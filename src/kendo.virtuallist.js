@@ -1329,7 +1329,7 @@ var __meta__ = {
                         item.removeClass(SELECTED);
                         this._values.splice(position, 1);
                         this._selectedIndexes.splice(position, 1);
-                        dataItem = this._selectedDataItems.splice(position, 1);
+                        dataItem = this._selectedDataItems.splice(position, 1)[0];
 
                         indexes.splice(i, 1);
 

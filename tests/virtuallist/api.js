@@ -316,6 +316,33 @@
         });
     });
 
+    asyncTest("select method deselects selected item and return correct dataitem", 4, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            valueMapper: function(options) {
+                options.success([0, 1]);
+            },
+            value: [0, 1]
+        }));
+
+        asyncDataSource.read().done(function() {
+            virtualList.bind("change", function(e) {
+                start()
+
+                var added = e.added;
+                var removed = e.removed;
+
+                equal(added.length, 0);
+                equal(removed.length, 1);
+
+                equal(removed[0].position, 0);
+                equal(removed[0].dataItem.text, "Item 0");
+            });
+
+            virtualList.select(0);
+        });
+    });
+
     asyncTest("select method deselects selected item when filtered (multiple)", 5, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: "multiple",
