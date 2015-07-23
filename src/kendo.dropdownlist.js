@@ -854,7 +854,8 @@ var __meta__ = {
 
         _get: function(candidate) {
             var data, found, idx;
-            var jQueryCandidate = $(candidate);
+            var isFunction = typeof candidate === "function";
+            var jQueryCandidate = !isFunction ? $(candidate) : $();
 
             if (this.optionLabel[0]) {
                 if (typeof candidate === "number") {
@@ -866,7 +867,7 @@ var __meta__ = {
                 }
             }
 
-            if (typeof candidate === "function") {
+            if (isFunction) {
                 data = this.dataSource.flatView();
 
                 for (idx = 0; idx < data.length; idx++) {

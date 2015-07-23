@@ -151,6 +151,20 @@
        equal(args[0], -1);
    });
 
+   test("select method does not call predicate with incorrect params", 1, function() {
+       dropdownlist = createDropDownList({
+           index: -1,
+           optionLabel: "Select...",
+           dataTextField: "text",
+           dataValueField: "value",
+           dataSource: [{ text: "text", value: "1" }]
+       });
+
+       dropdownlist.select(function(item) {
+            equal(item, dropdownlist.dataSource.data()[0]);
+       });
+   });
+
     test("open should open popup", 1, function () {
         dropdownlist = createDropDownList();
         dropdownlist.bind("open", function(){
