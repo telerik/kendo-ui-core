@@ -99,6 +99,61 @@
         ok(!multiselect.element[0].children[0].selected);
     });
 
+    asyncTest("MultiSelect value method forces re-bind if autoBind false is used", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            autoBind: false,
+            dataValueField: "id",
+            dataTextField: "text",
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        options.success([ { id: 1, text: "Item1" } ]);
+
+                        start();
+                        ok(true);
+                    }
+                }
+            },
+            value: [
+                { id: 1, text: "Item1" },
+                { id: 2, text: "Item2" },
+                { id: 3, text: "Item3" }
+            ]
+        });
+
+        multiselect.value(1);
+    });
+
+    asyncTest("MultiSelect value method selects the item retrieved from the server if autoBind:false", 2, function() {
+        var multiselect = new MultiSelect(select, {
+            autoBind: false,
+            dataValueField: "id",
+            dataTextField: "text",
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        options.success([ { id: 1, text: "New1" } ]);
+                    }
+                }
+            },
+            value: [
+                { id: 1, text: "Item1" },
+                { id: 2, text: "Item2" },
+                { id: 3, text: "Item3" }
+            ]
+        });
+
+        multiselect.bind("dataBound", function() {
+            var items = multiselect.dataItems();
+
+            start();
+            equal(items.length, 1);
+            equal(items[0].text, "New1");
+        });
+
+        multiselect.value(1);
+    });
+
     test("MultiSelect supports multiple values", function() {
         popuplateSelect();
         var multiselect = new MultiSelect(select);
