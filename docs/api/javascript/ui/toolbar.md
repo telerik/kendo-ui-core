@@ -188,6 +188,29 @@ Assigns the button to a group. Applicable only for the children of a ButtonGroup
     });
     </script>
 
+### items.buttons.hidden `Boolean` *(default: false)*
+
+Determines if the button is visible or hidden. By default the buttons are visible.
+
+#### Example
+
+    <div id="toolbar"></div>
+
+    <script>
+    $("#toolbar").kendoToolBar({
+      items: [
+        {
+          type: "buttonGroup",
+          buttons: [
+            { text: "foo" },
+            { text: "bar" },
+            { text: "baz", hidden: true }
+          ]
+        }
+      ]
+    });
+    </script>
+
 ### items.buttons.icon `String`
 
 Sets icon for the menu button. The icon should be one of the existing in the Kendo UI theme sprite.
@@ -500,6 +523,23 @@ Assigns the button to a group. Applicable only for buttons with `togglable: true
         });
     </script>
 
+### items.hidden `Boolean` *(default: false)*
+
+Determines if a button is visible or hidden. By default buttons are visible.
+
+#### Example
+
+    <div id="toolbar"></div>
+
+    <script>
+    $("#toolbar").kendoToolBar({
+      items: [
+        { type: "button", text: "MyButton 1", hidden: true },
+        { type: "button", text: "MyButton 2" }
+      ]
+    });
+    </script>
+
 ### items.icon `String`
 
 Sets icon for the item. The icon should be one of the existing in the Kendo UI theme sprite.
@@ -632,6 +672,30 @@ Specifies whether the menu button is initially enabled or disabled.
             }
             ]
         });
+    </script>
+
+### items.menuButtons.hidden `Boolean` *(default: false)*
+
+Determines if a button is visible or hidden. By default buttons are visible.
+
+#### Example
+
+    <div id="toolbar"></div>
+
+    <script>
+    $("#toolbar").kendoToolBar({
+      items: [
+        {
+          type: "splitButton",
+          text: "MyButton",
+          menuButtons: [
+            { text: "foo" },
+            { text: "bar" },
+            { text: "baz", hidden: true }
+          ]
+        }
+      ]
+    });
     </script>
 
 ### items.menuButtons.icon `String`
@@ -1176,6 +1240,31 @@ The name of the group.
         console.log(selected.attr("id"));
     </script>
 
+### hide
+
+Hides a command from the ToolBar widget. The command is hidden from the ToolBar container and overflow popup (if resizable is enabled).
+
+#### Parameters
+
+##### command `String|Element|jQuery`
+
+A string, DOM element or jQuery object which represents the command to be hidden. A string is treated as jQuery selector.
+
+#### Example - removed button from the ToolBar
+
+    <div id="toolbar"></div>
+    <script>
+        $("#toolbar").kendoToolBar({
+            items: [
+                { type: "button", id: "btn1", text: "Button 1" },
+                { type: "button", id: "btn2", text: "Button 2" }
+            ]
+        });
+
+        var toolbar = $("#toolbar").data("kendoToolBar");
+        toolbar.hide($("#btn2"));
+    </script>
+
 ### remove
 
 Removes a command from the ToolBar widget. The command is removed from the ToolBar container and overflow popup (if resizable is enabled).
@@ -1199,6 +1288,31 @@ A string, DOM element or jQuery object which represents the command to be remove
 
         var toolbar = $("#toolbar").data("kendoToolBar");
         toolbar.remove($("#btn2"));
+    </script>
+
+### show
+
+Shows a hidden command in the ToolBar widget. The command is shown in the ToolBar container and overflow popup (if resizable is enabled).
+
+#### Parameters
+
+##### command `String|Element|jQuery`
+
+A string, DOM element or jQuery object which represents the command to be shown. A string is treated as jQuery selector.
+
+#### Example - show button from the ToolBar
+
+    <div id="toolbar"></div>
+    <script>
+        $("#toolbar").kendoToolBar({
+            items: [
+                { type: "button", id: "btn1", text: "Button 1" },
+                { type: "button", id: "btn2", text: "Button 2", hidden: true }
+            ]
+        });
+
+        var toolbar = $("#toolbar").data("kendoToolBar");
+        toolbar.show($("#btn2"));
     </script>
 
 ### toggle
