@@ -118,14 +118,27 @@ FontAwesome icons can be used alongside the Kendo UI widgets, by adjusting the f
 The `form-control` Bootstrap CSS class is normally added to textboxes in order to apply some border, padding, background and font styles.
 The problem is that some Kendo UI widgets copy the custom CSS classes of their originating `<input>` elements to the widget wrapper element.
 This results in an incorrect padding style applied to a widget element that should not have a padding.
-Also, `.form-control` defines a 100% width style, which the Kendo UI widgets may override. The resolution is to use:
+Also, `.form-control` defines a 100% width style, which the Kendo UI widgets may override.
+Finally, the `.form-control` class applies height, border and other styles that may interfere with the Kendo UI styling.
+
+Possible resolutions include:
+
+1. Please the Bootstrap stylesheet **before** the Kendo UI stylesheet, so that same-specificity Kendo UI selectors can take precendece.
+
+2. Use custom CSS to fix any other outstanding issues, for example:
 
     .form-control.k-widget
     {
         padding: 0;
         width: 100%;
+        height: auto;
     }
-
+    
+    .form-control.k-widget:not(.k-autocomplete)
+    {
+      	border-width: 0;
+    }
+    
 ## Known limitations
 
 With the latest version of the Bootstrap library, a code that prevents the input in elements with `data-role=filter` has been introduced in the bootstrap.js file. This causes a problem with data input in filter menu
