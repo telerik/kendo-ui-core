@@ -3482,7 +3482,6 @@ table.k-editor {
     .box-shadow(none);
 }
 
-.k-filter-menu .k-button,
 .k-edit-form-container .k-button,
 .k-popup .k-button,
 .k-popup .k-primary:active,
@@ -3494,9 +3493,22 @@ table.k-editor {
     .box-shadow(none);
 }
 
+.k-filter-menu .k-button {
+   background: transparent;
+   border-color: transparent;
+}
+
+.k-filter-menu .k-primary {
+    border-left-color: @drop-down-border-color;
+}
+
+.k-filter-menu > div > div:last-child {
+    border-color: @drop-down-border-color;
+}
+
 .k-popup .k-primary,
 .k-edit-form-container .k-primary {
-    color: @primary-button-background-color;
+    color: @selected-background;
     background-color: @secondary-background-color;
     border-color: @secondary-background-color;
 }
