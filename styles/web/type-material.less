@@ -3493,6 +3493,13 @@ table.k-editor {
     .box-shadow(none);
 }
 
+.k-popup .k-primary,
+.k-edit-form-container .k-primary {
+    color: @selected-background;
+    background-color: @secondary-background-color;
+    border-color: @secondary-background-color;
+}
+
 .k-filter-menu .k-button {
    background: transparent;
    border-color: transparent;
@@ -3504,13 +3511,6 @@ table.k-editor {
 
 .k-filter-menu > div > div:last-child {
     border-color: @drop-down-border-color;
-}
-
-.k-popup .k-primary,
-.k-edit-form-container .k-primary {
-    color: @selected-background;
-    background-color: @secondary-background-color;
-    border-color: @secondary-background-color;
 }
 
 .k-popup .k-button:focus:active:not(.k-state-disabled):not([disabled]),
