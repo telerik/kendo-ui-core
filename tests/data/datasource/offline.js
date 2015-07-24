@@ -125,14 +125,14 @@
         dataSource.offlineData(state);
     });
 
-    test("state returns empty object if localStorage doesn't contain an item for the specified key", function() {
+    test("state returns empty array if localStorage doesn't contain an item for the specified key", function() {
         var dataSource = new DataSource({
             offlineStorage: "key"
         });
 
         var state = dataSource.offlineData();
 
-        equal(kendo.stringify(state), "{}");
+        equal(kendo.stringify(state), "[]");
     });
 
     test("data is stored in state", function() {
@@ -685,4 +685,23 @@
                 ok(true);
             });
     });
+
+    test("read empty offline datasource does not add phantom item", function() {
+        var dataSource = new kendo.data.DataSource({
+            offlineStorage: "key",
+            schema: {
+                model: {
+                    fields: {
+                        foo: {}
+                    }
+                }
+            }
+        });
+
+        dataSource.online(false);
+        dataSource.fetch();
+
+        equal(dataSource.data().length, 0);
+    });
+
 }());
