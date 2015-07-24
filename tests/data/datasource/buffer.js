@@ -276,6 +276,33 @@ test("re-reading the datasource at a distant location triggers reset while maint
     equal(buffer.at(210).value, 210);
 });
 
+test("triggers reset before resize when local data is filtered", 1, function() {
+    var data = [];
+    for (var i = 0; i < 25; i++) {
+        data.push({ item: "Item " + i, index: "Index " + i});
+    }
+
+    var dataSource = new kendo.data.DataSource({
+        data: data,
+        pageSize: 10
+    });
+
+    var myBuffer = new kendo.data.Buffer(dataSource, 7);
+    dataSource.fetch();
+
+    var resetFired = false;
+
+    myBuffer.bind("resize", function() {
+        ok(resetFired, "reset event is fired first");
+    });
+
+    myBuffer.bind("reset", function() {
+        resetFired = true;
+    });
+
+    dataSource.filter([{ field: "item", operator: "contains", value: "3" }]);
+});
+
 module("buffer disabled prefetch", {
     setup: function() {
         timeout = window.setTimeout;
