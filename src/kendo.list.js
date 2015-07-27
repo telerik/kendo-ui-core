@@ -1102,6 +1102,11 @@ var __meta__ = {
 
                 parent.first("cascade", function(e) {
                     that._userTriggered = e.userTriggered;
+
+                    if (that.listView.isBound()) {
+                        that._clearSelection(parent, true);
+                    }
+
                     that._cascadeSelect(parent);
                 });
 
