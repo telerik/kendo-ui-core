@@ -666,4 +666,51 @@ test("third combo is bound when only local data is used", function() {
         });
     });
 
+    asyncTest("widget clears child value on cascade", 1, function() {
+        parent.kendoComboBox({
+            dataTextField: "parentID",
+            dataValueField: "parentID",
+            dataSource: [
+                { parentID: 1 },
+                { parentID: 2 }
+            ],
+            value: 1
+        });
+
+        child.kendoComboBox({
+            cascadeFrom: "parent", //id of the parent
+            dataTextField: "childID",
+            dataValueField: "childID",
+            filter: "contains",
+            dataSource: {
+                serverFiltering: true,
+                transport: {
+                    read: function(options) {
+                        var data = [
+                            { parentID: 1, childID: "1" },
+                            { parentID: 2, childID: "2" },
+                            { parentID: 1, childID: "3" },
+                            { parentID: 2, childID: "4" }
+                        ];
+
+                        options.success(data);
+                    }
+                }
+            },
+            value: 1
+        });
+
+        var parentCB = parent.data("kendoComboBox");
+        var childCB = child.data("kendoComboBox");
+
+        var requestStart = function() {
+            start();
+            equal(childCB.value(), "");
+            childCB.dataSource.unbind("requestStart", requestStart);
+        };
+
+        childCB.dataSource.bind("requestStart", requestStart);
+
+        parentCB.value(2);
+    });
 })();
