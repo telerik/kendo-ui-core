@@ -501,14 +501,15 @@
 
 .k-rtl .k-multiselect-wrap li
 {
-    padding-left: 1.6em;
-    padding-right: .4em;
     float: right;
+    padding: .1em .4em .1em 1.6em;
+    margin: 2px 2px 2px 0;
 }
 
 .k-rtl .k-multiselect-wrap .k-select {
-  right: auto;
-  left: 0;
+    right: auto;
+    left: 0;
+    padding: .1em .2em;
 }
 
 /* Notification */
