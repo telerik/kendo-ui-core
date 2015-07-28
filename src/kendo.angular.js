@@ -558,7 +558,7 @@ var __meta__ = {
                 var _wrapper = $(widget.wrapper)[0];
                 var _element = $(widget.element)[0];
                 var compile = element.injector().get("$compile");
-                widget.destroy();
+                widget._destroy();
 
                 if (destroyRegister) {
                     destroyRegister();

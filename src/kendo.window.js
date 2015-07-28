@@ -1149,36 +1149,38 @@ var __meta__ = {
             }, options));
         },
 
-        destroy: function () {
-            var that = this;
-
-            if (that.resizing) {
-                that.resizing.destroy();
+        _destroy: function() {
+            if (this.resizing) {
+                this.resizing.destroy();
             }
 
-            if (that.dragging) {
-                that.dragging.destroy();
+            if (this.dragging) {
+                this.dragging.destroy();
             }
 
-            that.wrapper.off(NS)
+            this.wrapper.off(NS)
                 .children(KWINDOWCONTENT).off(NS).end()
                 .find(".k-resize-handle,.k-window-titlebar").off(NS);
 
-            $(window).off("resize" + NS + that._marker);
+            $(window).off("resize" + NS + this._marker);
 
-            clearTimeout(that._loadingIconTimeout);
+            clearTimeout(this._loadingIconTimeout);
 
-            Widget.fn.destroy.call(that);
+            Widget.fn.destroy.call(this);
 
-            that.unbind(undefined);
+            this.unbind(undefined);
 
-            kendo.destroy(that.wrapper);
+            kendo.destroy(this.wrapper);
 
-            that._removeOverlay(true);
+            this._removeOverlay(true);
+        },
 
-            that.wrapper.empty().remove();
+        destroy: function() {
+            this._destroy();
 
-            that.wrapper = that.appendTo = that.element = $();
+            this.wrapper.empty().remove();
+
+            this.wrapper = this.appendTo = this.element = $();
         },
 
         _createWindow: function() {
