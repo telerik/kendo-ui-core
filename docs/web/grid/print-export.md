@@ -50,7 +50,7 @@ In such cases it is advisable to use a separate print-friendly page with no froz
 				'<head>' +
 				'<meta charset="utf-8" />' +
 				'<title>Kendo UI Grid</title>' +
-				'<link href="http://cdn.kendostatic.com/' + kendo.version + '/styles/kendo.common.min.css" rel="stylesheet" /> ' +
+				'<link href="http://kendo.cdn.telerik.com/' + kendo.version + '/styles/kendo.common.min.css" rel="stylesheet" /> ' +
 				'<style>' +
 				'html { font: 11pt sans-serif; }' +
 				'.k-grid { border-top-width: 0; }' +

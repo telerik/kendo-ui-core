@@ -86,7 +86,7 @@ You can override the default duration for the entire document using a [higher sp
 
     <html>
         <head>
-            <link href="http://cdn.kendostatic.com/{version}/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
+            <link href="http://kendo.cdn.telerik.com/{version}/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
             <style>
                 .k-fx-end .k-fx-next,
                 .k-fx-end .k-fx-current {

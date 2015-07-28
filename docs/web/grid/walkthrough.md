@@ -576,7 +576,7 @@ The code below addresses this issue by cloning the header row and prepending it 
 				'<head>' +
 				'<meta charset="utf-8" />' +
 				'<title>Kendo UI Grid</title>' +
-				'<link href="http://cdn.kendostatic.com/' + kendo.version + '/styles/kendo.common.min.css" rel="stylesheet" /> ' +
+				'<link href="http://kendo.cdn.telerik.com/' + kendo.version + '/styles/kendo.common.min.css" rel="stylesheet" /> ' +
 				'<style>' +
 				'html { font: 11pt sans-serif; }' +
 				'.k-grid { border-top-width: 0; }' +

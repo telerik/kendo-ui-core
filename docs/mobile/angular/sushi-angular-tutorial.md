@@ -37,13 +37,13 @@ Alternatively you may [download and host Kendo UI in your project](http://docs.t
         <meta charset="utf-8">
         <title>Kendo UI Mobile Loves AngularJS</title>
 
-        <link rel="stylesheet" href="http://cdn.kendostatic.com/2014.3.1029/styles/kendo.mobile.all.min.css">
+        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2014.3.1029/styles/kendo.mobile.all.min.css">
         <!-- the application CSS file -->
         <link rel="http://demos.telerik.com/kendo-ui/content/mobile/apps/sushi/css/style.css">
 
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
-        <script src="http://cdn.kendostatic.com/2014.3.1029/js/kendo.all.min.js"></script>
+        <script src="http://kendo.cdn.telerik.com/2014.3.1029/js/kendo.all.min.js"></script>
     </head>
     <body>
 
@@ -66,13 +66,13 @@ This gives developers the freedom to specify if the entire html page or only a p
         <meta charset="utf-8">
         <title>Kendo UI Mobile Loves AngularJS</title>
 
-        <link rel="stylesheet" href="http://cdn.kendostatic.com/2014.3.1029/styles/kendo.mobile.all.min.css">
+        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2014.3.1029/styles/kendo.mobile.all.min.css">
         <!-- the application CSS file -->
         <link rel="http://demos.telerik.com/kendo-ui/content/mobile/apps/sushi/css/style.css">
 
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
-        <script src="http://cdn.kendostatic.com/2014.3.1029/js/kendo.all.min.js"></script>
+        <script src="http://kendo.cdn.telerik.com/2014.3.1029/js/kendo.all.min.js"></script>
     </head>
     <body kendo-mobile-application ng-app="sushiMobileApp">
 

@@ -15,7 +15,7 @@ For example, supposing you need to use a grid and a dropdownlist, your code coul
 
     <!-- Load the jQuery and RequireJS files from CDN -->
 
-    <script data-main="http://cdn.kendostatic.com/2014.2.903/js/jquery.min.js"
+    <script data-main="http://kendo.cdn.telerik.com/2014.2.903/js/jquery.min.js"
             src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.min.js"></script>
 
     <script>
@@ -58,7 +58,7 @@ In practice, if you use RequireJS you will probably have some files of your own 
       requirejs.config({
           paths: {
               app: "/path/to/your/files",
-              k: "http://cdn.kendostatic.com/VERSION/js"
+              k: "http://kendo.cdn.telerik.com/VERSION/js"
           }
       });
 

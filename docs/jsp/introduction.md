@@ -83,11 +83,11 @@ You can find a sample JSP Spring MVC application in the **\wrappers\jsp\spring-d
 
 You can include the JavaScript and CSS files from CDN. Don't forget to specify the version (e.g. 2012.2.710)
 
-    <link href="http://cdn.kendostatic.com/<VERSION>/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
-    <link href="http://cdn.kendostatic.com/<VERSION>/styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
+    <link href="http://kendo.cdn.telerik.com/<VERSION>/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
+    <link href="http://kendo.cdn.telerik.com/<VERSION>/styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
 
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://cdn.kendostatic.com/<VERSION>/js/kendo.all.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/<VERSION>/js/kendo.all.min.js"></script>
 
 ## Next Steps
 

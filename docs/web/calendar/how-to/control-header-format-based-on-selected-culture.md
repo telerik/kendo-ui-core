@@ -11,7 +11,7 @@ The example below demonstrates how to control header format of the Kendo UI Cale
 #### Example:
 
 ```html
-    <script src="http://cdn.kendostatic.com/2014.1.528/js/cultures/kendo.culture.ko-KR.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2014.1.528/js/cultures/kendo.culture.ko-KR.min.js"></script>
     <script>
       kendo.culture("ko-KR");
       kendo.calendar.views[0].title = function(date) {

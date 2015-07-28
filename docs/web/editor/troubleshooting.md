@@ -74,6 +74,6 @@ The Editor uses BOM characters to handle some ranges correctly. These characters
 
 1. If you observe the problem in the [online demos](http://demos.telerik.com/kendo-ui/editor), this might mean that your browser has enforced an encoding that is not UTF-8. This scenario is not supported.
 
-1. If the online demos behave properly, change the Kendo UI script references so that they are loaded from the CDN, `http://cdn.kendostatic.com/2014.2.716/js/kendo.all.min.js`. If your page now works correctly, then your local script files are served with the wrong encoding or are corrupted. Copy over the scripts (the files, not their content) from the official distribution and see if the problem persists.
+1. If the online demos behave properly, change the Kendo UI script references so that they are loaded from the CDN, `http://kendo.cdn.telerik.com/2014.2.716/js/kendo.all.min.js`. If your page now works correctly, then your local script files are served with the wrong encoding or are corrupted. Copy over the scripts (the files, not their content) from the official distribution and see if the problem persists.
 
 1. If the problem is still visible on your page, and the scripts are loaded via the CDN, then it is likely that the page is served with the wrong formatting. Make sure the page, as well as its layout pages, are saved and served in UTF-8.
