@@ -78,6 +78,28 @@
         kendo.destroy($('[kendo-window]'));
     });
 
+    ngTest2("controlling window visiblity through scope", 1, function(dom, controller, bootstrap) {
+        controller(function($scope) {
+            $scope.dialogOptions = {
+                visible: false,
+                appendTo: ".foo"
+            };
+        });
+
+        dom.addClass("foo");
+        var dialog = $("<div kendo-window k-options='dialogOptions' k-rebind='dialogOptions' />").appendTo(dom);
+        bootstrap(); var $scope = dom.scope();
+
+        $scope.$apply(function(){
+            $scope.dialogOptions.visible = true;
+        });
+
+        var dialog = dom.find("[kendo-window]").data("kendoWindow");
+
+        ok(dialog.element.is(":visible"));
+        kendo.destroy($('[kendo-window]'));
+    });
+
     ngTest2("clear the widget value when Angular sends undefined", 4, function(dom, controller, bootstrap) {
         $("<div><input kendo-datepicker='date' k-ng-model='foo.date' /><input kendo-numerictextbox='number' k-ng-model='foo.number' /></div>")
             .appendTo(dom);
