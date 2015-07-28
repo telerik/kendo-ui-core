@@ -11,7 +11,7 @@ The example below demonstrates how to extend an existing culture script, create 
 #### Example:
 
 ```html
-<script src="http://cdn.kendostatic.com/2014.3.1119/js/cultures/kendo.culture.en-GB.min.js"></script>
+<script src="http://kendo.cdn.telerik.com/2014.3.1119/js/cultures/kendo.culture.en-GB.min.js"></script>
 
 <div id="example">
     <input id="initial" value="10" min="1"/>

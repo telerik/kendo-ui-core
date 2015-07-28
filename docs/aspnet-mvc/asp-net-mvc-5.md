@@ -90,20 +90,20 @@ To include the Telerik UI for ASP.NET MVC JavaScript and CSS files from CDN foll
 1. Open the layout of the application. By default it is **Views/Shared/_Layout.cshtml** (or **Site.master** if using ASPX).
 2. Include **kendo.common-bootstrap.min.css** and **kendo.bootstrap.min.css**. Add a **link** tag within the **head** tag of the layout.
 
-        <link rel="stylesheet" href="http://cdn.kendostatic.com/<kendo ui version>/styles/kendo.common-bootstrap.min.css" />
-        <link rel="stylesheet" href="http://cdn.kendostatic.com/<kendo ui version>/styles/kendo.bootstrap.min.css" />
+        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/<kendo ui version>/styles/kendo.common-bootstrap.min.css" />
+        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/<kendo ui version>/styles/kendo.bootstrap.min.css" />
 
 3. Move the jQuery bundle to the **head** tag of the page. It is at the end of the page by default.
 4. Include **kendo.all.min.js** and **kendo.aspnetmvc.min.js** _after_ jQuery.
 
-        <script src="http://cdn.kendostatic.com/<kendo ui version>/js/kendo.all.min.js"></script>
-        <script src="http://cdn.kendostatic.com/<kendo ui version>/js/kendo.aspnetmvc.min.js"></script>
+        <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.all.min.js"></script>
+        <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.aspnetmvc.min.js"></script>
 
 5. If using Telerik MVC Scheduler wrapper, include **kendo.timezones.min.js** _after_ **kendo.all.min.js**
 
-        <script src="http://cdn.kendostatic.com/<kendo ui version>/js/kendo.all.min.js"></script>
-        <script src="http://cdn.kendostatic.com/<kendo ui version>/js/kendo.timezones.min.js"></script>
-        <script src="http://cdn.kendostatic.com/<kendo ui version>/js/kendo.aspnetmvc.min.js"></script>
+        <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.all.min.js"></script>
+        <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.timezones.min.js"></script>
+        <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.aspnetmvc.min.js"></script>
 
 ### Add reference to Kendo.Mvc.dll
 

@@ -14,8 +14,8 @@ To replicate the look and feel of Bootstrap in Kendo UI, take the following step
 
 The following example demonstrates the necessary links to these stylesheets (replace VERSION with the Kendo UI version that you want to use):
 
-    <link rel="stylesheet" href="http://cdn.kendostatic.com/VERSION/styles/kendo.common-bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.kendostatic.com/VERSION/styles/kendo.bootstrap.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/VERSION/styles/kendo.common-bootstrap.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/VERSION/styles/kendo.bootstrap.min.css">
 
 While these files will ensure that Kendo UI looks a lot like Bootstrap, it is not mandatory to use them.
 The default Kendo UI common.css and any other theme will style the widgets differently, but they will continue to function properly.

@@ -157,11 +157,11 @@ All data operations are persisted in this variable, so that it can be used or su
     <title>Kendo UI Grid - CRUD operations with local data</title>
 
     <style>html { font-size: 12px; font-family: Arial, Helvetica, sans-serif; }</style>
-    <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.common.min.css" rel="stylesheet" />
-    <link href="http://cdn.kendostatic.com/2014.2.903/styles/kendo.default.min.css" rel="stylesheet" />
+    <link href="http://kendo.cdn.telerik.com/2014.2.903/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="http://kendo.cdn.telerik.com/2014.2.903/styles/kendo.default.min.css" rel="stylesheet" />
 
-    <script src="http://cdn.kendostatic.com/2014.2.903/js/jquery.min.js"></script>
-    <script src="http://cdn.kendostatic.com/2014.2.903/js/kendo.web.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2014.2.903/js/jquery.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2014.2.903/js/kendo.web.min.js"></script>
     </head>
     <body>
 

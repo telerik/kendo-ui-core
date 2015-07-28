@@ -234,5 +234,5 @@ Generally, it is encouraged to use the Kendo UI themes, not the legacy ones.
 The latter are located in the **wrappers/aspnetmvc/LegacyThemes** folder of the Telerik UI for ASP.NET MVC distribution package.
 Legacy themes can also be referenced from the Kendo UI CDN. Don't forget to specify the version (e.g. 2012.2.710)
 
-    <link href="http://cdn.kendostatic.com/<VERSION>/styles/telerik/telerik.common.min.css" rel="stylesheet" type="text/css" />
-    <link href="http://cdn.kendostatic.com/<VERSION>/styles/telerik/telerik.black.min.css" rel="stylesheet" type="text/css" />
+    <link href="http://kendo.cdn.telerik.com/<VERSION>/styles/telerik/telerik.common.min.css" rel="stylesheet" type="text/css" />
+    <link href="http://kendo.cdn.telerik.com/<VERSION>/styles/telerik/telerik.black.min.css" rel="stylesheet" type="text/css" />

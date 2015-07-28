@@ -159,8 +159,8 @@ var dojoApi = (function($) {
                 .insertBefore(element);
         },
         wrapInHtml: function(snippet) {
-            var angular = '    <script src="http://cdn.kendostatic.com/kendo-version/js/angular.min.js"></script>\n';
-            var jszip = '    <script src="http://cdn.kendostatic.com/kendo-version/js/jszip.min.js"></script>\n';
+            var angular = '    <script src="http://kendo.cdn.telerik.com/kendo-version/js/angular.min.js"></script>\n';
+            var jszip = '    <script src="http://kendo.cdn.telerik.com/kendo-version/js/jszip.min.js"></script>\n';
 
             if (!(/ng-app/i).test(snippet)) {
                 angular = '';
@@ -175,15 +175,15 @@ var dojoApi = (function($) {
             '<head>\n'+
             '    <meta charset="utf-8">\n'+
             '    <title>Kendo UI Snippet</title>\n\n'+
-            '    <link rel="stylesheet" href="http://cdn.kendostatic.com/kendo-version/styles/kendo.common.min.css">\n'+
-            '    <link rel="stylesheet" href="http://cdn.kendostatic.com/kendo-version/styles/kendo.rtl.min.css">\n'+
-            '    <link rel="stylesheet" href="http://cdn.kendostatic.com/kendo-version/styles/kendo.default.min.css">\n'+
-            '    <link rel="stylesheet" href="http://cdn.kendostatic.com/kendo-version/styles/kendo.dataviz.min.css">\n'+
-            '    <link rel="stylesheet" href="http://cdn.kendostatic.com/kendo-version/styles/kendo.dataviz.default.min.css">\n'+
-            '    <link rel="stylesheet" href="http://cdn.kendostatic.com/kendo-version/styles/kendo.mobile.all.min.css">\n\n'+
+            '    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/kendo-version/styles/kendo.common.min.css">\n'+
+            '    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/kendo-version/styles/kendo.rtl.min.css">\n'+
+            '    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/kendo-version/styles/kendo.default.min.css">\n'+
+            '    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/kendo-version/styles/kendo.dataviz.min.css">\n'+
+            '    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/kendo-version/styles/kendo.dataviz.default.min.css">\n'+
+            '    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/kendo-version/styles/kendo.mobile.all.min.css">\n\n'+
             '    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>\n'+
             angular + jszip +
-            '    <script src="http://cdn.kendostatic.com/kendo-version/js/kendo.all.min.js"></script>\n'+
+            '    <script src="http://kendo.cdn.telerik.com/kendo-version/js/kendo.all.min.js"></script>\n'+
             '</head>\n'+
             '<body>\n  \n'+
             snippet+ '\n' +

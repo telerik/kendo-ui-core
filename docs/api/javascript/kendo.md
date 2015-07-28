@@ -175,7 +175,7 @@ If there is no corresponding culture then the method will try to find culture wh
 If no culture is found the default one is used.
 
 #### Example -  include a culture-specific JavaScript file and set the culture
-    <script src="http://cdn.kendostatic.com/2013.2.716/js/cultures/kendo.culture.en-GB.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2013.2.716/js/cultures/kendo.culture.en-GB.min.js"></script>
     <script>
       console.log(kendo.format("{0:c}", 99)); // outputs "$99.00" using the default en-US culture
       kendo.culture("en-GB"); // change the culture
@@ -289,7 +289,7 @@ Parses a string as a floating point number.
 
 #### Example
 
-    <script src="http://cdn.kendostatic.com/2013.2.716/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2013.2.716/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
       console.log(kendo.parseFloat("12.22")); // outputs "12.22"
       kendo.culture("de-DE");
@@ -317,7 +317,7 @@ Parses as a string as an integer.
 
 #### Example
 
-    <script src="http://cdn.kendostatic.com/2013.2.716/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2013.2.716/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
       console.log(kendo.parseInt("12.22")); // outputs "12"
       kendo.culture("de-DE");
@@ -662,7 +662,7 @@ The container element to enable scrolling for.
 Formats a `Number` or `Date` using the specified format and the current culture.
 
 #### Example
-    <script src="http://cdn.kendostatic.com/2013.2.716/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2013.2.716/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
       // Format a number using standard number formats and default culture (en-US)
       console.log(kendo.toString(10.12, "n"));  // "10.12"
@@ -942,7 +942,7 @@ Formats the value as a number with decimal and thousand separators.
 
 #### Example
 
-    <script src="http://cdn.kendostatic.com/2013.2.716/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2013.2.716/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
     console.log(kendo.toString(1234.567, "n")); // outputs "1,234.57"
     kendo.culture("de-DE");
@@ -955,7 +955,7 @@ Formats the value by adding the currency symbol.
 
 #### Example
 
-    <script src="http://cdn.kendostatic.com/2013.2.716/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2013.2.716/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
     console.log(kendo.toString(1234.567, "c")); // outputs "$1,234.57"
     kendo.culture("de-DE");
