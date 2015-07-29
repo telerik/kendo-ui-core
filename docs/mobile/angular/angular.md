@@ -12,7 +12,7 @@ context, The mobile views support AngularJS controllers, directives and two way 
 ## Kendo UI Mobile Application directive
 
     <body kendo-mobile-application ng-app="foo">
-        <kendo-mobile-view ng-controller="mine" k-title="'My Title'" k-layout="'default'">
+        <kendo-mobile-view ng-controller="MyCtrl" k-title="'My Title'" k-layout="'default'">
             <kendo-mobile-header>
                 <kendo-mobile-nav-bar>
                     <kendo-view-title></kendo-view-title>
@@ -24,7 +24,7 @@ context, The mobile views support AngularJS controllers, directives and two way 
 
         <script>
             angular.module("foo", [ "kendo.directives" ])
-                .controller("main", function($scope) {
+                .controller("MyCtrl", function($scope) {
                     $scope.hello = "Hello World!";
                 }]);
         </script>
