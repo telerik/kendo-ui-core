@@ -164,4 +164,33 @@
 
         ok(multiselect.popup.visible());
     });
+
+    test("Update underlying select element on item select", 3, function() {
+        var multiselect = new MultiSelect(select, {
+            tagMode: "single",
+            value: [1]
+        });
+
+        multiselect.value([1,2]);
+
+        var value = select.val();
+
+        equal(value.length, 2);
+        equal(value[0], 1);
+        equal(value[1], 2);
+    });
+
+    test("Update underlying select element on item remove", 2, function() {
+        var multiselect = new MultiSelect(select, {
+            tagMode: "single",
+            value: [1,2,3]
+        });
+
+        multiselect.value([2]);
+
+        var value = select.val();
+
+        equal(value.length, 1);
+        equal(value[0], 2);
+    });
 })();

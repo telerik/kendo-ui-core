@@ -1059,6 +1059,14 @@ var __meta__ = {
                         currentTotal: total
                     }));
                 }
+
+                for (idx = removed.length - 1; idx > -1; idx--) {
+                    that._setOption(getter(removed[idx].dataItem), false);
+                }
+
+                for (idx = 0; idx < added.length; idx++) {
+                    that._setOption(getter(added[idx].dataItem), true);
+                }
             }
 
             that._angularTagItems("compile");
