@@ -7,27 +7,34 @@ position: 2
 
 The Kendo UI CDN is hosted on Amazon CloudFront. The minified versions of all JavaScript files are available via the following URLs:
 
-    http://kendo.cdn.telerik.com/$VERSION$/js/$FILENAME$.min.js
-    http://kendo.cdn.telerik.com/$VERSION$/styles/$FILENAME$.min.css
+    http://kendo.cdn.telerik.com/VERSION/js/FILENAME.min.js
+    http://kendo.cdn.telerik.com/VERSION/styles/FILENAME.min.css
 
-For example:
+For example, the 2014.1.318 version can be loaded from:
 
     http://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js
     http://kendo.cdn.telerik.com/2014.1.318/styles/kendo.common.min.css
 
-To access the combined minified javascript for Kendo UI Core (available since Q1 2014 SP1), use the following url:
+Use the following URL to load the minified Kendo UI Core script (available since Q1 2014 SP1):
 
     http://kendo.cdn.telerik.com/2014.1.416/js/kendo.ui.core.min.js
 
 ## HTTPS
 
-Use the same URLs as above, e.g.
+Use the same host name as above, only replacing the schema with `https`
 
     https://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js
 
-You can also use a protocol relative url to automatically choose between HTTP/HTTPS:
+You can also use a protocol relative URL to match the schema of the page:
 
-    <script src="//kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js"></script>
+    //kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js
+
+## Note on Legacy URLs
+
+The following base URLs will remain active, but are no longer recommended for new projects:
+
+* http://cdn.kendostatic.com
+* https://da7xgjtj801h2.cloudfront.net
 
 ## CDN Fallback and Troubleshooting
 
