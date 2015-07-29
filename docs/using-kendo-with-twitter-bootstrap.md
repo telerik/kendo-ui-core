@@ -56,7 +56,7 @@ via [pull requests to the Kendo UI Core repository](https://github.com/telerik/k
 
 ## Nesting Kendo UI widgets and Bootstrap Grid layout
 
-Kendo UI uses the default `content-box` box model (`box-sizing` CSS property), while Bootstrap uses the non-default `bordex-box` model and applies it to all elements on the page,
+Kendo UI uses the default `content-box` box model (`box-sizing` CSS property), while Bootstrap uses the non-default `border-box` model and applies it to all elements on the page,
 including ones that are unrelated to Bootstrap. This breaks the layout of the Kendo UI widgets, which are placed inside a Bootstrap grid layout,
 forcing us to override the Bootstrap CSS and reapply the `content-box` box model to Kendo UI widgets. As a result, a Bootstrap grid layout placed inside a Kendo UI widget
 will not work as expected. In general, multiple level nesting of the two products is bound to break the one that is on the inside, unless an additional CSS rule is used for each new level of nesting.
