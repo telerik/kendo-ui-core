@@ -42,12 +42,12 @@
 @resize-background-color: @normal-text-color;
 @input-background-color: @base;
 @shadow-color: fadeout(contrast(@base), 80%);
-@upload-progress-background-color: contrast(@base, lighten(@info, 2%), darken(@info, 2%), 0.5);
-@upload-progress-text-color: contrast(@base, lighten(@normal-text-color, 1%), darken(@normal-text-color, 14%), 0.5);
-@upload-success-background-color: contrast(@base, lighten(@success, 4%), darken(@success, 1%), 0.5);
-@upload-success-text-color: contrast(@base, lighten(@normal-text-color, 1%), darken(@normal-text-color, 15%), 0.5);
-@upload-error-background-color: contrast(@base, lighten(@base, 26%), darken(@base, 10%), 0.5);
-@upload-error-text-color: contrast(@base, lighten(@normal-text-color, 1%), darken(@normal-text-color, 23%), 0.5);
+@upload-progress-background-color: @info;
+@upload-progress-text-color: contrast(@info);
+@upload-success-background-color: @success;
+@upload-success-text-color: contrast(@info);
+@upload-error-background-color: @error;
+@upload-error-text-color: contrast(@info);
 @task-summary-color: contrast(@base, lighten(@widget-text-color, 25%), darken(@widget-text-color, 25%), 0.5);
 @task-summary-selected-color: contrast(@base, lighten(@selected-background-color, 15%), darken(@selected-background-color, 25%), 0.5);
 @loading-panel-color: @base;

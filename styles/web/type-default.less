@@ -76,11 +76,11 @@
 @event-inverse-text-color: contrast(@normal-text-color, @background, darken(@background, 10%), 0.5);
 @scheduler-nonwork-background-color: contrast(@selected-background, lighten(@base, 3%), darken(@base, 5%), 0.5);
 @resize-background-color: contrast(@hover-background, lighten(@normal-text-color, 29%), darken(@normal-text-color, 1%), 0.5);
-@upload-progress-background-color: contrast(@base, lighten(@base, 23%), darken(@base, 1%), 0.5);
-@upload-progress-text-color: contrast(@selected-background, lighten(@hover-text-color, 15%), darken(@hover-text-color, 8%), 0.5);
-@upload-success-background-color: contrast(@selected-background, lighten(@hover-background, 20%), darken(@hover-background, 6%), 0.5);
-@upload-success-text-color: contrast(@selected-background, lighten(@hover-text-color, 14%), darken(@hover-text-color, 8%), 0.5);
-@upload-error-background-color: contrast(@base, lighten(@background, 1%), darken(@background, 10%), 0.5);
+@upload-progress-background-color: saturate(@info, 10%);
+@upload-progress-text-color: contrast(@upload-progress-background-color, lighten(@hover-text-color, 15%), darken(@hover-text-color, 8%), 0.5);
+@upload-success-background-color: saturate(@success, 10%);
+@upload-success-text-color: contrast(@upload-success-background-color, lighten(@hover-text-color, 14%), darken(@hover-text-color, 8%), 0.5);
+@upload-error-background-color: saturate(@error, 10%);
 @upload-error-text-color: contrast(@selected-background, lighten(@hover-text-color, 5%), darken(@hover-text-color, 17%), 0.5);
 @task-summary-color: lighten(@widget-text-color, 25%);
 @task-summary-selected-color: lighten(@selected-background-color, 25%);

@@ -77,12 +77,12 @@
 @event-inverse-text-color: @normal-text-color;
 @scheduler-nonwork-background-color: lighten(@base, 4%);
 @resize-background-color: @background;
-@upload-progress-background-color: darken(@info, 2%);
-@upload-progress-text-color: darken(@accent, 17%);
-@upload-success-background-color: darken(@error, 17%);
-@upload-success-text-color: @background;
-@upload-error-background-color: @error;
-@upload-error-text-color: lighten(@normal-text-color, 4%);
+@upload-progress-background-color: saturate(@info, 10%);
+@upload-progress-text-color: contrast(@info);
+@upload-success-background-color: saturate(@success, 10%);
+@upload-success-text-color: contrast(@success);
+@upload-error-background-color: saturate(@error, 10%);
+@upload-error-text-color: contrast(@error);
 @task-summary-color: lighten(@widget-text-color, 25%);
 @task-summary-selected-color: lighten(@selected-background-color, 25%);
 @loading-panel-color: @background;
