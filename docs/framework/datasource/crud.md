@@ -387,9 +387,6 @@ An empty response is also treated as a valid success response.
 The `create` action should perform a similar routine as `update`, with one notable difference:
 the newly created data item(s) has no ID, so it must be assigned server-side and returned by the remote service.
 
-It is possible to return only the ID field(s) and value(s).
-In this case these IDs will be assigned to the client-side data items in the same order in which the newly created data items have been submitted.
-
     /*Client POST request:
 
     ProductName: "Fresh yellow bananas"
