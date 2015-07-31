@@ -936,4 +936,23 @@ test("ComboBox is disabled when placed in disabled fieldset", function() {
      $(".k-list-container").remove()
 });
 
+asyncTest("ComboBox calls placeholder method when delayed binding is used", 1, function() {
+    combobox = input.kendoComboBox({
+        text: "Chai",
+        placeholder: "Select...",
+        autoBind: false
+    }).data("kendoComboBox");
+
+    stub(combobox, {
+        _placeholder: combobox._placeholder
+    });
+
+    setTimeout(function() {
+        start();
+        combobox.dataSource.read();
+
+        equal(combobox.calls("_placeholder"), 1);
+    });
+});
+
 })();

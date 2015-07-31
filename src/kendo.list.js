@@ -183,6 +183,7 @@ var __meta__ = {
 
                             that._accessor(value);
                             that.input.val(text);
+                            that._placeholder();
                         } else if (that._oldIndex === -1) {
                             that._oldIndex = that.selectedIndex;
                         }
