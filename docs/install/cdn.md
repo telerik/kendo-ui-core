@@ -21,7 +21,7 @@ Use the following URL to load the minified Kendo UI Core script (available since
 
 ## HTTPS
 
-Use the same host name as above, only replacing the schema with `https`
+Use the same host name as above, only replacing the scheme (protocol) with `https`
 
     https://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js
 
