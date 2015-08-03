@@ -1143,7 +1143,9 @@ var __meta__ = {
         _renderItems: function(dataItems, callback) {
             var items = $(kendo.render(this.template, dataItems));
 
-            this.angular("compile", function(){
+            callback(items);
+
+            this.angular("compile", function() {
                 return {
                     elements: items,
                     data: dataItems.map(function(data){
@@ -1152,7 +1154,6 @@ var __meta__ = {
                 };
             });
 
-            callback(items);
             mobile.init(items);
             this._enhanceItems(items);
 
