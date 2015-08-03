@@ -25,7 +25,7 @@ Use the same host name as above, only replacing the schema with `https`
 
     https://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js
 
-## Note on Legacy URLs
+### Note on Legacy URLs
 
 The following base URLs will remain active, but are no longer recommended for new projects:
 
