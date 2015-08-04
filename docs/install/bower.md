@@ -95,6 +95,6 @@ fatal: unable to access 'https://bower.telerik.com/bower-kendo-ui.git/': SSL cer
 The cause of this issue is the underlying git installation is missing the certificate bundle.
 To resolve the issue, [follow the steps in this help article](http://blogs.msdn.com/b/phkelley/archive/2014/01/20/adding-a-corporate-or-self-signed-certificate-authority-to-git-exe-s-store.aspx).
 
-* GitHub build 1.9.5 will not work with the Bower package. Using Git version 1.8.3 is recommended.
+* GitHub build 1.9.5 will not work with the Bower package.
 
 
