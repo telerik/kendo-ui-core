@@ -15,12 +15,14 @@ This is a Javascript object that can be configured to execute predefined functio
 
 ## Schema
 
-The DataSource schema has several important roles, some of which are:
+The DataSource schema has several important roles, with the most notable ones being:
 
-* define the data field types in `schema.model.fields`. This will ensure correct sorting and filtering, and correct usage of default field editors (for example, a numeric textbox for numeric data)
-* define the id field of the data items in `schema.model.id`. This will ensure correct adding, editing and deleting of items.
+* define the **data field types** in `schema.model.fields`. This will ensure correct sorting and filtering,
+and correct usage of default field editors (for example, a numeric textbox for numeric data).
+* define the **id field** of the data items in `schema.model.id`. This will ensure correct adding, editing and deleting of items.
+* define the **key**, which points to the data items array in `schema.data`. This is required when the data does not represent a plain array of objects or JSON.
 
-The above settings must be configured no matter whether local or remote CRUD operations are used.
+The first two settings must be configured no matter whether local or remote CRUD operations are used.
 The only case when they are not needed is for scenarios when all data fields are of string type and there is no editing.
 Further details about the schema are provided in the [DataSource API documentation](/api/javascript/data/datasource#configuration-schema).
 
