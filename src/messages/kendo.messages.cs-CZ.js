@@ -98,7 +98,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "addRowAbove": "Přidat řádek nad",
   "addRowBelow": "Přidat řádek pod",
   "deleteRow": "Smazat řádek",
-  "deleteColumn": "Smazat soupec",
+  "deleteColumn": "Smazat soupec"
 });
 }
 
@@ -142,7 +142,7 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
   "string": {
     "eq": "Je shodná s",
     "neq": "Je různá od",
-    "startswith": "Začíná na"
+    "startswith": "Začíná na",
     "contains": "Obsahuje",
     "doesnotcontain": "Neobsahuje",
     "endswith": "Končí na"
