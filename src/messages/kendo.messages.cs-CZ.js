@@ -149,7 +149,7 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
   },
   "date": {
     "eq": "Je rovno",
-    "neq": "Je různá od"
+    "neq": "Je různá od",
     "gt": "Začíná po",
     "gte": "Začíná od",
     "lt": "Končí po",
@@ -489,8 +489,8 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "timezoneEditorButton": "Časové pásmo",
     "timezoneTitle": "Časová pásma",
     "noTimezone": "Žádné časová pásmo",
-    "editorTitle": "Událost",
-  },
+    "editorTitle": "Událost"
+  }
 });
 }
 
