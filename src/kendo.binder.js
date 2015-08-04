@@ -1735,6 +1735,8 @@ var __meta__ = {
                 element.kendoBindingTarget = null;
             }
         }
+
+        kendo.destroy(element);
     }
 
     function unbindElementTree(element) {
