@@ -1000,3 +1000,45 @@ That can be changed or removed by setting an optional height style in the Grid's
         .Name("grid")
         .Scrollable(s => s.Height("auto")) // remove default height
      )
+
+## No Records Template
+
+The Grid can show a built-in or custom message to the user when there are no records to display. There are several ways to configure it.
+
+#### Example - enable the default built-in No Records message
+
+    @(Html.Kendo().Grid<Order>()   
+        .Name("Grid")
+        .NoRecords()
+    )
+
+#### Example - define a custom No Records message
+
+In this case the custom message will be displayed centered inside the empty Grid's data area.
+
+    @(Html.Kendo().Grid<Order>()   
+        .Name("Grid")
+        .NoRecords("string HTML template, automatically centered")
+    )
+
+#### Example - define a custom non-centered No Records message
+
+In this case the custom message will be displayed with no centering styles applied, which allows easier and more advanced appearance customization via custom CSS code.
+
+    @(Html.Kendo().Grid<Order>()   
+        .Name("Grid")
+        .NoRecords(n => n.Template("string HTML template, not centered"))
+    )
+
+#### Example - define a custom No Records message with an external Kendo UI template
+
+Save as above, but the template is defined outside the Grid declaration.
+
+    <script id="no-records-template-id" type="text/x-kendo-template">
+        external HTML template, not centered
+    </script>
+    
+    @(Html.Kendo().Grid<Order>()   
+        .Name("Grid")
+        .NoRecords(n => n.TemplateId("no-records-template-id"))
+    )
