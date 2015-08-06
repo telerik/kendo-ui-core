@@ -9,7 +9,9 @@ position: 1
 
 This tutorial shows how to configure an ASP.NET MVC6 project to use Telerik UI for ASP.NET MVC.
 
-The tutorial uses Visual Studio 2015 RC.
+### Prerequisites
+1. [Visual Studio 2015](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx)
+1. [Microsoft ASP.NET and Web Tools 2015 (Beta6)](http://www.microsoft.com/en-us/download/details.aspx?id=48222)
 
 ### 1. Create an ASP.NET MVC 6 Web Site
 Please skip this step if you're configuring an existing project.
@@ -25,13 +27,13 @@ Please skip this step if you're configuring an existing project.
 1. Open the NuGet Package Manager
 
     ![NuGet package manager](images/manage-nuget-packages.png)
-1. Choose `nuget.org` as a package source and search for `Kendo.Mvc`
-1. Install the `Kendo.Mvc` package version 2015.2.602 or later.
+1. Choose `api.nuget.org` as a package source and search for `Kendo.Mvc`
+1. Install the `Kendo.Mvc` package version 2015.2.805 or later.
 This should add a similar line in your `project.json`:
 
         "dependencies": {
             ...
-            "Kendo.Mvc": "2015.2.602"
+            "Kendo.Mvc": "2015.2.805"
         }
 
 1. Open `Startup.cs` and locate the `ConfigureServices` method. Add the following snippet:
@@ -39,7 +41,7 @@ This should add a similar line in your `project.json`:
         // Register UI for ASP.NET MVC helpers
         services.AddKendo();
 
-1. Import the `Kendo.Mvc.UI` namespace in `~/Views/_GlobalImport.cshtml`
+1. Import the `Kendo.Mvc.UI` namespace in `~/Views/_ViewImports.cshtml`
 
         @using Kendo.Mvc.UI
 
@@ -50,34 +52,25 @@ This should add a similar line in your `project.json`:
 
         ![Kendo UI resources](images/kendo-ui-wwwroot.png)
 
-    1. [Install Kendo UI as a Bower package](/install/bower)
-
-         After installing the Bower package edit the `gulpfile.js`
-         to copy the resources to `wwwroot\lib` on build.
-
-            gulp.task("copy", ["clean"], function () {
-                var bower = {
-                    ...
-                    "kendo-ui": "kendo-ui/{styles,js}/**/*"
-                };
-
-                ...
-            });
+    1. [Install Kendo UI Professional as a Bower package](/install/bower#install-kendo-ui-professional-bower-package)
 
 1. Register the Kendo UI styles and scripts in `~/Views/Shared/Layout.cshtml`
 
+        <head>
         ...
 
         <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.common-bootstrap.min.css" />
         <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.bootstrap.min.css" />
         <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.dataviz.bootstrap.min.css" />
-
+        </head>
+        <body>
         ...
 
         <script src="~/lib/kendo-ui/js/kendo.all.min.js"></script>
         <script src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"></script>
 
         @RenderSection("scripts", required: false)
+        </body>
 
 1. Use a Kendo UI Widget
 
