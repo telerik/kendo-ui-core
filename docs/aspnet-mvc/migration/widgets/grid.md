@@ -341,7 +341,23 @@ Groups Configuration Is Moved to Datasource:
 
 ## NoRecordsTemplate
 
-**NoRecordsTemplate** Is Not Available. There Will Be a No NoRecords Item but Text Will Be Shown Within the Pager. This Text Is Configurable Through **Pageable.Messages** Configuration
+**NoRecordsTemplate** is renamed to **NoRecords**.
+
+#### Old
+
+    Html.Telerik().Grid<Order>()
+        .Name("Grid")
+        .NoRecordsTemplate("foo")
+
+#### New
+
+    Html.Kendo().Grid<Order>()   
+        .Name("Grid")
+        .NoRecords("foo")
+
+More ways to use the NoRecords setting are discussed in the [Grid Configuration](/aspnet-mvc/helpers/grid/configuration#no-records-template) help page.
+
+A "No Records" message is also shown inside the Pager. The message is configurable through **Pageable.Messages**.
 
 ## Localization
 
