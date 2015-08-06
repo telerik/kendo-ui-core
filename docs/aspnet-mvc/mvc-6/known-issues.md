@@ -26,8 +26,6 @@ Come back often for updates.
 ### Grid
 
 - Server-side rendering is not supported
-- Column HTML attributes are not escaped. HttpEncoder is not available in MVC Beta 3.
-  See [aspnet/Mvc#72](https://github.com/aspnet/HttpAbstractions/issues/72)
 
 ### Chart
 
