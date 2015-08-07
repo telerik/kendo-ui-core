@@ -294,7 +294,11 @@ all table rows have the same heights - disable text wrapping, or set an explicit
 Due to height-related browser limitations, which cannot be avoided, virtual scrolling works with up to a couple of million records (depending on the browser).
 Using a larger row count than that can produce unexpected behavior or Javascript errors.
 
-In all cases listed above when using virtual scrolling is not supported, revert to standard paging.
+When using mobile touch devices, which do not have a visible scrollbar that can be grabbed and dragged, virtual scrolling combined with a large number of data items (e.g. thousands)
+can impose a challenge to easily acccess all table rows, as this will require a great deal of touch scrolling. On the other hand, using virtual scrolling with a very small number of items
+(below a couple of hundreds) doesn't make much sense either.
+
+In all cases listed above when using virtual scrolling is not supported or recommended, revert to standard paging or non-virtual scrolling without paging, depending on the number of data items.
 
 ## Locked columns (Frozen columns)
 
