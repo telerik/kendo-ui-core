@@ -269,8 +269,8 @@ When virtual scrolling is used, the HTML output is a little different, compared 
         </div>
     </div>
 
-Due to the specifics of its behavior and implementation, the virtual scrolling imposes certain limitations with regard to some other Grid features.
-It cannot be used together with grouping, hierarchy, keyboard navigation, batch editing and inline editing.
+The virtual scrolling behavior and implementation imposes limitations with regard to some other Grid features.
+It cannot be used together with grouping, hierarchy, batch editing and inline editing. Popup editing is supported, but without adding of new items.
 
 Virtual scrolling relies on a fake scrollbar. Its size is not determined by the browser, but calculated based on the average row height of already loaded data.
 As a result, variable row heights may cause unexpected behavior, such as inability to scroll to the last rows on the last page. There are two ways to ensure that
@@ -289,12 +289,12 @@ all table rows have the same heights - disable text wrapping, or set an explicit
     }
 
 > The Grid page size must be large-enough, so that the table rows do not fit in the scrollable data area. Otherwise the virtual vertical scrollbar will not be created.
-> We recommend setting a page size, which is at least **three times larger** than the number of visible table rows in the data area.
+> The page size must be **over three times larger** than the number of visible table rows in the data area.
 
 Due to height-related browser limitations, which cannot be avoided, virtual scrolling works with up to a couple of million records (depending on the browser).
 Using a larger row count than that can produce unexpected behavior or Javascript errors.
 
-In all cases listed above when using virtual scrolling is not recommended, revert to standard paging.
+In all cases listed above when using virtual scrolling is not supported, revert to standard paging.
 
 ## Locked columns (Frozen columns)
 
