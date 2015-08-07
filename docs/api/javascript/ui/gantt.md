@@ -2510,6 +2510,46 @@ If set to `false`, the day view will show all hours of the day. By default the v
     });
     </script>
 
+### taskTemplate `String|Function`
+
+The [template](/api/framework/kendo#methods-template) used to render the gantt tasks.
+
+The fields which can be used in the template are the [task fields](/api/javascript/data/gantttask)
+
+#### Example - set the task template
+
+    <script id="task-template" type="text/x-kendo-template">
+      <div> #= title # </div>
+      <div>
+        Start at #: start.toLocaleTimeString() #
+        <br />
+        End at #: end.toLocaleTimeString() #
+      </div>
+    </script>
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [{
+        id: 1,
+        orderId: 0,
+        parentId: null,
+        title: "Task1",
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 12:00")
+      }, {
+        id: 2,
+        orderId: 0,
+        parentId: null,
+        title: "Task2",
+        start: new Date("2014/6/17 11:00"),
+        end: new Date("2014/6/17 14:00")
+      }],
+      showWorkHours: false,
+      rowHeight: 70,
+      taskTemplate: $("#task-template").html()
+    });
+    </script>
+
 ### toolbar `String|Function|Array`
 
 If a `String` value is assigned to the `toolbar` configuration option, it will be treated as a single string template for the whole Gantt Toolbar,
@@ -3252,6 +3292,38 @@ The field of the gantt task which contains the assigned resource objects.
         { field: "title", title: "Title" },
         { field: "taskResources", title: "Task Resources" }
       ]
+    });
+    </script>
+
+### rowHeight `Number|String`
+
+The height of the table rows. Numeric values are treated as pixels.
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [{
+         id: 1,
+         orderId: 0,
+         parentId: null,
+         title: "Task1",
+         start: new Date("2014/6/17 9:00"),
+         end: new Date("2014/6/17 10:00")
+      }, {
+         id: 2,
+         orderId: 0,
+         parentId: null,
+         title: "Task2",
+         start: new Date("2014/6/17 11:00"),
+         end: new Date("2014/6/17 12:00")
+      }],
+      dependencies: [{
+         id: 1,
+         type: 1,
+         predecessorId: 1,
+         successorId: 2
+      }],
+      rowHeight: 100
     });
     </script>
 
