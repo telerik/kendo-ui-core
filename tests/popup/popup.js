@@ -91,6 +91,20 @@
         ok(!popup.visible());
     });
 
+    test("do not fall in infinitive loop when window.scroll during close", function() {
+        expect(1);
+        popup = new Popup(div, {
+            close: function() {
+                $(window).scroll();
+            }
+        });
+
+        popup.open();
+        popup.close();
+
+        ok(!popup.visible());
+    });
+
     test("popup appends element to body", function() {
         div.kendoPopup();
 
