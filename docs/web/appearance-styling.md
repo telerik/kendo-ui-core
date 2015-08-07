@@ -41,6 +41,8 @@ Some themes require a different "common" (base) stylesheet that applies differen
 
 * **kendo.common-fiori.css** - The base stylesheet for the Fiori theme available in Kendo UI Professional. Use this file instead of kendo.common.css and only with kendo.fiori.css.
 
+* **kendo.common-office365.css** - The base stylesheet for the Office365 theme available in Kendo UI Professional. Use this file instead of kendo.common.css and only with kendo.office365.css.
+
 ## Primitives
 
 Kendo UI widgets use primitives, meaning that different HTML elements in different widgets use the same CSS classes to provide a level of abstraction and allow common styling.
