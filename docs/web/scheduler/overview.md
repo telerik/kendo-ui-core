@@ -319,6 +319,28 @@ The function context of the event handler (available via the `this` keyword) is 
     scheduler.bind("edit", scheduler_edit);
     </script>
 
+## Adaptive rendering mode
+
+The Kendo UI Scheduler supports "adaptive" enhancements like changes in styling and behavior in order to remain consistent with the specific user device experience.
+For instance, when editing on a mobile device, Kendo UI will slide in a new screen for the user, which is a departure from the more desktop-like popup behaviors.
+
+To enable the adaptive feature, please set the [`mobile`](/api/javascript/ui/scheduler#configuration-mobile) property to `true`, `"phone"` or `"tablet"`.
+
+Each adaptive Scheduler is rendered inside a separate Kendo UI mobile Pane. Since the panes are absolutely positioned, they can overlap with other content on the page.
+To avoid this, wrap the Scheduler inside a `<div>` container that has a `position:relative` style and a set `height`. The `height` must be consistent with the Scheduler's height.
+As a general information, the absolute position is required so that transitions between main and edit views to work correctly.
+
+    <style>
+        .adaptive-scheduler-wrapper {
+            position: relative;
+            height: 400px;
+        }
+    </style>
+
+    <div class="adaptive-scheduler-wrapper">
+        <div id="scheduler1"></div>
+    </div>
+
 ## Printing
 
 The Scheduler may be scrollable when displayed on a web page, but it should not be scrollable during printing.
