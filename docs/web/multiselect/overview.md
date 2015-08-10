@@ -173,7 +173,7 @@ The MultiSelect gives you the ability to render a pop-up header.
 
 #### Example - define a header template
 
-    <input id="multiselect" />
+    <select id="multiselect" />
     <!-- Template -->
     <script id="headerTemplate" type="text/x-kendo-template">
         <strong>Header</strong>
