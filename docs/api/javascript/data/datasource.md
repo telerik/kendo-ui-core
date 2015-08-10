@@ -799,7 +799,7 @@ return the data items for the response.
         }
       },
       schema: {
-        data: "results" // twitter's response is { "results": [ /* results */ ] }
+        data: "statuses" // twitter's response is { "statuses": [ /* results */ ] }
       }
     });
     dataSource.fetch(function(){
@@ -821,7 +821,7 @@ return the data items for the response.
       },
       schema: {
         data: function(response) {
-          return response.results; // twitter's response is { "results": [ /* results */ ] }
+          return response.statuses; // twitter's response is { "statuses": [ /* results */ ] }
         }
       }
     });
