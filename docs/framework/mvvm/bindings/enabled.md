@@ -9,7 +9,7 @@ description: If the View-Model value returns true value, the target DOM widget i
 The `enabled` binding enables the target DOM element (or widget) if the View-Model value is `true`.
 If the View-Model value is `false` the target DOM element (or widget) will be disabled.
 
-The `enabled` binding supports only input HTML elements: `input`, `select` and `textarea`.
+The `enabled` binding supports only input HTML elements: `input`, `select`, `button` and `textarea`.
 When an input element is disabled the end user cannot change its value (type in text or choose a different option).
 
 ## Using the enable binding
