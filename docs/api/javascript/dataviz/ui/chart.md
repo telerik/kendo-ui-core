@@ -23330,7 +23330,7 @@ The format used to display the labels. Uses [kendo.format](/api/framework/kendo#
       ],
       xAxis: {
         labels: {
-          format: "{0:C"}
+          format: "{0:C}"
         }
       }
     });
@@ -28098,7 +28098,7 @@ The format used to display the labels. Uses [kendo.format](/api/framework/kendo#
       ],
       yAxis: {
         labels: {
-          format: "{0:C"}
+          format: "{0:C}"
         }
       }
     });
