@@ -18,7 +18,7 @@
        "cookiejar": "1.3.0",
 
        "faye-websocket": "0.4.4",
-       "less": "1.3.3",
+       "less": "1.7.5",
        "jshint": "1.1.0",
 
        "grunt": "~0.4.2",
