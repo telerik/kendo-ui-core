@@ -1,3 +1,0 @@
-[submodule "build/less-js"]
-	path = build/less-js
-	url = https://github.com/telerik/less.js.git
