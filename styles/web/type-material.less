@@ -2178,9 +2178,23 @@ html .km-pane-wrapper .km-widget,
     background-color: transparent;
 }
 
-.k-button:focus
+.k-button:focus,
+.k-split-button:focus
 {
     outline:none;
+}
+
+.k-split-button:focus {
+    background-color: @button-active-background;
+}
+
+.k-split-button:focus > .k-button {
+    background: transparent;
+    border-color: @button-active-background;
+}
+
+.k-split-button:focus > .k-button.k-split-button-arrow {
+    border-left-color: @alt-background-color;
 }
 
 .k-editor .k-tool:focus

@@ -1508,7 +1508,8 @@ div.k-filebrowser-dropzone em
 .k-tile,
 .k-slider-track,
 .k-slider-selection,
-.k-upload
+.k-upload,
+.k-split-button
 {
     border-radius: @main-border-radius;
 }
@@ -2171,9 +2172,19 @@ html .km-pane-wrapper .km-widget,
     background-color: transparent;
 }
 
-.k-button:focus
+.k-button:focus,
+.k-split-button:focus
 {
     outline:none;
+}
+
+.k-split-button:focus {
+    box-shadow: 0 0 0px 1px @button-focused-border-color;
+}
+
+.k-split-button:focus > .k-button {
+    background: transparent;
+    border-color: transparent;
 }
 
 .k-editor .k-tool:focus
