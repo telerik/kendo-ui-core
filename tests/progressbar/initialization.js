@@ -637,14 +637,14 @@ test("Chunk size is calculated correctly according to chunk count", function() {
     equal(actualChunkSize, expectedChunkSize);
 });
 
-test("Chunk count is reset to default if negative chunk count is passed", function() {
+test("Chunk count is reset to one if negative chunk count is passed", function() {
     var pb = new ProgressBar(container, {
         type: "chunk",
         chunkCount: -5
     });
 
     var chunkCount = pb.options.chunkCount;
-    equal(chunkCount, 5);
+    equal(chunkCount, 1);
 });
 
 test("Chunk count is reset to default if chunk count is less than two", function() {
@@ -654,6 +654,6 @@ test("Chunk count is reset to default if chunk count is less than two", function
     });
 
     var chunkCount = pb.options.chunkCount;
-    equal(chunkCount, 5);
+    equal(chunkCount, 1);
 });
 })();
