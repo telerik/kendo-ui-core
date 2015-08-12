@@ -4236,7 +4236,7 @@ The width of the table columns in timeline views. Value is treated as pixels.
 
 > The `columnWidth` option is supported when [views.type](#configuration-views.type) is set to "timeline", "timelineWeek", "timelineWorkWeek" or "timelineMonth".
 
-#### Example - set the event height in month view
+#### Example - set the columnWidth in timelineWeek view
 
     <div id="scheduler"></div>
     <script>
