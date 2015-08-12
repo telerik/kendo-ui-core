@@ -379,7 +379,7 @@ var __meta__ = {
             var html = "";
 
             if (options.chunkCount <= 1) {
-                options.chunkCount = DEFAULTCHUNKCOUNT;
+                options.chunkCount = 1;
             }
 
             html += "<ul class='k-reset'>";
