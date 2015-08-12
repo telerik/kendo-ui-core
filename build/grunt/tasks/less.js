@@ -22,14 +22,12 @@ module.exports = function(grunt) {
                 p.parse(grunt.file.read(f), function(err, tree){
                     try {
                         var css = tree.toCSS();
+                        var cssFile = f.replace(/\.less$/, ".css");
+                        grunt.log.writeln("Autoprefixing CSS file: " + cssFile);
                         postcss([ autoprefixer ]).process(css).then(function (result) {
                             result.warnings().forEach(function (warn) {
-                                console.warn(warn.toString());
+                                console.warn(warn.toString() + " " + f);
                             });
-
-                            var cssFile = f.replace(/\.less$/, ".css");
-                            grunt.log.writeln("Autoprefixing CSS file: " + cssFile);
-
                             grunt.file.write(PATH.join(destDir, cssFile), result.css);
                             var cssmin = CSSMIN(result.css);
                             grunt.file.write(PATH.join(destDir, f.replace(/\.less$/, ".min.css")), cssmin);
