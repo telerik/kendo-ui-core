@@ -26,7 +26,7 @@ context, The mobile views support AngularJS controllers, directives and two way 
             angular.module("foo", [ "kendo.directives" ])
                 .controller("MyCtrl", function($scope) {
                     $scope.hello = "Hello World!";
-                }]);
+                });
         </script>
     </body>
 
