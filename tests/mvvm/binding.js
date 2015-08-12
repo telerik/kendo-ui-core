@@ -794,6 +794,19 @@ test("checked binding binds radiobutton by value", function() {
     ok(dom.is(":checked"));
 });
 
+test("checked binding - clearing value clears selected radio button as well", function() {
+    dom = $('<input type="radio" name="test" value="foo" data-bind="checked:selectedItem"/>');
+
+    var viewModel = kendo.observable({
+        selectedItem: "foo"
+    });
+
+    kendo.bind(dom, viewModel);
+    viewModel.set("selectedItem", "");
+
+    equal(dom.prop("checked"), false);
+});
+
 test("checked binding binds radiobutton to boolean value", function() {
     dom = $('<input type="radio" value="true" data-bind="checked:selectedItem"/>');
 

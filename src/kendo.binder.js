@@ -694,6 +694,8 @@ var __meta__ = {
                     }
                     if (element.value === value.toString()) {
                         element.checked = true;
+                    }else{
+                        element.checked = false;
                     }
                 }
             },
