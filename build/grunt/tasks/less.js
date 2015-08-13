@@ -26,7 +26,7 @@ module.exports = function(grunt) {
                         grunt.log.writeln("Autoprefixing CSS file: " + cssFile);
                         postcss([ autoprefixer ]).process(css).then(function (result) {
                             result.warnings().forEach(function (warn) {
-                                console.warn(warn.toString() + " " + f);
+                                //console.warn(warn.toString() + " " + f);
                             });
                             grunt.file.write(PATH.join(destDir, cssFile), result.css);
                             var cssmin = CSSMIN(result.css);
