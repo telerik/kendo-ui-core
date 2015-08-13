@@ -18,19 +18,23 @@ module.exports = function(grunt) {
                     filename : PATH.basename(f),
                     syncImport: true
                 });
-                grunt.log.writeln("Compiling LESS file: " + f);
+                grunt.log.writeln(f + " - compiling LESS...");
                 p.parse(grunt.file.read(f), function(err, tree){
                     try {
                         var css = tree.toCSS();
                         var cssFile = f.replace(/\.less$/, ".css");
-                        grunt.log.writeln("Autoprefixing CSS file: " + cssFile);
+                        grunt.log.writeln(cssFile + " - autoprefixing CSS...");
                         postcss([ autoprefixer ]).process(css).then(function (result) {
                             result.warnings().forEach(function (warn) {
                                 console.warn(warn.toString() + " " + f);
                             });
-                            grunt.file.write(PATH.join(destDir, cssFile), result.css);
+                            var cssFileInDir = PATH.join(destDir, cssFile);
+                            grunt.log.writeln(cssFileInDir + " - saving CSS file...");
+                            grunt.file.write(cssFileInDir, result.css);
                             var cssmin = CSSMIN(result.css);
-                            grunt.file.write(PATH.join(destDir, f.replace(/\.less$/, ".min.css")), cssmin);
+                            var cssMinFileInDir = PATH.join(destDir, f.replace(/\.less$/, ".min.css"));
+                            grunt.log.writeln(cssMinFileInDir + " - saving minified CSS file...");
+                            grunt.file.write(cssMinFileInDir, cssmin);
                         });
                     } catch(ex) {
                         grunt.log.error("Can't process LESS file " + f);
