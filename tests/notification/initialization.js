@@ -578,7 +578,7 @@
         notification.show('<span id="bar">bar bar</span>');
         var barNotificationWrapper = $("#bar").closest(".k-notification").parent();
 
-        ok(fooNotificationWrapper.css("top") > barNotificationWrapper.css("top"));
+        ok(parseInt(fooNotificationWrapper.css("top"), 10) > parseInt(barNotificationWrapper.css("top"), 10));
         equal(fooNotificationWrapper.css("right"), barNotificationWrapper.css("right"));
     });
 
@@ -594,7 +594,7 @@
         notification.show('<span id="bar">bar bar</span>');
         var barNotificationWrapper = $("#bar").closest(".k-notification").parent();
 
-        ok(fooNotificationWrapper.css("top") < barNotificationWrapper.css("top"));
+        ok(parseInt(fooNotificationWrapper.css("top"), 10) < parseInt(barNotificationWrapper.css("top"), 10));
         equal(fooNotificationWrapper.css("right"), barNotificationWrapper.css("right"));
     });
 
@@ -612,7 +612,7 @@
         notification.show('<span id="bar">bar bar</span>');
         var barNotificationWrapper = $("#bar").closest(".k-notification").parent();
 
-        ok(fooNotificationWrapper.css("top") < barNotificationWrapper.css("top"));
+        ok(parseInt(fooNotificationWrapper.css("top"), 10) < parseInt(barNotificationWrapper.css("top"), 10));
         equal(fooNotificationWrapper.css("right"), barNotificationWrapper.css("right"));
     });
 
@@ -644,7 +644,7 @@
         notification.show('<span id="bar">bar</span>');
         var barNotificationWrapper = $("#bar").closest(".k-notification").parent();
 
-        ok(fooNotificationWrapper.css("left") > barNotificationWrapper.css("left"));
+        ok(parseInt(fooNotificationWrapper.css("left"), 10) > parseInt(barNotificationWrapper.css("left"), 10));
         equal(fooNotificationWrapper.css("top"), barNotificationWrapper.css("top"));
     });
 
