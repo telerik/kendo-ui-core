@@ -181,5 +181,22 @@ test('right scrolling button disappears and appears when (not) needed', 2, funct
     ok(buttonNext.is(":visible"));
 });
 
+test('right scrolling button appears if browser window width is reduced', 2, function () {
+    createTabStrip();
+
+    var buttonNext = tabstrip.wrapper.children(".k-tabstrip-next");
+
+    tabstrip.tabGroup.scrollLeft(tabstrip.tabGroup[0].scrollWidth + 100);
+    buttonNext.trigger("mousedown").trigger("mouseup");
+    tabstrip.tabGroup.finish();
+
+    ok(!buttonNext.is(":visible"));
+
+    tabstrip.wrapper.width(tabstrip.wrapper.width() - 50);
+
+    tabstrip.resize();
+
+    ok(buttonNext.is(":visible"));
+});
 
 })();
