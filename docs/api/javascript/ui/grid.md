@@ -772,9 +772,9 @@ Specifies the width of the input before it is initialized or turned into a widge
             dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }] });
     </script>
 
-### columns.filterable.cell.suggestionOperator `String` *(default: "startswidth")*
+### columns.filterable.cell.suggestionOperator `String` *(default: "startswith")*
 
-Specifies the AutoComplete filter option. Possible values are same as the one for the AutoComplete filter option- "startswidht", "endswith", "contains".
+Specifies the AutoComplete filter option. Possible values are same as the one for the AutoComplete filter option- "startswith", "endswith", "contains".
 
 > Notice this operator is completely separate from the operator used for filtering on this column - check [operator](#configuration-columns.filterable.cell.operator).
 
