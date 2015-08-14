@@ -185,5 +185,6 @@ This behavior is enabled by default, but [can be disabled](/api/javascript/ui/ta
 
 If the TabStrip has no fixed width and is placed in a fluid layout, it can re-check if tab scrolling becomes necessary, or is no longer required.
 To achieve this, execute the widget's [`resize()`](/using-kendo-in-responsive-web-pages#individual-widget-resizing) method, e.g. in `window.resize`.
+The `resize` method will also show the right scroll button if the last (and selected) tab becomes invisibile as a result of TabStrip shrinking.
 
 Check the [TabStrip API](/api/javascript/ui/tabstrip) for additional information about the widget configuration, events and methods.
