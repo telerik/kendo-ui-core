@@ -1041,12 +1041,12 @@ div.k-filebrowser-dropzone em
 
 .k-state-disabled
 {
-    opacity:.7;
+    opacity: .7;
 }
 
 .k-ie8 .k-state-disabled
 {
-    filter:alpha(opacity=70);
+    filter: alpha(opacity=70);
 }
 
 .k-tile-empty.k-state-selected,
@@ -1095,12 +1095,12 @@ div.k-filebrowser-dropzone em
 
 .k-slider-horizontal .k-tick
 {
-    background-image:url('@{image-folder}/slider-h.gif');
+    background-image: url('@{image-folder}/slider-h.gif');
 }
 
 .k-slider-vertical .k-tick
 {
-    background-image:url('@{image-folder}/slider-v.gif');
+    background-image: url('@{image-folder}/slider-v.gif');
 }
 
 /* Tooltip */
@@ -1977,7 +1977,7 @@ html .km-pane-wrapper .km-widget,
 
 .k-tabstrip-items .k-state-hover .k-link,
 .k-panelbar > li.k-state-hover > .k-link,
-.k-panelbar>li.k-state-default>.k-link.k-state-hover
+.k-panelbar > li.k-state-default > .k-link.k-state-hover
 {
     color: @hover-text-color;
 }
@@ -2076,7 +2076,6 @@ html .km-pane-wrapper .km-widget,
 
 .k-grid td.k-state-focused
 {
-    -webkit-box-shadow: inset 0 0 0 1px @focused-item-shadow;
     box-shadow: inset 0 0 0 1px @focused-item-shadow;
 }
 
@@ -2175,7 +2174,7 @@ html .km-pane-wrapper .km-widget,
 
 .k-button:focus,
 .k-split-button:focus {
-    outline:none;
+    outline: none;
 }
 
 .k-split-button:focus {
@@ -2671,7 +2670,7 @@ thead.k-grid-header th.k-header:last-child
 	.box-shadow(@focused-active-item-shadow);
 }
 
-.k-list>.k-state-hover
+.k-list > .k-state-hover
 {
    border-color: @hover-background-color;
 }
@@ -2716,7 +2715,7 @@ thead.k-grid-header th.k-header:last-child
 
 .k-slider-horizontal .k-tick
 {
-    background-image:url('@{image-folder}/slider-h.gif');
+    background-image: url('@{image-folder}/slider-h.gif');
 }
 
 .k-draghandle.k-state-selected,
@@ -3027,7 +3026,7 @@ td.k-state-focused.k-state-selected,
 }
 
 .k-grid .k-pager-numbers,
-.k-pager-wrap>.k-link
+.k-pager-wrap > .k-link
 {
     margin: 0;
 }
@@ -3141,16 +3140,11 @@ td.k-state-focused.k-state-selected,
         .k-grid .k-pager-numbers
         {
             position: absolute;
-            display: -moz-inline-flex;
-            display: -webkit-inline-flex;
             display: inline-flex;
-            -webkit-flex-direction: column-reverse;
             flex-direction: column-reverse;
             margin-left: .3em;
             overflow: visible;
             height: auto;
-            -webkit-transform: translatey(-100%);
-            -moz-transform: translatey(-100%);
             transform: translatey(-100%);
         }
         
@@ -3175,8 +3169,6 @@ td.k-state-focused.k-state-selected,
         {
             display: block;
             border-left: 0;
-            -webkit-transform: translatey(100%);
-            -moz-transform: translatey(100%);
             transform: translatey(100%);
         }
         
@@ -3298,9 +3290,6 @@ td.k-state-focused.k-state-selected,
 .k-chart .k-selection {
     border-color: #cccccc;
     transition: box-shadow .2s linear, border-color .2s linear;
-    -moz-transition: box-shadow .2s linear, border-color .2s linear;
-    -webkit-transition: box-shadow .2s linear, border-color .2s linear;
-    -o-transition: box-shadow .2s linear, border-color .2s linear;
 }
 
 .k-chart .k-selection:hover {
@@ -3311,19 +3300,13 @@ td.k-state-focused.k-state-selected,
     background-color: #ffffff;
     width: 15px;
     height: 15px;
-    -moz-box-shadow: 0 0 0 2px rgba(0,0,0,.1);
-    -webkit-box-shadow: 0 0 0 2px rgba(0,0,0,.1);
     box-shadow: 0 0 0 2px rgba(0,0,0,.1);
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
     border-radius: 10px;
 }
 
 .k-chart .k-handle:hover {
     background-color: #ffffff;
     border-color: #cccccc;
-    -moz-box-shadow: 0 0 0 2px rgba(0,0,0,.3);
-    -webkit-box-shadow: 0 0 0 2px rgba(0,0,0,.3);
     box-shadow: 0 0 0 2px rgba(0,0,0,.3);
 }
 
@@ -3337,8 +3320,6 @@ td.k-state-focused.k-state-selected,
 
 .k-chart .k-navigator-hint .k-tooltip {
     border: 3px solid #ffffff;
-    -moz-box-shadow: 0 0 0 3px rgba(0,0,0,.2);
-    -webkit-box-shadow: 0 0 0 3px rgba(0,0,0,.2);
     box-shadow: 0 0 0 3px rgba(0,0,0,.2);
     background: #ffffff;
     color: #676767;
@@ -3365,4 +3346,3 @@ td.k-state-focused.k-state-selected,
         background-image: url("@{image-folder}/markers_2x.png");
     }
 }
-
