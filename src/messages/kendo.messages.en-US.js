@@ -317,7 +317,7 @@ if (kendo.ui.NumericTextBox) {
 kendo.ui.NumericTextBox.prototype.options =
 $.extend(true, kendo.ui.NumericTextBox.prototype.options,{
   "upArrowText": "Increase value",
-  "downArrowText": "Decreate value"
+  "downArrowText": "Decrease value"
 });
 }
 
