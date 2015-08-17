@@ -2210,6 +2210,16 @@ The zoom min level in percentages.
 
 The zoom step when using the mouse-wheel to zoom in or out.
 
+## Fields
+
+### connections `Array`
+
+An array holding the diagram connections.
+
+### shapes `Array`
+
+An array holding the diagram shapes.
+
 ## Methods
 
 ### addConnection
