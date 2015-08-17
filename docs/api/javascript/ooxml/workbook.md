@@ -533,6 +533,29 @@ The value of the cell. Numbers and dates will be formatted as strings. String va
     });
     </script>
 
+### sheets.rows.height `Number`
+The row height in pixels.
+
+#### Example - set the row heights
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [{
+          rows: [{
+              cells: [{ value: "this row is 100px high" }],
+              height: 100
+          }, {
+              cells: [{ value: "this row is 200px high" }],
+              height: 200
+          }]
+      }]
+    });
+    kendo.saveAs({
+      dataURI: workbook.toDataURL(),
+      fileName: "Test.xlsx"
+    });
+    </script>
+
 ### sheets.title `String`
 
 Sets the title of the exported workbook sheet.
