@@ -643,11 +643,31 @@ The value of the cell. Numbers and dates will be formatted as strings. String va
     });
     </script>
 
+### sheets.rows.index `Number`
+The zero-based index of the row in the sheet.
+Defaults to the index of the object in the array.
+
+#### Example - set row height by index
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [{
+          rows: [{
+              cells: [{ value: "this row is 100px high" }],
+              height: 100,
+              index: 1
+          }]
+      }]
+    });
+    kendo.saveAs({
+      dataURI: workbook.toDataURL(),
+      fileName: "Test.xlsx"
+    });
+    </script>
+
 ### sheets.rows.height `Number`
 The row height in pixels.
 
 #### Example - set the row heights
-
     <script>
     var workbook = new kendo.ooxml.Workbook({
       sheets: [{
@@ -699,4 +719,4 @@ Creates an Excel file that represents the current workbook and returns it as a d
     </script>
 
 
-
+    
