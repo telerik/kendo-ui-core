@@ -92,6 +92,28 @@ If set to true the column will stretch to fit the contents of all cells.
       });
       </script>
 
+### sheets.columns.index `Number`
+
+The zero-based index of the column in the sheet.
+Defaults to the index of the object in the array.
+
+#### Example - set width on second column
+
+      <script>
+      var workbook = new kendo.ooxml.Workbook({
+        sheets: [{
+            columns: [{
+                width: 100,
+                index: 1
+            }]
+        }]
+      });
+      kendo.saveAs({
+        dataURI: workbook.toDataURL(),
+        fileName: "Test.xlsx"
+      });
+      </script>
+
 ### sheets.columns.width `Number`
 
 The width of the column in pixels.
