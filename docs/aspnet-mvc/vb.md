@@ -86,15 +86,40 @@ The following examples show the correct Visual Basic (VB) syntax when using [lam
                      End Sub) _
         .Pageable() _
         .Sortable() _
+        .ToolBar(Function(t)
+                    t.Create()
+                    t.Custom().Name("myCustomCommand").Text("custom toolbar button")
+                End Function) _
         .Filterable() _
         .DataSource(Function(d)
-                            d.Ajax().Read(Function(read) read.Action("Person_Read", "Home")).Model(Sub(m)
-                                                                                                         m.Id(Function(i) i.PersonID)
-                                                                                                   End Sub)
+                            d.Ajax()
+                                .Read(Function(read) read.Action("Person_Read", "Home")) _
+                                .Update(Function(update) update.Action("Person_Update", "Home")) _
+                                .Create(Function(create) create.Action("Person_Create", "Home")) _
+                                .Destroy(Function(destroy) destroy.Action("Person_Destroy", "Home")) _
+                                .Model(Sub(m)
+                                            m.Id(Function(i) i.PersonID)
+                                        End Sub)
                     End Function) _
         .Render()
     End Code
 
+#### Alternative ToolBar configurations
+
+    ...
+    .ToolBar(Function(t)
+                     t.Template("template as a string")
+             End Function) _
+    ...
+    
+    ...
+    .ToolBar(Function(t)
+                     t.Template(Sub()
+                                    @<text>server template</text>
+                                End Sub)
+             End Function) _
+    ...
+    
 ### Controller
 
     Imports Kendo.Mvc.Extensions
