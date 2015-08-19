@@ -24,22 +24,22 @@ module.exports = function(grunt) {
                     filename : PATH.basename(f),
                     syncImport: true
                 });
-                grunt.log.writeln(f + " - compiling LESS...");
+                grunt.log.writeln(f + " - compiling...");
                 p.parse(grunt.file.read(f), function(err, tree){
                     try {
                         var css = tree.toCSS();
                         var cssFile = f.replace(/\.less$/, ".css");
-                        grunt.log.writeln(cssFile + " - autoprefixing CSS...");
+                        grunt.log.writeln(cssFile + " - autoprefixing...");
                         postcss([ autoprefixer ]).process(css).then(function (result) {
                             result.warnings().forEach(function (warn) {
                                 console.warn(warn.toString() + " " + f);
                             });
                             var cssFileInDir = PATH.join(destDir, cssFile);
-                            grunt.log.writeln(cssFileInDir + " - saving CSS file...");
+                            grunt.log.writeln(cssFileInDir + " - saving...");
                             grunt.file.write(cssFileInDir, result.css);
                             var cssmin = CSSMIN(result.css);
                             var cssMinFileInDir = PATH.join(destDir, f.replace(/\.less$/, ".min.css"));
-                            grunt.log.writeln(cssMinFileInDir + " - saving minified CSS file...");
+                            grunt.log.writeln(cssMinFileInDir + " - saving...");
                             grunt.file.write(cssMinFileInDir, cssmin);
 
                             if (--fileCount === 0) {
