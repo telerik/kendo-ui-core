@@ -162,4 +162,95 @@
             equal(QUnit.fixture.find(".item").text(), "2");
         });
     });
+
+
+    ngTest("automatic widget delay works if an option is undefined", 2, function(){
+        angular.module('kendo.tests').controller('mine', function($scope) {
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><a kendo-mobile-button data-icon="foo"></a></div>');
+    },
+
+    function() {
+        var scope = QUnit.fixture.find("a").scope();
+
+        ok(!QUnit.fixture.find("a").getKendoMobileButton());
+
+        scope.$apply(function(){
+            scope.foo = {};
+        });
+
+        stop();
+
+        setTimeout(function() {
+            start();
+            ok(QUnit.fixture.find("a").getKendoMobileButton());
+        }, 100);
+    });
+
+    ngTest("automatic widget delay works if an k-options is undefined", 2, function(){
+        angular.module('kendo.tests').controller('mine', function($scope) {
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><a kendo-mobile-button k-options="foo"></a></div>');
+    },
+
+    function() {
+        var scope = QUnit.fixture.find("a").scope();
+
+        ok(!QUnit.fixture.find("a").getKendoMobileButton());
+
+        scope.$apply(function(){
+            scope.foo = {};
+        });
+
+        stop();
+
+        setTimeout(function() {
+            start();
+            ok(QUnit.fixture.find("a").getKendoMobileButton());
+        }, 100);
+    });
+
+    ngTest("automatic widget delay works with immediate promises", 1, function(){
+        angular.module('kendo.tests').controller('mine', function($scope, $q) {
+            $q(function(resolve, reject) { resolve({}); }).then(function(value) {
+                $scope.foo = value;
+            });
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><a kendo-mobile-button data-icon="foo"></a></div>');
+    },
+
+    function() {
+        var scope = QUnit.fixture.find("a").scope();
+        ok(QUnit.fixture.find("a").getKendoMobileButton());
+    });
+
+    var $$q;
+
+    ngTest("automatic widget delay works with delayed promises", 2, function(){
+        angular.module('kendo.tests').controller('mine', function($scope, $q) {
+            $$q = $q;
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><a kendo-mobile-button data-icon="foo"></a></div>');
+    },
+
+    function() {
+        var scope = QUnit.fixture.find("a").scope();
+        ok(!QUnit.fixture.find("a").getKendoMobileButton());
+
+        stop();
+        setTimeout(function() {
+            $$q(function(resolve, reject) { resolve({}); }).then(function(value) {
+                scope.foo = value;
+            });
+
+            setTimeout(function() {
+                start();
+                ok(QUnit.fixture.find("a").getKendoMobileButton());
+            });
+        }, 100);
+    });
 })();
