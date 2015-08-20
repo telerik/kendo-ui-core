@@ -1,5 +1,5 @@
 var PATH = require("path");
-var LESS = require("../../less-js");
+var LESS = require("less");
 var CSSMIN = require("cssmin").cssmin;
 var licensePath = PATH.join("resources", "legal", "core-license.txt");
 

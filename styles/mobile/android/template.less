@@ -150,7 +150,7 @@
 .km-android .km-detail,
 .km-android .km-rowdelete
 {
-    .linear-gradient-image(top, fade(@android-main-color, 50%), @android-light-border-color 50%, fade(@android-main-color, 10%) 50%, fade(@android-main-color, 0));
+    .linear-gradient-image(to bottom, fade(@android-main-color, 50%), @android-light-border-color 50%, fade(@android-main-color, 10%) 50%, fade(@android-main-color, 0));
     border-color: @android-main-color;
     background-color: #B01B1A;
 }
@@ -159,7 +159,7 @@
 .km-android-light .km-detail,
 .km-android-light .km-rowdelete
 {
-    .linear-gradient-image(top, fade(@android-light-main-color, 50%), @android-light-border-color 50%, fade(@android-light-main-color, 10%) 50%, fade(@android-light-main-color, 0));
+    .linear-gradient-image(to bottom, fade(@android-light-main-color, 50%), @android-light-border-color 50%, fade(@android-light-main-color, 10%) 50%, fade(@android-light-main-color, 0));
     border-color: @android-light-main-color;
 }
 
@@ -264,7 +264,7 @@
 {
     border-color: @android-background-color;
     background-color: lighten(@android-background-color, 21%);
-    .linear-gradient-image(top, lighten(@android-background-color, 21%), lighten(@android-background-color, 17%));
+    .linear-gradient-image(to bottom, lighten(@android-background-color, 21%), lighten(@android-background-color, 17%));
     .box-shadow(0 0 1px 2px #808080);
 }
 
@@ -272,7 +272,7 @@
 {
     border-color: @android-light-background-color;
     background-color: darken(@android-light-background-color, 21%);
-    .linear-gradient-image(top, darken(@android-light-background-color, 21%), darken(@android-light-background-color, 17%));
+    .linear-gradient-image(to bottom, darken(@android-light-background-color, 21%), darken(@android-light-background-color, 17%));
     .box-shadow(0 0 1px 2px @android-gray);
 }
 
