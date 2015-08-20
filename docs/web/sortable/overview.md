@@ -92,7 +92,7 @@ You may change the default placeholder by setting the `placeholder` configuratio
     </ul>
 
     <script>
-        $("#sortable").kendoSortable({ 
+        $("#sortable").kendoSortable({
             placeholder: "<li>Drop Here!</li>"
         });
     </script>
@@ -116,7 +116,7 @@ You may change the default hint by setting the `hint` configuration option.
     </ul>
 
     <script>
-        $("#sortable").kendoSortable({ 
+        $("#sortable").kendoSortable({
             hint: function(element) {
                 return $("<span></span>")
                         .text(element.text())
@@ -134,7 +134,7 @@ You may change the default hint by setting the `hint` configuration option.
     </ul>
 
     <script>
-        $("#sortable").kendoSortable({ 
+        $("#sortable").kendoSortable({
             hint: "<span>hint!</span>"
         });
     </script>
@@ -150,7 +150,7 @@ The Sortable widget can work without a visible hint. To disable the hint, set th
     </ul>
 
     <script>
-        $("#sortable").kendoSortable({ 
+        $("#sortable").kendoSortable({
             hint: $.noop
         });
     </script>
@@ -172,7 +172,7 @@ The **disabled** option specifies which items inside the Sortable's container ca
     <button id="btnDisable">Disable</button>
 
     <script>
-        $("#sortable").kendoSortable({ 
+        $("#sortable").kendoSortable({
             disabled: ".disabled"
         });
 
@@ -222,11 +222,13 @@ The `cursor` option changes the cursor style **only while the item is being drag
         }
     </style>
 
+ > Using a custom cursor in Internet Explorer browsers is not recommended. As it can cause performance problems, due to browser specifics in custom cursor icon rendering.
+
 ### Movement by axis
 
 By default, the widget uses the mouse cursor to determine the place of the drop placeholder. This means that if the mouse cursor is not over a sortable item, the placeholder will not be re-positioned.
 
-If the `axis` is set to "x" or "y", the widget will start operating in movement by axis mode. The widget will **use only the x or y coordinate** of the mouse cursor to determine the placeholder position. 
+If the `axis` is set to "x" or "y", the widget will start operating in movement by axis mode. The widget will **use only the x or y coordinate** of the mouse cursor to determine the placeholder position.
 This mode is useful when the **dragging is restricted in a container**.
 
 To see this feature in action please check [constraints demo page](http://demos.telerik.com/kendo-ui/web/sortable/constraints.html).
@@ -316,7 +318,7 @@ A common problem that developers encounter is that input elements inside the Sor
     </ul>
 
     <script>
-        $("#sortable").kendoSortable({ 
+        $("#sortable").kendoSortable({
             ignore: "input"
         });
     </script>
