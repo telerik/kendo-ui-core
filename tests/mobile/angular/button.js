@@ -18,7 +18,7 @@
     function() {
         angular.module('kendo.tests').controller('mine', function($scope) {
             $scope.icon = "home";
-        })
+        });
 
         var markup = '<div kendo-mobile-application>' +
         '<kendo-mobile-view ng-controller="mine"><a kendo-mobile-button k-rebind="icon" k-icon="icon" id="foo">Foo</a></kendo-mobile-view>' +
@@ -43,8 +43,7 @@
     ngTest("works with k-delay", 2,
     function() {
         angular.module('kendo.tests').controller('mine', function($scope) {
-            $scope.icon = "";
-        })
+        });
 
         var markup = '<div kendo-mobile-application>' +
         '<kendo-mobile-view ng-controller="mine"><a kendo-mobile-button k-ng-delay="icon" k-icon="icon" id="foo">Foo</a></kendo-mobile-view>' +
