@@ -6,6 +6,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-debug-task');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-postcss');
     grunt.loadTasks('build/grunt/tasks');
 
     // support different test sets for public|private repo
@@ -227,6 +228,19 @@ module.exports = function(grunt) {
         less: {
             options: {
                 destDir: "<%= kendo.options.destDir %>",
+                autoprefixer: {
+                    browsers: ([
+                        "Explorer >= 7",
+                        "Chrome >= 21",
+                        "Firefox ESR",
+                        "Opera >= 15",
+                        "Android >= 2.3",
+                        "Safari >= 6.2.6",
+                        "ExplorerMobile >= 10",
+                        "iOS >= 6",
+                        "BlackBerry >= 10"
+                    ]).join(",")
+                }
             },
             compile: {
                 src: [ "styles/**/kendo*.less" ],

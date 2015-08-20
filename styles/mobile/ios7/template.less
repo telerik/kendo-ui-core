@@ -101,7 +101,7 @@
 .km-ios7 .km-switch-background,
 .km-ios7 .k-slider-selection
 {
-    .linear-gradient-image(top, @ios7-active-color, @ios7-active-color);
+    .linear-gradient-image(to bottom, @ios7-active-color, @ios7-active-color);
 }
 
 .km-ios7 .km-switch-handle
@@ -142,9 +142,7 @@
 {
     color: @ios7-main-color;
     border-top-color: @ios7-second-border-color;
-    border-image: -webkit-linear-gradient(left, transparent 1em, @ios7-second-border-color 1em, @ios7-second-border-color 100%) 1 stretch;
-    border-image: -moz-linear-gradient(left, transparent 1em, @ios7-second-border-color 1em, @ios7-second-border-color 100%) 1 stretch;
-    border-image: -ms-linear-gradient(left, transparent 1em, @ios7-second-border-color 1em, @ios7-second-border-color 100%) 1 stretch;
+    border-image: linear-gradient(to right, transparent 1em, @ios7-second-border-color 1em, @ios7-second-border-color 100%) 1 stretch;
 }
 
 .km-ios7 .km-list > li:last-child
@@ -181,7 +179,7 @@
 .km-ios7 .km-filter-form
 {
     color: @ios7-list-title-background;
-    .linear-gradient-image(top, rgba(255,255,255,.6), rgba(255,255,255,.3));
+    .linear-gradient-image(to bottom, rgba(255,255,255,.6), rgba(255,255,255,.3));
 }
 
 .km-ios7 .km-filter-wrap > input

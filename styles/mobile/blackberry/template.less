@@ -25,14 +25,14 @@
 {
     color: @blackberry-main-color;
     background-color: @blackberry-light-background;
-    .linear-gradient-image(top, rgba(255,255,255,.7), rgba(255,255,255,0) 70%);
+    .linear-gradient-image(to bottom, rgba(255,255,255,.7), rgba(255,255,255,0) 70%);
     .box-shadow(~"0 1px 4px 0 rgba(0,0,0,.3)");
 }
 
 .km-blackberry .km-button,
 .km-blackberry .km-buttongroup
 {
-    .linear-gradient-image(top, rgba(0,0,0,0), rgba(0,0,0,.1));
+    .linear-gradient-image(to bottom, rgba(0,0,0,0), rgba(0,0,0,.1));
     border-color: rgba(0,0,0,.2);
 }
 
@@ -47,7 +47,7 @@
 .km-blackberry .k-toolbar .km-button
 {
     color: @blackberry-active-color;
-    .linear-gradient-image(top, rgba(255,255,255,.2), rgba(255,255,255,0));
+    .linear-gradient-image(to bottom, rgba(255,255,255,.2), rgba(255,255,255,0));
 }
 
 .km-blackberry .km-view-title
@@ -95,7 +95,7 @@
 .km-blackberry .km-popup.km-pane .km-header
 {
     background-color: @blackberry-navbar-background;
-    .linear-gradient-image(top, rgba(255,255,255,.2) 40%, rgba(255,255,255,0),
+    .linear-gradient-image(to bottom, rgba(255,255,255,.2) 40%, rgba(255,255,255,0),
                            left, rgba(255,255,255,0) 0, rgba(255,255,255,.3));
 }
 
@@ -103,7 +103,7 @@
 {
     .box-shadow(inset 0 2px 0 rgba(0,0,0,.3));
     background-color: #1A1A1A;
-    .linear-gradient-image(top, rgba(255,255,255,.18), rgba(255,255,255,0));
+    .linear-gradient-image(to bottom, rgba(255,255,255,.18), rgba(255,255,255,0));
 }
 
 .km-blackberry .km-tabstrip .km-button
@@ -124,7 +124,7 @@
 .km-blackberry .km-switch-handle
 {
     background: fade(@blackberry-light-border-color, 90%);
-    .linear-gradient-image(top, rgba(0,0,0,0), rgba(0,0,0,.15));
+    .linear-gradient-image(to bottom, rgba(0,0,0,0), rgba(0,0,0,.15));
     -webkit-box-shadow: inset 0 0 0 1px @blackberry-light-border-color, 0 0 0 1px @blackberry-dark-border-color;
     box-shadow: inset 0 0 0 1px @blackberry-light-border-color, 0 0 0 1px @blackberry-dark-border-color;
 }
@@ -218,7 +218,7 @@
 .km-blackberry .k-slider .k-draghandle:hover
 {
     background-color: #eee;
-    .linear-gradient-image(top, rgba(255,255,255,.6), rgba(255,255,255,0));
+    .linear-gradient-image(to bottom, rgba(255,255,255,.6), rgba(255,255,255,0));
     .box-shadow(~"inset 0 0 0 1px #fff, 0 0 1px 1px rgba(0,0,0,.3)");
 }
 
@@ -329,7 +329,7 @@
 .km-blackberry .k-dropdown-wrap
 {
     background: transparent 100% 0 no-repeat;
-    .linear-gradient-image(top, rgba(0,0,0,0), rgba(0,0,0,.1));
+    .linear-gradient-image(to bottom, rgba(0,0,0,0), rgba(0,0,0,.1));
     background-size: 1.8em 100%, auto;
 
     background: ~"-webkit-calc(100% - 5px)" 50% no-repeat url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAADICAQAAADrJAMDAAABG2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS4xLjIiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIi8+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJyIj8+MahxaQAAA/RJREFUeF7t1OlqVVcYh/HnIiz0LrYedWs8UXGc5yGKsxXtVVjwSryOFnoFxYq1TgQVhwQVT+KE0fihhRJ6IHkXGc7Jztr7PO/z8f9l82Oz+KeSrGcAE1pooU1ooU1ooYU2oYU2oYUW2oQW2oQWWmgTWmgTWmihTWihTWihhTahhTahhRbahBbahBZaaBNaaBNaaKFNaKFNaKGFNqGFNqGFFtqEFtqEFlpoE1poE1pooU1ooU1ooYU2oYVmFTf4lRusmlmo13W/H8gXmhE6M8MYW2sIvZWxGYAOI9lC8wOd7sD0f9T1Yv7eBaDDj7lC/zJrmGZLjaC3MD0L4Gau0L/NGb6xmXrcZr7NAfg9/z+621eGyf+G+RoA3Mz3jR4PhimGa8n8Jos3Oo5t4TBFm3yvzVQIsA1yhU5Tf8mWus2XFHM20HFsD4fPWVK3+RwCbIesoOPYEQ6fsqNu8yk02QF1gE5Tf8yKus3HUGQnZAkdx85w+MAm8rhNfEgxZwsdx65weM9QBsxDvA81dkF10M2nHmIytNgN2UPHsTscJtnIyt3GBPMeyB46HXvCYYINrMxtYCLFXBvoOPaGQ2dFqEs6ocJeqD90mrqsnPldirkJ0Gnqd5QZMO+D5kDDvnB8Wxl1ydtQYD80Cxr2h/ObSqhLXqeYmwadpn697NQl46HAAWgmNBwIqccpq2fmIDQXGg6G1GOsZ3luPWOhwCFoNjQcqpB6Ha9SzE2HTlO/Yh39vbW8DAUOw2BAw+EQ4CVrK2A+AoMDDUdChBd9o27xIhQ4CoMFnaZu9YX5eYp58KDhaIjxvGfqFs9CgWMwmNBwLAR51hN1i6ehwHEYXGg4HqI8XTJ1iyehwAkYZOg09ZMlUbcYTTELDSdCnNFFU7d4HAqcBKEB4GQI9HhR1Gt4FAqcAqG7nUpR98g8AkIvhPoRa5j/VvNwocxCw0iI9ZDV83gUPAgFToPQcadDsAdpaqDgfihwBoROdyZBXSSZ/w4FzoLQS6G+H1IX3AsFzoHQ83c2xLs3h7rgbi/MQsO5EPCvLjVQcCcUOA9CL7zzIeLd/6kL/gwFLoDQ/aC+QwEU3A7XiyD04rsQYt6m4I9+MgsNF2PqUOASCL30LgWkUZdB6OWnvgJC997lapiFhitpZq7StxMafkowX6OvJzRcDZiv0/cTGq7NYv6ZZTmh4Xo1zEJDyS1GuUUJQluV0Ca00EKb0EKb0EILbUILbUILLbQJLbQJLbTQJrTQJrTQQpvQQpvQQgttQgttQgsttAkttAkttNAmtNAmtNBCm9BCm9BCC21CC21CCy20CS20CS200Ca00Ca00EKb0EKb0EILbUILbf8CmhlC4QhCFjcAAAAASUVORK5CYII="),
@@ -391,7 +391,7 @@
 {
     color: @blackberry-active-color;
     background: @blackberry-active-background;
-    .linear-gradient-image(top, rgba(0,0,0,0), rgba(0,0,0,.2));
+    .linear-gradient-image(to bottom, rgba(0,0,0,0), rgba(0,0,0,.2));
 }
 
 .km-blackberry .km-popup .k-state-hover
@@ -407,14 +407,14 @@
 
 .km-blackberry .k-dropdown.k-state-border-up
 {
-    .linear-gradient-image(top, #777, #777 10%, transparent 10%,
+    .linear-gradient-image(to bottom, #777, #777 10%, transparent 10%,
                            top, #777, #777 10%, transparent 10%,
                            top, #fff, #fff 10%, transparent 10%);
 }
 
 .km-blackberry .k-dropdown.k-state-border-down
 {
-    .linear-gradient-image(top, transparent 90%, #777 90%, #777,
+    .linear-gradient-image(to bottom, transparent 90%, #777 90%, #777,
                            top, transparent 90%, #777 90%, #777,
                            top, transparent 90%, #fff 90%, #fff);
 }
@@ -453,7 +453,7 @@
 .km-root .km-blackberry.km-pane .km-listview-label input[type=radio]:checked:after
 {
     -webkit-background-clip: inherit;
-    .linear-gradient-image(top, #fff, #f9f9f9 10%, #eee);
+    .linear-gradient-image(to bottom, #fff, #f9f9f9 10%, #eee);
     .box-shadow(0 1px 1px rgba(0,0,0,.7));
 }
 
@@ -519,7 +519,7 @@
 .km-tablet .km-blackberry *:not(.km-actionsheet-phone) > .km-actionsheet,
 .km-blackberry .km-popup.km-pane .km-content
 {
-    .linear-gradient-image(top, rgba(0,0,0,.2), rgba(0,0,0,0) 10%);
+    .linear-gradient-image(to bottom, rgba(0,0,0,.2), rgba(0,0,0,0) 10%);
     border-color: rgba(255,255,255,.7);
 }
 
@@ -615,5 +615,5 @@
 {
     color: @blackberry-active-color;
     background: @blackberry-active-background;
-    .linear-gradient-image(top, rgba(255,255,255,.3), rgba(255,255,255,0));
+    .linear-gradient-image(to bottom, rgba(255,255,255,.3), rgba(255,255,255,0));
 }
