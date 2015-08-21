@@ -267,7 +267,7 @@
             ]
         }).data("kendoToolBar");
 
-        toolbar.toggle("#foo");
+        toolbar.toggle("#foo", true);
         ok($("#foo").hasClass("k-state-active"));
         ok($("#foo_overflow > .k-button").hasClass("k-state-active"));
     });
@@ -279,7 +279,7 @@
             ]
         }).data("kendoToolBar");
 
-        toolbar.toggle("#foo_overflow");
+        toolbar.toggle("#foo_overflow", true);
         ok($("#foo").hasClass("k-state-active"));
         ok($("#foo_overflow > .k-button").hasClass("k-state-active"));
     });
@@ -305,6 +305,18 @@
 
         toolbar.toggle("#foo_overflow", true);
         toolbar.toggle("#foo_overflow", false);
+        ok(!$("#foo").hasClass("k-state-active"));
+        ok(!$("#foo_overflow > .k-button").hasClass("k-state-active"));
+    });
+
+    test("toggle method respects flag 'false'", function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo", togglable: true }
+            ]
+        }).data("kendoToolBar");
+
+        toolbar.toggle("#foo", false);
         ok(!$("#foo").hasClass("k-state-active"));
         ok(!$("#foo_overflow > .k-button").hasClass("k-state-active"));
     });
