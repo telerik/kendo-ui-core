@@ -6,7 +6,7 @@ description: Filter Kendo UI Grid as you type
 
 # Filter Kendo UI Grid as you type
 
-The following example demonstrates how to filter the Kendo UI Grid on the fly, as the user types in the filter row textbox.
+The example below demonstrates how to filter the Kendo UI Grid on the fly, as the user types in the filter row textbox.
 
 The following steps are required:
 
