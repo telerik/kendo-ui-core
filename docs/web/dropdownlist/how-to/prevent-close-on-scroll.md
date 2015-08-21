@@ -6,7 +6,12 @@ description: Example that shows how to prevent popup close on scrolling when end
 
 # How to prevent popup close on scroll
 
-Example that shows how to prevent popup close on scrolling when end of the list is reached
+The following example shows how to prevent popup close when scrolling the dropdown with the mouse wheel and the end of the list is reached.
+Normally in such cases the browser will start scrolling the page, which will close the dropdown.
+
+> Kendo UI versions 2014.3 and older require a different implementation, namely:
+>
+> `stopScroll(widget.ul);` instead of `stopScroll(widget.ul.parent());`
 
 #### Example:
 
@@ -63,12 +68,12 @@ Example that shows how to prevent popup close on scrolling when end of the list 
 
             var widget = $("#products").data("kendoDropDownList");
 
-            stopScroll(widget.ul);
+            stopScroll(widget.ul.parent());
         });
     </script>
 
     <style scoped>
-        body { min-height: 1200px; padding: 30px; }
+        #example { min-height: 1200px; padding: 30px; }
 
         .demo-section {
             width: 400px;
