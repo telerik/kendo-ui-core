@@ -85,7 +85,7 @@ var __meta__ = {
             ignore: null,
             autoScroll: false,
             cursor: "auto",
-            moveOnEnter: false
+            moveOnDragEnter: false
         },
 
         destroy: function() {
@@ -158,7 +158,7 @@ var __meta__ = {
                 sibling,
                 getSibling,
                 axis = this.options.axis,
-                moveOnEnter = this.options.moveOnEnter,
+                moveOnDragEnter= this.options.moveOnDragEnter,
                 eventData = { item: draggedElement, list: this, draggableEvent: e };
 
             if(axis === "x" || axis === "y") {
@@ -186,15 +186,15 @@ var __meta__ = {
                 }
 
                 if(this._isFloating(target.element)) { //horizontal
-                    if(axisDelta.x < 0 && (moveOnEnter || offsetDelta.left < 0)) {
+                    if(axisDelta.x < 0 && (moveOnDragEnter || offsetDelta.left < 0)) {
                         direction = "prev";
-                    } else if(axisDelta.x > 0 && (moveOnEnter || offsetDelta.left > 0)) {
+                    } else if(axisDelta.x > 0 && (moveOnDragEnter || offsetDelta.left > 0)) {
                         direction = "next";
                     }
                 } else { //vertical
-                    if(axisDelta.y < 0 && (moveOnEnter || offsetDelta.top < 0)) {
+                    if(axisDelta.y < 0 && (moveOnDragEnter || offsetDelta.top < 0)) {
                         direction = "prev";
-                    } else if(axisDelta.y > 0 && (moveOnEnter || offsetDelta.top > 0)) {
+                    } else if(axisDelta.y > 0 && (moveOnDragEnter || offsetDelta.top > 0)) {
                         direction = "next";
                     }
                 }

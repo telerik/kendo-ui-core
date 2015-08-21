@@ -103,7 +103,7 @@
             targetOffset = kendo.getOffset(targetElement),
             sortable = element.kendoSortable().data("kendoSortable");
 
-        sortable.setOptions({ moveOnEnter: true });
+        sortable.setOptions({ moveOnDragEnter: true });
 
         //simulate press to trigger draggable's hint initialization
         press(draggedElement, draggableOffset.left, draggableOffset.top);
