@@ -96,6 +96,28 @@
         equal(sortable.placeholder.index(), 4, "placeholder changes its position while the draggedElement moves");
     });
 
+    test("placeholder is moved while cursor enters in the target area (moveOnEnter)", 2, function() {
+        var draggedElement = element.children().eq(0),
+            draggableOffset = kendo.getOffset(draggedElement),
+            targetElement = element.children().eq(1),
+            targetOffset = kendo.getOffset(targetElement),
+            sortable = element.kendoSortable().data("kendoSortable");
+
+        sortable.setOptions({ moveOnEnter: true });
+
+        //simulate press to trigger draggable's hint initialization
+        press(draggedElement, draggableOffset.left, draggableOffset.top);
+        move(draggedElement, targetOffset.left, targetOffset.top);
+
+        equal(sortable.placeholder.index(), 2, "placeholder is moved under the element under cursor");
+
+        targetElement = element.children().last();
+        targetOffset = kendo.getOffset(targetElement);
+
+        move(draggedElement, targetOffset.left, targetOffset.top);
+        equal(sortable.placeholder.index(), 4, "placeholder changes its position while the draggedElement moves");
+    });
+
     test("placeholder is not moved if item is dragged outside of the sortable container", 1, function() {
         var draggedElement = element.children().eq(1),
             draggableOffset = kendo.getOffset(draggedElement),
