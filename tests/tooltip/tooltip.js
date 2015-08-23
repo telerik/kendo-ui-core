@@ -477,4 +477,17 @@
 
         equal(tooltip.content.html(), "");
     });
+
+    asyncTest("dont show popup when tooltip destroyed after mouseenter", function() {
+        var tooltip = new Tooltip(container, { showAfter: 5 });
+
+        triggerEvent(container, "mouseenter");
+        tooltip.destroy();
+
+        setTimeout(function() {
+          start();
+          ok(!(tooltip.popup && tooltip.popup.visible()));
+        }, 10);
+    });
+
 })();

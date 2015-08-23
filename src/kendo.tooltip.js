@@ -425,6 +425,8 @@ var __meta__ = {
                 popup.destroy();
             }
 
+            clearTimeout(this.timeout);
+
             this.element.off(NS);
 
             DOCUMENT.off("keydown" + NS, this._documentKeyDownHandler);
