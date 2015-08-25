@@ -8,6 +8,8 @@ description: Chart intergration
 
 The example below demonstrates how to integrate PivotGrid with Kendo UI Chart
 
+> The example below omits the totals from the PivotGrid, so they are not shown in the Chart data visualization.
+
 #### Example:
 
 ```html
@@ -173,7 +175,9 @@ The example below demonstrates how to integrate PivotGrid with Kendo UI Chart
                       }
                   },
                   dataBound: function(e) {
-                    e.sender.options.categoryAxis.categories.sort()
+                    if (e.sender.options.categoryAxis) {
+                        e.sender.options.categoryAxis.categories.sort()
+                    }
                   }
                 });
               } else {
