@@ -81,9 +81,10 @@ They are shown in the [StylingPanels demo](http://demos.telerik.com/kendo-ui/sty
 **The following LESS-related information is applicable only to the case when you want to modify the Kendo UI CSS source code.**
 
 In Q1 2014 we split the Kendo UI Web common LESS file to separate LESS files for each widget. We also split all Kendo UI Mobile platform themes to file per widget.
-The LESS command-line compiler can be used to build source LESS files to CSS skins and themes. The LESS files that can be passed to the compiler are located in the first level folders inside styles/ folder -
-styles/web/ and styles/mobile/. Kendo UI Mobile files are self explanatory - except meego.less, which is deprecated, the rest of the files can be built with [our fork of LESS, located in GitHub](https://github.com/telerik/less.js)
-and produce all platform themes and several special use CSS files (including kendo.mobile.all.css).
+The LESS command-line compiler can be used to build source LESS files to CSS skins and themes.
+The LESS files that can be passed to the compiler are located in the first level folders inside styles/ folder -
+styles/web/ and styles/mobile/. Kendo UI Mobile files are self explanatory - except meego.less, which is deprecated, the rest of the files can be built with
+LESS and produce all platform themes and several special use CSS files (including kendo.mobile.all.css).
 The Kendo UI Web LESS files' naming is listed below:
 
 *   **kendo.[skin-name].less** - skin variables file, builds with compiler - produces the skin;
@@ -97,7 +98,9 @@ The Kendo UI Web LESS files' naming is listed below:
 *   **theme-template.less** - common skin template, referenced by all skins, doesn't build;
 *   **type-metro.less** - common metro skin template, referenced by all metro skins, doesn't build;
 
-The Kendo UI Web LESS files (including the Kendo UI Web mobile widgets styling) can be built using the upstream LESS, version 1.5.0 or newer.
+The Kendo UI Web LESS files (including the Kendo UI Web mobile widgets styling) can be built using LESS version 1.7.5.
+
+> Kendo UI versions until 2015.2.805 (inclusive) had to be built with [our fork of LESS, located in GitHub](https://github.com/telerik/less.js). This is no longer a requirement.
 
 ## Customizing Appearance
 
