@@ -53,6 +53,8 @@ By default the `value` binding relies on the `change` DOM event which is raised 
 
 > The [input DOM event](https://developer.mozilla.org/en-US/docs/Web/Events/input) may be used in case you need to update the viewmodel value on each keypress *and* when the user pastes content in the field. Keep in mind that the input event is supported in IE9+.
 
+> This is applicable only when `value` binding is applied to DOM element. The widgets does not support this attribute, because they do not expose specific *keyup* event.
+
 ### Using the data-value-update attribute
 
     <div id="view">
@@ -227,10 +229,10 @@ The second `option` will be displayed as selected. Selecting another `option` wi
 `selectedProducts` array. Unselecting an `option` will remove its corresponding item from the `selectedProducts` array.
 
 ## Strongly typed value binding
-By default the View-Model fields are updated with string values, as this is what the DOM element's value property contains. Since the 2015 Q1 release, Kendo MVVM allows strongly typed value binding by parsing the element's value before updating the View-Model field bound to it. Supported types are `text`, `number`, `date`, `datetime-local` and `boolean`.  
+By default the View-Model fields are updated with string values, as this is what the DOM element's value property contains. Since the 2015 Q1 release, Kendo MVVM allows strongly typed value binding by parsing the element's value before updating the View-Model field bound to it. Supported types are `text`, `number`, `date`, `datetime-local` and `boolean`.
 
 > To be correctly parsed, the `date` and `datetime-local` values should use strict formatting rules, including the leading zeroes:
-> 
+>
 > - `date` - "yyyy-MM-dd"
 > - `datetime-local` - "yyyy-MM-ddTHH:mm:ss"
 
@@ -240,7 +242,7 @@ Kendo MVVM automatically uses strongly typed value binding based on the input el
 ```html
     <div id="view">
         <input type="number" data-bind="value: Quantity"/>
-        <input type="date" data-bind="value: ArrivalDate"/> 
+        <input type="date" data-bind="value: ArrivalDate"/>
     </div>
     <script>
         var viewModel = kendo.observable({
@@ -259,17 +261,17 @@ Explicitly specifying the data type is also supported, via the `data-type` attri
 ```html
     <div id="view">
         <input type="text" data-type="number" data-bind="value: Quantity"/>
-        <input type="date" data-type="text" data-bind="value: ArrivalDate"/> 
-        
+        <input type="date" data-type="text" data-bind="value: ArrivalDate"/>
+
         <select multiple="multiple" data-type="number" data-bind="value: number">
             <option value="3.14">Pi</option>
             <option value="1.41">Pythagoras' constant</option>
             <option value="1.61">Golden ratio</option>
         </select>
-        
+
         <select data-type="date" data-bind="value: Birthday">
             <option value="2015-01-01">John</option>
-            <option value="2014-12-31">Jane</option> 
+            <option value="2014-12-31">Jane</option>
         </select>
     </div>
     <script>
