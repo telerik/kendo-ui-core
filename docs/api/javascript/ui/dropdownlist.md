@@ -1278,7 +1278,8 @@ Defines the whether to open/close the drop-down list.
 
 Gets or sets the value of the DropDownList. The value will not be set if there is no item with such value. If value is undefined, text of the data item is used.
 
-> **Important:** If the widget is not bound, value method will pre-fetch the data before continue with the value setting.
+> **Important:** If the widget is not bound (e.g. `autoBind` is set to `false`), the `value` method will pre-fetch the data before continuing with the value setting.
+**This does not apply when MVVM binding is used.**
 
 #### Parameters
 
