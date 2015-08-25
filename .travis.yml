@@ -14,3 +14,6 @@ before_install:
   - export CHROME_SANDBOX=/opt/google/chrome/chrome-sandbox
   - sudo cp -f build/chrome-sandbox $CHROME_SANDBOX
   - sudo chown root:root $CHROME_SANDBOX; sudo chmod 4755 $CHROME_SANDBOX
+
+notifications:
+    email: false
