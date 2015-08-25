@@ -523,11 +523,25 @@ input.k-textbox:active {
 
     td {
         border-radius: 50%;
+        border-color: transparent;
+    }
+    
+    .k-content .k-link,
+    .k-footer .k-link {
+        color: @link-text-color;
     }
 
     .k-header .k-link,
     .k-state-selected .k-link {
         color: @inversed-text-color;
+    }
+
+    .k-state-hover {
+        border-color: @hover-background;
+    }
+
+    .k-state-focused {
+        border-color: @accent;
     }
 
     .k-header .k-state-hover {
@@ -542,7 +556,8 @@ input.k-textbox:active {
     .k-state-selected,
     .k-state-selected.k-state-hover {        
         background-color: @selected-background;
-        border-color: @selected-text-color;
+        border-color: @selected-background;
+        box-shadow: none;
     }
 
     .k-footer {
