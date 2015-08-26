@@ -3346,6 +3346,7 @@ The array of data items that replace the current offline state of the data sourc
 
 #### Example - get the offline state
 
+    <script>
     var dataSource = kendo.data.DataSource({
         offlineStorage: "products-offline",
         transport: {
@@ -3381,6 +3382,7 @@ The array of data items that replace the current offline state of the data sourc
         var offlineData = dataSource.offlineData();
         console.log(offlineData[0].__state__); // displays "update"
     });
+    </script>
 
 ### page
 
