@@ -103,19 +103,6 @@ Run the application. Now there should be no errors and the screen should display
 
 For live preview please click [here](http://dojo.telerik.com/@valchev/exeS).
 
-To include Kendo UI widgets in the application you may use **custom tags or standard tags with custom attributes**. Both syntaxes are valid.
-Check the following example:
-
-    <!-- custom tag -->
-    <kendo-mobile-view id="index">
-        Index View
-    </kendo-mobile-view>
-
-    <!-- standard tag with custom attribute -->
-    <div kendo-mobile-view id="index">
-        Index View
-    </div>
-
 ## 3. Make the application SEO friendly
 
 In order to [create a SEO friendly](http://googlewebmastercentral.blogspot.com/2009/10/proposal-for-making-ajax-crawlable.html) mobile application all you need to do is turning on the [`hashBang`](http://docs.telerik.com/kendo-ui/api/javascript/mobile/application#configuration-hashBang) configuration.
