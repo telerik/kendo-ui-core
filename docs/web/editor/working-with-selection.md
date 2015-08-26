@@ -11,7 +11,7 @@ The Editor widget works with standard [Range objects](https://developer.mozilla.
 
 ## Set the editor selection
 
-In order to set the editor selection, you need to create a Range object that specifies the desired selection, and pass it to the [selectRange method](../../../api/web/editor#methods-selectRange):
+In order to set the editor selection, you need to create a Range object that specifies the desired selection, and pass it to the [selectRange method](/kendo-ui/api/javascript/ui/editor#methods-selectRange):
 
     <textarea id="editor"></textarea>
     <script>
