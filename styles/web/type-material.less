@@ -77,11 +77,11 @@
 @scheduler-nonwork-background-color: contrast(@background, lighten(@background, 14%), darken(@background, 2%), 0.5);
 @resize-background-color: #ffffff;
 @upload-progress-background-color: @info;
-@upload-progress-text-color: @normal-text-color;
+@upload-progress-text-color: contrast(@upload-progress-background-color, lighten(@info, 70%), darken(@info, 40%), 0.5);
 @upload-success-background-color: @success;
-@upload-success-text-color: @normal-text-color;
+@upload-success-text-color: contrast(@upload-success-background-color, lighten(@success, 70%), darken(@success, 40%), 0.5);
 @upload-error-background-color: @error;
-@upload-error-text-color: @normal-text-color;
+@upload-error-text-color: contrast(@upload-error-background-color, lighten(@error, 70%), darken(@error, 40%), 0.5);
 @task-summary-color: lighten(@header-background-color, 25%);
 @task-summary-selected-color: lighten(@header-background-color, 25%);
 @loading-panel-color: #ffffff;
@@ -1187,7 +1187,7 @@ div.k-filebrowser-dropzone em
 .k-file
 {
     background-color: @active-background-color;
-    border-color: @cell-border-color;
+    border-color: @widget-border-color;
 }
 
 .k-file-progress
