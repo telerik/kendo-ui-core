@@ -3130,6 +3130,10 @@ function pad(number, digits, end) {
 
     kendo.touchScroller = function(elements, options) {
         // return the first touch scroller
+        if (!options){ options = {}; }
+
+        options.useNative = true;
+
         return $(elements).map(function(idx, element) {
             element = $(element);
             if (support.kineticScrollNeeded && kendo.mobile.ui.Scroller && !element.data("kendoMobileScroller")) {
