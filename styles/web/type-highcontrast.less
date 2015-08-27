@@ -81,11 +81,11 @@
 @shadow-color: rgba(0, 0, 0, 0.7);
 @shadow-inset-color: darken(@base, 9%);
 @link-text-color: @normal-text-color;
-@upload-progress-background-color: lighten(@info, 2%);
+@upload-progress-background-color: @info;
 @upload-progress-text-color: @normal-text-color;
-@upload-success-background-color: lighten(@success, 4%);
+@upload-success-background-color: @success;
 @upload-success-text-color: @normal-text-color;
-@upload-error-background-color: darken(@error, 13%);
+@upload-error-background-color: @error;
 @upload-error-text-color: @normal-text-color;
 @task-summary-color: darken(@widget-text-color, 25%);
 @task-summary-selected-color: darken(@selected-background-color, 25%);
@@ -1058,11 +1058,15 @@ div.k-filebrowser-dropzone em
 .k-other-month,
 .k-other-month .k-link,
 .k-dropzone em,
-.k-dropzone .k-upload-status,
 .k-tile-empty strong,
 .k-slider .k-draghandle
 {
     color: @disabled-text-color;
+}
+
+.k-dropzone .k-upload-status
+{
+    color: @normal-text-color;
 }
 
 /* Progressbar */

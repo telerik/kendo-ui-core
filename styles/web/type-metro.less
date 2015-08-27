@@ -43,11 +43,11 @@
 @input-background-color: @base;
 @shadow-color: fadeout(contrast(@base), 80%);
 @upload-progress-background-color: @info;
-@upload-progress-text-color: contrast(@info);
+@upload-progress-text-color: contrast(@upload-progress-background-color, lighten(@info, 70%), darken(@info, 60%), 0.5);
 @upload-success-background-color: @success;
-@upload-success-text-color: contrast(@info);
+@upload-success-text-color: contrast(@upload-success-background-color, lighten(@success, 70%), darken(@success, 60%), 0.5);
 @upload-error-background-color: @error;
-@upload-error-text-color: contrast(@info);
+@upload-error-text-color: contrast(@upload-error-background-color, lighten(@error, 70%), darken(@error, 60%), 0.5);
 @task-summary-color: contrast(@base, lighten(@widget-text-color, 25%), darken(@widget-text-color, 25%), 0.5);
 @task-summary-selected-color: contrast(@base, lighten(@selected-background-color, 15%), darken(@selected-background-color, 25%), 0.5);
 @loading-panel-color: @base;
@@ -1063,11 +1063,15 @@ div.k-filebrowser-dropzone em
 .k-other-month,
 .k-other-month .k-link,
 .k-dropzone em,
-.k-dropzone .k-upload-status,
 .k-tile-empty strong,
 .k-slider .k-draghandle
 {
     color: @disabled-text-color;
+}
+
+.k-dropzone .k-upload-status
+{
+    color: @normal-text-color;
 }
 
 /* Progressbar */
