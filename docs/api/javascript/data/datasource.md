@@ -3347,12 +3347,12 @@ The array of data items that replace the current offline state of the data sourc
 #### Example - get the offline state
 
     <script>
-    var dataSource = kendo.data.DataSource({
+    var dataSource = new kendo.data.DataSource({
         offlineStorage: "products-offline",
         transport: {
             read: {
                 url: "http://demos.telerik.com/kendo-ui/service/products",
-                type: "jsonp"
+                dataType: "jsonp"
             },
             update: {
                 url: "http://demos.telerik.com/kendo-ui/service/products/update",
