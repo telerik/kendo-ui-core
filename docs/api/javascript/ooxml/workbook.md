@@ -416,6 +416,30 @@ Sets the horizontal alignment of the cell value. Supported values are `"left"`, 
     });
     </script>
 
+### sheets.rows.cells.index `Object`
+The zero-based index of the cell in the row.
+
+> Only the first value will be recorded if two cells occupy the same index.
+
+#### Example - list cells by index
+
+      <script>
+      var workbook = new kendo.ooxml.Workbook({
+        sheets: [{
+          rows: [{
+              cells: [
+                  { value: "B1", index: 1 },
+                  { value: "E1", index: 4 }
+              ]
+          }]
+        }]
+      });
+      kendo.saveAs({
+        dataURI: workbook.toDataURL(),
+        fileName: "Test.xlsx"
+      });
+      </script>
+
 ### sheets.rows.cells.italic `Boolean` *(default: false)*
 
 Setting it to `true` italicizes the cell value.
