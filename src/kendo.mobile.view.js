@@ -242,7 +242,7 @@ var __meta__ = {
             // prevent accidental address bar display when pulling the header
             if (kendo.support.kineticScrollNeeded) {
                 $(that.element).on("touchmove", ".km-header", preventScrollIfNotInput);
-                if (!that.options.useNativeScrolling) {
+                if (!that.options.useNativeScrolling && !that.options.stretch) {
                     $(that.element).on("touchmove", ".km-content", preventScrollIfNotInput);
                 }
             }
