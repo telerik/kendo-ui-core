@@ -447,18 +447,51 @@ table.k-editor {
 	padding-left: 10px;
 }
 
-.k-toolbar .k-input {
-    height: @input-height;
-    line-height: @input-height;
-    padding: 0.177em 0;
-    text-indent: @input-indent;
-    border: 0;
-    margin: 0;
+.k-toolbar {
+    line-height: 45px;
 }
 
-.k-toolbar .k-overflow-anchor {
-    border-width: 1px;    
-    line-height: inherit;
+.k-toolbar {
+    .k-button-group,
+    .k-button-group .k-button {
+        line-height: inherit;
+    }
+
+    .k-button-group .k-button {
+        padding: 0 11px;
+    }
+
+    .k-button,
+    .k-split-button,
+    .k-widget,
+    .k-textbox,
+    label,
+    .k-separator {
+        line-height: 1.143em;
+    }
+
+    .k-button {    
+        padding-top: 9px;
+        padding-bottom: 9px;
+    }
+
+    .k-input {
+        height: @input-height;
+        line-height: @input-height;
+        padding: 0.11em 0;
+        text-indent: @input-indent;
+        border: 0;
+        margin: 0;
+    }
+
+    .k-overflow-anchor {
+        width: 3.357em;
+        border-left-width: 1px;
+        padding-top: 2px; 
+        line-height: inherit;
+        height: 100%;
+        padding-bottom: 0;
+    }
 }
 
 .k-button-group .k-tool {
