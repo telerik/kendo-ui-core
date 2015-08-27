@@ -492,6 +492,21 @@ table.k-editor {
         height: 100%;
         padding-bottom: 0;
     }
+    
+    .k-separator {
+        line-height: 47px;
+    }
+
+    .k-button-group {
+        border-width: 0 1px;
+        border-style: solid;
+    }
+
+    .k-overflow-anchor + .k-button-group,
+    .k-separator + .k-button-group,
+    .k-button-group + .k-button-group {
+        border-left: none;
+    }
 }
 
 .k-button-group .k-tool {
