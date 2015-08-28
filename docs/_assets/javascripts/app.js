@@ -190,10 +190,157 @@ var dojoApi = (function($) {
             '</body>\n'+
             '</html>').replace(/kendo-version/g, dojoApi.configuration.currentKendoVersion);
             return result;
+        },
+
+        addButtons: function(element) {
+            $('<button class="btn btn-action btn-edit" title="Edit example">Edit</button>').insertBefore(element);
+            $('<a href="http://dojo.telerik.com" class="dojo" title="Open example in Kendo UI Dojo">Open In Dojo</a>').insertBefore(element);
+            $('<button class="btn btn-action btn-run" title="Run example">Run</button>').insertBefore(element);
+        },
+        editSnippet: function(element) {
+            reset();
+
+            var pre = $(element).nextAll("pre:first");
+
+            if (isCodeMirrorCurrent(pre)) {
+                showCodeMirror();
+            } else {
+                destroyCodeMirror();
+                createCodeMirror(pre);
+            }
+
+            pre.hide();
+        },
+        runSnippet: function(element) {
+            reset();
+
+            var pre = $(element).nextAll("pre:first");
+
+            var iframe = $('<iframe class="snippet-runner">').attr("src", 'javascript:""');
+
+
+            var snippet = null;
+
+            if (isCodeMirrorCurrent(pre)) {
+                snippet = codemirror.getValue();
+                hideCodeMirror();
+                iframe.show().insertAfter(codemirror.display.wrapper);
+            } else {
+                snippet = pre.text();
+                destroyCodeMirror();
+                iframe.show().insertAfter(pre);
+            }
+
+            iframe.on("load", function() {
+                iframe.height(iframe.contents().height());
+            });
+
+            pre.hide();
+
+            snippet = snippet.replace(/<script>(.*?)<\/script>/, "<script>try { $1 } catch(e) { document.write(e.toString()); }</script>");
+
+            var html = template({ version: kendo.version, snippet: snippet });
+
+            var contents = iframe.contents();
+
+            contents[0].open();
+            contents[0].write(html);
+            contents[0].close();
+        },
+
+        openSnippet: function(element) {
+           var snippet = null;
+
+           var pre = $(element).nextAll("pre:first");
+
+           if (isCodeMirrorCurrent(pre)) {
+              snippet = codemirror.getValue();
+           } else {
+              snippet = pre.text();
+           }
+
+           dojoApi.post(snippet);
         }
     };
 
-    return dojoApi;
+   var template = kendo.template(
+      '<!doctype html>' +
+      '<html>' +
+        '<head>' +
+            '<meta charset="utf-8">' +
+            '<meta http-equiv="X-UA-Compatible" content="IE=edge">' +
+            '<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">' +
+            '<script src="http://code.jquery.com/jquery-1.10.2.js"></script>' +
+            '<style>' +
+            'body {' +
+               'font-family: Helvetica, Arial, sans-serif;' +
+               'font-size: 14px' +
+            '}' +
+            '</style>' +
+            '<link rel="stylesheet" href="//kendo.cdn.telerik.com/${version}/styles/kendo.common-material.min.css">' +
+            '<link rel="stylesheet" href="//kendo.cdn.telerik.com/${version}/styles/kendo.material.min.css">' +
+            '<link rel="stylesheet" href="//kendo.cdn.telerik.com/${version}/styles/kendo.mobile.all.min.css">' +
+            '<link rel="stylesheet" href="//kendo.cdn.telerik.com/${version}/styles/kendo.rtl.min.css">' +
+            '<script src="//kendo.cdn.telerik.com/${version}/js/jszip.min.js"></script>' +
+            '<script src="//kendo.cdn.telerik.com/${version}/js/kendo.all.min.js"></script>' +
+            '<script src="//kendo.cdn.telerik.com/${version}/js/kendo.timezones.min.js"></script>' +
+            '<script>' +
+            'window.onerror = function(message, url, line) {' +
+               'document.write("<span style=\\"color:red;font-family:monospace\\">" + message + " at line " + line + "</span>");' +
+            '};' +
+            'window.onunload = function() {' +
+                'kendo.destroy(document.body);' +
+            '};' +
+            '</script>' +
+        '</head>' +
+        '<body>' +
+        '#= snippet #' +
+        '</body>' +
+      '</html>'
+   );
+
+   var codemirror = null;
+
+   function destroyCodeMirror() {
+        if (codemirror) {
+            $(codemirror.display.wrapper).remove();
+            codemirror = null;
+        }
+   }
+
+   function hideCodeMirror() {
+       if (codemirror) {
+           $(codemirror.display.wrapper).hide();
+       }
+   }
+
+   function showCodeMirror() {
+       if (codemirror) {
+           $(codemirror.display.wrapper).show();
+       }
+   }
+
+   function createCodeMirror(pre) {
+        codemirror = CodeMirror(function(element) {
+            $(element).insertAfter(pre);
+        }, {
+            value: pre.text(),
+            scrollbarStyle: "null",
+            lineNumbers: true,
+            mode: "htmlmixed"
+        });
+   }
+
+   function isCodeMirrorCurrent(pre) {
+       return codemirror && codemirror.display.wrapper.previousSibling === pre[0];
+   }
+
+   function reset() {
+        $("pre.prettyprint").show();
+        $(".snippet-runner").remove();
+   }
+
+   return dojoApi;
 })(jQuery);
 
 $(function(){
@@ -209,15 +356,25 @@ $(function(){
         $("#page-inner-content").toggleClass("move-inner-content");
     });
 
-    $(".prettyprint[lang=html]").each(function() {
-        dojoApi.showHintButton(this, "Edit this example");
+    $("body").find(".prettyprint[lang=html]").each(function() {
+        dojoApi.addButtons(this);
     });
 
-    $("body").on("click", ".dojo-submit-button", function(e) {
+    $("body").on("click", ".btn-edit", function(e) {
         e.preventDefault();
-        var snippet = $(this).next().text();
-        dojoApi.post(snippet);
+
+        dojoApi.editSnippet(this);
+    });
+
+    $("body").on("click", ".btn-run", function(e) {
+        e.preventDefault();
+
+        dojoApi.runSnippet(this);
+    });
+
+    $("body").on("click", ".dojo", function(e) {
+        e.preventDefault();
+
+        dojoApi.openSnippet(this);
     });
 });
-
-
