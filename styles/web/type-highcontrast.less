@@ -35,9 +35,9 @@
 @error-border-color: lighten(@accent, 7%);
 @error-text-color: @normal-text-color;
 @disabled-text-color: darken(@normal-text-color, 50%);
-@validation-background-color: saturate(@warning, 29%);
-@validation-border-color: saturate(@warning, 29%);
-@validation-text-color: darken(@accent, 27%);
+@validation-background-color: @warning;
+@validation-border-color: @warning;
+@validation-text-color: contrast(@validation-background-color, lighten(@warning, 80%), darken(@warning, 60%), 0.5);
 @notification-info-background-color: @info;
 @notification-info-text-color: @normal-text-color;
 @notification-info-border-color: @info;

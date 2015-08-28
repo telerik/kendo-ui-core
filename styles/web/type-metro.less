@@ -13,7 +13,7 @@
 @disabled-text-color: #cccccc;
 @validation-background-color: @warning;
 @validation-border-color: @warning;
-@validation-text-color: darken(@base, 29%);
+@validation-text-color: contrast(@validation-background-color, lighten(@warning, 80%), darken(@warning, 60%), 0.5);
 @notification-info-background-color: @info;
 @notification-info-text-color: contrast(@base, lighten(@normal-text-color, 1%), darken(@normal-text-color, 7%), 0.5);
 @notification-info-border-color: contrast(@base, lighten(@info, 1%), darken(@info, 11%), 0.5);
