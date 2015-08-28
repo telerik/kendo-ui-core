@@ -235,6 +235,33 @@ The horizontal offset in pixels to scroll to.
 
 The vertical offset in pixels to scroll to.
 
+### contentResized
+
+Updates the scroller dimensions. Should be called after the contents of the scroller update their size
+
+#### Example
+
+``` html
+    <div data-role="view">
+        <a data-role="button" data-click="addContent">Append content</a>
+
+        <div data-role="scroller" style="width: 200px; height: 200px" id="scroller">
+        </div>
+    </div>
+
+    <script>
+        function addContent() {
+            var content = '<div style="height: 500px; width: 500px">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>';
+            var scroller = $("#scroller").data("kendoMobileScroller");
+
+            scroller.scrollElement.append(content);
+            scroller.contentResized();
+        }
+
+        new kendo.mobile.Application();
+    </script>
+```
+
 ### destroy
 
 Prepares the **Scroller** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
