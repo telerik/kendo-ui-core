@@ -155,6 +155,8 @@ var __meta__ = {
             if (initial) {
                 this.navigate(initial);
             }
+
+            return initial;
         },
 
         options: {
