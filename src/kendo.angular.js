@@ -391,7 +391,7 @@ var __meta__ = {
         // if the model value is undefined, then we set the widget value to match ( == null/undefined )
         // In telerik/kendo-ui-core#1027 we discovered that after the timeout the $viewValue arives as NaN in some weird, default form.
         // Hence the check below.
-        if (!isNaN(ngMode.$viewValue) && currentVal != ngModel.$viewValue) {
+        if (!isNaN(ngModel.$viewValue) && currentVal != ngModel.$viewValue) {
             if (!ngModel.$isEmpty(ngModel.$viewValue)) {
                 widget.value(ngModel.$viewValue);
             } else if (currentVal != null && currentVal !== "" && currentVal != ngModel.$viewValue) {
