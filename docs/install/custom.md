@@ -52,7 +52,7 @@ shipped source, run the following shell commands:
 
 ```sh
     cd src
-    npm install -g grunt
+    npm install -g grunt-cli
     npm install
     grunt custom:autocomplete,dropdownlist
 ```
