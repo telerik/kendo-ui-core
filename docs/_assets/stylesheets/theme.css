@@ -75,7 +75,7 @@ footer {
     font-size: 15px;
     font-weight: bold;
     text-align: center;
-    margin: 1.467em 0.267em;
+    margin: 0.7em 0;
     cursor: pointer;
 }
 
@@ -105,10 +105,45 @@ footer {
     background-color: #013a5e;
 }
 
-.dojo-submit-button {
+.btn-run {
     opacity: .8;
     float: right;
-    margin: -3em 0 0 0;
+}
+
+.btn-edit {
+    background-color: #f4f5f7;
+    color: #333;
+    border: 1px solid #ccc;
+    float: left;
+}
+
+.btn-edit:hover {
+    color: #333;
+    background-color: #ebebeb;
+    border-color: #adadad;
+}
+
+.CodeMirror {
+    clear: both;
+    border: 1px solid #ebecee;
+    height: auto !important;
+}
+
+.dojo {
+    color: #428bca;
+    float: left;
+    display: inline-block;
+    padding: 0.667em 2.000em;
+    line-height: 0.933em;
+    background: transparent url(../images/external.png) no-repeat 126px 11px;
+    margin: 0.7em 0;
+    font-size: 15px;
+}
+
+.snippet-runner {
+    border: 1px solid #ebecee;
+    width: 100%;
+    min-height: 450px;
 }
 
 .k-tabstrip {
