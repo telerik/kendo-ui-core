@@ -29,9 +29,9 @@
 @error-border-color: lighten(@base, 4%);
 @error-text-color: lighten(@base, 4%);
 @disabled-text-color: darken(@background, 24%);
-@validation-background-color: darken(@warning, 20%);
-@validation-border-color: darken(@warning, 20%);
-@validation-text-color: @normal-text-color;
+@validation-background-color: @warning;
+@validation-border-color: @warning;
+@validation-text-color: contrast(@validation-background-color, lighten(@warning, 80%), darken(@warning, 60%), 0.5);
 @tooltip-background-color: @base;
 @tooltip-border-color: @base;
 @tooltip-text-color: @background;

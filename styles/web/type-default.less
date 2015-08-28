@@ -53,9 +53,9 @@
 @tooltip-text-color: @header-text-color;
 @tooltip-background-color: @header-background-color;
 @tooltip-border-color: @secondary-border-color;
-@validation-text-color: contrast(@base, lighten(@accent, 1%), darken(@accent, 23%), 0.5);
-@validation-background-color: contrast(@base, lighten(@background, 1%), darken(@background, 5%), 0.5);
-@validation-border-color: contrast(@base, lighten(@warning, 14%), darken(@warning, 10%), 0.5);
+@validation-text-color: contrast(@validation-background-color, lighten(@warning, 80%), darken(@warning, 60%), 0.5);
+@validation-background-color: @warning;
+@validation-border-color: @warning;
 @splitbar-background-color: saturate(@base, 1%);
 @draghandle-border-radius: 7px;
 @draghandle-border-color: darken(@success, 20%);

@@ -53,7 +53,7 @@
 @tooltip-text-color: #ffffff;
 @tooltip-background-color: rgba(100,100,100,.9);
 @tooltip-border-color: rgba(100,100,100,.9);
-@validation-text-color: lighten(@normal-text-color, 29%);
+@validation-text-color: contrast(@validation-background-color, lighten(@warning, 80%), darken(@warning, 60%), 0.5);
 @validation-background-color: @warning;
 @validation-border-color: @warning;
 @splitbar-background-color: contrast(@background, lighten(@background, 17%), darken(@background, 2%), 0.5);
