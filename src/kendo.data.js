@@ -4001,9 +4001,7 @@ var __meta__ = {
         if (transportOptions) {
             transportOptions.read = typeof transportOptions.read === STRING ? { url: transportOptions.read } : transportOptions.read;
 
-            var jsdo = kendo.data.transports.jsdo;
-
-            if (jsdo && dataSource && (transportOptions instanceof jsdo)) {
+            if (options.type === "jsdo") {
                 transportOptions.dataSource = dataSource;
             }
 
