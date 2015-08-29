@@ -481,7 +481,7 @@ test("re-read does not remove the parent of the observable array", function() {
     deepEqual(arr[1].parent(), arr);
 });
 
-test("dataSource instance is passed as option to the custom transport", 2, function() {
+test("dataSource instance is passed as option to the jsdo transport", 2, function() {
     var MyTransport = RemoteTransport.extend({
         init: function(options) {
             ok(options.dataSource);
@@ -489,21 +489,12 @@ test("dataSource instance is passed as option to the custom transport", 2, funct
         }
     });
 
-    kendo.data.transports["my-custom-transport"] = MyTransport;
+    kendo.data.transports.jsdo = MyTransport;
 
     var dataSource = new DataSource({
         transport: {},
-        type: "my-custom-transport"
+        type: "jsdo"
     });
-});
-
-test("dataSource instance is passed as option to the built-in remote transport", 2, function() {
-    var dataSource = new DataSource({
-        transport: {},
-    });
-
-    ok(dataSource.transport.options.dataSource instanceof DataSource);
-    equal(dataSource.transport.options.dataSource, dataSource);
 });
 
 }());
