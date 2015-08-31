@@ -97,6 +97,7 @@ var __meta__ = {
                 .on("keydown" + ns, proxy(that._keydown, that))
                 .on("paste" + ns, proxy(that._search, that))
                 .on("focus" + ns, function () {
+                    that._active = true;
                     that._prev = that._accessor();
                     that._placeholder(false);
                     wrapper.addClass(FOCUSED);
@@ -104,6 +105,7 @@ var __meta__ = {
                 .on("focusout" + ns, function () {
                     that._change();
                     that._placeholder();
+                    that._active = false;
                     wrapper.removeClass(FOCUSED);
                 })
                 .attr({
@@ -418,9 +420,10 @@ var __meta__ = {
 
             that._angularItems("compile");
 
-            //reset list value
-            that.listView.value([]);
-            that.listView.focus(-1);
+            if (that._open) {
+                that.listView.value([]);
+                that.listView.focus(-1);
+            }
 
             that.listView.filter(false);
 
@@ -463,7 +466,7 @@ var __meta__ = {
         },
 
         _listChange: function() {
-            if (!this.listView.filter()) {
+            if (!this.listView.filter() && this._active) {
                 this._selectValue(this.listView.selectedDataItems()[0]);
             }
         },
