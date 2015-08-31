@@ -218,7 +218,9 @@ asyncTest("Prevent filtration after item is selected", 0, function() {
         delay: 0
     });
 
-    input.val("f").focus();
+    input.val("f");
+    input.triggerHandler("focus");
+
     autocomplete.search();
     autocomplete.ul.find("li:first").click();
 
@@ -265,6 +267,9 @@ test("select item after filtering", function() {
         },
         filter: "contains"
     });
+
+    autocomplete.element.focus();
+    input.focus();
 
     autocomplete.search("foo1");
     autocomplete.ul.children(":first").click();
@@ -323,6 +328,35 @@ test("AutoComplete resets list value on refresh", function() {
     autocomplete.search("fo");
 
     equal(autocomplete.listView.value().length, 0);
+});
+
+test("AutoComplete keeps value when shared source is modified", function() {
+    var source = new kendo.data.DataSource({
+        data: [
+            {text: "foo", value: "1", parent: 1},
+            {text: "foo1", value: "2", parent: 1},
+            {text: "foo2", value: "3", parent: 1},
+            {text: "foo3", value: "4", parent: 2},
+            {text: "foo4", value: "5", parent: 2},
+            {text: "foo5", value: "6", parent: 3},
+        ]
+    });
+
+    var autocomplete = new AutoComplete(input, {
+        dataTextField: "text",
+        dataSource: source,
+        filter: "contains"
+    });
+
+    autocomplete.value("foo1");
+
+    source.filter({
+        field: "text",
+        operator: "eq",
+        value: "foo3"
+    });
+
+    equal(autocomplete.value(), "foo1");
 });
 
 }());

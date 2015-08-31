@@ -129,6 +129,7 @@ test("pressing enter closes updates the value of the autocomplete", 1, function(
         dataSource: ["baz", "bar"]
     });
 
+    input.triggerHandler("focus");
     input.val("b");
     autocomplete.search();
     input.press(kendo.keys.DOWN);
@@ -142,6 +143,7 @@ test("pressing tab closes updates the value of the autocomplete", 1, function() 
         dataSource: ["baz", "bar"]
     });
 
+    input.triggerHandler("focus");
     input.val("b");
     autocomplete.search();
     input.press(kendo.keys.DOWN);
