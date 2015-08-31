@@ -5365,7 +5365,8 @@ By default, column resizing is disabled.
     });
     </script>
 
-> Check [Column resizing](http://demos.telerik.com/kendo-ui/web/grid/column-resizing.html) for a live demo.
+> Check [Column resizing](http://demos.telerik.com/kendo-ui/web/grid/column-resizing.html) for a live demo and
+the [Column widths](/web/grid/appearance#column-widths) help section for additional relevant information.
 
 ### rowTemplate `String|Function`
 
@@ -6503,6 +6504,8 @@ Use this method if you want to save the state of the Grid into a variable.
 
 Hides the specified grid column.
 
+> Check the [Column widths](/web/grid/appearance#column-widths) help section for additional relevant information.
+
 #### Parameters
 
 ##### column `Number|String|Object`
@@ -6962,6 +6965,8 @@ The configuration options to be set.
 ### showColumn
 
 Shows the specified column.
+
+> Check the [Column widths](/web/grid/appearance#column-widths) help section for additional relevant information.
 
 #### Parameters
 

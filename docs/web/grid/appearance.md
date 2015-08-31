@@ -210,6 +210,9 @@ In old IE versions the column widths will be obeyed, but misalignment will occur
 so that it can adjust freely. Explicit widths for all columns should be set **only** if they are set in percent,
 or if their sum exceeds the Grid width and the goal is to have horizontal scrolling.
 
+Column resizing and hiding trigger the following behavior when scrolling is enabled: if all currently visible columns have explicit widths,
+the Grid will apply a pixel width to its table elements, so that the widths of all remaining columns (i.e. except the column that is currently resized or hidden) are maintained.
+
 If the Grid has no fixed width and resizes with the browser window, one can apply min-width to the Grid (if scrolling is disabled) or its two table elements (if scrolling is enabled).
 This will prevent undesired side effects if the browser window size is reduced too much.
 
