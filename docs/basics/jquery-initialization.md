@@ -111,3 +111,24 @@ A common mistake is to recreate a widget instance when the goal is only to get t
         // INCORRECT - instance reference is obtained while creating a duplicate instance:
         var duplicate = $("#autocomplete").kendoAutoComplete().data("kendoAutoComplete");
     </script>
+
+In order to check if a widget instance already exists for a certain DOM element, use the
+[standard way to obtain the widget instance](/basics/events-and-methods#obtain-a-reference-to-a-kendo-ui-widget-instance-using-jquery).
+If the returned value is `undefined`, then a widget instance does not exist.
+
+### Example - Check if a widget instance exists
+
+    <input id="autocomplete" />
+    <script>
+        // try to obtain the widget instance
+        var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+        
+        // check the returned value
+        if (typeof autocomplete === "undefined") {
+            // widget instance does not exist
+        }
+        // simpler alternative syntax for the above
+        if (!autocomplete) {
+            // widget instance does not exist
+        }
+    </script>
