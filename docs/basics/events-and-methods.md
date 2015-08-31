@@ -63,6 +63,9 @@ Once the widget instance is available, you can call its methods using the standa
 
 > A complete list and examples of the widget methods and method parameters is available in the [API reference](/api/introduction) section.
 
+If the code, which should return a widget instance, returns `undefined`, this means that the widget has not been initialized yet. Such a problem may occur, for example, if a widget
+is being created in a `document.ready` handler, but the widget instance is being referenced from code, which is executed earlier.
+
 ## Bind to Widget Events
 
 Each widget exposes different events, depending on its features - for example, the `AutoComplete` widget triggers `change`, `close`, `dataBound`, etc.
