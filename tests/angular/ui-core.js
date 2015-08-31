@@ -390,6 +390,7 @@ withAngularTests("Angular (UI Core)", function(runTest){
         var input = $("<input kendo-autocomplete='autocomplete' k-options='options' />").appendTo(dom);
         expect(2);
         $scope.whenRendered(function(){
+            input.triggerHandler("focus");
             input.type("b");
             $scope.autocomplete.search();
             input.press(kendo.keys.DOWN);
