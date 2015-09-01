@@ -362,6 +362,8 @@ var __meta__ = {
             var item = e.item;
             var element = this.element;
 
+            this._active = true;
+
             if (this.trigger("select", { item: item })) {
                 this.close();
                 return;
