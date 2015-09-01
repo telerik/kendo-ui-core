@@ -276,4 +276,15 @@ test("pressing the up arrows when the popup is not visible does not change value
     equal(input.val(), "b");
 });
 
+test("select with item click when source is filtered by API", 1, function() {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: ["Baz", "Bar"]
+    });
+
+    autocomplete.search("bar");
+    autocomplete.ul.children().eq(0).trigger(CLICK);
+
+    equal(autocomplete.value(), "Bar");
+});
+
 }());
