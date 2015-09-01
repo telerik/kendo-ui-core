@@ -216,7 +216,7 @@ var dojoApi = (function($) {
 
             var pre = $(element).nextAll("pre:first");
 
-            var iframe = $('<iframe class="snippet-runner">').attr("src", 'javascript:""');
+            var iframe = $('<iframe class="snippet-runner">').attr("src", '/kendo-ui/runner.html');
 
 
             var snippet = null;
@@ -285,6 +285,7 @@ var dojoApi = (function($) {
             '<script src="//kendo.cdn.telerik.com/${version}/js/kendo.all.min.js"></script>' +
             '<script src="//kendo.cdn.telerik.com/${version}/js/kendo.timezones.min.js"></script>' +
             '<script>' +
+            'kendo.mobile.Application.prototype.options.browserHistory = false;' +
             'window.onerror = function(message, url, line) {' +
                'document.write("<span style=\\"color:red;font-family:monospace\\">" + message + " at line " + line + "</span>");' +
             '};' +
