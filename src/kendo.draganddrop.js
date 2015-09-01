@@ -901,11 +901,10 @@ var __meta__ = {
                 }
             });
 
-            this._trigger(DRAGEND, e);
-            this._cancel(e.event);
+            this._cancel(this._trigger(DRAGEND, e));
         },
 
-        _cancel: function() {
+        _cancel: function(isDefaultPrevented) {
             var that = this;
 
             that._scrollableParent = null;
@@ -914,7 +913,13 @@ var __meta__ = {
 
             if (that.hint && !that.dropped) {
                 setTimeout(function() {
-                    that.hint.stop(true, true).animate(that.currentTargetOffset, "fast", that._afterEndHandler);
+                    that.hint.stop(true, true);
+
+                    if (isDefaultPrevented) {
+                        that._afterEndHandler();
+                    } else {
+                        that.hint.animate(that.currentTargetOffset, "fast", that._afterEndHandler);
+                    }
                 }, 0);
 
             } else {
