@@ -65,3 +65,64 @@ A Button icon can be set in two ways:
 Kendo UI ships with several ready to use icons. The full list of predefined icons can be seen in the [Icons](./icons) article.
 
 > **Important:** Check the [Icons](./icons) article for more information and how you can use custom icons in Kendo UI.
+
+## Nova theme features
+
+### Primary ButtonGroup state
+
+To activate the feature set `km-primary` class to the ButtonGroup.
+
+#### Primary ButtonGroup example
+
+    <ul data-role="buttongroup" data-index="0" class="km-primary">
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+    </ul>
+
+### ButtonGroup sizes
+
+There are three predefined sizes - small, medium (default) and large. To apply different than the default size set `km-small` or `km-large` class.
+
+#### Small ButtonGroup example
+
+    <ul data-role="buttongroup" data-index="0" class="km-small">
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+    </ul>
+
+#### Large ButtonGroup example
+
+    <ul data-role="buttongroup" data-index="0" class="km-large">
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+    </ul>
+
+### Justified ButtonGroup
+
+To activate this feature set `km-justified` class to the ButtonGroup.
+
+#### Justified ButtonGroup example
+
+    <ul data-role="buttongroup" data-index="0" class="km-justified">
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+    </ul>
+
+### Icons only ButtonGroup
+
+To achieve this outcome don't set text to the buttons in the ButtonGroup.
+
+#### Icons only ButtonGroup example
+
+    <ul data-role="buttongroup" data-index="1">
+        <li data-icon="play"></li>
+        <li data-icon="pause"></li>
+        <li data-icon="rewind"></li>
+        <li data-icon="fastforward"></li>
+        <li data-icon="globe"></li>
+    </ul>
+
