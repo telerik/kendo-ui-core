@@ -59,3 +59,51 @@ Additional icons may be added by defining the respective CSS class.
 If the `data-icon` attribute is set to `custom`, the button will receive `km-custom` CSS class.
 
 > **Important:** Check the [Icons](../icons) article for more information and how you can use custom icons in Kendo UI.
+
+## Nova theme features
+
+### Primary button state
+
+To activate the feature set `km-primary` class to the button.
+
+#### Primary button example
+
+    <a data-role="button" class="km-primary">Primary Button</a>
+
+### Buttons sizes
+
+There are three predefined sizes - small, medium (default) and large. To apply different than the default size set `km-small` or `km-large` class.
+
+#### Small button example
+
+    <a data-role="button" class="km-small">Small Button</a>
+
+#### Large button example
+
+    <a data-role="button" class="km-large">Large Button</a>
+
+### Justified button
+
+To activate this feature set `km-justified` class to the button.
+
+#### Justified button example
+
+    <a data-role="button" class="km-justified">Justified Button</a>
+
+### Link button
+
+To activate this feature set `km-link-button` class.
+
+#### Link button example
+
+    <a data-role="button" class="km-link-button">Link Button</a>
+
+### Icon only button
+
+To achieve this outcome don't set text to the button.
+
+#### Icon only button example
+
+    <a data-role="button" data-icon="home"></a>
+
+
