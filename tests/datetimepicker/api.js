@@ -711,7 +711,7 @@ test("value method can set 1/1/1970", function() {
     deepEqual(datepicker.dateView._value, date);
 });
 
-test("value method parses hours when ISO dateformat", 1, function() {
+test("value method parses hours when ISO date format", 1, function() {
     var datetimepicker = new DateTimePicker(input, {
         value: "2000-10-10T13:30:23"
     });
