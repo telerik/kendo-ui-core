@@ -711,6 +711,14 @@ test("value method can set 1/1/1970", function() {
     deepEqual(datepicker.dateView._value, date);
 });
 
+test("value method parses hours when ISO date format", 1, function() {
+    var datetimepicker = new DateTimePicker(input, {
+        value: "2000-10-10T13:30:23"
+    });
+
+    equal(datetimepicker.element.val(), "10/10/2000 1:30 PM");
+});
+
 test("setOptions method sets correct timeView min/max values", function() {
     var date = new Date(2013, 10, 10, 1, 30);
     var min = new Date(2013, 10, 9, 23, 30);
