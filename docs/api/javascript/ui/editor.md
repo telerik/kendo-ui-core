@@ -1786,7 +1786,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### imageBrowser.transport.read.type `String`
 
-The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "GET".
+The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "POST".
 Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
@@ -2030,7 +2030,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### imageBrowser.transport.destroy.type `String`
 
-The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "GET".
+The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "POST".
 Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
@@ -2189,7 +2189,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### imageBrowser.transport.create.type `String`
 
-The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "GET".
+The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "POST".
 Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
@@ -2629,7 +2629,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### fileBrowser.transport.read.type `String`
 
-The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "GET".
+The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "POST".
 Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
@@ -2837,7 +2837,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### fileBrowser.transport.destroy.type `String`
 
-The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "GET".
+The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "POST".
 Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
@@ -2996,7 +2996,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### fileBrowser.transport.create.type `String`
 
-The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "GET".
+The type of request to make (`"POST"`, `"GET`", `"PUT"` or `"DELETE"`), default is "POST".
 Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for further info.
 
 #### Example
