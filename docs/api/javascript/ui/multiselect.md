@@ -614,7 +614,8 @@ Usable when the tag shows the total of the available items.
       ],
       dataTextField: "name",
       dataValueField: "id",
-      tagTemplate: kendo.template($("#tagTemplate").html())
+      tagTemplate: kendo.template($("#tagTemplate").html()),
+      tagMode: "single"
     });
     </script>
 
