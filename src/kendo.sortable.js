@@ -58,7 +58,7 @@ var __meta__ = { // jshint ignore:line
                 that.options.hint = defaultHint;
             }
 
-            that._draggable = that._createDraggable();
+            that.draggable = that._createDraggable();
         },
 
         events: [
@@ -89,7 +89,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         destroy: function() {
-            this._draggable.destroy();
+            this.draggable.destroy();
             Widget.fn.destroy.call(this);
         },
 
@@ -259,7 +259,7 @@ var __meta__ = { // jshint ignore:line
             placeholder.replaceWith(draggedElement);
 
             draggedElement.show();
-            this._draggable.dropped = true;
+            this.draggable.dropped = true;
 
             eventData = {
                 action: this.indexOf(draggedElement) != MISSING_INDEX ? ACTION_SORT : ACTION_REMOVE,
