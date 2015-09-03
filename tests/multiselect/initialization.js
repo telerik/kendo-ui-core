@@ -582,6 +582,64 @@
         multiselect.search("test");
     });
 
+    test("MultiSelect passes normalized filter expression during initial source binding (autoBind: false)", 2, function() {
+        var multiselect = new MultiSelect(select, {
+            autoBind: false,
+            minLength: 3,
+            dataSource: {
+                serverFiltering: true,
+                transport: {
+                    read: "fake.url",
+                    parameterMap: function(options) {
+                        var filter = options.filter;
+
+                        equal(filter.filters.length, 1);
+                        equal(filter.logic, "and");
+                    }
+                }
+            },
+            dataValueField: "optionID",
+            dataTextField: "optionText",
+            value: [
+                { optionID: "1", optionText: "Item1" },
+                { optionID: "2", optionText: "Item2" }
+            ]
+        });
+
+        multiselect.search("test");
+    });
+
+    test("MultiSelect updates logic to 'and' on initial request", 2, function() {
+        var multiselect = new MultiSelect(select, {
+            autoBind: false,
+            minLength: 3,
+            dataSource: {
+                serverFiltering: true,
+                filter: {
+                    filters: [{ field: "optionText", operator: "eq", value: "test" }],
+                    logic: "or"
+                },
+                transport: {
+                    read: "fake.url",
+                    parameterMap: function(options) {
+                        var filter = options.filter;
+
+                        equal(filter.filters.length, 1);
+                        equal(filter.logic, "and");
+                    }
+                }
+            },
+            dataValueField: "optionID",
+            dataTextField: "optionText",
+            value: [
+                { optionID: "1", optionText: "Item1" },
+                { optionID: "2", optionText: "Item2" }
+            ]
+        });
+
+        multiselect.search("test");
+    });
+
     test("copy select title attribute to the visible input", function() {
         popuplateSelect();
         var multiselect = select.attr("title", "foo").kendoMultiSelect().data("kendoMultiSelect");
