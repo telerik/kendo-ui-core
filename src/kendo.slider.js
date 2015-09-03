@@ -118,12 +118,17 @@ var __meta__ = { // jshint ignore:line
         },
 
         _resize: function() {
+            var that = this;
             this._setTrackDivWidth();
             this.wrapper.find(".k-slider-items").remove();
 
             this._maxSelection = this._trackDiv[this._sizeFn]();
             this._sliderItemsInit();
             this._refresh();
+
+            if (this.options.enabled) {
+                this.enable(true);
+            }
         },
 
         _sliderItemsInit: function() {
