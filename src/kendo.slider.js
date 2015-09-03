@@ -118,7 +118,6 @@ var __meta__ = { // jshint ignore:line
         },
 
         _resize: function() {
-            var that = this;
             this._setTrackDivWidth();
             this.wrapper.find(".k-slider-items").remove();
 
