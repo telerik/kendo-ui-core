@@ -209,18 +209,21 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (filter) {
-                expression = expression.filters || [];
-                expression.push(filter);
+                expression = {
+                    filters: expression.filters || [],
+                    logic: "and"
+                };
+
+                expression.filters.push(filter);
             }
 
             if (!force) {
                 dataSource.filter(expression);
             } else {
-                dataSource.read(expression);
+                dataSource.read({ filter: expression });
             }
         },
 
-        //TODO: refactor
         _header: function() {
             var that = this;
             var template = that.options.headerTemplate;
