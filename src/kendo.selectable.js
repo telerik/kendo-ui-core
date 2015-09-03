@@ -2,7 +2,7 @@
     define([ "./kendo.core", "./kendo.userevents" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "selectable",
     name: "Selectable",
     category: "framework",
@@ -15,7 +15,6 @@ var __meta__ = {
         Widget = kendo.ui.Widget,
         proxy = $.proxy,
         abs = Math.abs,
-        shift = Array.prototype.shift,
         ARIASELECTED = "aria-selected",
         SELECTED = "k-state-selected",
         ACTIVE = "k-state-selecting",

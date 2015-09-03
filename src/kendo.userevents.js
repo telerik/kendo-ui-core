@@ -2,7 +2,7 @@
     define([ "./kendo.core" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "userevents",
     name: "User Events",
     category: "framework",

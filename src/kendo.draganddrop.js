@@ -2,7 +2,7 @@
     define([ "./kendo.core", "./kendo.userevents" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "draganddrop",
     name: "Drag & drop",
     category: "framework",

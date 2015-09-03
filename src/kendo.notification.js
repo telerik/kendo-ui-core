@@ -2,7 +2,7 @@
     define([ "./kendo.core", "./kendo.popup" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "notification",
     name: "Notification",
     category: "web",
@@ -172,7 +172,7 @@ var __meta__ = {
             }
 
             if (popup.options.anchor !== document.body && popup.options.origin.indexOf(RIGHT) > 0) {
-                popup.bind("open", function (e) {
+                popup.bind("open", function () {
                     var shadows = kendo.getShadows(popup.element);
                     setTimeout(function () {
                         popup.wrapper.css("left", parseFloat(popup.wrapper.css("left")) + shadows.left + shadows.right);
@@ -181,7 +181,7 @@ var __meta__ = {
             }
 
             if (options.hideOnClick) {
-                popup.bind("activate", function(e) {
+                popup.bind("activate", function() {
                     if (attachDelay) {
                         setTimeout(function(){
                             attachClick(popup.element);
@@ -207,8 +207,7 @@ var __meta__ = {
                 autoHideAfter = options.autoHideAfter,
                 x = options.position.left,
                 y = options.position.top,
-                allowHideAfter = options.allowHideAfter,
-                popup, openPopup, attachClick, closeIcon;
+                popup, openPopup;
 
             openPopup = $("." + that._guid + ":not(.k-hiding)").last();
 
@@ -220,7 +219,7 @@ var __meta__ = {
                 modal: true,
                 collision: "",
                 isRtl: that._isRtl,
-                close: function(e) {
+                close: function() {
                     that._triggerHide(this.element);
                 },
                 deactivate: function(e) {
@@ -311,8 +310,7 @@ var __meta__ = {
             var that = this,
                 autoHideAfter = options.autoHideAfter,
                 animation = options.animation,
-                insertionMethod = options.stacking == UP || options.stacking == LEFT ? "prependTo" : "appendTo",
-                attachClick;
+                insertionMethod = options.stacking == UP || options.stacking == LEFT ? "prependTo" : "appendTo";
 
             wrapper
                 .addClass(that._guid)
@@ -348,7 +346,7 @@ var __meta__ = {
             var that = this,
                 options = that.options,
                 wrapper = $(WRAPPER),
-                args, defaultArgs, popup;
+                args, defaultArgs;
 
             if (!type) {
                 type = INFO;

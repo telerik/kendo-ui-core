@@ -2,7 +2,7 @@
     define([ "./kendo.mobile.pane", "./kendo.router" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "mobile.application",
     name: "Application",
     category: "mobile",

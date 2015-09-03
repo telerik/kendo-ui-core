@@ -2,7 +2,7 @@
     define([ "./kendo.core" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "toolbar",
     name: "ToolBar",
     category: "web",
@@ -60,9 +60,7 @@ var __meta__ = {
         OVERFLOW_ALWAYS = "always",
         OVERFLOW_HIDDEN = "k-overflow-hidden",
 
-        KENDO_UID_ATTR = kendo.attr("uid"),
-
-        template = kendo.template;
+        KENDO_UID_ATTR = kendo.attr("uid");
 
         var Item = kendo.Class.extend({
             addOverflowAttr: function() {
@@ -698,7 +696,7 @@ var __meta__ = {
             }
         });
 
-        function adjustPopupWidth(e) {
+        function adjustPopupWidth() {
             var anchor = this.options.anchor,
                 computedWidth = anchor.outerWidth(),
                 width;
@@ -999,7 +997,7 @@ var __meta__ = {
                     toolbarItem,
                     overflowItem,
                     isResizable = this.options.resizable,
-                    type, uid;
+                    type;
 
                 element = this.element.find(candidate);
                 type = element.length ? element.data("type") : "";
@@ -1068,7 +1066,7 @@ var __meta__ = {
             show: function(candidate) {
                 var item = this._getItem(candidate);
 
-                if (item.toolbar) { 
+                if (item.toolbar) {
                     item.toolbar.show();
 
                     if (item.toolbar.options.type === "button" && item.toolbar.options.isChild) {
@@ -1213,7 +1211,6 @@ var __meta__ = {
             _buttonClick: function(e) {
                 var that = this, popup,
                     target, item, splitContainer,
-                    isDisabled,
                     isSplitButtonArrow = e.target.closest("." + SPLIT_BUTTON_ARROW).length,
                     handler, eventData;
 
@@ -1268,9 +1265,8 @@ var __meta__ = {
                 }
             },
 
-            _navigatable: function(e) {
+            _navigatable: function() {
                 var that = this;
-                var isResizable = this.options.resizable;
 
                 that.element
                     .attr("tabindex", 0)
@@ -1289,8 +1285,7 @@ var __meta__ = {
             _keydown: function(e) {
                 var target = $(e.target),
                     keyCode = e.keyCode,
-                    items = this.element.children(":not(.k-separator):visible"),
-                    index;
+                    items = this.element.children(":not(.k-separator):visible");
 
                 if (keyCode === keys.TAB) {
                     var element = target.parentsUntil(this.element).last(),

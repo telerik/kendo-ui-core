@@ -2,7 +2,7 @@
     define([ "./kendo.mobile.view", "./kendo.userevents" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "mobile.drawer",
     name: "Drawer",
     category: "mobile",
@@ -80,7 +80,7 @@ var __meta__ = {
             };
 
             if (this.options.swipeToOpen && SWIPE_TO_OPEN) {
-                userEvents.bind("press", function(e) { drawer.transition.cancel(); });
+                userEvents.bind("press", function() { drawer.transition.cancel(); });
                 userEvents.bind("start", function(e) { drawer._start(e); });
                 userEvents.bind("move", function(e) { drawer._update(e); });
                 userEvents.bind("end", function(e) { drawer._end(e); });

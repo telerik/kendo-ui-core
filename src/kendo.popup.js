@@ -2,7 +2,7 @@
     define([ "./kendo.core" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "popup",
     name: "Pop-up",
     category: "framework",
@@ -16,7 +16,6 @@ var __meta__ = {
         Widget = ui.Widget,
         support = kendo.support,
         getOffset = kendo.getOffset,
-        activeElement = kendo._activeElement,
         OPEN = "open",
         CLOSE = "close",
         DEACTIVATE = "deactivate",

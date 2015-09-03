@@ -2,7 +2,7 @@
     define([ "./kendo.data" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "data.signalr",
     name: "SignalR",
     category: "framework",

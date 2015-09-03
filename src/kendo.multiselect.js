@@ -2,7 +2,7 @@
     define([ "./kendo.list", "./kendo.mobile.scroller" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "multiselect",
     name: "MultiSelect",
     category: "web",
@@ -39,9 +39,6 @@ var __meta__ = {
         CHANGE = "change",
         PROGRESS = "progress",
         SELECT = "select",
-        NEXT = "nextSibling",
-        PREV = "previousSibling",
-        HIDE = ' style="display:none"',
         ARIA_DISABLED = "aria-disabled",
         ARIA_READONLY = "aria-readonly",
         FOCUSEDCLASS = "k-state-focused",
@@ -492,7 +489,7 @@ var __meta__ = {
             this.listView.refresh();
         },
 
-        _listBound: function(e) {
+        _listBound: function() {
             var that = this;
             var data = that.dataSource.flatView();
             var page = that.dataSource.page();
@@ -566,7 +563,6 @@ var __meta__ = {
             var that = this;
             var oldValue = that.listView.value().slice();
             var maxSelectedItems = that.options.maxSelectedItems;
-            var idx;
 
             if (value === undefined) {
                 return oldValue;
@@ -1075,7 +1071,6 @@ var __meta__ = {
 
         _select: function(candidate) {
             var that = this;
-            var idx;
 
             if (that._state === REBIND) {
                 that._state = "";

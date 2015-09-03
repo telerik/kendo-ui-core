@@ -2,7 +2,7 @@
     define([ "./kendo.popup" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "menu",
     name: "Menu",
     category: "web",
@@ -1325,7 +1325,6 @@ var __meta__ = {
 
         _closeHandler: function (e) {
             var that = this,
-				options = that.options,
                 target = $(e.relatedTarget || e.target),
 				sameTarget = target.closest(that.target.selector)[0] == that.target[0],
                 children = target.closest(itemSelector).children(popupSelector),

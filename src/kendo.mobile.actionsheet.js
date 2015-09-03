@@ -2,7 +2,7 @@
     define([ "./kendo.mobile.popover", "./kendo.mobile.shim" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "mobile.actionsheet",
     name: "ActionSheet",
     category: "mobile",

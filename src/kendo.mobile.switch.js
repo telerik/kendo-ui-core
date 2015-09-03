@@ -3,7 +3,7 @@
     define([ "./kendo.fx", "./kendo.userevents" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "mobile.switch",
     name: "Switch",
     category: "mobile",

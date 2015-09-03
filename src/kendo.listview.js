@@ -2,7 +2,7 @@
     define([ "./kendo.data", "./kendo.editable", "./kendo.selectable" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "listview",
     name: "ListView",
     category: "web",
@@ -35,7 +35,6 @@ var __meta__ = {
         FOCUSED = "k-state-focused",
         SELECTED = "k-state-selected",
         KEDITITEM = "k-edit-item",
-        STRING = "string",
         EDIT = "edit",
         REMOVE = "remove",
         SAVE = "save",

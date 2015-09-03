@@ -2,7 +2,7 @@
     define([ "./kendo.core", "./kendo.data" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "binder",
     name: "MVVM",
     category: "framework",
@@ -13,13 +13,11 @@ var __meta__ = {
 /*jshint eqnull: true */
 (function ($, undefined) {
     var kendo = window.kendo,
-        browser = kendo.support.browser,
         Observable = kendo.Observable,
         ObservableObject = kendo.data.ObservableObject,
         ObservableArray = kendo.data.ObservableArray,
         toString = {}.toString,
         binders = {},
-        slice = Array.prototype.slice,
         Class = kendo.Class,
         proxy = $.proxy,
         VALUE = "value",
@@ -830,7 +828,6 @@ var __meta__ = {
                 var optionIndex,
                     element = this.element,
                     options = element.options,
-                    valuePrimitive = this.options.valuePrimitive,
                     value = this.bindings[VALUE].get(),
                     values = value,
                     field = this.options.valueField || this.options.textField,
@@ -923,7 +920,6 @@ var __meta__ = {
                     dataSource = widget[fieldName],
                     view,
                     parents,
-                    groups = dataSource.group() || [],
                     hds = kendo.data.HierarchicalDataSource;
 
                 if (hds && dataSource instanceof hds) {

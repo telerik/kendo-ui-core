@@ -2,7 +2,7 @@
     define([ "./kendo.popup" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "mobile.shim",
     name: "Shim",
     category: "mobile",
@@ -16,7 +16,6 @@ var __meta__ = {
         ui = kendo.mobile.ui,
         Popup = kendo.ui.Popup,
         SHIM = '<div class="km-shim"/>',
-        SHOW = "show",
         HIDE = "hide",
         Widget = ui.Widget;
 

@@ -2,7 +2,7 @@
     define([ "./kendo.core", "./kendo.userevents" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "numerictextbox",
     name: "NumericTextBox",
     category: "web",
@@ -70,7 +70,7 @@ var __meta__ = {
              if (!kendo.support.mobileOS) {
                  that._text.on(FOCUS + ns, proxy(that._click, that));
              } else {
-                 that._text.on(TOUCHEND + ns + " " + FOCUS + ns, function(e) {
+                 that._text.on(TOUCHEND + ns + " " + FOCUS + ns, function() {
                     that._toggleText(false);
                     element.focus();
                  });

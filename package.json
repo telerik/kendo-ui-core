@@ -22,11 +22,11 @@
        "postcss": "^4.1.16",
        "grunt-postcss": "^0.5.5",
        "autoprefixer-core": "^5.2.1",
-       "jshint": "1.1.0",
+       "jshint": "2.8.0",
 
        "grunt": "~0.4.2",
        "grunt-cli": "~0.1.0",
-       "grunt-contrib-jshint": "~0.7.2",
+       "grunt-contrib-jshint": "~0.11.2",
        "grunt-contrib-copy": "~0.5.0",
        "grunt-debug-task": "0.1.3",
        "grunt-karma": "0.6.2",
@@ -46,5 +46,32 @@
    "scripts": {
        "build": "npm install && grunt build",
        "test": "./node_modules/.bin/grunt travis"
-   }
+   },
+   "jshintConfig": {
+        "es3": true,
+        "freeze": true,
+        "curly": true,
+        "undef": true,
+        "unused": true,
+        "latedef": true,
+        "noarg": true,
+        "nonbsp": true,
+        "browser": true,
+        "jquery": true,
+        "nonew": true,
+        "globals": {
+            "JSON": true,
+            "QUnit": true, "test": true, "asyncTest": true, "module": true, "start": true, "equal": true, "deepEqual": true, "ok": true, "stubMethod": true, "arrayClose": true, "contains": true,
+            "kendo": true,
+            "define": true,
+            "angular": true,
+            "compareMatrices": true, "compareBoundingBox": true,
+            "baseSurfaceTests": true, "baseSurfaceEventTests": true
+        }
+    },
+    "jshintFiles": [
+        "src/kendo*.js",
+        "src/messages/kendo*.js",
+        "tests/**/test-helper.js"
+    ]
 }

@@ -2,7 +2,7 @@
     define([ "./kendo.datepicker", "./kendo.numerictextbox", "./kendo.validator", "./kendo.binder" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "editable",
     name: "Editable",
     category: "framework",
@@ -214,7 +214,7 @@ var __meta__ = {
             values[e.field] = e.value;
 
             input = $(':input[' + bindAttribute + '*="' + fieldName + '"]', that.element)
-                .filter("[" + kendo.attr("validate") + "!='false']").filter(function(element) {
+                .filter("[" + kendo.attr("validate") + "!='false']").filter(function() {
                    return bindingRegex.test($(this).attr(bindAttribute));
                 });
             if (input.length > 1) {

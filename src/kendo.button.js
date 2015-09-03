@@ -2,7 +2,7 @@
     define([ "./kendo.core" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "button",
     name: "Button",
     category: "web",
@@ -52,12 +52,12 @@ var __meta__ = {
 
             kendo.notify(that);
         },
-        
+
         destroy: function() {
 			var that = this;
-			
+
 			that.wrapper.off(NS);
-			
+
 			Widget.fn.destroy.call(that);
 		},
 

@@ -2,7 +2,7 @@
     define([ "./kendo.draganddrop" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "slider",
     name: "Slider",
     category: "web",
@@ -661,7 +661,7 @@ var __meta__ = {
 
             dragHandle = that.wrapper.find(DRAG_HANDLE);
 
-            new Slider.Selection(dragHandle, that, options);
+            this._selection = new Slider.Selection(dragHandle, that, options);
             that._drag = new Slider.Drag(dragHandle, "", that, options);
         },
 
@@ -1341,7 +1341,7 @@ var __meta__ = {
 
             var dragHandles = that.wrapper.find(DRAG_HANDLE);
 
-            new RangeSlider.Selection(dragHandles, that, options);
+            this._selection = new RangeSlider.Selection(dragHandles, that, options);
             that._firstHandleDrag = new Slider.Drag(dragHandles.eq(0), "firstHandle", that, options);
             that._lastHandleDrag = new Slider.Drag(dragHandles.eq(1), "lastHandle" , that, options);
         },

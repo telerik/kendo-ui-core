@@ -2,7 +2,7 @@
     define([], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "core",
     name: "Core",
     category: "framework",
@@ -1481,7 +1481,6 @@ function pad(number, digits, end) {
         var date = null;
         var length, patterns;
         var tzoffset;
-        var sign;
 
         if (value && value.indexOf("/D") === 0) {
             date = dateRegExp.exec(value);
@@ -2196,8 +2195,7 @@ function pad(number, digits, end) {
             type = "offset";
         }
 
-        var result = element[type](),
-            mobileOS = support.mobileOS;
+        var result = element[type]();
 
         // IE10 touch zoom is living in a separate viewport
         if (support.browser.msie && (support.pointers || support.msPointers) && !positioned) {
@@ -3042,7 +3040,7 @@ function pad(number, digits, end) {
                     });
                 } else {
                     this.each(function() {
-                        new widget(this, options);
+                        return new widget(this, options);
                     });
                 }
 

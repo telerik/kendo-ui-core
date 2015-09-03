@@ -2,7 +2,7 @@
     define([ "./kendo.core", "./kendo.binder", "./kendo.fx" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "view",
     name: "View",
     category: "framework",
@@ -69,7 +69,7 @@ var __meta__ = {
             return that.element;
         },
 
-        clone: function(back) {
+        clone: function() {
             return new ViewClone(this);
         },
 

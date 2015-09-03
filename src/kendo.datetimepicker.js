@@ -2,7 +2,7 @@
     define([ "./kendo.datepicker", "./kendo.timepicker" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "datetimepicker",
     name: "DateTimePicker",
     category: "web",
@@ -134,8 +134,6 @@ var __meta__ = {
         setOptions: function(options) {
             var that = this,
                 value = that._value,
-                dateViewOptions = that.dateView.options,
-                timeViewOptions = that.timeView.options,
                 min, max, currentValue;
 
             Widget.fn.setOptions.call(that, options);

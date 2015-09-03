@@ -2,7 +2,7 @@
     define([ "./kendo.core" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "fx",
     name: "Effects",
     category: "framework",
@@ -53,7 +53,6 @@ var __meta__ = {
         PERSPECTIVE = cssPrefix + "perspective",
         DEFAULT_PERSPECTIVE = "1500px",
         TRANSFORM_PERSPECTIVE = "perspective(" + DEFAULT_PERSPECTIVE + ")",
-        ios7 = support.mobileOS && support.mobileOS.majorVersion == 7,
         directions = {
             left: {
                 reverse: "right",

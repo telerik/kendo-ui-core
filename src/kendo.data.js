@@ -2,7 +2,7 @@
     define([ "./kendo.core", "./kendo.data.odata", "./kendo.data.xml" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "data",
     name: "Data source",
     category: "framework",
@@ -282,7 +282,7 @@ var __meta__ = {
             return result;
         },
 
-        reduce: function(callback, initialValue) {
+        reduce: function(callback) {
             var idx = 0,
                 result,
                 length = this.length;
@@ -300,7 +300,7 @@ var __meta__ = {
             return result;
         },
 
-        reduceRight: function(callback, initialValue) {
+        reduceRight: function(callback) {
             var idx = this.length - 1,
                 result;
 
@@ -2000,7 +2000,7 @@ var __meta__ = {
     }
 
     function wrapGroupItems(data, model) {
-        var idx, length, group, items;
+        var idx, length, group;
         if (model) {
             for (idx = 0, length = data.length; idx < length; idx++) {
                 group = data.at(idx);
@@ -2639,12 +2639,9 @@ var __meta__ = {
 
         sync: function() {
             var that = this,
-                idx,
-                length,
                 created = [],
                 updated = [],
-                destroyed = that._destroyed,
-                data = that._flatData(that._data);
+                destroyed = that._destroyed;
 
             var promise = $.Deferred().resolve().promise();
 
@@ -3245,8 +3242,7 @@ var __meta__ = {
 
         _observe: function(data) {
             var that = this,
-                model = that.reader.model,
-                wrap = false;
+                model = that.reader.model;
 
             that._shouldDetachObservableParents = true;
 
@@ -4559,9 +4555,7 @@ var __meta__ = {
 
         at: function(index)  {
             var pageSize = this.pageSize,
-                item,
-                itemPresent = true,
-                changeTo;
+                itemPresent = true;
 
             if (index >= this.total()) {
                 this.trigger("endreached", {index: index });

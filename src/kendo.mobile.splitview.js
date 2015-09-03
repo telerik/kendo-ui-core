@@ -2,7 +2,7 @@
     define([ "./kendo.mobile.pane" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "mobile.splitview",
     name: "SplitView",
     category: "mobile",

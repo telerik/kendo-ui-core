@@ -3,7 +3,7 @@
     define([ "./kendo.draganddrop" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "sortable",
     name: "Sortable",
     category: "framework",
@@ -116,7 +116,6 @@ var __meta__ = {
 
         _dragstart: function(e) {
             var draggedElement = this.draggedElement = e.currentTarget,
-                target = e.target || kendo.elementUnderCursor(e),
                 disabled = this.options.disabled,
                 handler = this.options.handler,
                 _placeholder = this.options.placeholder,
@@ -140,7 +139,7 @@ var __meta__ = {
             }
         },
 
-        _dragcancel: function(e) {
+        _dragcancel: function() {
             this._cancel();
             this.trigger(CANCEL, { item: this.draggedElement });
 
@@ -307,10 +306,7 @@ var __meta__ = {
 
         _findElementUnderCursor: function(e) {
             var elementUnderCursor = kendo.elementUnderCursor(e),
-                draggable = e.sender,
-                disabled = this.options.disabled,
-                filter = this.options.filter,
-                items = this.items();
+                draggable = e.sender;
 
             if(containsOrEqualTo(draggable.hint[0], elementUnderCursor)) {
                 draggable.hint.hide();

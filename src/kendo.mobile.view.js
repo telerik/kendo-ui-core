@@ -2,7 +2,7 @@
     define([ "./kendo.core", "./kendo.fx", "./kendo.mobile.scroller", "./kendo.view" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "mobile.view",
     name: "View",
     category: "mobile",
@@ -13,11 +13,9 @@ var __meta__ = {
 
 (function($, undefined) {
     var kendo = window.kendo,
-        angular = window.angular,
         mobile = kendo.mobile,
         ui = mobile.ui,
         attr = kendo.attr,
-        Class = kendo.Class,
         Widget = ui.Widget,
         ViewClone = kendo.ViewClone,
         INIT = "init",
@@ -30,7 +28,6 @@ var __meta__ = {
         TRANSITION_START = "transitionStart",
         HIDE = "hide",
         DESTROY = "destroy",
-        Z_INDEX = "z-index",
         attrValue = kendo.attrValue,
         roleSelector = kendo.roleSelector,
         directiveSelector = kendo.directiveSelector,
@@ -220,7 +217,7 @@ var __meta__ = {
             return that.options.stretch ? that.content : that.scrollerContent;
         },
 
-        clone: function(back) {
+        clone: function() {
             return new ViewClone(this);
         },
 
@@ -469,7 +466,7 @@ var __meta__ = {
                 that.trigger(VIEW_SHOW, { view: e.view });
             });
 
-            that.viewContainer.bind(AFTER, function(e) {
+            that.viewContainer.bind(AFTER, function() {
                 that.trigger(AFTER);
             });
 
@@ -661,7 +658,7 @@ var __meta__ = {
                 .always($.proxy(this, "_xhrComplete", callback, url));
         },
 
-        _xhrComplete: function(callback, url, response, status, err) {
+        _xhrComplete: function(callback, url, response) {
             var success = true;
 
             if (typeof response === "object") {

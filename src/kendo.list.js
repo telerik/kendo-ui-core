@@ -2,7 +2,7 @@
     define([ "./kendo.data", "./kendo.popup" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "list",
     name: "List",
     category: "framework",
@@ -21,9 +21,7 @@ var __meta__ = {
         activeElement = kendo._activeElement,
         ObservableArray = kendo.data.ObservableArray,
         ID = "id",
-        LI = "li",
         CHANGE = "change",
-        CHARACTER = "character",
         FOCUSED = "k-state-focused",
         HOVER = "k-state-hover",
         LOADING = "k-loading",
@@ -886,7 +884,6 @@ var __meta__ = {
         _move: function(e) {
             var that = this;
             var key = e.keyCode;
-            var ul = that.ul[0];
             var down = key === keys.DOWN;
             var dataItem;
             var pressed;
@@ -1092,8 +1089,7 @@ var __meta__ = {
             var that = this,
                 options = that.options,
                 cascade = options.cascadeFrom,
-                select, valueField,
-                parent, change;
+                parent;
 
             if (cascade) {
                 parent = that._parentWidget();
@@ -1317,8 +1313,7 @@ var __meta__ = {
                 itemOffsetHeight = item.offsetHeight,
                 contentScrollTop = content.scrollTop,
                 contentOffsetHeight = content.clientHeight,
-                bottomDistance = itemOffsetTop + itemOffsetHeight,
-                yDimension, offsetHeight;
+                bottomDistance = itemOffsetTop + itemOffsetHeight;
 
                 if (contentScrollTop > itemOffsetTop) {
                     contentScrollTop = itemOffsetTop;
@@ -1414,7 +1409,7 @@ var __meta__ = {
             return this.focus() ? this.focus().index() : undefined;
         },
 
-        filter: function(filter, skipValueUpdate) {
+        filter: function(filter) {
             if (filter === undefined) {
                 return this._filtered;
             }

@@ -2,7 +2,7 @@
     define([ "./kendo.core" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "router",
     name: "Router",
     category: "framework",
@@ -492,7 +492,7 @@ var __meta__ = {
             }
         },
 
-        _same: function(e) {
+        _same: function() {
             this.trigger(SAME);
         },
 

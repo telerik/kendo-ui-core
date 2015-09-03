@@ -2,7 +2,7 @@
     define([ "./kendo.popup" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "timepicker",
     name: "TimePicker",
     category: "web",

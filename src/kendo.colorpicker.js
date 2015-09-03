@@ -2,7 +2,7 @@
     define([ "./kendo.core", "./kendo.color", "./kendo.popup", "./kendo.slider", "./kendo.userevents" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "colorpicker",
     name: "Color tools",
     category: "web",

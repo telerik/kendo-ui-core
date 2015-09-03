@@ -2,7 +2,7 @@
     define([ "./kendo.calendar", "./kendo.popup" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "datepicker",
     name: "DatePicker",
     category: "web",
@@ -25,7 +25,6 @@ var __meta__ = {
     OPEN = "open",
     CLOSE = "close",
     CHANGE = "change",
-    DATEVIEW = "dateView",
     DISABLED = "disabled",
     READONLY = "readonly",
     DEFAULT = "k-state-default",
@@ -33,7 +32,6 @@ var __meta__ = {
     SELECTED = "k-state-selected",
     STATEDISABLED = "k-state-disabled",
     HOVER = "k-state-hover",
-    KEYDOWN = "keydown" + ns,
     HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
     MOUSEDOWN = "mousedown" + ns,
     ID = "id",

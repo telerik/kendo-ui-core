@@ -2,7 +2,7 @@
     define([ "./kendo.data" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "pager",
     name: "Pager",
     category: "framework",
@@ -383,7 +383,7 @@ var __meta__ = {
             }
         },
 
-        _toggleActive: function(e) {
+        _toggleActive: function() {
             this.list.toggleClass("k-state-expanded");
         },
 

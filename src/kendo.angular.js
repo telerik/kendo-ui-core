@@ -2,7 +2,7 @@
     define([ "./kendo.core" ], f);
 })(function() {
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "angular",
     name: "AngularJS Directives",
     category: "framework",
@@ -88,6 +88,7 @@ var __meta__ = {
     };
 
     function createWidget(scope, element, attrs, widget, origAttr, controllers) {
+        /* jshint latedef: false */
         if (!(element instanceof jQuery)) {
             throw new Error("The Kendo UI directives require jQuery to be available before AngularJS. Please include jquery before angular in the document.");
         }
@@ -119,7 +120,7 @@ var __meta__ = {
                 var unresolved = parsed.unresolved[i];
 
                 var promise = $.Deferred(function(d) {
-                    var unwatch = scope.$watch(unresolved.path, function(newValue, oldValue) {
+                    var unwatch = scope.$watch(unresolved.path, function(newValue) {
                         if (newValue !== undefined) {
                             unwatch();
                             d.resolve();
@@ -139,7 +140,7 @@ var __meta__ = {
             var root = scope.$root || scope;
 
             var register = function() {
-                var unregister = scope.$watch(kNgDelay, function(newValue, oldValue) {
+                var unregister = scope.$watch(kNgDelay, function(newValue) {
                         if (newValue !== undefined) {
                         unregister();
                         // remove subsequent delays, to make ng-rebind work
@@ -645,7 +646,7 @@ var __meta__ = {
                 require: [ "?ngModel", "^?form" ],
                 scope: false,
 
-                controller: [ '$scope', '$attrs', '$element', function($scope, $attrs, $element) {
+                controller: [ '$scope', '$attrs', '$element', function($scope, $attrs) {
                     var that = this;
                     that.template = function(key, value) {
                         $attrs[key] = kendo.stringify(value);
@@ -755,7 +756,7 @@ var __meta__ = {
         module.directive(widget, function() {
             return {
                 restrict: "A",
-                link: function(scope, element, attrs, controllers) {
+                link: function(scope, element, attrs) {
                     createWidget(scope, element, attrs, widget, widget);
                 }
             };
@@ -1220,7 +1221,7 @@ var __meta__ = {
     .directive('kendoMobileApplication', function() {
         return {
             terminal: true,
-            link: function(scope, element, attrs, controllers) {
+            link: function(scope, element, attrs) {
                 createWidget(scope, element, attrs, 'kendoMobileApplication', 'kendoMobileApplication');
             }
         };
@@ -1228,7 +1229,7 @@ var __meta__ = {
         return {
             scope: true,
             link: {
-                pre: function(scope, element, attrs, controllers) {
+                pre: function(scope, element, attrs) {
                     attrs.defaultOptions = scope.viewOptions;
                     attrs._instance = createWidget(scope, element, attrs, 'kendoMobileView', 'kendoMobileView');
                 },
@@ -1243,7 +1244,7 @@ var __meta__ = {
         return {
             scope: true,
             link: {
-                pre: function(scope, element, attrs, controllers) {
+                pre: function(scope, element, attrs) {
                     attrs.defaultOptions = scope.viewOptions;
                     attrs._instance = createWidget(scope, element, attrs, 'kendoMobileDrawer', 'kendoMobileDrawer');
                 },
@@ -1258,7 +1259,7 @@ var __meta__ = {
         return {
             scope: true,
             link: {
-                pre: function(scope, element, attrs, controllers) {
+                pre: function(scope, element, attrs) {
                     attrs.defaultOptions = scope.viewOptions;
                     attrs._instance = createWidget(scope, element, attrs, 'kendoMobileModalView', 'kendoMobileModalView');
                 },
@@ -1273,7 +1274,7 @@ var __meta__ = {
         return {
             terminal: true,
             link: {
-                pre: function(scope, element, attrs, controllers) {
+                pre: function(scope, element, attrs) {
                     attrs.defaultOptions = scope.viewOptions;
                     attrs._instance = createWidget(scope, element, attrs, 'kendoMobileSplitView', 'kendoMobileSplitView');
                 },
@@ -1287,7 +1288,7 @@ var __meta__ = {
         return {
             terminal: true,
             link: {
-                pre: function(scope, element, attrs, controllers) {
+                pre: function(scope, element, attrs) {
                     attrs.defaultOptions = scope.viewOptions;
                     createWidget(scope, element, attrs, 'kendoMobilePane', 'kendoMobilePane');
                 }
@@ -1296,7 +1297,7 @@ var __meta__ = {
     }).directive('kendoMobileLayout', function() {
         return {
             link: {
-                pre: function (scope, element, attrs, controllers) {
+                pre: function (scope, element, attrs) {
                     createWidget(scope, element, attrs, 'kendoMobileLayout', 'kendoMobileLayout');
                 }
             }
@@ -1304,7 +1305,7 @@ var __meta__ = {
     }).directive('kendoMobileActionSheet', function() {
         return {
             restrict: "A",
-            link: function(scope, element, attrs, controllers) {
+            link: function(scope, element, attrs) {
                 element.find("a[k-action]").each(function() {
                     $(this).attr("data-" + kendo.ns + "action", $(this).attr("k-action"));
                 });
@@ -1316,7 +1317,7 @@ var __meta__ = {
         return {
             terminal: true,
             link: {
-                pre: function(scope, element, attrs, controllers) {
+                pre: function(scope, element, attrs) {
                     attrs.defaultOptions = scope.viewOptions;
                     createWidget(scope, element, attrs, 'kendoMobilePopOver', 'kendoMobilePopOver');
                 }
@@ -1326,21 +1327,21 @@ var __meta__ = {
         return {
             restrict : "E",
             replace  : true,
-            template : function(element, attributes) {
+            template : function(element) {
                 return "<span data-" + kendo.ns + "role='view-title'>" + element.html() + "</span>";
             }
         };
     }).directive('kendoMobileHeader', function() {
             return {
                 restrict: "E",
-                link: function(scope, element, attrs, controllers) {
+                link: function(scope, element) {
                     element.addClass("km-header").attr("data-role", "header");
                 }
             };
     }).directive('kendoMobileFooter', function() {
             return {
                 restrict: 'E',
-                link: function(scope, element, attrs, controllers) {
+                link: function(scope, element) {
                     element.addClass("km-footer").attr("data-role", "footer");
                 }
             };
@@ -1348,7 +1349,7 @@ var __meta__ = {
         return {
             restrict : "E",
             replace  : true,
-            template : function(element, attributes) {
+            template : function(element) {
                 return "<div data-" + kendo.ns + "role='page'>" + element.html() + "</div>";
             }
         };

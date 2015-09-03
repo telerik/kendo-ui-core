@@ -2,7 +2,7 @@
     define([ "./kendo.fx", "./kendo.data", "./kendo.draganddrop" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "mobile.scrollview",
     name: "ScrollView",
     category: "mobile",

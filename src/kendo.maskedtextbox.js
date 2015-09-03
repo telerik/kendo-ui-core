@@ -2,7 +2,7 @@
     define([ "./kendo.core" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "maskedtextbox",
     name: "MaskedTextBox",
     category: "web",
@@ -149,7 +149,6 @@ var __meta__ = {
         value: function(value) {
             var element = this.element;
             var emptyMask = this._emptyMask;
-            var options = this.options;
 
             if (value === undefined) {
                 return this.element.val();

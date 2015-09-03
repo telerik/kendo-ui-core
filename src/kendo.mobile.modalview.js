@@ -2,7 +2,7 @@
     define([ "./kendo.mobile.shim", "./kendo.mobile.view" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "mobile.modalview",
     name: "ModalView",
     category: "mobile",
@@ -23,7 +23,7 @@ var __meta__ = {
 
     var ModalView = ui.View.extend({
         init: function(element, options) {
-            var that = this, width, height;
+            var that = this;
 
             Widget.fn.init.call(that, element, options);
 

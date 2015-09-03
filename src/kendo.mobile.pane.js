@@ -2,7 +2,7 @@
     define([ "./kendo.mobile.view", "./kendo.mobile.loader" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "mobile.pane",
     name: "Pane",
     category: "mobile",
@@ -105,7 +105,7 @@ var __meta__ = {
                     that.closeActiveDialogs();
                 },
 
-                after: function(e) {
+                after: function() {
                     that.loader.transitionDone();
                 },
 

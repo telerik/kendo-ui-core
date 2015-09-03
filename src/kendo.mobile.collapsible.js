@@ -2,7 +2,7 @@
     define([ "./kendo.core" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "mobile.collapsible",
     name: "Collapsible",
     category: "mobile",
@@ -27,8 +27,6 @@ var __meta__ = {
 
         //icon position
         LEFT = "left",
-        RIGHT = "right",
-        TOP = "top",
 
         //events
         EXAPND = "expand",

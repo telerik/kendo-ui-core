@@ -2,7 +2,7 @@
     define([ "./kendo.fx", "./kendo.draganddrop" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "mobile.scroller",
     name: "Scroller",
     category: "mobile",

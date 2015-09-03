@@ -2,7 +2,7 @@
     define([ "./kendo.data", "./kendo.userevents", "./kendo.mobile.button" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "mobile.listview",
     name: "ListView",
     category: "mobile",

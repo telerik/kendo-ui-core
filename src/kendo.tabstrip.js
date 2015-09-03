@@ -2,7 +2,7 @@
     define([ "./kendo.data" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "tabstrip",
     name: "TabStrip",
     category: "web",
@@ -865,8 +865,7 @@ var __meta__ = {
 
         _tabPosition: function() {
             var that = this,
-                tabPosition = that.options.tabPosition,
-                tabGroup = that.tabGroup;
+                tabPosition = that.options.tabPosition;
 
             that.wrapper.addClass("k-floatwrap k-tabstrip-" + tabPosition);
 
@@ -960,7 +959,7 @@ var __meta__ = {
 
             return prevent;
         },
-        
+
         _scrollable: function() {
             var that = this,
                 options = that.options,

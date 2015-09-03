@@ -1,3 +1,4 @@
+/* jshint browser:false, node:true */
 var META = require("./build/kendo-meta.js");
 var PATH = require("path");
 
@@ -23,6 +24,8 @@ module.exports = function(grunt) {
     var browserOption = grunt.option('browser');
     var testsOption = grunt.option('tests');
     var jqueryOption = grunt.option('jquery');
+    var filesOption = grunt.option('files');
+
     var jquery = 'src/jquery.js';
 
     if (testsOption) {
@@ -48,11 +51,7 @@ module.exports = function(grunt) {
         reporters.push('junit');
     }
 
-    var jshint = grunt.file.readJSON('build/grunt/jshint.json');
-
-    var files = grunt.option('files');
-
-    jshint.files = files ? files.split(",") : jshint.files;
+    var pkg = grunt.file.readJSON('package.json');
 
     // all files (including subfiles like editor/main.js etc.)
     var allKendoFiles = META.loadAll().map(addSrc);
@@ -62,9 +61,11 @@ module.exports = function(grunt) {
 
     // Project configuration.
     grunt.initConfig({
-
         pkg: grunt.file.readJSON('package.json'),
-        jshint: jshint,
+        jshint: {
+            files: filesOption ? filesOption.split(",") : pkg.jshintFiles,
+            options: pkg.jshintConfig
+        },
         karma: {
             options: {
                 reportSlowerThan: 500,
@@ -72,7 +73,7 @@ module.exports = function(grunt) {
                 frameworks: ['qunit'],
                 preprocessors: {
                     'tests/**/.html': [],
-                    'tests/**/*-fixture.html': ['html2js'],
+                    'tests/**/*-fixture.html': ['html2js']
                 },
                 reporters: ['progress'],
                 colors: true,
@@ -127,7 +128,7 @@ module.exports = function(grunt) {
                         tests
                     )
                 }
-            },          
+            },
             legacyUnit: {
                 options: {
                     browsers: browserOption ? [ browserOption ] : [],
@@ -150,7 +151,7 @@ module.exports = function(grunt) {
                     expand: true,
                     cwd: "src/",
                     src: [ "jquery.*" ],
-                    dest: '<%= kendo.options.jsDestDir %>/',
+                    dest: '<%= kendo.options.jsDestDir %>/'
                 }]
             },
             angular: {
@@ -158,7 +159,7 @@ module.exports = function(grunt) {
                     expand: true,
                     cwd: "src/",
                     src: [ "angular.*" ],
-                    dest: '<%= kendo.options.jsDestDir %>/',
+                    dest: '<%= kendo.options.jsDestDir %>/'
                 }]
             },
             timezones: {
@@ -166,7 +167,7 @@ module.exports = function(grunt) {
                     expand: true,
                     cwd: "src/",
                     src: "kendo.timezones.js" ,
-                    dest: '<%= kendo.options.jsDestDir %>/',
+                    dest: '<%= kendo.options.jsDestDir %>/'
                 }]
             },
             css_assets: {
@@ -174,7 +175,7 @@ module.exports = function(grunt) {
                     expand: true,
                     cwd: "styles",
                     src: ["**/*.less", "**/*.woff", "**/*.ttf", "**/*.png", "**/*.gif", "**/*.css", "**/*.svg" ],
-                    dest: '<%= kendo.options.stylesDestDir %>/',
+                    dest: '<%= kendo.options.stylesDestDir %>/'
                 }]
             }
         },
@@ -188,22 +189,22 @@ module.exports = function(grunt) {
             min: {
                 src: mainKendoFiles,
                 dest: "<%= kendo.options.jsDestDir %>",
-                ext: ".min.js",
+                ext: ".min.js"
             },
             full: {
                 src: mainKendoFiles,
                 dest: "<%= kendo.options.jsDestDir %>",
-                ext: ".js",
+                ext: ".js"
             },
             cultures: {
                 src: [ "src/cultures/kendo.culture.*.js",
                        "!src/cultures/kendo.culture.*.min.js" ],
-                dest: "<%= kendo.options.jsDestDir %>/cultures",
+                dest: "<%= kendo.options.jsDestDir %>/cultures"
             },
             messages: {
                 src: [ "src/messages/kendo.messages.*.js",
                        "!src/messages/kendo.messages.*.min.js" ],
-                dest: "<%= kendo.options.jsDestDir %>/messages",
+                dest: "<%= kendo.options.jsDestDir %>/messages"
             }
         },
 
@@ -211,18 +212,18 @@ module.exports = function(grunt) {
             min: {
                 src: mainKendoFiles,
                 ext: ".min.js",
-                dest: PATH.join("dist", "download-builder", "content", "js"),
+                dest: PATH.join("dist", "download-builder", "content", "js")
             },
             config: {
                 src: mainKendoFiles,
-                dest: "download-builder/config/kendo-config.json",
-            },
+                dest: "download-builder/config/kendo-config.json"
+            }
         },
 
         custom: {
             options: {
-                destDir: "<%= kendo.options.jsDestDir %>",
-            },
+                destDir: "<%= kendo.options.jsDestDir %>"
+            }
         },
 
         less: {
@@ -243,7 +244,7 @@ module.exports = function(grunt) {
                 }
             },
             compile: {
-                src: [ "styles/**/kendo*.less" ],
+                src: [ "styles/**/kendo*.less" ]
             }
         },
 

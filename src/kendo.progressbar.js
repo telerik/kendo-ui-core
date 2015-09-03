@@ -2,7 +2,7 @@
     define([ "./kendo.core" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "progressbar",
     name: "ProgressBar",
     category: "web",
@@ -74,7 +74,7 @@ var __meta__ = {
 
         setOptions: function(options) {
             var that = this;
-            
+
             Widget.fn.setOptions.call(that, options);
 
             if (options.hasOwnProperty("reverse")) {

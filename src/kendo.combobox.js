@@ -2,7 +2,7 @@
     define([ "./kendo.list", "./kendo.mobile.scroller" ], f);
 })(function(){
 
-var __meta__ = {
+var __meta__ = { // jshint ignore:line
     id: "combobox",
     name: "ComboBox",
     category: "web",
@@ -42,12 +42,10 @@ var __meta__ = {
         STATEDISABLED = "k-state-disabled",
         ARIA_DISABLED = "aria-disabled",
         ARIA_READONLY = "aria-readonly",
-        STATE_SELECTED = "k-state-selected",
         STATE_FILTER = "filter",
         STATE_ACCEPT = "accept",
         STATE_REBIND = "rebind",
         HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
-        NULL = null,
         proxy = $.proxy;
 
     var ComboBox = Select.extend({
@@ -245,8 +243,6 @@ var __meta__ = {
         open: function() {
             var that = this;
             var state = that._state;
-            var focusedItem;
-            var index;
 
             if (that.popup.visible()) {
                 return;
@@ -276,7 +272,6 @@ var __meta__ = {
             var page = this.dataSource.page();
             var length = data.length;
             var dataItem;
-            var value;
 
             that._angularItems("compile");
 
