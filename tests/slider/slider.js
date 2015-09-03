@@ -309,6 +309,37 @@ test("slider should not modify input value with bg-BG culture", function () {
     kendo.culture("en-US");
 });
 
+test("should attach tick handlers when resize is called and slider is enabled", function () {
+    var change = false,
+        slider = newSlider({
+            min: 0,
+            max: 11,
+            largeStep: 1
+        });
+    slider.resize();
+    slider.bind("change", function(){
+        change = true;
+    });
+    slider.wrapper.find(".k-label").eq(1).trigger("mousedown");
+    equal(change, true);
+});
+
+test("should not call enable method when disbaled widget is resized", function () {
+    var change = false,
+        slider = newSlider({
+            min: 0,
+            max: 11,
+            largeStep: 1
+        });
+    slider.enable(false);
+    slider.resize();
+    slider.bind("change", function(){
+        change = true;
+    });
+    slider.wrapper.find(".k-label").eq(1).trigger("mousedown");
+    equal(change, false);
+});
+
 test("slider should render large ticks with min value bigger then 0 correctly", 3, function () {
     var slider = newSlider({ min: 1900, smallStep: 12, largeStep: 60, max: 2020 }, $("<input />"));
     var largeTicks = slider.wrapper.find(".k-tick-large");
