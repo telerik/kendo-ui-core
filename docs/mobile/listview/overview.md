@@ -282,3 +282,43 @@ Again if only several icons should be overridden, specify them with their classe
         visibility: hidden;
     }
 
+## Nova theme features
+
+### Tags
+
+To activate this feature add span with `km-badge` class.
+
+#### Mobile ListView tags example
+
+    <ul data-role="listview" data-style="inset">
+  		<li>
+     		<a>Home<span class="km-badge">NEW</span></a>
+  		</li>
+  		<li>
+     		Bar
+  		</li>
+	</ul>
+
+### Icons
+
+Icons shift the whole listview to right. The grouping headers are also indented. To activate this feature set `km-listview-icons` class.
+
+#### Mobile ListView icons example
+
+     <ul data-role="listview" class="km-listview-icons">
+       <li data-icon="downloads"><a href="#drawer-home">Inbox</a></li>
+       <li data-icon="favorites"><a href="#drawer-starred">Starred Items</a></li>        
+     </ul>
+
+### Thumbnails
+
+Thumbnails shift the whole listview to right. The grouping headers are also indented. To activate this feature set `km-thumbnail` to the images.
+
+#### Mobile ListView thumbnails example
+
+      <ul data-role="listview" class="km-listview-icons">
+        <li>
+          <img src="../content/web/foods/1.jpg" alt="Chai image" class="km-thumbnail">
+          <!-- ... -->
+        </li>
+      </ul>
