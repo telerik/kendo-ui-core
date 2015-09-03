@@ -5900,6 +5900,8 @@ A function that can be used to create a custom visual for the legend items. The 
 
 * options - the item options.
 * createVisual - a function that can be used to get the default visual.
+* series - the item series.
+* pointIndex - the index of the point in the series. Available for pie, donut and funnel series.
 
 #### Example - using custom visual for the legend items
 
