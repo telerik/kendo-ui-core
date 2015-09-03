@@ -118,7 +118,6 @@ var __meta__ = {
         },
 
         _resize: function() {
-            var that = this;
             this._setTrackDivWidth();
             this.wrapper.find(".k-slider-items").remove();
 
