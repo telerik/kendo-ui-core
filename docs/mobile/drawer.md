@@ -105,3 +105,21 @@ To do so, the navigational widget should have `data-rel="drawer"` and `href` att
     <div data-role="drawer" id="foo">
         ...
     </div>
+
+## Nova theme features
+
+### Nested ListView with different color scheme
+
+The ListView has different styling when placed in a Drawer.
+
+### Nested Vertical TabStrip
+
+To activate this feature set `km-vertical-tabstrip` class to the TabStrip placed in a Drawer.
+
+#### Nested Vertical TabStrip example
+	
+	<div data-role="drawer">
+        <div data-role="tabstrip" class="km-vertical-tabstrip">
+            <!-- ... -->
+        </div>
+    </div>

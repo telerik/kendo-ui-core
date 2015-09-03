@@ -89,3 +89,57 @@ By default the NavBar View Title is visible only in iOS and hidden in the rest o
     {
         visibility: visible;
     }
+
+## Nova theme features
+
+### Color schemes
+
+There are three predefined color schemes - light, dark (default) and accent. To apply different than the default color scheme set `km-light` or `km-accent` class.
+
+#### NavBar Light example
+
+     <header data-role="header">
+        <div data-role="navbar" class="km-light">
+            <!-- ... -->
+        </div>
+    </header>
+
+#### NavBar Accent example
+
+     <header data-role="header">
+        <div data-role="navbar" class="km-accent">
+            <!-- ... -->
+        </div>
+    </header>
+
+### Subtitle
+
+To activate this feature add span element with `km-view-subtitle` class into the NavBar.
+
+#### NavBar subtitle example
+
+     <header data-role="header">
+        <div data-role="navbar">
+            <!-- ... -->
+            <span class="km-view-subtitle">Subtitle</span>
+            <!-- ... -->
+        </div>
+    </header>
+
+### Nested ButtonGroup
+
+To achieve this outcome set `km-navbar-buttongroup` class and add ButtonGroup into the NavBar.
+
+#### NavBar subtitle example
+
+     <div data-role="navbar" class="km-navbar-buttongroup">
+           <!-- ... -->
+           <ul data-role="buttongroup" data-index="0">
+               <li>
+                   By Name
+               </li>
+               <li>
+                   By Family
+               </li>
+           </ul>
+      </div>
