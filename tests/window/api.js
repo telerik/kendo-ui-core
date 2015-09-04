@@ -900,7 +900,31 @@
         equal(dialog.options.title, newTitle);
     });
 
-    asyncTest("overlay is not hidden when showing second modal window after closing first", function() {
+    test("setOptions can toggle modality 1", 2, function () {
+        var dialog = createWindow({modal: false});
+
+        dialog.setOptions({ modal: true });
+
+        equal(dialog.wrapper.siblings(".k-overlay").filter(":visible").length, 1);
+
+        dialog.setOptions({ modal: false });
+
+        equal(dialog.wrapper.siblings(".k-overlay").filter(":visible").length, 0);
+    });
+
+    test("setOptions can toggle modality 2", 2, function () {
+        var dialog = createWindow({ modal: true });
+
+        dialog.setOptions({ modal: false });
+
+        equal(dialog.wrapper.siblings(".k-overlay").filter(":visible").length, 0);
+
+        dialog.setOptions({ modal: true });
+
+        equal(dialog.wrapper.siblings(".k-overlay").filter(":visible").length, 1);
+    });
+
+    asyncTest("overlay is not hidden when showing second modal window after closing first", function () {
         var dialog = createWindow({
             animation: { close: { duration: 500 } },
             modal: true
