@@ -13513,7 +13513,7 @@ The data item field which indicates whether to show the point category name in t
 
 ### series.visual `Function`
 
-A function that can be used to create a custom visual for the points. Applicable for bar, column, rangeBar, rangeColumn and waterfall series. The available argument fields are:
+A function that can be used to create a custom visual for the points. Applicable for bar, column, pie, donut, funnel, rangeBar, rangeColumn and waterfall series. The available argument fields are:
 
 * rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
 * options - the point options.
@@ -13525,6 +13525,12 @@ A function that can be used to create a custom visual for the points. Applicable
 * percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
 * runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
+* radius - the segment radius. Available for donut and pie series.
+* innerRadius - the segment inner radius. Available for donut series.
+* startAngle - the segment start angle. Available for donut and pie series.
+* endAngle - the segment end angle. Available for donut and pie series.
+* center - the segment center point. Available for donut and pie series.
+* points - the segment points. Available for funnel series.
 
 #### Example - using custom visual
 
