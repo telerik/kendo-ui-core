@@ -245,7 +245,7 @@ Although the Amazon CloudFront service provides for a reliable level of uptime s
 
 > You will be able to find more information on the topic at [Scott HanselMann - Fallback from CDN to Local Scripts](http://www.hanselman.com/blog/CDNsFailButYourScriptsDontHaveToFallbackFromCDNToLocalJQuery.aspx).
 
-## Customize Ypur Kendo UI Experience
+## Customize Your Kendo UI Experience
 
 This section will help you use the Kendo UI widgets, frameworks and functionalities that will best suit your project. For more details on how to do it, refer to the following chapters:
 
