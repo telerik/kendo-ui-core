@@ -392,6 +392,9 @@ var __meta__ = {
             this._resizable();
             this._draggable();
             this._actions();
+            if (typeof options.modal !== "undefined") {
+                this._overlay(options.modal);
+            }
         },
 
         events:[
