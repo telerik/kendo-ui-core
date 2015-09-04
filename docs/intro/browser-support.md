@@ -1,143 +1,54 @@
 ---
 title: Supported Browsers
-page_title: Supported browsers, Kendo UI web, Kendo UI mobile, Kendo UI DataViz, widgets, frameworks
+page_title: Supported browsers
 previous_url: /technical-requirements.html, /getting-started/technical-requirements, /browsers-support
 description: "Supported browsers, platform support and prerequisites for best performance when working with Kendo UI."
-position: 2
+position: 6
 ---
 
 # Supported Browsers
 
 Kendo UI widgets and frameworks are supported by a number of web browsers. In this section you will find which web browsers support the widgets and frameworks you need, as well as a couple of important notes related to the topic, and information on the supported operating systems and additional prerequisites. 
 
-* [Supported Desktop Browsers](...)  
-* [Supported Operating Systems](...)
-* [Other Prerequisites](...)
+* [Supported Desktop Browsers](http://docs.telerik.com/kendo-ui/browser-support#supported-desktop-browsers)  
+* [Supported Operating Systems](http://docs.telerik.com/kendo-ui/browser-support#supported-operating-systems)
+* [Other Prerequisites](http://docs.telerik.com/kendo-ui/browser-support#other-prerequisites)
 
 ## Supported Desktop Browsers
 
 ### Kendo UI Core and Web Widgets
 
-<table style="width:100%">
-<tbody>
-<tr>
-<th style="width:20%">Browser</th>
-<th>Supported Versions</th>
-</tr>
-
-<tr>
-<td>Internet Explorer</td>
-<td>7 or later</td>
-</tr>
-
-<tr>
-<td>Chrome</td>
-<td>21 or later</td>
-</tr>
-
-<tr>
-<td>Firefox</td>
-<td>[Current and ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history) ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/))</td>
-</tr>
-
-<tr>
-<td>Opera</td>
-<td>15 or later</td>
-</tr>
-
-<tr>
-<td>OS X Safari</td>
-<td>[6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)</td>
-</tr>
-
-</tbody>
-</table>
+| Browser			| Supported Versions			|
+| :---------------- | :---------------------------: | 
+| Internet Explorer | 7 or later					|
+| Chrome          	| 21 or later					|
+| Firefox          	| [Current and ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history) ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/))|
+| Opera	        	| 15 or later					|
+| OS X Safari    	| [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
 
 ### Kendo UI Mobile Widgets
 
-<table style="width:100%">
-<tbody>
-<tr>
-<th style="width:20%">Browser</th>
-<th>Supported Versions</th>
-</tr>
-
-<tr>
-<td>Internet Explorer</td>
-<td>10 or later</td>
-</tr>
-
-<tr>
-<td>Chrome</td>
-<td>21 or later</td>
-</tr>
-
-<tr>
-<td>Firefox</td>
-<td>Not supported</td>
-</tr>
-
-<tr>
-<td>Opera</td>
-<td>15 or later</td>
-</tr>
-
-<tr>
-<td>OS X Safari</td>
-<td>[6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)</td>
-</tr>
-
-</tbody>
-</table>
+| Browser			| Supported Versions			|
+| :---------------- | :---------------------------: | 
+| Internet Explorer | 10 or later					|
+| Chrome          	| 21 or later					|
+| Firefox          	| Not supported					|
+| Opera	        	| 15 or later					|
+| OS X Safari    	| [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
 
 ### Kendo UI DataViz Widgets
 
 ##### Fully Supported Desktop Browsers 
 
-<table style="width:100%">
-<tbody>
-<tr>
-<th style="width:20%">Browser</th>
-<th>Supported Versions</th>
-</tr>
-
-<tr>
-<td>Internet Explorer</td>
-<td>9 or later</td>
-</tr>
-
-<tr>
-<td>Chrome</td>
-<td>21 or later</td>
-</tr>
-
-<tr>
-<td>Firefox</td>
-<td>[Current and ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history) ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/))</td>
-</tr>
-
-<tr>
-<td>Opera</td>
-<td>15 or later</td>
-</tr>
-
-<tr>
-<td>OS X Safari</td>
-<td>[6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)</td>
-</tr>
-
-<tr>
-<td>iOS Safari</td>
-<td>iOS 8 and later</td>
-</tr>
-
-<tr>
-<td>Chrome for Mobile</td>
-<td>21 or later</td>
-</tr>
-
-</tbody>
-</table>
+| Browser			| Supported Versions			|
+| :---------------- | :---------------------------: | 
+| Internet Explorer | 9 or later					|
+| Chrome          	| 21 or later					|
+| Firefox          	| [Current and ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history) ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/))|
+| Opera	        	| 15 or later					|
+| OS X Safari    	| [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
+| iOS Safari		| iOS 8 and later				|
+| Chrome for Mobile | 21 or later					|
 
 ##### Desktop Browsers with Limited Support
 
@@ -167,62 +78,23 @@ Internet Explorer 10 is supported with the following limitations:
 
 ### Internet Explorer As an Embedded Browser in a Desktop Application
 
-Internet Explorer behaves differently when embedded inside a desktop (WinForms) application. It reports to support pointer events, but actually doesn't. As a result, some events, on which Kendo UI relies, are not fired. In order to avoid this problem, the following JavaScript code must be executed **before the Kendo UI scripts are registered**:
+Internet Explorer behaves differently when embedded inside a desktop (WinForms) application. It reports to support pointer events, but actually doesn't. As a result, some events, on which Kendo UI relies, are not fired. In order to avoid this problem, the following JavaScript code must be executed before the Kendo UI scripts are registered:
 
     window.MSPointerEvent = null;
     window.PointerEvent = null;
 
 ## Supported Operating Systems
 
-<table style="width:100%">
-<tbody>
-<tr>
-<th>Platform</th>
-<th>Version</th>
-</tr>
-
-<tr>
-<td>Windows</td>
-<td>XP or later</td>
-</tr>
-
-<tr>
-<td>Windows Server</td>
-<td>Server 2003 or later</td>
-</tr>
-
-<tr>
-<td>OS X</td>
-<td>10.5 or later</td>
-</tr>
-
-<tr>
-<td>Android</td>
-<td>2.3 or later</td>
-</tr>
-
-<tr>
-<td>iOS</td>
-<td>6.0 or later</td>
-</tr>
-
-<tr>
-<td>BlackBerry</td>
-<td>10.0 or later</td>
-</tr>
-
-<tr>
-<td>Windows Phone</td>
-<td>8.0 or later</td>
-</tr>
-
-<tr>
-<td>Chrome for Mobile</td>
-<td>Any version</td>
-</tr>
-
-</tbody>
-</table>
+| Platform			| Version						|
+| :---------------- | :---------------------------: | 
+| Windows			| XP or later					|
+| Windows Server  	| Server 2003 or later			|
+| OS X          	| 10.5 or later					|
+| Android        	| 2.3 or later					|
+| iOS		    	| 6.0 or later					|
+| BlackBerry        | 10.0 or later					|
+| Windows Phone    	| 8.0 or later					|
+| Chrome for Mobile	| Any version					|
 
 ### Important Notes
 

@@ -1,8 +1,8 @@
 ---
 title: Welcome to Kendo UI
-page_title: HTML5, jQuery-based framework | Kendo UI
+page_title: Welcome to Kendo UI
 description: "Kendo UI framework overview: UI components, rich data visualization framework, auto-adaptive mobile widgets and all tools for building rich web applications."
-previous_url: /index, /
+previous_url: /index
 position: 1
 ---
 
@@ -12,9 +12,9 @@ On our documentation website you will find the information you need to configure
  
 This section will give you an insight into Kendo UI in the following chapters:  
 
-*	[Overview](...)
-*	[Next Steps](...)
-*	[Further References](...)
+*	[Overview](http://docs.telerik.com/KENDO-UI/introduction#overview)
+*	[Next Steps](http://docs.telerik.com/KENDO-UI/introduction#next-steps)
+*	[Further References](http://docs.telerik.com/KENDO-UI/introduction#further-references)
 
 ## Overview
 
@@ -28,14 +28,14 @@ Kendo UI comes in several different bundles:
 * [Telerik UI for JSP](http://docs.telerik.com/kendo-ui/jsp/introduction) supports Kendo UI Professional and the JSP wrappers that are relevant to all available web and DataViz widgets 
 * [Telerik UI for PHP](http://docs.telerik.com/kendo-ui/php/introduction) consists of Kendo UI Professional and the PHP wrappers suited for all available web and DataViz widgets
 
-Kendo UI tools, widgets and frameworks fully handle the needs of many browsers and provide for a responsive web design. Find the full list of supported browsers and operating systems on [Supported Browsers](...).
+Kendo UI tools, widgets and frameworks fully handle the needs of many browsers and provide for a responsive web design. Find the full list of supported browsers and operating systems on [Supported Browsers](http://docs.telerik.com/kendo-ui/intro/browser-support).
 
-Get more information about the widgets and frameworks supported by each bundle on [Bundle Support for Kendo UI Widgets and Frameworks](...).   
+Get more information about the widgets and frameworks supported by each bundle on [Bundle Support for Kendo UI Widgets and Frameworks](http://docs.telerik.com/kendo-ui/intro/list-of-widgets).   
 
 ## Next Steps
 
-* [JavaScript Prerequisites](...)
-* [Getting Started](...)
+* [JavaScript Prerequisites](http://docs.telerik.com/kendo-ui/intro/prerequisites)
+* [Getting Started with Kendo UI](http://docs.telerik.com/kendo-ui/intro/getting-started)
 * [Initialize a Kendo UI Widget As a jQuery Plug-In](http://docs.telerik.com/kendo-ui/basics/jquery-initialization#initialize-a-kendo-ui-widget-using-the-jquery-plugin-syntax)
 * [Initialize a Kendo UI Widget from Markup](http://docs.telerik.com/kendo-ui/basics/markup)
 * [Call Widget Methods and Bind to Widget Events](http://docs.telerik.com/kendo-ui/basics/events-and-methods)
