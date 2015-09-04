@@ -387,6 +387,11 @@ The same as `selectable: true`
 When multiple selection is enabled, it is possible to select multiple rows/cells by dragging the mouse cursor to select them similar to the way you would select a block of text.
 
 > Selection is not persisted when the Grid is rebound, i.e. when paging, filtering, sorting, editing or virtual scrolling occurs.
+This behavior can be achieved with a custom implementation, as shown at [How to Persist Row Selection while Paging](/web/grid/how-to/Selection/persist-row-selection-while-paging).
+
+> Selection performance may decrease when the page size is too large or if no paging is used, and the Grid renders hundreds or thousands of items. This is most noticeable in 
+Internet Explorer. Grouping, hierarchy and frozen columns also have a negative impact on the selection performance, because these features make the Grid's HTML output more complex.
+Using paging and a reasonable page size is recommended.
 
 ### Paging
 
