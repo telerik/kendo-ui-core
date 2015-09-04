@@ -86,6 +86,18 @@ specified that the DataSource should make HTTP GET requests via the `Type` setti
         return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
     }
 
+### Templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions
+
+This exception can occur if an editable Grid is bound to a `DataTable`. The reason is that ASP.NET MVC's `EditorFor` does not support dynamic data types.
+
+#### Solution: Use a Popup edit form with editor templates.
+
+* [Example: MVC Grid Popup Editing](http://demos.telerik.com/aspnet-mvc/grid/editing-popup)
+* [Example: Bind the Grid for ASP.NET MVC to a DataTable](/aspnet-mvc/helpers/grid/how-to/grid-bind-to-datatable)
+* [Documentation: MVC Grid Editor Templates](/aspnet-mvc/helpers/grid/editor-templates) - use a separate editor template for each data field
+* [Documentation: Grid TemplateName setting](/api/aspnet-mvc/kendo.mvc.ui.fluent/grideditingsettingsbuilder#methods-TemplateName(System.String)) - use it
+to set a single edit form template for the whole edit form
+
 ## The grid does not display numbers and dates in the right format for my culture
 
 By default Kendo UI Grid formats dates and numbers using the **en-US** culture. To change the culture include the JavaScript for your culture and then call `kendo.culture`.
