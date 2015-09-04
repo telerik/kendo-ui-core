@@ -331,3 +331,23 @@ The Flat skin shipped with Kendo UI Mobile Q2 2013, was created to provide maxim
         border-color: #ff6363;
     }
 
+## Nova theme features
+
+### Generic content styles
+
+Nova theme provides predefined generic styles for **h1, h2, h3, h4 ,h5, h6** and **p** elements which are in a mobile view.
+
+### Font weights
+
+Nova theme provides three predefined font weights - light, medium and bold. To activate them use `km-light-font`, `km-medium-font` or `km-bold-font` classes.
+
+#### Font weights example
+	
+	<div data-role="view" data-title="Typography">	
+		<!-- h1 with bold font weight -->	
+		<h1 class="km-bold-font">Bold Heading 1</h1>
+		<!-- h1 with medium font weight -->
+		<h1 class="km-medium-font">Medium Heading 1</h1>
+		<!-- h1 with light font weight -->	
+		<h1 class="km-light-font">Heading 1</h1>
+	</div>
