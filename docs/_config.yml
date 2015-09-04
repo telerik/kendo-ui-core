@@ -5,11 +5,16 @@ url: "http://docs.telerik.com/kendo-ui"
 exclude: [readme.md, Gemfile, Gemfile.lock,api_sort.rb]
 navigation:
 ## List your directory names and order here, like this:
+    "introduction":
+        title: "Introduction"        
+    "intro":
+        title: "Getting Started"
+        position: 2
     "*excel":
         title: "Excel"
     "*how-to":
         title: "How To"
-        position: 1
+        position: 1        
     "framework/datasource":
         title: "DataSource"
         position: 1
