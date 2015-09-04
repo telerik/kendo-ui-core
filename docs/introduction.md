@@ -8,82 +8,43 @@ position: 1
 
 # Welcome to Kendo UI
 
-Kendo UI is an HTML5, jQuery-based framework for building modern web apps. The framework features lots of UI widgets, a
-rich data visualization framework, an auto-adaptive mobile framework, and all the tools needed for HTML5 app
-development, such as data source, templates, MVVM, drag-and-drop component, and more.
+On our documentation website you will find the information you need to configure and customize your Kendo UI so you can fully enjoy the rich functionalities of Kendo UI widgets and powerful frameworks.  
+ 
+This section will give you an insight into Kendo UI in the following chapters:  
+
+*	[Overview](...)
+*	[Next Steps](...)
+*	[Further References](...)
+
+## Overview
+
+Kendo UI is an HTML5, jQuery-based framework for building high-performance applications using the latest web standards. The framework features a great number of template UI widgets, a rich data-visualization framework, an auto-adaptive mobile framework, and all the tools needed for an HTML5 application development, such as data source, templates, MVVM, drag-and-drop component, and many more. 
 
 Kendo UI comes in several different bundles:
 
-* Kendo UI Core - free open source version of Kendo UI, licensed under Apache 2.0. Includes web, mobile widgets, and
-  framework features.
-* Kendo UI Professional - includes web, data visualisation, mobile widgets, and framework features.
-* Telerik UI for ASP.NET MVC - Kendo UI Professional plus ASP.NET MVC wrappers for all available widgets.
-* Telerik UI for JSP - Kendo UI Professional plus JSP wrappers for the available web and dataviz widgets.
-* Telerik UI for PHP - Kendo UI Professional plus PHP wrappers for the available web and dataviz widgets.
+* Telerik Kendo UI<sup>®</sup> Core is a free, open source version of Kendo UI and is licensed under Apache 2.0. Kendo UI Core includes web and mobile widgets as well as framework features.
+* Telerik Kendo UI<sup>®</sup> Professional combines web, data visualization (DataViz) and mobile widgets with framework features
+* [Telerik UI for ASP.NET MVC](http://docs.telerik.com/kendo-ui/aspnet-mvc/introduction) supplies Kendo UI Professional and the ASP.NET MVC wrappers that are applicable to all available Kendo UI widgets
+* [Telerik UI for JSP](http://docs.telerik.com/kendo-ui/jsp/introduction) supports Kendo UI Professional and the JSP wrappers that are relevant to all available web and DataViz widgets 
+* [Telerik UI for PHP](http://docs.telerik.com/kendo-ui/php/introduction) consists of Kendo UI Professional and the PHP wrappers suited for all available web and DataViz widgets
 
-## Server-Side Wrappers
+Kendo UI tools, widgets and frameworks fully handle the needs of many browsers and provide for a responsive web design. Find the full list of supported browsers and operating systems on [Supported Browsers](...).
 
-Kendo UI provides server-side wrappers for ASP.NET, PHP and JSP. Those are classes (ASP.NET and PHP) or XML tags (JSP)
-which generate the Kendo UI widgets from a server-side code.
-
-You can find more info about the server-side wrappers here:
-
-- [Get Started with Telerik UI for ASP.NET MVC](/aspnet-mvc/introduction)
-- [Get Started with Telerik UI for JSP](/jsp/introduction)
-- [Get Started with Telerik UI for PHP](/php/introduction)
+Get more information about the widgets and frameworks supported by each bundle on [Bundle Support for Kendo UI Widgets and Frameworks](...).   
 
 ## Next Steps
 
-### Kendo UI videos
+* [JavaScript Prerequisites](...)
+* [Getting Started](...)
+* [Initialize a Kendo UI Widget As a jQuery Plug-In](http://docs.telerik.com/kendo-ui/basics/jquery-initialization#initialize-a-kendo-ui-widget-using-the-jquery-plugin-syntax)
+* [Initialize a Kendo UI Widget from Markup](http://docs.telerik.com/kendo-ui/basics/markup)
+* [Call Widget Methods and Bind to Widget Events](http://docs.telerik.com/kendo-ui/basics/events-and-methods)
+* [Introduction to UI for ASP .NET MVC](http://docs.telerik.com/kendo-ui/aspnet-mvc/introduction)
+* [Introduction to UI for JSP](http://docs.telerik.com/kendo-ui/jsp/introduction)
+* [Introduction to UI for PHP](http://docs.telerik.com/kendo-ui/php/introduction)
 
-You can watch the videos in the [Kendo UI YouTube channel](http://www.youtube.com/kendouitv).
+## Further References
 
-### Kendo UI Dojo
-
-Several interactive tutorials are available in the [Kendo UI Dojo](http://dojo.telerik.com).
-
-### Further Reading
-
-1. [Use Kendo UI from CDN](/install/cdn)
-1. [Host Kendo UI in your project](/install/onsite)
-
-### Examples
-
-1. [Online demos](http://demos.telerik.com/kendo-ui)
-1. [Code library projects](http://www.telerik.com/support/code-library)
-
-### GitHub Public Example Repositories
-
--   [ASP.NET MVC examples](https://github.com/telerik/kendo-examples-asp-net-mvc/)
--   [UI for MVC examples](https://github.com/telerik/ui-for-aspnet-mvc-examples)
--   [ASP.NET WebForms examples](https://github.com/telerik/kendo-examples-asp-net/)
--   [JSP examples](https://github.com/telerik/kendo-examples-java)
--   [Kendo Mobile Sushi](https://github.com/telerik/kendo-mobile-sushi)
--   [PHP examples](https://github.com/telerik/kendo-examples-php)
-
-## Help Us Improve Kendo UI Documentation, Samples, Tutorials and Demos
-
-The Kendo UI team would love your help to improve the documentation. We encourage you to contribute in the way that you
-choose:
-
-### Submit a New Issue at GitHub
-
-[Open](https://github.com/telerik/kendo-docs/issues?state=open) a new issue on the topic if it does not exist already.
-
-When creating an issue, please provide a descriptive title, be as specific as possible and link to the document in
-question. If you can provide a link to the closest anchor to the issue, that is even better.
-
-### Update the Documentation at GitHub
-
-This is the most direct method. Follow [the contribution instructions](https://github.com/telerik/kendo-docs/blob/master/README.md). The basic steps
-are that you fork our documentation and submit a pull request. That way you may contribute to exactly where you found the error. After that, our technical
-writing team just needs to approve your change request. Please use only standard markdown and follow the directions at the link. If you find an issue
-in the docs, or even feel like creating new content, we are happy to have your contributions!
-
-### Forums
-
-You can visit the [Kendo UI Forums](http://www.telerik.com/forums) and leave feedback. This method will take a bit longer to reach our documentation
-team, but if you like the accountability of forums and need a fast reply from our support team, leaving feedback in the Kendo UI forums guarantees
-that your suggestion has a support number and that we will follow up on it.
-
-Thank you for contributing to the Kendo UI community!
+* [Kendo UI YouTube Channel](https://www.youtube.com/user/kendouiTV)
+* Try it yourself on [Kendo UI Dojo](http://dojo.telerik.com/) where a number of interactive tutorials are also available 
+* Discuss, browse and read more about Kendo UI widgets and frameworks on the [Kendo UI Code Library](http://www.telerik.com/support/code-library) page 
