@@ -1074,7 +1074,7 @@ In this case, the `length` of the response `Array` will be used.
     var dataSource = new kendo.data.DataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       serverGrouping: true,
       schema: {
         total: "total" // total is returned in the "total" field of the response
@@ -1088,7 +1088,7 @@ In this case, the `length` of the response `Array` will be used.
     var dataSource = new kendo.data.DataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       serverGrouping: true,
       schema: {
         total: function(response) {
