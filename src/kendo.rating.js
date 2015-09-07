@@ -22,7 +22,7 @@
             kendo = window.kendo,
             ui = kendo.ui,
             Widget = ui.Widget,
-            SPAN = 'span',
+            //SPAN = 'span',
             NUMBER = 'number',
             STAR = 'star',
             STAR_P = '&#x2605;',
@@ -160,7 +160,7 @@
                 that._clear();
                 input.wrap('<span class="k-widget k-rating"/>');
                 input.hide();
-                input.on(CHANGE + NS, function(e) {
+                input.on(CHANGE + NS, function() {
                     // update widget
                     that.refresh();
                     that.trigger(CHANGE, { value: parseFloat(input.val()) });
@@ -212,7 +212,7 @@
              * Refreshes the widget
              * @method refresh
              */
-            refresh: function (e) {
+            refresh: function () {
                 var that = this,
                     options = that.options;
                 if (that.wrapper) {
