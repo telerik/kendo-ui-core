@@ -8,6 +8,14 @@
 
     'use strict';
 
+    var __meta__ = { // jshint ignore:line
+        id: "rating",
+        name: "Rating",
+        category: "web",
+        description: "The Rating provides a set of clickable stars to display/record an integer value representing a satisfaction mark",
+        depends: [ "binder" ]
+    };
+
     // TODO: update for angular
     // TODO: check touch interfaces
     // TODO: Add tooltip with value and/or description
