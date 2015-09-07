@@ -174,6 +174,8 @@ The connection model has the following fields:
 * fromY `Number` - the connection from y position. (If from is set this position will not be applied)
 * toX `Number` - the connection to x position. (If from is set this position will not be applied)
 * toY `Number` - the connection to y position. (If from is set this position will not be applied)
+* fromConnector `String` - the name of the source shape connector.
+* toConnector `String` - the name of the target shape connector.
 
 Each field will be updated with user interaction. ConnectionsDataSource model definition:
 
@@ -213,6 +215,14 @@ Each field will be updated with user interaction. ConnectionsDataSource model de
 		  toY: {
 		    // The 'ToY' server-side field is mapped to the 'toY' client-side field
 		    from: "ToY", type: "number"
+		  },
+		  fromConnector: {
+		    // The 'FromConnector' server-side field is mapped to the 'fromConnector' client-side field
+		    from: "FromConnector", type: "string"
+		  },
+		  toConnector: {
+		    // The 'ToConnector' server-side field is mapped to the 'toConnector' client-side field
+		    from: "ToConnector", type: "string"
 		  }
 		}
 	  }
