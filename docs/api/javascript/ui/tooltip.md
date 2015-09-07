@@ -184,6 +184,8 @@ Defines the animation duration.
 The text or a function which result will be shown within the Tooltip.
 By default the Tooltip will display the target element title attribute content.
 
+> If the content passed to the Tooltip includes scripts, they will be executed. If this is not desired, make sure to strip any undesired content in advance.
+
 #### Example - extract the content from target element content
 
     <div id="container">

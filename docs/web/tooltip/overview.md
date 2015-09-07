@@ -70,8 +70,8 @@ Among the properties that can be controlled:
 
 ## Loading Tooltip content via AJAX
 
-A **Tooltip** provides built-in support for asynchronously loading content from a URL. This URL
-should return a HTML fragment that can be loaded in a Tooltip content area.
+A **Tooltip** provides built-in support for asynchronously loading content from a URL. This URL should return a HTML fragment that can be loaded in a Tooltip content area.
+If the content passed to the Tooltip includes scripts, they will be executed.
 
 ### Load Tooltip content asynchronously
 
@@ -87,7 +87,6 @@ should return a HTML fragment that can be loaded in a Tooltip content area.
 
 ## Accessing an Existing Tooltip
 
-
 You can reference an existing **Tooltip** instance via
 [jQuery.data()](http://api.jquery.com/jQuery.data/). Once a reference has been established, you can
 use the API to control its behavior.
@@ -95,5 +94,4 @@ use the API to control its behavior.
 ### Accessing an existing Tooltip instance
 
     var tooltip = $("#target").data("kendoTooltip");
-
 
