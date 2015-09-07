@@ -9,8 +9,9 @@ position: 1
 
 # Using Kendo with AngularJS
 
-Kendo UI can be used seamlessly with AngularJS. The two frameworks have some overlapping features though.
-If you are using AngularJS then you probably want to use Angular's own routing mechanism and data binding. Do not mix that with Kendo MVVM.
+Kendo UI can be used seamlessly with AngularJS. The integration between both frameworks is baked-in via AngularJS directives for the Kendo UI widgets, which are part of the product distribution and officially supported by our team. Thus you can benefit from the features available in Angular such as declarative data binding, routing, form validation, etc. and employ them when building beautiful and responsive UIs with Kendo UI.
+
+Read on below to learn more about the integration between Kendo UI and AngularJS, and visit [this page](http://www.telerik.com/kendo-ui/angularjs-and-kendo-ui-framework-integration "Kendo UI and AngularJS integration") on our site for more info.
 
 - [Creating widgets the Angular way](#creating-widgets-the-angular-way)
 - [Widget options in HTML](#widget-options-in-html)
@@ -28,7 +29,7 @@ If you are using AngularJS then you probably want to use Angular's own routing m
 
 > AngularJS Kendo UI widget initialization is not designed to be combined with the Kendo UI server wrappers.
 Using wrappers is equivalent to [jQuery plugin syntax initialization](/basics/jquery-initialization).
-If you want to create Kendo UI widget instances with AngularJS, then do not use server wrappers for these instances.
+If you want to create Kendo UI widget instances with AngularJS, then do not use server wrappers for these instances. Also have in mind that the two frameworks have some overlapping features (like Angular binding and Kendo UI MVVM) which should not be mixed.
 
 ## Using Angular-Kendo bindings
 
@@ -251,6 +252,8 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 ```
 
 The directive will update the `birthday` variable with the selected `Date` object whenever the `change` event occurs on the widget.
+
+**Note**: If you are using AngularJS then you probably want to use Angular's own routing mechanism and data binding. Do not mix that with Kendo UI MVVM.
 
 ### The k-value-primitive attribute
 
