@@ -4,8 +4,29 @@ page_title: Draw a piece of HTML available in the DOM
 position: 51
 ---
 
-# HTML-drawing API
+# Drawing HTML elements
 
+The Drawing API allows you to convert an existing page, or part of it, to drawing primitives.
+
+This allows you to further process the content and to export it various formats such as PDF, SVG and PNG.
+
+### Table of Contents
+
+* [HTML Drawing API](#html-drawing-api)
+* [Custom fonts and PDF](#custom-fonts-and-pdf)
+* [Multi-page PDF output](#multi-page-pdf-output)
+    * [Example - draw a multi-page Grid](#example---draw-a-multi-page-grid)
+* [Automatic page breaking](#automatic-page-breaking-q1-2015)
+    * [Page break limitations](#page-break-limitations)
+* [Page template (headers and footers)](#page-template-headers-and-footers)
+* [Customizing the looks](#customizing-the-looks)
+    * [The .k-pdf-export class](#the-k-pdf-export-class)
+    * [The &lt;kendo-pdf-document&gt; element](#the-kendo-pdf-document-element)
+* [Dimensions and CSS units for PDF output](#dimensions-and-css-units-for-pdf-output)
+* [Known limitations](#known-limitations)
+* [Supported browsers](#supported-browsers)
+
+### HTML Drawing API
 Using the `drawing.drawDOM` function you can draw a DOM element into a [drawing.Group](/api/dataviz/drawing/group), which you can then render with one of the supported backends into SVG, PDF, HTML5 `<canvas>` or VML.
 
 The DOM element must be appended to the document and must be visible (i.e. you cannot draw an element which has `display: none` or `visibility: hidden`, etc.).  For example if you have this HTML in the page:
@@ -307,7 +328,7 @@ do with CSS or display resolution.
 `"The document could not be saved. There was a problem reading(23)"`. The solution is to open Acrobat Reader options (Edit → Preferences) and in the "Documents" section uncheck “Save As optimizes for Fast Web View”, which is enabled by default. After this, Save As will work without errors.
 
 
-## Supported browsers
+### Supported browsers
 
 The HTML renderer has been tested in recent versions of Chrome, Firefox, Safari, Blink-based Opera, Internet Explorer 9 or later.
 
