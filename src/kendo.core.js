@@ -1852,6 +1852,29 @@ function pad(number, digits, end) {
         return overflow == "auto" || overflow == "scroll";
     }
 
+    function scrollLeft(element, value) {
+        var el = element instanceof $ ? element[0] : element;
+        var isRtl = support.isRtl(element);
+        var webkit = support.browser.webkit;
+        var mozila = support.browser.mozilla;
+
+        if (value !== undefined) {
+            if (isRtl && webkit) {
+                el.scrollLeft = el.scrollWidth - el.clientWidth - value;
+            } else if (isRtl && mozila) {
+                el.scrollLeft = -value;
+            } else {
+                el.scrollLeft = value;
+            }
+        } else {
+            if (isRtl && webkit) {
+                return el.scrollWidth - el.clientWidth - el.scrollLeft;
+            } else {
+                return Math.abs(el.scrollLeft);
+            }
+        }
+    }
+
     (function () {
         support._scrollbar = undefined;
 
@@ -2501,6 +2524,7 @@ function pad(number, digits, end) {
         deepExtend: deepExtend,
         getComputedStyles: getComputedStyles,
         isScrollable: isScrollable,
+        scrollLeft: scrollLeft,
         size: size,
         toCamelCase: toCamelCase,
         toHyphens: toHyphens,
