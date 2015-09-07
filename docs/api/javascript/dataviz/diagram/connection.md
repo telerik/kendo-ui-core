@@ -9,6 +9,30 @@ Connections are usually created by calling [connect](/api/dataviz/diagram#method
 
 ## Configuration
 
+### content `Object`
+
+Defines the label displayed on the connection path.
+
+### content.template `String|Function`
+
+The [template](/api/javascript/kendo#methods-template) which renders the labels.
+
+The fields which can be used in the template are:
+
+* dataItem - the data item, in case a field has been specified
+
+### content.text `String`
+
+The static text displayed on the connection.
+
+### content.visual `Function`
+
+A function returning a visual element to render for the content of a connection.
+
+### fromConnector `String` *(default: "Auto")*
+
+Specifies the name of the source shape connector that should be used by default.
+
 ### stroke `Object`
 
 Defines the stroke configuration.
@@ -215,6 +239,10 @@ Sets the Y coordinate of the point.
 ### selectable `Boolean` *(default: true)*
 
 Specifies if the connection can be selected.
+
+### toConnector `String` *(default: "Auto")*
+
+Specifies the name of the target shape connector that should be used by default.
 
 ### type `String`
 

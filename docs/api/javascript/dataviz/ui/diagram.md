@@ -94,6 +94,10 @@ The fields which can be used in the template are:
 
 The static text displayed on the connection.
 
+### connectionDefaults.content.visual `Function`
+
+A function returning a visual element to render for the content of a connection.
+
 ### connectionDefaults.editable `Boolean|Object` *(default: true)*
 
 Defines the editing behavior of the connections.
@@ -180,6 +184,10 @@ The supported values are:
 * "none": no cap
 * "ArrowEnd": a filled arrow
 * "FilledCircle": a filled circle
+
+### connectionDefaults.fromConnector `String` *(default: "Auto")*
+
+Specifies the name of the source shape connector that should be used by default.
 
 ### connectionDefaults.hover `Object`
 
@@ -333,6 +341,10 @@ Defines the stroke or line color of the connection.
 
 Defines the stroke width of the connection.
 
+### connectionDefaults.toConnector `String` *(default: "Auto")*
+
+Specifies the name of the target shape connector that should be used by default.
+
 ### connectionDefaults.type `String` *(default: "cascading")*
 
 Specifies the connections type. The supported values are `"polyline"` and `"cascading"`.
@@ -356,6 +368,10 @@ The fields which can be used in the template are:
 ### connections.content.text `String`
 
 The text displayed for the connection.
+
+### connections.content.visual `Function`
+
+A function returning a visual element to render for the content of the connection.
 
 ### connections.editable `Boolean|Object` *(default: true)*
 
@@ -459,6 +475,10 @@ Defines the x-coordinate of the connection source.
 ### connections.from.y `Number`
 
 Defines the y-coordinate of the connection source.
+
+### connections.fromConnector `String` *(default: "Auto")*
+
+Specifies the name of the source shape connector that should be used by default.
 
 ### connections.hover `Object`
 
@@ -630,6 +650,10 @@ Defines the point x value.
 ### connections.to.y `Number`
 
 Defines the point y value.
+
+### connections.toConnector `String` *(default: "Auto")*
+
+Specifies the name of the target shape connector that should be used by default.
 
 ### connections.type `String`
 
