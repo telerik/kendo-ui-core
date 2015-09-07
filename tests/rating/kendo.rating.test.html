@@ -1,0 +1,37 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>kendo.rating.test</title>
+    <link href="mocha.css" rel="stylesheet" />
+    <script src="mocha.js"></script>
+    <script src="chai.js"></script>
+    <script src="sinon.js"></script>
+    <script src="sinon-chai.js"></script>
+    <!--script src="../vendor/blanket.min.js" data-cover-adapter="../vendor/mocha-blanket.js"></script-->
+    <!--script src="../vendor/blanket.min.js" data-cover-flags="debug" data-cover-adapter="../vendor/mocha-blanket.js"></script-->
+    <script src="../../src/jquery.min.js"></script>
+    <script src="jquery.simulate.js"></script>
+    <script src="chai-jquery.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.data.js"></script>
+    <script src="../../src/kendo.binder.js"></script>
+    <script>
+        mocha.setup('bdd');
+        mocha.timeout(10000);
+    </script>
+    <!-- Rating requirements -->
+    <link href="../../styles/kendo.rating.css" rel="stylesheet" />
+    <script src="../../src/kendo.rating.js" data-cover></script>
+</head>
+<body>
+<div id="mocha"></div>
+<div id="fixtures"></div>
+<script src="kendo.rating.test.js"></script>
+<script>
+    mocha.checkLeaks().globals(['_jb_debug_helper', 'jQuery', 'kendo', 'chai', 'sinon']);
+    if (!window.blanket && !window.PHANTOMJS) {
+        mocha.run();
+    }
+</script>
+</body>
+</html>

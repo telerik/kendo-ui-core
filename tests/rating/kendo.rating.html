@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rating</title>
+    <script src="../../src/jquery.min.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.data.js"></script>
+    <script src="../../src/kendo.binder.js"></script>
+    <!-- Rating requirements -->
+    <link href="../../styles/kendo.rating.css" rel="stylesheet" />
+    <script src="../../src/kendo.rating.js"></script>
+    <style>
+        .big {
+            font-size: 32px;
+        }
+        .small {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+<h1>Rating</h1>
+<h2>Rating unbound</h2>
+<div>Value:<input id="rating" data-role="rating" type="number" value="2" readonly /></div>
+<h2>Rating bound to observable</h2>
+<div>Value:<input id="numbox" type="number" data-bind="value: rating" /></div>
+<div>
+    <input type="checkbox" data-bind="checked: visible" />Visible&nbsp;
+    <input type="checkbox" data-bind="checked: enabled" />Enabled
+</div>
+
+<div class="big"><input id="rating1" min="0" max="5" data-role="rating" data-bind="value: rating, visible: visible, enabled: enabled" /></div>
+<div class="small"><input id="rating2" step="0.5" data-role="rating" data-bind="value: rating, visible: visible, enabled: enabled" ></div>
+
+<pre>
+    {
+        value: <span data-bind="text: rating"></span>,
+        visible: <span data-bind="text: visible"></span>,
+        enabled: <span data-bind="text: enabled"></span>
+    }
+</pre>
+
+<script>
+    ;(function(window, $, undefined){
+
+        'use strict';
+
+        var kendo = window.kendo;
+
+        $(document).ready(function () {
+
+            var viewModel = kendo.observable({
+                rating: 3,
+                visible: true,
+                enabled: true
+            });
+
+            kendo.bind($('body'), viewModel);
+        });
+
+
+    }(this, jQuery));
+</script>
+</body>
+</html>
