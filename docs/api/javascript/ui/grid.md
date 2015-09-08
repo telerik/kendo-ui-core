@@ -1302,7 +1302,7 @@ is displayed in the column header cell.
       dataSource: [ { name: "Jane Doe" }, { name: "John Doe" } ]
     });
     </script>
-    
+
 #### Example - column header template as a Kendo UI template function with conditional logic
     <div id="grid"></div>
     <script>
@@ -5320,6 +5320,7 @@ Sets the title of the PDF file.
 ### reorderable `Boolean` *(default:false)*
 
 If set to `true` the user could reorder the columns by dragging their header cells. By default reordering is disabled.
+Multi-level headers allow reordering only in same level.
 
 #### Example - enable column reordering
 
@@ -6923,7 +6924,7 @@ Sets the options of the Grid. Use this method if you want to enable/disable a pa
 the complete state obtained previously with the [`getOptions`](#methods-getOptions) method.
 
 > There are three important things to keep in mind when using `getOptions` and `setOptions`.
-> 
+>
 > * **calling `setOptions()` in a Grid event handler is not possible.**
 > * `JSON.stringify()` cannot serialize function references (e.g. event handlers), so if stringification is used for the retrieved Grid state,
 > all configuration fields, which represent function references, will be lost. You have two options to avoid this limitation:
