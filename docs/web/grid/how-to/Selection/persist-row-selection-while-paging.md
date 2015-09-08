@@ -45,6 +45,7 @@ The following runnable sample demonstrates how to persists row selection in a gr
             serverFiltering: true,
             serverSorting: true
           },
+          height: 400,
           selectable: "multiple",
           pageable: {
             buttonCount: 5
@@ -69,19 +70,25 @@ The following runnable sample demonstrates how to persists row selection in a gr
             }
           ],
           change: function (e, args) {
-            var items = e.sender.items();
-            items.each(function (index) {
-              var dataItem = e.sender.dataItem(this);
-              selectedOrders[dataItem[idField]] = this.className.indexOf("k-state-selected") >= 0;
+            var grid = e.sender;
+            var items = grid.items();
+            items.each(function (idx, row) {
+                var idValue = grid.dataItem(row).get(idField);
+                if (row.className.indexOf("k-state-selected") >= 0) {
+                    selectedOrders[idValue] = true;
+                } else if (selectedOrders[idValue]) {
+                    delete selectedOrders[idValue];
+                }
             });
           },
           dataBound: function (e) {
-            var items = e.sender.items();
+            var grid = e.sender;
+            var items = grid.items();
             var itemsToSelect = [];
-            items.each(function (index) {
-              var dataItem = e.sender.dataItem(this);
-              if (selectedOrders[dataItem[idField]] == true) {
-                itemsToSelect.push(this);
+            items.each(function (idx, row) {
+              var dataItem = grid.dataItem(row);
+              if (selectedOrders[dataItem[idField]]) {
+                itemsToSelect.push(row);
               }
             });
 
