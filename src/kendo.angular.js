@@ -435,9 +435,9 @@ var __meta__ = { // jshint ignore:line
         };
 
         widget.first("change", onChange(false));
-		if (!(kendo.ui.AutoComplete && widget instanceof kendo.ui.AutoComplete)) {
-			widget.first("dataBound", onChange(true));
-		}
+        if (!(kendo.ui.AutoComplete && widget instanceof kendo.ui.AutoComplete)) {
+            widget.first("dataBound", onChange(true));
+        }
 
         var currentVal = value();
 
@@ -595,7 +595,7 @@ var __meta__ = { // jshint ignore:line
     function setupRebind(widget, scope, element, originalElement, rebindAttr, destroyRegister, attrs) {
         // watch for changes on the expression passed in the k-rebind attribute
         var unregister = scope.$watch(rebindAttr, function(newValue, oldValue) {
-            if (newValue !== oldValue) {
+            if (!widget._muteRebind && newValue !== oldValue) {
                 unregister(); // this watcher will be re-added if we compile again!
 
                 var templateOptions = WIDGET_TEMPLATE_OPTIONS[widget.options.name];

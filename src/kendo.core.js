@@ -2743,7 +2743,15 @@ function pad(number, digits, end) {
         _destroy: function() {
             this.destroy();
         },
-        angular: function(){}
+        angular: function(){},
+
+        _muteAngularRebind: function(callback) {
+            this._muteRebind = true;
+
+            callback.call(this);
+
+            this._muteRebind = false;
+        }
     });
 
     var DataBoundWidget = Widget.extend({
