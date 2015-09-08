@@ -1,82 +1,93 @@
 ---
-title: Persist row selection while paging
-page_title: Persist row selection while paging
-description: Persist row selection while paging
+title: Persist row selection while paging, sorting and filtering
+page_title: Persist row selection while paging, sorting and filtering
+description: Persist row selection while paging, sorting and filtering
 ---
 
-# Persist row selection while paging
+# Persist row selection while paging, sorting and filtering
 
-The following runnable sample demonstrates how to persists row selection in a grid, while different pages of the dataSource are shown.
+The following runnable sample demonstrates how to persists row selection in a grid, while performing data operations (paging, sorting, filtering).
+
+**The implemented technique requires an ID field to be defined in `schema.model`.**
 
 #### Example
 
 ```html
     <div id="grid"></div>
-    <input type="button" value="previous" onclick="previous();" />
+    
     <script>
-      var selected = [];
-      $("#grid").kendoGrid({
-        dataSource: {
-          type: "odata",
-          transport: {
-            read: "http://demos.kendoui.com/service/Northwind.svc/Orders"
-          },
-          schema: {
-            model: {
-              id: "OrderID",
-              fields: {
-                OrderID: { type: "number" },
-                Freight: { type: "number" },
-                ShipName: { type: "string" },
-                OrderDate: { type: "date" },
-                ShipCity: { type: "string" }
+
+      $(function () {
+      
+        var selectedOrders = [];
+        var idField = "OrderID";
+
+        $("#grid").kendoGrid({
+          dataSource: {
+            type: "odata",
+            transport: {
+              read: "http://demos.kendoui.com/service/Northwind.svc/Orders"
+            },
+            schema: {
+              model: {
+                id: "OrderID",
+                fields: {
+                  OrderID: { type: "number" },
+                  Freight: { type: "number" },
+                  ShipName: { type: "string" },
+                  OrderDate: { type: "date" },
+                  ShipCity: { type: "string" }
+                }
               }
-            }
+            },
+            pageSize: 10,
+            serverPaging: true,
+            serverFiltering: true,
+            serverSorting: true
           },
-          pageSize: 10,
-          serverPaging: true,
-          serverFiltering: true,
-          serverSorting: true
-        },
-        height: 440,
-        selectable: true,
-        pageable: true,
-        columns: [{
-          field:"OrderID",
-          filterable: false
-        },
-                  "Freight",
-                  {
-                    field: "OrderDate",
-                    title: "Order Date",
-                    width: 100,
-                    format: "{0:MM/dd/yyyy}"
-                  }, {
-                    field: "ShipName",
-                    title: "Ship Name",
-                    width: 200
-                  }, {
-                    field: "ShipCity",
-                    title: "Ship City"
-                  }],
-        change: function (e) {
-          var selectedItem = this.dataItem(this.select()),
-              currentPage = this.dataSource.page();
+          selectable: "multiple",
+          pageable: {
+            buttonCount: 5
+          },
+          sortable: true,
+          filterable: true,
+          navigatable: true,
+          columns: [
+            {
+              field: "ShipCountry",
+              title: "Ship Country",
+              width: 300
+            },
+            {
+              field: "Freight",
+              width: 300
+            },
+            {
+              field: "OrderDate",
+              title: "Order Date",
+              format: "{0:dd/MM/yyyy}"
+            }
+          ],
+          change: function (e, args) {
+            var items = e.sender.items();
+            items.each(function (index) {
+              var dataItem = e.sender.dataItem(this);
+              selectedOrders[dataItem[idField]] = this.className.indexOf("k-state-selected") >= 0;
+            });
+          },
+          dataBound: function (e) {
+            var items = e.sender.items();
+            var itemsToSelect = [];
+            items.each(function (index) {
+              var dataItem = e.sender.dataItem(this);
+              if (selectedOrders[dataItem[idField]] == true) {
+                itemsToSelect.push(this);
+              }
+            });
 
-          selected[currentPage] = selectedItem.OrderID;
-        },
-        dataBound: function () {
-          var currentPage = this.dataSource.page();
-          if(selected[currentPage] !== undefined) {
-            var uid = this.dataSource.get(selected[currentPage]).uid;
-            this.tbody.find("tr[data-uid='" + uid + "']").addClass("k-state-selected");
+            e.sender.select(itemsToSelect);
           }
-        }
+        });
       });
-
-      function previous() {
-        var grid = $("#grid").data("kendoGrid");
-        grid.dataSource.prev();
-      }
     </script>
 ```
