@@ -17,7 +17,8 @@ In this chapter:
 
 ## Overview
 
-Kendo UI is an HTML5 and jQuery-based comprehensive framework for building interactive and high-performance websites and applications for desktop computers and touchscreen devices by using the latest web standards. Basically, Kendo UI is a tool-set of web, mobile and data visualization UI scripts, styles, and images that gives you all you need to get your project up and running. The application framework package comes with a templating library of 75+ UI widgets, an abundance of data-visualization gadgets, client-side data source, an MVVM (Model View ViewModel) design pattern, and an adaptive-rendering mobile tool-set that can be seamlessly run on your website. Kendo UI provides AngularJS and Bootstrap integration and is incorporated into products and frameworks such as [Telerik Platform](http://www.telerik.com/platform#overview), [Telerik Analytics](http://www.telerik.com/analytics), [Sitefinity](http://www.sitefinity.com/), [TeamPulse](http://www.telerik.com/teampulse), [Test Studio](http://www.telerik.com/teststudio), [Google Chrome](https://chrome.google.com/webstore/detail/telerik-kendo-ui-chrome-i/npcmgpnfknjmndbbakdhchgibaajnlpe), [Visual Studio](https://visualstudiogallery.msdn.microsoft.com/65b78c2c-951e-43a8-bae7-f9039f59fb9b), [NuGet](https://www.nuget.org/packages/KendoUIWeb/) along with others. 
+Kendo UI is an HTML5 and jQuery-based comprehensive framework for building interactive and high-performance websites and applications for desktop and touchscreen devices by using the latest web standards. Basically, Kendo UI is a tool-set of web, mobile and data visualization UI scripts, styles, and images that gives you everything you need to get your project up and running. The application framework package comes with a templating library of 75+ UI widgets, an abundance of data-visualization gadgets, client-side data source, an MVVM (Model View ViewModel) design pattern, and an adaptive-rendering mobile tool-set that can be seamlessly run on your website. Kendo UI provides AngularJS and Bootstrap integration and is incorporated into products and frameworks such as [Telerik Platform](http://www.telerik.com/platform#overview), [Telerik Analytics](http://www.telerik.com/analytics), [Sitefinity](http://www.sitefinity.com/), [TeamPulse](http://www.telerik.com/teampulse), [Test Studio](http://www.telerik.com/teststudio), [Google Chrome](https://chrome.google.com/webstore/detail/telerik-kendo-ui-chrome-i/npcmgpnfknjmndbbakdhchgibaajnlpe), [Visual Studio](https://visualstudiogallery.msdn.microsoft.com/65b78c2c-951e-43a8-bae7-f9039f59fb9b), [NuGet](https://www.nuget.org/packages/KendoUIWeb/) along with others. 
+
 
 [Check Out the Kendo UI Demos](http://demos.telerik.com/kendo-ui/) 
 
@@ -34,7 +35,7 @@ Kendo UI Core is the free and open-source Kendo UI distribution, released under 
 
 ### Telerik Kendo UI<sup>®</sup> Professional 
 
-Kendo UI Professional is one of the commercial versions of Kendo UI and is formerly known as Kendo UI Complete. It is a comprehensive framework that provides 70+ widgets and features, and includes a simple and consistent programming interface, a rock-solid DataSource, out-of-the-box themes, a MVVM framework, and more. It is suitable for professional applications that require expert and timely technical support. 
+Kendo UI Professional is one of the commercial versions of Kendo UI and is formerly known as Kendo UI Complete. It is a comprehensive framework providing 70+ Kendo UI components, and including a simple and consistent programming interface, a rock-solid DataSource, out-of-the-box themes, a MVVM framework, and more. It is suitable for professional applications that require expert and timely technical support. 
 
 * [List of Kendo UI Components](http://docs.telerik.com/KENDO-UI/list-of-widgets)
 * [Browser Support](http://docs.telerik.com/KENDO-UI/browser-support)
@@ -70,7 +71,7 @@ Kendo UI Professional is one of the commercial versions of Kendo UI and is forme
 
 ## Next Steps
 
-* [Try it yourself on Kendo UI Dojo](http://dojo.telerik.com/)
+* [Try it yourself on our Kendo UI Dojo interactive learning platform](http://dojo.telerik.com/)
 * [Download Kendo UI for a 30-Day Trial Period](https://www.telerik.com/download-trial-file?pid=KENDOUICOMPLETE&lict=1)
 * [Getting Started with Kendo UI](http://docs.telerik.com/kendo-ui/intro/getting-started)
 * [JavaScript Prerequisites](http://docs.telerik.com/kendo-ui/intro/prerequisites)

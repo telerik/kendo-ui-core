@@ -9,6 +9,7 @@ position: 7
 
 The following table lists all Kendo UI components with regard to their support by the different Kendo UI bundles. 
 
+
 | Component      | Kendo UI Core	| Kendo UI Professional	| UI for ASP .NET MVC/JSP/PHP	|
 | :------------- | :--------------- | :-------------------- | :----------------------------	|
 | **Web Widgets**|
@@ -116,4 +117,3 @@ The following table lists all Kendo UI components with regard to their support b
 | [ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder) 	| Yes | Yes | Yes 		|
 | [Validators](http://demos.telerik.com/kendo-ui/validator/index) 	| Yes | Yes | Yes		|
 | **Official Support**											 	| No  | Yes | Yes  		|
-

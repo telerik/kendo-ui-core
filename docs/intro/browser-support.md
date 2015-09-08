@@ -79,7 +79,7 @@ Internet Explorer 10 is supported with the following limitations:
 * Internet Explorer compatibility modes are not supported. These modes can exhibit different behavior and rendering bugs as compared to the browser versions they emulate. 
 * It is highly recommendable to use [Internet Explorer Edge mode](http://blogs.msdn.com/b/ie/archive/2010/06/16/ie-s-compatibility-features-for-site-developers.aspx) via a META tag or an HTTP header
 
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
 * Kendo UI uses a progressive enhancement for its CSS styling. As a result, old and obsolete browsers may ignore CSS3 styles, such as rounded corners and linear gradients.
 
@@ -87,21 +87,25 @@ Internet Explorer 10 is supported with the following limitations:
 
 Internet Explorer behaves differently when embedded inside a desktop (WinForms) application. It reports to support pointer events, but actually doesn't. As a result, some events, on which Kendo UI relies, are not fired. In order to avoid this problem, the following JavaScript code must be executed before the Kendo UI scripts are registered:
 
+```
+<script>
     window.MSPointerEvent = null;
     window.PointerEvent = null;
+</script>
+```
 
 ## Supported Operating Systems
 
-| Platform			| Version						|
-| :---------------- | :---------------------------: | 
-| Windows			| XP or later					|
-| Windows Server  	| Server 2003 or later			|
-| OS X          	| 10.5 or later					|
-| Android        	| 2.3 or later					|
-| iOS		    	| 6.0 or later					|
-| BlackBerry        | 10.0 or later					|
-| Windows Phone    	| 8.0 or later					|
-| Chrome for Mobile	| Any version					|
+| Platform			| Version				|
+| :---------------- | :-------------------- | 
+| Windows			| XP or later			|
+| Windows Server  	| Server 2003 or later	|
+| OS X          	| 10.5 or later			|
+| Android        	| 2.3 or later			|
+| iOS		    	| 6.0 or later			|
+| BlackBerry        | 10.0 or later			|
+| Windows Phone    	| 8.0 or later			|
+| Chrome for Mobile	| Any version			|
 
 ### Important Notes
 
@@ -112,7 +116,7 @@ Internet Explorer behaves differently when embedded inside a desktop (WinForms) 
 
 * Enable JavaScript on all browsers
 
-In order to achieve best performance:
+Tips and tricks:  
 
 * Check **Disable Script Debugging** from your browser configuration options
 * Activate Caching in Internet Explorer
