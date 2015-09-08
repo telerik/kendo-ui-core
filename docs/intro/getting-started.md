@@ -36,35 +36,39 @@ To use Kendo UI in your project, you need to include the required JavaScript and
 1. Extract the `/js` and `/styles` directories from the bundle archive and copy them to your web application root directory.
 2. Include the Kendo UI JavaScript and CSS files in the `head` tag of your HTML document. Make sure the common CSS file is registered before the theme CSS file.
 
-        <!DOCTYPE html>
+	<!DOCTYPE html>
         <html>
-        	<head>
-	            <title>Welcome to Kendo UI!</title>
-	            <!-- Common Kendo UI CSS for web and dataviz widgets -->
-	            <link href="styles/kendo.common.min.css" rel="stylesheet" />
+        <head>
+            <title>Welcome to Kendo UI!</title>
+            <!-- Common Kendo UI CSS for web and dataviz widgets -->
+            <link href="styles/kendo.common.min.css" rel="stylesheet" />
 
-	            <!-- Default Kendo UI theme CSS for web and dataviz widgets -->
-	            <link href="styles/kendo.default.min.css" rel="stylesheet" />
+            <!-- (optional) Kendo UI web widgets' RTL CSS, include only in right-to-left applications -->
+            <link href="styles/kendo.rtl.min.css" rel="stylesheet" type="text/css" />
+            
+            <!-- Default Kendo UI theme CSS for web and dataviz widgets -->
+            <link href="styles/kendo.default.min.css" rel="stylesheet" />
 
-	            <!-- (optional) Kendo UI Mobile CSS, include only if you will use the mobile devices features -->
-	            <link href="styles/kendo.default.mobile.min.css" rel="stylesheet" type="text/css" />
+            <!-- (optional) Kendo UI Mobile CSS, include only if you will use the mobile devices features -->
+            <link href="styles/kendo.default.mobile.min.css" rel="stylesheet" type="text/css" />
 
-	            <!-- jQuery JavaScript -->
-	            <script src="js/jquery.min.js"></script>
+            <!-- jQuery JavaScript -->
+            <script src="js/jquery.min.js"></script>
 
-	            <!-- Kendo UI combined JavaScript -->
-	            <script src="js/kendo.all.min.js"></script>
-	        </head>
-        	<body>
-            	Hello World!
-        	</body>
+            <!-- Kendo UI combined JavaScript -->
+            <script src="js/kendo.all.min.js"></script>
+        </head>
+        <body>
+            Hello World!
+        </body>
         </html>
 
-	> The rest of the code examples assume that the Kendo UI scripts and stylesheets are present in the document.  
+The rest of the code examples assume that the Kendo UI scripts and stylesheets are present in the document.  
+
 
 3. Initialize a Kendo UI Widget (the DataPicker widget in the example):
 
-        <!-- HTML element from which the DatePicker would be initialized -->
+        <<!-- HTML element from which the DatePicker would be initialized -->
         <input id="datepicker" />
         <script>
         $(function() {
@@ -73,26 +77,26 @@ To use Kendo UI in your project, you need to include the required JavaScript and
         });
         </script>
 
-	Here is the complete example:
+Here is the complete example:
 
-    	<!DOCTYPE html>
-    	<html>
-        	<head>
-	            <title>Welcome to Kendo UI!</title>
-	            <link href="styles/kendo.common.min.css" rel="stylesheet" />
-	            <link href="styles/kendo.default.min.css" rel="stylesheet" />
-	            <script src="js/jquery.min.js"></script>
-	            <script src="js/kendo.all.min.js"></script>
-	        </head>
-	        <body>
-	            <input id="datepicker" />
-	            <script>
-	                $(function() {
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>Welcome to Kendo UI!</title>
+            <link href="styles/kendo.common.min.css" rel="stylesheet" />
+            <link href="styles/kendo.default.min.css" rel="stylesheet" />
+            <script src="js/jquery.min.js"></script>
+            <script src="js/kendo.all.min.js"></script>
+        </head>
+        <body>
+            <input id="datepicker" />
+            <script>
+                $(function() {
                     $("#datepicker").kendoDatePicker();
-	                });
-	            </script>
-	        </body>
-	    </html>
+                });
+            </script>
+        </body>
+    </html>
 
 ## Install Kendo UI As a Kendo UI Core or Kendo UI Professional Bower Package
 
@@ -106,20 +110,25 @@ Kendo UI maintains two bower packages, namely Kendo UI Core and Kendo UI Profess
 
 The Kendo UI Core Bower package is available as a [public GitHub repository](https://github.com/kendo-labs/bower-kendo-ui) and is also registered as `kendo-ui-core` in the bower registry.
 
-	sh bower install kendo-ui-core
+```sh
+bower install kendo-ui-core
+```
 
 ### Install Kendo UI Professional Bower Package
 
 The Kendo UI Professional Bower Package is hosted as a [private GitHub repository](https://bower.telerik.com). To access it, you need an active account for !!!Telerik Platform. Bower will prompt for your username and password during the installation and update processes.
 
-	sh bower install https://bower.telerik.com/bower-kendo-ui.git
+```sh
+bower install https://bower.telerik.com/bower-kendo-ui.git
+```
 
 You can also add the package to the `bower.json` file:
 
-	json
-	"dependencies": {
-    	"kendo-ui": "https://bower.telerik.com/bower-kendo-ui.git#~2014.3.1425"
-	}
+```json
+"dependencies": {
+    "kendo-ui": "https://bower.telerik.com/bower-kendo-ui.git#~2014.3.1425"
+}
+```
 
 > During the installation of the Bower package, you may be requested to confirm your credentials more than once. For further information, refer to [Storing Repository Credentials](...) below.
 
@@ -136,7 +145,9 @@ You can also add the package to the `bower.json` file:
 1. Create a text file called `_netrc` in your home directory (e.g. `c:\users\jane\_netrc`).
 2. Declare a HOME environment variable:
 
-		C:\> SETX HOME %USERPROFILE%
+	```
+    C:\> SETX HOME %USERPROFILE%
+    ```
    
 3. Add the credentials using the format listed above.
 
@@ -146,19 +157,26 @@ GitHub might have problems resolving your home directory if it contains spaces i
 
 1. Create a file called `.netrc` in your home directory (`~/.netrc`). Make sure you modify the file permissions to make it readable only to you.
 
-    	sh
-    	touch ~/.netrc
-    	chmod 0600 ~/.netrc
+    ```sh
+    touch ~/.netrc
+    chmod 0600 ~/.netrc
+    ```
     
 2. Add your credentials to the `~/.netrc` file using the format listed in the example below:
 		
-		machine bower.telerik.com
-        login my-telerik.identity@example.com
-        password mysecret
+```
+machine bower.telerik.com
+    login my-telerik.identity@example.com
+    password mysecret
+```
 
 #### Troubleshooting
 
-**Issue 1:** Bower on Windows has troubles installing the repository showing the error message `fatal: unable to access 'https://bower.telerik.com/bower-kendo-ui.git/': SSL certificate problem: unable to get local issuer certificate`. 
+**Issue 1:** Bower on Windows has troubles installing the repository showing the error message 
+
+```
+fatal: unable to access 'https://bower.telerik.com/bower-kendo-ui.git/': SSL certificate problem: unable to get local issuer certificate
+```
 
 **Cause:** The cause of this issue is the underlying GitHub installation is missing the certificate bundle.  
 
@@ -285,11 +303,12 @@ If you use the Kendo UI Core package, you can build a custom distribution using 
 
 Since Q3 2014, the necessary build scripts are shipped in the `src/` directory of the downloadable commercial bundles. To build a custom distribution from the shipped source, run the following shell commands:
 
-	sh
+```sh
     cd src
     npm install -g grunt-cli
     npm install
     grunt custom:autocomplete,dropdownlist
+```
 
 List the components you want to be included in the custom build and separated them with comma (`,`). The example above will build a custom minified script which includes the AutoComplete and the DropDownList widgets.
 
@@ -305,62 +324,62 @@ The following script files, either minified or not, can be included on a per-wid
 
 Here is the list of the shared components providing behaviors, data access and other services:
 
-| Feature				| Script Files								|
-| :-------------------: | :---------------------------------------: |
-| Angular JS Directives	| jquery.js 								|
-|						| kendo.core.js								|
-| 						| kendo.angular.js							|
-| MVVM					| jquery.js 								|
-|						| kendo.core.js								|
-| 						| kendo.data.js								|
-| 						| kendo.binder.js							|
-| Core					| jquery.js 								|
-|						| kendo.core.js								|
-| Data Source			| jquery.js 								|
-|						| kendo.core.js								|
-|						| kendo.data.odata.js (OData feature)		|
-|						| kendo.data.xml.js (XML feature)			|
-|						| kendo.data.js								|
-| Drag & Drop			| jquery.js 								|
-|						| kendo.core.js								|
-|						| kendo.userevents.js						|
-|						| kendo.draganddrop.js						|
-| Drawing API			| jquery.js									|
-|						| kendo.core.js								|
-|						| kendo.color.js							|
-|						| kendo.drawing.jsjquery.js					|
-| Effects				| jquery.js 								|
-|						| kendo.core.js								|
-|						| kendo.fx.js								|
-| PDF Export			| jquery.js 								|
-|						| kendo.core.js								|
-| 						| kendo.color.js							|
-| 						| kendo.drawing.js							|
-| 						| kendo.pdf.js								|
-| Router				| jquery.js 								|
-|						| kendo.core.js								|
-|						| kendo.router.js							|
-| Sortable				| jquery.js 								|
-|						| kendo.core.js								|
-|						| kendo.userevents.js						|
-| 						| kendo.draganddrop.js						|
-| 						| kendo.sortable.js							|
-| View					| jquery.js 								|
-|						| kendo.core.js								|
-|						| kendo.data.js								|
-| 						| kendo.binder.js							|
-| 						| kendo.fx.js								|
-| 						| kendo.view.js								|
+| Feature				| Script Files						|Comments 		|
+| :-------------------- | :-------------------------------- |:------------- |
+| Angular JS Directives	| jquery.js 						|				|
+|						| kendo.core.js						|				|
+| 						| kendo.angular.js					|				|
+| MVVM					| jquery.js 						|				|
+|						| kendo.core.js						|				|
+| 						| kendo.data.js						|				|
+| 						| kendo.binder.js					|				|
+| Core					| jquery.js 						|				|
+|						| kendo.core.js						|				|
+| Data Source			| jquery.js 						|				|
+|						| kendo.core.js						|				|
+|						| kendo.data.odata.js 				| OData feature	|
+|						| kendo.data.xml.js 				| XML feature	|
+|						| kendo.data.js						|				|
+| Drag & Drop			| jquery.js 						|				|
+|						| kendo.core.js						|				|
+|						| kendo.userevents.js				|				|
+|						| kendo.draganddrop.js				|				|
+| Drawing API			| jquery.js							|				|
+|						| kendo.core.js						|				|
+|						| kendo.color.js					|				|
+|						| kendo.drawing.jsjquery.js			|				|
+| Effects				| jquery.js 						|				|
+|						| kendo.core.js						|				|
+|						| kendo.fx.js						|				|
+| PDF Export			| jquery.js 						|				|
+|						| kendo.core.js						|				|
+| 						| kendo.color.js					|				|
+| 						| kendo.drawing.js					|				|
+| 						| kendo.pdf.js						|				|
+| Router				| jquery.js 						|				|
+|						| kendo.core.js						|				|
+|						| kendo.router.js					|				|
+| Sortable				| jquery.js 						|				|
+|						| kendo.core.js						|				|
+|						| kendo.userevents.js				|				|
+| 						| kendo.draganddrop.js				|				|
+| 						| kendo.sortable.js					|				|
+| View					| jquery.js 						|				|
+|						| kendo.core.js						|				|
+|						| kendo.data.js						|				|
+| 						| kendo.binder.js					|				|
+| 						| kendo.fx.js						|				|
+| 						| kendo.view.js						|				|
  
 
 #### Web
 
 Here is the list of the desktop UI Widgets for mobile-ready websites and applications:
 
-| Widget				| Script Files								|
-| :-------------------: | :---------------------------------------: |
-| AutoComplete			| jquery.js 								|
-|						| kendo.core.js								|
+| Widget				| Script Files								| Comments				|
+| :-------------------- | :---------------------------------------- | :-------------------: |
+| AutoComplete			| jquery.js 								| 						|
+|						| kendo.core.js								|						|
 |						| kendo.data.js								|
 |						| kendo.popup.js							|
 |						| kendo.list.js								|
