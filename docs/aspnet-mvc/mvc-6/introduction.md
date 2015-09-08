@@ -17,7 +17,9 @@ We target the stable release of the ASP.NET 5 framework. At the time of this wri
 
 The target runtime is [CoreCLR](https://github.com/dotnet/coreclr). The full desktop CLR is also supported.
 
-# ASP.NET on GitHub
+# ASP.NET Resources
+
+The [ASP.NET 5 Documentation](http://docs.asp.net/en/latest/index.html) is a great place to get started.
 
 The following repositories contain source code, instructions and issue trackers for the ASP.NET project.
 These are immensely useful when you need to track down particular issues or behaviors.
@@ -38,4 +40,3 @@ These are immensely useful when you need to track down particular issues or beha
 # See Also
 
 - [Installing Telerik UI for ASP.NET MVC in an MVC 6 project](getting-started)
-- [ASP.NET 5 Documentation](http://docs.asp.net/en/latest/index.html)
