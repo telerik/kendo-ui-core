@@ -398,6 +398,7 @@
 
 .k-popup.k-calendar-container {
  	padding: 0;
+    border: 0;
 }
 
 .k-multiselect-wrap .k-input {
@@ -786,9 +787,23 @@ div.editorToolbarWindow.k-window-content {
     padding: 0;
 }
 
+.k-popup-edit-form .k-primary {
+    float: right;
+}
+
+.k-popup-edit-form:after {
+    content: " ";
+    display: block; 
+    clear: both;
+}
+
 .k-gantt-toolbar,
 .k-scheduler-toolbar {
     padding: 0 1.286em;
+}
+
+.k-scheduler-navigation {
+    margin-left: -.786em;
 }
 
 .k-drag-clue {
