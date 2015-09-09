@@ -27,60 +27,58 @@ In this section:
 
 ### Step 1: Download Kendo UI
 
-Once you [download](http://www.telerik.com/download/kendo-ui) the Kendo UI packages include the following folders and files: 
+Once you [download](http://www.telerik.com/download/kendo-ui) any of the Kendo UI packages, you will get the following folders on your local repository: 
 
-
-You can download all Kendo UI bundles from the [download page](http://www.telerik.com/download/kendo-ui).
-
-The downloaded Kendo UI distribution package consists of the following folders and files:
-
-* The `/examples` folder contains the quick start demo files
-* The `/js` folder contains the minified JavaScript files 
-* The `/src` folder contains the source code files. It is not available in the Kendo UI trial version.
-* The `/styles` folder contains the minified CSS files and theme images
-* The `/wrappers` folder contains the server-side wrappers. It is only necessary for and available in Telerik UI for ASP.NET MVC, JSP or PHP distributions.
-* The `changelog.html` folder contains the Kendo UI release notes
+* `/examples` - the folder accommodates the quick start demo files
+* `/js` - the location contains the minified JavaScript files 
+* `/src` - this directory holds the source code files. Note that it is not available in the 30-day trial version.
+* `/styles` - the folder consists of the minified CSS files and theme images
+* `/wrappers` - the directory includes the server-side wrappers. As it is necessary for the Telerik UI for ASP.NET MVC, UI for JSP or UI for PHP distributions only, the folder is available in the commercial packages of these versions.
+* `changelog.html` - the folder provides the Kendo UI release notes
 
 ### Step 2: Add CSS and JavaScript References to Your Project
 
 To use Kendo UI in your project, you need to include the required JavaScript and CSS files.
 
-1. Extract the `/js` and `/styles` directories from the bundle archive and copy them to your web application root directory.
-2. Include the Kendo UI JavaScript and CSS files in the `head` tag of your HTML document. Make sure the common CSS file is registered before the theme CSS file.
+1. Extract the `/js` and `/styles` directories from the bundle archive and copy them to your web application root directory
+2. Include the Kendo UI JavaScript and CSS files in the `head` tag of your HTML document. Make sure the common CSS file is registered before the theme CSS file.   
 
-	<!DOCTYPE html>
-        <html>
-        <head>
-            <title>Welcome to Kendo UI!</title>
-            <!-- Common Kendo UI CSS for web and dataviz widgets -->
-            <link href="styles/kendo.common.min.css" rel="stylesheet" />
+Here goes the example:
 
-            <!-- (optional) Kendo UI web widgets' RTL CSS, include only in right-to-left applications -->
-            <link href="styles/kendo.rtl.min.css" rel="stylesheet" type="text/css" />
-            
-            <!-- Default Kendo UI theme CSS for web and dataviz widgets -->
-            <link href="styles/kendo.default.min.css" rel="stylesheet" />
+		<!DOCTYPE html>
+	        <html>
+	        <head>
+	            <title>Welcome to Kendo UI!</title>
+	            <!-- Common Kendo UI CSS for web and dataviz widgets -->
+	            <link href="styles/kendo.common.min.css" rel="stylesheet" />
+	
+	            <!-- (optional) Kendo UI web widgets' RTL CSS, include only in right-to-left applications -->
+	            <link href="styles/kendo.rtl.min.css" rel="stylesheet" type="text/css" />
+	            
+	            <!-- Default Kendo UI theme CSS for web and dataviz widgets -->
+	            <link href="styles/kendo.default.min.css" rel="stylesheet" />
+	
+	            <!-- (optional) Kendo UI Mobile CSS, include only if you will use the mobile devices features -->
+	            <link href="styles/kendo.default.mobile.min.css" rel="stylesheet" type="text/css" />
+	
+	            <!-- jQuery JavaScript -->
+	            <script src="js/jquery.min.js"></script>
+	
+	            <!-- Kendo UI combined JavaScript -->
+	            <script src="js/kendo.all.min.js"></script>
+	        </head>
+	        <body>
+	            Hello World!
+	        </body>
+	        </html>
 
-            <!-- (optional) Kendo UI Mobile CSS, include only if you will use the mobile devices features -->
-            <link href="styles/kendo.default.mobile.min.css" rel="stylesheet" type="text/css" />
+>The rest of the code examples assume that the Kendo UI scripts and stylesheets were added to the document.
 
-            <!-- jQuery JavaScript -->
-            <script src="js/jquery.min.js"></script>
+3. Initialize a Kendo UI Widget 
 
-            <!-- Kendo UI combined JavaScript -->
-            <script src="js/kendo.all.min.js"></script>
-        </head>
-        <body>
-            Hello World!
-        </body>
-        </html>
+Example with the DataPicker widget:
 
-The rest of the code examples assume that the Kendo UI scripts and stylesheets are present in the document.  
-
-
-3. Initialize a Kendo UI Widget (the DataPicker widget in the example):
-
-        <<!-- HTML element from which the DatePicker would be initialized -->
+        <!-- HTML element from which the DatePicker would be initialized -->
         <input id="datepicker" />
         <script>
         $(function() {
