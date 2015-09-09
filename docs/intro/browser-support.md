@@ -70,18 +70,18 @@ Kendo UI widgets rendering [data visualization](/intro/list-of-widgets) may requ
 
 ### Important Notes
 
-* Since Internet Explorer 11 was released in October 2013, look up the Q3 2013 SP2 (2013.3.1324) or a more recent Kendo UI version if you need support for it
+* Since Internet Explorer 11 was released in October 2013, look up the Q3 2013 SP2 (2013.3.1324) or a more recent Kendo UI version if you need support for it  
+
 * Browsers in beta stage are not supported
 * [Quirks mode](http://www.quirksmode.org/css/quirksmode.html) is not supported  
- 
 > Always specify a [DOCTYPE](http://reference.sitepoint.com/html/doctypes). Recommended DOCTYPES include `HTML5`, `XHTML 1.1`, `XHTML 1.0 Strict` and `HTML4 Strict`. The `HTML4 Transitional` DOCTYPE fires the Quirks mode and should not be used. `XHTML 1.0 Transitional` works well in most cases, but may cause issues with the vertical positioning of icons. The correct syntax for [all DOCTYPES](http://www.w3.org/QA/2002/04/valid-dtd-list.html) is provided on the [W3C website](http://www.w3.org/).  
 
 * Internet Explorer compatibility modes are not supported. These modes can exhibit different behavior and rendering bugs as compared to the browser versions they emulate.  
-* It is highly advisable to use [Internet Explorer Edge mode](http://blogs.msdn.com/b/ie/archive/2010/06/16/ie-s-compatibility-features-for-site-developers.aspx) via a META tag or an HTTP header:
+* It is highly advisable to use [Internet Explorer Edge mode](http://blogs.msdn.com/b/ie/archive/2010/06/16/ie-s-compatibility-features-for-site-developers.aspx) via a META tag or an HTTP header:  
 
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />  
 
-* Kendo UI uses a progressive enhancement for its CSS styling. As a result, old and obsolete browsers may ignore CSS3 styles such as rounded corners and linear gradients.
+* Kendo UI uses a progressive enhancement for its CSS styling. As a result, old and obsolete browsers may ignore CSS3 styles such as rounded corners and linear gradients.  
 * Internet Explorer behaves differently when embedded inside a desktop (WinForms) application. It reports to support pointer events, but actually doesn't. As a result, some events, on which Kendo UI relies, are not fired. In order to avoid this problem, the following JavaScript code must be executed before the Kendo UI scripts are registered:
 
 	```
@@ -106,7 +106,7 @@ Kendo UI widgets rendering [data visualization](/intro/list-of-widgets) may requ
 
 ### Important Notes
 
-* Kendo UI DataViz widgets support only the Canvas rendering mode in Android 2.3
+* Kendo UI widgets for data visualization support only the Canvas rendering mode in Android 2.3
 * Hybrid mouse and touch-screen devices are supported; for example, Internet Explorer 10, Chrome and Firefox on Windows 8
 
 ## Best Performance
