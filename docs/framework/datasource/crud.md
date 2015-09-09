@@ -81,8 +81,8 @@ updated, they are received as an array of objects in `e.data.models`. Again, the
 
 #### Note on IDs
 
-The Kendo UI DataSource uses the ID value to determine if a data item is new or existing. If the ID value is zero, it is assumed that the data item is new, so the **create** function will be
-executed. If you need to use zero ID values, then change the [`defaultValue`](/api/javascript/data/model#methods-Model.define) of the ID field in
+> The Kendo UI DataSource uses the ID value to determine if a data item is new or existing. If the ID value is zero, it is assumed that the data item is new, so the **create** function will be
+executed. If you need to use zero ID values, then change the [`defaultValue`](/api/javascript/data/model#methods-Model.define) of the ID field to -1 in
 [`schema.model.fields`](/api/javascript/data/datasource#configuration-schema.model).
 
 ### Create (Local)
