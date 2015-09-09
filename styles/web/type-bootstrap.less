@@ -1551,6 +1551,20 @@ div.k-filebrowser-dropzone em
     border-radius: @main-border-radius 0 0 @main-border-radius;
 }
 
+.k-toolbar .k-button-group {
+    .k-button {
+        border-left-color: transparent;
+    }
+
+    .k-group-start {
+        border-left-color: @button-border-color;
+    }
+
+    .k-button:focus {
+        border-left-color: @button-focused-border-color;
+    }    
+}
+
 .k-group-start.k-group-end.k-tool
 {
     border-radius: @main-border-radius;
