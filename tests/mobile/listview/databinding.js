@@ -487,7 +487,7 @@
                 dataSource: ds,
                 pullToRefresh: true
             });
-        }
+        };
 
         setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
 
@@ -533,7 +533,7 @@
                 dataSource: ds,
                 pullToRefresh: true
             });
-        }
+        };
 
         setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
         var scroller = application.scroller();
@@ -561,7 +561,7 @@
                     ok(true);
                 }
             });
-        }
+        };
 
         setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
         application.scroller().trigger("pull");
@@ -602,7 +602,7 @@
                     }
                 }
             });
-        }
+        };
 
         setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
         var scroller = application.scroller();
