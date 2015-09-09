@@ -77,8 +77,8 @@ if (kendo.ui.ColumnMenu) {
 kendo.ui.ColumnMenu.prototype.options.messages =
 $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "columns": "Kolumner",
-  "sortAscending": "Sortera fallande",
-  "sortDescending": "Sortera stigande",
+  "sortAscending": "Sortera stigande",
+  "sortDescending": "Sortera fallande",
   "settings": "Kolumninställningar",
   "done": "Klar",
   "lock": "Закључати",
