@@ -148,10 +148,10 @@ the hierarchy with any DataSource-enabled component.
 
 ### Sharing a HierarchicalDataSource between a TreeView and a Grid
 
-  <ul id="treeview"></ul>
-  <div id="grid"></div>
+    <ul id="treeview"></ul>
+    <div id="grid"></div>
 
-  <script>
+    <script>
     var Categories = new kendo.data.HierarchicalDataSource({
       type: "odata",
       transport: {
@@ -179,19 +179,19 @@ the hierarchy with any DataSource-enabled component.
           }
         }
       }
-  });
+    });
 
-  $("#treeview").kendoTreeView({
+    $("#treeview").kendoTreeView({
       dataSource: Categories,
       dataTextField: ["CategoryName", "ProductName"]
-  });
+    });
 
-  $("#grid").kendoGrid({
-      dataSource: Categories,
-      columns: [
-          { field: "CategoryName", title: "Name" },
-          { field: "Description" }
-      ]
-  });
-  </script>
+    $("#grid").kendoGrid({
+       dataSource: Categories,
+       columns: [
+         { field: "CategoryName", title: "Name" },
+         { field: "Description" }
+       ]
+    });
+    </script>
 
