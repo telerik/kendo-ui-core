@@ -1,18 +1,20 @@
 ---
 title: Getting Started with Kendo UI
 page_title: Getting Started with Kendo UI
-description: "Ways to get Kendo UI started: download and host Kendo UI in your project, install Kendo UI as a bower package, or use the Kendo UI CDN service. Customize your Kendo UI experience"
+description: "Get your project up and running: download and host Kendo UI, install Kendo UI as a bower package, or use the Kendo UI CDN service and include only what you need."
 position: 1
 ---
 
 # Getting Started with Kendo UI
 
-In this section you will be presented with alternative ways to get your Kendo UI started and also with an array of possibilities to customize your Kendo UI package. This information is detailed in the following chapters below:  
+Kendo UI distributions can be installed in several ways depending on your preferences.  
+
+In this section:   
 
 * [Host Kendo UI in Your Project](#host-kendo-ui-in-your-project)
 * [Install Kendo UI As a Bower Package](#install-kendo-ui-as-a-kendo-ui-core-or-kendo-ui-professional-bower-package)
 * [Use the Kendo UI CDN Service](#use-the-kendo-ui-cdn-service)
-* [Customize Your Kendo UI Experience](#customize-your-kendo-ui-experience)
+* [Include Only What You Need](#include-only-what-you-need)
 
 ## Host Kendo UI in Your Project
 
@@ -263,7 +265,7 @@ Although the Amazon CloudFront service provides for a reliable level of uptime s
 
 > You will be able to find more information on the topic at [Scott HanselMann - Fallback from CDN to Local Scripts](http://www.hanselman.com/blog/CDNsFailButYourScriptsDontHaveToFallbackFromCDNToLocalJQuery.aspx).
 
-## Customize Your Kendo UI Experience
+## Include Only What You Need
 
 This section will help you use the Kendo UI widgets, frameworks and functionalities that will best suit your project. For more details on how to do it, refer to the following chapters:
 

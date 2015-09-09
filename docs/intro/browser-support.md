@@ -12,9 +12,9 @@ Kendo UI components are designed to support all major browsers and to operate wi
 
 In this section:  
 
-* [Supported Desktop Browsers](http://docs.telerik.com/kendo-ui/browser-support#supported-desktop-browsers)  
-* [Supported Operating Systems](http://docs.telerik.com/kendo-ui/browser-support#supported-operating-systems)
-* [Other Prerequisites](http://docs.telerik.com/kendo-ui/browser-support#other-prerequisites)
+* [Supported Desktop Browsers](#supported-desktop-browsers)  
+* [Supported Operating Systems](#supported-operating-systems)
+* [Other Prerequisites](#other-prerequisites)
 
 ## Supported Desktop Browsers
 
@@ -28,7 +28,7 @@ In this section:
 | Opera	        	| 15 or later					|
 | OS X Safari    	| [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
 
-[List of Kendo UI Components](http://docs.telerik.com/KENDO-UI/list-of-widgets)
+[List of Kendo UI Components](http://docs.telerik.com/kendo-ui/intro/list-of-widgets)
 
 ### Kendo UI Mobile Widgets
 
@@ -40,7 +40,7 @@ In this section:
 | Opera	        	| 15 or later					|
 | OS X Safari    	| [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
 
-[List of Kendo UI Components](http://docs.telerik.com/KENDO-UI/list-of-widgets)
+[List of Kendo UI Components](http://docs.telerik.com/kendo-ui/intro/list-of-widgets)
 
 ### Kendo UI DataViz Widgets
 
@@ -69,7 +69,7 @@ Internet Explorer 10 is supported with the following limitations:
 * Dashed lines in canvas are not supported, which affects the image export as well
 * Android 2.x, therefore, uses non-interactive canvas output
 
-[List of Kendo UI Components](http://docs.telerik.com/KENDO-UI/list-of-widgets)
+[List of Kendo UI Components](http://docs.telerik.com/kendo-ui/intro/list-of-widgets)
 
 ### Important Notes
 
