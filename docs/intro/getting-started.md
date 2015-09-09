@@ -7,7 +7,14 @@ position: 1
 
 # Getting Started with Kendo UI
 
-Kendo UI distributions can be installed in several ways depending on your preferences.  
+Depending on your preferences and the requirements of your project, you can:  
+  
+* [Download](http://www.telerik.com/download/kendo-ui) Kendo UI for a 30-day trial period  
+* [Use]((https://github.com/telerik/kendo-ui-core)) the GitHub open-source license for Telerik Kendo UI® Core  
+* [Get](http://www.telerik.com/purchase/kendo-ui) your commercial license for Telerik Kendo UI® Professional  
+* [Get](http://www.telerik.com/purchase/aspnet-mvc) your commercial license for Telerik UI for ASP.NET MVC
+* [Get](http://www.telerik.com/purchase/jsp-ui) your commercial license for Telerik UI for JSP  
+* [Get](http://www.telerik.com/purchase/php-ui) your commercial license for Telerik UI for PHP   
 
 In this section:   
 
@@ -19,6 +26,9 @@ In this section:
 ## Host Kendo UI in Your Project
 
 ### Step 1: Download Kendo UI
+
+Once you [download](http://www.telerik.com/download/kendo-ui) the Kendo UI packages include the following folders and files: 
+
 
 You can download all Kendo UI bundles from the [download page](http://www.telerik.com/download/kendo-ui).
 
