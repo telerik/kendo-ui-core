@@ -12,7 +12,7 @@ In this chapter:
 
 *	[Overview](#overview)
 *	[Next Steps](#next-steps)
-*	[More References](#further-references)
+*	[Learning Resources](#learning-resources)
 *	[Help Us Improve Kendo UI Documentation](#help-us-improve-kendo-ui-documentation)
 
 ## Overview
@@ -30,15 +30,15 @@ Kendo UI Core is the free and open-source Kendo UI distribution, released under 
 
 > Kendo UI distributions are subject to licensing. You can [download](http://www.telerik.com/download/kendo-ui) the 30-day trial period version, or use the open-source license for [Kendo UI Core](https://github.com/telerik/kendo-ui-core), or learn more about the commercial licenses pricing and purchase the distribution that best suits your project [here](http://www.telerik.com/purchase/kendo-ui).   
 
-* [List of Kendo UI Components](http://docs.telerik.com/KENDO-UI/list-of-widgets)
-* [Browser Support](http://docs.telerik.com/KENDO-UI/browser-support)
+* [List of Kendo UI Components](http://docs.telerik.com/kendo-ui/intro/list-of-widgets)
+* [Browser Support](http://docs.telerik.com/kendo-ui/intro/browser-support)
 
 ### Telerik Kendo UI<sup>®</sup> Professional 
 
 Kendo UI Professional is one of the commercial versions of Kendo UI and is formerly known as Kendo UI Complete. It is a comprehensive framework providing 70+ Kendo UI components, and including a simple and consistent programming interface, a rock-solid DataSource, out-of-the-box themes, a MVVM framework, and more. It is suitable for professional applications that require expert and timely technical support. 
 
-* [List of Kendo UI Components](http://docs.telerik.com/KENDO-UI/list-of-widgets)
-* [Browser Support](http://docs.telerik.com/KENDO-UI/browser-support)
+* [List of Kendo UI Components](http://docs.telerik.com/kendo-ui/intro/list-of-widgets)
+* [Browser Support](http://docs.telerik.com/kendo-ui/intro/browser-support)
 * [Get a License](http://www.telerik.com/purchase/kendo-ui)
 * [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/kendo-ui-professional)  
 
@@ -46,8 +46,8 @@ Kendo UI Professional is one of the commercial versions of Kendo UI and is forme
 
 [UI for ASP .NET MVC](http://docs.telerik.com/kendo-ui/aspnet-mvc/introduction) is a Kendo UI commercial ditribution. It helps build rich and responsive any-device web applications, provides for their flawless work across all major browsers and includes 70+ ASP .NET MVC controls among which navigation, layout, data management, visualization, editing and interactivity. In short, UI for ASP .NET MVC supplies all Kendo UI Professional components together with the ASP.NET MVC server-side wrappers that are applicable to all available Kendo UI widgets. 
 
-* [List of Kendo UI Components](http://docs.telerik.com/KENDO-UI/list-of-widgets)
-* [Browser Support](http://docs.telerik.com/KENDO-UI/browser-support)
+* [List of Kendo UI Components](http://docs.telerik.com/kendo-ui/intro/list-of-widgets)
+* [Browser Support](http://docs.telerik.com/kendo-ui/intro/browser-support)
 * [Get a License](http://www.telerik.com/purchase/aspnet-mvc)
 * [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/aspnet-mvc)       
 
@@ -55,8 +55,8 @@ Kendo UI Professional is one of the commercial versions of Kendo UI and is forme
 
 [UI for JSP](http://docs.telerik.com/kendo-ui/jsp/introduction) is a thorough web development framewrok for building modern HTML5 apps that contains a Model-View-ViewModel framework and 40+ UI widgets with JSP server wrappers providing full support for touchscreen devices. In short, UI for JSP supports Kendo UI Professional and gives you full control over the web and DataViz widgets with complete server-side APIs.   
 
-* [List of Kendo UI Components](http://docs.telerik.com/KENDO-UI/list-of-widgets)
-* [Browser Support](http://docs.telerik.com/KENDO-UI/browser-support)
+* [List of Kendo UI Components](http://docs.telerik.com/kendo-ui/intro/list-of-widgets)
+* [Browser Support](http://docs.telerik.com/kendo-ui/intro/browser-support)
 * [Get a License](http://www.telerik.com/purchase/jsp-ui)
 * [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/jsp-ui)
 
@@ -79,10 +79,10 @@ Kendo UI Professional is one of the commercial versions of Kendo UI and is forme
 * [Initialize a Kendo UI Widget from Markup](http://docs.telerik.com/kendo-ui/basics/markup)
 * [Call Widget Methods and Bind to Widget Events](http://docs.telerik.com/kendo-ui/basics/events-and-methods)
 
-## More References
+## Learning Resources
 
+* [Kendo UI Support and Learning Resources](http://www.telerik.com/support/kendo-ui)
 * [Kendo UI YouTube Channel](https://www.youtube.com/user/kendouiTV)
-* [Kendo UI Code Library](http://www.telerik.com/support/code-library) 
 
 ## Help Us Improve Kendo UI Documentation
 
