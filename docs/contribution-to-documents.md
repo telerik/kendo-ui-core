@@ -1,11 +1,11 @@
 ---
-title: Help Us Improve Kendo UI Documentation
-page_title: Help Us Improve Kendo UI Documentation
+title: Help Improve Kendo UI Documentation
+page_title: Help Improve Kendo UI Documentation
 description: "Your contribution to Kendo UI documentation: suggestions and feedback."
 position: 251
 ---
 
-## Help Us Improve Kendo UI Documentation
+# Help Improve Kendo UI Documentation
 
 Our documentation hub online aims at providing well-structured, up-to-date, and easy-to-access help articles on Kendo UI. Whether you are moderately enthusiastic about programming or passionately devoted to innovation, our purpose is to help you augment the solutions for your project. You can support us achieve our goal and further elaborate on our documentation, samples, tutorials and demos by providing your suggestions and feedback in the most suitable way for you.
 
