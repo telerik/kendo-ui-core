@@ -70,7 +70,6 @@ Kendo UI Professional is one of the commercial versions of Kendo UI and is forme
 
 ## Next Steps
 
-* [Try it yourself on our Kendo UI Dojo interactive learning platform](http://dojo.telerik.com/)
 * [Download Kendo UI for a 30-Day Trial Period](https://www.telerik.com/download-trial-file?pid=KENDOUICOMPLETE&lict=1)
 * [Getting Started with Kendo UI](/intro/getting-started)
 * [JavaScript Prerequisites](/intro/prerequisites)
@@ -80,5 +79,6 @@ Kendo UI Professional is one of the commercial versions of Kendo UI and is forme
 
 ## Learning Resources
 
+* [Kendo UI Dojo Interactive Learning Platform](http://dojo.telerik.com/)
 * [Kendo UI Support and Learning Resources](http://www.telerik.com/support/kendo-ui)
 * [Kendo UI YouTube Channel](https://www.youtube.com/user/kendouiTV)
