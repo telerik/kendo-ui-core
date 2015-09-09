@@ -148,43 +148,50 @@ the hierarchy with any DataSource-enabled component.
 
 ### Sharing a HierarchicalDataSource between a TreeView and a Grid
 
+  <ul id="treeview"></ul>
+  <div id="grid"></div>
+
+  <script>
     var Categories = new kendo.data.HierarchicalDataSource({
-        transport: {
-            read: {
-                url: "http://demos.telerik.com/kendo-ui/service/Categories"
-            }
-        },
-        schema: {
-            model: {
-                hasChildren: "Products",
-                id: "CategoryID",
-                children: {
-                    transport: {
-                        read: {
-                            url: "http://demos.telerik.com/kendo-ui/service/Products"
-                        }
-                    },
-                    schema: {
-                        model: {
-                            id: "ProductID",
-                            hasChildren: false
-                        }
-                    }
-                }
-            }
+      type: "odata",
+      transport: {
+        read: {
+          url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
         }
-    });
+      },
+      schema: {
+        model: {
+          id: "CategoryID",
+          hasChildren: "Products",
+          children: {
+            type: "odata",
+            transport: {
+              read: {
+                url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+              }
+            },
+            schema: {
+              model: {
+                id: "ProductID",
+                hasChildren: false
+              }
+            }
+          }
+        }
+      }
+  });
 
-    $("#treeview").kendoTreeView({
-        dataSource: Categories,
-        dataTextField: ["CategoryName", "ProductName"]
-    });
+  $("#treeview").kendoTreeView({
+      dataSource: Categories,
+      dataTextField: ["CategoryName", "ProductName"]
+  });
 
-    $("#grid").kendoGrid({
-        dataSource: Categories,
-        columns: [
-            { field: "CategoryName", title: "Name" },
-            { field: "Description" }
-        ]
-    });
+  $("#grid").kendoGrid({
+      dataSource: Categories,
+      columns: [
+          { field: "CategoryName", title: "Name" },
+          { field: "Description" }
+      ]
+  });
+  </script>
 
