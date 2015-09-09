@@ -1,24 +1,26 @@
 ---
-title: Supported Browsers
-page_title: Supported browsers
+title: Web Browser and Operating System Support
+page_title: Web Browser and Operating System Support
 previous_url: /technical-requirements.html, /getting-started/technical-requirements, /browsers-support
 description: "Supported browsers, platform support and prerequisites for best performance when working with Kendo UI."
 position: 6
 ---
 
-# Supported Browsers
+# Web Browser and Operating System Support
 
-Kendo UI components are designed to support all major browsers and to operate without the worries of cross-browser compatibility, standards compliance or touch-device support. 
+In this chapter:  
 
-In this section:  
+* [Web Browser Support](#web-browser-support)  
+* [Operating System Support](#operating-system-support)
+* [Best Performance](#best-performance)
 
-* [Supported Desktop Browsers](#supported-desktop-browsers)  
-* [Supported Operating Systems](#supported-operating-systems)
-* [Other Prerequisites](#other-prerequisites)
+## Web Browser Support 
 
-## Supported Desktop Browsers
+Kendo UI components are designed to support all major browsers and to operate without the worries of cross-browser compatibility, standards compliance or touch-device support. However, depending on the specifics of your project and the components you prefer to use, the browser support provided by Kendo UI widgets may vary between the versions.
 
-### Kendo UI Core and Web Widgets
+### Web Browser Support General 
+
+The major part of the [Kendo UI widgets](/intro/list-of-widgets) have no limitations as of the browser versions they support:  
 
 | Browser			| Supported Versions			|
 | :---------------- | :---------------------------- | 
@@ -28,9 +30,9 @@ In this section:
 | Opera	        	| 15 or later					|
 | OS X Safari    	| [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
 
-[List of Kendo UI Components](http://docs.telerik.com/kendo-ui/intro/list-of-widgets)
+### Web Browser Support for Hybrid UI  
 
-### Kendo UI Mobile Widgets
+If your project is intended for mobile devices and you apply [hybrid UI](/intro/list-of-widgets) components, the user might need a later browser version: 
 
 | Browser			| Supported Versions			|
 | :---------------- | :---------------------------- | 
@@ -40,11 +42,11 @@ In this section:
 | Opera	        	| 15 or later					|
 | OS X Safari    	| [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
 
-[List of Kendo UI Components](http://docs.telerik.com/kendo-ui/intro/list-of-widgets)
+### Web Browser Support for Data Visualization Widgets 
 
-### Kendo UI DataViz Widgets
+Kendo UI widgets rendering [data visualization](/intro/list-of-widgets) may require more recent browser versions as well. If you want to implement them in your project, take heed of the information below. 
 
-##### Fully Supported Desktop Browsers 
+##### Fully Supported Browsers 
 
 | Browser			| Supported Versions			|
 | :---------------- | :---------------------------- | 
@@ -56,45 +58,40 @@ In this section:
 | iOS Safari		| iOS 8 or later				|
 | Chrome for Mobile | 21 or later					|
 
-##### Desktop Browsers with Limited Support
+##### Browsers with Limited Support
 
-Internet Explorer 6, 7 and 8 are supported with the following limitations:  
-
-* PDF and image export is not supported
-* Text rotation is not supported by the 64-bit versions
-* Gradients in pie and donut charts are not supported  
-
-Internet Explorer 10 is supported with the following limitations:  
-  
-* Dashed lines in canvas are not supported, which affects the image export as well
-* Android 2.x, therefore, uses non-interactive canvas output
-
-[List of Kendo UI Components](http://docs.telerik.com/kendo-ui/intro/list-of-widgets)
+| Browser			| Supported Versions			| Limitations								|
+| :---------------- | :---------------------------- | :-----------								|
+| Internet Explorer | 6, 7, and 8					| PDF and image export is not supported	|
+| 					|								| Text rotation is not supported by the 64-bit versions |
+| 					|								| Gradients in pie and donut charts are not supported |
+| Internet Explorer | 10							| Dashed lines in canvas are not supported, which affects the image export as well |
+| 					|								| Android 2.x, therefore, uses non-interactive canvas output | 
 
 ### Important Notes
 
 * Since Internet Explorer 11 was released in October 2013, look up the Q3 2013 SP2 (2013.3.1324) or a more recent Kendo UI version if you need support for it
 * Browsers in beta stage are not supported
-* [Quirks mode](http://www.quirksmode.org/css/quirksmode.html) is not supported. Always specify a [DOCTYPE](http://reference.sitepoint.com/html/doctypes). Recommended DOCTYPES include `HTML5`, `XHTML 1.1`, `XHTML 1.0 Strict` and `HTML4 Strict`. The `HTML4 Transitional` DOCTYPE fires the Quirks mode and should not be used. `XHTML 1.0 Transitional` works well in most cases, but may cause issues with the vertical positioning of icons. The correct syntax for [all DOCTYPES](http://www.w3.org/QA/2002/04/valid-dtd-list.html) is provided on the [W3C website](http://www.w3.org/).
-* Internet Explorer compatibility modes are not supported. These modes can exhibit different behavior and rendering bugs as compared to the browser versions they emulate. 
-* It is highly recommendable to use [Internet Explorer Edge mode](http://blogs.msdn.com/b/ie/archive/2010/06/16/ie-s-compatibility-features-for-site-developers.aspx) via a META tag or an HTTP header
+* [Quirks mode](http://www.quirksmode.org/css/quirksmode.html) is not supported  
+ 
+> Always specify a [DOCTYPE](http://reference.sitepoint.com/html/doctypes). Recommended DOCTYPES include `HTML5`, `XHTML 1.1`, `XHTML 1.0 Strict` and `HTML4 Strict`. The `HTML4 Transitional` DOCTYPE fires the Quirks mode and should not be used. `XHTML 1.0 Transitional` works well in most cases, but may cause issues with the vertical positioning of icons. The correct syntax for [all DOCTYPES](http://www.w3.org/QA/2002/04/valid-dtd-list.html) is provided on the [W3C website](http://www.w3.org/).  
 
-       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+* Internet Explorer compatibility modes are not supported. These modes can exhibit different behavior and rendering bugs as compared to the browser versions they emulate.  
+* It is highly advisable to use [Internet Explorer Edge mode](http://blogs.msdn.com/b/ie/archive/2010/06/16/ie-s-compatibility-features-for-site-developers.aspx) via a META tag or an HTTP header:
 
-* Kendo UI uses a progressive enhancement for its CSS styling. As a result, old and obsolete browsers may ignore CSS3 styles, such as rounded corners and linear gradients.
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-### Internet Explorer As an Embedded Browser in a Desktop Application
+* Kendo UI uses a progressive enhancement for its CSS styling. As a result, old and obsolete browsers may ignore CSS3 styles such as rounded corners and linear gradients.
+* Internet Explorer behaves differently when embedded inside a desktop (WinForms) application. It reports to support pointer events, but actually doesn't. As a result, some events, on which Kendo UI relies, are not fired. In order to avoid this problem, the following JavaScript code must be executed before the Kendo UI scripts are registered:
 
-Internet Explorer behaves differently when embedded inside a desktop (WinForms) application. It reports to support pointer events, but actually doesn't. As a result, some events, on which Kendo UI relies, are not fired. In order to avoid this problem, the following JavaScript code must be executed before the Kendo UI scripts are registered:
+	```
+	<script>
+	    window.MSPointerEvent = null;
+	    window.PointerEvent = null;
+	</script>
+	```
 
-```
-<script>
-    window.MSPointerEvent = null;
-    window.PointerEvent = null;
-</script>
-```
-
-## Supported Operating Systems
+## Operating System Support
 
 | Platform			| Version				|
 | :---------------- | :-------------------- | 
@@ -111,12 +108,12 @@ Internet Explorer behaves differently when embedded inside a desktop (WinForms) 
 
 * Kendo UI DataViz widgets support only the Canvas rendering mode in Android 2.3
 * Hybrid mouse and touch-screen devices are supported; for example, Internet Explorer 10, Chrome and Firefox on Windows 8
+
+## Best Performance
+
+To ensure the best performance of your project, follow the trick and tips:   
+
+ * Enable JavaScript on all browsers  
+ * Check **Disable Script Debugging** from your browser configuration options  
+ * Activate Caching in Internet Explorer  
  
-## Other Prerequisites
-
-* Enable JavaScript on all browsers
-
-Tips and tricks:  
-
-* Check **Disable Script Debugging** from your browser configuration options
-* Activate Caching in Internet Explorer
