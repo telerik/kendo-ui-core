@@ -1533,8 +1533,7 @@ div.k-filebrowser-dropzone em
 }
 
 .k-tool.k-group-start,
-.k-toolbar .k-split-button .k-button,
-.k-toolbar .k-button-group .k-group-start
+.k-toolbar .k-split-button .k-button
 {
     border-radius: @main-border-radius 0 0 @main-border-radius;
 }
@@ -1547,7 +1546,6 @@ div.k-filebrowser-dropzone em
 }
 
 .k-tool.k-group-end,
-.k-toolbar .k-button-group .k-group-end,
 .k-toolbar .k-split-button .k-split-button-arrow
 {
     border-radius: 0 @main-border-radius @main-border-radius 0;
@@ -3342,7 +3340,6 @@ table.k-editor {
 .k-editor-toolbar .k-tool,
 .k-group-start.k-group-end.k-tool {
     border-color: @alt-background-color;
-    border-radius: 50%;
 }
 
 .k-treeview .k-state-selected,
@@ -3373,15 +3370,17 @@ table.k-editor {
     .box-shadow(none);
 }
 
-.k-editor-toolbar .k-tool.k-state-hover,
-.k-toolbar .k-tool.k-state-hover {
-    background-color: @hover-background-color;
+.k-editor-toolbar .k-tool.k-state-selected,
+.k-toolbar .k-button-group .k-button.k-state-active {
+    .box-shadow(none);
+    background-color: @button-active-background;
+    border-color: @button-active-background;
 }
 
-.k-editor-toolbar .k-state-selected,
-.k-toolbar .k-state-selected{
-    .box-shadow(none);
-    background-color: transparent;
+.k-editor-toolbar .k-tool.k-state-hover,
+.k-toolbar .k-button-group .k-button:hover {
+    background-color: @hover-background-color;
+    border-color: @hover-background-color;
 }
 
 /* Progressbar */
