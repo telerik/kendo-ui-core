@@ -1,48 +1,60 @@
 ---
-title: Initialize a Kendo UI Widget as a jQuery Plugin
-page_title: Add Kendo UI jQuery Widgets to an Application using jQuery Plugin
+title: Initialize a Kendo UI Widget as a jQuery Plug-in
+page_title: Initialize a Kendo UI Widget as a jQuery Plug-in
 previous_url: /widgets, /howto/add-widgets, /basics/jquery-initialization
 description: Learn how to add Kendo UI widgets to your mobile website or web application.
 position: 3
 ---
 
-# Initialize a Kendo UI Widget Using the jQuery Plugin Syntax
+# Initialize a Kendo UI Widget Using the jQuery Plug-in Syntax
 
-All Kendo UI widgets are registered as [jQuery plugins](http://learn.jquery.com/plugins/), which allows them to be instantiated on a jQuery object
-instance. The jQuery plugin method is formed by the widget name in Pascal case, prefixed with `kendo` (`kendoGrid`, `kendoListView`).  The mobile
-widgets' methods are prefixed with `Mobile` to avoid collisions with their desktop counterparts (i.e. `kendoMobileTabStrip`, `kendoMobileButton`,
-`kendoMobileListView`).
+All Kendo UI widgets are registered as [jQuery plug-ins](http://learn.jquery.com/plugins/), which allows them to be instantiated on a jQuery object instance. The jQuery plug-in method is formed by the widget name in Pascal case, prefixed with `kendo` as in `kendoGrid` and `kendoListView`. The methods for mobile widgets are prefixed with `Mobile` to avoid collisions with their desktop counterparts as in `kendoMobileTabStrip`, `kendoMobileButton` and `kendoMobileListView`.
 
 Some Kendo UI widgets have specific requirements about the element types they should be instantiated on. For more details and working examples,
 check the source code in the [respective widget demo](http://demos.telerik.com/kendo-ui/) and [API reference](/api/introduction).
 
-## Instantiate a Kendo UI Autocomplete Widget
+In this chapter:  
+* [Instantiate the Kendo UI AutoComplete Widget](#instantiate-the-kendo-ui-autocomplete-widget)  
+* [Instantiate Multiple Kendo UI Buttons With a Single jQuery Selector](#instantiate-multiple-kendo-ui-buttons-with-a-single-jquery-selector)  
+* [Configure Kendo UI Widgets](#configure-kendo-ui-widgets)  
+* [Duplicate Kendo UI Widget Initialization](#duplicate-kendo-ui-widget-initialization)
 
-        <p>Animal: <input id="animal" /></p>
+## Instantiate the Kendo UI AutoComplete Widget
 
-        <script>
-            $(function() {
-              $("#animal").kendoAutoComplete({ dataSource: [ "Ant", "Antilope", "Badger", "Beaver", "Bird" ] });
-            });
-        </script>
+Example:
 
-If the jQuery object includes **more than one** DOM element, **a separate widget** will be instantiated for each.
+```
+	<p>Animal: <input id="animal" /></p>
+
+	<script>
+        $(function() {
+          $("#animal").kendoAutoComplete({ dataSource: [ "Ant", "Antilope", "Badger", "Beaver", "Bird" ] });
+        });
+    </script>
+```
+
+> Note that if the jQuery object includes more than one DOM element, a separate widget will be instantiated for each.
 
 ## Instantiate Multiple Kendo UI Buttons With a Single jQuery Selector
 
+Example: 
+
+```
     <button>Foo</button> | <button>Bar</button>
     <script>
       $(function() {
         $("button").kendoButton();
       });
     </script>
+```
 
+> The jQuery convention of returning the selected DOM element from most methods applies to the widget initialization methods. This allows jQuery methods to be chained.
 
-> The jQuery convention of **returning the selected DOM element** from most methods applies to the widget initialization methods. This allows jQuery
-> methods to be chained.
+### Chain jQuery Method Calls After the Widget Instantiation Plug-in Method
 
-### Chain jQuery Method Calls After the Widget Instantiation Plugin Method
+Example: 
 
+```
     <button>Foo</button> | <button>Bar</button>
 
     <script>
@@ -50,15 +62,17 @@ If the jQuery object includes **more than one** DOM element, **a separate widget
         $("button").kendoButton().css("color", "red");
       });
     </script>
+```
 
 ## Configure Kendo UI Widgets
 
-You can configure a Kendo UI widget by passing a configuration object (key/value pairs) as an argument to the jQuery plugin method. Each widget supported
-configuration options and events are listed in the respective widget [API reference](/api/introduction). The configuration object may also contain
-event handlers that will be bound to the corresponding widget events.
+You can configure a Kendo UI widget by passing a configuration object (key/value pairs) as an argument to the jQuery plugin method. Each widget supported configuration options and events are listed in the respective widget [API reference](/api/introduction). The configuration object may also contain event handlers that will be bound to the corresponding widget events.
 
-### Instantiate and Configure a Kendo UI Grid
+### Instantiate and Configure the Kendo UI Grid
 
+Example: 
+
+```
     <div id="grid"></div>
 
     <script>
@@ -88,17 +102,22 @@ event handlers that will be bound to the corresponding widget events.
       }
     });
     </script>
+```
 
 This example sets the [height](/api/web/grid#height-numberstring), [columns](/api/web/grid#columns-array) and [dataSource](/api/web/grid#datasource-kendodatadatasource--object) configuration options of the Grid widget.
 
 ## Duplicate Kendo UI Widget Initialization
 
-Please be careful **not** to initialize a widget on the same DOM element **more than once**.
-That often happens when using Kendo UI server wrappers (they are initialized automatically), or scenarios in which a widget is created in an event handler executed multiple times.
-A common mistake is to recreate a widget instance when the goal is only to get the instance object. **Duplicate initialization is not supported** and results in unexpected side effects.
+When using a Kendo UI server-side wrapper (as they are automatically initialized) or when a widget is being created in an event handler executed multiple times, it is possible to initialize a widget on the same DOM element more than once. In such a scenario, do not try to recreate a widget  instance when the goal is to get the instance object     
 
-### Example - Incorrect Duplicate Initialization
 
+A common mistake is to recreate a widget instance when the goal is only to get the instance object. Duplicate initialization is not supported and results in unexpected side effects.
+
+### Incorrect Duplicate Initialization
+
+Example:
+
+```
     <input id="autocomplete" />
     <script>
         // initialization code here...
@@ -111,13 +130,17 @@ A common mistake is to recreate a widget instance when the goal is only to get t
         // INCORRECT - instance reference is obtained while creating a duplicate instance:
         var duplicate = $("#autocomplete").kendoAutoComplete().data("kendoAutoComplete");
     </script>
+```
 
 In order to check if a widget instance already exists for a certain DOM element, use the
 [standard way to obtain the widget instance](/basics/events-and-methods#obtain-a-reference-to-a-kendo-ui-widget-instance-using-jquery).
 If the returned value is `undefined`, then a widget instance does not exist.
 
-### Example - Check if a widget instance exists
+### Check If a Widget Instance Exists
 
+Example:
+
+```
     <input id="autocomplete" />
     <script>
         // try to obtain the widget instance
@@ -132,3 +155,4 @@ If the returned value is `undefined`, then a widget instance does not exist.
             // widget instance does not exist
         }
     </script>
+```
