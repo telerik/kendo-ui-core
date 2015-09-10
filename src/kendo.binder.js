@@ -26,6 +26,7 @@ var __meta__ = { // jshint ignore:line
         CHECKED = "checked",
         CSS = "css",
         deleteExpando = true,
+        FUNCTION = "function",
         CHANGE = "change";
 
     (function() {
@@ -577,7 +578,7 @@ var __meta__ = { // jshint ignore:line
 
             for (idx = 0; idx < items.length; idx++) {
                 var child = element.children[index];
-                unbindElementTree(child);
+                unbindElementTree(child, true);
                 element.removeChild(child);
             }
         },
@@ -599,7 +600,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (this.bindings.template) {
-                unbindElementChildren(element);
+                unbindElementChildren(element, true);
 
                 $(element).html(this.bindings.template.render(source));
 
@@ -899,7 +900,7 @@ var __meta__ = { // jshint ignore:line
                     items = e.removedItems || widget.items();
 
                 for (idx = 0, length = items.length; idx < length; idx++) {
-                    unbindElementTree(items[idx]);
+                    unbindElementTree(items[idx], false);
                 }
             },
 
@@ -1632,7 +1633,7 @@ var __meta__ = { // jshint ignore:line
         parents = parents || [source];
 
         if (role || bind) {
-            unbindElement(element);
+            unbindElement(element, false);
         }
 
         if (role) {
@@ -1719,7 +1720,7 @@ var __meta__ = { // jshint ignore:line
         }
     }
 
-    function unbindElement(element) {
+    function unbindElement(element, destroyWidget) {
         var bindingTarget = element.kendoBindingTarget;
 
         if (bindingTarget) {
@@ -1733,20 +1734,29 @@ var __meta__ = { // jshint ignore:line
                 element.kendoBindingTarget = null;
             }
         }
+        
+        if(destroyWidget) {
+            var data = $(element).data();
+            for (var key in data) {
+                if (key.indexOf("kendo") === 0 && typeof data[key].destroy === FUNCTION) {
+                    data[key].destroy();
+                }
+            }
+        }
     }
 
-    function unbindElementTree(element) {
-        unbindElement(element);
+    function unbindElementTree(element, destroyWidgets) {
+        unbindElement(element, destroyWidgets);
 
-        unbindElementChildren(element);
+        unbindElementChildren(element, destroyWidgets);
     }
 
-    function unbindElementChildren(element) {
+    function unbindElementChildren(element, destroyWidgets) {
         var children = element.children;
 
         if (children) {
             for (var idx = 0, length = children.length; idx < length; idx++) {
-                unbindElementTree(children[idx]);
+                unbindElementTree(children[idx], destroyWidgets);
             }
         }
     }
@@ -1757,7 +1767,7 @@ var __meta__ = { // jshint ignore:line
         dom = $(dom);
 
         for (idx = 0, length = dom.length; idx < length; idx++ ) {
-            unbindElementTree(dom[idx]);
+            unbindElementTree(dom[idx], false);
         }
     }
 
