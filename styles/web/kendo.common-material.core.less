@@ -11,7 +11,8 @@
 
 @import "common/core.less";
 
-.k-button {
+.k-button,
+.k-toolbar .k-button {
     line-height: 1.143em;
     padding: 9px 14px;
 }
@@ -475,6 +476,19 @@ table.k-editor {
 	padding-left: 10px;
 }
 
+.k-toolbar {
+    line-height: 3.42em;
+}
+
+.k-toolbar .k-button-group {
+    line-height: 3.286em;
+}
+
+.k-toolbar .k-button-group .k-button {
+    line-height: inherit;
+    padding: 0 .857em;
+}
+
 .k-toolbar .k-input {
     height: @input-height;
     line-height: @input-height;
@@ -485,12 +499,20 @@ table.k-editor {
 }
 
 .k-toolbar .k-overflow-anchor {
-    border-width: 1px;    
-    line-height: inherit;
+    border-width: 0;    
+    line-height: 3.286em;
+    width: 3.42em;
+    height: 3.42em;
+    padding: 0;
 }
 
 .k-button-group .k-tool {
-	margin: 6px 0;
+    margin: 6px 0;
+}
+
+.k-toolbar .k-split-button-arrow {
+    padding-left: .4em;
+    padding-right: .4em;
 }
 
 .k-editor-toolbar .k-button-group .k-tool-icon,
@@ -506,10 +528,6 @@ table.k-editor {
 
 .k-editor-toolbar .k-state-selected {
     font-weight: bold;  
-}
-
-.k-editor-toolbar .k-tool.k-state-hover {
-    border-radius: 50%;
 }
 
 .k-filebrowser {
