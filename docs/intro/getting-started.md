@@ -7,6 +7,15 @@ position: 1
 
 # Getting Started with Kendo UI
 
+In this chapter:   
+
+* [Host Kendo UI in Your Project](#host-kendo-ui-in-your-project)
+* [Install Kendo UI As a Bower Package](#install-kendo-ui-as-a-kendo-ui-core-or-kendo-ui-professional-bower-package)
+* [Use the Kendo UI CDN Service](#use-the-kendo-ui-cdn-service)
+* [Include Only What You Need](#include-only-what-you-need)
+
+## Host Kendo UI in Your Project
+
 Depending on your preferences and the requirements of your project, you can:  
   
 * [Download](http://www.telerik.com/download/kendo-ui) Kendo UI for a 30-day trial period  
@@ -16,18 +25,9 @@ Depending on your preferences and the requirements of your project, you can:
 * [Get](http://www.telerik.com/purchase/jsp-ui) your commercial license for Telerik UI for JSP  
 * [Get](http://www.telerik.com/purchase/php-ui) your commercial license for Telerik UI for PHP   
 
-In this section:   
-
-* [Host Kendo UI in Your Project](#host-kendo-ui-in-your-project)
-* [Install Kendo UI As a Bower Package](#install-kendo-ui-as-a-kendo-ui-core-or-kendo-ui-professional-bower-package)
-* [Use the Kendo UI CDN Service](#use-the-kendo-ui-cdn-service)
-* [Include Only What You Need](#include-only-what-you-need)
-
-## Host Kendo UI in Your Project
-
 ### Step 1: Download Kendo UI
 
-Once you [download](http://www.telerik.com/download/kendo-ui) any of the Kendo UI packages, you will get the following folders on your local repository: 
+Once you [download](http://www.telerik.com/download/kendo-ui) any of the Kendo UI packages, you will get the following folders in your local repository: 
 
 * `/examples` - the folder accommodates the quick start demo files
 * `/js` - the location contains the minified JavaScript files 
@@ -40,8 +40,8 @@ Once you [download](http://www.telerik.com/download/kendo-ui) any of the Kendo U
 
 To use Kendo UI in your project, you need to include the required JavaScript and CSS files.
 
-1. Extract the `/js` and `/styles` directories from the bundle archive and copy them to your web application root directory
-2. Include the Kendo UI JavaScript and CSS files in the `head` tag of your HTML document. Make sure the common CSS file is registered before the theme CSS file.   
+**Step 1:** Extract the `/js` and `/styles` directories from the bundle archive and copy them to your web application root directory  
+**Step 2:** Include the Kendo UI JavaScript and CSS files in the `head` tag of your HTML document. Make sure the common CSS file is registered before the theme CSS file.  
 
 Here goes the example:
 
@@ -72,9 +72,9 @@ Here goes the example:
 	        </body>
 	        </html>
 
->The rest of the code examples assume that the Kendo UI scripts and stylesheets were added to the document.
+> The code examples onwards assume that the Kendo UI scripts and stylesheets were added to the document. 
 
-3. Initialize a Kendo UI Widget 
+**Step 3:** Initialize a Kendo UI Widget 
 
 Example with the DataPicker widget:
 
@@ -112,21 +112,21 @@ Here is the complete example:
 
 [Bower](http://bower.io/) is a popular package manager for the web.
 
-Kendo UI maintains two bower packages, namely Kendo UI Core and Kendo UI Professional. Official releases, service packs and internal builds are uploaded to both of them. 
+Kendo UI maintains 2 bower packages, namely Kendo UI Core and Kendo UI Professional. Official releases, service packs and internal builds are uploaded to both of them. 
 
-> The professional bower package is available only for licensed user accounts. It is not accessible for trial accounts. For the list of Kendo UI widgets and frameworks supported by the Kendo UI Core and the Kendo UI Professional bundles, refer to the [Bundle Support for Kendo UI Widgets and Frameworks](http://docs.telerik.com/kendo-ui/intro/list-of-widgets)
+> Kendo UI Professional bower package is available for licensed user accounts only. Check out the list of Kendo UI components and their bundle support [here](http://docs.telerik.com/kendo-ui/intro/list-of-widgets).
 
-### Install Kendo UI Core Bower Package
+### Option 1: Install Kendo UI Core Bower Package
 
-The Kendo UI Core Bower package is available as a [public GitHub repository](https://github.com/kendo-labs/bower-kendo-ui) and is also registered as `kendo-ui-core` in the bower registry.
+The Kendo UI Core Bower package is available as a [public GitHub repository](https://github.com/kendo-labs/bower-kendo-ui) and is also registered as `kendo-ui-core` in the bower registry: 
 
 ```sh
 bower install kendo-ui-core
 ```
 
-### Install Kendo UI Professional Bower Package
+### Option 2: Install Kendo UI Professional Bower Package
 
-The Kendo UI Professional Bower Package is hosted as a [private GitHub repository](https://bower.telerik.com). To access it, you need an active account for !!!Telerik Platform. Bower will prompt for your username and password during the installation and update processes.
+The Kendo UI Professional Bower Package is hosted as a [private GitHub repository](https://bower.telerik.com). To access it, you need an active account for Telerik Platform. Bower will prompt for your username and password during the installation and update processes:
 
 ```sh
 bower install https://bower.telerik.com/bower-kendo-ui.git
@@ -136,7 +136,7 @@ You can also add the package to the `bower.json` file:
 
 ```json
 "dependencies": {
-    "kendo-ui": "https://bower.telerik.com/bower-kendo-ui.git#~2014.3.1425"
+"kendo-ui": "https://bower.telerik.com/bower-kendo-ui.git#~2014.3.1425"
 }
 ```
 
@@ -152,27 +152,27 @@ You can also add the package to the `bower.json` file:
 
 > Caching your credentials is required if you use the Kendo UI Bower Package in an ASP.NET vNext project.
 
-1. Create a text file called `_netrc` in your home directory (e.g. `c:\users\jane\_netrc`).
-2. Declare a HOME environment variable:
+**Step 1:** Create a text file called `_netrc` in your home directory (e.g. `c:\users\jane\_netrc`)  
+**Step 2:** Declare a HOME environment variable:
 
-	```
-    C:\> SETX HOME %USERPROFILE%
-    ```
-   
-3. Add the credentials using the format listed above.
+```
+C:\> SETX HOME %USERPROFILE%
+```    
+
+**Step 3:** Add the credentials using the format listed above.
 
 GitHub might have problems resolving your home directory if it contains spaces in its path (e.g. `c:\Documents and Settings\jane`). Therefore, update your `%HOME%` environment variable to point to a directory having no spaces in its name.
 
 #### Store Your Credentials on Linux, OS X and Unix-Like Systems
 
-1. Create a file called `.netrc` in your home directory (`~/.netrc`). Make sure you modify the file permissions to make it readable only to you.
+**Step 1:** Create a file called `.netrc` in your home directory (`~/.netrc`). Make sure you modify the file permissions to make it readable only to you.
 
-    ```sh
-    touch ~/.netrc
-    chmod 0600 ~/.netrc
-    ```
+```sh
+touch ~/.netrc
+chmod 0600 ~/.netrc
+```
     
-2. Add your credentials to the `~/.netrc` file using the format listed in the example below:
+**Step 2:** Add your credentials to the `~/.netrc` file using the format listed in the example below:
 		
 ```
 machine bower.telerik.com
@@ -198,9 +198,9 @@ fatal: unable to access 'https://bower.telerik.com/bower-kendo-ui.git/': SSL cer
 
 The Kendo UI CDN is hosted on [Amazon CloudFront](https://aws.amazon.com/cloudfront/). In order to access the Kendo UI CDN Service, you can use either of the options described below. 
 
-### Through the HTTP Protocol
+### Option 1: Through the HTTP Protocol
 
-The minified versions of all JavaScript files are available via the following URLs:
+The minified versions of all JavaScript files are available via the following URLs:  
 <http://kendo.cdn.telerik.com/VERSION/js/FILENAME.min.js>  
 <http://kendo.cdn.telerik.com/VERSION/styles/FILENAME.min.css>
 
@@ -213,7 +213,7 @@ Use the following URL to load the minified Kendo UI Core script (available since
 
 >The <http://cdn.kendostatic.com> URL will remain active, but is no longer recommended for new projects.   
 
-### Through the HTTPS Protocol
+### Option 2: Through the HTTPS Protocol
 
 To access the Kendo UI CDN service through the HTTPS protocol, use the same host name as above, only replacing the scheme (protocol) with `https`:  
 <https://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js>
@@ -275,7 +275,7 @@ Although the Amazon CloudFront service provides for a reliable level of uptime s
 
 ## Include Only What You Need
 
-This section will help you use the Kendo UI widgets, frameworks and functionalities that will best suit your project. For more details on how to do it, refer to the following chapters:
+In this section you will learn how to use those Kendo UI components that will best suit your project:
 
 * [Pick the Right Combined Script Based on Your Project Type](#pick-the-right-combined-script-based-on-your-project-type)
 * [Build a Custom Combined Script With the Kendo UI Download Builder](#build-a-custom-combined-script-with-the-kendo-ui-download-builder)
@@ -328,545 +328,495 @@ Do not use multiple custom combined scripts, as they will contain duplicate code
 
 ### Include Individual Widget Scripts
 
-The following script files, either minified or not, can be included on a per-widget basis depending on the flavour you want to add to your project:
+The following script files, either minified or not, can be included on a per-widget basis depending on the flavor you want to add to your project. Refer to the list with Kendo UI widgets in terms of their bundle support [here](/intro/list-of-widgets). 
 
-#### Framework
+#### Kendo UI Widgets
 
-Here is the list of the shared components providing behaviors, data access and other services:
+Here is the list of the script files for desktop UI widgets for mobile-ready websites and applications:
 
-| Feature				| Script Files						|Comments 		|
-| :-------------------- | :-------------------------------- |:------------- |
-| Angular JS Directives	| jquery.js 						|				|
-|						| kendo.core.js						|				|
-| 						| kendo.angular.js					|				|
-| MVVM					| jquery.js 						|				|
-|						| kendo.core.js						|				|
-| 						| kendo.data.js						|				|
-| 						| kendo.binder.js					|				|
-| Core					| jquery.js 						|				|
-|						| kendo.core.js						|				|
-| Data Source			| jquery.js 						|				|
-|						| kendo.core.js						|				|
-|						| kendo.data.odata.js 				| OData feature	|
-|						| kendo.data.xml.js 				| XML feature	|
-|						| kendo.data.js						|				|
-| Drag & Drop			| jquery.js 						|				|
-|						| kendo.core.js						|				|
-|						| kendo.userevents.js				|				|
-|						| kendo.draganddrop.js				|				|
-| Drawing API			| jquery.js							|				|
-|						| kendo.core.js						|				|
-|						| kendo.color.js					|				|
-|						| kendo.drawing.jsjquery.js			|				|
-| Effects				| jquery.js 						|				|
-|						| kendo.core.js						|				|
-|						| kendo.fx.js						|				|
-| PDF Export			| jquery.js 						|				|
-|						| kendo.core.js						|				|
-| 						| kendo.color.js					|				|
-| 						| kendo.drawing.js					|				|
-| 						| kendo.pdf.js						|				|
-| Router				| jquery.js 						|				|
-|						| kendo.core.js						|				|
-|						| kendo.router.js					|				|
-| Sortable				| jquery.js 						|				|
-|						| kendo.core.js						|				|
-|						| kendo.userevents.js				|				|
-| 						| kendo.draganddrop.js				|				|
-| 						| kendo.sortable.js					|				|
-| View					| jquery.js 						|				|
-|						| kendo.core.js						|				|
-|						| kendo.data.js						|				|
-| 						| kendo.binder.js					|				|
-| 						| kendo.fx.js						|				|
-| 						| kendo.view.js						|				|
- 
+| Widget				| Script Files								| Comments					|
+| :---					| :---										| :---						|
+| [AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index)| jquery.js| 				|
+|						| kendo.core.js								|							|
+|						| kendo.data.js								|							|
+|						| kendo.popup.js							|							|
+|						| kendo.list.js								|							|
+|						| kendo.fx.js 								| Mobile scroller feature	|
+|						| kendo.userevents.js 						| Mobile scroller feature	|
+|						| kendo.draganddrop.js 						| Mobile scroller feature	|
+|						| kendo.mobile.scroller.js 					| Mobile scroller feature	|
+|						| kendo.virtuallist.js 						| VirtualList feature		|
+|						| kendo.autocomplete.js						| 							|
+| 						| kendo.angular.js							| 							|
+| [Button](http://demos.telerik.com/kendo-ui/button/index)| jquery.js|							|
+| 						| kendo.core.js								| 							|
+| 						| kendo.button.js							| 							|
+| [Calendar](http://demos.telerik.com/kendo-ui/calendar/index)| jquery.js|						|
+| 						| kendo.core.js								| 							|
+| 						| kendo.calendar.js							| 							|
+| [Color Tools](http://demos.telerik.com/kendo-ui/colorpicker/index)| jquery.js| 				|
+| 						| kendo.core.js								| 							|
+| 						| kendo.color.js							| 							|
+| 						| kendo.popup.js							|  							|
+| 						| kendo.userevents.js						| 							|
+| 						| kendo.draganddrop.js						| 							|
+| 						| kendo.slider.js							| 							|
+| 						| kendo.colorpicker.js						| 							|
+| [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index)| jquery.js|						|
+| 						| kendo.core.js								| 							|
+| 						| kendo.data.js								| 							|
+| 						| kendo.popup.js							| 							|
+| 						| kendo.list.js								| 							|
+| 						| kendo.fx.js 								| Mobile scroller feature	|
+| 						| kendo.userevents.js 						| Mobile scroller feature	|
+| 						| kendo.draganddrop.js 						| Mobile scroller feature	|
+| 						| kendo.mobile.scroller.js 					| Mobile scroller feature	|
+| 						| kendo.virtuallist.js 						| VirtualList feature		|
+| 						| kendo.combobox.js							| 							|
+| [DatePicker](http://demos.telerik.com/kendo-ui/datepicker/index)	| jquery.js|				|
+| 						| kendo.core.js								| 							|
+| 						| kendo.calendar.js							| 							|
+| 						| kendo.popup.js							| 							|
+| 						| kendo.datepicker.js						| 							|
+|						| kendo.timepicker.js						| 							|
+| 						| kendo.datetimepicker.js					| 							|
+| [DateTimePicker](http://demos.telerik.com/kendo-ui/datetimepicker/index)| jquery.js| 			|
+|						| kendo.core.js								| 							|
+|						| kendo.fx.js								| 							|
+| [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index)| jquery.js|				|
+| 						| kendo.core.js								| 							|
+| 						| kendo.data.js								| 							|
+| 						| kendo.popup.js							| 							|
+| 						| kendo.list.js								| 							|
+| 						| kendo.fx.js 								| Mobile scroller feature	|
+| 						| kendo.userevents.js 						| Mobile scroller feature	|
+| 						| kendo.draganddrop.js 						| Mobile scroller feature	|
+| 						| kendo.mobile.scroller.js 					| Mobile scroller feature	|
+| 						| kendo.virtuallist.js 						| VirtualList feature		|
+| 						| kendo.dropdownlist.js						| 							|
+| [Editor](http://demos.telerik.com/kendo-ui/editor/index)| jquery.js| 							|
+| 						| kendo.core.js								| 							|
+| 						| kendo.data.js								| 							|
+| 						| kendo.popup.js							| 							|
+| 						| kendo.list.js								| 							|
+| 						| kendo.combobox.js							| 							|
+| 						| kendo.dropdownlist.js						| 							|
+| 						| kendo.userevents.js						| 							|
+| 						| kendo.draganddrop.js						| 							|
+| 						| kendo.window.js							| 							|
+| 						| kendo.color.js 							| 							|
+|						| kendo.slider.js							| 							|
+| 						| kendo.colorpicker.js						| 							|
+| 						| kendo.selectable.js 						| Image Browser feature		|
+|						| kendo.listview.js 						| Image Browser feature		|
+| 						| kendo.upload.js 							| Image Browser feature		|
+| 						| kendo.filebrowser.js  					| Image Browser feature		|
+|						| kendo.imagebrowser.js  					| Image Browser feature		|
+| 						| kendo.resizable.js 						| Resize handle feature		|
+| 						| kendo.drawing.js 							| PDF export feature		|
+| 						| kendo.pdf.js 								| PDF export feature		|
+|						| kendo.editor.js							|  							|
+| [Gantt](http://demos.telerik.com/kendo-ui/gantt/index)| jquery.js|  							|
+| 						| kendo.core.js								|  							|
+| 						| kendo.data.js								|  							|
+| 						| kendo.popup.js							|  							|
+| 						| kendo.userevents.js						|  							|
+| 						| kendo.draganddrop.js						|  							|
+| 						| kendo.resizable.js						|  							|
+|						| kendo.window.js							|  							|
+| 						| kendo.dom.js								|  							|
+| 						| kendo.touch.js							| 							|
+|						| kendo.columnsorter.js						| 							|
+|						| kendo.calendar.js							| 							|
+|						| kendo.datepicker.js						| 							|
+| 						| kendo.timepicker.js						| 							|
+| 						| kendo.datetimepicker.js					| 							|
+| 						| kendo.numerictextbox.js					| 							|
+| 						| kendo.validator.js						| 							|
+| 						| kendo.binder.js							| 							|
+| 						| kendo.editable.js							| 							|
+| 						| kendo.gantt.list.js						| 							|
+| 						| kendo.gantt.timeline.js					| 							|
+|						| kendo.grid.js								| 							|
+|						| kendo.gantt.js							| 							|
+| [Grid](http://demos.telerik.com/kendo-ui/grid/index)| jquery.js| 								|
+| 						| kendo.core.js								| 							|
+| 						| kendo.data.js								| 							|
+| 						| kendo.columnsorter.js						| 							|
+| 						| kendo.calendar.js 						| Editing feature			|	
+| 						| kendo.popup.js 							| Editing feature			|
+| 						| kendo.datepicker.js 						| Editing feature			|
+| 						| kendo.userevents.js 						| Editing feature			|
+| 						| kendo.numerictextbox.js 					| Editing feature			|
+|						| kendo.validator.js 						| Editing feature			|
+| 						| kendo.binder.js 							| Editing feature			|
+| 						| kendo.editable.js 						| Editing feature			|
+| 						| kendo.draganddrop.js 						| Editing feature			|
+| 						| kendo.window.js 							| Editing feature			|
+| 						| kendo.calendar.js 						| Filtering feature			|
+|						| kendo.popup.js 							| Filtering feature			|
+| 						| kendo.datepicker.js 						| Filtering feature			|
+| 						| kendo.userevents.js 						| Filtering feature			|
+| 						| kendo.numerictextbox.js 					| Filtering feature			|
+| 						| kendo.list.js 							| Filtering feature			|
+|						| kendo.dropdownlist.js 					| Filtering feature			|
+| 						| kendo.binder.js 							| Filtering feature			|
+| 						| kendo.filtermenu.js 						| Filtering feature			|
+| 						| kendo.popup.js 							| Column menu feature		|
+| 						| kendo.calendar.js 						| Column menu feature		|
+| 						| kendo.datepicker.js 						| Column menu feature		|
+| 						| kendo.userevents.js 						| Column menu feature		|
+| 						| kendo.numerictextbox.js 					| Column menu feature		|
+| 						| kendo.list.js 							| Column menu feature		|
+| 						| kendo.dropdownlist.js 					| Column menu feature		|
+| 						| kendo.binder.js 							| Column menu feature		|
+| 						| kendo.filtermenu.js 						| Column menu feature		|
+| 						| kendo.menu.js 							| Column menu feature		|
+| 						| kendo.columnmenu.js 						| Column menu feature		|
+| 						| kendo.userevents.js 						| Grouping feature 			|	
+| 						| kendo.draganddrop.js 						| Grouping feature			|
+| 						| kendo.groupable.js 						| Grouping feature			|
+| 						| kendo.popup.js 							| Row filter feature  		|
+| 						| kendo.list.js 							| Row filter feature		|
+| 						| kendo.autocomplete.js  					| Row filter feature		|
+| 						| kendo.filtercell.js 						| Row filter feature		|
+| 						| kendo.pager.js 							| Paging Feature			|
+| 						| kendo.userevents.js 						| Selection Feature			|
+| 						| kendo.selectable.js 						| Selection Feature			|
+|						| kendo.userevents.js 						| Column reordering feature |
+| 						| kendo.draganddrop.js						| Column reordering feature	|
+| 						| kendo.reorderable.js 						| Column reordering feature	|
+| 						| kendo.userevents.js 						| Column resizing feature	|
+| 						| kendo.draganddrop.js 						| Column resizing feature 	|
+| 						| kendo.resizable.js 						| Column resizing feature	|
+| 						| kendo.popup.js 							| Grid adaptive rendering feature|
+| 						| kendo.fx.js 								| Grid adaptive rendering feature|
+| 						| kendo.userevents.js 						| Grid adaptive rendering feature|
+| 						| kendo.draganddrop.js 						| Grid adaptive rendering feature|
+| 						| kendo.mobile.scroller.js 					| Grid adaptive rendering feature|
+| 						| kendo.binder.js 							| Grid adaptive rendering feature|
+| 						| kendo.view.js 							| Grid adaptive rendering feature|
+| 						| kendo.mobile.view.js 						| Grid adaptive rendering feature|
+| 						| kendo.mobile.loader.js 					| Grid adaptive rendering feature|
+| 						| kendo.mobile.pane.js 						| Grid adaptive rendering feature|
+| 						| kendo.mobile.popover.js 					| Grid adaptive rendering feature|
+| 						| kendo.mobile.shim.js 						| Grid adaptive rendering feature|
+| 						| kendo.mobile.actionsheet.js 				| Grid adaptive rendering feature|
+| 						| kendo.ooxml.js 							| Excel export feature		| 
+| 						| kendo.excel.js 							| Excel export feature		|
+| 						| kendo.color.js 							| PDF export feature 		|
+| 						| kendo.drawing.js 							| PDF export feature		|		
+| 						| kendo.pdf.js 								| PDF export feature		|
+| 						| kendo.progressbar.js 						| PDF export feature		|
+| [ListView](http://demos.telerik.com/kendo-ui/listview/index)| jquery.js|						|
+| 						| kendo.core.js								| 							|
+| 						| kendo.data.js								| 							|
+| 						| kendo.calendar.js 						| Editing feature			|
+| 						| kendo.popup.js 							| Editing feature			|
+| 						| kendo.datepicker.js 						| Editing feature			|
+| 						| kendo.userevents.js 						| Editing feature			|
+|						| kendo.numerictextbox.js 					| Editing feature			|
+| 						| kendo.validator.js 						| Editing feature			|
+| 						| kendo.binder.js 							| Editing feature			|
+| 						| kendo.editable.js 						| Editing feature			|
+| 						| kendo.userevents.js 						| Selection feature			|
+| 						| kendo.selectable.js 						| Selection feature			|
+| 						| kendo.listview.js							| 							|
+| [MaskedTextBox](http://demos.telerik.com/kendo-ui/maskedtextbox/index)| jquery.js|			|
+| 						| kendo.core.js								| 							|
+| 						| kendo.maskedtextbox.js					| 							|
+| [Menu](http://demos.telerik.com/kendo-ui/menu/index)| jquery.js|	 							|
+| 						| kendo.core.js								| 							|
+| 						| kendo.popup.js							| 							|
+| 						| kendo.menu.js								| 							|
+| [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index)| jquery.js|				|
+| 						| kendo.core.js								| 							|
+| 						| kendo.data.js								| 							|
+| 						| kendo.popup.js							| 							|
+| 						| kendo.list.js								| 							|
+| 						| kendo.fx.js 								| Mobile scroller feature	|
+| 						| kendo.userevents.js 						| Mobile scroller feature	|
+| 						| kendo.draganddrop.js 						| Mobile scroller feature	|
+| 						| kendo.mobile.scroller.js 					| Mobile scroller feature	|
+| 						| kendo.virtuallist.js 						| VirtualList feature		|
+| 						| kendo.multiselect.js						| 							|
+| [Notification](http://demos.telerik.com/kendo-ui/notification/index)| jquery.js|				|
+| 						| kendo.core.js								| 							|
+| 						| kendo.popup.js							| 							|
+| 						| kendo.notification.js						| 							|
+| [NumericTextBox](http://demos.telerik.com/kendo-ui/numerictextbox/index)| jquery.js|			|
+| 						| kendo.core.js								| 							|
+| 						| kendo.userevents.js						| 							|
+| 						| kendo.numerictextbox.js 					| 							|
+| [PanelBar](http://demos.telerik.com/kendo-ui/panelbar/index)| jquery.js| 						|
+| 						| kendo.core.js								| 							|
+| 						| kendo.panelbar.js							| 							|
+| [PivotGrid](http://demos.telerik.com/kendo-ui/pivotgrid/index)| jquery.js|					|
+| 						| kendo.core.js								| 							|
+| 						| kendo.dom.js								| 							|
+| 						| kendo.data.js								| 							|
+| 						| kendo.data.xml.js							| 							|
+| 						| kendo.userevents.js						| 							|
+| 						| kendo.draganddrop.js						| 							|
+| 						| kendo.sortable.js							| 							|
+| 						| kendo.popup.js 							| Configurator feature		|
+| 						| kendo.list.js 							| Configurator feature		|
+| 						| kendo.dropdownlist.js						| Configurator feature		|
+| 						| kendo.treeview.js 						| Configurator feature		|
+| 						| kendo.menu.js 							| Configurator feature		|
+| 						| kendo.window.js 							| Configurator feature		|
+| 						| kendo.pivot.fieldmenu.js 					| Configurator feature		|
+| 						| kendo.pivot.configurator.js 				| Configurator feature		|
+| 						| kendo.popup.js 							| Filtering feature			|
+| 						| kendo.menu.js 							| Filtering feature			|
+| 						| kendo.window.js 							| Filtering feature			|
+| 						| kendo.treeview.js 						| Filtering feature			|
+| 						| kendo.list.js 							| Filtering feature			|
+| 						| kendo.dropdownlist.js 					| Filtering feature			|
+| 						| kendo.pivot.fieldmenu.js 					| Filtering feature			|
+| 						| kendo.ooxml.js 							| Excel export feature		|
+| 						| kendo.color.js 							| PDF export feature		|
+| 						| kendo.drawing.js 							| PDF export feature		|
+| 						| kendo.pdf.js 								| PDF export feature		|
+| 						| kendo.fx.js 								| Mobile scroller feature	|
+| 						| kendo.mobile.scroller.js					| Mobile scroller feature	|
+| 						| kendo.pivotgrid.js						| 							|
+| [ProgressBar](http://demos.telerik.com/kendo-ui/progressbar/index)| jquery.js| 				|
+| 						| kendo.core.js								| 							|
+| 						| kendo.progressbar.js						| 							|
+| [Responsive Panel](http://demos.telerik.com/kendo-ui/responsive-panel/index)| jquery.js|		|
+| 						| kendo.core.js								| 							|
+| 						| kendo.responsive-panel.js					| 							|
+| [Scheduler](http://demos.telerik.com/kendo-ui/scheduler/index)| jquery.js|					|
+| 						| kendo.core.js								| 							|
+| 						| kendo.data.js								| 							|
+| 						| kendo.popup.js							| 							|
+| 						| kendo.list.js								| 							|
+|						| kendo.dropdownlist.js						| 							|
+| 						| kendo.calendar.js							| 							|
+| 						| kendo.datepicker.js						| 							|
+| 						| kendo.userevents.js						| 							|
+| 						| kendo.numerictextbox.js					| 							|
+| 						| kendo.validator.js						| 							|
+| 						| kendo.binder.js							| 							|
+| 						| kendo.editable.js							| 							|
+| 						| kendo.multiselect.js						| 							|
+| 						| kendo.draganddrop.js						| 							|
+| 						| kendo.window.js							| 							|
+| 						| kendo.timepicker.js						| 							|
+| 						| kendo.datetimepicker.js					| 							|
+| 						| kendo.scheduler.recurrence.js				| 							|
+| 						| kendo.scheduler.view.js					| 							|
+| 						| kendo.scheduler.dayview.js 				| Scheduler Day View feature|
+| 						| kendo.scheduler.agendaview.js 			| Scheduler Agenda View feature|
+| 						| kendo.scheduler.monthview.js 				| Scheduler Month View feature|
+| 						| kendo.scheduler.timelineview.js 			| Scheduler Timeline View feature|
+| 						| kendo.fx.js 								| Scheduler adaptive rendering feature|
+| 						| kendo.mobile.scroller.js 					| Scheduler adaptive rendering feature|
+| 						| kendo.view.js 							| Scheduler adaptive rendering feature|
+| 						| kendo.mobile.view.js 						| Scheduler adaptive rendering feature|
+| 						| kendo.mobile.loader.js 					| Scheduler adaptive rendering feature|
+| 						| kendo.mobile.pane.js 						| Scheduler adaptive rendering feature|
+| 						| kendo.mobile.popover.js 					| Scheduler adaptive rendering feature|
+| 						| kendo.mobile.shim.js 						| Scheduler adaptive rendering feature|
+| 						| kendo.mobile.actionsheet.js				| Scheduler adaptive rendering feature|
+| 						| kendo.color.js 							| PDF export feature		|
+| 						| kendo.drawing.js 							| PDF export feature		|
+| 						| kendo.pdf.js 								| PDF export feature		|
+| 						| kendo.scheduler.js						| 							|
+| [Slider](http://demos.telerik.com/kendo-ui/slider/index)| jquery.js| 							|
+| 						| kendo.core.js								| 							|
+| 						| kendo.userevents.js						| 							|
+| 						| kendo.draganddrop.js						| 							|
+| 						| kendo.slider.js							| 							|
+| 						| kendo.view.js								| 							|
+| [Splitter](http://demos.telerik.com/kendo-ui/splitter/index)| jquery.js|						|
+| 						| kendo.core.js								| 							|
+| 						| kendo.userevents.js						| 							|
+| 						| kendo.draganddrop.js						| 							|
+| 						| kendo.resizable.js						| 							|
+| 						| kendo.splitter.js							| 							|
+| [TabStrip](http://demos.telerik.com/kendo-ui/tabstrip/index)| jjquery.js|						|
+| 						| kendo.core.js								| 							|
+| 						| kendo.data.js								| 							|
+| 						| kendo.tabstrip.js							| 							|
+| [TimePicker](http://demos.telerik.com/kendo-ui/timepicker/index)| jquery.js|					|
+| 						| kendo.core.js								| 							|
+| 						| kendo.popup.js							| 							|
+| 						| kendo.timepicker.js						| 							|
+| [ToolBar](http://demos.telerik.com/kendo-ui/toolbar/index)| jquery.js|						|
+| 						| kendo.core.js								| 							|
+| 						| kendo.toolbar.js							| 							|
+| [Tooltip](http://demos.telerik.com/kendo-ui/tooltip/index)| jquery.js| 						|
+| 						| kendo.core.js								| 							|
+| 						| kendo.popup.js							| 							|
+| 						| kendo.tooltip.js							| 							|
+| [TreeList](http://demos.telerik.com/kendo-ui/treelist/index)| jquery.js|						|
+| 						| kendo.core.js								| 							|
+| 						| kendo.dom.js								| 							|
+| 						| kendo.data.js								| 							|
+| 						| kendo.columnsorter.js 					| Sorting feature			|
+| 						| kendo.calendar.js 						| Filtering feature			|
+| 						| kendo.popup.js 							| Filtering feature			|
+| 						| kendo.datepicker.js 						| Filtering feature			|
+| 						| kendo.userevents.js 						| Filtering feature			|
+| 						| kendo.numerictextbox.js 					| Filtering feature			|
+| 						| kendo.list.js 							| Filtering feature			|
+| 						| kendo.dropdownlist.js 					| Filtering feature			|
+| 						| kendo.binder.js 							| Filtering feature			|
+| 						| kendo.filtermenu.js 						| Filtering feature			|	
+| 						| kendo.calendar.js 						| Editing feature			|
+| 						| kendo.popup.js 							| Editing feature			|
+| 						| kendo.datepicker.js						| Editing feature			|
+| 						| kendo.userevents.js 						| Editing feature			|
+| 						| kendo.numerictextbox.js 					| Editing feature			|
+| 						| kendo.validator.js 						| Editing feature			|
+| 						| kendo.binder.js 							| Editing feature			|
+| 						| kendo.editable.js 						| Editing feature			|
+| 						| kendo.draganddrop.js 						| Editing feature			|
+| 						| kendo.window.js 							| Editing feature			|
+| 						| kendo.userevents.js 						| Selection feature			|
+| 						| kendo.selectable.js 						| Selection feature			|
+| 						| kendo.userevents.js 						| Column resizing feature	|
+| 						| kendo.draganddrop.js 						| Column resizing feature	|
+| 						| kendo.resizable.js 						| Column resizing feature	|
+| 						| kendo.ooxml.js 							| Excel export feature 		|
+| 						| kendo.excel.js 							| Excel export feature		|
+| 						| kendo.color.js 							| PDF export feature 		|
+| 						| kendo.drawing.js 							| PDF export feature		|		
+| 						| kendo.pdf.js 								| PDF export feature		|
+| 						| kendo.treelist.js							| 							|
+| [TreeView](http://demos.telerik.com/kendo-ui/treeview/index)| jquery.js|						|
+| 						| kendo.core.js								| 							|
+| 						| kendo.data.js								| 							|
+| 				 		| kendo.userevents.js						| 							|
+| 						| kendo.draganddrop.js						| 							|
+| 						| kendo.treeview.js							| 							|
+| [Upload](http://demos.telerik.com/kendo-ui/upload/index)| jquery.js|							|
+| 						| kendo.core.js								| 							|
+| 						| kendo.upload.js							| 							|
+| [Validator](http://demos.telerik.com/kendo-ui/validator/index)| jquery.js|					|
+| 						| kendo.core.js`							| 							|
+| 						| kendo.validator.js						| 							|
+| [Window](http://demos.telerik.com/kendo-ui/window/index)| jquery.js|							|
+| 						| kendo.core.js								| 							|
+| 						| kendo.userevents.js						| 							|
+| 						| kendo.draganddrop.js						| 							|
+| 						| kendo.window.js							| 							|
 
-#### Web
+#### Widgets for Data Visualization
 
-Here is the list of the desktop UI Widgets for mobile-ready websites and applications:
+Here is the list of the script files for data visualization widgets for desktop and mobile web applications:
 
-| Widget				| Script Files								| Comments				|
-| :-------------------- | :---------------------------------------- | :-------------------: |
-| AutoComplete			| jquery.js 								| 						|
-|						| kendo.core.js								|						|
-|						| kendo.data.js								|
-|						| kendo.popup.js							|
-|						| kendo.list.js								|
-|						| kendo.fx.js (Mobile scroller feature)		|
-|						| kendo.userevents.js (Mobile scroller feature)	|
-|						| kendo.draganddrop.js (Mobile scroller feature)|
-|						| kendo.mobile.scroller.js (Mobile scroller feature |
-|						| kendo.virtuallist.js (VirtualList feature)|
-|						| kendo.autocomplete.js						|
-| 						| kendo.angular.js							|
-| Button				| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.button.js							|
-| Calendar				| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.calendar.js							|
-| Color Tools			| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.color.js							|
-| 						| kendo.popup.js							| 
-| 						| kendo.userevents.js						|
-| 						| kendo.draganddrop.js						|
-| 						| kendo.slider.js							|
-| 						| kendo.colorpicker.js						|
-| ComboBox				| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.data.js								|
-| 						| kendo.popup.js							|
-| 						| kendo.list.js								|
-| 						| kendo.fx.js (Mobile scroller feature)		|
-| 						| kendo.userevents.js (Mobile scroller feature) |
-| 						| kendo.draganddrop.js (Mobile scroller feature) |
-| 						| kendo.mobile.scroller.js (Mobile scroller feature) |
-| 						| kendo.virtuallist.js (VirtualList feature)|
-| 						| kendo.combobox.js							|
-| DatePicker			| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.calendar.js							|
-| 						| kendo.popup.js							|
-| 						| kendo.datepicker.js						|
-|						| kendo.timepicker.js						|
-| 						| kendo.datetimepicker.js					|
-| DateTimePicker		| jquery.js 								|
-|						| kendo.core.js								|
-|						| kendo.fx.js								|
-| DropDownList			| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.data.js								|
-| 						| kendo.popup.js							|
-| 						| kendo.list.js								|
-| 						| kendo.fx.js (Mobile scroller feature)		|
-| 						| kendo.userevents.js (Mobile scroller feature) |
-| 						| kendo.draganddrop.js (Mobile scroller feature) |
-| 						| kendo.mobile.scroller.js (Mobile scroller feature) |
-| 						| kendo.virtuallist.js (VirtualList feature)|
-| 						| kendo.dropdownlist.js						|
-| Editor				| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.data.js								|
-| 						| kendo.popup.js							|
-| 						| kendo.list.js								|
-| 						| kendo.combobox.js							|
-| 						| kendo.dropdownlist.js						|
-| 						| kendo.userevents.js						|
-| 						| kendo.draganddrop.js						|
-| 						| kendo.window.js							|
-| 						| kendo.color.js 							|
-|						| kendo.slider.js							|
-| 						| kendo.colorpicker.js						|
-| 						| kendo.selectable.js (Image Browser feature) |
-|						| kendo.listview.js (Image Browser feature)	|
-| 						| kendo.upload.js (Image Browser feature)	|
-| 						| kendo.filebrowser.js (Image Browser feature) |
-|						| kendo.imagebrowser.js (Image Browser feature) |
-| 						| kendo.resizable.js (Resize handle feature)|
-| 						| kendo.drawing.js (PDF export feature)		|
-| 						| kendo.pdf.js (PDF export feature)			|
-|						| kendo.editor.js							|
-| Gantt					| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.data.js								|
-| 						| kendo.popup.js							|
-| 						| kendo.userevents.js						|
-| 						| kendo.draganddrop.js						|
-| 						| kendo.resizable.js						|
-|						| kendo.window.js							|
-| 						| kendo.dom.js								|
-| 						| kendo.touch.js							|
-|						| kendo.columnsorter.js						|
-|						| kendo.calendar.js							|
-|						| kendo.datepicker.js						|
-| 						| kendo.timepicker.js						|
-| 						| kendo.datetimepicker.js					|
-| 						| kendo.numerictextbox.js					|
-| 						| kendo.validator.js						|
-| 						| kendo.binder.js							|
-| 						| kendo.editable.js							|
-| 						| kendo.gantt.list.js						|
-| 						| kendo.gantt.timeline.js					|
-|						| kendo.grid.js								|
-|						| kendo.gantt.js							|
-| Grid					| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.data.js								|
-| 						| kendo.columnsorter.js						|
-| 						| kendo.calendar.js (Editing feature)		|
-| 						| kendo.popup.js (Editing feature)			|
-| 						| kendo.datepicker.js (Editing feature)		|
-| 						| kendo.userevents.js (Editing feature)		|
-| 						| kendo.numerictextbox.js (Editing feature) |
-|						| kendo.validator.js (Editing feature)		|
-| 						| kendo.binder.js (Editing feature)			|
-| 						| kendo.editable.js (Editing feature)		|
-| 						| kendo.draganddrop.js (Editing feature)	|
-| 						| kendo.window.js (Editing feature)			|
-| 						| kendo.calendar.js (Filtering feature)		|
-|						| kendo.popup.js (Filtering feature)		|
-| 						| kendo.datepicker.js (Filtering feature)	|
-| 						| kendo.userevents.js (Filtering feature)	|
-| 						| kendo.numerictextbox.js (Filtering feature) |
-| 						| kendo.list.js (Filtering feature)			|
-|						| kendo.dropdownlist.js (Filtering feature)	|
-| 						| kendo.binder.js (Filtering feature)		|
-| 						| kendo.filtermenu.js (Filtering feature)	|
-| 						| kendo.popup.js (Column menu feature)		|
-| 						| kendo.calendar.js (Column menu feature)	|
-| 						| kendo.datepicker.js (Column menu feature)	|
-| 						| kendo.userevents.js (Column menu feature)	|
-| 						| kendo.numerictextbox.js (Column menu feature) |
-| 						| kendo.list.js (Column menu feature)		|
-| 						| kendo.dropdownlist.js (Column menu feature) |
-| 						| kendo.binder.js (Column menu feature)		|
-| 						| kendo.filtermenu.js (Column menu feature)	|
-| 						| kendo.menu.js (Column menu feature)		|
-| 						| kendo.columnmenu.js (Column menu feature)	|
-| 						| kendo.userevents.js (Grouping feature)	| 
-| 						| kendo.draganddrop.js (Grouping feature)	|
-| 						| kendo.groupable.js (Grouping feature)		|
-| 						| kendo.popup.js (Row filter feature)		|
-| 						| kendo.list.js (Row filter feature)		|
-| 						| kendo.autocomplete.js (Row filter feature) |
-| 						| kendo.filtercell.js (Row filter feature)	|
-| 						| kendo.pager.js (Paging feature)			|
-| 						| kendo.userevents.js (Selection feature)	|
-| 						| kendo.selectable.js (Selection feature)	|
-|						| kendo.userevents.js (Column reordering feature) |
-| 						| kendo.draganddrop.js (Column reordering feature) |
-| 						| kendo.reorderable.js (Column reordering feature) |
-| 						| kendo.userevents.js (Column resizing feature) |
-| 						| kendo.draganddrop.js (Column resizing feature) |
-| 						| kendo.resizable.js (Column resizing feature) |
-| 						| kendo.popup.js (Grid adaptive rendering feature) |
-| 						| kendo.fx.js (Grid adaptive rendering feature) |
-| 						| kendo.userevents.js (Grid adaptive rendering feature) |
-| 						| kendo.draganddrop.js (Grid adaptive rendering feature) |
-| 						| kendo.mobile.scroller.js (Grid adaptive rendering feature) |
-| 						| kendo.binder.js (Grid adaptive rendering feature) |
-| 						| kendo.view.js (Grid adaptive rendering feature) |
-| 						| kendo.mobile.view.js (Grid adaptive rendering feature) |
-| 						| kendo.mobile.loader.js (Grid adaptive rendering feature) |
-| 						| kendo.mobile.pane.js (Grid adaptive rendering feature) |
-| 						| kendo.mobile.popover.js (Grid adaptive rendering feature) |
-| 						| kendo.mobile.shim.js (Grid adaptive rendering feature) |
-| 						| kendo.mobile.actionsheet.js (Grid adaptive rendering feature) |
-| 						| kendo.ooxml.js (Excel export feature)		|
-| 						| kendo.excel.js (Excel export feature)		|
-| 						| kendo.color.js (PDF export feature)		|
-| 						| kendo.drawing.js (PDF export feature)		|
-| 						| kendo.pdf.js (PDF export feature)`		|
-| 						| kendo.progressbar.js (PDF export feature)	|
-| ListView				| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.data.js								|
-| 						| kendo.calendar.js (Editing feature)		|
-| 						| kendo.popup.js (Editing feature)			|
-| 						| kendo.datepicker.js (Editing feature)		|
-| 						| kendo.userevents.js (Editing feature)		|
-|						| kendo.numerictextbox.js (Editing feature)	|
-| 						| kendo.validator.js (Editing feature)		|
-| 						| kendo.binder.js (Editing feature)			|
-| 						| kendo.editable.js (Editing feature)		|
-| 						| kendo.userevents.js (Selection feature)	|
-| 						| kendo.selectable.js (Selection feature)	|
-| 						| kendo.listview.js							|
-| MaskedTextBox			| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.maskedtextbox.js					|
-| Menu					| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.popup.js							|
-| 						| kendo.menu.js								|
-| MultiSelect			| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.data.js								|
-| 						| kendo.popup.js							|
-| 						| kendo.list.js								|
-| 						| kendo.fx.js (Mobile scroller feature)		|
-| 						| kendo.userevents.js (Mobile scroller feature) |
-| 						| kendo.draganddrop.js (Mobile scroller feature) |
-| 						| kendo.mobile.scroller.js (Mobile scroller feature) |
-| 						| kendo.virtuallist.js (VirtualList feature) |
-| 						| kendo.multiselect.js						|
-| Notification			| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.popup.js							|
-| 						| kendo.notification.js						|
-| NumericTextBox		| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.userevents.js						|
-| 						| kendo.numerictextbox.js 					|
-| PanelBar				| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.panelbar.js							|
-| PivotGrid				| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.dom.js								|
-| 						| kendo.data.js								|
-| 						| kendo.data.xml.js							|
-| 						| kendo.userevents.js						|
-| 						| kendo.draganddrop.js						|
-| 						| kendo.sortable.js							|
-| 						| kendo.popup.js (Configurator feature)		|
-| 						| kendo.list.js (Configurator feature)		|
-| 						| kendo.dropdownlist.js (Configurator feature) |
-| 						| kendo.treeview.js (Configurator feature)	|
-| 						| kendo.menu.js (Configurator feature)		|
-| 						| kendo.window.js (Configurator feature)	|
-| 						| kendo.pivot.fieldmenu.js (Configurator feature) |
-| 						| kendo.pivot.configurator.js (Configurator feature) |
-| 						| kendo.popup.js (Filtering feature)		|
-| 						| kendo.menu.js (Filtering feature)			|
-| 						| kendo.window.js (Filtering feature)		|
-| 						| kendo.treeview.js (Filtering feature)		|
-| 						| kendo.list.js (Filtering feature)			|
-| 						| kendo.dropdownlist.js (Filtering feature)	| 
-| 						| kendo.pivot.fieldmenu.js (Filtering feature) |
-| 						| kendo.ooxml.js (Excel export feature)		|
-| 						| kendo.color.js (PDF export feature)		|
-| 						| kendo.drawing.js (PDF export feature)		|
-| 						| kendo.pdf.js (PDF export feature)			|
-| 						| kendo.fx.js (Mobile scroller feature)		|
-| 						| kendo.mobile.scroller.js (Mobile scroller feature) |
-| 						| kendo.pivotgrid.js						|
-| ProgressBar			| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.progressbar.js						|
-| Responsive Panel		| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.responsive-panel.js					|
-| Scheduler				| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.data.js								|
-| 						| kendo.popup.js							|
-| 						| kendo.list.js								|
-|						| kendo.dropdownlist.js						|
-| 						| kendo.calendar.js							|
-| 						| kendo.datepicker.js						|
-| 						| kendo.userevents.js						|
-| 						| kendo.numerictextbox.js					|
-| 						| kendo.validator.js						|
-| 						| kendo.binder.js							|
-| 						| kendo.editable.js							|
-| 						| kendo.multiselect.js						|
-| 						| kendo.draganddrop.js						|
-| 						| kendo.window.js							|
-| 						| kendo.timepicker.js						|
-| 						| kendo.datetimepicker.js					|
-| 						| kendo.scheduler.recurrence.js				|
-| 						| kendo.scheduler.view.js					|
-| 						| kendo.scheduler.dayview.js (Scheduler Day View feature) |
-| 						| kendo.scheduler.agendaview.js (Scheduler Agenda View feature) |
-| 						| kendo.scheduler.monthview.js (Scheduler Month View feature) |
-| 						| kendo.scheduler.timelineview.js (Scheduler Timeline View feature) |
-| 						| kendo.fx.js (Scheduler adaptive rendering feature) |
-| 						| kendo.mobile.scroller.js (Scheduler adaptive rendering feature) |
-| 						| kendo.view.js (Scheduler adaptive rendering feature) |
-| 						| kendo.mobile.view.js (Scheduler adaptive rendering feature) |
-| 						| kendo.mobile.loader.js (Scheduler adaptive rendering feature) |
-| 						| kendo.mobile.pane.js (Scheduler adaptive rendering feature) |
-| 						| kendo.mobile.popover.js (Scheduler adaptive rendering feature) |
-| 						| kendo.mobile.shim.js (Scheduler adaptive rendering feature) |
-| 						| kendo.mobile.actionsheet.js (Scheduler adaptive rendering feature) |
-| 						| kendo.color.js (PDF export feature) 		|
-| 						| kendo.drawing.js (PDF export feature)		|
-| 						| kendo.pdf.js (PDF export feature)			|
-| 						| kendo.scheduler.js						|
-| Slider				| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.userevents.js						|
-| 						| kendo.draganddrop.js						|
-| 						| kendo.slider.js							|
-| 						| kendo.view.js								|
-| Splitter				| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.userevents.js						|
-| 						| kendo.draganddrop.js						|
-| 						| kendo.resizable.js						|
-| 						| kendo.splitter.js							|
-| TabStrip				| jjquery.js								|
-| 						| kendo.core.js								|
-| 						| kendo.data.js								|
-| 						| kendo.tabstrip.js							|
-| TimePicker			| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.popup.js							|
-| 						| kendo.timepicker.js						|
-| ToolBar				| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.toolbar.js							|
-| Tooltip				| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.popup.js							|
-| 						| kendo.tooltip.js							|
-| TreeList				| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.dom.js								|
-| 						| kendo.data.js								|
-| 						| kendo.columnsorter.js (Sorting feature)	|
-| 						| kendo.calendar.js (Filtering feature)		|
-| 						| kendo.popup.js (Filtering feature)		|
-| 						| kendo.datepicker.js (Filtering feature)	|
-| 						| kendo.userevents.js (Filtering feature)	|
-| 						| kendo.numerictextbox.js (Filtering feature) |
-| 						| kendo.list.js (Filtering feature)			|
-| 						| kendo.dropdownlist.js (Filtering feature)	|
-| 						| kendo.binder.js (Filtering feature)		|
-| 						| kendo.filtermenu.js (Filtering feature)	|
-| 						| kendo.calendar.js (Editing feature)		|
-| 						| kendo.popup.js (Editing feature)			|
-| 						| kendo.datepicker.js (Editing feature)		|
-| 						| kendo.userevents.js (Editing feature)		|
-| 						| kendo.numerictextbox.js (Editing feature)	|
-| 						| kendo.validator.js (Editing feature)		|
-| 						| kendo.binder.js (Editing feature)			|
-| 						| kendo.editable.js (Editing feature)		|
-| 						| kendo.draganddrop.js (Editing feature)	|
-| 						| kendo.window.js (Editing feature)			|
-| 						| kendo.userevents.js (Selection feature)	|
-| 						| kendo.selectable.js (Selection feature)	|
-| 						| kendo.userevents.js (Column resizing feature) |
-| 						| kendo.draganddrop.js (Column resizing feature) |
-| 						| kendo.resizable.js (Column resizing feature) |
-| 						| kendo.ooxml.js (Excel export feature)		|
-| 						| kendo.excel.js (Excel export feature)		|
-| 						| kendo.color.js (PDF export feature)		|
-| 						| kendo.drawing.js (PDF export feature)		|
-| 						| kendo.pdf.js (PDF export feature)			|
-| 						| kendo.treelist.js							|
-| TreeView				| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.data.js								|
-| 				 		| kendo.userevents.js						|
-| 						| kendo.draganddrop.js						|
-| 						| kendo.treeview.js							|
-| Upload				| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.upload.js							|
-| Validator				| jquery.js									|
-| 						| kendo.core.js`							|
-| 						| kendo.validator.js						|
-| Window				| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.userevents.js						|
-| 						| kendo.draganddrop.js						|
-| 						| kendo.window.js							|
+| Widget				| Script Files								|Comments					|
+| :---					| :---										|:---						|
+| [Barcode](http://demos.telerik.com/kendo-ui/barcode/index)| jquery.js| 						|			
+| 						| kendo.core.js								| 							|
+| 						| kendo.color.js							| 							|
+| 						| kendo.drawing.js							| 							|
+| 						| kendo.dataviz.core.js						| 							|
+| 						| kendo.dataviz.barcode.js					| 							|
+| [Chart](http://demos.telerik.com/kendo-ui/chart-api/index)| jquery.js|						|
+| 						| kendo.core.js								| 							|
+| 						| kendo.data.js								| 							|
+| 						| kendo.userevents.js						| 							|
+| 						| kendo.color.js							| 							|
+| 						| kendo.drawing.js							| 							|
+| 						| kendo.dataviz.core.js						| 							|
+| 						| kendo.dataviz.themes.js					| 							|
+| 						| kendo.dataviz.chart.js					| Polar & Radar feature		|
+| 						| kendo.dataviz.chart.polar.js 				| Polar & Radar feature		|
+| 						| kendo.dataviz.chart.js 					| Funnel chart feature 		|
+| 						| kendo.dataviz.chart.funnel.js				| Funnel chart feature		|
+| 						| kendo.pdf.js 								| PDF export feature		|
+| 						| kendo.dataviz.chart.js					| 							|
+| [Diagram](http://demos.telerik.com/kendo-ui/diagram/index)| jquery.js|						|
+| 						| kendo.core.js								| 							|
+| 						| kendo.data.js								| 							|
+| 						| kendo.userevents.js						|  							|
+| 						| kendo.fx.js								| 							|
+| 						| kendo.draganddrop.js						| 							|
+| 						| kendo.mobile.scroller.js					| 							|
+| 						| kendo.color.js							| 							|
+| 						| kendo.drawing.js							| 							|
+| 						| kendo.dataviz.core.js						| 							|
+| 						| kendo.dataviz.themes.js					| 							|
+| 						| kendo.toolbar.js							| 							|
+| 						| kendo.pdf.js 								| PDF export feature		|
+| 						| kendo.calendar.js							| Editing feature			|
+| 						| kendo.popup.js 							| Editing feature			|
+| 						| kendo.datepicker.js 						| Editing feature			|
+| 						| kendo.numerictextbox.js 					| Editing feature			|
+| 						| kendo.validator.js 						| Editing feature			|
+| 						| kendo.binder.js 							| Editing feature			|
+| 						| kendo.editable.js 						| Editing feature			|
+| 						| kendo.window.js 							| Editing feature			|
+| 						| kendo.list.js 							| Editing feature			|
+| 						| kendo.dropdownlist.js 					| Editing feature			|
+| 						| kendo.dataviz.diagram.js					| 							|
+| [Gauge](http://demos.telerik.com/kendo-ui/linear-gauge/index)| jquery.js|						|
+| 						| kendo.core.js								| 							|
+| 						| kendo.color.js							| 							|
+| 						| kendo.drawing.js							| 							|
+| 						| kendo.dataviz.core.js						| 							|
+| 						| kendo.dataviz.themes.js					| 							|
+| 						| kendo.dataviz.gauge.js					| 							|
+| [Map](http://demos.telerik.com/kendo-ui/map/index)| jquery.js|								|
+| 						| kendo.core.js								| 							|
+| 						| kendo.data.js								| 							|
+| 						| kendo.userevents.js						| 							|
+| 						| kendo.popup.js							| 							|
+| 						| kendo.tooltip.js							| 							|
+| 						| kendo.color.js							| 							|
+| 						| kendo.drawing.js							| 							|
+| 						| kendo.dataviz.core.js						| 							|
+| 						| kendo.fx.js								| 							|
+| 						| kendo.draganddrop.js						| 							|
+| 						| kendo.mobile.scroller.js					| 							|
+| 						| kendo.dataviz.map.js						| 							|
+| [QRCode](http://demos.telerik.com/kendo-ui/qrcode/index)| jquery.js|							|
+| 						| kendo.core.js								| 							|
+| 						| kendo.color.js							| 							|
+| 						| kendo.drawing.js							| 							|
+| 						| kendo.dataviz.core.js						| 							|
+| 						| kendo.dataviz.qrcode.js					| 							|
+| [Sparklines](http://demos.telerik.com/kendo-ui/sparklines/index)| jquery.js| 					|
+| 						| kendo.core.js								| 							|
+| 						| kendo.data.js								| 							|
+| 						| kendo.userevents.js						| 							|
+| 						| kendo.color.js							| 							|
+| 						| kendo.drawing.js							| 							|
+| 						| kendo.dataviz.core.js						| 							|
+| 						| kendo.dataviz.themes.js					| 							|
+| 						| kendo.dataviz.chart.js					| 							|
+| 						| kendo.dataviz.sparkline.js				| 							|
+| [StockCharts](http://demos.telerik.com/kendo-ui/financial/index)| jquery.js|					|
+| 						| kendo.core.js								| 							|
+| 						| kendo.data.js								| 							|
+| 						| kendo.userevents.js						| 							|
+| 						| kendo.color.js							| 							|
+| 						| kendo.drawing.js							| 							|
+| 						| kendo.dataviz.core.js						| 							|
+| 						| kendo.dataviz.themes.js					| 							|
+| 						| kendo.dataviz.chart.js					| 							|
+| 						| kendo.dataviz.stockchart.js				| 							|
+| [TreeMap](http://demos.telerik.com/kendo-ui/treemap/index)| jquery.js|						|
+| 						| kendo.core.js								| 							|
+| 						| kendo.data.js								| 							|
+| 						| kendo.userevents.js						| 							|
+| 						| kendo.color.js							| 							|
+| 						| kendo.drawing.js							| 							|
+| 						| kendo.dataviz.core.js						| 							|
+| 						| kendo.dataviz.themes.js					| 							|
+| 						| kendo.dataviz.treeMap.js					| 							|
 
-#### DataViz
-Here is the list of the Data Visualization widgets for desktop and mobile web applications:
+#### Hybrid UI
 
-| Widget				| Script Files								|
-| :-------------------: | :---------------------------------------: |
-| Barcode				| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.color.js							|
-| 						| kendo.drawing.js							|
-| 						| kendo.dataviz.core.js						|
-| 						| kendo.dataviz.barcode.js					|
-| Chart					| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.data.js								|
-| 						| kendo.userevents.js						|
-| 						| kendo.color.js							|
-| 						| kendo.drawing.js							|
-| 						| kendo.dataviz.core.js						|
-| 						| kendo.dataviz.themes.js					|
-| 						| kendo.dataviz.chart.js (Polar & Radar feature) |
-| 						| kendo.dataviz.chart.polar.js (Polar & Radar feature) |
-| 						| kendo.dataviz.chart.js (Funnel chart feature) |
-| 						| kendo.dataviz.chart.funnel.js (Funnel chart feature) |
-| 						| kendo.pdf.js (PDF export feature)			|
-| 						| kendo.dataviz.chart.js					|
-| Diagram				| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.data.js								|
-| 						| kendo.userevents.js						| 
-| 						| kendo.fx.js								|
-| 						| kendo.draganddrop.js						|
-| 						| kendo.mobile.scroller.js					|
-| 						| kendo.color.js							|
-| 						| kendo.drawing.js							|
-| 						| kendo.dataviz.core.js						|
-| 						| kendo.dataviz.themes.js					|
-| 						| kendo.toolbar.js							|
-| 						| kendo.pdf.js (PDF export feature)			|
-| 						| kendo.calendar.js (Editing feature)		|
-| 						| kendo.popup.js (Editing feature)			|
-| 						| kendo.datepicker.js (Editing feature)		|
-| 						| kendo.numerictextbox.js (Editing feature)	|
-| 						| kendo.validator.js (Editing feature)		|
-| 						| kendo.binder.js (Editing feature)			|
-| 						| kendo.editable.js (Editing feature)		|
-| 						| kendo.window.js (Editing feature)			|
-| 						| kendo.list.js (Editing feature)			|
-| 						| kendo.dropdownlist.js (Editing feature)	|
-| 						| kendo.dataviz.diagram.js					|
-| Gauge					| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.color.js							|
-| 						| kendo.drawing.js							|
-| 						| kendo.dataviz.core.js						|
-| 						| kendo.dataviz.themes.js					|
-| 						| kendo.dataviz.gauge.js					|
-| Map					| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.data.js								|
-| 						| kendo.userevents.js						|
-| 						| kendo.popup.js							|
-| 						| kendo.tooltip.js							|
-| 						| kendo.color.js							|
-| 						| kendo.drawing.js							|
-| 						| kendo.dataviz.core.js						|
-| 						| kendo.fx.js								|
-| 						| kendo.draganddrop.js						|
-| 						| kendo.mobile.scroller.js					|
-| 						| kendo.dataviz.map.js						|
-| QRCode				| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.color.js							|
-| 						| kendo.drawing.js							|
-| 						| kendo.dataviz.core.js						|
-| 						| kendo.dataviz.qrcode.js					|
-| Sparkline				| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.data.js								|
-| 						| kendo.userevents.js						|
-| 						| kendo.color.js							|
-| 						| kendo.drawing.js							|
-| 						| kendo.dataviz.core.js						|
-| 						| kendo.dataviz.themes.js					|
-| 						| kendo.dataviz.chart.js					|
-| 						| kendo.dataviz.sparkline.js				|
-| StockChart			| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.data.js								|
-| 						| kendo.userevents.js						|
-| 						| kendo.color.js							|
-| 						| kendo.drawing.js							|
-| 						| kendo.dataviz.core.js						|
-| 						| kendo.dataviz.themes.js					|
-| 						| kendo.dataviz.chart.js					|
-| 						| kendo.dataviz.stockchart.js				|
-| TreeMap				| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.data.js								|
-| 						| kendo.userevents.js						|
-| 						| kendo.color.js							|
-| 						| kendo.drawing.js							|
-| 						| kendo.dataviz.core.js						|
-| 						| kendo.dataviz.themes.js					|
-| 						| kendo.dataviz.treeMap.js					|
-
-#### Mobile
-Here is the list of the frameworks and widgets for mobile applications:
+Here is the list of the script files for the frameworks and widgets for mobile applications:
 
 | Widget				| Script Files								|
-| :-------------------: | :---------------------------------------: |
-| ActionSheet			| jquery.js									|
+| :---					| :---										|
+| [ActionSheet](http://demos.telerik.com/kendo-ui/m/index#actionsheet/index)| jquery.js|
 | 						| kendo.core.js								|
 | 						| kendo.popup.js							|
 | 						| kendo.fx.js								|
@@ -882,7 +832,7 @@ Here is the list of the frameworks and widgets for mobile applications:
 | 						| kendo.mobile.popover.js					|
 | 						| kendo.mobile.shim.js						|
 | 						| kendo.mobile.actionsheet.js				|
-| Application			| jquery.js									|
+| [Application](http://demos.telerik.com/kendo-ui/m/index#application/loadingpopup)| jquery.js|
 | 						| kendo.core.js								|
 | 						| kendo.fx.js								|
 | 						| kendo.userevents.js						|
@@ -896,18 +846,18 @@ Here is the list of the frameworks and widgets for mobile applications:
 | 						| kendo.mobile.pane.js						|
 | 						| kendo.router.js							|
 | 						| kendo.mobile.application.js				|
-| Button				|jquery.js									|
+| [Button](http://demos.telerik.com/kendo-ui/m/index#mobile-button/index)|jquery.js|
 | 						| kendo.core.js								|
 | 						| kendo.userevents.js						|
 | 						| kendo.mobile.button.js					|				
-| ButtonGroup			| jquery.js									|
+| [ButtonGroup](http://demos.telerik.com/kendo-ui/m/index#buttongroup/mobile)| jquery.js|
 | 						| kendo.core.js								|
 | 						| kendo.mobile.buttongroup.js				|
-| Collapsible			| jquery.js									|
+| [Collapsible](http://demos.telerik.com/kendo-ui/m/index#collapsible/index)| jquery.js|
 | 						| kendo.core.js								|
 | 						| kendo.userevents.js						|
 | 						| kendo.mobile.collapsible.js				|
-| Drawer				| jquery.js									|
+| [Drawer](http://demos.telerik.com/kendo-ui/m/index#drawer/index)| jquery.js|
 | 						| kendo.core.js								|
 | 						| kendo.fx.js								|
 | 						| kendo.userevents.js						|
@@ -918,13 +868,13 @@ Here is the list of the frameworks and widgets for mobile applications:
 | 						| kendo.view.js								|
 | 						| kendo.mobile.view.js						|
 | 						| kendo.mobile.drawer.js					|
-| ListView				|jquery.js									|
+| [ListView](http://demos.telerik.com/kendo-ui/m/index#mobile-listview/index)|jquery.js|
 | 						| kendo.core.js								|
 | 						| kendo.data.js								|
 | 						| kendo.userevents.js						|
 | 						| kendo.mobile.button.js					|
 | 						| kendo.mobile.listview.js					|						
-| ModalView				| jquery.js									|
+| [ModalView](http://demos.telerik.com/kendo-ui/m/index#modalview/index)| jquery.js|
 | 						| kendo.core.js								|
 | 						| kendo.popup.js							|
 | 						| kendo.mobile.shim.js						|
@@ -937,10 +887,10 @@ Here is the list of the frameworks and widgets for mobile applications:
 | 						| kendo.view.js								|
 | 						| kendo.mobile.view.js						|
 | 						| kendo.mobile.modalview.js					|			
-| NavBar				| jquery.js									|
+| [NavBar](http://demos.telerik.com/kendo-ui/m/index#navbar/index)| jquery.js|
 | 						| kendo.core.js								|
 | 						| kendo.mobile.navbar.js					|
-| PopOver				| jquery.js									|
+| [PopOver](http://demos.telerik.com/kendo-ui/m/index#popover/index)| jquery.js|
 | 						| kendo.core.js								|
 | 						| kendo.popup.js							|
 | 						| kendo.fx.js								|
@@ -954,20 +904,20 @@ Here is the list of the frameworks and widgets for mobile applications:
 | 						| kendo.mobile.loader.js					|
 | 						| kendo.mobile.pane.js						|
 | 						| kendo.mobile.popover.js					|
-| Scroller				| jquery.js									|
+| [Scroller](http://demos.telerik.com/kendo-ui/m/index#scroller/index)| jquery.js|
 | 						| kendo.core.js								|
 | 						| kendo.fx.js								|
 | 						| kendo.userevents.js						|
 | 						| kendo.draganddrop.js						|
 | 						| kendo.mobile.scroller.js					|
-| ScrollView			| jquery.js									|
+| [ScrollView](http://demos.telerik.com/kendo-ui/m/index#scrollview/mobile)| jquery.js|
 | 						| kendo.core.js								|
 | 						| kendo.fx.js								|
 | 						| kendo.data.js								|
 | 						| kendo.userevents.js						|
 | 						| kendo.draganddrop.js						|
 | 						| kendo.mobile.scrollview.js				|
-| SplitView				| jquery.js									|
+| [SplitView](http://demos.telerik.com/kendo-ui/m/index#splitview/index)| jquery.js|
 | 						| kendo.core.js								|
 | 						| kendo.fx.js								|
 | 						| kendo.userevents.js						|
@@ -980,34 +930,83 @@ Here is the list of the frameworks and widgets for mobile applications:
 | 						| kendo.mobile.loader.js					|
 | 						| kendo.mobile.pane.js						|
 | 						| kendo.mobile.splitview.js					|
-| Switch				| jquery.js									|
+| [Switch](http://demos.telerik.com/kendo-ui/m/index#switch/mobile)| jquery.js|
 | 						| kendo.core.js								|
 | 						| kendo.fx.js								|
 | 						| kendo.userevents.js						|
 | 						| kendo.mobile.switch.js					|
-| TabStrip				| jquery.js									|
+| [TabStrip](http://demos.telerik.com/kendo-ui/m/index#mobile-tabstrip/index)| jquery.js|
 | 						| kendo.core.js								|
 | 						| kendo.mobile.tabstrip.js					|
-| Touch					| jquery.js									|
+| [Touch](http://demos.telerik.com/kendo-ui/m/index#touchevents/mobile)| jquery.js|
 | 						| kendo.core.js								|
 | 						| kendo.userevents.js						|
 | 						| kendo.touch.js							|
 
-- [Server Wrappers](#server-wrappers)
-  - [ASP.NET MVC](#aspnet-mvc)
+#### Tools, Frameworks and Utilities
 
-#### Server Wrappers
-This is the list of the supplementary scripts for integration with server-side technologies:
+Here is the list of the script files for the shared components providing behaviors, data access and other services:
 
-| Server-Side Wrapper	| Script Files								|
-| :-------------------: | :---------------------------------------: |
-| ActionSheet			| jquery.js									|
-| 						| kendo.core.js								|
-| 						| kendo.data.js								|
-| 						| kendo.popup.js							|
-| 						| kendo.list.js								|
-| 						| kendo.combobox.js							|
-| 						| kendo.dropdownlist.js						|
-| 						| kendo.multiselect.js						|
-| 						| kendo.validator.js						|
-| 						| kendo.aspnetmvc.js						|
+| Feature				| Script Files						|Comments 		|
+| :---					| :---								|:---			|
+| [Angular JS Directives](http://demos.telerik.com/kendo-ui/integration/index)| jquery.js||
+|						| kendo.core.js						|				|
+| 						| kendo.angular.js					|				|
+| [MVVM](http://demos.telerik.com/kendo-ui/mvvm/index)| jquery.js|			|
+|						| kendo.core.js						|				|
+| 						| kendo.data.js						|				|
+| 						| kendo.binder.js					|				|
+| [Core](https://github.com/telerik/kendo-ui-core)| jquery.js|				|
+|						| kendo.core.js						|				|
+| [Data Source](http://demos.telerik.com/kendo-ui/datasource/index)| jquery.js||
+|						| kendo.core.js						|				|
+|						| kendo.data.odata.js 				| OData feature	|
+|						| kendo.data.xml.js 				| XML feature	|
+|						| kendo.data.js						|				|
+| [Drag and Drop](http://demos.telerik.com/kendo-ui/dragdrop/index)| jquery.js||
+|						| kendo.core.js						|				|
+|						| kendo.userevents.js				|				|
+|						| kendo.draganddrop.js				|				|
+| [Drawing API](http://demos.telerik.com/kendo-ui/drawing/index)| jquery.js||
+|						| kendo.core.js						|				|
+|						| kendo.color.js					|				|
+|						| kendo.drawing.jsjquery.js			|				|
+| [Effects](http://demos.telerik.com/kendo-ui/fx/expand)| jquery.js|		|
+|						| kendo.core.js						|				|
+|						| kendo.fx.js						|				|
+| [PDF Export](http://demos.telerik.com/kendo-ui/pdf-export/index)| jquery.js||
+|						| kendo.core.js						|				|
+| 						| kendo.color.js					|				|
+| 						| kendo.drawing.js					|				|
+| 						| kendo.pdf.js						|				|
+| [Router](http://demos.telerik.com/kendo-ui/spa/index)| jquery.js|			|
+|						| kendo.core.js						|				|
+|						| kendo.router.js					|				|
+| [Sortable](http://demos.telerik.com/kendo-ui/sortable/index)| jquery.js|	|
+|						| kendo.core.js						|				|
+|						| kendo.userevents.js				|				|
+| 						| kendo.draganddrop.js				|				|
+| 						| kendo.sortable.js					|				|
+| [View](http://demos.telerik.com/kendo-ui/m/index#mobile-view/index)| jquery.js||
+|						| kendo.core.js						|				|
+|						| kendo.data.js						|				|
+| 						| kendo.binder.js					|				|
+| 						| kendo.fx.js						|				|
+| 						| kendo.view.js						|				|
+
+#### Server-Side Wrappers
+
+This is the list of the script files for the supplementary scripts for integration with server-side technologies:
+
+| Server-Side Wrapper	| Script Files						|
+| :---					| :---								|
+| [ASP.NET MVC](http://docs.telerik.com/kendo-ui/aspnet-mvc/introduction)| jquery.js|
+| 						| kendo.core.js						|
+| 						| kendo.data.js						|
+| 						| kendo.popup.js					|
+| 						| kendo.list.js						|
+| 						| kendo.combobox.js					|
+| 						| kendo.dropdownlist.js				|
+| 						| kendo.multiselect.js				|
+| 						| kendo.validator.js				|
+| 						| kendo.aspnetmvc.js				|
