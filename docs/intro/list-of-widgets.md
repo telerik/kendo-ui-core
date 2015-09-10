@@ -9,8 +9,8 @@ position: 7
 
 The following table lists all Kendo UI components with regard to their support by the different Kendo UI bundles. 
 
-| Component      			| Kendo UI Core		| Kendo UI Professional	| UI for ASP .NET MVC/JSP/PHP	|
-| :------------------------	| :--------------- 	| :-------------------- | :----------------------------	|
+| Component      		| Kendo UI Core		| Kendo UI Professional	| UI for ASP .NET MVC/JSP/PHP|
+| :---					| :---				| :---					| :---						 |
 | **Data Management**		|
 | [Grid](http://demos.telerik.com/kendo-ui/grid/index)			 		| No  | Yes | Yes 			|
 | [ListView](http://demos.telerik.com/kendo-ui/listview/index)	 		| Yes | Yes | Yes 			|
