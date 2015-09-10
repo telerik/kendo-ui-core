@@ -1736,11 +1736,9 @@ var __meta__ = { // jshint ignore:line
         }
         
         if(destroyWidget) {
-            var data = $(element).data();
-            for (var key in data) {
-                if (key.indexOf("kendo") === 0 && typeof data[key].destroy === FUNCTION) {
-                    data[key].destroy();
-                }
+            var widget = kendo.widgetInstance($(element));
+            if (widget && typeof widget.destroy === FUNCTION) {
+                widget.destroy();
             }
         }
     }
