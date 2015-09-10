@@ -603,6 +603,35 @@
         equal(dataSource.total(), 1);
     });
 
+    test("synced deleted item stays deleted after cancelChanges", function() {
+        var dataSource = new kendo.data.DataSource({
+            offlineStorage: "key",
+            schema: {
+                model: {
+                    id: "id"
+                }
+            },
+            transport: {
+                read: function(options) {
+                    options.success([
+                        { id: 1 }
+                    ])
+                },
+                destroy: function(options) {
+                    options.success();
+                }
+            }
+        });
+
+        dataSource.read();
+        dataSource.remove(dataSource.at(0));
+        dataSource.sync();
+        console.log(dataSource._pristineData);
+        dataSource.cancelChanges();
+
+        equal(dataSource.data().length, 0);
+    });
+
     test("cancelChanges of synced inserted item resets it to previous state", function() {
         var dataSource = new kendo.data.DataSource({
             offlineStorage: "key",
