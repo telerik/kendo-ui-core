@@ -2916,6 +2916,8 @@ the `data` method will return the group items.
 
 > The [schema.model](#configuration-schema.model) configuration will not be used to parse the set data items. The data should be parsed in advance.
 
+Compare with the [`view`](#methods-view) method, which will return the data items that correspond to the current page, filter, sort and group configuration.
+
 #### Parameters
 
 ##### value `Array|kendo.data.ObservableArray`
@@ -3946,7 +3948,8 @@ Gets the number of available pages.
 
 ### view
 
-Returns the data items which correspond to the current page, filter, sort and group configuration.
+Returns the data items which correspond to the **current** page, filter, sort and group configuration.
+Compare with the [`data`](#methods-data) method, which will return data items from **all** pages, if **local** data binding and paging are used.
 
 To ensure that data is available this method should be used within the [change](#events-change) event handler or the [fetch](#methods-fetch) method.
 
