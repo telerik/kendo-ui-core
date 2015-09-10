@@ -3630,6 +3630,9 @@ The data item or data items to update.
 
 Executes the specified query over the data items. Makes a HTTP request if bound to a remote service.
 
+This method is useful when you need to modify several parameters of the data request at the same time (e.g. filtering and sorting).
+If you execute `filter()` and then `sort()`, the DataSource will make two separate requests. With `query()`, it will make one request.
+
 #### Parameters
 
 ##### options `Object` *(optional)*
