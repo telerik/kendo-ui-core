@@ -11,6 +11,9 @@ var __meta__ = { // jshint ignore:line
 };
 
 (function ($, undefined) {
+    if (!kendo.support.customElements) {
+        return;
+    }
     var TAGNAMES = {
         editor         : "textarea",
         numerictextbox : "input",

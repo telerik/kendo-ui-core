@@ -2199,6 +2199,8 @@ function pad(number, digits, end) {
         var documentMode = document.documentMode;
 
         support.hashChange = ("onhashchange" in window) && !(support.browser.msie && (!documentMode || documentMode <= 8)); // old IE detection
+
+        support.customElements = ("registerElement" in window.document);
     })();
 
 
