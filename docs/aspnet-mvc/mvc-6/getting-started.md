@@ -11,7 +11,7 @@ This tutorial shows how to configure an ASP.NET MVC6 project to use Telerik UI f
 
 ### Prerequisites
 1. [Visual Studio 2015](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx)
-1. [Microsoft ASP.NET and Web Tools 2015 (Beta6)](http://www.microsoft.com/en-us/download/details.aspx?id=48222)
+1. [Microsoft ASP.NET and Web Tools 2015 (Beta7)](http://www.microsoft.com/en-us/download/details.aspx?id=48738)
 
 ### 1. Create an ASP.NET MVC 6 Web Site
 Please skip this step if you're configuring an existing project.
@@ -28,12 +28,12 @@ Please skip this step if you're configuring an existing project.
 
     ![NuGet package manager](images/manage-nuget-packages.png)
 1. Choose `api.nuget.org` as a package source and search for `Kendo.Mvc`
-1. Install the `Kendo.Mvc` package version 2015.2.805 or later.
+1. Install the `Kendo.Mvc` package version 2015.2.909 or later.
 This should add a similar line in your `project.json`:
 
         "dependencies": {
             ...
-            "Kendo.Mvc": "2015.2.805"
+            "Kendo.Mvc": "2015.2.909"
         }
 
 1. Open `Startup.cs` and locate the `ConfigureServices` method. Add the following snippet:
