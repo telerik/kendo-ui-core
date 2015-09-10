@@ -42,11 +42,13 @@ var __meta__ = { // jshint ignore:line
     Object.keys(kendo.ui.roles).forEach(function(name) {
         registerElement(name, kendo.ui.roles[name]);
     });
+
     if(kendo.dataviz) {
         Object.keys(kendo.dataviz.ui.roles).forEach(function(name) {
             registerElement(name, kendo.dataviz.ui.roles[name]);
         });
     }
+
     if(kendo.mobile) {
         Object.keys(kendo.mobile.ui.roles).forEach(function(name) {
             registerElement("mobile" + name, kendo.mobile.ui.roles[name]);
@@ -131,6 +133,50 @@ var __meta__ = { // jshint ignore:line
 
         var prototype = Object.create(HTMLElement.prototype);
 
+        Object.defineProperty(prototype, 'options', {
+            get: function() {
+                return this.widget.options;
+            },
+
+            set: function(options) {
+                var instance = this.widget;
+                options = $.extend(true, {}, instance.options, options);
+
+                var _wrapper = $(instance.wrapper)[0];
+                var _element = $(instance.element)[0];
+
+                instance._destroy();
+
+                var newElement = document.createElement(TAGNAMES[name] || "div");
+
+                if (_wrapper && _element) {
+                    _wrapper.parentNode.replaceChild(_element, _wrapper);
+                    $(_element).replaceWith(newElement);
+                }
+
+                if (instance.value) {
+                    options.value = instance.value();
+                }
+
+                instance.init(newElement, options);
+
+                this.bindEvents();
+
+            }
+        });
+
+        prototype.bindEvents = function() {
+            widget.prototype.events.forEach(function(eventName) {
+                this.widget.bind(eventName, eventHandler.bind(this, eventName));
+
+                if (this.hasAttribute(EVENT_PREFIX + eventName)) {
+                    this.bind(eventName, function(e) {
+                        window[this.getAttribute(EVENT_PREFIX + eventName)].call(this, e);
+                    }.bind(this));
+                }
+            }.bind(this));
+        };
+
         prototype.attachedCallback = function() {
             var that = this;
             var element = document.createElement(TAGNAMES[name] || "div");
@@ -144,22 +190,14 @@ var __meta__ = { // jshint ignore:line
                 expose(that, obj);
             } while ((obj = Object.getPrototypeOf(obj)));
 
-            widget.prototype.events.forEach(function(eventName) {
-                that.widget.bind(eventName, eventHandler.bind(that, eventName));
-                that.widget.element.on(eventName, function(e){
-                    e.stopPropagation();
-                });
-                if (that.hasAttribute(EVENT_PREFIX + eventName)) {
-                    that.bind(eventName, function(e) {
-                        window[that.getAttribute(EVENT_PREFIX + eventName)].call(that, e);
-                    });
-                }
-            });
+            this.bindEvents();
         };
 
         prototype.detachedCallback = function() {
             kendo.destroy(this.element);
         };
+
+        kendo.webComponents.push("kendo-" + name);
 
         document.registerElement("kendo-" + name, {
             prototype: prototype

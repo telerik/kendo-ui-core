@@ -14,7 +14,8 @@ var __meta__ = { // jshint ignore:line
 (function ($, angular, undefined) {
     "use strict";
 
-    if (!angular) {
+    // Angular2 exposes a global angular object, but it does not have an injector...
+    if (!angular || !angular.injector) {
         return;
     }
 

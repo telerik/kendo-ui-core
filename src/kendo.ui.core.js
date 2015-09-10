@@ -66,7 +66,8 @@
         "./kendo.mobile.switch",
         "./kendo.mobile.tabstrip",
         "./kendo.angular",
-        "./kendo.webcomponents"
+        "./kendo.webcomponents",
+        "./kendo.angular2"
     ], f);
 })(function(){
     "bundle all";
