@@ -23,6 +23,7 @@ var __meta__ = { // jshint ignore:line
         autocomplete   : "input",
         colorpicker    : "input",
         maskedtextbox  : "input",
+        dropdownlist   : "select",
         multiselect    : "select",
         upload         : "input",
         validator      : "form",
