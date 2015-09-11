@@ -816,20 +816,6 @@ var __meta__ = { // jshint ignore:line
 
     }
 
-    (function(){
-        function doAll(isMobile) {
-            return function(namespace) {
-                angular.forEach(namespace, function(value) {
-                    if (value.fn && value.fn.options && value.fn.options.name && (/^[A-Z]/).test(value.fn.options.name)) {
-                        createDirectives(value, isMobile);
-                    }
-                });
-            };
-        }
-        angular.forEach([ kendo.ui, kendo.dataviz && kendo.dataviz.ui ], doAll(false));
-        angular.forEach([ kendo.mobile && kendo.mobile.ui ], doAll(true));
-    })();
-
     /* -----[ utils ]----- */
 
     function kendoWidgetInstance(el) {
