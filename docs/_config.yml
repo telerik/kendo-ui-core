@@ -6,9 +6,9 @@ exclude: [readme.md, Gemfile, Gemfile.lock,api_sort.rb]
 navigation:
 ## List your directory names and order here, like this:
     "introduction":
-        title: "Introduction"        
+        title: "Introduction" 
     "intro":
-        title: "Getting Started"
+        title: "Getting Started with Kendo UI"
         position: 2
     "*excel":
         title: "Excel"
@@ -26,9 +26,6 @@ navigation:
         position: 4
     "framework/save-files":
         title: "Save Files"
-    "*install":
-        title: "Install and Upgrade"
-        position: 3
     "*basics":
         title: "The Basics"
         position: 4

@@ -2,7 +2,7 @@
 title: Help Improve Kendo UI Documentation
 page_title: Help Improve Kendo UI Documentation
 description: "Your contribution to Kendo UI documentation: suggestions and feedback."
-position: 251
+position: 252
 ---
 
 # Help Improve Kendo UI Documentation
