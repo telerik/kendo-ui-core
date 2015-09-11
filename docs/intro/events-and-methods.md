@@ -1,54 +1,67 @@
 ---
 title: Call Widget Methods and Bind to Widget Events
-page_title: Call widget methods and bind to widget events
+page_title: Call Widget Methods and Bind to Widget Events
 description: Learn how to obtain a reference to an initialized Kendo UI widget instance and call its methods and events
 previous_url: /basics/events-and-methods
 position: 5
 ---
 
-In addition to the initialization configuration options, each Kendo UI widget instance features **methods** and **events**,
-which may be used to query or modify its state during run time. In order to use them, you should obtain a reference to the widget instance first.
+# Call Widget Methods and Bind to Widget Events
 
-## Obtain a Reference to a Kendo UI widget Instance Using jQuery
+In addition to the initialization configuration options, each Kendo UI widget instance features methods and events that may be used to query or modify its state during run time. In order to use them, you should obtain a reference to the widget instance first.
 
-To get a reference to a widget instance, use the [jQuery data](http://api.jquery.com/data/) method and
-pass the plugin name as a *string* (the Kendo UI widgets are jQuery plugins).
+In this chapter:  
 
-        <p>Animal: <input id="animal" /></p>
+* [Obtain a Reference to a Kendo UI Widget Instance Using jQuery](#obtain-a-reference-to-a-kendo-ui-widget-instance-using-jquery)  
+* [Bind to Widget Events](#bind-to-widget-events)
 
-        <script>
-            $(function() {
-              // create a new widget instance
-              $("#animal").kendoAutoComplete({ dataSource: [ "Ant", "Antilope", "Badger", "Beaver", "Bird" ] });
+## Obtain a Reference to a Kendo UI Widget Instance Using jQuery
 
-              // retrieve the widget instance
-              var autoComplete = $("#animal").data("kendoAutoComplete");
+To get a reference to a widget instance, use the [jQuery data](http://api.jquery.com/data/) method and pass the plug-in name as a string (the Kendo UI widgets are jQuery plug-ins). 
+
+Example: 
+
+```
+    <p>Animal: <input id="animal" /></p>
+
+    <script>
+        $(function() {
+          // create a new widget instance
+          $("#animal").kendoAutoComplete({ dataSource: [ "Ant", "Antilope", "Badger", "Beaver", "Bird" ] });
+
+          // retrieve the widget instance
+          var autoComplete = $("#animal").data("kendoAutoComplete");
+             
+          console.log(autoComplete);
+        });
+    </script>
+```
+
+To get a reference to a widget instance, you may also use the `getKendo<WidgetName>` method. Note that the jQuery convention of returning the selected DOM element(s) applies to widget initialization plug-in methods too. This means that the plug-in method, for example `kendoAutoComplete()`, does not return the widget instance, but the jQuery selector that the method was used on.
+
+Example:
+
+```
+    <p>Animal: <input id="animal" /></p>
+
+    <script>
+        $(function() {
+          // create a new widget instance
+          $("#animal").kendoAutoComplete({ dataSource: [ "Ant", "Antilope", "Badger", "Beaver", "Bird" ] });
+
+          // retrieve the widget instance
+          var autoComplete = $("#animal").getKendoAutoComplete();
               
-              console.log(autoComplete);
-            });
-        </script>
+          console.log(autoComplete);
+        });
+    </script>
+```
 
-To get a reference to a widget instance, you may also use the `getKendo<WidgetName>` method.
+Once the widget instance is available, you can call its methods using the standard JavaScript method syntax. The complete list and examples of the widget methods and method parameters is available in the [API reference](/api/javascript/kendo) section.
 
-        <p>Animal: <input id="animal" /></p>
+Example:
 
-        <script>
-            $(function() {
-              // create a new widget instance
-              $("#animal").kendoAutoComplete({ dataSource: [ "Ant", "Antilope", "Badger", "Beaver", "Bird" ] });
-
-              // retrieve the widget instance
-              var autoComplete = $("#animal").getKendoAutoComplete();
-              
-              console.log(autoComplete);
-            });
-        </script>
-
-> The jQuery convention of returning the selected DOM element(s) applies to widget initialization plugin methods too.
-This means that the plugin method (e.g. `kendoAutoComplete()`) **does not return the widget instance**, but the jQuery selector that the method was used on.
-
-Once the widget instance is available, you can call its methods using the standard JavaScript method syntax:
-
+```
         <p>Animal: <input id="animal" /></p>
 
         <script>
@@ -61,19 +74,21 @@ Once the widget instance is available, you can call its methods using the standa
               autoComplete.focus();
             });
         </script>
+```
 
-> A complete list and examples of the widget methods and method parameters is available in the [API reference](/api/introduction) section.
-
-If the code, which should return a widget instance, returns `undefined`, this means that the widget has not been initialized yet. Such a problem may occur, for example, if a widget
-is being created in a `document.ready` handler, but the widget instance is being referenced from code, which is executed earlier.
+If the code, which should return a widget instance, returns `undefined`, this means that the widget has not been initialized yet. Such a problem may occur, for example, if a widget is being created in a `document.ready` handler, but the widget instance is being referenced from code that was executed earlier.
 
 ## Bind to Widget Events
 
-Each widget exposes different events, depending on its features - for example, the `AutoComplete` widget triggers `change`, `close`, `dataBound`, etc.
-You may pass event handlers when you instantiate the widget, or afterwards.
+Depending on the its specific features, each widget exposes different events. For example, the `AutoComplete` widget triggers `change`, `close`, `dataBound`, etc. You may pass event handlers when you instantiate the widget or afterwards.
 
 ### Bind to Events during Widget Initialization
 
+Event handlers, which are attached during widget initialization, will be executed every time the event is fired. If you need the handler to be executed only once, then attach it after the widget initialization with the `one` method.
+
+Example: 
+
+```
     <p>Animal: <input id="animal" /></p>
 
     <script>
@@ -88,15 +103,15 @@ You may pass event handlers when you instantiate the widget, or afterwards.
           
         });
     </script>
-
-Event handlers, which are attached during widget initialization, will be executed every time the event is fired.
-If you need the handler to be executed only once, then attach it after widget initialization with the `one` method.
+```
 
 ### Bind to Events after Widget Initialization
 
-There are two methods, which all Kendo UI widgets have - **`bind`** and **`one`**. Both of them are used to attach event handlers to already existing widget instances.
-The only difference is that event handlers attached with `one` will be executed only once.
+There are two methods, which all Kendo UI widgets have, namely `bind` and `one`. Both of them are used to attach event handlers to already existing widget instances. The only difference is that event handlers attached with `one` will be executed only once.
 
+Example: 
+
+```
     <p>Animal: <input id="animal" /></p>
 
     <script>
@@ -122,14 +137,19 @@ The only difference is that event handlers attached with `one` will be executed 
           
         });
     </script>
+```
 
 ### Event Handler Argument
 
-Each Kendo UI widget passes **one** argument to the event handler, the so called **event object**. Usually, it has one or more fields with information specific to
-the event. **All event objects have the `sender` field**, which provides a reference to the widget instance that triggered the event.
+Each Kendo UI widget passes one argument to the event handler, which is the so called "event object". Usually, it has one or more fields containing information that is specific to the event. All event objects have a `sender` field, which provides a reference to the widget instance that triggered the event. 
 
-Passing additional custom event arguments to the handler is not supported.
+Passing additional custom event arguments to the handler is not supported. 
 
+The full list and examples of the widget events and the fields available in the event objects is available in the [API reference](/api/javascript/kendo) section.
+
+Example: 
+
+```
     <p>Animal: <input id="animal" /></p>
 
     <script>
@@ -144,14 +164,15 @@ Passing additional custom event arguments to the handler is not supported.
           
         });
     </script>
-
-> A full list and examples of the widget events and the fields available in the event objects is available in the [API reference](/api/introduction) section.
+```
 
 ### Prevent the Effect of Certain Events
 
-Certain widget events may be prevented by calling the `preventDefault` method of the **event object**.
-The effect of the event prevention is specific for each event and is documented in the [API reference](/api/introduction).
+Certain widget events may be prevented by calling the `preventDefault` method of the event object. The effect of the event prevention is specific for each event and is documented in the [API reference](/api/javascript/kendo).
 
+Example: 
+
+```
     <p>Animal: <input id="animal" /></p>
 
     <script>
@@ -168,11 +189,15 @@ The effect of the event prevention is specific for each event and is documented 
           });
         });
     </script>
+```
 
 ### Unbind from a Widget Event
 
-To unbind from a given event, you should keep a reference to the event handler function and invoke the `unbind` method with it.
+To unbind from a given event, you should keep a reference to the event handler function and invoke the `unbind` method with it. Note that calling the `unbind` method without a second argument unbinds all event handlers from the event.
 
+Example: 
+
+```
     <p>Animal: <input id="animal" /></p>
 
     <button id="unbindButton">Unbind event</button>
@@ -191,5 +216,4 @@ To unbind from a given event, you should keep a reference to the event handler f
           });
         });
     </script>
-
-> Calling the `unbind` method without a second argument **unbinds all event handlers** from the event.
+```

@@ -70,6 +70,8 @@ You can configure a Kendo UI widget by passing a configuration object (key/value
 
 ### Instantiate and Configure the Kendo UI Grid
 
+The example below sets the [height](/api/web/grid#height-numberstring), [columns](/api/web/grid#columns-array) and [dataSource](/api/web/grid#datasource-kendodatadatasource--object) configuration options of the Grid widget.
+
 Example: 
 
 ```
@@ -104,12 +106,9 @@ Example:
     </script>
 ```
 
-This example sets the [height](/api/web/grid#height-numberstring), [columns](/api/web/grid#columns-array) and [dataSource](/api/web/grid#datasource-kendodatadatasource--object) configuration options of the Grid widget.
-
 ## Duplicate Kendo UI Widget Initialization
 
-When using a Kendo UI server-side wrapper (as they are automatically initialized) or when a widget is being created in an event handler executed multiple times, it is possible to initialize a widget on the same DOM element more than once. In such a scenario, do not try to recreate a widget  instance when the goal is to get the instance object     
-
+When using a Kendo UI server-side wrapper (as the server-side wrappers are automatically initialized) or when a widget is being created in an event handler executed multiple times, it is possible to initialize a widget on the same DOM element more than once. In such a scenario, do not try to recreate a widget instance when the goal is to get the instance object.     
 
 A common mistake is to recreate a widget instance when the goal is only to get the instance object. Duplicate initialization is not supported and results in unexpected side effects.
 
@@ -132,11 +131,10 @@ Example:
     </script>
 ```
 
-In order to check if a widget instance already exists for a certain DOM element, use the
-[standard way to obtain the widget instance](/basics/events-and-methods#obtain-a-reference-to-a-kendo-ui-widget-instance-using-jquery).
-If the returned value is `undefined`, then a widget instance does not exist.
-
 ### Check If a Widget Instance Exists
+
+In order to check whether a widget instance already exists for a certain DOM element, use the
+[standard way to obtain the widget instance](/basics/events-and-methods#obtain-a-reference-to-a-kendo-ui-widget-instance-using-jquery). If the returned value is `undefined`, then the widget instance does not exist.
 
 Example:
 
