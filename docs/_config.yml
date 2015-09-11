@@ -71,8 +71,16 @@ navigation:
         title: "Mobile ListView"
         position: 9
     "mobile/collapsible":
-        title: "Mobile Collapsible"
+        title: "Collapsible"
         position: 14
+    "mobile/drawer":
+        title: "Drawer"
+    "mobile/forms":
+        title: "Forms"    
+    "mobile/navbar":
+        title: "NavBar"
+    "mobile/scrollview":
+        title: "ScrollView"
     "*typescript":
     "*asp.net":
         title: "ASP.NET"
@@ -88,18 +96,12 @@ navigation:
         title: "MobileApplication"
     "*mobilebuttongroup":
         title: "MobileButtonGroup"
-    "*mobiledrawer":
-        title: "MobileDrawer"
-    "*mobilenavbar":
-        title: "MobileNavBar"
     "*mobilelayout":
         title: "MobileLayout"
     "*mobilemodalview":
         title: "MobileModalView"
     "*mobilepopover":
         title: "MobilePopOver"
-    "*mobilescrollview":
-        title: "MobileScrollView"
     "*mobilesplitview":
         title: "MobileSplitView"
     "*mobileswitch":
