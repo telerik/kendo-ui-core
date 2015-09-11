@@ -56,30 +56,30 @@ function preventParentSelection(e) {
 
 $(function(){
     $("pre[lang]").each(function() {
-       if (this.parentNode.className.indexOf("k-content") >= 0) {
-           return;
-       }
+        if (this.parentNode.className.indexOf("k-content") >= 0) {
+            return;
+        }
 
-       var langs = $(this).nextUntil(":not(pre)", "pre").add(this);
+        var langs = $(this).nextUntil(":not(pre)", "pre").add(this);
 
-       var tabs = $.map(langs, function(item) {
-          return $("<li>").text($(item).attr("lang"));
-       });
+        var tabs = $.map(langs, function(item) {
+            return $("<li>").text($(item).attr("lang"));
+        });
 
-       if (tabs.length < 2) {
-           return;
-       }
+        if (tabs.length < 2) {
+            return;
+        }
 
-       tabs[0].addClass("k-state-active");
+        tabs[0].addClass("k-state-active");
 
-       var tabstrip = $("<div>")
-                       .insertBefore(this)
-                       .append($("<ul>").append(tabs))
-                       .append(langs);
+        var tabstrip = $("<div>")
+        .insertBefore(this)
+        .append($("<ul>").append(tabs))
+        .append(langs);
 
-       langs.wrap("<div>");
+        langs.wrap("<div>");
 
-       tabstrip.kendoTabStrip({ animation: false });
+        tabstrip.kendoTabStrip({ animation: false });
     });
 
     $("pre").addClass("prettyprint");
@@ -87,9 +87,9 @@ $(function(){
     prettyPrint();
 
     $("#markdown-toc")
-        .on("click", "a", function() {
-            $(".section > ul").hide();
-        })
+    .on("click", "a", function() {
+        $(".section > ul").hide();
+    })
     .each(function() {
         var ul = $("<ul>");
 
@@ -101,29 +101,29 @@ $(function(){
             }
 
             $("<li>")
-                .addClass("section")
-                .append(h2.children().clone())
-                .appendTo(ul)
-                .mouseenter(function() {
-                    var children = $(this).children("ul");
+            .addClass("section")
+            .append(h2.children().clone())
+            .appendTo(ul)
+            .mouseenter(function() {
+                var children = $(this).children("ul");
 
-                    if (!children.length) {
-                        children = $("<ul>");
+                if (!children.length) {
+                    children = $("<ul>");
 
-                        h2.nextUntil("h2").filter("h3").each(function(){
-                            $("<li>").append($(this).children().clone()).appendTo(children);
-                        });
+                    h2.nextUntil("h2").filter("h3").each(function(){
+                        $("<li>").append($(this).children().clone()).appendTo(children);
+                    });
 
-                        if (children.children().length) {
-                            children.appendTo(this);
-                        }
+                    if (children.children().length) {
+                        children.appendTo(this);
                     }
+                }
 
-                    children.show();
-                })
-                .mouseleave(function() {
-                    $(this).children("ul").hide();
-                });
+                children.show();
+            })
+            .mouseleave(function() {
+                $(this).children("ul").hide();
+            });
         });
 
         ul.appendTo(this);
@@ -154,9 +154,9 @@ var dojoApi = (function($) {
             element = $(element);
 
             $("<button type='button'>")
-                .text(text)
-                .addClass("btn btn-action dojo-submit-button")
-                .insertBefore(element);
+            .text(text)
+            .addClass("btn btn-action dojo-submit-button")
+            .insertBefore(element);
         },
         wrapInHtml: function(snippet) {
             var angular = '    <script src="http://kendo.cdn.telerik.com/kendo-version/js/angular.min.js"></script>\n';
@@ -171,31 +171,31 @@ var dojoApi = (function($) {
             }
 
             var result = ('<!DOCTYPE html>\n'+
-            '<html>\n'+
-            '<head>\n'+
-            '    <meta charset="utf-8">\n'+
-            '    <title>Kendo UI Snippet</title>\n\n'+
-            '    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/kendo-version/styles/kendo.common.min.css">\n'+
-            '    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/kendo-version/styles/kendo.rtl.min.css">\n'+
-            '    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/kendo-version/styles/kendo.default.min.css">\n'+
-            '    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/kendo-version/styles/kendo.dataviz.min.css">\n'+
-            '    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/kendo-version/styles/kendo.dataviz.default.min.css">\n'+
-            '    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/kendo-version/styles/kendo.mobile.all.min.css">\n\n'+
-            '    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>\n'+
-            angular + jszip +
-            '    <script src="http://kendo.cdn.telerik.com/kendo-version/js/kendo.all.min.js"></script>\n'+
-            '</head>\n'+
-            '<body>\n  \n'+
-            snippet+ '\n' +
-            '</body>\n'+
+                '<html>\n'+
+                '<head>\n'+
+                '    <meta charset="utf-8">\n'+
+                '    <title>Kendo UI Snippet</title>\n\n'+
+                '    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/kendo-version/styles/kendo.common.min.css">\n'+
+                '    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/kendo-version/styles/kendo.rtl.min.css">\n'+
+                '    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/kendo-version/styles/kendo.default.min.css">\n'+
+                '    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/kendo-version/styles/kendo.dataviz.min.css">\n'+
+                '    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/kendo-version/styles/kendo.dataviz.default.min.css">\n'+
+                '    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/kendo-version/styles/kendo.mobile.all.min.css">\n\n'+
+                '    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>\n'+
+                angular + jszip +
+                '    <script src="http://kendo.cdn.telerik.com/kendo-version/js/kendo.all.min.js"></script>\n'+
+                '</head>\n'+
+                '<body>\n  \n'+
+                snippet+ '\n' +
+                '</body>\n'+
             '</html>').replace(/kendo-version/g, dojoApi.configuration.currentKendoVersion);
-            return result;
+        return result;
         },
 
         addButtons: function(element) {
             $('<button class="btn btn-action btn-edit" title="Edit example">Edit</button>').insertBefore(element);
             $('<a href="http://dojo.telerik.com" class="dojo" title="Open example in Kendo UI Dojo">Open In Dojo</a>').insertBefore(element);
-            $('<button class="btn btn-action btn-run" title="Run example">Run</button>').insertBefore(element);
+                $('<button class="btn btn-action btn-run" title="Run example">Run</button>').insertBefore(element);
         },
         editSnippet: function(element) {
             reset();
@@ -249,32 +249,32 @@ var dojoApi = (function($) {
         },
 
         openSnippet: function(element) {
-           var snippet = null;
+            var snippet = null;
 
-           var pre = $(element).nextAll("pre:first");
+            var pre = $(element).nextAll("pre:first");
 
-           if (isCodeMirrorCurrent(pre)) {
-              snippet = codemirror.getValue();
-           } else {
-              snippet = pre.text();
-           }
+            if (isCodeMirrorCurrent(pre)) {
+                snippet = codemirror.getValue();
+            } else {
+                snippet = pre.text();
+            }
 
-           dojoApi.post(snippet);
+            dojoApi.post(snippet);
         }
     };
 
-   var template = kendo.template(
-      '<!doctype html>' +
-      '<html>' +
-        '<head>' +
+    var template = kendo.template(
+        '<!doctype html>' +
+            '<html>' +
+            '<head>' +
             '<meta charset="utf-8">' +
             '<meta http-equiv="X-UA-Compatible" content="IE=edge">' +
             '<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">' +
             '<script src="http://code.jquery.com/jquery-1.10.2.js"></script>' +
             '<style>' +
             'body {' +
-               'font-family: Helvetica, Arial, sans-serif;' +
-               'font-size: 14px' +
+                'font-family: Helvetica, Arial, sans-serif;' +
+            'font-size: 14px' +
             '}' +
             '</style>' +
             '<link rel="stylesheet" href="//kendo.cdn.telerik.com/${version}/styles/kendo.common-material.min.css">' +
@@ -287,41 +287,41 @@ var dojoApi = (function($) {
             '<script>' +
             'kendo.mobile.Application.prototype.options.browserHistory = false;' +
             'window.onerror = function(message, url, line) {' +
-               'document.write("<span style=\\"color:red;font-family:monospace\\">" + message + " at line " + line + "</span>");' +
+                'document.write("<span style=\\"color:red;font-family:monospace\\">" + message + " at line " + line + "</span>");' +
             '};' +
             'window.onunload = function() {' +
                 'kendo.destroy(document.body);' +
             '};' +
             '</script>' +
-        '</head>' +
-        '<body>' +
-        '#= snippet #' +
-        '</body>' +
-      '</html>'
-   );
+            '</head>' +
+            '<body>' +
+            '#= snippet #' +
+            '</body>' +
+            '</html>'
+    );
 
-   var codemirror = null;
+    var codemirror = null;
 
-   function destroyCodeMirror() {
+    function destroyCodeMirror() {
         if (codemirror) {
             $(codemirror.display.wrapper).remove();
             codemirror = null;
         }
-   }
+    }
 
-   function hideCodeMirror() {
-       if (codemirror) {
-           $(codemirror.display.wrapper).hide();
-       }
-   }
+    function hideCodeMirror() {
+        if (codemirror) {
+            $(codemirror.display.wrapper).hide();
+        }
+    }
 
-   function showCodeMirror() {
-       if (codemirror) {
-           $(codemirror.display.wrapper).show();
-       }
-   }
+    function showCodeMirror() {
+        if (codemirror) {
+            $(codemirror.display.wrapper).show();
+        }
+    }
 
-   function createCodeMirror(pre) {
+    function createCodeMirror(pre) {
         codemirror = CodeMirror(function(element) {
             $(element).insertAfter(pre);
         }, {
@@ -330,18 +330,18 @@ var dojoApi = (function($) {
             lineNumbers: true,
             mode: "htmlmixed"
         });
-   }
+    }
 
-   function isCodeMirrorCurrent(pre) {
-       return codemirror && codemirror.display.wrapper.previousSibling === pre[0];
-   }
+    function isCodeMirrorCurrent(pre) {
+        return codemirror && codemirror.display.wrapper.previousSibling === pre[0];
+    }
 
-   function reset() {
+    function reset() {
         $("pre.prettyprint").show();
         $(".snippet-runner").remove();
-   }
+    }
 
-   return dojoApi;
+    return dojoApi;
 })(jQuery);
 
 $(function(){
@@ -358,7 +358,9 @@ $(function(){
     });
 
     $("body").find(".prettyprint[lang=html]").each(function() {
-        dojoApi.addButtons(this);
+        if (this.parentNode.className.indexOf("k-content") < 0) {
+            dojoApi.addButtons(this);
+        }
     });
 
     $("body").on("click", ".btn-edit", function(e) {
