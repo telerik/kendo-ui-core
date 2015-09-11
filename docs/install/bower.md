@@ -96,5 +96,6 @@ The cause of this issue is the underlying git installation is missing the certif
 To resolve the issue, [follow the steps in this help article](http://blogs.msdn.com/b/phkelley/archive/2014/01/20/adding-a-corporate-or-self-signed-certificate-authority-to-git-exe-s-store.aspx).
 
 * GitHub build 1.9.5 will not work with the Bower package.
+* When using @ symbol in the url for accessing the Kendo UI Bower repository (due to network restrictions or admin rules, for instance), make sure you encode it as follows: https://firstname.lasname**%40**domain.com@bower.telerik.com/bower-kendo-ui.git.
 
 
