@@ -194,6 +194,8 @@ fatal: unable to access 'https://bower.telerik.com/bower-kendo-ui.git/': SSL cer
 
 > 1.9.5 GitHub build will not work with the Bower package.
 
+> When using @ symbol in the url for accessing the Kendo UI Bower repository (due to network restrictions or admin rules, for instance), make sure you encode it as follows: https://firstname.lasname**%40**domain.com@bower.telerik.com/bower-kendo-ui.git.
+ 
 ## Use the Kendo UI CDN Service
 
 The Kendo UI CDN is hosted on [Amazon CloudFront](https://aws.amazon.com/cloudfront/). In order to access the Kendo UI CDN Service, you can use either of the options described below. 
