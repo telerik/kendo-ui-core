@@ -42,7 +42,7 @@ Kendo UI Professional is one of the commercial versions of Kendo UI and is forme
 
 ### Telerik UI for ASP.NET MVC
 
-[UI for ASP.NET MVC](http://docs.telerik.com/kendo-ui/aspnet-mvc/introduction) is a Kendo UI commercial distribution. It helps build rich and responsive any-device web applications, provides for their flawless work across all major browsers and includes 70+ ASP.NET MVC controls among which navigation, layout, data management, visualization, editing and interactivity. In short, UI for ASP.NET MVC supplies all Kendo UI Professional components together with the ASP.NET MVC server-side wrappers that are applicable to all available Kendo UI widgets.ASP 
+[UI for ASP.NET MVC](http://docs.telerik.com/kendo-ui/aspnet-mvc/introduction) is a Kendo UI commercial distribution. It helps build rich and responsive any-device web applications, provides for their flawless work across all major browsers and includes 70+ ASP.NET MVC controls among which navigation, layout, data management, visualization, editing and interactivity. In short, UI for ASP.NET MVC supplies all Kendo UI Professional components together with the ASP.NET MVC server-side wrappers that are applicable to all available Kendo UI widgets. 
 
 * [List of Kendo UI Components](/intro/list-of-widgets)
 * [Browser Support](/intro/browser-support)
