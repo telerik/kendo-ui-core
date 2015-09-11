@@ -903,12 +903,11 @@ var __meta__ = { // jshint ignore:line
         return true;
     }
 
-    defadvice(kendo.ui, "plugin", function(klass, register, prefix){
-        this.next();
+    kendo.onWidgetRegistered(function(entry){
         pendingPatches = $.grep(pendingPatches, function(args){
             return !defadvice.apply(null, args);
         });
-        createDirectives(klass, prefix == "Mobile");
+        createDirectives(entry.widget, entry.prefix == "Mobile");
     });
 
     /* -----[ Customize widgets for Angular ]----- */
