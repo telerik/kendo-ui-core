@@ -37,23 +37,18 @@ var __meta__ = { // jshint ignore:line
         contextmenu    : "ul",
         actionsheet    : "ul"
     };
+
     var EVENT_PREFIX = "on-";
 
-    Object.keys(kendo.ui.roles).forEach(function(name) {
-        registerElement(name, kendo.ui.roles[name]);
+    var registered = [];
+
+    kendo.onWidgetRegistered(function(entry) {
+        var elementName = entry.prefix + entry.widget.prototype.options.name.toLowerCase();
+        if (registered.indexOf(elementName) === -1) {
+            registered.push(elementName);
+            registerElement(elementName, entry.widget);
+        }
     });
-
-    if(kendo.dataviz) {
-        Object.keys(kendo.dataviz.ui.roles).forEach(function(name) {
-            registerElement(name, kendo.dataviz.ui.roles[name]);
-        });
-    }
-
-    if(kendo.mobile) {
-        Object.keys(kendo.mobile.ui.roles).forEach(function(name) {
-            registerElement("mobile" + name, kendo.mobile.ui.roles[name]);
-        });
-    }
 
     var jsonRegExp = /^\s*(?:\{(?:.|\r\n|\n)*\}|\[(?:.|\r\n|\n)*\])\s*$/;
     var jsonFormatRegExp = /^\{(\d+)(:[^\}]+)?\}|^\[[A-Za-z_]*\]$/;
@@ -123,6 +118,10 @@ var __meta__ = { // jshint ignore:line
                     component[props[idx]] = obj[props[idx]].bind(component.widget);
                 }
             }else{
+                if (props[idx] === "options") {
+                    continue;
+                }
+
                 component[props[idx]] = component[props[idx]] || obj[props[idx]];
             }
         }

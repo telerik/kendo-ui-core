@@ -2486,6 +2486,8 @@ function pad(number, digits, end) {
     localUrlRe = /^([a-z]+:)?\/\//i;
 
     extend(kendo, {
+        widgets: [],
+        _widgetRegisteredCallbacks: [],
         ui: kendo.ui || {},
         fx: kendo.fx || fx,
         effects: kendo.effects || effects,
@@ -2624,6 +2626,14 @@ function pad(number, digits, end) {
 
         triggeredByInput: function(e) {
             return (/^(label|input|textarea|select)$/i).test(e.target.tagName);
+        },
+
+        onWidgetRegistered: function(callback) {
+            for (var i = 0, len = kendo.widgets.length; i < len; i++) {
+                callback(kendo.widgets[i]);
+            }
+
+            kendo._widgetRegisteredCallbacks.push(callback);
         },
 
         logToConsole: function(message) {
@@ -3043,6 +3053,13 @@ function pad(number, digits, end) {
 
             getter = "getKendo" + prefix + name;
             name = "kendo" + prefix + name;
+
+            var widgetEntry = { name: name, widget: widget, prefix: prefix || "" };
+            kendo.widgets.push(widgetEntry);
+
+            for (var i = 0, len = kendo._widgetRegisteredCallbacks.length; i < len; i++) {
+                kendo._widgetRegisteredCallbacks[i](widgetEntry);
+            }
 
             $.fn[name] = function(options) {
                 var value = this,

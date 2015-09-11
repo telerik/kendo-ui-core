@@ -32,7 +32,6 @@
     ];
     var dom;
 
-    
     module("WebComponents - Kendo UI Core", {
         setup: function() {
             QUnit.fixture.empty();
@@ -46,15 +45,15 @@
     test("custom elements are created for core widgets", function() {
         coreWidgets.forEach(function(name) {
             var element = $("<kendo-"+ name.toLowerCase() +"/>").appendTo(dom)[0];
-            ok(element.widget instanceof kendo.ui[name]);
-            
+            ok(element.widget instanceof kendo.ui[name], name + " is not registered as a component");
+
         });
     });
 
     test("custom elements are created for mobile widgets", function() {
         mobileWidgets.forEach(function(name) {
             var element = $("<kendo-mobile"+ name.toLowerCase() +"/>").appendTo(dom)[0];
-            ok(element.widget instanceof kendo.mobile.ui[name]);
+            ok(element.widget instanceof kendo.mobile.ui[name], name + " is not registered as a component");
         });
     });
 

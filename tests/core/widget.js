@@ -122,4 +122,32 @@ test("destroy removes any event handlers", function() {
     equal(options.calls("foo"), 0);
 });
 
+test("plugin callback is called for existing and new widgets", 2, function() {
+    var currentWidgets = kendo.widgets;
+    kendo.widgets = [];
+
+    var Widget1 = kendo.ui.Widget.extend({ options: { name: "widget1" }});
+
+    kendo.ui.plugin(Widget1, { roles: [] });
+
+    var i = 0;
+    kendo.onWidgetRegistered(function(entry) {
+        switch (i++) {
+            case 0:
+                equal(entry.widget.prototype.options.name, "widget1");
+                break;
+            case 1:
+                equal(entry.widget.prototype.options.name, "widget2");
+                break;
+        }
+    });
+
+    var Widget2 = kendo.ui.Widget.extend({ options: { name: "widget2" }});
+
+    kendo.ui.plugin(Widget2, { roles: [] });
+
+    // reset the state
+    kendo.widgets = currentWidgets;
+    kendo._widgetRegisteredCallbacks = [];
+});
 }());
