@@ -30,9 +30,11 @@ These are immensely useful when you need to track down particular issues or beha
 
 # Running the Sample Application on Windows
 
-The sample application is currently targeting MVC Beta 6 and is not runnable with Beta 7.
-
-The next official release (2015 Q3 Beta) will address this.
+- [Visual Studio 2015](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx)
+- [Microsoft ASP.NET and Web Tools 2015 (Beta7)](http://www.microsoft.com/en-us/download/details.aspx?id=48738)
+- Download the matching release of the [Sample Application](https://github.com/telerik/ui-for-aspnet-mvc-6-demos/releases)
+- Open the `Kendo.Mvc.Examples.sln` solution in Visual Studio.
+- Run the application.
 
 # See Also
 
