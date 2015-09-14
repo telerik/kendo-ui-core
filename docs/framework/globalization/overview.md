@@ -55,9 +55,11 @@ Kendo UI exposes methods which converts the specified string to date or number o
 
 For more detail information check [this help topic](/framework/globalization/dateparsing).
 
-## globalize.js support
+## Support for jQuery Globalize.js 0.1 (deprecated)
 
-> When globalize.js is registered before Kendo UI scripts, then Kendo UI will use globalize.js features instead of Kendo UI Globalization.
+Loading globalize.js will override the default globalization features in Kendo UI. Not everything is guaranteed to work, for example custom number formats are unsupported in this case.
+
+> The Globalization 0.1 library is no longer supported. Using it is not recommended.
 
 ## Widgets that depend on culture info
 
