@@ -79,8 +79,8 @@ var __meta__ = { // jshint ignore:line
         var result = {};
 
         Object.keys(options).concat("dataSource").forEach(function(name) {
-            if (element.hasAttribute(name)) {
-                result[name] = parseOption(element, name);
+            if (element.hasAttribute(kendo.toHyphens(name))) {
+                result[name] = parseOption(element, kendo.toHyphens(name));
             }
         });
 
