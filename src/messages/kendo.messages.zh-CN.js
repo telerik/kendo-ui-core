@@ -315,6 +315,7 @@ $.extend(true, kendo.ui.NumericTextBox.prototype.options,{
 if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
+  "allPages": "All",
   "display": "显示条目 {0} - {1} 共 {2}",
   "empty": "没有可显示的记录。",
   "page": "页",

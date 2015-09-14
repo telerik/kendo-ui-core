@@ -314,6 +314,7 @@ $.extend(true, kendo.ui.NumericTextBox.prototype.options,{
 if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
+  "allPages": "All",
   "display": "Registos {0} - {1} de {2}",
   "empty": "Sem registos para apresentar.",
   "page": "Página",

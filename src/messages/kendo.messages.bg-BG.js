@@ -321,6 +321,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
 if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
+  "allPages": "Всички",
   "page": "Страница",
   "display": "{0} - {1} от {2} записи",
   "of": "от {0}",
