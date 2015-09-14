@@ -214,6 +214,7 @@ $.extend(true, kendo.ui.Groupable.prototype.options.messages,{
 if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
+  "allPages": "All",
   "display": "{0} - {1} di {2} elementi",
   "empty": "Nessun elemento da visualizzare",
   "first": "Vai alla prima pagina",

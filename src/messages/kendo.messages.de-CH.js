@@ -316,6 +316,7 @@ $.extend(true, kendo.ui.NumericTextBox.prototype.options,{
 if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
+  "allPages": "All",
   "display": "Anzeigen der Elemente {0} - {1} von {2}",
   "empty": "keine Daten",
   "first": "Gehen Sie zur ersten Seite",

@@ -278,6 +278,7 @@ $.extend(true, kendo.ui.Groupable.prototype.options.messages,{
 if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
+  "allPages": "All",
   "display": "items {0} - {1} van {2}",
   "empty": "Geen items om te tonen",
   "first": "Ga naar eerste pagina",

@@ -318,6 +318,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
 if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
+  "allPages": "All",
   "page": "עמוד",
   "display": "{0} - {1} מתוך {2} פריטים",
   "of": "מתוך {0}",

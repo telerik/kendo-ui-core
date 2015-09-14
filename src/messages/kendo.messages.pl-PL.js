@@ -172,6 +172,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
 if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
+  "allPages": "All",
   "page": "Strona",
   "display": "Wyświetlanie elementów {0} - {1} z {2}",
   "of": "z {0}",

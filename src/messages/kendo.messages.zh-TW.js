@@ -294,6 +294,7 @@ $.extend(true, kendo.ui.NumericTextBox.prototype.options,{
 if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
+  "allPages": "All",
   "display": "顯示條目 {0} - {1} 共 {2}",
   "empty": "沒有可顯示的記錄。",
   "page": "頁",
