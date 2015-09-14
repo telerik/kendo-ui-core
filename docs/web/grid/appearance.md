@@ -249,7 +249,8 @@ This will prevent undesired side effects if the browser window size is reduced t
 Using the Grid ID (Name) in the above selectors is optional, so that the styles are applied to a particular Grid instance only.
 
 Setting column widths in percent is possible, but if the sum of all widths is greater than 100% (i.e. a horizontal scrollbar is desired), the Grid tables must have a (min-)width style,
-otherwise the tables will be 100% wide (as wide as the Grid) and the columns will be narrower than desired.
+otherwise the tables will be 100% wide (as wide as the Grid) and the columns will be narrower than desired. Please note that when column widths are set in percent, resizing one column may
+lead to other columns changing their widths as well.
 
 ## Virtual Scrolling
 
