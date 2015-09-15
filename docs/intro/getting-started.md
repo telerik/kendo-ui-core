@@ -2,12 +2,13 @@
 title: Getting Started with Kendo UI
 page_title: Getting Started with Kendo UI
 description: "Get your project up and running: download and host Kendo UI, install Kendo UI as a bower package, or use the Kendo UI CDN service and include only what you need."
+previous_url: /install/bower, /install/cdn, /install/custom
 position: 1
 ---
 
 # Getting Started with Kendo UI
 
-In this chapter:   
+In this chapter:
 
 * [Host Kendo UI in Your Project](#host-kendo-ui-in-your-project)
 * [Install Kendo UI As a Bower Package](#install-kendo-ui-as-a-kendo-ui-core-or-kendo-ui-professional-bower-package)
@@ -16,21 +17,21 @@ In this chapter:
 
 ## Host Kendo UI in Your Project
 
-Depending on your preferences and the requirements of your project, you can:  
-  
-* [Download](http://www.telerik.com/download/kendo-ui) Kendo UI for a 30-day trial period  
-* [Use]((https://github.com/telerik/kendo-ui-core)) the GitHub open-source license for Telerik Kendo UI® Core  
-* [Get](http://www.telerik.com/purchase/kendo-ui) your commercial license for Telerik Kendo UI® Professional  
+Depending on your preferences and the requirements of your project, you can:
+
+* [Download](http://www.telerik.com/download/kendo-ui) Kendo UI for a 30-day trial period
+* [Use]((https://github.com/telerik/kendo-ui-core)) the GitHub open-source license for Telerik Kendo UI® Core
+* [Get](http://www.telerik.com/purchase/kendo-ui) your commercial license for Telerik Kendo UI® Professional
 * [Get](http://www.telerik.com/purchase/aspnet-mvc) your commercial license for Telerik UI for ASP.NET MVC
-* [Get](http://www.telerik.com/purchase/jsp-ui) your commercial license for Telerik UI for JSP  
-* [Get](http://www.telerik.com/purchase/php-ui) your commercial license for Telerik UI for PHP   
+* [Get](http://www.telerik.com/purchase/jsp-ui) your commercial license for Telerik UI for JSP
+* [Get](http://www.telerik.com/purchase/php-ui) your commercial license for Telerik UI for PHP
 
 ### Step 1: Download Kendo UI
 
-Once you [download](http://www.telerik.com/download/kendo-ui) any of the Kendo UI packages, you will get the following folders in your local repository: 
+Once you [download](http://www.telerik.com/download/kendo-ui) any of the Kendo UI packages, you will get the following folders in your local repository:
 
 * `/examples` - the folder accommodates the quick start demo files
-* `/js` - the location contains the minified JavaScript files 
+* `/js` - the location contains the minified JavaScript files
 * `/src` - this directory holds the source code files. Note that it is not available in the 30-day trial version.
 * `/styles` - the folder consists of the minified CSS files and theme images
 * `/wrappers` - the directory includes the server-side wrappers. As it is necessary for the Telerik UI for ASP.NET MVC, UI for JSP or UI for PHP distributions only, the folder is available in the commercial packages of these versions.
@@ -40,8 +41,8 @@ Once you [download](http://www.telerik.com/download/kendo-ui) any of the Kendo U
 
 To use Kendo UI in your project, you need to include the required JavaScript and CSS files.
 
-**Step 1:** Extract the `/js` and `/styles` directories from the bundle archive and copy them to your web application root directory  
-**Step 2:** Include the Kendo UI JavaScript and CSS files in the `head` tag of your HTML document. Make sure the common CSS file is registered before the theme CSS file.  
+**Step 1:** Extract the `/js` and `/styles` directories from the bundle archive and copy them to your web application root directory
+**Step 2:** Include the Kendo UI JavaScript and CSS files in the `head` tag of your HTML document. Make sure the common CSS file is registered before the theme CSS file.
 
 Here goes the example:
 
@@ -51,19 +52,19 @@ Here goes the example:
 	            <title>Welcome to Kendo UI!</title>
 	            <!-- Common Kendo UI CSS for web and dataviz widgets -->
 	            <link href="styles/kendo.common.min.css" rel="stylesheet" />
-	
+
 	            <!-- (optional) Kendo UI web widgets' RTL CSS, include only in right-to-left applications -->
 	            <link href="styles/kendo.rtl.min.css" rel="stylesheet" type="text/css" />
-	            
+
 	            <!-- Default Kendo UI theme CSS for web and dataviz widgets -->
 	            <link href="styles/kendo.default.min.css" rel="stylesheet" />
-	
+
 	            <!-- (optional) Kendo UI Mobile CSS, include only if you will use the mobile devices features -->
 	            <link href="styles/kendo.default.mobile.min.css" rel="stylesheet" type="text/css" />
-	
+
 	            <!-- jQuery JavaScript -->
 	            <script src="js/jquery.min.js"></script>
-	
+
 	            <!-- Kendo UI combined JavaScript -->
 	            <script src="js/kendo.all.min.js"></script>
 	        </head>
@@ -72,9 +73,9 @@ Here goes the example:
 	        </body>
 	        </html>
 
-> The code examples onwards assume that the Kendo UI scripts and stylesheets were added to the document. 
+> The code examples onwards assume that the Kendo UI scripts and stylesheets were added to the document.
 
-**Step 3:** Initialize a Kendo UI Widget 
+**Step 3:** Initialize a Kendo UI Widget
 
 Example with the DataPicker widget:
 
@@ -112,13 +113,13 @@ Here is the complete example:
 
 [Bower](http://bower.io/) is a popular package manager for the web.
 
-Kendo UI maintains 2 bower packages, namely Kendo UI Core and Kendo UI Professional. Official releases, service packs and internal builds are uploaded to both of them. 
+Kendo UI maintains 2 bower packages, namely Kendo UI Core and Kendo UI Professional. Official releases, service packs and internal builds are uploaded to both of them.
 
 > Kendo UI Professional bower package is available for licensed user accounts only. Check out the list of Kendo UI components and their bundle support [here](http://docs.telerik.com/kendo-ui/intro/list-of-widgets).
 
 ### Option 1: Install Kendo UI Core Bower Package
 
-The Kendo UI Core Bower package is available as a [public GitHub repository](https://github.com/kendo-labs/bower-kendo-ui) and is also registered as `kendo-ui-core` in the bower registry: 
+The Kendo UI Core Bower package is available as a [public GitHub repository](https://github.com/kendo-labs/bower-kendo-ui) and is also registered as `kendo-ui-core` in the bower registry:
 
 ```sh
 bower install kendo-ui-core
@@ -144,7 +145,7 @@ You can also add the package to the `bower.json` file:
 
 ### Storing Your Repository Credentials
 
-**Option 1:** In order to avoid retyping your credentials, you may cache them. The easiest way to do that is to store them as plain text in a [.netrc file](http://www.mavetju.org/unix/netrc.php). 
+**Option 1:** In order to avoid retyping your credentials, you may cache them. The easiest way to do that is to store them as plain text in a [.netrc file](http://www.mavetju.org/unix/netrc.php).
 
 **Option 2:** A secure alternative to do the same is to use the GitHub credential helpers. Refer to [Stack Overflow](http://stackoverflow.com/questions/5343068/is-there-a-way-to-skip-password-typing-when-using-https-github) to follow the discussion on the topic.
 
@@ -152,12 +153,12 @@ You can also add the package to the `bower.json` file:
 
 > Caching your credentials is required if you use the Kendo UI Bower Package in an ASP.NET vNext project.
 
-**Step 1:** Create a text file called `_netrc` in your home directory (e.g. `c:\users\jane\_netrc`)  
+**Step 1:** Create a text file called `_netrc` in your home directory (e.g. `c:\users\jane\_netrc`)
 **Step 2:** Declare a HOME environment variable:
 
 ```
 C:\> SETX HOME %USERPROFILE%
-```    
+```
 
 **Step 3:** Add the credentials using the format listed above.
 
@@ -171,9 +172,9 @@ GitHub might have problems resolving your home directory if it contains spaces i
 touch ~/.netrc
 chmod 0600 ~/.netrc
 ```
-    
+
 **Step 2:** Add your credentials to the `~/.netrc` file using the format listed in the example below:
-		
+
 ```
 machine bower.telerik.com
     login my-telerik.identity@example.com
@@ -182,60 +183,60 @@ machine bower.telerik.com
 
 #### Troubleshooting
 
-**Issue 1:** Bower on Windows has troubles installing the repository showing the error message 
+**Issue 1:** Bower on Windows has troubles installing the repository showing the error message
 
 ```
 fatal: unable to access 'https://bower.telerik.com/bower-kendo-ui.git/': SSL certificate problem: unable to get local issuer certificate
 ```
 
-**Cause:** The cause of this issue is the underlying GitHub installation is missing the certificate bundle.  
+**Cause:** The cause of this issue is the underlying GitHub installation is missing the certificate bundle.
 
 **Fix:** To resolve the issue, follow the steps in this [help article](http://blogs.msdn.com/b/phkelley/archive/2014/01/20/adding-a-corporate-or-self-signed-certificate-authority-to-git-exe-s-store.aspx).
 
 > 1.9.5 GitHub build will not work with the Bower package.
 
 > When using @ symbol in the url for accessing the Kendo UI Bower repository (due to network restrictions or admin rules, for instance), make sure you encode it as follows: https://firstname.lasname**%40**domain.com@bower.telerik.com/bower-kendo-ui.git.
- 
+
 ## Use the Kendo UI CDN Service
 
-The Kendo UI CDN is hosted on [Amazon CloudFront](https://aws.amazon.com/cloudfront/). In order to access the Kendo UI CDN Service, you can use either of the options described below. 
+The Kendo UI CDN is hosted on [Amazon CloudFront](https://aws.amazon.com/cloudfront/). In order to access the Kendo UI CDN Service, you can use either of the options described below.
 
 ### Option 1: Through the HTTP Protocol
 
-The minified versions of all JavaScript files are available via the following URLs:  
-<http://kendo.cdn.telerik.com/VERSION/js/FILENAME.min.js>  
+The minified versions of all JavaScript files are available via the following URLs:
+<http://kendo.cdn.telerik.com/VERSION/js/FILENAME.min.js>
 <http://kendo.cdn.telerik.com/VERSION/styles/FILENAME.min.css>
 
-For example, the 2014.1.318 version can be loaded from:  
-<http://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js>  
-<http://kendo.cdn.telerik.com/2014.1.318/styles/kendo.common.min.css>  
+For example, the 2014.1.318 version can be loaded from:
+<http://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js>
+<http://kendo.cdn.telerik.com/2014.1.318/styles/kendo.common.min.css>
 
 Use the following URL to load the minified Kendo UI Core script (available since Q1 2014 SP1):
-<http://kendo.cdn.telerik.com/2014.1.416/js/kendo.ui.core.min.js> 
+<http://kendo.cdn.telerik.com/2014.1.416/js/kendo.ui.core.min.js>
 
->The <http://cdn.kendostatic.com> URL will remain active, but is no longer recommended for new projects.   
+>The <http://cdn.kendostatic.com> URL will remain active, but is no longer recommended for new projects.
 
 ### Option 2: Through the HTTPS Protocol
 
-To access the Kendo UI CDN service through the HTTPS protocol, use the same host name as above, only replacing the scheme (protocol) with `https`:  
+To access the Kendo UI CDN service through the HTTPS protocol, use the same host name as above, only replacing the scheme (protocol) with `https`:
 <https://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js>
 
->The <https://da7xgjtj801h2.cloudfront.net> URL will remain active, but are no longer recommended for new projects.  
+>The <https://da7xgjtj801h2.cloudfront.net> URL will remain active, but are no longer recommended for new projects.
 
 ### Troubleshooting
 
-**Issue 1:** Disruption and connection problems  
-Although the Amazon CloudFront service provides for a reliable level of uptime support, you may encounter disruption or connection troubles. After you have checked the status of the systems at [http://status.aws.amazon.com/](http://status.aws.amazon.com/), the CDN status is reported as healthy and is operating normally.   
+**Issue 1:** Disruption and connection problems
+Although the Amazon CloudFront service provides for a reliable level of uptime support, you may encounter disruption or connection troubles. After you have checked the status of the systems at [http://status.aws.amazon.com/](http://status.aws.amazon.com/), the CDN status is reported as healthy and is operating normally.
 
 **Cause:** You could be experiencing Internet or network connectivity problems, or DNS problems, or it is possible that firewalls, antivirus or other security software incorrectly filters out the CDN scripts or modifies (breaks) them on-the-fly.
 
-**Fix:** Contact your system administrator, as remote investigation of connection problems is outside the scope of Kendo UI support. 
+**Fix:** Contact your system administrator, as remote investigation of connection problems is outside the scope of Kendo UI support.
 
 **Issue 2:** How to refer Kendo UI From CDN With a Local Script Fallback
 
-**Cause:** Kendo UI internal builds are not uploaded on CDN, because they are intended only for clients with a commercial license. Only major releases and service packs are uploaded on the Kendo UI CDN.  
+**Cause:** Kendo UI internal builds are not uploaded on CDN, because they are intended only for clients with a commercial license. Only major releases and service packs are uploaded on the Kendo UI CDN.
 
-**Fix:** You should use a private CDN for internal builds. It is recommendable to implement a local fallback when using any kind of CDN in the way displayed here:  
+**Fix:** You should use a private CDN for internal builds. It is recommendable to implement a local fallback when using any kind of CDN in the way displayed here:
 
     <!DOCTYPE html>
     <html>
@@ -324,13 +325,13 @@ Since Q3 2014, the necessary build scripts are shipped in the `src/` directory o
 
 List the components you want to be included in the custom build and separated them with comma (`,`). The example above will build a custom minified script which includes the AutoComplete and the DropDownList widgets.
 
-> When complete, the grunt command will output a `kendo.custom.min.js` file in the `src/dist` directory.  
-The grunt build task automatically resolves the needed dependencies for each component, so you don't have to list them.  
+> When complete, the grunt command will output a `kendo.custom.min.js` file in the `src/dist` directory.
+The grunt build task automatically resolves the needed dependencies for each component, so you don't have to list them.
 Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
 
 ### Include Individual Widget Scripts
 
-The following script files, either minified or not, can be included on a per-widget basis depending on the flavor you want to add to your project. Refer to the list with Kendo UI widgets in terms of their bundle support [here](/intro/list-of-widgets). 
+The following script files, either minified or not, can be included on a per-widget basis depending on the flavor you want to add to your project. Refer to the list with Kendo UI widgets in terms of their bundle support [here](/intro/list-of-widgets).
 
 #### Kendo UI Widgets
 
@@ -445,7 +446,7 @@ Here is the list of the script files for desktop UI widgets for mobile-ready web
 | 						| kendo.core.js								| 							|
 | 						| kendo.data.js								| 							|
 | 						| kendo.columnsorter.js						| 							|
-| 						| kendo.calendar.js 						| Editing feature			|	
+| 						| kendo.calendar.js 						| Editing feature			|
 | 						| kendo.popup.js 							| Editing feature			|
 | 						| kendo.datepicker.js 						| Editing feature			|
 | 						| kendo.userevents.js 						| Editing feature			|
@@ -475,7 +476,7 @@ Here is the list of the script files for desktop UI widgets for mobile-ready web
 | 						| kendo.filtermenu.js 						| Column menu feature		|
 | 						| kendo.menu.js 							| Column menu feature		|
 | 						| kendo.columnmenu.js 						| Column menu feature		|
-| 						| kendo.userevents.js 						| Grouping feature 			|	
+| 						| kendo.userevents.js 						| Grouping feature 			|
 | 						| kendo.draganddrop.js 						| Grouping feature			|
 | 						| kendo.groupable.js 						| Grouping feature			|
 | 						| kendo.popup.js 							| Row filter feature  		|
@@ -504,10 +505,10 @@ Here is the list of the script files for desktop UI widgets for mobile-ready web
 | 						| kendo.mobile.popover.js 					| Grid adaptive rendering feature|
 | 						| kendo.mobile.shim.js 						| Grid adaptive rendering feature|
 | 						| kendo.mobile.actionsheet.js 				| Grid adaptive rendering feature|
-| 						| kendo.ooxml.js 							| Excel export feature		| 
+| 						| kendo.ooxml.js 							| Excel export feature		|
 | 						| kendo.excel.js 							| Excel export feature		|
 | 						| kendo.color.js 							| PDF export feature 		|
-| 						| kendo.drawing.js 							| PDF export feature		|		
+| 						| kendo.drawing.js 							| PDF export feature		|
 | 						| kendo.pdf.js 								| PDF export feature		|
 | 						| kendo.progressbar.js 						| PDF export feature		|
 | [ListView](http://demos.telerik.com/kendo-ui/listview/index)| jquery.js|						|
@@ -666,7 +667,7 @@ Here is the list of the script files for desktop UI widgets for mobile-ready web
 | 						| kendo.list.js 							| Filtering feature			|
 | 						| kendo.dropdownlist.js 					| Filtering feature			|
 | 						| kendo.binder.js 							| Filtering feature			|
-| 						| kendo.filtermenu.js 						| Filtering feature			|	
+| 						| kendo.filtermenu.js 						| Filtering feature			|
 | 						| kendo.calendar.js 						| Editing feature			|
 | 						| kendo.popup.js 							| Editing feature			|
 | 						| kendo.datepicker.js						| Editing feature			|
@@ -685,7 +686,7 @@ Here is the list of the script files for desktop UI widgets for mobile-ready web
 | 						| kendo.ooxml.js 							| Excel export feature 		|
 | 						| kendo.excel.js 							| Excel export feature		|
 | 						| kendo.color.js 							| PDF export feature 		|
-| 						| kendo.drawing.js 							| PDF export feature		|		
+| 						| kendo.drawing.js 							| PDF export feature		|
 | 						| kendo.pdf.js 								| PDF export feature		|
 | 						| kendo.treelist.js							| 							|
 | [TreeView](http://demos.telerik.com/kendo-ui/treeview/index)| jquery.js|						|
@@ -712,7 +713,7 @@ Here is the list of the script files for data visualization widgets for desktop 
 
 | Widget				| Script Files								|Comments					|
 | :---					| :---										|:---						|
-| [Barcode](http://demos.telerik.com/kendo-ui/barcode/index)| jquery.js| 						|			
+| [Barcode](http://demos.telerik.com/kendo-ui/barcode/index)| jquery.js| 						|
 | 						| kendo.core.js								| 							|
 | 						| kendo.color.js							| 							|
 | 						| kendo.drawing.js							| 							|
@@ -851,7 +852,7 @@ Here is the list of the script files for the frameworks and widgets for mobile a
 | [Button](http://demos.telerik.com/kendo-ui/m/index#mobile-button/index)|jquery.js|
 | 						| kendo.core.js								|
 | 						| kendo.userevents.js						|
-| 						| kendo.mobile.button.js					|				
+| 						| kendo.mobile.button.js					|
 | [ButtonGroup](http://demos.telerik.com/kendo-ui/m/index#buttongroup/mobile)| jquery.js|
 | 						| kendo.core.js								|
 | 						| kendo.mobile.buttongroup.js				|
@@ -875,7 +876,7 @@ Here is the list of the script files for the frameworks and widgets for mobile a
 | 						| kendo.data.js								|
 | 						| kendo.userevents.js						|
 | 						| kendo.mobile.button.js					|
-| 						| kendo.mobile.listview.js					|						
+| 						| kendo.mobile.listview.js					|
 | [ModalView](http://demos.telerik.com/kendo-ui/m/index#modalview/index)| jquery.js|
 | 						| kendo.core.js								|
 | 						| kendo.popup.js							|
@@ -888,7 +889,7 @@ Here is the list of the script files for the frameworks and widgets for mobile a
 | 						| kendo.binder.js							|
 | 						| kendo.view.js								|
 | 						| kendo.mobile.view.js						|
-| 						| kendo.mobile.modalview.js					|			
+| 						| kendo.mobile.modalview.js					|
 | [NavBar](http://demos.telerik.com/kendo-ui/m/index#navbar/index)| jquery.js|
 | 						| kendo.core.js								|
 | 						| kendo.mobile.navbar.js					|
