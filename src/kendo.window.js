@@ -385,6 +385,8 @@ var __meta__ = { // jshint ignore:line
 
         setOptions: function(options) {
             Widget.fn.setOptions.call(this, options);
+            var scrollable = this.options.scrollable !== false;
+
             this.restore();
             this._animations();
             this._dimensions();
@@ -395,6 +397,8 @@ var __meta__ = { // jshint ignore:line
             if (typeof options.modal !== "undefined") {
                 this._overlay(options.modal);
             }
+
+            this.element.css(OVERFLOW, scrollable ? "" : "hidden");
         },
 
         events:[
@@ -434,6 +438,7 @@ var __meta__ = { // jshint ignore:line
             maxWidth: Infinity,
             maxHeight: Infinity,
             pinned: false,
+            scrollable: true,
             position: {},
             content: null,
             visible: null,
@@ -750,11 +755,14 @@ var __meta__ = { // jshint ignore:line
         },
 
         _activate: function() {
+            var scrollable = this.options.scrollable !== false;
+
             if (this.options.autoFocus) {
                 this.element.focus();
             }
+
+            this.element.css(OVERFLOW, scrollable ? "" : "hidden");
             this.trigger(ACTIVATE);
-            this.wrapper.children(KWINDOWCONTENT).css(OVERFLOW, "");
         },
 
         _removeOverlay: function(suppressAnimation) {

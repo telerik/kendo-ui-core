@@ -361,6 +361,19 @@ Enables (**true**) or disables (**false**) the ability for users to resize a **W
     });
     </script>
 
+### scrollable `Boolean` *(default: true)*
+
+Enables (**true**) or disables (**false**) the ability for users to scroll the window contents.
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoWindow({
+      scrollable: false
+    });
+    </script>
+
 ### title `String|Boolean` *default: ""*
 
 The text in the window title bar. If `false`, the window will be displayed without a title bar. Note that this will prevent the window from being dragged, and the window titlebar buttons will not be shown.

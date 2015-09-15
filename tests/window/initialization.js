@@ -533,4 +533,26 @@
 
         equal(dialog.element.css("visibility"), "visible");
     });
+
+    test("initializing with scrollable: false adds overflow: hidden", function() {
+        var dialog = createWindow({ scrollable: false });
+
+        equal(dialog.element.css("overflow"), "hidden");
+    });
+
+    test("scrollable: false is persisted upon activate", function() {
+        var dialog = createWindow({ visible: false, scrollable: false });
+
+        dialog.open();
+
+        equal(dialog.element.css("overflow"), "hidden");
+    });
+
+    test("scrollable: false through setOptions adds overflow:hidden", function() {
+        var dialog = createWindow({});
+
+        dialog.setOptions({ scrollable: false });
+
+        equal(dialog.element.css("overflow"), "hidden");
+    });
 })();
