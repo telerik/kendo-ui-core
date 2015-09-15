@@ -6198,7 +6198,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_dataBinding(e) {
-        console.log("dataBinding"));
+        console.log("dataBinding");
     }
     $("#scheduler").kendoScheduler({
       date: new Date("2013/6/6"),
@@ -6243,7 +6243,7 @@ The widget instance which fired the event.
         }
       ],
       dataBound: function(e) {
-        console.log("dataBound"));
+        console.log("dataBound");
       }
     });
     </script>
@@ -6253,7 +6253,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_dataBound(e) {
-        console.log("dataBound"));
+        console.log("dataBound");
     }
     $("#scheduler").kendoScheduler({
       date: new Date("2013/6/6"),
