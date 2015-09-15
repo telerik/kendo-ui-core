@@ -17,6 +17,9 @@ In addition to the [jQuery plugin syntax](/intro/jquery-initialization), the Ken
 > `data` attribute initialization is not designed to be combined with the Kendo UI server wrappers. Using wrappers is equivalent to [jQuery plug-in syntax initialization](/intro/jquery-initialization). If you want to create Kendo UI widget instances via the
 [MVVM](/framework/mvvm/overview) or [AngularJS](/AngularJS/introduction) mechanisms, then do not use server wrappers for these instances.
 
+While it is theoretically possible to initialize several different Kendo UI widgets from the same DOM element via [jQuery plugin syntax](/intro/jquery-initialization),
+this is not recommended and is not supported with declarative initialization from markup.
+
 In this chapter:  
 
 * [Declarative Widgets in SPA View](#declarative-widgets-in-spa-view)  
