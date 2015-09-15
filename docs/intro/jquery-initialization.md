@@ -8,10 +8,14 @@ position: 3
 
 # Initialize a Kendo UI Widget Using the jQuery Plug-in Syntax
 
-All Kendo UI widgets are registered as [jQuery plug-ins](http://learn.jquery.com/plugins/), which allows them to be instantiated on a jQuery object instance. The jQuery plug-in method is formed by the widget name in Pascal case, prefixed with `kendo` as in `kendoGrid` and `kendoListView`. The methods for mobile widgets are prefixed with `Mobile` to avoid collisions with their desktop counterparts as in `kendoMobileTabStrip`, `kendoMobileButton` and `kendoMobileListView`.
+All Kendo UI widgets are registered as [jQuery plug-ins](http://learn.jquery.com/plugins/), which allows them to be instantiated on a jQuery object instance.
+The jQuery plug-in method is formed by the widget name in Pascal case, prefixed with `kendo` as in `kendoGrid` and `kendoListView`.
+The methods for mobile widgets are prefixed with `Mobile` to avoid collisions with their desktop counterparts as in `kendoMobileTabStrip`, `kendoMobileButton` and `kendoMobileListView`.
 
 Some Kendo UI widgets have specific requirements about the element types they should be instantiated on. For more details and working examples,
 check the source code in the [respective widget demo](http://demos.telerik.com/kendo-ui/) and [API reference](/api/introduction).
+
+While it is theoretically possible to initialize several different Kendo UI widgets from the same DOM element, this is not recommended and may lead to undesired side effects.
 
 In this chapter:  
 * [Instantiate the Kendo UI AutoComplete Widget](#instantiate-the-kendo-ui-autocomplete-widget)  
