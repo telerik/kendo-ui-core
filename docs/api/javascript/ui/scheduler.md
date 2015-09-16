@@ -5671,7 +5671,7 @@ Get the relevant resources for a given slot.
 
     var slot = scheduler.slotByElement(element);
 
-    var resouce = scheduler.resourcesBySlot(slot);
+    var resource = scheduler.resourcesBySlot(slot);
 
     for (var key in resource) {
         console.log("resouce - {" + key + ": " + resource[key] + " }");
