@@ -1,6 +1,7 @@
 ---
 title: Custom PDF page layout
 page_title: Custom PDF page layout
+previous_url: /framework/drawing/how-to/custom-page-layout
 description: This article demonstrates how to customize the page layout during PDF export
 ---
 
