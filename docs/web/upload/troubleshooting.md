@@ -35,11 +35,12 @@ See bug ID [819941](https://connect.microsoft.com/IE/feedback/details/819941/fil
 ## Problem: Incorrect progress readings when using IE10/11 with Windows Authentication
 
 The upload progress indicator can go over 100% or freeze. This doesn't indicate that the request has completed.
-It seems that the issue only occurs when accessing a web server on localhost.
+The issue is unrelated to Kendo UI and is caused by an Internet Explorer bug. It can be observed with any FormData XMLHttpRequest.
+The problem seems to only occur when accessing a web server on localhost.
 
 #### Solution
 
-Deploy the application on a remote web server.
+Deploy the application on a remote web server or disable asynchronous uploads.
 
 ## Problem: Incorrect behavior in the Opera browser
 
