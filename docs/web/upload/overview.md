@@ -18,10 +18,10 @@ users without requiring extra developer effort. Features highlights:
 *   File drag-and-drop *
 *   Cancelling upload in-progress *
 
-
 (*) These features are automatically enabled if supported by the browser.
 
-An **Upload** is a standards-based widget; no plug-ins required.
+The **Upload** is a standards-based widget, no plug-ins required. Please note that uploading large files in chunks is currently not supported, as it would require
+an additional plug-in (Flash or Silverlight) to compensate for missing File API support in older browsers.
 
 ## Getting Started
 
