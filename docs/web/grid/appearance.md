@@ -270,8 +270,14 @@ When virtual scrolling is used, the HTML output is a little different, compared 
             <div class="k-virtual-scrollable-wrap">
                 <table>...</table>
             </div>
+            <div class="k-scrollbar k-scrollbar-vertical">
+                ...<!-- divs, which generate a scrollbar -->...
+            </div>
         </div>
     </div>
+
+Note that when virtual scrolling is used, the Grid data table is not placed inside a scrollable container. The scrollbar belongs to a separate special `div.k-scrollbar` shown above.
+This matters in scenarios when the Grid data rows should be scrolled manually to a particular position.
 
 The virtual scrolling behavior and implementation imposes limitations with regard to some other Grid features.
 It cannot be used together with grouping, hierarchy, batch editing and inline editing. Popup editing is supported, but without adding of new items.
