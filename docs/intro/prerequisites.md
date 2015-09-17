@@ -2,13 +2,13 @@
 title: Kendo UI JavaScript Prerequisites
 page_title: Kendo UI JavaScript prerequisites
 description: "Overview of the JavaScript libraries which Kendo UI depends on"
-previous_url: /install/prerequisites
+previous_url: /install/prerequisites, /javascript-dependencies
 position: 2
 ---
 
 # Kendo UI JavaScript Prerequisites
 
-In this chapter:  
+In this chapter:
 
 * [jQuery](#jquery)
 * [AngularJS](#angularjs)
@@ -28,7 +28,7 @@ The current official version of Kendo UI requires jQuery 1.9.1. There are occasi
 The following list provides jQuery compatibility information about the major Kendo UI releases and their corresponding service packs:
 
 | Major Releases												| jQuery Version| Comments|
-| :---															| :---			| :---	  |  
+| :---															| :---			| :---	  |
 | [Kendo UI 2015.2.624 (Q2 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q2-2015)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2015.1.318 (Q1 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q1-2015)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2014.3.1119 (Q3 2014)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2014)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
@@ -48,14 +48,14 @@ Occasionally, a legacy web application might require an older jQuery version wit
 
 ## AngularJS
 
-From Q2 2014 release onward, Kendo UI widgets support [AngularJS](http://angularjs.org/) integration. To activate the AngularJS directives, you need to install the AngularJS library. Just like jQuery, its minified format is located is in the `js` directory of the Kendo UI bundle you have downloaded. 
+From Q2 2014 release onward, Kendo UI widgets support [AngularJS](http://angularjs.org/) integration. To activate the AngularJS directives, you need to install the AngularJS library. Just like jQuery, its minified format is located is in the `js` directory of the Kendo UI bundle you have downloaded.
 
 > Unlike jQuery, Kendo UI distributions do not need AngularJS in order to function correctly.
 
 ### Supported AngularJS Versions
 
 | Major Releases												 | AngularJS Version| Comments|
-| :---															 | :---				| :---	  |  
+| :---															 | :---				| :---	  |
 | [Kendo UI 2015.2.624 (Q2 2015)](/install/changes-and-backward-compatibility)		|1.3.16|- |
 | [Kendo UI 2015.1.318 (Q1 2015)](/install/changes-and-backward-compatibility)		|1.3.0 |- |
 | [Kendo UI 2014.3.1119 (Q3 2014)](/install/changes-and-backward-compatibility)		|1.3.0 |- |
