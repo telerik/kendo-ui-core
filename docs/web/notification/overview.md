@@ -219,6 +219,27 @@ but you will still be able to use the shorthand show methods, as demonstrated be
 	});
 	</script>
 
+## Change settings for specific notification messages
+
+It is possible for a single Notification widget instance to display different messages with different settings, e.g. ones related to automatic hiding, hide timeouts, etc.
+In order to achieve that, use the [`setOptions`](/api/javascript/ui/widget#methods-setOptions) method to apply the desired configuration options.
+The new options will apply to all messages displayed later on. To restore or change the widget settings again, use `setOptions` as many times, as necessary.
+
+    <span id="notification"></span>
+    <script>
+        var notificationWidget = $("#notification").kendoNotification({
+            autoHideAfter: 1000
+        }).data("kendoNotification");
+
+        notificationWidget.show("foo text"); // message will auto hide after 1 second
+        
+        notificationWidget.setOptions({
+            autoHideAfter: 2000
+        });
+        
+        notificationWidget.show("bar text"); // message will auto hide after 2 seconds
+    </script>
+
 ## HTML output
 
 Each notification is rendered inside the following wrapper element:
