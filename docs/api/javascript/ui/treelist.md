@@ -2859,9 +2859,9 @@ Sets the title of the PDF file.
 
 ### scrollable `Boolean|Object` *(default: true)*
 
-If set to `true` the treelist will display a scrollbar when the total row height (or width) exceeds the treelist height (or width). By default scrolling is enabled.
+If set to `true` the TreeList will display a scrollbar when the total row height (or width) exceeds the TreeList height (or width). By default scrolling is enabled.
 
-Can be set to a JavaScript object which represents the scrolling configuration.
+Scrolling renders separate tables for the header and data area. For accessibility-conscious applications, disable scrolling.
 
 #### Example - disable scrolling
 

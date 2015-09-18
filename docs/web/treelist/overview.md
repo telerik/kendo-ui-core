@@ -251,3 +251,30 @@ The function context of the event handler (available via the `this` keyword) is 
     treelist.bind("dataBound", treelist_databound);
     </script>
 ```
+
+## Scrolling
+
+TreeList scrolling is enabled by default.
+
+Enabled scrolling does not guarantee that scrollbars will appear. This is because scrolling makes sense and works together with set dimensions.
+
+1. To achieve vertical scrolling, the TreeList must have a set height. Otherwise, it will expand vertically to show all rows.
+1. To achieve horizontal scrolling, all columns must have explicit pixel widths and their sum must exceed the TreeList width.
+
+Scenarios 1. and 2. can be controlled independently.
+
+When enabled, scrolling causes the TreeList to render separate tables for the header area and the data area. This ensures that the header area is always visible during vertical TreeList scrolling.
+The two tables may need to be taken into account when making some manual Javascript or CSS manipulations to the tables.
+
+    <div class="k-widget k-grid k-treelist">
+        <div class="k-grid-header">
+            <div class="k-grid-header-wrap">
+                <table>...</table>
+            </div>
+        </div>
+        <div class="k-grid-content">
+            <table>...</table>
+        </div>
+    </div>
+
+> If you want to allow maximum TreeList accessibility with assistive technologies, disable the scrolling feature.
