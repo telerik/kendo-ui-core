@@ -158,3 +158,8 @@ Example:
         }
     </script>
 ```
+
+## Initialization of widgets inside iframes
+
+It is theoretically possible to initialize a Kendo UI widget, which is inside an iframe, from the context of the parent page.
+This may work in specific scenarios, but is not officially supported. For example, widgets that render popups may not be able to display them.
