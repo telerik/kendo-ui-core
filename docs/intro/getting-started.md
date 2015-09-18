@@ -2,7 +2,7 @@
 title: Getting Started with Kendo UI
 page_title: Getting Started with Kendo UI
 description: "Get your project up and running: download and host Kendo UI, install Kendo UI as a bower package, or use the Kendo UI CDN service and include only what you need."
-previous_url: /install/bower, /install/cdn, /install/custom, install/onsite
+previous_url: /install/bower, /install/cdn, /install/custom, /install/onsite
 position: 1
 ---
 
