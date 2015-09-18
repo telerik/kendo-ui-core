@@ -292,6 +292,8 @@ var __meta__ = { // jshint ignore:line
                 that.listView = new kendo.ui.VirtualList(that.ul, listOptions);
             }
 
+            that.listView.bind("click", function(e) { e.preventDefault(); });
+
             that.listView.value(that._initialValues || that.options.value);
         },
 
@@ -509,7 +511,7 @@ var __meta__ = { // jshint ignore:line
             that.popup.position();
 
             if (that.options.highlightFirst && (page === undefined || page === 1)) {
-                that.listView.first();
+                that.listView.focusFirst();
             }
 
             if (that._touchScroller) {
@@ -718,23 +720,23 @@ var __meta__ = { // jshint ignore:line
                     that.open();
 
                     if (!current) {
-                        this.listView.first();
+                        this.listView.focusFirst();
                     }
                     return;
                 }
 
                 if (current) {
-                    this.listView.next();
+                    this.listView.focusNext();
                     if (!this.listView.focus()) {
-                        this.listView.last();
+                        this.listView.focusLast();
                     }
                 } else {
-                    this.listView.first();
+                    this.listView.focusFirst();
                 }
             } else if (key === keys.UP) {
                 if (visible) {
                     if (current) {
-                        this.listView.prev();
+                        this.listView.focusPrev();
                     }
 
                     if (!this.listView.focus()) {
@@ -777,7 +779,7 @@ var __meta__ = { // jshint ignore:line
                 that.close();
             } else if (key === keys.HOME) {
                 if (visible) {
-                    this.listView.first();
+                    this.listView.focusFirst();
                 } else if (!hasValue) {
                     tag = that.tagList[0].firstChild;
 
@@ -787,7 +789,7 @@ var __meta__ = { // jshint ignore:line
                 }
             } else if (key === keys.END) {
                 if (visible) {
-                    this.listView.last();
+                    this.listView.focusLast();
                 } else if (!hasValue) {
                     tag = that.tagList[0].lastChild;
 

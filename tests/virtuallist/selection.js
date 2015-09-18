@@ -990,7 +990,7 @@
             virtualList.select(element1);
 
             var element2 = virtualList.items().eq(2);
-            virtualList.next();
+            virtualList.focusNext();
 
             ok(!element1.hasClass(FOCUSED));
             ok(element1.hasClass(SELECTED));
@@ -1009,7 +1009,7 @@
             virtualList.select(element1);
 
             var element2 = virtualList.items().eq(1);
-            virtualList.prev();
+            virtualList.focusPrev();
 
             ok(!element1.hasClass(FOCUSED));
             ok(element1.hasClass(SELECTED));
@@ -1068,7 +1068,7 @@
                 start();
 
                 var current = virtualList.focus();
-                virtualList.next();
+                virtualList.focusNext();
 
                 equal(virtualList.focus()[0], current[0], "incorrect item is focused");
             });
@@ -1104,7 +1104,7 @@
                 start();
 
                 var current = virtualList.focus();
-                virtualList.prev();
+                virtualList.focusPrev();
 
                 equal(virtualList.focus()[0], current[0], "incorrect item is focused");
             }, 150);

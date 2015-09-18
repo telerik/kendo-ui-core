@@ -869,19 +869,19 @@ var __meta__ = { // jshint ignore:line
         },
 
         _firstItem: function() {
-            this.listView.first();
+            this.listView.focusFirst();
         },
 
         _lastItem: function() {
-            this.listView.last();
+            this.listView.focusLast();
         },
 
         _nextItem: function() {
-            this.listView.next();
+            this.listView.focusNext();
         },
 
         _prevItem: function() {
-            this.listView.prev();
+            this.listView.focusPrev();
         },
 
         _move: function(e) {
@@ -1235,6 +1235,7 @@ var __meta__ = { // jshint ignore:line
         options: {
             name: "StaticList",
             dataValueField: null,
+            valuePrimitive: false,
             selectable: true,
             template: null,
             groupTemplate: null,
@@ -1341,7 +1342,7 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
-        next: function() {
+        focusNext: function() {
             var current = this.focus();
 
             if (!current) {
@@ -1353,7 +1354,7 @@ var __meta__ = { // jshint ignore:line
             this.focus(current);
         },
 
-        prev: function() {
+        focusPrev: function() {
             var current = this.focus();
 
             if (!current) {
@@ -1365,11 +1366,11 @@ var __meta__ = { // jshint ignore:line
             this.focus(current);
         },
 
-        first: function() {
+        focusFirst: function() {
             this.focus(this.element[0].children[0]);
         },
 
-        last: function() {
+        focusLast: function() {
             this.focus(this.element[0].children[this.element[0].children.length - 1]);
         },
 
@@ -1529,9 +1530,15 @@ var __meta__ = { // jshint ignore:line
             return deferred;
         },
 
+        items: function() {
+            return this.element.children(".k-item");
+        },
+
         _click: function(e) {
             if (!e.isDefaultPrevented()) {
-                this.trigger("click", { item: $(e.currentTarget) });
+                if (!this.trigger("click", { item: $(e.currentTarget) })) {
+                    this.select(e.currentTarget);
+                }
             }
         },
 

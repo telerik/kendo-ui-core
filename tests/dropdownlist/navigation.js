@@ -813,7 +813,7 @@
             index: -1
         });
 
-        dropdownlist.listView.first();
+        dropdownlist.listView.focusFirst();
         dropdownlist.wrapper.focus().press(keys.DOWN);
 
         var current = dropdownlist.current();

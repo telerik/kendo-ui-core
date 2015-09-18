@@ -649,7 +649,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (this.options.highlightFirst && !word) {
-                this.listView.first();
+                this.listView.focusFirst();
             }
         },
 

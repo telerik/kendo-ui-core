@@ -17,11 +17,6 @@
         }
     });
 
-    function getData(count) {
-
-
-    }
-
     test("setDataSource method overrides current data source", function() {
         var list = new StaticList(element, {
             dataSource: ["item"],
@@ -1210,7 +1205,7 @@
         });
 
         list.dataSource.read();
-        list.next();
+        list.focusNext();
 
         var children = element.children();
 
@@ -1227,7 +1222,7 @@
 
         list.dataSource.read();
         list.focus(0);
-        list.next();
+        list.focusNext();
 
         var children = element.children();
 
@@ -1243,7 +1238,7 @@
         });
 
         list.dataSource.read();
-        list.prev();
+        list.focusPrev();
 
         var children = element.children();
 
@@ -1260,7 +1255,7 @@
 
         list.dataSource.read();
         list.focus(2);
-        list.prev();
+        list.focusPrev();
 
         var children = element.children();
 
@@ -1276,7 +1271,7 @@
         });
 
         list.dataSource.read();
-        list.first();
+        list.focusFirst();
 
         var children = element.children();
 
@@ -1292,7 +1287,7 @@
         });
 
         list.dataSource.read();
-        list.last();
+        list.focusLast();
 
         var children = element.children();
 
@@ -1391,5 +1386,19 @@
         equal(removed.position, 0);
         equal(removed.dataItem, "item2");
         ok(!$.isArray(removed.dataItem));
+    });
+
+    test("items returns item elements", function() {
+        var list = new StaticList(element, {
+            selectable: "multiple",
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        var items = list.items();
+        equal(items.length, 3);
+        ok(items.eq(0).hasClass("k-item"));
     });
 })();

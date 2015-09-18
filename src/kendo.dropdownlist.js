@@ -123,6 +123,8 @@ var __meta__ = { // jshint ignore:line
                 that.enable(false);
             }
 
+            that.listView.bind("click", function(e) { e.preventDefault(); });
+
             kendo.notify(that);
         },
 
@@ -887,21 +889,21 @@ var __meta__ = { // jshint ignore:line
             if (this.optionLabel[0]) {
                 this._focus(this.optionLabel);
             } else {
-                this.listView.first();
+                this.listView.focusFirst();
             }
         },
 
         _lastItem: function() {
             this.optionLabel.removeClass("k-state-focused");
-            this.listView.last();
+            this.listView.focusLast();
         },
 
         _nextItem: function() {
             if (this.optionLabel.hasClass("k-state-focused")) {
                 this.optionLabel.removeClass("k-state-focused");
-                this.listView.first();
+                this.listView.focusFirst();
             } else {
-                this.listView.next();
+                this.listView.focusNext();
             }
         },
 
@@ -910,7 +912,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            this.listView.prev();
+            this.listView.focusPrev();
             if (!this.listView.focus()) {
                 this.optionLabel.addClass("k-state-focused");
             }

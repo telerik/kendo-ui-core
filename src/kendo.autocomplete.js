@@ -134,6 +134,8 @@ var __meta__ = { // jshint ignore:line
                 that.enable(false);
             }
 
+            that.listView.bind("click", function(e) { e.preventDefault(); });
+
             kendo.notify(that);
         },
 
@@ -437,7 +439,7 @@ var __meta__ = { // jshint ignore:line
                 var current = this.listView.focus();
 
                 if (options.highlightFirst && !current) {
-                    that.listView.first();
+                    that.listView.focusFirst();
                 }
 
                 if (options.suggest && isActive) {
@@ -526,12 +528,12 @@ var __meta__ = { // jshint ignore:line
 
             if (key === keys.DOWN) {
                 if (visible) {
-                    this._move(current ? "next" : "first");
+                    this._move(current ? "focusNext" : "focusFirst");
                 }
                 e.preventDefault();
             } else if (key === keys.UP) {
                 if (visible) {
-                    this._move(current ? "prev" : "last");
+                    this._move(current ? "focusPrev" : "focusLast");
                 }
                 e.preventDefault();
             } else if (key === keys.ENTER || key === keys.TAB) {

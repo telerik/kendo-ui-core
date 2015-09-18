@@ -665,18 +665,18 @@ var __meta__ = { // jshint ignore:line
             return this._focusedIndex;
         },
 
-        first: function() {
+        focusFirst: function() {
             this.scrollTo(0);
             this.focus(0);
         },
 
-        last: function() {
+        focusLast: function() {
             var lastIndex = this.dataSource.total();
             this.scrollTo(this.heightContainer.offsetHeight);
             this.focus(lastIndex);
         },
 
-        prev: function() {
+        focusPrev: function() {
             var index = this._focusedIndex;
             var current;
 
@@ -694,7 +694,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        next: function() {
+        focusNext: function() {
             var index = this._focusedIndex;
             var lastIndex = this.dataSource.total() - 1;
             var current;

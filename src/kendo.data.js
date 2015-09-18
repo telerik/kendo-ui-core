@@ -1062,6 +1062,20 @@ var __meta__ = { // jshint ignore:line
 
                 return a + ".lastIndexOf('" + b + "', 0) == 0";
             },
+            doesnotstartwith: function(a, b, ignore) {
+                if (ignore) {
+                    a = "(" + a + " || '').toLowerCase()";
+                    if (b) {
+                        b = b.toLowerCase();
+                    }
+                }
+
+                if (b) {
+                    b = quote(b);
+                }
+
+                return a + ".lastIndexOf('" + b + "', 0) == -1";
+            },
             endswith: function(a, b, ignore) {
                 if (ignore) {
                     a = "(" + a + " || '').toLowerCase()";
@@ -1075,6 +1089,20 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 return a + ".indexOf('" + b + "', " + a + ".length - " + (b || "").length + ") >= 0";
+            },
+            doesnotendwith: function(a, b, ignore) {
+                if (ignore) {
+                    a = "(" + a + " || '').toLowerCase()";
+                    if (b) {
+                        b = b.toLowerCase();
+                    }
+                }
+
+                if (b) {
+                    b = quote(b);
+                }
+
+                return a + ".indexOf('" + b + "', " + a + ".length - " + (b || "").length + ") < 0";
             },
             contains: function(a, b, ignore) {
                 if (ignore) {

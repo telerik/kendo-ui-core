@@ -485,6 +485,8 @@ function pad(number, digits, end) {
                 symbol: "%"
             },
             currency: {
+                name: "US Dollar",
+                abbr: "USD",
                 pattern: ["($n)", "$n"],
                 decimals: 2,
                 ",": ",",
@@ -2494,6 +2496,7 @@ function pad(number, digits, end) {
         mobile: kendo.mobile || { },
         data: kendo.data || {},
         dataviz: kendo.dataviz || {},
+        spreadsheet: {},
         keys: {
             INSERT: 45,
             DELETE: 46,

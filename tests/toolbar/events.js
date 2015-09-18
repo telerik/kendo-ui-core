@@ -39,15 +39,16 @@
         click(container.find("#foo"));
     });
 
-    test("click event defined at button level is fired", 1, function() {
+    test("click event defined at button level is fired", 2, function() {
         container.kendoToolBar({
             items: [
                 { 
                     type: "button",
                     id: "foo",
                     text: "foo",
-                    click: function() {
+                    click: function(e) {
                         ok(true, "Click event is fired");
+                        equal(e.sender, container.data("kendoToolBar"));
                     }
                 }
             ]

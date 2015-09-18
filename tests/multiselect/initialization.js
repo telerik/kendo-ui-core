@@ -430,14 +430,14 @@
         });
 
         stub(multiselect.listView, {
-            first: multiselect.listView.first
+            focusFirst: multiselect.listView.focusFirst
         });
 
         multiselect.dataSource.read();
 
         multiselect.dataSource.page(2);
 
-        equal(multiselect.listView.calls("first"), 1);
+        equal(multiselect.listView.calls("focusFirst"), 1);
     });
 
     test("Copy accesskey to the visible input", function() {
