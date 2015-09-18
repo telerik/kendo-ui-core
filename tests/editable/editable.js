@@ -511,6 +511,17 @@
         ok(!div.find("input").data("bind"));
     });
 
+    test("dropdown is displayed if field values are empty array", function() {
+        defaultModel.foo = "foo";
+
+        var editable = div.append($('<div></div>')).kendoEditable({
+            fields: { field: "foo", values: [] },
+            model: defaultModel
+        });
+
+        ok(div.find("select").data("kendoDropDownList"));
+    });
+
     test("dropdown is displayed if field values are set", function() {
         defaultModel.foo = "foo";
 
