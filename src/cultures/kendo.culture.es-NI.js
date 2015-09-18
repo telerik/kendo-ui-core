@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Cordoba",
+                abbr: "NIO",
                 pattern: ["($n)","$n"],
                 decimals: 2,
                 ",": ",",

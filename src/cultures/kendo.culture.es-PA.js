@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Panamanian Balboa",
+                abbr: "PAB",
                 pattern: ["($ n)","$ n"],
                 decimals: 2,
                 ",": ",",

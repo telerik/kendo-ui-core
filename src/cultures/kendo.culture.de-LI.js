@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Swiss Franc",
+                abbr: "CHF",
                 pattern: ["$-n","$ n"],
                 decimals: 2,
                 ",": ".",

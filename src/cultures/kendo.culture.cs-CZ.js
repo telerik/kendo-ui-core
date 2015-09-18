@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Czech Koruna",
+                abbr: "CZK",
                 pattern: ["-n $","n $"],
                 decimals: 2,
                 ",": " ",

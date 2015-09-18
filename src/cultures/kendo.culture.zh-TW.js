@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "New Taiwan Dollar",
+                abbr: "TWD",
                 pattern: ["-$n","$n"],
                 decimals: 2,
                 ",": ",",

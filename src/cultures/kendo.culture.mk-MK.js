@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Macedonian Denar",
+                abbr: "MKD",
                 pattern: ["-n $","n $"],
                 decimals: 2,
                 ",": ".",

@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Guinea Francs",
+                abbr: "GNF",
                 pattern: ["n- $","$ n"],
                 decimals: 2,
                 ",": ",",

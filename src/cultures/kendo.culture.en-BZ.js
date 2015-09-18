@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Belize Dollar",
+                abbr: "BZD",
                 pattern: ["($n)","$n"],
                 decimals: 2,
                 ",": ",",

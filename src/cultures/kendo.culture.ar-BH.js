@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Bahraini Dinar",
+                abbr: "BHD",
                 pattern: ["$n-","$ n"],
                 decimals: 3,
                 ",": ",",

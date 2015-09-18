@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Rand",
+                abbr: "ZAR",
                 pattern: ["$-n","$ n"],
                 decimals: 2,
                 ",": " ",

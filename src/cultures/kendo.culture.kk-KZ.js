@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Tenge",
+                abbr: "KZT",
                 pattern: ["-$n","$n"],
                 decimals: 2,
                 ",": " ",

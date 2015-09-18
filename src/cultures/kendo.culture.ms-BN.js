@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Brunei Dollar",
+                abbr: "BND",
                 pattern: ["($n)","$n"],
                 decimals: 0,
                 ",": ".",

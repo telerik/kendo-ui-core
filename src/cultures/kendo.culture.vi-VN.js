@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Vietnamese Dong",
+                abbr: "VND",
                 pattern: ["-n $","n $"],
                 decimals: 2,
                 ",": ".",

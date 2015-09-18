@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Rwandan Franc",
+                abbr: "RWF",
                 pattern: ["-n $","n $"],
                 decimals: 2,
                 ",": " ",

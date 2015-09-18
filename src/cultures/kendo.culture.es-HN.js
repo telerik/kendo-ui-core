@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Honduran Lempira",
+                abbr: "HNL",
                 pattern: ["$ -n","$ n"],
                 decimals: 2,
                 ",": ",",

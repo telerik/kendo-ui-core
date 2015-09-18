@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Guatemalan Quetzal",
+                abbr: "GTQ",
                 pattern: ["-$n","$n"],
                 decimals: 2,
                 ",": ",",

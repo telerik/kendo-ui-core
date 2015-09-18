@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Azerbaijanian Manat",
+                abbr: "AZN",
                 pattern: ["-n $","n $"],
                 decimals: 2,
                 ",": " ",

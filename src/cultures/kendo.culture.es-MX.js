@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Mexican Peso",
+                abbr: "MXN",
                 pattern: ["-$n","$n"],
                 decimals: 2,
                 ",": ",",

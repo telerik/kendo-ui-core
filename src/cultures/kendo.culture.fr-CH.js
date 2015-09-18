@@ -4,21 +4,23 @@
         numberFormat: {
             pattern: ["-n"],
             decimals: 2,
-            ",": " ",
-            ".": ",",
+            ",": "'",
+            ".": ".",
             groupSize: [3],
             percent: {
                 pattern: ["-n%","n%"],
                 decimals: 2,
-                ",": " ",
-                ".": ",",
+                ",": "'",
+                ".": ".",
                 groupSize: [3],
                 symbol: "%"
             },
             currency: {
+                name: "Swiss Franc",
+                abbr: "CHF",
                 pattern: ["-n $","n $"],
                 decimals: 2,
-                ",": " ",
+                ",": "'",
                 ".": ".",
                 groupSize: [3],
                 symbol: "fr."

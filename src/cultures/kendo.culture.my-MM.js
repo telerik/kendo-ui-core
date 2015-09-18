@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Myanmar Kyat",
+                abbr: "MMK",
                 pattern: ["-$ n","n $"],
                 decimals: 2,
                 ",": ",",

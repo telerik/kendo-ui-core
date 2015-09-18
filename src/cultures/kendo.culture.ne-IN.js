@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Indian Rupee",
+                abbr: "INR",
                 pattern: ["-$n","$n"],
                 decimals: 2,
                 ",": ",",

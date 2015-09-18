@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Somoni",
+                abbr: "TJS",
                 pattern: ["-n $","n $"],
                 decimals: 2,
                 ",": " ",

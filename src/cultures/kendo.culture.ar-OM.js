@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Omani Rial",
+                abbr: "OMR",
                 pattern: ["$n-","$ n"],
                 decimals: 3,
                 ",": ",",

@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Pound Sterling",
+                abbr: "GBP",
                 pattern: ["-$n","$n"],
                 decimals: 2,
                 ",": ",",

@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Congolese Franc",
+                abbr: "CDF",
                 pattern: ["(n$)","n$"],
                 decimals: 2,
                 ",": " ",

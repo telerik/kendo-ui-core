@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Colombian Peso",
+                abbr: "COP",
                 pattern: ["-$n","$n"],
                 decimals: 2,
                 ",": ".",

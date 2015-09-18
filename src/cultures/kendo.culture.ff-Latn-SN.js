@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "CFA",
+                abbr: "XOF",
                 pattern: ["-n $","n $"],
                 decimals: 2,
                 ",": " ",

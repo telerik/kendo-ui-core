@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Peruvian Nuevo Sol",
+                abbr: "PEN",
                 pattern: ["$ -n","$ n"],
                 decimals: 2,
                 ",": ",",

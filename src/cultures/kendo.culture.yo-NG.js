@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Nigerian Naira",
+                abbr: "NGN",
                 pattern: ["-$ n","$ n"],
                 decimals: 2,
                 ",": ",",

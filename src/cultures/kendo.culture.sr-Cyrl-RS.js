@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Serbian Dinar",
+                abbr: "RSD",
                 pattern: ["-n $","n $"],
                 decimals: 2,
                 ",": ".",

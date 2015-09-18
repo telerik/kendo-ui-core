@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Jamaican Dollar",
+                abbr: "JMD",
                 pattern: ["-$n","$n"],
                 decimals: 2,
                 ",": ",",

@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Kuwaiti Dinar",
+                abbr: "KWD",
                 pattern: ["$n-","$ n"],
                 decimals: 3,
                 ",": ",",

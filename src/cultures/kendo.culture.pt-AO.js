@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Angolan Kwanza",
+                abbr: "AOA",
                 pattern: ["($n)","$n"],
                 decimals: 2,
                 ",": ".",

@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Tunisian Dinar",
+                abbr: "TND",
                 pattern: ["$n-","$ n"],
                 decimals: 3,
                 ",": ",",

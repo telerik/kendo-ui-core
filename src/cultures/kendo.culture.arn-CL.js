@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Chilean Peso",
+                abbr: "CLP",
                 pattern: ["-$ n","$ n"],
                 decimals: 2,
                 ",": ".",

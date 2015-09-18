@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "CFA Franc BCEAO",
+                abbr: "XOF",
                 pattern: ["(n$)","n$"],
                 decimals: 2,
                 ",": " ",

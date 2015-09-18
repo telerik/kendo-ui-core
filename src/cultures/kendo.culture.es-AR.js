@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Argentine Peso",
+                abbr: "ARS",
                 pattern: ["$-n","$ n"],
                 decimals: 2,
                 ",": ".",

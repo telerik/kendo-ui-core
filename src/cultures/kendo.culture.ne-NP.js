@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Nepalese Rupees",
+                abbr: "NPR",
                 pattern: ["-$n","$n"],
                 decimals: 2,
                 ",": ",",

@@ -16,6 +16,8 @@
                 symbol: "%"
             },
             currency: {
+                name: "Jordanian Dinar",
+                abbr: "JOD",
                 pattern: ["$n-","$ n"],
                 decimals: 3,
                 ",": ",",
