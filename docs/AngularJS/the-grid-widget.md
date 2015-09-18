@@ -158,14 +158,13 @@ In order to take full control on the logic that performs the request to the serv
 <script>
 angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope, $http) {
     $scope.gridOptions = {
-        columns: [ { field: "FirstName" }, { field: "LastName" } ],
+        columns: [ { field: "ProductID" }, { field: "ProductName" } ],
+        pageable: true,
         dataSource: {
-            schema: {
-                data: "d"
-            },
+            pageSize: 5,
             transport: {
                 read: function (e) {
-                  $http({method: 'GET', url: 'http://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees'}).
+                  $http.jsonp('http://demos.telerik.com/kendo-ui/service/Products?callback=JSON_CALLBACK').
                   success(function(data, status, headers, config) {
                       e.success(data)
                   }).
@@ -174,8 +173,7 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
                       console.log(status);
                   });
               }
-           },
-          pageSize: 5
+           }
         }
     }
 });
