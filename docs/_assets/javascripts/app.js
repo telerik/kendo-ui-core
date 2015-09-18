@@ -282,6 +282,7 @@ var dojoApi = (function($) {
             '<link rel="stylesheet" href="//kendo.cdn.telerik.com/${version}/styles/kendo.mobile.all.min.css">' +
             '<link rel="stylesheet" href="//kendo.cdn.telerik.com/${version}/styles/kendo.rtl.min.css">' +
             '<script src="//kendo.cdn.telerik.com/${version}/js/jszip.min.js"></script>' +
+            '<script src="//kendo.cdn.telerik.com/${version}/js/angular.min.js"></script>' +
             '<script src="//kendo.cdn.telerik.com/${version}/js/kendo.all.min.js"></script>' +
             '<script src="//kendo.cdn.telerik.com/${version}/js/kendo.timezones.min.js"></script>' +
             '<script>' +
