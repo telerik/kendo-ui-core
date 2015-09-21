@@ -13,6 +13,7 @@ The example below demonstrates how to persist the expanded nodes in a cookie and
 ```html
   <div id="treeview"></div>
   <button onclick="reloadPage()">Reload Page</button>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.0.3/js.cookie.min.js"></script>
   <script>
     function saveExpanded() {
       var treeview = $("#treeview").data("kendoTreeView");
@@ -23,7 +24,7 @@ The example below demonstrates how to persist the expanded nodes in a cookie and
             expandedItemsIds[item.id] = true;
         }
       });
-      $.cookie('expanded', kendo.stringify(expandedItemsIds));
+      Cookies.set('expanded', kendo.stringify(expandedItemsIds));
     }
 
     function setExpanded(data, expanded) {
@@ -55,9 +56,9 @@ The example below demonstrates how to persist the expanded nodes in a cookie and
       ]}
     ];
 
-    var expanded = $.cookie('expanded');
+    var expanded = Cookies.get('expanded');
     if (expanded) {
-      $.removeCookie('expanded');
+      Cookies.remove('expanded');
       expanded = JSON.parse(expanded);
       setExpanded(data, expanded);
     }
