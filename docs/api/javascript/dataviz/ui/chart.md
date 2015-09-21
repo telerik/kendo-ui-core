@@ -12423,6 +12423,8 @@ The supported values are:
 
 > The `step` value is only supported when [series.type](#configuration-series.type) is set to "line".
 
+> The `smooth` options is not supported for stacked area series with missing values.
+
 #### Example - set the style behavior
     <div id="chart"></div>
     <script>
