@@ -8,7 +8,7 @@ position: 1
 
 # Welcome to Kendo UI
 
-In this chapter:  
+In this chapter:
 
 *	[Overview](#overview)
 *	[Next Steps](#next-steps)
@@ -16,9 +16,9 @@ In this chapter:
 
 ## Overview
 
-Kendo UI is an HTML5 and jQuery-based comprehensive framework for building interactive and high-performance websites and applications for desktop and touchscreen devices by using the latest web standards. Basically, Kendo UI is a tool-set of web, mobile and data visualization UI scripts, styles, and images that gives you everything you need to get your project up and running. The application framework package comes with a templating library of 75+ UI widgets, an abundance of data-visualization gadgets, client-side data source, an MVVM (Model-View-ViewModel) design pattern, and an adaptive-rendering mobile tool-set that can be seamlessly run on your website. Kendo UI provides AngularJS and Bootstrap integration and is incorporated into products and frameworks such as [Telerik Platform](http://www.telerik.com/platform#overview), [Telerik Analytics](http://www.telerik.com/analytics), [Sitefinity](http://www.sitefinity.com/), [TeamPulse](http://www.telerik.com/teampulse), [Test Studio](http://www.telerik.com/teststudio), [Google Chrome](https://chrome.google.com/webstore/detail/telerik-kendo-ui-chrome-i/npcmgpnfknjmndbbakdhchgibaajnlpe), [Visual Studio](https://visualstudiogallery.msdn.microsoft.com/65b78c2c-951e-43a8-bae7-f9039f59fb9b), [NuGet](https://www.nuget.org/packages/KendoUIWeb/) along with others. 
+Kendo UI is an HTML5 and jQuery-based comprehensive framework for building interactive and high-performance websites and applications for desktop and touchscreen devices by using the latest web standards. Basically, Kendo UI is a tool-set of web, mobile and data visualization UI scripts, styles, and images that gives you everything you need to get your project up and running. The application framework package comes with a templating library of 75+ UI widgets, an abundance of data-visualization gadgets, client-side data source, an MVVM (Model-View-ViewModel) design pattern, and an adaptive-rendering mobile tool-set that can be seamlessly run on your website. Kendo UI provides AngularJS and Bootstrap integration and is incorporated into products and frameworks such as [Telerik Platform](http://www.telerik.com/platform#overview), [Telerik Analytics](http://www.telerik.com/analytics), [Sitefinity](http://www.sitefinity.com/), [TeamPulse](http://www.telerik.com/teampulse), [Test Studio](http://www.telerik.com/teststudio), [Google Chrome](https://chrome.google.com/webstore/detail/telerik-kendo-ui-chrome-i/npcmgpnfknjmndbbakdhchgibaajnlpe), [Visual Studio](https://visualstudiogallery.msdn.microsoft.com/65b78c2c-951e-43a8-bae7-f9039f59fb9b), [NuGet](https://www.nuget.org/packages/KendoUICore/) along with others.
 
-[Check Out the Kendo UI Demos](http://demos.telerik.com/kendo-ui/) 
+[Check Out the Kendo UI Demos](http://demos.telerik.com/kendo-ui/)
 
 Kendo UI is distributed in several bundles you can choose from depending on what your project requires.
 
@@ -42,16 +42,16 @@ Kendo UI Professional is one of the commercial versions of Kendo UI and is forme
 
 ### Telerik UI for ASP.NET MVC
 
-[UI for ASP.NET MVC](http://docs.telerik.com/kendo-ui/aspnet-mvc/introduction) is a Kendo UI commercial distribution. It helps build rich and responsive any-device web applications, provides for their flawless work across all major browsers and includes 70+ ASP.NET MVC controls among which navigation, layout, data management, visualization, editing and interactivity. In short, UI for ASP.NET MVC supplies all Kendo UI Professional components together with the ASP.NET MVC server-side wrappers that are applicable to all available Kendo UI widgets. 
+[UI for ASP.NET MVC](http://docs.telerik.com/kendo-ui/aspnet-mvc/introduction) is a Kendo UI commercial distribution. It helps build rich and responsive any-device web applications, provides for their flawless work across all major browsers and includes 70+ ASP.NET MVC controls among which navigation, layout, data management, visualization, editing and interactivity. In short, UI for ASP.NET MVC supplies all Kendo UI Professional components together with the ASP.NET MVC server-side wrappers that are applicable to all available Kendo UI widgets.
 
 * [List of Kendo UI Components](/intro/list-of-widgets)
 * [Browser Support](/intro/browser-support)
 * [Get a License](http://www.telerik.com/purchase/aspnet-mvc)
-* [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/aspnet-mvc)       
+* [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/aspnet-mvc)
 
 ### Telerik UI for JSP
 
-[UI for JSP](http://docs.telerik.com/kendo-ui/jsp/introduction) is a thorough web development framework for building modern HTML5 apps that contains a Model-View-ViewModel framework and 40+ UI widgets with JSP server wrappers providing full support for touchscreen devices. In short, UI for JSP supports Kendo UI Professional and gives you full control over the web and DataViz widgets with complete server-side APIs.   
+[UI for JSP](http://docs.telerik.com/kendo-ui/jsp/introduction) is a thorough web development framework for building modern HTML5 apps that contains a Model-View-ViewModel framework and 40+ UI widgets with JSP server wrappers providing full support for touchscreen devices. In short, UI for JSP supports Kendo UI Professional and gives you full control over the web and DataViz widgets with complete server-side APIs.
 
 * [List of Kendo UI Components](/intro/list-of-widgets)
 * [Browser Support](/intro/browser-support)
