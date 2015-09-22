@@ -1,11 +1,22 @@
 ---
-title: Globalization
+title: Globalization and Localization
 page_title: Globalization guide for Telerik UI for ASP.NET MVC
 description: Globalize, internationalize a Telerik UI for ASP.NET MVC application
 position: 4
 ---
 
-# Globalization
+# Globalization and Localization
+
+- [Globalization](#globalization)
+    - [Use the same culture on the server and client-side](#use-the-same-culture-on-the-server-and-client-side)
+      - [Set the server-side culture](#set-the-server-side-culture)
+      - [Set the client-side culture to match the one on the server](#set-the-client-side-culture-to-match-the-one-on-the-server)
+- [Localization](#localization)
+    - [Changing the localization messages](#changing-the-localization-messages)
+    - [Adding new localizations](#adding-new-localizations)
+
+## Globalization
+
 Globalization is the process of designing and developing an application that works in multiple cultures and languages.
 The culture defines specific information for the number formats, week and month names, date and time formats etc.
 
@@ -34,10 +45,16 @@ to the **~/Scripts/cultures/** directory of your application. Let's use the Span
 
 After performing those steps all UI widgets included in the product will use the "es-ES" culture for parsing and formatting dates and numbers.
 
-## Set the current server-side culture
+### Use the same culture on the server and client-side
 
-The previous tutorial showed how to set the culture client-side. To set the server-side culture you need to update the
-**web.config** file of your ASP.NET MVC application:
+It's important to have matching culture set on the client and on the server. This will ensure that dates and numbers are displayed and parsed correctly.
+
+#### Set the server-side culture
+
+You can choose to set the server-side culture globally or per-request.
+
+##### Globally
+To set the server-side culture you need to update the **web.config** file of your ASP.NET MVC application:
 
     <system.web>
         <!-- snip --!>
@@ -45,12 +62,22 @@ The previous tutorial showed how to set the culture client-side. To set the serv
         <!-- snip --!>
     </system.web>
 
-This will set both the [CurrentCulture](http://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.currentculture.aspx)
-and [CurrentUICulture](http://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.currentuiculture.aspx) to "es-ES".
+##### Per-request
+Override the [Controller.Initialize](https://msdn.microsoft.com/en-us/library/system.web.mvc.controller.initialize(v=vs.118).aspx) method to set the [CurrentCulture](http://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.currentculture.aspx)
+and [CurrentUICulture](http://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.currentuiculture.aspx).
 
-## Use the same culture on the server and client-side
+    protected override void Initialize(System.Web.Routing.RequestContext requestContext)
+    {
+        Thread.CurrentThread.CurrentCulture =
+            Thread.CurrentThread.CurrentUICulture =
+                new CultureInfo(requestContext.HttpContext.Request["my-culture"]);
 
-To make Telerik UI for ASP.NET MVC use the same culture as the server-side follow these steps:
+        base.Initialize(requestContext);
+    }
+
+#### Set the client-side culture to match the one on the server
+
+To make the widgets use the same culture as the server-side follow these steps:
 
 1. Copy the required culture JavaScript files from the **\js\culture\** directory of your Telerik UI for ASP.NET MVC installation
 to the **~/Scripts/cultures/** directory of your application.
@@ -84,7 +111,7 @@ to the **~/Scripts/cultures/** directory of your application.
                 kendo.culture("@culture");
             </script>
 
-## Localized user interface
+## Localization
 
 If the `CurrentUICulture` is set (from code or **web.config**) Telerik UI for ASP.NET MVC will use localized user interface messages.
 
@@ -110,7 +137,7 @@ If the `CurrentUICulture` is not supported the default "en-US" will be used.
 
 > The culture used for the localization messages is determined by the `CurrentUICulture` property and **not** by `CurrentCulture`.
 
-## Changing the localization messages
+### Changing the localization messages
 
 Telerik UI for ASP.NET MVC uses [satellite assemblies](http://blogs.msdn.com/b/global_developer/archive/2011/07/22/introduction-to-satellite-assemblies.aspx) to support localization (user interface messages localized for a set of cultures).
 
@@ -146,7 +173,7 @@ For example to change the default message for the "create" grid toolbar command 
               })
         )
 
-## Adding new localizations
+### Adding new localizations
 
 To add a localization for a new language a custom version of Kendo.Mvc.dll must be built. This is required because Kendo.Mvc.dll is a strongly named assembly and its private key is not shipped as part of the Telerik UI for ASP.NET MVC distribution.
 
