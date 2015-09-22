@@ -174,38 +174,6 @@ The value to be set to the cells.
     </script>
 ```
 
-### value
-
-Gets or sets the value of the cells.
-
-> If the cell has formula set, the value setting will clear it.
-
-#### Parameters
-
-##### value `String|Number|Date` *optional*
-
-The value to be set to the cells.
-
-#### Returns
-
-`Object` the current value of the top-left cell of the range.
-
-#### Example
-
-```html
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
-
-        $("#spreadsheet").kendoSpreadsheet();
-
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
-
-        var sheet = spreadsheet.activeSheet();
-
-        sheet.range("A1:B2").value("foo");
-    </script>
-```
-
 ### format
 
 Gets or sets the format of the cells.
@@ -250,4 +218,36 @@ More details about the supported format may be found in [the cell formatting hel
 ### clearFilter
 ### clearFilters
 ### hasFilter
+### value
+
+Gets or sets the value of the cells.
+
+> If the cell has formula set, the value setting will clear it.
+
+#### Parameters
+
+##### value `String|Number|Date` *optional*
+
+The value to be set to the cells.
+
+#### Returns
+
+`Object` the current value of the top-left cell of the range.
+
+#### Example
+
+```html
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        sheet.range("A1:B2").value("foo");
+    </script>
+```
+
 ### wrap
