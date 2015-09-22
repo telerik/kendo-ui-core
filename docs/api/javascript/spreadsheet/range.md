@@ -143,6 +143,319 @@ The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/
     </script>
 ```
 
+### clear
+
+Clears the contents of the range cells.
+
+#### Parameters
+
+##### options `Object` *optional*
+
+An object which may contain `contentsOnly: true` or `formatOnly: true` key values. Clearing the format will remove the cell formatting and visual styles.
+
+If a parameter is not passed, the method will clear both the cells values and the formatting.
+
+#### Example
+
+```html
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        sheet.range("A1").value(1);
+        sheet.range("A2").value(2);
+        sheet.range("A1:A2").clear();
+    </script>
+```
+
+### clearFilter
+
+Clears the set filters for the given column(s). The indices is relative to the beginning of the range.
+
+#### Parameters
+
+##### indices `Array | Number`
+
+The column(s) which filters should be cleared.
+
+#### Example - clear the filters for a column
+
+```html
+    <div id="spreadsheet"></div>
+
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        var values = [
+            [ "C 1", "C 2", "C 3" ],
+            [ 7, 5, 6 ],
+            [ 7, 8, 9 ],
+            [ 6, 3, 9 ]
+        ];
+
+        sheet.range("A1:C4").values(values);
+
+        var filter = new kendo.spreadsheet.ValueFilter({ values: [ 7 ] });
+        var filter2 = new kendo.spreadsheet.ValueFilter({ values: [ 8 ] });
+
+        sheet.range("A1:C4").filter([
+          { column: 0, filter: filter },
+            { column: 1, filter: filter2 }
+        ]);
+
+        // row 3 will be visible now.
+
+        sheet.range("A1:C3").clearFilter([ 1 ]);
+        // the filter on B column will be cleared, so rows 2 and 3 will be visible.
+    </script>
+
+```
+
+### filter
+
+Enables/disables or sets the filter for a given range.
+
+#### Parameters
+
+##### filter `Boolean | Object | Array`
+
+Determines the action performed by the method.
+
+* Passing `true` enables the filtering for the given range.
+* Passing `false` disables and clears the set filters.
+* Passing a `{ column: Number, filter: kendo.spreadsheet.Filter }` object applies the filter to the respective column.
+* Passing an array of `{ column: Number, filter: kendo.spreadsheet.Filter }` objects applies each filter to the respective column. The column index is relative to the beginning of the range.
+
+#### Example - enable filter
+
+```html
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        var values = [
+            [ 1, 2, 3 ],
+            [ 4, 5, 6 ],
+            [ 7, 8, 9 ]
+        ];
+
+        sheet.range("A1:C3").values(values);
+
+        sheet.range("A1:C3").filter(true);
+    </script>
+```
+
+#### Example - disable filter
+```html
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        var values = [
+            [ 1, 2, 3 ],
+            [ 4, 5, 6 ],
+            [ 7, 8, 9 ]
+        ];
+
+        sheet.range("A1:C3").values(values);
+
+        sheet.range("A1:C3").filter(true);
+        sheet.range("A1:C3").filter(false);
+    </script>
+```
+
+#### Example - set filter
+```html
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        var values = [
+            [ 1, 2, 3 ],
+            [ 4, 5, 6 ],
+            [ 7, 8, 9 ]
+        ];
+
+        var values = [
+            [ "C 1", "C 2", "C 3" ],
+            [ 4, 5, 6 ],
+            [ 7, 8, 9 ]
+        ];
+
+        sheet.range("A1:C3").values(values);
+
+        var filter = new kendo.spreadsheet.ValueFilter({ values: [ 7 ] });
+
+        sheet.range("A1:C3").filter({ column: 0, filter: filter });
+    </script>
+```
+
+#### Example - set multiple filters
+
+```html
+
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        var values = [
+            [ "C 1", "C 2", "C 3" ],
+            [ 4, 5, 6 ],
+            [ 7, 8, 9 ]
+        ];
+
+        sheet.range("A1:C3").values(values);
+
+        var filter = new kendo.spreadsheet.ValueFilter({ values: [ 7 ] });
+        var filter2 = new kendo.spreadsheet.ValueFilter({ values: [ 8 ] });
+
+        sheet.range("A1:C3").filter([
+            { column: 0, filter: filter },
+            { column: 1, filter: filter2 }
+        ]);
+    </script>
+
+```
+
+
+### format
+
+Gets or sets the format of the cells.
+
+#### Parameters
+
+##### format `String` *optional*
+
+The new format for the cells.
+
+#### Returns
+
+`String` the format of the top-left cell of the range.  When used as a
+setter, `format` returns the Range object to allow chained calls.
+
+More details about the supported format may be found in [the cell formatting help topic](/web/spreadsheet/format).
+
+#### Example
+
+```html
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        sheet.range("A1").value(12.3456).format("#.###");
+    </script>
+```
+
+### formula
+
+Gets or sets the formula of the cells.
+
+#### Parameters
+
+##### formula `String` *optional*
+
+The new formula of the cell. The string may optionally start with `=`.
+
+##### Returns
+
+`String` the formula of the top-left cell of the range.
+
+#### Example
+
+```html
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        sheet.range("A1").input("1000");
+        sheet.range("A2").formula("A1*2");
+        console.log(sheet.range("A2").formula()); // "A1*2"
+    </script>
+```
+
+### hasFilter
+
+Returns `true` if the sheet of the range has filter enabled.
+
+#### Returns
+
+`Boolean` `true` if the sheet has a filter, `false` otherwise.
+
+#### Example - clear the filters for a column
+
+```html
+    <div id="spreadsheet"></div>
+
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        var values = [
+            [ "C 1", "C 2", "C 3" ],
+            [ 7, 5, 6 ],
+            [ 7, 8, 9 ],
+            [ 6, 3, 9 ]
+        ];
+
+        sheet.range("A1:C4").values(values);
+
+        var filter = new kendo.spreadsheet.ValueFilter({ values: [ 7 ] });
+        var filter2 = new kendo.spreadsheet.ValueFilter({ values: [ 8 ] });
+
+        sheet.range("A1:C4").filter([
+          { column: 0, filter: filter },
+            { column: 1, filter: filter2 }
+        ]);
+
+        console.log(sheet.range("A1:C4").hasFilter());
+    </script>
+```
+
+
 ### input
 
 Gets or sets the value of the cells. If the string passed starts with `=`, the method *sets the formula* of the cell.
@@ -174,22 +487,10 @@ The value to be set to the cells.
     </script>
 ```
 
-### format
 
-Gets or sets the format of the cells.
+### merge
 
-#### Parameters
-
-##### format `String` *optional*
-
-The new format for the cells (see below).
-
-#### Returns
-
-`String` the format of the top-left cell of the range.  When used as a
-setter, `format` returns the Range object to allow chained calls.
-
-More details about the supported format may be found in [the cell formatting help topic](/web/spreadsheet/format).
+Merges the range cells into a single merged cell. If the range already includes a merged cell, they are merged, too.
 
 #### Example
 
@@ -203,21 +504,84 @@ More details about the supported format may be found in [the cell formatting hel
 
         var sheet = spreadsheet.activeSheet();
 
-        sheet.range("A1").value(12.3456).format("#.###");
+        sheet.range("A1:B2").merge();
     </script>
 ```
 
-### formula
-### validation
-### merge
-### unmerge
 ### select
+
+Sets the sheet selection to the range cells.
+
+```html
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        sheet.range("A1:B2").select();
+    </script>
+```
+
 ### values
-### clear
-### filter
-### clearFilter
-### clearFilters
-### hasFilter
+
+Sets the values of the range cells. The argument should be an array of arrays which match the dimensions of the range.
+
+#### Parameters
+
+##### values `Array`
+
+The cell values.
+
+#### Example
+
+```html
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        var values = [
+            [ 1, 2, 3 ],
+            [ 4, 5, 6 ],
+            [ 7, 8, 9 ]
+        ];
+
+        sheet.range("A1:C3").values(values);
+    </script>
+```
+
+### unmerge
+
+Un-merges any merged cells which are included in the range.
+
+```html
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        sheet.range("A1:B2").merge();
+        sheet.range("B3:C3").merge();
+        sheet.range("A1:D4").unmerge(); // this will unmerge both merged cells.
+    </script>
+```
+
+### validation
+
+TODO:
+
 ### value
 
 Gets or sets the value of the cells.
@@ -251,3 +615,32 @@ The value to be set to the cells.
 ```
 
 ### wrap
+
+Gets or sets the wrap of the range cells.
+
+#### Parameters
+
+##### value `Boolean` *optional*
+
+`true` if to enable wrapping, `false` otherwise.
+
+#### Returns
+
+`Boolean` the current wrap state of the top-left cell of the range.
+
+#### Example
+
+```html
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        sheet.range("A2").value("long long long long long long text");
+        sheet.range("A2:B3").wrap(true);
+    </script>
+```
