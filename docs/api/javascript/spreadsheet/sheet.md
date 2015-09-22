@@ -85,7 +85,7 @@ Deletes the contents of the column at the provided index and shifts the remainin
 
 The zero-based index of the column
 
-#### Example
+##### Example
 
 ```html
     <div id="spreadsheet"></div>
@@ -253,12 +253,6 @@ The zero-based index of the row
 
 Inserts a new, empty column at the provided index. The contents of the spreadsheet (including the ones in the current column index) are shifted to the right.
 
-#### Parameters
-
-##### index `Number`
-
-The zero-based index of the column
-
 #### Example
 
 ```html
@@ -276,6 +270,13 @@ The zero-based index of the column
         sheet.insertColumn(1);
     </script>
 ```
+
+#### Parameters
+
+##### index `Number`
+
+The zero-based index of the column
+
 ### insertRow
 
 Inserts a new, empty row at the provided index. The contents of the spreadsheet (including the ones in the current row index) are shifted down.
@@ -318,6 +319,7 @@ Returns a [Range](/api/javascript/spreadsheet/range) for the given range specifi
 
 `kendo.spreadsheet.Range` a range object, which may be used to manipulate the cell state further.
 
+#### Example
 ```html
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
