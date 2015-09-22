@@ -391,7 +391,7 @@ Gets or sets the formula of the cells.
 
 The new formula of the cell. The string may optionally start with `=`.
 
-##### Returns
+#### Returns
 
 `String` the formula of the top-left cell of the range.
 
