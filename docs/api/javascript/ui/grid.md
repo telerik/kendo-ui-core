@@ -940,7 +940,7 @@ populated at the time the template function is called, if the Grid uses remote b
 
 Use this options to enable the MultiCheck filtering support for that column.
 
-> If you have enabled the columns.multi option and your Grid uses serverPaging (or ServerOperations(true) if using the MVC wrappers) you need to provide columns.filterable.dataSource. If columns.filterable.dataSource is not provided bad performance.
+> If you have enabled the columns.multi option and your Grid uses serverPaging (or ServerOperations(true) when using the MVC wrappers) you will need to provide columns.filterable.dataSource. Otherwise, a negative impact on the performance could be observed.
 
 #### Example - enable checkbox filtering support.
     <div id="grid"></div>
