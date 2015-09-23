@@ -458,7 +458,13 @@ Returns `true` if the sheet of the range has filter enabled.
 
 ### input
 
-Gets or sets the value of the cells. If the string passed starts with `=`, the method *sets the formula* of the cell.
+Gets or sets the value of the cells.  This is similar to `value`, but it parses the argument as if it was entered through the text box:
+
+- if it starts with `=` (equal sign), a *formula* is set.  This may throw an error if the formula is syntactically invalid.  Example: `range("C1").input("=A1+B1")`.
+- if it looks like a number, a numeric value (not string) is set.
+- if it's `true` or `false` (case-insensitive) the respective boolean value is set.
+- if it's a `Date` object, or a string that can be parsed as a date, it is converted to the numerical representation of the date.
+- if it starts with `'` (single quote), a string containing the rest of the characters is set.  Example: `range("A1").input("'TRUE")` — sets the *text* "TRUE", not the boolean.
 
 #### Parameters
 
