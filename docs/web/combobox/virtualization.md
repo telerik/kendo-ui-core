@@ -32,16 +32,16 @@ The virtualization feature combines **Data** and **UI** virtualization in order 
 
 In the context of the widget, the **Data** virtualization is accomplished using the DataSource paging functionality and remote data retrieval.
 Thus the widget will retrieve only a concrete data page instead of requesting the whole data set at once. The DataSource paging should be configured **correctly**
-in order to ensure the proper widget's work. Please refer to the [server paging](/kendo-ui/api/javascript/data/datasource#configuration-serverPaging) configuration for more details.
+in order to ensure the proper widget's work. Please refer to the [server paging](/api/javascript/data/datasource#configuration-serverPaging) configuration for more details.
 
 ## What is UI virtualization
 
-The widget uses a specific strategy of reusing a list of DOM elements in order to display the corresponding data chuck. The number of those elements is determined based on the [height](/kendo-ui/api/javascript/ui/combobox#configuration-height)
+The widget uses a specific strategy of reusing a list of DOM elements in order to display the corresponding data chuck. The number of those elements is determined based on the [height](/api/javascript/ui/combobox#configuration-height)
 and [itemHeight](#itemheight) options. Once the number is calculated, the widget creates those elements and starts re-using them to display the current *data source page*.
 
 ## How the Data and UI virtualization is combined
 
-To ensure the correct work of the widget, the DataSource pageSize value is calculated **automatically**, based on the (([height](/kendo-ui/api/javascript/ui/combobox#configuration-height)
+To ensure the correct work of the widget, the DataSource pageSize value is calculated **automatically**, based on the (([height](/api/javascript/ui/combobox#configuration-height)
 / [itemHeight](#itemheight)) * 4) formula. This is done by the widget itself, and the defined pageSize value will be overriden if it does not match the calculated one.
 
 > To avoid multiple initial requests, define a correct **pageSize** value.
@@ -62,7 +62,7 @@ The virtualized list container **must** have a `height` option set (in pixels). 
 
 ### pageSize
 
-The virtualized widget will *calculate* the **pageSize** value automatically based on the (([height](/kendo-ui/api/javascript/ui/combobox#configuration-height) / [itemHeight](#itemheight)) * 4) formula
+The virtualized widget will *calculate* the **pageSize** value automatically based on the (([height](/api/javascript/ui/combobox#configuration-height) / [itemHeight](#itemheight)) * 4) formula
 and will *override* the custom defined pageSize value. This is done to ensure the proper work of the virtualized list.
 
 Let's consider the following scenario:
