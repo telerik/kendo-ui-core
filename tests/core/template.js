@@ -153,7 +153,7 @@ test("template executes multiline expression", function() {
 });
 
 test("template throws error on invalid template", function() {
-    raises(function() { template.compile('<a href="#">link</a>') }, /Invalid template/, "Template does not raise proper error");
+    throws(function() { template.compile('<a href="#">link</a>') }, /Invalid template/, "Template does not raise proper error");
 });
 
 test("slot count is 0 for template without expressions", function() {

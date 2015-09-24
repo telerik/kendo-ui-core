@@ -327,7 +327,7 @@ test("update with dataType set to jsonp throws an error", function() {
         }
     });
 
-    raises(function() {
+    throws(function() {
         dataSource.transport.parameterMap({ foo: 1 }, "update");
     }, "dataType for update should be json");
 });
@@ -343,7 +343,7 @@ test("create with dataType set to jsonp throws an error", function() {
         }
     });
 
-    raises(function() {
+    throws(function() {
         dataSource.transport.parameterMap({ foo: 1 }, "create");
     }, "dataType for create should be json");
 });
@@ -359,7 +359,7 @@ test("destroy with dataType set to jsonp throws an error", function() {
         }
     });
 
-    raises(function() {
+    throws(function() {
         dataSource.transport.parameterMap({ foo: 1 }, "destroy");
     }, "dataType for destroy should be json");
 });

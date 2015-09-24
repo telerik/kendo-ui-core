@@ -1086,7 +1086,7 @@ test("binding are removed if element is rebind", 1, function() {
 test("error is thrown if binding is not find", function() {
     dom = $('<div data-bind="nonexisting:foo"/>');
 
-    raises(function() { kendo.bind(dom, {}); }, "Error should be thrown");
+    throws(function() { kendo.bind(dom, {}); }, "Error should be thrown");
 });
 
 test("widget initialization", function() {

@@ -461,7 +461,7 @@ test("binding disabled to false enables the widget", function() {
 test("setting non existing binding throws an error", function() {
     dom = $('<input data-bind="nonexisting:foo" data-role="autocomplete" />');
 
-    raises(function() { kendo.bind(dom, {}); }, "Error is not thrown");
+    throws(function() { kendo.bind(dom, {}); }, "Error is not thrown");
 });
 
 test("assign to DataSource as ViewModel field", function() {
