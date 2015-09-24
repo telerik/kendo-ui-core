@@ -4,7 +4,9 @@ page_title: Create masking functionality for the Date Picker widget
 description: Create masking functionality for the Date Picker widget
 ---
 
-The following runnable sample demonstrates how to create masking functionality for the Kendo UI DatePicker widget
+# Kendo UI Masked DatePicker
+
+The following example demonstrates how to add a mask to the Kendo UI DatePicker via a custom Kendo UI widget.
 
 ```html
     <script>
@@ -32,11 +34,18 @@ The following runnable sample demonstrates how to create masking functionality f
             .closest(".k-datepicker")
             .add(element)
             .removeClass("k-textbox");
+
+            that.element.data("kendoDatePicker").bind("change", function() {
+              that.trigger(CHANGE);
+            });
           },
           options: {
             name: "MaskedDatePicker",
             dateOptions: {}
           },
+          events: [
+            CHANGE
+          ],
           destroy: function () {
             var that = this;
             Widget.fn.destroy.call(that);
@@ -56,13 +65,14 @@ The following runnable sample demonstrates how to create masking functionality f
 
         ui.plugin(MaskedDatePicker);
 
-      })(window.kendo.jQuery); 
+      })(window.kendo.jQuery);
     </script>
+    
     <div id="example">
-      <input id="datePicker" />
+      <input id="maskedDatePicker" />
       <script>
         $(document).ready(function() {
-        	$('#datePicker').kendoMaskedDatePicker();
+        	$('#maskedDatePicker').kendoMaskedDatePicker();
         });
       </script>
     </div>

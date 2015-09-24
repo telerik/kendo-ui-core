@@ -7,17 +7,17 @@ description: Keep the value of a DOM widget and the value of a View-Model field 
 # Value binding
 
 The `value` binding keeps the value of a DOM element or widget and the value of a View-Model field in sync.
-When the end-user changes the value of the DOM element (or widget) the bound View-Model value is updated. If the
-View-Model value is updated from code the value of the bound DOM element (or widget) is updated visually.
+When the end-user changes the value of the DOM element (or widget), the bound View-Model value is updated. If the
+View-Model value is updated from code, then the value of the bound DOM element (or widget) is updated visually.
 
-** Important: the value binding supports only DOM elements or widgets that have a "value" **
+> Value binding supports only DOM elements with a `value` property and widgets that have a `value()` method. The DOM element or widget also must fire a `change` event
+when the user changes its value. Changing the widget's value programmatically via the `value()` method must not fire the `change` event.
 
-Supported elements are `input`, `textarea` and
-`select`. All widgets that have the notion of a value are supported i.e. `AutoComplete`,
-`DropDownList`, `ComboBox`, `DatePicker`, `TimePicker`, `NumericTextBox`, `Slider`.
+Supported elements are `input`, `textarea` and `select`.
+All widgets that have the notion of a value are supported, i.e. `AutoComplete`, `ColorPicker`, `ComboBox`, `DropDownList`, `DatePicker`,
+`DateTimePicker`, `Editor`, `MaskedTextBox`, `MultiSelect`, `NumericTextBox`, `Slider`, `TimePicker`, and `Upload`.
 
-If you want to set the text or html content of a DOM element use the `text` or `html`
-bindings instead of the `value` binding.
+If you want to set the text or html content of a DOM element, then use the `text` or `html` bindings instead of the `value` binding.
 
 Checkboxes (`<input type="checkbox" />`) and radio buttons (`<input type="radio" />`) should use
 the [checked](checked) binding instead.
