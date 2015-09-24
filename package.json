@@ -9,8 +9,8 @@
    },
    "devDependencies": {
        "optimist": "0.3.7",
-       "typescript": "1.4.1",
-       "uglify-js": "2.4.24",
+       "typescript": "^1.5.3",
+       "uglify-js": "2.4.15",
        "cssmin": "0.3.2",
        "faye": "0.8.3",
        "xmlbuilder": "0.4.2",
