@@ -3277,6 +3277,27 @@ var __meta__ = {
             return data.bind(CHANGE, that._changeHandler);
         },
 
+        _updateTotalForAction: function(action, items) {
+            var that = this;
+
+            var total = parseInt(that._total, 10);
+
+            if (!isNumber(that._total)) {
+                total = parseInt(that._pristineTotal, 10);
+            }
+            if (action === "add") {
+                total += items.length;
+            } else if (action === "remove") {
+                total -= items.length;
+            } else if (action !== "itemchange" && action !== "sync" && !that.options.serverPaging) {
+                total = that._pristineTotal;
+            } else if (action === "sync") {
+                total = that._pristineTotal = parseInt(that._total, 10);
+            }
+
+            that._total = total;
+        },
+
         _change: function(e) {
             var that = this, idx, length, action = e ? e.action : "";
 
@@ -3289,23 +3310,20 @@ var __meta__ = {
             }
 
             if (that.options.autoSync && (action === "add" || action === "remove" || action === "itemchange")) {
-                that.sync();
-            } else {
-                var total = parseInt(that._total, 10);
-                if (!isNumber(that._total)) {
-                    total = parseInt(that._pristineTotal, 10);
-                }
-                if (action === "add") {
-                    total += e.items.length;
-                } else if (action === "remove") {
-                    total -= e.items.length;
-                } else if (action !== "itemchange" && action !== "sync" && !that.options.serverPaging) {
-                    total = that._pristineTotal;
-                } else if (action === "sync") {
-                    total = that._pristineTotal = parseInt(that._total, 10);
-                }
 
-                that._total = total;
+                var handler = function(args) {
+                    if (args.action === "sync") {
+                        that.unbind("change", handler);
+                        that._updateTotalForAction(action, e.items);
+                    }
+                };
+
+                that.first("change", handler);
+
+                that.sync();
+
+            } else {
+                that._updateTotalForAction(action, e ? e.items : []);
 
                 that._process(that._data, e);
             }

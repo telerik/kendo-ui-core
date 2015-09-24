@@ -741,6 +741,25 @@ test("total is updated after removing all items and adding new", function() {
     equal(dataSource.total(), 1);
 });
 
+test("total is updated after removing all items and adding new with autoSync", function() {
+    var dataSource = new DataSource({
+        autoSync: true,
+        schema: {
+            model: { id: "id" }
+        },
+        data: [{ id: 1, foo: "bar"},{ id: 2, foo: "baz"}]
+    });
+
+    dataSource.read();
+
+    dataSource.remove(dataSource.get(1));
+    dataSource.remove(dataSource.get(2));
+
+    dataSource.add({});
+
+    equal(dataSource.total(), 1);
+});
+
 test("sync returns promise", function() {
     var dataSource = new DataSource({
         schema: {
