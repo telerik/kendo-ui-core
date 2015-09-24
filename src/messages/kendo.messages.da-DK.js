@@ -26,7 +26,7 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "neq": "Er forskellig fra",
     "startswith": "Begynder med",
     "contains": "Indeholder",
-    "doesnotcontain": "Indeholder ikke"
+    "doesnotcontain": "Ikke indeholder"
   },
   "enums": {
     "eq": "Er lig med",
@@ -62,7 +62,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "neq": "Er forskellig fra",
     "startswith": "Begynder med",
     "contains": "Indeholder",
-    "doesnotcontain": "Indeholder ikke"
+    "doesnotcontain": "Ikke indeholder"
   },
   "enums": {
     "eq": "Er lig med",
@@ -193,7 +193,7 @@ if (kendo.ui.FilterCell) {
 kendo.ui.FilterCell.prototype.options.messages =
 $.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
   "filter": "Filter",
-  "clear": "Fjern filter",
+  "clear": "Nulstil",
   "isFalse": "er falskt",
   "isTrue": "er sandt",
   "operator": "Operatør"
@@ -207,13 +207,13 @@ kendo.ui.FilterMenu.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "filter": "Filter",
   "and": "Og",
-  "clear": "Fjern filter",
-  "info": "Vis rækker med en værdi der",
+  "clear": "Nulstil",
+  "info": "Vis rækker som",
   "selectValue": "-Vælg værdi-",
   "isFalse": "er falskt",
   "isTrue": "er sandt",
   "cancel": "Annuller",
-  "operator": "Operatør",
+  "operator": "Operator",
   "value": "Value",
   "or": "Eller"
 });
@@ -253,8 +253,8 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "outdent": "Ryk ud",
   "strikethrough": "Gennemstreget",
   "styles": "Stilarter",
-  "subscript": "Subscript",
-  "superscript": "Superscript",
+  "subscript": "Sænket skrift",
+  "superscript": "Hævet skrift",
   "underline": "Understreget",
   "unlink": "Fjern link",
   "deleteFile": "Er du sikker på, at du ønsker at slette \"{0}\"?",
@@ -269,21 +269,21 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "backColor": "Baggrundsfarve",
   "foreColor": "Farve",
   "dialogButtonSeparator": "eller",
-  "dialogCancel": "Cancel",
-  "dialogInsert": "Insert",
-  "imageAltText": "Alternate text",
-  "imageWebAddress": "Web address",
-  "linkOpenInNewWindow": "Open link in new window",
-  "linkText": "Text",
-  "linkToolTip": "ToolTip",
-  "linkWebAddress": "Web address",
+  "dialogCancel": "Fortryd",
+  "dialogInsert": "Insæt",
+  "imageAltText": "Alternativ tekst",
+  "imageWebAddress": "Web adresse",
+  "linkOpenInNewWindow": "Åben link i nyt vindue",
+  "linkText": "Teskt",
+  "linkToolTip": "Tooltip",
+  "linkWebAddress": "Web adresse",
   "search": "Søg",
   "addColumnLeft": "Tilføj kolonne til venstre",
   "addColumnRight": "Tilføj kolonne til højre",
   "addRowAbove": "Tilføj kolonne over",
   "addRowBelow": "Tilføj kolonne under",
   "deleteColumn": "Slet kolonne",
-  "deleteRow": "Slet række row",
+  "deleteRow": "Slet række",
   "createTable": "Opret tabel",
   "dropFilesHere": "træk og slip filer for at uploade",
   "formatting": "Formatér",
