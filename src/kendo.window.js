@@ -574,7 +574,7 @@ var __meta__ = { // jshint ignore:line
                 var object = that._object(dom);
                 var options = object && object.options;
 
-                return options && options.modal && options.visible && dom.is(VISIBLE);
+                return options && options.modal && options.visible && options.appendTo === that.options.appendTo && dom.is(VISIBLE);
             }).sort(function(a, b){
                 return +$(a).css("zIndex") - +$(b).css("zIndex");
             });
