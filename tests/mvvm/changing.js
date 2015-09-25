@@ -184,6 +184,26 @@ test("removing item from view model array reflects UI", function() {
     equal(dom.find("option").last().text(), "baz");
 });
 
+test("adding item to array which is unbound isn't reflected in the ui", function() {
+    var viewModel = kendo.observable( {
+        current: {items: [] },
+        data: [{ items:["foo"] }, { items: ["bar"] }],
+    });
+
+
+    var dom = $('<div><select data-bind="source:current.items"/></div>');
+
+    kendo.bind(dom, viewModel);
+
+    viewModel.set("current", viewModel.data[0]);
+    viewModel.set("current", viewModel.data[1]);
+
+    viewModel.data[0].items.push("baz");
+
+    equal(dom.find("option").length, 1);
+    equal(dom.find("option").last().text(), "bar");
+});
+
 test("removing item from array removes table rows", function() {
     var viewModel = kendo.observable( {
         foo: ["foo", "bar", "baz"],

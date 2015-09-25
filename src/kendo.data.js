@@ -449,6 +449,8 @@ var __meta__ = { // jshint ignore:line
 
             Observable.fn.init.call(this);
 
+            this._handlers = {};
+
             for (field in value) {
                 member = value[field];
 
@@ -463,7 +465,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         shouldSerialize: function(field) {
-            return this.hasOwnProperty(field) && field !== "_events" && typeof this[field] !== FUNCTION && field !== "uid";
+            return this.hasOwnProperty(field) && field !== "_handlers" && field !== "_events" && typeof this[field] !== FUNCTION && field !== "uid";
         },
 
         forEach: function(f) {
@@ -536,6 +538,12 @@ var __meta__ = { // jshint ignore:line
                 current = kendo.getter(field, true)(that);
 
             if (current !== value) {
+                if (current instanceof Observable && this._handlers[field]) {
+                    if (this._handlers[field].get) {
+                       current.unbind(GET, this._handlers[field].get);
+                    }
+                    current.unbind(CHANGE, this._handlers[field].change);
+                }
 
                 if (!that.trigger("set", { field: field, value: value })) {
                     if (!composite) {
@@ -551,8 +559,10 @@ var __meta__ = { // jshint ignore:line
         parent: noop,
 
         wrap: function(object, field, parent) {
-            var that = this,
-                type = toString.call(object);
+            var that = this;
+            var get;
+            var change;
+            var type = toString.call(object);
 
             if (object != null && (type === "[object Object]" || type === "[object Array]")) {
                 var isObservableArray = object instanceof ObservableArray;
@@ -563,18 +573,22 @@ var __meta__ = { // jshint ignore:line
                         object = new ObservableObject(object);
                     }
 
-                    if (object.parent() != parent()) {
-                        object.bind(GET, eventHandler(that, GET, field, true));
-                        object.bind(CHANGE, eventHandler(that, CHANGE, field, true));
-                    }
+                    get = eventHandler(that, GET, field, true);
+                    object.bind(GET, get);
+                    change = eventHandler(that, CHANGE, field, true);
+                    object.bind(CHANGE, change);
+
+                    that._handlers[field] = { get: get, change: change };
                 } else if (type === "[object Array]" || isObservableArray || isDataSource) {
                     if (!isObservableArray && !isDataSource) {
                         object = new ObservableArray(object);
                     }
 
-                    if (object.parent() != parent()) {
-                        object.bind(CHANGE, eventHandler(that, CHANGE, field, false));
-                    }
+                    change = eventHandler(that, CHANGE, field, false);
+
+                    object.bind(CHANGE, change);
+
+                    that._handlers[field] = { change: change };
                 }
 
                 object.parent = parent;
