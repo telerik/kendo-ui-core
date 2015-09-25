@@ -136,6 +136,22 @@
         ok(dialog.wrapper.prev("div").is(".k-overlay"));
     });
 
+    test("destroying a modal window removes overlay if other open window has different appendTo", 2, function () {
+        var dialog = createWindow({
+                modal: true,
+                appendTo: QUnit.fixture
+            }),
+            overlappingDialog = createWindow({
+                modal: true,
+                appendTo: document.body
+            });
+
+        overlappingDialog.destroy();
+
+        equal($(".k-overlay").length, 1);
+        equal(QUnit.fixture.children(".k-overlay").length, 1);
+    });
+
     test("closing window from close handler", 1, function() {
         var dialog = createWindow({
                 modal: true,
