@@ -79,6 +79,12 @@ module.exports = function(grunt) {
                 colors: true,
                 autoWatch: true,
                 browsers: browsers,
+                customLaunchers: {
+                    ChromiumTravis: {
+                        base: 'Chrome',
+                        flags: ['--no-sandbox']
+                    }
+                },
                 captureTimeout: 60000,
                 browserNoActivityTimeout: 30000,
                 singleRun: grunt.option('single-run')
@@ -109,7 +115,7 @@ module.exports = function(grunt) {
 
                     singleRun: true,
 
-                    browsers: [ 'Chrome' ],
+                    browsers: [ 'ChromiumTravis' ],
 
                     files: [].concat(
                         TESTS.beforeTestFiles,
