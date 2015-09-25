@@ -626,7 +626,6 @@
         dataSource.read();
         dataSource.remove(dataSource.at(0));
         dataSource.sync();
-        console.log(dataSource._pristineData);
         dataSource.cancelChanges();
 
         equal(dataSource.data().length, 0);
