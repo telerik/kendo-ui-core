@@ -239,7 +239,7 @@ var dojoApi = (function($) {
 
             snippet = snippet.replace(/<script>(.*?)<\/script>/, "<script>try { $1 } catch(e) { document.write(e.toString()); }</script>");
 
-            var html = template({ version: kendo.version, snippet: snippet });
+            var html = template({ version: kendo.version, snippet: snippet, html: /<html>/i.test(snippet) });
 
             var contents = iframe.contents();
 
@@ -264,7 +264,7 @@ var dojoApi = (function($) {
     };
 
     var template = kendo.template(
-        '<!doctype html>' +
+        '# if (!html) { #<!doctype html>' +
             '<html>' +
             '<head>' +
             '<meta charset="utf-8">' +
@@ -285,8 +285,8 @@ var dojoApi = (function($) {
             '<script src="//kendo.cdn.telerik.com/${version}/js/angular.min.js"></script>' +
             '<script src="//kendo.cdn.telerik.com/${version}/js/kendo.all.min.js"></script>' +
             '<script src="//kendo.cdn.telerik.com/${version}/js/kendo.timezones.min.js"></script>' +
-            '<script>' +
-            'kendo.mobile.Application.prototype.options.browserHistory = false;' +
+            '# } #<script>' +
+            'if (typeof kendo !== "undefined") kendo.mobile.Application.prototype.options.browserHistory = false;' +
             'window.onerror = function(message, url, line) {' +
                 'document.write("<span style=\\"color:red;font-family:monospace\\">" + message + " at line " + line + "</span>");' +
             '};' +
@@ -294,11 +294,11 @@ var dojoApi = (function($) {
                 'kendo.destroy(document.body);' +
             '};' +
             '</script>' +
-            '</head>' +
+            '# if (!html) { #</head>' +
             '<body>' +
-            '#= snippet #' +
-            '</body>' +
-            '</html>'
+            '# } # #= snippet #' +
+            '# if (!html) { #</body>' +
+            '</html> # } #'
     );
 
     var codemirror = null;

@@ -33,60 +33,7 @@ When GlobalizeJS is needed, it should be included after the Kendo UI scripts.
 
 ## Using RequireJS
 
-JSZip doesn't play well with RequireJS by default. However it is possible to make it work. Here is an example:
-
-```html
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.16/require.js'></script>
-    <script>
-      requirejs.config({
-        paths : {
-          jquery : 'http://kendo.cdn.telerik.com/2014.3.1411/js/jquery.min',
-          jszip : 'http://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip',
-          kendo : 'http://kendo.cdn.telerik.com/2014.3.1411/js/kendo.all.min'
-        },
-        shim : {
-          "kendo" : {
-            deps : [ "jquery", "jszip" ]
-          }
-        }
-      });
-    </script>
-    <div id="example">
-      <div id="grid" style="width: 900px"></div>
-      <script>
-        require([ "jszip", "kendo" ], initApp);
-        function initApp(jszip){
-          window.JSZip = jszip;
-          $("#grid").kendoGrid({
-            toolbar: ["excel"],
-            excel: {
-              fileName: "Kendo UI Grid Export.xlsx",
-              proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
-            },
-            dataSource: {
-              type: "odata",
-              transport: {
-                read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
-              },
-              schema:{
-                model: {
-                  fields: {
-                    ProductName: { type: "string" },
-                    UnitPrice: { type: "number" }
-                  }
-                }
-              },
-              pageSize: 7,
-            },
-            columns: [
-              { width: 300, field: "ProductName", title: "Product Name"},
-              { width: 300, field: "UnitPrice", title: "Unit Price"}
-            ]
-          });
-        }
-      </script>
-    </div>
-```
+JSZip requires extra initalization code in order to work with RequireJS. Check the related example in the [Use Kendo UI with RequireJS](/using-kendo-with-requirejs#using-jszip-with-requirejs) help topic.
 
 ## Browser support
 
