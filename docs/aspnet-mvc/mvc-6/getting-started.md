@@ -48,7 +48,7 @@ This should add a similar line in your `project.json`:
 1. Copy the Kendo UI client-side resources
     1. Manual installation
 
-        Copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\kendo-ui`
+        Copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\lib\kendo-ui`
 
         ![Kendo UI resources](images/kendo-ui-wwwroot.png)
 
