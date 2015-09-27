@@ -4172,7 +4172,7 @@ The fields which can be used in the template are:
 
 * resources() - returns the relevant resources for the current slot.
 
-> The `allDaySlotTemplate` option is supported when [views.type](#configuration-views.type) is set to "day" or "week".
+> The `allDaySlotTemplate` option is supported when [views.type](#configuration-views.type) is set to "day", "week" or "workWeek".
 
 #### Example - set the date header template
     <div id="scheduler"></div>
@@ -4990,7 +4990,7 @@ The fields which can be used in the template are:
 
 * resources() - returns the relevant resources for the current slot.
 
-> The `slotTemplate` option is supported when [views.type](#configuration-views.type) is set to "day" or "week".
+> The `slotTemplate` option is supported when [views.type](#configuration-views.type) is set to "day", "week", "workWeek" or "timeline" views.
 
 #### Example - set the slot template
     <div id="scheduler"></div>
