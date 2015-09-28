@@ -17,6 +17,9 @@ check the source code in the [respective widget demo](http://demos.telerik.com/k
 
 While it is theoretically possible to initialize several different Kendo UI widgets from the same DOM element, this is not recommended and may lead to undesired side effects.
 
+> It is strongly recommended to initialize Kendo UI widgets from HTML elements, which are part of the DOM tree.
+Creating widgets from [document fragments](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) may cause undesired side effects or Javascript errors.
+
 In this chapter:  
 * [Instantiate the Kendo UI AutoComplete Widget](#instantiate-the-kendo-ui-autocomplete-widget)  
 * [Instantiate Multiple Kendo UI Buttons With a Single jQuery Selector](#instantiate-multiple-kendo-ui-buttons-with-a-single-jquery-selector)  
