@@ -8013,6 +8013,79 @@ A function that can be used to create a custom visual for the title. The availab
       });
     </script>
 
+### pannable `Boolean|Object` *(default: false)*
+
+Specifies if the chart can be panned.
+
+#### Example - enable panning
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        }],
+        pannable: true,
+        categoryAxis: {
+          categories: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+          min: 2,
+          max: 5
+        }
+      });
+    </script>
+
+### pannable.key `String` *(default: "none")*
+
+Specifies the key that should be pressed to activate panning. The supported values are:
+
+* "none" - No key is required.
+* "ctrl" - The "ctrl" key should be pressed.
+* "shift" - The "shift" key should be pressed.
+* "alt" - The "alt" key should be pressed.
+
+#### Example - set the pannable key
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        }],
+        pannable: {
+          key: "shift"
+        },
+        categoryAxis: {
+          categories: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+          min: 2,
+          max: 5
+        }
+      });
+    </script>
+
+### pannable.lock `String` *(default: "none")*
+
+Specifies an axis that should not be panned. The supported values are `none`, `x` and `y`.
+
+#### Example - lock the y axis
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        }],
+        pannable: {
+          lock: "y"
+        },
+        valueAxis: {
+          min: 2,
+          max: 7
+        },
+        categoryAxis: {
+          categories: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+          min: 2,
+          max: 5
+        }
+      });
+    </script>
+
 ### pdf `Object`
 Configures the export settings for the [saveAsPDF](#methods-saveAsPDF) method.
 
@@ -31636,6 +31709,133 @@ A function that can be used to create a custom visual for the notes. The availab
               return new kendo.drawing.Group().append(line, circle);
             }
           }
+        }
+      });
+    </script>
+
+### zoomable `Boolean|Object` *(default: false)*
+
+Specifies if the chart can be zoomed.
+
+### Example - enable zooming
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        }],
+        zoomable: true,
+        categoryAxis: {
+          categories: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+        }
+      });
+    </script>
+
+### zoomable.mousewheel `Boolean|Object`
+
+Specifies if the chart can be zoomed using the mouse wheel.
+
+### Example - disable mouse wheel zoom
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        }],
+        zoomable: {
+          mousewheel: false
+        },
+        categoryAxis: {
+          categories: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+        }
+      });
+    </script>
+
+### zoomable.mousewheel.lock `String` *(default: "none")*
+
+Specifies an axis that should not be zoomed. The supported values are `none`, `x` and `y`.
+
+### Example - disable mouse wheel zoom for the y axis
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        }],
+        zoomable: {
+          mousewheel: false
+        },
+        categoryAxis: {
+          categories: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+        }
+      });
+    </script>
+
+### zoomable.selection `Boolean|Object`
+
+Specifies if the chart can be zoomed using selection.
+
+### Example - disable selection zoom
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        }],
+        zoomable: {
+          selection: false
+        },
+        categoryAxis: {
+          categories: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+        }
+      });
+    </script>
+
+### zoomable.selection.key `String` *(default: "shift")*
+
+Specifies a keyboard key that should be pressed to activate the selection. The supported values are:
+
+* "none" - No key is required.
+* "ctrl" - The "ctrl" key should be pressed.
+* "shift" - The "shift" key should be pressed.
+* "alt" - The "alt" key should be pressed.
+
+### Example - specify that no key needs be pressed
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        }],
+        zoomable: {
+          selection: {
+            key: "none"
+          }
+        },
+        categoryAxis: {
+          categories: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+        }
+      });
+    </script>
+
+### zoomable.selection.lock `String` *(default: "none")*
+
+Specifies an axis that should not be zoomed. The supported values are `none`, `x` and `y`.
+
+### Example - disable selection zoom for the y axis
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        }],
+        zoomable: {
+          selection: {
+            lock: "y"
+          }
+        },
+        categoryAxis: {
+          categories: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
         }
       });
     </script>
