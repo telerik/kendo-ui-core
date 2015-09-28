@@ -3093,6 +3093,7 @@ td.k-state-focused.k-state-selected,
             overflow: visible;
             height: auto;
             transform: translatey(-100%);
+            -webkit-transform: translatey(-100%);
         }
         
         .km-pane-wrapper .k-pager-numbers .k-link,
@@ -3101,6 +3102,12 @@ td.k-state-focused.k-state-selected,
         .km-pane-wrapper .k-pager-wrap > .k-pager-info {
             padding-top: 0;
             padding-bottom: 0;
+        }
+        
+        .km-pane-wrapper .k-pager-wrap .k-pager-numbers + .k-pager-nav,
+        .km-pane-wrapper .k-pager-nav:first-child + .k-pager-nav + .k-pager-nav
+        {
+            right: 2.7em;
         }
         
         .k-rtl .k-pager-numbers,
@@ -3117,6 +3124,7 @@ td.k-state-focused.k-state-selected,
             display: block;
             border-left: 0;
             transform: translatey(100%);
+            -webkit-transform: translatey(100%);
         }
         
         .k-pager-numbers li:not(.k-current-page)
@@ -3143,6 +3151,7 @@ td.k-state-focused.k-state-selected,
             border-radius: 0 @main-border-radius @main-border-radius 0;
         }
         
+        .k-pager-nav.k-pager-first,
         .k-rtl .k-pager-nav.k-pager-first + .k-link {
             border-right: 0;
             border-radius: @main-border-radius 0 0 @main-border-radius;

@@ -2389,6 +2389,18 @@ html .km-pane-wrapper .km-widget,
     .k-ie11,
     .k-safari {   
         
+        .k-pager-numbers,
+        .k-grid .k-pager-numbers {
+            transform: translatey(-100%);
+            -webkit-transform: translatey(-100%);
+        }
+        
+        .k-pager-numbers .k-current-page,
+        .k-grid .k-pager-numbers .k-current-page {
+            transform: translatey(100%);
+            -webkit-transform: translatey(100%);
+        }
+        
         .k-scheduler-toolbar > ul.k-scheduler-views > li.k-current-view,
         .k-pager-numbers .k-current-page .k-link
         {
@@ -2397,7 +2409,7 @@ html .km-pane-wrapper .km-widget,
             background-color: @drop-down-background;
             border-color: @widget-border-color;
         }
-    
+        
         .k-pager-numbers .k-current-page .k-link
         {
             border-color: @secondary-border-color;
