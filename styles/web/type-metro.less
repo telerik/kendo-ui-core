@@ -2402,7 +2402,20 @@ html .km-pane-wrapper .km-widget,
 @media only screen and (max-width: 1024px) {
     .k-webkit,
     .k-ff,
-    .k-ie11 {   
+    .k-ie11,
+    .k-safari {   
+        
+        .km-pane-wrapper .k-pager-numbers,
+        .km-pane-wrapper .k-grid .k-pager-numbers {
+            transform: translate(-50%, 0%);
+            -webkit-transform: translate(-50%, 0%);
+        }
+        
+        .km-pane-wrapper .k-pager-numbers.k-state-expanded,
+        .km-pane-wrapper .k-grid .k-pager-numbers.k-state-expanded {
+            transform: translate(-50%, -100%);
+            -webkit-transform: translate(-50%, -100%);
+        }
         
         .k-scheduler-toolbar > ul.k-scheduler-views > li.k-current-view,
         .k-pager-numbers .k-current-page .k-link

@@ -1665,7 +1665,19 @@ html .km-pane-wrapper .km-widget,
             -moz-transform: translatey(-100%);
             transform: translatey(-100%);            
         }
-
+        
+        .km-pane-wrapper .k-pager-numbers,
+        .km-pane-wrapper .k-grid .k-pager-numbers {
+            left: 50%;
+            transform: translate(-50%, 0%);
+            -webkit-transform: translate(-50%, 0%);
+        }
+        .km-pane-wrapper .k-pager-numbers.k-state-expanded,
+        .km-pane-wrapper .k-grid .k-pager-numbers.k-state-expanded {
+            -webkit-transform: translate(-50%, -100%);
+            transform: translate(-50%, -100%);           
+        }
+        
         .km-pane-wrapper .k-pager-numbers .k-link,
         .km-pane-wrapper .k-pager-numbers .k-state-selected,
         .km-pane-wrapper .k-pager-wrap > .k-link,
