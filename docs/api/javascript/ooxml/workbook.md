@@ -321,7 +321,7 @@ Sets the number of columns that a cell occupies.
     });
     </script>
 
-### sheets.rows.cells.fontName `String` *(default: "Calibri")*
+### sheets.rows.cells.fontFamily `String` *(default: "Calibri")*
 
 Sets the font used to display the cell value.
 
@@ -332,7 +332,7 @@ Sets the font used to display the cell value.
       sheets: [
           {
               rows: [
-                { cells: [ { value: "Arial", fontName: "Arial" } ] }
+                { cells: [ { value: "Arial", fontFamily: "Arial" } ] }
               ]
           }
       ]
@@ -342,6 +342,10 @@ Sets the font used to display the cell value.
       fileName: "Test.xlsx"
     });
     </script>
+
+### sheets.rows.cells.fontName `String` *(default: "Calibri")*
+
+Deprecated in versions 2015.3 and newer. Use [fontFamily](#configuration-sheets.rows.cells.fontFamily) instead.
 
 ### sheets.rows.cells.fontSize `Number` *(default: 11)*
 
@@ -393,28 +397,7 @@ The [Create a custom number format](https://support.office.com/en-us/article/Cre
 
 ### sheets.rows.cells.hAlign `String`
 
-Sets the horizontal alignment of the cell value. Supported values are `"left"`, `"center"` and `"right"`.
-
-#### Example - set the horizontal alignment
-
-    <script>
-    var workbook = new kendo.ooxml.Workbook({
-      sheets: [
-          {
-              columns: [ { width: 200 } ],
-              rows: [
-                { cells: [ { value: "Left", hAlign: "left" } ] },
-                { cells: [ { value: "Center", hAlign: "center" } ] },
-                { cells: [ { value: "Right", hAlign: "right" } ] }
-              ]
-          }
-      ]
-    });
-    kendo.saveAs({
-      dataURI: workbook.toDataURL(),
-      fileName: "Test.xlsx"
-    });
-    </script>
+Deprecated in versions 2015.3 and newer. Use [textAlign](#configuration-sheets.rows.cells.textAlign) instead.
 
 ### sheets.rows.cells.index `Object`
 The zero-based index of the cell in the row.
@@ -484,6 +467,31 @@ Sets the number of rows that a cell occupies.
     });
     </script>
 
+### sheets.rows.cells.textAlign `String`
+
+Sets the horizontal alignment of the cell value. Supported values are `"left"`, `"center"` and `"right"`.
+
+#### Example - set the horizontal alignment
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              columns: [ { width: 200 } ],
+              rows: [
+                { cells: [ { value: "Left", textAlign: "left" } ] },
+                { cells: [ { value: "Center", textAlign: "center" } ] },
+                { cells: [ { value: "Right", textAlign: "right" } ] }
+              ]
+          }
+      ]
+    });
+    kendo.saveAs({
+      dataURI: workbook.toDataURL(),
+      fileName: "Test.xlsx"
+    });
+    </script>
+
 ### sheets.rows.cells.underline `Boolean` *(default: false)*
 
 Setting it to `true` underlines the cell value.
@@ -530,6 +538,10 @@ Setting it to `true` wraps the cell value.
 
 ### sheets.rows.cells.vAlign `String` *(default: "bottom")*
 
+Deprecated in versions 2015.3 and newer. Use [verticalAlign](#configuration-sheets.rows.cells.verticalAlign) instead.
+
+### sheets.rows.cells.verticalAlign `String` *(default: "bottom")*
+
 Sets the vertical alignment of the cell value. Supported values are `"top"`, `"center"` and `"bottom"`.
 
 #### Example - set the horizontal alignment
@@ -541,9 +553,9 @@ Sets the vertical alignment of the cell value. Supported values are `"top"`, `"c
               columns: [ { width: 200 } ],
               rows: [
                 { cells: [
-                  { rowSpan: 2, value: "Top", vAlign: "top" },
-                  { rowSpan: 2, value: "Middle", vAlign: "center" },
-                  { rowSpan: 2, value: "Bottom", vAlign: "bottom" }
+                  { rowSpan: 2, value: "Top", verticalAlign: "top" },
+                  { rowSpan: 2, value: "Middle", verticalAlign: "center" },
+                  { rowSpan: 2, value: "Bottom", verticalAlign: "bottom" }
                  ]
                 }
               ]
