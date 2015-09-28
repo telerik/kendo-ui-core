@@ -142,6 +142,40 @@ The selected range in the sheet, e.g. "A1:B10".
 
 `Array` the available sheets.
 
+### saveAsExcel
+
+Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) event.
+
+> Calling this method could trigger the browser built-in popup blocker in some cases. To avoid that, always call it as a response to an end-user action e.g. button click.
+
+#### Example - manually initiate Excel export
+
+    <button id="export">Export to Excel</button>
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                name: "Food Order",
+                mergedCells: [
+                    "A1:G1"
+                ],
+                rows: [{
+                    height: 70,
+                    cells: [{
+                        value: "My Company", fontSize: 32, textAlign: "center"
+                    }]
+                }],
+            }]
+        });
+        $("#export").click(function(e) {
+            var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+            spreadsheet.saveAsExcel();
+        });
+    </script>
+
+    <!-- Load Pako ZLIB library to enable PDF compression -->
+    <script src="http://cdn.kendostatic.com/2015.2.624/js/pako_deflate.min.js"></script>
+
 ### sheetByName
 
 #### Parameters
@@ -225,3 +259,77 @@ The selected range in the sheet, e.g. "A1:B10".
 ### render
 
 ### excelExport
+
+Fired when the user clicks the "Export to Excel" toolbar button.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.data `Array`
+
+The array of data items used to create the Excel workbook.
+
+##### e.workbook `kendo.ooxml.Workbook`
+
+The Excel [workbook configuration object](/api/javascript/ooxml/workbook#configuration). Used to initialize a `kendo.ooxml.Workbook` class. Modifications of the workbook will reflect in the output Excel document.
+
+##### e.preventDefault `Function`
+
+If invoked the grid will not save the generated file.
+
+#### Example - subscribe to the "excelExport" event during initialization
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                name: "Food Order",
+                mergedCells: [
+                    "A1:G1"
+                ],
+                rows: [{
+                    height: 70,
+                    cells: [{
+                        value: "My Company", fontSize: 32, textAlign: "center"
+                    }]
+                }],
+            }],
+            excelExport: function(e) {
+                e.workbook.fileName = "Spreadsheet.xlsx";
+            }
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.saveAsExcel();
+    </script>
+
+#### Example - subscribe to the "excelExport" event after initialization
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                name: "Food Order",
+                mergedCells: [
+                    "A1:G1"
+                ],
+                rows: [{
+                    height: 70,
+                    cells: [{
+                        value: "My Company", fontSize: 32, textAlign: "center"
+                    }]
+                }],
+            }]
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.bind("excelExport", function(e) {
+            e.workbook.fileName = "Spreadsheet.xlsx";
+        });
+
+        spreadsheet.saveAsExcel();
+    </script>
+
