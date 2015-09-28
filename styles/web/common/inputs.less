@@ -711,12 +711,19 @@ span.k-numerictextbox
         overflow: hidden;
         .disable-high-contrast();
 
-        &.k-state-selected {
+        &.k-state-selected,
+        &.k-state-selected:hover {
             z-index: 100;
             background: transparent;
-            box-shadow: 0 1px 4px #000, inset 0 0 3px #fff;
+            box-shadow: 0 1px 3px 1px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.45);
             position: relative;
         }
+    }
+    
+    .k-item:hover {
+        z-index: 101;
+        position: relative;
+        box-shadow: 0 1px 3px 1px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.3);
     }
 }
 
