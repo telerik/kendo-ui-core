@@ -20,6 +20,9 @@ In addition to the [jQuery plugin syntax](/intro/jquery-initialization), the Ken
 While it is theoretically possible to initialize several different Kendo UI widgets from the same DOM element via [jQuery plugin syntax](/intro/jquery-initialization),
 this is not recommended and is not supported with declarative initialization from markup.
 
+> It is strongly recommended to initialize Kendo UI widgets from HTML elements, which are part of the DOM tree.
+Creating widgets from [document fragments](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) may cause undesired side effects or Javascript errors.
+
 In this chapter:  
 
 * [Declarative Widgets in SPA View](#declarative-widgets-in-spa-view)  
