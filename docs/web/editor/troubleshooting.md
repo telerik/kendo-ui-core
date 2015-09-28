@@ -56,12 +56,21 @@ Another possible approach is to use the Editor's "inline" mode, i.e. create the 
 
 ## Editor displays raw HTML content when using the browser's Back and Forward buttons
 
-The Editor stores its value encoded by default. When the page is retrieved from the *bfcache* (back-forward cache), the textarea value is persisted encoded and the Editor encodes it again. This process can be easily observed if one navigates several times back and forth - on each navigation, the Editor value will be encoded once more.
+The Editor stores its value encoded by default. When the page is retrieved from the *bfcache* (back-forward cache), the textarea value is persisted encoded and the Editor encodes it again.
+This process can be easily observed if one navigates several times back and forth - on each navigation, the Editor value will be encoded once more. To resolve the problem,
+set the [`encoded`](/api/web/editor#configuration-encoded) property to `false`, and expect the editor value to be posted unencoded to the server.
+If you are using ASP.NET, be sure to either disable the ASP.NET security validation or set the `AllowHtml` attribute on the model field that will receive the HTML string.
+Here is some more [information about request validation in ASP.NET](http://blogs.learnnowonline.com/blog/bid/199703/ASP-NET-MVC-Request-Validation-Protection-AllowHtml-Attribute).
 
-To resolve the problem, set the [`encoded`](/api/web/editor#configuration-encoded) property to `false`, and expect the editor value to be posted unencoded to the server. If you are using ASP.NET, be sure to either disable the ASP.NET security validation or set the `AllowHtml` attribute on the model field that will receive the HTML string. Here is some more [information about request validation in ASP.NET](http://blogs.learnnowonline.com/blog/bid/199703/ASP-NET-MVC-Request-Validation-Protection-AllowHtml-Attribute).
+Another option is to enable the [inline Editor mode](/web/editor/overview#classic-mode-vs-inline-mode), which does not use an `iframe` and a `textarea`.
+In this case, however, the Editor's value should be [submitted manually](/getting-started/web/editor/troubleshooting#inline-editor-value-is-not-posted-to-the-server).
 
-Another option is to enable the [inline Editor mode](/web/editor/overview#classic-mode-vs-inline-mode), which does not use an `iframe` and a `textarea`. In this case, however, the Editor's value should be [submitted manually](/getting-started/web/editor/troubleshooting#inline-editor-value-is-not-posted-to-the-server).
+The browser's back-forward cache can be disabled by attaching a `window.unload` handler, for example:
 
+    $(window).unload(function() {
+      // nothing required here
+    });
+    
 ## Pasted styles from MS Word are not retained
 
 By design, the Editor widget strives to output clean, XHTML-compatible markup. Because of that, the widget cleans up invalid styles set by Microsoft Word, and removes most presentational styles. Such styles include the colors applied by the current theme, and the default MS Word font and size. Ideally, the output of the editor should be styled via a stylesheet provided through the [stylesheets configuration option](/kendo-ui/api/web/editor#configuration-stylesheets). This allows all pasted content to be styled in a consistent manner across your site.

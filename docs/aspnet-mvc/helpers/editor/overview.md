@@ -117,11 +117,15 @@ You can subscribe to all [events](/api/web/editor#events) exposed by Kendo UI Ed
 
 ## Kendo UI Editor shows HTML tags after validation
 
-After server-side validation the Editor displays the posted encoded value from the ModelState. The Razor view engine will encode it once again and as a result, HTML tags will appear inside the widget content area.
-More information about this behavior related to ASP.NET MVC is available at
+After server-side validation the Editor displays the posted encoded value from the ModelState. The Razor view engine will encode it once again and as a result,
+HTML tags will appear inside the widget content area. More information about this behavior related to ASP.NET MVC is available at
 [ASP.NET MVC's Html Helpers Render the Wrong Value](http://blogs.msdn.com/b/simonince/archive/2010/05/05/asp-net-mvc-s-html-helpers-render-the-wrong-value.aspx).
 
 There are two alternative options to tackle this scenario:
 
 * Clear the ModelState in the controller's action method after the POST
 * Set `Encode(false)` for the Editor and set an `[AllowHtml]` attribute to the model property, so that the Editor's value is submitted non-encoded.
+
+## More Troubleshooting
+
+For additional tips, please check the [Troubleshooting section of the vanilla HTML/Javascript Kendo UI Editor](/web/editor/troubleshooting).
