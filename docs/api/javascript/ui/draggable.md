@@ -258,26 +258,31 @@ Provides a way for customization of the drag indicator. If a function is supplie
 
 ### holdToDrag `Boolean` *(default: false)*
 
-Suitable for touch oriented user interface, in order to avoid collision with the touch scrolling gesture. When set to `true`, the widget will be activated after the user taps and holds the finger on the element for a short amount of time.
+Suitable for touch oriented user interface, in order to avoid collision with the touch scrolling gesture.
+When set to `true`, the widget will be activated after the user taps and holds the finger on the element for a short amount of time.
 
-The *draggable* will also be activated by pressing, holding and lifting the finger without any movement. Dragging it afterwards will initiate the drag immediately. The activated mode can be canceled by calling `cancelHold`.
+The *draggable* will also be activated by pressing, holding and lifting the finger without any movement. Dragging it afterwards will initiate the drag immediately.
+The activated mode can be canceled by calling [`cancelHold`](#methods-cancelHold).
 
 #### Example - hold to drag
 
     <div id="draggable"></div>
 
+    <p id="alert" style="display:none">dragToHold activated...</p>
+
     <script>
       $("#draggable").kendoDraggable({
         holdToDrag: true,
         hold: function(e) {
-            $("draggable").css("background", "red");
+            $("#draggable").css("background", "#f00");
+            $("#alert").show();
         },
         hint: function(element) {
           var hintElement = $("<div id='hint'></div>");
           hintElement.css({
-            "background-image": "url('http://www.telerik.com/image/kendo-logo.png')",
-            "width": "230px",
-            "height": "80px"
+            background: "#3c0",
+            width: 200,
+            height: 200
           });
           return hintElement;
         }
@@ -286,10 +291,10 @@ The *draggable* will also be activated by pressing, holding and lifting the fing
 
     <style>
       #draggable {
-        width: 50px;
-        height: 50px;
-        background-color: orange;
-        border: 2px solid green;
+        width: 200px;
+        height: 200px;
+        background: #f90;
+        border: 2px solid #c60;
       }
     </style>
 
@@ -319,6 +324,10 @@ Specifies child elements for which the drag will not be initialized. Useful if t
             border: 2px solid green;
             margin: 5px;
         }
+        #container input
+        {
+            width: 90%;
+        }
     </style>
 
 ## Methods
@@ -329,26 +338,29 @@ Has effect only when `holdToDrag` is set to `true`. Cancels the activated state 
 
 #### Example - cancel activated draggable
 
+    <p>Hold the draggable square to activate it...</p>
+
     <div id="draggable"></div>
 
-    <a id="cancel">Cancel Draggable activated state</a>
+    <p><button type="button" class="k-button" id="cancel">Cancel Draggable activated state</button></p>
 
     <script>
       $("#cancel").click(function() {
           $("#draggable").data("kendoDraggable").cancelHold();
+          $("#draggable").removeClass("active-draggable");
       });
 
       $("#draggable").kendoDraggable({
         holdToDrag: true,
         hold: function(e) {
-            $("draggable").css("background", "red");
+            $("#draggable").addClass("active-draggable");
         },
         hint: function(element) {
           var hintElement = $("<div id='hint'></div>");
           hintElement.css({
-            "background-image": "url('http://www.telerik.com/image/kendo-logo.png')",
-            "width": "230px",
-            "height": "80px"
+            background: "#f00",
+            width: 200,
+            height: 200
           });
           return hintElement;
         }
@@ -357,10 +369,14 @@ Has effect only when `holdToDrag` is set to `true`. Cancels the activated state 
 
     <style>
       #draggable {
-        width: 50px;
-        height: 50px;
-        background-color: orange;
-        border: 2px solid green;
+        width: 200px;
+        height: 200px;
+        background: #f90;
+        border: 2px solid #c30;
+      }
+
+      #draggable.active-draggable {
+        background: #f00;
       }
     </style>
 
