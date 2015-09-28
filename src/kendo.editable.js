@@ -295,7 +295,7 @@ var __meta__ = { // jshint ignore:line
                 that.angular("compile", function(){
                     return {
                         elements: container,
-                        data: [ { dataItem: model } ]
+                        data: container.map(function() { return { dataItem: model }; })
                     };
                 });
             }
