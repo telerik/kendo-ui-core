@@ -4231,6 +4231,8 @@ Fired when the data source makes a remote service request.
 
 The event handler function context (available via the `this` keyword) will be set to the data source instance.
 
+It is possible to prevent the remote request. To achieve this, execute `e.preventDefault()` in the handler function.
+
 #### Event Data
 
 ##### e.sender `kendo.data.DataSource`
@@ -4271,6 +4273,25 @@ The type of the request. Set to "create", "read", "update" or "destroy".
       }
     });
     dataSource.bind("requestStart", dataSource_requestStart);
+    dataSource.fetch();
+    </script>
+
+#### Example - prevent the remote request
+    <script>
+    var dataSource = new kendo.data.DataSource({
+      transport: {
+        read: {
+          url: "http://demos.telerik.com/kendo-ui/service/products",
+          dataType: "jsonp"
+        }
+      },
+      requestStart: function(e) {
+        var myCondition = true;
+        if (myCondition) {
+            e.preventDefault();
+        }
+      }
+    });
     dataSource.fetch();
     </script>
 
