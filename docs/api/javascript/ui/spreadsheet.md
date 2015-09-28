@@ -223,3 +223,5 @@ The selected range in the sheet, e.g. "A1:B10".
 ## Events
 
 ### render
+
+### excelExport
