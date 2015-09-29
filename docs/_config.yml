@@ -182,6 +182,11 @@ navigation:
         title: "PivotGrid"
     "*grid":
         title: "Grid"
+    "*spreadsheet":
+        title: "Spreadsheet"
+    "*import-and-export-data":
+        title: "Import and Export Data"
+        index: 1
     "*listview":
         title: "ListView"
     "*maskedtextbox":

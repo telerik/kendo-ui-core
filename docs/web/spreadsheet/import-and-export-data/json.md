@@ -9,7 +9,7 @@ position: 1
 
 The Spreadsheet component allows you to store and load data in a native JSON format.
 The format follows the same structure as the [widget configuration](/api/javascript/ui/spreadsheet#configuration).
-It's designed to be used both for direct storage and as an [intermediate format](convert-between-formats).
+It's designed to be used both for direct storage and as an [intermediate format](server-side-processing).
 
 > An official JSON schema will be published once the component goes out of Beta.
 
