@@ -2496,6 +2496,7 @@ function pad(number, digits, end) {
         mobile: kendo.mobile || { },
         data: kendo.data || {},
         dataviz: kendo.dataviz || {},
+        drawing: kendo.drawing || {},
         spreadsheet: {},
         keys: {
             INSERT: 45,
