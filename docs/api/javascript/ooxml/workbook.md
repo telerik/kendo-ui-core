@@ -143,36 +143,63 @@ The width of the column in pixels.
 
 ### sheets.freezePane `Object`
 
-Frozen rows and columns configuration.
+Deprecated in versions 2015.3 and newer. Use
+[frozenColumns](#configuration-sheets.frozenColumns) and
+[frozenRows](#configuration-sheets.frozenRows) instead.
 
-#### Example - freeze rows and columns
+### sheets.freezePane.colSplit `Number` *(default: 0)*
+
+Deprecated in versions 2015.3 and newer. Use
+[frozenColumns](#configuration-sheets.frozenColumns) instead.
+
+### sheets.freezePane.rowSplit `Number` *(default: 0)*
+
+Deprecated in versions 2015.3 and newer. Use
+[frozenRows](#configuration-sheets.frozenRows) instead.
+
+### sheets.frozenColumns `Number` *(default: 0)*
+The number of frozen columns in this sheet.
+
+#### Example - freeze columns
 
     <script>
     var workbook = new kendo.ooxml.Workbook({
-      sheets: [
-          {
-              columns: [ { autoWidth: true }, { autoWidth: true }, { autoWidth: true } ],
-              freezePane: { colSplit: 2, rowSplit: 1 },
-              rows: [
-                { cells: [ { value: "Frozen row" }, { value: "Frozen row" }, { value: "Frozen row" }  ] },
-                { cells: [ { value: "Frozen column" }, { value: "Frozen column" }, { value: "Free column" }  ] }
-              ]
-          }
-      ]
+      sheets: [{
+          frozenColumns: 2,
+          rows: [
+            { cells: [ { value: "Frozen column" }, { value: "Frozen column" }, { value: "Free column" }  ] }
+          ]
+      }]
     });
+
     kendo.saveAs({
       dataURI: workbook.toDataURL(),
       fileName: "Test.xlsx"
     });
     </script>
 
-### sheets.freezePane.colSplit `Number` *(default: 0)*
+### sheets.frozenRows `Number` *(default: 0)*
+The number of frozen rows in this sheet.
 
-Number of columns to freeze from the left.
+#### Example - freeze columns
 
-### sheets.freezePane.rowSplit `Number` *(default: 0)*
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [{
+          frozenRows: 1,
+          rows: [
+            { cells: [ { value: "Frozen row" } ] },
+            { cells: [ { value: "Free row" } ] }
+          ]
+      }]
+    });
 
-Number of rows to freeze from the top.
+    kendo.saveAs({
+      dataURI: workbook.toDataURL(),
+      fileName: "Test.xlsx"
+    });
+    </script>
+
 
 ### sheets.filter `Object` *(default: null)*
 
