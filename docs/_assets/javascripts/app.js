@@ -1,5 +1,9 @@
 function expandNavigation(url) {
-    return function() {
+    return function expand(e) {
+        if (e.node) {
+            return;
+        }
+
         var segments = url.split("/");
         var page = segments[segments.length - 1];
         var treeview = this;
@@ -13,16 +17,70 @@ function expandNavigation(url) {
             dataSource = node.children;
         }
 
-        node.set("selected", true);
-
         var li = this.element.find("li[data-uid='" + node.uid + "']");
 
-        $("#page-nav").scrollTop(li.offset().top - this.element.offset().top - $("#page-nav").outerHeight() / 2);
+        scrollNodeIntoView(li);
 
-        this.unbind("dataBound", arguments.callee);
+        if (location.pathname.indexOf("/api/") < 0) {
+            node.set("selected", location.hash === "");
+
+            $("h2").each(function() {
+                var hash = $(this).find("a").attr("href");
+
+                var h2Node = treeview.append({ path: hash, selected: location.hash.replace("#", "") === hash.replace("#", ""), text: $(this).text() }, li);
+
+                $(this).nextUntil("h2", "h3").each(function() {
+                    var hash = $(this).find("a").attr("href");
+                    treeview.append({ path: hash, selected: location.hash.replace("#", "") === hash.replace("#", ""), text: $(this).text() }, h2Node);
+                });
+            });
+        } else {
+            node.set("selected", true);
+        }
+
+        this.unbind("dataBound", expand);
     }
 }
 
+$(window).on("hashchange", function() {
+    selectNode(location.hash, false);
+});
+
+function selectNode(hash, scroll) {
+    var li = $("#page-tree li:has(>div>span>a[href='" + hash + "'])");
+
+    if (li.length) {
+        var treeview = $("#page-tree").data("kendoTreeView");
+        treeview.select(li);
+        scrollNodeIntoView(li);
+    }
+}
+
+function scrollNodeIntoView(li) {
+    var top = li.offset().top;
+
+    if (top - $("#page-nav").offset().top < 0 || top > $("#page-nav").outerHeight()) {
+        $("#page-nav").scrollTop(top - $("#page-tree").offset().top - $("#page-nav").outerHeight() / 2);
+    }
+}
+
+if (location.pathname.indexOf("/api/") < 0) {
+    $(function() {
+        var headings = $("h2,h3");
+
+        $("#page-article").on("scroll", function(e) {
+            var pageArticle = this;
+
+            var current = headings.filter(function() {
+                return $(this).offset().top + this.offsetHeight > 0;
+            }).first();
+
+            if (current.length) {
+                selectNode(current.find("a").attr("href"), true);
+            }
+        });
+    });
+}
 
 function navigationTemplate(root) {
     return function(data) {
@@ -39,16 +97,21 @@ function navigationTemplate(root) {
             url = url.replace(".html", "");
         }
 
-        while (item = item.parentNode()) {
-            url = item.path + "/" + url;
+        if (url.indexOf("#") < 0) {
+            while (item = item.parentNode()) {
+                url = item.path + "/" + url;
+            }
+            return '<a href="' + root + url + '">' + text + "</a>";
+        } else {
+            return '<a href="' + url + '">' + text + "</a>";
         }
-
-        return '<a href="' + root + url + '">' + text + "</a>";
     }
 }
 
 function preventParentSelection(e) {
-    if (this.dataItem(e.node).hasChildren) {
+    var node = this.dataItem(e.node);
+
+    if (node.path.indexOf("#") < 0 && node.hasChildren) {
         e.preventDefault();
         this.toggle(e.node);
     }
