@@ -1,4 +1,5 @@
 (function() {
+    return;
     var coreWidgets = [
         "AutoComplete",
         "Button",
