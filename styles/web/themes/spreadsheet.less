@@ -1,0 +1,283 @@
+@spreadsheet-header-border: @spreadsheet-pane-border;
+@spreadsheet-header-background: @base;
+@spreadsheet-pane-border: darken(@base, 20%);
+@spreadsheet-cell-border: darken(@base, 10%);
+@spreadsheet-selection-background: fadeout(@selected-background, 80%);
+@spreadsheet-selection-border: @selected-background;
+
+.k-spreadsheet-top-corner,
+.k-spreadsheet-row-header td,
+.k-spreadsheet-column-header td {
+    background-color: @spreadsheet-header-background;
+    background-image: none;
+    color: contrast(@spreadsheet-header-background);
+    border-color: @spreadsheet-header-border;
+}
+
+.k-spreadsheet-top-corner {
+    border-color: @spreadsheet-header-border;
+
+    &:after {
+        border-color: transparent @spreadsheet-header-border @spreadsheet-header-border transparent;
+    }
+}
+
+.k-spreadsheet-pane {
+    border-color: @spreadsheet-pane-border;
+
+    td {
+        border-color: @spreadsheet-cell-border;
+    }
+
+    .k-spreadsheet-column-header td,
+    .k-spreadsheet-row-header td {
+        border-color: @spreadsheet-header-border;
+    }
+
+    .k-spreadsheet-merged-cell {
+        background-color: @background;
+    }
+}
+
+.k-selection-partial,
+.k-selection-full {
+    .k-spreadsheet-pane & {
+        border-color: @spreadsheet-selection-background;
+        background-color: @spreadsheet-selection-background;
+    }
+
+    .k-spreadsheet-column-header & {
+        border-bottom-color: fadein(@spreadsheet-selection-background, 80%);
+    }
+
+    .k-spreadsheet-row-header & {
+        border-right-color: fadein(@spreadsheet-selection-background, 80%);
+    }
+}
+
+.k-spreadsheet-pane .k-selection-partial {
+    background-color: @spreadsheet-selection-background;
+}
+
+.k-spreadsheet-selection {
+    background-color: @spreadsheet-selection-background;
+    border-color: @spreadsheet-selection-border;
+}
+
+.k-spreadsheet-cell-editor {
+    box-shadow: inset 0 0 0 2px @spreadsheet-selection-border;
+}
+
+.k-spreadsheet-active-cell {
+    box-shadow: inset 0 0 0 1px @spreadsheet-selection-border;
+    border-color: @spreadsheet-selection-border;
+
+    td {
+        background-color: @background;
+        border-color: @spreadsheet-selection-border;
+        box-shadow: inset 1px 1px 0 1px @spreadsheet-selection-border, inset 0 0 0 1px @spreadsheet-selection-border;
+    }
+
+    &.k-right td {
+        box-shadow: inset 1px 1px 0 1px @spreadsheet-selection-border, inset -2px 0 0 1px @spreadsheet-selection-border;
+    }
+
+    &.k-bottom td {
+        box-shadow: inset 1px 1px 0 1px @spreadsheet-selection-border, inset 0 -2px 0 1px @spreadsheet-selection-border;
+    }
+
+    &.k-right.k-bottom td {
+        box-shadow: inset 1px 1px 0 1px @spreadsheet-selection-border, inset -2px -2px 0 1px @spreadsheet-selection-border;
+    }
+
+    .k-ff & td {
+        box-shadow: inset 0 0 0 1px @spreadsheet-selection-border;
+    }
+}
+
+.k-spreadsheet-active-cell.k-single {
+    background-color: #fff;
+}
+
+.k-spreadsheet {
+    > .k-spreadsheet-formula-bar  {
+        background-color: @background;
+        border-color: @spreadsheet-header-background @spreadsheet-header-background @spreadsheet-header-border;
+
+        &:before {
+            border-color: @spreadsheet-header-border;
+        }
+
+        &:after {
+            border-color: @spreadsheet-header-background;
+        }
+    }
+
+    .k-spreadsheet-formula-input {
+        background-color: @background;
+        color: @normal-text-color;
+    }
+}
+
+.k-spreadsheet-format-cells .k-spreadsheet-preview {
+    border-color: @widget-border-color;
+}
+
+.k-spreadsheet-filter {
+    border-radius: @border-radius;
+    background-color: @background;
+
+    box-shadow: inset 0 0 0 1px @spreadsheet-cell-border;
+
+    &.k-state-active {
+        color: @selected-text-color;
+        background-color: @selected-background;
+    }
+
+    &:hover {
+        color: @hover-text-color;
+        background: @hover-background;
+        border-color: darken(@hover-background, 8%);
+    }
+}
+
+.k-action-window .k-action-buttons {
+    border-color: @widget-border-color;
+}
+
+.k-spreadsheet-sample {
+    color: lighten(@normal-text-color, 30%);
+
+    .k-state-selected & {
+        color: inherit;
+    }
+}
+
+.k-spreadsheet-window .k-list-wrapper,
+.k-spreadsheet-window .k-list {
+    border-color: @widget-border-color;
+    border-radius: @border-radius;
+}
+
+.k-resize-handle,
+.k-resize-hint-handle,
+.k-resize-hint-marker {
+    background-color: @selected-background;
+}
+
+.k-resize-hint-vertical .k-resize-hint-handle,
+.k-resize-hint-vertical .k-resize-hint-marker {
+    background-color: @selected-background;
+}
+
+.k-spreadsheet-toolbar {
+    &.k-toolbar .k-button-group .k-button {
+        border-radius: @border-radius;
+    }
+
+    > .k-widget,
+    > .k-button,
+    > .k-button-group {
+        border-radius: @border-radius;
+    }
+
+    > .k-separator {
+        border-color: @widget-border-color;
+    }
+
+    .k-overflow-anchor {
+        border-radius: 0;
+    }
+}
+
+.k-spreadsheet-popup {
+    border-radius: @border-radius;
+
+    .k-separator {
+        background-color: @widget-border-color;
+    }
+
+    .k-button {
+        background-color: transparent;
+
+        &:hover {
+            background-color: @hover-background;
+        }
+    }
+
+    .k-state-active {
+        background-color: @selected-background;
+        color: contrast(@selected-text-color);
+
+        &:hover {
+            background-color: darken(@selected-background, 10%);
+        }
+    }
+}
+
+.k-spreadsheet-filter-menu {
+    .k-details {
+        border-color: @widget-border-color;
+    }
+
+    .k-details-content .k-space-right {
+        background-color: @background;
+    }
+
+    .k-spreadsheet-value-treeview-wrapper {
+        background-color: @background;
+        border-color: @widget-border-color;
+        border-radius: @border-radius 0 0 @border-radius;
+    }
+}
+
+.k-syntax-ref { color: #ff8822; }
+.k-syntax-num { color: #0099ff; }
+.k-syntax-func { font-weight: bold; }
+.k-syntax-str { color: #38b714; }
+.k-syntax-error { color: red; }
+.k-syntax-bool { color: #a9169c; }
+.k-syntax-startexp { font-weight: bold; }
+.k-syntax-paren-match { background-color: #caf200; }
+
+.k-series-a {
+    border-color: @series-a;
+    background-color: fade(@series-a, 15%);
+}
+
+.k-series-b {
+    border-color: @series-b;
+    background-color: fade(@series-b, 15%);;
+}
+
+.k-series-c {
+    border-color: @series-c;
+    background-color: fade(@series-c, 15%);;
+}
+
+.k-series-d {
+    border-color: @series-d;
+    background-color: fade(@series-d, 15%);;
+}
+
+.k-series-e {
+    border-color: @series-e;
+    background-color: fade(@series-e, 15%);;
+}
+
+.k-series-f {
+    border-color: @series-f;
+    background-color: fade(@series-f, 15%);;
+}
+
+
+.k-spreadsheet-sheets-remove:hover .k-icon {
+    color: #cc2222;
+}
+
+.k-spreadsheet-formula-list {
+    .k-state-focused {
+        background-color: @selected-background;
+        color: @selected-text-color;
+    }
+}

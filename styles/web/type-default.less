@@ -839,6 +839,12 @@ html .km-pane-wrapper .k-header
     border-bottom-left-radius: @inner-border-radius;
 }
 
+.k-popup .k-treeview .k-item > .k-group
+{
+    background: transparent;
+    color: @widget-text-color;
+}
+
 .k-marquee-text
 {
     color: @selected-text-color;
@@ -2451,18 +2457,6 @@ html .km-pane-wrapper .km-widget,
     .k-ie11,
     .k-safari {   
         
-        .k-pager-numbers,
-        .k-grid .k-pager-numbers {
-            transform: translatey(-100%);
-            -webkit-transform: translatey(-100%);
-        }
-        
-        .k-pager-numbers .k-current-page,
-        .k-grid .k-pager-numbers .k-current-page {
-            transform: translatey(100%);
-            -webkit-transform: translatey(100%);
-        }
-        
         .k-scheduler-toolbar > ul.k-scheduler-views > li.k-current-view,
         .k-pager-numbers .k-current-page .k-link
         {
@@ -2471,7 +2465,7 @@ html .km-pane-wrapper .km-widget,
             background-color: @drop-down-background;
             border-color: @widget-border-color;
         }
-        
+    
         .k-pager-numbers .k-current-page .k-link
         {
             border-color: @secondary-border-color;
@@ -2616,3 +2610,33 @@ html .km-pane-wrapper .km-widget,
 .k-map .k-attribution {
     color: #666666;
 }
+
+@import "themes/spreadsheet.less";
+
+.k-spreadsheet {
+    .k-widget {
+        &[data-property='fontSize'] { width: 60px; }
+        &[data-property='format'] { width: 100px; }
+        &[data-property='fontFamily'] { width: 130px; }
+    }
+
+    .k-spreadsheet-sheets-remove {
+        margin: .5em .5em .5em -.5em;
+    }
+}
+
+.k-spreadsheet-toolbar .k-combobox {
+    .k-input {
+        color: @normal-text-color;
+    }
+
+    .k-state-hover,
+    .k-state-active,
+    .k-state-focused
+    {
+        .k-input {
+            color: @input-text-color;
+        }
+    }
+}
+

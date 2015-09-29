@@ -1553,7 +1553,7 @@ div.k-filebrowser-dropzone em
     border-radius: @main-border-radius 0 0 @main-border-radius;
 }
 
-.k-toolbar .k-button-group {
+.k-toolbar:not(.k-spreadsheet-toolbar) .k-button-group {
     .k-button {
         border-left-color: transparent;
     }
@@ -1564,7 +1564,7 @@ div.k-filebrowser-dropzone em
 
     .k-button:focus {
         border-left-color: @button-focused-border-color;
-    }    
+    }
 }
 
 .k-group-start.k-group-end.k-tool
@@ -3161,7 +3161,6 @@ td.k-state-focused.k-state-selected,
             overflow: visible;
             height: auto;
             transform: translatey(-100%);
-            -webkit-transform: translatey(-100%);
         }
         
         .km-pane-wrapper .k-pager-numbers .k-link,
@@ -3170,12 +3169,6 @@ td.k-state-focused.k-state-selected,
         .km-pane-wrapper .k-pager-wrap > .k-pager-info {
             padding-top: 0;
             padding-bottom: 0;
-        }
-        
-        .km-pane-wrapper .k-pager-wrap .k-pager-numbers + .k-pager-nav,
-        .km-pane-wrapper .k-pager-nav:first-child + .k-pager-nav + .k-pager-nav
-        {
-            right: 2.7em;
         }
         
         .k-rtl .k-pager-numbers,
@@ -3192,7 +3185,6 @@ td.k-state-focused.k-state-selected,
             display: block;
             border-left: 0;
             transform: translatey(100%);
-            -webkit-transform: translatey(100%);
         }
         
         .k-pager-numbers li:not(.k-current-page)
@@ -3219,7 +3211,6 @@ td.k-state-focused.k-state-selected,
             border-radius: 0 @main-border-radius @main-border-radius 0;
         }
         
-        .k-pager-nav.k-pager-first,
         .k-rtl .k-pager-nav.k-pager-first + .k-link {
             border-right: 0;
             border-radius: @main-border-radius 0 0 @main-border-radius;
@@ -3368,5 +3359,14 @@ td.k-state-focused.k-state-selected,
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
     .k-map .k-marker {
         background-image: url("@{image-folder}/markers_2x.png");
+    }
+}
+@import "themes/spreadsheet.less";
+
+.k-spreadsheet {
+    .k-widget {
+        &[data-property='fontSize'] { width: 70px; }
+        &[data-property='format'] { width: 100px; }
+        &[data-property='fontFamily'] { width: 130px; }
     }
 }

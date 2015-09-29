@@ -1665,19 +1665,7 @@ html .km-pane-wrapper .km-widget,
             -moz-transform: translatey(-100%);
             transform: translatey(-100%);            
         }
-        
-        .km-pane-wrapper .k-pager-numbers,
-        .km-pane-wrapper .k-grid .k-pager-numbers {
-            left: 50%;
-            transform: translate(-50%, 0%);
-            -webkit-transform: translate(-50%, 0%);
-        }
-        .km-pane-wrapper .k-pager-numbers.k-state-expanded,
-        .km-pane-wrapper .k-grid .k-pager-numbers.k-state-expanded {
-            -webkit-transform: translate(-50%, -100%);
-            transform: translate(-50%, -100%);           
-        }
-        
+
         .km-pane-wrapper .k-pager-numbers .k-link,
         .km-pane-wrapper .k-pager-numbers .k-state-selected,
         .km-pane-wrapper .k-pager-wrap > .k-link,
@@ -1901,4 +1889,72 @@ html .km-pane-wrapper .km-widget,
 
 .k-map .k-attribution {
     color: #666666;
+}
+
+@import "themes/spreadsheet.less";
+
+@spreadsheet-selection-border: #26c6da;
+@spreadsheet-selection-background: fadeout(@spreadsheet-selection-border, 80%);
+
+@active-header-text: contrast(@accent);
+@inactive-header-text: contrast(@accent);
+
+.k-spreadsheet {
+    .k-spreadsheet-quick-access-toolbar,
+    .k-spreadsheet-sheets-bar {
+        .k-button {
+            box-shadow: none;
+            color: @active-header-text;
+            border-radius: 0;
+            line-height: 2.6em;
+            width: 3em;
+
+            &:hover {
+                .composite-background(@tabs-hover-gradient);
+                border-color: saturate(@normal-text-color, 7%);
+            }
+        }
+    }
+
+    .k-spreadsheet-sheets-bar .k-button {
+        left: 0;
+        bottom: 0;
+        padding-top: .5em;
+        padding-bottom: .5em;
+        line-height: 2.2em;
+    }
+
+    .k-spreadsheet-sheets-remove {
+        margin: 0 0 0 -1em;
+    }
+}
+
+.k-spreadsheet-sheets-items,
+.k-spreadsheet-tabstrip {
+    .k-state-default .k-link {
+        color: @inactive-header-text;
+    }
+
+    .k-item.k-state-hover,
+    .k-item.k-state-active,
+    .k-item.k-state-focused {
+        background-color: transparent;
+
+        .k-link {
+            color: @active-header-text;
+        }
+    }
+
+    .k-state-active .k-link {
+        color: @active-header-text;
+    }
+}
+
+.k-spreadsheet-toolbar {
+    background: darken(@base, 4%);
+
+    > .k-button {
+        line-height: 1.9em;
+        border-color: transparent;
+    }
 }

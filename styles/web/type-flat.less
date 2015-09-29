@@ -2713,3 +2713,19 @@ html .km-pane-wrapper .km-widget,
         background-image: url("@{image-folder}/markers_2x.png");
     }
 }
+
+@import "themes/spreadsheet.less";
+
+@spreadsheet-cell-border: darken(@background, 10%);
+@spreadsheet-header-border: lighten(@base, 18%);
+
+.k-spreadsheet-pane {
+    .k-spreadsheet-column-header td,
+    .k-spreadsheet-row-header td {
+        &.k-selection-partial,
+        &.k-selection-full {
+            background-color: @selected-background;
+            border-color: darken(@selected-background, 9%);
+        }
+    }
+}

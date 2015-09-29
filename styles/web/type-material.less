@@ -3675,18 +3675,6 @@ div.k-scheduler-marquee:after {
             transform: translatey(-100%);
         }
 
-        .km-pane-wrapper .k-pager-numbers,
-        .km-pane-wrapper .k-grid .k-pager-numbers {
-            left: 50%;
-            transform: translate(-50%, 0%);
-            -webkit-transform: translate(-50%, 0%);
-        }
-        .km-pane-wrapper .k-pager-numbers.k-state-expanded,
-        .km-pane-wrapper .k-grid .k-pager-numbers.k-state-expanded {
-            -webkit-transform: translate(-50%, -100%);
-            transform: translate(-50%, -100%);           
-        }
-
         .km-pane-wrapper .k-pager-numbers .k-link,
         .km-pane-wrapper .k-pager-numbers .k-state-selected,
         .km-pane-wrapper .k-pager-wrap > .k-link,
@@ -3928,4 +3916,71 @@ div.k-scheduler-marquee:after {
 .k-button-wrap .k-button {
     font-size: 21px;
     padding: 7px 13px;
+}
+
+@import "themes/spreadsheet.less";
+
+@spreadsheet-header-background: @background;
+@spreadsheet-pane-border: darken(@background, 20%);
+@spreadsheet-cell-border: darken(@background, 10%);
+
+@active-header-text: contrast(@accent);
+@inactive-header-text: screen(@accent, #808080);
+@header-element-hover: multiply(@accent, #ccc);
+
+.k-spreadsheet {
+    .k-spreadsheet-quick-access-toolbar,
+    .k-spreadsheet-sheets-bar {
+        .k-button {
+            box-shadow: none;
+            color: @active-header-text;
+            border-radius: 0;
+            line-height: 2.6em;
+            width: 3em;
+
+            &:hover {
+                background-color: @header-element-hover;
+                border-color: @header-element-hover;
+            }
+        }
+    }
+
+    .k-spreadsheet-sheets-bar .k-button {
+        left: 0;
+        bottom: 0;
+        padding-top: .5em;
+        padding-bottom: .5em;
+        line-height: 2.2em;
+    }
+
+    .k-spreadsheet-sheets-remove {
+        margin: 0 0 0 -1em;
+    }
+}
+
+.k-spreadsheet-sheets-items,
+.k-spreadsheet-tabstrip {
+    .k-state-default .k-link {
+        color: @inactive-header-text;
+    }
+
+    .k-item.k-state-hover,
+    .k-item.k-state-active,
+    .k-item.k-state-focused {
+        background-color: transparent;
+
+        .k-link {
+            color: @active-header-text;
+        }
+    }
+
+    .k-state-active .k-link {
+        color: @active-header-text;
+    }
+}
+
+.k-spreadsheet-toolbar {
+    > .k-button:not(.k-overflow-anchor) {
+        line-height: 2em;
+    }
 }
