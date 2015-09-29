@@ -10,11 +10,11 @@ var __meta__ = { // jshint ignore:line
     depends: [ "core" ]
 };
 
-(function ($, undefined) {
+(function ($, angular, undefined) {
     if (!kendo.support.customElements) {
         return;
     }
-    if (angular && (angular.version.major == 1) || angular.injector) {
+    if (angular && (angular.version.major == 1 || angular.injector)) {
         return;
     }
     var TAGNAMES = {
@@ -208,7 +208,7 @@ var __meta__ = { // jshint ignore:line
             prototype: prototype
         });
     }
-})(window.kendo.jQuery);
+})(window.kendo.jQuery, window.angular);
 
 return window.kendo;
 
