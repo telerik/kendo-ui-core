@@ -14,6 +14,9 @@ var __meta__ = { // jshint ignore:line
     if (!kendo.support.customElements) {
         return;
     }
+    if (angular && (angular.version.major == 1) || angular.injector) {
+        return;
+    }
     var TAGNAMES = {
         editor         : "textarea",
         numerictextbox : "input",
