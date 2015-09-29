@@ -595,12 +595,19 @@ Gets or sets the validation of the cells.
 The validation configuration object. It may contain `type`, `comparerType`, `dataType`, `from`, `to`, `allowNulls`, `messageTemplate` and `titleTemplate` keys.
 
 The `type` Can be set to "warning" or "reject". By default the type is "warning".
+
 The `comparerType` Can be set to "greaterThan", "lessThan", "between", "equalTo", "notEqualTo", "greaterThanOrEqualTo", "lessThanOrEqualTo", "notBetween" or "custom".
+
 The `dataType` Can be set to "date", "text", "number" or "custom".
+
 The `from` This key holds formula or value. Used as first or only compare value depending on specified comparer.
+
 The `to` This key can be set to formula or value. It's optional depending on the specified comparer.
+
 The `allowNulls` Can be set to boolean value.
+
 The `messageTemplate` The message which will be displayed in the "reject" validation window.
+
 The `titleTemplate` The title of the "reject" validation window.
 
 #### Returns
