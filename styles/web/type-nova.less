@@ -1547,6 +1547,8 @@ html .km-pane-wrapper .km-widget,
             top: 0;
         }
 
+        .k-gantt-toolbar > ul.k-gantt-views > li.k-current-view,
+        .k-gantt-toolbar > ul.k-gantt-views > li.k-current-view:hover,    
         .k-scheduler-toolbar > ul.k-scheduler-views > li.k-current-view,
         .k-scheduler-toolbar > ul.k-scheduler-views > li.k-current-view:hover {
             background-position: 50% 50%;
@@ -1556,23 +1558,28 @@ html .km-pane-wrapper .km-widget,
             text-align: right;
         }
 
+        .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded > li,
         .k-scheduler-toolbar > ul.k-scheduler-views.k-state-expanded > li {
             border-radius: 0;
         }
 
+        .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded > .k-state-hover,
         .k-scheduler-toolbar > ul.k-scheduler-views.k-state-expanded > .k-state-hover {
             background-color: @hover-background;
         }
 
+        .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded >.k-state-selected,
         .k-scheduler-toolbar > ul.k-scheduler-views.k-state-expanded >.k-state-selected {
             color: @selected-text-color;
             background-color: @selected-background;
         }
 
+        .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded >.k-state-hover .k-link,
         .k-scheduler-toolbar > ul.k-scheduler-views.k-state-expanded >.k-state-hover .k-link {
             background-color: transparent;
         }
 
+        .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded > li.k-current-view .k-link,
         .k-scheduler-toolbar > ul.k-scheduler-views.k-state-expanded > li.k-current-view .k-link {
             color: @inversed-text-color;
         }
@@ -1588,10 +1595,12 @@ html .km-pane-wrapper .km-widget,
             min-width: 20px;
         }
 
+        .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded .k-link,
         .k-scheduler-toolbar > ul.k-scheduler-views.k-state-expanded .k-link {
             color: @link-text-color;
         }
 
+        .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded .k-state-selected .k-link,
         .k-scheduler-toolbar > ul.k-scheduler-views.k-state-expanded .k-state-selected .k-link {
             color: @selected-text-color;
         }
@@ -1783,6 +1792,10 @@ html .km-pane-wrapper .km-widget,
 
         .k-pager-numbers.k-state-expanded li {
             display: inline-block;
+        }
+
+        .k-gantt-toolbar > ul.k-gantt-views {
+            top: 0;
         }
     }
 }

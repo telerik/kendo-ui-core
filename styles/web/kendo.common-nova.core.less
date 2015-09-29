@@ -863,10 +863,23 @@ div.editorToolbarWindow.k-window-content {
 }
 
 .k-gantt-toolbar li .k-link,
-.k-scheduler-toolbar li .k-link {
+.k-scheduler-toolbar li .k-link,
+.k-gantt-toggle {
     vertical-align: middle;
-    line-height: 44px;
-    padding-top: 2px;
+    line-height: 46px;
+}
+
+.k-gantt-toggle {
+    padding: 0
+}
+
+.k-gantt-actions {
+    vertical-align: middle;
+    line-height: 48px;
+}
+
+.k-gantt-actions > .k-button {
+     vertical-align: middle;
 }
 
 .k-gantt-toolbar,
@@ -1152,6 +1165,11 @@ div.editorToolbarWindow.k-window-content {
 
     .k-i-expand {
         background-position: 0 0;
+    }
+
+    .k-i-gantt-toggle,
+    .k-button:not(.k-state-disabled):hover .k-i-gantt-toggle {
+        background-position: -80px -240px;
     }
 }
 
