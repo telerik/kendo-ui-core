@@ -26,6 +26,89 @@ The height of the header row in pixels.
 ### headerWidth `Number` *(default: 32)*
 The width of the header column in pixels.
 
+### excel `Object`
+
+Configures the Kendo UI Spreadsheet Excel export settings.
+
+### excel.fileName `String` *(default: "Spreasheet.xslx")*
+
+Specifies the file name of the exported Excel file.
+
+#### Example - set the default Excel file name
+```html
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                name: "Food Order",
+                mergedCells: [
+                    "A1:G1"
+                ],
+                rows: [{
+                    height: 70,
+                    cells: [{
+                        value: "My Company", fontSize: 32, textAlign: "center"
+                    }]
+                }],
+            }],
+            excel: {
+                fileName: "Order.xlsx"
+            }
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.saveAsExcel();
+    </script>
+```
+
+### excel.forceProxy `Boolean` *(default: false)*
+If set to true, the content will be forwarded to [proxyURL](#configuration-excel.proxyURL) even if the browser supports saving files locally.
+
+### excel.proxyURL `String` *(default: null)*
+
+The URL of the server side proxy which will stream the file to the end user.
+
+A proxy will be used when the browser isn't capable of saving files locally.
+Such browsers are IE version 9 and lower and Safari.
+
+The developer is responsible for implementing the server-side proxy.
+
+The proxy will receive a POST request with the following parameters in the request body:
+
+* contentType: The MIME type of the file
+* base64: The base-64 encoded file content
+* fileName: The file name, as requested by the caller.
+
+The proxy should return the decoded file with the "Content-Disposition" header set to
+`attachment; filename="<fileName.xslx>"`.
+
+#### Example - set the server proxy URL
+```html
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                name: "Food Order",
+                mergedCells: [
+                    "A1:G1"
+                ],
+                rows: [{
+                    height: 70,
+                    cells: [{
+                        value: "My Company", fontSize: 32, textAlign: "center"
+                    }]
+                }],
+            }],
+            excel: {
+                proxyURL: "/save"
+            }
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.saveAsExcel();
+    </script>
+```
+
 ### rowHeight `Number` *(default: 20)*
 The default row height in pixels.
 
@@ -49,6 +132,11 @@ The zero-based index of the column. Required to ensure correct positioning.
 
 ### sheets.columns.width `Number`
 The width of the column in pixels. Defaults to [columnWidth](#configuration-columnWidth).
+
+### sheets.dataSource `kendo.data.DataSource`
+The data source instance for this sheet.
+
+See [Bind to Data Source](/web/spreadsheet/import-and-export-data/bind-to-data-source).
 
 ### sheets.filter `Object`
 Defines the filtering criteria for this sheet, if any.
@@ -315,7 +403,7 @@ Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) 
 > Calling this method could trigger the browser built-in popup blocker in some cases. To avoid that, always call it as a response to an end-user action e.g. button click.
 
 #### Example - manually initiate Excel export
-
+```html
     <button id="export">Export to Excel</button>
     <div id="spreadsheet"></div>
     <script>
@@ -339,8 +427,9 @@ Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) 
         });
     </script>
 
-    <!-- Load Pako ZLIB library to enable PDF compression -->
-    <script src="http://cdn.kendostatic.com/2015.2.624/js/pako_deflate.min.js"></script>
+    <!-- Load JSZIP library to enable Excel export -->
+    <script src="http://cdn.kendostatic.com/2015.2.624/js/jszip.min.js"></script>
+```
 
 ### sheetByName
 Returns a sheet matching the specified name, if any.
@@ -496,7 +585,7 @@ The Excel [workbook configuration object](/api/javascript/ooxml/workbook#configu
 If invoked the grid will not save the generated file.
 
 #### Example - subscribe to the "excelExport" event during initialization
-
+```html
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -520,9 +609,10 @@ If invoked the grid will not save the generated file.
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsExcel();
     </script>
+```
 
 #### Example - subscribe to the "excelExport" event after initialization
-
+```html
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -547,4 +637,5 @@ If invoked the grid will not save the generated file.
 
         spreadsheet.saveAsExcel();
     </script>
+```
 

@@ -6,8 +6,12 @@ position: 2
 
 # Format strings
 
-The supported format string is mostly Excel-compatible.  A format string consists of one or more sections (separated
-with semicolons).  A section can optionally specify a color and a condition.  Here are some examples:
+The supported format strings are compatible with
+[Excel number formats](https://support.office.com/en-au/article/Create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4),
+with some [notable exceptions](#differences-to-excel).
+
+A format string consists of one or more sections (separated with semicolons).
+A section can optionally specify a color and a condition.  Here are some examples:
 
 Display a number with at most 3 decimals:
 

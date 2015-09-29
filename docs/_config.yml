@@ -182,8 +182,6 @@ navigation:
         title: "PivotGrid"
     "*grid":
         title: "Grid"
-    "web/spreadsheet":
-        title: "Spreadsheet"
     "*listview":
         title: "ListView"
     "*maskedtextbox":

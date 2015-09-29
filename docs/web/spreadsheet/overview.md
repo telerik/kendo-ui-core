@@ -76,4 +76,12 @@ The range is retrieved using a string with [A1](https://msdn.microsoft.com/en-us
 
 ## Data import/export
 
+The Spreadsheet widget offers methods for storing and loading data in a JSON format.
+See [Store as JSON](import-and-export-data/overview).
+
+Built-in [Export to Excel](import-and-export/export-to-excel) is also available and works entirely in the browser.
+
 ## Data Binding
+
+Individual sheets can be bound to a Data Source in a special data-driven mode.
+See [Bind to Data Source](import-and-export/bind-to-data-source).

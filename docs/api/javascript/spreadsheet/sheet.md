@@ -131,7 +131,41 @@ The zero-based index of the row
 ```
 
 ### fromJSON
-**TODO**
+
+Loads the widget state and sheet data from JSON.
+
+The schema follows the same structure as the [widget configuration](/api/javascript/ui/spreadsheet#configuration).
+
+> An official JSON schema will be published once the component goes out of Beta.
+
+#### Parameters
+
+##### data `Object`
+
+The object to load data from.  This should be **the deserialized object**, not the JSON string.
+
+#### Example - Load spreadsheet from JSON
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.fromJSON({
+            sheets: [{
+                name: "Food Order",
+                mergedCells: [
+                    "A1:G1"
+                ],
+                rows: [{
+                    height: 70,
+                    cells: [{
+                        value: "My Company", fontSize: 32, textAlign: "center"
+                    }]
+                }]
+            }]
+        });
+    </script>
 
 ### frozenColumns
 
@@ -393,7 +427,39 @@ Returns a range with the current active selection.
 
 ### toJSON
 
-**TODO**
+Stores the widget state and sheet data to JSON format.
+
+The schema follows the same structure as the [widget configuration](/api/javascript/ui/spreadsheet#configuration).
+
+> An official JSON schema will be published once the component goes out of Beta.
+
+#### Example - Store spreadsheet to JSON
+
+    <div id="spreadsheet"></div>
+    <pre id="result"></pre>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                name: "Food Order",
+                mergedCells: [
+                    "A1:G1"
+                ],
+                rows: [{
+                    height: 70,
+                    cells: [{
+                        value: "My Company", fontSize: 32, textAlign: "center"
+                    }]
+                }]
+            }]
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        var data = spreadsheet.toJSON();
+        var json = JSON.stringify(data, null, 2);
+
+        $("#spreadsheet").remove();
+        $("#result").text(json);
+    </script>
 
 ### unhideColumn
 
