@@ -13,31 +13,209 @@ Represents the Kendo UI Spreadsheet widget. Inherits from [Widget](/api/javascri
 ### activeSheet `String`
 The name of the currently active sheet.
 
+Must match one of the (sheet names)[#configuration-sheets.name] exactly.
+
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet({
+            activeSheet: "Budget",
+            sheets: [{ name: "Food Order" }, { name: "Budget" }]
+        });
+    </script>
+```
+
 ### columnWidth `Number` *(default: 64)*
+
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet({
+            columnWidth: 100
+        });
+    </script>
+```
 
 ### columns `Number` *(default: 50)*
 
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet({
+            columns: 30
+        });
+    </script>
+```
+
+
 ### headerHeight `Number` *(default: 20)*
+
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet({
+            headerHeight: 50
+        });
+    </script>
+```
+
 
 ### headerWidth `Number` *(default: 32)*
 
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet({
+            headerWidth: 50
+        });
+    </script>
+```
+
+
 ### rowHeight `Number` *(default: 20)*
+
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet({
+            rowHeight: 50
+        });
+    </script>
+```
+
 
 ### rows `Number` *(default: 200)*
 
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet({
+            rows: 300
+        });
+    </script>
+```
+
 ### sheets `Array`
 
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [
+                { name: "S1" },
+                { name: "S2" }
+            ]
+        });
+    </script>
+```
+
 ### sheets.activeCell `String`
-The active cell in the sheet, e.g. "A1".
+The active cell in the sheet, e.g. `"A1"`.
+
+> Setting the active sheet won't modify the sheet selection, so it may have to be set, too.
+
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [
+                { name: "S1", activeCell: "B2", selection: "A1:B2" },
+                { name: "S2", activeCell: "C3", selection: "A1:C3" }
+            ]
+        });
+    </script>
+```
 
 ### sheets.name `String`
+
 The name of the sheet.
+
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [ { name: "S1" } ]
+        });
+    </script>
+```
 
 ### sheets.columns `Array`
 
+An array defining the columns in this sheet and their content.
+
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [ { columns: columns: [ { index: 1, width: 200 }] } ]
+        });
+    </script>
+```
+
 ### sheets.columns.index `Number`
 
+The zero-based index of the column. Required to ensure correct positioning.
+
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [ { columns: columns: [ { index: 1, width: 200 }] } ]
+        });
+    </script>
+```
+
 ### sheets.columns.width `Number`
+
+The width of the column in pixels. Defaults to [columnWidth](#configuration-columnWidth).
+
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [ { columns: columns: [ { index: 1, width: 200 }] } ]
+        });
+    </script>
+```
 
 ### sheets.filter `Object`
 
@@ -61,11 +239,80 @@ The name of the sheet.
 
 ### sheets.frozenColumns `Number`
 
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [ { frozenColumns: 3 } ]
+        });
+    </script>
+```
+
+
 ### sheets.frozenRows `Number`
+
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [ { frozenRows: 3 } ]
+        });
+    </script>
+```
 
 ### sheets.mergedCells `Array`
 
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [ { mergedCells: [ "A1:B2", "C3:D6" ] } ]
+        });
+    </script>
+```
+
 ### sheets.rows `Array`
+
+
+#### Initialize Spreadsheet with data, using `sheets.rows` configuration option
+
+```
+    <div id="spreadsheet"></div>
+
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [
+                {
+                    name: "Populated" ,
+                    rows: [
+                        {
+                            index: 2,
+                            cells: [
+                                { index: 3, background: "red", color: "green", value: "D3" },
+                                { index: 10, color: "blue", value: "a value" }
+                            ]
+                        },
+                        {
+                            index: 5,
+                            cells: [
+                                { index: 0, color: "red", value: "A6" }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        });
+    </script>
+```
 
 ### sheets.rows.cells `Array`
 
@@ -93,6 +340,20 @@ The name of the sheet.
 
 ### sheets.rows.cells.formula `String`
 
+The cell formula **without the leading equals** sign, e.g. `"A1 * 10"`.
+
+### sheets.rows.cells.index `Number`
+The zero-based index of the cell. **Required** to ensure correct positioning.
+
+### sheets.rows.cells.textAlign `String`
+The text align setting for the cell content.
+
+Available options are:
+* `"left"`
+* `"center"`
+* `"right"`
+* `"justify"`
+
 ### sheets.rows.cells.index `Number`
 
 ### sheets.rows.cells.textAlign `String`
@@ -103,14 +364,56 @@ The name of the sheet.
 
 ### sheets.rows.cells.verticalAlign `String`
 
+The vertical align setting for the cell content.
+
+Available options are:
+* `"left"`
+* `"center"`
+* `"right"`
+* `"justify"`
+
 ### sheets.rows.cells.wrap `Boolean`
 
 ### sheets.rows.height `Number`
 
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [
+                {
+                    name: "Populated" ,
+                    rows: [
+                        {
+                            index: 2,
+                            height: 100
+                        }
+                    ]
+                }
+            ]
+        });
+    </script>
+```
+
 ### sheets.rows.index `Number`
 
 ### sheets.selection `String`
-The selected range in the sheet, e.g. "A1:B10".
+The selected range in the sheet, e.g. `"A1:B10"`.
+
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [ {selection: "B3:D4"} ]
+        });
+    </script>
+```
 
 ### sheets.sort `Object`
 
@@ -124,6 +427,18 @@ The selected range in the sheet, e.g. "A1:B10".
 
 ### toolbar `Boolean` *(default: true)*
 
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [ { toolbar: false } ]
+        });
+    </script>
+```
+
 ## Methods
 
 ### activeSheet
@@ -136,11 +451,53 @@ The selected range in the sheet, e.g. "A1:B10".
 
 `kendo.spreadsheet.Sheet` the active sheet.
 
+#### Example
+
+```
+    <button>Select Sheet 2</button>
+    <div id="spreadsheet"></div>
+
+
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [ {selection: "B3:D4"}, { }, { } ]
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        $("button").click(function() {
+            spreadsheet.activeSheet(spreadsheet.sheets()[1]);
+        });
+    </script>
+```
+
 ### sheets
 
 #### Returns
 
 `Array` the available sheets.
+
+#### Example
+
+```
+    <button>Console log sheets</button>
+    <div id="spreadsheet"></div>
+
+
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [ {selection: "B3:D4"}, { }, { } ]
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        $("button").click(function() {
+            console.log(spreadsheet.sheets()[1]);
+        });
+    </script>
+```
 
 ### saveAsExcel
 
@@ -186,6 +543,28 @@ Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) 
 
 `kendo.spreadsheet.Sheet` the sheet that match the name.
 
+
+#### Example
+
+```
+    <button>Get sheet</button>
+    <div id="spreadsheet"></div>
+
+
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [ { name: "S1", selection: "B3:D4"}, { name: "S2" }, { name: "S3" } ]
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        $("button").click(function() {
+            console.log(spreadsheet.sheetByName("S1"));
+        });
+    </script>
+```
+
 ### sheetIndex
 
 #### Parameters
@@ -195,6 +574,27 @@ Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) 
 #### Returns
 
 `Number` the sheet index.
+
+#### Example
+
+```
+    <button>Get sheet index</button>
+    <div id="spreadsheet"></div>
+
+
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [ { name: "S1", selection: "B3:D4"}, { name: "S2" }, { name: "S3" } ]
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        $("button").click(function() {
+            console.log(spreadsheet.sheetIndex(spreadsheet.sheetByName("S2")));
+        });
+    </script>
+```
 
 ### sheetByIndex
 
@@ -206,6 +606,27 @@ Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) 
 
 `kendo.spreadsheet.Sheet` the sheet that match the index.
 
+#### Example
+
+```
+    <button>Get sheet by index</button>
+    <div id="spreadsheet"></div>
+
+
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [ { name: "S1", selection: "B3:D4"}, { name: "S2" }, { name: "S3" } ]
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        $("button").click(function() {
+            console.log(spreadsheet.sheetByIndex(1));
+        });
+    </script>
+```
+
 ### insertSheet
 
 #### Parameters
@@ -216,6 +637,7 @@ Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) 
 
 `kendo.spreadsheet.Sheet` the inserted sheet.
 
+
 ### moveSheetToIndex
 
 #### Parameters
@@ -224,11 +646,54 @@ Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) 
 
 ##### index `Number`
 
+#### Example
+```
+    <button>Move Sheet</button>
+    <div id="spreadsheet"></div>
+
+
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [ { name: "S1", selection: "B3:D4"}, { name: "S2" }, { name: "S3" } ]
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        $("button").click(function() {
+            var secondSheet = spreadsheet.sheetByIndex(1);
+            spreadsheet.moveSheetToIndex(secondSheet, 0);
+        });
+    </script>
+```
+
+
 ### removeSheet
 
 #### Parameters
 
 ##### sheet `kendo.spreadsheet.Sheet`
+
+#### Example
+```
+    <button>Remove Sheet</button>
+    <div id="spreadsheet"></div>
+
+
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [ { name: "S1", selection: "B3:D4"}, { name: "S2" }, { name: "S3" } ]
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        $("button").click(function() {
+            var secondSheet = spreadsheet.sheetByIndex(1);
+            spreadsheet.removeSheet(secondSheet);
+        });
+    </script>
+```
 
 ### renameSheet
 
@@ -237,6 +702,27 @@ Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) 
 ##### sheet `kendo.spreadsheet.Sheet`
 
 ##### newSheetName `String`
+
+#### Example
+```
+    <button>Rename Sheet</button>
+    <div id="spreadsheet"></div>
+
+
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [ { name: "S1", selection: "B3:D4"}, { name: "S2" }, { name: "S3" } ]
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        $("button").click(function() {
+            var secondSheet = spreadsheet.sheetByIndex(1);
+            spreadsheet.renameSheet(secondSheet, "New sheet");
+        });
+    </script>
+```
 
 #### Returns
 
@@ -278,7 +764,7 @@ The Excel [workbook configuration object](/api/javascript/ooxml/workbook#configu
 
 ##### e.preventDefault `Function`
 
-If invoked the grid will not save the generated file.
+If invoked the spreadsheet will not save the generated file.
 
 #### Example - subscribe to the "excelExport" event during initialization
 
