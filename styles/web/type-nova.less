@@ -443,7 +443,7 @@ textarea.k-textbox:hover,
     background-color: @selected-background;
 }
 
-.k-dropdown-wrap.k-state-active .k-input {
+.k-dropdown .k-state-active .k-input {
     color: @selected-text-color;
 }
 
@@ -1148,7 +1148,13 @@ input.k-textbox:active {
 .k-toolbar {
     .k-button,
     .k-button-group {
+        color: @normal-text-color;
         border-color: @widget-border-color;
+    }
+
+    .k-button:active,
+    .k-button.k-state-active {
+        color: @inversed-text-color;
     }
 
     .k-button-group .k-button {
