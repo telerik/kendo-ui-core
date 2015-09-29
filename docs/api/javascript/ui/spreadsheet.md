@@ -362,6 +362,73 @@ Available options are:
 
 ### sheets.rows.cells.value `Number|String|Boolean|Date`
 
+### sheets.rows.cells.validation `Object`
+The validation rule applied to the cell.
+
+#### Initialize Spreadsheet with validation data, using `sheets.rows` configuration option
+```
+    <div id="spreadsheet"></div>
+
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [
+                {
+                    name: "Populated" ,
+                    rows: [
+                        {
+                            index: 2,
+                            cells: [
+                                { index: 3, background: "red", color: "green", value: "D3" },
+                                { index: 10, color: "blue", value: "a value" }
+                            ]
+                        },
+                        {
+                            index: 5,
+                            cells: [
+                                {
+                                    index: 0,
+                                    color: "red",
+                                    value: "A6",
+                                    validation: {
+                                        from: "1",
+                                        to: "2",
+                                        comparerType: "between",
+                                        dataType: "number",
+                                        messageTemplate: "Number should match the validation."
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        });
+    </script>
+```
+### sheets.rows.cells.validation.type `String`
+Defines the validation type. The acceptable options are *reject* or *warning*
+
+### sheets.rows.cells.validation.comparerType `String`
+Defines the comparer type used to validate the cell value, e.g. "greaterThan", "between" and etc.
+
+### sheets.rows.cells.validation.dataType `String`
+Defines the data type of the cell value.
+
+### sheets.rows.cells.validation.from `String`
+Defines a *formula* or *value* used for the comparison process. Used as *only* if comparer type does not require second argument.
+
+### sheets.rows.cells.validation.to `String`
+Defines a *formula* or *value* used for the comparison process. Will be used if comparer type requies second argument.
+
+### sheets.rows.cells.validation.allowNulls `String`
+Specifies whether to allow nulls.
+
+### sheets.rows.cells.validation.messageTemplate `String`
+Defines the *hint* message that will be displayed if value is invalid.
+
+### sheets.rows.cells.validation.titleTemplate `String`
+Defines the *hint* title that will be displayed if value is invalid.
+
 ### sheets.rows.cells.verticalAlign `String`
 
 The vertical align setting for the cell content.
