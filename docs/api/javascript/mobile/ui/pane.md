@@ -205,7 +205,7 @@ The id or URL of the view.
 
 The transition to apply when navigating. See [View Transitions](/mobile/application#view-transitions) for more information.
 
-### Example
+#### Example
 
     <div data-role="splitview">
         <div data-role="pane" id="main-pane">
