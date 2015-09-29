@@ -207,6 +207,31 @@ The index of the first filterable column.
 
 The index of the last filterable column.
 
+### sheets.name `String`
+
+Sets the name of the exported workbook sheet.
+
+#### Example - set the sheet name
+
+    <script>
+        var workbook = new kendo.ooxml.Workbook({
+         sheets: [
+            {
+                columns: [ { autoWidth: true } ],
+                name: "My custom sheet name",
+                rows: [
+                    { cells: [ { value: "short" } ] },
+                    { cells: [ { value: "longer text value" } ] }
+                ]
+            }
+        ]
+    });
+    kendo.saveAs({
+        dataURI: workbook.toDataURL(),
+        fileName: "Test.xlsx"
+    });
+  </script>
+
 ### sheets.rows `Array`
 
 The array of rows of the sheet.
@@ -615,29 +640,7 @@ The row height in pixels.
     </script>
 
 ### sheets.title `String`
-
-Sets the title of the exported workbook sheet.
-
-#### Example - set the sheet title
-
-    <script>
-  		var workbook = new kendo.ooxml.Workbook({
-   		 sheets: [
-        	{
-            	columns: [ { autoWidth: true } ],
-          		title: "My custom sheet title",
-            	rows: [
-              		{ cells: [ { value: "short" } ] },
-              		{ cells: [ { value: "longer text value" } ] }
-            	]
-        	}
-    	]
-  	});
-  	kendo.saveAs({
-    	dataURI: workbook.toDataURL(),
-    	fileName: "Test.xlsx"
-  	});
-  </script>
+Deprecated in versions 2015.3 and newer. Use [name](#configuration-sheets.name) instead.
 
 ## Methods
 
