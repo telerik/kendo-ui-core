@@ -586,7 +586,49 @@ Un-merges any merged cells which are included in the range.
 
 ### validation
 
-TODO:
+Gets or sets the validation of the cells.
+
+#### Parameters
+
+##### value `Object` *optional*
+
+The validation configuration object. It may contain `type`, `comparerType`, `dataType`, `from`, `to`, `allowNulls`, `messageTemplate` and `titleTemplate` keys.
+
+The `type` Can be set to "warning" or "reject". By default the type is "warning".
+The `comparerType` Can be set to "greaterThan", "lessThan", "between", "equalTo", "notEqualTo", "greaterThanOrEqualTo", "lessThanOrEqualTo", "notBetween" or "custom".
+The `dataType` Can be set to "date", "text", "number" or "custom".
+The `from` This key holds formula or value. Used as first or only compare value depending on specified comparer.
+The `to` This key can be set to formula or value. It's optional depending on the specified comparer.
+The `allowNulls` Can be set to boolean value.
+The `messageTemplate` The message which will be displayed in the "reject" validation window.
+The `titleTemplate` The title of the "reject" validation window.
+
+#### Returns
+
+`Object` the current validation of the top-left cell of the range.
+
+#### Example
+
+```html
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        sheet.range("A1").value(4);
+        sheet.range("A1").validation({
+            from: "1",
+            to: "2",
+            comparerType: "between",
+            dataType: "number",
+            messageTemplate: "Number should match the validation."
+        });
+    </script>
+```
 
 ### value
 
