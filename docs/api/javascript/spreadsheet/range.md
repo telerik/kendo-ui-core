@@ -1,5 +1,5 @@
 ---
-title: kendo.spreadsheet.Range
+title: Range
 page_title: Configuration, methods and events of Kendo UI Spreadsheet Range Instance object
 ---
 

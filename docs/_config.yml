@@ -6,7 +6,7 @@ exclude: [readme.md, Gemfile, Gemfile.lock,api_sort.rb]
 navigation:
 ## List your directory names and order here, like this:
     "introduction":
-        title: "Introduction" 
+        title: "Introduction"
     "intro":
         title: "Getting Started with Kendo UI"
         position: 2
@@ -14,7 +14,7 @@ navigation:
         title: "Excel"
     "*how-to":
         title: "How To"
-        position: 1        
+        position: 1
     "framework/datasource":
         title: "DataSource"
         position: 1
@@ -76,7 +76,7 @@ navigation:
     "mobile/drawer":
         title: "Drawer"
     "mobile/forms":
-        title: "Forms"    
+        title: "Forms"
     "mobile/navbar":
         title: "NavBar"
     "mobile/scrollview":
@@ -182,6 +182,8 @@ navigation:
         title: "PivotGrid"
     "*grid":
         title: "Grid"
+    "web/spreadsheet":
+        title: "Spreadsheet"
     "*listview":
         title: "ListView"
     "*maskedtextbox":

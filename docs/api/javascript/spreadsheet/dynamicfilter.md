@@ -1,5 +1,5 @@
 ---
-title: kendo.spreadsheet.DynamicFilter
+title: DynamicFilter
 page_title: Configuration, methods and events of Kendo UI Spreadsheet DynamicFilter Instance object
 ---
 

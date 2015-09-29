@@ -1,7 +1,6 @@
 ---
 title: Overview
-page_title: Overview of Spreadsheet UI widget | Kendo UI Documentation
-description: Quick steps to help you create Kendo UI Spreadsheet
+page_title: Kendo UI Spreadsheet widget - Overview
 position: 1
 ---
 
@@ -49,11 +48,13 @@ A detailed list of the configuration options supported by the widget including s
 
 ## API Overview
 
-The spreadsheet widget instance [exposes a few methods](/api/javascript/ui/spreadsheet) for sheet instance retrieval, insertion and deletion.
+The spreadsheet widget instance [exposes a few methods](/api/javascript/ui/spreadsheet#methods) for sheet instance retrieval, insertion and deletion. The most commonly used one is [activeSheet](/api/javascript/ui/spreadsheet#methods-activeSheet)
 
-The [sheet object instance](/api/javascript/spreadsheet/sheet) interface allows for sheet level settings and options to be set.
+The [sheet object instance](/api/javascript/spreadsheet/sheet) interface gives the developer the ability to get/set various sheet level settings and data.
 
 The sheet `range` method is used to retrieve a *[Range](/api/javascript/spreadsheet/range) instance* which may be used to manipulate one (or more) cell regions of the sheet.
+
+The range is retrieved using a string with [A1](https://msdn.microsoft.com/en-us/library/bb211395.aspx) or [RC notation](http://excelribbon.tips.net/T008803_Understanding_R1C1_References.html) notation.
 
 ### Set value for a range of cells
 ``` html
@@ -72,6 +73,7 @@ The sheet `range` method is used to retrieve a *[Range](/api/javascript/spreadsh
         range.value("foo").color("green");
     </script>
 ```
+
 ## Data import/export
 
 ## Data Binding
