@@ -4,7 +4,7 @@
     if (kendo.ui.FlatColorPicker) {
         kendo.ui.FlatColorPicker.prototype.options.messages =
         $.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages, {
-            "apply": "باشه",
+            "apply": "تایید",
             "cancel": "انصراف"
         });
     }
@@ -14,7 +14,7 @@
     if (kendo.ui.ColorPicker) {
         kendo.ui.ColorPicker.prototype.options.messages =
         $.extend(true, kendo.ui.ColorPicker.prototype.options.messages, {
-            "apply": "باشه",
+            "apply": "تایید",
             "cancel": "انصراف"
         });
     }
@@ -126,8 +126,8 @@
     if (kendo.ui.FilterCell) {
         kendo.ui.FilterCell.prototype.options.messages =
         $.extend(true, kendo.ui.FilterCell.prototype.options.messages, {
-            "isTrue": "درست باشه",
-            "isFalse": "درست نباشه",
+            "isTrue": "درست باشد",
+            "isFalse": "درست نباشد",
             "filter": "فیلتر",
             "clear": "پاک کردن",
             "operator": "عملگر"
@@ -158,9 +158,9 @@
             "date": {
                 "eq": "برابر باشد با",
                 "neq": "برابر نباشد با",
-                "gte": "بعد یا برابر باشد با",
+                "gte": "پس از یا هم زمان باشد با",
                 "gt": "بعد از",
-                "lte": "قبل یا برابر باشد با",
+                "lte": "قبل از یا هم زمان باشد با",
                 "lt": "قبل از"
             },
             "enums": {
@@ -213,9 +213,9 @@
             "date": {
                 "eq": "برابر باشد با",
                 "neq": "برابر نباشد با",
-                "gte": "بعد یا برابر باشد با",
+                "gte": "پس از یا هم زمان باشد با",
                 "gt": "بعد از",
-                "lte": "قبل یا برابر باشد با",
+                "lte": "قبل از یا هم زمان باشد با",
                 "lt": "قبل از"
             },
             "enums": {
