@@ -42,16 +42,6 @@ HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to co
 * [Evaluate UI for ASP.NET MVC](http://www.telerik.com/download/aspnet-mvc)
 * [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/aspnet-mvc)
 
-
-[UI for ASP.NET MVC](/aspnet-mvc/introduction) is a Kendo UI product flavor which targets ASP.NET MVC developers. It includes all Kendo UI Professional components as well as
-HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to configure the Kendo UI widgets via C# code.
-
-* [List of Kendo UI Components](/intro/list-of-widgets)
-* [Browser Support](/intro/browser-support)
-* [Get a License](http://www.telerik.com/purchase/aspnet-mvc)
-* [Evaluate UI for ASP.NET MVC](http://www.telerik.com/download/aspnet-mvc)
-* [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/aspnet-mvc)
-
 [UI for JSP](/jsp/introduction) is a Kendo UI product flavor which targets the Java web application developers. It includes JSP (Java Server Pages) tags for all Kendo UI Professional widgets.
 
 * [List of Kendo UI Components](/intro/list-of-widgets)
