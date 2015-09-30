@@ -117,6 +117,17 @@
         background-color: @background;
         color: @normal-text-color;
     }
+
+    .k-resize-handle,
+    .k-resize-hint-handle,
+    .k-resize-hint-marker {
+        background-color: @selected-background;
+    }
+
+    .k-resize-hint-vertical .k-resize-hint-handle,
+    .k-resize-hint-vertical .k-resize-hint-marker {
+        background-color: @selected-background;
+    }
 }
 
 .k-spreadsheet-format-cells .k-spreadsheet-preview {
@@ -157,17 +168,6 @@
 .k-spreadsheet-window .k-list {
     border-color: @widget-border-color;
     border-radius: @border-radius;
-}
-
-.k-resize-handle,
-.k-resize-hint-handle,
-.k-resize-hint-marker {
-    background-color: @selected-background;
-}
-
-.k-resize-hint-vertical .k-resize-hint-handle,
-.k-resize-hint-vertical .k-resize-hint-marker {
-    background-color: @selected-background;
 }
 
 .k-spreadsheet-toolbar {
