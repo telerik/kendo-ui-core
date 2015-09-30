@@ -85,18 +85,17 @@ The LESS command-line compiler can be used to build source LESS files to CSS ski
 The LESS files that can be passed to the compiler are located in the first level folders inside styles/ folder -
 styles/web/ and styles/mobile/. Kendo UI Mobile files are self explanatory - except meego.less, which is deprecated, the rest of the files can be built with
 LESS and produce all platform themes and several special use CSS files (including kendo.mobile.all.css).
-The Kendo UI Web LESS files' naming is listed below:
+The LESS files of Kendo UI are named as follows.
 
-*   **kendo.[skin-name].less** - skin variables file, builds with compiler - produces the skin;
-*   **kendo.[skin-name].mobile.less** - mobile widgets styling for the corresponding skin, references the variables file above, builds - produces the mobile skin;
-*   **kendo.common.core.less** - core Common LESS file, references only the common core, builds - produces the common core CSS;
-*   **kendo.common.less** - full Common LESS file, builds - produces the common Web CSS;
-*   **kendo.common-bootstrap.core.less** - core Bootstrap common, builds - produces the core common Bootstrap CSS;
-*   **kendo.common-bootstrap.less** - full Bootstrap common, builds - produces the common Bootstrap CSS;
-*   **kendo.rtl.css** - RTL styles, CSS only;
-*   **kendo.winjs.less** - WinJS specific styles, builds;
-*   **theme-template.less** - common skin template, referenced by all skins, doesn't build;
-*   **type-metro.less** - common metro skin template, referenced by all metro skins, doesn't build;
+*   **kendo.[theme-name].less** - File that contains theme variables. Building it produces a theme file. Does not include styles for mobile widgets.
+*   **kendo.[theme-name].mobile.less** - File that contains styling for all widgets (including mobile). Builing it produces a theme file for all widgets.
+*   **kendo.common.less** - Default sizing file for all Kendo UI widgets. Building it produces a common file for all Kendo UI widgets.
+*   **kendo.common-[theme-tname].less** - Sizing adjustments for [theme-name] for all Kendo UI widgets. Building it produces a common file for all Kendo UI widgets.
+*   **kendo.common.core.less** - Default sizing file for Kendo UI Core widgets. Building it produces a common file for Kendo UI Core widgets.
+*   **kendo.common-[theme-tname].core.less** - Sizing adjustments for [theme-name] for Kendo UI Core widgets. Building it produces a common file for Kendo UI Core widgets.
+*   **kendo.winjs.less** - WinJS specific styles.
+*   **kendo.rtl.css** - Styles for widgets in RTL mode, CSS only.
+*   **type-[theme-name].less** - Supporting files that cannot be built. Translates the colors from kendo.[theme-name].less to the theme colors to a usable theme.
 
 The Kendo UI Web LESS files (including the Kendo UI Web mobile widgets styling) can be built using LESS version 1.7.5.
 
