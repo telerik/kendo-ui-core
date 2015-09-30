@@ -168,11 +168,12 @@ test("defining header template", function() {
 
 test("highlight first item", function() {
     var autocomplete = new AutoComplete(input, {
+        animation: false,
         dataSource: ["1", "2", "3"],
         highlightFirst: true
     });
 
-    autocomplete.dataSource.query();
+    autocomplete.search("1");
 
     ok(autocomplete.ul.children().eq(0).hasClass("k-state-focused"));
 });

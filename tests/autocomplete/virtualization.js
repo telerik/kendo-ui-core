@@ -31,6 +31,7 @@
                     }, 0);
                 }
             },
+            serverFiltering: true,
             serverPaging: true,
             pageSize: 40,
             schema: {
@@ -43,7 +44,7 @@
     module("kendo.ui.AutoComplete Virtualization", {
         setup: function() {
             kendo.ns = "";
-            select = $("<select multiple />").appendTo(QUnit.fixture);
+            select = $("<input />").appendTo(QUnit.fixture);
         },
         teardown: function() {
             if (select.data("kendoAutoComplete")) {
@@ -80,7 +81,7 @@
         autocomplete.search("Item");
     });
 
-    asyncTest("does not select duplicated values", 2, function() {
+    asyncTest("should clear selected item on popup open", 2, function() {
         var autocomplete = new AutoComplete(select, {
             close: function(e) { e.preventDefault(); },
             height: CONTAINER_HEIGHT,
@@ -90,7 +91,7 @@
                 transport: {
                     read: function(options) {
                         setTimeout(function() {
-                            options.success({ 
+                            options.success({
                                 data: [
                                     { id: 1, text: "Item " + 1 },
                                     { id: 11, text: "Item " + 1 },
@@ -99,7 +100,7 @@
                                     { id: 11111, text: "Item " + 1 },
                                     { id: 111111, text: "Item " + 1 }
                                 ],
-                                total: 6 
+                                total: 6
                             });
                         }, 0);
                     }
@@ -118,12 +119,12 @@
             value: "Item 1"
         });
 
-        autocomplete.one("dataBound", function() {
+        autocomplete.popup.one("activate", function() {
             var selectedCount = autocomplete.listView.items().filter(".k-state-selected").length
 
             start();
-            equal(selectedCount, 1);
-            ok(autocomplete.listView.items().eq(0).hasClass("k-state-selected"));
+            equal(selectedCount, 0);
+            ok(!autocomplete.listView.items().eq(0).hasClass("k-state-selected"));
         });
 
         autocomplete.search("Item");
