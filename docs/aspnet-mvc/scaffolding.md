@@ -33,11 +33,11 @@ Select the **Kendo UI Scaffolder** from the next menu:
 
 ![Kendo UI Scaffolder](/aspnet-mvc/images/scaffolding/kendo_ui_scaffolder.png)
 
-This will bring up the **Kendo UI** scaffolding configuration panel to choose between Kendo UI Grid or Chart:
+This will bring up the **Kendo UI** scaffolding configuration panel to choose between Kendo UI Grid, Chart and Scheduler:
 
 ![Kendo UI Scaffolder Widget Selection](/aspnet-mvc/images/scaffolding/widget_select.png)
 
-Detailed information about the possible configuration options could be found in the [scaffolding section of the Grid Helper documentation](/aspnet-mvc/helpers/grid/scaffolding) and [scaffolding section of the Chart Helper documentation](/aspnet-mvc/helpers/chart/scaffolding). The Controller will be generated in the currently selected location along with the corresponding view.
+Detailed information about the possible configuration options could be found in the [scaffolding section of the Grid Helper documentation](/aspnet-mvc/helpers/grid/scaffolding), [scaffolding section of the Chart Helper documentation](/aspnet-mvc/helpers/chart/scaffolding) and [scaffolding section of the Scheduler Helper documentation](/aspnet-mvc/helpers/scheduler/scaffolding). The Controller will be generated in the currently selected location along with the corresponding view.
 
 # Troubleshooting
 
