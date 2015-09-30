@@ -92,9 +92,8 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | Insert				| **1.** Select a row by clicking on the respective row number |
 | 						| **2.** Click the **Insert** tab from the **Menu** |
 | 						| **3.** Click **Add Row Below** [ <span class="k-font-icon k-i-add-row-below"></span> ] or **Add Row Above** [ <span class="k-font-icon k-i-add-row-above"></span> ] on the Toolbar |
-| Delete				| **1.** Select a row by clicking on its row number|
-|						| **2.** Right-click on the row number |
-|						| **3.** Choose **Delete** |
+| Delete				| **1.** Right-click on the row number |
+|						| **2.** Choose **Delete** |
 | Delete (via the Toolbar) | **1.** Select a row by clicking on its row number |
 |						| **2.** In the **Menu** click **Insert** |
 |						| **3.** On the Toolbar click **Delete Row** [ <span class="k-font-icon k-i-delete-row"></span> ] |
