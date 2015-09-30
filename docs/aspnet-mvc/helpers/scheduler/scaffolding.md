@@ -15,7 +15,7 @@ The following tutorial shows how to scaffold a Kendo UI Scheduler for ASP.NET MV
 1.  Create a new ASP.NET MVC application, include an Entity Framework Data Model and add **Telerik UI for ASP.NET MVC**. If you have already done so, you can skip to the next step, otherwise you can follow the first 5 steps of the [following tutorial](/aspnet-mvc/helpers/scheduler/ajax-editing#getting-started).
 
 2.  Right click on the location where the Scheduler Controller should be generated and select **Add | New Scaffolded item...** from the displayed menu. In this example we will generate it in the **Controllers** folder.
-![New Scaffolded Item](/aspnet-mvc/images/scaffolding/scheduler_new_scaffolded_item.png)
+![New Scaffolded Item](/aspnet-mvc/helpers/scheduler/images/scaffolding/scheduler_new_scaffolded_item.png)
 
 3.  Select **Kendo UI Scaffolder** from the list of available scaffolders and then select the desired Scheduler option.
 ![Kendo UI Scaffolder](/aspnet-mvc/images/scaffolding/kendo_ui_scaffolder.png)
