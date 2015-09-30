@@ -152,10 +152,10 @@ If you want to skip building Kendo UI Core yourself, head on over to [Telerik.co
 You can also easily include Kendo UI Core in your site or application by using the Kendo CDN:
 
 ```
-<link href="http://cdn.kendostatic.com/2014.2.716/styles/kendo.common.min.css" rel="stylesheet" />
-<link href="http://cdn.kendostatic.com/2014.2.716/styles/kendo.default.min.css" rel="stylesheet" />
-<script src="http://cdn.kendostatic.com/2014.2.716/js/jquery.min.js"></script>
-<script src="http://cdn.kendostatic.com/2014.2.716/js/kendo.ui.core.min.js"></script>
+<link href="http://kendo.cdn.telerik.com/2014.2.716/styles/kendo.common.min.css" rel="stylesheet" />
+<link href="http://kendo.cdn.telerik.com/2014.2.716/styles/kendo.default.min.css" rel="stylesheet" />
+<script src="http://kendo.cdn.telerik.com/2014.2.716/js/jquery.min.js"></script>
+<script src="http://kendo.cdn.telerik.com/2014.2.716/js/kendo.ui.core.min.js"></script>
 ```
 The main advantage of the CDN approach is that your users may be able to leverage a primed cache version of Kendo UI Core if they've visited other sites using the framework.
 
