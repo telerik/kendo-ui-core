@@ -1017,6 +1017,21 @@ The filter value.
 
 Gets or sets the selected item. Selects the item provided as an argument and updates the value and text of the widget.
 
+> **Important:** This method **does not trigger** [change](#events-change) event.
+This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      dataSource: [ "Apples", "Oranges" ]
+    });
+
+    var combobox = $("#combobox").data("kendoComboBox");
+    combobox.select(0);
+    combobox.trigger("change");
+    </script>
+
 #### Parameters
 
 ##### li `jQuery | Number | Function`
@@ -1153,6 +1168,21 @@ Characters to force a suggestion.
 Gets or sets the text of the ComboBox. Widget will select the item with same text. If
 there are no matches then the text will be considered as a custom value of the widget.
 
+> **Important:** This method **does not trigger** [change](#events-change) event.
+This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      dataSource: [ "Apples", "Oranges" ]
+    });
+
+    var combobox = $("#combobox").data("kendoComboBox");
+    combobox.text("Apples");
+    combobox.trigger("change");
+    </script>
+
 #### Parameters
 
 ##### text `String`
@@ -1204,6 +1234,21 @@ Defines the whether to open/close the drop-down list.
 Gets or sets the value of the ComboBox.
 
 > **Important:** If the widget is not bound, value method will pre-fetch the data before continue with the value setting.
+
+> **Important:** This method **does not trigger** [change](#events-change) event.
+This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      dataSource: [ "Apples", "Oranges" ]
+    });
+
+    var combobox = $("#combobox").data("kendoComboBox");
+    combobox.value("Apples");
+    combobox.trigger("change");
+    </script>
 
 #### Parameters
 

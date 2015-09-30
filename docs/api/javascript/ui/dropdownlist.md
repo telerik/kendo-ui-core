@@ -1114,6 +1114,21 @@ The search value.
 
 Gets or sets the selected item. Selects the item provided as an argument and updates the value and text of the widget.
 
+> **Important:** This method **does not trigger** [change](#events-change) event.
+This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: [ "Apples", "Oranges" ]
+    });
+
+    var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+    dropdownlist.select(1);
+    dropdownlist.trigger("change");
+    </script>
+
 #### Parameters
 
 ##### li `jQuery | Number | Function`
@@ -1280,6 +1295,21 @@ Gets or sets the value of the DropDownList. The value will not be set if there i
 
 > **Important:** If the widget is not bound (e.g. `autoBind` is set to `false`), the `value` method will pre-fetch the data before continuing with the value setting.
 **This does not apply when MVVM binding is used.**
+
+> **Important:** This method **does not trigger** [change](#events-change) event.
+This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: [ "Apples", "Oranges" ]
+    });
+
+    var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+    dropdownlist.value("Apples");
+    dropdownlist.trigger("change");
+    </script>
 
 #### Parameters
 
