@@ -48,8 +48,8 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | Rename 				| **1.** Double-click the tab of the sheet you want to rename and modify it |
 | 						| **2.** Press `Enter` to exit, or click anywhere on the sheet			|
 | Reorder				| Click and hold the sheet tab, and drag it to the desired location on the Sheet Tab Bar |
-| Delete				| Click **X** [...] on the tab of the sheet you want to remove |
-| Select a whole sheet	| Click **Select All** [...] located to the left of column letter **A** and above row number **1** on the active sheet |
+| Delete				| Click **X** [ <span class="k-font-icon k-i-x"></span> ] on the tab of the sheet you want to remove |
+| Select a whole sheet	| Click **Select All** [ <span class="k-font-icon k-i-resize-se"></span> ]  located to the left of column letter **A** and above row number **1** on the active sheet |
 
 ### Actions with Cells
 
@@ -58,29 +58,29 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | Select/activate		| Click on a cell		|
 | Edit 					| Double-click a cell 	|
 | Copy content			| **1.** Select a cell	|
-|						| **2.** Click **Copy** [...] on the Toolbar, or use the [`Ctrl` + C](/user-guide#shortcut-keys) keyboard shortcut |
+|						| **2.** Click **Copy** [ <span class="k-font-icon k-i-copy"></span> ] on the Toolbar, or use the [`Ctrl` + C](/user-guide#shortcut-keys) keyboard shortcut |
 | Cut content			| **1.** Select a cell	|
-|						| **2.** Click **Cut** [...] on the Toolbar, or use the [`Ctrl` + X](/user-guide#shortcut-keys) keyboard shortcut |
+|						| **2.** Click **Cut** [ <span class="k-font-icon k-i-cut"></span> ] on the Toolbar, or use the [`Ctrl` + X](/user-guide#shortcut-keys) keyboard shortcut |
 | Paste content			| **1.** Click the cell where you want to place the copied or cut content |
-|						| **2.** Click **Paste** [...] on the Toolbar, or use the [`Ctrl` + V](/user-guide#shortcut-keys) keyboard shortcut |
+|						| **2.** Click **Paste** [ <span class="k-font-icon k-i-paste"></span> ] on the Toolbar, or use the [`Ctrl` + V](/user-guide#shortcut-keys) keyboard shortcut |
 | Delete content		| **1.** Select a cell	|
 |						| **2.** Press **Delete** on your keyboard to remove its content |
 | Merge cells			| **1.** Select the cells you want to merge |
 |						| **2.** Right-click the selection -> **Merge** |
 |						| **3.** Select the option from the **Merge Cells** pop-up window |
 | Merge cells (via the Toolbar)	| **1.** Select the cells you want to merge |
-|						| **2.** Click **Merge Cells** [...] on the Toolbar |
+|						| **2.** Click **Merge Cells** [ <span class="k-font-icon k-i-merge-horizontally"></span> ] on the Toolbar |
 |						| **3.** Choose an option from the drop-down list |
 | Add a background color| **1.** Select a cell	|
-| 						| **2.** Click **Background** [...] on the Toolbar |
+| 						| **2.** Click **Background** [ <span class="k-font-icon k-i-background"></span> ] on the Toolbar |
 |						| **3.** Choose a color from the drop-down list to apply to the cell background |
 | Align content			| **1.** Select a cell	|
-| 						| **2.** Click **Alignment** [...] on the Toolbar |
+| 						| **2.** Click **Alignment** [ <span class="k-font-icon k-i-justify-left"></span> ] on the Toolbar |
 |						| **3.** Choose a style form the drop-down list |
 | Wrap text				| **1.** Select the cell that contains content you want to wrap |
-| 						| **2.** Click **Wrap Text** [...] on the Toolbar |
+| 						| **2.** Click **Wrap Text** [ <span class="k-font-icon k-i-text-wrap"></span> ] on the Toolbar |
 | Choose border styles and colors | **1.** Select a cell |
-| 						| **2.** Click **Borders** [...] on the Toolbar |
+| 						| **2.** Click **Borders** [ <span class="k-font-icon k-i-all-borders"></span> ] on the Toolbar |
 |						| **3.** Select the border style and/or the color from the drop-down list |
 | 						| **4.** Click anywhere on the sheet to exit |
 
@@ -91,13 +91,13 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | Select/activate		| Click the row number against of the row you want to select |
 | Insert				| **1.** Select a row by clicking on the respective row number |
 | 						| **2.** Click the **Insert** tab from the **Menu** |
-| 						| **3.** Click **Add Row Below** or **Add Row Above** on the Toolbar |
+| 						| **3.** Click **Add Row Below** [ <span class="k-font-icon k-i-add-row-below"></span> ] or **Add Row Above** [ <span class="k-font-icon k-i-add-row-above"></span> ] on the Toolbar |
 | Delete				| **1.** Select a row by clicking on its row number|
 |						| **2.** Right-click on the row number |
 |						| **3.** Choose **Delete** |
 | Delete (via the Toolbar) | **1.** Select a row by clicking on its row number |
 |						| **2.** In the **Menu** click **Insert** |
-|						| **3.** On the Toolbar click **Delete Row** |
+|						| **3.** On the Toolbar click **Delete Row** [ <span class="k-font-icon k-i-delete-row"></span> ] |
 | Hide					| **1.** Select the row(s) by clicking on the respective row number |
 |						| **2.** Right-click on the row number |
 |						| **3.** Choose **Hide** |
@@ -105,12 +105,12 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 |						| **2.** Hover the pointer over the row number field until either the upper or bottom field border is highlighted |
 |						| **3.** Click the highlighted area and hold while dragging it to the desired height. Release the hold. |
 | Add a background color | **1.** Select a row |
-|						| **2.** On the Toolbar click **Background** |
+|						| **2.** On the Toolbar click **Background** [ <span class="k-font-icon k-i-background"></span> ] |
 |						| **3.** Select the color from the drop-down list |
 | Wrap text				| **1.** Select a row |
-|						| **2.** Click **Wrap Text** on the Toolbar |
+|						| **2.** Click **Wrap Text** [ <span class="k-font-icon k-i-text-wrap"></span> ] on the Toolbar |
 | Choose border styles and colors | **1.** Select a row |
-|						| **2.** Click **Borders** on the Toolbar |
+|						| **2.** Click **Borders** [ <span class="k-font-icon k-i-all-borders"></span> ] on the Toolbar |
 |						| **3.** Select the border style and/or the color from the drop-down list |
 |						| **4.** Click anywhere on the worksheet to exit |
 
