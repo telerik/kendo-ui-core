@@ -45,8 +45,8 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | WHAT YOU WANT			| HOW TO GET THERE	|
 | :---					| :---				|
 | Create				| Click **+** on the Sheet Tab Bar to create a new sheet				|
-| Rename 				| 1. Double-click the tab of the sheet you want to rename and modify it |
-| 						| 2. Press `Enter` to exit, or click anywhere on the sheet			|
+| Rename 				| **1.** Double-click the tab of the sheet you want to rename and modify it |
+| 						| **2.** Press `Enter` to exit, or click anywhere on the sheet			|
 | Reorder				| Click and hold the sheet tab, and drag it to the desired location on the Sheet Tab Bar |
 | Delete				| Click **X** [...] on the tab of the sheet you want to remove |
 | Select a whole sheet	| Click **Select All** [...] located to the left of column letter **A** and above row number **1** on the active sheet |
@@ -58,11 +58,11 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | Select/activate		| Click on a cell		|
 | Edit 					| Double-click a cell 	|
 | Copy content			| **1.** Select a cell	|
-|						| **2.** Click **Copy** [...] on the Toolbar, or use the [Copy](/keyboard-shortcuts) keyboard shortcut |
+|						| **2.** Click **Copy** [...] on the Toolbar, or use the [Copy](/user-guide#shortcut-keys) keyboard shortcut |
 | Cut content			| **1.** Select a cell	|
-|						| **2.** Click **Cut** [...] on the Toolbar, or use the [Cut](/keyboard-shortcuts) keyboard shortcut |
+|						| **2.** Click **Cut** [...] on the Toolbar, or use the [Cut](/user-guide#shortcut-keys) keyboard shortcut |
 | Paste content			| **1.** Click the cell where you want to place the copied or cut content |
-|						| **2.** Click **Paste** [...] on the Toolbar, or use the [Paste](/keyboard-shortcuts) keyboard shortcut |
+|						| **2.** Click **Paste** [...] on the Toolbar, or use the [Paste](/user-guide#shortcut-keys) keyboard shortcut |
 | Delete content		| **1.** Select a cell	|
 |						| **2.** Press **Delete** on your keyboard to remove its content |
 | Merge cells			| **1.** Select the cells you want to merge |
@@ -172,8 +172,8 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | Freeze panes				| **1.** Select the row or column which you want to freeze |
 |							| **2.** From the Toolbar click **Freeze Panes** |
 |							| **3.** Choose the option from the drop-down list |
-| Apply the `Undo` function | Click **Undo** on the **Menu** to reverse your last [number?] of actions |
-| Apply the `Redo` function | Click **Redo** on the **Menu** to repeat your last [number?] of actions |
+| Apply the `Undo` function | Click **Undo** on the **Menu** to reverse the actions you made during your current session. The number of actions you can reverse using `Undo` is unlimited. |
+| Apply the `Redo` function | Click **Redo** on the **Menu** to repeat the actions you made during your current session. The number of actions you can repeat using `Redo` is unlimited. |
 | Increase decimal values	| Click **Increase Decimal** on the Toolbar to increase the number of digits after the decimal point |
 | Decrease decimal values	| Click **Decrease Decimal** on the Toolbar to decrease the number of digits after the decimal point |
 | Apply formulas and functions | **1.** Select a cell |
