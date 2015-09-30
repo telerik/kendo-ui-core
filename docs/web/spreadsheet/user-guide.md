@@ -58,11 +58,11 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | Select/activate		| Click on a cell		|
 | Edit 					| Double-click a cell 	|
 | Copy content			| **1.** Select a cell	|
-|						| **2.** Click **Copy** [...] on the Toolbar, or use the [Copy](/user-guide#shortcut-keys) keyboard shortcut |
+|						| **2.** Click **Copy** [...] on the Toolbar, or use the [`Ctrl` + C](/user-guide#shortcut-keys) keyboard shortcut |
 | Cut content			| **1.** Select a cell	|
-|						| **2.** Click **Cut** [...] on the Toolbar, or use the [Cut](/user-guide#shortcut-keys) keyboard shortcut |
+|						| **2.** Click **Cut** [...] on the Toolbar, or use the [`Ctrl` + X](/user-guide#shortcut-keys) keyboard shortcut |
 | Paste content			| **1.** Click the cell where you want to place the copied or cut content |
-|						| **2.** Click **Paste** [...] on the Toolbar, or use the [Paste](/user-guide#shortcut-keys) keyboard shortcut |
+|						| **2.** Click **Paste** [...] on the Toolbar, or use the [`Ctrl` + V](/user-guide#shortcut-keys) keyboard shortcut |
 | Delete content		| **1.** Select a cell	|
 |						| **2.** Press **Delete** on your keyboard to remove its content |
 | Merge cells			| **1.** Select the cells you want to merge |
