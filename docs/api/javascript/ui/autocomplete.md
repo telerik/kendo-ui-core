@@ -826,6 +826,20 @@ The value to search for. All matches are displayed in the suggestion popup.
 
 Selects the item provided as an argument and updates the value of the widget.
 
+> **Important:** This method **does not trigger** [change](#events-change) event.
+This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete();
+    var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+    autocomplete.search("J");
+    autocomplete.select(autocomplete.ul.children().eq(1)); // Selects the second suggestion which is "Jane"
+    autocomplete.trigger("change");
+    </script>
+
+
 #### Parameters
 
 ##### item `String|Element|jQuery`
@@ -892,6 +906,18 @@ The value to set.
 ### value
 
 Gets or sets the value of the widget.
+
+> **Important:** This method **does not trigger** [change](#events-change) event.
+This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete();
+    var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+    autocomplete.value("new value");
+    autocomplete.trigger("change");
+    </script>
 
 #### Parameters
 
