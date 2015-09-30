@@ -67,7 +67,7 @@ Compares two color objects for equality.
     console.log(red.equals(opaqueRed)); // logs true
     </script>
 
-#### toHSV
+### toHSV
 
 Returns the color in HSV representation.  As HSV object, it has the
 following properties:
@@ -82,7 +82,7 @@ This does not modify the current object, it creates a new one instead.
 #### Returns
 `Object` An object with h, s, v and a fields.
 
-#### toRGB
+### toRGB
 
 Returns the color in RGB representation.  The result has the following
 properties:
@@ -95,9 +95,10 @@ properties:
 This does not modify the current object, it creates a new one instead.
 
 #### Returns
+
 `Object` An object with r, g, b and a fields.
 
-#### toBytes
+### toBytes
 
 Returns the color in "Bytes" representation.  It has the same properties as
 RGB, but `r`, `g` and `b` are integers between 0 and 255 instead of floats.
@@ -107,35 +108,54 @@ This does not modify the current object, it creates a new one instead.
 #### Returns
 `Object` An object with r, g and b fields.
 
-#### toHex
+### toHex
 
 Returns a string in `"FF0000"` form (without a leading `#`).
 
 #### Returns
+
 `String` The color in hex notation.
 
-#### toCss
+### toCss
 
 Like `toHex`, but includes a leading `#`.
 
 #### Returns
+
 `String` The color in CSS notation.
 
-#### toCssRgba
+### toCssRgba
 
 Returns the color in RGBA notation (includes the opacity).
 
 #### Returns
+
 `String` The color in RGBA notation.
 
-#### toDisplay
+### toDisplay
 
 Returns the color in the best notation supported by the current browser.  In
 IE < 9 this returns the `#FF0000` form; in all other browsers it returns the
 RGBA form.
 
 #### Returns
+
 `String` The color in the best notation supported by the current browser.
+
+
+## Fields
+
+### r `Number`
+
+The red channel of the color, in the range from 0 to 1.
+
+### g `Number`
+
+The green channel of the color, in the range from 0 to 1.
+
+### b `Number`
+
+The blue channel of the color, in the range from 0 to 1.
 
 
 ## Static Methods
