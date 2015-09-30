@@ -8,11 +8,11 @@ position: 2
 
 ##### Audience
 
-This guide is intended for the end user of the Kendo UI Spreadsheet widget. It aims at providing information about the widget's functionalities for data implementation and visualization, and support to end users while working with it. 
+This guide is intended for the end user of the Kendo UI Spreadsheet widget. It aims at providing information about the widget's functionalities for data entry/management, and support to end users while working with it.
 
 ##### Table of Contents
 
-To the left of this page is the collapsible Table of Contents. You can easily navigate through it by clicking on the title of a section you want to read. 
+To the left of this page is the collapsible Table of Contents. You can easily navigate through it by clicking on the title of a section you want to read.
 
 ##### Organization
 
@@ -20,28 +20,30 @@ The instructions in this guide are organized in sections, based on the actions y
 
 ##### Conventions
 
-This guide uses the following conventions: 
+This guide uses the following conventions:
 
 | ITEM										| CONVENTION						|
-| :---										| :---								|  
+| :---										| :---								|
 | Buttons, menus, dialog titles 			| **boldface** font 				|
 | Keyboard buttons, names of functions		| `screen` font						|
 | Selection sequences of buttons or options	| **Data** -> **Data Validation**	|
 
-### Overview 
+### Overview
 
-The Kendo UI Spreadsheet is used for implementation of related data and its visualization in a tabular format (rows and columns). This kind of data structuring provides for an easier management and analysis. The widget renders the feeling of a [Microsoft Excel table](https://support.office.com/en-ca/article/Overview-of-Excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c) by offering many cell-formatting options, styles, and themes, but supports a much simpler and easy-to-master user interface. 
+The Kendo UI Spreadsheet is used for implementation of related data and its visualization in a tabular format (rows and columns).
+This kind of data structuring provides for an easier management and analysis.
+The widget renders the feeling of a [Microsoft Excel table](https://support.office.com/en-ca/article/Overview-of-Excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c) by offering many cell-formatting options, styles, and themes, while utilizing simpler and easy-to-master user interface.
 
 ##### Elements of Kendo UI Spreadsheet
 
 
 
-### Actions with Sheets 
+### Actions with Sheets
 
 When you open the spreadsheet, the widget automatically generates a worksheet and applies to it a set of default settings.
 
 | WHAT YOU WANT			| HOW TO GET THERE	|
-| :---					| :---				| 
+| :---					| :---				|
 | Create				| Click **+** on the Sheet Tab Bar to create a new sheet				|
 | Rename 				| 1. Double-click the tab of the sheet you want to rename and modify it |
 | 						| 2. Press `Enter` to exit, or click anywhere on the sheet			|
@@ -52,7 +54,7 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 ### Actions with Cells
 
 | WHAT YOU WANT			| HOW TO GET THERE		|
-| :---					| :---					| 
+| :---					| :---					|
 | Select/activate		| Click on a cell		|
 | Edit 					| Double-click a cell 	|
 | Copy content			| **1.** Select a cell	|
@@ -76,13 +78,13 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | 						| **2.** Click **Alignment** [...] on the Toolbar |
 |						| **3.** Choose a style form the drop-down list |
 | Wrap text				| **1.** Select the cell that contains content you want to wrap |
-| 						| **2.** Click **Wrap Text** [...] on the Toolbar | 
+| 						| **2.** Click **Wrap Text** [...] on the Toolbar |
 | Choose border styles and colors | **1.** Select a cell |
 | 						| **2.** Click **Borders** [...] on the Toolbar |
 |						| **3.** Select the border style and/or the color from the drop-down list |
 | 						| **4.** Click anywhere on the sheet to exit |
 
-### Actions with Rows 
+### Actions with Rows
 
 | WHAT YOU WANT			| HOW TO GET THERE		|
 | :---					| :---					|
@@ -162,7 +164,7 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 |						| **Number** customizes the format of numerical input |
 |						| **Currency** customizes the format of currency input |
 |						| **Date** customizes the format of date input |
- 
+
 ### Other Data Formatting Options
 
 | WHAT YOU WANT				| HOW TO GET THERE		|
@@ -189,19 +191,19 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 |							| **Sort range A to Z** sorts the data within the column in an ascending alphabetical order |
 |							| **Sort range Z to A** sorts the data within the column in a descending alphabetical order |
 |							| **Filter by condition** filters the data within the column by applying any of the conditions from the drop-down list of options. Determine a value in the filed below so the condition can apply and sort the data. |
-|							| **Filter by value** opens a list of all different values listed within the column. Check **All** to avoid setting criteria to the information within the selected column and display all data from it. Uncheck **All** to let go of all sub-filters. You can also set filtering criteria by checking the checkboxes against each value. | 
+|							| **Filter by value** opens a list of all different values listed within the column. Check **All** to avoid setting criteria to the information within the selected column and display all data from it. Uncheck **All** to let go of all sub-filters. You can also set filtering criteria by checking the checkboxes against each value. |
 | Validate data				| Data validation allows you to predetermine the format and constrain the value of the content of a single cell or cells within a range, column, or row. |
 |							| **1.** Select a cell or a range of cells |
 |							| **2.** In the **Menu** click **Data** -> **Data Validation** to open the **Data Validation** window |
 |							| **3.** Choose the criterion from the drop-down list of options. |
-|							| **4.** A new window with criteria-specific options appears. Use the prompts and drop-down options to set the rules for modifying the content. | 
-| Export files				| Click **Export to Excel** to export your file in a Microsoft Excel format |  
+|							| **4.** A new window with criteria-specific options appears. Use the prompts and drop-down options to set the rules for modifying the content. |
+| Export files				| Click **Export to Excel** to export your file in a Microsoft Excel format |
 
 <br>
 
 > Whenever **Cancel** is displayed as a command and you click on it, it closes an active drop-down list or menu, or exits an open window, and takes you back to the spreadsheet.
-> 
-> Whenever **Apply** is displayed as a command, click on it after you selected an option to confirm its application.   
+>
+> Whenever **Apply** is displayed as a command, click on it after you selected an option to confirm its application.
 
 ### Shortcut Keys
 
