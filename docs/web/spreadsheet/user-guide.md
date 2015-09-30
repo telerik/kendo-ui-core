@@ -24,7 +24,7 @@ This guide uses the following conventions:
 
 | ITEM										| CONVENTION						|
 | :---										| :---								|
-| Buttons, menus, dialog titles 			| **boldface** font 				|
+| Buttons, menus, tabs, dialog titles		| **boldface** font 				|
 | Keyboard buttons, names of functions		| `screen` font						|
 | Selection sequences of buttons or options	| **Data** -> **Data Validation**	|
 
@@ -87,40 +87,40 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | WHAT YOU WANT			| HOW TO GET THERE		|
 | :---					| :---					|
 | Select/activate 		| Click the column letter against the column you want to select |
-| Insert				| <ol><li>Select a column by clicking on the respective column letter</li> <li>Click **Insert** from the **Menu**</li> <li>On the Toolbar click **Add Column Left** or **Add Column Right**</li></ol> |
-| Delete				| <ol><li>Select the column(s) by clicking on the respective column letter</li> <li>In the **Menu** click **Insert**</li> <li>On the Toolbar click **Delete Column**</li></ol> |
+| Insert				| <ol><li>Select a column by clicking on the respective column letter</li> <li>Click the **Insert** tab from the **Menu**</li> <li>On the Toolbar click **Add Column Left** [ <span class="k-font-icon k-i-add-column-left"></span> ] or **Add Column Right** [ <span class="k-font-icon k-i-add-column-right"></span> ]</li></ol> |
+| Delete				| <ol><li>Select the column(s) by clicking on the respective column letter</li> <li>In the **Menu** click **Insert**</li> <li>On the Toolbar click **Delete Column** [ <span class="k-font-icon k-i-delete-column"></span> ]</li></ol> |
 | Hide					| <ol><li>Select a column by clicking on the respective column letter</li> <li>Right-click on the column letter</li> <li>Choose **Hide**</li></ol> |
 | Resize the width of a column | <ol><li>Select a column or a cell within a column</li> <li>Hover the pointer over the column letter field until either the left or right border is highlighted</li> <li>Click the highlighted area and hold while dragging it to the desired width. Release the hold.</li></ol> |
-| Add a background color | <ol><li>Select a  column</li> <li>On the Toolbar click **Background**</li> <li>Select the color from the drop-down list</li></ol> |
-| Wrap text				| <ol><li>Select the column whose content you want to wrap</li> <li>Click **Wrap Text** on the Toolbar</li></ol> |
-| Choose border styles and colors | <ol><li>Select a column</li> <li>Click **Borders** on the Toolbar</li> <li>Select the border style and/or the color from the drop-down list</li> <li>Click anywhere on the sheet to exit</li></ol> |
+| Add a background color | <ol><li>Select a  column</li> <li>On the Toolbar click **Background** [ <span class="k-font-icon k-i-background"></span> ]</li> <li>Select the color from the drop-down list</li></ol> |
+| Wrap text				| <ol><li>Select the column whose content you want to wrap</li> <li>Click **Wrap Text** [ <span class="k-font-icon k-i-text-wrap"></span> ] on the Toolbar</li></ol> |
+| Choose border styles and colors | <ol><li>Select a column</li> <li>Click **Borders** [ <span class="k-font-icon k-i-all-borders"></span> ] on the Toolbar</li> <li>Select the border style and/or the color from the drop-down list</li> <li>Click anywhere on the sheet to exit</li></ol> |
 
 ### Actions with Fonts
 
 | WHAT YOU WANT			| HOW TO GET THERE		|
 | :---					| :---					|
-| Choose a font			| <ol><li>Select the cell(s) to which you want to apply the font</li> <li>On the Toolbar click **Font**</li> <li>Choose a font type from the drop-down list</li></ol> |
-| Edit the font size 	| <ol><li>Select the cell(s) to which you want to apply the font size</li> <li>On the Toolbar click **Font Size**</li> <li>Choose the font size from the predetermined values in drop-down list</li></ol> |
-| Format fonts			| <ol><li>Select the cell(s) where you want to format the font</li> <li>Use any of the following commands:</li></ol> <ul><ul><li>To make make the font **bold**, click **Bold** on the Toolbar</li> <li>To make make the font *italic*, click **Italic** on the Toolbar</li> <li>To make make the font <u>underlined</u>, click **Underline** on the Toolbar</li></ul></ul> |
-| Customize the format of numbers | <ol><li>Select the cell(s) where you want to format the font</li> <li>Click **Custom Format** on the Toolbar</li> <li>Select an option from the drop-down list. The style of formatting is hinted to the right of each option.</li></ol> |
-| Further customize the format of numbers | <ol><li>Select the cell(s) whose content you want to format</li> <li>Click **Custom Format** -> **More Formats**. Choose any of the following options:</li></ol> <ul><ul><li>**Number** customizes the format of numerical input</li> <li>**Currency** customizes the format of currency input</li> <li>**Date** customizes the format of date input</li></ul></ul> |
+| Choose a font			| <ol><li>Select the cell(s) to which you want to apply the font</li> <li>On the Toolbar click **Font** [ <span class="k-font-icon k-i-font-family"></span> ]</li> <li>Choose a font type from the drop-down list</li></ol> |
+| Edit the font size 	| <ol><li>Select the cell(s) to which you want to apply the font size</li> <li>On the Toolbar click **Font Size** [ <span class="k-font-icon k-i-font-size"></span> ]</li> <li>Choose the font size from the predetermined values in drop-down list</li></ol> |
+| Format fonts			| <ol><li>Select the cell(s) where you want to format the font</li> <li>Use any of the following commands:</li></ol> <ul><ul><li>To make make the font **bold**, click **Bold** [ <span class="k-font-icon k-i-bold"></span> ] on the Toolbar</li> <li>To make make the font *italic*, click **Italic** [ <span class="k-font-icon k-i-italic"></span> ] on the Toolbar</li> <li>To make make the font <u>underlined</u>, click **Underline** [ <span class="k-font-icon k-i-underline"></span> ] on the Toolbar</li></ul></ul> |
+| Customize the format of numbers | <ol><li>Select the cell(s) where you want to format the font</li> <li>Click **Custom Format** [ <span class="k-font-icon k-i-format-number"></span> ] on the Toolbar</li> <li>Select an option from the drop-down list. The style of formatting is hinted to the right of each option.</li></ol> |
+| Further customize the format of numbers | <ol><li>Select the cell(s) whose content you want to format</li> <li>Click **Custom Format** [ <span class="k-font-icon k-i-format-number"></span> ] -> **More Formats**. Choose any of the following options:</li></ol> <ul><ul><li>**Number** customizes the format of numerical input</li> <li>**Currency** customizes the format of currency input</li> <li>**Date** customizes the format of date input</li></ul></ul> |
 
 ### Other Data Formatting Options
 
 | WHAT YOU WANT				| HOW TO GET THERE		|
 | :---						| :---					|
 | Freeze panes				| <ol><li>Select the row or column which you want to freeze</li> <li>From the Toolbar click **Freeze Panes**</li> <li>Choose the option from the drop-down list</li></ol> |
-| Apply the `Undo` function | Click **Undo** on the **Menu** to reverse the actions you made during your current session. The number of actions you can reverse using `Undo` is unlimited. |
-| Apply the `Redo` function | Click **Redo** on the **Menu** to repeat the actions you made during your current session. The number of actions you can repeat using `Redo` is unlimited. |
-| Increase decimal values	| Click **Increase Decimal** on the Toolbar to increase the number of digits after the decimal point |
-| Decrease decimal values	| Click **Decrease Decimal** on the Toolbar to decrease the number of digits after the decimal point |
+| Apply the `Undo` function | Click **Undo** [ <span class="k-font-icon k-i-undo"></span> ] on the **Menu** to reverse the actions you made during your current session. The number of actions you can reverse using `Undo` is unlimited. |
+| Apply the `Redo` function | Click **Redo** [ <span class="k-font-icon k-i-redo"></span> ] on the **Menu** to repeat the actions you made during your current session. The number of actions you can repeat using `Redo` is unlimited. |
+| Increase decimal values	| Click **Increase Decimal** [ <span class="k-font-icon k-i-increase-decimal"></span> ] on the Toolbar to increase the number of digits after the decimal point |
+| Decrease decimal values	| Click **Decrease Decimal** [ <span class="k-font-icon k-i-decrease-decimal"></span> ] on the Toolbar to decrease the number of digits after the decimal point |
 | Apply formulas and functions | <ol><li>Select a cell</li> <li>Go to the **Formula Bar** and type an equal sign [ `=` ]</li> <li>Type your formula/function and press `Enter` once done to see the outcome of your input in the cell. Note that when you start writing a function, the `AutoComplete` prompts you with the syntax.</li></ol> |
-| Edit formulas and functions 	| <ol><li>Double-click on a cell to display the formula/function in the **Formula Bar**</li> <li>Change the formula/function and press **Enter**</li></ol> |
-| Sort information			| <ol><li>Select a column</li> <li>On the **Menu** click the **Data** tab</li> <li>Click **Sort** on the Toolbar and choose an option from the drop-down list. The data within the active sheet is now sorted according to the alphabetical order of the column you modified and in an ascending or descending order of its content.</li></ol> |
-| Apply filters				| <ol><li>Select the columns whose data you want to filter</li> <li>Go to **Data** tab on the **Menu**</li> <li>Click **Filter** on the Toolbar</li></ol> |
+| Edit formulas and functions 	| <ol><li>Double-click on a cell to display the formula/function in the **Formula Bar**</li> <li>Change the formula/function and press `Enter`</li></ol> |
+| Sort information			| <ol><li>Select a column</li> <li>On the **Menu** click the **Data** tab</li> <li>Click **Sort** [ <span class="k-font-icon k-i-sort-desc"></span> ] on the Toolbar and choose an option from the drop-down list. The data within the active sheet is now sorted according to the alphabetical order of the column you modified and in an ascending or descending order of its content.</li></ol> |
+| Apply filters				| <ol><li>Select the columns whose data you want to filter</li> <li>Go to **Data** tab on the **Menu**</li> <li>Click **Filter** [ <span class="k-font-icon k-i-filter"></span> ] on the Toolbar</li></ol> |
 | Use applied filters		| Once you filtered the data within a column, click on the drop-down arrow of the filter and choose from the drop-down list of options: <ul><li>**Sort range A to Z** sorts the data within the column in an ascending alphabetical order</li> <li>**Sort range Z to A** sorts the data within the column in a descending alphabetical order</li> <li>**Filter by condition** filters the data within the column by applying any of the conditions from the drop-down list of options. Determine a value in the filed below so the condition can apply and sort the data.</li> <li>**Filter by value** opens a list of all different values listed within the column:</li> <ul><li>Check **All** to avoid setting criteria to the information within the selected column and display all data from it.</li> <li>Uncheck **All** to let go of all sub-filters.</li> <li>You can also set filtering criteria by checking the checkboxes against each value.</li></ul></ul> |
 | Validate data				| Data validation allows you to predetermine the format and constrain the value of the content of a single cell or cells within a range, column, or row: <ol><li>Select a cell or a range of cells</li> <li>In the **Menu** click **Data** -> **Data Validation** to open the **Data Validation** window</li> <li>Choose the criterion from the drop-down list of options.</li> <li>A new window with criteria-specific options appears. Use the prompts and drop-down options to set the rules for modifying the content.</li></ol> |
-| Export files				| Click **Export to Excel** to export your file in a Microsoft Excel format |
+| Export files				| Click **Export to Excel** [ <span class="k-font-icon k-i-xls"></span> ] to export your file in a Microsoft Excel format |
 
 <br>
 
