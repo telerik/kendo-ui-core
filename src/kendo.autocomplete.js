@@ -136,6 +136,8 @@ var __meta__ = { // jshint ignore:line
 
             that.listView.bind("click", function(e) { e.preventDefault(); });
 
+            that._resetFocusItemHandler = $.proxy(that._resetFocusItem, that);
+
             kendo.notify(that);
         },
 
@@ -279,6 +281,8 @@ var __meta__ = { // jshint ignore:line
                 that._open = true;
 
                 that.listView.filter(true);
+                that.listView.value([]);
+
                 that._filterSource({
                     value: ignoreCase ? word.toLowerCase() : word,
                     operator: options.filter,
@@ -413,6 +417,16 @@ var __meta__ = { // jshint ignore:line
             that.listView.value(that.options.value);
         },
 
+        _resetFocusItem: function() {
+            var index = this.options.highlightFirst ? 0 : -1;
+
+            if (this.options.virtual) {
+                this.listView.scrollTo(0);
+            }
+
+            this.listView.focus(index);
+        },
+
         _listBound: function() {
             var that = this;
             var popup = that.popup;
@@ -424,24 +438,11 @@ var __meta__ = { // jshint ignore:line
 
             that._angularItems("compile");
 
-            if (that._open) {
-                that.listView.value([]);
-                that.listView.focus(-1);
-            }
-
-            that.listView.filter(false);
-
             that._calculateGroupPadding(that._height(length));
 
             popup.position();
 
             if (length) {
-                var current = this.listView.focus();
-
-                if (options.highlightFirst && !current) {
-                    that.listView.focusFirst();
-                }
-
                 if (options.suggest && isActive) {
                     that.suggest(data[0]);
                 }
@@ -455,9 +456,21 @@ var __meta__ = { // jshint ignore:line
                     action = "close";
                 }
 
+                if (length) {
+                    if (!options.virtual) {
+                        that._resetFocusItem();
+                    } else {
+                        that.popup
+                            .unbind("activate", that._resetFocusItemHandler)
+                            .one("activate", that._resetFocusItemHandler);
+                    }
+                }
+
                 popup[action]();
                 that._typingTimeout = undefined;
             }
+
+            that.listView.filter(false);
 
             if (that._touchScroller) {
                 that._touchScroller.reset();
