@@ -8,14 +8,7 @@ position: 1
 
 # Getting Started with Kendo UI
 
-In this chapter:
-
-* [Host Kendo UI in Your Project](#host-kendo-ui-in-your-project)
-* [Install Kendo UI As a Bower Package](#install-kendo-ui-as-a-kendo-ui-core-or-kendo-ui-professional-bower-package)
-* [Use the Kendo UI CDN Service](#use-the-kendo-ui-cdn-service)
-* [Include Only What You Need](#include-only-what-you-need)
-
-## Host Kendo UI in Your Project
+### Host Kendo UI in Your Project
 
 Depending on your preferences and the requirements of your project, you can:
 
@@ -26,7 +19,7 @@ Depending on your preferences and the requirements of your project, you can:
 * [Get](http://www.telerik.com/purchase/jsp-ui) your commercial license for Telerik UI for JSP
 * [Get](http://www.telerik.com/purchase/php-ui) your commercial license for Telerik UI for PHP
 
-### Step 1: Download Kendo UI
+#### Step 1: Download Kendo UI
 
 Once you [download](http://www.telerik.com/download/kendo-ui) any of the Kendo UI packages, you will get the following folders in your local repository:
 
@@ -37,11 +30,11 @@ Once you [download](http://www.telerik.com/download/kendo-ui) any of the Kendo U
 * `/wrappers` - the directory includes the server-side wrappers. As it is necessary for the Telerik UI for ASP.NET MVC, UI for JSP or UI for PHP distributions only, the folder is available in the commercial packages of these versions.
 * `changelog.html` - the folder provides the Kendo UI release notes
 
-### Step 2: Add CSS and JavaScript References to Your Project
+#### Step 2: Add CSS and JavaScript References to Your Project
 
 To use Kendo UI in your project, you need to include the required JavaScript and CSS files.
 
-**Step 1:** Extract the `/js` and `/styles` directories from the bundle archive and copy them to your web application root directory
+**Step 1:** Extract the `/js` and `/styles` directories from the bundle archive and copy them to your web application root directory  
 **Step 2:** Include the Kendo UI JavaScript and CSS files in the `head` tag of your HTML document. Make sure the common CSS file is registered before the theme CSS file.
 
 Here goes the example:
@@ -109,7 +102,7 @@ Here is the complete example:
         </body>
     </html>
 
-## Install Kendo UI As a Kendo UI Core or Kendo UI Professional Bower Package
+### Install Kendo UI As a Kendo UI Core or Kendo UI Professional Bower Package
 
 [Bower](http://bower.io/) is a popular package manager for the web.
 
@@ -117,7 +110,7 @@ Kendo UI maintains 2 bower packages, namely Kendo UI Core and Kendo UI Professio
 
 > Kendo UI Professional bower package is available for licensed user accounts only. Check out the list of Kendo UI components and their bundle support [here](http://docs.telerik.com/kendo-ui/intro/list-of-widgets).
 
-### Option 1: Install Kendo UI Core Bower Package
+#### Option 1: Install Kendo UI Core Bower Package
 
 The Kendo UI Core Bower package is available as a [public GitHub repository](https://github.com/kendo-labs/bower-kendo-ui) and is also registered as `kendo-ui-core` in the bower registry:
 
@@ -125,7 +118,7 @@ The Kendo UI Core Bower package is available as a [public GitHub repository](htt
 bower install kendo-ui-core
 ```
 
-### Option 2: Install Kendo UI Professional Bower Package
+#### Option 2: Install Kendo UI Professional Bower Package
 
 The Kendo UI Professional Bower Package is hosted as a [private GitHub repository](https://bower.telerik.com). To access it, you need an active account for Telerik Platform. Bower will prompt for your username and password during the installation and update processes:
 
@@ -143,18 +136,18 @@ You can also add the package to the `bower.json` file:
 
 > During the installation of the Bower package, you may be requested to confirm your credentials more than once. For further information, refer to [Storing Repository Credentials](...) below.
 
-### Storing Your Repository Credentials
+#### Storing Your Repository Credentials
 
 **Option 1:** In order to avoid retyping your credentials, you may cache them. The easiest way to do that is to store them as plain text in a [.netrc file](http://www.mavetju.org/unix/netrc.php).
 
 **Option 2:** A secure alternative to do the same is to use the GitHub credential helpers. Refer to [Stack Overflow](http://stackoverflow.com/questions/5343068/is-there-a-way-to-skip-password-typing-when-using-https-github) to follow the discussion on the topic.
 
-#### Store Your Credentials on Windows
+##### Store Your Credentials on Windows
 
 > Caching your credentials is required if you use the Kendo UI Bower Package in an ASP.NET vNext project.
 
-**Step 1:** Create a text file called `_netrc` in your home directory (e.g. `c:\users\jane\_netrc`)
-**Step 2:** Declare a HOME environment variable:
+**Step 1:** Create a text file called `_netrc` in your home directory (e.g. `c:\users\jane\_netrc`)  
+**Step 2:** Declare a `HOME` environment variable:
 
 ```
 C:\> SETX HOME %USERPROFILE%
@@ -164,7 +157,7 @@ C:\> SETX HOME %USERPROFILE%
 
 GitHub might have problems resolving your home directory if it contains spaces in its path (e.g. `c:\Documents and Settings\jane`). Therefore, update your `%HOME%` environment variable to point to a directory having no spaces in its name.
 
-#### Store Your Credentials on Linux, OS X and Unix-Like Systems
+##### Store Your Credentials on Linux, OS X and Unix-Like Systems
 
 **Step 1:** Create a file called `.netrc` in your home directory (`~/.netrc`). Make sure you modify the file permissions to make it readable only to you.
 
@@ -181,7 +174,7 @@ machine bower.telerik.com
     password mysecret
 ```
 
-#### Troubleshooting
+##### Troubleshooting
 
 **Issue 1:** Bower on Windows has troubles installing the repository showing the error message
 
@@ -197,18 +190,18 @@ fatal: unable to access 'https://bower.telerik.com/bower-kendo-ui.git/': SSL cer
 
 > When using @ symbol in the url for accessing the Kendo UI Bower repository (due to network restrictions or admin rules, for instance), make sure you encode it as follows: https://firstname.lasname**%40**domain.com@bower.telerik.com/bower-kendo-ui.git.
 
-## Use the Kendo UI CDN Service
+### Use the Kendo UI CDN Service
 
 The Kendo UI CDN is hosted on [Amazon CloudFront](https://aws.amazon.com/cloudfront/). In order to access the Kendo UI CDN Service, you can use either of the options described below.
 
-### Option 1: Through the HTTP Protocol
+#### Option 1: Through the HTTP Protocol
 
-The minified versions of all JavaScript files are available via the following URLs:
-<http://kendo.cdn.telerik.com/VERSION/js/FILENAME.min.js>
+The minified versions of all JavaScript files are available via the following URLs:  
+<http://kendo.cdn.telerik.com/VERSION/js/FILENAME.min.js>  
 <http://kendo.cdn.telerik.com/VERSION/styles/FILENAME.min.css>
 
-For example, the 2014.1.318 version can be loaded from:
-<http://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js>
+For example, the 2014.1.318 version can be loaded from:  
+<http://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js>  
 <http://kendo.cdn.telerik.com/2014.1.318/styles/kendo.common.min.css>
 
 Use the following URL to load the minified Kendo UI Core script (available since Q1 2014 SP1):
@@ -216,14 +209,14 @@ Use the following URL to load the minified Kendo UI Core script (available since
 
 >The <http://cdn.kendostatic.com> URL will remain active, but is no longer recommended for new projects.
 
-### Option 2: Through the HTTPS Protocol
+#### Option 2: Through the HTTPS Protocol
 
-To access the Kendo UI CDN service through the HTTPS protocol, use the same host name as above, only replacing the scheme (protocol) with `https`:
+To access the Kendo UI CDN service through the HTTPS protocol, use the same host name as above, only replacing the scheme (protocol) with `https`:  
 <https://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js>
 
 >The <https://da7xgjtj801h2.cloudfront.net> URL will remain active, but are no longer recommended for new projects.
 
-### Troubleshooting
+#### Troubleshooting
 
 **Issue 1:** Disruption and connection problems
 Although the Amazon CloudFront service provides for a reliable level of uptime support, you may encounter disruption or connection troubles. After you have checked the status of the systems at [http://status.aws.amazon.com/](http://status.aws.amazon.com/), the CDN status is reported as healthy and is operating normally.
@@ -276,16 +269,9 @@ Although the Amazon CloudFront service provides for a reliable level of uptime s
 
 > You will be able to find more information on the topic at [Scott HanselMann - Fallback from CDN to Local Scripts](http://www.hanselman.com/blog/CDNsFailButYourScriptsDontHaveToFallbackFromCDNToLocalJQuery.aspx).
 
-## Include Only What You Need
+### Include Only What You Need
 
-In this section you will learn how to use those Kendo UI components that will best suit your project:
-
-* [Pick the Right Combined Script Based on Your Project Type](#pick-the-right-combined-script-based-on-your-project-type)
-* [Build a Custom Combined Script With the Kendo UI Download Builder](#build-a-custom-combined-script-with-the-kendo-ui-download-builder)
-* [Use Grunt to Build a Custom Script](#use-grunt-to-build-a-custom-script)
-* [Include Individual Widget Scripts](#include-individual-widget-scripts)
-
-### Pick the Right Combined Script Based on Your Project Type
+#### Pick the Right Combined Script Based on Your Project Type
 
 The following combined scripts are available in the bundles or at the CDN in order to facilitate the common project types:
 
@@ -304,13 +290,13 @@ In addition, each of the combined script files should not be registered together
 
 > Registering duplicate scripts may cause JavaScript errors and unexpected behavior.
 
-### Build a Custom Combined Script with the Kendo UI Download Builder
+#### Build a Custom Combined Script with the Kendo UI Download Builder
 
 Users with a commercial license may use the [custom download builder tool](http://www.telerik.com/download/custom-download) to create a single JavaScript file which contains only the required widgets and features.
 
 > Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
 
-### Use Grunt to Build a Custom Script
+#### Use Grunt to Build a Custom Script
 
 If you use the Kendo UI Core package, you can build a custom distribution using the `grunt` build tool by following the instructions in [README](https://github.com/telerik/kendo-ui-core#building-only-what-you-need).
 
@@ -329,11 +315,11 @@ List the components you want to be included in the custom build and separated th
 The grunt build task automatically resolves the needed dependencies for each component, so you don't have to list them.
 Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
 
-### Include Individual Widget Scripts
+#### Include Individual Widget Scripts
 
 The following script files, either minified or not, can be included on a per-widget basis depending on the flavor you want to add to your project. Refer to the list with Kendo UI widgets in terms of their bundle support [here](/intro/list-of-widgets).
 
-#### Kendo UI Widgets
+##### Kendo UI Widgets
 
 Here is the list of the script files for desktop UI widgets for mobile-ready websites and applications:
 
@@ -707,7 +693,7 @@ Here is the list of the script files for desktop UI widgets for mobile-ready web
 | 						| kendo.draganddrop.js						| 							|
 | 						| kendo.window.js							| 							|
 
-#### Widgets for Data Visualization
+##### Widgets for Data Visualization
 
 Here is the list of the script files for data visualization widgets for desktop and mobile web applications:
 
@@ -813,7 +799,7 @@ Here is the list of the script files for data visualization widgets for desktop 
 | 						| kendo.dataviz.themes.js					| 							|
 | 						| kendo.dataviz.treeMap.js					| 							|
 
-#### Hybrid UI
+##### Hybrid UI
 
 Here is the list of the script files for the frameworks and widgets for mobile applications:
 
@@ -946,7 +932,7 @@ Here is the list of the script files for the frameworks and widgets for mobile a
 | 						| kendo.userevents.js						|
 | 						| kendo.touch.js							|
 
-#### Tools, Frameworks and Utilities
+##### Tools, Frameworks and Utilities
 
 Here is the list of the script files for the shared components providing behaviors, data access and other services:
 
@@ -997,7 +983,7 @@ Here is the list of the script files for the shared components providing behavio
 | 						| kendo.fx.js						|				|
 | 						| kendo.view.js						|				|
 
-#### Server-Side Wrappers
+##### Server-Side Wrappers
 
 This is the list of the script files for the supplementary scripts for integration with server-side technologies:
 

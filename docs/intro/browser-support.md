@@ -8,17 +8,11 @@ position: 6
 
 # Web Browser and Operating System Support
 
-In this chapter:
-
-* [Web Browser Support](#web-browser-support)
-* [Operating System Support](#operating-system-support)
-* [Best Performance](#best-performance)
-
-## Web Browser Support
+### Web Browser Support
 
 Kendo UI components are designed to support all major browsers and to operate without the worries of cross-browser compatibility, standards compliance or touch-device support. However, depending on the specifics of your project and the components you prefer to use, the browser support provided by Kendo UI widgets may vary between the versions.
 
-### Web Browser Support General
+#### Web Browser Support General
 
 Most [Kendo UI widgets](/intro/list-of-widgets) have no limitations as of the browser versions they support:
 
@@ -30,7 +24,7 @@ Most [Kendo UI widgets](/intro/list-of-widgets) have no limitations as of the br
 | Opera             | 15 or later                   |
 | OS X Safari       | [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
 
-### Web Browser Support for Hybrid UI
+#### Web Browser Support for Hybrid UI
 
 The [hybrid UI](/intro/list-of-widgets) widgets and framework are intended for Cordova based deployments, and support the following mobile device browsers and their corresponding web view components:
 
@@ -42,7 +36,7 @@ The [hybrid UI](/intro/list-of-widgets) widgets and framework are intended for C
 | Opera             | 15 or later                   |
 | OS X Safari       | [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
 
-### Web Browser Support for Data Visualization Widgets
+#### Web Browser Support for Data Visualization Widgets
 
 Kendo UI widgets rendering [data visualization](/intro/list-of-widgets) may require more recent browser versions as well. If you want to use them in your project, consider the information below.
 
@@ -70,7 +64,7 @@ Kendo UI widgets rendering [data visualization](/intro/list-of-widgets) may requ
 |                   |                               | Android 2.x, therefore, uses non-interactive canvas output |
 |Android            | 2.3                           | The Canvas rendering mode is only supported
 
-### Important Notes
+#### Important Notes
 
 * Since Internet Explorer 11 was released in October 2013, look up the Q3 2013 SP2 (2013.3.1324) or a more recent Kendo UI version if you need support for it
 
@@ -96,7 +90,7 @@ Kendo UI widgets rendering [data visualization](/intro/list-of-widgets) may requ
 </script>
 ```
 
-## Operating System Support
+### Operating System Support
 
 | Platform          | Version               |
 | :---------------- | :-------------------- |
@@ -109,12 +103,12 @@ Kendo UI widgets rendering [data visualization](/intro/list-of-widgets) may requ
 | Windows Phone     | 8.0 or later          |
 | Chrome for Mobile | Any version           |
 
-### Important Notes
+#### Important Notes
 
 * Hybrid mouse and touch-screen devices are supported; for example, Internet Explorer 10, Chrome and Firefox on Windows 8
 * JavaScript should be enabled on all browsers so that they can be allowed to run scripts
 
-## Best Performance
+### Best Performance
 
 To ensure the best performance of your project, make sure that you:
 
