@@ -56,7 +56,7 @@ Kendo UI widgets rendering [data visualization](/intro/list-of-widgets) may requ
 
 | Browser           | Supported Versions            | Limitations                               |
 | :---------------- | :---------------------------- | :-----------                              |
-| Internet Explorer | 8			                    | PDF and image export is not supported 	|
+| Internet Explorer | 8                             | PDF and image export is not supported     |
 |                   |                               | Text rotation is not supported by the 64-bit versions |
 |                   |                               | Gradients in pie and donut charts are not supported |
 | Internet Explorer | 10                            | Dashed lines in canvas are not supported, which affects the image export as well |
