@@ -20,11 +20,11 @@ Kendo UI components are designed to support all major browsers and to operate wi
 
 ### Web Browser Support General
 
-Most [Kendo UI widgets](/intro/list-of-widgets) have no limitations as of the browser versions they support:
+Most [Kendo UI widgets](/intro/list-of-widgets) have no limitations as of the browser versions they support.
 
-| Browser           | Supported Versions            |
-| :---------------- | :---------------------------- |
-| Internet Explorer | 7 or later                    |
+| Browser           | Supported Versions            | Limitations
+| :---------------- | :---------------------------- | :---------------
+| Internet Explorer | 7 or later                    | Kendo UI [Spreadsheet](http://demos.telerik.com/kendo-ui/spreadsheet/index) requires IE9 or later
 | Chrome            | 21 or later                   |
 | Firefox           | [Current and ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history) ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/))|
 | Opera             | 15 or later                   |
@@ -62,8 +62,7 @@ Kendo UI widgets rendering [data visualization](/intro/list-of-widgets) may requ
 
 | Browser           | Supported Versions            | Limitations                               |
 | :---------------- | :---------------------------- | :-----------                              |
-| Internet Explorer | 6, 7, and 8                   | **Spreadsheet Widget** is not available |
-|                   |                               | PDF and image export is not supported |
+| Internet Explorer | 6, 7, and 8                   | PDF and image export is not supported |
 |                   |                               | Text rotation is not supported by the 64-bit versions |
 |                   |                               | Gradients in pie and donut charts are not supported |
 | Internet Explorer | 10                            | Dashed lines in canvas are not supported, which affects the image export as well |
