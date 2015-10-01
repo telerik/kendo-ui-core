@@ -18,7 +18,7 @@ Most [Kendo UI widgets](/intro/list-of-widgets) have no limitations as of the br
 
 | Browser           | Supported Versions            | Limitations
 | :---------------- | :---------------------------- | :---------------
-| Internet Explorer | 7 or later                    | Kendo UI [Spreadsheet](http://demos.telerik.com/kendo-ui/spreadsheet/index) requires IE9 or later
+| Internet Explorer | 8 or later                    | Kendo UI [Spreadsheet](http://demos.telerik.com/kendo-ui/spreadsheet/index) requires IE9 or later
 | Chrome            | 21 or later                   |
 | Firefox           | [Current and ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history) ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/))|
 | Opera             | 15 or later                   |
@@ -56,7 +56,7 @@ Kendo UI widgets rendering [data visualization](/intro/list-of-widgets) may requ
 
 | Browser           | Supported Versions            | Limitations                               |
 | :---------------- | :---------------------------- | :-----------                              |
-| Internet Explorer | 6, 7, and 8                   | PDF and image export is not supported |
+| Internet Explorer | 8			                    | PDF and image export is not supported 	|
 |                   |                               | Text rotation is not supported by the 64-bit versions |
 |                   |                               | Gradients in pie and donut charts are not supported |
 | Internet Explorer | 10                            | Dashed lines in canvas are not supported, which affects the image export as well |
@@ -64,6 +64,8 @@ Kendo UI widgets rendering [data visualization](/intro/list-of-widgets) may requ
 |Android            | 2.3                           | The Canvas rendering mode is only supported
 
 #### Important Notes
+
+* As of Kendo UI 2015 Q3 release Internet Explorer 7 is no longer supported.
 
 * Since Internet Explorer 11 was released in October 2013, look up the Q3 2013 SP2 (2013.3.1324) or a more recent Kendo UI version if you need support for it
 
