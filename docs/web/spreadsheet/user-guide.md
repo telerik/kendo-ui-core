@@ -24,7 +24,7 @@ This guide uses the following conventions:
 
 | ITEM										| CONVENTION						|
 | :---										| :---								|
-| Buttons, menus, dialog titles 			| **boldface** font 				|
+| Buttons, menus, tabs, dialog titles		| **boldface** font 				|
 | Keyboard buttons, names of functions		| `screen` font						|
 | Selection sequences of buttons or options	| **Data** -> **Data Validation**	|
 
@@ -41,11 +41,10 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | WHAT YOU WANT			| HOW TO GET THERE	|
 | :---					| :---				|
 | Create				| Click **+** on the Sheet Tab Bar to create a new sheet				|
-| Rename 				| **1.** Double-click the tab of the sheet you want to rename and modify it |
-| 						| **2.** Press `Enter` to exit, or click anywhere on the sheet			|
+| Rename 				| <ol><li> Double-click the tab of the sheet you want to rename and modify it</li> <li>Press `Enter` to exit, or click anywhere on the sheet</li></ol> |
 | Reorder				| Click and hold the sheet tab, and drag it to the desired location on the Sheet Tab Bar |
-| Delete				| Click **X** [...] on the tab of the sheet you want to remove |
-| Select a whole sheet	| Click **Select All** [...] located to the left of column letter **A** and above row number **1** on the active sheet |
+| Delete				| Click **X** [ <span class="k-font-icon k-i-x"></span> ] on the tab of the sheet you want to remove |
+| Select a whole sheet	| Click **Select All** [ <span class="k-font-icon k-i-resize-se"></span> ]  located to the left of column letter **A** and above row number **1** on the active sheet |
 
 ### Actions with Cells
 
@@ -69,57 +68,27 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | WHAT YOU WANT			| HOW TO GET THERE		|
 | :---					| :---					|
 | Select/activate		| Click the row number against of the row you want to select |
-| Insert				| **1.** Select a row by clicking on the respective row number |
-| 						| **2.** Click the **Insert** tab from the **Menu** |
-| 						| **3.** Click **Add Row Below** or **Add Row Above** on the Toolbar |
-| Delete				| **1.** Select a row by clicking on its row number|
-|						| **2.** Right-click on the row number |
-|						| **3.** Choose **Delete** |
-| Delete (via the Toolbar) | **1.** Select a row by clicking on its row number |
-|						| **2.** In the **Menu** click **Insert** |
-|						| **3.** On the Toolbar click **Delete Row** |
-| Hide					| **1.** Select the row(s) by clicking on the respective row number |
-|						| **2.** Right-click on the row number |
-|						| **3.** Choose **Hide** |
-| Resize the height of a row | **1.** Select a row or a cell from a row |
-|						| **2.** Hover the pointer over the row number field until either the upper or bottom field border is highlighted |
-|						| **3.** Click the highlighted area and hold while dragging it to the desired height. Release the hold. |
-| Add a background color | **1.** Select a row |
-|						| **2.** On the Toolbar click **Background** |
-|						| **3.** Select the color from the drop-down list |
-| Wrap text				| **1.** Select a row |
-|						| **2.** Click **Wrap Text** on the Toolbar |
-| Choose border styles and colors | **1.** Select a row |
-|						| **2.** Click **Borders** on the Toolbar |
-|						| **3.** Select the border style and/or the color from the drop-down list |
-|						| **4.** Click anywhere on the worksheet to exit |
+| Insert				| <ol><li>Select a row by clicking on the respective row number</li> <li>Click the **Insert** tab from the **Menu**</li> <li>Click **Add Row Below** [ <span class="k-font-icon k-i-add-row-below"></span> ] or **Add Row Above** [ <span class="k-font-icon k-i-add-row-above"></span> ] on the Toolbar</li></ol> |
+| Delete				| <ol><li>Right-click on the row number</li> <li>Choose **Delete**</li></ol> |
+| Delete (via the Toolbar) | <ol><li>Select a row by clicking on its row number</li> <li>In the **Menu** click **Insert**</li> <li>On the Toolbar click **Delete Row** [ <span class="k-font-icon k-i-delete-row"></span> ]</li></ol> |
+| Hide					| <ol><li>Select the row(s) by clicking on the respective row number</li> <li>Right-click on the row number</li> <li>Choose **Hide**</li></ol> |
+| Resize the height of a row | <ol><li>Select a row or a cell from a row</li> <li>Hover the pointer over the row number field until either the upper or bottom field border is highlighted</li> <li>Click the highlighted area and hold while dragging it to the desired height. Release the hold.</li></ol> |
+| Add a background color | <ol><li>Select a row</li> <li>On the Toolbar click **Background** [ <span class="k-font-icon k-i-background"></span> ]</li> <li>Select the color from the drop-down list</li></ol> |
+| Wrap text				| <ol><li>Select a row</li> <li>Click **Wrap Text** [ <span class="k-font-icon k-i-text-wrap"></span> ] on the Toolbar</li></ol> |
+| Choose border styles and colors | <ol><li>Select a row</li> <li>Click **Borders** [ <span class="k-font-icon k-i-all-borders"></span> ] on the Toolbar</li> <li>Select the border style and/or the color from the drop-down list</li> <li>Click anywhere on the worksheet to exit</li></ol> |
 
 ### Actions with Columns
 
 | WHAT YOU WANT			| HOW TO GET THERE		|
 | :---					| :---					|
 | Select/activate 		| Click the column letter against the column you want to select |
-| Insert				| **1.** Select a column by clicking on the respective column letter |
-|						| **2.** Click **Insert** from the **Menu** |
-|						| **3.** On the Toolbar click **Add Column Left** or **Add Column Right** |
-| Delete				| **1.** Select the column(s) by clicking on the respective column letter |
-|						| **2.** In the **Menu** click **Insert** |
-|						| **3.** On the Toolbar click **Delete Column** |
-| Hide					| **1.** Select a column by clicking on the respective column letter |
-|						| **2.** Right-click on the column letter |
-|						| **3.** Choose **Hide** |
-| Resize the width of a column | **1.** Select a column or a cell within a column |
-|						| **2.** Hover the pointer over the column letter field until either the left or right border is highlighted |
-|						| **3.** Click the highlighted area and hold while dragging it to the desired width. Release the hold. |
-| Add a background color | **1.** Select a  column |
-| 						| **2.** On the Toolbar click **Background** |
-|						| **3.** Select the color from the drop-down list |
-| Wrap text				| **1.** Select the column whose content you want to wrap |
-|						| **2.** Click **Wrap Text** on the Toolbar |
-| Choose border styles and colors | **1.** Select a column |
-|						| **2.** Click **Borders** on the Toolbar |
-|						| **3.** Select the border style and/or the color from the drop-down list |
-|						| **4.** Click anywhere on the sheet to exit |
+| Insert				| <ol><li>Select a column by clicking on the respective column letter</li> <li>Click the **Insert** tab from the **Menu**</li> <li>On the Toolbar click **Add Column Left** [ <span class="k-font-icon k-i-add-column-left"></span> ] or **Add Column Right** [ <span class="k-font-icon k-i-add-column-right"></span> ]</li></ol> |
+| Delete				| <ol><li>Select the column(s) by clicking on the respective column letter</li> <li>In the **Menu** click **Insert**</li> <li>On the Toolbar click **Delete Column** [ <span class="k-font-icon k-i-delete-column"></span> ]</li></ol> |
+| Hide					| <ol><li>Select a column by clicking on the respective column letter</li> <li>Right-click on the column letter</li> <li>Choose **Hide**</li></ol> |
+| Resize the width of a column | <ol><li>Select a column or a cell within a column</li> <li>Hover the pointer over the column letter field until either the left or right border is highlighted</li> <li>Click the highlighted area and hold while dragging it to the desired width. Release the hold.</li></ol> |
+| Add a background color | <ol><li>Select a  column</li> <li>On the Toolbar click **Background** [ <span class="k-font-icon k-i-background"></span> ]</li> <li>Select the color from the drop-down list</li></ol> |
+| Wrap text				| <ol><li>Select the column whose content you want to wrap</li> <li>Click **Wrap Text** [ <span class="k-font-icon k-i-text-wrap"></span> ] on the Toolbar</li></ol> |
+| Choose border styles and colors | <ol><li>Select a column</li> <li>Click **Borders** [ <span class="k-font-icon k-i-all-borders"></span> ] on the Toolbar</li> <li>Select the border style and/or the color from the drop-down list</li> <li>Click anywhere on the sheet to exit</li></ol> |
 
 ### Actions with Fonts
 
@@ -135,35 +104,18 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 
 | WHAT YOU WANT				| HOW TO GET THERE		|
 | :---						| :---					|
-| Freeze panes				| **1.** Select the row or column which you want to freeze |
-|							| **2.** From the Toolbar click **Freeze Panes** |
-|							| **3.** Choose the option from the drop-down list |
-| Apply the `Undo` function | Click **Undo** on the **Menu** to reverse the actions you made during your current session. The number of actions you can reverse using `Undo` is unlimited. |
-| Apply the `Redo` function | Click **Redo** on the **Menu** to repeat the actions you made during your current session. The number of actions you can repeat using `Redo` is unlimited. |
-| Increase decimal values	| Click **Increase Decimal** on the Toolbar to increase the number of digits after the decimal point |
-| Decrease decimal values	| Click **Decrease Decimal** on the Toolbar to decrease the number of digits after the decimal point |
-| Apply formulas and functions | **1.** Select a cell |
-|							| **2.** Go to the **Formula Bar** and type an equal sign (...) |
-|							| **3.** Type your formula/function and press `Enter` once done to see the outcome of your input in the cell. Note that when you start writing a function, the `AutoComplete` prompts you with the syntax. |
-| Edit formulas and functions 	| **1.** Double-click on a cell to display the formula/function in the **Formula Bar** |
-|								| **2.** Change the formula/function and press **Enter** |
-| Sort information			| **1.** Select a column |
-|							| **2.** On the **Menu** click the **Data** tab |
-|							| **3.** Click **Sort** on the Toolbar and choose an option from the drop-down list. The data within the active sheet is now sorted according to the alphabetical order of the column you modified and in an ascending or descending order of its content.|
-| Apply filters				| **1.** Select the columns whose data you want to filter |
-|							| **2.** Go to **Data** tab on the **Menu** |
-|							| **3.** Click **Filter** on the Toolbar |
-| Use applied filters		| Once you filtered the information in a column, click on the drop-down arrow of the [filter icon?] and choose from the drop-down list of options: |
-|							| **Sort range A to Z** sorts the data within the column in an ascending alphabetical order |
-|							| **Sort range Z to A** sorts the data within the column in a descending alphabetical order |
-|							| **Filter by condition** filters the data within the column by applying any of the conditions from the drop-down list of options. Determine a value in the filed below so the condition can apply and sort the data. |
-|							| **Filter by value** opens a list of all different values listed within the column. Check **All** to avoid setting criteria to the information within the selected column and display all data from it. Uncheck **All** to let go of all sub-filters. You can also set filtering criteria by checking the checkboxes against each value. |
-| Validate data				| Data validation allows you to predetermine the format and constrain the value of the content of a single cell or cells within a range, column, or row. |
-|							| **1.** Select a cell or a range of cells |
-|							| **2.** In the **Menu** click **Data** -> **Data Validation** to open the **Data Validation** window |
-|							| **3.** Choose the criterion from the drop-down list of options. |
-|							| **4.** A new window with criteria-specific options appears. Use the prompts and drop-down options to set the rules for modifying the content. |
-| Export files				| Click **Export to Excel** to export your file in a Microsoft Excel format |
+| Freeze panes				| <ol><li>Select the row or column which you want to freeze</li> <li>From the Toolbar click **Freeze Panes**</li> <li>Choose the option from the drop-down list</li></ol> |
+| Apply the `Undo` function | Click **Undo** [ <span class="k-font-icon k-i-undo"></span> ] on the **Menu** to reverse the actions you made during your current session. The number of actions you can reverse using `Undo` is unlimited. |
+| Apply the `Redo` function | Click **Redo** [ <span class="k-font-icon k-i-redo"></span> ] on the **Menu** to repeat the actions you made during your current session. The number of actions you can repeat using `Redo` is unlimited. |
+| Increase decimal values	| Click **Increase Decimal** [ <span class="k-font-icon k-i-increase-decimal"></span> ] on the Toolbar to increase the number of digits after the decimal point |
+| Decrease decimal values	| Click **Decrease Decimal** [ <span class="k-font-icon k-i-decrease-decimal"></span> ] on the Toolbar to decrease the number of digits after the decimal point |
+| Apply formulas and functions | <ol><li>Select a cell</li> <li>Go to the **Formula Bar** and type an equal sign [ `=` ]</li> <li>Type your formula/function and press `Enter` once done to see the outcome of your input in the cell. Note that when you start writing a function, the `AutoComplete` prompts you with the syntax.</li></ol> |
+| Edit formulas and functions 	| <ol><li>Double-click on a cell to display the formula/function in the **Formula Bar**</li> <li>Change the formula/function and press `Enter`</li></ol> |
+| Sort information			| <ol><li>Select a column</li> <li>On the **Menu** click the **Data** tab</li> <li>Click **Sort** [ <span class="k-font-icon k-i-sort-desc"></span> ] on the Toolbar and choose an option from the drop-down list. The data within the active sheet is now sorted according to the alphabetical order of the column you modified and in an ascending or descending order of its content.</li></ol> |
+| Apply filters				| <ol><li>Select the columns whose data you want to filter</li> <li>Go to **Data** tab on the **Menu**</li> <li>Click **Filter** [ <span class="k-font-icon k-i-filter"></span> ] on the Toolbar</li></ol> |
+| Use applied filters		| Once you filtered the data within a column, click on the drop-down arrow of the filter and choose from the drop-down list of options: <ul><li>**Sort range A to Z** sorts the data within the column in an ascending alphabetical order</li> <li>**Sort range Z to A** sorts the data within the column in a descending alphabetical order</li> <li>**Filter by condition** filters the data within the column by applying any of the conditions from the drop-down list of options. Determine a value in the filed below so the condition can apply and sort the data.</li> <li>**Filter by value** opens a list of all different values listed within the column:</li> <ul><li>Check **All** to avoid setting criteria to the information within the selected column and display all data from it.</li> <li>Uncheck **All** to let go of all sub-filters.</li> <li>You can also set filtering criteria by checking the checkboxes against each value.</li></ul></ul> |
+| Validate data				| Data validation allows you to predetermine the format and constrain the value of the content of a single cell or cells within a range, column, or row: <ol><li>Select a cell or a range of cells</li> <li>In the **Menu** click **Data** -> **Data Validation** to open the **Data Validation** window</li> <li>Choose the criterion from the drop-down list of options.</li> <li>A new window with criteria-specific options appears. Use the prompts and drop-down options to set the rules for modifying the content.</li></ol> |
+| Export files				| Click **Export to Excel** [ <span class="k-font-icon k-i-xls"></span> ] to export your file in a Microsoft Excel format |
 
 <br>
 
@@ -173,16 +125,16 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 
 ### Shortcut Keys
 
-| WHAT YOU WANT TO DO			| SHORTCUTS					|
-| :--- 							| :---						|
-| Copies the content of a cell 	| `Ctrl` + `C`				|
-| Pastes the content of a cell	| `Ctrl` + `V`				|
-| Reverses the last (number? of) commands or deletes the last entry you typed	| `Ctrl` + `Z` |
-| Repeats the last action, if possible 											| `Ctrl` + `Y` |
-| Cuts selected cells			| `Ctrl` + `X`				|
-| Selects the whole worksheet	| `Ctrl` + `A`				|
-| Selects nonadjacent cells		| `Ctrl` + click on the cell you want to select			|
-| Selects nonadjacent rows/columns | `Ctrl` + click on the row/column you want to select 	|
-| Selects adjacent cells 		| `Shift` + an `arrow` key 	|
-| Selects adjacent rows/columns	| `Shift` + an `arrow` key 	|
-| Cancel an entry in a cell or in the Formula Bar | `Esc`	|
+| WHAT YOU WANT TO DO										| SHORTCUTS					|
+| :--- 														| :---						|
+| Copies the content of a cell 								| `Ctrl` + `C`				|
+| Pastes the content of a cell								| `Ctrl` + `V`				|
+| Reverses the last commands or deletes the last entry you typed	| `Ctrl` + `Z` 		|
+| Repeats the last action, if possible 						| `Ctrl` + `Y` 				|
+| Cuts selected cells										| `Ctrl` + `X`				|
+| Selects the whole worksheet								| `Ctrl` + `A`				|
+| Selects nonadjacent cells									| `Ctrl` + click on the cell you want to select			|
+| Selects nonadjacent rows/columns 							| `Ctrl` + click on the row/column you want to select 	|
+| Selects adjacent cells 									| `Shift` + an `arrow` key 	|
+| Selects adjacent rows/columns								| `Shift` + an `arrow` key 	|
+| Cancels an entry in a cell or in the Formula Bar			| `Esc`						|
