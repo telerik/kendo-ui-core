@@ -22,7 +22,7 @@ The following tutorial shows how to scaffold a Kendo UI Scheduler for ASP.NET MV
 
 4.  On the next screen you will be presented with the Model and Data Context options.
     - First enter the Controller and View names.  
-![Scheduler options](/aspnet-mvc/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_1)
+![Scheduler options](/aspnet-mvc/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_1.png)
     - The **Model Class** DropDownList will contain all model types from the active project. In this example we will list products in the Scheduler. Select the **Product** entity.  
 ![Model Class](/aspnet-mvc/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_3.png)
     - From the **Data Context Class** DropDownList you could select the **Entity Framework Data Model** class to be used. In this example it is **SampleEntities** (the DataBase used is the one from the [offline examples](/aspnet-mvc/introduction#running-the-sample-application)).  
