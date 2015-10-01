@@ -317,53 +317,53 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
 if (kendo.ui.Scheduler) {
 kendo.ui.Scheduler.prototype.options.messages =
 $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
-  "allDay": "all day",
-  "cancel": "Cancel",
+  "allDay": "hele dagen",
+  "cancel": "Fortryd",
   "editable": {
-    "confirmation": "Are you sure you want to delete this event?"
+    "confirmation": "Er du sikker på at du vil slette denne begivenhed?"
   },
-  "date": "Date",
-  "destroy": "Delete",
+  "date": "Dato",
+  "destroy": "Slet",
   "editor": {
-    "allDayEvent": "All day event",
-    "description": "Description",
-    "editorTitle": "Event",
-    "end": "End",
-    "endTimezone": "End timezone",
-    "repeat": "Repeat",
-    "separateTimezones": "Use separate start and end time zones",
+    "allDayEvent": "Hele dagen",
+    "description": "Beskrivelse",
+    "editorTitle": "Begivenhed",
+    "end": "Slut",
+    "endTimezone": "Slut tidszone",
+    "repeat": "Gentag",
+    "separateTimezones": "Brug forskellige start og slut tidszoner",
     "start": "Start",
-    "startTimezone": "Start timezone",
+    "startTimezone": "Start tidszone",
     "timezone": " ",
-    "timezoneEditorButton": "Time zone",
-    "timezoneEditorTitle": "Timezones",
-    "title": "Title",
-    "noTimezone": "No timezone"
+    "timezoneEditorButton": "Tidszone",
+    "timezoneEditorTitle": "Tidszoner",
+    "title": "Titel",
+    "noTimezone": "Ingen tidszone"
   },
-  "event": "Event",
+  "event": "Begivenhed",
   "recurrenceMessages": {
-    "deleteRecurring": "Do you want to delete only this event occurrence or the whole series?",
-    "deleteWindowOccurrence": "Delete current occurrence",
-    "deleteWindowSeries": "Delete the series",
-    "deleteWindowTitle": "Delete Recurring Item",
-    "editRecurring": "Do you want to edit only this event occurrence or the whole series?",
-    "editWindowOccurrence": "Edit current occurrence",
-    "editWindowSeries": "Edit the series",
-    "editWindowTitle": "Edit Recurring Item"
+    "deleteRecurring": "Vil du kun slette denne hændelse eller hele serien?",
+    "deleteWindowOccurrence": "Slet denne hændelse",
+    "deleteWindowSeries": "Slet hele serien",
+    "deleteWindowTitle": "Slet tilbagevendende hændelse",
+    "editRecurring": "Vil du kun redigere denne hændelse eller hele serien?",
+    "editWindowOccurrence": "Rediger denne hændelse",
+    "editWindowSeries": "Rediger hele serien",
+    "editWindowTitle": "Rediger tilbagevendende hændelse"
   },
-  "save": "Save",
-  "time": "Time",
-  "today": "Today",
+  "save": "Gem",
+  "time": "Tid",
+  "today": "I dag",
   "views": {
     "agenda": "Agenda",
-    "day": "Day",
-    "month": "Month",
-    "week": "Week",
-    "workWeek": "Work Week"
+    "day": "Dag",
+    "month": "Måned",
+    "week": "Uge",
+    "workWeek": "Arbejdsuge"
   },
-  "deleteWindowTitle": "Delete event",
-  "showFullDay": "Show full day",
-  "showWorkDay": "Show business hours"
+  "deleteWindowTitle": "Slet begivenhed",
+  "showFullDay": "Vis hel dag",
+  "showWorkDay": "Vis arbejdsdag"
 });
 }
 })(window.kendo.jQuery);
