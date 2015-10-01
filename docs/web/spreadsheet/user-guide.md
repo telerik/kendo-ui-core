@@ -6,19 +6,19 @@ position: 2
 
 # The User Guide to the Kendo UI Spreadsheet Widget
 
-##### Audience
+### Audience
 
 This guide is intended for the end user of the Kendo UI Spreadsheet widget. It aims at providing information about the widget's functionalities for data entry/management, and support to end users while working with it.
 
-##### Table of Contents
+### Table of Contents
 
 To the left of this page is the collapsible Table of Contents. You can easily navigate through it by clicking on the title of a section you want to read.
 
-##### Organization
+### Organization
 
 The instructions in this guide are organized in sections, based on the actions you might wish to execute on each spreadsheet component (sheets, rows, columns).
 
-##### Conventions
+### Conventions
 
 This guide uses the following conventions:
 
@@ -34,14 +34,9 @@ The Kendo UI Spreadsheet is used for implementation of related data and its visu
 This kind of data structuring provides for an easier management and analysis.
 The widget renders the feeling of a [Microsoft Excel table](https://support.office.com/en-ca/article/Overview-of-Excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c) by offering many cell-formatting options, styles, and themes, while utilizing simpler and easy-to-master user interface.
 
-##### Elements of Kendo UI Spreadsheet
-
-
-
 ### Actions with Sheets
 
 When you open the spreadsheet, the widget automatically generates a worksheet and applies to it a set of default settings.
-
 
 | WHAT YOU WANT			| HOW TO GET THERE	|
 | :---					| :---				|
@@ -65,7 +60,7 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | Merge cells (via the Toolbar)	|<ol><li>Select the cells you want to merge</li> <li>Click **Merge Cells** [ <span class="k-font-icon k-i-merge-horizontally"></span> ] on the Toolbar</li> <li>Choose an option from the drop-down list</li></ol> |
 | Add a background color| <ol><li>Select a cell</li> <li>Click **Background** [ <span class="k-font-icon k-i-background"></span> ] on the Toolbar</li> <li>Choose a color from the drop-down list to apply to the cell background</li></ol> |
 | Align content			| <ol><li>Select a cell</li> <li>Click **Alignment** [ <span class="k-font-icon k-i-justify-left"></span> ] on the Toolbar</li> <li>Choose a style form the drop-down list</li></ol> |
-| Wrap text				| <ol><li>Select the cell that contains content you want to wrap</li> <li>Click **Wrap Text** [ <span class="k-font-icon k-i-text-wrap"></span> ] on the Toolbar</li></ol> |
+| Wrap text				| <ol><li>Select a cell that contains the content you want to wrap</li> <li>Click **Wrap Text** [ <span class="k-font-icon k-i-text-wrap"></span> ] on the Toolbar</li></ol> |
 | Choose border styles and colors | <ol><li>Select a cell</li> <li>Click **Borders** [ <span class="k-font-icon k-i-all-borders"></span> ] on the Toolbar</li> <li>Select the border style and/or the color from the drop-down list</li> <li>Click anywhere on the sheet to exit</li></ol> |
 
 ### Actions with Rows
@@ -101,7 +96,7 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | :---					| :---					|
 | Choose a font			| <ol><li>Select the cell(s) to which you want to apply the font</li> <li>On the Toolbar click **Font** [ <span class="k-font-icon k-i-font-family"></span> ]</li> <li>Choose a font type from the drop-down list</li></ol> |
 | Edit the font size 	| <ol><li>Select the cell(s) to which you want to apply the font size</li> <li>On the Toolbar click **Font Size** [ <span class="k-font-icon k-i-font-size"></span> ]</li> <li>Choose the font size from the predetermined values in drop-down list</li></ol> |
-| Format fonts			| <ol><li>Select the cell(s) where you want to format the font</li> <li>Use any of the following commands:</li></ol> <ul><ul><li>To make make the font **bold**, click **Bold** [ <span class="k-font-icon k-i-bold"></span> ] on the Toolbar</li> <li>To make make the font *italic*, click **Italic** [ <span class="k-font-icon k-i-italic"></span> ] on the Toolbar</li> <li>To make make the font <u>underlined</u>, click **Underline** [ <span class="k-font-icon k-i-underline"></span> ] on the Toolbar</li></ul></ul> |
+| Format fonts			| <ol><li>Select the cell(s) where you want to format the font</li> <li>Use any of the following commands:</li></ol> <ul><ul><li>To make make the font **bold**, click **Bold** [ <span class="k-font-icon k-i-bold"></span> ] on the Toolbar</li> <li>To make make the font <i>italic</i>, click **Italic** [ <span class="k-font-icon k-i-italic"></span> ] on the Toolbar</li> <li>To make make the font <u>underlined</u>, click **Underline** [ <span class="k-font-icon k-i-underline"></span> ] on the Toolbar</li></ul></ul> |
 | Customize the format of numbers | <ol><li>Select the cell(s) where you want to format the font</li> <li>Click **Custom Format** [ <span class="k-font-icon k-i-format-number"></span> ] on the Toolbar</li> <li>Select an option from the drop-down list. The style of formatting is hinted to the right of each option.</li></ol> |
 | Further customize the format of numbers | <ol><li>Select the cell(s) whose content you want to format</li> <li>Click **Custom Format** [ <span class="k-font-icon k-i-format-number"></span> ] -> **More Formats**. Choose any of the following options:</li></ol> <ul><ul><li>**Number** customizes the format of numerical input</li> <li>**Currency** customizes the format of currency input</li> <li>**Date** customizes the format of date input</li></ul></ul> |
 
