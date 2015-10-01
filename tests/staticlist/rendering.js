@@ -541,4 +541,29 @@
 
         ok(true);
     });
+
+    test("StaticList doesn't select value on bind if skipUpdateOnBind is true", function() {
+        var list = new StaticList(element, {
+            selectable: "multiple",
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "a" },
+                    { name: "item3", type: "b" }
+                ]
+            },
+            value: ["item1", "item3"],
+            template: '#:data.name#',
+            skipUpdateOnBind: true
+        });
+
+        stub(list, {
+            value: list.value
+        });
+
+        list.dataSource.read();
+
+        ok(!list.args("value")[0]);
+    });
 })();
