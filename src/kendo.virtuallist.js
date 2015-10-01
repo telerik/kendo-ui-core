@@ -358,7 +358,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 that._createList();
-                if (!action && that._values.length && !that._filter) {
+                if (!action && that._values.length && !that._filter && !that.options.skipUpdateOnBind) {
                     that.value(that._values, true).done(function() {
                         that._lastPage = that.dataSource.page();
                         that._listCreated = true;

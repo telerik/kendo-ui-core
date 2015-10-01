@@ -299,6 +299,26 @@
         });
     });
 
+    asyncTest("widget doesn't set value if skipUpdateOnBind is true", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            valueMapper: function(options) { options.success(options.value); },
+            dataValueField: "text",
+            value: ["Item1"],
+            skipUpdateOnBind: true
+        }));
+
+        stub(virtualList, {
+            value: virtualList.value
+        });
+
+        virtualList.one("listBound", function() {
+            start();
+            equal(virtualList.calls("value"), 0);
+        });
+
+        virtualList.dataSource.read();
+    });
+
     //dataBinding
 
     asyncTest("reads the dataSource (autoBind: true by default)", 1, function() {
