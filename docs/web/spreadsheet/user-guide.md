@@ -34,8 +34,8 @@ The Kendo UI Spreadsheet is used for implementation of related data and its visu
 This kind of data structuring provides for an easier management and analysis.
 The widget renders the feeling of a [Microsoft Excel table](https://support.office.com/en-ca/article/Overview-of-Excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c) by offering many cell-formatting options, styles, and themes, while utilizing simpler and easy-to-master user interface.
 
-
-![Spreadsheet UI components](images/spreadsheet-components.png)
+##### Main Elements of the Kendo UI Spreadsheet Widget  
+<center>![Spreadsheet UI components](images/spreadsheet-components.png)</center>
 
 ### Actions with Sheets
 
@@ -122,9 +122,9 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 
 <br>
 
-> Whenever **Cancel** is displayed as a command and you click on it, it closes an active drop-down list or menu, or exits an open window, and takes you back to the spreadsheet.
+> Whenever **Cancel** is displayed as a command, click on it if you want to close an active drop-down list or menu, or exit an open window, and return to the worksheet.
 >
-> Whenever **Apply** is displayed as a command, click on it after you selected an option to confirm its application.
+> Whenever **Apply** is displayed as a command, click on it if you want an option you selected to be applied.
 
 ### Shortcut Keys
 
