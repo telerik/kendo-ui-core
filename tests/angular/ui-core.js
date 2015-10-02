@@ -277,6 +277,20 @@
         equal($scope.foo, "two");
    });
 
+   ngTest2("Widget value is updated when k-ng-model is set", 1, function(dom, controller, bootstrap) {
+       var date = new Date();
+
+       controller(function($scope) {
+           $scope.obj = date;
+       });
+       $("<input kendo-date-time-picker='kdtp' k-ng-model='obj'/>").appendTo(dom);
+
+       bootstrap();
+       var $scope = dom.scope();
+       equal($scope.kdtp.value(), date);
+   });
+
+
    asyncTest("triggers kendoRendered", 2, function() {
        var root = $('<div ng-controller=main></div>').appendTo(QUnit.fixture);
 

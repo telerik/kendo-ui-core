@@ -412,6 +412,7 @@ var __meta__ = { // jshint ignore:line
 
                 if (formattedValue !== value) {
                     that.element.val(date === null ? value : formattedValue);
+                    that.element.trigger(CHANGE);
                 }
 
                 return date;
@@ -742,7 +743,7 @@ var __meta__ = { // jshint ignore:line
         options.format = extractFormat(options.format || patterns.g);
         options.timeFormat = timeFormat = extractFormat(options.timeFormat || patterns.t);
         kendo.DateView.normalize(options);
-        
+
         if (parseFormats) {
            options.parseFormats.unshift("yyyy-MM-ddTHH:mm:ss");
         }
