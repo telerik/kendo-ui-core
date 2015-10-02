@@ -49,12 +49,13 @@ By default, elements without any align are centered.
 ## Automatically Update NavBar Title Based on Current View's Title
 
 If an element with `role` data attribute set to `view-title` is present inside the mobile NavBar,
-the Kendo mobile Application instance will update its text to the current View's title when changing views.
+the Kendo mobile Application instance will update its text to the current View's title when changing views. Notice that the element itself should not contain any text - it will be removed automatically.
 The View title is specified by setting the `title` data attribute of the View element.
 
 This feature is particularly useful if the mobile NavBar is inside a layout.
 
 > The NavBar will automatically hide if the containing view does not have a view title and the NavBar hosts a span with `data-role=view-title` attribute.
+
 
 ### Use the `view-title` data attribute to auto-update the mobile NavBar title
 
