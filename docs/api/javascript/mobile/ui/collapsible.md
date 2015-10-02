@@ -244,7 +244,7 @@ Recalculates the content height.
         function onExpand() {
             var that = this;
             setTimeout(function() {
-                that.refresh();
+                that.resize();
             });
         }
     </script>
