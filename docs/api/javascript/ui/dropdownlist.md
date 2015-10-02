@@ -19,6 +19,9 @@ Configures the opening and closing animations of the suggestion popup. Setting t
     <input id="dropdownlist" />
     <script>
     $("#dropdownlist").kendoDropDownList({
+      dataSource: {
+        data: ["One", "Two"]
+      },
       animation: false
     });
     </script>
