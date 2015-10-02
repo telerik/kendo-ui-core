@@ -28,6 +28,7 @@ Configures the opening and closing animations of the suggestion popup. Setting t
     <input id="dropdownlist" />
     <script>
     $("#dropdownlist").kendoDropDownList({
+      dataSource: ["One", "Two"],
       animation: {
        close: {
          effects: "fadeOut zoom:out",
@@ -48,6 +49,7 @@ Configures the opening and closing animations of the suggestion popup. Setting t
     <input id="dropdownlist" />
     <script>
     $("#dropdownlist").kendoDropDownList({
+      dataSource: ["One", "Two"],
       animation: {
        close: {
          effects: "zoom:out",
