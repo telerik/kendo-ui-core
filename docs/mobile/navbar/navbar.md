@@ -16,7 +16,18 @@ Alternatively, it can be initialized using jQuery plugin syntax in the containin
 
 ### Initialize Kendo mobile NavBar based on role data attribute
 
-    <div data-role="navbar">My View Title</div>
+```html
+    <div data-role="view" data-title="Hello world">
+        <div data-role="header">
+            <div data-role="navbar">
+                <span data-role="view-title"></span>
+            </div>
+        </div>
+    </div>
+    <script>
+        new kendo.mobile.Application();
+    </script>
+```
 
 ### Initialize Kendo mobile NavBar using jQuery plugin syntax
 
@@ -42,6 +53,8 @@ the Kendo mobile Application instance will update its text to the current View's
 The View title is specified by setting the `title` data attribute of the View element.
 
 This feature is particularly useful if the mobile NavBar is inside a layout.
+
+> The NavBar will automatically hide if the containing view does not have a view title and the NavBar hosts a span with `data-role=view-title` attribute.
 
 ### Use the `view-title` data attribute to auto-update the mobile NavBar title
 
