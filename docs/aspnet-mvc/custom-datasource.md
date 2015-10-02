@@ -56,8 +56,7 @@ Using the CustomDataSource builder even for small customizations require additio
         )
     )
 
-##Using the ClientHandlerDescriptor class to set JavaScript function or object for "Read" operation:
-
+##Using the ClientHandlerDescriptor class to set JavaScript function or object as option of DataSource
 The demo below show how to set JavaScript function for the "Read" operation of the Scheduler by utilizing the "ClientHandlerDescriptor" type included in "Kendo.Mvc" namespace. This class allow rendering of code as-is, without wrapping as string - this way JavaScript functions and objects can be set to various options of the CustomDataSource.
 
     @(Html.Kendo().Scheduler<MeetingViewModel>()
@@ -101,6 +100,55 @@ The demo below show how to set JavaScript function for the "Read" operation of t
         }
     </script>
 
+##DefaultValue of model fields as function
+This example show how to set the default value of the "EmployeeID" field to JavaScript function. This is usable in cases where the default value should be dynamic - for example when the user insert new record while "EmployeeID" column is filtered by value different than the default value.
+
+    @(Html.Kendo().Grid<ForeignKeyColumnDemo.Models.Order>()
+        .Name("grid")
+        .ToolBar(toolbar => toolbar.Create())
+        .Filterable()
+        .DataSource(dataSource => dataSource
+            .Custom()
+            .Type("aspnetmvc-ajax")
+            .PageSize(10)
+            .ServerPaging(false)
+            .ServerSorting(false)
+            .ServerFiltering(false)
+            .Transport(transport => transport
+                .Read(read => read.Action("Read", "Home"))
+                .Create(create => create.Action("Create", "Home"))
+            )
+            .Schema(schema => schema
+                .Data("Data")
+                .Total("Total")
+                .Errors("Errors")
+                .Model(model => {
+                    model.Id("OrderID");
+                    model.Field("OrderID", typeof(int));
+                    model.Field("EmployeeID", typeof(int)).DefaultValue(new Kendo.Mvc.ClientHandlerDescriptor() { HandlerName = "defaultValue" });
+                    model.Field("OrderDate", typeof(DateTime));
+                    model.Field("OrderDescription", typeof(string));
+                    model.Field("IsCompleted", typeof(bool));
+                })
+            )
+        )
+    )
+    
+    <script>    
+        function defaultValue(e) {
+            if (typeof this.EmployeeID === "function") {
+                var grid = $("#grid").data("kendoGrid");
+                var ds = grid.dataSource;
+                var filter = ds.filter();
+             
+                if (filter && filter.filters[0].field === "EmployeeID") {
+                    return filter.filters[0].value;
+                } else {
+                    return 1;
+                }
+            }
+        }
+    </script>
 
 ##Setting custom DataType of the Grid DataSource CRUD operations
 Example below show how to bind the Grid to Kendo UI online demo service that serve "jsonp" data (full demo is available in [Telerik UI for ASP.NET MVC offline application](/aspnet-mvc/introduction#sample-application)):
@@ -215,7 +263,7 @@ Here is an example of using the CustomDataSource builder to bind the Grid wrappe
             .Type("odata-v4")
             .Transport(transport =>
             {
-                transport.Read(read => read.Url("/odata/Products").Data("function() {return {'$expand': 'Category'} }"));
+                transport.Read(read => read.Url("/odata/Products").Data("{'$expand': 'Category'}");
             })
             .Events(ev => ev.RequestEnd("onRequestEnd"))
             .PageSize(20)
