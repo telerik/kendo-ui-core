@@ -8,7 +8,7 @@ description: A How-To article explaining how to implement a stable sort in Googl
 
 The implementation of the built-in sorting algorithm in Google Chrome [is not guaranteed to be stable](https://code.google.com/p/v8/issues/detail?id=90).
 
-A [non-stable sorting algorithm] may cause items with the same sorting order to change places.
+A [non-stable sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability) may cause items with the same sorting order to change places.
 
 Take the example below. When you run it in Chrome and sort by the Address field, the items will change place.
 This is visible if you look at the Name column.
