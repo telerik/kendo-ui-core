@@ -15,25 +15,13 @@ The Sortable widget makes a group of DOM elements sortable by dragging and dropp
 - [Initialize a Sortable widget using jQuery plug-in syntax](#initialize-a-sortable-widget-using-jquery-plug-in-syntax)
 - [Key features](#key-features)
 - [Placeholder](#placeholder)
-  - [Customize the placeholder](#customize-the-placeholder)
-    - [Build the placeholder from the dragged element](#build-the-placeholder-from-the-dragged-element)
-    - [Build a static placeholder](#build-a-static-placeholder)
 - [Hint](#hint)
-  - [Customize the hint](#customize-the-hint)
-    - [Build the hint from the dragged element](#build-the-hint-from-the-dragged-element)
-    - [Build a static hint](#build-a-static-hint)
-    - [Disable the hint](#disable-the-hint)
 - [Filter/Disable items](#filterdisable-items)
-  - [Disable all items at runtime](#disable-all-items-at-runtime)
 - [Cursor](#cursor)
-  - [Change the cursor to "move"](#change-the-cursor-to-move)
-  - [Example - grab/grabbing cursor on hover](#example---grabgrabbing-cursor-on-hover)
 - [Movement by axis](#movement-by-axis)
 - [Common scenarios](#common-scenarios)
 - [Persist the order](#persist-the-order)
-  - [Persist items' order in local storage](#persist-items-order-in-local-storage)
 - [Sortable items with inputs](#sortable-items-with-inputs)
-  - [Sortable widget with focus-able input elements](#sortable-widget-with-focus-able-input-elements)
 - [Related help topics](#related)
 
 ## Initialization and basic usage
@@ -42,6 +30,7 @@ The Sortable widget is initialized on an existing HTML element and enables the r
 
 ### Initialize a Sortable widget using jQuery plug-in syntax
 
+```html
     <ul id="sortable">
         <li>Item1</li>
         <li>Item2</li>
@@ -51,6 +40,7 @@ The Sortable widget is initialized on an existing HTML element and enables the r
     <script>
         $("#sortable").kendoSortable();
     </script>
+```
 
 ## Key features
 
@@ -66,6 +56,7 @@ You may change the default placeholder by setting the `placeholder` configuratio
 
 ##### Build the placeholder from the dragged element
 
+```html
     <ul id="sortable">
         <li>ItemA1</li>
         <li>ItemA2</li>
@@ -82,9 +73,11 @@ You may change the default placeholder by setting the `placeholder` configuratio
             }
         });
     </script>
+```
 
 ##### Build a static placeholder
 
+```html
     <ul id="sortable">
         <li>ItemA1</li>
         <li>ItemA2</li>
@@ -96,6 +89,7 @@ You may change the default placeholder by setting the `placeholder` configuratio
             placeholder: "<li>Drop Here!</li>"
         });
     </script>
+```
 
 ### Hint
 
@@ -109,6 +103,7 @@ You may change the default hint by setting the `hint` configuration option.
 
 ##### Build the hint from the dragged element
 
+```html
     <ul id="sortable">
         <li>ItemA1</li>
         <li>ItemA2</li>
@@ -124,9 +119,11 @@ You may change the default hint by setting the `hint` configuration option.
             }
         });
     </script>
+```
 
 ##### Build a static hint
 
+```html
     <ul id="sortable">
         <li>ItemA1</li>
         <li>ItemA2</li>
@@ -138,11 +135,13 @@ You may change the default hint by setting the `hint` configuration option.
             hint: "<span>hint!</span>"
         });
     </script>
+```
 
 ##### Disable the hint
 
 The Sortable widget can work without a visible hint. To disable the hint, set the `hint` option to an empty function ([jQuery.noop](http://api.jquery.com/jQuery.noop/)).
 
+```html
     <ul id="sortable">
         <li>ItemA1</li>
         <li>ItemA2</li>
@@ -154,6 +153,7 @@ The Sortable widget can work without a visible hint. To disable the hint, set th
             hint: $.noop
         });
     </script>
+```
 
 ### Filter/Disable items
 
@@ -163,6 +163,7 @@ The **disabled** option specifies which items inside the Sortable's container ca
 
 #### Disable all items at runtime
 
+```html
     <ul id="sortable">
         <li>ItemA1</li>
         <li>ItemA2</li>
@@ -180,6 +181,7 @@ The **disabled** option specifies which items inside the Sortable's container ca
             $("#sortable").children().addClass("disabled");
         });
     </script>
+```
 
 ### Cursor
 
@@ -188,6 +190,7 @@ There are several build-in cursor types you can choose from. A full list is avai
 
 #### Change the cursor to "move"
 
+```
     <ul id="sortable">
         <li>ItemA1</li>
         <li>ItemA2</li>
@@ -199,11 +202,13 @@ There are several build-in cursor types you can choose from. A full list is avai
             cursor: "move"
         });
     </script>
+```
 
 The `cursor` option changes the cursor style **only while the item is being dragged**. You may change the on-hover cursor with CSS.
 
 #### Example - grab/grabbing cursor on hover
 
+```html
     <ul id="sortable">
         <li>ItemA1</li>
         <li>ItemA2</li>
@@ -221,6 +226,7 @@ The `cursor` option changes the cursor style **only while the item is being drag
             cursor: url('http://demos.telerik.com/kendo-ui//content/web/sortable/grabbing.cur'), default;
         }
     </style>
+```
 
  > Using a custom cursor in Internet Explorer browsers is not recommended. As it can cause performance problems, due to browser specifics in custom cursor icon rendering.
 
@@ -244,6 +250,7 @@ To restore the Sortable layout you should render the DOM elements in their last 
 
 #### Persist items' order in local storage
 
+```html
     <div id="sortable"></div>
 
     <button id="reset">Reset</button>
@@ -304,6 +311,7 @@ To restore the Sortable layout you should render the DOM elements in their last 
             background-color: #51A0ED;
         }
     </style>
+```
 
 ### Sortable items with inputs
 
@@ -311,6 +319,7 @@ A common problem that developers encounter is that input elements inside the Sor
 
 #### Sortable widget with focus-able input elements
 
+```html
     <ul id="sortable">
         <li>ItemA1 <input type="text" /></li>
         <li>ItemA2 <input type="text" /></li>
@@ -322,6 +331,37 @@ A common problem that developers encounter is that input elements inside the Sor
             ignore: "input"
         });
     </script>
+```
+
+#### Sortable widget with radio buttons
+
+A sortable with radio buttons and a hint cloned from the sortable element will lose the selected radio if dragged, because the clone will take over the selection. To avoid this, clear the name of the radio in the hint:
+
+```html
+ <ul id="sortable-basic">
+      <li class="sortable"><input type="radio" name="foo" />Papercut <span>3:04</span></li>
+      <li class="sortable"><input type="radio" name="foo" />One Step Closer <span>2:35</span></li>
+      <li class="sortable"><input type="radio" name="foo" />With You <span>3:23</span></li>
+      <li class="sortable"><input type="radio" name="foo" />Points of Authority <span>3:20</span></li>
+      <li class="sortable"><input type="radio" name="foo" />Crawling <span>3:29</span></li>
+
+    </ul>
+
+    <script>
+      $("#sortable-basic").kendoSortable({
+        hint:function(element) {
+          var hint = element.clone().addClass("hint");
+          // alternatively, you may remove the input from the hint
+          hint.find("input").attr("name", "");
+          return hint;
+
+        },
+        placeholder:function(element) {
+          return element.clone().addClass("placeholder").text("drop here");
+        }
+      });
+    </script>
+```
 
 
 ## Related
