@@ -3,7 +3,7 @@ title: Application
 page_title: Documentation for Kendo UI Mobile Application
 description: How to initiate Kendo UI Mobile Application and handle the navigation.
 previous_url: /howto/universal-mobile-apps-html5
-position: 1
+position: 0
 ---
 
 # Application
@@ -320,51 +320,6 @@ By default Android Kendo UI Mobile styling switches the places of the applicatio
         -webkit-flex-direction: column;
         flex-direction: column;
     }
-
-## Forcing Platform Styles
-
-The **Application** provides a way to force a specific platform look on your application upon init by
-passing the platform name in the `options` parameter of the Application's constructor:
-
-### Force iOS look
-
-    <script>
-         new kendo.mobile.Application($(document.body), {
-             platform: "ios"
-         });
-    </script>
-
-Platform can be one of "ios", "ios7", "android", "blackberry" and "wp". Additionally, platform theme variants can be set by either using platform or skin configuration option.
-Platform variants can be "android-light" and "android-dark" (which is default):
-
-### Force Android Holo Light theme
-
-    <script>
-         new kendo.mobile.Application($(document.body), {
-             skin: "android-light"
-         });
-    </script>
-
-Additionally, the OS version can be specified by passing a `kendo.support.mobileOS` object that is expected by Kendo UI Mobile.
-This allows fine-grained tuning of the application look and behavior. A sample object initialization is like this:
-
-### Force iOS 5 look
-
-    <script>
-        new kendo.mobile.Application($(document.body), {
-            platform: {
-                device: "ipad",       // Mobile device, can be "ipad", "iphone", "android", "fire", "blackberry", "wp"
-                name: "ios",          // Mobile OS, can be "ios", "android", "blackberry", "wp"
-                ios: true,            // Mobile OS name as a flag
-                majorVersion: 5,      // Major OS version
-                minorVersion: "0.0",  // Minor OS versions
-                flatVersion: "500",   // Flat OS version for easier comparison
-                appMode: false,       // Whether running in browser or in AppMode/Cordova/PhoneGap/Telerik AppBuilder.
-                cordova: false,       // Whether running in Cordova/PhoneGap/Telerik AppBuilder.
-                tablet: "ipad"        // If a tablet - tablet name or false for a phone.
-            }
-        });
-    </script>
 
 ## Stop link highlighting in Windows Phone 8
 
