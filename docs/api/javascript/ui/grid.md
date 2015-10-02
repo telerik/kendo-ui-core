@@ -1415,7 +1415,26 @@ be disabled for this column. By default all columns are sortable if sorting is e
 
 ### columns.sortable.compare `Function`
 
-A JavaScript function which is used to compare the values - should return -1 if first argument is less than second one, 0 if both are the same or +1 if the first one is greater than second one.
+A JavaScript function which is used to compare the values. It has the same signature as the [compare function accepted by Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
+
+The basic function implementation is as follows (pseudo-code):
+```pseudo
+    function compare(a, b, descending) {
+      if (a is less than b by some ordering criterion) {
+        return -1;
+      }
+
+      if (a is greater than b by the ordering criterion) {
+        return 1;
+      }
+
+      // a must be equal to b
+      return 0;
+    }
+```
+
+One notable exception is that we also supply a third parameter that indicates the sort direction (true for descending).
+See [How-to: Stable Sort in Chrome](/web/grid/how-to/stable-sort-chrome) for more details on how this can be useful.
 
 #### Example - define custom compare function
 
