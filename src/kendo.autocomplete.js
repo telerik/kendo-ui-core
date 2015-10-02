@@ -401,7 +401,8 @@ var __meta__ = { // jshint ignore:line
                     that._angularItems("cleanup");
                 },
                 dataBound: listBoundHandler,
-                listBound: listBoundHandler
+                listBound: listBoundHandler,
+                skipUpdateOnBind: true
             };
 
             listOptions = $.extend(that._listOptions(), listOptions, typeof virtual === "object" ? virtual : {});
