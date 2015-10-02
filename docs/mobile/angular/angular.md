@@ -46,7 +46,7 @@ event).
 
 ## Mobile Widget Directives
 
-All directives may be used as elements or as attributes. If the directive is used as an element name, it **will be replaced** with a standard HTML
+All directives may be used as elements or as **attributes**. If the directive is used as an element name, it **will be replaced** with a standard HTML
 element once the directive is compiled. Each mobile widget features an AngularJS in the [Kendo UI demos web site](http://demos.telerik.com/kendo-ui/).
 
 ### ActionSheet
@@ -69,6 +69,10 @@ The widget is instantiated from the `kendo-mobile-detail-button` directive.
 ### ButtonGroup
 
 The widget is instantiated from the `kendo-mobile-button-group` directive.
+
+### Collapsible
+
+the widget is instantiated from the `kendo-mobile-collapsible` directive. The inner markup follows follows the same convention as the non-angular widget.
 
 ### Drawer
 
