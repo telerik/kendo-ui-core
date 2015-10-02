@@ -2,22 +2,240 @@
 title: Styling
 page_title: User guide to styling Kendo UI Mobile applications
 description: How to style Kendo UI Mobile applications with CSS.
+position: 0
 ---
 
-# Styling Kendo UI Mobile
 
-<br/>
 ## Kendo UI Mobile CSS Dependencies
 
 <br/>
-By default Kendo UI Mobile is shipped with several separate CSS files:
+Kendo UI Mobile is shipped with several separate CSS files:
 
-* **kendo.mobile.all.min.css** - is the default one and includes all supported themes, along with the Flat skin, common and icon CSSes.
-* **kendo.mobile.\*.min.css** - separate CSS files for every supported platform, which (every one) are self-sufficient - they include the needed common and icon CSS.
+* **kendo.mobile.all.min.css** - is the default one and includes all supported themes, common and icon CSS.
+* **kendo.mobile.\*.min.css** - separate CSS files for every supported platform and skin, which are self-sufficient.
 * **kendo.mobile.common.min.css** - common and icon CSS needed for the Kendo UI Mobile theme skeleton - use this one if you want to start a skin from scratch.
-* **kendo.icenium.min.css** - Separate CSS build for Icenium - it includes only the iOS and Android themes.
 
-All themes and skins ***require*** the **images** subfolder, which contains a mask for the iOS back button, icon fonts and the WP8 PhoneGap icon workaround images.
+All themes and skins ***require*** the **images** sub-folder, which contains a mask for the iOS back button, icon fonts and the WP8 PhoneGap icon workaround images.
+
+Depending on the project requirements, the mobile application may be styled in several different ways.
+Each approach requires a different set of stylesheets and `mobile.Application` configuration options.
+
+## Mobile Application Which Changes its Theme Based on the Device It Is Deployed on
+
+For the platform-adaptive styling to work as expected, the `kendo.mobile.all.min.css` CSS should be referred.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2014.3.1316/styles/kendo.mobile.all.min.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2015.3.930/js/kendo.all.min.js"></script>
+</head>
+<body>
+    <div data-role="view" data-title="Hello world">
+
+    <div data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title">Hello</span>
+        </div>
+    </div>
+        <a data-role="button">I am a button</a>
+    </div>
+
+    <script>
+        new kendo.mobile.Application(document.body, {
+        });
+    </script>
+</body>
+</html>
+```
+
+## Mobile Application with iOS Look on All Devices
+
+If you are targeting iOS devices only, or you want your application to have the iOS look regardless of the device, you may use either `kendo.mobile.all.min.css` or `kendo.mobile.ios.min.css`.
+Both stylesheet files include both the *iOS6* (default) and *iOS7+* looks. The `majorVersion` of the `platform` configuration option determines which one will be used.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- both stylesheets may be used here -->
+    <!-- <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.3.930/styles/kendo.mobile.ios.min.css" />  -->
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.3.930/styles/kendo.mobile.ios.min.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2015.3.930/js/kendo.all.min.js"></script>
+</head>
+<body>
+    <div data-role="view" data-title="Hello world">
+
+    <div data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title">Hello</span>
+        </div>
+    </div>
+        <a data-role="button">I am a button</a>
+    </div>
+
+    <script>
+        new kendo.mobile.Application(document.body, {
+            platform: {
+                name: "ios",
+                majorVersion: 9 // Major OS version - may be set to 6 or removed for the skeuomorphism look.
+            }
+        });
+    </script>
+</body>
+</html>
+```
+
+## Mobile Application with Android Look on All Devices
+
+If you are targeting Android devices only, or you want your application to have the Android look regardless of the device,
+you may use either `kendo.mobile.all.min.css`, `kendo.mobile.android.dark.min.css` (for dark, default mode) or `kendo.mobile.android.light.min.css`.
+The platform configuration option should be set, too.
+
+### Mobile Application with Android Halo Dark Look
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.3.930/styles/kendo.mobile.android.dark.min.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2015.3.930/js/kendo.all.min.js"></script>
+</head>
+<body>
+    <div data-role="view" data-title="Hello world">
+
+    <div data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title">Hello</span>
+        </div>
+    </div>
+        <a data-role="button">I am a button</a>
+    </div>
+
+    <script>
+        new kendo.mobile.Application(document.body, {
+            platform: "android"
+        });
+    </script>
+</body>
+</html>
+```
+
+### Mobile Application with Android Halo Light Look
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.3.930/styles/kendo.mobile.android.light.min.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2015.3.930/js/kendo.all.min.js"></script>
+</head>
+<body>
+    <div data-role="view" data-title="Hello world">
+
+    <div data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title">Hello</span>
+        </div>
+    </div>
+        <a data-role="button">I am a button</a>
+    </div>
+
+    <script>
+        new kendo.mobile.Application(document.body, {
+            platform: "android"
+        });
+    </script>
+</body>
+</html>
+```
+
+## Mobile Application with Windows Phone 8 Look on All Devices
+
+If you are targeting Windows Phone devices only, or you want your application to have the
+Windows Phone look regardless of the device, you may use either `kendo.mobile.all.min.css` or `kendo.mobile.wp8.min.css`.
+The platform configuration option should be set, too.
+
+### Mobile Application with Windows Phone 8 Look
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.3.930/styles/kendo.mobile.wp8.min.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2015.3.930/js/kendo.all.min.js"></script>
+</head>
+<body>
+    <div data-role="view" data-title="Hello world">
+
+    <div data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title">Hello</span>
+        </div>
+    </div>
+        <a data-role="button">I am a button</a>
+    </div>
+
+    <script>
+        new kendo.mobile.Application(document.body, {
+            platform: "wp"
+        });
+    </script>
+</body>
+</html>
+```
+
+## Mobile Application with a Platform Agnostic Skin
+
+Kendo UI Mobile ships several device agnostic skins:
+
+ * `flat`
+ * `nova`
+ * `material`
+ * `fiori`
+ * `office365`
+
+Each skin is shipped separately as `kendo.mobile.${skin}.min.css`. The skin should be activated using the `skin` option.
+
+### Mobile Application with a Nova Skin
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.3.930/styles/kendo.mobile.nova.min.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2015.3.930/js/kendo.all.min.js"></script>
+</head>
+<body>
+    <div data-role="view" data-title="Hello world">
+
+    <div data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title">Hello</span>
+        </div>
+    </div>
+        <a data-role="button">I am a button</a>
+    </div>
+
+    <script>
+        new kendo.mobile.Application(document.body, { skin: "nova" });
+    </script>
+</body>
+</html>
+```
+
+## Using the Mobile Widgets in a Web Context without a Mobile Application Instance
+
+The case is described in further details in the [Using with Kendo UI Web](/mobile/regular-usage) help article.
+
+<br/>
 
 ## Kendo UI Mobile ThemeBuilder
 
@@ -342,12 +560,12 @@ Nova theme provides predefined generic styles for **h1, h2, h3, h4 ,h5, h6** and
 Nova theme provides three predefined font weights - light, medium and bold. To activate them use `km-light-font`, `km-medium-font` or `km-bold-font` classes.
 
 #### Font weights example
-	
-	<div data-role="view" data-title="Typography">	
-		<!-- h1 with bold font weight -->	
+
+	<div data-role="view" data-title="Typography">
+		<!-- h1 with bold font weight -->
 		<h1 class="km-bold-font">Bold Heading 1</h1>
 		<!-- h1 with medium font weight -->
 		<h1 class="km-medium-font">Medium Heading 1</h1>
-		<!-- h1 with light font weight -->	
+		<!-- h1 with light font weight -->
 		<h1 class="km-light-font">Heading 1</h1>
 	</div>
