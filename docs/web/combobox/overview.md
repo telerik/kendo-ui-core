@@ -30,7 +30,7 @@ that initialization is done within $(document).ready() statement.
 > Widget copies any styles and CSS classes from the input element to the visible input and the wrapper element.
 
 ### Initialize a ComboBox using a jQuery selector
-    
+
     <input id="comboBox" />
 
     <script>
@@ -44,6 +44,7 @@ that initialization is done within $(document).ready() statement.
           ]
         });
       });
+    </script>
 
 ### Initialize a ComboBox from existing `<select>` element with a pre-defined structure
 
@@ -161,13 +162,13 @@ The ComboBox gives the ability to render a pop-up header.
             });
         });
     </script>
-    
+
 
 ## Accessing an existing ComboBox instance
 
 You can reference an existing ComboBox widget via
 [jQuery.data()](http://api.jquery.com/jQuery.data/).
-    
+
     <input id="comboBox" />
 
     <script>
@@ -179,7 +180,7 @@ You can reference an existing ComboBox widget via
 jQuery width() method can be used for changing the widget dimensions.
 
 ### Example
-    
+
      <input id="comboBox" />
 
     <script>
