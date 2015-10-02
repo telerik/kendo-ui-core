@@ -3369,6 +3369,38 @@ This method expands the row.
         treeList.expand(row);
     </script>
 
+### itemFor
+
+Returns the rendered HTML element for a given model.
+
+#### Parameters
+
+##### model `kendo.data.TreeListModel|Object`
+
+A model from the DataSource, or the id of a model in the DataSource.
+
+#### Returns
+`jQuery` the row that corresponds to the model
+
+#### Example - get row from model
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+          columns: [
+            { field: "name" },
+            { field: "age" }
+          ],
+          dataSource: [
+              { id: 1, name: "Jane Doe", age: 30 },
+              { id: 2, name: "John Doe", age: 33 }
+          ]
+        });
+        var treeList = $("#treeList").data("kendoTreeList");
+        var jane = treeList.dataSource.get(1);
+        var row = treeList.itemFor(jane);
+    </script>
+
 ### refresh
 
 Renders all table rows using the current data items.
@@ -4113,6 +4145,279 @@ The widget instance which fired the event.
         var treeList = $("#treeList").data("kendoTreeList");
         treeList.bind("dataBound", dataBound);
         treeList.dataSource.fetch();
+    </script>
+
+### dragstart
+
+Fired when the user attempts to drag an item. If prevented, the item is not allowed to move.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+##### e.source `kendo.data.TreeListModel`
+
+The model of the source row.
+
+#### Example - subscribe to the "dragstart" event before initialization
+
+    <div id="treeList"></div>
+     <script>
+        $("#treeList").kendoTreeList({
+          columns: [
+            { field: "Name" },
+            { field: "Position" }
+          ],
+          editable: {
+            move: true
+          },
+          dataSource: [
+            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+            { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+          ],
+          dragstart: function(e) {
+            console.log("dragstart", e.source);
+          }
+        });
+    </script>
+
+#### Example - subscribe to the "dragstart" event after initialization
+
+    <div id="treeList"></div>
+    <script>
+        function dragstart(e) {
+            console.log("dragstart");
+        }
+        $("#treeList").kendoTreeList({
+          columns: [
+            { field: "Name" },
+            { field: "Position" }
+          ],
+          editable: {
+            move: true
+          },
+          dataSource: [
+            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+            { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+          ]
+        });
+
+        var treeList = $("#treeList").data("kendoTreeList");
+        treeList.bind("dragstart", dragstart);
+    </script>
+
+### drag
+
+Fired while the user drags and item. This event is triggered on every mouse move.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.source `kendo.data.TreeListModel`
+
+The model of the source row.
+
+##### e.target `jQuery`
+
+The element under the cursor.
+
+##### e.sender `kendo.ui.TreeList`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "drag" event before initialization
+
+    <div id="treeList"></div>
+     <script>
+        $("#treeList").kendoTreeList({
+          columns: [
+            { field: "Name" },
+            { field: "Position" }
+          ],
+          editable: {
+            move: true
+          },
+          dataSource: [
+            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+            { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+          ],
+          drag: function(e) {
+            console.log("drag", e.source, e.target);
+          }
+        });
+    </script>
+
+#### Example - subscribe to the "drag" event after initialization
+
+    <div id="treeList"></div>
+    <script>
+        function drag(e) {
+            console.log("drag");
+        }
+        $("#treeList").kendoTreeList({
+          columns: [
+            { field: "Name" },
+            { field: "Position" }
+          ],
+          editable: {
+            move: true
+          },
+          dataSource: [
+            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+            { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+          ]
+        });
+
+        var treeList = $("#treeList").data("kendoTreeList");
+        treeList.bind("drag", drag);
+    </script>
+
+### dragend
+
+Fired when the user has finished dragging an item and the model has been updated.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.source `kendo.data.TreeListModel`
+
+The model of the source row.
+
+##### e.destination `kendo.data.TreeListModel`
+
+The model of the new parent row.
+
+##### e.sender `kendo.ui.TreeList`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "dragend" event before initialization
+
+    <div id="treeList"></div>
+     <script>
+        $("#treeList").kendoTreeList({
+          columns: [
+            { field: "Name" },
+            { field: "Position" }
+          ],
+          editable: {
+            move: true
+          },
+          dataSource: [
+            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+            { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+          ],
+          dragend: function(e) {
+            console.log("dragend", e.source, e.destination);
+          }
+        });
+    </script>
+
+#### Example - subscribe to the "dragend" event after initialization
+
+    <div id="treeList"></div>
+    <script>
+        function dragend(e) {
+            console.log("dragend");
+        }
+        $("#treeList").kendoTreeList({
+          columns: [
+            { field: "Name" },
+            { field: "Position" }
+          ],
+          editable: {
+            move: true
+          },
+          dataSource: [
+            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+            { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+          ]
+        });
+
+        var treeList = $("#treeList").data("kendoTreeList");
+        treeList.bind("dragend", dragend);
+    </script>
+
+### drop
+
+Fired when the user drops an item. If prevented, the source row will not be moved.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.source `kendo.data.TreeListModel`
+
+The model of the source row.
+
+##### e.destination `kendo.data.TreeListModel`
+
+The model of the new parent row.
+
+##### e.sender `kendo.ui.TreeList`
+
+The widget instance which fired the event.
+
+##### e.valid `Boolean`
+
+Indicates whether the drag operation is successful.
+
+##### e.setValid `Boolean`
+
+Sets the valid state. If set to false, the row will be animated back to its origin, indicating to the user that the operation was invalid.
+
+#### The difference between e.setValid(false) and e.preventDefault()
+
+Both operations cancel the default drag operation, but the indication to the user is different.
+`e.setValid(false)` indicates that the operation was unsuccessful by animating the drag clue to its original position.
+`e.preventDefault()` simply removes the clue, as if it has been dropped.
+As a general rule, use `preventDefault` to manually handle the drag&drop operation, and `setValid(false)` to indicate unsuccessful drag&drops.
+
+#### Example - subscribe to the "drop" event before initialization
+
+    <div id="treeList"></div>
+     <script>
+        $("#treeList").kendoTreeList({
+          columns: [
+            { field: "Name" },
+            { field: "Position" }
+          ],
+          editable: {
+            move: true
+          },
+          dataSource: [
+            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+            { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+          ],
+          drop: function(e) {
+            console.log("drop", e.source, e.destination, e.valid);
+          }
+        });
+    </script>
+
+#### Example - subscribe to the "drop" event after initialization
+
+    <div id="treeList"></div>
+    <script>
+        function drop(e) {
+            console.log("drop");
+        }
+        $("#treeList").kendoTreeList({
+          columns: [
+            { field: "Name" },
+            { field: "Position" }
+          ],
+          editable: {
+            move: true
+          },
+          dataSource: [
+            { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+            { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+          ]
+        });
+
+        var treeList = $("#treeList").data("kendoTreeList");
+        treeList.bind("drop", drop);
     </script>
 
 ### edit
