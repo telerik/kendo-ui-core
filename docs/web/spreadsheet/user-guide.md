@@ -1,10 +1,10 @@
 ---
 title: User Guide
-page_title: Guide of the User Interface of the Spreadsheet Widget
+page_title: User Guide for the Kendo UI Spreadsheet Widget
 position: 2
 ---
 
-# The User Guide to the Kendo UI Spreadsheet Widget
+# User Guide for the Kendo UI Spreadsheet Widget
 
 ### Audience
 

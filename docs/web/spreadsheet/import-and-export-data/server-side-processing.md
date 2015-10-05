@@ -4,10 +4,9 @@ page_title: Server-side processing of Kendo UI Spreadsheet data | Kendo UI Docum
 description: How to process Kendo UI Spreadsheet data using the Telerik Document Processing library
 ---
 
-# Server-side processing using the Telerik Document Processing Library
+# Server-side Processing Using the Telerik Document Processing Library
 
-The native data format for the Spreadsheet widget is [JSON](json).
-There's also built-in support for [exporting to Excel](/web/spreadsheet/import-and-export-data/export-to-excel) that runs in the browser.
+The native data format for the Spreadsheet widget is [JSON](json). There is also built-in support for [exporting to Excel](/web/spreadsheet/import-and-export-data/export-to-excel) that runs in the browser.
 
 For anything beyond that, we ship a .NET based server-side module based on [Telerik RadSpredProcessing](http://docs.telerik.com/devtools/wpf/controls/radspreadprocessing/overview), part of the Document Processing Library.
 
@@ -19,11 +18,9 @@ It allows importing, exporting and processing data from various formats:
 
 # Overview
 
-The implementation is contained in the Telerik.Web.Spreadsheet assembly.
-It's distributed as part of the UI for ASP.NET MVC bundle (/spreadsheet).
+The implementation is contained in the Telerik.Web.Spreadsheet assembly. It is distributed as part of the UI for ASP.NET MVC bundle (/spreadsheet).
 
-The main entry point is the Telerik.Web.Spreadsheet.Workbook class.
-This is a POCO object that mirrors the object structure of the JSON and provides format conversion methods.
+The main entry point is the Telerik.Web.Spreadsheet.Workbook class. This is a POCO object that mirrors the object structure of the JSON and provides format conversion methods.
 
 Under the hood it uses the Telerik DPL to perform the actual conversion.
 

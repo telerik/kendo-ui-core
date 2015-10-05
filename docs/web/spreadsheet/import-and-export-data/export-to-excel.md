@@ -6,27 +6,21 @@ description: How to export the Kendo UI Spreadsheet widget to an Excel file in t
 
 # Exporting the Spreadsheet to Excel (.xlsx)
 
-The Spreadsheet component utilizes the framework
-[Excel export module](/framework/excel)
-to produce Excel files directly in the browser.
+The Spreadsheet component utilizes the [Excel export module](/framework/excel) framework to produce Excel files directly in the browser.
 
-The output files are in the OOXML Spreadsheet format with `.xlsx` extension.
-The legacy `.xls`, binary format is not supported.
+The output files are in the OOXML Spreadsheet format with an `.xlsx` extension. The legacy `.xls`, binary format is not supported.
 
 # User Interface
 
-The default toolbar configuration includes an "Excel Export" button.
-Clicking it will open a dialog for entering the file name.
+The default toolbar configuration includes an **Excel Export** button. Clicking on it opens a dialog box for entering the file name.
 
 ![Export to Excel](export-to-excel.png)
 
 # Export API
 
-The Spreadsheet client-side API includes the
-[saveAsExcel](/api/javascript/ui/spreadsheet#methods-saveAsExcel) method for initiating export via JavaScript.
+The Spreadsheet client-side API includes the [saveAsExcel](/api/javascript/ui/spreadsheet#methods-saveAsExcel) method for initiating export via JavaScript.
 
-This method will not ask the user for a file name.
-Instead it will the value set in [excel.fileName](/api/javascript/ui/spreadsheet.html#configuration-excel.fileName).
+This method will not ask the user for a file name. Instead, it will the value set in [excel.fileName](/api/javascript/ui/spreadsheet.html#configuration-excel.fileName).
 
 # Limitations and Known Issues
 
