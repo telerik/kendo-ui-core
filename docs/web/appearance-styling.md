@@ -39,6 +39,8 @@ Some themes require a different "common" (base) stylesheet that applies differen
 
 * **kendo.common-material.css** - The base stylesheet for the Material and MaterialBlack themes. Use this file instead of kendo.common.css and only with kendo.material.css or kendo.materialblack.css theme files.
 
+* **kendo.common-nova.css** - The base stylesheet for the Nova theme. Use this file instead of kendo.common.css and only with kendo.nova.css.
+
 * **kendo.common-fiori.css** - The base stylesheet for the Fiori theme available in Kendo UI Professional. Use this file instead of kendo.common.css and only with kendo.fiori.css.
 
 * **kendo.common-office365.css** - The base stylesheet for the Office365 theme available in Kendo UI Professional. Use this file instead of kendo.common.css and only with kendo.office365.css.
