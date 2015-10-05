@@ -355,6 +355,31 @@ test("serialize converts data to the original structure with object as from decl
     ok(!("bar" in result[2]));
 });
 
+test("serialize converts data to the original structure with object as from declaration - nested field", function() {
+    var reader = new DataReader({
+        model: {
+            fields: {
+                bar: { from: "foo.baz" }
+            }
+        }
+    });
+
+    var result = reader.parse([{ foo: { baz: "1" } }, { foo: { baz: "" } }, { foo: { baz: "0" } }]);
+
+    result = reader.data(result);
+    result[0].bar = "new value";
+    result = reader.serialize(result);
+
+    equal(result.length, 3);
+    equal(result[0].foo.baz, "new value");
+    equal(result[1].foo.baz, "");
+    equal(result[2].foo.baz, "0");
+    ok(!("bar" in result[0]));
+    ok(!("bar" in result[1]));
+    ok(!("bar" in result[2]));
+});
+
+
 test("converts field values to the specifed type", function() {
     var reader = new DataReader({
         model: {

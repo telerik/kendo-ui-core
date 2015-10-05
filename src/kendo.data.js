@@ -1810,6 +1810,7 @@ var __meta__ = { // jshint ignore:line
             getter,
             originalName,
             idx,
+            setters = {},
             length;
 
         for (idx = 0, length = data.length; idx < length; idx++) {
@@ -1818,7 +1819,10 @@ var __meta__ = { // jshint ignore:line
                 originalName = fieldNames[getter];
 
                 if (originalName && originalName !== getter) {
-                    record[originalName] = getters[getter](record);
+                    if (!setters[originalName]) {
+                        setters[originalName] = kendo.setter(originalName);
+                    }
+                    setters[originalName](record, getters[getter](record));
                     delete record[getter];
                 }
             }
