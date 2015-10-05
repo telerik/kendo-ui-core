@@ -99,6 +99,9 @@ The data field names should be valid Javascript identifiers, that's why it is re
 * no special characters
 * the first character should be a letter
 
+If the Grid is created from a <table>, but the widget dataSource is configured to use a transport and remote operations, a remote request will be made for the initial Grid state,
+eventhough the <table> may already be populated. This behavior is by design and cannot be avoided, except when using the Grid's MVC wrapper.
+
 When creating the Grid from an existing table, the following **column** settings can be defined via HTML attributes:
 
 * data field names via `data-field` attributes
