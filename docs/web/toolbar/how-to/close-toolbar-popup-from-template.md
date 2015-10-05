@@ -1,4 +1,3 @@
-
 ---
 title: Close toolbar popup manually
 page_title: Close toolbar popup manually
