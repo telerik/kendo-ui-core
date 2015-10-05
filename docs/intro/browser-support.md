@@ -18,7 +18,11 @@ Most [Kendo UI widgets](/intro/list-of-widgets) have no limitations as of the br
 
 | Browser           | Supported Versions            | Limitations
 | :---------------- | :---------------------------- | :---------------
+<<<<<<< HEAD
 | Internet Explorer | 8 or later                    | Kendo UI [Spreadsheet](http://demos.telerik.com/kendo-ui/spreadsheet/index) requires IE9 or later
+=======
+| Internet Explorer | 8 or later                    | Kendo UI [Spreadsheet](http://demos.telerik.com/kendo-ui/spreadsheet/index) and [Responsive panel](http://demos.telerik.com/kendo-ui/responsive-panel/index) require IE9 or later
+>>>>>>> 89f2b9e... Add responsive panel in browser support limitations
 | Chrome            | 21 or later                   |
 | Firefox           | [Current and ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history) ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/))|
 | Opera             | 15 or later                   |
@@ -117,4 +121,3 @@ To ensure the best performance of your project, make sure that you:
  * Always use an up-to-date browser version
  * Check **Disable Script Debugging** from your browser configuration options
  * Activate Caching in Internet Explorer
-
