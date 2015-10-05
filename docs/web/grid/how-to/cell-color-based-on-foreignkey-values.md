@@ -20,7 +20,7 @@ The example below demonstrates how to set cell text color based on the ForeignKe
     	color:green;
     }
     </style>
-    <script src="../content/shared/js/products.js" type="text/javascript"></script>
+    <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js" type="text/javascript"></script>
     <div id="example">
       <div id="grid"></div>
 
