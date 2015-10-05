@@ -17,13 +17,19 @@ Display a number with up to 3 decimals:
 
     #.###
 
+##### Example:
+
 Display positive numbers (or zero) in green, negative numbers in red:
 
     [Green]#.###;[Red]#.###
 
+##### Example:
+
 Display positive numbers in green, negative numbers in red, and the text "Zero" in blue if the number is zero.
 
     [Green]#.###;[Red]#.###;[Blue]"Zero"
+
+##### Example:
 
 Same as above, but if the cell contains text, display it in magenta:
 
@@ -36,7 +42,11 @@ Excel documentation mentions that a maximum of four sections are supported, and 
 - Format for zero
 - Format for text
 
-Excel also supports a more flexible conditional formatting. For example, display numbers greater than 100 in green, numbers less than -100 in yellow, and other numbers in cyan:
+Excel also supports a more flexible conditional formatting. 
+
+##### Example:
+
+Display numbers greater than 100 in green, numbers less than -100 in yellow, and other numbers in cyan:
 
     [>100][GREEN]#,##0;[<=-100][YELLOW]#,##0;[CYAN]#,##0
 
