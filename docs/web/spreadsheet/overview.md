@@ -26,7 +26,7 @@ The Kendo UI Spreadsheet widget allows editing and visualisation of tabular data
 
 Each of these features is exposed as a UI for the end user, as well as is exposed as API calls for the developer for further UI customization.
 
-> The Spreadsheet Widget supports IE version 8 or later.
+> The Spreadsheet Widget supports IE version 9 or later.
 
 ## Initialization
 
