@@ -21,21 +21,31 @@ function expandNavigation(url) {
 
         scrollNodeIntoView(li);
 
+        this.select(li);
+
+
         if (location.pathname.indexOf("/api/") < 0) {
-            node.set("selected", location.hash === "");
+            li.addClass("current-topic");
 
             $("h2").each(function() {
                 var hash = $(this).find("a").attr("href");
 
-                var h2Node = treeview.append({ path: hash, selected: location.hash.replace("#", "") === hash.replace("#", ""), text: $(this).text() }, li);
+                var h2Node = treeview.append({ path: hash, text: kendo.htmlEncode($(this).text()) }, li);
+
+                if (location.hash.replace("#", "") === hash.replace("#", "")) {
+                    selectNode(hash);
+                }
 
                 $(this).nextUntil("h2", "h3").each(function() {
                     var hash = $(this).find("a").attr("href");
-                    treeview.append({ path: hash, selected: location.hash.replace("#", "") === hash.replace("#", ""), text: $(this).text() }, h2Node);
+                    treeview.append({ path: hash, text: kendo.htmlEncode($(this).text()) }, h2Node);
+
+                    if (location.hash.replace("#", "") === hash.replace("#", "")) {
+                        selectNode(hash);
+                    }
                 });
+
             });
-        } else {
-            node.set("selected", true);
         }
 
         this.unbind("dataBound", expand);
@@ -51,7 +61,14 @@ function selectNode(hash, scroll) {
 
     if (li.length) {
         var treeview = $("#page-tree").data("kendoTreeView");
+        var topicNode = li.closest(".current-topic");
+
         treeview.select(li);
+
+        topicNode.find("li").removeClass("path");
+
+        li.parentsUntil(topicNode).addClass("path");
+
         scrollNodeIntoView(li);
     }
 }

@@ -58,6 +58,53 @@ footer {
     font-size: 14px;
 }
 
+#page-nav .current-topic > div > .k-in {
+    background: #00b312;
+}
+
+#page-nav .k-in {
+    line-height: 1.3em;
+}
+
+#page-nav .current-topic .k-icon {
+    background-image: none;
+}
+
+#page-nav .current-topic > .k-group > .k-item {
+    padding: 0;
+}
+
+#page-nav .current-topic > div > .k-in > a {
+    color: #fff;
+}
+
+#page-nav .path > div > .k-in a{
+    color: #00b312;
+}
+
+#page-nav .path .k-state-selected a {
+    color: #00b312;
+}
+
+#page-nav .path .k-state-selected {
+    background: none;
+    position: relative;
+}
+
+#page-nav .path .k-state-selected:before {
+    background-color: #00b312;
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 2px;
+    bottom: 2px;
+    width: 3px;
+}
+
+#page-nav .path .path .k-state-selected:before {
+    left: -26px;
+}
+
 .btn {
     color: #fff;
     background-color: #2a2d33;
