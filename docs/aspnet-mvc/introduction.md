@@ -53,11 +53,14 @@ The Telerik UI for ASP.NET MVC contains the following directories.
 * **js** - minified JavaScript files.
 * **styles** - minified CSS files and images used by the themes.
 * **src** - complete JavaScript, CSS and C# source code. **N/A** in the trial version.
+* **spreadsheet** - [Telerik.Web.Spreadsheet](/web/spreadsheet/import-and-export-data/server-side-processing) assembly and its dependencies from the Telerik Document Processing library
 * **wrappers\aspnetmvc\Binaries\MVC3** - assemblies for ASP.NET MVC 3 applications.
 * **wrappers\aspnetmvc\Binaries\MVC4**- assemblies for ASP.NET MVC 4 applications.
 * **wrappers\aspnetmvc\Binaries\MVC5**- assemblies for ASP.NET MVC 5 applications.
 * **wrappers\aspnetmvc\Examples\VS2012**- ASP.NET MVC 4 sample application built with Visual Studio 2012.
 * **wrappers\aspnetmvc\Examples\VS2013**- ASP.NET MVC 5 sample application built with Visual Studio 2013.
+* **wrappers\aspnetmvc\Examples\VS2015**- ASP.NET MVC 5 sample application built with Visual Studio 2015.
+* **wrappers\aspnetmvc\Examples\MVC6**- ASP.NET MVC 6 Beta sample application built with Visual Studio 2015.
 * **wrappers\aspnetmvc\EditorTemplates**- ready-to-use editor templates based on the Kendo UI widgets.
 * **wrappers\aspnetmvc\LegacyThemes** - themes ported from Telerik Extensions for ASP.NET MVC (discontinued product superseded by Telerik UI for ASP.NET MVC).
 * **wrappers\aspnetmvc\Scaffolding** - Kendo UI Scaffolder Visual Studio extension. Enables generating Kendo UI MVC wrapper widgets declarations inside Visual Studio projects. Added in Q1 2015 release.
