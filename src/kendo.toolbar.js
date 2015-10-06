@@ -806,8 +806,14 @@ var __meta__ = { // jshint ignore:line
             },
 
             select: function(button) {
+                var tmp;
                 for (var i = 0; i < this.buttons.length; i ++) {
-                    this.buttons[i].select(false);
+                    tmp = this.buttons[i];
+
+                    tmp.select(false);
+                    if (tmp.twin()) {
+                        tmp.twin().select(false);
+                    }
                 }
 
                 button.select(true);
