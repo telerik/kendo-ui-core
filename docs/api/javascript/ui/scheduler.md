@@ -4841,7 +4841,7 @@ The fields which can be used in the template are:
 
 The number of time slots to display per major tick.
 
-> The `minorTickCount` option is supported when [views.type](#configuration-views.type) is set to "day" or "week".
+> The `minorTickCount` option is supported when [views.type](#configuration-views.type) is set to "day", "week" or "timeline".
 
 #### Example - set the number of time slots
 
