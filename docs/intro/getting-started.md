@@ -34,7 +34,7 @@ Once you [download](http://www.telerik.com/download/kendo-ui) any of the Kendo U
 
 To use Kendo UI in your project, you need to include the required JavaScript and CSS files.
 
-**Step 1:** Extract the `/js` and `/styles` directories from the bundle archive and copy them to your web application root directory  
+**Step 1:** Extract the `/js` and `/styles` directories from the bundle archive and copy them to your web application root directory
 **Step 2:** Include the Kendo UI JavaScript and CSS files in the `head` tag of your HTML document. Make sure the common CSS file is registered before the theme CSS file.
 
 Here goes the example:
@@ -146,7 +146,7 @@ You can also add the package to the `bower.json` file:
 
 > Caching your credentials is required if you use the Kendo UI Bower Package in an ASP.NET vNext project.
 
-**Step 1:** Create a text file called `_netrc` in your home directory (e.g. `c:\users\jane\_netrc`)  
+**Step 1:** Create a text file called `_netrc` in your home directory (e.g. `c:\users\jane\_netrc`)
 **Step 2:** Declare a `HOME` environment variable:
 
 ```
@@ -186,7 +186,7 @@ fatal: unable to access 'https://bower.telerik.com/bower-kendo-ui.git/': SSL cer
 
 **Fix:** To resolve the issue, follow the steps in this [help article](http://blogs.msdn.com/b/phkelley/archive/2014/01/20/adding-a-corporate-or-self-signed-certificate-authority-to-git-exe-s-store.aspx).
 
-> 1.9.5 GitHub build will not work with the Bower package.
+> 1.9.5 Git build will not work with the Bower package.
 
 > When using @ symbol in the url for accessing the Kendo UI Bower repository (due to network restrictions or admin rules, for instance), make sure you encode it as follows: https://firstname.lasname**%40**domain.com@bower.telerik.com/bower-kendo-ui.git.
 
@@ -196,12 +196,12 @@ The Kendo UI CDN is hosted on [Amazon CloudFront](https://aws.amazon.com/cloudfr
 
 #### Option 1: Through the HTTP Protocol
 
-The minified versions of all JavaScript files are available via the following URLs:  
-<http://kendo.cdn.telerik.com/VERSION/js/FILENAME.min.js>  
+The minified versions of all JavaScript files are available via the following URLs:
+<http://kendo.cdn.telerik.com/VERSION/js/FILENAME.min.js>
 <http://kendo.cdn.telerik.com/VERSION/styles/FILENAME.min.css>
 
-For example, the 2014.1.318 version can be loaded from:  
-<http://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js>  
+For example, the 2014.1.318 version can be loaded from:
+<http://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js>
 <http://kendo.cdn.telerik.com/2014.1.318/styles/kendo.common.min.css>
 
 Use the following URL to load the minified Kendo UI Core script (available since Q1 2014 SP1):
@@ -211,7 +211,7 @@ Use the following URL to load the minified Kendo UI Core script (available since
 
 #### Option 2: Through the HTTPS Protocol
 
-To access the Kendo UI CDN service through the HTTPS protocol, use the same host name as above, only replacing the scheme (protocol) with `https`:  
+To access the Kendo UI CDN service through the HTTPS protocol, use the same host name as above, only replacing the scheme (protocol) with `https`:
 <https://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js>
 
 >The <https://da7xgjtj801h2.cloudfront.net> URL will remain active, but are no longer recommended for new projects.
