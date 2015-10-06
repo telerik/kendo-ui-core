@@ -1384,6 +1384,8 @@ If the value of `transport.create` is a string the data source uses this string 
 > *Important:* The remote service must return the inserted data items and the data item field configured as the `id` must be set. For example
 if the `id` of the data item is `ProductID` the "create" server response must be `[{ "ProductID": 79 }]`.
 
+> All transport actions (read, update, create, destroy) must be defined in the same way, e.g. as functions or as objects. Mixing the different configuration alternatives is not possible.
+
 #### Example - set the create remote service
 
     <script>
@@ -1631,6 +1633,8 @@ all options supported by `jQuery.ajax` via `transport.destroy` except the `succe
 If the value of `transport.destroy` is a function, the data source invokes that function instead of `jQuery.ajax`.
 
 If the value of `transport.destroy` is a string the data source uses this string as the URL of the remote service.
+
+> All transport actions (read, update, create, destroy) must be defined in the same way, e.g. as functions or as objects. Mixing the different configuration alternatives is not possible.
 
 #### Example - set the destroy remote service
 
@@ -2092,6 +2096,8 @@ If the value of `transport.read` is a function, the data source invokes that fun
 
 If the value of `transport.read` is a string the data source uses this string as the URL of the remote service.
 
+> All transport actions (read, update, create, destroy) must be defined in the same way, e.g. as functions or as objects. Mixing the different configuration alternatives is not possible.
+
 #### Example - set the read remote service
 
     <script>
@@ -2416,6 +2422,8 @@ all options supported by `jQuery.ajax` via `transport.update` except the `succes
 If the value of `transport.update` is a function, the data source invokes that function instead of `jQuery.ajax`.
 
 If the value of `transport.update` is a string the data source uses this string as the URL of the remote service.
+
+> All transport actions (read, update, create, destroy) must be defined in the same way, e.g. as functions or as objects. Mixing the different configuration alternatives is not possible.
 
 #### Example - specify update as a string
 
