@@ -134,4 +134,53 @@
         multiselect.open();
     });
 
+    //unstable
+    /*asyncTest("dataItem returns correct object based on LI element", 2, function() {
+        var multiselect = new MultiSelect(select, {
+            close: function(e) { e.preventDefault(); },
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource : new kendo.data.DataSource({
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            var data = generateData(options.data);
+                            data = data.slice(0, 53 - ((options.data.page - 1) * options.data.pageSize));
+                            options.success({ data: data, total: 53 });
+                        }, 0);
+                    }
+                },
+                serverFiltering: true,
+                serverPaging: true,
+                pageSize: 40,
+                schema: {
+                    data: "data",
+                    total: "total"
+                }
+            }),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 20
+            }
+        });
+
+        multiselect.open();
+        multiselect.one("dataBound", function() {
+                setTimeout(function() {
+                    start();
+                    var item49 = multiselect.listView.content.find("li")
+                                         .filter(function(_, li) { return $(li).data("offsetIndex") == 49 });
+
+                    var dataItem = multiselect.dataItem(item49);
+
+                    equal(dataItem.value, 49);
+                    equal(dataItem.text, item49.text());
+                }, 400);
+
+            multiselect.listView.content.scrollTop(5 * CONTAINER_HEIGHT);
+        });
+    });*/
+
 })();
