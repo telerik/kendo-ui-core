@@ -1352,4 +1352,29 @@
         click(button);
     });
 
+    test("overflow button group selected state is reset after selection change", function() {
+        container.kendoToolBar({
+            items: [
+                {
+                    type: "buttonGroup",
+                    buttons: [
+                        { text: "foo", id: "foo", togglable: true, group: "foo", selected: true },
+                        { text: "bar", id: "bar", togglable: true, group: "foo" },
+                        { text: "baz", id: "baz", togglable: true, group: "foo" }
+                    ]
+                }
+            ]
+        });
+
+        container.data("kendoToolBar").toggle((container.find("#bar")));
+
+        ok(!$("#foo").hasClass("k-state-active"), 1);
+        ok($("#bar").hasClass("k-state-active"), 2);
+        ok(!$("#baz").hasClass("k-state-active"), 3);
+
+        ok(!$("#foo_overflow").hasClass("k-state-active"), 4);
+        ok($("#bar_overflow").hasClass("k-state-active"), 5);
+        ok(!$("#baz_overflow").hasClass("k-state-active"), 6);
+    });
+
 })();
