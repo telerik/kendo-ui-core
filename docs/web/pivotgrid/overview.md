@@ -62,15 +62,29 @@ This will create the following PivotGrid widget:
 ## Filtering
 
 The PivotGrid widget uses [kendo.data.PivotDataSource](/api/framework/pivotdatasource) to perform *label* filtration. That being said, it filters only by members' caption value.
-The filter descriptor is similar to [kendo.data.DataSource's filter option](/api/javascript/data/datasource#configuration-filter) option. It contains:
+The filter descriptor is similar to [kendo.data.DataSource's filter option](/api/javascript/data/datasource#configuration-filter). It contains:
 
 - **field** - the full path to the tuple member (e.g. '[Date].[Calendar].[Calendar Year].&[2005]')
 - **operator** - all operators that work with strings. **Widget treats field values as strings**
 - **value** - filter value
 
-For runnable example visit the [Filter a dimension](/web/pivotgrid/how-to/filter-dimension) how-to demo.
+For a runnable example visit the [Filter a dimension](/web/pivotgrid/how-to/filter-dimension) how-to demo.
 
 Filtering is supported both in OLAP and flat-data (client cube) binding scenarios.
+
+> Sorting is supported only in OLAP binding scenarios. Client cube cannot be sorted for the time being.
+
+## Sorting
+
+Widget supports sorting by members' caption name. The structure of the **sort** descriptor is similar to [kendo.data.DataSource's sort option](/api/javascript/data/datasource#configuration-sort).
+It contains:
+
+- **field** - the name of the dimension (e.g. '[Date].[Calendar]')
+- **dir** - direction of the sorting
+
+All inner members of the sorted dimension will be sorted with same sort dimension
+
+For a runnable example visit the [Sort a dimension](/web/pivotgrid/how-to/sort-dimension) how-to demo.
 
 ## Accessing an Existing PivotGrid
 
