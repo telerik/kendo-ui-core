@@ -194,7 +194,7 @@ If set to `false` the widget will be disabled and will not allow user input. The
 ### filter `String` *(default: "startswith")*
 
 The filtering method used to determine the suggestions for the current value. The default filter is "startswith" -
-all data items which begin with the current widget value are displayed in the suggestion popup. The supported filter values are `startswith`, `endswith` and `contains`.
+all data items which begin with the current widget value are displayed in the suggestion popup. The supported `filter` values are `startswith`, `endswith` and `contains`.
 
 #### Example - set the filter
 
