@@ -115,3 +115,32 @@ This will happen if two or more widgets are initialized from elements that have 
 		$('#editor').kendoEditor();
 		$('#editor').kendoEditor(); // problem
 	</script>
+
+## ComboBox/DropDownList/MultiSelect looses selected item when bound to shared DataSource instance
+
+The selected item of the widget is directly related to the data source view. If it does not contain the selected item,
+then widget will remove its current value. This behavior is expected and the solution is to use separate data sources
+
+#### Example: Problem
+    var ds = new kendo.data.DataSource({ data: ["foo", "bar"] });
+
+    $("#ms1").kendoMultiSelect({
+        dataSource: ds
+    });
+
+    $("#ms2").kendoMultiSelect({
+        dataSource: ds
+    });
+
+#### Example: Solution
+
+    var ds = new kendo.data.DataSource({ data: ["foo", "bar"] });
+    ds.read();
+
+    $("#ms1").kendoMultiSelect({
+        dataSource: new kendo.data.DataSource({ data: ds.data() });
+    });
+
+    $("#ms2").kendoMultiSelect({
+        dataSource: new kendo.data.DataSource({ data: ds.data() });
+    });
