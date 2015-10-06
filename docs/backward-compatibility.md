@@ -22,7 +22,7 @@ All DataViz-related CSS code has been moved into the web widgets' CSS files. Ple
 
 * **AutoComplete/DropDownList/ComboBox/MultiSelect**: Change in rendering of widget's list - widget's ul element is wrapped inside a scrollable container.
 
-<ul><ul><li>Old rendering:</li></ul></ul>
+<ul><li>Old rendering:</li></ul>
 
 ```
     <div class="k-list-container k-popup">
@@ -30,8 +30,8 @@ All DataViz-related CSS code has been moved into the web widgets' CSS files. Ple
         <ul class="k-list">
         </ul>
     </div>
-```  
-<ul><ul><li>New rendering:</li></ul></ul>
+```
+<ul><li>New rendering:</li></ul>
 
 ```
     <div class="k-list-container k-popup">
@@ -49,16 +49,48 @@ All DataViz-related CSS code has been moved into the web widgets' CSS files. Ple
 
 #### Breaking Changes
 
+* **AutoComplete/DropDownList/ComboBox/MultiSelect**: Widget will not try to re-select using its value when source is changed
+
+<ul><li>Old behavior:</li></ul>
+```
+    <input id="dropdownlist" />
+    <script>
+        var widget = $("#dropdownlist").kendoDropDownList({
+            value: "foo2"
+            datasource: [ ]
+        });
+
+        widget.setDataSource(["foo1", "foo2"]);
+
+        //the "foo2" will be selected
+    </script>
+```
+
+<ul><li>New behavior:</li></ul>
+```
+    <input id="dropdownlist" />
+    <script>
+        var widget = $("#dropdownlist").kendoDropDownList({
+            value: "foo2"
+            dataSource: [ ]
+        });
+
+        widget.setDataSource(["foo1", "foo2"]); //the "foo2" will NOT be selected
+
+        widget.value("foo2"); //should be called in order to for re-selection of the old value
+    </script>
+```
+
 * **MultiSelect**: Change in the item selection behavior
 
-<ul><ul><li>Old rendering: Selected items was hidden.</li></ul></ul>
- 
-<ul><ul><li>New rendering: Selected item is still visible. This allows to de-select item from the popup list.</li></ul></ul>
+<ul><li>Old rendering: Selected items was hidden.</li></ul>
+
+<ul><li>New rendering: Selected item is still visible. This allows to de-select item from the popup list.</li></ul>
 
 * **DropDownList**: In order to support **grouping** and **virtualization**, we decided to move the optionLabel outside the items list and place it as a static header on top of the popup element.
 This change was required, because optionLabel element cannot be part of any displayed group. Please refer to the new rendering if you manipulate option label manually.
 
-<ul><ul><li>Old rendering:</li></ul></ul>
+<ul><li>Old rendering:</li></ul>
 
 ```
     <ul>
@@ -81,7 +113,7 @@ This change was required, because optionLabel element cannot be part of any disp
     1. The widget will not select the first item, when its selected index is `-1`
     2. The widget will not select the first item, when the selected value is not present in the data source
 
-<ul><ul><li>Old rendering:</li></ul></ul>
+<ul><li>Old rendering:</li></ul>
 
 ```
 	<input id="dropdownlist" />
@@ -350,7 +382,7 @@ This change will affect people using the private `_data` field of the data sourc
 	aggregate: function(value, state) { return value + state; }
 ```
 
-<ul><ul><li>New rendering (if you need scripts to be posted to the server):</li></ul></ul> 
+<ul><ul><li>New rendering (if you need scripts to be posted to the server):</li></ul></ul>
 
 ```
 	aggregate: function(value, state) {
@@ -375,7 +407,7 @@ This change will affect people using the private `_data` field of the data sourc
 
 * TabStrip automatically calls [**kendo.resize**](../api/framework/kendo#methods-resize) to its contents in both [**show**](../api/web/tabstrip#events-show) and [**activate**](../api/web/tabstrip#events-activate) events.
 
-**TreeView**: The deprecated `checkboxTemplate` configuration option has been removed. If you don't need a highly specific checkbox template, consider using the default one (using checkboxes: true).  
+**TreeView**: The deprecated `checkboxTemplate` configuration option has been removed. If you don't need a highly specific checkbox template, consider using the default one (using checkboxes: true).
 
 If you need any custom checkbox rendering, use the checkboxes.template option:
 
@@ -485,7 +517,7 @@ the new default import once functionality of @import directive).
 * **Core**: kendo.support.pointers now only shows support for IE11 pointer events - kendo.support.msPointers was added to indicate that IE10 pointer events are supported too.  
 
 * **Splitter**: the internal method `trigger("resize")`, which has been provided as a workaround in certain scenarios, no longer works. It has been replaced with a [public API method `resize()`](/using-kendo-in-responsive-web-pages), which now all Kendo UI widgets have.
-Also see [`kendo.resize()`](/api/framework/kendo/#methods-resize).  
+Also see [`kendo.resize()`](/api/framework/kendo/#methods-resize).
 
 * **Splitter**: the `layoutChange` event is now obsolete and will be removed in the future. Please use the `resize` event instead.  
 
@@ -602,7 +634,7 @@ Enabling endless scrolling or press to load more configuration options now puts 
 
 * **AutoComplete/ComboBox/DropDownList:** Rename enable option to **enabled**  
 
-* **TreeView/HierarchicalDataSource/Node:** The `children` field is initialized depending on the `hasChildren` field, as previously documented. Use the `append` and `load` methods to initialize it, and if accessing the children field directly, verify if it is present.  
+* **TreeView/HierarchicalDataSource/Node:** The `children` field is initialized depending on the `hasChildren` field, as previously documented. Use the `append` and `load` methods to initialize it, and if accessing the children field directly, verify if it is present.
 
 #### ASP.NET MVC
 
@@ -757,14 +789,14 @@ For more information check the [Styling Icons demo](http://demos.telerik.com/ken
 *  **Data:** kendo.model.js file has been removed. The content of kendo.model.js file has been consolidated with the kendo.data.js content.
 *  **Data:** `Model.id` is no longer a function. It is a field.
 
-<ul><ul><li>Old rendering:</li></ul></ul>
+<ul><li>Old rendering:</li></ul>
 
 ```
 	var model = dataSource.get(42);
 	var modelId = model.id(); //42
 ```
-   
-<ul><ul><li>New rendering:</li></ul></ul>
+
+<ul><li>New rendering:</li></ul>
 
 ```
 	var model = dataSource.get(42);
