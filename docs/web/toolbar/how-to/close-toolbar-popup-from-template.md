@@ -23,7 +23,6 @@ The example below demonstrates how to use close the toolbar popup from a button 
       items: [
         { type: "button", text: "Button" },
         {
-          type: "button",
           template:"<a class='k-item k-state-default ng-scope' >Test</a>",
           overflowTemplate:"<button onclick='action()' class='btn' >Test</button>",
           overflow: "always"
