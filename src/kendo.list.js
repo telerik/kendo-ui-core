@@ -313,6 +313,10 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (typeof index !== "number") {
+                if (that.options.virtual) {
+                    return that.dataSource.getByUid($(index).data("uid"));
+                }
+
                 index = $(that.items()).index(index);
             }
 

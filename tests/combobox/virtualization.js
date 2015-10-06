@@ -201,4 +201,50 @@
             });
         });
     });
+
+    asyncTest("dataItem returns correct object based on LI element", 2, function() {
+        var combobox = new ComboBox(select, {
+            close: function(e) { e.preventDefault(); },
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource : new kendo.data.DataSource({
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success({ data: generateData(options.data), total: 53 });
+                        }, 0);
+                    }
+                },
+                serverFiltering: true,
+                serverPaging: true,
+                pageSize: 40,
+                schema: {
+                    data: "data",
+                    total: "total"
+                }
+            }),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 20
+            }
+        });
+
+        combobox.open();
+        combobox.one("dataBound", function() {
+            combobox.one("dataBound", function() {
+                start();
+                var item49 = combobox.listView.content.find("li")
+                                     .filter(function(_, li) { return $(li).data("offsetIndex") == 49 });
+
+                var dataItem = combobox.dataItem(item49);
+
+                equal(dataItem.value, 49);
+                equal(dataItem.text, item49.text());
+            });
+
+            scroll(combobox.listView.content, 5 * CONTAINER_HEIGHT);
+        });
+    });
 })();
