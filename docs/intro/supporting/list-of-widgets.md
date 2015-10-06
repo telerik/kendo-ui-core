@@ -2,7 +2,7 @@
 title: Bundle Support for Kendo UI Components
 page_title: Bundle Support for Kendo UI Components
 description: "List of Kendo UI components supported by Kendo UI Core, Kendo UI Professional, UI for ASP .NET MVC, UI for JSP, and UI for PHP"
-position: 7
+position: 2
 ---
 
 # Bundle Support for Kendo UI Components

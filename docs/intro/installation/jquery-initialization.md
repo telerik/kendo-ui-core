@@ -1,9 +1,9 @@
 ---
 title: Initialize a Kendo UI Widget as a jQuery Plug-in
 page_title: Initialize a Kendo UI Widget as a jQuery Plug-in
-previous_url: /widgets, /howto/add-widgets, /basics/jquery-initialization
+previous_url: /widgets, /howto/add-widgets, /basics/jquery-initialization, /intro/jquery-initialization
 description: Learn how to add Kendo UI widgets to your mobile website or web application.
-position: 3
+position: 6
 ---
 
 # Initialize a Kendo UI Widget Using the jQuery Plug-in Syntax
