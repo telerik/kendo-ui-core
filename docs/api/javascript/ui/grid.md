@@ -5579,6 +5579,8 @@ and the string value will be passed as an argument to a [`kendo.template()`](/ap
 
 If a `Function` value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the Grid Toolbar contents.
 
+> If the grid is instantiated with MVVM, The template passed will not be bound to the grid view model context. You may bind the toolbar element manually afterwards, using `kendo.bind(gridWidgetInstance.element.find("k-grid-toolbar"))`
+
 If an `Array` value is assigned, it will be treated as the list of commands displayed in the grid's Toolbar. Commands can be custom or built-in ("cancel", "create", "save", "excel", "pdf").
 
 The "cancel" built-in command reverts any data changes done by the end user.
