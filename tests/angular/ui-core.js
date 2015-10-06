@@ -290,7 +290,6 @@
        equal($scope.kdtp.value(), date);
    });
 
-
    asyncTest("triggers kendoRendered", 2, function() {
        var root = $('<div ng-controller=main></div>').appendTo(QUnit.fixture);
 
@@ -684,13 +683,23 @@ withAngularTests("Angular (UI Core)", function(runTest){
         });
     });
 
+    runTest("ng-model is updated when k-ng-model is set initially", function(dom, $scope){
+        $scope.obj = new Date();
+        $("<input kendo-date-time-picker id='kdtp' ng-model='str' k-ng-model='obj' />").appendTo(dom);
+        expect(1);
+        setTimeout(function() {
+            equal($scope.str, $("#kdtp").val());
+            start();
+        },50)
+    });
+
     // XXX: for some reason ng-repeat does not work in the test suite.
     //
     // runTest("Dirty flag should not be globally cleared with ng-repeat", function(dom, $scope){
     //     var options = {
     //         dataSource     : $scope.data,
     //         dataTextField  : "text",
-    //         dataValueField : "id"
+        //         dataValueField : "id"
     //     };
     //     $scope.things = [{
     //         item: 1,
