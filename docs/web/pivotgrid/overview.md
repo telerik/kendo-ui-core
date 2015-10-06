@@ -59,6 +59,19 @@ This will create the following PivotGrid widget:
 
 ![Kendo UI PivotGrid](/images/pivotgrid.png)
 
+## Filtering
+
+The PivotGrid widget uses [kendo.data.PivotDataSource](/api/framework/pivotdatasource) to perform *label* filtration. That being said, it filters only by members' caption value.
+The filter descriptor is similar to [kendo.data.DataSource's filter option](/api/javascript/data/datasource#configuration-filter) option. It contains:
+
+- **field** - the full path to the tuple member (e.g. '[Date].[Calendar].[Calendar Year].&[2005]')
+- **operator** - all operators that work with strings. **Widget treats field values as strings**
+- **value** - filter value
+
+For runnable example visit the [Filter a dimension](/web/pivotgrid/how-to/filter-dimension) how-to demo.
+
+Filtering is supported both in OLAP and flat-data (client cube) binding scenarios.
+
 ## Accessing an Existing PivotGrid
 
 You can reference an existing **PivotGrid** instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
