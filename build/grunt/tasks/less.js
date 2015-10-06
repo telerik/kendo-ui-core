@@ -22,6 +22,7 @@ module.exports = function(grunt) {
                 var p = new LESS.Parser({
                     paths    : [ base ],
                     filename : PATH.basename(f),
+                    relativeUrls: true,
                     syncImport: true
                 });
                 grunt.log.writeln(f + " - compiling...");
@@ -36,7 +37,13 @@ module.exports = function(grunt) {
                             });
                             var cssFileInDir = PATH.join(destDir, cssFile);
                             grunt.log.writeln(cssFileInDir + " - saving...");
-                            grunt.file.write(cssFileInDir, result.css);
+                            var css = result.css;
+
+                            // hack to remove relative URLs in kendo.theme.mobile.css files
+                            // pending removal once styles/{mobile,web,dataviz} folders are gone
+                            css = css.replace(/\.\.\/mobile\//g, '');
+
+                            grunt.file.write(cssFileInDir, css);
                             var cssmin = CSSMIN(result.css);
                             var cssMinFileInDir = PATH.join(destDir, f.replace(/\.less$/, ".min.css"));
                             grunt.log.writeln(cssMinFileInDir + " - saving...");
