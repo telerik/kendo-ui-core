@@ -289,4 +289,14 @@ test("binding invisible to false shows the tabstrip", function() {
 
     ok(tabstrip.wrapper.css("display") != "none", "TabStrip is not invisible");
 });
+
+test("tab is correctly selected based on value binding", function() {
+    dom = $('<div data-role="tabstrip" data-text-field="Name" data-content-field="Content" data-bind="source: dataSource, value: selected"></div>');
+
+    kendo.bind(dom, {selected: "Tab1",dataSource: [{ Name: "Tab1", Content: "Tab1: content" },{ Name: "Tab2", Content: "Tab2: content" }]});
+
+    var tabstrip = dom.data("kendoTabStrip");
+
+    ok(tabstrip.element.find("li").first().hasClass("k-state-active"));
+});
 })();

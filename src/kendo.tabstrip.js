@@ -164,7 +164,7 @@ var __meta__ = { // jshint ignore:line
 
     var TabStrip = Widget.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this, value;
 
             Widget.fn.init.call(that, element, options);
 
@@ -208,6 +208,10 @@ var __meta__ = { // jshint ignore:line
                 that.wrapper.on("keydown" + NS, that._keyDownProxy);
             }
 
+            if (that.options.value) {
+                value = that.options.value;
+            }
+
             that.wrapper.children(".k-tabstrip-items")
                 .on(CLICK + NS, ".k-state-disabled .k-link", false)
                 .on(CLICK + NS, " > " + NAVIGATABLEITEMS, function (e) {
@@ -243,7 +247,7 @@ var __meta__ = { // jshint ignore:line
             if (that.element[0].id) {
                 that._ariaId = that.element[0].id + "_ts_active";
             }
-
+            that.value(value);
             kendo.notify(that);
         },
 
