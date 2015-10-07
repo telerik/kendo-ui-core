@@ -5,6 +5,11 @@
 @spreadsheet-selection-background: fadeout(@selected-background, 80%);
 @spreadsheet-selection-border: @selected-background;
 
+.k-spreadsheet-row-header,
+.k-spreadsheet-column-header {
+    background-color: @background;
+}
+
 .k-spreadsheet-top-corner,
 .k-spreadsheet-row-header td,
 .k-spreadsheet-column-header td {
@@ -37,26 +42,22 @@
     .k-spreadsheet-merged-cell {
         background-color: @background;
     }
-}
 
-.k-selection-partial,
-.k-selection-full {
-    .k-spreadsheet-pane & {
+    .k-selection-partial,
+    .k-selection-full {
         border-color: @spreadsheet-selection-background;
         background-color: @spreadsheet-selection-background;
     }
 
-    .k-spreadsheet-column-header & {
+    .k-spreadsheet-column-header .k-selection-partial,
+    .k-spreadsheet-column-header .k-selection-full {
         border-bottom-color: fadein(@spreadsheet-selection-background, 80%);
     }
 
-    .k-spreadsheet-row-header & {
+    .k-spreadsheet-row-header .k-selection-partial,
+    .k-spreadsheet-row-header .k-selection-full {
         border-right-color: fadein(@spreadsheet-selection-background, 80%);
     }
-}
-
-.k-spreadsheet-pane .k-selection-partial {
-    background-color: @spreadsheet-selection-background;
 }
 
 .k-spreadsheet-selection {
