@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Overview of the Kendo UI Drawing API
-position: 0
+position: 1
 ---
 
 # Overview

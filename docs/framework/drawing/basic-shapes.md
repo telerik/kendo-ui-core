@@ -1,7 +1,7 @@
 ---
 title: Draw basic shapes
 page_title: Draw basic shapes with the Kendo UI Drawing API
-position: 1
+position: 2
 ---
 
 # Draw Basic Shapes
