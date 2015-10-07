@@ -193,9 +193,11 @@ var dojoApi = (function($) {
         },
 
         addButtons: function(element) {
-            $('<button class="btn btn-action btn-edit" title="Edit example">Edit</button>').insertBefore(element);
-            $('<a href="http://dojo.telerik.com" class="dojo" title="Open example in Kendo UI Dojo">Open In Dojo</a>').insertBefore(element);
+            if (!$(element).prev().is(".btn-run")) {
+                $('<button class="btn btn-action btn-edit" title="Edit example">Edit</button>').insertBefore(element);
+                $('<a href="http://dojo.telerik.com" class="dojo" title="Open example in Kendo UI Dojo">Open In Dojo</a>').insertBefore(element);
                 $('<button class="btn btn-action btn-run" title="Run example">Run</button>').insertBefore(element);
+            }
         },
         editSnippet: function(element) {
             reset();
