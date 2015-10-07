@@ -1,11 +1,11 @@
 ---
-title: Bundle Support for Kendo UI Components
-page_title: Bundle Support for Kendo UI Components
-description: "List of Kendo UI components supported by Kendo UI Core, Kendo UI Professional, UI for ASP .NET MVC, UI for JSP, and UI for PHP"
+title: List of Components and Their Bundle Support
+page_title: List of Components and Their Bundle Support
+description: "List of Kendo UI components, Kendo UI Core widgets, Kendo UI Professional widgets, UI for ASP .NET MVC, UI for JSP, and UI for PHP"
 position: 2
 ---
 
-# Bundle Support for Kendo UI Components
+# List of Components and Their Bundle Support
 
 The following table lists all Kendo UI components with regard to their support by the different Kendo UI bundles.
 

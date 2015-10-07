@@ -1,11 +1,11 @@
 ---
-title: Script Files for Kendo UI Tools, Frameworks and Utilities
-page_title: Script Files for Kendo UI Tools, Frameworks and Utilities
-description: "script files for frameworks and utilities, Kendo shared components"
+title: List of Script Files for the Tools, Frameworks and Utilities
+page_title: List of Script Files for the Tools, Frameworks and Utilities
+description: "script files for frameworks and utilities, Kendo UI shared components"
 position: 6
 ---
 
-# Script Files for Kendo UI Tools, Frameworks and Utilities
+# List of Script Files for the Tools, Frameworks and Utilities
 
 Below are listed the script files for Kendo UI shared components providing behaviors, data access and other services:
 

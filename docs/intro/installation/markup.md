@@ -1,12 +1,12 @@
 ---
-title: Initialize a Kendo UI Widget From Markup
-page_title: Use AngularJS or Kendo UI MVVM to instantiate and configure Kendo UI widgets
+title: Initialize a Widget Using Markup
+page_title: Initialize a Widget Using Markup
 previous_url: /data-attribute-initialization, /howto/declarative_initialization, /basics/markup, /intro/markup
-description: Learn how to add Kendo UI widgets to your mobile website or web application.
+description: "initialize widgets from markup, add Kendo widgets to your mobile website or web application, AngularJS or MVVM to configure Kendo UI"
 position: 7
 ---
 
-# Initialize Kendo UI Widgets From Markup
+# Initialize a Widget Using Markup
 
 In addition to the [jQuery plugin syntax](/intro/jquery-initialization), the Kendo UI widgets may be instantiated based on custom HTML attributes in several ways:
 

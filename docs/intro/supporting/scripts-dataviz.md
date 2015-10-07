@@ -1,11 +1,11 @@
 ---
-title: Script Files for Kendo UI Data Visualization Widgets
-page_title: Script Files for Kendo UI Data Visualization Widgets
-description: "script files rendering data visualization widgets, Kendo DataViz scripts"
+title: List of Script Files for the Data Visualization Widgets
+page_title: List of Script Files for the Data Visualization Widgets
+description: "script files for widgets rendering data visualization, Kendo DataViz script files"
 position: 4
 ---
 
-# Script Files for Kendo UI Data Visualization Widgets
+# List of Script Files for the Data Visualization Widgets
 
 Below are listed the script files for Kendo UI widgets rendering data visualization for desktop and mobile web applications:
 

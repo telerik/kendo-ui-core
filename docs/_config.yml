@@ -8,7 +8,7 @@ navigation:
     "introduction":
         title: "Introduction"
     "intro":
-        title: "Getting Started with Kendo UI"
+        title: "Getting Started"
         position: 2
     "*installation":
         title: "Prerequisites and Installation"

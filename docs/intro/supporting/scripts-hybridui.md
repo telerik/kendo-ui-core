@@ -1,11 +1,11 @@
 ---
-title: Script Files for Kendo Hybrid UI
-page_title: Script Files for Kendo Hybrid UI
-description: "script files for hybrid UI, Kendo mobile widgets"
+title: List of Script Files for the Hybrid UI Widgets
+page_title: List of Script Files for the Hybrid UI Widgets
+description: "script files for hybrid UI, Kendo UI hybrid widgets"
 position: 5
 ---
 
-# Script Files for Kendo Hybrid UI
+# List of Script Files for the Hybrid UI Widgets
 
 Below are listed the script files for Kendo UI frameworks and widgets for mobile applications:
 

@@ -1,11 +1,11 @@
 ---
-title: Script Files for Kendo UI Widgets
-page_title: Script Files for Kendo UI Widgets
-description: "script files Kendo widgets general, Kendo web widgets"
+title: List of Script Files for the Desktop Widgets
+page_title: List of Script Files for the Desktop Widgets
+description: "script files Kendo UI widgets general, Kendo UI web widgets"
 position: 3
 ---
 
-# Script Files for Kendo UI Widgets
+# List of Script Files for the Desktop Widgets
 
 Below are listed the script files for Kendo UI desktop widgets for mobile-ready websites and applications:
 
