@@ -1,12 +1,12 @@
 ---
-title: Initialize a Kendo UI Widget as a jQuery Plug-in
-page_title: Initialize a Kendo UI Widget as a jQuery Plug-in
+title: Initialize a Widget Using jQuery Plug-in Syntax
+page_title: Initialize a Widget Using jQuery Plug-in Syntax
 previous_url: /widgets, /howto/add-widgets, /basics/jquery-initialization, /intro/jquery-initialization
-description: Learn how to add Kendo UI widgets to your mobile website or web application.
+description: "add Kendo widgets to your mobile website or web application"
 position: 6
 ---
 
-# Initialize a Kendo UI Widget Using the jQuery Plug-in Syntax
+# Initialize a Widget Using jQuery Plug-in Syntax
 
 All Kendo UI widgets are registered as [jQuery plug-ins](http://learn.jquery.com/plugins/), which allows them to be instantiated on a jQuery object instance.
 The jQuery plug-in method is formed by the widget name in Pascal case, prefixed with `kendo` as in `kendoGrid` and `kendoListView`.

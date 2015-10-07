@@ -1,11 +1,11 @@
 ---
-title: Install Kendo UI As a Kendo UI Core or Kendo UI Professional Bower Package
-page_title: Install Kendo UI As a Kendo UI Core or Kendo UI Professional Bower Package
+title: Install Kendo UI as a Bower Package
+page_title: Install Kendo UI as a Bower Package
 description: "bower package, install Kendo UI Professional, install Kendo UI Core"
 position: 2
 ---
 
-# Install Kendo UI as a Kendo UI Core or Kendo UI Professional Bower Package
+# Install Kendo UI as a Bower Package
 
 [Bower](http://bower.io/) is a popular package manager for the web.
 

@@ -1,7 +1,7 @@
 ---
 title: Getting Started with Kendo UI
 page_title: Getting Started with Kendo UI
-description: "project up and running, download and host Kendo, Kendo bower package, Kendo CDN service, include only what you need with Kendo"
+description: "project up and running, download and host Kendo UI, Kendo UI bower package, Kendo UI CDN service, include only what you need with Kendo UI"
 previous_url: /install/bower, /install/cdn, /install/custom, /install/onsite, /getting-started
 position: 1
 ---
@@ -68,7 +68,7 @@ Here goes the example:
 
 > The code examples onwards assume that the Kendo UI scripts and stylesheets were added to the document.
 
-**Step 3:** Initialize a Kendo UI Widget
+**Step 3:** Initialize a Widget
 
 Example with the DataPicker widget:
 
@@ -76,7 +76,7 @@ Example with the DataPicker widget:
         <input id="datepicker" />
         <script>
         $(function() {
-            // Initialize the Kendo DatePicker by calling the kendoDatePicker jQuery plugin
+            // Initialize the Kendo UI DatePicker by calling the kendoDatePicker jQuery plugin
             $("#datepicker").kendoDatePicker();
         });
         </script>
@@ -102,7 +102,7 @@ Here is the complete example:
         </body>
     </html>
 
-### Install Kendo UI as a Kendo UI Core or Kendo UI Professional Bower Package
+### Install Kendo UI as a Bower Package
 
 [Bower](http://bower.io/) is a popular package manager for the web.
 
@@ -110,14 +110,14 @@ Kendo UI maintains 2 bower packages, namely Kendo UI Core and Kendo UI Professio
 
 [Learn more about installing Kendo UI as a Bower package](/intro/installation/bower-install)
 
-### Use the Kendo UI CDN Service
+### Use Kendo UI with CDN Services
 
-The Kendo UI CDN is hosted on [Amazon CloudFront](https://aws.amazon.com/cloudfront/). In order to access the Kendo UI CDN Service, you can use different approaches.
+Kendo UI CDN is hosted on [Amazon CloudFront](https://aws.amazon.com/cloudfront/). To access the CDN Service, you can use different approaches.
 
 [Learn more about the Kendo UI CDN Service](/intro/installation/cdn-service)
 
 ### Include Only What You Need
 
-You can add to your project only what it requires by picking the right combined scripts, building a custom combined script, or use Grunt to build a custom script. 
+Add to your project only what it requires by picking the right combined scripts, building a custom combined script, or using Grunt to build a custom script. 
 
 [Learn more about customizing the scripts you need](/intro/installation/what-you-need)  

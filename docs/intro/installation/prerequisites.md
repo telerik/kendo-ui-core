@@ -1,12 +1,12 @@
 ---
-title: Kendo UI JavaScript Prerequisites
-page_title: Kendo UI JavaScript prerequisites
-description: "Overview of the JavaScript libraries which Kendo UI depends on"
+title: JavaScript Prerequisites
+page_title: JavaScript Prerequisites
+description: "JavaScript libraries Kendo, JS overview Kendo"
 previous_url: /install/prerequisites, /javascript-dependencies, /intro/prerequisites
 position: 5
 ---
 
-# Kendo UI JavaScript Prerequisites
+# JavaScript Prerequisites
 
 ### jQuery
 

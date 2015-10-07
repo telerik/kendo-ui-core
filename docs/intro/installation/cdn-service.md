@@ -1,11 +1,11 @@
 ---
-title: Use the Kendo UI CDN Service
-page_title: Use the Kendo UI CDN Service
+title: Use Kendo UI with CDN Services
+page_title: Use Kendo UI with CDN Services
 description: "install Kendo UI, Kendo CDN service"
 position: 3
 ---
 
-# Use the Kendo UI CDN Service
+# Use Kendo UI with CDN Services
 
 The Kendo UI CDN is hosted on [Amazon CloudFront](https://aws.amazon.com/cloudfront/). In order to access the Kendo UI CDN Service, you can use either of the options described below.
 

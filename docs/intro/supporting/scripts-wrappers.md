@@ -1,11 +1,11 @@
 ---
-title: Script Files for Kendo UI Server-Side Wrappers
-page_title: Script Files for Kendo UI Server-Side Wrappers
-description: "script files for server-side wrappers, ASP.NET MVC script files with Kendo"
+title: List of Script Files for the Server-Side Wrappers
+page_title: List of Script Files for the Server-Side Wrappers
+description: "script files for server-side wrappers, ASP.NET MVC script files for Kendo"
 position: 7
 ---
 
-# Script Files for Kendo UI Server-Side Wrappers
+# List of Script Files for the Server-Side Wrappers
 
 Below are listed the script files for Kendo UI supplementary scripts for integration with server-side technologies:
 
