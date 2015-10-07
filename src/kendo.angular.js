@@ -736,6 +736,7 @@ var __meta__ = { // jshint ignore:line
 
     var SKIP_SHORTCUTS = [
         'MobileView',
+        'MobileDrawer',
         'MobileLayout',
         'MobileSplitView',
         'MobilePane',
