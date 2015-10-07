@@ -100,8 +100,6 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | Choose a font			| <ol><li>Select the cell(s) to which you want to apply the font</li> <li>On the Toolbar click **Font** [ <span class="k-font-icon k-i-font-family"></span> ]</li> <li>Choose a font type from the drop-down list</li></ol> |
 | Edit the font size 	| <ol><li>Select the cell(s) to which you want to apply the font size</li> <li>On the Toolbar click **Font Size** [ <span class="k-font-icon k-i-font-size"></span> ]</li> <li>Choose the font size from the predetermined values in drop-down list</li></ol> |
 | Format fonts			| <ol><li>Select the cell(s) where you want to format the font</li> <li>Use any of the following commands:</li></ol> <ul><ul><li>To make make the font **bold**, click **Bold** [ <span class="k-font-icon k-i-bold"></span> ] on the Toolbar</li> <li>To make make the font <i>italic</i>, click **Italic** [ <span class="k-font-icon k-i-italic"></span> ] on the Toolbar</li> <li>To make make the font <u>underlined</u>, click **Underline** [ <span class="k-font-icon k-i-underline"></span> ] on the Toolbar</li></ul></ul> |
-| Customize the format of numbers | <ol><li>Select the cell(s) where you want to format the font</li> <li>Click **Custom Format** [ <span class="k-font-icon k-i-format-number"></span> ] on the Toolbar</li> <li>Select an option from the drop-down list. The style of formatting is hinted to the right of each option.</li></ol> |
-| Further customize the format of numbers | <ol><li>Select the cell(s) whose content you want to format</li> <li>Click **Custom Format** [ <span class="k-font-icon k-i-format-number"></span> ] -> **More Formats**. Choose any of the following options:</li></ol> <ul><ul><li>**Number** customizes the format of numerical input</li> <li>**Currency** customizes the format of currency input</li> <li>**Date** customizes the format of date input</li></ul></ul> |
 
 ### Other Data Formatting Options
 
@@ -112,6 +110,8 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | Apply the `Redo` function | Click **Redo** [ <span class="k-font-icon k-i-redo"></span> ] on the **Menu** to repeat the actions you made during your current session. The number of actions you can repeat using `Redo` is unlimited. |
 | Increase decimal values	| Click **Increase Decimal** [ <span class="k-font-icon k-i-increase-decimal"></span> ] on the Toolbar to increase the number of digits after the decimal point |
 | Decrease decimal values	| Click **Decrease Decimal** [ <span class="k-font-icon k-i-decrease-decimal"></span> ] on the Toolbar to decrease the number of digits after the decimal point |
+| Customize the format of numbers | <ol><li>Select the cell(s) where you want to format the font</li> <li>Click **Custom Format** [ <span class="k-font-icon k-i-format-number"></span> ] on the Toolbar</li> <li>Select an option from the drop-down list. The style of formatting is hinted to the right of each option.</li></ol> |
+| Further customize the format of numbers | <ol><li>Select the cell(s) whose content you want to format</li> <li>Click **Custom Format** [ <span class="k-font-icon k-i-format-number"></span> ] -> **More Formats**. Choose any of the following options:</li></ol> <ul><ul><li>**Number** customizes the format of numerical input</li> <li>**Currency** customizes the format of currency input</li> <li>**Date** customizes the format of date input</li></ul></ul> |
 | Apply formulas and functions | <ol><li>Select a cell</li> <li>Go to the **Formula Bar** and type an equal sign [ `=` ]</li> <li>Type your formula/function and press `Enter` once done to see the outcome of your input in the cell. Note that when you start writing a function, the `AutoComplete` prompts you with the syntax.</li></ol> |
 | Edit formulas and functions 	| <ol><li>Double-click on a cell to display the formula/function in the **Formula Bar**</li> <li>Change the formula/function and press `Enter`</li></ol> |
 | Sort information			| <ol><li>Select a column</li> <li>On the **Menu** click the **Data** tab</li> <li>Click **Sort** [ <span class="k-font-icon k-i-sort-desc"></span> ] on the Toolbar and choose an option from the drop-down list. The data within the active sheet is now sorted according to the alphabetical order of the column you modified and in an ascending or descending order of its content.</li></ol> |
@@ -126,7 +126,7 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 >
 > Whenever **Apply** is displayed as a command, click on it if you want an option you selected to be applied.
 
-### Shortcut Keys
+### Keyboard Shortcuts
 
 | WHAT YOU WANT TO DO										| SHORTCUTS					|
 | :--- 														| :---						|
