@@ -3,7 +3,22 @@ var FS    = require("fs");
 var SYS   = require("util");
 var U2    = require("uglify-js");
 
-var SRCDIR = PATH.join(__dirname, "..", "src");
+(function(){
+    function tryDir(dir) {
+        try {
+            var filename = PATH.join(__dirname, "..", dir, "cultures", "kendo.culture.en-US.js");
+            FS.statSync(filename);
+            global.KENDO_SRC_DIR = dir;
+            return true;
+        } catch(ex) {};
+    }
+    if (!(tryDir("src") || tryDir("js"))) {
+        console.error("!!! Cannot find Kendo sources directory");
+        throw "EXIT";
+    }
+})();
+
+var SRCDIR = PATH.join(__dirname, "..", KENDO_SRC_DIR);
 
 var AMD_WRAPPER = "(function(f, define){\n\
     define($DEPS, f);\n\
@@ -133,10 +148,10 @@ var getKendoFile = (function() {
                 var replacements = [];
                 replacements.push(
                     { begin : 0,
-                      end   : ast.body[0].start.pos,
+                      end   : ast.start.pos,
                       text  : ""
                     },
-                    { begin : ast.body[ast.body.length - 1].end.endpos,
+                    { begin : ast.end.endpos,
                       end   : my_code.length,
                       text  : "" }
                 );
@@ -164,7 +179,7 @@ var getKendoFile = (function() {
 
                 my_code = replaceInString(my_code, replacements);
             }
-            return my_code;
+            return "(" + my_code + ")();";
         }),
 
         // Generates the complete (readable) source of this component.
@@ -200,30 +215,11 @@ var getKendoFile = (function() {
         buildMinAST_noAMD: cachedProperty("buildMinAST_noAMD", function(){
             var ast = this.buildMinAST();
             var f = walkAST(ast, findDefine).factory;
-            var stats = [];
-            walkAST(f, function(node){
-                if (node !== f) {
-                    if (node instanceof U2.AST_Return) {
-                        var p = node.value;
-                        while (p instanceof U2.AST_Seq) {
-                            stats.push(new U2.AST_SimpleStatement({ body: p.car }));
-                            p = p.cdr;
-                        }
-                        if (p && p.has_side_effects(U2.Compressor({ unsafe: true, pure_getters: true }))) {
-                            stats.push(new U2.AST_SimpleStatement({ body: p }));
-                        }
-                        this.exit();
-                    }
-                    else if (node instanceof U2.AST_Statement) {
-                        stats.push(node);
-                        return true;
-                    }
-                }
+            return new U2.AST_Toplevel({
+                body: [ new U2.AST_SimpleStatement({
+                    body: new U2.AST_Call({ expression: f, args: [] })
+                }) ]
             });
-            if (stats.length == 0) {
-                throw new Error("Can't find main code for " + this.filename());
-            }
-            return new U2.AST_Toplevel({ body: stats });
         }),
 
         buildMinSource_noAMD: cachedProperty("buildMinSource_noAMD", function(){
@@ -235,7 +231,7 @@ var getKendoFile = (function() {
                 file: this.filename().replace(/\.js$/i, ".min.js"),
                 orig_line_diff: 8,
                 dest_line_diff: 8,
-                root: "../src/js/"
+                root: "../src/" + KENDO_SRC_DIR + "/"
             });
             return this.buildMinAST().print_to_string({
                 source_map: source_map
@@ -248,7 +244,7 @@ var getKendoFile = (function() {
         }),
 
         _getFullAST: function(withoutDeps){
-            var deps = withoutDeps ? [] : this.getCompFiles();
+            var deps = withoutDeps ? [] : this.getCompFiles().slice().reverse();
             var ast = this.getAMDFactory().factory;
             ast = cloneAST(ast);
             ast.transform(new U2.TreeTransformer(function(node, descend){
@@ -257,10 +253,12 @@ var getKendoFile = (function() {
                     deps.forEach(function(f){
                         var comp = getKendoFile(f);
                         var f = comp.getAMDFactory().factory;
-                        f.body.forEach(function(stat){
-                            if (!isReturnKendo(stat))
-                                node.body.push(stat);
-                        });
+                        node.body.unshift(new U2.AST_SimpleStatement({
+                            body: new U2.AST_Call({
+                                expression: f,
+                                args: []
+                            })
+                        }));
                     });
                     return node;
                 }
@@ -394,7 +392,7 @@ function fileNamesToAMDDeps(files, min) {
 };
 
 function replaceInString(str, replacements) {
-    replacements = U2.mergeSort(replacements, function(a, b){
+    replacements.sort(function(a, b){
         return a.begin - b.begin;
     });
     for (var i = replacements.length; --i >= 0;) {
@@ -713,7 +711,16 @@ function bundleFiles_getMinAST(files) {
     loadComponents(files).forEach(function(f){
         var comp = getKendoFile(f);
         var ast = comp.getFullAST_noDeps();
-        code.push.apply(code, ast.body);
+        // must be an IIFE.
+        if (!(ast instanceof U2.AST_Lambda)) {
+            console.log("Got wrong node!", ast.TYPE);
+            throw new Error("BAD AST NOTE IN BUILD");
+        }
+        code.push(new U2.AST_SimpleStatement({
+            body: new U2.AST_Call({
+                expression: ast, args: []
+            })
+        }));
     });
     var min = minify(new U2.AST_Toplevel({ body: code }));
     return get_wrapper().wrap([], min);
@@ -728,7 +735,7 @@ function bundleFiles(files, filename, min) {
             file: filename,
             orig_line_diff: 8,
             dest_line_diff: 8,
-            root: "../src/js/"
+            root: "../src/" + KENDO_SRC_DIR + "/"
         });
         code = ast.print_to_string({ source_map: map });
         return {
@@ -748,6 +755,48 @@ function bundleFiles(files, filename, min) {
 
 function loadAll() {
     return loadComponents(listKendoFiles());
+}
+
+function checkDeps(files) {
+    var loading = [];
+    var loaded = [];
+    function indent() {
+        var n = loading.length;
+        var str = "";
+        while (n-- > 0) str += "..";
+        return str;
+    }
+    function loadOne(filename, basedir){
+        filename = filename.replace(/(\.js)?$/, ".js");
+        filename = PATH.resolve(basedir, filename);
+        filename = PATH.relative(SRCDIR, filename);
+        filename = PATH.normalize(filename);
+        if (loaded.indexOf(filename) >= 0) {
+            return;
+        }
+        var out = indent() + filename, cycle = false;
+        if (loading.indexOf(filename) >= 0) {
+            out += " *** CYCLE!";
+            cycle = true;
+        }
+        console.log(out);
+        if (cycle) {
+            throw new Error(filename + " depends on itself");
+        }
+        loading.push(filename);
+        var comp = getKendoFile(filename);
+        comp.getAMDDeps().forEach(function(f){
+            loadOne(f, comp.dirname());
+        });
+        loaded.push(loading.pop());
+    }
+    files.forEach(function(file){
+        var comp = getKendoFile(file);
+        if (!comp.isSubfile()) {
+            loadOne(comp.filename(), comp.dirname());
+            console.log("---");
+        }
+    });
 }
 
 /* -----[ exports ]----- */
@@ -775,10 +824,12 @@ if (require.main === module) (function(){
         .describe("full", "Full build")
         .describe("min", "Minified build")
         .describe("kendo-config", "Generate kendo-config.json")
+        .describe("check-deps", "Report circular dependencies")
         .boolean("all-deps")
         .boolean("direct-deps")
         .boolean("bundle-all")
         .boolean("min")
+        .boolean("check-deps")
         .string("subfiles")
         .string("build")
         .wrap(80)
@@ -820,6 +871,11 @@ if (require.main === module) (function(){
 
     if (ARGV["bundle-all"]) {
         files = loadAll();
+    }
+
+    if (ARGV["check-deps"]) {
+        checkDeps(files || REST);
+        return;
     }
 
     if (ARGV["full"] || ARGV["min"]) {
