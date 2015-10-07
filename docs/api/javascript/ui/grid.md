@@ -2979,6 +2979,9 @@ The label used for the check-all checkbox.
 
 The text of the filter operators displayed in the filter menu.
 
+> If `operators` are defined manually, then the default messages will be overridden too. If you would like to control the `operators` and still use the default messages,
+then you will need to retrieve them from the `FilterCell` prototype - `kendo.ui.FilterCell.fn.options.operators.{type}`, where type can be "string", "date", "number" and "enums".
+
 ### filterable.operators.string `Object`
 
 The texts of the filter operators displayed for columns bound to string fields.
