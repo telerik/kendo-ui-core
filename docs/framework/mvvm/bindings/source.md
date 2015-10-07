@@ -13,6 +13,10 @@ The template is specified by the `data-template` attribute of the element. The v
 an existing `script` element which defines the Kendo template. If a template is not specified a default template will be
 used depending on element tag name.
 
+> *Important*: `Source` binding does not support nesting widgets with source binding, e.g. `treeview` with source binding to the view model.
+The nested widgets will trigger **source change**, which will force the root source binging to re-render its content, leading to infinitive loops.
+The proper way to nest widgets with source is to use `data-source` attribute [demo](/web/treeview/how-to/MVVM/multiple-treeviews-source-binding).
+
 ## Source binding to array
 
 When the View-Model value is an array the `source` binding will iterate all array items and render the template. The accumulated output of the template
