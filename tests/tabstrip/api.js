@@ -459,6 +459,58 @@ test("append method appends content containers before the tabGroup when tabPosit
     ok(newDiv.next().is("ul.k-tabstrip-items"));
 });
 
+test("value option is correctly set", function () {
+    var tabStrip = createTabStrip({
+        value: "Tab1",
+        dataTextField: "Name",
+        dataContentField: "Content",
+        dataSource: [
+          { Name: "Tab1", Content: "Tab1: content" },
+          { Name: "Tab2", Content: "Tab2: content" }
+        ]
+    });
 
+    ok(tabStrip.element.find("li").first().hasClass("k-state-active"));
+});
+
+test("value() method correctly selects active tab", function () {
+    var tabStrip = createTabStrip({
+        dataTextField: "Name",
+        dataContentField: "Content",
+        dataSource: [
+          { Name: "Tab1", Content: "Tab1: content" },
+          { Name: "Tab2", Content: "Tab2: content" }
+        ]
+    });
+    tabStrip.value("Tab2");
+    ok(tabStrip.element.find("li").eq(1).hasClass("k-state-active"));
+});
+
+test("value() method does not select tab when value is null", function () {
+    var tabStrip = createTabStrip({
+        dataTextField: "Name",
+        dataContentField: "Content",
+        dataSource: [
+          { Name: "Tab1", Content: "Tab1: content" },
+          { Name: "Tab2", Content: "Tab2: content" }
+        ]
+    });
+    tabStrip.value(null);
+    ok(!tabStrip.element.find("li").eq(1).hasClass("k-state-active"));
+});
+
+test("value() method does not select tab when value is undefined", function () {
+    var tabStrip = createTabStrip({
+        dataTextField: "Name",
+        dataContentField: "Content",
+        dataSource: [
+          { Name: "Tab1", Content: "Tab1: content" },
+          { Name: "Tab2", Content: "Tab2: content" }
+        ]
+    });
+    var value;
+    tabStrip.value(value);
+    ok(!tabStrip.element.find("li").eq(1).hasClass("k-state-active"));
+});
 
 })();

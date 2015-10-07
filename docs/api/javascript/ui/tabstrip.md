@@ -454,6 +454,24 @@ A [**fade animation**](#configuration-animation) is highly recommended with any 
         });
     </script>
 
+### value `String`*(default: null)*
+
+Specifies the selectd tab. Should be corresponding to the dataTextField configuration and used when bound to a DataSource component.
+
+#### Example
+
+    $("#tabstrip").kendoTabStrip({
+        value: "Tab1",
+        dataTextField: "Name",
+        dataContentField: "Content",
+        dataSource: [
+          { Name: "Tab1", Content: "Tab1: content" },
+          { Name: "Tab2", Content: "Tab2: content" }
+        ]
+    });
+
+> **Important:** This configuration options is available with releases after 2015.3.1002.
+
 ## Fields
 
 ### tabGroup `jQuery`

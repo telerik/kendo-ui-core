@@ -693,6 +693,25 @@ withAngularTests("Angular (UI Core)", function(runTest){
         },50)
     });
 
+    runTest("TabStrip selects correct tab based on value configuration", function(dom, $scope){
+       $scope.options = {
+          value: "Tab1",
+          dataTextField: "Name",
+          dataContentField: "Content",
+          dataSource: [
+            { Name: "Tab1", Content: "Tab1: content" },
+            { Name: "Tab2", Content: "Tab2: content" }
+          ]
+        };
+        $("<div id='tabstrip' kendo-tab-strip k-options='options''></div>").appendTo(dom);
+        expect(1);
+        setTimeout(function() {
+            equal($("#tabstrip").find("li").first().hasClass("k-state-active"), true);
+            start();
+        },50)
+    });
+
+
     // XXX: for some reason ng-repeat does not work in the test suite.
     //
     // runTest("Dirty flag should not be globally cleared with ng-repeat", function(dom, $scope){
