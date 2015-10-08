@@ -1,6 +1,5 @@
 var PATH = require("path");
-var LESS = require("less");
-var CSSMIN = require("cssmin").cssmin;
+
 var licensePath = PATH.join("resources", "legal", "core-license.txt");
 
 module.exports = function(grunt) {
@@ -14,4 +13,4 @@ module.exports = function(grunt) {
             });
         });
     });
-}
+};
