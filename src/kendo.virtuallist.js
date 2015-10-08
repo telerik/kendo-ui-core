@@ -177,7 +177,7 @@ var __meta__ = { // jshint ignore:line
         if (data.index !== 0 && data.newGroup) {
             $("<div class=" + GROUPITEM + "></div>")
                 .appendTo(element)
-                .html(templates.groupTemplate({ group: data.group }));
+                .html(templates.groupTemplate(data.group));
         }
 
         if (data.top !== undefined) {
@@ -266,7 +266,7 @@ var __meta__ = { // jshint ignore:line
             dataValueField: null,
             template: "#:data#",
             placeholderTemplate: "loading...",
-            groupTemplate: "#:group#",
+            groupTemplate: "#:data#",
             fixedGroupTemplate: "fixed header template",
             valueMapper: null
         },
