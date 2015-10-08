@@ -8,7 +8,7 @@
 #page-inner-content {
     position: absolute;
     top: 79px;
-    bottom: 44px;
+    bottom: 0;
     width: 100%;
 }
 
@@ -74,6 +74,9 @@ footer {
     top: 5px;
 }
 
+#page-nav .article {
+    top: 6px;
+}
 
 #page-nav .k-plus { margin: 0; padding: 0; background: url(../images/plus.png); }
 #page-nav .k-minus { margin: 0; padding: 0; background: url(../images/minus.png); }
@@ -261,8 +264,8 @@ footer {
 #page-nav .current-topic .k-group .k-in a {
     font-size: 12px;
     color: #555;
-    padding-top: 3px;
-    padding-bottom: 4px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 #page-nav #page-tree .current-topic[data-expanded="true"] > .k-group {
@@ -270,14 +273,12 @@ footer {
 }
 
 #page-nav #page-tree .current-topic[data-expanded="true"] > .k-group > .k-item {
-    padding-top: 10px;
+    padding-top: 15px;
 }
 
 #page-nav #page-tree .current-topic[data-expanded="true"] > .k-group > .k-item > div > .k-in a  {
     font-weight: bold;
     font-size: 13px;
-    padding-top: 4px;
-    padding-bottom: 4px;
 }
 
 #page-nav #page-tree .current-topic[data-expanded="true"] > .k-group > .k-item > div > .k-icon  {

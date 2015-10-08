@@ -61,12 +61,41 @@ article, aside, footer {
 }
 
 #page-edit-link {
+    transition: top .2s;
     position: absolute;
     z-index: 10;
-    right: 28px;
-    top: 10px;
+    right: 6em;
+    top: -30px;
+    width: 120px;
+    height: 20px;
     margin: 0;
+    padding: 10px 0;
     text-decoration: none;
+    text-align: center;
+    border-radius: 0;
+    background-color: #ddd;
+    color: #444;
+    
+    animation: editbutton 2s linear;
+    -webkit-animation: editbutton 2s linear;
+}
+
+#page-edit-link:hover {
+    transition: top .2s linear .2s;
+    top: -0px;
+}
+
+
+@-webkit-keyframes editbutton {
+    0% {top: -0px;}
+    75% {top: -0px;}
+    100% {top: -30px;}
+}
+
+@keyframes editbutton {
+    0% {top: -0px;}
+    75% {top: -0px;}
+    100% {top: -30px;}
 }
 
 #logo-bar {
@@ -193,7 +222,7 @@ article, aside, footer {
     right: 0;
     bottom: 0;
     overflow: auto;
-    padding: 15px 1em 4em 6em;
+    padding: 15px 0 0;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -212,6 +241,7 @@ article, aside, footer {
 
 #page-article article {
     max-width: 930px;
+    margin: 0 1em 4em 6em;
 }
 
 #page-article h1 {
@@ -280,6 +310,10 @@ h1 span.type-link a:hover {
     color: #036c9c;
 }
 
+h1 + p {
+    font-size: 18px;
+}
+
 h2 {
     margin: 2.5em 0 0;
     padding-top: 2em;
@@ -290,8 +324,6 @@ h2 {
     margin: 2em 0 0;
     padding: 0;
 }
-
-
 
 h3 {
     margin-top: 2em;
@@ -438,13 +470,16 @@ blockquote th, blockquote td {
 /* Footer */
 footer
 {
-    text-align: right;
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    text-align: left;
     width: 100%;
     box-sizing: border-box;
-    padding: 0 1em 0 0;
+    padding: 0;
+}
+
+footer p {
+    margin: 0;
+    padding: 20px;
+    font-size: 12px;
 }
 
 /* Search */
@@ -644,8 +679,11 @@ footer
     #page-article {
         width: 100%;
         margin-left: 0;
-        padding-left: 2em;
-        padding-right: 2em;
+    }
+    
+    #page-article article {
+      margin-left: 2em;
+      margin-right: 2em;
     }
 
     #page-article h1 {
@@ -707,9 +745,5 @@ footer
         text-align: right;
         left: auto;
         cursor: pointer;
-    }
-
-    footer {
-        display: none;
     }
 }
