@@ -884,6 +884,23 @@
         });
     });
 
+    asyncTest("when null is passed to the value method all values are cleared", 3, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            value: [1, 2, 3]
+        }));
+
+        asyncDataSource.read().then(function() {
+            virtualList.bind("change", function() {
+                start();
+                ok(true, "change is fired");
+                equal(this.value().length, 0);
+                equal(this.selectedDataItems().length, 0);
+            });
+            virtualList.value(null);
+        });
+    });
+
     asyncTest("when empty array is passed to the value method removed items are available in the change event", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: "multiple",
@@ -896,6 +913,21 @@
                 equal(e.removed.length, 3);
             });
             virtualList.value([]);
+        });
+    });
+
+    asyncTest("when null is passed to the value method removed items are available in the change event", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            value: [1, 2, 3]
+        }));
+
+        asyncDataSource.read().then(function() {
+            virtualList.bind("change", function(e) {
+                start();
+                equal(e.removed.length, 3);
+            });
+            virtualList.value(null);
         });
     });
 
@@ -967,6 +999,22 @@
 
         asyncDataSource.read().then(function() {
             virtualList.value([]).done(function() {
+                start();
+                ok(true, "done callback");
+                equal(virtualList.value().length, 0);
+            })
+        });
+    });
+
+    asyncTest("valueDeffered is resolved immediately if null is passed", 2, function() {
+        var count = 1;
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            value: [1, 2, 3]
+        }));
+
+        asyncDataSource.read().then(function() {
+            virtualList.value(null).done(function() {
                 start();
                 ok(true, "done callback");
                 equal(virtualList.value().length, 0);
