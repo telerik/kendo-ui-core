@@ -8,6 +8,7 @@ var replace =  require('gulp-replace');
 var minifyCSS = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var clone = require('gulp-clone');
+var sourcemaps = require('gulp-sourcemaps');
 
 var merge = require('merge2');
 var autoprefix = require('less-plugin-autoprefix');
@@ -30,10 +31,15 @@ var cleanCssOptions = {
     advanced: false
 };
 
-var logger = logger({
-    before: 'Starting LESS',
+var lessLogger = logger({
     after: 'LESS complete!',
     extname: '.css',
+    showChange: true
+});
+
+var minCssLogger = logger({
+    after: 'Min CSS complete!',
+    extname: '.min.css',
     showChange: true
 });
 
@@ -44,7 +50,8 @@ gulp.task("css-assets", function() {
 
 gulp.task("styles", [ "css-assets" ], function() {
     var css = gulp.src("styles/**/kendo*.less")
-        .pipe(logger)
+        .pipe(sourcemaps.init())
+        .pipe(lessLogger)
         .pipe(less({
             relativeUrls: true,
             plugins: [new autoprefix({ browsers: browsers }) ]
@@ -52,8 +59,11 @@ gulp.task("styles", [ "css-assets" ], function() {
         .pipe(replace(/\.\.\/mobile\//g, '')); // temp hack for the discrepancy between source and generated "source"
 
     var minCss = css.pipe(clone())
+        .pipe(minCssLogger)
         .pipe(minifyCSS(cleanCssOptions))
-        .pipe(rename({ suffix: ".min" }));
+        .pipe(rename({ suffix: ".min" }))
+        .pipe(sourcemaps.write("maps", { sourceRoot: "../../../styles" }));
 
-    merge(css, minCss).pipe(gulp.dest('dist/styles'));
+    merge(css, minCss)
+        .pipe(gulp.dest('dist/styles'));
 });
