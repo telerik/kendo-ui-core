@@ -408,6 +408,10 @@ var __meta__ = { // jshint ignore:line
                 return that._values.slice();
             }
 
+            if (value === null) {
+                value = [];
+            }
+
             value = toArray(value);
 
             if (that.options.selectable === "multiple" && that.select().length && value.length) {
