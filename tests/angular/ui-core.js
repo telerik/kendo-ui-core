@@ -290,6 +290,19 @@
        equal($scope.kdtp.value(), date);
    });
 
+   ngTest2("PanelBar AngularJS templates are compiled", 1, function(dom, controller, bootstrap) {
+       controller(function($scope) {
+           $scope.foo = "Hello World!";
+           $scope.panelBarDataSource = [{text: "{{foo}}"}]
+       });
+       $('<ul kendo-panel-bar="kpb" k-data-source="panelBarDataSource"></ul>').appendTo(dom);
+
+       bootstrap();
+       var $scope = dom.scope();
+       equal($scope.kpb.element.find("span").text(), $scope.foo);
+   });
+
+
    asyncTest("triggers kendoRendered", 2, function() {
        var root = $('<div ng-controller=main></div>').appendTo(QUnit.fixture);
 
