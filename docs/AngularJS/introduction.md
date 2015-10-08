@@ -26,6 +26,7 @@ Read on below to learn more about the integration between Kendo UI and AngularJS
 - [Change widget state using k-ng-disabled and k-ng-readonly](#change-widget-state-using-k-ng-disabled-and-k-ng-readonly)
 - [Delaying widget initialization](#delaying-widget-initialization)
 - [Getting widget references](#getting-widget-references)
+- [Widget placed in window](#widget-placed-in-window)
 
 > AngularJS Kendo UI widget initialization is not designed to be combined with the Kendo UI server wrappers.
 Using wrappers is equivalent to [jQuery plugin syntax initialization](/basics/jquery-initialization).
@@ -597,4 +598,32 @@ Setting the options of the widget, in a custom directive - with the Q2 2015 rele
     .controller("MyCtrl", function($scope){});
 </script>
 ````
+### Widget placed in window
+
+AngularJS will create a new scope for the content placed in a window. This is due to the dynamic scoping behavior of the framework.
+Widgets placed in the window or popup will loose its connection to the *parent* scope and hence they will **not handle** any changes to the *parent* scope.
+
+The available workaround is to either access the Kendo widget directly, using its jQuery object, or to access the newly created child scope. Basically, you will need to find the
+window/popup element and get the scope from it.
+
+#### Get AngularJS scope attached to the window popup
+
+````html
+<div id="example" ng-app="KendoDemos">
+    <div class="demo-section k-header" ng-controller="MyCtrl">
+        <div kendo-window="wnd"></div>
+    </div>
+</div>
+<script>
+    angular.module("KendoDemos", [ "kendo.directives" ])
+    .controller("MyCtrl", function($scope){
+      $scope.$on("kendoRendered", function(e) {
+        //retrieve the child scope from the window element
+        var childScope = angular.element($scope.wnd.element).scope();
+      });
+    });
+</script>
+````
+
+
 {% endraw %}
