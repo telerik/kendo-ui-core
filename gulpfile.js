@@ -39,7 +39,7 @@ var logger = logger({
 
 gulp.task("css-assets", function() {
     return gulp.src("styles/**/*.{less,woff,ttf,png,gif,css,svg}").
-        pipe(gulp.dest("dist/gulp-styles"));
+        pipe(gulp.dest("dist/styles"));
 });
 
 gulp.task("styles", [ "css-assets" ], function() {
