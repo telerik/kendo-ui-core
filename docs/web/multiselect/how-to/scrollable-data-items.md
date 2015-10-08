@@ -1,12 +1,12 @@
 ---
-title: Scrollbale data items
-page_title: Scrollbale data items
-description: Scrollbale data items
+title: Scrollable data items
+page_title: Scrollable data items
+description: Scrollable data items
 ---
 
-# Scrollbale data items
+# Scrollable MultiSelect data items
 
-The example below demonstrates how to create a scrollable list of the selected items in the widget.
+The example below demonstrates how to create a scrollable list of the selected items in the MultiSelect.
 
 #### Example:
 
