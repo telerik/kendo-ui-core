@@ -229,7 +229,7 @@ module.exports = function(grunt) {
                 stderr: false
             },
             gulpStyles: {
-                command: 'node_modules/gulp/bin/gulp.js styles'
+                command: 'node node_modules/gulp/bin/gulp.js styles'
             }
         },
 
