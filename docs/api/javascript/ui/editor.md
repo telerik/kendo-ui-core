@@ -1365,12 +1365,12 @@ Indicates whether inline scripts will be serialized and posted to the server.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
-      value: "The character ä is an umlaut",
+      value: "before script <script>alert(1);<\/script> after script",
       serialization: {
-        entities: true
+        scripts: true
       }
     });
-    console.log($("#editor").data("kendoEditor").value()); // logs "The character &auml; is an umlaut"
+    console.log($("#editor").data("kendoEditor").value()); // log will contain the script tag
     </script>
 
 ### serialization.semantic `Boolean` *(default: true)*
