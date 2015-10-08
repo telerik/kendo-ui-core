@@ -494,6 +494,62 @@ The value to be set to the cells.
 ```
 
 
+### isSortable
+
+Returns if a range can be sorted.
+
+#### Returns
+
+`Boolean` whether the range can be sorted.
+
+#### Example
+
+```html
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        var range = sheet.range("A1:B1");
+
+        if (range.isSortable()) {
+            range.sort()
+        }
+    </script>
+```
+
+### isFilterable
+
+Returns if a range can be filtered.
+
+#### Returns
+
+`Boolean` whether the range can be filtered.
+
+#### Example
+
+```html
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        var range = sheet.range("A1:B1");
+
+        if (range.isFilterable()) {
+            range.filter(true);
+        }
+    </script>
+```
+
 ### merge
 
 Merges the range cells into a single merged cell. If the range already includes a merged cell, they are merged, too.
