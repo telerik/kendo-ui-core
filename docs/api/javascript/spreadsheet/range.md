@@ -344,7 +344,6 @@ Determines the action performed by the method.
             { column: 1, filter: filter2 }
         ]);
     </script>
-
 ```
 
 
@@ -570,6 +569,7 @@ Merges the range cells into a single merged cell. If the range already includes 
     </script>
 ```
 
+
 ### select
 
 Sets the sheet selection to the range cells.
@@ -585,6 +585,88 @@ Sets the sheet selection to the range cells.
         var sheet = spreadsheet.activeSheet();
 
         sheet.range("A1:B2").select();
+    </script>
+```
+
+### sort
+
+Sorts the rows in the range.
+
+#### Parameters
+
+##### sort `Number | Object | Array`
+
+Determines the action performed by the method.
+
+* Passing a number `n` sorts the `n`th column in the range, in ascending order.
+* Passing a `{ column: Number, ascending: Boolean }` sorts the respective column in ascending / descending order, based on the ascending parameter. The column index is relative to the beginning of the range.
+* Passing an array of `{ column: Number, ascending: Boolean }` objects sorts each column, specified by the index.
+
+#### Example - sort a single column
+
+```html
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        var values = [
+            [ 1, 2, 3 ],
+            [ 7, 8, 9 ],
+            [ 4, 5, 6 ]
+        ];
+
+        sheet.range("A1:C3").values(values);
+
+        sheet.range("A1:C3").sort(1);
+    </script>
+```
+
+#### Example - sort a column in descending order
+
+```html
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        var values = [
+            [ 1, 2, 3 ],
+            [ 7, 8, 9 ],
+            [ 4, 5, 6 ]
+        ];
+
+        sheet.range("A1:C3").values(values);
+
+        sheet.range("A1:C3").sort({ column: 2, ascending: false });
+    </script>
+```
+
+### unmerge
+
+Un-merges any merged cells which are included in the range.
+
+```html
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        sheet.range("A1:B2").merge();
+        sheet.range("B3:C3").merge();
+        sheet.range("A1:D4").unmerge(); // this will unmerge both merged cells.
     </script>
 ```
 
@@ -617,26 +699,6 @@ The cell values.
         ];
 
         sheet.range("A1:C3").values(values);
-    </script>
-```
-
-### unmerge
-
-Un-merges any merged cells which are included in the range.
-
-```html
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
-
-        $("#spreadsheet").kendoSpreadsheet();
-
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
-
-        var sheet = spreadsheet.activeSheet();
-
-        sheet.range("A1:B2").merge();
-        sheet.range("B3:C3").merge();
-        sheet.range("A1:D4").unmerge(); // this will unmerge both merged cells.
     </script>
 ```
 
