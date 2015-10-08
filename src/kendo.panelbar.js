@@ -246,6 +246,8 @@ var __meta__ = { // jshint ignore:line
                 that.expand(content.parent(), false);
             }
 
+            that._angularCompile();
+
             kendo.notify(that);
         },
 
@@ -271,10 +273,30 @@ var __meta__ = { // jshint ignore:line
             expandMode: "multiple"
         },
 
+        _angularCompile: function() {
+            var that = this;
+            that.angular("compile", function(){
+                return {
+                    elements: that.element.children("li"),
+                    data: [{ dataItem: that.options.$angular}]
+                };
+            });
+        },
+
+        _angularCleanup: function() {
+            var that = this;
+
+            that.angular("cleanup", function(){
+                return { elements: that.element.children("li") };
+            });
+        },
+
         destroy: function() {
             Widget.fn.destroy.call(this);
 
             this.element.off(NS);
+
+            this._angularCleanup();
 
             kendo.destroy(this.element);
         },
