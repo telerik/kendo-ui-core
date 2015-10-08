@@ -231,8 +231,6 @@
         });
     });
 
-// fails because select(-1) resolves the promise
-/*
     asyncTest("listBound event is fired after all values are prefetched (multi selection)", 3, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: "multiple",
@@ -249,7 +247,7 @@
         }));
         asyncDataSource.read();
     });
-*/
+
     asyncTest("fires the activate event", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             activate: function() {
