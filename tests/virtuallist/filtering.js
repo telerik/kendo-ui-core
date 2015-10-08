@@ -385,4 +385,18 @@
         localDataSource.filter({field: "text", operator: "contains", value: "0"});
     });
 
+    asyncTest("resets pageSize after filters are cleared", 1, function() {
+        virtualList.filter(true);
+        localDataSource.filter({field: "text", operator: "contains", value: "200"});
+        localDataSource.range(0, 8);
+
+        virtualList.one("listBound", function() {
+            start();
+            equal(virtualList.dataSource.pageSize(), 16);
+        });
+
+        virtualList.filter(false);
+        localDataSource.filter([]);
+    });
+
 })();

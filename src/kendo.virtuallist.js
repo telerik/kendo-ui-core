@@ -980,6 +980,10 @@ var __meta__ = { // jshint ignore:line
                 pageSize = this.itemCount,
                 flatGroups = {};
 
+            if (dataSource.pageSize() < pageSize) {
+                dataSource.pageSize(pageSize);
+            }
+
             return function(index, rangeStart) {
                 var that = this;
                 if (!dataSource.inRange(rangeStart, pageSize)) {
