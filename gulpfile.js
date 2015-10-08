@@ -8,9 +8,14 @@ var replace =  require('gulp-replace');
 var minifyCSS = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var clone = require('gulp-clone');
+var cache = require('gulp-cached');
+var progeny = require('gulp-progeny');
+var plumber = require('gulp-plumber');
+var filter = require('gulp-filter');
 var sourcemaps = require('gulp-sourcemaps');
 
 var merge = require('merge2');
+var lazypipe = require('lazypipe');
 var autoprefix = require('less-plugin-autoprefix');
 
 var browsers = [
@@ -48,15 +53,34 @@ gulp.task("css-assets", function() {
         pipe(gulp.dest("dist/styles"));
 });
 
-gulp.task("styles", [ "css-assets" ], function() {
+var lessToCss = lazypipe()
+    .pipe(less, { relativeUrls: true, plugins: [new autoprefix({ browsers: browsers }) ] })
+    .pipe(replace, /\.\.\/mobile\//g, ''); // temp hack for the discrepancy between source and generated "source"
+
+gulp.task("dev-less",function() {
+    return gulp.src("styles/**/*.less")
+        .pipe(plumber({
+            errorHandler: function (err) {
+                console.log(err);
+                this.emit('end');
+            }
+        }))
+        .pipe(cache('less'))
+        .pipe(progeny({
+            regexp: /^\s*@import\s*(?:\(\w+\)\s*)?['"]([^'"]+)['"]/
+        }))
+        .pipe(filter(['**/kendo.*.less']))
+        .pipe(sourcemaps.init())
+        .pipe(lessToCss())
+        .pipe(sourcemaps.write("maps", { sourceRoot: "../../../../styles" }))
+        .pipe(gulp.dest('dist/styles'));
+});
+
+gulp.task("less",function() {
     var css = gulp.src("styles/**/kendo*.less")
         .pipe(sourcemaps.init())
         .pipe(lessLogger)
-        .pipe(less({
-            relativeUrls: true,
-            plugins: [new autoprefix({ browsers: browsers }) ]
-        }))
-        .pipe(replace(/\.\.\/mobile\//g, '')); // temp hack for the discrepancy between source and generated "source"
+        .pipe(lessToCss());
 
     var minCss = css.pipe(clone())
         .pipe(minCssLogger)
@@ -64,6 +88,12 @@ gulp.task("styles", [ "css-assets" ], function() {
         .pipe(rename({ suffix: ".min" }))
         .pipe(sourcemaps.write("maps", { sourceRoot: "../../../styles" }));
 
-    merge(css, minCss)
+    return merge(css, minCss)
         .pipe(gulp.dest('dist/styles'));
+});
+
+gulp.task("styles", [ "less", "css-assets" ]);
+
+gulp.task("watch-styles", [ "dev-less", "css-assets" ], function() {
+    return gulp.watch("styles/**/*.less", [ "dev-less" ]);
 });
