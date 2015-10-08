@@ -21,6 +21,9 @@ layout: index
                     }
                 }
             },
+            messages: {
+                loading: " "
+            },
             select: preventParentSelection,
             template: navigationTemplate("{{site.baseurl}}/"),
             dataBound: expandNavigation("{{page.url | remove_first: '/' }}")

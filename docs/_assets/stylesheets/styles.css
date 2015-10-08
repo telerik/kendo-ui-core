@@ -143,7 +143,7 @@ article, aside, footer {
     z-index: 1;
     right: 0;
     font-size: 12px;
-    padding-left: 28px;
+    padding-left: 5.8em;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -160,8 +160,7 @@ article, aside, footer {
     width: 500px;
     overflow: auto;
     background: #fff;
-    border: 1px solid #f5f7f8;
-    box-shadow: 3px 3px 3px #f5f7f8;
+    box-shadow: 0 0 6px 1px rgba(0,0,0,0.2);
     padding: 1em 0;
 }
 
@@ -252,10 +251,12 @@ article, aside, footer {
 
 a {
     color: #1976d2;
+    text-decoration: none;
 }
 
 a:hover {
-    color: #036c9c;
+    color: #1565c0;
+    text-decoration: underline;
 }
 
 h1,h2,h3,h4,h5,h6,
@@ -470,10 +471,11 @@ blockquote th, blockquote td {
 /* Footer */
 footer
 {
-    text-align: left;
+    text-align: right;
     width: 100%;
     box-sizing: border-box;
     padding: 0;
+    border-top: 1px solid #ebecee;
 }
 
 footer p {
@@ -658,7 +660,8 @@ footer p {
     }
 
     #markdown-toc {
-        border-bottom: none;
+        left: 0;
+        padding-left: 1.3em;
     }
 
     .nav-buttons,
