@@ -66,6 +66,8 @@ As a shortcut, you can discard the dashes after `kendo-`:
 
 You can specify any options supported by Kendo UI widgets in element attributes, by converting the option name from camelCase to dash-separated-words, and prefixing it with `k-`.  For example:
 
+> Widget **will not initialize** if any of the defined attribute options are `undefined`. For instance, if the NumericTextBox `k-max` attribute points to a `$scope.maxNumber` field which is `undefined` then it will not initialize.
+
 > Important: Kendo bindings will parse attributes without **prefixes** if they match widget's options. For instance, the HTML5 `placeholder` attribute defined in the `NumericTextBox` element will be parsed as Angular expression,
 because the widget has a placeholder option. Because of this built-in functionality, you will need to ensure that attribute has a valid Angular expression or a valid string value, quoted with `'` characters.
 
@@ -121,6 +123,8 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 ### Widget configuration in controller
 
 If you'd like to store all widget configuration in the controller, you can use the special `k-options` attribute:
+
+> Widget **will not initialize** if any of the defined attribute options are `undefined`. For instance, if the NumericTextBox `k-max` attribute points to a `$scope.maxNumber` field which is `undefined` then it will not initialize.
 
 #### Configure Kendo UI Widget from controller in AngularJS
 

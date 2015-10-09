@@ -8,6 +8,12 @@ position: 251
 
 # Kendo UI Framework Changes and Backward Compatibility
 
+## Kendo UI 2015 Q3
+
+### Changes from 2015 Q2 SP2 (2015.2.902)
+
+Widgets **will not initialize** if any of the defined attribute options are `undefined`. For instance, if the NumericTextBox `k-max` attribute points to a `$scope.maxNumber` field which is `undefined` then it will not initialize.
+
 ## Kendo UI 2015 Q2
 
 ### Changes from 2015 Q1 SP2 (2015.1.429)
