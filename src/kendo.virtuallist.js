@@ -695,6 +695,10 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 return index;
+            } else {
+                index = this.dataSource.total() - 1;
+                this.focus(index);
+                return index;
             }
         },
 
@@ -713,6 +717,10 @@ var __meta__ = { // jshint ignore:line
                     this.focus(index);
                 }
 
+                return index;
+            } else {
+                index = 0;
+                this.focus(index);
                 return index;
             }
         },
