@@ -217,6 +217,8 @@ var __meta__ = { // jshint ignore:line
                 expression.filters.push(filter);
             }
 
+            this.listView._dsFilter = expression;
+
             if (!force) {
                 dataSource.filter(expression);
             } else {
@@ -1191,6 +1193,13 @@ var __meta__ = { // jshint ignore:line
 
                 that.first("dataBound", handler);
 
+
+                /*that._filterSource({
+                    field: valueField,
+                    operator: "eq",
+                    value: filterValue
+                });*/
+
                 that.dataSource.filter(filters);
 
             } else {
@@ -1954,10 +1963,27 @@ var __meta__ = { // jshint ignore:line
             return select && this._dataItemPosition(dataItem, values) !== -1;
         },
 
+        _isFiltered: function(filter) {
+            var old = this._dsFilter;
+
+            filter = $.extend({}, filter);
+
+            this._dsFilter = filter;
+
+            if (!old) {
+                return false;
+            }
+
+            return JSON.stringify(filter) !== JSON.stringify(old);
+        },
+
         refresh: function(e) {
             var that = this;
             var changedItems;
             var action = e && e.action;
+            var skipUpdateOnBind = that.options.skipUpdateOnBind;
+
+            var outlierFilter = this._isFiltered(this.dataSource.filter()) && !that._filtered;
 
             that.trigger("dataBinding");
 
@@ -1980,7 +2006,7 @@ var __meta__ = { // jshint ignore:line
                     that._skipUpdate = false;
                     that._selectedIndices = that._valueIndices(that._values, that._selectedIndices);
                 }
-            } else if (!that.options.skipUpdateOnBind && (!action || action === "add")) {
+            } else if (!outlierFilter && !skipUpdateOnBind && (!action || action === "add")) {
                 that.value(that._values);
             }
 
@@ -1988,7 +2014,9 @@ var __meta__ = { // jshint ignore:line
                 that._valueDeferred.resolve();
             }
 
-            that.trigger("dataBound");
+            if (!outlierFilter) {
+                that.trigger("dataBound");
+            }
         },
 
         isBound: function() {
