@@ -327,7 +327,18 @@ var __meta__ = { // jshint ignore:line
         expand: function (element, useAnimation) {
             var that = this,
                 animBackup = {};
+            if (that._animating && element.find("ul").is(":visible")) {
+                 that.one("complete", function() {
+                    setTimeout(function() {
+                        that.expand(element);
+                    });
+                 });
+                 return;
+            }
+            that._animating = true;
+
             useAnimation = useAnimation !== false;
+
             element = this.element.find(element);
 
             element.each(function (index, item) {
@@ -364,6 +375,9 @@ var __meta__ = { // jshint ignore:line
         collapse: function (element, useAnimation) {
             var that = this,
                 animBackup = {};
+
+            that._animating = true;
+
             useAnimation = useAnimation !== false;
             element = that.element.find(element);
 
@@ -389,7 +403,6 @@ var __meta__ = { // jshint ignore:line
                 }
 
             });
-
             return that;
         },
 
@@ -920,6 +933,7 @@ var __meta__ = { // jshint ignore:line
                 hasCollapseAnimation = collapse && "effects" in collapse;
 
             if (element.is(VISIBLE) != visibility) {
+                that._animating = false;
                 return;
             }
 
@@ -936,16 +950,27 @@ var __meta__ = { // jshint ignore:line
 
             if (visibility) {
                 animation = extend( hasCollapseAnimation ? collapse
-                                    : extend({ reverse: true }, animation), { hide: true });
+                    : extend({ reverse: true }, animation), { hide: true });
+
+                animation.complete = function() {
+                    that._animationCallback();
+                };
             } else {
                 animation = extend( { complete: function (element) {
                     that._triggerEvent(ACTIVATE, element.closest(ITEM));
+                    that._animationCallback();
                 } }, animation );
             }
 
             element
                 .kendoStop(true, true)
                 .kendoAnimate( animation );
+        },
+
+        _animationCallback: function() {
+            var that = this;
+            that.trigger("complete");
+            that._animating = false;
         },
 
         _collapseAllExpanded: function (item) {
