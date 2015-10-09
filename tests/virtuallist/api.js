@@ -710,6 +710,30 @@
         });
     });
 
+    asyncTest("focusNext method focuses first item if there is no currently focused item", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true
+        }));
+
+        asyncDataSource.read().then(function() {
+            start();
+            virtualList.focusNext();
+            equal(virtualList.focusIndex(), 0);
+        });
+    });
+
+    asyncTest("fcusPrev method focuses last item if there is no currently focused item", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true
+        }));
+
+        asyncDataSource.read().then(function() {
+            start();
+            virtualList.focusPrev();
+            equal(virtualList.focusIndex(), virtualList.dataSource.total() - 1);
+        });
+    });
+
     asyncTest("focusIndex method returns focused index", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true
