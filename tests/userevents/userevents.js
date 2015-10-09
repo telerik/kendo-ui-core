@@ -6,7 +6,7 @@
     module("UserEvents", {
         setup: function() {
             element = $('<div />');
-            userEvents = new UserEvents(element);
+            userEvents = new UserEvents(element, { fastTap: true });
         }
     });
 

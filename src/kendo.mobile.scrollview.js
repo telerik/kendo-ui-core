@@ -124,6 +124,7 @@ var __meta__ = { // jshint ignore:line
             });
 
             userEvents = new kendo.UserEvents(element, {
+                fastTap: true,
                 start: function(e) {
                     if (abs(e.x.velocity) * 2 >= abs(e.y.velocity)) {
                         userEvents.capture();

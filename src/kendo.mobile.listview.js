@@ -907,6 +907,7 @@ var __meta__ = { // jshint ignore:line
                 .on("move up cancel", HIGHLIGHT_SELECTOR, "_dim");
 
             this._userEvents = new kendo.UserEvents(element, {
+                fastTap: true,
                 filter: ITEM_SELECTOR,
                 allowSelection: true,
                 tap: function(e) {

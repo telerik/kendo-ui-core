@@ -167,6 +167,7 @@ var __meta__ = { // jshint ignore:line
                 x: new TouchAxis("X", touchInfo.location),
                 y: new TouchAxis("Y", touchInfo.location),
                 type: touchInfo.type,
+                useClickAsTap: userEvents.useClickAsTap,
                 threshold: userEvents.threshold || THRESHOLD[touchInfo.type],
                 userEvents: userEvents,
                 target: target,
@@ -215,26 +216,26 @@ var __meta__ = { // jshint ignore:line
         },
 
         end: function(touchInfo) {
-            var that = this;
+            this.endTime = now();
 
-            that.endTime = now();
-
-            if (that._finished) { return; }
+            if (this._finished) { return; }
 
             // Mark the object as finished if there are blocking operations in the event handlers (alert/confirm)
-            that._finished = true;
+            this._finished = true;
 
-            that._trigger(RELEASE, touchInfo); // Release should be fired before TAP (as click is after mouseup/touchend)
+            this._trigger(RELEASE, touchInfo); // Release should be fired before TAP (as click is after mouseup/touchend)
 
-            if (that._moved) {
-                that._trigger(END, touchInfo);
+            if (this._moved) {
+                this._trigger(END, touchInfo);
             } else {
-                that._trigger(TAP, touchInfo);
+                if (!this.useClickAsTap) {
+                    this._trigger(TAP, touchInfo);
+                }
             }
 
-            clearTimeout(that._holdTimeout);
+            clearTimeout(this._holdTimeout);
 
-            that.dispose();
+            this.dispose();
         },
 
         dispose: function() {
@@ -316,6 +317,7 @@ var __meta__ = { // jshint ignore:line
             that._maxTouches = options.multiTouch ? 2 : 1;
             that.allowSelection = options.allowSelection;
             that.captureUpIfMoved = options.captureUpIfMoved;
+            that.useClickAsTap = !options.fastTap && !support.delayedClick();
             that.eventNS = ns;
 
             element = $(element).handler(that);
@@ -334,6 +336,10 @@ var __meta__ = { // jshint ignore:line
                 .on(kendo.applyEventMap("up cancel", ns), "_end");
 
             element.on(kendo.applyEventMap("down", ns), filter, "_start");
+
+            if (that.useClickAsTap) {
+                element.on(kendo.applyEventMap("click", ns), filter, "_click");
+            }
 
             if (support.pointers || support.msPointers) {
                 element.css("-ms-touch-action", "pinch-zoom double-tap-zoom");
@@ -532,6 +538,31 @@ var __meta__ = { // jshint ignore:line
 
         _end: function(e) {
             this._eachTouch("end", e);
+        },
+
+        _click: function(e) {
+            var data = {
+                touch: {
+                    initialTouch: e.target,
+                    target: $(e.currentTarget),
+                    endTime: now(),
+                    x: {
+                        location: e.pageX,
+                        client: e.clientX
+                    },
+                    y: {
+                        location: e.pageY,
+                        client: e.clientY
+                    }
+                },
+                x: e.pageX,
+                y: e.pageY,
+                target: $(e.currentTarget),
+                event: e,
+                type: "tap"
+            };
+
+            this.trigger("tap", data);
         },
 
         _eachTouch: function(methodName, e) {

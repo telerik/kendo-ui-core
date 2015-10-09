@@ -2043,6 +2043,35 @@ function pad(number, digits, end) {
             support.hasNativeScrolling = mobileOS;
         }
 
+        support.delayedClick = function() {
+
+            // only the mobile devices with touch events do this.
+            if (support.touch) {
+                // All iOS devices so far (by the time I am writing this, iOS 9.0.2 is the latest),
+                // delay their click events.
+                if (mobileOS.ios) {
+                    return true;
+                }
+
+                if (mobileOS.android) {
+
+                    if (!support.browser.chrome) { // older webkits and webviews delay the click
+                        return true;
+                    }
+
+                    // from here on, we deal with Chrome on Android.
+                    if (support.browser.version < 32) {
+                        return false;
+                    }
+
+                    // Chrome 32+ does conditional fast clicks if the view port is not user scalable.
+                    return !($("meta[name=viewport]").attr("content") || "").match(/user-scalable=no/i);
+                }
+            }
+
+            return false;
+        };
+
         support.mouseAndTouchPresent = support.touch && !(support.mobileOS.ios || support.mobileOS.android);
 
         support.detectBrowser = function(ua) {

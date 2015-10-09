@@ -234,6 +234,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             that.userEvents = new kendo.UserEvents(that.wrapper, {
+                fastTap: true,
                 tap: function() {
                     if(that.options.enable) {
                         that._toggle(!that.element[0].checked);

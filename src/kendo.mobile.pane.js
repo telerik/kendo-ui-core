@@ -285,6 +285,7 @@ var __meta__ = { // jshint ignore:line
                 .on("click", roleSelector(linkRoles) + "," + buttonSelectors + "," + pressedButtonSelector, "_appLinkClick");
 
             this.userEvents = new kendo.UserEvents(this.element, {
+                fastTap: true,
                 filter: buttonSelectors,
                 tap: function(e) {
                     e.event.currentTarget = e.touch.currentTarget;

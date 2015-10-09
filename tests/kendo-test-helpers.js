@@ -20,19 +20,19 @@ function stub(that, methods) {
             stubs[method].calls ++;
             stubs[method].args.push(arguments);
             return impl.apply(that, arguments);
-        }
+        };
     });
 
     that.calls = function(method) {
         return stubs[method].calls;
-    }
+    };
 
     that.args = function(method, index) {
         method = stubs[method];
 
         index = index !== undefined ? index: method.args.length - 1;
         return method.args[index];
-    }
+    };
 
     return that;
 }
@@ -95,7 +95,7 @@ function tzTest(tzAlias, testName, expected, callback ) {
             if (d.indexOf(names[i]) !== -1) {
                 return true;
             }
-        };
+        }
 
         return false;
     }
@@ -128,7 +128,11 @@ function press(element, x, y, id) {
         clientX: x,
         clientY: y,
         identifier: id || 1
-    })
+    });
+}
+
+function clickAt(element, x, y) {
+    element.trigger($.Event("click", { pageX: x, pageY: y }));
 }
 
 function move(element, x, y, id) {
@@ -138,7 +142,7 @@ function move(element, x, y, id) {
         clientX: x,
         clientY: y,
         identifier: id || 1
-    })
+    });
 }
 
 function release(element, x, y, id) {
@@ -148,7 +152,7 @@ function release(element, x, y, id) {
         clientX: x,
         clientY: y,
         identifier: id || 1
-    })
+    });
 }
 
 function tap(element, x, y, id) {
@@ -195,12 +199,12 @@ kendo.suppressLog = true;
     Widget.fn.init = function() {
         widgets.push(this);
         init.apply(this, arguments);
-    }
+    };
 
     Widget.fn.destroy = function() {
         widgets.splice(widgets.indexOf(this), 1);
         destroy.apply(this, arguments);
-    }
+    };
 
     QUnit.testDone(function( details ) {
         if (!QUnit.suppressCleanupCheck) {

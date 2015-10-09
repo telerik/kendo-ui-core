@@ -54,6 +54,7 @@ var __meta__ = { // jshint ignore:line
 
             that._userEvents = new kendo.UserEvents(that.element, {
                 allowSelection: !useTap,
+                fastTap: true,
                 press: function(e) {
                     that._activate(e);
                 },

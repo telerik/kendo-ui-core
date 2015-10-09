@@ -45,6 +45,7 @@ var __meta__ = { // jshint ignore:line
             that.content = container.children().not(that.header).wrapAll(CONTENT_WRAPPER).parent();
 
             that._userEvents = new kendo.UserEvents(that.header, {
+                fastTap: true,
                 tap: function() { that.toggle(); }
             });
 

@@ -1,6 +1,13 @@
 (function() {
     var element, touch;
 
+    function click(element, x, y) {
+        element.trigger($.Event("click", { pageX: x, pageY: y}));
+    }
+
+    /* global press */
+    /* global move */
+    /* global release */
     module("touch events", {
         setup: function() {
             element = $("<i />");
@@ -37,17 +44,17 @@
         move(element, 18, 18);
     });
 
-    module("tap events", {
+    module("tap events (fast tap)", {
         setup: function() {
             element = $("<i />");
-            touch = element.kendoTouch({ minHold: 100, doubleTapTimeout: 100 }).data("kendoTouch");
+            touch = element.kendoTouch({ minHold: 100, doubleTapTimeout: 100, fastTap: true }).data("kendoTouch");
         },
         teardown: function() {
             touch.destroy();
         }
     });
 
-    test("triggers tap on press + release", 1, function() {
+    test("triggers tap on press + release with fastTap", 1, function() {
         touch.bind("tap", function() {
             ok(true);
         });
@@ -96,7 +103,7 @@
     });
 
     test("canceling in touchstart stops tap", 0, function() {
-        touch.bind("touchstart", function(e) {
+        touch.bind("touchstart", function() {
             touch.cancel();
         });
 
@@ -282,8 +289,8 @@
             ok(true);
         });
 
-        press(element, 10, 20, 2)
-        move(element, 15, 25, 2)
+        press(element, 10, 20, 2);
+        move(element, 15, 25, 2);
     });
 
     test("provides distance in the gesture start event", 1, function(){
@@ -322,5 +329,64 @@
         press(element, 10, 20, 2);
         move(element, 15, 25, 2);
         release(element, 15, 25, 2);
+    });
+
+    module("tap events (click)", {
+        setup: function() {
+            element = $("<i />");
+            touch = element.kendoTouch({ minHold: 100, doubleTapTimeout: 100 }).data("kendoTouch");
+        },
+        teardown: function() {
+            touch.destroy();
+        }
+    });
+
+    test("triggers tap on press + release with fastTap", 1, function() {
+        touch.bind("tap", function() {
+            ok(true);
+        });
+
+        click(element, 10, 10);
+    });
+
+    test("triggers double tap on two subsequent taps", 1, function() {
+        touch.bind("doubletap", function() {
+            ok(true);
+        });
+
+        click(element, 10, 10);
+        click(element, 10, 10);
+    });
+
+    test("too distant taps do not trigger double tap", 0, function() {
+        touch.bind("doubletap", function() {
+            ok(false);
+        });
+
+        click(element, 10, 10);
+        click(element, 50, 50);
+    });
+
+    test("triple tapping triggers double tap once", 1, function() {
+        touch.bind("doubletap", function() {
+            ok(true);
+        });
+
+        click(element, 10, 10);
+        click(element, 10, 10);
+        click(element, 10, 10);
+    });
+
+    asyncTest("does not trigger double tap if second one is done after the doubleTapTimeout", 0, function() {
+        touch.bind("doubletap", function() {
+            ok(false);
+        });
+
+        click(element, 10, 10);
+
+        setTimeout(function() {
+            start();
+            click(element, 10, 10);
+        }, 200);
     });
 })();

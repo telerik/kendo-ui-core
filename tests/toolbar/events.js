@@ -5,8 +5,7 @@
         MOUSEUP = kendo.support.mouseup;
 
     function click(element) {
-        element.trigger(MOUSEDOWN);
-        element.trigger(MOUSEUP);
+        element.trigger("click");
     }
 
     module("Toolbar: Events: ", {
@@ -42,7 +41,7 @@
     test("click event defined at button level is fired", 2, function() {
         container.kendoToolBar({
             items: [
-                { 
+                {
                     type: "button",
                     id: "foo",
                     text: "foo",
@@ -60,7 +59,7 @@
     test("both click events (toolbar and button level) are fired", 2, function() {
         container.kendoToolBar({
             items: [
-                { 
+                {
                     type: "button",
                     id: "foo",
                     text: "foo",
@@ -93,7 +92,7 @@
     test("click event (button level) is not fired for disabled buttons", 0, function() {
         container.kendoToolBar({
             items: [
-                { 
+                {
                     type: "button",
                     id: "foo",
                     text: "foo",
@@ -224,7 +223,7 @@
     test("click on disabled toggleButton does not trigger the toggle event (button level)", 0, function() {
         container.kendoToolBar({
             items: [
-                { 
+                {
                     type: "button",
                     togglable: true,
                     id: "foo",
@@ -260,7 +259,7 @@
     test("click on toggleButton triggers toggle event (button level)", 1, function() {
         container.kendoToolBar({
             items: [
-                { 
+                {
                     type: "button",
                     togglable: true,
                     id: "foo",

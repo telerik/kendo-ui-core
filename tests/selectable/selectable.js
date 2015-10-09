@@ -35,7 +35,7 @@
             }
 
             $.fn.tap = function(info) {
-                return this.press().release(info);
+                return triggerEvent(this, "click", info);
             }
         },
         teardown: function() {
