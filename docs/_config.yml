@@ -21,6 +21,9 @@ navigation:
     "*how-to":
         title: "How To"
         position: 1
+    "*end-user":
+        title: "For the End User"
+        position: 4
     "framework/datasource":
         title: "DataSource"
         position: 1
@@ -192,7 +195,7 @@ navigation:
         title: "Spreadsheet"
     "*import-and-export-data":
         title: "Import and Export Data"
-        index: 1
+        position: 3
     "*listview":
         title: "ListView"
     "*maskedtextbox":
