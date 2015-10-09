@@ -17,6 +17,8 @@ var sourcemaps = require('gulp-sourcemaps');
 var merge = require('merge2');
 var lazypipe = require('lazypipe');
 var autoprefix = require('less-plugin-autoprefix');
+var browserSync = require('browser-sync').create();
+var argv = require('yargs').argv;
 
 var browsers = [
     "Explorer >= 7",
@@ -56,6 +58,25 @@ gulp.task("css-assets", function() {
 var lessToCss = lazypipe()
     .pipe(less, { relativeUrls: true, plugins: [new autoprefix({ browsers: browsers }) ] })
     .pipe(replace, /\.\.\/mobile\//g, ''); // temp hack for the discrepancy between source and generated "source"
+
+gulp.task("build-skin", ["css-assets"], function() {
+    var lessLogger = logger({ after: 'LESS complete!', extname: '.css', showChange: true });
+    var mapLogger = logger({ after: 'map complete!', extname: '.css.map', showChange: true });
+
+    return gulp.src(argv.s.replace(/mobile|web/, "**"))
+        .pipe(sourcemaps.init())
+        .pipe(lessLogger)
+        .pipe(lessToCss())
+        .pipe(mapLogger)
+        .pipe(sourcemaps.write("maps", { sourceRoot: "../../../../styles" }))
+        .pipe(gulp.dest('dist/styles'))
+        .pipe(browserSync.stream());
+});
+
+gulp.task("watch-skin", [ "build-skin" ], function() {
+    browserSync.init({ proxy: "localhost" });
+    return gulp.watch("styles/**/*.less", [ "build-skin" ]);
+});
 
 gulp.task("dev-less",function() {
     return gulp.src("styles/**/*.less")

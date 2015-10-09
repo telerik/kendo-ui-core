@@ -55,8 +55,10 @@
        "gulp-clone": "~1.0.0",
        "gulp-sourcemaps": "~1.6.0",
 
+       "browser-sync": "~2.9.10",
        "lazypipe": "~1.0.1",
-       "merge2": "~0.3.6"
+       "merge2": "~0.3.6",
+       "yargs": "~3.27.0"
    },
    "scripts": {
        "build": "npm install && grunt build",
