@@ -404,12 +404,13 @@
 }
 
 blockquote {
-    color: #bf5e00;
-    background: #fff4d9 url(../images/important.png) no-repeat 26px 26px;
+    color: #002034;
+    background: #eef9ff;
+    border: 1px solid #d9f3ff;
 }
 
 blockquote a {
-    color: #428bca;
+    color: #1976d2;
 }
 
 blockquote th, blockquote td {

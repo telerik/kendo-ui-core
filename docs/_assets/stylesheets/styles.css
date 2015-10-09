@@ -374,10 +374,29 @@ h3 em {
     font-weight: bold;
 }
 
+h4 {
+    margin: 2.5em 0 .5em;
+    color: #666;
+}
+
 blockquote {
-    padding: 10px 30px 10px 90px;
-    margin: 0;
+    padding: 36px 30px 10px 30px;
+    margin: 3em 0;
     min-height: 70px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+blockquote:before {
+    content: "Note";
+    position: absolute;
+    left: 30px;
+    top: 22px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #0288d1;
 }
 
 blockquote table {
