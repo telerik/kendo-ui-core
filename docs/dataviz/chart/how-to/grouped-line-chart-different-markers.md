@@ -140,5 +140,4 @@ The example below demonstrates how to set different marker types to each series 
       series[2].markers.type = "square";
     }
     </script>
-
 ```
