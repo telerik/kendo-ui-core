@@ -828,6 +828,23 @@
         ok(buttonGroup.hasClass("foo"));
     });
 
+    test("options.attrbites (button level) does not remove build-in overflow button classes", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "buttonGroup", overflow: "always", buttons: [
+                        { id: "btn1", text: "Btn1", attributes: { 'class': 'myClass' } },
+                        { id: "btn2", text: "Btn2", attributes: { 'class': 'myClass' } }
+                    ]
+                }
+            ]
+        }).data("kendoToolBar");
+
+        var button1 = $("#btn1_overflow");
+        ok(button1.hasClass("k-overflow-button") && button1.hasClass("myClass"));
+        var button2 = $("#btn2_overflow");
+        ok(button2.hasClass("k-overflow-button") && button1.hasClass("myClass"));
+    });
+
     test("ButtonGroup with no buttons does not throw JS error", 0, function() {
         try {
             var toolbar = container.kendoToolBar({

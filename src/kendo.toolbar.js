@@ -313,8 +313,6 @@ var __meta__ = { // jshint ignore:line
 
                 var element = this.element;
 
-                element.addClass(OVERFLOW_BUTTON + " " + BUTTON);
-
                 if (options.showText != "toolbar" && options.text) {
                     if (options.mobile) {
                         element.html('<span class="km-text">' + options.text + "</span>");
@@ -337,6 +335,8 @@ var __meta__ = { // jshint ignore:line
                 this.addUidAttr();
                 this.addOverflowAttr();
                 this.enable(options.enable);
+
+                element.addClass(OVERFLOW_BUTTON + " " + BUTTON);
 
                 if (options.hidden) {
                     this.hide();
