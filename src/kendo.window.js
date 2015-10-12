@@ -395,7 +395,9 @@ var __meta__ = { // jshint ignore:line
             this._draggable();
             this._actions();
             if (typeof options.modal !== "undefined") {
-                this._overlay(options.modal);
+                var visible = this.options.visible !== false;
+
+                this._overlay(options.modal && visible);
             }
 
             this.element.css(OVERFLOW, scrollable ? "" : "hidden");

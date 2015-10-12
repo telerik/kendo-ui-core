@@ -950,6 +950,18 @@
         equal(dialog.wrapper.siblings(".k-overlay").filter(":visible").length, 1);
     });
 
+    test("setOptions does not show modal overlay if window is hidden", function() {
+        var dialog = createWindow({ visible: false });
+
+        dialog.setOptions({ modal: true });
+
+        equal(dialog.wrapper.siblings(".k-overlay").filter(":visible").length, 0);
+
+        dialog.setOptions({ modal: true, visible: false });
+
+        equal(dialog.wrapper.siblings(".k-overlay").filter(":visible").length, 0);
+    });
+
     asyncTest("overlay is not hidden when showing second modal window after closing first", function () {
         var dialog = createWindow({
             animation: { close: { duration: 500 } },
