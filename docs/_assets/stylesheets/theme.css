@@ -170,7 +170,7 @@
 #page-nav #page-tree > .k-group > .k-item[data-expanded="true"] {
     transition: padding .1s;
     box-shadow: inset 0 1px #e8ebef, 0 1px #e8ebef ;
-    padding-bottom: 12px;
+    padding-bottom: 0;
     background-color: #f3f5f7;
 }
 
@@ -254,6 +254,17 @@
 #page-nav .current-topic .k-state-selected {
     background-color: #e2e4e7;
     color: #000;
+    position: relative;
+}
+
+#page-nav .current-topic .k-state-selected:before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: #00b321;
 }
 
 #page-nav .current-topic .k-group .k-state-selected a {
@@ -314,55 +325,72 @@
     border-color: #c2410e;
 }
 
-.btn-action {
-    background-color: #015991;
-    color: #fff;
+.action-buttons {
+    margin-top: 1.5em;
+    border: 1px solid #e8ebef;
+    border-bottom: 0;
+    background-color: #fefefe;
+}
+.action-buttons .btn {
+    margin: 0;
+    padding: .72em 1.5em;
+    border: 0;
+    border-radius: 0;
+    line-height: 1.2em;
+    outline: none;
+    background-color: transparent;
+    color: #333;
     border-width: 0;
+    border-right: 1px solid #e8ebef;
+    font-size: 14px;
 }
 
-.btn-action:hover {
-    background-color: #013a5e;
+.action-buttons + pre {
+    margin-top: 0;
 }
 
-.btn-run {
-    opacity: .8;
+.action-buttons .btn:hover {
+    text-decoration: none;
+    background-color: #e8ebef;
+    color: #000;
+    
+}
+
+.action-buttons .active-button,
+.action-buttons .active-button:hover {
+    background-color: #e8ebef;
+    color: #333;
+}
+
+.action-buttons .btn-dojo {
     float: right;
-}
-
-.btn-edit {
-    background-color: #f4f5f7;
-    color: #333;
-    border: 1px solid #ccc;
-    float: left;
-}
-
-.btn-edit:hover {
-    color: #333;
-    background-color: #ebebeb;
-    border-color: #adadad;
+    border-right: 0;
+    border-left: 1px solid #e8ebef;
+    padding-right: 2.7em;
+    background: transparent url(../images/external.png) no-repeat 109px 50%;
 }
 
 .CodeMirror {
     clear: both;
     border: 1px solid #ebecee;
     height: auto !important;
+    font-family: "Roboto Mono", "Ubuntu Mono", "Consolas", "Monaco", monospace;
 }
 
-.dojo {
-    color: #428bca;
-    float: left;
-    display: inline-block;
-    padding: 0.667em 2.000em;
-    line-height: 0.933em;
-    background: transparent url(../images/external.png) no-repeat 126px 11px;
-    margin: 0.7em 0;
-    font-size: 15px;
+.CodeMirror pre {
+    font-family: "Roboto Mono", "Ubuntu Mono", "Consolas", "Monaco", monospace !important;
+}
+
+.CodeMirror-code{
+    line-height: 18px;
+    font-size: 13px;
 }
 
 .snippet-runner {
     border: 1px solid #ebecee;
     width: 100%;
     min-height: 450px;
+    box-sizing: border-box;
 }
 
 .k-tabstrip {
@@ -397,10 +425,6 @@
 .prettyprint {
     border-color: #e8ebef;
     background-color: #f9f9f9;
-}
-
-.prettyprint code {
-    line-height: 1.4;
 }
 
 blockquote {

@@ -26,15 +26,24 @@ function expandNavigation(url) {
 
         if (location.pathname.indexOf("/api/") < 0) {
             li.addClass("current-topic");
-
+            
             $("h2").each(function() {
                 var hash = $(this).find("a").attr("href");
-
+                
+                $(".current-topic>ul>li:first-child>div>span.k-in").addClass("k-state-selected");
+                
+                var state = $(".k-state-selected");
+                if (state.length > 1) {
+                  $(".k-state-selected").first().removeClass("k-state-selected");
+                }
                 var h2Node = treeview.append({ path: hash, text: kendo.htmlEncode($(this).text()) }, li);
+                
 
                 if (location.hash.replace("#", "") === hash.replace("#", "")) {
                     selectNode(hash);
                 }
+                
+                
 
                 $(this).nextUntil("h2", "h3").each(function() {
                     var hash = $(this).find("a").attr("href");
@@ -42,11 +51,15 @@ function expandNavigation(url) {
 
                     if (location.hash.replace("#", "") === hash.replace("#", "")) {
                         selectNode(hash);
+                        $("h1").css("font-weight", "bold");
                     }
                 });
 
             });
+            
+            
         }
+        
 
         this.unbind("dataBound", expand);
     }
@@ -273,14 +286,16 @@ var dojoApi = (function($) {
         },
 
         addButtons: function(element) {
-            $('<button class="btn btn-action btn-edit" title="Edit example">Edit</button>').insertBefore(element);
-            $('<a href="http://dojo.telerik.com" class="dojo" title="Open example in Kendo UI Dojo">Open In Dojo</a>').insertBefore(element);
-                $('<button class="btn btn-action btn-run" title="Run example">Run</button>').insertBefore(element);
+            $('<div class="action-buttons">'+
+              '<button class="btn btn-edit" title="Edit example">Edit</button>'+
+              '<button class="btn btn-run" title="Run example">Preview</button>'+
+              '<a href="http://dojo.telerik.com" class="btn btn-dojo" title="Open example in Kendo UI Dojo">Open In Dojo</a>'+
+              '</div>').insertBefore(element);
         },
         editSnippet: function(element) {
             reset();
 
-            var pre = $(element).nextAll("pre:first");
+            var pre = $(element).parent().nextAll("pre:first");
 
             if (isCodeMirrorCurrent(pre)) {
                 showCodeMirror();
@@ -290,11 +305,14 @@ var dojoApi = (function($) {
             }
 
             pre.hide();
+            
+            $(element).addClass("active-button");
+            $(element).next().removeClass("active-button");
         },
         runSnippet: function(element) {
             reset();
 
-            var pre = $(element).nextAll("pre:first");
+            var pre = $(element).parent().nextAll("pre:first");
 
             var iframe = $('<iframe class="snippet-runner">').attr("src", '/kendo-ui/runner.html');
 
@@ -326,12 +344,15 @@ var dojoApi = (function($) {
             contents[0].open();
             contents[0].write(html);
             contents[0].close();
+            
+            $(element).addClass("active-button");
+            $(element).prev().removeClass("active-button");
         },
 
         openSnippet: function(element) {
             var snippet = null;
 
-            var pre = $(element).nextAll("pre:first");
+            var pre = $(element).parent().nextAll("pre:first");
 
             if (isCodeMirrorCurrent(pre)) {
                 snippet = codemirror.getValue();
@@ -420,6 +441,8 @@ var dojoApi = (function($) {
     function reset() {
         $("pre.prettyprint").show();
         $(".snippet-runner").remove();
+        $(".btn-edit").removeClass("active-button");
+        $(".btn-run").removeClass("active-button");
     }
 
     return dojoApi;
@@ -456,7 +479,7 @@ $(function(){
         dojoApi.runSnippet(this);
     });
 
-    $("body").on("click", ".dojo", function(e) {
+    $("body").on("click", ".btn-dojo", function(e) {
         e.preventDefault();
 
         dojoApi.openSnippet(this);

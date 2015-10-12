@@ -24,17 +24,12 @@ a img {
 }
 
 p code, li code {
-    background: rgba(0, 0, 0, 0.04);
+    font-weight: 700;
+    color: #000;
 }
 
 pre code {
     background: transparent;
-}
-
-p code::before,
-p code::after {
-    letter-spacing: -0.2em;
-    content: "\00a0";
 }
 
 header,
@@ -42,6 +37,10 @@ nav,
 section,
 article, aside, footer {
    display:block;
+}
+
+code, em {
+  font-family: "Roboto Mono", "Ubuntu Mono", "Consolas", "Monaco", monospace;
 }
 
 /* Header */
@@ -303,12 +302,21 @@ a.type-link:hover {
 }
 
 a.type-link code {
-    color: #666;
+    color: #1976d2;;
 }
 
 a.type-link:hover code,
 h1 span.type-link a:hover {
-    color: #036c9c;
+    color: #1565c0;
+}
+
+
+#markdown-toc + #page-article h1 {
+    margin: 0;
+}
+
+#markdown-toc + #page-article h1 + p {
+    margin: 0;
 }
 
 h1 + p {
@@ -316,23 +324,22 @@ h1 + p {
 }
 
 h2 {
-    margin: 2.5em 0 0;
-    padding-top: 2em;
+    margin: 1.5em 0 0;
+    padding-top: 1em;
     position: relative;
 }
 
 #markdown-toc + #page-article h2 {
-    margin: 2em 0 0;
     padding: 0;
 }
 
 h3 {
-    margin-top: 2em;
+    margin-top: 1.5em;
 }
 
 #markdown-toc + #page-article h3 {
-    margin-top: 2.5em;
-    padding-top: 2em;
+    margin: 1.5em 0 0;
+    padding-top: .7em;
     position: relative;
 }
 
@@ -341,12 +348,11 @@ h2:before,
     content: " ";
     display: block;
     font-size: 0;
-    font-height: 0;
-    width: 100%;
-    height: 1px;
+    width: 30px;
+    height: 3px;
+    top: 0;
     position: absolute;
-    top: -3px;
-    border-top: 2px solid #ebecee;
+    background-color: #00b312;
 }
 
 #markdown-toc + #page-article h2:before {
@@ -361,8 +367,7 @@ h2 + h3 {
 
 h3 code, h3 em {
     color: #666;
-    font-family: monospace;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 h3 code {
@@ -375,19 +380,19 @@ h3 em {
 }
 
 h4 {
-    margin: 2.5em 0 .5em;
+    margin: 1em 0 .5em;
     color: #666;
 }
 
 blockquote {
-    padding: 36px 30px 10px 30px;
+    padding: 10px 30px;
     margin: 3em 0;
     min-height: 70px;
     position: relative;
     box-sizing: border-box;
 }
 
-blockquote:before {
+/*blockquote:before {
     content: "Note";
     position: absolute;
     left: 30px;
@@ -397,7 +402,7 @@ blockquote:before {
     text-transform: uppercase;
     letter-spacing: 1px;
     color: #0288d1;
-}
+}*/
 
 blockquote table {
     border: 0;
@@ -409,19 +414,21 @@ blockquote th, blockquote td {
 }
 
 .prettyprint {
-    font-size: 12px;
+    font-size: 13px;
     padding: 20px;
     border: 1px solid transparent;
     overflow: hidden;
     word-break: break-word;
     clear: both;
+    margin: 2.5em 0;
 }
 
 .prettyprint code {
     display: block;
     overflow-x: auto;
     padding: 0;
-    line-height: 22px;
+    line-height: 18px;
+    font-family: "Roboto Mono", "Ubuntu Mono", "Consolas", "Monaco", monospace;
 }
 
 .prettyprint code .hljs {
