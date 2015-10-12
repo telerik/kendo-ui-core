@@ -14,7 +14,7 @@ Kendo UI components are designed to support all major browsers and to operate wi
 
 #### Web Browser Support General
 
-Most [Kendo UI widgets](/intro/list-of-widgets) have no limitations as of the browser versions they support.
+Most [Kendo UI widgets](/intro/supporting/list-of-widgets) have no limitations as of the browser versions they support.
 
 | Browser           | Supported Versions            | Limitations
 | :---------------- | :---------------------------- | :---------------
@@ -26,7 +26,7 @@ Most [Kendo UI widgets](/intro/list-of-widgets) have no limitations as of the br
 
 #### Web Browser Support for Hybrid UI
 
-The [hybrid UI](/intro/list-of-widgets) widgets and framework are intended for Cordova based deployments, and support the following mobile device browsers and their corresponding web view components:
+The [hybrid UI widgets and frameworks](/intro/supporting/list-of-widgets) are intended for Cordova based deployments, and support the following mobile device browsers and their corresponding web view components:
 
 | Browser           | Supported Versions            |
 | :---------------- | :---------------------------- |
@@ -38,7 +38,7 @@ The [hybrid UI](/intro/list-of-widgets) widgets and framework are intended for C
 
 #### Web Browser Support for Data Visualization Widgets
 
-Kendo UI widgets rendering [data visualization](/intro/list-of-widgets) may require more recent browser versions as well. If you want to use them in your project, consider the information below.
+[Kendo UI widgets rendering data visualization](/intro/supporting/list-of-widgets) may require more recent browser versions as well. If you want to use them in your project, consider the information below.
 
 ##### Fully Supported Browsers
 

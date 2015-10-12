@@ -2,6 +2,7 @@
 title: List of Components and Their Bundle Support
 page_title: List of Components and Their Bundle Support
 description: "List of Kendo UI components, Kendo UI Core widgets, Kendo UI Professional widgets, UI for ASP .NET MVC, UI for JSP, and UI for PHP"
+previous_url: /intro/list-of-widgets
 position: 2
 ---
 

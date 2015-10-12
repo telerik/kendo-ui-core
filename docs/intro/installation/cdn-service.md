@@ -2,6 +2,7 @@
 title: Use Kendo UI with CDN Services
 page_title: Use Kendo UI with CDN Services
 description: "install Kendo UI, Kendo CDN service"
+previous_url: /install/cdn
 position: 3
 ---
 
