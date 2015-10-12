@@ -10,6 +10,10 @@ By default, the tooltip width will be reduced, if the content is too little, and
 In some scenarios this can cause the tooltip to be narrower than desired.
 The following example demonstrates how to calculate the Tooltip width on each opening to allow greater flexibility.
 
+Relevant resources:
+
+* [api/javascript/ui/tooltip#configuration-content](content property)
+
 #### Example:
 
 ```html
