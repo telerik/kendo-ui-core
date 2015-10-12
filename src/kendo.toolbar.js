@@ -516,7 +516,7 @@ var __meta__ = { // jshint ignore:line
                     } else if (e.keyCode === keys.UP) {
                         findFocusableSibling(li, "prev").focus();
                     } else if (e.keyCode === keys.SPACEBAR || e.keyCode === keys.ENTER) {
-                            that.toolbar.userEvents.trigger("tap", { target: $(e.target) });
+                        that.toolbar.userEvents.trigger("tap", { target: $(e.target) });
                     }
                 });
             },
@@ -1357,6 +1357,9 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (keyCode === keys.SPACEBAR || keyCode === keys.ENTER) {
+
+                    e.preventDefault(); //prevent pspacebar to scroll the page down
+
                     if (target.is("." + SPLIT_BUTTON)) {
                         target = target.children().first();
                     }
