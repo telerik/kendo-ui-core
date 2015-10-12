@@ -157,6 +157,7 @@ var __meta__ = { // jshint ignore:line
             placeholder: "",
             height: 200,
             animation: {},
+            virtual: false,
             itemTemplate: "",
             tagTemplate: "",
             groupTemplate: "#:data#",

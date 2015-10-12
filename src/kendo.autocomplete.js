@@ -158,6 +158,7 @@ var __meta__ = { // jshint ignore:line
             separator: null,
             placeholder: "",
             animation: {},
+            virtual: false,
             value: null
         },
 
