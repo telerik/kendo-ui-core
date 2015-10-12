@@ -962,6 +962,20 @@
         equal(dialog.wrapper.siblings(".k-overlay").filter(":visible").length, 0);
     });
 
+    test("setOptions to suppress close animation", function() {
+        var dialog = createWindow({ visible: false });
+
+        dialog.setOptions({
+            animation: {
+                close: false
+            }
+        });
+
+        dialog.open();
+
+        ok(true);
+    });
+
     asyncTest("overlay is not hidden when showing second modal window after closing first", function () {
         var dialog = createWindow({
             animation: { close: { duration: 500 } },
