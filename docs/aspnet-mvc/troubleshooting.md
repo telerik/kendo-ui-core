@@ -185,6 +185,23 @@ or return Data property only:
 
 In "Getting Started" section of every widget you can find "Configure widget for ajax binding". It clearly shows how to return data to the client.
 
+## CombobBox widget displays '0' value
+
+The ComboBox supports item selection or custom values. In the latter case, the custom value is displayed as *text*, because this is how the custom value is treated.
+
+The widget will display "0" value if it is bound to **non-nullable integer** or other number type. In that case, the widget will retrieve the default value which is "0" and will set it,
+it is perfectly valid value. When the widget is initialized on the client, it cannot find such data item and considers the value as custom. That is why it is displayed in the visible input.
+
+### Solution
+
+In order to avoid this default behavior, you will need to clear the widgets value using its `Value` method:
+
+        @model int
+        @(Html.Kendo().ComboBoxFor(m)
+              .Value(m == 0 ? "" : m.ToString())
+
+        @* other options are omitted for breavity *@
+
 ## Only one instance of the widget works in the page
 
 This will happen if two or more widgets or MVC server wrappers have the same `Name()`. The value specified via the `Name()` method is used as the `id` HTML attribute of the widget. The latter must be unique in the page.
@@ -282,7 +299,7 @@ In such scenarios the inner widget can be included via a custom helper. For exam
 ## Kendo UI MVC wrappers cause double AJAX postback in debug mode using Ajax.Beginform()
 
 To address this issue, add the following line to the bundleconfig.cs file:
- 
+
     bundles.IgnoreList.Ignore("*.unobtrusive-ajax.min.js", OptimizationMode.WhenDisabled)
 
 This will prevent the unobtrusive ajax script from loading twice (i.e. the minified and non-minified) in debug mode, which is what causes the double postback.
