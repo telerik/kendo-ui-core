@@ -321,7 +321,6 @@ h1 span.type-link a:hover {
     color: #1565c0;
 }
 
-
 #markdown-toc + #page-article h1 {
     margin: 0;
 }
@@ -335,6 +334,7 @@ h1 span.type-link a:hover {
 }
 
 #markdown-toc + #page-article h3 {
+    font-size: 1.17em;
     margin: 1.5em 0 0;
     padding-top: .7em;
     position: relative;
@@ -361,6 +361,7 @@ h2 {
 }
 
 h3 {
+    font-size: 1.25em;
     margin-top: 1.5em;
 }
 
@@ -369,8 +370,6 @@ h4 + p,
 h5 + p {
     margin-top: 0;
 }
-
-
 
 h2:before,
 #markdown-toc + #page-article h3:before {
@@ -387,11 +386,6 @@ h2:before,
 #markdown-toc + #page-article h2:before {
     height: 0;
     border-top: 0;
-}
-
-h2 + h3 {
-    border-top: 0;
-    margin-top: 0;
 }
 
 h3 code, h3 em {
