@@ -194,6 +194,9 @@ The first control point for the curve.
 ##### controlIn `Array|kendo.geometry.Point`
 The second control point for the curve.
 
+##### endPoint `Array|kendo.geometry.Point`
+The curve end point.
+
 #### Returns
 `kendo.drawing.Path` The current instance to allow chaining.
 
