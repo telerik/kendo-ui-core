@@ -53,7 +53,8 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 
 | WHAT YOU WANT			| HOW TO GET THERE		|
 | :---					| :---					|
-| Select/activate		| Click a cell		|
+| Select/activate       | Click a cell		    |
+| Select a range of cells | <ol><li>Click a cell</li> <li>Extend the selection by holding down the mouse while marking the selection you want</li></ol> |
 | Edit 					| Double-click a cell 	|
 | Copy content			| <ol><li>Select a cell</li> <li>Click **Copy** [ <span class="k-font-icon k-i-copy"></span> ] on the **Toolbar**, or use the [`Ctrl` + `C`](#shortcut-keys) keyboard shortcut</li></ol>|
 | Cut content			| <ol><li>Select a cell</li> <li>Click **Cut** [ <span class="k-font-icon k-i-cut"></span> ] on the **Toolbar**, or use the [`Ctrl` + `X`](#shortcut-keys) keyboard shortcut</li></ol> |
