@@ -302,7 +302,12 @@ a.type-link:hover {
 }
 
 a.type-link code {
-    color: #1976d2;;
+    color: #1976d2;
+    font-size: .9em;
+}
+
+p a.type-link code {
+    font-size: 1em;
 }
 
 a.type-link:hover code,
@@ -319,6 +324,26 @@ h1 span.type-link a:hover {
     margin: 0;
 }
 
+#markdown-toc + #page-article h2 {
+    padding: 0;
+}
+
+#markdown-toc + #page-article h3 {
+    margin: 1.5em 0 0;
+    padding-top: .7em;
+    position: relative;
+}
+
+#markdown-toc + #page-article h5 {
+    font-size: 15px;
+    margin-top: .5em;
+    margin-bottom: 0;
+}
+
+#markdown-toc + #page-article h4 {
+    margin-bottom: 0;
+}
+
 h1 + p {
     font-size: 18px;
 }
@@ -329,19 +354,17 @@ h2 {
     position: relative;
 }
 
-#markdown-toc + #page-article h2 {
-    padding: 0;
-}
-
 h3 {
     margin-top: 1.5em;
 }
 
-#markdown-toc + #page-article h3 {
-    margin: 1.5em 0 0;
-    padding-top: .7em;
-    position: relative;
+h3 + p,
+h4 + p,
+h5 + p {
+    margin-top: 0;
 }
+
+
 
 h2:before,
 #markdown-toc + #page-article h3:before {
