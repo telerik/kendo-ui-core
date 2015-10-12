@@ -2,6 +2,7 @@
 title: Include Only What You Need
 page_title: Include Only What You Need
 description: "customize Kendo, add what you need"
+previous_url: /install/custom
 position: 4
 ---
 
@@ -11,7 +12,7 @@ position: 4
 
 The following combined scripts are available in the bundles or at the CDN in order to facilitate the common project types:
 
-*  `kendo.ui.core.min.js` contains all widgets supported by the [Kendo UI Core distribution](http://docs.telerik.com/kendo-ui/intro/list-of-widgets). The relevant script is available in the Kendo UI Core package as well.
+*  `kendo.ui.core.min.js` contains all widgets supported by the [Kendo UI Core distribution](/intro/supporting/list-of-widgets). The relevant script is available in the Kendo UI Core package as well.
 *  `kendo.all.min.js` contains a minified version of all features provided by Kendo UI.
 
 > `kendo.all.min.js` is available in the Kendo UI Professional, Telerik UI for ASP.NET MVC, Telerik UI for JSP and Telerik UI for PHP bundles. However, `kendo.all.min.js` does not include the `kendo.aspnetmvc.min.js`. To install it, add `kendo.aspnetmvc.min.js` to `kendo.all.min.js` or use the [custom download builder tool](http://www.telerik.com/download/custom-download).
