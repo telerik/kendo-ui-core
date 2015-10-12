@@ -2,7 +2,7 @@
 title: Getting Started with Kendo UI
 page_title: Getting Started with Kendo UI
 description: "project up and running, download and host Kendo UI, Kendo UI bower package, Kendo UI CDN service, include only what you need with Kendo UI"
-previous_url: /install/bower, /install/cdn, /install/custom, /install/onsite, /getting-started
+previous_url: /install/bower, /install/cdn, /install/custom, /install/onsite, /getting-started, /intro/getting-started
 position: 1
 ---
 
@@ -34,7 +34,7 @@ Once you [download any of the Kendo UI bundles](http://www.telerik.com/download/
 
 To use Kendo UI in your project, you need to include the required JavaScript and CSS files.
 
-**Step 1:** Extract the `/js` and `/styles` directories from the bundle archive and copy them to your web application root directory  
+**Step 1:** Extract the `/js` and `/styles` directories from the bundle archive and copy them to your web application root directory
 **Step 2:** Include the Kendo UI JavaScript and CSS files in the `head` tag of your HTML document. Make sure the common CSS file is registered before the theme CSS file.
 
 Here goes the example:
@@ -118,6 +118,6 @@ Kendo UI CDN is hosted on [Amazon CloudFront](https://aws.amazon.com/cloudfront/
 
 ### Include Only What You Need
 
-Add to your project only what it requires by picking the right combined scripts, building a custom combined script, or using Grunt to build a custom script. 
+Add to your project only what it requires by picking the right combined scripts, building a custom combined script, or using Grunt to build a custom script.
 
-[Learn more about customizing the scripts you need](/intro/installation/what-you-need)  
+[Learn more about customizing the scripts you need](/intro/installation/what-you-need)
