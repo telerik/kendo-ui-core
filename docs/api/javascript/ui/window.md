@@ -500,9 +500,10 @@ Gets or set the content of a window.
 
 #### Parameters
 
-##### content `String` *(optional)*
+##### content `String|jQuery` *(optional)*
 
-The content of the Window.
+The content of the Window. Can be an HTML string or jQuery object.
+
 
 #### Returns
 
@@ -517,7 +518,7 @@ The content of the Window.
     console.log(dialog.content()); // logs "foo"
     </script>
 
-#### Example = set the window content
+#### Example - set the window content
 
     <div id="dialog"></div>
     <script>
