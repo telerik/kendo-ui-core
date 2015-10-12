@@ -19,22 +19,61 @@ The **View** and **Layout** classes are used for the UI rendering. UI Event hand
 
     <script id="index" type="text/x-kendo-template">
         Hello <span data-bind="text: foo"></span>
+        <button data-bind="click: buttonClick">Click me to call view model code</button>
+        <a href="#" data-bind="click: goToView2">Go to view 2</a>
     </script>
 
     <script>
-        var index = new kendo.View(
-            "index", // the id of the script element that contains the view markup
-            { model: kendo.observable({ foo: "World!" }) }
-        );
+        // models
+      	var viewModel = kendo.observable({
+          foo: "World!",
 
+          init: function() {
+            console.log("view init", this.foo);
+          },
+
+          show: function() {
+            console.log("view show", this.foo);
+          },
+
+          buttonClick: function() {
+            alert("button clicked");
+          },
+
+          goToView2: function(e) {
+            router.navigate("/detail");
+            e.preventDefault();
+          }
+        });
+
+
+        // views, layouts
+        var layout = new kendo.Layout("<header>Header</header><section id='content'></section><footer>Footer</footer>");
+
+        var index = new kendo.View("index", { model: viewModel, init: viewModel.init.bind(viewModel), show: viewModel.show.bind(viewModel) });
+
+        var detail = new kendo.View("<span>Detail - press your browser back button to navigate back.</span>");
+
+
+        // routing
         var router = new kendo.Router();
 
+      	router.bind("init", function() {
+            layout.render($("#app"));
+        });
+
         router.route("/", function() {
-            index.render("#app");
+          	layout.showIn("#content", index);
+        });
+
+        router.route("/detail", function() {
+          	layout.showIn("#content", detail);
         });
 
         $(function() {
             router.start();
         });
+
     </script>
+
 ```
