@@ -17,12 +17,14 @@ position: 5
 | `Ctrl` + `X`				                        | Cuts selected cells										    |
 | `Ctrl` + `Y` 				                        | Repeats the last action, if possible by using the `Redo` command |  
 | `Ctrl` + `Z` 		                                | Reverses the last action or deletes the last typed entry by using the `Undo` command |
-| `Ctrl` + select a cell                        	| Selects nonadjacent cells	                                    |
-| `Ctrl` + select a row or column 	                | Selects nonadjacent rows or columns 							|  
+| `Ctrl` + select a cell                        	| Selects an adjacent or non adjacent cell |
+| `Ctrl` + select cells                             | Selects a range of adjacent or nonadjacent cells. To simultaneously select more than one range of cells, repeat this command. The selected ranges can also overlap. |
+| `Ctrl` + select a row or column 	                | Selects an adjacent or nonadjacent row or column. |  
+| `Ctrl` + select rows or columns                   | Selects a range of adjacent or nonadjacent rows or columns. To simultaneously select more than one range of rows or columns, repeat this command. The selected ranges can also overlap. |
 | `Esc`						                        | Cancels an entry in a cell or in the **Formula Bar**          |
 | `Arrow` keys                                      | Move a cell up, down, left, or right in a worksheet          |
 | `Ctrl` + `Arrow` key                              | Moves to the edge of the current data region of the active worksheet |
-| `Shift` + `Arrow` key 	                        | Selects adjacent cells, rows, or columns, by extending the selection by one cell, row, or column |
+| `Shift` + `Arrow` key 	                        | Selects (a range of) adjacent cells, rows, or columns, by extending the selection by one cell, row, or column |
 | `Ctrl` + `Shift` + `Arrow` key                    | Extends the selection of cells to the last nonblank cell in the same row or column as the active cell |
 | `Down Arrow` / `Up Arrow` key                     | <ul><li>Selects the next or previous command when a menu or submenu is open</li> <li>In a dialog box, the arrow keys move between options in an active drop-down list, or between options in a group of options</li></ul> |
 | `Backspace`                                       | <ul><li>Deletes one character to the left in the **Formula Bar**</li> <li>Removes the content of the active cell</li> <li>In cell editing mode, it deletes the character to the left of the insertion point</li></ul> |
@@ -39,5 +41,5 @@ position: 5
 | `Page Up`                                         | Moves one screen up in a worksheet                           |
 | `Spacebar`                                        | In a dialog box, performs the action for the selected button, or selects or clears a check box |
 | `Alt` + `Spacebar`                                | Displays the **Control** menu for the Spreadsheet window     |
-| `Tab`                                             | <ul><li>Moves one cell to the right in a worksheet</li> <li>Moves to the next option or option group in a dialog box</li></ul> |
+| `Tab`                                             | <ul><li>Moves one cell to the right in a worksheet</li> <li>Moves to the next option or option group in a dialog box</li> <li>Moves a cell within an active range of cells, rows, or columns.</li></ul> |
 | `Shift` + `Tab`                                   | Moves to the previous cell in a worksheet or the previous option in a dialog box |
