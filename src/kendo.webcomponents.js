@@ -13,6 +13,13 @@ var __meta__ = { // jshint ignore:line
 (function ($, angular, undefined) {
     if (!kendo.support.customElements) {
         return;
+    } else {
+        try {
+            document.registerElement("kendo-autocomplete");
+        }
+        catch(err) {
+            return;
+        }
     }
     if (angular && (angular.version.major == 1 || angular.injector)) {
         return;
