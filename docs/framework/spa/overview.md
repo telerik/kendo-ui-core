@@ -14,6 +14,7 @@ The **View** and **Layout** classes are used for the UI rendering. UI Event hand
 
 ## Hello World Single Page Application
 
+```html
     <div id="app"></div>
 
     <script id="index" type="text/x-kendo-template">
@@ -36,3 +37,4 @@ The **View** and **Layout** classes are used for the UI rendering. UI Event hand
             router.start();
         });
     </script>
+```
