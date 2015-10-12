@@ -3032,7 +3032,7 @@ The shape that will be added.
 
 Prevents the add action. If called, the element will not be added to the diagram.
 
-##### e.sender `kendo.ui.Diagram`
+##### e.sender `kendo.dataviz.ui.Diagram`
 
 The widget instance which fired the event.
 
@@ -3071,7 +3071,7 @@ The dataItem to which connection is bound.
 
 The dataItem to which shape is bound.
 
-##### e.sender `kendo.ui.Diagram`
+##### e.sender `kendo.dataviz.ui.Diagram`
 
 The widget instance which fired the event.
 
@@ -3089,7 +3089,7 @@ The added items (shapes or connections).
 
 The removed items (shapes or connections).
 
-##### e.sender `kendo.ui.Diagram`
+##### e.sender `kendo.dataviz.ui.Diagram`
 
 The widget instance which fired the event.
 
@@ -3145,15 +3145,19 @@ Fired when the user clicks on a shape or a connection.
 
 #### Event Data
 
-##### e.item `Object`
+##### e.item `kendo.dataviz.diagram.Shape` | `kendo.dataviz.diagram.Connection`
 
 The clicked shape or connection.
+
+##### meta `Object`
+
+An object with fields indicating which keys(altKey, ctrlKey, shiftKey, metaKey) were pressed.
 
 ##### e.point `kendo.dataviz.diagram.Point`
 
 The clicked location.
 
-##### e.sender `kendo.ui.Diagram`
+##### e.sender `kendo.dataviz.ui.Diagram`
 
 The widget instance which fired the event.
 
@@ -3165,7 +3169,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 #### Event Data
 
-##### e.sender `kendo.ui.Diagram`
+##### e.sender `kendo.dataviz.ui.Diagram`
 
 ### drag
 
@@ -3181,7 +3185,7 @@ An array with the dragged connection.
 
 An array with the dragged shapes.
 
-##### e.sender `kendo.ui.Diagram`
+##### e.sender `kendo.dataviz.ui.Diagram`
 
 The widget instance which fired the event.
 
@@ -3199,7 +3203,7 @@ An array with the dragged connection.
 
 An array with the dragged shapes.
 
-##### e.sender `kendo.ui.Diagram`
+##### e.sender `kendo.dataviz.ui.Diagram`
 
 The widget instance which fired the event.
 
@@ -3221,7 +3225,7 @@ An array with the dragged connection.
 
 An array with the dragged shapes.
 
-##### e.sender `kendo.ui.Diagram`
+##### e.sender `kendo.dataviz.ui.Diagram`
 
 The widget instance which fired the event.
 
@@ -3247,13 +3251,13 @@ The dataItem to which connection is bound.
 
 The dataItem to which shape is bound.
 
-##### e.sender `kendo.ui.Diagram`
+##### e.sender `kendo.dataviz.ui.Diagram`
 
 The widget instance which fired the event.
 
 ### itemBoundsChange
 
-Fired when the location or size of an item are changed.
+Fired when the location or size of a shape are changed.
 
 #### Event Data
 
@@ -3261,25 +3265,25 @@ Fired when the location or size of an item are changed.
 
 The new item bounds.
 
-##### e.item `Object`
+##### e.item `kendo.dataviz.diagram.Shape`
 
-The affected item (shape or connection).
+The affected shape.
 
-##### e.sender `kendo.ui.Diagram`
+##### e.sender `kendo.dataviz.ui.Diagram`
 
 The widget instance which fired the event.
 
 ### itemRotate
 
-Fired when an item is rotated.
+Fired when a shape is rotated.
 
 #### Event Data
 
-##### e.item `Object`
+##### e.item `kendo.dataviz.diagram.Shape`
 
-The rotated item (shape or connection).
+The rotated shape.
 
-##### e.sender `kendo.ui.Diagram`
+##### e.sender `kendo.dataviz.ui.Diagram`
 
 The widget instance which fired the event.
 
@@ -3293,11 +3297,11 @@ Will not fire for disabled items.
 
 #### Event Data
 
-##### e.item `Object`
+##### e.item `kendo.dataviz.diagram.Shape` | `kendo.dataviz.diagram.Connection`
 
 The target shape or connection.
 
-##### e.sender `kendo.ui.Diagram`
+##### e.sender `kendo.dataviz.ui.Diagram`
 
 The diagram instance which fired the event.
 
@@ -3311,11 +3315,11 @@ Will not fire for disabled items.
 
 #### Event Data
 
-##### e.item `Object`
+##### e.item `kendo.dataviz.diagram.Shape` | `kendo.dataviz.diagram.Connection`
 
 The target shape or connection.
 
-##### e.sender `kendo.ui.Diagram`
+##### e.sender `kendo.dataviz.ui.Diagram`
 
 The diagram instance which fired the event.
 
@@ -3325,7 +3329,11 @@ Fired when the user pans the diagram.
 
 #### Event Data
 
-##### e.sender `kendo.ui.Diagram`
+##### pan `kendo.dataviz.diagram.Point`
+
+A point representing the pan distance.
+
+##### e.sender `kendo.dataviz.ui.Diagram`
 
 The widget instance which fired the event.
 
@@ -3347,7 +3355,7 @@ The shape that will be removed.
 
 Prevents the remove action. If called, the element will not be removed to the diagram.
 
-##### e.sender `kendo.ui.Diagram`
+##### e.sender `kendo.dataviz.ui.Diagram`
 
 The widget instance which fired the event.
 
@@ -3369,7 +3377,7 @@ The dataItem to which connection is bound.
 
 The dataItem to which shape is bound.
 
-##### e.sender `kendo.ui.Diagram`
+##### e.sender `kendo.dataviz.ui.Diagram`
 
 The widget instance which fired the event.
 
@@ -3387,7 +3395,7 @@ The selected items (shapes and connections).
 
 The rest of the items (shapes and connections).
 
-##### e.sender `kendo.ui.Diagram`
+##### e.sender `kendo.dataviz.ui.Diagram`
 
 The widget instance which fired the event.
 
@@ -3401,7 +3409,7 @@ Fired when the user changes the diagram zoom level.
 
 The zoom center.
 
-##### e.sender `kendo.ui.Diagram`
+##### e.sender `kendo.dataviz.ui.Diagram`
 
 The widget instance which fired the event.
 
@@ -3419,7 +3427,7 @@ Fired when the user starts changing the diagram zoom level.
 
 The zoom center.
 
-##### e.sender `kendo.ui.Diagram`
+##### e.sender `kendo.dataviz.ui.Diagram`
 
 The widget instance which fired the event.
 
