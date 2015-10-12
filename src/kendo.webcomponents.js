@@ -11,7 +11,7 @@ var __meta__ = { // jshint ignore:line
 };
 
 (function ($, angular, undefined) {
-    if (!kendo.support.customElements) {
+    if (!kendo.support.customElements || kendo.webComponents.length) {
         return;
     }
     if (angular && (angular.version.major == 1 || angular.injector)) {
