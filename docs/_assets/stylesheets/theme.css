@@ -273,7 +273,7 @@
     color: #000;
 }
 
-#page-nav #page-tree .k-group .current-topic[data-expanded="true"] > .k-group > .k-item > div > .k-icon  { display: none; }
+#page-nav #page-tree .k-group .current-topic[data-expanded="true"] > .k-group > .k-item > div > .k-icon  { display: none; z-index: 1; }
 #page-nav #page-tree .k-group .k-group .current-topic[data-expanded="true"] > .k-group > .k-item > div > .k-icon  { display: block; left: 20px; }
 #page-nav #page-tree .k-group .k-group .k-group .current-topic[data-expanded="true"] > .k-group > .k-item > div > .k-icon  { display: block; left: 37px; }
 #page-nav #page-tree .k-group .k-group .k-group .k-group .current-topic[data-expanded="true"] > .k-group > .k-item > div > .k-icon  { display: block; left: 54px; }
