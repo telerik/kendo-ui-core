@@ -177,7 +177,7 @@
 #page-nav #page-tree > .k-group > .k-item[data-expanded="true"] > div > .k-in,
 #page-nav #page-tree > .k-group > .k-item[data-expanded="true"] > div > .k-in a {
     transition: padding .1s, font-weight .1s;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 /* Indent Level 3 */
