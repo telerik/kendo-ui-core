@@ -384,6 +384,16 @@
         ok(!ddl.data("kendoDropDownList"));
     });
 
+    test("content() with jQuery object", function() {
+        var dialog = createWindow();
+
+        var dom = $("<span class='a'>foo</span>");
+
+        dialog.content(dom);
+
+        equal(dialog.element.find(".a").length, 1);
+    });
+
     test("toFront() raises window z-index above other windows", function() {
         var firstWindow = createWindow(),
             secondWindow = createWindow();
