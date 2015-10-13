@@ -138,7 +138,98 @@ This last one is the grid. Yes, this one line creates a [Kendo UI Grid](/ui-widg
 
 Here is the finished product. Kendo UI bindings are keeping the UI and the model in sync as changes are made.
 
-<iframe frameborder="0" allowfullscreen="allowfullscreen" src="http://jsfiddle.net/burkeholland/NqSuS/6/embedded/result,js,html" style="width: 100%; height: 450px;"></iframe>
+```html
+<div class="form">       
+  <dl>
+    <dt>Type</dt>
+    <dd><select data-role="dropdownlist" data-bind="source: type, value: expenseType" data-text-field="name" data-value-field="value"></select></dd>
+    <dt>Merchant</dt>
+    <dd><input id="merchant" type="text" class='k-textbox' data-bind="value: merchant" /></dd>
+    <dt>Amount</dt>
+    <dd><input data-role="numerictextbox" data-bind="value: amount" id="amount" type="text" /></dd>
+  </dl>
+    <dt>&nbsp;</dt>
+    <dd><button id="create" data-bind="click: create" class="k-button">Add</button></dd>
+</div>
+
+<div class="grid" data-role="grid" data-sortable="true" data-bind="source: expenses" data-columns='["Type", "Merchant", "Amount"]' data-scrollable="false"></div>
+
+<script>
+
+var viewModel = kendo.observable({
+
+    // expenses array will hold the grid values
+    expenses: [],
+
+    // type array populates the drop down
+    type: [{ name: "Food", value: "food"}, { name: "Clothing", value: "clothing"}, { name: "Bills", value: "bills" }],
+
+    // expenseType holds the currently selected value of the dropdown list
+    expenseType: "food", 
+
+    // the values are bound to the merchant and amount fields
+    merchant: null,
+    amount: null,
+
+    // event execute on click of add button
+    create: function(e) {         
+        // add the items to the array of expenses
+        this.get("expenses").push({Type: this.get("expenseType"), Merchant: this.get("merchant"), Amount: this.get("amount")});
+
+        // reset the form
+        this.set("expenseType", "food");
+        this.set("merchant", "");
+        this.set("amount", "");
+    }
+
+});
+
+// apply the bindings
+kendo.bind(document.body.children, viewModel);
+
+</script>
+
+<style>
+
+.form
+{
+    padding: 0 2em;
+}
+
+.form:after
+{
+    content: "";
+    display: block;
+    clear: both;
+}
+
+dl, dt, dd
+{
+    margin: 0;
+    padding: 0;
+}
+    
+dt, dd
+{
+    float: left;
+    margin-top: 1em;
+}
+    
+dt
+{
+    clear: left;
+    text-align: right;
+    width: 6em;
+    margin-right: 2em;
+    line-height: 2.4;
+}
+
+.grid {
+    margin: 2em;
+}
+
+</style>
+```
 
 Not only does MVVM keep you from having to worry about many of the manual details, it also dramatically simplifies your code so that in your JavaScript you are only working with model objects. The DOM simply reflects the changes that you make to the model.
 
