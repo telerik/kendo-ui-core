@@ -119,7 +119,7 @@ code, em {
     position: absolute;
     top: 0;
     left: 0;
-    width: 17%;
+    width: 18%;
     height: 100%;
     overflow: auto;
     background: #fefefe;
@@ -234,7 +234,7 @@ code, em {
 
 #markdown-toc,
 #page-article {
-    width: 83%;
+    width: 82%;
 }
 
 #page-article article {
@@ -368,7 +368,7 @@ h6 {
 }
 
 #markdown-toc + #page-article h3 a {
-    color: #ff3399;
+    color: #ec0f7d;
 }
 
 #markdown-toc + #page-article h3 + p,

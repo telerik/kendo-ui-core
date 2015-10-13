@@ -144,6 +144,10 @@
     font-size: 14px;
 }
 
+/*#page-nav #page-tree > .k-group > .k-item > div > .k-in .article + a {
+    padding-left: 40px;
+}*/
+
 #page-nav #page-tree > .k-group > .k-item > div > .k-state-selected a {
     color: #fff;
     background-color: #00b312;
@@ -159,6 +163,8 @@
 
 #page-nav #page-tree > .k-group > .k-item > div > .k-in .article {
     display: none;
+/*    right: auto;
+    left: 20px;*/
 }
 
 #page-nav .k-item .k-in.k-state-hover,
@@ -170,7 +176,7 @@
 #page-nav #page-tree > .k-group > .k-item[data-expanded="true"] {
     transition: padding .1s;
     box-shadow: inset 0 1px #e8ebef, 0 1px #e8ebef ;
-    padding-bottom: 0;
+    padding-bottom: 10px;
     background-color: #f3f5f7;
 }
 
