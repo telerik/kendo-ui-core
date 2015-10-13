@@ -57,8 +57,8 @@ Do not use multiple custom combined scripts, as they will contain duplicate code
 Below are the references to the script files which, whether minified or not, can be included on a per-widget basis depending on the flavor you want to add to your project. 
 
 + [List of Kendo UI widgets in terms of their bundle support](/intro/supporting/list-of-widgets)  
-+ [List of the script files for the desktop UI widgets for mobile-ready websites and apps](/intro/supporting/scripts-general) 
-+ [List of the script files for the widgets rendering data visualization](/intro/supporting/scripts-dataviz)
-+ [List of the script files for the frameworks and widgets for mobile applications](/intro/supporting/scripts-hybridui)
-+ [List of the script files for the tools and utilities](/intro/supporting/scripts-frameworks)
-+ [List of the script files for the server-side wrappers](/intro/supporting/scripts-wrappers)
++ [List of script files for the desktop UI widgets for mobile-ready websites and apps](/intro/supporting/scripts-general) 
++ [List of script files for the widgets rendering data visualization](/intro/supporting/scripts-dataviz)
++ [List of script files for the frameworks and widgets for mobile applications](/intro/supporting/scripts-hybridui)
++ [List of script files for the tools and utilities](/intro/supporting/scripts-frameworks)
++ [List of script files for the server-side wrappers](/intro/supporting/scripts-wrappers)

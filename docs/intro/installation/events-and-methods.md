@@ -14,7 +14,7 @@ In addition to the initialization configuration options, each Kendo UI widget in
 
 To get a reference to a widget instance, use the [jQuery data](http://api.jquery.com/data/) method and pass the plug-in name as a string (the Kendo UI widgets are jQuery plug-ins). 
 
-Example: 
+**Example:** 
 
 ```
     <p>Animal: <input id="animal" /></p>
@@ -34,7 +34,7 @@ Example:
 
 To get a reference to a widget instance, you may also use the `getKendo<WidgetName>` method. Note that the jQuery convention of returning the selected DOM element(s) applies to widget initialization plug-in methods too. This means that the plug-in method, for example `kendoAutoComplete()`, does not return the widget instance, but the jQuery selector that the method was used on.
 
-Example:
+**Example:**
 
 ```
     <p>Animal: <input id="animal" /></p>
@@ -54,7 +54,7 @@ Example:
 
 Once the widget instance is available, you can call its methods using the standard JavaScript method syntax. The complete list and examples of the widget methods and method parameters is available in the [API reference](/api/javascript/kendo) section.
 
-Example:
+**Example:**
 
 ```
         <p>Animal: <input id="animal" /></p>
@@ -81,7 +81,7 @@ Depending on the its specific features, each widget exposes different events. Fo
 
 Event handlers, which are attached during widget initialization, will be executed every time the event is fired. If you need the handler to be executed only once, then attach it after the widget initialization with the `one` method.
 
-Example: 
+**Example:** 
 
 ```
     <p>Animal: <input id="animal" /></p>
@@ -104,7 +104,7 @@ Example:
 
 There are two methods, which all Kendo UI widgets have, namely `bind` and `one`. Both of them are used to attach event handlers to already existing widget instances. The only difference is that event handlers attached with `one` will be executed only once.
 
-Example: 
+**Example:** 
 
 ```
     <p>Animal: <input id="animal" /></p>
@@ -142,7 +142,7 @@ Passing additional custom event arguments to the handler is not supported.
 
 The full list and examples of the widget events and the fields available in the event objects is available in the [API reference](/api/javascript/kendo) section.
 
-Example: 
+**Example:** 
 
 ```
     <p>Animal: <input id="animal" /></p>
@@ -165,7 +165,7 @@ Example:
 
 Certain widget events may be prevented by calling the `preventDefault` method of the event object. The effect of the event prevention is specific for each event and is documented in the [API reference](/api/javascript/kendo).
 
-Example: 
+**Example:** 
 
 ```
     <p>Animal: <input id="animal" /></p>
@@ -190,7 +190,7 @@ Example:
 
 To unbind from a given event, you should keep a reference to the event handler function and invoke the `unbind` method with it. Note that calling the `unbind` method without a second argument unbinds all event handlers from the event.
 
-Example: 
+**Example:** 
 
 ```
     <p>Animal: <input id="animal" /></p>
