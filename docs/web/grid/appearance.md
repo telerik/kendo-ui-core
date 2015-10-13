@@ -184,11 +184,13 @@ The Grid columns behave differently, depending on whether scrolling is enabled o
 This means that all width-less columns will be equally wide no matter what their content is, and will expand or shrink, depending on the available space.
 If there is not enough horizontal space, width-less columns can even shrink to zero width.
 All set column widths will be obeyed no matter what the cell content is. If the content cannot fit, it will wrap or be clipped.
+During column resizing, only the resized column will change its width and the other column widths will be persisted. To achieve this, the table width will change.
 
 * When Grid **scrolling is disabled**, the `table-layout` style is set to `auto`. This is the default behavior of HTML tables.
 The column widths are determined by the browser and cell content, if not set explicitly.
 The browser will try to obey all set column widths, but may readjust some columns, depending on their content.
 The column widths may change on paging, sorting and other data operations.
+During column resizing, more than one column width will change, because the table width remains constant.
 
 If needed, a fixed table layout can be applied to a non-scrollable Grid:
 
@@ -197,7 +199,7 @@ If needed, a fixed table layout can be applied to a non-scrollable Grid:
         table-layout: fixed;
     }
 
-Column widths must be set only via the `width` property of the Grid columns. Using table cell width styles is incorrect.
+Column widths should be set only via the `width` property of the Grid columns. Using table cell width styles is not recommended.
 When creating the Grid from an HTML `table`, column widths can be set via width styles of the table `col` elements.
 
 > [Scrolling makes the Grid render separate tables for the header and data area](#scrolling) and naturally, these tables should have synchronized column widths.
