@@ -16,7 +16,7 @@ The FileBrowser-related code is identical to the ImageBrowser one, with two exce
 should be used instead of        
 `var imageBrowser = $(".k-imagebrowser").data("kendoImageBrowser");`
 
-Once the [ListView](/api/javascript/ui/listview) and [Upload](/api/javascript/ui/upload) widget objects are available,
+Once the [ListView](/api/javascript/ui/listview), [Upload](/api/javascript/ui/upload) and [DropDownList](/api/javascript/ui/dropdownlist) widget objects are available,
 one can use their APIs to attach events with [`bind()`](/intro/events-and-methods#bind-to-events-after-widget-initialization) or perform other customizations.
 
 Please note that the `transport` configurations below are over-simplified and invalid.
