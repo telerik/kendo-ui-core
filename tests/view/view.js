@@ -119,13 +119,11 @@
 
         var el = view.render();
 
-        el.find("a").trigger("mousedown");
-        el.find("a").trigger("mouseup");
+        clickAt(el.find("a"));
 
         view.destroy();
 
-        el.find("a").trigger("mousedown");
-        el.find("a").trigger("mouseup");
+        clickAt(el.find("a"));
         equal(el.find("a").data("kendoTouch"), null);
     });
 
