@@ -31,11 +31,9 @@ This is the markup we will use as a starting point for our implementation:
         <dd><button id="create" class="k-button">Add</button></dd>
     </div>
 
-    <div class="span4"><b>Expenses</b><hr />
-        <table id="expenses">
+    <table id="expenses">
 
-        <table>
-    </div>
+    <table>
 
 ### Developing With MVVM
 
