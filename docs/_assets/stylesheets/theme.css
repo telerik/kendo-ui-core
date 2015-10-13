@@ -243,7 +243,7 @@
 }
 
 #page-nav #page-tree .current-topic[data-expanded="true"] > .k-group > .k-item {
-    padding-top: 15px;
+    padding-top: 10px;
 }
 
 #page-nav #page-tree .current-topic[data-expanded="true"] > .k-group > .k-item > div > .k-in a  {
@@ -326,7 +326,7 @@
 }
 
 .action-buttons {
-    margin-top: 1.5em;
+    margin-top: 12px;
     border: 1px solid #e8ebef;
     border-bottom: 0;
     background-color: #fefefe;

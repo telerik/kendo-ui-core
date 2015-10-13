@@ -220,7 +220,7 @@ code, em {
     right: 0;
     bottom: 0;
     overflow: auto;
-    padding: 15px 0 0;
+    padding: 30px 0 0;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -248,12 +248,6 @@ code, em {
     margin: 2em auto;
 }
 
-#page-article h1 {
-    margin-top: 30px;
-    font-size: 34px;
-    font-weight: normal;
-}
-
 a {
     color: #1976d2;
     text-decoration: none;
@@ -277,6 +271,7 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 
 h1 a:hover, h2 a:hover, h3 a:hover,
 h4 a:hover, h5 a:hover, h6 a:hover {
+    text-decoration: none;
     background: transparent url(../images/anchor.png) no-repeat 0 50%;
 }
 
@@ -321,6 +316,44 @@ h1 span.type-link a:hover {
     color: #1565c0;
 }
 
+/* Headings */
+h1,h2,h3,h4,h5,h6 {
+    font-weight: 400;
+    line-height: 1.2em;
+    margin-top: 30px;
+    margin-bottom: 12px;
+}
+h1 {
+    font-size: 34px;
+}
+
+h2 {
+    font-size: 26px;
+    font-weight: 500;
+    margin-top: 42px;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+h4 {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+h5 {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+h6 {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
 #markdown-toc + #page-article h1 {
     margin: 0;
 }
@@ -329,63 +362,45 @@ h1 span.type-link a:hover {
     margin: 0;
 }
 
-#markdown-toc + #page-article h2 {
-    padding: 0;
-}
-
 #markdown-toc + #page-article h3 {
-    font-size: 1.17em;
-    margin: 1.5em 0 0;
-    padding-top: .7em;
-    position: relative;
+    margin-bottom: 3px;
+    font-size: 16px;
 }
 
-#markdown-toc + #page-article h5 {
-    font-size: 15px;
-    margin-top: .5em;
-    margin-bottom: 0;
+#markdown-toc + #page-article h3 a {
+    color: #ff3399;
+}
+
+#markdown-toc + #page-article h3 + p,
+#markdown-toc + #page-article h4 + p,
+#markdown-toc + #page-article h5 + p {
+    margin-top: 0;
 }
 
 #markdown-toc + #page-article h4 {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 16px;
+    margin-bottom: 6px;
+    color: #666;
+}
+
+#markdown-toc + #page-article h5 {
+    margin-top: 6px;
     margin-bottom: 0;
+}
+
+#markdown-toc + #page-article h5 code {
+    color: #3e526b;
+}
+
+#markdown-toc + #page-article h5 a code {
+    color: #1976d2;
 }
 
 h1 + p {
     font-size: 18px;
-}
-
-h2 {
-    margin: 1.5em 0 0;
-    padding-top: 1em;
-    position: relative;
-}
-
-h3 {
-    font-size: 1.25em;
-    margin-top: 1.5em;
-}
-
-h3 + p,
-h4 + p,
-h5 + p {
-    margin-top: 0;
-}
-
-h2:before,
-#markdown-toc + #page-article h3:before {
-    content: " ";
-    display: block;
-    font-size: 0;
-    width: 30px;
-    height: 3px;
-    top: 0;
-    position: absolute;
-    background-color: #00b312;
-}
-
-#markdown-toc + #page-article h2:before {
-    height: 0;
-    border-top: 0;
 }
 
 h3 code, h3 em {
@@ -394,38 +409,41 @@ h3 code, h3 em {
 }
 
 h3 code {
-    margin-left: 10px;
+    margin-left: 4px;
+}
+
+h3 a:first-child + a code:before {
+    content: "-";
+    margin-right: 7px;
+    color: #ccc;
+}
+
+h3 > code:first-child:before {
+    content: "|";
+    margin-right: 7px;
+    color: #ccc;
 }
 
 h3 em {
     font-style: normal;
-    font-weight: bold;
+    font-weight: 500;
 }
 
-h4 {
-    margin: 1em 0 .5em;
-    color: #666;
+p {
+    margin: 12px 0;
+}
+
+ul, ol {
+    margin: 12px 0 30px;
 }
 
 blockquote {
     padding: 10px 30px;
-    margin: 3em 0;
+    margin: 30px 0;
     min-height: 70px;
     position: relative;
     box-sizing: border-box;
 }
-
-/*blockquote:before {
-    content: "Note";
-    position: absolute;
-    left: 30px;
-    top: 22px;
-    font-size: 14px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #0288d1;
-}*/
 
 blockquote table {
     border: 0;
@@ -443,7 +461,7 @@ blockquote th, blockquote td {
     overflow: hidden;
     word-break: break-word;
     clear: both;
-    margin: 2.5em 0;
+    margin: 12px 0 30px;
 }
 
 .prettyprint code {
