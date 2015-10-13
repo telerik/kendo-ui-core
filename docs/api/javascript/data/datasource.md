@@ -2049,6 +2049,7 @@ which should follow the `schema.data` configuration.
 
 #### Example
 
+    <script src="http://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-1.1.3.min.js"></script>
     <script>
     var hubUrl = "http://demos.telerik.com/kendo-ui/service/signalr/hubs";
     var connection = $.hubConnection(hubUrl, { useDefaultPath: false});
@@ -2327,42 +2328,45 @@ It is recommended to familiarize with the SignalR [JavaScript API](http://www.as
 
 #### Example
 
-    var hubUrl = "http://demos.telerik.com/kendo-ui/service/signalr/hubs";
-    var connection = $.hubConnection(hubUrl, { useDefaultPath: false});
-    var hub = connection.createHubProxy("productHub");
-    var hubStart = connection.start({ jsonp: true });
+    <script src="http://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-1.1.3.min.js"></script>
+    <script>
+        var hubUrl = "http://demos.telerik.com/kendo-ui/service/signalr/hubs";
+        var connection = $.hubConnection(hubUrl, { useDefaultPath: false});
+        var hub = connection.createHubProxy("productHub");
+        var hubStart = connection.start({ jsonp: true });
 
-    var dataSource = new kendo.data.DataSource({
-        type: "signalr",
-        schema: {
-            model: {
-                id: "ID",
-                fields: {
-                    "ID": { editable: false, nullable: true },
-                    "CreatedAt": { type: "date" },
-                    "UnitPrice": { type: "number" }
+        var dataSource = new kendo.data.DataSource({
+            type: "signalr",
+            schema: {
+                model: {
+                    id: "ID",
+                    fields: {
+                        "ID": { editable: false, nullable: true },
+                        "CreatedAt": { type: "date" },
+                        "UnitPrice": { type: "number" }
+                    }
+                }
+            },
+            transport: {
+                signalr: {
+                    promise: hubStart,
+                    hub: hub,
+                    server: {
+                        read: "read",
+                        update: "update",
+                        destroy: "destroy",
+                        create: "create"
+                    },
+                    client: {
+                        read: "read",
+                        update: "update",
+                        destroy: "destroy",
+                        create: "create"
+                    }
                 }
             }
-        },
-        transport: {
-            signalr: {
-                promise: hubStart,
-                hub: hub,
-                server: {
-                    read: "read",
-                    update: "update",
-                    destroy: "destroy",
-                    create: "create"
-                },
-                client: {
-                    read: "read",
-                    update: "update",
-                    destroy: "destroy",
-                    create: "create"
-                }
-            }
-        }
-    });
+        });
+    </script>
 
 ### transport.signalr.client `Object`
 
