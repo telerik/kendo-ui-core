@@ -251,6 +251,16 @@ Template to be used for rendering the alternate items in the ListView.
     });
     </script>
 
+## Fields
+
+### dataSource `kendo.data.DataSource`
+
+The [data source](/api/framework/datasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
+
+> Changes of the data source will be reflected in the widget.
+
+> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](#methods-setDataSource) method instead.
+
 ## Methods
 
 ### add
