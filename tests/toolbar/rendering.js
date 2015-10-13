@@ -3,8 +3,7 @@
         ToolBar = kendo.ui.ToolBar;
 
     function click(element) {
-        element.trigger("mousedown");
-        element.trigger("mouseup");
+        element.trigger("click");
     }
 
     module("Toolbar rendering:", {
@@ -117,7 +116,7 @@
 
     test("click event handler of the button is stored in the data of the rendered element", 2, function() {
         container.kendoToolBar({
-            items: [{ 
+            items: [{
                 type: "button",
                 id: "foo",
                 text: "foo",
@@ -593,7 +592,7 @@
 
     test("toggle event handler of the button is stored in the data of the rendered element", 2, function() {
         container.kendoToolBar({
-            items: [{ 
+            items: [{
                 type: "button",
                 togglable: true,
                 id: "foo",
@@ -1352,8 +1351,7 @@
     });
 
     /* MISC */
-
-    test("DOM click event of disabled button is prevented", 0, function() {
+    test("DOM click event of disabled button is prevented", 1, function() {
         container.kendoToolBar({
             items: [
                 { type: "button", id: "foo", text: "foo", enable: false }
@@ -1362,8 +1360,8 @@
 
         var button = container.find("#foo");
 
-        button.click(function() {
-            ok(false, "click is fired");
+        container.click(function(e) {
+            ok(e.isDefaultPrevented(), "enable false does not prevent the click");
         });
 
         click(button);

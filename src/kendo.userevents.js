@@ -562,7 +562,9 @@ var __meta__ = { // jshint ignore:line
                 type: "tap"
             };
 
-            this.trigger("tap", data);
+            if (this.trigger("tap", data)) {
+                e.preventDefault();
+            };
         },
 
         _eachTouch: function(methodName, e) {
