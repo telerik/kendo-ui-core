@@ -22,7 +22,7 @@ Creating widgets from [document fragments](https://developer.mozilla.org/en-US/d
 
 ### Instantiate the Kendo UI AutoComplete Widget
 
-Example:
+**Example:**
 
 ```
 	<p>Animal: <input id="animal" /></p>
@@ -38,7 +38,7 @@ Example:
 
 ### Instantiate Multiple Kendo UI Buttons With a Single jQuery Selector
 
-Example: 
+**Example:**
 
 ```
     <button>Foo</button> | <button>Bar</button>
@@ -53,7 +53,7 @@ Example:
 
 #### Chain jQuery Method Calls After the Widget Instantiation Plug-in Method
 
-Example: 
+**Example:** 
 
 ```
     <button>Foo</button> | <button>Bar</button>
@@ -73,7 +73,7 @@ You can configure a Kendo UI widget by passing a configuration object (key/value
 
 The example below sets the [height](/api/web/grid#height-numberstring), [columns](/api/web/grid#columns-array) and [dataSource](/api/web/grid#datasource-kendodatadatasource--object) configuration options of the Grid widget.
 
-Example: 
+**Example:** 
 
 ```
     <div id="grid"></div>
@@ -115,7 +115,7 @@ A common mistake is to recreate a widget instance when the goal is only to get t
 
 #### Incorrect Duplicate Initialization
 
-Example:
+**Example:**
 
 ```
     <input id="autocomplete" />
@@ -137,7 +137,7 @@ Example:
 In order to check whether a widget instance already exists for a certain DOM element, use the
 [standard way to obtain the widget instance](/basics/events-and-methods#obtain-a-reference-to-a-kendo-ui-widget-instance-using-jquery). If the returned value is `undefined`, then the widget instance does not exist.
 
-Example:
+**Example:**
 
 ```
     <input id="autocomplete" />
