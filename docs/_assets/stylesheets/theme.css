@@ -61,7 +61,7 @@
 /* Main Naivation */
 
 #page-tree {
-    padding: 10px 0;
+    padding: 0;
     white-space: normal;
     word-break: break-word;
     overflow: hidden;
@@ -183,7 +183,6 @@
 #page-nav #page-tree > .k-group > .k-item[data-expanded="true"] > div > .k-in,
 #page-nav #page-tree > .k-group > .k-item[data-expanded="true"] > div > .k-in a {
     transition: padding .1s, font-weight .1s;
-    font-weight: 500;
 }
 
 /* Indent Level 3 */
@@ -248,9 +247,9 @@
     padding-bottom: 15px;
 }
 
-#page-nav #page-tree .current-topic[data-expanded="true"] > .k-group > .k-item {
+/*#page-nav #page-tree .current-topic[data-expanded="true"] > .k-group > .k-item {
     padding-top: 10px;
-}
+}*/
 
 #page-nav #page-tree .current-topic[data-expanded="true"] > .k-group > .k-item > div > .k-in a  {
     font-weight: bold;
