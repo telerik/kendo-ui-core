@@ -6,7 +6,7 @@ description: Get reference to the ImageBrowser and FileBrowser child widgets
 
 # Get reference to the Editor ImageBrowser's and FileBrowser's child widgets
 
-The Editor's **ImageBrowser** and **FileBrowser** widgets use internally other Kendo UI widgets - a Kendo UI **Upload** and a Kendo UI **ListView**.
+The Editor's **ImageBrowser** and **FileBrowser** widgets use internally other Kendo UI widgets - a Kendo UI **Upload**, **ListView** and a **DropDownList**.
 The following example demonstrates how to obtain these widgets' client-side objects.
 
 The FileBrowser-related code is identical to the ImageBrowser one, with two exceptions:
@@ -71,6 +71,10 @@ Please note that the `transport` configurations below are over-simplified and in
                 // retrieve the Upload widget object
                 var upload = imageBrowser.upload;
                 console.log(upload);
+
+                // retrieve the DropDownList widget object
+                var dropdownlist = imageBrowser.arrangeBy;
+                console.log(dropdownlist);
             });
         });
         
@@ -89,6 +93,10 @@ Please note that the `transport` configurations below are over-simplified and in
                 // retrieve the Upload widget object
                 var upload = fileBrowser.upload;
                 console.log(upload);
+
+                // retrieve the DropDownList widget object
+                var dropdownlist = fileBrowser.arrangeBy;
+                console.log(dropdownlist);
             });
         });
     });
