@@ -17,7 +17,8 @@ should be used instead of
 `var imageBrowser = $(".k-imagebrowser").data("kendoImageBrowser");`
 
 Once the [ListView](/api/javascript/ui/listview), [Upload](/api/javascript/ui/upload) and [DropDownList](/api/javascript/ui/dropdownlist) widget objects are available,
-one can use their APIs to attach events with [`bind()`](/intro/events-and-methods#bind-to-events-after-widget-initialization) or perform other customizations.
+one can use their APIs to attach events with [`bind()`](/intro/events-and-methods#bind-to-events-after-widget-initialization) or perform other customizations,
+which may not be otherwise supported.
 
 Please note that the `transport` configurations below are over-simplified and invalid.
 
