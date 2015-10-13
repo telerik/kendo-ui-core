@@ -23,21 +23,21 @@ Depending on your preferences and the requirements of your project, you can:
 
 Once you [download any of the Kendo UI bundles](http://www.telerik.com/download/kendo-ui), you will get the following folders in your local repository:
 
-* `/examples` - the folder accommodates the quick start demo files
-* `/js` - the location contains the minified JavaScript files
-* `/src` - this directory holds the source code files. Note that it is not available in the 30-day trial version.
-* `/styles` - the folder consists of the minified CSS files and theme images
-* `/wrappers` - the directory includes the server-side wrappers. As it is necessary for the Telerik UI for ASP.NET MVC, UI for JSP or UI for PHP distributions only, the folder is available in the commercial packages of these versions.
-* `changelog.html` - the folder provides the Kendo UI release notes
+* `/examples` - accommodates the quick start demo files
+* `/js` - contains the minified JavaScript files
+* `/src` - holds the source code files. Note that it is not available in the 30-day trial version.
+* `/styles` - consists of the minified CSS files and theme images
+* `/wrappers` - includes the server-side wrappers. As it is necessary for the Telerik UI for ASP.NET MVC, UI for JSP or UI for PHP distributions only, the folder is available in the commercial packages of these versions.
+* `changelog.html` - provides the Kendo UI release notes
 
 #### Step 2: Add CSS and JavaScript References to Your Project
 
 To use Kendo UI in your project, you need to include the required JavaScript and CSS files.
 
-**Step 1:** Extract the `/js` and `/styles` directories from the bundle archive and copy them to your web application root directory
+**Step 1:** Extract the `/js` and `/styles` directories from the bundle archive and copy them to your web application root directory  
 **Step 2:** Include the Kendo UI JavaScript and CSS files in the `head` tag of your HTML document. Make sure the common CSS file is registered before the theme CSS file.
 
-Here goes the example:
+**Example:**
 
 		<!DOCTYPE html>
 	        <html>
@@ -70,7 +70,7 @@ Here goes the example:
 
 **Step 3:** Initialize a Widget
 
-Example with the DataPicker widget:
+**Example ([DatePicker widget](http://demos.telerik.com/kendo-ui/datepicker/index)):**
 
         <!-- HTML element from which the DatePicker would be initialized -->
         <input id="datepicker" />
@@ -81,7 +81,7 @@ Example with the DataPicker widget:
         });
         </script>
 
-Here is the complete example:
+**The complete example ([DatePicker widget](http://demos.telerik.com/kendo-ui/datepicker/index)):**
 
     <!DOCTYPE html>
     <html>
