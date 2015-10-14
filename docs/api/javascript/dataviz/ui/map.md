@@ -1774,6 +1774,9 @@ The function return value must be a `kendo.drawing.Shape`.
         });
     </script>
 
+### layerDefaults.tileSize `Number` *(default: 256)*
+The size of the image tile in pixels.
+
 ### layerDefaults.tile `Object`
 
 The default configuration for tile layers.
@@ -2244,6 +2247,9 @@ For example "pinTarget" is rendered as "k-marker-pin-target".
             }]
         });
     </script>
+
+### layers.tileSize `Number` *(default: 256)*
+The size of the image tile in pixels.
 
 ### layers.titleField `String` *(default: "title")*
 
