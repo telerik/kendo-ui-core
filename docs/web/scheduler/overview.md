@@ -8,13 +8,13 @@ description: Quick steps to help you create a Kendo UI Scheduler.
 
 The Kendo UI Scheduler widget displays a set of events (a.k.a. appointments or tasks). It can display the scheduler events in different views - a single day, a whole week or month and as a list of tasks which need to be accomplished.
 
-
-
 ## Getting Started
 
 The first steps are to include the Kendo UI JavaScript and CSS files. Those steps are described in detail in the [introduction](/introduction#kendo-ui-web) help topic so we won't repeat them here.
 The next thing a Kendo UI Scheduler needs is a data source to be bound to. The scheduler uses a special type of Kendo UI DataSource - the [kendo.data.SchedulerDataSource](/api/framework/schedulerdatasource).
 The `SchedulerDataSource` contains instances of a custom Kendo UI model - [kendo.data.SchedulerEvent](/api/framework/schedulerevent) - which represent the scheduler event data items.
+
+> It is **required** to define all fields from the [kendo.data.SchedulerEvent](/api/framework/schedulerevent) in the dataSource ["schema.model"](/api/framework/datasource#configuration-schema.model) option in order to **enable editing of the events** and working with **recurring events**
 
 ## Binding to local JavaScript array
 
