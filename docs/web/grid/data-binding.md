@@ -17,15 +17,26 @@ To start with, we need a data source. Due to my work on [instasharp.org](http://
 
 First we need a grid on our page. A simple table describing the column headers will do just fine. This makes sense. If you were making a grid yourself, you would start with a table.
 
-<iframe style="width: 700px; height: 300px;" src="http://jsfiddle.net/65kWY/13/embedded/html"></iframe>
+    <table id="grid">
+        <thead>
+            <tr>
+                <th>
+                    
+                </th>
+                <th>
+                    Details
+                </th>
+                <th>
+                    Comments
+                </th>
+        </thead>
+        <tbody>
+        <td colspan="3"></td>
+        </tbody>
+    </table>
 
-Now we need to make our div into a grid. First we need to download the Kendo UI or we can use the static CDN references.
-
-We are going to need the **kendo.common.min.css**, the **kendo.kendo.min.css** as far as stylesheets go. We also need jQuery because Kendo UI is built on top of the jQuery platform. The last thing we need is the **kendo.all.min.js** reference. It's important to include your jQuery reference first as it is a dependency for Kendo UI.
-
-For the sake of simplicity, here are all the script tags as CDN references that you can just copy and paste.
-
-<iframe style="width: 700px; height: 150px;" src="http://jsfiddle.net/65kWY/2/embedded/js"></iframe>
+Now we need to make our table into a grid. First, make sure that
+[all Javascript and CSS files required by Kendo UI](/intro/installation/getting-started#host-kendo-ui-in-your-project) are registered.
 
 We can turn the div into a grid in the document.ready() jQuery function.
 
