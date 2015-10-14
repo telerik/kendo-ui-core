@@ -38,13 +38,13 @@ Here is how to configure a simple Kendo DatePicker:
                 .Value(DateTime.Today) //Set the value of the datepicker
             )
 
-## Accessing an Existing DatePicker
+## Access an Existing DatePicker
 
 You can reference an existing DatePicker instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
 Once a reference has been established, you can use the [API](/api/web/datepicker#methods) to control its behavior.
 
 
-### Accessing an existing DatePicker instance
+### Access an Existing DatePicker Instance
 
     //Put this after your Kendo DatePicker for ASP.NET MVC declaration
     <script>
@@ -55,13 +55,13 @@ Once a reference has been established, you can use the [API](/api/web/datepicker
     </script>
 
 
-### Handling Kendo UI DatePicker events
+### Handle DatePicker Events
 
 You can subscribe to all [events](/api/web/datepicker#events) exposed by Kendo UI DatePicker:
 
 
 
-### WebForms - subscribe by handler name
+### WebForms - Subscribe by Handler Name
 
     <%: Html.Kendo().DatePicker()
         .Name("datepicker")
@@ -86,7 +86,7 @@ You can subscribe to all [events](/api/web/datepicker#events) exposed by Kendo U
     </script>
 
 
-### Razor - subscribe by handler name
+### Razor - Subscribe by Handler Name
 
     @(Html.Kendo().DatePicker()
       .Name("datepicker")
@@ -111,7 +111,7 @@ You can subscribe to all [events](/api/web/datepicker#events) exposed by Kendo U
     </script>
 
 
-### Razor - subscribe by template delegate
+### Razor - Subscribe by Template Delegate
 
     @(Html.Kendo().DatePicker()
       .Name("datepicker")
@@ -131,10 +131,10 @@ You can subscribe to all [events](/api/web/datepicker#events) exposed by Kendo U
 
 ## Troubleshooting
 
-### Display [DateTimeOffset](http://msdn.microsoft.com/en-us/library/system.datetimeoffset.aspx) value in widget
+### Display the [`DateTimeOffset`](http://msdn.microsoft.com/en-us/library/system.datetimeoffset.aspx) Value in a Widget
 The DatePicker widget supports only DateTime structure. You will need to convert DateTimeOffset into DatePicker in order to show date and time correctly.
 
-### Client validation fails with invalid date
+### Client Validation Fails with Invalid Date
 By default ASP.NET MVC project uses jQuery validate framework, which does not provide support for internationalized dates.
 In other words, every string which [Date.parse](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Date/parse) cannot define as valid date will be reported as invalid. As extending open source libraries is beyond of our product,
 you will need to resolve this issue manually - check this [link](http://www.dotnet-programming.com/post/2011/12/14/Globalization-Validation-and-DateNumber-Formats-in-AspNet-MVC.aspx) for more information.

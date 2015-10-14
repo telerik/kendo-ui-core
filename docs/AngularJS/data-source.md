@@ -10,7 +10,7 @@ Most Kendo UI widgets work with a DataSource object. Kendo strives hard to keep 
 
 Below is an example with static, local data. When you select an item in the grid, two input fields become available and they are bound to that item's data. Editing the data in the input fields will work as expected — the grid magically updates. But if you click the button (“Update from code”) nothing appears to happen.
 
-###### Example - trying to update data source:
+###### Example - trying to update data source
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -54,7 +54,7 @@ The reason why this happens is because the grid's data source is actually a diff
 
 To fix this issue we need to create and place in scope the data source object ourselves. Only the controller changes, the markup is the same:
 
-#### Use `kendo.data.ObservableArray` to Update the Data Source
+#### Use `kendo.data.ObservableArray` to update the data source
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">

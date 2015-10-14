@@ -34,13 +34,13 @@ Here is how to configure a simple Kendo ColorPicker:
                   .Value("#ff0000") // Set the value of the colorpicker
             )
 
-## Accessing an Existing ColorPicker
+## Access an Existing ColorPicker
 
 You can reference an existing ColorPicker instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
 Once a reference has been established, you can use the [API](/api/web/colorpicker#methods) to control its behavior.
 
 
-### Accessing an existing ColorPicker instance
+### Access an Existing ColorPicker Instance
 
     //Put this after your Kendo ColorPicker for ASP.NET MVC declaration
     <script>
@@ -51,11 +51,11 @@ Once a reference has been established, you can use the [API](/api/web/colorpicke
     </script>
 
 
-## Handling Kendo UI ColorPicker events
+## Handle ColorPicker Events
 
 You can subscribe to all [events](/api/web/colorpicker#events) exposed by Kendo UI ColorPicker:
 
-### WebForms - subscribe by handler name
+### WebForms - Subscribe by Handler Name
 
     <%: Html.Kendo().ColorPicker()
             .Name("colorpicker")
@@ -85,7 +85,7 @@ You can subscribe to all [events](/api/web/colorpicker#events) exposed by Kendo 
     </script>
 
 
-### Razor - subscribe by handler name
+### Razor - Subscribe by Handler Name
 
     @(Html.Kendo().ColorPicker()
           .Name("colorpicker")
@@ -115,7 +115,7 @@ You can subscribe to all [events](/api/web/colorpicker#events) exposed by Kendo 
     </script>
 
 
-### Razor - subscribe by template delegate
+### Razor - Subscribe by Template Delegate
 
     @(Html.Kendo().ColorPicker()
           .Name("colorpicker")

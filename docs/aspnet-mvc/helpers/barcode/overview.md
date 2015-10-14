@@ -50,13 +50,13 @@ Here is how to configure a simple Kendo Barcode:
             )
 
 
-## Accessing an Existing Barcode
+## Access an Existing Barcode
 
 You can reference an existing Barcode instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
 Once a reference has been established, you can use the [API](/api/web/barcode#methods) to control its behavior.
 
 
-### Accessing an existing Barcode instance
+### Access an Existing Barcode Instance
 
     //Put this after your Kendo Barcode for ASP.NET MVC declaration
     <script>

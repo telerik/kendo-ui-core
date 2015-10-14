@@ -62,12 +62,12 @@ Here is how to configure the Kendo Chart for server binding to the list of Inter
                   )
             )
 
-## Accessing an Existing Chart
+## Access an Existing Chart
 
 You can reference an existing chart instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
 Once a reference has been established, you can use the [API](/api/dataviz/chart#methods) to control its behavior.
 
-### Accessing an existing Chart instance
+### Access an Existing Chart Instance
 
     // Put this after your Kendo Chart for ASP.NET MVC declaration
     <script>
@@ -77,12 +77,12 @@ Once a reference has been established, you can use the [API](/api/dataviz/chart#
         });
     </script>
 
-## Handling Kendo UI Chart events
+## Handle Chart Events
 
 You can subscribe to all [events](/api/dataviz/chart#events) exposed by Kendo UI Chart:
 
 
-### WebForms - subscribe by handler name
+### WebForms - Subscribe by Handler Name
 
     <%: Html.Kendo().Chart(Model)
             .Name("internetUsersChart")
@@ -103,7 +103,7 @@ You can subscribe to all [events](/api/dataviz/chart#events) exposed by Kendo UI
     </script>
 
 
-### Razor - subscribe by handler name
+### Razor - Subscribe by Handler Name
 
     @(Html.Kendo().Chart(Model)
           .Name("internetUsersChart")
@@ -124,7 +124,7 @@ You can subscribe to all [events](/api/dataviz/chart#events) exposed by Kendo UI
     </script>
 
 
-### Razor - subscribe by template delegate
+### Razor - Subscribe by Template Delegate
 
     @(Html.Kendo().Chart(Model)
           .Name("internetUsersChart")

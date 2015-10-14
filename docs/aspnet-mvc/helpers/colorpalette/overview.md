@@ -34,13 +34,13 @@ Here is how to configure a simple Kendo ColorPalette:
                   .Value("#ff0000") //Set the value of the colorpalette
             )
 
-## Accessing an Existing ColorPalette
+## Access an Existing ColorPalette
 
 You can reference an existing ColorPalette instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
 Once a reference has been established, you can use the [API](/api/web/colorpalette#methods) to control its behavior.
 
 
-### Accessing an existing ColorPalette instance
+### Access an Existing ColorPalette Instance
 
     //Put this after your Kendo ColorPalette for ASP.NET MVC declaration
     <script>
@@ -51,11 +51,11 @@ Once a reference has been established, you can use the [API](/api/web/colorpalet
     </script>
 
 
-## Handling Kendo UI ColorPalette events
+## Handle ColorPalette Events
 
 You can subscribe to all [events](/api/web/colorpalette#events) exposed by Kendo UI ColorPalette:
 
-### WebForms - subscribe by handler name
+### WebForms - Subscribe by Handler Name
 
     <%: Html.Kendo().ColorPalette()
             .Name("colorpalette")
@@ -70,7 +70,7 @@ You can subscribe to all [events](/api/web/colorpalette#events) exposed by Kendo
     </script>
 
 
-### Razor - subscribe by handler name
+### Razor - Subscribe by Handler Name
 
     @(Html.Kendo().ColorPalette()
           .Name("colorpalette")
@@ -85,7 +85,7 @@ You can subscribe to all [events](/api/web/colorpalette#events) exposed by Kendo
     </script>
 
 
-### Razor - subscribe by template delegate
+### Razor - Subscribe by Template Delegate
 
     @(Html.Kendo().ColorPalette()
           .Name("colorpalette")

@@ -1,10 +1,10 @@
 ---
-title: Create masking functionality for the Date Picker widget
+title: Create a Masked DatePicker
 page_title: Create masking functionality for the Date Picker widget
 description: Create masking functionality for the Date Picker widget
 ---
 
-# Kendo UI Masked DatePicker
+# Create a Masked DatePicker
 
 The following example demonstrates how to add a mask to the Kendo UI DatePicker via a custom Kendo UI widget.
 

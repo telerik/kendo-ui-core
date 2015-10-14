@@ -38,14 +38,14 @@ Here is how to configure a simple Kendo Calendar:
                 .Value(DateTime.Now) //Set the value of the calendar
             )
 
-## Accessing an Existing Calendar
+## Access an Existing Calendar
 
 You can reference an existing Calendar instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
 Once a reference has been established, you can use the [API](/api/web/calendar#methods) to control its behavior.
 
 
 
-### Accessing an existing Calendar instance
+### Access an Existing Calendar Instance
 
     //Put this after your Kendo Calendar for ASP.NET MVC declaration
     <script>
@@ -56,13 +56,13 @@ Once a reference has been established, you can use the [API](/api/web/calendar#m
     </script>
 
 
-## Handling Kendo UI Calendar events
+## Handle Calendar Events
 
 You can subscribe to all [events](/api/web/calendar#events) exposed by Kendo UI Calendar:
 
 
 
-### WebForms - subscribe by handler name
+### WebForms - Subscribe by Handler Name
 
     <%: Html.Kendo().Calendar()
         .Name("calendar")
@@ -82,7 +82,7 @@ You can subscribe to all [events](/api/web/calendar#events) exposed by Kendo UI 
     </script>
 
 
-### Razor - subscribe by handler name
+### Razor - Subscribe by Handler Name
 
     @(Html.Kendo().Calendar()
       .Name("calendar")
@@ -102,7 +102,7 @@ You can subscribe to all [events](/api/web/calendar#events) exposed by Kendo UI 
     </script>
 
 
-### Razor - subscribe by template delegate
+### Razor - Subscribe by Template Delegate
 
     @(Html.Kendo().Calendar()
       .Name("calendar")

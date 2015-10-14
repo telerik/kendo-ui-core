@@ -12,6 +12,7 @@ position: 5
 
 The Kendo UI library is based on [jQuery](http://jquery.com/). All Kendo UI bundles include the corresponding minified jQuery library in the `js` directory.
 
+> **Important**  
 > In order for the Kendo UI scripts to work as expected, make sure you include a reference to the jQuery library in the document before the scripts.
 
 ### Supported jQuery Versions
@@ -35,7 +36,7 @@ The following list provides jQuery compatibility information about the major Ken
 | [Kendo UI 2012.1.322 (Q1 2012)](/install/changes-and-backward-compatibility)	|1.7.1| - |
 | [Kendo UI 2011.3.1129 (Q3 2011)](/install/changes-and-backward-compatibility)	|1.7.1| - |
 
-### What to Do When a Previous jQuery Version Is Required
+### What to Do If a Previous jQuery Version Is Required
 
 Occasionally, a legacy web application might require an older jQuery version with which Kendo UI components are not compatible. In these cases you can use a recent jQuery version together with [jQuery Migrate](https://github.com/jquery/jquery-migrate/). The plug-in will restore the jQuery features that have been depreciated and will provide for the required backward compatibility.
 
@@ -43,6 +44,7 @@ Occasionally, a legacy web application might require an older jQuery version wit
 
 From Q2 2014 release onward, Kendo UI widgets support [AngularJS](http://angularjs.org/) integration. To activate the AngularJS directives, you need to install the AngularJS library. Just like jQuery, its minified format is located is in the `js` directory of the Kendo UI bundle you have downloaded.
 
+> **Important**  
 > Unlike jQuery, Kendo UI distributions do not need AngularJS in order to function correctly.
 
 ### Supported AngularJS Versions
