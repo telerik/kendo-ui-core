@@ -35,7 +35,31 @@ As previously mentioned, Kendo UI Templates use "`with`" blocking by default. Th
 
 By setting `useWithBlock` to `false`, Kendo UI templates will run at maximum speed. Use this option if you are looking for ways to make your apps run faster, especially on mobile devices.
 
-You can try a live demo of Kendo UI Templates with "`with`" blocking disabled using [this jsPerf example](http://jsfiddle.net/kfEfw/2/).
+You can try a live demo of Kendo UI Templates with `with` blocking disabled. 
+
+###### Example
+
+```html
+<div id="results">
+</div>
+
+<script>
+window.sharedVariables = {
+   header: "Header",
+   header2: "Header2",
+   header3: "Header3",
+   header4: "Header4",
+   header5: "Header5",
+   header6: "Header6",
+   list: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+  };
+
+window.kendouiTemplate = kendo.template("<div><h1 class='header'><#= data.header #></h1><h2 class='header2'><#= data.header2 #></h2><h3 class='header3'><#= data.header3 #></h3><h4 class='header4'><#= data.header4 #></h4><h5 class='header5'><#= data.header5 #></h5><h6 class='header6'><#= data.header6 #></h6><ul class='list'><# for (var i = 0, l = data.list.length; i < l; i++) { #><li class='item'><#= data.list[i] #></li><# } #></ul></div>", {useWithBlock:false});
+
+$("#results").html(window.kendouiTemplate(sharedVariables));
+</script>
+
+```
 
 ### Impact of disabling "with" block on template syntax
 JavaScript's `with` keyword is used to extend the scope chain for a statement. Anything inside of a `with` block will use the context defined by `with`, thus saving repetitive scope code. It is generally considered to be a feature of JavaScript that should be avoided.
@@ -64,7 +88,39 @@ By default, you might create a Kendo UI template like this:
 		    </div>
 		</script>
 
-Notice how we're able to use the names of the properties of my `data` object directly (header, header2, list). You can [try this example using jsFiddle here](http://jsfiddle.net/zMRXy/1/).
+Notice how we're able to use the names of the properties of my `data` object directly (header, header2, list). 
+
+###### Example
+
+```html
+<div id="results">
+</div>
+
+<script type="text/x-kendo-template" id="temp">
+    <div>
+        <h1 class='header'>#= header #</h1>
+        <h2 class='header2'>#= header2 #</h2>
+        <ul>
+            # for(var i = 0, l = list.length; i < l; i++){#
+            <li class='item'>#= list[i] #</li>
+            #}#
+        </ul>
+    </div>
+</script>
+
+<script>
+window.sharedVariables = {
+   header: "Header",
+   header2: "Header2",
+   list: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+  };
+
+window.kendouiTemplate = kendo.template($("#temp").html(), {useWithBlock:true});
+
+$("#results").html(window.kendouiTemplate(sharedVariables));
+</script>
+
+```
 
 Now, let's disable "`with`" blocking when we initalize our template in JavaScript:
 
