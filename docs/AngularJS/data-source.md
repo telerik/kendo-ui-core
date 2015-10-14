@@ -4,13 +4,14 @@ title: DataSource vs. Angular scope
 
 {% raw %}
 
-# Kendo DataSource vs. Angular scope
+# Kendo DataSource vs. Angular Scope
 
 Most Kendo UI widgets work with a DataSource object. Kendo strives hard to keep simple cases simple, so you don't always have to create the DataSource object yourself.
 
 Below is an example with static, local data. When you select an item in the grid, two input fields become available and they are bound to that item's data. Editing the data in the input fields will work as expected — the grid magically updates. But if you click the button (“Update from code”) nothing appears to happen.
 
-#### Trying to update data source
+###### Example - trying to update data source:
+
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
     <div kendo-grid
@@ -49,11 +50,11 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 ```
 The reason why this happens is because the grid's data source is actually a different object from $scope.gridData. When the widget initializes it creates a DataSource object as a copy of the original object. Changing the original object has no effect on the grid.
 
-## The fix
+## The Fix
 
 To fix this issue we need to create and place in scope the data source object ourselves. Only the controller changes, the markup is the same:
 
-#### Using kendo.data.ObservableArray to update the data source
+#### Use `kendo.data.ObservableArray` to Update the Data Source
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
