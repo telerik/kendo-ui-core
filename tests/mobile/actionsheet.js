@@ -50,7 +50,7 @@
         actionSheet.bind("close", function() {
             start();
             ok(true);
-        })
+        });
         tap(root.find(".km-shim"));
     });
 

@@ -43,7 +43,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (!options.modal) {
-                that.shim.on("up", "_hide");
+                that.shim.on("down", "_hide");
             }
 
             (app ? app.element : $(document.body)).append(shim);
