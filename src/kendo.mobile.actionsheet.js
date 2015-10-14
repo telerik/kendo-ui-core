@@ -67,8 +67,8 @@ var __meta__ = { // jshint ignore:line
             that.shim = new ShimClass(that.wrapper, $.extend({modal: os.ios && os.majorVersion < 7, className: "km-actionsheet-root"}, that.options.popup) );
 
             that._closeProxy = $.proxy(that, "_close");
-            that._shimHiddenProxy = $.proxy(that, "_shimHidden");
-            that.shim.bind("hide", that._shimHiddenProxy);
+            that._shimHideProxy = $.proxy(that, "_shimHide");
+            that.shim.bind("hide", that._shimHideProxy);
 
             if (tablet) {
                 kendo.onResize(that._closeProxy);
@@ -144,8 +144,12 @@ var __meta__ = { // jshint ignore:line
             this._close();
         },
 
-        _shimHidden: function() {
-            this.context = this.target = null;
+        _shimHide: function(e) {
+            if (!this.trigger(CLOSE)) {
+                this.context = this.target = null;
+            } else {
+                e.preventDefault();
+            }
         },
 
         _close: function(e) {
