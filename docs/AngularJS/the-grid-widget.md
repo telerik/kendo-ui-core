@@ -5,11 +5,11 @@ description: Use Kendo UI Grid with AngularJS
 
 {% raw %}
 
-# The Grid widget in Angular-Kendo
+# The Grid Widget in Angular-Kendo
 
 The Grid is one of Kendo's most complex widgets. On this page we will outline some particularities.
 
-## The `k-on-change` attribute
+## The `k-on-change` Attribute
 
 If you assign a `k-on-change` event handler, it will be evaluated in a scope containing additional local variables:
 
@@ -35,9 +35,10 @@ When the grid is not in multiple selection mode, the `data` above will not be an
 
 When cell selection is allowed, an additional `columns` variable will be present. It is an array containing the indexes of the columns where cells are selected.
 
-The following example allows you to choose the grid's selection mode and then select items in the grid and see what variables are available.
+You can choose the grid's selection mode and then select items in the grid and see what variables are available.
 
-#### Handle the change event in AngularJS
+###### Example - handle the change event in AngularJS:
+
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
   <label>Select mode: <select kendo-dropdownlist ng-model="gridOptions.selectable">
@@ -80,11 +81,11 @@ The following example allows you to choose the grid's selection mode and then se
   });
 </script>
 ```
-## Dynamically set columns
+## Dynamically Set Columns
 
-When you need to, say, load columns definition from the server, you need to postpone the widget initialization until the data is available, because the Grid doesn't support defining columns after the widget is created. For this, the `k-ng-delay` attribute comes in handy. Here is an example (using `$timeout` to emulate networking — the data is set in scope asynchronously):
+When you need to, say, load columns definition from the server, you need to postpone the widget initialization until the data is available, because the Grid doesn't support defining columns after the widget is created. For this, the `k-ng-delay` attribute comes in handy. You can use `$timeout` to emulate networking — the data is set in scope asynchronously.
 
-#### Dynamically set the grid columns in AngularJS
+###### Example - dynamically set the grid columns in AngularJS:
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
   <div kendo-grid k-options="gridOptions" k-ng-delay="gridOptions"></div>
@@ -110,9 +111,9 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 ```
 ## Templates
 
-The Grid supports a lot of user-customizable templates. You can define the `rowTemplate` if you want to completely customize how each row is displayed, or individual cell templates by adding a `template` property in your column definitions. The difference versus plain Kendo is that when the Grid is created with the Angular directive the templates can contain live `\{\{angular\}\}` bits. Both `rowTemplate` and `columns.template` are compiled with Angular in a scope containing a `dataItem` variable which points to the data model of the current item. Here is an example for `rowTemplate`:
+The Grid supports a lot of user-customizable templates. You can define the `rowTemplate` if you want to completely customize how each row is displayed, or individual cell templates by adding a `template` property in your column definitions. The difference versus plain Kendo is that when the Grid is created with the Angular directive the templates can contain live `\{\{angular\}\}` bits. Both `rowTemplate` and `columns.template` are compiled with Angular in a scope containing a `dataItem` variable which points to the data model of the current item.
 
-#### Set the grid row template in AngularJS
+###### Example - set the grid row template in AngularJS (`rowTemplate`):
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
   <div kendo-grid k-options="gridOptions" k-ng-delay="gridOptions"></div>
@@ -146,11 +147,12 @@ In the above example if you select an item it will display two input fields boun
 
 The one thing you must be careful about when using `rowTemplate` is to include the attribute `data-uid="#: uid #"` on the toplevel row element, as described in the Grid documentation. That cannot use an Angular template like `data-uid="{{dataItem.uid}}"`, because that is compiled after the grid was displayed and the widget will not be able to tell which row belongs to which data item.
 
-## How to bind the Grid using the $http service
+## Use the `$http` Service to Bind the Grid
 
 In order to take full control on the logic that performs the request to the server all you have to do is to define the different transport operations as functions. Inside the function you can use the $http or the $.ajax methods to perform the needed. When done (inside the success callback) you just need to pass the result to the `success` function part of the events arguments object.
 
-#### Use $http to bind the grid
+###### Example - use `$http` to bind the Grid:
+
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
     <div kendo-grid k-options="gridOptions"></div>

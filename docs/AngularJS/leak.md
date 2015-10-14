@@ -8,7 +8,7 @@ page_title: Memory Usage Leaks with Kendo UI and AngularJS
 Under certain conditions, several Kendo UI users have discovered that the browser memory usage continuously increases when data-bound widgets (like the Grid) are created and destroyed in the AngularJS context.
 Usually this occurs in conjunction with the AngularJS routing.
 
-## The "right way" to look for memory leaks
+## The "right way" to Look for Memory Leaks
 
 Such reports are not unique to the Kendo UI directives.
 The [Angular JS repository](https://github.com/angular/angular.js) features several threads which dig into various aspects of the problem, [Issue #4864](https://github.com/angular/angular.js/issues/4864) being one of the most prominent ones.
@@ -18,7 +18,7 @@ The [post from Igor Minar](https://github.com/angular/angular.js/issues/4864#iss
 - Triggering the garbage collect will cause many "leaked" detached DOM nodes to be collected. If this is not so, then there is a real problem present.
 - According to Igor, the Chrome browser should be started with `--js-flags="--nocrankshaft --noopt"`. We did not notice any effect of these flags in our test cases, though.
 
-## Create a simple test case
+## Create a Simple Test Case
 
 In order to verify that our implementation does not differ from the default AngularJS behavior, we created a simplified test case which uses the `ng-repeat` directive and the router:
 
@@ -82,7 +82,7 @@ The DOM count increases as the routes toggle with each other. This looks like a 
 
 The seemingly retained detached nodes are getting collected by the garbage collector.
 
-## Extend the test to Kendo UI Grid
+## Extend the Test to Kendo UI Grid
 
 Let's replace the repeat directive above with a Kendo UI Grid.
 

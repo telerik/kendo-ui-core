@@ -5,7 +5,7 @@ title: ng-repeat, ng-if and ng-bind integration
 {% raw %}
 
 
-# `ng-repeat`, `ng-if` and `ng-bind` support
+# `ng-repeat`, `ng-if` and `ng-bind` Support
 
 Prior to the Q2 2015 release, the Kendo UI widgets which were instantiated over existing markup **partially supported `ng-repeat`** and other DOM manipulation directives in the markup. Subsequent changes to the markup caused by those directives were not handled correctly, though.
 
@@ -158,7 +158,7 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
     </script>
 ```
 
-## k-ng-delay workaround
+## `k-ng-delay` Workaround
 
 If generating content with the data-source is not desired, a possible workaround of the behavior may be implemented using the `k-ng-delay` configuration option.
 
