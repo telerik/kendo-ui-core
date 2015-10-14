@@ -14,7 +14,7 @@ Kendo UI maintains 2 bower packages, namely Kendo UI Core and Kendo UI Professio
 
 > Kendo UI Professional bower package is available for licensed user accounts only. Check out the [list of Kendo UI components and their bundle support](/intro/supporting/list-of-widgets).
 
-#### Option 1: Install Kendo UI Core Bower Package
+## Option 1: Install Kendo UI Core Bower Package
 
 The Kendo UI Core Bower package is available as a [public GitHub repository](https://github.com/kendo-labs/bower-kendo-ui) and is also registered as `kendo-ui-core` in the bower registry:
 
@@ -22,7 +22,7 @@ The Kendo UI Core Bower package is available as a [public GitHub repository](htt
 bower install kendo-ui-core
 ```
 
-#### Option 2: Install Kendo UI Professional Bower Package
+## Option 2: Install Kendo UI Professional Bower Package
 
 The Kendo UI Professional Bower Package is hosted as a [private GitHub repository](https://bower.telerik.com). To access it, you need an active account for Telerik Platform. Bower will prompt for your username and password during the installation and update processes:
 
@@ -40,13 +40,13 @@ You can also add the package to the `bower.json` file:
 
 > During the installation of the Bower package, you may be requested to confirm your credentials more than once. For further information, refer to the Storing Repository Credentials section below.
 
-#### Storing Your Repository Credentials
+### Store Your Repository Credentials
 
 **Option 1:** In order to avoid retyping your credentials, you may cache them. The easiest way to do that is to store them as plain text in a [.netrc file](http://www.mavetju.org/unix/netrc.php).
 
 **Option 2:** A secure alternative to do the same is to use the GitHub credential helpers. Refer to [Stack Overflow](http://stackoverflow.com/questions/5343068/is-there-a-way-to-skip-password-typing-when-using-https-github) to follow the discussion on the topic.
 
-##### Store Your Credentials on Windows
+### Store Your Credentials on Windows
 
 > Caching your credentials is required if you use the Kendo UI Bower Package in an ASP.NET vNext project.
 
@@ -61,7 +61,7 @@ C:\> SETX HOME %USERPROFILE%
 
 GitHub might have problems resolving your home directory if it contains spaces in its path (e.g. `c:\Documents and Settings\jane`). Therefore, update your `%HOME%` environment variable to point to a directory having no spaces in its name.
 
-##### Store Your Credentials on Linux, OS X and Unix-Like Systems
+### Store Your Credentials on Linux, OS X and Unix-Like Systems
 
 **Step 1:** Create a file called `.netrc` in your home directory (`~/.netrc`). Make sure you modify the file permissions to make it readable only to you.
 
@@ -78,7 +78,7 @@ machine bower.telerik.com
     password mysecret
 ```
 
-##### Troubleshooting
+## Troubleshooting
 
 **Issue 1:** Bower on Windows has troubles installing the repository showing the error message
 
