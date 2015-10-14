@@ -60,41 +60,34 @@ code, em {
 }
 
 #page-edit-link {
-    transition: top .2s;
+    transition: width .2s linear .3s;
     position: absolute;
     z-index: 10;
-    right: 6em;
-    top: -30px;
-    width: 120px;
-    height: 20px;
+    right: 36px;
+    top: 70px;
+    width: 26px;
+    height: 17px;
     margin: 0;
-    padding: 10px 0;
+    padding: 9px 10px 10px 0;
     text-decoration: none;
     text-align: center;
     border-radius: 0;
-    background-color: #ddd;
-    color: #444;
-    
-    animation: editbutton 2s linear;
-    -webkit-animation: editbutton 2s linear;
+    background-color: #fff;
+    color: #787878;
+    white-space: nowrap;
+    overflow: hidden;
+    border: 1px solid #e8ebef;
+    border-radius: 20px;
+}
+
+#page-edit-link span {
+    padding: 0 8px 0 10px;
 }
 
 #page-edit-link:hover {
-    transition: top .2s linear .2s;
-    top: -0px;
-}
-
-
-@-webkit-keyframes editbutton {
-    0% {top: -0px;}
-    75% {top: -0px;}
-    100% {top: -30px;}
-}
-
-@keyframes editbutton {
-    0% {top: -0px;}
-    75% {top: -0px;}
-    100% {top: -30px;}
+    transition: width .2s linear .3s;
+    width: 130px;
+    color: #000;
 }
 
 #logo-bar {
