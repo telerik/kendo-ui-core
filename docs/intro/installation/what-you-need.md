@@ -8,7 +8,7 @@ position: 4
 
 # Include Only What You Need
 
-### Pick the Right Combined Script Based on Your Project Type
+## Pick the Right Combined Script Based on Your Project Type
 
 The following combined scripts are available in the bundles or at the CDN in order to facilitate the common project types:
 
@@ -27,13 +27,13 @@ In addition, each of the combined script files should not be registered together
 
 > Registering duplicate scripts may cause JavaScript errors and unexpected behavior.
 
-### Build a Custom Combined Script with the Kendo UI Download Builder
+## Build a Custom Combined Script with the Kendo UI Download Builder
 
 Users with a commercial license may use the [custom download builder tool](http://www.telerik.com/download/custom-download) to create a single JavaScript file which contains only the required widgets and features.
 
 > Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
 
-### Use Grunt to Build a Custom Script
+## Use Grunt to Build a Custom Script
 
 If you use the Kendo UI Core package, you can build a custom distribution using the `grunt` build tool by following the instructions in [README](https://github.com/telerik/kendo-ui-core#building-only-what-you-need).
 
@@ -52,7 +52,7 @@ List the components you want to be included in the custom build and separated th
 The grunt build task automatically resolves the needed dependencies for each component, so you don't have to list them.
 Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
 
-### Include Individual Widget Scripts
+## Include Individual Widget Scripts
 
 Below are the references to the script files which, whether minified or not, can be included on a per-widget basis depending on the flavor you want to add to your project. 
 

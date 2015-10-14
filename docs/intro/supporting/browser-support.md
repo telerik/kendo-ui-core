@@ -8,11 +8,11 @@ position: 1
 
 # Web Browser and Operating System Support
 
-### Web Browser Support
+## Web Browser Support
 
 Kendo UI components are designed to support all major browsers and to operate without the worries of cross-browser compatibility, standards compliance or touch-device support. However, depending on the specifics of your project and the components you prefer to use, the browser support provided by Kendo UI widgets may vary between the versions.
 
-#### Web Browser Support General
+### Web Browser Support General
 
 Most [Kendo UI widgets](/intro/supporting/list-of-widgets) have no limitations as of the browser versions they support.
 
@@ -24,7 +24,7 @@ Most [Kendo UI widgets](/intro/supporting/list-of-widgets) have no limitations a
 | Opera             | 15 or later                   |
 | OS X Safari       | [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
 
-#### Web Browser Support for Hybrid UI
+### Web Browser Support for Hybrid UI
 
 The [hybrid UI widgets and frameworks](/intro/supporting/list-of-widgets) are intended for Cordova based deployments, and support the following mobile device browsers and their corresponding web view components:
 
@@ -36,11 +36,11 @@ The [hybrid UI widgets and frameworks](/intro/supporting/list-of-widgets) are in
 | Opera             | 15 or later                   |
 | OS X Safari       | [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
 
-#### Web Browser Support for Data Visualization Widgets
+### Web Browser Support for Data Visualization Widgets
 
 [Kendo UI widgets rendering data visualization](/intro/supporting/list-of-widgets) may require more recent browser versions as well. If you want to use them in your project, consider the information below.
 
-##### Fully Supported Browsers
+#### Fully Supported Browsers
 
 | Browser           | Supported Versions            |
 | :---------------- | :---------------------------- |
@@ -52,7 +52,7 @@ The [hybrid UI widgets and frameworks](/intro/supporting/list-of-widgets) are in
 | iOS Safari        | iOS 8 or later                |
 | Chrome for Mobile | 21 or later                   |
 
-##### Browsers with Limited Support
+#### Browsers with Limited Support
 
 | Browser           | Supported Versions            | Limitations                               |
 | :---------------- | :---------------------------- | :-----------                              |
@@ -63,7 +63,7 @@ The [hybrid UI widgets and frameworks](/intro/supporting/list-of-widgets) are in
 |                   |                               | Android 2.x, therefore, uses non-interactive canvas output |
 |Android            | 2.3                           | The Canvas rendering mode is only supported
 
-#### Important Notes
+### Important Notes
 
 * As of Kendo UI 2015 Q3 release Internet Explorer 7 is no longer supported.
 
@@ -93,7 +93,7 @@ The [hybrid UI widgets and frameworks](/intro/supporting/list-of-widgets) are in
 </script>
 ```
 
-### Operating System Support
+## Operating System Support
 
 | Platform          | Version               |
 | :---------------- | :-------------------- |
@@ -106,16 +106,15 @@ The [hybrid UI widgets and frameworks](/intro/supporting/list-of-widgets) are in
 | Windows Phone     | 8.0 or later          |
 | Chrome for Mobile | Any version           |
 
-#### Important Notes
+### Important Notes
 
 * Hybrid mouse and touch-screen devices are supported; for example, Internet Explorer 10, Chrome and Firefox on Windows 8
 * JavaScript should be enabled on all browsers so that they can be allowed to run scripts
 
-### Best Performance
+## Best Performance
 
 To ensure the best performance of your project, make sure that you:
 
  * Always use an up-to-date browser version
  * Check **Disable Script Debugging** from your browser configuration options
  * Activate Caching in Internet Explorer
-

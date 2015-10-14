@@ -23,7 +23,7 @@ this is not recommended and is not supported with declarative initialization fro
 > It is strongly recommended to initialize Kendo UI widgets from HTML elements, which are part of the DOM tree.
 Creating widgets from [document fragments](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) may cause undesired side effects or Javascript errors.
 
-### Declarative Widgets in SPA View
+## Declarative Widgets in SPA View
 
 Below is an example referring to a SPA View with an AutoComplete widget in the template. More information about the SPA View may be found in the [Buliding Single Page Applications help section](/framework/spa/overview).
 
@@ -39,7 +39,7 @@ Below is an example referring to a SPA View with an AutoComplete widget in the t
     </script>
 ```
 
-### Declarative Widgets with `kendo.bind`
+## Declarative Widgets with `kendo.bind`
 
 Here is an example referring to an MVVM-bound DOM element with an AutoComplete widget: 
 
@@ -57,7 +57,7 @@ Here is an example referring to an MVVM-bound DOM element with an AutoComplete w
 
 > The `data-bind` attribute syntax establishes a two-way binding between the widget options (in that case, the data source) and the view model field (the `source`). For more information, refer to the [MVVM introduction help topic](/framework/mvvm/overview).
 
-### Declarative Widgets in a Hybrid UI Application
+## Declarative Widgets in a Hybrid UI Application
 
 Below is an example referring to Kendo Hybrid UI application with a view and an AutoComplete widget. More information about Hybrid UI applications is available in the [Building Hybrid Mobile Applications topic](/framework/spa/overview).
 
@@ -83,11 +83,11 @@ Below is an example referring to Kendo Hybrid UI application with a view and an 
     </script>
 ```
 
-### Widget Configuration Options and Event Handlers as Data Attributes
+## Widget Configuration Options and Event Handlers as Data Attributes
 
 In addition to the `data-role` attribute, the declarative initialization parses other data attributes and passes them as configuration options to the widget constructor. You can find out more about the supported data attributes and how to bind them to widget events in the [data attributes explained](/framework/data-attribute-initialization) section.
 
-### Kendo UI AngularJS Directives
+## Kendo UI AngularJS Directives
 
 Below is an example referring to the Kendo UI AngularJS AutoComplete directive. To learn more about the features of the Kendo UI AngularJS directives, visit the [AngularJS](/AngularJS/introduction) help topic.
 
