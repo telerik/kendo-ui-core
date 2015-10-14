@@ -1,5 +1,9 @@
 function expandNavigation(url) {
-    return function() {
+    return function expand(e) {
+        if (e.node) {
+            return;
+        }
+
         var segments = url.split("/");
         var page = segments[segments.length - 1];
         var treeview = this;
@@ -13,16 +17,100 @@ function expandNavigation(url) {
             dataSource = node.children;
         }
 
-        node.set("selected", true);
-
         var li = this.element.find("li[data-uid='" + node.uid + "']");
 
-        $("#page-nav").scrollTop(li.offset().top - this.element.offset().top - $("#page-nav").outerHeight() / 2);
+        scrollNodeIntoView(li);
 
-        this.unbind("dataBound", arguments.callee);
+        this.select(li);
+
+
+        if (location.pathname.indexOf("/api/") < 0) {
+            li.addClass("current-topic");
+            
+            $("h2").each(function() {
+                var hash = $(this).find("a").attr("href");
+                
+                $(".current-topic>ul>li:first-child>div>span.k-in").addClass("k-state-selected");
+                
+                var state = $(".k-state-selected");
+                if (state.length > 1) {
+                  $(".k-state-selected").first().removeClass("k-state-selected");
+                }
+                var h2Node = treeview.append({ path: hash, text: kendo.htmlEncode($(this).text()) }, li);
+                
+
+                if (location.hash.replace("#", "") === hash.replace("#", "")) {
+                    selectNode(hash);
+                }
+                
+                
+
+                $(this).nextUntil("h2", "h3").each(function() {
+                    var hash = $(this).find("a").attr("href");
+                    treeview.append({ path: hash, text: kendo.htmlEncode($(this).text()) }, h2Node);
+
+                    if (location.hash.replace("#", "") === hash.replace("#", "")) {
+                        selectNode(hash);
+                        $("h1").css("font-weight", "bold");
+                    }
+                });
+
+            });
+            
+            
+        }
+        
+
+        this.unbind("dataBound", expand);
     }
 }
 
+$(window).on("hashchange", function() {
+    selectNode(location.hash, false);
+});
+
+function selectNode(hash, scroll) {
+    var li = $("#page-tree li:has(>div>span>a[href='" + hash + "'])");
+
+    if (li.length) {
+        var treeview = $("#page-tree").data("kendoTreeView");
+        var topicNode = li.closest(".current-topic");
+
+        treeview.select(li);
+
+        topicNode.find("li").removeClass("path");
+
+        li.parentsUntil(topicNode).addClass("path");
+
+        scrollNodeIntoView(li);
+    }
+}
+
+function scrollNodeIntoView(li) {
+    var top = li.offset().top;
+
+    if (top - $("#page-nav").offset().top < 0 || top > $("#page-nav").outerHeight()) {
+        $("#page-nav").scrollTop(top - $("#page-tree").offset().top - $("#page-nav").outerHeight() / 2);
+    }
+}
+
+if (location.pathname.indexOf("/api/") < 0) {
+    $(function() {
+        var headings = $("h2,h3");
+
+        $("#page-article").on("scroll", function(e) {
+            var pageArticle = this;
+
+            var current = headings.filter(function() {
+                return $(this).offset().top + this.offsetHeight > 0;
+            }).first();
+
+            if (current.length) {
+                selectNode(current.find("a").attr("href"), true);
+            }
+        });
+    });
+}
 
 function navigationTemplate(root) {
     return function(data) {
@@ -39,16 +127,21 @@ function navigationTemplate(root) {
             url = url.replace(".html", "");
         }
 
-        while (item = item.parentNode()) {
-            url = item.path + "/" + url;
+        if (url.indexOf("#") < 0) {
+            while (item = item.parentNode()) {
+                url = item.path + "/" + url;
+            }
+            return '<a href="' + root + url + '">' + text + "</a>";
+        } else {
+            return '<a href="' + url + '">' + text + "</a>";
         }
-
-        return '<a href="' + root + url + '">' + text + "</a>";
     }
 }
 
 function preventParentSelection(e) {
-    if (this.dataItem(e.node).hasChildren) {
+    var node = this.dataItem(e.node);
+
+    if (node.path.indexOf("#") < 0 && node.hasChildren) {
         e.preventDefault();
         this.toggle(e.node);
     }
@@ -193,16 +286,18 @@ var dojoApi = (function($) {
         },
 
         addButtons: function(element) {
-            if (!$(element).prev().is(".btn-run")) {
-                $('<button class="btn btn-action btn-edit" title="Edit example">Edit</button>').insertBefore(element);
-                $('<a href="http://dojo.telerik.com" class="dojo" title="Open example in Kendo UI Dojo">Open In Dojo</a>').insertBefore(element);
-                $('<button class="btn btn-action btn-run" title="Run example">Run</button>').insertBefore(element);
+            if (!$(element).parent().prev().is(".action-buttons")) {
+                $('<div class="action-buttons">'+
+                 '<button class="btn btn-edit" title="Edit example">Edit</button>'+
+                 '<button class="btn btn-run" title="Run example">Preview</button>'+
+                 '<a href="http://dojo.telerik.com" class="btn btn-dojo" title="Open example in Kendo UI Dojo">Open In Dojo</a>'+
+                 '</div>').insertBefore(element);
             }
         },
         editSnippet: function(element) {
             reset();
 
-            var pre = $(element).nextAll("pre:first");
+            var pre = $(element).parent().nextAll("pre:first");
 
             if (isCodeMirrorCurrent(pre)) {
                 showCodeMirror();
@@ -212,11 +307,14 @@ var dojoApi = (function($) {
             }
 
             pre.hide();
+            
+            $(element).addClass("active-button");
+            $(element).next().removeClass("active-button");
         },
         runSnippet: function(element) {
             reset();
 
-            var pre = $(element).nextAll("pre:first");
+            var pre = $(element).parent().nextAll("pre:first");
 
             var iframe = $('<iframe class="snippet-runner">').attr("src", '/kendo-ui/runner.html');
 
@@ -248,12 +346,15 @@ var dojoApi = (function($) {
             contents[0].open();
             contents[0].write(html);
             contents[0].close();
+            
+            $(element).addClass("active-button");
+            $(element).prev().removeClass("active-button");
         },
 
         openSnippet: function(element) {
             var snippet = null;
 
-            var pre = $(element).nextAll("pre:first");
+            var pre = $(element).parent().nextAll("pre:first");
 
             if (isCodeMirrorCurrent(pre)) {
                 snippet = codemirror.getValue();
@@ -342,6 +443,8 @@ var dojoApi = (function($) {
     function reset() {
         $("pre.prettyprint").show();
         $(".snippet-runner").remove();
+        $(".btn-edit").removeClass("active-button");
+        $(".btn-run").removeClass("active-button");
     }
 
     return dojoApi;
@@ -378,7 +481,7 @@ $(function(){
         dojoApi.runSnippet(this);
     });
 
-    $("body").on("click", ".dojo", function(e) {
+    $("body").on("click", ".btn-dojo", function(e) {
         e.preventDefault();
 
         dojoApi.openSnippet(this);
