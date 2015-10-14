@@ -14,7 +14,7 @@ The first steps are to include the Kendo UI JavaScript and CSS files. Those step
 The next thing a Kendo UI Scheduler needs is a data source to be bound to. The scheduler uses a special type of Kendo UI DataSource - the [kendo.data.SchedulerDataSource](/api/framework/schedulerdatasource).
 The `SchedulerDataSource` contains instances of a custom Kendo UI model - [kendo.data.SchedulerEvent](/api/framework/schedulerevent) - which represent the scheduler event data items.
 
-> It is **required** to define all fields from the [kendo.data.SchedulerEvent](/api/framework/schedulerevent) in the dataSource ["schema.model"](/api/framework/datasource#configuration-schema.model) option in order to **enable editing of the events** and working with **recurring events**
+> It is **required** to define all fields from the [kendo.data.SchedulerEvent](/api/framework/schedulerevent) in the dataSource [schema.model](/api/framework/datasource#configuration-schema.model) option in order to **enable editing of the events** and working with **recurring events** 
 
 ## Binding to local JavaScript array
 
@@ -116,7 +116,7 @@ When binding to a remote service the following are recommended (but not mandator
 
 1. Set the [timezone](/api/web/scheduler#configuration-timezone) option of the scheduler. It is used to tell the scheduler in what timezone the scheduler events are created and stored on the server. If the timezone is not
 set the scheduler will use the current timezone. This means that users with different timezone settings will see different start and end times. Setting the timezone of the scheduler would make it display the same
-start and end times regardless of the current user timezone.
+start and end times regardless of the current user timezone. For **additional information about timezones** and how the scheduler works with them you can check the [timezones](/web/scheduler/timezones) **help topic**.
 1. Send the scheduler event date fields (start and end) in [UTC](http://en.wikipedia.org/wiki/Coordinated_Universal_Time) to the remote service. The `parameterMap` option from the previous example does the same:
 
         parameterMap: function(options, operation) {
