@@ -139,7 +139,7 @@ This will also happen if only the client template is set but the grid is configu
 
 ## The "X" DataSource configuration option is not available
 
-Not all settings of the DataSource are exposed via the `DataSource` fluent API. For full control over the DataSource consider using the client-side version of Kendo UI Grid.
+Not all settings of the DataSource are exposed via the `DataSource` fluent API. For full control over the DataSource consider using the [CustomDataSource](/aspnet-mvc/custom-datasource) fluent API or the client-side version of Kendo UI Grid.
 
 ## Client-side events are not raised in server bound mode
 
