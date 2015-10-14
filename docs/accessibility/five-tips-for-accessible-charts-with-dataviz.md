@@ -225,7 +225,7 @@ The result is a simple, accessible table based on the same data as the chart its
 
 For a complete, working sample of this example, see [http://jsbin.com/odowud/15](http://jsbin.com/odowud/15/edit).
 
-### 5. Create an off-Screen Table, or Allow the Table and Chart to be Swapped on-Screen
+### 5. Create an Off-screen Table, or Allow the Table and Chart to be Swapped On-screen
 
 Generating a data table is nice, but you may not want to display the raw data on-screen with the chart for all users. In that case, you have two
 options. You can either: 1) place the table off-screen, invisible to sighted users, but available to screen readers; or, 2) provide all users with the

@@ -7,25 +7,13 @@ description: Kendo UI Grid for ASP.NET MVC Excel Export
 
 Kendo UI Grid can export its data as Excel document since the Q3 2014 (2014.3.1119) version.
 
-- [Enable Excel Export](#enable-excel-export)
-- [What is Exported](#what-is-exported)
-- [How To](#how-to)
-    - [Export All Data](#export-all-data)
-    - [Customize the Excel Document](#customize-the-excel-document)
-    - [Column Templates](#column-templates)
-    - [Column Format](#column-format)
-    - [Detail Template](#detail-template)
-    - [Export Multiple Grids](#export-multiple-grids)
-- [Troubleshooting](#troubleshooting)
-- [Further Reading](#further-reading)
-
 ## Enable Excel Export
 
 To enable Excel export include the corresponding toolbar command and configure the export settings.
 
 * [Online demo](http://demos.telerik.com/aspnet-mvc/grid/excel-export)
 
-#### Example - enable Excel export
+###### Example - enable Excel export
 
 ```Razor
 @(Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
@@ -56,7 +44,7 @@ To enable Excel export include the corresponding toolbar command and configure t
 
 To initiate Excel export via code call the [saveAsExcel](/api/javascript/ui/grid.html#methods-saveAsExcel) method.
 
-> Important: Older browsers (IE9 and below, Safari) require the implementation of a [server proxy](/framework/save-files/introduction#browser-support).
+> Older browsers (IE9 and below, Safari) require the implementation of a [server proxy](/framework/save-files/introduction#browser-support).
 
 ## What is Exported
 
@@ -76,13 +64,13 @@ The `DetailTemplate` option is **not** used during export. Check [Detail Templat
 
 ## How To
 
-### Export all data
+### Export All Data
 
 By default the Kendo UI Grid exports only the current page of data. To export all pages set the `AllPages` option to `true`.
 
 > When the `AllPages` option is set to `true` the grid will make a "read" request for **all** data. In case the data items are too many the browser may become unresponsive. Consider implementing server-side export for such cases.
 
-#### Example - export all data
+###### Example - export all data
 ```Razor
 @(Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
     .Name("grid")
@@ -147,17 +135,17 @@ The [Multiple Grid Export](/aspnet-mvc/helpers/grid/how-to/excel/multiple-grid-e
 
 ## Troubleshooting
 
-### JavaScript error that JSZip is not found
+### JavaScript Error that JSZip Is Not Found
 
 Clicking the "Export to Excel" button or calling the `saveAsExcel` throws an exception if the JSZip JavaScript library isn't found. Including JSZip in the page solves the problem.
 Further info is available in the [Excel Export Introduction](/framework/excel/introduction#requirements)
 
-### Export does not work in Internet Explorer and Safari
+### Export Does Not Work in Internet Explorer and Safari
 
 Internet Explorer versions below 10 and Safari can't save a file and require the implementation of a [server proxy](/framework/save-files/introduction#browser-support).
 Set the `ProxyURL` option to specify the server proxy URL.
 
-#### Example - user server proxy
+###### Example - user server proxy
 
 ```Controller
 public class ProxyController : Controller

@@ -4,11 +4,11 @@ page_title: Link marker to location
 description: Link marker to location.
 ---
 
-# Link a Kendo UI Map Marker to a location on the map.
+# Link a Kendo UI Map Marker to a Location on the Map
 
 The example below demonstrates how to draw a straight line between a marker and a location on a Kendo UI Map.
 
-#### Example:
+###### Example:
 
 ```html
     <div id="map"></div>
