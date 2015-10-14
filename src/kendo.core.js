@@ -1855,10 +1855,16 @@ function pad(number, digits, end) {
     }
 
     function scrollLeft(element, value) {
-        var el = element instanceof $ ? element[0] : element;
-        var isRtl = support.isRtl(element);
         var webkit = support.browser.webkit;
         var mozila = support.browser.mozilla;
+        var el = element instanceof $ ? element[0] : element;
+        var isRtl;
+
+        if (!element) {
+            return;
+        }
+
+        isRtl = support.isRtl(element);
 
         if (value !== undefined) {
             if (isRtl && webkit) {
