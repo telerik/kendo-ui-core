@@ -317,7 +317,7 @@ var __meta__ = { // jshint ignore:line
 
             if (this.options.$angular) {
                 controller = this.element.controller();
-                scope = this.$angular[0];
+                scope = this.options.$angular[0];
 
                 if (controller) {
                     var callback = $.proxy(this, '_callController', controller, scope);
