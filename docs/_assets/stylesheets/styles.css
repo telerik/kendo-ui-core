@@ -24,17 +24,12 @@ a img {
 }
 
 p code, li code {
-    background: rgba(0, 0, 0, 0.04);
+    font-weight: 700;
+    color: #000;
 }
 
 pre code {
     background: transparent;
-}
-
-p code::before,
-p code::after {
-    letter-spacing: -0.2em;
-    content: "\00a0";
 }
 
 header,
@@ -42,6 +37,10 @@ nav,
 section,
 article, aside, footer {
    display:block;
+}
+
+code, em {
+  font-family: "Roboto Mono", "Ubuntu Mono", "Consolas", "Monaco", monospace;
 }
 
 /* Header */
@@ -61,12 +60,41 @@ article, aside, footer {
 }
 
 #page-edit-link {
+    transition: top .2s;
     position: absolute;
     z-index: 10;
-    right: 28px;
-    top: 10px;
+    right: 6em;
+    top: -30px;
+    width: 120px;
+    height: 20px;
     margin: 0;
+    padding: 10px 0;
     text-decoration: none;
+    text-align: center;
+    border-radius: 0;
+    background-color: #ddd;
+    color: #444;
+    
+    animation: editbutton 2s linear;
+    -webkit-animation: editbutton 2s linear;
+}
+
+#page-edit-link:hover {
+    transition: top .2s linear .2s;
+    top: -0px;
+}
+
+
+@-webkit-keyframes editbutton {
+    0% {top: -0px;}
+    75% {top: -0px;}
+    100% {top: -30px;}
+}
+
+@keyframes editbutton {
+    0% {top: -0px;}
+    75% {top: -0px;}
+    100% {top: -30px;}
 }
 
 #logo-bar {
@@ -78,6 +106,11 @@ article, aside, footer {
 
 .nav-buttons {
     float: right;
+    margin-top: .92em;
+}
+
+#page-header a.btn {
+    margin-left: .3em;
 }
 
 /* Topic navigation */
@@ -86,60 +119,19 @@ article, aside, footer {
     position: absolute;
     top: 0;
     left: 0;
-    width: 20%;
+    width: 18%;
     height: 100%;
     overflow: auto;
-    background: #f5f7f8;
-    border-right: 1px solid #ebecee;
+    background: #fefefe;
+    border-right: 1px solid #e8ebef;
     z-index: 1;
     -webkit-overflow-scrolling: touch;
-}
-
-#page-tree {
-    padding: 20px 20px 40px 30px;
-    white-space: normal;
-    word-break: break-word;
-    overflow: hidden;
-}
-
-#page-nav .k-plus { background: url(../images/close.png); }
-#page-nav .k-minus { background: url(../images/open.png); }
-#page-nav .article {
-    background: url(../images/file.png);
-    position: absolute;
-    margin-left: -21px;
-    margin-top: 2px;
-}
-
-#page-nav .k-in {
-    line-height: 20px;
+    -webkit-touch-callout: none;
     -webkit-user-select: none;
+    -khtml-user-select: none;
     -moz-user-select: none;
-    user-select: none;
-    cursor: pointer;
-}
-
-#page-nav .k-in a {
-    margin: -1px -.3333em -1px -.25em;
-    padding: 1px .3333em 1px .25em;
-    display: inline-block;
-}
-
-#page-nav .k-in,
-#page-nav .k-in a {
-    border: 0;
-    color: #000;
-    text-decoration: none;
-    font-size: 13px;
-}
-
-#page-nav .k-state-selected {
-    background-color: #00b312;
-}
-
-#page-nav .k-state-selected,
-#page-nav .k-state-selected a {
-    color: #fff;
+    -ms-user-select: none;
+    user-select: none
 }
 
 /* Table of contents */
@@ -150,7 +142,7 @@ article, aside, footer {
     z-index: 1;
     right: 0;
     font-size: 12px;
-    padding-left: 28px;
+    padding-left: 5.8em;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -167,8 +159,7 @@ article, aside, footer {
     width: 500px;
     overflow: auto;
     background: #fff;
-    border: 1px solid #f5f7f8;
-    box-shadow: 3px 3px 3px #f5f7f8;
+    box-shadow: 0 0 6px 1px rgba(0,0,0,0.2);
     padding: 1em 0;
 }
 
@@ -202,7 +193,7 @@ article, aside, footer {
 }
 
 #markdown-toc .section a {
-    color: #428bca;
+    color: #ec0f7d;
 }
 
 /* Article pages */
@@ -222,18 +213,19 @@ article, aside, footer {
 }
 
 #page-article {
-    background-color: #fff;
+    background-color: #ffffff;
     line-height: 1.5;
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     overflow: auto;
-    padding: 15px 1em 3em 3em;
+    padding: 30px 0 0;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -webkit-overflow-scrolling: touch;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
 #markdown-toc + #page-article {
@@ -242,23 +234,28 @@ article, aside, footer {
 
 #markdown-toc,
 #page-article {
-    width: 80%;
+    width: 82%;
 }
 
 #page-article article {
     max-width: 930px;
+    margin: 0 1em 4em 6em;
 }
 
-#page-article h1 {
-    margin-top: 30px;
+#page-article img {
+    display: block;
+    max-width: 100%;
+    margin: 2em auto;
 }
 
 a {
-    color: #428bca;
+    color: #1976d2;
+    text-decoration: none;
 }
 
 a:hover {
-    color: #036c9c;
+    color: #1565c0;
+    text-decoration: underline;
 }
 
 h1,h2,h3,h4,h5,h6,
@@ -274,6 +271,7 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 
 h1 a:hover, h2 a:hover, h3 a:hover,
 h4 a:hover, h5 a:hover, h6 a:hover {
+    text-decoration: none;
     background: transparent url(../images/anchor.png) no-repeat 0 50%;
 }
 
@@ -305,79 +303,146 @@ a.type-link:hover {
 }
 
 a.type-link code {
-    color: #666;
+    color: #1976d2;
+    font-size: .9em;
+}
+
+p a.type-link code {
+    font-size: 1em;
 }
 
 a.type-link:hover code,
 h1 span.type-link a:hover {
-    color: #036c9c;
+    color: #1565c0;
+}
+
+/* Headings */
+h1,h2,h3,h4,h5,h6 {
+    font-weight: 400;
+    line-height: 1.2em;
+    margin-top: 30px;
+    margin-bottom: 12px;
+}
+h1 {
+    font-size: 34px;
 }
 
 h2 {
-    margin: 2.5em 0 0;
-    padding-top: 2em;
-    position: relative;
+    font-size: 26px;
+    font-weight: 500;
+    margin-top: 42px;
 }
-
-#markdown-toc + #page-article h2 {
-    margin: 2em 0 0;
-    padding: 0;
-}
-
-
 
 h3 {
-    margin-top: 2em;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+h4 {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+h5 {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+h6 {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+#markdown-toc + #page-article h1 {
+    margin: 0;
+}
+
+#markdown-toc + #page-article h1 + p {
+    margin: 0;
 }
 
 #markdown-toc + #page-article h3 {
-    margin-top: 2.5em;
-    padding-top: 2em;
-    position: relative;
+    margin-bottom: 3px;
+    font-size: 16px;
 }
 
-h2:before,
-#markdown-toc + #page-article h3:before {
-    content: " ";
-    display: block;
-    font-size: 0;
-    font-height: 0;
-    width: 100%;
-    height: 1px;
-    position: absolute;
-    top: -3px;
-    border-top: 2px solid #ebecee;
+#markdown-toc + #page-article h3 a {
+    color: #ec0f7d;
 }
 
-#markdown-toc + #page-article h2:before {
-    height: 0;
-    border-top: 0;
-}
-
-h2 + h3 {
-    border-top: 0;
+#markdown-toc + #page-article h3 + p,
+#markdown-toc + #page-article h4 + p,
+#markdown-toc + #page-article h5 + p {
     margin-top: 0;
+}
+
+#markdown-toc + #page-article h4 {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 16px;
+    margin-bottom: 6px;
+    color: #666;
+}
+
+#markdown-toc + #page-article h5 {
+    margin-top: 6px;
+    margin-bottom: 0;
+}
+
+#markdown-toc + #page-article h5 code {
+    color: #3e526b;
+}
+
+#markdown-toc + #page-article h5 a code {
+    color: #1976d2;
+}
+
+h1 + p {
+    font-size: 18px;
 }
 
 h3 code, h3 em {
     color: #666;
-    font-family: monospace;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 h3 code {
-    margin-left: 10px;
+    margin-left: 4px;
+}
+
+h3 a:first-child + a code:before {
+    content: "-";
+    margin-right: 7px;
+    color: #ccc;
+}
+
+h3 > code:first-child:before {
+    content: "|";
+    margin-right: 7px;
+    color: #ccc;
 }
 
 h3 em {
     font-style: normal;
-    font-weight: bold;
+    font-weight: 500;
+}
+
+p {
+    margin: 12px 0;
+}
+
+ul, ol {
+    margin: 12px 0 30px;
 }
 
 blockquote {
-    padding: 10px 30px 10px 90px;
-    margin: 0;
+    padding: 10px 30px;
+    margin: 30px 0;
     min-height: 70px;
+    position: relative;
+    box-sizing: border-box;
 }
 
 blockquote table {
@@ -390,19 +455,21 @@ blockquote th, blockquote td {
 }
 
 .prettyprint {
-    font-size: 12px;
+    font-size: 13px;
     padding: 20px;
     border: 1px solid transparent;
     overflow: hidden;
     word-break: break-word;
     clear: both;
+    margin: 12px 0 30px;
 }
 
 .prettyprint code {
     display: block;
     overflow-x: auto;
     padding: 0;
-    line-height: 22px;
+    line-height: 18px;
+    font-family: "Roboto Mono", "Ubuntu Mono", "Consolas", "Monaco", monospace;
 }
 
 .prettyprint code .hljs {
@@ -472,12 +539,16 @@ blockquote th, blockquote td {
 footer
 {
     text-align: right;
-    position: absolute;
-    bottom: 0;
-    left: 0;
     width: 100%;
     box-sizing: border-box;
-    padding: 0 1em 0 0;
+    padding: 0;
+    border-top: 1px solid #ebecee;
+}
+
+footer p {
+    margin: 0;
+    padding: 20px;
+    font-size: 12px;
 }
 
 /* Search */
@@ -656,7 +727,8 @@ footer
     }
 
     #markdown-toc {
-        border-bottom: none;
+        left: 0;
+        padding-left: 1.3em;
     }
 
     .nav-buttons,
@@ -677,8 +749,11 @@ footer
     #page-article {
         width: 100%;
         margin-left: 0;
-        padding-left: 2em;
-        padding-right: 2em;
+    }
+    
+    #page-article article {
+      margin-left: 2em;
+      margin-right: 2em;
     }
 
     #page-article h1 {
@@ -740,9 +815,5 @@ footer
         text-align: right;
         left: auto;
         cursor: pointer;
-    }
-
-    footer {
-        display: none;
     }
 }
