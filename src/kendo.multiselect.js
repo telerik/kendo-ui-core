@@ -456,6 +456,14 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _filterSource: function(filter, force) {
+            if(!force) {
+                force = this._retrieveData;
+            }
+            this._retrieveData = false;
+            List.fn._filterSource.call(this, filter, force);
+        },
+
         close: function() {
             this.popup.close();
         },
@@ -470,7 +478,6 @@ var __meta__ = { // jshint ignore:line
             if (that._retrieveData || !that.listView.isBound() || that._state === ACCEPT) {
                 that._open = true;
                 that._state = REBIND;
-                that._retrieveData = false;
 
                 that.listView.filter(false);
                 that.listView.skipUpdate(true);
@@ -557,8 +564,7 @@ var __meta__ = { // jshint ignore:line
                     ignoreCase: ignoreCase
                 };
 
-                that._filterSource(expression, that._retrieveData);
-                that._retrieveData = false;
+                that._filterSource(expression);
             }
         },
 

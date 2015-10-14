@@ -559,6 +559,29 @@
         equal(multiselect.dataItems().length, 0);
     });
 
+    test("MultiSelect fetches data source on first manual search when autoBind: false and serverFiltering: false", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            autoBind: false,
+            minLength: 3,
+            dataSource: {
+                serverFiltering: false,
+                transport: {
+                    read: function() {
+                        ok(true);
+                    }
+                }
+            },
+            dataValueField: "optionID",
+            dataTextField: "optionText",
+            value: [
+                { optionID: "1", optionText: "Item1" },
+                { optionID: "2", optionText: "Item2" }
+            ]
+        });
+        multiselect.open();
+        multiselect.search("test");
+    });
+
     test("MultiSelect fetches data source on first search when autoBind: false and serverFiltering: false", 1, function() {
         var multiselect = new MultiSelect(select, {
             autoBind: false,
@@ -578,7 +601,6 @@
                 { optionID: "2", optionText: "Item2" }
             ]
         });
-
         multiselect.search("test");
     });
 
