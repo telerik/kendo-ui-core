@@ -49,7 +49,37 @@ Next, we'll initialize the ListView by referring the template and a result set f
 
 Here's the live example of the representation (above):
 
-<iframe style="width: 700px; height: 450px" src="http://jsfiddle.net/3w7ru/90/embedded/result" frameborder="0"></iframe>
+
+```html
+<div id="listView" style="max-height:400px;overflow:auto;"></div>
+
+<script type="text/x-kendo-tmpl" id="template">
+    <div class="product">
+        <img src="http://demos.kendoui.com/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+        <h3>#:ProductName#</h3>
+        <p>#:kendo.toString(UnitPrice, "c")#</p>
+    </div>
+</script>
+
+<script>
+
+var dataSource = new kendo.data.DataSource({
+    transport: {
+        read: {
+            url: "http://demos.kendoui.com/service/Products",
+            dataType: "jsonp"
+        }
+    }
+});
+
+$("#listView").kendoListView({
+    dataSource: dataSource,
+    pageable: true,
+    template: kendo.template($("#template").html())
+});
+
+</script>
+```
 
 In scenarios where the number of items bound to a ListView is larger than expected, a Pager will control the items being displayed. Using a Pager is relatively simple. First, you create a target element for its rendering. Typically, it should be placed in the vicinity of the ListView:
 
@@ -90,7 +120,41 @@ The next step is to update the ListView configuration to state that it support p
 
 Here's the same live example with a Pager applied to the ListView:
 
-<iframe style="width: 700px; height: 450px" src="http://jsfiddle.net/3w7ru/92/embedded/result" frameborder="0"></iframe>
+```html
+<div id="listView" style="max-height:400px;overflow:auto;"></div>
+<div id="pager"></div>
+
+
+<script type="text/x-kendo-tmpl" id="template">
+    <div class="product">
+        <img src="http://demos.kendoui.com/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+        <h3>#:ProductName#</h3>
+        <p>#:kendo.toString(UnitPrice, "c")#</p>
+    </div>
+</script>
+
+<script>
+var dataSource = new kendo.data.DataSource({
+    transport: {
+        read: {
+            url: "http://demos.kendoui.com/service/Products",
+            dataType: "jsonp"
+        }
+    }
+});
+
+$("pager").kendoPager({
+    dataSource: dataSource
+});
+
+$("#listView").kendoListView({
+    dataSource: dataSource,
+    pageable: true,
+    template: kendo.template($("#template").html())
+});
+</script>
+
+```
 
 From a design perspective, it may be useful to visually differiante each alternating item in a ListView. For example, in the previous example, I may wish to have every second item have a slightly darker background (i.e. banded rows). Defining the altTemplate property accomplishes this through the use of a template that you define. Let's go ahead and update our working example to include a template for alternating items.
 
@@ -117,7 +181,56 @@ From a design perspective, it may be useful to visually differiante each alterna
 
 Here's how the live example how looks with a template for alternating items:
 
-<iframe style="width: 750px; height: 450px" src="http://jsfiddle.net/3w7ru/94/embedded/result" frameborder="0"></iframe>
+```html
+
+<div id="listView" style="max-height:400px;overflow:auto;"></div>
+<div class="k-pager-wrap">
+    <div id="pager"></div>
+</div>
+
+<script type="text/x-kendo-tmpl" id="template">
+    <div class="product">
+        <img src="http://demos.kendoui.com/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+        <h3>#:ProductName#</h3>
+        <p>#:kendo.toString(UnitPrice, "c")#</p>
+    </div>
+</script>
+
+    <script type="text/x-kendo-tmpl" id="altTemplate">
+        <div class="product alt">
+            <img src="http://demos.kendoui.com/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+            <h3>#:ProductName#</h3>
+            <p>#:kendo.toString(UnitPrice, "c")#</p>
+        </div>
+    </script>
+
+<script>
+var dataSource = new kendo.data.DataSource({
+    transport: {
+        read: {
+            url: "http://demos.kendoui.com/service/Products",
+            dataType: "jsonp"
+        }
+    },
+    pageSize: 3
+});
+
+$("#pager").kendoPager({
+    dataSource: dataSource
+});
+
+$("#listView").kendoListView({
+    dataSource: dataSource,
+    template: kendo.template($("#template").html()),
+    altTemplate: kendo.template($("#altTemplate").html()),
+});
+</script>
+
+<style>
+    .alt { background-color: #EEE; }
+</style>
+
+```
 
 In addition to paging, the ListView supports item selection, navigation, and inline editing. Supporting these operations is achieved through the initialization of its Boolean configuration options. In the case of inline editing, the ListView provides the editTemplate property, which defines a template for this mode. Once define, the ListView can render out this editing template via the edit method. When invoked, the editTemplate for the ListView is applied against the target item. In most scenarios, you should implement this through an event model that is triggered when the user selected an item to modify.
 
@@ -194,6 +307,48 @@ You can capture when items are selected through the change event that is trigger
         }
     });
 
-Updating the example that I created before, here's the live representation of that with item selection enabled:
+Updating the example created before, here's the live representation of that with item selection enabled:
 
-<iframe style="width: 700px; height: 450px" src="http://jsfiddle.net/3w7ru/95/embedded/result" frameborder="0"></iframe>
+```html
+<div id="listView" style="max-height:400px;overflow:auto;"></div>
+<div class="k-pager-wrap">
+    <div id="pager"></div>
+</div>
+
+<script type="text/x-kendo-tmpl" id="template">
+    <div class="product">
+        <img src="http://demos.kendoui.com/content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+        <h3>#:ProductName#</h3>
+        <p>#:kendo.toString(UnitPrice, "c")#</p>
+    </div>
+</script>
+
+
+<script>
+var dataSource = new kendo.data.DataSource({
+    transport: {
+        read: {
+            url: "http://demos.kendoui.com/service/Products",
+            dataType: "jsonp"
+        }
+    },
+    pageSize: 3
+});
+
+$("#pager").kendoPager({
+    dataSource: dataSource
+});
+
+$("#listView").kendoListView({
+    selectable: true,
+    dataSource: dataSource,
+    template: kendo.template($("#template").html())
+});
+</script>
+
+
+<style>
+    .alt { background-color: #EEE; }
+</style>
+
+```
