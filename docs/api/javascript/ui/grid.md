@@ -778,7 +778,7 @@ Specifies the AutoComplete filter option. Possible values are same as the one fo
 
 > Notice this operator is completely separate from the operator used for filtering on this column - check [operator](#configuration-columns.filterable.cell.operator).
 
-#### Example - Specifying inputWidth option for the filter cell of a column
+#### Example - Specifying suggestionOperator option for the filter cell of a column
 
     <div id="grid"></div>
     <script>
