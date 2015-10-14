@@ -192,8 +192,8 @@ code, em {
     text-decoration: none;
 }
 
-#markdown-toc .section a {
-    color: #ec0f7d;
+#markdown-toc .section > a {
+    color: #e50870;
 }
 
 /* Article pages */
@@ -368,7 +368,7 @@ h6 {
 }
 
 #markdown-toc + #page-article h3 a {
-    color: #ec0f7d;
+    color: #e50870;
 }
 
 #markdown-toc + #page-article h3 + p,
@@ -380,10 +380,10 @@ h6 {
 #markdown-toc + #page-article h4 {
     font-size: 12px;
     text-transform: uppercase;
-    font-weight: 500;
-    margin-top: 16px;
+    font-weight: 700;
+    margin-top: 20px;
     margin-bottom: 6px;
-    color: #666;
+    color: #333;
 }
 
 #markdown-toc + #page-article h5 {
