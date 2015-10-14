@@ -342,7 +342,11 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (support.pointers || support.msPointers) {
-                element.css("-ms-touch-action", "pinch-zoom double-tap-zoom");
+                if (support.browser.version < 11) {
+                    element.css("-ms-touch-action", "pinch-zoom double-tap-zoom");
+                } else {
+                    element.css("touch-action", "none");
+                }
             }
 
             if (options.preventDragEvent) {
