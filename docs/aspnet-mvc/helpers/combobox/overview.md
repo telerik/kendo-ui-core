@@ -15,7 +15,7 @@ There are two ways to bind a Kendo ComboBox for ASP.NET MVC:
 *   **server** - the data will be serialized to the client. No Ajax requests will be made.
 *   **ajax** - the combobox will make ajax request to get the data.
 
-### Configure the Kendo ComboBox for server binding
+### Configure ComboBox for Server Binding
 
 Here is how to configure the Kendo ComboBox for server binding to the Northwind Products table using Linq to SQL:
 
@@ -57,7 +57,7 @@ Here is how to configure the Kendo ComboBox for server binding to the Northwind 
               .SelectedIndex(10) //Select an item with index 10. Note that the indexes are zero based.
             )
 
-### Configure the Kendo ComboBox for ajax binding
+### Configure ComboBox for Ajax Binding
 
 Here is how to configure the Kendo ComboBox for ajax binding to the Northwind Products table using Linq to SQL:
 
@@ -113,9 +113,10 @@ Here is how to configure the Kendo ComboBox for ajax binding to the Northwind Pr
                 .SelectedIndex(0) //Select first item.
             )
 
-> **Important:** **ToDataSourceResult()** extension method will modify structure of the result and the widget will not be able to bind to it. Please return simple array of data in this case.
+> **Important**  
+> The `ToDataSourceResult()` extension method will modify structure of the result and the widget will not be able to bind to it. Please return simple array of data in this case.
 
-### Configure the Kendo ComboBox to work with ToDataSourceResult instance
+### Configure ComboBox to Work with the `ToDataSourceResult` Instance
 
 Here is how to configure the combobox to use a custom datasource and thus to bind to a ToDataSourceResult instance.
 
@@ -181,7 +182,7 @@ Here is how to configure the combobox to use a custom datasource and thus to bin
                 })
             )
 
-### Sending parameters to the server
+### Send Parameters to the Server
 
 Here is how to configure the Kendo ComboBox to send parameters to the server:
 
@@ -260,6 +261,7 @@ Here is how the **GetProducts** method looks like:
             return Json(products, JsonRequestBehavior.AllowGet);
         }
 
+> **Important**  
 > The Kendo ComboBox has default event handler for the DataSource's Data callback. If you do not
 define event handler, it will be used.
 
@@ -279,13 +281,13 @@ define event handler, it will be used.
 
 As you can see the combobox sends the input's value only if the end-user starts to type in it.
 
-## Accessing an Existing ComboBox
+## Access an Existing ComboBox
 
 You can reference an existing ComboBox instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
 Once a reference has been established, you can use the [API](/api/web/combobox#methods) to control its behavior.
 
 
-### Accessing an existing ComboBox instance
+### Access an Existing ComboBox Instance
 
     //Put this after your Kendo ComboBox  for ASP.NET MVC declaration
     <script>
@@ -296,11 +298,11 @@ Once a reference has been established, you can use the [API](/api/web/combobox#m
     </script>
 
 
-## Handling Kendo UI ComboBox events
+## Handle ComboBox Events
 
 You can subscribe to all [events](/api/web/combobox#events) exposed by Kendo UI ComboBox:
 
-### WebForms - subscribe by handler name
+### WebForms - Subscribe by Handler Name
 
     <%: Html.Kendo().ComboBox()
         .Name("combobox")
@@ -321,7 +323,7 @@ You can subscribe to all [events](/api/web/combobox#events) exposed by Kendo UI 
     </script>
 
 
-### Razor - subscribe by handler name
+### Razor - Subscribe by Handler Name
 
     @(Html.Kendo().ComboBox()
       .Name("combobox")
@@ -342,7 +344,7 @@ You can subscribe to all [events](/api/web/combobox#events) exposed by Kendo UI 
     </script>
 
 
-### Razor - subscribe by template delegate
+### Razor - Subscribe by Template Delegate
 
     @(Html.Kendo().ComboBox()
       .Name("combobox")

@@ -1,12 +1,12 @@
 ---
-title: Use Kendo UI with CDN Services
+title: Use Kendo UI CDN Services
 page_title: Use Kendo UI with CDN Services
 description: "install Kendo UI, Kendo CDN service"
 previous_url: /install/cdn
 position: 3
 ---
 
-# Use Kendo UI with CDN Services
+# Use Kendo UI CDN Services
 
 The Kendo UI CDN is hosted on [Amazon CloudFront](https://aws.amazon.com/cloudfront/). In order to access the Kendo UI CDN Service, you can use either of the options described below.
 
@@ -23,14 +23,16 @@ For example, the 2014.1.318 version can be loaded from:
 Use the following URL to load the minified Kendo UI Core script (available since Q1 2014 SP1):
 <http://kendo.cdn.telerik.com/2014.1.416/js/kendo.ui.core.min.js>
 
->The <http://cdn.kendostatic.com> URL will remain active, but is no longer recommended for new projects.
+> **Important**  
+> The <http://cdn.kendostatic.com> URL will remain active, but is no longer recommended for new projects.
 
 ## Option 2: Through the HTTPS Protocol
 
 To access the Kendo UI CDN service through the HTTPS protocol, use the same host name as above, only replacing the scheme (protocol) with `https`:  
 <https://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js>
 
->The <https://da7xgjtj801h2.cloudfront.net> URL will remain active, but are no longer recommended for new projects.
+> **Important**  
+> The <https://da7xgjtj801h2.cloudfront.net> URL will remain active, but are no longer recommended for new projects.
 
 ## Troubleshooting
 
@@ -83,4 +85,5 @@ Although the Amazon CloudFront service provides for a reliable level of uptime s
     </body>
     </html>
 
+> **Important**  
 > You will be able to find more information on the topic at [Scott HanselMann - Fallback from CDN to Local Scripts](http://www.hanselman.com/blog/CDNsFailButYourScriptsDontHaveToFallbackFromCDNToLocalJQuery.aspx).

@@ -162,6 +162,7 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 
 If generating content with the data-source is not desired, a possible workaround of the behavior may be implemented using the `k-ng-delay` configuration option.
 
+> **Important**  
 > The approach is not recommended, and has some side effects, like FOUC and decreased performance.
 
 ```html

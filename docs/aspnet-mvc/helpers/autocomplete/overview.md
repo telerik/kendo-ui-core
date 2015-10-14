@@ -15,7 +15,7 @@ There are two ways to bind a Kendo AutoComplete for ASP.NET MVC:
 *   **server** - the data will be serialized to the client. No Ajax requests will be made.
 *   **ajax** - the autocomplete will make ajax requests to get the data.
 
-### Configure the Kendo AutoComplete for server binding
+### Configure AutoComplete for Server Binding
 
 Here is how to configure the Kendo AutoComplete for server binding to the Northwind Products table using Linq to SQL:
 
@@ -54,9 +54,9 @@ Here is how to configure the Kendo AutoComplete for server binding to the Northw
                .Filter("contains") //Define the type of the filter, which autocomplete will use.
              )
 
-### Configure the Kendo AutoComplete for ajax binding
+### Configure AutoComplete for Ajax Binding
 
-Here is how to configure the Kendo AutoComplete for ajax binding to the Northwind Products table using Linq to SQL:
+Here is how to configure the AutoComplete for Ajax binding to the Northwind Products table using Linq to SQL:
 
 1.  Make sure you have followed all the steps from the [Introduction](/aspnet-mvc/introduction) help topic.
 2.  Create an action method which renders the view:
@@ -72,7 +72,7 @@ Here is how to configure the Kendo AutoComplete for ajax binding to the Northwin
             NorthwindDataContext northwind = new NorthwindDataContext();
             return Json(northwind.Products, JsonRequestBehavior.AllowGet);
         }
-4.  Add a ajax bound autocomplete:
+4.  Add an ajax bound autocomplete:
      - WebForms
 
              <%: Html.Kendo().AutoComplete()
@@ -102,9 +102,10 @@ Here is how to configure the Kendo AutoComplete for ajax binding to the Northwin
                 })
              )
 
-> **Important:** **ToDataSourceResult()** extension method will modify structure of the result and the widget will not be able to bind to it. Please return simple array of data in this case.
+> **Important**  
+> The `ToDataSourceResult()` extension method will modify structure of the result and the widget will not be able to bind to it. Please return simple array of data in this case.
 
-### Configure the Kendo AutoComplete to work with ToDataSourceResult instance
+### Configure AutoComplete to Work with the `ToDataSourceResult` Instance
 
 Here is how to configure the autocomplete to use a custom datasource and thus to bind to a ToDataSourceResult instance.
 
@@ -168,7 +169,7 @@ Here is how to configure the autocomplete to use a custom datasource and thus to
                 })
             )
 
-### Sending parameters to the server
+### Send Parameters to the Server
 
 Here is how to configure the Kendo ComboBox to send parameters to the server:
 
@@ -241,12 +242,12 @@ Here is how the **GetProducts** method looks like:
             return Json(products, JsonRequestBehavior.AllowGet);
         }
 
-## Accessing an Existing AutoComplete
+## Access an Existing AutoComplete
 
 You can reference an existing AutoComplete instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
 Once a reference has been established, you can use the [API](/api/web/autocomplete#methods) to control its behavior.
 
-### Accessing an existing AutoComplete instance
+### Access an Existing AutoComplete Instance
 
     //Put this after your Kendo AutoComplete for ASP.NET MVC declaration
     <script>
@@ -257,11 +258,11 @@ Once a reference has been established, you can use the [API](/api/web/autocomple
     </script>
 
 
-## Handling Kendo UI AutoComplete events
+## Handle AutoComplete Events
 
-You can subscribe to all [events](/api/web/autocomplete#events) exposed by Kendo UI autocomplete:
+You can subscribe to all [events](/api/web/autocomplete#events) exposed by Kendo UI AutoComplete:
 
-### WebForms - subscribe by handler name
+### WebForms - Subscribe by Handler Name
 
     <%: Html.Kendo().AutoComplete()
         .Name("autocomplete")
@@ -282,7 +283,7 @@ You can subscribe to all [events](/api/web/autocomplete#events) exposed by Kendo
     </script>
 
 
-### Razor - subscribe by handler name
+### Razor - Subscribe by Handler Name
 
     @(Html.Kendo().AutoComplete()
       .Name("autocomplete")
@@ -303,7 +304,7 @@ You can subscribe to all [events](/api/web/autocomplete#events) exposed by Kendo
     </script>
 
 
-### Razor - subscribe by template delegate
+### Razor - Subscribe by Template Delegate
 
     @(Html.Kendo().AutoComplete()
       .Name("autocomplete")

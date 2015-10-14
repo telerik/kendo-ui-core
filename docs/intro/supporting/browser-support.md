@@ -40,7 +40,7 @@ The [hybrid UI widgets and frameworks](/intro/supporting/list-of-widgets) are in
 
 [Kendo UI widgets rendering data visualization](/intro/supporting/list-of-widgets) may require more recent browser versions as well. If you want to use them in your project, consider the information below.
 
-#### Fully Supported Browsers
+#### Fully supported browsers
 
 | Browser           | Supported Versions            |
 | :---------------- | :---------------------------- |
@@ -52,7 +52,7 @@ The [hybrid UI widgets and frameworks](/intro/supporting/list-of-widgets) are in
 | iOS Safari        | iOS 8 or later                |
 | Chrome for Mobile | 21 or later                   |
 
-#### Browsers with Limited Support
+#### Browsers with limited support
 
 | Browser           | Supported Versions            | Limitations                               |
 | :---------------- | :---------------------------- | :-----------                              |
@@ -72,6 +72,7 @@ The [hybrid UI widgets and frameworks](/intro/supporting/list-of-widgets) are in
 * Browsers in beta stage are not supported
 * Exporting a zoomed in/out page to PDF is not supported.
 * [Quirks mode](http://www.quirksmode.org/css/quirksmode.html) is not supported
+> **Important**  
 > Always specify a [DOCTYPE](http://reference.sitepoint.com/html/doctypes). Recommended doctypes include `HTML5`, `XHTML 1.1`, `XHTML 1.0 Strict` and `HTML4 Strict`. The `HTML4 Transitional` DOCTYPE fires the Quirks mode and should not be used. `XHTML 1.0 Transitional` works well in most cases, but may cause issues with the vertical positioning of icons. The correct syntax for [all doctypes](http://www.w3.org/QA/2002/04/valid-dtd-list.html) is provided on the [W3C website](http://www.w3.org/).
 
 * Internet Explorer compatibility modes are not supported. These modes can exhibit different behavior and rendering bugs as compared to the browser versions they emulate.

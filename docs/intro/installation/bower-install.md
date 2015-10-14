@@ -12,6 +12,7 @@ position: 2
 
 Kendo UI maintains 2 bower packages, namely Kendo UI Core and Kendo UI Professional. Official releases, service packs and internal builds are uploaded to both of them.
 
+> **Important**  
 > Kendo UI Professional bower package is available for licensed user accounts only. Check out the [list of Kendo UI components and their bundle support](/intro/supporting/list-of-widgets).
 
 ## Option 1: Install Kendo UI Core Bower Package
@@ -38,6 +39,7 @@ You can also add the package to the `bower.json` file:
 }
 ```
 
+> **Important**  
 > During the installation of the Bower package, you may be requested to confirm your credentials more than once. For further information, refer to the Storing Repository Credentials section below.
 
 ### Store Your Repository Credentials
@@ -48,6 +50,7 @@ You can also add the package to the `bower.json` file:
 
 ### Store Your Credentials on Windows
 
+> **Important**  
 > Caching your credentials is required if you use the Kendo UI Bower Package in an ASP.NET vNext project.
 
 **Step 1:** Create a text file called `_netrc` in your home directory (e.g. `c:\users\jane\_netrc`)  
@@ -90,6 +93,6 @@ fatal: unable to access 'https://bower.telerik.com/bower-kendo-ui.git/': SSL cer
 
 **Fix:** To resolve the issue, follow the steps in this [help article](http://blogs.msdn.com/b/phkelley/archive/2014/01/20/adding-a-corporate-or-self-signed-certificate-authority-to-git-exe-s-store.aspx).
 
+> **Important**  
 > 1.9.5 Git build will not work with the Bower package.
-
 > When using @ symbol in the url for accessing the Kendo UI Bower repository (due to network restrictions or admin rules, for instance), make sure you encode it as follows: https://firstname.lasname**%40**domain.com@bower.telerik.com/bower-kendo-ui.git.

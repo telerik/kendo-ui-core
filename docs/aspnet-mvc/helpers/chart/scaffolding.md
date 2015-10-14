@@ -8,9 +8,10 @@ description: Learn how to scaffold Kendo UI Chart for ASP.NET MVC using the Kend
 
 The following tutorial shows how to scaffold a Kendo UI Chart for ASP.NET MVC using the **Kendo UI Scaffolder** Visual Studio extension.
 
+> **Important**  
 > The Kendo UI Scaffolder will not include the required **UI for ASP.NET MVC** files to the project. You could achieve this automatically using the [Telerik UI for ASP.NET MVC Visual Studio Extensions](/aspnet-mvc/vs-integration/introduction) or manually as demonstrated [here](/aspnet-mvc/asp-net-mvc-5).
 
-# Getting started
+## Getting Started
 
 1.  Create a new ASP.NET MVC application, include an Entity Framework Data Model and add **Telerik UI for ASP.NET MVC**. If you have already done so, you can skip to the next step, otherwise you can follow the first 4 steps of the [following tutorial](/aspnet-mvc/helpers/chart/overview#getting-started).
 

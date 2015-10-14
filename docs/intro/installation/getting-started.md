@@ -34,7 +34,7 @@ Once you [download any of the Kendo UI bundles](http://www.telerik.com/download/
 
 To use Kendo UI in your project, you need to include the required JavaScript and CSS files.
 
-**Step 1:** Extract the `/js` and `/styles` directories from the bundle archive and copy them to your web application root directory  
+**Step 1:** Extract the `/js` and `/styles` directories from the bundle archive and copy them to your web application root directory.  
 **Step 2:** Include the Kendo UI JavaScript and CSS files in the `head` tag of your HTML document. Make sure the common CSS file is registered before the theme CSS file.
 
 ###### Example
@@ -66,9 +66,10 @@ To use Kendo UI in your project, you need to include the required JavaScript and
 	        </body>
 	        </html>
 
+> **Important**  
 > The code examples onwards assume that the Kendo UI scripts and stylesheets were added to the document.
 
-**Step 3:** Initialize a Widget
+**Step 3:** Initialize a Widget.
 
 ###### Example ([DatePicker widget](http://demos.telerik.com/kendo-ui/datepicker/index))
 
@@ -110,7 +111,7 @@ Kendo UI maintains 2 bower packages, namely Kendo UI Core and Kendo UI Professio
 
 [Learn more about installing Kendo UI as a Bower package](/intro/installation/bower-install)
 
-## Use Kendo UI with CDN Services
+## Use Kendo UI CDN Services
 
 Kendo UI CDN is hosted on [Amazon CloudFront](https://aws.amazon.com/cloudfront/). To access the CDN Service, you can use different approaches.
 

@@ -19,9 +19,9 @@ The **Button** can include both inline and block elements defined via `.Content(
 
 Placing clickable elements with their own special behavior inside the **Button** (e.g. hyperlinks, textboxes, etc) may cause undesired side efects.
 
-### Button initialization examples
+### Button Initialization Examples
 
-#### Using the default `button` tag
+#### Use the default `button` tag
 
 * Razor
 
@@ -36,7 +36,7 @@ Placing clickable elements with their own special behavior inside the **Button**
             .HtmlAttributes( new {type = "button"} )
             .Content("Text button") %>
 
-#### Using an `anchor` tag
+#### Use an `anchor` tag
 
 * Razor
 
@@ -51,7 +51,7 @@ Placing clickable elements with their own special behavior inside the **Button**
             .Tag("a")
             .Content("Link button") %>
 
-## Using Icons
+## Use Icons
 
 The **Button** can accommodate an icon, which enhances the meaning of the text content.
 The widget provides three ways to add an icon with a classic `img` element or with a background image (usually a sprite).
@@ -59,14 +59,14 @@ From web standarts' point of view, using background images is better, because th
 
 There are three settings, which the **Button** provides for configuring icons - `.Icon()`, `.SpriteCssClass()` and `.ImageUrl()`. Only one should be used at a time.
 
-### Background icons
+### Background Icons
 
 Background icons are applied via the `.Icon()` or `.SpriteCssClass()` fluent methods and are displayed as a background of a `span` element.
 
 The difference between the two settings is that `.Icon()` is intended to be used for built-in Kendo UI icons, which are part of the theme sprite.
 For a list of available icon names, please refer to the [Icons demo](http://demos.telerik.com/kendo-ui/web/styling/icons.html).
 
-#### Using `.Icon()`
+#### Use `.Icon()`
 
 * Razor
 
@@ -85,7 +85,7 @@ The above configuration will produce the following HTML output:
 
     <button type="button" id="cancelButton" class="k-button k-button-icontext"><span class="k-icon k-cancel"></span>Cancel</button>
 
-#### Using `.SpriteCssClass()`
+#### Use `.SpriteCssClass()`
 
 * Razor
 
@@ -107,7 +107,7 @@ The above configuration will produce the following HTML output:
 Technically, `.SpriteCssClass("k-icon k-cancel")` can be used to achieve the same result as `.Icon("cancel")`,
 but `.Icon()` will spare you the need to set two CSS classes at the same time and will provides a certain level of abstraction.
 
-#### Using a Button with no text
+#### Use a button with no text
 
 The Button will use an existing `span` element if it is supplied as `.Content()`, e.g. if the goal is to have a Button with no text. The `span` element must have a `k-sprite` CSS class.
 
@@ -124,11 +124,11 @@ The Button will use an existing `span` element if it is supplied as `.Content()`
             .SpriteCssClass("myDeleteClass")
             .Content("<span class='k-sprite'>Delete</span>") %>
 
-### Image icons
+### Image Icons
 
 Image icons are applied via the `.ImageUrl()` property and are displayed as a `img` element.
 
-#### Using `.ImageUrl()`
+#### Use `.ImageUrl()`
 
 * Razor
 
@@ -147,7 +147,7 @@ The above configuration will produce the following HTML output:
 
     <button type="button" id="imageButton" class="k-button k-button-icontext"><img class="k-image" src="/images/myIcon.gif" alt="icon" />Image button</button>
 
-#### Using `.ImageUrl()` with no text
+#### Use `.ImageUrl()` with no text
 
 An `img` tag should be placed inside the **Button** content. The image should have a `k-image` CSS class.
 
@@ -164,13 +164,13 @@ An `img` tag should be placed inside the **Button** content. The image should ha
             .ImageUrl("/images/myIcon.gif")
             .Content("<img class='k-image' alt='my icon' />") %>
 
-## Enabled and Disabled buttons
+## Enabled and Disabled Buttons
 
 The business logic of an application often requires a certain button to be temporarily disabled or enabled.
 The **Button** can be configured to be initially disabled via its `.Enable()` setting.
 The widget can also be disabled or enabled at any time with Javascript by using its `enable()` method with a boolean argument.
 
-### Using `.Enable()`
+### Use `.Enable()`
 
 * Razor
 
@@ -187,6 +187,6 @@ The widget can also be disabled or enabled at any time with Javascript by using 
 
 For more information on the **Button** [`enable` method](/api/web/button#methods-enable), please refer to the [Button API](/api/web/button/).
 
-## Accessing the Button instance
+## Access the Button Instance
 
 Please refer to the **Button**'s [Getting Started](/web/button/overview/#accessing-the-button-instance) documentation page.

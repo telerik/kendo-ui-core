@@ -4,7 +4,7 @@ page_title: Configuration of Kendo UI Chart for ASP.NET MVC for Ajax binding
 description: How to configure Kendo UI Chart for ASP.NET MVC for Ajax binding in quick steps.
 ---
 
-## Ajax Binding
+# Ajax Binding
 
 When configured for ajax binding the Kendo Chart for ASP.NET MVC will make an ajax requests to populate its series.
 
