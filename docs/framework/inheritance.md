@@ -29,7 +29,7 @@ language, supporting [object-oriented](http://en.wikipedia.org/wiki/Object-orien
 
 That’s a lot of ability in one language.  Functional languages are powerful, but when you are able to add in OO principals, it get's really beautiful.
 
-### Inheritance With Kendo UI
+### Inheritance with Kendo UI
 
 You can create a new object with Kendo UI by calling **kendo.Class.extend** to define it.
 
@@ -114,8 +114,65 @@ was set after my dad was created, it is specific to his object instance of **Par
 
 ### Next Steps
 
-Use the Fiddle below to experiment with Inheritance In Kendo UI.
+Use the example below to experiment with Inheritance In Kendo UI.
 
-<iframe style="width: 100%; height: 750px;" src="http://jsfiddle.net/burkeholland/FgShb/embedded/js,result" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+###### Example
 
-   [21]: http://twitter.com/johnbristowe
+```html
+<div id="content"></div>
+
+<script>
+function log(msg) {
+    $("#content").append("<p>" + msg + "</p>");
+}
+ 
+// create a new person class
+var Person = kendo.Class.extend({
+    firstName: 'Not Set',
+    lastName: 'Not Set',
+    isPrettyCoolPerson: false,
+    init: function(firstName, lastName) {
+        if (firstName) this.firstName = firstName;
+        if (lastName) this.lastName = lastName;
+    },
+    sayHello: function() {
+        log("Hello! I'm " + this.firstName + " " + this.lastName)
+    }
+});
+
+// create a new John Bristowe of type person (He is really more machine than man. Twisted and EVILE.)
+var person = new Person("John", "Bristowe");
+// say hello John
+person.sayHello();
+
+// create a parent object of type person    
+var Parent = Person.extend({
+    firstName: 'Mark',
+    lastName: 'Holland'
+});
+
+// create my dad. he was a parent - sometimes. just kidding dad!    
+var myDad = new Parent();
+myDad.isPrettyCoolPerson = true;
+
+// say hello dad
+myDad.sayHello();
+// expose dad's coolness factor
+    log("Cool? " + myDad.isPrettyCoolPerson);
+        
+// create a new child object that inherits from the parent    
+var Child = Parent.extend({});
+
+// create me. for more info on how this was actually done, talk to my dad.
+var me = new Child();
+me.firstName = "Burke";
+
+// Hello!
+me.sayHello();
+// expose my coolness
+log("Cool? " + me.isPrettyCoolPerson);
+</script>
+
+```
+
+[21]: http://twitter.com/johnbristowe

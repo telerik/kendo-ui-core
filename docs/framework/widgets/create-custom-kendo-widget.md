@@ -344,7 +344,7 @@ And with that final touch, we officially have a fully data-bound widget. Here is
 
     })(jQuery);
 
-Here is demonstration of it in action. There are two widgets initialized here. The first one takes uses a simple array as a DataSource. The second uses a remote endpoint, a template, and declarative initialization.
+The demontrsation below uses two widgets that are initialized. The first one takes uses a simple array as a DataSource. The second uses a remote endpoint, a template, and declarative initialization.
 
 <iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/burkeholland/N9DfB/embedded/result,js,html,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
@@ -523,6 +523,35 @@ And with that, we have now fully enabled MVVM in our widget. This means we can n
 Notice that the widget is now bound to the **dataSource** variable inside of the ViewModel via **data-bind**. This means that if we add an item client
 side to the DataSource, our widget will reflect the change immediately, without us having to re-render anything.
 
-Here is the complete example.  Notice that when you add an item to the DataSource, it is immediately reflected in the Repeater widget.
+Int he complete example below note that when you add an item to the DataSource, it is immediately reflected in the Repeater widget.
 
-<iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/burkeholland/5FYhx/embedded/result,js,html,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+###### Example
+
+```html
+<label for="newItem">Enter A New Item</input>
+        <input id="newItem" data-bind="value: newItem" class="k-input" />
+        <button class="k-button" data-bind="click: add">Add Item</button>
+        
+        <div id="repeater"></div>
+        
+        <div data-role="repeater" data-bind="source: items" data-template="template"></div>
+        
+        <script type="text/x-kendo-template" id="template">
+            <div style="color: salmon; margin-right: 10px'"><h1>#= data #</h1></div>
+        </script>
+        
+<script>
+var viewModel = kendo.observable({
+    items: ["item1", "item2", "item3"],
+    newItem: null,
+    add: function(e) {
+        if (this.get("newItem")) {
+            this.get("items").push(this.get("newItem"));
+        }
+    }
+});
+
+kendo.bind(document.body, viewModel);
+</script>       
+
+```
