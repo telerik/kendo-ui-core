@@ -26,7 +26,10 @@ The first two settings must be configured no matter whether local or remote CRUD
 The only case when they are not needed is for scenarios when all data fields are of string type and there is no editing.
 Further details about the schema are provided in the [DataSource API documentation](/api/javascript/data/datasource#configuration-schema).
 
-## CRUD Operations with Local Transport
+## CRUD Operations with Local or Custom Transport
+
+The information in this section is applicable to scenarios, in which the data is already available on the client, or its retrieval and submitting will be taken care of by the developer.
+In other words, the Kendo UI DataSource will not make any HTTP requests on its own.
 
 ### Read (Local)
 
@@ -141,7 +144,7 @@ Only `e.success()` or `e.error()` should be called.
         }
     });
 
-### Error handling with Local Transport
+### Error handling with Local and Custom Transport
 
 If any of the transport actions (read, update, create, destroy) fails, then information about this can and should be passed to the Kendo UI DataSource instance.
 This is achieved by executing `e.error()` instead of `e.success()` in the respective transport function. The `error` method accepts three parameters -
@@ -291,6 +294,9 @@ Only `e.success()` or `e.error()` should be called. When adding an item, it stil
     </html>
 
 ## CRUD Operations with Remote Transport
+
+The information in this section is applicable to scenarios, in which the data should be retrieved from and submitted to a remote data service
+via HTTP requests made by the Kendo UI DataSource.
 
 CRUD operations with remote data rely on server code to perform the read, update, create and destroy actions.
 Instead of configuring client functions, the dataSource transport defines remote service URLs and the expected format in which data should be sent and received.
