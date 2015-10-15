@@ -7,7 +7,7 @@ position: 1
 
 # Grid
 
-The Grid HtmlHelper extension is a server-side wrapper for the [Kendo UI Grid](/api/web/grid) widget. It allows you to configure the Kendo UI grid
+The Grid HtmlHelper extension is a server-side wrapper for the [Kendo UI Grid](/api/javascript/ui/grid) widget. It allows you to configure the Kendo UI grid
 from server-side code, helps with data binding and editing.
 
 ## Introduction
@@ -90,7 +90,7 @@ Name the model "Northwind.edmx" and click "Next". This will start the "Entity Da
 ## Get Reference to the Grid
 
 To get a reference to a grid instance use the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified via the `Name()` method.
-Then you can use you can use the JavaScript [API](/api/web/grid#methods) of the grid.
+Then you can use you can use the JavaScript [API](/api/javascript/ui/grid#methods) of the grid.
 
 ###### Example - get reference to a Kendo UI Grid instance
 
@@ -113,7 +113,7 @@ Then you can use you can use the JavaScript [API](/api/web/grid#methods) of the 
 
 ## Handle Grid Events
 
-You can subscribe to all [events](/api/web/grid#events) exposed by the widget:
+You can subscribe to all [events](/api/javascript/ui/grid#events) exposed by the widget:
 
 ### Subscribe to an Event by Handler Name (ASPX)
 
@@ -181,7 +181,7 @@ You can subscribe to all [events](/api/web/grid#events) exposed by the widget:
 
 ## Further Reading
 
-1. [API reference](/api/wrappers/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder)
+1. [API reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder)
 1. [Configuration](/aspnet-mvc/helpers/grid/configuration)
 1. [FAQ](/aspnet-mvc/helpers/grid/faq)
 1. [Ajax Binding](/aspnet-mvc/helpers/grid/ajax-binding)

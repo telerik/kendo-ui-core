@@ -4,15 +4,15 @@ page_title: Understanding the different rendering modes in Kendo UI Javascript D
 description: How to configure the rendering modes in the Kendo UI DataViz suite.
 ---
 
-# Notes on rendering
+# Notes on Rendering
 
-The **Kendo UI** DataViz widgets supports the following rendering targets:
+The Kendo UI DataViz widgets supports the following rendering targets:
 
 * SVG
 * VML
 * Canvas
 
-## Mode selection
+## Mode Selection
 
 The rendering mode will be chosen automatically based on availability.
 
@@ -22,7 +22,7 @@ These components do not require interactivity and will default to Canvas renderi
 You can set the preferred rendering mode in the
 [renderAs](/api/dataviz/chart#configuration-renderAs) option.
 
-### Example: Set preferred rendering mode to Canvas
+###### Example - set a preferred rendering mode to Canvas
 
     <div id="chart"></div>
     <script>
@@ -35,7 +35,7 @@ You can set the preferred rendering mode in the
     });
     </script>
 
-## Including only what you need
+## Include Only What You Need
 
 The rendering modules are available as separate files:
 
@@ -45,11 +45,12 @@ The rendering modules are available as separate files:
 
 You must include at least one, the rest are optional.
 
+> **Important**  
 > The Canvas and SVG modules are required by the [imageDataURL](/api/dataviz/chart#methods-imageDataURL) and [svg](/api/dataviz/chart#methods-svg) methods.
 
 See also:
 
-* [JavaScript dependencies](/javascript-dependencies)
+* [JavaScript dependencies](/intro/installation/prerequisites)
 * [Custom Download Builder](http://www.telerik.com/download/custom-download) (requires login)
 
 ## Limitations

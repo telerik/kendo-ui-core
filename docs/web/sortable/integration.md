@@ -15,13 +15,13 @@ The Sortable widget may be used to reorder Kendo UI Grid/ListView items via drag
 
 The article assumes that you are familiar with the following:
 
-- [Kendo UI Sortable](../../../web/sortable/overview)
-- [Kendo UI Grid](../../../web/grid/overview)
-- [Kendo UI DataSource API](../../../api/framework/datasource#methods)
+- [Kendo UI Sortable](/web/sortable/overview)
+- [Kendo UI Grid](/web/grid/overview)
+- [Kendo UI DataSource API](/api/javascript/data/datasource#methods)
 
 ## Reorder Kendo UI Grid table rows using the Sortable widget
 
-The Sortable widget should be initialized on the Grid's [`table element`](../../../api/web/grid#fields-table).
+The Sortable widget should be initialized on the Grid's [`table element`](/api/javascript/ui/grid#fields-table).
 In the general case, the `filter` property of the Sortable widget should select all `tr` elements that are direct children of the table's `tbody` element. For example: `filter: ">tbody >tr"`.
 
 > In AngularJS application the Sortable widget should be initialized as parent directive. The `filter` configuration option should select all `tr` elements that are children of the `.k-grid` wrapper.
@@ -33,7 +33,7 @@ For example `.filter(">tbody >tr:not(.k-grid-edit-row)")`. In this way the Sorta
 **If the Grid is configured to display details**, you should use a selector that matches only the master Grid rows. For example: `filter: ">tbody >tr.k-master-row"`.
 In this way the detail rows will not be draggable.
 
-For more information check the [Sortable events](../../../api/web/sortable#events) and the [Grid/Sortable integration demo](http://demos.telerik.com/kendo-ui/web/sortable/integration-grid.html).
+For more information check the [Sortable events](/api/javascript/ui/sortable#events) and the [Grid/Sortable integration demo](http://demos.telerik.com/kendo-ui/web/sortable/integration-grid.html).
 
 ## Sortable with editing
 

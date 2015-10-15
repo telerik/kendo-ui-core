@@ -2,13 +2,13 @@
 title: New Project Wizard
 ---
 
-#New Project Wizard
+# New Project Wizard
 
 This help topic shows how to create a new Telerik UI for ASP.NET MVC Application.
 
 The New Project wizard is used for creation of a new Telerik UI for ASP.NET MVC Application (Telerik | UI for ASP.NET MVC | Create New Telerik Project). The wizard consists of two steps. On the first page the user can specify some project-wide settings while on the second page he can configure the data access layer.
 
-##Project Settings
+## Project Settings
 
 ![New Project Wizard](/aspnet-mvc/vs-integration/images/new1.png)
 
@@ -21,11 +21,11 @@ Using the options in the Telerik UI for ASP.NET MVC Project Settings page you ca
 -   **View Engine** - Choose between Razor and WebForms
 -   **Theme** – Choose the visual theme for your Telerik UI for ASP.NET MVC Application
 -   **Copy Editor Templates** - Copy the predefined editor templates to ~/Views/Shared/EditorTemplates
--   **Use CDN Support** - Enable or disable [CDN](/javascript-dependencies#cdn) support.
+-   **Use CDN Support** - Enable or disable [CDN](/intro/installation/cdn-service) support.
 -   **Copy Global Resources** - Copy the localization files to ~/Scripts/kendo/{version}/cultures
 -   **Add Test Project** - Choose whether to add a test project to the solution.
 
-##Data Access Settings
+## Data Access Settings
 
 ![Data Access Settings](/aspnet-mvc/vs-integration/images/data_access.png)
 
@@ -38,7 +38,7 @@ On the next step the New Project wizard's Data Access page offers you initialize
 
 - **Skip creating an OpenAccess Model Library Project** - No data access project will be added.
 
-##Creation of New Kendo UI web application
+## Create a New Kendo UI Web Application
 
 When you click 'Finish', the creation of new Kendo UI web application will begin. The wizard will:
 
@@ -52,7 +52,7 @@ When you click 'Finish', the creation of new Kendo UI web application will begin
 - Apply the pre-selected theme
 - Create test project (optional)
 
-## Modernizr inclusion
+## Modernize Inclusion
 
 The Kendo UI ASP.NET MVC application includes a custom stripped-down Modernizr in a file called `kendo.modernizr.custom.js`. Its goal is to provide HTML5 element support for old browsers, specifically Internet Explorer.
 If you need Modernizr in your application, you may want to remove the existing Modernizr and register another version, which includes more components and features. In this case, if HTML5 element support is required,

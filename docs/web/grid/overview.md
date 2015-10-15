@@ -45,7 +45,7 @@ for highly optimized binding to large data sets. Enabling UI virtualization is d
 ## Accessing an Existing Grid
 
 You can reference an existing **Grid** instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [Grid API](/api/web/grid) to control its behavior.
+Once a reference has been established, you can use the [Grid API](/api/javascript/ui/grid) to control its behavior.
 
 ### Accessing an existing Grid instance
 

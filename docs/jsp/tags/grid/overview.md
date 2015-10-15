@@ -4,7 +4,7 @@ title: Overview
 
 # Grid
 
-The Grid tag is a server-side wrapper for the [Kendo UI Grid](/api/web/grid) widget.
+The Grid tag is a server-side wrapper for the [Kendo UI Grid](/api/javascript/ui/grid) widget.
 
 ## Getting Started
 
@@ -40,7 +40,7 @@ Here is how to configure the Kendo Grid for binding to a data passed as model at
 ## Accessing an Existing Grid
 
 You can reference an existing Grid instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/grid#methods) to control its behavior.
+Once a reference has been established, you can use the [API](/api/javascript/ui/grid#methods) to control its behavior.
 
 ### Accessing an existing Grid instance
 
@@ -55,7 +55,7 @@ Once a reference has been established, you can use the [API](/api/web/grid#metho
 
 ## Handling Kendo UI Grid events
 
-You can subscribe to all [events](/api/web/grid#events) exposed by Kendo UI grid:
+You can subscribe to all [events](/api/javascript/ui/grid#events) exposed by Kendo UI grid:
 
 
 ### Subscribe by handler name

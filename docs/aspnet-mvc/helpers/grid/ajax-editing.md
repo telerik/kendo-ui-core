@@ -235,7 +235,7 @@ Server validation is often needed when performing editing. The following tutoria
             return Json(new[] { product }.ToDataSourceResult(request, ModelState));
         }
 1. Subscribe to the [error](/api/framework/datasource#events-error) event of the data source. It is fired when there are model state errors or some other unexpected problem occurred when making the ajax request.
-In the event handler display the errors and call the [cancelChanges](/api/web/grid#methods-cancelChanges) method of the grid.
+In the event handler display the errors and call the [cancelChanges](/api/javascript/ui/grid#methods-cancelChanges) method of the grid.
 
     ```Razor
     @(Html.Kendo().Grid<KendoGridAjaxEditing.Models.ProductViewModel>()
