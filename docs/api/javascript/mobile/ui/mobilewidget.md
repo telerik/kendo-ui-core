@@ -4,7 +4,7 @@ title: MobileWidget
 
 # kendo.mobile.ui.Widget
 
-Base class of all Kendo UI Mobile widgets. Inherits from [kendo.ui.Widget](/api/framework/widget).
+Base class of all Kendo UI Mobile widgets. Inherits from [kendo.ui.Widget](/api/javascript/ui/widget).
 
 ## Methods
 

@@ -18,7 +18,7 @@ Kendo Grid provides a way to localize the user interface using the configuration
 		{ name: "cancel", text: "Custom Cancel" }
 	]
 
-More info can be found in the [toolbar](/api/web/grid#toolbar-array) section of the Grid API reference.
+More info can be found in the [toolbar](/api/javascript/ui/grid#configuration-toolbar) section of the Grid API reference.
 
 ## Localization of the column commands:
 
@@ -40,7 +40,7 @@ More info can be found in the [toolbar](/api/web/grid#toolbar-array) section of 
         }
     ]
 
-More info can be found in the [columns.command](/api/web/grid#columnscommand-stringarray) section of the Grid API reference.
+More info can be found in the [columns.command](/api/javascript/ui/grid#configuration-columns.command) section of the Grid API reference.
     
 ## Localization of the filter menu
 
@@ -93,7 +93,7 @@ More info can be found in the [columns.command](/api/web/grid#columnscommand-str
 		}
 	}
 
-More info can be found in the [filterable](/api/web/grid#filterablemessages-object) section of the Grid API reference.
+More info can be found in the [filterable](/api/javascript/ui/grid#configuration-filterable.messages) section of the Grid API reference.
 
 ## Localization of the grouping header
 
@@ -103,7 +103,7 @@ More info can be found in the [filterable](/api/web/grid#filterablemessages-obje
         }
     }
 
-More info can be found in the [groupable.messages](/api/web/grid#groupablemessages-object) section of the Grid API reference.
+More info can be found in the [groupable.messages](/api/javascript/ui/grid#configuration-columnMenu.messages) section of the Grid API reference.
 
 ## Localization of the column menu
 

@@ -32,7 +32,7 @@ kendoui bundle name.
 
 ![jquery plugin](/images/vsdoc/jquery-plugin.png)
 
-### Widget accessors
+### Widget Accessors
 
 ![jquery plugin](/images/vsdoc/jquery-accessor.png)
 
@@ -45,7 +45,7 @@ kendoui bundle name.
 There are two ways to reference the intellisense.
 
 1. When the script is directly added to a page as shown above.
-The `kendo.all-vsdoc.js` and `kendo.all.min.intellisense.js` files are also available on the [Kendo UI CDN](/javascript-dependencies#cdn), in the same folder as the regular JS files.
+The `kendo.all-vsdoc.js` and `kendo.all.min.intellisense.js` files are also available on the [Kendo UI CDN](/intro/installation/cdn-service), in the same folder as the regular JS files.
 1. Using a reference hint from within an external JS file as shown below
 
 ![script reference](/images/vsdoc/js-reference.png)

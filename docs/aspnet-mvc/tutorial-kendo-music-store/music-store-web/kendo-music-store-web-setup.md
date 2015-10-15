@@ -5,7 +5,7 @@ position: 1
 
 # Project Setup - Kendo UI Music Store
 
-## Add Kendo UI to the project
+## Add Kendo UI to the Project
 
 Start by adding Kendo UI to the project. There are a lot of ways to accomplish this.
 Kendo UI can be downloaded from [telerik.com](http://www.telerik.com/download/kendo-ui-complete), referenced from the CDN, or fetched with NuGet.
@@ -26,7 +26,7 @@ For that reason, we will use the minified files in the remainder of this example
 
 ### Fetch from the CDN
 
-Kendo UI can also be fetched from a CDN instead of downloading the files. For more information and the CDN URLs, please see: **[Getting Started: Javascript Dependencies](http://docs.telerik.com/kendo-ui/javascript-dependencies)**
+Kendo UI can also be fetched from a CDN instead of downloading the files. For more information and the CDN URLs, see [Use Kendo UI CDN Services](/intro/installation/cdn-service).
 
 ### Fetch from NuGet
 
@@ -64,7 +64,7 @@ You can see and modify which files the ASP.NET bundler will ignore by inspecting
     // Do not include intellisense files
     bundles.IgnoreList.Ignore("*.intellisense.js");
 
-### Separate Libs and App code into bundles
+### Separate Libs and App Code into Bundles
 
 Most sizable web applications will include a number of .js files. It is a good practice to separate these into
 bundles for third-party libraries and your own application code.
@@ -88,7 +88,7 @@ And render them in **_Layout.cshtml**:
     @Scripts.Render("~/bundles/libs")
     @Scripts.Render("~/bundles/app")
 
-### Easier debugging with the commercial version of Kendo UI
+### Easier Debugging with the Commercial Version of Kendo UI
 
 While it is typically good practice to always include the minified versions of .js and .css files that you use, it makes debugging JavaScript errors more difficult.
 The commercial version of Kendo UI comes with the full non-minified source code. We can include these files instead, using the ASP.NET bundler to bundle and minify them for production, while still keeping them un-minified for development.

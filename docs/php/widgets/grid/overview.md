@@ -6,7 +6,7 @@ description: Learn how to bind Kendo UI Grid for PHP, handle Kendo UI Grid Event
 
 # Grid
 
-The Kendo Grid for PHP is a server-side wrapper for the [Kendo UI Grid](/api/web/grid) widget.
+The Kendo Grid for PHP is a server-side wrapper for the [Kendo UI Grid](/api/javascript/ui/grid) widget.
 
 ## Getting Started
 
@@ -54,7 +54,7 @@ Here is how to configure the grid for local binding:
 ## Getting Client-side Reference
 
 You can reference the clien-side Kendo Grid instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/grid#methods) to control its behavior.
+Once a reference has been established, you can use the [API](/api/javascript/ui/grid#methods) to control its behavior.
 
 
 ### Example
@@ -72,7 +72,7 @@ Once a reference has been established, you can use the [API](/api/web/grid#metho
 
 ## Handling Events
 
-You can subscribe to all grid [events](/api/web/grid#events).
+You can subscribe to all grid [events](/api/javascript/ui/grid#events).
 
 ### Example - subscribing by specifying JavaScript function name
 

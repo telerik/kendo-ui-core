@@ -13,7 +13,7 @@ In order to see those features in action please check the [adaptive rendering de
 
 ## Enabling the adaptive rendering feature
 
-To enable the adaptive rendering feature the developer should set [mobile](/api/web/grid#configuration-mobile) propery to `true`, `phone` or `tablet`.
+To enable the adaptive rendering feature the developer should set [mobile](/api/javascript/ui/grid#configuration-mobile) propery to `true`, `phone` or `tablet`.
 
 #### Example
     <div id="grid"></div>

@@ -19,15 +19,15 @@ All code examples assume the following model:
         public double UnitPrice { get; set; }
     }
 
-The Kendo UI Grid fluent API is exposed via the [Kendo.Mvc.UI.Fluent.GridBuilder](/api/wrappers/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder) class.
+The Kendo UI Grid fluent API is exposed via the [Kendo.Mvc.UI.Fluent.GridBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder) class.
 You don't need to instantiate that class though. You need to use the `Grid` HtmlHelper extension method instead:
 
     @(Html.Kendo().Grid<Product>().Name("grid"))
 
 ## Common DataSource Settings
 
-The [DataSource](/api/wrappers/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder#methods-DataSource(System.Action<Kendo.Mvc.UI.Fluent.DataSourceBuilder<T>>))
-method of Kendo UI Grid for ASP.NET MVC configures the [data source](/api/web/grid#configuration-dataSource).
+The [DataSource](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder#methods-Columns(System.Action<Kendo.Mvc.UI.Fluent.GridColumnFactory<T>>))
+method of Kendo UI Grid for ASP.NET MVC configures the [data source](/api/javascript/ui/grid#configuration-dataSource).
 
 ### Aggregates
 

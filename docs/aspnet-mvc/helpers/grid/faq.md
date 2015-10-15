@@ -147,7 +147,7 @@ The Kendo Template has an implicit parameter called `data`. Use that as the argu
 ### How Do I Use a Kendo UI Widget Inside a Grid Client Column Template?
 
 `script` tags are not automatically evaluated inside a Grid client column template, so any included widgets will not be initialized.
-The scripts must be evaluated manually in the [Grid's dataBound event](/api/web/grid#events-dataBound).
+The scripts must be evaluated manually in the [Grid's dataBound event](/api/javascript/ui/grid#events-dataBound).
 
 ###### Example - add a Kendo UI menu inside a Grid client column template
 

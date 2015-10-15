@@ -61,7 +61,7 @@ Fields and templates are defined via data attributes:
     </table>
 
 The table can now describe the entire structure of the grid. The field that the column is bound to in the data set, is specified in the `data-field` attribute of each `th` element. Using `data-field` attributes is highly
-recommended, otherwise the header cell content should meet the [requirements for data field names](/api/web/grid#configuration-columns.field).
+recommended, otherwise the header cell content should meet the [requirements for data field names](/api/javascript/ui/grid#configuration-columns.field).
 
 Since the layout of the grid is defined by the HTML it’s only necessary to call the kendoGrid() function to create a grid.
 
@@ -654,7 +654,7 @@ The code below addresses this issue by cloning the header row and prepending it 
 
 When the datasource does not return any data (e.g. as a result of filtering) a table row with some user-friendly message can be added manually:
 
-### Example - adding a table row in the Grid's [dataBound](/api/web/grid/#events-dataBound) event handler
+### Example - adding a table row in the Grid's [dataBound](/api/javascript/ui/grid#events-dataBound) event handler
 
     function onGridDataBound(e) {
         if (!e.sender.dataSource.view().length) {
