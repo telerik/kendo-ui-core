@@ -13,6 +13,16 @@ A point representing a location (x, y) in two-dimensional coordinate space.
             var point = new geom.Point(10, 20);
         </script>
 
+## Constructor Parameters
+
+### x `Number`
+
+The x coordinate of the point.
+
+### y `Number`
+
+The y coordinate of the point.
+
 ## Fields
 
 ### x `Number`
