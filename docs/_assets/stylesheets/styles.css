@@ -241,12 +241,16 @@ code, em {
     margin: 2em auto;
 }
 
-a {
+a,
+p a code,
+li a code {
     color: #1976d2;
     text-decoration: none;
 }
 
-a:hover {
+a:hover,
+p a:hover code,
+li a:hover code {
     color: #1565c0;
     text-decoration: underline;
 }
