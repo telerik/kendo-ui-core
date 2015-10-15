@@ -35,7 +35,7 @@ Configures the Kendo UI Spreadsheet Excel export settings.
 Specifies the file name of the exported Excel file.
 
 #### Example - set the default Excel file name
-```html
+```
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -83,7 +83,7 @@ The proxy should return the decoded file with the "Content-Disposition" header s
 `attachment; filename="<fileName.xslx>"`.
 
 #### Example - set the server proxy URL
-```html
+```
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -470,7 +470,7 @@ Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) 
 > Calling this method could trigger the browser built-in popup blocker in some cases. To avoid that, always call it as a response to an end-user action e.g. button click.
 
 #### Example - manually initiate Excel export
-```html
+```
     <button id="export">Export to Excel</button>
     <div id="spreadsheet"></div>
     <script>
@@ -652,7 +652,7 @@ The Excel [workbook configuration object](/api/javascript/ooxml/workbook#configu
 If invoked the grid will not save the generated file.
 
 #### Example - subscribe to the "excelExport" event during initialization
-```html
+```
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
@@ -679,7 +679,7 @@ If invoked the grid will not save the generated file.
 ```
 
 #### Example - subscribe to the "excelExport" event after initialization
-```html
+```
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet({
