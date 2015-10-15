@@ -9,8 +9,8 @@
 @select-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 20%), 0.5);
 @select-hover-background-color: saturate(@hover-background, 1%);
 @select-group-background-color: @base;
-@input-background-color: #fff;
-@input-text-color: darken(@accent, 29%);
+@input-background-color: contrast(@normal-text-color, @content-background-color, #fff, 0.5);
+@input-text-color: @normal-text-color;
 @link-text-color: saturate(@normal-text-color, 1%);
 @header-text-color: contrast(@selected-background, lighten(@normal-text-color, 1%), darken(@normal-text-color, 13%), 0.5);
 @header-background-color: saturate(@base, 4%);
@@ -1924,6 +1924,8 @@ html .km-pane-wrapper .km-widget,
     border-color: @drop-down-hover-border-color;
 }
 
+input.k-textbox,
+textarea.k-textbox,
 .k-multiselect.k-header
 {
     border-color: @drop-down-border-color;
