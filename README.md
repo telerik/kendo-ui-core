@@ -13,56 +13,56 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | Feature | Core | [Professional](http://www.telerik.com/kendo-ui) | UI for [MVC](http://www.telerik.com/aspnet-mvc)/[JSP](http://www.telerik.com/jsp-ui)/[PHP](http://www.telerik.com/php-ui) |
 | ------- | :----: | :--------: | :------------------: |
 | **Framework** |
-| DataSource | Yes | Yes | Yes |
-| MVVM | Yes | Yes | Yes |
-| SPA | Yes | Yes | Yes |
-| Effects | Yes | Yes | Yes |
-| Drag & Drop | Yes | Yes | Yes |
-| Validator | Yes | Yes | Yes |
+| DataSource | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| MVVM | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| SPA | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Effects | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Drag & Drop | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Validator | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | **Widgets** |
-| AutoComplete | Yes | Yes | Yes |
-| Calendar | Yes | Yes | Yes |
-| ComboBox | Yes | Yes | Yes |
-| DatePicker | Yes | Yes | Yes |
-| DateTimePicker | Yes | Yes | Yes |
-| DropDownList | Yes | Yes | Yes |
-| ListView | Yes | Yes | Yes |
-| Menu | Yes | Yes | Yes |
-| NumericTextBox | Yes | Yes | Yes |
-| PanelBar | Yes | Yes | Yes |
-| Slider | Yes | Yes | Yes |
-| Splitter | Yes | Yes | Yes |
-| TabStrip | Yes | Yes | Yes |
-| TimePicker | Yes | Yes | Yes |
-| Tooltip | Yes | Yes | Yes |
-| Window | Yes | Yes | Yes |
-| Sortable | Yes | Yes | Yes |
-| Progress | Yes | Yes | Yes |
-| Button | Yes | Yes | Yes |
-| Color Picker | Yes | Yes | Yes |
-| ContextMenu | Yes | Yes | Yes |
-| Toolbar | Yes | Yes | Yes |
-| MultiSelect | Yes | Yes | Yes |
-| MaskedTextBox | Yes | Yes | Yes |
-| Notification | Yes | Yes | Yes |
-| Editor | No | Yes | Yes |
-| Grid | No | Yes | Yes |
-| PivotGrid | No | Yes | Yes |
-| Scheduler | No | Yes | Yes |
-| Gantt | No | Yes | Yes |
-| TreeView | No | Yes | Yes |
-| TreeList | No | Yes | Yes |
-| TreeMap | No | Yes | Yes |
-| Upload | No | Yes | Yes |
+| AutoComplete | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Calendar | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| ComboBox | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| DatePicker | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| DateTimePicker | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| DropDownList | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| ListView | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Menu | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| NumericTextBox | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| PanelBar | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Slider | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Splitter | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| TabStrip | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| TimePicker | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Tooltip | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Window | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Sortable | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Progress | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Button | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Color Picker | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| ContextMenu | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Toolbar | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| MultiSelect | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| MaskedTextBox | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Notification | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Editor | :x: | :white_check_mark: | :white_check_mark: |
+| Grid | :x: | :white_check_mark: | :white_check_mark: |
+| PivotGrid | :x: | :white_check_mark: | :white_check_mark: |
+| Scheduler | :x: | :white_check_mark: | :white_check_mark: |
+| Gantt | :x: | :white_check_mark: | :white_check_mark: |
+| TreeView | :x: | :white_check_mark: | :white_check_mark: |
+| TreeList | :x: | :white_check_mark: | :white_check_mark: |
+| TreeMap | :x: | :white_check_mark: | :white_check_mark: |
+| Upload | :x: | :white_check_mark: | :white_check_mark: |
 | **Data Viz** |
-| Charts | No | Yes | Yes |
-| Gauges | No | Yes | Yes |
-| QR Code | No | Yes | Yes |
-| Bar Code | No | Yes | Yes |
+| Charts | :x: | :white_check_mark: | :white_check_mark: |
+| Gauges | :x: | :white_check_mark: | :white_check_mark: |
+| QR Code | :x: | :white_check_mark: | :white_check_mark: |
+| Bar Code | :x: | :white_check_mark: | :white_check_mark: |
 | **Mobile** |
-| Mobile Widgets | Yes | Yes | Yes |
-| Mobile Framework Features | Yes | Yes | Yes |
-| **Official Support** | No | Yes | Yes
+| Mobile Widgets | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Mobile Framework Features | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| **Official Support** | :x: | :white_check_mark: | :white_check_mark:
 
 ## Compatibility and Requirements
 
