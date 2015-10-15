@@ -6,11 +6,13 @@ description: Reorder AngularJS Grid rows
 
 # Reorder AngularJS Grid rows
 
-The following runnable sample demonstrates how to reorder Grid rows using Kendo UI Sortable in AngularJS application
+The following runnable sample demonstrates how to reorder Grid rows using Kendo UI Sortable in AngularJS application.
 
 #### Example:
 
 ```html
+  <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+
   <div id="example" ng-app="KendoDemos">
     <div ng-controller="MyCtrl">
       <kendo-sortable options="sortableOptions">
