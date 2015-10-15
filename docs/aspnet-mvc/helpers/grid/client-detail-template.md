@@ -11,7 +11,7 @@ description: Set the detail template of Kendo UI Grid used during ajax binding
 Kendo UI Grid for ASP.NET MVC provides the ability to show additional info for a data item. This is done by setting the detail template of the grid
 This help topic shows how to use detail template which is used in ajax binding scenarios.
 
-## Client details
+## Client Details
 
 The following tutorial shows how to configure Kendo UI Grid for ASP.NET MVC to display additional details of the **Product** entity from the **Northwind** database.
 
@@ -91,6 +91,8 @@ Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. That
     %>
     ```
 1.  Define the client template using [Kendo UI Template](/framework/templates/overview) syntax. The context of the template is the data item (Product entity) to which the current grid row is bound.
+
+> **Important**  
 > Any "#" symbols that are not part of a template expression (#: #, # # or #= #) must be escaped ("\\#").
 
         <script id="client-template" type="text/x-kendo-template">
@@ -140,7 +142,7 @@ Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. That
 
 [Download Visual Studio Project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/client-detail-template)
 
-## Client hierarchy
+## Client Hierarchy
 
 The following tutorial shows how to configure Kendo UI Grid for ASP.NET MVC to display all **Product** entities available per **Category** entity from the **Northwind** database.
 
@@ -239,9 +241,11 @@ Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. That
     ```
 1. Define the client template using [Kendo UI Template](/framework/templates/overview) syntax. The context of the template is the Category entity to which the current grid row is bound. The template itself
 contains another grid which is bound to the `Products_Read` action.
+
+> **Important**  
 > **Always** call the `ToClientTemplate` method when using Telerik UI for ASP.NET MVC widgets in a client template.
 >
->**Important:** The "#" characters used for a template expression should be escaped when using a column `ClientTemplate` in a detail template so that the expression is evaluated in the correct context.
+> The "#" characters used for a template expression should be escaped when using a column `ClientTemplate` in a detail template so that the expression is evaluated in the correct context.
 
         <script id="client-template" type="text/x-kendo-template">
         @(Html.Kendo().Grid<KendoGridClientHierarchy.Models.Product>()

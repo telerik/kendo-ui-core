@@ -7,9 +7,11 @@ position: 3
 
 # Diagram Editing
 
-To enable the editing support of KendoUI Diagram widget the following steps should be performed:
+To enable the editing support for Kendo UI Diagram widget, perform the following steps:
 
-## Configure the dataSource(shapeDataSource) for remote CRUD (Create, Read, Update, Destroy) data operations:
+## DataSource Configuration for Remote CRUD Data Operations
+
+Configure the dataSource (shapeDataSource) for remote CRUD (Create, Read, Update, Destroy) data operations in the way demonstrated below:
 
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -33,7 +35,9 @@ To enable the editing support of KendoUI Diagram widget the following steps shou
 	  }
     });
 
-## Configure the connectionsDataSource for remote CRUD (Create, Read, Update, Destroy) data operations(without connectionsDataSource the editing will be turned off):
+## ConnectionsDataSource Configuration for Remote CRUD Data Operations
+
+Configure the connectionsDataSource for remote CRUD (Create, Read, Update, Destroy) data operations in the way demonstrated below. Note that without connectionsDataSource the editing will be turned off:
 
     var connectionsDataSource = new kendo.data.DataSource({
       transport: {
@@ -57,7 +61,9 @@ To enable the editing support of KendoUI Diagram widget the following steps shou
 	  }
     });
 
-## Declare fields definition through the dataSource schema:
+## Declare Fields Definition (dataSource Schema)
+
+Declare fields definition through the dataSource schema:
 
     var dataSource = new kendo.data.DataSource({
       //..
@@ -72,7 +78,9 @@ To enable the editing support of KendoUI Diagram widget the following steps shou
       }
     });
 
-## Declare fields definition through the connectionsDataSource schema:
+## Declare Fields Definition (connectionsDataSource Schema)
+
+Declare fields definition through the connectionsDataSource schema:
 
     var connectionsDataSource = new kendo.data.DataSource({
       //..
@@ -91,7 +99,9 @@ To enable the editing support of KendoUI Diagram widget the following steps shou
       }
     });
 
-## If you want to enable new records insertion, you should configure the toolbar(the createShape will be added by default):
+## Configure the Toolbar
+
+Configure the Toolbar if you want to enable new records insertion. The createShape will be added by default.
 
     $("#diagram").kendoDiagram({
       dataSource: dataSource,
@@ -101,7 +111,9 @@ To enable the editing support of KendoUI Diagram widget the following steps shou
 	  }
     });
 
-## In order to be able to delete records, you should add a delete tool:
+## Add a delete tool
+
+Add a delete tool if you want to be able to delete records.
 
     $("#diagram").kendoDiagram({
       dataSource: dataSource,
@@ -111,7 +123,7 @@ To enable the editing support of KendoUI Diagram widget the following steps shou
 	  }
     });
 
-## The fields of the shape model
+## Shape Model Fileds
 
 The shape model has the following fields:
 
@@ -162,7 +174,7 @@ Each field will be updated with user interaction. All fields except `id` are not
 	  }
 	}
 
-## The fields of the connection model
+## Connection Model Fields
 
 The connection model has the following fields:
 

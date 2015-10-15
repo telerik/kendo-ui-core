@@ -31,7 +31,7 @@ used to get the editor HTML for the whole model.
 
 A lot of additional info about ASP.NET MVC editor templates can be found in the [ASP.NET MVC 2 Templates](http://bradwilson.typepad.com/blog/2009/10/aspnet-mvc-2-templates-part-1-introduction.html) blog post series.
 
-## Create Custom Editor For a Bound Property
+## Create Custom Editor for a Bound Property
 
 Often there is need to create a custom editor for a specific property. For example show a dropdownlist which contains all available values a property can take.
 

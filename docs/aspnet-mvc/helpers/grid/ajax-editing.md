@@ -6,7 +6,7 @@ description: Documentation how to define commands and set the editing mode to co
 
 # Ajax Editing
 
-## Getting started
+## Getting Started
 
 The following tutorial shows how to configure Kendo UI Grid for ASP.NET MVC to do ajax editing of the Northwind database (the Products table).
 
@@ -194,7 +194,7 @@ Name the model "Northwind.edmx" and click "Next". This will start the "Entity Da
 
 [Download Visual Studio Project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/ajax-editing)
 
-## Display ModelState errors
+## Display ModelState Errors
 
 Server validation is often needed when performing editing. The following tutorial shows how to use the `AddModelError` method with Kendo UI Grid for ASP.NET MVC.
 
