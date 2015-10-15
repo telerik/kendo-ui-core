@@ -174,20 +174,8 @@ All data operations are persisted in this variable, so that it can be used or su
 If the Grid is bound to an [ObservableArray](/api/javascript/data/observablearray), there is no need to add, edit or remove items from the array manually.
 Only `e.success()` or `e.error()` should be called. When adding an item, it still needs an ID to be assigned.
 
-    <!DOCTYPE html>
-    <html>
-    <head>
-    <meta charset="utf-8" />
-    <title>Kendo UI Grid - CRUD operations with local data</title>
-
-    <style>html { font-size: 12px; font-family: Arial, Helvetica, sans-serif; }</style>
-    <link href="http://kendo.cdn.telerik.com/2014.2.903/styles/kendo.common.min.css" rel="stylesheet" />
-    <link href="http://kendo.cdn.telerik.com/2014.2.903/styles/kendo.default.min.css" rel="stylesheet" />
-
-    <script src="http://kendo.cdn.telerik.com/2014.2.903/js/jquery.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2014.2.903/js/kendo.web.min.js"></script>
-    </head>
-    <body>
+```html
+    <style>html { font: 12px sans-serif; }</style>
 
     <div id="grid"></div>
 
@@ -289,9 +277,7 @@ Only `e.success()` or `e.error()` should be called. When adding an item, it stil
             });
         });
     </script>
-
-    </body>
-    </html>
+```
 
 ## CRUD Operations with Remote Transport
 
