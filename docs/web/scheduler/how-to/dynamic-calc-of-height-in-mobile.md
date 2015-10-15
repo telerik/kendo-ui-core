@@ -11,7 +11,7 @@ The example below demonstrates how to calculate widgets height dynamically in mo
 #### Example:
 
 ```html
-<div data-init="initLoginView" data-role="view" id="login">
+<div data-init="initLoginView" data-role="view" id="login"  data-stretch="true">
 <header data-role="header">
   <div data-role="navbar">
     <div>TEST</div>
