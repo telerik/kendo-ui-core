@@ -115,7 +115,7 @@ The JSON response of the action method will contain only a single page of data. 
 > If your data is `IQueryable<T>` returned by a LINQ-enabled provider (Entity Framework, LINQ to SQL, Telerik OpenAccess, NHibernate or other) the LINQ expressions
 created by the `ToDataSourceResult` method will be converted to SQL and executed by the database server.
 
-## Using View Models
+## Use View Models
 
 Sometimes it is convenient to use view model objects instead of entities returned by Entity Framework. For example you may want to
 avoid serializing all Entity Framework properties as JSON or prevent serialization exceptions caused by circular references.
@@ -259,7 +259,7 @@ The custom parameter names must not match reserved words, which are used by the 
     }
     </script>
 
-## Enable Client Data Processing during Ajax Binding
+## Enable Client Data Processing
 
 By default the Kendo UI Grid for ASP.NET MVC will make an ajax request to the action method every time the user changes the page, sorts, filters or groups. This behavior
 can be changed by disabling `ServerOperation`.
@@ -308,9 +308,9 @@ can be changed by disabling `ServerOperation`.
           .Sortable()
     )
 
-## Customize the Rendered Content and Attach Event Handlers on the Fly
+## Customize Content and Attach Event Handlers on the Fly
 
-In addition using [server](/aspnet-mvc/helpers/grid/configuration#template) and [client](/aspnet-mvc/helpers/grid/configuration#clienttemplate) column templates,
+In addition to using [server](/aspnet-mvc/helpers/grid/configuration#template) and [client](/aspnet-mvc/helpers/grid/configuration#clienttemplate) column templates,
 in some cases you may need to customize the Grid data rows' appearance or content with Javascript - hide, show or modify some content, attach custom event handlers, etc.
 When using client-side databinding for the Grid, all these customizations should be performed in the Grid's [dataBound](/aspnet-mvc/helpers/grid/overview#handling-kendo-ui-grid-events) event.
 If the custom code is executed earlier (e.g. in document.ready), it is very likely to have no effect, because the table rows are still not rendered at that time.

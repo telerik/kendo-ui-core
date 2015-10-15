@@ -11,7 +11,7 @@ description: Set the detail template of Kendo UI Grid used during server binding
 Kendo UI Grid for ASP.NET MVC provides the ability to show additional info for a data item. This is done by setting the detail template of the grid
 This help topic shows how to use detail template which is used in server binding scenarios.
 
-## Server details
+## Server Details
 
 The following tutorial shows how to configure Kendo UI Grid for ASP.NET MVC to display additional details of the **Product** entity from the **Northwind** database.
 
@@ -104,7 +104,7 @@ Name the model "Northwind.edmx" and click "Next". This will start the "Entity Da
 
 [Download Visual Studio Project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/server-detail-template)
 
-## Server hierarchy
+## Server Hierarchy
 
 The following tutorial shows how to configure Kendo UI Grid for ASP.NET MVC to display all **Product** entities available per **Category** entity from the **Northwind** database.
 

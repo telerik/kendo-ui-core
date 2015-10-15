@@ -8,9 +8,10 @@ description: Learn how to scaffold Kendo UI Grid for ASP.NET MVC using the Kendo
 
 The following tutorial shows how to scaffold a Kendo UI Grid for ASP.NET MVC using the **Kendo UI Scaffolder** Visual Studio extension.
 
+> **Important**  
 > The Kendo UI Scaffolder will not include the required **UI for ASP.NET MVC** files to the project. You could achieve this automatically using the [Telerik UI for ASP.NET MVC Visual Studio Extensions](/aspnet-mvc/vs-integration/introduction) or manually as demonstrated [here](/aspnet-mvc/asp-net-mvc-5).
 
-# Getting started
+# Getting Started
 
 1.  Create a new ASP.NET MVC application, include an Entity Framework Data Model and add **Telerik UI for ASP.NET MVC**. If you have already done so, you can skip to the next step, otherwise you can follow the first 4 steps of the [following tutorial](/aspnet-mvc/helpers/grid/overview#getting-started).
 
@@ -40,7 +41,8 @@ The following tutorial shows how to scaffold a Kendo UI Grid for ASP.NET MVC usi
     - Select the **ProductViewModel** class from the **ViewModel Class** DropDownList.  
     ![ViewModel Class](/aspnet-mvc/helpers/grid/images/scaffolding/view_model_class.png)
 
-		> It is important that the names of the properties in the ViewModel are exactly the same as the corresponding ones in the Entity. Otherwise the Kendo UI Scaffolder won't be able to link them correctly.
+		> **Important**  
+        > The names of the properties in the ViewModel must be exactly the same as the corresponding ones in the Entity. Otherwise the Kendo UI Scaffolder will not be able to link them correctly.
 
 6. Click the **Grid options** item on the left.  
 ![Grid options](/aspnet-mvc/helpers/grid/images/scaffolding/kendo_ui_grid2.png)  

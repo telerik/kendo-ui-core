@@ -27,7 +27,7 @@ Here are some of the differences between server and ajax bound modes:
     - In server-bound mode the grid makes HTTP get requests to ASP.NET MVC action methods which cause a full page refresh.
     - In ajax-bound mode the grid makes ajax requests which cause partial page update. The grid retrieves only the data needed for the current page.
 
-## Getting started
+## Getting Started
 
 The following tutorial shows how to configure Kendo UI Grid for ASP.NET MVC to do server binding to the Northwind database (the Products table).
 
@@ -87,12 +87,12 @@ Name the model "Northwind.edmx" and click "Next". This will start the "Entity Da
 1. Build and run the application
 ![Final result](/aspnet-mvc/helpers/grid/images/grid-bound-grid.png)
 
-## Getting reference to the Kendo UI Grid widget
+## Get Reference to the Grid
 
 To get a reference to a grid instance use the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified via the `Name()` method.
 Then you can use you can use the JavaScript [API](/api/web/grid#methods) of the grid.
 
-### Example - get reference to a Kendo UI Grid instance
+###### Example - get reference to a Kendo UI Grid instance
 
     @(Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products)
           .Name("grid")
@@ -111,11 +111,13 @@ Then you can use you can use the JavaScript [API](/api/web/grid#methods) of the 
     </script>
 
 
-## Handling Kendo UI Grid events
+## Handle Grid Events
 
 You can subscribe to all [events](/api/web/grid#events) exposed by the widget:
 
-### Example - subscribe to event by handler name (ASPX)
+### Subscribe to an Event by Handler Name (ASPX)
+
+###### Example
 
     <%: Html.Kendo().Grid(Model)
             .Name("grid")
@@ -135,7 +137,9 @@ You can subscribe to all [events](/api/web/grid#events) exposed by the widget:
     </script>
 
 
-### Example - subscribe to event by handler name (Razor)
+### Subscribe to an Event by Handler Name (Razor)
+
+###### Example
 
     @(Html.Kendo().Grid(Model)
           .Name("grid")
@@ -155,7 +159,9 @@ You can subscribe to all [events](/api/web/grid#events) exposed by the widget:
     </script>
 
 
-### Example - subscribe to event via Razor delegate
+### Subscribe to an Event via Razor Delegate
+
+###### Example
 
     @(Html.Kendo().Grid(Model)
           .Name("grid")
@@ -173,7 +179,7 @@ You can subscribe to all [events](/api/web/grid#events) exposed by the widget:
           )
     )
 
-## Further reading
+## Further Reading
 
 1. [API reference](/api/wrappers/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder)
 1. [Configuration](/aspnet-mvc/helpers/grid/configuration)

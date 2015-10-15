@@ -8,7 +8,7 @@ description: How to use and configure Kendo UI Grid for ASP.NET MVC for server c
 
 Kendo Grid for ASP.NET MVC provides ability for the developer to bypass the built-in data processing and to handle operations such paging, sorting, filtering and grouping by himself. This is supported both for server and ajax binding.
 
-## Custom server binding
+## Custom Server Binding
 
 To configure the Kendo Grid for server custom binding follow these steps:
 
@@ -151,7 +151,7 @@ Decorate that parameter with the `Kendo.UI.DataSourceRequestAttribute`. That att
 
 [Download Visual Studio Project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/custom-server-binding)
 
-## Custom ajax binding
+## Custom Ajax Binding
 
 To configure the Kendo Grid for ajax custom binding follow these steps:
 

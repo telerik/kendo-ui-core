@@ -10,7 +10,7 @@ By default the Kendo Grid for ASP.NET MVC will perform server side requests (HTT
 
 To bind the grid with data you just need to set its data source and render the view. There are a few ways to do this:
 
-##   Bind to the `Model` of the view:
+## Bind to the `Model` of the View
 
 ### Controller
 
@@ -57,7 +57,7 @@ To bind the grid with data you just need to set its data source and render the v
 
 [Download Visual Studio Project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/server-binding)
 
-##   Bind to an item from the `ViewData` or `ViewBag`:
+##   Bind to an Item from the `ViewData` or `ViewBag`
 
 ### Action
 
@@ -95,7 +95,7 @@ To bind the grid with data you just need to set its data source and render the v
               columns.Bound(p => p.UnitsInStock);
           })
     )
-##  Use the `BindTo` method:
+##  Use the `BindTo` method
 
 ### Action
 
