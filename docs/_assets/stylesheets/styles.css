@@ -505,6 +505,39 @@ blockquote th, blockquote td {
     text-align: left;
 }
 
+.tag-neutral,
+.tag-success,
+.tag-error,
+.tag-warning {
+    display: inline-block;
+    min-width: 25px;
+    padding: 0 4px;
+    border-radius: 3px;
+    font-size: 13px;
+    text-align: center;
+}
+
+.tag-neutral {
+    background-color: #ececec;
+    color: #000;
+}
+
+.tag-success {
+    background-color: #00b312;
+    color: #fff;
+}
+
+.tag-error {
+    background-color: #ff1744;
+    color: #fff;
+}
+
+.tag-warning {
+    background-color: #ff9600;
+    color: #fff;
+}
+
+
 #page-toc+ul {
     padding-left: 0;
 }
