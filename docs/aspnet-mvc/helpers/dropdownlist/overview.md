@@ -15,7 +15,7 @@ There are two ways to bind a Kendo DropDownList for ASP.NET MVC:
 *   **server** - the data will be serialized to the client. No Ajax requests will be made.
 *   **ajax** - the dropdownlist will make ajax request to get the data.
 
-### Configure the Kendo DropDownList for server binding
+### Configure the DropDownList for Server Binding
 
 Here is how to configure the Kendo DropDownList  for server binding to the Northwind Products table using Linq to SQL:
 
@@ -57,7 +57,7 @@ Here is how to configure the Kendo DropDownList  for server binding to the North
               .SelectedIndex(10) //Select an item with index 10\. Note that the indexes are zero based.
             )
 
-### Configure the Kendo DropDownList for ajax binding
+### Configure the DropDownList for Ajax Binding
 
 Here is how to configure the Kendo DropDownList for ajax binding to the Northwind Products table using Linq to SQL:
 
@@ -111,9 +111,10 @@ Here is how to configure the Kendo DropDownList for ajax binding to the Northwin
                 .SelectedIndex(0) //Select first item.
             )
 
-> **Important:** **ToDataSourceResult()** extension method will modify structure of the result and the widget will not be able to bind to it. Please return simple array of data in this case.
+> **Important**  
+> The `ToDataSourceResult()` extension method will modify the structure of the result and the widget will not be able to bind to it. Please return simple array of data in this case.
 
-### Configure the Kendo DropDownList to work with ToDataSourceResult instance
+### Configure the DropDownList to Work with the `ToDataSourceResult` Instance
 
 Here is how to configure the dropdownlist to use a custom datasource and thus to bind to a ToDataSourceResult instance.
 
@@ -179,7 +180,7 @@ Here is how to configure the dropdownlist to use a custom datasource and thus to
                 })
             )
 
-### Sending parameters to the server
+### Send Parameters to the Server
 
 Here is how to configure the Kendo DropDownList to send parameters to the server:
 
@@ -256,8 +257,8 @@ Here is how the **GetProducts** method looks like:
             return Json(products, JsonRequestBehavior.AllowGet);
         }
 
-> The Kendo DropDownList has default event handler for the DataSource's Data callback. If you do not
-define event handler, it will be used.
+> **Important**  
+> The DropDownList has default event handler for the DataSource's Data callback. If you do not define an event handler, the default one will be used.
 
 *Default event handler for the DataSource's Data callback*
 
@@ -275,13 +276,13 @@ define event handler, it will be used.
 
 As you can see the dropdownlist sends the input's value only if the end-user starts to type in it.
 
-## Accessing an Existing DropDownList
+## Access an Existing DropDownList
 
 You can reference an existing DropDownList instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
 Once a reference has been established, you can use the [API](/api/web/dropdownlist#methods) to control its behavior.
 
 
-### Accessing an existing DropDownList instance
+### Access an Existing DropDownList Instance
 
     //Put this after your Kendo DropDownList for ASP.NET MVC declaration
     <script>
@@ -292,12 +293,12 @@ Once a reference has been established, you can use the [API](/api/web/dropdownli
     </script>
 
 
-## Handling Kendo UI DropDownList events
+## Handle DropDownList Events
 
 You can subscribe to all [events](/api/web/dropdownlist#events) exposed by Kendo UI DropDownList:
 
 
-### WebForms - subscribe by handler name
+### WebForms - Subscribe by Handler Name
 
     <%: Html.Kendo().DropDownList()
         .Name("dropdownlist")
@@ -318,7 +319,7 @@ You can subscribe to all [events](/api/web/dropdownlist#events) exposed by Kendo
     </script>
 
 
-### Razor - subscribe by handler name
+### Razor - Subscribe by Handler Name
 
     @(Html.Kendo().DropDownList()
       .Name("dropdownlist")
@@ -339,7 +340,7 @@ You can subscribe to all [events](/api/web/dropdownlist#events) exposed by Kendo
     </script>
 
 
-### Razor - subscribe by template delegate
+### Razor - Subscribe by Template Delegate
 
     @(Html.Kendo().DropDownList()
       .Name("dropdownlist")

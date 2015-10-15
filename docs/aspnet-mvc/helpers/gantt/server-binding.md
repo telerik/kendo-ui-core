@@ -91,7 +91,7 @@ Below are the data model classes for the Tasks and Dependencies and the availabl
         }
     }
 
-## Bind to an item from `ViewData` :
+## Bind to an Item from `ViewData`
 
 ### Action
 
@@ -194,7 +194,7 @@ Below are the data model classes for the Tasks and Dependencies and the availabl
         )
     )
 
-## Bind to an item from `ViewBag` :
+## Bind to an Item from `ViewBag`
 
 ### Action
 

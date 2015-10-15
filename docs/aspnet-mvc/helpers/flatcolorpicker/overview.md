@@ -34,13 +34,13 @@ Here is how to configure a simple Kendo FlatColorPicker:
                   .Value("#ff0000") //Set the value of the flatcolorpicker
             )
 
-## Accessing an Existing FlatColorPicker
+## Access an Existing FlatColorPicker
 
 You can reference an existing FlatColorPicker instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
 Once a reference has been established, you can use the [API](/api/web/flatcolorpicker#methods) to control its behavior.
 
 
-### Accessing an existing FlatColorPicker instance
+### Access an Existing FlatColorPicker Instance
 
     //Put this after your Kendo FlatColorPicker for ASP.NET MVC declaration
     <script>
@@ -51,11 +51,11 @@ Once a reference has been established, you can use the [API](/api/web/flatcolorp
     </script>
 
 
-## Handling Kendo UI FlatColorPicker events
+## Handle FlatColorPicker Events
 
 You can subscribe to all [events](/api/web/flatcolorpicker#events) exposed by Kendo UI FlatColorPicker:
 
-### WebForms - subscribe by handler name
+### WebForms - Subscribe by Handler Name
 
     <%: Html.Kendo().FlatColorPicker()
             .Name("flatcolorpicker")
@@ -70,7 +70,7 @@ You can subscribe to all [events](/api/web/flatcolorpicker#events) exposed by Ke
     </script>
 
 
-### Razor - subscribe by handler name
+### Razor - Subscribe by Handler Name
 
     @(Html.Kendo().FlatColorPicker()
           .Name("flatcolorpicker")
@@ -85,7 +85,7 @@ You can subscribe to all [events](/api/web/flatcolorpicker#events) exposed by Ke
     </script>
 
 
-### Razor - subscribe by template delegate
+### Razor - Subscribe by Template Delegate
 
     @(Html.Kendo().FlatColorPicker()
           .Name("flatcolorpicker")

@@ -35,7 +35,7 @@ Here is how to configure a simple Kendo Editor:
                   .Value("<p>Initial value</p>") // Set the value of the editor
             )
 
-## Processing the editor value on the server
+## Process the Editor Value on the Server
 
 The editor value will be posted as a string and mapped to a variable with the name of the widget.
 Note that the posted value is HTML-encoded by default, in order to circumvent the [ASP.NET request validation](http://msdn.microsoft.com/en-us/library/hh882339.aspx).
@@ -49,15 +49,16 @@ In order to decode the value, use the [HttpUtility.HtmlDecode method](http://msd
         return View();
     }
 
+> **Important**  
 > You can suppress the editor encoding by specifying Encode(false) via the fluent API and adding the [AllowHtml attribute](http://msdn.microsoft.com/en-us/library/system.web.mvc.allowhtmlattribute(v=vs.118).aspx) to the model field that stores the HTML.
 
-## Accessing an Existing Editor
+## Access an Existing Editor
 
 You can reference an existing Editor instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
 Once a reference has been established, you can use the [API](/api/web/editor#methods) to control its behavior.
 
 
-### Accessing an existing Editor instance
+### Access an Еxisting Editor Instance
 
     // Put this after your Kendo Editor for ASP.NET MVC declaration
     <script>
@@ -68,11 +69,11 @@ Once a reference has been established, you can use the [API](/api/web/editor#met
     </script>
 
 
-## Handling Kendo UI Editor events
+## Handle Editor Events
 
 You can subscribe to all [events](/api/web/editor#events) exposed by Kendo UI Editor:
 
-### WebForms - subscribe by handler name
+### WebForms - Subscribe by Handler Name
 
     <%: Html.Kendo().Editor()
             .Name("editor")
@@ -87,7 +88,7 @@ You can subscribe to all [events](/api/web/editor#events) exposed by Kendo UI Ed
     </script>
 
 
-### Razor - subscribe by handler name
+### Razor - Subscribe by Handler Name
 
     @(Html.Kendo().Editor()
           .Name("editor")
@@ -102,7 +103,7 @@ You can subscribe to all [events](/api/web/editor#events) exposed by Kendo UI Ed
     </script>
 
 
-### Razor - subscribe by template delegate
+### Razor - Subscribe by Template Delegate
 
     @(Html.Kendo().Editor()
           .Name("editor")
@@ -115,7 +116,10 @@ You can subscribe to all [events](/api/web/editor#events) exposed by Kendo UI Ed
           )
     )
 
-## Kendo UI Editor shows HTML tags after validation
+ 
+## Troubleshooting 
+    
+### Editor Shows HTML Tags after Validation
 
 After server-side validation the Editor displays the posted encoded value from the ModelState. The Razor view engine will encode it once again and as a result,
 HTML tags will appear inside the widget content area. More information about this behavior related to ASP.NET MVC is available at
@@ -126,6 +130,6 @@ There are two alternative options to tackle this scenario:
 * Clear the ModelState in the controller's action method after the POST
 * Set `Encode(false)` for the Editor and set an `[AllowHtml]` attribute to the model property, so that the Editor's value is submitted non-encoded.
 
-## More Troubleshooting
+### More Troubleshooting
 
 For additional tips, please check the [Troubleshooting section of the vanilla HTML/Javascript Kendo UI Editor](/web/editor/troubleshooting).

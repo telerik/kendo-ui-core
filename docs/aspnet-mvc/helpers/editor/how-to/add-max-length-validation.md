@@ -1,14 +1,14 @@
 ---
-title: Add max-length validation
+title: Add maxlength Validation
 page_title: Add max-length validation
 description: Add max-length validation
 ---
 
-# Add max-length validation
+# Add `maxlength` Validation
 
 The snippet below demonstrates how to define custom kendo validators to check the length of the text content, or the length of the HTML content, via custom validation rules.
 
-#### Example
+###### Example
 
     <form>
         @(Html.Kendo().Editor()
