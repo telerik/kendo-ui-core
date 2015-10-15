@@ -52,6 +52,42 @@ When using this technique, the Grid and its data area **must not have fixed heig
 
 Using the `#GridID` will allow the styles to be applied to a particular Grid instance only. In order to apply the above styles to all Grid instances, you can replace the ID with the `.k-grid` CSS class.
 
+### Restore the Grid scroll position on rebind
+
+In some scenarios, the Grid scroll position may be reset when the widget is rebound.
+If this is undesirable, the scroll position can be saved in the [`dataBinding`](/api/javascript/ui/grid#events-dataBinding) event and restored
+in the [`dataBound`](/api/javascript/ui/grid#events-dataBound) event.
+The scrollable container is `div.k-grid-content` and it can be retrieved as a child element of the widget [`wrapper`](/framework/widgets/wrapper-element).
+
+    $(function () {
+        // initialize the variable, which will hold the scroll positions
+        var scrollOffset = {
+            left: 0,
+            top: 0
+        };
+
+        //save the scroll position before the new data is rendered
+        function onGridDataBinding (e) {
+            var container = e.sender.wrapper.children(".k-grid-content");
+            scrollOffset.left = container.scrollLeft();
+            scrollOffset.top = container.scrollTop();
+        }
+
+        //restore the scroll position after the new data has been rendered
+        function onGridDataBound (e) {
+            var container = e.sender.wrapper.children(".k-grid-content");
+            container.scrollLeft(scrollOffset.left);
+            container.scrollTop(scrollOffset.top);
+        }
+
+        // attach the Grid event handlers
+        $("#grid").kendoGrid({
+            dataBinding: onGridDataBinding,
+            dataBound: onGridDataBound
+            // ...rest of code ommitted for brevity...
+        });
+    });
+
 ## Width
 
 By default the Grid has no width and behaves like a block-level element, i.e. it expands to the width of its parent element.
