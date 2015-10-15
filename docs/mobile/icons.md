@@ -407,288 +407,288 @@ already defined and in use, but only in the iOS7 platform theme (and available s
     vertical-align: middle;
     font: 1em/3em "KendoUI" !important;
 }
-.k-i-arrow-e:after { content: "\E000"; }
-.k-i-arrow-n:after { content: "\E001"; }
-.k-i-arrow-s:after { content: "\E002"; }
-.k-i-arrow-w:after { content: "\E003"; }
-.k-i-arrow-ne:after { content: "\E004"; }
-.k-i-arrow-nw:after { content: "\E005"; }
-.k-i-arrow-se:after { content: "\E006"; }
-.k-i-arrow-sw:after { content: "\E007"; }
-.k-i-seek-e:after { content: "\E008"; }
-.k-i-seek-n:after { content: "\E009"; }
-.k-i-seek-s:after { content: "\E00A"; }
-.k-i-seek-w:after { content: "\E00B"; }
+.k-mi-arrow-e:after { content: "\E000"; }
+.k-mi-arrow-n:after { content: "\E001"; }
+.k-mi-arrow-s:after { content: "\E002"; }
+.k-mi-arrow-w:after { content: "\E003"; }
+.k-mi-arrow-ne:after { content: "\E004"; }
+.k-mi-arrow-nw:after { content: "\E005"; }
+.k-mi-arrow-se:after { content: "\E006"; }
+.k-mi-arrow-sw:after { content: "\E007"; }
+.k-mi-seek-e:after { content: "\E008"; }
+.k-mi-seek-n:after { content: "\E009"; }
+.k-mi-seek-s:after { content: "\E00A"; }
+.k-mi-seek-w:after { content: "\E00B"; }
 .k-si-arrow-e:after { content: "\E00C"; }
 .k-si-arrow-n:after { content: "\E00D"; }
 .k-si-arrow-s:after { content: "\E00E"; }
 .k-si-arrow-w:after { content: "\E00F"; }
-.k-i-arrowhead-e:after { content: "\E010"; }
-.k-i-arrowhead-n:after { content: "\E011"; }
-.k-i-arrowhead-s:after { content: "\E012"; }
-.k-i-arrowhead-w:after { content: "\E013"; }
-.k-i-arrowhead-ew:after { content: "\E014"; }
-.k-i-arrowhead-ns:after { content: "\E015"; }
-.k-i-move:after { content: "\E016"; }
-.k-i-resize:after { content: "\E017"; }
-.k-i-resize-45:after { content: "\E018"; }
-.k-i-resize-135:after { content: "\E019"; }
-.k-i-resize-h:after { content: "\E01A"; }
-.k-i-resize-v:after { content: "\E01B"; }
-.k-i-refresh:after { content: "\E01C"; }
-.k-i-refresh-rev:after { content: "\E01D"; }
+.k-mi-arrowhead-e:after { content: "\E010"; }
+.k-mi-arrowhead-n:after { content: "\E011"; }
+.k-mi-arrowhead-s:after { content: "\E012"; }
+.k-mi-arrowhead-w:after { content: "\E013"; }
+.k-mi-arrowhead-ew:after { content: "\E014"; }
+.k-mi-arrowhead-ns:after { content: "\E015"; }
+.k-mi-move:after { content: "\E016"; }
+.k-mi-resize:after { content: "\E017"; }
+.k-mi-resize-45:after { content: "\E018"; }
+.k-mi-resize-135:after { content: "\E019"; }
+.k-mi-resize-h:after { content: "\E01A"; }
+.k-mi-resize-v:after { content: "\E01B"; }
+.k-mi-refresh:after { content: "\E01C"; }
+.k-mi-refresh-rev:after { content: "\E01D"; }
 .k-si-refresh:after { content: "\E01E"; }
 .k-si-refresh-rev:after { content: "\E01F"; }
-.k-i-turn-en:after { content: "\E020"; }
-.k-i-turn-es:after { content: "\E021"; }
-.k-i-turn-ne:after { content: "\E022"; }
-.k-i-turn-nw:after { content: "\E023"; }
-.k-i-turn-se:after { content: "\E024"; }
-.k-i-turn-sw:after { content: "\E025"; }
-.k-i-turn-wn:after { content: "\E026"; }
-.k-i-turn-ws:after { content: "\E027"; }
-.k-i-uturn-e:after { content: "\E028"; }
-.k-i-uturn-e-rev:after { content: "\E029"; }
-.k-i-uturn-n:after { content: "\E02A"; }
-.k-i-uturn-n-rev:after { content: "\E02B"; }
-.k-i-uturn-s:after { content: "\E02C"; }
-.k-i-uturn-s-rev:after { content: "\E02D"; }
-.k-i-uturn-w:after { content: "\E02E"; }
-.k-i-uturn-w-rev:after { content: "\E02F"; }
-.k-i-tick-sign:after { content: "\E030"; }
-.k-i-close-sign:after { content: "\E031"; }
-.k-i-plus-sign:after { content: "\E032"; }
-.k-i-minus-sign:after { content: "\E033"; }
+.k-mi-turn-en:after { content: "\E020"; }
+.k-mi-turn-es:after { content: "\E021"; }
+.k-mi-turn-ne:after { content: "\E022"; }
+.k-mi-turn-nw:after { content: "\E023"; }
+.k-mi-turn-se:after { content: "\E024"; }
+.k-mi-turn-sw:after { content: "\E025"; }
+.k-mi-turn-wn:after { content: "\E026"; }
+.k-mi-turn-ws:after { content: "\E027"; }
+.k-mi-uturn-e:after { content: "\E028"; }
+.k-mi-uturn-e-rev:after { content: "\E029"; }
+.k-mi-uturn-n:after { content: "\E02A"; }
+.k-mi-uturn-n-rev:after { content: "\E02B"; }
+.k-mi-uturn-s:after { content: "\E02C"; }
+.k-mi-uturn-s-rev:after { content: "\E02D"; }
+.k-mi-uturn-w:after { content: "\E02E"; }
+.k-mi-uturn-w-rev:after { content: "\E02F"; }
+.k-mi-tick-sign:after { content: "\E030"; }
+.k-mi-close-sign:after { content: "\E031"; }
+.k-mi-plus-sign:after { content: "\E032"; }
+.k-mi-minus-sign:after { content: "\E033"; }
 .k-si-plus-sign:after { content: "\E034"; }
 .k-si-minus-sign:after { content: "\E035"; }
-.k-i-cancel:after { content: "\E036"; }
-.k-i-tick:after { content: "\E037"; }
-.k-i-close:after { content: "\E038"; }
-.k-i-plus:after { content: "\E039"; }
-.k-i-minus:after { content: "\E03A"; }
+.k-mi-cancel:after { content: "\E036"; }
+.k-mi-tick:after { content: "\E037"; }
+.k-mi-close:after { content: "\E038"; }
+.k-mi-plus:after { content: "\E039"; }
+.k-mi-minus:after { content: "\E03A"; }
 .k-si-plus:after { content: "\E03B"; }
 .k-si-minus:after { content: "\E03C"; }
-.k-i-stop:after { content: "\E03D"; }
-.k-i-pause:after { content: "\E03E"; }
-.k-i-eject:after { content: "\E03F"; }
-.k-i-volume-off:after { content: "\E040"; }
-.k-i-volume-low:after { content: "\E041"; }
-.k-i-volume-high:after { content: "\E042"; }
-.k-i-earphones:after { content: "\E043"; }
-.k-i-heart:after { content: "\E044"; }
-.k-i-heart-empty:after { content: "\E045"; }
-.k-i-heart-half:after { content: "\E046"; }
-.k-i-star:after { content: "\E047"; }
-.k-i-star-empty:after { content: "\E048"; }
-.k-i-star-half:after { content: "\E049"; }
-.k-i-star-half-empty:after { content: "\E04A"; }
-.k-i-chart-column:after { content: "\E04B"; }
-.k-i-chart-bar:after { content: "\E04C"; }
-.k-i-chart-pie:after { content: "\E04D"; }
-.k-i-chart-donut:after { content: "\E04E"; }
-.k-i-chart-line:after { content: "\E04F"; }
-.k-i-chart-area:after { content: "\E050"; }
-.k-i-chart-donut:after { content: "\E051"; }
-.k-i-align-left:after { content: "\E052"; }
-.k-i-align-center:after { content: "\E053"; }
-.k-i-align-right:after { content: "\E054"; }
-.k-i-align-justify:after { content: "\E055"; }
-.k-i-align-clear:after { content: "\E056"; }
-.k-i-bold:after { content: "\E057"; }
-.k-i-bold-sans:after { content: "\E058"; }
-.k-i-italic:after { content: "\E059"; }
-.k-i-italic-sans:after { content: "\E05A"; }
-.k-i-underline:after { content: "\E05B"; }
-.k-i-underline-sans:after { content: "\E05C"; }
-.k-i-strikethrough:after { content: "\E05D"; }
-.k-i-strikethrough-sans:after { content: "\E05E"; }
-.k-i-font-a:after { content: "\E05F"; }
-.k-i-font-a-sans:after { content: "\E060"; }
-.k-i-font-t:after { content: "\E061"; }
-.k-i-font-t-sans:after { content: "\E062"; }
-.k-i-brightness:after { content: "\E063"; }
-.k-i-brightness-contrast:after { content: "\E064"; }
-.k-i-contrast:after { content: "\E065"; }
-.k-i-crop:after { content: "\E066"; }
-.k-i-mirror:after { content: "\E067"; }
-.k-i-flip-h:after { content: "\E068"; }
-.k-i-flip-v:after { content: "\E069"; }
-.k-i-rotate:after { content: "\E06A"; }
-.k-i-rotate-rev:after { content: "\E06B"; }
-.k-i-filter:after { content: "\E06C"; }
-.k-i-filter-clear:after { content: "\E06D"; }
-.k-i-sort-asc:after { content: "\E06E"; }
-.k-i-sort-desc:after { content: "\E06F"; }
-.k-i-sort-clear:after { content: "\E070"; }
-.k-i-indent:after { content: "\E071"; }
-.k-i-outdent:after { content: "\E072"; }
-.k-i-hyperlink:after { content: "\E073"; }
-.k-i-hyperlink-clear:after { content: "\E074"; }
-.k-i-hyperlink-ext:after { content: "\E075"; }
+.k-mi-stop:after { content: "\E03D"; }
+.k-mi-pause:after { content: "\E03E"; }
+.k-mi-eject:after { content: "\E03F"; }
+.k-mi-volume-off:after { content: "\E040"; }
+.k-mi-volume-low:after { content: "\E041"; }
+.k-mi-volume-high:after { content: "\E042"; }
+.k-mi-earphones:after { content: "\E043"; }
+.k-mi-heart:after { content: "\E044"; }
+.k-mi-heart-empty:after { content: "\E045"; }
+.k-mi-heart-half:after { content: "\E046"; }
+.k-mi-star:after { content: "\E047"; }
+.k-mi-star-empty:after { content: "\E048"; }
+.k-mi-star-half:after { content: "\E049"; }
+.k-mi-star-half-empty:after { content: "\E04A"; }
+.k-mi-chart-column:after { content: "\E04B"; }
+.k-mi-chart-bar:after { content: "\E04C"; }
+.k-mi-chart-pie:after { content: "\E04D"; }
+.k-mi-chart-donut:after { content: "\E04E"; }
+.k-mi-chart-line:after { content: "\E04F"; }
+.k-mi-chart-area:after { content: "\E050"; }
+.k-mi-chart-donut:after { content: "\E051"; }
+.k-mi-align-left:after { content: "\E052"; }
+.k-mi-align-center:after { content: "\E053"; }
+.k-mi-align-right:after { content: "\E054"; }
+.k-mi-align-justify:after { content: "\E055"; }
+.k-mi-align-clear:after { content: "\E056"; }
+.k-mi-bold:after { content: "\E057"; }
+.k-mi-bold-sans:after { content: "\E058"; }
+.k-mi-italic:after { content: "\E059"; }
+.k-mi-italic-sans:after { content: "\E05A"; }
+.k-mi-underline:after { content: "\E05B"; }
+.k-mi-underline-sans:after { content: "\E05C"; }
+.k-mi-strikethrough:after { content: "\E05D"; }
+.k-mi-strikethrough-sans:after { content: "\E05E"; }
+.k-mi-font-a:after { content: "\E05F"; }
+.k-mi-font-a-sans:after { content: "\E060"; }
+.k-mi-font-t:after { content: "\E061"; }
+.k-mi-font-t-sans:after { content: "\E062"; }
+.k-mi-brightness:after { content: "\E063"; }
+.k-mi-brightness-contrast:after { content: "\E064"; }
+.k-mi-contrast:after { content: "\E065"; }
+.k-mi-crop:after { content: "\E066"; }
+.k-mi-mirror:after { content: "\E067"; }
+.k-mi-flip-h:after { content: "\E068"; }
+.k-mi-flip-v:after { content: "\E069"; }
+.k-mi-rotate:after { content: "\E06A"; }
+.k-mi-rotate-rev:after { content: "\E06B"; }
+.k-mi-filter:after { content: "\E06C"; }
+.k-mi-filter-clear:after { content: "\E06D"; }
+.k-mi-sort-asc:after { content: "\E06E"; }
+.k-mi-sort-desc:after { content: "\E06F"; }
+.k-mi-sort-clear:after { content: "\E070"; }
+.k-mi-indent:after { content: "\E071"; }
+.k-mi-outdent:after { content: "\E072"; }
+.k-mi-hyperlink:after { content: "\E073"; }
+.k-mi-hyperlink-clear:after { content: "\E074"; }
+.k-mi-hyperlink-ext:after { content: "\E075"; }
 .k-si-hyperlink-ext:after { content: "\E076"; }
-.k-i-ul:after { content: "\E077"; }
+.k-mi-ul:after { content: "\E077"; }
 .k-si-ul:after { content: "\E078"; }
-.k-i-paint:after { content: "\E079"; }
-.k-i-paste:after { content: "\E07A"; }
-.k-i-pencil:after { content: "\E07B"; }
-.k-i-image:after { content: "\E07C"; }
-.k-i-image-add:after { content: "\E07D"; }
-.k-i-print:after { content: "\E07E"; }
-.k-i-zoom:after { content: "\E07F"; }
-.k-i-zoom-in:after { content: "\E080"; }
-.k-i-zoom-out:after { content: "\E081"; }
-.k-i-asterisk:after { content: "\E082"; }
-.k-i-clip:after { content: "\E083"; }
-.k-i-clip-45:after { content: "\E084"; }
-.k-i-qrcode:after { content: "\E085"; }
-.k-i-book:after { content: "\E086"; }
-.k-i-bookmark:after { content: "\E087"; }
-.k-i-briefcase:after { content: "\E088"; }
-.k-i-calendar:after { content: "\E089"; }
-.k-i-camera-still:after { content: "\E08A"; }
-.k-i-camera-video:after { content: "\E08B"; }
-.k-i-certificate:after { content: "\E08C"; }
-.k-i-clock:after { content: "\E08D"; }
-.k-i-cloud:after { content: "\E08E"; }
-.k-i-collapse:after { content: "\E08F"; }
-.k-i-columns:after { content: "\E090"; }
-.k-i-comment:after { content: "\E091"; }
-.k-i-comment-empty:after { content: "\E092"; }
-.k-i-comments:after { content: "\E093"; }
-.k-i-comments-empty:after { content: "\E094"; }
-.k-i-credit-card:after { content: "\E095"; }
-.k-i-download:after { content: "\E096"; }
-.k-i-draghandle:after { content: "\E097"; }
+.k-mi-paint:after { content: "\E079"; }
+.k-mi-paste:after { content: "\E07A"; }
+.k-mi-pencil:after { content: "\E07B"; }
+.k-mi-image:after { content: "\E07C"; }
+.k-mi-image-add:after { content: "\E07D"; }
+.k-mi-print:after { content: "\E07E"; }
+.k-mi-zoom:after { content: "\E07F"; }
+.k-mi-zoom-in:after { content: "\E080"; }
+.k-mi-zoom-out:after { content: "\E081"; }
+.k-mi-asterisk:after { content: "\E082"; }
+.k-mi-clip:after { content: "\E083"; }
+.k-mi-clip-45:after { content: "\E084"; }
+.k-mi-qrcode:after { content: "\E085"; }
+.k-mi-book:after { content: "\E086"; }
+.k-mi-bookmark:after { content: "\E087"; }
+.k-mi-briefcase:after { content: "\E088"; }
+.k-mi-calendar:after { content: "\E089"; }
+.k-mi-camera-still:after { content: "\E08A"; }
+.k-mi-camera-video:after { content: "\E08B"; }
+.k-mi-certificate:after { content: "\E08C"; }
+.k-mi-clock:after { content: "\E08D"; }
+.k-mi-cloud:after { content: "\E08E"; }
+.k-mi-collapse:after { content: "\E08F"; }
+.k-mi-columns:after { content: "\E090"; }
+.k-mi-comment:after { content: "\E091"; }
+.k-mi-comment-empty:after { content: "\E092"; }
+.k-mi-comments:after { content: "\E093"; }
+.k-mi-comments-empty:after { content: "\E094"; }
+.k-mi-credit-card:after { content: "\E095"; }
+.k-mi-download:after { content: "\E096"; }
+.k-mi-draghandle:after { content: "\E097"; }
 .k-si-draghandle:after { content: "\E098"; }
-.k-i-envelop:after { content: "\E099"; }
-.k-i-envelop-open:after { content: "\E09A"; }
-.k-i-eye:after { content: "\E09B"; }
-.k-i-file:after { content: "\E09C"; }
-.k-i-file-add:after { content: "\E09D"; }
-.k-i-film:after { content: "\E09E"; }
-.k-i-flag:after { content: "\E09F"; }
-.k-i-folder-add:after { content: "\E0A0"; }
-.k-i-folder:after { content: "\E0A1"; }
-.k-i-folder-open:after { content: "\E0A2"; }
-.k-i-folder-up:after { content: "\E0A3"; }
-.k-i-gear:after { content: "\E0A4"; }
+.k-mi-envelop:after { content: "\E099"; }
+.k-mi-envelop-open:after { content: "\E09A"; }
+.k-mi-eye:after { content: "\E09B"; }
+.k-mi-file:after { content: "\E09C"; }
+.k-mi-file-add:after { content: "\E09D"; }
+.k-mi-film:after { content: "\E09E"; }
+.k-mi-flag:after { content: "\E09F"; }
+.k-mi-folder-add:after { content: "\E0A0"; }
+.k-mi-folder:after { content: "\E0A1"; }
+.k-mi-folder-open:after { content: "\E0A2"; }
+.k-mi-folder-up:after { content: "\E0A3"; }
+.k-mi-gear:after { content: "\E0A4"; }
 .k-si-gear:after { content: "\E0A5"; }
-.k-i-transmit:after { content: "\E0A6"; }
-.k-i-beer:after { content: "\E0A7"; }
-.k-i-cocktail:after { content: "\E0A8"; }
-.k-i-coffee:after { content: "\E0A9"; }
-.k-i-wine:after { content: "\E0AA"; }
-.k-i-grid:after { content: "\E0AB"; }
-.k-i-thumbs:after { content: "\E0AC"; }
-.k-i-split-h:after { content: "\E0AD"; }
-.k-i-split-v:after { content: "\E0AE"; }
-.k-i-home:after { content: "\E0AF"; }
-.k-i-inbox:after { content: "\E0B0"; }
-.k-i-key:after { content: "\E0B1"; }
-.k-i-login:after { content: "\E0B2"; }
-.k-i-logout:after { content: "\E0B3"; }
-.k-i-place:after { content: "\E0B4"; }
-.k-i-megaphone:after { content: "\E0B5"; }
-.k-i-note:after { content: "\E0B6"; }
-.k-i-pin:after { content: "\E0B7"; }
-.k-i-unpin:after { content: "\E0B8"; }
-.k-i-power:after { content: "\E0B9"; }
-.k-i-progress-bars:after { content: "\E0BA"; }
-.k-i-road:after { content: "\E0BB"; }
-.k-i-rss:after { content: "\E0BC"; }
-.k-i-floppy:after { content: "\E0BD"; }
-.k-i-sitemap:after { content: "\E0BE"; }
-.k-i-tag-45:after { content: "\E0BF"; }
-.k-i-tag-h:after { content: "\E0C0"; }
-.k-i-thunderbolt:after { content: "\E0C1"; }
-.k-i-tooltip:after { content: "\E0C2"; }
-.k-i-trash:after { content: "\E0C3"; }
-.k-i-trophy:after { content: "\E0C4"; }
-.k-i-ungroup:after { content: "\E0C5"; }
-.k-i-upload:after { content: "\E0C6"; }
-.k-i-window:after { content: "\E0C7"; }
-.k-i-tiles:after { content: "\E0C8"; }
-.k-i-wrench:after { content: "\E0C9"; }
-.k-i-action:after { content: "\E0CA"; }
-.k-i-add:after { content: "\E0CB"; }
-.k-i-add-inv:after { content: "\E0CC"; }
-.k-i-armchair:after { content: "\E0CD"; }
-.k-i-battery:after { content: "\E0CE"; }
-.k-i-book-open:after { content: "\E0CF"; }
-.k-i-camera:after { content: "\E0D0"; }
-.k-i-cart:after { content: "\E0D1"; }
-.k-i-time:after { content: "\E0D2"; }
-.k-i-coffee-card:after { content: "\E0D3"; }
-.k-i-download-arrow:after { content: "\E0D4"; }
-.k-i-edit:after { content: "\E0D5"; }
-.k-i-faves:after { content: "\E0D6"; }
-.k-i-star:after { content: "\E0D7"; }
-.k-i-featured:after { content: "\E0D8"; }
-.k-i-forward:after { content: "\E0D9"; }
-.k-i-cog:after { content: "\E0DA"; }
-.k-i-globe:after { content: "\E0DB"; }
-.k-i-globe-inv:after { content: "\E0DC"; }
-.k-i-house:after { content: "\E0DD"; }
-.k-i-info:after { content: "\E0DE"; }
-.k-i-share:after { content: "\E0DF"; }
-.k-i-more-h:after { content: "\E0E0"; }
-.k-i-more-v:after { content: "\E0E1"; }
-.k-i-next:after { content: "\E0E2"; }
-.k-i-pause-a:after { content: "\E0E3"; }
-.k-i-user:after { content: "\E0E4"; }
-.k-i-play-a:after { content: "\E0E5"; }
-.k-i-refresh-a:after { content: "\E0E6"; }
-.k-i-reset:after { content: "\E0E7"; }
-.k-i-rewind:after { content: "\E0E8"; }
-.k-i-search-a:after { content: "\E0E9"; }
-.k-i-stop-a:after { content: "\E0EA"; }
-.k-i-tiles-a:after { content: "\E0EB"; }
-.k-i-trash-a:after { content: "\E0EC"; }
-.k-i-undo:after { content: "\E0ED"; }
-.k-i-redo:after { content: "\E0EE"; }
-.k-i-volume-a:after { content: "\E0EF"; }
-.k-i-wifi:after { content: "\E0F0"; }
-.k-i-more-lines:after { content: "\E0F1"; }
-.k-i-pull-to-ref:after { content: "\E0F2"; }
-.k-i-loading-android:after { content: "\E0F3"; }
-.k-i-loading-blackberry:after { content: "\E0F4"; }
-.k-i-loading-meego:after { content: "\E0F5"; }
-.k-i-loading-custom:after { content: "\E0F6"; }
-.k-i-loading-ios:after { content: "\E0F7"; }
-.k-i-bug:after { content: "\E0F8"; }
-.k-i-info:after { content: "\E0F9"; }
-.k-i-warning:after { content: "\E0FA"; }
-.k-i-question:after { content: "\E0FB"; }
-.k-i-insert-n:after { content: "\E0FC"; }
-.k-i-insert-m:after { content: "\E0FD"; }
-.k-i-insert-s:after { content: "\E0FE"; }
-.k-i-lock:after { content: "\E0FF"; }
-.k-i-unlock:after { content: "\E100"; }
-.k-i-phone:after { content: "\E101"; }
-.k-i-tablet:after { content: "\E102"; }
-.k-i-ol:after { content: "\E103"; }
-.k-i-barcode:after { content: "\E104"; }
-.k-i-html5:after { content: "\E105"; }
-.k-i-css3:after { content: "\E106"; }
-.k-i-kendoui:after { content: "\E107"; }
-.k-i-telerik:after { content: "\E108"; }
-.k-i-icenium:after { content: "\E109"; }
-.k-i-sitefinity:after { content: "\E10A"; }
-.k-i-twitter:after { content: "\E10B"; }
-.k-i-linkedin:after { content: "\E10C"; }
-.k-i-facebook:after { content: "\E10D"; }
-.k-i-pinterest:after { content: "\E10E"; }
-.k-i-youtube:after { content: "\E10F"; }
-.k-i-vimeo:after { content: "\E110"; }
-.k-i-behance:after { content: "\E111"; }
-.k-i-dribbble:after { content: "\E112"; }
-.k-i-googleplus:after { content: "\E113"; }
-.k-i-minimize:after { content: "\E114"; }
-.k-i-html:after { content: "\E115"; }
-.k-i-group:after { content: "\E116"; }
-.k-i-subscript:after { content: "\E117"; }
-.k-i-superscript:after { content: "\E118"; }
-.k-i-drophere:after { content: "\E119"; }
+.k-mi-transmit:after { content: "\E0A6"; }
+.k-mi-beer:after { content: "\E0A7"; }
+.k-mi-cocktail:after { content: "\E0A8"; }
+.k-mi-coffee:after { content: "\E0A9"; }
+.k-mi-wine:after { content: "\E0AA"; }
+.k-mi-grid:after { content: "\E0AB"; }
+.k-mi-thumbs:after { content: "\E0AC"; }
+.k-mi-split-h:after { content: "\E0AD"; }
+.k-mi-split-v:after { content: "\E0AE"; }
+.k-mi-home:after { content: "\E0AF"; }
+.k-mi-inbox:after { content: "\E0B0"; }
+.k-mi-key:after { content: "\E0B1"; }
+.k-mi-login:after { content: "\E0B2"; }
+.k-mi-logout:after { content: "\E0B3"; }
+.k-mi-place:after { content: "\E0B4"; }
+.k-mi-megaphone:after { content: "\E0B5"; }
+.k-mi-note:after { content: "\E0B6"; }
+.k-mi-pin:after { content: "\E0B7"; }
+.k-mi-unpin:after { content: "\E0B8"; }
+.k-mi-power:after { content: "\E0B9"; }
+.k-mi-progress-bars:after { content: "\E0BA"; }
+.k-mi-road:after { content: "\E0BB"; }
+.k-mi-rss:after { content: "\E0BC"; }
+.k-mi-floppy:after { content: "\E0BD"; }
+.k-mi-sitemap:after { content: "\E0BE"; }
+.k-mi-tag-45:after { content: "\E0BF"; }
+.k-mi-tag-h:after { content: "\E0C0"; }
+.k-mi-thunderbolt:after { content: "\E0C1"; }
+.k-mi-tooltip:after { content: "\E0C2"; }
+.k-mi-trash:after { content: "\E0C3"; }
+.k-mi-trophy:after { content: "\E0C4"; }
+.k-mi-ungroup:after { content: "\E0C5"; }
+.k-mi-upload:after { content: "\E0C6"; }
+.k-mi-window:after { content: "\E0C7"; }
+.k-mi-tiles:after { content: "\E0C8"; }
+.k-mi-wrench:after { content: "\E0C9"; }
+.k-mi-action:after { content: "\E0CA"; }
+.k-mi-add:after { content: "\E0CB"; }
+.k-mi-add-inv:after { content: "\E0CC"; }
+.k-mi-armchair:after { content: "\E0CD"; }
+.k-mi-battery:after { content: "\E0CE"; }
+.k-mi-book-open:after { content: "\E0CF"; }
+.k-mi-camera:after { content: "\E0D0"; }
+.k-mi-cart:after { content: "\E0D1"; }
+.k-mi-time:after { content: "\E0D2"; }
+.k-mi-coffee-card:after { content: "\E0D3"; }
+.k-mi-download-arrow:after { content: "\E0D4"; }
+.k-mi-edit:after { content: "\E0D5"; }
+.k-mi-faves:after { content: "\E0D6"; }
+.k-mi-star:after { content: "\E0D7"; }
+.k-mi-featured:after { content: "\E0D8"; }
+.k-mi-forward:after { content: "\E0D9"; }
+.k-mi-cog:after { content: "\E0DA"; }
+.k-mi-globe:after { content: "\E0DB"; }
+.k-mi-globe-inv:after { content: "\E0DC"; }
+.k-mi-house:after { content: "\E0DD"; }
+.k-mi-info:after { content: "\E0DE"; }
+.k-mi-share:after { content: "\E0DF"; }
+.k-mi-more-h:after { content: "\E0E0"; }
+.k-mi-more-v:after { content: "\E0E1"; }
+.k-mi-next:after { content: "\E0E2"; }
+.k-mi-pause-a:after { content: "\E0E3"; }
+.k-mi-user:after { content: "\E0E4"; }
+.k-mi-play-a:after { content: "\E0E5"; }
+.k-mi-refresh-a:after { content: "\E0E6"; }
+.k-mi-reset:after { content: "\E0E7"; }
+.k-mi-rewind:after { content: "\E0E8"; }
+.k-mi-search-a:after { content: "\E0E9"; }
+.k-mi-stop-a:after { content: "\E0EA"; }
+.k-mi-tiles-a:after { content: "\E0EB"; }
+.k-mi-trash-a:after { content: "\E0EC"; }
+.k-mi-undo:after { content: "\E0ED"; }
+.k-mi-redo:after { content: "\E0EE"; }
+.k-mi-volume-a:after { content: "\E0EF"; }
+.k-mi-wifi:after { content: "\E0F0"; }
+.k-mi-more-lines:after { content: "\E0F1"; }
+.k-mi-pull-to-ref:after { content: "\E0F2"; }
+.k-mi-loading-android:after { content: "\E0F3"; }
+.k-mi-loading-blackberry:after { content: "\E0F4"; }
+.k-mi-loading-meego:after { content: "\E0F5"; }
+.k-mi-loading-custom:after { content: "\E0F6"; }
+.k-mi-loading-ios:after { content: "\E0F7"; }
+.k-mi-bug:after { content: "\E0F8"; }
+.k-mi-info:after { content: "\E0F9"; }
+.k-mi-warning:after { content: "\E0FA"; }
+.k-mi-question:after { content: "\E0FB"; }
+.k-mi-insert-n:after { content: "\E0FC"; }
+.k-mi-insert-m:after { content: "\E0FD"; }
+.k-mi-insert-s:after { content: "\E0FE"; }
+.k-mi-lock:after { content: "\E0FF"; }
+.k-mi-unlock:after { content: "\E100"; }
+.k-mi-phone:after { content: "\E101"; }
+.k-mi-tablet:after { content: "\E102"; }
+.k-mi-ol:after { content: "\E103"; }
+.k-mi-barcode:after { content: "\E104"; }
+.k-mi-html5:after { content: "\E105"; }
+.k-mi-css3:after { content: "\E106"; }
+.k-mi-kendoui:after { content: "\E107"; }
+.k-mi-telerik:after { content: "\E108"; }
+.k-mi-icenium:after { content: "\E109"; }
+.k-mi-sitefinity:after { content: "\E10A"; }
+.k-mi-twitter:after { content: "\E10B"; }
+.k-mi-linkedin:after { content: "\E10C"; }
+.k-mi-facebook:after { content: "\E10D"; }
+.k-mi-pinterest:after { content: "\E10E"; }
+.k-mi-youtube:after { content: "\E10F"; }
+.k-mi-vimeo:after { content: "\E110"; }
+.k-mi-behance:after { content: "\E111"; }
+.k-mi-dribbble:after { content: "\E112"; }
+.k-mi-googleplus:after { content: "\E113"; }
+.k-mi-minimize:after { content: "\E114"; }
+.k-mi-html:after { content: "\E115"; }
+.k-mi-group:after { content: "\E116"; }
+.k-mi-subscript:after { content: "\E117"; }
+.k-mi-superscript:after { content: "\E118"; }
+.k-mi-drophere:after { content: "\E119"; }
 .km-contactadd:after, .km-rowinsert:after { content: "\E039"; }
 .km-rowdelete:after { content: "\E03a"; }
 .km-detaildisclose:after { content: "\E0E2"; }
@@ -809,267 +809,267 @@ already defined and in use, but only in the iOS7 platform theme (and available s
 .k-ios7-phone-fill:after { content: "\E326"; }
 </style>
 <ul class="additional-icons">
-    <li><span class="button k-i-arrow-e"></span>\e000</li>
-    <li><span class="button k-i-arrow-n"></span>\e001</li>
-    <li><span class="button k-i-arrow-s"></span>\e002</li>
-    <li><span class="button k-i-arrow-w"></span>\e003</li>
-    <li><span class="button k-i-arrow-ne"></span>\e004</li>
-    <li><span class="button k-i-arrow-nw"></span>\e005</li>
-    <li><span class="button k-i-arrow-se"></span>\e006</li>
-    <li><span class="button k-i-arrow-sw"></span>\e007</li>
-    <li><span class="button k-i-seek-e"></span>\e008</li>
-    <li><span class="button k-i-seek-n"></span>\e009</li>
-    <li><span class="button k-i-seek-s"></span>\e00a</li>
-    <li><span class="button k-i-seek-w"></span>\e00b</li>
+    <li><span class="button k-mi-arrow-e"></span>\e000</li>
+    <li><span class="button k-mi-arrow-n"></span>\e001</li>
+    <li><span class="button k-mi-arrow-s"></span>\e002</li>
+    <li><span class="button k-mi-arrow-w"></span>\e003</li>
+    <li><span class="button k-mi-arrow-ne"></span>\e004</li>
+    <li><span class="button k-mi-arrow-nw"></span>\e005</li>
+    <li><span class="button k-mi-arrow-se"></span>\e006</li>
+    <li><span class="button k-mi-arrow-sw"></span>\e007</li>
+    <li><span class="button k-mi-seek-e"></span>\e008</li>
+    <li><span class="button k-mi-seek-n"></span>\e009</li>
+    <li><span class="button k-mi-seek-s"></span>\e00a</li>
+    <li><span class="button k-mi-seek-w"></span>\e00b</li>
     <li><span class="button k-si-arrow-e"></span>\e00c</li>
     <li><span class="button k-si-arrow-n"></span>\e00d</li>
     <li><span class="button k-si-arrow-s"></span>\e00e</li>
     <li><span class="button k-si-arrow-w"></span>\e00f</li>
-    <li><span class="button k-i-arrowhead-e"></span>\e010</li>
-    <li><span class="button k-i-arrowhead-n"></span>\e011</li>
-    <li><span class="button k-i-arrowhead-s"></span>\e012</li>
-    <li><span class="button k-i-arrowhead-w"></span>\e013</li>
-    <li><span class="button k-i-arrowhead-ew"></span>\e014</li>
-    <li><span class="button k-i-arrowhead-ns"></span>\e015</li>
-    <li><span class="button k-i-move"></span>\e016</li>
-    <li><span class="button k-i-resize"></span>\e017</li>
-    <li><span class="button k-i-resize-45"></span>\e018</li>
-    <li><span class="button k-i-resize-135"></span>\e019</li>
-    <li><span class="button k-i-resize-h"></span>\e01a</li>
-    <li><span class="button k-i-resize-v"></span>\e01b</li>
-    <li><span class="button k-i-refresh"></span>\e01c</li>
-    <li><span class="button k-i-refresh-rev"></span>\e01d</li>
+    <li><span class="button k-mi-arrowhead-e"></span>\e010</li>
+    <li><span class="button k-mi-arrowhead-n"></span>\e011</li>
+    <li><span class="button k-mi-arrowhead-s"></span>\e012</li>
+    <li><span class="button k-mi-arrowhead-w"></span>\e013</li>
+    <li><span class="button k-mi-arrowhead-ew"></span>\e014</li>
+    <li><span class="button k-mi-arrowhead-ns"></span>\e015</li>
+    <li><span class="button k-mi-move"></span>\e016</li>
+    <li><span class="button k-mi-resize"></span>\e017</li>
+    <li><span class="button k-mi-resize-45"></span>\e018</li>
+    <li><span class="button k-mi-resize-135"></span>\e019</li>
+    <li><span class="button k-mi-resize-h"></span>\e01a</li>
+    <li><span class="button k-mi-resize-v"></span>\e01b</li>
+    <li><span class="button k-mi-refresh"></span>\e01c</li>
+    <li><span class="button k-mi-refresh-rev"></span>\e01d</li>
     <li><span class="button k-si-refresh"></span>\e01e</li>
     <li><span class="button k-si-refresh-rev"></span>\e01f</li>
-    <li><span class="button k-i-turn-en"></span>\e020</li>
-    <li><span class="button k-i-turn-es"></span>\e021</li>
-    <li><span class="button k-i-turn-ne"></span>\e022</li>
-    <li><span class="button k-i-turn-nw"></span>\e023</li>
-    <li><span class="button k-i-turn-se"></span>\e024</li>
-    <li><span class="button k-i-turn-sw"></span>\e025</li>
-    <li><span class="button k-i-turn-wn"></span>\e026</li>
-    <li><span class="button k-i-turn-ws"></span>\e027</li>
-    <li><span class="button k-i-uturn-e"></span>\e028</li>
-    <li><span class="button k-i-uturn-e-rev"></span>\e029</li>
-    <li><span class="button k-i-uturn-n"></span>\e02a</li>
-    <li><span class="button k-i-uturn-n-rev"></span>\e02b</li>
-    <li><span class="button k-i-uturn-s"></span>\e02c</li>
-    <li><span class="button k-i-uturn-s-rev"></span>\e02d</li>
-    <li><span class="button k-i-uturn-w"></span>\e02e</li>
-    <li><span class="button k-i-uturn-w-rev"></span>\e02f</li>
-    <li><span class="button k-i-tick-sign"></span>\e030</li>
-    <li><span class="button k-i-close-sign"></span>\e031</li>
-    <li><span class="button k-i-plus-sign"></span>\e032</li>
-    <li><span class="button k-i-minus-sign"></span>\e033</li>
+    <li><span class="button k-mi-turn-en"></span>\e020</li>
+    <li><span class="button k-mi-turn-es"></span>\e021</li>
+    <li><span class="button k-mi-turn-ne"></span>\e022</li>
+    <li><span class="button k-mi-turn-nw"></span>\e023</li>
+    <li><span class="button k-mi-turn-se"></span>\e024</li>
+    <li><span class="button k-mi-turn-sw"></span>\e025</li>
+    <li><span class="button k-mi-turn-wn"></span>\e026</li>
+    <li><span class="button k-mi-turn-ws"></span>\e027</li>
+    <li><span class="button k-mi-uturn-e"></span>\e028</li>
+    <li><span class="button k-mi-uturn-e-rev"></span>\e029</li>
+    <li><span class="button k-mi-uturn-n"></span>\e02a</li>
+    <li><span class="button k-mi-uturn-n-rev"></span>\e02b</li>
+    <li><span class="button k-mi-uturn-s"></span>\e02c</li>
+    <li><span class="button k-mi-uturn-s-rev"></span>\e02d</li>
+    <li><span class="button k-mi-uturn-w"></span>\e02e</li>
+    <li><span class="button k-mi-uturn-w-rev"></span>\e02f</li>
+    <li><span class="button k-mi-tick-sign"></span>\e030</li>
+    <li><span class="button k-mi-close-sign"></span>\e031</li>
+    <li><span class="button k-mi-plus-sign"></span>\e032</li>
+    <li><span class="button k-mi-minus-sign"></span>\e033</li>
     <li><span class="button k-si-plus-sign"></span>\e034</li>
     <li><span class="button k-si-minus-sign"></span>\e035</li>
-    <li><span class="button k-i-cancel"></span>\e036</li>
-    <li><span class="button k-i-tick"></span>\e037</li>
-    <li><span class="button k-i-close"></span>\e038</li>
-    <li><span class="button k-i-plus"></span>\e039</li>
-    <li><span class="button k-i-minus"></span>\e03a</li>
+    <li><span class="button k-mi-cancel"></span>\e036</li>
+    <li><span class="button k-mi-tick"></span>\e037</li>
+    <li><span class="button k-mi-close"></span>\e038</li>
+    <li><span class="button k-mi-plus"></span>\e039</li>
+    <li><span class="button k-mi-minus"></span>\e03a</li>
     <li><span class="button k-si-plus"></span>\e03b</li>
     <li><span class="button k-si-minus"></span>\e03c</li>
-    <li><span class="button k-i-stop"></span>\e03d</li>
-    <li><span class="button k-i-pause"></span>\e03e</li>
-    <li><span class="button k-i-eject"></span>\e03f</li>
-    <li><span class="button k-i-volume-off"></span>\e040</li>
-    <li><span class="button k-i-volume-low"></span>\e041</li>
-    <li><span class="button k-i-volume-high"></span>\e042</li>
-    <li><span class="button k-i-earphones"></span>\e043</li>
-    <li><span class="button k-i-heart"></span>\e044</li>
-    <li><span class="button k-i-heart-empty"></span>\e045</li>
-    <li><span class="button k-i-heart-half"></span>\e046</li>
-    <li><span class="button k-i-star"></span>\e047</li>
-    <li><span class="button k-i-star-empty"></span>\e048</li>
-    <li><span class="button k-i-star-half"></span>\e049</li>
-    <li><span class="button k-i-star-half-empty"></span>\e04a</li>
-    <li><span class="button k-i-chart-column"></span>\e04b</li>
-    <li><span class="button k-i-chart-bar"></span>\e04c</li>
-    <li><span class="button k-i-chart-pie"></span>\e04d</li>
-    <li><span class="button k-i-chart-donut"></span>\e04e</li>
-    <li><span class="button k-i-chart-line"></span>\e04f</li>
-    <li><span class="button k-i-chart-area"></span>\e050</li>
-    <li><span class="button k-i-chart-donut"></span>\e051</li>
-    <!--li><span class="button k-i-align-left"></span>\e052</li>
-    <li><span class="button k-i-align-center"></span>\e053</li>
-    <li><span class="button k-i-align-right"></span>\e054</li>
-    <li><span class="button k-i-align-justify"></span>\e055</li>
-    <li><span class="button k-i-align-clear"></span>\e056</li-->
-    <li><span class="button k-i-bold"></span>\e057</li>
-    <li><span class="button k-i-bold-sans"></span>\e058</li>
-    <li><span class="button k-i-italic"></span>\e059</li>
-    <li><span class="button k-i-italic-sans"></span>\e05a</li>
-    <li><span class="button k-i-underline"></span>\e05b</li>
-    <li><span class="button k-i-underline-sans"></span>\e05c</li>
-    <li><span class="button k-i-strikethrough"></span>\e05d</li>
-    <li><span class="button k-i-strikethrough-sans"></span>\e05e</li>
-    <li><span class="button k-i-font-a"></span>\e05f</li>
-    <li><span class="button k-i-font-a-sans"></span>\e060</li>
-    <li><span class="button k-i-font-t"></span>\e061</li>
-    <li><span class="button k-i-font-t-sans"></span>\e062</li>
-    <li><span class="button k-i-brightness"></span>\e063</li>
-    <li><span class="button k-i-brightness-contrast"></span>\e064</li>
-    <li><span class="button k-i-contrast"></span>\e065</li>
-    <li><span class="button k-i-crop"></span>\e066</li>
-    <li><span class="button k-i-mirror"></span>\e067</li>
-    <li><span class="button k-i-flip-h"></span>\e068</li>
-    <li><span class="button k-i-flip-v"></span>\e069</li>
-    <li><span class="button k-i-rotate"></span>\e06a</li>
-    <li><span class="button k-i-rotate-rev"></span>\e06b</li>
-    <li><span class="button k-i-filter"></span>\e06c</li>
-    <li><span class="button k-i-filter-clear"></span>\e06d</li>
-    <li><span class="button k-i-sort-asc"></span>\e06e</li>
-    <li><span class="button k-i-sort-desc"></span>\e06f</li>
-    <li><span class="button k-i-sort-clear"></span>\e070</li>
-    <li><span class="button k-i-indent"></span>\e071</li>
-    <li><span class="button k-i-outdent"></span>\e072</li>
-    <li><span class="button k-i-hyperlink"></span>\e073</li>
-    <li><span class="button k-i-hyperlink-clear"></span>\e074</li>
-    <li><span class="button k-i-hyperlink-ext"></span>\e075</li>
+    <li><span class="button k-mi-stop"></span>\e03d</li>
+    <li><span class="button k-mi-pause"></span>\e03e</li>
+    <li><span class="button k-mi-eject"></span>\e03f</li>
+    <li><span class="button k-mi-volume-off"></span>\e040</li>
+    <li><span class="button k-mi-volume-low"></span>\e041</li>
+    <li><span class="button k-mi-volume-high"></span>\e042</li>
+    <li><span class="button k-mi-earphones"></span>\e043</li>
+    <li><span class="button k-mi-heart"></span>\e044</li>
+    <li><span class="button k-mi-heart-empty"></span>\e045</li>
+    <li><span class="button k-mi-heart-half"></span>\e046</li>
+    <li><span class="button k-mi-star"></span>\e047</li>
+    <li><span class="button k-mi-star-empty"></span>\e048</li>
+    <li><span class="button k-mi-star-half"></span>\e049</li>
+    <li><span class="button k-mi-star-half-empty"></span>\e04a</li>
+    <li><span class="button k-mi-chart-column"></span>\e04b</li>
+    <li><span class="button k-mi-chart-bar"></span>\e04c</li>
+    <li><span class="button k-mi-chart-pie"></span>\e04d</li>
+    <li><span class="button k-mi-chart-donut"></span>\e04e</li>
+    <li><span class="button k-mi-chart-line"></span>\e04f</li>
+    <li><span class="button k-mi-chart-area"></span>\e050</li>
+    <li><span class="button k-mi-chart-donut"></span>\e051</li>
+    <!--li><span class="button k-mi-align-left"></span>\e052</li>
+    <li><span class="button k-mi-align-center"></span>\e053</li>
+    <li><span class="button k-mi-align-right"></span>\e054</li>
+    <li><span class="button k-mi-align-justify"></span>\e055</li>
+    <li><span class="button k-mi-align-clear"></span>\e056</li-->
+    <li><span class="button k-mi-bold"></span>\e057</li>
+    <li><span class="button k-mi-bold-sans"></span>\e058</li>
+    <li><span class="button k-mi-italic"></span>\e059</li>
+    <li><span class="button k-mi-italic-sans"></span>\e05a</li>
+    <li><span class="button k-mi-underline"></span>\e05b</li>
+    <li><span class="button k-mi-underline-sans"></span>\e05c</li>
+    <li><span class="button k-mi-strikethrough"></span>\e05d</li>
+    <li><span class="button k-mi-strikethrough-sans"></span>\e05e</li>
+    <li><span class="button k-mi-font-a"></span>\e05f</li>
+    <li><span class="button k-mi-font-a-sans"></span>\e060</li>
+    <li><span class="button k-mi-font-t"></span>\e061</li>
+    <li><span class="button k-mi-font-t-sans"></span>\e062</li>
+    <li><span class="button k-mi-brightness"></span>\e063</li>
+    <li><span class="button k-mi-brightness-contrast"></span>\e064</li>
+    <li><span class="button k-mi-contrast"></span>\e065</li>
+    <li><span class="button k-mi-crop"></span>\e066</li>
+    <li><span class="button k-mi-mirror"></span>\e067</li>
+    <li><span class="button k-mi-flip-h"></span>\e068</li>
+    <li><span class="button k-mi-flip-v"></span>\e069</li>
+    <li><span class="button k-mi-rotate"></span>\e06a</li>
+    <li><span class="button k-mi-rotate-rev"></span>\e06b</li>
+    <li><span class="button k-mi-filter"></span>\e06c</li>
+    <li><span class="button k-mi-filter-clear"></span>\e06d</li>
+    <li><span class="button k-mi-sort-asc"></span>\e06e</li>
+    <li><span class="button k-mi-sort-desc"></span>\e06f</li>
+    <li><span class="button k-mi-sort-clear"></span>\e070</li>
+    <li><span class="button k-mi-indent"></span>\e071</li>
+    <li><span class="button k-mi-outdent"></span>\e072</li>
+    <li><span class="button k-mi-hyperlink"></span>\e073</li>
+    <li><span class="button k-mi-hyperlink-clear"></span>\e074</li>
+    <li><span class="button k-mi-hyperlink-ext"></span>\e075</li>
     <li><span class="button k-si-hyperlink-ext"></span>\e076</li>
-    <li><span class="button k-i-ul"></span>\e077</li>
+    <li><span class="button k-mi-ul"></span>\e077</li>
     <li><span class="button k-si-ul"></span>\e078</li>
-    <li><span class="button k-i-paint"></span>\e079</li>
-    <li><span class="button k-i-paste"></span>\e07a</li>
-    <li><span class="button k-i-pencil"></span>\e07b</li>
-    <li><span class="button k-i-image"></span>\e07c</li>
-    <li><span class="button k-i-image-add"></span>\e07d</li>
-    <li><span class="button k-i-print"></span>\e07e</li>
-    <li><span class="button k-i-zoom"></span>\e07f</li>
-    <li><span class="button k-i-zoom-in"></span>\e080</li>
-    <li><span class="button k-i-zoom-out"></span>\e081</li>
-    <li><span class="button k-i-asterisk"></span>\e082</li>
-    <li><span class="button k-i-clip"></span>\e083</li>
-    <li><span class="button k-i-clip-45"></span>\e084</li>
-    <li><span class="button k-i-qrcode"></span>\e085</li>
-    <li><span class="button k-i-book"></span>\e086</li>
-    <li><span class="button k-i-bookmark"></span>\e087</li>
-    <li><span class="button k-i-briefcase"></span>\e088</li>
-    <li><span class="button k-i-calendar"></span>\e089</li>
-    <li><span class="button k-i-camera-still"></span>\e08a</li>
-    <li><span class="button k-i-camera-video"></span>\e08b</li>
-    <li><span class="button k-i-certificate"></span>\e08c</li>
-    <li><span class="button k-i-clock"></span>\e08d</li>
-    <li><span class="button k-i-cloud"></span>\e08e</li>
-    <li><span class="button k-i-collapse"></span>\e08f</li>
-    <li><span class="button k-i-columns"></span>\e090</li>
-    <li><span class="button k-i-comment"></span>\e091</li>
-    <li><span class="button k-i-comment-empty"></span>\e092</li>
-    <li><span class="button k-i-comments"></span>\e093</li>
-    <li><span class="button k-i-comments-empty"></span>\e094</li>
-    <li><span class="button k-i-credit-card"></span>\e095</li>
-    <li><span class="button k-i-download"></span>\e096</li>
-    <li><span class="button k-i-draghandle"></span>\e097</li>
+    <li><span class="button k-mi-paint"></span>\e079</li>
+    <li><span class="button k-mi-paste"></span>\e07a</li>
+    <li><span class="button k-mi-pencil"></span>\e07b</li>
+    <li><span class="button k-mi-image"></span>\e07c</li>
+    <li><span class="button k-mi-image-add"></span>\e07d</li>
+    <li><span class="button k-mi-print"></span>\e07e</li>
+    <li><span class="button k-mi-zoom"></span>\e07f</li>
+    <li><span class="button k-mi-zoom-in"></span>\e080</li>
+    <li><span class="button k-mi-zoom-out"></span>\e081</li>
+    <li><span class="button k-mi-asterisk"></span>\e082</li>
+    <li><span class="button k-mi-clip"></span>\e083</li>
+    <li><span class="button k-mi-clip-45"></span>\e084</li>
+    <li><span class="button k-mi-qrcode"></span>\e085</li>
+    <li><span class="button k-mi-book"></span>\e086</li>
+    <li><span class="button k-mi-bookmark"></span>\e087</li>
+    <li><span class="button k-mi-briefcase"></span>\e088</li>
+    <li><span class="button k-mi-calendar"></span>\e089</li>
+    <li><span class="button k-mi-camera-still"></span>\e08a</li>
+    <li><span class="button k-mi-camera-video"></span>\e08b</li>
+    <li><span class="button k-mi-certificate"></span>\e08c</li>
+    <li><span class="button k-mi-clock"></span>\e08d</li>
+    <li><span class="button k-mi-cloud"></span>\e08e</li>
+    <li><span class="button k-mi-collapse"></span>\e08f</li>
+    <li><span class="button k-mi-columns"></span>\e090</li>
+    <li><span class="button k-mi-comment"></span>\e091</li>
+    <li><span class="button k-mi-comment-empty"></span>\e092</li>
+    <li><span class="button k-mi-comments"></span>\e093</li>
+    <li><span class="button k-mi-comments-empty"></span>\e094</li>
+    <li><span class="button k-mi-credit-card"></span>\e095</li>
+    <li><span class="button k-mi-download"></span>\e096</li>
+    <li><span class="button k-mi-draghandle"></span>\e097</li>
     <li><span class="button k-si-draghandle"></span>\e098</li>
-    <li><span class="button k-i-envelop"></span>\e099</li>
-    <li><span class="button k-i-envelop-open"></span>\e09a</li>
-    <li><span class="button k-i-eye"></span>\e09b</li>
-    <li><span class="button k-i-file"></span>\e09c</li>
-    <li><span class="button k-i-file-add"></span>\e09d</li>
-    <li><span class="button k-i-film"></span>\e09e</li>
-    <li><span class="button k-i-flag"></span>\e09f</li>
-    <li><span class="button k-i-folder-add"></span>\e0a0</li>
-    <li><span class="button k-i-folder"></span>\e0a1</li>
-    <li><span class="button k-i-folder-open"></span>\e0a2</li>
-    <li><span class="button k-i-folder-up"></span>\e0a3</li>
-    <li><span class="button k-i-gear"></span>\e0a4</li>
+    <li><span class="button k-mi-envelop"></span>\e099</li>
+    <li><span class="button k-mi-envelop-open"></span>\e09a</li>
+    <li><span class="button k-mi-eye"></span>\e09b</li>
+    <li><span class="button k-mi-file"></span>\e09c</li>
+    <li><span class="button k-mi-file-add"></span>\e09d</li>
+    <li><span class="button k-mi-film"></span>\e09e</li>
+    <li><span class="button k-mi-flag"></span>\e09f</li>
+    <li><span class="button k-mi-folder-add"></span>\e0a0</li>
+    <li><span class="button k-mi-folder"></span>\e0a1</li>
+    <li><span class="button k-mi-folder-open"></span>\e0a2</li>
+    <li><span class="button k-mi-folder-up"></span>\e0a3</li>
+    <li><span class="button k-mi-gear"></span>\e0a4</li>
     <li><span class="button k-si-gear"></span>\e0a5</li>
-    <li><span class="button k-i-transmit"></span>\e0a6</li>
-    <li><span class="button k-i-beer"></span>\e0a7</li>
-    <li><span class="button k-i-cocktail"></span>\e0a8</li>
-    <li><span class="button k-i-coffee"></span>\e0a9</li>
-    <li><span class="button k-i-wine"></span>\e0aa</li>
-    <li><span class="button k-i-grid"></span>\e0ab</li>
-    <li><span class="button k-i-thumbs"></span>\e0ac</li>
-    <li><span class="button k-i-split-h"></span>\e0ad</li>
-    <li><span class="button k-i-split-v"></span>\e0ae</li>
-    <li><span class="button k-i-home"></span>\e0af</li>
-    <li><span class="button k-i-inbox"></span>\e0b0</li>
-    <li><span class="button k-i-key"></span>\e0b1</li>
-    <li><span class="button k-i-login"></span>\e0b2</li>
-    <li><span class="button k-i-logout"></span>\e0b3</li>
-    <li><span class="button k-i-place"></span>\e0b4</li>
-    <li><span class="button k-i-megaphone"></span>\e0b5</li>
-    <li><span class="button k-i-note"></span>\e0b6</li>
-    <li><span class="button k-i-pin"></span>\e0b7</li>
-    <li><span class="button k-i-unpin"></span>\e0b8</li>
-    <li><span class="button k-i-power"></span>\e0b9</li>
-    <li><span class="button k-i-progress-bars"></span>\e0ba</li>
-    <li><span class="button k-i-road"></span>\e0bb</li>
-    <li><span class="button k-i-rss"></span>\e0bc</li>
-    <li><span class="button k-i-floppy"></span>\e0bd</li>
-    <li><span class="button k-i-sitemap"></span>\e0be</li>
-    <li><span class="button k-i-tag-45"></span>\e0bf</li>
-    <li><span class="button k-i-tag-h"></span>\e0c0</li>
-    <li><span class="button k-i-thunderbolt"></span>\e0c1</li>
-    <li><span class="button k-i-tooltip"></span>\e0c2</li>
-    <li><span class="button k-i-trash"></span>\e0c3</li>
-    <li><span class="button k-i-trophy"></span>\e0c4</li>
-    <li><span class="button k-i-ungroup"></span>\e0c5</li>
-    <li><span class="button k-i-upload"></span>\e0c6</li>
-    <li><span class="button k-i-window"></span>\e0c7</li>
-    <li><span class="button k-i-tiles"></span>\e0c8</li>
-    <li><span class="button k-i-wrench"></span>\e0c9</li>
-    <li><span class="button k-i-action"></span>\e0ca</li>
-    <li><span class="button k-i-add"></span>\e0cb</li>
-    <li><span class="button k-i-add-inv"></span>\e0cc</li>
-    <li><span class="button k-i-armchair"></span>\e0cd</li>
-    <li><span class="button k-i-battery"></span>\e0ce</li>
-    <li><span class="button k-i-book-open"></span>\e0cf</li>
-    <li><span class="button k-i-camera"></span>\e0d0</li>
-    <li><span class="button k-i-cart"></span>\e0d1</li>
-    <li><span class="button k-i-time"></span>\e0d2</li>
-    <li><span class="button k-i-coffee-card"></span>\e0d3</li>
-    <li><span class="button k-i-download-arrow"></span>\e0d4</li>
-    <li><span class="button k-i-edit"></span>\e0d5</li>
-    <li><span class="button k-i-faves"></span>\e0d6</li>
-    <li><span class="button k-i-star"></span>\e0d7</li>
-    <li><span class="button k-i-featured"></span>\e0d8</li>
-    <li><span class="button k-i-forward"></span>\e0d9</li>
-    <li><span class="button k-i-cog"></span>\e0da</li>
-    <li><span class="button k-i-globe"></span>\e0db</li>
-    <li><span class="button k-i-globe-inv"></span>\e0dc</li>
-    <li><span class="button k-i-house"></span>\e0dd</li>
-    <li><span class="button k-i-info"></span>\e0de</li>
-    <li><span class="button k-i-share"></span>\e0df</li>
-    <li><span class="button k-i-more-h"></span>\e0e0</li>
-    <li><span class="button k-i-more-v"></span>\e0e1</li>
-    <li><span class="button k-i-next"></span>\e0e2</li>
-    <li><span class="button k-i-pause-a"></span>\e0e3</li>
-    <li><span class="button k-i-user"></span>\e0e4</li>
-    <li><span class="button k-i-play-a"></span>\e0e5</li>
-    <li><span class="button k-i-refresh-a"></span>\e0e6</li>
-    <li><span class="button k-i-reset"></span>\e0e7</li>
-    <li><span class="button k-i-rewind"></span>\e0e8</li>
-    <li><span class="button k-i-search-a"></span>\e0e9</li>
-    <li><span class="button k-i-stop-a"></span>\e0ea</li>
-    <li><span class="button k-i-tiles-a"></span>\e0eb</li>
-    <li><span class="button k-i-trash-a"></span>\e0ec</li>
-    <li><span class="button k-i-undo"></span>\e0ed</li>
-    <li><span class="button k-i-redo"></span>\e0ee</li>
-    <li><span class="button k-i-volume-a"></span>\e0ef</li>
-    <li><span class="button k-i-wifi"></span>\e0f0</li>
-    <li><span class="button k-i-more-lines"></span>\e0f1</li>
-    <li><span class="button k-i-pull-to-ref"></span>\e0f2</li>
-    <li><span class="button k-i-loading-android"></span>\e0f3</li>
-    <li><span class="button k-i-loading-blackberry"></span>\e0f4</li>
-    <li><span class="button k-i-loading-meego"></span>\e0f5</li>
-    <li><span class="button k-i-loading-custom"></span>\e0f6</li>
-    <li><span class="button k-i-loading-ios"></span>\e0f7</li>
-    <li><span class="button k-i-bug"></span>\e0f8</li>
-    <li><span class="button k-i-info"></span>\e0f9</li>
-    <li><span class="button k-i-warning"></span>\e0fa</li>
-    <li><span class="button k-i-question"></span>\e0fb</li>
-    <li><span class="button k-i-insert-n"></span>\e0fc</li>
-    <li><span class="button k-i-insert-m"></span>\e0fd</li>
-    <li><span class="button k-i-insert-s"></span>\e0fe</li>
-    <li><span class="button k-i-lock"></span>\e0ff</li>
-    <li><span class="button k-i-unlock"></span>\e100</li>
-    <li><span class="button k-i-phone"></span>\e101</li>
-    <li><span class="button k-i-tablet"></span>\e102</li>
-    <li><span class="button k-i-ol"></span>\e103</li>
-    <li><span class="button k-i-barcode"></span>\e104</li>
+    <li><span class="button k-mi-transmit"></span>\e0a6</li>
+    <li><span class="button k-mi-beer"></span>\e0a7</li>
+    <li><span class="button k-mi-cocktail"></span>\e0a8</li>
+    <li><span class="button k-mi-coffee"></span>\e0a9</li>
+    <li><span class="button k-mi-wine"></span>\e0aa</li>
+    <li><span class="button k-mi-grid"></span>\e0ab</li>
+    <li><span class="button k-mi-thumbs"></span>\e0ac</li>
+    <li><span class="button k-mi-split-h"></span>\e0ad</li>
+    <li><span class="button k-mi-split-v"></span>\e0ae</li>
+    <li><span class="button k-mi-home"></span>\e0af</li>
+    <li><span class="button k-mi-inbox"></span>\e0b0</li>
+    <li><span class="button k-mi-key"></span>\e0b1</li>
+    <li><span class="button k-mi-login"></span>\e0b2</li>
+    <li><span class="button k-mi-logout"></span>\e0b3</li>
+    <li><span class="button k-mi-place"></span>\e0b4</li>
+    <li><span class="button k-mi-megaphone"></span>\e0b5</li>
+    <li><span class="button k-mi-note"></span>\e0b6</li>
+    <li><span class="button k-mi-pin"></span>\e0b7</li>
+    <li><span class="button k-mi-unpin"></span>\e0b8</li>
+    <li><span class="button k-mi-power"></span>\e0b9</li>
+    <li><span class="button k-mi-progress-bars"></span>\e0ba</li>
+    <li><span class="button k-mi-road"></span>\e0bb</li>
+    <li><span class="button k-mi-rss"></span>\e0bc</li>
+    <li><span class="button k-mi-floppy"></span>\e0bd</li>
+    <li><span class="button k-mi-sitemap"></span>\e0be</li>
+    <li><span class="button k-mi-tag-45"></span>\e0bf</li>
+    <li><span class="button k-mi-tag-h"></span>\e0c0</li>
+    <li><span class="button k-mi-thunderbolt"></span>\e0c1</li>
+    <li><span class="button k-mi-tooltip"></span>\e0c2</li>
+    <li><span class="button k-mi-trash"></span>\e0c3</li>
+    <li><span class="button k-mi-trophy"></span>\e0c4</li>
+    <li><span class="button k-mi-ungroup"></span>\e0c5</li>
+    <li><span class="button k-mi-upload"></span>\e0c6</li>
+    <li><span class="button k-mi-window"></span>\e0c7</li>
+    <li><span class="button k-mi-tiles"></span>\e0c8</li>
+    <li><span class="button k-mi-wrench"></span>\e0c9</li>
+    <li><span class="button k-mi-action"></span>\e0ca</li>
+    <li><span class="button k-mi-add"></span>\e0cb</li>
+    <li><span class="button k-mi-add-inv"></span>\e0cc</li>
+    <li><span class="button k-mi-armchair"></span>\e0cd</li>
+    <li><span class="button k-mi-battery"></span>\e0ce</li>
+    <li><span class="button k-mi-book-open"></span>\e0cf</li>
+    <li><span class="button k-mi-camera"></span>\e0d0</li>
+    <li><span class="button k-mi-cart"></span>\e0d1</li>
+    <li><span class="button k-mi-time"></span>\e0d2</li>
+    <li><span class="button k-mi-coffee-card"></span>\e0d3</li>
+    <li><span class="button k-mi-download-arrow"></span>\e0d4</li>
+    <li><span class="button k-mi-edit"></span>\e0d5</li>
+    <li><span class="button k-mi-faves"></span>\e0d6</li>
+    <li><span class="button k-mi-star"></span>\e0d7</li>
+    <li><span class="button k-mi-featured"></span>\e0d8</li>
+    <li><span class="button k-mi-forward"></span>\e0d9</li>
+    <li><span class="button k-mi-cog"></span>\e0da</li>
+    <li><span class="button k-mi-globe"></span>\e0db</li>
+    <li><span class="button k-mi-globe-inv"></span>\e0dc</li>
+    <li><span class="button k-mi-house"></span>\e0dd</li>
+    <li><span class="button k-mi-info"></span>\e0de</li>
+    <li><span class="button k-mi-share"></span>\e0df</li>
+    <li><span class="button k-mi-more-h"></span>\e0e0</li>
+    <li><span class="button k-mi-more-v"></span>\e0e1</li>
+    <li><span class="button k-mi-next"></span>\e0e2</li>
+    <li><span class="button k-mi-pause-a"></span>\e0e3</li>
+    <li><span class="button k-mi-user"></span>\e0e4</li>
+    <li><span class="button k-mi-play-a"></span>\e0e5</li>
+    <li><span class="button k-mi-refresh-a"></span>\e0e6</li>
+    <li><span class="button k-mi-reset"></span>\e0e7</li>
+    <li><span class="button k-mi-rewind"></span>\e0e8</li>
+    <li><span class="button k-mi-search-a"></span>\e0e9</li>
+    <li><span class="button k-mi-stop-a"></span>\e0ea</li>
+    <li><span class="button k-mi-tiles-a"></span>\e0eb</li>
+    <li><span class="button k-mi-trash-a"></span>\e0ec</li>
+    <li><span class="button k-mi-undo"></span>\e0ed</li>
+    <li><span class="button k-mi-redo"></span>\e0ee</li>
+    <li><span class="button k-mi-volume-a"></span>\e0ef</li>
+    <li><span class="button k-mi-wifi"></span>\e0f0</li>
+    <li><span class="button k-mi-more-lines"></span>\e0f1</li>
+    <li><span class="button k-mi-pull-to-ref"></span>\e0f2</li>
+    <li><span class="button k-mi-loading-android"></span>\e0f3</li>
+    <li><span class="button k-mi-loading-blackberry"></span>\e0f4</li>
+    <li><span class="button k-mi-loading-meego"></span>\e0f5</li>
+    <li><span class="button k-mi-loading-custom"></span>\e0f6</li>
+    <li><span class="button k-mi-loading-ios"></span>\e0f7</li>
+    <li><span class="button k-mi-bug"></span>\e0f8</li>
+    <li><span class="button k-mi-info"></span>\e0f9</li>
+    <li><span class="button k-mi-warning"></span>\e0fa</li>
+    <li><span class="button k-mi-question"></span>\e0fb</li>
+    <li><span class="button k-mi-insert-n"></span>\e0fc</li>
+    <li><span class="button k-mi-insert-m"></span>\e0fd</li>
+    <li><span class="button k-mi-insert-s"></span>\e0fe</li>
+    <li><span class="button k-mi-lock"></span>\e0ff</li>
+    <li><span class="button k-mi-unlock"></span>\e100</li>
+    <li><span class="button k-mi-phone"></span>\e101</li>
+    <li><span class="button k-mi-tablet"></span>\e102</li>
+    <li><span class="button k-mi-ol"></span>\e103</li>
+    <li><span class="button k-mi-barcode"></span>\e104</li>
     <li><span class="button k-ios7-add"></span>\e200</li>
     <li><span class="button k-ios7-battery"></span>\e203</li>
     <li><span class="button k-ios7-book-open"></span>\e204</li>
