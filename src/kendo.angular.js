@@ -626,8 +626,10 @@ var __meta__ = { // jshint ignore:line
 
                 widget = null;
 
-                if (_wrapper && _element) {
-                    _wrapper.parentNode.replaceChild(_element, _wrapper);
+                if (_element) {
+                    if (_wrapper) {
+                        _wrapper.parentNode.replaceChild(_element, _wrapper);
+                    }
                     $(element).replaceWith(originalElement);
                 }
 
