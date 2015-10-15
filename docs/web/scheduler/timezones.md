@@ -5,53 +5,57 @@ description: Overview of the Scheduler timezone option
 ---
 
 # Timezones Overview
-A ['Time Zone'](http://www.timeanddate.com/time/time-zones.html) refers to any of 24 regions loosely divided by longitude, where the same standard time is kept.
+A ['time zone'](http://www.timeanddate.com/time/time-zones.html) refers to any of the 24 regions loosely divided by longitude, where the same standard time is kept.
 
-## Timezones and the JavaScript `Date` object
-In JavaScript the `Date` object represents single moment in time measured in milliseconds since 01 January 1970. It is important to mention that the JavaScript `Date` objects are [always crated using the current browser timezone offset](http://www.ecma-international.org/ecma-262/6.0/#sec-localtime). That why if you create new `Date` as follows:
+## Timezones and the `Date` Object
+In JavaScript the `Date` object represents a single moment in time, measured in the number of milliseconds since 01 January, 1970 UTC. The `Date` objects are [always created using the current browser timezone offset](http://www.ecma-international.org/ecma-262/6.0/#sec-localtime). Construct a new `Date` object in the following way:
 
     new Date(2014,1,1,12,0,0);
 
-The result in the browser console will show that your current timezone offset is already applied:
+The result in the browser console shows that your current timezone offset is already applied:
 
     Sat Feb 01 2014 12:00:00 GMT+0200 (FLE Standard Time)
 
-If you try to stringify the previously created `Date` using [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method the result will be as follows:
+If you try to convert the previously created JavaScript `Date` to a JSON string using the [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method , the result is:
 
     ""2014-02-01T10:00:00.000Z""
 
-## Timezones and Kendo UI Scheduler
-In Kendo UI Scheduler there is a [timezone](/api/javascript/ui/scheduler#configuration-timezone) option which is used to tell the widget in which timezone to show the appointment dates. By default this option is **not set** and therefor the [event dates will be created with current client timezone offset](/web/scheduler/timezones#timezone-option-is-not-set). This means that *users from different timezone will see different start and end times*. On the other hand setting the Scheduler [timezone](/api/javascript/ui/scheduler#configuration-timezone) will force the widget to display the *same start and end times* regardless the user's timezone.
+## Timezones and the Scheduler
+You can define a [timezone](/api/javascript/ui/scheduler#configuration-timezone) option to the Kendo UI Scheduler. It tells the widget what timezone to apply when displaying the appointment dates. This option is **not set** by default and, therefore, the [event dates will be created based on the current client timezone offset](/web/scheduler/timezones#timezone-option-is-not-set). This means that **users from different timezones will see different start and end times**. On the other hand, setting the Scheduler [timezone](/api/javascript/ui/scheduler#configuration-timezone) will force the widget to show the **same start and end times** regardless of the user's timezone.
 
-> When remote binding is used the Kendo UI Scheduler **expects to receive "UTC" dates**. Respectively, it will send them back to the server in UTC timezone. The **service in use is responsible for keeping the dates in UTC timezone**, without offsetting them with it's local time.
+> **Important**  
 
-> When the Scheduler is bind to remote service it is recommended that the **timezone** option is always set, for example to "Etc/UTC".
+> When the remote binding is used, the Kendo UI Scheduler **expects to receive UTC dates**. Respectively, it will send them back to the server in UTC. The **service in use is responsible for keeping the dates in UTC**, without offsetting them against its local time.
 
-> When the **timezone** option of the Scheduler is not set the current system timezone offset is used.
+> When the Scheduler is bound to a remote service, it is recommended that the **timezone** option is always set, for example, to "Etc/UTC".
 
-> Recommended `Date` format for sending and receiving Scheduler event dates is [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) with "Z" zone designator (UTC date). The same format is used by [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method converting `Date` objects to JSON.
+> When the **timezone** option of the Scheduler is not set, the current system timezone offset is used.
 
-Based on the specifics of the JavaScript `Date` object explained above, the Scheduler needs to adjust the dates of the events when reading and sending them:
+> The recommended `Date` format for sending and receiving Scheduler event dates is [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) with a **Z** zone designator (UTC date). The same format is used by the [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method, which converts JavaScript `Date` objects to JSON strings.
 
-### Reading events from remote source or local array
+Based on the specifics of the JavaScript `Date` object explained above, the Scheduler needs to adjust the dates of the events when reading and sending them.
 
-1) [SchedulerEvent](/api/framework/SchedulerEvent) instances are created, where start/end dates are instatiated as JavaScript `Date` objects.
-In that process, [dates will be offset with local time](http://www.ecma-international.org/ecma-262/6.0/#sec-localtime). 
+### Read Events from a Remote Source or a Local Array
 
-1) if [timezone](/api/javascript/ui/scheduler#configuration-timezone) option is defined, widget will remove the local timezone offset, converting dates to UTC timezone.
-Then it will apply the defined timezone value (e.g. 'America/New_York').
+1.  [SchedulerEvent](/api/framework/SchedulerEvent) instances are created, where start/end dates are instatiated as JavaScript `Date` objects.
+During the process the [dates will be offset against the local time](http://www.ecma-international.org/ecma-262/6.0/#sec-localtime). 
 
-### Sending events to remote service
+2. If the [timezone](/api/javascript/ui/scheduler#configuration-timezone) option is defined, the widget will remove the local timezone offset, converting dates to UTC.
+Then it will apply the defined timezone value (e.g., 'America/New_York').
 
-1) if [timezone](/api/javascript/ui/scheduler#configuration-timezone) option is defined, widget will remove the applied timezone offset (e.g. 'America/New_York'), converting dates to UTC timezone. Then it will apply the local time.
+### Send Events to a Remote Service
 
-1) [SchedulerEvent](/api/framework/SchedulerEvent) instances will be serialized using [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify). In this process, the dates will be converted to UTC timezone and then formatted into [ISO8601 format](https://en.wikipedia.org/wiki/ISO_8601).
+1. If the [timezone](/api/javascript/ui/scheduler#configuration-timezone) option is defined, the widget will remove the applied timezone offset (e.g., 'America/New_York'), converting dates to UTC. Then it will apply the local time.
 
-## Scheduler without timezone option
+2. [SchedulerEvent](/api/framework/SchedulerEvent) instances will be serialized using [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify). In the process, the dates will be converted to UTC and then formatted according to the [ISO8601 format](https://en.wikipedia.org/wiki/ISO_8601).
 
-In this case the Scheduler will show the dates unchanged - *they will be in the local timezone offset*. Please consider the following examples of using the Scheduler without the "timezone" option. You can change your system timezone setting to see what is the difference between them.
+## Scheduler without the Timezone Option
 
-1) Bind the Scheduler to local dates with no "timezone" option set:
+If you choose not to define a timezone option, your system timezone settings will apply by deafault. Yet, you can customize them so you can deliver an appointment date either in the local offset, or in UTC. 
+
+If you run the first example below, the Scheduler will show the dates in the local timezone offset. This means that the event will be displayed as scheduled for 2:00pm, regardless of your location - whether you are in the **Europe/Berlin** timezone, for instance, or in the **Europe/Sofia** one. 
+
+###### Example - bind the Scheduler to local dates when the `timezone` option is not set
 ````html
     <div id="scheduler"></div>
     <script>
@@ -76,7 +80,10 @@ In this case the Scheduler will show the dates unchanged - *they will be in the 
     });
     </script>
 ````
-1) Bind the Scheduler to UTC dates with no "timezone" option set:
+
+If you run the second example below, the Scheduler will show the dates according to the UTC convention. This means that the event will be displayed as scheduled for 4:00pm if you are in the **Europe/Berlin** timezone, for instance, while if you are in the **Europe/Sofia** timezone, the event will appear as scheduled for 5:00pm.  
+
+###### Example - bind the Scheduler to UTC dates when the `timezone` option is not set
 ````html
     <div id="scheduler"></div>
     <script>
