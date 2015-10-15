@@ -1340,11 +1340,11 @@ The text similar to "Today" displayed in scheduler.
     });
     </script>
 
-### messages.editable 'Object'
+### messages.editable `Object`
 
 The configuration of the scheduler editable messages. Use this option to customize or localize the scheduler editable messages.
 
-### messages.editable.confirmation 'String'
+### messages.editable.confirmation `String`
 
 The text similar to "Are you sure you want to delete this event?" displayed in scheduler.
 
