@@ -26,7 +26,7 @@ The following tutorial shows how to scaffold a Kendo UI Chart for ASP.NET MVC us
 
 5.  On the next screen you will be presented with the Model and Data Context options.
     - First enter the Controller and View names.  
-![Grid options](/aspnet-mvc/helpers/grid/images/scaffolding/kendo_ui_chart1.png)
+![Grid options](/aspnet-mvc/helpers/grid/images/scaffolding/kendo_ui_grid1.png)
     - The **Model Class** DropDownList will contain all model types from the active project. In this example we will list products in the Chart. Select the **Product** entity.  
 ![Model Class](/aspnet-mvc/helpers/grid/images/scaffolding/model_class.png)
     - From the **Data Context Class** DropDownList you could select the **Entity Framework Data Model** class to be used. In this example it is **NorthwindEntities**.  

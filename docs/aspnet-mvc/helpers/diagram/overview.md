@@ -48,12 +48,12 @@ Here is how to configure the Kendo Diagram with ajax binding:
                     .Layout(l => l.Type(DiagramLayoutType.Layered))
             )
 
-## Accessing an Existing Diagram
+## Access an Existing Diagram
 
 You can reference an existing diagram instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
 Once a reference has been established, you can use the [API](/api/dataviz/diagram#methods) to control its behavior.
 
-### Accessing an existing Diagram instance
+### Access an Existing Diagram Instance
 
     // Put this after your Kendo Diagram for ASP.NET MVC declaration
     <script>
@@ -63,11 +63,11 @@ Once a reference has been established, you can use the [API](/api/dataviz/diagra
         });
     </script>
 
-## Handling Kendo UI Diagram events
+## Handle Diagram Events
 
 You can subscribe to all [events](/api/dataviz/diagram#events) exposed by Kendo UI Diagram:
 
-### WebForms - subscribe by handler name
+### WebForms - Subscribe by Handler Name
 
     <%= Html.Kendo().Diagram()
             .Name("diagram")
@@ -89,7 +89,7 @@ You can subscribe to all [events](/api/dataviz/diagram#events) exposed by Kendo 
         }
     </script>
 
-### Razor - subscribe by handler name
+### Razor - Subscribe by Handler Name
 
     @(Html.Kendo().Diagram()
           .Name("diagram")
@@ -111,7 +111,7 @@ You can subscribe to all [events](/api/dataviz/diagram#events) exposed by Kendo 
         }
     </script>
 
-### Razor - subscribe by template delegate
+### Razor - Subscribe by Template Delegate
 
     @(Html.Kendo().Diagram()
           .Name("diagram")

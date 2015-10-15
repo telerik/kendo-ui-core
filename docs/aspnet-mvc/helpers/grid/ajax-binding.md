@@ -111,6 +111,7 @@ Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. That
 The `ToDataSourceResult` method uses the `DataSourceRequest` parameter and LINQ expressions to page, sort, filter and group your data.
 The JSON response of the action method will contain only a single page of data. The grid will be bound to that data.
 
+> **Important**  
 > If your data is `IQueryable<T>` returned by a LINQ-enabled provider (Entity Framework, LINQ to SQL, Telerik OpenAccess, NHibernate or other) the LINQ expressions
 created by the `ToDataSourceResult` method will be converted to SQL and executed by the database server.
 
@@ -193,14 +194,14 @@ The custom parameter names must not match reserved words, which are used by the 
 [sorting](/api/javascript/data/datasource#configuration-serverSorting), [filtering](/api/javascript/data/datasource#configuration-serverFiltering),
 [paging](/api/javascript/data/datasource#configuration-serverPaging) and [grouping](/api/javascript/data/datasource#configuration-serverGrouping).
 
-### Example - add the additional parameters to the action method:
+###### Example - add the additional parameters to the action method
 
     public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request, string firstName, string lastName)
     {
         //Implementation omitted
     }
 
-### Example - specify the JavaScript function which returns additional data (ASPX)
+###### Example - specify the JavaScript function which returns additional data (ASPX)
 
     <%: Html.Kendo().Grid<KendoGridAjaxBinding.Models.Product>()
           .Name("grid")
@@ -229,7 +230,7 @@ The custom parameter names must not match reserved words, which are used by the 
     }
     </script>
 
-### Example - specify the JavaScript function which returns additional data (Razor)
+###### Example - specify the JavaScript function which returns additional data (Razor)
 
     @(Html.Kendo().Grid<KendoGridAjaxBinding.Models.Product>()
           .Name("grid")
@@ -263,7 +264,7 @@ The custom parameter names must not match reserved words, which are used by the 
 By default the Kendo UI Grid for ASP.NET MVC will make an ajax request to the action method every time the user changes the page, sorts, filters or groups. This behavior
 can be changed by disabling `ServerOperation`.
 
-### Example - enable client data processing (ASPX)
+###### Example - enable client data processing (ASPX)
 
     <%: Html.Kendo().Grid<KendoGridAjaxBinding.Models.Product>()
           .Name("grid")
@@ -285,7 +286,7 @@ can be changed by disabling `ServerOperation`.
           .Sortable()
     %>
 
-### Example - enable client data processing (Razor)
+###### Example - enable client data processing (Razor)
 
     @(Html.Kendo().Grid<KendoGridAjaxBinding.Models.Product>()
           .Name("grid")
@@ -318,6 +319,6 @@ There is one exception to the above - delegated event handlers will work, becaus
 (e.g. the Grid [`table`](/api/javascript/ui/grid#fields-table), [`tbody`](/api/javascript/ui/grid#fields-tbody) or [`wrapper`](/framework/widgets/wrapper-element)),
 and the event handler code should check what is the event target.
 
-## Prevent Ajax response caching
+## Prevent Ajax Response Caching
 
 See the [FAQ section - How to prevent Ajax response caching?](/aspnet-mvc/helpers/grid/faq#how-to-prevent-ajax-response-caching)
