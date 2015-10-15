@@ -24,6 +24,9 @@ The article assumes that you are familiar with the following:
 The Sortable widget should be initialized on the Grid's [`table element`](../../../api/web/grid#fields-table).
 In the general case, the `filter` property of the Sortable widget should select all `tr` elements that are direct children of the table's `tbody` element. For example: `filter: ">tbody >tr"`.
 
+> In AngularJS application the Sortable widget should be initialized as parent directive. The `filter` configuration option should select all `tr` elements that are children of the `.k-grid` wrapper.
+See [this example](http://docs.telerik.com/kendo-ui/web/sortable/how-to/angularjs-reorder-grid-rows).
+
 **If the Grid's editing is enabled**, you should use a more specific filter selector that excludes the item that is currently in edit mode.
 For example `.filter(">tbody >tr:not(.k-grid-edit-row)")`. In this way the Sortable functionality will not interfere with Grid's editing feature.
 
