@@ -11,7 +11,7 @@ var __meta__ = { // jshint ignore:line
 };
 
 (function (kendo, System) {
-    if (!System) {
+    if (!System || !System.register) {
         return;
     }
 
