@@ -121,9 +121,9 @@ This will happen if two or more widgets are initialized from elements that have 
 
 See [Creating Multiple Widgets Throws JavaScript Errors](#creating-multiple-widgets-throws-javascript-errors) above.
 
-## Selected Item Is Lost
+## ComboBox/DropDownList/MultiSelect Looses Selected Item When Bound to Shared DataSource Instance
 
-If any of the ComboBox, DropDownList, and MultiSelect widgets lose a selected item when bound to a shared DataSource instance, note that the selected item of the widget is directly related to the data source view. If it does not contain the selected item, the widget will remove its current value. This behavior is expected and the solution is to use separate data sources.
+The selected item of the widget is directly related to the data source view. If it does not contain the selected item, then widget will remove its current value. This behavior is expected and the solution is to use separate data sources.
 
 ###### Example - an issue
     var ds = new kendo.data.DataSource({ data: ["foo", "bar"] });
