@@ -1171,6 +1171,41 @@ The subtype further defines the layout type by specifying in greater detail the 
 * "horizontal" - *layered layout* specific subtype. The preferred direction of the links is horizontal.
 * "vertical" - *layered layout* specific subtype. The preferred direction of the links is vertical.
 
+### layout.tipOverTreeStartLevel `Number` *(default: 0)*
+
+Specifies the start level when the [subtype](#configuration-layout.subtype) is `tipOver`.
+
+#### Example - set the tipOver layout start level
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        dataSource: {
+          data: [{
+            items: [{
+              items: [{
+                items: [{}, {}, {}]
+              }, {
+                items: [{}, {}, {}]
+              }, {
+                items: [{}, {}, {}]
+              }]
+            }]
+          }]
+        },
+        layout: {
+          type: "tree",
+          subtype: "tipover",
+          tipOverTreeStartLevel: 1
+        },
+        shapeDefaults: {
+          width: 40,
+          height: 40
+        }
+      });
+    </script>
+
+
 ### layout.type `String` *(default: "tree")*
 
 The type of the layout algorithm to use. Predefined values are:
