@@ -1250,6 +1250,7 @@ var __meta__ = { // jshint ignore:line
                 if (that._triggerEvent({ item: that.element, type: OPEN }) === false) {
                     if (that.popup.visible() && that.options.filter) {
                         that.popup.close(true);
+                        that.popup.element.kendoStop(true);
                     }
 
                     if (y !== undefined) {
