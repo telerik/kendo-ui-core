@@ -165,32 +165,34 @@ This binding can also be used with elements, which are containers for items (e.g
               data-text-field="name"
               data-value-field="id"></select>
               
-      <p>Unordered list</p>
-      <ul data-bind="source: fruits" data-template="list-template">
-        <li></li>
-      </ul>
-      
-      <p>Table</p>
-      <table>
-        <thead><th>ID</th><th>Name</th></thead>
-        <tbody data-bind="source: fruits" data-template="row-template">
-            <tr><td></td><td></td></tr>
-        </tbody>
-      </table>
+        <p>Select</p>
+        <select data-bind="source: fruits" data-template="select-template"></select>
+
+        <script id="select-template" type="text/x-kendo-template">
+            <option value="#: id #">#: name #</option>
+        </script>
+
+        <p>Unordered list</p>
+        <ul data-bind="source: fruits" data-template="list-template">
+            <li></li>
+        </ul>
+
+        <script id="list-template" type="text/x-kendo-template">
+            <li><strong>ID</strong> #: id #, <strong>Name</strong> #: name #</li>
+        </script>
+
+        <p>Table</p>
+        <table>
+            <thead><th>ID</th><th>Name</th></thead>
+            <tbody data-bind="source: fruits" data-template="row-template">
+                <tr><td></td><td></td></tr>
+            </tbody>
+        </table>
+        <script id="row-template" type="text/x-kendo-template">
+            <tr><td>#: id #</td><td>#: name #</td></tr>
+        </script>
     </div>
     
-    <script id="list-template" type="text/x-kendo-template">
-        <li>
-            <strong>ID</strong> #: id #, <strong>Name</strong> #: name #
-        </li>
-    </script>
-    
-    <script id="row-template" type="text/x-kendo-template">
-        <tr>
-            <td>#: id #</td><td>#: name #</td>
-        </tr>
-    </script>
-
     <script>
 
       var viewModel = kendo.observable({
