@@ -1877,6 +1877,7 @@ A function that can be used to create a custom visual for the labels. The availa
 * format - the default format of the label
 * options - the label options.
 * rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
 * text - the label text.
 * value - the category value
 
@@ -3804,6 +3805,7 @@ A function that can be used to create a custom visual for the title. The availab
 
 * text - the label text.
 * rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
 * options - the label options.
 * createVisual - a function that can be used to get the default visual.
 
@@ -7982,6 +7984,7 @@ A function that can be used to create a custom visual for the title. The availab
 
 * text - the label text.
 * rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
 * options - the label options.
 * createVisual - a function that can be used to get the default visual.
 
@@ -15211,9 +15214,9 @@ A function that can be used to create a custom visual for the labels. The availa
 
 * text - the label text.
 * rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
 * options - the label options.
 * createVisual - a function that can be used to get the default visual.
-* sender - the chart instance (may be undefined).
 
 #### Example - using custom visual for the labels
 
@@ -19158,6 +19161,7 @@ A function that can be used to create a custom visual for the labels. The availa
 * format - the default format of the label
 * options - the label options.
 * rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
 * text - the label text.
 * value - the category value
 
@@ -20944,6 +20948,7 @@ A function that can be used to create a custom visual for the title. The availab
 
 * text - the label text.
 * rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
 * options - the label options.
 * createVisual - a function that can be used to get the default visual.
 
@@ -23876,6 +23881,7 @@ A function that can be used to create a custom visual for the labels. The availa
 * format - the default format of the label
 * options - the label options.
 * rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
 * text - the label text.
 * value - the category value
 
@@ -25674,6 +25680,7 @@ A function that can be used to create a custom visual for the title. The availab
 
 * text - the label text.
 * rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
 * options - the label options.
 * createVisual - a function that can be used to get the default visual.
 
@@ -26968,6 +26975,7 @@ The length of the connecting lines in pixels.
 A function that can be used to create a custom visual for the notes. The available argument fields are:
 
 * rect - the `kendo.geometry.Rect` that defines the note target rect.
+* sender - the chart instance (may be undefined).
 * options - the note options.
 * createVisual - a function that can be used to get the default visual.
 * value - the note value.
@@ -28601,6 +28609,7 @@ A function that can be used to create a custom visual for the labels. The availa
 * format - the default format of the label
 * options - the label options.
 * rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
 * text - the label text.
 * value - the category value
 
@@ -30393,6 +30402,7 @@ A function that can be used to create a custom visual for the title. The availab
 
 * text - the label text.
 * rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
 * options - the label options.
 * createVisual - a function that can be used to get the default visual.
 
