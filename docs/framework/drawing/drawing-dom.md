@@ -318,6 +318,8 @@ do with CSS or display resolution.
 
 - the content of the following elements is not rendered: `<iframe>`, `<svg>`.  A `<canvas>` will be rendered as an image, but only if it's “non-tainted” (does not display images from another domain).
 
+- SVG-s referenced with `<img>` tag will not render in Internet Explorer, because [IE taints the canvas](http://stackoverflow.com/questions/31484379/ie-canvas-datauri-security-error).
+
 - rendering of `<select>` elements is imperfect (some minor issues can be noticed, like wrong padding or missing the drop down arrow).  We recommend using a Kendo DropDown or ListView widget instead of a plain `<select>`.
 
 - images hosted on different domains might not be rendered, unless permissive [Cross-Origin HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image) are provided by the server.  Similarly, fonts might not be possible to load cross-domain.
