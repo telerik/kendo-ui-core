@@ -59,6 +59,47 @@ The promise will be resolved with the root [Group](drawing/group) of the scene.
 ##### element `jQuery`
 The root DOM element to draw.
 
+##### options `Object`
+Configuration options
+
+##### options.avoidLinks `Boolean` *(default: false)*
+A flag indicating whether to produce actual hyperlinks in the exported PDF file.
+
+##### options.forcePageBreak `String`
+An optional CSS selector that specifies the elements that should cause page breaks.
+
+See [Multi-page PDF output](/framework/drawing/drawing-dom#multi-page-pdf-output).
+
+##### options.paperSize `String` *(default: "auto")*
+The paper size for [automatic page breaking](/framework/drawing/drawing-dom#automatic-page-breaking-q1-2015).
+The default "auto" means paper size is determined by content.
+
+Supported values:
+
+* A predefined size: "A4", "A3" etc
+* An array of two numbers specifying the width and height in points (1pt = 1/72in)
+* An array of two strings specifying the width and height in units.
+  Supported units are "mm", "cm", "in" and "pt".
+
+##### options.margin `String|Object`
+Specifies the margins of the page (numbers or strings with units). Supported
+units are "mm", "cm", "in" and "pt" (default).
+
+##### options. margin.bottom `Number|String` *(default: 0)*
+The bottom margin. Numbers are considered as "pt" units.
+
+##### options. margin.left `Number|String` *(default: 0)*
+The left margin. Numbers are considered as "pt" units.
+
+##### options. margin.right `Number|String` *(default: 0)*
+The right margin. Numbers are considered as "pt" units.
+
+##### options. margin.top `Number|String` *(default: 0)*
+The top margin. Numbers are considered as "pt" units.
+
+##### options.template `String`
+The [page template](/framework/drawing/drawing-dom#page-template-headers-and-footers) for multi-page output.
+
 #### Returns
 `Promise` A promise that will be resolved with the root Group of the scene.
 
