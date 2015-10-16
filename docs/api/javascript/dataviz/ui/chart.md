@@ -9624,6 +9624,7 @@ A function that can be used to create a custom visual for the error bars. The av
 * createVisual - a function that can be used to get the default visual.
 * low - the error bar low value.
 * high - the error bar high value.
+* sender - the chart instance.
 
 #### Example - use custom visual for the error bars
 
@@ -10623,6 +10624,7 @@ The available argument fields are:
 * category - the point category.
 * dataItem - the point dataItem.
 * value - the point value.
+* sender - the chart instance.
 * series - the point series.
 * percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
 * runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
@@ -11247,6 +11249,7 @@ A function that can be used to create a custom visual for the labels. The availa
 * rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
 * options - the label options.
 * createVisual - a function that can be used to get the default visual.
+* sender - the chart instance (may be undefined).
 
 #### Example - using custom visual for the labels
 
@@ -11937,6 +11940,7 @@ A function that can be used to create a custom visual for the markers. The avail
 * category - the category of the marker point.
 * dataItem - the dataItem of the marker point.
 * value - the value of the marker point.
+* sender - the chart instance.
 * series - the series of the marker point.
 
 #### Example - use custom visual for the markers
@@ -13596,6 +13600,7 @@ A function that can be used to create a custom visual for the points. Applicable
 * category - the point category.
 * dataItem - the point dataItem.
 * value - the point value.
+* sender - the chart instance.
 * series - the point series.
 * percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
 * runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
@@ -14360,6 +14365,7 @@ A function that can be used to create a custom visual for the notes. The availab
 * category - the category of the note point.
 * dataItem - the dataItem of the note point.
 * value - the value of the note point.
+* sender - the chart instance.
 * series - the series of the note point.
 * text - the note text.
 
@@ -15207,6 +15213,7 @@ A function that can be used to create a custom visual for the labels. The availa
 * rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
 * options - the label options.
 * createVisual - a function that can be used to get the default visual.
+* sender - the chart instance (may be undefined).
 
 #### Example - using custom visual for the labels
 
@@ -16110,6 +16117,7 @@ A function that can be used to create a custom visual for the points. Applicable
 * category - the point category.
 * dataItem - the point dataItem.
 * value - the point value.
+* sender - the chart instance.
 * series - the point series.
 
 #### Example - using custom visual
@@ -16826,6 +16834,7 @@ A function that can be used to create a custom visual for the notes. The availab
 * category - the category of the note point.
 * dataItem - the dataItem of the note point.
 * value - the value of the note point.
+* sender - the chart instance.
 * series - the series of the note point.
 * text - the note text.
 
