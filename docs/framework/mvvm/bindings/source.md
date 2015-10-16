@@ -153,15 +153,43 @@ This example will output the following (all `data` attributes are removed for cl
 ### Source binding to a Kendo UI DataSource instance
 
 `source` binding to a Kendo UI DataSource can be used for Kendo UI widgets, which can normally be databound to a Kendo UI DataSource outside an MVVM scenario.
-Such a binding will not work for plain HTML elements such as textboxes, as they are not aware how to handle a Kendo UI DataSource instance or extract its data items.
+This binding can also be used with elements, which are containers for items (e.g. `<ul>`, `<table>`, `<select>`, etc.). In this case an item template must be defined via `data-template`.
+
+`source` binding will not work for plain HTML elements that are not meant to be bound to collections of data items, such as textboxes.
 
 ```html
     <div id="example">
+      <p>Kendo UI DropDownList</p>
       <select data-role="dropdownlist"
               data-bind="source: fruits"
               data-text-field="name"
               data-value-field="id"></select>
+              
+      <p>Unordered list</p>
+      <ul data-bind="source: fruits" data-template="list-template">
+        <li></li>
+      </ul>
+      
+      <p>Table</p>
+      <table>
+        <thead><th>ID</th><th>Name</th></thead>
+        <tbody data-bind="source: fruits" data-template="row-template">
+            <tr><td></td><td></td></tr>
+        </tbody>
+      </table>
     </div>
+    
+    <script id="list-template" type="text/x-kendo-template">
+        <li>
+            <strong>ID</strong> #: id #, <strong>Name</strong> #: name #
+        </li>
+    </script>
+    
+    <script id="row-template" type="text/x-kendo-template">
+        <tr>
+            <td>#: id #</td><td>#: name #</td>
+        </tr>
+    </script>
 
     <script>
 
@@ -186,6 +214,21 @@ Such a binding will not work for plain HTML elements such as textboxes, as they 
       kendo.bind("#example", viewModel);
 
     </script>
+    
+    <style>
+    
+        table {
+            border-collapse: collapse;
+        }
+    
+        table th,
+        table td {
+            border: 1px solid #999;
+            padding: .3em .6em;
+            text-align: left;
+        }
+    
+    </style>
 ```
 
 ### Source binding to the View-Model
@@ -232,7 +275,7 @@ The `this` reserved word should always be used on its own. The following are **n
 
 When applied to a `select` element the `source` binding would create `option` elements.
 
-### Source binding to array of primitive objects
+### Source binding of a select element to array of primitive objects
 
     <select data-bind="source: colors"></select>
     <script>
@@ -258,7 +301,7 @@ The `source` binding could also populate a `select` from an array of non-primiti
 `data-text-field` and `data-value-field` attributes are used to specify how the value and content of the `option`
 elements would be bound.
 
-### Source binding to array of non-primitive objects
+### Source binding of a select element to array of non-primitive objects
 
     <select data-text-field="name" data-value-field="id"
            data-bind="source: products"></select>
