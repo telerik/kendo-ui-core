@@ -2992,7 +2992,7 @@ The data items which will replace the current ones in the data source. If omitte
 
 Reads the data items from a remote service (if the [transport](#configuration-transport) option is set) or from a JavaScript array (if the [data](#configuration-data) option is set).
 
-> The `fetch` method makes a request to the remote service only the first time it is called.
+> The `fetch` method makes a request to the remote service only the first time it is called if the dataSource is not configured for server operations.
 
 #### Parameters
 
