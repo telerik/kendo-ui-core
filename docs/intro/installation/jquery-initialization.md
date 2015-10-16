@@ -74,7 +74,7 @@ You can configure a Kendo UI widget by passing a configuration object (key/value
 
 ### Instantiate the Grid Widget
 
-The example below sets the [height](/api/javascript/ui/grid#configuration-height), [columns](/api/web/grid#columns-array) and [dataSource](/api/web/grid#datasource-kendodatadatasource--object) configuration options of the Grid widget.
+The example below sets the [height](/api/javascript/ui/grid#configuration-height), [columns](/api/javascript/ui/grid#configuration-columns) and [dataSource](/api/javascript/ui/grid#configuration-dataSource) configuration options of the Grid widget.
 
 ###### Example
 

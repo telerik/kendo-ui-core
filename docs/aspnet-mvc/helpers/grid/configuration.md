@@ -284,7 +284,7 @@ Enable or disable batch create, update and destroy operations. By default batch 
 
 ## Column Configuration
 
-The [Columns](/api/wrappers/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder#methods-Columns(System.Action<Kendo.Mvc.UI.Fluent.GridColumnFactory<T>>)) method configures the grid columns. If not used the grid will create a column for every public property of the model.
+The [Columns](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder#methods-Columns) method configures the grid columns. If not used the grid will create a column for every public property of the model.
 
 ###### Example - configure the grid columns (WebForms)
 
