@@ -116,7 +116,7 @@ More info can be found in the [groupable.messages](/api/javascript/ui/grid#confi
         }
     }
 
-More info can be found in the [columnMenu.messages](/api/web/grid#columnmenumessages-object) section of the Grid API reference.
+More info can be found in the [columnMenu.messages](/api/javascript/ui/grid#configuration-columnMenu.messages) section of the Grid API reference.
 
 ## Localization of the pager
 
