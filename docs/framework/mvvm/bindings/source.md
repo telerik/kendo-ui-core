@@ -150,6 +150,43 @@ This example will output the following (all `data` attributes are removed for cl
         Name: <span>John Doe</span>
     </div>
 
+### Source binding to a Kendo UI DataSource instance
+
+`source` binding to a Kendo UI DataSource can be used for Kendo UI widgets, which can normally be databound to a Kendo UI DataSource outside an MVVM scenario.
+Such a binding will not work for plain HTML elements such as textboxes, as they are not aware how to handle a Kendo UI DataSource instance or extract its data items.
+
+```html
+    <div id="example">
+      <select data-role="dropdownlist"
+              data-bind="source: fruits"
+              data-text-field="name"
+              data-value-field="id"></select>
+    </div>
+
+    <script>
+
+      var viewModel = kendo.observable({
+        fruits: new kendo.data.DataSource({
+          data: [
+            { id: 1, name: "Apples" },
+            { id: 2, name: "Oranges" },
+            { id: 3, name: "Bananas" }
+          ],
+          schema: {
+            model: {
+              fields: {
+                id: { type: "number" },
+                name: { type: "string" }
+              }
+            }
+          }
+        })
+      });
+
+      kendo.bind("#example", viewModel);
+
+    </script>
+```
 
 ### Source binding to the View-Model
 
