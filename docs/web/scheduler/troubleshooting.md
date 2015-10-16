@@ -6,23 +6,20 @@ description: Learn how to use Kendo UI jQuery Scheduler component and easily han
 
 # Scheduler Troubleshooting
 
-## Created/Deleted/Updated Events are Sent Multiple Times to the Remote Service
-If any of the create, delete, or update events are sent multiple time to the remote service, the server response to them is interpreted by the dataSource as an error, and the dataSource [error event](/api/framework/datasource#events-error) is triggered. As a result, the Scheduler dataSource will try to sync the request again by sending it to the remote sevice each time a user requires the same action, and will continue to do so until it signifies success.
+## Create/Destroy/Update Request Is Sent Multiple Times to the Remote Service
 
-**Solution**: Update the remote service in use, so it can return valid responses. Make sure the format of the server response is formatted in the same way as the **read** action response:
+In this case the server response of the create/destroy/update action is interpreted as an error by the dataSource and the [error event](/api/framework/datasource#events-error) of the dataSource is triggered. When such a request fails, the Scheduler dataSource will try to get a valid server response again on a subsequent dataSource sync until the request succeeds. 
+
+**Solution**: Update the remote service in use, so it can return valid responses. Make sure the server response is formatted in the same way as the **read** action response:
 
 1. **create** request - the Scheduler expects the created record to be returned to the client side with its [id field](/api/javascript/data/schedulerevent#fields-id) set to a **unique value**.
 
-2. **update/destroy** request - the Scheduler expects the server to return a valid response, so it can signify success. Such a response could be the updated/deleted event formatted in the same way as the **read** action:
+2. **update/destroy** request - the Scheduler expects the server to return a valid response, so it can signify success. Such a response, for example, is the updated/deleted event formatted in the same way as the **read** action:
 
     [{id: 23, title: "some title", start:"2015-10-14T15:00:00.000Z", end:"2015-10-14T17:00:00.000Z" }]
 
 ## When You Cancel Changes Other Events Disappear
 It is possible to experience such behavior if the [id fields](/api/javascript/data/schedulerevent#fields-id) of the other events are not set to valid and unique values. 
-
-**Solution**: Update the remote service in use, so it can return valid responses.
-Make sure the server returns valid responses for the **create** and **read** actions and all events have valid unique values set in their respective [id field](/api/javascript/data/schedulerevent#fields-id).
-
 
 ## Created Events Are Offset after Create/Update Request
 This behavior may be caused if the Scheduler [timezone](/api/javascript/ui/scheduler#configuration-timezone) option is not set, or if the remote service does not keep dates in the correct format.
