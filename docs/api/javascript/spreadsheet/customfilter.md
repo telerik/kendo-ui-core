@@ -29,7 +29,7 @@ In addition, `startswith`, `endswith`, `contains`, `doesnotstartwith` and `doesn
 #### Example - custom filter
 
 
-```html
+```
     <div id="spreadsheet"></div>
 
     <script type="text/javascript" charset="utf-8">

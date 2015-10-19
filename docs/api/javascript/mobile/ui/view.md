@@ -144,7 +144,7 @@ Prepares the **View** for safe removal from DOM. Detaches all event handlers and
 
 #### Example
 
-```html
+```
 <div data-role="view" id="main">
     <a data-role="button" data-click="destroyView">Destroy and remove view</a>
 </div>

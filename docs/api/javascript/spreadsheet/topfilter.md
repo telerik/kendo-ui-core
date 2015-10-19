@@ -27,7 +27,7 @@ An object which may contain the following keys:
 #### Example - top 2 numbers
 
 
-```html
+```
     <div id="spreadsheet"></div>
 
     <script type="text/javascript" charset="utf-8">
@@ -56,7 +56,7 @@ An object which may contain the following keys:
 #### Example - filter the top 50 percent of the items
 
 
-```html
+```
     <div id="spreadsheet"></div>
 
     <script type="text/javascript" charset="utf-8">
