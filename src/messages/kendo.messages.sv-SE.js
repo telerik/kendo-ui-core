@@ -7,8 +7,10 @@
  * If you do not own a commercial license, this file shall be governed by the trial license terms.
  */
 ! function (e, define) {
+    "use strict";
     define([], e);
 }(function () {
+    "use strict";
     return function(e) {
         kendo.ui.FilterCell && (kendo.ui.FilterCell.prototype.options.operators = e.extend(!0, kendo.ui.FilterCell.prototype.options.operators, {
                 date: {
