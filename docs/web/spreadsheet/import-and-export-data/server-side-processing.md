@@ -8,7 +8,7 @@ description: How to process Kendo UI Spreadsheet data using the Telerik Document
 
 The native data format for the Spreadsheet widget is [JSON](json). There is also built-in support for [exporting to Excel](/web/spreadsheet/import-and-export-data/export-to-excel) that runs in the browser.
 
-For anything beyond that, we ship a .NET based server-side module based on [Telerik RadSpredProcessing](http://docs.telerik.com/devtools/wpf/controls/radspreadprocessing/overview), part of the Document Processing Library.
+For anything beyond that, we ship a .NET based server-side module based on [Telerik RadSpreadProcessing](http://docs.telerik.com/devtools/wpf/controls/radspreadprocessing/overview), part of the Document Processing Library.
 
 It allows importing, exporting and processing data from various formats:
 * Excel Microsoft Office Open XML Spreadsheet (.xlsx)
