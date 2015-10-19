@@ -1,7 +1,7 @@
 ---
 title: List of Script Files for the Hybrid UI Widgets
 page_title: List of Script Files for the Hybrid UI Widgets
-description: "script files for hybrid UI, Kendo UI hybrid widgets"
+description: "Script files for Kendo UI hybrid widgets and frameworks."
 position: 5
 ---
 

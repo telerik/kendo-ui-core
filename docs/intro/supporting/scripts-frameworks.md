@@ -1,7 +1,7 @@
 ---
 title: List of Script Files for the Tools, Frameworks and Utilities
 page_title: List of Script Files for the Tools, Frameworks and Utilities
-description: "script files for frameworks and utilities, Kendo UI shared components"
+description: "Script files for Kendo UI shared components (frameworks, tools, and utilities)."
 position: 6
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: List of Script Files for the Desktop Widgets
 page_title: List of Script Files for the Desktop Widgets
-description: "script files Kendo UI widgets general, Kendo UI web widgets"
+description: "Script files Kendo UI desktop widgets."
 position: 3
 ---
 

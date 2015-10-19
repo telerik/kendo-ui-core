@@ -1,7 +1,7 @@
 ---
 title: Welcome to Kendo UI!
 page_title: Welcome to Kendo UI!
-description: "Kendo UI framework overview, UI components, rich data visualization framework, auto-adaptive mobile widgets, tools for building rich web applications"
+description: "Overview of Kendo UI jQuery- and HTML5-based widgets, frameworks, utilities and distributions."
 previous_url: /index
 position: 1
 ---

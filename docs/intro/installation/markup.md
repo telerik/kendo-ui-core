@@ -2,7 +2,7 @@
 title: Initialize a Widget Using Markup
 page_title: Initialize a Widget Using Markup
 previous_url: /data-attribute-initialization, /howto/declarative_initialization, /basics/markup, /intro/markup
-description: "initialize widgets from markup, add Kendo widgets to your mobile website or web application, AngularJS or MVVM to configure Kendo UI"
+description: "Initialize Kendo UI widgets from markup, add Kendo UI widgets to your application, and use AngularJS or MVVM to configure Kendo UI."
 position: 7
 ---
 

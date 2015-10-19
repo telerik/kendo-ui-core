@@ -1,7 +1,7 @@
 ---
 title: Install Kendo UI as a Bower Package
 page_title: Install Kendo UI as a Bower Package
-description: "bower package, install Kendo UI Professional, install Kendo UI Core"
+description: "Install Kendo UI Professional or Kendo UI Core bower package."
 previous_url: /install/bower
 position: 2
 ---
