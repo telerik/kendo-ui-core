@@ -649,6 +649,9 @@ Inserts a PanelBar item after the specified referenceItem
     </ul>
     <script>
         $("#panelbar").kendoPanelBar();
+
+        var panelBar = $("#panelbar").data("kendoPanelBar");
+
         panelBar.insertAfter(
             [{
                 text: "Item 1",
@@ -715,6 +718,9 @@ Inserts a PanelBar item before the specified referenceItem
     </ul>
     <script>
         $("#panelbar").kendoPanelBar();
+
+        var panelBar = $("#panelbar").data("kendoPanelBar");
+
         panelBar.insertBefore(
             [{
                 text: "Item 1",
