@@ -208,12 +208,12 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            if (filter) {
-                expression = {
-                    filters: expression.filters || [],
-                    logic: "and"
-                };
+            expression = {
+                filters: expression.filters || [],
+                logic: "and"
+            };
 
+            if (filter) {
                 expression.filters.push(filter);
             }
 
