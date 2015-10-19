@@ -536,4 +536,27 @@
         equal(options[1].text, "text1");
         equal(options[1].value, "1");
     });
+
+    test("MultiSelect calls read with normalized filters collection", 1, function() {
+        var values = [{ text: "text1", value: "2" }, { text: "text1", value: "1" }];
+
+        var multiselect = new MultiSelect(select, {
+            autoBind: false,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            values: values,
+            dataSource: {
+                serverFiltering: true,
+                transport: {
+                    read: "fake.url",
+                    parameterMap: function(options) {
+                        equal(options.filter.filters.length, 0);
+                    }
+                }
+            }
+        });
+
+        multiselect.open();
+    });
 })();
