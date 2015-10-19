@@ -1296,6 +1296,8 @@ var __meta__ = { // jshint ignore:line
                 this.dataSource.unbind(CHANGE, this._refreshHandler);
             }
 
+            clearTimeout(this._scrollId);
+
             Widget.fn.destroy.call(this);
         },
 
