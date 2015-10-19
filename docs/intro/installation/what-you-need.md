@@ -1,7 +1,7 @@
 ---
 title: Include Only What You Need
 page_title: Include Only What You Need
-description: "customize Kendo, add what you need"
+description: "Customize Kendo UI for your project and add what you need."
 previous_url: /install/custom
 position: 4
 ---

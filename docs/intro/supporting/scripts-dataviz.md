@@ -1,7 +1,7 @@
 ---
 title: List of Script Files for the Data Visualization Widgets
 page_title: List of Script Files for the Data Visualization Widgets
-description: "script files for widgets rendering data visualization, Kendo DataViz script files"
+description: "Script files for Kendo UI widgets that render data visualization."
 position: 4
 ---
 

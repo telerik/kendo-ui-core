@@ -2,7 +2,7 @@
 title: Initialize a Widget Using jQuery Plug-in Syntax
 page_title: Initialize a Widget Using jQuery Plug-in Syntax
 previous_url: /widgets, /howto/add-widgets, /basics/jquery-initialization, /intro/jquery-initialization
-description: "add Kendo widgets to your mobile website or web application"
+description: "Use jQuery plug-in sytax to add Kendo UI widgets to your mobile website or web application."
 position: 6
 ---
 

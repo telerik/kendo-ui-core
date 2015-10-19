@@ -1,7 +1,7 @@
 ---
 title: Call Widget Methods and Bind to Widget Events
 page_title: Call Widget Methods and Bind to Widget Events
-description: "obtain a reference to an initialized Kendo UI widget instance, methods and events for Kendo"
+description: "Obtain a reference to an initialized Kendo UI widget instance, call methods and bind to events."
 previous_url: /basics/events-and-methods, /intro/events-and-methods
 position: 8
 ---
