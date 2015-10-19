@@ -10,8 +10,8 @@
         setup: function () {
             QUnit.fixture.append(
                     '<div id="target" style="width: 100px; height: 100px;">' +
-                    '    <div class="filter" style="width: 20px; height: 20px;"></div>' +
-                    '    <div class="filter" style="width: 20px; height: 20px;"></div>' +
+                    '    <div class="filter" style="width: 20px; height: 20px;">1</div>' +
+                    '    <div class="filter" style="width: 20px; height: 20px;">2</div>' +
                     '</div>' +
                     '<ul id="menu">' +
                     '   <li>' +
@@ -208,5 +208,42 @@
 
     });
 
+
+    test("open event's target argument should point to the DOM element that was clicked, no align",2, function(){
+        var target;
+        menu.setOptions({
+            alignToAnchor: false,
+            showOn: "click",
+            target: ".filter"
+        });
+
+        menu.bind("open", function (e) {
+            equal($(e.target).text(), $(target).text());
+        });
+
+        target = $(".filter:first");
+        target.click();
+
+        target = $(".filter:last");
+        target.click();
+    });
+    test("open event's target argument should point to the DOM element that was clicked",2, function(){
+        var target;
+        menu.setOptions({
+            alignToAnchor: true,
+            showOn: "click",
+            target: ".filter"
+        });
+
+        menu.bind("open", function (e) {
+            equal($(e.target).text(), $(target).text());
+        });
+
+        target = $(".filter:first");
+        target.click();
+
+        target = $(".filter:last");
+        target.click();
+    });
 })();
 
