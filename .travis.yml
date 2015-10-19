@@ -12,4 +12,7 @@ notifications:
   email: false
   slack:
     secure: QFMZSJNCI5H5xzoIcDbJfzgR9AH7FuBD4tOyqRr/FMfEm1mV5eInvgUSmz0xFN3TpDMwJXKi41mrquK6/ey3DEgI0Jm5M32FTis+HahXp3R6zamD7+6Y0WaTxhILcULPqJVo2Ce4WtMqbmrEyk2xLFSYPhFt9wPna9aFO4j+OZw=
+    on_success: change
+    on_failure: change
+    on_start: never
 sudo: false
