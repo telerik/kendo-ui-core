@@ -7,26 +7,8 @@ position: 51
 # Drawing HTML elements
 
 The Drawing API allows you to convert an existing page, or part of it, to drawing primitives.
-
 This allows you to further process the content and to export it various formats such as PDF, SVG and PNG.
 
-### Table of Contents
-
-* [HTML Drawing API](#html-drawing-api)
-* [Custom fonts and PDF](#custom-fonts-and-pdf)
-* [Multi-page PDF output](#multi-page-pdf-output)
-    * [Example - draw a multi-page Grid](#example---draw-a-multi-page-grid)
-* [Automatic page breaking](#automatic-page-breaking-q1-2015)
-    * [Page break limitations](#page-break-limitations)
-* [Page template (headers and footers)](#page-template-headers-and-footers)
-* [Customizing the looks](#customizing-the-looks)
-    * [The .k-pdf-export class](#the-k-pdf-export-class)
-    * [The &lt;kendo-pdf-document&gt; element](#the-kendo-pdf-document-element)
-* [Dimensions and CSS units for PDF output](#dimensions-and-css-units-for-pdf-output)
-* [Known limitations](#known-limitations)
-* [Supported browsers](#supported-browsers)
-
-### HTML Drawing API
 Using the `drawing.drawDOM` function you can draw a DOM element into a [drawing.Group](/api/dataviz/drawing/group), which you can then render with one of the supported backends into SVG, PDF, HTML5 `<canvas>` or VML.
 
 The DOM element must be appended to the document and must be visible (i.e. you cannot draw an element which has `display: none` or `visibility: hidden`, etc.).  For example if you have this HTML in the page:
@@ -53,7 +35,7 @@ You can draw it from JavaScript with the following call:
 `drawing.drawDOM` takes a jQuery selector or object, or a plain DOM node, and returns a promise which will deliver a `drawing.Group` object.
 
 
-### Custom fonts and PDF
+## Custom fonts and PDF
 
 If you need PDF output, for optimal layout and Unicode support your document should declare the fonts that it uses using [CSS `font-face` declarations](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face).  Starting with version Q3-2014-SP1, the PDF generator in Kendo UI is able to dig such declarations directly from the CSS and there is no need for you to manually call [pdf.defineFont](/framework/drawing/pdf-output.html#using-custom-fonts).
 
@@ -79,13 +61,13 @@ Notes:
 - Kendo UI bundles the DejaVu font family and will fall back to it for a few names like “Times New Roman”, “Arial”, “Courier”, or generics like “serif”, “sans-serif”, “monospace”, if no alternate fonts are specified.  This is so that Unicode works by default.  Note, however, that the layout problem will remain — the PDF output will be slightly different from the browser unless the exact same fonts are used.
 
 
-### Multi-page PDF output
+## Multi-page PDF output
 
 `drawing.drawDOM` allows you to create a [multi-page PDF](/framework/drawing/pdf-output.html#multiple-pages-output) by specifying manual page breaks.
 
 A page break will occur **before** each element that matches the `forcePageBreak` CSS selector.
 
-#### Example - draw a multi-page Grid
+### Example - draw a multi-page Grid
 ```html
     <div id="grid" style="width: 900px;"></div>
 
@@ -119,7 +101,7 @@ A page break will occur **before** each element that matches the `forcePageBreak
 ```
 
 
-### Automatic page breaking (Q1 2015)
+## Automatic page breaking (Q1 2015)
 
 When your target is PDF output, you can solicit automatic page breaking (subject to a few limitations detailed below) by informing `drawDOM` what is the desired page size and margins.  The options are `paperSize` and `margin`, same as documented in [PDF options](/framework/drawing/pdf-output.html#pdf-options).  You can still use `forcePageBreak` in this case to manually specify break points.
 
@@ -142,7 +124,7 @@ Example:
       });
     </script>
 
-#### Page break limitations
+### Page break limitations
 
 Page breaking happens only inside text nodes.  Therefore, if an element has no text content, it cannot be split across pages.  For example an `<img>`, or a `<div>` which has perhaps a border or background image, but otherwise no content, will not be split.  If such elements fall on a page boundary, they will be moved to the next page (along with all the following DOM nodes), and if they don't fit on a single page they will be truncated.
 
@@ -219,11 +201,11 @@ When multi-page output is requested (via `forcePageBreak`/`paperSize`) you can a
     </script>
 
 
-### Customizing the looks
+## Customizing the looks
 
 If you'd like the PDF output to look different than what it does in the browser, there are a few options to write CSS rules that apply only in the PDF output.
 
-#### The `.k-pdf-export` class
+### The `.k-pdf-export` class
 
 This CSS class is applied to a DOM element just before drawing starts, and removed thereafter.  Thus, for example to put a border around all paragraphs in PDF output you can define a style like this:
 
@@ -245,7 +227,7 @@ One drawback of this approach is that you cannot add background images.  The fol
 
 The reason is that images are cached upfront, and this one will miss.  The next option should be used when you need to add any background images.
 
-#### The `<kendo-pdf-document>` element
+### The `<kendo-pdf-document>` element
 
 This only works when multi-page documents are requested (thus, only when one of `forcePageBreak` or `paperSize` is given).  To make it work if you only need a single page, you can pass some dummy value to `forcePageBreak`, e.g.: `forcePageBreak: "-"`.
 
@@ -261,7 +243,7 @@ In such case, the DOM renderer will create a clone of the element (in order to b
 Images are safe to add here.
 
 
-### Dimensions and CSS units for PDF output
+## Dimensions and CSS units for PDF output
 
 If you target PDF output, the only unit which is safe to use in CSS is `px`.
 Using `cm`, `in`, `mm`, `pt` etc. will have unpredictable results.  This
@@ -306,7 +288,7 @@ to `drawDOM` — it is safe to use any units there, since they have nothing to
 do with CSS or display resolution.
 
 
-### Known limitations
+## Known limitations
 
 - no support for RTL text
 
@@ -330,7 +312,7 @@ do with CSS or display resolution.
 `"The document could not be saved. There was a problem reading(23)"`. The solution is to open Acrobat Reader options (Edit → Preferences) and in the "Documents" section uncheck “Save As optimizes for Fast Web View”, which is enabled by default. After this, Save As will work without errors.
 
 
-### Supported browsers
+## Supported browsers
 
 The HTML renderer has been tested in recent versions of Chrome, Firefox, Safari, Blink-based Opera, Internet Explorer 9 or later.
 
