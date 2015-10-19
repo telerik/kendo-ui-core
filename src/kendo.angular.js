@@ -474,7 +474,7 @@ var __meta__ = { // jshint ignore:line
         widget.$angular_setLogicValue(getter(scope));
 
         // keep in sync
-        var watchHandler = function(newValue, oldValue) {
+        var watchHandler = function(newValue) {
             if (newValue === undefined) {
                 // because widget's value() method usually checks if the new value is undefined,
                 // in which case it returns the current value rather than clearing the field.
@@ -482,9 +482,6 @@ var __meta__ = { // jshint ignore:line
                 newValue = null;
             }
             if (updating) {
-                return;
-            }
-            if (newValue === oldValue) {
                 return;
             }
 
