@@ -22,7 +22,8 @@ $(function() {
         ],
         timezone: "Etc/UTC",
         date: kendo.date.today(),
-        dataSource: []
+        dataSource: [],
+        editable: false
     });
 
     function fitWidget() {
