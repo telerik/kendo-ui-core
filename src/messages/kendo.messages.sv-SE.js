@@ -299,16 +299,16 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "linkWebAddress": "Webbadress",
   "search": "Search",
   "createTable": "Skapa tabell",
-  "addColumnLeft": "Add column on the left",
-  "addColumnRight": "Add column on the right",
-  "addRowAbove": "Add row above",
-  "addRowBelow": "Add row below",
-  "deleteColumn": "Delete column",
-  "deleteRow": "Delete row",
+  "addColumnLeft": "Lägg till vänsterkolumn",
+  "addColumnRight": "Lägg till högerkolumn",
+  "addRowAbove": "Lägg till rad ovanför",
+  "addRowBelow": "Lägg till rad under",
+  "deleteColumn": "Ta bort kolumn",
+  "deleteRow": "Ta bort rad",
   "formatting": "Format",
-  "viewHtml": "View HTML",
-  "dialogUpdate": "Update",
-  "insertFile": "Insert file"
+  "viewHtml": "Visa HTML",
+  "dialogUpdate": "Uppdatera",
+  "insertFile": "Ange fil"
 });
 }
 
@@ -317,53 +317,53 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
 if (kendo.ui.Scheduler) {
 kendo.ui.Scheduler.prototype.options.messages =
 $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
-  "allDay": "all day",
+  "allDay": "Hela dagen",
   "cancel": "Avbryt",
   "editable": {
-    "confirmation": "Are you sure you want to delete this event?"
+    "confirmation": "Är du säker på att du vill ta bort tillfället?"
   },
-  "date": "Date",
-  "destroy": "Delete",
+  "date": "Datum",
+  "destroy": "Ta bort",
   "editor": {
-    "allDayEvent": "All day event",
-    "description": "Description",
-    "editorTitle": "Event",
-    "end": "End",
-    "endTimezone": "End timezone",
-    "repeat": "Repeat",
-    "separateTimezones": "Use separate start and end time zones",
+    "allDayEvent": "Heldagstillfälle",
+    "description": "Beskrivning",
+    "editorTitle": "Tillfälle",
+    "end": "Slut",
+    "endTimezone": "Sluttidszon",
+    "repeat": "Upprepa",
+    "separateTimezones":  "Använd separata start och sluttidszoner",
     "start": "Start",
-    "startTimezone": "Start timezone",
+    "startTimezone": "Starttidszon",
     "timezone": " ",
-    "timezoneEditorButton": "Time zone",
-    "timezoneEditorTitle": "Timezones",
-    "title": "Title",
-    "noTimezone": "No timezone"
+    "timezoneEditorButton": "Tidszon",
+    "timezoneEditorTitle": "Tidszoner",
+    "title": "Titel",
+    "noTimezone": "Ingen tidszon"
   },
-  "event": "Event",
+  "event": "Tillfälle",
   "recurrenceMessages": {
-    "deleteRecurring": "Do you want to delete only this event occurrence or the whole series?",
-    "deleteWindowOccurrence": "Delete current occurrence",
-    "deleteWindowSeries": "Delete the series",
-    "deleteWindowTitle": "Delete Recurring Item",
-    "editRecurring": "Do you want to edit only this event occurrence or the whole series?",
-    "editWindowOccurrence": "Edit current occurrence",
-    "editWindowSeries": "Edit the series",
-    "editWindowTitle": "Edit Recurring Item"
+    "deleteRecurring": "Vill du ta bort enbart detta tillfället eller hela serien?",
+    "deleteWindowOccurrence": "Ta bort nuvarande upprepning",
+    "deleteWindowSeries": "Ta bort serien",
+    "deleteWindowTitle": "Ta bort återkommande objekt",
+    "editRecurring": "Vill du redigera enbart detta tillfälle eller hela serien?",
+    "editWindowOccurrence": "Redigera återkommade tillfälle",
+    "editWindowSeries": "Redigera serie",
+    "editWindowTitle": "Redigera återkommande objekt"
   },
-  "save": "Save",
-  "time": "Time",
-  "today": "Today",
+  "save": "Spara",
+  "time": "Tid",
+  "today": "Idag",
   "views": {
     "agenda": "Agenda",
-    "day": "Day",
-    "month": "Month",
-    "week": "Week",
-    "workWeek": "Work Week"
+    "day": "Dag",
+    "month": "Månad",
+    "week": "Vecka",
+    "workWeek": "Arbetsvecka"
   },
-  "deleteWindowTitle": "Delete event",
-  "showFullDay": "Show full day",
-  "showWorkDay": "Show business hours"
+  "deleteWindowTitle": "Ta bort tillfälle",
+  "showFullDay": "Visa heldag",
+  "showWorkDay": "Visa arbetsdag"
 });
 }
 })(window.kendo.jQuery);
