@@ -30,10 +30,6 @@ The example below demonstrates how to edit Scheduler event using ContextMenu
         "week",
         "month",
       ],
-      selectable: true,
-      change: function(e) {
-        selectState = e;
-      },
       timezone: "Etc/UTC",
       dataSource: {
         batch: true,
@@ -101,17 +97,25 @@ The example below demonstrates how to edit Scheduler event using ContextMenu
     }).data("kendoScheduler");
 
     $("#contextMenu").kendoContextMenu({
-        filter: ".k-event, .k-scheduler-table",
-        showOn: "click",
-        select: function() {
-          if (selectState.events.length) {
-            scheduler.editEvent(selectState.events[0]);
-          } else {
-            scheduler.addEvent({
-              start: selectState.start,
-              end: selectState.end
-            });
-          }
+        filter: ".k-event, .k-scheduler-table td",
+        target: "#scheduler",
+        //Optionally show the menu on left mouse click:
+        //showOn: "click",
+        select: function(e) {
+            var target = $(e.target);
+
+            if (target.hasClass("k-event")) {
+              var occurrenceByUid = scheduler.occurrenceByUid(target.data("uid"));
+
+              scheduler.editEvent(occurrenceByUid);
+            } else {
+              var slot = scheduler.slotByElement(target);
+
+              scheduler.addEvent({
+                start: slot.startDate,
+                end: slot.endDate
+              });
+            }
         },
         open: function(e) {
           var menu = e.sender;
