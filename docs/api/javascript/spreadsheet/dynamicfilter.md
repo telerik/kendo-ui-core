@@ -26,7 +26,7 @@ An object which should have a `type` field set to:
 #### Example - aboveAverage
 
 
-```html
+```
     <div id="spreadsheet"></div>
 
     <script type="text/javascript" charset="utf-8">
@@ -57,7 +57,7 @@ An object which should have a `type` field set to:
 
 #### Example - filter a range with dates
 
-```html
+```
     <div id="spreadsheet"></div>
 
     <script type="text/javascript" charset="utf-8">

@@ -30,7 +30,7 @@ The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -63,7 +63,7 @@ The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -96,7 +96,7 @@ The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -129,7 +129,7 @@ The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -157,7 +157,7 @@ If a parameter is not passed, the method will clear both the cells values and th
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -185,7 +185,7 @@ The column(s) which filters should be cleared.
 
 #### Example - clear the filters for a column
 
-```html
+```
     <div id="spreadsheet"></div>
 
     <script type="text/javascript" charset="utf-8">
@@ -238,7 +238,7 @@ Determines the action performed by the method.
 
 #### Example - enable filter
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -261,7 +261,7 @@ Determines the action performed by the method.
 ```
 
 #### Example - disable filter
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -285,7 +285,7 @@ Determines the action performed by the method.
 ```
 
 #### Example - set filter
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -317,7 +317,7 @@ Determines the action performed by the method.
 
 #### Example - set multiple filters
 
-```html
+```
 
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
@@ -366,7 +366,7 @@ More details about the supported format may be found in [the cell formatting hel
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -396,7 +396,7 @@ The new formula of the cell. The string may optionally start with `=`.
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -422,7 +422,7 @@ Returns `true` if the sheet of the range has filter enabled.
 
 #### Example - clear the filters for a column
 
-```html
+```
     <div id="spreadsheet"></div>
 
     <script type="text/javascript" charset="utf-8">
@@ -477,7 +477,7 @@ The value to be set to the cells.
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -503,7 +503,7 @@ Returns if a range can be sorted.
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -531,7 +531,7 @@ Returns if a range can be filtered.
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -555,7 +555,7 @@ Merges the range cells into a single merged cell. If the range already includes 
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -574,7 +574,7 @@ Merges the range cells into a single merged cell. If the range already includes 
 
 Sets the sheet selection to the range cells.
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -604,7 +604,7 @@ Determines the action performed by the method.
 
 #### Example - sort a single column
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -628,7 +628,7 @@ Determines the action performed by the method.
 
 #### Example - sort a column in descending order
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -654,7 +654,7 @@ Determines the action performed by the method.
 
 Un-merges any merged cells which are included in the range.
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -682,7 +682,7 @@ The cell values.
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -734,7 +734,7 @@ The `titleTemplate` The title of the "reject" validation window.
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -773,7 +773,7 @@ The value to be set to the cells.
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -803,7 +803,7 @@ Gets or sets the wrap of the range cells.
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 

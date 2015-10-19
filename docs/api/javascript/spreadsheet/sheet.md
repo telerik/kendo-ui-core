@@ -21,7 +21,7 @@ The column index(es)
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -61,7 +61,7 @@ If passed, the method will set the width of the column at the passed index.
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -87,7 +87,7 @@ The zero-based index of the column
 
 ##### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -114,7 +114,7 @@ The zero-based index of the row
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -183,7 +183,7 @@ The amount of columns to be frozen. Pass `0` to remove the frozen pane.
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -213,7 +213,7 @@ The amount of columns to be frozen. Pass `0` to remove the frozen pane.
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -239,7 +239,7 @@ The zero-based index of the column
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -267,7 +267,7 @@ The zero-based index of the row
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -289,7 +289,7 @@ Inserts a new, empty column at the provided index. The contents of the spreadshe
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -323,7 +323,7 @@ The zero-based index of the column
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -354,7 +354,7 @@ Returns a [Range](/api/javascript/spreadsheet/range) for the given range specifi
 `kendo.spreadsheet.Range` a range object, which may be used to manipulate the cell state further.
 
 #### Example
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -385,7 +385,7 @@ If passed, the method will set the height of the row at the passed index.
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -409,7 +409,7 @@ Returns a range with the current active selection.
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -473,7 +473,7 @@ The zero-based index of the column
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -502,7 +502,7 @@ The zero-based index of the row
 
 #### Example
 
-```html
+```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -533,7 +533,7 @@ The sheet instance.
 
 #### Example - subscribe to the "change" event during initialization
 
-```html
+```
     <input id="dropdownlist" />
     <script>
         $("#spreadsheet").kendoSpreadsheet();

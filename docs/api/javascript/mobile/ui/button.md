@@ -47,7 +47,7 @@ By default, buttons trigger click/navigate when the user taps the button (a pres
 
 #### Example - button which reacts immediately when pressed
 
-```html
+```
     <div data-role="view" data-title="Foo">
         <div data-role="header">
             <div data-role="navbar">

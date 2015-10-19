@@ -27,7 +27,7 @@ An object which may contain the following keys:
 #### Example - filter a range by values
 
 
-```html
+```
     <div id="spreadsheet"></div>
 
     <script type="text/javascript" charset="utf-8">
@@ -56,7 +56,7 @@ An object which may contain the following keys:
 #### Example - filter a range by values with blanks
 
 
-```html
+```
 
     <div id="spreadsheet"></div>
 
@@ -89,7 +89,7 @@ An object which may contain the following keys:
 
 #### Example - filter a range with dates
 
-```html
+```
 
     <div id="spreadsheet"></div>
 
