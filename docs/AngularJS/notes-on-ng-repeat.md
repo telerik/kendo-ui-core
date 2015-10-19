@@ -162,36 +162,39 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 
 If generating content with the data-source is not desired, a possible workaround of the behavior may be implemented using the `k-ng-delay` configuration option.
 
-> **Important**  
+> **Important**
 > The approach is not recommended, and has some side effects, like FOUC and decreased performance.
 
-```html
-    <div ng-app="app" ng-controller="MyCtrl">
-        <ul kendo-tree-view k-ng-delay="treeInit">
-            <li ng-repeat="item in tree">
-                {{item.text}}
-                <ul>
-                    <li ng-repeat="item in item.items">
-                        {{item.text}}
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <script>
-        angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope, $timeout) {
-            $scope.tree = [
-                { text: "Foo", items: [
-                    { text: "Foo 1" },
-                { text: "Foo 2" } ] },
-                { text: "Bar", items: [
-                    { text: "Bar 1" },
-                { text: "Bar 2" } ] },
-            ];
+### TabStrip With Directives and Delayed Initialization
 
-            $timeout(function() {
-                $scope.treeInit = true;
-            });
-        });
-    </script>
+```html
+<div id="example" ng-app="KendoDemos">
+    <div class="demo-section k-content">
+        <div ng-controller="MyCtrl">
+            <div kendo-tab-strip k-ng-delay="tabStripDelay">
+              <!-- tab list -->
+              <ul>
+                <li ng-repeat="tab in tabs">{{tab}}</li>
+              </ul>
+
+              <div ng-repeat="tabContent in tabContents">
+                {{ tabContent }}
+              </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ])
+      .controller("MyCtrl", function($scope, $timeout){
+          $scope.tabs = [ "t1", "t2" ];
+          $scope.tabContents = [ "tc1", "tc2" ];
+
+                $timeout(function() {
+            $scope.tabStripDelay = true;
+          });
+      })
+</script>
 ```
