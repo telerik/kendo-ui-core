@@ -14,6 +14,7 @@ For additional information about the code used below, please check:
 
 * [how to configure Editor tools](/api/javascript/ui/editor#configuration-tools)
 * [how to execute Editor commands](/api/javascript/ui/editor#methods-exec)
+* [Editor custom tools demo](http://demos.telerik.com/kendo-ui/editor/custom-tools)
 * [how to configure a Window](/api/javascript/ui/window)
 * [how to obtain a widget's element from its client object](/framework/widgets/wrapper-element)
 * [notes on destroying Windows](/web/window/overview#destroying-a-kendo-ui-window)
