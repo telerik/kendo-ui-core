@@ -309,8 +309,4 @@
                 deleteWindowTitle: "Ta bort tillfälle",
                 showFullDay: "Visa heldag",
                 showWorkDay: "Visa för arbetsdag"
-            }))
-    }(window.kendo.jQuery), window.kendo;
-}, "function" == typeof define && define.amd ? define : function (e, t) {
-    t();
-})
+            }))}(window.kendo.jQuery), window.kendo;}, "function" == typeof define && define.amd ? define : function (e, t) {t();})
