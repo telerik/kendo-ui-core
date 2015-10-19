@@ -1258,6 +1258,7 @@ var __meta__ = { // jshint ignore:line
                         that.popup.open(x, y);
                     } else {
                         that.popup.options.anchor = (x ? x : that.popup.anchor) || that.target;
+                        that.popup.element.kendoStop(true);
                         that.popup.open();
                     }
 
@@ -1310,6 +1311,7 @@ var __meta__ = { // jshint ignore:line
 
             if ((options.filter && kendo.support.matchesSelector.call(ev.currentTarget, options.filter)) || !options.filter) {
                 if (options.alignToAnchor) {
+                    that.popup.options.anchor = ev.currentTarget;
                     that.open(ev.currentTarget);
                 } else {
                     that.popup.options.anchor = ev.currentTarget;
