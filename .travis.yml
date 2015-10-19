@@ -1,13 +1,15 @@
 language: node_js
 node_js:
-- '4.1.0'
+- 4.1.0
 cache:
   directories:
-    - node_modules
+  - node_modules
 before_install:
-  - export CHROME_BIN=chromium-browser
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
+- export CHROME_BIN=chromium-browser
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
 notifications:
-    email: false
+  email: false
+  slack:
+    secure: QFMZSJNCI5H5xzoIcDbJfzgR9AH7FuBD4tOyqRr/FMfEm1mV5eInvgUSmz0xFN3TpDMwJXKi41mrquK6/ey3DEgI0Jm5M32FTis+HahXp3R6zamD7+6Y0WaTxhILcULPqJVo2Ce4WtMqbmrEyk2xLFSYPhFt9wPna9aFO4j+OZw=
 sudo: false
