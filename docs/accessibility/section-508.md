@@ -1,16 +1,16 @@
 ---
 title: Section 508 Support
 page_title: Section 508 Support
-description: Kendo UI Section 508 support
+description: "Detailed description of the Section 508 Accesibility support provided by Kendo UI components."
+keywords: html 5 widgets section 508 support
 position: 2
 ---
 
-# Kendo UI Section 508 Support
+# Section 508 Support
 
-The following table shows the level of support that Kendo UI provides for the
-[Section 508 Web standard](http://www.section508.gov/section-508-standards-guide#Web).
+The following table shows the level of support that Kendo UI provides for the [Section 508 Web content standards](http://www.section508.gov/section-508-standards-guide#Web).
 
-## Section 1194.22 Web-based Internet Information and Applications
+**Section 1194.22 Web Information and Application Standards:**
 
 |Criteria|Supporting features|Remarks
 |------------|----|----
