@@ -175,7 +175,8 @@ With Q3 2014 release Kendo UI provides customized presentation for checkboxes / 
 
 Due to popular demand, we have prepared an example that demonstrates a possible way to switch Kendo UI themes on the client.
 
-> The core functionality of the following demo is replacing CSS stylesheets on the client, which is not something related to Kendo UI.
+> The core functionality of the following demo is replacing CSS stylesheets on the client,
+which is not something related to Kendo UI and does not require any Kendo UI APIs.
 From this point of view, the example is provided "as is", and may need customization and tweaking,
 according to a specific scenario, requirements, browser support, etc.
 
