@@ -116,5 +116,5 @@ All attributes must be applied to the `<th>` elements, except for the column wid
 
 Other column-related settings cannot be defined via HTML attributes in the `<table>`. If such settings must be used (e.g., commands, locking, editors, custom row or cell CSS classes, etc.), the above attribute configuration should be abandoned and all settings should be included in the Grid's JavaScript initialization statement. Note that when using a declarative widget initialization, you must set the column properties via the `data-columns` attribute.
 
-As seen from the code snippets above, in the fisrt case the Grid client object is attached to a `div`, while in the second one the object is attached to a `table`.
+As seen from the code snippets above, in the first case the Grid client object is attached to a `div`, while in the second one the object is attached to a `table`.
 However, the generated HTML output of the Grid depends entirely on the widget settings and it will always be the same, no matter how the widget is initialized.
