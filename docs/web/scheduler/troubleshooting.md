@@ -21,7 +21,7 @@ In this case the server response of the create/destroy/update action is interpre
 ## When You Cancel Changes Other Events Disappear
 It is possible to experience such behavior if the [id fields](/api/javascript/data/schedulerevent#fields-id) of the other events are not set to valid and unique values. 
 
-## Editing event cause all initial events to sent to the Create action
+## Editing event cause all initial events to be send to the Create action
 This behavior can be experienced if the [id fields](/api/javascript/data/schedulerevent#fields-id) of all events are not set to valid and unique values during initial read. 
 
 ## Created Events Are Offset after Create/Update Request
