@@ -60,8 +60,8 @@ var __meta__ = { // jshint ignore:line
             var ds = toDataSource(scope.$eval(source), type);
 
             // not recursive -- this triggers when the whole data source changed
-            scope.$watch(source, function(mew, old){
-                if (mew !== old) {
+            scope.$watch(source, function(mew) {
+                if (mew !== undefined) {
                     var ds = toDataSource(mew, type);
                     var widget = kendoWidgetInstance(element);
                     if (widget && typeof widget.setDataSource == "function") {
