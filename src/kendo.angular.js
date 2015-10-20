@@ -57,15 +57,17 @@ var __meta__ = { // jshint ignore:line
         };
         return function(scope, element, role, source) {
             var type = types[role] || 'DataSource';
-            var ds = toDataSource(scope.$eval(source), type);
+            var current = scope.$eval(source);
+            var ds = toDataSource(current, type);
 
-            // not recursive -- this triggers when the whole data source changed
             scope.$watch(source, function(mew) {
-                if (mew !== undefined) {
-                    var ds = toDataSource(mew, type);
-                    var widget = kendoWidgetInstance(element);
-                    if (widget && typeof widget.setDataSource == "function") {
+                var widget = kendoWidgetInstance(element);
+
+                if (widget && typeof widget.setDataSource == "function") {
+                    if (mew !== current) {
+                        var ds = toDataSource(mew, type);
                         widget.setDataSource(ds);
+                        current = mew;
                     }
                 }
             });
@@ -471,7 +473,15 @@ var __meta__ = { // jshint ignore:line
         var setter = getter.assign;
         var updating = false;
 
-        widget.$angular_setLogicValue(getter(scope));
+        var current = getter(scope);
+
+        widget.$angular_setLogicValue(current);
+
+        var valueIsCollection = kendo.ui.MultiSelect && widget instanceof kendo.ui.MultiSelect;
+
+        if (valueIsCollection) {
+            var sourceItemCount = current.length;
+        }
 
         // keep in sync
         var watchHandler = function(newValue) {
@@ -481,13 +491,30 @@ var __meta__ = { // jshint ignore:line
                 // https://github.com/telerik/kendo-ui-core/issues/299
                 newValue = null;
             }
+
+            if (valueIsCollection) {
+                if (newValue == current) {
+                    if (newValue.length == sourceItemCount) {
+                        return;
+                    }
+                }
+            } else {
+                if (newValue == current) {
+                    return;
+                }
+            }
+
             if (updating) {
                 return;
             }
 
+            current = newValue;
+            if (valueIsCollection) {
+                sourceItemCount = current.length;
+            }
             widget.$angular_setLogicValue(newValue);
         };
-        if (kendo.ui.MultiSelect && widget instanceof kendo.ui.MultiSelect) {
+        if (valueIsCollection) {
             scope.$watchCollection(kNgModel, watchHandler);
         } else {
             scope.$watch(kNgModel, watchHandler);
