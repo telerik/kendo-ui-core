@@ -467,10 +467,7 @@ var __meta__ = { // jshint ignore:line
 
         close: function() {
             var that = this;
-
-            //if (!that.options.disableDates(that.dateView._current)) {
-                that.dateView.close();
-            //}
+            that.dateView.close();
         },
 
         min: function(value) {
@@ -606,7 +603,7 @@ var __meta__ = { // jshint ignore:line
                 isSameType = (date === null && current === null) || (date instanceof Date && current instanceof Date),
                 formattedValue;
 
-            if (options.disableDates && options.disableDates(date)) {
+            if (options.disableDates(date)) {
                 date = null;
                 if (!that._old) {
                     value = null;
