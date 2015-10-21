@@ -18,7 +18,7 @@ Prepares the widget for safe removal from the DOM. Detaches all event handlers a
 
 ### one
 
-Attaches a handler to an event. The handler is executed only once. Examples and more info can be found in the [one](/api/framework/observable#one) section of the
+Attaches a handler to an event. The handler is executed only once. Examples and more info can be found in the [one](/api/javascript/observable#methods-one) section of the
 `kendo.Observable` API reference.
 
 ### setOptions
@@ -53,11 +53,11 @@ The options to be changed or added.
 
 ### trigger
 
-Executes all handlers attached to the given event. More info can be found in the [trigger](/api/framework/observable#trigger) section of the
+Executes all handlers attached to the given event. More info can be found in the [trigger](/api/javascript/observable#methods-trigger) section of the
 `kendo.Observable` API reference.
 
 ### unbind
 
-Remove a previously attached event handler. More info can be found in the [unbind](/api/framework/observable#unbind) section of the
+Remove a previously attached event handler. More info can be found in the [unbind](/api/javascript/observable#methods-unbind) section of the
 `kendo.Observable` API reference.
 

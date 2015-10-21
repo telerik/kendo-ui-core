@@ -12,8 +12,7 @@ All Kendo UI widgets are registered as [jQuery plug-ins](http://learn.jquery.com
 The jQuery plug-in method is formed by the widget name in Pascal case, prefixed with `kendo` as in `kendoGrid` and `kendoListView`.
 The methods for mobile widgets are prefixed with `Mobile` to avoid collisions with their desktop counterparts as in `kendoMobileTabStrip`, `kendoMobileButton` and `kendoMobileListView`.
 
-Some Kendo UI widgets have specific requirements about the element types they should be instantiated on. For more details and working examples,
-check the source code in the [respective widget demo](http://demos.telerik.com/kendo-ui/) and [API reference](/api/introduction).
+Some Kendo UI widgets have specific requirements about the element types they should be instantiated on. For more details and working examples, check the source code in the [respective widget demo](http://demos.telerik.com/kendo-ui/) and [API reference](/api/javascript/kendo).
 
 While it is theoretically possible to initialize several different Kendo UI widgets from the same DOM element, this is not recommended and may lead to undesired side effects.
 
@@ -70,7 +69,7 @@ Creating widgets from [document fragments](https://developer.mozilla.org/en-US/d
 
 ## Configure a Widget
 
-You can configure a Kendo UI widget by passing a configuration object (key/value pairs) as an argument to the jQuery plugin method. Each widget supported configuration options and events are listed in the respective widget [API reference](/api/introduction). The configuration object may also contain event handlers that will be bound to the corresponding widget events.
+You can configure a Kendo UI widget by passing a configuration object (key/value pairs) as an argument to the jQuery plugin method. Each widget supported configuration options and events are listed in the respective widget [API reference](/api/javascript/kendo). The configuration object may also contain event handlers that will be bound to the corresponding widget events.
 
 ### Instantiate the Grid Widget
 
