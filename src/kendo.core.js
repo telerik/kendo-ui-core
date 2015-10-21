@@ -1846,7 +1846,7 @@ function pad(number, digits, end) {
     }
 
     function isScrollable(element) {
-        if (element.className.indexOf("k-auto-scrollable") > -1) {
+        if (element && element.className && typeof(element.className) === "string" && element.className.indexOf("k-auto-scrollable") > -1) {
             return true;
         }
 
