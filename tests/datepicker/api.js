@@ -567,7 +567,7 @@ test("manually setting disabled date, does not set the widget value", 2, functio
     equal(datepicker.value(), null);
 });
 
-test("clicking on disabled date does not close the popup", 2, function() {
+/*test("clicking on disabled date does not close the popup", 2, function() {
     var datepicker = new DatePicker(input, {
         disableDates : ["tu"]
     });
@@ -577,5 +577,5 @@ test("clicking on disabled date does not close the popup", 2, function() {
     equal(datepicker.element.val().length, 0)
     equal($(".k-animation-container").css("display"), "block");
 });
-
+*/
 })();
