@@ -696,16 +696,6 @@ withAngularTests("Angular (UI Core)", function(runTest){
         });
     });
 
-    runTest("ng-model is updated when k-ng-model is set initially", function(dom, $scope){
-        $scope.obj = new Date();
-        $("<input kendo-date-time-picker id='kdtp' ng-model='str' k-ng-model='obj' />").appendTo(dom);
-        expect(1);
-        setTimeout(function() {
-            equal($scope.str, $("#kdtp").val());
-            start();
-        },50)
-    });
-
     runTest("TabStrip selects correct tab based on value configuration", function(dom, $scope){
        $scope.options = {
           value: "Tab1",
@@ -877,6 +867,18 @@ withAngularTests("Angular (UI Core)", function(runTest){
             start();
         });
     });
+
+    ngTest2("ng-model is updated when k-ng-model is set initially", 1, function(dom, controller, bootstrap) {
+        controller(function($scope) {
+            $scope.obj = new Date();
+        });
+
+         $("<input kendo-date-time-picker id='kdtp' ng-model='str' k-ng-model='obj' />").appendTo(dom);
+        bootstrap();
+        var $scope = dom.scope();
+        equal(new Date($("#kdtp").val()).getDate(), $scope.obj.getDate());
+    });
+
 
     ngTest2("Widget respects k-ng-disabled attribue change to true", 1, function(dom, controller, bootstrap) {
         controller(function($scope) {
