@@ -62,8 +62,10 @@ The root DOM element to draw.
 ##### options `Object`
 Configuration options
 
-##### options.avoidLinks `Boolean` *(default: false)*
-A flag indicating whether to produce actual hyperlinks in the exported PDF file.
+##### options.avoidLinks `Boolean|String` *(default: false)*
+A flag indicating whether to produce clickable hyperlinks in the exported PDF file.
+
+It's also possible to pass a CSS selector as argument. All matching links will be ignored.
 
 ##### options.forcePageBreak `String`
 An optional CSS selector that specifies the elements that should cause page breaks.
