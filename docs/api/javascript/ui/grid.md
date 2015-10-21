@@ -6948,9 +6948,12 @@ The data source to which the widget should be bound.
 Sets the options of the Grid. Use this method if you want to enable/disable a particular feature/option or to load
 the complete state obtained previously with the [`getOptions`](#methods-getOptions) method.
 
+When `setOptions` is called, the Grid widget will be destroyed and recreated.
+
 > There are three important things to keep in mind when using `getOptions` and `setOptions`.
 >
 > * **calling `setOptions()` in a Grid event handler is not possible.**
+> * **calling `setOptions()` in a function, which is related to the Grid's databinding mechanism may cause an endless loop.**
 > * `JSON.stringify()` cannot serialize function references (e.g. event handlers), so if stringification is used for the retrieved Grid state,
 > all configuration fields, which represent function references, will be lost. You have two options to avoid this limitation:
 > use a [custom implementation](https://github.com/tarruda/super-json) to serialize JavaScript functions, or
