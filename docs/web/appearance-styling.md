@@ -95,7 +95,6 @@ The LESS files of Kendo UI are named as follows.
 *   **kendo.common-[theme-tname].less** - Sizing adjustments for [theme-name] for all Kendo UI widgets. Building it produces a common file for all Kendo UI widgets.
 *   **kendo.common.core.less** - Default sizing file for Kendo UI Core widgets. Building it produces a common file for Kendo UI Core widgets.
 *   **kendo.common-[theme-tname].core.less** - Sizing adjustments for [theme-name] for Kendo UI Core widgets. Building it produces a common file for Kendo UI Core widgets.
-*   **kendo.winjs.less** - WinJS specific styles.
 *   **kendo.rtl.css** - Styles for widgets in RTL mode, CSS only.
 *   **type-[theme-name].less** - Supporting files that cannot be built. Translates the colors from kendo.[theme-name].less to the theme colors to a usable theme.
 
@@ -194,12 +193,12 @@ according to a specific scenario, requirements, browser support, etc.
 
   #tree {
     height: 9em;
-  }    
+  }
 
-</style>     
+</style>
 
 <div>
-  
+
   <input class="themeChooser" value="default" />
 
   <p><input id="datetimepicker" /></p>
@@ -217,7 +216,7 @@ according to a specific scenario, requirements, browser support, etc.
 <script>
 
   $(function(){
-    
+
     $(document.body).addClass("k-content");
 
     // theme chooser dropdown
@@ -297,7 +296,7 @@ according to a specific scenario, requirements, browser support, etc.
       }
     };
 
-  });    
+  });
 
 </script>
 
