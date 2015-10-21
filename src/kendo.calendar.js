@@ -274,19 +274,19 @@ var __meta__ = { // jshint ignore:line
             view = isNaN(view) ? views[view] : view;
 
             var that = this,
-            options = that.options,
-            culture = options.culture,
-            min = options.min,
-            max = options.max,
-            title = that._title,
-            from = that._table,
-            old = that._oldTable,
-            selectedValue = that._value,
-            currentValue = that._current,
-            future = value && +value > +currentValue,
-            vertical = view !== undefined && view !== that._index,
-            to, currentView, compare,
-            disabled;
+                options = that.options,
+                culture = options.culture,
+                min = options.min,
+                max = options.max,
+                title = that._title,
+                from = that._table,
+                old = that._oldTable,
+                selectedValue = that._value,
+                currentValue = that._current,
+                future = value && +value > +currentValue,
+                vertical = view !== undefined && view !== that._index,
+                to, currentView, compare,
+                disabled;
 
             if (!value) {
                 value = currentValue;
@@ -361,11 +361,11 @@ var __meta__ = { // jshint ignore:line
 
         value: function(value) {
             var that = this,
-            view = that._view,
-            options = that.options,
-            old = that._view,
-            min = options.min,
-            max = options.max;
+                view = that._view,
+                options = that.options,
+                old = that._view,
+                min = options.min,
+                max = options.max;
 
             if (value === undefined) {
                 return that._value;
@@ -397,16 +397,16 @@ var __meta__ = { // jshint ignore:line
 
         _move: function(e) {
             var that = this,
-            options = that.options,
-            key = e.keyCode,
-            view = that._view,
-            index = that._index,
-            min = that.options.min,
-            max = that.options.max,
-            currentValue = new DATE(+that._current),
-            isRtl = kendo.support.isRtl(that.wrapper),
-            isDisabled = that.options.disableDates,
-            value, prevent, method, temp;
+                options = that.options,
+                key = e.keyCode,
+                view = that._view,
+                index = that._index,
+                min = that.options.min,
+                max = that.options.max,
+                currentValue = new DATE(+that._current),
+                isRtl = kendo.support.isRtl(that.wrapper),
+                isDisabled = that.options.disableDates,
+                value, prevent, method, temp;
 
             if (e.target === that._table[0]) {
                 that._active = true;
@@ -527,10 +527,10 @@ var __meta__ = { // jshint ignore:line
 
         _horizontal: function(from, to, future) {
             var that = this,
-            active = that._active,
-            horizontal = that.options.animation.horizontal,
-            effects = horizontal.effects,
-            viewWidth = from.outerWidth();
+                active = that._active,
+                horizontal = that.options.animation.horizontal,
+                effects = horizontal.effects,
+                viewWidth = from.outerWidth();
 
             if (effects && effects.indexOf(SLIDE) != -1) {
                 from.add(to).css({ width: viewWidth });
@@ -568,10 +568,10 @@ var __meta__ = { // jshint ignore:line
 
         _vertical: function(from, to) {
             var that = this,
-            vertical = that.options.animation.vertical,
-            effects = vertical.effects,
-            active = that._active, //active state before from's blur
-            cell, position;
+                vertical = that.options.animation.vertical,
+                effects = vertical.effects,
+                active = that._active, //active state before from's blur
+                cell, position;
 
             if (effects && effects.indexOf("zoom") != -1) {
                 to.css({
@@ -617,9 +617,9 @@ var __meta__ = { // jshint ignore:line
 
         _class: function(className, value, date) {
             var that = this,
-            id = that._cellID,
-            disabledDate,
-            cell = that._cell;
+                id = that._cellID,
+                disabledDate,
+                cell = that._cell;
 
             if (cell) {
                 cell.removeAttr(ARIA_SELECTED)
@@ -764,9 +764,9 @@ var __meta__ = { // jshint ignore:line
 
         _option: function(option, value) {
             var that = this,
-            options = that.options,
-            currentValue = that._value || that._current,
-            isBigger;
+                options = that.options,
+                currentValue = that._value || that._current,
+                isBigger;
 
             if (value === undefined) {
                 return options[option];
@@ -804,9 +804,9 @@ var __meta__ = { // jshint ignore:line
 
         _toggle: function(toggle) {
             var that = this,
-            options = that.options,
-            disabledToday = that.options.disableDates(getToday()),
-            link = that._today;
+                options = that.options,
+                disabledToday = that.options.disableDates(getToday()),
+                link = that._today;
 
             if (toggle === undefined) {
                 toggle = isInRange(getToday(), options.min, options.max);
@@ -851,11 +851,11 @@ var __meta__ = { // jshint ignore:line
 
         _templates: function() {
             var that = this,
-            options = that.options,
-            footer = options.footer,
-            month = options.month,
-            content = month.content,
-            empty = month.empty;
+                options = that.options,
+                footer = options.footer,
+                month = options.month,
+                content = month.content,
+                empty = month.empty;
 
             that.month = {
                 content: template('<td#=data.cssClass# role="gridcell"><a tabindex="-1" class="k-link#=data.linkClass#" href="#=data.url#" ' + kendo.attr("value") + '="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
@@ -1207,9 +1207,9 @@ var __meta__ = { // jshint ignore:line
 
     function title(date, min, max, modular) {
         var start = date.getFullYear(),
-        minYear = min.getFullYear(),
-        maxYear = max.getFullYear(),
-        end;
+            minYear = min.getFullYear(),
+            maxYear = max.getFullYear(),
+            end;
 
         start = start - start % modular;
         end = start + (modular - 1);
@@ -1226,17 +1226,17 @@ var __meta__ = { // jshint ignore:line
 
     function view(options) {
         var idx = 0,
-        data,
-        min = options.min,
-        max = options.max,
-        start = options.start,
-        setter = options.setter,
-        build = options.build,
-        length = options.cells || 12,
-        cellsPerRow = options.perRow || 4,
-        content = options.content || cellTemplate,
-        empty = options.empty || emptyCellTemplate,
-        html = options.html || '<table tabindex="0" role="grid" class="k-content k-meta-view" cellspacing="0"><tbody><tr role="row">';
+            data,
+            min = options.min,
+            max = options.max,
+            start = options.start,
+            setter = options.setter,
+            build = options.build,
+            length = options.cells || 12,
+            cellsPerRow = options.perRow || 4,
+            content = options.content || cellTemplate,
+            empty = options.empty || emptyCellTemplate,
+            html = options.html || '<table tabindex="0" role="grid" class="k-content k-meta-view" cellspacing="0"><tbody><tr role="row">';
 
         for(; idx < length; idx++) {
             if (idx > 0 && idx % cellsPerRow === 0) {
@@ -1258,9 +1258,9 @@ var __meta__ = { // jshint ignore:line
 
     function compare(date1, date2, modifier) {
         var year1 = date1.getFullYear(),
-        start  = date2.getFullYear(),
-        end = start,
-        result = 0;
+            start  = date2.getFullYear(),
+            end = start,
+            result = 0;
 
         if (modifier) {
             start = start - start % modifier;
@@ -1327,8 +1327,8 @@ var __meta__ = { // jshint ignore:line
 
     function normalize(options) {
         var start = views[options.start],
-        depth = views[options.depth],
-        culture = getCulture(options.culture);
+            depth = views[options.depth],
+            culture = getCulture(options.culture);
 
         options.format = extractFormat(options.format || culture.calendars.standard.patterns.d);
 
@@ -1364,8 +1364,8 @@ var __meta__ = { // jshint ignore:line
     function isEqualDatePart(value1, value2) {
         if (value1) {
             return value1.getFullYear() === value2.getFullYear() &&
-            value1.getMonth() === value2.getMonth() &&
-            value1.getDate() === value2.getDate();
+                value1.getMonth() === value2.getMonth() &&
+                value1.getDate() === value2.getDate();
         }
 
         return false;
@@ -1374,7 +1374,7 @@ var __meta__ = { // jshint ignore:line
     function isEqualMonth(value1, value2) {
         if (value1) {
             return value1.getFullYear() === value2.getFullYear() &&
-            value1.getMonth() === value2.getMonth();
+                value1.getMonth() === value2.getMonth();
         }
 
         return false;
@@ -1382,7 +1382,6 @@ var __meta__ = { // jshint ignore:line
 
 
     function getDisabledExpr(option) {
-        var that = this;
         if (kendo.isFunction(option)) {
             return option;
         }
@@ -1390,14 +1389,13 @@ var __meta__ = { // jshint ignore:line
         if ($.isArray(option)) {
             return createDisabledExpr(option);
         }
-        return new Function();
+        return new Function(); //jshint ignore:line
     }
 
     function createDisabledExpr(dates) {
-        var body,
-        callback,
-        disabledDates = [],
-        days = ["su", "mo", "tu", "we", "th", "fr", "sa"];
+        var body, callback,
+            disabledDates = [],
+            days = ["su", "mo", "tu", "we", "th", "fr", "sa"];
 
         for (var i = 0; i < dates.length; i++) {
             var day = dates[i].toLowerCase();
@@ -1414,7 +1412,7 @@ var __meta__ = { // jshint ignore:line
                 "return false" +
             "}";
 
-        callback = new Function(["date"],body);
+        callback = new Function(["date"],body); //jshint ignore:line
 
         return callback;
     }
