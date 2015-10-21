@@ -255,7 +255,7 @@ which is an element that wraps every Kendo UI popup.
 
 When the widget displays static notifications, the above `div.k-notification` is a child of the element specified by the widget's [`appendTo`](#configuration-appendTo) setting.
     
-The default template of the **Notification** widget is shown below. This markup is rendered inside the `div.k-nitification` element.
+The default template of the **Notification** widget is shown below. This markup is rendered inside the `div.k-notification` element.
 
     <div class="k-notification-wrap">
         <span class="k-icon k-i-note">#=typeIcon#</span>
