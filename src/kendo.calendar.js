@@ -70,7 +70,7 @@ var __meta__ = { // jshint ignore:line
 
     var Calendar = Widget.extend({
         init: function(element, options) {
-            var that = this, value, id;
+            var that = this, value, id, current;
 
             Widget.fn.init.call(that, element, options);
 
@@ -78,6 +78,8 @@ var __meta__ = { // jshint ignore:line
             options = that.options;
 
             options.url = window.unescape(options.url);
+
+            that.options.disableDates = getDisabledExpr(that.options.disableDates);
 
             that._templates();
 
@@ -111,10 +113,18 @@ var __meta__ = { // jshint ignore:line
             value = parse(options.value, options.format, options.culture);
 
             that._index = views[options.start];
+
+            current = new DATE(+restrictValue(value, options.min, options.max));
+
             that._current = new DATE(+restrictValue(value, options.min, options.max));
 
             that._addClassProxy = function() {
                 that._active = true;
+                if (that._cell.hasClass("k-state-disabled")) {
+                    var todayString = that._view.toDateString(getToday());
+                    that._cell = that._cellByDate(todayString);
+                }
+
                 that._cell.addClass(FOCUSED);
             };
 
@@ -169,6 +179,8 @@ var __meta__ = { // jshint ignore:line
                 options.dates = that.options.dates;
             }
 
+            options.disableDates = getDisabledExpr(options.disableDates);
+
             Widget.fn.setOptions.call(that, options);
 
             that._templates();
@@ -181,7 +193,7 @@ var __meta__ = { // jshint ignore:line
 
         destroy: function() {
             var that = this,
-                today = that._today;
+            today = that._today;
 
             that.element.off(ns);
             that._title.off(ns);
@@ -229,7 +241,7 @@ var __meta__ = { // jshint ignore:line
 
         navigateUp: function() {
             var that = this,
-                index = that._index;
+            index = that._index;
 
             if (that._title.hasClass(DISABLED)) {
                 return;
@@ -262,19 +274,19 @@ var __meta__ = { // jshint ignore:line
             view = isNaN(view) ? views[view] : view;
 
             var that = this,
-                options = that.options,
-                culture = options.culture,
-                min = options.min,
-                max = options.max,
-                title = that._title,
-                from = that._table,
-                old = that._oldTable,
-                selectedValue = that._value,
-                currentValue = that._current,
-                future = value && +value > +currentValue,
-                vertical = view !== undefined && view !== that._index,
-                to, currentView, compare,
-                disabled;
+            options = that.options,
+            culture = options.culture,
+            min = options.min,
+            max = options.max,
+            title = that._title,
+            from = that._table,
+            old = that._oldTable,
+            selectedValue = that._value,
+            currentValue = that._current,
+            future = value && +value > +currentValue,
+            vertical = view !== undefined && view !== that._index,
+            to, currentView, compare,
+            disabled;
 
             if (!value) {
                 value = currentValue;
@@ -317,7 +329,8 @@ var __meta__ = { // jshint ignore:line
                     url: options.url,
                     dates: options.dates,
                     format: options.format,
-                    culture: culture
+                    culture: culture,
+                    disableDates: options.disableDates
                 }, that[currentView.name])));
 
                 makeUnselectable(to);
@@ -333,11 +346,11 @@ var __meta__ = { // jshint ignore:line
                 that.trigger(NAVIGATE);
             }
 
-            if (view === views[options.depth] && selectedValue) {
+            if (view === views[options.depth] && selectedValue && !that.options.disableDates(selectedValue)) {
                 that._class("k-state-selected", currentView.toDateString(selectedValue));
             }
 
-            that._class(FOCUSED, currentView.toDateString(value));
+            that._class(FOCUSED, currentView.toDateString(value), value);
 
             if (!from && that._cell) {
                 that._cell.removeClass(FOCUSED);
@@ -368,7 +381,11 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            that._value = value;
+            if (!that.options.disableDates(value)) {
+                that._value = value;
+            } else if (that._value === undefined) {
+                that._value = null;
+            }
 
             if (old && value === null && that._cell) {
                 that._cell.removeClass("k-state-selected");
@@ -380,13 +397,16 @@ var __meta__ = { // jshint ignore:line
 
         _move: function(e) {
             var that = this,
-                options = that.options,
-                key = e.keyCode,
-                view = that._view,
-                index = that._index,
-                currentValue = new DATE(+that._current),
-                isRtl = kendo.support.isRtl(that.wrapper),
-                value, prevent, method, temp;
+            options = that.options,
+            key = e.keyCode,
+            view = that._view,
+            index = that._index,
+            min = that.options.min,
+            max = that.options.max,
+            currentValue = new DATE(+that._current),
+            isRtl = kendo.support.isRtl(that.wrapper),
+            isDisabled = that.options.disableDates,
+            value, prevent, method, temp;
 
             if (e.target === that._table[0]) {
                 that._active = true;
@@ -440,7 +460,12 @@ var __meta__ = { // jshint ignore:line
                         view.setDate(currentValue, value);
                     }
 
-                    that._focus(restrictValue(currentValue, options.min, options.max));
+                    if (isDisabled(currentValue)) {
+                        currentValue = that._nextNavigatable(currentValue, value);
+                    }
+                    if (isInRange(currentValue, min, max)) {
+                        that._focus(restrictValue(currentValue, options.min, options.max));
+                    }
                 }
             }
 
@@ -451,11 +476,34 @@ var __meta__ = { // jshint ignore:line
             return that._current;
         },
 
+        _nextNavigatable: function(currentValue, value) {
+            var that = this,
+            disabled = true,
+            view = that._view,
+            min = that.options.min,
+            max = that.options.max,
+            isDisabled = that.options.disableDates,
+            navigatableDate = new Date(currentValue.valueOf());
+
+            view.setDate(navigatableDate, -value);
+
+            while (disabled) {
+                view.setDate(currentValue, value);
+                disabled = isDisabled(currentValue);
+            }
+
+            if (!isInRange(currentValue, min, max)) {
+                currentValue = navigatableDate;
+            }
+
+            return currentValue;
+        },
+
         _animate: function(options) {
             var that = this,
-                from = options.from,
-                to = options.to,
-                active = that._active;
+            from = options.from,
+            to = options.to,
+            active = that._active;
 
             if (!from) {
                 to.insertAfter(that.element[0].firstChild);
@@ -479,10 +527,10 @@ var __meta__ = { // jshint ignore:line
 
         _horizontal: function(from, to, future) {
             var that = this,
-                active = that._active,
-                horizontal = that.options.animation.horizontal,
-                effects = horizontal.effects,
-                viewWidth = from.outerWidth();
+            active = that._active,
+            horizontal = that.options.animation.horizontal,
+            effects = horizontal.effects,
+            viewWidth = from.outerWidth();
 
             if (effects && effects.indexOf(SLIDE) != -1) {
                 from.add(to).css({ width: viewWidth });
@@ -492,12 +540,12 @@ var __meta__ = { // jshint ignore:line
                 that._focusView(active, from);
 
                 from.parent()
-                    .css({
-                        position: "relative",
-                        width: viewWidth * 2,
-                        "float": LEFT,
-                        "margin-left": future ? 0 : -viewWidth
-                    });
+                .css({
+                    position: "relative",
+                    width: viewWidth * 2,
+                    "float": LEFT,
+                    "margin-left": future ? 0 : -viewWidth
+                });
 
                 to[future ? "insertAfter" : "insertBefore"](from);
 
@@ -520,10 +568,10 @@ var __meta__ = { // jshint ignore:line
 
         _vertical: function(from, to) {
             var that = this,
-                vertical = that.options.animation.vertical,
-                effects = vertical.effects,
-                active = that._active, //active state before from's blur
-                cell, position;
+            vertical = that.options.animation.vertical,
+            effects = vertical.effects,
+            active = that._active, //active state before from's blur
+            cell, position;
 
             if (effects && effects.indexOf("zoom") != -1) {
                 to.css({
@@ -562,31 +610,36 @@ var __meta__ = { // jshint ignore:line
 
         _cellByDate: function(value) {
             return this._table.find("td:not(." + OTHERMONTH + ")")
-                       .filter(function() {
-                           return $(this.firstChild).attr(kendo.attr(VALUE)) === value;
-                       });
+            .filter(function() {
+                return $(this.firstChild).attr(kendo.attr(VALUE)) === value;
+            });
         },
 
-        _class: function(className, value) {
+        _class: function(className, value, date) {
             var that = this,
-                id = that._cellID,
-                cell = that._cell;
+            id = that._cellID,
+            disabledDate,
+            cell = that._cell;
 
             if (cell) {
                 cell.removeAttr(ARIA_SELECTED)
-                    .removeAttr("aria-label")
-                    .removeAttr(ID);
+                .removeAttr("aria-label")
+                .removeAttr(ID);
+            }
+
+            if (date) {
+                disabledDate = that.options.disableDates(date);
             }
 
             cell = that._table
-                       .find("td:not(." + OTHERMONTH + ")")
-                       .removeClass(className)
-                       .filter(function() {
-                          return $(this.firstChild).attr(kendo.attr(VALUE)) === value;
-                       })
-                       .attr(ARIA_SELECTED, true);
+            .find("td:not(." + OTHERMONTH + ")")
+            .removeClass(className)
+            .filter(function() {
+                return $(this.firstChild).attr(kendo.attr(VALUE)) === value;
+            })
+            .attr(ARIA_SELECTED, true);
 
-            if (className === FOCUSED && !that._active && that.options.focusOnNav !== false) {
+            if (className === FOCUSED && !that._active && that.options.focusOnNav !== false || disabledDate) {
                 className = "";
             }
 
@@ -604,19 +657,23 @@ var __meta__ = { // jshint ignore:line
 
         _bindTable: function (table) {
             table
-                .on(FOCUS_WITH_NS, this._addClassProxy)
-                .on(BLUR, this._removeClassProxy);
+            .on(FOCUS_WITH_NS, this._addClassProxy)
+            .on(BLUR, this._removeClassProxy);
         },
 
         _click: function(link) {
             var that = this,
-                options = that.options,
-                currentValue = new Date(+that._current),
-                value = link.attr(kendo.attr(VALUE)).split("/");
+            options = that.options,
+            currentValue = new Date(+that._current),
+            value = link.attr(kendo.attr(VALUE)).split("/");
 
             //Safari cannot create correctly date from "1/1/2090"
             value = new DATE(value[0], value[1], value[2]);
             adjustDST(value, 0);
+
+            if (that.options.disableDates(value)) {
+                value = that._value;
+            }
 
             that._view.setDate(currentValue, value);
 
@@ -625,7 +682,7 @@ var __meta__ = { // jshint ignore:line
 
         _focus: function(value) {
             var that = this,
-                view = that._view;
+            view = that._view;
 
             if (view.compare(value, that._current) !== 0) {
                 that.navigate(value);
@@ -643,9 +700,9 @@ var __meta__ = { // jshint ignore:line
 
         _footer: function(template) {
             var that = this,
-                today = getToday(),
-                element = that.element,
-                footer = element.find(".k-footer");
+            today = getToday(),
+            element = that.element,
+            footer = element.find(".k-footer");
 
             if (!template) {
                 that._toggle(false);
@@ -658,9 +715,9 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._today = footer.show()
-                                .find(".k-link")
-                                .html(template(today))
-                                .attr("title", kendo.toString(today, "D", that.options.culture));
+            .find(".k-link")
+            .html(template(today))
+            .attr("title", kendo.toString(today, "D", that.options.culture));
 
             that._toggle();
         },
@@ -672,15 +729,15 @@ var __meta__ = { // jshint ignore:line
 
             if (!element.find(".k-header")[0]) {
                 element.html('<div class="k-header">' +
-                             '<a href="#" role="button" class="k-link k-nav-prev"><span class="k-icon k-i-arrow-w"></span></a>' +
-                             '<a href="#" role="button" aria-live="assertive" aria-atomic="true" class="k-link k-nav-fast"></a>' +
-                             '<a href="#" role="button" class="k-link k-nav-next"><span class="k-icon k-i-arrow-e"></span></a>' +
-                             '</div>');
+                    '<a href="#" role="button" class="k-link k-nav-prev"><span class="k-icon k-i-arrow-w"></span></a>' +
+                    '<a href="#" role="button" aria-live="assertive" aria-atomic="true" class="k-link k-nav-fast"></a>' +
+                    '<a href="#" role="button" class="k-link k-nav-next"><span class="k-icon k-i-arrow-e"></span></a>' +
+                '</div>');
             }
 
             links = element.find(".k-link")
-                           .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE + " " + FOCUS_WITH_NS + " " + BLUR, mousetoggle)
-                           .click(false);
+            .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE + " " + FOCUS_WITH_NS + " " + BLUR, mousetoggle)
+            .click(false);
 
             that._title = links.eq(1).on(CLICK, function() { that._active = that.options.focusOnNav !== false; that.navigateUp(); });
             that[PREVARROW] = links.eq(0).on(CLICK, function() { that._active = that.options.focusOnNav !== false; that.navigateToPast(); });
@@ -689,8 +746,8 @@ var __meta__ = { // jshint ignore:line
 
         _navigate: function(arrow, modifier) {
             var that = this,
-                index = that._index + 1,
-                currentValue = new DATE(+that._current);
+            index = that._index + 1,
+            currentValue = new DATE(+that._current);
 
             arrow = that[arrow];
 
@@ -707,9 +764,9 @@ var __meta__ = { // jshint ignore:line
 
         _option: function(option, value) {
             var that = this,
-                options = that.options,
-                currentValue = that._value || that._current,
-                isBigger;
+            options = that.options,
+            currentValue = that._value || that._current,
+            isBigger;
 
             if (value === undefined) {
                 return options[option];
@@ -747,8 +804,9 @@ var __meta__ = { // jshint ignore:line
 
         _toggle: function(toggle) {
             var that = this,
-                options = that.options,
-                link = that._today;
+            options = that.options,
+            disabledToday = that.options.disableDates(getToday()),
+            link = that._today;
 
             if (toggle === undefined) {
                 toggle = isInRange(getToday(), options.min, options.max);
@@ -757,24 +815,29 @@ var __meta__ = { // jshint ignore:line
             if (link) {
                 link.off(CLICK);
 
-                if (toggle) {
+                if (toggle && !disabledToday) {
                     link.addClass(TODAY)
-                        .removeClass(DISABLED)
-                        .on(CLICK, proxy(that._todayClick, that));
+                    .removeClass(DISABLED)
+                    .on(CLICK, proxy(that._todayClick, that));
                 } else {
                     link.removeClass(TODAY)
-                        .addClass(DISABLED)
-                        .on(CLICK, prevent);
+                    .addClass(DISABLED)
+                    .on(CLICK, prevent);
                 }
             }
         },
 
         _todayClick: function(e) {
             var that = this,
-                depth = views[that.options.depth],
-                today = getToday();
+            depth = views[that.options.depth],
+            disabled = that.options.disableDates,
+            today = getToday();
 
             e.preventDefault();
+
+            if (disabled(today)) {
+                return;
+            }
 
             if (that._view.compare(that._current, today) === 0 && that._index == depth) {
                 that._changeView = false;
@@ -788,11 +851,11 @@ var __meta__ = { // jshint ignore:line
 
         _templates: function() {
             var that = this,
-                options = that.options,
-                footer = options.footer,
-                month = options.month,
-                content = month.content,
-                empty = month.empty;
+            options = that.options,
+            footer = options.footer,
+            month = options.month,
+            content = month.content,
+            empty = month.empty;
 
             that.month = {
                 content: template('<td#=data.cssClass# role="gridcell"><a tabindex="-1" class="k-link#=data.linkClass#" href="#=data.url#" ' + kendo.attr("value") + '="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
@@ -880,15 +943,19 @@ var __meta__ = { // jshint ignore:line
                     content: options.content,
                     empty: options.empty,
                     setter: that.setDate,
-                    build: function(date) {
-
+                    disableDates: options.disableDates,
+                    build: function(date, idx, disableDates) {
                         var cssClass = [],
-                            day = date.getDay(),
-                            linkClass = "",
-                            url = "#";
+                        day = date.getDay(),
+                        linkClass = "",
+                        url = "#";
 
                         if (date < firstDayOfMonth || date > lastDayOfMonth) {
                             cssClass.push(OTHERMONTH);
+                        }
+
+                        if (disableDates(date)) {
+                            cssClass.push(DISABLED);
                         }
 
                         if (+date === today) {
@@ -923,8 +990,8 @@ var __meta__ = { // jshint ignore:line
             },
             last: function(date) {
                 var last = new DATE(date.getFullYear(), date.getMonth() + 1, 0),
-                    first = calendar.firstDayOfMonth(date),
-                    timeOffset = Math.abs(last.getTimezoneOffset() - first.getTimezoneOffset());
+                first = calendar.firstDayOfMonth(date),
+                timeOffset = Math.abs(last.getTimezoneOffset() - first.getTimezoneOffset());
 
                 if (timeOffset) {
                     last.setHours(first.getHours() + (timeOffset / 60));
@@ -999,7 +1066,7 @@ var __meta__ = { // jshint ignore:line
             },
             setDate: function(date, value) {
                 var month,
-                    hours = date.getHours();
+                hours = date.getHours();
 
                 if (value instanceof DATE) {
                     month = value.getMonth();
@@ -1098,7 +1165,7 @@ var __meta__ = { // jshint ignore:line
                     setter: this.setDate,
                     build: function(date, idx) {
                         var start = date.getFullYear(),
-                            end = start + 9;
+                        end = start + 9;
 
                         if (start < min) {
                             start = min;
@@ -1140,9 +1207,9 @@ var __meta__ = { // jshint ignore:line
 
     function title(date, min, max, modular) {
         var start = date.getFullYear(),
-            minYear = min.getFullYear(),
-            maxYear = max.getFullYear(),
-            end;
+        minYear = min.getFullYear(),
+        maxYear = max.getFullYear(),
+        end;
 
         start = start - start % modular;
         end = start + (modular - 1);
@@ -1159,17 +1226,17 @@ var __meta__ = { // jshint ignore:line
 
     function view(options) {
         var idx = 0,
-            data,
-            min = options.min,
-            max = options.max,
-            start = options.start,
-            setter = options.setter,
-            build = options.build,
-            length = options.cells || 12,
-            cellsPerRow = options.perRow || 4,
-            content = options.content || cellTemplate,
-            empty = options.empty || emptyCellTemplate,
-            html = options.html || '<table tabindex="0" role="grid" class="k-content k-meta-view" cellspacing="0"><tbody><tr role="row">';
+        data,
+        min = options.min,
+        max = options.max,
+        start = options.start,
+        setter = options.setter,
+        build = options.build,
+        length = options.cells || 12,
+        cellsPerRow = options.perRow || 4,
+        content = options.content || cellTemplate,
+        empty = options.empty || emptyCellTemplate,
+        html = options.html || '<table tabindex="0" role="grid" class="k-content k-meta-view" cellspacing="0"><tbody><tr role="row">';
 
         for(; idx < length; idx++) {
             if (idx > 0 && idx % cellsPerRow === 0) {
@@ -1179,7 +1246,7 @@ var __meta__ = { // jshint ignore:line
             start = new DATE(start.getFullYear(), start.getMonth(), start.getDate(), 0, 0, 0);
             adjustDST(start, 0);
 
-            data = build(start, idx);
+            data = build(start, idx, options.disableDates);
 
             html += isInRange(start, min, max) ? content(data) : empty(data);
 
@@ -1191,9 +1258,9 @@ var __meta__ = { // jshint ignore:line
 
     function compare(date1, date2, modifier) {
         var year1 = date1.getFullYear(),
-            start  = date2.getFullYear(),
-            end = start,
-            result = 0;
+        start  = date2.getFullYear(),
+        end = start,
+        result = 0;
 
         if (modifier) {
             start = start - start % modifier;
@@ -1243,7 +1310,11 @@ var __meta__ = { // jshint ignore:line
     }
 
     function mousetoggle(e) {
-        $(this).toggleClass(HOVER, MOUSEENTER.indexOf(e.type) > -1 || e.type == FOCUS);
+        var disabled = $(this).hasClass("k-state-disabled");
+
+        if (!disabled) {
+            $(this).toggleClass(HOVER, MOUSEENTER.indexOf(e.type) > -1 || e.type == FOCUS);
+        }
     }
 
     function prevent (e) {
@@ -1256,8 +1327,8 @@ var __meta__ = { // jshint ignore:line
 
     function normalize(options) {
         var start = views[options.start],
-            depth = views[options.depth],
-            culture = getCulture(options.culture);
+        depth = views[options.depth],
+        culture = getCulture(options.culture);
 
         options.format = extractFormat(options.format || culture.calendars.standard.patterns.d);
 
@@ -1293,8 +1364,8 @@ var __meta__ = { // jshint ignore:line
     function isEqualDatePart(value1, value2) {
         if (value1) {
             return value1.getFullYear() === value2.getFullYear() &&
-                   value1.getMonth() === value2.getMonth() &&
-                   value1.getDate() === value2.getDate();
+            value1.getMonth() === value2.getMonth() &&
+            value1.getDate() === value2.getDate();
         }
 
         return false;
@@ -1303,11 +1374,51 @@ var __meta__ = { // jshint ignore:line
     function isEqualMonth(value1, value2) {
         if (value1) {
             return value1.getFullYear() === value2.getFullYear() &&
-                   value1.getMonth() === value2.getMonth();
+            value1.getMonth() === value2.getMonth();
         }
 
         return false;
     }
+
+
+    function getDisabledExpr(option) {
+        var that = this;
+        if (kendo.isFunction(option)) {
+            return option;
+        }
+
+        if ($.isArray(option)) {
+            return createDisabledExpr(option);
+        }
+        return new Function();
+    }
+
+    function createDisabledExpr(dates) {
+        var body,
+        callback,
+        disabledDates = [],
+        days = ["su", "mo", "tu", "we", "th", "fr", "sa"];
+
+        for (var i = 0; i < dates.length; i++) {
+            var day = dates[i].toLowerCase();
+            var index = $.inArray(day, days);
+            if (index > -1) {
+                disabledDates.push(index);
+            }
+        }
+
+        body = "var found = date && $.inArray(date.getDay(),["+ disabledDates +"]) > -1;" +
+            "if (found) {"+
+                " return true " +
+            "} else {" +
+                "return false" +
+            "}";
+
+        callback = new Function(["date"],body);
+
+        return callback;
+    }
+
 
     calendar.isEqualDatePart = isEqualDatePart;
     calendar.makeUnselectable =  makeUnselectable;
@@ -1315,6 +1426,7 @@ var __meta__ = { // jshint ignore:line
     calendar.isInRange = isInRange;
     calendar.normalize = normalize;
     calendar.viewsEnum = views;
+    calendar.disabled = getDisabledExpr;
 
     kendo.calendar = calendar;
 })(window.kendo.jQuery);

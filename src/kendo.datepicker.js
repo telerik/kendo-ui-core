@@ -133,7 +133,8 @@ var __meta__ = { // jshint ignore:line
                 max: options.max,
                 min: options.min,
                 month: options.month,
-                start: options.start
+                start: options.start,
+                disableDates: options.disableDates
             });
         },
 
@@ -221,7 +222,12 @@ var __meta__ = { // jshint ignore:line
         value: function(value) {
             var that = this,
                 calendar = that.calendar,
-                options = that.options;
+                options = that.options,
+                disabledDate = options.disableDates;
+
+            if (disabledDate && disabledDate(value)) {
+                value = null;
+            }
 
             that._value = value;
             that._current = new DATE(+restrictValue(value, options.min, options.max));
@@ -232,6 +238,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _click: function(e) {
+
             if (e.currentTarget.className.indexOf(SELECTED) !== -1) {
                 this.close();
             }
@@ -262,6 +269,8 @@ var __meta__ = { // jshint ignore:line
             Widget.fn.init.call(that, element, options);
             element = that.element;
             options = that.options;
+
+            options.disableDates = kendo.calendar.disabled(options.disableDates);
 
             options.min = parse(element.attr("min")) || parse(options.min);
             options.max = parse(element.attr("max")) || parse(options.max);
@@ -457,7 +466,11 @@ var __meta__ = { // jshint ignore:line
         },
 
         close: function() {
-            this.dateView.close();
+            var that = this;
+
+            //if (!that.options.disableDates(that.dateView._current)) {
+                that.dateView.close();
+            //}
         },
 
         min: function(value) {
@@ -513,7 +526,6 @@ var __meta__ = { // jshint ignore:line
 
         _change: function(value) {
             var that = this;
-
             value = that._update(value);
 
             if (+that._old != +value) {
@@ -593,6 +605,13 @@ var __meta__ = { // jshint ignore:line
                 date = parse(value, options.parseFormats, options.culture),
                 isSameType = (date === null && current === null) || (date instanceof Date && current instanceof Date),
                 formattedValue;
+
+            if (options.disableDates && options.disableDates(date)) {
+                date = null;
+                if (!that._old) {
+                    value = null;
+                }
+            }
 
             if (+date === +current && isSameType) {
                 formattedValue = kendo.toString(date, options.format, options.culture);

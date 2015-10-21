@@ -61,6 +61,7 @@ var __meta__ = { // jshint ignore:line
             element = that.element;
             options = that.options;
 
+            options.disableDates = kendo.calendar.disabled(options.disableDates);
             options.min = parse(element.attr("min")) || parse(options.min);
             options.max = parse(element.attr("max")) || parse(options.max);
 
@@ -406,6 +407,13 @@ var __meta__ = { // jshint ignore:line
                 date = parse(value, options.parseFormats, options.culture),
                 isSameType = (date === null && current === null) || (date instanceof Date && current instanceof Date),
                 rebind, timeViewOptions, old, skip, formattedValue;
+
+            if (options.disableDates && options.disableDates(date)) {
+                date = null;
+                if (!that._old) {
+                    value = null;
+                }
+            }
 
             if (+date === +current && isSameType) {
                 formattedValue = kendo.toString(date, options.format, options.culture);

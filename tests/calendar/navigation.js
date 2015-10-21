@@ -562,4 +562,79 @@ test("_move focuses the table", 1, function() {
     equal(document.activeElement, calendar._table[0]);
 });
 
+module("kendo.ui.Calendar disabled dates navigation", {
+    setup: function() {
+        kendo.effects.disable();
+
+        div = $("<div />").appendTo(QUnit.fixture).kendoCalendar({
+            value: new Date(2015,9,22),
+            disableDates: function(date) {
+                var disabled = [13,14,20,21];
+                if (date && disabled.indexOf(date.getDate()) > -1) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+
+        calendar = div.data("kendoCalendar");
+
+        calendar.focus();
+    },
+    teardown: function() {
+        kendo.effects.enable();
+
+        calendar.destroy();
+        div.remove();
+        kendo.destroy(QUnit.fixture);
+    }
+});
+
+test("skips disabled date to the left", 1, function() {
+    calendar._move({ keyCode: keys.LEFT, preventDefault: $.noop });
+
+    equal($(".k-state-focused > a").text(), 19);
+});
+
+test("skips disabled date to the right", 1, function() {
+    calendar.value(new Date(2015,9,19));
+    calendar._move({ keyCode: keys.RIGHT, preventDefault: $.noop });
+
+    equal($(".k-state-focused > a").text(), 22);
+});
+
+test("skips disabled date when navigated between weeks UP", 1, function() {
+    calendar.value(new Date(2015,9,28));
+    calendar._move({ keyCode: keys.UP, preventDefault: $.noop });
+
+    equal($(".k-state-focused > a").text(), 7);
+});
+
+test("skips disabled date when navigated between weeks DOWN", 1, function() {
+    calendar.value(new Date(2015,9,7));
+    calendar._move({ keyCode: keys.DOWN, preventDefault: $.noop });
+
+    equal($(".k-state-focused > a").text(), 28);
+});
+
+test("do not navigate to disabled date in the min range", 1, function() {
+    calendar.value(new Date(2015,9,15));
+    calendar.min(new Date(2015,9,13));
+    calendar._move({ keyCode: keys.LEFT, preventDefault: $.noop });
+
+    equal($(".k-state-focused > a").text(), 15);
+});
+
+
+test("do not navigate to disabled date in the max range", 1, function() {
+    var today = new Date();
+    var max = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+    calendar.max(max);
+    calendar.value(new Date(2015,9,12));
+
+    var focusedValue = new Date($(".k-state-focused > a").data("value")).getDate();
+    equal(focusedValue, today.getDate());
+});
+
 })();

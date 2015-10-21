@@ -179,7 +179,8 @@ test("month view renders days", function() {
         empty: template.empty,
         content: template.content,
         min: new Date(2000, 10, 10),
-        max: new Date(2020, 10, 10)
+        max: new Date(2020, 10, 10),
+        disableDates: $.noop
     }));
 
     equal(div.find("thead").find("th").length, 7);
@@ -201,6 +202,7 @@ test("month view's content method honors culture", function() {
             content: template.content,
             min: new Date(2000, 10, 10),
             max: new Date(2020, 10, 10),
+            disableDates: $.noop,
             culture: "bg-BG"
         }));
 
@@ -215,6 +217,7 @@ test("month view renderer honors firstDayOfWeek property", function() {
 
     div.html(calendar.views[0].content({
         date: today,
+        disableDates: $.noop,
         empty: template.empty,
         content: template.content,
         min: today,
@@ -234,6 +237,7 @@ test("month view honors firstVisibleDay", function() {
         date: today,
         empty: template.empty,
         content: template.content,
+        disableDates: $.noop,
         min: new Date(2000, 10, 10),
         max: new Date(2020, 10, 10)
     }));
@@ -249,6 +253,7 @@ test("month view renders anchor in td with title", function() {
         date: today,
         empty: template.empty,
         content: template.content,
+        disableDates: $.noop,
         min: new Date(2000, 10, 10),
         max: new Date(2020, 10, 10)
     }));
@@ -266,6 +271,7 @@ test("month view renders anchor in td with title depending on the options.cultur
         empty: template.empty,
         content: template.content,
         culture: "bg-BG",
+        disableDates: $.noop,
         min: new Date(2000, 10, 10),
         max: new Date(2020, 10, 10)
     }));
@@ -282,6 +288,7 @@ tzTest("Sofia", "month view renders empty string if date is not in range", funct
         empty: template.empty,
         min: new Date(today),
         max: max,
+        disableDates: $.noop,
         content: template.content
     }));
 
@@ -299,6 +306,7 @@ tzTest("Brazil", "last day of March is rendered as part of the current month", f
         empty: template.empty,
         min: new Date(today),
         max: max,
+        disableDates: $.noop,
         content: template.content
     }));
     equal($("[data-value='2015/2/31']").parent().hasClass("k-other-month"), false);
@@ -314,6 +322,7 @@ test("month view should render data-val attribute", function() {
         empty: template.empty,
         min: new Date(today),
         max: max,
+        disableDates: $.noop,
         content: template.content
     }));
 
@@ -329,6 +338,7 @@ test("month view should render k-other-month style", function() {
         empty: template.empty,
         min: new Date(1900,0,1),
         max: new Date(2900,0,1),
+        disableDates: $.noop,
         content: template.content
     }));
 
@@ -344,6 +354,7 @@ test("month view should not render k-other-month to last day of month", function
         empty: template.empty,
         min: new Date(1900,0,1),
         max: new Date(2900,0,1),
+        disableDates: $.noop,
         content: template.content
     }));
 
@@ -362,6 +373,7 @@ test("month view do not apply k-other-month to the first day of the month", func
         min: new Date(1900,0,1),
         max: new Date(2900,0,1),
         empty: template.empty,
+        disableDates: $.noop,
         content: template.content
     }));
 
@@ -378,6 +390,7 @@ test("month view renders k-today if today is in the current view", function() {
         empty: template.empty,
         min: new Date(1900,0,1),
         max: new Date(2900,0,1),
+        disableDates: $.noop,
         content: template.content
     }));
 
@@ -395,6 +408,7 @@ test("month view renders k-weekend", function() {
         empty: template.empty,
         min: new Date(1900,0,1),
         max: new Date(2900,0,1),
+        disableDates: $.noop,
         content: template.content
     }));
 
@@ -413,6 +427,7 @@ test("month view passes dates array", function() {
         empty: template.empty,
         min: new Date(1900,0,1),
         max: new Date(2900,0,1),
+        disableDates: $.noop,
         content: function(data) {
             equal(data.dates, dates);
         }
@@ -431,6 +446,7 @@ test("month view renders URL if current date is in dates", function() {
         empty: template.empty,
         min: new Date(1900,0,1),
         max: new Date(2900,0,1),
+        disableDates: $.noop,
         content: template.content
     }));
 
@@ -455,7 +471,8 @@ test("month view honors culture when renders URL", function() {
         empty: template.empty,
         min: new Date(1900,0,1),
         max: new Date(2900,0,1),
-        content: template.content
+        content: template.content,
+        disableDates: $.noop
     }));
 
     var a = div.find("a[href*=home]");

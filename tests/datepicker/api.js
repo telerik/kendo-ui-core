@@ -83,6 +83,19 @@ test("max method sets calendar max value", function() {
     deepEqual(calendar.max(), date);
 });
 
+test("disabled dates are reflected to calendar", function() {
+    dateview = new DateView();
+    dateview._calendar();
+
+    var options = {
+        disableDates: ["mo"],
+        value: new Date(2015,9,19)
+    }
+    dateview.setOptions(options);
+    var isDisabled = dateview.calendar.element.find("td").eq(1).hasClass("k-state-disabled")
+    equal(isDisabled, true);
+});
+
 var input;
 var datepicker;
 var DatePicker = kendo.ui.DatePicker;
@@ -522,6 +535,47 @@ test("setOptions updates options.dates", 1, function() {
     });
 
     equal(datepicker.options.dates.length, 2);
+});
+
+test("disabled date is not set as widgets value", 1, function() {
+    var datepicker = new DatePicker(input, {
+        value: new Date(2015,9,19),
+        disableDates : ["mo"]
+    });
+
+    equal(datepicker.element.val(), "");
+});
+
+test("widget value is set correctly when disabled dates are added", 1, function() {
+    var datepicker = new DatePicker(input, {
+        value: new Date(2015,9,20),
+        disableDates : ["mo"]
+    });
+
+    equal(datepicker.element.val(), "10/20/2015");
+});
+
+test("manually setting disabled date, does not set the widget value", 2, function() {
+    var datepicker = new DatePicker(input, {
+        value: new Date(2015,9,20),
+        disableDates : ["mo"]
+    });
+    datepicker.element.val("10/19/2015");
+    datepicker.element.blur();
+
+    equal(datepicker.element.val(), "10/19/2015");
+    equal(datepicker.value(), null);
+});
+
+test("clicking on disabled date does not close the popup", 2, function() {
+    var datepicker = new DatePicker(input, {
+        disableDates : ["tu"]
+    });
+    datepicker.dateView._calendar();
+    datepicker.open();
+    $("[data-value='2015/9/13']").parent().trigger("click");
+    equal(datepicker.element.val().length, 0)
+    equal($(".k-animation-container").css("display"), "block");
 });
 
 })();
