@@ -8,7 +8,7 @@ position: 4
 
 # Fetch data From Another Domain by using CORS with All (Modern) Browsers
 
-CORS is cool. [Cross-Origin Resource Sharing](http://www.w3.org/TR/cors/) is a (slowly) emerging technology for the web that finally gives async web operations a way to directly grab resources from different domains. In fact, we've talked about CORS a couple of times on the Kendo UI blogs [here](http://blogs.telerik.com/kendoui/posts/11-08-25/shields_up_web_service_abstraction_with_kendo_ui) and [here](http://blogs.telerik.com/kendoui/posts/11-08-24/cross-domain_queries_to_odata_services_with_jquery).
+CORS is cool. [Cross-Origin Resource Sharing](http://www.w3.org/TR/cors/) is a (slowly) emerging technology for the web that finally gives async web operations a way to directly grab resources from different domains. In fact, we've talked about CORS a couple of times on the Kendo UI blogs [here](http://www.telerik.com/blogs/shields-up-web-service-abstraction-with-kendo-ui) and [here](http://www.telerik.com/blogs/cross-domain-queries-to-odata-services-with-jquery).
 
 By default, the "[same origin](https://developer.mozilla.org/En/Same_origin_policy_for_JavaScript)" security sandbox built-in to all browsers does not allow XHR (Ajax) calls across different domains. You can try, but you'll get an error that looks something like this:
 
@@ -31,7 +31,7 @@ Alternatively, site owners can grant wide-open access with the always ready to p
 
 __Access-Control-Allow-Origin: *__
 
-Now, any site that wants to load a resource directly using Ajax can do so without getting the browser security error. It's a very helpful technique for modern apps that often load data using JavaScript, and hopefully more modern web APIs will start to support CORS. You can already find CORS in action with the [GeoNames.org](http://www.geonames.org/export/ws-overview.html) and [Last.fm](http://www.last.fm/api) APIs. Twitter does not yet support CORS, but [they are considering it](https://dev.twitter.com/discussions/1291) for APIs that already support JSONP. Facebook does not support CORS.
+Now, any site that wants to load a resource directly using Ajax can do so without getting the browser security error. It's a very helpful technique for modern apps that often load data using JavaScript, and hopefully more modern web APIs will start to support CORS. You can already find CORS in action with the [GeoNames.org](http://www.geonames.org/export/ws-overview.html) and [Last.fm](http://www.last.fm/api) APIs. Twitter does not yet support CORS, but [they are considering it](https://twittercommunity.com/t/access-control-allow-origin/7253) for APIs that already support JSONP. Facebook does not support CORS.
 
 ## Server-side Setting
 Clearly, CORS is powerful. It opens-up the tightly controlled browser security sandbox that is essential to the trusted fabric of the web. As you might expect, then, it's a decision that must be made by site owners (you can't use CORS with sites that don't allow it), and it's controlled by web server configuration.
@@ -101,13 +101,13 @@ The most draconian of your choices, but given *most* browsers *do* support CORS,
 The choice is yours, but clearly, you have *some* choice that should still make CORS appealing.
 
 ## Putting It All Together
-In the [Kendo UI Feed Reader demo](http://blogs.telerik.com/kendoui/posts/11-09-29/rss_feed_reader_built_with_kendo_ui_yql_amp_less), we use [YQL](http://developer.yahoo.com/yql/) to feed RSS XML directly to the browser. YQL supports CORS, so we elected to send XML to the browser instead of JSONP to highlight [Kendo UI's data source support for XML](http://demos.telerik.com/kendo-ui/web/datasource/xml-data.html).
+In the [Kendo UI Feed Reader demo](http://www.telerik.com/blogs/rss-feed-reader-built-with-kendo-ui-yql-amp-less), we use [YQL](http://developer.yahoo.com/yql/) to feed RSS XML directly to the browser. YQL supports CORS, so we elected to send XML to the browser instead of JSONP to highlight [Kendo UI's data source support for XML](http://demos.telerik.com/kendo-ui/web/datasource/xml-data.html).
 
 Version 1 of this demo did not support non-CORS browsers. To add support for these browsers, we modified the code to use XDR with IE and YQL JSONP with Opera and all non-CORS browsers.
 
 ### Fixing IE with jQuery $.ajax transports
 
-Making CORS code work with IE 8/9 is actually very easy thanks to [some code](https://github.com/dkastner/jquery.iecors) written by [Derek Kastner](http://twitter.com/#!/dkastner). With jQuery 1.5+, you can create custom "transport" implementations to control the inner-workings of jQuery $.ajax. Derek has done just that with XDR.
+Making CORS code work with IE 8/9 is actually very easy thanks to [some code](https://github.com/dkastner/jquery.iecors) written by [Derek Kastner](https://twitter.com/dkastner). With jQuery 1.5+, you can create custom "transport" implementations to control the inner-workings of jQuery $.ajax. Derek has done just that with XDR.
 
 [His "iecors" project](https://github.com/dkastner/jquery.iecors) simply creates a jQuery transport that uses XDR in jQuery $.ajax requests when it's needed. All you have to do is add the small JS file to your page and everything starts working (no changes to your code). The Kendo UI Data Source, which uses jQuery $.ajax under the covers, will now use XDR in IE.
 
@@ -155,4 +155,4 @@ Now, Opera (any other non-CORS browser) will use an alternate configuration of t
 ## Bottom Line on CORS
 Hopefully this post helps highlight the value of CORS and how it can be used with most modern browsers. As more app code moves to the client, the need for CORS will only grow. Start playing with it today and help push web standards to the next level.
 
-*[This article was [originally published on the Kendo UI Blogs](http://blogs.telerik.com/kendoui/posts/11-10-03/using_cors_with_all_modern_browsers) on October 3rd, 2011. Updated July 2012.]*
+*[This article was [originally published on the Kendo UI Blogs](http://www.telerik.com/blogs/using-cors-with-all-modern-browsers) on October 3rd, 2011. Updated July 2012.]*

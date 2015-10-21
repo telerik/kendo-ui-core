@@ -18,7 +18,7 @@ The Kendo UI DataSource syncs all changes with the remote service when a connect
 
 Set the [offlineStorage](/api/framework/datasource#configuration-offlineStorage) option to enable offline storage. The DataSource uses this value as a key when saving and loading its state.
 
-By default the Kendo UI DataSource uses [localStorage](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Storage#localStorage) to persist its offline state.
+By default the Kendo UI DataSource uses [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API#localStorage) to persist its offline state.
 
 > In order to use offline storage, the model must have a designated ID field.
 
@@ -155,7 +155,7 @@ To use custom offline storage set the `offlineStorage` option to a JavaScript ob
 ## Detect browser Internet connection
 
 At the time of this writing there isn't a cross-browser way to determine whether a web application has Internet access or not. In addition some browsers treat online mode differently than the rest.
-More info about browser online mode is available in [MDN](https://developer.mozilla.org/en-US/docs/Web/API/NavigatorOnLine.onLine).
+More info about browser online mode is available in [MDN](https://developer.mozilla.org/en-US/docs/Web/API/NavigatorOnLine/onLine).
 
 This is why the Kendo UI DataSource does not attempt to automatically detect offline mode. The developer could implement that by either handlng the ["online" and "offline"](https://developer.mozilla.org/en-US/docs/Online_and_offline_events) events or via Ajax polling.
 

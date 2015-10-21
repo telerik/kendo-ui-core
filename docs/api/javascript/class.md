@@ -11,7 +11,7 @@ The base class of most Kendo objects. Provides simple inheritance support.
 
 ### fn `Object`
 
-An alias to the [prototype](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Object/prototype) of the class. Often used to call methods of the base class.
+An alias to the [prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype) of the class. Often used to call methods of the base class.
 
 #### Example - use the prototype to call base methods
 
