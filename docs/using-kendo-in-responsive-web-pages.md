@@ -128,7 +128,7 @@ Such features are available for widgets like grid, scheduler, treelist, etc.
 
 We also have a responsive panel widget which is a responsive container component. Its sole purpose is providing the necessary plumbing for hiding content on small screens when the specified width boundary is passed, and showing this content when its "hamburger" icon button is clicked.
 
-You can see them in action [here](http://demos.telerik.com/kendo-ui/responsive/).
+You can see them in action [here](http://demos.telerik.com/kendo-ui/).
 
 ##See Also
 [Twitter Bootstrap Integration](http://docs.telerik.com/kendo-ui/using-kendo-with-twitter-bootstrap)
