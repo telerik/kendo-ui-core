@@ -70,7 +70,7 @@ var __meta__ = { // jshint ignore:line
 
     var Calendar = Widget.extend({
         init: function(element, options) {
-            var that = this, value, id, current;
+            var that = this, value, id;
 
             Widget.fn.init.call(that, element, options);
 
@@ -92,10 +92,15 @@ var __meta__ = { // jshint ignore:line
                     .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE, CELLSELECTOR, mousetoggle)
                     .on(KEYDOWN_NS, "table.k-content", proxy(that._move, that))
                     .on(CLICK, CELLSELECTOR, function(e) {
-                        var link = e.currentTarget.firstChild;
+                        var link = e.currentTarget.firstChild,
+                            value = that._toDateObject(link);
 
                         if (link.href.indexOf("#") != -1) {
                             e.preventDefault();
+                        }
+
+                        if (that.options.disableDates(value)) {
+                            return;
                         }
 
                         that._click($(link));
@@ -113,8 +118,6 @@ var __meta__ = { // jshint ignore:line
             value = parse(options.value, options.format, options.culture);
 
             that._index = views[options.start];
-
-            current = new DATE(+restrictValue(value, options.min, options.max));
 
             that._current = new DATE(+restrictValue(value, options.min, options.max));
 
@@ -665,10 +668,8 @@ var __meta__ = { // jshint ignore:line
             var that = this,
             options = that.options,
             currentValue = new Date(+that._current),
-            value = link.attr(kendo.attr(VALUE)).split("/");
+            value = that._toDateObject(link);
 
-            //Safari cannot create correctly date from "1/1/2090"
-            value = new DATE(value[0], value[1], value[2]);
             adjustDST(value, 0);
 
             if (that.options.disableDates(value)) {
@@ -847,6 +848,14 @@ var __meta__ = { // jshint ignore:line
             that.navigate(today, depth);
 
             that.trigger(CHANGE);
+        },
+
+        _toDateObject: function(link) {
+            var value = $(link).attr(kendo.attr(VALUE)).split("/");
+            //Safari cannot create correctly date from "1/1/2090"
+            value = new DATE(value[0], value[1], value[2]);
+
+            return value;
         },
 
         _templates: function() {

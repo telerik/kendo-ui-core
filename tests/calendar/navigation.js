@@ -569,7 +569,7 @@ module("kendo.ui.Calendar disabled dates navigation", {
         div = $("<div />").appendTo(QUnit.fixture).kendoCalendar({
             value: new Date(2015,9,22),
             disableDates: function(date) {
-                var disabled = [13,14,20,21];
+                var disabled = [13,14,20,21,23];
                 if (date && disabled.indexOf(date.getDate()) > -1) {
                     return true;
                 } else {
@@ -627,14 +627,12 @@ test("do not navigate to disabled date in the min range", 1, function() {
 });
 
 
-/*test("do not navigate to disabled date in the max range", 1, function() {
-    var today = new Date();
-    var max = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+test("do not navigate to disabled date in the max range", 1, function() {
+    var max = new Date(2015,9,23);
     calendar.max(max);
-    calendar.value(new Date(2015,9,12));
-
+    calendar._move({ keyCode: keys.RIGHT, preventDefault: $.noop });
     var focusedValue = new Date($(".k-state-focused > a").data("value")).getDate();
-    equal(focusedValue, today.getDate());
-});*/
+    equal(focusedValue, 22);
+});
 
 })();
