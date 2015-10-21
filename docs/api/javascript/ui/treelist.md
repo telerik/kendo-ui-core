@@ -3373,6 +3373,8 @@ This method expands the row.
 
 Returns the rendered HTML element for a given model.
 
+> This method is available with versions released after the official Q3 release - 2015.3.930.
+
 #### Parameters
 
 ##### model `kendo.data.TreeListModel|Object`
