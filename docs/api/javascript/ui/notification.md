@@ -444,6 +444,9 @@ This is a shorthand method for [`show(data, "info")`](#methods-show)
 
 **Required**. The string content for the notification; or the object with the values for the variables inside the notification template; or the function, which returns the required string or an object.
 
+Note that the widget does not perform any automatic sanitization of the passed content and `script` tags will be evaluated.
+In order to encode script tags as HTML entities, use `#: #` expressions in the [Kendo UI templates](/framework/templates/overview).
+
 ### show
 
 Displays a notification.
