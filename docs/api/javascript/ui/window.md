@@ -870,7 +870,7 @@ Triggered when a Window has finished its closing animation.
     <script>
     $("#dialog").kendoWindow({
       deactivate: function() {
-        // close animation will start soon
+        // close animation is about to finish
       }
     });
     </script>
