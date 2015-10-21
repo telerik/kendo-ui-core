@@ -5004,6 +5004,40 @@ The author of the PDF document.
     });
     </script>
 
+### pdf.avoidLinks `Boolean|String` *(default: false)*
+A flag indicating whether to produce actual hyperlinks in the exported PDF file.
+
+It's also possible to pass a CSS selector as argument. All matching links will be ignored.
+
+> Available in versions 2015.3.1020 and later
+
+#### Example - skip hyperlinks
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+        toolbar: ["pdf"],
+        pdf: {
+            creator: "John Doe",
+            avoidLinks: true
+        },
+        dataSource: {
+            transport: {
+                read: {
+                    url: "http://demos.telerik.com/kendo-ui/service/products",
+                    dataType: "jsonp"
+                }
+            },
+            pageSize: 10
+        },
+        columns: [
+          { field: "ProductName",
+            template: "<a href='producs/#= ProductID #/'>#= ProductName #</a>" }
+        ],
+        pageable: true
+    });
+    </script>
+
 ### pdf.creator `String` *(default: "Kendo UI PDF Generator")*
 
 The creator of the PDF document.

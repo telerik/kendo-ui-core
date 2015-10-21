@@ -330,6 +330,13 @@ The author of the PDF document.
     });
     </script>
 
+### pdf.avoidLinks `Boolean|String` *(default: false)*
+A flag indicating whether to produce actual hyperlinks in the exported PDF file.
+
+It's also possible to pass a CSS selector as argument. All matching links will be ignored.
+
+> Available in versions 2015.3.1020 and later
+
 ### pdf.creator `String` *(default: "Kendo UI PDF Generator")*
 
 The creator of the PDF document.
