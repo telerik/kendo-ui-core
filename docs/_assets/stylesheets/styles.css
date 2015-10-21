@@ -132,7 +132,7 @@ code, em {
 #markdown-toc {
     border-bottom: 1px solid #ebecee;
     position: absolute;
-    z-index: 1;
+    z-index: 5;
     right: 0;
     font-size: 12px;
     padding-left: 5.8em;
