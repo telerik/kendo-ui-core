@@ -427,7 +427,7 @@ Sets the format that Excel uses to display the cell value.
 
 > The format option does not follow the `{0:}` syntax that `kendo.format` uses.
 
-The [Create a custom number format](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4) page describes the formats that Excel supports.
+The [Create a custom number format](https://support.office.com/en-us/article/Create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4?ui=en-US&rs=en-US&ad=US) page describes the formats that Excel supports.
 
 #### Example - set the cell format
 

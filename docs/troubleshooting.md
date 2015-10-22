@@ -48,7 +48,7 @@ The following JavaScript errors will be thrown (depending on the browser):
 ### Kendo UI Widgets Cannot Be Initialized in IE Compatibility Mode
 
 Kendo widgets provide a WAI-ARIA support, which means that some ARIA specific attributes are added to the HTML element. When a widget tries to add an ARIA attribute using
-[jQuery's attr method](http://api.jquery.com/attr/), which in turn calls[Element.setAttribute method](https://developer.mozilla.org/en-US/docs/Web/API/Element.setAttribute),
+[jQuery's attr method](http://api.jquery.com/attr/), which in turn calls[Element.setAttribute method](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute),
 the *Internet Explorer* in Compatibility mode will raise a JavaScript error with the following message:
 
 * SCRIPT3: Member not found (in Internet Explorer 10+ in Compatibility Mode)

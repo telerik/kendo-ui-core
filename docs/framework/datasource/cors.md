@@ -10,7 +10,7 @@ position: 4
 
 CORS is cool. [Cross-Origin Resource Sharing](http://www.w3.org/TR/cors/) is a (slowly) emerging technology for the web that finally gives async web operations a way to directly grab resources from different domains. In fact, we've talked about CORS a couple of times on the Kendo UI blogs [here](http://www.telerik.com/blogs/shields-up-web-service-abstraction-with-kendo-ui) and [here](http://www.telerik.com/blogs/cross-domain-queries-to-odata-services-with-jquery).
 
-By default, the "[same origin](https://developer.mozilla.org/En/Same_origin_policy_for_JavaScript)" security sandbox built-in to all browsers does not allow XHR (Ajax) calls across different domains. You can try, but you'll get an error that looks something like this:
+By default, the "[same origin](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy)" security sandbox built-in to all browsers does not allow XHR (Ajax) calls across different domains. You can try, but you'll get an error that looks something like this:
 
 **XMLHttpRequest cannot load [URL]. Origin [YOUR WEBSITE] is not allowed by Access-Control-Allow-Origin.**
 
@@ -50,13 +50,13 @@ As confirmed by the useful [CanIUse.com](http://caniuse.com/#search=CORS), suppo
 - Trident browsers (Internet Explorer 8+)
 - Presto browsers (specifically, Opera 12+)
 
-That's not bad. Unitl recently Opera was missing from that list, but with the release of Opera 12 in mid 2012, [Opera also now supports CORS](http://dev.opera.com/articles/view/dom-access-control-using-cross-origin-resource-sharing/).
+That's not bad. Unitl recently Opera was missing from that list, but with the release of Opera 12 in mid 2012, [Opera also now supports CORS](https://dev.opera.com/articles/dom-access-control-using-cors/).
 
 We'll talk about handling old Opera versions more in a minute, but let's first address IE.
 
 ### Internet Explorer and XDomainRequest
 
-IE, pre IE10, approaches cross origin resource sharing a bit differently. Rather than go the route of Webkit and Gecko, IE 8 and 9 do not reuse the standard Ajax XMLHttpRequest object for CORS requests. Instead, they introduce a *brand new* object for cross-origin resource sharing called [`XDomainRequest`](http://msdn.microsoft.com/en-us/library/cc288060(v=vs.85).aspx).
+IE, pre IE10, approaches cross origin resource sharing a bit differently. Rather than go the route of Webkit and Gecko, IE 8 and 9 do not reuse the standard Ajax XMLHttpRequest object for CORS requests. Instead, they introduce a *brand new* object for cross-origin resource sharing called [`XDomainRequest`](https://msdn.microsoft.com/en-us/library/cc288060(v=vs.85).aspx).
 
 This means your Ajax code for cross-domain calls looks 100% identical to "same-domain" calls in Chrome and Firefox, but it will have to "fork" in Internet Explorer to use the new XDR object with CORS requests. A pain, but a solvable problem. *(There are some other limits with XDR, [but we'll leave that to you to research](http://blogs.msdn.com/b/ieinternals/archive/2010/05/13/xdomainrequest-restrictions-limitations-and-workarounds.aspx).*
 
@@ -101,7 +101,7 @@ The most draconian of your choices, but given *most* browsers *do* support CORS,
 The choice is yours, but clearly, you have *some* choice that should still make CORS appealing.
 
 ## Putting It All Together
-In the [Kendo UI Feed Reader demo](http://www.telerik.com/blogs/rss-feed-reader-built-with-kendo-ui-yql-amp-less), we use [YQL](http://developer.yahoo.com/yql/) to feed RSS XML directly to the browser. YQL supports CORS, so we elected to send XML to the browser instead of JSONP to highlight [Kendo UI's data source support for XML](http://demos.telerik.com/kendo-ui/web/datasource/xml-data.html).
+In the [Kendo UI Feed Reader demo](http://www.telerik.com/blogs/rss-feed-reader-built-with-kendo-ui-yql-amp-less), we use [YQL](https://developer.yahoo.com/yql/) to feed RSS XML directly to the browser. YQL supports CORS, so we elected to send XML to the browser instead of JSONP to highlight [Kendo UI's data source support for XML](http://demos.telerik.com/kendo-ui/datasource/xml-data).
 
 Version 1 of this demo did not support non-CORS browsers. To add support for these browsers, we modified the code to use XDR with IE and YQL JSONP with Opera and all non-CORS browsers.
 

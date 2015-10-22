@@ -44,11 +44,11 @@ If using ASP.NET bundles make sure the `Scripts.Render("~/bundles/jquery")` bloc
 
 This error occurs after upgrading jQuery to 1.9. The `live` method is no longer available in this version of jQuery.
 As a result some JavaScript libraries which are often used in ASP.NET MVC applications will throw errors.
-Those libraries are **jquery.unobtrusive-ajax**, **jquery.validate** and **jquery.validate.unobtrusive**. You need to update the following packages via [Nuget](http://nuget.org):
+Those libraries are **jquery.unobtrusive-ajax**, **jquery.validate** and **jquery.validate.unobtrusive**. You need to update the following packages via [Nuget](http://nuget.org/):
 
-* [jQuery.Validation](https://nuget.org/packages/jQuery.Validation)
-* [Microsoft.jQuery.Unobtrusive.Ajax](http://nuget.org/packages/Microsoft.jQuery.Unobtrusive.Ajax)
-* [Microsoft.jQuery.Unobtrusive.Validation](http://nuget.org/packages/Microsoft.jQuery.Unobtrusive.Validation)
+* [jQuery.Validation](https://www.nuget.org/packages/jQuery.Validation)
+* [Microsoft.jQuery.Unobtrusive.Ajax](https://www.nuget.org/packages/Microsoft.jQuery.Unobtrusive.Ajax)
+* [Microsoft.jQuery.Unobtrusive.Validation](https://www.nuget.org/packages/Microsoft.jQuery.Unobtrusive.Validation)
 
 > **Important**  
 > In ASP.NET MVC 3 applications **jquery.unobtrusive-ajax** and **jquery.validate.unobtrusive** are not installed as NUget packages. You would need to install them separately. The packages are [Microsoft.jQuery.Unobtrusive.Ajax](http://nuget.org/packages/Microsoft.jQuery.Unobtrusive.Ajax) and [Microsoft.jQuery.Unobtrusive.Validation](http://nuget.org/packages/Microsoft.jQuery.Unobtrusive.Validation). First you must delete **jquery.unobtrusive-ajax.js**, **jquery.unobtrusive-ajax.min.js**, **jquery.validate.unobtrusive.js** and **jquery.validate.unobtrusive.min.js** from your **~/Sripts** folder. Then install Microsoft.jQuery.Unobtrusive.Ajax and Microsoft.jQuery.Unobtrusive.Validation.
@@ -89,9 +89,9 @@ Those libraries are **jquery.unobtrusive-ajax**, **jquery.validate** and **jquer
 
 ## Menu Renders Too Slowly in Debug Mode
 
-The Menu has security trimming functionality, which is enabled by default. Under the hood, it creates an [AuthorizationContext](http://msdn.microsoft.com/en-us/library/system.web.mvc.authorizationcontext(v=vs.108).aspx) for every menu item with set Action/Controller. In 'debug' mode those context objects are not cached and as a result there may be delay in rendering the menu in case there are a lot of items. When your application is deployed and debug mode is disabled the authorization context objects are cached.
+The Menu has security trimming functionality, which is enabled by default. Under the hood, it creates an [AuthorizationContext](https://msdn.microsoft.com/en-us/library/system.web.mvc.authorizationcontext(v=vs.108).aspx) for every menu item with set Action/Controller. In 'debug' mode those context objects are not cached and as a result there may be delay in rendering the menu in case there are a lot of items. When your application is deployed and debug mode is disabled the authorization context objects are cached.
 
-More info about ASP.NET debug mode can be found in the Scott Guthrie's blog post: [Don’t run production ASP.NET Applications with debug="true" enabled](http://weblogs.asp.net/scottgu/archive/2006/04/11/Don_1920_t-run-production-ASP.NET-Applications-with-debug_3D001D20_true_1D20_-enabled.aspx).
+More info about ASP.NET debug mode can be found in the Scott Guthrie's blog post: [Don’t run production ASP.NET Applications with debug="true" enabled](http://weblogs.asp.net/scottgu/introducing-asp-net-5).
 
 **Solution**:
 

@@ -484,7 +484,7 @@ We need to first create such extension method in a static class
 
 ### How Do I Mark Certain Properties as Read-only?
 
-By default all properties are readonly. Decorate the read-only properties with the [ReadOnly](http://msdn.microsoft.com/en-us/library/system.componentmodel.readonlyattribute.aspx) data annotation attribute or use the `Editable` configuration method.
+By default all properties are readonly. Decorate the read-only properties with the [ReadOnly](https://msdn.microsoft.com/en-us/library/system.componentmodel.readonlyattribute.aspx) data annotation attribute or use the `Editable` configuration method.
 
 ###### Example - Read-only property via the ReadOnly attribute
 

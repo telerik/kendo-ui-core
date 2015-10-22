@@ -192,7 +192,7 @@ The supported aggregates are "average", "count", "max", "min" and "sum".
     });
     </script>
 
-> Check [Aggregates](http://demos.telerik.com/kendo-ui/web/grid/aggregates.html) for a live demo.
+> Check [Aggregates](http://demos.telerik.com/kendo-ui/grid/aggregates) for a live demo.
 
 ### columns.attributes `Object`
 
@@ -570,7 +570,7 @@ Array of values specified via the [values](#configuration-columns.values) option
     });
     </script>
 
-> Check [Editing custom editor](http://demos.telerik.com/kendo-ui/web/grid/editing-custom.html) for a live demo.
+> Check [Editing custom editor](http://demos.telerik.com/kendo-ui/grid/editing-custom) for a live demo.
 
 ### columns.encoded `Boolean` *(default: true)*
 
@@ -1060,7 +1060,7 @@ The role data attribute of the widget used in the filter menu or a JavaScript fu
     });
     </script>
 
-> Check [Filter menu customization](http://demos.telerik.com/kendo-ui/web/grid/filter-menu-customization.html) for a live demo.
+> Check [Filter menu customization](http://demos.telerik.com/kendo-ui/grid/filter-menu-customization) for a live demo.
 
 ### columns.footerTemplate `String|Function`
 The [template](/api/framework/kendo#methods-template) which renders the footer table cell for the column.
@@ -1594,7 +1594,7 @@ An array of values that will be displayed instead of the bound value. Each item 
 
 This example displays "Beverages" and "Food" in the "category" column instead of "1" and "2".
 
-> Check [ForeignKey column](http://demos.telerik.com/kendo-ui/web/grid/foreignkeycolumn.html) for a live demo.
+> Check [ForeignKey column](http://demos.telerik.com/kendo-ui/grid/foreignkeycolumn) for a live demo.
 
 ### columns.menu `Boolean`
 
@@ -1641,7 +1641,7 @@ Can be set to a JavaScript object which represents the column menu configuration
     });
     </script>
 
-> Check [Column menu](http://demos.telerik.com/kendo-ui/web/grid/column-menu.html) for a live demo.
+> Check [Column menu](http://demos.telerik.com/kendo-ui/grid/column-menu) for a live demo.
 
 ### columnMenu.columns `Boolean` *(default: true)*
 
@@ -2018,12 +2018,12 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/framework
     });
     </script>
 
-> Check [Binding to local data](http://demos.telerik.com/kendo-ui/web/grid/local-data.html) and [Binding to remote data](http://demos.telerik.com/kendo-ui/web/grid/remote-data.html) for live demos.
+> Check [Binding to local data](http://demos.telerik.com/kendo-ui/grid/local-data-binding) and [Binding to remote data](http://demos.telerik.com/kendo-ui/grid/remote-data-binding) for live demos.
 
 ### detailTemplate `String|Function`
 
 The [template](/api/framework/kendo#methods-template) which renders the detail rows.
-Check [Detail Template](http://demos.telerik.com/kendo-ui/web/grid/detailtemplate.html) for a live demo.
+Check [Detail Template](http://demos.telerik.com/kendo-ui/grid/detailtemplate) for a live demo.
 
 > The detail template content cannot be wider than the total width of all master columns, unless the detail template is scrollable.
 
@@ -2110,7 +2110,7 @@ Can be set to a JavaScript object which represents the editing configuration.
     });
     </script>
 
-> Check [Batch editing](http://demos.telerik.com/kendo-ui/web/grid/editing.html), [Inline editing](http://demos.telerik.com/kendo-ui/web/grid/editing-inline.html) and [Popup editing](http://demos.telerik.com/kendo-ui/web/grid/editing-popup.html) for live demos.
+> Check [Batch editing](http://demos.telerik.com/kendo-ui/grid/editing), [Inline editing](http://demos.telerik.com/kendo-ui/grid/editing-inline) and [Popup editing](http://demos.telerik.com/kendo-ui/grid/editing-popup) for live demos.
 
 ### editable.confirmation `Boolean|String|Function` *(default: true)*
 
@@ -3825,7 +3825,7 @@ Can be set to a JavaScript object which represents the grouping configuration.
     });
     </script>
 
-> Check [Basic usage](http://demos.telerik.com/kendo-ui/web/grid/index.html) for a live demo.
+> Check [Basic usage](http://demos.telerik.com/kendo-ui/grid/index) for a live demo.
 
 ### groupable.enabled `Boolean` *(default: true)*
 
@@ -4307,7 +4307,7 @@ If set to `true` the use could navigate the widget using the keyboard navigation
     });
     </script>
 
-> Check [Keyboard navigation](http://demos.telerik.com/kendo-ui/web/grid/navigation.html) for a live demo.
+> Check [Keyboard navigation](http://demos.telerik.com/kendo-ui/grid/keyboard-navigation) for a live demo.
 
 ### noRecords `Boolean|Object` *(default: false)*
 
@@ -5396,7 +5396,7 @@ Multi-level headers allow reordering only in same level.
     });
     </script>
 
-> Check [Column reordering](http://demos.telerik.com/kendo-ui/web/grid/column-reordering.html) for a live demo.
+> Check [Column reordering](http://demos.telerik.com/kendo-ui/grid/column-reordering) for a live demo.
 
 ### resizable `Boolean` *(default:false)*
 
@@ -5422,7 +5422,7 @@ By default, column resizing is disabled.
     });
     </script>
 
-> Check [Column resizing](http://demos.telerik.com/kendo-ui/web/grid/column-resizing.html) for a live demo and
+> Check [Column resizing](http://demos.telerik.com/kendo-ui/grid/column-resizing) for a live demo and
 the [Column widths](/web/grid/appearance#column-widths) help section for additional relevant information.
 
 ### rowTemplate `String|Function`
@@ -5491,7 +5491,7 @@ Can be set to a JavaScript object which represents the scrolling configuration.
 
 If set to `true` the grid will always display a single page of data. Scrolling would just change the data which is currently displayed.
 
-> Check [Virtualization of local data](http://demos.telerik.com/kendo-ui/web/grid/virtualization-local-data.html) and [Virtualization of remote data](http://demos.telerik.com/kendo-ui/web/grid/virtualization-remote-data.html) for live demos.
+> Check [Virtualization of local data](http://demos.telerik.com/kendo-ui/grid/virtualization-local-data) and [Virtualization of remote data](http://demos.telerik.com/kendo-ui/grid/virtualization-remote-data) for live demos.
 
 ### selectable `Boolean|String` *(default: false)*
 
@@ -5536,7 +5536,7 @@ Can also be set to the following string values:
     });
     </script>
 
-> Check [Selection](http://demos.telerik.com/kendo-ui/web/grid/selection.html) for a live demo.
+> Check [Selection](http://demos.telerik.com/kendo-ui/grid/selection) for a live demo.
 
 ### sortable `Boolean|Object` *(default: false)*
 
@@ -5561,7 +5561,7 @@ Can be set to a JavaScript object which represents the sorting configuration.
     });
     </script>
 
-> Check [Sorting](http://demos.telerik.com/kendo-ui/web/grid/sorting.html) for a live demo.
+> Check [Sorting](http://demos.telerik.com/kendo-ui/grid/sorting) for a live demo.
 
 ### sortable.allowUnsort `Boolean` *(default: true)*
 
@@ -5765,7 +5765,7 @@ The [template](/api/framework/kendo#methods-template) which renders the command.
     });
     </script>
 
-> Check [Toolbar template](http://demos.telerik.com/kendo-ui/web/grid/toolbar-template.html) for a live demo.
+> Check [Toolbar template](http://demos.telerik.com/kendo-ui/grid/toolbar-template) for a live demo.
 
 #### Example - set the template as a string
 

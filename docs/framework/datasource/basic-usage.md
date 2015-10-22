@@ -69,7 +69,7 @@ Here's another example of creating a DataSource for data from a remote endpoint:
 
 In this example, the DataSource is initialized to represent an in-memory cache of tweets from the search service for Twitter. This endpoint employs a [JSON](http://www.json.org/)-based endpoint contact that allows an input parameter, `q` to denote a query string for the search service. Here, its value is provides by a input element on the page.
 
-Operations conducted by the DataSource against this remote endpoint are performed via [jQuery.ajax()](http://api.jquery.com/jQuery.ajax/) and therefore, subject to the same security constraints enforced by the user agent. These security constraints also apply to XHRs made across different domains. Since this is the case with the example above, the `dataType` configuration property is set to use [JSONP](http://en.wikipedia.org/wiki/JSONP).
+Operations conducted by the DataSource against this remote endpoint are performed via [jQuery.ajax()](http://api.jquery.com/jQuery.ajax/) and therefore, subject to the same security constraints enforced by the user agent. These security constraints also apply to XHRs made across different domains. Since this is the case with the example above, the `dataType` configuration property is set to use [JSONP](https://en.wikipedia.org/wiki/JSONP).
 
 ## Working with Grouped Data
 
