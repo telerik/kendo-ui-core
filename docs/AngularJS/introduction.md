@@ -12,7 +12,7 @@ Read on below to learn about the integration between Kendo UI and AngularJS and 
 
 ## Overview
 
-Kendo UI can be used seamlessly with AngularJS. The integration between both frameworks is baked-in via AngularJS directives for Kendo UI widgets, which are part of the product distribution and officially supported by our team. Thus, you can benefit from the features available in AngularJS (such as declarative data binding, routing, form validation, and others) and employ them when building beautiful and responsive UIs with Kendo UI.
+Kendo UI can be used seamlessly with AngularJS. The integration between both frameworks is baked-in via AngularJS directives for Kendo UI widgets, which are part of the product distribution and officially supported by our team. Thus, you can benefit from the features available in AngularJS (such as declarative data binding, routing, form validation, and others) and employ them when building up your project.
 
 > **Important**  
 > AngularJS Kendo UI widget initialization is not designed to be combined with the Kendo UI server wrappers. Using wrappers is equivalent to [jQuery plugin syntax initialization](/basics/jquery-initialization "Initialize a Widget Using jQuery Plug-in Syntax"). If you want to create Kendo UI widget instances with AngularJS, do not use server wrappers for these instances. Also, bear in mind that the two frameworks have some overlapping features, such as Angular binding and Kendo UI MVVM, which must not be mixed.
