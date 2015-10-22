@@ -50,37 +50,6 @@ Represents the Kendo UI Calendar widget. Inherits from [Widget](/api/javascript/
         });
     </script>
 
-### disableDates `Array|Function` *(default: null)*
-
-An array or function that will be used to determine which dates to be disabled in the calendar.
-
-#### Example - specify an array of days to be disabled
-
-    $("#calendar").kendoCalendar({
-		value: new Date(),
-		disableDates: ["we", "th"],
-    });
-
-you can also pass a function that will be dynamically resolved for each date of the calendar. Note that when the function return true, the date will be disabled.
-
-#### Example - use a function to disabled dates
-
-    $("#calendar").kendoCalendar({
-		value: new Date(),
-		disableDates: function (date) {
-			var disabled = [13,14,20,21];
-			if (date && disabled.indexOf(date.getDate()) > -1 ) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-	});
-
-note that a check for an empty `date` is needed, as the widget can work with a null value as well.
-
-> This functionality was added with the Q1 release of 2016.
-
 ### depth `String`
 
 Specifies the navigation depth. The following
@@ -112,6 +81,43 @@ shows the decades from the century
             depth: "year"
         });
     </script>
+
+### disableDates `Array|Function` *(default: null)*
+
+An array or function that will be used to determine which dates to be disabled in the calendar.
+
+#### Example - specify an array of days to be disabled
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+		value: new Date(),
+		disableDates: ["we", "th"],
+    });
+    </script>
+
+you can also pass a function that will be dynamically resolved for each date of the calendar. Note that when the function returns true, the date will be disabled.
+
+#### Example - use a function to disabled dates
+
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+		value: new Date(),
+		disableDates: function (date) {
+			var disabled = [13,14,20,21];
+			if (date && disabled.indexOf(date.getDate()) > -1 ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	});
+    </script>
+
+note that a check for an empty `date` is needed, as the widget can work with a null value as well.
+
+> This functionality was added with the Q1 release of 2016.
 
 ### footer `String|Function`
 

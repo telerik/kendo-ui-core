@@ -466,8 +466,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         close: function() {
-            var that = this;
-            that.dateView.close();
+            this.dateView.close();
         },
 
         min: function(value) {

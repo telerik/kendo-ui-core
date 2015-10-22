@@ -171,6 +171,43 @@ settings are available for the **depth** value:
     });
     </script>
 
+### disableDates `Array|Function` *(default: null)*
+
+An array or function that will be used to determine which dates to be disabled for selection by the widget.
+
+#### Example - specify an array of days to be disabled
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+		value: new Date(),
+		disableDates: ["we", "th"],
+    });
+    </script>
+
+you can also pass a function that will be dynamically resolved for each date of the calendar. Note that when the function returns true, the date will be disabled.
+
+#### Example - use a function to disabled dates
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+		value: new Date(),
+		disableDates: function (date) {
+			var disabled = [13,14,20,21];
+			if (date && disabled.indexOf(date.getDate()) > -1 ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	});
+    </script>
+
+note that a check for an empty `date` is needed, as the widget can work with a null value as well.
+
+> This functionality was added with the Q1 release of 2016.
+
 ### footer `String`
 
  The [template](/api/framework/kendo#methods-template) which renders the footer of the calendar. If false, the footer will not be rendered.

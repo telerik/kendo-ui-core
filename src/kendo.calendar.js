@@ -123,6 +123,7 @@ var __meta__ = { // jshint ignore:line
 
             that._addClassProxy = function() {
                 that._active = true;
+
                 if (that._cell.hasClass("k-state-disabled")) {
                     var todayString = that._view.toDateString(getToday());
                     that._cell = that._cellByDate(todayString);
