@@ -2532,7 +2532,7 @@ function pad(number, digits, end) {
         data: kendo.data || {},
         dataviz: kendo.dataviz || {},
         drawing: kendo.drawing || {},
-        spreadsheet: {},
+        spreadsheet: { messages: {} },
         keys: {
             INSERT: 45,
             DELETE: 46,
