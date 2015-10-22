@@ -32,7 +32,7 @@ The Telerik UI for ASP.NET MVC Visual Studio Extensions support Visual Studio 20
 
 To download Telerik UI for ASP.NET MVC follow these steps.
 
-1. Log in to your [Telerik account](http://www.telerik.com/account.aspx).
+1. Log in to your [Telerik account](https://www.telerik.com/login/v2/telerik?ReturnUrl=https://www.telerik.com/v2/oauth/telerik/authorize%3Fclient_id%3Dhttp://www.lean.telerik.com%26redirect_uri%3Dhttp://www.telerik.com/account/default.aspx%26response_type%3Dcode%26state%3DBC61727E88E19B88D8471959A1CD745B15A7E71498002F0383A966A0200E7FDA).
 2. Click **Products & Subscriptions**  in the top navigation.
 3. Click **UI for ASP.NET MVC**. If this option is not available click one of the following: **DevCraft UI Edition**, **DevCraft Complete**  or **DevCraft Ultimate**.
 4. Click **Download Installer and other resources**.

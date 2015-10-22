@@ -18,7 +18,7 @@ Both extensions should be enabled in the PHP configuration (php.ini). The
 
 ## Download and Install Telerik UI for PHP
 
-You can download Telerik UI for PHP from the [official download page](http://www.telerik.com/download/php-ui). The distribution zip file
+You can download Telerik UI for PHP from the [official download page](http://demos.telerik.com/php-ui/). The distribution zip file
 contains the following directories:
 
 *   **/js** - minified JavaScript files.
@@ -45,7 +45,7 @@ and check the [JavaScript Dependencies](/intro/installation/prerequisites) help 
         <script src="js/kendo.web.min.js"></script>
 
     > **Important**  
-    > If you want to use Kendo UI Web and DataViz at the same time, you should include **kendo.all.min.js** instead of **kendo.web.min.js** and **kendo.dataviz.min.js**. You can also create a custom JavaScript file using the [Custom Download Builder](http://www.telerik.com/download/custom-download).
+    > If you want to use Kendo UI Web and DataViz at the same time, you should include **kendo.all.min.js** instead of **kendo.web.min.js** and **kendo.dataviz.min.js**. You can also create a custom JavaScript file using the [Custom Download Builder](https://www.telerik.com/login/v2/telerik?ReturnUrl=https://www.telerik.com/download/custom-download).
 
 4. Include the Kendo PHP [Autoload](http://php.net/manual/en/language.oop5.autoload.php) file.
 
@@ -96,6 +96,6 @@ and check the [JavaScript Dependencies](/intro/installation/prerequisites) help 
 You can watch the videos in the [Kendo UI YouTube channel](http://www.youtube.com/kendouitv):
 
 1. [Getting Started With The PHP Wrappers For Kendo UI: Part 1](http://www.youtube.com/watch?v=2Kpgp_nocEI)
-1. [Getting Started With The PHP Wrappers For Kendo UI: Part 2](http://www.youtube.com/watch?v=RQCLqA6Pu_E)
-1. [Getting Started With The PHP Wrappers For Kendo UI: Part 3](http://www.youtube.com/watch?v=zYh6cuU_leQ)
+1. [Getting Started With The PHP Wrappers For Kendo UI: Part 2](https://www.youtube.com/watch?v=RQCLqA6Pu_E)
+1. [Getting Started With The PHP Wrappers For Kendo UI: Part 3](https://www.youtube.com/watch?v=zYh6cuU_leQ)
 

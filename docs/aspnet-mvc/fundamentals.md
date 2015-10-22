@@ -19,13 +19,13 @@ Telerik UI for ASP.NET MVC is a set of server-side wrappers. A server-wrapper do
 
 ### Kendo HtmlHelper extension method
 
-The **Kendo** [HtmlHelper](http://www.asp.net/mvc/tutorials/older-versions/views/creating-custom-html-helpers-cs) exposes all Kendo UI server wrappers.
+The **Kendo** [HtmlHelper](http://www.asp.net/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs) exposes all Kendo UI server wrappers.
 
 ![Kendo HtmlHelper extension method](/aspnet-mvc/images/kendo-extension.png)
 
 ### Widget options
 
-The widget options are exposed via [fluent interface](http://en.wikipedia.org/wiki/Fluent_interface).
+The widget options are exposed via [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface).
 
 ![Fluent interface](/aspnet-mvc/images/fluent-interface.png)
 

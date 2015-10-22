@@ -1374,7 +1374,7 @@ Local data sources are bound to a JavaScript array via the [data](#configuration
 
 The configuration used when the data source saves newly created data items. Those are items added to the data source via the [add](#methods-add) or [insert](#methods-insert) methods.
 
-> The data source uses [jQuery.ajax](http://api.jquery.com/jQuery.ajax) to make a HTTP request to the remote service. The value configured via `transport.create` is passed to [`jQuery.ajax`](http://api.jquery.com/jquery.ajax/#jQuery-ajax-settings). This means that you can set
+> The data source uses [jQuery.ajax](http://api.jquery.com/jQuery.ajax/) to make a HTTP request to the remote service. The value configured via `transport.create` is passed to [`jQuery.ajax`](http://api.jquery.com/jquery.ajax/#jQuery-ajax-settings). This means that you can set
 all options supported by `jQuery.ajax` via `transport.create` except the `success` and `error` callback functions which are used by the transport.
 
 If the value of `transport.create` is a function, the data source invokes that function instead of `jQuery.ajax`. Check [the jQuery documentation](http://api.jquery.com/jquery.ajax/#jQuery-ajax-settings) for more details on the provided argument.
@@ -2322,9 +2322,9 @@ If set to function the data source will invoke it and use the result as the URL.
 
 The configuration used when [type](#configuration-type) is set to "signalr". Configures the SignalR settings - hub, connection promise, server and client hub methods.
 
-Live demo available at [demos.telerik.com/kendo-ui](http://demos.telerik.com/kendo-ui/web/grid/signalr.html).
+Live demo available at [demos.telerik.com/kendo-ui](http://demos.telerik.com/kendo-ui/grid/signalr).
 
-It is recommended to familiarize with the SignalR [JavaScript API](http://www.asp.net/signalr/overview/signalr-20/hubs-api/hubs-api-guide-javascript-client).
+It is recommended to familiarize with the SignalR [JavaScript API](http://www.asp.net/signalr/overview/guide-to-the-api/hubs-api-guide-javascript-client).
 
 #### Example
 

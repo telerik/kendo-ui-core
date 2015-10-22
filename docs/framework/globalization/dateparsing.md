@@ -5,7 +5,7 @@ description: Guide to supported methods for converting a specified string to a D
 ---
 # Date parsing
 
-Kendo exposes methods which converts the specified string to a [Date](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date) object using culture's specific settings.
+Kendo exposes methods which converts the specified string to a [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) object using culture's specific settings.
 
 ## Parse a string as date without specifying a format
 

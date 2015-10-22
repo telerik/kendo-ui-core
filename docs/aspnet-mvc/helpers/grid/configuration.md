@@ -484,8 +484,8 @@ Sets the server template which will be used when displaying the bound field.
 > **Important**  
 > The `Template` is used when he grid is configured for [server binding](/aspnet-mvc/helpers/grid/ajax-binding). If client-side data operations are enabled ([`ServerOperation` is set to `false`](/aspnet-mvc/helpers/grid/ajax-binding#enable-client-data-processing-during-ajax-binding)), you will also need a [`ClientTemplate`](#clienttemplate).
 
-In WebForms the template is a [server side code block](http://msdn.microsoft.com/en-us/library/ms178135%28vs.80%29.aspx).
-In Razor the template is a [templated razor delegate](http://haacked.com/archive/2011/02/27/templated-razor-delegates.aspx).
+In WebForms the template is a [server side code block](https://msdn.microsoft.com/en-us/library/ms178135(vs.80).aspx).
+In Razor the template is a [templated razor delegate](http://haacked.com/archive/2011/02/27/templated-razor-delegates.aspx/).
 
 ###### Example - set the column template (WebForms)
 

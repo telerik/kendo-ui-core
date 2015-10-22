@@ -27,12 +27,12 @@ There are various reasons which may cause this. Follow the troubleshooting instr
 1. Use your browser's developer console to check for any JavaScript errors. In most browsers pressing **F12** will pop up the developer console. Address all JavaScript errors.
 More info can be found in the [troubleshooting help topic](/aspnet-mvc/troubleshooting).
 2. Check the "Network" (or "Net" in Firebug) tab of the browser developer console. Look for a failed HTTP request for the action method configured via the `DataSource` grid setting.
-    - HTTP status code [401](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#401) indicates that authentication is required and has failed or not yet been provided.
-    - HTTP status code [403](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#403) indicates that request is not authorized. Perhaps the current user does not have
+    - HTTP status code [401](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#401) indicates that authentication is required and has failed or not yet been provided.
+    - HTTP status code [403](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#403) indicates that request is not authorized. Perhaps the current user does not have
     the required permissions.
-    - HTTP status code [404](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#404) indicates that requested URL cannot be found.
+    - HTTP status code [404](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#404) indicates that requested URL cannot be found.
     Check if the controller and action names are spelled correctly.
-    - HTTP status code [500](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#500) indicates that a server error occurred while process the request.
+    - HTTP status code [500](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#500) indicates that a server error occurred while process the request.
     Check what the server response is. In most cases it will contain the full .NET stacktrace. If the reason for the exception is not clear put a break-point
     in the action method and break with the debugger. Also check the [well known exceptions](#well-known-exceptions)
 3. Check if you are using the `ToDataSourceResult` extension method. That method returns the data in the JSON format expected by the Kendo UI Grid. Check the
@@ -42,14 +42,14 @@ More info can be found in the [troubleshooting help topic](/aspnet-mvc/troublesh
 
 ### Circular Reference Detected While Serializing an Object of Type
 
-The reason for this exception is that the [JavaScriptSerializer](http://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.aspx) class used by
-the [Json](http://msdn.microsoft.com/en-us/library/system.web.mvc.controller.json.aspx) method cannot serialize object graphs which contain circular references (refer to each other).
+The reason for this exception is that the [JavaScriptSerializer](https://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.aspx) class used by
+the [Json](https://msdn.microsoft.com/en-us/library/system.web.mvc.controller.json.aspx) method cannot serialize object graphs which contain circular references (refer to each other).
 The solution is to use View Model objects and avoid serializing the properties which create the circular reference.
 Check ["How do I avoid circular reference exceptions"](/aspnet-mvc/helpers/grid/faq#how-do-i-avoid-circular-reference-exceptions?) for further information.
 
 ### JSON JavaScriptSerializer Serialization or Deserialization Error
 
-This exception is thrown when the length of the JSON response exceeds the default [MaxJsonLength](http://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.maxjsonlength.aspx).
+This exception is thrown when the length of the JSON response exceeds the default [MaxJsonLength](https://msdn.microsoft.com/en-us/library/system.web.script.serialization.javascriptserializer.maxjsonlength.aspx).
 There are a few possible solutions:
 
 * Enable paging by calling the `Pageable` method

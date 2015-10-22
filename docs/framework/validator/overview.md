@@ -10,12 +10,12 @@ The Kendo UI Validator offers an easy way to do client-side form validation. Bui
 For a complete overview of the Validator's methods and configuration options, [review the Validator API Reference](/api/javascript/ui/validator).
 
 ## HTML5 form validation
-One of the highly anticipated features in HTML5 is the arrival of new [HTML5 form validation attributes](https://developer.mozilla.org/en/HTML/Forms_in_HTML#Constraint_Validation). When used, these attributes set constraints on HTML inputs that will be enforced by the browser. Available constraints include:
+One of the highly anticipated features in HTML5 is the arrival of new [HTML5 form validation attributes](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms_in_HTML#Constraint_Validation). When used, these attributes set constraints on HTML inputs that will be enforced by the browser. Available constraints include:
 
 - required
 - pattern (regex)
 - min/max
-- [HTML5 data types](https://developer.mozilla.org/en/HTML/Element/input#attr-type) (email, url, number, etc.)
+- [HTML5 data types](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input#attr-type) (email, url, number, etc.)
 
 To use HTML5 form validation, these attributes are added to simple HTML input elements:
 
@@ -29,7 +29,7 @@ When a browser supports HTML5 validation, it will automatically attempt to valid
 The ideas of HTML5 forms is great, but in practice there are a few problems today:
 
 1. Old browsers offer no support for HTML5 form validation
-2. Support for HTML5 forms in *modern* browsers [is incomplete](http://wufoo.com/html5/)
+2. Support for HTML5 forms in *modern* browsers [is incomplete](http://www.wufoo.com/html5/)
 3. Browser create validation error messages are difficult/impossible to re-style
 
 To address the realities of today's browser landscape, applications need to augment HTML5's form validation concepts with JavaScript. The Kendo UI Validator provides that solution.
@@ -59,7 +59,7 @@ Next, a Kendo UI Validator needs to be added to the page. In a JavaScript block 
         }
     });
 
-With this simple configuration, the unchanged HTML5 form validation attributes will now work in old and new browsers, and an application will have complete control over the content and styling of validation error messages. When the "Save" button is clicked, if any inputs do not pass all constraints, the Kendo UI Validator will display the appropriate valdiation error message. [View the Kendo UI Validator live demo](http://demos.telerik.com/kendo-ui/web/validator/index.html).
+With this simple configuration, the unchanged HTML5 form validation attributes will now work in old and new browsers, and an application will have complete control over the content and styling of validation error messages. When the "Save" button is clicked, if any inputs do not pass all constraints, the Kendo UI Validator will display the appropriate valdiation error message. [View the Kendo UI Validator live demo](http://demos.telerik.com/kendo-ui/validator/index).
 
 ## Default Validation Rules
 
