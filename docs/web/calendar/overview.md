@@ -12,12 +12,12 @@ position: 1
 
 ## Getting Started
 
-### Initialize the Calendar 
+### Initialize the Calendar
 
 Initialize the Calendar by using a jQuery selector:
-    
+
     <div id="calendar"></div>
-    
+
     <script>
         $(document).ready(function(){
             $("#calendar").kendoCalendar();
@@ -35,13 +35,13 @@ The Calendar provides many configuration options that can be set during initiali
 *   Navigation depth (i.e., define the last view to which the user can navigate)
 *   Day template
 *   Footer template
-    
+
 ### Define Selected, Min, and Max Dates
 
 Create a Calendar with a selected date and a defined minimum and maximum dates in the following way:
-    
+
     <div id="calendar"></div>
-    
+
     <script>
         $("#calendar").kendoCalendar({
             value: new Date(),
@@ -61,12 +61,12 @@ Define the first rendered view with the `start` option. Control the navigation d
 *   `decade` - shows the years of the decade
 *   `century` - shows the decades of the century
 
-### Create a Selectable Month Calendar 
+### Create a Selectable Month Calendar
 
 Create a Calendar that allows users to select a month in the following way:
-    
+
     <div id="calendar"></div>
-    
+
     <script>
         $("#calendar").kendoCalendar({
             start: "year",
@@ -81,9 +81,9 @@ Kendo UI Calendar allows rendered day customization for the `month` view.
 ### Custom Tamplates
 
 Create a Calendar by using a custom template in the following way:
-    
+
     <div id="calendar"></div>
-    
+
     <script>
         $("#calendar").kendoCalendar({
             month: {
@@ -91,7 +91,7 @@ Create a Calendar by using a custom template in the following way:
             }
         });
     </script>
- 
+
 The template wraps the `value` in a `<div>` HTML element. The structure of the data object that is passed to the template function:
 
     data = {
@@ -101,6 +101,43 @@ The template wraps the `value` in a `<div>` HTML element. The structure of the d
         dateString: "2011/0/1" // formatted date using yyyy/MM/dd format and month is zero-based
     };
 
+## Disable Dates
+
+Kendo UI Calendar widget provides the functionality to disable certain days, such as weekends, national holidays, and others, which are not intended to be selected by the end user.
+
+### Set an Array
+
+One way to disable a date is by setting an array. List the days that need to be disabled by using the first letters from their names in English:
+
+```html
+   <div id="calendar"></div>
+   <script>
+    $("#calendar").kendoCalendar({
+		value: new Date(),
+		disableDates: ["we", "th"],
+	});
+  </script>
+```
+
+### Add a Function
+
+The other way to disable dates is by adding a function and determine its return value as `true` for the date that is disabled:
+
+```html
+    <div id="calendar"></div>
+    <script>
+    $("#calendar").kendoCalendar({
+        disableDates: function (date) {
+            var disabled = [13,14,20,21];
+            if (date && disabled.indexOf(date.getDate()) > -1 ) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+	});
+    </script>
+```
 ## See Also
 
 Other articles on Kendo UI Calendar:

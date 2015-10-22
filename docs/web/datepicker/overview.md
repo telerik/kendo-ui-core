@@ -15,14 +15,14 @@ position: 1
 ### Initialize the DatePicker
 
     <input id="datePicker" />
-    
+
     <script>
         $(document).ready(function(){
             $("#datePicker").kendoDatePicker();
         });
     </script>
 
-> **Important**  
+> **Important**
 > The widget copies any styles and CSS classes from the input element to the wrapper element.
 
 ## Configuration
@@ -38,9 +38,9 @@ The DatePicker provides configuration options that can be set during initializat
 ### Define Selected, Min, and Max Dates
 
 Create a DatePicker with a selected date and a defined minimum and maximum dates in the following way:
-    
+
     <input id="datePicker" />
-    
+
     <script>
         $(document).ready(function(){
             $("#datePicker").kendoDatePicker({
@@ -67,7 +67,7 @@ Define the first rendered view with the `start` option. Control the navigation d
 Create a DatePicker that allows users to select a month in the following way:
 
     <input id="datePicker" />
-    
+
     <script>
         $("#datePicker").kendoDatePicker({
             start: "year",
@@ -75,6 +75,45 @@ Create a DatePicker that allows users to select a month in the following way:
         });
     </script>
 
+## Disable Dates
+
+Kendo UI DatePicker widget provides the functionality to disable certain days, such as weekends, national holidays, and others, which are not intended to be selected by the end user.
+
+### Set an Array
+
+One way to disable a date is by setting an array. List the days that need to be disabled by using the first letters from their names in English:
+
+```html
+    <input id="datePicker" />
+
+    <script>
+    $("#datePicker").kendoDatePicker({
+		value: new Date(),
+		disableDates: ["we", "th"],
+	});
+    </script>
+```
+
+### Add a Function
+
+The other way to disable dates is by adding a function and determine its return value as `true` for the date that is disabled:
+
+```html
+    <input id="datePicker" />
+
+    <script>
+        $("#datePicker").kendoDatePicker({
+            disableDates: function (date) {
+                var disabled = [13,14,20,21];
+                if (date && disabled.indexOf(date.getDate()) > -1 ) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+    </script>
+```
 ## See Also
 
 Other articles on Kendo UI DatePicker:
