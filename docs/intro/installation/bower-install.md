@@ -1,7 +1,7 @@
 ---
 title: Install Kendo UI as a Bower Package
 page_title: Install Kendo UI as a Bower Package
-description: "Install Kendo UI Professional or Kendo UI Core bower package."
+description: "Get HTML5 UI frameworks and widgets by installing Kendo UI Professional or Kendo UI Core bower package."
 previous_url: /install/bower
 position: 2
 ---

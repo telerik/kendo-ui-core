@@ -1,7 +1,7 @@
 ---
 title: List of Components and Their Bundle Support
 page_title: List of Components and Their Bundle Support
-description: "List of Kendo UI components for Kendo UI Core, Kendo UI Professional, and Kendo UI Complete distributions."
+description: "List of Kendo UI controls included in Kendo UI Core, Kendo UI Professional, and Kendo UI Complete distributions."
 previous_url: /intro/list-of-widgets
 position: 2
 ---

@@ -1,7 +1,7 @@
 ---
 title: JavaScript Prerequisites
 page_title: JavaScript Prerequisites
-description: "Overview of JavaScript prerequisites for installing Kendo UI widgets."
+description: "Overview of JavaScript prerequisites for installing Kendo UI widgets and frameworks."
 previous_url: /install/prerequisites, /javascript-dependencies, /intro/prerequisites
 position: 5
 ---

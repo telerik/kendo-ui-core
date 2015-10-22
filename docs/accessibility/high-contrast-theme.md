@@ -1,13 +1,12 @@
 ---
-title: High-contrast Support
-page_title: High-contrast Support
+title: High-contrast Theme
+page_title: High-contrast Theme
 related: a11y-accessibility-overview
-description: html 5 widgets with high-contrast support
-keywords: 
+description: "Accessibility support through setting Kendo UI high-contrast theme for HTML5 UI controls."
 position: 6
 ---
 
-# High-contrast Support
+# High-contrast Theme
 
 In addition to providing WAI-ARIA and keyboard support, Kendo UI ships with a high-contrast theme that can be used to serve users with low vision or other visual disabilities, which require a high contrast ratio between foreground and background elements.
 

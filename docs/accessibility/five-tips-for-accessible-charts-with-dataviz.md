@@ -1,12 +1,11 @@
 ---
-title: Charts Accessibility Support
-page_title: Charts Accessibility Support
-description: "Tips about how to make Kendo UI charts accessible."
-keywords: html 5 accessible charts
+title: Charts
+page_title: Charts
+description: "Tips and tricks how to make Kendo UI chart widgets accessible."
 position: 7
 ---
 
-# Charts Accessibility Support
+# Charts
 
 This article provides five practical tips (with code samples and illustrative videos) for making Kendo UI charts and graphs more accessible. These are things you can quickly and easily do in your applications to make them easier to access by disabled users through assistive technologies which interact with your content.
 

@@ -1,7 +1,7 @@
 ---
 title: Use Kendo UI CDN Services
 page_title: Use Kendo UI with CDN Services
-description: "Install Kendo UI by using Kendo CDN service."
+description: "Install HTML5 UI frameworks and widgets by using Kendo UI CDN service."
 previous_url: /install/cdn
 position: 3
 ---

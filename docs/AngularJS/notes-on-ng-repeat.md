@@ -1,25 +1,25 @@
 ---
-title: ng-repeat, ng-if and ng-bind integration
+title: Other Directives Support
+page_title: Other Directives Support
+description: "Learn more about the `ng-repeat`, `ng-if`, `ng-bind` directives supported by Kendo UI controls in AngularJS."
+position: 6
 ---
 
-{% raw %}
+# Other Directives Support 
 
+Prior to Kendo UI Q2 2015 release, the widgets which were instantiated over existing markup partially supported `ng-repeat`, `ng-if`, `ng-bind`, and other DOM manipulation directives in the markup. Subsequent changes to the markup, caused by those directives, were not handled correctly though.
 
-# `ng-repeat`, `ng-if` and `ng-bind` Support
+## Overview
 
-Prior to the Q2 2015 release, the Kendo UI widgets which were instantiated over existing markup **partially supported `ng-repeat`** and other DOM manipulation directives in the markup. Subsequent changes to the markup caused by those directives were not handled correctly, though.
+The widgets who exhibited that behavior were the `tabstrip`, `panelbar`, `menu`, `treeview` and several mobile widgets. The support of that behavior was accidental and not intentional, due to the directives instantiating the widgets in a `$timeout` (`setTimeout`) wrap.
 
-The widgets who exhibited that behavior were the *tabstrip*, *panelbar*, *menu*, *treeview* and several mobile widgets. The support of that behavior was accidental and not intentional, due to the directives instantiating the widgets in a `$timeout` (`setTimeout`) wrap.
-
-The timeout initialization caused several other issues, though. The widget instances were not accessible in a reliable manner; each widget instantiation required several additional `$scope.digest` cycles to be executed.
-Performance was negatively affected and the widget initialization was visible to the end user in certain scenarios. The [change from June 17th](https://github.com/telerik/kendo-ui-core/commit/0a4912ea9c14b2924d9914a5108ae2c2f636e4ed) removed the timeout implementation,
-effectively breaking the accidental `ng-repeat` support in later releases.
+The timeout initialization caused several other issues as well. The widget instances were not accessible in a reliable manner. Each widget instantiation required several additional `$scope.digest` cycles to be executed. Performance was negatively affected and the widget initialization was visible to the end user in certain scenarios. The [change from June 17](https://github.com/telerik/kendo-ui-core/commit/0a4912ea9c14b2924d9914a5108ae2c2f636e4ed) removed the timeout implementation, effectively breaking the accidental `ng-repeat` support in later releases.
 
 ## Suggested Approach
 
-The recommended means to achieve dynamic content generation for the listed widgets is through the `dataSource` configuration option.
+The recommended approach to achieve dynamic content generation for the listed widgets is through the `dataSource` configuration option.  
 
-### TreeView With DataSource in AngularJS
+###### Example - TreeView with `DataSource` in AngularJS
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -46,7 +46,8 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 </script>
 ```
 
-### PanelBar with DataSource in AngularJS
+###### Example - PanelBar with `DataSource` in AngularJS
+
 ```html
   <div ng-app="foo">
       <div ng-controller="MyCtrl">
@@ -92,7 +93,8 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
   </script>
 ```
 
-### TabStrip with DataSource in AngularJS
+###### Example - TabStrip with `DataSource` in AngularJS
+
 ```html
   <div ng-app="foo">
     <div ng-controller="MyCtrl">
@@ -119,7 +121,8 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
   </script>
 ```
 
-### Menu with DataSource in AngularJS
+###### Example - Menu with `DataSource` in AngularJS
+
 ```html
     <div ng-app="foo">
         <div ng-controller="MyCtrl">
@@ -158,14 +161,14 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
     </script>
 ```
 
-## `k-ng-delay` Workaround
+## `k-ng-delay` Approach
 
-If generating content with the data-source is not desired, a possible workaround of the behavior may be implemented using the `k-ng-delay` configuration option.
+If generating content with `DataSource` is not desired, a possible workaround of the behavior may be implemented using the `k-ng-delay` configuration option.
 
 > **Important**
-> The approach is not recommended, and has some side effects, like FOUC and decreased performance.
+> The approach is not recommended and has some side effects, such as FOUC (flash of unstyled content), and decreased performance.
 
-### TabStrip With Directives and Delayed Initialization
+###### Example - TabStrip with directives and delayed initialization
 
 ```html
 <div id="example" ng-app="KendoDemos">

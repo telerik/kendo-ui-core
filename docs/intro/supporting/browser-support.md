@@ -2,7 +2,7 @@
 title: Web Browser and Operating System Support
 page_title: Web Browser and Operating System Support
 previous_url: /technical-requirements.html, /getting-started/technical-requirements, /browsers-support, /intro/browser-support
-description: "Browsers and operating systems supported by Kendo UI."
+description: "Browsers and operating systems supported by Kendo UI widgets and frameworks."
 position: 1
 ---
 
