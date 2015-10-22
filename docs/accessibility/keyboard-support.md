@@ -1,12 +1,11 @@
 ---
-title: Keyboard Support
-page_title: Keyboard Support
-description: "Accessibility through keyboard shortcuts supported by Kendo UI components."
-keywords: html 5 widgets keyboard support
+title: Keyboard Shortcuts
+page_title: Keyboard Shortcuts
+description: "Accessibility through keyboard shortcuts supported by Kendo UI controls."
 position: 4
 ---
 
-# Keyboard Support
+# Keyboard Shortcuts
 
 Keyboard access is a very significant aspect of the interaction between disabled users and the Web. The more the functionalities of your project that users can handle through the keyboard, the wider the variety of assistive technologies that can be used by disabled users. 
 

@@ -1,8 +1,7 @@
 ---
 title: Overview
 page_title: Overview
-description: "An overview of Accessibility standards Kendo UI components support."
-keywords: html 5 widgets accessibility overview
+description: "An overview of the Accessibility standards Kendo UI controls support."
 position: 1
 ---
 

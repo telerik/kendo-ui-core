@@ -1,16 +1,17 @@
 ---
-title: Global Kendo UI events in AngularJS
+title: Global Events
+page_title: Global Events  
+description: "Learn more about the Kendo UI global events in AngularJS to take full advantage of AngularJS integration into Kendo UI controls."
+position: 2
 ---
 
-{% raw %}
+# Global Events
 
-# Global Kendo UI Events in AngularJS
-
-The Kendo UI directives emit a `"kendoWidgetCreated"` event for each widget which is created, and a `"kendoRendered"` event after all widgets defined in the page were created.
+Kendo UI directives emit a `kendoWidgetCreated` event for each widget that is created, and a `kendoRendered` event after all widgets, defined in the page, were created.
 
 ## `kendoWidgetCreated`
 
-For example, suppose we want to create a TreeView widget that automatically expands the checked items upon initialization. We can't easily do without "kendoWidgetCreated" because the widget is not instantiated at the time our controller function runs, but only after (that should be obvious, since the widget is built from data defined by the controller). 
+Suppose you want to create a TreeView widget that automatically expands the checked items upon initialization. You cannot easily do it without the `kendoWidgetCreated` event, because the widget is not instantiated at the time your `controller` function runs, but after it was finalized. This is logical as the widget is built from data which is defined within the `controller`:
 
 ###### Example - listen to the `kendoWidgetCreated` event
 
@@ -87,7 +88,7 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 
 ## `kendoRendered`
 
-This event might be useful to know when all widgets defined in page have been rendered, since everything happens asynchronously. Using it you can for instance hide the view initially and display it when widgets have been initialized; or you can show a “loading” overlay, etc.
+Because browsers render data asynchronously, the `kendoRendered` event is useful to manipulate the view of a page while the widgets, defined on this page, finish their rendering. For example, you can use `kendoRendered` to initially hide the view and then display it when the widgets are already initialized, or you can show a **Loading...** overlay, or whatever you decide fits to your project.
 
 ###### Example - listen to the `kendoRendered` event
 
@@ -103,5 +104,3 @@ angular.module("app", [ "kendo.directives" ]).controller("MyCtrl", function($sco
 });
 </script>
 ```
-
-{% endraw %}

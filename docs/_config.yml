@@ -74,7 +74,7 @@ navigation:
         title: "API Reference"
         position: -15
     "accessibility":
-        title: "Accessibility"
+        title: "Accessibility Support"
         position: 18
     "mobile/listview":
         title: "Mobile ListView"

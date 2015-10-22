@@ -1,13 +1,12 @@
 ---
-title: WAI-ARIA Support
-page_title: WAI-ARIA Support
+title: WAI-ARIA
+page_title: WAI-ARIA
 related: a11y-accessibility-overview, a11y-keyboard-support
 description: "WAI-ARIA Accessibility standards and their built-in support in Kendo UI components."
-keywords: html 5 widgets wai-aria support
 position: 3
 ---
 
-# WAI-ARIA Support
+# WAI-ARIA
 
 [WAI-ARIA](http://www.w3.org/WAI/PF/aria-practices/) is a World Wide Web Consortium specification that is designed to be a framework for web developers to use in developing applications that leverage Ajax, scripting and other rich application techniques. The framework specifies a series of steps that developers can use in their own applications to make them more accessible to assistive technologies such as screen readers.
 

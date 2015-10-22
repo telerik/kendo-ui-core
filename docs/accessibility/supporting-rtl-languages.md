@@ -1,13 +1,12 @@
 ---
-title: Right-to-Left Language Support
-page_title: Right-to-Left Language Support
+title: Right-to-Left Languages
+page_title: Right-to-Left Languages
 related: a11y-accessibility-overview, widget-appearance-rtl
-description: "Accessibility features related to bidirectional (right-to-left) languages, supported by Kendo UI components."
-keywords: html 5 widgets right-to-left language support
+description: "Accessibility features related to bidirectional (right-to-left) languages, supported by Kendo UI controls."
 position: 5
 ---
 
-# Right-to-Left (RTL) Language Support
+# Right-to-Left Languages
 
 Right-to-Left, or RTL, support is a phrase commonly-used to describe the ability of a library, website, or application to handle and respond to users, who communicate through a right-to-left language such as Arabic, Hebrew, Chinese or Japanese. Left-to-right is the default language input for most users of the web, but many websites and applications wish to also provide RTL support for their visitors.
 

@@ -1,16 +1,17 @@
 ---
-title: DataSource vs. Angular scope
+title: DataSource
+page_title: DataSource  
+description: "Learn more about the interaction between Kendo UI DataSource and AngularJS scope to take full advantage of AngularJS integration into Kendo UI controls."
+position: 3
 ---
 
-{% raw %}
+# DataSource
 
-# Kendo DataSource vs. Angular Scope
+Most Kendo UI widgets work with a DataSource object. Kendo UI strives hard to keep simple cases simple, so you do not always have to create the DataSource object yourself.
 
-Most Kendo UI widgets work with a DataSource object. Kendo strives hard to keep simple cases simple, so you don't always have to create the DataSource object yourself.
+Below is an example with static, local data. When you select an item in the grid, two input fields become available and they are bound to that item's data. Editing the data in the input fields works as expected: the grid magically updates. 
 
-Below is an example with static, local data. When you select an item in the grid, two input fields become available and they are bound to that item's data. Editing the data in the input fields will work as expected — the grid magically updates. But if you click the button (“Update from code”) nothing appears to happen.
-
-###### Example - trying to update data source
+###### Example - trying to update the data source
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -48,13 +49,10 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 });
 </script>
 ```
-The reason why this happens is because the grid's data source is actually a different object from $scope.gridData. When the widget initializes it creates a DataSource object as a copy of the original object. Changing the original object has no effect on the grid.
 
-## The Fix
+However, if you click the **UPDATE FROM CODE** button, nothing appears to happen. The reason why this is so is because the grid's data source is actually a different object from `$scope.gridData`. When the widget initializes it creates a `DataSource` object as a copy of the original object. Changing the original object has no effect on the grid.
 
-To fix this issue we need to create and place in scope the data source object ourselves. Only the controller changes, the markup is the same:
-
-#### Use `kendo.data.ObservableArray` to update the data source
+**Solution**: Create and place in scope the data source object yourself. Only the `controller` changes while the markup is the same. Use `kendo.data.ObservableArray` to update the data source:   
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -91,10 +89,9 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 });
 </script>
 ```
-Note that I used [ObservableObject](/api/framework/observableobject.md)'s `set` method in order to update the object. This is the recommended way. In this particular case the following will work too:
+
+Note that the recommended way to update the object is to use the `set` method of the [ObservableObject](/api/framework/observableobject.md). However, in this particular case the following approach works too:
 
     $scope.gridData[0].track = "Hey you";
 
-but that's because of a relatively ugly hack: when grid columns don't declare a template property, Angular-Kendo bindings will automatically initialize it with a template which uses `{{angular}}` expressions. So if you just set the property in the object, the display will update, but it's Angular, not Kendo, who manages that. The grid itself would not be notified about a change in the data. In general we recommend using methods of the Observable objects to manage the data, that's the only guaranteed way that widgets will properly update.
-
-{% endraw %}
+The reason behind this is the fact that when grid columns do not declare a template property, Angular-Kendo bindings automatically initialize it with a template, which uses `{{angular}}` expressions. So, if you just set the property in the object, the display will update, but it is Angular, not Kendo, that manages the update. The grid itself would not be notified about a change in the data. In general, try to use methods of the Observable objects to manage the data as this is the only guaranteed way that widgets will properly update.

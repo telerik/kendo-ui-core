@@ -1,26 +1,25 @@
 ---
 title: Memory Leaks
-page_title: Memory Usage Leaks with Kendo UI and AngularJS
+page_title: Memory Leaks
+description: "Learn where to look for memory leaks and how to handle them while working with Kendo UI controls and AngularJS."
+position: 5
 ---
 
-# Memory Usage Leaks with Kendo UI and AngularJS
+# Memory Leaks
 
-Under certain conditions, several Kendo UI users have discovered that the browser memory usage continuously increases when data-bound widgets (like the Grid) are created and destroyed in the AngularJS context.
-Usually this occurs in conjunction with the AngularJS routing.
+Under certain conditions, the browser memory usage continuously increases when data-bound widgets, such as the Grid, are created and destroyed in the AngularJS context. Many of these reports are related to the AngularJS routing.
 
-## The "right way" to Look for Memory Leaks
+## Look for Memory Leaks
 
-Such reports are not unique to the Kendo UI directives.
-The [Angular JS repository](https://github.com/angular/angular.js) features several threads which dig into various aspects of the problem, [Issue #4864](https://github.com/angular/angular.js/issues/4864) being one of the most prominent ones.
-The [post from Igor Minar](https://github.com/angular/angular.js/issues/4864#issuecomment-29394307) offers several insights which highlight most of the problems our team has stumbled upon too. The takeaways are the following:
+Memory leak reports are not unique to Kendo UI directives. The [Angular JS repository](https://github.com/angular/angular.js) features several threads which dig into various aspects of the problem, [Issue #4864](https://github.com/angular/angular.js/issues/4864) being among the most prominent ones. The [post from Igor Minar](https://github.com/angular/angular.js/issues/4864#issuecomment-29394307) offers several insights, which highlight most of the problems our team has stumbled upon too. The takeaways are the following:
 
-- Use new, "clean" chrome profile for testing, since extensions may cause false leaks. Incognito mode works, too. From our experience, ad blockers are quite common causes.
-- Triggering the garbage collect will cause many "leaked" detached DOM nodes to be collected. If this is not so, then there is a real problem present.
-- According to Igor, the Chrome browser should be started with `--js-flags="--nocrankshaft --noopt"`. We did not notice any effect of these flags in our test cases, though.
+- Use new, "clean" Chrome profile for testing, since extensions may cause false leaks. Incognito mode works, too. From our experience, ad blockers represent quite a common cause.
+- Triggering the garbage collect causes many "leaked" detached DOM nodes to be collected. If this is not so, then there is a real problem present.
+- According to Igor, the Chrome browser must be started with `--js-flags="--nocrankshaft --noopt"`. We did not notice any effect of these flags in our test cases, though.
 
 ## Create a Simple Test Case
 
-In order to verify that our implementation does not differ from the default AngularJS behavior, we created a simplified test case which uses the `ng-repeat` directive and the router:
+To verify that your implementation does not differ from the default AngularJS behavior, create a simplified test case which uses the `ng-repeat` directive and the router. The code is available in [the Dojo](http://dojo.telerik.com/@petyosi/ipaJE), too:
 
 ```html
 <!DOCTYPE html>
@@ -70,13 +69,11 @@ In order to verify that our implementation does not differ from the default Angu
 </html>
 ```
 
-The code is available in [the Dojo](http://dojo.telerik.com/@petyosi/ipaJE), too.
-
-Let's observe how the page performs in the Chrome timeline by recording the sample above:
+Observe how the page performs in the Chrome timeline by recording the sample above:
 
 <img src="leak-ng-repeat.png" width="600" />
 
-The DOM count increases as the routes toggle with each other. This looks like a leak. Let's perform the same, but we will force the garbage collect during the recording:
+The DOM count increases as the routes toggle with each other. This looks like a leak. Perform the same, but force the garbage collect during the recording:
 
 <img src="leak-ng-repeat-gc.png" width="600" />
 
@@ -84,7 +81,7 @@ The seemingly retained detached nodes are getting collected by the garbage colle
 
 ## Extend the Test to Kendo UI Grid
 
-Let's replace the repeat directive above with a Kendo UI Grid.
+Replace the `repeat` directive above with a Kendo UI Grid:
 
 ```html
 <!DOCTYPE html>
@@ -147,14 +144,12 @@ The sample above performs in the same way. Nodes are retained, but collecting th
 
 <img src="leak-kendo-grid-gc.png" width="600" />
 
-
-Based on this research, we consider the memory usage of the Kendo UI directives (although not perfect) to be unavoidable given the AngularJS context.
+Based on this research, you can consider the memory usage of the Kendo UI directives (although not perfect) to be unavoidable given the AngularJS context.
 
 > **Important**  
-> Worth noticing is that the majority of the Kendo UI widgets do not exhibit such leaks outside of the AngularJS context.
+> Note that the majority of Kendo UI widgets do not exhibit such leaks outside of the AngularJS context. 
 
-One fix that has worked has been to clean up before a route change. So wherever we change to a new route via $location.path('/my/new/route'), we execute some extra code to clear out the HTML in the prior view using: 
+A fix that works is to clean up before a route change. So, wherever you change to a new route via `$location.path('/my/new/route')`, you execute some extra code to clear out the HTML in the prior view using: 
 
     kendo.destroy(document.body);
     $('.view-root-node').html('');
-    
