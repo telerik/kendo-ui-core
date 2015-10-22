@@ -11,7 +11,7 @@ Prior to Kendo UI Q2 2015 release, the widgets which were instantiated over exis
 
 ## Overview
 
-The widgets who exhibited that behavior were the `tabstrip`, `panelbar`, `menu`, `treeview` and several mobile widgets. The support of that behavior was accidental and not intentional, due to the directives instantiating the widgets in a `$timeout` (`setTimeout`) wrap.
+The widgets which exhibited that behavior were the `tabstrip`, `panelbar`, `menu`, `treeview` and several mobile widgets. The support of that behavior was accidental and not intentional, due to the directives instantiating the widgets in a `$timeout` (`setTimeout`) wrap.
 
 The timeout initialization caused several other issues as well. The widget instances were not accessible in a reliable manner. Each widget instantiation required several additional `$scope.digest` cycles to be executed. Performance was negatively affected and the widget initialization was visible to the end user in certain scenarios. The [change from June 17](https://github.com/telerik/kendo-ui-core/commit/0a4912ea9c14b2924d9914a5108ae2c2f636e4ed) removed the timeout implementation, effectively breaking the accidental `ng-repeat` support in later releases.
 
