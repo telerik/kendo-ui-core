@@ -169,9 +169,9 @@ Fires when the view transition starts. The `type` event data is set to either `"
 
     <script>
     var foo = new kendo.View("<span>Foo</span>");
-    var bar = new kendo.View("<span>Bar</span>", { transitionStart: function() { console.log(e) });
+    var bar = new kendo.View("<span>Bar</span>", { transitionStart: function() { console.log(e) }});
 
-    var layout = new kendo.Layout("<header>Header</header><section id="content"></section><footer></footer>");
+    var layout = new kendo.Layout("<header>Header</header><section id='content'></section><footer></footer>");
 
     layout.render($("#app"));
 
