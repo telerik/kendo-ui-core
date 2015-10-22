@@ -13,7 +13,7 @@ position: 2
 Kendo UI maintains 2 bower packages, namely Kendo UI Core and Kendo UI Professional. Official releases, service packs and internal builds are uploaded to both of them.
 
 > **Important**  
-> Kendo UI Professional bower package is available for licensed user accounts only. Check out the [list of Kendo UI components and their bundle support](/intro/supporting/list-of-widgets).
+> Kendo UI Professional bower package is available only for **commercial license holders**. Check out the [list of Kendo UI components and their bundle support](/intro/supporting/list-of-widgets).
 
 ## Option 1: Install Kendo UI Core Bower Package
 
