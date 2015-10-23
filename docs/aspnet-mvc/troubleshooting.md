@@ -44,7 +44,7 @@ If using ASP.NET bundles make sure the `Scripts.Render("~/bundles/jquery")` bloc
 
 This error occurs after upgrading jQuery to 1.9. The `live` method is no longer available in this version of jQuery.
 As a result some JavaScript libraries which are often used in ASP.NET MVC applications will throw errors.
-Those libraries are **jquery.unobtrusive-ajax**, **jquery.validate** and **jquery.validate.unobtrusive**. You need to update the following packages via [Nuget](http://nuget.org/):
+Those libraries are **jquery.unobtrusive-ajax**, **jquery.validate** and **jquery.validate.unobtrusive**. You need to update the following packages via [Nuget](https://www.nuget.org/):
 
 * [jQuery.Validation](https://www.nuget.org/packages/jQuery.Validation)
 * [Microsoft.jQuery.Unobtrusive.Ajax](https://www.nuget.org/packages/Microsoft.jQuery.Unobtrusive.Ajax)

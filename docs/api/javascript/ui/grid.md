@@ -5462,7 +5462,7 @@ The [template](/api/framework/kendo#methods-template) which renders rows. Be def
     });
     </script>
 
-> Check [Row template](http://demos.telerik.com/kendo-ui/web/grid/rowtemplate.html) for a live demo.
+> Check [Row template](http://demos.telerik.com/kendo-ui/grid/rowtemplate) for a live demo.
 
 ### scrollable `Boolean|Object` *(default: true)*
 

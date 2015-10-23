@@ -484,3 +484,41 @@
 .k-i-format-number:before {
 	content: "\e698";
 }
+
+.additional-icons {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.additional-icons:after {
+  content: "";
+  display: block;
+  clear: both;
+  height: 0;
+}
+
+.additional-icons li {
+    float: left;
+    margin: 0;
+    padding: 8px 0px;
+    width: 296px;
+    text-align: left;
+    color: #787878;
+    font-size: 13px;
+}
+
+.icon-preview {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    text-decoration: none;
+    color: #333;
+    margin: 0 10px 0 0;
+    font-size: 16px;
+    border: 1px solid #ebecee;
+    background-color: #f5f7f8;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 5px;
+}
