@@ -63,7 +63,7 @@ To set the server-side culture you need to update the **web.config** file of you
     </system.web>
 
 ##### Per-request
-Override the [Controller.Initialize](https://msdn.microsoft.com/en-us/library/system.web.mvc.controller.initialize(v=vs.118).aspx) method to set the [CurrentCulture](http://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.currentculture.aspx)
+Override the [Controller.Initialize](https://msdn.microsoft.com/en-us/library/system.web.mvc.controller.initialize(v=vs.118).aspx) method to set the [CurrentCulture](https://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.currentculture.aspx)
 and [CurrentUICulture](http://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.currentuiculture.aspx).
 
     protected override void Initialize(System.Web.Routing.RequestContext requestContext)

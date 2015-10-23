@@ -9,7 +9,7 @@ description: How to create the editing UI of Kendo Grid ASP.NET MVC with ASP.NET
 ## Introduction
 
 Kendo Grid for ASP.NET MVC relies on ASP.NET MVC editor templates to create the editing UI. If the grid is configured for
-in-line or in-cell editing the [Html.EditorFor](http://msdn.microsoft.com/en-us/library/system.web.mvc.html.editorextensions.editorfor.aspx) method
+in-line or in-cell editing the [Html.EditorFor](https://msdn.microsoft.com/en-us/library/system.web.mvc.html.editorextensions.editorfor.aspx) method
 is used to get the editor HTML for every property which is editable. So for this configuration:
 
     Html.Kendo().Grid<Order>()
@@ -89,7 +89,7 @@ to the **~/Views/Shared/EditorTemplates** folder e.g. `EmployeeEditor.ascx` or `
 
             return View();
         }
-5. Decorate the `Employee` property with the [UIHint](http://msdn.microsoft.com/en-us/library/cc679268) attribute. It needs the name of the editor template created in
+5. Decorate the `Employee` property with the [UIHint](https://msdn.microsoft.com/en-us/library/cc679268) attribute. It needs the name of the editor template created in
 step 3 sans the extension i.e. `"EmployeeEditor"`.
 
         public class Order

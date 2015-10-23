@@ -64,7 +64,7 @@ You can find a sample JSP Spring MVC application in the **\wrappers\jsp\spring-d
         <link href="resources/styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
         <script src="resources/js/jquery.min.js"></script>
         <script src="resources/js/kendo.web.min.js"></script>
-1.  Configure your page to include the Kendo UI DataViz JavaScript and CSS files. **Important**: If you want to use Kendo UI Web and DataViz at the same time you should include **kendo.all.min.js** instead of **kendo.web.min.js** and **kendo.dataviz.min.js**. You can also create a custom JavaScript file using the [Custom Download Builder](http://www.telerik.com/download/custom-download).
+1.  Configure your page to include the Kendo UI DataViz JavaScript and CSS files. **Important**: If you want to use Kendo UI Web and DataViz at the same time you should include **kendo.all.min.js** instead of **kendo.web.min.js** and **kendo.dataviz.min.js**. You can also create a custom JavaScript file using the [Custom Download Builder](https://www.telerik.com/login/v2/telerik?ReturnUrl=http%3a%2f%2fwww.telerik.com%2fdownload%2fcustom-download).
 
         <link href="resources/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
         <link href="resources/styles/kendo.dataviz.min.css" rel="stylesheet" type="text/css" />

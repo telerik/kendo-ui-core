@@ -73,7 +73,7 @@ The [hybrid UI widgets and frameworks](/intro/supporting/list-of-widgets) are in
 * Exporting a zoomed in/out page to PDF is not supported.
 * [Quirks mode](http://www.quirksmode.org/css/quirksmode.html) is not supported
 > **Important**  
-> Always specify a [DOCTYPE](http://reference.sitepoint.com/html/doctypes). Recommended doctypes include `HTML5`, `XHTML 1.1`, `XHTML 1.0 Strict` and `HTML4 Strict`. The `HTML4 Transitional` DOCTYPE fires the Quirks mode and should not be used. `XHTML 1.0 Transitional` works well in most cases, but may cause issues with the vertical positioning of icons. The correct syntax for [all doctypes](http://www.w3.org/QA/2002/04/valid-dtd-list.html) is provided on the [W3C website](http://www.w3.org/).
+> Always specify a [DOCTYPE](http://www.sitepoint.com/web-foundations/doctypes/). Recommended doctypes include `HTML5`, `XHTML 1.1`, `XHTML 1.0 Strict` and `HTML4 Strict`. The `HTML4 Transitional` DOCTYPE fires the Quirks mode and should not be used. `XHTML 1.0 Transitional` works well in most cases, but may cause issues with the vertical positioning of icons. The correct syntax for [all doctypes](http://www.w3.org/QA/2002/04/valid-dtd-list.html) is provided on the [W3C website](http://www.w3.org/).
 
 * Internet Explorer compatibility modes are not supported. These modes can exhibit different behavior and rendering bugs as compared to the browser versions they emulate.
 * Windows Universal apps and Cordova for Windows environments are not supported, due to the [sandbox restrictions of the environment](https://msdn.microsoft.com/en-us/library/windows/apps/hh849625.aspx#Automatic_script_filtering). The recommended UI suite for this environment is [UI for Windows Universal](http://www.telerik.com/windows-universal-ui).

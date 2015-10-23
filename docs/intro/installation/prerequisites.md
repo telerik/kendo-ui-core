@@ -42,7 +42,7 @@ Occasionally, a legacy web application might require an older jQuery version wit
 
 ## AngularJS
 
-From Q2 2014 release onward, Kendo UI widgets support [AngularJS](http://angularjs.org/) integration. To activate the AngularJS directives, you need to install the AngularJS library. Just like jQuery, its minified format is located is in the `js` directory of the Kendo UI bundle you have downloaded.
+From Q2 2014 release onward, Kendo UI widgets support [AngularJS](https://angularjs.org/) integration. To activate the AngularJS directives, you need to install the AngularJS library. Just like jQuery, its minified format is located is in the `js` directory of the Kendo UI bundle you have downloaded.
 
 > **Important**  
 > Unlike jQuery, Kendo UI distributions do not need AngularJS in order to function correctly.
