@@ -122,10 +122,10 @@ Fires when the View is replaced in a layout placeholder.
     <div id="app"></div>
 
     <script>
-    var foo = new kendo.View("<span>Foo</span>", { hide: function() { console.log("Foo is hidden now"); });
+    var foo = new kendo.View("<span>Foo</span>", { hide: function() { console.log("Foo is hidden now"); }});
     var bar = new kendo.View("<span>Bar</span>");
 
-    var layout = new kendo.Layout("<header>Header</header><section id="content"></section><footer></footer>");
+    var layout = new kendo.Layout("<header>Header</header><section id='content'></section><footer></footer>");
 
     layout.render($("#app"));
 
@@ -142,7 +142,7 @@ Fires the first time the view renders.
     <div id="app"></div>
 
     <script>
-    var view = new kendo.View("Hi!", { init: function() { console.log("View is initiated") } });
+    var view = new kendo.View("Hi!", { init: function() { console.log("View is initiated"); } });
     view.render($("#app"));
     </script>
 
@@ -169,9 +169,9 @@ Fires when the view transition starts. The `type` event data is set to either `"
 
     <script>
     var foo = new kendo.View("<span>Foo</span>");
-    var bar = new kendo.View("<span>Bar</span>", { transitionStart: function() { console.log(e) });
+    var bar = new kendo.View("<span>Bar</span>", { transitionStart: function() { console.log(e) }});
 
-    var layout = new kendo.Layout("<header>Header</header><section id="content"></section><footer></footer>");
+    var layout = new kendo.Layout("<header>Header</header><section id='content'></section><footer></footer>");
 
     layout.render($("#app"));
 
@@ -189,9 +189,9 @@ Fires after the view transition container has its `k-fx-end` class set. The `typ
 
     <script>
     var foo = new kendo.View("<span>Foo</span>");
-    var bar = new kendo.View("<span>Bar</span>", { transitionEnd: function() { console.log(e) });
+    var bar = new kendo.View("<span>Bar</span>", { transitionEnd: function() { console.log(e) }});
 
-    var layout = new kendo.Layout("<header>Header</header><section id="content"></section><footer></footer>");
+    var layout = new kendo.Layout("<header>Header</header><section id='content'></section><footer></footer>");
 
     layout.render($("#app"));
 
