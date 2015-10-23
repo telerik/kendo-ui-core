@@ -5,7 +5,7 @@ description: "Learn more about the `ng-repeat`, `ng-if`, `ng-bind` directives su
 position: 6
 ---
 
-# Other Directives Support 
+# Specific Directives Support
 
 Prior to Kendo UI Q2 2015 release, the widgets which were instantiated over existing markup partially supported `ng-repeat`, `ng-if`, `ng-bind`, and other DOM manipulation directives in the markup. Subsequent changes to the markup, caused by those directives, were not handled correctly though.
 
