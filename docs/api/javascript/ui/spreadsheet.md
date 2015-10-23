@@ -563,6 +563,9 @@ The header column width in pixels.
 ##### options.dataSource  `kendo.data.DataSource`
 The data source for this sheet.
 
+##### options.data `Object`
+The sheet state and data as `Object`.  The schema follows the same structure as the [widget configuration](/api/javascript/ui/spreadsheet#configuration).
+
 #### Returns
 
 `kendo.spreadsheet.Sheet` the inserted sheet.
