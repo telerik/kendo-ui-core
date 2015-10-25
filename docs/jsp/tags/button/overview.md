@@ -17,7 +17,7 @@ The **Button** widget can be initialized from any element, defined via the `tag`
 
 The **Button** can include both inline and block elements defined via `content`. One should take into account web standards, which prohibit placing block elements (e.g. `div`, `p`) inside inline elements (e.g. `a`, `span`).
 
-Placing clickable elements with their own special behavior inside the **Button** (e.g. hyperlinks, textboxes, etc) may cause undesired side efects.
+Placing clickable elements with their own special behavior inside the **Button** (e.g. hyperlinks, textboxes, etc) may cause undesired side effects.
 
 ### Button initialization examples
 
