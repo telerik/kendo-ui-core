@@ -63,7 +63,9 @@ where more information can be found.
 
 * The workaround is to force the *Internet Exprorer* to use the 'Edge' mode:
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+ ```
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+ ```
 
 * The other option is to path jQuery. You can find more information about the possible path in the aforementioned jQuery bug report.
 
