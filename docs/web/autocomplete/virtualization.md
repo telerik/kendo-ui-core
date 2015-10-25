@@ -1,4 +1,4 @@
-
+---
 title: Virtualization
 page_title: Kendo UI AutoComplete Virtualization
 description: This document provides information how to configure virtualization in Kendo UI AutoComplete
