@@ -56,7 +56,7 @@ Once a reference has been established, you can use the [API](/api/javascript/dat
     // Put this after your Kendo Map for ASP.NET MVC declaration
     <script>
     $(function() {
-        // Notice that the Name() of the mao is used to get its client-side instance
+        // Notice that the Name() of the map is used to get its client-side instance
         var map = $("#map").data("kendoMap");
     });
     </script>
@@ -64,7 +64,7 @@ Once a reference has been established, you can use the [API](/api/javascript/dat
 
 ## Handling Kendo UI Map events
 
-You can subscribe to all [events](/api/javascript/dataviz/ui/map#events) exposed by Kendo UI Editor:
+You can subscribe to all [events](/api/javascript/dataviz/ui/map#events) exposed by Kendo UI Map:
 
 ### Razor - subscribe by handler name
 
