@@ -1,0 +1,65 @@
+@checkbox-border-color: darken(@base, 12%);
+@checkbox-border-radius: 3px;
+@checkbox-background-color: @background;
+@checkbox-hover-border-color: darken(@base, 24%);
+@checkbox-hover-box-shadow: none;
+@checkbox-checked-border-color: darken(@base, 12%);
+@checkbox-checked-background-color: @background;
+@checkbox-checked-color: @accent;
+@checkbox-active-border-color: lighten(@accent, 13%);
+@checkbox-active-box-shadow: 0 0 2px 0 @checkbox-active-border-color;
+@checkbox-disabled-background-color: @background;
+@checkbox-disabled-color: darken(@base, 29%);
+@checkbox-disabled-border-color: darken(@base, 12%);
+
+.k-checkbox-label:before{
+    border-color: @checkbox-border-color;
+    background: @checkbox-background-color;
+    border-radius: @checkbox-border-radius;
+}
+
+.k-checkbox-label:hover:before,
+.k-checkbox:checked + .k-checkbox-label:hover:before  {
+    border-color: @checkbox-hover-border-color;
+    box-shadow: @checkbox-hover-box-shadow;
+}
+
+.k-checkbox:checked + .k-checkbox-label:before {
+    background-color: @checkbox-checked-background-color;
+    border-color: @checkbox-checked-border-color;
+    color: @checkbox-checked-color;
+}
+
+.k-checkbox-label:active:before {
+    box-shadow: @checkbox-active-box-shadow;
+    border-color: @checkbox-active-border-color;
+}
+
+.k-checkbox:checked + .k-checkbox-label:active:before {
+    box-shadow: @checkbox-active-box-shadow;
+    border-color: @checkbox-active-border-color;
+}
+
+.k-checkbox:disabled + .k-checkbox-label {
+    color: @checkbox-disabled-color;
+}
+
+.k-checkbox:disabled + .k-checkbox-label:hover:before {
+    box-shadow: none;
+}
+
+.k-checkbox:disabled + .k-checkbox-label:before,
+.k-checkbox:checked:disabled + .k-checkbox-label:before,
+.k-checkbox:checked:disabled + .k-checkbox-label:active:before,
+.k-checkbox:checked:disabled + .k-checkbox-label:hover:before  {
+    color: @checkbox-disabled-color;
+    background: @checkbox-disabled-background-color;
+    border-color: @checkbox-disabled-border-color;
+    border-radius: @checkbox-border-radius;
+}
+
+.k-checkbox:focus + .k-checkbox-label:before {
+  border-color: @checkbox-active-border-color;
+  box-shadow: @checkbox-active-box-shadow;
+}
+

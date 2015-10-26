@@ -1270,54 +1270,17 @@ input.k-textbox:active {
     .box-shadow(@popups-shadow);
 }
 
-/* Checkboxes */
-.k-checkbox-label {
-    color: @normal-text-color;
-}
+@import "themes/checkbox.less";
 
-.k-checkbox-label:before {
-   border-color: darken(@widget-background-color, 12%);
-   border-radius: @inputs-border-radius;
-}
-
-.k-checkbox-label:after{
-   border-color: darken(@widget-background-color, 12%);
-   background: @widget-background-color;
-   border-radius: @inputs-border-radius;
-}
-
-.k-checkbox:checked + .k-checkbox-label:after {
-   background-color: @widget-background-color;
-   border-color: darken(@widget-background-color, 12%); 
-   border-radius: @inputs-border-radius;
-   color: @accent;
-}
-
-.k-checkbox:checked + .k-checkbox-label:active:after {
-    border-color: @accent;
-}   
-
-.k-checkbox:checked + .k-checkbox-label:active:before {
-    border-radius: @inputs-border-radius; 
-}
-
-.k-checkbox:disabled + .k-checkbox-label {
-   color: @disabled-border-color;
-   opacity: .6;
-}
-
-.k-checkbox:checked:disabled + .k-checkbox-label:after {
-    background: @widget-background-color;
-    color: @accent;
-}
- 
-.k-checkbox:disabled + .k-checkbox-label:after,
-.k-checkbox:checked:disabled + .k-checkbox-label:active:after,
-.k-checkbox:disabled + .k-checkbox-label:hover:before,
-.k-checkbox:checked:disabled + .k-checkbox-label:hover:after {
-    border-color: @disabled-border-color;
-    border-radius: @inputs-border-radius;
-}
+@checkbox-border-color: darken(@widget-background-color, 12%);
+@checkbox-border-radius: @inputs-border-radius;
+@checkbox-background-color: @widget-background-color;
+@checkbox-hover-border-color: darken(@base, 24%);
+@checkbox-hover-box-shadow: none;
+@checkbox-checked-border-color: darken(@widget-background-color, 12%);
+@checkbox-checked-background-color: @widget-background-color;
+@checkbox-active-border-color: @accent;
+@checkbox-active-box-shadow: none;
 
 /* RadioButtons */
 .k-radio-label:before {  
@@ -1359,7 +1322,6 @@ input.k-textbox:active {
     border-color: darken(@widget-background-color, 12%);
 }
 
-.k-checkbox:focus + .k-checkbox-label:after,
 .k-radio:focus + .k-radio-label:before {
     border-color: @accent;
 }
