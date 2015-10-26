@@ -18,7 +18,7 @@ that the default `type` HTML attribute for buttons is `submit`. Clicking the but
 
 The **Button** can include both inline and block elements, but one should take into account web standards, which prohibit placing block elements (e.g. `div`, `p`) inside inline elements (e.g. `a`, `span`).
 
-Placing clickable elements with their own special behavior inside the **Button** (e.g. hyperlinks, textboxes, etc) may cause undesired side efects.
+Placing clickable elements with their own special behavior inside the **Button** (e.g. hyperlinks, textboxes, etc) may cause undesired side effects.
 
 ### Button initialization example
 
