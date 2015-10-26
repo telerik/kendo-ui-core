@@ -124,7 +124,7 @@ var __meta__ = { // jshint ignore:line
             that._addClassProxy = function() {
                 that._active = true;
 
-                if (that._cell.hasClass("k-state-disabled")) {
+                if (that._cell.hasClass(DISABLED)) {
                     var todayString = that._view.toDateString(getToday());
                     that._cell = that._cellByDate(todayString);
                 }
@@ -622,8 +622,8 @@ var __meta__ = { // jshint ignore:line
         _class: function(className, value, date) {
             var that = this,
                 id = that._cellID,
-                disabledDate,
-                cell = that._cell;
+                cell = that._cell,
+                disabledDate;
 
             if (cell) {
                 cell.removeAttr(ARIA_SELECTED)
@@ -807,7 +807,7 @@ var __meta__ = { // jshint ignore:line
         _toggle: function(toggle) {
             var that = this,
                 options = that.options,
-                disabledToday = that.options.disableDates(getToday()),
+                isTodayDisabled = that.options.disableDates(getToday()),
                 link = that._today;
 
             if (toggle === undefined) {
@@ -817,7 +817,7 @@ var __meta__ = { // jshint ignore:line
             if (link) {
                 link.off(CLICK);
 
-                if (toggle && !disabledToday) {
+                if (toggle && !isTodayDisabled) {
                     link.addClass(TODAY)
                     .removeClass(DISABLED)
                     .on(CLICK, proxy(that._todayClick, that));
