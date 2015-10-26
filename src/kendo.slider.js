@@ -628,10 +628,12 @@ var __meta__ = { // jshint ignore:line
     }
 
     function round(value) {
+        var precision, power;
+
         value = parseFloat(value, 10);
         precision = getPrecision(value);
+        power = math.pow(10, precision || 0);
 
-        var power = math.pow(10, precision || 0);
         return math.round(value * power) / power;
     }
 
