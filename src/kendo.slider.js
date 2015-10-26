@@ -613,7 +613,7 @@ var __meta__ = { // jshint ignore:line
         return (value + "").replace(".", kendo.cultures.current.numberFormat["."]);
     }
 
-    function getPrecision(value) {
+    function calculatePrecision(value) {
         var number = value.toString();
         var precision = 0;
 
@@ -631,7 +631,7 @@ var __meta__ = { // jshint ignore:line
         var precision, power;
 
         value = parseFloat(value, 10);
-        precision = getPrecision(value);
+        precision = calculatePrecision(value);
         power = math.pow(10, precision || 0);
 
         return math.round(value * power) / power;
