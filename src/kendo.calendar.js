@@ -870,9 +870,6 @@ var __meta__ = { // jshint ignore:line
                 adjustDST(today, 0);
                 today = +today;
 
-                start = new DATE(start.getFullYear(), start.getMonth(), start.getDate());
-                adjustDST(start, 0);
-
                 return view({
                     cells: 42,
                     perRow: 7,
@@ -884,6 +881,9 @@ var __meta__ = { // jshint ignore:line
                     empty: options.empty,
                     setter: that.setDate,
                     build: function(date) {
+                        date = new DATE(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
+                        adjustDST(date, 0);
+
                         var cssClass = [],
                             day = date.getDay(),
                             linkClass = "",
