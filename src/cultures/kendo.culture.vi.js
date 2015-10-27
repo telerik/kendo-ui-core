@@ -29,12 +29,12 @@
         calendars: {
             standard: {
                 days: {
-                    names: ["Chủ Nhật","Thứ Hai","Thứ Ba","Thứ Tư","Thứ Năm","Thứ Sáu","Thứ Bảy"],
-                    namesAbbr: ["CN","T2","T3","Tư","Năm","Sáu","Bảy"],
+                    names: ["Chủ Nhật","Thứ Hai","Thứ Ba","Thứ Tư","Thứ Năm","Thứ Sáu","Thứ Bảy"],
+                    namesAbbr: ["CN","T2","T3","Tư","Năm","Sáu","Bảy"],
                     namesShort: ["C","H","B","T","N","S","B"]
                 },
                 months: {
-                    names: ["Tháng Giêng","Tháng Hai","Tháng Ba","Tháng Tư","Tháng Năm","Tháng Sáu","Tháng Bảy","Tháng Tám","Tháng Chín","Tháng Mười","Tháng Mười Một","Tháng Mười Hai"],
+                    names: ["Tháng Một","Tháng Hai","Tháng Ba","Tháng Tư","Tháng Năm","Tháng Sáu","Tháng Bảy","Tháng Tám","Tháng Chín","Tháng Mười","Tháng Mười Một","Tháng Mười Hai"],
                     namesAbbr: ["Thg1","Thg2","Thg3","Thg4","Thg5","Thg6","Thg7","Thg8","Thg9","Thg10","Thg11","Thg12"]
                 },
                 AM: ["SA","sa","SA"],
