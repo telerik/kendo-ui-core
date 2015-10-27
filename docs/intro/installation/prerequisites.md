@@ -51,6 +51,7 @@ From Q2 2014 release onward, Kendo UI widgets support [AngularJS](https://angula
 
 | Major Releases												 | AngularJS Version| Comments|
 | :---															 | :---				| :---	  |
+| [Kendo UI 2015.3.930 (Q3 2015)](/install/changes-and-backward-compatibility)		|1.4.0+|- |
 | [Kendo UI 2015.2.624 (Q2 2015)](/install/changes-and-backward-compatibility)		|1.3.16|- |
 | [Kendo UI 2015.1.318 (Q1 2015)](/install/changes-and-backward-compatibility)		|1.3.0 |- |
 | [Kendo UI 2014.3.1119 (Q3 2014)](/install/changes-and-backward-compatibility)		|1.3.0 |- |
