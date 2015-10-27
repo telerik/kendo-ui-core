@@ -57,6 +57,6 @@
     test("scrollable parent gets the body if not scrollable", function() {
         var el = $("<div style='width: 200px; height:300px; position: absolute; top: 100px; left: 200px;'>Div</div>").appendTo(QUnit.fixture);
         var parent = kendo.ui.Draggable.utils.findScrollableParent(el);
-        equal(parent[0], document.body);
+        ok(parent[0] === document.body || parent[0] === document.documentElement);
     });
 })();
