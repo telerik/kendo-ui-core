@@ -2060,25 +2060,27 @@ Template variables:
 
 #### Example
 
-    $("#chart").kendoChart({
-         title: {
-             text: "My Chart Title"
-         },
-         series: [
-             {
-                 type: "area",
-                 name: "Series 1",
-                 data: [200, 450, 300, 125],
-                 tooltip: {
-                     visible: true,
-                     template: "#= category # - #= value #"
-                 }
-             }
-         ],
-         categoryAxis: {
-             categories: [2000, 2001, 2002, 2003]
-         }
+    <div id="stock-chart"></div>
+    <script>
+    $("#stock-chart").kendoStockChart({
+        navigator: {
+          series: {
+            tooltip: {
+              visible: true,
+              template: "#= value # - #= date #"
+            },
+
+            type: "line",
+            field: "value",
+            categoryField: "date",
+            data: [
+              { value: 1, date: new Date(2012, 1, 1) },
+              { value: 2, date: new Date(2012, 1, 2) }
+            ]
+          }
+        }
     });
+    </script>
 
 ### navigator.series.tooltip.visible `Boolean`*(default: false)*
 
@@ -2097,21 +2099,33 @@ Specifies the initially selected range.
 The full range of values is shown if no range is specified.
 
 #### Example
-    <p>
+
+    <div id="stock-chart"></div>
+    <script>
     $("#stock-chart").kendoStockChart({
-         navigator: {
-            series: {
-                type: "line",
-                field: "volume"
+        navigator: {
+          select: {
+              from: "2012/02/01",
+              to: "2012/02/02"
+          },
+
+          series: {
+            type: "line",
+            field: "value",
+            categoryField: "date",
+            tooltip: {
+              visible: true,
+              template: "#= value # - #= date #"
             },
-            select: {
-                from: "2012/01/01",
-                to: "2012/03/01"
-            }
-         },
-         ...
-    })
-    </p>
+            data: [
+              { value: 1, date: new Date(2012, 1, 1) },
+              { value: 2, date: new Date(2012, 1, 2) },
+              { value: 1, date: new Date(2012, 1, 3) }
+            ]
+          }
+        }
+    });
+    </script>
 
 ### navigator.select.from `Date`|`String`
 
@@ -2139,16 +2153,27 @@ Template variables:
 
 #### Example
 
-    // chart initialization
+    <div id="stock-chart"></div>
+    <script>
     $("#stock-chart").kendoStockChart({
-         navigator: {
-            hint: {
-                // hint template
-                template: "From: #= from # To: #= to #"
-            }
-         },
-         ...
+        navigator: {
+          hint: {
+            template: "From: #= from # To: #= to #"
+          },
+
+          series: {
+            type: "line",
+            field: "value", 
+            categoryField: "date",
+            data: [
+              { value: 1, date: new Date(2012, 1, 1) },
+              { value: 2, date: new Date(2012, 1, 2) },
+              { value: 1, date: new Date(2012, 1, 3) }
+            ]
+          }
+        }
     });
+    </script>
 
 ### navigator.hint.format `String`
 
@@ -2177,29 +2202,21 @@ Category indicies at which the value axes cross the category axis. (Only for arr
 of categories to denote the far end of the axis.
 
 #### Example
-    <p>
-    $("#chart").kendoChart({
+
+    <div id="stock-chart"></div>
+    <script>
+    $("#stock-chart").kendoStockChart({
          categoryAxis: {
              categories: ["A", "B"],
              axisCrossingValue: [0, 100]
          },
          valueAxis: [{ }, { name: "secondary" }]
-         ...
-    })
-    </p>
+    });
+    </script>
 
 ### categoryAxis.categories `Array`
 
 Array of category names.
-
-#### Example
-
-    $("#chart").kendoChart({
-        categoryAxis: {
-            categories: [ 2005, 2006, 2007, 2008, 2009 ]
-        },
-        ...
-    });
 
 ### categoryAxis.color `String`
 
