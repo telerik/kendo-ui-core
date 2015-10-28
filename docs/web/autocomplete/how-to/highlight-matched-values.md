@@ -1,13 +1,16 @@
 ---
-title: Highlight matched values
-page_title: Highlight matched values
-description: Highlight matched values
+title: Highlight Matched Values
+page_title: Highlight Matched Values | Kendo UI AutoComplete Widget
+description: "Learn how to highlight matched values in a Kendo UI AutoComplete widget." 
+slug: howto_highlight_matched_values_autocomplete
+position: 2
 ---
 
-# Highlight matched values from the user input
+# Highlight Matched Values
 
 The example below demonstrates how to highlight the matched values from the AutoComplete suggestions based on the value entered by the user.
-#### Example:
+
+###### Example
 
 ```html
     <div id="example">
@@ -121,3 +124,12 @@ The example below demonstrates how to highlight the matched values from the Auto
       </style>
     </div>
 ```
+
+## See Also
+
+Other how-to examples on Kendo UI AutoComplete:
+
+* [Use Custom Templates with AngularJS]({% slug howto_use_custom_angularjs_templates_autocomplete %})
+* [Restrict Other Users]({% slug howto_restrict_user_input_autocomplete %})
+* [Show `No results found`]({% slug howto_add_customized_templates_autocomplete %})
+* [Change `DataSource` Dynamically]({% slug howto_change_datasource_dynamically_autocomplete %})
