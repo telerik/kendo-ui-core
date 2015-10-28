@@ -12,7 +12,7 @@ Kendo UI AutoComplete widget provides suggestions depending on the typed text. I
 
 ## Getting Started
 
-### Initialize AutoComplete 
+### Initialize the AutoComplete 
 
 You can initialize the AutoComplete widget by using a jQuery selector:
     
