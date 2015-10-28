@@ -15,6 +15,6 @@ Kendo UI uses `eval()` calls. This is how the Kendo UI templates work internally
 
 If CSP mode is enabled for a Kendo UI application the `unsafe-eval` keyword should be added as part of the `meta` tag used for enabling the CSP mode.
 
-    <meta http-equiv="Content-Security-Policy" content="script-src 'unsafe-eval' 'self' https://cdn.kendostatic.com;">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'unsafe-eval' 'self' https://kendo.cdn.telerik.com;">
 
 {% endraw %}
