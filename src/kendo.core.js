@@ -1,5 +1,5 @@
 (function(f, define){
-    define([], f);
+    define(['jquery'], f);
 })(function(){
 
 var __meta__ = { // jshint ignore:line

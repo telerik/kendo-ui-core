@@ -8,12 +8,15 @@ exports.beforeTestFiles = [
 ];
 
 exports.afterTestFiles = [
+    'src/kendo.timezones.js',
     'src/cultures/kendo.culture.de-DE.js',
     'src/cultures/kendo.culture.bg-BG.js',
     'src/cultures/kendo.culture.en-ZA.js',
     "src/cultures/kendo.culture.es-ES.js",
     'tests/kendo-test-helpers.js',
-    'tests/**/test-helper.js'
+    'tests/**/test-helper.js',
+
+    'src/kendo.webcomponents.js'
 ];
 
 exports.ciFiles = [ 'dist/js/kendo.ui.core.min.js' ];

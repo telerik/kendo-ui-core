@@ -75,7 +75,7 @@ Kendo UI Core has not been tested against any other versions of these libraries.
 
 ## Building Kendo UI Core
 
-There are two ways to get the source code for Kendo UI Core. You can either download a pre-built zip from [Telerik.com](http://www.telerik.com/kendo-ui/open-source-core), or build the source yourself using Grunt. The latter approach includes an option for building a distribution of Kendo UI Core that includes only the widgets and framework features required by your app.
+There are two ways to get the source code for Kendo UI Core. You can either download a pre-built zip from [Telerik.com](http://www.telerik.com/kendo-ui/open-source-core), or build the source yourself using Gulp. The latter approach includes an option for building a distribution of Kendo UI Core that includes only the widgets and framework features required by your app.
 
 ### Installing Dependencies
 
@@ -114,33 +114,33 @@ npm run build
 ```
 The minified version of the scripts and styles of Kendo UI Core will be put in the `dist/` subdirectory.
 
-If you want to create custom build or help with Kendo UI Core development, it would be better to install the [grunt command line interface](https://github.com/gruntjs/grunt-cli) as a global package:
+If you want to create custom build or help with Kendo UI Core development, it would be better to install the [gulp command line interface](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#1-install-gulp-globally) as a global package:
 
+```sh
+[sudo] npm install --global gulp
 ```
-[sudo] npm install -g grunt-cli
-```
-Make sure you have `grunt` installed by testing:
+Make sure you have `gulp` installed by testing:
 
-```
-grunt --version
+```sh
+gulp --version
 ```
 
-Now by running the `grunt` command in the Kendo UI Core directory, you can build the full version of Kendo UI Core. This works just like the `npm run build` command:
-```
-grunt build
+Now by running the `gulp` command in the Kendo UI Core directory, you can build the full version of Kendo UI Core. This works just like the `npm run build` command:
+```sh
+gulp build
 ```
 
 There are several other tasks available:
-```
-grunt --help
+```sh
+gulp --help
 ```
 
 ### Building only what you need
 
-The grunt `custom` task will create a custom minified file - `dist/kendo.custom.min.js`, which includes only the specified components. The following command will include only the autocomplete and dropdownlist widgets:
+The gulp `custom` task will create a custom minified file - `dist/kendo.custom.min.js`, which includes only the specified components. The following command will include only the autocomplete and dropdownlist widgets:
 
-```
-grunt custom:autocomplete,dropdownlist
+```sh
+gulp custom -c autocomplete,dropdownlist
 ```
 
 ## Source Code and Downloads
@@ -151,7 +151,7 @@ If you want to skip building Kendo UI Core yourself, head on over to [Telerik.co
 
 You can also easily include Kendo UI Core in your site or application by using the Kendo CDN:
 
-```
+```html
 <link href="http://kendo.cdn.telerik.com/2014.2.716/styles/kendo.common.min.css" rel="stylesheet" />
 <link href="http://kendo.cdn.telerik.com/2014.2.716/styles/kendo.default.min.css" rel="stylesheet" />
 <script src="http://kendo.cdn.telerik.com/2014.2.716/js/jquery.min.js"></script>
@@ -177,7 +177,7 @@ Before contributing to Kendo UI Core, please:
 
 ## Getting Help
 
-**Tl;dr** - Use the [issues list](https://github.com/telerik/kendo-ui-core/issues) of this repo for bugs, [Stack Overflow](http://stackoverflow.com/questions/tagged/kendo-ui) or the [Kendo UI Premium Forums](http://www.telerik.com/forums/kendo-ui-framework) for help and [User Voice](http://kendoui-feedback.telerik.com/forums/127393-kendo-ui-feedback) for feature requests. Misfiled items will be closed.
+**TL;DR** - Use the [issues list](https://github.com/telerik/kendo-ui-core/issues) of this repo for bugs, [Stack Overflow](http://stackoverflow.com/questions/tagged/kendo-ui) or the [Kendo UI Premium Forums](http://www.telerik.com/forums/kendo-ui-framework) for help and [User Voice](http://kendoui-feedback.telerik.com/forums/127393-kendo-ui-feedback) for feature requests. Misfiled items will be closed.
 
 As a fully-open source project, Kendo UI Core is a primarily community-supported project, As such, you are encouraged to use forums like Stack Overflow to post questions, and the issues list of this repo to report bugs.
 
