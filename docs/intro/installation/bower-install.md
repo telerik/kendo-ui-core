@@ -95,4 +95,4 @@ fatal: unable to access 'https://bower.telerik.com/bower-kendo-ui.git/': SSL cer
 
 > **Important**  
 > 1.9.5 Git build will not work with the Bower package.
-> When using @ symbol in the url for accessing the Kendo UI Bower repository (due to network restrictions or admin rules, for instance), make sure you encode it as follows: https://firstname.lasname**%40**domain.com@bower.telerik.com/bower-kendo-ui.git.
+> When using @ symbol in the url for accessing the Kendo UI Bower repository (due to network restrictions or admin rules, for instance), make sure you encode it as follows: `https://firstname.lasname**%40**domain.com@bower.telerik.com/bower-kendo-ui.git`.
