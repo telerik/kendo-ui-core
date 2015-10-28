@@ -8,7 +8,7 @@ position: 1
 
 # Button Overview
 
-Kendo UI Button widget provides a styled clickable UI functionality with arbitrary content. Apart from consistent Kendo UI styling, the Button provides keyboard operability for elements, which natively do not have it (e.g., `span`). 
+[Kendo UI Button widget](http://demos.telerik.com/kendo-ui/button/index) provides a styled clickable UI functionality with arbitrary content. Apart from consistent Kendo UI styling, the Button provides keyboard operability for elements, which natively do not have it (e.g., `span`). 
 
 Note that the content of this article necessitates your understanding of the [fundamental Kendo UI widget concepts](/widgets).
 

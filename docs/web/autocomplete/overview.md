@@ -8,7 +8,7 @@ position: 1
 
 # AutoComplete Overview
 
-Kendo UI AutoComplete widget provides suggestions depending on the typed text. It also allows multiple value entries. The suggestions shown by the widget can come from a local array or from a remote data service.
+[Kendo UI AutoComplete widget](http://demos.telerik.com/kendo-ui/autocomplete/index) provides suggestions depending on the typed text. It also allows multiple value entries. The suggestions shown by the widget can come from a local array or from a remote data service.
 
 ## Getting Started
 
