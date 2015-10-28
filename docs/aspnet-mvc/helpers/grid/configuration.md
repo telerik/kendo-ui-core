@@ -91,7 +91,7 @@ Sets the action method which is responsible for destroying data items.
 
 ### Events
 
-Specifies the event handlers for the data source [events](/api/framework/datasource#events).
+Specifies the event handlers for the data source [events](/api/javascript/data/datasource#events).
 
 ###### Example - handle data source events
 

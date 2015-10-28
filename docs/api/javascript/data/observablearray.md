@@ -7,7 +7,7 @@ description: How to create a new ObservableArray, explanations how to use kendo.
 # kendo.data.ObservableArray
 
 The `ObservableArray` wraps an existing Array object with change tracking capabilities. It is used by [Kendo MVVM](/framework/mvvm/overview) and
-the [kendo.data.DataSource](/framework/datasource/overview). Inherits from [kendo.Observable](/api/framework/observable).
+the [kendo.data.DataSource](/framework/datasource/overview). Inherits from [kendo.Observable](/api/javascript/observable).
 
 ## Configuration
 
@@ -36,7 +36,7 @@ To create a new `ObservableArray`, use its constructor or the `kendo.observable`
     console.log(observable.people instanceof kendo.data.ObservableArray); // outputs "true"
     </script>
 
-> **Important**: The `kendo.data.ObservableArray` wraps its items [kendo.data.ObservableObject](/api/framework/observableobject) instances (unless the items are of primitive type).
+> **Important**: The `kendo.data.ObservableArray` wraps its items [kendo.data.ObservableObject](/api/javascript/data/observableobject) instances (unless the items are of primitive type).
 
 #### Example - array of complex and primitive Type
     <script>

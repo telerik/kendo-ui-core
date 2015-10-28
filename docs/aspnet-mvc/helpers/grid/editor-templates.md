@@ -26,7 +26,7 @@ the following code will be used to get the editor HTML for the `OrderDate` and `
     Html.EditorFor(o => o.OrderDate);
     Html.EditorFor(o => o.ShipCountry);
 
-If the grid is configured for pop-up editing the [Html.EditorForModel](http://msdn.microsoft.com/en-us/library/system.web.mvc.html.editorextensions.editorformodel.aspx) is
+If the grid is configured for pop-up editing the [Html.EditorForModel](https://msdn.microsoft.com/en-us/library/system.web.mvc.html.editorextensions.editorformodel.aspx) is
 used to get the editor HTML for the whole model.
 
 A lot of additional info about ASP.NET MVC editor templates can be found in the [ASP.NET MVC 2 Templates](http://bradwilson.typepad.com/blog/2009/10/aspnet-mvc-2-templates-part-1-introduction.html) blog post series.

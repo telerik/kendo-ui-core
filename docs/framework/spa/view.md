@@ -59,7 +59,7 @@ or return a reference to the existing view element if no container is provided.
 ## MVVM Integration
 
 If an observable object is passed as a `model` configuration option to the view constructor, the view will bind it to the element when instantiated.
-If no model is present, the content will be processed using [Data Attribute Initialization](/data-attribute-initialization).
+If no model is present, the content will be processed using [Data Attribute Initialization](/intro/installation/markup).
 
 ## MVVM Bound View
     <script id="index" type="text/x-kendo-template">

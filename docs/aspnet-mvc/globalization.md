@@ -37,7 +37,7 @@ to the **~/Scripts/cultures/** directory of your application. Let's use the Span
             <script src="@Url.Content("~/Scripts/kendo.all.min.js")"></script>
             <script src="@Url.Content("~/Scripts/kendo.aspnetmvc.min.js")"></script>
             <script src="@Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js")"></script>
-1. Set the current culture by calling the [kendo.culture](/api/framework/kendo#methods-culture) method. The script block should come *after* the culture JavaScript file.
+1. Set the current culture by calling the [kendo.culture](/api/javascript/kendo#methods-culture) method. The script block should come *after* the culture JavaScript file.
 
         <script>
         kendo.culture("es-ES");
@@ -64,7 +64,7 @@ To set the server-side culture you need to update the **web.config** file of you
 
 ##### Per-request
 Override the [Controller.Initialize](https://msdn.microsoft.com/en-us/library/system.web.mvc.controller.initialize(v=vs.118).aspx) method to set the [CurrentCulture](https://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.currentculture.aspx)
-and [CurrentUICulture](http://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.currentuiculture.aspx).
+and [CurrentUICulture](https://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.currentuiculture.aspx).
 
     protected override void Initialize(System.Web.Routing.RequestContext requestContext)
     {
@@ -99,7 +99,7 @@ to the **~/Scripts/cultures/** directory of your application.
     - Razor
 
             <script src="@Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js")"></script>
-1. Set the current culture by calling the [kendo.culture](/api/framework/kendo#methods-culture) method. The script block should come *after* the culture JavaScript file.
+1. Set the current culture by calling the [kendo.culture](/api/javascript/kendo#methods-culture) method. The script block should come *after* the culture JavaScript file.
     - ASPX
 
             <script>

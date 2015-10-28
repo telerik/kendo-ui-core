@@ -137,7 +137,7 @@ A common mistake is to recreate a widget instance when the goal is only to get t
 ### Check If a Widget Instance Exists
 
 In order to check whether a widget instance already exists for a certain DOM element, use the
-[standard way to obtain the widget instance](/basics/events-and-methods#obtain-a-reference-to-a-kendo-ui-widget-instance-using-jquery). If the returned value is `undefined`, then the widget instance does not exist.
+[standard way to obtain the widget instance](/intro/installation/events-and-methods#obtain-a-reference-to-a-kendo-ui-widget-instance-using-jquery). If the returned value is `undefined`, then the widget instance does not exist.
 
 ###### Example
 

@@ -8,17 +8,17 @@ position: 7
 
 # Initialize a Widget Using Markup
 
-In addition to the [jQuery plugin syntax](/intro/jquery-initialization), the Kendo UI widgets may be instantiated based on custom HTML attributes in several ways:
+In addition to the [jQuery plugin syntax](/intro/installation/jquery-initialization), the Kendo UI widgets may be instantiated based on custom HTML attributes in several ways:
 
 **Option 1:** The [View](/framework/spa/view) and the [mobile Application](/mobile/application) instantiate widgets based on the `role` HTML 5 data attributes. Both use the [MVVM](/framework/mvvm/overview) internally.  
 **Option 2:** The `kendo.bind` method will scan the passed DOM element contents for the `data-role` attributes and will instantiate the respective widgets.  
 **Option 3:** The Kendo UI [AngularJS](/AngularJS/introduction) directives support declarative initialization based on custom element attributes or custom tag names.
 
 > **Important**  
-> `data` attribute initialization is not designed to be combined with the Kendo UI server wrappers. Using wrappers is equivalent to [jQuery plug-in syntax initialization](/intro/jquery-initialization). If you want to create Kendo UI widget instances via the
+> `data` attribute initialization is not designed to be combined with the Kendo UI server wrappers. Using wrappers is equivalent to [jQuery plug-in syntax initialization](/intro/installation/jquery-initialization). If you want to create Kendo UI widget instances via the
 [MVVM](/framework/mvvm/overview) or [AngularJS](/AngularJS/introduction) mechanisms, then do not use server wrappers for these instances.
 
-While it is theoretically possible to initialize several different Kendo UI widgets from the same DOM element via [jQuery plugin syntax](/intro/jquery-initialization),
+While it is theoretically possible to initialize several different Kendo UI widgets from the same DOM element via [jQuery plugin syntax](/intro/installation/jquery-initialization),
 this is not recommended and is not supported with declarative initialization from markup.
 
 > **Important**  
