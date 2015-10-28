@@ -51,7 +51,7 @@ Those libraries are **jquery.unobtrusive-ajax**, **jquery.validate** and **jquer
 * [Microsoft.jQuery.Unobtrusive.Validation](https://www.nuget.org/packages/Microsoft.jQuery.Unobtrusive.Validation)
 
 > **Important**  
-> In ASP.NET MVC 3 applications **jquery.unobtrusive-ajax** and **jquery.validate.unobtrusive** are not installed as NUget packages. You would need to install them separately. The packages are [Microsoft.jQuery.Unobtrusive.Ajax](http://nuget.org/packages/Microsoft.jQuery.Unobtrusive.Ajax) and [Microsoft.jQuery.Unobtrusive.Validation](http://nuget.org/packages/Microsoft.jQuery.Unobtrusive.Validation). First you must delete **jquery.unobtrusive-ajax.js**, **jquery.unobtrusive-ajax.min.js**, **jquery.validate.unobtrusive.js** and **jquery.validate.unobtrusive.min.js** from your **~/Sripts** folder. Then install Microsoft.jQuery.Unobtrusive.Ajax and Microsoft.jQuery.Unobtrusive.Validation.
+> In ASP.NET MVC 3 applications **jquery.unobtrusive-ajax** and **jquery.validate.unobtrusive** are not installed as NUget packages. You would need to install them separately. The packages are [Microsoft.jQuery.Unobtrusive.Ajax](https://www.nuget.org/packages/Microsoft.jQuery.Unobtrusive.Ajax) and [Microsoft.jQuery.Unobtrusive.Validation](https://www.nuget.org/packages/Microsoft.jQuery.Unobtrusive.Validation). First you must delete **jquery.unobtrusive-ajax.js**, **jquery.unobtrusive-ajax.min.js**, **jquery.validate.unobtrusive.js** and **jquery.validate.unobtrusive.min.js** from your **~/Sripts** folder. Then install Microsoft.jQuery.Unobtrusive.Ajax and Microsoft.jQuery.Unobtrusive.Validation.
 
 ## Visual Studio Server IntelliSense Does Not Show MVC HtmlHelper Extension Method
 

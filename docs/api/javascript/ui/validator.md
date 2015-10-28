@@ -10,7 +10,7 @@ description: How to configure the Validator in Kendo UI Framework, get error mes
 
 ### errorTemplate `String`
 
-The [template](/api/framework/kendo#methods-template) which renders the validation message.
+The [template](/api/javascript/kendo#methods-template) which renders the validation message.
 
 #### Defining custom error template
     <form id="myform">

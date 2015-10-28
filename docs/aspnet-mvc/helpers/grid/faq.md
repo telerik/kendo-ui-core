@@ -10,7 +10,7 @@ description: Learn how to use Kendo UI Grid for ASP.NET MVC by reading Grid FAQ 
 
 ### How Do I Display HTML in a Grid Column?
 
-By default the Kendo UI Grid for ASP.NET MVC will encode the HTML entities present in the data. To prevent that call the [Encoded](/api/wrappers/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilderi#encodedsystem.boolean)
+By default the Kendo UI Grid for ASP.NET MVC will encode the HTML entities present in the data. To prevent that call the [Encoded](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#formatsystem.string)
 method and pass `false` as the argument.
 
 ######## Example - display HTML entities in Grid columns
@@ -194,7 +194,7 @@ The Menu requires the Grid cells to allow overflowing, which is disabled by defa
 ### How Do I Change the Format of a Bound Column?
 
 Use the [Format](api/wrappers/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#formatsystem.string) method.
-The value should be a valid [number](/api/framework/kendo#standard-number-formats) or [date](/api/framework/kendo#standard-date-formats) format.
+The value should be a valid [number](/api/javascript/kendo#standard-number-formats) or [date](/api/javascript/kendo#standard-date-formats) format.
 
 ###### Example - specify the format of a bound column
 
@@ -280,7 +280,7 @@ If the grid is ajax bound the `Data` method should be used to specify the name o
 
 ### How Do I Reload the Data in an Ajax Bound Grid?
 
-The [read](/api/framework/datasource#read) method of the DataSource should be used.
+The [read](/api/javascript/data/datasource#read) method of the DataSource should be used.
 
 ###### Example - reload an Ajax bound Grid
 
@@ -346,7 +346,7 @@ properties which create the circular references.
 
 ### How Do I Handle Errors in Ajax Binding Mode?
 
-The [error](/api/framework/datasource#error) event of the DataSource should be used.
+The [error](/api/javascript/data/datasource#error) event of the DataSource should be used.
 Use the `Error` method from the fluent API to specify the name of the JavaScript function which will handle the event.
 
 ###### Example - handle errors in Ajax binding

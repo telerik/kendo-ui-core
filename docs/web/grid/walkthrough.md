@@ -177,7 +177,7 @@ If virtual scrolling is **not used**, there are several options:
 
 * The Grid should be initialized when its element becomes visible;
 * The Grid's layout must be adjusted manually. With old Kendo UI versions, use the code from the above example (there is no need to attach a window resize handler). Since Q3 2013,
-you can use [`kendo.resize()`](/api/framework/kendo/#methods-resize) or the Grid's [`resize()`](/using-kendo-in-responsive-web-pages#individual-widget-resizing) method.
+you can use [`kendo.resize()`](/api/javascript/kendo#methods-resize) or the Grid's [`resize()`](/using-kendo-in-responsive-web-pages#individual-widget-resizing) method.
 * Instead of setting an overall height for the Grid in its configuration, you can define height for the scrollable data area only. In this case no height calculations will be made:
 
         #GridID .k-grid-content
@@ -512,7 +512,7 @@ This is achieved by preventing event bubbling of the custom hyperlinks' **keydow
 
 In order to get a Grid table row by the data item ID can be achieved in the following way.
 
-First, the [ID field should be defined in the model configuration](/api/framework/model#configuration-Example) of the Grid datasource.
+First, the [ID field should be defined in the model configuration](/api/javascript/data/model#configuration-Example) of the Grid datasource.
 
 Then, the row model, the model UID and the Grid table row can be retrieved consecutively in the following way:
 

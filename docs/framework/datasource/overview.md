@@ -27,7 +27,7 @@ In other words, the DataSource fully supports CRUD operations (Create, Read, Upd
 and provides both client-side and server-side support for sorting, paging, filtering, grouping and aggregates.
 
 > To learn more about the capabilities of the DataSource, make sure to check out its
-[configuration API, methods and events](/api/framework/datasource), and also [demos](http://demos.telerik.com/kendo-ui/datasource/index).
+[configuration API, methods and events](/api/javascript/data/datasource), and also [demos](http://demos.telerik.com/kendo-ui/datasource/index).
 
 ## Getting Started
 

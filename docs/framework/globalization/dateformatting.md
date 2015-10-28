@@ -6,7 +6,7 @@ description: Learn how with date formatting you can convert Date object to human
 
 #Date Formatting
 
-The purpose of date formatting is to convert Date object to a human readable string using culture's specific settings. [kendo.format](/api/framework/kendo#format) and [kendo.toString](/api/framework/kendo#tostring) methods support standard and custom date formats:
+The purpose of date formatting is to convert Date object to a human readable string using culture's specific settings. [kendo.format](/api/javascript/kendo#format) and [kendo.toString](/api/javascript/kendo#tostring) methods support standard and custom date formats:
 
 ## Standard date formats
 

@@ -21,21 +21,21 @@ The current official version of Kendo UI requires jQuery 1.9.1. There are occasi
 
 The following list provides jQuery compatibility information about the major Kendo UI releases and their corresponding service packs:
 
-| Major Releases												| jQuery Version| Comments|
-| :---															| :---			| :---	  |
+| Major Releases												                                        | jQuery Version       | Comments|
+| :---															                                        | :---			       | :---	  |
 | [Kendo UI 2015.3.930 (Q3 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2015)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2015.2.624 (Q2 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q2-2015)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2015.1.318 (Q1 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q1-2015)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2014.3.1119 (Q3 2014)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2014)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2014.2.716 (Q2 2014)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q2-2014)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
-| [Kendo UI 2014.1.318 (Q1 2014)](/install/changes-and-backward-compatibility)	|1.9.1| Also compatible with 1.10.x and 2.0.x|
-| [Kendo UI 2013.3.1119 (Q3 2013)](/install/changes-and-backward-compatibility)	|1.9.1| Also compatible with 1.10.x and 2.0.x|
-| [Kendo UI 2013.2.716 (Q2 2013)](/install/changes-and-backward-compatibility)	|1.9.1| - |
-| [Kendo UI 2013.1.319 (Q1 2013)](/install/changes-and-backward-compatibility)	|1.9.1| - |
-| [Kendo UI 2012.3.1114 (Q3 2012)](/install/changes-and-backward-compatibility)	|1.8.2| - |
-| [Kendo UI 2012.2.710 (Q2 2012)](/install/changes-and-backward-compatibility)	|1.7.1| - |
-| [Kendo UI 2012.1.322 (Q1 2012)](/install/changes-and-backward-compatibility)	|1.7.1| - |
-| [Kendo UI 2011.3.1129 (Q3 2011)](/install/changes-and-backward-compatibility)	|1.7.1| - |
+| [Kendo UI 2014.1.318 (Q1 2014)](/backward-compatibility#kendo-ui-2014-q1)	                    |1.9.1| Also compatible with 1.10.x and 2.0.x|
+| [Kendo UI 2013.3.1119 (Q3 2013)](/backward-compatibility#kendo-ui-2013-q3)	                |1.9.1| Also compatible with 1.10.x and 2.0.x|
+| [Kendo UI 2013.2.716 (Q2 2013)](/backward-compatibility#kendo-ui-2013-q2)	                    |1.9.1| - |
+| [Kendo UI 2013.1.319 (Q1 2013)](/backward-compatibility#kendo-ui-2013-q1)	                    |1.9.1| - |
+| [Kendo UI 2012.3.1114 (Q3 2012)](/backward-compatibility#kendo-ui-2012-q3)	                |1.8.2| - |
+| [Kendo UI 2012.2.710 (Q2 2012)](/backward-compatibility#kendo-ui-2012-q2)	                    |1.7.1| - |
+| [Kendo UI 2012.1.322 (Q1 2012)](/backward-compatibility#kendo-ui-2012-q1-20121322)	        |1.7.1| - |
+| [Kendo UI 2011.3.1129 (Q3 2011)](/backward-compatibility#changes-from-2011-q3-sp1-201131407)  |1.7.1| - |
 
 ### What to Do If a Previous jQuery Version Is Required
 
@@ -52,11 +52,11 @@ From Q2 2014 release onward, Kendo UI widgets support [AngularJS](https://angula
 
 | Major Releases												 | AngularJS Version| Comments|
 | :---															 | :---				| :---	  |
-| [Kendo UI 2015.3.930 (Q3 2015)](/install/changes-and-backward-compatibility)		|1.4.0+|- |
-| [Kendo UI 2015.2.624 (Q2 2015)](/install/changes-and-backward-compatibility)		|1.3.16|- |
-| [Kendo UI 2015.1.318 (Q1 2015)](/install/changes-and-backward-compatibility)		|1.3.0 |- |
-| [Kendo UI 2014.3.1119 (Q3 2014)](/install/changes-and-backward-compatibility)		|1.3.0 |- |
-| [Kendo UI 2014.2.716 (Q2 2014)](/install/changes-and-backward-compatibility)		|1.2.16|Upgraded to 1.2.21 in subsequent internal builds|
+| [Kendo UI 2015.3.930 (Q3 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2015)		|1.4.0+|- |
+| [Kendo UI 2015.2.624 (Q2 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q2-2015)		|1.3.16|- |
+| [Kendo UI 2015.1.318 (Q1 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q1-2015)		|1.3.0 |- |
+| [Kendo UI 2014.3.1119 (Q3 2014)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2014)		|1.3.0 |- |
+| [Kendo UI 2014.2.716 (Q2 2014)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q2-2014)		|1.2.16|Upgraded to 1.2.21 in subsequent internal builds|
 
 ## JSZip Library
 
