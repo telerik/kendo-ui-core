@@ -38,6 +38,21 @@ test("_icons method creates calendar and clock button", function() {
     ok(icons.children(":last").hasClass("k-icon k-i-clock"));
 });
 
+test("DateTimePicker renders last date when navigating", function() {
+    var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+    datetimepicker.value(new Date());
+    datetimepicker.open();
+    var calendar = $("[data-role=calendar]").getKendoCalendar();
+    calendar.navigateUp();
+    calendar.navigateUp();
+    calendar.navigateUp();
+    $(".k-link").not(".k-nav-today").last().trigger("click");
+    $(".k-link").not(".k-nav-today").last().trigger("click");
+    $(".k-link").not(".k-nav-today").last().trigger("click");
+
+    equal($(".k-link").not(".k-nav-today").last().text(), 31);
+});
+
 test("DateTimePicker creates DateView", function() {
     var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
 
