@@ -85,7 +85,7 @@ var flavours = {
 
     travis: {
         reporters: ['dots'],
-        singleRun: false,
+        singleRun: true,
         browsers: [ 'ChromiumTravis' ],
 
         files: [].concat(

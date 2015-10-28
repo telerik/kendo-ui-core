@@ -56,7 +56,7 @@ gulp.task("build-skin", ["css-assets"], function() {
             filesToBuild.replace(/(styles|mobile|web)/, "**")
         ]))
         .pipe(sourcemaps.init())
-        .pipe(CSS.fromLess())
+        .pipe(cssUtils.fromLess())
         .pipe(mapLogger)
         .pipe(sourcemaps.write("maps", { sourceRoot: "../../../../styles" }))
         .pipe(gulp.dest('dist/styles'))
