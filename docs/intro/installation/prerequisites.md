@@ -23,6 +23,7 @@ The following list provides jQuery compatibility information about the major Ken
 
 | Major Releases												| jQuery Version| Comments|
 | :---															| :---			| :---	  |
+| [Kendo UI 2015.3.930 (Q3 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2015)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2015.2.624 (Q2 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q2-2015)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2015.1.318 (Q1 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q1-2015)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2014.3.1119 (Q3 2014)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2014)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
