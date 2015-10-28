@@ -10,11 +10,9 @@
    "devDependencies": {
        "optimist": "0.3.7",
        "typescript": "^1.5.3",
-       "uglify-js": "2.4.24",
        "xmlbuilder": "0.4.2",
        "colors": "^1.1.2",
        "cookiejar": "1.3.0",
-
        "faye": "0.8.3",
        "faye-websocket": "0.4.4",
 
@@ -22,15 +20,13 @@
        "less-plugin-autoprefix": "~1.5.1",
 
        "jshint": "2.8.0",
+       "jshint-stylish": "~2.0.1",
        "is-absolute": "^0.1.7",
 
        "grunt": "~0.4.2",
        "grunt-cli": "~0.1.0",
        "grunt-shell": "~1.1.2",
-       "grunt-contrib-jshint": "~0.11.2",
-       "grunt-contrib-copy": "~0.5.0",
        "grunt-debug-task": "0.1.3",
-       "grunt-karma": "0.12",
 
        "qunitjs": "1.19.0",
 
@@ -43,6 +39,7 @@
 
        "gulp": "3.9.0",
        "gulp-debug": "~2.1.1",
+       "gulp-util": "~3.0.7",
        "gulp-rename": "~1.2.2",
        "gulp-less": "~3.0.3",
        "gulp-cached": "~1.1.0",
@@ -54,15 +51,30 @@
        "gulp-minify-css": "~1.2.1",
        "gulp-clone": "~1.0.0",
        "gulp-sourcemaps": "~1.6.0",
+       "gulp-jshint": "^1.11.2",
+       "gulp-concat": "^2.6.0",
+       "gulp-foreach": "^0.1.0",
+       "gulp-ignore": "^1.2.1",
+       "gulp-insert": "^0.5.0",
+       "gulp-uglify": "^1.4.2",
+       "gulp-if": "^2.0.0",
+
+       "amd-optimize": "0.6.1",
+       "through2": "^2.0.0",
+       "through-gulp": "^0.3.8",
+       "vinyl": "^1.0.0",
+       "run-sequence": "~1.1.4",
 
        "browser-sync": "~2.9.10",
        "lazypipe": "~1.0.1",
        "merge2": "~0.3.6",
+       "require-dir": "~0.3.0",
+       "glob": "~5.0.15",
        "yargs": "~3.27.0"
    },
    "scripts": {
-       "build": "npm install && grunt build",
-       "test": "./node_modules/.bin/grunt travis"
+       "build": "npm install && ./node_modules/.bin/gulp build",
+       "test": "./node_modules/.bin/gulp travis"
    },
    "jshintConfig": {
         "es3": true,

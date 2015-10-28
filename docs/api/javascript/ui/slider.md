@@ -84,11 +84,30 @@ Configuration of the **Slider** tooltip.
 Disables (**false**) or enables (**true**) the tooltip of
 the **Slider**.
 
-### tooltip.format `String`*(default: "{0}")*
+### tooltip.format `String`*(default: "{0:#,#.##}")*
 
 Format string for the text of the tooltip. Note: The applied
 format will also influence the appearance of the **Slider**
 tick labels.
+
+The slider widget supports precision of up-to 10 digits after the decimals point.
+
+#### Example - set format according to the precision
+
+    <input id="slider" style="width: 300px" />
+    <script>
+      $("#slider").kendoSlider({
+        precision: 4,
+        smallStep:0.0001,
+        largeStep:0.0001,
+        min:0,
+        max:0.0004,
+        value: 0.0002,
+        tooltip: {
+          format: "{0:#,#.####}"
+        }
+      });
+    </script>
 
 ### tooltip.template `String`
 
@@ -98,7 +117,7 @@ Template of the tooltip. The following variables are passed by the Slider and ar
 *   **selectionStart** and **selectionEnd** - the current values when using a range slider
 
 #### Example - using RangeSlider template
-    
+
 	<div id="rangeslider" class="humidity">
       <input />
       <input />
@@ -119,7 +138,7 @@ Template of the tooltip. The following variables are passed by the Slider and ar
         }
       });
     </script>
-	
+
 ### value `Number`
 
 The underlying value of the **Slider**.

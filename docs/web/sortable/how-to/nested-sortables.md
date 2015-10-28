@@ -31,7 +31,7 @@ The following runnable sample demonstrates how to create nested Sortable widgets
 
     $("#parent").kendoSortable({
       connectWith: "#nested",
-      filter: ">li.list-item", //filter only list-items that are direct child of the Sortable container
+      filter: ">li.list-item", //filter only list-items that are direct child of the Sortable container. Use ".list-item" to allow parent items to use the nested sortable.
       ignore: "#nested >li", //ignore nested list-items
       placeholder: placeholder
     });
@@ -40,5 +40,5 @@ The following runnable sample demonstrates how to create nested Sortable widgets
       filter: ".list-item",
       placeholder: placeholder
     });
-  </script> 
+  </script>
 ```

@@ -10,7 +10,7 @@ Base class of all Kendo UI widgets. Inherits from [Observable](/api/javascript/o
 
 ### bind
 
-Attaches a handler to an event. Examples and more info can be found in the [bind](/api/framework/observable#bind) section of the `kendo.Observable` API reference.
+Attaches a handler to an event. Examples and more info can be found in the [bind](/api/javascript/observable#bind) section of the `kendo.Observable` API reference.
 
 ### destroy
 

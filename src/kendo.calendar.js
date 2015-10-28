@@ -870,9 +870,6 @@ var __meta__ = { // jshint ignore:line
                 adjustDST(today, 0);
                 today = +today;
 
-                start = new DATE(start.getFullYear(), start.getMonth(), start.getDate());
-                adjustDST(start, 0);
-
                 return view({
                     cells: 42,
                     perRow: 7,
@@ -884,6 +881,7 @@ var __meta__ = { // jshint ignore:line
                     empty: options.empty,
                     setter: that.setDate,
                     build: function(date) {
+
                         var cssClass = [],
                             day = date.getDay(),
                             linkClass = "",
@@ -1178,6 +1176,9 @@ var __meta__ = { // jshint ignore:line
                 html += '</tr><tr role="row">';
             }
 
+            start = new DATE(start.getFullYear(), start.getMonth(), start.getDate(), 0, 0, 0);
+            adjustDST(start, 0);
+
             data = build(start, idx);
 
             html += isInRange(start, min, max) ? content(data) : empty(data);
@@ -1320,4 +1321,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

@@ -123,7 +123,7 @@ Finally, the `.form-control` class applies height, border and other styles that 
 
 Possible resolutions include:
 
-1. Please the Bootstrap stylesheet **before** the Kendo UI stylesheet, so that same-specificity Kendo UI selectors can take precendece.
+1. Place the Bootstrap stylesheet **before** the Kendo UI stylesheet, so that same-specificity Kendo UI selectors can take precendece.
 
 2. Use custom CSS to fix any other outstanding issues, for example:
 

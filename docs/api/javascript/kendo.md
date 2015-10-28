@@ -464,7 +464,7 @@ A server "echo" proxy might be required, depending on browser capabilities.
 Configuration options for the save operation.
 
 ##### options.dataURI `String`
-The file contents encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
+The file contents encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/Web/HTTP/data_URIs).
 
 Only base64-encoded Data URIs are supported.
 
@@ -507,7 +507,7 @@ the proxy should set the "Content-Disposition" header to `inline; filename="<fil
 
 ### stringify
 
-Converts a JavaScript object to [JSON](http://en.wikipedia.org/wiki/JSON). Uses [JSON.stringify](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/JSON/stringify) in browsers that support it.
+Converts a JavaScript object to [JSON](http://en.wikipedia.org/wiki/JSON). Uses [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) in browsers that support it.
 
 #### Parameters
 

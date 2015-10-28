@@ -13,7 +13,7 @@ position: 1
 Kendo UI is a HTML5 user interface framework for building interactive and high-performance websites and applications.
 The framework comes with a library of 70+ UI widgets, an abundance of data-visualization gadgets, client-side data source, built-in MVVM (Model-View-ViewModel) library. Kendo UI provides AngularJS and Bootstrap integration.
 
-[Check Out the Kendo UI Online Demos](http://demos.telerik.com/kendo-ui/)
+[Check out Kendo UI online demos](http://demos.telerik.com/kendo-ui/)
 
 Kendo UI is distributed as part of several product units that you can choose from depending on your project requirements.
 
@@ -46,7 +46,7 @@ HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to co
 
 * [List of Kendo UI Components](/intro/supporting/list-of-widgets)
 * [Browser Support](/intro/supporting/browser-support)
-* [Evaluate UI for JSP](http://www.telerik.com/download/jsp)
+* [Evaluate UI for JSP](http://www.telerik.com/download/jsp-ui)
 * [Get a License](http://www.telerik.com/purchase/jsp-ui)
 * [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/jsp-ui)
 
@@ -54,7 +54,7 @@ HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to co
 
 * [List of Kendo UI Components](/intro/supporting/list-of-widgets)
 * [Browser Support](/intro/supporting/browser-support)
-* [Evaluate UI for PHP](http://www.telerik.com/download/php)
+* [Evaluate UI for PHP](http://www.telerik.com/download/php-ui)
 * [Get a License](http://www.telerik.com/purchase/php-ui)
 * [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/php-ui)
 

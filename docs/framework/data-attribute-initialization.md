@@ -56,7 +56,7 @@ be automatically be initialized as a mobile listview widget in the mobile applic
 
 Each widget configuration option can be set with a data attribute of the target element. **Add the "data-" prefix to the name of the configuration option** and specify the option value e.g. `data-delay="100"`.
 
-> Camel-cased options are set via dash-separated attributes. For example, the [ignoreCase](/api/web/autocomplete#configuration-ignoreCase) option of the AutoComplete is set via `data-ignore-case`.
+> Camel-cased options are set via dash-separated attributes. For example, the [ignoreCase](/api/javascript/ui/autocomplete#configuration-ignoreCase) option of the AutoComplete is set via `data-ignore-case`.
 
 Options, which start with `data` do not require an additional "data" in the attribute name e.g. the `dataTextField` option is set via the `data-text-field` attribute and `dataSource` is set via the
 `data-source` attribute.

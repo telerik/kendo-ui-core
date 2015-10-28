@@ -43,7 +43,6 @@ var __meta__ = { // jshint ignore:line
         STATE_FOCUSED = "k-state-focused",
         STATE_DEFAULT = "k-state-default",
         STATE_DISABLED = "k-state-disabled",
-        PRECISION = 3,
         DISABLED = "disabled",
         UNDEFINED = "undefined",
         TABINDEX = "tabindex",
@@ -614,9 +613,27 @@ var __meta__ = { // jshint ignore:line
         return (value + "").replace(".", kendo.cultures.current.numberFormat["."]);
     }
 
+    function calculatePrecision(value) {
+        var number = value.toString();
+        var precision = 0;
+
+        number = number.split(".");
+
+        if (number[1]) {
+            precision = number[1].length;
+        }
+
+        precision = precision > 10 ? 10 : precision;
+        return precision;
+    }
+
     function round(value) {
+        var precision, power;
+
         value = parseFloat(value, 10);
-        var power = math.pow(10, PRECISION || 0);
+        precision = calculatePrecision(value);
+        power = math.pow(10, precision || 0);
+
         return math.round(value * power) / power;
     }
 
@@ -1712,4 +1729,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });

@@ -1,14 +1,16 @@
 ---
-title: Change DataSource dynamically
-page_title: Change DataSource dynamically
-description: Change DataSource dynamically
+title: Change `DataSource` Dynamically
+page_title: Change `DataSource` Dynamically | Kendo UI AutoComplete Widget
+description: "Learn how to change `DataSource` synamically in a Kendo UI AutoComplete widget."
+slug: howto_change_datasource_dynamically_autocomplete
+position: 1
 ---
 
-# Change DataSource dynamically based on user selection
+# Change `DataSource` Dynamically
 
-The example below demonstrates how to change dynamically the DataSource based on selection made via radio buttons
+The example below demonstrates how to dynamically change the `DataSource` based on user selections made via radio buttons.
 
-#### Example:
+###### Example
 
 ```html
      <div id="example">
@@ -129,3 +131,12 @@ The example below demonstrates how to change dynamically the DataSource based on
       </style>
     </div>
 ```
+
+## See Also
+
+Other how-to examples on Kendo UI AutoComplete:
+
+* [Use Custom Templates with AngularJS]({% slug howto_use_custom_angularjs_templates_autocomplete %})
+* [Restrict Other Users]({% slug howto_restrict_user_input_autocomplete %})
+* [Show `No results found`]({% slug howto_add_customized_templates_autocomplete %})
+* [Highlight Matched Values]({% slug howto_highlight_matched_values_autocomplete %})

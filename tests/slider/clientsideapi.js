@@ -37,6 +37,23 @@ test("value should not be null or empty string and should return old value", fun
 
 test("value should be in range", function() {
     var slider = newSlider();
+    $.extend(slider.options, {
+        precision: 4,
+        smallStep:0.0001,
+        largeStep:0.0001,
+        min:0,
+        max:0.0004,
+        value: 0.0002,
+        tooltip: {
+          format: "{0:#,#.####}"
+        }
+    });
+
+    equal(slider.value(), 0.0002);
+});
+
+test("precision is correctly calculated", function() {
+    var slider = newSlider();
     $.extend(slider.options, { showButtons: false });
 
     slider.value(11);

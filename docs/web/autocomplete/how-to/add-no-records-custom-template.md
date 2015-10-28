@@ -1,14 +1,16 @@
 ---
-title: Add "No records found" template
-page_title: Add "No records found" template
-description: Add "No records found" template
+title: Show `No results found`
+page_title: Show `No results found` | Kendo UI AutoComplete Widget
+description: "Learn how to add customized templates in a Kendo UI AutoComplete widget."
+slug: howto_add_customized_templates_autocomplete
+position: 4
 ---
 
-# Add "No records found" template
+# Show `No results found`
 
-The example below demonstrates how to show a customized template, when the entered values does not match any of the suggestions.
+The example below demonstrates how to add a customized template when the entered values do not match any of the suggestions.
 
-#### Example:
+###### Example
 
 ```html
     <div id="example">
@@ -140,3 +142,12 @@ The example below demonstrates how to show a customized template, when the enter
       </style>
     </div>
 ```
+
+## See Also
+
+Other how-to examples on Kendo UI AutoComplete:
+
+* [Use Custom Templates with AngularJS]({% slug howto_use_custom_angularjs_templates_autocomplete %})
+* [Restrict Other Users]({% slug howto_restrict_user_input_autocomplete %})
+* [Change `DataSource` Dynamically]({% slug howto_change_datasource_dynamically_autocomplete %})
+* [Highlight Matched Values]({% slug howto_highlight_matched_values_autocomplete %})

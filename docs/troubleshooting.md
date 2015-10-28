@@ -53,7 +53,7 @@ the *Internet Explorer* in Compatibility mode will raise a JavaScript error with
 
 * SCRIPT3: Member not found (in Internet Explorer 10+ in Compatibility Mode)
 
-The problem is reported to Microsoft [here](https://connect.microsoft.com/IE/feedback/details/774078). Also there is a [jQuery bug report](http://bugs.jquery.com/ticket/12577)
+The problem is reported to Microsoft on `https://connect.microsoft.com/IE/feedback/details/774078`. Also there is a [jQuery bug report](http://bugs.jquery.com/ticket/12577)
 where more information can be found.
 
 > **Important**  
@@ -63,7 +63,9 @@ where more information can be found.
 
 * The workaround is to force the *Internet Exprorer* to use the 'Edge' mode:
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+ ```
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+ ```
 
 * The other option is to path jQuery. You can find more information about the possible path in the aforementioned jQuery bug report.
 

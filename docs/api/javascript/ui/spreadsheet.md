@@ -439,6 +439,9 @@ For example, column C will have index 2.
 ### sheets.sort.ref `String`
 The sorted range, e.g. "A1:D5".
 
+### sheetsbar `Boolean` *(default: true)*
+A boolean value indicating if the sheetsbar should be displayed.
+
 ### toolbar `Boolean` *(default: true)*
 A boolean value indicating if the toolbar should be displayed.
 
@@ -562,6 +565,9 @@ The header column width in pixels.
 
 ##### options.dataSource  `kendo.data.DataSource`
 The data source for this sheet.
+
+##### options.data `Object`
+The sheet state and data as `Object`.  The schema follows the same structure as the [widget configuration](/api/javascript/ui/spreadsheet#configuration).
 
 #### Returns
 

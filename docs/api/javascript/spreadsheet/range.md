@@ -221,6 +221,62 @@ The column(s) which filters should be cleared.
 
 ```
 
+### fillFrom
+
+Fills a range with values inferred from a source range.  This method employs some heuristics similar to what Excel's auto-filling algorithm does when you select a range of cells and drag the bottom-right handle.  The range to be filled is the current object, and you must pass a source range containing data as first argument.
+
+#### Parameters
+
+##### srcRange `Range | String`
+
+The source range.  It must have the same number of rows or the same number of columns as the current range — otherwise
+an exception will be thrown ("Incompatible auto-fill ranges").
+
+##### direction `Number` *optional*
+
+Specifies the fill direction.  If the source range (`srcRange`) and target range (the current object) are adjacent, the
+fill direction can be inferred from their positions, so it can be missing.  For example:
+
+```
+    sheet.range("B2:C3").fillFrom("B4:C5")
+```
+
+In this case it will select vertical reverse filling, because the target range is above the source range.
+
+If the ranges are not adjacent and the direction is missing, an exception will be thrown if the ranges don't start
+either on same column or on the same row ("Cannot determine fill direction").
+
+Possible values for direction:
+
+- 0 — fill top-down
+- 1 — fill left-to-right
+- 2 — fill bottom-up
+- 3 — fill right-to-left
+
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        sheet.range("A1:C2").values([
+            [ 2, "Mon", "Foo 1" ],
+            [ 5, "Wed", "Foo 2" ]
+        ]);
+
+        sheet.range("A3:C10").fillFrom("A1:C2");
+    </script>
+```
+
+The above will continue column `A` with 8, 11, 14 etc., column `B` with "Fri", "Sun", "Thu" etc. and column `C` with
+"Foo 3", "Foo 4" etc.
+
 ### filter
 
 Enables/disables or sets the filter for a given range.

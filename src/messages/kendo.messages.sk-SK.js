@@ -326,7 +326,7 @@ $.extend(true, kendo.ui.NumericTextBox.prototype.options,{
 if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
-  "allPages": "All",
+  "allPages": "Všetko",
   "display": "{0} - {1} z {2} záznamov",
   "empty": "Žiadny záznam na zobrazenie",
   "page": "Strana",

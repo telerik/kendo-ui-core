@@ -146,7 +146,7 @@ makes a HTTP request for every CRUD operation.
 
 ### data `Array|String`
 
-The array of data items which the data source contains. The data source will wrap those items as [kendo.data.ObservableObject](/api/framework/observableobject) or [kendo.data.Model](/api/framework/model) (if [schema.model](#configuration-schema-model) is set).
+The array of data items which the data source contains. The data source will wrap those items as [kendo.data.ObservableObject](/api/javascript/data/observableobject) or [kendo.data.Model](/api/javascript/data/model) (if [schema.model](#configuration-schema-model) is set).
 
 Can be set to a string value if the [schema.type](#configuration-schema.type) option is set to "xml".
 
@@ -952,9 +952,9 @@ The result should have the following format:
 
 The data item (model) configuration.
 
-If set to an object the [Model.define](/api/framework/model#model.define) method will be used to initialize the data source model.
+If set to an object the [Model.define](/api/javascript/data/model#model.define) method will be used to initialize the data source model.
 
-If set to an existing [kendo.data.Model](/api/framework/model) instance the data source will use that instance and will **not** initialize a new one.
+If set to an existing [kendo.data.Model](/api/javascript/data/model) instance the data source will use that instance and will **not** initialize a new one.
 
 #### Example - set the model as a JavaScript object
 
@@ -2698,7 +2698,7 @@ Appends a data item to the data source.
 
 ##### model `Object|kendo.data.Model`
 
-Either a [kendo.data.Model](/api/framework/model) instance or JavaScript object containing the data item field values.
+Either a [kendo.data.Model](/api/javascript/data/model) instance or JavaScript object containing the data item field values.
 
 #### Returns
 
@@ -2918,10 +2918,10 @@ The optional data item (model). If specified only the changes of this data item 
 Gets or sets the data items of the data source.
 
 If the data source is bound to a remote service (via the [transport](#configuration-transport) option) the `data` method will return the service response.
-Every item from the response is wrapped in a [kendo.data.ObservableObject](/api/framework/observableobject) or [kendo.data.Model](/api/framework/model) (if the [schema.model](#configuration-schema.model) option is set).
+Every item from the response is wrapped in a [kendo.data.ObservableObject](/api/javascript/data/observableobject) or [kendo.data.Model](/api/javascript/data/model) (if the [schema.model](#configuration-schema.model) option is set).
 
 If the data source is bound to a JavaScript array (via the [data](#configuration-data) option) the `data` method will return the items of that array.
-Every item from the array is wrapped in a [kendo.data.ObservableObject](/api/framework/observableobject) or [kendo.data.Model](/api/framework/model) (if the [schema.model](#configuration-schema.model) option is set).
+Every item from the array is wrapped in a [kendo.data.ObservableObject](/api/javascript/data/observableobject) or [kendo.data.Model](/api/javascript/data/model) (if the [schema.model](#configuration-schema.model) option is set).
 
 If the data source is grouped (via the [group](#configuration-group) option or the [group](#methods-group) method) and the [serverGrouping](#configuration-serverGrouping) is set to `true`
 the `data` method will return the group items.
@@ -3087,7 +3087,7 @@ The filter configuration. Accepts the same values as the [filter](#configuration
 
 ### get
 
-Gets the data item (model) with the specified [id](/api/framework/model#fields-id).
+Gets the data item (model) with the specified [id](/api/javascript/data/model#fields-id).
 
 > The `get` method requires the [schema.model](#configuration-schema.model) option to be set and the `id` of the model to be specified.
 
@@ -3121,7 +3121,7 @@ The id of the model to look for.
 
 ### getByUid
 
-Gets the data item (model) with the specified [uid](/api/framework/model#fields-uid).
+Gets the data item (model) with the specified [uid](/api/javascript/data/model#fields-uid).
 
 #### Parameters
 
@@ -3252,7 +3252,7 @@ The zero-based index at which the data item will be inserted.
 
 ##### model `Object|kendo.data.ObservableObject|kendo.data.Model`
 
-Either a [kendo.data.Model](/api/framework/model) instance or JavaScript object containing the field values.
+Either a [kendo.data.Model](/api/javascript/data/model) instance or JavaScript object containing the field values.
 
 #### Returns
 

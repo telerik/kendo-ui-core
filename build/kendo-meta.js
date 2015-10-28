@@ -571,6 +571,10 @@ function loadComponent(filename, basedir, files, maxLevel) {
             loading.push(filename);
             var comp = getKendoFile(filename);
             comp.getAMDDeps().forEach(function(f){
+                if (f == 'jquery') {
+                    return;
+                }
+
                 // level is increased only if we don't load a subfile.
                 // otherwise we assume we're on the same level as the current component.
                 load(f, comp.dirname(), level + (comp.isSubfile() ? 0 : 1));

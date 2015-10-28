@@ -2,93 +2,61 @@
 
 var gulp = require('gulp');
 var debug = require('gulp-debug'); // jshint ignore:line
-var less = require('gulp-less');
 var logger = require('gulp-logger');
-var replace =  require('gulp-replace');
-var minifyCSS = require('gulp-minify-css');
-var rename = require('gulp-rename');
+var util = require('gulp-util');
 var clone = require('gulp-clone');
-var cache = require('gulp-cached');
-var progeny = require('gulp-progeny');
 var plumber = require('gulp-plumber');
 var filter = require('gulp-filter');
 var sourcemaps = require('gulp-sourcemaps');
+var gulpIf = require('gulp-if');
+var jshint = require("gulp-jshint");
+
+var ignore = require('gulp-ignore');
 
 var merge = require('merge2');
+var concat = require('gulp-concat');
 var lazypipe = require('lazypipe');
-var autoprefix = require('less-plugin-autoprefix');
 var browserSync = require('browser-sync').create();
 var argv = require('yargs').argv;
 
-var browsers = [
-    "Explorer >= 7",
-    "Chrome >= 21",
-    "Firefox ESR",
-    "Opera >= 15",
-    "Android >= 2.3",
-    "Safari >= 6.2.6",
-    "ExplorerMobile >= 10",
-    "iOS >= 6",
-    "BlackBerry >= 10"
-].join(",");
+var license = require('./build/gulp/license');
+var cssUtils = require('./build/gulp/css');
+var umdWrapToCore = require('./build/gulp/wrap-umd');
+var gatherAmd = require('./build/gulp/gather-amd');
+var uglify = require('./build/gulp/uglify');
+var requireDir = require('require-dir');
+var runSequence = require('run-sequence');
 
-var cleanCssOptions = {
-    compatibility: 'ie7',
-    aggressiveMerging: false,
-    advanced: false
-};
-
-var lessLogger = logger({
-    after: 'LESS complete!',
-    extname: '.css',
-    showChange: true
-});
-
-var minCssLogger = logger({
-    after: 'Min CSS complete!',
-    extname: '.min.css',
-    showChange: true
-});
+requireDir('./build/gulp/tasks');
 
 gulp.task("css-assets", function() {
-    return gulp.src("styles/**/*.{less,woff,ttf,eot,png,gif,css,svg,txt}").
-        pipe(gulp.dest("dist/styles"));
+    return gulp.src("styles/**/*.{less,woff,ttf,eot,png,gif,css,svg,txt}")
+        .pipe(gulpIf((file) => file.path.match(/.less$/), license() ))
+        .pipe(gulp.dest("dist/styles"));
 });
 
-var lessToCss = lazypipe()
-    .pipe(less, { relativeUrls: true, plugins: [new autoprefix({ browsers: browsers }) ] })
-    .pipe(replace, /\.\.\/mobile\//g, ''); // temp hack for the discrepancy between source and generated "source"
-
-var resumeOnErrors = lazypipe()
-    .pipe(plumber, {
-        errorHandler: function (err) {
-            console.log(err);
-            this.emit('end');
-        }
-    });
-
-var cacheLessDependencies = lazypipe()
-    .pipe(cache, 'less')
-    .pipe(progeny, {
-        regexp: /^\s*@import\s*(?:\(\w+\)\s*)?['"]([^'"]+)['"]/
-    });
-
 gulp.task("build-skin", ["css-assets"], function() {
-    var lessLogger = logger({ after: 'LESS complete!', extname: '.css', showChange: true });
-    var mapLogger = logger({ after: 'map complete!', extname: '.css.map', showChange: true });
+    var resumeOnErrors = lazypipe()
+        .pipe(plumber, {
+            errorHandler: function (err) {
+                console.log(err);
+                this.emit('end');
+            }
+        });
+
+    var mapLogger = logger({ after: 'source map complete!', extname: '.css.map', showChange: true });
 
     var allFiles = "styles/**/*.less";
     var filesToBuild = argv.s || 'styles/**/kendo.*.less';
 
     return gulp.src(allFiles)
         .pipe(resumeOnErrors())
-        .pipe(cacheLessDependencies())
+        .pipe(cssUtils.cacheLessDependencies())
         .pipe(filter([
             filesToBuild.replace(/(styles|mobile|web)/, "**")
         ]))
         .pipe(sourcemaps.init())
-        .pipe(lessLogger)
-        .pipe(lessToCss())
+        .pipe(cssUtils.fromLess())
         .pipe(mapLogger)
         .pipe(sourcemaps.write("maps", { sourceRoot: "../../../../styles" }))
         .pipe(gulp.dest('dist/styles'))
@@ -97,15 +65,13 @@ gulp.task("build-skin", ["css-assets"], function() {
 
 gulp.task("less",function() {
     var css = gulp.src("styles/**/kendo*.less")
-        .pipe(sourcemaps.init())
-        .pipe(lessLogger)
-        .pipe(lessToCss());
+        .pipe(license())
+        .pipe(cssUtils.fromLess());
 
     var minCss = css.pipe(clone())
-        .pipe(minCssLogger)
-        .pipe(minifyCSS(cleanCssOptions))
-        .pipe(rename({ suffix: ".min" }))
-        .pipe(sourcemaps.write("maps", { sourceRoot: "../../../styles" }));
+        .pipe(sourcemaps.init())
+        .pipe(cssUtils.minify())
+        .pipe(sourcemaps.write("./"));
 
     return merge(css, minCss)
         .pipe(gulp.dest('dist/styles'));
@@ -116,4 +82,99 @@ gulp.task("styles", [ "less", "css-assets" ]);
 gulp.task("watch-styles", [ "build-skin", "css-assets" ], function() {
     browserSync.init({ proxy: "localhost", open: false });
     return gulp.watch("styles/**/*.less", [ "build-skin" ]);
+});
+
+// cloning those somehow fails, I think that it is due to the RTL symbols in the culture
+function cultures() {
+   return gulp.src('src/cultures/kendo.culture.*.js', { base: 'src' })
+        .pipe(umdWrapToCore())
+        .pipe(license());
+}
+
+function messages() {
+   return gulp.src('src/messages/kendo.messages.*.js', { base: 'src' })
+        .pipe(umdWrapToCore())
+        .pipe(license());
+}
+
+var toDist = lazypipe().pipe(gulp.dest,  "dist/js");
+
+gulp.task("scripts", function() {
+    var src = gulp.src('src/kendo.*.js').pipe(gatherAmd.gather()).pipe(license());
+
+    var thirdParty = gulp.src('src/{jquery,angular,pako,jszip}*.*');
+
+    var gatheredSrc = src.pipe(clone())
+        .pipe(ignore.include(["**/src/kendo.**.js"]));
+
+    var minSrc = merge(cultures(), messages(), gatheredSrc)
+        .pipe(sourcemaps.init())
+        .pipe(uglify())
+        .pipe(logger({after: 'source map complete!', extname: '.map', showChange: true}))
+        .pipe(sourcemaps.write("./"));
+
+    // the duplication below is due to something strange with merge2 and concat
+    // resulting in "cannot switch to old mode now" error
+    return merge(
+        cultures().pipe(toDist()),
+        messages().pipe(toDist()),
+        src.pipe(toDist()),
+        minSrc.pipe(toDist()),
+        thirdParty.pipe(toDist())
+    );
+});
+
+gulp.task("custom", function() {
+    var files = argv.c;
+
+    if (!files) {
+        throw new util.PluginError({
+            task: "custom",
+            plugin: "custom",
+            message: "please provide a list of the components to be included in the build with -c, separated with ','"
+        });
+    }
+
+    var included = [];
+    var src = gulp.src(`src/kendo.{${files}}.js`)
+                .pipe(gatherAmd.gatherCustom())
+                .pipe(filter(function(file) {
+                    if (included.indexOf(file.path) === -1) {
+                        included.push(file.path);
+                        return true;
+                    }  else {
+                        util.log("skipping ", file.path);
+                        return false;
+                    }
+                }))
+                .pipe(concat({path: 'src/kendo.custom.js', base: 'src'}))
+                .pipe(license());
+
+    var minSrc = src
+        .pipe(clone())
+        .pipe(sourcemaps.init())
+        .pipe(uglify())
+        .pipe(logger({after: 'source map complete!', extname: '.map', showChange: true}))
+        .pipe(sourcemaps.write("./"));
+
+    return merge(src.pipe(toDist()), minSrc.pipe(toDist()));
+});
+
+gulp.task("jshint", function() {
+    var packageJSON = require('./package');
+
+    return gulp.src(packageJSON.jshintFiles)
+        .pipe(jshint(packageJSON.jshintConfig))
+        .pipe(jshint.reporter('jshint-stylish'))
+        .pipe(jshint.reporter('fail'));
+});
+
+gulp.task('build', [ 'scripts', 'styles' ]);
+
+gulp.task('ci', function(done) {
+  runSequence('build', 'karma-jenkins', done);
+});
+
+gulp.task('travis', function(done) {
+  runSequence('jshint', 'build', 'karma-travis', done);
 });

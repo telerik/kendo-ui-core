@@ -10,29 +10,29 @@ position: 3
 
 The Kendo UI CDN is hosted on [Amazon CloudFront](https://aws.amazon.com/cloudfront/). In order to access the Kendo UI CDN Service, you can use either of the options described below.
 
-## Option 1: Through the HTTP Protocol
+## Option 1: Via the HTTP Protocol
 
 The minified versions of all JavaScript files are available via the following URLs:  
-<http://kendo.cdn.telerik.com/VERSION/js/FILENAME.min.js>  
-<http://kendo.cdn.telerik.com/VERSION/styles/FILENAME.min.css>
+`https://kendo.cdn.telerik.com/VERSION/js/FILENAME.min.js`
+`https://kendo.cdn.telerik.com/VERSION/styles/FILENAME.min.css`
 
 For example, the 2014.1.318 version can be loaded from:  
-<http://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js>  
-<http://kendo.cdn.telerik.com/2014.1.318/styles/kendo.common.min.css>
+<https://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js>  
+<https://kendo.cdn.telerik.com/2014.1.318/styles/kendo.common.min.css>
 
 Use the following URL to load the minified Kendo UI Core script (available since Q1 2014 SP1):
-<http://kendo.cdn.telerik.com/2014.1.416/js/kendo.ui.core.min.js>
+<https://kendo.cdn.telerik.com/2014.1.416/js/kendo.ui.core.min.js>
 
 > **Important**  
-> The <http://cdn.kendostatic.com> URL will remain active, but is no longer recommended for new projects.
+> The <http://cdn.kendostatic.com/> URL will remain active, but is no longer recommended for new projects.
 
-## Option 2: Through the HTTPS Protocol
+## Option 2: Via the HTTPS Protocol
 
 To access the Kendo UI CDN service through the HTTPS protocol, use the same host name as above, only replacing the scheme (protocol) with `https`:  
 <https://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js>
 
 > **Important**  
-> The <https://da7xgjtj801h2.cloudfront.net> URL will remain active, but are no longer recommended for new projects.
+> The <https://da7xgjtj801h2.cloudfront.net/> URL will remain active, but is no longer recommended for new projects.
 
 ## Troubleshooting
 

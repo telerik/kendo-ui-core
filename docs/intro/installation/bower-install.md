@@ -25,7 +25,7 @@ bower install kendo-ui-core
 
 ## Option 2: Install Kendo UI Professional Bower Package
 
-The Kendo UI Professional Bower Package is hosted as a [private GitHub repository](https://bower.telerik.com). To access it, you need an active account for Telerik Platform. Bower will prompt for your username and password during the installation and update processes:
+The Kendo UI Professional Bower Package is hosted as a private GitHub repository. To access it, you need an active account for Telerik Platform. Bower will prompt for your username and password during the installation and update processes:
 
 ```sh
 bower install https://bower.telerik.com/bower-kendo-ui.git
@@ -95,4 +95,4 @@ fatal: unable to access 'https://bower.telerik.com/bower-kendo-ui.git/': SSL cer
 
 > **Important**  
 > 1.9.5 Git build will not work with the Bower package.
-> When using @ symbol in the url for accessing the Kendo UI Bower repository (due to network restrictions or admin rules, for instance), make sure you encode it as follows: https://firstname.lasname**%40**domain.com@bower.telerik.com/bower-kendo-ui.git.
+> When using @ symbol in the url for accessing the Kendo UI Bower repository (due to network restrictions or admin rules, for instance), make sure you encode it as follows: `https://firstname.lasname**%40**domain.com@bower.telerik.com/bower-kendo-ui.git`.

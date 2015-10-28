@@ -6,7 +6,7 @@ description: Configuration of Kendo UI Chart widget for server binding in quick 
 
 # Chart
 
-The Chart HtmlHelper extension is a server-side wrapper for the [Kendo UI Chart](/api/dataviz/chart) widget.
+The Chart HtmlHelper extension is a server-side wrapper for the [Kendo UI Chart](/api/javascript/dataviz/ui/chart) widget.
 
 ## Getting Started
 
@@ -65,7 +65,7 @@ Here is how to configure the Kendo Chart for server binding to the list of Inter
 ## Access an Existing Chart
 
 You can reference an existing chart instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/dataviz/chart#methods) to control its behavior.
+Once a reference has been established, you can use the [API](/api/javascript/dataviz/ui/chart#methods) to control its behavior.
 
 ### Access an Existing Chart Instance
 
@@ -79,7 +79,7 @@ Once a reference has been established, you can use the [API](/api/dataviz/chart#
 
 ## Handle Chart Events
 
-You can subscribe to all [events](/api/dataviz/chart#events) exposed by Kendo UI Chart:
+You can subscribe to all [events](/api/javascript/dataviz/ui/chart#events) exposed by Kendo UI Chart:
 
 
 ### WebForms - Subscribe by Handler Name

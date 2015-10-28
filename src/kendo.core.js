@@ -1,5 +1,5 @@
 (function(f, define){
-    define([], f);
+    define(['jquery'], f);
 })(function(){
 
 var __meta__ = { // jshint ignore:line
@@ -37,7 +37,7 @@ var __meta__ = { // jshint ignore:line
         slice = [].slice,
         globalize = window.Globalize;
 
-    kendo.version = "$KENDO_VERSION";
+    kendo.version = "$KENDO_VERSION".trim();
 
     function Class() {}
 
@@ -2532,7 +2532,7 @@ function pad(number, digits, end) {
         data: kendo.data || {},
         dataviz: kendo.dataviz || {},
         drawing: kendo.drawing || {},
-        spreadsheet: {},
+        spreadsheet: { messages: {} },
         keys: {
             INSERT: 45,
             DELETE: 46,
@@ -4270,4 +4270,4 @@ function pad(number, digits, end) {
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
