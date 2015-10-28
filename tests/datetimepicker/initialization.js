@@ -40,7 +40,7 @@ test("_icons method creates calendar and clock button", function() {
 
 test("DateTimePicker renders last date when navigating", function() {
     var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
-    datetimepicker.value(new Date (2099,11,10,10,10,10));
+    datetimepicker.value(new Date(2099, 11, 10, 10, 10, 10));
     datetimepicker.open();
     equal($(".k-link").not(".k-nav-today").last().text(), 31);
 });
