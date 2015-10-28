@@ -881,8 +881,6 @@ var __meta__ = { // jshint ignore:line
                     empty: options.empty,
                     setter: that.setDate,
                     build: function(date) {
-                        date = new DATE(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
-                        adjustDST(date, 0);
 
                         var cssClass = [],
                             day = date.getDay(),
@@ -1177,6 +1175,9 @@ var __meta__ = { // jshint ignore:line
             if (idx > 0 && idx % cellsPerRow === 0) {
                 html += '</tr><tr role="row">';
             }
+
+            start = new DATE(start.getFullYear(), start.getMonth(), start.getDate(), 0, 0, 0);
+            adjustDST(start, 0);
 
             data = build(start, idx);
 
