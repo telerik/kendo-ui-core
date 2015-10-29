@@ -29,6 +29,8 @@ var runSequence = require('run-sequence');
 
 requireDir('./build/gulp/tasks');
 
+var makeSourceMaps = !argv['skip-source-maps'];
+
 gulp.task("css-assets", function() {
     return gulp.src("styles/**/*.{less,woff,ttf,eot,png,gif,css,svg,txt}")
         .pipe(gulpIf((file) => file.path.match(/.less$/), license() ))
@@ -64,14 +66,14 @@ gulp.task("build-skin", ["css-assets"], function() {
 });
 
 gulp.task("less",function() {
-    var css = gulp.src("styles/**/kendo*.less")
+    var css = gulp.src(`styles/${argv.styles || '**/*.less'}`, { base: "styles" })
         .pipe(license())
         .pipe(cssUtils.fromLess());
 
     var minCss = css.pipe(clone())
-        .pipe(sourcemaps.init())
+        .pipe(gulpIf(makeSourceMaps, sourcemaps.init()))
         .pipe(cssUtils.minify())
-        .pipe(sourcemaps.write("./"));
+        .pipe(gulpIf(makeSourceMaps, sourcemaps.write("./")));
 
     return merge(css, minCss)
         .pipe(gulp.dest('dist/styles'));
@@ -100,18 +102,20 @@ function messages() {
 var toDist = lazypipe().pipe(gulp.dest,  "dist/js");
 
 gulp.task("scripts", function() {
-    var src = gulp.src('src/kendo.*.js').pipe(gatherAmd.gather()).pipe(license());
+    var src = gulp.src(`src/${argv.scripts || 'kendo.*.js'}`, { base: "src" }).pipe(gatherAmd.gather()).pipe(license());
 
     var thirdParty = gulp.src('src/{jquery,angular,pako,jszip}*.*');
 
     var gatheredSrc = src.pipe(clone())
         .pipe(ignore.include(["**/src/kendo.**.js"]));
 
-    var minSrc = merge(cultures(), messages(), gatheredSrc)
-        .pipe(sourcemaps.init())
+    var scriptsToUglify = argv['skip-cultures'] ? gatheredSrc : merge(cultures(), messages(), gatheredSrc);
+
+    var minSrc = scriptsToUglify
+        .pipe(gulpIf(makeSourceMaps, sourcemaps.init()))
         .pipe(uglify())
-        .pipe(logger({after: 'source map complete!', extname: '.map', showChange: true}))
-        .pipe(sourcemaps.write("./"));
+        .pipe(gulpIf(makeSourceMaps, logger({after: 'source map complete!', extname: '.map', showChange: true})))
+        .pipe(gulpIf(makeSourceMaps, sourcemaps.write("./")));
 
     // the duplication below is due to something strange with merge2 and concat
     // resulting in "cannot switch to old mode now" error
@@ -152,10 +156,10 @@ gulp.task("custom", function() {
 
     var minSrc = src
         .pipe(clone())
-        .pipe(sourcemaps.init())
+        .pipe(gulpIf(makeSourceMaps, sourcemaps.init()))
         .pipe(uglify())
-        .pipe(logger({after: 'source map complete!', extname: '.map', showChange: true}))
-        .pipe(sourcemaps.write("./"));
+        .pipe(gulpIf(makeSourceMaps, logger({after: 'source map complete!', extname: '.map', showChange: true})))
+        .pipe(gulpIf(makeSourceMaps, sourcemaps.write("./")));
 
     return merge(src.pipe(toDist()), minSrc.pipe(toDist()));
 });

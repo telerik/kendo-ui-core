@@ -74,7 +74,7 @@
    },
    "scripts": {
        "build": "npm install && ./node_modules/.bin/gulp build",
-       "test": "./node_modules/.bin/gulp travis"
+       "test": "./node_modules/.bin/gulp travis --scripts kendo.ui.core.js --styles '{web/kendo.common.core.less,mobile/kendo.mobile.all.less,web/kendo.rtl.less}' --skip-cultures --skip-source-maps"
    },
    "jshintConfig": {
         "es3": true,
