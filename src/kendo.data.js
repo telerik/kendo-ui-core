@@ -4270,7 +4270,7 @@ var __meta__ = { // jshint ignore:line
                 that._initChildren();
             }
 
-            that._loaded = !!(value && (value[childrenField] || value._loaded));
+            that._loaded = !!(value && value._loaded);
         },
 
         _initChildren: function() {
