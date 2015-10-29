@@ -8632,3 +8632,64 @@ The widget instance which fired the event.
     var grid = $("#grid").data("kendoGrid");
     grid.bind("columnUnlock", grid_columnUnlock);
     </script>
+
+### navigate
+
+Fired when [navigatable](#configuration-navigatable) is enabled and the user change current item with either
+mouse or keyboard interaction.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.element `jQuery`
+
+A jQuery object of the new hightlighted cell.
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "navigate" event during initialization
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width: 100, locked: true },
+        { field: "name", width: 100 },
+        { field: "age", width: 50 }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30, id: 1 },
+        { name: "John Doe", age: 33, id: 2 }
+      ],
+      navigatable: true,
+      navigate: function(e) {
+        console.log(e.element); // displays the newly highlighted cell
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "navigate" event after initialization
+
+    <div id="grid"></div>
+    <script>
+    function grid_navigate(e) {
+        console.log(e.element); // displays the newly highlighted cell
+    }
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width: 100, locked: true },
+        { field: "name", width: 100 },
+        { field: "age", width: 50 }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30, id: 1 },
+        { name: "John Doe", age: 33, id: 2 }
+      ],
+      navigatable: true
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.bind("navigate", grid_navigate);
+    </script>
