@@ -1,20 +1,20 @@
 ---
 title: Overview
-page_title: Calendar UI widget for web app development | Kendo UI Documentation
-description: Initialize Calendar UI widget, configure the behaviour of the control and use a custom template.
+page_title: Overview | Kendo UI Calendar Widget
+description: "Learn how to initialize the Kendo UI Calendar widget, configure its options and make use of custom templates."
+slug: overview_kendoui_calendar_widget
+position: 1
 ---
 
 # Calendar Overview
 
-The Kendo UI Calendar widget renders a graphical calendar that supports
-navigation and selection. It also supports custom templates for its
-"month" view and configuration options for minimum and maximum date,
-start view and the depth of the navigation.
+[Kendo UI Calendar widget](http://demos.telerik.com/kendo-ui/calendar/index) renders a graphical calendar that supports navigation and selection. It also supports custom templates for its `month` view and configuration options for minimum and maximum date, start view and the depth of the navigation.
 
 ## Getting Started
 
+### Initialize the Calendar 
 
-### Initialize the Calendar via a jQuery ID selector
+Initialize the Calendar by using a jQuery selector:
     
     <div id="calendar"></div>
     
@@ -24,23 +24,21 @@ start view and the depth of the navigation.
         });
     </script>
 
-## Configuring Calendar Behaviors
 
+## Configuration
 
-The Calendar provides many configuration options that can be
-set during initialization. Among the properties that can be
-controlled are:
-
+The Calendar provides many configuration options that can be set during initialization. Among the properties you can control are:
 
 *   Selected date
 *   Minimum and/or maximum date
 *   Start view
-*   Define the navigation depth (last view to which the user can
-navigate)
+*   Navigation depth (i.e., define the last view to which the user can navigate)
 *   Day template
 *   Footer template
     
-### Create Calendar with selected date and a defined minimum and maximum date
+### Define Selected, Min, and Max Dates
+
+Create a Calendar with a selected date and a defined minimum and maximum dates in the following way:
     
     <div id="calendar"></div>
     
@@ -52,24 +50,20 @@ navigate)
         });
     </script>
 
-The Calendar will not navigate before the specified minimum
-date. It will also restrict the navigation to the maximum date
-specified.
+As a result, the Calendar does not navigate before the specified minimum date and also restricts the navigation to the maximum date you specified.
 
-## Define start view and navigation depth
+### Define the Start View and Navigation Depth
 
+Define the first rendered view with the `start` option. Control the navigation depth with the `depth` option. The following views are predefined:
 
-The first view rendered can be defined with the "start" option.
-Navigation depth can be controlled with the "depth" option. Predefined
-views are:
+*   `month` - shows the days of the month
+*   `year` - shows the months of the year
+*   `decade` - shows the years of the decade
+*   `century` - shows the decades of the century
 
+### Create a Selectable Month Calendar 
 
-*   "month" - shows the days from the month
-*   "year" - shows the months of the year
-*   "decade" - shows the years from the decade
-*   "century" - shows the decades from the century
-
-### Create a Calendar, which allows a user to select a month
+Create a Calendar that allows users to select a month in the following way:
     
     <div id="calendar"></div>
     
@@ -80,12 +74,13 @@ views are:
         });
     </script>
 
-## Customize day template
+## Customize Day Templates
 
+Kendo UI Calendar allows rendered day customization for the "month" view.
 
-The Calendar allows rendered day customization for the "month" view.
+### Custom Tamplates
 
-### Create a Calendar with custom template
+Create a Calendar by using a custom template in the following way:
     
     <div id="calendar"></div>
     
@@ -96,11 +91,8 @@ The Calendar allows rendered day customization for the "month" view.
             }
         });
     </script>
-
-The template wraps the "value" in a div HTML element. Here is an
-example of the object passed to the template function:
-
-**Structure of the data object passed to the template**
+ 
+The template wraps the `value` in a `<div>` HTML element. The structure of the data object that is passed to the template function:
 
     data = {
         date: date, // Date object corresponding to the current cell
@@ -108,3 +100,12 @@ example of the object passed to the template function:
         value: date.getDate(),
         dateString: "2011/0/1" // formatted date using yyyy/MM/dd format and month is zero-based
     };
+
+## See Also
+
+Other articles on Kendo UI Calendar:
+
+* [Control the Header Format]({% slug howto_control_header_format_calendar %})
+* [Overview of the HtmlHelper Extension](/aspnet-mvc/helpers/calendar/overview)
+* [Overview of the JSP Tag](/jsp/tags/calendar/overview)
+* [Overview of the PHP Class](/php/widgets/calendar/overview)

@@ -14,7 +14,7 @@ position: 1
 
 ### Initialize the AutoComplete 
 
-You can initialize the AutoComplete widget by using a jQuery selector:
+Initialize the AutoComplete widget by using a jQuery selector:
     
     <input id="autoComplete" />
     
