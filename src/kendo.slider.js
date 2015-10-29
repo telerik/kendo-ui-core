@@ -752,6 +752,7 @@ var __meta__ = { // jshint ignore:line
                 .find(DRAG_HANDLE)
                 .attr(TABINDEX, 0)
                 .on(MOUSE_UP, function () {
+                    that._drag.draggable.userEvents.cancel();
                     that._setTooltipTimeout();
                 })
                 .on(CLICK, function (e) {
@@ -1453,6 +1454,7 @@ var __meta__ = { // jshint ignore:line
                 .find(DRAG_HANDLE)
                 .attr(TABINDEX, 0)
                 .on(MOUSE_UP, function () {
+                    that._drag.draggable.userEvents.cancel();
                     that._setTooltipTimeout();
                 })
                 .on(CLICK, function (e) {
