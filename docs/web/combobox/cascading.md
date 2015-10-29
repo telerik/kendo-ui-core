@@ -1,17 +1,20 @@
 ---
 title: Cascading ComboBoxes
-page_title: jQuery-powered Cascading ComboBox in Kendo UI Web
-description: This document provides information how Kendo UI cascading ComboBox works and helps you handle most common scenarios with illustrative examples and FAQ.
-position: 2
+page_title: Cascading ComboBoxes | Kendo UI ComboBox Widget
+description: "Learn how Kendo UI cascading ComboBox works and helps you handle the most common scenarios with illustrative examples and FAQ."
+slug: cascading_kendoui_combobox_widget
+position: 5
 ---
 
 # Cascading ComboBoxes
 
-The cascading comboboxes are a series of 2 or more comboboxes in which each combobox is filtered according to the previous combobox.
+A [cascading ComboBox](http://demos.telerik.com/kendo-ui/combobox/cascadingcombobox) is a series of two or more ComboBoxes in which each ComboBox is filtered according to the selected options in the previous ComboBox.
 
-##How it works?
+## Initialize Cascading ComboBoxes
 
-Here is a simple example:
+Initialize a cascading ComboBox in the following way:
+
+###### Example
 
     <input id="parent" />
     <input id="child" />
@@ -30,18 +33,18 @@ Here is a simple example:
              });
          });
     </script>
-The "child" combobox will cascade from the "parent" combobox if the [cascadeFrom](/api/web/combobox#configuration) option is defined. The `cascadeFrom` option should point to the parent's ID.
 
-> **Important:** If the `cascadeFrom` property is not defined or the parent combobox is not initialized then the cascading functionality will not **work**.
+The `child` ComboBox cascades from the `parent` one if the [`cascadeFrom`](/api/web/combobox#configuration) option is defined. The `cascadeFrom` option should point to the `parent` ID.
 
-Here is a list of the actions which the child combobox makes during the initialization:
+> **Important**  
+> The cascading functionality only works when you define the `cascadeFrom` property and initialize the `parent` ComboBox.
 
-- Checks if the "cascadeFrom" property is set. If not then the cascading is disabled.
-- Tries to find the parent combobox object. If the result is null, then the functionality is omitted.
-- The child combobox will listen to any changes of the parent's value.
-- If the parent does not have a value, then the child will be disabled.
-- If the parent has a value, then the child will be enabled and will filter its data depending on it. Here is how the filter options will look like:
+The `child` ComboBox takes the following actions during initialization:
 
+- Checks if the `cascadeFrom` property is set. If not, cascading is disabled.
+- Tries to find the parent ComboBox object. If the result is null, then the functionality is omitted.
+- Listens to any changes of the `parent` value.
+- If the `parent` does not have a value, the `child` is disabled. If the `parent` has a value, the child is enabled and filters its data accordingly. This is what the filter options look like:
 
         field: "parentID",  //the dataValueField of the parent
         operator: "eq",
@@ -54,24 +57,20 @@ And here are the paramenters of this request:
         filter[filters][0][operator]: eq
         filter[filters][0][value]:
 
+> **Important**  
 > Please note that the filter operator will always be "eq". The child combobox will use the `dataValueField` option of the parent combobox in order to filter the data.
 
-## Kendo MVVM and cascading widgets
+## MVVM Value Binding
 
-The MVVM [value](/framework/mvvm/bindings/value) binding updates the **model** when UI element triggers `change` event. When widgets cascades, however, they will not raise change event and thus the model will not be updated.
-For those who need synced **model**, please review the following demo which shows how to implement a [custom MVVM binding](/framework/mvvm/bindings/custom) that will update the model accordingly:
+The MVVM [value](/framework/mvvm/bindings/value) binding updates the `model` when a UI element triggers a `change` event. When widgets cascade, however, they will not raise a `change` event and the `model` is not updated. If you need a synced `model`, refer to [this demo](http://dojo.telerik.com/@ggkrustev/aSAlU) which shows how to implement a [custom MVVM binding](/framework/mvvm/bindings/custom) that will update the model accordingly.
 
-- [http://dojo.telerik.com/@ggkrustev/aSAlU](http://dojo.telerik.com/@ggkrustev/aSAlU)
+For more information about why a widget does not trigger a `change` event, refer to [this Github discussion](http://github.com/telerik/kendo-ui-core/issues/661).
 
-For more details, why the widgets does not trigger `change` event refer to this Github discussion:
+## FAQ
 
-- [http://github.com/telerik/kendo-ui-core/issues/661](http://github.com/telerik/kendo-ui-core/issues/661)
+**1. I am using cascading ComboBoxes with the `"autoBind: true"` option set and I need to pre-set the selected items. How to do that?**
 
-####FAQ
-
-Q: I am using cascading comboboxes with `"autoBind: true"` option set and I need to pre-set the selected items. How to do that?
-
-A: You need to set the value of the comboboxes. For instance, you can define it before initialization:
+You need to set the value of the ComboBoxes. For instance, you can define it before initialization:
 
     <input id="parent" value="1" />
     <input id="child" value="36" />
@@ -84,11 +83,11 @@ A: You need to set the value of the comboboxes. For instance, you can define it 
        });
     </script>
 
-You also can use the [value](/api/web/combobox#configuration) option.
+You also can use the [`value`](/api/web/combobox#configuration) option.
 
-Q: I am using comboboxes with load on demand (autoBind: false) and I need to pre-set the selected items. How to do that?
+**2. I am using ComboBoxes with load on demand (`autoBind: false`) and I need to pre-set the selected items. How to do that?**
 
-A: You need to set the [value](/api/web/combobox#configuration) and [text](/api/web/combobox#configuration) options.
+You need to set the [`value`](/api/web/combobox#configuration) and [`text`](/api/web/combobox#configuration) options:
 
     <input id="parent" value="1" />
     <input id="child" value="36" />
@@ -120,14 +119,13 @@ A: You need to set the [value](/api/web/combobox#configuration) and [text](/api/
        });
     </script>
 
-Q: The serverFiltering is disabled and the child combobox does not work?
+**3. The `serverFiltering` is disabled and the `child` ComboBox does not work. What is the reason for that?**
 
-A: When [serverFiltering](/api/framework/datasource#configuration) is disabled, then the combobox will not make any additional requests to the server. Hence it will filter the initial data using the parent's dataValueField property. If no items are found, then the child combobox will be left empty. If you need to use child combobox with disabled server filtering, then you will need to provide all neccessary data on the client.
+When [`serverFiltering`](/api/framework/datasource#configuration) is disabled, the ComboBox does not make any additional requests to the server. Hence it filters the initial data using the `parent`'s `dataValueField` property. If no items are found, the `child` ComboBox is left empty. If you want to use a `child` ComboBox with disabled server filtering, provide all the neccessary data on the client.
 
-Q: Cannot get the request parameters on the server?
+**4. Cannot get the request parameters on the server. What to do now?**
 
-A: Check the format of the request parameters in the end of the "How it works?" section. Modify your server code in order to get them correctly.
-Other option is to pass the ID of the parent combobox manually, using the data callback of the DataSource's Transport.Read object:
+Check the format of the request parameters as displayed at the end of the Initialize Cascading ComboBoxes section of this article. Modify your server code in order to get them correctly. Another way to handle the issue is to pass the ID of the parent ComboBox manually, using the data callback of the DataSource's `Transport.Read` object:
 
     <input id="child" />
 
@@ -149,3 +147,11 @@ Other option is to pass the ID of the parent combobox manually, using the data c
       });
     </script>
 
+## See Also 
+
+Other articles on Kendo UI ComboBox:
+
+* [Overview]({% slug overview_kendoui_combobox_widget %})
+* [Grouping]({% slug grouping_kendoui_combobox_widget %})
+* [Virtualization]({% slug virtualization_kendoui_combobox_widget %})
+* [Server Filtering]({% slug server_filtering_kendoui_combobox_widget %})

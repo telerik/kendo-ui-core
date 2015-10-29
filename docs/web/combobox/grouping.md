@@ -1,17 +1,20 @@
 ---
 title: Grouping
-page_title: Kendo UI ComboBox Grouping
-description: This document provides information how to configure grouping in Kendo UI ComboBox, DropDownList, AutoComplete and MultiSelect
-position: 3
+page_title: Grouping | Kendo UI ComboBox Widget
+description: "Learn how to configure grouping in Kendo UI ComboBox, DropDownList, AutoComplete and MultiSelect widgets."
+slug: grouping_kendoui_combobox_widget
+position: 2
 ---
 
 # Grouping
 
-Kendo UI AutoComplete, ComboBox, DropDownList and MultiSelect support binding to a grouped [datasource](http://docs.telerik.com/kendo-ui/framework/datasource/overview) since Q1 2015 (2015.1.318).
-This functionality allows to display data items categorized by a specific model field. For more details about the data source grouping functionality please refer to
-the [group documentation](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-group).
+As of Kendo UI Q1 2015 (2015.1.318) [Kendo UI AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index), [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index), [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index) and [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) widgets support binding to a grouped [datasource](http://docs.telerik.com/kendo-ui/framework/datasource/overview). This functionality allows you to display data items categorized by a specific model field. 
 
-## Kendo UI ComboBox with remote transport and grouped data source
+For more details about the data source grouping functionality, refer to the [group configuration article](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-group).
+
+## Enable
+
+Enable the grouping functionality in a ComboBox by using the remote transport and a grouped data source:
 
 ```html
 <div class="demo-section k-header">
@@ -37,26 +40,21 @@ the [group documentation](http://docs.telerik.com/kendo-ui/api/javascript/data/d
 </script>
 ```
 
-## How to configure
+## Configure
 
-In order to display grouped items in the widget, you will need to group the data source component using its
-[group configuration](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-group). Once the group option is defined,
-widget will **automatically** display the suggestion items grouped.
+In order to display grouped items in the widget, you will need to group the data source component using its [group configuration](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-group). Once the group option is defined, the widget will automatically display the suggestion items grouped.
 
-## How to customize
+## Customize
 
-Widget exposes [groupTemplate](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#configuration-groupTemplate) and
-[fixedGroupedTemplate](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#configuration-fixedGroupTemplate) templates that
-allows to configure rendering of the group titles.
+The widget exposes [groupTemplate](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#configuration-groupTemplate) and [fixedGroupedTemplate](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#configuration-fixedGroupTemplate) templates that allow to configure rendering of the group titles.
 
-### Customize the inline group title
+### Inline Group Title
 
-To customize the inline group title displayed next to the suggestion item in the popup element, you will need to use the [groupTemplate](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#configuration-groupTemplate)
-option. It is rendered in the absolute positioned, right aligned group element displayed in every first element of each new group.
+To customize the inline group title displayed next to the suggestion item in the popup element, you will need to use the [groupTemplate](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#configuration-groupTemplate) option. It is rendered in the absolute positioned, right aligned group element displayed in every first element of each new group.
 
-Parameter passed to the template is the group title value.
+The parameter passed to the template is the group title value.
 
-#### Define a custom group template
+###### Example - define a custom group template
 
 ```html
 <div class="demo-section k-header">
@@ -83,14 +81,13 @@ Parameter passed to the template is the group title value.
 </script>
 ```
 
-### Customize the fixed group header
+### Fixed Group Header
 
-To customize the group title displayed in the fixed group header positioned on top of the list, you will need to use the [fixedGroupTemplate](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#configuration-fixedGroupTemplate)
-option. It shows the group title of the current visible group. That means that the value is updated dynamically on the scroll position of the grouped list.
+To customize the group title displayed in the fixed group header positioned on top of the list, you will need to use the [fixedGroupTemplate](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#configuration-fixedGroupTemplate) option. It shows the group title of the current visible group. This means that the value is updated dynamically on the scroll position of the grouped list.
 
-Parameter passed to the template is the group title value.
+The parameter passed to the template is the group title value.
 
-#### Define a custom fixed group template
+###### Example - define a custom fixed group template
 
 ```html
 <div class="demo-section k-header">
@@ -116,3 +113,12 @@ Parameter passed to the template is the group title value.
     });
 </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI ComboBox:
+
+* [Overview]({% slug overview_kendoui_combobox_widget %})
+* [Virtualization]({% slug virtualization_kendoui_combobox_widget %})
+* [Server Filtering]({% slug server_filtering_kendoui_combobox_widget %})
+* [Cascading ComboBoxes]({% slug cascading_kendoui_combobox_widget %})

@@ -20,7 +20,7 @@ navigation:
         title: "Excel"
     "*how-to":
         title: "How To"
-        position: 1
+        position: 200
     "*end-user":
         title: "For the End User"
         position: 4

@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Overview | Kendo UI Button Widget 
-description: "Learn how to use Kendo UI Button widget."
+description: "Learn how to initialize the Kendo UI Button widget and apply its other options."
 slug: overview_kendoui_button_widget
 position: 1
 ---
@@ -137,7 +137,7 @@ Technically, `spriteCssClass` can be used to achieve the same result as `icon`, 
 
 In some cases you may want to use a Button with no text and only an icon inside. In order to increase the accessibility of the widget in this case, a text label can be included inside the sprite `span`.
 
-#### Example - use the Button with no text
+###### Example - use the Button with no text
 
 	<button type="button" id="deleteButton"><span class="k-sprite">Delete</span></button>
 
@@ -277,6 +277,6 @@ Kendo UI Button can be used for creating different style of buttons, like the Fl
 
 Other articles on Kendo UI Button:
 
-* [Overview of the Button HtmlHelper Extension](/aspnet-mvc/helpers/button/overview)
-* [Overview of the Button JSP Tag](/jsp/tags/button/overview)
-* [Overview of the Button PHP Class](/php/widgets/button/overview) 
+* [Overview of the HtmlHelper Extension](/aspnet-mvc/helpers/button/overview)
+* [Overview of the JSP Tag](/jsp/tags/button/overview)
+* [Overview of the PHP Class](/php/widgets/button/overview) 
