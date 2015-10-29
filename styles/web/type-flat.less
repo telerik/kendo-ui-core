@@ -2177,67 +2177,14 @@ html .km-pane-wrapper .km-widget,
 @checkbox-disabled-color: darken(@background, 24%);
 @checkbox-disabled-border-color: darken(@background, 20%);
 
-//Radio buttons
-.k-radio-label:before {  
-  border-color: @radio-border-color-before;
-  border-radius: 50%;
-  background-color: @radio-background-color;
-  border-width: @radio-border-width-before;
-}
+@import "themes/radiobutton.less";
 
-.k-radio-label:hover:before,
-.k-radio:checked + .k-radio-label:hover:before  {
-   border-color: @radio-hover-border-color;
-   box-shadow: @radio-hover-box-shadow;
-}
-
-.k-radio:checked + .k-radio-label:before {
-   border-color: @radio-checked-border-color-before;
-}
-
-.k-radio:checked + .k-radio-label:after {
-  background-color: @radio-checked-background-color-after;
-  border-radius: 50%; 
-}
-
-.k-radio-label:active:before {
-  box-shadow: @radio-active-box-shadow; 
-  border-radius: 50%;
-  border-color: @radio-active-border-color-before;
-}
-
-.k-radio:checked + .k-radio-label:active:before {
-  box-shadow: @radio-checked-active-box-shadow; 
-  border-radius: 50%;
-  border-color: @radio-checked-active-border-color-before;
-}
-
-.k-radio:disabled + .k-radio-label {
-   color: @radio-disabled-color;
-}
-
-.k-radio:disabled + .k-radio-label:before {       
-   border-color: #bfbfbf;
-}
-
-.k-radio:disabled + .k-radio-label:active:before {
-  box-shadow: @radio-disabled-box-shadow;
-  background: @radio-disabled-background-color-before;
-}
-
-.k-radio:disabled + .k-radio-label:before {
-    background: @radio-disabled-background-color-after;
-}
-
-.k-radio:disabled + .k-radio-label:hover:after,
-.k-radio:disabled + .k-radio-label:hover:before {
-  box-shadow: @radio-disabled-box-shadow;
-}
-
-.k-radio:focus + .k-radio-label:before {
-  border-color: @radio-active-border-color-before;
-  box-shadow: @radio-active-box-shadow;
-}
+@radio-border-color: @accent;
+@radio-hover-border-color: lighten(@hover-background, 8%);
+@radio-active-border-color: @base;
+@radio-active-box-shadow: none;
+@radio-disabled-color: darken(@background, 24%);
+@radio-disabled-border-color: darken(@background, 20%);
 
 // Retina sprite
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
