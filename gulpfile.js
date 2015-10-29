@@ -66,7 +66,7 @@ gulp.task("build-skin", ["css-assets"], function() {
 });
 
 gulp.task("less",function() {
-    var css = gulp.src(`styles/${argv.styles || '**/*.less'}`, { base: "styles" })
+    var css = gulp.src(`styles/${argv.styles || '**/kendo*.less'}`, { base: "styles" })
         .pipe(license())
         .pipe(cssUtils.fromLess());
 
