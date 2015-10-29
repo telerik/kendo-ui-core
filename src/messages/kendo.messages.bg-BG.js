@@ -46,6 +46,251 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
 });
 }
 
+/* Spreadsheet messages */
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.borderPalette) {
+kendo.spreadsheet.messages.borderPalette =
+$.extend(true, kendo.spreadsheet.messages.borderPalette,{
+  "allBorders": "Всички граници",
+  "insideBorders": "Вътрешни граници",
+  "insideHorizontalBorders": "Вътрешни хоризонтални граници",
+  "insideVerticalBorders": "Вътрешни вертикални граници",
+  "outsideBorders": "Външни граници",
+  "leftBorder": "Лява граница",
+  "topBorder": "Горна граница",
+  "rightBorder": "Дясна граница",
+  "bottomBorder": "Долна граница",
+  "noBorders": "Без граница"
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.dialogs) {
+kendo.spreadsheet.messages.dialogs =
+$.extend(true, kendo.spreadsheet.messages.dialogs,{
+  "apply": "Приложи",
+  "save": "Запази",
+  "cancel": "Откажи",
+  "remove": "Премахни",
+  "okText": "OK",
+  "formatCellsDialog": {
+    "title": "Форматиране",
+    "categories": {
+      "number": "Число",
+      "currency": "Валута",
+      "date": "Дата"
+      }
+  },
+  "fontFamilyDialog": {
+    "title": "Шрифт"
+  },
+  "fontSizeDialog": {
+    "title": "Размер на шрифта"
+  },
+  "bordersDialog": {
+    "title": "Граници"
+  },
+  "alignmentDialog": {
+    "title": "Подравняване",
+    "buttons": {
+     "justtifyLeft": "Подравняване отляво",
+     "justifyCenter": "Центриране",
+     "justifyRight": "Подравняване отдясно",
+     "justifyFull": "Двустранно подравняване",
+     "alignTop": "Горно подравняване",
+     "alignMiddle": "Подравняване в средата",
+     "alignBottom": "Долно подравняване"
+    }
+  },
+  "mergeDialog": {
+    "title": "Обединяване на клетки",
+    "buttons": {
+      "mergeCells": "Обедини всичко",
+      "mergeHorizontally": "Обедини по хоризонтала",
+      "mergeVertically": "Обедини по вертикала",
+      "unmerge": "Раздели на клетки"
+    }
+  },
+  "freezeDialog": {
+    "title": "Фиксирай прозорците",
+    "buttons": {
+      "freezePanes": "Фиксирай прозорците",
+      "freezeRows": "Фиксирай редове",
+      "freezeColumns": "Фиксирай колони",
+      "unfreeze": "Освободи прозорците"
+    }
+  },
+  "validationDialog": {
+    "title": "Проверка на данни",
+    "hintMessage": "Въведете валидна {0} стойност {1}.",
+    "hintTitle": "Проверка {0}",
+    "criteria": {
+      "any": "Всяка стойност",
+      "number": "Число",
+      "text": "Текст",
+      "date": "Дата",
+      "custom": "По избор"
+    },
+    "comparers": {
+      "greaterThan": "по-голямо от",
+      "lessThan": "по-малко от",
+      "between": "между",
+      "notBetween": "не е между",
+      "equalTo": "равно на",
+      "notEqualTo": "не е равно на",
+      "greaterThanOrEqualTo": "по-голямо или равно на",
+      "lessThanOrEqualTo": "по-малко или равно на"
+    },
+    "comparerMessages": {
+      "greaterThan": "по-голямо от {0}",
+      "lessThan": "по-малко от {0}",
+      "between": "между {0} и {1}",
+      "notBetween": "не е между {0} и {1}",
+      "equalTo": "равно на {0}",
+      "notEqualTo": "не е равно на {0}",
+      "greaterThanOrEqualTo": "по-голямо или равно на {0}",
+      "lessThanOrEqualTo": "по-малко или равно на {0}",
+      "custom": "което удовлетворява формулата: {0}"
+    },
+    "labels": {
+      "criteria": "Критерии",
+      "comparer": "Comparer",
+      "min": "Мин",
+      "max": "Макс",
+      "value": "Стойност",
+      "start": "Начало",
+      "end": "Край",
+      "onInvalidData": "При невалидни данни",
+      "rejectInput": "Откажи въвеждане",
+      "showWarning": "Покажи предупреждение",
+      "showHint": "Покажи входно съобщение",
+      "hintTitle": "Заглавие",
+      "hintMessage": "СъобщениеHint message"
+    },
+    "placeholders": {
+      "typeTitle": "Напишете заглавие",
+      "typeMessage": "Напишете съобщение"
+    }
+  },
+  "saveAsDialog": {
+    "title": "Запиши като...",
+    "labels": {
+      "fileName": "Име на файл",
+      "saveAsType": "Запиши като"
+    }
+  },
+  "excelExportDialog": {
+    "title": "Експортиране към Excel..."
+  },
+  "modifyMergedDialog": {
+    "errorMessage": "Не може да се промени част от обединена клетка."
+  },
+  "useKeyboardDialog": {
+    "title": "Копиране и поставяне",
+    "errorMessage": "Тези команди не могат да бъдат избрани от менюто. Вместо това използвайте клавишна комбинация:",
+    "labels": {
+      "forCopy": "за копиране",
+      "forCut": "за изрязване",
+      "forPaste": "за поставяне"
+    }
+  },
+  "unsupportedSelectionDialog": {
+    "errorMessage": "Командата, която сте избрали, не може да бъде използвана с няколко селекции."
+  }
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.toolbar) {
+kendo.spreadsheet.messages.toolbar =
+$.extend(true, kendo.spreadsheet.messages.toolbar,{
+  "addColumnLeft": "Добави колона отляво",
+  "addColumnRight": "Добави колона отдясно",
+  "addRowAbove": "Добави ред отгоре",
+  "addRowBelow": "Добави ред отдолу",
+  "alignment": "Подравняване",
+  "alignmentButtons": {
+    "justtifyLeft": "Подравняване отляво",
+    "justifyCenter": "Центрирано",
+    "justifyRight": "Подравняване отдясно",
+    "justifyFull": "Двустранно подравняване",
+    "alignTop": "Горно подравняване",
+    "alignMiddle": "Подравняване в средата",
+    "alignBottom": "Подравняване в дъното"
+  },
+  "backgroundColor": "Фон",
+  "bold": "Удебеляване",
+  "borders": "Граници",
+  "copy": "Копирай",
+  "cut": "Изрежи",
+  "deleteColumn": "Изтрий колона",
+  "deleteRow": "Изтрии ред",
+  "excelExport": "Експортиране към Excel...",
+  "filter": "Филтриране",
+  "fontFamily": "Шрифт",
+  "fontSize": "Размер на шрифт",
+  "format": "Формат по избор...",
+  "formatTypes": {
+    "automatic": "Автоматичен",
+    "number": "Число",
+    "percent": "Процент",
+    "financial": "Финансов",
+    "currency": "Валута",
+    "date": "Дата",
+    "time": "Час",
+    "dateTime": "Дата и час",
+    "duration": "Период",
+    "moreFormats": "Още формати..."
+  },
+  "formatDecreaseDecimal": "Намали порядъка",
+  "formatIncreaseDecimal": "Увеличи порядъка",
+  "freeze": "Фиксирай прозорците",
+  "freezeButtons": {
+    "freezePanes": "Фиксирай прозорците",
+    "freezeRows": "Фиксирай редове",
+    "freezeColumns": "фиксирай колони",
+    "unfreeze": "Освободи прозорците"
+  },
+  "italic": "Курсив",
+  "merge": "Обединяване на клетки",
+  "mergeButtons": {
+    "mergeCells": "Обединяване на всичко",
+    "mergeHorizontally": "Обединяване по редове",
+    "mergeVertically": "Обединяване по колони",
+    "unmerge": "Разделяне на клетки"
+  },
+  "paste": "Поставяне",
+  "quickAccess": {
+    "redo": "Стъпка напред",
+    "undo": "Стъпка назад"
+  },
+  "sortAsc": "Сортирай възходящо",
+  "sortDesc": "Сортирай низходящо",
+  "sortButtons": {
+    "sortSheetAsc": "Сортирай лист от A до Z",
+    "sortSheetDesc": "Сортирай лист от Z до A",
+    "sortRangeAsc": "Сортирай селекция от A до Z",
+    "sortRangeDesc": "Сортирай селекция от Z до A"
+  },
+  "textColor": "Цвят на текста",
+  "textWrap": "Пренасяне на текста",
+  "underline": "Подчертано",
+  "validation": "Проверка на данни..."
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.view) {
+kendo.spreadsheet.messages.view =
+$.extend(true, kendo.spreadsheet.messages.view,{
+  "errors": {
+    "shiftingNonblankCells": "Не може да се вмъкнат клетки поради възможност от загуба на данни. Изберете друга локация за вмъкване на клетки или изтрийте данни от края на работния лист."
+  },
+  "tabs": {
+    "home": "Начало",
+    "insert": "Вмъкване",
+    "data": "Данни"
+  }
+});
+}
+
 /* Slider */
 
 if (kendo.ui.Slider) {
@@ -305,7 +550,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "pdf": "Експорт към PDF",
     "save": "Запази промените",
     "select": "Избери",
-    "update": "Запази"
+    "update": "Обнови"
   },
   "editable": {
     "cancelDelete": "Откажи",
