@@ -1,11 +1,12 @@
 (function() {
    module("NG - Core");
+   /* global ngTest2, expect */
 
    ngTest2("creates widgets", 3, function(root, controller, bootstrap) {
         var slider = $("<input kendo-slider />").appendTo(root);
         var numericTextBox = $("<input kendo-numerictextbox />").appendTo(root);
         var colorPicker = $("<input kendo-color-picker />").appendTo(root);
-        var grid = $("<div kendo-grid></div>").appendTo(root);
+        $("<div kendo-grid></div>").appendTo(root);
 
         bootstrap();
 
@@ -32,7 +33,7 @@
             $scope.comboModel = { id: 2 };
             $scope.dropDownModel = { id: 2 };
             $scope.multiSelectModel = [ { id: 2 } ];
-        })
+        });
 
         $("<div>" +
           "  <input kendo-combobox='combo' k-options='options' k-ng-model='comboModel' />" +
@@ -63,7 +64,7 @@
         controller(function($scope) {
             $scope.windowOptions = {
                 title: "Foo"
-            }
+            };
         });
 
         var w1 = $("<div kendo-window k-options='windowOptions'></div>").appendTo(dom);
@@ -94,7 +95,7 @@
             $scope.dialogOptions.visible = true;
         });
 
-        var dialog = dom.find("[kendo-window]").data("kendoWindow");
+        dialog = dom.find("[kendo-window]").data("kendoWindow");
 
         ok(dialog.element.is(":visible"));
         kendo.destroy($('[kendo-window]'));
@@ -220,13 +221,13 @@
     });
 
    ngTest2("triggers kendoWidgetCreated", 1, function(root, controller, bootstrap) {
-        var slider = $("<input kendo-slider='slider' />").appendTo(root);
+        $("<input kendo-slider='slider' />").appendTo(root);
 
         controller(function($scope) {
-            $scope.$on("kendoWidgetCreated", function(widget) {
+            $scope.$on("kendoWidgetCreated", function() {
                 equal($scope.slider, root.find("input").data("kendoSlider"));
             });
-        })
+        });
 
         bootstrap();
    });
@@ -293,7 +294,7 @@
    ngTest2("PanelBar AngularJS templates are compiled", 1, function(dom, controller, bootstrap) {
        controller(function($scope) {
            $scope.foo = "Hello World!";
-           $scope.panelBarDataSource = [{text: "{{foo}}"}]
+           $scope.panelBarDataSource = [{text: "{{foo}}"}];
        });
        $('<ul kendo-panel-bar="kpb" k-data-source="panelBarDataSource"></ul>').appendTo(dom);
 
@@ -322,6 +323,7 @@
    });
 })();
 
+/* global withAngularTests */
 withAngularTests("Angular (UI Core)", function(runTest){
 
     $.fn.press = function(key) {
@@ -359,6 +361,16 @@ withAngularTests("Angular (UI Core)", function(runTest){
         });
     });
 
+    runTest("store widget reference in $scope with tag", function(dom, $scope){
+        $("<kendo-window scope-field='window' k-title='\"Reference\"'></div>").appendTo(dom);
+        expect(2);
+        $scope.whenRendered(function(){
+            ok($scope.window instanceof kendo.ui.Window);
+            equal($scope.window.title(), "Reference");
+            start();
+        });
+    });
+
     runTest("handle k-options", function(dom, $scope){
         var w1 = $("<div kendo-window k-options='windowOptions'></div>").appendTo(dom);
         var w2 = $("<div kendo-window k-title='windowOptions.title'></div>").appendTo(dom);
@@ -383,7 +395,7 @@ withAngularTests("Angular (UI Core)", function(runTest){
 
     runTest("handle unprefixed on- options", function(dom, $scope){
         var theSwitch = $("<div kendo-mobileswitch on-label='onLabel'></div>").appendTo(dom);
-        $scope.onLabel = "ONE"
+        $scope.onLabel = "ONE";
         $scope.whenRendered(function(){
             equal(theSwitch.data("kendoMobileSwitch").options.onLabel, "ONE");
             start();
@@ -411,7 +423,7 @@ withAngularTests("Angular (UI Core)", function(runTest){
             dataSource: $scope.data,
             dataValueField: "id",
             dataTextField: "text",
-            template: "| {{dataItem.text}} |",
+            template: "| {{dataItem.text}} |"
         };
         var input = $("<input kendo-autocomplete='autocomplete' k-options='options' />").appendTo(dom);
         expect(2);
@@ -432,9 +444,9 @@ withAngularTests("Angular (UI Core)", function(runTest){
             dataSource: $scope.data,
             dataValueField: "id",
             dataTextField: "text",
-            template: "| {{dataItem.text}} |",
+            template: "| {{dataItem.text}} |"
         };
-        var combo = $("<input kendo-combobox='combobox' k-options='options' />").appendTo(dom);
+        $("<input kendo-combobox='combobox' k-options='options' />").appendTo(dom);
         expect(2);
         $scope.whenRendered(function(){
             $scope.combobox.open();
@@ -467,7 +479,7 @@ withAngularTests("Angular (UI Core)", function(runTest){
     });
 
     runTest("ListView inline templates", function(dom, $scope){
-        $scope.edit = function(e) { equal(e.item.text(), "|Foo|"); }
+        $scope.edit = function(e) { equal(e.item.text(), "|Foo|"); };
 
         $("<div kendo-list-view='list' k-data-source='data' k-on-edit='edit(kendoEvent)'><span k-template>{{dataItem.text}} {{dataItem.id}}</span><span k-alt-template>{{dataItem.id}} {{dataItem.text}}</span><div k-edit-template class='my-editable'>|{{dataItem.text}}|</div></div>").appendTo(dom);
 
@@ -490,7 +502,7 @@ withAngularTests("Angular (UI Core)", function(runTest){
             valueTemplate: "{{dataItem.id}} {{dataItem.text}}",
             headerTemplate: "<div id='test-header-template'>|{{1+1}}|</div>"
         };
-        var input = $("<select kendo-dropdownlist='list' k-options='options'></select>").appendTo(dom);
+        $("<select kendo-dropdownlist='list' k-options='options'></select>").appendTo(dom);
         expect(4);
         $scope.whenRendered(function(){
             var items = $scope.list.items();
@@ -522,7 +534,7 @@ withAngularTests("Angular (UI Core)", function(runTest){
             contentUrls: [
                 "ajax-template.html"
             ],
-            contentLoad: function(ev) {
+            contentLoad: function() {
                 equal(dom.find("div.content").text(), $scope.hello);
                 start();
             }
@@ -539,7 +551,7 @@ withAngularTests("Angular (UI Core)", function(runTest){
     runTest("TabStrip -- compile template loaded from server", function(dom, $scope){
         $scope.options = {
             contentUrls: [ "ajax-template.html" ],
-            contentLoad: function(ev) {
+            contentLoad: function() {
                 equal(dom.find("div.content").text(), $scope.hello);
                 start();
             }
@@ -572,7 +584,7 @@ withAngularTests("Angular (UI Core)", function(runTest){
     runTest("Splitter -- compile template loaded from server", function(dom, $scope){
         $scope.options = {
             panes: [ null, { contentUrl: "ajax-template.html" } ],
-            contentLoad: function(ev) {
+            contentLoad: function() {
                 equal(dom.find("div.content").text(), $scope.hello);
                 start();
             }
@@ -682,7 +694,7 @@ withAngularTests("Angular (UI Core)", function(runTest){
             dataValueField : "id"
         };
         $scope.item = 1;
-        var form = $("<form name='form'><select name='select' kendo-dropdownlist='dropDown' k-options='options' ng-model='item'></select></form>").appendTo(dom);
+        $("<form name='form'><select name='select' kendo-dropdownlist='dropDown' k-options='options' ng-model='item'></select></form>").appendTo(dom);
         expect(5);
         $scope.whenRendered(function(){
             equal($scope.form.$dirty, false);
@@ -711,7 +723,7 @@ withAngularTests("Angular (UI Core)", function(runTest){
         setTimeout(function() {
             equal($("#tabstrip").find("li").first().hasClass("k-state-active"), true);
             start();
-        },50)
+        },50);
     });
 
 
@@ -900,7 +912,7 @@ withAngularTests("Angular (UI Core)", function(runTest){
         var $scope = dom.scope();
         $scope.$apply(function() {
             $scope.disabled = false;
-        })
+        });
         equal($scope.ddl.element.prop("disabled"), $scope.disabled);
     });
 
@@ -924,7 +936,7 @@ withAngularTests("Angular (UI Core)", function(runTest){
         var $scope = dom.scope();
         $scope.$apply(function() {
             $scope.disabled = true;
-        })
+        });
         equal($scope.ddl.element.prop("disabled"), $scope.disabled);
     });
 
@@ -1008,7 +1020,7 @@ withAngularTests("Angular (UI Core)", function(runTest){
       var $scope = dom.scope();
       $scope.$apply(function() {
           $scope.disabled = false;
-      })
+      });
       var isEnabled = $("[data-role=datepicker]").prop("disabled");
       equal(isEnabled, $scope.disabled);
     });
