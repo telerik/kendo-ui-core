@@ -14,14 +14,38 @@ Represents the Kendo UI ToolBar. Inherits from [Widget](/api/javascript/ui/widge
 
 If `resizable` is set to `true` the widget will detect changes in the viewport width and hides the overflowing controls in the command overflow popup.
 
-#### Example - disable the resizable feature
+> When set to `true`, the resizable configuration triggers `overflow: hidden;` CSS property. 
 
-    <div id="toolbar"></div>
+#### Example - Resizable and Non-Resizable ToolBar
+
+    <div style="width: 350px; border: 1px solid #ccc; padding: 10px 10px 50px;">
+        
+        <h5>Non-Resizable ToolBar</h5>
+        <div id="toolbar-non-resizable"></div>
+        
+        <h5>Resizable ToolBar</h5>
+        <div id="toolbar-resizable"></div>
+        
+    </div>
+    
     <script>
-        $("#toolbar").kendoToolBar({
+        $("#toolbar-non-resizable").kendoToolBar({
             resizable: false,
             items: [
-                { type: "button", text: "MyButton" }
+                { type: "button", text: "Button 1" },
+                { type: "button", text: "Button 2" },
+                { type: "button", text: "Button 3" },
+                { type: "button", text: "Button 4" }
+            ]
+        });
+        
+        $("#toolbar-resizable").kendoToolBar({
+            resizable: true,
+            items: [
+                { type: "button", text: "Button 1" },
+                { type: "button", text: "Button 2" },
+                { type: "button", text: "Button 3" },
+                { type: "button", text: "Button 4" }
             ]
         });
     </script>
