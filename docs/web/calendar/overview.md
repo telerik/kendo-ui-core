@@ -8,7 +8,7 @@ position: 1
 
 # Calendar Overview
 
-[Kendo UI Calendar widget](http://demos.telerik.com/kendo-ui/calendar/index) renders a graphical calendar that supports navigation and selection. It also supports custom templates for its `month` view and configuration options for minimum and maximum date, start view and the depth of the navigation.
+[Kendo UI Calendar widget](http://demos.telerik.com/kendo-ui/calendar/index) renders a graphical calendar that supports navigation and selection. It also supports custom templates for its `month` view and configuration options for minimum and maximum dates, a start view and the depth of the navigation.
 
 ## Getting Started
 
@@ -109,3 +109,7 @@ Other articles on Kendo UI Calendar:
 * [Overview of the HtmlHelper Extension](/aspnet-mvc/helpers/calendar/overview)
 * [Overview of the JSP Tag](/jsp/tags/calendar/overview)
 * [Overview of the PHP Class](/php/widgets/calendar/overview)
+
+Articles on Kendo UI DatePicker:
+
+* [Overview]({% slug overview_kendoui_datepicker_widget %})
