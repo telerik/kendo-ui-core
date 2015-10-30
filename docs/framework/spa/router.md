@@ -11,6 +11,7 @@ It is also used for programmatic navigation to a given state. A change event is 
 
 ## Router with a root route callback
 
+```html
     <script>
         var router = new kendo.Router();
 
@@ -22,7 +23,7 @@ It is also used for programmatic navigation to a given state. A change event is 
             router.start();
         });
     </script>
-
+```
 By default, if the URL fragment is empty (or not present), the "/" route callback will be executed. The `init` event handler will be executed regardless of the initial URL.
 
 ## Parameters
@@ -32,6 +33,7 @@ The parsed parts of the URL are passed as parameters to the route callback.
 
 ### Parameter Parsing
 
+```html
     <script>
         var router = new kendo.Router();
 
@@ -47,9 +49,11 @@ The parsed parts of the URL are passed as parameters to the route callback.
             router.navigate("/items/books/59");
         });
     </script>
+```
 
 ### Optional Segments
 
+```html
     <script>
         var router = new kendo.Router();
 
@@ -70,10 +74,11 @@ The parsed parts of the URL are passed as parameters to the route callback.
             router.navigate("/items/books");
         });
     </script>
-
+```
 
 ### Route Globbing
 
+```html
     <script>
         var router = new kendo.Router();
 
@@ -94,7 +99,7 @@ The parsed parts of the URL are passed as parameters to the route callback.
             router.navigate("/items/books");
         });
     </script>
-
+```
 
 ## Navigation
 
@@ -103,6 +108,7 @@ Clicking on anchor links will also trigger the respective route - a link with `h
 
 ### Route Navigation
 
+```html
     <a href="#/foo">Foo</a>
 
     <script>
@@ -117,13 +123,14 @@ Clicking on anchor links will also trigger the respective route - a link with `h
             router.navigate("/foo");
         });
     </script>
-
+```
 ## Missing Routes, Intercepting Navigation
 
 If no route match is found, the router will trigger a `routeMissing` event, passing the url in the event handler.
 
 ### Missing Route Handling
 
+```html
     <script>
     var router = new kendo.Router({ routeMissing: function(e) { console.log(e.url) } });
 
@@ -132,11 +139,13 @@ If no route match is found, the router will trigger a `routeMissing` event, pass
         router.navigate("/foo");
     });
     </script>
+```
 
 Each time the url fragment changes, the router triggers a `change` event. calling the `preventDefault` method on the event object will revert the url to the previous state.
 
 ### Intercepting Navigation
 
+```html
     <script>
     var router = new kendo.Router({
         change: function(e) {
@@ -150,6 +159,7 @@ Each time the url fragment changes, the router triggers a `change` event. callin
         router.navigate("/foo");
     });
     </script>
+```
 
 ## Query String Parameters
 
