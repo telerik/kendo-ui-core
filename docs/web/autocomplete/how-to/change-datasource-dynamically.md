@@ -134,7 +134,7 @@ The example below demonstrates how to dynamically change the `DataSource` based 
 
 ## See Also
 
-Other how-to examples on Kendo UI AutoComplete:
+Other Kendo UI AutoComplete how-to examples:
 
 * [Use Custom Templates with AngularJS]({% slug howto_use_custom_angularjs_templates_autocomplete %})
 * [Restrict Other Users]({% slug howto_restrict_user_input_autocomplete %})

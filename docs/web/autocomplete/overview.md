@@ -69,13 +69,13 @@ You can bind to a local data array by using the `dataSource` property:
         });
     </script>
 
-### Remote Data
+### Remote Data Service
 
 The easiest way to bind an AutoComplete to a remote data service is to use the `DataSource` component - an abstraction for local and remote data. `DataSource` can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
-#### Bind to Remote Data 
+#### Bind to Remote Data Service
 
-You can bind to remote data by using OData by means of the `DataSource` component:
+You can bind to a remote data service by using OData by means of the `DataSource` component:
 
     $(document).ready(function(){
         $("#autoComplete").kendoAutoComplete({

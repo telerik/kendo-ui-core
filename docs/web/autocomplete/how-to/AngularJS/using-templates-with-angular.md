@@ -121,7 +121,7 @@ The example below demonstrates how to use AngularJS templates inside the Kendo U
 
 ## See Also
 
-Other how-to examples on Kendo UI AutoComplete:
+Other Kendo UI AutoComplete how-to examples:
 
 * [Show `No results found`]({% slug howto_add_customized_templates_autocomplete %})
 * [Change `DataSource` Dynamically]({% slug howto_change_datasource_dynamically_autocomplete %})

@@ -8,7 +8,7 @@ position: 5
 
 # Cascading ComboBoxes
 
-A [cascading ComboBox](http://demos.telerik.com/kendo-ui/combobox/cascadingcombobox) is a series of two or more ComboBoxes in which each ComboBox is filtered according to the selected options in the previous ComboBox.
+The [cascading ComboBox](http://demos.telerik.com/kendo-ui/combobox/cascadingcombobox) is a series of two or more ComboBoxes in which each ComboBox is filtered according to the selected options in the previous ComboBox.
 
 ## Initialize Cascading ComboBoxes
 
@@ -155,3 +155,10 @@ Other articles on Kendo UI ComboBox:
 * [Grouping]({% slug grouping_kendoui_combobox_widget %})
 * [Virtualization]({% slug virtualization_kendoui_combobox_widget %})
 * [Server Filtering]({% slug server_filtering_kendoui_combobox_widget %})
+* [Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
+* [Detect When All Widgets Are Bound]({% slug howto_detect_when_widgets_bound_combobox %})
+* [Bypass Boundary Detection]({% slug howto_bypass_boudary_detection_combobox %})
+* [Make Visible Input Readonly]({% slug howto_make_visible_inputs_readonly_combobox %})
+* [Search for Items by Dragging to Input]({% slug howto_search_items_dragging_toinput_combobox %})
+* [Underline Matched Search]({% slug howto_underline_matched_search_combobox %})
+* [Clear Filter on Open]({% slug howto_clear_filter_open_combobox %})

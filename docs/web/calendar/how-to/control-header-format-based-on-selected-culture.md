@@ -57,4 +57,6 @@ The example below demonstrates how to control the header format of Kendo UI Cale
 
 ## See Also
 
+Other articles on Kendo UI Calendar:
+
 * [Calendar Overview]({% slug overview_kendoui_calendar_widget %})
