@@ -1,4 +1,5 @@
 (function() {
+    /* global stub */
     var MockAdapter = kendo.Class.extend({
         init: function() {
             this.url = "";
@@ -170,7 +171,7 @@
 
         history.navigate("bar");
 
-        equal(history.current, "foo")
+        equal(history.current, "foo");
     });
 
     test("Triggers back", 2, function() {
@@ -233,7 +234,7 @@
     test("triggers ready with the initial location", 1, function() {
         adapter.current = function() {
             return "/initial-location";
-        }
+        };
         history.start();
         equal(history.current, "/initial-location");
     });
@@ -262,7 +263,7 @@
     test("supports #:back pseudo url for going back", 1, function() {
         stub(adapter, { back: function() {
             ok(true);
-        }})
+        }});
 
         history.start();
         history.navigate("/new-location");
@@ -301,7 +302,7 @@
         history.start();
         var called = false;
 
-        history.change(function(e) {
+        history.change(function() {
             called = true;
         });
 

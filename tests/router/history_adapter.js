@@ -42,7 +42,7 @@
 
         if (length === 50) {
             start();
-            console.log("skipping history length tests, max length reached");
+            window.console.log("skipping history length tests, max length reached");
             ok(true);
             return;
         }

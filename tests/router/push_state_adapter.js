@@ -1,6 +1,6 @@
 (function() {
     if (!kendo.support.pushState) {
-        console.log("Browser does not support push state, skipping tests");
+        window.console.log("Browser does not support push state, skipping tests");
         return;
     }
 
@@ -42,7 +42,7 @@
      * So, we will push, then go back.
      */
     asyncTest("change calls callback when path changed", 1, function() {
-        adapter.change(function(e) {
+        adapter.change(function() {
             start();
             ok(true);
         });
@@ -53,7 +53,7 @@
 
     asyncTest("stop cancels callback", 1, function() {
         var called = false;
-        adapter.change(function(e) {
+        adapter.change(function() {
             called = true;
         });
 
@@ -79,7 +79,7 @@
         equal(location.pathname, root + "foo");
 
         if (history.length === 50) {
-            console.log("max history length reached, skipping length check");
+            window.console.log("max history length reached, skipping length check");
             ok(true);
         } else {
             equal(initial, adapter.length());
