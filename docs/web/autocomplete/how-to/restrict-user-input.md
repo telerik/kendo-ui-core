@@ -134,7 +134,7 @@ The example below demonstrates how to restrict user input in a Kendo UI AutoComp
 
 ## See Also
 
-Other how-to examples on Kendo UI AutoComplete:
+Other Kendo UI AutoComplete how-to examples:
 
 * [Use Custom Templates with AngularJS]({% slug howto_use_custom_angularjs_templates_autocomplete %})
 * [Show `No results found`]({% slug howto_add_customized_templates_autocomplete %})
