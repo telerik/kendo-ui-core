@@ -178,21 +178,7 @@
 @secondary-hover-background-color: #5c6bc0;
 @secondary-header-color: rgba(256, 256, 256, 0.5);
 @secondary-header-background-color: #283593;
-@radio-border-color-before: lighten(@normal-text-color, 23%);
-@radio-background-color: @background;
-@radio-border-width-before: 2px;
-@radio-hover-border-color: lighten(@normal-text-color, 23%);
-@radio-hover-box-shadow: none;
-@radio-checked-border-color-before: @accent;
-@radio-checked-background-color-after: @accent;
-@radio-active-border-color-before: lighten(@normal-text-color, 23%);
-@radio-active-box-shadow: 0 0 0 0.750em fadeout(@hover-background, 70%);
-@radio-checked-active-border-color-before: @accent;
-@radio-checked-active-box-shadow: 0 0 0 0.750em fadeout(@accent, 70%);
-@radio-disabled-background-color-after: lighten(@background, 20%);
-@radio-disabled-color: contrast(@background, lighten(@background, 20%), darken(@background, 25%), 0.5);
-@radio-disabled-box-shadow: none;
-@radio-disabled-background-color-before: lighten(@background, 20%);
+
 /* Kendo skin */
 
 @theme-name: ~"material";
@@ -2199,66 +2185,33 @@ html .km-pane-wrapper .km-widget,
     box-shadow: 0 0 0 12px fadeout(@accent, 70%);
 }
 
-//Radio buttons
-.k-radio-label:before {
-  border-color: @radio-border-color-before;
-  border-radius: 50%;
-  background-color: @radio-background-color;
-  border-width: @radio-border-width-before;
+@import "themes/radiobutton.less";
+
+@radio-border-color: lighten(@normal-text-color, 23%);
+@radio-border-width: 2px;
+@radio-hover-border-color: @radio-border-color;
+@radio-checked-background-color: @accent;
+@radio-disabled-background-color: lighten(@background, 20%);
+@radio-disabled-color: contrast(@background, lighten(@background, 20%), darken(@background, 25%), 0.5);
+@radio-disabled-border-color: #bfbfbf;
+
+.k-radio:checked + .k-radio-label:before,
+.k-radio:checked + .k-radio-label:hover:before {
+    border-color: @radio-checked-background-color;
 }
 
-.k-radio-label:hover:before,
-.k-radio:checked + .k-radio-label:hover:before  {
-   border-color: @radio-hover-border-color;
-   box-shadow: @radio-hover-box-shadow;
-}
-
-.k-radio:checked + .k-radio-label:before {
-   border-color: @radio-checked-border-color-before;
-}
-
-.k-radio:checked + .k-radio-label:after {
-  background-color: @radio-checked-background-color-after;
-  border-radius: 50%;
-}
-
-.k-radio-label:active:before {
-  box-shadow: @radio-active-box-shadow;
-  border-radius: 50%;
-  border-color: @radio-active-border-color-before;
+.k-radio + .k-radio-label:active:before {
+    border-color: @radio-border-color;
+    box-shadow: 0 0 0 12px fadeout(@hover-background, 70%);
 }
 
 .k-radio:checked + .k-radio-label:active:before {
-  box-shadow: @radio-checked-active-box-shadow;
-  border-radius: 50%;
-  border-color: @radio-checked-active-border-color-before;
-}
-
-.k-radio:disabled + .k-radio-label {
-   color: @radio-disabled-color;
-}
-
-.k-radio:disabled + .k-radio-label:before {
-   border-color: #bfbfbf;
-}
-
-.k-radio:disabled + .k-radio-label:active:before {
-  box-shadow: @radio-disabled-box-shadow;
-  background: @radio-disabled-background-color-before;
-}
-
-.k-radio:disabled + .k-radio-label:before {
-    background: @radio-disabled-background-color-after;
-}
-
-.k-radio:disabled + .k-radio-label:hover:after,
-.k-radio:disabled + .k-radio-label:hover:before {
-  box-shadow: @radio-disabled-box-shadow;
+    box-shadow: 0 0 0 12px fadeout(@accent, 70%);
 }
 
 .k-radio:focus + .k-radio-label:before {
-  border-color: @radio-active-border-color-before;
-  box-shadow: @radio-active-box-shadow;
+    border-color: @radio-border-color;
+    box-shadow: 0 0 0 12px fadeout(@hover-background, 70%);
 }
 
 // Retina sprite
@@ -3344,10 +3297,6 @@ table.k-editor {
     .box-shadow(none);
     border-color: @draghandle-background-color;
     background-color: @draghandle-background-color;
-}
-
-.k-radio:checked + .k-radio-label:hover:before {
-    border-color: @radio-checked-border-color-before;
 }
 
 .k-edit-form-container .k-edit-buttons {
