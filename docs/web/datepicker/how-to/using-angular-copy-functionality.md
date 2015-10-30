@@ -1,14 +1,16 @@
 ---
-title: Using AngularJS copy functionality
-page_title: Using AngularJS copy functionality
-description: Using AngularJS copy functionality
+title: Use AngularJS Copy Functionality
+page_title: Use AngularJS Copy Functionality | Kendo UI DatePicker Widget
+description: "Learn how to usе the AngularJS copy functionality in the Kendo UI DatePicker."
+slug: howto_use_angularjs_copy_functionality_datepicker
+position: 12
 ---
 
-# Using AngularJS copy functionality
+# Use AngularJS Copy Functionality
 
-The example below demonstrates how to use AngularJS copy functionality with a Kendo UI DatePicker
+The example below demonstrates how to use the AngularJS copy functionality in a Kendo UI DatePicker.
 
-#### Example:
+###### Example
 
 ```html
     <div id="example" ng-app="KendoDemos">
@@ -66,3 +68,21 @@ The example below demonstrates how to use AngularJS copy functionality with a Ke
       }
     </script>
 ```
+
+## See Also
+
+Other Kendo UI DatePicker how-to examples:
+
+* [Create Date Masking]({% slug howto_create_date_masking_datepicker %})
+* [Select Ranges between DatePickers]({% slug howto_select_ranges_between_datepicker %})
+* [Set the First Weekday]({% slug howto_set_first_weekday_datepicker %})
+* [Integrate DatePicker with DateJS Library]({% slug howto_integrate_withdatejs_library_datepicker %})
+* [Disable Dates]({% slug howto_disable_dates_datepicker %})
+* [Hide the Deafult Button]({% slug howto_hide_default_button_datepicker %})
+* [Globally Modify Default Options]({% slug howto_globally_modify_default_options_datepicker %})
+* [Persist Entered Dates]({% slug howto_persist_entered_dates_datepicker %})
+* [Make Input Elements Readonly]({% slug howto_make_input_elements_readonly_datepicker %})
+* [Resize Calendar Based on Input Width]({% slug howto_use_resize_calendar_basedon_input_width_datepicker %})
+* [Restrict User Input to Min/Max Values]({% slug howto_restrict_user_input_minandmax_values_datepicker %})
+* [Show Out-of-Range Dates as Disabled]({% slug howto_show_outofrange_dates_disabled_datepicker %})
+* [Submit Forms on ENTER]({% slug howto_submmit_forms_onenter_datepicker %})

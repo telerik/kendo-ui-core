@@ -1,6 +1,6 @@
 ---
-title: Other Directives Support
-page_title: Other Directives Support
+title: Specific Directives Support
+page_title: Specific Directives Support
 description: "Learn more about the `ng-repeat`, `ng-if`, `ng-bind` directives supported by Kendo UI controls in AngularJS."
 position: 6
 ---
