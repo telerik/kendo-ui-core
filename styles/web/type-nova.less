@@ -1282,47 +1282,14 @@ input.k-textbox:active {
 @checkbox-active-border-color: @accent;
 @checkbox-active-box-shadow: none;
 
-/* RadioButtons */
-.k-radio-label:before {  
-    border-color: darken(@widget-background-color, 12%);
-    border-radius: 50%;
-    background-color: @widget-background-color;
-    border-width: 1px;
-}
+@import "themes/radiobutton.less";
 
-.k-radio:checked + .k-radio-label:before {
-    border-color: darken(@widget-background-color, 12%);
-}
+@radio-hover-border-color: darken(@base, 12%);
+@radio-active-border-color: @accent;
+@radio-active-box-shadow: none;
 
-.k-radio:checked + .k-radio-label:after {
-    background-color: @accent;
-    border-radius: 50%; 
-}
-
-.k-radio-label:active:before {
-    border-radius: 50%;
-    border-color: @accent;
-}
-
+.k-radio:checked + .k-radio-label:hover:before,
 .k-radio:checked + .k-radio-label:active:before {
-    border-radius: 50%;
-    border-color: @accent;
-}
-
-.k-radio:disabled + .k-radio-label {
-    color: darken(@widget-background-color, 12%);
-}
-
-.k-radio:disabled + .k-radio-label:active:before {
-    background: @widget-background-color;
-}
-
-.k-radio:disabled + .k-radio-label:before {
-    background: @widget-background-color;
-    border-color: darken(@widget-background-color, 12%);
-}
-
-.k-radio:focus + .k-radio-label:before {
     border-color: @accent;
 }
 
