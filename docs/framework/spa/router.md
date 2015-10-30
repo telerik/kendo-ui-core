@@ -9,7 +9,6 @@ The **Router** class is responsible for tracking the application state and navig
 The router integrates into the browser history using the fragment part of the url (`#page`), making the application states bookmarkable and linkable.
 It is also used for programmatic navigation to a given state. A change event is exposed, suitable for authorization hooks.
 
-
 ## Router with a root route callback
 
     <script>
@@ -151,3 +150,47 @@ Each time the url fragment changes, the router triggers a `change` event. callin
         router.navigate("/foo");
     });
     </script>
+
+## Query String Parameters
+
+In addition to the route parameters, the route callback will receive a key:value object with
+the query string parameters (if any) as its last argument.
+
+### Query String Parameters Example
+
+```html
+    <script>
+    var router = new kendo.Router();
+
+    router.route("/foo", function(params) {
+        console.log(params.q);
+    });
+
+    $(function() {
+        router.start();
+        router.navigate("/foo?q=2");
+    });
+    </script>
+```
+
+### The Back Action Parameter
+
+If the back button is pressed, the query string parameters object will include a `_back: true` field to indicate the back action.
+
+### Detecting the back button press in a route
+
+```html
+    <script>
+    var router = new kendo.Router();
+
+    router.route("/foo", function(params) {
+        console.log(params._back);
+    });
+
+    $(function() {
+        router.start();
+        router.navigate("/foo?q=2");
+        history.back();
+    });
+    </script>
+```
