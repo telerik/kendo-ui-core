@@ -20,7 +20,7 @@ test("raises init when started", 1, function(){
         init: function(e) {
             equal(e.url, "/");
         }
-    })
+    });
 
     router.start();
 });
@@ -42,7 +42,7 @@ test("supports multiple instances", 2, function(){
 
     router.start();
 
-    router2 = new kendo.Router();
+    var router2 = new kendo.Router();
     router2.route("/", function() { ok(true); });
     router2.start();
 });
@@ -103,7 +103,7 @@ module("Router params", {
         location.hash = '';
         router.destroy();
     }
-})
+});
 
 test("recognizes an url", 1, function(){
     var router = new kendo.Router();
@@ -158,7 +158,7 @@ test("handles complex query string parameters", 6, function(){
 test("no exception is rised when invalid query string parameters are passed", 2, function(){
     var router = new kendo.Router();
 
-    router.route("/:foo", function(foo, params) {
+    router.route("/:foo", function(foo) {
         equal(foo, "foo");
         ok(true);
     });
@@ -243,9 +243,9 @@ test("triggers change on url change", 2, function(){
     var router = new kendo.Router();
 
 
-    router.one("change", function(e) { equal(e.url, "/") });
+    router.one("change", function(e) { equal(e.url, "/");});
     router.start();
-    router.one("change", function(e) { equal(e.url, "/foo") });
+    router.one("change", function(e) { equal(e.url, "/foo");});
     navigate("/foo");
 });
 
@@ -253,9 +253,9 @@ test("triggers change on query string params change", 2, function(){
     var router = new kendo.Router();
 
     router.start();
-    router.one("change", function(e) { equal(e.url, "/foo?bar=A") });
+    router.one("change", function(e) { equal(e.url, "/foo?bar=A");});
     navigate("/foo?bar=A");
-    router.one("change", function(e) { equal(e.url, "/foo?bar=B") });
+    router.one("change", function(e) { equal(e.url, "/foo?bar=B");});
     navigate("/foo?bar=B");
 });
 
@@ -275,7 +275,7 @@ test("preventing default does not hit the route", 0, function(){
 
     router.start();
 
-    router.route("/foo", function(url) {
+    router.route("/foo", function() {
         ok(false);
     });
 
@@ -294,7 +294,7 @@ test("triggers route missing if no route found", 2, function(){
     });
 
     router.bind("routeMissing", function(e) {
-        equal(e.url, "/foo")
+        equal(e.url, "/foo");
     });
 
     router.start();
@@ -315,7 +315,7 @@ test("query string parameters are available in the route missing event", 3, func
 
     router.start();
     navigate("/foo?bar=A&baz=B");
-})
+});
 
 test("navigate method navigates to a given url", 1, function(){
     var router = new kendo.Router();
@@ -326,4 +326,21 @@ test("navigate method navigates to a given url", 1, function(){
 
     router.start();
     router.navigate("/foo");
+});
+
+asyncTest("navigate method navigates to a given url", 1, function(){
+    var router = new kendo.Router();
+
+    var i = 0;
+    router.route("/foo", function(params) {
+        if (++i == 2) {
+            start();
+            ok(params._back);
+        }
+    });
+
+    router.start();
+    router.navigate("/foo");
+    router.navigate("/bar");
+    history.back();
 });
