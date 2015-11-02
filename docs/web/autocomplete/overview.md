@@ -205,10 +205,14 @@ You can customize the width of a drop-down list and change its dimensions by usi
 
 Other articles on Kendo UI AutoComplete:
 
-* [Grouping]({% slug grouping_kendoui_autocomplete_widget %})
+* [Grouping Functionality]({% slug grouping_kendoui_autocomplete_widget %})
 * [Virtualization]({% slug virtualization_kendoui_autocomplete_widget %})
-* [Use Custom Templates with AngularJS]({% slug howto_use_custom_angularjs_templates_autocomplete %}) 
-* [Show `No results found`]({% slug howto_add_customized_templates_autocomplete %})
-* [Change `DataSource` Dynamically]({% slug howto_change_datasource_dynamically_autocomplete %})
-* [Highlight Matched Values]({% slug howto_highlight_matched_values_autocomplete %})
-* [Restrict Other Users]({% slug howto_restrict_user_input_autocomplete %})
+* [How to Use Custom AngularJS Template]({% slug howto_use_custom_angularjs_templates_autocomplete %})
+* [How to Show a `No results found` Message]({% slug howto_add_customized_templates_autocomplete %})
+* [How to Dynamically Change `DataSource` Based on User Selections]({% slug howto_change_datasource_dynamically_autocomplete %})
+* [How to Highlight Matched Values]({% slug howto_highlight_matched_values_autocomplete %})
+* [How to Restrict Other Users]({% slug howto_restrict_user_input_autocomplete %})
+* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/autocomplete/overview)
+* [Overview of the JSP Tag](/jsp/tags/autocomplete/overview)
+* [Overview of the PHP Class](/php/widgets/autocomplete/overview)
+* [JavaScript API Reference](/api/javascript/ui/autocomplete)

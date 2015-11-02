@@ -34,7 +34,7 @@ To access the Kendo UI CDN service through the HTTPS protocol, use the same host
 > **Important**  
 > The <https://da7xgjtj801h2.cloudfront.net/> URL will remain active, but is no longer recommended for new projects.
 
-## Troubleshooting
+## Troubleshoot
 
 **Issue 1:** Disruption and connection problems
 Although the Amazon CloudFront service provides for a reliable level of uptime support, you may encounter disruption or connection troubles. After you have checked the status of the systems at [http://status.aws.amazon.com/](http://status.aws.amazon.com/), the CDN status is reported as healthy and is operating normally.

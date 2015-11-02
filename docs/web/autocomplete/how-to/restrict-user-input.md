@@ -3,7 +3,6 @@ title: Restrict User Input
 page_title: Restrict User Input | Kendo UI AutoComplete Widget
 description: "Learn how to restrict user input in a Kendo UI AutoComplete widget."
 slug: howto_restrict_user_input_autocomplete
-position: 3
 ---
 
 # Restrict User Input
@@ -134,9 +133,10 @@ The example below demonstrates how to restrict user input in a Kendo UI AutoComp
 
 ## See Also
 
-Other Kendo UI AutoComplete how-to examples:
+Other articles on Kendo UI AutoComplete:
 
-* [Use Custom Templates with AngularJS]({% slug howto_use_custom_angularjs_templates_autocomplete %})
-* [Show `No results found`]({% slug howto_add_customized_templates_autocomplete %})
-* [Change `DataSource` Dynamically]({% slug howto_change_datasource_dynamically_autocomplete %})
-* [Highlight Matched Values]({% slug howto_highlight_matched_values_autocomplete %})
+* [JavaScript API Reference](/api/javascript/ui/autocomplete)
+* [How to Use Custom AngularJS Templates]({% slug howto_use_custom_angularjs_templates_autocomplete %})
+* [How to Show a `No results found` Message]({% slug howto_add_customized_templates_autocomplete %})
+* [How to Dynamically Change `DataSource` Based on User Selections]({% slug howto_change_datasource_dynamically_autocomplete %})
+* [How to Highlight Matched Values]({% slug howto_highlight_matched_values_autocomplete %})

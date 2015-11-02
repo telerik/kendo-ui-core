@@ -81,7 +81,7 @@ machine bower.telerik.com
     password mysecret
 ```
 
-## Troubleshooting
+## Troubleshoot
 
 **Issue 1:** Bower on Windows has troubles installing the repository showing the error message
 
