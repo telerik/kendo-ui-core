@@ -651,4 +651,15 @@
         }
     });
 
+    test("navigates to the specified url on click", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo", url: "#foo" }
+            ]
+        });
+
+        click(container.find("#foo"));
+        ok(window.location.href.indexOf("#foo") !== -1);
+    });
+
 })();
