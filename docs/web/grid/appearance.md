@@ -212,6 +212,12 @@ the following statement is required instead of `resize()`:
 
 In some cases it may be possible to delay the Grid initialization, or change the order in which various Kendo UI widgets are initialized, so that the Grid is initialized while visible.
 
+For more information on how to initialize the Grid inside other Kendo UI widgets which act as hidden containers, see:
+
+* [Initialize the Grid inside the PanelBar]({% slug initialize_thegrid_panelbar_widget %})
+* [Initialize the Grid inside the TabStrib]({% slug initialize_thegrid_tabstrip_widget %})
+* [Initialize the Grid inside the Window]({% slug initialize_thegrid_window_widget %})
+
 ## Column widths
 
 The Grid columns behave differently, depending on whether scrolling is enabled or not.
