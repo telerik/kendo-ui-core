@@ -75,6 +75,70 @@ initialized from HTML, or through the configuration options. The Kendo UI Menu A
 
 Initialization of a Menu should occur after the DOM is fully loaded. It is recommended that initialization the Menu is done within a $(document).ready() statement.
 
+## Menu HTML markup
+
+Let's start with the following initial HTML markup.
+
+    <ul id="MenuID">
+        <li>root item 1</li>
+        <liroot item 2
+            <ul>
+                <li>child item 1</li>
+                <li>child item 2</li>
+            </ul>
+        </li>
+        <li>root item 3
+            <ul>
+                <li>
+                    <div>Menu template content</div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+Creating a Kendo UI Menu from the above DOM will result in the following HTML markup:
+
+    <ul id="MenuID" class="k-widget k-menu">
+        <li class="k-item k-state-default"><span class="k-link">root item 1</span></li>
+        <li class="k-item k-state-default">
+            <span class="k-link">root item 2
+                <span class="k-icon k-i-arrow-s"></span>
+            </span>
+            <ul class="k-group k-menu-group">
+                <li class="k-item k-state-default"><span class="k-link">child item 1</span></li>
+                <li class="k-item k-state-default"><span class="k-link">child item 2</span></li>
+            </ul>
+        </li>
+        <li class="k-item k-state-default">
+            <span class="k-link">root item 3
+                <span class="k-icon k-i-arrow-s"></span>
+            </span>
+            <ul class="k-group k-menu-group">
+                <li class="k-item k-state-default">
+                    <div>Menu template content</div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+The most notable changes are:
+
+* All `<ul>` and `<li>` elements receive some Kendo UI CSS classes
+* Each menu item text is wrapped in a `span.k-link` element, or `a.k-link` element, if a navigation URL is specified.
+* Once a menu group is opened, the `ul.k-group` element is wrapped by a `div.k-animation-container` and the DOM structure is transformed to:
+
+        <li class="k-item k-state-default">
+            <span class="k-link">root item 2
+                <span class="k-icon k-i-arrow-s"></span>
+            </span>
+            <div class="k-animation-container">
+                <ul class="k-group k-menu-group">
+                    <li class="k-item k-state-default"><span class="k-link">child item 1</span></li>
+                    <li class="k-item k-state-default"><span class="k-link">child item 2</span></li>
+                </ul>
+            </div>
+        </li>
+
 ## Customize Menu Animations
 
 By default, the Menu uses a slide animation to expand sub-items on mouse hover event. Animations can be changed using configuration properties, along with the animation style and delay. Menu items can also be configured to open on click instead of on hover.
