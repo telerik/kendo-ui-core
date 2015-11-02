@@ -874,6 +874,7 @@ Reloads TabStrip tab(s) via AJAX.
 
     <script>
         var tabStrip = $("#tabstrip").kendoTabStrip({
+            dataTextField: "text",
             dataSource: [{
                 text: "Tab 1",
                 contentUrl: "partialContent1.html"
