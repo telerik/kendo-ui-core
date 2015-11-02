@@ -8635,6 +8635,8 @@ The widget instance which fired the event.
 
 ### navigate
 
+> Important: This event is available with the Q3 2015 SP1 release.
+
 Fired when [navigatable](#configuration-navigatable) is enabled and the user change current item with either
 mouse or keyboard interaction.
 
