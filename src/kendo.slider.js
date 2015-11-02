@@ -1128,7 +1128,6 @@ var __meta__ = { // jshint ignore:line
 
                 owner.trigger(SLIDE, slideParams);
             }
-
             that._updateTooltip(that.val);
         },
 
@@ -1137,6 +1136,10 @@ var __meta__ = { // jshint ignore:line
                 options = that.options,
                 tooltip = options.tooltip,
                 html = "";
+
+            if (that.val) {
+                val = that.val;
+            }
 
             if (!tooltip.enabled) {
                 return;
@@ -1454,8 +1457,8 @@ var __meta__ = { // jshint ignore:line
                 .find(DRAG_HANDLE)
                 .attr(TABINDEX, 0)
                 .on(MOUSE_UP, function () {
-                    that._drag.draggable.userEvents.cancel();
                     that._setTooltipTimeout();
+                    that._drag.draggable.userEvents.cancel();
                 })
                 .on(CLICK, function (e) {
                     that._focusWithMouse(e.target);
