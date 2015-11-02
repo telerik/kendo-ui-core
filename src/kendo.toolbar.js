@@ -1276,6 +1276,10 @@ var __meta__ = { // jshint ignore:line
                     that.trigger(CLICK, eventData);
                 }
 
+                if (item.options.url) {
+                    window.location.href = item.options.url;
+                }
+
                 if (target.hasClass(OVERFLOW_BUTTON)) {
                     that.popup.close();
                 }
