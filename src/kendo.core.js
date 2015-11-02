@@ -2110,6 +2110,24 @@ function pad(number, digits, end) {
 
         support.browser = support.detectBrowser(navigator.userAgent);
 
+        support.detectClipboardAccess = function() {
+            var commands = {
+                copy: document.queryCommandSupported ? document.queryCommandSupported("copy") : false,
+                cut: document.queryCommandSupported ? document.queryCommandSupported("cut") : false,
+                paste : document.queryCommandSupported ? document.queryCommandSupported("paste") : false
+            };
+
+            if (support.browser.chrome && support.browser.version >= 43) {
+                //not using queryCommandSupported due to chromium issue #476508
+                commands.copy = true;
+                commands.cut = true;
+            }
+
+            return commands;
+        };
+
+        support.clipboard = support.detectClipboardAccess();
+
         support.zoomLevel = function() {
             try {
                 var browser = support.browser;
