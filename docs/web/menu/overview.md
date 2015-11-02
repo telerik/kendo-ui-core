@@ -123,8 +123,9 @@ Creating a Kendo UI Menu from the above DOM will result in the following HTML ma
 
 The most notable changes are:
 
-* All `<ul>` and `<li>` elements receive some Kendo UI CSS classes
+* All `<ul>` and `<li>` elements receive some Kendo UI CSS classes.
 * Each menu item text is wrapped in a `span.k-link` element, or `a.k-link` element, if a navigation URL is specified.
+* A dropdown arrow (`<span class="k-icon k-i-arrow-s"></span>`) is appended to the `.k-link` element of each expandable menu item.
 * Once a menu group is opened, the `ul.k-group` element is wrapped by a `div.k-animation-container` and the DOM structure is transformed to:
 
 <!-- -->
