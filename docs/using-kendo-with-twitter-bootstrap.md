@@ -141,8 +141,10 @@ Possible resolutions include:
     
 ## Known limitations
 
-With the latest version of the Bootstrap library, a code that prevents the input in elements with `data-role=filter` has been introduced in the bootstrap.js file. This causes a problem with data input in filter menu
-input elements.
+* Bootstrap modal dialogs prevent access to Kendo UI popups, which are opened by widgets placed inside the modal dialog.
+In such cases, use non-modal Bootstrap dialogs or [modal](/api/javascript/ui/window#configuration-modal) Kendo UI [Windows](/web/window/overview).
+* With the latest version of the Bootstrap library, a code that prevents the input in elements with `data-role=filter` has been introduced in the bootstrap.js file.
+This causes a problem with data input in filter menu input elements.
 
 ##See Also
 [Responsive Web Design](http://docs.telerik.com/kendo-ui/using-kendo-in-responsive-web-pages)
