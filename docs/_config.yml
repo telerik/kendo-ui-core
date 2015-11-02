@@ -16,12 +16,6 @@ navigation:
     "*supporting":
         title: "Additional Resources"
         position: 2
-    "*installation":
-        title: "Prerequisites and Installation"
-        position: 1
-    "*supporting":
-        title: "Additional Resources"
-        position: 2
     "*excel":
         title: "Excel"
     "*how-to":
