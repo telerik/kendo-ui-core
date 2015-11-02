@@ -127,17 +127,19 @@ The most notable changes are:
 * Each menu item text is wrapped in a `span.k-link` element, or `a.k-link` element, if a navigation URL is specified.
 * Once a menu group is opened, the `ul.k-group` element is wrapped by a `div.k-animation-container` and the DOM structure is transformed to:
 
-        <li class="k-item k-state-default">
-            <span class="k-link">root item 2
-                <span class="k-icon k-i-arrow-s"></span>
-            </span>
-            <div class="k-animation-container">
-                <ul class="k-group k-menu-group">
-                    <li class="k-item k-state-default"><span class="k-link">child item 1</span></li>
-                    <li class="k-item k-state-default"><span class="k-link">child item 2</span></li>
-                </ul>
-            </div>
-        </li>
+<!-- -->
+
+    <li class="k-item k-state-default">
+        <span class="k-link">root item 2
+            <span class="k-icon k-i-arrow-s"></span>
+        </span>
+        <div class="k-animation-container">
+            <ul class="k-group k-menu-group">
+                <li class="k-item k-state-default"><span class="k-link">child item 1</span></li>
+                <li class="k-item k-state-default"><span class="k-link">child item 2</span></li>
+            </ul>
+        </div>
+    </li>
 
 ## Customize Menu Animations
 
