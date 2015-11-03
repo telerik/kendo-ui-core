@@ -47,12 +47,16 @@ Since the inline editor is initialized from a non-form element, it is not posted
       });
     </script>
 
-## Images inside the Editor are not resizable in some scenarios
+## Images and tables inside the Editor are not resizable in some scenarios
 
-To begin with, image resizing inside contenteditable elements depends on the browser and is not an Editor feature. In addition, there is a browser issue, which is exhibited in the following way -
-if a "classic" Editor (which uses an `iframe`) is created while hidden, or is hidden after initialization and then displayed back, then images become non-resizable. This problem is not related to Kendo UI.
-It can be resolved by calling the Editor's [`refresh`](/api/web/editor#methods-refresh) method after the Editor becomes visible. Refreshing the widget will recreate the iframe.
+To begin with, image and table resizing inside contenteditable elements depends on the browser and is not an Editor feature.
+In addition, there is a browser issue, which is exhibited in the following way - if a "classic" Editor (which uses an `iframe`) is created while hidden,
+or is hidden after initialization and then displayed back, then images become non-resizable. This problem is not related to Kendo UI. It can be resolved by calling the
+Editor's [`refresh`](/api/web/editor#methods-refresh) method after the Editor becomes visible. Refreshing the widget will recreate the iframe.
 Another possible approach is to use the Editor's "inline" mode, i.e. create the Editor from a `div`.
+
+In order to achieve image or table resizing in browsers that normally do not support it (such as Google Chrome 46 for example),
+one can implement a [custom Editor tool](http://demos.telerik.com/kendo-ui/editor/custom-tools).
 
 ## Editor displays raw HTML content when using the browser's Back and Forward buttons
 
