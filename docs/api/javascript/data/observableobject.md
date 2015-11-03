@@ -9,7 +9,7 @@ description: The documentation contains examples for the configuration of a new 
 The `kendo.data.ObservableObject` is the building block of [Kendo MVVM](/framework/mvvm/overview). In addition
 the items of the [kendo.dat.DataSource](/framework/datasource/overview) are `kendo.data.ObservableObject` instances.
 
-Inherits from [kendo.Observable](/api/framework/observable).
+Inherits from [kendo.Observable](/api/javascript/observable).
 
 ## Configuration
 
@@ -66,7 +66,7 @@ The unique identifier of the `ObservableObject`.
 
 ### bind
 
-Attaches a handler to an event. Examples and more info can be found in the [bind](/api/framework/observable#bind) section of the
+Attaches a handler to an event. Examples and more info can be found in the [bind](/api/javascript/observable#bind) section of the
 kendo.Observable API reference.
 
 #### Example - subscribe to an event

@@ -29,7 +29,7 @@ kendo.saveAs({
 
 The `kendo.saveAs` will attempt to save the file using client-side API in browsers that support file creation (IE10+, Google Chrome and FireFox).
 If the browser doesn't implement an API for saving files then `kendo.saveAs` could POST the content to a server-side proxy which will stream the file back to the end user.
-The server-side proxy approach works in all [supported browsers](/browsers-support). Set the `proxyURL` option to enable the server proxy. You can make `kendo.saveAs` always use the server proxy
+The server-side proxy approach works in all [supported browsers](/intro/supporting/browser-support). Set the `proxyURL` option to enable the server proxy. You can make `kendo.saveAs` always use the server proxy
 by setting the `forceProxy` option to `true`.
 
 #### Example - set server proxy

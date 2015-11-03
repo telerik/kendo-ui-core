@@ -17,22 +17,22 @@ The minified versions of all JavaScript files are available via the following UR
 `https://kendo.cdn.telerik.com/VERSION/styles/FILENAME.min.css`
 
 For example, the 2014.1.318 version can be loaded from:  
-<https://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js>  
-<https://kendo.cdn.telerik.com/2014.1.318/styles/kendo.common.min.css>
+`https://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js`
+`https://kendo.cdn.telerik.com/2014.1.318/styles/kendo.common.min.css`
 
 Use the following URL to load the minified Kendo UI Core script (available since Q1 2014 SP1):
-<https://kendo.cdn.telerik.com/2014.1.416/js/kendo.ui.core.min.js>
+`https://kendo.cdn.telerik.com/2014.1.416/js/kendo.ui.core.min.js`
 
 > **Important**  
-> The <http://cdn.kendostatic.com/> URL will remain active, but is no longer recommended for new projects.
+> The `http://cdn.kendostatic.com/` URL will remain active, but is no longer recommended for new projects.
 
 ## Option 2: Via the HTTPS Protocol
 
 To access the Kendo UI CDN service through the HTTPS protocol, use the same host name as above, only replacing the scheme (protocol) with `https`:  
-<https://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js>
+`https://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js`
 
 > **Important**  
-> The <https://da7xgjtj801h2.cloudfront.net/> URL will remain active, but is no longer recommended for new projects.
+> The `https://da7xgjtj801h2.cloudfront.net/` URL will remain active, but is no longer recommended for new projects.
 
 ## Troubleshoot
 
