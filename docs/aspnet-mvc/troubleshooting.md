@@ -89,7 +89,10 @@ Those libraries are **jquery.unobtrusive-ajax**, **jquery.validate** and **jquer
 
 ## Menu Renders Too Slowly in Debug Mode
 
-The Menu has security trimming functionality, which is enabled by default. Under the hood, it creates an [AuthorizationContext](https://msdn.microsoft.com/en-us/library/system.web.mvc.authorizationcontext(v=vs.108).aspx) for every menu item with set Action/Controller. In 'debug' mode those context objects are not cached and as a result there may be delay in rendering the menu in case there are a lot of items. When your application is deployed and debug mode is disabled the authorization context objects are cached.
+The Menu has security trimming functionality, which is enabled by default.
+Under the hood, it creates an [AuthorizationContext](https://msdn.microsoft.com/en-us/library/system.web.mvc.authorizationcontext(v=vs.108).aspx) for every menu item with set Action/Controller.
+In 'debug' mode those context objects (ControllerContext, ActionContext and the resulting AuthorizationContext) are not cached and are recreated each time the Menu is rendered.
+As a result there may be delay in rendering the menu in case there are a lot of items. When your application is deployed and debug mode is disabled the authorization context objects are cached.
 
 More info about ASP.NET debug mode can be found in the Scott Guthrie's blog post: [Don’t run production ASP.NET Applications with debug="true" enabled](http://weblogs.asp.net/scottgu/introducing-asp-net-5).
 
