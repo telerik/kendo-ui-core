@@ -73,6 +73,10 @@ where more information can be found.
 
 Please refer to [Kendo UI CDN Fallback and Troubleshooting](/intro/installation/cdn-service#troubleshooting).
 
+## Web Server returns 404 Not Found errors for WOFF or TTF font files
+
+Please refer to [Serving Icon Fonts](/mobile/icons#serving-icon-fonts).
+
 ## Widget Object Is Undefined after Loading a Page through AJAX
 
 Usually caused when the page loaded via AJAX contains a script reference to jQuery. When jQuery is re-initialized, all jQuery-based data attributes are cleared, including the data("kendoWidget") attribute that holds the Kendo UI widget object.
