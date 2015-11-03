@@ -1,20 +1,18 @@
 ---
 title: Overview
-page_title: How-to for jQuery UI DateTimePicker widget in Kendo UI Web framework
-description: Overview of Kendo UI DateTimePicker widget. Get familiar with the configuration options of the control and define the interval between values in the time drop-down list.
+page_title: Overview | Kendo UI DateTimePicker Widget
+description: "Learn how to initialize the Kendo UI DateTimePicker widget, configure its options and define the interval between values int he time drop-down list."
+slug: overview_kendoui_datetimepicker_widget
+position: 1
 ---
 
 # DateTimePicker Overview
 
-The DateTimePicker widget allows the user to select a value from a
-calendar or a time drop-down list as well as direct input.
-It supports configurable options for minimum and maximum value, format, interval between predefined hours in the time view, custom templates for "month" view
-of the calendar, start view and the depth of the navigation.
-
+[Kendo UI DateTimePicker widget](http://demos.telerik.com/kendo-ui/datetimepicker/index) allows the user to select a value from a calendar or a time drop-down list as well as direct input. It supports configurable options for minimum and maximum value, format, interval between predefined hours in the time view, custom templates for "month" view of the calendar, start view and the depth of the navigation.
 
 ## Getting Started
 
-### DateTimePicker initialization
+### Initialize the DateTimePicker
     
     <input id="dateTimePicker"> 
 
@@ -24,22 +22,22 @@ of the calendar, start view and the depth of the navigation.
       });
     </script>
 
-> Widget copies any styles and CSS classes from the input element to the wrapper element.
+> **Important**  
+> The widget copies any styles and CSS classes from the input element to the wrapper element.
 
-## Configure DateTimePicker Behavior
+## Configuration
 
-The DateTimePicker widget provides configuration options that can be set
-during initialization. Among the properties that can be controlled:
+The DateTimePicker provides many configuration options that can be set during initialization. Among the properties you can control are:
 
+* Selected date
+* Minimum and/or maximum date and time
+* Format definition
+* Start view
+* Navigation depth (i.e., define the last view to which the user can navigate)
+* Interval definition between predefined values in the time drop-down list 
 
-*   Selected datetime
-*   Minimum/Maximum datetime
-*   Define format
-*   Start view
-*   Navigation depth (last view to which the user can navigate)
-*   Define interval between predefined values in the time drop-down list
+### Define Selected, Min, and Max Datetime
 
-### Create DateTimePicker with a selected value and a defined minimum and maximum datetime
     <input id="dateTimePicker"> 
 
     <script>
@@ -52,10 +50,10 @@ during initialization. Among the properties that can be controlled:
         });
     </script>
 
-DateTimePicker will set the value only if the entered datetime is valid and
-within the defined range.
+The DateTimePicker will set the value only if the entered datetime is valid and within the defined range.
 
-### Define the format
+### Define the Format
+
     <input id="dateTimePicker"> 
 
     <script>
@@ -64,8 +62,7 @@ within the defined range.
         });
     </script>
 
-The DateTimePicker value is parsed when the user changes the content via typing. This means that if, for example, the format contains only a time portion, the date will be reset to today.
-To support such a DateTimePicker format, you should make the widget textbox read-only after the widget is initialized and not via the widget's readonly() method (otherwise the Date and Time pop-ups will be disabled).
+The DateTimePicker value is parsed when the user changes the content via typing. This means that if, for example, the format contains only a time portion, the date will be reset to today. To support such a DateTimePicker format, you should make the widget textbox read-only after the widget is initialized and not via the widget's `readonly()` method. Otherwise the **Date** and **Time** pop-ups will be disabled.
     
     <input id="dateTimePicker"> 
 
@@ -75,7 +72,7 @@ To support such a DateTimePicker format, you should make the widget textbox read
         }).attr("readonly", "readonly");
     </script>
 
-### Define the time format
+### Define the Time Format
     
     <input id="dateTimePicker"> 
     
@@ -85,20 +82,17 @@ To support such a DateTimePicker format, you should make the widget textbox read
         });
     </script>     
 
-## Define a Start View and Navigation Depth
+### Define the Start View and Navigation Depth
 
+Define the first rendered view with the `start` option. Control the navigation depth with the `depth` option. The following views are predefined:
 
-The first rendered view can be defined with the "start" option.
-Navigation depth can be controlled with "depth" option. Predefined
-views are:
+*   `month` - shows the days of the month
+*   `year` - shows the months of the year
+*   `decade` - shows the years of the decade
+*   `century` - shows the decades of the century
 
+### Create a Selectable Month DateTimePicker
 
-*   "month" - shows the days from the month
-*   "year" - shows the months of the year
-*   "decade" - shows the years from the decade
-*   "century" - shows the decades from the century
-
-### Create a DateTimePicker for selecting a month
     <input id="dateTimePicker"> 
     
     <script>
@@ -108,7 +102,9 @@ views are:
         });
     </script>
 
-### Define the interval (in minutes) between values in the time drop-down list
+### Define Intervals
+
+Define the interval (in minutes) between values in the time drop-down list in the following way:
     
     <input id="dateTimePicker"> 
     
@@ -117,3 +113,35 @@ views are:
             interval: 15
         })
     </script>
+
+## See Also
+
+Other articles on Kendo UI DateTimePicker:
+
+* [How to Prevent Invalid Values]({% slug howto_prevent_invalid_values_datetimepicker %})
+* [How to Validate Custom Dates]({% slug howto_validate_custom_dates_datetimepicker %})
+* [How to Limit Navigation to Months]({% slug howto_limit_navigation_tomonths_datetimepicker %})
+* [How to Override Hours in the Popup]({% slug howto_override_hours_inpopup_datetimepicker %})
+* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/datetimepicker/overview)
+* [Overview of the JSP Tag](/jsp/tags/datetimepicker/overview)
+* [Overview of the PHP Class](/php/widgets/datetimepicker/overview)
+* [JavaScript API Reference](/api/javascript/ui/datetimepicker)
+
+Articles on Kendo UI Calendar:
+
+* [Overview]({% slug overview_kendoui_calendar_widget %})
+* [How to Control the Header Format]({% slug howto_control_header_format_calendar %})
+* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/calendar/overview)
+* [Overview of the JSP Tag](/jsp/tags/calendar/overview)
+* [Overview of the PHP Class](/php/widgets/calendar/overview)
+* [JavaScript API Reference](/api/javascript/ui/calendar)
+
+Articles on Kendo UI DatePicker:
+
+* [Overview]({% slug overview_kendoui_datepicker_widget %})
+* [How to Disable Dates]({% slug howto_disable_dates_datepicker %})
+* [How to Set the First Weekday]({% slug howto_set_first_weekday_datepicker %})
+* [How to Create Date Masking]({% slug howto_create_date_masking_datepicker %})
+* [How to Persist Entered Dates]({% slug howto_persist_entered_dates_datepicker %})
+* [How to Resize Calendar Based on Input Width]({% slug howto_use_resize_calendar_basedon_input_width_datepicker %})
+* [JavaScript API Reference](/api/javascript/ui/datepicker)

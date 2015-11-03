@@ -1,14 +1,15 @@
 ---
-title: Override hours in the popup
-page_title: Override hours in the popup
-description: Example that shows how to override hours in the popup
+title: Override Hours in the Popup
+page_title: Override Hours in the Popup | Kendo UI DateTimePicker Widget
+description: "Learn how to override hours in the popup of the Kendo UI DateTimePicker widget."
+slug: howto_override_hours_inpopup_datetimepicker
 ---
 
-# How to override hours in the popup
+# Override Hours in the Popup
 
-Example that shows how to override hours in the popup
+The example below demonstrates how to override hours in the popup:
 
-#### Example:
+###### Example
 
 ```html
 <input id="datetimepicker" />
@@ -33,3 +34,12 @@ Example that shows how to override hours in the popup
   });
 </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI DateTimePicker:
+
+* [JavaScript API Reference](/api/javascript/ui/datetimepicker)
+* [How to Prevent Invalid Values]({% slug howto_prevent_invalid_values_datetimepicker %})
+* [How to Validate Custom Dates]({% slug howto_validate_custom_dates_datetimepicker %})
+* [How to Limit Navigation to Months]({% slug howto_limit_navigation_tomonths_datetimepicker %})
