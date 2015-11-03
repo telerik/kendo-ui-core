@@ -184,21 +184,18 @@ Enable virtualization in a ComboBox by using the example below. It demonstrates 
 
 ## See Also
 
-Articles on Kendo UI DataSource:
-
-* [DataSource Overview](/framework/datasource/overview)
-* [DataSource API](/api/javascript/data/datasource)
-
 Other articles on Kendo UI ComboBox:
 
 * [Virtual Setup](/api/javascript/ui/combobox#configuration-virtual)
-* [Overview]({% slug overview_kendoui_combobox_widget %})
-* [Grouping]({% slug grouping_kendoui_combobox_widget %}) 
-* [Server Filtering]({% slug server_filtering_kendoui_combobox_widget %})
-* [Cascading ComboBoxes]({% slug cascading_kendoui_combobox_widget %})
-* [Configure Deferred Value Binding]({% slug howto_configure_deffered_value_binding_combobox %})
-* [Expand Background of Long List Items]({% slug howto_expand_background_longlist_items_combobox %})
-* [Expand ComboBox Located in Bootstrap Layout]({% slug howto_expand_widget_bootstrap_widget_combobox %})
-* [Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
-* [Select Items on TAB]({% slug howto_select_items_ontab_combobox %})
-* [Disable Child Cascading ComboBoxes]({% slug howto_disable_child_cascading_combobox %})
+* [How to Configure Deferred Value Binding]({% slug howto_configure_deffered_value_binding_combobox %})
+* [How to Expand Background of Long List Items]({% slug howto_expand_background_longlist_items_combobox %})
+* [How to Expand ComboBox Located in Bootstrap Layout]({% slug howto_expand_widget_bootstrap_widget_combobox %})
+* [How to Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
+* [How to Select Items on TAB]({% slug howto_select_items_ontab_combobox %})
+* [How to Disable Child Cascading ComboBoxes]({% slug howto_disable_child_cascading_combobox %})
+* [JavaScript API Reference](/api/javascript/ui/combobox)
+
+Articles on Kendo UI DataSource:
+
+* [DataSource Overview](/framework/datasource/overview)
+* [JavaScript DataSource API Reference](/api/javascript/data/datasource)

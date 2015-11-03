@@ -42,13 +42,10 @@ the [Virtualization](/kendo-ui/web/combobox/virtualization) feature of the widge
 
 Other articles on Kendo UI ComboBox:
 
-* [Overview]({% slug overview_kendoui_combobox_widget %})
-* [Grouping]({% slug grouping_kendoui_combobox_widget %})
-* [Virtualization]({% slug virtualization_kendoui_combobox_widget %})
-* [Cascading ComboBoxes]({% slug cascading_kendoui_combobox_widget %})
-* [Clear Filter on Open]({% slug howto_clear_filter_open_combobox %})
-* [Open ComboBox When `onfocus` is Triggered]({% slug howto_open_onfocus_combobox %})
-* [Configure Deferred Value Binding]({% slug howto_configure_deffered_value_binding_combobox %})
-* [Expand Background of Long List Items]({% slug howto_expand_background_longlist_items_combobox %})
-* [Expand ComboBox Located in Bootstrap Layout]({% slug howto_expand_widget_bootstrap_widget_combobox %})
-* [Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
+* [How to Configure Deferred Value Binding]({% slug howto_configure_deffered_value_binding_combobox %})
+* [How to Expand Background of Long List Items]({% slug howto_expand_background_longlist_items_combobox %})
+* [How to Expand ComboBox Located in Bootstrap Layout]({% slug howto_expand_widget_bootstrap_widget_combobox %})
+* [How to Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
+* [How to Select Items on TAB]({% slug howto_select_items_ontab_combobox %})
+* [How to Disable Child Cascading ComboBoxes]({% slug howto_disable_child_cascading_combobox %})
+* [JavaScript API Reference](/api/javascript/ui/combobox)

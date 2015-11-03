@@ -277,6 +277,7 @@ Kendo UI Button can be used for creating different style of buttons, like the Fl
 
 Other articles on Kendo UI Button:
 
-* [Overview of the HtmlHelper Extension](/aspnet-mvc/helpers/button/overview)
+* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/button/overview)
 * [Overview of the JSP Tag](/jsp/tags/button/overview)
 * [Overview of the PHP Class](/php/widgets/button/overview) 
+* [JavaScript API Reference](/api/javascript/ui/button)

@@ -3,7 +3,6 @@ title: Control the Header Format
 page_title: Control the Header Format | Kendo UI Calendar Widget
 description: "Learn how to control the header format of the Kendo UI Calendar widget."
 slug: howto_control_header_format_calendar
-position: 1
 ---
 
 # Control the Header Format
@@ -59,4 +58,4 @@ The example below demonstrates how to control the header format of Kendo UI Cale
 
 Other articles on Kendo UI Calendar:
 
-* [Calendar Overview]({% slug overview_kendoui_calendar_widget %})
+* [JavaScript API Reference](/api/javascript/ui/calendar)
