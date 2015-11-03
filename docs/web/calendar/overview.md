@@ -105,11 +105,17 @@ The template wraps the `value` in a `<div>` HTML element. The structure of the d
 
 Other articles on Kendo UI Calendar:
 
-* [Control the Header Format]({% slug howto_control_header_format_calendar %})
-* [Overview of the HtmlHelper Extension](/aspnet-mvc/helpers/calendar/overview)
+* [How to Control the Header Format]({% slug howto_control_header_format_calendar %})
+* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/calendar/overview)
 * [Overview of the JSP Tag](/jsp/tags/calendar/overview)
 * [Overview of the PHP Class](/php/widgets/calendar/overview)
+* [JavaScript API Reference](/api/javascript/ui/calendar)
 
 Articles on Kendo UI DatePicker:
 
 * [Overview]({% slug overview_kendoui_datepicker_widget %})
+* [How to Disable Dates]({% slug howto_disable_dates_datepicker %})
+* [How to Set the First Weekday]({% slug howto_set_first_weekday_datepicker %})
+* [How to Create Date Masking]({% slug howto_create_date_masking_datepicker %})
+* [How to Persist Entered Dates]({% slug howto_persist_entered_dates_datepicker %})
+* [How to Resize Calendar Based on Input Width]({% slug howto_use_resize_calendar_basedon_input_width_datepicker %})
