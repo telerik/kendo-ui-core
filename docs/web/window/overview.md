@@ -34,7 +34,7 @@ DOM element that was used to initialize the content.
 ### HTML structure and DOM Placement
 
 By default, the Window is created as a child of the `<body>` element. This behavior should be taken into account with regard to CSS selectors or element discovery via Javascript.
-The behavior is configurable via the [`appendTo` setting](/api/web/window#configuration-appendTo).
+The behavior is configurable via the [`appendTo` setting](/api/javascript/ui/window#configuration-appendTo).
 
 #### Before initialization
 
@@ -180,7 +180,7 @@ all sorts of undesired side effects, including a broken DOM tree, deleted widget
     });
 
 If the Window has no set dimensions, it will probably resize after the AJAX content is loaded. This will naturally change the widget position on the screen and it will no longer be centered. If this is a requirement,
-then either [`center`](/api/web/window#methods-center) the Window in its [`refresh`](/api/web/window#events-refresh) event, or set some explicit dimensions.
+then either [`center`](/api/javascript/ui/window#methods-center) the Window in its [`refresh`](/api/javascript/ui/window#events-refresh) event, or set some explicit dimensions.
 
 ## Using iframes
 
@@ -260,7 +260,7 @@ By default, the Window widget is moved in the DOM and placed as a child of the `
 but may lead to undesired side effects if the Window is created from an element inside a form, because the moved form fields will not be submitted. There are two ways to avoid this:
 
 1. the whole form including its opening and closing tags should be inside the element, from which the Window is created;
-1. if some parts of the form should remain outside the Window, then the [appendTo](/api/web/window#configuration-appendTo) property should be used,
+1. if some parts of the form should remain outside the Window, then the [appendTo](/api/javascript/ui/window#configuration-appendTo) property should be used,
 so that the widget remains inside the form;
 
 When the Window contains a form, which is submitted via standard POST, the widget will be closed and the page will be reloaded.

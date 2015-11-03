@@ -193,7 +193,7 @@ The Menu requires the Grid cells to allow overflowing, which is disabled by defa
 
 ### How Do I Change the Format of a Bound Column?
 
-Use the [Format](api/wrappers/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#formatsystem.string) method.
+Use the [Format](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#formatsystem.string) method.
 The value should be a valid [number](/api/javascript/kendo#standard-number-formats) or [date](/api/javascript/kendo#standard-date-formats) format.
 
 ###### Example - specify the format of a bound column

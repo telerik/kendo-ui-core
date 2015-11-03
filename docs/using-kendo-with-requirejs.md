@@ -12,7 +12,7 @@ You can use this feature to load only the needed Kendo UI JavaScript files inste
 
 ## Using RequireJS to load Kendo UI from CDN
 
-This example shows how to load the Kendo UI JavaScript files via [CDN](/intro/getting-started#use-the-kendo-ui-cdn-service).
+This example shows how to load the Kendo UI JavaScript files via [CDN](/intro/installation/getting-started#use-the-kendo-ui-cdn-service).
 
 ```html
 <!doctype html>

@@ -380,7 +380,7 @@ This change will affect people using the private `_data` field of the data sourc
 
 **PivotDataSource**
 
-* The measure aggregator of the [client pivot cube](../api/javascript/data/pivotdatasource#configuration-schema.cube) uses **object** instead of number for the `state` argument. The field that should be set to accumulate the value is called `accumulator`.
+* The measure aggregator of the [client pivot cube](/api/javascript/data/pivotdatasource#configuration-schema.cube) uses **object** instead of number for the `state` argument. The field that should be set to accumulate the value is called `accumulator`.
 
 <ul><ul><li>Old rendering:</li></ul></ul>
 
@@ -409,9 +409,9 @@ This change will affect people using the private `_data` field of the data sourc
 
 * Q2 2014 introduces an additional TabStrip wrapper div which makes sure that the TabStrip changes in height won't affect the page scrolling position.  
 
-* TabStrip's **activate** event has been renamed to [**show**](../api/web/tabstrip#events-show) event - which fires at the beginning of the open animation. A new [**activate**](../api/web/tabstrip#events-activate) event has been introduced, which is fired at the end of the open animation. This is done for consistency with the rest of the widgets.  
+* TabStrip's **activate** event has been renamed to [**show**](/api/javascript/ui/tabstrip#events-show) event - which fires at the beginning of the open animation. A new [**activate**](/api/javascript/ui/tabstrip#events-activate) event has been introduced, which is fired at the end of the open animation. This is done for consistency with the rest of the widgets.  
 
-* TabStrip automatically calls [**kendo.resize**](../api/framework/kendo#methods-resize) to its contents in both [**show**](../api/web/tabstrip#events-show) and [**activate**](../api/web/tabstrip#events-activate) events.
+* TabStrip automatically calls [**kendo.resize**](/api/javascript/kendo#methods-resize) to its contents in both [**show**](/api/javascript/ui/tabstrip#events-show) and [**activate**](/api/javascript/ui/tabstrip#events-activate) events.
 
 **TreeView**: The deprecated `checkboxTemplate` configuration option has been removed. If you don't need a highly specific checkbox template, consider using the default one (using checkboxes: true).
 
@@ -467,7 +467,7 @@ you can style your app with them if you don't include any of the Kendo UI Mobile
 
 **DatePicker**: The DatePicker widget now uses a single calendar instance. The calendar will be created on first popup opening.
 
-If you need to get a reference to the calendar you will need to get in the [open](kendo-ui/api/web/datepicker#events-open) event handler:
+If you need to get a reference to the calendar you will need to get in the [open](/api/javascript/ui/datepicker#events-open) event handler:
 
 <ul><ul><li>Old rendering:</li></ul></ul>
 
@@ -488,7 +488,7 @@ If you need to get a reference to the calendar you will need to get in the [open
 
 **DateTimePicker**: The DateTimePicker widget now uses a single calendar instance. The calendar will be created on first date popup opening.
 
-If you need to get a reference to the calendar you will need to get in the [open](kendo-ui/api/web/datetimepicker#events-open) event handler:
+If you need to get a reference to the calendar you will need to get in the [open](/api/javascript/ui/datetimepicker#events-open) event handler:
 
 <ul><ul><li>Old rendering:</li></ul></ul>
 
@@ -523,7 +523,7 @@ the new default import once functionality of @import directive).
 * **Core**: kendo.support.pointers now only shows support for IE11 pointer events - kendo.support.msPointers was added to indicate that IE10 pointer events are supported too.  
 
 * **Splitter**: the internal method `trigger("resize")`, which has been provided as a workaround in certain scenarios, no longer works. It has been replaced with a [public API method `resize()`](/using-kendo-in-responsive-web-pages), which now all Kendo UI widgets have.
-Also see [`kendo.resize()`](/api/framework/kendo/#methods-resize).
+Also see [`kendo.resize()`](/api/javascript/kendo#methods-resize).
 
 * **Splitter**: the `layoutChange` event is now obsolete and will be removed in the future. Please use the `resize` event instead.  
 
@@ -653,7 +653,7 @@ Some ASP.NET MVC applications may be broken if using other libraries incompatibl
 #### Breaking changes
 
 * **Cascading ComboBoxes/DropDownLists:** The parameterMap of the child widget's dataSource is called before the change event of the parent widget.
-Use [cascade](/api/web/combobox#cascade) event instead of change event.
+Use [cascade](/api/javascript/ui/combobox#cascade) event instead of change event.
 
 * Telerik UI for ASP.NET MVC: Remove Slide effect. Use SlideIn instead.
 

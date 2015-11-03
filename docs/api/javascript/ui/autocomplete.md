@@ -69,7 +69,7 @@ The duration of the close animation in milliseconds.
 
 The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/framework/fx/common)
+[Complete list of available animations](/api/javascript/effects/common)
 
 ### animation.open `Object`
 
@@ -97,16 +97,16 @@ The duration of the open animation in milliseconds.
 
 The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/framework/fx/common)
+[Complete list of available animations](/api/javascript/effects/common)
 
 ### dataSource `Object|Array|kendo.data.DataSource`
 
-The data source of the widget which is used to display suggestions for the current value. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/framework/datasource)
+The data source of the widget which is used to display suggestions for the current value. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
 instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/framework/datasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/datasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.DataSource](/api/framework/datasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascript/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
 
 #### Example - set dataSource as a JavaScript object
 
@@ -207,7 +207,7 @@ all data items which begin with the current widget value are displayed in the su
 
 ### fixedGroupTemplate `String|Function`
 
-The [template](/api/framework/kendo#methods-template) used to render the fixed header group. By default the widget displays only the value of the current group.
+The [template](/api/javascript/kendo#methods-template) used to render the fixed header group. By default the widget displays only the value of the current group.
 
     <input id="customers" style="width: 400px" />
     <script>
@@ -229,7 +229,7 @@ The [template](/api/framework/kendo#methods-template) used to render the fixed h
 
 ### groupTemplate `String|Function`
 
-The [template](/api/framework/kendo#methods-template) used to render the groups. By default the widget displays only the value of the group.
+The [template](/api/javascript/kendo#methods-template) used to render the groups. By default the widget displays only the value of the group.
 
     <input id="customers" style="width: 400px" />
     <script>
@@ -396,7 +396,7 @@ Specifies a static HTML content, which will be rendered as a header of the popup
 
 ### template `String|Function`
 
-The [template](/api/framework/kendo#methods-template) used to render the suggestions. By default the widget displays only the text of the suggestion (configured via `dataTextField`).
+The [template](/api/javascript/kendo#methods-template) used to render the suggestions. By default the widget displays only the text of the suggestion (configured via `dataTextField`).
 
 #### Example - specify template as a function
 
@@ -596,7 +596,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/framework/datasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
+The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
 
 > Changes of the data source will be reflected in the widget.
 
@@ -1075,7 +1075,7 @@ The widget instance which fired the event.
 
 The filter descriptor that will be used to filter the data source.
 
-> The data source filters the data items client-side unless the [data source serverFiltering](/api/framework/datasource#configuration-serverFiltering) option is set to `true`.
+> The data source filters the data items client-side unless the [data source serverFiltering](/api/javascript/data/datasource#configuration-serverFiltering) option is set to `true`.
 
 #### Example - subscribe to the "filtering" event during initialization
 
