@@ -351,10 +351,10 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (view === views[options.depth] && selectedValue && !that.options.disableDates(selectedValue)) {
-                that._class("k-state-selected", currentView.toDateString(selectedValue));
+                that._class("k-state-selected", selectedValue);
             }
 
-            that._class(FOCUSED, currentView.toDateString(value), value);
+            that._class(FOCUSED, value);
 
             if (!from && that._cell) {
                 that._cell.removeClass(FOCUSED);
@@ -487,19 +487,19 @@ var __meta__ = { // jshint ignore:line
             min = that.options.min,
             max = that.options.max,
             isDisabled = that.options.disableDates,
-            navigatableDate = new Date(currentValue.valueOf());
+            navigatableDate = new Date(currentValue.getTime());
 
             view.setDate(navigatableDate, -value);
 
             while (disabled) {
                 view.setDate(currentValue, value);
+
+                if (!isInRange(currentValue, min, max)) {
+                    currentValue = navigatableDate;
+                    break;
+                }
                 disabled = isDisabled(currentValue);
             }
-
-            if (!isInRange(currentValue, min, max)) {
-                currentValue = navigatableDate;
-            }
-
             return currentValue;
         },
 
@@ -619,10 +619,11 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
-        _class: function(className, value, date) {
+        _class: function(className, date) {
             var that = this,
                 id = that._cellID,
                 cell = that._cell,
+                value = that._view.toDateString(date),
                 disabledDate;
 
             if (cell) {
@@ -690,7 +691,7 @@ var __meta__ = { // jshint ignore:line
                 that.navigate(value);
             } else {
                 that._current = value;
-                that._class(FOCUSED, view.toDateString(value));
+                that._class(FOCUSED, value);
             }
         },
 
