@@ -22,7 +22,7 @@ The example below demonstrates how to highlight Kendo UI Map Shapes by specified
             dataSource: {
               type: "geojson",
               transport: {
-                read: "../content/dataviz/map/countries-users.geo.json"
+                read: "http://output.jsbin.com/zuguhajiye.js"
               }
             },
             style: {
