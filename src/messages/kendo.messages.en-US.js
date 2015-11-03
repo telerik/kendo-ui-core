@@ -648,6 +648,45 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
 });
 }
 
+if (kendo.spreadsheet && kendo.spreadsheet.messages.filterMenu) {
+kendo.spreadsheet.messages.filterMenu =
+$.extend(true, kendo.spreadsheet.messages.filterMenu,{
+  "sortAscending": "Sort range A to Z",
+  "sortDescending": "Sort range Z to A",
+  "filterByValue": "Filter by value",
+  "filterByCondition": "Filter by condition",
+  "apply": "Apply",
+  "search": "Search",
+  "clear": "Clear",
+  "blanks": "(Blanks)",
+  "operatorNone": "None",
+  "and": "AND",
+  "or": "OR",
+  "operators": {
+    "string": {
+      "contains": "Text contains",
+      "doesnotcontain": "Text does not contain",
+      "startswith": "Text starts with",
+      "endswith": "Text ends with"
+    },
+    "date": {
+      "eq":  "Date is",
+      "neq": "Date is not",
+      "lt":  "Date is before",
+      "gt":  "Date is after"
+    },
+    "number": {
+      "eq": "Is equal to",
+      "neq": "Is not equal to",
+      "gte": "Is greater than or equal to",
+      "gt": "Is greater than",
+      "lte": "Is less than or equal to",
+      "lt": "Is less than"
+    }
+  }
+});
+}
+
 if (kendo.spreadsheet && kendo.spreadsheet.messages.toolbar) {
 kendo.spreadsheet.messages.toolbar =
 $.extend(true, kendo.spreadsheet.messages.toolbar,{
