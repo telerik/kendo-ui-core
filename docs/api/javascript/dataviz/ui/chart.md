@@ -32781,6 +32781,10 @@ The series of the note.
 
 The data item of the point's note.
 
+##### e.visual `Object`
+
+The note visual element.
+
 #### Example - subscribe to the "noteClick" event during initialization
     <div id="chart"></div>
     <script>
@@ -32840,6 +32844,10 @@ The series of the note.
 ##### e.dataItem `Object`
 
 The data item of the point's note.
+
+##### e.visual `Object`
+
+The note visual element.
 
 #### Example - subscribe to the "noteHover" event during initialization
     <div id="chart"></div>
