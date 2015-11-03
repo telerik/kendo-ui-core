@@ -21,7 +21,7 @@ The example below demonstrates how to draw a straight line between a marker and 
           dataSource: {
             type: "geojson",
             transport: {
-              read: "../content/dataviz/map/countries-users.geo.json"
+              read: "http://output.jsbin.com/zuguhajiye.js"
             }
           }
         }, {

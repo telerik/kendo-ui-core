@@ -28,7 +28,7 @@ The example below demonstrates how to use Kendo UI Map in Kendo UI Mobile View a
           layers: [{
             type: "bing",
             imagerySet: "aerialWithLabels",
-            key: "AjQF548guEF8MWgEspVokNny7l_GULKsZ81tR-LvPK96Bm3REkCjNHs2aC_b7nvF"
+            key: "AqaPuZWytKRUA8Nm5nqvXHWGL8BDCXvK8onCl2PkC581Zp3T_fYAQBiwIphJbRAK"
           }]
         });
       }

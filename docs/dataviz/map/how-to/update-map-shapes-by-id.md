@@ -22,7 +22,7 @@ The example below demonstrates how to update Kendo UI Map Shapes by specified id
             dataSource: {
               type: "geojson",
               transport: {
-                read: "../content/dataviz/map/countries-users.geo.json"
+                read: "http://output.jsbin.com/zuguhajiye.js"
               }
             },
             style: {
