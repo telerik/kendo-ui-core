@@ -1,14 +1,15 @@
 ---
-title: Custom date validation
-page_title: Custom date validation
-description: Example that shows how to create custom date validation
+title: Validate Custom Dates
+page_title: Validate Custom Dates | Kendo UI DateTimePicker Widget
+description: "Learn how to create custom date validation in a Kendo UI DateTimePicker widget."
+slug: howto_validate_custom_dates_datetimepicker
 ---
 
-# How to create custom date validation
+# Validate Custom Dates
 
-Example that shows how to create custom date validation
+The example below demonstrates how to create a custom date validation:
 
-#### Example:
+###### Example
 
 ```html
   <div id="example">
@@ -59,3 +60,12 @@ Example that shows how to create custom date validation
     </style>
   </div>
 ```
+
+## See Also
+
+Other articles on Kendo UI DateTimePicker:
+
+* [JavaScript API Reference](/api/javascript/ui/datetimepicker)
+* [How to Prevent Invalid Values]({% slug howto_prevent_invalid_values_datetimepicker %})
+* [How to Limit Navigation to Months]({% slug howto_limit_navigation_tomonths_datetimepicker %})
+* [How to Override Hours in the Popup]({% slug howto_override_hours_inpopup_datetimepicker %})

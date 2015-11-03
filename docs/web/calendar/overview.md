@@ -76,7 +76,7 @@ Create a Calendar that allows users to select a month in the following way:
 
 ## Customize Day Templates
 
-Kendo UI Calendar allows rendered day customization for the "month" view.
+Kendo UI Calendar allows rendered day customization for the `month` view.
 
 ### Custom Tamplates
 
@@ -119,3 +119,16 @@ Articles on Kendo UI DatePicker:
 * [How to Create Date Masking]({% slug howto_create_date_masking_datepicker %})
 * [How to Persist Entered Dates]({% slug howto_persist_entered_dates_datepicker %})
 * [How to Resize Calendar Based on Input Width]({% slug howto_use_resize_calendar_basedon_input_width_datepicker %})
+* [JavaScript API Reference](/api/javascript/ui/datepicker)
+
+Articles on Kendo UI DateTimePicker:
+
+* [Overview]({% slug overview_kendoui_datetimepicker_widget %})
+* [How to Prevent Invalid Values]({% slug howto_prevent_invalid_values_datetimepicker %})
+* [How to Validate Custom Dates]({% slug howto_validate_custom_dates_datetimepicker %})
+* [How to Limit Navigation to Months]({% slug howto_limit_navigation_tomonths_datetimepicker %})
+* [How to Override Hours in the Popup]({% slug howto_override_hours_inpopup_datetimepicker %})
+* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/datetimepicker/overview)
+* [Overview of the JSP Tag](/jsp/tags/datetimepicker/overview)
+* [Overview of the PHP Class](/php/widgets/datetimepicker/overview)
+* [JavaScript API Reference](/api/javascript/ui/datetimepicker)

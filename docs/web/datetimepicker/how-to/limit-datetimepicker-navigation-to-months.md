@@ -1,15 +1,15 @@
 ---
-title: Limit DateTimePicker navigation to Months (MVVM)
-page_title: Limit DateTimePicker navigation to Months (MVVM)
-description: Example that shows how to limit the calendar navigation of the DateTimePicker to Months
-
+title: Limit Navigation to Months
+page_title: Limit Navigation to Months | Kendo UI DateTimePicker Widget
+description: "Learn how to limit the Kendo UI DateTimePicker navigation to months only."
+slug: howto_limit_navigation_tomonths_datetimepicker
 ---
 
-# How to limit the DateTimePicker navigation (MVVM)
+# Limit Navigation to Months
 
-Example that shows how to limit the calendar navigation of the DateTimePicker to Months
+The example below demonstrates how to limit the calendar navigation of the DateTimePicker to months (MVVM):
 
-#### Example:
+###### Example
 
 ```html
       <input data-role="datetimepicker" />
@@ -42,3 +42,12 @@ Example that shows how to limit the calendar navigation of the DateTimePicker to
       });
     </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI DateTimePicker:
+
+* [JavaScript API Reference](/api/javascript/ui/datetimepicker)
+* [How to Prevent Invalid Values]({% slug howto_prevent_invalid_values_datetimepicker %})
+* [How to Validate Custom Dates]({% slug howto_validate_custom_dates_datetimepicker %})
+* [How to Override Hours in the Popup]({% slug howto_override_hours_inpopup_datetimepicker %})

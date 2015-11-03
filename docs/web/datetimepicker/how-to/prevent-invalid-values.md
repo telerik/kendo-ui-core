@@ -1,14 +1,15 @@
 ---
-title: Prevent invalid values
-page_title: Prevent invalid values
-description: Example that shows how to prevent invalid values in Kendo UI DateTimePicker
+title: Prevent Invalid Values
+page_title: Prevent Invalid Values | Kendo UI DateTimePicker Widget
+description: "Learn how to prevent invalid values in a Kendo UI DateTimePicker widget."
+slug: howto_prevent_invalid_values_datetimepicker
 ---
 
-# How to prevent invalid values
+# Prevent Invalid Values
 
-Example that shows how to prevent invalid values
+The example below demonstrates how to prevent invalid values in a Kendo UI DateTimePicker widget:
 
-#### Example:
+###### Example
 
 ```html
   <div id="example">
@@ -59,3 +60,12 @@ Example that shows how to prevent invalid values
     </script>            
   </div>
 ```
+
+## See Also
+
+Other articles on Kendo UI DateTimePicker:
+
+* [JavaScript API Reference](/api/javascript/ui/datetimepicker)
+* [How to Validate Custom Dates]({% slug howto_validate_custom_dates_datetimepicker %})
+* [How to Limit Navigation to Months]({% slug howto_limit_navigation_tomonths_datetimepicker %})
+* [How to Override Hours in the Popup]({% slug howto_override_hours_inpopup_datetimepicker %})

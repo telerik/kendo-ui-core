@@ -23,7 +23,7 @@ Initialize the AutoComplete widget by using a jQuery selector:
     });
 
 > **Important**  
-> The widget will copy any styles and CSS classes from the input element to the wrapper element.
+> The widget copies any styles and CSS classes from the input element to the wrapper element.
 
     <input id="autoComplete" class="myClass" />
 
