@@ -839,7 +839,7 @@ A jQuery object of the span element which holds the selected text.
     var span = dropdownlist.span;
 
     span.css("background-color", "red");
-    <script>
+    </script>
 
 ### filterInput `jQuery`
 A jQuery object of the filter input element, where the user types.
