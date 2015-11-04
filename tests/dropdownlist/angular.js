@@ -169,4 +169,38 @@
         equal(widget.value(), 2);
         equal(widget.text(), "custom text");
     });
+
+    ngTest("dropdown updates the model on select during data-binding", 2, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            var colors = [ { color: "red", value: 1 }, { color: "green", value: 2 }, { color: "blue", value: 3 } ];
+
+            $scope.selectedColor = null;
+            $scope.options = {
+                autoBind: false,
+                dataTextField: "color",
+                dataValueField: "value",
+                dataSource: {
+                    data: colors
+                },
+                dataBound: function(e) {
+                    $scope.$apply(function() {
+                        e.sender.select(2);
+                        e.sender.trigger("change");
+                    });
+                }
+            }
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-drop-down-list k-options="options" k-ng-model=selectedColor></select></div>');
+    },
+
+    function() {
+        var dropdown = QUnit.fixture.find("select").getKendoDropDownList();
+        var scope = dropdown.element.scope();
+
+        dropdown.open();
+
+        equal(scope.selectedColor.value, 3);
+        equal(scope.selectedColor.color, "blue");
+    });
 })();
