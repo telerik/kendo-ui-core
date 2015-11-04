@@ -133,6 +133,23 @@
     .k-resize-hint-vertical .k-resize-hint-marker {
         background-color: @selected-background;
     }
+
+    .k-single-selection::after {
+        background-color: @spreadsheet-selection-border;
+        border-color: @background;
+    }
+
+    .k-auto-fill {
+        border-color: @spreadsheet-selection-border;
+    }
+
+    .k-auto-fill-punch {
+        background-color: fadeout(@background, 50%);
+    }
+
+    .k-single-selection.k-dim-auto-fill-handle::after {
+        background-color: fadeout(@spreadsheet-selection-border, 50%);
+    }
 }
 
 .k-spreadsheet-format-cells .k-spreadsheet-preview {
