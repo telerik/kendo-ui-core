@@ -527,9 +527,10 @@ var __meta__ = { // jshint ignore:line
                 ngForm.$setDirty();
             }
 
-            scope.$apply(function(){
+            digest(scope, function(){
                 setter(scope, widget.$angular_getLogicValue());
             });
+
             updating = false;
         });
     }
