@@ -855,7 +855,7 @@ A jQuery object of the filter input element, where the user types.
     var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
 
     var filterInput = dropdownlist.filterInput;
-    <script>
+    </script>
 
 ### options `Object`
 An object, which holds the options of the widget.
@@ -869,7 +869,7 @@ An object, which holds the options of the widget.
     var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
 
     var options = dropdownlist.options;
-    <script>
+    </script>
 
 ### list `jQuery`
 A jQuery object of the drop-down list element.
@@ -883,7 +883,7 @@ A jQuery object of the drop-down list element.
     var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
 
     var list = dropdownlist.list;
-    <script>
+    </script>
 
 ### ul `jQuery`
 A jQuery object of the `ul` element, which holds the available options.
@@ -897,7 +897,7 @@ A jQuery object of the `ul` element, which holds the available options.
     var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
 
     var ul = dropdownlist.ul;
-    <script>
+    </script>
 
 ## Methods
 
