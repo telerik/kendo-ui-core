@@ -102,30 +102,34 @@ function messages() {
 var toDist = lazypipe().pipe(gulp.dest,  "dist/js");
 
 gulp.task("scripts", function() {
+    var skipMinify = argv['skip-min'];
     var src = gulp.src(`src/${argv.scripts || 'kendo.*.js'}`, { base: "src" }).pipe(gatherAmd.gather()).pipe(license());
 
     var thirdParty = gulp.src('src/{jquery,angular,pako,jszip}*.*');
 
-    var gatheredSrc = src.pipe(clone())
-        .pipe(ignore.include(["**/src/kendo.**.js"]));
+    if (!skipMinify) {
+        var gatheredSrc = src.pipe(clone())
+            .pipe(ignore.include(["**/src/kendo.**.js"]));
 
-    var scriptsToUglify = argv['skip-cultures'] ? gatheredSrc : merge(cultures(), messages(), gatheredSrc);
-
-    var minSrc = scriptsToUglify
-        .pipe(gulpIf(makeSourceMaps, sourcemaps.init()))
-        .pipe(uglify())
-        .pipe(gulpIf(makeSourceMaps, logger({after: 'source map complete!', extname: '.map', showChange: true})))
-        .pipe(gulpIf(makeSourceMaps, sourcemaps.write("./")));
+        var scriptsToUglify = argv['skip-cultures'] ? gatheredSrc : merge(cultures(), messages(), gatheredSrc);
+    
+        var minSrc = scriptsToUglify
+            .pipe(gulpIf(makeSourceMaps, sourcemaps.init()))
+            .pipe(uglify())
+            .pipe(gulpIf(makeSourceMaps, logger({after: 'source map complete!', extname: '.map', showChange: true})))
+            .pipe(gulpIf(makeSourceMaps, sourcemaps.write("./")));
+    }
 
     // the duplication below is due to something strange with merge2 and concat
     // resulting in "cannot switch to old mode now" error
-    return merge(
+    var combinedSrc = merge(
         cultures().pipe(toDist()),
         messages().pipe(toDist()),
         src.pipe(toDist()),
-        minSrc.pipe(toDist()),
         thirdParty.pipe(toDist())
     );
+     
+    return skipMinify ? combinedSrc : merge(combinedSrc, minSrc.pipe(toDist()));
 });
 
 gulp.task("custom", function() {
