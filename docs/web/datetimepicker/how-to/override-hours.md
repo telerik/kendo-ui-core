@@ -7,7 +7,7 @@ slug: howto_override_hours_inpopup_datetimepicker
 
 # Override Hours in the Popup
 
-The example below demonstrates how to override hours in the popup:
+The example below demonstrates how to override hours in the popup.
 
 ###### Example
 

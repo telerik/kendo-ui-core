@@ -7,7 +7,7 @@ slug: howto_validate_custom_dates_datetimepicker
 
 # Validate Custom Dates
 
-The example below demonstrates how to create a custom date validation:
+The example below demonstrates how to create a custom date validation.
 
 ###### Example
 

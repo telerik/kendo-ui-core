@@ -1,8 +1,9 @@
 ---
 title: List of Keyboard Shortcuts
-page_title: List of Keyboard Shortcuts
-description: shortcuts supported by Kendo UI Spreadsheet widget
-position: 5
+page_title: List of Keyboard Shortcuts | Kendo UI Spreadsheet Widget
+description: "A list of the keyboard shortcuts supported by the Kendo UI Spreadsheet widget."
+slug: list_ofkeyboard_shortcuts_spreadsheet_widget
+position: 3
 ---
 
 # List of Keyboard Shortcuts
@@ -43,3 +44,10 @@ position: 5
 | `Alt` + `Spacebar`                                | Displays the **Control** menu for the Spreadsheet window     |
 | `Tab`                                             | <ul><li>Moves one cell to the right in a worksheet</li> <li>Moves to the next option or option group in a dialog box</li> <li>Moves a cell within an active range of cells, rows, or columns.</li></ul> |
 | `Shift` + `Tab`                                   | Moves to the previous cell in a worksheet or the previous option in a dialog box |
+
+## See Also
+
+Other articles on Kendo UI Spreadsheet:
+
+* [List of Formulas and Functions]({% slug list_offormulas_andfunctions_spreadsheet_widget %})
+* [User Guide]({% slug user_guide_spreadsheet_widget %})

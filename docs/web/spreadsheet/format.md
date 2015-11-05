@@ -1,41 +1,39 @@
 ---
 title: Cell Formatting
-page_title: An overview of the custom formats supported by the Kendo UI Spreadsheet widget
+page_title: Cell Formatting | Kendo UI Spreadsheet Widget
+description: "Learn how to format cells in the Kendo UI Spreadsheet widget."
+slug: cell_formatting_spreadsheet_widget
 position: 2
 ---
 
-# Format Strings
+# Cell Formatting
 
-The supported format strings are compatible with [Excel number formats](https://support.office.com/en-au/article/Create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4),
+Kendo UI Spreadsheet supports many cell-formatting options such as formatting of strings, text, numbers, dates, and time. 
+
+## Format Strings
+
+The supported format strings are compatible with the [Excel number formats](https://support.office.com/en-au/article/Create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4),
 with some [notable exceptions](#differences-to-excel).
 
-A format string consists of one or more sections (separated by semicolons). A section can optionally specify a color and a condition. 
+A format string consists of one or more sections, separated by semicolons. A section optionally specifies a color and a condition. 
 
-##### Example: 
-
-Display a number with up to 3 decimals:
+###### Example - display a number with up to 3 decimals
 
     #.###
 
-##### Example:
-
-Display positive numbers (or zero) in green, negative numbers in red:
+###### Example - display positive numbers (or zero) in green, negative numbers in red
 
     [Green]#.###;[Red]#.###
 
-##### Example:
-
-Display positive numbers in green, negative numbers in red, and the text "Zero" in blue if the number is zero.
+###### Example - display positive numbers in green, negative numbers in red, and the text "Zero" in blue if the number is zero
 
     [Green]#.###;[Red]#.###;[Blue]"Zero"
 
-##### Example:
-
-Same as above, but if the cell contains text, display it in magenta:
+###### Example - same as above, but if the cell contains text, display it in magenta:
 
     [Green]#.###;[Red]#.###;[Blue]"Zero";[Magenta]@
 
-Excel documentation mentions that a maximum of four sections are supported, and if all are present, they are interpreted in this order:
+Excel documentation mentions that a maximum of four sections are supported, and if all are present, they are interpreted in the following order:
 
 - Positive numbers format
 - Negative numbers format
@@ -44,34 +42,31 @@ Excel documentation mentions that a maximum of four sections are supported, and 
 
 Excel also supports a more flexible conditional formatting. 
 
-##### Example:
-
-Display numbers greater than 100 in green, numbers less than -100 in yellow, and other numbers in cyan:
+###### Example - display numbers greater than 100 in green, numbers less than -100 in yellow, and other numbers in cyan
 
     [>100][GREEN]#,##0;[<=-100][YELLOW]#,##0;[CYAN]#,##0
 
 In this case it is not clear whether only up to four sections are allowed, of which the last one must be text, while the Spreadsheet formatter allows for any number of conditional sections.
 
-### Text and Number Formatting
+## Format Text and Numbers
 
-| Character | Meaning                                                                                                                                                                                                                    |
-|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `0`       | Digit placeholder. Use this to display insignificant zeroes. For example, `8.9` with the format `00.000` displays as `08.900`.                                                                                          |
-| `#`       | Digit placeholder. This does not display insignificant zeroes. For example, `12.34` in the `###.###` format displays as `12.34`.                                                                                            |
-| `?`       | Digit placeholder. It is similar to `0`, but displays a space character instead of a zero. You can use this to align numbers by decimal point, but you should use a fixed-width font for this to be effective. |
-| `.`       | Decimal point.                                                                                                                                                                                                             |
-| `,`       | Thousands separator, or scale (see below).                                                                                                                                                                             |
-| `\`       | Escape the next character (display literally).                                                                                                                                                                              |
-| `_`       | Skip the width of the next character.                                                                                                                                                                                     |
-| `"text"`  | Includes a piece of text in the format. Characters inside will not be interpreted in any way, they will just output literally.                                                                                            |
-| `@`       | Text placeholder. Will be replaced with the text in the cell.                                                                                                                                                             |
+| Character | Meaning       |
+|-----------|---------------|
+| `0`       | Digit placeholder. Use this to display insignificant zeroes. For example, `8.9` with the format `00.000` displays as `08.900`.    |
+| `#`       | Digit placeholder. This does not display insignificant zeroes. For example, `12.34` in the `###.###` format displays as `12.34`.  |
+| `?`       | Digit placeholder. It is similar to `0`, but displays a space character instead of a zero. You can use this to align numbers by decimal point, but you should use a fixed-width font for this to be effective.        |
+| `.`       | Decimal point. |
+| `,`       | Thousands separator, or scale (see below).    |
+| `\`       | Escape the next character (display literally).|
+| `_`       | Skip the width of the next character.         |
+| `"text"`  | Includes a piece of text in the format. Characters inside will not be interpreted in any way, they will just output literally.    |
+| `@`       | Text placeholder. Will be replaced with the text in the cell. |
 
-The thousands separator (`,`) has a double role. When between any digit placeholders, it will output a number with thousands separated by the separator in the current culture. For instance, `#,#` formats `1234567` as `1,234,567`.
-When a comma follows a digit placeholder but is not followed by one, it scales the number by one thousand. For instance, `#.##,` formats `12345` as `12.35`. Here is a more complicated format that shows where this could be useful:
+The thousands separator (`,`) has a double role. When between any digit placeholders, it will output a number in thousands separated by the separator in the current culture. For instance, `#,#` formats `1234567` as `1,234,567`. When a comma follows a digit placeholder but is not followed by one, it scales the number by one thousand. For instance, `#.##,` formats `12345` as `12.35`. Here is a more complicated format that shows where this could be useful:
 
     [>1000000]#.##,,"M";[>1000]#.##,"K";[>0]#"B";[=0]"Empty";[<0]"Replace HDD!"
 
-##### Example:
+###### Example
 
 |    Value | Display      |
 |----------|--------------|
@@ -81,9 +76,9 @@ When a comma follows a digit placeholder but is not followed by one, it scales t
 |        0 | Empty        |
 |      -10 | Replace HDD! |
 
-### Date and Time Formatting
+## Format Dates and Time
 
-| Format string | Meaning                                                                           |
+| Format String | Meaning                                                                           |
 |---------------|-----------------------------------------------------------------------------------|
 | m             | Display month number without leading zero                                         |
 | mm            | Display month number with leading zero                                            |
@@ -110,15 +105,25 @@ When a comma follows a digit placeholder but is not followed by one, it scales t
 | A/P           | Same as above, but displays `A` or `P`                                            |
 | a/p           | Idem, but displays `a` or `p`                                                     |
 
-Notice that the month and minute specifiers are ambiguous (`m` or `mm`).  It is interpreted as a month number,
-unless preceded by an hour part (`h` or `hh`) in which case it displays minutes. Therefore:
+Notice that the month and minute specifiers are ambiguous (`m` or `mm`). These strings are interpreted as a month number, unless preceded by an hour part (`h` or `hh`) in which case it displays minutes. Therefore:
 
-| Format string             | Example display         |
+| Format String             | Example Display         |
 |---------------------------|-------------------------|
 | d m yyyy                  | 22 9 2015               |
 | h "hours and" m "minutes" | 12 hours and 25 minutes |
 
-### Differences to Excel
+## Spreadsheet vs. Excel
 
-- No support for exponent (“scientific”) notation (`E+`, `E-` Excel formats)
-- No support for filling cell width (`*` Excel format)
+The Spreadsheet does not support the following options otherwise available in Excel:
+
+- Exponent (“scientific”) notation (`E+`, `E-` Excel formats)
+- Filling cell width (`*` Excel format)
+
+## See Also 
+
+Other articles on Kendo UI Spreadsheet:
+
+* [Custom Functions]({% slug custom_functions_spreadsheet_widget %})
+* [Localization of Messages]({% slug localization_ofmessages_spreadsheet_widget %})
+* [Data Import and Export]()
+* [User Guide]({% slug user_guide_spreadsheet_widget %})

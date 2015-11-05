@@ -1,8 +1,9 @@
 ---
 title: List of Formulas and Functions
-page_title: List of Formulas and Functions
-description: formulas and functions in Kendo UI spreadsheet
-position: 4
+page_title: List of Formulas and Functions | Kendo UI Spreadsheet Widget
+description: "A list of the formulas and functions available in the Kendo UI Spreadsheet widget."
+slug: list_offormulas_andfunctions_spreadsheet_widget
+position: 2
 ---
 
 # List of Formulas and Functions
@@ -260,3 +261,10 @@ position: 4
 | YEARFRAC                  | Extracts the number of years (including fractional part) between two dates
 
 For more information on how to create formulas and what their syntax is, go to the list of [Excel functions](https://support.office.com/en-GB/article/Excel-functions-by-category-5f91f4e9-7b42-46d2-9bd1-63f26a86c0eb?CorrelationId=343eb30b-8175-4479-be19-1310dd12334f).
+
+## See Also
+
+Other articles on Kendo UI Spreadsheet:
+
+* [List of Keyboard Shortcuts]({% slug list_ofkeyboard_shortcuts_spreadsheet_widget %})
+* [User Guide]({% slug user_guide_spreadsheet_widget %})
