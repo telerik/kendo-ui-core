@@ -11,7 +11,7 @@ var cache = require('gulp-cached');
 var progeny = require('gulp-progeny');
 
 var browsers = [
-    "Explorer >= 7",
+    "Explorer >= 8",
     "Chrome >= 21",
     "Firefox ESR",
     "Opera >= 15",
