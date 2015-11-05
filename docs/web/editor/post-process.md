@@ -1,17 +1,17 @@
 ---
-title: Post-processing
-page_title: Post-processing the editor content | Kendo UI Documentation
-description: The documentation guide will show how to post-process the Editor content so that it fits your needs.
+title: Post-Process Content
+page_title: Post-Process Content | Kendo UI Editor Widget
+description: "Learn how to post-process the content of the Kendo UI Editor widget so it fits your needs."
+slug: post_process_content_editor_widget
 position: 3
 ---
 
-# Post-processing the editor content
+# Post-Process Content
 
-## Post-processing the editor value before sending it to the server
+If the Editor is within a `<form>` element, the convenient moment to post-process its content is right before the `<form>` is posted to the server in the `submit` event.
 
-If the editor is within a `<form>` element, a good moment to post-process its contents is right before the form is posted to the server, in the `submit` event.
+###### Example - remove all paragraphs before posting the content to the server
 
-### Example - remove all paragraphs before posting to server
     <form>
       <textarea id="comments"></textarea>
 
@@ -34,3 +34,14 @@ If the editor is within a `<form>` element, a good moment to post-process its co
       comments.val(value);
     });
     </script>
+
+## See Also
+
+Other articles on Kendo UI Editor:
+
+* [Overview]({% slug overview_kendoui_editor_widget %})
+* [Image Browser]({% slug image_browser_editor_widget %})
+* [Set Selections]({% slug set_selections_editor_widget %})
+* [Prevent Cross-Site Scripting]({% slug prevent_xss_editor_widget %})
+* [Troubleshooting]({% slug troubleshooting_editor_widget %})
+* [JavaScript API Reference](/api/javascript/ui/editor)
