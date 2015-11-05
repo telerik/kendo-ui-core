@@ -7,7 +7,7 @@ slug: howto_limit_navigation_tomonths_datetimepicker
 
 # Limit Navigation to Months
 
-The example below demonstrates how to limit the calendar navigation of the DateTimePicker to months (MVVM):
+The example below demonstrates how to limit the calendar navigation of the DateTimePicker to months (MVVM).
 
 ###### Example
 

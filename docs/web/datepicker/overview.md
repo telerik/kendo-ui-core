@@ -102,9 +102,6 @@ Articles on Kendo UI Calendar:
 
 * [Overview]({% slug overview_kendoui_calendar_widget %})
 * [How to Control the Header Format]({% slug howto_control_header_format_calendar %})
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/calendar/overview)
-* [Overview of the JSP Tag](/jsp/tags/calendar/overview)
-* [Overview of the PHP Class](/php/widgets/calendar/overview)
 * [JavaScript API Reference](/api/javascript/ui/calendar)
 
 Articles on Kendo UI DateTimePicker:
@@ -114,7 +111,4 @@ Articles on Kendo UI DateTimePicker:
 * [How to Validate Custom Dates]({% slug howto_validate_custom_dates_datetimepicker %})
 * [How to Limit Navigation to Months]({% slug howto_limit_navigation_tomonths_datetimepicker %})
 * [How to Override Hours in the Popup]({% slug howto_override_hours_inpopup_datetimepicker %})
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/datetimepicker/overview)
-* [Overview of the JSP Tag](/jsp/tags/datetimepicker/overview)
-* [Overview of the PHP Class](/php/widgets/datetimepicker/overview)
 * [JavaScript API Reference](/api/javascript/ui/datetimepicker)

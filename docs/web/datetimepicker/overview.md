@@ -131,9 +131,6 @@ Articles on Kendo UI Calendar:
 
 * [Overview]({% slug overview_kendoui_calendar_widget %})
 * [How to Control the Header Format]({% slug howto_control_header_format_calendar %})
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/calendar/overview)
-* [Overview of the JSP Tag](/jsp/tags/calendar/overview)
-* [Overview of the PHP Class](/php/widgets/calendar/overview)
 * [JavaScript API Reference](/api/javascript/ui/calendar)
 
 Articles on Kendo UI DatePicker:

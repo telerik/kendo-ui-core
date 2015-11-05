@@ -7,7 +7,7 @@ slug: howto_prevent_invalid_values_datetimepicker
 
 # Prevent Invalid Values
 
-The example below demonstrates how to prevent invalid values in a Kendo UI DateTimePicker widget:
+The example below demonstrates how to prevent invalid values in a Kendo UI DateTimePicker widget.
 
 ###### Example
 

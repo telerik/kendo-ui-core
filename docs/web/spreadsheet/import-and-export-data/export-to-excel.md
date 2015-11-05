@@ -1,31 +1,44 @@
 ---
 title: Export to Excel
-page_title: Export Kendo UI Spreadsheet data as Excel (.xlsx) | Kendo UI Documentation
-description: How to export the Kendo UI Spreadsheet widget to an Excel file in the browser
+page_title: Export to Excel | Kendo UI Spreadsheet Widget
+description: "Learn how to export the Kendo UI Spreadsheet widget to an Excel file in the browser."
+slug: export_toexcel_spreadsheet_widget
+position: 2
 ---
 
-# Exporting the Spreadsheet to Excel (.xlsx)
+# Export to Excel
 
-The Spreadsheet component utilizes the [Excel export module](/framework/excel/introduction) framework to produce Excel files directly in the browser.
+The Spreadsheet component utilizes the [Excel export module](/framework/excel/introduction) framework to produce Excel files directly in the browser. The output files are in the OOXML Spreadsheet format with an `.xlsx` extension. The legacy `.xls` binary format is not supported.
 
-The output files are in the OOXML Spreadsheet format with an `.xlsx` extension. The legacy `.xls`, binary format is not supported.
-
-# User Interface
+## User Interface
 
 The default toolbar configuration includes an **Excel Export** button. Clicking on it opens a dialog box for entering the file name.
 
 ![Export to Excel](export-to-excel.png)
 
-# Export API
+## API Export Reference
 
-The Spreadsheet client-side API includes the [saveAsExcel](/api/javascript/ui/spreadsheet#methods-saveAsExcel) method for initiating export via JavaScript.
+The Spreadsheet client-side API includes the [`saveAsExcel`](/api/javascript/ui/spreadsheet#methods-saveAsExcel) method for initiating the export via JavaScript.
 
-This method will not ask the user for a file name. Instead, it will the value set in [excel.fileName](/api/javascript/ui/spreadsheet.html#configuration-excel.fileName).
+This method will not ask you to specify a file name. Instead, it will set the value in [`excel.fileName`](/api/javascript/ui/spreadsheet.html#configuration-excel.fileName).
 
-# Limitations and Known Issues
+## Known Issues
 
 Currently, the export module does not handle:
-* Filtering and Sorting
+
+* Sorting and filtering
 * Border styles
 
 These will be addressed before the widget goes out of Beta.
+
+## See Also
+
+Other articles on Kendo UI Spreadsheet:
+
+* [API Reference](/api/javascript/ui/spreadsheet)
+* [Load and Save Data as JSON]({% slug loadand_saveas_json_spreadsheet_widget %})
+* [Data Source Binding]({% slug bind_todata_source_spreadsheet_widget %})
+* [Server-Side Processing]({% slug serverside_processing_spreadsheet_widget %})
+* [Custom Functions]({% slug custom_functions_spreadsheet_widget %})
+* [Cell Formatting]({% slug cell_formatting_spreadsheet_widget %})
+* [Localization of Messages]({% slug localization_ofmessages_spreadsheet_widget %})

@@ -23,7 +23,7 @@ The ComboBox looks and operates consistently regardless of the initialization ty
 
 #### Use an `<input>` Element
 
-Initialize the ComboBox from an exisiting `<input>` element. The ComboBox should be initialized after the DOM is fully loaded. It is recommended that initialization is done within the `$(document).ready()` statement.
+Initialize the ComboBox from an exisiting `<input>` element only after the DOM is fully loaded. It is recommended that initialization is done within the `$(document).ready()` statement.
 
 > **Important**  
 > The widget copies any styles and CSS classes from the input element to the visible input and the wrapper element.
@@ -169,7 +169,7 @@ You can refer an existing ComboBox widget via [jQuery.data()](http://api.jquery.
 
 ## Customize the Drop-Down List
 
-You can customize the width of a drop-down list and change its dimensions by using the jQuery width() method.
+You can customize the width of a drop-down list and change its dimensions by using the jQuery `width()` method.
 
 ###### Example
 
@@ -207,3 +207,9 @@ Other articles on Kendo UI ComboBox:
 * [Overview of the JSP Tag](/jsp/tags/combobox/overview)
 * [Overview of the PHP Class](/php/widgets/combobox/overview) 
 * [JavaScript API Reference](/api/javascript/ui/combobox)
+
+Articles on Kendo UI DropDownList:
+
+* [Overview]({% slug overview_kendoui_dropdownlist_widget %})
+* [Cascading DropDownLists]({% slug cascading_kendoui_combobox_widget %})
+* [JavaScript API Reference](/api/javascript/ui/dropdownlist)

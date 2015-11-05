@@ -3,7 +3,7 @@ title: Virtualization
 page_title: Virtualization | Kendo UI ComboBox Widget
 description: "Learn how to configure virtualization in Kendo UI ComboBox, DropDownList, AutoComplete and MultiSelect widgets."
 slug: virtualization_kendoui_combobox_widget
-position: 2
+position: 3
 ---
 
 # Virtualization
