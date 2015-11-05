@@ -199,6 +199,45 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
 });
 }
 
+if (kendo.spreadsheet && kendo.spreadsheet.messages.filterMenu) {
+kendo.spreadsheet.messages.filterMenu =
+$.extend(true, kendo.spreadsheet.messages.filterMenu,{
+  "sortAscending": "Сортирай възходящо",
+  "sortDescending": "Сортирай низходящо",
+  "filterByValue": "Филтрирай по стойност",
+  "filterByCondition": "Филтрирай по критерий",
+  "apply": "Приложи",
+  "search": "Търси",
+  "clear": "Премахни филтър",
+  "blanks": "(Празни места)",
+  "operatorNone": "Без критерии",
+  "and": "И",
+  "or": "ИЛИ",
+  "operators": {
+    "string": {
+      "contains": "Съдържа",
+      "doesnotcontain": "Не съдържа",
+      "startswith": "Започва с",
+      "endswith": "Завършва на"
+    },
+    "date": {
+      "eq": "Е равно на",
+      "neq": "Не е равно на",
+      "lt": "Е преди",
+      "gt": "Е след"
+    },
+    "number": {
+      "eq": "Е равно на",
+      "neq": "Не е равно на",
+      "gte": "Е по-голяма или равно на",
+      "gt": "Е по-голямо от",
+      "lte": "Е по-малко или равно на",
+      "lt": "Е по-малко от"
+    }
+  }
+});
+}
+
 if (kendo.spreadsheet && kendo.spreadsheet.messages.toolbar) {
 kendo.spreadsheet.messages.toolbar =
 $.extend(true, kendo.spreadsheet.messages.toolbar,{
