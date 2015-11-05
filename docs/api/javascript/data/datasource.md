@@ -4031,6 +4031,10 @@ The data source instance which fired the event.
 
 String describing the action type (available for all actions other than "read"). Possible values are "itemchange", "add", "remove" and "sync".
 
+##### e.field `String` *(optional)*
+
+String describing the field that is changed (available only for "itemchange" action).
+
 ##### e.items `Array`
 
 The array of data items that were affected (or read).
