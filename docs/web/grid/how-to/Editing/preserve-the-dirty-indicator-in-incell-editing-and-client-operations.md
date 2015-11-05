@@ -78,7 +78,7 @@ This example demonstrates how to preserve the dirty indicator in incell editing 
 
         function dirtyField(data, fieldName){
           	var hasClass = $("[data-uid=" + data.uid + "]").find(".k-dirty-cell").length < 1;
-            if(data.dirty && data.dirtyFields[fieldName] && !hasClass){
+            if(data.dirty && data.dirtyFields[fieldName] && hasClass){
                 return "<span class='k-dirty'></span>"
             }
             else{
