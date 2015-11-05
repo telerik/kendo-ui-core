@@ -42,7 +42,7 @@ This causes the editor input to not fire its change event which in turns prevent
 
 In case you use `inline` or `popup` editing mode you should set a more specific filter that excludes the item that is currently in edit mode.
 
-    .filter(">tbody >tr:not(.k-grid-edit-rowa)")
+    .filter(">tbody >tr:not(.k-grid-edit-row)")
 
 The above will **not work** in case you use **`batch`/`incell` editing** mode.
 In such case the solution is to use [custom editors](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.editor) and configure them to [update when the input event fires](http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value#controlling-when-the-view-model-is-updated) (by default framework listens for the change event).
