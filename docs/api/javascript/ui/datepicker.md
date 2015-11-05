@@ -178,7 +178,8 @@ shows the decades from the century
     <input id="datepicker"/>
     <script>
     $("#datepicker").kendoDatePicker({
-        depth: "year"
+        depth: "year",
+        start: "year"
     });
     </script>
 
