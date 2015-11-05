@@ -500,6 +500,7 @@ In other words, if you use this raw form you are responsible for type-checking t
 Other articles on Kendo UI Spreadsheet:
 
 * [Cell Formatting]({% slug cell_formatting_spreadsheet_widget %})
-* [Localization of Messages]({% slug localization_ofmessages_spreadsheet_widget %})
-* [Data Import and Export]()
+* [Store Data as JSON]({% slug loadand_saveas_json_spreadsheet_widget %})
+* [Export to Excel]({% slug export_toexcel_spreadsheet_widget %})
+* [Server-Side Processing]({% slug serverside_processing_spreadsheet_widget %})
 * [User Guide]({% slug user_guide_spreadsheet_widget %})

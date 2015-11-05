@@ -96,7 +96,6 @@ Other articles on Kendo UI Spreadsheet:
 
 * [Custom Functions]({% slug custom_functions_spreadsheet_widget %})
 * [Cell Formatting]({% slug cell_formatting_spreadsheet_widget %})
-* [Localization of Messages]({% slug localization_ofmessages_spreadsheet_widget %})
 * [Load and Save Data as JSON]({% slug loadand_saveas_json_spreadsheet_widget %})
 * [Data Source Binding]({% slug bind_todata_source_spreadsheet_widget %})
 * [Export to Excel]({% slug export_toexcel_spreadsheet_widget %})

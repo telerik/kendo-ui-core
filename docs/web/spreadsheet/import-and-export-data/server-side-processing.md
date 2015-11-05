@@ -113,4 +113,3 @@ Other articles on Kendo UI Spreadsheet:
 * [Export to Excel]({% slug export_toexcel_spreadsheet_widget %})
 * [Custom Functions]({% slug custom_functions_spreadsheet_widget %})
 * [Cell Formatting]({% slug cell_formatting_spreadsheet_widget %})
-* [Localization of Messages]({% slug localization_ofmessages_spreadsheet_widget %})

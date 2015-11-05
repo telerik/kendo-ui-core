@@ -98,4 +98,3 @@ Other articles on Kendo UI Spreadsheet:
 * [Server-Side Processing]({% slug serverside_processing_spreadsheet_widget %})
 * [Custom Functions]({% slug custom_functions_spreadsheet_widget %})
 * [Cell Formatting]({% slug cell_formatting_spreadsheet_widget %})
-* [Localization of Messages]({% slug localization_ofmessages_spreadsheet_widget %})
