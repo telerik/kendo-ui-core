@@ -1,27 +1,30 @@
 ---
 title: Image Browser
+page_title: Image Browser | Kendo UI Editor Widget
+description: "Learn how to initialize and configure the Kendo UI Editor widget."
+slug: image_browser_editor_widget
 position: 2
 ---
 
 # Image Browser
 
-## Introduction
-
-By default the "Insert Image" tool opens a simple dialog which allows the user to type in or paste the URL of an image and optionally specify a tooltip.
+By default the **Insert Image** tool opens a simple dialog which allows you to type in or paste the URL of an image and, optionally, specify a tooltip.
 
 ![Insert Image Dialog](/web/editor/editor-insert-image.png)
 
-Since the Q3 2012 release KendoUI Editor widget supports a new way of picking an image by browsing a list of predefined files and directories. Uploading new images is also supported.
+## Overview
+
+From Q3 2012 release onwards the Editor supports a new way of picking an image by browsing a list of predefined files and directories. Uploading new images is also supported.
 
 ![Image Browser Dialog](/web/editor/editor-image-browser.png)
 
-The image browser needs a server side implementation to retrieve and upload the files and directories.
+The image browser needs a server-side implementation to retrieve and upload the files and directories.
 
-## Configuring the ImageBrowser
+## Configuration
 
 The image browser tool can be configured through the [`imagebrowser` configuration option](/api/web/editor#configuration-imageBrowser).
 
-#### Example
+###### Example
 
        $(document).ready(function(){
          $("#editor").kendoEditor({
@@ -38,15 +41,13 @@ The image browser tool can be configured through the [`imagebrowser` configurati
          });
       });
       
-The default requests and responses for the create / read / destroy / upload  operations are as follows:
+The default requests and responses for the `create/read/destroy/upload` operations are as follows:
  
-- **create** - makes a request for the creation of a directory with the following parameters:
+- `create` - makes a request for the creation of a directory with the parameters below and does not expect a response:
 
         { "name": "New folder name", "type": "d", "path": "foo/" }
 
-    Does not expect a response.
-
-- **read** - sends the `path` parameter to specify the path which is browsed. Expects a file listing in the following format:
+- `read` - sends the `path` parameter to specify the path which is browsed and expects a file listing in the format below:
    
         [
             { "name": "foo.png", "type": "f", "size": 73289 },
@@ -54,17 +55,28 @@ The default requests and responses for the create / read / destroy / upload  ope
             ...
         ]
 
-    Where `name` is the file or directory name, `type` is either "f" for file or "d" for directory, and `size` is the file size (optional).
+    Where `name` is the file or directory name, `type` is either an **f** for a file or a **d** for a directory, and `size` is the file size (optional).
 
-- **destroy** - makes a request with the following parameters
+- `destroy` - makes a request with the following parameters:
 
-    - **name** - the file / directory to be deleted
-    - **path** - the directory in which the file / directory resides
-    - **type** - whether a file or a directory is to be deleted ("f" or "d")
-    - **size** - optional, the file size, as provided from the **read** response
+    - `name` - the file or directory to be deleted.
+    - `path` - the directory in which the file or the directory resides.
+    - `type` - whether a file or a directory is to be deleted (an **f** or a **d**).
+    - `size` - optional, the file size, as provided by the `read` response.
 
-- **upload** - makes a request to the `uploadUrl`. The request payload consists of the uploaded file. Expects a file object in response:
+- `upload` - makes a request to the `uploadUrl`. The request payload consists of the uploaded file and expects a `file` object in response:
 
         { "name": "foo.png", "type": "f", "size": 12345 }
 
 All of these can be changed through the [`imagebrowser` configuration](/api/web/editor#configuration-imageBrowser).
+
+## See Also
+
+Other articles on Kendo UI Editor:
+
+* [Overview]({% slug overview_kendoui_editor_widget %})
+* [Post-Process Content]({% slug post_process_content_editor_widget %})
+* [Set Selections]({% slug set_selections_editor_widget %})
+* [Prevent Cross-Site Scripting]({% slug prevent_xss_editor_widget %})
+* [Troubleshooting]({% slug troubleshooting_editor_widget %})
+* [JavaScript API Reference](/api/javascript/ui/editor)

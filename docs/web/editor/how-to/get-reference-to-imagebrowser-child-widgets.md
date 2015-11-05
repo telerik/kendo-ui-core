@@ -1,28 +1,24 @@
 ---
-title: Get reference to the ImageBrowser and FileBrowser child widgets
-page_title: Get reference to the ImageBrowser and FileBrowser child widgets
-description: Get reference to the ImageBrowser and FileBrowser child widgets
+title: Get Reference to Child Widgets
+page_title: Get Reference to Child Widgets | Kendo UI Editor Widget
+description: "Learn how to get a reference to the ImageBrowser's and FileBrowser's child widgets in the Kendo UI Editor widget."
+slug: howto_get_referenceto_child_widgets_editor
 ---
 
-# Get reference to the Editor ImageBrowser's and FileBrowser's child widgets
+# Get Reference to Child Widgets
 
-The Editor's **ImageBrowser** and **FileBrowser** widgets use internally other Kendo UI widgets - a Kendo UI **Upload**, **ListView** and a **DropDownList**.
-The following example demonstrates how to obtain these widgets' client-side objects.
+The Editor's ImageBrowser and FileBrowser widgets internally use the Kendo UI Upload, ListView, and DropDownList widgets. The example below demonstrates how to obtain these widgets' client-side objects. 
 
 The FileBrowser-related code is identical to the ImageBrowser one, with two exceptions:
 
-* The `.k-insertFile` CSS class should be used instead of `.k-insertImage` to attach the click handler.
-* `var fileBrowser = $(".k-filebrowser").data("kendoFileBrowser");`      
-should be used instead of        
-`var imageBrowser = $(".k-imagebrowser").data("kendoImageBrowser");`
+* The `.k-insertFile` CSS class should be used instead of `.k-insertImage` to attach the `click` handler.
+* `var fileBrowser = $(".k-filebrowser").data("kendoFileBrowser");` should be used instead of `var imageBrowser = $(".k-imagebrowser").data("kendoImageBrowser");`.
 
-Once the [ListView](/api/javascript/ui/listview), [Upload](/api/javascript/ui/upload) and [DropDownList](/api/javascript/ui/dropdownlist) widget objects are available,
-one can use their APIs to attach events with [`bind()`](/intro/events-and-methods#bind-to-events-after-widget-initialization) or perform other customizations,
-which may not be otherwise supported.
+Once the [ListView](/api/javascript/ui/listview), [Upload](/api/javascript/ui/upload) and [DropDownList](/api/javascript/ui/dropdownlist) widget objects are available, one can use their APIs to attach events with [`bind()`](/intro/events-and-methods#bind-to-events-after-widget-initialization) or perform other customizations, which may not be otherwise supported.
 
-Please note that the `transport` configurations below are over-simplified and invalid.
+Note that the `transport` configurations below are over-simplified and invalid.
 
-#### Example
+###### Example
 
 ```html
     <textarea name="editor" id="editor"></textarea>
@@ -104,3 +100,14 @@ Please note that the `transport` configurations below are over-simplified and in
 
     </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Editor:
+
+* [JavaScript API Reference](/api/javascript/ui/editor)
+* [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
+* [How to Add Max-Length Validation]({% slug howto_add_max_length_validation_editor %})
+* [How to Use Inline Editor inside Windows]({% slug howto_use_inline_editor_inside_windows_editor %})
+* [How to Insert HTML Content via Custom Popup Tools]({% slug howto_insert_html_content_custom_popup_tool_editor %})
+* [How to Set Caret Position]({% slug howto_set_caret_position_editor %})

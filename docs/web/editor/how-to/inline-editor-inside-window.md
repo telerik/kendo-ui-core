@@ -1,19 +1,17 @@
 ---
-title: Use Kendo UI Inline Editor inside a Window
-page_title: Use Kendo UI Inline Editor inside a Window
-description: Use Kendo UI Inline Editor inside a Window
+title: Use Inline Editor inside Windows
+page_title: Use Inline Editor inside Windows | Kendo UI Editor Widget
+description: "Learn how to use an inline Kendo UI Editor inside a window."
+slug: howto_use_inline_editor_inside_windows_editor
 ---
 
-# Use Kendo UI Inline Editor inside a Window
+# Use Inline Editor inside Windows
 
-The inline Editor uses a popup toolbar, which is placed inside a Kendo UI Window instance.
-When several Kendo UI Window instances are open, the last focused one always moves on top of all others, which can lead to the Editor toolbar being hidden behind
-the Window instance that holds the Editor.
+The inline Editor uses a popup toolbar, which is placed inside a Kendo UI Window instance. When several Kendo UI Window instances are open, the recently focused one always moves on top of all others. This may lead to the Editor toolbar being hidden behind the Window instance that holds the Editor itself.
 
-The example below demonstrates how to handle such a scenario. A fixed `z-index` style should be enforced to the Window, which holds the Editor.
-An `!important` clause should be used with the `z-index` style.
+The example below demonstrates how to handle such a scenario. Enforce a fixed `z-index` style to the Window that holds the Editor. Use an `!important` clause with the `z-index` style.
 
-#### Example
+###### Example
 
 ```html
 <style>
@@ -58,3 +56,14 @@ $(function() {
 </script>
 
 ```
+
+## See Also
+
+Other articles on Kendo UI Editor:
+
+* [JavaScript API Reference](/api/javascript/ui/editor)
+* [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
+* [How to Add Max-Length Validation]({% slug howto_add_max_length_validation_editor %})
+* [How to Get Reference to Child Widgets]({% slug howto_get_referenceto_child_widgets_editor %})
+* [How to Insert HTML Content via Custom Popup Tools]({% slug howto_insert_html_content_custom_popup_tool_editor %})
+* [How to Set Caret Position]({% slug howto_set_caret_position_editor %})
