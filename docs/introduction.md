@@ -10,7 +10,7 @@ position: 1
 
 ### Overview
 
-Kendo UI is a HTML5 user interface framework for building interactive and high-performance websites and applications.
+Kendo UI is an HTML5 user interface framework for building interactive and high-performance websites and applications.
 The framework comes with a library of 70+ UI widgets, an abundance of data-visualization gadgets, client-side data source, built-in MVVM (Model-View-ViewModel) library. Kendo UI provides AngularJS and Bootstrap integration.
 
 [Check out Kendo UI online demos](http://demos.telerik.com/kendo-ui/)
