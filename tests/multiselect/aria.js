@@ -104,8 +104,8 @@
         multiselect.dataSource.trigger("progress");
 
         setTimeout(function() {
-            start();
             equal(multiselect.input.attr("aria-busy"), "true");
+            start();
         }, 200);
     });
 
