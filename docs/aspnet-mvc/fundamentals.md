@@ -168,9 +168,11 @@ The `ToClientTemplate` method instructs the widget wrapper to escape its own scr
 
 ## Using BeginForm() inside Kendo UI content containers
 
-If `Html.BeginForm()` or `Ajax.BeginForm()` should be included inside a Kendo UI widget `.Content()`, the correct way to do it is to use the widget helper's `.Render()` method, as shown below.
+If `Html.BeginForm()` or `Ajax.BeginForm()` should be included inside a Kendo UI widget `.Content()`, the correct way to do it is to use the widget helper's `.Render();` method
+and wrap the widget declaration in a non-rendering code block (e.g. `@{}` instead of `@()`).
 Otherwise the form will be rendered outside the widget and any form fields inside the widget will not be submitted as expected.
 The approach is required with widgets such as Window, TabStrip, Splitter and PanelBar.
+The approach is not required if the form is placed inside a partial view, which is loaded with Ajax via `.LoadContentFrom()`, or if a plain HTML `<form>` tag is used.
 
     @{Html.Kendo().TabStrip()
         .Name("TabStrip1")
@@ -185,8 +187,6 @@ The approach is required with widgets such as Window, TabStrip, Splitter and Pan
                 </text>);
         }).Render();
     }
-
-The above implementation is not required if the form is placed inside a partial view, which is loaded with Ajax via `.LoadContentFrom()`, or if a plain HTML `<form>` tag is used.
 
 ## CSS Bundling
 
