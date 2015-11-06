@@ -8,19 +8,19 @@ position: 1
 
 # User Guide
 
-### Audience
+## Audience
 
 This guide is intended for the end user of the Kendo UI Spreadsheet widget. It aims at providing information about the widget's functionalities for data entry/management, and support to end users while working with it.
 
-### Table of Contents
+## Table of Contents
 
 To the left of this page is the collapsible Table of Contents. You can easily navigate through it by clicking on the title of a section you want to read.
 
-### Organization
+## Organization
 
 The instructions in this guide are organized in sections, based on the actions you might wish to execute on each spreadsheet component (sheets, rows, columns).
 
-### Conventions
+## Conventions
 
 This guide uses the following conventions:
 
@@ -30,14 +30,14 @@ This guide uses the following conventions:
 | Keyboard buttons, names of functions		| `screen` font						|
 | Selection sequences of buttons or options	| **Data** -> **Data Validation**	|
 
-### Overview
+## Overview
 
 The Kendo UI Spreadsheet is used for implementation of related data and its visualization in a tabular format (rows and columns). This kind of data structuring provides for an easier management and analysis. The widget renders the feeling of a [Microsoft Excel table](https://support.office.com/en-ca/article/Overview-of-Excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c) by offering many cell-formatting options, styles, and themes, while utilizing simpler and easy-to-master user interface.
 
 ##### Main Elements of the Kendo UI Spreadsheet Widget  
 <center>![Spreadsheet UI components](../images/spreadsheet-components.png)</center>
 
-### Actions with Sheets
+## Actions with Sheets
 
 When you open the spreadsheet, the widget automatically generates a worksheet and applies to it a set of default settings.
 
@@ -49,7 +49,7 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | Reorder				| Click and hold the sheet tab, and drag it to the desired location on the Sheet Tab Bar |
 | Delete				| Click **X** [ <span class="k-font-icon k-i-x"></span> ] on the tab of the sheet you want to remove |
 
-### Actions with Cells
+## Actions with Cells
 
 | WHAT YOU WANT			| HOW TO GET THERE		|
 | :---					| :---					|
@@ -67,7 +67,7 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | Add a background color| <ol><li>Select a cell</li> <li>Click **Background** [ <span class="k-font-icon k-i-background"></span> ] on the **Toolbar**</li> <li>Choose a color from the drop-down list to apply to the cell background</li></ol> |
 | Choose border styles and colors | <ol><li>Select a cell</li> <li>Click **Borders** [ <span class="k-font-icon k-i-all-borders"></span> ] on the **Toolbar**</li> <li>Select the border style and/or the color from the drop-down list</li> <li>Click anywhere on the sheet to exit</li></ol> |
 
-### Actions with Rows
+## Actions with Rows
 
 | WHAT YOU WANT			| HOW TO GET THERE		|
 | :---					| :---					|
@@ -81,7 +81,7 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | Add a background color | <ol><li>Select a row</li> <li>On the **Toolbar** click **Background** [ <span class="k-font-icon k-i-background"></span> ]</li> <li>Select the color from the drop-down list</li></ol> |
 | Choose border styles and colors | <ol><li>Select a row</li> <li>Click **Borders** [ <span class="k-font-icon k-i-all-borders"></span> ] on the **Toolbar**</li> <li>Select the border style and/or the color from the drop-down list</li> <li>Click anywhere on the worksheet to exit</li></ol> |
 
-### Actions with Columns
+## Actions with Columns
 
 | WHAT YOU WANT			| HOW TO GET THERE		|
 | :---					| :---					|
@@ -94,7 +94,7 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | Add a background color | <ol><li>Select a  column</li> <li>On the **Toolbar** click **Background** [ <span class="k-font-icon k-i-background"></span> ]</li> <li>Select the color from the drop-down list</li></ol> |
 | Choose border styles and colors | <ol><li>Select a column</li> <li>Click **Borders** [ <span class="k-font-icon k-i-all-borders"></span> ] on the **Toolbar**</li> <li>Select the border style and/or the color from the drop-down list</li> <li>Click anywhere on the sheet to exit</li></ol> |
 
-### Actions with Fonts
+## Actions with Fonts
 
 | WHAT YOU WANT			| HOW TO GET THERE		|
 | :---					| :---					|
@@ -102,17 +102,19 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | Edit font sizes 	| <ol><li>Select the cells to which you want to apply the font size</li> <li>On the **Toolbar** click **Font Size** [ <span class="k-font-icon k-i-font-size"></span> ]</li> <li>Choose the font size from the predetermined values in drop-down list</li></ol> |
 | Format fonts			| <ol><li>Select the cells where you want to format the font</li> <li>Use any of the following commands:</li></ol> <ul><ul><li>To make make the font **bold**, click **Bold** [ <span class="k-font-icon k-i-bold"></span> ] on the **Toolbar**</li> <li>To make make the font <i>italic</i>, click **Italic** [ <span class="k-font-icon k-i-italic"></span> ] on the **Toolbar**</li> <li>To make make the font <u>underlined</u>, click **Underline** [ <span class="k-font-icon k-i-underline"></span> ] on the **Toolbar**</li></ul></ul> |
 
-### Actions with Filters
+## Actions with Filters
 
 | WHAT YOU WANT				| HOW TO GET THERE		|
 | :---						| :---					|
-| Sort text fields   		| <ol><li>Click **Data** on the **Tab Bar**</li> <li>Select a column</li> <li>Click **Sort** [ <span class="k-font-icon k-i-sort-desc"></span> ] on the **Toolbar** and choose any of the two options from the drop-down list:</li> <ul><ul><li>**Sort range A to Z** sorts the content within the selected columns in ascending order</li> <li>**Sort range Z to A** sorts the content within the selected columns in descending alphabetical order</li></ul></ul></ol> |
+| Sort fields   		    | <ol><li>Click **Data** on the **Tab Bar**</li> <li>Select a column</li> <li>Click **Sort** [ <span class="k-font-icon k-i-sort-desc"></span> ] on the **Toolbar** and choose any of the two options from the drop-down list:</li> <ul><ul><li>**Sort range A to Z** sorts the content within the selected columns in ascending order</li> <li>**Sort range Z to A** sorts the content within the selected columns in descending alphabetical order</li></ul></ul></ol> |
+| Unsort fields             | <ul><li>Click **Undo** [ <span class="k-font-icon k-i-undo"></span> ] on the **Menu** to reverse the sorting you made.</li></ul> <ul>Оr</ul> <ul><li>Add a new column. Check which is the last active field of the columns whose data you want to sort. Then add a subsequent number (1, 2, 3, etc.) to each field of the recently added column ending with the field in the same row as the last field of the columns whose content you want to sort. In this way you can revert the sorting of the target columns by applying the sorting option in ascending order to the recently added helper column.</li></ul> |
 | Filter information        | <ol><li>Click **Data** on the **Tab Bar**</li> <li>Select the columns to which you want to apply the filtering criteria</li> <li>Click **Filter** [ <span class="k-font-icon k-i-filter"></span> ] on the **Toolbar**</li> <li>Choose from the drop-down list of options:</li> <ul><ul><li>**Sort range A to Z** sorts the data within the columns in ascending alphabetical order</li> <li>**Sort range Z to A** sorts the data within the columns in descending alphabetical order</li> <li>**Filter by condition** filters the data within the column by applying any of the conditions from the drop-down list of options. Each of them can be applied to text fields, dates, or numbers:</li> <ul><ul><li><u>Text fields:</u> Choose any of the options referring to texts from the **Filter by condition** drop-down list. Fill in the field below to set the filter condition. Click **Apply**. For example, choose **Text starts with**, set the condition to **E**, and click **Apply**. The result shows all rows containing text fields that start with an **E**. You can alphabetically sort the filtered infromation by clicking **Sort range A to Z** or **Sort range Z to A**.</li> <li><u>Dates:</u> Choose any of the options referring to dates from the **Filter by condition** drop-down list. Fill in the field below to set the filter condition. Click **Apply**. For example, choose **Date is**, set the condition to **6/30/2014**, and click **Apply**. The result is a list of only rows containing fields that display the date 6/30/2014. Note that the date format may differ depending on the order of date components. Make sure you check the current format before applying this filter.</li> <li><u>Numbers:</u> Choose any of the options referring to numbers from the **Filter by condition** drop-down list. Fill in the field below to set the filter condition. Click **Apply**. For example, choose **Is equal to**, set the condition to **10230**, and click **Apply**. The result is a list of only rows containing fields that display the number 10230.</li></ul></ul></ul></ul> <ul><ul>To retrieve all applied filters and sorting conditions, from **Filter by condition** choose **None** -> **Apply**.</ul></ul> <ul><ul><li>**Filter by value** provides more options for filtering numbers.</li> <ul><li>Select the checkbox against **All** to clear all conditions and view all rows within the active sheet</li> <li>Uncheck **All** to clear all checkboxes, and choose the values according to which you want to filter the data in the selected columns.</li></ul></ul></ul> |   
 
-### Other Data Formatting Options
+## Other Actions
 
 | WHAT YOU WANT				| HOW TO GET THERE		|
 | :---						| :---					|
+| Auto Fill                 | <ol><li>Insert textual, numeric, or textual and numeric characters of one and the same pattern in at least two subsequent column cells. For example, 1, 2.</li> <li>Select these cells.</li> <li>To copy the data series automatically, drag the fill handle across, down, or up the cells you want to fill.</li></ol> Note that the **Auto Fill** copies the format of the cells with the initial data series and applies it to the target ones.
 | Freeze panes				| <ol><li>Select the row or column which you want to freeze</li> <li>From the **Toolbar** click **Freeze Panes**</li> <li>Choose the option from the drop-down list</li></ol> |
 | Apply the `Undo` function | Click **Undo** [ <span class="k-font-icon k-i-undo"></span> ] on the **Menu** to reverse the actions you made during your current session. The number of actions you can reverse using `Undo` is unlimited. |
 | Apply the `Redo` function | Click **Redo** [ <span class="k-font-icon k-i-redo"></span> ] on the **Menu** to repeat the actions you made during your current session. The number of actions you can repeat using `Redo` is unlimited. |
@@ -132,11 +134,11 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 >
 > Whenever **Apply** is displayed as a command, click it if you want an option you selected to be applied.
 
-### Formulas and Functions
+## Formulas and Functions
 
 The Spreadsheet widget supports many of the Excel formulas and functions as seen in the [List of Formulas and Functions](/web/spreadsheet/end-user/list-of-formulas). 
 
-### Keyboard Shortcuts
+## Keyboard Shortcuts
 
 The Spreadsheet widget supports many of the Excel keyboard shortcuts as shown in the [List of Keyboard Shortcuts](/web/spreadsheet/end-user/list-of-shortcuts).
 

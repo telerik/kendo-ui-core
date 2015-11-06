@@ -8,11 +8,11 @@ position: 6
 
 # Troubleshooting
 
-## Pasting Displays Nothing in Internet Explorer
+## Pasting Displays Nothing (Internet Explorer)
 
 Pasting in the Editor requires permission to access **Clipboard** data. This may require users with strict security settings to add the site in the trusted site zone, or to adjust their Internet options so that the **Allow Programmatic Clipboard Access** setting is set to either **Allowed** or **Prompt**.
 
-## Editor in Popup Is Readonly in Firefox
+## Editor in Popup Is Readonly (Firefox)
 
 Firefox cannot handle `iframe` elements properly when they are moved to the DOM. When an Editor is used inside a popup, which moves elements to the DOM, the popup (e.g., a Kendo UI Window, a jQuery dialog, etc.) must be initialized first, or you must call the [`refresh` method](/kendo-ui/api/web/editor#methods-refresh).
 
@@ -57,7 +57,7 @@ Another possible approach is to use the Editor's inline mode, i.e., create the E
 
 To achieve image or table resizing in browsers such as Google Chrome 46 that do not normally support it, implement a [custom Editor tool](http://demos.telerik.com/kendo-ui/editor/custom-tools).
 
-## Using Back and Forward Browser Buttons Displays Raw HTML
+## Back and Forward Browser Buttons Display Raw HTML
 
 The Editor stores its value encoded by default. When the page is retrieved from the `bfcache` (back-forward cache), the `textarea` value is persisted encoded and the Editor encodes it again. This process can be easily observed if you navigate several times back and forth. On each navigation, the Editor value will be encoded once more. To resolve the problem, set the [`encoded`](/api/web/editor#configuration-encoded) property to `false`, and expect the Editor value to be posted unencoded to the server. If you are using ASP.NET, be sure to either disable the ASP.NET security validation, or set the `AllowHtml` attribute on the model field that will receive the HTML string. Here is some more [information about requesting validation in ASP.NET](http://blogs.learnnowonline.com/blog/bid/199703/ASP-NET-MVC-Request-Validation-Protection-AllowHtml-Attribute).
 
@@ -77,7 +77,7 @@ By design, the Editor strives to output a clean, XHTML-compatible markup. Becaus
 
 If wrong pasting removes semantics or actual content along with the styles, submit a bug report and attach an MS Word document that reproduces the problem.
 
-## Applying Formats Show BOM Characters in Editable Area
+## Formatting Shows BOM Characters in Editable Area
 
 The Editor uses BOM characters to correctly handle some ranges. These characters become visible if there is a problem with the page encoding. To debug this, follow the steps:
 
