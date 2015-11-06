@@ -95,18 +95,24 @@
         equal(multiselect.ul.attr("aria-live"), "polite");
     });
 
-    asyncTest("MultiSelect adds aria-busy=true when loader is shown", 1, function() {
+    test("MultiSelect calls progress handler when loader is shown",  function() {
+        var multiselect = new MultiSelect(input, {
+            filter: "startswith"
+        });
+
+        multiselect._showBusy  = function() { ok(true); };
+        multiselect.setDataSource(["item1", "item2"]);
+        multiselect.dataSource.trigger("progress");
+    });
+
+    test("MultiSelect adds aria-busy=true when loader is shown",  function() {
         var multiselect = new MultiSelect(input, {
             dataSource: ["item1", "item2"],
             filter: "startswith"
         });
 
-        multiselect.dataSource.trigger("progress");
-
-        setTimeout(function() {
-            equal(multiselect.input.attr("aria-busy"), "true");
-            start();
-        }, 200);
+        multiselect._showBusyHandler();
+        equal(multiselect.input.attr("aria-busy"), "true");
     });
 
     test("MultiSelect adds aria-busy=false when loader is hidden", 1, function() {
