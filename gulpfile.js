@@ -106,14 +106,15 @@ gulp.task("scripts", function() {
     var src = gulp.src(`src/${argv.scripts || 'kendo.*.js'}`, { base: "src" }).pipe(gatherAmd.gather()).pipe(license());
 
     var thirdParty = gulp.src('src/{jquery,angular,pako,jszip}*.*');
+    var minSrc;
 
     if (!skipMinify) {
         var gatheredSrc = src.pipe(clone())
             .pipe(ignore.include(["**/src/kendo.**.js"]));
 
         var scriptsToUglify = argv['skip-cultures'] ? gatheredSrc : merge(cultures(), messages(), gatheredSrc);
-    
-        var minSrc = scriptsToUglify
+
+        minSrc = scriptsToUglify
             .pipe(gulpIf(makeSourceMaps, sourcemaps.init()))
             .pipe(uglify())
             .pipe(gulpIf(makeSourceMaps, logger({after: 'source map complete!', extname: '.map', showChange: true})))
@@ -128,7 +129,7 @@ gulp.task("scripts", function() {
         src.pipe(toDist()),
         thirdParty.pipe(toDist())
     );
-     
+
     return skipMinify ? combinedSrc : merge(combinedSrc, minSrc.pipe(toDist()));
 });
 
