@@ -26,14 +26,14 @@ Here is how to configure the dropdownlist for local binding:
             array('name' => 'Jane Doe', 'age' => 29)
         );
         ?>
-3. Create a [data source](/api/wrappers/php/Kendo/Data/DataSource) and set its [data](/api/wrappers/php/Kendo/Data/DataSource#data):
+3. Create a [data source](/api/php/Kendo/Data/DataSource) and set its [data](/api/php/Kendo/Data/DataSource#data):
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
         $dataSource->data($data);
         ?>
-4. Create a [dropdownlist](/api/wrappers/php/Kendo/UI/DropDownList), configure its [dataTextField](/api/wrappers/php/Kendo/UI/DropDownList#datatextfield) and
-[dataValueField](/api/wrappers/php/Kendo/UI/DropDownList#datavaluefield) options and set its [data source](/api/wrappers/php/Kendo/UI/DropDownList#datasource).
+4. Create a [dropdownlist](/api/php/Kendo/UI/DropDownList), configure its [dataTextField](/api/php/Kendo/UI/DropDownList#datatextfield) and
+[dataValueField](/api/php/Kendo/UI/DropDownList#datavaluefield) options and set its [data source](/api/php/Kendo/UI/DropDownList#datasource).
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -44,7 +44,7 @@ Here is how to configure the dropdownlist for local binding:
         $dropdownlist->dataTextField('name');
         $dropdownlist->dataValueField('age');
         ?>
-5. Output the dropdownlist by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+5. Output the dropdownlist by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $dropdownlist->render();

@@ -32,7 +32,7 @@ First we will configure a Kendo Scheduler for PHP binding and then we will imple
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
         ?>
-1. Create a [data source](/api/wrappers/php/Kendo/Data/DataSource) and set its [data](/api/wrappers/php/Kendo/Data/DataSource#data) and [schema](/api/wrappers/php/Kendo/Data/DataSource#schema). Setting the schema is required
+1. Create a [data source](/api/php/Kendo/Data/DataSource) and set its [data](/api/php/Kendo/Data/DataSource#data) and [schema](/api/php/Kendo/Data/DataSource#schema). Setting the schema is required
 to specify the model fields.
 
         <?php
@@ -107,7 +107,7 @@ to specify the model fields.
         $dataSource->data($products)
                    ->schema($schema);
         ?>
-1. Create a [scheduler](/api/wrappers/php/Kendo/UI/Scheduler), configure its initial [date](/api/wrappers/php/Kendo/UI/Scheduler#date) and set its [data source](/api/wrappers/php/Kendo/UI/Scheduler#datasource).
+1. Create a [scheduler](/api/php/Kendo/UI/Scheduler), configure its initial [date](/api/php/Kendo/UI/Scheduler#date) and set its [data source](/api/php/Kendo/UI/Scheduler#datasource).
 
         <?php
         $scheduler = new \Kendo\UI\Scheduler('scheduler');
@@ -115,7 +115,7 @@ to specify the model fields.
         $scheduler->date(new DateTime('2013/6/13')
                 ->dataSource(dataSource);
         ?>
-1. Output the scheduler by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+1. Output the scheduler by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $scheduler->render();

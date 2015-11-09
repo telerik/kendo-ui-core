@@ -13,7 +13,7 @@ The Kendo PanelBar for PHP is a server-side wrapper for the [Kendo UI PanelBar](
 Here is how to configure a simple Kendo PanelBar:
 
 1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-1. Create a [panelbar](/api/wrappers/php/Kendo/UI/PanelBar) and set its [items](/api/wrappers/php/Kendo/UI/PanelBar#addItem)
+1. Create a [panelbar](/api/php/Kendo/UI/PanelBar) and set its [items](/api/php/Kendo/UI/PanelBar#addItem)
 
         <?php
         $panelbar = new \Kendo\UI\PanelBar('panelbar');
@@ -37,7 +37,7 @@ Here is how to configure a simple Kendo PanelBar:
         $panelbar->addItem($item1, $item2);
         ?>
 
-1. Output the panelbar by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+1. Output the panelbar by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $panelbar->render();

@@ -13,7 +13,7 @@ The Kendo TabStrip for PHP is a server-side wrapper for the [Kendo UI TabStrip](
 Here is how to configure a simple Kendo TabStrip:
 
 1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-1. Create a [tabstrip](/api/wrappers/php/Kendo/UI/TabStrip) and set its [items](/api/wrappers/php/Kendo/UI/TabStrip#addItem)
+1. Create a [tabstrip](/api/php/Kendo/UI/TabStrip) and set its [items](/api/php/Kendo/UI/TabStrip#addItem)
 
         <?php
         $tabstrip = new \Kendo\UI\TabStrip('tabstrip');
@@ -41,7 +41,7 @@ Here is how to configure a simple Kendo TabStrip:
         $tabstrip.addItem($item1, $item2);
         ?>
 
-1. Output the tabstrip by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+1. Output the tabstrip by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $tabstrip->render();

@@ -16,7 +16,7 @@ Here is how to configure a simple Kendo MaskedTextBox:
 
 1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
 
-2. Create a [maskedtextbox](/api/wrappers/php/Kendo/UI/MaskedTextBox).
+2. Create a [maskedtextbox](/api/php/Kendo/UI/MaskedTextBox).
 
         <?php
         $maskedtextbox = new \Kendo\UI\MaskedTextBox('maskedtextbox');
@@ -24,7 +24,7 @@ Here is how to configure a simple Kendo MaskedTextBox:
                       ->value("(123) 345-6789");
         ?>
 
-3. Output the maskedtextbox by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+3. Output the maskedtextbox by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $maskedtextbox->render();

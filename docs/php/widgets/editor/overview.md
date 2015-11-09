@@ -14,14 +14,14 @@ Here is how to configure a simple Kendo Editor:
 
 1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
 
-2. Create a [editor](/api/wrappers/php/Kendo/UI/Editor).
+2. Create a [editor](/api/php/Kendo/UI/Editor).
 
         <?php
         $editor = new \Kendo\UI\Editor('editor');
         $editor->value('#ff0000');
         ?>
 
-3. Output the editor by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+3. Output the editor by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $editor->render();

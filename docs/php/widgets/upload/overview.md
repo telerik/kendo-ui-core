@@ -18,7 +18,7 @@ The Upload supports two main modes:
 Here is how to configure the Upload for asynchronous operation:
 
 1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-2. Create an [upload](/api/wrappers/php/Kendo/UI/Upload), configure its [async](/api/wrappers/php/Kendo/UI/Upload#async) options
+2. Create an [upload](/api/php/Kendo/UI/Upload), configure its [async](/api/php/Kendo/UI/Upload#async) options
 
         <?php
         $upload = new \Kendo\UI\Upload('files[]');
@@ -26,7 +26,7 @@ Here is how to configure the Upload for asynchronous operation:
                 'saveUrl' => 'save.php'
         ));
         ?>
-3. Output the upload by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+3. Output the upload by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $upload->render();

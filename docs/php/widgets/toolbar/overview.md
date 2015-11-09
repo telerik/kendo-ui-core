@@ -13,7 +13,7 @@ The Kendo ToolBar for PHP is a server-side wrapper for the [Kendo UI ToolBar](/a
 Here is how to configure a simple Kendo ToolBar:
 
 1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-2. Create a [toolbar](/api/wrappers/php/Kendo/UI/ToolBar), specify the widget's commands.
+2. Create a [toolbar](/api/php/Kendo/UI/ToolBar), specify the widget's commands.
 
         <?php
         
@@ -57,7 +57,7 @@ Here is how to configure a simple Kendo ToolBar:
 
         ?>
 
-3. Output the toolbar by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+3. Output the toolbar by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php echo $toolbar->render(); ?>
 

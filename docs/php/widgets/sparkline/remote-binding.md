@@ -65,7 +65,7 @@ This help topic shows how to bind Kendo Sparkline for PHP to JSON response.
 
 ### Create PHP file which returns JSON
 
-1. Create a new php file called **weather.php**. This file will return data in JSON format. The data source is configured to request it via the [url](/api/wrappers/php/Kendo/Data/DataSourceTransportRead#url) setting.
+1. Create a new php file called **weather.php**. This file will return data in JSON format. The data source is configured to request it via the [url](/api/php/Kendo/Data/DataSourceTransportRead#url) setting.
 1. Create a PDO connection
 
         <?php

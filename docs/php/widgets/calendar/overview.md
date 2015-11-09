@@ -14,8 +14,8 @@ Here is how to configure a simple Kendo Calendar:
 
 1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
 
-2. Create a [calendar](/api/wrappers/php/Kendo/UI/Calendar), configure its [min](/api/wrappers/php/Kendo/UI/Calendar#min),
-[max](/api/wrappers/php/Kendo/UI/Calendar#max) and [value](/api/wrappers/php/Kendo/UI/Calendar#value) options.
+2. Create a [calendar](/api/php/Kendo/UI/Calendar), configure its [min](/api/php/Kendo/UI/Calendar#min),
+[max](/api/php/Kendo/UI/Calendar#max) and [value](/api/php/Kendo/UI/Calendar#value) options.
 
         <?php
         $calendar = new \Kendo\UI\Calendar('calendar');

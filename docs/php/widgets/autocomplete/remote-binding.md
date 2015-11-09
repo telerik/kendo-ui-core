@@ -59,7 +59,7 @@ will happen on the server-side.
 
 ### Create PHP file which returns JSON
 
-1. Create a new php file called **products.php**. This file will return data in JSON format. The data source is configured to request it via the [url](/api/wrappers/php/Kendo/Data/DataSourceTransportRead#url) setting.
+1. Create a new php file called **products.php**. This file will return data in JSON format. The data source is configured to request it via the [url](/api/php/Kendo/Data/DataSourceTransportRead#url) setting.
 1. Create a PDO connection
 
         <?php
@@ -150,11 +150,11 @@ First we will configure a Kendo AutoComplete for PHP binding and then we will im
 
 ### Create PHP file which returns JSON (using DataSourceResult)
 
-1. Create a new php file called **products.php**. This file will return data in JSON format. The data source is configured to request it via the [url](/api/wrappers/php/Kendo/Data/DataSourceTransportRead#url) setting.
+1. Create a new php file called **products.php**. This file will return data in JSON format. The data source is configured to request it via the [url](/api/php/Kendo/Data/DataSourceTransportRead#url) setting.
 1. Copy **/wrappers/php/lib/DataSourceResult.php** to your web site root and include it.
 
         <?php require_once 'lib/DataSourceResult.php'; ?>
-1. Read the request body and parse it as JSON. In the previous example we configured the Kendo DataSource to submit its parameters as JSON via the [parameterMap](/api/wrappers/php/Kendo/Data/DataSourceTransport#parametermap).
+1. Read the request body and parse it as JSON. In the previous example we configured the Kendo DataSource to submit its parameters as JSON via the [parameterMap](/api/php/Kendo/Data/DataSourceTransport#parametermap).
 
         <?php
         $request = json_decode(file_get_contents('php://input'));

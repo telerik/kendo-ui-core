@@ -33,7 +33,7 @@ First we will configure a Kendo Grid for PHP binding and then we will implement 
         $statement->execute();
         $products = $statement->fetchAll(PDO::FETCH_ASSOC);
         ?>
-1. Create a [data source](/api/wrappers/php/Kendo/Data/DataSource) and set its [data](/api/wrappers/php/Kendo/Data/DataSource#data) and [schema](/api/wrappers/php/Kendo/Data/DataSource#schema). Setting the schema is required
+1. Create a [data source](/api/php/Kendo/Data/DataSource) and set its [data](/api/php/Kendo/Data/DataSource#data) and [schema](/api/php/Kendo/Data/DataSource#schema). Setting the schema is required
 to specify the model fields. Those fields are required for filtering and editing.
 
         <?php
@@ -67,7 +67,7 @@ to specify the model fields. Those fields are required for filtering and editing
         $dataSource->data($products)
                    ->schema($schema);
         ?>
-1. Create a [grid](/api/wrappers/php/Kendo/UI/Grid), configure its [columns](/api/wrappers/php/Kendo/UI/Grid#addcolumn) and set its [data source](/api/wrappers/php/Kendo/UI/Grid#datasource).
+1. Create a [grid](/api/php/Kendo/UI/Grid), configure its [columns](/api/php/Kendo/UI/Grid#addcolumn) and set its [data source](/api/php/Kendo/UI/Grid#datasource).
 
         <?php
         $grid = new \Kendo\UI\Grid('grid');
@@ -88,7 +88,7 @@ to specify the model fields. Those fields are required for filtering and editing
 
         $grid->addColumn($productNameColumn, $unitPriceColumn, $discontinuedColumn);
         ?>
-1. Output the grid by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+1. Output the grid by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $grid->render();

@@ -26,7 +26,7 @@ Here is how to configure a simple Kendo UI QRCode:
                ->errorCorrection("H")
                ->encoding("UTF_8");
 
-1. Output the chart by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+1. Output the chart by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         echo $qrcode->render();
 

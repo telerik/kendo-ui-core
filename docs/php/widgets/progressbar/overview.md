@@ -13,14 +13,14 @@ The Kendo ProgressBar for PHP is a server-side wrapper for the [Kendo UI Progres
 Here is how to configure a simple Kendo ProgressBar:
 
 1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-2. Create a [ProgressBar](/api/wrappers/php/Kendo/UI/ProgressBar).
+2. Create a [ProgressBar](/api/php/Kendo/UI/ProgressBar).
 
 		<?php
 		  $pb = new \Kendo\UI\ProgressBar('progressBar');
 		  $pb->type('percent');
 		?>
 
-3. Output the ProgressBar by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+3. Output the ProgressBar by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
 		<?php
           echo $pb->render();

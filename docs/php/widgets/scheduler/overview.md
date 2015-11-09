@@ -39,20 +39,20 @@ Here is how to configure the scheduler for local binding:
             )
         );
         ?>
-3. Create a [data source](/api/wrappers/php/Kendo/Data/DataSource) and set its [data](/api/wrappers/php/Kendo/Data/DataSource#data):
+3. Create a [data source](/api/php/Kendo/Data/DataSource) and set its [data](/api/php/Kendo/Data/DataSource#data):
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
         $dataSource->data($data);
         ?>
-4. Create a [scheduler](/api/wrappers/php/Kendo/UI/Scheduler), set initial selected [date](/api/wrappers/php/Kendo/UI/Scheduler#date) and set its [data source](/api/wrappers/php/Kendo/UI/Scheduler#datasource).
+4. Create a [scheduler](/api/php/Kendo/UI/Scheduler), set initial selected [date](/api/php/Kendo/UI/Scheduler#date) and set its [data source](/api/php/Kendo/UI/Scheduler#datasource).
 
         <?php
         $scheduler = new \Kendo\UI\Scheduler('scheduler');
         $scheduler->date(new DateTime('2013/6/13'))
              ->dataSource($dataSource);
         ?>
-5. Output the scheduler by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+5. Output the scheduler by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $scheduler->render();

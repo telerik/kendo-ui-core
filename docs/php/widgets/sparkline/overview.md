@@ -23,13 +23,13 @@ Here is how to configure the sparkline for local binding:
         <?php
         $data = array(1, 3, 5, 4, 2);
         ?>
-4. Create a [sparkline](/api/wrappers/php/Kendo/Dataviz/UI/Sparkline), configure its [data](/api/wrappers/php/Kendo/Dataviz/UI/Sparkline#data).
+4. Create a [sparkline](/api/php/Kendo/Dataviz/UI/Sparkline), configure its [data](/api/php/Kendo/Dataviz/UI/Sparkline#data).
 
         <?php
         $sparkline = new \Kendo\Dataviz\UI\Sparkline('sparkline');
         $sparkline->data($data);
         ?>
-5. Output the sparkline by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+5. Output the sparkline by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $sparkline->render();

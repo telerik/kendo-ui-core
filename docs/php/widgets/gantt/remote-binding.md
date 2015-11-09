@@ -16,7 +16,7 @@ This help topic shows how to bind Kendo Gantt for PHP to JSON response.
 ### Configure Gantt for Remote Binding
 
 1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-1. Create a [data source](/api/wrappers/php/Kendo/Data/DataSource) for the tasks and set its [transport](/api/wrappers/php/Kendo/Data/DataSource#transport) and [schema](/api/wrappers/php/Kendo/Data/DataSource#schema):
+1. Create a [data source](/api/php/Kendo/Data/DataSource) for the tasks and set its [transport](/api/php/Kendo/Data/DataSource#transport) and [schema](/api/php/Kendo/Data/DataSource#schema):
 
         <?php
         $taskTransport = new \Kendo\Data\DataSourceTransport();
@@ -130,7 +130,7 @@ This help topic shows how to bind Kendo Gantt for PHP to JSON response.
             ->schema($taskSchema)
             ->batch(true);
         ?>
-1. Create a [data source](/api/wrappers/php/Kendo/Data/DataSource) for the dependencies and set its [transport](/api/wrappers/php/Kendo/Data/DataSource#transport) and [schema](/api/wrappers/php/Kendo/Data/DataSource#schema):
+1. Create a [data source](/api/php/Kendo/Data/DataSource) for the dependencies and set its [transport](/api/php/Kendo/Data/DataSource#transport) and [schema](/api/php/Kendo/Data/DataSource#schema):
     
         <?php
         $dependencyTransport = new \Kendo\Data\DataSourceTransport();
@@ -211,7 +211,7 @@ This help topic shows how to bind Kendo Gantt for PHP to JSON response.
             ->batch(true);
         ?>
 
-1. Create a [gantt](/api/wrappers/php/Kendo/UI/Gantt) and set its [data source](/api/wrappers/php/Kendo/UI/Gantt#datasource) and  [dependencies data source](/api/wrappers/php/Kendo/UI/Gantt#dependencies).
+1. Create a [gantt](/api/php/Kendo/UI/Gantt) and set its [data source](/api/php/Kendo/UI/Gantt#datasource) and  [dependencies data source](/api/php/Kendo/UI/Gantt#dependencies).
 
         <?php
         $gantt = new \Kendo\UI\Gantt('gantt');
@@ -219,7 +219,7 @@ This help topic shows how to bind Kendo Gantt for PHP to JSON response.
         $gantt->dataSource($tasksDataSource)
             ->dependencies($dependenciesDataSource);
         ?>
-1. Output the gantt by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+1. Output the gantt by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $gantt->render();
@@ -227,7 +227,7 @@ This help topic shows how to bind Kendo Gantt for PHP to JSON response.
 
 ### Create PHP file which returns tasks as JSON
 
-1. Create a new php file called **tasks.php**. This file will return data in JSON format. The data source is configured to request it via the [url](/api/wrappers/php/Kendo/Data/DataSourceTransportRead#url) setting.
+1. Create a new php file called **tasks.php**. This file will return data in JSON format. The data source is configured to request it via the [url](/api/php/Kendo/Data/DataSourceTransportRead#url) setting.
 1. Create a PDO connection
 
         <?php
@@ -252,7 +252,7 @@ This help topic shows how to bind Kendo Gantt for PHP to JSON response.
 
 ### Create PHP file which returns dependencies as JSON
 
-1. Create a new php file called **dependencies.php**. This file will return data in JSON format. The data source is configured to request it via the [url](/api/wrappers/php/Kendo/Data/DataSourceTransportRead#url) setting.
+1. Create a new php file called **dependencies.php**. This file will return data in JSON format. The data source is configured to request it via the [url](/api/php/Kendo/Data/DataSourceTransportRead#url) setting.
 1. Create a PDO connection
 
         <?php
@@ -283,7 +283,7 @@ This help topic shows how to bind Kendo Gantt for PHP to JSON response.
         <?php
         $db = new PDO('sqlite:../sample.db');
         ?>
-1. Read the request body and parse it as JSON. In the previous example we configured the Kendo DataSource to submit its parameters as JSON via the [parameterMap](/api/wrappers/php/Kendo/Data/DataSourceTransport#parametermap).
+1. Read the request body and parse it as JSON. In the previous example we configured the Kendo DataSource to submit its parameters as JSON via the [parameterMap](/api/php/Kendo/Data/DataSourceTransport#parametermap).
 
         <?php
         $request = json_decode(file_get_contents('php://input'));
@@ -409,7 +409,7 @@ This help topic shows how to bind Kendo Gantt for PHP to JSON response.
         <?php
         $db = new PDO('sqlite:../sample.db');
         ?>
-1. Read the request body and parse it as JSON. In the previous example we configured the Kendo DataSource to submit its parameters as JSON via the [parameterMap](/api/wrappers/php/Kendo/Data/DataSourceTransport#parametermap).
+1. Read the request body and parse it as JSON. In the previous example we configured the Kendo DataSource to submit its parameters as JSON via the [parameterMap](/api/php/Kendo/Data/DataSourceTransport#parametermap).
 
         <?php
         $request = json_decode(file_get_contents('php://input'));
@@ -499,7 +499,7 @@ First we will configure a Kendo Gantt for PHP binding and then we will implement
 
 ### Configure Gantt for editing (using DataSourceResult)
 1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-1. Create a [data source](/api/wrappers/php/Kendo/Data/DataSource) for the tasks and configure it:
+1. Create a [data source](/api/php/Kendo/Data/DataSource) for the tasks and configure it:
 
         <?php
         $taskTransport = new \Kendo\Data\DataSourceTransport();
@@ -615,7 +615,7 @@ First we will configure a Kendo Gantt for PHP binding and then we will implement
             ->schema($taskSchema)
             ->batch(true);
         ?>
-1. Create a [data source](/api/wrappers/php/Kendo/Data/DataSource) for the dependencies and configure it:
+1. Create a [data source](/api/php/Kendo/Data/DataSource) for the dependencies and configure it:
 
         <?php
         $dependencyTransport = new \Kendo\Data\DataSourceTransport();
@@ -697,7 +697,7 @@ First we will configure a Kendo Gantt for PHP binding and then we will implement
             ->schema($dependencySchema)
             ->batch(true);
         ?>
-1. Create a [gantt](/api/wrappers/php/Kendo/UI/Gantt) and set its [data source](/api/wrappers/php/Kendo/UI/Gantt#datasource) and  [dependencies data source](/api/wrappers/php/Kendo/UI/Gantt#dependencies).
+1. Create a [gantt](/api/php/Kendo/UI/Gantt) and set its [data source](/api/php/Kendo/UI/Gantt#datasource) and  [dependencies data source](/api/php/Kendo/UI/Gantt#dependencies).
 
         <?php
         $gantt = new \Kendo\UI\Gantt('gantt');
@@ -705,7 +705,7 @@ First we will configure a Kendo Gantt for PHP binding and then we will implement
         $gantt->dataSource($tasksDataSource)
             ->dependencies($dependenciesDataSource);
         ?>
-1. Output the gantt by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+1. Output the gantt by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $gantt->render();
@@ -717,7 +717,7 @@ First we will configure a Kendo Gantt for PHP binding and then we will implement
 1. Copy **/wrappers/php/lib/DataSourceResult.php** to your web site root and include it.
 
         <?php require_once '../lib/DataSourceResult.php'; ?>
-1. Read the request body and parse it as JSON. In the previous example we configured the Kendo DataSource to submit its parameters as JSON via the [parameterMap](/api/wrappers/php/Kendo/Data/DataSourceTransport#parametermap).
+1. Read the request body and parse it as JSON. In the previous example we configured the Kendo DataSource to submit its parameters as JSON via the [parameterMap](/api/php/Kendo/Data/DataSourceTransport#parametermap).
 
         <?php
         $request = json_decode(file_get_contents('php://input'));
@@ -790,7 +790,7 @@ First we will configure a Kendo Gantt for PHP binding and then we will implement
 1. Copy **/wrappers/php/lib/DataSourceResult.php** to your web site root and include it.
 
         <?php require_once '../lib/DataSourceResult.php'; ?>
-1. Read the request body and parse it as JSON. In the previous example we configured the Kendo DataSource to submit its parameters as JSON via the [parameterMap](/api/wrappers/php/Kendo/Data/DataSourceTransport#parametermap).
+1. Read the request body and parse it as JSON. In the previous example we configured the Kendo DataSource to submit its parameters as JSON via the [parameterMap](/api/php/Kendo/Data/DataSourceTransport#parametermap).
 
         <?php
         $request = json_decode(file_get_contents('php://input'));

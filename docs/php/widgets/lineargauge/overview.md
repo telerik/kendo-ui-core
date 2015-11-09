@@ -20,7 +20,7 @@ Here is how to configure a simple Kendo LinearGauge:
         $gauge->pointer(array('value' => 10))
               ->scale(array('min' => 0, 'max' => 100));
 
-1. Output the chart by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+1. Output the chart by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         echo $gauge->render();
 
