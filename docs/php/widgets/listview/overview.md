@@ -26,7 +26,7 @@ Here is how to configure the listview for local binding:
             array('name' => 'Jane Doe', 'age' => 29)
         );
         ?>
-3. Create a [data source](/api/wrappers/php/Kendo/Data/DataSource) and set its [data](/api/wrappers/php/Kendo/Data/DataSource#data):
+3. Create a [data source](/api/php/Kendo/Data/DataSource) and set its [data](/api/php/Kendo/Data/DataSource#data):
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -42,7 +42,7 @@ Here is how to configure the listview for local binding:
     		</div>
 		</script>
 
-5. Create a [listview](/api/wrappers/php/Kendo/UI/ListView), configure its [template](/api/wrappers/php/Kendo/UI/ListView#template) and set its [data source](/api/wrappers/php/Kendo/UI/ListView#datasource).
+5. Create a [listview](/api/php/Kendo/UI/ListView), configure its [template](/api/php/Kendo/UI/ListView#template) and set its [data source](/api/php/Kendo/UI/ListView#datasource).
 
         <?php        
         $listview = new \Kendo\UI\ListView('listview');		
@@ -50,13 +50,13 @@ Here is how to configure the listview for local binding:
              ->dataSource($dataSource);
         ?>
 
-6. Optionally you can configure the [tagName](/api/wrappers/php/Kendo/UI/ListView#tagname) which is used to create an element which will contain all listivew items once the listview is bound. By default `div` element will be created.
+6. Optionally you can configure the [tagName](/api/php/Kendo/UI/ListView#tagname) which is used to create an element which will contain all listivew items once the listview is bound. By default `div` element will be created.
 
 		<?php
 		$listview->tagName('ul');
 		?>
 
-7. Output the listview by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+7. Output the listview by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $listview->render();

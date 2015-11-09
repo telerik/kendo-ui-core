@@ -27,13 +27,13 @@ Here is how to configure the treelist for local binding:
             array('name' => 'Jane Doe', 'age' => 29, 'parentId' => null)
         );
         ?>
-3. Create a [data source](/api/wrappers/php/Kendo/Data/DataSource) and set its [data](/api/wrappers/php/Kendo/Data/DataSource#data):
+3. Create a [data source](/api/php/Kendo/Data/DataSource) and set its [data](/api/php/Kendo/Data/DataSource#data):
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
         $dataSource->data($data);
         ?>
-4. Create a [treelist](/api/wrappers/php/Kendo/UI/TreeList), configure its [columns](/api/wrappers/php/Kendo/UI/TreeList#addcolumn) and set its [data source](/api/wrappers/php/Kendo/UI/TreeList#datasource).
+4. Create a [treelist](/api/php/Kendo/UI/TreeList), configure its [columns](/api/php/Kendo/UI/TreeList#addcolumn) and set its [data source](/api/php/Kendo/UI/TreeList#datasource).
 
         <?php
         $nameColumn = new \Kendo\UI\TreeListColumn();
@@ -46,7 +46,7 @@ Here is how to configure the treelist for local binding:
         $treelist->addColumn($nameColumn, $ageColumn)
              ->dataSource($dataSource);
         ?>
-5. Output the treelist by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+5. Output the treelist by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $treelist->render();

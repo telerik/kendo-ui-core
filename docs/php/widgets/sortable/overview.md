@@ -15,14 +15,14 @@ Unlike most of the server side wrapper the Sortable one does not render HTML mar
 Here is how to configure a simple Kendo Sortable:
 
 1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-2. Create a [sortable](/api/wrappers/php/Kendo/UI/Sortable), set its container and customize the hint and placeholder of the widget
+2. Create a [sortable](/api/php/Kendo/UI/Sortable), set its container and customize the hint and placeholder of the widget
 
         <?php
         $sortable = new \Kendo\UI\Sortable('#sortable-basic'); // select the container for the Sortable
         $sortable->hint(new \Kendo\JavaScriptFunction('hint'))
                  ->placeholder(new \Kendo\JavaScriptFunction('placeholder'));
         ?>
-3. Output the sortable by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+3. Output the sortable by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $sortable->render();

@@ -35,7 +35,7 @@ First we will configure a Kendo Gantt for PHP binding and then we will implement
         $statement->execute();
         $dependencies = $statement->fetchAll(PDO::FETCH_ASSOC);
         ?>
-1. Create a [data source](/api/wrappers/php/Kendo/Data/DataSource) for the tasks and set its [data](/api/wrappers/php/Kendo/Data/DataSource#data) and [schema](/api/wrappers/php/Kendo/Data/DataSource#schema). Setting the schema is required
+1. Create a [data source](/api/php/Kendo/Data/DataSource) for the tasks and set its [data](/api/php/Kendo/Data/DataSource#data) and [schema](/api/php/Kendo/Data/DataSource#schema). Setting the schema is required
 to specify the model fields.
 
         <?php
@@ -115,7 +115,7 @@ to specify the model fields.
         $tasksDataSource->data($tasks)
               ->schema($tasksSchema);
         ?>
-1. Create a [data source](/api/wrappers/php/Kendo/Data/DataSource) for the dependencies and set its [data](/api/wrappers/php/Kendo/Data/DataSource#data) and [schema](/api/wrappers/php/Kendo/Data/DataSource#schema). Setting the schema is required to specify the model fields.
+1. Create a [data source](/api/php/Kendo/Data/DataSource) for the dependencies and set its [data](/api/php/Kendo/Data/DataSource#data) and [schema](/api/php/Kendo/Data/DataSource#schema). Setting the schema is required to specify the model fields.
 
         <?php
         // Create the schema model
@@ -160,7 +160,7 @@ to specify the model fields.
         $dependenciesDataSource->data($dependencies)
               ->schema($dependenciesSchema);
         ?>
-1. Create a [gantt](/api/wrappers/php/Kendo/UI/Gantt) and set its [data source](/api/wrappers/php/Kendo/UI/Gantt#datasource) and  [dependencies data source](/api/wrappers/php/Kendo/UI/Gantt#dependencies).
+1. Create a [gantt](/api/php/Kendo/UI/Gantt) and set its [data source](/api/php/Kendo/UI/Gantt#datasource) and  [dependencies data source](/api/php/Kendo/UI/Gantt#dependencies).
 
         <?php
         $gantt = new \Kendo\UI\Gantt('gantt');
@@ -168,7 +168,7 @@ to specify the model fields.
         $gantt->dataSource($tasksDataSource)
             ->dependencies($dependenciesDataSource);
         ?>
-1. Output the gantt by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+1. Output the gantt by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $gantt->render();

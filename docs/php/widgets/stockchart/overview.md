@@ -28,14 +28,14 @@ Here is how to configure the Kendo StockChart for server binding:
         );
         ?>
 
-1. Create a [data source](/api/wrappers/php/Kendo/Data/DataSource) and set its [data](/api/wrappers/php/Kendo/Data/DataSource#data):
+1. Create a [data source](/api/php/Kendo/Data/DataSource) and set its [data](/api/php/Kendo/Data/DataSource#data):
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
         $dataSource->data($data);
         ?>
 
-1. Create a [stock chart](/api/wrappers/php/Kendo/Dataviz/UI/StockChart) and configure it:
+1. Create a [stock chart](/api/php/Kendo/Dataviz/UI/StockChart) and configure it:
 
         <?php
         $chart = new \Kendo\Dataviz\UI\StockChart('stock-chart');
@@ -56,7 +56,7 @@ Here is how to configure the Kendo StockChart for server binding:
               ->navigator($navigator);
         ?>
 
-1. Output the chart by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+1. Output the chart by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php echo $chart->render(); ?>
 

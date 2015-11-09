@@ -14,7 +14,7 @@ Here is how to configure a simple Kendo Menu:
 
 1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
 
-1. Create a [menu](/api/wrappers/php/Kendo/UI/Menu) and set its [items](/api/wrappers/php/Kendo/UI/Menu#additem)
+1. Create a [menu](/api/php/Kendo/UI/Menu) and set its [items](/api/php/Kendo/UI/Menu#additem)
 
         <?php
         $menu = new \Kendo\UI\Menu('menu');
@@ -38,7 +38,7 @@ Here is how to configure a simple Kendo Menu:
         $menu.addItem($item1, $item2);
         ?>
 
-1. Output the menu by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+1. Output the menu by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $menu->render();

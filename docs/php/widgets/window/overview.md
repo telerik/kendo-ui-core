@@ -13,7 +13,7 @@ The Kendo Window for PHP is a server-side wrapper for the [Kendo UI Window](/api
 Here is how to configure a simple Kendo Window:
 
 1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-2. Create a [window](/api/wrappers/php/Kendo/UI/Window)
+2. Create a [window](/api/php/Kendo/UI/Window)
 
         <?php
         $window = new \Kendo\UI\Window('window');
@@ -40,7 +40,7 @@ Here is how to configure a simple Kendo Window:
             $window->endContent();
         ?>
 
-4. Output the window by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+4. Output the window by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $window->render();

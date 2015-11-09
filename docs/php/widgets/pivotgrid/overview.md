@@ -71,7 +71,7 @@ The following tutorial shows how to configure Kendo UI PivotGrid for PHP to do a
             ->addMeasure(array('[Measures].[Internet Sales Amount]'))
             ->schema($schema);
 
-4. Create a [pivotgrid](/api/wrappers/php/Kendo/UI/PivotGrid) and set its data source:
+4. Create a [pivotgrid](/api/php/Kendo/UI/PivotGrid) and set its data source:
 
         $pivotgrid = new \Kendo\UI\PivotGrid('pivotgrid');
         $pivotgrid->dataSource($dataSource);

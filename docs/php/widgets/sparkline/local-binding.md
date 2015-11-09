@@ -32,7 +32,7 @@ First we will configure a Kendo Sparkline for PHP binding and then we will imple
         $statement->execute();
         $weather = $statement->fetchAll(PDO::FETCH_ASSOC);
         ?>
-1. Create a [data source](/api/wrappers/php/Kendo/Data/DataSource) and set its [data](/api/wrappers/php/Kendo/Data/DataSource#data) and [schema](/api/wrappers/php/Kendo/Data/DataSource#schema). Setting the schema is required to specify the model fields. Those fields are required for filtering and editing.
+1. Create a [data source](/api/php/Kendo/Data/DataSource) and set its [data](/api/php/Kendo/Data/DataSource#data) and [schema](/api/php/Kendo/Data/DataSource#schema). Setting the schema is required to specify the model fields. Those fields are required for filtering and editing.
 
         <?php
         // Create the schema model
@@ -57,7 +57,7 @@ First we will configure a Kendo Sparkline for PHP binding and then we will imple
         $dataSource->data($weather)
                    ->schema($schema);
         ?>
-1. Create a [sparkline](/api/wrappers/php/Kendo/Dataviz/UI/Sparkline), configure its [series](/api/wrappers/php/Kendo/Dataviz/UI/Sparkline#addSeriesItem).
+1. Create a [sparkline](/api/php/Kendo/Dataviz/UI/Sparkline), configure its [series](/api/php/Kendo/Dataviz/UI/Sparkline#addSeriesItem).
 
         <?php
         $sparkline = new \Kendo\Dataviz\UI\Sparkline('sparkline');
@@ -68,7 +68,7 @@ First we will configure a Kendo Sparkline for PHP binding and then we will imple
         $sparkline->addSeriesItem($tmaxSeries)
               ->dataSource($dataSource);
         ?>
-1. Output the sparkline by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+1. Output the sparkline by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $sparkline->render();

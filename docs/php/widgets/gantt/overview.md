@@ -54,26 +54,26 @@ Here is how to configure the gantt for local binding:
             )
         );
         ?>
-1. Create a [data source](/api/wrappers/php/Kendo/Data/DataSource) for the tasks and set its [data](/api/wrappers/php/Kendo/Data/DataSource#data):
+1. Create a [data source](/api/php/Kendo/Data/DataSource) for the tasks and set its [data](/api/php/Kendo/Data/DataSource#data):
 
         <?php
         $tasksDataSource = new \Kendo\Data\DataSource();
         $tasksDataSource->data($tasksData);
         ?>
-1. Create a [data source](/api/wrappers/php/Kendo/Data/DataSource) for the dependencies and set its [data](/api/wrappers/php/Kendo/Data/DataSource#data):
+1. Create a [data source](/api/php/Kendo/Data/DataSource) for the dependencies and set its [data](/api/php/Kendo/Data/DataSource#data):
 
         <?php
         $dependenciesDataSource = new \Kendo\Data\DataSource();
         $dependenciesDataSource->data($dependenciesData);
         ?>
-1. Create a [gantt](/api/wrappers/php/Kendo/UI/Gantt), set its [data source](/api/wrappers/php/Kendo/UI/Gantt#datasource) and  [dependencies data source](/api/wrappers/php/Kendo/UI/Gantt#dependencies).
+1. Create a [gantt](/api/php/Kendo/UI/Gantt), set its [data source](/api/php/Kendo/UI/Gantt#datasource) and  [dependencies data source](/api/php/Kendo/UI/Gantt#dependencies).
 
         <?php
         $gantt = new \Kendo\UI\Gantt('gantt');
         $gantt->dataSource($tasksDataSource)
             ->dependencies($dependenciesDataSource);
         ?>
-1. Output the gantt by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+1. Output the gantt by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $gantt->render();

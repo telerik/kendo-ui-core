@@ -13,13 +13,13 @@ The Kendo Tooltip for PHP is a server-side wrapper for the [Kendo UI Tooltip](/a
 Here is how to configure a simple Kendo Tooltip:
 
 1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-2. Create a [tooltip](/api/wrappers/php/Kendo/UI/Tooltip), set its container and add filter to target all child anchor elements with title attribute for which the tooltip will be shown
+2. Create a [tooltip](/api/php/Kendo/UI/Tooltip), set its container and add filter to target all child anchor elements with title attribute for which the tooltip will be shown
 
         <?php
         $tooltip = new \Kendo\UI\Tooltip('#container');
         $tooltip->filter("a[title]");
         ?>
-3. Output the tooltip by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+3. Output the tooltip by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $tooltip->render();

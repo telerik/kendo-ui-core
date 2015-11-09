@@ -13,14 +13,14 @@ The Kendo Slider for PHP is a server-side wrapper for the [Kendo UI Slider](/api
 Here is how to configure a simple Kendo Slider:
 
 1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-1. Create a [slider](/api/wrappers/php/Kendo/UI/Slider).
+1. Create a [slider](/api/php/Kendo/UI/Slider).
 
         <?php
         $slider = new \Kendo\UI\Slider('slider');
         $slider->value(42);
         ?>
 
-1. Output the slider by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+1. Output the slider by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $slider->render();

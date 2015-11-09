@@ -14,14 +14,14 @@ Here is how to configure a simple Kendo FlatColorPicker:
 
 1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
 
-2. Create a [flatcolorpicker](/api/wrappers/php/Kendo/UI/FlatColorPicker).
+2. Create a [flatcolorpicker](/api/php/Kendo/UI/FlatColorPicker).
 
         <?php
         $flatcolorpicker = new \Kendo\UI\FlatColorPicker('flatcolorpicker');
         $flatcolorpicker->value('#ff0000');
         ?>
 
-3. Output the flatcolorpicker by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+3. Output the flatcolorpicker by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $flatcolorpicker->render();

@@ -28,7 +28,7 @@ returned by PDO.
         $statement = $db->prepare('SELECT * FROM Products');
         $products = $statement->fetchAll(PDO::FETCH_ASSOC);
         ?>
-1. Create a [data source](/api/wrappers/php/Kendo/Data/DataSource) and set its [data](/api/wrappers/php/Kendo/Data/DataSource#data) and [schema](/api/wrappers/php/Kendo/Data/DataSource#schema). Setting the schema is required
+1. Create a [data source](/api/php/Kendo/Data/DataSource) and set its [data](/api/php/Kendo/Data/DataSource#data) and [schema](/api/php/Kendo/Data/DataSource#schema). Setting the schema is required
 to specify the model fields. Those fields are required for filtering.
 
         <?php
@@ -58,8 +58,8 @@ to specify the model fields. Those fields are required for filtering.
         $dataSource->data($products)
                    ->schema($schema);
         ?>
-4. Create a [combobox](/api/wrappers/php/Kendo/UI/ComboBox), configure its [dataTextField](/api/wrappers/php/Kendo/UI/ComboBox#datatextfield) and
-[dataValueField](/api/wrappers/php/Kendo/UI/ComboBox#datavaluefield) options and set its [data source](/api/wrappers/php/Kendo/UI/ComboBox#datasource).
+4. Create a [combobox](/api/php/Kendo/UI/ComboBox), configure its [dataTextField](/api/php/Kendo/UI/ComboBox#datatextfield) and
+[dataValueField](/api/php/Kendo/UI/ComboBox#datavaluefield) options and set its [data source](/api/php/Kendo/UI/ComboBox#datasource).
 
         <?php
         $comboBox = new \Kendo\UI\ComboBox('ComboBox');
@@ -67,7 +67,7 @@ to specify the model fields. Those fields are required for filtering.
         $comboBox->dataTextField('ProductName');
         $comboBox->dataValueField('ProductID');
         ?>
-5. Output the combobox by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+5. Output the combobox by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $comboBox->render();

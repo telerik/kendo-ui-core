@@ -13,7 +13,7 @@ The Kendo DateTimePicker for PHP is a server-side wrapper for the [Kendo UI Date
 Here is how to configure a simple Kendo DateTimePicker:
 
 1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-2. Create a [datetimepicker](/api/wrappers/php/Kendo/UI/DateTimePicker).
+2. Create a [datetimepicker](/api/php/Kendo/UI/DateTimePicker).
 
         <?php
         $datetimepicker = new \Kendo\UI\DateTimePicker('datetimepicker');

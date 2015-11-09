@@ -75,7 +75,7 @@ First we will configure a Kendo TreeView for PHP binding and then we will implem
         $data = toHierarchy($rows, 'EmployeeID', 'ReportsTo');
         ?>
 
-1. Create a [data source](/api/wrappers/php/Kendo/Data/DataSource) and set its [data](/api/wrappers/php/Kendo/Data/DataSource#data)
+1. Create a [data source](/api/php/Kendo/Data/DataSource) and set its [data](/api/php/Kendo/Data/DataSource#data)
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -83,7 +83,7 @@ First we will configure a Kendo TreeView for PHP binding and then we will implem
         $dataSource->data($data);
         ?>
 
-1. Create a [treeview](/api/wrappers/php/Kendo/UI/TreeView), configure its [dataTextField](/api/wrappers/php/Kendo/UI/TreeView#dataTextField) and set its [data source](/api/wrappers/php/Kendo/UI/TreeView#datasource).
+1. Create a [treeview](/api/php/Kendo/UI/TreeView), configure its [dataTextField](/api/php/Kendo/UI/TreeView#dataTextField) and set its [data source](/api/php/Kendo/UI/TreeView#datasource).
 
         <?php
         $treeview = new \Kendo\UI\TreeView('treeview');
@@ -94,7 +94,7 @@ First we will configure a Kendo TreeView for PHP binding and then we will implem
 
         ?>
 
-1. Output the treeview by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+1. Output the treeview by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $treeview->render();

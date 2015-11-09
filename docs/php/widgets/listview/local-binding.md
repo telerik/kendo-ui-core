@@ -32,7 +32,7 @@ returned by PDO.
         $products = $statement->fetchAll(PDO::FETCH_ASSOC);
         ?>
 
-4. Create a [data source](/api/wrappers/php/Kendo/Data/DataSource) and set its [data](/api/wrappers/php/Kendo/Data/DataSource#data) and [schema](/api/wrappers/php/Kendo/Data/DataSource#schema). Setting the schema is required
+4. Create a [data source](/api/php/Kendo/Data/DataSource) and set its [data](/api/php/Kendo/Data/DataSource#data) and [schema](/api/php/Kendo/Data/DataSource#schema). Setting the schema is required
 to specify the model fields. Those fields are required for filtering and editing.
 
         <?php
@@ -66,7 +66,7 @@ to specify the model fields. Those fields are required for filtering and editing
         $dataSource->data($products)
                    ->schema($schema);
         ?>
-5. Create a [listview](/api/wrappers/php/Kendo/UI/ListView), configure its [template](/api/wrappers/php/Kendo/UI/ListView#template) and set its [data source](/api/wrappers/php/Kendo/UI/ListView#datasource).
+5. Create a [listview](/api/php/Kendo/UI/ListView), configure its [template](/api/php/Kendo/UI/ListView#template) and set its [data source](/api/php/Kendo/UI/ListView#datasource).
 
 		<script type="text/x-kendo-tmpl" id="template">
     		<div class="product">
@@ -83,7 +83,7 @@ to specify the model fields. Those fields are required for filtering and editing
              ->dataSource($dataSource);
         
         ?>
-6. Output the listview by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+6. Output the listview by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $listview->render();

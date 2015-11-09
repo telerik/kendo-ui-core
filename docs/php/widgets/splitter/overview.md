@@ -109,7 +109,7 @@ Here is how to configure a simple Kendo Splitter:
 		$splitter->addPane($topPane, $middlePane, $bottomPane);
 		?>
 
-1. Output the splitter by echo-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+1. Output the splitter by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
         <?php
         echo $splitter->render();
