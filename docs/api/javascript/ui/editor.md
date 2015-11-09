@@ -1691,7 +1691,7 @@ Defines the initial folder to display, relative to the root.
 
 Specifies the settings for loading and saving data.
 
-### imageBrowser.transport.read `Object|String`
+### imageBrowser.transport.read `Object|String|Function`
 
 Options or URL for remote image retrieval.
 
@@ -1705,6 +1705,25 @@ Options or URL for remote image retrieval.
       imageBrowser: {
         transport: {
           read: "/imagebrowser/read"
+        }
+      }
+    });
+    </script>
+
+#### Example - specify read as a function
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      imageBrowser: {
+        transport: {
+          read: function(options) {
+              // query async service, then call options.success or options.error
+              options.success([
+                { "name": "foo", "type": "d" },
+                { "name": "bar.png", "type": "f", "size": 15289 }
+              ]);
+          }
         }
       }
     });
@@ -2534,7 +2553,7 @@ Defines the initial folder to display, relative to the root.
 
 Specifies the settings for loading and saving data.
 
-### fileBrowser.transport.read `Object|String`
+### fileBrowser.transport.read `Object|String|Function`
 
 Options or URL for remote file retrieval.
 
@@ -2548,6 +2567,25 @@ Options or URL for remote file retrieval.
       fileBrowser: {
         transport: {
           read: "/filebrowser/read"
+        }
+      }
+    });
+    </script>
+
+#### Example - specify read as a function
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      fileBrowser: {
+        transport: {
+          read: function(options) {
+              // query async service, then call options.success or options.error
+              options.success([
+                { "name": "foo", "type": "d" },
+                { "name": "bar.pdf", "type": "f", "size": 15289 }
+              ]);
+          }
         }
       }
     });
