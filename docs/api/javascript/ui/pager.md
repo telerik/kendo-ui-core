@@ -770,7 +770,7 @@ Sets or gets the current page.
 
 #### Parameters
 
-##### page `Boolean`
+##### page `Number`
 
 The new page number.
 
