@@ -37,7 +37,7 @@ var __meta__ = { // jshint ignore:line
         slice = [].slice,
         globalize = window.Globalize;
 
-    kendo.version = "$KENDO_VERSION".trim();
+    kendo.version = "$KENDO_VERSION".replace(/^\s+|\s+$/g, '');
 
     function Class() {}
 
