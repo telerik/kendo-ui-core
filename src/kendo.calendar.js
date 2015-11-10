@@ -1423,7 +1423,7 @@ var __meta__ = { // jshint ignore:line
                 "return false" +
             "}";
 
-        callback = new Function(["date"],body); //jshint ignore:line
+        callback = new Function("date", body); //jshint ignore:line
 
         return callback;
     }
