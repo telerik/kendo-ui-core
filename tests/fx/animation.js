@@ -87,21 +87,17 @@
     });
 
     test("reverse method of the effect is called if reverse = true", 1, function() {
-        var reverseWasCalled = false;
-
         kendo.effects.createEffect("foo", {
            prepare: function() {
-                equal(this._reverse, true);
-                return { start: {}, end: {} };
-            }
+               equal(this._reverse, true);
+               return { start: {}, end: {} };
+           }
         });
 
         animate(span, "foo", true);
     });
 
     asyncTest("passing options to animate works", 2, function() {
-        var reverseWasCalled = false, callbackWasCalled = false;
-
         kendo.effects.createEffect("foo", {
            prepare: function() {
                equal(this._reverse, true);
@@ -120,8 +116,6 @@
     });
 
     asyncTest("passing options to animate effects as string", 2, function() {
-        var reverseWasCalled = false, callbackWasCalled = false;
-
         kendo.effects.createEffect("foo", {
            prepare: function() {
                 equal(this._reverse, true);
@@ -147,7 +141,7 @@
             restore: [ "overflow" ],
 
            prepare: function() {
-                ok(this.element.data("overflow") == "visible")
+                ok(this.element.data("overflow") == "visible");
                 return { start: { overflow: "hidden" } };
             },
 
@@ -172,9 +166,6 @@
         span.kendoAnimate({
             effects: "moo",
             duration: 100,
-            init: function () {
-                oldTime = +new Date();
-            },
             complete: function() {
                 called = true;
                 start();
@@ -205,7 +196,7 @@
                     height = span.height();
                 },
 
-                complete: function(element) {
+                complete: function() {
                     equal(height, 0);
                     equal(span.height(), 20);
                     start();
@@ -230,7 +221,7 @@
                 init: function () {
                     height = span.height();
                 },
-                complete: function(element) {
+                complete: function() {
                     equal(height, 0);
                     equal(span.height(), 100);
                     start();
@@ -250,7 +241,7 @@
                     opacity = span.css("opacity");
                 },
                 complete: function () {
-                    ok(opacity == 0);
+                    ok(opacity === 0);
                     ok(span.css("opacity") == 1);
                     start();
                 }
@@ -259,8 +250,6 @@
 
         asyncTest("fadeOut animates the opacity from 1 to 0", function() {
             span.css({ position: "absolute", display: "block" });
-
-            var opacity = 5;
 
             kendo.effects.Fade.prototype.restore = [];
 
@@ -274,7 +263,7 @@
             });
         });
 
-        if (!kendo.support.browser.msie) // TODO: Write the IE part of this test.
+        if (!kendo.support.browser.msie) { // TODO: Write the IE part of this test.
             asyncTest("zoomIn animates the scale from 0.01 to 1", function() {
                 span.css({ position: "absolute", display: "block" });
 
@@ -293,13 +282,15 @@
                     }
                 });
             });
+        }
 
         asyncTest("slideIn:right moves the element right from - its width to 0", function() {
             span.css({ position: "absolute", display: "block", left: 10 });
 
             var position = 1;
-            if (transforms)
+            if (transforms) {
                 span.css(TRANSFORM, "translateX(10px)");
+            }
 
             span.kendoAnimate({
                 effects: "slideIn:right",
@@ -309,7 +300,7 @@
                 },
                 complete: function () {
                     ok(position == -span.width());
-                    ok((transforms ? animationProperty(span, "translateX") : span.offset().left) == 0);
+                    ok((transforms ? animationProperty(span, "translateX") : span.offset().left) === 0);
                     start();
                 }
             });
@@ -319,8 +310,9 @@
             span.css({ position: "absolute", display: "block", top: 10 });
 
             var position = 1;
-            if (transforms)
+            if (transforms) {
                 span.css(TRANSFORM, "translateY(10px)");
+            }
 
             span.kendoAnimate({
                 effects: "slideIn:down",
@@ -330,7 +322,7 @@
                 },
                 complete: function () {
                     ok(position == -span.height());
-                    ok((transforms ? animationProperty(span, "translateY") : span.offset().top) == 0);
+                    ok((transforms ? animationProperty(span, "translateY") : span.offset().top) === 0);
                     start();
                 }
             });
@@ -347,7 +339,7 @@
                     initialHeight = span.height();
                 },
                 complete: function () {
-                    ok(initialHeight == 0);
+                    ok(initialHeight === 0);
                     ok(span.height() == 100);
                     start();
                 }
@@ -365,7 +357,7 @@
                     initialWidth = span.width();
                 },
                 complete: function () {
-                    ok(initialWidth == 0);
+                    ok(initialWidth === 0);
                     ok(span.width() == 100);
                     start();
                 }
