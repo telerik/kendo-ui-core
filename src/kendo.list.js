@@ -1583,7 +1583,7 @@ var __meta__ = { // jshint ignore:line
                         "} " +
                         "return -1;";
 
-                comparer = new Function(["current", "values"], body);
+                comparer = new Function("current", "values", body);
 
                 that._valueComparer = function(current) {
                     return comparer(current, normalized);
