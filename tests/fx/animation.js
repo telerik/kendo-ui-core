@@ -241,7 +241,7 @@
                     opacity = span.css("opacity");
                 },
                 complete: function () {
-                    ok(opacity === 0);
+                    ok(opacity === '0');
                     ok(span.css("opacity") == 1);
                     start();
                 }
