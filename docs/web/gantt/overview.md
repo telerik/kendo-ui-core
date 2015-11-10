@@ -1,22 +1,26 @@
 ---
 title: Overview
-page_title: Overview of the Kendo UI Gantt widget
-description: Quick steps to help you create a Kendo UI Gantt.
+page_title: Overview | Kendo UI Gantt Widget
+description: "Learn how to initialize and configure the Kendo UI Gantt widget."
+slug: overview_kendoui_gantt_widget
+position: 1
 ---
 
 # Gantt Overview
 
-The Kendo UI Gantt widget displays a set of tasks and dependencies, which are used to visualize project planning data. The widget provides a Treelist section where the tasks can be edited, sorted and reordered in a grid-like fashion, as well as a Timeline section, where the tasks and dependencies are visualized under an adjustable time ruler, and can be resized, moved, edited and removed. It can also display the Timeline in three different views – day, week and month.
+[Kendo UI Gantt widget](http://demos.telerik.com/kendo-ui/gantt/index) displays a set of tasks and dependencies, which are used to visualize project planning data. The widget provides a Treelist section where the tasks can be edited, sorted and reordered in a grid-like fashion, as well as a Timeline section, where the tasks and dependencies are visualized under an adjustable time ruler, and can be resized, moved, edited and removed. It can also display the Timeline in three different views – day, week and month.
 
 ## Getting Started
 
-The Kendo UI Gantt widget needs two special types of Kendo UI DataSource components – the [kendo.data.GanttDataSource](/api/framework/ganttdatasource) for loading tasks, and [kendo.data.GanttDependencyDataSource](/api/framework/ganttdependencydatasource) for loading dependencies (although the widget can work when only tasks are loaded as well). The `GanttDataSource` contains instances of a custom Kendo UI model – [kendo.data.GanttTask](/api/framework/gantttask), which represents the gantt task data items, and the `GanttDependencyDataSource` contains instances of the custom [kendo.data.GanttDependency](/api/framework/ganttdependency) model, which represents the gantt dependency data items.
+The Kendo UI Gantt widget needs two special types of Kendo UI DataSource components – the [`kendo.data.GanttDataSource`](/api/framework/ganttdatasource) for loading tasks, and [`kendo.data.GanttDependencyDataSource`](/api/framework/ganttdependencydatasource) for loading dependencies, although the widget can work when only tasks are loaded as well. The `GanttDataSource` contains instances of a custom Kendo UI model – [`kendo.data.GanttTask`](/api/framework/gantttask), which represents the Gantt task data items - and the `GanttDependencyDataSource` contains instances of the custom [`kendo.data.GanttDependency`](/api/framework/ganttdependency) model, which represents the Gantt dependency data items.
 
-## Binding to local JavaScript array
+## Data Binding
 
-The easiest way to bind the gantt is to provide the tasks and dependencies as an array of JavaScript objects. Here is a minimal working example:
+### Bind to a Local Array
 
-### Example - binding to array of JavaScript objects
+The easiest way to bind the Gantt is to provide the tasks and dependencies as an array of JavaScript objects. 
+
+###### Example - bind to an array of JavaScript objects
 
     <!-- HTML element in which the Kendo UI Gantt will initialize -->
     <div id="gantt"></div>
@@ -49,17 +53,16 @@ The easiest way to bind the gantt is to provide the tasks and dependencies as an
       });
     </script>
 
-This example initializes a gantt widget with two tasks and one dependency between them. You can switch views, edit the tasks, create and delete new tasks and dependencies. Any changes however will be kept in-memory and will be lost when the user refreshes the page. This is why a gantt will most likely be bound to a remote service which will persist the gantt tasks and dependencies.
+This example initializes a Gantt widget with two tasks and one dependency between them. You can switch the views, edit the tasks, create and delete new tasks and dependencies. Any changes, however, are kept in-memory and are lost once the user refreshes the page. That is why it is better to bind the Gantt to a remote service, which persists the Gantt tasks and dependencies.
 
-## Binding to remote service
+### Bind to a Remote Service
 
-In most cases the Kendo UI Gantt widget would be bound to a remote service which will return, create, update or delete gantt tasks and dependencies. The Kendo UI [online demos](http://demos.telerik.com/kendo-ui/web/gantt/) use
-a demo remote service which returns sample gantt tasks and dependencies. That service uses [JSONP](http://en.wikipedia.org/wiki/JSONP) in order to support cross-domain requests.
+In most cases the Kendo UI Gantt widget would be bound to a remote service which will return, create, update or delete Gantt tasks and dependencies. The Kendo UI [online demos](http://demos.telerik.com/kendo-ui/web/gantt/) use a demo remote service, which returns sample Gantt tasks and dependencies. That service uses [JSONP](http://en.wikipedia.org/wiki/JSONP) in order to support cross-domain requests.
 
-> The demo service uses JSONP in order to be accessible cross-domain. If your own service lives in the same domain as the web site you don't need to use JSONP - you can use JSON instead. More information
-about cross-domain requests can be found [here](/howto/use-cors-with-all-modern-browsers).
+> **Important**  
+> The demo service uses JSONP so it can be accessible across domains. If your own service lives in the same domain as the website, you do not need to use JSONP. Use JSON instead. More information about cross-domain requests can be found [here](/howto/use-cors-with-all-modern-browsers).
 
-### Example - binding to remote service
+###### Example - bind to a remote service
 
     <div id="gantt"></div>
     <script>      
@@ -149,24 +152,25 @@ about cross-domain requests can be found [here](/howto/use-cors-with-all-modern-
       });
     </script>
 
-It is important to note how the fields of the scheduler event are configured (in the `schema.model` section) and mapped to the fields returned by the remote service using the `from` option.
+It is important to note how the fields of the scheduler event in the `schema.model` section are configured and mapped to the fields returned by the remote service using the `from` option.
 
-## The fields of kendo.data.GanttTask
+## Configuration
+
+### `kendo.data.GanttTask` Fields
 
 The `kendo.data.GanttTask` object has the following fields:
 
-* end `Date` - the date at which the task ends.
-* expanded `Boolean` - if the task is expanded or not.
-* id `Number` - the unique identifier of the gantt task. Tasks whose `id` is not set are considered as "new".
-* orderId `Number` - the index of the task.
-* parentId `Number` - the unique identifier of the task's parent task. Tasks whose `parentId` is not set or null are considered as "root-level".
-* percentComplete `Number` - the percentage of completion of the task.
-* start `Date` - the date at which the task  starts.
-* summary `Boolean` - if the task is has children or not.
-* title `String` - the title of the task.
+* `end Date` - the date at which the task ends.
+* Expanded `Boolean` - if the task is expanded, or not.
+* `id Number` - the unique identifier of the Gantt task. Tasks, whose `id` is not set, are considered as `"new"`.
+* `orderId Number` - the index of the task.
+* `parentId Number` - the unique identifier of the task's parent task. Tasks, whose `parentId` is not set or null, are considered as `"root-level"`.
+* `percentComplete Number` - the percentage of the task completion.
+* `start Date` - the date at which the task starts.
+* `summary Boolean` - if the task has children, or not.
+* `title String` - the title of the task.
 
-If your remote service stores and returns the gantt tasks in a different format use the `schema.model.fields` and `schema.model.id` options of the data source to describe them.
-The "remote service binding" example shown above shows how to map remote service fields to client-side gantt task fields:
+If your remote service stores and returns the gantt tasks in a different format use the `schema.model.fields` and `schema.model.id` options of the data source to describe them. The "Example - bind to a remote service" above shows how to map remote service fields to client-side Gantt task fields:
 
         schema: {
             model: {
@@ -213,19 +217,19 @@ The "remote service binding" example shown above shows how to map remote service
             }
         }
 
-> All `kendo.data.GanttTask` fields must be listed when using `schema.model.fields`. The fields which represents the `id` of the event must also be set via `schema.model.id`.
+> **Important**  
+> List all `kendo.data.GanttTask` fields when using the `schema.model.fields`. Set the fields which represent the `id` of the event via the `schema.model.id`.
 
-## The fields of kendo.data.GanttDependency
+### `kendo.data.GanttDependency` Fields
 
 The `kendo.data.GanttDependency` object has the following fields:
 
-* id `Number` - the unique identifier of the gantt dependency. Tasks whose `id` is not set are considered as "new".
-* predecessorId `Number` - the unique identifier of the predecessor task.
-* successorId `Number` - the unique identifier of the successor task.
-* type `Number` - the type of the dependency.
+* `id Number` - the unique identifier of the Gantt dependency. Tasks, whose `id` is not set, are considered as `"new"`.
+* `predecessorId Number` - the unique identifier of the predecessor task.
+* `successorId Number` - the unique identifier of the successor task.
+* `type Number` - the type of the dependency.
 
-If your remote service stores and returns the gantt dependencies in a different format use the `schema.model.fields` and `schema.model.id` options of the data source to describe them.
-The "remote service binding" example shown above shows how to map remote service fields to client-side gantt dependency fields:
+If your remote service stores and returns the Gantt dependencies in a different format, use the `schema.model.fields` and `schema.model.id` options of the data source to describe them. The "Example - bind to a remote service" shown above demonstrates how to map remote service fields to client-side Gantt dependency fields:
 
         schema: {
             model: {
@@ -252,22 +256,23 @@ The "remote service binding" example shown above shows how to map remote service
             }
         }
 
-> All `kendo.data.GanttDependency` fields must be listed when using `schema.model.fields`. The fields which represents the `id` of the event must also be set via `schema.model.id`.
+> **Important**  
+> List all `kendo.data.GanttDependency` fields when using the `schema.model.fields`. Set the fields which represent the `id` of the event via the `schema.model.id`.
 
-## Columns
+### Columns
 
-The columns in the treelist section of the Kendo UI Gantt can be idividually configured. The following configuration options are supported:
+The columns in the Treelist section of the Kendo UI Gantt can be idividually configured. The following configuration options are supported:
 
-- field - the field from the task model which will be used to populate the column
-- title - the header text of the column
-- sortable - whether the column can be sorted or not
-- editable - whether the column can be edited or not
-- width - the width of the column
-- format - the format in which the data in the column is represented in.
+- `field` - the field from the task model which will be used to populate the column.
+- `title` - the header text of the column.
+- `sortable` - whether the column can be sorted, or not.
+- `editable` - whether the column can be edited, or not.
+- `width` - the width of the column.
+- `format` - the format in which the data in the column is represented.
 
 To configure individual columns use the [views](/api/web/gantt#configuration-columns) option:
 
-### Example - configure gantt columns
+###### Example - configure Gantt columns
 
     <div id="gantt"></div>
     <script>      
@@ -297,17 +302,17 @@ To configure individual columns use the [views](/api/web/gantt#configuration-col
     });
     </script>
 
-## Views
+### Views
 
-Kendo UI Gantt timeline can display its tasks in different "views". The following views are supported:
+Kendo UI Gantt Timeline can display its tasks in different views. The supported ones are listed below:
 
-- day - the timeline is divided into separate days and hours.
-- week - the timeline is divided into weeks and days.
-- month - the timeline is divided into months and weeks.
+- `day` - the timeline is divided into separate days and hours.
+- `week` - the timeline is divided into weeks and days.
+- `month` - the timeline is divided into months and weeks.
 
-To enable or disable individual other views or configure them use the [views](/api/web/gantt#configuration-views) option:
+To enable or disable individual views or configure them, use the [views](/api/web/gantt#configuration-views) option:
 
-### Example - enable all scheduler views
+###### Example - enable all scheduler views
 
     <div id="gantt"></div>
     <script>
@@ -344,11 +349,11 @@ To enable or disable individual other views or configure them use the [views](/a
     });
     </script>
 
-## Getting reference to a Kendo UI Gantt
+### Get a Gantt Reference
 
-To get a reference to a Kendo UI Gantt instance, use the jQuery `data` and pass "kendoGantt" as argument:
+To get a reference to a Kendo UI Gantt instance, use the jQuery `data` and pass the `"kendoGantt"` as an argument:
 
-### Example - get reference to a Kendo UI Gantt
+###### Example - get a Kendo UI Gantt reference
 
     <div id="gantt"></div>
     <script>
@@ -367,11 +372,13 @@ To get a reference to a Kendo UI Gantt instance, use the jQuery `data` and pass 
     var gantt = $("#gantt").data("kendoGantt");
     </script>
 
-## Using the API of Kendo UI Gantt
+## Gantt API
 
-The gantt widget exposes a set of [methods](/api/web/gantt#methods) and [fields](/api/web/gantt#fields) which the developer can use.
+### Methods and Fields
 
-### Example - using the API of Kendo UI Gantt
+The Gantt widget exposes a set of [methods](/api/web/gantt#methods) and [fields](/api/web/gantt#fields) for you to use.
+
+###### Example - use the Kendo UI Gantt API
 
     <div id="gantt"></div>
     <script>
@@ -391,18 +398,16 @@ The gantt widget exposes a set of [methods](/api/web/gantt#methods) and [fields]
     gantt.view("week"); // Go to week view
     </script>
 
-## Subscribing to the events of Kendo UI Gantt
+### Events
 
-The gantt widget supports a set of [events](/api/web/gantt#events) which the developer can subscribe to. There are two ways to handle events:
+The Gantt widget supports a set of [events](/api/web/gantt#events) for you to subscribe to. There are two ways to handle events:
 
-* Specify the JavaScript function which will handle the event during widget initialization.
+* Specify the JavaScript function which will handle the event during the widget initialization.
 * Use the `bind` method of the widget.
 
-The event handler is the JavaScript function invoked when the event is fired. The argument of the event handler is a JavaScript object which contains event specific data.
-You can get a reference of the widget which fired the event via the `sender` field of the event argument.
-The function context of the event handler (available via the `this` keyword) is set to the instance of the widget which fired the event.
+The event handler is the JavaScript function invoked when the event is fired. The argument of the event handler is a JavaScript object which contains event specific data. Get a widget reference, which fired the event, via the `sender` field of the event argument. The function context of the event handler, available via the `this` keyword, is set to the instance of the widget, which fired the event.
 
-### Example - subscribe to a gantt event during initialization
+###### Example - subscribe to a Gantt event during initialization
 
     <div id="gantt"></div>
     <script>
@@ -422,7 +427,7 @@ The function context of the event handler (available via the `this` keyword) is 
     });
     </script>
 
-### Example - subscribe to a gantt event using the bind method
+###### Example - subscribe to a Gantt event using the `bind` method
 
     <div id="gantt"></div>
     <script>
@@ -444,3 +449,13 @@ The function context of the event handler (available via the `this` keyword) is 
     gantt.bind("navigate", gantt_navigate);
     </script>
     
+## See Also
+
+Other articles on Kendo UI Gantt:
+
+* [JavaScript API Reference](/api/javascript/ui/gantt)
+* [How to Create Custom Views]({% slug howto_create_custom_views_gantt %})
+* [How to Colorize Tasks]({% slug howto_colorize_tasks_gantt %})
+* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/gantt/overview)
+* [Overview of the JSP Tag](/jsp/tags/gantt/overview)
+* [Overview of the PHP Class](/php/widgets/gantt/overview)

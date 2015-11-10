@@ -1,14 +1,15 @@
 ---
-title: Colorizing tasks
-page_title: Colorizing tasks
-description: Colorizing tasks
+title: Colorize Tasks
+page_title: Colorize Tasks | Kendo UI Gantt Widget
+description: "Learn how to colorize tasks in the Kendo UI Gantt widget."
+slug: howto_colorize_tasks_gantt
 ---
 
-# Colorizing tasks
+# Colorize Tasks
 
-The example below demonstrates how to colorize each task based on a condition.
+The example below demonstrates how to colorize each task based on a condition in the Kendo UI Gantt widget.
 
-#### Example:
+###### Example
 
 ```html
     <div id="gantt"></div>
@@ -138,3 +139,10 @@ The example below demonstrates how to colorize each task based on a condition.
 
     </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Gantt:
+
+* [JavaScript API Reference](/api/javascript/ui/gantt)
+* [How to Create Custom Views]({% slug howto_create_custom_views_gantt %})

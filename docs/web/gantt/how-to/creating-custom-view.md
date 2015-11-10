@@ -1,14 +1,15 @@
 ---
-title: Creating custom view
-page_title: Creating custom view
-description: Creating custom view
+title: Create Custom Views
+page_title: Create Custom Views | Kendo UI Gantt Widget
+description: "Learn how to create custom views in the Kendo UI Gantt widget."
+slug: howto_create_custom_views_gantt
 ---
 
-# Creating custom view
+# Create Custom Views
 
-The example below demonstrates how to create a custom view for the Kendo UI Gantt
+The example below demonstrates how to create a custom view in the Kendo UI Gantt.
 
-#### Example:
+###### Example
 
 ```html
     <div id="gantt"></div>
@@ -101,3 +102,10 @@ The example below demonstrates how to create a custom view for the Kendo UI Gant
     });
     </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Gantt:
+
+* [JavaScript API Reference](/api/javascript/ui/gantt)
+* [How to Colorize Tasks]({% slug howto_colorize_tasks_gantt %})
