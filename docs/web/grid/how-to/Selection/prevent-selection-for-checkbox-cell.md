@@ -19,20 +19,20 @@ The following runnable sample demonstrates how to prevent the cell selection for
           dataSource: {
             data: [{foo:1}, {foo:2}]
           },
-          columns: [ 
+          columns: [
             {
               template: '<input type="checkbox" />'
             },
             "foo"
           ],
-          selectable: "multiple cell"  
-        }).on("mouseup", ".k-grid-content tr > td:first-child", function () {
+          selectable: "multiple cell"
+        }).on(kendo.support.msPointers ? "pointerup" : "mouseup", ".k-grid-content tr > td:first-child", function () {
 
           grid.selectable.one("select", function(e) {
             e.preventDefault();
-          });    
+          });
 
-        }).data("kendoGrid");  
+        }).data("kendoGrid");
       });
     </script>
 ```
