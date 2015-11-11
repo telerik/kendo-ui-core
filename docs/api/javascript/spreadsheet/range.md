@@ -11,6 +11,60 @@ An instance of a range object may be obtained as a return value from the Sheet [
 
 ## Methods
 
+### background
+
+Gets or sets the background color of the cells in the range.
+
+#### Parameters
+
+##### value `String` *optional*
+
+Any valid [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value).
+
+#### Returns
+
+`String` the current background color of the top-left cell of the range.
+
+#### Example
+
+```
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
+    $("#spreadsheet").kendoSpreadsheet();
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var sheet = spreadsheet.activeSheet();
+    sheet.range("A1:B2").value("foo");
+    sheet.range("A1").background("green");
+    sheet.range("A2").background("#a0b0c0");
+    sheet.range("B1").background("rgb(255,0, 255)");
+</script>
+```
+
+### bold
+
+Gets or sets the bold state of the cells in the range.
+
+##### value `Boolean` *optional*
+
+True to make the text bold; false otherwise.
+
+#### Returns
+
+`Boolean` the current bold state of the top-left cell of the range.
+
+#### Example
+
+```
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
+    $("#spreadsheet").kendoSpreadsheet();
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var sheet = spreadsheet.activeSheet();
+    sheet.range("A1").value("bold");
+    sheet.range("A1").bold(true);
+</script>
+```
+
 ### borderBottom
 
 Gets or sets the state of the bottom border of the cells. If the range includes more than a single cell, the setting is applied to all cells.
@@ -31,17 +85,17 @@ The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/
 #### Example
 
 ```
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        sheet.range("A2:B3").borderBottom({ size: "2px", color: "green" });
-    </script>
+    sheet.range("A2:B3").borderBottom({ size: "2px", color: "green" });
+</script>
 ```
 
 ### borderLeft
@@ -64,17 +118,17 @@ The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/
 #### Example
 
 ```
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        sheet.range("A2:B3").borderLeft({ size: "2px", color: "green" });
-    </script>
+    sheet.range("A2:B3").borderLeft({ size: "2px", color: "green" });
+</script>
 ```
 
 ### borderRight
@@ -97,17 +151,17 @@ The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/
 #### Example
 
 ```
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        sheet.range("A2:B3").borderRight({ size: "2px", color: "green" });
-    </script>
+    sheet.range("A2:B3").borderRight({ size: "2px", color: "green" });
+</script>
 ```
 
 ### borderTop
@@ -130,17 +184,46 @@ The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/
 #### Example
 
 ```
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        sheet.range("A2:B3").borderTop({ size: "2px", color: "green" });
-    </script>
+    sheet.range("A2:B3").borderTop({ size: "2px", color: "green" });
+</script>
+```
+
+### color
+
+Gets or sets the text color of the range.
+
+#### Parameters
+
+##### value `String` *optional*
+
+Any valid [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value).
+
+#### Returns
+
+`String` the current color of the top-left cell of the range.
+
+#### Example
+
+```
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
+    $("#spreadsheet").kendoSpreadsheet();
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var sheet = spreadsheet.activeSheet();
+    sheet.range("A1:B2").value("foo");
+    sheet.range("A1").color("green");
+    sheet.range("A2").color("#a0b0c0");
+    sheet.range("B1").color("rgb(255,0, 255)");
+</script>
 ```
 
 ### clear
@@ -158,19 +241,19 @@ If a parameter is not passed, the method will clear both the cells values and th
 #### Example
 
 ```
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        sheet.range("A1").value(1);
-        sheet.range("A2").value(2);
-        sheet.range("A1:A2").clear();
-    </script>
+    sheet.range("A1").value(1);
+    sheet.range("A2").value(2);
+    sheet.range("A1:A2").clear();
+</script>
 ```
 
 ### clearFilter
@@ -186,38 +269,38 @@ The column(s) which filters should be cleared.
 #### Example - clear the filters for a column
 
 ```
-    <div id="spreadsheet"></div>
+<div id="spreadsheet"></div>
 
-    <script type="text/javascript" charset="utf-8">
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        var values = [
-            [ "C 1", "C 2", "C 3" ],
-            [ 7, 5, 6 ],
-            [ 7, 8, 9 ],
-            [ 6, 3, 9 ]
-        ];
+    var values = [
+        [ "C 1", "C 2", "C 3" ],
+        [ 7, 5, 6 ],
+        [ 7, 8, 9 ],
+        [ 6, 3, 9 ]
+    ];
 
-        sheet.range("A1:C4").values(values);
+    sheet.range("A1:C4").values(values);
 
-        var filter = new kendo.spreadsheet.ValueFilter({ values: [ 7 ] });
-        var filter2 = new kendo.spreadsheet.ValueFilter({ values: [ 8 ] });
+    var filter = new kendo.spreadsheet.ValueFilter({ values: [ 7 ] });
+    var filter2 = new kendo.spreadsheet.ValueFilter({ values: [ 8 ] });
 
-        sheet.range("A1:C4").filter([
-          { column: 0, filter: filter },
-            { column: 1, filter: filter2 }
-        ]);
+    sheet.range("A1:C4").filter([
+      { column: 0, filter: filter },
+        { column: 1, filter: filter2 }
+    ]);
 
-        // row 3 will be visible now.
+    // row 3 will be visible now.
 
-        sheet.range("A1:C3").clearFilter([ 1 ]);
-        // the filter on B column will be cleared, so rows 2 and 3 will be visible.
-    </script>
+    sheet.range("A1:C3").clearFilter([ 1 ]);
+    // the filter on B column will be cleared, so rows 2 and 3 will be visible.
+</script>
 
 ```
 
@@ -295,113 +378,165 @@ Determines the action performed by the method.
 #### Example - enable filter
 
 ```
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        var values = [
-            [ 1, 2, 3 ],
-            [ 4, 5, 6 ],
-            [ 7, 8, 9 ]
-        ];
+    var values = [
+        [ 1, 2, 3 ],
+        [ 4, 5, 6 ],
+        [ 7, 8, 9 ]
+    ];
 
-        sheet.range("A1:C3").values(values);
+    sheet.range("A1:C3").values(values);
 
-        sheet.range("A1:C3").filter(true);
-    </script>
+    sheet.range("A1:C3").filter(true);
+</script>
 ```
 
 #### Example - disable filter
 ```
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        var values = [
-            [ 1, 2, 3 ],
-            [ 4, 5, 6 ],
-            [ 7, 8, 9 ]
-        ];
+    var values = [
+        [ 1, 2, 3 ],
+        [ 4, 5, 6 ],
+        [ 7, 8, 9 ]
+    ];
 
-        sheet.range("A1:C3").values(values);
+    sheet.range("A1:C3").values(values);
 
-        sheet.range("A1:C3").filter(true);
-        sheet.range("A1:C3").filter(false);
-    </script>
+    sheet.range("A1:C3").filter(true);
+    sheet.range("A1:C3").filter(false);
+</script>
 ```
 
 #### Example - set filter
 ```
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        var values = [
-            [ 1, 2, 3 ],
-            [ 4, 5, 6 ],
-            [ 7, 8, 9 ]
-        ];
+    var values = [
+        [ 1, 2, 3 ],
+        [ 4, 5, 6 ],
+        [ 7, 8, 9 ]
+    ];
 
-        var values = [
-            [ "C 1", "C 2", "C 3" ],
-            [ 4, 5, 6 ],
-            [ 7, 8, 9 ]
-        ];
+    var values = [
+        [ "C 1", "C 2", "C 3" ],
+        [ 4, 5, 6 ],
+        [ 7, 8, 9 ]
+    ];
 
-        sheet.range("A1:C3").values(values);
+    sheet.range("A1:C3").values(values);
 
-        var filter = new kendo.spreadsheet.ValueFilter({ values: [ 7 ] });
+    var filter = new kendo.spreadsheet.ValueFilter({ values: [ 7 ] });
 
-        sheet.range("A1:C3").filter({ column: 0, filter: filter });
-    </script>
+    sheet.range("A1:C3").filter({ column: 0, filter: filter });
+</script>
 ```
 
 #### Example - set multiple filters
 
 ```
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
 
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
+    $("#spreadsheet").kendoSpreadsheet();
 
-        $("#spreadsheet").kendoSpreadsheet();
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var sheet = spreadsheet.activeSheet();
 
-        var sheet = spreadsheet.activeSheet();
+    var values = [
+        [ "C 1", "C 2", "C 3" ],
+        [ 4, 5, 6 ],
+        [ 7, 8, 9 ]
+    ];
 
-        var values = [
-            [ "C 1", "C 2", "C 3" ],
-            [ 4, 5, 6 ],
-            [ 7, 8, 9 ]
-        ];
+    sheet.range("A1:C3").values(values);
 
-        sheet.range("A1:C3").values(values);
+    var filter = new kendo.spreadsheet.ValueFilter({ values: [ 7 ] });
+    var filter2 = new kendo.spreadsheet.ValueFilter({ values: [ 8 ] });
 
-        var filter = new kendo.spreadsheet.ValueFilter({ values: [ 7 ] });
-        var filter2 = new kendo.spreadsheet.ValueFilter({ values: [ 8 ] });
-
-        sheet.range("A1:C3").filter([
-            { column: 0, filter: filter },
-            { column: 1, filter: filter2 }
-        ]);
-    </script>
+    sheet.range("A1:C3").filter([
+        { column: 0, filter: filter },
+        { column: 1, filter: filter2 }
+    ]);
+</script>
 ```
 
+### fontFamily
+
+Gets or sets the font family of the cells in the range.
+
+#### Parameters
+
+##### value `String` *optional*
+
+The font family that should be set.
+
+#### Returns
+
+`String` the font family of the top-left cell of the range.
+
+#### Example
+
+```
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
+    $("#spreadsheet").kendoSpreadsheet();
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var sheet = spreadsheet.activeSheet();
+    sheet.range("A1:B1").value("monospace");
+    sheet.range("A1").fontFamily("monospace");
+</script>
+```
+
+### fontSize
+
+Gets or sets the font size of the cells in the range.
+
+#### Parameters
+
+##### value `Number` *optional*
+
+The font size (in pixels) that should be set.
+
+#### Returns
+
+`Number` the font size of the top-left cell of the range.
+
+#### Example
+
+```
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
+    $("#spreadsheet").kendoSpreadsheet();
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var sheet = spreadsheet.activeSheet();
+    sheet.range("A1").value("50px");
+    sheet.range("A1").fontSize(50);
+</script>
+```
 
 ### format
 
@@ -423,17 +558,17 @@ More details about the supported format may be found in [the cell formatting hel
 #### Example
 
 ```
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        sheet.range("A1").value(12.3456).format("#.###");
-    </script>
+    sheet.range("A1").value(12.3456).format("#.###");
+</script>
 ```
 
 ### formula
@@ -453,19 +588,19 @@ The new formula of the cell. The string may optionally start with `=`.
 #### Example
 
 ```
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        sheet.range("A1").input("1000");
-        sheet.range("A2").formula("A1*2");
-        console.log(sheet.range("A2").formula()); // "A1*2"
-    </script>
+    sheet.range("A1").input("1000");
+    sheet.range("A2").formula("A1*2");
+    console.log(sheet.range("A2").formula()); // "A1*2"
+</script>
 ```
 
 ### hasFilter
@@ -479,35 +614,35 @@ Returns `true` if the sheet of the range has filter enabled.
 #### Example - clear the filters for a column
 
 ```
-    <div id="spreadsheet"></div>
+<div id="spreadsheet"></div>
 
-    <script type="text/javascript" charset="utf-8">
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        var values = [
-            [ "C 1", "C 2", "C 3" ],
-            [ 7, 5, 6 ],
-            [ 7, 8, 9 ],
-            [ 6, 3, 9 ]
-        ];
+    var values = [
+        [ "C 1", "C 2", "C 3" ],
+        [ 7, 5, 6 ],
+        [ 7, 8, 9 ],
+        [ 6, 3, 9 ]
+    ];
 
-        sheet.range("A1:C4").values(values);
+    sheet.range("A1:C4").values(values);
 
-        var filter = new kendo.spreadsheet.ValueFilter({ values: [ 7 ] });
-        var filter2 = new kendo.spreadsheet.ValueFilter({ values: [ 8 ] });
+    var filter = new kendo.spreadsheet.ValueFilter({ values: [ 7 ] });
+    var filter2 = new kendo.spreadsheet.ValueFilter({ values: [ 8 ] });
 
-        sheet.range("A1:C4").filter([
-          { column: 0, filter: filter },
-            { column: 1, filter: filter2 }
-        ]);
+    sheet.range("A1:C4").filter([
+      { column: 0, filter: filter },
+        { column: 1, filter: filter2 }
+    ]);
 
-        console.log(sheet.range("A1:C4").hasFilter());
-    </script>
+    console.log(sheet.range("A1:C4").hasFilter());
+</script>
 ```
 
 
@@ -534,20 +669,19 @@ The value to be set to the cells.
 #### Example
 
 ```
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        sheet.range("A1").input("1");
-        sheet.range("A2").input("=A1*2");
-    </script>
+    sheet.range("A1").input("1");
+    sheet.range("A2").input("=A1*2");
+</script>
 ```
-
 
 ### isSortable
 
@@ -560,21 +694,21 @@ Returns if a range can be sorted.
 #### Example
 
 ```
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        var range = sheet.range("A1:B1");
+    var range = sheet.range("A1:B1");
 
-        if (range.isSortable()) {
-            range.sort()
-        }
-    </script>
+    if (range.isSortable()) {
+        range.sort()
+    }
+</script>
 ```
 
 ### isFilterable
@@ -588,21 +722,48 @@ Returns if a range can be filtered.
 #### Example
 
 ```
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        var range = sheet.range("A1:B1");
+    var range = sheet.range("A1:B1");
 
-        if (range.isFilterable()) {
-            range.filter(true);
-        }
-    </script>
+    if (range.isFilterable()) {
+        range.filter(true);
+    }
+</script>
+```
+
+### italic
+
+Gets or sets the italic state of the cells in the range.
+
+#### Parameters
+
+##### value `Boolean` *optional*
+
+True will make the text of the cells italic; false otherwise.
+
+#### Returns
+
+`Boolean` the current italic state of the top-left cell of the range.
+
+#### Example
+
+```
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
+    $("#spreadsheet").kendoSpreadsheet();
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var sheet = spreadsheet.activeSheet();
+    sheet.range("A1").value("italic");
+    sheet.range("A1").italic(true);
+</script>
 ```
 
 ### merge
@@ -612,17 +773,17 @@ Merges the range cells into a single merged cell. If the range already includes 
 #### Example
 
 ```
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        sheet.range("A1:B2").merge();
-    </script>
+    sheet.range("A1:B2").merge();
+</script>
 ```
 
 
@@ -631,17 +792,17 @@ Merges the range cells into a single merged cell. If the range already includes 
 Sets the sheet selection to the range cells.
 
 ```
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        sheet.range("A1:B2").select();
-    </script>
+    sheet.range("A1:B2").select();
+</script>
 ```
 
 ### sort
@@ -661,49 +822,82 @@ Determines the action performed by the method.
 #### Example - sort a single column
 
 ```
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        var values = [
-            [ 1, 2, 3 ],
-            [ 7, 8, 9 ],
-            [ 4, 5, 6 ]
-        ];
+    var values = [
+        [ 1, 2, 3 ],
+        [ 7, 8, 9 ],
+        [ 4, 5, 6 ]
+    ];
 
-        sheet.range("A1:C3").values(values);
+    sheet.range("A1:C3").values(values);
 
-        sheet.range("A1:C3").sort(1);
-    </script>
+    sheet.range("A1:C3").sort(1);
+</script>
 ```
 
 #### Example - sort a column in descending order
 
 ```
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        var values = [
-            [ 1, 2, 3 ],
-            [ 7, 8, 9 ],
-            [ 4, 5, 6 ]
-        ];
+    var values = [
+        [ 1, 2, 3 ],
+        [ 7, 8, 9 ],
+        [ 4, 5, 6 ]
+    ];
 
-        sheet.range("A1:C3").values(values);
+    sheet.range("A1:C3").values(values);
 
-        sheet.range("A1:C3").sort({ column: 2, ascending: false });
-    </script>
+    sheet.range("A1:C3").sort({ column: 2, ascending: false });
+</script>
+```
+
+### textAlign
+
+Gets or sets the text alignment of the cells in the range.
+
+#### Parameters
+
+##### value `String` *optional*
+
+One of the following values: "left", "center", "right" and "justify".
+
+#### Returns
+
+`String` the current text alignment of the top-left cell of the range.
+
+#### Example
+
+```
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
+    $("#spreadsheet").kendoSpreadsheet();
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var sheet = spreadsheet.activeSheet();
+    sheet.range("A1").value("left");
+    sheet.range("A1").textAlign("left");
+    sheet.range("A2").value("right");
+    sheet.range("A2").textAlign("right");
+    sheet.range("A3").value("center");
+    sheet.range("A3").textAlign("center");
+    sheet.range("A4").value("justify");
+    sheet.range("A4").textAlign("justify");
+</script>
 ```
 
 ### unmerge
@@ -711,19 +905,19 @@ Determines the action performed by the method.
 Un-merges any merged cells which are included in the range.
 
 ```
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        sheet.range("A1:B2").merge();
-        sheet.range("B3:C3").merge();
-        sheet.range("A1:D4").unmerge(); // this will unmerge both merged cells.
-    </script>
+    sheet.range("A1:B2").merge();
+    sheet.range("B3:C3").merge();
+    sheet.range("A1:D4").unmerge(); // this will unmerge both merged cells.
+</script>
 ```
 
 ### values
@@ -739,23 +933,23 @@ The cell values.
 #### Example
 
 ```
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        var values = [
-            [ 1, 2, 3 ],
-            [ 4, 5, 6 ],
-            [ 7, 8, 9 ]
-        ];
+    var values = [
+        [ 1, 2, 3 ],
+        [ 4, 5, 6 ],
+        [ 7, 8, 9 ]
+    ];
 
-        sheet.range("A1:C3").values(values);
-    </script>
+    sheet.range("A1:C3").values(values);
+</script>
 ```
 
 ### validation
@@ -791,24 +985,24 @@ The `titleTemplate` The title of the "reject" validation window.
 #### Example
 
 ```
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        sheet.range("A1").value(4);
-        sheet.range("A1").validation({
-            from: "1",
-            to: "2",
-            comparerType: "between",
-            dataType: "number",
-            messageTemplate: "Number should match the validation."
-        });
-    </script>
+    sheet.range("A1").value(4);
+    sheet.range("A1").validation({
+        from: "1",
+        to: "2",
+        comparerType: "between",
+        dataType: "number",
+        messageTemplate: "Number should match the validation."
+    });
+</script>
 ```
 
 ### value
@@ -830,17 +1024,51 @@ The value to be set to the cells.
 #### Example
 
 ```
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        sheet.range("A1:B2").value("foo");
-    </script>
+    sheet.range("A1:B2").value("foo");
+</script>
+```
+
+### verticalAlign
+
+Gets or sets the vertical alignment of the cells in the range.
+
+#### Parameters
+
+##### value `String` *optional*
+
+One of the following values: "top", "middle" and "bottom".
+
+#### Returns
+
+`String` the current text alignment of the top-left cell of the range.
+
+#### Example
+
+```
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
+    $("#spreadsheet").kendoSpreadsheet();
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var sheet = spreadsheet.activeSheet();
+    sheet.rowHeight(0, 40);
+    sheet.rowHeight(1, 40);
+    sheet.rowHeight(2, 40);
+    sheet.range("A1").value("top");
+    sheet.range("A1").verticalAlign("top");
+    sheet.range("A2").value("middle");
+    sheet.range("A2").verticalAlign("middle");
+    sheet.range("A3").value("bottom");
+    sheet.range("A3").verticalAlign("bottom");
+</script>
 ```
 
 ### wrap
@@ -860,16 +1088,16 @@ Gets or sets the wrap of the range cells.
 #### Example
 
 ```
-    <div id="spreadsheet"></div>
-    <script type="text/javascript" charset="utf-8">
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
 
-        $("#spreadsheet").kendoSpreadsheet();
+    $("#spreadsheet").kendoSpreadsheet();
 
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
 
-        var sheet = spreadsheet.activeSheet();
+    var sheet = spreadsheet.activeSheet();
 
-        sheet.range("A2").value("long long long long long long text");
-        sheet.range("A2:B3").wrap(true);
-    </script>
+    sheet.range("A2").value("long long long long long long text");
+    sheet.range("A2:B3").wrap(true);
+</script>
 ```
