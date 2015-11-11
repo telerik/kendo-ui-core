@@ -40,7 +40,7 @@ These are immensely useful when you need to track down particular issues or beha
 
 - Install [Microsoft ASP.NET (Beta8)](http://docs.asp.net/en/latest/getting-started/installing-on-linux.html) on one of the supported Linux distributions
 - Download the matching release of the [Sample Application](https://github.com/telerik/ui-for-aspnet-mvc-6-demos/releases)
-- Navigate to the `Kendo.Mvc.Examples` folder using terminal
+- Navigate to the `Kendo.Mvc.Examples` folder using Terminal
 - Restore the packages using `dnu restore` command
 - Run the application using `dnx web` command
 - In your browser navigate to `localhost:5000`
