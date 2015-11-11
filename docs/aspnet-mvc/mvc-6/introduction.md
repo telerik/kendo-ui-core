@@ -36,6 +36,15 @@ These are immensely useful when you need to track down particular issues or beha
 - Open the `Kendo.Mvc.Examples.sln` solution in Visual Studio.
 - Run the application.
 
+# Running the Sample Application on Linux
+
+- Install [Microsoft ASP.NET (Beta8)](http://docs.asp.net/en/latest/getting-started/installing-on-linux.html) on one of the supported Linux distributions
+- Download the matching release of the [Sample Application](https://github.com/telerik/ui-for-aspnet-mvc-6-demos/releases)
+- Navigate to the `Kendo.Mvc.Examples` folder using terminal
+- Restore the packages using `dnu restore` command
+- Run the application using `dnx web` command
+- In your browser navigate to `localhost:5000`
+
 # See Also
 
 - [Installing Telerik UI for ASP.NET MVC in an MVC 6 project](getting-started)
