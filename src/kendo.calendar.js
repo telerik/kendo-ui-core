@@ -1400,7 +1400,7 @@ var __meta__ = { // jshint ignore:line
         if ($.isArray(option)) {
             return createDisabledExpr(option);
         }
-        return new Function(); //jshint ignore:line
+        return $.noop;
     }
 
     function createDisabledExpr(dates) {
