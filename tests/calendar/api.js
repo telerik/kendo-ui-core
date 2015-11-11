@@ -677,7 +677,7 @@ test("today link should be enabled on _footer(true)", function() {
     cal._footer(cal.footer);
 
     ok(cal._today[0]);
-    ok(!cal._today.hasClass("t-state-disabled"));
+    ok(!cal._today.hasClass("k-state-disabled"));
 });
 
 test("value method honors options.culture", function() {
@@ -789,6 +789,72 @@ test("setOptions updates options.dates", 1, function() {
     });
 
     equal(calendar.options.dates.length, 2);
+});
+
+test("disabled date does get k-state-focused class", 1, function() {
+    var calendar = new Calendar(div, {
+        value: new Date(2015,9,3),
+		disableDates: ["mo", "sa"]
+    });
+    var cell = calendar.element.find("td").eq(6);
+    cell.trigger("click");
+    var focused = cell.hasClass("k-state-focused");
+    equal(focused, false);
+});
+
+test("disabled date does get k-state-focused class when calleback is used", 1, function() {
+    var calendar = new Calendar(div, {
+        value: new Date(2015,9,3),
+		disableDates: function(date) {
+            if (date && date.getDate() == 4) {
+                return true
+            } else {
+                return false
+            }
+        }
+    });
+   equal($("tr").eq(2).find("td").hasClass("k-state-disabled"), true);
+});
+
+test("clicking today button does not set the widgets value", 1, function() {
+    var calendar = new Calendar(div, {
+        value: new Date(2015,9,3),
+		disableDates: ["mo", "tu", "we", "th", "fr", "sa", "su"]
+    });
+    $(".k-nav-today").click();
+    equal(calendar.value(), null);
+});
+
+test("today link is disabled if the respecitve date is disabled", 1, function() {
+    var today = new Date();
+    var max = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+    var calendar = new Calendar(div, {
+        disableDates: ["mo", "tu", "we", "th", "fr", "sa", "su"]
+    });
+    calendar.max(max);
+    equal($(".k-footer>a").hasClass("k-state-disabled"), true);
+});
+
+test("_current is not set if date is disabled", 1, function() {
+    var calendar = new Calendar(div, {
+        value: new Date(2015,9,12),
+        disableDates: ["mo", "fr"]
+    });
+
+    calendar.value(new Date(2015,9,13));
+    $("[data-value='2015/9/12']").trigger("click");
+
+    equal(calendar.current().getDate(), 13);
+});
+
+test("_current is not set if date is disabled", 1, function() {
+    var calendar = new Calendar(div, {
+        value: new Date(2015,9,12),
+		disableDates: ["mo", "th"]
+    });
+
+    calendar.value(new Date(2015,9,15));
+    equal(calendar.value(), null);
 });
 
 })();

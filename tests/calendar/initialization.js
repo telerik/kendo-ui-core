@@ -304,4 +304,41 @@ test("Widget does not fall into infinitive loop", function() {
     ok(true);
 });
 
+test("Widget sets disabled class correctly when callback is set", function() {
+    var cal = new Calendar(div, {
+        value: new Date(2015,9,12),
+		disableDates: function(date) {
+            if (date.getDate() == 27) {
+                return true;
+            }
+        }
+    });
+    ok(cal.element.find("tbody>tr>td").first().hasClass("k-state-disabled"));
+});
+
+test("Widget sets disabled class correctly when array is set", function() {
+    var cal = new Calendar(div, {
+        value: new Date(2015,9,12),
+		disableDates: ["mo", "su"]
+    });
+    ok($('tr').eq(2).children().first().hasClass("k-state-disabled"));
+});
+
+test("Widget value is not set if value is disbaled date", function() {
+    var cal = new Calendar(div, {
+        value: new Date(2015,9,3),
+		disableDates: ["mo", "sa"]
+    });
+    ok(cal.element.find("tr").eq(1).children().last().hasClass("k-state-disabled"));
+});
+
+test("Widget value is correctly after initialized with disabled value", function() {
+    var cal = new Calendar(div, {
+        value: new Date(2015,9,3),
+		disableDates: ["mo", "sa"]
+    });
+    cal.value(new Date(2015,9,4))
+    ok(cal.element.find('tr').eq(2).children().first().hasClass("k-state-selected"));
+});
+
 }());

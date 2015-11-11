@@ -821,4 +821,47 @@ test("setOptions updates max option correctly", 1, function() {
     ok(datetimepicker.timeView.ul.children().length > 1);
 });
 
+
+test("does not set disabled date as value", 1, function() {
+    var datetimepicker = new DateTimePicker(input, {
+        value: new Date(2015,9,20, 10,10,10),
+		disableDates: ["tu"]
+    });
+
+    equal(datetimepicker.value(), null);
+});
+
+test("does not update the input when disabled value is set", 1, function() {
+    var datetimepicker = new DateTimePicker(input, {
+        value: new Date(2015,9,20, 10,10,10),
+        disableDates: ["tu"]
+    });
+
+    equal(datetimepicker.element.val().length, 0);
+});
+
+test("manually setting disabled date, does not set the widget value", 2, function() {
+    var datetimepicker = new DateTimePicker(input, {
+        value: new Date(2015,9,19, 10,10,10),
+        disableDates: ["tu"]
+    });
+    datetimepicker.element.val("10/13/2015 12:00 AM");
+    datetimepicker.element.blur();
+
+    equal(datetimepicker.element.val(), "10/13/2015 12:00 AM");
+    equal(datetimepicker.value(), null);
+});
+
+test("manually setting disabled date, does not set the widget value", 2, function() {
+    var datetimepicker = new DateTimePicker(input, {
+        value: new Date(2015,9,19, 10,10,10),
+        disableDates: ["tu"]
+    });
+    datetimepicker.element.val("10/13/2015 12:00 AM");
+    datetimepicker.element.blur();
+
+    equal(datetimepicker.element.val(), "10/13/2015 12:00 AM");
+    equal(datetimepicker.value(), null);
+});
+
 })();
