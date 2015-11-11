@@ -752,7 +752,6 @@ var __meta__ = { // jshint ignore:line
                 .find(DRAG_HANDLE)
                 .attr(TABINDEX, 0)
                 .on(MOUSE_UP, function () {
-                    that._drag.draggable.userEvents.cancel();
                     that._setTooltipTimeout();
                 })
                 .on(CLICK, function (e) {
@@ -1007,7 +1006,8 @@ var __meta__ = { // jshint ignore:line
             this.owner._activeDragHandle = this;
             // HACK to initiate click on the line
             this.draggable.userEvents.cancel();
-            this.draggable.userEvents._start(e);
+            this._dragstart(e);
+            this.dragend();
         },
 
         _dragstart: function(e) {
@@ -1137,10 +1137,6 @@ var __meta__ = { // jshint ignore:line
                 tooltip = options.tooltip,
                 html = "";
 
-            if (that.val) {
-                val = that.val;
-            }
-
             if (!tooltip.enabled) {
                 return;
             }
@@ -1178,6 +1174,7 @@ var __meta__ = { // jshint ignore:line
                 that.draggable.userEvents._disposeAll();
             }
 
+            that.draggable.userEvents.cancel();
             return that._end();
         },
 
@@ -1458,7 +1455,6 @@ var __meta__ = { // jshint ignore:line
                 .attr(TABINDEX, 0)
                 .on(MOUSE_UP, function () {
                     that._setTooltipTimeout();
-                    that._drag.draggable.userEvents.cancel();
                 })
                 .on(CLICK, function (e) {
                     that._focusWithMouse(e.target);
