@@ -1806,7 +1806,7 @@ The [template](/api/javascript/kendo#methods-template) which renders the labels.
 The fields which can be used in the template are:
 
 * value - the category value
-* dataItem - the data item, in case a field has been specified
+* dataItem - the data item, in case a field has been specified. If the category does not have a corresponding item in the data then an empty object will be passed.
 * format - the default format of the label
 * culture - the default culture (if set) on the label
 
