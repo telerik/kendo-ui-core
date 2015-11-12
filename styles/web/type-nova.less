@@ -785,8 +785,13 @@ input.k-textbox:active {
     background-color: @widget-background-color;
 }
 
-.k-grid-content tr:hover {
+.k-grid tr:hover {
     background-color: @hover-background;
+}
+
+.k-grid-header th.k-state-focused,
+.k-grid td.k-state-focused {
+    box-shadow: inset 0 0 0 1px darken(@widget-border-color, 27%);
 }
 
 .k-grid-toolbar .k-button,
@@ -877,10 +882,25 @@ input.k-textbox:active {
     border-color: @widget-border-color;
 }
 
+.k-grid td.k-state-selected,
+.k-grid tr.k-state-selected > td {
+    border-color: fadeout(@widget-border-color, 20%);
+}
+
 .k-grid tr.k-state-selected,
 .k-grid td.k-state-selected,
 .k-grid td.k-state-selected.k-state-focused {
     background-color: lighten(@info, 22%);
+}
+
+.k-grid tr:hover .k-state-selected,
+.k-grid tr.k-state-selected:hover td {
+    background-color: fadeout(@info, 75%);
+}
+
+.k-grid tr:hover .k-state-focused.k-state-selected,
+.k-grid tr.k-state-selected:hover td.k-state-focused {
+    box-shadow: inset 0 0 0 1px darken(@widget-border-color, 35%);
 }
 
 .k-marquee-color {
