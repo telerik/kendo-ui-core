@@ -9,8 +9,10 @@ body, html,
 
 body, html {
     min-height: 100%;
-    height: 100%;
-    overflow: hidden;
+}
+
+html {
+    padding-top: 79px;
 }
 
 body {
@@ -46,7 +48,19 @@ code, em {
 /* Header */
 
 #page-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
     font-size: 12px;
+    z-index: 100;
+}
+
+/* adjust anchors for fixed header*/
+:target:before {
+    content: "";
+    display: block;
+    height: 85px;
+    margin: -85px 0 0;
 }
 
 #page-header:after {
@@ -109,8 +123,8 @@ code, em {
 /* Topic navigation */
 
 #page-nav {
-    position: absolute;
-    top: 0;
+    position: fixed;
+    top: 79px;
     left: 0;
     width: 18%;
     height: 100%;
@@ -131,7 +145,9 @@ code, em {
 
 #markdown-toc {
     border-bottom: 1px solid #ebecee;
-    position: absolute;
+    position: fixed;
+    background-color: #fff;
+    top: 79px;
     z-index: 5;
     right: 0;
     font-size: 12px;
@@ -193,7 +209,6 @@ code, em {
 
 #page-inner-content {
     position: relative;
-    overflow: hidden;
     margin: 0;
 }
 
@@ -208,11 +223,6 @@ code, em {
 #page-article {
     background-color: #ffffff;
     line-height: 1.5;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    overflow: auto;
     padding: 30px 0 0;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -221,13 +231,13 @@ code, em {
     font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
-#markdown-toc + #page-article {
-    top: 51px;
-}
-
 #markdown-toc,
 #page-article {
     width: 82%;
+}
+
+#page-article {
+    padding-left: 18%;
 }
 
 #page-article article {
@@ -350,6 +360,18 @@ h6 {
     font-size: 12px;
     text-transform: uppercase;
     font-weight: 700;
+}
+
+#markdown-toc + #page-article {
+    /* adjust for ToC fixed positioning */
+    padding-top: 80px;
+}
+
+#markdown-toc + #page-article :target:before {
+    content: "";
+    display: block;
+    height: 135px;
+    margin: -135px 0 0;
 }
 
 #markdown-toc + #page-article h1 {
@@ -733,8 +755,8 @@ footer p {
         width: 70%;
     }
 
-    #page-search {
-        left: 30%;
+    #page-article {
+        padding-left: 30%;
     }
 
     .btn.pricing-btn {
@@ -743,6 +765,7 @@ footer p {
 
     #page-search {
         right: 390px;
+        left: 30%;
     }
 }
 
@@ -776,15 +799,12 @@ footer p {
         min-width: 250px;
     }
 
-    div#page-inner-content {
-        bottom: 0;
-    }
-
     #page-article {
         width: 100%;
         margin-left: 0;
+        padding-left: 0;
     }
-    
+
     #page-article article {
       margin-left: 2em;
       margin-right: 2em;
@@ -892,3 +912,4 @@ footer p {
     box-sizing: border-box;
     padding: 5px;
 }
+
