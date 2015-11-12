@@ -73,7 +73,7 @@
 @scheduler-background-color: contrast(@normal-text-color, @background, darken(@background, 10%), 0.5);
 @current-time-color: darken(@error, 29%);
 @event-background-color: contrast(@selected-background, lighten(@selected-background, 33%), darken(@selected-background, 7%), 0.5);
-@event-text-color: @normal-text-color;
+@event-text-color: contrast(@event-background-color, @normal-text-color, @primary-button-text-color, 0.4);
 @event-inverse-text-color: contrast(@normal-text-color, @background, darken(@background, 10%), 0.5);
 @scheduler-nonwork-background-color: contrast(@selected-background, lighten(@base, 3%), darken(@base, 5%), 0.5);
 @resize-background-color: contrast(@hover-background, lighten(@normal-text-color, 29%), darken(@normal-text-color, 1%), 0.5);
