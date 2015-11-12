@@ -1,25 +1,29 @@
 ---
 title: Appearance
-page_title: Appearance of the Kendo UI Grid widget
-description: This section will guide you how to control the Grid layout and appearance
-position: 2
+page_title: Appearance | Kendo UI Grid Widget
+description: "Learn how to control the layout and appearance of the Kendo UI Grid widget."
+slug: appearance_kendoui_grid_widget
+position: 5
 ---
 
-# Grid Appearance
+# Appearance
+
+[Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) supports various options for you to apply to your project by setting its layout and appearance that best match your needs. 
 
 ## Scrolling
 
-Grid scrolling is enabled by default (except for the [MVC wrapper](/aspnet-mvc/helpers/grid/configuration#scrolling), for historical reasons).
+The scrolling functionality of the Grid is enabled by default. For historical reasons, however, the [Grid MVC wrapper](/aspnet-mvc/helpers/grid/configuration#scrolling) does not support it.
 
-Enabled scrolling does not guarantee that scrollbars will appear. This is because scrolling makes sense and works together with set dimensions.
+Though the scrolling functionality is enabled, the scrollbars do not necessarily appear. The reason for this is that scrolling requires you to define some of the widget's dimensions:
 
 1. To achieve vertical scrolling, the Grid must have a set height. Otherwise, it will expand vertically to show all rows.
-1. To achieve horizontal scrolling, all columns must have explicit pixel widths and their sum must exceed the Grid width.
+1. To achieve horizontal scrolling, all columns must have explicit widths defined in pixels and their sum must exceed the width of the Grid.
 
-Scenarios 1. and 2. can be controlled independently.
+You can control vertical and horizontal scrolling independently.
 
-When enabled, scrolling causes the Grid to render **two** tables - one for the header area and one for the scrollable data area. This ensures that the header area is always visible during vertical Grid scrolling.
-The two tables may need to be taken into account when making some manual Javascript or CSS manipulations to the Grid tables.
+When scrolling is enabled, the Grid renders two tables - one for the header area and one for the scrollable data area. This ensures that the header area of the Grid is always visible during vertical scrolling. Take the two tables into account when you need to manually make Javascript or CSS updates to the Grid tables.
+
+###### Example
 
     <div class="k-widget k-grid">
         <div class="k-grid-header">
@@ -32,13 +36,14 @@ The two tables may need to be taken into account when making some manual Javascr
         </div>
     </div>
 
-> If you want to allow maximum Grid accessibility with assistive technologies, disable the scrolling feature.
+> **Important**  
+> If you want to achieve a maximum Grid accessibility with assistive technologies, disable the scrolling feature.
 
-### Remove the vertical scrollbar
+### Remove Vertical Scrollbars
 
-When Grid scrolling is enabled, its vertical scrollbar is always visible even when not active. This simplifies the implementation and improves performance.
-In cases when it is certain that a vertical scrollbar will not be needed, and only horizontal scrolling will be used, the vertical scrollbar can be removed with CSS, as shown below.
-When using this technique, the Grid and its data area **must not have fixed heights applied**, so that they are able to shrink and expand, according to the number of table rows.
+When you enable scrolling in the Grid, its vertical scrollbar is always visible even if it is not needed. This simplifies the implementation and improves the performance of the widget. If your project does not require a vertical scrollbar, but will apply only horizontal scrolling, you can remove the vertical scrollbar via CSS in the way demonstrated in the example below. When using this technique, make sure that neither the Grid, nor its data area apply fixed heights, so that they are able to shrink and expand according to the number of table rows.
+
+###### Example
 
     #GridID .k-grid-header
     {
@@ -50,14 +55,13 @@ When using this technique, the Grid and its data area **must not have fixed heig
        overflow-y: visible;
     }
 
-Using the `#GridID` will allow the styles to be applied to a particular Grid instance only. In order to apply the above styles to all Grid instances, you can replace the ID with the `.k-grid` CSS class.
+The `#GridID` allows the application of styles only to a particular Grid instance. To use the above styles in all Grid instances, replace the ID with the `.k-grid` CSS class.
 
-### Restore the Grid scroll position on rebind
+### Restore Scroll Positions
 
-In some scenarios, the Grid scroll position may be reset when the widget is rebound.
-If this is undesirable, the scroll position can be saved in the [`dataBinding`](/api/javascript/ui/grid#events-dataBinding) event and restored
-in the [`dataBound`](/api/javascript/ui/grid#events-dataBound) event.
-The scrollable container is `div.k-grid-content` and it can be retrieved as a child element of the widget [`wrapper`](/framework/widgets/wrapper-element).
+In some scenarios, the Grid scroll position may be reset when the widget is rebound. If you want to avoid this behavior, save the scroll position in the [`dataBinding`](/api/javascript/ui/grid#events-dataBinding) event and restore it in the [`dataBound`](/api/javascript/ui/grid#events-dataBound) event. The scrollable container is `div.k-grid-content` and you can retrieve it as a child element of the widget [`wrapper`](/framework/widgets/wrapper-element).
+
+###### Example
 
     $(function () {
         // initialize the variable, which will hold the scroll positions
@@ -73,7 +77,7 @@ The scrollable container is `div.k-grid-content` and it can be retrieved as a ch
             scrollOffset.top = container.scrollTop();
         }
 
-        //restore the scroll position after the new data has been rendered
+        //restore the scroll position after the new data is rendered
         function onGridDataBound (e) {
             var container = e.sender.wrapper.children(".k-grid-content");
             container.scrollLeft(scrollOffset.left);
@@ -84,55 +88,102 @@ The scrollable container is `div.k-grid-content` and it can be retrieved as a ch
         $("#grid").kendoGrid({
             dataBinding: onGridDataBinding,
             dataBound: onGridDataBound
-            // ...rest of code ommitted for brevity...
+            // ...the rest of the code is ommitted for brevity...
         });
     });
 
+### Virtual Scrolling
+
+Virtual scrolling is an alternative to paging. When enabled, the Grid will load data from the remote data source as the user scrolls vertically. Note that horizontal scrolling is not virtualized.
+
+> **Importnat**  
+> Either enable virtual scrolling, or paging. Do not apply both features at the same time.
+
+When you apply virtual scrolling, the HTML output is a little different as compared to the standard scrolling functionality:
+
+    <div class="k-widget k-grid">
+        <div class="k-grid-header">
+            <div class="k-grid-header-wrap">
+                <table>...</table>
+            </div>
+        </div>
+        <div class="k-grid-content">
+            <div class="k-virtual-scrollable-wrap">
+                <table>...</table>
+            </div>
+            <div class="k-scrollbar k-scrollbar-vertical">
+                ...<!-- divs, which generate a scrollbar -->...
+            </div>
+        </div>
+    </div>
+
+Note that when you use virtual scrolling, the Grid data table is not placed inside a scrollable container. The scrollbar belongs to a separate `div.k-scrollbar` shown above. This matters in scenarios when the data rows should be manually scrolled to a particular position.
+
+The virtual scrolling behavior and implementation imposes limitations with regard to some other Grid features. Virtual scrolling cannot be used together with grouping, hierarchy, batch editing, and inline editing. Popup editing is supported, but without the functionality of adding new items.
+
+Virtual scrolling relies on a fake scrollbar. Its size is not determined by the browser, but is calculated based on the average row height of the data that is already loaded. As a result, variable row heights may cause unexpected behavior, such as inability to scroll to the last rows on the last page. There are two ways to ensure that all table rows have the same heights: either disable text wrapping, or set an explicit large-enough row height:
+
+    .k-virtual-scrollable-wrap tr
+    {
+        height: 3em;
+    }
+
+    /* or */
+
+    .k-virtual-scrollable-wrap td
+    {
+        white-space: nowrap;
+    }
+
+> **Important**  
+> The page size of the Grid must be large-enough, so that the table rows do not fit in the scrollable data area. Otherwise the vertical virtual scrollbar will not be created.
+> The page size of the Grid must be over three times larger than the number of visible table rows in the data area.
+
+Due to height-related browser limitations, which cannot be avoided, virtual scrolling works with up to a couple of million records. The exact number of records depends on the browser. Note that if you use a row count that is larger than, can produce unexpected widget behavior, or Javascript errors.
+
+When using mobile touch devices, which do not have a visible scrollbar that can be grabbed and dragged, virtual scrolling combined with a large number of data items, e.g. thousands, can impose a challenge to easily acccess all table rows, as this will require a great deal of touch scrolling. On the other hand, using virtual scrolling with a very small number of items, e.g. less than two hundred, does not make much sense either.
+
+In the cases listed above, when using virtual scrolling is not supported or recommended, revert to standard paging or non-virtual scrolling without paging, depending on the number of data items.
+    
 ## Width
 
-By default the Grid has no width and behaves like a block-level element, i.e. it expands to the width of its parent element.
+By default, the Grid has no width and behaves like a block-level element. This means that it expands to the width of its parent element. 
 
-If Grid **scrolling is enabled** and the sum of all column widths is greater than the Grid width, a horizontal scrollbar will appear.
+If you enable the scrolling functionality of the Grid and the sum of all column widths is greater than the width of the Grid, a horizontal scrollbar will appear. 
 
-If Grid **scrolling is disabled** and the columns cannot fit, they will overflow the Grid `<div>`, which will result in the widget's right border passing through the data cells.
-This is because the Grid is basically a `<table>` element inside a `<div>` element. Tables can expand horizontally beyond 100% to enclose their content, while divs don't do that.
-Possible resolutions to table overflowing include:
+If you disable the scrolling functionality of the Grid and the columns are not able to fit, they will overflow the Grid `<div>`. This results in the widget's right border passing through the data cells. The reason for this is that, basically, the Grid is a `<table>` element inside a `<div>` one. Tables can expand horizontally beyond 100% to enclose their content, while `<div>` elements lack this beahvior. 
 
-* enable Grid scrolling (which is disabled by default when using the Kendo UI Grid MVC wrapper)
-* set a large-enough width or min-width style for the Grid wrapper - the `<div class="k-widget k-grid">` element
-* [float](https://developer.mozilla.org/en-US/docs/Web/CSS/float) the Grid wrapper and [clear](https://developer.mozilla.org/en-US/docs/Web/CSS/clear) the float right after the widget.
-Floated elements expand and shrink automatically to enclose their content, when needed.
-This approach should be used only if the previous two are unacceptable.
+Possible solutions for table overflowing are:
 
-When using hierarchy, the detail template content cannot be wider than the master table, unless the detail template is scrollable.
+* Enable the scrolling functionality, which, by default, is disabled when using the Kendo UI Grid MVC wrapper.
+* Set a large-enough width or a min-width style for the Grid wrapper, the `<div class="k-widget k-grid">` element.
+* [Float](https://developer.mozilla.org/en-US/docs/Web/CSS/float) the Grid wrapper and [clear](https://developer.mozilla.org/en-US/docs/Web/CSS/clear) the float right after the widget. Floated elements expand and shrink automatically to enclose their content when needed. Use this approach only if the previous two are unacceptable.
+
+When you use hierarchy, the detail template content cannot be wider than the master table, unless the detail template is scrollable.
 
 ## Height
 
-By default the Grid has no height and expands to fit all table rows. For historical reasons, the Grid MVC wrapper
-[applies a default height of 200px to its data area](/aspnet-mvc/helpers/grid/configuration#scrolling) when widget scrolling is enabled.
+By default, the Grid has no height and expands to fit all table rows. For historical reasons, the Grid MVC wrapper [applies a default height of 200px to its data area](/aspnet-mvc/helpers/grid/configuration#scrolling) when scrolling is enabled.
 
-A height can be set to the Grid in one of the following ways:
+Set the height of the Grid in one of the following ways:
 
-* apply an inline height style to the `div` from which the Grid is initialized
-* use the widget's **`height`** property, which will apply an inline style to the Grid wrapper, i.e. same as above
-* use external CSS, e.g. by using the Grid's ID or CSS class (`.k-grid`) to apply a height style
+* Apply an inline height style to the `<div>` from which the Grid is initialized.
+* Use the `height` property of the widget, which will apply an inline style to the Grid wrapper, i.e. the same as the above option.
+* Use external CSS, e.g. use the ID or CSS class (`.k-grid`) of the Grid to apply a height style.
 
-It makes sense to set height to the Grid **only if Grid scrolling is enabled**.
+It makes sense to set a height to the Grid only if its scrolling is enabled.
 
-When the Grid has a set height, it calculates the appropriate height of its scrollable data area, so that the sum of the header row(s), filter row, data, footer and pager is
-equal to the expected Grid height. That's why, if the Grid height is changed width Javascript after the widget has been created, the
-[Grid's `resize` method](/using-kendo-in-responsive-web-pages) must be called afterwards. In this way the Grid will recalculate the height of its data area.
+When the Grid has a set height, it calculates the appropriate height of its scrollable data area, so that the sum of the header rows, filter row, data, footer, and pager is equal to the expected Grid height. That is why, if the Grid height is changed via Javascript after you create the widget, you must call the [`resize` method of the Grid](/using-kendo-in-responsive-web-pages) afterwards. In this way, the Grid recalculates the height of its data area.
 
 ![Grid With Fixed Height And Scrolling](/web/grid/grid3_1.png)
 
-In some special scenarios, it is possible to set a height style (via Javascript or external CSS) to the Grid's scrollable data area, which is a `div.k-grid-content` element.
-In this case, please do not set height to the Grid.
+In some special scenarios, it is possible to set a height style to the scrollable data area of the Grid, either via Javascript, or external CSS, which is a `div.k-grid-content` element. In this case, do not set height to the Grid.
 
-### Allow the Grid height to vary within certain limits
+### Let the Height Vary within Limits
 
-It is possible to make the Grid expand and shrink vertically, according to the number of its rows, but within certain limits.
-To achieve this, do not set any Grid height and apply a min and/or max height style to the scrollable data area.
-Do not forget to [remove the default data area height](/aspnet-mvc/helpers/grid/configuration#scrolling) if using the MVC wrapper.
+It is possible to make the Grid expand and shrink vertically according to the number of its rows, but within certain limits. To achieve this, do not set any Grid height and apply a min and/or max height style to the scrollable data area. Make sure you [remove the default data area height](/aspnet-mvc/helpers/grid/configuration#scrolling) if you use the MVC wrapper.
+
+###### Example
 
     #GridID .k-grid-content
     {
@@ -140,28 +191,20 @@ Do not forget to [remove the default data area height](/aspnet-mvc/helpers/grid/
         max-height: 400px;
     }
 
-You can use the `.k-grid` class instead of the Grid ID to target all widget instances.
+You can use the `.k-grid` class instead of the `GridID` to target all widget instances.
 
-### Make the Grid 100% high and auto resizable
+### Set a 100% Height and Auto-Resize 
 
-This section is applicable to **scrollable** Grids only.
+> **Important**  
+> This section is applicable to scrollable Grids only.
 
-In order to configure the Grid to be 100% high and resize together with its parent element, the first and most important thing to do is
-make the Grid [wrapper `<div>`](/framework/widgets/wrapper-element) 100% high. According to web standards,
-**elements with a percentage height require their parent to have an explicit height**. This requirement applies recursively
-until an element with a pixel height is reached, or until the `html` element is reached. 100% high elements cannot have margins, paddings, borders or sibling elements,
-so the default border of the Grid should be removed as well.
+To configure the height of the Grid to 100% and resize together with its parent element, first make the [Grid wrapper `<div>`](/framework/widgets/wrapper-element) 100% high. According to web standards, elements with a percentage height require that their parent has an explicit height. This requirement applies recursively either until an element with a pixel height, or the `html` element is reached. 100% high elements cannot have margins, paddings, borders, or sibling elements, so remove the default border of the Grid as well.
 
-The second step is to ensure that the inner Grid layout adapts to changes in the height of the widget's wrapper `<div>`.
-If those changes are triggered by browser window resizing, then subscribe to the browser window's `resize` event and execute the Grid's
-[`resize`](/using-kendo-in-responsive-web-pages) method. The `resize` method will take care of measuring the height of the Grid `div` and
-adjusting the height of the scrollable data area. The `resize` method doesn't have to be called if the Grid is placed inside a Kendo UI Splitter,
-because the Splitter will execute it automatically. The method is also not needed if locked (frozen) columns are used.
+Second, ensure that the inner Grid layout adapts to changes in the height of the Grid wrapper `<div>`. If those changes are triggered by browser window resizing, subscribe to the window `resize` event of the browser and execute the [`resize`](/using-kendo-in-responsive-web-pages) method of the Grid. The `resize` method will take care of measuring the height of the Grid `<div>` and adjusting the height of the scrollable data area. You do not need to call the `resize` method if the Grid is placed inside a Kendo UI Splitter, because the Splitter will execute it automatically. Also, you do not need the method if you use locked (frozen) columns.
 
-If the available vertical space for the Grid depends on some custom layout resizing controlled by the user, then use a suitable event or method, which is related to the layout changes,
-to execute the Grid's `resize` method. In this case, call the `resize` method even if using locked (frozen) columns.
+If the available vertical space for the Grid depends on a custom layout resizing controlled by the user, use a suitable event or method related to the layout changes to execute the `resize` method of the Grid. In this case, call the `resize` method even if you use locked (frozen) columns.
 
-The `resize` method will work for Kendo UI versions **Q3 2013 or later**. For older versions, the following Javascript code must be used instead or `resize`, which practically does the same:
+The `resize` method will work for Kendo UI versions delivered after the Kendo UI Q3 2013 release. For older versions, use the following Javascript code instead of `resize`, which practically does the same:
 
     $(window).resize(function() {
         var gridElement = $("#GridID"),
@@ -176,63 +219,23 @@ The `resize` method will work for Kendo UI versions **Q3 2013 or later**. For ol
         gridElement.children(".k-grid-content").height(newHeight - otherElementsHeight);
     });
 
-The "[How to resize the Grid when the window is resized](/web/grid/how-to/Layout/resize-grid-when-the-window-is-resized)" documentation page contains a runnable example of the discussed scenario.
+The [help article on how to resize the Grid when the window is resized](/web/grid/how-to/Layout/resize-grid-when-the-window-is-resized) contains a runnable example of the discussed scenario.
 
-### Grid Loading Indicator
+### Loading Indicator
 
-The Grid uses internally the [`kendo.ui.progress`](/api/javascript/ui/ui#methods-progress) method to display a loading overlay during remote read requests.
-If Grid scrolling is disabled, the overlay is displayed over the whole Grid. If scrolling is enabled, the overlay is displayed over the scrollable data area.
-If Grid scrolling is enabled and the Grid has no height, the data area will initially have a zero height,
-which will make the loading overlay invisible during the first remote request.
-This issue can be resolved in two ways - set some Grid height, or apply a `min-height` style to the `div.k-grid-content` element
-(see [example above](/web/grid/appearance#allow-the-grid-height-to-vary-within-certain-limits)).
+The Grid internally uses the [`kendo.ui.progress`](/api/javascript/ui/ui#methods-progress) method to display a loading overlay during remote `read` requests. If the scrolling Grid functionality is disabled, the overlay is displayed over the whole Grid. If scrolling is enabled, the overlay is displayed over the scrollable data area.
 
-## Initialize the Grid inside a hidden container
+If the scrolling Grid functionality is enabled and the Grid has no height, the data area will initially have a zero height, which will make the loading overlay invisible during the first remote request. This issue can be resolved in two ways: either set a Grid height, or apply a `min-height` style to the `div.k-grid-content` element. For more information, refer to the [the example of setting the height within certain limits](/web/grid/appearance#allow-the-grid-height-to-vary-within-certain-limits)).
 
-Depending on the Grid configuration, the widget may need to perform Javascript calculations to adjust its layout during initialization
-(e.g. when scrolling, virtual scrolling or frozen columns are used). Generally, Javascript size calculations don't work for elements,
-which are hidden with a `display:none` style and the Grid can also be affected.
-Depending on the exact scenario, the following can be observed when the widget is eventually displayed:
+## Columns
 
-* the scrollable data area overflows the Grid's bottom border. This can be resolved by executing the Grid's
-[`resize`](/using-kendo-in-responsive-web-pages#individual-widget-resizing) method when the widget becomes visible.
-Alternatively, apply the desired height to the scrollable data area, instead of the Grid widget:
+### Column Width
 
-        #GridID .k-grid-content
-        {
-            height: 270px;
-        }
-* the virtual scrollbar is not visible. This can be resolved by executing the Grid's
-[`resize`](/using-kendo-in-responsive-web-pages#individual-widget-resizing) method when the widget becomes visible. For Kendo UI versions 2014.3.1119 (Q3 2014) and older,
-the following statement is required instead of `resize()`:
+The Grid columns behave differently, depending on whether scrolling is enabled, or not.
 
-        $("#GridID").data("kendoGrid").dataSource.fetch();
-* frozen columns are too narrow and non-frozen columns are not visible. This can be resolved by executing the Grid's
-[`resize`](/using-kendo-in-responsive-web-pages#individual-widget-resizing) method when the widget becomes visible.
+When the scrolling functionality is enabled, which is the default case except for the Grid MVC wrapper, the `table-layout` style of the Grid tables is set to `fixed`. This means that all columns without a defined width will appear equally wide, no matter what their content is, and will expand or shrink depending on the available space. If there is not enough horizontal space, columns without a defined width may even shrink to a zero width. All set column widths will be obeyed no matter what the cell content is. If the content cannot fit, it will be either wrapped, or clipped. During column resizing, only the resized column will change its width and the other column widths will be persisted. To achieve this, the table width will change.
 
-In some cases it may be possible to delay the Grid initialization, or change the order in which various Kendo UI widgets are initialized, so that the Grid is initialized while visible.
-
-For more information on how to initialize the Grid inside other Kendo UI widgets which act as hidden containers, see:
-
-* [Initialize the Grid inside the PanelBar]({% slug initialize_thegrid_panelbar_widget %})
-* [Initialize the Grid inside the TabStrib]({% slug initialize_thegrid_tabstrip_widget %})
-* [Initialize the Grid inside the Window]({% slug initialize_thegrid_window_widget %})
-
-## Column widths
-
-The Grid columns behave differently, depending on whether scrolling is enabled or not.
-
-* When Grid **scrolling is enabled** (by default, except for the widget MVC wrapper), the `table-layout` style of the Grid tables is set to `fixed`.
-This means that all width-less columns will be equally wide no matter what their content is, and will expand or shrink, depending on the available space.
-If there is not enough horizontal space, width-less columns can even shrink to zero width.
-All set column widths will be obeyed no matter what the cell content is. If the content cannot fit, it will wrap or be clipped.
-During column resizing, only the resized column will change its width and the other column widths will be persisted. To achieve this, the table width will change.
-
-* When Grid **scrolling is disabled**, the `table-layout` style is set to `auto`. This is the default behavior of HTML tables.
-The column widths are determined by the browser and cell content, if not set explicitly.
-The browser will try to obey all set column widths, but may readjust some columns, depending on their content.
-The column widths may change on paging, sorting and other data operations.
-During column resizing, more than one column width will change, because the table width remains constant.
+When the scrolling functionality is disabled, the `table-layout` style is set to `auto`. This is the default behavior of HTML tables. If not explicitly set, the column widths are determined by the browser and cell content. The browser will try to obey all set column widths, but may readjust some columns depending on their content. The column widths may change on paging, sorting, and other data operations. The width of multiple columns changes during resizing, because the table width remains constant.
 
 If needed, a fixed table layout can be applied to a non-scrollable Grid:
 
@@ -241,24 +244,16 @@ If needed, a fixed table layout can be applied to a non-scrollable Grid:
         table-layout: fixed;
     }
 
-Column widths should be set only via the `width` property of the Grid columns. Using table cell width styles is not recommended.
-When creating the Grid from an HTML `table`, column widths can be set via width styles of the table `col` elements.
+Column widths should be set only via the `width` property of the Grid columns. Using table cell width styles is not recommended. When creating the Grid from an HTML `table`, column widths can be set via width styles of the table `col` elements.
 
-> [Scrolling makes the Grid render separate tables for the header and data area](#scrolling) and naturally, these tables should have synchronized column widths.
-This can be ensured only when the `table-layout` is `fixed`. As a result, it is not possible to have a scrollable Grid with automatic table layout
-(i.e. automatic column widths, which depend on the cell content).
+> **Important**  
+> [Scrolling makes the Grid render separate tables for the header and data area](#scrolling). These tables must have synchronized column widths. This can be ensured only when the `table-layout` is `fixed`. As a result, it is not possible to have a scrollable Grid with automatic table layout, i.e. automatic column widths, which depend on the cell content.
 
-If all columns have pixel widths and their sum exceeds the width of the grid, a horizontal scrollbar will appear (if scrolling is enabled). If that sum is less than the width of the grid,
-the column widths will be ignored and all columns will expand. This will lead to undesired side effects, e.g. when resizing columns.
-In old IE versions the column widths will be obeyed, but misalignment will occur. That's why it is recommended to have at least one column without specified width,
-so that it can adjust freely. Explicit widths for all columns should be set **only** if they are set in percent,
-or if their sum exceeds the Grid width and the goal is to have horizontal scrolling.
+If all columns have pixel widths and their sum exceeds the width of the Grid, a horizontal scrollbar appears if scrolling is enabled. If that sum is less than the width of the Grid, the column widths are ignored and all columns expand. This leads to undesired side effects, e.g. when resizing columns. In old Internet Explorer versions the column widths are obeyed, but misalignment occurs. That is why it is recommended to have at least one column without a specified width, so that it can adjust freely. Set explicit widths for all columns only if they are set in percent, or if their sum exceeds the Grid width and the goal is to achieve horizontal scrolling.
 
-Column resizing and hiding trigger the following behavior when scrolling is enabled: if all currently visible columns have explicit widths,
-the Grid will apply a pixel width to its table elements, so that the widths of all remaining columns (i.e. except the column that is currently resized or hidden) are maintained.
+Column resizing and hiding trigger the following behavior when scrolling is enabled: if all currently visible columns have explicit widths, the Grid applies a pixel width to its table elements, so that the widths of all remaining columns, i.e. except the column that is currently resized or hidden, are maintained.
 
-If the Grid has no fixed width and resizes with the browser window, one can apply min-width to the Grid (if scrolling is disabled) or its two table elements (if scrolling is enabled).
-This will prevent undesired side effects if the browser window size is reduced too much.
+If the Grid has no fixed width and resizes with the browser window, you can apply a min-width to the Grid if scrolling is disabled, or its two table elements if scrolling is enabled. This prevents undesired side effects if the browser window size is reduced too much.
 
     /* How to apply minimum width to the Grid when scrolling is disabled */
 
@@ -290,97 +285,71 @@ This will prevent undesired side effects if the browser window size is reduced t
         min-width: initial;
     }
 
-Using the Grid ID (Name) in the above selectors is optional, so that the styles are applied to a particular Grid instance only.
+Using the `Grid ID` (Name) in the above selectors is optional, so that the styles are applied to a particular Grid instance only.
 
-Setting column widths in percent is possible, but if the sum of all widths is greater than 100% (i.e. a horizontal scrollbar is desired), the Grid tables must have a (min-)width style,
-otherwise the tables will be 100% wide (as wide as the Grid) and the columns will be narrower than desired. Please note that when column widths are set in percent, resizing one column may
-lead to other columns changing their widths as well.
+Setting column widths in percent is possible, but if the sum of all widths is greater than 100%, i.e. a horizontal scrollbar is desired, the Grid tables must have a (min-)width style. Otherwise, the tables will be 100% wide (as wide as the Grid) and the columns will be narrower than desired. Note that when column widths are set in percent, resizing one column may lead to other columns changing their widths as well.
 
-## Virtual Scrolling
+### Lock Columns
 
-Virtual scrolling is an alternative to paging. When enabled, the Grid will load data from the remote data source as the user scrolls vertically (horizontal scrolling is not virtualized).
+Locked (frozen) columns allow some columns to be visible at all times during horizontal Grid scrolling.
 
-Either enable virtual scrolling, or paging, but not both features at the same time.
+The Grid supports frozen columns on one side of the table. In order to work properly, the feature has the following requirements to the Grid configuration:
 
-When virtual scrolling is used, the HTML output is a little different, compared to standard scrolling:
-
-    <div class="k-widget k-grid">
-        <div class="k-grid-header">
-            <div class="k-grid-header-wrap">
-                <table>...</table>
-            </div>
-        </div>
-        <div class="k-grid-content">
-            <div class="k-virtual-scrollable-wrap">
-                <table>...</table>
-            </div>
-            <div class="k-scrollbar k-scrollbar-vertical">
-                ...<!-- divs, which generate a scrollbar -->...
-            </div>
-        </div>
-    </div>
-
-Note that when virtual scrolling is used, the Grid data table is not placed inside a scrollable container. The scrollbar belongs to a separate special `div.k-scrollbar` shown above.
-This matters in scenarios when the Grid data rows should be scrolled manually to a particular position.
-
-The virtual scrolling behavior and implementation imposes limitations with regard to some other Grid features.
-It cannot be used together with grouping, hierarchy, batch editing and inline editing. Popup editing is supported, but without adding of new items.
-
-Virtual scrolling relies on a fake scrollbar. Its size is not determined by the browser, but calculated based on the average row height of already loaded data.
-As a result, variable row heights may cause unexpected behavior, such as inability to scroll to the last rows on the last page. There are two ways to ensure that
-all table rows have the same heights - disable text wrapping, or set an explicit large-enough row height:
-
-    .k-virtual-scrollable-wrap tr
-    {
-        height: 3em;
-    }
-
-    /* or */
-
-    .k-virtual-scrollable-wrap td
-    {
-        white-space: nowrap;
-    }
-
-> The Grid page size must be large-enough, so that the table rows do not fit in the scrollable data area. Otherwise the virtual vertical scrollbar will not be created.
-> The page size must be **over three times larger** than the number of visible table rows in the data area.
-
-Due to height-related browser limitations, which cannot be avoided, virtual scrolling works with up to a couple of million records (depending on the browser).
-Using a larger row count than that can produce unexpected behavior or Javascript errors.
-
-When using mobile touch devices, which do not have a visible scrollbar that can be grabbed and dragged, virtual scrolling combined with a large number of data items (e.g. thousands)
-can impose a challenge to easily acccess all table rows, as this will require a great deal of touch scrolling. On the other hand, using virtual scrolling with a very small number of items
-(below a couple of hundreds) doesn't make much sense either.
-
-In all cases listed above when using virtual scrolling is not supported or recommended, revert to standard paging or non-virtual scrolling without paging, depending on the number of data items.
-
-## Locked columns (Frozen columns)
-
-Frozen (locked) columns allow some columns to be visible at all times during horizontal Grid scrolling.
-
-The Grid supports frozen columns on one side of the table. In order to work properly, the feature has the following requirements on the Grid configuration:
-
-* [scrolling](#scrolling) must be enabled
-* the Grid should have a height set
-* all columns should have explicit **pixel** widths set, so that the Grid can adjust the layout of the frozen and non-frozen table parts
-* the total width of all locked columns should be equal to or less than the Grid width minus three times the scrollbar width
+* [Scrolling](#scrolling) must be enabled.
+* The Grid must have a defined height.
+* All columns must have explicit pixel widths set, so that the Grid can adjust the layout of the frozen and non-frozen table parts.
+* The total width of all locked columns must be equal to or less than the Grid width minus three times the scrollbar width.
 
 The above ensures that at least one non-locked column is always visible and horizontal scrolling of the non-locked columns is possible.
 
-Row template and detail features are not supported in combination with column locking.
+The row template and detail features are not supported in combination with column locking.
 
-Frozen columns cannot be touch-scrolled, because they are wrapped in a container with an `overflow:hidden` style.
-This limitation is worked around on desktop devices with the help of the mousewheel event, but it does not exist on touch devices.
+Frozen columns cannot be touch-scrolled, because they are wrapped in a container with an `overflow:hidden` style. This limitation can be worked around on desktop devices with the help of the mousewheel event, but it does not exist on touch devices.
 
-> The [Grid API](/api/javascript/ui/grid) allows columns to be locked and unlocked on the fly.
-However, this is possible only if at least one column is locked initially during initialization.
-The HTML output and script behavior of the Grid are very different when frozen columns are used,
-that's why the widget cannot switch between "frozen" and "unfrozen" mode after initialization.
+> **Important**  
+> The [Grid API](/api/javascript/ui/grid) allows columns to be locked and unlocked on the fly. However, this is possible only if at least one column is initially locked during initialization. The HTML output and script behavior of the Grid are very different when frozen columns are used. That is why the widget cannot switch between frozen and unfrozen mode after initialization.
 
-Frozen columns rely on row height synchronization between the frozen and non-frozen parts.
-Some browsers, such as IE9 and Firefox require a `line-height` style set in pixels, otherwise the synchronization may not work properly, probably due to some sub-pixel quirks.
+Frozen columns rely on row height synchronization between the frozen and non-frozen parts. Some browsers, such as Internet Explorer 9 and Firefox, require a `line-height` style set in pixels. Otherwise the synchronization may not work properly, probably due to some sub-pixel quirks.
 
     div.k-grid td
     {
         line-height: 18px;
     }
+
+## Initialize inside Hidden Containers
+
+Depending on the Grid configuration, the widget may need to perform Javascript calculations to adjust its layout during initialization, e.g. when scrolling, virtual scrolling, or frozen columns are used. Generally, Javascript size calculations do not work for elements, which are hidden with a `display:none` style and the Grid can also be affected.
+
+Depending on the exact scenario, the following behavior can be observed when the widget is eventually displayed:
+
+* The scrollable data area overflows the bottom border of the Grid. This can be resolved by executing the [`resize`](/using-kendo-in-responsive-web-pages#individual-widget-resizing) method when the Grid becomes visible. Alternatively, apply the desired height to the scrollable data area instead of the Grid widget:
+
+        #GridID .k-grid-content
+        {
+            height: 270px;
+        }
+
+* The virtual scrollbar is not visible. This can be resolved by executing the [`resize`](/using-kendo-in-responsive-web-pages#individual-widget-resizing) method when the Grid becomes visible. For Kendo UI Q3 2014 (2014.3.1119) release and older, apply the following statement instead of `resize()`:
+
+        $("#GridID").data("kendoGrid").dataSource.fetch();
+
+* Frozen columns are too narrow and non-frozen columns are not visible. This can be resolved by executing the [`resize`](/using-kendo-in-responsive-web-pages#individual-widget-resizing) method when the Grid becomes visible.
+
+In some cases it may be possible to delay the initialization of the Grid, or change the order in which various Kendo UI widgets are initialized, so that the Grid is initialized while visible. For more information on how to initialize the Grid inside other Kendo UI widgets which act as hidden containers, see:
+
+* [Initialize the Grid inside the PanelBar]({% slug initialize_thegrid_panelbar_widget %})
+* [Initialize the Grid inside the TabStrib]({% slug initialize_thegrid_tabstrip_widget %})
+* [Initialize the Grid inside the Window]({% slug initialize_thegrid_window_widget %})
+    
+## See Also
+
+Other articles on Kendo UI Grid:
+
+* [JavaScript API Reference](/api/javascript/ui/grid)
+* [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})
+* [Remote Data Binding]({% slug remote_data_binding_grid %})
+* [Editing Functionality]({% slug editing_kendoui_grid_widget %})
+* [Localization of Messages]({% slug localization_kendoui_grid_widget %})
+* [Adaptive Rendering]({% slug adaptive_rendering_kendoui_grid_widget %})
+* [Exporting Content to Excel]({% slug exporting_excel_kendoui_grid_widget %})
+* [Printing Your Grid]({% slug printing_kendoui_grid %})

@@ -1,15 +1,20 @@
 ---
 title: Localization
-position: 4
+page_title: Localization | Kendo UI Grid Widget
+description: "Learn how to localize the content of the Kendo UI Grid widget."
+slug: localization_kendoui_grid_widget
+position: 7
 ---
 
-# Grid Localization
+# Localization
 
-Localization is the process of adapting software to meet the requirements of local markets and different languages. Kendo widgets allows the developer to change the text messages that are displayed to the end user.
+Localization is the process of adapting software to meet the requirements of local markets and different languages. Kendo widgets allow you to change the text messages that are displayed to the end user.
 
-Kendo Grid provides a way to localize the user interface using the configuration options.
+The Grid widget provides a way to localize the user interface by using configuration options.
 
-## Localization of the toolbar controls:
+## Toolbar Controls
+
+###### Example
 
     toolbar: [
 		//name - name of the available commands, text - text to be set on the button
@@ -18,9 +23,11 @@ Kendo Grid provides a way to localize the user interface using the configuration
 		{ name: "cancel", text: "Custom Cancel" }
 	]
 
-More info can be found in the [toolbar](/api/javascript/ui/grid#configuration-toolbar) section of the Grid API reference.
+Find more info in the [`toolbar`](/api/javascript/ui/grid#configuration-toolbar) section of the Grid API reference.
 
-## Localization of the column commands:
+## Column Commands 
+
+###### Example
 
     columns: [
         { field: "FirstName", title: "First Name" },
@@ -40,13 +47,15 @@ More info can be found in the [toolbar](/api/javascript/ui/grid#configuration-to
         }
     ]
 
-More info can be found in the [columns.command](/api/javascript/ui/grid#configuration-columns.command) section of the Grid API reference.
+Find more info in the [`columns.command`](/api/javascript/ui/grid#configuration-columns.command) section of the Grid API reference.
     
-## Localization of the filter menu
+## Filter Menu
+
+###### Example
 
 	filterable: {
 		messages: {
-			info: "Custom header text:", // sets the text on top of the filter menu
+			info: "Custom header text:", // sets the text on top of the Filter menu
 			filter: "CustomFilter", // sets the text for the "Filter" button
 			clear: "CustomClear", // sets the text for the "Clear" button
 			
@@ -54,7 +63,7 @@ More info can be found in the [columns.command](/api/javascript/ui/grid#configur
 			isTrue: "custom is true", // sets the text for "isTrue" radio button
 			isFalse: "custom is false", // sets the text for "isFalse" radio button
 			
-			//changes the text of the "And" and "Or" of the filter menu
+			//changes the text of the "And" and "Or" of the Filter menu
 			and: "CustomAnd",
 			or: "CustomOr"
 		},
@@ -93,9 +102,11 @@ More info can be found in the [columns.command](/api/javascript/ui/grid#configur
 		}
 	}
 
-More info can be found in the [filterable](/api/javascript/ui/grid#configuration-filterable.messages) section of the Grid API reference.
+Find more info in the [`filterable`](/api/javascript/ui/grid#configuration-filterable.messages) section of the Grid API reference.
 
-## Localization of the grouping header
+## Grouping Header
+
+###### Example
 
     groupable: {
         messages: {
@@ -103,9 +114,11 @@ More info can be found in the [filterable](/api/javascript/ui/grid#configuration
         }
     }
 
-More info can be found in the [groupable.messages](/api/javascript/ui/grid#configuration-columnMenu.messages) section of the Grid API reference.
+Find more info in the [`groupable.messages`](/api/javascript/ui/grid#configuration-columnMenu.messages) section of the Grid API reference.
 
-## Localization of the column menu
+## Column Menu
+
+###### Example
 
     columnMenu: {
         messages: {
@@ -116,9 +129,11 @@ More info can be found in the [groupable.messages](/api/javascript/ui/grid#confi
         }
     }
 
-More info can be found in the [columnMenu.messages](/api/javascript/ui/grid#configuration-columnMenu.messages) section of the Grid API reference.
+Find more info in the [`columnMenu.messages`](/api/javascript/ui/grid#configuration-columnMenu.messages) section of the Grid API reference.
 
-## Localization of the pager
+## Pager
+
+###### Example
 
     pageable: {
         messages: {
@@ -135,4 +150,16 @@ More info can be found in the [columnMenu.messages](/api/javascript/ui/grid#conf
         }
     }
 
-More info can be found in the [messages](/api/web/pager#messages-object) section of the Pager API reference.
+Find more info in the [`messages`](/api/web/pager#messages-object) section of the Pager API reference.
+
+## See Also
+
+Other articles on Kendo UI Grid:
+
+* [JavaScript API Reference](/api/javascript/ui/grid)
+* [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})
+* [Remote Data Binding]({% slug remote_data_binding_grid %})
+* [Editing Functionality]({% slug editing_kendoui_grid_widget %})
+* [Adaptive Rendering]({% slug adaptive_rendering_kendoui_grid_widget %})
+* [Exporting Content to Excel]({% slug exporting_excel_kendoui_grid_widget %})
+* [Printing Your Grid]({% slug printing_kendoui_grid %})
