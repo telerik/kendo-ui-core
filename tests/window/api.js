@@ -37,6 +37,20 @@
         equal(titleElement.text(), oldTitle);
     });
 
+    test("title method gets and sets the title consistently", 2, function () {
+        var title = "&lt;foo&gt;",
+            window = createWindow({ title: title }),
+            oldTitle = window.title(),
+            newTitle,
+            titleElement = $(".k-window-title", window.wrapper);
+
+        equal(window.title(), title);
+
+        window.title(window.title());
+
+        equal(window.title(), title);
+    });
+
     test("title method and title property set once encoded string as once encoded", 2, function () {
         var encodedString = kendo.htmlEncode("<script>var foo1 = 1;<\/script>"),
             window = createWindow({ title: encodedString }),
