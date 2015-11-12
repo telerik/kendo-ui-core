@@ -7,41 +7,44 @@ position: 2
 
 # Using Telerik UI for ASP.NET MVC in MVC 6 applications on Linux
 
-This tutorial shows how to configure an ASP.NET MVC6 project to use Telerik UI for ASP.NET MVC on Linux.
+This tutorial shows how to configure an ASP.NET MVC6 project that enables you to use Telerik UI for ASP.NET MVC on Linux.
 
+> **Important**  
 > The following steps are tested on Ubuntu 14.04.
 
-### Prerequisites 
-1. [Microsoft ASP.NET (Beta8)](http://docs.asp.net/en/latest/getting-started/installing-on-linux.html)
+## Prerequisites 
 
-### 1. Create an ASP.NET MVC 6 Web Site
-Please skip this step if you're configuring an existing project. We will use [Yeoman](http://yeoman.io/) to scaffold empty ASP.NET application. 
+Make sure you have the [Microsoft ASP.NET (Beta8)](http://docs.asp.net/en/latest/getting-started/installing-on-linux.html) installed.
 
-1. Install [Node.js](https://github.com/nodesource/distributions) v.4.x (if not yet installed):
+## Create an ASP.NET MVC 6 Website
+
+Please skip this step if you are configuring an existing project. We will use [Yeoman](http://yeoman.io/) to scaffold an empty ASP.NET application. 
+
+**Step 1.** Install [Node.js](https://github.com/nodesource/distributions) v.4.x (if not yet installed):
         
         curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
         sudo apt-get install -y nodejs
 
-2. Check if the Node.js version is the desired one:
+**Step 2.** Check if the Node.js version is the desired one:
         
         kendo@kendo-docker:~$ nodejs -v
         v4.2.2
 
-3. Install Yeoman and [aspnet](https://github.com/omnisharp/generator-aspnet#readme) generator:
+**Step 3.** Install Yeoman and an [aspnet](https://github.com/omnisharp/generator-aspnet#readme) generator:
 
         sudo npm install -g yo generator-aspnet
 
-4. Navigate to the folder where the project folder should be created using Terminal:
+**Step 4.** Navigate to the folder where you want to create the project folder using Terminal:
 
         kendo@kendo-docker:~$ mkdir Projects$
         kendo@kendo-docker:~$ cd Projects/
         kendo@kendo-docker:~/Projects$
         
-5. Type the following command:
+**Step 5.** Type the following command:
 
         yo aspnet
    
-You should see the following response:
+**Result:** Now you are able to see the following response:
 
         kendo@kendo-docker:~/Projects$ yo aspnet
 
@@ -66,7 +69,9 @@ You should see the following response:
           Unit test project 
 
         
-6. Navigate using arrow keys to select the `Web Application Basic` option and press enter. Then enter te name of the new application (you can skip this step and use the default name by pressing enter). After setting the name the generator will create desired folder and the selected application. You should see the following response:
+**Step 6.** Navigate using the keyboard arrow keys to select the **Web Application Basic** option, and press `Enter`. Then create the name of the new application (you can skip this step and use the default name by pressing `Enter`). After setting the name, the generator will create the desired folder and the selected application. 
+
+**Result:** Now you are able to see the following response:
 
         Your project is now created, you can use the following commands to get going
             cd "WebApplicationBasic"
@@ -74,11 +79,11 @@ You should see the following response:
             dnu build (optional, build will also happen when it's run)
             dnx web
         
-7. As stated in the above response, navigate to the created folder and execute the following command:
+**Step 7.** As stated in the above response, navigate to the created folder and execute the following command:
 
         dnu restore
         
-After typing the command above, the packages will be downloaded from nuget. The end of the response should look like:
+**Result:** After typing the command above, the packages is downloaded from nuget. The end of the response looks like the following:
 
         Restore complete, 10070ms elapsed
         
@@ -86,54 +91,51 @@ After typing the command above, the packages will be downloaded from nuget. The 
             https://api.nuget.org/v3-flatcontainer/
         kendo@kendo-docker:~/Projects/WebApplicationBasic$ 
         
-8. Start the application using the following command:
+**Step 8.** Start the application using the following command:
 
         dnx web
         
-This will output the following response:
+**Result:** This delivers the following response:
 
         Hosting environment: Production
         Now listening on: http://localhost:5000
         Application started. Press Ctrl+C to shut down.
 
-9. Finally use your favorite browser to navigate to the above location and make sure the application is working:
+**Step 9.** Finally, use your favorite browser to navigate to the above location and make sure the application is working in the way shown below. After checking the application in the browser, stop the server.
 
-    ![Web application in browser](images/website.png)
+![Web application in browser](images/website.png)
 
-After checking the application in the browser stop the server.
+## Add Kendo UI MVC NuGet Package
 
-### 2. Add Kendo nuget package
-
-1. Open `project.json` file using your favorite text editor and add the `Kendo.Mvc` dependency:
+**Step 1.** Open the `project.json` file, using your favorite text editor, and add the `Kendo.Mvc` dependency:
 
         "dependencies": {
             ...
             "Kendo.Mvc": "2015.3.1026"
         }
 
-1. Navigate to the project folder and restore the packages again:
+**Step 2.** Navigate to the project folder and restore the packages again:
 
         dnu restore
 
-1. Open `Startup.cs` using your favorite text editor (IDE) and locate the `ConfigureServices` method. Add the following snippet:
+**Step 3.** Open `Startup.cs`, using your favorite text editor (IDE), and locate the `ConfigureServices` method. Add the following snippet:
 
         // Register UI for ASP.NET MVC helpers
         services.AddKendo();
 
-1. Import the `Kendo.Mvc.UI` namespace in `~/Views/_ViewImports.cshtml`
+**Step 4.** Import the `Kendo.Mvc.UI` namespace in `~/Views/_ViewImports.cshtml`:
 
         @using Kendo.Mvc.UI
 
-1. Copy the Kendo UI client-side resources
-    1. Manual installation
+**Step 5.** Copy the Kendo UI client-side resources.
 
-        Copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\lib\kendo-ui`
+* Install manually by copying the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\lib\kendo-ui`:
 
-        ![Kendo UI resources](images/resources.png)
+![Kendo UI resources](images/resources.png)
 
-    1. [Install Kendo UI Professional as a Bower package](/install/bower#install-kendo-ui-professional-bower-package)
+* [Install Kendo UI Professional as a Bower package](/install/bower#install-kendo-ui-professional-bower-package)
 
-1. Register the Kendo UI styles and scripts in `~/Views/Shared/Layout.cshtml`
+**Step 6.** Register Kendo UI styles and scripts in `~/Views/Shared/Layout.cshtml`:
 
         <head>
         ...
@@ -151,25 +153,23 @@ After checking the application in the browser stop the server.
         @RenderSection("scripts", required: false)
         </body>
 
-1. Use a Kendo UI Widget
+**Step 7.** Use a Kendo UI widget, such as the DatePicker in the example below, by adding the following snippet to `~/Views/Home/Index.cshtml`:
 
-    Add the following snippet to `~/Views/Home/Index.cshtml`
+        <h2>Kendo UI DatePicker</h2>
 
-            <h2>Kendo UI DatePicker</h2>
+        @(Html.Kendo().DatePicker()
+                .Name("datepicker")
+                .Deferred()
+        )
 
-            @(Html.Kendo().DatePicker()
-                    .Name("datepicker")
-                    .Deferred()
-            )
+        @section scripts {
+            @Html.Kendo().DeferredScripts()
+        }
 
-            @section scripts {
-                @Html.Kendo().DeferredScripts()
-            }
-
-1. Navigate to the project folder using Terminal and run it using the following command:
+**Step 8.** Navigate to the project folder using Terminal and run it using the following command:
  
         dnx web
 
-1. All done
+**Result:** All done
 
-    ![Sample page](images/sample-page.png)
+![Sample page](images/sample-page.png)
