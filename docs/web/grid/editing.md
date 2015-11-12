@@ -1,15 +1,21 @@
 ---
 title: Editing
-page_title: Documentation for enabling editing in Grid UI widget
-description: Which steps to follow in order to enable the editing support of Kendo UI jQuery grid widget.
-position: 3
+page_title: Editing | Kendo UI Grid Widget
+description: "Learn how to enable the editing support for the Kendo UI Grid widget."
+slug: editing_kendoui_grid_widget
+position: 4
 ---
 
-# Grid Editing
+# Editing
 
-To enable the editing support of KendoUI Grid widget the following steps should be performed:
+To enable the editing support for the Kendo UI Grid widget, perform the following steps:
 
-## Configure the DataSource for remote CRUD  (Create, Read, Update, Destroy) data operations:
+## DataSource CRUD Configuration
+
+The example below demonstrates how to configure the dataSource for CRUD (Create, Read, Update, Destroy) data operations.
+
+###### Example
+
     var dataSource = new kendo.data.DataSource({
        transport: {
          read:   "/Products",
@@ -31,7 +37,11 @@ To enable the editing support of KendoUI Grid widget the following steps should 
          //...
     });
 
-## Declare fields definition through the DataSource schema:
+## `schema` Field Definition
+
+The example below demonstrates how to declare fields definitions through the DataSource `schema`.
+
+###### Example
 
     var dataSource = new kendo.data.DataSource({
         //..
@@ -65,16 +75,18 @@ To enable the editing support of KendoUI Grid widget the following steps should 
       }
     });
 
-## Set the KendoUI Grid editable configuration option:
+## `editable` Option Setting
+
+The examples below demonstrate the two options to set the `editable` configuration option in the Grid.
+
+###### Example
 
     $("#grid").kendoGrid({
           dataSource: dataSource,
           editable: true
     });
 
-or
-
-## Set the KendoUI Grid editable configuration option:
+###### Example
 
     $("#grid").kendoGrid({
           dataSource: dataSource,
@@ -84,7 +96,10 @@ or
           }
     });
 
-## If you want to enable new records insertion the toolbar should be configured:
+If you want to enable the insertion of new records, configure the Toolbar.
+
+###### Example
+
 
     $("#grid").kendoGrid({
          dataSource: dataSource,
@@ -92,7 +107,10 @@ or
          editable: true
     });
 
-## Additionally in order to delete records a delete command column should be defined:
+If you want to delete records, define a delete command column.
+
+###### Example
+
      $("#grid").kendoGrid({
          dataSource: dataSource,
          columns: [
@@ -104,3 +122,15 @@ or
             }],
          editable: true
      });
+
+## See Also
+
+Other articles on Kendo UI Grid:
+
+* [JavaScript API Reference](/api/javascript/ui/grid)
+* [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})
+* [Remote Data Binding]({% slug remote_data_binding_grid %})
+* [Localization of Messages]({% slug localization_kendoui_grid_widget %})
+* [Adaptive Rendering]({% slug adaptive_rendering_kendoui_grid_widget %})
+* [Exporting Content to Excel]({% slug exporting_excel_kendoui_grid_widget %})
+* [Printing Your Grid]({% slug printing_kendoui_grid %})

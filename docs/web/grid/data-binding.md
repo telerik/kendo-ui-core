@@ -1,21 +1,85 @@
 ---
-title: Bind the Grid to Remote Data
-page_title: Bind Kendo UI jQuery grid to remote data | Kendo UI Grid Documentation
-description: This article will explain how to use Kendo UI Grid widget in your web application and bind it to remote data.
+title: Remote Data Binding
+page_title: Remote Data Binding | Kendo UI Grid Widget
+description: "Learn how to use the Kendo UI Grid widget in your web application and bind it to a remote data source."
 previous_url: /howto/bind-the-grid-to-remote-data
+slug: remote_data_binding_grid
+position: 3
 ---
 
-# Bind the Grid to Remote Data
+# Remote Data Binding
 
-Love them or hate them, grids are a staple of user interfaces. While jQuery has made UI engineering remarkably easier on most of us, the grid is still a very iffy scenario when designing for the web.
-
-Fortunately, the [Grid](http://demos.telerik.com/kendo-ui/grid/index) makes this much easier on us. With to the rapid templating engine that is included with Kendo UI, and the built-in datasource, we can get up and running with our grid very quickly.
+[Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) features a rapid templating engine and a built-in dataSource, which allow you to set up the widget very quickly and use it in your project.
 
 To start with, we need a data source. Due to my work on [instasharp.org](http://instasharp.org/) recently, I have become quite familiar with the Instagram API. We can use their "Popular" feeds endpoint without having to go through an authorization process. We still need a client_id, but it is easy to sign up for one of those at [http://instagram.com/developer/register/#](http://instagram.com/developer/register/#).
 
-##Create The Grid
+## Create the Grid
 
-First we need a grid on our page. A simple table describing the column headers will do just fine. This makes sense. If you were making a grid yourself, you would start with a table.
+Find detailed information on how to create the Grid from a `<table>` element in the [Overview help article]({% slug overview_kendoui_grid_widget %}).
+
+## Add Data
+
+Kendo UI provides a very powerful [data binding framework](http://demos.telerik.com/kendo-ui/datasource/index) you can use right inline with your grid. To do that, define the data source of the grid and supply your remote endpoint.
+
+###### Example
+
+```html
+    <table id="grid">
+        <thead>
+            <tr>
+                <th>
+                    
+                </th>
+                <th>
+                    Details
+                </th>
+                <th>
+                    Comments
+                </th>
+        </thead>
+        <tbody>
+        <td colspan="3"></td>
+        </tbody>
+    </table>
+
+    <script>
+    
+        $(function() {
+            $("#grid").kendoGrid({
+                dataSource: {   
+                    transport: {   
+                        read: {
+                           url: "https://api.instagram.com/v1/media/popular?client_id=4e0171f9fcfc4015bb6300ed91fbf719&count=25",
+                            dataType: "jsonp"
+                        }
+                    },
+                    schema: {
+                          data: "data"
+                    }
+                },
+                height: 500,
+                scrollable: true,
+                selectable: true
+            });
+        });
+        
+    </script>   
+    
+```
+
+For a better understanding of the example above, refer to the following explanations: 
+
+* `dataSource` - creates a new Kendo UI data source and assigns it as the data source for the Grid.
+* `transport` - defines how you will communicate with your remote data source.
+* `url` - points the location of the data you want to bind the widget to. 
+* `dataType` - tells the data source the format you expect the response to be in. In this case, it is JSONP. JSONP is a way of returning JSON from a cross-browser request without getting blocked. It is also a way to get malicious code injected into your page. It basically wraps the JSON response in a callback to intentionally mislead the browser. It is recommended not to do it unless you fully trust your data.
+* `schema` - tells the Grid what the schema of your response is. Think of it as the "JSON element to repeat on". Kendo UI looks for this element to represent each row in the Grid. The server returns an array of `data` elements so your repeating item is just "data". </li>
+
+When you run the example, you see a grid with no data in it. Therefore, you must provide the Grid with the data you want to be rendered in each column. Do this by specifying which element off the `data` tag in the server response you want to show in that particular column. The next example specifies the `field` attribute in the column array, so that the Grid displays the actual data from your response.
+
+###### Example
+
+```html
 
     <table id="grid">
         <thead>
@@ -35,50 +99,197 @@ First we need a grid on our page. A simple table describing the column headers w
         </tbody>
     </table>
 
-Now we need to make our table into a grid. First, make sure that
-[all Javascript and CSS files required by Kendo UI](/intro/installation/getting-started#host-kendo-ui-in-your-project) are registered.
+    <script>
 
-We can turn the div into a grid in the document.ready() jQuery function.
+        $(function() {
+            $("#grid").kendoGrid({
+                columns: [{ field: 'images.thumbnail.url' }, { field: 'user.username' }, { field: 'comments' }],
+                dataSource: {
+                    transport: {
+                        read: {
+                           url: "https://api.instagram.com/v1/media/popular?client_id=4e0171f9fcfc4015bb6300ed91fbf719&count=25",
+                            dataType: "jsonp"
+                        }
+                    },
+                    schema: {
+                          data: "data"
+                    }
+                },
+                height: 500,
+                scrollable: true,
+                selectable: true
+            });
+        });
 
-<iframe style="width: 700px; height: 600px;" src="http://jsfiddle.net/65kWY/13/embedded/result"></iframe>
+    </script>
 
-## Add Some Awesome Data
+```
 
-It's not much to look at, so lets add some data to it. Kendo UI provides a very powerful [data binding framework](http://demos.telerik.com/kendo-ui/datasource/index) we can use right inline with our grid. We simply need to define the data source of the grid and supply our remote endpoint. Kendo UI is still in beta so some of the naming may change slightly, but I'll explain what each one of these attributes / objects does.</p>
+Now you have some data as well as some issues with its visualization. The Grid renders the URL of an image in its **Image** column and the other columns show arrays of objects. Now you need indicate to the Grid that the way you want it to display each of the columns. Do this by an inline template for the image, ademonstrated below.
 
-<iframe style="width: 700px; height: 350px;" src="http://jsfiddle.net/65kWY/12/embedded/js,html,css,result"></iframe>
+###### Example
 
-## The Breakdown
+```html
 
-* The **dataSource** object creates a new Kendo UI data source and assigns it as the data source for the grid.
-* The **transport** object defines how we will communicate with our remote data source.
-    * **read**
-    * **url** is pretty self explanatory.
-        * **dataType** tells the data source the format that we expect the response to be in. In this case, it's JSOP. JSONP is a way of returning json from a cross-browser request without getting blocked. It's also a way to get malicious code injected into your page. It basically wraps the json response in a callback to fool the browser. Don't do it unless you fully trust your data. I think the fine folks at Instagram are quite trustworthy enough for this demo!
-    * **schema** tells the grid what the schema of our response is. Or you could think of it as the "json element to repeat on". Kendo UI will look for this element to represent each row in the grid. Instagram returns an array of "data" elements so our repeating item is just "data". </li>
+    <table id="grid">
+        <thead>
+            <tr>
+                <th>
+                    
+                </th>
+                <th>
+                    Details
+                </th>
+                <th>
+                    Comments
+                </th>
+        </thead>
+        <tbody>
+        <td colspan="3"></td>
+        </tbody>
+    </table>
 
-Now if you run the above example (if you haven't already), you will see a grid with nothing in it. That's because we haven't told the grid what to render in each column. We can do this by simply specifying which element off the "data" tag in the Instagram response we want to show in that particular column. I have specified the "field" attribute in the columns array so now our grid will display the actual data from our response.
+    <script>
 
-<iframe style="width: 700px; height: 600px;" src="http://jsfiddle.net/65kWY/10/embedded/result,js,html,css"></iframe>
+        $(function() {
+            $("#grid").kendoGrid({
+                columns: [{ template: '<img src="#= images.thumbnail.url #" />' }, 
+                          { field: 'user.username' }, { field: 'comments' }],
+                dataSource: {
+                    transport: {
+                        read: {
+                           url: "https://api.instagram.com/v1/media/popular?client_id=4e0171f9fcfc4015bb6300ed91fbf719&count=25",
+                            dataType: "jsonp"
+                        }
+                    },
+                    schema: {
+                          data: "data"
+                    }
+                },
+                height: 500,
+                scrollable: true,
+                selectable: true
+            });
+        });
 
-Now we have data, but we have several problems. We have the URL of an image in our image column and the other columns are showing arrays of objects because they are. We need to tell the grid how we want each column displayed. We can do that through a simple inline template for the image. Now our image shows up just fine.
+    </script>
+```
 
-<iframe style="width: 700px; height: 600px;" src="http://jsfiddle.net/65kWY/11/embedded/result,js,html,css"></iframe>
+The rest of the columns need some more specific templating since they are complex displays, not single fields. You can do that by moving the template outside of the Grid and then setting the template for the details to contain the name of the user that created the photo, the filter they used to create it, and the photo caption. In the last cell, use JavaScript in your templates to enumerate over the comments to display them in a list.
 
-## Make it pretty. Well. Prettier.
+All markup is now removed from your JavaScript. Add a little bit of style and your grid is now fully customized.
 
-The rest of the columns need some more specific templating since they are complex displays, not single fields. We can do that by moving the template outside of the grid and then setting the template for the details to contain the name of the user that created the photo, the filter they used to create it, and the photo caption. In the last cell we use JavaScript in our templates to enumerate over the comments to display them in a list.
+###### Example
 
-We have now moved all markup removed from our JavaScript (very clean). We add a little bit of style and our grid is now fully customizable.
+```html
 
-<iframe style="width: 700px; height: 600px;" src="http://jsfiddle.net/65kWY/8/embedded/result,html,js,css/"></iframe>
+    <table id="grid">
+        <thead>
+            <tr>
+                <th>
+                    
+                </th>
+                <th>
+                    Details
+                </th>
+                <th>
+                    Comments
+                </th>
+        </thead>
+        <tbody>
+        <td colspan="3"></td>
+        </tbody>
+    </table>
 
-## A Note About Templates
+    <script id="detailsTemplate" type="text/x-kendo-template">
+        <tr class="row">
+            <td>
+              <div class="image">
+                  <img src="#= images.thumbnail.url #" alt="#= user.username #" />
+              </div>
+            </td>
+            <td>
+              <div><span class="strong">Caption: </span># if ( caption ) { #
+                  #= caption.text # 
+                  # } #
+              </div>
+              <div><span class="strong">Username: </span>
+                #= user.username #
+              </div>
+              <div><span class="strong">Filter: </span>
+                #= filter #
+              </div>
+            </td>
+            <td> 
+              <div class="comments">
+                # $.each(comments.data, function(data) { #
+                <div class="comment">
+                  <span class="strong">#= this.from.username #: </span>#= this.text #
+                </div>
+                # }); #
+              </div>
+            </td>
+        </tr>
+   </script>
+   
+   <script>
+   $(function() {
+            $("#grid").kendoGrid({
+                rowTemplate: kendo.template($("#detailsTemplate").html()),
+                dataSource: {
+                    transport: {
+                        read: {
+                           url: "https://api.instagram.com/v1/media/popular?client_id=4e0171f9fcfc4015bb6300ed91fbf719&count=25",
+                            dataType: "jsonp"
+                        }
+                    },
+                    schema: {
+                          data: "data"
+                    }
+                },
+                height: 500,
+                scrollable: true,
+                selectable: true
+            });
+        });
+    </script>
+    
+    <style>
+        .row {
+            margin-bottom: 20px;
+            border-bottom: thin solid black;
+          }
 
-If you check out the "html" tab on the previous fiddle, you can see the templating syntax for [Kendo UI Templates](/framework/templates/overview). Templates are HTML inside of special script blocks. If you notice, I have also mixed in JavaScript right along with the html. The syntax will feel very familiar if you have ever done any PHP, Razor or other server side templating engine.
+        .image {
+            text-align: center;
+          }
 
-## Wrap Up
+        .comments {
+            height: 100px;
+          }
+          
+          .comment {
+            margin-top: 3px;
+            margin-bottom: 3px;
+            width: 90%;
+          }
+          .strong {
+            font-weight: bold;
+          }
+    </style>
+```
 
-I hope you were able to see the power of the Kendo UI [Grid](http://demos.telerik.com/kendo-ui/grid/index), [Data Source](http://demos.telerik.com/kendo-ui/datasource/index) and [Templating](http://demos.telerik.com/kendo-ui/templates/index) engine in this article. As well as providing you with a complete toolkit for your jQuery / HTML5 development, it helps you write cleaner JavaScript and lets the markup remain where it belongs.
+> **Important**  
+> When you check out the `html` code in the above example, you see the templating syntax for [Kendo UI templates](/framework/templates/overview). Templates represent HTML content inside of special script blocks. Note that JavaScript is also mixed right along with the `html` content. The syntax is familiar to the one used when doing PHP, Razor, or other server-side templating engine.
 
-Download the toolkit [here](http://www.telerik.com/download/kendo-ui-complete), or use the CDN references. Make sure you also hit up the [forums](http://www.telerik.com/forums/kendo-ui-framework) if you have any questions or suggestions for Kendo UI.
+## See Also
+
+Other articles on Kendo UI Grid:
+
+* [JavaScript API Reference](/api/javascript/ui/grid)
+* [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})
+* [Editing Functionality]({% slug editing_kendoui_grid_widget %})
+* [Localization of Messages]({% slug localization_kendoui_grid_widget %})
+* [Adaptive Rendering]({% slug adaptive_rendering_kendoui_grid_widget %})
+* [Exporting Content to Excel]({% slug exporting_excel_kendoui_grid_widget %})
+* [Printing Your Grid]({% slug printing_kendoui_grid %})
