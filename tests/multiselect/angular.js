@@ -154,4 +154,24 @@
         equal(tags.eq(0).children("span:first").text(), "red - My text");
         equal(tags.eq(1).children("span:first").text(), "green - My text");
     });
+
+    //ng-model
+
+    ngTest("multiselect with autoBind:false skips binding when value is null", 2, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            var colors = new kendo.data.ObservableArray([ { color: "red", value: 1 }, { color: "green", value: 2 }, { color: "blue", value: 3 } ]);
+
+            $scope.colors = new kendo.data.DataSource({ data: colors }),
+            $scope.selectedColor = null;
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-multi-select k-auto-bind="false" ng-model=selectedColor k-data-source=colors k-data-text-field="\'color\'" k-data-value-field="\'value\'"></select></div>');
+    },
+
+    function() {
+        var widget = QUnit.fixture.find("select").getKendoMultiSelect();
+
+        equal(widget.listView.isBound(), false);
+        equal(widget.value(), "");
+    });
 })();
