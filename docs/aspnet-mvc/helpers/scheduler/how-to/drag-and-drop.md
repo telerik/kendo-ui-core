@@ -9,4 +9,4 @@ description: Scheduler with drag and drop support
 The example below demonstrates how to implement drag and drop between Kendo UI Grid and Scheduler.
 
 
-[Scheduler with server filtering](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-drag-and-drop)
+[Scheduler with drag and drop](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-drag-and-drop)
