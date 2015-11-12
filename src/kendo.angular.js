@@ -402,10 +402,18 @@ var __meta__ = { // jshint ignore:line
             setTimeout(function(){
                 if (widget) { // might have been destroyed in between. :-(
                     var kNgModel = scope[widget.element.attr("k-ng-model")];
+
                     if (kNgModel) {
                         val = kNgModel;
                     }
-                    widget.value(val);
+
+                    if (widget.options.autoBind === false && !widget.listView.isBound()) {
+                        if (val) {
+                            widget.value(val);
+                        }
+                    } else {
+                        widget.value(val);
+                    }
                 }
             }, 0);
         };
