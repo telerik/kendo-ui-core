@@ -637,7 +637,7 @@ var __meta__ = { // jshint ignore:line
                 titleBarHeight;
 
             if (!arguments.length) {
-                return title.text();
+                return title.html();
             }
 
             if (text === false) {
