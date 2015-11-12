@@ -470,6 +470,7 @@ blockquote th, blockquote td {
     padding: 0;
     line-height: 18px;
     font-family: "Roboto Mono", "Ubuntu Mono", "Consolas", "Monaco", monospace;
+    font-weight: normal;
 }
 
 .prettyprint code .hljs {
