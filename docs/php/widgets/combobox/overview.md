@@ -6,7 +6,7 @@ description: Learn how to bind Kendo UI ComboBox for PHP, handle Kendo UI ComboB
 
 # ComboBox
 
-The Kendo ComboBox for PHP is a server-side wrapper for the [Kendo UI ComboBox](/api/web/combobox) widget.
+The Kendo ComboBox for PHP is a server-side wrapper for the [Kendo UI ComboBox](/api/javascript/ui/combobox) widget.
 
 ## Getting Started
 
@@ -53,7 +53,7 @@ Here is how to configure the combobox for local binding:
 ## Getting Client-side Reference
 
 You can reference the client-side Kendo ComboBox instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/combobox#methods) to control its behavior.
+Once a reference has been established, you can use the [API](/api/javascript/ui/combobox#methods) to control its behavior.
 
 
 ### Example
@@ -71,7 +71,7 @@ Once a reference has been established, you can use the [API](/api/web/combobox#m
 
 ## Handling Events
 
-You can subscribe to all combobox [events](/api/web/combobox#events).
+You can subscribe to all combobox [events](/api/javascript/ui/combobox#events).
 
 ### Example - subscribing by specifying JavaScript function name
 

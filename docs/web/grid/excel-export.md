@@ -260,7 +260,7 @@ Internet Explorer 9, or older, and Safari do not support the option for saving a
 * [Export MVC Grid to CSV](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/csv-export-server-side)
 * [Create Excel Documents with Kendo UI](/framework/excel/introduction)
 * [Save Files with Kendo UI](/framework/save-files/introduction)
-* [kendo.ooxml.Workbook API Reference](/api/javascript/ooxml/Workbook)
+* [kendo.ooxml.Workbook API Reference](/api/javascript/ooxml/workbook)
 
 ## See Also
 

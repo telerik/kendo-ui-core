@@ -16,12 +16,12 @@ The configuration of the assignments of the gantt resources. An assignment is a 
 
 ### assignments.dataSource `Object|Array|kendo.data.DataSource`
 
-The data source which contains assignment data items.  Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/framework/datasource)
+The data source which contains assignment data items.  Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
 instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/framework/datasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/datasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.DataSource](/api/framework/datasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascript/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
 
 #### Example - set the assignments data source
 
@@ -212,7 +212,7 @@ The field of the assignment data item which represents the amount of the assigne
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/framework/datasource#events-change) event of the
+If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource#events-change) event of the
 data source is fired. By default the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.
@@ -379,10 +379,10 @@ The text that is displayed in the column header cell. If not set the [field](#co
 
 ### columns.format `String`
 
-The format that is applied to the value before it is displayed. Takes the form "{0:format}" where "format" is a [standard number format](/api/framework/kendo#standard-number-formats),
-[custom number format](/api/framework/kendo#custom-number-formats), [standard date format](/api/framework/kendo#standard-date-formats) or a [custom date format](/api/framework/kendo#custom-date-formats).
+The format that is applied to the value before it is displayed. Takes the form "{0:format}" where "format" is a [standard number format](/api/javascript/kendo#standard-number-formats),
+[custom number format](/api/javascript/kendo#custom-number-formats), [standard date format](/api/javascript/kendo#standard-date-formats) or a [custom date format](/api/javascript/kendo#custom-date-formats).
 
-> The [kendo.format](/api/framework/kendo#methods-format) function is used to format the value.
+> The [kendo.format](/api/javascript/kendo#methods-format) function is used to format the value.
 
 #### Example - set format for the start and end column
 
@@ -644,12 +644,12 @@ The update interval of the "current time" marker, in milliseconds.
 
 ### dataSource `Object|Array|kendo.data.GanttDataSource`
 
-The data source of the widget which contains the tasks. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.GanttDataSource](/api/framework/ganttdatasource)
+The data source of the widget which contains the tasks. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.GanttDataSource](/api/javascript/data/ganttdatasource)
 instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.GanttDataSource](/api/framework/ganttdatasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.GanttDataSource](/api/javascript/data/ganttdatasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.GanttDataSource](/api/framework/ganttdatasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.GanttDataSource](/api/javascript/data/ganttdatasource) instance the widget will use that instance and will **not** initialize a new one.
 
 > The Kendo UI Gantt widget can be bound *only* to a `kendo.data.GanttDataSource`. An exception will be thrown if the `dataSource` option is set to a `kendo.data.DataSource` instance.
 
@@ -757,12 +757,12 @@ If the `dataSource` option is an existing [kendo.data.GanttDataSource](/api/fram
 
 ### dependencies `Object|Array|kendo.data.GanttDependencyDataSource`
 
-The data source of the widget which contains the dependencies. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.GanttDependencyDataSource](/api/framework/ganttdependencydatasource)
+The data source of the widget which contains the dependencies. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.GanttDependencyDataSource](/api/javascript/data/ganttdependencydatasource)
 instance.
 
-If the `dependencies` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.GanttDependencyDataSource](/api/framework/ganttdependencydatasource) instance using that value as data source configuration.
+If the `dependencies` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.GanttDependencyDataSource](/api/javascript/data/ganttdependencydatasource) instance using that value as data source configuration.
 
-If the `dependencies` option is an existing [kendo.data.GanttDependencyDataSource](/api/framework/ganttdependencydatasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dependencies` option is an existing [kendo.data.GanttDependencyDataSource](/api/javascript/data/ganttdependencydatasource) instance the widget will use that instance and will **not** initialize a new one.
 
 > The Kendo UI Gantt dependencies can be bound *only* to a `kendo.data.GanttDependencyDataSource`. An exception will be thrown if the `dataSource` option is set to a `kendo.data.DataSource` instance.
 
@@ -985,7 +985,7 @@ If set to `true` the Gantt will display a confirmation dialog when the user dele
 
 ### editable.template `String|Function`
 
-The [template](/api/framework/kendo#methods-template) which renders the editor.
+The [template](/api/javascript/kendo#methods-template) which renders the editor.
 
 The template should contain elements whose `name` HTML attributes are set as the editable fields. This is how the Gantt will know
 which field to update. The other option is to use [MVVM](/framework/mvvm/overview) bindings in order to bind HTML elements to data item fields.
@@ -2519,7 +2519,7 @@ If set to `false`, the day view will show all hours of the day. By default the v
 
 ### taskTemplate `String|Function`
 
-The [template](/api/framework/kendo#methods-template) used to render the gantt tasks.
+The [template](/api/javascript/kendo#methods-template) used to render the gantt tasks.
 
 The fields which can be used in the template are the [task fields](/api/javascript/data/gantttask)
 
@@ -2560,7 +2560,7 @@ The fields which can be used in the template are the [task fields](/api/javascri
 ### toolbar `String|Function|Array`
 
 If a `String` value is assigned to the `toolbar` configuration option, it will be treated as a single string template for the whole Gantt Toolbar,
-and the string value will be passed as an argument to a [`kendo.template()`](/api/framework/kendo#methods-template) function.
+and the string value will be passed as an argument to a [`kendo.template()`](/api/javascript/kendo#methods-template) function.
 
 If a `Function` value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the Gantt Toolbar contents.
 
@@ -2660,7 +2660,7 @@ This class can be used to obtain reference to the button after Gantt initializat
 
 ### toolbar.template `String|Function`
 
-The [template](/api/framework/kendo#methods-template) which renders the command. By default renders a button.
+The [template](/api/javascript/kendo#methods-template) which renders the command. By default renders a button.
 
 #### Example - set the template as a function
     <div id="gantt"></div>
@@ -2765,7 +2765,7 @@ The task tooltip configuration options.
 
 ### tooltip.template `String|Function`
 
-The [template](/api/framework/kendo#methods-template) which renders the tooltip.
+The [template](/api/javascript/kendo#methods-template) which renders the tooltip.
 
 The fields which can be used in the template are:
 
@@ -2879,7 +2879,7 @@ The size of the time slot headers. Values are treated as pixels.
 
 ### views.timeHeaderTemplate `String|Function`
 
-The [template](/api/framework/kendo#methods-template) used to render the time slots in "day" view
+The [template](/api/javascript/kendo#methods-template) used to render the time slots in "day" view
 
 #### Example
 
@@ -2904,7 +2904,7 @@ The [template](/api/framework/kendo#methods-template) used to render the time sl
 
 ### views.dayHeaderTemplate `String|Function`
 
-The [template](/api/framework/kendo#methods-template) used to render the day slots in "day" and "week" views.
+The [template](/api/javascript/kendo#methods-template) used to render the day slots in "day" and "week" views.
 
 #### Example - dayHeaderTemplate set for "day" view.
 
@@ -2956,7 +2956,7 @@ The [template](/api/framework/kendo#methods-template) used to render the day slo
 
 ### views.weekHeaderTemplate `String|Function`
 
-The [template](/api/framework/kendo#methods-template) used to render the week slots in "week" and "month" views.
+The [template](/api/javascript/kendo#methods-template) used to render the week slots in "week" and "month" views.
 
 #### Example - weekHeaderTemplate set for "week" view
 
@@ -3009,7 +3009,7 @@ The [template](/api/framework/kendo#methods-template) used to render the week sl
 
 ### views.monthHeaderTemplate `String|Function`
 
-The [template](/api/framework/kendo#methods-template) used to render the month slots in "month" and "year" views.
+The [template](/api/javascript/kendo#methods-template) used to render the month slots in "month" and "year" views.
 
 #### Example - monthHeaderTemplate set for "month" view
 
@@ -3064,7 +3064,7 @@ The [template](/api/framework/kendo#methods-template) used to render the month s
 
 ### views.yearHeaderTemplate `String|Function`
 
-The [template](/api/framework/kendo#methods-template) used to render the year slots in "year" view.
+The [template](/api/javascript/kendo#methods-template) used to render the year slots in "year" view.
 
 #### Example
 
@@ -3197,12 +3197,12 @@ The field of the resource data item which contains the resource color.
 
 ### resources.dataSource `Object|Array|kendo.data.DataSource`
 
-The data source which contains resource data items.  Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/framework/datasource)
+The data source which contains resource data items.  Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
 instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/framework/datasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/datasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.DataSource](/api/framework/datasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascript/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
 
 #### Example - set the resource data source
 
@@ -3338,7 +3338,7 @@ The height of the table rows. Numeric values are treated as pixels.
 
 ### dataSource `kendo.data.GanttDataSource`
 
-The [data source](/api/framework/ganttdatasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
+The [data source](/api/javascript/data/ganttdatasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
 
 > Changes of the data source will be reflected in the widget.
 
@@ -3444,7 +3444,7 @@ The [data source](/api/framework/ganttdatasource) of the widget. Configured via 
 
 ### dependencies `kendo.data.GanttDependencyDataSource`
 
-The [dependencies data source](/api/framework/ganttdependencydatasource) of the widget. Configured via the [dependencies](#configuration-dependencies) option.
+The [dependencies data source](/api/javascript/data/ganttdependencydatasource) of the widget. Configured via the [dependencies](#configuration-dependencies) option.
 
 > Changes of the data source will be reflected in the widget.
 

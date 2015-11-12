@@ -63,7 +63,7 @@ The animation played when a popup is closed.
 
 The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/framework/fx/common)
+[Complete list of available animations](/api/javascript/effects/common)
 
 ### animation.close.duration `Number`
 
@@ -91,7 +91,7 @@ The animation played when the popup is opened.
 
 The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/framework/fx/common)
+[Complete list of available animations](/api/javascript/effects/common)
 
 ### animation.open.duration `Number`
 
@@ -210,7 +210,7 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
 ### footer `String`
 
- The [template](/api/framework/kendo#methods-template) which renders the footer of the calendar. If false, the footer will not be rendered.
+ The [template](/api/javascript/kendo#methods-template) which renders the footer of the calendar. If false, the footer will not be rendered.
 
 #### Example - specify footer template as a function
 

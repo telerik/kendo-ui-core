@@ -37,7 +37,7 @@ JSZip requires extra initalization code in order to work with RequireJS. Check t
 
 ## Browser support
 
-Excel generation is available for all [supported browsers](/browsers-support). Saving the file needs a server-side proxy for older browser versions.
+Excel generation is available for all [supported browsers](/intro/supporting/browser-support). Saving the file needs a server-side proxy for older browser versions.
 Check the [saving files](/framework/save-files/introduction) help topic for more details.
 
 ## Create Excel Document

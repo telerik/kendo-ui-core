@@ -14,7 +14,7 @@ Pasting in the Editor requires permission to access **Clipboard** data. This may
 
 ## Editor in Popup Is Readonly (Firefox)
 
-Firefox cannot handle `iframe` elements properly when they are moved to the DOM. When an Editor is used inside a popup, which moves elements to the DOM, the popup (e.g., a Kendo UI Window, a jQuery dialog, etc.) must be initialized first, or you must call the [`refresh` method](/kendo-ui/api/web/editor#methods-refresh).
+Firefox cannot handle `iframe` elements properly when they are moved to the DOM. When an Editor is used inside a popup, which moves elements to the DOM, the popup (e.g., a Kendo UI Window, a jQuery dialog, etc.) must be initialized first, or you must call the [`refresh` method](/api/javascript/ui/editor#methods-refresh).
 
 ## Editor in iPad Expands instead of Being Scrollable
 
@@ -51,7 +51,7 @@ Since the inline Editor is initialized from a non-`form` element, it is not post
 
 Image and table resizing inside `contenteditable` elements depends on the browser. As a result of browser behavior, images may become non-resizable if a "classic" Editor (which uses an `iframe`) is created while hidden, or is hidden after its initialization and then displayed back. 
 
-As the reason for thе issue lies in browser functionalities, it can be resolved by calling the Editor's [`refresh`](/api/web/editor#methods-refresh) method after the Editor becomes visible. Refreshing the widget will recreate the `iframe`. 
+As the reason for thе issue lies in browser functionalities, it can be resolved by calling the Editor's [`refresh`](/api/javascript/ui/editor#methods-refresh) method after the Editor becomes visible. Refreshing the widget will recreate the `iframe`. 
 
 Another possible approach is to use the Editor's inline mode, i.e., create the Editor from a `div` element.
 
@@ -59,7 +59,7 @@ To achieve image or table resizing in browsers such as Google Chrome 46 that do 
 
 ## Back and Forward Browser Buttons Display Raw HTML
 
-The Editor stores its value encoded by default. When the page is retrieved from the `bfcache` (back-forward cache), the `textarea` value is persisted encoded and the Editor encodes it again. This process can be easily observed if you navigate several times back and forth. On each navigation, the Editor value will be encoded once more. To resolve the problem, set the [`encoded`](/api/web/editor#configuration-encoded) property to `false`, and expect the Editor value to be posted unencoded to the server. If you are using ASP.NET, be sure to either disable the ASP.NET security validation, or set the `AllowHtml` attribute on the model field that will receive the HTML string. Here is some more [information about requesting validation in ASP.NET](http://blogs.learnnowonline.com/blog/bid/199703/ASP-NET-MVC-Request-Validation-Protection-AllowHtml-Attribute).
+The Editor stores its value encoded by default. When the page is retrieved from the `bfcache` (back-forward cache), the `textarea` value is persisted encoded and the Editor encodes it again. This process can be easily observed if you navigate several times back and forth. On each navigation, the Editor value will be encoded once more. To resolve the problem, set the [`encoded`](/api/javascript/ui/editor#configuration-encoded) property to `false`, and expect the Editor value to be posted unencoded to the server. If you are using ASP.NET, be sure to either disable the ASP.NET security validation, or set the `AllowHtml` attribute on the model field that will receive the HTML string. Here is some more [information about requesting validation in ASP.NET](http://blogs.learnnowonline.com/blog/bid/199703/ASP-NET-MVC-Request-Validation-Protection-AllowHtml-Attribute).
 
 Another option is to enable the [inline Editor mode](/web/editor/overview#classic-mode-vs-inline-mode), which does not use an `iframe` and a `textarea`. In this case, however, the Editor's value must be [submitted manually](/getting-started/web/editor/troubleshooting#inline-editor-value-is-not-posted-to-the-server).
 
@@ -73,7 +73,7 @@ The browser's back-forward cache can be disabled by attaching a `window.unload` 
     
 ## Pasted MS Word Styles Are Not Retained
 
-By design, the Editor strives to output a clean, XHTML-compatible markup. Because of that, the widget cleans up invalid styles set by Microsoft Word, and removes the most presentational styles. Such styles include the colors applied by the current theme and the default MS Word font and size. Ideally, the output of the Editor should be styled via a stylesheet provided through the [stylesheets configuration option](/kendo-ui/api/web/editor#configuration-stylesheets). This allows all pasted content to be styled in a consistent manner across your site.
+By design, the Editor strives to output a clean, XHTML-compatible markup. Because of that, the widget cleans up invalid styles set by Microsoft Word, and removes the most presentational styles. Such styles include the colors applied by the current theme and the default MS Word font and size. Ideally, the output of the Editor should be styled via a stylesheet provided through the [stylesheets configuration option](/api/javascript/ui/editor#configuration-stylesheets). This allows all pasted content to be styled in a consistent manner across your site.
 
 If wrong pasting removes semantics or actual content along with the styles, submit a bug report and attach an MS Word document that reproduces the problem.
 

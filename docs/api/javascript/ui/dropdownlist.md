@@ -66,7 +66,7 @@ Configures the opening and closing animations of the suggestion popup. Setting t
 
 The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/framework/fx/common)
+[Complete list of available animations](/api/javascript/effects/common)
 
 ### animation.close.duration `Number` *(default: 100)*
 
@@ -94,7 +94,7 @@ The animation played when the suggestion popup is opened.
 
 The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/framework/fx/common)
+[Complete list of available animations](/api/javascript/effects/common)
 
 ### animation.open.duration `Number` *(default: 200)*
 
@@ -180,12 +180,12 @@ Defines the field to be used to filter the data source. If not defined the [pare
 
 ### dataSource `Object|Array|kendo.data.DataSource`
 
-The data source of the widget which is used to display a list of values. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/framework/datasource)
+The data source of the widget which is used to display a list of values. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
 instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/framework/datasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/datasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.DataSource](/api/framework/datasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascript/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
 
 #### Example - set dataSource as a JavaScript object
 
@@ -310,7 +310,7 @@ The supported filter values are `startswith`, `endswith` and `contains`.
 
 ### fixedGroupTemplate `String|Function`
 
-The [template](/api/framework/kendo#methods-template) used to render the fixed header group. By default the widget displays only the value of the current group.
+The [template](/api/javascript/kendo#methods-template) used to render the fixed header group. By default the widget displays only the value of the current group.
 
     <input id="customers" style="width: 400px" />
     <script>
@@ -333,7 +333,7 @@ The [template](/api/framework/kendo#methods-template) used to render the fixed h
 
 ### groupTemplate `String|Function`
 
-The [template](/api/framework/kendo#methods-template) used to render the groups. By default the widget displays only the value of the group.
+The [template](/api/javascript/kendo#methods-template) used to render the groups. By default the widget displays only the value of the group.
 
     <input id="customers" style="width: 400px" />
     <script>
@@ -483,7 +483,7 @@ refer to [Popup](/api/javascript/ui/popup) documentation.
 
 ### optionLabelTemplate `String|Function`
 
-The [template](/api/framework/kendo#methods-template) used to render the option label.
+The [template](/api/javascript/kendo#methods-template) used to render the option label.
 
 ### headerTemplate `String|Function`
 
@@ -508,7 +508,7 @@ Specifies a static HTML content, which will be rendered as a header of the popup
 
 ### template `String|Function`
 
-The [template](/api/framework/kendo#methods-template) used to render the items. By default the widget displays only the text of the data item (configured via `dataTextField`).
+The [template](/api/javascript/kendo#methods-template) used to render the items. By default the widget displays only the text of the data item (configured via `dataTextField`).
 
 #### Example - specify template as a function
 
@@ -548,7 +548,7 @@ The [template](/api/framework/kendo#methods-template) used to render the items. 
 
 ### valueTemplate `String|Function`
 
-The [valueTemplate](/api/framework/kendo#methods-template) used to render the selected value. By default the widget displays only the text of the data item (configured via `dataTextField`).
+The [valueTemplate](/api/javascript/kendo#methods-template) used to render the selected value. By default the widget displays only the text of the data item (configured via `dataTextField`).
 
 #### Example - specify valueTemplate as a function
 
@@ -803,7 +803,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/framework/datasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
+The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
 
 > Changes of the data source will be reflected in the widget.
 
@@ -1477,7 +1477,7 @@ The widget instance which fired the event.
 
 The filter descriptor that will be used to filter the data source.
 
-> The data source filters the data items client-side unless the [data source serverFiltering](/api/framework/datasource#configuration-serverFiltering) option is set to `true`.
+> The data source filters the data items client-side unless the [data source serverFiltering](/api/javascript/data/datasource#configuration-serverFiltering) option is set to `true`.
 
 #### Example - subscribe to the "filtering" event during initialization
 
@@ -1576,7 +1576,7 @@ Fired when an item from the popup is selected by the user either with mouse/tap 
 > **Important:** The event is not fired when an item is selected programmatically.
 
 > **Important:** Since version Q1 2015 (2015.1.318), the
-[option label has been moved outside the item list DOM collection](/install/changes-and-backward-compatibility#kendo-ui-2015-q1).
+[option label has been moved outside the item list DOM collection](/backward-compatibility#kendo-ui-2015-q1).
 As a result, jQuery.index() can no longer be used to reliably detect if the option label is the selected dropdown item.
 A more appropriate approach would be to check if the selected dataItem value is an empty string,
 and/or check if the selected dateItem's text is equal to the optionLabel string.

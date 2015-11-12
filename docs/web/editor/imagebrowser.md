@@ -22,7 +22,7 @@ The image browser needs a server-side implementation to retrieve and upload the 
 
 ## Configuration
 
-The image browser tool can be configured through the [`imagebrowser` configuration option](/api/web/editor#configuration-imageBrowser).
+The image browser tool can be configured through the [`imagebrowser` configuration option](/api/javascript/ui/editor#configuration-imageBrowser).
 
 ###### Example
 
@@ -68,7 +68,7 @@ The default requests and responses for the `create/read/destroy/upload` operatio
 
         { "name": "foo.png", "type": "f", "size": 12345 }
 
-All of these can be changed through the [`imagebrowser` configuration](/api/web/editor#configuration-imageBrowser).
+All of these can be changed through the [`imagebrowser` configuration](/api/javascript/ui/editor#configuration-imageBrowser).
 
 ## See Also
 

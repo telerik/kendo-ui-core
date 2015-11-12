@@ -175,7 +175,7 @@ This does not trigger the "change" event.
 
 ### color
 
-Get or set the selected color. If no argument is given, this returns the currently selected color as a [`kendo.Color` object](/api/framework/color).
+Get or set the selected color. If no argument is given, this returns the currently selected color as a [`kendo.Color` object](/api/javascript/color).
 
 #### Parameters
 
@@ -241,5 +241,5 @@ The value of the ColorPicker.
     flatpicker.bind("change", picker_change);
     </script>
 
-[parseColor]: ../framework/kendo#parseColor
-[Color]: ../framework/kendo#Color
+[parseColor]: /api/javascript/kendo#parseColor
+[Color]: /api/javascript/kendo#Color

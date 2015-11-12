@@ -62,7 +62,7 @@ Defines the number of buttons displayed in the numeric pager.
     </script>
 
 ### dataSource `Object|kendo.data.DataSource`
-Instance of kendo DataSource. See the [**kendo.data.DataSource**](/api/framework/datasource).
+Instance of kendo DataSource. See the [**kendo.data.DataSource**](/api/javascript/data/datasource).
 
 This option is mandatory because the Pager is tightly connected with DataSource. The pager is UI widget for managing paging over the DataSource. The Pager gets values like page size or total count of items from DataSource.
 

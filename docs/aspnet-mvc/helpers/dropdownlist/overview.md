@@ -6,7 +6,7 @@ description: How to bind a Kendo UI DropDownList for ASP.NET MVC, configure a se
 
 # DropDownList
 
-The DropDownList HtmlHelper extension is a server-side wrapper for the [Kendo UI DropDownList](/api/web/dropdownlist) widget.
+The DropDownList HtmlHelper extension is a server-side wrapper for the [Kendo UI DropDownList](/api/javascript/ui/dropdownlist) widget.
 
 ## Getting Started
 
@@ -279,7 +279,7 @@ As you can see the dropdownlist sends the input's value only if the end-user sta
 ## Access an Existing DropDownList
 
 You can reference an existing DropDownList instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/dropdownlist#methods) to control its behavior.
+Once a reference has been established, you can use the [API](/api/javascript/ui/dropdownlist#methods) to control its behavior.
 
 
 ### Access an Existing DropDownList Instance
@@ -295,7 +295,7 @@ Once a reference has been established, you can use the [API](/api/web/dropdownli
 
 ## Handle DropDownList Events
 
-You can subscribe to all [events](/api/web/dropdownlist#events) exposed by Kendo UI DropDownList:
+You can subscribe to all [events](/api/javascript/ui/dropdownlist#events) exposed by Kendo UI DropDownList:
 
 
 ### WebForms - Subscribe by Handler Name

@@ -64,13 +64,13 @@ The handler should return either:
 *   Any other response to signify failure.
 
 ### Remove handler
-The remove handler should accept POST requests (configurable via the [removeVerb](/api/web/upload#configuration-async.removeVerb) option).
+The remove handler should accept POST requests (configurable via the [removeVerb](/api/javascript/ui/upload#configuration-async.removeVerb) option).
 The requests will contain one or more text fields with name "fileNames". In this case, we change it to "fileNames[]" using the removeField option.
 
 The handler should return either:
 
 *   An empty response to signify success.
-*   A JSON string with "text/plain" content encoding. The de-serialized object is available in the [success](/api/web/upload#events-success) event handler.
+*   A JSON string with "text/plain" content encoding. The de-serialized object is available in the [success](/api/javascript/ui/upload#events-success) event handler.
 *   Any other response to signify failure.
 
 ### Asynchronous mode fallback

@@ -12,12 +12,12 @@ Represents the Kendo UI PivotConfigurator widget. Inherits from [Widget](/api/ja
 
 ### dataSource `Object|kendo.data.PivotDataSource`
 
-The data source of the widget which is used to display values. Can be a JavaScript object which represents a valid data source configuration or an existing [kendo.data.PivotDataSource](/api/framework/pivotdatasource)
+The data source of the widget which is used to display values. Can be a JavaScript object which represents a valid data source configuration or an existing [kendo.data.PivotDataSource](/api/javascript/data/pivotdatasource)
 instance.
 
-If the `dataSource` option is set to a JavaScript object the widget will initialize a new [kendo.data.PivotDataSource](/api/framework/pivotdatasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object the widget will initialize a new [kendo.data.PivotDataSource](/api/javascript/data/pivotdatasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.PivotDataSource](/api/framework/pivotdatasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.PivotDataSource](/api/javascript/data/pivotdatasource) instance the widget will use that instance and will **not** initialize a new one.
 
 #### Example - set dataSource as a JavaScript object
 
@@ -1277,7 +1277,7 @@ The text of the "not equal" filter operator.
 
 ### dataSource `kendo.data.PivotDataSource`
 
-The [data source](/api/framework/pivotdatasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
+The [data source](/api/javascript/data/pivotdatasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
 
 > Changes of the data source will be reflected in the widget.
 

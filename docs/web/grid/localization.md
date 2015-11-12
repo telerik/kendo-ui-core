@@ -150,7 +150,7 @@ Find more info in the [`columnMenu.messages`](/api/javascript/ui/grid#configurat
         }
     }
 
-Find more info in the [`messages`](/api/web/pager#messages-object) section of the Pager API reference.
+Find more info in the [`messages`](/api/javascript/ui/pager#messages-object) section of the Pager API reference.
 
 ## See Also
 
