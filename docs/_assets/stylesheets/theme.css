@@ -5,17 +5,6 @@
     width: 100%;
 }
 
-#page-inner-content {
-    position: absolute;
-    top: 79px;
-    bottom: 0;
-    width: 100%;
-}
-
-#page-inner-content.move-inner-content {
-    top: 126px;
-}
-
 #page-header {
     background-color: #2a2d33;
     color: #fff;
@@ -459,3 +448,4 @@ pre .pln { color: #3e526b; }    /* plaintext */
 pre .tag { color: #3e526b; } /* html/xml tag */
 pre .atn { color: #3e526b; } /* attribute name */
 pre .dec { color: #3e526b; } /* decimal */
+

@@ -1,3 +1,32 @@
+function scrollNodeIntoView(li) {
+    var top = li.offset().top;
+    var navContainer = $("#page-nav");
+    var navContainerHeight = navContainer.outerHeight();
+
+    if (top - navContainer.offset().top < 0 || top > navContainerHeight) {
+        navContainer.scrollTop(top - $("#page-tree").offset().top - navContainerHeight / 2);
+    }
+}
+
+function selectNode(hash, scroll) {
+    var li = $("#page-tree li:has(>div>span>a[href='" + hash + "'])");
+
+    if (li.length) {
+        var treeview = $("#page-tree").data("kendoTreeView");
+        var topicNode = li.closest(".current-topic");
+
+        treeview.select(li);
+
+        topicNode.find("li").removeClass("path");
+
+        li.parentsUntil(topicNode).addClass("path");
+
+        if (scroll) {
+            scrollNodeIntoView(li);
+        }
+    }
+}
+
 function expandNavigation(url) {
     return function expand(e) {
         if (e.node) {
@@ -5,7 +34,6 @@ function expandNavigation(url) {
         }
 
         var segments = url.split("/");
-        var page = segments[segments.length - 1];
         var treeview = this;
 
         var dataSource = this.dataSource;
@@ -26,24 +54,21 @@ function expandNavigation(url) {
 
         if (location.pathname.indexOf("/api/") < 0) {
             li.addClass("current-topic");
-            
+
             $("h2").each(function() {
                 var hash = $(this).find("a").attr("href");
-                
+
                 $(".current-topic>ul>li:first-child>div>span.k-in").addClass("k-state-selected");
-                
+
                 var state = $(".k-state-selected");
                 if (state.length > 1) {
                   $(".k-state-selected").first().removeClass("k-state-selected");
                 }
                 var h2Node = treeview.append({ path: hash, text: kendo.htmlEncode($(this).text()) }, li);
-                
 
                 if (location.hash.replace("#", "") === hash.replace("#", "")) {
                     selectNode(hash);
                 }
-                
-                
 
                 $(this).nextUntil("h2", "h3").each(function() {
                     var hash = $(this).find("a").attr("href");
@@ -56,53 +81,26 @@ function expandNavigation(url) {
                 });
 
             });
-            
-            
         }
-        
+
 
         this.unbind("dataBound", expand);
-    }
+    };
 }
 
 $(window).on("hashchange", function() {
     selectNode(location.hash, false);
 });
 
-function selectNode(hash, scroll) {
-    var li = $("#page-tree li:has(>div>span>a[href='" + hash + "'])");
-
-    if (li.length) {
-        var treeview = $("#page-tree").data("kendoTreeView");
-        var topicNode = li.closest(".current-topic");
-
-        treeview.select(li);
-
-        topicNode.find("li").removeClass("path");
-
-        li.parentsUntil(topicNode).addClass("path");
-
-        scrollNodeIntoView(li);
-    }
-}
-
-function scrollNodeIntoView(li) {
-    var top = li.offset().top;
-
-    if (top - $("#page-nav").offset().top < 0 || top > $("#page-nav").outerHeight()) {
-        $("#page-nav").scrollTop(top - $("#page-tree").offset().top - $("#page-nav").outerHeight() / 2);
-    }
-}
-
 if (location.pathname.indexOf("/api/") < 0) {
     $(function() {
         var headings = $("h2,h3");
+        var fixedHeaderHeight = $("#page-header").height();
 
-        $("#page-article").on("scroll", function(e) {
-            var pageArticle = this;
-
+        $(document).on("scroll", function() {
+            var scrollOffset = $(document).scrollTop() + fixedHeaderHeight;
             var current = headings.filter(function() {
-                return $(this).offset().top + this.offsetHeight > 0;
+                return $(this).offset().top + this.offsetHeight - scrollOffset > 0;
             }).first();
 
             if (current.length) {
@@ -135,7 +133,7 @@ function navigationTemplate(root) {
         } else {
             return '<a href="' + url + '">' + text + "</a>";
         }
-    }
+    };
 }
 
 function preventParentSelection(e) {
