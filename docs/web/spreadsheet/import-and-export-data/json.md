@@ -22,7 +22,7 @@ Persisted information includes:
 
 ## Serialization API
 
-The Spreadsheet client-side API includes the [`fromJSON`](/api/javascript/ui/spreadsheet#methods-fromJSON) and [`toJSON`](`http://localhost/kendo-ui/api/javascript/ui/spreadsheet#methods-toJSON`) methods for loading and storing the widget state.
+The Spreadsheet client-side API includes the [`fromJSON`](/api/javascript/ui/spreadsheet#methods-fromJSON) and [`toJSON`](http://localhost/kendo-ui/api/javascript/ui/spreadsheet#methods-toJSON) methods for loading and storing the widget state.
 
 To load the spreadsheet with data, pass an object matching the required schema, to `fromJSON`. This will reset the widget and clear all existing data.
 

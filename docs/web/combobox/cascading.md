@@ -34,7 +34,7 @@ Initialize a cascading ComboBox in the following way:
          });
     </script>
 
-The `child` ComboBox cascades from the `parent` one if the [`cascadeFrom`](/api/web/combobox#configuration) option is defined. The `cascadeFrom` option should point to the `parent` ID.
+The `child` ComboBox cascades from the `parent` one if the [`cascadeFrom`](/api/javascript/ui/combobox#configuration) option is defined. The `cascadeFrom` option should point to the `parent` ID.
 
 > **Important**  
 > The cascading functionality only works when you define the `cascadeFrom` property and initialize the `parent` ComboBox.
@@ -83,11 +83,11 @@ You need to set the value of the ComboBoxes. For instance, you can define it bef
        });
     </script>
 
-You also can use the [`value`](/api/web/combobox#configuration) option.
+You also can use the [`value`](/api/javascript/ui/combobox#configuration) option.
 
 **2. I am using ComboBoxes with load on demand (`autoBind: false`) and I need to pre-set the selected items. How to do that?**
 
-You need to set the [`value`](/api/web/combobox#configuration) and [`text`](/api/web/combobox#configuration) options:
+You need to set the [`value`](/api/javascript/ui/combobox#configuration) and [`text`](/api/javascript/ui/combobox#configuration) options:
 
     <input id="parent" value="1" />
     <input id="child" value="36" />

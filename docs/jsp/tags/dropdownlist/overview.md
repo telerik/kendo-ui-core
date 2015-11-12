@@ -4,7 +4,7 @@ title: Overview
 
 # DropDownList
 
-The DropDownList JSP tag is a server-side wrapper for the [Kendo UI DropDownList](/api/web/dropdownlist) widget.
+The DropDownList JSP tag is a server-side wrapper for the [Kendo UI DropDownList](/api/javascript/ui/dropdownlist) widget.
 
 ## Getting Started
 
@@ -39,7 +39,7 @@ Here is how to configure the Kendo DropDownList for binding to a data passed as 
 ## Accessing an Existing DropDownList
 
 You can reference an existing DropDownList instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/dropdownlist#methods) to control its behavior.
+Once a reference has been established, you can use the [API](/api/javascript/ui/dropdownlist#methods) to control its behavior.
 
 ### Accessing an existing DropDownList instance
 
@@ -53,7 +53,7 @@ Once a reference has been established, you can use the [API](/api/web/dropdownli
 
 ## Handling Kendo UI DropDownList events
 
-You can subscribe to all [events](/api/web/dropdownlist#events) exposed by Kendo UI dropdownlist:
+You can subscribe to all [events](/api/javascript/ui/dropdownlist#events) exposed by Kendo UI dropdownlist:
 
 ### Subscribe by handler name
 

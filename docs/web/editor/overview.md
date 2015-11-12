@@ -30,7 +30,7 @@ The Editor assumes two mode types depending on the element from which it is crea
 
 If you initialize the Editor from a `<textarea>`, it assumes its classic mode. The `textarea` is hidden and used to hold the value of the widget. A `contenteditable iframe` is created for you to type in. In the past, `iframes` were the only element which allowed content editability in most browsers.
 
-The classic Editor is able to post its value automatically, because it is based on a `form` element. The Editor tools are always visible. The Editor's content does not reside on the main web page, so the page styling does not influence the editable content. If custom styles need to be applied to the editable content, they must be [injected via the Editor's configuration](/api/web/editor#configuration-stylesheets).
+The classic Editor is able to post its value automatically, because it is based on a `form` element. The Editor tools are always visible. The Editor's content does not reside on the main web page, so the page styling does not influence the editable content. If custom styles need to be applied to the editable content, they must be [injected via the Editor's configuration](/api/javascript/ui/editor#configuration-stylesheets).
 
 [Classic Editor Demo](http://demos.telerik.com/kendo-ui/web/editor/index.html)
 

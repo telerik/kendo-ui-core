@@ -162,7 +162,7 @@ The supported effects are **"expandVertical"** and **"fadeIn"**.
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/framework/datasource#events-change) event of the
+If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource#events-change) event of the
 data source is fired. By default the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source does not make more than one request to the remote service.
@@ -265,7 +265,7 @@ Sets the name attribute of the checkbox inputs. That name will be posted to the 
 
 ### checkboxes.template `String|Function`
 
-The [template](/api/framework/kendo#methods-template) which renders the checkboxes. Can be used to allow posting of
+The [template](/api/javascript/kendo#methods-template) which renders the checkboxes. Can be used to allow posting of
 additional information along the TreeView checkboxes.
 
 The fields which can be used in the template are:
@@ -309,11 +309,11 @@ Sets the field of the data item that provides the image URL of the TreeView node
 
 ### dataSource `Object|Array|kendo.data.HierarchicalDataSource`
 
-The data source of the widget which is used render nodes. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.HierarchicalDataSource](/api/framework/hierarchicaldatasource) instance.
+The data source of the widget which is used render nodes. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.HierarchicalDataSource](/api/javascript/data/hierarchicaldatasource) instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.HierarchicalDataSource](/api/framework/hierarchicaldatasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.HierarchicalDataSource](/api/javascript/data/hierarchicaldatasource) instance using that value as data source configuration.
 
-If the `dataSource` option is an existing [kendo.data.HierarchicalDataSource](/api/framework/hierarchicaldatasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [kendo.data.HierarchicalDataSource](/api/javascript/data/hierarchicaldatasource) instance the widget will use that instance and will **not** initialize a new one.
 
 #### Example - set dataSource as a JavaScript object
 
@@ -995,8 +995,8 @@ The text that is being searched for.
 ### findByUid
 
 Searches for a node with the given unique identifier.
-Applicable when the widget is bound to a [HierarchicalDataSource](/api/framework/hierarchicaldatasource).
-If you want to find a node by its `id`, use the [dataSource.get()](/api/framework/datasource#get) method and supply its uid to the `findByUid` method.
+Applicable when the widget is bound to a [HierarchicalDataSource](/api/javascript/data/hierarchicaldatasource).
+If you want to find a node by its `id`, use the [dataSource.get()](/api/javascript/data/datasource#get) method and supply its uid to the `findByUid` method.
 
 #### Parameters
 

@@ -6,7 +6,7 @@ description: User Guide for server-side wrapper for Kendo UI ComboBox for ASP.NE
 
 # ComboBox
 
-The ComboBox HtmlHelper extension is a server-side wrapper for the [Kendo UI ComboBox](/api/web/combobox) widget.
+The ComboBox HtmlHelper extension is a server-side wrapper for the [Kendo UI ComboBox](/api/javascript/ui/combobox) widget.
 
 ## Getting Started
 
@@ -284,7 +284,7 @@ As you can see the combobox sends the input's value only if the end-user starts 
 ## Access an Existing ComboBox
 
 You can reference an existing ComboBox instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/combobox#methods) to control its behavior.
+Once a reference has been established, you can use the [API](/api/javascript/ui/combobox#methods) to control its behavior.
 
 
 ### Access an Existing ComboBox Instance
@@ -300,7 +300,7 @@ Once a reference has been established, you can use the [API](/api/web/combobox#m
 
 ## Handle ComboBox Events
 
-You can subscribe to all [events](/api/web/combobox#events) exposed by Kendo UI ComboBox:
+You can subscribe to all [events](/api/javascript/ui/combobox#events) exposed by Kendo UI ComboBox:
 
 ### WebForms - Subscribe by Handler Name
 

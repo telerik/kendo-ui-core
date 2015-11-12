@@ -6,7 +6,7 @@ description: Learn how to bind Kendo UI DropDownList for PHP, handle Kendo UI Dr
 
 # DropDownList
 
-The Kendo DropDownList for PHP is a server-side wrapper for the [Kendo UI DropDownList](/api/web/dropdownlist) widget.
+The Kendo DropDownList for PHP is a server-side wrapper for the [Kendo UI DropDownList](/api/javascript/ui/dropdownlist) widget.
 
 ## Getting Started
 
@@ -53,7 +53,7 @@ Here is how to configure the dropdownlist for local binding:
 ## Getting Client-side Reference
 
 You can reference the client-side Kendo DropDownList instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/dropdownlist#methods) to control its behavior.
+Once a reference has been established, you can use the [API](/api/javascript/ui/dropdownlist#methods) to control its behavior.
 
 
 ### Example
@@ -71,7 +71,7 @@ Once a reference has been established, you can use the [API](/api/web/dropdownli
 
 ## Handling Events
 
-You can subscribe to all dropdownlist [events](/api/web/dropdownlist#events).
+You can subscribe to all dropdownlist [events](/api/javascript/ui/dropdownlist#events).
 
 ### Example - subscribing by specifying JavaScript function name
 

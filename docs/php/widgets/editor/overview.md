@@ -6,7 +6,7 @@ description: Getting started with Kendo UI Editor for PHP in quick steps - confi
 
 # Editor
 
-The Kendo Editor for PHP is a server-side wrapper for the [Kendo UI Editor](/api/web/editor) widget.
+The Kendo Editor for PHP is a server-side wrapper for the [Kendo UI Editor](/api/javascript/ui/editor) widget.
 
 ## Getting Started
 
@@ -30,13 +30,13 @@ Here is how to configure a simple Kendo Editor:
 ## Getting the editor value on the server
 
 The editor posts its value HTML-encoded by default.
-You can either disable this functionality through the [encoded](/api/web/editor#encoded-boolean-default) configuration option,
+You can either disable this functionality through the [encoded](/api/javascript/ui/editor#encoded-boolean-default) configuration option,
 or use [html_entity_decode](http://php.net/manual/en/function.html-entity-decode.php).
 
 ## Getting Client-side Reference
 
 You can reference the client-side Kendo Editor instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/editor#methods) to control its behavior.
+Once a reference has been established, you can use the [API](/api/javascript/ui/editor#methods) to control its behavior.
 
 
 ### Example
@@ -54,7 +54,7 @@ Once a reference has been established, you can use the [API](/api/web/editor#met
 
 ## Handling Events
 
-You can subscribe to all editor [events](/api/web/editor#events).
+You can subscribe to all editor [events](/api/javascript/ui/editor#events).
 
 ### Example - subscribing by specifying JavaScript function name
 

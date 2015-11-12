@@ -4,7 +4,7 @@ title: Overview
 
 # Editor
 
-The Editor JSP tag is a server-side wrapper for the [Kendo UI Editor](/api/web/editor) widget.
+The Editor JSP tag is a server-side wrapper for the [Kendo UI Editor](/api/javascript/ui/editor) widget.
 
 ## Getting Started
 
@@ -32,7 +32,7 @@ Here is how to configure a simple Kendo Editor:
 ## Accessing an Existing Editor
 
 You can reference an existing Editor instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/editor#methods) to control its behavior.
+Once a reference has been established, you can use the [API](/api/javascript/ui/editor#methods) to control its behavior.
 
 ### Accessing an existing Editor instance
 
@@ -46,7 +46,7 @@ Once a reference has been established, you can use the [API](/api/web/editor#met
 
 ## Handling Kendo UI Editor events
 
-You can subscribe to all [events](/api/web/editor#events) exposed by Kendo UI Editor:
+You can subscribe to all [events](/api/javascript/ui/editor#events) exposed by Kendo UI Editor:
 
 ### Subscribe by handler name
 

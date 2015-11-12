@@ -4,7 +4,7 @@ title: Overview
 
 # ComboBox
 
-The ComboBox JSP tag is a server-side wrapper for the [Kendo UI ComboBox](/api/web/combobox) widget.
+The ComboBox JSP tag is a server-side wrapper for the [Kendo UI ComboBox](/api/javascript/ui/combobox) widget.
 
 ## Getting Started
 
@@ -39,7 +39,7 @@ Here is how to configure the Kendo ComboBox for binding to a data passed as mode
 ## Accessing an Existing ComboBox
 
 You can reference an existing ComboBox instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/combobox#methods) to control its behavior.
+Once a reference has been established, you can use the [API](/api/javascript/ui/combobox#methods) to control its behavior.
 
 ### Accessing an existing ComboBox instance
 
@@ -53,7 +53,7 @@ Once a reference has been established, you can use the [API](/api/web/combobox#m
 
 ## Handling Kendo UI ComboBox events
 
-You can subscribe to all [events](/api/web/combobox#events) exposed by Kendo UI combobox:
+You can subscribe to all [events](/api/javascript/ui/combobox#events) exposed by Kendo UI combobox:
 
 ### Subscribe by handler name
 

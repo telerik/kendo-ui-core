@@ -470,7 +470,7 @@ The `role` [data attribute](/framework/data-attribute-initialization) of the wid
 
 ### columns.footerTemplate `String|Function`
 
-The [template](/api/framework/kendo#methods-template) which renders the footer table cell for the column.
+The [template](/api/javascript/kendo#methods-template) which renders the footer table cell for the column.
 
 The fields which can be used in the template are:
 
@@ -508,10 +508,10 @@ The fields which can be used in the template are:
 
 ### columns.format `String`
 
-The format that is applied to the value before it is displayed. Takes the form "{0:format}" where "format" is a [standard number format](/api/framework/kendo#standard-number-formats),
-[custom number format](/api/framework/kendo#custom-number-formats), [standard date format](/api/framework/kendo#standard-date-formats) or a [custom date format](/api/framework/kendo#custom-date-formats).
+The format that is applied to the value before it is displayed. Takes the form "{0:format}" where "format" is a [standard number format](/api/javascript/kendo#standard-number-formats),
+[custom number format](/api/javascript/kendo#custom-number-formats), [standard date format](/api/javascript/kendo#standard-date-formats) or a [custom date format](/api/javascript/kendo#custom-date-formats).
 
-> The [kendo.format](/api/framework/kendo#methods-format) function is used to format the value.
+> The [kendo.format](/api/javascript/kendo#methods-format) function is used to format the value.
 
 #### Example - specify the column format string
 
@@ -558,7 +558,7 @@ The table headers would look like this: `<th class="name-header" style="text-ali
 
 ### columns.headerTemplate `String|Function`
 
-The [template](/api/framework/kendo#methods-template) which renders the column header content. By default the value of the [title](#configuration-columns.title) column option
+The [template](/api/javascript/kendo#methods-template) which renders the column header content. By default the value of the [title](#configuration-columns.title) column option
 is displayed in the column header cell.
 
 > If sorting is enabled, the column header content will be wrapped in an `<a>` element. As a result the template **must** contain only inline elements.
@@ -656,7 +656,7 @@ A JavaScript function which is used to compare the values - should return -1 if 
 
 ### columns.template `String|Function`
 
-The [template](/api/framework/kendo#methods-template) which renders the column content. The treelist renders table rows (`<tr>`) which represent the data source items.
+The [template](/api/javascript/kendo#methods-template) which renders the column content. The treelist renders table rows (`<tr>`) which represent the data source items.
 Each table row consists of table cells (`<td>`) which represent the treelist columns. By default the HTML-encoded value of the [field](#configuration-columns.field) is displayed in the column.
 
 > Use the `template` to customize the way the column displays its value.
@@ -1139,10 +1139,10 @@ The text message displayed for the menu item which performs descending sort.
 
 ### dataSource `Object|Array|kendo.data.TreeListDataSource`
 
-The data source of the widget which is used to render table rows. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/framework/datasource)
+The data source of the widget which is used to render table rows. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
 instance.
 
-If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/framework/datasource) instance using that value as data source configuration.
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/datasource) instance using that value as data source configuration.
 
 If the `dataSource` option is an existing `kendo.data.DataSource` instance, the widget will use that instance and will **not** initialize a new one.
 
@@ -1297,7 +1297,7 @@ Enables drag&drop UI of rows between parents.
 
 ### editable.template `String|Function`
 
-The [template](/api/framework/kendo#methods-template) which renders the popup editor.
+The [template](/api/javascript/kendo#methods-template) which renders the popup editor.
 
 The template should contain elements whose `name` HTML attributes are set as the editable fields. This is how the treelist will know
 which field to update. The other option is to use [MVVM](/framework/mvvm/overview) bindings in order to bind HTML elements to data item fields.
@@ -3004,7 +3004,7 @@ The sorting mode. If set to "single" the user can sort by one column. If set to 
 ### toolbar `String|Function|Array`
 
 If a `String` value is assigned to the `toolbar` configuration option, it will be treated as a single string template for the whole treelist Toolbar,
-and the string value will be passed as an argument to a [`kendo.template()`](/api/framework/kendo#methods-template) function.
+and the string value will be passed as an argument to a [`kendo.template()`](/api/javascript/kendo#methods-template) function.
 
 If a `Function` value is assigned (it may be a `kendo.template()` function call or a generic function reference), then the return value of the function will be used to render the treelist Toolbar contents.
 
@@ -4451,7 +4451,7 @@ The jQuery object representing the container element. That element contains the 
 
 ##### e.model `kendo.data.TreeListModel`
 
-The data item which is going to be edited. Use its [isNew](/api/framework/model#methods-isNew) method to check if the data item is new (created) or not (edited).
+The data item which is going to be edited. Use its [isNew](/api/javascript/data/model#methods-isNew) method to check if the data item is new (created) or not (edited).
 
 ##### e.sender `kendo.ui.TreeList`
 

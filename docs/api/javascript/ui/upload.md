@@ -481,7 +481,7 @@ client-side events to build your own UI.
     </script>
 
 ### template `String|Function`
-The [template](/api/framework/kendo#methods-template) used to render the files in the list
+The [template](/api/javascript/kendo#methods-template) used to render the files in the list
 
 #### Template data `Array`
 

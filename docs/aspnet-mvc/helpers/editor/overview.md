@@ -6,7 +6,7 @@ description: User Guide for server-side wrapper for Kendo UI Editor for ASP.NET 
 
 # Editor
 
-The Editor HtmlHelper extension is a server-side wrapper for the [Kendo UI Editor](/api/web/editor) widget.
+The Editor HtmlHelper extension is a server-side wrapper for the [Kendo UI Editor](/api/javascript/ui/editor) widget.
 
 ## Getting Started
 
@@ -55,7 +55,7 @@ In order to decode the value, use the [HttpUtility.HtmlDecode method](http://msd
 ## Access an Existing Editor
 
 You can reference an existing Editor instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/editor#methods) to control its behavior.
+Once a reference has been established, you can use the [API](/api/javascript/ui/editor#methods) to control its behavior.
 
 
 ### Access an Еxisting Editor Instance
@@ -71,7 +71,7 @@ Once a reference has been established, you can use the [API](/api/web/editor#met
 
 ## Handle Editor Events
 
-You can subscribe to all [events](/api/web/editor#events) exposed by Kendo UI Editor:
+You can subscribe to all [events](/api/javascript/ui/editor#events) exposed by Kendo UI Editor:
 
 ### WebForms - Subscribe by Handler Name
 

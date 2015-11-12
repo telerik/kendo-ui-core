@@ -63,7 +63,7 @@ The animation played when the popup is closed.
 
 The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/framework/fx/common)
+[Complete list of available animations](/api/javascript/effects/common)
 
 ### animation.close.duration `Number`
 
@@ -91,7 +91,7 @@ The animation played when the calendar popup is opened.
 
 The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.
 
-[Complete list of available animations](/api/framework/fx/common)
+[Complete list of available animations](/api/javascript/effects/common)
 
 ### animation.open.duration `Number`
 
