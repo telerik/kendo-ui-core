@@ -301,6 +301,21 @@ test("combobox substracts height of header from list content", function() {
     ok(combobox.listView.content.height() < 100);
 });
 
+test("combobox calculates popup height properly when ul has overflow-x styling", function() {
+    combobox = new ComboBox(input, {
+        dataSource: ["item1", "item2", "item3", "item4", "item5"],
+        height: 50
+    });
+
+    combobox.ul.css("overflow-x", "hidden");
+
+    combobox.open();
+
+    var list = combobox.list;
+
+    equal(list.height(), 50);
+});
+
 test("combobox populates its list when the datasource changes", function() {
    combobox = new ComboBox(input, {
        dataTextField: "text",

@@ -906,7 +906,21 @@
         ok(filterHeader.find("input")[0]);
     });
 
-    //TODO: offset height correctly
+    test("widget calculates popup height properly when ul has overflow-x styling", function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: ["item1", "item2", "item3", "item4", "item5"],
+            height: 50
+        });
+
+        dropdownlist.ul.css("overflow-x", "hidden");
+
+        dropdownlist.open();
+
+        var list = dropdownlist.list;
+
+        equal(list.height(), 50);
+    });
+
     /*
     test("adjust ul height if filter header is rendered", function() {
         var dropdownlist = new DropDownList(input, {

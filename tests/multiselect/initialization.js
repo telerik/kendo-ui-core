@@ -238,6 +238,21 @@
         equal(multiselect.list.css("height"), "50px");
     });
 
+    test("MultiSelect calculates popup height properly when ul has overflow-x styling", function() {
+        multiselect = new MultiSelect(select, {
+             dataSource: ["item1", "item2", "item3", "item4", "item5"],
+             height: 50
+        });
+
+        multiselect.ul.css("overflow-x", "hidden");
+
+        multiselect.open();
+
+        var list = multiselect.list;
+
+        equal(list.height(), 50);
+    });
+
     test("MultiSelect adds scrollbar width to the fixed group header padding", function() {
         var dataSource = new kendo.data.DataSource({
             data: [
