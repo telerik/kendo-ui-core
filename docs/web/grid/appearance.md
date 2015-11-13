@@ -57,6 +57,10 @@ When you enable scrolling in the Grid, its vertical scrollbar is always visible 
 
 The `#GridID` allows the application of styles only to a particular Grid instance. To use the above styles in all Grid instances, replace the ID with the `.k-grid` CSS class.
 
+Here is an enhanced example, which shows how to hide or show the scrollbar, depending on the number of Grid rows.
+
+[Hide the Grid's vertical scrollbar when not needed](/web/grid/how-to/Layout/hide-scrollbar-when-not-needed)
+
 ### Restore Scroll Positions
 
 In some scenarios, the Grid scroll position may be reset when the widget is rebound. If you want to avoid this behavior, save the scroll position in the [`dataBinding`](/api/javascript/ui/grid#events-dataBinding) event and restore it in the [`dataBound`](/api/javascript/ui/grid#events-dataBound) event. The scrollable container is `div.k-grid-content` and you can retrieve it as a child element of the widget [`wrapper`](/framework/widgets/wrapper-element).
