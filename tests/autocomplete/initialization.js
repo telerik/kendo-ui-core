@@ -408,6 +408,21 @@ test("AutoComplete adds scrollbar width to the fixed group header padding", func
     ok(parseFloat(padding) > 15);
 });
 
+test("AutoComplete calculates popup height properly when ul has overflow-x styling", function() {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: ["item1", "item2", "item3", "item4", "item5"],
+        height: 50
+    });
+
+    autocomplete.ul.css("overflow-x", "hidden");
+
+    autocomplete.search("item");
+
+    var list = autocomplete.list;
+
+    equal(list.height(), 50);
+});
+
 test("AutoComplete does not add scrollbar width if popup is shorter then options.height", function() {
     var dataSource = new kendo.data.DataSource({
         data: [
