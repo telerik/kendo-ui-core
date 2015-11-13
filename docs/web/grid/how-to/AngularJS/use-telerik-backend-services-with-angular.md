@@ -1,14 +1,15 @@
 ---
-title: Grid Bound to Telerik Backend Services in AngularJS
-page_title: Grid Bound to Telerik Backend Services in AngularJS
-description: Kendo Grid example that demontrates how to bind the Grid widget to the Telerik Backend Services in an AngularJS application.
+title: Bind to Telerik Backend Services
+page_title: Bind to Telerik Backend Services | Kendo UI Grid Widget
+description: "Learn how to use AngularJS directives to bind a Kendo UI Grid widget to Telerik Backend Services."
+slug: howto_bindto_telerik_backend_services_grid
 ---
 
-# Binding an Kendo UI Grid to Telerik Backend Services in AngularJS
+# Bind to Telerik Backend Services
 
-The example below demonstrates how to use AngularJS directives to declare a grid bound to the Telerik Backend Services.
+The example below demonstrates how to bind the Grid widget to the Telerik Backend Services in an AngularJS application.
 
-#### Example:
+###### Example
 
 ```html
 <div id="example" ng-app="KendoDemos">
@@ -74,3 +75,14 @@ The example below demonstrates how to use AngularJS directives to declare a grid
   }
 </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Grid:
+
+* [JavaScript API Reference](/api/javascript/ui/grid)
+* [How to Create Custom ToolBar Templates]({% slug howto_create_custom_toolbar_templates_grid %})
+* [How to Use AngularJS in Popup Editor Templates]({% slug howto_use_angularin_popup_editor_templates_grid %})
+* [How to Create Custom Editors]({% slug howto_create_custom_editors_grid %})
+* [How to Create Custom Edit Buttons]({% slug howto_create_custom_edit_buttons_grid %})
+* [How to Use Resize Columns from a Button]({% slug howto_resize_columnsfrom_abutton_grid %})

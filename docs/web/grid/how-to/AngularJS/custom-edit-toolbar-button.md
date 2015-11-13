@@ -1,14 +1,15 @@
 ---
-title: Custom edit toolbar button
-page_title: Custom edit toolbar button
-description: Custom edit toolbar button
+title: Create Custom Edit Buttons
+page_title: Create Custom Edit Buttons | Kendo UI Grid Widget
+description: "Learn how to create a custom Edit button in the Kendo UI Grid widget by using AngularJS."
+slug: howto_create_custom_edit_buttons_grid
 ---
 
-# Custom edit toolbar button
+# Create Custom Edit Buttons 
 
-The example below demonstrates how to create custom edit button in the Grid's toolbar using AngularJS
+The example below demonstrates how to create a custom **Edit** button in the Toolbar of the Kendo UI Grid widget by using AngularJS.
 
-#### Example:
+###### Example
 
 ```html
      <div id="example" ng-app="KendoDemos">
@@ -94,3 +95,14 @@ The example below demonstrates how to create custom edit button in the Grid's to
       }
     </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Grid:
+
+* [JavaScript API Reference](/api/javascript/ui/grid)
+* [How to Bind to Telerik Backend Services]({% slug howto_bindto_telerik_backend_services_grid %})
+* [How to Create Custom ToolBar Templates]({% slug howto_create_custom_toolbar_templates_grid %})
+* [How to Create Custom Editors]({% slug howto_create_custom_editors_grid %})
+* [How to Use AngularJS in Popup Editor Templates]({% slug howto_use_angularin_popup_editor_templates_grid %})
+* [How to Use Resize Columns from a Button]({% slug howto_resize_columnsfrom_abutton_grid %})
