@@ -181,7 +181,7 @@ In some special scenarios, it is possible to set a height style to the scrollabl
 
 ### Let the Height Vary within Limits
 
-It is possible to make the Grid expand and shrink vertically according to the number of its rows, but within certain limits. To achieve this, do not set any Grid height and apply a min and/or max height style to the scrollable data area. Make sure you [remove the default data area height](/aspnet-mvc/helpers/grid/configuration#scrolling) if you use the MVC wrapper.
+It is possible to make the Grid expand and shrink vertically according to the number of its rows, but within certain limits. To achieve this, do not set any Grid height and apply a min and/or max height style to the scrollable data area. Make sure you [remove the default data area height](/aspnet-mvc/helpers/grid/configuration#scrolling) if you use the MVC wrapper. **Please note that this whole approach is not applicable when virtual scrolling is enabled.**
 
 ###### Example
 
