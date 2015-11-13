@@ -160,13 +160,13 @@
             dataSource: ["foo", "bar"],
             filter: "contains",
             filtering: function(e) {
-                start();
-
                 var filter = e.filter;
 
                 equal(filter.field, "");
                 equal(filter.operator, "contains");
                 equal(filter.value, "baz");
+
+                start();
             }
         });
 
@@ -186,11 +186,12 @@
         multiselect.input.focus().val("baz").keydown();
 
         setTimeout(function() {
-            start();
             var data = multiselect.dataSource.view();
 
             equal(data.length, 1);
             equal(data[0], "foo");
+
+            start();
         });
     });
 
