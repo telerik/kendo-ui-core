@@ -195,13 +195,13 @@ The platform configuration option should be set, too.
 
 Kendo UI Mobile ships several device agnostic skins:
 
- * `flat`
- * `nova`
- * `material`
- * `fiori`
- * `office365`
+ * `flat` - kendo.mobile.flat.min.css
+ * `nova` - kendo.mobile.nova.min.css
+ * `material` - kendo.mobile.material.min.css
+ * `fiori` - kendo.mobile.fiori.min.css
+ * `office365` - kendo.mobile.office365.min.css
 
-Each skin is shipped separately as `kendo.mobile.${skin}.min.css`. The skin should be activated using the `skin` option.
+The skin should be activated by including the respective skin CSS file `kendo.mobile.${skin}.min.css` and setting the `skin` option.
 
 ### Mobile Application with a Nova Skin
 
