@@ -75,7 +75,7 @@ Other articles on Kendo UI Grid:
 
 * [JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Bind to Telerik Backend Services]({% slug howto_bindto_telerik_backend_services_grid %})
-* [How to Use AngularJS in Popup Editor Templates]({% slug howto_use_angularin_popup_editor_templates_grid %})
 * [How to Create Custom ToolBar Templates]({% slug howto_create_custom_toolbar_templates_grid %})
 * [How to Create Custom Edit Buttons]({% slug howto_create_custom_edit_buttons_grid %})
 * [How to Use Resize Columns from a Button]({% slug howto_resize_columnsfrom_abutton_grid %})
+* [How to Use AngularJS in Popup Editor Templates]({% slug howto_use_angularin_popup_editor_templates_grid %})
