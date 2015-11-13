@@ -28,7 +28,7 @@
 @selected-shadow: none;
 @focused-border-color: darken(@success, 23%);
 @focused-shadow: 0 0 3px 0 @shadow-color;
-@focused-item-shadow: inset 0 0 3px 1px @hover-border-color;
+@focused-item-shadow: inset 0 0 3px 1px contrast(@selected-background, lighten(@normal-text-color, 50%), lighten(@normal-text-color, 30%), 0.5);
 @focused-active-item-shadow: inset 0 0 3px 1px darken(@selected-border-color, 10%);
 @active-text-color: contrast(@selected-background, lighten(@normal-text-color, 1%), darken(@normal-text-color, 13%), 0.5);
 @active-gradient: none;
@@ -2038,7 +2038,9 @@ textarea.k-textbox,
 
 .k-grid td.k-state-focused
 {
-    box-shadow: inset 0 0 0 1px @focused-item-shadow;
+    //box-shadow: inset 0 0 0 1px @focused-item-shadow;
+    //.box-shadow(inset @focused-item-shadow);
+    .box-shadow(@focused-item-shadow);
 }
 
 .k-header,
