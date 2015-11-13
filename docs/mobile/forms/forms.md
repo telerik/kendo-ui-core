@@ -12,6 +12,8 @@ Kendo UI Mobile provides automatic platform dependent styling of form elements w
 *   Inputs of types **text**, **password**, **search**, **url**, **email**, **number**, **tel**, **file**(not in iOS), **date**, **time** **month** and **datetime**;
 *   Single **select** elements or Kendo DropDownList replacements.
 
+> **Important:** To make use of native-like forms layout and to properly align widgets without additional styling, it is advisable to build and organize your mobile forms using [Kendo UI Mobile ListView](/mobile/listview/overview). 
+
 The input elements with a picker use the native one from the current platform if it is supported.
 HTML5 form elements are fully functional only on the following platforms: iOS 5.x+, Android 4.x+, BlackBerry 6.x+, BlackBerry Playbook 1.x+.
 The styling will still work on older platforms, but the functionality will be limited to text input only.
