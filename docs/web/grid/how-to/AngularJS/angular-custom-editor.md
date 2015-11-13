@@ -1,14 +1,15 @@
 ---
-title: Custom editor with Angular JS
-page_title: Custom editor with Angular JS
-description: Kendo Grid custom editor with Angular JS
+title: Create Custom Editors
+page_title: Create Custom Editors | Kendo UI Grid Widget
+description: "Learn how to create custome editors by using AngularJS in a Kendo UI Grid widget."
+slug: howto_create_custom_editors_grid
 ---
 
-# Kendo Grid custom editor with Angular JS
+# Create Custom Editors
 
-The example below demonstrates how to create custom editor in Kendo Grid using AngularJS
+The example below demonstrates how to create a custom editor in the Kendo UI Grid widget by using AngularJS.
 
-#### Example:
+###### Example
 
 ```html
   <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
@@ -67,3 +68,14 @@ The example below demonstrates how to create custom editor in Kendo Grid using A
     })
   </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Grid:
+
+* [JavaScript API Reference](/api/javascript/ui/grid)
+* [How to Bind to Telerik Backend Services]({% slug howto_bindto_telerik_backend_services_grid %})
+* [How to Use AngularJS in Popup Editor Templates]({% slug howto_use_angularin_popup_editor_templates_grid %})
+* [How to Create Custom ToolBar Templates]({% slug howto_create_custom_toolbar_templates_grid %})
+* [How to Create Custom Edit Buttons]({% slug howto_create_custom_edit_buttons_grid %})
+* [How to Use Resize Columns from a Button]({% slug howto_resize_columnsfrom_abutton_grid %})

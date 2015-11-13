@@ -1,10 +1,15 @@
 ---
-title: Grid ToolBar template with AngularJS
-page_title: Grid ToolBar template with AngularJS
-description: Kendo Grid example that demontrates how to create custom Grid ToolBar template in AngularJS application.
+title: Create Custom ToolBar Templates
+page_title: Create Custom ToolBar Templates | Kendo UI Grid Widget
+description: "Learn how to create a custom ToolBar template in an AngularJS application using the Kendo UI Grid widget."
+slug: howto_create_custom_toolbar_templates_grid
 ---
 
-The example below demonstrates how to create custom Grid ToolBar template in AngularJS application.
+# Create Custom ToolBar Templates
+
+The example below demonstrates how to create a custom ToolBar template in AngularJS application.
+
+###### Example
 
 ```html
 <div id="example" ng-app="KendoDemos">
@@ -36,3 +41,14 @@ The example below demonstrates how to create custom Grid ToolBar template in Ang
            .controller("MyCtrl", MyCtrl);
 </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Grid:
+
+* [JavaScript API Reference](/api/javascript/ui/grid)
+* [How to Bind to Telerik Backend Services]({% slug howto_bindto_telerik_backend_services_grid %})
+* [How to Use AngularJS in Popup Editor Templates]({% slug howto_use_angularin_popup_editor_templates_grid %})
+* [How to Create Custom Editors]({% slug howto_create_custom_editors_grid %})
+* [How to Create Custom Edit Buttons]({% slug howto_create_custom_edit_buttons_grid %})
+* [How to Use Resize Columns from a Button]({% slug howto_resize_columnsfrom_abutton_grid %})
