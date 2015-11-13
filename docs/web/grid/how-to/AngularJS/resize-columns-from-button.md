@@ -83,3 +83,4 @@ Other articles on Kendo UI Grid:
 * [How to Create Custom ToolBar Templates]({% slug howto_create_custom_toolbar_templates_grid %})
 * [How to Create Custom Editors]({% slug howto_create_custom_editors_grid %})
 * [How to Create Custom Edit Buttons]({% slug howto_create_custom_edit_buttons_grid %})
+* [How to Use AngularJS in Popup Editor Templates]({% slug howto_use_angularin_popup_editor_templates_grid %})

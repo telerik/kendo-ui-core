@@ -9,7 +9,7 @@ slug: howto_use_angularin_popup_editor_templates_grid
 
 The example below demonstrates how to use AngularJS directives in a custom Grid popup editor template.
 
-The dataItem is made dirty via `ng-change` (for HTML elements) and `k-on-change` (for Kendo UI widget). Otherwise the DataSource will not update modified data items.
+The `dataItem` is made dirty via `ng-change` for HTML elements, and `k-on-change` for Kendo UI widgets. Otherwise the DataSource will not update the modified data items.
 
 ###### Example
 
