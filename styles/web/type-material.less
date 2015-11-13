@@ -822,7 +822,6 @@ html .km-pane-wrapper .k-header
 .k-state-focused,
 .k-list>.k-state-focused,
 .k-listview>.k-state-focused,
-.k-grid-header th.k-state-focused,
 td.k-state-focused,
 .k-button.k-state-focused
 {
@@ -2967,6 +2966,7 @@ color: @base;
     background-color: darken(@selected-background, 4%);
 }
 
+.k-grid-header th.k-state-focused,
 .k-grid td.k-state-focused {
     .box-shadow(inset @focused-item-shadow);
 }
