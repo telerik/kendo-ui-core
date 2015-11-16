@@ -963,7 +963,7 @@ Shows the **ContextMenu** at the specified coordinates in pixels or aligned to t
 
 X coordinate in pixels or the anchor element to which to align. If passed an item - jQuery object or element - it will be opened.
 
-##### y `Number`
+##### y `Number` *optional*
 
 Y coordinate in pixels. If not specified, ContextMenu will assume the first parameter is an anchor element.
 
