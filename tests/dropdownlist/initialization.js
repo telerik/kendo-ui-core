@@ -245,6 +245,7 @@
         dropdownlist.options.height = 100;
 
         dropdownlist.dataSource.read();
+        dropdownlist.open();
 
         equal(dropdownlist.list.css("height"), "100px");
     });
@@ -463,6 +464,7 @@
         });
 
         dropdownlist.refresh();
+        dropdownlist.open();
 
         equal(dropdownlist.list.height(), 50);
     });
@@ -738,13 +740,43 @@
     });
 
     test("dropdownlist can be initialized in hidden container", function() {
-        var div = $("<div style='display: none'></div>").appendTo(QUnit.fixture),
-            dropdown = input.appendTo(div).kendoDropDownList().data("kendoDropDownList");
+        var div = $("<div style='display: none'></div>").appendTo(QUnit.fixture);
+
+        var dropdown = input.appendTo(div).kendoDropDownList({
+            animation: false,
+            dataSource: [0,1],
+            height: 200
+        }).data("kendoDropDownList");
 
         div.show();
-        dropdown.popup.open();
+        dropdown.open();
 
-        equal(dropdown.popup.element.parent().width(), dropdown.wrapper.width(), 2);
+        equal(dropdown.popup.element.parent().width(), dropdown.wrapper.width());
+    });
+
+    test("dropdownlist put in hidden container can be re-bound", function() {
+        var div = $("<div style='display: none'></div>").appendTo(QUnit.fixture);
+
+        var dropdown = input.appendTo(div).kendoDropDownList({
+            animation: false,
+            dataSource: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
+            height: 200,
+            popup: {
+                appendTo: div
+            }
+        }).data("kendoDropDownList");
+
+        div.show();
+        dropdown.open();
+        dropdown.close();
+        div.hide();
+
+        dropdown.dataSource.read();
+
+        div.show();
+        dropdown.open();
+
+        equal(dropdown.list.height(), 200);
     });
 
     test("DropDownList does not set width if list has style.width", function() {
@@ -1007,6 +1039,8 @@
             height: 50
         }).data("kendoDropDownList");
 
+        dropdownlist.open();
+
         var padding = dropdownlist.list.find(".k-group-header").css("padding-right");
 
         ok(parseFloat(padding) >= kendo.support.scrollbar());
@@ -1028,6 +1062,8 @@
             dataSource: dataSource,
             height: 350
         }).data("kendoDropDownList");
+
+        dropdownlist.open();
 
         var padding = dropdownlist.list.find(".k-group-header").css("padding-right");
 
