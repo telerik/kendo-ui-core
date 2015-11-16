@@ -15,7 +15,7 @@ Come back often for updates.
 ## ASP.NET 5 / MVC 6 Framework
 
 - Data Tables are not supported. See [dotnet/corefx#1039](https://github.com/dotnet/corefx/issues/1039)
-- Localization resources are not supported. See [dotnet/corefx#947](https://github.com/dotnet/corefx/issues/947).
+- Localization resources are not supported. See [dotnet/coreclr#2007](https://github.com/dotnet/coreclr/issues/2007).
 
 ## UI Helpers
 
