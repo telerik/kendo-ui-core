@@ -1196,13 +1196,7 @@ var __meta__ = { // jshint ignore:line
                         .on("mouseenter" + STATIC_LIST_NS, "li", function() { $(this).addClass(HOVER); })
                         .on("mouseleave" + STATIC_LIST_NS, "li", function() { $(this).removeClass(HOVER); });
 
-            this.content = this.element
-                        .wrap("<div unselectable='on'></div>")
-                        .parent()
-                        .css({
-                            "overflow": "auto",
-                            "position": "relative"
-                        });
+            this.content = this.element.wrap("<div class='k-list-scroller' unselectable='on'></div>").parent();
             this.header = this.content.before('<div class="k-group-header" style="display:none"></div>').prev();
 
             this._bound = false;
