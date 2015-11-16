@@ -305,12 +305,13 @@
 
     test("TimePicker resize height on first open", 1, function() {
         var timepicker = new TimePicker(input, {
+            animation: false,
             height: 100
         });
 
         timepicker.open();
 
-        equal(timepicker.timeView.ul.height(), 100)
+        equal(timepicker.timeView.list.height(), 100)
     });
 
     test("TimePicker resize height after setOptions", 1, function() {
@@ -328,7 +329,7 @@
 
         timepicker.open();
 
-        equal(timepicker.timeView.ul.height(), 200)
+        equal(timepicker.timeView.list.height(), 200)
     });
 
     test("TimePicker is disabled when placed in disabled fieldset", function() {
