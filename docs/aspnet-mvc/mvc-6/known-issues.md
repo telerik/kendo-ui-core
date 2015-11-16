@@ -22,13 +22,13 @@ Come back often for updates.
 ### Common
 
 - Limited set of helpers. Interim releases will add more widgets.
-- As of ASP.NET MVC BETA 8 [Deferred initialization feature](/aspnet-mvc/fundamentals.html#deferred-initialization) will not work as the View is rendered async and the widget is not able to register its scripts prior to calling the DeferredScripts HtmlHelper extension method. This is currently only possible when widget is rendered via its Render method.
+- As of ASP.NET MVC BETA 8, due to change in the View rendering, [Deferred initialization option](/aspnet-mvc/fundamentals.html#deferred-initialization) can be set only as last setting.
 
-        @{Html.Kendo().NumericTextBox()
+        @(Html.Kendo().NumericTextBox()
               .Name("age")
+              /*other configuration..*/
               .Deferred()
-              .Render();
-        }
+        )
 
 
 ### Grid
