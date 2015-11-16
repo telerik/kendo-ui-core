@@ -487,13 +487,12 @@
         });
 
         dropdownlist.open();
+
+        var height = dropdownlist.ul.height();
+
         dropdownlist.bind("dataBound", function() {
             start();
-            equal(dropdownlist.args("_height")[0], 1);
-        });
-
-        stub(dropdownlist, {
-            _height: dropdownlist._height
+            ok(dropdownlist.ul.height() < height);
         });
 
         dropdownlist.filterInput.focus().val("test").keydown();

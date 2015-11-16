@@ -224,6 +224,7 @@
         }).data("kendoMultiSelect");
 
         multiselect.refresh();
+        multiselect.open();
 
         equal(multiselect.list.height(), 50);
     });
@@ -234,6 +235,7 @@
         multiselect.options.height = 50;
 
         multiselect.refresh();
+        multiselect.open();
 
         equal(multiselect.list.css("height"), "50px");
     });
@@ -270,6 +272,8 @@
             height: 50
         }).data("kendoMultiSelect");
 
+        multiselect.open();
+
         var padding = multiselect.list.find(".k-group-header").css("padding-right");
 
         ok(parseFloat(padding) >= kendo.support.scrollbar());
@@ -291,6 +295,8 @@
             dataSource: dataSource,
             height: 350
         }).data("kendoMultiSelect");
+
+        multiselect.open();
 
         var padding = multiselect.list.find(".k-group-header").css("padding-right");
 

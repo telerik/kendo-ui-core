@@ -415,17 +415,13 @@ var __meta__ = { // jshint ignore:line
             var length = data.length;
             var dataItem;
 
-            var height;
             var value;
 
             that._angularItems("compile");
 
             that._presetValue = false;
 
-            if (!that.options.virtual) {
-                height = that._height(filtered ? (length || 1) : length);
-                that._calculateGroupPadding(height);
-            }
+            that._resizePopup(true);
 
             that.popup.position();
 

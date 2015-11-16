@@ -273,6 +273,7 @@ test("combobox shrink ul if the height of the items is more then options.height"
       combobox.options.height = 100;
 
       combobox.dataSource.read();
+      combobox.open();
 
       equal(combobox.list.css("height"), "100px");
 });
@@ -486,6 +487,7 @@ test("set height if items height is bigger than options.height", function() {
    });
 
    combobox.refresh();
+   combobox.open();
 
    equal(combobox.list.height(), 50);
 });
@@ -809,6 +811,8 @@ test("ComboBox adds scrollbar width to the fixed group header padding", function
         height: 50
     }).data("kendoComboBox");
 
+    combobox.open();
+
     var padding = combobox.list.find(".k-group-header").css("padding-right");
 
     ok(parseFloat(padding) >= kendo.support.scrollbar());
@@ -830,6 +834,8 @@ test("ComboBox does not add scrollbar width to the fixed group header padding if
         dataSource: dataSource,
         height: 350
     }).data("kendoComboBox");
+
+    combobox.open();
 
     var padding = combobox.list.find(".k-group-header").css("padding-right");
 

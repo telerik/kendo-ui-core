@@ -440,7 +440,7 @@ var __meta__ = { // jshint ignore:line
 
             that._angularItems("compile");
 
-            that._calculateGroupPadding(that._height(length));
+            that._resizePopup();
 
             popup.position();
 

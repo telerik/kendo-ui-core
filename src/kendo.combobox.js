@@ -280,9 +280,7 @@ var __meta__ = { // jshint ignore:line
 
             that._presetValue = false;
 
-            if (!options.virtual) {
-                that._calculateGroupPadding(that._height(length));
-            }
+            that._resizePopup();
 
             that.popup.position();
 
