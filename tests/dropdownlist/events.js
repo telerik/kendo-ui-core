@@ -719,4 +719,43 @@
 
         ddl.value(1);
     });
+
+    test("change event is not raised when value is set through configuration", 0, function() {
+        var dropdownlist = new DropDownList(input, {
+            value: 2,
+            dataValueField: "id",
+            dataTextField: "name",
+            dataSource: [
+                { id: 1, name: "name1" },
+                { id: 2, name: "name2" },
+                { id: 3, name: "name3" }
+            ],
+            change: function() {
+                ok(false);
+            }
+        });
+
+        dropdownlist.wrapper.focus().blur();
+    });
+
+    test("change event is not raised when widget is not bound and value method is used", 0, function() {
+        var select = $("<select></select>").appendTo(QUnit.fixture);
+
+        var dropdownlist = new DropDownList(select, {
+            autoBind: false,
+            dataValueField: "id",
+            dataTextField: "name",
+            dataSource: [
+                { id: 1, name: "name1" },
+                { id: 2, name: "name2" },
+                { id: 3, name: "name3" }
+            ],
+            change: function() {
+                ok(false);
+            }
+        });
+
+        dropdownlist.value(2);
+        dropdownlist.wrapper.focus().blur();
+    });
 })();
