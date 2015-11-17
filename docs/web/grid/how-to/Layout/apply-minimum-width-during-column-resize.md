@@ -1,17 +1,17 @@
 ---
-title: Apply minimum width during column resize
-page_title: Apply minimum width during column resize
-description: Kendo Grid example that demonstrates how to apply minimum column width during column resize.
+title: Apply Minimum Width during Column Resize
+page_title:  Apply Minimum Width during Column Resize | Kendo UI Grid Widget
+description: "Learn how to access an editor control in the edit event handler of the Kendo UI Grid widget."
+slug: howto_apply_min_width_during_column_resize_grid
 ---
 
-# Apply minimum width during column resize
+# Apply Minimum Width during Column Resize
 
-The code snippet below demonstrates how to use the internal Grid column resizing API to enforce a minimum column width during column resize.
-When the user starts resizing, a "start" event is fired and some references are saved. Then they are used in the "resize" event, which is fired continuously during resizing. 
-The new column width is periodically checked and if decreases below the set minimum width, the minimum column width is enforced back.
-Since the Grid table(s) also receive a width style during resizing, it is overridden as well, when needed. A similar logic can be used to enforce a maximum width.
+When the user starts resizing, a `start` event is fired and some references are saved. Then they are used in the `resize` event, which is fired continuously during resizing. The new column width is periodically checked and if it decreases below the set minimum width, the minimum column width is enforced back. Since the Grid table(s) also receive a width style during resizing, it is overridden as well, when needed. A similar logic can be used to enforce a maximum width.
 
-#### Example
+The example below demonstrates how to use the internal Grid column resizing API to enforce a minimum column width during column resize.
+
+###### Example
 
 ```html
     <div id="grid"></div>
@@ -53,3 +53,15 @@ Since the Grid table(s) also receive a width style during resizing, it is overri
         });
     </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Grid:
+
+* [JavaScript API Reference](/api/javascript/ui/grid)
+* [How to Adjust Row Height with Virtual Scrolling]({% slug howto_adjust_row_height_withvirtual_scrolling_grid %})
+* [How to Change Group Header Position with Locked Columns]({% slug howto_change_group_header_position_wthlocked_columns_grid %})
+* [How to Create and Use Auto Layout]({% slug howto_create_and_use_autolayout_grid %})
+* [How to Hide the Vertical Scrollbar When Not Needed]({% slug howto_hide_vertical_scrollbar_grid %})
+* [How to Resize Grid When Window Is Resized]({% slug howto_resize_whenthe_windowis_resized_grid %})
+* [How to Use FontAwesome Icons in Custom Command Buttons]({% slug howto_use_fontawesomeiconsin_custom_command_buttons_grid %})

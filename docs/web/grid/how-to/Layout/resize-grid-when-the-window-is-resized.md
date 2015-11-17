@@ -1,18 +1,17 @@
 ---
-title: Resize grid when the window is resized
-page_title: Resize grid when the window is resized
-description: Resize grid when the window is resized
+title: Resize Grid When Window Is Resized
+page_title:  Resize Grid When Window Is Resized | Kendo UI Grid Widget
+description: "Learn how to resize a Kendo UI Grid widget when the parent window is resized too."
+slug: howto_resize_whenthe_windowis_resized_grid
 ---
 
-# Resize grid when the window is resized
+# Resize Grid When Window Is Resized
 
-The following runnable sample demonstrates how to resize the Kendo UI Grid when the parent window is resized.
+Web standards require elements with a percentage height to have a parent with an explicit height. The rule applies recursively until an element with a pixel height is reached, or the root HTML element is reached. In the latter case the `body` and `html` elements need a 100% height style as well. 100% high elements cannot have margins, paddings, borders, and siblings.
 
-Web standards require elements with a percentage height to have a parent with an explicit height.
-The rule applies recursively until an element with a pixel height is reached, or the root HTML element is reached.
-In the latter case the BODY and HTML elements need a 100% height style as well. 100% high elements cannot have margins, paddings, borders and siblings.
+The example below demonstrates how to resize the Kendo UI Grid when the parent window is resized.
 
-#### Example
+###### Example
 
 ```html
     <style>
@@ -82,3 +81,15 @@ In the latter case the BODY and HTML elements need a 100% height style as well. 
       });
     </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Grid:
+
+* [JavaScript API Reference](/api/javascript/ui/grid)
+* [How to Adjust Row Height with Virtual Scrolling]({% slug howto_adjust_row_height_withvirtual_scrolling_grid %})
+* [How to Apply Minimum Width during Column Resize]({% slug howto_apply_min_width_during_column_resize_grid %})
+* [How to Change Group Header Position with Locked Columns]({% slug howto_change_group_header_position_wthlocked_columns_grid %})
+* [How to Create and Use Auto Layout]({% slug howto_create_and_use_autolayout_grid %})
+* [How to Hide the Vertical Scrollbar When Not Needed]({% slug howto_hide_vertical_scrollbar_grid %})
+* [How to Use FontAwesome Icons in Custom Command Buttons]({% slug howto_use_fontawesomeiconsin_custom_command_buttons_grid %})

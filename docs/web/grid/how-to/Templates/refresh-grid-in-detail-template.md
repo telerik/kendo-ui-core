@@ -1,14 +1,15 @@
 ---
-title: Refresh grid in detail template
-page_title: Refresh grid in detail template
-description: Refresh grid in detail template
+title: Refresh Grid in Detail Template
+page_title: Refresh Grid in Detail Template | Kendo UI Grid Widget
+description: "Learn how to refresh a child grid in a detail template by using an external button in the Kendo UI Grid widget."
+slug: howto_refresh_gridin_detail_template_grid
 ---
 
-# Refresh grid in detail template
+# Refresh Grid in Detail Template
 
-The following runnable sample demonstrates how to refresh a child grid in a detail template using external button
+The example below demonstrates how to refresh a child grid in a detail template by using an external button in Kendo UI Grid.
 
-#### Example
+###### Example
 
 ```html
     <div id="grid"></div>
@@ -82,3 +83,12 @@ The following runnable sample demonstrates how to refresh a child grid in a deta
       }
     </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Grid:
+
+* [JavaScript API Reference](/api/javascript/ui/grid)
+* [How to Create Custom Editor in Detail Template]({% slug howto_create_custom_editorin_detail_template_grid %})
+* [How to Use Checkbox Column Templates and Edit]({% slug howto_use_checkbox_column_templateand_edit_grid %})
+* [How to Use Dates inside Row Template]({% slug howto_use_dates_inside_row_template_grid %})

@@ -1,14 +1,15 @@
 ---
-title: FontAwesome icons in custom command buttons
-page_title: FontAwesome icons in custom command buttons
-description: FontAwesome icons in custom command buttons
+title: Use FontAwesome Icons in Custom Command Buttons
+page_title:  Use FontAwesome Icons in Custom Command Buttons | Kendo UI Grid Widget
+description: "Learn how to use FontAwesome icons in custom command buttons while working with the Kendo UI Grid widget."
+slug: howto_use_fontawesomeiconsin_custom_command_buttons_grid
 ---
 
-# FontAwesome icons in custom command buttons
+# Use FontAwesome Icons in Custom Command Buttons
 
-The following runnable sample demonstrates how to use FontAwesome icons inside a Kendo UI Grid custom command button.
+The example below demonstrates how to use FontAwesome icons inside a Kendo UI Grid custom command button.
 
-#### Example
+###### Example
 
 ```html
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -74,3 +75,15 @@ The following runnable sample demonstrates how to use FontAwesome icons inside a
             </div>
       </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Grid:
+
+* [JavaScript API Reference](/api/javascript/ui/grid)
+* [How to Adjust Row Height with Virtual Scrolling]({% slug howto_adjust_row_height_withvirtual_scrolling_grid %})
+* [How to Apply Minimum Width during Column Resize]({% slug howto_apply_min_width_during_column_resize_grid %})
+* [How to Change Group Header Position with Locked Columns]({% slug howto_change_group_header_position_wthlocked_columns_grid %})
+* [How to Create and Use Auto Layout]({% slug howto_create_and_use_autolayout_grid %})
+* [How to Hide the Vertical Scrollbar When Not Needed]({% slug howto_hide_vertical_scrollbar_grid %})
+* [How to Resize Grid When Window Is Resized]({% slug howto_resize_whenthe_windowis_resized_grid %})

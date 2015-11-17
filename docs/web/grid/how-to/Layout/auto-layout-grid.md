@@ -1,14 +1,15 @@
 ---
-title: Creating and using auto layout
-page_title: Creating and using auto layout
-description: Creating and using auto layout
+title: Create and Use Auto Layout
+page_title:  Create and Use Auto Layout | Kendo UI Grid Widget
+description: "Learn how to create and use auto layout in the Kendo UI Grid widget."
+slug: howto_create_and_use_autolayout_grid
 ---
 
-# Creating and using auto layout
+# Create and Use Auto Layout
 
-The following runnable sample demonstrates how to create auto layout for the Kendo UI Grid. Please note that the auto layout requires disabled Grid scrolling
+The example below demonstrates how to create auto layout for the Kendo UI Grid. Note that the auto layout requires you to disable the scrolling functionality of the Grid.
 
-#### Example
+###### Example
 
 ```html
     <style>
@@ -107,3 +108,15 @@ The following runnable sample demonstrates how to create auto layout for the Ken
       }));
     </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Grid:
+
+* [JavaScript API Reference](/api/javascript/ui/grid)
+* [How to Adjust Row Height with Virtual Scrolling]({% slug howto_adjust_row_height_withvirtual_scrolling_grid %})
+* [How to Apply Minimum Width during Column Resize]({% slug howto_apply_min_width_during_column_resize_grid %})
+* [How to Change Group Header Position with Locked Columns]({% slug howto_change_group_header_position_wthlocked_columns_grid %})
+* [How to Hide the Vertical Scrollbar When Not Needed]({% slug howto_hide_vertical_scrollbar_grid %})
+* [How to Resize Grid When Window Is Resized]({% slug howto_resize_whenthe_windowis_resized_grid %})
+* [How to Use FontAwesome Icons in Custom Command Buttons]({% slug howto_use_fontawesomeiconsin_custom_command_buttons_grid %})
