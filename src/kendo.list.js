@@ -388,7 +388,7 @@ var __meta__ = { // jshint ignore:line
                 value = optionValue;
             }
 
-            if (value !== that._old) {
+            if (value !== unifyType(that._old, typeof value)) {
                 trigger = true;
             } else if (index !== undefined && index !== that._oldIndex) {
                 trigger = true;
@@ -1561,7 +1561,6 @@ var __meta__ = { // jshint ignore:line
 
         _valueExpr: function(type, values) {
             var that = this;
-            var value;
             var idx = 0;
 
             var body;
@@ -1572,19 +1571,7 @@ var __meta__ = { // jshint ignore:line
                 that._valueType = type;
 
                 for (; idx < values.length; idx++) {
-                    value = values[idx];
-
-                    if (value !== undefined && value !== "" && value !== null) {
-                        if (type === "boolean") {
-                            value = Boolean(value);
-                        } else if (type === "number") {
-                            value = Number(value);
-                        } else if (type === "string") {
-                            value = value.toString();
-                        }
-                    }
-
-                    normalized.push(value);
+                    normalized.push(unifyType(values[idx], type));
                 }
 
                 body = "for (var idx = 0; idx < " + normalized.length + "; idx++) {" +
@@ -2059,6 +2046,20 @@ var __meta__ = { // jshint ignore:line
         }
 
         return found;
+    }
+
+    function unifyType(value, type) {
+        if (value !== undefined && value !== "" && value !== null) {
+            if (type === "boolean") {
+                value = Boolean(value);
+            } else if (type === "number") {
+                value = Number(value);
+            } else if (type === "string") {
+                value = value.toString();
+            }
+        }
+
+        return value;
     }
 })(window.kendo.jQuery);
 

@@ -88,19 +88,6 @@ test("_change is not raised initially", 0, function() {
     combobox._change();
 });
 
-test("_change does not raise change event if value has't changed", 0, function() {
-    combobox = new ComboBox(input, {
-        dataSource: [{text: "foo"}, {text: "bar"}],
-        change: function() {
-            ok(false);
-        }
-    });
-
-    combobox._old = "foo";
-    combobox.value("foo");
-    combobox._change();
-});
-
 test("select does not raise the change event", 0, function() {
     combobox = new ComboBox(input, {
         dataSource: [{text: "foo"}, {text: "bar"}],
@@ -648,6 +635,45 @@ test("ComboBox does not trigger change event on blur after initialization (<sele
         }
     }).data("kendoComboBox");
 
+    combobox.input.focus().blur();
+});
+
+test("change event is not raised when value is set through configuration", 0, function() {
+    var combobox = new ComboBox(input, {
+        value: 2,
+        dataValueField: "id",
+        dataTextField: "name",
+        dataSource: [
+            { id: 1, name: "name1" },
+            { id: 2, name: "name2" },
+            { id: 3, name: "name3" }
+        ],
+        change: function() {
+            ok(false);
+        }
+    });
+
+    combobox.input.focus().blur();
+});
+
+test("change event is not raised when widget is not bound and value method is used", 0, function() {
+    var select = $("<select></select>").appendTo(QUnit.fixture);
+
+    var combobox = new ComboBox(select, {
+        autoBind: false,
+        dataValueField: "id",
+        dataTextField: "name",
+        dataSource: [
+            { id: 1, name: "name1" },
+            { id: 2, name: "name2" },
+            { id: 3, name: "name3" }
+        ],
+        change: function() {
+            ok(false);
+        }
+    });
+
+    combobox.value(2);
     combobox.input.focus().blur();
 });
 
