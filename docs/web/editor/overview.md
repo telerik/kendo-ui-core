@@ -112,6 +112,101 @@ You can temporarily make the Editor readonly by using the following approach:
     // make editable
     editorBody.add("td", editorBody).attr("contenteditable", true);
 
+## Default content styling
+
+The Editor uses an iframe and applies some default CSS styles to its content when the [classic mode](#classic-mode) is enabled. This allows the widget to override the default browser styling.
+The styles are shown in the code snippet below. They are targeting mostly headings, paragraphs, links, lists and tables.
+All tables inside the Editor obtain a `k-table` class, which is **not** included in the widget's value.
+
+    html,
+    body {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      min-height: 100%;
+    }
+
+    body {
+      font-size: 12px;
+      font-family: Verdana,Geneva,sans-serif;
+      margin-top: -1px;
+      padding: 1px .2em 0;
+      word-wrap: break-word;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin: .67em 0;
+    }
+
+    h2 {
+      font-size: 1.5em;
+    }
+
+    h3 {
+      font-size: 1.16em;
+    }
+
+    h4 {
+      font-size: 1em;
+    }
+
+    h5 {
+      font-size: .83em;
+    }
+
+    h6 {
+      font-size: .7em;
+    }
+
+    p {
+      margin: 0 0 1em;
+    }
+
+    ul, ol {
+      padding-left: 2.5em;
+    }
+
+    a {
+      color: #00a;
+    }
+
+    code {
+      font-size: 1.23em;
+    }
+
+    .k-table {
+      table-layout: fixed;
+      width: 100%;
+      border-spacing: 0;
+      margin: 0 0 1em;
+    }
+
+    .k-table td {
+      min-width: 1px;
+      padding: .2em .3em;
+    }
+
+    .k-table,
+    .k-table td {
+      outline: 0;
+      border: 1px dotted #ccc;
+    }
+
+    .k-table p {
+      margin: 0;
+      padding: 0;
+    }
+
+There may be scenarios when the above styles are undesired and need to be removed or overridden. In order to remove all the styles, execute the following code after the Editor has been initialized.
+
+    var editor = $("#EditorID").data("kendoEditor");
+    var styleTag = editor.body.parentNode.getElementsByTagName("style")[0];
+    styleTag.parentNode.removeChild(styleTag);
+
+In order to override the above styles, use custom styles with [higher specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity) selectors and
+inject those custom styles in an [Editor stylesheet](http://demos.telerik.com/kendo-ui/editor/styles). When doing so, it is not required to customize the widget's Formatting tool.
+
 ## See Also
 
 Other articles on Kendo UI Editor:
