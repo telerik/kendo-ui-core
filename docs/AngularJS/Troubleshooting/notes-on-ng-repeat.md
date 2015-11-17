@@ -1,17 +1,18 @@
 ---
-title: Specific Directives Support
-page_title: Specific Directives Support
+title: ng-* Directives in Widget Markup
+page_title: ng-* Directives in Widget Markup | AngularJS Directives
 description: "Learn more about the `ng-repeat`, `ng-if`, `ng-bind` directives supported by Kendo UI controls in AngularJS."
-position: 6
+previous_url: /AngularJS/notes-on-ng-repeat
+slug: ngrepeat_ngif_ngbind_support_angularjs
 ---
 
-# Specific Directives Support
+# ng-* Directives in Widget Markup
 
 Prior to Kendo UI Q2 2015 release, the widgets which were instantiated over existing markup partially supported `ng-repeat`, `ng-if`, `ng-bind`, and other DOM manipulation directives in the markup. Subsequent changes to the markup, caused by those directives, were not handled correctly though.
 
 ## Overview
 
-The widgets which exhibited that behavior were the `tabstrip`, `panelbar`, `menu`, `treeview` and several mobile widgets. The support of that behavior was accidental and not intentional, due to the directives instantiating the widgets in a `$timeout` (`setTimeout`) wrap.
+The widgets which exhibited that behavior were the TabStrip, PanelBar, Menu, TreeView, and several mobile widgets. The support of that behavior was accidental and not intentional, due to the directives instantiating the widgets in a `$timeout` (`setTimeout`) wrap.
 
 The timeout initialization caused several other issues as well. The widget instances were not accessible in a reliable manner. Each widget instantiation required several additional `$scope.digest` cycles to be executed. Performance was negatively affected and the widget initialization was visible to the end user in certain scenarios. The [change from June 17](https://github.com/telerik/kendo-ui-core/commit/0a4912ea9c14b2924d9914a5108ae2c2f636e4ed) removed the timeout implementation, effectively breaking the accidental `ng-repeat` support in later releases.
 
@@ -201,3 +202,14 @@ If generating content with `DataSource` is not desired, a possible workaround of
       })
 </script>
 ```
+
+## See Also
+
+Other articles on AngularJS directives and integration with Kendo UI:
+
+* [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
+* [DataSource Updates]({% slug datasource_updates_angularjs_directives %})
+* [Global Events]({% slug global_events_angularjs_directives %})
+* [Settings of the Grid]({% slug grid_settings_angularjs_directives %})
+* [Memory Leaks]({% slug memory_leaks_angularjs_directives %})
+* [How to Nest Widgets]({% slug nest_widgets_angularjs_directives %})

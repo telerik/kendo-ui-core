@@ -1,7 +1,9 @@
 ---
 title: Memory Leaks
-page_title: Memory Leaks
+page_title: Memory Leaks | AngularJS Directives
 description: "Learn where to look for memory leaks and how to handle them while working with Kendo UI controls and AngularJS."
+previous_url: /AngularJS/leak
+slug: memory_leaks_angularjs_directives
 position: 5
 ---
 
@@ -17,7 +19,7 @@ Memory leak reports are not unique to Kendo UI directives. The [Angular JS repos
 - Triggering the garbage collect causes many "leaked" detached DOM nodes to be collected. If this is not so, then there is a real problem present.
 - According to Igor, the Chrome browser must be started with `--js-flags="--nocrankshaft --noopt"`. We did not notice any effect of these flags in our test cases, though.
 
-## Create a Simple Test Case
+## Create a Test Case
 
 To verify that your implementation does not differ from the default AngularJS behavior, create a simplified test case which uses the `ng-repeat` directive and the router. The code is available in [the Dojo](http://dojo.telerik.com/@petyosi/ipaJE), too:
 
@@ -79,7 +81,7 @@ The DOM count increases as the routes toggle with each other. This looks like a 
 
 The seemingly retained detached nodes are getting collected by the garbage collector.
 
-## Extend the Test to Kendo UI Grid
+## Extend the Test Case
 
 Replace the `repeat` directive above with a Kendo UI Grid:
 
@@ -153,3 +155,14 @@ A fix that works is to clean up before a route change. So, wherever you change t
 
     kendo.destroy(document.body);
     $('.view-root-node').html('');
+    
+## See Also
+
+Other articles on AngularJS directives and integration with Kendo UI:
+
+* [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
+* [Directives with Timeout Initialization in Markup]({% slug ngrepeat_ngif_ngbind_support_angularjs %})
+* [DataSource Updates]({% slug datasource_updates_angularjs_directives %})
+* [Global Events]({% slug global_events_angularjs_directives %})
+* [Settings of the Grid]({% slug grid_settings_angularjs_directives %})
+* [How to Nest Widgets]({% slug nest_widgets_angularjs_directives %})

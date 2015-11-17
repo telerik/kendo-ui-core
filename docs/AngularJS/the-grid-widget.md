@@ -1,11 +1,12 @@
 ---
-title: Grid
-page_title: Grid
+title: Grid Settings
+page_title: Grid Settings | AngularJS Directives
 description: "Learn the tips and tricks about how to use Kendo UI Grid widget in AngularJS."
+slug: grid_settings_angularjs_directives
 position: 4
 ---
 
-# Grid
+# Grid Settings
 
 The Grid is one of the most complex Kendo UI widgets. This chapter outlines some of its particularities regarding the AngularJS integration supported by Kendo UI.
 
@@ -145,7 +146,7 @@ As seen, if you select an item, it displays two input fields bound to the select
 > **Important**  
 > When using `rowTemplate`, include the `data-uid="#: uid #"` attribute in the toplevel row element as described in the [Grid documentation](/web/grid/how-to/Templates/row-template-using-dates). You must not use an AngularJS template like `data-uid="{{dataItem.uid}}"` because it is compiled after the grid is displayed and the widget cannot discriminate between the different rows and the data items they belong to.
 
-## `$http` Service to Bind the Grid
+## `$http` Service Binding the Grid
 
 In order to take full control on the logic that performs the request to the server all you have to do is to define the different transport operations as functions. Inside the function you can use the $http or the $.ajax methods to perform the needed. When done (inside the success callback) you just need to pass the result to the `success` function part of the events arguments object.
 
@@ -178,3 +179,14 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
     }
 });
 </script>
+
+## See Also
+
+Other articles on AngularJS directives and integration with Kendo UI:
+
+* [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
+* [DataSource Updates]({% slug datasource_updates_angularjs_directives %})
+* [Directives with Timeout Initialization in Markup]({% slug ngrepeat_ngif_ngbind_support_angularjs %})
+* [Global Events]({% slug global_events_angularjs_directives %})
+* [Memory Leaks]({% slug memory_leaks_angularjs_directives %})
+* [How to Nest Widgets]({% slug nest_widgets_angularjs_directives %})

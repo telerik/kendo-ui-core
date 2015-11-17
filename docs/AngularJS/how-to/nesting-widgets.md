@@ -1,8 +1,8 @@
 ---
 title: Nest Widgets
-page_title: Nest Widgets | Kendo UI AngularJS Directives
+page_title: Nest Widgets | AngularJS Directives
 description: "Learn about the nesting of Kendo UI widgets in AngularJS applications."
-slug: nest_widgets_angularjs
+slug: nest_widgets_angularjs_directives
 position: 7
 ---
 
@@ -36,3 +36,14 @@ In such cases the [`k-ng-delay`](http://docs.telerik.com/kendo-ui/AngularJS/intr
       .controller("MyCtrl", function($scope){
       })
     </script>
+    
+## See Also
+
+Other articles on AngularJS directives and integration with Kendo UI:
+
+* [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
+* [DataSource Updates]({% slug datasource_updates_angularjs_directives %})
+* [Global Events]({% slug global_events_angularjs_directives %})
+* [Settings of the Grid]({% slug grid_settings_angularjs_directives %})
+* [Memory Leaks]({% slug memory_leaks_angularjs_directives %})
+* [Directives with Timeout Initialization in Markup]({% slug ngrepeat_ngif_ngbind_support_angularjs %})
