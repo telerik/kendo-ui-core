@@ -1,22 +1,21 @@
 ---
-title: Custom PDF page layout
-page_title: Custom PDF page layout
+title: Customize Page Layout
+page_title: Customize Page Layout | Kendo UI Grid Widget
+description: "Learn how to export a Kendo UI Grid in PDF and customize its page layout."
 previous_url: /framework/drawing/how-to/custom-page-layout
-description: This article demonstrates how to customize the page layout during PDF export
+slug: howto_customize_page_layout_pdf_grid
 ---
 
-# Custom PDF page layout
+# Customize Page Layout
 
-This example will show how to export a multi-page Grid and customize the page layout.
-
-Our goal is to fit the grid in the center of the exported page.
-We'll also add a header and a footer that are not part of the original page.
+When exporting a Kendo UI Grid in PDF, the goal is to fit the grid in the center of the exported page and add a header and a footer that are not part of the original page. 
 
 ![Result](custom-page-layout.png)
 
-The full code of the example follows with additional discussion in the comments.
+The example below demonstrates how to export a multi-page Kendo UI Grid and customize its page layout.
 
-## Example - page layout
+###### Example
+
 ```html
 <!-- Load Pako ZLIB library to enable PDF compression -->
 <script src="http://kendo.cdn.telerik.com/2015.1.429/js/pako_deflate.min.js"></script>
@@ -185,20 +184,19 @@ The full code of the example follows with additional discussion in the comments.
 </script>
 ```
 
-## Support for Unicode
+## Unicode Support
 
-By default the generated PDF file will use a standard set of fonts.
-This set does not include any Unicode characters.
+By default, the generated PDF file uses a standard set of fonts, which does not include any Unicode characters. Solve this issue by providing your own set of fonts for the export. Only the used subset of these fonts will be embedded in the PDF file. This is the reason why DejaVu is includede in the demo.
 
-The solution is to provide your own set of fonts for the export.
-Only the used subset of these fonts will be embedded in the PDF file.
+For further details, see [Custom fonts](/framework/drawing/pdf-output#using-custom-fonts).
 
-This is why we include DejaVu in the demo.
+## See Also
 
-See [Custom fonts](/framework/drawing/pdf-output#using-custom-fonts) for details.
+Other articles on Kendo UI Grid export in PDF:
 
-## See also
-
-* [API Reference for kendo.drawing](/api/javascript/drawing)
-* [API reference for kendo.geometry](/api/javascript/geometry)
-
+* [API Reference for `kendo.drawing`](/api/javascript/drawing)
+* [API Reference for `kendo.geometry`](/api/javascript/geometry)
+* [JavaScript API Reference](/api/javascript/ui/grid)
+* [How to Customize Page Layout]({% slug howto_customize_page_layout_pdf_grid %})
+* [How to Export All Pages]({% slug howto_export_all_pagesto_pdf_grid %})
+* [How to Export All Pages and Full Page Content]({% slug howto_export_allpagesand_full_page_content_pdf_grid %})

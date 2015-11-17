@@ -1,14 +1,15 @@
 ---
-title: Export full page content with Kendo UI Grid all pages
-page_title: Export full page content with Kendo UI Grid all pages
-description: Export full page content with Kendo UI Grid all pages
+title: Export All Pages and Full Page Content
+page_title: Export All Pages and Full Page Content | Kendo UI Grid Widget
+description: "Learn how to export all Kendo UI Grid pages and their full data and visual content."
+slug: howto_export_allpagesand_full_page_content_pdf_grid
 ---
 
-# Export a PDF including all Grid pages and all pages content
+# Export All Pages and Full Page Content
 
-This example demonstrates how to export the full page content along with Grid all pages in a PDF file.
+This example demonstrates how to export all Kendo UI Grid pages and their full page content in a PDF file.
 
-#### Example:
+###### Example
 
 ```html
     <button class="k-button">Export Grid</button>
@@ -138,3 +139,12 @@ This example demonstrates how to export the full page content along with Grid al
       });
     </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Grid export in PDF:
+
+* [JavaScript API Reference](/api/javascript/ui/grid)
+* [How to Customize Page Layout]({% slug howto_customize_page_layout_pdf_grid %})
+* [How to Export All Pages]({% slug howto_export_all_pagesto_pdf_grid %})
+* [How to Export Multiple Pages with Variable Row Height]({% slug howto_export_multiple_pageswith_variable_rowheight_pdf_grid %})
