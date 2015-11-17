@@ -1,14 +1,15 @@
 ---
-title: Adjust row height with virtual scrolling
-page_title: Adjust row height with virtual scrolling
-description: Adjust row height in with virtual scrolling
+title: Adjust Row Height with Virtual Scrolling
+page_title:  Adjust Row Height with Virtual Scrolling | Kendo UI Grid Widget
+description: "Learn how to adjust row height when virtual scrolling is enabled in the Kendo UI Grid widget."
+slug: howto_adjust_row_height_withvirtual_scrolling_grid
 ---
 
-# Adjust row height in with virtual scrolling
+# Adjust Row Height with Virtual Scrolling
 
-The following runnable sample demonstrates how to adjust the row height of a Kendo UI Grid with virtual scrolling enabled.
+The example below demonstrates how to adjust the row height of a Kendo UI Grid when the virtual scrolling functionality is enabled.
 
-#### Example
+###### Example
 
 ```html
     <div id="grid" style="height: 380px"></div>
@@ -63,3 +64,15 @@ The following runnable sample demonstrates how to adjust the row height of a Ken
       });
     </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Grid:
+
+* [JavaScript API Reference](/api/javascript/ui/grid)
+* [How to Apply Minimum Width during Column Resize]({% slug howto_apply_min_width_during_column_resize_grid %})
+* [How to Change Group Header Position with Locked Columns]({% slug howto_change_group_header_position_wthlocked_columns_grid %})
+* [How to Create and Use Auto Layout]({% slug howto_create_and_use_autolayout_grid %})
+* [How to Hide the Vertical Scrollbar When Not Needed]({% slug howto_hide_vertical_scrollbar_grid %})
+* [How to Resize Grid When Window Is Resized]({% slug howto_resize_whenthe_windowis_resized_grid %})
+* [How to Use FontAwesome Icons in Custom Command Buttons]({% slug howto_use_fontawesomeiconsin_custom_command_buttons_grid %})

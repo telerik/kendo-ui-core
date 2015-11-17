@@ -1,14 +1,15 @@
 ---
-title: Custom editor in detail template
-page_title: Custom editor in detail template
-description: Custom editor in detail template
+title: Create Custom Editor in Detail Template
+page_title: Create Custom Editor in Detail Template | Kendo UI Grid Widget
+description: "Learn how to create custom a custom editor in a Kendo UI Grid detail template."
+slug: howto_create_custom_editorin_detail_template_grid
 ---
 
-# Custom editor in detail template
+# Create Custom Editor in Detail Template
 
-The following runnable sample demonstrates how to create custom editor in a Kendo UI Grid detail template
+The example below demonstrates how to create a custom editor in a Kendo UI Grid detail template.
 
-#### Example
+###### Example
 
 ```html
     <div id="grid"></div>
@@ -126,3 +127,12 @@ The following runnable sample demonstrates how to create custom editor in a Kend
     </script>
 
 ```
+
+## See Also
+
+Other articles on Kendo UI Grid:
+
+* [JavaScript API Reference](/api/javascript/ui/grid)
+* [How to Refresh Grid in Detail Template]({% slug howto_refresh_gridin_detail_template_grid %})
+* [How to Use Checkbox Column Templates and Edit]({% slug howto_use_checkbox_column_templateand_edit_grid %})
+* [How to Use Dates inside Row Template]({% slug howto_use_dates_inside_row_template_grid %})

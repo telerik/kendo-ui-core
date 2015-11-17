@@ -1,14 +1,15 @@
 ---
-title: Hide the vertical scrollbar when not needed
-page_title: Hide the vertical scrollbar when not needed
-description: Hide the vertical scrollbar when not needed
+title: Hide the Vertical Scrollbar
+page_title:  Hide the Vertical Scrollbar | Kendo UI Grid Widget
+description: "Learn how to hide the vertical scrollbar of the Kendo UI Grid widget when you do not need it."
+slug: howto_hide_vertical_scrollbar_grid
 ---
 
-# Hide the Grid's vertical scrollbar when not needed
+# Hide the Vertical Scrollbar
 
-The following runnable example demonstrates how to conditionally hide the vertical scrollbar of the Kendo UI Grid, when the total height of all table rows is less than the Grid height.
+The example below demonstrates how to conditionally hide the vertical scrollbar of the Kendo UI Grid, when the total height of all table rows is less than the Grid height.
 
-#### Example
+###### Example
 
 ```html
 <style>
@@ -86,3 +87,15 @@ $(function () {
 
 </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Grid:
+
+* [JavaScript API Reference](/api/javascript/ui/grid)
+* [How to Adjust Row Height with Virtual Scrolling]({% slug howto_adjust_row_height_withvirtual_scrolling_grid %})
+* [How to Apply Minimum Width during Column Resize]({% slug howto_apply_min_width_during_column_resize_grid %})
+* [How to Change Group Header Position with Locked Columns]({% slug howto_change_group_header_position_wthlocked_columns_grid %})
+* [How to Create and Use Auto Layout]({% slug howto_create_and_use_autolayout_grid %})
+* [How to Resize Grid When Window Is Resized]({% slug howto_resize_whenthe_windowis_resized_grid %})
+* [How to Use FontAwesome Icons in Custom Command Buttons]({% slug howto_use_fontawesomeiconsin_custom_command_buttons_grid %})
