@@ -1,8 +1,9 @@
 ---
 title: AngularJS Integration
-page_title: AngularJS Integration  
+page_title: AngularJS Integration | AngularJS Directives"
 description: "Learn more about the AngularJS integration of Kendo UI controls and find out how to use the widgets in AngularJS applications."
 previous_url: /using-kendo-with-angularjs
+slug: angularjs_integration_directives
 position: 1
 ---
 
@@ -21,7 +22,7 @@ Kendo UI can be used seamlessly with AngularJS. The integration between both fra
 
 The AngularJS bindings are now integrated into Kendo UI. If you are using one of the bundles, such as `kendo.all.min.js`, then the required code is already there. If you load individual Kendo UI files, you need to also load `kendo.angular.js` (or `kendo.angular.min.js`). It must be loaded after `kendo.core`.
 
-In order for the Angular bindings to be activated, you must load `angular.js` before you load Kendo UI. Therefore, load the scripts in this order:
+In order to activate the Angular bindings, load `angular.js` before you load Kendo UI. Therefore, load the scripts in this order:
 
     <script src="jquery.js"></script>
     <script src="angular.js"></script>
@@ -31,7 +32,7 @@ Do not forget to load the Kendo UI stylesheets too. Next when creating your Angu
 
     var app = angular.module("your-angular-app", [ "kendo.directives" ]);
 
-### Create Widgets the Angular Way
+### Widget Creation in AngularJS
 
 The directives kick in on attributes like `kendo-widget-name`. Refer to the example below to get the `DatePicker` widget:
 
@@ -78,7 +79,7 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 </script>
 ```
 
-#### Set widget **array** and **object** options as attributes in AngularJS
+#### Set widget `array` and `object` options as attributes in AngularJS
 
 You can use declarative attributes for **array** and **object** configuration options, too:
 
@@ -101,7 +102,7 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 </script>
 ```
 
-### Widget Configuration in `controller`
+### Widget Configuration in Controller
 
 If you want to store the whole widget configuration in the `controller`, you can use the special `k-options` attribute:
 
@@ -238,7 +239,7 @@ The directive will update the `birthday` variable with the selected `Date` objec
 > **Important**  
 > If you are using AngularJS, then you probably want to use Angular's own routing mechanism and data binding. Do not mix that with Kendo UI MVVM.
 
-### The `k-value-primitive` Attribute
+### `k-value-primitive` Attribute
 
 As of Kendo UI Q3 2014 (2014.3.1119) release, the `k-value-primitve` attribute has been introduced for DropDownList, ComboBox, MultiSelect, and AutoComplete widgets.
 
@@ -373,7 +374,7 @@ The Grid, TreeView, and ListView widgets will evaluate handlers defined with `k-
 
 The `kendoEvent` is available as well.
 
-### Update Widgets When Options Change
+### Widget Update upon Option Changes
 
 You can update a widget from `controller`. Use the special `k-rebind` attribute to create a widget which automatically updates when some scope variable changes. This option will destroy the original widget and will recreate it using the changed options:
 
@@ -400,7 +401,7 @@ To watch multiple options for change, just use `k-options` and pass the same var
 
     <ul kendo-menu k-options="menuOptions" k-rebind="menuOptions"> ... </ul>
 
-### Use `k-ng-disabled` and `k-ng-readonly` to Change Widget States 
+### State Changes via `k-ng-disabled` and `k-ng-readonly`
 
 Kendo UI Q1 2015 release intorduced support for `k-ng-disabled` and `k-ng-readonly` directives. By using them, you can change the `disabled` or `readonly` state of the widget based on a scope variable.
 
@@ -520,7 +521,7 @@ You can load the widget data with a `$http` call and initialize the widget when 
 </script>
 ```
 
-### Get Widget References
+### Widget References
 
 #### Get widget instances in `controller`
 
@@ -651,3 +652,14 @@ The best solution in this case would be for you to use a separate `controller` t
 
 </div>
 ````
+
+## See Also
+
+Other articles on AngularJS directives and integration with Kendo UI:
+
+* [Global Events]({% slug global_events_angularjs_directives %})
+* [DataSource Updates]({% slug datasource_updates_angularjs_directives %})
+* [Directives with Timeout Initialization in Markup]({% slug ngrepeat_ngif_ngbind_support_angularjs %})
+* [Memory Leaks]({% slug memory_leaks_angularjs_directives %})
+* [Settings of the Grid]({% slug grid_settings_angularjs_directives %})
+* [How to Nest Widgets]({% slug nest_widgets_angularjs_directives %})

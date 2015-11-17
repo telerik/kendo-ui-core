@@ -1,15 +1,16 @@
 ---
-title: DataSource
-page_title: DataSource  
+title: Directives with DataSource
+page_title: Directives with DataSource | AngularJS Directives 
 description: "Learn more about the interaction between Kendo UI DataSource and AngularJS scope to take full advantage of AngularJS integration into Kendo UI controls."
+slug: datasource_updates_angularjs_directives
 position: 3
 ---
 
-# DataSource
+# Directives with DataSource
 
 Most Kendo UI widgets work with a DataSource object. Kendo UI strives hard to keep simple cases simple, so you do not always have to create the DataSource object yourself.
 
-Below is an example with static, local data. When you select an item in the grid, two input fields become available and they are bound to that item's data. Editing the data in the input fields works as expected: the grid magically updates. 
+Below is an example with static, local data. When you select an item in the Grid, two input fields become available and they are bound to that item's data. Editing the data in the input fields works as expected: the Grid updates. 
 
 ###### Example - trying to update the data source
 
@@ -95,3 +96,14 @@ Note that the recommended way to update the object is to use the `set` method of
     $scope.gridData[0].track = "Hey you";
 
 The reason behind this is the fact that when grid columns do not declare a template property, Angular-Kendo bindings automatically initialize it with a template, which uses `{{angular}}` expressions. So, if you just set the property in the object, the display will update, but it is Angular, not Kendo, that manages the update. The grid itself would not be notified about a change in the data. In general, try to use methods of the Observable objects to manage the data as this is the only guaranteed way that widgets will properly update.
+
+## See Also
+
+Other articles on AngularJS directives and integration with Kendo UI:
+
+* [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
+* [Directives with Timeout Initialization in Markup]({% slug ngrepeat_ngif_ngbind_support_angularjs %})
+* [Global Events]({% slug global_events_angularjs_directives %})
+* [Memory Leaks]({% slug memory_leaks_angularjs_directives %})
+* [Settings of the Grid]({% slug grid_settings_angularjs_directives %})
+* [How to Nest Widgets]({% slug nest_widgets_angularjs_directives %})
