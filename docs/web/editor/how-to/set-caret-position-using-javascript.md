@@ -7,25 +7,25 @@ slug: howto_set_caret_position_editor
 
 # Set Caret Position
 
-The example below demonstrates how to set the position of the caret inside a Kendo UI inline Editor by using JavaScript.
+The examples below demonstrate how to set the position of the caret inside a Kendo UI inline Editor by using JavaScript.
 
-###### Example
+The first sample uses a position index, while the second one searches for a string. The exact implementation in other scenarios will vary, depending on the business logic and used DOM/Range APIs.
+
+###### Example 1 - set caret position to a specified index
 
 ```html
-    <div id="example">
-        <button class="click">Click</button>
-        <div class="demo-section k-header" style="padding:100px">
-            <div id="topEditor">some text that I want to alter</div>
-        </div>
+    <div id="example" style="margin: 2em;">
+        <p><button id="setPosition" class="k-button">Click</button></p>
+        <div id="editor">Some text to focus and edit.</div>
     </div>
 
     <script>
       $(document).ready(function() {
-        $("#topEditor").kendoEditor();
+        $("#editor").kendoEditor();
 
-        $('.click').click(function () {
-          $("#topEditor").focus().trigger("click");
-          var editor = $("#topEditor").data("kendoEditor");
+        $("#setPosition").click(function () {
+          $("#editor").focus().trigger("click");
+          var editor = $("#editor").data("kendoEditor");
           moveCaret(editor, 6);
         });
 
@@ -38,6 +38,58 @@ The example below demonstrates how to set the position of the caret inside a Ken
             editor.selectRange(range);
           }
         }
+      });
+    </script>
+```
+
+###### Example 2 - set caret position to the start of a string
+
+```html
+    <div id="example" style="margin: 2em;">
+      <p><input id="stringToFocus" class="k-textbox" type="text" value="focus" /> <button id="setPosition" class="k-button">Click</button></p>
+      <div id="editor" style="margin: 5em 0 0">
+        <p>Random paragraph 1.</p>
+        <p>Some text to focus and edit.</p>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function() {
+        $("#editor").kendoEditor();
+
+        
+        function findNodeOfString(container, str) {
+          var nodeIterator = document.createNodeIterator(
+            container,
+            NodeFilter.SHOW_TEXT,
+            function(node) {
+        			return node.nodeValue.indexOf(str) >= 0 ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    				});
+          
+          return nodeIterator.nextNode();
+        }
+
+        function moveCaret(editor, str) {
+          var range = editor.getRange();
+          if (range.collapsed) {
+            
+            
+            var textNode = findNodeOfString(editor.body, str);
+            if (textNode !== null) {
+              var position = textNode.nodeValue.indexOf(str);
+              range.setStart(textNode, position);
+            }
+            range.collapse(true); // collapse to start
+            editor.selectRange(range);
+          }
+        }
+        
+        $("#setPosition").click(function () {
+          $("#editor").focus().trigger("click");
+          var editor = $("#editor").data("kendoEditor");
+          moveCaret(editor, $("#stringToFocus").val());
+        });
+        
       });
     </script>
 ```
