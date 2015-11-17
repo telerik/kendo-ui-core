@@ -6,7 +6,7 @@ description: Learn how to define the initially selected button, select a button 
 
 # kendo.mobile.ui.ButtonGroup
 
-Represents the Kendo UI Mobile ButtonGroup widget. Inherits from [kendo.mobile.ui.Widget](/api/framework/mobilewidget).
+Represents the Kendo UI Mobile ButtonGroup widget. Inherits from [kendo.mobile.ui.Widget](/api/javascript/mobile/ui/mobilewidget).
 
 ## Configuration
 
