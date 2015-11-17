@@ -244,7 +244,8 @@ textarea.k-textbox:hover,
 /* Default icons opacity */
 .k-icon,
 .k-button .k-image,
-.k-panelbar .k-state-active .k-icon,
+.k-panelbar > .k-state-active > .k-header > .k-icon,
+.k-panelbar > .k-state-active > .k-header .k-state-default .k-icon,
 .k-tabstrip-scrollable .k-button:active .k-icon {
     opacity: .4;
 }
@@ -263,7 +264,8 @@ textarea.k-textbox:hover,
 .k-splitbar.k-state-focused .k-icon,
 .k-scheduler-toolbar .k-icon,
 .k-gantt-toolbar .k-icon,
-.k-toolbar .k-overflow-anchor.k-state-border-down .k-i-more {
+.k-toolbar .k-overflow-anchor.k-state-border-down .k-i-more,
+.k-panelbar > .k-state-active > .k-header .k-state-active .k-icon {
     opacity: 1;
 }
 
