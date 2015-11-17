@@ -591,6 +591,10 @@ var __meta__ = { // jshint ignore:line
                 element = this.container(),
                 template = this.template();
 
+            if (source == null) {
+                return;
+            }
+
             if (source instanceof kendo.data.DataSource) {
                 source = source.view();
             }
@@ -611,8 +615,7 @@ var __meta__ = { // jshint ignore:line
                         bindElement(element.children[idx], source[idx], this.options.roles, [source[idx]].concat(parents));
                     }
                 }
-            }
-            else {
+            } else {
                 $(element).html(kendo.render(template, source));
             }
         }
@@ -1743,7 +1746,7 @@ var __meta__ = { // jshint ignore:line
                 element.kendoBindingTarget = null;
             }
         }
-        
+
         if(destroyWidget) {
             var widget = kendo.widgetInstance($(element));
             if (widget && typeof widget.destroy === FUNCTION) {
