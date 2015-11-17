@@ -1,14 +1,17 @@
 ---
-title: Column Template
-description: Use the column template in the output Excel document
+title: Use Column Template
+page_title:  Use Column Template | Kendo UI Grid Widget
+description: "Learn how to use the column template as the value of a corresponding cell in the Excel document while exporting Kendo UI Grid."
+slug: howto_use_column_template_grid
 ---
 
-# Column Template Export
+# Use Column Template
 
-This example shows how to use the column template as the value of corresponding cell in the output Excel document.
-For additional info check [Create Excel Documents](/framework/excel/introduction#create-excel-document).
+The example below demonstrates how to use the column template as the value of a corresponding cell in the Excel document while exporting Kendo UI Grid. 
 
-#### Example - column template export
+For additional information about how Excel documents work, refer to the [introductory help topic on Excel](/framework/excel/introduction#create-excel-document).
+
+###### Example
 
 ```html
 <div id="grid"></div>
@@ -46,3 +49,14 @@ $("#grid").kendoGrid({
 });
 </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Grid export to Excel:
+
+* [JavaScript API Reference](/api/javascript/ui/grid#configuration-excel)
+* [How to Configure Color for Alternating Rows]({% slug howto_configure_color_alternating_rows_grid %})
+* [How to Export Checked Columns Only]({% slug howto_export_checked_columns_only_grid %})
+* [How to Export Detail Grids]({% slug howto_exportto_excel_masterand_detail_grid %})
+* [How to Export Multiple Grids]({% slug howto_export_excel_multiple_grids_grid %})
+* [How to Format Cell Values]({% slug howto_format_cell_values_grid %})

@@ -1,12 +1,13 @@
 ---
-title: Export only checked columns
-page_title: Create Excel file from checked columns only
-description: This article shows how to create Excel document from the checked rows only
+title: Export Checked Columns Only
+page_title:  Export Checked Columns Only | Kendo UI Grid Widget
+description: "Learn how to create Excel documents by exporting the checked columns only from a Kendo UI Grid widget."
+slug: howto_export_checked_columns_only_grid
 ---
 
-## Export checked columns of the Grid
+# Export Checked Columns Only
 
-### Example - create an Excel document from checked columns only
+###### Example
 
 ```html
      <div id="grid"></div>
@@ -67,3 +68,13 @@ description: This article shows how to create Excel document from the checked ro
     </script>
 ```
 
+## See Also
+
+Other articles on Kendo UI Grid export to Excel:
+
+* [JavaScript API Reference](/api/javascript/ui/grid#configuration-excel)
+* [How to Configure Color for Alternating Rows]({% slug howto_configure_color_alternating_rows_grid %})
+* [How to Export Detail Grids]({% slug howto_exportto_excel_masterand_detail_grid %})
+* [How to Export Multiple Grids]({% slug howto_export_excel_multiple_grids_grid %})
+* [How to Format Cell Values]({% slug howto_format_cell_values_grid %})
+* [How to Use Column Template]({% slug howto_use_column_template_grid %})

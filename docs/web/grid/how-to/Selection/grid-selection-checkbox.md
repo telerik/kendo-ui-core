@@ -1,17 +1,15 @@
 ---
-title: Selection with checkbox column
-page_title: Selection with checkbox column
-description: Kendo Grid example how to select Kendo Grid rows with checkbox column and how to get the IDs of all selected items.
+title: Make Selection with Checkbox Column
+page_title:  Make Selection with Checkbox Column | Kendo UI Grid Widget
+description: "Learn how to select a Kendo UI Grid row with a checkbox column, preserve the selection and get the IDs of all selected items."
+slug: howto_make_selection_checkbox_column_grid
 ---
 
-# Kendo UI Grid selection with checkbox column
+# Make Selection with Checkbox Column
 
-This example demonstrates how to:
-- select grid row using a checkbox
-- preserve that selection between pages
-- get the selected item IDs from all pages
+The example below demonstrates how to select a Kendo UI Grid row using a checkbox, preserve the selection between pages, and get the IDs of the selected items from all pages.
 
-#### Example
+###### Example
 
 ```html
 <div id="grid"></div>
@@ -163,3 +161,12 @@ This example demonstrates how to:
     }
 </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Grid:
+
+* [JavaScript API Reference](/api/javascript/ui/grid)
+* [How to Persist Row Selection while Paging, Sorting, and Filtering]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %})
+* [How to Prevent Selection for Checkbox Cells]({% slug howto_prevent_selection_checkbox_cells_grid %})
+* [How to Select Multiple Rows with Checkboxes]({% slug howto_select_multiple_rowswith_checkboxes_grid %})

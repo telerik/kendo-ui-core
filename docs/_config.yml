@@ -16,8 +16,6 @@ navigation:
     "*supporting":
         title: "Additional Resources"
         position: 2
-    "*excel":
-        title: "Excel"
     "*how-to":
         title: "How To"
         position: 200
@@ -62,8 +60,6 @@ navigation:
     "php":
         title: "UI for PHP"
         position: 13
-    "*pdf-export":
-        title: "PDF Export"
     "webforms":
         title: "Use in ASP.NET Web Forms"
         position: 14
@@ -95,7 +91,32 @@ navigation:
     "*tags":
         title: "Tags"
     "*angular":
+        title: "AngularJS"    
+    "web/grid/how-to/AngularJS":
         title: "AngularJS"
+        position: 1
+    "web/grid/how-to/Editing":
+        title: "Editing"
+        position: 2
+    "web/grid/how-to/Layout":
+        title: "Appearance"
+        position: 3
+    "web/grid/how-to/Selection":
+        title: "Selection"
+        position: 4
+    "web/grid/how-to/Templates":
+        title: "Templates"
+        position: 5
+    "web/grid/how-to/excel":
+        title: "Excel Export"
+        position: 6
+    "web/grid/how-to/pdf-export":
+        title: "PDF Export"
+        position: 7
+    "*excel":
+        title: "Excel"
+    "*pdf-export":
+        title: "PDF Export"
     "*mobileactionsheet":
         title: "MobileActionSheet"
     "*mobileapplication":

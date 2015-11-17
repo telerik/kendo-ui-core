@@ -1,14 +1,15 @@
 ---
-title: Prevent selection for checkbox cell
-page_title: Prevent selection for checkbox cell
-description: Prevent selection for checkbox cell
+title: Prevent Selection for Checkbox Cells
+page_title:  Prevent Selection for Checkbox Cells | Kendo UI Grid Widget
+description: "Learn how to prevent selection for checkbox cells in Kendo UI Grid."
+slug: howto_prevent_selection_checkbox_cells_grid
 ---
 
-# Prevent selection for checkbox cell
+# Prevent Selection for Checkbox Cells
 
-The following runnable sample demonstrates how to prevent the cell selection for checkbox cell or any cell.
+The example below demonstrates how to prevent the cell selection functionality for checkbox or any cells.
 
-#### Example
+###### Example
 
 ```html
     <div id="grid"></div>
@@ -36,3 +37,12 @@ The following runnable sample demonstrates how to prevent the cell selection for
       });
     </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Grid:
+
+* [JavaScript API Reference](/api/javascript/ui/grid)
+* [How to Make Selection with Checkbox Column]({% slug howto_make_selection_checkbox_column_grid %})
+* [How to Persist Row Selection while Paging, Sorting, and Filtering]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %})
+* [How to Select Multiple Rows with Checkboxes]({% slug howto_select_multiple_rowswith_checkboxes_grid %})

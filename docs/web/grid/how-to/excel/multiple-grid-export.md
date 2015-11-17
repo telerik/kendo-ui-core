@@ -1,14 +1,17 @@
 ---
-title: Multiple Grid Export
-description: Export more than one Kendo UI grid to Excel
+title: Export Multiple Grids
+page_title: Export Multiple Grids | Kendo UI Grid Widget
+description: "Learn how to export to Excel more than one Kendo UI Grid."
+slug: howto_export_excel_multiple_grids_grid
 ---
 
-# Multiple Grid Export
+# Export Multiple Grids
 
-This example shows how to export two Kendo UI grids in the same Excel document. Each grid is exported in a separate Excel sheet.
-For additional info check [Create Excel Documents](/framework/excel/introduction#create-excel-document).
+The example below demonstrates how to export two Kendo UI Grids in the same Excel document. Each grid is exported in a separate Excel sheet. 
 
-#### Example - multiple grid Excel export
+For additional information about how Excel documents work, refer to the [introductory help topic on Excel](/framework/excel/introduction#create-excel-document).
+
+###### Example
 
 ```html
 <button id="export" class="k-button"><span class="k-icon k-i-excel"></span>Export to Excel</button>
@@ -94,3 +97,14 @@ For additional info check [Create Excel Documents](/framework/excel/introduction
   });
 </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Grid export to Excel:
+
+* [JavaScript API Reference](/api/javascript/ui/grid#configuration-excel)
+* [How to Configure Color for Alternating Rows]({% slug howto_configure_color_alternating_rows_grid %})
+* [How to Export Detail Grids]({% slug howto_exportto_excel_masterand_detail_grid %})
+* [How to Export Checked Columns Only]({% slug howto_export_checked_columns_only_grid %})
+* [How to Format Cell Values]({% slug howto_format_cell_values_grid %})
+* [How to Use Column Template]({% slug howto_use_column_template_grid %})
