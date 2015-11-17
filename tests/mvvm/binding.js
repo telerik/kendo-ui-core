@@ -291,6 +291,67 @@ test("select binding with template", function() {
     equal(dom.find("option").val(), "1");
 });
 
+test("source binding to undefined", function() {
+    dom = $('<div data-bind="source:foo">');
+
+    var vm = kendo.observable({});
+
+    kendo.bind(dom, vm);
+
+    equal(dom.text(), "");
+
+    vm.set("foo", "foo");
+
+    equal(dom.text(), "foo");
+});
+
+test("source binding to null", function() {
+    dom = $('<div data-bind="source:foo">');
+
+    var vm = kendo.observable({
+        foo: null
+    });
+
+    kendo.bind(dom, vm);
+
+    equal(dom.text(), "");
+
+    vm.set("foo", "foo");
+
+    equal(dom.text(), "foo");
+});
+
+test("source binding to deep nested undefined", function() {
+    dom = $('<div data-bind="source:foo.bar">');
+
+    var vm = kendo.observable({
+    });
+
+    kendo.bind(dom, vm);
+
+    equal(dom.text(), "");
+
+    vm.set("foo", {bar: "foo"});
+
+    equal(dom.text(), "foo");
+});
+
+test("source binding to nested undefined", function() {
+    dom = $('<div data-bind="source:foo.bar">');
+
+    var vm = kendo.observable({
+        foo: null
+    });
+
+    kendo.bind(dom, vm);
+
+    equal(dom.text(), "");
+
+    vm.set("foo", {bar: "foo"});
+
+    equal(dom.text(), "foo");
+});
+
 test("select binding to data source", function() {
     dom = $('<select data-template="select-template" data-bind="source:foo"/>');
 
