@@ -1930,7 +1930,7 @@ html .km-pane-wrapper .km-widget,
     color: @hover-text-color;
 }
 
-.k-panelbar .k-state-focused.k-state-hover
+.k-panelbar > li > .k-state-focused.k-state-hover
 {
     background: @hover-background-color;
     .box-shadow(none);
@@ -3062,7 +3062,7 @@ background-color: @secondary-background-color;
 color: @widget-text-color;
 }
 
-.k-panelbar .k-state-hover {
+.k-panelbar > li >.k-state-hover {
 background-color: @hover-background-color;
 }
 
@@ -3172,12 +3172,12 @@ table.k-editor {
 .k-treeview .k-state-selected,
 .k-treeview .k-state-focused,
 .k-editor-toolbar .k-dropdown,
-.k-panelbar .k-state-focused {
+.k-panelbar > li > .k-state-focused {
     .box-shadow(none);
 }
 
 .k-treeview .k-state-focused,
-.k-panelbar .k-state-focused {
+.k-panelbar > li > .k-state-focused {
     background-color: @hover-background-color;
 }
 
