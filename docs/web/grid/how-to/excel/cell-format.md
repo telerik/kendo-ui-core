@@ -1,15 +1,17 @@
 ---
-title: Cell Format
-description: Format the cell values
+title: Format Cell Values
+page_title: Format Cell Values | Kendo UI Grid Widget
+description: "Learn how to format the cell values of the Kendo UI Grid widget during Excel export."
+slug: howto_format_cell_values_grid
 ---
 
 # Set Cell Format During Excel export
 
-To format the cell values set the [format](/api/javascript/ooxml/workbook.html#configuration-sheets.rows.cells.format) option of the cells.
+To format the cell values, set the [`format`](/api/javascript/ooxml/workbook.html#configuration-sheets.rows.cells.format) option of the cells. The page about [creating a custom number format](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4) describes the formats, supported by Excel. 
 
-The [Create a custom number format](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4) page describes the formats that Excel supports.
+The example below demonstrates how to format cell values of the Kendo UI Grid during Excel export. 
 
-#### Example - format cell values
+###### Example 
 
 ```html
 <div id="grid"></div>
@@ -36,7 +38,10 @@ The [Create a custom number format](https://support.office.com/en-us/article/Cre
     });
 </script>
 ```
-#### Example - set custom format for Date values
+
+The example below demonstrates how to set a custom format for `date` values.
+
+###### Example
 
 ```html
 <div id="grid"></div>
@@ -80,3 +85,14 @@ The [Create a custom number format](https://support.office.com/en-us/article/Cre
   });
 </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Grid export to Excel:
+
+* [JavaScript API Reference](/api/javascript/ui/grid#configuration-excel)
+* [How to Configure Color for Alternating Rows]({% slug howto_configure_color_alternating_rows_grid %})
+* [How to Export Checked Columns Only]({% slug howto_export_checked_columns_only_grid %})
+* [How to Export Detail Grids]({% slug howto_exportto_excel_masterand_detail_grid %})d
+* [How to Export Multiple Grids]({% slug howto_export_excel_multiple_grids_grid %})
+* [How to Use Column Template]({% slug howto_use_column_template_grid %})

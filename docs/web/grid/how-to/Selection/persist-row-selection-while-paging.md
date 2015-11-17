@@ -1,16 +1,18 @@
 ---
-title: Persist row selection while paging, sorting and filtering
-page_title: Persist row selection while paging, sorting and filtering
-description: Persist row selection while paging, sorting and filtering
+title: Persist Row Selection during Data Operations
+page_title: Persist Row Selection during Data Operations | Kendo UI Grid Widget
+description: "Learn how to persist row selection while performing the paging, sorting, and filtering data operations in the Kendo UI Grid."
+slug: howto_persist_row_selection_paging_sorting_filtering_grid
 ---
 
-# Persist row selection while paging, sorting and filtering
+# Persist Row Selection during Data Operations
 
-The following runnable sample demonstrates how to persists row selection in a grid, while performing data operations (paging, sorting, filtering).
+The example below demonstrates how to persist the row selection in a Kendo UI Grid, while performing the data operations of paging, sorting, and filtering.
 
-**The implemented technique requires an ID field to be defined in `schema.model`.**
+> **Importnat**  
+> The implemented technique requires you to define an `ID` field in `schema.model`.
 
-#### Example
+###### Example
 
 ```html
     <div id="grid"></div>
@@ -98,3 +100,12 @@ The following runnable sample demonstrates how to persists row selection in a gr
       });
     </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Grid:
+
+* [JavaScript API Reference](/api/javascript/ui/grid)
+* [How to Make Selection with Checkbox Column]({% slug howto_make_selection_checkbox_column_grid %})
+* [How to Prevent Selection for Checkbox Cells]({% slug howto_prevent_selection_checkbox_cells_grid %})
+* [How to Select Multiple Rows with Checkboxes]({% slug howto_select_multiple_rowswith_checkboxes_grid %})

@@ -1,14 +1,17 @@
 ---
-title: Detail Grid Excel Export
-description: How to export master and detail grids in Excel
+title: Export Detail Grids
+page_title:  Export Detail Grids | Kendo UI Grid Widget
+description: "Learn how to export to Excel master and detail Kendo UI Grids."
+slug: howto_exportto_excel_masterand_detail_grid
 ---
 
-# Detail Grid Excel Export
+# Export Detail Grids
 
-The following demos shows how to export the detail grids and merge their workbooks with the master grid workbook. They use the [excelExport](/api/javascript/ui/grid#events-excelExport) event to get the
-workbook of the detail grids. The event is prevented to avoid saving an Excel file for every detail grid. For additional info check [Create Excel Documents](/framework/excel/introduction#create-excel-document).
+The examples below demonstrate how to export to Excel detail Kendo UI Grids and merge their workbooks with the master grid workbook. They use the [`excelExport`](/api/javascript/ui/grid#events-excelExport) event to get the workbook of the detail grids. The event is prevented to avoid saving an Excel file for every detail grid. 
 
-#### Example - detail grid Excel export (all pages and details)
+For additional information about how Excel documents work, refer to the [introductory help topic on Excel](/framework/excel/introduction#create-excel-document).
+
+###### Example - detail Grid export to Excel (all pages and details)
 
 ```html
 <div id="grid"></div>
@@ -203,7 +206,7 @@ workbook of the detail grids. The event is prevented to avoid saving an Excel fi
 </script>
 ```
 
-#### Example - detail grid Excel export (current page only)
+###### Example - detail Grid export to Excel (current page only)
 
 ```html
 <div id="grid"></div>
@@ -336,3 +339,14 @@ workbook of the detail grids. The event is prevented to avoid saving an Excel fi
   }
 </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Grid export to Excel:
+
+* [JavaScript API Reference](/api/javascript/ui/grid#configuration-excel)
+* [How to Configure Color for Alternating Rows]({% slug howto_configure_color_alternating_rows_grid %})
+* [How to Export Checked Columns Only]({% slug howto_export_checked_columns_only_grid %})
+* [How to Export Multiple Grids]({% slug howto_export_excel_multiple_grids_grid %})
+* [How to Format Cell Values]({% slug howto_format_cell_values_grid %})
+* [How to Use Column Template]({% slug howto_use_column_template_grid %})

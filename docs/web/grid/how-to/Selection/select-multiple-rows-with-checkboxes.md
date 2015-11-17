@@ -1,14 +1,15 @@
 ---
-title: Select multiple rows with checkboxes
-page_title: Select multiple rows with checkboxes
-description: Select multiple rows with checkboxes
+title: Select Multiple Rows with Checkboxes
+page_title:  Select Multiple Rows with Checkboxes | Kendo UI Grid Widget
+description: "Learn how to select multiple rows with checkboxes in the Kendo UI Grid widget."
+slug: howto_select_multiple_rowswith_checkboxes_grid
 ---
 
-# Select multiple rows with checkboxes
+# Select Multiple Rows with Checkboxes
 
-The following runnable sample demonstrates how to select multiple rows using checkbox template.
+The example below demonstrates how to select multiple rows using the checkbox template in the Kendo UI Grid widget.
 
-#### Example
+###### Example
 
 ```html
   <div id="grid"></div>
@@ -42,3 +43,12 @@ The following runnable sample demonstrates how to select multiple rows using che
       })
     </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Grid:
+
+* [JavaScript API Reference](/api/javascript/ui/grid)
+* [How to Make Selection with Checkbox Column]({% slug howto_make_selection_checkbox_column_grid %})
+* [How to Persist Row Selection while Paging, Sorting, and Filtering]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %})
+* [How to Prevent Selection for Checkbox Cells]({% slug howto_prevent_selection_checkbox_cells_grid %})
