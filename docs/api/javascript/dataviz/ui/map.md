@@ -5383,7 +5383,7 @@ The source jQuery event instance
 
 ### markerActivate
 
-Fired when a marker has been displayed.
+Fired when a marker has been displayed and has a DOM element assigned.
 
 #### Event Data
 
@@ -5426,6 +5426,8 @@ The source widget instance.
 
 Fired when a marker has been created and is about to be displayed.
 Cancelling the event will prevent the marker from being shown.
+
+Use [markerActivate](#events-markerActivate) if you need to access the marker DOM element.
 
 > Markers are automatically created for GeoJSON Point geometries. If the markerCreated event is cancelled a regular shape (circle) will be created instead.
 
