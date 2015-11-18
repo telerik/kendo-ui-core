@@ -111,7 +111,7 @@ The example below demonstrates how to create auto layout for the Kendo UI Grid. 
 
 ## See Also
 
-Other articles on Kendo UI Grid:
+Other articles on Kendo UI Grid and how-to examples related to its layout:
 
 * [JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Adjust Row Height with Virtual Scrolling]({% slug howto_adjust_row_height_withvirtual_scrolling_grid %})

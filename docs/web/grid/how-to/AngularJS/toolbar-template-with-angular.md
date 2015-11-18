@@ -44,7 +44,7 @@ The example below demonstrates how to create a custom ToolBar template in Angula
 
 ## See Also
 
-Other articles on Kendo UI Grid:
+Other articles on Kendo UI Grid and how-to examples related to AngularJS:
 
 * [JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Bind to Telerik Backend Services]({% slug howto_bindto_telerik_backend_services_grid %})

@@ -88,7 +88,7 @@ The example below demonstrates how to set a custom format for `date` values.
 
 ## See Also
 
-Other articles on Kendo UI Grid export to Excel:
+Other articles on Kendo UI Grid and how-to examples related to its export to Excel:
 
 * [JavaScript API Reference](/api/javascript/ui/grid#configuration-excel)
 * [How to Configure Color for Alternating Rows]({% slug howto_configure_color_alternating_rows_grid %})

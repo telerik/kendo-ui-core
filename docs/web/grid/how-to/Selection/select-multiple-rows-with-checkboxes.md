@@ -46,7 +46,7 @@ The example below demonstrates how to select multiple rows using the checkbox te
 
 ## See Also
 
-Other articles on Kendo UI Grid:
+Other articles on Kendo UI Grid and how-to examples on the selection functionality:
 
 * [JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Make Selection with Checkbox Column]({% slug howto_make_selection_checkbox_column_grid %})

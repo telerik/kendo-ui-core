@@ -136,7 +136,7 @@ $(document).ready(function () {
 
 ## See Also
 
-Other articles on Kendo UI Grid:
+Other articles on Kendo UI Grid and how-to examples related to its editing functionality:
 
 * [JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Access Editor Controls in Edit Events]({% slug howto_access_editor_controlsin_edit_events_grid %})
