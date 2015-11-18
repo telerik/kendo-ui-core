@@ -246,7 +246,9 @@ var __meta__ = { // jshint ignore:line
                 that.expand(content.parent(), false);
             }
 
-            that._angularCompile();
+            if (that.options.dataSource) {
+                that._angularCompile();
+            }
 
             kendo.notify(that);
         },
