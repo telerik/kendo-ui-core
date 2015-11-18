@@ -67,7 +67,7 @@ The example below demonstrates how to adjust the row height of a Kendo UI Grid w
 
 ## See Also
 
-Other articles on Kendo UI Grid:
+Other articles on Kendo UI Grid and how-to examples related to its layout:
 
 * [JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Apply Minimum Width during Column Resize]({% slug howto_apply_min_width_during_column_resize_grid %})

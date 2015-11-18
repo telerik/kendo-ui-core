@@ -164,7 +164,7 @@ The example below demonstrates how to select a Kendo UI Grid row using a checkbo
 
 ## See Also
 
-Other articles on Kendo UI Grid:
+Other articles on Kendo UI Grid and how-to examples on the selection functionality:
 
 * [JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Persist Row Selection while Paging, Sorting, and Filtering]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %})

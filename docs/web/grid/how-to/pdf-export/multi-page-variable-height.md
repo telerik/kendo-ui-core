@@ -151,7 +151,7 @@ The example below demonstrates how to export a multi-page Grid with a variable r
 
 ## See Also
 
-Other articles on Kendo UI Grid export in PDF:
+Other articles on Kendo UI Grid and how-to examples related to its export in PDF:
 
 * [JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Customize Page Layout]({% slug howto_customize_page_layout_pdf_grid %})

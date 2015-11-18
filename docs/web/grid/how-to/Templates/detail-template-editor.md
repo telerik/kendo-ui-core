@@ -130,7 +130,7 @@ The example below demonstrates how to create a custom editor in a Kendo UI Grid 
 
 ## See Also
 
-Other articles on Kendo UI Grid:
+Other articles on Kendo UI Grid and how-to examples related to the usage of templates:
 
 * [JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Refresh Grid in Detail Template]({% slug howto_refresh_gridin_detail_template_grid %})

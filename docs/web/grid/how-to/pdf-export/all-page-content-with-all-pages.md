@@ -142,7 +142,7 @@ This example demonstrates how to export all Kendo UI Grid pages and their full p
 
 ## See Also
 
-Other articles on Kendo UI Grid export in PDF:
+Other articles on Kendo UI Grid and how-to examples related to its export in PDF:
 
 * [JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Customize Page Layout]({% slug howto_customize_page_layout_pdf_grid %})

@@ -192,7 +192,7 @@ For further details, see [Custom fonts](/framework/drawing/pdf-output#using-cust
 
 ## See Also
 
-Other articles on Kendo UI Grid export in PDF:
+Other articles on Kendo UI Grid and how-to examples related to its export in PDF:
 
 * [API Reference for `kendo.drawing`](/api/javascript/drawing)
 * [API Reference for `kendo.geometry`](/api/javascript/geometry)

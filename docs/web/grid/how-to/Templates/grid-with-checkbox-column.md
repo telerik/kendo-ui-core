@@ -80,7 +80,7 @@ The example below demonstrates how to use checkboxes in Kendo UI Grid column tem
 
 ## See Also
 
-Other articles on Kendo UI Grid:
+Other articles on Kendo UI Grid and how-to examples related to the usage of templates:
 
 * [JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Create Custom Editor in Detail Template]({% slug howto_create_custom_editorin_detail_template_grid %})

@@ -174,3 +174,6 @@ Other articles on Kendo UI Grid:
 * [Adaptive Rendering]({% slug adaptive_rendering_kendoui_grid_widget %})
 * [Exporting Content to Excel]({% slug exporting_excel_kendoui_grid_widget %})
 * [Printing Your Grid]({% slug printing_kendoui_grid %})
+* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/grid/overview)
+* [Overview of the JSP Tag](/jsp/tags/grid/overview)
+* [Overview of the PHP Class](/php/widgets/grid/overview)

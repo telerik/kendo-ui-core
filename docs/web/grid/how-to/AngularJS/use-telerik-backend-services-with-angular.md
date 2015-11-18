@@ -78,7 +78,7 @@ The example below demonstrates how to bind the Grid widget to the Telerik Backen
 
 ## See Also
 
-Other articles on Kendo UI Grid:
+Other articles on Kendo UI Grid and how-to examples related to AngularJS:
 
 * [JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Create Custom ToolBar Templates]({% slug howto_create_custom_toolbar_templates_grid %})
