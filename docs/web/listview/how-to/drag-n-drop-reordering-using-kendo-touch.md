@@ -1,10 +1,13 @@
 ---
-title: Drag and Drop reordering using Kendo UI Touch
-page_title: Drag and Drop reordering using Kendo UI Touch
-description: Drag and Drop reordering using Kendo UI Touch  
+title: Reorder Using Drag-and-Drop and Kendo UI Touch
+page_title: Reorder Using Drag-and-Drop and Kendo UI Touch | Kendo UI ListView Widget
+description: "Learn how to implement drag-and-drop reordering of in the Kendo UI ListView widget using `kendoTouch` tap event."
+slug: howto_reorder_using_draganddrop_kendouitouch_listview
 ---
 
-The following runnable sample demonstrates implementation for drag'n'drop reordering in ListView using kendoTouch tap event. The approach is suitable for mobile devices as it does not prevent the scrolling of the page/widget.
+# Reorder Using Drag-and-Drop and Kendo UI Touch
+
+The example below demonstrates how to implement the drag-and-drop reordering in Kendo UI ListView by using the `kendoTouch` tap event. The approach is suitable for mobile devices as it does not prevent the scrolling of the page/widget.
 
 ```html
     <!-- kendo Web ListView -->
@@ -147,3 +150,10 @@ The following runnable sample demonstrates implementation for drag'n'drop reorde
          }
     </style>
 ```
+
+## See Also
+
+Other articles on Kendo UI ListView:
+
+* [JavaScript API Reference](/api/javascript/ui/listview)
+* [How to Filter Using Slider Selection]({% slug howto_filter_using_slider_selection_listview %})

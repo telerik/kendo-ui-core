@@ -1,26 +1,25 @@
 ---
 title: Overview
-page_title: Kendo UI ListView Widget Documentation
-description: Specify custom type of layout, first steps, configuration and behavior of Kendo UI ListView widget.
+page_title: Overview | Kendo UI ListView Widget
+description: "Learn how to initialize the Kendo UI ListView widget, customize its layout, and configure its behavior."
+slug: overview_kendoui_listview_widget
 position: 1
 ---
 
 # ListView Overview
 
-The ListView is designed to give your the freedom to specify custom type of layout
-for the items displayed in the control. It can be bound to local JSON data or to
-remote data using the Kendo DataSource component.
-
+[Kendo UI ListView widget](http://demos.telerik.com/kendo-ui/listview/index) is designed to give you the freedom to specify a custom type of layout for the items displayed in the control. It can be bound to local JSON data or to remote data using the Kendo UI DataSource component.
 
 ## Getting Started
 
-### Creating a **ListView** from existing HTML element
+### Create a ListView
+
+Kendo UI ListView can be created out of an existing HTML element: `<span>`, `<div>`, or `<ul>`.
 
       <ul id="listView"></ul>
 
-The ListView can be initialized from span, div or ul elements.
 
-### Initialize the Kendo ListView
+### Initialize the ListView
 
       $(document).ready(function() {
           $("#listView").kendoListView({
@@ -39,13 +38,11 @@ The ListView can be initialized from span, div or ul elements.
           });
       });
 
-## Configuring ListView Behavior
+## Configuration
 
-Kendo ListView supports selection, navigation, editing. Configuring any of
-these ListView behaviors is done using simple boolean configuration options. For
-example, the follow snippet shows how to enable all of these behaviors.
+The ListView supports selection, navigation, and editing functionalities which, by default, are disabled. You can configure any of these behaviors by using simple Boolean options, as shown in the example below. 
 
-### Enabling ListView selection, navigation and editing
+###### Example - enable selection, navigation and editing
 
       $(document).ready(function() {
           $("#listView").kendoListView({
@@ -57,11 +54,9 @@ example, the follow snippet shows how to enable all of these behaviors.
           });
       });
 
-By default selection, navigation and editing are **disabled**.
+To enable paging, instantiate a separate pager control and bind it to the same DataSource, as shown in the example below.
 
-To enable paging, the developer should initiaze separate pager control and bind it to the same DataSource.
-
-### Enabling ListView paging
+###### Example - enable paging
 
     <div id="listview"></div>
     <div id="pager"></div>
@@ -88,3 +83,14 @@ To enable paging, the developer should initiaze separate pager control and bind 
         });
     </script>
 
+## See Also
+
+Other articles on Kendo UI ListView and how-to examples:
+
+* [Basic Usage]({% slug basic_usage_kendoui_listview_widget %})
+* [How to Reorder Using Drag-and-Drop and Kendo UI Touch]({% slug howto_reorder_using_draganddrop_kendouitouch_listview %})
+* [How to Filter Using Slider Selection]({% slug howto_filter_using_slider_selection_listview %})
+* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/listview/overview)
+* [Overview of the JSP Tag](/jsp/tags/listview/overview)
+* [Overview of the PHP Class](/php/widgets/listview/overview)
+* [JavaScript API Reference](/api/javascript/ui/listview)
