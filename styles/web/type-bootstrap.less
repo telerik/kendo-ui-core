@@ -1950,7 +1950,7 @@ html .km-pane-wrapper .km-widget,
     color: @hover-text-color;
 }
 
-.k-panelbar .k-state-focused.k-state-hover
+.k-panelbar > .k-state-focused.k-state-hover
 {
     background: @hover-background-color;
 	.box-shadow(none);
@@ -2609,7 +2609,7 @@ thead.k-grid-header th.k-header:last-child
     color: @widget-text-color;
 }
 
-.k-panelbar .k-state-focused
+.k-panelbar > .k-state-focused
 {
     .box-shadow(inset @focused-shadow);
 }
@@ -2630,7 +2630,6 @@ thead.k-grid-header th.k-header:last-child
     color: @hover-text-color;
 }
 
-.k-panelbar .k-state-focused.k-state-selected,
 td.k-state-focused.k-state-selected,
 .k-state-selected td.k-state-focused,
 .k-listview>.k-state-focused.k-state-selected
@@ -2638,10 +2637,14 @@ td.k-state-focused.k-state-selected,
     .box-shadow(@focused-active-item-shadow);
 }
 
-.k-panelbar .k-state-focused.k-state-hover
+.k-panelbar > .k-state-focused.k-state-hover
 {
     background: @hover-background-color;
 	.box-shadow(none);
+}
+
+.k-panelbar > li .k-state-selected.k-state-hover {
+    .box-shadow(none);
 }
 
 .k-pager-wrap
