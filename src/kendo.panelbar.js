@@ -246,7 +246,7 @@ var __meta__ = { // jshint ignore:line
                 that.expand(content.parent(), false);
             }
 
-            if (that.options.dataSource) {
+            if (options.dataSource) {
                 that._angularCompile();
             }
 
