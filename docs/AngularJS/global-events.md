@@ -111,8 +111,8 @@ angular.module("app", [ "kendo.directives" ]).controller("MyCtrl", function($sco
 Other articles on AngularJS directives and integration with Kendo UI:
 
 * [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
-* [DataSource Updates]({% slug datasource_updates_angularjs_directives %})
-* [Directives with Timeout Initialization in Markup]({% slug ngrepeat_ngif_ngbind_support_angularjs %})
+* [Grid Settings]({% slug grid_settings_angularjs_directives %})
+* [Directives with DataSource]({% slug datasource_updates_angularjs_directives %})
+* [ng-* Directives in Widget Markup]({% slug ngrepeat_ngif_ngbind_support_angularjs %})
 * [Memory Leaks]({% slug memory_leaks_angularjs_directives %})
-* [Settings of the Grid]({% slug grid_settings_angularjs_directives %})
 * [How to Nest Widgets]({% slug nest_widgets_angularjs_directives %})
