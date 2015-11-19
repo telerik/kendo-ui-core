@@ -5415,7 +5415,7 @@ The source widget instance.
                     }]
                 }
             }],
-            markerCreated: function(e) {
+            markerActivate: function(e) {
                 e.marker.element.addClass("foo");
             }
         });
