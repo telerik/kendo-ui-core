@@ -135,19 +135,46 @@ The duration of the open animation in milliseconds.
 
 ### dates `Array`
 
- Specifies a list of dates, which will be passed to the month template of the DateView. All dates, which match the date portion of the selected date will be used to re-bind the TimeView.
+Specifies a list of dates, which will be passed to the [month template](#configuration-month.content) of the DateView.
+All dates, which match the date portion of the selected date will be used to re-bind the TimeView.
 
 #### Example - specify a list of dates
 
+    <style>
+      .party{color:red}
+    </style>
+
     <input id="datetimepicker" />
+
+    <script id="cell-template" type="text/x-kendo-template">
+      <span class="#= isInArray(data.date, data.dates) ? 'party' : '' #">#= data.value #</span>
+    </script>
+
     <script>
-        $("#datetimepicker").kendoDateTimePicker({
-            value: new Date(2000, 10, 1),
-            dates: [
-                new Date(2000, 10, 10, 10, 0, 0),
-                new Date(2000, 10, 12, 10, 30, 0)
-            ] //can manipulate month template depending on this array.
-        });
+      $("#datetimepicker").kendoDateTimePicker({
+        value: new Date(2000, 10, 1),
+        month: {
+          content: $("#cell-template").html()
+        },
+        dates: [
+          new Date(2000, 10, 10),
+          new Date(2000, 10, 30)
+        ] //can manipulate month template depending on this array.
+      });
+
+      function isInArray(date, dates) {
+        for(var idx = 0, length = dates.length; idx < length; idx++) {
+          var d = dates[idx];
+          if (date.getFullYear() == d.getFullYear() &&
+              date.getMonth() == d.getMonth() &&
+              date.getDate() == d.getDate()) {
+            return true;
+          }
+        }
+
+        return false;
+      }
+      
     </script>
 
 ### depth `String`
