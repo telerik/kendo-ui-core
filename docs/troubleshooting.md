@@ -154,3 +154,15 @@ The selected item of the widget is directly related to the data source view. If 
     $("#ms2").kendoMultiSelect({
         dataSource: new kendo.data.DataSource({ data: ds.data() });
     });
+
+## Third-party modal popups prevent access to Kendo UI widgets
+
+Some third-party modal popups prevent access to focusable elements, which are rendered outside the modal popup.
+Such widgets include the Bootstrap modal dialog, the jQuery UI modal dialog, and possibly others. The Kendo UI widgets, which are affected by this behavior are all widgets, which
+render their own detached popups, e.g. AutoComplete, ColorPicker, ComboBox, DropDownList, DateTimePicker, Editor, Grid and MultiSelect. The popups of these Kendo UI widgets are rendered
+as children of the `<body>` and as a result, the third-party modal popup will prevent access to them.
+
+There are two ways to avoid the problem:
+
+* Disable the modal popup's modality, so that elements outside it can be focused.
+* Use a [modal](/api/javascript/ui/window#configuration-modal) Kendo UI [Window](/web/window/overview) instead of a third-party popup.
