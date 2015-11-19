@@ -294,11 +294,17 @@ The template to be used for rendering the cells in "month" view, which are betwe
 
 #### Example - specify cell template as a string
 
+    <style>
+      .exhibition{color:blue}
+      .party{color:red}
+    </style>
+
     <input id="datepicker" />
+
     <script id="cell-template" type="text/x-kendo-template">
-        <div class="#= data.value < 10 ? 'exhibition' : 'party' #"></div>
-        #= data.value #
+        <span class="#= data.value < 10 ? 'exhibition' : 'party' #">#= data.value #</span>
     </script>
+
     <script>
     $("#datepicker").kendoDatePicker({
         month: {
