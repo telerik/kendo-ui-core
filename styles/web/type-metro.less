@@ -2045,10 +2045,22 @@ html .km-pane-wrapper .km-widget,
     color: @secondary-text-color;
 }
 
-.k-grid td.k-state-focused
-{
-    -webkit-box-shadow: inset 0 0 0 1px @focused-item-shadow;
-    box-shadow: inset 0 0 0 1px @focused-item-shadow;
+.k-grid tr:hover {
+    color: @hover-text-color;
+    background-color: @hover-background;
+}
+
+.k-grid td.k-state-focused {
+    box-shadow: inset 0 0 0 1px contrast(@base, darken(@hover-background, 6%), lighten(@hover-background, 86%), 0.5);
+}
+
+.k-grid tr:hover .k-state-focused,
+.k-grid tr.k-state-selected:hover td,
+.k-grid tr .k-state-focused.k-state-selected,
+.k-grid tr.k-state-selected td.k-state-focused,
+.k-grid tr:hover .k-state-focused.k-state-selected,
+.k-grid tr.k-state-selected:hover td.k-state-focused {
+    box-shadow: inset 0 0 0 1px contrast(@base, darken(@hover-background, 25%), lighten(@hover-background, 86%), 0.5);
 }
 
 .k-header,
