@@ -78,7 +78,7 @@ Create a Calendar that allows users to select a month in the following way:
 
 Kendo UI Calendar allows rendered day customization for the `month` view.
 
-### Custom Tamplates
+### Custom Templates
 
 Create a Calendar by using a custom template in the following way:
 
