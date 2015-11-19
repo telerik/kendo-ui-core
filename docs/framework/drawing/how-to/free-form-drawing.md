@@ -4,11 +4,11 @@ page_title: Free-form drawing
 description: Free-form drawing
 ---
 
-# Apply Transformations During Export
+# Free-form drawing
 
 This example demonstrates how to implement free-form drawing surface.
 
-## Example - Applying transformations during export
+## Example
 ```html
     <div id="surface" style="width: 1000px; height: 1000px;border: 1px solid black;cursor: crosshair"></div>
     <script>
