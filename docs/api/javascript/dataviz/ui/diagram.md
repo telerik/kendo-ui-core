@@ -1940,13 +1940,14 @@ Specifies the type of the Shape using any of the built-in shape type.
 
 A function returning a visual element to render for a given shape. The following primitives can be used to construct a composite visual:
 
-* Circle
-* Rectangle
-* Path
-* Line
-* Polyline
-* TextBlock
-* Image
+* [Circle](/api/javascript/dataviz/diagram/Circle)
+* [Rectangle](/api/javascript/dataviz/diagram/Rectangle)
+* [Path](/api/javascript/dataviz/diagram/Path)
+* [Line](/api/javascript/dataviz/diagram/Line)
+* [Polyline](/api/javascript/dataviz/diagram/Polyline)
+* [TextBlock](/api/javascript/dataviz/diagram/TextBlock)
+* [Image](/api/javascript/dataviz/diagram/Image)
+* [Layout](/api/javascript/dataviz/diagram/Layout)
 
 #### Example - how to use the visual
 
