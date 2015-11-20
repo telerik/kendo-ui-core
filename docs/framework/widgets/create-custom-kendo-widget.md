@@ -531,15 +531,15 @@ Int he complete example below note that when you add an item to the DataSource, 
 <label for="newItem">Enter A New Item</input>
         <input id="newItem" data-bind="value: newItem" class="k-input" />
         <button class="k-button" data-bind="click: add">Add Item</button>
-        
+
         <div id="repeater"></div>
-        
+
         <div data-role="repeater" data-bind="source: items" data-template="template"></div>
-        
+
         <script type="text/x-kendo-template" id="template">
             <div style="color: salmon; margin-right: 10px'"><h1>#= data #</h1></div>
         </script>
-        
+
 <script>
 var viewModel = kendo.observable({
     items: ["item1", "item2", "item3"],
@@ -552,6 +552,137 @@ var viewModel = kendo.observable({
 });
 
 kendo.bind(document.body, viewModel);
-</script>       
+</script>
+
+```
+
+
+## Value bound Widgets
+
+In order for a widget to support [value binding](http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value), you need to:
+
+* Add a `value` method to the widget that sets the current widget value and returns the current value if no arguments are passed.
+* [Trigger](http://docs.telerik.com/kendo-ui/api/javascript/ui/widget#methods-trigger) the widget change event when the widget value is changed.
+
+For example lets create a simple input widget that selects the value on focus.
+
+1. Create the widget and implement the functionality that you are looking for.
+
+        (function ($) {
+            var kendo = window.kendo;
+
+            var SelectedTextBox = kendo.ui.Widget.extend({
+              init: function (element, options) {
+                kendo.ui.Widget.fn.init.call(this, element, options);
+
+                this.element.on("focus", this._focus);
+              },
+
+              options: {
+                name: "SelectedTextBox"
+              },
+
+              _focus: function () {
+                this.select();
+              },
+
+              destroy: function () {
+                this.element.off("focus", this._focus);
+              }
+            });
+
+            kendo.ui.plugin(SelectedTextBox);
+        })(jQuery);
+
+1. Add a value method.
+
+        var SelectedTextBox = kendo.ui.Widget.extend({
+          ...
+          value: function (value) {
+            if (value !== undefined) {
+              this.element.val(value);
+            } else {
+               return this.element.val();
+            }
+          }
+        });
+
+1. Trigger the change event.
+
+        var SelectedTextBox = kendo.ui.Widget.extend({
+          init: function (element, options) {
+            ...
+            this._changeHandler = $.proxy(this._change, this);
+            this.element.on("change", this._changeHandler);
+          },
+
+          ...
+
+          _change: function () {
+            this.trigger("change");
+          },
+
+          destroy: function () {
+            this.element.off("change", this._changeHandler);
+            this.element.off("focus", this._focus);
+          }
+        });
+
+###### Example
+
+```html
+    <script>
+      (function ($) {
+        var kendo = window.kendo;
+
+        var SelectedTextBox = kendo.ui.Widget.extend({
+          init: function (element, options) {
+            kendo.ui.Widget.fn.init.call(this, element, options);
+
+            this._changeHandler = $.proxy(this._change, this);
+            this.element.on("change", this._changeHandler);
+            this.element.on("focus", this._focus);
+          },
+
+          options: {
+            name: "SelectedTextBox"
+          },
+
+          _change: function () {
+            this._value = this.element.val();
+            this.trigger("change");
+          },
+
+          _focus: function () {
+            this.select();
+          },
+
+          value: function (value) {
+            if (value !== undefined) {
+              this.element.val(value);
+            } else {
+              return this.element.val();
+            }
+          },
+
+          destroy: function () {
+            this.element.off("change", this._changeHandler);
+            this.element.off("focus", this._focus);
+          }
+        });
+
+        kendo.ui.plugin(SelectedTextBox);
+      })(jQuery);
+    </script>
+
+    <input type="text" data-role="selectedtextbox" data-bind="value:foo" />
+
+    <script>
+      var viewModel = kendo.observable({
+        foo: "bar"
+      });
+
+      kendo.bind(document.body, viewModel);
+    </script>
 
 ```
