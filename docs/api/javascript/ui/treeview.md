@@ -185,6 +185,8 @@ data source is fired. By default the widget will bind to the data source specifi
 
 If set to `true` the widget will auto-scroll the containing element when the mouse/finger is close to the top/bottom of it.
 
+> If the scroll container is different than the TreeView container, set `overflow: hidden` on the TreeView container.
+
 #### Example - use autoScroll in a scrollable container
 
     <div style="height: 200px; overflow: auto">
