@@ -132,11 +132,9 @@ The zero-based index of the row
 
 ### fromJSON
 
-Loads the widget state and sheet data from JSON.
+Loads the sheet from an object in the format defined in the [sheet configuration](/api/javascript/ui/spreadsheet#configuration.sheets).
 
-The schema follows the same structure as the [widget configuration](/api/javascript/ui/spreadsheet#configuration).
-
-> An official JSON schema will be published once the component goes out of Beta.
+> The configuration and cell values will be merged.
 
 #### Parameters
 
@@ -144,27 +142,66 @@ The schema follows the same structure as the [widget configuration](/api/javascr
 
 The object to load data from.  This should be **the deserialized object**, not the JSON string.
 
-#### Example - Load spreadsheet from JSON
+#### Example - Merge sheet data
 
     <div id="spreadsheet"></div>
+    <pre id="result"></pre>
     <script>
-        $("#spreadsheet").kendoSpreadsheet();
-
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
-        spreadsheet.fromJSON({
-            sheets: [{
-                name: "Food Order",
-                mergedCells: [
-                    "A1:G1"
-                ],
-                rows: [{
-                    height: 70,
-                    cells: [{
-                        value: "My Company", fontSize: 32, textAlign: "center"
-                    }]
-                }]
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{
+          name: "Food Order",
+          mergedCells: [
+            "A1:C1"
+          ],
+          rows: [{
+            height: 70,
+            cells: [{
+              value: "Order #231", bold: "true", fontSize: 32, textAlign: "center"
             }]
-        });
+          }, {
+            height: 25,
+            cells: [{
+              value: "Product", bold: "true", textAlign: "center"
+            }, {
+              value: "Quantity", bold: "true", textAlign: "center"
+            }, {
+              value: "Price", bold: "true", textAlign: "center"
+            }]
+          }],
+          columns: [{
+            width: 200
+          }, {
+            width: 115
+          }, {
+            width: 115
+          }]
+        }]
+      });
+
+      // Load sheet data
+      var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+      var sheet = spreadsheet.sheetByIndex(0);
+      sheet.fromJSON({
+        rows: [{
+          index: 2,
+          cells: [{
+            value: "Calzone"
+          }, {
+            value: 1
+          }, {
+            value: 12.29, format: "$#,##0.00"
+          }]
+        }, {
+          index: 3,
+          cells: [{
+            value: "Margarita"
+          }, {
+            value: 2
+          }, {
+            value: 9.11, format: "$#,##0.00"
+          }]
+        }]
+      });
     </script>
 
 ### frozenColumns
@@ -426,14 +463,9 @@ Returns a range with the current active selection.
 ```
 
 ### toJSON
+Serializes the sheet in the format defined in the [sheet configuration](/api/javascript/ui/spreadsheet#configuration.sheets).
 
-Stores the widget state and sheet data to JSON format.
-
-The schema follows the same structure as the [widget configuration](/api/javascript/ui/spreadsheet#configuration).
-
-> An official JSON schema will be published once the component goes out of Beta.
-
-#### Example - Store spreadsheet to JSON
+#### Example - Serialize the sheet as JSON
 
     <div id="spreadsheet"></div>
     <pre id="result"></pre>
@@ -454,7 +486,8 @@ The schema follows the same structure as the [widget configuration](/api/javascr
         });
 
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
-        var data = spreadsheet.toJSON();
+        var sheet = spreadsheet.sheetByIndex(0);
+        var data = sheet.toJSON();
         var json = JSON.stringify(data, null, 2);
 
         $("#spreadsheet").remove();

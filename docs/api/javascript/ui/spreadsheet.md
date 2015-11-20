@@ -610,6 +610,34 @@ The new name of the sheet.
 ### toJSON
 Serializes the workbook in the format defined in the [configuration](#configuration).
 
+#### Example - Store spreadsheet to JSON
+
+    <div id="spreadsheet"></div>
+    <pre id="result"></pre>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                name: "Food Order",
+                mergedCells: [
+                    "A1:G1"
+                ],
+                rows: [{
+                    height: 70,
+                    cells: [{
+                        value: "My Company", fontSize: 32, textAlign: "center"
+                    }]
+                }]
+            }]
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        var data = spreadsheet.toJSON();
+        var json = JSON.stringify(data, null, 2);
+
+        $("#spreadsheet").remove();
+        $("#result").text(json);
+    </script>
+
 #### Returns
 
 `Object` the serialized workbook.
@@ -621,8 +649,32 @@ Loads the workbook data from an object with the format defined in the [configura
 
 #### Parameters
 
-##### options `Object`
-The source data.
+##### data `Object`
+
+The object to load data from.  This should be **the deserialized object**, not the JSON string.
+
+#### Example - Load spreadsheet from JSON
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.fromJSON({
+            sheets: [{
+                name: "Food Order",
+                mergedCells: [
+                    "A1:G1"
+                ],
+                rows: [{
+                    height: 70,
+                    cells: [{
+                        value: "My Company", fontSize: 32, textAlign: "center"
+                    }]
+                }]
+            }]
+        });
+    </script>
 
 ## Events
 
