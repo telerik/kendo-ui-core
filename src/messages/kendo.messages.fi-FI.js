@@ -700,7 +700,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
     "justifyCenter": "Keskitä",
     "justifyRight": "Tasaa oikealle",
     "justifyFull": "Tasaa molemmat reunat",
-    "alignTop": "Tasaa ylös,
+    "alignTop": "Tasaa ylös",
     "alignMiddle": "Tasaa keskelle",
     "alignBottom": "Tasaa alas"
   },
