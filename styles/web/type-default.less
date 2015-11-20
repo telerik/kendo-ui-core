@@ -1252,9 +1252,20 @@ div.k-filebrowser-dropzone em
     .box-shadow(@active-shadow);
 }
 
+.k-grid tr:hover {
+    .composite-background(@widget-gradient);
+    background-color: contrast(@widget-background-color, darken(@header-background-color, 20%), @header-background-color, .5)
+}
+
 .k-grid td.k-state-selected.k-state-focused
 {
     background-color: lighten(@selected-background-color, 3%);
+}
+
+.k-grid tr.k-state-selected:hover,
+.k-grid td.k-state-selected:hover {
+    background-color: saturate(@selected-background-color, 7%);
+    .composite-background(none);
 }
 
 .k-popup,
