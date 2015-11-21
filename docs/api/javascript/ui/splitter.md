@@ -32,7 +32,7 @@ An array of pane definitions.
 
 ### panes.collapsed `Boolean` *(default: false)*
 
-Specifies whether a pane is initially collapsed (**true**) or expanded (**true**).
+Specifies whether a pane is initially collapsed (**true**) or expanded (**false**).
 
 #### Example
 
