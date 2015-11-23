@@ -1549,7 +1549,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### transport.create.type `String` *(default: "GET")*
 
-The type of request to make ("POST", "GET", "PUT" or `"DELETE"`), default is "GET".
+The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
 
 > The `type` option is ignored if `dataType` is set to "jsonp". JSONP always uses GET requests.
 
@@ -1815,7 +1815,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### transport.destroy.type `String`
 
-The type of request to make ("POST", "GET", "PUT" or `"DELETE"`), default is "GET".
+The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
 
 > The `type` option is ignored if `dataType` is set to "jsonp". JSONP always uses GET requests.
 
@@ -2260,7 +2260,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### transport.read.type `String`
 
-The type of request to make ("POST", "GET", "PUT" or `"DELETE"`), default is "GET".
+The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
 
 > The `type` option is ignored if `dataType` is set to "jsonp". JSONP always uses GET requests.
 
@@ -2592,7 +2592,7 @@ Refer to the [jQuery.ajax](http://api.jquery.com/jQuery.ajax) documentation for 
 
 ### transport.update.type `String`
 
-The type of request to make ("POST", "GET", "PUT" or `"DELETE"`), default is "GET".
+The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
 
 > The `type` option is ignored if `dataType` is set to "jsonp". JSONP always uses GET requests.
 
