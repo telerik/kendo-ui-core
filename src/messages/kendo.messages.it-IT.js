@@ -367,3 +367,288 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
 });
 }
 })(window.kendo.jQuery);
+
+/* Spreadsheet messages */
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.borderPalette) {
+kendo.spreadsheet.messages.borderPalette =
+$.extend(true, kendo.spreadsheet.messages.borderPalette,{
+  "allBorders": "Tutti i bordi",
+  "insideBorders": "Bordi interni",
+  "insideHorizontalBorders": "Bordi interni orizzontali",
+  "insideVerticalBorders": "Bordi interni verticali",
+  "outsideBorders": "Bordi esterni",
+  "leftBorder": "Bordo sinistro",
+  "topBorder": "Bordo superiore",
+  "rightBorder": "Bordo destro",
+  "bottomBorder": "Bordo inferiore",
+  "noBorders": "Nessun bordo"
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.dialogs) {
+kendo.spreadsheet.messages.dialogs =
+$.extend(true, kendo.spreadsheet.messages.dialogs,{
+  "apply": "Applica",
+  "save": "Salva",
+  "cancel": "Annulla",
+  "remove": "Rimuovi",
+  "okText": "OK",
+  "formatCellsDialog": {
+    "title": "Formato",
+    "categories": {
+      "number": "Numero",
+      "currency": "Valuta",
+      "date": "Data"
+      }
+  },
+  "fontFamilyDialog": {
+    "title": "Carattere"
+  },
+  "fontSizeDialog": {
+    "title": "Dimensione carattere"
+  },
+  "bordersDialog": {
+    "title": "Bordi"
+  },
+  "alignmentDialog": {
+    "title": "Allineamento",
+    "buttons": {
+     "justtifyLeft": "Allinea testo a sinistra",
+     "justifyCenter": "Allinea al centro",
+     "justifyRight": "Allinea testo a destra",
+     "justifyFull": "Giustifica",
+     "alignTop": "Allinea in alto",
+     "alignMiddle": "Allinea al centro verticalmente",
+     "alignBottom": "Allinea in basso"
+    }
+  },
+  "mergeDialog": {
+    "title": "Unisci celle",
+    "buttons": {
+      "mergeCells": "Unisci tutte le celle",
+      "mergeHorizontally": "Unisci orizzontalmente",
+      "mergeVertically": "Unisci verticalmente",
+      "unmerge": "Dividi celle"
+    }
+  },
+  "freezeDialog": {
+    "title": "Blocca riquadri",
+    "buttons": {
+      "freezePanes": "Blocca riquadri",
+      "freezeRows": "Blocca righe",
+      "freezeColumns": "Blocca colonne",
+      "unfreeze": "Sblocca riquadri"
+    }
+  },
+  "validationDialog": {
+    "title": "Convalida dati",
+    "hintMessage": "Si prega di inserire un {0} valore valido {1}.",
+    "hintTitle": "Convalida {0}",
+    "criteria": {
+      "any": "Qualsiasi valore",
+      "number": "Numero",
+      "text": "Testo",
+      "date": "Data",
+      "custom": "Formula personalizzata"
+    },
+    "comparers": {
+      "greaterThan": "più grande di",
+      "lessThan": "minore di",
+      "between": "tra",
+      "notBetween": "non tra",
+      "equalTo": "uguale a",
+      "notEqualTo": "non uguale a",
+      "greaterThanOrEqualTo": "maggiore o uguale a",
+      "lessThanOrEqualTo": "minore o uguale a"
+    },
+    "comparerMessages": {
+      "greaterThan": "più grande di {0}",
+      "lessThan": "minore di {0}",
+      "between": "tra {0} e {1}",
+      "notBetween": "non tra {0} e {1}",
+      "equalTo": "uguale a {0}",
+      "notEqualTo": "non uguale a {0}",
+      "greaterThanOrEqualTo": "maggiore o uguale a {0}",
+      "lessThanOrEqualTo": "minore o uguale a {0}",
+      "custom": "che soddisfa la formula: {0}"
+    },
+    "labels": {
+      "criteria": "Criteri",
+      "comparer": "Operatore di confronto",
+      "min": "Min",
+      "max": "Max",
+      "value": "Valore",
+      "start": "Inizia",
+      "end": "Fine",
+      "onInvalidData": "In base ai dati non validi",
+      "rejectInput": "Rifiuta di ingresso",
+      "showWarning": "Mostra avviso",
+      "showHint": "Mostra suggerimento",
+      "hintTitle": "Titolo suggerimento",
+      "hintMessage": "Messaggio suggerimento"
+    },
+    "placeholders": {
+      "typeTitle": "Tipo di titolo",
+      "typeMessage": "Tipo di messaggio"
+    }
+  },
+  "saveAsDialog": {
+    "title": "Salva con nome...",
+    "labels": {
+      "fileName": "Nome file",
+      "saveAsType": "Salva come tipo"
+    }
+  },
+  "excelExportDialog": {
+    "title": "Esporta in Excel..."
+  },
+  "modifyMergedDialog": {
+    "errorMessage": "Impossibile modificare parte di una cella unita."
+  },
+  "useKeyboardDialog": {
+    "title": "Copia e incolla",
+    "errorMessage": "Queste azioni non possono essere invocate attraverso il menu. Ti prego, utilizza le scorciatoie da tastiera:",
+    "labels": {
+      "forCopy": "per copiare",
+      "forCut": "per tagliare",
+      "forPaste": "per incollare"
+    }
+  },
+  "unsupportedSelectionDialog": {
+    "errorMessage": "L'azione non può essere eseguita su selezione multipla."
+  }
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.filterMenu) {
+kendo.spreadsheet.messages.filterMenu =
+$.extend(true, kendo.spreadsheet.messages.filterMenu,{
+  "sortAscending": "Ordina dall'A alla Z ",
+  "sortDescending": "Ordina dalla Z all'A",
+  "filterByValue": "Filtra per valore",
+  "filterByCondition": "Filtra per criteri",
+  "apply": "Applica",
+  "search": "Cerca",
+  "clear": "Cancella",
+  "blanks": "(Vuote)",
+  "operatorNone": "Senza criteri",
+  "and": "E",
+  "or": "O",
+  "operators": {
+    "string": {
+      "contains": "Testo contiene",
+      "doesnotcontain": "Testo non contiene",
+      "startswith": "Testo inizia con",
+      "endswith": "Testo finisce con"
+    },
+    "date": {
+      "eq": "È uguale a",
+      "neq": "Non è uguale a"
+      "lt": "È prima",
+      "gt": "È dopo",
+    },
+    "number": {
+      "eq": "È uguale a",
+      "gt": "È più grande di",
+      "gte": "È più grande o uguale a",
+      "lt": "È più piccolo di",
+      "lte": "È più piccolo o uguale a",
+      "neq": "Non è uguale a"
+    }
+  }
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.toolbar) {
+kendo.spreadsheet.messages.toolbar =
+$.extend(true, kendo.spreadsheet.messages.toolbar,{
+  "addColumnLeft": "Aggiungi colonna a sinistra",
+  "addColumnRight": "Aggiungi colonna a destra",
+  "addRowAbove": "Aggiungi riga sopra",
+  "addRowBelow": "Aggiungi riga sotto",
+  "alignment": "Allineamento",
+  "alignmentButtons": {
+  "justtifyLeft": "Allinea testo a sinistra",
+  "justifyCenter": "Allinea al centro",
+  "justifyRight": "Allinea testo a destra",
+  "justifyFull": "Giustifica",
+  "alignTop": "Allinea in alto",
+  "alignMiddle": "Allinea al centro verticalmente",
+  "alignBottom": "Allinea in basso"
+  },
+  "backgroundColor": "Colore riempimento",
+  "bold": "Grassetto",
+  "borders": "Bordi",
+  "copy": "Copia",
+  "cut": "Taglia",
+  "deleteColumn": "Rimuovi colonna",
+  "deleteRow": "Rimuovi riga",
+  "excelExport": "Esporta in Excel...",
+  "filter": "Filtro",
+  "fontFamily": "Carattere",
+  "fontSize": "Dimensione carattere",
+  "format": "Format personalizzato...",
+  "formatTypes": {
+    "automatic": "Automatico",
+    "number": "Numero",
+    "percent": "Percentuale",
+    "financial": "Contabilità",
+    "currency": "Valuta",
+    "date": "Data",
+    "time": "Ora",
+    "dateTime": "Data e ora",
+    "duration": "Durata",
+    "moreFormats": "Altri formati..."
+  },
+  "formatDecreaseDecimal": "Riduce il numero di decimali",
+  "formatIncreaseDecimal": "Aumenta il numero di decimali",
+  "freeze": "Blocca riquadri",
+  "freezeButtons": {
+    "freezePanes": "Blocca riquadri",
+    "freezeRows": "Blocca righe",
+    "freezeColumns": "Blocca colonne",
+    "unfreeze": "Sblocca riquadri"
+  },
+  "italic": "Corsivo",
+  "merge": "Unisci celle",
+  "mergeButtons": {
+    "mergeCells": "Unisci tutte le celle",
+    "mergeHorizontally": "Unisci orizzontalmente",
+    "mergeVertically": "Unisci verticalmente",
+    "unmerge": "Dividi celle"
+  },
+  "paste": "Incolla",
+  "quickAccess": {
+    "redo": "Ripristina",
+    "undo": "Annulla"
+  },
+  "sortAsc": "Ordine crescente",
+  "sortDesc": "Ordine decrescente",
+  "sortButtons": {
+    "sortSheetAsc": "Ordina fogli dall'A alle Z",
+    "sortSheetDesc": "Ordina fogli dalle Z all'A",
+    "sortRangeAsc": "Ordina intervalli dall'A alle Z",
+    "sortRangeDesc": "Ordina intervalli dalle Z all'A"
+  },
+  "textColor": "Colore carattere",
+  "textWrap": "Testo a capo",
+  "underline": "Sottolineato",
+  "validation": "Convalida dati..."
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.view) {
+kendo.spreadsheet.messages.view =
+$.extend(true, kendo.spreadsheet.messages.view,{
+  "errors": {
+    "shiftingNonblankCells": "Impossibile inserire cellule a causa di una possibile perdita di dati. Seleziona un altro punto di inserimento o cancellare i dati dalla fine del foglio di lavoro.",
+    "filterRangeContainingMerges": "Impossibile creare un filtro all'interno di un intervallo che contiene celle unite."
+  },
+  "tabs": {
+    "home": "Home",
+    "insert": "Inserisci",
+    "data": "Dati"
+  }
+});
+}
