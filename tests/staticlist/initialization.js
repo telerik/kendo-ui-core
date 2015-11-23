@@ -164,4 +164,32 @@
 
         equal(selectedItem.name, "Item new");
     });
+
+    test("keep value when source is filtered from outside", function() {
+        var list = new StaticList(element, {
+            dataSource: {
+                data: [
+                    { name: "item", value: 1, group: "a" },
+                    { name: "item2", value: 2, group: "b" }
+                ],
+                group: { field: "group" }
+            },
+            dataValueField: "value",
+            groupTemplate: "#:data#",
+            template: "#:data.name#",
+            value: 1
+        });
+
+        list.dataSource.read();
+
+        list.dataSource.filter({
+            field: "name",
+            operator: "eq",
+            value: "none"
+        });
+
+        equal(list.dataSource.view().length, 0);
+        equal(list.select()[0], 0);
+        equal(list.value()[0], 1);
+    });
 })();
