@@ -940,7 +940,7 @@ var __meta__ = { // jshint ignore:line
                         }
                     }
 
-                    if (that.trigger(SELECT, { item: that.listView.focus() })) {
+                    if (that.trigger(SELECT, { item: that._focus() })) {
                         that._focus(current);
                         return;
                     }

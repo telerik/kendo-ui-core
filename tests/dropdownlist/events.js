@@ -702,6 +702,30 @@
         equal(dropdownlist.value(), "foo");
     });
 
+    test("widget passes optionLabel on select", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: [
+                { item: "item1" },
+                { item: "item2" }
+            ],
+            dataTextField: "item",
+            dataValueField: "item",
+            optionLabel: "Select..."
+        });
+
+        dropdownlist.select(1);
+
+        dropdownlist.one("select", function(e) {
+            ok(e.item.hasClass("k-list-optionlabel"));
+        });
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.wrapper.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.UP
+        });
+    });
+
     test("widget triggers cascade only once on value set", 1, function() {
         var ddl = new DropDownList(input, {
             optionLabel: "Select",
