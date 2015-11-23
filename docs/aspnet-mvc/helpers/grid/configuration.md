@@ -559,7 +559,10 @@ Sets the width of the column in pixels or other units. By default the width is n
 
 ## Template Column Settings
 
-A template column is declared via the `Template` method. It has the following settings:
+A template column is declared via the `Template` method. This is a column that is not bound to a specific field from the data, so it is not sortable and filterable.
+Nevertheless, template columns can still display data item values.
+
+Template columns have the following settings:
 
 ### ClientTemplate
 

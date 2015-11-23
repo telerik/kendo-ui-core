@@ -591,7 +591,8 @@ If set to `true` the column value will be HTML-encoded before it is displayed. I
 
 ### columns.field `String`
 
-The field to which the column is bound. The value of this field is displayed by the column during data binding.
+The field to which the column is bound. The value of this field is displayed in the column's cells during data binding.
+Only columns that are bound to a field can be sortable or filterable.
 **The field name should be a valid Javascript identifier and should contain no spaces, no special characters, and the first character should be a letter.**
 
 #### Example - specify the column field
