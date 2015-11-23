@@ -116,35 +116,14 @@ var __meta__ = { // jshint ignore:line
         },
 
         _listOptions: function(options) {
-            var currentOptions = this.options;
-
-            options = options || {};
-            options = {
-                height: options.height || currentOptions.height,
-                dataValueField: options.dataValueField || currentOptions.dataValueField,
-                dataTextField: options.dataTextField || currentOptions.dataTextField,
-                groupTemplate: options.groupTemplate || currentOptions.groupTemplate,
-                fixedGroupTemplate: options.fixedGroupTemplate || currentOptions.fixedGroupTemplate,
-                template: options.template || currentOptions.template
-            };
-
-            if (!options.template) {
-                options.template = "#:" + kendo.expr(options.dataTextField, "data") + "#";
-            }
-
-            return options;
-        },
-
-        _initList: function() {
             var that = this;
-            var options = that.options;
-            var virtual = options.virtual;
-            var hasVirtual = !!virtual;
-            var value = options.value;
-
+            var currentOptions = that.options;
+            var virtual = currentOptions.virtual;
             var listBoundHandler = proxy(that._listBound, that);
 
-            var listOptions = {
+            virtual = typeof virtual === "object" ? virtual : {};
+
+            options = $.extend({
                 autoBind: false,
                 selectable: true,
                 dataSource: that.dataSource,
@@ -158,35 +137,41 @@ var __meta__ = { // jshint ignore:line
                 },
                 dataBound: listBoundHandler,
                 listBound: listBoundHandler,
+                height: currentOptions.height,
+                dataValueField: currentOptions.dataValueField,
+                dataTextField: currentOptions.dataTextField,
+                groupTemplate: currentOptions.groupTemplate,
+                fixedGroupTemplate: currentOptions.fixedGroupTemplate,
+                template: currentOptions.template
+            }, options, virtual);
+
+            if (!options.template) {
+                options.template = "#:" + kendo.expr(options.dataTextField, "data") + "#";
+            }
+
+            return options;
+        },
+
+        _initList: function() {
+            var that = this;
+            var listOptions = that._listOptions({
                 selectedItemChange: proxy(that._listChange, that)
-            };
+            });
 
-            listOptions = $.extend(that._listOptions(), listOptions, typeof virtual === "object" ? virtual : {});
-
-            if (!hasVirtual) {
+            if (!that.options.virtual) {
                 that.listView = new kendo.ui.StaticList(that.ul, listOptions);
             } else {
                 that.listView = new kendo.ui.VirtualList(that.ul, listOptions);
             }
 
+            that._setListValue();
+        },
+
+        _setListValue: function(value) {
+            value = value || this.options.value;
+
             if (value !== undefined) {
-                that.listView.value(value).done(function() {
-                    var text = options.text;
-
-                    if (!that.listView.filter() && that.input) {
-                        if (that.selectedIndex === -1) {
-                            if (text === undefined || text === null) {
-                                text = value;
-                            }
-
-                            that._accessor(value);
-                            that.input.val(text);
-                            that._placeholder();
-                        } else if (that._oldIndex === -1) {
-                            that._oldIndex = that.selectedIndex;
-                        }
-                    }
-                });
+                this.listView.value(value);
             }
         },
 
@@ -1976,9 +1961,6 @@ var __meta__ = { // jshint ignore:line
             var changedItems;
             var action = e && e.action;
             var skipUpdateOnBind = that.options.skipUpdateOnBind;
-
-            //TODO: Test for outlier filtering
-            //var outlierFilter = this.isFiltered() && !that._filtered;
 
             that.trigger("dataBinding");
 

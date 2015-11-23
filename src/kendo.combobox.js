@@ -261,6 +261,33 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _setListValue: function() {
+            var that = this;
+            var options = that.options;
+            var value = options.value;
+
+            if (value !== undefined) {
+                that.listView.value(value).done(function() {
+                    var text = options.text;
+
+                    //TODO: refactor
+                    if (!that.listView.isFiltered() && that.input) {
+                        if (that.selectedIndex === -1) {
+                            if (text === undefined || text === null) {
+                                text = value;
+                            }
+
+                            that._accessor(value);
+                            that.input.val(text || that.input.val());
+                            that._placeholder();
+                        } else if (that._oldIndex === -1) {
+                            that._oldIndex = that.selectedIndex;
+                        }
+                    }
+                });
+            }
+        },
+
         _listBound: function() {
             var that = this;
             var options  = that.options;
