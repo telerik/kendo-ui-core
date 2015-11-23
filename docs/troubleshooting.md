@@ -9,14 +9,39 @@ position: 9
 
 This page provides solutions for common problems you may encounter while working with Kendo UI widgets.
 
-## Check for JavaScript Errors
+## Unhandled JavaScript Errors
+
+**Symptoms**
+
+* The application does not function at all or is limited to static content
+* Kendo UI Widgets are not instantiated
+
+**Solution**
 
 JavaScript errors are likely to prevent a web page from working as expected. By default all browsers
 hide the JavaScript errors from the end user.
 
-Fortunately there are [browser developer tools](http://javascript.info/tutorial/development) to inspect and debug JavaScript errors.
+Use the browser developer Tools see and debug JavaScript errors:
+* [Google Chrome - Console](https://developer.chrome.com/devtools/docs/console)
+* [IE - F12 Tools Console](https://msdn.microsoft.com/en-us/library/gg589530(v=vs.85).aspx)
+* [Firefox - JavaScript Console](https://developer.mozilla.org/en-US/Learn/Discover_browser_developer_tools#The_JavaScript_console)
 
-## Known JavaScript Issues
+## Memory leaks
+
+**Symptoms**
+
+ * Browser memory usage increases over time
+ * Application becomes unresponsive or hangs
+
+**Solution**
+
+There are multiple possible reasons for leaking JavaScript Heap memory.
+
+In order to narrow them down we need the help of the browser developer tools.
+See [Memory Diagnosis | Web Tools](https://developers.google.com/web/tools/chrome-devtools/profile/memory-problems/memory-diagnosis?hl=en)
+for a detailed description of the debugging process.
+
+## Common Issues
 
 ### jQuery Is Unavailable or Undefined
 
@@ -69,15 +94,15 @@ where more information can be found.
 
 * The other option is to path jQuery. You can find more information about the possible path in the aforementioned jQuery bug report.
 
-## Scripts or Stylesheets Do Not Load from Kendo UI CDN
+### Scripts or Stylesheets Do Not Load from Kendo UI CDN
 
 Please refer to [Kendo UI CDN Fallback and Troubleshooting](/intro/installation/cdn-service#troubleshooting).
 
-## Web Server returns 404 Not Found errors for WOFF or TTF font files
+### Web Server returns 404 Not Found errors for WOFF or TTF font files
 
 Please refer to [Serving Icon Fonts](/mobile/icons#serving-icon-fonts).
 
-## Widget Object Is Undefined after Loading a Page through AJAX
+### Widget Object Is Undefined after Loading a Page through AJAX
 
 Usually caused when the page loaded via AJAX contains a script reference to jQuery. When jQuery is re-initialized, all jQuery-based data attributes are cleared, including the data("kendoWidget") attribute that holds the Kendo UI widget object.
 
@@ -106,13 +131,13 @@ The solution is to load a partial HTML fragment that doesn't contain any unneede
         content: "/foo"
     });
 
-## Input Widgets Do Not Raise Change Event When API Is Used
+### Input Widgets Do Not Raise Change Event When API Is Used
 
 Change event of an input widget is triggered only by user action. DOM elements work in the same way.
 
 If you need to trigger an event manually use the [trigger method](/api/javascript/ui/widget#methods-trigger).
 
-## Creating Multiple Widgets Throws JavaScript Errors
+### Creating Multiple Widgets Throws JavaScript Errors
 
 This will happen if two or more widgets are initialized from elements that have same IDs. The ID for each element on the page should be unique. jQuery will find only the first one every time it searches for it and thus try to initialize the first element in the DOM multiple times.
 
@@ -123,11 +148,11 @@ This will happen if two or more widgets are initialized from elements that have 
 		$('#editor').kendoEditor(); // problem
 	</script>
     
-## When Creating Multiple Widgets Only One of Them Works 
+### When Creating Multiple Widgets Only One of Them Works
 
 See [Creating Multiple Widgets Throws JavaScript Errors](#creating-multiple-widgets-throws-javascript-errors) above.
 
-## ComboBox/DropDownList/MultiSelect Looses Selected Item When Bound to Shared DataSource Instance
+### ComboBox/DropDownList/MultiSelect Looses Selected Item When Bound to Shared DataSource Instance
 
 The selected item of the widget is directly related to the data source view. If it does not contain the selected item, then widget will remove its current value. This behavior is expected and the solution is to use separate data sources.
 
@@ -155,7 +180,7 @@ The selected item of the widget is directly related to the data source view. If 
         dataSource: new kendo.data.DataSource({ data: ds.data() });
     });
 
-## Third-party modal popups prevent access to Kendo UI widgets
+### Third-party modal popups prevent access to Kendo UI widgets
 
 Some third-party modal popups prevent access to focusable elements, which are rendered outside the modal popup.
 Such widgets include the Bootstrap modal dialog, the jQuery UI modal dialog, and possibly others. The Kendo UI widgets, which are affected by this behavior are all widgets, which
