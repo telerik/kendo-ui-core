@@ -255,6 +255,8 @@ var __meta__ = { // jshint ignore:line
             var hasOptionLabel = !!that.optionLabel[0];
             var optionLabel = that.options.optionLabel;
 
+            if (index === null) { return index; }
+
             if (index === undefined) {
                 dataItem = that.listView.selectedDataItems()[0];
             } else {
