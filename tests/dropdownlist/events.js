@@ -758,4 +758,33 @@
         dropdownlist.value(2);
         dropdownlist.wrapper.focus().blur();
     });
+
+    test("cascading child triggers filtering event", 1, function() {
+        var parent = $("<input id='parent' />").appendTo(QUnit.fixture);
+        var child = $("<input />").appendTo(QUnit.fixture);
+
+        parent.kendoDropDownList({
+            dataTextField: "parentID",
+            dataValueField: "parentID",
+            dataSource: [
+                { parentID: 1 },
+                { parentID: 2 }
+            ],
+            value: 1
+        });
+
+        child.kendoDropDownList({
+            cascadeFrom: "parent", //id of the parent
+            dataTextField: "childID",
+            dataValueField: "id",
+            optionLabel: "Select",
+            dataSource:  [
+                { parentID: 1, childID: "1", id: 1 },
+                { parentID: 1, childID: "3", id: 2 }
+            ],
+            filtering: function() {
+                ok(true);
+            }
+        });
+    });
 })();

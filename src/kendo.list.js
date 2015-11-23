@@ -1180,8 +1180,6 @@ var __meta__ = { // jshint ignore:line
 
                 that.first("dataBound", handler);
 
-
-                //TODO: use this method to trigger 'filtering' event
                 that._cascading = true;
                 that._filterSource({
                     field: valueField,
