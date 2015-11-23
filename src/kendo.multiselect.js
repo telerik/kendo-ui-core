@@ -361,7 +361,6 @@ var __meta__ = { // jshint ignore:line
 
             if (that._state === FILTER) {
                 that._state = ACCEPT;
-                that.listView.filter(false);
                 that.listView.skipUpdate(true);
             }
 
@@ -479,7 +478,6 @@ var __meta__ = { // jshint ignore:line
                 that._open = true;
                 that._state = REBIND;
 
-                that.listView.filter(false);
                 that.listView.skipUpdate(true);
 
                 that._filterSource();
@@ -553,7 +551,6 @@ var __meta__ = { // jshint ignore:line
             length = word.length;
 
             if (!length || length >= options.minLength) {
-                that.listView.filter(true);
                 that._state = FILTER;
                 that._open = true;
 
@@ -700,6 +697,8 @@ var __meta__ = { // jshint ignore:line
 
         _click: function(e) {
             var item = e.item;
+
+            e.preventDefault();
 
             if (this.trigger(SELECT, { item: item })) {
                 this._close();
@@ -1095,7 +1094,6 @@ var __meta__ = { // jshint ignore:line
 
             if (that._state === FILTER) {
                 that._state = ACCEPT;
-                that.listView.filter(false);
                 that.listView.skipUpdate(true);
             }
         },

@@ -216,7 +216,6 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             that._listCreated = false;
             that._fetching = false;
-            that._filter = false;
 
             Widget.fn.init.call(that, element, options);
 
@@ -313,6 +312,7 @@ var __meta__ = { // jshint ignore:line
             if (that.dataSource) {
                 that.dataSource.unbind(CHANGE, that._refreshHandler);
                 that.dataSource.unbind(CHANGE, that._rangeChangeHandler);
+                that.dataSource.unbind("reset", that._resetRangeHandler);
 
                 value = that.value();
 
@@ -322,11 +322,13 @@ var __meta__ = { // jshint ignore:line
                 });
             } else {
                 that._refreshHandler = $.proxy(that.refresh, that);
+                that._resetRangeHandler = $.proxy(that._resetRange, that);
                 that._rangeChangeHandler = $.proxy(that.rangeChange, that);
             }
 
             that.dataSource = dataSource.bind(CHANGE, that._refreshHandler)
-                                        .bind(CHANGE, that._rangeChangeHandler);
+                                        .bind(CHANGE, that._rangeChangeHandler)
+                                        .bind("reset", that._resetRangeHandler);
 
             if (that.dataSource.view().length !== 0) {
                 that.refresh();
@@ -335,11 +337,19 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _resetRange: function() {
+            this._rangeChange = true;
+        },
+
         rangeChange: function () {
             var that = this;
             var page = that.dataSource.page();
+            var filter = $.extend({}, that.dataSource.filter());
+            var filterChanged = !kendo.data.Query.compareFilters((that._lastFilter || that._lastDSFilter), filter);
 
-            if (that.isBound() && that._rangeChange === true && that._lastPage !== page) {
+            that._lastFilter = filter;
+
+            if (that.isBound() && (that._rangeChange === true || filterChanged) && that._lastPage !== page) {
                 that._lastPage = page;
                 that.trigger(LISTBOUND);
             }
@@ -348,17 +358,18 @@ var __meta__ = { // jshint ignore:line
         refresh: function(e) {
             var that = this;
             var action = e && e.action;
+            var filtered = this.isFiltered();
             var changedItems;
 
             if (that._mute) { return; }
 
             if (!that._fetching) {
-                if (that._filter) {
+                if (filtered) {
                     that.focus(0);
                 }
 
                 that._createList();
-                if (!action && that._values.length && !that._filter && !that.options.skipUpdateOnBind) {
+                if (!action && that._values.length && !filtered && !that.options.skipUpdateOnBind) {
                     that.value(that._values, true).done(function() {
                         that._lastPage = that.dataSource.page();
                         that._listCreated = true;
@@ -730,6 +741,7 @@ var __meta__ = { // jshint ignore:line
                 indices,
                 singleSelection = that.options.selectable !== "multiple",
                 prefetchStarted = !!that._activeDeferred,
+                filtered = this.isFiltered(),
                 deferred,
                 removed = [];
 
@@ -739,11 +751,11 @@ var __meta__ = { // jshint ignore:line
 
             indices = that._getIndecies(candidate);
 
-            if (that._filter && !singleSelection && that._deselectFiltered(indices)) {
+            if (filtered && !singleSelection && that._deselectFiltered(indices)) {
                 return;
             }
 
-            if (!indices.length || (singleSelection && !that._filter && lastFrom(indices) === lastFrom(this._selectedIndexes))) {
+            if (!indices.length || (singleSelection && !filtered && lastFrom(indices) === lastFrom(this._selectedIndexes))) {
                 return;
             }
 
@@ -795,13 +807,16 @@ var __meta__ = { // jshint ignore:line
             this._mute = false;
         },
 
-        filter: function(filter) {
-            if (filter === undefined) {
-                return this._filter;
+        setDSFilter: function(filter) {
+            this._lastDSFilter = $.extend({}, filter);
+        },
+
+        isFiltered: function() {
+            if (!this._lastDSFilter) {
+                this.setDSFilter(this.dataSource.filter());
             }
 
-            this._filter = filter;
-            this._rangeChange = true;
+            return !kendo.data.Query.compareFilters(this.dataSource.filter(), this._lastDSFilter);
         },
 
         skipUpdate: $.noop,
@@ -1416,6 +1431,7 @@ var __meta__ = { // jshint ignore:line
                 var skip = (page - 1) * take;
 
                 that.mute(function() {
+                    that._rangeChange = false;
                     dataSource.range(skip, take); //switch the range to get the dataItem
 
                     dataItem = that._findDataItem([index - skip]);

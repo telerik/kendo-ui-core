@@ -281,8 +281,9 @@ var __meta__ = { // jshint ignore:line
             if (!length || length >= options.minLength) {
                 that._open = true;
 
-                that.listView.filter(true);
-                that.listView.value([]);
+                that._mute(function() {
+                    this.listView.value([]);
+                });
 
                 that._filterSource({
                     value: ignoreCase ? word.toLowerCase() : word,
@@ -368,6 +369,8 @@ var __meta__ = { // jshint ignore:line
         _click: function(e) {
             var item = e.item;
             var element = this.element;
+
+            e.preventDefault();
 
             this._active = true;
 
@@ -472,8 +475,6 @@ var __meta__ = { // jshint ignore:line
                 that._typingTimeout = undefined;
             }
 
-            that.listView.filter(false);
-
             if (that._touchScroller) {
                 that._touchScroller.reset();
             }
@@ -484,8 +485,14 @@ var __meta__ = { // jshint ignore:line
             that.trigger("dataBound");
         },
 
+        _mute: function(callback) {
+            this._muted = true;
+            callback.call(this);
+            this._muted = false;
+        },
+
         _listChange: function() {
-            if (!this.listView.filter() && this._active) {
+            if (this._active && !this._muted) {
                 this._selectValue(this.listView.selectedDataItems()[0]);
             }
         },

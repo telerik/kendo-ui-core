@@ -353,7 +353,6 @@
 
         list.dataSource.read();
 
-        list.filter(true);
         list.dataSource.filter({
             field: "name",
             operator: "eq",
@@ -391,7 +390,6 @@
 
         list.dataSource.read();
 
-        list.filter(true);
         list.dataSource.filter({
             field: "name",
             operator: "eq",
@@ -424,7 +422,6 @@
 
         list.dataSource.read();
 
-        list.filter(true);
         list.dataSource.filter({
             field: "name",
             operator: "eq",
@@ -451,7 +448,6 @@
 
         list.dataSource.read();
 
-        list.filter(true);
         list.dataSource.filter({
             field: "name",
             operator: "eq",
@@ -478,7 +474,6 @@
 
         list.dataSource.read();
 
-        list.filter(true);
         list.dataSource.filter({
             field: "name",
             operator: "eq",
@@ -507,7 +502,6 @@
 
         list.dataSource.read();
 
-        list.filter(true);
         list.dataSource.filter({
             field: "name",
             operator: "eq",

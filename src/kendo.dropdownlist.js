@@ -756,6 +756,8 @@ var __meta__ = { // jshint ignore:line
         _click: function (e) {
             var item = e.item || $(e.currentTarget);
 
+            e.preventDefault();
+
             if (this.trigger("select", { item: item })) {
                 this.close();
                 return;
@@ -974,7 +976,6 @@ var __meta__ = { // jshint ignore:line
             that.listView.select(candidate);
 
             if (!keepState && that._state === STATE_FILTER) {
-                that.listView.filter(false);
                 that._state = STATE_ACCEPT;
             }
 

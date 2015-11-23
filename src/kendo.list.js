@@ -217,7 +217,9 @@ var __meta__ = { // jshint ignore:line
                 expression.filters.push(filter);
             }
 
-            this.listView._dsFilter = expression;
+            if (that._cascading) {
+                this.listView.setDSFilter(expression);
+            }
 
             if (!force) {
                 dataSource.filter(expression);
@@ -735,7 +737,7 @@ var __meta__ = { // jshint ignore:line
 
             if (!length || length >= options.minLength) {
                 that._state = "filter";
-                that.listView.filter(true);
+
                 if (filter === "none") {
                     that._filter(word);
                 } else {
@@ -1194,14 +1196,14 @@ var __meta__ = { // jshint ignore:line
                 that.first("dataBound", handler);
 
 
-                /*that._filterSource({
+                //TODO: use this method to trigger 'filtering' event
+                that._cascading = true;
+                that._filterSource({
                     field: valueField,
                     operator: "eq",
                     value: filterValue
-                });*/
-
-                that.dataSource.filter(filters);
-
+                });
+                that._cascading = false;
             } else {
                 that.enable(false);
                 that._clearSelection(parent);
@@ -1439,14 +1441,6 @@ var __meta__ = { // jshint ignore:line
             return this.focus() ? this.focus().index() : undefined;
         },
 
-        filter: function(filter) {
-            if (filter === undefined) {
-                return this._filtered;
-            }
-
-            this._filtered = filter;
-        },
-
         skipUpdate: function(skipUpdate) {
             this._skipUpdate = skipUpdate;
         },
@@ -1471,11 +1465,13 @@ var __meta__ = { // jshint ignore:line
                 indices = [];
             }
 
-            if (that._filtered && !singleSelection && that._deselectFiltered(indices)) {
+            var filtered = that.isFiltered();
+
+            if (filtered && !singleSelection && that._deselectFiltered(indices)) {
                 return;
             }
 
-            if (singleSelection && !that._filtered && $.inArray(indices[indices.length - 1], selectedIndices) !== -1) {
+            if (singleSelection && !filtered && $.inArray(indices[indices.length - 1], selectedIndices) !== -1) {
                 if (that._dataItems.length && that._view.length) {
                     that._dataItems = [that._view[selectedIndices[0]].item];
                 }
@@ -1959,22 +1955,20 @@ var __meta__ = { // jshint ignore:line
         },
 
         _selected: function(dataItem, values) {
-            var select = !this._filtered || this.options.selectable === "multiple";
+            var select = !this.isFiltered() || this.options.selectable === "multiple";
             return select && this._dataItemPosition(dataItem, values) !== -1;
         },
 
-        _isFiltered: function(filter) {
-            var old = this._dsFilter;
+        setDSFilter: function(filter) {
+            this._lastDSFilter = extend({}, filter);
+        },
 
-            filter = $.extend({}, filter);
-
-            this._dsFilter = filter;
-
-            if (!old) {
-                return false;
+        isFiltered: function() {
+            if (!this._lastDSFilter) {
+                this.setDSFilter(this.dataSource.filter());
             }
 
-            return JSON.stringify(filter) !== JSON.stringify(old);
+            return !kendo.data.Query.compareFilters(this.dataSource.filter(), this._lastDSFilter);
         },
 
         refresh: function(e) {
@@ -1983,7 +1977,8 @@ var __meta__ = { // jshint ignore:line
             var action = e && e.action;
             var skipUpdateOnBind = that.options.skipUpdateOnBind;
 
-            var outlierFilter = this._isFiltered(this.dataSource.filter()) && !that._filtered;
+            //TODO: Test for outlier filtering
+            //var outlierFilter = this.isFiltered() && !that._filtered;
 
             that.trigger("dataBinding");
 
@@ -2000,13 +1995,13 @@ var __meta__ = { // jshint ignore:line
                         items: changedItems
                     });
                 }
-            } else if (that._filtered || that._skipUpdate) {
+            } else if (that.isFiltered() || that._skipUpdate) {
                 that.focus(0);
                 if (that._skipUpdate) {
                     that._skipUpdate = false;
                     that._selectedIndices = that._valueIndices(that._values, that._selectedIndices);
                 }
-            } else if (!outlierFilter && !skipUpdateOnBind && (!action || action === "add")) {
+            } else if (!skipUpdateOnBind && (!action || action === "add")) {
                 that.value(that._values);
             }
 
@@ -2014,9 +2009,7 @@ var __meta__ = { // jshint ignore:line
                 that._valueDeferred.resolve();
             }
 
-            if (!outlierFilter) {
-                that.trigger("dataBound");
-            }
+            that.trigger("dataBound");
         },
 
         isBound: function() {
@@ -2089,6 +2082,7 @@ var __meta__ = { // jshint ignore:line
 
         return value;
     }
+
 })(window.kendo.jQuery);
 
 return window.kendo;

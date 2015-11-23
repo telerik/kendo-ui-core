@@ -185,7 +185,6 @@
                 equal(virtualList.value()[0], 0);
             });
             virtualList.value([0]);
-            virtualList.filter(true);
             asyncDataSource.filter({ field: "letter", operator: "eq", value: "b" });
         });
     });
@@ -249,7 +248,6 @@
             });
 
             virtualList.focus(30);
-            virtualList.filter(true);
 
             stub(dataSource, {
                 total: function() { return 1; } //return less items
@@ -263,13 +261,11 @@
         asyncDataSource.read().then(function() {
             virtualList.one("listBound", function() {
                 virtualList.one("listBound", function() {
-                   start(); 
+                   start();
                    ok(true, "listBound is fired");
                 });
-                virtualList.filter(false);
                 asyncDataSource.filter([]);
             });
-            virtualList.filter(true);
             asyncDataSource.filter({ field: "letter", operator: "eq", value: "b" });
         });
     });
@@ -336,7 +332,6 @@
         virtualList.one("listBound", function() {
             equal(this.items().first().text(), "Item 200");
         });
-        virtualList.filter(true);
         localDataSource.filter({field: "text", operator: "contains", value: "200"});
 
         virtualList.one("listBound", function() {
@@ -349,15 +344,12 @@
 
             start();
         });
-        virtualList.filter(true);
         localDataSource.filter({field: "text", operator: "contains", value: "1234"});
     });
 
     asyncTest("set focus to the first item after subsequent filtering", 1, function() {
-        virtualList.filter(true);
         localDataSource.filter({field: "text", operator: "contains", value: "200"});
 
-        virtualList.filter(true);
         localDataSource.filter([]);
 
         virtualList.one("listBound", function() {
@@ -365,7 +357,6 @@
 
             start();
         });
-        virtualList.filter(true);
         localDataSource.filter({field: "text", operator: "contains", value: "1234"});
     });
 
@@ -378,15 +369,13 @@
                 ok(virtualList.items().eq(0).hasClass("k-state-selected"));
             });
 
-            virtualList.filter(false);
             localDataSource.filter([]);
         });
-        virtualList.filter(true);
+
         localDataSource.filter({field: "text", operator: "contains", value: "0"});
     });
 
     asyncTest("resets pageSize after filters are cleared", 1, function() {
-        virtualList.filter(true);
         localDataSource.filter({field: "text", operator: "contains", value: "200"});
         localDataSource.range(0, 8);
 
@@ -395,7 +384,6 @@
             equal(virtualList.dataSource.pageSize(), 16);
         });
 
-        virtualList.filter(false);
         localDataSource.filter([]);
     });
 
