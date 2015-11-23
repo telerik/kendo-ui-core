@@ -300,6 +300,29 @@ Sets the field of the data item that provides the image URL of the tab.
         });
     </script>
 
+### dataSource `Object|Array|kendo.data.DataSource`
+
+The data source of the widget which is used to display the items. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
+instance.
+
+If the `dataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/datasource) instance using that value as data source configuration.
+
+If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascript/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
+
+#### Example
+
+    <div id="tabstrip"></div>
+
+    <script>
+      $("#tabstrip").kendoTabStrip({
+        dataTextField: "Name",
+        dataSource: [
+          { Name: "Tab1"},
+          { Name: "Tab2"}
+        ]
+      });
+    </script>
+
 ### dataSpriteCssClass `String`*(default: "")*
 
 Sets the field of the data item that provides the CSS class of the tab.
@@ -963,7 +986,11 @@ The target tab(s), specified as a selector, jQuery object or index in the tab gr
 
 ### setDataSource
 
-Sets the data source of the widget.
+Sets the dataSource of an existing tabstrip and rebinds it.
+
+#### Parameters
+
+##### dataSource `Object|Array|kendo.data.DataSource`
 
 #### Example
 
