@@ -229,15 +229,13 @@ code, em {
     -webkit-box-sizing: border-box;
     -webkit-overflow-scrolling: touch;
     font-family: Roboto, Helvetica, Arial, sans-serif;
-}
-
-#markdown-toc,
-#page-article {
-    width: 82%;
-}
-
-#page-article {
     padding-left: 18%;
+    padding-right: 2em;
+    max-width: 100em;
+}
+
+#markdown-toc {
+    left: 18%;
 }
 
 #page-article article {
@@ -594,7 +592,6 @@ blockquote th, blockquote td {
 /* Footer */
 footer
 {
-    text-align: right;
     width: 100%;
     box-sizing: border-box;
     padding: 0;
@@ -750,9 +747,8 @@ footer p {
        width: 30%;
     }
 
-    #markdown-toc,
-    #page-article {
-        width: 70%;
+    #markdown-toc {
+        left: 30%;
     }
 
     #page-article {
@@ -800,7 +796,6 @@ footer p {
     }
 
     #page-article {
-        width: 100%;
         margin-left: 0;
         padding-left: 0;
     }
