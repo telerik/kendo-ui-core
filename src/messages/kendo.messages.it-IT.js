@@ -546,7 +546,7 @@ $.extend(true, kendo.spreadsheet.messages.filterMenu,{
       "eq": "È uguale a",
       "neq": "Non è uguale a",
       "lt": "È prima",
-      "gt": "È dopo",
+      "gt": "È dopo"
     },
     "number": {
       "eq": "È uguale a",
