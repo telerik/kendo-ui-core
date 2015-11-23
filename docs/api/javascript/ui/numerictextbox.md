@@ -35,7 +35,9 @@ Represents the Kendo UI NumericTextBox widget. Inherits from [Widget](/api/javas
 
 ### decimals `Number`*(default: null)*
 
- Specifies the number precision. If not set precision defined by current culture is used.
+Specifies the number precision applied to the widget value and when the NumericTextBox is focused. If not set, the precision defined by the current culture is used.
+
+Compare with the [`format`](#configuration-format) property.
 
 #### Example
 
@@ -48,7 +50,7 @@ Represents the Kendo UI NumericTextBox widget. Inherits from [Widget](/api/javas
 
 ### downArrowText `String`*(default: "Decrease value")*
 
- Specifies the text of the tooltip on the down arrow.
+Specifies the text of the tooltip on the down arrow.
 
 #### Example
 
@@ -61,7 +63,9 @@ Represents the Kendo UI NumericTextBox widget. Inherits from [Widget](/api/javas
 
 ### format `String`*(default: "n")*
 
- Specifies the format of the number. Any [valid number format](/framework/globalization/numberformatting) is allowed.
+Specifies the number format used when the widget is not focused. Any [valid number format](/framework/globalization/numberformatting) is allowed.
+
+Compare with the [`decimals`](#configuration-decimals) property.
 
 #### Example
 
