@@ -5,70 +5,114 @@ url: "http://docs.telerik.com/kendo-ui"
 exclude: [readme.md, Gemfile, Gemfile.lock,api_sort.rb]
 navigation:
 ## List your directory names and order here, like this:
+    "api":
+        title: "API Reference"
+        position: 0
     "introduction":
         title: "Introduction"
+        position: 1
     "intro":
         title: "Getting Started"
         position: 2
-    "*installation":
+    "intro/installation":
         title: "Prerequisites and Installation"
         position: 1
-    "*supporting":
+    "intro/supporting":
         title: "Additional Resources"
-        position: 2
-    "*how-to":
-        title: "How To"
-        position: 200
+        position: 2       
+    "web":
+        title: "Web Widgets"
+        position: 3
+    "dataviz":
+        title: "Data Visualization"
+        position: 4        
+    "mobile":
+        title: "Mobile Framework and Widgets"
+        position: 5        
+    "framework":
+        title: "Framework and Utilities"
+        position: 6
     "framework/datasource":
         title: "DataSource"
         position: 1
-    "framework/draganddrop":
-        title: "Drag and Drop"
+    "framework/hierarchicaldatasource":
+        title: "HierarchicalDataSource"
         position: 2
+    "framework/mvvm":
+        title: "MVVM"
+        position: 3
+    "framework/templates":
+        title: "Templates"
+        position: 4
+    "framework/spa":
+        title: "Single Page Applications"
+        position: 5
     "framework/excel":
         title: "Create Excel Documents"
-        position: 4
+        position: 6
+    "framework/draganddrop":
+        title: "Drag and Drop"
+        position: 7
+    "framework/drawing":
+        title: "Drawing API"
+        position: 8
+    "framework/fx":
+        title: "FX"
+        position: 9
+    "framework/globalization":
+        title: "Globalization"
+        position: 10
+    "framework/localization":
+        title: "Localization"
+        position: 11
+    "framework/validator":
+        title: "Validator"
+        position: 12
     "framework/save-files":
         title: "Save Files"
+        position: 13
+    "framework/widgets":
+        title: "Widgets"
+        position: 14
+    "AngularJS":
+        title: "AngularJS Directives"
+        position: 7
+    "aspnet-mvc":
+        title: "UI for ASP.NET MVC"
+        position: 8
+    "jsp":
+        title: "UI for JSP"
+        position: 9
+    "php":
+        title: "UI for PHP"
+        position: 10
+    "webforms":
+        title: "Use in ASP.NET Web Forms"
+        position: 11
+    "troubleshoot":
+        title: "Troubleshooting"
+        position: 12       
+    "accessibility":
+        title: "Accessibility Support"
+        position: 13
+    "*how-to":
+        title: "How To"
+        position: 200
+    "*angular":
+        title: "AngularJS" 
+        position: 1
+    "*troubleshoot":
+        title: "Troubleshooting"
+        position: 201
+    "framework/geometry":
+        title: "Geometry"        
+        position: 3       
     "*basics":
         title: "The Basics"
         position: 4
-    "web":
-        title: "Web Widgets"
-        position: 5
-    "dataviz":
-        title: "Data Visualization"
-        position: 6
-    "mobile":
-        title: "Mobile Framework and Widgets"
-        position: 7
-    "framework":
-        title: "Framework and Utilities"
-        position: 8
-    "AngularJS":
-        title: "AngularJS Directives"
-        position: 10
-    "aspnet-mvc":
-        title: "UI for ASP.NET MVC"
-        position: 11
     "aspnet-mvc/mvc-6":
         title: "ASP.NET MVC 6"
         position: 4
-    "jsp":
-        title: "UI for JSP"
-        position: 12
-    "php":
-        title: "UI for PHP"
-        position: 13
-    "webforms":
-        title: "Use in ASP.NET Web Forms"
-        position: 14
-    "api":
-        title: "API Reference"
-        position: -15
-    "accessibility":
-        title: "Accessibility Support"
-        position: 18
     "mobile/listview":
         title: "Mobile ListView"
         position: 9
@@ -90,8 +134,6 @@ navigation:
         title: "Widgets"
     "*tags":
         title: "Tags"
-    "*angular":
-        title: "AngularJS"    
     "web/grid/how-to/AngularJS":
         title: "AngularJS"
         position: 1
@@ -309,10 +351,6 @@ navigation:
     "api/php":
         title: "PHP"
         position: 5
-    "framework/drawing":
-        title: "Drawing API"
-    "framework/geometry":
-        title: "Geometry"
 
 ## The application virtual path
 baseurl: /kendo-ui
