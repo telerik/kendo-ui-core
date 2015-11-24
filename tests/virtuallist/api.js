@@ -1385,6 +1385,40 @@
         asyncDataSource.read();
     });
 
+    asyncTest("setDataSource method cleans the list when source is updated", 2, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            value: "1",
+            valueMapper: function(operation) {
+                operation.success(1);
+            }
+        }));
+
+        virtualList.one("listBound", function() {
+            virtualList.setDataSource({
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success({ data: generateData(options.data), total: 300 });
+                        }, 0);
+                    }
+                },
+                serverPaging: true,
+                pageSize: 80,
+                schema: {
+                    data: "data",
+                    total: "total"
+                }
+            });
+
+            ok(!virtualList.isBound());
+            ok(!virtualList.element.html());
+            start();
+        });
+
+        asyncDataSource.read();
+    });
+
     asyncTest("removeAt method removes values at current position", 6, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: "multiple",

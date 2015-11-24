@@ -314,6 +314,9 @@ var __meta__ = { // jshint ignore:line
                 that.dataSource.unbind(CHANGE, that._rangeChangeHandler);
                 that.dataSource.unbind("reset", that._resetRangeHandler);
 
+                that._clean();
+                that._listCreated = false;
+
                 that._deferValue = true;
                 value = that.value();
 
