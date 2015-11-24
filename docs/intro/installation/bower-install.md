@@ -25,7 +25,8 @@ bower install kendo-ui-core
 
 ## Option 2: Install Kendo UI Professional Bower Package
 
-The Kendo UI Professional Bower Package is hosted as a private GitHub repository. To access it, you need an active account for Telerik Platform. Bower will prompt for your username and password during the installation and update processes:
+The Kendo UI Professional Bower Package is hosted as a private GitHub repository. To access it, you need an active subscription for Kendo UI or DevCraft.
+Bower will prompt for your username and password during the installation and update processes:
 
 ```sh
 bower install https://bower.telerik.com/bower-kendo-ui.git
@@ -35,7 +36,7 @@ You can also add the package to the `bower.json` file:
 
 ```json
 "dependencies": {
-"kendo-ui": "https://bower.telerik.com/bower-kendo-ui.git#~2014.3.1425"
+"kendo-ui": "https://bower.telerik.com/bower-kendo-ui.git#~{{ site.cdnVersion }}"
 }
 ```
 
@@ -81,18 +82,42 @@ machine bower.telerik.com
     password mysecret
 ```
 
-## Troubleshoot
+## Troubleshooting
 
-**Issue 1:** Bower on Windows has troubles installing the repository showing the error message
+### SSL Problem on Windows
+Bower on Windows has troubles installing the repository showing the error message:
 
 ```
 fatal: unable to access 'https://bower.telerik.com/bower-kendo-ui.git/': SSL certificate problem: unable to get local issuer certificate
 ```
 
-**Cause:** The cause of this issue is the underlying GitHub installation is missing the certificate bundle.
+The cause of this issue is the underlying GitHub installation is missing the certificate bundle.
 
-**Fix:** To resolve the issue, follow the steps in this [help article](http://blogs.msdn.com/b/phkelley/archive/2014/01/20/adding-a-corporate-or-self-signed-certificate-authority-to-git-exe-s-store.aspx).
+**Solution**
+
+To resolve the issue, follow the steps in this
+[help article](http://blogs.msdn.com/b/phkelley/archive/2014/01/20/adding-a-corporate-or-self-signed-certificate-authority-to-git-exe-s-store.aspx).
 
 > **Important**  
 > 1.9.5 Git build will not work with the Bower package.
 > When using @ symbol in the url for accessing the Kendo UI Bower repository (due to network restrictions or admin rules, for instance), make sure you encode it as follows: `https://firstname.lasname**%40**domain.com@bower.telerik.com/bower-kendo-ui.git`.
+
+### Restoring packages in Visual Studio 2015
+
+The Git client bundled in Visual Studio is unable to authenticate with our Bower repository. You can get an error message such as:
+```
+ECMDERR Failed to execute "git ls-remote --tags --heads https://bower.telerik.com/bower-kendo-ui.git", exit code of #-532462766
+```
+
+**Solution**
+
+We must use a Windows port of Git and stored credentials instead of the built-in client.
+
+1. Setup [stored credentials](#store-your-credentials-on-windows)
+1. Install [Git for Windows](https://git-for-windows.github.io/)
+1. Right click on Bower folder under Dependencies
+1. Select "Configure external tools"
+1. Uncheck "$(DevEnvDir)\Extensions\Microsoft\Web Tools\External\git"
+1. Add a new entry - "C:\Program Files\Git\bin" (or your installation location)
+
+![Chart in IE](/images/vs2015-external-tools.png)

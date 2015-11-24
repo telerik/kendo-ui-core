@@ -52,22 +52,59 @@ This should add a similar line in your `project.json`:
 
         ![Kendo UI resources](images/kendo-ui-wwwroot.png)
 
-    1. [Install Kendo UI Professional as a Bower package](/install/bower#install-kendo-ui-professional-bower-package)
+    1. [Install Kendo UI Professional as a Bower package](/intro/installation/bower-install#restoring-packages-in-visual-studio-2015)
 
 1. Register the Kendo UI styles and scripts in `~/Views/Shared/Layout.cshtml`
 
         <head>
         ...
 
-        <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.common-bootstrap.min.css" />
-        <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.bootstrap.min.css" />
-        <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.dataviz.bootstrap.min.css" />
+        <environment names="Development">
+            ...
+
+            <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.common-nova.min.css" />
+            <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.nova.min.css" />
+        </environment>
+        <environment names="Staging,Production">
+            ...
+
+            <link rel="stylesheet"
+                  href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common-nova.min.css"
+                  asp-fallback-href="~/lib/kendo-ui/styles/kendo.common-nova.min.css"
+                  asp-fallback-test-class="k-widget"
+                  asp-fallback-test-property="border-style" asp-fallback-test-value="solid" />
+
+            <link rel="stylesheet"
+                   href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.nova.min.css"
+                  asp-fallback-href="~/lib/kendo-ui/styles/kendo.nova.min.css"
+                  asp-fallback-test-class="k-icon"
+                  asp-fallback-test-property="opacity" asp-fallback-test-value="0.4" />
+        </environment>
         </head>
         <body>
+
         ...
 
-        <script src="~/lib/kendo-ui/js/kendo.all.min.js"></script>
-        <script src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"></script>
+        <environment names="Development">
+            ...
+
+            @* Place Kendo UI scripts after jQuery *@
+            <script src="~/lib/kendo-ui/js/kendo.all.min.js"></script>
+            <script src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"></script>
+        </environment>
+        <environment names="Staging,Production">
+            ...
+
+            @*  Place Kendo UI scripts after jQuery *@
+            <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"
+                    asp-fallback-src="~/lib/kendo-ui/js/kendo.all.min.js"
+                    asp-fallback-test="window.kendo">
+            </script>
+            <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.aspnetmvc.min.js"
+                    asp-fallback-src="~/lib/kendo-ui/js/kendo.aspnetmvc.min.js"
+                    asp-fallback-test="kendo.data.transports['aspnetmvc-ajax']">
+            </script>
+        </environment>
 
         @RenderSection("scripts", required: false)
         </body>
@@ -83,6 +120,7 @@ This should add a similar line in your `project.json`:
                     .Deferred()
             )
 
+            @* All initialization scripts are rendered to the bottom of the page, see Layout.cshtml *@
             @section scripts {
                 @Html.Kendo().DeferredScripts()
             }
