@@ -86,10 +86,18 @@ Check [this Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho), which shows h
 
 ## Known limitations
 
+### Value Precision
+
 Kendo UI NumericTextBox widget uses JavaScript [Number](http://ecma262-5.com/ELS5_HTML.htm#Section_8.5) object to keep its value, which has a certain precision limitation.
 In general, Number object can persist its precision up to 16 digits. Numbers longer than that length will be converted to
 exponential numbers and hence will lose their precision. As the widget relies on a Number object, it gets the same precision limitation.
 
-#### Workaround
 Unfortunately, there is no feasible workaround for this limitation as it comes from the JavaScript itself. What we suggest is to use
 simple INPUT element with server validation, as some server languages are able to parse long numbers.
+
+### Input Type
+
+The Kendo UI NumericTextBox uses `<input type="text" />` elements in order to support all its features such as custom formats and multiple cultures.
+This will prevent the numeric keyboard from appearing on mobile devices with context-specific software keyboards.
+
+We recommend using a plain numeric input for mobile devices. Add a [`k-textbox`](/web/appearance-styling#primitives) CSS class to apply Kendo UI styling.
