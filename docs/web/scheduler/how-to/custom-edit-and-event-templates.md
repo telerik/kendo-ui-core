@@ -73,9 +73,9 @@ The example below demonstrates how to create and use custom templates for the Ke
     <div data-container-for="ownerId" class="k-edit-field">
         <select id="ownerId" data-bind="value:ownerId" data-role="dropdownlist"
         				data-value-field="value" data-text-field="text">
-          <!--<option value="1">Alex</option>
+          <option value="1">Alex</option>
           <option value="2">Bob</option>
-          <option value="3">Charlie</option>-->
+          <option value="3">Charlie</option>
       </select>
       </div>
     </script>
@@ -159,13 +159,7 @@ The example below demonstrates how to create and use custom templates for the Ke
                 { text: "Charlie", value: 3, color: "#56ca85" }
               ]
             }
-          ],
-          edit: function(e) {
-            var ownerId = e.container.find("#ownerId").data("kendoDropDownList");
-
-            //bind the widget to the resouces
-            ownerId.dataSource.data(e.sender.resources[0].dataSource.data());
-          }
+          ]
         });
 
         $("#people :checkbox").change(function(e) {
