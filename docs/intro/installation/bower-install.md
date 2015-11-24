@@ -17,7 +17,7 @@ Kendo UI maintains 2 bower packages, namely Kendo UI Core and Kendo UI Professio
 
 ## Option 1: Install Kendo UI Core Bower Package
 
-The Kendo UI Core Bower package is available as a [public GitHub repository](https://github.com/kendo-labs/bower-kendo-ui) and is also registered as `kendo-ui-core` in the bower registry:
+The Kendo UI Core Bower package is available as a [public Git repository](https://github.com/kendo-labs/bower-kendo-ui) and is also registered as `kendo-ui-core` in the bower registry:
 
 ```sh
 bower install kendo-ui-core
@@ -25,7 +25,7 @@ bower install kendo-ui-core
 
 ## Option 2: Install Kendo UI Professional Bower Package
 
-The Kendo UI Professional Bower Package is hosted as a private GitHub repository. To access it, you need an active subscription for Kendo UI or DevCraft.
+The Kendo UI Professional Bower Package is hosted as a private Git repository. To access it, you need an active subscription for Kendo UI or DevCraft.
 Bower will prompt for your username and password during the installation and update processes:
 
 ```sh
@@ -47,7 +47,7 @@ You can also add the package to the `bower.json` file:
 
 **Option 1:** In order to avoid retyping your credentials, you may cache them. The easiest way to do that is to store them as plain text in a [.netrc file](http://www.mavetju.org/unix/netrc.php).
 
-**Option 2:** A secure alternative to do the same is to use the GitHub credential helpers. Refer to [Stack Overflow](http://stackoverflow.com/questions/5343068/is-there-a-way-to-skip-password-typing-when-using-https-github) to follow the discussion on the topic.
+**Option 2:** A secure alternative to do the same is to use the Git credential helpers. Refer to [Stack Overflow](http://stackoverflow.com/questions/5343068/is-there-a-way-to-skip-password-typing-when-using-https-github) to follow the discussion on the topic.
 
 ### Store Your Credentials on Windows
 
@@ -63,7 +63,7 @@ C:\> SETX HOME %USERPROFILE%
 
 **Step 3:** Add the credentials using the format listed above.
 
-GitHub might have problems resolving your home directory if it contains spaces in its path (e.g. `c:\Documents and Settings\jane`). Therefore, update your `%HOME%` environment variable to point to a directory having no spaces in its name.
+Git might have problems resolving your home directory if it contains spaces in its path (e.g. `c:\Documents and Settings\jane`). Therefore, update your `%HOME%` environment variable to point to a directory having no spaces in its name.
 
 ### Store Your Credentials on Linux, OS X and Unix-Like Systems
 
@@ -91,7 +91,7 @@ Bower on Windows has troubles installing the repository showing the error messag
 fatal: unable to access 'https://bower.telerik.com/bower-kendo-ui.git/': SSL certificate problem: unable to get local issuer certificate
 ```
 
-The cause of this issue is the underlying GitHub installation is missing the certificate bundle.
+The cause of this issue is the underlying Git installation is missing the certificate bundle.
 
 **Solution**
 
