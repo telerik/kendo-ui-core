@@ -314,6 +314,7 @@ var __meta__ = { // jshint ignore:line
                 that.dataSource.unbind(CHANGE, that._rangeChangeHandler);
                 that.dataSource.unbind("reset", that._resetRangeHandler);
 
+                that._deferValue = true;
                 value = that.value();
 
                 that.value([]);
@@ -362,6 +363,8 @@ var __meta__ = { // jshint ignore:line
             var changedItems;
 
             if (that._mute) { return; }
+
+            that._deferValue = false;
 
             if (!that._fetching) {
                 if (filtered) {
@@ -439,7 +442,7 @@ var __meta__ = { // jshint ignore:line
 
             that._values = value;
 
-            if ((that.isBound() && !that._mute) || _forcePrefetch) {
+            if ((that.isBound() && !that._mute && !that._deferValue) || _forcePrefetch) {
                 that._prefetchByValue(value);
             }
 
@@ -502,7 +505,6 @@ var __meta__ = { // jshint ignore:line
             var ranges = this._rangesList;
             var result = $.Deferred();
             var defs = [];
-
 
             var low = Math.floor(index / take) * take;
             var high = Math.ceil(index / take) * take;

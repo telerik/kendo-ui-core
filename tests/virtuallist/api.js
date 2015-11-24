@@ -1489,4 +1489,33 @@
             });
         });
     });
+
+    asyncTest("select value when source and value are applied simultaneously", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            autoBind: true,
+            selectable: true,
+            dataSource: [],
+            valueMapper: function(o) {
+                var value = o.value;
+
+                if (!value) {
+                    value = [];
+                }
+
+                o.success(o.value);
+            },
+            value: "",
+        }));
+
+        asyncDataSource.one("change", function() {
+            start();
+
+            var value = virtualList.value();
+
+            equal(value[0], 250);
+        });
+
+        virtualList.setDataSource(asyncDataSource);
+        virtualList.value(250);
+    });
 })();
