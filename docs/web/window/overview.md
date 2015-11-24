@@ -269,7 +269,7 @@ because in such cases the Window should remain visible to display and validation
 
 ## Destroying a Kendo UI Window
 
-Unlike most other widgets, the Kendo UI Window is **completely removed from the DOM** when [destroyed](/widgets#destroying-kendo-ui-widgets).
+Unlike most other widgets, the Kendo UI Window is **completely removed from the DOM** when [destroyed](/framework/widgets/destroy).
 This means that the element, from which it was initialized, no longer exists on the page, so a new Window instance can be created only from another element.
 
 If the goal is to destroy a Window instance when it is being closed, the earliest recommended time to do that is the [`deactivate`](/api/javascript/ui/window#events-deactivate) event.
