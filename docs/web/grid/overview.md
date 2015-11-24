@@ -18,7 +18,9 @@ There are two primary ways to create a Kendo UI Grid:
 * From an empty `<div>` element. In this case all Grid settings are provided in the initialization script statement.
 * From an existing HTML `<table>` element. In this case some of the Grid settings can be inferred from the table structure and the HTML attributes of the elements.
 
-###### Example - from an empty `<div>`
+### From an Empty `<div>`
+
+###### Example
 
     // define the HTML div that will contain the Grid 
     <div id="grid"></div>
@@ -50,8 +52,10 @@ There are two primary ways to create a Kendo UI Grid:
         });
 
     </script>
+    
+### From an HTML Table
 
-###### Example - from an existing HTML table
+###### Example
 
 When creating the Grid from a table, it is usually already populated with data. This improves the accessibility and search engine optimization, and ensures that the user will see data even if JavaScript is disabled or there is a JavaScript error on the page.
 
@@ -121,9 +125,11 @@ As seen from the code snippets above, in the first case the Grid client object i
 
 ## Configuration
 
-To configure any of these Grid behaviors, use simple Boolean configuration options. 
+### Paging, Sorting, Grouping, and Scrolling
 
-###### Example - enable paging, sorting, grouping, and scrolling
+To configure any of these Grid behaviors, use simple Boolean configuration options. Note that by default, paging, grouping, and sorting are disabled, and scrolling is enabled.
+
+###### Example
 
        $(document).ready(function(){
           $("#grid").kendoGrid({
@@ -134,13 +140,11 @@ To configure any of these Grid behaviors, use simple Boolean configuration optio
           });
       });
 
-By default, paging, grouping, and sorting are disabled, and scrolling is enabled.
+### Virtualization
 
-## Virtual Scrolling
+When binding to large data sets or when using large page sizes, reducing active in-memory DOM objects is important for the performance of the widget. The Grid provides a built-in [UI virtualization functionality]({% slug virtualization_kendoui_combobox_widget %}) for highly optimized binding to large sets of data. Enabling virtual scrolling is done by means of a simple configuration.
 
-When binding to large data sets or when using large page sizes, reducing active in-memory DOM objects is important for the performance of the widget. The Grid provides a built-in [UI virtualization functionality]({% slug virtualization_kendoui_combobox_widget %}) for highly optimized binding to large sets of data. Enabling UI virtualization is done by means of a simple configuration.
-
-###### Example - enable virtualization
+###### Example
 
        $(document).ready(function(){
           $("#grid").kendoGrid({

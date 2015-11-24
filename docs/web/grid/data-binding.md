@@ -11,13 +11,11 @@ position: 3
 
 [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) features a rapid templating engine and a built-in dataSource, which allow you to set up the widget very quickly and use it in your project.
 
+## Bind to Remote Data
+
 To start with, we need a data source. Due to my work on [instasharp.org](http://instasharp.org/) recently, I have become quite familiar with the Instagram API. We can use their "Popular" feeds endpoint without having to go through an authorization process. We still need a client_id, but it is easy to sign up for one of those at [http://instagram.com/developer/register/#](http://instagram.com/developer/register/#).
 
-## Create the Grid
-
-Find detailed information on how to create the Grid from a `<table>` element in the [Overview help article]({% slug overview_kendoui_grid_widget %}).
-
-## Add Data
+### Supply Remote Endpoint
 
 Kendo UI provides a very powerful [data binding framework](http://demos.telerik.com/kendo-ui/datasource/index) you can use right inline with your grid. To do that, define the data source of the grid and supply your remote endpoint.
 
@@ -75,6 +73,8 @@ For a better understanding of the example above, refer to the following explanat
 * `dataType` - tells the data source the format you expect the response to be in. In this case, it is JSONP. JSONP is a way of returning JSON from a cross-browser request without getting blocked. It is also a way to get malicious code injected into your page. It basically wraps the JSON response in a callback to intentionally mislead the browser. It is recommended not to do it unless you fully trust your data.
 * `schema` - tells the Grid what the schema of your response is. Think of it as the "JSON element to repeat on". Kendo UI looks for this element to represent each row in the Grid. The server returns an array of `data` elements so your repeating item is just "data". </li>
 
+### Add Data
+
 When you run the example, you see a grid with no data in it. Therefore, you must provide the Grid with the data you want to be rendered in each column. Do this by specifying which element off the `data` tag in the server response you want to show in that particular column. The next example specifies the `field` attribute in the column array, so that the Grid displays the actual data from your response.
 
 ###### Example
@@ -125,6 +125,8 @@ When you run the example, you see a grid with no data in it. Therefore, you must
 
 ```
 
+### Handle Visualization
+
 Now you have some data as well as some issues with its visualization. The Grid renders the URL of an image in its **Image** column and the other columns show arrays of objects. Now you need indicate to the Grid that the way you want it to display each of the columns. Do this by an inline template for the image, ademonstrated below.
 
 ###### Example
@@ -174,6 +176,8 @@ Now you have some data as well as some issues with its visualization. The Grid r
 
     </script>
 ```
+
+### Set Column Template
 
 The rest of the columns need some more specific templating since they are complex displays, not single fields. You can do that by moving the template outside of the Grid and then setting the template for the details to contain the name of the user that created the photo, the filter they used to create it, and the photo caption. In the last cell, use JavaScript in your templates to enumerate over the comments to display them in a list.
 

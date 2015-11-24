@@ -63,7 +63,7 @@ Initialize the ComboBox by using a jQuery selector:
       });
     </script>
 
-## Bind to Local or Remote Data
+## Data Binding
 
 The ComboBox can be bound to both local arrays and remote data service via the `DataSource` component<&mdash;>-</&mdash;>an abstraction for local and remote data. Local arrays are appropriate for limited value options, while remote data binding is better for larger data sets. With remote data-binding, items will be loaded on-demand, when they are displayed. The `DataSource` component can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
@@ -90,7 +90,7 @@ The ComboBox can be bound to both local arrays and remote data service via the `
     });
     </script>
 
-## Customize Templates
+## Templates
 
 The ComboBox uses Kendo UI templates to enable control over how the item and popup header is rendered. For a detailed description of the capabilities and syntax of the Kendo UI templates, please refer to the [Kendo UI template documentation](/framework/templates/overview).
 
@@ -157,7 +157,7 @@ The ComboBox allows you to render a pop-up header.
     </script>
 
 
-## Access the ComboBox Instance
+## Existing Instance Reference
 
 You can refer an existing ComboBox widget via [jQuery.data()](http://api.jquery.com/jQuery.data/):
 
@@ -167,7 +167,7 @@ You can refer an existing ComboBox widget via [jQuery.data()](http://api.jquery.
         var comboBox = $("#comboBox").data("kendoComboBox");
     </script>
 
-## Customize the Drop-Down List
+## Drop-Down List
 
 You can customize the width of a drop-down list and change its dimensions by using the jQuery `width()` method.
 

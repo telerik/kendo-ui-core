@@ -10,7 +10,7 @@ position: 5
 
 The [cascading ComboBox](http://demos.telerik.com/kendo-ui/combobox/cascadingcombobox) is a series of two or more ComboBoxes in which each ComboBox is filtered according to the selected options in the previous ComboBox.
 
-## Initialize Cascading ComboBoxes
+## Initialize the ComboBoxes
 
 Initialize a cascading ComboBox in the following way:
 

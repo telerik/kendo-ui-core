@@ -70,6 +70,31 @@ This approach allows you to initialize multiple Button widgets at once, but with
 	});
 	</script>
 
+## Enable or Disable Buttons
+
+The business logic of an application often requires a certain button to be temporarily disabled or enabled. Kendo UI Button can be configured to be initially disabled via its `enable` property or by initializing it from an element, which has a `disabled="disabled"` HTML attribute. The Button can also be disabled or enabled at any time with Javascript by using its `enable()` method with a boolean argument.
+
+###### Example - enable and disable the Button
+
+	<button type="button" id="editButton">Edit</button>
+
+	<script>
+
+	$(function(){
+		var editButton = $("#editButton").kendoButton({
+			enable: false
+		}).data("kendoButton");
+
+		// ...
+
+		// enable button
+		editButton.enable(true);
+	});
+
+	</script>
+
+For more information on the Button [`enable` property](/api/web/button#configuration-enable) and the [`enable` method](/api/web/button#methods-enable), please refer to the [Button API](/api/web/button/).    
+    
 ## Add Icons
 
 The Button can accommodate an icon, which enhances the meaning of the text content. The widget provides three ways to add an icon with a classic `img` element or with a background image (usually a sprite). From web standarts' point of view, using background images is better, because the icon does not represent structural content, but is simply a decoration.
@@ -176,32 +201,7 @@ Image icons are applied via the `imageUrl` property and are displayed as a `img`
 
 In order to increase the accessibility of the widget when adding an `img` element manually, an `alt` attribute is required.
 
-## Enable and Disable Buttons
-
-The business logic of an application often requires a certain button to be temporarily disabled or enabled. Kendo UI Button can be configured to be initially disabled via its `enable` property or by initializing it from an element, which has a `disabled="disabled"` HTML attribute. The Button can also be disabled or enabled at any time with Javascript by using its `enable()` method with a boolean argument.
-
-###### Example - enable and disable the Button
-
-	<button type="button" id="editButton">Edit</button>
-
-	<script>
-
-	$(function(){
-		var editButton = $("#editButton").kendoButton({
-			enable: false
-		}).data("kendoButton");
-
-		// ...
-
-		// enable button
-		editButton.enable(true);
-	});
-
-	</script>
-
-For more information on the Button [`enable` property](/api/web/button#configuration-enable) and the [`enable` method](/api/web/button#methods-enable), please refer to the [Button API](/api/web/button/).
-
-## Access the Button Instance
+## Existing Instance Reference
 
 Similar to all other Kendo UI widgets, you can access an existing Button instance via the `.data()` jQuery method, executed by the jQuery object of the originating element.
 

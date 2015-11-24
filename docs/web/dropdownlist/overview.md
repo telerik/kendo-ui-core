@@ -64,7 +64,7 @@ Initialize the DropDownList by using a jQuery selector:
       });
     </script>
 
-## Bind to Local or Remote Data
+## Data Binding
 
 The DropDownList can be bound to both local arrays and remote data service via the `DataSource` component<&mdash;>-</&mdash;>an abstraction for local and remote data. Local arrays are appropriate for limited value options, while remote data binding is better for larger data sets. With remote data-binding, items will be loaded on-demand; when they are displayed. The DataSource component can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
@@ -88,7 +88,7 @@ The DropDownList can be bound to both local arrays and remote data service via t
         });
     </script>
 
-## Customize Templates
+## Templates
 
 The DropDownList uses Kendo UI templates to enable control over how item, popup header and selected value is rendered. For a detailed description of the capabilities and syntax of the Kendo UI templates, please refer to the [Kendo UI Templates documentation](/framework/templates/overview).
 
@@ -184,7 +184,7 @@ The DropDownList allows you to render a pop-up header.
         });
     </script>
 
-## Customize the DropDownList
+## Cusomization
 
 You can customize the width of a the DropDownList and change its dimensions by using the jQuery `width()` method.
 
