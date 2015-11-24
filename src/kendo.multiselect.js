@@ -191,8 +191,6 @@ var __meta__ = { // jshint ignore:line
 
             List.fn.setOptions.call(this, options);
 
-            this._normalizeOptions(listOptions);
-
             this.listView.setOptions(listOptions);
 
             this._accessors();
@@ -248,54 +246,27 @@ var __meta__ = { // jshint ignore:line
             this.currentTag(null);
         },
 
-        _normalizeOptions: function(options) {
+        _listOptions: function(options) {
+            var that = this;
+            var listOptions = List.fn._listOptions.call(that, $.extend(options, {
+                selectedItemChange: proxy(that._selectedItemChange, that),
+                selectable: "multiple"
+            }));
+
             var itemTemplate = this.options.itemTemplate || this.options.template;
-            var template = options.itemTemplate || itemTemplate || options.template;
+            var template = listOptions.itemTemplate || itemTemplate || listOptions.template;
 
             if (!template) {
-                template = "#:" + kendo.expr(options.dataTextField, "data") + "#";
+                template = "#:" + kendo.expr(listOptions.dataTextField, "data") + "#";
             }
 
-            options.template = template;
+            listOptions.template = template;
+
+            return listOptions;
         },
 
-        _initList: function() {
-            var that = this;
-            var virtual = that.options.virtual;
-            var hasVirtual = !!virtual;
-
-            var listBoundHandler = proxy(that._listBound, that);
-
-            var listOptions = {
-                autoBind: false,
-                selectable: "multiple",
-                dataSource: that.dataSource,
-                click: proxy(that._click, that),
-                change: proxy(that._listChange, that),
-                activate: proxy(that._activateItem, that),
-                deactivate: proxy(that._deactivateItem, that),
-                dataBinding: function() {
-                    that.trigger("dataBinding");
-                    that._angularItems("cleanup");
-                },
-                dataBound: listBoundHandler,
-                listBound: listBoundHandler,
-                selectedItemChange: proxy(that._selectedItemChange, that)
-            };
-
-            listOptions = $.extend(that._listOptions(), listOptions, typeof virtual === "object" ? virtual : {});
-
-            that._normalizeOptions(listOptions);
-
-            if (!hasVirtual) {
-                that.listView = new kendo.ui.StaticList(that.ul, listOptions);
-            } else {
-                that.listView = new kendo.ui.VirtualList(that.ul, listOptions);
-            }
-
-            that.listView.bind("click", function(e) { e.preventDefault(); });
-
-            that.listView.value(that._initialValues || that.options.value);
+        _setListValue: function() {
+            List.fn._setListValue.call(this, this._initialValues);
         },
 
         _listChange: function(e) {
@@ -361,7 +332,6 @@ var __meta__ = { // jshint ignore:line
 
             if (that._state === FILTER) {
                 that._state = ACCEPT;
-                that.listView.filter(false);
                 that.listView.skipUpdate(true);
             }
 
@@ -479,7 +449,6 @@ var __meta__ = { // jshint ignore:line
                 that._open = true;
                 that._state = REBIND;
 
-                that.listView.filter(false);
                 that.listView.skipUpdate(true);
 
                 that._filterSource();
@@ -553,7 +522,6 @@ var __meta__ = { // jshint ignore:line
             length = word.length;
 
             if (!length || length >= options.minLength) {
-                that.listView.filter(true);
                 that._state = FILTER;
                 that._open = true;
 
@@ -700,6 +668,8 @@ var __meta__ = { // jshint ignore:line
 
         _click: function(e) {
             var item = e.item;
+
+            e.preventDefault();
 
             if (this.trigger(SELECT, { item: item })) {
                 this._close();
@@ -1095,7 +1065,6 @@ var __meta__ = { // jshint ignore:line
 
             if (that._state === FILTER) {
                 that._state = ACCEPT;
-                that.listView.filter(false);
                 that.listView.skipUpdate(true);
             }
         },

@@ -116,35 +116,14 @@ var __meta__ = { // jshint ignore:line
         },
 
         _listOptions: function(options) {
-            var currentOptions = this.options;
-
-            options = options || {};
-            options = {
-                height: options.height || currentOptions.height,
-                dataValueField: options.dataValueField || currentOptions.dataValueField,
-                dataTextField: options.dataTextField || currentOptions.dataTextField,
-                groupTemplate: options.groupTemplate || currentOptions.groupTemplate,
-                fixedGroupTemplate: options.fixedGroupTemplate || currentOptions.fixedGroupTemplate,
-                template: options.template || currentOptions.template
-            };
-
-            if (!options.template) {
-                options.template = "#:" + kendo.expr(options.dataTextField, "data") + "#";
-            }
-
-            return options;
-        },
-
-        _initList: function() {
             var that = this;
-            var options = that.options;
-            var virtual = options.virtual;
-            var hasVirtual = !!virtual;
-            var value = options.value;
-
+            var currentOptions = that.options;
+            var virtual = currentOptions.virtual;
             var listBoundHandler = proxy(that._listBound, that);
 
-            var listOptions = {
+            virtual = typeof virtual === "object" ? virtual : {};
+
+            options = $.extend({
                 autoBind: false,
                 selectable: true,
                 dataSource: that.dataSource,
@@ -158,35 +137,41 @@ var __meta__ = { // jshint ignore:line
                 },
                 dataBound: listBoundHandler,
                 listBound: listBoundHandler,
+                height: currentOptions.height,
+                dataValueField: currentOptions.dataValueField,
+                dataTextField: currentOptions.dataTextField,
+                groupTemplate: currentOptions.groupTemplate,
+                fixedGroupTemplate: currentOptions.fixedGroupTemplate,
+                template: currentOptions.template
+            }, options, virtual);
+
+            if (!options.template) {
+                options.template = "#:" + kendo.expr(options.dataTextField, "data") + "#";
+            }
+
+            return options;
+        },
+
+        _initList: function() {
+            var that = this;
+            var listOptions = that._listOptions({
                 selectedItemChange: proxy(that._listChange, that)
-            };
+            });
 
-            listOptions = $.extend(that._listOptions(), listOptions, typeof virtual === "object" ? virtual : {});
-
-            if (!hasVirtual) {
+            if (!that.options.virtual) {
                 that.listView = new kendo.ui.StaticList(that.ul, listOptions);
             } else {
                 that.listView = new kendo.ui.VirtualList(that.ul, listOptions);
             }
 
+            that._setListValue();
+        },
+
+        _setListValue: function(value) {
+            value = value || this.options.value;
+
             if (value !== undefined) {
-                that.listView.value(value).done(function() {
-                    var text = options.text;
-
-                    if (!that.listView.filter() && that.input) {
-                        if (that.selectedIndex === -1) {
-                            if (text === undefined || text === null) {
-                                text = value;
-                            }
-
-                            that._accessor(value);
-                            that.input.val(text);
-                            that._placeholder();
-                        } else if (that._oldIndex === -1) {
-                            that._oldIndex = that.selectedIndex;
-                        }
-                    }
-                });
+                this.listView.value(value);
             }
         },
 
@@ -215,6 +200,10 @@ var __meta__ = { // jshint ignore:line
 
             if (filter) {
                 expression.filters.push(filter);
+            }
+
+            if (that._cascading) {
+                this.listView.setDSFilter(expression);
             }
 
             if (!force) {
@@ -733,7 +722,7 @@ var __meta__ = { // jshint ignore:line
 
             if (!length || length >= options.minLength) {
                 that._state = "filter";
-                that.listView.filter(true);
+
                 if (filter === "none") {
                     that._filter(word);
                 } else {
@@ -951,7 +940,7 @@ var __meta__ = { // jshint ignore:line
                         }
                     }
 
-                    if (that.trigger(SELECT, { item: that.listView.focus() })) {
+                    if (that.trigger(SELECT, { item: that._focus() })) {
                         that._focus(current);
                         return;
                     }
@@ -1191,8 +1180,13 @@ var __meta__ = { // jshint ignore:line
 
                 that.first("dataBound", handler);
 
-                that.dataSource.filter(filters);
-
+                that._cascading = true;
+                that._filterSource({
+                    field: valueField,
+                    operator: "eq",
+                    value: filterValue
+                });
+                that._cascading = false;
             } else {
                 that.enable(false);
                 that._clearSelection(parent);
@@ -1430,14 +1424,6 @@ var __meta__ = { // jshint ignore:line
             return this.focus() ? this.focus().index() : undefined;
         },
 
-        filter: function(filter) {
-            if (filter === undefined) {
-                return this._filtered;
-            }
-
-            this._filtered = filter;
-        },
-
         skipUpdate: function(skipUpdate) {
             this._skipUpdate = skipUpdate;
         },
@@ -1462,11 +1448,13 @@ var __meta__ = { // jshint ignore:line
                 indices = [];
             }
 
-            if (that._filtered && !singleSelection && that._deselectFiltered(indices)) {
+            var filtered = that.isFiltered();
+
+            if (filtered && !singleSelection && that._deselectFiltered(indices)) {
                 return;
             }
 
-            if (singleSelection && !that._filtered && $.inArray(indices[indices.length - 1], selectedIndices) !== -1) {
+            if (singleSelection && !filtered && $.inArray(indices[indices.length - 1], selectedIndices) !== -1) {
                 if (that._dataItems.length && that._view.length) {
                     that._dataItems = [that._view[selectedIndices[0]].item];
                 }
@@ -1950,14 +1938,27 @@ var __meta__ = { // jshint ignore:line
         },
 
         _selected: function(dataItem, values) {
-            var select = !this._filtered || this.options.selectable === "multiple";
+            var select = !this.isFiltered() || this.options.selectable === "multiple";
             return select && this._dataItemPosition(dataItem, values) !== -1;
+        },
+
+        setDSFilter: function(filter) {
+            this._lastDSFilter = extend({}, filter);
+        },
+
+        isFiltered: function() {
+            if (!this._lastDSFilter) {
+                this.setDSFilter(this.dataSource.filter());
+            }
+
+            return !kendo.data.Query.compareFilters(this.dataSource.filter(), this._lastDSFilter);
         },
 
         refresh: function(e) {
             var that = this;
             var changedItems;
             var action = e && e.action;
+            var skipUpdateOnBind = that.options.skipUpdateOnBind;
 
             that.trigger("dataBinding");
 
@@ -1974,13 +1975,13 @@ var __meta__ = { // jshint ignore:line
                         items: changedItems
                     });
                 }
-            } else if (that._filtered || that._skipUpdate) {
+            } else if (that.isFiltered() || that._skipUpdate) {
                 that.focus(0);
                 if (that._skipUpdate) {
                     that._skipUpdate = false;
                     that._selectedIndices = that._valueIndices(that._values, that._selectedIndices);
                 }
-            } else if (!that.options.skipUpdateOnBind && (!action || action === "add")) {
+            } else if (!skipUpdateOnBind && (!action || action === "add")) {
                 that.value(that._values);
             }
 
@@ -2061,6 +2062,7 @@ var __meta__ = { // jshint ignore:line
 
         return value;
     }
+
 })(window.kendo.jQuery);
 
 return window.kendo;

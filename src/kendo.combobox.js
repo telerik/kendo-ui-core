@@ -254,11 +254,35 @@ var __meta__ = { // jshint ignore:line
             if ((!that.listView.isBound() && state !== STATE_FILTER) || state === STATE_ACCEPT) {
                 that._open = true;
                 that._state = STATE_REBIND;
-                that.listView.filter(false);
                 that._filterSource();
             } else {
                 that.popup.open();
                 that._focusItem();
+            }
+        },
+
+        _setListValue: function() {
+            var that = this;
+            var options = that.options;
+            var value = options.value;
+            var text = options.text;
+
+            if (value !== undefined) {
+                that.listView.value(value).done(function() {
+                    if (!that.listView.isFiltered()) {
+                        if (that.selectedIndex === -1) {
+                            if (text === undefined || text === null) {
+                                text = value;
+                            }
+
+                            that._accessor(value);
+                            that.input.val(text || that.input.val());
+                            that._placeholder();
+                        } else if (that._oldIndex === -1) {
+                            that._oldIndex = that.selectedIndex;
+                        }
+                    }
+                });
             }
         },
 
@@ -401,7 +425,6 @@ var __meta__ = { // jshint ignore:line
             this.listView.select(candidate);
 
             if (!keepState && this._state === STATE_FILTER) {
-                this.listView.filter(false);
                 this._state = STATE_ACCEPT;
             }
         },
@@ -591,6 +614,8 @@ var __meta__ = { // jshint ignore:line
 
         _click: function(e) {
             var item = e.item;
+
+            e.preventDefault();
 
             if (this.trigger("select", { item: item })) {
                 this.close();

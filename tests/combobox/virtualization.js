@@ -188,7 +188,6 @@
             combobox.search("1");
             combobox.one("dataBound", function() {
                 combobox.select(2); //select "Item 111"
-                combobox.listView.filter(false);
                 combobox.dataSource.filter([]);
 
                 setTimeout(function() {

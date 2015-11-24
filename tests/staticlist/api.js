@@ -335,7 +335,8 @@
             ok(true);
         });
 
-        list.filter(true);
+        list.dataSource.filter({ field: "", operator: "eq", value: "item2" });
+
         list.select(1); //select again
     });
 
@@ -831,7 +832,6 @@
 
         list.dataSource.read();
 
-        list.filter(true);
         list.dataSource.filter({
             field: "name",
             operator: "eq",
@@ -1336,7 +1336,7 @@
             template: "#:data#"
         });
 
-        list.filter(true);
+        list.dataSource.read();
         list.dataSource.filter({
             field: "",
             operator: "eq",
@@ -1401,4 +1401,44 @@
         equal(items.length, 3);
         ok(items.eq(0).hasClass("k-item"));
     });
+
+    test("isFiltered method returns true if source is filtered", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        list.dataSource.filter({ field: "", operator: "eq", value: "item2" });
+
+        ok(list.isFiltered());
+    });
+
+    test("isFiltered method returns false if applied filter is removed", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        list.dataSource.filter({ field: "", operator: "eq", value: "item2" });
+        list.dataSource.filter({});
+
+        ok(!list.isFiltered());
+    });
+
+    test("isFiltered method returns false if widget is no bound", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        //first bind is done with filtering
+        list.dataSource.filter({ field: "", operator: "eq", value: "item2" });
+
+        ok(!list.isFiltered());
+    });
+
 })();
