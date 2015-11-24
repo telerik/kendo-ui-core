@@ -265,13 +265,11 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var options = that.options;
             var value = options.value;
+            var text = options.text;
 
             if (value !== undefined) {
                 that.listView.value(value).done(function() {
-                    var text = options.text;
-
-                    //TODO: refactor
-                    if (!that.listView.isFiltered() && that.input) {
+                    if (!that.listView.isFiltered()) {
                         if (that.selectedIndex === -1) {
                             if (text === undefined || text === null) {
                                 text = value;
