@@ -1,19 +1,27 @@
 ---
 title: Context Menu
-page_title: Overview of Kendo UI ContextMenu widget
-description: Steps that help you initialize the ContextMenu widget using JSON data object.
+page_title: Context Menu | Kendo UI Menu Widget
+description: "Learn how to initialize Kendo UI ContextMenu, configure its behaviors and customize animations."
+slug: overview_kendoui_contextmenu_widget
+position: 2
 ---
 
-# ContextMenu Overview
+# Context Menu
 
-The Kendo UI ContextMenu displays hierarchical data as a multi-level menu in a popup. It provides rich styling for unordered lists
-of items, and can be used for both navigation and executing JavaScript commands. Items can be defined and
-initialized from HTML, or the API can be used to add and remove items. A ContextMenu target can be specified along with filter
-for multiple targets and an event to which the ContextMenu will listen in order to pop up.
+[Kendo UI Context Menu](http://demos.telerik.com/kendo-ui/menu/context-menu) displays hierarchical data as a multi-level menu in a popup. It provides rich styling for unordered lists of items, and can be used for both navigation and execution of JavaScript commands. Items can be defined and initialized from HTML, or the API can be used to add and remove items. A ContextMenu target can be specified along with a filter for multiple targets and an event to which the ContextMenu will listen to so it pops up.
 
 ## Getting Started
 
-### Initialize a Kendo UI ContextMenu using HTML markup
+### Initialize the ContextMenu 
+
+Kendo UI ContextMenu can be initialized in two ways: 
+
+* Through HTML markup
+* Through JSON data object
+
+#### Initialize ContextMenu using HTML markup
+
+###### Example
 
     <ul id="context-menu">
         <li>Item 1</li>
@@ -25,7 +33,9 @@ for multiple targets and an event to which the ContextMenu will listen in order 
         });
     </script>
 
-### Initialize a Kendo UI ContextMenu using JSON data object
+#### Initialize Menu using JSON data object
+
+###### Example
 
     <ul id="context-menu"></ul>
     <script>
@@ -60,14 +70,15 @@ for multiple targets and an event to which the ContextMenu will listen in order 
         });
     </script>
 
-Initialization of a ContextMenu should occur after the DOM is fully loaded. It is recommended that initialization the Menu is done within a $(document).ready() statement.
+The initialization of the ContextMenu must occur after the DOM is fully loaded. It is recommended that you initialize the Menu within a `$(document).ready()` statement.
 
-## Customize ContextMenu Animations
+## ContextMenu Animations
 
-By default, the ContextMenu uses a slide animation to expand sub-items on mouse hover event. Animations can be changed using configuration properties, along with the animation style and delay. Menu items can also be configured to open on click instead of on hover. ContextMenu can also be configured to use a different
-open event than the default "contextmenu" (right click).
+By default, the ContextMenu uses a slide animation to expand sub-items on a mouse hover event. Animations, along with the animation style and delay, can be customized by using configuration properties. You can also confgure Menu items to open on click instead of on hover, and ContextMenu can also be configured to use a different open event than the default `contextmenu` (right click).
 
-### Change ContextMenu animation and open event
+The example below demonstrates how to change ContextMenu animation and open behavior.
+
+###### Example 
 
     <ul id="context-menu">
         <li>Item 1</li>
@@ -83,19 +94,17 @@ open event than the default "contextmenu" (right click).
         });
     </script>
 
-## Dynamic configuration of ContextMenu items
+## Dynamic Items
 
-The ContextMenu API provides methods for dynamic adding
-or removing ContextMenu items. To add items, you need to provide the new item as a JSON
-object along with a reference item.
+[The Kendo UI ContextMenu API](/api/javascript/ui/contextmenu) provides methods for dynamically adding or removing Menu items. 
 
+To add items, provide the new item as a JSON object along with a reference item. A reference item is a target ContextMenu item HTML element that already exists in the ContextMenu. The reference item will be used to determine the placement in the hierarchy of the new item. Any valid jQuery selector can be used to obtain a reference to the target item. 
 
-A reference item is a target ContextMenu item HTML element that
-already exists in the ContextMenu. The reference item will be used to determine the
-placement in the hierarchy of the new item. Any valid jQuery selector can be used to
-obtain a reference to the target item.
+For more information on configuring Menu items, see the [Menu API demos](http://demos.telerik.com/kendo-ui/web/menu/api.html).
 
-### How to add a new root ContextMenu item
+The example below demonstrates how to add a new root ContextMenu item. 
+
+###### Example
 
     <ul id="context-menu">
         <li>Item 1</li>
@@ -108,3 +117,13 @@ obtain a reference to the target item.
             contextMenu.element.children("li:last")
         );
     </script>
+    
+## See Also
+
+Articles on Kendo UI Menu and how-to examples:
+
+* [Overview]({% slug overview_kendoui_menu_widget %})
+* [How to Create Split Button]({% slug howto_createa_split_button_menu %})
+* [How to Execute Custom Click Actions Based on Class Name]({% slug howto_execute_custom_click_actions_basedon_classnames_menu %})
+* [How to Use FontAwesome Icons]({% slug howto_use_fontawesome_icons_menu %})
+* [JavaScript API Reference](/api/javascript/ui/menu)

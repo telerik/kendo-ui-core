@@ -9,7 +9,7 @@ position: 1
 
 # MaskedTextBox Overview
 
-[kendo UI MaskedTextBox widget](http://demos.telerik.com/kendo-ui/maskedtextbox/index) allows controlled text input based on a specific format. This specific format can be defined using the [mask](/api/web/maskedtextbox#configuration-mask) option of the widget. Each mask can contain mask rules and mask literals. The mask literals will be automatically entered for the user and they cannot be removed. The widget also has predefined rules which specify:
+[Kendo UI MaskedTextBox widget](http://demos.telerik.com/kendo-ui/maskedtextbox/index) allows controlled text input based on a specific format. This specific format can be defined using the [mask](/api/web/maskedtextbox#configuration-mask) option of the widget. Each mask can contain mask rules and mask literals. The mask literals will be automatically entered for the user and they cannot be removed. The widget also has predefined rules which specify:
 
 - required/optional digit input
 - required/optional letter input

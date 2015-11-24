@@ -1,19 +1,27 @@
 ---
 title: Overview
-page_title: Overview of Menu UI widget | Kendo UI Documentation
-description: Steps that help you initialize the Menu widget using JSON data object and customize animation.
+page_title: Overview | Kendo UI Menu Widget
+description: "Learn how to initialize the Kendo UI Menu widget, configure its behaviors and customize animations."
+slug: overview_kendoui_menu_widget
+position: 1
 ---
 
 # Menu Overview
 
-The Kendo UI Menu displays hierarchical data as a multi-level menu. It provides rich styling for unordered lists
-of items, and can be used for both navigation and executing JavaScript commands. Items can be defined and
-initialized from HTML, or through the configuration options. The Kendo UI Menu API can be used to add and remove items.
-
+[Kendo UI Menu widget](http://demos.telerik.com/kendo-ui/menu/index) displays hierarchical data as a multi-level menu. It provides rich styling for unordered lists of items, and can be used for both navigation and executing JavaScript commands. Items can be defined and initialized from HTML, or through the configuration options. [Kendo UI Menu API](/api/javascript/ui/menu) can be used to add and remove items.
 
 ## Getting Started
 
-### Initialize the Kendo UI Menu using HTML markup
+### Initialize the Menu 
+
+The Kendo UI Menu widget can be initialized in two ways: 
+
+* Through HTML markup
+* Through JSON data object
+
+#### Initialize Menu using HTML markup
+
+###### Example
 
     <ul id="menu">
         <li>Normal Item
@@ -36,8 +44,10 @@ initialized from HTML, or through the configuration options. The Kendo UI Menu A
             $("#menu").kendoMenu();
         });
     </script>
+    
+#### Initialize Menu using JSON data object
 
-### Initialize the Kendo UI Menu using JSON data object
+###### Example
     
     <ul id="menu"></ul>
 
@@ -47,18 +57,18 @@ initialized from HTML, or through the configuration options. The Kendo UI Menu A
           dataSource:
           [{
             text: "Item 1",
-            cssClass: "myClass",                         // Add custom CSS class to the item, optional, added 2012 Q3 SP1.
-            url: "http://www.telerik.com"                // Link URL if navigation is needed, optional.
+            cssClass: "myClass",                         // (Optional) Add custom CSS class to the item, added 2012 Q3 SP1
+            url: "http://www.telerik.com"                // (Optional) Link URL if navigation is needed 
           },
            {
              text: "<b>Item 2</b>",
-             encoded: false,                              // Allows use of HTML for item text
-             content: "text"                              // content within an item
+             encoded: false,                              // Allows the use of HTML for item text
+             content: "text"                              // Content within an item
            },
            {
              text: "Item 3",
-             imageUrl: "http://www.telerik.com/test.jpg", // Item image URL, optional.
-             items: [{                                    // Sub item collection
+             imageUrl: "http://www.telerik.com/test.jpg", // (Optional) Item image URL
+             items: [{                                    // Sub-item collection
                text: "Sub Item 1"
              },
                      {
@@ -67,17 +77,19 @@ initialized from HTML, or through the configuration options. The Kendo UI Menu A
            },
            {
              text: "Item 4",
-             spriteCssClass: "imageClass3"                // Item image sprite CSS class, optional.
+             spriteCssClass: "imageClass3"                // (Optional) Item image sprite CSS class
            }]
         })
       });
     </script>
 
-Initialization of a Menu should occur after the DOM is fully loaded. It is recommended that initialization the Menu is done within a $(document).ready() statement.
+The initialization of the Menu must occur after the DOM is fully loaded. It is recommended that you initialize the Menu within a `$(document).ready()` statement.
 
-## Menu HTML markup
+### Sample Case
 
-Let's start with the following initial HTML markup.
+The example below demonstrates the basic approach to build a Menu by using HTML markup. 
+
+###### Example
 
     <ul id="MenuID">
         <li>root item 1</li>
@@ -96,7 +108,10 @@ Let's start with the following initial HTML markup.
         </li>
     </ul>
 
-Creating a Kendo UI Menu from the above DOM will result in the following HTML markup:
+
+To create a Kendo UI Menu based on the example above, elaborate on the DOM elements in the way demonstrated by the code below.
+
+###### Example 
 
     <ul id="MenuID" class="k-widget k-menu">
         <li class="k-item k-state-default"><span class="k-link">root item 1</span></li>
@@ -121,14 +136,16 @@ Creating a Kendo UI Menu from the above DOM will result in the following HTML ma
         </li>
     </ul>
 
-The most notable changes are:
 
-* All `<ul>` and `<li>` elements receive some Kendo UI CSS classes.
+The basic emphasis is on the following changes:
+
+* All `<ul>` and `<li>` elements receive some of the Kendo UI CSS classes.
 * Each menu item text is wrapped in a `span.k-link` element, or `a.k-link` element, if a navigation URL is specified.
 * A dropdown arrow (`<span class="k-icon k-i-arrow-s"></span>`) is appended to the `.k-link` element of each expandable menu item.
-* Once a menu group is opened, the `ul.k-group` element is wrapped by a `div.k-animation-container` and the DOM structure is transformed to:
 
-<!-- -->
+Once a menu group is opened, the `ul.k-group` element is wrapped by a `div.k-animation-container` and the DOM structure is transformed in the way demonstrated below.
+
+###### Example
 
     <li class="k-item k-state-default">
         <span class="k-link">root item 2
@@ -142,11 +159,14 @@ The most notable changes are:
         </div>
     </li>
 
-## Customize Menu Animations
+## Menu Animations
 
-By default, the Menu uses a slide animation to expand sub-items on mouse hover event. Animations can be changed using configuration properties, along with the animation style and delay. Menu items can also be configured to open on click instead of on hover.
+By default, the Menu uses a slide animation to expand sub-items on a mouse hover event. Animations, along with the animation style and delay, can be customized by using configuration properties. You can also configure Menu items to open on click instead of on hover.
 
-### Change Menu animation and open behavior
+The example below demonstrates how to change Menu animation and open behavior.
+
+###### Example 
+
     <ul id="menu"></ul>
 
     <script>
@@ -159,17 +179,18 @@ By default, the Menu uses a slide animation to expand sub-items on mouse hover e
         });
     </script>
 
-## Configure dynamic Menu items
+## Dynamic Items
 
-The Menu API provides methods for dynamic adding
-or removing Menu items. To add items, you need to provide the new item as a JSON
-object along with a reference item.
+[The Kendo UI Menu API](/api/javascript/ui/menu) provides methods for dynamically adding or removing Menu items. 
 
+To add items, provide the new item as a JSON object along with a reference item. A reference item is a target Menu item HTML element that already exists in the Menu. The reference item will be used to determine the placement in the hierarchy of the new item. Any valid jQuery selector can be used to obtain a reference to the target item. 
 
-A reference item is a target Menu item HTML element that already exists in the Menu. The reference item will be used to determine the
-placement in the hierarchy of the new item. Any valid jQuery selector can be used to obtain a reference to the target item. For examples, see the [Menu API demos](http://demos.telerik.com/kendo-ui/web/menu/api.html).
+For more information on configuring Menu items, see the [Menu API demos](http://demos.telerik.com/kendo-ui/web/menu/api.html).
 
-### How to add a new root Menu item
+The example below demonstrates how to add a new root Menu item. 
+
+###### Example
+
     <ul id="menu"></ul>
 
     <script>
@@ -180,26 +201,13 @@ placement in the hierarchy of the new item. Any valid jQuery selector can be use
         );
     </script>
 
-## Keyboard Navigation
+## Display
 
-The Menu provides keyboard navigation functionality. When focused the first root item is activated.
+### Shrink Menu to Exactly Fit Root Items
 
-The following keys and user actions are supported:
+The Menu renders as a `<ul>` element and expands horizontally by default. If a horizontal Menu is wider than the total width of its root items, a blank space will remain visible on the right. To remove this space, use the CSS rules in the example below.
 
-* Left and right arrow keys move the active item left and right on the root level of horizontal Menus.
-* Up and down arrow keys move the active item up and down of vertical Menu item groups.
-* Down arrow opens an item group a horizontal Menu.
-* Right arrow opens an item group of a vertical Menu.
-* Left arrow closes an item group.
-* Right arrow moves the active state to the next root item of a horizontal Menu, if the previous active item has been inside an item group.
-* Escape closes an item group.
-* (Shift+) Tab blurs the Menu and moves focus to the next (previous) focusable page element.
-
-## Shrink the Menu to exactly fit the root items
-
-The Menu renders as a `UL` element and expands horizontally by default.
-If a horizontal Menu is wider than the total width of its root items, a blank space will remain visible on the right. In order to remove this space, you can use the following CSS rules:
-
+###### Example
 
     #menu-id /* for a specific menu instance */
     ,
@@ -208,7 +216,9 @@ If a horizontal Menu is wider than the total width of its root items, a blank sp
        display: inline-block;
     }
 
-Shrinking the horizontal Menu will make the last root item's border touch the Menu's right border (in left-to-right layouts). The last item border can be removed with:
+In left-to-right layouts, shrinking the horizontal Menu will make the border of the last root item touch the right border of the Menu. The last item border can be removed as shwon int he example below.
+
+###### Example 
 
     #menu-id > .k-last /* for a specific menu instance */
     ,
@@ -216,3 +226,31 @@ Shrinking the horizontal Menu will make the last root item's border touch the Me
     {
        border-width: 0;
     }
+
+## Keyboard Navigation
+
+The Menu provides a keyboard navigation functionality. When on focus, the first root item is activated.
+
+Kendo UI Menu supports the following keyboard shortcuts and user actions:
+
+| SHORTCUT						| DESCRIPTION				                                                        |
+|:---                           |:---                                                                               |
+| Left `Arrow` key              | <ul><li>Moves the active item on the root level of horizontal Menus to the left</li> <li>Closes an item group</li></ul> |
+| Right `Arrow` key             | <ul><li>Moves the active item on the root level of horizontal Menus to the right</li> <li>opens an item group of a vertical Menu</li> <li>Moves the active state to the next root item of a horizontal Menu, if the previous active item has been inside an item group</li></ul>        |
+| Up `Arrow` key                | Moves the active item of vertical Menu item groups upwards                        |
+| Down `Arrow` key              | <ul><li>Moves the active item of vertical Menu item groups downwards</li> <li>Opens an item group of a horizontal Menu</li></ul> |
+| `Esc`                         | Closes an item group                                                              |
+| (`Shift`+) `Tab`              | Blurs the Menu and moves the focus to the next (previous) focusable page element  |
+
+## See Also
+
+Other articles on Kendo UI Menu and how-to examples:
+
+* [Context Menu]({% slug overview_kendoui_contextmenu_widget %})
+* [How to Create Split Button]({% slug howto_createa_split_button_menu %})
+* [How to Execute Custom Click Actions Based on Class Name]({% slug howto_execute_custom_click_actions_basedon_classnames_menu %})
+* [How to Use FontAwesome Icons]({% slug howto_use_fontawesome_icons_menu %})
+* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/menu/overview)
+* [Overview of the JSP Tag](/jsp/tags/menu/overview)
+* [Overview of the PHP Class](/php/widgets/menu/overview)
+* [JavaScript API Reference](/api/javascript/ui/menu)
