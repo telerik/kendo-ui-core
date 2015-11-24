@@ -10,7 +10,9 @@ position: 5
 
 Allowing users to enter the HTML of your site imposes security risks that you need to address. This article shows how a hypothetical attack proceeds and what to do to prevent it.
 
-## Typical XSS Attacks
+## XSS Attacks
+
+Below is demonstrated how a typical XSS attack is done.
 
 1. A malicious user visits a page that uses the Editor widget. Let us assume that there is a `<textarea id="editor">` element on the page.
 
@@ -26,11 +28,11 @@ Allowing users to enter the HTML of your site imposes security risks that you ne
 3. The unprocessed content is stored on the server.
 4. A victim visits the compromised page that outputs the above HTML.
 
-## XSS Editor Protection
+## XSS Protection
 
 The Editor widget itself can do little in order to protect you from XSS attacks, because malicious users can edit form fields manually and post forged requests to the server, as shown in step #2 above. To protect your users from these attacks, clean the posted content on the server through an HTML parsing and a whitelist of allowed tags.
 
-## Whitelist Allowed Tags
+## Whitelist Tags
 
 Depending on your server-side platform, here are some libraries that allow processing HTML with a whitelist:
 

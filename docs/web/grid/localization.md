@@ -12,7 +12,7 @@ Localization is the process of adapting software to meet the requirements of loc
 
 The Grid widget provides a way to localize the user interface by using configuration options.
 
-## Toolbar Controls
+## Toolbar
 
 ###### Example
 
@@ -25,7 +25,24 @@ The Grid widget provides a way to localize the user interface by using configura
 
 Find more info in the [`toolbar`](/api/javascript/ui/grid#configuration-toolbar) section of the Grid API reference.
 
-## Column Commands 
+## Columns 
+
+### Menu
+
+###### Example
+
+    columnMenu: {
+        messages: {
+            sortAscending: "Sort Ascending",
+            sortDescending: "Sort Descending",
+            filter: "Filter",
+            columns: "Columns"
+        }
+    }
+
+Find more info in the [`columnMenu.messages`](/api/javascript/ui/grid#configuration-columnMenu.messages) section of the Grid API reference.
+
+### Commands
 
 ###### Example
 
@@ -49,7 +66,7 @@ Find more info in the [`toolbar`](/api/javascript/ui/grid#configuration-toolbar)
 
 Find more info in the [`columns.command`](/api/javascript/ui/grid#configuration-columns.command) section of the Grid API reference.
     
-## Filter Menu
+## Filter
 
 ###### Example
 
@@ -115,21 +132,6 @@ Find more info in the [`filterable`](/api/javascript/ui/grid#configuration-filte
     }
 
 Find more info in the [`groupable.messages`](/api/javascript/ui/grid#configuration-columnMenu.messages) section of the Grid API reference.
-
-## Column Menu
-
-###### Example
-
-    columnMenu: {
-        messages: {
-            sortAscending: "Sort Ascending",
-            sortDescending: "Sort Descending",
-            filter: "Filter",
-            columns: "Columns"
-        }
-    }
-
-Find more info in the [`columnMenu.messages`](/api/javascript/ui/grid#configuration-columnMenu.messages) section of the Grid API reference.
 
 ## Pager
 

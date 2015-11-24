@@ -34,7 +34,7 @@ Initialize the AutoComplete widget by using a jQuery selector:
     </span>
 
 
-## AutoComplete Suggestions
+## Suggestions
 
 There are two primary ways to provide AutoComplete suggestions:
 
@@ -122,7 +122,7 @@ You can bind to a JSONP service by using Kendo UI `DataSource`:
      })
     });
 
-## Customize Templates
+## Templates
 
 The AutoComplete widget uses Kendo UI templates to enable control over how an item and pop-up header is rendered. For detailed description of the capabilities and syntax of the templates, please refer to the [documentation](/framework/templates/overview).
 
@@ -186,7 +186,7 @@ The AutoComplete widget provides the rendering of a pop-up header.
         });
     </script>
 
-## Customize the Drop-Down List
+## Drop-Down List
 
 You can customize the width of a drop-down list and change its dimensions by using the jQuery width() method.
 

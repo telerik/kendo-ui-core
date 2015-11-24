@@ -320,9 +320,9 @@ Frozen columns rely on row height synchronization between the frozen and non-fro
         line-height: 18px;
     }
 
-## Initialize inside Hidden Containers
+## Hidden Containers
 
-Depending on the Grid configuration, the widget may need to perform Javascript calculations to adjust its layout during initialization, e.g. when scrolling, virtual scrolling, or frozen columns are used. Generally, Javascript size calculations do not work for elements, which are hidden with a `display:none` style and the Grid can also be affected.
+Depending on the Grid configuration, the widget may need to perform Javascript calculations to adjust its layout during initialization inside hidden containers, e.g. when scrolling, virtual scrolling, or frozen columns are used. Generally, Javascript size calculations do not work for elements, which are hidden with a `display:none` style and the Grid can also be affected.
 
 Depending on the exact scenario, the following behavior can be observed when the widget is eventually displayed:
 
