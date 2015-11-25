@@ -35,6 +35,8 @@
         ok(tv.popup);
         ok(tv.popup.element.is("div"));
         ok(tv.popup.element.hasClass("k-list-container"));
+        ok(tv.popup.element.hasClass("k-list-scroller"));
+        equal(tv.popup.element.attr("unselectable"), "on");
         ok(tv.popup.element.children(":first").is("ul"));
         ok(tv.popup.element.children(":first").hasClass("k-list k-reset"));
         equal(tv.popup.options.anchor, input);
