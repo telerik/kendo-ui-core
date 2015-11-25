@@ -66,7 +66,7 @@ var __meta__ = { // jshint ignore:line
                     .on("mouseenter" + ns, LI, function() { $(this).addClass(HOVER); })
                     .on("mouseleave" + ns, LI, function() { $(this).removeClass(HOVER); });
 
-        that.list = $("<div class='k-list-container k-list-scroller'/>")
+        that.list = $("<div class='k-list-container k-list-scroller' unselectable='on'/>")
                     .append(that.ul)
                     .on(MOUSEDOWN, preventDefault);
 
