@@ -155,7 +155,7 @@ The conversion and processing can hang or fail even if the spreadsheet file does
 
 Even cells that appear empty will be processed if they have non-default styling.
 
-** Solution **
+**Solution**
 
 Reset all cells outside the used range to the default borders, formatting and colors.
 
