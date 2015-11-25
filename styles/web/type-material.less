@@ -2152,10 +2152,8 @@ html .km-pane-wrapper .km-widget,
 @checkbox-disabled-background-color: contrast(@background, lighten(@background, 20%), darken(@background, 4%), 0.5);
 @checkbox-disabled-color: darken(@hover-background, 17%);
 @checkbox-disabled-border-color: contrast(@background, lighten(@background, 20%), darken(@background, 25%), 0.5);
-
-.k-checkbox + .k-checkbox-label:before {
-    z-index: 1;
-}
+@checkbox-indeterminate-background-color: @accent;
+@checkbox-indeterminate-border-color: @accent;
 
 .k-checkbox + .k-checkbox-label:after {
     content: "";
@@ -2177,6 +2175,10 @@ html .km-pane-wrapper .km-widget,
 
 .k-checkbox:checked + .k-checkbox-label:active:after {
     box-shadow: 0 0 0 12px fadeout(@accent, 70%);
+}
+
+.k-checkbox:indeterminate + .k-checkbox-label:before {
+    border-color: @accent;
 }
 
 @import "themes/radiobutton.less";

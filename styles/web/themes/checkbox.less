@@ -11,6 +11,12 @@
 @checkbox-disabled-background-color: @background;
 @checkbox-disabled-color: darken(@base, 29%);
 @checkbox-disabled-border-color: darken(@base, 12%);
+@checkbox-indeterminate-gradient: @selected-gradient;
+@checkbox-indeterminate-border-color: @checkbox-active-border-color;
+@checkbox-indeterminate-background-color: @checkbox-checked-color;
+@checkbox-indeterminate-hover-background-color: @checkbox-indeterminate-background-color;
+@checkbox-indeterminate-hover-border-color: @checkbox-indeterminate-background-color;
+@checkbox-indeterminate-border-radius: @checkbox-border-radius - 1;
 
 .k-checkbox-label:before{
     border-color: @checkbox-border-color;
@@ -59,7 +65,18 @@
 }
 
 .k-checkbox:focus + .k-checkbox-label:before {
-  border-color: @checkbox-active-border-color;
-  box-shadow: @checkbox-active-box-shadow;
+    border-color: @checkbox-active-border-color;
+    box-shadow: @checkbox-active-box-shadow;
 }
 
+.k-checkbox:indeterminate + .k-checkbox-label:after {
+    background-color: @checkbox-indeterminate-background-color;
+    .composite-background(@checkbox-indeterminate-gradient);
+    border-color: @checkbox-indeterminate-border-color;
+    border-radius: @checkbox-indeterminate-border-radius;
+}
+
+.k-checkbox:indeterminate:hover + .k-checkbox-label:after {
+    border-color: @checkbox-indeterminate-hover-border-color;
+    background-color: @checkbox-indeterminate-hover-background-color;
+}

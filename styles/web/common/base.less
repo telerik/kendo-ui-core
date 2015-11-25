@@ -793,6 +793,23 @@ input.k-checkbox,
   text-align: center;
 }
 
+.k-checkbox:indeterminate + .k-checkbox-label:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border-width: @checkbox-border-width;
+  border-style: solid;
+  width: 8px;
+  height: 8px;
+  font-size: @checkbox-check-size;
+  text-align: center;
+  content: " ";
+  margin-left: -2px;
+}
+
 .k-checkbox:checked + .k-checkbox-label:before {
   content: @checkbox-tick-icon-content;
 }
