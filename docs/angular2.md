@@ -21,17 +21,17 @@ The example below is based on the [5 min quickstart](https://angular.io/docs/js/
 <html>
     <head>
         <title>Kendo UI Angular 2 Quickstart</title>
-        <link href="http://cdn.kendostatic.com/2015.3.930/styles/kendo.common.min.css" rel="stylesheet" />
-        <link href="http://cdn.kendostatic.com/2015.3.930/styles/kendo.metro.min.css" rel="stylesheet" />
 
-        <script src="https://github.jspm.io/jmcriffey/bower-traceur-runtime@0.0.91/traceur-runtime.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/systemjs/0.18.4/system.src.js"></script>
-        <script type="text/javascript" charset="utf-8">
-         System.config({ defaultJSExtensions: true });
-        </script>
-        <script src="https://code.angularjs.org/2.0.0-alpha.36/angular2.dev.js"></script>
+        <script src="https://code.angularjs.org/tools/system.js"></script>
+        <script src="https://code.angularjs.org/tools/typescript.js"></script>
+        <script src="https://code.angularjs.org/2.0.0-alpha.44/angular2.dev.js"></script>
+
+        <link href="http://cdn.kendostatic.com/2015.3.1111/styles/kendo.common.min.css" rel="stylesheet" />
+        <link href="http://cdn.kendostatic.com/2015.3.1111/styles/kendo.metro.min.css" rel="stylesheet" />
+
         <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
-        <script src="https://kendo.cdn.telerik.com/2015.3.930/js/kendo.all.min.js"></script>
+        <script src="//kendo.cdn.telerik.com/2015.3.1111/js/kendo.all.min.js"></script>
+
     </head>
     <body>
 
@@ -39,15 +39,16 @@ The example below is based on the [5 min quickstart](https://angular.io/docs/js/
         <my-app></my-app>
 
         <script>
-            System.import('app');
+            System.config({
+                transpiler: 'typescript',
+                typescriptOptions: { emitDecoratorMetadata: true }
+            });
+            System.import('./app.ts');
         </script>
     </body>
 </html>
 ```
 ```typescript
-/// <reference path="typings/angular2/angular2.d.ts" />
-/// <reference path="typings/kendo-ui/kendo-ui.d.ts" />
-//
 import {Component, View, bootstrap, FORM_DIRECTIVES, ControlGroup, Control } from 'angular2/angular2';
 import {KendoValueAccessor} from 'kendo/angular2';
 
