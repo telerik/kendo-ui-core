@@ -97,7 +97,23 @@ simple INPUT element with server validation, as some server languages are able t
 
 ### Input Type
 
-The Kendo UI NumericTextBox uses `<input type="text" />` elements in order to support all its features such as custom formats and multiple cultures.
-This will prevent the numeric keyboard from appearing on mobile devices with context-specific software keyboards.
+The Kendo UI NumericTextBox uses `<input type="text" />` elements. If the widget is initialized from an `<input type="number" />` element, it will switch the input type to `text`.
+This behavior is required in order to support comma (",") as a decimal separator in some non-"en-US" cultures. For the time being, browsers do not take into account the client's culture and
+always ignore values that contain a comma decimal separator.
 
-We recommend using a plain numeric input for mobile devices. Add a [`k-textbox`](/web/appearance-styling#primitives) CSS class to apply Kendo UI styling.
+A side effect from using a text input type is that it will prevent the numeric keyboard from appearing on mobile devices with context-specific software keyboards.
+
+If a numeric software keyboard is desired, there are two possible workarounds:
+
+* Use a plain numeric input for mobile devices and add a [`k-textbox`](/web/appearance-styling#primitives) CSS class to apply Kendo UI styling.
+* Change the input type back to `number` after the NumericTextBox is initialized. This is possible only for cultures that use a dot (".") as a decimal separator.
+
+        /* widget is initialized */
+        $("#my-numeric-textbox").kendoNumericTextBox({ /*...*/ });
+        
+        /* set the input type to "number" */
+        $("#my-numeric-textbox").attr("type", "number");
+        
+        /* or if the widget object is already available */
+        var numericTextBoxObject = $("#my-numeric-textbox").data("kendoNumericTextBox");
+        numericTextBoxObject.element.attr("type", "number");
