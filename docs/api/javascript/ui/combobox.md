@@ -841,7 +841,7 @@ A jQuery object of the visible input element, where the user types.
     var combobox = $("#combobox").data("kendoComboBox");
 
     var input = combobox.input;
-    <script>
+    </script>
 
 ### options `Object`
 An object, which holds the options of the widget.
@@ -855,7 +855,7 @@ An object, which holds the options of the widget.
     var combobox = $("#combobox").data("kendoComboBox");
 
     var options = combobox.options;
-    <script>
+    </script>
 
 ### list `jQuery`
 A jQuery object of the drop-down list element.
@@ -869,7 +869,7 @@ A jQuery object of the drop-down list element.
     var combobox = $("#combobox").data("kendoComboBox");
 
     var list = combobox.list;
-    <script>
+    </script>
 
 ### ul `jQuery`
 A jQuery object of the `ul` element, which holds the available options.
@@ -883,7 +883,7 @@ A jQuery object of the `ul` element, which holds the available options.
     var combobox = $("#combobox").data("kendoComboBox");
 
     var ul = combobox.ul;
-    <script>
+    </script>
 
 ## Methods
 
