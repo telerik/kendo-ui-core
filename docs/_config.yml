@@ -19,16 +19,16 @@ navigation:
         position: 1
     "intro/supporting":
         title: "Additional Resources"
-        position: 2       
+        position: 2
     "web":
         title: "Web Widgets"
         position: 3
     "dataviz":
         title: "Data Visualization"
-        position: 4        
+        position: 4
     "mobile":
         title: "Mobile Framework and Widgets"
-        position: 5        
+        position: 5
     "framework":
         title: "Framework and Utilities"
         position: 6
@@ -91,7 +91,7 @@ navigation:
         position: 11
     "troubleshoot":
         title: "Troubleshooting"
-        position: 12       
+        position: 12
     "accessibility":
         title: "Accessibility Support"
         position: 13
@@ -99,14 +99,14 @@ navigation:
         title: "How To"
         position: 200
     "*angular":
-        title: "AngularJS" 
+        title: "AngularJS"
         position: 1
     "*troubleshoot":
         title: "Troubleshooting"
         position: 201
     "framework/geometry":
-        title: "Geometry"        
-        position: 3       
+        title: "Geometry"
+        position: 3
     "*basics":
         title: "The Basics"
         position: 4
@@ -356,7 +356,7 @@ navigation:
 baseurl: /kendo-ui
 
 ## The Kendo UI version used
-cdnVersion: "2015.3.930"
+cdnVersion: "2015.3.1111"
 
 ## Assign layout and category per different paths
 defaults:
