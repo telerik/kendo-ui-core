@@ -148,6 +148,17 @@ public ActionResult Process(Telerik.Web.Spreadsheet.Workbook workbook)
 }
 ```
 
+## Troubleshooting
+
+### Processing fails for files with small amount of data
+The conversion and processing can hang or fail even if the spreadsheet file does not contain a lot of data.
+
+Even cells that appear empty will be processed if they have non-default styling.
+
+** Solution **
+
+Reset all cells outside the used range to the default borders, formatting and colors.
+
 ## Further Reading
 
 The full documentation of the [RadSpreadProcessing module](http://docs.telerik.com/devtools/wpf/controls/radspreadprocessing/overview) is available as a part of the [UI for WPF](http://docs.telerik.com/devtools/wpf/introduction).
