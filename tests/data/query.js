@@ -562,6 +562,70 @@ test("sort using two strings as arguments", function() {
     equal(result[2].name, "foo");
 });
 
+test("filter isempty on string", function() {
+    var data = [{ name: "" }, { name: "bar" }, { name: "foo"}];
+
+    var result = new Query(data).filter({ field: "name", operator: "isempty" }).toArray();
+
+    equal(result.length, 1);
+});
+
+test("filter isnotempty on string", function() {
+    var data = [{ name: "" }, { name: "bar" }, { name: "foo"}];
+
+    var result = new Query(data).filter({ field: "name", operator: "isnotempty" }).toArray();
+
+    equal(result.length, 2);
+});
+
+test("filter isnotnull on null string", function() {
+    var data = [{ name: null }, { name: "bar" }, { name: "foo"}];
+
+    var result = new Query(data).filter({ field: "name", operator: "isnotnull" }).toArray();
+
+    equal(result.length, 2);
+});
+
+test("filter isnotnull on undefined string", function() {
+    var data = [{ name: undefined }, { name: "bar" }, { name: "foo"}];
+
+    var result = new Query(data).filter({ field: "name", operator: "isnotnull" }).toArray();
+
+    equal(result.length, 2);
+});
+
+test("filter isnotnull on 0", function() {
+    var data = [{ name: 0 }, { name: "bar" }, { name: "foo"}];
+
+    var result = new Query(data).filter({ field: "name", operator: "isnotnull" }).toArray();
+
+    equal(result.length, 3);
+});
+
+test("filter isnull on 0", function() {
+    var data = [{ name: 0 }, { name: "bar" }, { name: "foo"}];
+
+    var result = new Query(data).filter({ field: "name", operator: "isnull" }).toArray();
+
+    equal(result.length, 0);
+});
+
+test("filter isnull on null string", function() {
+    var data = [{ name: null }, { name: "bar" }, { name: "foo"}];
+
+    var result = new Query(data).filter({ field: "name", operator: "isnull" }).toArray();
+
+    equal(result.length, 1);
+});
+
+test("filter isnull on undefined string", function() {
+    var data = [{ name: undefined }, { name: "bar" }, { name: "foo"}];
+
+    var result = new Query(data).filter({ field: "name", operator: "isnull" }).toArray();
+
+    equal(result.length, 1);
+});
+
 test("filter on null string", function() {
     var data = [{ name: null }, { name: "bar" }, { name: "foo"}];
 

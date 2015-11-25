@@ -23,7 +23,11 @@ var __meta__ = { // jshint ignore:line
             contains : "substringof",
             doesnotcontain: "substringof",
             endswith: "endswith",
-            startswith: "startswith"
+            startswith: "startswith",
+            isnull: "eq",
+            isnotnull: "ne",
+            isempty: "eq",
+            isnotempty: "ne"
         },
         odataFiltersVersionFour = extend({}, odataFilters, {
             contains: "contains"
@@ -100,7 +104,11 @@ var __meta__ = { // jshint ignore:line
                     filter = odataFiltersVersionFour[operator];
                 }
 
-                if (filter && value !== undefined) {
+                if (operator === "isnull" || operator === "isnotnull") {
+                    filter = kendo.format("{0} {1} null", field, filter);
+                } else if (operator === "isempty" || operator === "isnotempty") {
+                    filter = kendo.format("{0} {1} ''", field, filter);
+                } else if (filter && value !== undefined) {
                     type = $.type(value);
                     if (type === "string") {
                         format = "'{1}'";

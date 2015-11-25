@@ -1145,6 +1145,18 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 return a + ".indexOf('" + b + "') == -1";
+            },
+            isempty: function(a) {
+                return a + " === ''";
+            },
+            isnotempty: function(a) {
+                return a + " !== ''";
+            },
+            isnull: function(a) {
+                return a + " === null || " + a + " === undefined";
+            },
+            isnotnull: function(a) {
+                return a + " !== null && " + a + " !== undefined";
             }
         };
     })();
@@ -1245,7 +1257,10 @@ var __meta__ = { // jshint ignore:line
         isgreaterthanorequalto: "gte",
         greaterthanequal: "gte",
         ge: "gte",
-        notsubstringof: "doesnotcontain"
+        notsubstringof: "doesnotcontain",
+        isnull: "isnull",
+        isempty: "isempty",
+        isnotempty: "isnotempty"
     };
 
     function normalizeOperator(expression) {

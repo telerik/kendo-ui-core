@@ -325,6 +325,34 @@ test("ge", function() {
     }), "(d.foo >= 10)");
 });
 
+test("isempty", function() {
+    equal(compile({
+        logic: "and",
+        filters: [ { field: "foo", operator: "isempty" } ]
+    }), "(d.foo === '')");
+});
+
+test("isnotempty", function() {
+    equal(compile({
+        logic: "and",
+        filters: [ { field: "foo", operator: "isnotempty" } ]
+    }), "(d.foo !== '')");
+});
+
+test("isnull", function() {
+    equal(compile({
+        logic: "and",
+        filters: [ { field: "foo", operator: "isnull" } ]
+    }), "(d.foo === null || d.foo === undefined)");
+});
+
+test("isnotnull", function() {
+    equal(compile({
+        logic: "and",
+        filters: [ { field: "foo", operator: "isnotnull" } ]
+    }), "(d.foo !== null && d.foo !== undefined)");
+});
+
 test("startswith", function() {
     equal(compile({
         logic: "and",
