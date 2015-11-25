@@ -100,7 +100,7 @@ In some scenarios, the Grid scroll position may be reset when the widget is rebo
 
 Virtual scrolling is an alternative to paging. When enabled, the Grid will load data from the remote data source as the user scrolls vertically. Note that horizontal scrolling is not virtualized.
 
-> **Importnat**  
+> **Important**  
 > Either enable virtual scrolling, or paging. Do not apply both features at the same time.
 
 When you apply virtual scrolling, the HTML output is a little different as compared to the standard scrolling functionality:
@@ -143,7 +143,7 @@ Virtual scrolling relies on a fake scrollbar. Its size is not determined by the 
 > The page size of the Grid must be large-enough, so that the table rows do not fit in the scrollable data area. Otherwise the vertical virtual scrollbar will not be created.
 > The page size of the Grid must be over three times larger than the number of visible table rows in the data area.
 
-Due to height-related browser limitations, which cannot be avoided, virtual scrolling works with up to a couple of million records. The exact number of records depends on the browser. Note that if you use a row count that is larger than, can produce unexpected widget behavior, or Javascript errors.
+Due to height-related browser limitations, which cannot be avoided, virtual scrolling works with up to a couple of million records. The exact number of records depends on the browser. Note that if you use a row count that is larger than, can produce unexpected widget behavior, or Javascript errors. Adjusting the scroll position programmatically, so that a certain row becomes visible is not supported.
 
 When using mobile touch devices, which do not have a visible scrollbar that can be grabbed and dragged, virtual scrolling combined with a large number of data items, e.g. thousands, can impose a challenge to easily acccess all table rows, as this will require a great deal of touch scrolling. On the other hand, using virtual scrolling with a very small number of items, e.g. less than two hundred, does not make much sense either.
 
