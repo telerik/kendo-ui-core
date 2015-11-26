@@ -27,7 +27,7 @@ Now turn the `<div>` into a grid by selecting the `<div>` with a jQuery selector
 
     $("#grid").kendoGrid({
         columns: [ { title: "First Name", field: "firstName" },
-                   { title: "Last Name", field: "lastName"}
+                   { title: "Last Name", field: "lastName"},
                    { title: "Email", field: "email" } ]
     });
 
