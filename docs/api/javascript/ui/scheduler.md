@@ -4278,7 +4278,7 @@ The fields which can be used in the template are:
 
 * date - represents the major tick date.
 
-> The `dateHeaderTemplate` option is supported when [views.type](#configuration-views.type) is set to "day" or "week".
+> The `dateHeaderTemplate` option is supported when [views.type](#configuration-views.type) is set to "day", "week", "workweek" and "timeline" views.
 
 #### Example - set the date header template
     <div id="scheduler"></div>
@@ -4819,7 +4819,7 @@ The fields which can be used in the template are:
 
 * date - represents the major tick date.
 
-> The `majorTimeHeaderTemplate` option is supported when [views.type](#configuration-views.type) is set to "day" or "week".
+> The `majorTimeHeaderTemplate` option is supported when [views.type](#configuration-views.type) is set to "day", "week", "workweek" and "timeline" views.
 
 #### Example - set the major time header template
 
