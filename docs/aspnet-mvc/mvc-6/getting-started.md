@@ -71,14 +71,14 @@ This should add a similar line in your `project.json`:
             <link rel="stylesheet"
                   href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common-nova.min.css"
                   asp-fallback-href="~/lib/kendo-ui/styles/kendo.common-nova.min.css"
-                  asp-fallback-test-class="k-widget"
-                  asp-fallback-test-property="border-style" asp-fallback-test-value="solid" />
+                  asp-fallback-test-class="k-common-test-class"
+                  asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
 
             <link rel="stylesheet"
                    href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.nova.min.css"
                   asp-fallback-href="~/lib/kendo-ui/styles/kendo.nova.min.css"
-                  asp-fallback-test-class="k-icon"
-                  asp-fallback-test-property="opacity" asp-fallback-test-value="0.4" />
+                  asp-fallback-test-class="k-theme-test-class"
+                  asp-fallback-test-property="opacity" asp-fallback-test-value="0" />
         </environment>
         </head>
         <body>
