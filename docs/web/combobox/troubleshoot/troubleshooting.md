@@ -18,7 +18,9 @@ This page provides solutions for common issues you may encounter while working w
 
 The selected item of the widget is directly related to the data source view. If it does not contain the selected item, then the widget will remove its current value. This behavior is expected and the solution is to use separate data sources.
 
-###### Example - an issue
+The example below demonstrates a sample issue.
+
+###### Example
 
     var ds = new kendo.data.DataSource({ data: ["foo", "bar"] });
 
@@ -30,7 +32,9 @@ The selected item of the widget is directly related to the data source view. If 
         dataSource: ds
     });
 
-###### Example - the solution of the issue above
+The example below demonstrates the solution to the above issue.   
+ 
+###### Example
 
     var ds = new kendo.data.DataSource({ data: ["foo", "bar"] });
     ds.read();
