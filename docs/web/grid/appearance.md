@@ -123,7 +123,7 @@ When you apply virtual scrolling, the HTML output is a little different as compa
 
 Note that when you use virtual scrolling, the Grid data table is not placed inside a scrollable container. The scrollbar belongs to a separate `div.k-scrollbar` shown above. This matters in scenarios when the data rows should be manually scrolled to a particular position.
 
-The virtual scrolling behavior and implementation imposes limitations with regard to some other Grid features. Virtual scrolling cannot be used together with grouping, hierarchy, batch editing, and inline editing. Popup editing is supported, but without the functionality of adding new items.
+The virtual scrolling behavior and implementation imposes limitations with regard to some other Grid features. Virtual scrolling cannot be used together with grouping and hierarchy. CRUD operations are also not supported.
 
 Virtual scrolling relies on a fake scrollbar. Its size is not determined by the browser, but is calculated based on the average row height of the data that is already loaded. As a result, variable row heights may cause unexpected behavior, such as inability to scroll to the last rows on the last page. There are two ways to ensure that all table rows have the same heights: either disable text wrapping, or set an explicit large-enough row height:
 
