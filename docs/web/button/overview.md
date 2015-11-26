@@ -201,6 +201,47 @@ Image icons are applied via the `imageUrl` property and are displayed as a `img`
 
 In order to increase the accessibility of the widget when adding an `img` element manually, an `alt` attribute is required.
 
+### Font icons
+
+It is possible to use FontAwesome or other font icons inside the Kendo UI button by setting the required third-party CSS classes via the `spriteCssClass` property.
+However, this will cause a `k-sprite` CSS class to be rendered and it applies some font and size styles, which may interfere with the font icons styles.
+There are two ways to proceed in this case. One is to override the Kendo UI styles, which break the font icons:
+
+```html
+<link rel="stylesheet"
+    href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" />
+<style>
+    .k-button .fa {
+        font-size: inherit;
+        line-height: inherit;
+        width: auto;
+        height: auto;
+        margin-left: 0;
+    }
+</style>
+
+<button type="button" id="archiveButton">Archive</button>
+
+<script>
+    $("#archiveButton").kendoButton({
+        spriteCssClass: "fa fa-archive"
+    });
+</script>
+```
+
+The other option is to include the required HTML markup and CSS classes inside the Kendo UI Button directly, as template content. In this way a `k-sprite` class will not be rendered by the Button.
+
+```html
+<link rel="stylesheet"
+    href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" />
+
+<button type="button" id="archiveButton"><span class="fa fa-archive"></span> Archive</button>
+
+<script>
+    $("#archiveButton").kendoButton({});
+</script>
+```
+
 ## Existing Instance Reference
 
 Similar to all other Kendo UI widgets, you can access an existing Button instance via the `.data()` jQuery method, executed by the jQuery object of the originating element.
