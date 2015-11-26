@@ -96,5 +96,4 @@ Other articles on Kendo UI Spreadsheet:
 * [Data Source Binding]({% slug bind_todata_source_spreadsheet_widget %})
 * [Export to Excel]({% slug export_toexcel_spreadsheet_widget %})
 * [Server-Side Processing]({% slug serverside_processing_spreadsheet_widget %})
-* [Custom Functions]({% slug custom_functions_spreadsheet_widget %})
 * [Cell Formatting]({% slug cell_formatting_spreadsheet_widget %})

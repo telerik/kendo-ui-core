@@ -123,7 +123,6 @@ The Spreadsheet does not support the following options otherwise available in Ex
 
 Other articles on Kendo UI Spreadsheet:
 
-* [Custom Functions]({% slug custom_functions_spreadsheet_widget %})
 * [Store Data as JSON]({% slug loadand_saveas_json_spreadsheet_widget %})
 * [Export to Excel]({% slug export_toexcel_spreadsheet_widget %})
 * [Server-Side Processing]({% slug serverside_processing_spreadsheet_widget %})
