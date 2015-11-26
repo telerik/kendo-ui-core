@@ -17,8 +17,8 @@ position: 1
 The Kendo UI DropDownList widget can be initialized in three ways: 
 
 1. By using the `<option>` tag of an existing `<select>` element with defined data items.
-2. By binding the widget to a local data array and using the `<input>` element.
-3. By binding the widget to a remote data service and using the `<input>` element.
+2. By binding the widget to a local data array and using the `<input>` or `<select>` element.
+3. By binding the widget to a remote data service and using the `<input>` or `<select>` element.
 
 The DropDownList looks and operates consistently regardless of the initialization type you choose to apply.
 
