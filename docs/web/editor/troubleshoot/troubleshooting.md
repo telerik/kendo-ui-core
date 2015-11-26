@@ -2,7 +2,7 @@
 title: Common Issues
 page_title: Common Issues | Kendo UI Editor Troubleshooting
 description: "Learn how to deal with issues you may encounter while using the Kendo UI Editor widget."
-previous_url: /editor/troubleshooting
+previous_url: /web/editor/troubleshooting
 slug: troubleshooting_editor_widget
 ---
 
