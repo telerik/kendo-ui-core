@@ -14,23 +14,20 @@ position: 1
 
 ### Initialize the ComboBox 
 
-There are two ways to create a ComboBox:
+The Kendo UI ComboBox widget can be initialized in three ways: 
 
-1.  From a `<select>` element with HTML to define the list items
-2.  From an `<input>` element with databinding to define the list items
+1. By using the `<option>` tag of an existing `<select>` element with defined data items.
+2. By binding the widget to a local data array and using the `<input>` element.
+3. By binding the widget to a remote data service and using the `<input>` element.
 
 The ComboBox looks and operates consistently regardless of the initialization type you choose to apply.
 
-#### Use an `<input>` Element
-
-Initialize the ComboBox from an exisiting `<input>` element only after the DOM is fully loaded. It is recommended that initialization is done within the `$(document).ready()` statement.
-
 > **Important**  
-> The widget copies any styles and CSS classes from the input element to the visible input and the wrapper element.
+> * As ComboBox should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
+> 
+> * The widget copies any styles and CSS classes from the input element to the wrapper element and visible input.
 
-#### Use a `<select>` Element
-
-Initialize the ComboBox from an existing `<select>` element with a pre-defined structure:
+#### Initialize the ComboBox from an existing `<select>` element with defined data items
 
     <select id="comboBox">
         <option>Item 1</option>
@@ -44,9 +41,11 @@ Initialize the ComboBox from an existing `<select>` element with a pre-defined s
         });
     </script>
     
-#### Use a jQuery Selector
+#### Initialize the ComboBox by binding it to a local data array
 
-Initialize the ComboBox by using a jQuery selector:
+The ComboBox can be bound to local data arrays via the [DataSource component](/framework/datasource/overview) - an abstraction for local and remote data. Local arrays are appropriate for limited value options. 
+
+###### Example
 
     <input id="comboBox" />
 
@@ -63,11 +62,11 @@ Initialize the ComboBox by using a jQuery selector:
       });
     </script>
 
-## Data Binding
+#### Initialize the ComboBox by binding it to a remote data service   
+   
+The ComboBox can be bound to remote data arrays via the [DataSource component](/framework/datasource/overview) - an abstraction for local and remote data. Remote data binding is appropriate for larger data sets, so that items are loaded on-demand, when displayed. The DataSource can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
-The ComboBox can be bound to both local arrays and remote data service via the `DataSource` component<&mdash;>-</&mdash;>an abstraction for local and remote data. Local arrays are appropriate for limited value options, while remote data binding is better for larger data sets. With remote data-binding, items will be loaded on-demand, when they are displayed. The `DataSource` component can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
-
-###### Example - bind to a remote service
+###### Example
 
     <input id="comboBox" />
 
@@ -92,13 +91,13 @@ The ComboBox can be bound to both local arrays and remote data service via the `
 
 ## Templates
 
-The ComboBox uses Kendo UI templates to enable control over how the item and popup header is rendered. For a detailed description of the capabilities and syntax of the Kendo UI templates, please refer to the [Kendo UI template documentation](/framework/templates/overview).
+The ComboBox uses [Kendo UI templates](/framework/templates/overview) to provide full control over the way pop-up items are rendered. 
 
 ### Item Templates
 
-The ComboBox uses Kendo UI templates to control how pop-up items are rendered.
+The example below demonstrates how to define an item template.
 
-###### Example - use an item template
+###### Example 
 
     <input id="comboBox" />
     <!-- Template -->
@@ -127,9 +126,9 @@ The ComboBox uses Kendo UI templates to control how pop-up items are rendered.
 
 ### Header Templates
 
-The ComboBox allows you to render a pop-up header.
+The ComboBox allows you to render a pop-up header. The example below demonstrates how to define a header template.
 
-###### Example - define a header template
+###### Example
 
     <input id="comboBox" />
     <!-- Template -->
@@ -156,18 +155,9 @@ The ComboBox allows you to render a pop-up header.
         });
     </script>
 
-
-## Existing Instance Reference
-
-You can refer an existing ComboBox widget via [jQuery.data()](http://api.jquery.com/jQuery.data/):
-
-    <input id="comboBox" />
-
-    <script>
-        var comboBox = $("#comboBox").data("kendoComboBox");
-    </script>
-
-## Drop-Down List
+## Configuration
+    
+### Drop-Down List
 
 You can customize the width of a drop-down list and change its dimensions by using the jQuery `width()` method.
 
@@ -182,9 +172,19 @@ You can customize the width of a drop-down list and change its dimensions by usi
         combobox.list.width(400);
     </script>
 
-## `label` Element Support
+### `label` Element Support
 
 Because of its complex rendering, focusing the widget by using a `label` element requires additional implementation. For more information about how to do it, check [this Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
+
+## Existing Instance Reference
+
+You can refer an existing ComboBox widget via [jQuery.data()](http://api.jquery.com/jQuery.data/):
+
+    <input id="comboBox" />
+
+    <script>
+        var comboBox = $("#comboBox").data("kendoComboBox");
+    </script>
 
 ## See Also
 
@@ -194,7 +194,7 @@ Other articles on Kendo UI ComboBox:
 * [Virtualization]({% slug virtualization_kendoui_combobox_widget %})
 * [Cascading ComboBoxes]({% slug cascading_kendoui_combobox_widget %})
 * [Server Filtering]({% slug server_filtering_kendoui_combobox_widget %})
-* [How to Add Option Label Manually]({% slug howto_add_option_label_manually_combobox %})
+* [Troubleshooting]({% slug troubleshooting_common_issues_combobox_kendoui %})
 * [How to Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
 * [How to Configure Deferred Value Binding]({% slug howto_configure_deffered_value_binding_combobox %})
 * [How to Declaratively Initialize ComboBox with Templates]({% slug howto_declaratively_initialize_with_templates_combobox %})
@@ -211,5 +211,10 @@ Other articles on Kendo UI ComboBox:
 Articles on Kendo UI DropDownList:
 
 * [Overview]({% slug overview_kendoui_dropdownlist_widget %})
-* [Cascading DropDownLists]({% slug cascading_kendoui_combobox_widget %})
+* [Cascading DropDownLists]({% slug cascading_kendoui_dropdownlist_widget %})
 * [JavaScript API Reference](/api/javascript/ui/dropdownlist)
+
+Articles on Kendo UI MultiSelect:
+
+* [Overview]({% slug overview_kendoui_multiselect_widget %})
+* [JavaScript API Reference](/api/javascript/ui/multiselect)

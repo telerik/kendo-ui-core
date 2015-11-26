@@ -18,7 +18,9 @@ This page provides solutions for common problems you may encounter while working
 
 The selected item of the widget is directly related to the data source view. If it does not contain the selected item, then the widget will remove its current value. This behavior is expected and the solution is to use separate data sources.
 
-###### Example - an issue
+The example below demonstrates a sample issue.
+
+###### Example
 
     var ds = new kendo.data.DataSource({ data: ["foo", "bar"] });
 
@@ -30,7 +32,9 @@ The selected item of the widget is directly related to the data source view. If 
         dataSource: ds
     });
 
-###### Example - the solution of the issue above
+The example below demonstrates the solution to the above issue.   
+ 
+###### Example
 
     var ds = new kendo.data.DataSource({ data: ["foo", "bar"] });
     ds.read();
@@ -44,6 +48,26 @@ The selected item of the widget is directly related to the data source view. If 
     });
     
 ## See Also
+
+Other articles on Kendo UI MultiSelect:
+
+* [JavaScript API Reference](/api/javascript/ui/multiselect)
+* [Grouping Functionality]({% slug grouping_kendoui_multiselect_widget %})
+* [Virtualization]({% slug virtualization_kendoui_multiselect_widget %})
+* [How to Bind Values to Template]({% slug howto_bind_values_totemplate_multiselect %})
+* [How to Cascade from DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %})
+* [How to Create Cascading MultiSelects]({% slug howto_create_cascading_widgets_multiselect %})
+* [How to Create Scrollable Data Items]({% slug howto_create_scrollable_data_items_multiselect %})
+* [How to Filter Values in Widgets Sharing the Same Data]({% slug howto_filter_valuesin_widgetswith_shared_data_multiselect %})
+* [How to Preselect Items on Load in AngularJS]({% slug howto_preselect_itemson_load_angular_multiselect %})
+* [How to Preselect Items Using MVVM Binding]({% slug howto_preselect_items_byusing_mvvm_binding_multiselect %})
+* [How to Reorder Selected Items]({% slug howto_reorder_selected_items_multiselect %})
+* [How to Select All Values with Single Selection]({% slug howto_select_allvalues_witha_single_selection_multiselect %})
+* [How to Select or Deselect All Items]({% slug howto_select_and_deselect_allitems_multiselect %})
+* [How to Select the First Item on TAB]({% slug howto_select_thefirst_itemon_tab_multiselect %})
+* [How to Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
+* [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})
+* [Overview]({% slug overview_kendoui_multiselect_widget %})
 
 Other articles on troubleshooting:
 

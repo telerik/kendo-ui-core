@@ -16,4 +16,4 @@ Other articles on Kendo UI DropDownList:
 
 * [Overview]({% slug overview_kendoui_dropdownlist_widget %})
 * [Grouping Functionality]({% slug grouping_kendoui_combobox_widget %})
-* [Cascading DropDownLists]({% slug cascading_kendoui_combobox_widget %})
+* [Cascading DropDownLists]({% slug cascading_kendoui_dropdownlist_widget %})
