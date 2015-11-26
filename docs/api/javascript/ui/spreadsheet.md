@@ -308,6 +308,9 @@ Sets the cell font to italic, if set to `true`.
 ### sheets.rows.cells.bold `Boolean`
 Sets the cell font to bold, if set to `true`.
 
+### sheets.rows.cells.enable `Boolean`
+Disables the cell, if set to `false`.
+
 ### sheets.rows.cells.format `String`
 The format of the cell text.
 
