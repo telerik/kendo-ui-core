@@ -1,26 +1,29 @@
 ---
 title: Overview
-page_title: Summary of Kendo UI Notification functionality
-description: Find out how to use the Kendo UI Notification widget
+page_title: Overview | Kendo UI Notification Widget
+description: "Learn how to initialize the Kendo UI Notification widget and customize it functionalities."
+slug: overview_kendoui_notification_widget
+position: 1
 ---
 
 # Notification Overview
 
-The **Kendo UI Notification** provides a styled UI widget with arbitrary content, which can provide information to the user on various occasions.
+[Kendo UI Notification widget](http://demos.telerik.com/kendo-ui/notification/index) provides a styled UI widget with arbitrary content, which can provide information to the user on various occasions.
 
-*It is assumed that the reader of this page is familiar with the [fundamental Kendo UI widget concepts](/widgets).*
+> **Important**  
+> The content of this page is intended to users that are familiar with the [fundamental Kendo UI widget concepts](/widgets).
 
 ## Getting Started
 
-The **Notification** widget can be initialized from any element, because it does not manipulate the element's content.
-The element **will be hidden** if the widget will be used with popup notifications, or if static notifications will **not** be appended to the Notification element.
-In these two cases it is assumed that the element will not be needed for anything.
+### Initialize the Notification
 
-On the other hand, if the **Notification** element will be used to contain static (non-popup) notifications, then its tag is recommended to be one,
-which allows nesting the elements inside the notifications' template. For example, inline elements (`span`, `a`, `em`, etc.) cannot contain block
-elements (`div`, `p`, `ul`, `li`, headings, etc.). Using a `div` element for the widget is OK.
+Kendo UI Notification can be initialized from any element, because it does not manipulate the element's content. 
 
-### Example - initialization and basic usage
+The element will be hidden if the widget is used with popup notifications, or if static notifications are not appended to the Notification element. In these two cases it is assumed that the element will not be needed. However, if the Notification element is meant to contain static (non-popup) notifications, then its tag is recommended to be such so as to allow nesting the elements inside the notifications' template. For example, inline elements, such as `<span>`, `<a>`, `<em>`, etc. cannot contain block elements, such as `<div>`, `<p>`, `<ul>`, `<li>`, headings, etc. It is perfectly fine to use a `<div>` element for initiating the widget.
+
+The example below demonstrates how to initialize the Notification and what its basic usage is.
+
+###### Example
 
     <span id="notification"></span>
 	
@@ -38,16 +41,18 @@ elements (`div`, `p`, `ul`, `li`, headings, etc.). Using a `div` element for the
         notificationWidget.show("foo");
 	});
 	</script>
+    
+## Configuration
 
-## Notification Types
+### Types
 
-The **Notification** widget provides several built-in notification types: `"info"`, `"success"`, `"warning"` and `"error"`.
-The benefit of having different notification types is the ability to use different templates and looks for each type.
-The built-in types provide ready-to-use shorthand methods for displaying, as well as built-in templates and styling.
-The shorthand method names match the listed notification types. If no type is specified when a notification is shown, `"info"` is assumed.
-An unlimited amount of custom notification types and corresponding templates can be defined. For further details, see [Templates](#templates).
+Kendo UI Notification provides the following built-in notification types: `"info"`, `"success"`, `"warning"` and `"error"`. By using them, you can apply different templates and looks for each type. The built-in types provide ready-to-use shorthand display methods and styling functionalities. The shorthand method names match the listed notification types. If you do not specify a notification type, the widget assumes that the default `"info"` should be invoked and will display it. You can also defines an unlimited amount of custom notification types and corresponding templates. 
 
-### Example - built-in notification types
+For more information on Kendo UI Templates, refer to [this help article](#templates).
+
+The example below demonstrates how to apply built-in notification types. 
+
+###### Example
 
     <span id="notification"></span>
 	
@@ -71,18 +76,19 @@ An unlimited amount of custom notification types and corresponding templates can
 	});
 	</script>
 
-## Hiding the notifications
+### Hide Notifications
 
-By default, the notifications remain visible for 5 seconds and then disappear. Clicking anywhere on them hides them right away.
-If this is not intuitive enough for the users, a visible close button can be displayed. Hide delay is configurable in milliseconds. A zero value disables automatic hiding.
+By default, Kendo UI Notifications remain visible for 5 seconds and then disappear. Clicking anywhere on a notification hides it right away. You can delay hiding, which is an option configurable in milliseconds. If you set a zero value, the automatic hiding is disabled. After its hiding animation is completed, the dismissed notification is removed from the DOM. 
 
-After its hiding animation is complete, the dismissed notification is removed from the DOM.
+If you want to make the notification more intuitive for the end user, the widget allows for displaying a visible **Close** button. 
 
-If needed, automatic hiding by clicking anywhere on the notifications can be disabled. In this case the notifications can be dismissed only with the button, if it is present.
-In addition, the ability to hide a notification manually can be postponed. The benefit of this feature is to prevent accidental hiding of notifications, which have just appeared.
-By default, postponing is disabled.
+The default behavior of hiding a notification by clicking anywhere on it can be disabled. In this case, the notification can be dismissed only by clicking the **Close** button, if present. 
 
-### Example - manage hide settings
+The option of hiding a notification manually can also be postponed, which is useful if you want to prevent users from accidentally hiding a notification, which has just appeared. Note that by default the option to postpone the hiding of a notification is disabled.
+
+The example below demonstrates how to manage the hiding settings of a notification.
+
+###### Example
 
     <span id="notification"></span>
 	
@@ -101,22 +107,21 @@ By default, postponing is disabled.
 	});
 	</script>
 
-## Positioning and stacking
+### Position and Stack Notifications
 
-### Popup messages
+#### Popup messages
 
-By default, the **Notification** widget creates popups, which overlay the other page content. If no position settings are defined,
-the first popup will be displayed near the bottom-right corner of the browser viewport and subsequent popups will stack upwards.
-Positioning and stacking can be controlled independently. If no stacking setting is defined, the popups will stack upwards or downwards, depending on the positioning settings
-(e.g. popups which display at the top of the viewport will stack downwards and vice versa). In most cases automatic stacking is good enough.
-Defining stacking explicitly is needed mostly when it should be leftward or rightward, which is a little uncommon.
+By default, Kendo UI Notification creates popups, which overlay the other page content. If you do not define any position settings, the first popup will be displayed near the bottom-right corner of the browser viewport and subsequent popups will stack upwards. 
 
-By default, popups are *pinned*, i.e. when the page is scrolled, they do not move. This is achieved by applying a `position:fixed` style to the popups.
-When the popups are not pinned, they use `position:absolute`.
+You can independently control positioning and stacking. If you do not define any stacking settings, the popups will stack upwards or downwards, depending on the positioning settings. For example, popups displayed at the top of the viewport will stack downwards and vice versa. The automatic settings of the stacking functionality comply with a common preference among users. However, you can render leftward or rightward stacking by explicitly defining the respective settings.  
 
-If the popup content will vary and stacking is likely to occur, it is a good idea to define explicit dimensions, so that the popups are aligned and look better when stacked next to one another.
+Popups are pinned by default, which means that they do not change their position when users scroll the page. The pinned functionality is achieved by applying a `position:fixed` style to the popups. If you want to let the popups move together with the scrolled page, use the `position:absolute` style.
 
-### Example - manage position, stacking and size
+If the popup content is expected to vary and stacking is likely to occur, it is a good idea to define explicit dimensions. In this way, the popups are aligned and look better when stacked next to one another.
+
+The example below demonstrates how to manage the positioning, stacking, and sizing functionalities of notifications. 
+
+###### Example
 
     <span id="notification"></span>
 	
@@ -139,23 +144,20 @@ If the popup content will vary and stacking is likely to occur, it is a good ide
 	});
 	</script>
 
-There may be cases when the popup notifications appear too quickly or become too much on the screen and there is no more available space.
-In this case the subsequent popups will appear outside of the visible viewport area and will be inaccessible (if pinned).
-If such scenarios are likely to occur, it is recommended to consider using shorter hide delay or static notifications (see below), for better usability.
+There may be cases when the popup notifications appear too quickly or occupy too much space on the screen, so that there is not enaou. In such cases the subsequent popups will appear outside of the visible viewport area and will be inaccessible (if pinned). If such scenarios are likely to occur, it is recommended to consider using shorter hide delay or static notifications (see below), for better usability. 
 
-Stacking works with the help of a GUID, which is generated by the widget upon initialization and appended as a CSS class to each notification element.
-In this way every **Notification** instance can recognize and manage its own currently visible notifications independently.
+Stacking works with the help of a Globally Unique Identifier (GUID), which is generated by the widget upon initialization and appended as a CSS class to each notification element. In this way every Notification instance can recognize and manage its own currently visible notifications independently.
 
-> Using several **Notification** widget instances, which display notifications at the same place on the page is not recommended, because the notifications from the multiple instances will overlap.
+> **Important**  
+> Using several Notification widget instances, which display notifications at the same place on the page, is not recommended because the notifications from the multiple instances will overlap.
 
-### Static messages
+#### Static messages
 
-The **Notification** widget can also display "static" notifications, which do not overlay other elements, but instead take part in the so-called *normal flow* of the page content.
-In this case positioning settings do not make sense and are ignored. When static notifications are used, the stacking direction can only be set to `down` (default) or `up`,
-depending on whether new messages should appear after or before existing ones. Static notifications are displayed, if a target container is specified.
-One widget instance can display either popup or static notifications, not both at the same time.
+Kendo UI Notification also allows for displaying static notifications, which do not overlay other elements, but instead take part in the so-called normal flow of the page content. In such cases, the positioning settings are ignored as they do not make sense. When you use static notifications, the stacking direction can only be set to `down`, which is the default setting, or `up`, depending on whether new messages should appear after or before the existing ones. Static notifications are displayed if a target container is specified. One widget instance can display either popup, or static notifications, but not both of them at one time.
 
-### Example - enable static notifications
+The example below demonstrates how to enable static notifications. 
+
+###### Example
 
     <div id="notification"></div>
 	
@@ -169,16 +171,44 @@ One widget instance can display either popup or static notifications, not both a
         });
 	});
 	</script>
+    
+#### Change the settings for specific notification messages
+
+It is possible for a single Notification widget instance to display different messages with different settings, e.g. messages related to automatic hiding, hide timeouts, etc. To apply the desired configuration options, use the [`setOptions`](/api/javascript/ui/widget#methods-setOptions) method. The new options will apply to all messages displayed later on. To restore or change the widget settings again, use `setOptions` as many times as necessary.
+
+###### Example
+
+    <span id="notification"></span>
+    <script>
+        var notificationWidget = $("#notification").kendoNotification({
+            autoHideAfter: 1000
+        }).data("kendoNotification");
+
+        notificationWidget.show("foo text"); // message will auto hide after 1 second
+        
+        notificationWidget.setOptions({
+            autoHideAfter: 2000
+        });
+        
+        notificationWidget.show("bar text"); // message will auto hide after 2 seconds
+    </script>
+    
+## Notification API 
+
+### Events
+
+Kendo UI Notification exposes two events: `show` and `hide`. The `show` event is fired when the showing animation starts. The `hide` event is fired when the hiding animation starts.
+
+For more information on the configuration options, refer to [Kendo UI Notification API section](/api/javascript/ui/notification).
 
 ## Templates
 
-*This documentation section assumes that you are familiar with [Kendo UI templates](/framework/templates/overview)*.
+> **Important**  
+> The content of this section is intended to users that are familiar with [Kendo UI templates](/framework/templates/overview).
 
-The **Notification** widget allows configuring multiple templates. Each template will be used together with its corresponding [notification type](#notification-types) (either build-in or custom).
-If you define a custom template for a built-in notification type, you will no longer be able to use the corresponding built-in template,
-but you will still be able to use the shorthand show methods, as demonstrated below.
+Kendo UI Notification allows configuring multiple templates. Each template will be used together with its corresponding [notification type](#configuration-Types), either build-in, or custom. If you define a custom template for a built-in notification type, you will no longer be able to use the corresponding built-in template, but you will still be able to use the shorthand show methods, as demonstrated in the example below.
 
-### Example - template usage
+###### Example
 
     <span id="notification"></span>
 	
@@ -218,44 +248,22 @@ but you will still be able to use the shorthand show methods, as demonstrated be
         }, "timeAlert");
 	});
 	</script>
+    
+## HTML Output
 
-## Change settings for specific notification messages
-
-It is possible for a single Notification widget instance to display different messages with different settings, e.g. ones related to automatic hiding, hide timeouts, etc.
-In order to achieve that, use the [`setOptions`](/api/javascript/ui/widget#methods-setOptions) method to apply the desired configuration options.
-The new options will apply to all messages displayed later on. To restore or change the widget settings again, use `setOptions` as many times, as necessary.
-
-    <span id="notification"></span>
-    <script>
-        var notificationWidget = $("#notification").kendoNotification({
-            autoHideAfter: 1000
-        }).data("kendoNotification");
-
-        notificationWidget.show("foo text"); // message will auto hide after 1 second
-        
-        notificationWidget.setOptions({
-            autoHideAfter: 2000
-        });
-        
-        notificationWidget.show("bar text"); // message will auto hide after 2 seconds
-    </script>
-
-## HTML output
-
-Each notification is rendered inside the following wrapper element:
+Each notification is rendered inside the `<div>` wrapper element:
 
     <div class="k-widget k-notification k-notification-TYPE" data-role="popup">
         <!-- ... default or custom template content ... -->
     </div>
 
-`TYPE` denotes the [notification type](#notification-types) (either a built-in or a custom one), for example `k-notification-info` or `k-notification-success`, etc.
+`TYPE` denotes the [notification type](#configuration-Types), either built-in, or custom, for example `k-notification-info` or `k-notification-success`, etc.
 
-When the widget displays popups, the above `div.k-notification` is nested inside a positioned (`absolute` or `fixed`) `div.k-animation-container`,
-which is an element that wraps every Kendo UI popup.
+When the widget displays popups, the above `div.k-notification` is nested inside a positioned, either `absolute`, or `fixed`, `div.k-animation-container`, which is an element that wraps every Kendo UI popup.
 
 When the widget displays static notifications, the above `div.k-notification` is a child of the element specified by the widget's [`appendTo`](#configuration-appendTo) setting.
     
-The default template of the **Notification** widget is shown below. This markup is rendered inside the `div.k-notification` element.
+The default template of Kendo UI Notification is shown below. This markup is rendered inside the `div.k-notification` element.
 
     <div class="k-notification-wrap">
         <span class="k-icon k-i-note">#=typeIcon#</span>
@@ -265,18 +273,27 @@ The default template of the **Notification** widget is shown below. This markup 
 
 ## RTL Support
 
-Proper right-to-left support for the popup notifications (when using the built-in notification templates) requires the originating element
-of the Notification widget to be a descendant of an element with a `k-rtl` class. Static notifications using built-in templates should also be descendants of such a `.k-rtl` element.
+Proper right-to-left support for the popup notifications, when using the built-in notification templates, requires the originating element of the Notification widget to be a descendant of an element with a `k-rtl` class. Static notifications using built-in templates should also be descendants of such a `.k-rtl` element.
 
-For more information, please refer to the [general RTL Support article](http://docs.telerik.com/kendo-ui/web/appearance-rtl).
+For more information on right-to-left language support, refer to the [general RTL Support help article](http://docs.telerik.com/kendo-ui/web/appearance-rtl).
 
-## Events
+## Reference 
 
-The **Notification** widgets exposes two events - `show` and `hide`. The `show` event is fired when the showing animation starts. The `hide` event is fired when the hiding animation starts.
+### Existing Instances
 
-## Accessing the Notification instance
+Similar to all other Kendo UI widgets, an existing Notification instance is accessed via the `.data("kendoNotification")` jQuery method, executed by the jQuery object of the originating element. 
 
-Similar to all other Kendo UI widgets, an existing **Notification** instance is accessed via the `.data("kendoNotification")` jQuery method, executed by the jQuery object of the originating element.
-See [Getting reference to a Kendo UI widget](/widgets#getting-reference-to-a-kendo-ui-widget).
+For detailed information on how to get a reference to a Kendo UI widget, see [this help topic](/widgets#getting-reference-to-a-kendo-ui-widget). 
 
-For further reading and related information, please refer to the [Notification API](/api/web/notification/).
+For further reading on Kendo UI Notification settings, refer to [Kendo UI Notification API](/api/web/notification/).
+
+## See Also
+
+Other articles on Kendo UI Notification:
+
+* [JavaScript API Reference](/api/javascript/ui/notification)
+* [How to Move Popup Notifications on Window Resize]({% slug howto_move_popup_notifications_onwindow_resize_notification %})
+* [How to Stack Static Notifications to the Left or Right]({% slug howto_stack_static_tothe_leftor_right_notification %})
+* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/notification/overview)
+* [Overview of the JSP Tag](/jsp/tags/notification/overview)
+* [Overview of the PHP Class](/php/widgets/notification/overview)

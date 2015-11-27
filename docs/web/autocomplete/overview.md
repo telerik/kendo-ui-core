@@ -186,7 +186,9 @@ The AutoComplete widget provides the rendering of a pop-up header.
         });
     </script>
 
-## Drop-Down List
+## Configuration
+
+### Drop-Down List
 
 You can customize the width of a drop-down list and change its dimensions by using the jQuery width() method.
 

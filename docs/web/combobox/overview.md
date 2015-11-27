@@ -176,7 +176,9 @@ You can customize the width of a drop-down list and change its dimensions by usi
 
 Because of its complex rendering, focusing the widget by using a `label` element requires additional implementation. For more information about how to do it, check [this Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
 
-## Existing Instance Reference
+## Reference 
+
+### Existing Instances
 
 You can refer an existing ComboBox widget via [jQuery.data()](http://api.jquery.com/jQuery.data/):
 

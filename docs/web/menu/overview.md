@@ -159,7 +159,9 @@ Once a menu group is opened, the `ul.k-group` element is wrapped by a `div.k-ani
         </div>
     </li>
 
-## Menu Animations
+## Configuration
+
+### Menu Animations
 
 By default, the Menu uses a slide animation to expand sub-items on a mouse hover event. Animations, along with the animation style and delay, can be customized by using configuration properties. You can also configure Menu items to open on click instead of on hover.
 
@@ -179,7 +181,7 @@ The example below demonstrates how to change Menu animation and open behavior.
         });
     </script>
 
-## Dynamic Items
+### Dynamic Items
 
 [The Kendo UI Menu API](/api/javascript/ui/menu) provides methods for dynamically adding or removing Menu items. 
 
