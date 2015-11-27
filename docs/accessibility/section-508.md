@@ -1,7 +1,8 @@
 ---
 title: Section 508
-page_title: Section 508
-description: "Detailed description of the Section 508 Accesibility support provided by Kendo UI controls."
+page_title: Section 508 | Kendo UI Accessibility Support
+description: "Learn more about the Section 508 Accesibility support provided by Kendo UI controls."
+slug: section508_accessibility_support
 position: 2
 ---
 
@@ -40,3 +41,14 @@ table td:nth-child(2) {
     white-space:nowrap;
 }
 </style>
+
+## See Also
+
+Other articles on Kendo UI Accessibility support:
+
+* [Overview of Web Accessibility Standards]({% slug overview_accessibility_support_kendoui %})
+* [Charts]({% slug charts_accessibility_support %})
+* [High-Contrast Theme]({% slug high_contrast_theme_accessibility_support %})
+* [Keyboard Shortcuts]({% slug keyboard_shortcuts_accessibility_support %})
+* [Right-to-Left Languages]({% slug right_toleft_languages_accessibility_support %})
+* [WAI-ARIA]({% slug wai_aria_accessibility_support %})
