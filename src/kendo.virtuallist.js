@@ -334,6 +334,8 @@ var __meta__ = { // jshint ignore:line
                                         .bind(CHANGE, that._rangeChangeHandler)
                                         .bind("reset", that._resetRangeHandler);
 
+            that.setDSFilter(that.dataSource.filter());
+
             if (that.dataSource.view().length !== 0) {
                 that.refresh();
             } else if (that.options.autoBind) {

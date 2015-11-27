@@ -1504,6 +1504,22 @@
         });
     });
 
+    asyncTest("isFiltered method returns true if source is bound with filtering", 1, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+
+        virtualList.one("listBound", function() {
+            start();
+
+            ok(virtualList.isFiltered());
+        });
+
+        asyncDataSource.filter({
+            field: "value",
+            operator: "eq",
+            value: 2
+        });
+    });
+
     asyncTest("isFiltered method returns false if applied filter is removed", 1, function() {
         var virtualList = new VirtualList(container, virtualSettings);
 
