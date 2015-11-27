@@ -1282,6 +1282,8 @@ var __meta__ = { // jshint ignore:line
                 that._refreshHandler = proxy(that.refresh, that);
             }
 
+            that.setDSFilter(dataSource.filter());
+
             that.dataSource = dataSource.bind(CHANGE, that._refreshHandler);
             that._fixedHeader();
         },

@@ -36,12 +36,6 @@
         equal(element.attr("role"), "listbox");
     });
 
-    test("StaticList sets overflow style to the content element", function() {
-        var list = new StaticList(element);
-
-        equal(list.content.css("overflow"), "auto");
-    });
-
     test("StaticList builds a template", function() {
         var list = new StaticList(element, {
             template: "test"
