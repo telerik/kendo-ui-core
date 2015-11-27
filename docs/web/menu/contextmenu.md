@@ -72,7 +72,9 @@ Kendo UI ContextMenu can be initialized in two ways:
 
 The initialization of the ContextMenu must occur after the DOM is fully loaded. It is recommended that you initialize the Menu within a `$(document).ready()` statement.
 
-## ContextMenu Animations
+## Configuration
+
+### ContextMenu Animations
 
 By default, the ContextMenu uses a slide animation to expand sub-items on a mouse hover event. Animations, along with the animation style and delay, can be customized by using configuration properties. You can also confgure Menu items to open on click instead of on hover, and ContextMenu can also be configured to use a different open event than the default `contextmenu` (right click).
 
@@ -94,7 +96,7 @@ The example below demonstrates how to change ContextMenu animation and open beha
         });
     </script>
 
-## Dynamic Items
+### Dynamic Items
 
 [The Kendo UI ContextMenu API](/api/javascript/ui/contextmenu) provides methods for dynamically adding or removing Menu items. 
 

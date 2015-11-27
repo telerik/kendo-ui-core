@@ -70,7 +70,9 @@ This approach allows you to initialize multiple Button widgets at once, but with
 	});
 	</script>
 
-## Enable or Disable Buttons
+## Configuration
+
+### Enable or Disable Buttons
 
 The business logic of an application often requires a certain button to be temporarily disabled or enabled. Kendo UI Button can be configured to be initially disabled via its `enable` property or by initializing it from an element, which has a `disabled="disabled"` HTML attribute. The Button can also be disabled or enabled at any time with Javascript by using its `enable()` method with a boolean argument.
 
@@ -242,11 +244,15 @@ The other option is to include the required HTML markup and CSS classes inside t
 </script>
 ```
 
-## Existing Instance Reference
+## Reference 
+
+### Existing Instances
 
 Similar to all other Kendo UI widgets, you can access an existing Button instance via the `.data()` jQuery method, executed by the jQuery object of the originating element.
 
-###### Example - access a Button instance
+The exampel below demonstrates how to access a Button instance.
+
+###### Example
 
 	<button type="button" id="editButton">Edit</button>
 
@@ -262,7 +268,9 @@ Similar to all other Kendo UI widgets, you can access an existing Button instanc
 
 The `kendoButton()` method returns the same jQuery object that has been used to execute it. That is why, if the Button is to be accessed afterwards, it is a good idea to save it at the time of initialization.
 
-###### Example - save and access a reference to a Button instance
+The example below demonstrates how to save and access a reference to a Button instance.
+
+###### Example
 
 	<button type="button" id="editButton">Edit</button>
 	<button type="button" id="deleteButton">Delete</button>
@@ -285,7 +293,9 @@ For further reading and related information, please refer to the [Button API](/a
 
 Kendo UI Button can be used for creating different style of buttons, like the Floating Action Button from the Material Design theme.
 
-###### Example - create a Floating Action Button
+The example below demonstrates how to create a Floating Action Button.
+
+###### Example
 
     <button id="primaryTextButton" class="k-primary"></button>
     <script>

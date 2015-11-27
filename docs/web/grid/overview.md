@@ -158,11 +158,15 @@ For more information on the layout features avaialbe in the Grid, refer to:
 
 * [Appearance of the Grid]({% slug appearance_kendoui_grid_widget %})
 
-## Existing Instance Reference
+## Reference 
+
+### Existing Instances
 
 Reference an existing Grid instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference has been established, use the [Grid API](/api/javascript/ui/grid) to control its behavior.
 
-###### Example - access an existing Grid instance
+The example below demonstrates how to access and existing Grid instance.
+
+###### Example
 
     var grid = $("#grid").data("kendoGrid");
 
