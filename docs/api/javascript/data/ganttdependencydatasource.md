@@ -6,7 +6,7 @@ description: Learn more about the configuration of Kendo UI GanttDependencyDataS
 
 # kendo.data.GanttDependencyDataSource
 
-The dependencies data source used by the [kendo.ui.Gantt](/api/web/gantt) widget.
+The dependencies data source used by the [kendo.ui.Gantt](/api/javascript/ui/gantt) widget.
 Inherits from [kendo.data.DataSource](/api/framework/datasource). The GanttDependencyDataSource contains instances of the
 [kendo.data.GanttDependency](/api/framework/ganttdependency) class.
 
