@@ -343,8 +343,8 @@ The logical operation to use when the `filter.filters` option is set. The suppor
 
 ### filter.operator `String`
 
-The filter operator (comparison). The supported operators are: "eq" (equal to), "neq" (not equal to), "lt" (less than), "lte" (less than or equal to), "gt" (greater than), "gte" (greater than or equal to),
-"startswith", "endswith", "contains". The last three are supported only for string fields.
+The filter operator (comparison). The supported operators are: "eq" (equal to), "neq" (not equal to), "isnull" (is equal to null), "isnotnull" (is not equal to null), "lt" (less than), "lte" (less than or equal to), "gt" (greater than), "gte" (greater than or equal to),
+"startswith", "endswith", "contains", "isempty", "isnotempty". The last five are supported only for string fields.
 
 #### Example - set the filter operator
 
