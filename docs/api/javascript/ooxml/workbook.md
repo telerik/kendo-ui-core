@@ -308,6 +308,50 @@ Sets the background color of the cell. Supports hex CSS-like values that start w
     });
     </script>
 
+### sheets.rows.cells.borderBottom `Object`
+The style information for the bottom border of the cell.
+
+### sheets.rows.cells.borderBottom.color `String`
+The bottom border color of the cell.
+
+Many standard CSS formats are supported, but the canonical form is "#ccff00".
+
+### sheets.rows.cells.borderBottom.size `String`
+The width of the border in pixels.
+
+### sheets.rows.cells.borderLeft `Object`
+The style information for the left border of the cell.
+
+### sheets.rows.cells.borderLeft.color `String`
+The left border color of the cell.
+
+Many standard CSS formats are supported, but the canonical form is "#ccff00".
+
+### sheets.rows.cells.borderLeft.size `String`
+The width of the border in pixels.
+
+### sheets.rows.cells.borderTop `Object`
+The style information for the top border of the cell.
+
+### sheets.rows.cells.borderTop.color `String`
+The top border color of the cell.
+
+Many standard CSS formats are supported, but the canonical form is "#ccff00".
+
+### sheets.rows.cells.borderTop.size `String`
+The width of the border in pixels.
+
+### sheets.rows.cells.borderRight `Object`
+The style information for the right border of the cell.
+
+### sheets.rows.cells.borderRight.color `String`
+The right border color of the cell.
+
+Many standard CSS formats are supported, but the canonical form is "#ccff00".
+
+### sheets.rows.cells.borderRight.size `String`
+The width of the border in pixels.
+
 ### sheets.rows.cells.bold `Boolean` *(default: false)*
 
 Setting it to `true` makes the cell value bold.
