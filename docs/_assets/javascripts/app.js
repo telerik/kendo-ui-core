@@ -461,7 +461,7 @@ $(function(){
         $("#page-inner-content").toggleClass("move-inner-content");
     });
 
-    $("body").find(".prettyprint[lang=html]").each(function() {
+    $("body").find(".prettyprint[data-lang=html]").each(function() {
         if (this.parentNode.className.indexOf("k-content") < 0) {
             dojoApi.addButtons(this);
         }
