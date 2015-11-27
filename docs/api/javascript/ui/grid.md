@@ -3063,6 +3063,106 @@ The text of the "not equal" filter operator.
     });
     </script>
 
+### filterable.operators.string.isnull `String` *(default: "Is null")*
+
+The text of the "isnull" filter operator.
+
+#### Example - set the string "isnull" operator
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" }
+      ],
+      dataSource: [
+        { name: "Jane Doe" },
+        { name: "John Doe" }
+      ],
+      filterable: {
+        operators: {
+          string: {
+            isnull: "Null"
+          }
+        }
+      }
+    });
+    </script>
+
+### filterable.operators.string.isnotnull `String` *(default: "Is not null")*
+
+The text of the "isnotnull" filter operator.
+
+#### Example - set the string "isnotnull" operator
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" }
+      ],
+      dataSource: [
+        { name: "Jane Doe" },
+        { name: "John Doe" }
+      ],
+      filterable: {
+        operators: {
+          string: {
+            isnotnull: "Not null"
+          }
+        }
+      }
+    });
+    </script>
+
+### filterable.operators.string.isempty `String` *(default: "Is empty")*
+
+The text of the "isempty" filter operator.
+
+#### Example - set the string "isempty" operator
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" }
+      ],
+      dataSource: [
+        { name: "Jane Doe" },
+        { name: "John Doe" }
+      ],
+      filterable: {
+        operators: {
+          string: {
+            isempty: "Empty"
+          }
+        }
+      }
+    });
+    </script>
+
+### filterable.operators.string.isnotempty `String` *(default: "Is not empty")*
+
+The text of the "isnotempty" filter operator.
+
+#### Example - set the string "isnotempty" operator
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" }
+      ],
+      dataSource: [
+        { name: "Jane Doe" },
+        { name: "John Doe" }
+      ],
+      filterable: {
+        operators: {
+          string: {
+            isnotempty: "Not empty"
+          }
+        }
+      }
+    });
+    </script>
+
 ### filterable.operators.string.startswith `String` *(default: "Starts with")*
 
 The text of the "starts with" filter operator.
@@ -3276,6 +3376,78 @@ The text of the "not equal" filter operator.
         operators: {
           number: {
             neq: "Not equal to"
+          }
+        }
+      }
+    });
+    </script>
+
+### filterable.operators.number.isnull `String` *(default: "Is null")*
+
+The text of the "isnull" filter operator.
+
+#### Example - set the number "isnull" operator
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ],
+        schema: {
+          model: {
+            fields: {
+              age: { type: "number" }
+            }
+          }
+        }
+      },
+      filterable: {
+        operators: {
+          number: {
+            isnull: "Null"
+          }
+        }
+      }
+    });
+    </script>
+
+### filterable.operators.number.isnotnull `String` *(default: "Is not null")*
+
+The text of the "isnotnull" filter operator.
+
+#### Example - set the number "isnotnull" operator
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+        data: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ],
+        schema: {
+          model: {
+            fields: {
+              age: { type: "number" }
+            }
+          }
+        }
+      },
+      filterable: {
+        operators: {
+          number: {
+            isnotnull: "Not null"
           }
         }
       }
@@ -3535,6 +3707,76 @@ The text of the "not equal" filter operator.
     });
     </script>
 
+### filterable.operators.date.isnull `String` *(default: "Is null")*
+
+The text of the "isnull" filter operator.
+
+#### Example - set the date "isnull" operator
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "date", format: "{0:yyyy-MM-dd}" }
+      ],
+      dataSource: {
+        data: [
+          { date: kendo.parseDate("2000-10-10") },
+          { date: new Date() }
+        ],
+        schema: {
+          model: {
+            fields: {
+              date: { type: "date" }
+            }
+          }
+        }
+      },
+      filterable: {
+        operators: {
+          date: {
+            isnull: "Null"
+          }
+        }
+      }
+    });
+    </script>
+
+### filterable.operators.date.isnotnull `String` *(default: "Is not null")*
+
+The text of the "isnotnull" filter operator.
+
+#### Example - set the date "isnotnull" operator
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "date", format: "{0:yyyy-MM-dd}" }
+      ],
+      dataSource: {
+        data: [
+          { date: kendo.parseDate("2000-10-10") },
+          { date: new Date() }
+        ],
+        schema: {
+          model: {
+            fields: {
+              date: { type: "date" }
+            }
+          }
+        }
+      },
+      filterable: {
+        operators: {
+          date: {
+            isnotnull: "Null"
+          }
+        }
+      }
+    });
+    </script>
+
 ### filterable.operators.date.gte `String` *(default: "Is after or equal to")*
 
 The text of the "greater than or equal" filter operator.
@@ -3766,6 +4008,68 @@ The text of the "not equal" filter operator.
         operators: {
           enums: {
             neq: "Not equal to"
+          }
+        }
+      }
+    });
+    </script>
+
+### filterable.operators.enums.isnull `String` *(default: "Is null")*
+
+The text of the "isnull" filter operator.
+
+#### Example - set the enum "isnull" operator
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category", values: [
+            {text: "Beverages", value: 1 },
+            {text: "Food", value: 2 }
+          ]
+        }
+      ],
+      dataSource: [
+        { productName: "Tea", category: 1 },
+        { productName: "Ham", category: 2 }
+      ],
+      filterable: {
+        operators: {
+          enums: {
+            isnull: "Null"
+          }
+        }
+      }
+    });
+    </script>
+
+### filterable.operators.enums.isnotnull `String` *(default: "Is not null")*
+
+The text of the "isnotnull" filter operator.
+
+#### Example - set the enum "isnotnull" operator
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category", values: [
+            {text: "Beverages", value: 1 },
+            {text: "Food", value: 2 }
+          ]
+        }
+      ],
+      dataSource: [
+        { productName: "Tea", category: 1 },
+        { productName: "Ham", category: 2 }
+      ],
+      filterable: {
+        operators: {
+          enums: {
+            isnotnull: "Not null"
           }
         }
       }
