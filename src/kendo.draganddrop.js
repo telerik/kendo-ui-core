@@ -850,7 +850,7 @@ var __meta__ = { // jshint ignore:line
 
                 target._trigger(DRAGENTER, extend(e, { dropTarget: $(targetElement) }));
                 lastDropTarget = extend(target, { targetElement: targetElement });
-            });            
+            });
 
             this._trigger(DRAG, extend(e, { dropTarget: lastDropTarget, elementUnderCursor: cursorElement }));
         },
@@ -1073,7 +1073,7 @@ var __meta__ = { // jshint ignore:line
 
         var parent = $(element)[0];
 
-        while (!kendo.isScrollable(parent) && parent !== document.body) {
+        while (parent && !kendo.isScrollable(parent) && parent !== document.body) {
             parent = parent.parentNode;
         }
 
