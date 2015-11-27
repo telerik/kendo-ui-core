@@ -2,6 +2,20 @@ module Jekyll
 
     require 'html/pipeline'
 
+    class LangFilter < HTML::Pipeline::Filter
+
+        def call
+
+            doc.css('pre[lang]').each do |node|
+                node['data-lang'] = node['lang']
+                node.remove_attribute('lang')
+            end
+
+            doc
+        end
+
+    end
+
     class RootRelativeFilter < HTML::Pipeline::Filter
 
         def call
@@ -209,6 +223,7 @@ module Jekyll
 
             @pipeline = HTML::Pipeline.new [
                 HTML::Pipeline::MarkdownFilter,
+                LangFilter,
                 RootRelativeFilter,
                 ApiHeaderIdFilter,
                 OptionsTitleFilter,
