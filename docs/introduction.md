@@ -1,8 +1,9 @@
 ---
 title: Welcome to Kendo UI!
-page_title: Welcome to Kendo UI!
-description: "Overview of Kendo UI jQuery- and HTML5-based widgets, frameworks, utilities and distributions."
+page_title: Welcome to Kendo UI! | Kendo UI
+description: "Learn about the Kendo UI controls, their distributions, frameworks, tools, and utilities."
 previous_url: /index
+slug: welcometo_kendoui
 position: 1
 ---
 
@@ -13,7 +14,7 @@ position: 1
 Kendo UI is an HTML5 user interface framework for building interactive and high-performance websites and applications.
 The framework comes with a library of 70+ UI widgets, an abundance of data-visualization gadgets, client-side data source, built-in MVVM (Model-View-ViewModel) library. Kendo UI provides AngularJS and Bootstrap integration.
 
-[Check out Kendo UI online demos](http://demos.telerik.com/kendo-ui/)
+[Check Out Kendo UI Online Demos](http://demos.telerik.com/kendo-ui/)
 
 Kendo UI is distributed as part of several product units that you can choose from depending on your project requirements.
 
@@ -33,6 +34,8 @@ Kendo UI Professional includes widgets for enterprise-grade line-of-business app
 
 Kendo UI Complete incorporates all the products in the Kendo UI family - Kendo UI Professional, [UI for ASP.NET MVC](/aspnet-mvc/introduction), [UI for JSP](/jsp/introduction) and [UI for PHP](http://docs.telerik.com/kendo-ui/php/introduction)
 
+#### UI for ASP.NET MVC
+
 [UI for ASP.NET MVC](/aspnet-mvc/introduction) is a Kendo UI product flavor which targets ASP.NET MVC developers. It includes all Kendo UI Professional components as well as
 HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to configure the Kendo UI widgets via C# code.
 
@@ -42,6 +45,8 @@ HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to co
 * [Get a License](http://www.telerik.com/purchase/aspnet-mvc)
 * [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/aspnet-mvc)
 
+#### UI for JSP
+
 [UI for JSP](/jsp/introduction) is a Kendo UI product flavor which targets the Java web application developers. It includes JSP (Java Server Pages) tags for all Kendo UI Professional widgets.
 
 * [List of Kendo UI Components](/intro/supporting/list-of-widgets)
@@ -49,6 +54,8 @@ HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to co
 * [Evaluate UI for JSP](http://www.telerik.com/download/jsp-ui)
 * [Get a License](http://www.telerik.com/purchase/jsp-ui)
 * [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/jsp-ui)
+
+#### UI for PHP
 
 [UI for PHP](http://docs.telerik.com/kendo-ui/php/introduction) is a Kendo UI product flavor which targets the PHP web application developers. It includes PHP classes for configuring all Kendo UI Professional widgets.
 
@@ -58,7 +65,7 @@ HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to co
 * [Get a License](http://www.telerik.com/purchase/php-ui)
 * [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/php-ui)
 
-## Other Products Where Kendo UI Is Incorporated
+## Other Kendo UI Incorporating Products
 
 Kendo UI Core is the free and open-source Kendo UI distribution, released under Apache v2.0 License.
 It provides access to a limited number of widgets and framework features, and to 1,000+ tests running across browsers for each commit to the [Kendo UI Core GitHub repository](https://github.com/telerik/kendo-ui-core).
@@ -71,14 +78,14 @@ Kendo UI is also incorporated into products such as [Telerik Platform](http://ww
 
 ## Next Steps
 
-* [Getting Started with Kendo UI](/intro/installation/getting-started)
-* [Install Kendo UI as a Bower Package](/intro/installation/bower-install)
-* [Use Kendo UI CDN Services](/intro/installation/cdn-service)
-* [Include Only What You Need](/intro/installation/what-you-need)
-* [JavaScript Prerequisites](/intro/installation/prerequisites)
-* [Initialize a Kendo UI Widget As a jQuery Plug-In](/intro/installation/jquery-initialization)
-* [Initialize a Kendo UI Widget from Markup](/intro/installation/markup)
-* [Call Widget Methods and Bind to Widget Events](/intro/installation/events-and-methods)
+* [Getting Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Install Kendo UI as a Bower Package]({% slug kendoui_bower_packages_kendoui_installation %})
+* [Use Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
+* [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
+* [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
+* [Initialize a Kendo UI Widget As a jQuery Plug-In]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Initialize a Kendo UI Widget from Markup]({% slug initialize_widgets_using_markup_installation %})
+* [Call Widget Methods and Bind to Widget Events]({% slug widget_methodsand_events_kendoui_installation %})
 
 ## Learning Resources
 

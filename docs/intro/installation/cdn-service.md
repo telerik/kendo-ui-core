@@ -1,16 +1,19 @@
 ---
-title: Use Kendo UI CDN Services
-page_title: Use Kendo UI with CDN Services
+title: Kendo UI CDN Services
+page_title: Kendo UI CDN Services | Kendo UI Installation
 description: "Install HTML5 UI frameworks and widgets by using Kendo UI CDN service."
 previous_url: /install/cdn
+slug: kendoui_cdn_services_installation
 position: 3
 ---
 
-# Use Kendo UI CDN Services
+# Kendo UI CDN Services
 
 The Kendo UI CDN is hosted on [Amazon CloudFront](https://aws.amazon.com/cloudfront/). In order to access the Kendo UI CDN Service, you can use either of the options described below.
 
-## Option 1: Via the HTTP Protocol
+## Protocols
+
+### Via HTTP Protocol
 
 The minified versions of all JavaScript files are available via the following URLs:  
 `https://kendo.cdn.telerik.com/VERSION/js/FILENAME.min.js`
@@ -26,7 +29,7 @@ Use the following URL to load the minified Kendo UI Core script (available since
 > **Important**  
 > The `http://cdn.kendostatic.com/` URL will remain active, but is no longer recommended for new projects.
 
-## Option 2: Via the HTTPS Protocol
+### Via HTTPS Protocol
 
 To access the Kendo UI CDN service through the HTTPS protocol, use the same host name as above, only replacing the scheme (protocol) with `https`:  
 `https://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js`
@@ -34,16 +37,17 @@ To access the Kendo UI CDN service through the HTTPS protocol, use the same host
 > **Important**  
 > The `https://da7xgjtj801h2.cloudfront.net/` URL will remain active, but is no longer recommended for new projects.
 
-## Troubleshoot
+## Troubleshooting
 
-**Issue 1:** Disruption and connection problems
+### Disruption and Connection Issues 
+
 Although the Amazon CloudFront service provides for a reliable level of uptime support, you may encounter disruption or connection troubles. After you have checked the status of the systems at [http://status.aws.amazon.com/](http://status.aws.amazon.com/), the CDN status is reported as healthy and is operating normally.
 
 **Cause:** You could be experiencing Internet or network connectivity problems, or DNS problems, or it is possible that firewalls, antivirus or other security software incorrectly filters out the CDN scripts or modifies (breaks) them on-the-fly.
 
 **Fix:** Contact your system administrator, as remote investigation of connection problems is outside the scope of Kendo UI support.
 
-**Issue 2:** How to refer Kendo UI From CDN With a Local Script Fallback
+### Refer Kendo UI from CDN with Local Script Fallback
 
 **Cause:** Kendo UI internal builds are not uploaded on CDN, because they are intended only for clients with a commercial license. Only major releases and service packs are uploaded on the Kendo UI CDN.
 
@@ -87,3 +91,15 @@ Although the Amazon CloudFront service provides for a reliable level of uptime s
 
 > **Important**  
 > You will be able to find more information on the topic at [Scott HanselMann - Fallback from CDN to Local Scripts](http://www.hanselman.com/blog/CDNsFailButYourScriptsDontHaveToFallbackFromCDNToLocalJQuery.aspx).
+
+## See Also
+
+Other articles on getting started with Kendo UI:
+
+* [Getting Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Kendo UI Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
+* [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
+* [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
+* [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
+* [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})

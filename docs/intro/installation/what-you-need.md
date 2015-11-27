@@ -1,14 +1,15 @@
 ---
 title: Include Only What You Need
-page_title: Include Only What You Need
+page_title: Include Only What You Need | Kendo UI Installation
 description: "Customize Kendo UI for your project and add the HTML5 UI controls you need."
 previous_url: /install/custom
+slug: include_only_what_you_need_kendoui_installation
 position: 4
 ---
 
 # Include Only What You Need
 
-## Pick the Right Combined Script for Your Project
+## Combined Scripts
 
 The following combined scripts are available in the bundles or at the CDN in order to facilitate the common project types:
 
@@ -30,14 +31,16 @@ In addition, each of the combined script files should not be registered together
 > **Important**  
 > Registering duplicate scripts may cause JavaScript errors and unexpected behavior.
 
-## Build a Custom Combined Script with the Download Builder
+## Build Scripts
+
+### With Download Builder
 
 Users with a commercial license may use the [custom download builder tool](https://www.telerik.com/login/v2/telerik?ReturnUrl=http%3a%2f%2fwww.telerik.com%2fdownload%2fcustom-download) to create a single JavaScript file which contains only the required widgets and features.
 
 > **Important**  
 > Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
 
-## Build a Custom Script Using Grunt
+## Using Grunt
 
 If you use the Kendo UI Core package, you can build a custom distribution using the `grunt` build tool by following the instructions in [README](https://github.com/telerik/kendo-ui-core#building-only-what-you-need).
 
@@ -57,7 +60,7 @@ List the components you want to be included in the custom build and separated th
 The grunt build task automatically resolves the needed dependencies for each component, so you don't have to list them.
 Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
 
-## Include Individual Widget Scripts
+## Individual Scripts
 
 Below are the references to the script files which, whether minified or not, can be included on a per-widget basis depending on the flavor you want to add to your project. 
 
@@ -67,3 +70,15 @@ Below are the references to the script files which, whether minified or not, can
 + [List of script files for the frameworks and widgets for mobile applications](/intro/supporting/scripts-hybridui)
 + [List of script files for the tools and utilities](/intro/supporting/scripts-frameworks)
 + [List of script files for the server-side wrappers](/intro/supporting/scripts-wrappers)
+
+## See Also
+
+Other articles on getting started with Kendo UI:
+
+* [Getting Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Kendo UI Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
+* [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
+* [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
+* [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
+* [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})

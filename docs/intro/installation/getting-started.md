@@ -1,8 +1,9 @@
 ---
 title: Getting Started with Kendo UI
-page_title: Getting Started with Kendo UI
+page_title: Getting Started with Kendo UI | Kendo UI Installation
 description: "Get your HTML5 UI frameworks and widgets by hosting Kendo UI, downloading Kendo UI bower package, or using Kendo UI CDN service."
 previous_url: /install/onsite, /getting-started, /intro/getting-started
+slug: getting_started_installation_kendoui 
 position: 1
 ---
 
@@ -19,7 +20,7 @@ Depending on your preferences and the requirements of your project, you can:
 * [Get your commercial license for Telerik UI for PHP](http://www.telerik.com/purchase/php-ui)
 * [Use the GitHub open-source license for Telerik Kendo UI® Core](https://github.com/telerik/kendo-ui-core)
 
-### Step 1: Download Kendo UI
+### Step 1: Download
 
 Once you [download any of the Kendo UI bundles](http://www.telerik.com/download/kendo-ui), you will get the following folders in your local repository:
 
@@ -30,7 +31,7 @@ Once you [download any of the Kendo UI bundles](http://www.telerik.com/download/
 * `/wrappers` - includes the server-side wrappers. As it is necessary for the Telerik UI for ASP.NET MVC, UI for JSP or UI for PHP distributions only, the folder is available in the commercial packages of these versions.
 * `changelog.html` - provides the Kendo UI release notes
 
-### Step 2: Add CSS and JavaScript References to Your Project
+### Step 2: Add CSS and JavaScript References
 
 To use Kendo UI in your project, you need to include the required JavaScript and CSS files.
 
@@ -38,6 +39,7 @@ To use Kendo UI in your project, you need to include the required JavaScript and
 **Step 2:** Include the Kendo UI JavaScript and CSS files in the `head` tag of your HTML document. Make sure the common CSS file is registered before the theme CSS file.
 
 ###### Example
+
 		<!DOCTYPE html>
 	        <html>
 	        <head>
@@ -70,7 +72,9 @@ To use Kendo UI in your project, you need to include the required JavaScript and
 
 **Step 3:** Initialize a Widget.
 
-###### Example ([DatePicker widget](http://demos.telerik.com/kendo-ui/datepicker/index))
+The example below demonstrates how to initialize the [DatePicker widget](http://demos.telerik.com/kendo-ui/datepicker/index).
+
+###### Example
 
         <!-- HTML element from which the DatePicker would be initialized -->
         <input id="datepicker" />
@@ -80,8 +84,10 @@ To use Kendo UI in your project, you need to include the required JavaScript and
             $("#datepicker").kendoDatePicker();
         });
         </script>
+        
+The example below demonstrates the full initialization of the [DatePicker widget](http://demos.telerik.com/kendo-ui/datepicker/index). 
 
-###### The complete example ([DatePicker widget](http://demos.telerik.com/kendo-ui/datepicker/index))
+###### Example
 
     <!DOCTYPE html>
     <html>
@@ -102,22 +108,34 @@ To use Kendo UI in your project, you need to include the required JavaScript and
         </body>
     </html>
 
-## Install Kendo UI as a Bower Package
+## Bower Packages
 
 [Bower](http://bower.io/) is a popular package manager for the web.
 
 Kendo UI maintains 2 bower packages, namely Kendo UI Core and Kendo UI Professional. Official releases, service packs and internal builds are uploaded to both of them.
 
-[Learn more about installing Kendo UI as a Bower package](/intro/installation/bower-install)
+For more information on installing Kendo UI as a Bower package, see [this article]({% slug kendoui_bower_packages_kendoui_installation %}).
 
-## Use Kendo UI CDN Services
+## CDN Services
 
 Kendo UI CDN is hosted on [Amazon CloudFront](https://aws.amazon.com/cloudfront/). To access the CDN Service, you can use different approaches.
 
-[Learn more about the Kendo UI CDN Service](/intro/installation/cdn-service)
+For more information on installing Kendo UI CDN Service, see [this article]({% slug kendoui_cdn_services_installation %}).
 
 ## Include Only What You Need
 
 Add to your project only what it requires by picking the right combined scripts, building a custom combined script, or using Grunt to build a custom script.
 
-[Learn more about customizing the scripts you need](/intro/installation/what-you-need)
+For more information on customizing the scripts you need, see [this article]({% slug include_only_what_you_need_kendoui_installation %}).
+
+## See Also
+
+Other articles on getting started with Kendo UI:
+
+* [Kendo UI Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
+* [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
+* [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
+* [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
+* [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
+* [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})
