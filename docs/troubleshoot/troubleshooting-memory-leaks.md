@@ -9,13 +9,25 @@ slug: troubleshooting_system_memory_symptoms_kendoui
 
 This page provides solutions for issues related to performance issues that you may encounter while working with Kendo UI widgets.
 
+## Slow Execution or Lags
+
+### Browser Extensions
+
+Try disabling browser extensions as a first step when faced performance issues.
+
+Most browsers provide a way to temporary disable all add-ons:
+
+* [Chrome - Incognito mode](https://support.google.com/chrome/answer/95464?source=gsearch&hl=en)
+* [Internet Explorer - InPrivate Browsing](http://windows.microsoft.com/en-us/internet-explorer/products/ie-9/features/in-private)
+* [Firefox - Safe mode](https://support.mozilla.org/en-US/kb/troubleshoot-firefox-issues-using-safe-mode)
+
 ## Memory Leaks
 
 ### Browser Memory Usage Increases over Time
 
 **Solution**
 
-There are multiple possible reasons for leaking JavaScript Heap memory. To narrow them down, use the support the browser developer tools provide. See [Memory Diagnosis | Web Tools](https://developers.google.com/web/tools/chrome-devtools/profile/memory-problems/memory-diagnosis?hl=en) for a detailed description of the debugging process.
+There are multiple possible reasons for leaking JavaScript Heap memory. To narrow them down, use the profiling features provided by the browser developer tools. See [Memory Diagnosis | Web Tools](https://developers.google.com/web/tools/chrome-devtools/profile/memory-problems/memory-diagnosis?hl=en) for a detailed description of the debugging process.
 
 ### Application Becomes Unresponsive or Hangs
 
