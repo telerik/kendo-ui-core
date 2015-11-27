@@ -147,7 +147,7 @@ Use it to set the Id of the parent DropDownList widget.
 
 ### cascadeFromField `String`
 
-Defines the field to be used to filter the data source. If not defined the [parent's dataValueField option will be used](/api/web/dropdownlist#configuration-dataValueField).
+Defines the field to be used to filter the data source. If not defined the [parent's dataValueField option will be used](/api/javascript/ui/dropdownlist#configuration-dataValueField).
 [Help topic showing how cascading functionality works](/web/dropdownlist/cascading)
 
 #### Example
@@ -1420,7 +1420,7 @@ Fired when the value of the widget is changed by the user.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
-> **Important:** The event is not fired when the value of the widget is changed programmatically. If you need to handle changes made by API, wire the [cascade](/api/web/dropdownlist#events-cascade) event.
+> **Important:** The event is not fired when the value of the widget is changed programmatically. If you need to handle changes made by API, wire the [cascade](/api/javascript/ui/dropdownlist#events-cascade) event.
 
 #### Event Data
 
