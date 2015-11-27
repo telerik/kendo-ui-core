@@ -43,7 +43,11 @@ The configuration options of the layout.
 
 ### alignContent `String` *(default: "start")*
 
-Specifies the alignment of the content.
+Specifies the alignment of the content. The supported values are:
+
+* `"start"` - aligns the content to the rectangle origin
+* `"center"` - aligns the content to the rectangle center
+* `"end"` - aligns the content to the rectangle end
 
 #### Example
 
@@ -72,7 +76,11 @@ Specifies the alignment of the content.
 
 ### alignItems `String` *(default: "start")*
 
-Specifies the alignment of the items based.
+Specifies the alignment of the items based on the largest one. The supported values are:
+
+* `"start"` - aligns the items to the start of the largest element.
+* `"center"` - aligns the items to the center of the largest element.
+* `"end"` - aligns the items to the end of the largest element
 
 #### Example
 
@@ -100,7 +108,11 @@ Specifies the alignment of the items based.
 
 ### justifyContent `String` *(default: "start")*
 
-Specifies how should the content be justified.
+Specifies how should the content be justified. The supported values are:
+
+* `"start"` - aligns the items to the rectangle origin
+* `"center"` - aligns the items to the rectangle center
+* `"end"` - aligns the items to the rectangle end
 
 #### Example
 
