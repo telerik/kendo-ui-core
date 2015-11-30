@@ -30,7 +30,7 @@ For a complete overview of the methods and configuration options MaskedTextBox a
         });
     </script>
 
-When a MaskedTextBox is initialized, it will decorate the input element with a `k-textbox` CSS class.
+When a MaskedTextBox is initialized, it will decorate the `<input>` element with a `k-textbox` CSS class.
 
 > **Important**  
 > The default mask is an empty string, which allows any input. If you need to restrict user input, define a mask value.
