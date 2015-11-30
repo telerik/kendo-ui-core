@@ -21,7 +21,9 @@ While it is theoretically possible to initialize several different Kendo UI widg
 > It is strongly recommended to initialize Kendo UI widgets from HTML elements, which are part of the DOM tree.
 Creating widgets from [document fragments](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) may cause undesired side effects or Javascript errors.
 
-## Instantiate the AutoComplete
+## Widget Initialization
+
+### Instantiate the AutoComplete
 
 The example below demonstrates how to instantiate Kendo UI AutoComplete.
 
@@ -40,7 +42,7 @@ The example below demonstrates how to instantiate Kendo UI AutoComplete.
 > **Important**  
 > If the jQuery object includes more than one DOM element, a separate widget will be instantiated for each.
 
-## Instantiate Multiple Buttons
+### Instantiate Multiple Buttons
 
 The example below demonstrates how to instantiate multiple buttons with a single jQuery selector.
 
@@ -58,7 +60,7 @@ The example below demonstrates how to instantiate multiple buttons with a single
 > **Important**  
 > The jQuery convention of returning the selected DOM element from most methods applies to the widget initialization methods. This allows jQuery methods to be chained.
 
-## Chain jQuery Method Calls 
+### Chain jQuery Method Calls 
 
 The example below demonstrates the chain jQuery method calls after the widget instantiation plug-in method.
 
@@ -73,6 +75,10 @@ The example below demonstrates the chain jQuery method calls after the widget in
       });
     </script>
 ```
+
+### Initialization within `iframes`
+
+It is theoretically possible to initialize a Kendo UI widget, which is inside an `iframe`, from the context of the parent page. This may work in specific scenarios, but is not officially supported. For example, widgets that render popups may not be able to display them.
 
 ## Configuration
 
@@ -164,11 +170,6 @@ In order to check whether a widget instance already exists for a certain DOM ele
         }
     </script>
 ```
-
-## Initialization within `iframes`
-
-It is theoretically possible to initialize a Kendo UI widget, which is inside an iframe, from the context of the parent page.
-This may work in specific scenarios, but is not officially supported. For example, widgets that render popups may not be able to display them.
 
 ## See Also
 

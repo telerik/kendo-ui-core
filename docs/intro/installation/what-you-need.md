@@ -31,6 +31,17 @@ In addition, each of the combined script files should not be registered together
 > **Important**  
 > Registering duplicate scripts may cause JavaScript errors and unexpected behavior.
 
+## Individual Widget Scripts
+
+Below are the references to the script files which, whether minified or not, can be included on a per-widget basis depending on the flavor you want to add to your project. 
+
++ [List of Kendo UI widgets in terms of their bundle support]({% slug bundle_supportfor_kendoui_components %})  
++ [List of script files for the desktop UI widgets for mobile-ready websites and apps]({% slug scirpt_filesfor_desktop_widgets %})  
++ [List of script files for the widgets rendering data visualization]({% slug script_filesfor_datavisualization_widgets %})
++ [List of script files for the frameworks and widgets for mobile applications]({% slug script_filesfor_hybridui_widgets %})
++ [List of script files for the tools and utilities]({% slug script_filesfor_tools_frameworks_utilities %})
++ [List of script files for the server-side wrappers]({% slug script_filesfor_serverside_wrappers %})
+
 ## Build Scripts
 
 ### With Download Builder
@@ -40,7 +51,7 @@ Users with a commercial license may use the [custom download builder tool](https
 > **Important**  
 > Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
 
-## Using Grunt
+### Use Grunt
 
 If you use the Kendo UI Core package, you can build a custom distribution using the `grunt` build tool by following the instructions in [README](https://github.com/telerik/kendo-ui-core#building-only-what-you-need).
 
@@ -59,17 +70,6 @@ List the components you want to be included in the custom build and separated th
 > When complete, the grunt command will output a `kendo.custom.min.js` file in the `src/dist` directory.
 The grunt build task automatically resolves the needed dependencies for each component, so you don't have to list them.
 Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
-
-## Individual Scripts
-
-Below are the references to the script files which, whether minified or not, can be included on a per-widget basis depending on the flavor you want to add to your project. 
-
-+ [List of Kendo UI widgets in terms of their bundle support](/intro/supporting/list-of-widgets)  
-+ [List of script files for the desktop UI widgets for mobile-ready websites and apps](/intro/supporting/scripts-general) 
-+ [List of script files for the widgets rendering data visualization](/intro/supporting/scripts-dataviz)
-+ [List of script files for the frameworks and widgets for mobile applications](/intro/supporting/scripts-hybridui)
-+ [List of script files for the tools and utilities](/intro/supporting/scripts-frameworks)
-+ [List of script files for the server-side wrappers](/intro/supporting/scripts-wrappers)
 
 ## See Also
 

@@ -24,8 +24,8 @@ Kendo UI Professional is one of the commercial versions of Kendo UI.
 It is a comprehensive framework providing 70+ Kendo UI widgets, and includes a simple and consistent programming interface, a rock-solid DataSource, out-of-the-box themes, an MVVM framework, and more.
 Kendo UI Professional includes widgets for enterprise-grade line-of-business applications and is suitable for creating professional websites that require expert and timely technical support.
 
-* [List of Kendo UI Components](/intro/supporting/list-of-widgets)
-* [Browser Support](/intro/supporting/browser-support)
+* [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
+* [Browser Support]({% slug wbe_browserand_operating_system_support %})
 * [Evaluate Kendo UI Professional](http://www.telerik.com/download/kendo-ui)
 * [Get a License](http://www.telerik.com/purchase/kendo-ui)
 * [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/kendo-ui-professional)
@@ -39,8 +39,8 @@ Kendo UI Complete incorporates all the products in the Kendo UI family - Kendo U
 [UI for ASP.NET MVC](/aspnet-mvc/introduction) is a Kendo UI product flavor which targets ASP.NET MVC developers. It includes all Kendo UI Professional components as well as
 HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to configure the Kendo UI widgets via C# code.
 
-* [List of Kendo UI Components](/intro/supporting/list-of-widgets)
-* [Browser Support](/intro/supporting/browser-support)
+* [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
+* [Browser Support]({% slug wbe_browserand_operating_system_support %})
 * [Evaluate UI for ASP.NET MVC](http://www.telerik.com/download/aspnet-mvc)
 * [Get a License](http://www.telerik.com/purchase/aspnet-mvc)
 * [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/aspnet-mvc)
@@ -49,8 +49,8 @@ HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to co
 
 [UI for JSP](/jsp/introduction) is a Kendo UI product flavor which targets the Java web application developers. It includes JSP (Java Server Pages) tags for all Kendo UI Professional widgets.
 
-* [List of Kendo UI Components](/intro/supporting/list-of-widgets)
-* [Browser Support](/intro/supporting/browser-support)
+* [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
+* [Browser Support]({% slug wbe_browserand_operating_system_support %})
 * [Evaluate UI for JSP](http://www.telerik.com/download/jsp-ui)
 * [Get a License](http://www.telerik.com/purchase/jsp-ui)
 * [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/jsp-ui)
@@ -59,8 +59,8 @@ HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to co
 
 [UI for PHP](http://docs.telerik.com/kendo-ui/php/introduction) is a Kendo UI product flavor which targets the PHP web application developers. It includes PHP classes for configuring all Kendo UI Professional widgets.
 
-* [List of Kendo UI Components](/intro/supporting/list-of-widgets)
-* [Browser Support](/intro/supporting/browser-support)
+* [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
+* [Browser Support]({% slug wbe_browserand_operating_system_support %})
 * [Evaluate UI for PHP](http://www.telerik.com/download/php-ui)
 * [Get a License](http://www.telerik.com/purchase/php-ui)
 * [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/php-ui)
@@ -71,8 +71,8 @@ Kendo UI Core is the free and open-source Kendo UI distribution, released under 
 It provides access to a limited number of widgets and framework features, and to 1,000+ tests running across browsers for each commit to the [Kendo UI Core GitHub repository](https://github.com/telerik/kendo-ui-core).
 Kendo UI Core is suitable for open-source or commercial projects that do not require complex UI, such as Grid, Chart, etc., nor dedicated technical support. Kendo UI Core does not offer dedicated technical support. 
 
-* [List of Kendo UI Components](/intro/supporting/list-of-widgets)
-* [Browser Support](/intro/supporting/browser-support)
+* [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
+* [Browser Support]({% slug wbe_browserand_operating_system_support %})
 
 Kendo UI is also incorporated into products such as [Telerik Platform](http://www.telerik.com/platform#overview), [Telerik Analytics](http://www.telerik.com/analytics), [Sitefinity](http://www.sitefinity.com/), [TeamPulse](http://www.telerik.com/teampulse), [Test Studio](http://www.telerik.com/teststudio), and others.
 
