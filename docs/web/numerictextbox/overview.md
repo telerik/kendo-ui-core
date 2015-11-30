@@ -1,21 +1,18 @@
 ---
 title: Overview
-page_title: NumericTextBox UI widget - documentation overview
-description: How to create NumericTextBox widget and deal with proper configuration of its behaviors.
+page_title: Overview | Kendo UI NumericTextBox Widget
+description: "Learn how to initialize the Kendo UI NumericTextBox widget and configure its behaviors."
+slug: overview_kendoui_numerictextbox_widget
+position: 1
 ---
 
 # NumericTextBox Overview
 
-The NumericTextBox widget can convert an `INPUT` element into a numeric, percentage or currency textbox.
-The type is defined depending on the specified format. The widget renders spin buttons and with their help you can
-increment/decrement the value with a predefined step. The NumericTextBox widget accepts only numeric entries.
-The widget uses _kendo.culture.current_ culture in order to determine number precision and other culture
-specific properties.
-
+[Kendo UI NumericTextBox widget](http://demos.telerik.com/kendo-ui/numerictextbox/index) can convert an `<input>` element into a numeric, percentage, or currency textbox. The conversion data type is defined by the specified format. The widget renders spin buttons and by using them you can increment/decrement the value with a predefined step. The NumericTextBox widget accepts only numeric entries. The widget uses `kendo.culture.current` culture to determine the number precision and other culture-specific properties.
 
 ## Getting Started
 
-### NumericTextBox initialization
+### Initialize the NumericTextBox
     
     <input id="textBox" />
     
@@ -25,26 +22,28 @@ specific properties.
         });
     </script>
 
-When a NumericTextBox is initialized, it will automatically
-wrap the `INPUT` element with a `<span>` tag and render spin buttons.
+When a NumericTextBox is initialized, it will automatically wrap the `<input>` element with a `<span>` tag and render spin buttons.
 
-> When getting a reference of the widget, you should always use id instead of class selector. Behind the scenes, the NumericTextBox creates a secondary element that is used to represent the visual look of the widget, and copies over all non-id attributes, including the class. This will cause unexpected results when class is sued for widget referencing.
+> **Important**  
+> When getting a reference to the widget, you should always use `id` instead of a class selector. Behind the scenes, the NumericTextBox creates a secondary element that is used to represent the visual look of the widget, and copies over all non-`id` attributes, including the class. This will cause unexpected results when the class is sued for widget referencing.
 
-## Configure NumericTextBox behavior
+## Configuration
 
+NumericTextBox provides configuration options that can be set during initialization. Some of the properties that can be controlled are:
 
-The NumericTextBox provides configuration options that can be set during initialization. Some of the properties that can be
-controlled are:
-
-*   Value of the NumericTextBox
+*   Value of the widget
 *   Minimum and/or maximum values
 *   Increment step
-*   Precision of the number
+*   Precision of number
 *   Number format (any valid number format is allowed)
 
-For a complete overview of the NumericTextBox's methods and configuration options, [review the NumericTextBox API Reference](/api/web/numerictextbox).
+For a complete overview of the methods and configuration options NumericTextBox applies, [review its API Reference](/api/javascript/ui/numerictextbox).
 
-### Customize NumericTextBox defaults
+### Customize Defaults
+
+The example below demonstrates how to customize NumericTextBox defaults.
+
+###### Example
 
      <input id="textbox">
      
@@ -59,7 +58,11 @@ For a complete overview of the NumericTextBox's methods and configuration option
         });
     </script>
 
-### Create Currency NumericTextBox widget
+### Create Currency NumericTextBox
+
+The example below demonstrates how to create a currency NumericTextBox widget.
+
+###### Example
 
      <input id="textbox">
      
@@ -69,7 +72,12 @@ For a complete overview of the NumericTextBox's methods and configuration option
         });
     </script>
 
-### Create Percentage NumericTextBox widget
+### Create Percentage NumericTextBox
+
+The example below demonstartes how to create a percentage NumericTextBox widget.
+
+###### Example
+
     <input id="textbox">
      
      <script>
@@ -79,34 +87,28 @@ For a complete overview of the NumericTextBox's methods and configuration option
         });
     </script>
 
-## Support for label element
+### `label` Element Support
 
-Because of its complex rendering, focusing the widget using a `LABEL` element requires additional implementation.
-Check [this Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho), which shows how its done.
+Because of its complex rendering, focusing the widget by using a label element requires additional implementation. For more information about how to do it, check this [this Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
 
-## Known limitations
+## Known Limitations
 
 ### Value Precision
 
-Kendo UI NumericTextBox widget uses JavaScript [Number](http://ecma262-5.com/ELS5_HTML.htm#Section_8.5) object to keep its value, which has a certain precision limitation.
-In general, Number object can persist its precision up to 16 digits. Numbers longer than that length will be converted to
-exponential numbers and hence will lose their precision. As the widget relies on a Number object, it gets the same precision limitation.
+Kendo UI NumericTextBox uses a JavaScript [`Number`](http://ecma262-5.com/ELS5_HTML.htm#Section_8.5) object to keep its value, which has a certain precision limitation. In general, the `Number` object can persist its precision up to 16 digits. Numbers longer than that are converted to exponential numbers. Hence, they lose their precision. As the widget relies on a `Number` object, it gets the same precision limitation.
 
-Unfortunately, there is no feasible workaround for this limitation as it comes from the JavaScript itself. What we suggest is to use
-simple INPUT element with server validation, as some server languages are able to parse long numbers.
+No feasible workaround for this limitation exists as it comes from JavaScript itself. It is recommended that you use a simple `<input>` element with server validation as some server languages are able to parse long numbers.
 
 ### Input Type
 
-The Kendo UI NumericTextBox uses `<input type="text" />` elements. If the widget is initialized from an `<input type="number" />` element, it will switch the input type to `text`.
-This behavior is required in order to support comma (",") as a decimal separator in some non-"en-US" cultures. For the time being, browsers do not take into account the client's culture and
-always ignore values that contain a comma decimal separator.
+Kendo UI NumericTextBox uses `<input type="text" />` elements. If the widget is initialized from an `<input type="number" />` element, it will switch the input type to `text`. This behavior is required so that comma (",") is supported as a decimal separator in some non-"en-US" cultures. For the time being, browsers do not take into account the client's culture and always ignore values that contain a comma decimal separator.
 
-A side effect from using a text input type is that it will prevent the numeric keyboard from appearing on mobile devices with context-specific software keyboards.
-
-If a numeric software keyboard is desired, there are two possible workarounds:
+A side effect from using a `text` input type is that it prevents the numeric keyboard from appearing on mobile devices with context-specific software keyboards. If a numeric software keyboard is desired, use any of the two possible workarounds:
 
 * Use a plain numeric input for mobile devices and add a [`k-textbox`](/web/appearance-styling#primitives) CSS class to apply Kendo UI styling.
 * Change the input type back to `number` after the NumericTextBox is initialized. This is possible only for cultures that use a dot (".") as a decimal separator.
+
+###### Example
 
         /* widget is initialized */
         $("#my-numeric-textbox").kendoNumericTextBox({ /*...*/ });
@@ -117,3 +119,20 @@ If a numeric software keyboard is desired, there are two possible workarounds:
         /* or if the widget object is already available */
         var numericTextBoxObject = $("#my-numeric-textbox").data("kendoNumericTextBox");
         numericTextBoxObject.element.attr("type", "number");
+        
+## See Also
+
+Other articles on Kendo UI NumericTextBox and how-to examples:
+
+* [How to Add Title Attribute]({% slug howto_add_title_attribute_numerictextbox %})
+* [How to Change Text Color]({% slug howto_change_text_color_numerictextbox %})
+* [How to Focus Widget on Label Click]({% slug howto_focus_widgeton_label_click_numerictextbox %})
+* [How to Persist Old Value]({% slug howto_persist_old_value_numerictextbox %})
+* [How to Select All Text on Focus]({% slug howto_select_all_texton_focus_numerictextbox %})
+* [How to Update Value on Keyup]({% slug howto_update_valueon_keyup_angularjs_numerictextbox %})
+* [How to Update Value on Spin]({% slug howto_update_valueon_spin_angularjs_numerictextbox %})
+* [How to Use Custom Culture Script]({% slug howto_use_custom_culture_script_numerictextbox %})
+* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/numerictextbox/overview)
+* [Overview of the JSP Tag](/jsp/tags/numerictextbox/overview)
+* [Overview of the PHP Class](/php/widgets/numerictextbox/overview)
+* [JavaScript API Reference](/api/javascript/ui/numerictextbox)
