@@ -11,7 +11,7 @@ position: 2
 
 [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) is a powerful control for displaying data in a tabular format. It provides many options, such as paging, sorting, filtering, grouping, and editing, which determine the way data is presented and manipulated. The Grid can be bound to local or remote data by using the Kendo UI DataSource component.
 
-## Create the Grid
+## Initialize the Grid
 
 There are two primary ways to create a Kendo UI Grid:
 

@@ -35,10 +35,12 @@ The DatePicker provides configuration options that can be set during initializat
 * Start view
 * Navigation depth (the last view to which the user can navigate)
 
-### Define Selected, Min, and Max Dates
+### Selected, Min, and Max Dates
 
-Create a DatePicker with a selected date and a defined minimum and maximum dates in the following way:
-    
+The example below demonstrates how to create a DatePicker with a selected date and a defined minimum and maximum dates.
+
+###### Example
+
     <input id="datePicker" />
     
     <script>
@@ -53,7 +55,7 @@ Create a DatePicker with a selected date and a defined minimum and maximum dates
 
 Note that the DatePicker will set the value only if the entered date is valid and within the defined range.
 
-### Define the Start View and Navigation Depth
+### Start View and Navigation Depth
 
 Define the first rendered view with the `start` option. Control the navigation depth with the `depth` option. The following views are predefined:
 
@@ -62,9 +64,11 @@ Define the first rendered view with the `start` option. Control the navigation d
 *   `decade` - shows the years of the decade
 *   `century` - shows the decades of the century
 
-### Create a Selectable Month DatePicker
+### Selectable Month DatePicker
 
-Create a DatePicker that allows users to select a month in the following way:
+The example below demonstrates how to create a DatePicker that allows users to select a month.
+
+###### Example
 
     <input id="datePicker" />
     
@@ -74,6 +78,50 @@ Create a DatePicker that allows users to select a month in the following way:
             depth: "year"
         });
     </script>
+
+## Disable Dates
+
+Kendo UI DatePicker widget provides the functionality to disable certain days, such as weekends, national holidays, and others, which are not intended to be selected by the end user.
+
+### Set an Array
+
+One way to disable a date is by setting an array. List the days that need to be disabled by using the first letters from their names in English.
+
+###### Example
+
+```html
+    <input id="datePicker" />
+
+    <script>
+    $("#datePicker").kendoDatePicker({
+		value: new Date(),
+		disableDates: ["we", "th"],
+	});
+    </script>
+```
+
+### Add a Function
+
+The other way to disable dates is by adding a function and determine its return value as `true` for the date that is disabled.
+
+###### Example
+
+```html
+    <input id="datePicker" />
+
+    <script>
+        $("#datePicker").kendoDatePicker({
+            disableDates: function (date) {
+                var disabled = [13,14,20,21];
+                if (date && disabled.indexOf(date.getDate()) > -1 ) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+    </script>
+```
 
 ## See Also
 

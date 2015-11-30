@@ -20,7 +20,9 @@ The Kendo UI Gantt widget needs two special types of Kendo UI DataSource compone
 
 The easiest way to bind the Gantt is to provide the tasks and dependencies as an array of JavaScript objects. 
 
-###### Example - bind to an array of JavaScript objects
+The example below demonstrates how to bind the widget to an array of JavaScript objects.
+
+###### Example
 
     <!-- HTML element in which the Kendo UI Gantt will initialize -->
     <div id="gantt"></div>
@@ -62,7 +64,9 @@ In most cases the Kendo UI Gantt widget would be bound to a remote service which
 > **Important**  
 > The demo service uses JSONP so it can be accessible across domains. If your own service lives in the same domain as the website, you do not need to use JSONP. Use JSON instead. More information about cross-domain requests can be found [here](/howto/use-cors-with-all-modern-browsers).
 
-###### Example - bind to a remote service
+The example below demonstrates how to bind the widget to a remote service.
+
+###### Example
 
     <div id="gantt"></div>
     <script>      
@@ -270,9 +274,11 @@ The columns in the Treelist section of the Kendo UI Gantt can be idividually con
 - `width` - the width of the column.
 - `format` - the format in which the data in the column is represented.
 
-To configure individual columns use the [views](/api/web/gantt#configuration-columns) option:
+To configure individual columns use the [views](/api/web/gantt#configuration-columns) option. 
 
-###### Example - configure Gantt columns
+The example below demonstrates how to configure Gantt columns.
+
+###### Example
 
     <div id="gantt"></div>
     <script>      
@@ -310,9 +316,11 @@ Kendo UI Gantt Timeline can display its tasks in different views. The supported 
 - `week` - the timeline is divided into weeks and days.
 - `month` - the timeline is divided into months and weeks.
 
-To enable or disable individual views or configure them, use the [views](/api/web/gantt#configuration-views) option:
+To enable or disable individual views or configure them, use the [views](/api/web/gantt#configuration-views) option. 
 
-###### Example - enable all scheduler views
+The example below demonstrates how to enable all scheduler views.
+
+###### Example
 
     <div id="gantt"></div>
     <script>
@@ -351,9 +359,11 @@ To enable or disable individual views or configure them, use the [views](/api/we
 
 ### Get a Gantt Reference
 
-To get a reference to a Kendo UI Gantt instance, use the jQuery `data` and pass the `"kendoGantt"` as an argument:
+To get a reference to a Kendo UI Gantt instance, use the jQuery `data` and pass the `"kendoGantt"` as an argument.
 
-###### Example - get a Kendo UI Gantt reference
+The example below demonstrates how to get a Kendo UI Gantt reference.
+
+###### Example
 
     <div id="gantt"></div>
     <script>
@@ -378,7 +388,9 @@ To get a reference to a Kendo UI Gantt instance, use the jQuery `data` and pass 
 
 The Gantt widget exposes a set of [methods](/api/web/gantt#methods) and [fields](/api/web/gantt#fields) for you to use.
 
-###### Example - use the Kendo UI Gantt API
+The example below demonstrates how to use the Kendo UI Gantt API.
+
+###### Example
 
     <div id="gantt"></div>
     <script>
@@ -407,7 +419,9 @@ The Gantt widget supports a set of [events](/api/web/gantt#events) for you to su
 
 The event handler is the JavaScript function invoked when the event is fired. The argument of the event handler is a JavaScript object which contains event specific data. Get a widget reference, which fired the event, via the `sender` field of the event argument. The function context of the event handler, available via the `this` keyword, is set to the instance of the widget, which fired the event.
 
-###### Example - subscribe to a Gantt event during initialization
+The example below demonstrates how to subscribe to a Gantt event during initialization.
+
+###### Example
 
     <div id="gantt"></div>
     <script>
@@ -427,7 +441,9 @@ The event handler is the JavaScript function invoked when the event is fired. Th
     });
     </script>
 
-###### Example - subscribe to a Gantt event using the `bind` method
+The example below demonstrates how to subscribe to a Gantt event using the `bind` method.   
+    
+###### Example
 
     <div id="gantt"></div>
     <script>

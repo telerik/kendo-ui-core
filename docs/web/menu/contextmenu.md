@@ -19,6 +19,9 @@ Kendo UI ContextMenu can be initialized in two ways:
 * Through HTML markup
 * Through JSON data object
 
+> **Important**  
+> As ContextMenu should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
+
 #### Initialize ContextMenu using HTML markup
 
 ###### Example
@@ -69,8 +72,6 @@ Kendo UI ContextMenu can be initialized in two ways:
             })
         });
     </script>
-
-The initialization of the ContextMenu must occur after the DOM is fully loaded. It is recommended that you initialize the Menu within a `$(document).ready()` statement.
 
 ## Configuration
 

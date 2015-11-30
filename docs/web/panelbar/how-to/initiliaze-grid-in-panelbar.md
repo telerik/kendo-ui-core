@@ -64,5 +64,8 @@ The example below demonstrates how to use the `activate` event when initializing
 
 ## See Also
 
-* [Initialize the Grid inside a Hidden Container](/web/grid/appearance#initialize-the-grid-inside-a-hidden-container)    
-* [API Reference on the Configuration of PanelBar Animations](/api/javascript/ui/panelbar#configuration-animation)
+Other articles on Kendo UI PanelBar:
+
+* [JavaScript API Reference](/api/javascript/ui/panelbar)
+* [Initialize the Grid inside a Hidden Container]({% slug appearance_kendoui_grid_widget %}#hidden-containers)
+* [API Reference for Configuring PanelBar Animations](/api/javascript/ui/panelbar#configuration-animation)
