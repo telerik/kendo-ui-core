@@ -17,9 +17,9 @@ Try disabling browser extensions as a first step when faced performance issues.
 
 Most browsers provide a way to temporary disable all add-ons:
 
-* [Chrome - Incognito mode](https://support.google.com/chrome/answer/95464?source=gsearch&hl=en)
+* [Chrome - Incognito Mode](https://support.google.com/chrome/answer/95464?source=gsearch&hl=en)
 * [Internet Explorer - InPrivate Browsing](http://windows.microsoft.com/en-us/internet-explorer/products/ie-9/features/in-private)
-* [Firefox - Safe mode](https://support.mozilla.org/en-US/kb/troubleshoot-firefox-issues-using-safe-mode)
+* [Firefox - Safe Mode](https://support.mozilla.org/en-US/kb/troubleshoot-firefox-issues-using-safe-mode)
 
 ## Memory Leaks
 
@@ -39,6 +39,7 @@ Other articles on troubleshooting:
 
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
 * [JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
+* [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
 * [Common Issues in Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %})
 * [Common Issues in Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %})
 * [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})

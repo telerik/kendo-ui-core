@@ -70,6 +70,7 @@ Other articles on Kendo UI ComboBox:
 Other articles on troubleshooting:
 
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
+* [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
 * [JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
 * [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})

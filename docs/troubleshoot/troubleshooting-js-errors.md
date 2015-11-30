@@ -35,6 +35,7 @@ Other articles on troubleshooting:
 
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
 * [Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
+* [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
 * [Common Issues in Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %})
 * [Common Issues in Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %})
 * [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})
