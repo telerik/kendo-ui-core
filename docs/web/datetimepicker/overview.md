@@ -36,7 +36,11 @@ The DateTimePicker provides many configuration options that can be set during in
 * Navigation depth (i.e., define the last view to which the user can navigate)
 * Interval definition between predefined values in the time drop-down list
 
-### Define Selected, Min, and Max Datetime
+### Selected, Min, and Max Datetime
+
+The example below demonstrates how to define selected, min, and max datetimes.
+
+###### Example
 
     <input id="dateTimePicker">
 
@@ -52,7 +56,11 @@ The DateTimePicker provides many configuration options that can be set during in
 
 The DateTimePicker will set the value only if the entered datetime is valid and within the defined range.
 
-### Define the Format
+### Datetime Format
+
+The exampe below demonstrates how to define the datetime format.
+
+###### Example
 
     <input id="dateTimePicker">
 
@@ -72,7 +80,11 @@ The DateTimePicker value is parsed when the user changes the content via typing.
         }).attr("readonly", "readonly");
     </script>
 
-### Define the Time Format
+### Time Format
+
+The exampe below demonstrates how to define the time format.
+
+###### Example
 
     <input id="dateTimePicker">
 
@@ -82,7 +94,7 @@ The DateTimePicker value is parsed when the user changes the content via typing.
         });
     </script>
 
-### Define the Start View and Navigation Depth
+### Start View and Navigation Depth
 
 Define the first rendered view with the `start` option. Control the navigation depth with the `depth` option. The following views are predefined:
 
@@ -91,7 +103,11 @@ Define the first rendered view with the `start` option. Control the navigation d
 *   `decade` - shows the years of the decade
 *   `century` - shows the decades of the century
 
-### Create a Selectable Month DateTimePicker
+### Selectable Month DateTimePicker
+
+The exampe below demonstrates how to create a selectable month DateTimePicker.
+
+###### Example
 
     <input id="dateTimePicker">
 
@@ -102,9 +118,11 @@ Define the first rendered view with the `start` option. Control the navigation d
         });
     </script>
 
-### Define Intervals
+### Intervals
 
-Define the interval (in minutes) between values in the time drop-down list in the following way:
+Define the interval (in minutes) between values in the time drop-down list as demonstrated in the example below.
+
+###### Example
 
     <input id="dateTimePicker">
 
@@ -120,7 +138,9 @@ Kendo UI DateTimePicker widget provides the functionality to disable certain day
 
 ### Set an Array
 
-One way to disable a date is by setting an array. List the days that need to be disabled by using the first letters from their names in English:
+One way to disable a date is by setting an array. List the days that need to be disabled by using the first letters from their names in English.
+
+###### Example
 
 ```html
     <input id="dateTimePicker" />
@@ -135,7 +155,9 @@ One way to disable a date is by setting an array. List the days that need to be 
 
 ### Add a Function
 
-The other way to disable dates is by adding a function and determine its return value as `true` for the date that is disabled:
+The other way to disable dates is by adding a function and determine its return value as `true` for the date that is disabled.
+
+###### Example
 
 ```html
     <input id="dateTimePicker" />

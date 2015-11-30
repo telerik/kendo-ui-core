@@ -39,7 +39,7 @@ NumericTextBox provides configuration options that can be set during initializat
 
 For a complete overview of the methods and configuration options NumericTextBox applies, [review its API Reference](/api/javascript/ui/numerictextbox).
 
-### Customize Defaults
+### Defaults
 
 The example below demonstrates how to customize NumericTextBox defaults.
 
@@ -58,7 +58,7 @@ The example below demonstrates how to customize NumericTextBox defaults.
         });
     </script>
 
-### Create Currency NumericTextBox
+### Currency NumericTextBox
 
 The example below demonstrates how to create a currency NumericTextBox widget.
 
@@ -72,7 +72,7 @@ The example below demonstrates how to create a currency NumericTextBox widget.
         });
     </script>
 
-### Create Percentage NumericTextBox
+### Percentage NumericTextBox
 
 The example below demonstartes how to create a percentage NumericTextBox widget.
 

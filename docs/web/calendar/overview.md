@@ -36,9 +36,11 @@ The Calendar provides many configuration options that can be set during initiali
 *   Day template
 *   Footer template
 
-### Define Selected, Min, and Max Dates
+### Selected, Min, and Max Dates
 
-Create a Calendar with a selected date and a defined minimum and maximum dates in the following way:
+The example below demonstrates how to create a Calendar with a selected date and a defined minimum and maximum dates.
+
+###### Example
 
     <div id="calendar"></div>
 
@@ -52,7 +54,7 @@ Create a Calendar with a selected date and a defined minimum and maximum dates i
 
 As a result, the Calendar does not navigate before the specified minimum date and also restricts the navigation to the maximum date you specified.
 
-### Define the Start View and Navigation Depth
+### Start View and Navigation Depth
 
 Define the first rendered view with the `start` option. Control the navigation depth with the `depth` option. The following views are predefined:
 
@@ -61,9 +63,11 @@ Define the first rendered view with the `start` option. Control the navigation d
 *   `decade` - shows the years of the decade
 *   `century` - shows the decades of the century
 
-### Create a Selectable Month Calendar
+### Selectable Month Calendar
 
-Create a Calendar that allows users to select a month in the following way:
+The example below demonstrates how to create a Calendar that allows users to select a month.
+
+###### Example
 
     <div id="calendar"></div>
 
@@ -80,7 +84,9 @@ Kendo UI Calendar allows rendered day customization for the `month` view.
 
 ### Custom Templates
 
-Create a Calendar by using a custom template in the following way:
+The example below demonstrates how to create a Calendar by using a custom template.
+
+###### Example
 
     <div id="calendar"></div>
 
@@ -107,7 +113,9 @@ Kendo UI Calendar widget provides the functionality to disable certain days, suc
 
 ### Set an Array
 
-One way to disable a date is by setting an array. List the days that need to be disabled by using the first letters from their names in English:
+One way to disable a date is by setting an array. List the days that need to be disabled by using the first letters from their names in English.
+
+###### Example
 
 ```html
    <div id="calendar"></div>
@@ -121,7 +129,9 @@ One way to disable a date is by setting an array. List the days that need to be 
 
 ### Add a Function
 
-The other way to disable dates is by adding a function and determine its return value as `true` for the date that is disabled:
+The other way to disable dates is by adding a function and determine its return value as `true` for the date that is disabled.
+
+###### Example
 
 ```html
     <div id="calendar"></div>

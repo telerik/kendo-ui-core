@@ -1,20 +1,32 @@
 ---
 title: Overview
-page_title: Overview of PanelBar UI widget documentation
-description: Read when the initialization of PanelBar UI widget should occur and how to load the content with AJAX.
+page_title: Overview | Kendo UI PanelBar Widget
+description: "Learn how to initialize the Kendo UI PanelBar widget and configure its behaviors."
+slug: overview_kendoui_panelbar_widget
+position: 1
 ---
 
 # PanelBar Overview
 
-The Kendo UI PanelBar displays hierarchical data as a multi-level, expandable widget. Its structure may be defined in HTML or configured dynamically through its API. The content for items can also be loaded via AJAX by specifying a content URL.
-
+[Kendo UI PanelBar widget](http://demos.telerik.com/kendo-ui/panelbar/index) displays hierarchical data as a multi-level, expandable widget. Its structure may be defined in HTML or configured dynamically through its API. The content of the items can also be loaded via AJAX by specifying a content URL.
 
 ## Getting Started
 
-A PanelBar can be created by targeting the root element of a HTML list. A
-PanelBar will utilize this list to define its structure and content.
+### Initialize the PanelBar 
 
-### Initialize a Kendo UI PanelBar using HTML markup
+You can create a PanelBar in the following ways:
+
+* Through HTMl markup
+* Through JSON data object 
+
+> **Important**  
+> As PanelBar should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
+
+#### Initialize PanelBar using HTML markup
+
+You can create a Kendo UI PanelBar by targeting the root element of an HTML list. The widget utilizes this list to define its structure and content.
+
+###### Example
 
     <ul id="panelbar">
         <li>
@@ -32,26 +44,12 @@ PanelBar will utilize this list to define its structure and content.
             $("#panelbar").kendoPanelBar();
         });
     </script>
-
-PanelBar items may contain nested content (including markup) within a div
-element. Text content located outside nested content will be used as the title of the item.
-
-### Create a list of items in HTML with nested content
-
-    <ul id="panelbar">
-        <li>Item with no content</li>
-        <li>Item with content
-            <div>This is nested content of a PanelBar item.</div>
-        </li>
-    </ul>
     
-    <script>
-        $(document).ready(function() {
-            $("#panelbar").kendoPanelBar();
-        });
-    </script>
+#### Initialize PanelBar using JSON data object
 
-### Initialize a Kendo UI PanelBar using JSON data object
+The example below demonstrates how to initialize a PanelBar by using a JSON data object.
+
+###### Example
 
     <ul id="panelbar"></ul>
 
@@ -60,23 +58,23 @@ element. Text content located outside nested content will be used as the title o
         dataSource: [
           {
             text: "Item 1",
-            cssClass: "myClass",                            // Add custom CSS class to the item, optional, added 2012 Q3 SP1.
-            url: "http://www.telerik.com/"                  // link URL if navigation is needed (optional)
-          },
+            cssClass: "myClass",                            // (Optional) Add custom CSS class to the item, added 2012 Q3 SP1.
+            url: "http://www.telerik.com/"                  // (Optional) Link URL if navigation is needed 
+            },
           {
             text: "<b>Item 2</b>",
-            encoded: false,                                 // Allows use of HTML for item text
-            content: "text"                                 // content within an item
+            encoded: false,                                 // Allows the use of HTML for item text
+            content: "text"                                 // Content within an item
           },
           {
             text: "Item 3",
-            contentUrl: "partialContent.html"               // content URL to load within an item
+            contentUrl: "partialContent.html"               // Content URL to load within an item
           },
           {
             text: "Item 4",
-            imageUrl: "http://www.telerik.com/test.jpg",    // item image URL, optional
-            expanded: true,                                 // item is rendered expanded
-            items: [{                                       // Sub item collection.
+            imageUrl: "http://www.telerik.com/test.jpg",    // (Optional) Item image URL
+            expanded: true,                                 // Item is rendered expanded
+            items: [{                                       // Sub-item collection
               text: "Sub Item 1"
             },
                     {
@@ -92,14 +90,35 @@ element. Text content located outside nested content will be used as the title o
       });
     </script>
     
-Initialization of a PanelBar should occur after the DOM is fully loaded. It is recommended that initialization the PanelBar is done within a $(document).ready() statement.
+## Configuration
 
-## Load Content with AJAX
+### Item Lists with Nested Content
 
-The PanelBar provides built-in support for asynchronously loading content from remote URLs. These URLs should return HTML content that can be
-loaded in the PanelBar item content area. Content DIVs should be empty for AJAX loading to work.
+PanelBar items may contain nested content, including markup, within a `<div>` element. The text content located outside the nested content is used as a title of the item.
 
-### Load a PanelBar item content asynchronously via AJAX
+###### Example
+
+    <ul id="panelbar">
+        <li>Item with no content</li>
+        <li>Item with content
+            <div>This is nested content of a PanelBar item.</div>
+        </li>
+    </ul>
+    
+    <script>
+        $(document).ready(function() {
+            $("#panelbar").kendoPanelBar();
+        });
+    </script>
+
+
+### Content with AJAX
+
+The PanelBar provides built-in support for asynchronously loading content from remote URLs. These URLs should return HTML content that can be loaded in the PanelBar item content area. Content `<div>` elements should be empty for AJAX loading to work.
+
+The example below demonstrates how to load a PanelBar item content aynchronously via AJAX. 
+
+###### Example
 
     <ul id="panelbar">
         <li>Item 1
@@ -124,18 +143,17 @@ loaded in the PanelBar item content area. Content DIVs should be empty for AJAX 
         });
     </script>
 
-When the PanelBar loads remote content via AJAX, the server response is cached in-memory so
-that subsequent expand/collapse actions do not trigger subsequent AJAX requests.
+When the PanelBar loads remote content via AJAX, the server response is cached in-memory so that subsequent expand/collapse actions do not trigger subsequent AJAX requests.
 
+### PanelBar Animations
 
-## Customize PanelBar Animations
+By default, a PanelBar uses animations to expand and reveal sub-items when an item header is clicked. These animations can be modified in configuration via the open and close animation properties. A
+PanelBar can also be configured to only allow one panel be opened at a time. 
 
+The example below demonstrates how to change the PanelBar animation and `expandMode` behavior.
 
-By default, a PanelBar uses animations to expand and reveal sub-items when an item header is
-clicked. These animations can be modified in configuration via the open and close animation properties. A
-PanelBar can also be configured to only allow one panel be opened at a time.
+###### Example
 
-### Change PanelBar animation and expandMode behavior
     <ul id="panelbar"></ul>
     
     <script>
@@ -147,16 +165,19 @@ PanelBar can also be configured to only allow one panel be opened at a time.
         });
     </script>
 
-## Configure dynamic PanelBar items
 
+### Dynamic Items
 
-The PanelBar API provides methods for dynamic adding or removing PanelBar items. To add items, you need to provide the new item as a JSON
-object along with a reference item.
+[The PanelBar API](/api/javascript/ui/panelbar) provides methods for dynamically adding or removing PanelBar items. 
 
-A reference item is a target PanelBar item HTML element that already exists in the PanelBar. The reference item will be used to determine the
-placement in the hierarchy of the new item. Any valid jQuery selector can be used to obtain a reference to the target item.
+To add items, provide the new item as a JSON object along with a reference item. A reference item is a target PanelBar item HTML element that already exists in the PanelBar. The reference item will be used to determine the placement in the hierarchy of the new item. Any valid jQuery selector can be used to obtain a reference to the target item.
 
-### How to add new root PanelBar item
+For more information on configuring PanelBar items, see the [PanelBar API demos](http://demos.telerik.com/kendo-ui/panelbar/api).
+
+The example below demonstrates how to add a new root PanelBar item.
+
+###### Example
+
     <ul id="panelbar"></ul>
     
     <script>
@@ -167,3 +188,13 @@ placement in the hierarchy of the new item. Any valid jQuery selector can be use
             panelBar.element.children("li:last")
         );
     </script>
+    
+## See Also
+
+Other articles on Kendo UI PanelBar and how-to examples:
+
+* [How to Initialize the Grid in PanelBar]({% slug initialize_thegrid_panelbar_widget %})
+* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/panelbar/overview)
+* [Overview of the JSP Tag](/jsp/tags/panelbar/overview)
+* [Overview of the PHP Class](/php/widgets/panelbar/overview)
+* [JavaScript API Reference](/api/javascript/ui/panelbar)

@@ -34,7 +34,9 @@ Initialize the AutoComplete widget by using a jQuery selector:
     </span>
 
 
-## Suggestions
+## Configuration
+
+### Suggestions
 
 There are two primary ways to provide AutoComplete suggestions:
 
@@ -43,13 +45,13 @@ There are two primary ways to provide AutoComplete suggestions:
 
 Locally defined values are best for small, fixed sets of suggestions. Remote suggestions must be used for larger data sets. When used with the `DataSource` component, filtering large remote data services can be pushed to the server as well, maximizing client-side performance.
 
-### Local Data Array
+#### Local Data Array
 
 To configure and provide AutoComplete suggestions locally, you can either pass an array directly to its constructor or you can set the `dataSource` property to a local array.
 
-#### Initialize Local Data Array
+You can directly initialize a local data array in `constructor` as demonstrated in the example below.
 
-You can directly initialize a local data array in `constructor`:
+###### Example
     
     <input id="autoComplete" />
     
@@ -57,9 +59,9 @@ You can directly initialize a local data array in `constructor`:
         $("#autoComplete").kendoAutoComplete(["Item1", "Item2", "Item3"]);
     </script>
 
-#### Bind to Local Data Array
+You can bind the widget to a local data array by using the `dataSource` property as demonstrated int he example below.
 
-You can bind to a local data array by using the `dataSource` property:
+###### Example
     
     <input id="autoComplete" />
     <script>
@@ -69,13 +71,13 @@ You can bind to a local data array by using the `dataSource` property:
         });
     </script>
 
-### Remote Data Service
+#### Remote Data Service
 
 The easiest way to bind an AutoComplete to a remote data service is to use the `DataSource` component - an abstraction for local and remote data. `DataSource` can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
-#### Bind to Remote Data Service
+You can bind the widget to a remote data service by using OData by means of the `DataSource` component as demonstrated in the example below.
 
-You can bind to a remote data service by using OData by means of the `DataSource` component:
+###### Example
 
     $(document).ready(function(){
         $("#autoComplete").kendoAutoComplete({
@@ -90,9 +92,9 @@ You can bind to a remote data service by using OData by means of the `DataSource
         });
     });
 
-#### Bind to JSONP Service
+You can bind the widget to a JSONP service by using Kendo UI `DataSource` as demonstrated in the example below.
 
-You can bind to a JSONP service by using Kendo UI `DataSource`:
+###### Example
 
     $(document).ready(function(){
      $("#autoComplete").kendoAutoComplete({
@@ -121,6 +123,21 @@ You can bind to a JSONP service by using Kendo UI `DataSource`:
       }
      })
     });
+    
+### Drop-Down List
+
+You can customize the width of a drop-down list and change its dimensions by using the jQuery width() method.
+
+###### Example
+
+    <input id="autoComplete" />
+    
+    <script>  
+        $("#autoComplete").kendoAutoComplete();
+        var autoComplete = $("#autocomplete").data("kendoAutoComplete");
+        // set width of the drop-down list
+        autoComplete.list.width(400);
+    </script>
 
 ## Templates
 
@@ -130,7 +147,9 @@ The AutoComplete widget uses Kendo UI templates to enable control over how an it
 
 The AutoComplete widget uses Kendo UI templates to control the way drop-down items are rendered.
 
-###### Example - define an item template
+The example below demonstrates how to define an item template.
+
+###### Example
 
     <input id="autoComplete" />
     <!-- Template -->
@@ -160,7 +179,9 @@ The AutoComplete widget uses Kendo UI templates to control the way drop-down ite
 
 The AutoComplete widget provides the rendering of a pop-up header.
 
-###### Example - define a header template
+The example below demonstrates how to define a header template.
+
+###### Example 
     
     <input id="autoComplete" />
     <!-- Template -->
@@ -186,23 +207,6 @@ The AutoComplete widget provides the rendering of a pop-up header.
         });
     </script>
 
-## Configuration
-
-### Drop-Down List
-
-You can customize the width of a drop-down list and change its dimensions by using the jQuery width() method.
-
-###### Example
-
-    <input id="autoComplete" />
-    
-    <script>  
-        $("#autoComplete").kendoAutoComplete();
-        var autoComplete = $("#autocomplete").data("kendoAutoComplete");
-        // set width of the drop-down list
-        autoComplete.list.width(400);
-    </script>
-    
 ## See Also
 
 Other articles on Kendo UI AutoComplete:
