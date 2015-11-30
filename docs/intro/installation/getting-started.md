@@ -13,12 +13,12 @@ position: 1
 
 Depending on your preferences and the requirements of your project, you can:
 
-* [Download Kendo UI for a 30-day trial period](http://www.telerik.com/download/kendo-ui)
-* [Get your commercial license for Telerik Kendo UI® Professional](http://www.telerik.com/purchase/kendo-ui)
-* [Get your commercial license for Telerik UI for ASP.NET MVC](http://www.telerik.com/purchase/aspnet-mvc)
-* [Get your commercial license for Telerik UI for JSP](http://www.telerik.com/purchase/jsp-ui)
-* [Get your commercial license for Telerik UI for PHP](http://www.telerik.com/purchase/php-ui)
-* [Use the GitHub open-source license for Telerik Kendo UI® Core](https://github.com/telerik/kendo-ui-core)
+* [Download Kendo UI for a 30-day Trial Period](http://www.telerik.com/download/kendo-ui)
+* [Get Your Commercial License for Telerik Kendo UI® Professional](http://www.telerik.com/purchase/kendo-ui)
+* [Get Your Commercial License for Telerik UI for ASP.NET MVC](http://www.telerik.com/purchase/aspnet-mvc)
+* [Get Your Commercial License for Telerik UI for JSP](http://www.telerik.com/purchase/jsp-ui)
+* [Get Your Commercial License for Telerik UI for PHP](http://www.telerik.com/purchase/php-ui)
+* [Use the GitHub Open-Source License for Telerik Kendo UI® Core](https://github.com/telerik/kendo-ui-core)
 
 ### Step 1: Download
 
@@ -108,7 +108,9 @@ The example below demonstrates the full initialization of the [DatePicker widget
         </body>
     </html>
 
-## Bower Packages
+## Install Bower Packages
+
+### Kendo UI Bower Packages
 
 [Bower](http://bower.io/) is a popular package manager for the web.
 
@@ -116,7 +118,9 @@ Kendo UI maintains 2 bower packages, namely Kendo UI Core and Kendo UI Professio
 
 For more information on installing Kendo UI as a Bower package, see [this article]({% slug kendoui_bower_packages_kendoui_installation %}).
 
-## CDN Services
+## Use CDN Services
+
+### Kendo UI CDN Services
 
 Kendo UI CDN is hosted on [Amazon CloudFront](https://aws.amazon.com/cloudfront/). To access the CDN Service, you can use different approaches.
 

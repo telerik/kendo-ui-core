@@ -1,11 +1,12 @@
 ---
-title: List of Script Files for the Data Visualization Widgets
-page_title: List of Script Files for the Data Visualization Widgets
-description: "Script files for Kendo UI widgets that render data visualization."
+title: Script Files for Data Visualization Widgets
+page_title: Script Files for Data Visualization Widgets | Kendo UI Installation
+description: "Learn which are the script files for Kendo UI widgets that render data visualization."
+slug: script_filesfor_datavisualization_widgets
 position: 4
 ---
 
-# List of Script Files for the Data Visualization Widgets
+# Script Files for Data Visualization Widgets
 
 Below are listed the script files for Kendo UI widgets rendering data visualization for desktop and mobile web applications:
 
@@ -110,3 +111,12 @@ Below are listed the script files for Kendo UI widgets rendering data visualizat
 | 						| kendo.dataviz.core.js						| 							|
 | 						| kendo.dataviz.themes.js					| 							|
 | 						| kendo.dataviz.treeMap.js					| 							|
+
+## See Also
+
+Articles with script files for the other Kendo UI components:
+
++ [List of Script Files for the Desktop UI Widgets]({% slug scirpt_filesfor_desktop_widgets %})  
++ [List of Script Files for the Frameworks and Widgets for Mobile Applications]({% slug script_filesfor_hybridui_widgets %})
++ [List of Script Files for the Tools and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
++ [List of Script Files for the Server-Side Wrappers]({% slug script_filesfor_serverside_wrappers %})

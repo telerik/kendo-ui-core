@@ -1,11 +1,12 @@
 ---
-title: List of Script Files for the Hybrid UI Widgets
-page_title: List of Script Files for the Hybrid UI Widgets
-description: "Script files for Kendo UI hybrid widgets and frameworks."
+title: Script Files for Hybrid UI Widgets
+page_title: Script Files for Hybrid UI Widgets | Kendo UI Installation
+description: "Learn which are the script files for Kendo UI hybrid widgets and frameworks."
+slug: script_filesfor_hybridui_widgets
 position: 5
 ---
 
-# List of Script Files for the Hybrid UI Widgets
+# Script Files for Hybrid UI Widgets
 
 Below are listed the script files for Kendo UI frameworks and widgets for mobile applications:
 
@@ -137,3 +138,12 @@ Below are listed the script files for Kendo UI frameworks and widgets for mobile
 | 						| kendo.core.js								|
 | 						| kendo.userevents.js						|
 | 						| kendo.touch.js							|
+
+## See Also
+
+Articles with script files for the other Kendo UI components:
+
++ [List of Script Files for the Desktop UI Widgets]({% slug scirpt_filesfor_desktop_widgets %})  
++ [List of Script Files for the Widgets Rendering Data Visualization]({% slug script_filesfor_datavisualization_widgets %})
++ [List of Script Files for the Tools and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
++ [List of Script Files for the Server-Side Wrappers]({% slug script_filesfor_serverside_wrappers %})
