@@ -1,16 +1,17 @@
 ---
-title: Render row header caption as anchor
-page_title: Render row header caption as anchor
-description: Render row header caption as anchor
+title: Render Row Header Caption As Anchor
+page_title: Render Row Header Caption As Anchor | Kendo UI PivotGrid Widget
+description: "Learn how to render a row header captino as an anchor in a Kendo UI PivotGrid widget."
+slug: howto_render_rowheader_captionas_anchor_pivotgrid
 ---
 
-# Render row header caption as anchor
+# Render Row Header Caption As Anchor
 
-The example below demonstrates how to use [rowHeaderTemplate](/api/javascript/ui/pivotgrid#configuration-rowHeaderTemplate)
-to render some of the row header caption fields as anchors. The same approach is applicable when [columnHeaderTemplate](/api/javascript/ui/pivotgrid#configuration-columnHeaderTemplate)
-or [dataCellTemplate](/api/javascript/ui/pivotgrid#configuration-dataCellTemplate) options are used.
+The example below demonstrates how to use [`rowHeaderTemplate`](/api/javascript/ui/pivotgrid#configuration-rowHeaderTemplate) to render some of the row header caption fields as anchors. 
 
-#### Example:
+Apply the same approach when [`columnHeaderTemplate`](/api/javascript/ui/pivotgrid#configuration-columnHeaderTemplate) or [`dataCellTemplate`](/api/javascript/ui/pivotgrid#configuration-dataCellTemplate) options are used.
+
+###### Example
 
 ```html
 <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
@@ -70,3 +71,27 @@ or [dataCellTemplate](/api/javascript/ui/pivotgrid#configuration-dataCellTemplat
     </script>
 </div>
 ```
+
+## See Also
+
+Other articles on Kendo UI PivotGrid:
+
+* [JavaScript API Reference](/api/javascript/ui/pivotgrid)
+* [How to Access MDX Query]({% slug howto_access_mdx_query_pivotgrid %})
+* [How to Add Dimension to Column Axis]({% slug howto_add_dimension_column_axis_pivotgrid %})
+* [How to Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
+* [How to Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
+* [How to Expand "Include fields" TreeView]({% slug howto_expand_include_fields_treeview_pivotgrid %})
+* [How to Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})
+* [How to Filter by Using the "include" Operator]({% slug howto_use_include_operator_pivotgrid %})
+* [How to Filter Dimensions]({% slug howto_filter_dimensions_pivotgrid %})
+* [How to Integrate with Kendo UI Chart]({% slug howto_integratewith_kendoui_chart_pivotgrid %})
+* [How to Make "Include fields" Window Modal]({% slug howto_make_include_fields_window_modal_pivotgrid %})
+* [How to Modify Exported Excel Files]({% slug howto_modify_exported_excel_files_pivotgrid %})
+* [How to Modify Measure Tag Captions]({% slug howto_modify_measure_tag_captions_pivotgrid %})
+* [How to Reload PivotGrid Configuration Options]({% slug howto_reload_configuration_options_pivotgrid %})
+* [How to Right-Align Text]({% slug howto_right_align_text_pivotgrid %})
+* [How to Show Tooltip with Data Cell Information]({% slug howto_show_tooltip_withdata_cellinformation_pivotgrid %})
+* [How to Sort Dimensions]({% slug howto_sort_dimensions_pivotgrid %})
+* [How to Translate PivotConfigurator Field Items]({% slug howto_translate_pivotconfigurator_messages_pivotgrid %})
+* [How to Translate PivotGrid Messages]({% slug howto_translate_pivotgrid_messages_pivotgrid %})

@@ -1,38 +1,49 @@
 ---
-title: Kendo UI PivotGrid FAQ
-page_title: Kendo UI PivotGrid Frequently Asked Questions
-description: Answers to Frequently Asked Questions about what Kendo UI PivotGrid supports
+title: Frequently Asked Questions
+page_title: Frequently Asked Questions | Kendo UI PivotGrid Widget
+description: "Find the most frequent questions related to the Kendo UI PivotGrid widget and their answers."
+slug: frequently_asked_questions_pivotgrid
+position: 6
 ---
 
-# Kendo UI PivotGrid Frequently Asked Questions
+# Frequently Asked Questions
 
-This is a collection of frequently asked questions about what Kendo UI PivotGrid supports.
+This is a collection of the most frequently asked questions (FAQ) related to the Kendo UI PivotGrid widget and their answers.
 
-## Q: Does the PivotGrid widget works with OLAP cube delived by MS SSAS?
+## OLAP 
 
-A: _**Yes.**_ The [MS SSAS](http://technet.microsoft.com/en-us/library/ms175609(v=sql.90).aspx) uses [XMLA](http://en.wikipedia.org/wiki/XML_for_Analysis) protocol, which is the main requirement for the PivotGrid to work.
+### Does Kendo UI PivotGrid Work with OLAP Cube, Delived by MS SSAS?
 
-## Q: Does the PivotGrid widget works with different OLAP servers?
+Yes. The [Microsoft SQL Server Analysis Services (MS SSAS)](http://technet.microsoft.com/en-us/library/ms175609(v=sql.90).aspx) use the [XMLA](http://en.wikipedia.org/wiki/XML_for_Analysis) protocol, which is the main requirement for the PivotGrid to work.
 
-A: If the OLAP service implements [XMLA](http://en.wikipedia.org/wiki/XML_for_Analysis) standard, then it should work out-of-the-box. Please note that the supported format of [Execute](http://msdn.microsoft.com/en-us/library/ms186691.Aspx) method is a **Multidimensional** property:
+### Does the PivotGrid Work with Different OLAP Servers?
+
+If the OLAP service implements the [XMLA](http://en.wikipedia.org/wiki/XML_for_Analysis) standard, it should work out-of-the-box. Note that the supported format of the [`Execute`](http://msdn.microsoft.com/en-us/library/ms186691.Aspx) method is a Multidimensional property:
 
 	<PropertyList>
        <Format>Multidimensional</Format>
     </PropertyList>
 
-and value of the *Axis format* should be **TupleFormat**:
+The value of the `AxisFormat` should be `TupleFormat`:
 
 	<PropertyList>
        <AxisFormat>TupleFormat</AxisFormat>
     </PropertyList>
 
-## Q: How to connect to a secured OLAP instance?
+### How to Connect to Secured OLAP Instance?
 
-A: Please check the [Access the cube securely](/kendo-ui/web/pivotgrid/olap-cube-setup#access-the-cube-securely) section.
+Check the [section related to accessing the cube securely](/kendo-ui/web/pivotgrid/olap-cube-setup#access-the-cube-securely).
 
-## Q: I don't have OLAP cube, can I still use Kendo UI PivotGrid?
+### I Do Not Have OLAP Cube. Can I Still Use the PivotGrid?
 
-A: Currently, the Kendo UI PivotDataSource has limited support for [binding to flat data](http://demos.telerik.com/kendo-ui/pivotgrid/local-flat-data-binding). Note that in this scenario not all of the features avialable when bound to a OLAP cube are supported. Those includes filtering, sorting, hierarchies and etc.
+Currently, Kendo UI `PivotDataSource` has limited support for [binding to flat data](http://demos.telerik.com/kendo-ui/pivotgrid/local-flat-data-binding). Note that in this scenario not all of the features that are avialable when the widget is bound to an OLAP cube are supported, such as filtering, sorting, hierarchies, etc.
 
-## Next steps:
-- [Getting started](/web/pivotgrid/overview)
+## See Also 
+
+Other article on Kendo UI PivotGrid:
+
+* [Overview]({% slug overview_kendoui_pivotgrid_widget %})
+* [PivotConfigurator]({% slug overview_kendoui_pivotconfigurator_pivotgridwidget %})
+* [Exporting]({% slug exporting_functionality_pivotgridwidget %})
+* [Fundamentals]({% slug fundamentals_pivotgrid_widget %})
+* [OLAP Cube Setup]({% slug olap_cube_setup_pivotgrid_widget %})

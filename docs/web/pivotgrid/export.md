@@ -1,81 +1,70 @@
 ---
 title: Exporting
-description: Kendo UI Grid Excel Export feature
+page_title: Exporting | Kendo UI PivotGrid Widget
+description: "Learn how to export a Kendo UI PivotGrid to Excel and in PDF."
+slug: exporting_functionality_pivotgridwidget
+position: 3
 ---
 
 # Exporting
 
-When using **Kendo UI Q1 2015 and newer versions**, the PivotGrid provides built-in PDF and Excel export functionality.
+As of Kendo UI 2015 Q1 and newer versions, the PivotGrid widget provides a built-in PDF and Excel export functionality.
 
 ## PDF Export
 
-The PDF export is enabled by default when `kendo.all.min.js`, `kendo.web.min.js` or custom build that includes PDF scripts are loaded on the page.
-To setup the PDF export refer to the PDF configuration option:
+PDF export is enabled by default when `kendo.all.min.js`, `kendo.web.min.js`, or a custom build that includes PDF scripts are loaded on the page. To set up PDF export, refer to [the PDF configuration option](/api/javascript/ui/pivotgrid#configuration-pdf).
 
-* [PDF export configuration](/api/javascript/ui/pivotgrid#configuration-pdf)
-
-The most important thing to point out is that exporting in older browsers (IE9 and below, Safari) requires the implementation of a server proxy
-(more information is available in the `proxyUrl` configuration sections above). **PDF export is not supported in IE8 and below.**
+> **Important**  
+> * Exporting in older browsers, such as Internet Explorer 9 and older, or Safari, requires the implementation of a server proxy. For more information, see the [`proxyUrl` configuration sections above](/api/javascript/ui/pivotgrid#configuration-pdf). 
+> * PDF export is not supported in Internet Explorer 8 and older browser versions.
 
 ## Excel Export
 
-Kendo UI Grid can export its data as Excel document since the Q1 2015 version .
+### Enable Export
 
-- [Enable Excel Export](#enable-excel-export)
-- [What is Exported](#what-is-exported)
-- [How To](#how-to)
-    - Customize the Excel Document
-    - Templates
-- [Troubleshooting](#troubleshooting)
-- [Further Reading](#further-reading)
+The Excel export is enabled by default when `kendo.ooxml.min.js` is loaded on the page. Note that `kendo.ooxml.min.js` is included in `kendo.all.min.js` and `kendo.web.min.js`. To setup the export to Excel, refer to the following configuration knowledge sources:
 
-### Enable Excel Export
+* [Excel Export Configuration](/api/javascript/ui/pivotgrid#configuration-excel)
+* [Online Demo](http://demos.telerik.com/kendo-ui/pivotgrid/excel-export)
 
-The Excel export is enabled by default when `kendo.ooxml.min.js` is loaded on the page. Note that it is included in `kendo.all.min.js` and `kendo.web.min.js`.
-To setup the Excel export refer to the Excel configuration option:
+To initiate Excel export  via code, call the [`saveAsExcel`](/api/javascript/ui/pivotgrid.html#methods-saveAsExcel) method.
 
-* [Excel export configuration](/api/javascript/ui/pivotgrid#configuration-excel)
-* [Online demo](http://demos.telerik.com/kendo-ui/pivotgrid/excel-export)
+### Features
 
-To initiate Excel export via code call the [saveAsExcel](/api/javascript/ui/pivotgrid.html#methods-saveAsExcel) method.
+#### Exported Content
 
+With the default configuration, Kendo UI PivotGrid exports the current data with the sorting and filtering functionalities applied.
 
-### What is Exported
+The PivotGrid widget does not export the current CSS theme in the Excel file. 
 
-With the default configuration Kendo UI PivotGrid exports the current data with sorting, filtering applied.
+For more information on how to change the visual appearance of the Excel document, see the section about [the Excel customizaion](#customize-the-excel-document) below. 
 
-The pivotgrid doesn't export the current CSS theme in the Excel file. Check [Customzie the Excel Document](#customize-the-excel-document) for information about changing the visual appearance of the Excel document.
+The [`dataCellTemplate`](/api/javascript/ui/pivotgrid#configuration-dataCellTemplate), [`columnHeaderTemplate`](/api/javascript/ui/pivotgrid#configuration-columnHeaderTemplate), and
+the [`rowHeaderTemplate`](/api/javascript/ui/pivotgrid#configuration-rowHeaderTemplate) options are not used during export. For more information on this, see the section about the [templates](#templates) below.
 
-The [dataCellTemplate](/api/javascript/ui/pivotgrid#configuration-dataCellTemplate), [columnHeaderTemplate](/api/javascript/ui/pivotgrid#configuration-columnHeaderTemplate) and
-[rowHeaderTemplate](/api/javascript/ui/pivotgrid#configuration-rowHeaderTemplate) options are **not** used during export. Check [Templates](#templates) for more info.
+### Excel Customization
 
-### How To
+The [`excelExport`](/api/javascript/ui/grid#events-excelExport) event allows customization of the generated Excel document. The `workbook` event argument exposes the generated Excel workbook configuration.
 
-#### Customize the Excel Document
+For a better understanding about how Excel documents work, check the [introductory help topic on Excel](/framework/excel/introduction#create-excel-document).
 
-The [excelExport](/api/javascript/ui/grid#events-excelExport) event allows customization of the generated Excel document.
-The `workbook` event argument exposes the generated Excel workbook configuration.
+### Templates
 
-To understand how Excel documents work check the [Excel Introduction](/framework/excel/introduction#create-excel-document) help topic.
+Kendo UI PivotGrid does not use [`dataCellTemplate`](/api/javascript/ui/pivotgrid#configuration-dataCellTemplate), [`columnHeaderTemplate`](/api/javascript/ui/pivotgrid#configuration-columnHeaderTemplate), and [`rowHeaderTemplate`](/api/javascript/ui/pivotgrid#configuration-rowHeaderTemplate) during Excel export. It exports only the data. The reason for this is that the templates may contain arbitrary HTML which cannot be converted to Excel column values.
 
-#### Templates
+## Troubleshooting
 
-Kendo UI PivotGrid doesn't use [dataCellTemplate](/api/javascript/ui/pivotgrid#configuration-dataCellTemplate), [columnHeaderTemplate](/api/javascript/ui/pivotgrid#configuration-columnHeaderTemplate) and
-[rowHeaderTemplate](/api/javascript/ui/pivotgrid#configuration-rowHeaderTemplate) during Excel export - it exports only the data. The reason is simple - the templates may contain arbitrary HTML which can't be converted to Excel column values.
+### JavaScript "JSZip Is Not Found" Error
 
-### Troubleshooting
+Clicking the **Export to Excel** button or calling the `saveAsExcel` throws an exception if the JSZip JavaScript library is not found. o solve this issue, include JSZip in the page. For more information on this, see the [introductory help topic about exporting to Excel](/framework/excel/introduction#requirements).  
 
-#### JavaScript error that JSZip is not found
+### Export Not Working in Internet Explorer and Safari
 
-Clicking the "Export to Excel" button or calling the `saveAsExcel` throws an exception if the JSZip JavaScript library isn't found. Including JSZip in the page solves the problem.
-Further info is available in the [Excel Export Introduction](/framework/excel/introduction#requirements)
+Internet Explorer 10, or older, and Safari do not support the option of file saving and require the implementation of a [server proxy](/framework/save-files/introduction#browser-support). Set the [`proxyURL`](/api/javascript/ui/pivotgrid#configuration-excel.proxyURL) option to specify the server proxy URL.
 
-#### Export does not work in Internet Explorer and Safari
+The example below demonstrates how to specify the server proxy URL.
 
-Internet Explorer versions below 10 and Safari can't save a file and require the implementation of a [server proxy](/framework/save-files/introduction#browser-support).
-Set the [proxyURL](/api/javascript/ui/pivotgrid#configuration-excel.proxyURL) option to specify the server proxy URL.
-
-#### Example - user server proxy
+###### Example
 
     <div id="grid"></div>
     <script>
@@ -102,9 +91,18 @@ Set the [proxyURL](/api/javascript/ui/pivotgrid#configuration-excel.proxyURL) op
         });
     </script>
 
+## Further Reading
 
-### Further Reading
+* [Learn More about Creating Excel Documents with Kendo UI](/framework/excel/introduction)
+* [Learn How to Save Files with Kendo UI](/framework/save-files/introduction)
+* [`kendo.ooxml.Workbook` API Reference](/api/javascript/ooxml/Workbook)
 
-* [Create Excel Documents with Kendo UI](/framework/excel/introduction)
-* [Save Files with Kendo UI](/framework/save-files/introduction)
-* [kendo.ooxml.Workbook API Reference](/api/javascript/ooxml/Workbook)
+## See Also
+
+Other articles on Kendo UI PivotGrid: 
+
+* [Overview]({% slug overview_kendoui_pivotgrid_widget %})
+* [PivotConfigurator]({% slug overview_kendoui_pivotconfigurator_pivotgridwidget %})
+* [Fundamentals]({% slug fundamentals_pivotgrid_widget %})
+* [OLAP Cube Setup]({% slug olap_cube_setup_pivotgrid_widget %})
+* [Frequently Asked Questions]({% slug frequently_asked_questions_pivotgrid %})

@@ -1,49 +1,53 @@
 ---
-title: Setup OLAP cube
-page_title: Quick steps for OLAP cube setup
-description: A list of steps for OLAP cube setup and HTTP access
+title: OLAP Cube Setup
+page_title: OLAP Cube Setup | Kendo UI PivotGrid Widget
+description: "Learn how to set up the OLAP Cube when working with the Kendo UI PivotGrid widget."
+slug: olap_cube_setup_pivotgrid_widget
+position: 5
 ---
 
-#OLAP Cube setup steps
+# OLAP Cube Setup
 
-This topic shows the required steps for the OLAP cube setup using MS [SSAS](http://technet.microsoft.com/en-us/library/ms175609(v=sql.90).aspx).
+This article demonstrates the required steps to set up the OLAP Cube by using Microsoft SQL Server Analysis Services [SSAS](http://technet.microsoft.com/en-us/library/ms175609(v=sql.90).aspx).
 
-## Install SQL Server Analysis Services
+## Install SSAS
 
-To install [SQL Server Analysis Services](http://technet.microsoft.com/en-us/library/ms175609(v=sql.90).aspx) follow this [MSDN tutorial](http://msdn.microsoft.com/en-us/library/hh403424(v=sql.110).aspx).
+For detailed information on how to install the [SQL Server Analysis Services](http://technet.microsoft.com/en-us/library/ms175609(v=sql.90).aspx), follow the [MSDN tutorial](http://msdn.microsoft.com/en-us/library/hh403424(v=sql.110).aspx).
 
-## Define an OLAP Cube
-Follow the [Multidimensional modeling tutorial](http://msdn.microsoft.com/en-us/library/ms170208(v=sql.110).aspx), which shows how to create, define and deploy OLAP multidimensional cube.
+## Define OLAP Cube
 
-## Configure HTTP Access to Analysis Services
-HTTP access to SQL Server Analysis Services can be enabled using a MSMDPUMP.ddl ISAPI extension. Follow this [tutorial](http://technet.microsoft.com/en-us/library/gg492140.aspx), which shows how to setup the MSMDPUMP.ddl extension. [Here](http://demos.telerik.com/olap/msmdpump.dll) you can find an online accessible OLAP service for test purposes.
+For detailed information on how to create, define, and deploy the OLAP multidimensional cube, follow the [MSDN multidimensional modelling tutorial](http://msdn.microsoft.com/en-us/library/ms170208(v=sql.110).aspx).
 
-## Enable cross-domain access to the OLAP service
+## Configure HTTP Access
 
-For deeper understanding about **CORS** check this [article](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS).
+HTTP access to SQL Server Analysis Services can be enabled by using a MSMDPUMP.ddl ISAPI extension. 
 
->This step is **not** required if the cube will **not** be requested from different domains.
+For detailed information on how to set up the MSMDPUMP.ddl extension, follow the [MSDN HTTP access tutorial](http://technet.microsoft.com/en-us/library/gg492140.aspx). 
 
-If you want to allow cross-domain requests to the OLAP service, then you will need to enable CORS behavior of your server.
+To find an online accessible OLAP service for test purposes, follow [this link](http://demos.telerik.com/olap/msmdpump.dll).
 
-*This topic will examine how to enable CORS of [IIS](http://www.iis.net/)* server.
+## Enable Cross-Domain Access
 
-Cross-domain access requires to specify:
+> **Important**  
+> This step is not required if the cube is not intended to be requested from different domains.
 
-- *Domains* that will perform the data requests
-- *[HTTP method](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html)* through which the data will be transferred
-- *HTTP Headers* that can be used in the requests
-- *User credentials*,  required if an authenticated access needs to be used
-- The server response to the *OPTIONS method* requests
+For detailed information on Cross-Origin Resource Sharing (CORS), follow [this link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS).
 
-The above points can be combined in two general steps:
+If you want to allow cross-domain requests to the OLAP service, enable the CORS behavior of your server. The sections below demonstrate how to enable CORS of an [Internet Information Services (IIS)](http://www.iis.net/) server.
 
-1. Configure HTTP Response Headers (point 1 to 4)
-2. Configure OPTIONS method server response (point 5)
+Cross-domain access requires you to configure HTTP Response Headers and the `OPTIONS` method server response.
 
 ### Configure HTTP Response Headers
 
-The following list of HTTP Response Headers shows the settings required to enable the IIS CORS behavior:
+To configure HTTP Response Headers, specify:
+* The domains that will perform the data requests.
+* An [HTTP method](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) through which the data will be transferred.
+* HTTP Headers that can be used in the requests.
+* User credentials that are going to be required if an authenticated access is used.
+
+The example below demontrates the list of HTTP Response Headers that show the settings required to enable the IIS CORS behavior. 
+
+###### Example 
 
 <table>
     <tbody>
@@ -59,80 +63,87 @@ The following list of HTTP Response Headers shows the settings required to enabl
             </th>
         </tr>
         <tr>
-            <td><em>Access-Control-Allow-Headers</em></td>
-            <td><em>Origin, Content-Type, Accept</em></td>
+            <td><strong>Access-Control-Allow-Headers</strong></td>
+            <td><code>Origin, Content-Type, Accept</code></td>
             <td>
-                <p>These are the names of the fields required to be used in the actual request. Values should be comma separated.</p>
+                <p>These are the names of the fields required to be used in the actual request. Values should be comma-separated.</p>
                 <ul>
-                    <li><em>Origin</em> – this field indicates where the cross-origin or preflight request originates from. This setting tells the server that the origin, which performs the request is a known one.</li>
-                    <li><em>Content-Type</em> – this field indicates the content (MIME) type of the entity body sent to the recipient. The actual content type used in the communication between **OLAP service** and **Kendo UI PivotDataSource** is <em>text/xml</em>.</li>
-                    <li><em>Accept</em> – this field specifies the media types which are acceptable for the response.</li>
+                    <li><code>Origin</code> – this field indicates where the cross-origin or preflight request originates from. This setting tells the server that the origin, which performs the request is a known one.</li>
+                    <li><code>Content-Type</code> – this field indicates the content (MIME) type of the entity body sent to the recipient. The actual content type used in the communication between OLAP service and Kendo UI <code>PivotDataSource</code> is text/xml.</li>
+                    <li><code>Accept</code> – this field specifies the media types which are acceptable for the response.</li>
                 </ul>
             </td>
         </tr>
         <tr>
-            <td><em>Access-Control-Allow-Origin</em></td>
+            <td><strong>Access-Control-Allow-Origin</strong></td>
             <td>
-                <p>The URI names that may access the resource. When an asterisk (*) is defined all domains are allowed.</p>
+                <p>The URI names that may access the resource. When an asterisk (*) is defined, all domains are allowed.</p>
             </td>
             <td>
-                <p>The names of the allowed domains should separed by comma (,).</p>
+                <p>The names of the allowed domains should be separated by comma (,).</p>
             </td>
         </tr>
         <tr>
-            <td><em>Access-Control-Request-Method</em></td>
-            <td><em>POST</em></td>
+            <td><strong>Access-Control-Request-Method</strong></td>
+            <td><code>POST</code></td>
             <td>
                 <p>The name of the HTTP method to be used in the actual request.</p>
-                <p>XMLA protocol specify a HTTP POST method.</p>
+                <p>The XMLA protocol specifies an HTTP <code>POST</code> method.</p>
             </td>
         </tr>
         <tr>
-            <td><em>Access-Control-Allow-Credentials</em><em>(Authenticated access only)</em></td>
-            <td><em>true</em></td>
+            <td><strong>Access-Control-Allow-Credentials</strong> (authenticated access only)</td>
+            <td><code>true</code></td>
             <td>
                 <p>The allowed values are:</p>
                 <ul>
-                    <li><em>true</em> – allows suppliying of credentials with the request.</li>
-                    <li><em>false</em> – disable supplying of credentials with the request. Equal to missing the header at all.</li>
+                    <li><code>true</code> – allows suppliying of credentials with the request.</li>
+                    <li><code>false</code> – disable supplying of credentials with the request. Equal to an altogether missing header.</li>
                 </ul>
             </td>
         </tr>
     </tbody>
 </table>
 
-### Configure OPTIONS method server response
+### Configure `OPTIONS` Method Server Response 
 
-In IIS OPTIONS method behavior should be configured via **OPTIONSVerbHandler** mapping settings. Here is the list of settings that should be applied:
+To configure the `OPTIONS` method server response, specify the server response to the `OPTIONS` method requests. In IIS the `OPTIONS` method behavior should be configured via the `OPTIONSVerbHandler` mapping settings.
+
+The example below demonstrates the list of settings that should be applied.
+
+###### Example 
 
 <table>
     <tbody>
         <tr>
-            <th>HTTP handler name</th>
+            <th>HTTP Handler Name</th>
             <th>Required Access Level</th>
             <th>Details</th>
         </tr>
         <tr>
-            <td><em>OPTIONSVerbHandler</em></td>
-            <td><em>Read</em></td>
+            <td><code>OPTIONSVerbHandler</code></td>
+            <td><code>Read</code></td>
             <td>
-                <p>Specifies that the handler requires READ access to the requests.</p>
+                <p>Specifies that the handler requires <code>READ</code> access to the requests.</p>
             </td>
         </tr>
     </tbody>
 </table>
 
-### Access the cube securely
+### Access Cube Securely
 
 There are two possible approaches to implement a secured access to the OLAP instance:
 
-- Use a proxy service which communicates with the cube on a secured protocol. This proxy should support the XMLA protocol. In the Microsoft world, the solution is to use [ADOMD.NET](https://technet.microsoft.com/en-us/library/ms123483%28v=sql.110%29.aspx).
-You can check this [forum thread](http://www.telerik.com/forums/securing-access-to-msmdpump-dll) for more details.
+* Use a proxy service which communicates with the cube on a secured protocol. This proxy should support the XMLA protocol. In the Microsoft world, the solution is to use [ADOMD.NET](https://technet.microsoft.com/en-us/library/ms123483%28v=sql.110%29.aspx). For detailed information on this, refer to [this forum thread](http://www.telerik.com/forums/securing-access-to-msmdpump-dll).
 
-- The other option is to send the credentials with a request header, even though thus the **username** and **password** will be visible on the client side (browser).
-If this is the way you would like to go, then I will suggest you review this [StackOverflow discussion](http://stackoverflow.com/questions/14579478/how-to-pass-credentials-for-a-webservice-using-jquery-ajax-call)
-to understand how to pass credentials with request headers. You can define the required callbacks and settings directly in the [transport.read](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-transport.read) object,
-as they will be passed to the $.ajax method.
+* Send the credentials with a request header, even though thus the **Username** and **Password** will be visible on the client side (browser). For details on how to pass credentials with request headers, refer to this [StackOverflow discussion](http://stackoverflow.com/questions/14579478/how-to-pass-credentials-for-a-webservice-using-jquery-ajax-call). You can define the required callbacks and settings directly in the [`transport.read`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-transport.read) object, as they will be passed to the `$.ajax` method.
 
-## Next steps:
-- [Getting started](/web/pivotgrid/overview)
+## See Also 
+
+Other article on Kendo UI PivotGrid:
+
+* [Overview]({% slug overview_kendoui_pivotgrid_widget %})
+* [PivotConfigurator]({% slug overview_kendoui_pivotconfigurator_pivotgridwidget %})
+* [Exporting]({% slug exporting_functionality_pivotgridwidget %})
+* [Fundamentals]({% slug fundamentals_pivotgrid_widget %})
+* [Frequently Asked Questions]({% slug frequently_asked_questions_pivotgrid %})
