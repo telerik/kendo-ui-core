@@ -22,7 +22,8 @@ Come back often for updates.
 ### Common
 
 - Limited set of helpers. Interim releases will add more widgets.
-- As of ASP.NET MVC BETA 8, due to change in the View rendering, [Deferred initialization option](/aspnet-mvc/fundamentals.html#deferred-initialization) can be set only as last setting.
+- Localization is work in progress. See [aspnet/Home/issues/1124](https://github.com/aspnet/Home/issues/1142) for a discussion.
+- [Deferred()](/aspnet-mvc/fundamentals.html#deferred-initialization) can be invoked only as a last setting.
 
         @(Html.Kendo().NumericTextBox()
               .Name("age")
