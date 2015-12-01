@@ -162,7 +162,7 @@ For more information on the layout features avaialbe in the Grid, refer to:
 
 ### Existing Instances
 
-Reference an existing Grid instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference has been established, use the [Grid API](/api/javascript/ui/grid) to control its behavior.
+Refer to an existing Grid instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference has been established, use the [Grid API](/api/javascript/ui/grid) to control its behavior.
 
 The example below demonstrates how to access and existing Grid instance.
 

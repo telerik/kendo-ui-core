@@ -1,11 +1,11 @@
 ---
-title: Show "No results found"
-page_title: Show "No results found" | Kendo UI AutoComplete Widget
+title: Show "No results found" Message
+page_title: Show "No results found" Message | Kendo UI AutoComplete Widget
 description: "Learn how to add customized templates in a Kendo UI AutoComplete widget."
 slug: howto_add_customized_templates_autocomplete
 ---
 
-# Show "No results found"
+# Show "No results found" Message
 
 The example below demonstrates how to add a customized template when the entered values do not match any of the suggestions.
 
