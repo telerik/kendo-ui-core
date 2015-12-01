@@ -1,10 +1,12 @@
 function scrollNodeIntoView(li) {
-    var top = li.offset().top;
     var navContainer = $("#page-nav");
-    var navContainerHeight = navContainer.outerHeight();
+    var top = li.offset().top - navContainer.offset().top;
+    var bottom = top + li.find(">div").outerHeight();
+    var containerTop = navContainer.scrollTop();
+    var containerHeight = navContainer.outerHeight();
 
-    if (top - navContainer.offset().top < 0 || top > navContainerHeight) {
-        navContainer.scrollTop(top - $("#page-tree").offset().top - navContainerHeight / 2);
+    if (top < containerTop || bottom > containerHeight) {
+        navContainer.scrollTop(top - containerHeight / 2);
     }
 }
 

@@ -125,9 +125,9 @@ code, em {
 #page-nav {
     position: fixed;
     top: 79px;
+    bottom: 0;
     left: 0;
     width: 18%;
-    height: 100%;
     overflow: auto;
     background: #fefefe;
     border-right: 1px solid #e8ebef;
