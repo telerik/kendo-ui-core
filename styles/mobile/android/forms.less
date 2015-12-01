@@ -9,6 +9,10 @@
     height: .1em;
 }
 
+.km-android .km-list .km-full-width-slider .k-slider-track {
+    border-width: 0;
+}
+
 .km-android .k-slider .k-draghandle,
 .km-android .k-slider .k-draghandle:hover
 {
@@ -49,6 +53,11 @@
 .km-android .k-slider-vertical .k-slider-track
 {
     width: .1em;
+}
+
+.km-android .km-list .km-full-width-slider .k-slider-track,
+.km-android .km-list .km-full-width-slider .k-slider-selection {
+    height: .15rem;
 }
 
 .km-android .k-slider-selection
@@ -319,3 +328,245 @@
     .box-shadow(0 0 3px currentcolor);
 }
 
+/* Nova theme features */
+.km-android .km-icon-label.km-required:after {
+    margin-left: -.89em;
+}
+
+.km-android .km-label-above {
+    font-size: 0.87em;
+    margin-top: -2px;
+    padding-top: .42em;
+    padding-bottom: 2em;
+    margin-bottom: .13em;
+}
+
+.km-android fieldset .km-label-above {
+    margin-top: 0;
+    padding-top: 1.455em;
+    padding-bottom: 3.091em;
+}
+
+.km-android .km-label-above textarea { 
+    top: 50%;
+}
+
+.km-android {
+    .km-list {
+        .km-label-above {
+            input[type=password],
+            input[type=search], 
+            input[type=number], 
+            input[type=tel],
+            input[type=url],
+            input[type=email],
+            input[type=month],
+            input[type=color],
+            input[type=week], 
+            input[type=date], 
+            input[type=time], 
+            input[type=datetime], 
+            input[type=datetime-local], 
+            input[type=text]:not(.k-input), 
+            select:not([multiple]), 
+            .k-dropdown-wrap, 
+            textarea  {
+                padding-left: .7em;
+                margin-top: -.375em;
+                border: none;
+            }
+        }
+    }
+}
+
+.km-android {
+    .km-list {
+        fieldset {
+            .km-label-above {
+                input[type=password],
+                input[type=search], 
+                input[type=number], 
+                input[type=tel],
+                input[type=url],
+                input[type=email],
+                input[type=month],
+                input[type=color],
+                input[type=week], 
+                input[type=date], 
+                input[type=time], 
+                input[type=datetime], 
+                input[type=datetime-local], 
+                input[type=text]:not(.k-input), 
+                select:not([multiple]), 
+                .k-dropdown-wrap, 
+                textarea  {
+                    margin-top: -.25em;
+                }
+            }
+        }    
+    }
+}
+
+.km-android .km-list fieldset {
+    border: none;
+    padding: 0 1.61em;
+    margin: -.5em -1.61em;
+}
+
+.km-android .km-list fieldset > input[type=password],
+.km-android .km-list fieldset > input[type=search],
+.km-android .km-list fieldset > input[type=number],
+.km-android .km-list fieldset > input[type=tel],
+.km-android .km-list fieldset > input[type=url],
+.km-android .km-list fieldset > input[type=email],
+.km-android .km-list fieldset > input[type=month],
+.km-android .km-list fieldset > input[type=color],
+.km-android .km-list fieldset > input[type=week],
+.km-android .km-list fieldset > input[type=date],
+.km-android .km-list fieldset > input[type=time],
+.km-android .km-list fieldset > input[type=datetime],
+.km-android .km-list fieldset > input[type=datetime-local],
+.km-android .km-list fieldset > input[type=text]:not(.k-input),
+.km-android .km-list fieldset > select:not([multiple]),
+.km-android .km-list fieldset > .k-dropdown-wrap,
+.km-android .km-list fieldset > textarea {
+    padding: 1.23em 0 1.23em 0; 
+    margin: 2px 0;
+    border: none;
+    outline: none;
+}
+
+.km-android .km-list fieldset legend {
+    text-indent: 0;
+    margin: 0 -1.61em;
+    font-weight: normal;
+    padding: 1.23em 1.61em .11em;
+    width: 100%;
+    box-sizing: content-box;
+    text-transform: uppercase;
+}
+
+.km-android .km-legend-button {
+    text-transform: uppercase;
+}    
+
+.km-android .km-list fieldset .km-inline-field {
+    margin-top: 0;
+    margin-left: 0;
+    padding-left: 1.61em;
+}
+
+.km-android .km-list fieldset .km-inline-field:first-of-type {
+    padding-left: 0;
+}
+
+.km-android .km-inline-field.km-label-above {
+    margin-bottom: 0;
+}
+
+.km-android {
+    .km-list {
+        .km-inline-field {
+            input[type=password],
+            input[type=search], 
+            input[type=number], 
+            input[type=tel],
+            input[type=url],
+            input[type=email],
+            input[type=month],
+            input[type=color],
+            input[type=week], 
+            input[type=date], 
+            input[type=time], 
+            input[type=datetime], 
+            input[type=datetime-local], 
+            input[type=text]:not(.k-input), 
+            select:not([multiple]), 
+            .k-dropdown-wrap, 
+            textarea  {
+                left: 0;
+                padding-left: 0;
+                padding-left: 1em;  
+            }
+        }
+    }
+}
+
+.km-android {
+    .km-list {
+        .km-inline-field:first-of-type {
+            input[type=password],
+            input[type=search], 
+            input[type=number], 
+            input[type=tel],
+            input[type=url],
+            input[type=email],
+            input[type=month],
+            input[type=color],
+            input[type=week], 
+            input[type=date], 
+            input[type=time], 
+            input[type=datetime], 
+            input[type=datetime-local], 
+            input[type=text]:not(.k-input), 
+            select:not([multiple]), 
+            .k-dropdown-wrap, 
+            textarea  {
+                margin-left: 0;
+                padding-left: 0; 
+            }
+        }
+    }
+}
+
+.km-android .km-list .km-full-width-slider {
+    margin-top: 0;
+    padding: 1.55em 0;
+}
+
+/* Standalone Checkboxes and RadioButtons */
+.km-android .km-checkbox-label,
+.km-android .km-radio-label {
+    font-size: 1em;
+    line-height: 1.5em;
+    margin-left: .89em;
+}
+
+.km-android .km-checkbox-label:before,
+.km-android .km-checkbox-label:after {
+    right: .7em;
+    width: 1.07rem;
+    height: 1.07rem;   
+    text-align: right;
+    font-size: 1.5em;
+}
+
+.km-android .km-checkbox-label:before {
+    border-width: 0.133rem;
+    border-style: solid;
+}
+
+//Radio buttons
+.km-android .km-radio-label {
+    padding-left: 2.5em;
+    line-height: 1.5em;  
+}
+
+.km-android .km-radio-label:before {    
+    width: 1.07rem;
+    height: 1.07rem;
+    border-width: 0.133rem;
+    border-style: solid;
+}
+
+.km-android input.km-radio:checked + .km-radio-label:after {
+    border-width: 2px; 
+    border-style: solid;
+    top: 45%;
+}
+
+.km-android input.km-radio:checked + .km-radio-label:after {
+    width: .55rem;
+    height: .55rem;
+    left: 0.2rem;
+}
