@@ -193,6 +193,10 @@
     color: @ios7-overlay-background;
 }
 
+.km-ios7 label.km-required:after {
+    color: @ios7-second-active-background;
+}
+
 /* Scroller */
 
 .km-ios7 .km-touch-scrollbar
@@ -301,6 +305,31 @@
     color: @ios7-second-color;
 }
 
+.km-ios7 .km-legend-button,
+.km-ios7 .km-drawer a {
+    text-decoration: none;
+}
+
+.km-ios7 .km-list > li label,
+.km-ios7 .km-list fieldset textarea,
+.km-ios7 .km-list fieldset input,
+.km-ios7 .km-checkbox-label,
+.km-ios7 .km-radio-label {
+    color: darken(@ios7-second-color, 17%);
+}
+
+.km-ios7 .km-list fieldset .km-inline-field {
+    border-color: @ios7-second-border-color;
+}
+
+.km-ios7 .km-group-title,
+.km-ios7 .km-list fieldset legend,
+.km-ios7 .km-shim li.km-actionsheet-title {
+    background: @ios7-list-title-background;
+    border-color: @ios7-second-border-color;
+    color: @ios7-active-background;
+}
+
 /* Active States */
 
 .km-ios7 .km-badge,
@@ -361,8 +390,21 @@
 
 .km-ios7 .k-list,
 .km-ios7 .k-slider,
-.km-ios7 .km-widget
+.km-ios7 .km-widget,
+.km-ios7 .km-checkbox-label:after
 {
     color: @ios7-active-background;
 }
 
+.km-ios7 .km-checkbox-label,
+.km-ios7 .km-radio-label {
+    color: @ios7-main-color;
+}
+
+.km-ios7 .km-radio-label:before {
+    border-color: darken(@ios7-second-color, 17%);
+}
+
+.km-ios7 .km-radio-label:after {
+    background-color: @ios7-active-background;
+}

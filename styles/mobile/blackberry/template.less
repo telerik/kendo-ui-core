@@ -9,6 +9,8 @@
 @blackberry-dark-border-color: darken(@blackberry-border-color, 60%);
 @blackberry-light-background: #e6e6e6;
 
+@error: #ef5350;
+
 .km-blackberry,
 .km-blackberry .km-content
 {
@@ -611,4 +613,92 @@
     color: @blackberry-active-color;
     background: @blackberry-active-background;
     background-image: linear-gradient(to bottom, rgba(255,255,255,.3), rgba(255,255,255,0));
+}
+
+/* Nova theme features */
+.km-blackberry .km-required:after {
+    color: @error;
+}
+
+.km-blackberry .km-legend-button {
+    color: @blackberry-active-background;
+}
+
+.km-blackberry .km-label-above,
+.km-blackberry .km-icon-label,
+.km-blackberry .km-radio-label:before,
+.km-blackberry .km-radio-label:after,
+.km-blackberry .km-checkbox-label:before,
+.km-blackberry .km-checkbox-label:after {
+    color: lighten(@blackberry-main-color, 60%);
+}
+
+.km-blackberry input.km-radio + .km-radio-label:before,
+.km-blackberry input.km-checkbox + .km-checkbox-label:before {
+    color: @blackberry-active-color;
+    border-color: rgba(0,0,0,.4);
+    .box-shadow(~"inset 0 0 2px 1px rgba(0,0,0,.2), 0 1px 0 rgba(255,255,255,.3)");
+}
+
+.km-blackberry input.km-radio:checked + .km-radio-label:before,
+.km-blackberry input.km-checkbox:checked + .km-checkbox-label:before {
+    background-color: @blackberry-active-background; 
+    border-color: rgba(0,0,0,.4);
+    .box-shadow(~"inset 0 0 2px 1px rgba(0,0,0,.2), 0 1px 0 rgba(255,255,255,.3)");
+}
+
+.km-blackberry input.km-checkbox:checked + .km-checkbox-label:after {
+    color: @blackberry-active-color;
+}
+
+.km-blackberry input.km-radio:checked + .km-radio-label:after {
+    -webkit-background-clip: inherit;
+    background-image: linear-gradient(to bottom, #fff, #f9f9f9 10%, #eee);
+    .box-shadow(0 1px 1px rgba(0,0,0,.7));
+}
+
+.km-blackberry .km-list fieldset legend {
+    -webkit-box-shadow: 0 2px 0 0  @blackberry-active-background;
+    box-shadow: 0 2px 0 0 @blackberry-active-background;
+}
+
+.km-blackberry .km-list .km-label-above input[type=text]:not(.k-input),
+.km-blackberry .km-list .km-label-above input[type=password],
+.km-blackberry .km-list .km-label-above input[type=search],
+.km-blackberry .km-list .km-label-above input[type=number],
+.km-blackberry .km-list .km-label-above input[type=tel],
+.km-blackberry .km-list .km-label-above input[type=url],
+.km-blackberry .km-list .km-label-above input[type=email],
+.km-blackberry .km-list .km-label-above input[type=file],
+.km-blackberry .km-list .km-label-above input[type=month],
+.km-blackberry .km-list .km-label-above input[type=color],
+.km-blackberry .km-list .km-label-above input[type=week],
+.km-blackberry .km-list .km-label-above input[type=date],
+.km-blackberry .km-list .km-label-above input[type=time],
+.km-blackberry .km-list .km-label-above input[type=datetime],
+.km-blackberry .km-list .km-label-above input[type=datetime-local],
+.km-blackberry .km-list .km-label-above select:not([multiple]),
+.km-blackberry .km-list .km-label-above .k-dropdown, .km-blackberry .km-list .km-label-above textarea {
+    background: none;
+    .box-shadow(none);
+}
+
+.km-blackberry .km-list fieldset > input[type=password],
+.km-blackberry .km-list fieldset > input[type=search],
+.km-blackberry .km-list fieldset > input[type=number],
+.km-blackberry .km-list fieldset > input[type=tel],
+.km-blackberry .km-list fieldset > input[type=url],
+.km-blackberry .km-list fieldset > input[type=email],
+.km-blackberry .km-list fieldset > input[type=month],
+.km-blackberry .km-list fieldset > input[type=color],
+.km-blackberry .km-list fieldset > input[type=week],
+.km-blackberry .km-list fieldset > input[type=date],
+.km-blackberry .km-list fieldset > input[type=time],
+.km-blackberry .km-list fieldset > input[type=datetime],
+.km-blackberry .km-list fieldset > input[type=datetime-local],
+.km-blackberry .km-list fieldset > input[type=text]:not(.k-input),
+.km-blackberry .km-list fieldset > select:not([multiple]),
+.km-blackberry .km-list fieldset > .k-dropdown-wrap,
+.km-blackberry .km-list fieldset > textarea {
+    background: none;
 }

@@ -20,6 +20,7 @@
 @wp-third-text-dark: #666;
 @wp-third-text-light: #ccc;
 
+@error: #f44336;
 
 .km-wp,
 .km-wp .km-content,
@@ -505,4 +506,51 @@
 .km-wp .km-collapsible-content
 {
     color: #999;
+}
+
+/* Nova theme features */
+.km-wp label.km-required:after {
+    color: @error;
+}
+
+.km-wp .km-list .km-legend-button,
+.km-wp .km-list fieldset legend {
+    background-color: @wp-accent-background;
+    color: @wp-accent-text;
+}
+
+.km-wp {
+    .km-list {
+        fieldset,
+        .km-label-above {
+            input[type=password],
+            input[type=search], 
+            input[type=number], 
+            input[type=tel],
+            input[type=url],
+            input[type=email],
+            input[type=month],
+            input[type=color],
+            input[type=week], 
+            input[type=date], 
+            input[type=time], 
+            input[type=datetime], 
+            input[type=datetime-local], 
+            input[type=text]:not(.k-input), 
+            select:not([multiple]), 
+            .k-dropdown-wrap, 
+            textarea  {
+                color: @wp-main-text-light;
+                background: @wp-second-background-light;
+            }
+        }
+    }
+}
+
+.km-wp input.km-radio:checked+.km-radio-label:after {
+    background: @wp-main-text-dark;
+}
+
+.km-wp-light input.km-radio:checked+.km-radio-label:after {
+    background: @wp-main-text-light;
 }

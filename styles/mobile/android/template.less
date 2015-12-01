@@ -14,6 +14,8 @@
 @android-light-main-color: #222;
 @android-light-background-color: #fcfcfc;
 
+@error: #ef5350;
+
 /* Colors */
 
 .km-android,
@@ -704,8 +706,6 @@
     color: @android-gray;
 }
 
-
-
 .km-android .km-shim,
 .km-android .km-popup,
 .km-android .k-slider,
@@ -721,5 +721,66 @@
 .km-android .km-widget .km-state-active
 {
     color: @android-active-background;
+}
+
+/* Nova theme features */
+.km-android .km-required:after {
+    color: @error;
+}
+
+.km-android-light .km-list fieldset legend {
+    -webkit-box-shadow: 0 2px 0 0  fade(@android-light-main-color, 13.5%);
+    box-shadow: 0 2px 0 0 fade(@android-light-main-color, 13.5%);
+}
+
+.km-android-dark .km-list fieldset legend {
+    -webkit-box-shadow: 0 2px 0 0  fade(@android-main-color, 40%);
+    box-shadow: 0 2px 0 0 fade(@android-main-color, 40%);
+}
+
+.km-android-light .km-label-above,
+.km-android-light .km-icon-label,
+.km-android-light .km-radio-label:before,
+.km-android-light .km-radio-label:after,
+.km-android-light .km-checkbox-label:before,
+.km-android-light .km-checkbox-label:after {
+    color: fade(@android-light-main-color, 40%);
+}
+
+.km-android-dark .km-label-above,
+.km-android-dark .km-icon-label,
+.km-android-dark .km-radio-label:before,
+.km-android-dark .km-radio-label:after,
+.km-android-dark .km-checkbox-label:before,
+.km-android-dark .km-checkbox-label:after {
+    color: fade(@android-main-color, 40%);
+}
+
+.km-android .km-radio-label:after {
+    background-color: @android-active-background;
+}
+
+.km-android-dark .km-radio-label:before,
+.km-android-dark .km-checkbox-label:before,
+.km-android-dark .km-checkbox-label:after {
+    border-color: @android-button-color;
+}
+
+.km-android-light input.km-checkbox:checked + .km-checkbox-label:before {
+    border-color: @android-light-main-color;
+}
+
+.km-android input.km-checkbox:focus + .km-checkbox-label:before,
+.km-android input.km-checkbox:focus + .km-checkbox-label:before  {
+    .box-shadow(0 0 1px 2px @android-active-background);
+}
+
+.km-android input.km-checkbox:checked + .km-checkbox-label:after {
+    color: @android-active-background;
+}    
+
+.km-android input.km-radio:checked + .km-radio-label:after {
+    .box-shadow(0 0 16px 1px @android-active-background);
+    border-color: fade(@android-light-main-color, 40%);
 }
 
