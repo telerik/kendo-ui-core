@@ -740,7 +740,8 @@
             virtualList.one("listBound", function() {
                 start();
                 equal(virtualList.focusIndex(), 100);
-            })
+            });
+
             virtualList.select(100);
         });
     });
