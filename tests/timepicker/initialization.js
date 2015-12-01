@@ -174,16 +174,6 @@
         equal(timepicker.timeView.popup.options.appendTo[0], $(appendTo)[0]);
     });
 
-    test("timepicker initializes a touch scroller when in mobile", 1, function() {
-        kendo.support.touch = true;
-        kendo.support.kineticScrollNeeded = true;
-        kendo.support.mobileOS = kendo.support.detectOS("iPhone OS 4_3");
-
-        var timepicker = new kendo.ui.TimePicker(input);
-
-        ok(timepicker.timeView.popup.element.hasClass("km-scroll-wrapper"));
-    });
-
     test("timepicker strips format from '{0:format}'", function() {
         var timepicker = new kendo.ui.TimePicker(input, {
             format: "{0:hh:mm}"
