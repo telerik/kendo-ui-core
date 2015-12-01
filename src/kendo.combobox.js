@@ -315,7 +315,7 @@ var __meta__ = { // jshint ignore:line
                     that._state = "";
                 }
 
-                var keepState = true;
+                var keepState = true; //TODO: remove as not needed
                 var custom = that._customOption;
 
                 that._customOption = undefined;
@@ -343,8 +343,11 @@ var __meta__ = { // jshint ignore:line
                 that._initialIndex = null;
 
                 dataItem = that.listView.selectedDataItems()[0];
-                if (dataItem && that.text() && that.text() !== that._text(dataItem)) {
-                    that._selectValue(dataItem);
+                if (dataItem) {
+                    that._custom(that._value(dataItem) || ""); //TODO: test this
+                    if (that.text() && that.text() !== that._text(dataItem)) {
+                        that._selectValue(dataItem);
+                    }
                 }
             } else if (filtered && focusedItem) {
                 focusedItem.removeClass("k-state-selected");

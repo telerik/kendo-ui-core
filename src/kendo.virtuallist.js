@@ -245,6 +245,7 @@ var __meta__ = { // jshint ignore:line
 
             that.content.on("scroll" + VIRTUAL_LIST_NS, kendo.throttle(function() {
                 that._renderItems();
+                that.rangeChange();
             }, options.delay));
 
             that._selectable();
@@ -327,11 +328,11 @@ var __meta__ = { // jshint ignore:line
             } else {
                 that._refreshHandler = $.proxy(that.refresh, that);
                 that._resetRangeHandler = $.proxy(that._resetRange, that);
-                that._rangeChangeHandler = $.proxy(that.rangeChange, that);
+                //that._rangeChangeHandler = $.proxy(that.rangeChange, that);
             }
 
             that.dataSource = dataSource.bind(CHANGE, that._refreshHandler)
-                                        .bind(CHANGE, that._rangeChangeHandler)
+                                        //.bind(CHANGE, that._rangeChangeHandler)
                                         .bind("reset", that._resetRangeHandler);
 
             that.setDSFilter(that.dataSource.filter());
@@ -351,11 +352,11 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var page = that.dataSource.page();
             var filter = $.extend({}, that.dataSource.filter());
-            var filterChanged = !kendo.data.Query.compareFilters((that._lastFilter || that._lastDSFilter), filter);
+            var filterChanged = !kendo.data.Query.compareFilters((that._lastFilter || that._lastDSFilter), filter) && !that._mute;
 
             that._lastFilter = filter;
 
-            if (that.isBound() && (that._rangeChange === true || filterChanged) && that._lastPage !== page) {
+            if (that.isBound() && !that._valuePreset && that._lastPage !== page /* && (that._rangeChange === true || filterChanged) */) {
                 that._lastPage = page;
                 that.trigger(LISTBOUND);
             }
@@ -378,7 +379,9 @@ var __meta__ = { // jshint ignore:line
 
                 that._createList();
                 if (!action && that._values.length && !filtered && !that.options.skipUpdateOnBind) {
+                    that._valuePreset = true;
                     that.value(that._values, true).done(function() {
+                        that._valuePreset = false;
                         that._lastPage = that.dataSource.page();
                         that._listCreated = true;
                         that.trigger(LISTBOUND);
@@ -392,6 +395,8 @@ var __meta__ = { // jshint ignore:line
                 if (that._renderItems) {
                     that._renderItems(true);
                 }
+
+                that.rangeChange();
             }
 
             if (action === "itemchange") {
@@ -469,7 +474,7 @@ var __meta__ = { // jshint ignore:line
                         match = isPrimitive(item) ? value[i] === item : value[i] === valueGetter(item);
 
                         if (match) {
-                            forSelection.push(idx);
+                            forSelection.push(dataView[idx].index);  //TODO: Test this!
                         }
                     }
                 }
@@ -759,10 +764,18 @@ var __meta__ = { // jshint ignore:line
             indices = that._getIndecies(candidate);
 
             if (filtered && !singleSelection && that._deselectFiltered(indices)) {
+                //TODO: test this
+                if (that._valueDeferred) {
+                    that._valueDeferred.resolve();
+                }
                 return;
             }
 
             if (!indices.length || (singleSelection && !filtered && lastFrom(indices) === lastFrom(this._selectedIndexes))) {
+                //TODO: test this
+                if (that._valueDeferred) {
+                    that._valueDeferred.resolve();
+                }
                 return;
             }
 
@@ -1015,7 +1028,9 @@ var __meta__ = { // jshint ignore:line
                 flatGroups = {};
 
             if (dataSource.pageSize() < pageSize) {
+                this._mute = true;
                 dataSource.pageSize(pageSize);
+                this._mute = false;
             }
 
             return function(index, rangeStart) {
@@ -1306,6 +1321,7 @@ var __meta__ = { // jshint ignore:line
                 removedindexesCounter = 0,
                 item;
 
+            //TODO: move to selectable: true logic!
             if (indexes[position] === -1) { //deselect everything
                 for (var idx = 0; idx < selectedIndexes.length; idx++) {
                     selectedIndex = selectedIndexes[idx];
@@ -1322,6 +1338,8 @@ var __meta__ = { // jshint ignore:line
                 this._values = [];
                 this._selectedDataItems = [];
                 this._selectedIndexes = [];
+
+                //TODO: Stop modifying the array!!!
                 indexes.splice(0, indexes.length);
 
                 return removed;
@@ -1339,11 +1357,12 @@ var __meta__ = { // jshint ignore:line
                         position: position,
                         dataItem: this._selectedDataItems[position]
                     });
-
-                    this._values = [];
-                    this._selectedDataItems = [];
-                    this._selectedIndexes = [];
                 }
+
+                //TODO: this should be called always, not only when index !== selectedIndex
+                this._values = [];
+                this._selectedDataItems = [];
+                this._selectedIndexes = [];
             } else if (selectable === "multiple") {
                 for (var i = 0; i < indexes.length; i++) {
                     position = $.inArray(indexes[i], selectedIndexes);
