@@ -76,7 +76,7 @@ The example below demonstrates how to modify the generated `Workbook` object fro
 
 ## See Also
 
-Other articles on Kendo UI PivotGrid:
+Other articles on Kendo UI PivotGrid and how-to examples:
 
 * [JavaScript API Reference](/api/javascript/ui/pivotgrid)
 * [How to Access MDX Query]({% slug howto_access_mdx_query_pivotgrid %})
