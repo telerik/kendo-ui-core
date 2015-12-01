@@ -8,7 +8,7 @@ description: Using Diagram scrollbar
 
 This example demonstrates how scrollbar for the Diagram element.
 
-#### Example - Draw external content in Diagram shape
+#### Example
 
 ```html
 
