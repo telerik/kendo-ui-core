@@ -261,28 +261,25 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _setListValue: function() {
+        _updateSelectionState: function() {
             var that = this;
-            var options = that.options;
-            var value = options.value;
-            var text = options.text;
+            var text = that.options.text;
+            var value = that.options.value;
 
-            if (value !== undefined) {
-                that.listView.value(value).done(function() {
-                    if (!that.listView.isFiltered()) {
-                        if (that.selectedIndex === -1) {
-                            if (text === undefined || text === null) {
-                                text = value;
-                            }
+            if (that.listView.isFiltered()) {
+                return;
+            }
 
-                            that._accessor(value);
-                            that.input.val(text || that.input.val());
-                            that._placeholder();
-                        } else if (that._oldIndex === -1) {
-                            that._oldIndex = that.selectedIndex;
-                        }
-                    }
-                });
+            if (that.selectedIndex === -1) {
+                if (text === undefined || text === null) {
+                    text = value;
+                }
+
+                that._accessor(value);
+                that.input.val(text || that.input.val());
+                that._placeholder();
+            } else if (that._oldIndex === -1) {
+                that._oldIndex = that.selectedIndex;
             }
         },
 
