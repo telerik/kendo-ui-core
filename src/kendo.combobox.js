@@ -286,19 +286,85 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _buildOptions: function(data) {
+            var that = this;
+            if (!that._isSelect) {
+                return;
+            }
+
+            var custom = that._customOption;
+            var hasChild = that.element[0].children[0];
+
+            if (that._state === STATE_REBIND) {
+                that._state = "";
+            }
+
+            that._customOption = undefined;
+            that._options(data, "", that.value());
+
+            if (custom && custom[0].selected) {
+                that._custom(custom.val());
+            } else if (!hasChild) {
+                that._custom("");
+            }
+        },
+
+        _updateSelection: function() {
+            var that = this;
+            var listView = that.listView;
+            var initialIndex = that._initialIndex;
+            var hasInitialIndex = initialIndex !== null && initialIndex > -1;
+            var filtered = that._state === STATE_FILTER;
+
+            if (filtered) {
+                $(listView.focus()).removeClass("k-state-selected");
+                return;
+            }
+
+            if (that._fetch) {
+                return;
+            }
+
+            if (!listView.value().length) {
+                if (hasInitialIndex) {
+                    that.select(initialIndex);
+                } else if (that._accessor()) {
+                    listView.value(that._accessor());
+                }
+            }
+
+            that._initialIndex = null;
+
+            var dataItem = listView.selectedDataItems()[0];
+
+            if (!dataItem) {
+                return;
+            }
+
+            that._custom(that._value(dataItem) || "");
+
+            if (that.text() && that.text() !== that._text(dataItem)) {
+                that._selectValue(dataItem);
+            }
+        },
+
+        _updateItemFocus: function() {
+            var listView = this.listView;
+
+            if (!this.options.highlightFirst) {
+                listView.focus(-1);
+            } else if (!listView.focus() && !listView.focusIndex()) {
+                listView.focus(0);
+            }
+        },
+
         _listBound: function() {
             var that = this;
-            var options  = that.options;
-            var initialIndex = that._initialIndex;
-            var filtered = that._state === STATE_FILTER;
             var isActive = that.input[0] === activeElement();
 
-            var listView = that.listView;
-            var focusedItem = listView.focus();
-            var data = this.dataSource.flatView();
-            var page = this.dataSource.page();
-            var length = data.length;
-            var dataItem;
+            var data = that.dataSource.flatView();
+            var page = that.dataSource.page();
+            var isFirstPage = page === undefined || page === 1;
 
             that._angularItems("compile");
 
@@ -308,61 +374,16 @@ var __meta__ = { // jshint ignore:line
 
             that.popup.position();
 
-            if (that._isSelect) {
-                var hasChild = that.element[0].children[0];
-
-                if (that._state === STATE_REBIND) {
-                    that._state = "";
-                }
-
-                var keepState = true; //TODO: remove as not needed
-                var custom = that._customOption;
-
-                that._customOption = undefined;
-                that._options(data, "", that.value());
-
-                if (custom && custom[0].selected) {
-                    that._custom(custom.val(), keepState);
-                } else if (!hasChild) {
-                    that._custom("", keepState);
-                }
-            }
+            that._buildOptions(data);
 
             that._makeUnselectable();
 
-            if (!filtered && !that._fetch) {
-                if (!listView.value().length) {
-                    if (initialIndex !== null && initialIndex > -1) {
-                        that.select(initialIndex);
-                        focusedItem = listView.focus();
-                    } else if (that._accessor()) {
-                        listView.value(that._accessor());
-                    }
-                }
+            that._updateSelection();
 
-                that._initialIndex = null;
+            if (data.length && isFirstPage) {
+                that._updateItemFocus();
 
-                dataItem = that.listView.selectedDataItems()[0];
-                if (dataItem) {
-                    that._custom(that._value(dataItem) || ""); //TODO: test this
-                    if (that.text() && that.text() !== that._text(dataItem)) {
-                        that._selectValue(dataItem);
-                    }
-                }
-            } else if (filtered && focusedItem) {
-                focusedItem.removeClass("k-state-selected");
-            }
-
-            if (length && (page === undefined || page === 1)) {
-                if (options.highlightFirst) {
-                    if (!focusedItem && !listView.focusIndex()) {
-                        listView.focus(0);
-                    }
-                } else {
-                    listView.focus(-1);
-                }
-
-                if (options.suggest && isActive && that.input.val()) {
+                if (that.options.suggest && isActive && that.input.val()) {
                     that.suggest(data[0]);
                 }
             }
@@ -373,14 +394,10 @@ var __meta__ = { // jshint ignore:line
                 if (that._typingTimeout && !isActive) {
                     that.popup.close();
                 } else {
-                    that.toggle(!!length);
+                    that.toggle(!!data.length);
                 }
 
                 that._typingTimeout = null;
-            }
-
-            if (that._touchScroller) {
-                that._touchScroller.reset();
             }
 
             that._hideBusy();
