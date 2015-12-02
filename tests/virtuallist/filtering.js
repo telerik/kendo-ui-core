@@ -189,11 +189,15 @@
         });
     });
 
-    asyncTest("keeps selection after filtering", 1, function() {
+    asyncTest("keeps selection after filtering", 2, function() {
         asyncDataSource.read().then(function() {
-            virtualList.one("change", function() {
-                start();
-                ok(virtualList.items().first().hasClass(SELECTED), "item is selected");
+            virtualList.one("listBound", function() {
+                virtualList.one("listBound", function() {
+                    start();
+                    ok(virtualList.items().first().hasClass(SELECTED), "item is selected");
+                });
+                ok(!virtualList.items().first().hasClass(SELECTED), "item is selected");
+                asyncDataSource.filter([]);
             });
             virtualList.select(virtualList.items().first());
             asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });

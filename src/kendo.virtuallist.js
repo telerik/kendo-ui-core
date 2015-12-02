@@ -1114,7 +1114,7 @@ var __meta__ = { // jshint ignore:line
                 item = item ? item.item : null;
             }
 
-            if (value.length && item) {
+            if (!this.isFiltered() && value.length && item) {
                 for (var i = 0; i < value.length; i++) {
                     match = isPrimitive(item) ? value[i] === item : value[i] === valueGetter(item);
                     if (match) {
