@@ -132,7 +132,7 @@ For examples demonstrating these two approaches, refer to the [ProgressBar API r
 
 ### Existing Instances
 
-Reference to an existing ProgressBar instance is made via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference has been established, use the [ProgressBar API](/api/web/progressbar) to control its behavior.
+Make a reference to an existing ProgressBar instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once done, use the [ProgressBar API](/api/web/progressbar) to control its behavior.
 
 The example below denmonstrates how to access an existing ProgressBer instance.
 
