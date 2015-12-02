@@ -1,22 +1,27 @@
 ---
 title: Overview
-page_title: Overview of ResponsivePanel UI widget | Kendo UI Documentation
-description: Quick steps to help you use the Kendo UI ResponsivePanel.
+page_title: Overview | Kendo UI ResponsivePanel Widget
+description: "Learn how to initialize the Kendo UI ResponsivePanel widget and configure its behaviors."
+slug: overview_kendoui_responsivepanel_widget
 position: 1
 ---
 
 # ResponsivePanel Overview
 
-The ReponsivePanel widget allows you to hide part of the content of the page on small screens.
-This allows more screen estate for content for mobile users.
+The ReponsivePanel widget allows you to hide part of a page content on small screens. This allows more space for content on mobile screens.
 
-> CSS3 media queries are supported in IE9 and above, so this widget does not support IE7 and IE8.
+> **Important**  
+> CSS3 media queries are supported in Internet Explorer 9 and later versions. This means that Kendo UI ResponsivePanel does not support Internet Explorer 7 and Internet Explorer 8.
 
-## Configuring the ResponsivePanel
+## Configuration
 
-You can specify the page width when the content will become hidden via the breakpoint configuration option, and the placement of the expandable content via the orientation configuration option.
+### Specify Width and Placement
 
-#### Collapse menu on the left on small screens
+Specify the page width when the content becomes hidden via the `breakpoint` configuration option. The placement of the expandable content can be configured via the `orientation` option.
+
+The example below demonstrates how to collapse the menu on the left of small screens.
+
+###### Example
 
 ```html
   <header>
@@ -84,3 +89,9 @@ You can specify the page width when the content will become hidden via the break
     }
   </style>
 ```
+
+## See Also 
+
+Other articles on Kendo UI ResponsivePanel:
+
+* [JavaScript API Reference](/api/javascript/ui/responsivepanel)
