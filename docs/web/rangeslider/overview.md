@@ -1,45 +1,57 @@
 ---
 title: Overview
-page_title: HTML5 Range Input in Kendo UI RangeSlider Widget
-description: Learn how to display range of values, select them in Kendo UI RangeSlider widget and learn how to customize behaviors of the component to ensure a consistent experience.
+page_title: Overview | Kendo UI RangeSlider Widget
+description: "Learn how to initialize the Kendo UI RangeSlider widget and configure its behaviors."
+slug: overview_kendoui_rangeslider_widget
+position: 1
 ---
 
 # RangeSlider Overview
 
-The **RangeSlider** widget display range of values and allows you to select ranges of values. Unlike the HTML5 range input, the **RangeSlider** presents a consistent experience across browsers and features a rich API and event model.
+[Kendo UI RangeSlider widget](http://demos.telerik.com/kendo-ui/slider/events) displays a range of values and allows you to select ranges of values. Unlike the HTML5 range input, the RangeSlider presents a consistent experience across browsers and provides a rich API and event model.
 
 ## Getting Started
 
-### Create two HTML input elements in a div
+### Create the RangeSlider 
+
+Create the RangeSlider by using two HTML `<input>` elements in a `<div>` one as demonstrated in the example below.
+
+###### Example
 
     <div id="rangeSlider">
         <input />
         <input />
     </div>
 
-Initialization of a **RangeSlider** should occur after the DOM is fully loaded. It is recommended
-that initialization the **RangeSlider** occur within a handler is provided to $(document).ready().
+   
+### Initialize the RangeSlider
 
-### Initialize a RangeSlider using a selector within $(document).ready()
+Initialize the RangeSlider using a jQuery selector as demonstrated int he example below.
+
+###### Example
 
     $(document).ready(function() {
         $("#rangeSlider").kendoRangeSlider();
     });
 
-The **RangeSlider** requires two inputs to capture both ends of the value range. This benefits
-scenarios where JavaScript is disabled, in which case users will be presented with two inputs, still allowing them to input a valid range.
+> **Important**  
+> * As the RangeSlider should be initialized after the DOM is fully loaded, make sure you initilaize it within a `$(document).ready()` statement. 
+> * The RangeSlider requires two inputs to capture both ends of the value range. This benefits scenarios where JavaScript is disabled, in which case users will be presented with two inputs, still allowing them to input a valid range.
 
-## Customizing RangeSlider Behaviors
+## Customization
 
-Many facets of the **RangeSlider** behavior can be configured through
-properties, including:
+### Behaviors
+
+The aspects of the RangeSlider behavior can be customized by configuring its properties. These include: 
 
 *   Minimum and/or maximum values
-*   Orientation (horizontal or vertical)
+*   Horizontal or vertical orientation
 *   Small or large step
 *   Tooltip format/placement
 
-### Initialize a RangeSlider and its properties
+The example below demonstrates ghow to customize the RangeSlider behaviors by configuring its properties.
+
+###### Example
 
     $("#rangeSlider").kendoRangeSlider({
         min: 10,
@@ -49,13 +61,20 @@ properties, including:
         largeStep: 10
     });
 
-## Accessing an Existing RangeSlider
+## Reference
 
-You can reference an existing **RangeSlider** instance via
-[jQuery.data()](http://api.jquery.com/jQuery.data/). Once a reference has been established, you can
-use the API to control its behavior.
+### Existing Instances
 
-### Accessing an existing RangeSlider instance
+Make a reference to an existing RangeSlider instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference has been established, you can use the API to control its behavior.
+
+The example below denmonstrates how to access an existing RangeSlider instance.
+
+###### Example
 
     var rangeSlider = $("#rangeSlider").data("kendoRangeSlider");
 
+## See Also
+
+Other articles on Kendo UI RangeSlider:
+
+* [JavaScript API Reference](/api/javascript/ui/rangeslider)
