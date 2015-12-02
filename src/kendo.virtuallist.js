@@ -129,9 +129,6 @@ var __meta__ = { // jshint ignore:line
                 callback(arr1[i], arr2[i], templates);
                 if (arr2[i].item) {
                     this.trigger(ITEMCHANGE, { item: $(arr1[i]), data: arr2[i].item, ns: kendo.ui });
-                    if (arr2[i].index === this._selectedIndex) {
-                        this.select(this._selectedIndex);
-                    }
                 }
             }
         };
