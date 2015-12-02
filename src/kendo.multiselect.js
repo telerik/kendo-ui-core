@@ -125,20 +125,6 @@ var __meta__ = { // jshint ignore:line
             kendo.notify(that);
         },
 
-        _preselect: function(data, value) {
-            var that = this;
-
-            if (!isArray(data) && !(data instanceof kendo.data.ObservableArray)) {
-                data = [data];
-            }
-
-            if ($.isPlainObject(data[0]) || data[0] instanceof kendo.data.ObservableObject || !that.options.dataValueField) {
-                that.dataSource.data(data);
-                that.value(value || that._initialValues);
-                that._retrieveData = true;
-            }
-        },
-
         options: {
             name: "MultiSelect",
             tagMode: "multiple",
@@ -590,6 +576,20 @@ var __meta__ = { // jshint ignore:line
             that._fetchData();
         },
 
+        _preselect: function(data, value) {
+            var that = this;
+
+            if (!isArray(data) && !(data instanceof kendo.data.ObservableArray)) {
+                data = [data];
+            }
+
+            if ($.isPlainObject(data[0]) || data[0] instanceof kendo.data.ObservableObject || !that.options.dataValueField) {
+                that.dataSource.data(data);
+                that.value(value || that._initialValues);
+                that._retrieveData = true;
+            }
+        },
+
         _setOption: function(value, selected) {
             var option = this.element[0].children[this._optionsMap[value]];
 
@@ -620,6 +620,10 @@ var __meta__ = { // jshint ignore:line
                     that._fetch = false;
                 });
             }
+        },
+
+        _isBound: function() {
+            return this.listView.isBound() && !this._retrieveData;
         },
 
         _dataSource: function() {

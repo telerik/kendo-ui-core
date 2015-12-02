@@ -384,6 +384,30 @@
         equal(tags.last().children("span:first").text(), "bar");
     });
 
+    test("value binding pre-selects value when options.value is defined and autoBind:false", function() {
+        dom = $('<select data-bind="value:value"></select>');
+
+        var items = new kendo.data.ObservableArray([{text:"foo", value: 1}, {text:"bar", value: 2}]);
+        var observable = kendo.observable({
+            items: new kendo.data.DataSource({ data: items }),
+            value: items[1]
+        });
+
+        dom.kendoMultiSelect({
+            autoBind: false,
+            dataValueField: "value",
+            dataTextField: "text",
+            dataSource: items,
+            value: items[0]
+        });
+
+        kendo.bind(dom, observable);
+
+        var widget = dom.data("kendoMultiSelect");
+
+        deepEqual(widget.value(), [2]);
+    });
+
     test("source binding updates widgets value if value binding exists", function() {
         dom = $('<select data-role="multiselect" data-value-field="value" data-text-field="text" data-value-primitive="true" data-bind="value:value, source:items"></select>');
 
