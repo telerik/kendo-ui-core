@@ -16,7 +16,7 @@ position: 1
 
 You can create a PanelBar in the following ways:
 
-* Through HTMl markup
+* Through HTML markup
 * Through JSON data object 
 
 > **Important**  
