@@ -729,12 +729,25 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _triggerChange: function(removed, added) {
+            removed = removed || [];
+            added = added || [];
+
+            if (removed.length || added.length) {
+                this.trigger(CHANGE, {
+                    removed: removed,
+                    added: added
+                });
+            }
+        },
+
         select: function(candidate) {
             var that = this,
                 indices,
                 singleSelection = that.options.selectable !== "multiple",
                 prefetchStarted = !!that._activeDeferred,
                 filtered = this.isFiltered(),
+                isAlreadySelected,
                 deferred,
                 result,
                 removed = [];
@@ -744,15 +757,12 @@ var __meta__ = { // jshint ignore:line
             }
 
             indices = that._getIndecies(candidate);
+            isAlreadySelected = singleSelection && !filtered && lastFrom(indices) === lastFrom(this._selectedIndexes);
+            removed = that._deselectCurrentValues(indices);
 
-            if (filtered && !singleSelection && that._deselectFiltered(indices)) {
-                if (that._valueDeferred) {
-                    that._valueDeferred.resolve();
-                }
-                return;
-            }
+            if (removed.length || !indices.length || isAlreadySelected) {
+                that._triggerChange(removed);
 
-            if (!indices.length || (singleSelection && !filtered && lastFrom(indices) === lastFrom(this._selectedIndexes))) {
                 if (that._valueDeferred) {
                     that._valueDeferred.resolve();
                 }
@@ -779,13 +789,7 @@ var __meta__ = { // jshint ignore:line
                 var added = that._select(indices);
 
                 that.focus(indices);
-
-                if (added.length || removed.length) {
-                    that.trigger(CHANGE, {
-                        added: added,
-                        removed: removed
-                    });
-                }
+                that._triggerChange(removed, added);
 
                 if (that._valueDeferred) {
                     that._valueDeferred.resolve();
@@ -1358,13 +1362,17 @@ var __meta__ = { // jshint ignore:line
             };
         },
 
-        _deselectFiltered: function(indices) {
+        _deselectCurrentValues: function(indices) {
             var children = this.element[0].children;
             var value, index, position;
             var values = this._values;
             var removed = [];
             var idx = 0;
             var j;
+
+            if (this.options.selectable !== "multiple" || !this.isFiltered()) {
+                return [];
+            }
 
             for (; idx < indices.length; idx++) {
                 position = -1;
@@ -1384,16 +1392,7 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            if (removed.length) {
-                this.trigger("change", {
-                    added: [],
-                    removed: removed
-                });
-
-                return true;
-            }
-
-            return false;
+            return removed;
         },
 
         _select: function(indexes) {
