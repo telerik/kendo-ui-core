@@ -256,6 +256,9 @@ navigation:
     "*import-and-export-data":
         title: "Import and Export Data"
         position: 3
+    "*end-user":
+        title: "For the End User"
+        position: 4
     "*listview":
         title: "ListView"
     "*maskedtextbox":
