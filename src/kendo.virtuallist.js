@@ -455,7 +455,7 @@ var __meta__ = { // jshint ignore:line
                         match = isPrimitive(item) ? value[i] === item : value[i] === valueGetter(item);
 
                         if (match) {
-                            forSelection.push(dataView[idx].index);  //TODO: Test this!
+                            forSelection.push(dataView[idx].index);
                         }
                     }
                 }
@@ -746,7 +746,6 @@ var __meta__ = { // jshint ignore:line
             indices = that._getIndecies(candidate);
 
             if (filtered && !singleSelection && that._deselectFiltered(indices)) {
-                //TODO: test this
                 if (that._valueDeferred) {
                     that._valueDeferred.resolve();
                 }
@@ -754,7 +753,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (!indices.length || (singleSelection && !filtered && lastFrom(indices) === lastFrom(this._selectedIndexes))) {
-                //TODO: test this
                 if (that._valueDeferred) {
                     that._valueDeferred.resolve();
                 }
@@ -1296,7 +1294,6 @@ var __meta__ = { // jshint ignore:line
 
         _deselect: function(indices) {
             var removed = [],
-                index,
                 selectedIndex,
                 dataItem,
                 selectedIndexes = this._selectedIndexes,
