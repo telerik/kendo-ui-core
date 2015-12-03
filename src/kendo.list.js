@@ -171,9 +171,12 @@ var __meta__ = { // jshint ignore:line
             value = value || this.options.value;
 
             if (value !== undefined) {
-                this.listView.value(value);
+                this.listView.value(value)
+                    .done(proxy(this._updateSelectionState, this));
             }
         },
+
+        _updateSelectionState: $.noop,
 
         _listMousedown: function(e) {
             if (!this.filterInput || this.filterInput[0] !== e.target) {
@@ -1281,6 +1284,8 @@ var __meta__ = { // jshint ignore:line
             } else {
                 that._refreshHandler = proxy(that.refresh, that);
             }
+
+            that.setDSFilter(dataSource.filter());
 
             that.dataSource = dataSource.bind(CHANGE, that._refreshHandler);
             that._fixedHeader();

@@ -43,7 +43,7 @@
     module("kendo.ui.ComboBox Virtualization", {
         setup: function() {
             kendo.ns = "";
-            select = $("<select multiple />").appendTo(QUnit.fixture);
+            select = $("<select />").appendTo(QUnit.fixture);
         },
         teardown: function() {
             if (select.data("kendoComboBox")) {
@@ -199,6 +199,107 @@
                 }, 300);
             });
         });
+    });
+
+    asyncTest("widget keeps the selected item after filter is cleared", 4, function() {
+        var combobox = new ComboBox(select, {
+            autoBind: false,
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        var filter = options.data.filter;
+
+                        if (filter && filter.filters.length) {
+                            setTimeout(function() {
+                                options.success({
+                                    data: [
+                                        { id: 1, value: 1, text: "Item " + 1 },
+                                        { id: 11, value: 11, text: "Item " + 11 },
+                                        { id: 111, value: 111, text: "Item " + 111 },
+                                        { id: 1111, value: 1111, text: "Item " + 1111 }
+                                    ],
+                                    total: 4
+                                });
+                            }, 0);
+                        } else {
+                            setTimeout(function() {
+                                options.success({ data: generateData(options.data), total: 300 });
+                            }, 0);
+                        }
+                    }
+                },
+                serverPaging: true,
+                serverFiltering: true,
+                pageSize: 40,
+                schema: {
+                    data: "data",
+                    total: "total"
+                }
+            },
+            filter: "contains",
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            }
+        });
+
+        combobox.one("dataBound", function() {
+            combobox.open();
+            combobox.select(1);
+            combobox.close();
+
+            combobox.one("dataBound", function() {
+                start();
+                equal(combobox.select(), 11);
+                equal(combobox.dataItem().value, 11);
+                ok($("[data-offset-index=11]").hasClass("k-state-focused"));
+                ok($("[data-offset-index=11]").hasClass("k-state-selected"));
+            });
+
+            combobox.open();
+        });
+
+        combobox.search("1");
+    });
+
+    asyncTest("widget keeps selected value when filter is cleared (select)", 1, function() {
+        var data = generateData({ skip: 0, take: 40 });
+        var combobox = new ComboBox(select, {
+            autoBind: false,
+            animation: false,
+            height: 200,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                transport: { read: function(options) { options.success(data); } },
+                pageSize: 40
+            },
+            filter: "contains",
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 28
+            }
+        });
+
+        combobox.one("dataBound", function() {
+            combobox.select(0);
+            combobox.close();
+
+            combobox.one("dataBound", function() {
+                start();
+                equal(combobox.value(), "11");
+            });
+
+            combobox.open();
+        });
+
+        //simulate MVVM value binding
+        combobox._preselect("1", "Item1");
+        combobox.search("11");
     });
 
     asyncTest("dataItem returns correct object based on LI element", 2, function() {

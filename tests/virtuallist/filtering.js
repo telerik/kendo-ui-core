@@ -189,14 +189,47 @@
         });
     });
 
-    asyncTest("keeps selection after filtering", 1, function() {
+    asyncTest("removes selection when dataSource is filtered", 2, function() {
         asyncDataSource.read().then(function() {
-            virtualList.one("change", function() {
-                start();
-                ok(virtualList.items().first().hasClass(SELECTED), "item is selected");
+            virtualList.one("listBound", function() {
+                virtualList.one("listBound", function() {
+                    start();
+                    ok(virtualList.items().first().hasClass(SELECTED), "item is selected");
+                });
+                ok(!virtualList.items().first().hasClass(SELECTED), "item is selected");
+                asyncDataSource.filter([]);
             });
             virtualList.select(virtualList.items().first());
             asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
+        });
+    });
+
+    asyncTest("select the correct item after filter is cleared", 2, function() {
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        options.success(data);
+                    }, 0);
+                }
+            }
+        });
+
+        virtualList.setDataSource(dataSource);
+
+        dataSource.read().then(function() {
+            virtualList.one("listBound", function() {
+                virtualList.one("listBound", function() {
+                    virtualList.one("listBound", function() {
+                        start();
+                        equal(virtualList.items().find(".k-state-selected").length, 0);
+                        deepEqual(virtualList.select(), [17]);
+                    });
+                    dataSource.filter([]);
+                });
+                virtualList.select(11);
+            });
+            dataSource.filter({ field: "letter", operator: "eq", value: "b" });
         });
     });
 

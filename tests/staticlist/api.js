@@ -1431,14 +1431,31 @@
 
     test("isFiltered method returns false if widget is no bound", 1, function() {
         var list = new StaticList(element, {
-            dataSource: ["item1", "item2", "item3"],
+            dataSource: {
+                data: ["item1", "item2", "item3"],
+                filter: { field: "", operator: "eq", value: "item2" }
+            },
+            template: "#:data#"
+        });
+
+        //first bind is done with filtering
+        list.dataSource.read();
+
+        ok(!list.isFiltered());
+    });
+
+    test("isFiltered method returns true if bind the widget with filter", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: {
+                data: ["item1", "item2", "item3"]
+            },
             template: "#:data#"
         });
 
         //first bind is done with filtering
         list.dataSource.filter({ field: "", operator: "eq", value: "item2" });
 
-        ok(!list.isFiltered());
+        ok(list.isFiltered());
     });
 
 })();
