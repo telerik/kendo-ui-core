@@ -736,6 +736,7 @@ var __meta__ = { // jshint ignore:line
                 prefetchStarted = !!that._activeDeferred,
                 filtered = this.isFiltered(),
                 deferred,
+                result,
                 removed = [];
 
             if (candidate === undefined) {
@@ -760,7 +761,9 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            removed = that._deselect(indices);
+            result = that._deselect(indices);
+            removed = result.removed;
+            indices = result.indices;
 
             if (singleSelection) {
                 that._activeDeferred = null;
@@ -1287,7 +1290,7 @@ var __meta__ = { // jshint ignore:line
             return result;
         },
 
-        _deselect: function(indexes) {
+        _deselect: function(indices) {
             var removed = [],
                 index,
                 selectedIndex,
@@ -1298,8 +1301,10 @@ var __meta__ = { // jshint ignore:line
                 removedindexesCounter = 0,
                 item;
 
+            indices = indices.slice();
+
             //TODO: move to selectable: true logic!
-            if (indexes[position] === -1) { //deselect everything
+            if (indices[position] === -1) { //deselect everything
                 for (var idx = 0; idx < selectedIndexes.length; idx++) {
                     selectedIndex = selectedIndexes[idx];
 
@@ -1317,13 +1322,16 @@ var __meta__ = { // jshint ignore:line
                 this._selectedIndexes = [];
 
                 //TODO: Stop modifying the array!!!
-                indexes.splice(0, indexes.length);
+                indices.splice(0, indices.length);
 
-                return removed;
+                return {
+                    indices: indices,
+                    removed: removed
+                }
             }
 
             if (selectable === true) {
-                index = indexes[position];
+                index = indices[position];
                 selectedIndex = selectedIndexes[position];
 
                 if (selectedIndex !== undefined && index !== selectedIndex) {
@@ -1341,8 +1349,8 @@ var __meta__ = { // jshint ignore:line
                 this._selectedDataItems = [];
                 this._selectedIndexes = [];
             } else if (selectable === "multiple") {
-                for (var i = 0; i < indexes.length; i++) {
-                    position = $.inArray(indexes[i], selectedIndexes);
+                for (var i = 0; i < indices.length; i++) {
+                    position = $.inArray(indices[i], selectedIndexes);
                     selectedIndex = selectedIndexes[position];
 
                     if (selectedIndex !== undefined) {
@@ -1357,7 +1365,7 @@ var __meta__ = { // jshint ignore:line
                         this._selectedIndexes.splice(position, 1);
                         dataItem = this._selectedDataItems.splice(position, 1)[0];
 
-                        indexes.splice(i, 1);
+                        indices.splice(i, 1);
 
                         removed.push({
                             index: selectedIndex,
@@ -1371,7 +1379,10 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            return removed;
+            return {
+                indices: indices,
+                removed: removed
+            };
         },
 
         _deselectFiltered: function(indices) {

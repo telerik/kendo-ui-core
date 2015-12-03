@@ -1085,6 +1085,23 @@
         asyncDataSource.read();
     });
 
+    asyncTest("valueDeffered is resolved when same value is set multiple times", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "single",
+            valueMapper: function(options) {
+                options.success([2]);
+            }
+        }));
+
+        virtualList.value([2]);
+        asyncDataSource.read().then(function() {
+            virtualList.value([2]).then(function() {
+                start();
+                ok(true, "promise is resolved");
+            });
+        });
+    });
+
     asyncTest("value method clears previous values and dataItems", 3, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,
