@@ -350,7 +350,9 @@ var __meta__ = { // jshint ignore:line
 
             that.currentTag(null);
             that._change();
-            that._close();
+            if(that.popup.visible()) {
+                that._close();
+            }
         },
 
         _tagListClick: function(e) {
