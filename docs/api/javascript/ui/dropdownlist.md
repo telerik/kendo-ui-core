@@ -998,7 +998,7 @@ Returns the data item at the specified index. If the index is not specified, the
 
 #### Parameters
 
-##### index `Number` *(optional)*
+##### index `jQuery|Number` *(optional)*
 
 The zero-based index of the data record.
 
