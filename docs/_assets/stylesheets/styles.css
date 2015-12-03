@@ -141,6 +141,11 @@ code, em {
     user-select: none
 }
 
+#page-nav .k-item>.k-group {
+    /* simplifies scroll positioning */
+    position: static;
+}
+
 /* Table of contents */
 
 #markdown-toc {
