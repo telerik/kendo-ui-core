@@ -1028,7 +1028,9 @@ input.k-textbox:active {
 
 .k-event,
 .k-task-complete {
-    color: @inversed-text-color;    
+    color: @inversed-text-color;
+    background: darken(@info, 21%); 
+    border-color: darken(@info, 21%);
 }
 
 .k-event.k-state-selected {
@@ -1083,10 +1085,6 @@ input.k-textbox:active {
 .k-gantt-toolbar li:last-child,
 .k-gantt-toolbar li:last-child>.k-link {
     border-radius: 0;
-}
-
-.k-task-complete {
-    background: darken(@info, 21%);
 }
 
 .k-gantt .k-task-draghandle {
