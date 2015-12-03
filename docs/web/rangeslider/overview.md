@@ -26,7 +26,7 @@ Create the RangeSlider by using two HTML `<input>` elements in a `<div>` one as 
    
 ### Initialize the RangeSlider
 
-Initialize the RangeSlider using a jQuery selector as demonstrated int he example below.
+Initialize the RangeSlider using a jQuery selector as demonstrated in the example below.
 
 ###### Example
 
@@ -49,7 +49,7 @@ The aspects of the RangeSlider behavior can be customized by configuring its pro
 *   Small or large step
 *   Tooltip format/placement
 
-The example below demonstrates ghow to customize the RangeSlider behaviors by configuring its properties.
+The example below demonstrates how to customize the RangeSlider behaviors by configuring its properties.
 
 ###### Example
 
@@ -67,7 +67,7 @@ The example below demonstrates ghow to customize the RangeSlider behaviors by co
 
 Make a reference to an existing RangeSlider instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference has been established, you can use the API to control its behavior.
 
-The example below denmonstrates how to access an existing RangeSlider instance.
+The example below demonstrates how to access an existing RangeSlider instance.
 
 ###### Example
 
