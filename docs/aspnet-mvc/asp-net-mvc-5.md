@@ -119,8 +119,8 @@ The next step is to add a reference to **Kendo.Mvc.dll** which is the assembly c
 The next step is to let ASP.NET MVC know of the Kendo.Mvc.UI namespace where the server-side wrappers are. To do this update the web.config file of the web application.
 
 1. Open **Views/Web.config** (or root **Web.config** if using **ASPX**).
-2. Locate the **namespaces** tag.
-3. Append an **add** tag to the **namespaces** tag.
+1. Locate the **namespaces** tag.
+1. Append an **add** tag to the **namespaces** tag.
 
         <namespaces>
             <add namespace="System.Web.Mvc" />
@@ -129,6 +129,13 @@ The next step is to let ASP.NET MVC know of the Kendo.Mvc.UI namespace where the
             <add namespace="System.Web.Routing" />
             <add namespace="Kendo.Mvc.UI" />
         </namespaces>
+
+1. Add a binding redirect to your current System.Web.Mvc version
+
+        <dependentAssembly>
+            <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
+            <bindingRedirect oldVersion="0.0.0.0-5.2.3.0" newVersion="5.2.3.0" />
+        </dependentAssembly>
 
 ## Use a Kendo UI widget
 
