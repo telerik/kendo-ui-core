@@ -761,6 +761,10 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
+            if (indices.length === 1 && indices[0] === -1) {
+                indices = [];
+            }
+
             result = that._deselect(indices);
             removed = result.removed;
             indices = result.indices;
@@ -1303,48 +1307,20 @@ var __meta__ = { // jshint ignore:line
 
             indices = indices.slice();
 
-            //TODO: move to selectable: true logic!
-            if (indices[position] === -1) { //deselect everything
+            if (selectable === true || !indices.length) { //deselect everything
+
                 for (var idx = 0; idx < selectedIndexes.length; idx++) {
-                    selectedIndex = selectedIndexes[idx];
+                    if (selectedIndexes[idx] !== undefined) {
+                        this._getElementByIndex(selectedIndexes[idx]).removeClass(SELECTED);
 
-                    this._getElementByIndex(selectedIndex).removeClass(SELECTED);
-
-                    removed.push({
-                        index: selectedIndex,
-                        position: idx,
-                        dataItem: this._selectedDataItems[idx]
-                    });
+                        removed.push({
+                            index: selectedIndexes[idx],
+                            position: idx,
+                            dataItem: this._selectedDataItems[idx]
+                        });
+                    }
                 }
 
-                this._values = [];
-                this._selectedDataItems = [];
-                this._selectedIndexes = [];
-
-                //TODO: Stop modifying the array!!!
-                indices.splice(0, indices.length);
-
-                return {
-                    indices: indices,
-                    removed: removed
-                }
-            }
-
-            if (selectable === true) {
-                index = indices[position];
-                selectedIndex = selectedIndexes[position];
-
-                if (selectedIndex !== undefined && index !== selectedIndex) {
-                    this._getElementByIndex(selectedIndex).removeClass(SELECTED);
-
-                    removed.push({
-                        index: selectedIndex,
-                        position: position,
-                        dataItem: this._selectedDataItems[position]
-                    });
-                }
-
-                //TODO: this should be called always, not only when index !== selectedIndex
                 this._values = [];
                 this._selectedDataItems = [];
                 this._selectedIndexes = [];
