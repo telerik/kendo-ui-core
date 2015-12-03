@@ -37,7 +37,9 @@ The Kendo UI Spreadsheet is used for implementation of related data and its visu
 ##### Main Elements of the Kendo UI Spreadsheet Widget  
 <center>![Spreadsheet UI components](../images/spreadsheet-components.png)</center>
 
-## Actions with Sheets
+## Actions 
+
+### Sheets
 
 When you open the spreadsheet, the widget automatically generates a worksheet and applies to it a set of default settings.
 
@@ -49,7 +51,7 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | Reorder				| Click and hold the sheet tab, and drag it to the desired location on the Sheet Tab Bar |
 | Delete				| Click **X** [ <span class="k-font-icon k-i-x"></span> ] on the tab of the sheet you want to remove |
 
-## Actions with Cells
+### Cells
 
 | WHAT YOU WANT			| HOW TO GET THERE		|
 | :---					| :---					|
@@ -67,7 +69,7 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | Add a background color| <ol><li>Select a cell</li> <li>Click **Background** [ <span class="k-font-icon k-i-background"></span> ] on the **Toolbar**</li> <li>Choose a color from the drop-down list to apply to the cell background</li></ol> |
 | Choose border styles and colors | <ol><li>Select a cell</li> <li>Click **Borders** [ <span class="k-font-icon k-i-all-borders"></span> ] on the **Toolbar**</li> <li>Select the border style and/or the color from the drop-down list</li> <li>Click anywhere on the sheet to exit</li></ol> |
 
-## Actions with Rows
+### Rows
 
 | WHAT YOU WANT			| HOW TO GET THERE		|
 | :---					| :---					|
@@ -81,7 +83,7 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | Add a background color | <ol><li>Select a row</li> <li>On the **Toolbar** click **Background** [ <span class="k-font-icon k-i-background"></span> ]</li> <li>Select the color from the drop-down list</li></ol> |
 | Choose border styles and colors | <ol><li>Select a row</li> <li>Click **Borders** [ <span class="k-font-icon k-i-all-borders"></span> ] on the **Toolbar**</li> <li>Select the border style and/or the color from the drop-down list</li> <li>Click anywhere on the worksheet to exit</li></ol> |
 
-## Actions with Columns
+### Columns
 
 | WHAT YOU WANT			| HOW TO GET THERE		|
 | :---					| :---					|
@@ -94,7 +96,7 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | Add a background color | <ol><li>Select a  column</li> <li>On the **Toolbar** click **Background** [ <span class="k-font-icon k-i-background"></span> ]</li> <li>Select the color from the drop-down list</li></ol> |
 | Choose border styles and colors | <ol><li>Select a column</li> <li>Click **Borders** [ <span class="k-font-icon k-i-all-borders"></span> ] on the **Toolbar**</li> <li>Select the border style and/or the color from the drop-down list</li> <li>Click anywhere on the sheet to exit</li></ol> |
 
-## Actions with Fonts
+### Fonts
 
 | WHAT YOU WANT			| HOW TO GET THERE		|
 | :---					| :---					|
@@ -102,7 +104,7 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | Edit font sizes 	| <ol><li>Select the cells to which you want to apply the font size</li> <li>On the **Toolbar** click **Font Size** [ <span class="k-font-icon k-i-font-size"></span> ]</li> <li>Choose the font size from the predetermined values in drop-down list</li></ol> |
 | Format fonts			| <ol><li>Select the cells where you want to format the font</li> <li>Use any of the following commands:</li></ol> <ul><ul><li>To make make the font **bold**, click **Bold** [ <span class="k-font-icon k-i-bold"></span> ] on the **Toolbar**</li> <li>To make make the font <i>italic</i>, click **Italic** [ <span class="k-font-icon k-i-italic"></span> ] on the **Toolbar**</li> <li>To make make the font <u>underlined</u>, click **Underline** [ <span class="k-font-icon k-i-underline"></span> ] on the **Toolbar**</li></ul></ul> |
 
-## Actions with Filters
+### Filters
 
 | WHAT YOU WANT				| HOW TO GET THERE		|
 | :---						| :---					|
@@ -110,7 +112,7 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 | Unsort fields             | <ul><li>Click **Undo** [ <span class="k-font-icon k-i-undo"></span> ] on the **Menu** to reverse the sorting you made.</li></ul> <ul>Оr</ul> <ul><li>Add a new column. Check which is the last active field of the columns whose data you want to sort. Then add a subsequent number (1, 2, 3, etc.) to each field of the recently added column ending with the field in the same row as the last field of the columns whose content you want to sort. In this way you can revert the sorting of the target columns by applying the sorting option in ascending order to the recently added helper column.</li></ul> |
 | Filter information        | <ol><li>Click **Data** on the **Tab Bar**</li> <li>Select the columns to which you want to apply the filtering criteria</li> <li>Click **Filter** [ <span class="k-font-icon k-i-filter"></span> ] on the **Toolbar**</li> <li>Choose from the drop-down list of options:</li> <ul><ul><li>**Sort range A to Z** sorts the data within the columns in ascending alphabetical order</li> <li>**Sort range Z to A** sorts the data within the columns in descending alphabetical order</li> <li>**Filter by condition** filters the data within the column by applying any of the conditions from the drop-down list of options. Each of them can be applied to text fields, dates, or numbers:</li> <ul><ul><li><u>Text fields:</u> Choose any of the options referring to texts from the **Filter by condition** drop-down list. Fill in the field below to set the filter condition. Click **Apply**. For example, choose **Text starts with**, set the condition to **E**, and click **Apply**. The result shows all rows containing text fields that start with an **E**. You can alphabetically sort the filtered infromation by clicking **Sort range A to Z** or **Sort range Z to A**.</li> <li><u>Dates:</u> Choose any of the options referring to dates from the **Filter by condition** drop-down list. Fill in the field below to set the filter condition. Click **Apply**. For example, choose **Date is**, set the condition to **6/30/2014**, and click **Apply**. The result is a list of only rows containing fields that display the date 6/30/2014. Note that the date format may differ depending on the order of date components. Make sure you check the current format before applying this filter.</li> <li><u>Numbers:</u> Choose any of the options referring to numbers from the **Filter by condition** drop-down list. Fill in the field below to set the filter condition. Click **Apply**. For example, choose **Is equal to**, set the condition to **10230**, and click **Apply**. The result is a list of only rows containing fields that display the number 10230.</li></ul></ul></ul></ul> <ul><ul>To retrieve all applied filters and sorting conditions, from **Filter by condition** choose **None** -> **Apply**.</ul></ul> <ul><ul><li>**Filter by value** provides more options for filtering numbers.</li> <ul><li>Select the checkbox against **All** to clear all conditions and view all rows within the active sheet</li> <li>Uncheck **All** to clear all checkboxes, and choose the values according to which you want to filter the data in the selected columns.</li></ul></ul></ul> |   
 
-## Other Actions
+### Other
 
 | WHAT YOU WANT				| HOW TO GET THERE		|
 | :---						| :---					|
