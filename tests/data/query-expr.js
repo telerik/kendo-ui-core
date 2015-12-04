@@ -523,7 +523,7 @@ test("date eq", function() {
     equal(compile({
         logic: "and",
         filters: [ { operator: "eq", value: date} ]
-    }), "((d?d.getTime():d) == " + date.getTime() + ")");
+    }), "((d&&d.getTime?d.getTime():d) == " + date.getTime() + ")");
 });
 
 test("date neq", function() {
@@ -531,7 +531,7 @@ test("date neq", function() {
     equal(compile({
         logic: "and",
         filters: [ { operator: "neq", value: date} ]
-    }), "((d?d.getTime():d) != " + date.getTime() + ")");
+    }), "((d&&d.getTime?d.getTime():d) != " + date.getTime() + ")");
 });
 
 test("date gt", function() {
@@ -539,7 +539,7 @@ test("date gt", function() {
     equal(compile({
         logic: "and",
         filters: [ { operator: "gt", value: date} ]
-    }), "((d?d.getTime():d) > " + date.getTime() + ")");
+    }), "((d&&d.getTime?d.getTime():d) > " + date.getTime() + ")");
 });
 
 test("date gte", function() {
@@ -547,7 +547,7 @@ test("date gte", function() {
     equal(compile({
         logic: "and",
         filters: [ { operator: "gte", value: date} ]
-    }), "((d?d.getTime():d) >= " + date.getTime() + ")");
+    }), "((d&&d.getTime?d.getTime():d) >= " + date.getTime() + ")");
 });
 
 test("date lt", function() {
@@ -555,7 +555,7 @@ test("date lt", function() {
     equal(compile({
         logic: "and",
         filters: [ { operator: "lt", value: date} ]
-    }), "((d?d.getTime():d) < " + date.getTime() + ")");
+    }), "((d&&d.getTime?d.getTime():d) < " + date.getTime() + ")");
 });
 
 test("date lte", function() {
@@ -563,26 +563,26 @@ test("date lte", function() {
     equal(compile({
         logic: "and",
         filters: [ { operator: "lte", value: date} ]
-    }), "((d?d.getTime():d) <= " + date.getTime() + ")");
+    }), "((d&&d.getTime?d.getTime():d) <= " + date.getTime() + ")");
 });
 
 test("string neq", function() {
     equal(compile({
         logic: "and",
         filters: [ { operator: "neq", value: "foo"} ]
-    }), "((d || '').toLowerCase() != 'foo')");
+    }), "(((d || '')+'').toLowerCase() != 'foo')");
 });
 test("string filtering is case insensitive by default", function() {
     equal(compile({
         logic: "and",
         filters: [ { operator: "neq", value: "Foo"} ]
-    }), "((d || '').toLowerCase() != 'foo')");
+    }), "(((d || '')+'').toLowerCase() != 'foo')");
 });
 
 test("apostrophe in strings is escaped", function() {
     equal(compile({
         filters: [ { operator: "eq", value: "f'oo"} ]
-    }), "((d || '').toLowerCase() == 'f\\'oo')");
+    }), "(((d || '')+'').toLowerCase() == 'f\\'oo')");
 });
 
 test("string filtering is case sensitive", function() {
@@ -595,7 +595,7 @@ test("string filtering is case sensitive", function() {
 test("carriage return in strings is escaped", function() {
     equal(compile({
         filters: [ { operator: "eq", value: "foo \r\n bar"} ]
-    }), "((d || '').toLowerCase() == 'foo  bar')");
+    }), "(((d || '')+'').toLowerCase() == 'foo  bar')");
 });
 
 }());

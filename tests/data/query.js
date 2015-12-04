@@ -765,6 +765,52 @@ test("filter filters on nullable dates", function () {
     equal(result[0].getFullYear(), 2011);
 });
 
+test("filter with date filters out strings and numbers", function() {
+    var data = [new Date(2011, 1, 1), "foo", 42];
+
+    var result = new Query(data).filter( {
+        field: function(item) {
+            return item;
+        },
+        operator: "eq",
+        value: new Date(2011, 1, 1)
+    }).toArray();
+
+    equal(result.length, 1);
+    equal(result[0].getFullYear(), 2011);
+});
+
+test("filter with string filters out numbers", function() {
+    var data = ["foo", 42];
+
+    var result = new Query(data).filter( {
+        field: function(item) {
+            return item;
+        },
+        operator: "eq",
+        value: "foo",
+        ignoreCase: true
+    }).toArray();
+
+    equal(result.length, 1);
+    equal(result[0], "foo");
+});
+
+test("filter with 'null' as string does not match null", function() {
+    var data = [null];
+
+    var result = new Query(data).filter( {
+        field: function(item) {
+            return item;
+        },
+        operator: "eq",
+        value: "null",
+        ignoreCase: true
+    }).toArray();
+
+    equal(result.length, 0);
+});
+
 test("filter filters without passing operator defaults to eq", function() {
     var data = [ {field: 100} , {field: 10} , {field: 1} ];
 
