@@ -1,24 +1,24 @@
 ---
 title: Resources
-page_title: Resources and the Kendo UI Scheduler widget
-description: How to use resources with Kendo UI Scheduler.
+page_title: Resources | Kendo UI Scheduler Widget
+description: "Learn how to use resources with the Kendo UI Scheduler widget."
+slug: resources_kendoui_scheduler_widget
+position: 2
 ---
 
-# Scheduler Resources
+# Resources
 
-Kendo UI Scheduler supports assigning scheduler events to a set of predefined resources. The scheduler widget supports more than one kind of resource. Multiple instances of the same resource type
-can be assigned to a scheduler event.
+[Kendo UI Scheduler](http://demos.telerik.com/kendo-ui/scheduler/index) allows you to assign Scheduler events to a set of predefined resources. The widget supports multiple resources. Multiple instances of the same resource type can be assigned to a single Scheduler event. The Scheduler provides you with the option to assign resources via the Scheduler event edit form.
 
-The scheduler widget allows the user to assign resources via the scheduler event edit form.
+## Instance Resources
 
+### Single Instance Resources
 
+A single instance resource is a resource of which only one instance can be assigned to a Scheduler event. A typical example is a Scheduler displaying a list of meetings (Scheduler events), which are held in two rooms (resources). Since a meeting can be held in one room it can be considered a single resource.
 
-## Single instance resource
+The example below demonstrates how to use a single instance resource.
 
-A single instance resource is a resource of which only one instance can be assigned to a scheduler event. A typical example is a scheduler displaying a list of meetings (scheduler events) which are held in two rooms (resources).
-Since a meeting can be held in one room it can be considered as a "single" resource.
-
-### Example - single single resources
+###### Example
 
     <div id="scheduler"></div>
     <script>
@@ -57,14 +57,15 @@ Since a meeting can be held in one room it can be considered as a "single" resou
     });
     </script>
 
-If a resource instance has its `color` field set the scheduler will use this value as the background of all events assigned to that instance.
+If a resource instance has its `color` field set, the Scheduler will use this value as background for all events assigned to that instance.
 
-## Multiple resource instances
+### Multiple Instance Resources
 
-A multiple resource instance is a resource of which more than one instance can be assigned to a scheduler event. A typical example is a scheduler displaying a list of meetings and the meeting atendees. Since more than one atendee
-can participate in a meeting it can be considered a "multiple" instance resource.
+A multiple instance resource is a resource of which more than one instance can be assigned to a scheduler event. A typical example is a Scheduler displaying a list of meetings and the meeting atendees. Since more than one atendee can participate in a meeting, it can be considered a multiple instance resource.
 
-### Example - multiple instance resources
+The example below demonstrates how to use multiple instance resources.
+
+###### Example
 
     <div id="scheduler"></div>
     <script>
@@ -105,13 +106,15 @@ can participate in a meeting it can be considered a "multiple" instance resource
     });
     </script>
 
-The scheduler will use the `color` of the first resource instance as the background of the scheduler events.
+The scheduler will use the `color` of the first resource instance as background for the Scheduler events.
 
-## Multiple resource types
+## Resource Types
 
-Kendo UI Scheduler supports unlimited resource types. For example we can combine the single and multiple resource examples in a single one.
+### Multiple Resource Types
 
-### Example - multiple resource types
+Kendo UI Scheduler supports unlimited resource types. For instance, you are able to combine the single and multiple resource examples in one, as demonstrated in the example below.
+
+###### Example
 
     <div id="scheduler"></div>
     <script>
@@ -168,8 +171,18 @@ Kendo UI Scheduler supports unlimited resource types. For example we can combine
     });
     </script>
 
-## Further reading
+## Further Reading
 
-Additional information about Kendo UI resources can be found in the documentation of the [resources](/api/web/scheduler#configuration-resources) option.
+For more information on how to configure Kendo UI resources, see [this article](/api/web/scheduler#configuration-resources).
 
-In addition you can check the [Resources](http://demos.telerik.com/kendo-ui/web/scheduler/resources.html) online demo.
+To build a better understanding of resources, see the [online demo](http://demos.telerik.com/kendo-ui/web/scheduler/resources.html).
+
+## See  Also
+
+Other articles on Kendo UI Scheduler and how-to examples:
+
+* [JavaScript API Reference](/api/javascript/ui/scheduler)
+* [Overview]({% slug overview_kendoui_scheduler_widget %})
+* [Timezones]({% slug timezones_kendoui_scheduler_widget %})
+* [How to Filter Events by Resource Using MultiSelect]({% slug howto_filter_eventsby_resourceusing_multiselect_scheduler %})
+* [How to Persist Resource Values on `move`]({% slug howto_persistresourcevalues_onamoveevent_scheduler %})
