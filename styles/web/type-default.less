@@ -758,6 +758,22 @@ html .km-pane-wrapper .k-header
     background-color: @calendar-group-background-color;
 }
 
+.k-calendar td.k-state-selected.k-state-hover {
+    background-color: saturate(@selected-background-color, 7%);
+    .composite-background(none);
+}
+
+.k-calendar td.k-state-selected .k-link {
+    color: @selected-text-color;    
+}
+
+.k-calendar td.k-state-focused.k-state-selected,
+.k-calendar td.k-state-selected.k-state-active,
+.k-calendar td.k-state-selected:active,
+.k-calendar td.k-state-selected.k-state-hover:active {
+    .box-shadow(@focused-item-shadow);
+}
+
 .k-calendar-container.k-group
 {
     border-color: @group-border-color;
@@ -2053,8 +2069,6 @@ textarea.k-textbox,
 
 .k-grid td.k-state-focused
 {
-    //box-shadow: inset 0 0 0 1px @focused-item-shadow;
-    //.box-shadow(inset @focused-item-shadow);
     .box-shadow(@focused-item-shadow);
 }
 
