@@ -1,14 +1,15 @@
 ---
-title: Persist the resource values on event move
-page_title: Persist the resource values on event move
-description: Persist the resource values on event move
+title: Persist Resource Values on <code>move</code>
+page_title: Persist Resource Values on move | Kendo UI Scheduler Widget
+description: "Learn how to persist resource values on a move event in a Kendo UI Scheduler widget."
+slug: howto_persistresourcevalues_onamoveevent_scheduler
 ---
 
-# Persist the resource values on event move
+# Persist Resource Values on `move`
 
-The example below demonstrates how to persist the event resouces on move.
+The example below demonstrates how to persist the event resouces on `move` in a Kendo UI Scheduler.
 
-#### Example:
+###### Example
 
 ```html
 <div id="example">
@@ -108,3 +109,28 @@ $(function() {
 });
 </script>
 ```
+
+## See Also 
+
+Other articles and how-to examples on Kendo UI Scheduler:
+
+* [JavaScript API Reference](/api/javascript/ui/scheduler)
+* [How to Create Recurrence Editor Using Mobile Editor]({% slug howto_createrecurrenceeditor_byusingmobileeditor_scheduler %})
+* [How to Export to iCal]({% slug howto_exportto_ical_scheduler %})
+* [How to Hide Header and Footer in Adaptive Rendering]({% slug howto_hideheaderandfooter_inadaptiverebdering_scheduler %})
+* [How to Hide Time Headers]({% slug howto_hide_time_headers_scheduler %})
+* [How to Modify Editor Template upon New Events]({% slug howto_modifyeditortemplate_wheneventisnew_scheduler %})
+* [How to Modify Event Styling on `databound`]({% slug howto_modifyeventstyling_ondatabound_scheduler %})
+* [How to Prevent Moving AllDay Events outside the AllDay Header]({% slug howto_preventmovingalldayevents_fromalldayheader_scheduler %})
+* [How to Work with Scheduler Offline]({% slug howto_setupthewidget_toworkoffline_scheduler %})
+* [How to Use Remote Validation]({% slug howto_useremotevalidation_scheduler %})
+
+How-to examples on Kendo UI Scheduler in AngularJS:
+
+* [How to Create and Set `ObservableArray` Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
+* [How to Edit Using ContextMenu]({% slug howto_edit_using_contectmenu_angularjs_scheduler %})
+* [How to Set Initial Data Manually]({% slug howto_set_intial_data_manually_angularjs_scheduler %})
+* [How to Show Тooltip on `hover`]({% slug howto_show_tooltipon_hover_angularjs_scheduler %})
+* [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
+
+For additional runnable examples on Kendo UI Scheduler, browse the [Scheduler **How To** documentation folder](http://docs.telerik.com/kendo-ui/web/scheduler/how-to).

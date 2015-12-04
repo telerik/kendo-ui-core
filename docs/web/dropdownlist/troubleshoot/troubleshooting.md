@@ -77,7 +77,7 @@ Other articles on troubleshooting:
 * [JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
 * [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})
-* [Common Issues in Kendo UI Scheduler](/web/scheduler/troubleshooting)
+* [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
 * [Common Issues in Kendo UI Upload](/web/upload/troubleshooting)
 * [Common Issues in Widgets Rendering Data Visualization](/dataviz/troubleshooting)
 * [Common Issues in Telerik UI for ASP.NET MVC](/aspnet-mvc/troubleshooting)

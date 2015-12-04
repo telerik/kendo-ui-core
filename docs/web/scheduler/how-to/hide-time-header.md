@@ -1,16 +1,17 @@
 ---
-title: Hide times header
-page_title: Hide times header
-description: Hide times header
+title: Hide Time Headers
+page_title: Hide Time Headers | Kendo UI Scheduler Widget
+description: "Learn how to hide the time headers of the day/week/workWeek views in a Kendo UI Scheduler widget."
+slug: howto_hide_time_headers_scheduler
 ---
 
-# Hide times header of Day/Week/WorkWeek views
+# Hide Time Headers
 
-## Hide times header of a ungrouped view
+## Ungrouped View
 
-The example below demonstrates how to hide the time headers of a ungrouped scheduler view.
+The example below demonstrates how to hide the time headers of an ungrouped Kendo UI Scheduler view.
 
-#### Example:
+###### Example
 
 ```html
 <body>
@@ -109,11 +110,12 @@ $(function() {
 });
 </script>
 ```
-## Hide times header of a grouped view
 
-The example below demonstrates how to hide the time headers of a grouped scheduler view.
+## Grouped View
 
-#### Example:
+The example below demonstrates how to hide the time headers of a grouped Kendo UI Scheduler view.
+
+###### Example
 
 ```html
 <body>
@@ -222,3 +224,28 @@ $(function() {
 });
 </script>
 ```
+
+## See Also 
+
+Other articles and how-to examples on Kendo UI Scheduler:
+
+* [JavaScript API Reference](/api/javascript/ui/scheduler)
+* [How to Create Recurrence Editor Using Mobile Editor]({% slug howto_createrecurrenceeditor_byusingmobileeditor_scheduler %})
+* [How to Export to iCal]({% slug howto_exportto_ical_scheduler %})
+* [How to Hide Header and Footer in Adaptive Rendering]({% slug howto_hideheaderandfooter_inadaptiverebdering_scheduler %})
+* [How to Modify Editor Template upon New Events]({% slug howto_modifyeditortemplate_wheneventisnew_scheduler %})
+* [How to Modify Event Styling on `databound`]({% slug howto_modifyeventstyling_ondatabound_scheduler %})
+* [How to Persist Resource Values on `move`]({% slug howto_persistresourcevalues_onamoveevent_scheduler %})
+* [How to Prevent Moving AllDay Events outside the AllDay Header]({% slug howto_preventmovingalldayevents_fromalldayheader_scheduler %})
+* [How to Work with Scheduler Offline]({% slug howto_setupthewidget_toworkoffline_scheduler %})
+* [How to Use Remote Validation]({% slug howto_useremotevalidation_scheduler %})
+
+How-to examples on Kendo UI Scheduler in AngularJS:
+
+* [How to Create and Set `ObservableArray` Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
+* [How to Edit Using ContextMenu]({% slug howto_edit_using_contectmenu_angularjs_scheduler %})
+* [How to Set Initial Data Manually]({% slug howto_set_intial_data_manually_angularjs_scheduler %})
+* [How to Show Тooltip on `hover`]({% slug howto_show_tooltipon_hover_angularjs_scheduler %})
+* [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
+
+For additional runnable examples on Kendo UI Scheduler, browse the [Scheduler **How To** documentation folder](http://docs.telerik.com/kendo-ui/web/scheduler/how-to).
