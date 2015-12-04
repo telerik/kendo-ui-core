@@ -763,6 +763,13 @@ html .km-pane-wrapper .k-header
     background-color: @calendar-group-background-color;
 }
 
+.k-calendar td.k-state-focused.k-state-selected,
+.k-calendar td.k-state-selected.k-state-active,
+.k-calendar td.k-state-selected:active,
+.k-calendar td.k-state-selected.k-state-hover:active {
+    .box-shadow(@focused-item-shadow);
+}
+
 .k-calendar-container.k-group
 {
     border-color: @group-border-color;

@@ -544,7 +544,7 @@ input.k-textbox:active {
     }
 
     .k-state-focused {
-        border-color: @accent;
+        border-color: lighten(@hover-text-color, 8%);
     }
 
     .k-header .k-state-hover {
@@ -561,6 +561,14 @@ input.k-textbox:active {
         background-color: @selected-background;
         border-color: @selected-background;
         box-shadow: none;
+    }
+
+    .k-state-selected.k-state-hover {
+        background-color: @accent-hover-background;
+    }
+
+    .k-state-selected.k-state-focused {
+        border-color: multiply(@accent, #9a9a9a);
     }
 
     .k-footer {
