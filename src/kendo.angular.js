@@ -482,13 +482,14 @@ var __meta__ = { // jshint ignore:line
         var updating = false;
 
         var current = getter(scope);
+        var sourceItemCount;
 
         widget.$angular_setLogicValue(current);
 
         var valueIsCollection = kendo.ui.MultiSelect && widget instanceof kendo.ui.MultiSelect;
 
         if (valueIsCollection) {
-            var sourceItemCount = current.length;
+            sourceItemCount = current.length;
         }
 
         // keep in sync
@@ -536,7 +537,12 @@ var __meta__ = { // jshint ignore:line
             }
 
             digest(scope, function(){
-                setter(scope, widget.$angular_getLogicValue());
+                current = widget.$angular_getLogicValue();
+                if (valueIsCollection) {
+                    sourceItemCount = current.length;
+                }
+
+                setter(scope, current);
             });
 
             updating = false;
