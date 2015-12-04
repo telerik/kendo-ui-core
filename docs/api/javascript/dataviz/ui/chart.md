@@ -9160,7 +9160,8 @@ The series base color. The supported values are:
 
 The data item field which contains the series color.
 
-> The `colorField` option is supported when [series.type](#configuration-series.type) is set to "bar", "column", "bubble", "donut", "pie", "candlestick", "ohlc" or "waterfall".
+> The `colorField` option is supported when [series.type](#configuration-series.type)
+is set to "bar", "column", "rangeBar", "rangeColumn", "bubble", "donut", "pie", "candlestick", "ohlc" or "waterfall".
 
 #### Example - set the chart series color field
 
