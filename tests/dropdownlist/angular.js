@@ -223,4 +223,35 @@
         equal(widget.listView.isBound(), false);
         equal(widget.value(), "");
     });
+
+    ngTest("dropdownlist respects model value on reset", 1, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            var colors = new kendo.data.ObservableArray([ { color: "red", value: 1 }, { color: "green", value: 2 }, { color: "blue", value: 3 } ]);
+
+            $scope.colors = new kendo.data.DataSource({ data: colors }),
+            $scope.data = {
+                color: null
+            }
+
+            $scope.clear = function() {
+                $scope.$apply(function() {
+                    $scope.data.color = null;
+                });
+            };
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-drop-down-list k-ng-model="data.color" k-value-primitive="true" k-data-source=colors k-data-text-field="\'color\'" k-data-value-field="\'value\'"></select></div>');
+    },
+
+    function() {
+        var dropdown = QUnit.fixture.find("select").getKendoDropDownList();
+        var scope = dropdown.element.scope();
+
+        dropdown.select(1);
+        dropdown.trigger("change");
+
+        scope.clear();
+
+        equal(dropdown.value(), "");
+    });
 })();
