@@ -1,14 +1,15 @@
 ---
-title: Reorder rows in nested Grid
-page_title: Reorder rows in nested Grid
-description: Reorder rows in nested Grid
+title: Reorder Rows in Nested Grid
+page_title: Reorder Rows in Nested Grid | Kendo UI Sortable Widget
+description: "Learn how to reorder rows in a child Grid using the Kendo UI Sortable widget."
+slug: howto_reorderrowsinnestedgrid_sortable
 ---
 
-# Reorder rows in nested Grid
+# Reorder Rows in Nested Grid
 
-The following runnable sample demonstrates how to reorder rows in a child Grid using Kendo UI Sortable
+The example below demonstrates how to reorder rows in a child Grid using the Kendo UI Sortable widget.
 
-#### Example:
+###### Example
 
 ```html
     <div id="example">
@@ -143,3 +144,14 @@ The following runnable sample demonstrates how to reorder rows in a child Grid u
       </script>
     </div>
 ```
+
+## See Also 
+
+Other articles and how-to examples on Kendo UI Sortable:
+
+* [JavaScript API Reference](/api/javascript/ui/sortable)
+* [How to Nest Sortables]({% slug howto_nestsortables_sortable %})
+* [How to Persist Order in `localStorage`]({% slug howto_persistoderinlocalstorage_sortable %})
+* [How to Reorder AngularJS Grid Rows]({% slug howto_reorderangularjsgridrows_angular_sortable %})
+* [How to Reorder Grid Rows]({% slug howto_reordergridrows_sortable %})
+* [How to Transfer Grid Rows]({% slug howto_transfergridrows_sortable %})

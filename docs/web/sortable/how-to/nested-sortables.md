@@ -1,14 +1,15 @@
 ---
-title: Nested sortables
-page_title: Create nested Sortable widgets
-description: Create nested Sortable widgets
+title: Nest Sortables
+page_title: Nest Sortables | Kendo UI Sortable Widget
+description: "Learn how to create nested Kendo UI Sortable widgets."
+slug: howto_nestsortables_sortable
 ---
 
-# Create nested Sortable widgets
+# Nest Sortables
 
-The following runnable sample demonstrates how to create nested Sortable widgets
+The example below demonstrates how to create nested Kendo UI Sortable widgets.
 
-#### Example:
+###### Example
 
 ```html
   <ul id="parent">
@@ -42,3 +43,14 @@ The following runnable sample demonstrates how to create nested Sortable widgets
     });
   </script>
 ```
+
+## See Also 
+
+Other articles and how-to examples on Kendo UI Sortable:
+
+* [JavaScript API Reference](/api/javascript/ui/sortable)
+* [How to Persist Order in `localStorage`]({% slug howto_persistoderinlocalstorage_sortable %})
+* [How to Reorder AngularJS Grid Rows]({% slug howto_reorderangularjsgridrows_angular_sortable %})
+* [How to Reorder Grid Rows]({% slug howto_reordergridrows_sortable %})
+* [How to Reorder Rows in Nested Grid]({% slug howto_reorderrowsinnestedgrid_sortable %})
+* [How to Transfer Grid Rows]({% slug howto_transfergridrows_sortable %})
