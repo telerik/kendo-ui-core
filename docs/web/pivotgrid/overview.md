@@ -100,7 +100,7 @@ For a demo, see the runnable how-to example about [sorting a dimension](/web/piv
 
 ### Existing Instances
 
-Refer to an existing an existing PivotGrid instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference has been established, use the [PivotGrid API](/api/web/pivotgrid) to control its behavior.
+Refer to an existing PivotGrid instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference has been established, use the [PivotGrid API](/api/web/pivotgrid) to control its behavior.
 
 The example below demonstrates how to access an existing PivotGrid instance.
 

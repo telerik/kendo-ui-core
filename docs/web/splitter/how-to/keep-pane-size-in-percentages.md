@@ -1,14 +1,15 @@
 ---
-title: Keep pane size in percentages
-page_title: Keep pane size in percentages
-description: Keep pane size in percentages
+title: Keep Pane Size in Percentages
+page_title: Keep Pane Size in Percentages | Kendo UI Splitter Widget
+description: "Learn how to keep the Kendo UI Splitter pane sizes in percentages upon user resize."
+slug: howto_keeppanesizepercentages_splitter
 ---
 
-# Keep pane size in percentages
+# Keep Pane Size in Percentages
 
-The example below demonstrates how to keep the splitter pane sizes in percentages upon user resizes
+The example below demonstrates how to keep the Kendo UI Splitter pane sizes in percentages upon user resizes.
 
-#### Example:
+###### Example
 
 ```html
     <div id="splitter" style="height: 400px">
@@ -49,3 +50,10 @@ The example below demonstrates how to keep the splitter pane sizes in percentage
       });
     </script>
 ```
+
+## See Also 
+
+Other articles on Kendo UI Splitter:
+
+* [JavaScript API Reference](/api/javascript/ui/splitter)
+* [How to Expand to 100% Height and Auto-Resize]({% slug howto_expandto100heightandautoresize_splitter %})

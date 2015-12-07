@@ -1,23 +1,23 @@
 ---
-title: Expand Splitter to 100% Height
-page_title: Expand Splitter to 100% Height and Make it Resize Automatically
-description: Expand Splitter to 100% Height and Make it Resize Automatically
+title: Expand to 100% Height and Auto-Resize
+page_title: Expand to 100% Height and Auto-Resize | Kendo UI Splitter Widget
+description: "Learn how to expand the Kendo UI Splitter to a 100% height and make it resize automatically."
+slug: howto_expandto100heightandautoresize_splitter
 ---
 
-# Expand the Splitter to 100% Height and Make it Resize Automatically
+# Expand to 100% Height and Auto-Resize
 
-The example below demonstrates how to expand the Splitter to 100% height and resize it together with the browser window.
+When making the Splitter 100% high, keep in mind that web standards require elements with percentage height to have a parent element with an explicit height. In the case below, the parent of the Splitter is the `body`, so it receives a `height:100%` style, which in turn results in the `html` element obtaining the same style. If the requirement is not met, the computed height of the Splitter will fall back to `auto` and the widget may collapse completely, depending on its content. 
 
-When making the Splitter 100% high, one should keep in mind that web standards require elements with percentage height to have a parent element with an explicit height.
-In this case the parent of the Splitter is the `body`, so it receives a `height:100%` style, which in turn results in the `html` element obtaining the style as well.
-If the requirement is not met, the Splitter's computed height will fallback to `auto` and the widget may collapse completely, depending on its content.
-In addition, the Splitter should have its border removed. 100% high elements cannot have borders, margins, paddings and sibling elements.
-In a nested Splitters scenario, the inner Splitters remove their borders automatically, given that each Splitter is a direct child of a parent pane.
+Also, make sure you remove the border of the Splitter. 100% high elements cannot have borders, margins, paddings, and sibling elements. 
 
-If the Splitter's dimensions do not depend directly on the browser viewport size, one may need to set the width and height of the Splitter `<div>` manually
-and then call the widget's [`resize`](/web/splitter/overview#resizing-a-splitter-manually) method.
+In a nested-Splitter scenario, the inner Splitters remove their borders automatically, given that each Splitter is a direct child of a parent pane.
 
-#### Example:
+If the dimensions of the Splitter do not depend directly on the browser viewport size, you may need to set the width and height of the Splitter `<div>` manually and then call the widget's [`resize`](/web/splitter/overview#resizing-a-splitter-manually) method.
+
+The example below demonstrates how to expand the Kendo UI Splitter to 100% height and resize it together with the browser window.
+
+###### Example
 
 ```html
 <style>
@@ -93,3 +93,10 @@ and then call the widget's [`resize`](/web/splitter/overview#resizing-a-splitter
     });
 </script>
 ```
+
+## See Also 
+
+Other articles on Kendo UI Splitter:
+
+* [JavaScript API Reference](/api/javascript/ui/splitter)
+* [How to Keep Pane Size in Percentages]({% slug howto_keeppanesizepercentages_splitter %})
