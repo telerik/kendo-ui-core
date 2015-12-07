@@ -12,7 +12,7 @@ The example below demonstrates how to define custom Kendo UI validators to check
 ###### Example
 
 ```html
-  <form id="employeeForm" data-role="validator" novalidate="novalidate">
+  <form id="employeeForm" novalidate="novalidate">
     <p>Both editors contain 100 characters.</p>
 
     <p>This editor has a max <em>text</em> length of 100 characters, so adding more formatting does not invalidate it</p>
