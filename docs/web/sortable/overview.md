@@ -1,34 +1,24 @@
 ---
 title: Overview
-page_title: Sortable widget - getting started help topic
-description: How to use the Sortable widget
-position: 0
+page_title: Overview | Kendo UI Sortable Widget
+description: "Learn how to initialize the Kendo UI Sortable widget and configure its behaviors."
+slug: overview_kendoui_sortable_widget
+position: 1
 ---
 
 # Sortable Overview
 
-The Sortable widget makes a group of DOM elements sortable by dragging and dropping with a mouse or a finger.
+[Kendo UI Sortable widget](http://demos.telerik.com/kendo-ui/sortable/index) makes a group of DOM elements sortable by dragging and dropping with a mouse or a finger.
 
-<div id="page-toc"></div>
+## Getting Started 
 
-- [Initialization and basic usage](#initialization-and-basic-usage)
-- [Initialize a Sortable widget using jQuery plug-in syntax](#initialize-a-sortable-widget-using-jquery-plug-in-syntax)
-- [Key features](#key-features)
-- [Placeholder](#placeholder)
-- [Hint](#hint)
-- [Filter/Disable items](#filterdisable-items)
-- [Cursor](#cursor)
-- [Movement by axis](#movement-by-axis)
-- [Common scenarios](#common-scenarios)
-- [Persist the order](#persist-the-order)
-- [Sortable items with inputs](#sortable-items-with-inputs)
-- [Related help topics](#related)
+### Initialize the Sortable
 
-## Initialization and basic usage
+The Sortable is initialized on an existing HTML element and enables the reordering of the element's children.
 
-The Sortable widget is initialized on an existing HTML element and enables the reordering of the element's children.
+The example below demonstrates how to initialize Kendo UI Sortable by using jQuery plug-in syntax.
 
-### Initialize a Sortable widget using jQuery plug-in syntax
+###### Example
 
 ```html
     <ul id="sortable">
@@ -42,19 +32,22 @@ The Sortable widget is initialized on an existing HTML element and enables the r
     </script>
 ```
 
-## Key features
+## Features
 
 ### Placeholder
 
-The Placeholder is the element which indicates where the dragged item will be placed when dropped. By default, the placeholder is a clone of the dragged element with removed `id` attribute and `visibility` set to `hidden` in order to form a visual gap.
+The Placeholder is the element which indicates where the dragged item will be placed when dropped. By default, the Placeholder is a clone of the dragged element with a removed `id` attribute, and `visibility` set to `hidden` to form a visual gap.
 
-> **Important:** The placeholder element is appended to the Sortable container DOM element. Because of this, jQuery's `index` method **returns unexpected results** while dragging. If you want to get the index of a given item in the Sortable collection you should use widget's [`indexOf`](../../../api/web/sortable#methods-indexof) method.
+> **Important**  
+> The placeholder element is appended to the Sortable DOM element container. Because of this, jQuery's `index` method returns unexpected results while dragging. If you want to get the index of a given item in the Sortable collection, use widget's [`indexOf`](/api/javascript/ui/sortable#methods-indexof) method.
 
-#### Customize the placeholder
+#### Customize the Placeholder
 
-You may change the default placeholder by setting the `placeholder` configuration option.
+You can change the default Placeholder by setting the `placeholder` configuration option.
 
-##### Build the placeholder from the dragged element
+The example below demonstrates how to build the Placeholder from the dragged element.
+
+###### Example
 
 ```html
     <ul id="sortable">
@@ -75,7 +68,9 @@ You may change the default placeholder by setting the `placeholder` configuratio
     </script>
 ```
 
-##### Build a static placeholder
+The example below demonstrates how to build a static Placeholder. 
+
+###### Example
 
 ```html
     <ul id="sortable">
@@ -93,15 +88,18 @@ You may change the default placeholder by setting the `placeholder` configuratio
 
 ### Hint
 
-The Hint is the element representing the dragged item. By default, the hint is a clone of the dragged item.
+The Hint is the element representing the dragged item. By default, the Hint is a clone of the dragged item.
 
-> **Important:** The hint element is appended to the `<body>` tag. This may cause styling issues if the CSS rules are applied only to the Sortable's container.
+> **Important**  
+> The `hint` element is appended to the `<body>` tag. This may cause styling issues if the CSS rules are applied only to the Sortable's container.
 
-#### Customize the hint
+#### Customize the Hint
 
-You may change the default hint by setting the `hint` configuration option.
+You can change the default Hint by setting the `hint` configuration option.
 
-##### Build the hint from the dragged element
+The example below demonstrates how to build the Hint from the dragged element.
+
+###### Example
 
 ```html
     <ul id="sortable">
@@ -121,7 +119,9 @@ You may change the default hint by setting the `hint` configuration option.
     </script>
 ```
 
-##### Build a static hint
+The example below demonstrates how to build a static Hint. 
+
+###### Example
 
 ```html
     <ul id="sortable">
@@ -137,7 +137,9 @@ You may change the default hint by setting the `hint` configuration option.
     </script>
 ```
 
-##### Disable the hint
+The example below demonstrates how to disable the Hint. 
+
+###### Example
 
 The Sortable widget can work without a visible hint. To disable the hint, set the `hint` option to an empty function ([jQuery.noop](http://api.jquery.com/jQuery.noop/)).
 
@@ -155,40 +157,13 @@ The Sortable widget can work without a visible hint. To disable the hint, set th
     </script>
 ```
 
-### Filter/Disable items
-
-The **filter** option specifies which items inside the Sortable's container will be sortable. Items that do not match the `filter` selector will not be draggable nor reordered when the user drags a sortable item over them.
-
-The **disabled** option specifies which items inside the Sortable's container cannot be dragged. Items that match the disabled selector cannot be dragged **but will reorder** when the user drags a sortable item over them.
-
-#### Disable all items at runtime
-
-```html
-    <ul id="sortable">
-        <li>ItemA1</li>
-        <li>ItemA2</li>
-        <li>ItemA3</li>
-    </ul>
-
-    <button id="btnDisable">Disable</button>
-
-    <script>
-        $("#sortable").kendoSortable({
-            disabled: ".disabled"
-        });
-
-        $("#btnDisable").click(function() {
-            $("#sortable").children().addClass("disabled");
-        });
-    </script>
-```
-
 ### Cursor
 
-The `cursor` configuration option is used to specify what cursor will be shown while the **user drags a sortable item**.
-There are several build-in cursor types you can choose from. A full list is available at [quirksmode.org](http://quirksmode.org/css/user-interface/cursor.html).
+The `cursor` configuration option determines the type of cursor to be displayed while the user drags a sortable item. There are several build-in cursor types you can choose from. A full list is available at [quirksmode.org](http://quirksmode.org/css/user-interface/cursor.html).
 
-#### Change the cursor to "move"
+The example below demonstrates how to change the cursor type to `"move"`.
+
+###### Example
 
 ```
     <ul id="sortable">
@@ -204,9 +179,11 @@ There are several build-in cursor types you can choose from. A full list is avai
     </script>
 ```
 
-The `cursor` option changes the cursor style **only while the item is being dragged**. You may change the on-hover cursor with CSS.
+The `cursor` option changes the cursor style only for the time while the item is dragged. If you want to changhe the cursor type on `hover`, use CSS.
 
-#### Example - grab/grabbing cursor on hover
+The example below demonstrates how to grab the cursor on `hover`.
+
+###### Example
 
 ```html
     <ul id="sortable">
@@ -228,27 +205,56 @@ The `cursor` option changes the cursor style **only while the item is being drag
     </style>
 ```
 
- > Using a custom cursor in Internet Explorer browsers is not recommended. As it can cause performance problems, due to browser specifics in custom cursor icon rendering.
+> **Important**  
+> It is advisable not to use a custom cursor in Internet Explorer, as due to the browser's specifics in custom cursor icon rendering, this may cause performace issues.
 
-### Movement by axis
+### Filter and Disable Items
 
-By default, the widget uses the mouse cursor to determine the place of the drop placeholder. This means that if the mouse cursor is not over a sortable item, the placeholder will not be re-positioned.
+The `filter` option specifies which items inside the Sortable's container will be sortable. Items not matching the `filter` selector will neither be draggable, nor reordered, when the user drags a sortable item over them.
 
-If the `axis` is set to "x" or "y", the widget will start operating in movement by axis mode. The widget will **use only the x or y coordinate** of the mouse cursor to determine the placeholder position.
-This mode is useful when the **dragging is restricted in a container**.
+The `disabled` option specifies which items inside the Sortable's container cannot be dragged. Items matching the disabled selector cannot be dragged, but will reorder, when the user drags a sortable item over them.
 
-To see this feature in action please check [constraints demo page](http://demos.telerik.com/kendo-ui/web/sortable/constraints.html).
+The example below demonstrates how to disable all items at runtime.
 
-## Common scenarios
+###### Example
 
-### Persist the order
+```html
+    <ul id="sortable">
+        <li>ItemA1</li>
+        <li>ItemA2</li>
+        <li>ItemA3</li>
+    </ul>
 
-The Sortable widget doesn't persist the current items' order.
-You may use the `change` event to detect when changes in the order occur and save them either in local storage or submit them to the server with [jQuery.ajax](http://api.jquery.com/jQuery.ajax/).
+    <button id="btnDisable">Disable</button>
 
-To restore the Sortable layout you should render the DOM elements in their last order.
+    <script>
+        $("#sortable").kendoSortable({
+            disabled: ".disabled"
+        });
 
-#### Persist items' order in local storage
+        $("#btnDisable").click(function() {
+            $("#sortable").children().addClass("disabled");
+        });
+    </script>
+```
+
+### Move by Axis
+
+By default, Kendo UI Sortable uses the mouse cursor to determine the place of the drop Placeholder. This means that if the mouse cursor is not over a sortable item, the Placeholder will not be re-positioned.
+
+If the `axis` is set to `"x"` or `"y"`, the widget will start operating in movement by axis mode. The widget will use only the `x` or `y` coordinate of the mouse cursor to determine the position of the Placeholder. This mode is useful when dragging is restricted in a container.
+
+To see this feature in action, check the [constraints demo page](http://demos.telerik.com/kendo-ui/web/sortable/constraints.html).
+
+## Common Scenarios
+
+### Order Persistence
+
+The Sortable widget does not persist the order of the current items. If you want to detect when changes in the order occur and save them either in local storage, or submit them to the server with [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax/), use the `change` event. To restore the Sortable layout, render the DOM elements in their last order.
+
+The example below demonstrates how to persist the order of items in local storage.
+
+###### Example
 
 ```html
     <div id="sortable"></div>
@@ -313,11 +319,11 @@ To restore the Sortable layout you should render the DOM elements in their last 
     </style>
 ```
 
-### Sortable items with inputs
+### `<input>` Elements inside Sortable Items
 
-A common problem that developers encounter is that input elements inside the Sortable items cannot be focused due to the item being draggable. To avoid that, use the `ignore` option.
+`<input>` elements inside Sortable items cannot be focused because the items are draggable. To avoid that, use the `ignore` option, as demonstrated in the example below.
 
-#### Sortable widget with focus-able input elements
+###### Example
 
 ```html
     <ul id="sortable">
@@ -333,9 +339,11 @@ A common problem that developers encounter is that input elements inside the Sor
     </script>
 ```
 
-#### Sortable widget with radio buttons
+### Radio Buttons
 
-A sortable with radio buttons and a hint cloned from the sortable element will lose the selected radio if dragged, because the clone will take over the selection. To avoid this, clear the name of the radio in the hint:
+A Sortable with radio buttons and a Hint cloned from the Sortable element will lose the selected radio if dragged, because the clone will take over the selection. To avoid this, clear the name of the radio in the Hint, as demonstrated in the example below. 
+
+###### Example
 
 ```html
  <ul id="sortable-basic">
@@ -363,10 +371,24 @@ A sortable with radio buttons and a hint cloned from the sortable element will l
     </script>
 ```
 
+## Further Reading
 
-## Related
+* [Kendo UI Templates](/framework/templates/overview)
+* [Kendo UI DataSource](/framework/datasource/overview)
 
-- [Kendo Templates](../../../framework/templates/overview)
-- [Kendo DataSource](../../../framework/datasource/overview)
-- [Integration with Grid/ListView](../../../web/sortable/integration)
-- [Integration with TabStrip](../../../web/sortable/integration-tabstrip)
+## See Also
+
+Other articles on Kendo UI Sortable:
+
+* [Integration with TabStrip]({% slug integrationwith_tabstrip_sortable_widget %})
+* [Integration with Grid and ListView]({% slug integrationwith_gridandlistview_sortable_widget %})
+* [How to Nest Sortables]({% slug howto_nestsortables_sortable %})
+* [How to Persist Order in `localStorage`]({% slug howto_persistoderinlocalstorage_sortable %})
+* [How to Reorder AngularJS Grid Rows]({% slug howto_reorderangularjsgridrows_angular_sortable %})
+* [How to Reorder Grid Rows]({% slug howto_reordergridrows_sortable %})
+* [How to Reorder Rows in Nested Grid]({% slug howto_reorderrowsinnestedgrid_sortable %})
+* [How to Transfer Grid Rows]({% slug howto_transfergridrows_sortable %})
+* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/sortable/overview)
+* [Overview of the JSP Tag](/jsp/tags/sortable/overview)
+* [Overview of the PHP Class](/php/widgets/sortable/overview)
+* [JavaScript API Reference](/api/javascript/ui/sortable)
