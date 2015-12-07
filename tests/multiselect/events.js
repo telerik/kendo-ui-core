@@ -183,9 +183,7 @@
             }
         });
 
-        multiselect.input.focus().val("baz").keydown();
-
-        setTimeout(function() {
+        multiselect.one("dataBound", function() {
             var data = multiselect.dataSource.view();
 
             equal(data.length, 1);
@@ -193,9 +191,11 @@
 
             start();
         });
+
+        multiselect.input.focus().val("baz").keydown();
     });
 
-    asyncTest("MultiSelect filtering event can be prevented", 1, function() {
+    test("MultiSelect filtering event can be prevented", 0, function() {
         var multiselect = new MultiSelect(select, {
             delay: 0,
             dataSource: ["foo", "bar"],
@@ -209,12 +209,7 @@
             ok(false);
         });
 
-        multiselect.input.focus().val("baz").keydown();
-
-        setTimeout(function() {
-            start();
-            ok(true);
-        });
+        multiselect.search("baz");
     });
 
     asyncTest("MultiSelect triggers filtering when filter is cleared", 1, function() {
