@@ -17,14 +17,14 @@ position: 1
 1. Include the Kendo UI JavaScript and CSS files. For more information on how to add these to your project, refer to the [article on getting started with Kendo UI]({% slug getting_started_installation_kendoui %}).
 2. Kendo UI Scheduler needs a data source to be bound to and uses a special type of Kendo UI DataSource: [`kendo.data.SchedulerDataSource`](/api/framework/schedulerdatasource). The `SchedulerDataSource` contains instances of a custom Kendo UI model: [`kendo.data.SchedulerEvent`](/api/framework/schedulerevent), which represents the event data items of the Scheduler.
 
-> **Important**  
-> To enable editing of the events and working with recurring event, you must define all fields of the [`kendo.data.SchedulerEvent`](/api/framework/schedulerevent) in the dataSource [`schema.model`](/api/framework/datasource#configuration-schema.model). 
+> **Important**
+> To enable editing of the events and working with recurring event, you must define all fields of the [`kendo.data.SchedulerEvent`](/api/framework/schedulerevent) in the dataSource [`schema.model`](/api/framework/datasource#configuration-schema.model).
 
-### Bind to Local Array 
+### Bind to Local Array
 
-When binding the Scheduler to a local array, you can switch from a "day" to a "week" view, edit the events, create new events, and delete existing ones. However, these changes will not be kept in-memory, which essentially means that they will be lost when the user refreshes the page. 
+When binding the Scheduler to a local array, you can switch from a "day" to a "week" view, edit the events, create new events, and delete existing ones. However, these changes will not be kept in-memory, which essentially means that they will be lost when the user refreshes the page.
 
-The example below demonstrates how to initialize a Scheduler with two events and how to bind it to an array of JavaScript objects. 
+The example below demonstrates how to initialize a Scheduler with two events and how to bind it to an array of JavaScript objects.
 
 ###### Example
 
@@ -54,12 +54,12 @@ The example below demonstrates how to initialize a Scheduler with two events and
 
 ### Bind to Remote Service
 
-Binding a Kendo UI Scheduler widget to a remote service persists its events. This means that users are able to return, update, or delete them. 
+Binding a Kendo UI Scheduler widget to a remote service persists its events. This means that users are able to return, update, or delete them.
 
 For more information on Scheduler remote data binding examples based on sample scheduler events, see [Kendo UI online demo library](http://demos.telerik.com/kendo-ui/web/scheduler/). Note that to support cross-domain requests, the remote service uses [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
-> **Important**  
-> If your own service lives in the same domain as the website, you do not need to use JSONP&mdash;use JSON instead. 
+> **Important**
+> If your own service lives in the same domain as the website, you do not need to use JSONP&mdash;use JSON instead.
 
 For more information on cross-domain requests, see [this article](/framework/datasource/cors).
 
@@ -135,7 +135,7 @@ The `kendo.data.SchedulerEvent` object has the following fields:
 * start `Date` - the date on which the event starts.
 * title `String` - the title of the event which is displayed in the scheduler views.
 
-If your remote service stores and returns the Scheduler events in a different format, use the `schema.model.fields` and `schema.model.id` options of the data source to describe them. 
+If your remote service stores and returns the Scheduler events in a different format, use the `schema.model.fields` and `schema.model.id` options of the data source to describe them.
 
 The example below demonstrates how to map remote service fields to client-side scheduler event fields.
 
@@ -174,7 +174,7 @@ The example below demonstrates how to map remote service fields to client-side s
             }
         }
 
-> **Important**  
+> **Important**
 > When using `schema.model.fields`, make sure you list all `kendo.data.SchedulerEvent` fields. The fields which represent the `id` of the event must also be set via `schema.model.id`.
 
 ### Best Practices
@@ -192,6 +192,15 @@ When binding to a remote service, it is advisable, while not mandatory, to do th
         }
 3. Store the Scheduler event date fields (start and end) in UTC format as well. This allows for the easier migration of your data between servers in different timezones.
 
+### Limitations
+
+#### A time-frame between two days
+
+Built-in views of the widget are designed to render a time-frame that ends in the same day it starts. If you would like to render views which starts in one day and ends in another,
+then you will need to build a custom view. You can refer to the available how-to demos:
+
+- [Create a custom view](/web/scheduler/how-to/custom-view)
+
 ## Configuration
 
 ### Views
@@ -204,7 +213,7 @@ Kendo UI Scheduler supports different views to display its events. These are:
 - `month` - displays the events in a single month.
 - `agenda` - displays the events from the current date until the next week (7 days).
 
-The `day` and `week` views are enabled by default. To enable other views or configure them, use the [`views`](/api/web/scheduler#configuration-views) option. 
+The `day` and `week` views are enabled by default. To enable other views or configure them, use the [`views`](/api/web/scheduler#configuration-views) option.
 
 The example below demonstrates how to enable all Scheduler views.
 
@@ -236,10 +245,10 @@ The example below demonstrates how to enable all Scheduler views.
       ]
     });
     </script>
-    
+
 ### Printing
 
-Kendo UI Scheduler may be scrollable when displayed on a web page. However, it should not be scrollable during printing. 
+Kendo UI Scheduler may be scrollable when displayed on a web page. However, it should not be scrollable during printing.
 
 The example below demonstrates how to ensure that the widget expands and displays all events in the current view during printing.
 
@@ -259,7 +268,7 @@ The example below demonstrates how to ensure that the widget expands and display
 	   }
 	}
 
-The code in the example above works in Internet Explorer and Google Chrome. 
+The code in the example above works in Internet Explorer and Google Chrome.
 
 The example below demonstrates how to trigger the same behavior in Firefox as it ignores the `overflow-y` style.
 
@@ -267,7 +276,7 @@ The example below demonstrates how to trigger the same behavior in Firefox as it
 
     @media print {
         /* the same rules as above... */
-        
+
         .k-ff .k-scheduler-content
         {
             margin-right: 17px !important;
@@ -302,8 +311,8 @@ In addition, the Scheduler needs a fixed pixel width for itself or some of its a
         });
 
     </script>
-    
-> **Important**  
+
+> **Important**
 > Due to an Internet Explorer bug, related to absolutely positioned elements inside tables, the Scheduler events will be printed over their correct time slots only if the widget fits on one page.
 
 ### Adaptive Rendering Mode
@@ -328,7 +337,7 @@ The example below demonstrates how to configure the adaptive rendering mode of t
     <div class="adaptive-scheduler-wrapper">
         <div id="scheduler1"></div>
     </div>
-    
+
 ## Scheduler API
 
 ### Methods and Fields
@@ -359,7 +368,7 @@ The example below demonstrates how to apply the Scheduler API.
 
 ### Events
 
-Kendo UI Scheduler supports a set of [events](/api/web/scheduler#events) you can subscribe to. 
+Kendo UI Scheduler supports a set of [events](/api/web/scheduler#events) you can subscribe to.
 
 There are two ways to handle events:
 
@@ -389,8 +398,8 @@ The example below demonstrates how to subscribe to a Scheduler event during the 
       }
     });
     </script>
-    
-The example below demonstrates how to subscribe to a Scheduler event by using the `bind` method. 
+
+The example below demonstrates how to subscribe to a Scheduler event by using the `bind` method.
 
 ###### Example
 

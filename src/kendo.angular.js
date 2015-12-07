@@ -485,7 +485,6 @@ var __meta__ = { // jshint ignore:line
 
         var length = function(value) {
             //length is irrelevant when value is not collection
-            //
             return valueIsCollection ? value.length : 0;
         };
 
@@ -502,6 +501,7 @@ var __meta__ = { // jshint ignore:line
                 newValue = null;
             }
 
+            //compare values by reference if a collection
             if (updating || (newValue == oldValue && length(newValue) == currentValueLength)) {
                 return;
             }
