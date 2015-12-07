@@ -179,6 +179,7 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
     }
 });
 </script>
+```
 
 ## See Also
 
