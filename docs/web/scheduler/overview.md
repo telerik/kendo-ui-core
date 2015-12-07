@@ -18,6 +18,7 @@ position: 1
 2. Kendo UI Scheduler needs a data source to be bound to and uses a special type of Kendo UI DataSource: [`kendo.data.SchedulerDataSource`](/api/framework/schedulerdatasource). The `SchedulerDataSource` contains instances of a custom Kendo UI model: [`kendo.data.SchedulerEvent`](/api/framework/schedulerevent), which represents the event data items of the Scheduler.
 
 > **Important**
+> 
 > To enable editing of the events and working with recurring event, you must define all fields of the [`kendo.data.SchedulerEvent`](/api/framework/schedulerevent) in the dataSource [`schema.model`](/api/framework/datasource#configuration-schema.model).
 
 ### Bind to Local Array
@@ -59,6 +60,7 @@ Binding a Kendo UI Scheduler widget to a remote service persists its events. Thi
 For more information on Scheduler remote data binding examples based on sample scheduler events, see [Kendo UI online demo library](http://demos.telerik.com/kendo-ui/web/scheduler/). Note that to support cross-domain requests, the remote service uses [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
 > **Important**
+>
 > If your own service lives in the same domain as the website, you do not need to use JSONP&mdash;use JSON instead.
 
 For more information on cross-domain requests, see [this article](/framework/datasource/cors).
@@ -175,6 +177,7 @@ The example below demonstrates how to map remote service fields to client-side s
         }
 
 > **Important**
+> 
 > When using `schema.model.fields`, make sure you list all `kendo.data.SchedulerEvent` fields. The fields which represent the `id` of the event must also be set via `schema.model.id`.
 
 ### Best Practices
@@ -191,15 +194,6 @@ When binding to a remote service, it is advisable, while not mandatory, to do th
             }
         }
 3. Store the Scheduler event date fields (start and end) in UTC format as well. This allows for the easier migration of your data between servers in different timezones.
-
-### Limitations
-
-#### A time-frame between two days
-
-Built-in views of the widget are designed to render a time-frame that ends in the same day it starts. If you would like to render views which starts in one day and ends in another,
-then you will need to build a custom view. You can refer to the available how-to demos:
-
-- [Create a custom view](/web/scheduler/how-to/custom-view)
 
 ## Configuration
 
@@ -313,6 +307,7 @@ In addition, the Scheduler needs a fixed pixel width for itself or some of its a
     </script>
 
 > **Important**
+> 
 > Due to an Internet Explorer bug, related to absolutely positioned elements inside tables, the Scheduler events will be printed over their correct time slots only if the widget fits on one page.
 
 ### Adaptive Rendering Mode
@@ -449,6 +444,14 @@ The example below demonstrates how to access an existing Scheduler instance.
     // Get reference to the kendo.ui.Scheduler instance
     var scheduler = $("#scheduler").data("kendoScheduler");
     </script>
+    
+## Known Limitations
+
+### Time-Frames between Two Days
+
+The built-in views of the widget are designed to render a time-frame that ends on the day it starts. If you want to render views which start on one day and end on another, build a custom view. 
+
+For additional informatino on how to create custom views, refer to [this how-to example]({% slug howto_create_custom_view_inheriting_builtinview_scheduler %}).
 
 ## See Also
 
