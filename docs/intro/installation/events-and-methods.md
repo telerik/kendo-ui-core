@@ -237,4 +237,3 @@ Other articles on getting started with Kendo UI:
 * [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
 * [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
 =======
->>>>>>> Add documentation explaining that methods do not fire events
