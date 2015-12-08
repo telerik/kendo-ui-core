@@ -80,11 +80,11 @@ Once the widget instance is available, you can call its methods using the standa
 
 If the code, which should return a widget instance, returns `undefined`, this means that the widget has not been initialized yet. Such a problem may occur, for example, if a widget is being created in a `document.ready` handler, but the widget instance is being referenced from code that was executed earlier.
 
-## Bind to Events
+## Events
 
 Depending on the its specific features, each widget exposes different events. For example, the `AutoComplete` widget triggers `change`, `close`, `dataBound`, etc. You may pass event handlers when you instantiate the widget or afterwards.
 
-### During Initialization
+### Event Binding During Initialization
 
 Event handlers, which are attached during widget initialization, will be executed every time the event is fired. If you need the handler to be executed only once, then attach it after the widget initialization with the `one` method.
 
@@ -107,7 +107,7 @@ Event handlers, which are attached during widget initialization, will be execute
     </script>
 ```
 
-### After Initialization
+### Event Binding After Initialization
 
 There are two methods, which all Kendo UI widgets have, namely `bind` and `one`. Both of them are used to attach event handlers to already existing widget instances. The only difference is that event handlers attached with `one` will be executed only once.
 
@@ -220,10 +220,11 @@ To unbind from a given event, you should keep a reference to the event handler f
     </script>
 ```
 
-### Combining methods and events
+## Known Limitations
 
-Note that the Kendo UI framework will not fire an event when the corresponding method is invoked. For example the select event of the Kendo UI PanelBar will not be fired, if you call the
-select method via the API.
+### Combine Methods and Events
+
+Note that the Kendo UI framework will not fire an event when the corresponding method is invoked. For example, the `select` event of the Kendo UI PanelBar widget will not be fired if you call the `select` method via the API.
 
 ## See Also
 
