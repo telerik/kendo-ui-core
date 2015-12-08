@@ -23,6 +23,7 @@ position: 1
     </script>
 
 > **Important**
+>
 > The widget copies any styles and CSS classes from the input element to the wrapper element.
 
 ## Configuration
@@ -203,3 +204,8 @@ Articles on Kendo UI DatePicker:
 * [How to Persist Entered Dates]({% slug howto_persist_entered_dates_datepicker %})
 * [How to Resize Calendar Based on Input Width]({% slug howto_use_resize_calendar_basedon_input_width_datepicker %})
 * [JavaScript API Reference](/api/javascript/ui/datepicker)
+
+Articles on Kendo UI TimePicker:
+
+* [Overview]({% slug overview_kendoui_timepicker_widget %})
+* [JavaScript API Reference](/api/javascript/ui/timepicker)

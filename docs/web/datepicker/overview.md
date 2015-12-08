@@ -159,3 +159,8 @@ Articles on Kendo UI DateTimePicker:
 * [How to Limit Navigation to Months]({% slug howto_limit_navigation_tomonths_datetimepicker %})
 * [How to Override Hours in the Popup]({% slug howto_override_hours_inpopup_datetimepicker %})
 * [JavaScript API Reference](/api/javascript/ui/datetimepicker)
+
+Articles on Kendo UI TimePicker:
+
+* [Overview]({% slug overview_kendoui_timepicker_widget %})
+* [JavaScript API Reference](/api/javascript/ui/timepicker)
