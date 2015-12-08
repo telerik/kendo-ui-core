@@ -26,7 +26,9 @@ The Spreadsheet client-side API includes the [`fromJSON`](/api/javascript/ui/spr
 
 To load the spreadsheet with data, pass an object matching the required schema, to `fromJSON`. This will reset the widget and clear all existing data.
 
-###### Example - load data by using `fromJSON`
+The example below demonstrates how to load data by using `fromJSON`.
+
+###### Example
 
 ```html
     <div id="spreadsheet"></div>
@@ -53,7 +55,9 @@ To load the spreadsheet with data, pass an object matching the required schema, 
 
 You can also choose to load data in a specific [sheet](/api/javascript/spreadsheet/sheet) only. This will not affect the data located in the other sheets, apart from the formulas that refer to it.
 
-###### Example - load sheet data by using `fromJSON`
+The example below demonstrates how to load sheet data by using `fromJSON`.
+
+###### Example
 
 ```html
     <div id="spreadsheet"></div>

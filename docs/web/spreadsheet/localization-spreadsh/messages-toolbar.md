@@ -1,7 +1,7 @@
 ---
-title: List of `toolbar` Messages
-page_title: List of `toolbar` Messages | Kendo UI Spreadsheet Widget
-description: "A list of the `toolbar` messages used for localization of the Kendo UI Spreadsheet widget via JavaScript."
+title: List of <code>toolbar</code> Messages
+page_title: List of toolbar Messages | Kendo UI Spreadsheet Widget
+description: "A list of the toolbar messages used for localization of the Kendo UI Spreadsheet widget via JavaScript."
 slug: localization_toolbar_messages_spreadsheet_widget
 ---
 
@@ -94,5 +94,5 @@ Below is the list of the messages and their namespaces under the `toolbar` categ
 * [List of `dialogs` Messages]({% slug localization_dialogs_messages_spreadsheet_widget %})
 * [List of `filterMenu` Messages]({% slug localization_filter_menu_messages_spreadsheet_widget %})
 * [List of `view` Messages]({% slug localization_view_messages_spreadsheet_widget%})
-* [Localization of the Spredasheet Widget]({% slug localization_ofmessages_spreadsheet_widget %})
+* [Localization of the Spreadsheet Widget]({% slug localization_ofmessages_spreadsheet_widget %})
 * [Localization Overview of Kendo UI Widgets](/framework/localization/overview)

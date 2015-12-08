@@ -140,7 +140,7 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 
 The Spreadsheet widget supports many of the Excel formulas and functions as seen in the [List of Formulas and Functions](/web/spreadsheet/end-user/list-of-formulas). 
 
-## Keyboard Shortcuts
+## Keyboard Navigation
 
 The Spreadsheet widget supports many of the Excel keyboard shortcuts as shown in the [List of Keyboard Shortcuts](/web/spreadsheet/end-user/list-of-shortcuts).
 
