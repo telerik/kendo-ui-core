@@ -49,6 +49,7 @@ The example below is based on the [5 min quickstart](https://angular.io/docs/js/
 </html>
 ```
 ```typescript
+/// <reference path="kendo.angular2.d.ts" />
 import {Component, View, bootstrap, FORM_DIRECTIVES, ControlGroup, Control } from 'angular2/angular2';
 import {KendoValueAccessor} from 'kendo/angular2';
 
@@ -116,6 +117,22 @@ class MyAppComponent {
 }
 
 bootstrap(MyAppComponent);
+```
+``` typescript
+// kendo.angular2.d.ts
+declare module "kendo/angular2" {
+    class KendoValueAccessor {
+        private elementRef;
+        private cd;
+        onChange: (_: any) => void;
+        onTouched: () => void;
+        element: any;
+        constructor(cd, elementRef);
+        writeValue(value: any): void;
+        registerOnChange(fn: (_: any) => {}): void;
+        registerOnTouched(fn: () => {}): void;
+    }
+}
 ```
 
 ## Widget configuration and events
