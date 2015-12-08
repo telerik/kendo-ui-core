@@ -170,7 +170,7 @@
             }
         });
 
-        multiselect.input.focus().val("baz").keydown();
+        multiselect.search("baz");
     });
 
     asyncTest("modifying filter expression in filtering event changes datasource result", 2, function() {
