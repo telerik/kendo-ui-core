@@ -547,9 +547,15 @@ var __meta__ = { // jshint ignore:line
             }
 
             var flipPos = extend({}, location);
+            var elementHeight = element.outerHeight();
+            var wrapperHeight =  wrapper.outerHeight();
+
+            if (!wrapper.height() && elementHeight) {
+                wrapperHeight = wrapperHeight + elementHeight;
+            }
 
             if (collisions[0] === "flip") {
-                location.top += that._flip(offsets.top, element.outerHeight(), anchor.outerHeight(), viewportHeight / zoomLevel, origins[0], positions[0], wrapper.outerHeight());
+                location.top += that._flip(offsets.top, elementHeight, anchor.outerHeight(), viewportHeight / zoomLevel, origins[0], positions[0], wrapperHeight);
             }
 
             if (collisions[1] === "flip") {
