@@ -15,9 +15,9 @@ In addition to the initialization configuration options, each Kendo UI widget in
 
 ### jQuery Data Method
 
-To get a reference to a widget instance, use the [jQuery data](http://api.jquery.com/data/) method and pass the plug-in name as a string (the Kendo UI widgets are jQuery plug-ins). 
+To get a reference to a widget instance, use the [jQuery data](http://api.jquery.com/data/) method and pass the plug-in name as a string (the Kendo UI widgets are jQuery plug-ins).
 
-###### Example 
+###### Example
 
 ```
     <p>Animal: <input id="animal" /></p>
@@ -29,7 +29,7 @@ To get a reference to a widget instance, use the [jQuery data](http://api.jquery
 
           // retrieve the widget instance
           var autoComplete = $("#animal").data("kendoAutoComplete");
-             
+
           console.log(autoComplete);
         });
     </script>
@@ -51,7 +51,7 @@ To get a reference to a widget instance, you may also use the `getKendo<WidgetNa
 
           // retrieve the widget instance
           var autoComplete = $("#animal").getKendoAutoComplete();
-              
+
           console.log(autoComplete);
         });
     </script>
@@ -95,14 +95,14 @@ Event handlers, which are attached during widget initialization, will be execute
 
     <script>
         $(function() {
-        
+
           $("#animal").kendoAutoComplete({
               dataSource: [ "Ant", "Antilope", "Badger", "Beaver", "Bird" ],
               change: function(e) {
                 console.log("change event handler");
               }
           });
-          
+
         });
     </script>
 ```
@@ -111,41 +111,41 @@ Event handlers, which are attached during widget initialization, will be execute
 
 There are two methods, which all Kendo UI widgets have, namely `bind` and `one`. Both of them are used to attach event handlers to already existing widget instances. The only difference is that event handlers attached with `one` will be executed only once.
 
-###### Example 
+###### Example
 
 ```
     <p>Animal: <input id="animal" /></p>
 
     <script>
         $(function() {
-        
+
           $("#animal").kendoAutoComplete({
               dataSource: [ "Ant", "Antilope", "Badger", "Beaver", "Bird" ]
           });
-          
+
           // ...
-          
+
           var autocomplete = $("#animal").data("kendoAutoComplete");
-          
+
           // attach an event handler that will be executed each time the event is fired
           autocomplete.bind("change", function(e) {
                 console.log("change event handler");
           });
-          
+
           // attach an event handler that will be executed only the first time the event is fired
           autocomplete.one("open", function(e) {
                 console.log("open event handler");
           });
-          
+
         });
     </script>
 ```
 
 ### Event Handler Argument
 
-Each Kendo UI widget passes one argument to the event handler, which is the so called "event object". Usually, it has one or more fields containing information that is specific to the event. All event objects have a `sender` field, which provides a reference to the widget instance that triggered the event. 
+Each Kendo UI widget passes one argument to the event handler, which is the so called "event object". Usually, it has one or more fields containing information that is specific to the event. All event objects have a `sender` field, which provides a reference to the widget instance that triggered the event.
 
-Passing additional custom event arguments to the handler is not supported. 
+Passing additional custom event arguments to the handler is not supported.
 
 The full list and examples of the widget events and the fields available in the event objects is available in the [API reference](/api/javascript/kendo) section.
 
@@ -156,14 +156,14 @@ The full list and examples of the widget events and the fields available in the 
 
     <script>
         $(function() {
-        
+
           $("#animal").kendoAutoComplete({
               dataSource: [ "Ant", "Antilope", "Badger", "Beaver", "Bird" ],
               open: function(e) {
                 var autocomplete = e.sender;
               }
           });
-          
+
         });
     </script>
 ```
@@ -220,6 +220,11 @@ To unbind from a given event, you should keep a reference to the event handler f
     </script>
 ```
 
+### Combining methods and events
+
+Note that the Kendo UI framework will not fire an event when the corresponding method is invoked. For example the select event of the Kendo UI PanelBar will not be fired, if you call the
+select method via the API.
+
 ## See Also
 
 Other articles on getting started with Kendo UI:
@@ -231,3 +236,5 @@ Other articles on getting started with Kendo UI:
 * [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
 * [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
 * [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
+=======
+>>>>>>> Add documentation explaining that methods do not fire events
