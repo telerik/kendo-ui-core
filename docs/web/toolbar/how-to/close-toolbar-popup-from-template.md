@@ -1,14 +1,15 @@
 ---
-title: Close toolbar popup manually
-page_title: Close toolbar popup manually
-description: Close toolbar popup manually
+title: Close ToolBar Popup Manually
+page_title: Close ToolBar Popup Manually | Kendo UI ToolBar Widget
+description: "Learn how to close the Kendo UI ToolBar popup manually."
+slug: howto_closetoolbarpopupmanually_toolbar
 ---
 
-# Close Toolbar Popup Manually
+# Close ToolBar Popup Manually
 
-The example below demonstrates how to use close the toolbar popup from a button click event in a template.
+The example below demonstrates how to close the Kendo UI ToolBar popup from a button `click` event in a template.
 
-#### Example:
+##### Example
 
 ```html
    <div id="toolbar"></div>
@@ -31,3 +32,10 @@ The example below demonstrates how to use close the toolbar popup from a button 
     });
   </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI ToolBar:
+
+* [JavaScript API Reference](/api/javascript/ui/toolbar)
+* [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_toolbar %})
