@@ -56,7 +56,7 @@ The example below demonstrates how to Drag and Drop rows between two grids.
         $(grid1.element).kendoDraggable({
           filter: "tr",
           hint: function (e) {
-            item = $('<div class="k-grid k-widget" style="background-color: DarkOrange; color: black;"><table><tbody><tr>' + e.html() + '</tr></tbody></table></div>');
+            var item = $('<div class="k-grid k-widget" style="background-color: DarkOrange; color: black;"><table><tbody><tr>' + e.html() + '</tr></tbody></table></div>');
             return item;
           },
           group: "gridGroup1",
@@ -66,7 +66,7 @@ The example below demonstrates how to Drag and Drop rows between two grids.
         $(grid2.element).kendoDraggable({
           filter: "tr",
           hint: function (e) {
-            item = $('<div class="k-grid k-widget" style="background-color: MediumVioletRed; color: black;"><table><tbody><tr>' + e.html() + '</tr></tbody></table></div>');
+            var item = $('<div class="k-grid k-widget" style="background-color: MediumVioletRed; color: black;"><table><tbody><tr>' + e.html() + '</tr></tbody></table></div>');
             return item;
           },
           group: "gridGroup2",
@@ -77,7 +77,7 @@ The example below demonstrates how to Drag and Drop rows between two grids.
           drop: function (e) {
             var dataItem = dataSource2.getByUid(e.draggable.currentTarget.data("uid"));
             dataSource2.remove(dataItem);
-            dataSource1.add(dataItem);            
+            dataSource1.add(dataItem);
           },
           group: "gridGroup2",
         });
@@ -86,7 +86,7 @@ The example below demonstrates how to Drag and Drop rows between two grids.
           drop: function (e) {
             var dataItem = dataSource1.getByUid(e.draggable.currentTarget.data("uid"));
             dataSource1.remove(dataItem);
-            dataSource2.add(dataItem);            
+            dataSource2.add(dataItem);
           },
           group: "gridGroup1",
         });
