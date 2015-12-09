@@ -252,8 +252,6 @@ var __meta__ = { // jshint ignore:line
         dataItem: function(index) {
             var that = this;
             var dataItem = null;
-            var hasOptionLabel = !!that.optionLabel[0];
-            var optionLabel = that.options.optionLabel;
 
             if (index === null) { return index; }
 
@@ -269,15 +267,15 @@ var __meta__ = { // jshint ignore:line
                     } else {
                         index = $(that.items()).index(index);
                     }
-                } else if (hasOptionLabel) {
+                } else if (!!that.optionLabel[0]) {
                     index -= 1;
                 }
 
                 dataItem = that.dataSource.flatView()[index];
             }
 
-            if (!dataItem && hasOptionLabel) {
-                dataItem = $.isPlainObject(optionLabel) ? new ObservableObject(optionLabel) : that._assignInstance(that._optionLabelText(), "");
+            if (!dataItem) {
+                dataItem = that._optionLabelDataItem();
             }
 
             return dataItem;
@@ -405,6 +403,17 @@ var __meta__ = { // jshint ignore:line
         _optionLabelText: function() {
             var optionLabel = this.options.optionLabel;
             return (typeof optionLabel === "string") ? optionLabel : this._text(optionLabel);
+        },
+
+        _optionLabelDataItem: function() {
+            var that = this;
+            var optionLabel = that.options.optionLabel;
+
+            if (!!that.optionLabel[0]) {
+                return $.isPlainObject(optionLabel) ? new ObservableObject(optionLabel) : that._assignInstance(that._optionLabelText(), "");
+            }
+
+            return null;
         },
 
         _listBound: function() {
@@ -646,10 +655,12 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _matchText: function(text, index) {
-            var that = this;
-            var ignoreCase = that.options.ignoreCase;
-            var found = false;
+        _matchText: function(text, word) {
+            var ignoreCase = this.options.ignoreCase;
+
+            if (text === undefined || text === null) {
+                return false;
+            }
 
             text = text + "";
 
@@ -657,48 +668,53 @@ var __meta__ = { // jshint ignore:line
                 text = text.toLowerCase();
             }
 
-            if (text.indexOf(that._word) === 0) {
-                if (that.optionLabel[0]) {
-                    index += 1;
-                }
+            return text.indexOf(word) === 0;
+        },
 
-                that._select(index);
+        _shuffleData: function(data, splitIndex) {
+            var optionDataItem = this._optionLabelDataItem();
+
+            if (optionDataItem) {
+                data = [optionDataItem].concat(data);
+            }
+
+            return data.slice(splitIndex).concat(data.slice(0, splitIndex));
+        },
+
+        _selectNext: function() {
+            var that = this;
+            var data = that.dataSource.flatView().toJSON();
+            var dataLength = data.length + (!!this.optionLabel[0] ? 1 : 0);
+            var isInLoop = sameCharsOnly(that._word, that._last);
+            var startIndex = that.selectedIndex;
+            var text;
+
+            if (startIndex === -1) {
+                startIndex = 0;
+            } else {
+                startIndex += isInLoop ? 1 : 0;
+                startIndex = normalizeIndex(startIndex, dataLength);
+            }
+
+            data = that._shuffleData(data, startIndex);
+
+            for (var idx = 0; idx < dataLength; idx++) {
+                text = that._text(data[idx]);
+
+                if (isInLoop && that._matchText(text, that._last)) {
+                    break;
+                } else if (that._matchText(text, that._word)) {
+                    break;
+                }
+            }
+
+            if (idx !== dataLength) {
+                that._select(normalizeIndex(startIndex + idx, dataLength));
+
                 if (!that.popup.visible()) {
                     that._change();
                 }
-
-                found = true;
             }
-
-            return found;
-        },
-
-        _selectNext: function(index) {
-            var that = this;
-            var startIndex = index;
-            var data = that.dataSource.flatView();
-            var length = data.length;
-            var text;
-
-            for (; index < length; index++) {
-                text = that._text(data[index]);
-
-                if (text && that._matchText(text, index) && !(that._word.length === 1 && startIndex === that.selectedIndex)) {
-                    return true;
-                }
-            }
-
-            if (startIndex > 0 && startIndex < length) {
-                index = 0;
-                for (; index <= startIndex; index++) {
-                    text = that._text(data[index]);
-                    if (text && that._matchText(text, index)) {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
         },
 
         _keypress: function(e) {
@@ -709,8 +725,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             var character = String.fromCharCode(e.charCode || e.keyCode);
-            var index = that.selectedIndex;
-            var length = that._word.length;
 
             if (that.options.ignoreCase) {
                 character = character.toLowerCase();
@@ -720,20 +734,7 @@ var __meta__ = { // jshint ignore:line
                 e.preventDefault();
             }
 
-            if (!length) {
-                that._word = character;
-            }
-
-            if (that._last === character && length <= 1 && index > -1) {
-                if (that._selectNext(index)) {
-                    return;
-                }
-            }
-
-            if (length) {
-                that._word += character;
-            }
-
+            that._word += character;
             that._last = character;
 
             that._search();
@@ -800,16 +801,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 that._select(function(dataItem) {
-                    var text = that._text(dataItem);
-
-                    if (text !== undefined) {
-                        text = (text + "");
-                        if (ignoreCase) {
-                            text = text.toLowerCase();
-                        }
-
-                        return text.indexOf(word) === 0;
-                    }
+                    return that._matchText(that._text(dataItem), word);
                 });
             }
         },
@@ -817,7 +809,6 @@ var __meta__ = { // jshint ignore:line
         _search: function() {
             var that = this;
             var dataSource = that.dataSource;
-            var index = that.selectedIndex;
 
             clearTimeout(that._typingTimeout);
 
@@ -837,20 +828,14 @@ var __meta__ = { // jshint ignore:line
                     that._word = "";
                 }, that.options.delay);
 
-                if (index === -1) {
-                    index = 0;
-                }
-
-                if (!that.ul[0].firstChild) {
+                if (!that.listView.isBound()) {
                     dataSource.fetch().done(function () {
-                        if (dataSource.data()[0] && index > -1) {
-                            that._selectNext(index);
-                        }
+                        that._selectNext();
                     });
                     return;
                 }
 
-                that._selectNext(index);
+                that._selectNext();
             }
         },
 
@@ -1230,6 +1215,22 @@ var __meta__ = { // jshint ignore:line
         }
 
         instance[fields[lastIndex]] = value;
+    }
+
+    function normalizeIndex(index, length) {
+        if (index >= length) {
+            index -= length;
+        }
+        return index;
+    }
+
+    function sameCharsOnly(word, character) {
+        for (var idx = 0; idx < word.length; idx++) {
+            if (word.charAt(idx) !== character) {
+                return false;
+            }
+        }
+        return true;
     }
 
     ui.plugin(DropDownList);
