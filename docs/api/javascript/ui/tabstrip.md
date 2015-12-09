@@ -943,9 +943,9 @@ Removes a specified tab from a TabStrip.
 
 #### Parameters
 
-##### element `String|Number`
+##### element `String|Number|jQuery`
 
-The target tab(s), specified as a selector or jQuery object, to be removed.
+The target tab(s) to be removed, specified as a string selector, a jQuery object, or a zero-based item index.
 
 #### Returns
 
