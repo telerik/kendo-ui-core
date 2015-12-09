@@ -21,7 +21,7 @@ It allows importing, exporting, and processing data from various formats:
 
 The .NET server-side module is distributed as a part of the [UI for ASP.NET MVC bundle](/aspnet-mvc/introduction).
 
-In the ZIP bundle you will find a `spreadsheet` folder that contains assemblies for both .NET 4.0 and .NET 4.5.
+The `telerik.ui.for.aspnetmvc.<version>.zip` archive contains a `spreadsheet` folder that contains assemblies for both .NET 4.0 and .NET 4.5.
 You need to include a reference to the `Telerik.Web.Spreadsheet.dll` assembly for the respective framework version.
 
 The main entry point for the project is the `Telerik.Web.Spreadsheet.Workbook` class.
