@@ -1,14 +1,15 @@
 ---
-title: Show a context menu
-page_title: Show a context menu
-description: Show a context menu
+title: Show Context Menu
+page_title: Show Context Menu | Kendo UI TreeList Widget
+description: "Learn how to show a context menu for the Kendo UI TreeList rows."
+slug: howto_showcontextmenu_treelist
 ---
 
-# Show a context menu
+# Show Context Menu
 
-The example below demonstrates how to show a context menu for the TreeList rows
+The example below demonstrates how to show a context menu for the Kendo UI TreeList rows.
 
-#### Example:
+###### Example
 
 ```html
   <div id="treelist"></div>
@@ -103,3 +104,13 @@ The example below demonstrates how to show a context menu for the TreeList rows
     });
   </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI TreeList:
+
+* [JavaScript API Reference](/api/javascript/ui/treelist)
+* [How to Hide Edit Fields on Different Levels]({% slug howto_hideeditfieldsondifferentlevels_treelist %})
+* [How to Show Checkbox Column]({% slug howto_showcheckboxcolumn_treelist %})
+* [How to Update Field in All Child Nodes]({% slug howto_updatefieldinallchildnodes_treelist %})
+* [How to Update Field in All Child Nodes in AgularJS]({% slug howto_updatefieldinallchildnodes_angularjs_treelist %})

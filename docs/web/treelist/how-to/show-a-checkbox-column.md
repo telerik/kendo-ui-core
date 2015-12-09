@@ -1,14 +1,15 @@
 ---
-title: Show a checkbox column
-page_title: Show a checkbox column
-description: Show a checkbox column
+title: Show Checkbox Column
+page_title: Show Checkbox Column | Kendo UI TreeList Widget
+description: "Learn how to show a checkbox column bound to the item model in a Kendo UI TreeList widget."
+slug: howto_showcheckboxcolumn_treelist
 ---
 
-# Show a checkbox column
+# Show Checkbox Column
 
-The example below demonstrates how to show a checkbox column bound to the item model.
+The example below demonstrates how to show a checkbox column bound to the item model in a Kendo UI TreeList widget.
 
-#### Example:
+###### Example
 
 ```html
   <div id="treelist"></div>
@@ -54,3 +55,13 @@ The example below demonstrates how to show a checkbox column bound to the item m
     });
   </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI TreeList:
+
+* [JavaScript API Reference](/api/javascript/ui/treelist)
+* [How to Hide Edit Fields on Different Levels]({% slug howto_hideeditfieldsondifferentlevels_treelist %})
+* [How to Show Context Menu]({% slug howto_showcontextmenu_treelist %})
+* [How to Update Field in All Child Nodes]({% slug howto_updatefieldinallchildnodes_treelist %})
+* [How to Update Field in All Child Nodes in AgularJS]({% slug howto_updatefieldinallchildnodes_angularjs_treelist %})

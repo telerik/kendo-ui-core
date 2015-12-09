@@ -1,26 +1,35 @@
 ---
 title: Overview
-page_title: Overview of TreeList UI widget | Kendo UI Documentation
-description: Quick steps to help you create a Kendo UI TreeList
+page_title: Overview | Kendo UI TreeList Widget
+description: "Learn how to initialize the Kendo UI TreeList widget and configure its behavior."
+slug: overview_kendoui_treelist_widget
 position: 1
 ---
 
-# TreeList Introduction
+# TreeList Overview
 
-The Kendo UI TreeList widget enables display of self-referencing tabular data, and allows sorting, filtering, and editing of data
+[Kendo UI TreeList widget](http://demos.telerik.com/kendo-ui/treelist/index) enables the display of self-referencing tabular data and allows sorting, filtering, and data editing.
 
 ## Getting Started
 
-The Kendo UI TreeList needs a data source where the data is retrieved from. The treelist uses a special type of Kendo UI DataSource - the [kendo.data.TreeListDataSource](/api/javascript/data/treelistdatasource). The `TreeListDataSource` contains instances of a custom Kendo UI model - [kendo.data.TreeListModel](/api/javascript/data/treelistmodel) - which represents the treelist data items.
+### Initialize the TreeList
 
-## Binding to a JavaScript array
+To create a Kendo UI TreeList, use an empty `div` element and supply all TreeList settings in the initialization script, as demonstrated in the example below.
 
-To create a Kendo UI TreeList, use an empty `div` element and supply all TreeList settings in the initialization script.
+###### Example
 
-### Example - create a TreeList from an empty div
+    <!-- Define the HTML div that is going to hold the TreeList -->
+    <div id="treelist"></div>
+
+Kendo UI TreeList needs a data source from where it is able to retrieve the data you want it to display. The widget uses a special type of Kendo UI DataSource&mdash;[`kendo.data.TreeListDataSource`](/api/javascript/data/treelistdatasource). The `TreeListDataSource` contains instances of a custom Kendo UI model&mdash;[`kendo.data.TreeListModel`](/api/javascript/data/treelistmodel)&mdash;which represents the TreeList data items.
+
+### Bind to Local Arrays
+
+The example below demonstrates how to initialize the TreeList and bind it to a local data array.
+
+###### Example
 
 ```html
-<!-- Define the HTML div that will hold the TreeList -->
 <div id="treelist"></div>
 
 <!-- Initialize the TreeList -->
@@ -45,16 +54,20 @@ To create a Kendo UI TreeList, use an empty `div` element and supply all TreeLis
 </script>
 ```
 
-Note that data objects contain both an `id` and `parentId` field, which describe the hierarchy of items. These field names can be changed via the [`schema.model`](/api/javascript/data/datasource#configuration-schema-model) definition.
+Note that the data objects contain both an `id` and a `parentId` field which describe the hierarchy of items. These field names can be changed via the [`schema.model` definition](/api/javascript/data/datasource#configuration-schema-model).
 
-## Binding to remote data
+### Bind to Remote Data
 
-The TreeListDataSource can be bound to remote data, in order to enable the TreeList to load items from a web service. This allows TreeList items to be retrieved from and saved to a database on the server. To enable remote binding, set the DataSource `transport`:
+You are able to bind the `TreeListDataSource` to remote data, which means that the TreeList is going to load items from a web service. Remote data binding is going to enable the retrieval of data from the server and the saving of TreeList data items to the server database. 
 
-### Example - bind the TreeList to a remote service
+For additional information on Kendo UI DataSource, refer to [this article](/framework/datasource/overview).
+
+The example below demonstrates how to enable remote binding for the TreeList by setting the DataSource `transport`.
+
+###### Example 
 
 ```html
-    <!-- Define the HTML div that will hold the TreeList -->
+
     <div id="treelist"></div>
 
     <script>
@@ -129,15 +142,51 @@ The TreeListDataSource can be bound to remote data, in order to enable the TreeL
     </script>
 ```
 
-Note that the `parentId` is mapped from the `ReportsTo` field by the line `parentId: { field: "ReportsTo", nullable: true }`. The TreeList renders its hierarchy based on the `parentId` - `id` relationship.
+Note that the `parentId` is mapped from the `ReportsTo` field by the `parentId: { field: "ReportsTo", nullable: true }` line. The TreeList renders its hierarchy based on the `parentId` - `id` relationship.
 
-> All fields must be listed when using `schema.model.fields`. The field which represents the `id` of the event must also be set via `schema.model.id`. Not setting these will still work for displaying data, but will post incomplete objects on the server when editing items.
+> **Important** 
+> 
+> List all fields when using the `schema.model.fields`. Also, set the field which represents the `id` of the event via the `schema.model.id`. If these are not set, they will still work for displaying data, but will post incomplete objects on the server when editing items.
 
-## Getting reference to a Kendo UI TreeList
+## Features
 
-To get a reference to a Kendo UI TreeList instance, use the jQuery `data` method and pass "kendoTreeList" as argument:
+### Scrolling
 
-### Example - get reference to a Kendo UI TreeList
+The TreeList scrolling is enabled by default. However, the enabled scrolling functionality does not guarantee the appearance of scrollbars. The reason for this is that scrolling requires you to define some of the widget's dimensions:
+
+1. To achieve vertical scrolling, set a height to the TreeList. If the height is not defined, the TreeList is going to expand vertically to show all rows.
+2. To achieve horizontal scrolling, all columns must have explicit widths defined in pixels and their sum must exceed the width of the TreeList.
+
+You are able to independently control vertical and horizontal scrolling.
+
+When scrolling is enabled, the TreeList renders two tables&mdash;one for the header area and one for the scrollable data area. This ensures that the header area of the TreeList is always visible during vertical scrolling. Take the two tables into account when you need to manually make Javascript or CSS updates to the Grid tables.
+
+###### Example
+
+    <div class="k-widget k-grid k-treelist">
+        <div class="k-grid-header">
+            <div class="k-grid-header-wrap">
+                <table>...</table>
+            </div>
+        </div>
+        <div class="k-grid-content">
+            <table>...</table>
+        </div>
+    </div>
+
+> **Important**
+> 
+> If you want to achieve a maximum TreeList accessibility with assistive technologies, disable the scrolling feature.
+
+## TreeList API
+
+### Methods and Fields
+
+Kendo UI TreeList exposes a set of [methods](/api/javascript/ui/treelist#methods) and [fields](/api/javascript/ui/treelist#fields) you can use.
+
+The example below demonstrates how to apply the [TreeList API](/api/javascript/ui/treelist).
+
+###### Example
 
 ```html
     <div id="treelist"></div>
@@ -150,34 +199,7 @@ To get a reference to a Kendo UI TreeList instance, use the jQuery `data` method
       dataSource: {
         data: [
           { id: 1, parentId: null, Name: "Jane Smith", Position: "CEO" },
-          { id: 2, parentId: 1,    Name: "Alex Sells", Position: "EVP Sales" }
-          { id: 3, parentId: 1,    Name: "Bob Price",  Position: "EVP Marketing" }
-        ]
-      }
-    });
-    // Get reference to the kendo.ui.TreeList instance
-    var treelist = $("#treelist").data("kendoTreeList");
-    </script>
-```
-
-## Using the API of Kendo UI TreeList
-
-The TreeList widget exposes a set of [methods](/api/javascript/ui/treelist#methods) and [fields](/api/javascript/ui/treelist#fields) which you can use.
-
-### Example - use the API of the Kendo UI TreeList
-
-```html
-    <div id="treelist"></div>
-    <script>
-    $("#treelist").kendoTreeList({
-      columns: [
-        { field: "Name" },
-        { field: "Position" }
-      ],
-      dataSource: {
-        data: [
-          { id: 1, parentId: null, Name: "Jane Smith", Position: "CEO" },
-          { id: 2, parentId: 1,    Name: "Alex Sells", Position: "EVP Sales" }
+          { id: 2, parentId: 1,    Name: "Alex Sells", Position: "EVP Sales" },
           { id: 3, parentId: 1,    Name: "Bob Price",  Position: "EVP Marketing" }
         ]
       }
@@ -191,18 +213,20 @@ The TreeList widget exposes a set of [methods](/api/javascript/ui/treelist#metho
     </script>
 ```
 
-## Subscribing to the events of Kendo UI TreeList
+### Events
 
-The treelist widget supports a set of [events](/api/javascript/ui/treelist#events) which you can subscribe to. There are two ways to handle events:
+Kendo UI TreeList supports a set of [events](/api/javascript/ui/treelist#events) you can subscribe to.
 
-* Specify the JavaScript function which will handle the event during widget initialization.
-* Use the `bind` method of the widget.
+There are two ways to handle events:
 
-The event handler is the JavaScript function invoked when the event is fired. The argument of the event handler is a JavaScript object which contains event-specific data.
-You can get a reference of the widget which fired the event via the `sender` field of the event argument.
-The function context of the event handler (available via the `this` keyword) is set to the instance of the widget which fired the event.
+* Specify the JavaScript function which will handle the event during the initialization of the widget.
+* Use the `bind` method of the widget after initialization.
 
-### Example - subscribe to a treelist event during initialization
+The event handler is the JavaScript function invoked when the event is fired. The argument of the event handler is a JavaScript object which contains event-specific data. Get a reference of the widget, which fired the event, via the `sender` field of the event argument. The function context of the event handler (available via the `this` keyword) is set to the instance of the widget which fired the event.
+
+The example below demonstrates how to subscribe to a TreeList event during the initialization of the widget.
+
+###### Example 
 
 ```html
     <div id="treelist"></div>
@@ -215,7 +239,7 @@ The function context of the event handler (available via the `this` keyword) is 
       dataSource: {
         data: [
           { id: 1, parentId: null, Name: "Jane Smith", Position: "CEO" },
-          { id: 2, parentId: 1,    Name: "Alex Sells", Position: "EVP Sales" }
+          { id: 2, parentId: 1,    Name: "Alex Sells", Position: "EVP Sales" },
           { id: 3, parentId: 1,    Name: "Bob Price",  Position: "EVP Marketing" }
         ]
       },
@@ -226,7 +250,9 @@ The function context of the event handler (available via the `this` keyword) is 
     </script>
 ```
 
-### Example - subscribe to a treelist event using the bind method
+The example below demonstrates how to subscribe to a TreeList event by using the `bind` method.
+
+###### Example
 
 ```html
     <div id="treelist"></div>
@@ -242,7 +268,7 @@ The function context of the event handler (available via the `this` keyword) is 
       dataSource: {
         data: [
           { id: 1, parentId: null, Name: "Jane Smith", Position: "CEO" },
-          { id: 2, parentId: 1,    Name: "Alex Sells", Position: "EVP Sales" }
+          { id: 2, parentId: 1,    Name: "Alex Sells", Position: "EVP Sales" },
           { id: 3, parentId: 1,    Name: "Bob Price",  Position: "EVP Marketing" }
         ]
       }
@@ -252,29 +278,47 @@ The function context of the event handler (available via the `this` keyword) is 
     </script>
 ```
 
-## Scrolling
+## Reference
 
-TreeList scrolling is enabled by default.
+### Existing Instances
 
-Enabled scrolling does not guarantee that scrollbars will appear. This is because scrolling makes sense and works together with set dimensions.
+Refer to an existing TreeList instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) and pass `"kendoTreeList"` as an argument. Once a reference has been established, use the [TreeList API](/api/javascript/ui/treelist) to control its behavior.
 
-1. To achieve vertical scrolling, the TreeList must have a set height. Otherwise, it will expand vertically to show all rows.
-1. To achieve horizontal scrolling, all columns must have explicit pixel widths and their sum must exceed the TreeList width.
+The example below demonstrates how to access an existing TreeList instance.
 
-Scenarios 1. and 2. can be controlled independently.
+###### Example
 
-When enabled, scrolling causes the TreeList to render separate tables for the header area and the data area. This ensures that the header area is always visible during vertical TreeList scrolling.
-The two tables may need to be taken into account when making some manual Javascript or CSS manipulations to the tables.
+```html
+    <div id="treelist"></div>
+    <script>
+    $("#treelist").kendoTreeList({
+      columns: [
+        { field: "Name" },
+        { field: "Position" }
+      ],
+      dataSource: {
+        data: [
+          { id: 1, parentId: null, Name: "Jane Smith", Position: "CEO" },
+          { id: 2, parentId: 1,    Name: "Alex Sells", Position: "EVP Sales" },
+          { id: 3, parentId: 1,    Name: "Bob Price",  Position: "EVP Marketing" }
+        ]
+      }
+    });
+    // Get reference to the kendo.ui.TreeList instance
+    var treelist = $("#treelist").data("kendoTreeList");
+    </script>
+```
 
-    <div class="k-widget k-grid k-treelist">
-        <div class="k-grid-header">
-            <div class="k-grid-header-wrap">
-                <table>...</table>
-            </div>
-        </div>
-        <div class="k-grid-content">
-            <table>...</table>
-        </div>
-    </div>
+## See Also
 
-> If you want to allow maximum TreeList accessibility with assistive technologies, disable the scrolling feature.
+Other articles on Kendo UI TreeList and how-to examples:
+
+* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/treelist/overview)
+* [Overview of the JSP Tag](/jsp/tags/treelist/overview)
+* [Overview of the PHP Class](/php/widgets/treelist/overview)
+* [How to Hide Edit Fields on Different Levels]({% slug howto_hideeditfieldsondifferentlevels_treelist %})
+* [How to Show Checkbox Column]({% slug howto_showcheckboxcolumn_treelist %})
+* [How to Show Context Menu]({% slug howto_showcontextmenu_treelist %})
+* [How to Update Field in All Child Nodes]({% slug howto_updatefieldinallchildnodes_treelist %})
+* [How to Update Field in All Child Nodes in AgularJS]({% slug howto_updatefieldinallchildnodes_angularjs_treelist %})
+* [JavaScript API Reference](/api/javascript/ui/treelist)
