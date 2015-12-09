@@ -1,20 +1,17 @@
 ---
-title: Calculate Tooltip content width
-page_title: Calculate Tooltip content width
-description: Calculate Tooltip content width
+title: Calculate Tooltip Content Width
+page_title: Calculate Tooltip Content Width | Kendo UI Tooltip Widget
+description: "Learn how to calculate the content width of a Kendo UI Tiilyip."
+slug: howto_calculatetooltipcontentlength_tooltip
 ---
 
-# Calculate Tooltip content width
+# Calculate Tooltip Content Width
 
-By default, the tooltip width will be reduced, if the content is too little, and also, the tooltip width not change if the displayed content can fit.
-In some scenarios this can cause the tooltip to be narrower than desired.
-The following example demonstrates how to calculate the Tooltip width on each opening to allow greater flexibility.
+By default, if the content is too little, the Tooltip width is going to be reduced, and if the displayed content can fit, the Tooltip width is not going to change. Therefore, in some scenarios this results in a Tooltip that is narrower than desired.
 
-Relevant resources:
+The example below demonstrates how to calculate the width of a Kendo UI Tooltip on each opening and allow for a greater flexibility.
 
-* [api/javascript/ui/tooltip#configuration-content](content property)
-
-#### Example:
+###### Example
 
 ```html
     <style>
@@ -56,3 +53,12 @@ Relevant resources:
       })
     </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Tooltip:
+
+* [Content Property of the Tooltip](/api/javascript/ui/tooltip#configuration-content)
+* [JavaScript API Reference](/api/javascript/ui/tooltip)
+* [How to Show Only If Text Exceeds Certain Length]({% slug howto_showonlyiftextexceedscertainlength_tooltip %})
+* [How to Show Only If Text Overflows with Ellipsis]({% slug howto_showonlyiftextoverflowswithellipsis_tooltip %})
