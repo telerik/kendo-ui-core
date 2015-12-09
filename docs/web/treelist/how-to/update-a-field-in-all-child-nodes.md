@@ -1,14 +1,15 @@
 ---
-title: Update a field in all child nodes
-page_title: Update a field in all child nodes
-description: Update a field in all child nodes
+title: Update Field in All Child Nodes
+page_title: Update Field in All Child Nodes | Kendo UI TreeList Widget
+description: "Learn how to update all child nodes recursively, propagating the state of a row in a Kendo UI TreeList widget."
+slug: howto_updatefieldinallchildnodes_treelist
 ---
 
-# Update a field in all child nodes
+# Update Field in All Child Nodes
 
-The example below demonstrates how to update all child nodes recursively, propagating the state of a row
+The example below demonstrates how to update all child nodes recursively, propagating the state of a row in a Kendo UI TreeList widget.
 
-#### Example:
+###### Example
 
 ```html
   <div id="treelist"></div>
@@ -77,3 +78,13 @@ The example below demonstrates how to update all child nodes recursively, propag
     });
   </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI TreeList:
+
+* [JavaScript API Reference](/api/javascript/ui/treelist)
+* [How to Hide Edit Fields on Different Levels]({% slug howto_hideeditfieldsondifferentlevels_treelist %})
+* [How to Show Checkbox Column]({% slug howto_showcheckboxcolumn_treelist %})
+* [How to Show Context Menu]({% slug howto_showcontextmenu_treelist %})
+* [How to Update Field in All Child Nodes in AgularJS]({% slug howto_updatefieldinallchildnodes_angularjs_treelist %})

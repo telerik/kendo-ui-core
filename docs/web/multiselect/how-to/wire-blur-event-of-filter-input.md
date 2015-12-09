@@ -81,6 +81,7 @@ Other articles on Kendo UI MultiSelect:
 * [How to Bind Values to Template]({% slug howto_bind_values_totemplate_multiselect %})
 * [How to Cascade from DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %})
 * [How to Create Cascading MultiSelects]({% slug howto_create_cascading_widgets_multiselect %})
+* [How to Create Checkbox Custom Item Template]({% slug howto_checkbox_custom_item_template_multiselect %})
 * [How to Create Scrollable Data Items]({% slug howto_create_scrollable_data_items_multiselect %})
 * [How to Filter Values in Widgets Sharing the Same Data]({% slug howto_filter_valuesin_widgetswith_shared_data_multiselect %})
 * [How to Preselect Items on Load in AngularJS]({% slug howto_preselect_itemson_load_angular_multiselect %})
