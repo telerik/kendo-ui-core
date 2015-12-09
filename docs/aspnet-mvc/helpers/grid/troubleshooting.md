@@ -146,3 +146,7 @@ Not all settings of the DataSource are exposed via the `DataSource` fluent API. 
 
 Kendo UI Grid for ASP.NET MVC will not fire all client-side events when configured for server bound mode.
 Check the [server binding](/aspnet-mvc/helpers/grid/server-binding#client-side-events-and-server-binding) help topic for further details.
+
+## Grid fires Create action instead of Update action
+
+If an ID value is not set for a given data item, the Grid will treat it as new and will call the Create action. The ID value should be **non-default for the used data field type**.

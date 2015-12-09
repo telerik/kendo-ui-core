@@ -93,7 +93,8 @@
 }
 
 .km-flat .km-listinset > li:last-child,
-.km-flat .km-listgroupinset .km-list > li:last-child
+.km-flat .km-listgroupinset .km-list > li:last-child,
+.km-flat .km-list fieldset .km-inline-field
 {
     border-color: @flat-border-color;
 }
@@ -104,7 +105,8 @@
     border-color: currentcolor;
 }
 
-.km-flat .km-group-title
+.km-flat .km-group-title,
+.km-flat .km-list fieldset legend
 {
     background: @flat-background;
     border-color: @flat-border-color;
@@ -135,6 +137,9 @@
 }
 
 /* Forms */
+.km-flat .km-label-above {
+    color: @flat-second-color;
+}
 
 .km-flat .km-list input[type=password],
 .km-flat .km-list input[type=search],
@@ -318,7 +323,8 @@
 
 .km-flat .km-switch-handle,
 .km-flat .k-slider-selection,
-.km-flat .km-switch-background
+.km-flat .km-switch-background,
+.km-flat .km-list fieldset legend
 {
     color: @flat-active-background;
 }
@@ -357,4 +363,27 @@
 .km-flat .km-rowdelete
 {
     background: @flat-second-active-background;
+}
+
+.km-flat label.km-required:after {
+    color: @flat-second-active-background;
+}
+
+.km-flat .km-checkbox-label:before,
+.km-flat .km-checkbox-label:after {
+    color:  @flat-active-background;
+    border-color: @flat-active-background;
+}
+
+.km-flat .km-radio-label:before {
+    border-color: @flat-active-background;
+}
+
+.km-flat .km-radio-label:after {
+    background-color: @flat-active-background;
+}
+
+
+.km-flat .km-list fieldset legend {
+    .box-shadow(0 1px 0 @flat-border-color);
 }

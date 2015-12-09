@@ -8,9 +8,13 @@ position: 4
 
 # Editing
 
-To enable the editing support for the Kendo UI Grid widget, perform the following steps:
+Editing is one of the basic functionalities Kendo UI Grid supports and it allows you to manipulate the way the data is presented.
 
-## DataSource CRUD Configuration
+## Enable Editing
+
+To enable the editing support for the Kendo UI Grid widget, perform the steps demonstrated below.
+
+### Configure DataSource
 
 The example below demonstrates how to configure the dataSource for CRUD (Create, Read, Update, Destroy) data operations.
 
@@ -37,7 +41,7 @@ The example below demonstrates how to configure the dataSource for CRUD (Create,
          //...
     });
 
-## `schema` Field Definition
+### Define Fileds through `schema`
 
 The example below demonstrates how to declare fields definitions through the DataSource `schema`.
 
@@ -75,7 +79,7 @@ The example below demonstrates how to declare fields definitions through the Dat
       }
     });
 
-## `editable` Option Setting
+### Set `editable` Option
 
 The examples below demonstrate the two options to set the `editable` configuration option in the Grid.
 

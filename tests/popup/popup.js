@@ -756,4 +756,24 @@
             equal(popup.calls("_position"), 1);
         }, 100);
     });
+
+    test("calculate position correctly when content height is 'auto'", function() {
+        popup = new Popup(div, { anchor: anchor });
+        popup.open();
+
+        popup.element[0].style.height = "auto";
+        popup.wrapper[0].style.height = "auto";
+
+        stub(popup, {
+            _flip: popup._flip
+        });
+
+        popup.position();
+
+        var flipArgs = popup.args("_flip");
+        var elementHeight = flipArgs[1];
+        var wrapperHeight = flipArgs[6];
+
+        equal(elementHeight, wrapperHeight);
+    });
 })();

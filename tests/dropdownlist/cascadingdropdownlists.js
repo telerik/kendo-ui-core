@@ -631,7 +631,7 @@
         ddl3.destroy();
     });
 
-    asyncTest("child widget selects its value after parents starts cascade", 2, function() {
+    asyncTest("child widget selects its value after parents starts cascading", 2, function() {
         var deferred = $.Deferred();
 
         var ddl = new DropDownList(parent, {

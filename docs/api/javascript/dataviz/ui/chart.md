@@ -9160,7 +9160,8 @@ The series base color. The supported values are:
 
 The data item field which contains the series color.
 
-> The `colorField` option is supported when [series.type](#configuration-series.type) is set to "bar", "column", "bubble", "donut", "pie", "candlestick", "ohlc" or "waterfall".
+> The `colorField` option is supported when [series.type](#configuration-series.type)
+is set to "bar", "column", "rangeBar", "rangeColumn", "bubble", "donut", "pie", "candlestick", "ohlc" or "waterfall".
 
 #### Example - set the chart series color field
 
@@ -13550,7 +13551,7 @@ Sets the visible property of a chart series
 
 ### series.visibleInLegend `Boolean` *(default: true)*
 
-A value indicating whether to show the point category name (for bubble, donut and pie series)
+A value indicating whether to show the point category name (for funnel, donut and pie series)
 or series name (for other available series types) in the legend.
 
 #### Example - hide a chart series from the legend
@@ -13572,7 +13573,7 @@ or series name (for other available series types) in the legend.
 
 The data item field which indicates whether to show the point category name in the legend.
 
-> The `visibleInLegendField` option is supported when [series.type](#configuration-series.type) is set to "buble", "donut" or "pie".
+> The `visibleInLegendField` option is supported when [series.type](#configuration-series.type) is set to "funnel", "donut" or "pie".
 
 #### Example - set the chart series visible in legend field
 

@@ -129,9 +129,6 @@ var __meta__ = { // jshint ignore:line
                 callback(arr1[i], arr2[i], templates);
                 if (arr2[i].item) {
                     this.trigger(ITEMCHANGE, { item: $(arr1[i]), data: arr2[i].item, ns: kendo.ui });
-                    if (arr2[i].index === this._selectedIndex) {
-                        this.select(this._selectedIndex);
-                    }
                 }
             }
         };
@@ -216,7 +213,6 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             that._listCreated = false;
             that._fetching = false;
-            that._filter = false;
 
             Widget.fn.init.call(that, element, options);
 
@@ -246,6 +242,7 @@ var __meta__ = { // jshint ignore:line
 
             that.content.on("scroll" + VIRTUAL_LIST_NS, kendo.throttle(function() {
                 that._renderItems();
+                that._triggerListBound();
             }, options.delay));
 
             that._selectable();
@@ -312,8 +309,11 @@ var __meta__ = { // jshint ignore:line
 
             if (that.dataSource) {
                 that.dataSource.unbind(CHANGE, that._refreshHandler);
-                that.dataSource.unbind(CHANGE, that._rangeChangeHandler);
 
+                that._clean();
+                that._listCreated = false;
+
+                that._deferValueSet = true;
                 value = that.value();
 
                 that.value([]);
@@ -322,24 +322,24 @@ var __meta__ = { // jshint ignore:line
                 });
             } else {
                 that._refreshHandler = $.proxy(that.refresh, that);
-                that._rangeChangeHandler = $.proxy(that.rangeChange, that);
             }
 
-            that.dataSource = dataSource.bind(CHANGE, that._refreshHandler)
-                                        .bind(CHANGE, that._rangeChangeHandler);
+            that.dataSource = dataSource.bind(CHANGE, that._refreshHandler);
 
-            if (that.dataSource.view().length !== 0) {
+            that.setDSFilter(dataSource.filter());
+
+            if (dataSource.view().length !== 0) {
                 that.refresh();
             } else if (that.options.autoBind) {
-                that.dataSource.fetch();
+                dataSource.fetch();
             }
         },
 
-        rangeChange: function () {
+        _triggerListBound: function () {
             var that = this;
             var page = that.dataSource.page();
 
-            if (that.isBound() && that._rangeChange === true && that._lastPage !== page) {
+            if (that.isBound() && !that._selectingValue && that._lastPage !== page) {
                 that._lastPage = page;
                 that.trigger(LISTBOUND);
             }
@@ -348,31 +348,36 @@ var __meta__ = { // jshint ignore:line
         refresh: function(e) {
             var that = this;
             var action = e && e.action;
+            var filtered = this.isFiltered();
             var changedItems;
 
             if (that._mute) { return; }
 
+            that._deferValueSet = false;
+
             if (!that._fetching) {
-                if (that._filter) {
+                if (filtered) {
                     that.focus(0);
                 }
 
                 that._createList();
-                if (!action && that._values.length && !that._filter && !that.options.skipUpdateOnBind) {
+                if (!action && that._values.length && !filtered && !that.options.skipUpdateOnBind) {
+                    that._selectingValue = true;
                     that.value(that._values, true).done(function() {
-                        that._lastPage = that.dataSource.page();
                         that._listCreated = true;
-                        that.trigger(LISTBOUND);
+                        that._selectingValue = false;
+                        that._triggerListBound();
                     });
                 } else {
-                    that._lastPage = that.dataSource.page();
                     that._listCreated = true;
-                    that.trigger(LISTBOUND);
+                    that._triggerListBound();
                 }
             } else {
                 if (that._renderItems) {
                     that._renderItems(true);
                 }
+
+                that._triggerListBound();
             }
 
             if (action === "itemchange") {
@@ -428,7 +433,7 @@ var __meta__ = { // jshint ignore:line
 
             that._values = value;
 
-            if ((that.isBound() && !that._mute) || _forcePrefetch) {
+            if ((that.isBound() && !that._mute && !that._deferValueSet) || _forcePrefetch) {
                 that._prefetchByValue(value);
             }
 
@@ -450,7 +455,7 @@ var __meta__ = { // jshint ignore:line
                         match = isPrimitive(item) ? value[i] === item : value[i] === valueGetter(item);
 
                         if (match) {
-                            forSelection.push(idx);
+                            forSelection.push(dataView[idx].index);
                         }
                     }
                 }
@@ -491,7 +496,6 @@ var __meta__ = { // jshint ignore:line
             var ranges = this._rangesList;
             var result = $.Deferred();
             var defs = [];
-
 
             var low = Math.floor(index / take) * take;
             var high = Math.ceil(index / take) * take;
@@ -725,12 +729,27 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _triggerChange: function(removed, added) {
+            removed = removed || [];
+            added = added || [];
+
+            if (removed.length || added.length) {
+                this.trigger(CHANGE, {
+                    removed: removed,
+                    added: added
+                });
+            }
+        },
+
         select: function(candidate) {
             var that = this,
                 indices,
                 singleSelection = that.options.selectable !== "multiple",
                 prefetchStarted = !!that._activeDeferred,
+                filtered = this.isFiltered(),
+                isAlreadySelected,
                 deferred,
+                result,
                 removed = [];
 
             if (candidate === undefined) {
@@ -738,16 +757,25 @@ var __meta__ = { // jshint ignore:line
             }
 
             indices = that._getIndecies(candidate);
+            isAlreadySelected = singleSelection && !filtered && lastFrom(indices) === lastFrom(this._selectedIndexes);
+            removed = that._deselectCurrentValues(indices);
 
-            if (that._filter && !singleSelection && that._deselectFiltered(indices)) {
+            if (removed.length || !indices.length || isAlreadySelected) {
+                that._triggerChange(removed);
+
+                if (that._valueDeferred) {
+                    that._valueDeferred.resolve();
+                }
                 return;
             }
 
-            if (!indices.length || (singleSelection && !that._filter && lastFrom(indices) === lastFrom(this._selectedIndexes))) {
-                return;
+            if (indices.length === 1 && indices[0] === -1) {
+                indices = [];
             }
 
-            removed = that._deselect(indices);
+            result = that._deselect(indices);
+            removed = result.removed;
+            indices = result.indices;
 
             if (singleSelection) {
                 that._activeDeferred = null;
@@ -761,13 +789,7 @@ var __meta__ = { // jshint ignore:line
                 var added = that._select(indices);
 
                 that.focus(indices);
-
-                if (added.length || removed.length) {
-                    that.trigger(CHANGE, {
-                        added: added,
-                        removed: removed
-                    });
-                }
+                that._triggerChange(removed, added);
 
                 if (that._valueDeferred) {
                     that._valueDeferred.resolve();
@@ -795,13 +817,16 @@ var __meta__ = { // jshint ignore:line
             this._mute = false;
         },
 
-        filter: function(filter) {
-            if (filter === undefined) {
-                return this._filter;
+        setDSFilter: function(filter) {
+            this._lastDSFilter = $.extend({}, filter);
+        },
+
+        isFiltered: function() {
+            if (!this._lastDSFilter) {
+                this.setDSFilter(this.dataSource.filter());
             }
 
-            this._filter = filter;
-            this._rangeChange = true;
+            return !kendo.data.Query.compareFilters(this.dataSource.filter(), this._lastDSFilter);
         },
 
         skipUpdate: $.noop,
@@ -993,7 +1018,9 @@ var __meta__ = { // jshint ignore:line
                 flatGroups = {};
 
             if (dataSource.pageSize() < pageSize) {
+                this._mute = true;
                 dataSource.pageSize(pageSize);
+                this._mute = false;
             }
 
             return function(index, rangeStart) {
@@ -1016,9 +1043,7 @@ var __meta__ = { // jshint ignore:line
 
                             if (rangeStart <= firstItemIndex && firstItemIndex <= (rangeStart + pageSize)) {
                                 that._fetching = true;
-                                that._rangeChange = true;
                                 dataSource.range(rangeStart, pageSize);
-                                that._rangeChange = false;
                             }
                         });
                     }
@@ -1028,12 +1053,10 @@ var __meta__ = { // jshint ignore:line
                     if (lastRangeStart !== rangeStart) {
                         that._mute = true;
                         that._fetching = true;
-                        that._rangeChange = true;
 
                         dataSource.range(rangeStart, pageSize);
                         lastRangeStart = rangeStart;
 
-                        that._rangeChange = false;
                         that._fetching = false;
                         that._mute = false;
                     }
@@ -1100,7 +1123,7 @@ var __meta__ = { // jshint ignore:line
                 item = item ? item.item : null;
             }
 
-            if (value.length && item) {
+            if (!this.isFiltered() && value.length && item) {
                 for (var i = 0; i < value.length; i++) {
                     match = isPrimitive(item) ? value[i] === item : value[i] === valueGetter(item);
                     if (match) {
@@ -1273,9 +1296,8 @@ var __meta__ = { // jshint ignore:line
             return result;
         },
 
-        _deselect: function(indexes) {
+        _deselect: function(indices) {
             var removed = [],
-                index,
                 selectedIndex,
                 dataItem,
                 selectedIndexes = this._selectedIndexes,
@@ -1284,47 +1306,28 @@ var __meta__ = { // jshint ignore:line
                 removedindexesCounter = 0,
                 item;
 
-            if (indexes[position] === -1) { //deselect everything
+            indices = indices.slice();
+
+            if (selectable === true || !indices.length) { //deselect everything
+
                 for (var idx = 0; idx < selectedIndexes.length; idx++) {
-                    selectedIndex = selectedIndexes[idx];
+                    if (selectedIndexes[idx] !== undefined) {
+                        this._getElementByIndex(selectedIndexes[idx]).removeClass(SELECTED);
 
-                    this._getElementByIndex(selectedIndex).removeClass(SELECTED);
-
-                    removed.push({
-                        index: selectedIndex,
-                        position: idx,
-                        dataItem: this._selectedDataItems[idx]
-                    });
+                        removed.push({
+                            index: selectedIndexes[idx],
+                            position: idx,
+                            dataItem: this._selectedDataItems[idx]
+                        });
+                    }
                 }
 
                 this._values = [];
                 this._selectedDataItems = [];
                 this._selectedIndexes = [];
-                indexes.splice(0, indexes.length);
-
-                return removed;
-            }
-
-            if (selectable === true) {
-                index = indexes[position];
-                selectedIndex = selectedIndexes[position];
-
-                if (selectedIndex !== undefined && index !== selectedIndex) {
-                    this._getElementByIndex(selectedIndex).removeClass(SELECTED);
-
-                    removed.push({
-                        index: selectedIndex,
-                        position: position,
-                        dataItem: this._selectedDataItems[position]
-                    });
-
-                    this._values = [];
-                    this._selectedDataItems = [];
-                    this._selectedIndexes = [];
-                }
             } else if (selectable === "multiple") {
-                for (var i = 0; i < indexes.length; i++) {
-                    position = $.inArray(indexes[i], selectedIndexes);
+                for (var i = 0; i < indices.length; i++) {
+                    position = $.inArray(indices[i], selectedIndexes);
                     selectedIndex = selectedIndexes[position];
 
                     if (selectedIndex !== undefined) {
@@ -1339,7 +1342,7 @@ var __meta__ = { // jshint ignore:line
                         this._selectedIndexes.splice(position, 1);
                         dataItem = this._selectedDataItems.splice(position, 1)[0];
 
-                        indexes.splice(i, 1);
+                        indices.splice(i, 1);
 
                         removed.push({
                             index: selectedIndex,
@@ -1353,16 +1356,23 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            return removed;
+            return {
+                indices: indices,
+                removed: removed
+            };
         },
 
-        _deselectFiltered: function(indices) {
+        _deselectCurrentValues: function(indices) {
             var children = this.element[0].children;
             var value, index, position;
             var values = this._values;
             var removed = [];
             var idx = 0;
             var j;
+
+            if (this.options.selectable !== "multiple" || !this.isFiltered()) {
+                return [];
+            }
 
             for (; idx < indices.length; idx++) {
                 position = -1;
@@ -1382,16 +1392,7 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            if (removed.length) {
-                this.trigger("change", {
-                    added: [],
-                    removed: removed
-                });
-
-                return true;
-            }
-
-            return false;
+            return removed;
         },
 
         _select: function(indexes) {

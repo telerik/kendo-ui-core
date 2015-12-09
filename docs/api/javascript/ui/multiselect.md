@@ -689,6 +689,8 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
 
 Enables the virtualization feature of the widget.
 
+#### Example - MultiSelect with virtualized list
+
     <select id="orders" style="width: 400px;"></select>
     <script>
         $(document).ready(function() {
@@ -732,6 +734,76 @@ Enables the virtualization feature of the widget.
                 }
             });
         });
+
+        function convertValues(value) {
+            var data = {};
+
+            value = $.isArray(value) ? value : [value];
+
+            for (var idx = 0; idx < value.length; idx++) {
+                data["values[" + idx + "]"] = value[idx];
+            }
+
+            return data;
+        }
+    </script>
+
+#### Example - MultiSelect widget with declarative virtualization config
+
+    <div class="demo-section k-header">
+        <h4>Search for shipping name</h4>
+        <select id="orders" style="width: 400px"
+               data-role="multiselect"
+               data-bind="value: order, source: source"
+               data-text-field="ShipName"
+               data-value-field="OrderID"
+               data-filter="contains"
+               data-virtual="{itemHeight:26,valueMapper:orderValueMapper}"
+               data-height="520"
+                ></select>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            var model = kendo.observable({
+                    order: [10548],
+              source: new kendo.data.DataSource({
+                type: "odata",
+                transport: {
+                  read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                },
+                schema: {
+                  model: {
+                    fields: {
+                      OrderID: { type: "number" },
+                      Freight: { type: "number" },
+                      ShipName: { type: "string" },
+                      OrderDate: { type: "date" },
+                      ShipCity: { type: "string" }
+                    }
+                  }
+                },
+                pageSize: 80,
+                serverPaging: true,
+                serverFiltering: true
+              })
+            });
+
+
+            kendo.bind($(document.body), model);
+        });
+
+        function orderValueMapper(options) {
+            $.ajax({
+              url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+              type: "GET",
+              dataType: "jsonp",
+              data: convertValues(options.value),
+              success: function (data) {
+                options.success(data);
+              }
+            })
+        }
 
         function convertValues(value) {
             var data = {};

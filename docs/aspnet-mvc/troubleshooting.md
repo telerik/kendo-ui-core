@@ -50,12 +50,12 @@ Those libraries are **jquery.unobtrusive-ajax**, **jquery.validate** and **jquer
 * [Microsoft.jQuery.Unobtrusive.Ajax](https://www.nuget.org/packages/Microsoft.jQuery.Unobtrusive.Ajax)
 * [Microsoft.jQuery.Unobtrusive.Validation](https://www.nuget.org/packages/Microsoft.jQuery.Unobtrusive.Validation)
 
-> **Important**  
+> **Important**
 > In ASP.NET MVC 3 applications **jquery.unobtrusive-ajax** and **jquery.validate.unobtrusive** are not installed as NUget packages. You would need to install them separately. The packages are [Microsoft.jQuery.Unobtrusive.Ajax](https://www.nuget.org/packages/Microsoft.jQuery.Unobtrusive.Ajax) and [Microsoft.jQuery.Unobtrusive.Validation](https://www.nuget.org/packages/Microsoft.jQuery.Unobtrusive.Validation). First you must delete **jquery.unobtrusive-ajax.js**, **jquery.unobtrusive-ajax.min.js**, **jquery.validate.unobtrusive.js** and **jquery.validate.unobtrusive.min.js** from your **~/Sripts** folder. Then install Microsoft.jQuery.Unobtrusive.Ajax and Microsoft.jQuery.Unobtrusive.Validation.
 
 ## Visual Studio Server IntelliSense Does Not Show MVC HtmlHelper Extension Method
 
-**Solution**:  
+**Solution**:
 
 1. Make sure the `Kendo.Mvc.UI` namespace is imported in `web.config`.
     * If you are using the WebForms view engine open the **web.config** file in the root folder of your application. Add
@@ -119,7 +119,7 @@ If the name of a widget is different from the property of the Model, the ModelBi
 
 **Solution**: Verify that the name of the widget is the same as the Model's property you want to update.
 
-> **Important**  
+> **Important**
 > If strongly-typed widget is used do not set Name manually, because name is generated automatically.
 
 ## AutoComplete/ComboBox/DropDownList/MultiSelect Loading Icon Continues Spinning
@@ -296,3 +296,18 @@ Alternatively, just remove the non minified script from the project (this obviou
 ## Kendo UI Theme Images Do Not Appear When Using CSS Bundling
 
 Refer to the [CSS Bundling](/aspnet-mvc/fundamentals#css-bundling) documentation.
+
+## Kendo UI MVC wrapper with Ajax binding shows an outdated data
+
+If the widget, DropDownList for instance, does not show the updated data on page visit, then the most common reason for this issue is a cached Ajax request. `IE` is notorious with its requests caching,
+which returns the cached `XmlHttpRequest` result instead of making new request. The options to overcome this behavior are:
+
+- to force the `check for newer versions of stored pages` [(link)](https://support.microsoft.com/en-us/kb/263070)
+- to disable caching using HTTP headers
+
+    [OutputCache(Duration=0,NoStore=true,VaryByParam="None")]
+    public JsonResult Index()
+    {
+        //TODO: return the updated data here!
+        return Json(new string[] {});
+    }

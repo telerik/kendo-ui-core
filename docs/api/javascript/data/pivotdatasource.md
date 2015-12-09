@@ -6,7 +6,7 @@ description: Learn more about the configuration of Kendo UI PivotDataSource, met
 
 # kendo.data.PivotDataSource
 
-The data source used by the [kendo.ui.PivotGrid](/api/web/pivotgrid) widget.
+The data source used by the [kendo.ui.PivotGrid](/api/javascript/ui/pivotgrid) widget.
 Inherits from [kendo.data.DataSource](/api/framework/datasource).
 
 

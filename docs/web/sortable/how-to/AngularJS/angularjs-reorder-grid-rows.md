@@ -1,14 +1,15 @@
 ---
-title: Reorder AngularJS Grid rows
-page_title: Reorder AngularJS Grid rows
-description: Reorder AngularJS Grid rows
+title: Reorder AngularJS Grid Rows
+page_title: Reorder AngularJS Grid Rows | Kendo UI Sortable Widget
+description: "Learn how to reorder AngularJS Grid rows by using the Kendo UI Sortable widget."
+slug: howto_reorderangularjsgridrows_angular_sortable
 ---
 
-# Reorder AngularJS Grid rows
+# Reorder AngularJS Grid Rows
 
-The following runnable sample demonstrates how to reorder Grid rows using Kendo UI Sortable in AngularJS application.
+The example below demonstrates how to reorder Grid rows using Kendo UI Sortable in an AngularJS application.
 
-#### Example:
+###### Example
 
 ```html
   <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
@@ -69,3 +70,14 @@ The following runnable sample demonstrates how to reorder Grid rows using Kendo 
     });
   </script>
 ```
+
+## See Also 
+
+Other articles and how-to examples on Kendo UI Sortable:
+
+* [JavaScript API Reference](/api/javascript/ui/sortable)
+* [How to Nest Sortables]({% slug howto_nestsortables_sortable %})
+* [How to Persist Order in `localStorage`]({% slug howto_persistoderinlocalstorage_sortable %})
+* [How to Reorder Grid Rows]({% slug howto_reordergridrows_sortable %})
+* [How to Reorder Rows in Nested Grid]({% slug howto_reorderrowsinnestedgrid_sortable %})
+* [How to Transfer Grid Rows]({% slug howto_transfergridrows_sortable %})

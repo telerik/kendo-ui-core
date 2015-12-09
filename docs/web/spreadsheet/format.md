@@ -10,26 +10,35 @@ position: 2
 
 Kendo UI Spreadsheet supports many cell-formatting options such as formatting of strings, text, numbers, dates, and time. 
 
-## Format Strings
+## Formatting 
 
-The supported format strings are compatible with the [Excel number formats](https://support.office.com/en-au/article/Create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4),
-with some [notable exceptions](#differences-to-excel).
+### Strings
+
+The format strings are compatible with the [Excel number formats](https://support.office.com/en-au/article/Create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4), with some [notable exceptions](#differences-to-excel).
 
 A format string consists of one or more sections, separated by semicolons. A section optionally specifies a color and a condition. 
 
-###### Example - display a number with up to 3 decimals
+The example below demonstrates how to display a number with up to three decimals.
+
+###### Example
 
     #.###
 
-###### Example - display positive numbers (or zero) in green, negative numbers in red
+The example below demonstrates how to display positive numbers, or zero, in green, and negative numbers in red.     
+    
+###### Example
 
     [Green]#.###;[Red]#.###
+    
+The example below demonstrates how to display positive numbers in green, negative numbers in red, and the the "Zero" text in blue if the number is zero.
 
-###### Example - display positive numbers in green, negative numbers in red, and the text "Zero" in blue if the number is zero
+###### Example
 
     [Green]#.###;[Red]#.###;[Blue]"Zero"
+    
+This example is the same as the previous one, with the difference to display any possible text in the cell in magenta.
 
-###### Example - same as above, but if the cell contains text, display it in magenta:
+###### Example
 
     [Green]#.###;[Red]#.###;[Blue]"Zero";[Magenta]@
 
@@ -42,13 +51,15 @@ Excel documentation mentions that a maximum of four sections are supported, and 
 
 Excel also supports a more flexible conditional formatting. 
 
-###### Example - display numbers greater than 100 in green, numbers less than -100 in yellow, and other numbers in cyan
+The example below demonstrates how to display numbers greater than 100 in green, numbers less than minus 100 in yellow, and other numbers in cyan. 
+
+###### Example
 
     [>100][GREEN]#,##0;[<=-100][YELLOW]#,##0;[CYAN]#,##0
 
 In this case it is not clear whether only up to four sections are allowed, of which the last one must be text, while the Spreadsheet formatter allows for any number of conditional sections.
 
-## Format Text and Numbers
+### Text and Numbers
 
 | Character | Meaning       |
 |-----------|---------------|
@@ -76,7 +87,7 @@ The thousands separator (`,`) has a double role. When between any digit placehol
 |        0 | Empty        |
 |      -10 | Replace HDD! |
 
-## Format Dates and Time
+### Dates and Time
 
 | Format String | Meaning                                                                           |
 |---------------|-----------------------------------------------------------------------------------|
@@ -105,7 +116,7 @@ The thousands separator (`,`) has a double role. When between any digit placehol
 | A/P           | Same as above, but displays `A` or `P`                                            |
 | a/p           | Idem, but displays `a` or `p`                                                     |
 
-Notice that the month and minute specifiers are ambiguous (`m` or `mm`). These strings are interpreted as a month number, unless preceded by an hour part (`h` or `hh`) in which case it displays minutes. Therefore:
+Note that the month and minute specifiers are ambiguous (`m` or `mm`). These strings are interpreted as a month number, unless preceded by an hour part (`h` or `hh`) in which case it displays minutes. Therefore:
 
 | Format String             | Example Display         |
 |---------------------------|-------------------------|

@@ -809,6 +809,25 @@
         equal(JSON.stringify(dataItem.toJSON()), '{"item":"Select...","custom":"custom"}');
     });
 
+    test("dataItem method returns returns null if argument is null", function() {
+        dropdownlist = new DropDownList(input, {
+            dataSource: [
+                { item: "item1" },
+                { item: "item2" }
+            ],
+            dataTextField: "item",
+            dataValueField: "item",
+            optionLabel: {
+              item: "Select...",
+              custom: "custom"
+            }
+        });
+
+        var dataItem = dropdownlist.dataItem(null);
+
+        equal(dataItem, null);
+    });
+
     test("DropDownList re-binds on dataSource.data([])", function() {
         dropdownlist = new DropDownList(input, ["item1", "item2"]);
 

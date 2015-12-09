@@ -174,7 +174,7 @@ Fires when the RangeSlider value changes as a result of selecting a new value wi
 
 #### Event Data
 
-##### e.value `Number`
+##### e.value `Array`
 
 Represents the updated array of values of the first and second drag handle.
 
@@ -184,6 +184,6 @@ Fires when the user drags the drag handle to a new position.
 
 #### Event Data
 
-##### e.value `Number`
+##### e.value `Array`
 
 Represents an array of values of the current positions of the first and second drag handle.

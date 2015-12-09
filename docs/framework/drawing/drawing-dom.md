@@ -316,4 +316,4 @@ do with CSS or display resolution.
 
 The HTML renderer has been tested in recent versions of Chrome, Firefox, Safari, Blink-based Opera, Internet Explorer 9 or later.
 
-Internet Explorer <= 8 is not supported.
+> Mobile browsers and Internet Explorer <= 8 are not supported.

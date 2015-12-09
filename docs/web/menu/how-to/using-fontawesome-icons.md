@@ -1,14 +1,15 @@
 ---
-title: Using FontAwesome icons
-page_title: Using FontAwesome icons
-description: Using FontAwesome icons.
+title: Use FontAwesome Icons
+page_title: Use FontAwesome Icons | Kendo UI Menu Widget
+description: "Learn how to include custom FontAwesome icons in the Kendo UI Menu widget."
+slug: howto_use_fontawesome_icons_menu
 ---
 
-# Using FontAwesome icons for Kendo UI Menu.
+# Use FontAwesome Icons
 
 The example below demonstrates how to include custom [FontAwesome](http://fortawesome.github.io/Font-Awesome/) icons in the Kendo UI Menu
 
-#### Example:
+###### Example
 
 ```html
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -44,3 +45,11 @@ The example below demonstrates how to include custom [FontAwesome](http://fortaw
       }
     </style>
 ```
+
+## See Also
+
+Other articles on Kendo UI Menu:
+
+* [JavaScript API Reference](/api/javascript/ui/menu)
+* [How to Create Split Button]({% slug howto_createa_split_button_menu %})
+* [How to Execute Custom Click Actions Based on Class Name]({% slug howto_execute_custom_click_actions_basedon_classnames_menu %})

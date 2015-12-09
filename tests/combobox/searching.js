@@ -885,4 +885,30 @@ test("text method should set custom value to already added custom option", 2, fu
     input.blur();
 });
 
+test("keep selcted value when filtered from outside", 2, function() {
+    var values = ["unknown", "unknown2"];
+    var select = $("<select></select>");
+
+    combobox = new ComboBox(select, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: data,
+        filter: "contains",
+        change: function() {
+            equal(this.value(), values.shift());
+        },
+        value: 2
+    });
+
+    combobox.dataSource.filter({
+        field: "text",
+        operator: "eq",
+        value: "none"
+    });
+
+
+    equal(combobox.value(), 2);
+    equal(combobox.text(), "Bar");
+});
+
 })();

@@ -100,7 +100,7 @@ In some scenarios, the Grid scroll position may be reset when the widget is rebo
 
 Virtual scrolling is an alternative to paging. When enabled, the Grid will load data from the remote data source as the user scrolls vertically. Note that horizontal scrolling is not virtualized.
 
-> **Importnat**  
+> **Important**  
 > Either enable virtual scrolling, or paging. Do not apply both features at the same time.
 
 When you apply virtual scrolling, the HTML output is a little different as compared to the standard scrolling functionality:
@@ -123,7 +123,7 @@ When you apply virtual scrolling, the HTML output is a little different as compa
 
 Note that when you use virtual scrolling, the Grid data table is not placed inside a scrollable container. The scrollbar belongs to a separate `div.k-scrollbar` shown above. This matters in scenarios when the data rows should be manually scrolled to a particular position.
 
-The virtual scrolling behavior and implementation imposes limitations with regard to some other Grid features. Virtual scrolling cannot be used together with grouping, hierarchy, batch editing, and inline editing. Popup editing is supported, but without the functionality of adding new items.
+The virtual scrolling behavior and implementation imposes limitations with regard to some other Grid features. Virtual scrolling cannot be used together with grouping and hierarchy. CRUD operations are also not supported.
 
 Virtual scrolling relies on a fake scrollbar. Its size is not determined by the browser, but is calculated based on the average row height of the data that is already loaded. As a result, variable row heights may cause unexpected behavior, such as inability to scroll to the last rows on the last page. There are two ways to ensure that all table rows have the same heights: either disable text wrapping, or set an explicit large-enough row height:
 
@@ -143,9 +143,9 @@ Virtual scrolling relies on a fake scrollbar. Its size is not determined by the 
 > The page size of the Grid must be large-enough, so that the table rows do not fit in the scrollable data area. Otherwise the vertical virtual scrollbar will not be created.
 > The page size of the Grid must be over three times larger than the number of visible table rows in the data area.
 
-Due to height-related browser limitations, which cannot be avoided, virtual scrolling works with up to a couple of million records. The exact number of records depends on the browser. Note that if you use a row count that is larger than, can produce unexpected widget behavior, or Javascript errors.
+Due to height-related browser limitations, which cannot be avoided, virtual scrolling works with up to a couple of million records. The exact number of records depends on the browser. Note that if you use a row count that is larger than, can produce unexpected widget behavior, or Javascript errors. Adjusting the scroll position programmatically, so that a certain row becomes visible is not supported.
 
-When using mobile touch devices, which do not have a visible scrollbar that can be grabbed and dragged, virtual scrolling combined with a large number of data items, e.g. thousands, can impose a challenge to easily acccess all table rows, as this will require a great deal of touch scrolling. On the other hand, using virtual scrolling with a very small number of items, e.g. less than two hundred, does not make much sense either.
+When using mobile touch devices, which do not have a visible scrollbar that can be grabbed and dragged, virtual scrolling combined with a large number of data items, e.g. thousands, can impose a challenge to easily acccess all table rows, as this will require a great deal of touch scrolling. On the other hand, using virtual scrolling with a very small number of items, e.g. less than two hundred, does not make much sense either. Virtual scrolling on touch devices relies on drag and drop events, which are slower than native scrolling, so inferior scrolling performance may be noticable.
 
 In the cases listed above, when using virtual scrolling is not supported or recommended, revert to standard paging or non-virtual scrolling without paging, depending on the number of data items.
     
@@ -320,9 +320,9 @@ Frozen columns rely on row height synchronization between the frozen and non-fro
         line-height: 18px;
     }
 
-## Initialize inside Hidden Containers
+## Hidden Containers
 
-Depending on the Grid configuration, the widget may need to perform Javascript calculations to adjust its layout during initialization, e.g. when scrolling, virtual scrolling, or frozen columns are used. Generally, Javascript size calculations do not work for elements, which are hidden with a `display:none` style and the Grid can also be affected.
+Depending on the Grid configuration, the widget may need to perform Javascript calculations to adjust its layout during initialization inside hidden containers, e.g. when scrolling, virtual scrolling, or frozen columns are used. Generally, Javascript size calculations do not work for elements, which are hidden with a `display:none` style and the Grid can also be affected.
 
 Depending on the exact scenario, the following behavior can be observed when the widget is eventually displayed:
 

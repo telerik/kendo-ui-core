@@ -1,12 +1,16 @@
 function scrollNodeIntoView(li) {
-    var top = li.offset().top;
-    var navContainer = $("#page-nav");
-    var navContainerHeight = navContainer.outerHeight();
+    var container = $("#page-nav")[0];
+    var top = li[0].offsetTop;
+    var bottom = top + li.find(">div").outerHeight();
 
-    if (top - navContainer.offset().top < 0 || top > navContainerHeight) {
-        navContainer.scrollTop(top - $("#page-tree").offset().top - navContainerHeight / 2);
+    var containerTop = container.scrollTop;
+    var containerHeight = container.clientHeight;
+
+    if (top < containerTop || bottom > containerHeight + containerTop) {
+        container.scrollTop = top - containerHeight / 2;
     }
 }
+
 
 function selectNode(hash, scroll) {
     var li = $("#page-tree li:has(>div>span>a[href='" + hash + "'])");
@@ -461,7 +465,7 @@ $(function(){
         $("#page-inner-content").toggleClass("move-inner-content");
     });
 
-    $("body").find(".prettyprint[lang=html]").each(function() {
+    $("body").find(".prettyprint[data-lang=html]").each(function() {
         if (this.parentNode.className.indexOf("k-content") < 0) {
             dojoApi.addButtons(this);
         }

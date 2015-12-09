@@ -8,22 +8,80 @@ position: 3
 
 # Virtualization
 
-[Kendo UI AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index), [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index), [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index) and [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) widgets support UI and data virtualization which is useful when  you want to display large data sets. The UI virtualization technique uses a fixed amount of list items in the widget's pop-up list regardless of the data set size. When the list is scrolled, the widget will reuse the existing items to display the relevant data, instead of creating new ones. The virtualization feature combines data and UI virtualization in order to retrieve and display only a subset of the whole data set.
+[Kendo UI AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index), [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index), [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index) and [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) widgets support UI and data virtualization which is useful when  you want to display large data sets. The UI virtualization technique uses a fixed amount of list items in the widget's pop-up list regardless of the data set size. When the list is scrolled, the widget will reuse the existing items to display the relevant data, instead of creating new ones. 
 
-## Data Virtualization
+## Data and UI Virtualization
+
+The virtualization feature combines data and User Interface (UI) virtualization in order to retrieve and display only a subset of the whole data set.
+
+### Data 
 
 In the context of the widget, data virtualization is accomplished by using the `DataSource` paging functionality and remote data retrieval. Thus, the widget retrieves only a concrete data page instead of requesting the whole data set at once. The `DataSource` paging should be configured correctly in order to ensure the proper work of the widgets. Please refer to the [server paging](/api/javascript/data/datasource#configuration-serverPaging) configuration for more details.
 
-## UI Virtualization
+### UI
 
 The widget uses a specific strategy of reusing a list of DOM elements in order to display the corresponding data chuck. The number of these elements is determined based on the [`height`](/api/javascript/ui/combobox#configuration-height) and [`itemHeight`](#itemheight) options. Once the number is calculated, the widget creates those elements and starts reusing them to display the current data source page.
 
-## Data and UI Virtualization Combined
+### Data and UI Combined
 
 To ensure the correct work of the widget, the DataSource `pageSize` value is calculated automatically based on the (([`height`](/api/javascript/ui/combobox#configuration-height) / [`itemHeight`](#itemheight)) * 4) formula. This is done by the widget itself, and the defined `pageSize` value will be overriden if it does not match the calculated one.
 
 > **Important**  
 > To avoid multiple initial requests, define a correct `pageSize` value.
+
+## Enable
+
+Enable virtualization in a ComboBox by using the example below. It demonstrates the minimum widget and `DataSource` configuration requirements for the virtualization to work as expected:
+
+```html
+    <input id="orders" style="width: 400px" />
+    <script>
+        $(document).ready(function() {
+            $("#orders").kendoComboBox({
+                template: '#= OrderID # | #= ShipName #',
+                dataTextField: "ShipName",
+                dataValueField: "OrderID",
+                virtual: {
+                    itemHeight: 26,
+                    valueMapper: function(options) {
+                        $.ajax({
+                            url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+                            type: "GET",
+                            data: convertValues(options.value),
+                            success: function (data) {
+                                options.success(data);
+                            }
+                        })
+                    }
+                },
+                height: 520,
+                dataSource: {
+                    type: "odata",
+                    transport: {
+                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                    },
+                    pageSize: 80,
+                    serverPaging: true,
+                    serverFiltering: true
+                }
+            });
+        });
+
+        //This is a helper method that serializes values into a understandable format for the server.
+        //This method is not obligatory to use. Instead, you need to send the value in a format that is understandable for the server.
+        function convertValues(value) {
+            var data = {};
+
+            value = $.isArray(value) ? value : [value];
+
+            for (var idx = 0; idx < value.length; idx++) {
+                data["values[" + idx + "]"] = value[idx];
+            }
+
+            return data;
+        }
+    </script>
+```
 
 ## Configuration
 
@@ -122,60 +180,6 @@ The result is:
 ### `valueMapper` Implementation
 
 As mentioned in the previous section, the service should map the selected value to a concrete row index. The implementation of this functionality is completely under your control. However, the most simplified implementation includes the iteration of all items counting the index of the rows. A more optimized solution still is to use a dedicated SQL method that handles this action internally. You can do this by using the [`ROW_NUMBER()`](https://msdn.microsoft.com/en-us/library/ms186734.aspx) function.
-
-## Enable Virtualization
-
-Enable virtualization in a ComboBox by using the example below. It demonstrates the minimum widget and `DataSource` configuration requirements for the virtualization to work as expected:
-
-```html
-    <input id="orders" style="width: 400px" />
-    <script>
-        $(document).ready(function() {
-            $("#orders").kendoComboBox({
-                template: '#= OrderID # | #= ShipName #',
-                dataTextField: "ShipName",
-                dataValueField: "OrderID",
-                virtual: {
-                    itemHeight: 26,
-                    valueMapper: function(options) {
-                        $.ajax({
-                            url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
-                            type: "GET",
-                            data: convertValues(options.value),
-                            success: function (data) {
-                                options.success(data);
-                            }
-                        })
-                    }
-                },
-                height: 520,
-                dataSource: {
-                    type: "odata",
-                    transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
-                    },
-                    pageSize: 80,
-                    serverPaging: true,
-                    serverFiltering: true
-                }
-            });
-        });
-
-        //This is a helper method that serializes values into a understandable format for the server.
-        //This method is not obligatory to use. Instead, you need to send the value in a format that is understandable for the server.
-        function convertValues(value) {
-            var data = {};
-
-            value = $.isArray(value) ? value : [value];
-
-            for (var idx = 0; idx < value.length; idx++) {
-                data["values[" + idx + "]"] = value[idx];
-            }
-
-            return data;
-        }
-    </script>
-```
 
 ## Known Limitations
 

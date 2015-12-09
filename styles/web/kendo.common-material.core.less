@@ -778,6 +778,25 @@ div.k-window-content {
     background-position: -176px -240px;
 }
 
+.k-checkbox:indeterminate + .k-checkbox-label:before {
+    border-width: 2px;
+}
+
+.k-checkbox + .k-checkbox-label:before {
+    z-index: 1;
+}
+
+.k-checkbox:indeterminate + .k-checkbox-label:after {
+    width: 10px;
+    height: 10px;
+    border-width: 0;
+    margin-left: 0;
+    top: 4px;
+    left: 4px;
+    transform: none;
+    z-index: 2;
+}
+
 .k-radio:checked + .k-radio-label:after {
     top: 4px; 
     left: 4px

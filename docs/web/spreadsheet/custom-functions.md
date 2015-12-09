@@ -10,7 +10,9 @@ position: 3
 
 You can make your own JavaScript functions available in formulas by calling the `kendo.spreadsheet.defineFunction(name, func)`. The first argument (`string`) is the name for your function in formulas (case-insensitive), and the second one is a JavaScript function (the implementation).
 
-## Synchronous Primitives
+## Primitives
+
+### Synchronous Primitives
 
 The example below demonstrates how to define a function that calculates the distance between two points.
 
@@ -32,7 +34,7 @@ If you include the above JavaScript code, you can then use `DISTANCE` in formula
 
 Note that in the above example `defineFunction` returns an object that has an `args` method. Using it, you can specify the expected types of arguments. If the function is called with mismatching argument types, the spreadsheet runtime will automatically return an error and your implementation will not even be called. This frees you from manually writing code that does argument type checking, and provides a nice declarative syntax instead.
 
-## Asynchronous Primitives
+### Asynchronous Primitives
 
 Suppose you have a way to retrieve currency information from some remote server, you can define a primitive to make this information available in formulas. Note that we call `argsAsync` instead of `args` to define an asynchronous function.
 
@@ -131,7 +133,7 @@ In addition to basic type specifiers, which are strings, you can also use the fo
 
 In certain clauses you might need to be able to refer to values of previously type-checked arguments. For example, let us say you want to write a primitive that takes a minimum, a maximum, and a value that must be between them, and should return as a fraction the position of that value between min and max.
 
-###### Example - implementation
+###### Example
 
     defineFunction("my.position", function(min, max, value){
         return (value - min) / (max - min);
@@ -238,7 +240,9 @@ The type checking mechanism will error out when your primitive receives more arg
 
 The simplest way is to use the `"rest"` type specifier. In such cases the last argument will be an array containing all remaining arguments, whatever types they might be. 
 
-###### Example - a function that joins arguments with a separator, producing a string
+The example below demonstrates how to use a function that joins arguments with a separatorm producing a string.
+
+###### Example
 
     defineFunction("join", function(sep, list){
         return list.join(sep);
@@ -303,7 +307,7 @@ Time is kept as a fraction of a day, i.e., 0.5 means 12:00:00. For example, the 
 
 Functions to pack/unpack dates are available in `spreadsheet.calc.runtime`. 
 
-###### Example - usage
+###### Example
 
     var runtime = kendo.spreadsheet.calc.runtime;
 
@@ -373,7 +377,9 @@ To test when something is the `NULL` reference, just do `x === spreadsheet.NULLR
 
 `spreadsheet.UnionRef` is a union. It contains a `ref` property, which is an array of references (it can be empty). A `UnionRef` can be created by the union operator, which is the comma.
 
-###### Example - a function that takes an arbitrary reference and returns its type of reference
+The example below demonstrates how to use a function that takes an arbitrary reference and returns its type of reference.
+
+###### Example
 
     defineFunction("refkind", function(x){
         if (x === spreadsheet.NULLREF) {
@@ -393,7 +399,9 @@ To test when something is the `NULL` reference, just do `x === spreadsheet.NULLR
         [ "x", "ref" ]
     ]);
 
-###### Example - a function that takes an arbitrary reference and returns the total number of cells that it covers
+The example below demonstrates how to use a function that takes an arbitrary reference and returns the total number of cells it covers.
+    
+###### Example
 
     defineFunction("countcells", function(x){
         var count = 0;
@@ -438,7 +446,9 @@ Matrices are defined by `spreadsheet.calc.runtime.Matrix`. Your primitive can re
 
 Matrices were primarily added to deal with the “array formulas” concept in Excel. A function can return multiple values, and those will be in a `Matrix` object. 
 
-###### Example - a function that doubles each number in a range, and returns a matrix of the same shape
+The example below demonstrates how to use a function that doubles each number in a range and returns a matrix of the same shape.
+
+###### Example
 
     defineFunction("doublematrix", function(m){
         return m.map(function(value){
@@ -480,7 +490,9 @@ Additionally, there is a `formula` property, an object representing the current 
 
 If `args` or `argsAsync` are not called, the primitive function will receive exactly two arguments: a callback to be invoked with the result, and an array that will contain the arguments passed in the formula. 
 
-###### Example - a function that adds two <del>numbers</del> things
+The example below demonstrates how to use a function that adds two <del>numbers</del> things.
+
+###### Example
 
     defineFunction("add", function(callback, args){
         callback(args[0] + args[1]);

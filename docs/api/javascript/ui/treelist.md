@@ -1368,7 +1368,7 @@ which field to update. The other option is to use [MVVM](/framework/mvvm/overvie
 
 Configures the Kendo UI Window instance, which is used when the TreeList edit mode is "popup". The configuration is optional.
 
-For more information, please refer to the [Window configuration API](/api/web/window).
+For more information, please refer to the [Window configuration API](/api/javascript/ui/window).
 
 #### Example - TreeList popup Window configuration
 

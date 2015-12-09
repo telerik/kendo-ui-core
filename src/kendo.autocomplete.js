@@ -197,11 +197,20 @@ var __meta__ = { // jshint ignore:line
 
             List.fn.setOptions.call(this, options);
 
-            listOptions.dataValueField = listOptions.dataTextField;
-
             this.listView.setOptions(listOptions);
             this._accessors();
             this._aria();
+        },
+
+        _listOptions: function(options) {
+            var listOptions = List.fn._listOptions.call(this, $.extend(options, {
+                skipUpdateOnBind: true
+            }));
+
+            listOptions.dataValueField = listOptions.dataTextField;
+            listOptions.selectedItemChange = null;
+
+            return listOptions;
         },
 
         _editable: function(options) {
@@ -281,8 +290,9 @@ var __meta__ = { // jshint ignore:line
             if (!length || length >= options.minLength) {
                 that._open = true;
 
-                that.listView.filter(true);
-                that.listView.value([]);
+                that._mute(function() {
+                    this.listView.value([]);
+                });
 
                 that._filterSource({
                     value: ignoreCase ? word.toLowerCase() : word,
@@ -369,6 +379,8 @@ var __meta__ = { // jshint ignore:line
             var item = e.item;
             var element = this.element;
 
+            e.preventDefault();
+
             this._active = true;
 
             if (this.trigger("select", { item: item })) {
@@ -380,43 +392,6 @@ var __meta__ = { // jshint ignore:line
             this._blur();
 
             caret(element, element.val().length);
-        },
-
-        _initList: function() {
-            var that = this;
-            var virtual = that.options.virtual;
-            var hasVirtual = !!virtual;
-
-            var listBoundHandler = proxy(that._listBound, that);
-
-            var listOptions = {
-                autoBind: false,
-                selectable: true,
-                dataSource: that.dataSource,
-                click: $.proxy(that._click, this),
-                change: $.proxy(that._listChange, this),
-                activate: proxy(that._activateItem, that),
-                deactivate: proxy(that._deactivateItem, that),
-                dataBinding: function() {
-                    that.trigger("dataBinding");
-                    that._angularItems("cleanup");
-                },
-                dataBound: listBoundHandler,
-                listBound: listBoundHandler,
-                skipUpdateOnBind: true
-            };
-
-            listOptions = $.extend(that._listOptions(), listOptions, typeof virtual === "object" ? virtual : {});
-
-            listOptions.dataValueField = listOptions.dataTextField;
-
-            if (!hasVirtual) {
-                that.listView = new kendo.ui.StaticList(that.ul, listOptions);
-            } else {
-                that.listView = new kendo.ui.VirtualList(that.ul, listOptions);
-            }
-
-            that.listView.value(that.options.value);
         },
 
         _resetFocusItem: function() {
@@ -472,8 +447,6 @@ var __meta__ = { // jshint ignore:line
                 that._typingTimeout = undefined;
             }
 
-            that.listView.filter(false);
-
             if (that._touchScroller) {
                 that._touchScroller.reset();
             }
@@ -484,8 +457,14 @@ var __meta__ = { // jshint ignore:line
             that.trigger("dataBound");
         },
 
+        _mute: function(callback) {
+            this._muted = true;
+            callback.call(this);
+            this._muted = false;
+        },
+
         _listChange: function() {
-            if (!this.listView.filter() && this._active) {
+            if (this._active && !this._muted) {
                 this._selectValue(this.listView.selectedDataItems()[0]);
             }
         },

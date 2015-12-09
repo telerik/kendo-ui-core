@@ -1,11 +1,12 @@
 ---
-title: List of Script Files for the Tools, Frameworks and Utilities
-page_title: List of Script Files for the Tools, Frameworks and Utilities
-description: "Script files for Kendo UI shared components - frameworks, tools, and utilities."
+title: Script Files for Tools, Frameworks and Utilities
+page_title: Script Files for Tools, Frameworks and Utilities | Kendo UI Installation
+description: "Learn which are the script files for Kendo UI shared components: frameworks, tools, and utilities."
+slug: script_filesfor_tools_frameworks_utilities
 position: 6
 ---
 
-# List of Script Files for the Tools, Frameworks and Utilities
+# Script Files for Tools, Frameworks and Utilities
 
 Below are listed the script files for Kendo UI shared components providing behaviors, data access and other services:
 
@@ -55,3 +56,12 @@ Below are listed the script files for Kendo UI shared components providing behav
 | 						| kendo.binder.js					|				|
 | 						| kendo.fx.js						|				|
 | 						| kendo.view.js						|				|
+
+## See Also
+
+Articles with script files for the other Kendo UI components:
+
++ [List of Script Files for the Desktop UI Widgets]({% slug scirpt_filesfor_desktop_widgets %})  
++ [List of Script Files for the Widgets Rendering Data Visualization]({% slug script_filesfor_datavisualization_widgets %})
++ [List of Script Files for the Frameworks and Widgets for Mobile Applications]({% slug script_filesfor_hybridui_widgets %})
++ [List of Script Files for the Server-Side Wrappers]({% slug script_filesfor_serverside_wrappers %})

@@ -304,6 +304,31 @@ The column(s) which filters should be cleared.
 
 ```
 
+### enable
+
+Gets or sets the disabled state of the cells in the range.
+
+##### value `Boolean` *optional*
+
+True to make the cell enabled; false to disable it.
+
+#### Returns
+
+`Boolean` the current disabled state of the top-left cell of the range.
+
+#### Example
+
+```
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
+    $("#spreadsheet").kendoSpreadsheet();
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var sheet = spreadsheet.activeSheet();
+    sheet.range("A1").value("disabled");
+    sheet.range("A1").enable(false);
+</script>
+```
+
 ### fillFrom
 
 Fills a range with values inferred from a source range.  This method employs some heuristics similar to what Excel's auto-filling algorithm does when you select a range of cells and drag the bottom-right handle.  The range to be filled is the current object, and you must pass a source range containing data as first argument.

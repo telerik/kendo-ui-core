@@ -1492,8 +1492,12 @@ div.k-filebrowser-dropzone em
     border-radius: 0 @main-border-radius @main-border-radius 0;
 }
 
+.k-toolbar .k-button-group > .k-group-end {
+    border-radius: @main-border-radius;
+}
+
 .k-tool.k-group-end,
-.k-toolbar .k-button-group .k-group-end,
+.k-toolbar .k-button-group .k-button + .k-group-end,
 .k-toolbar .k-split-button .k-split-button-arrow
 {
     border-radius: 0 @main-border-radius @main-border-radius 0;
@@ -1856,6 +1860,16 @@ html .km-pane-wrapper .km-widget,
 .km-pane-wrapper .k-filter-menu .k-button[type=reset]:active
 {
     background-color: darken(red, 20);
+}
+
+.km-pane-wrapper .k-pager-numbers .k-link,
+.km-pane-wrapper .k-pager-numbers .k-state-selected,
+.km-pane-wrapper .k-pager-wrap > .k-link {
+    border-radius: 0;
+}
+
+.km-pane-wrapper .k-pager-nav.k-pager-first {
+    border-radius: 4px 0 0 4px;
 }
 
 /* /Column Menu */

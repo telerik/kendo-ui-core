@@ -142,7 +142,7 @@ Use it to set the Id of the parent ComboBox widget.
 
 ### cascadeFromField `String`
 
-Defines the field to be used to filter the data source. If not defined the [parent's dataValueField option will be used](/api/web/combobox#configuration-dataValueField).
+Defines the field to be used to filter the data source. If not defined the [parent's dataValueField option will be used](/api/javascript/ui/combobox#configuration-dataValueField).
 [Help topic showing how cascading functionality works](/web/combobox/cascading)
 
 #### Example
@@ -601,6 +601,8 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
 
 Enables the virtualization feature of the widget.
 
+#### Example - ComboBox with virtualized list
+
     <input id="orders" style="width: 400px" />
     <script>
         $(document).ready(function() {
@@ -621,6 +623,76 @@ Enables the virtualization feature of the widget.
                 }
             });
         });
+    </script>
+
+#### Example - ComboBox widget with declarative virtualization config
+
+    <div class="demo-section k-header">
+        <h4>Search for shipping name</h4>
+        <input id="orders" style="width: 400px"
+               data-role="combobox"
+               data-bind="value: order, source: source"
+               data-text-field="ShipName"
+               data-value-field="OrderID"
+               data-filter="contains"
+               data-virtual="{itemHeight:26,valueMapper:orderValueMapper}"
+               data-height="520"
+               />
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            var model = kendo.observable({
+                    order: "10249",
+              source: new kendo.data.DataSource({
+                type: "odata",
+                transport: {
+                  read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                },
+                schema: {
+                  model: {
+                    fields: {
+                      OrderID: { type: "number" },
+                      Freight: { type: "number" },
+                      ShipName: { type: "string" },
+                      OrderDate: { type: "date" },
+                      ShipCity: { type: "string" }
+                    }
+                  }
+                },
+                pageSize: 80,
+                serverPaging: true,
+                serverFiltering: true
+              })
+            });
+
+
+            kendo.bind($(document.body), model);
+        });
+
+        function orderValueMapper(options) {
+            $.ajax({
+              url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+              type: "GET",
+              dataType: "jsonp",
+              data: convertValues(options.value),
+              success: function (data) {
+                options.success(data);
+              }
+            })
+        }
+
+        function convertValues(value) {
+            var data = {};
+
+            value = $.isArray(value) ? value : [value];
+
+            for (var idx = 0; idx < value.length; idx++) {
+                data["values[" + idx + "]"] = value[idx];
+            }
+
+            return data;
+        }
     </script>
 
 ### virtual.itemHeight `Number`*(default: null)*
@@ -769,7 +841,7 @@ A jQuery object of the visible input element, where the user types.
     var combobox = $("#combobox").data("kendoComboBox");
 
     var input = combobox.input;
-    <script>
+    </script>
 
 ### options `Object`
 An object, which holds the options of the widget.
@@ -783,7 +855,7 @@ An object, which holds the options of the widget.
     var combobox = $("#combobox").data("kendoComboBox");
 
     var options = combobox.options;
-    <script>
+    </script>
 
 ### list `jQuery`
 A jQuery object of the drop-down list element.
@@ -797,7 +869,7 @@ A jQuery object of the drop-down list element.
     var combobox = $("#combobox").data("kendoComboBox");
 
     var list = combobox.list;
-    <script>
+    </script>
 
 ### ul `jQuery`
 A jQuery object of the `ul` element, which holds the available options.
@@ -811,7 +883,7 @@ A jQuery object of the `ul` element, which holds the available options.
     var combobox = $("#combobox").data("kendoComboBox");
 
     var ul = combobox.ul;
-    <script>
+    </script>
 
 ## Methods
 
@@ -1284,7 +1356,7 @@ Fired when the value of the widget is changed by the user.
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
 > **Important:** The event is not fired when the value of the widget is changed from code.
-> **Important:** The event is not fired when the value of the widget is changed programmatically. If you need to handle changes made by API, wire the [cascade](/api/web/combobox#events-cascade) event.
+> **Important:** The event is not fired when the value of the widget is changed programmatically. If you need to handle changes made by API, wire the [cascade](/api/javascript/ui/combobox#events-cascade) event.
 
 #### Event Data
 

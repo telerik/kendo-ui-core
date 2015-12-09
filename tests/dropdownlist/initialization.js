@@ -344,9 +344,11 @@
             headerTemplate: "<div>Header</div>"
         });
 
-        var optionHeader = dropdownlist.list.children(":first");
+        var optionHeader = dropdownlist.list.children(":first")[0];
 
-        equal(optionHeader[0].outerHTML, '<div class="k-list-optionlabel k-state-selected k-state-focused">SELECT...</div>');
+        ok(optionHeader.id)
+        equal(optionHeader.className, "k-list-optionlabel k-state-selected k-state-focused");
+        equal(optionHeader.innerHTML, "SELECT...");
     });
 
     test("optionLabel template supports complex object", function() {
@@ -356,9 +358,11 @@
             headerTemplate: "<div>Header</div>",
         });
 
-        var optionHeader = dropdownlist.list.children(":first");
+        var optionHeader = dropdownlist.list.children(":first")[0];
 
-        equal(optionHeader[0].outerHTML, '<div class="k-list-optionlabel k-state-selected k-state-focused">Select...</div>');
+        ok(optionHeader.id)
+        equal(optionHeader.className, "k-list-optionlabel k-state-selected k-state-focused");
+        equal(optionHeader.innerHTML, "Select...");
     });
 
     test("defining input template", function() {

@@ -1,14 +1,15 @@
 ---
-title: Show only if text exceeds certain length
-page_title: Show only if text exceeds certain length
-description: Show only if text exceeds certain length
+title: Show Only If Text Exceeds Certain Length
+page_title: Show Only If Text Exceeds Certain Length | Kendo UI Tooltip Widget
+description: "Learn how to show a Kendo UI Tooltip only if the target text exceeds a certain length."
+slug: howto_showonlyiftextexceedscertainlength_tooltip
 ---
 
-# Show only if text exceeds certain length
+# Show Only If Text Exceeds Certain Length
 
-The following runnable sample demonstrates how to show the Tooltip only if the target's text exceeds certain length
+The example below demonstrates how to show a Kendo UI Tooltip only if the text of the target exceeds a certain length.
 
-#### Example:
+###### Example
 
 ```html
     <div id="content" style="width: 500px">
@@ -70,3 +71,11 @@ The following runnable sample demonstrates how to show the Tooltip only if the t
       });
     </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Tooltip:
+
+* [JavaScript API Reference](/api/javascript/ui/tooltip)
+* [How to Calculate Tooltip Content Width]({% slug howto_calculatetooltipcontentlength_tooltip %})
+* [How to Show Only If Text Overflows with Ellipsis]({% slug howto_showonlyiftextoverflowswithellipsis_tooltip %})
