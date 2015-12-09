@@ -88,13 +88,54 @@
         equal(dropdownlist.selectedIndex, 1);
     });
 
-    test("select next item if starts with same character", 1, function() {
+    test("selects next item if starts with same character", 1, function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: ["text1", "text2", "text3"]
         });
 
         input.press("t");
         input.press("t");
+
+        equal(dropdownlist.selectedIndex, 2);
+    });
+
+    test("selects a specific item if typed matches", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: ["text1", "text2", "text3", "text4", "text5", "text6"]
+        });
+
+        input.press("t");
+        input.press("e");
+        input.press("x");
+        input.press("t");
+        input.press("4");
+
+        equal(dropdownlist.selectedIndex, 3);
+    });
+
+    test("selects a specific item after loop", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: ["tt1", "t", "ttt", "tt3", "tt", "tttt"]
+        });
+
+        input.press("t");
+        input.press("t");
+        input.press("1");
+
+        equal(dropdownlist.selectedIndex, 0);
+    });
+
+    test("stays on the same item if changed char but still in loop", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: ["text1", "text2", "text3"]
+        });
+
+        input.press("t"); //selects text2
+        input.press("t"); //selects text3
+        input.press("e");
+        input.press("x");
+        input.press("t");
+        input.press("2"); //resulting text is 'ttext2'
 
         equal(dropdownlist.selectedIndex, 2);
     });
@@ -308,6 +349,24 @@
         ok(true);
     });
 
+    test("searching always start from next item", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: [
+                { text: "Black", value: "1" },
+                { text: "Orange", value: "2" },
+                { text: "Grey", value: "3" }
+            ],
+            dataTextField: "text",
+            dataValueField: "value",
+            index: 2
+        });
+
+        input.press("z");
+        input.press("z");
+
+        ok(true);
+    });
+
     test("search honors optionLabel header", 1, function() {
         var dropdownlist = new DropDownList(input, {
             optionLabel: "Select item...",
@@ -319,6 +378,24 @@
         });
 
         input.press("b");
+    });
+
+    test("search honors optionLabel header", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            delay: 0,
+            optionLabel: "Select",
+            dataSource: ["Animal", "Bat", "Cat"],
+        });
+
+        input.press("a");
+        dropdownlist._word = "";
+
+        input.press("c");
+        dropdownlist._word = "";
+
+        input.press("a");
+
+        equal(dropdownlist.value(), "Animal");
     });
 
     asyncTest("filter items on user input", 2, function() {
