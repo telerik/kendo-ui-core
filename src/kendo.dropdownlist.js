@@ -255,6 +255,8 @@ var __meta__ = { // jshint ignore:line
             var hasOptionLabel = !!that.optionLabel[0];
             var optionLabel = that.options.optionLabel;
 
+            if (index === null) { return index; }
+
             if (index === undefined) {
                 dataItem = that.listView.selectedDataItems()[0];
             } else {
@@ -756,6 +758,8 @@ var __meta__ = { // jshint ignore:line
         _click: function (e) {
             var item = e.item || $(e.currentTarget);
 
+            e.preventDefault();
+
             if (this.trigger("select", { item: item })) {
                 this.close();
                 return;
@@ -893,13 +897,13 @@ var __meta__ = { // jshint ignore:line
         },
 
         _lastItem: function() {
-            this.optionLabel.removeClass("k-state-focused");
+            this._resetOptionLabel();
             this.listView.focusLast();
         },
 
         _nextItem: function() {
             if (this.optionLabel.hasClass("k-state-focused")) {
-                this.optionLabel.removeClass("k-state-focused");
+                this._resetOptionLabel();
                 this.listView.focusFirst();
             } else {
                 this.listView.focusNext();
@@ -913,7 +917,7 @@ var __meta__ = { // jshint ignore:line
 
             this.listView.focusPrev();
             if (!this.listView.focus()) {
-                this.optionLabel.addClass("k-state-focused");
+                this._focus(this.optionLabel);
             }
         },
 
@@ -940,6 +944,10 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _resetOptionLabel: function(additionalClass) {
+            this.optionLabel.removeClass("k-state-focused" + (additionalClass || "")).removeAttr("id");
+        },
+
         _focus: function(candidate) {
             var listView = this.listView;
             var optionLabel = this.optionLabel;
@@ -954,15 +962,19 @@ var __meta__ = { // jshint ignore:line
                 return candidate;
             }
 
-            optionLabel.removeClass("k-state-focused");
+            this._resetOptionLabel();
 
             candidate = this._get(candidate);
 
             listView.focus(candidate);
 
             if (candidate === -1) {
-                //TODO: ARIA
-                optionLabel.addClass("k-state-focused");
+                optionLabel.addClass("k-state-focused")
+                           .attr("id", listView._optionID);
+
+                this._focused.add(this.filterInput)
+                    .removeAttr("aria-activedescendant")
+                    .attr("aria-activedescendant", listView._optionID);
             }
         },
 
@@ -974,7 +986,6 @@ var __meta__ = { // jshint ignore:line
             that.listView.select(candidate);
 
             if (!keepState && that._state === STATE_FILTER) {
-                that.listView.filter(false);
                 that._state = STATE_ACCEPT;
             }
 
@@ -986,7 +997,6 @@ var __meta__ = { // jshint ignore:line
         _selectValue: function(dataItem) {
             var that = this;
             var optionLabel = that.options.optionLabel;
-            var labelElement = that.optionLabel;
             var idx = that.listView.select();
 
             var value = "";
@@ -997,7 +1007,7 @@ var __meta__ = { // jshint ignore:line
                 idx = -1;
             }
 
-            labelElement.removeClass("k-state-focused k-state-selected");
+            this._resetOptionLabel(" k-state-selected");
 
             if (dataItem) {
                 text = dataItem;
@@ -1006,8 +1016,10 @@ var __meta__ = { // jshint ignore:line
                     idx += 1;
                 }
             } else if (optionLabel) {
-                that._focus(labelElement.addClass("k-state-selected"));
+                that._focus(that.optionLabel.addClass("k-state-selected"));
+
                 text = that._optionLabelText();
+
                 if (typeof optionLabel === "string") {
                     value = "";
                 } else {

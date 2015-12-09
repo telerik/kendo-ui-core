@@ -1,7 +1,8 @@
 ---
 title: Charts
-page_title: Charts
-description: "Tips and tricks how to make Kendo UI chart widgets accessible."
+page_title: Charts | Kendo UI Accessibility Support
+description: "Learn more tips and tricks how to make Kendo UI Charts accessible."
+slug: charts_accessibility_support
 position: 7
 ---
 
@@ -9,7 +10,7 @@ position: 7
 
 This article provides five practical tips (with code samples and illustrative videos) for making Kendo UI charts and graphs more accessible. These are things you can quickly and easily do in your applications to make them easier to access by disabled users through assistive technologies which interact with your content.
 
-## Charts Accessibility Case
+## Accessibility Case
 
 In the realm of Accessibility, the most oft-mentioned guidelines and regulations are WAI_ARIA, Section 508 and the W3C Web Content Accessibility Guidelines (WCAG) 2.0. Section 508 makes up the law that governs the creation of accessible software for government entities in the United States, while WCAG (along with WAI-ARIA) contains a comprehensive set of guidelines for creating accessible websites and applications.
 
@@ -23,7 +24,7 @@ and WCAG Guideline 1.1:
 
 Providing text equivalents to non-text content is a key tenant of accessibility. Content like images, animations, video, and audio are great, but these are impossible for screen readers and other assistive technologies to parse. And if they cannot be parsed by these technologies, they cannot be enjoyed by disabled users. Thus, Section 508 and WCAG both require that all non-decorative non-text content be made accessible to assistive technologies.
 
-## Accessibility and Data Visualisation Components
+## Data Visualization
 
 Kendo UI charts and graphs definitely fit the bill of "non-text content". By definition, Kendo UI allows you to create visual charts and graphs that enhance textual or tabular data. These cannot possibly be accessible, out-of-the-box, right? 
 
@@ -39,9 +40,9 @@ Of course, if you watched the video, you may have also noticed that the screen r
 
 In the next section look at five steps you can take to improve the accessibility of your charts. Each takes only minutes to add to your apps, and you can adopt any or all of these as long as they make sense. You might as well find that not only do these steps make your charts more accessible to disabled users, but also that the improvements enhance the value of your content for all of your users regardless of their abilities.
 
-## Five Tips for Accessible Charts
+## Tips for Accessible Charts
 
-### 1. Provide a Text Description of the Chart
+### 1. Provide Text Description
 
 The simplest thing you can do is add a pure-text description of your chart to the page. Here is an example of the markup for such a chart:
 
@@ -110,7 +111,7 @@ Here is a [brief video](http://www.youtube.com/watch?v=QyB3sTVRd3E&feature=youtu
 
 In this example the description is detailed, but it might as well not be. The goal is to provide disabled users with the key information found in your chart, which will vary depending on the data.
 
-### 2. Add `role` and `title` Attributes to the Chart Element
+### 2. Add `role` and `title` to Chart Element
 
 Another simple step you can take is to add a WAI-ARIA role and a title to the `div` that contains your chart. This can be as simple as doing the following:
 
@@ -118,7 +119,7 @@ Another simple step you can take is to add a WAI-ARIA role and a title to the `d
 
 In the first video, even though VoiceOver could read the chart title and legend to it, it could not select the container, or even tell you were interacting with an HTML element. By adding a role of `img` and a title, VoiceOver can do both, which you can see in the first 15 seconds of the video for step 1.
 
-### 3. Add `title` and `desc` Elements to the Root of the `svg` Element
+### 3. Add `title` and `desc` to the Root of the `svg` Element
 
 The next step we can take is to manually add title and description elements to the SVG element created by Kendo UI. These elements can bev leveraged by screen readers as fallback content to be read to disabled users.
 
@@ -202,7 +203,7 @@ The result is a simple, accessible table based on the same data as the chart its
 
 For a complete working sample of this example, see [http://jsbin.com/odowud/15](http://jsbin.com/odowud/15/edit).
 
-### 5. Create Off-screen Tables; Allow Tables and Charts to be Swapped On-screen
+### 5. Create Off-Screen Tables and Swapped On-Screen Tables and Charts
 
 Generating a data table is nice, but you may not want to display the raw data on-screen with the chart for all users. In that case, you have two options. You can either 1) place the table off-screen, invisible to sighted users, but available to screen readers, or 2) provide all users with the ability to switch between the chart and the table.
 
@@ -254,3 +255,14 @@ SVG (the technology used to power Kendo UI charts) is pretty accessible out of t
 - [WCAG 2.0](http://www.w3.org/TR/WCAG20/)
 - [W3C SVG Accessibility Guidelines](http://www.w3.org/TR/SVG-access/)
 - [HTML5 Accessibility: SVG Text (Paciello Group Blog Post)](http://www.paciellogroup.com/blog/2011/08/html5-accessibility-chops-interactive-image-example/)
+
+## See Also
+
+Other articles on Kendo UI Accessibility support:
+
+* [Overview of Web Accessibility Standards]({% slug overview_accessibility_support_kendoui %})
+* [High-Contrast Theme]({% slug high_contrast_theme_accessibility_support %})
+* [Keyboard Shortcuts]({% slug keyboard_shortcuts_accessibility_support %})
+* [Right-to-Left Languages]({% slug right_toleft_languages_accessibility_support %})
+* [Section 508]({% slug section508_accessibility_support %})
+* [WAI-ARIA]({% slug wai_aria_accessibility_support %})

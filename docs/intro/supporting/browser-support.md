@@ -1,8 +1,9 @@
 ---
 title: Web Browser and Operating System Support
-page_title: Web Browser and Operating System Support
+page_title: Web Browser and Operating System Support | Kendo UI Installation
 previous_url: /technical-requirements.html, /getting-started/technical-requirements, /browsers-support, /intro/browser-support
 description: "Browsers and operating systems supported by Kendo UI widgets and frameworks."
+slug: wbe_browserand_operating_system_support
 position: 1
 ---
 
@@ -119,3 +120,15 @@ To ensure the best performance of your project, make sure that you:
  * Always use an up-to-date browser version
  * Check **Disable Script Debugging** from your browser configuration options
  * Activate Caching in Internet Explorer
+
+## See Also
+
+Other articles on getting started with Kendo UI:
+
+* [Getting Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Kendo UI Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
+* [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
+* [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
+* [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
+* [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})

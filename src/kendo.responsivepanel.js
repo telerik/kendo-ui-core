@@ -33,7 +33,7 @@ var __meta__ = { // jshint ignore:line
             this.element
                 .addClass("k-rpanel k-rpanel-" + this.options.orientation + " " + this._guid);
 
-            this._resizeHandler = proxy(this.resize, this, false);
+            this._resizeHandler = proxy(this.resize, this, true);
             $(window).on("resize" + NS, this._resizeHandler);
         },
         _mediaQuery:
@@ -101,7 +101,9 @@ var __meta__ = { // jshint ignore:line
             CLOSE
         ],
         _resize: function() {
-            this.element.removeClass("k-rpanel-animate");
+            this.element.removeClass("k-rpanel-animate k-rpanel-expanded");
+
+            $(document.documentElement).off(ACTIVATE_EVENTS, this._closeHandler);
         },
         _toggleButtonClick: function(e) {
             e.preventDefault();

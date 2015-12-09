@@ -14,7 +14,7 @@ This tutorial shows how to configure an ASP.NET MVC6 project that enables you to
 
 ## Prerequisites 
 
-Make sure you have the [Microsoft ASP.NET (Beta8)](http://docs.asp.net/en/latest/getting-started/installing-on-linux.html) installed.
+Make sure you have the [Microsoft ASP.NET (RC1)](http://docs.asp.net/en/latest/getting-started/installing-on-linux.html) installed.
 
 ## Create an ASP.NET MVC 6 Website
 
@@ -111,7 +111,7 @@ Please skip this step if you are configuring an existing project. We will use [Y
 
         "dependencies": {
             ...
-            "Kendo.Mvc": "2015.3.1026"
+            "Kendo.Mvc": "2015.3.1120"
         }
 
 **Step 2.** Navigate to the project folder and restore the packages again:

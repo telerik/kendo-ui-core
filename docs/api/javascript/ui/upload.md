@@ -1030,29 +1030,6 @@ The request will be in UNSENT state.
         }
     </script>
 
-#### Example - Add request header
-    <input type="file" name="files" id="photos" />
-    <script>
-        $("#photos").kendoUpload({
-            async: {
-                saveUrl: "save",
-                removeUrl: "remove"
-            },
-            upload: onUpload
-        });
-
-        function onUpload(e) {
-            var xhr = e.XMLHttpRequest;
-            if (xhr) {
-                xhr.addEventListener("readystatechange", function (e) {
-                    if (xhr.readyState == 1 /* OPENED */) {
-                        xhr.setRequestHeader("X-Foo", "Bar");
-                    }
-                });
-            }
-        }
-    </script>
-
 #### Example - Replace payload
     <input type="file" name="files" id="photos" />
     <script>

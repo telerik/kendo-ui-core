@@ -1,7 +1,8 @@
 ---
 title: Bundle Support for Kendo UI Components
-page_title: Bundle Support for Kendo UI Components
-description: "List of Kendo UI components supported by Kendo UI Core, Kendo UI Professional, UI for ASP .NET MVC, UI for JSP, and UI for PHP"
+page_title: Bundle Support for Kendo UI Components | Kendo UI Installation
+description: "Learn which are the Kendo UI components supported by Kendo UI Core, Kendo UI Professional, UI for ASP .NET MVC, UI for JSP, and UI for PHP."
+slug: bundle_supportfor_kendoui_components
 position: 2
 ---
 
@@ -110,3 +111,15 @@ The following table lists all Kendo UI components with regard to their support b
 | [Templates](http://demos.telerik.com/kendo-ui/templates/index)        | Yes | Yes | Yes           |
 | [ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder)        | Yes | Yes | Yes           |
 | **Official Support**                                                  | No  | Yes | Yes           |
+
+## See Also
+
+Other articles on getting started with Kendo UI:
+
+* [Getting Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Kendo UI Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
+* [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
+* [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
+* [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
+* [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})

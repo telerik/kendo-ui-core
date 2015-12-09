@@ -1,15 +1,15 @@
 ---
-title: Set the widget mask using a custom MVVM binding
-page_title: Set the widget mask using a custom MVVM binding
-description: Set the widget mask using a custom MVVM binding
+title: Customize Masks through MVVM Binding
+page_title: Customize Masks through MVVM Binding | Kendo UI MaskedTextBox Widget
+description: "Learn how to set the Kendo UI MaskedTextBox masks using a custom MVVM binding."
+slug: howto_customize_masks_through_mvvmbinding_mvvm_maskedtextbox
 ---
 
-# Set the widget mask using a custom MVVM binding
+# Customize Masks through MVVM Binding
 
+The example below demonstrates how to implement [a custom MVVM binding](http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/custom) to set the widget mask option.
 
-The example below demonstrates how to implement [a custom MVVM binding](http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/custom) to set the widget mask option
-
-#### Example:
+###### Example
 
 ```html
 <div id="example">
@@ -49,3 +49,12 @@ The example below demonstrates how to implement [a custom MVVM binding](http://d
     </script>
 </div>
 ```
+
+## See Also
+
+Other articles on Kendo UI MaskedTextBox:
+
+* [JavaScript API Reference](/api/javascript/ui/maskedtextbox)
+* [How to Show Custom Placeholder on Blur]({% slug howto_show_custom_placeholderon_blur_maskedtextbox %})
+* [How to Use Custom Directive to Set Model Value]({% slug howto_use_raw_methodtoset_modelvalue_angularjs_maskedtextbox %})
+* [How to Use Custom MVVM Binding to Set Model Value]({% slug howto_use_custommvvm_bindingto_setmodel_value_maskedtextbox %})

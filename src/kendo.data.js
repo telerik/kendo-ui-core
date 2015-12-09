@@ -1016,7 +1016,7 @@ var __meta__ = { // jshint ignore:line
                         b = new Date(+date[1]);
                     } else if (ignore) {
                         b = "'" + b.toLowerCase() + "'";
-                        a = "(" + a + " || '').toLowerCase()";
+                        a = "((" + a + " || '')+'').toLowerCase()";
                     } else {
                         b = "'" + b + "'";
                     }
@@ -1024,7 +1024,7 @@ var __meta__ = { // jshint ignore:line
 
                 if (b.getTime) {
                     //b looks like a Date
-                    a = "(" + a + "?" + a + ".getTime():" + a + ")";
+                    a = "(" + a + "&&" + a + ".getTime?" + a + ".getTime():" + a + ")";
                     b = b.getTime();
                 }
             }
@@ -1145,6 +1145,18 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 return a + ".indexOf('" + b + "') == -1";
+            },
+            isempty: function(a) {
+                return a + " === ''";
+            },
+            isnotempty: function(a) {
+                return a + " !== ''";
+            },
+            isnull: function(a) {
+                return a + " === null || " + a + " === undefined";
+            },
+            isnotnull: function(a) {
+                return a + " !== null && " + a + " !== undefined";
             }
         };
     })();
@@ -1245,7 +1257,10 @@ var __meta__ = { // jshint ignore:line
         isgreaterthanorequalto: "gte",
         greaterthanequal: "gte",
         ge: "gte",
-        notsubstringof: "doesnotcontain"
+        notsubstringof: "doesnotcontain",
+        isnull: "isnull",
+        isempty: "isempty",
+        isnotempty: "isnotempty"
     };
 
     function normalizeOperator(expression) {
@@ -1285,6 +1300,71 @@ var __meta__ = { // jshint ignore:line
     }
 
     Query.normalizeFilter = normalizeFilter;
+
+    function compareDescriptor(f1, f2) {
+        if (f1.logic || f2.logic) {
+            return false;
+        }
+
+        return f1.field === f2.field && f1.value === f2.value && f1.operator === f2.operator;
+    }
+
+    function normalizeDescriptor(filter) {
+        filter = filter || {};
+
+        if (isEmptyObject(filter)) {
+            return { logic: "and", filters: [] };
+        }
+
+        return normalizeFilter(filter);
+    }
+
+    function fieldComparer(a, b) {
+        if (b.logic || (a.field > b.field)) {
+            return 1;
+        } else if (a.field < b.field) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+
+    function compareFilters(expr1, expr2) {
+        expr1 = normalizeDescriptor(expr1);
+        expr2 = normalizeDescriptor(expr2);
+
+        if (expr1.logic !== expr2.logic) {
+            return false;
+        }
+
+        var f1, f2;
+        var filters1 = (expr1.filters || []).slice();
+        var filters2 = (expr2.filters || []).slice();
+
+        if (filters1.length !== filters2.length) {
+            return false;
+        }
+
+        filters1 = filters1.sort(fieldComparer);
+        filters2 = filters2.sort(fieldComparer);
+
+        for (var idx = 0; idx < filters1.length; idx++) {
+            f1 = filters1[idx];
+            f2 = filters2[idx];
+
+            if (f1.logic && f2.logic) {
+                if (!compareFilters(f1, f2)) {
+                    return false;
+                }
+            } else if (!compareDescriptor(f1, f2)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    Query.compareFilters = compareFilters;
 
     function normalizeAggregate(expressions) {
         return isArray(expressions) ? expressions : [expressions];

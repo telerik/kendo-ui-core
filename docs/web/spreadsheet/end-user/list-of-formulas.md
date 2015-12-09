@@ -116,9 +116,10 @@ position: 2
 | HLOOKUP                   | Looks for a matching value in the first row of a given table, and returns the value of the indicated row 
 | HOUR                      | Converts a serial number to an hour
 | IF                        | Returns a value, if a condition is true
+| IFERROR                   | Returns a specified value if a forumla evaluates to an error; otherwise, returns the result of the formula
 | INDEX                     | Returns a value or a reference to a value fromwithin a table or range
 | INDIRECT                  | Returns a reference indicated by a text value    
-| INT                       | Rounds a number down to the nearest integer   
+| INT                       | Rounds a number down to the nearest integer
 | INTERCEPT                 | Returns the intercept of the linear regression line for the given data   
 | ISBLANK                   | Returns `True` if the referenced cell is blank; else returns `False`
 | ISERR                     | Returns `True` if the value is any error except `#N/A`; else returns `False`
@@ -203,6 +204,8 @@ position: 2
 | REPT                      | Repeats text a specified number of times
 | RIGHT                     | Returns the righmost characters from a text value
 | ROMAN                     | Converts Arabic numbers to Roman as text
+| ROUNDDOWN                 | Rounds a number down, towards zero, to the number of digits specified by `digits`
+| ROUNDUP                   | Rounds a number up, away from 0 (zero), to the number of digits specified by `digits`
 | ROW                       | Returns the row number(s) of a reference
 | ROWS                      | Returns the number of rows in a reference
 | RSQ                       | Returns the square of the `Pearson` product moment correlation coefficient
@@ -260,7 +263,7 @@ position: 2
 | YEAR                      | Converts a serial number to a year
 | YEARFRAC                  | Extracts the number of years (including fractional part) between two dates
 
-For more information on how to create formulas and what their syntax is, go to the list of [Excel functions](https://support.office.com/en-GB/article/Excel-functions-by-category-5f91f4e9-7b42-46d2-9bd1-63f26a86c0eb?CorrelationId=343eb30b-8175-4479-be19-1310dd12334f).
+For more information on how to create formulas and what their syntax is, see the list of [Excel functions](https://support.office.com/en-GB/article/Excel-functions-by-category-5f91f4e9-7b42-46d2-9bd1-63f26a86c0eb?CorrelationId=343eb30b-8175-4479-be19-1310dd12334f).
 
 ## See Also
 

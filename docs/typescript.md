@@ -11,6 +11,7 @@ Kendo UI provides a [TypeScript](http://www.typescriptlang.org/) definitions fil
 
 ## Installation
 
+### From redistributable package
 Each Kendo UI distribution includes a *typescript* directory which contains a `.d.ts` file i.e. `kendo.all.d.ts`. Copy that file in your project.
 In your TypeScript file add a reference to that file:
 
@@ -20,6 +21,12 @@ You can optionally include the latest jQuery TypeScript definition file as well:
 
     /// <reference path="jquery-1.8.d.ts" />
     /// <reference path="kendo.all.d.ts" />
+
+### As NuGet package
+The Kendo UI TypeScript definitions are available on nuget.org as
+[kendo-ui.TypeScript.DefinitelyTyped](https://www.nuget.org/packages/kendo-ui.TypeScript.DefinitelyTyped/)
+
+The package is maintained via the [DefinitelyTyped](http://definitelytyped.org/) project.
 
 ## Features
 

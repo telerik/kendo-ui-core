@@ -1,36 +1,26 @@
 ---
-title: Scroll the TabStrip with the keyboard
-page_title: Scroll the TabStrip with the keyboard
-description: Scroll the TabStrip with the keyboard
+title: Scroll TabStrip with Keyboard
+page_title: Scroll TabStrip with Keyboard | Kendo UI TabStrip Widget
+description: "Learn how to vertically scroll the Knedo UI TabStrip widget using keyboard navigation."
+slug: howto_scrolltabstripwithkeyboard_tabstrip
 ---
 
-# Scroll the TabStrip with the keyboard
+# Scroll TabStrip with Keyboard
 
-Keyboard navigation requires an element to be focused. Non-form elements normally do not receive focus.
-To overcome this, the TabStrip wrapper `<div>` has a `tabindex` attribute.
+Keyboard navigation requires an element to be focused. Non-form elements normally do not receive focus. To overcome this, the TabStrip `<div>` wrapper has a `tabindex` attribute. Logically, `Left Arrow` and `Right Arrow` keys switch the active tab. `Up Arrow` and `Down Arrow` keys do the same as this is what accessibility standards require. When the TabStrip [wrapper](/framework/widgets/wrapper-element) has the focus, and its active content container is scrollable, then the `Up Arrow` and `Down Arrow` keys do not scroll the container even if the widget ignores these keystrokes. This is because the focused element is a parent of the scrollable one and the browser has no idea that it is supposed to scroll the child element in this situation. 
 
-LEFT and RIGHT arrows switch the active tab, which looks logical to everybody. UP and DOWN arrows also do this,
-which may not seem logical to everybody, but this is what accessibility standards require.
+There is a way to make the scrollable content container become focused: add a `tabindex` attribute to it. Then, scrolling with the `Up Arrow` and `Down Arrow` keys start working, but TabStrip keyboard navigation completely stops working. This is because Kendo UI TabStrip handles key events only if its wrapper is the focused element. The idea behind this behavior is that the widget is not supposed to interfere with the keyboard navigation of nested form elements, child widgets, etc. 
 
-When the TabStrip [wrapper](/framework/widgets/wrapper-element) has the focus, and its active content container is scrollable, then UP and DOWN arrows will not scroll the container
-even if the TabStrip ignores these keystrokes. This is because the focused element is a parent of the scrollable one and the browser
-has no idea that it should scroll the child element in this situation. For example, what should the browser do if there are multiple scrollable child elements?
+To vertically scroll the TabStrip content containers with the help of the keyboard, do the following:
 
-There is a way to make the scrollable content container receive focus - add a `tabindex` attribute to it.
-Then scrolling with the UP and DOWN arrows will start working, but TabStrip keyboard navigation will stop working completely.
-This is because the TabStrip handles key events only if its wrapper is the focused element.
-The idea behind this behavior is that the TabStrip should not interfere with the keyboard navigation of nested form elements, child widgets, etc.
-
-In conclusion, if you want to vertically scroll the TabStrip content containers with the keyboard, you have two options:
-
-* sacrifice the widget's keyboard navigation altogether, by removing the wrapper's `tabindex` after widget initialization.
-In this way the TabStrip will not be able to receive focus and capture keyboard events.
+1. Drop the keyboard navigation of the TabStrip altogether by removing the wrapper's `tabindex` after widget initialization. In this way the TabStrip is not able to receive focus and capture keyboard events.
 
         $("#tabstrip").kendoTabStrip();
         $("#tabstrip").removeAttr("tabindex");
-* scroll the container with Javascript, as the example below demonstrates
+        
+2. Scroll the container using Javascript, as the example below demonstrates.
 
-#### Example:
+###### Example
 
 ```html
     <style>
@@ -97,3 +87,12 @@ In this way the TabStrip will not be able to receive focus and capture keyboard 
         });
     </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI TabStrip:
+
+* [JavaScript API Reference](/api/javascript/ui/tabstrip)
+* [How to Display Buttons at the Bottom]({% slug howto_displaybuttonsatthebottom_tabstrip %})
+* [How to Expand to 100% Height and Auto-Resize]({% slug howto_expandto100percentheightautoresize_tabstrip %})
+* [How to Initialize the Grid in Kendo UI TabStrip]({% slug initialize_thegrid_tabstrip_widget %})

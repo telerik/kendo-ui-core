@@ -1,14 +1,15 @@
 ---
-title: Select/deselect all items
-page_title: Select/deselect all items
-description: Select/deselect all items
+title: Select or Deselect All Items
+page_title: Select or Deselect All Items | Kendo UI MultiSelect Widget
+description: "Learn how to select or deselect all items in the Kendo UI MultiSelect widget."
+slug: howto_select_and_deselect_allitems_multiselect
 ---
 
-# Select/deselect all items
+# Select or Deselect All Items
 
-The example below demonstrates how to select/deselect all items using external buttons.
+The example below demonstrates how to select or deselect all items in the Kendo UI MultiSelect widget by using external buttons.
 
-#### Example:
+###### Example
 
 ```html
     <div id="example" role="application">
@@ -79,3 +80,21 @@ The example below demonstrates how to select/deselect all items using external b
       </script>
     </div>
 ```
+
+## See Also
+
+Other articles on Kendo UI MultiSelect:
+
+* [JavaScript API Reference](/api/javascript/ui/multiselect)
+* [How to Bind Values to Template]({% slug howto_bind_values_totemplate_multiselect %})
+* [How to Cascade from DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %})
+* [How to Create Cascading MultiSelects]({% slug howto_create_cascading_widgets_multiselect %})
+* [How to Create Scrollable Data Items]({% slug howto_create_scrollable_data_items_multiselect %})
+* [How to Filter Values in Widgets Sharing the Same Data]({% slug howto_filter_valuesin_widgetswith_shared_data_multiselect %})
+* [How to Preselect Items on Load in AngularJS]({% slug howto_preselect_itemson_load_angular_multiselect %})
+* [How to Preselect Items Using MVVM Binding]({% slug howto_preselect_items_byusing_mvvm_binding_multiselect %})
+* [How to Reorder Selected Items]({% slug howto_reorder_selected_items_multiselect %})
+* [How to Select All Values with Single Selection]({% slug howto_select_allvalues_witha_single_selection_multiselect %})
+* [How to Select the First Item on TAB]({% slug howto_select_thefirst_itemon_tab_multiselect %})
+* [How to Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
+* [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})

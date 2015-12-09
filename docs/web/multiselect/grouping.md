@@ -1,10 +1,20 @@
 ---
 title: Grouping
-page_title: Kendo UI MultiSelect Grouping
-description: This document provides information how to configure grouping in Kendo UI MultiSelect
-position: 3
+page_title: Grouping | Kendo UI MultiSelect Widget
+description: "Learn how to to configure grouping in Kendo UI MultiSelect, DropDownList, ComboBox, and AutoComplete widgets."
+slug: grouping_kendoui_multiselect_widget
+position: 2
 ---
 
 # Grouping
 
-Grouping functionality described in the [ComboBox](/web/combobox/grouping) is applicable to the MultiSelect.
+The grouping functionality described in the related help article for [Kendo UI ComboBox widget](/web/combobox/grouping) is applicable to Kendo UI MultiSelect.
+
+## See Also
+
+Other articles on Kendo UI MultiSelect:
+
+* [Overview]({% slug overview_kendoui_multiselect_widget %})
+* [JavaScript API Reference](/api/javascript/ui/multiselect)
+* [Virtualization]({% slug virtualization_kendoui_multiselect_widget %})
+* [Troubleshooting]({% slug troubleshooting_common_issues_multiselect_kendoui %})

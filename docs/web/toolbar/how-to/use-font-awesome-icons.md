@@ -1,14 +1,15 @@
 ---
-title: Use FontAwesome icons
-page_title: Use FontAwesome icons
-description: Use FontAwesome icons
+title: Use FontAwesome Icons
+page_title: Use FontAwesome Icons | Kendo UI TabStrip Widget
+description: "Learn how to use FontAwesome icons in the Kendo UI ToolBar widget."
+slug: howto_usefontawesomeicons_toolbar
 ---
 
-# Use FontAwesome icons
+# Use FontAwesome Icons
 
-The example below demonstrates how to use [FontAwesome icons](http://fortawesome.github.io/Font-Awesome/icons/) as toolbar sprite icons.
+The example below demonstrates how to use [FontAwesome icons](http://fortawesome.github.io/Font-Awesome/icons/) as Kendo UI ToolBar sprite icons.
 
-#### Example:
+###### Example
 
 ```html
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -32,3 +33,10 @@ The example below demonstrates how to use [FontAwesome icons](http://fortawesome
       })
     </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI ToolBar:
+
+* [JavaScript API Reference](/api/javascript/ui/toolbar)
+* [How to Close ToolBar Popup Manually]({% slug howto_closetoolbarpopupmanually_toolbar %})

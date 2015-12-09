@@ -1,14 +1,15 @@
 ---
-title: Stack static notifications to the left or right
-page_title: Stack static notifications to the left or right
-description: Stack static notifications to the left or right
+title: Stack Static Notifications to the Left or Right
+page_title: Stack Static Notifications to the Left or Right | Kendo UI Notification Widget
+description: "Learn how to stack static notifications to the left or to the right in the Kendo UI Notfication widget."
+slug: howto_stack_static_tothe_leftor_right_notification
 ---
 
-# Stack static notifications to the left or right
+# Stack Static Notifications to the Left or Right
 
-The following demo shows how to stack static notifications to the left or to the right
+The example below demonstrates how to stack static notifications to the left or to the right.
 
-#### Example
+###### Example
 
 ```html
 <style>
@@ -77,3 +78,10 @@ $(function() {
 
 </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Notification:
+
+* [JavaScript API Reference](/api/javascript/ui/notification)
+* [How to Move Popup Notifications on Window Resize]({% slug howto_move_popup_notifications_onwindow_resize_notification %})

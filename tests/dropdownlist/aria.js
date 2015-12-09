@@ -101,4 +101,42 @@
 
       equal(dropdownlist.filterInput.attr("aria-activedescendant"), dropdownlist.current()[0].id);
   });
+
+    test("widget adds activedescendant to the wrapper when optionLabel is focused", 3, function() {
+        var dropdownlist = new DropDownList(input, {
+            filter: "contains",
+            dataSource: [
+                { item: "item1" },
+                { item: "item2" }
+            ],
+            dataTextField: "item",
+            dataValueField: "item",
+            optionLabel: "Select..."
+        });
+
+        var current = dropdownlist.current();
+
+        ok(current.attr("id"));
+        ok(current.hasClass("k-list-optionlabel"));
+        equal(dropdownlist.wrapper.attr("aria-activedescendant"), dropdownlist.current()[0].id);
+    });
+
+    test("widget removes aria id from the optionLabel", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            filter: "contains",
+            dataSource: [
+                { item: "item1" },
+                { item: "item2" }
+            ],
+            dataTextField: "item",
+            dataValueField: "item",
+            optionLabel: "Select..."
+        });
+
+        dropdownlist.select(1);
+
+        var optionLabel = dropdownlist.list.find(".k-list-optionlabel");
+
+        ok(!optionLabel.attr("id"));
+    });
 })();

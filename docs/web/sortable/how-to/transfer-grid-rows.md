@@ -1,15 +1,15 @@
 ---
-title: Transfer Grid rows
-page_title: Transfer Grid rows
-description: Move a row from one grid to another using Kendo UI Sortable widget
+title: Transfer Grid Rows
+page_title: Transfer Grid Rows | Kendo UI Sortable Widget
+description: "Learn how to move a row from one Grid to another using the Kendo UI Sortable widget."
+slug: howto_transfergridrows_sortable
 ---
 
-# Transfer Grid rows
+# Transfer Grid Rows
 
-The following runnable sample demonstrates how to transfer Kendo UI Grid rows via the Kendo UI Sortable widget. The user can drag rows from the first grid to the second and vice versa. Reordering of
-rows within the same grid is also implemented.
+The example below demonstrates how to move a row from one Kendo UI Grid to another by dragging it from the first Grid to the second one and vice versa. Reordering the rows within the same Grid in the same way is also supported.
 
-#### Example:
+###### Example
 
 ```html
 <div id="grid1" style="width: 400px; float:left"></div>
@@ -103,3 +103,14 @@ rows within the same grid is also implemented.
   }
 </script>
 ```
+
+## See Also 
+
+Other articles and how-to examples on Kendo UI Sortable:
+
+* [JavaScript API Reference](/api/javascript/ui/sortable)
+* [How to Nest Sortables]({% slug howto_nestsortables_sortable %})
+* [How to Persist Order in `localStorage`]({% slug howto_persistoderinlocalstorage_sortable %})
+* [How to Reorder AngularJS Grid Rows]({% slug howto_reorderangularjsgridrows_angular_sortable %})
+* [How to Reorder Grid Rows]({% slug howto_reordergridrows_sortable %})
+* [How to Reorder Rows in Nested Grid]({% slug howto_reorderrowsinnestedgrid_sortable %})

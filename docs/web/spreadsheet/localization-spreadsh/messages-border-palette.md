@@ -1,7 +1,7 @@
 ---
-title: List of `borderPalette` Messages
-page_title: List of `borderPalette` Messages | Kendo UI Spreadsheet Widget
-description: "A list of the `borderPalette` messages used for localization of the Kendo UI Spreadsheet widget via JavaScript."
+title: List of <code>borderPalette</code> Messages
+page_title: List of borderPalette Messages | Kendo UI Spreadsheet Widget
+description: "A list of the borderPalette messages used for localization of the Kendo UI Spreadsheet widget via JavaScript."
 slug: localization_borderpalette_messages_spreadsheet_widget
 ---
 
@@ -32,5 +32,5 @@ Below is the list of the messages and their namespaces under the `borderPalette`
 * [List of `filterMenu` Messages]({% slug localization_filter_menu_messages_spreadsheet_widget %})
 * [List of `toolbar` Messages]({% slug localization_toolbar_messages_spreadsheet_widget%})
 * [List of `view` Messages]({% slug localization_view_messages_spreadsheet_widget%})
-* [Localization of the Spredasheet Widget]({% slug localization_ofmessages_spreadsheet_widget %})
+* [Localization of the Spreadsheet Widget]({% slug localization_ofmessages_spreadsheet_widget %})
 * [Localization Overview of Kendo UI Widgets](/framework/localization/overview)

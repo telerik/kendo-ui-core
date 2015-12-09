@@ -8,12 +8,19 @@ position: 9
 
 # Printing
 
-In most cases the Grid is not the only content on a page and, yet, you might want to print the Grid only. There are two ways to achieve this:
+In most cases the Grid is not the only content on a page and, yet, you might want to print the Grid only. 
 
-1. Print the existing web page, but use a print stylesheet to hide the parts of the page that are not needed.
-2. Retrieve the Grid HTML, inject it in a new browser window, and trigger the printing of the new page.
+## Options
 
-The example below demonstrates how to apply the second option. It also addresses some other important things you must keep in mind as follows:
+There are two ways to print the content of the Grid only, though the Grid itself may not be the only content displayed on a page.
+
+### Print the Existing Web Page
+
+Print the existing web pag, but use a print stylesheet to hide the parts of the page that are not needed.
+
+### Print a New Web Page
+
+The example below demonstrates how to retrieve the Grid HTML, inject it in a new browser window, and trigger the printing of the new page. It also addresses some other important things you must keep in mind as follows:
 
 * If the Grid is scrollable, some rows or columns may not be visible on the printed paper. Make sure that during printing the Grid has no set height, and the scrollability of the data area is disabled.
 * Depending on the column width, some of the cell content may not be fully visible. This problem is resolved by forcing an automatic `table-layout` to the Grid table, which disables the ellipsis (...).

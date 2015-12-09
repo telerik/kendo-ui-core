@@ -232,3 +232,210 @@
     background-clip: padding-box;
 }
 
+.km-wp .km-list .km-full-width-slider {    
+    position: relative;
+    margin-top: 0;
+    padding: 1.55em 0;
+    width: auto;
+    display: block;
+}
+
+.km-wp .km-full-width-slider .k-slider-track {
+    height: .5rem;
+    top: 50%;
+}
+
+
+/* Nova theme features */
+.km-wp .km-icon-label.km-required:after {
+    margin-left: -.89em;
+}
+
+.km-wp .km-label-above {
+    font-size: 1em;
+    padding-top: .27em;
+    padding-bottom: 2.5em;
+    margin-left: -.7em;
+}
+
+.km-wp .km-label-above textarea { 
+    top: 50%;
+}
+
+.km-wp .km-list fieldset {
+    border: none;
+    margin: .55em -1.4em 0;
+    padding: 0 .7em;
+}
+
+.km-wp .km-list fieldset legend {
+    line-height: 2em;
+    text-indent: 0;
+    font-weight: normal;
+    padding: 1.23em 1.61em .11em;
+    width: 100%;
+    box-sizing: content-box;
+    text-transform: uppercase;
+    padding: 0;
+    padding-left: .7em;
+}
+
+.km-wp .km-list fieldset legend + .km-inline-field {
+    margin-top: .5em;   
+}
+
+.km-wp .km-label-above {
+    font-size: 1em;
+    margin-left: -.7em;
+}
+
+.km-wp .km-legend-button {
+    text-transform: uppercase;
+}    
+
+.km-wp .km-list fieldset .km-inline-field {
+    margin-top: 0;
+    margin-left: 0;
+}
+
+.km-wp .km-inline-field.km-label-above {
+    margin-bottom: 0;
+}
+
+.km-wp {
+    .km-list {
+        .km-inline-field {
+            input[type=password],
+            input[type=search], 
+            input[type=number], 
+            input[type=tel],
+            input[type=url],
+            input[type=email],
+            input[type=month],
+            input[type=color],
+            input[type=week], 
+            input[type=date], 
+            input[type=time], 
+            input[type=datetime], 
+            input[type=datetime-local], 
+            input[type=text]:not(.k-input), 
+            select:not([multiple]), 
+            .k-dropdown-wrap, 
+            textarea  {
+                left: 0;
+                padding-left: 1em; 
+            }
+        }
+    }
+}
+
+.km-wp {
+    .km-list {
+        fieldset,
+        .km-label-above {
+            input[type=password],
+            input[type=search], 
+            input[type=number], 
+            input[type=tel],
+            input[type=url],
+            input[type=email],
+            input[type=month],
+            input[type=color],
+            input[type=week], 
+            input[type=date], 
+            input[type=time], 
+            input[type=datetime], 
+            input[type=datetime-local], 
+            input[type=text]:not(.k-input), 
+            select:not([multiple]), 
+            .k-dropdown-wrap, 
+            textarea  {
+                border: none;
+                padding: .4em 0 .4em .7em;
+                margin-top: 0;
+            }
+        }
+    }
+}
+
+.km-wp {
+    .km-list {
+        fieldset {
+            input[type=password],
+            input[type=search], 
+            input[type=number], 
+            input[type=tel],
+            input[type=url],
+            input[type=email],
+            input[type=month],
+            input[type=color],
+            input[type=week], 
+            input[type=date], 
+            input[type=time], 
+            input[type=datetime], 
+            input[type=datetime-local], 
+            input[type=text]:not(.k-input), 
+            select:not([multiple]), 
+            .k-dropdown-wrap, 
+            textarea  {
+                padding: 5px 0;
+                margin-top: 0;
+                padding-left: .7em;
+            }
+        }
+    }
+}
+
+/* Standalone Checkboxes and RadioButtons */
+.km-wp .km-checkbox-label,
+.km-wp .km-radio-label {
+    font-size: 1em;
+    line-height: 1.5em;
+    margin-left: .89em;
+}
+
+.km-wp .km-checkbox-label:before,
+.km-wp .km-checkbox-label:after {
+    right: .7em;
+    width: 1.07rem;
+    height: 1.07rem;   
+    text-align: right;
+    font-size: 1.5em;
+}
+
+.km-wp .km-checkbox-label:before {
+    border-width: 0.133rem;
+    border-style: solid;
+}
+
+.km-wp input.km-checkbox:checked + .km-checkbox-label:after {
+    font-size: 1.2em;
+    line-height: 1em; 
+    right: 1em;
+}
+
+//Radio buttons
+.km-wp .km-radio-label {
+    padding-left: 2.5em;
+    line-height: 1.5em;  
+}
+
+.km-wp .km-radio-label:before {    
+    width: 1rem;
+    height: 1rem;
+    border-width: 0.133rem;
+    border-style: solid;
+}
+
+.km-wp input.km-radio:checked + .km-radio-label:after {
+    border-width: 2px; 
+    border-style: solid;
+    top: 36%;
+    transform: translateY(-36%);
+}
+
+.km-wp input.km-radio:checked + .km-radio-label:after {
+    width: .27rem;
+    height: .27rem;
+    left: .35rem;
+}

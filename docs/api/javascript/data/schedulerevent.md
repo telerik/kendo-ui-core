@@ -45,7 +45,7 @@ The date at which the scheduler event ends. The `end` date is mandatory.
 
 ### endTimezone `String` *(default: undefined)*
 
-The timezone of the `end` date. If not specified the [timezone](/api/web/scheduler#configuration-timezone) will be used.
+The timezone of the `end` date. If not specified the [timezone](/api/javascript/ui/scheduler#configuration-timezone) will be used.
 
 The complete list of the supported timezones is available in the [List of IANA time zones](http://en.wikipedia.org/wiki/List_of_IANA_time_zones) Wikipedia page.
 
@@ -176,7 +176,7 @@ The date at which the scheduler event starts. The `start` date is mandatory.
 
 ### startTimezone `String` *(default: undefined)*
 
-The timezone of the `start` date. If not specified the [timezone](/api/web/scheduler#configuration-timezone) will be used.
+The timezone of the `start` date. If not specified the [timezone](/api/javascript/ui/scheduler#configuration-timezone) will be used.
 
 The complete list of the supported timezones is available in the [List of IANA time zones](http://en.wikipedia.org/wiki/List_of_IANA_time_zones) Wikipedia page.
 

@@ -1,11 +1,12 @@
 ---
-title: List of Script Files for the Desktop Widgets
-page_title: List of Script Files for the Desktop Widgets
-description: "Script files Kendo UI desktop widgets."
+title: Script Files for Desktop Widgets
+page_title: Script Files for Desktop Widgets | Kendo UI Installation
+description: "Learn which are the script files Kendo UI desktop widgets."
+slug: scirpt_filesfor_desktop_widgets
 position: 3
 ---
 
-# List of Script Files for the Desktop Widgets
+# Script Files for Desktop Widgets
 
 Below are listed the script files for Kendo UI desktop widgets for mobile-ready websites and applications:
 
@@ -378,3 +379,12 @@ Below are listed the script files for Kendo UI desktop widgets for mobile-ready 
 | 						| kendo.userevents.js						| 							|
 | 						| kendo.draganddrop.js						| 							|
 | 						| kendo.window.js							| 							|
+
+## See Also
+
+Articles with script files for the other Kendo UI components:
+
++ [List of Script Files for the Widgets Rendering Data Visualization]({% slug script_filesfor_datavisualization_widgets %})
++ [List of Script Files for the Frameworks and Widgets for Mobile Applications]({% slug script_filesfor_hybridui_widgets %})
++ [List of Script Files for the Tools and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
++ [List of Script Files for the Server-Side Wrappers]({% slug script_filesfor_serverside_wrappers %})

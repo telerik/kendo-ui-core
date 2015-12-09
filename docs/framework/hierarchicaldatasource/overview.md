@@ -34,6 +34,44 @@ hierarchical data.
 
     var localDataSource = new kendo.data.HierarchicalDataSource({ data: categorizedMovies });
 
+### Creating a HierarchicalDataSource bound to local heterogeneous data
+
+      var data = [{
+        CategoryName: "Category 1",
+        Products: [{
+          ProductName: "Product 1",
+          Suppliers: [{
+            SupplierName: "Supplier 1"
+          }]
+        }]
+      }];
+
+      var Suppliers = {
+        schema: {
+          data: "Suppliers"
+        }
+      };
+
+      var Products = {
+        schema: {
+          data: "Products",
+          model: {
+            children: Suppliers
+          }
+        }
+      };
+
+      var categoriesDataSource = new kendo.data.HierarchicalDataSource({
+        data: data,
+        schema: {
+          model: {
+            children: Products
+          }
+        }
+      });
+
+The example demonstrates how to configure the HierarchicalDataSource in order to bind the children when the fields holding the children items have different names.
+
 ### Creating a HierarchicalDataSource bound to a homogeneous remote data service
 
     var homogeneous = new kendo.data.HierarchicalDataSource({

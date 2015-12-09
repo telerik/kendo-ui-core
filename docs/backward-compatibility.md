@@ -8,6 +8,16 @@ position: 251
 
 # Kendo UI Framework Changes and Backward Compatibility
 
+## Kendo UI 2016 Q1
+
+### Changes from 2015 Q3 (2015.2.930)
+
+#### Breaking Changes
+
+The  *Grid*, *Gantt*, *TreeList*, *Scheduler*, *Toolbar*, and *Spreadsheet* widgets will use the native `click` event for taps on desktop environments.
+Previously, the `mouseup` event was utilized.
+For details and means to revert that behavior, check [this issue](https://github.com/telerik/kendo-ui-core/issues/1176).
+
 ## Kendo UI 2015 Q3
 
 ### Changes from 2015 Q2 SP2 (2015.2.902)

@@ -70,6 +70,33 @@ This approach allows you to initialize multiple Button widgets at once, but with
 	});
 	</script>
 
+## Configuration
+
+### Enable or Disable Buttons
+
+The business logic of an application often requires a certain button to be temporarily disabled or enabled. Kendo UI Button can be configured to be initially disabled via its `enable` property or by initializing it from an element, which has a `disabled="disabled"` HTML attribute. The Button can also be disabled or enabled at any time with Javascript by using its `enable()` method with a boolean argument.
+
+###### Example - enable and disable the Button
+
+	<button type="button" id="editButton">Edit</button>
+
+	<script>
+
+	$(function(){
+		var editButton = $("#editButton").kendoButton({
+			enable: false
+		}).data("kendoButton");
+
+		// ...
+
+		// enable button
+		editButton.enable(true);
+	});
+
+	</script>
+
+For more information on the Button [`enable` property](/api/web/button#configuration-enable) and the [`enable` method](/api/web/button#methods-enable), please refer to the [Button API](/api/web/button/).    
+    
 ## Add Icons
 
 The Button can accommodate an icon, which enhances the meaning of the text content. The widget provides three ways to add an icon with a classic `img` element or with a background image (usually a sprite). From web standarts' point of view, using background images is better, because the icon does not represent structural content, but is simply a decoration.
@@ -176,36 +203,56 @@ Image icons are applied via the `imageUrl` property and are displayed as a `img`
 
 In order to increase the accessibility of the widget when adding an `img` element manually, an `alt` attribute is required.
 
-## Enable and Disable Buttons
+### Font icons
 
-The business logic of an application often requires a certain button to be temporarily disabled or enabled. Kendo UI Button can be configured to be initially disabled via its `enable` property or by initializing it from an element, which has a `disabled="disabled"` HTML attribute. The Button can also be disabled or enabled at any time with Javascript by using its `enable()` method with a boolean argument.
+It is possible to use FontAwesome or other font icons inside the Kendo UI button by setting the required third-party CSS classes via the `spriteCssClass` property.
+However, this will cause a `k-sprite` CSS class to be rendered and it applies some font and size styles, which may interfere with the font icons styles.
+There are two ways to proceed in this case. One is to override the Kendo UI styles, which break the font icons:
 
-###### Example - enable and disable the Button
+```html
+<link rel="stylesheet"
+    href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" />
+<style>
+    .k-button .fa {
+        font-size: inherit;
+        line-height: inherit;
+        width: auto;
+        height: auto;
+        margin-left: 0;
+    }
+</style>
 
-	<button type="button" id="editButton">Edit</button>
+<button type="button" id="archiveButton">Archive</button>
 
-	<script>
+<script>
+    $("#archiveButton").kendoButton({
+        spriteCssClass: "fa fa-archive"
+    });
+</script>
+```
 
-	$(function(){
-		var editButton = $("#editButton").kendoButton({
-			enable: false
-		}).data("kendoButton");
+The other option is to include the required HTML markup and CSS classes inside the Kendo UI Button directly, as template content. In this way a `k-sprite` class will not be rendered by the Button.
 
-		// ...
+```html
+<link rel="stylesheet"
+    href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" />
 
-		// enable button
-		editButton.enable(true);
-	});
+<button type="button" id="archiveButton"><span class="fa fa-archive"></span> Archive</button>
 
-	</script>
+<script>
+    $("#archiveButton").kendoButton({});
+</script>
+```
 
-For more information on the Button [`enable` property](/api/web/button#configuration-enable) and the [`enable` method](/api/web/button#methods-enable), please refer to the [Button API](/api/web/button/).
+## Reference 
 
-## Access the Button Instance
+### Existing Instances
 
 Similar to all other Kendo UI widgets, you can access an existing Button instance via the `.data()` jQuery method, executed by the jQuery object of the originating element.
 
-###### Example - access a Button instance
+The exampel below demonstrates how to access a Button instance.
+
+###### Example
 
 	<button type="button" id="editButton">Edit</button>
 
@@ -221,7 +268,9 @@ Similar to all other Kendo UI widgets, you can access an existing Button instanc
 
 The `kendoButton()` method returns the same jQuery object that has been used to execute it. That is why, if the Button is to be accessed afterwards, it is a good idea to save it at the time of initialization.
 
-###### Example - save and access a reference to a Button instance
+The example below demonstrates how to save and access a reference to a Button instance.
+
+###### Example
 
 	<button type="button" id="editButton">Edit</button>
 	<button type="button" id="deleteButton">Delete</button>
@@ -244,7 +293,9 @@ For further reading and related information, please refer to the [Button API](/a
 
 Kendo UI Button can be used for creating different style of buttons, like the Floating Action Button from the Material Design theme.
 
-###### Example - create a Floating Action Button
+The example below demonstrates how to create a Floating Action Button.
+
+###### Example
 
     <button id="primaryTextButton" class="k-primary"></button>
     <script>

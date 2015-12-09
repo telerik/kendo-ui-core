@@ -476,9 +476,9 @@ If this argument is not supplied, then `"info"` is assumed.
     <span id="notification"></span>
     <script>
     var notificationWidget = $("#notification").kendoNotification({
-        templates: {
-            myAlert: "<div>System alert: #= myMessage #</div>"
-        }
+       templates: [
+            { type: "myAlert", template: "<div>System alert: #= myMessage #</div>"}
+        ]
     }).data("kendoNotification");
 
     notificationWidget.show({ myMessage: "foo text" }, "myAlert");

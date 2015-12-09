@@ -1,17 +1,19 @@
 ---
-title: Display tab buttons at the bottom
-page_title: Display tab buttons at the bottom
-description: Display tab buttons at the bottom
+title: Display Buttons at the Bottom
+page_title: Display Buttons at the Bottom | Kendo UI TabStrip Widget
+description: "Learn how to display tab buttons at the bottom of the Kendo UI TabStrip widget."
+slug: howto_displaybuttonsatthebottom_tabstrip
 ---
 
-# Display tab buttons at the bottom
+# Display Buttons at the Bottom
 
-> This example is now obsolete. Use the [**tabPosition**](/api/javascript/ui/tabstrip#configuration-tabPosition) property instead,
-except when working with a very old Kendo UI version.
+The example below demonstrates how to display the tab buttons at the bottom of the TabStrip widget.
 
-The following runnable sample demonstrates how to display the tab buttons at the bottom of the widget.
+> **Important** 
+> 
+> This example is now obsolete unless you are working with a very old Kendo UI version. For recent versions, use the [`tabPosition` property](/api/javascript/ui/tabstrip#configuration-tabPosition) instead.
 
-#### Example:
+###### Example
 
 ```html
     <style>
@@ -73,3 +75,12 @@ The following runnable sample demonstrates how to display the tab buttons at the
         });
     </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI TabStrip:
+
+* [JavaScript API Reference](/api/javascript/ui/tabstrip)
+* [How to Expand to 100% Height and Auto-Resize]({% slug howto_expandto100percentheightautoresize_tabstrip %})
+* [How to Initialize the Grid in Kendo UI TabStrip]({% slug initialize_thegrid_tabstrip_widget %})
+* [How to Scroll TabStrip with Keyboard]({% slug howto_scrolltabstripwithkeyboard_tabstrip %})

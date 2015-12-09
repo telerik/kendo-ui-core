@@ -255,6 +255,10 @@ The event handler function context (available via the `this` keyword) will be se
 
 The validator instance which fired the event.
 
+##### e.valid `Boolean`
+
+True if validation is passed, otherwise false.
+
 #### Example - subscribe to the "validate" event during initialization
 
       <form>

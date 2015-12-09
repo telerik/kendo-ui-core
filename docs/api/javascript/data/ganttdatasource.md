@@ -6,7 +6,7 @@ description: Learn more about the configuration of Kendo UI GanttDataSource, met
 
 # kendo.data.GanttDataSource
 
-The data source used by the [kendo.ui.Gantt](/api/web/gantt) widget.
+The data source used by the [kendo.ui.Gantt](/api/javascript/ui/gantt) widget.
 Inherits from [kendo.data.DataSource](/api/framework/datasource). The GanttDataSource contains instances of the
 [kendo.data.GanttTask](/api/framework/gantttask) class.
 

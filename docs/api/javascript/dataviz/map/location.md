@@ -86,6 +86,9 @@ to the given destination in meters.
 ##### destination `kendo.dataviz.map.Location`
 The destination location.
 
+##### bearing `Number`
+The bearing to the destination in decimal degrees.
+
 #### Returns
 `Number` The distance to the specified location in meters.
 

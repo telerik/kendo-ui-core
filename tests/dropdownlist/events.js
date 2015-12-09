@@ -702,6 +702,30 @@
         equal(dropdownlist.value(), "foo");
     });
 
+    test("widget passes optionLabel on select", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: [
+                { item: "item1" },
+                { item: "item2" }
+            ],
+            dataTextField: "item",
+            dataValueField: "item",
+            optionLabel: "Select..."
+        });
+
+        dropdownlist.select(1);
+
+        dropdownlist.one("select", function(e) {
+            ok(e.item.hasClass("k-list-optionlabel"));
+        });
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.wrapper.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.UP
+        });
+    });
+
     test("widget triggers cascade only once on value set", 1, function() {
         var ddl = new DropDownList(input, {
             optionLabel: "Select",
@@ -757,5 +781,34 @@
 
         dropdownlist.value(2);
         dropdownlist.wrapper.focus().blur();
+    });
+
+    test("cascading child triggers filtering event", 1, function() {
+        var parent = $("<input id='parent' />").appendTo(QUnit.fixture);
+        var child = $("<input />").appendTo(QUnit.fixture);
+
+        parent.kendoDropDownList({
+            dataTextField: "parentID",
+            dataValueField: "parentID",
+            dataSource: [
+                { parentID: 1 },
+                { parentID: 2 }
+            ],
+            value: 1
+        });
+
+        child.kendoDropDownList({
+            cascadeFrom: "parent", //id of the parent
+            dataTextField: "childID",
+            dataValueField: "id",
+            optionLabel: "Select",
+            dataSource:  [
+                { parentID: 1, childID: "1", id: 1 },
+                { parentID: 1, childID: "3", id: 2 }
+            ],
+            filtering: function() {
+                ok(true);
+            }
+        });
     });
 })();

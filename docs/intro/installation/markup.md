@@ -1,12 +1,13 @@
 ---
-title: Initialize a Widget Using Markup
-page_title: Initialize a Widget Using Markup
+title: Initialize Widgets Using Markup
+page_title: Initialize Widgets Using Markup | Kendo UI Installation
 previous_url: /data-attribute-initialization, /howto/declarative_initialization, /basics/markup, /intro/markup
 description: "Initialize Kendo UI widgets from markup, add Kendo UI frameworks to your application, and use AngularJS or MVVM to configure Kendo UI."
+slug: initialize_widgets_using_markup_installation
 position: 7
 ---
 
-# Initialize a Widget Using Markup
+# Initialize Widgets Using Markup
 
 In addition to the [jQuery plugin syntax](/intro/installation/jquery-initialization), the Kendo UI widgets may be instantiated based on custom HTML attributes in several ways:
 
@@ -25,9 +26,13 @@ this is not recommended and is not supported with declarative initialization fro
 > It is strongly recommended to initialize Kendo UI widgets from HTML elements, which are part of the DOM tree.
 Creating widgets from [document fragments](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) may cause undesired side effects or Javascript errors.
 
-## Declarative Widgets in SPA View
+## Declarative Widgets
+
+### Declarative Widgets in SPA View
 
 Below is an example referring to a SPA View with an AutoComplete widget in the template. More information about the SPA View may be found in the [Buliding Single Page Applications help section](/framework/spa/overview).
+
+###### Example
 
 ```
     <div id="container"></div>
@@ -41,9 +46,11 @@ Below is an example referring to a SPA View with an AutoComplete widget in the t
     </script>
 ```
 
-## Declarative Widgets with `kendo.bind`
+### Declarative Widgets with `kendo.bind`
 
-Here is an example referring to an MVVM-bound DOM element with an AutoComplete widget: 
+Here is an example referring to an MVVM-bound DOM element with an AutoComplete widget.
+
+###### Example
 
 ```
     <div id="container">
@@ -60,9 +67,11 @@ Here is an example referring to an MVVM-bound DOM element with an AutoComplete w
 > **Important**  
 > The `data-bind` attribute syntax establishes a two-way binding between the widget options (in that case, the data source) and the view model field (the `source`). For more information, refer to the [MVVM introduction help topic](/framework/mvvm/overview).
 
-## Declarative Widgets in a Hybrid UI Application
+### Declarative Widgets in a Hybrid UI Application
 
 Below is an example referring to Kendo Hybrid UI application with a view and an AutoComplete widget. More information about Hybrid UI applications is available in the [Building Hybrid Mobile Applications topic](/framework/spa/overview).
+
+###### Example
 
 ```
     <div data-role="view" data-model="foo">
@@ -86,13 +95,15 @@ Below is an example referring to Kendo Hybrid UI application with a view and an 
     </script>
 ```
 
-## Widget Configuration Options and Event Handlers as Data Attributes
+## Configuration
 
 In addition to the `data-role` attribute, the declarative initialization parses other data attributes and passes them as configuration options to the widget constructor. You can find out more about the supported data attributes and how to bind them to widget events in the [data attributes explained](/framework/data-attribute-initialization) section.
 
-## Kendo UI AngularJS Directives
+### AngularJS Directives
 
 Below is an example referring to the Kendo UI AngularJS AutoComplete directive. To learn more about the features of the Kendo UI AngularJS directives, visit the [AngularJS](/AngularJS/introduction) help topic.
+
+###### Example
 
 ```
     <div ng-app>
@@ -111,3 +122,15 @@ Below is an example referring to the Kendo UI AngularJS AutoComplete directive. 
         });
     </script>
 ```
+
+## See Also
+
+Other articles on getting started with Kendo UI:
+
+* [Getting Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Kendo UI Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
+* [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
+* [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
+* [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
+* [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})

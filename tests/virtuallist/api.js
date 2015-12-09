@@ -226,7 +226,6 @@
         }));
         asyncDataSource.read();
     });
-    */
 
     asyncTest("listBound event is fired when range is changed", 3, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
@@ -301,7 +300,10 @@
 
     asyncTest("fires the change event when list is filtered", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: true
+            selectable: true,
+            valueMapper: function(options) {
+                options.success(options.value);
+            }
         }));
 
         asyncDataSource.read().then(function() {
@@ -312,7 +314,12 @@
                 ok(true);
             });
 
-            virtualList.filter(true);
+            virtualList.dataSource.filter({
+                field: "value",
+                operator: "eq",
+                value: 2
+            });
+
             virtualList.select(0);
         });
     });
@@ -353,7 +360,6 @@
         }));
 
         virtualList.one("change", function() {
-            virtualList.filter(true);
             virtualList.dataSource.filter({
                 field: "value",
                 operator: "eq",
@@ -414,27 +420,6 @@
         });
     });
 
-    asyncTest("select method selects same index when filtered (single selection)", 1, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: true,
-            valueMapper: function(options) {
-                options.success([1]);
-            }
-        }));
-
-        asyncDataSource.read().done(function() {
-            virtualList.select(0);
-
-            virtualList.filter(true);
-            virtualList.bind("change", function(e) {
-                start()
-                ok(true);
-            });
-
-            virtualList.select(0);
-        });
-    });
-
     asyncTest("select method selects same index when filtered (multiple selection)", 2, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: "multiple",
@@ -460,7 +445,6 @@
                 virtualList.select(0);
             });
 
-            virtualList.filter(true);
             virtualList.dataSource.filter({
                 field: "text",
                 operator: "contains",
@@ -756,7 +740,8 @@
             virtualList.one("listBound", function() {
                 start();
                 equal(virtualList.focusIndex(), 100);
-            })
+            });
+
             virtualList.select(100);
         });
     });
@@ -828,15 +813,6 @@
         asyncDataSource.read().then(function() {
             start();
             ok(virtualList.isBound());
-        });
-    });
-
-    asyncTest("filter method sets the filter state", 1, function() {
-        var virtualList = new VirtualList(container, virtualSettings);
-        asyncDataSource.read().then(function() {
-            start();
-            virtualList.filter(true);
-            ok(virtualList.filter());
         });
     });
 
@@ -1107,6 +1083,23 @@
         });
 
         asyncDataSource.read();
+    });
+
+    asyncTest("valueDeffered is resolved when same value is set multiple times", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "single",
+            valueMapper: function(options) {
+                options.success([2]);
+            }
+        }));
+
+        virtualList.value([2]);
+        asyncDataSource.read().then(function() {
+            virtualList.value([2]).then(function() {
+                start();
+                ok(true, "promise is resolved");
+            });
+        });
     });
 
     asyncTest("value method clears previous values and dataItems", 3, function() {
@@ -1410,6 +1403,40 @@
         asyncDataSource.read();
     });
 
+    asyncTest("setDataSource method cleans the list when source is updated", 2, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            value: "1",
+            valueMapper: function(operation) {
+                operation.success(1);
+            }
+        }));
+
+        virtualList.one("listBound", function() {
+            virtualList.setDataSource({
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success({ data: generateData(options.data), total: 300 });
+                        }, 0);
+                    }
+                },
+                serverPaging: true,
+                pageSize: 80,
+                schema: {
+                    data: "data",
+                    total: "total"
+                }
+            });
+
+            ok(!virtualList.isBound());
+            ok(!virtualList.element.html());
+            start();
+        });
+
+        asyncDataSource.read();
+    });
+
     asyncTest("removeAt method removes values at current position", 6, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: "multiple",
@@ -1477,5 +1504,86 @@
             equal(value.length, 1);
             equal(value[0], "item");
         });
+    });
+
+    asyncTest("isFiltered method returns true if source is filtered", 1, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+
+        asyncDataSource.read().then(function() {
+            start();
+
+            virtualList.dataSource.filter({
+                field: "value",
+                operator: "eq",
+                value: 2
+            });
+
+            ok(virtualList.isFiltered());
+        });
+    });
+
+    asyncTest("isFiltered method returns true if source is bound with filtering", 1, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+
+        virtualList.one("listBound", function() {
+            start();
+
+            ok(virtualList.isFiltered());
+        });
+
+        asyncDataSource.filter({
+            field: "value",
+            operator: "eq",
+            value: 2
+        });
+    });
+
+    asyncTest("isFiltered method returns false if applied filter is removed", 1, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+
+        asyncDataSource.read().then(function() {
+
+            virtualList.dataSource.filter({
+                field: "value",
+                operator: "eq",
+                value: 2
+            });
+
+            asyncDataSource.one("change", function (){
+                start();
+                virtualList.dataSource.filter({});
+
+                ok(!virtualList.isFiltered());
+            });
+        });
+    });
+
+    asyncTest("select value when source and value are applied simultaneously", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            autoBind: true,
+            selectable: true,
+            dataSource: [],
+            valueMapper: function(o) {
+                var value = o.value;
+
+                if (!value) {
+                    value = [];
+                }
+
+                o.success(o.value);
+            },
+            value: "",
+        }));
+
+        asyncDataSource.one("change", function() {
+            start();
+
+            var value = virtualList.value();
+
+            equal(value[0], 250);
+        });
+
+        virtualList.setDataSource(asyncDataSource);
+        virtualList.value(250);
     });
 })();

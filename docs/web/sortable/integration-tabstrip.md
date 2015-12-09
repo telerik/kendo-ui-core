@@ -1,24 +1,29 @@
 ---
 title: Integration with TabStrip
-page_title: Sortable widget - integration with TabStrip
-description: How to reorder Kendo UI TabStrip tabs with the Sortable widget
-position: 2
+page_title: Integration with TabStrip | Kendo UI Sortable Widget
+description: "Learn how to reorder Kendo UI TabStrip items with the Kendo UI Sortable widget."
+slug: integrationwith_tabstrip_sortable_widget
+position: 3
 ---
 
-# Integration with Kendo UI TabStrip
+# Integration with TabStrip
 
-The Sortable widget may be used for reordering the TabStrip's tabs.
+[Kendo UI Sortable widget](http://demos.telerik.com/kendo-ui/sortable/index) can be used to reorder the items in the tabs of a TabStrip.
 
 ## Prerequisites
 
-The article assumes that you are familiar with the following:
+Before going on reading, make sure you are familiar with the following topics:
 
-- [Kendo UI Sortable](../../../web/sortable/overview)
-- [Kendo UI TabStrip](../../../web/tabstrip/overview)
+* [Overview of the Sortable Widget]({% slug overview_kendoui_sortable_widget %})
+* [Overview of Kendo UI TabStrip](/web/tabstrip/overview)
 
-## Reorder Kendo UI TabStrip items using the Sortable widget
+## Reorder 
 
-The Sortable widget should be initialized on TabStrip `ul.k-tabstrip-items` element. In the general case, the `filter` property of the widget should select all `li.k-item` elements. If required the hint movement can be restricted within the `ul.k-tabstrip-items` element.
+### TabStrip Items
+
+To reorder the tabs of a TabStrip, initialize the Sortable widget on the TabStrip's `ul.k-tabstrip-items` element. Normally, the `filter` property of the widget should select all `li.k-item` elements. If required, the Hint movement can be restricted within the `ul.k-tabstrip-items` element.
+
+###### Example
 
     $("#tabstrip ul.k-tabstrip-items").kendoSortable({
         filter: "li.k-item",
@@ -42,13 +47,17 @@ The Sortable widget should be initialized on TabStrip `ul.k-tabstrip-items` elem
         }
     });
 
-In order to avoid visual glitches, it is recommended to activate the current tab at the `start` event handler of the Sortable widget.
+To avoid visual glitches, it is advisable to activate the current tab at the `start` event handler of the Sortable widget.
+
+###### Example
 
     start: function(e) {
         $("#tabstrip").data("kendoTabStrip").activateTab(e.item);
     }
 
-After a tab is sorted the developer should update its order in the TabStrip widget.
+After a tab is sorted, update its order in the TabStrip widget.
+
+###### Example
 
     change: function(e) {
         var tabstrip = $("#tabstrip").data("kendoTabStrip"),
@@ -61,5 +70,11 @@ After a tab is sorted the developer should update its order in the TabStrip widg
         }
     }
 
-For more information check [Sortable's events](../../../api/web/sortable#events) and [TabStrip/Sortable integration demo](http://demos.telerik.com/kendo-ui/web/sortable/integration-tabstrip.html).
+For additional information on the Sortable events, refer to [this article](/api/javascript/ui/sortable#events) and the [TabStrip/Sortable integration demo](http://demos.telerik.com/kendo-ui/web/sortable/integration-tabstrip.html).
 
+## See Also
+
+Other articles on Kendo UI Sortable:
+
+* [Integration with Grid and ListView]({% slug integrationwith_gridandlistview_sortable_widget %})
+* [JavaScript API Reference](/api/javascript/ui/sortable)

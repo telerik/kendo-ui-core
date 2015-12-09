@@ -217,6 +217,26 @@ test("$filter and neq operator", function() {
     equal(result.$filter, "Name ne 'bar'");
 });
 
+test("$filter and isempty operator uses eq", function() {
+    var result = parameterMap({ filter: { filters: [ {field: "Name", operator: "isempty" } ]}});
+    equal(result.$filter, "Name eq ''");
+});
+
+test("$filter and isnotempty operator uses eq", function() {
+    var result = parameterMap({ filter: { filters: [ {field: "Name", operator: "isnotempty" } ]}});
+    equal(result.$filter, "Name ne ''");
+});
+
+test("$filter and isnull operator uses eq", function() {
+    var result = parameterMap({ filter: { filters: [ {field: "Name", operator: "isnull" } ]}});
+    equal(result.$filter, "Name eq null");
+});
+
+test("$filter and isnotnull operator uses ne", function() {
+    var result = parameterMap({ filter: { filters: [ {field: "Name", operator: "isnotnull" } ]}});
+    equal(result.$filter, "Name ne null");
+});
+
 test("$filter with nested field", function() {
     var result = parameterMap({ filter: { filters: [ {field: "foo.bar", operator: "neq", value: "bar"} ]} });
 

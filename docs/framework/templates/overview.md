@@ -8,7 +8,7 @@ position: 1
 # Kendo UI Templates Overview
 
 Kendo UI Templates provide a simple to use, high-performance JavaScript templating engine in the Kendo UI Framework.
-Templates offer a way to create HTML chunks that can be automatially merged with JavaScript data. They are a substituate for traditional "HTML string building" in JavaScript.
+Templates offer a way to create HTML chunks that can be automatially merged with JavaScript data. They are a substitute for traditional "HTML string building" in JavaScript.
 
 ## Template Basics
 

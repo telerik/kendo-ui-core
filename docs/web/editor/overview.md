@@ -38,7 +38,7 @@ The classic Editor is able to post its value automatically, because it is based 
 
 If you initialize the Editor from a `<div>` or any other element (`<div>` elements are recommended in most cases), it assumes its inline mode. The originating element is made contenteditable and is used by the widget to return its value.
 
-The inline Editor is not able to post its value and [this is something you must take care of](/web/editor/troubleshooting). The Editor tools are only visible when the widget is focused. The Editor's content resides on the main web page, so the page styling can influence the editable content.
+The inline Editor is not able to post its value and [this is something you must take care of](/web/editor/troubleshoot/troubleshooting). The Editor tools are only visible when the widget is focused. The Editor's content resides on the main web page, so the page styling can influence the editable content.
 
 [Inline Editor Demo](http://demos.telerik.com/kendo-ui/web/editor/inline-editing.html)
 
@@ -88,18 +88,7 @@ Beside the available built-in tools, the Editor functionality can be extended th
 
 The custom buttons get a `k-toolName` CSS class to allow styling, where `toolName` is the name specified in the custom tool configuration. Note that `undo` and `redo` are reserved tool names.
 
-## Size
-
-Before the Q3 2012 (2012.3.1114) release the Editor assumed the pixel offset width of the `<textarea>` from which it was created. As of now, the widget behaves in the following way:
-
-* The Editor applies the width or height value, set via an inline style in the `<textarea>`, if such is available.
-* If the `<textarea>` is not displaying such explicit values, the Editor applies a 100% width dimension and a deafult height of 250px.
-
-If the `<textarea>` width and height аре applied via external CSS styles, use a similar approach to the Editor, e.g., by using its `k-editor` CSS class.
-
-Note that `<textarea>` `cols` and `rows` are required attributes and they can influence the dimensions of a `<textarea>` element as well. However, browsers do not apply them in a consistent manner, so the Editor ignores them when its size is rendered.
-
-## Readonly Functionality
+### Apply Readonly Functionality
 
 You can temporarily make the Editor readonly by using the following approach:
 
@@ -112,11 +101,22 @@ You can temporarily make the Editor readonly by using the following approach:
     // make editable
     editorBody.add("td", editorBody).attr("contenteditable", true);
 
-## Default content styling
+## Display
 
-The Editor uses an iframe and applies some default CSS styles to its content when the [classic mode](#classic-mode) is enabled. This allows the widget to override the default browser styling.
-The styles are shown in the code snippet below. They are targeting mostly headings, paragraphs, links, lists and tables.
-All tables inside the Editor obtain a `k-table` class, which is **not** included in the widget's value.
+### Size
+
+Before the Q3 2012 (2012.3.1114) release the Editor assumed the pixel offset width of the `<textarea>` from which it was created. As of now, the widget behaves in the following way:
+
+* The Editor applies the width or height value, set via an inline style in the `<textarea>`, if such is available.
+* If the `<textarea>` is not displaying such explicit values, the Editor applies a 100% width dimension and a deafult height of 250px.
+
+If the `<textarea>` width and height аре applied via external CSS styles, use a similar approach to the Editor, e.g., by using its `k-editor` CSS class.
+
+Note that `<textarea>` `cols` and `rows` are required attributes and they can influence the dimensions of a `<textarea>` element as well. However, browsers do not apply them in a consistent manner, so the Editor ignores them when its size is rendered.
+
+### Default Content Styling
+
+Kendo UI Editor uses an `iframe` and applies some default CSS styles to its content when the [classic mode](#classic-mode) is enabled. This allows the widget to override the default browser styling. The styles are shown in the code snippet below. They are targeting mostly headings, paragraphs, links, lists, and tables. All tables inside the Editor obtain a `k-table` class, which is not included in the widget's value.
 
     html,
     body {
@@ -198,14 +198,13 @@ All tables inside the Editor obtain a `k-table` class, which is **not** included
       padding: 0;
     }
 
-There may be scenarios when the above styles are undesired and need to be removed or overridden. In order to remove all the styles, execute the following code after the Editor has been initialized.
+There may be scenarios when the above styles are undesired and need to be removed or overridden. To remove all the styles, execute the following code after the Editor has been initialized:
 
     var editor = $("#EditorID").data("kendoEditor");
     var styleTag = editor.body.parentNode.getElementsByTagName("style")[0];
     styleTag.parentNode.removeChild(styleTag);
 
-In order to override the above styles, use custom styles with [higher specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity) selectors and
-inject those custom styles in an [Editor stylesheet](http://demos.telerik.com/kendo-ui/editor/styles). When doing so, it is not required to customize the widget's Formatting tool.
+To override the above styles, use custom styles with [higher specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity) selectors and inject those custom styles in an [Editor stylesheet](http://demos.telerik.com/kendo-ui/editor/styles). When doing so, it is not required to customize the widget's Formatting tool.
 
 ## See Also
 
@@ -217,6 +216,12 @@ Other articles on Kendo UI Editor:
 * [Set Selections]({% slug set_selections_editor_widget %})
 * [Prevent Cross-Site Scripting]({% slug prevent_xss_editor_widget %})
 * [Troubleshooting]({% slug troubleshooting_editor_widget %})
+* [How to Add Max-Length Validation]({% slug howto_add_max_length_validation_editor %})
+* [How to Get Reference to Child Widgets]({% slug howto_get_referenceto_child_widgets_editor %})
+* [How to Insert HTML Content via Custom Popup Tools]({% slug howto_insert_html_content_custom_popup_tool_editor %})
+* [How to Set Caret Position]({% slug howto_set_caret_position_editor %})
+* [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
+* [How to Use Inline Editor inside Windows]({% slug howto_use_inline_editor_inside_windows_editor %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/editor/overview)
 * [Overview of the JSP Tag](/jsp/tags/editor/overview)
 * [Overview of the PHP Class](/php/widgets/editor/overview)

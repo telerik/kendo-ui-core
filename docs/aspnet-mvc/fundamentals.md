@@ -50,8 +50,9 @@ Widget IDs (Names) should meet the requirements for valid HTML ID attributes. Th
 Alternatively you can use `NumericTextBoxFor`. All Kendo UI server wrappers which accept a value can be initialized via a [WidgetName]For method e.g. DatePicker -> DatePicker**For**.
 Those methods set the **Name** of the server wrapper automatically. Thus `@Html.Kendo().NumericTextBoxFor(model => model.Age)` is the same as `@Html.Kendo().NumericTextBox().Name("Age").Value(Model.Age)`.
 
-> Widget names must always be unique in the context of the whole web page. In case multiple partial views are loaded and they contain widget instances with the same Name (ID),
-only one widget instance will work properly.
+> Widget Names must always be unique in the context of the **whole web page**. If a partial view is loaded multiple times, each instance of this partial view must render all widgets
+with unique Names (IDs). Failure to do so will result in duplicate element IDs on the page, and only one widget instance will be initialized and work properly
+(the one, which occurs first in the HTML markup).
 
 ## Deferred initialization
 

@@ -1,20 +1,21 @@
 ---
-title: Move popup notifications on window resize
-page_title: Move popup notifications on window resize
-description: Move popup notifications on window resize
+title: Move Popup Notifications on Window Resize
+page_title: Move Popup Notifications on Window Resize | Kendo UI Notification Widget
+description: "Learn how to move popup notifications on window resize in the Kendo UI Notification widget."
+slug: howto_move_popup_notifications_onwindow_resize_notification
 ---
 
-# Move popup notifications on window resize
+# Move Popup Notifications on Window Resize
 
-The following demo shows how to move popup notifications on browser window resize, so that they retain their original position with regard to the viewport boundaries.
+The example below demonstrates how to move popup notifications on browser window resize, so that they remain within the viewport boundaries.
 
-What the code below does is the following:
+The code from the snippet executes the following actions:
 
-1. Ensure that the `timeOutMoveFunction` function is executed once, some time after browser window resizing is complete.
-1. Calculate the expected position of the first (oldest) notification popup and compare it with the current position.
-1. Move all notification popups, according to the discrepancy derived in the previous point.
+1. Ensures that the `timeOutMoveFunction` function is executed once, some time after browser window resizing is complete.
+1. Calculates the expected position of the first (oldest) notification popup and compare it with the current position.
+1. Moves all notification popups, according to the discrepancy derived from the previous point.
 
-#### Example
+###### Example
 
 ```html
     <div id="example">
@@ -90,3 +91,10 @@ What the code below does is the following:
 
     </div>
 ```
+
+## See Also
+
+Other articles on Kendo UI Notification:
+
+* [JavaScript API Reference](/api/javascript/ui/notification)
+* [How to Stack Static Notifications to the Left or Right]({% slug howto_stack_static_tothe_leftor_right_notification %})

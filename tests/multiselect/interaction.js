@@ -290,13 +290,24 @@ test("MultiSelect highlights first item on refresh", function() {
 });
 
 test("MultiSelect unselects custom option", function() {
+    var data = [
+        ["item1", "item2"],
+        ["item3", "item4"]
+    ];
+
     var multiselect = new MultiSelect(select, {
-        dataSource: ["item1", "item2"],
+        dataSource: {
+            transport: {
+                read: function(options) {
+                    options.success(data.shift());
+                }
+            },
+            serverFiltering: true
+        },
         value: ["item1", "item2"]
     });
 
-    multiselect.listView.filter(true);
-    multiselect.dataSource.data(["item3", "item4"]);
+    multiselect.dataSource.filter({ value: "3", operator: "contains", field: "text" });
 
     multiselect.ul.children().eq(0).click();
     multiselect.tagList.children().first().find(".k-i-close").click();
@@ -319,7 +330,6 @@ test("MultiSelect removed custom option is not selected on list rebind", functio
     });
 
     multiselect.open();
-    multiselect.listView.filter(true);
     multiselect.dataSource.filter({
         field: "text",
         operator: "eq",
@@ -327,7 +337,6 @@ test("MultiSelect removed custom option is not selected on list rebind", functio
     });
 
     multiselect.ul.children().eq(0).click();
-    multiselect.listView.filter(false);
     multiselect.dataSource.filter({});
 
     var li = multiselect.ul.find(".k-state-selected");
@@ -337,13 +346,24 @@ test("MultiSelect removed custom option is not selected on list rebind", functio
 });
 
 test("MultiSelect removes value matching custom option", function() {
+    var data = [
+        ["item1", "item2"],
+        ["item3", "item4"]
+    ];
+
     var multiselect = new MultiSelect(select, {
-        dataSource: ["item1", "item2"],
+        dataSource: {
+            transport: {
+                read: function(options) {
+                    options.success(data.shift());
+                }
+            },
+            serverFiltering: true
+        },
         value: ["item1", "item2"]
     });
 
-    multiselect.listView.filter(true);
-    multiselect.dataSource.data(["item3", "item4"]);
+    multiselect.dataSource.filter({ value: "3", operator: "contains", field: "text" });
 
     multiselect.ul.children().eq(0).click();
     multiselect.tagList.children().first().find(".k-i-close").click();

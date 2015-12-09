@@ -509,7 +509,11 @@ $.extend(true, kendo.spreadsheet.messages.borderPalette,{
   "topBorder": "Top border",
   "rightBorder": "Right border",
   "bottomBorder": "Bottom border",
-  "noBorders": "No border"
+  "noBorders": "No border",
+  "reset": "Reset color",
+  "customColor": "Custom color...",
+  "apply": "Apply",
+  "cancel": "Cancel"
 });
 }
 
@@ -577,7 +581,8 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
       "number": "Number",
       "text": "Text",
       "date": "Date",
-      "custom": "Custom Formula"
+      "custom": "Custom Formula",
+      "list": "List"
     },
     "comparers": {
       "greaterThan": "greater than",
@@ -613,7 +618,8 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
       "showWarning": "Show warning",
       "showHint": "Show hint",
       "hintTitle": "Hint title",
-      "hintMessage": "Hint message"
+      "hintMessage": "Hint message",
+      "ignoreBlank": "Ignore blank"
     },
     "placeholders": {
       "typeTitle": "Type title",
@@ -657,6 +663,7 @@ $.extend(true, kendo.spreadsheet.messages.filterMenu,{
   "filterByCondition": "Filter by condition",
   "apply": "Apply",
   "search": "Search",
+  "addToCurrent": "Add to current selection",
   "clear": "Clear",
   "blanks": "(Blanks)",
   "operatorNone": "None",
@@ -707,6 +714,10 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   "backgroundColor": "Background",
   "bold": "Bold",
   "borders": "Borders",
+  "colorPicker": {
+    "reset": "Reset color",
+    "customColor": "Custom color..."
+  },
   "copy": "Copy",
   "cut": "Cut",
   "deleteColumn": "Delete column",
@@ -770,7 +781,8 @@ kendo.spreadsheet.messages.view =
 $.extend(true, kendo.spreadsheet.messages.view,{
   "errors": {
     "shiftingNonblankCells": "Cannot insert cells due to data loss possibility. Select another insert location or delete the data from the end of your worksheet.",
-    "filterRangeContainingMerges": "Cannot create a filter within a range containing merges"
+    "filterRangeContainingMerges": "Cannot create a filter within a range containing merges",
+    "validationError": "The value that you entered violates the validation rules set on the cell."
   },
   "tabs": {
     "home": "Home",

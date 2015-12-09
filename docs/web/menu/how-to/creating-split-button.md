@@ -1,14 +1,15 @@
 ---
-title: Creating Split Button
-page_title: Creating Split Button
-description: Creating Split Button.
+title: Create Split Button
+page_title: Create Split Button | Kendo UI Menu Widget
+description: "Learn how to create a Split button in the Kendo UI Menu widget."
+slug: howto_createa_split_button_menu
 ---
 
-# Creating Split Button. 
+# Create Split Button 
 
-The example below demonstrates how to create a Split Button using Kendo UI Menu.
+The example below demonstrates how to create a Split button using Kendo UI Menu.
 
-#### Example:
+###### Example
 
 ```html
     <ul id="myMenu">
@@ -62,3 +63,11 @@ The example below demonstrates how to create a Split Button using Kendo UI Menu.
       }
     </style>
 ```
+
+## See Also
+
+Other articles on Kendo UI Menu:
+
+* [JavaScript API Reference](/api/javascript/ui/menu)
+* [How to Execute Custom Click Actions Based on Class Name]({% slug howto_execute_custom_click_actions_basedon_classnames_menu %})
+* [How to Use FontAwesome Icons]({% slug howto_use_fontawesome_icons_menu %})

@@ -1,14 +1,15 @@
 ---
-title: Use raw method to set the model value
-page_title: Use raw method to set the model value
-description: Use raw method to set the model value
+title: Use Custom MVVM Binding to Set Model Value
+page_title: Use Custom MVVM Binding to Set Model Value | Kendo UI MaskedTextBox Widget
+description: "Learn how to use custom MVVM bindings to retrieve unmasked widget values in the Kendo UI MaskedTextBox widget."
+slug: howto_use_custommvvm_bindingto_setmodel_value_maskedtextbox
 ---
 
-# Use custom MVVM binding to retrieve unmasked widget value
+# Use Custom MVVM Binding to Set Model Value
 
-The example below demonstrates how to implement [a custom MVVM binding](http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/custom) to set the unmasked widget value
+The example below demonstrates how to implement [a custom MVVM binding](http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/custom) to set the unmasked widget value.
 
-#### Example:
+###### Example
 
 ```html
 <div id="example">
@@ -57,3 +58,12 @@ The example below demonstrates how to implement [a custom MVVM binding](http://d
     </script>
 </div>
 ```
+
+## See Also
+
+Other articles on Kendo UI MaskedTextBox:
+
+* [JavaScript API Reference](/api/javascript/ui/maskedtextbox)
+* [How to Customize Masks through MVVM Binding]({% slug howto_customize_masks_through_mvvmbinding_mvvm_maskedtextbox %})
+* [How to Show Custom Placeholder on Blur]({% slug howto_show_custom_placeholderon_blur_maskedtextbox %})
+* [How to Use Custom Directive to Set Model Value]({% slug howto_use_raw_methodtoset_modelvalue_angularjs_maskedtextbox %})

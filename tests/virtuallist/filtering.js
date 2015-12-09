@@ -185,19 +185,51 @@
                 equal(virtualList.value()[0], 0);
             });
             virtualList.value([0]);
-            virtualList.filter(true);
             asyncDataSource.filter({ field: "letter", operator: "eq", value: "b" });
         });
     });
 
-    asyncTest("keeps selection after filtering", 1, function() {
+    asyncTest("removes selection when dataSource is filtered", 2, function() {
         asyncDataSource.read().then(function() {
-            virtualList.one("change", function() {
-                start();
-                ok(virtualList.items().first().hasClass(SELECTED), "item is selected");
+            virtualList.one("listBound", function() {
+                virtualList.one("listBound", function() {
+                    start();
+                    ok(virtualList.items().first().hasClass(SELECTED), "item is selected");
+                });
+                ok(!virtualList.items().first().hasClass(SELECTED), "item is selected");
+                asyncDataSource.filter([]);
             });
             virtualList.select(virtualList.items().first());
             asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
+        });
+    });
+
+    asyncTest("select the correct item after filter is cleared", 2, function() {
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        options.success(data);
+                    }, 0);
+                }
+            }
+        });
+
+        virtualList.setDataSource(dataSource);
+
+        dataSource.read().then(function() {
+            virtualList.one("listBound", function() {
+                virtualList.one("listBound", function() {
+                    virtualList.one("listBound", function() {
+                        start();
+                        equal(virtualList.items().find(".k-state-selected").length, 0);
+                        deepEqual(virtualList.select(), [17]);
+                    });
+                    dataSource.filter([]);
+                });
+                virtualList.select(11);
+            });
+            dataSource.filter({ field: "letter", operator: "eq", value: "b" });
         });
     });
 
@@ -249,7 +281,6 @@
             });
 
             virtualList.focus(30);
-            virtualList.filter(true);
 
             stub(dataSource, {
                 total: function() { return 1; } //return less items
@@ -263,13 +294,11 @@
         asyncDataSource.read().then(function() {
             virtualList.one("listBound", function() {
                 virtualList.one("listBound", function() {
-                   start(); 
+                   start();
                    ok(true, "listBound is fired");
                 });
-                virtualList.filter(false);
                 asyncDataSource.filter([]);
             });
-            virtualList.filter(true);
             asyncDataSource.filter({ field: "letter", operator: "eq", value: "b" });
         });
     });
@@ -336,7 +365,6 @@
         virtualList.one("listBound", function() {
             equal(this.items().first().text(), "Item 200");
         });
-        virtualList.filter(true);
         localDataSource.filter({field: "text", operator: "contains", value: "200"});
 
         virtualList.one("listBound", function() {
@@ -349,15 +377,12 @@
 
             start();
         });
-        virtualList.filter(true);
         localDataSource.filter({field: "text", operator: "contains", value: "1234"});
     });
 
     asyncTest("set focus to the first item after subsequent filtering", 1, function() {
-        virtualList.filter(true);
         localDataSource.filter({field: "text", operator: "contains", value: "200"});
 
-        virtualList.filter(true);
         localDataSource.filter([]);
 
         virtualList.one("listBound", function() {
@@ -365,7 +390,6 @@
 
             start();
         });
-        virtualList.filter(true);
         localDataSource.filter({field: "text", operator: "contains", value: "1234"});
     });
 
@@ -378,15 +402,13 @@
                 ok(virtualList.items().eq(0).hasClass("k-state-selected"));
             });
 
-            virtualList.filter(false);
             localDataSource.filter([]);
         });
-        virtualList.filter(true);
+
         localDataSource.filter({field: "text", operator: "contains", value: "0"});
     });
 
     asyncTest("resets pageSize after filters are cleared", 1, function() {
-        virtualList.filter(true);
         localDataSource.filter({field: "text", operator: "contains", value: "200"});
         localDataSource.range(0, 8);
 
@@ -395,7 +417,6 @@
             equal(virtualList.dataSource.pageSize(), 16);
         });
 
-        virtualList.filter(false);
         localDataSource.filter([]);
     });
 

@@ -146,7 +146,7 @@ The update interval of the "current time" marker, in milliseconds.
 
 ### currentTimeMarker.useLocalTimezone `Boolean` *(default: true)*
 
-If set to `false` the "current time" marker would be displayed using the scheduler [timezone](/api/web/scheduler#configuration-timezone).
+If set to `false` the "current time" marker would be displayed using the scheduler [timezone](/api/javascript/ui/scheduler#configuration-timezone).
 
 #### Example - set "current time" marker to use scheduler timezone
     <div id="scheduler"></div>
@@ -629,7 +629,7 @@ If set to `true` the user can update events. Updating is enabled by default.
 
 Configures the Kendo UI Window instance, which is used when the Grid edit mode is `"popup"`. The configuration is optional.
 
-For more information, please refer to the [Window configuration API](/api/web/window).
+For more information, please refer to the [Window configuration API](/api/javascript/ui/window).
 
 #### Example - Scheduler popup Window configuration
 
@@ -4278,7 +4278,7 @@ The fields which can be used in the template are:
 
 * date - represents the major tick date.
 
-> The `dateHeaderTemplate` option is supported when [views.type](#configuration-views.type) is set to "day" or "week".
+> The `dateHeaderTemplate` option is supported when [views.type](#configuration-views.type) is set to "day", "week", "workweek" and "timeline" views.
 
 #### Example - set the date header template
     <div id="scheduler"></div>
@@ -4819,7 +4819,7 @@ The fields which can be used in the template are:
 
 * date - represents the major tick date.
 
-> The `majorTimeHeaderTemplate` option is supported when [views.type](#configuration-views.type) is set to "day" or "week".
+> The `majorTimeHeaderTemplate` option is supported when [views.type](#configuration-views.type) is set to "day", "week", "workweek" and "timeline" views.
 
 #### Example - set the major time header template
 
@@ -5741,13 +5741,13 @@ Gets or sets the events (or slots) which are selected.
 
 ##### events `Array`
 
-The Uids of events which should be selected. List of the available events can be get using the [data](/api/web/scheduler#methods-select) method.
+The Uids of events which should be selected. List of the available events can be get using the [data](/api/javascript/ui/scheduler#methods-select) method.
 
 ##### options `Object`
 
 ##### options.events `Array`
 
-The Uids of events which should be selected. List of the available events can be get using the [data](/api/web/scheduler#methods-select) method.
+The Uids of events which should be selected. List of the available events can be get using the [data](/api/javascript/ui/scheduler#methods-select) method.
 
 ##### options.resources `Array`
 
