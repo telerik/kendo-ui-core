@@ -1056,6 +1056,7 @@ var __meta__ = { // jshint ignore:line
 
                 this.filterInput = $('<input class="k-textbox"/>')
                                       .attr({
+                                          placeholder: this.element.attr("placeholder"),
                                           role: "listbox",
                                           "aria-haspopup": true,
                                           "aria-expanded": false

@@ -1232,4 +1232,16 @@
          equal(input.attr("disabled"), "disabled");
     });
 
+    test("copy placeholder value to the filter input", function() {
+        var placeholder = "Type...";
+
+        input.attr("placeholder", placeholder);
+
+        var dropdownlist = new DropDownList(input, {
+            filter: "contains"
+        });
+
+        equal(dropdownlist.filterInput.attr("placeholder"),  placeholder);
+    });
+
 })();
