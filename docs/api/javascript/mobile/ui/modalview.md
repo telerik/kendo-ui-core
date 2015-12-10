@@ -136,9 +136,9 @@ Open the ModalView
 
 #### Parameters
 
-##### target `jQuery`
+##### target `jQuery` *(optional)*
 
-(optional) The target of the ModalView
+The target of the ModalView
 
 ## Events
 
