@@ -751,7 +751,7 @@ test("third combo is bound when only local data is used", function() {
         equal(childSource[1].id, "2");
     });
 
-    test("widget filters child on popup close", 1, function() {
+    test("widget filters child on popup close", 3, function() {
         var parentCB = new ComboBox(parent, {
             animation: false,
             optionLabel: "Select",
@@ -778,13 +778,14 @@ test("third combo is bound when only local data is used", function() {
             }
         });
 
-        parentCB2.bind("filtering", function() {
-            ok(true);
-        });
-
         parentCB.open();
         parentCB.select(0);
-        parentCB.select(1);
         parentCB.close();
+
+        var childSource = parentCB2.dataSource.view();
+
+        equal(childSource.length, 2);
+        equal(childSource[0].id, "1");
+        equal(childSource[1].id, "1");
     });
 })();
