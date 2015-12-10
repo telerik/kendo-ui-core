@@ -132,9 +132,8 @@ When you open the spreadsheet, the widget automatically generates a worksheet an
 <br>
 
 > **Important**  
-> Whenever **Cancel** is displayed as a command, click it if you want to close an active drop-down list or menu, or exit an open window, and return to the worksheet.
->
-> Whenever **Apply** is displayed as a command, click it if you want an option you selected to be applied.
+> * Whenever **Cancel** is displayed as a command, click it if you want to close an active drop-down list or menu, or exit an open window, and return to the worksheet.
+> * Whenever **Apply** is displayed as a command, click it if you want an option you selected to be applied.
 
 ## Formulas and Functions
 
