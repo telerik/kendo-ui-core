@@ -49,13 +49,13 @@ test("raise DOM change event", function() {
     datepicker._change("10/10/2000");
 });
 
-test("does not force element's DOM change event when the user manually edits the value and presses 'Enter'", 1, function() {
+test("does not force element's DOM change event when the user manually edits the value and presses 'Enter'", 0, function() {
     input.kendoDatePicker({
         value: new Date(2000, 10, 10, 10, 0, 0)
     });
 
     input.bind("change", function() {
-        ok(true);
+        ok(false);
     });
 
     input.focus()
