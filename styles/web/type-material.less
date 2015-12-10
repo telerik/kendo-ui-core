@@ -28,7 +28,7 @@
 @selected-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
 @focused-border-color: #67afe9;
 @focused-shadow: 0 2px 6px rgba(0,0,0,.2), 0 2px 3px rgba(0,0,0,.05);
-@focused-item-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.3);
+@focused-item-shadow: inset 0 0 0 1px contrast(@background, darken(@base, 50%), lighten(@base, 30%), 0.5);
 @focused-active-item-shadow: none;
 @active-text-color: @normal-text-color;
 @active-gradient: none;
@@ -713,65 +713,61 @@ html .km-pane-wrapper .k-header
     border-color: @focused-border-color;
 }
 
-.k-calendar .k-link
-{
-    color: @calendar-content-text-color;
+
+.k-calendar {
+    .k-link {
+        color: @calendar-content-text-color;
+    }
+
+    .k-footer {
+        padding: 0;
+    }
+
+    .k-footer .k-nav-today {
+        color: @form-widget-color;
+        text-decoration: @calendar-footer-text-decoration;
+        background-color: @calendar-footer-background;
+    }
+
+    .k-footer .k-nav-today:hover,
+    .k-footer .k-nav-today.k-state-hover {
+        background-color: @calendar-footer-hover-background;
+        text-decoration: @calendar-footer-hover-text-decoration;
+    }
+
+    .k-footer .k-nav-today:active {
+        background-color: @calendar-footer-active-background;
+    }
+
+    .k-link.k-nav-fast {
+        color: @form-widget-color;
+    }
+
+    .k-nav-fast.k-state-hover {
+        text-decoration: @calendar-header-hover-text-decoration;
+        background-color: @calendar-header-hover-background;
+        color: @hover-text-color;
+    }
+
+    .k-link.k-state-hover {
+        border-radius: @calendar-border-radius;
+    }
+
+    .k-footer .k-link {
+        border-radius: 0;
+    }
+
+    th {
+        background-color: @calendar-group-background-color;
+    }
+
 }
 
-.k-calendar .k-footer
-{
-    padding: 0;
-}
-
-.k-calendar .k-footer .k-nav-today
-{
-    color: @form-widget-color;
-    text-decoration: @calendar-footer-text-decoration;
-    background-color: @calendar-footer-background;
-}
-
-.k-calendar .k-footer .k-nav-today:hover,
-.k-calendar .k-footer .k-nav-today.k-state-hover
-{
-    background-color: @calendar-footer-hover-background;
-    text-decoration: @calendar-footer-hover-text-decoration;
-}
-
-.k-calendar .k-footer .k-nav-today:active
-{
-    background-color: @calendar-footer-active-background;
-}
-
-.k-calendar .k-link.k-nav-fast
-{
-    color: @form-widget-color;
-}
-
-.k-calendar .k-nav-fast.k-state-hover
-{
-    text-decoration: @calendar-header-hover-text-decoration;
-    background-color: @calendar-header-hover-background;
-    color: @hover-text-color;
-}
-
-.k-calendar .k-link.k-state-hover,
-.k-window-titlebar .k-link
-{
+.k-window-titlebar .k-link {
     border-radius: @calendar-border-radius;
 }
 
-.k-calendar .k-footer .k-link
-{
-    border-radius: 0;
-}
-
-.k-calendar th
-{
-    background-color: @calendar-group-background-color;
-}
-
-.k-calendar-container.k-group
-{
+.k-calendar-container.k-group {
     border-color: @group-border-color;
 }
 
@@ -2679,18 +2675,22 @@ td.k-state-focused.k-state-selected
 .box-shadow(@focused-active-item-shadow);
 }
 
-.k-calendar td.k-state-focused {
-    background-color: @hover-background-color;
-    .box-shadow(none);
+.k-calendar td.k-state-focused,
+.k-calendar td.k-state-selected.k-state-focused {
+    .box-shadow(@focused-item-shadow);
 }
 
 .k-calendar td.k-state-selected {
-    background-color: @primary-button-background-color;
+    background-color: @selected-background;
     .box-shadow(none);
 }
 
+.k-calendar td.k-state-selected.k-state-hover {
+    background-color: darken(@selected-background, 4%);
+}
+
 .k-calendar .k-state-selected > .k-link {
-    color: @inverse-text-color;
+    color: @base;
 }
 
 /* Calendar */
@@ -2721,6 +2721,19 @@ background-color: @secondary-header-background-color;
 .k-calendar .k-nav-fast.k-state-hover {
 border-radius: 0;
 }
+
+.k-calendar .k-today {
+    background-color: @accent;
+}
+
+.k-calendar .k-today .k-link {
+    color: @base;
+}
+
+.k-calendar .k-today.k-state-hover {
+    background-color: contrast(@background, darken(@accent, 10%), softlight(@accent, #b9b9b9), .5);
+} 
+
 
 .k-calendar .k-link.k-state-hover,
 .k-window-titlebar .k-link
