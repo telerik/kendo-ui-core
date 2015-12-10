@@ -713,4 +713,78 @@ test("third combo is bound when only local data is used", function() {
 
         parentCB.value(2);
     });
+
+    test("widget does not filter child if popup is opened", 3, function() {
+        var parentCB = new ComboBox(parent, {
+            animation: false,
+            dataValueField: "id",
+            dataTextField: "text2",
+            dataSource: [
+                {text: "item1", id: "1", text2: "i"},
+                {text: "item3", id: "2", text2: "i"}
+            ],
+            value: "2"
+        });
+
+        var parentCB2 = new ComboBox(child, {
+            dataValueField: "text",
+            dataTextField: "text",
+            cascadeFrom: "parent",
+            dataSource: {
+                data: [
+                    {text: "item1", id: "1"},
+                    {text: "item2", id: "1"},
+                    {text: "item3", id: "2"},
+                    {text: "item4", id: "2"}
+                ]
+            }
+        });
+
+
+        parentCB.open();
+        parentCB.select(0);
+
+        var childSource = parentCB2.dataSource.view();
+
+        equal(childSource.length, 2);
+        equal(childSource[0].id, "2");
+        equal(childSource[1].id, "2");
+    });
+
+    test("widget filters child on popup close", 1, function() {
+        var parentCB = new ComboBox(parent, {
+            animation: false,
+            optionLabel: "Select",
+            dataValueField: "id",
+            dataTextField: "text2",
+            dataSource: [
+                {text: "item1", id: "1", text2: "i"},
+                {text: "item3", id: "2", text2: "i"}
+            ],
+            value: "2"
+        });
+
+        var parentCB2 = new ComboBox(child.attr("id", "child"), {
+            dataValueField: "text",
+            dataTextField: "text",
+            cascadeFrom: "parent",
+            dataSource: {
+                data: [
+                    {text: "item1", id: "1"},
+                    {text: "item2", id: "1"},
+                    {text: "item3", id: "2"},
+                    {text: "item4", id: "2"}
+                ]
+            }
+        });
+
+        parentCB2.bind("filtering", function() {
+            ok(true);
+        });
+
+        parentCB.open();
+        parentCB.select(0);
+        parentCB.select(1);
+        parentCB.close();
+    });
 })();
