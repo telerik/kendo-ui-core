@@ -521,17 +521,23 @@ var __meta__ = { // jshint ignore:line
         },
 
         _change: function(value) {
-            var that = this;
-            value = that._update(value);
+            var that = this,
+            oldValue = that.element.val(),
+            dateChanged;
 
-            if (+that._old != +value) {
+            value = that._update(value);
+            dateChanged = +that._old != +value;
+
+            var valueUpdated = dateChanged && !that._typing;
+            var textFormatted = oldValue !== that.element.val();
+
+            if (valueUpdated || textFormatted) {
+                that.element.trigger(CHANGE);
+            }
+
+            if (dateChanged) {
                 that._old = value;
                 that._oldText = that.element.val();
-
-                if (!that._typing) {
-                    // trigger the DOM change event so any subscriber gets notified
-                    that.element.trigger(CHANGE);
-                }
 
                 that.trigger(CHANGE);
             }
