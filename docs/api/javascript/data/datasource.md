@@ -924,7 +924,7 @@ The result should have the following format:
     var dataSource = new kendo.data.DataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       serverGrouping: true,
       schema: {
         groups: "groups" // groups are returned in the "groups" field of the response
@@ -938,7 +938,7 @@ The result should have the following format:
     var dataSource = new kendo.data.DataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       serverGrouping: true,
       schema: {
         groups: function(response) {
