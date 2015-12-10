@@ -2,6 +2,7 @@
 title: Common Issues
 page_title: Common Issues | Kendo UI Upload Widget
 description: "Learn how to deal with issues you may encounter while using the Kendo UI Upload widget."
+previous_url: /web/upload/troubleshooting
 slug: troubleshooting_upload_widget
 position: 1
 ---
