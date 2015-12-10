@@ -157,7 +157,7 @@ Other articles on troubleshooting:
 * [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})
 * [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})
 * [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
-* [Common Issues in Kendo UI Upload](/web/upload/troubleshooting)
+* [Common Issues in Kendo UI Upload]({% slug troubleshooting_upload_widget %})
 * [Common Issues in Widgets Rendering Data Visualization](/dataviz/troubleshooting)
 * [Common Issues in Telerik UI for ASP.NET MVC](/aspnet-mvc/troubleshooting)
 * [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/grid/troubleshooting)

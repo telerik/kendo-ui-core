@@ -1,23 +1,36 @@
 ---
-title: Drag and drop
-page_title: Drag and drop feature in async mode of Kendo UI Upload widget
-description: Step-by-step instructions how to upload files with drag and drop feature in async mode in File Upload UI widget.
+title: Drag and Drop
+page_title: Drag and Drop | Kendo UI Upload Widget
+description: "Learn how to upload files with the drag-and-drop functionality in asyncronous mode in the Kendo UI Upload widget."
+slug: dragandrop_upload_widget
 position: 2
 ---
 
-Users can select files by dropping them over the Upload.
+# Drag and Drop
 
-This feature is only available in [async mode](modes#asynchronous-mode) and requires a supported browser.
+Users can select files by dropping them over the Kendo UI Upload. 
 
-## Uploading files with drag and drop
+> **Important** 
+> 
+> The drag-and-drop functionality is only available in [async mode](modes#asynchronous-mode) and requires a [supported browser]({% slug browsersupport_upload_widget %}).
 
-1. The drop zone will appear when a file is dragged over the browser window.  ![](/web/upload/upload-dd1.png)
-2. The drop zone will be highlighted when the mouse is over it.  ![](/web/upload/upload-dd2.png)
-3. Releasing the file over the drop zone will add it to the upload queue.  ![](/web/upload/upload-dd3.png)
+## Select and Upload Files
 
-##  Drop zone visibility
+### File Upload
 
-The drop zone is not visible by default. You can override this behavior with the following CSS rules:
+To upload a file, follow the steps below: 
+
+1. Drag a file over the browser window for the drop zone to appear. ![](/web/upload/upload-dd1.png)
+2. When you pass the mouse over the drop zone, it gets highligheted. ![](/web/upload/upload-dd2.png)
+3. Release the file over the drop zone so it adds it to the upload queue. ![](/web/upload/upload-dd3.png)
+
+###  Drop Zone Visibility
+
+By default, the drop zone is not visible. 
+
+The example below demonstrates how to override this behavior by applying the CSS rules.
+
+###### Example
 
     div.k-dropzone {
         border: 1px solid #c5c5c5; /* For Default; Different for each theme */
@@ -27,3 +40,12 @@ The drop zone is not visible by default. You can override this behavior with the
         visibility: visible;
     }
 
+## See Also
+
+Other articles on Kendo UI Upload:
+
+* [Overview]({% slug overview_kendoui_upload_widget %})
+* [Send and Receive Metadata]({% slug metadata_upload_widget %})
+* [Modes of Operation]({% slug modes_upload_widget %})
+* [Browser Support]({% slug browsersupport_upload_widget %})
+* [Troubleshooting]({% slug troubleshooting_upload_widget %})
