@@ -1,19 +1,24 @@
 ---
-title: Binding to a flat table
-page_title: Explains how to bind the Kendo UI TreeView to a flat data table that keeps references about the hierarchical structure.
-description: Documentation for the Kendo UI TreeView widget.
+title: Bind to Flat Tables
+page_title: Bind to Flat Tables | Kendo UI TreeView Widget
+description: "Learn how to bind the Kendo UI TreeView widget to a flat data table that keeps references about the hierarchical structure."
+slug: bindtoflattables_treeview_widget
 position: 2
 ---
 
-# Overview
+# Bind to Flat Tables
 
-The TreeView expects hierarchical data, so any flat structure must be converted to a hierarchical one before binding.
-This article shows two methods for the conversion, which differ in the amount of time necessary for their completion and the resulting tree.
+[Kendo UI TreeView widget](http://demos.telerik.com/kendo-ui/treeview/index) expects hierarchical data, so any flat structure must be converted to a hierarchical one before binding the widget to it. This article shows two methods for the conversion of flat data into hierarchical one, which differ from each other in the amount of time necessary for their completion and the resulting tree.
 
-## Method 1: Initial pre-processing of all data
+## Methods 
 
-This method pre-processes all available data and converts it to a hierarchy prior to binding the TreeView.
-This requires more time and memory, and the resulting tree is fully rendered.
+### Initial All-Data Pre-processing
+
+This method pre-processes all available data and converts it into a hierarchy prior to binding the TreeView widget. This requires more time and memory, and the resulting tree is fully rendered.
+
+The example below demonstrates how to pre-process all data before binding the TreeView to it.
+
+###### Example
 
     <div id="tree"></div>
     <script>
@@ -50,16 +55,20 @@ This requires more time and memory, and the resulting tree is fully rendered.
       return hash[rootLevel];
     }
 
-    // tree for visualizing data
+    // the tree for visualizing data
     $("#tree").kendoTreeView({
       dataSource: processTable(flatData, "id", "parent", 0),
       loadOnDemand: false
     });
     </script>
 
-## Method 2: Incremental data filtering
+### Incremental Data Filtering
 
-The second method allows nodes to be loaded on demand, but is more computationally intensive, as it requires the collection to be filtered each time a node gets expanded.
+This second method allows nodes to be loaded on demand, but is more computationally intensive as it requires the collection to be filtered each time a node gets expanded.
+
+The exampel below demonstrates how to filter data incrementally.
+
+###### Example
 
     <div id="tree"></div>
     <script>
@@ -78,7 +87,7 @@ The second method allows nodes to be loaded on demand, but is more computational
       { id: 12, parent: 5, text: "Item 1.1.3" }
     ];
 
-    // tree for visualizing data
+    // the tree for visualizing data
     $("#tree").kendoTreeView({
       dataSource: {
         transport: {
@@ -108,3 +117,10 @@ The second method allows nodes to be loaded on demand, but is more computational
       }
     })
     </script>
+
+## See Also
+
+Other articles on Kendo UI TreeView:
+
+* [Overview]({% slug overview_kendoui_treeview_widget %})
+* [JavaScript API Reference](/api/javascript/ui/treeview)

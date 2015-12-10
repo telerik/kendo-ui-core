@@ -1,29 +1,33 @@
 ---
 title: Overview
-page_title: Overview of Kendo UI jQuery TreeView widget
-description: Documentation for Kendo UI TreeView widget.
+page_title: Overview | Kendo UI TreeView Widget
+description: "Learn how to initialize the Kendo UI TreeView widget and configure its behavior."
+slug: overview_kendoui_treeview_widget
 position: 1
 ---
 
 # Overview
 
-The TreeView displays hierarchical data in a traditional tree structure. It supports user
-interaction through the mouse or touch to perform re-ordering operations via drag-and-drop.
+[Kendo UI TreeView widget](http://demos.telerik.com/kendo-ui/treeview/index) displays hierarchical data in a traditional tree structure. It supports user interaction through mouse or touch to perform re-ordering operations via drag-and-drop.
 
 ## Getting Started
 
-A TreeView can be created in two ways:
+### Initialize the TreeView
 
-1.  Define a hierarchical list with static HTML
-2.  Use dynamic data binding either to a local or remote data source.
+Kendo UI TreeView can be created in two ways:
 
-Static HTML definition is appropriate for small hierarchies and for data that does not change frequently.
-Databinding should be used for larger data sets and for data that changes frequently.
+1.  Through the definition of a hierarchical list by using static HTML. This approach is suitable for small hierarchies and for data that does not frequently change. 
+2.  Through the usage of dynamic data binding either to a local, or a remote data source. This approach is suitable for larger data sets and for data that frequently changes.
 
+> **Important**
+>
+> As TreeView should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
 
-## Creating a TreeView from HTML
+#### Initialize TreeView through a hierarchical HTML list
 
-### Create a hierarchical list in HTML
+The example below demonstrates how to initialize the TreeView through a hierarchical list in HTML.
+
+###### Example
 
     <ul id="treeView">
         <li>Item 1
@@ -35,23 +39,21 @@ Databinding should be used for larger data sets and for data that changes freque
         <li>Item 2</li>
     </ul>
 
-Initialization of a TreeView should occur after the DOM is fully loaded,
-preferably in the $(document).ready() event handler.
-
-### Initialize a TreeView using a selector within $(document).ready()
-
+    <script>
     $(document).ready(function() {
         $("#treeView").kendoTreeView();
     });
+    </script>
+    
+#### Initialize TreeView through local array data binding
 
-## Creating a TreeView with Data Binding to a Local Data Source
+The example below demonstrates how to create a TreeView and bind it to a local data source.
 
-### Create the TreeView container
+###### Example
 
     <div id="treeView"></div>
 
-### Initialize and bind the TreeView
-
+    <script>
     $(document).ready(function() {
         $("#treeView").kendoTreeView({
             dataSource: [
@@ -66,8 +68,13 @@ preferably in the $(document).ready() event handler.
             ]
         })
     });
+    </script>
 
-### Binding to a remote HierarchicalDataSource
+#### Initialize TreeView through remote service data binding
+
+The example below demonstrates how to create a TreeView and bind it to a remote HierarchicalDataSource.
+    
+###### Example
 
     $("#treeView").kendoTreeView({
         dataSource: {
@@ -86,80 +93,75 @@ preferably in the $(document).ready() event handler.
         }
     })
 
-A complete reference on how to bind the TreeView to different service end-points can be found
-on the [HierarchicalDataSource API help](/api/framework/hierarchicaldatasource).
+For a complete reference on how to bind the TreeView to different service end-points, refer to the [`HierarchicalDataSource` API article](/api/framework/hierarchicaldatasource).
 
-### Enabling drag-and-drop for TreeView nodes
+## Configuration
+
+### Drag and Drop
+
+When the drag-and-drop feature is enabled, the nodes of a TreeView can be dragged and dropped between all levels. The functionality also features useful tooltips that help users indicate where the node is going to be dropped.
+
+The example below demonstrates how to enable the drag-and-drop functionality for TreeView nodes.
+
+###### Example
 
     $("#treeView").kendoTreeView({
         dragAndDrop: true
     });
 
-When drag-and-drop is enabled, the nodes of a TreeView can be dragged and dropped between all
-levels, with useful tooltips helping indicate where the node will be dropped.
+### Item Properties
 
+When binding the TreeView through the `dataSource` configuration option, each item can acquire the properties demonstrated in the example below.
 
-## Accessing an Existing TreeView
-
-You can reference an existing **TreeView** instance via
-[jQuery.data()](http://api.jquery.com/jQuery.data/). Once a reference has been established, you can
-use the API to control its behavior.
-
-### Accessing an existing TreeView instance
-
-    var treeView = $("#treeView").data("kendoTreeView");
-
-## Item definition
-
-When binding through the dataSource configuration option, each item can have the following properties:
+###### Example
 
     var item = {
         text: "Item text",
 
-        // if specified, renders the item as a link. (<a href=""></a>)
+        // If specified, renders the item as a link (<a href=""></a>)
         url: "/",
 
-        // renders a <img class="k-image" src="/images/icon.png" />
+        // Renders a <img class="k-image" src="/images/icon.png" />
         imageUrl: "/images/icon.png",
 
-        // renders a <span class="k-sprite icon save" />
+        // Renders a <span class="k-sprite icon save" />
         spriteCssClass: "icon save",
 
-        // specifies whether the node text should be encoded or not
-        // useful when rendering node-specific HTML
+        // Specifies whether the node text should be encoded, or not
+        //(useful when rendering node-specific HTML)
         encoded: false,
 
-        // specifies whether the item is initially expanded
+        // Specifies whether the item is initially expanded
         // (applicable when the item has child nodes)
         expanded: true,
 
-        // specifies whether the item checkbox is initially checked
+        // Specifies whether the item checkbox is initially checked
         // (applicable for items with checkboxes using the default checkbox template)
         checked: true,
 
-        // specifies whether the item is initially selected
+        // Specifies whether the item is initially selected
         selected: true,
 
-        // indicates the sub-items of the item
+        // Indicates the sub-items of the item
         items: [
             { text: "Subitem text" }
         ]
     };
 
-The **text**, **imageUrl**, **spriteCssClass** and **url** fields can be changed through the
-[datatextfield](/api/web/treeview#dataTextField), [dataimageurlfield](/api/web/treeview#dataImageUrlField),
-[dataspritecssclassfield](/api/web/treeview#dataSpriteCssClassField), and [dataurlfield](/api/web/treeview#dataUrlField),
-respectively.
+The `text`, `imageUrl`, `spriteCssClass`, and `url` fields can be configured through the [`datatextfield`](/api/web/treeview#dataTextField), [`dataimageurlfield`](/api/web/treeview#dataImageUrlField), [`dataspritecssclassfield`](/api/web/treeview#dataSpriteCssClassField), and [`dataurlfield`](/api/web/treeview#dataUrlField) options respectively.
 
-You can add arbitrary fields when binding through a dataSource. These are stored in the HierarchicalDataSource,
-and can be easily accessed through the treeview [dataItem method](/api/web/treeview#dataitem):
+You can add arbitrary fields when binding through `dataSource`. These are stored in the `HierarchicalDataSource`, and can be easily accessed through the TreeView [`dataItem` method](/api/web/treeview#dataitem).
 
-## Common operations
+## Common Scenarios
 
-### Getting the node data in the select event handler
+### Get Node Data in `select` Event Handler
+
+The example below demonstrates how to get the node data in the `select` event handler.
+
+###### Example 
 
     function onSelect(e) {
-        // `this` refers to the TreeView object
+        // this refers to the TreeView object
         var dataItem = this.dataItem(e.node);
 
         console.log("Selected node with id=" + dataItem.id);
@@ -175,10 +177,13 @@ and can be easily accessed through the treeview [dataItem method](/api/web/treev
         select: onSelect
     });
 
-Since the dataItem is of type [Node](/api/framework/node),
-you can use its [loaded flag](/api/framework/node#methods-loaded) to force reloading of nodes from the server.
+### Reload Child Nodes When Nodes Expand
 
-### Reloading child nodes when nodes are expanded
+Since `dataItem` is of the [`Node`](/api/framework/node) type, you are able to use its [loaded flag](/api/framework/node#methods-loaded) to force reloading of nodes from the server. The `Node.loaded` method sets the loaded flag of the node, indicating that it needs to be refreshed.
+
+The example below demonstrates how to reload child nodes when nodes are expanded.
+
+###### Example
 
     function onExpand(e) {
         var dataItem = this.dataItem(e.node);
@@ -191,9 +196,11 @@ you can use its [loaded flag](/api/framework/node#methods-loaded) to force reloa
         expand: onExpand
     });
 
-The Node.loaded method sets the loaded flag of the node, indicating that it needs to be refreshed.
+### Gather Checked Nodes from TreeView
 
-### Gathering the checked nodes from a treeview
+The example below demonstrates how to gather the checked nodes from a Kendo UI TreeView. You are able to use the same approach for gathering expanded nodes.
+
+###### Example
 
     var treeview = $("#treeview").data("kendoTreeView");
     var checkedNodes = [];
@@ -212,11 +219,13 @@ The Node.loaded method sets the loaded flag of the node, indicating that it need
 
     gatherStates(treeview.dataSource.view());
 
-The same approach can be used for gathering of expanded nodes.
+### Project TreeView State
 
-### Projecting the TreeView state
+The `HierarchicalDataSource` does not support data projection. Therefore, you might need to remap state fields via the [`schema.parse`](/api/framework/datasource#configuration-schema.parse) configuration option. 
 
-Because the HierarchicalDataSource does not support data projection, you might need to remap state fields via the [schema.parse](/api/framework/datasource#configuration-schema.parse) configuration option:
+The example below demonstrates how to project a TreeView state.
+
+###### Example
 
     <div id="tree">
     <script>
@@ -251,3 +260,47 @@ Because the HierarchicalDataSource does not support data projection, you might n
       });
 
     </script>
+
+## Reference
+
+### Existing Instances 
+
+Refer to an existing TreeView instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference has been established, use the [TreeView API](/api/javascript/ui/treeview) to control its behavior.
+
+The example below demonstrates how to access an existing TreeView instance.
+
+###### Example
+
+    var treeView = $("#treeView").data("kendoTreeView");
+    
+## See Also
+
+Other articles on Kendo UI TreeView and how-to examples:
+
+* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/treeview/overview)
+* [Overview of the JSP Tag](/jsp/tags/treeview/overview)
+* [Overview of the PHP Class](/php/widgets/treeview/overview)
+* [Bind to Flat Tables]({% slug bindtoflattables_treeview_widget %})
+* [How to Attach Methods to Data Items]({% slug howto_attache_methodsto_dataitems_treeview %})
+* [How to Check Nodes Programatically]({% slug howto_checknodeprogramatically_treeview %})
+* [How to Combine Local Data with Remote Loading]({% slug howto_combinelocaldatawithremoteloading_treeview %})
+* [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
+* [How to Expand All Nodes upon Check]({% slug howto_expandallnodes_uponcheck_treeview %})
+* [How to Expand Nodes during Drag]({% slug howto_expandnodesduringdrag_treeview %})
+* [How to Filter Out Search Results]({% slug howto_filetroutserachresults_treeview %})
+* [How to Hide Checkboxes for Root Level]({% slug howto_hidecheckboxesforrootlevel_treeview %})
+* [How to Persist Expanded State]({% slug howto_persistexpandedstate_treeview %})
+* [How to Prevent Dragging Nodes to Root Level]({% slug howto_preventdragging_nodestorootlevel_treeview %})
+* [How to Render Multiple TreeViews Using HTML Source Binding]({% slug howto_rendermultipleusing_htmlsourcebinding_mvvm_treeview %})
+* [How to Scroll to Selected Item]({% slug howto_scrolltoselecteditem_treeview %})
+* [How to Show Lines between Nodes]({% slug howto_showlinesbetweennodes_treeview %})
+* [How to Show Node Context Menu]({% slug howto_shiwnodecontextmenu_treeview %})
+* [How to Sort Child Nodes]({% slug howto_sortchildnodes_treeview %})
+* [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})
+* [JavaScript API Reference](/api/javascript/ui/treeview)
+
+How-to examples on Kendo UI TreeView in AngularJS:
+
+* [How to Edit Nodes via Form]({% slug howto_editnodesviaform_angularjs_treeview %})
+* [How to Scroll to Item]({% slug howto_scrolltoitem_angularjs_treeview %})
+* [How to Toggle Nodes with Single Click]({% slug howto_togglenodeswithsingleclick_angularjs_treeview %})

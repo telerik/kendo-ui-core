@@ -1,14 +1,15 @@
 ---
-title: Check nodes programatically
-page_title: Check nodes programatically
-description: Check nodes programatically
+title: Check Nodes Programatically
+page_title: Check Nodes Programatically | Kendo UI TreeView Widget
+description: "Learn how to check the checkbox of a Kendo UI TreeView node programatically."
+slug: howto_checknodeprogramatically_treeview
 ---
 
-# Check nodes programatically
+# Check Nodes Programatically
 
-The example below demonstrates how to check the checkbox of a node programatically
+The example below demonstrates how to check the checkbox of a Kendo UI TreeView node programatically.
 
-#### Example
+###### Example
 
 ```html
   <div id="tree"></div>
@@ -36,3 +37,30 @@ The example below demonstrates how to check the checkbox of a node programatical
     treeview.dataItem(bar).set("checked", true);
   </script>
 ```
+
+## See Also
+
+How-to examples on Kendo UI TreeView in AngularJS:
+
+* [How to Edit Nodes via Form]({% slug howto_editnodesviaform_angularjs_treeview %})
+* [How to Scroll to Item]({% slug howto_scrolltoitem_angularjs_treeview %})
+* [How to Toggle Nodes with Single Click]({% slug howto_togglenodeswithsingleclick_angularjs_treeview %})
+
+Articles and other how-to examples on Kendo UI TreeView:
+
+* [JavaScript API Reference](/api/javascript/ui/treeview)
+* [How to Attach Methods to Data Items]({% slug howto_attache_methodsto_dataitems_treeview %})
+* [How to Combine Local Data with Remote Loading]({% slug howto_combinelocaldatawithremoteloading_treeview %})
+* [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
+* [How to Expand All Nodes upon Check]({% slug howto_expandallnodes_uponcheck_treeview %})
+* [How to Expand Nodes during Drag]({% slug howto_expandnodesduringdrag_treeview %})
+* [How to Filter Out Search Results]({% slug howto_filetroutserachresults_treeview %})
+* [How to Hide Checkboxes for Root Level]({% slug howto_hidecheckboxesforrootlevel_treeview %})
+* [How to Persist Expanded State]({% slug howto_persistexpandedstate_treeview %})
+* [How to Prevent Dragging Nodes to Root Level]({% slug howto_preventdragging_nodestorootlevel_treeview %})
+* [How to Render Multiple TreeViews Using HTML Source Binding]({% slug howto_rendermultipleusing_htmlsourcebinding_mvvm_treeview %})
+* [How to Scroll to Selected Item]({% slug howto_scrolltoselecteditem_treeview %})
+* [How to Show Lines between Nodes]({% slug howto_showlinesbetweennodes_treeview %})
+* [How to Show Node Context Menu]({% slug howto_shiwnodecontextmenu_treeview %})
+* [How to Sort Child Nodes]({% slug howto_sortchildnodes_treeview %})
+* [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})

@@ -12,11 +12,11 @@ position: 1
 
 ## Getting Started
 
+### Initialize the Gantt
+
 The Kendo UI Gantt widget needs two special types of Kendo UI DataSource components – the [`kendo.data.GanttDataSource`](/api/framework/ganttdatasource) for loading tasks, and [`kendo.data.GanttDependencyDataSource`](/api/framework/ganttdependencydatasource) for loading dependencies, although the widget can work when only tasks are loaded as well. The `GanttDataSource` contains instances of a custom Kendo UI model – [`kendo.data.GanttTask`](/api/framework/gantttask), which represents the Gantt task data items - and the `GanttDependencyDataSource` contains instances of the custom [`kendo.data.GanttDependency`](/api/framework/ganttdependency) model, which represents the Gantt dependency data items.
 
-## Data Binding
-
-### Bind to a Local Array
+### Bind to Local Arrays
 
 The easiest way to bind the Gantt is to provide the tasks and dependencies as an array of JavaScript objects. 
 
@@ -57,7 +57,7 @@ The example below demonstrates how to bind the widget to an array of JavaScript 
 
 This example initializes a Gantt widget with two tasks and one dependency between them. You can switch the views, edit the tasks, create and delete new tasks and dependencies. Any changes, however, are kept in-memory and are lost once the user refreshes the page. That is why it is better to bind the Gantt to a remote service, which persists the Gantt tasks and dependencies.
 
-### Bind to a Remote Service
+### Bind to Remote Data
 
 In most cases the Kendo UI Gantt widget would be bound to a remote service which will return, create, update or delete Gantt tasks and dependencies. The Kendo UI [online demos](http://demos.telerik.com/kendo-ui/web/gantt/) use a demo remote service, which returns sample Gantt tasks and dependencies. That service uses [JSONP](http://en.wikipedia.org/wiki/JSONP) in order to support cross-domain requests.
 
