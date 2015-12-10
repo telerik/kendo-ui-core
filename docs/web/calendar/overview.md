@@ -12,12 +12,12 @@ position: 1
 
 ## Getting Started
 
-### Initialize the Calendar 
+### Initialize the Calendar
 
 Initialize the Calendar by using a jQuery selector:
-    
+
     <div id="calendar"></div>
-    
+
     <script>
         $(document).ready(function(){
             $("#calendar").kendoCalendar();
@@ -43,7 +43,7 @@ The example below demonstrates how to create a Calendar with a selected date and
 ###### Example
 
     <div id="calendar"></div>
-    
+
     <script>
         $("#calendar").kendoCalendar({
             value: new Date(),
@@ -70,7 +70,7 @@ The example below demonstrates how to create a Calendar that allows users to sel
 ###### Example
 
     <div id="calendar"></div>
-    
+
     <script>
         $("#calendar").kendoCalendar({
             start: "year",
@@ -89,7 +89,7 @@ The example below demonstrates how to create a Calendar by using a custom templa
 ###### Example
 
     <div id="calendar"></div>
-    
+
     <script>
         $("#calendar").kendoCalendar({
             month: {
@@ -97,7 +97,7 @@ The example below demonstrates how to create a Calendar by using a custom templa
             }
         });
     </script>
- 
+
 The template wraps the `value` in a `<div>` HTML element. The structure of the data object that is passed to the template function:
 
     data = {
@@ -106,48 +106,6 @@ The template wraps the `value` in a `<div>` HTML element. The structure of the d
         value: date.getDate(),
         dateString: "2011/0/1" // formatted date using yyyy/MM/dd format and month is zero-based
     };
-
-## Disable Dates
-
-Kendo UI Calendar widget provides the functionality to disable certain days, such as weekends, national holidays, and others, which are not intended to be selected by the end user.
-
-### Set an Array
-
-One way to disable a date is by setting an array. List the days that need to be disabled by using the first letters from their names in English.
-
-###### Example
-
-```html
-   <div id="calendar"></div>
-   <script>
-    $("#calendar").kendoCalendar({
-		value: new Date(),
-		disableDates: ["we", "th"],
-	});
-  </script>
-```
-
-### Add a Function
-
-The other way to disable dates is by adding a function and determine its return value as `true` for the date that is disabled.
-
-###### Example
-
-```html
-    <div id="calendar"></div>
-    <script>
-    $("#calendar").kendoCalendar({
-        disableDates: function (date) {
-            var disabled = [13,14,20,21];
-            if (date && disabled.indexOf(date.getDate()) > -1 ) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-	});
-    </script>
-```
 
 ## See Also
 

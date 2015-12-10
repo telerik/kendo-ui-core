@@ -13,8 +13,8 @@ position: 1
 ## Getting Started
 
 ### Initialize the DateTimePicker
-    
-    <input id="dateTimePicker"> 
+
+    <input id="dateTimePicker">
 
     <script>
       $(document).ready(function(){
@@ -35,7 +35,7 @@ The DateTimePicker provides many configuration options that can be set during in
 * Format definition
 * Start view
 * Navigation depth (i.e., define the last view to which the user can navigate)
-* Interval definition between predefined values in the time drop-down list 
+* Interval definition between predefined values in the time drop-down list
 
 ### Selected, Min, and Max Datetime
 
@@ -43,7 +43,7 @@ The example below demonstrates how to define selected, min, and max datetimes.
 
 ###### Example
 
-    <input id="dateTimePicker"> 
+    <input id="dateTimePicker">
 
     <script>
         $(document).ready(function(){
@@ -63,7 +63,7 @@ The exampe below demonstrates how to define the datetime format.
 
 ###### Example
 
-    <input id="dateTimePicker"> 
+    <input id="dateTimePicker">
 
     <script>
         $("#dateTimePicker").kendoDateTimePicker({
@@ -72,8 +72,8 @@ The exampe below demonstrates how to define the datetime format.
     </script>
 
 The DateTimePicker value is parsed when the user changes the content via typing. This means that if, for example, the format contains only a time portion, the date will be reset to today. To support such a DateTimePicker format, you should make the widget textbox read-only after the widget is initialized and not via the widget's `readonly()` method. Otherwise the **Date** and **Time** pop-ups will be disabled.
-    
-    <input id="dateTimePicker"> 
+
+    <input id="dateTimePicker">
 
     <script>
         $("#dateTimePicker").kendoDateTimePicker({
@@ -93,7 +93,7 @@ The exampe below demonstrates how to define the time format.
         $("#dateTimePicker").kendoDateTimePicker({
             timeFormat: "hh:mm:ss tt" //this format will be used to format the predefined values in the time list.
         });
-    </script>     
+    </script>
 
 ### Start View and Navigation Depth
 
@@ -110,8 +110,8 @@ The exampe below demonstrates how to create a selectable month DateTimePicker.
 
 ###### Example
 
-    <input id="dateTimePicker"> 
-    
+    <input id="dateTimePicker">
+
     <script>
         $("#dateTimePicker").kendoDateTimePicker({
             start: "year",
@@ -132,50 +132,6 @@ Define the interval (in minutes) between values in the time drop-down list as de
             interval: 15
         })
     </script>
-
-## Disable Dates
-
-Kendo UI DateTimePicker widget provides the functionality to disable certain days, such as weekends, national holidays, and others, which are not intended to be selected by the end user.
-
-### Set an Array
-
-One way to disable a date is by setting an array. List the days that need to be disabled by using the first letters from their names in English.
-
-###### Example
-
-```html
-    <input id="dateTimePicker" />
-
-    <script>
-    $("#dateTimePicker").kendoDateTimePicker({
-		value: new Date(),
-		disableDates: ["we", "th"],
-	});
-    </script>
-```
-
-### Add a Function
-
-The other way to disable dates is by adding a function and determine its return value as `true` for the date that is disabled.
-
-###### Example
-
-```html
-    <input id="dateTimePicker" />
-
-    <script>
-        $("#dateTimePicker").kendoDateTimePicker({
-            disableDates: function (date) {
-                var disabled = [13,14,20,21];
-                if (date && disabled.indexOf(date.getDate()) > -1 ) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });
-    </script>
-```
 
 ## See Also
 
