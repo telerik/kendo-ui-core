@@ -87,6 +87,14 @@ With this simple configuration, the unchanged HTML5 form validation attributes w
 
      <input type="email" name="email" />
 
+### **date**- constrain the value to being a valid date, using [kendo.parseDate](/api/javascript/kendo#methods-parseDate) to validate input
+
+     <input type="date" name="date" />
+
+or
+
+     <input data-type="date" name="date" />
+
 ## Custom Validation Rules
 
 Beside the built-in validation rules, with KendoUI Validator you can set custom rules through the [rules configuration option](/api/javascript/ui/validator#rules).
