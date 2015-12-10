@@ -765,7 +765,7 @@
         equal(childSource[1].id, "2");
     });
 
-    test("widget filters child on popup close", 1, function() {
+    test("widget filters child on popup close", 3, function() {
         var ddl = new DropDownList(parent, {
             animation: false,
             optionLabel: "Select",
@@ -792,13 +792,14 @@
             }
         });
 
-        ddl2.bind("filtering", function() {
-            ok(true);
-        });
-
         ddl.open();
-        ddl.select(0);
         ddl.select(1);
         ddl.close();
+
+        var childSource = ddl2.dataSource.view();
+
+        equal(childSource.length, 2);
+        equal(childSource[0].id, "1");
+        equal(childSource[1].id, "1");
     });
 })();
