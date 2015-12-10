@@ -1,22 +1,32 @@
 ---
-title: Supported Browsers
-page_title: Supported browsers for Kendo UI Upload widget
-description: Detailed browser requirements for the Upload widget.
+title: Browser Support
+page_title: Browser Support | Kendo UI Upload Widget
+description: "Learn about the browser versions that support the Kendo UI Upload features."
+slug: browsersupport_upload_widget
 position: 5
 ---
 
-# Supported features
+# Browser Support
 
-The Upload component uses progressive enhancement to enable
-certain features when browser support is detected.
+The Kendo UI widget uses progressive enhancement to enable certain features when browser support is detected.
 
-## Supported features by browser
-| Feature                                         | IE  | Firefox | Chrome | Safari      | Opera |  Works w/o JavaScript
-| ---                                             | --- | ---     | ---    | ---         | ---   |  ---
-| Styled upload button                            | ✓   | ✓       | ✓      | ✓           | ✓     |  ✓
-| Asynchronous upload                             | ✓   | ✓       | ✓      | ✓           | ✓     |  ✕
-| Multiple file selection from the "Open" dialog  | 10+ | 3.6+    | ✓      | ✓           | ✕     |  ✓
-| Progress tracking                               | 10+ | 4+      | ✓      | ✓           | ✕     |  ✕
-| Drag & Drop                                     | 10+ | 4+      | ✓      | Mac OS only | ✕     |  ✕
-| Cancel upload in progress                       | ✓   | ✓       | ✓      | ✓           | ✓     |  ✕
+The table below lists each Kendo UI feature as supported by the respective browser version. 
 
+| Feature                                           | IE  | Firefox  | Chrome | Safari      | Opera   |  Works w/o JavaScript
+| ---                                               | --- | ---      | ---    | ---         | ---     |  ---
+| Styled **Upload** button                          | ✓   | ✓        | ✓      | ✓           | ✓      |  ✓
+| Asynchronous upload                               | ✓   | ✓        | ✓      | ✓           | ✓      |  ✕
+| Multiple file selection from the **Open** dialog  | 10+ | 3.6+     | ✓      | ✓           | ✕      |  ✓
+| Progress tracking                                 | 10+ | 4+       | ✓      | ✓           | ✕      |  ✕
+| File drag-and-drop                                | 10+ | 4+       | ✓      | Mac OS only | ✕      |  ✕
+| In-progress cancellation of upload                | ✓   | ✓        | ✓      | ✓           | ✓      |  ✕
+
+## See Also
+
+Other articles on Kendo UI Upload:
+
+* [Overview]({% slug overview_kendoui_upload_widget %})
+* [Drag and Drop]({% slug dragandrop_upload_widget %})
+* [Send and Receive Metadata]({% slug metadata_upload_widget %})
+* [Modes of Operation]({% slug modes_upload_widget %})
+* [Troubleshooting]({% slug troubleshooting_upload_widget %})

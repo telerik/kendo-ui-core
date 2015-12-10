@@ -1,23 +1,30 @@
 ---
 title: Metadata
-page_title: Documentation guide for using metadata in File Upload UI widget
-description: How to send metadata to the save handler and receive metadata in Kendo UI Upload widget.
+page_title: Metadata | Kendo UI Upload Widget
+description: "Learn how to send metadata to the save handler and receive metadata in the Kendo UI Upload widget."
+slug: metadata_upload_widget
 position: 3
 ---
 
-Asynchronous uploading usually means that you lose the association betwen the files and the context that they originate from.
+# Metadata
 
-Take an e-mail application for example. The save handler must associate the uploaded files to a particular message.
+Asynchronous uploading usually means that you lose the association between the files and the context they originate from. For example, in an application the save handler must associate the uploaded files with a particular message. The message and the file might even be processed on different servers in a load balancing or cloud computing scenario.
 
-The message and the file even might be processed on different servers in a load balancing or cloud computing scenario.
+## Send and Receive 
 
-## Sending metadata to the save handler
+### Send Metadata
 
-1. Add an input field for description. We will send its value to the save handler.
+To send metadata over to the the save handler, follow the steps below:
+
+**Step 1.** Add an `input` field for the file description. Its value is going to be sent to the save handler.
+
+###### Example
 
         <input type="text" id="fileDescription" />
 
-2. Declare a handler for the upload event and attach a data object to the passed event.
+**Step 2.** Declare a handler for the `upload` event and attach a data object to the passed event.
+
+###### Example
 
         function onUpload(e) {
             e.data = {
@@ -25,7 +32,9 @@ The message and the file even might be processed on different servers in a load 
             };
         }
 
-3. Attach the `upload` event handler.
+**Step 3.** Attach the `upload` event handler.
+
+###### Example
 
         $("#photos").kendoUpload({
             async: {
@@ -35,19 +44,21 @@ The message and the file even might be processed on different servers in a load 
             upload: onUpload
         });
 
-4. Process the file and the associated description
+**Step 4.** Process the file and the associated description. 
 
-The description, and any other fields of the `e.data` object, will be serialized in the POST request.
+The description, and any other fields of the `e.data` object, are going to be serialized in the POST request. 
 
-Please consult the documentation of your server-side platform for instructions on how to read posted form fields.
+For more information on how to read posted form fields, refer to the documentation of your server-side platform.
 
-## Receiving metadata from the save handler
+### Receive Metadata 
 
-The save handler can sometimes produce a result that needs to be routed back to the page.
+The save handler can sometimes produce a result that needs to be routed back to the page. The Upload requires a response in a JSON format with a `Content-Type` set to `"text/plain"`. Responses that are not empty and in a format ither than JSON are going to be treated as a server error.
 
-The Upload requires the response to be in JSON format with Content-Type set to "text/plain". Any non-empty response that is not JSON will be treated as a server error.
+To receive metadata from the save handler, follow the steps below:
 
-1. Build the response
+**Step 1.** Build the response.
+
+###### Example
 
         <?php
 
@@ -58,13 +69,17 @@ The Upload requires the response to be in JSON format with Content-Type set to "
             echo json_encode($data);
         ?>
 
-2. Declare a handler for the [success event](/api/web/upload/events.aspx#success) and process the response
+**Step 2.** Declare a handler for the [`success` event](/api/web/upload/events.aspx#success) and process the response.
+
+###### Example
 
         function onSuccess(e) {
             alert("Status: " + e.response.status);
         }
 
-3. Attach the event handler
+**Step 3.** Attach the event handler.
+
+###### Example
 
         $("#photos").kendoUpload({
             async: {
@@ -74,4 +89,16 @@ The Upload requires the response to be in JSON format with Content-Type set to "
             success: onSuccess
         });
 
-> The same approach of sending and receiving metadata is applicable for the **remove** handler as well.
+> **Important**
+>
+> The same approach of sending and receiving metadata is also applicable for the `remove` handler.
+
+## See Also
+
+Other articles on Kendo UI Upload:
+
+* [Overview]({% slug overview_kendoui_upload_widget %})
+* [Drag and Drop]({% slug dragandrop_upload_widget %})
+* [Modes of Operation]({% slug modes_upload_widget %})
+* [Browser Support]({% slug browsersupport_upload_widget %})
+* [Troubleshooting]({% slug troubleshooting_upload_widget %})
