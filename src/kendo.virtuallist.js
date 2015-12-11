@@ -211,7 +211,8 @@ var __meta__ = { // jshint ignore:line
     var VirtualList = DataBoundWidget.extend({
         init: function(element, options) {
             var that = this;
-            that._listCreated = false;
+
+            that.bound(false);
             that._fetching = false;
 
             Widget.fn.init.call(that, element, options);
@@ -311,7 +312,7 @@ var __meta__ = { // jshint ignore:line
                 that.dataSource.unbind(CHANGE, that._refreshHandler);
 
                 that._clean();
-                that._listCreated = false;
+                that.bound(false);
 
                 that._deferValueSet = true;
                 value = that.value();
@@ -339,7 +340,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var page = that.dataSource.page();
 
-            if (that.isBound() && !that._selectingValue && that._lastPage !== page) {
+            if (that.bound() && !that._selectingValue && that._lastPage !== page) {
                 that._lastPage = page;
                 that.trigger(LISTBOUND);
             }
@@ -364,12 +365,12 @@ var __meta__ = { // jshint ignore:line
                 if (!action && that._values.length && !filtered && !that.options.skipUpdateOnBind) {
                     that._selectingValue = true;
                     that.value(that._values, true).done(function() {
-                        that._listCreated = true;
+                        that.bound(true);
                         that._selectingValue = false;
                         that._triggerListBound();
                     });
                 } else {
-                    that._listCreated = true;
+                    that.bound(true);
                     that._triggerListBound();
                 }
             } else {
@@ -433,7 +434,7 @@ var __meta__ = { // jshint ignore:line
 
             that._values = value;
 
-            if ((that.isBound() && !that._mute && !that._deferValueSet) || _forcePrefetch) {
+            if ((that.bound() && !that._mute && !that._deferValueSet) || _forcePrefetch) {
                 that._prefetchByValue(value);
             }
 
@@ -807,8 +808,12 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        isBound: function() {
-            return this._listCreated;
+        bound: function(bound) {
+            if (bound === undefined) {
+                return this._listCreated;
+            }
+
+            this._listCreated = bound;
         },
 
         mute: function(callback) {
@@ -945,7 +950,7 @@ var __meta__ = { // jshint ignore:line
                 options = that.options,
                 dataSource = that.dataSource;
 
-            if (that._listCreated) {
+            if (that.bound()) {
                 that._clean();
             }
 
@@ -1229,7 +1234,7 @@ var __meta__ = { // jshint ignore:line
                     range2 = diff > 0 ? list2.slice(-diff) : list2.slice(0, -diff);
                 }
 
-                reorder(range, range2, that._listCreated);
+                reorder(range, range2, that.bound());
 
                 currentOffset = offset;
             };

@@ -802,17 +802,27 @@
         });
     });
 
-    test("isBound returns false if the list is not bound yet", 1, function() {
+    test("bound returns false if the list is not bound yet", 1, function() {
         var virtualList = new VirtualList(container, virtualSettings);
         asyncDataSource.read();
-        ok(!virtualList.isBound());
+        ok(!virtualList.bound());
     });
 
-    asyncTest("isBound returns true if the list is bound", 1, function() {
+    asyncTest("bound returns true if the list is bound", 1, function() {
         var virtualList = new VirtualList(container, virtualSettings);
         asyncDataSource.read().then(function() {
             start();
-            ok(virtualList.isBound());
+            ok(virtualList.bound());
+        });
+    });
+
+    asyncTest("bound sets the bound stat of the widget", 1, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+        asyncDataSource.read().then(function() {
+            start();
+            virtualList.bound(false);
+
+            ok(!virtualList.bound());
         });
     });
 
@@ -1429,7 +1439,7 @@
                 }
             });
 
-            ok(!virtualList.isBound());
+            ok(!virtualList.bound());
             ok(!virtualList.element.html());
             start();
         });
