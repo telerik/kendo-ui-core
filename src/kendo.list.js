@@ -376,7 +376,7 @@ var __meta__ = { // jshint ignore:line
             var value = that.value();
             var trigger;
 
-            if (that._isSelect && !that.listView.isBound() && optionValue) {
+            if (that._isSelect && !that.listView.bound() && optionValue) {
                 value = optionValue;
             }
 
@@ -924,7 +924,7 @@ var __meta__ = { // jshint ignore:line
                 if (e.altKey) {
                     that.toggle(down);
                 } else {
-                    if (!that.listView.isBound()) {
+                    if (!that.listView.bound()) {
                         if (!that._fetch) {
                             that.dataSource.one(CHANGE, function() {
                                 that._fetch = false;
@@ -1028,7 +1028,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            if (!that.listView.isBound() && !that._fetch && !hasItems) {
+            if (!that.listView.bound() && !that._fetch && !hasItems) {
                 that._fetch = true;
                 that.dataSource.fetch().done(function() {
                     that._fetch = false;
@@ -1138,7 +1138,7 @@ var __meta__ = { // jshint ignore:line
                         return;
                     }
 
-                    if (that.listView.isBound()) {
+                    if (that.listView.bound()) {
                         that._clearSelection(parent, true);
                     }
 
@@ -1149,7 +1149,7 @@ var __meta__ = { // jshint ignore:line
                 parent.popup.bind("deactivate", cascadeHandler);
 
                 //refresh was called
-                if (parent.listView.isBound()) {
+                if (parent.listView.bound()) {
                     that._cascadeSelect(parent);
                 } else if (!parent.value()) {
                     that.enable(false);
@@ -1235,7 +1235,7 @@ var __meta__ = { // jshint ignore:line
             this.content = this.element.wrap("<div class='k-list-scroller' unselectable='on'></div>").parent();
             this.header = this.content.before('<div class="k-group-header" style="display:none"></div>').prev();
 
-            this._bound = false;
+            this.bound(false);
 
             this._optionID = kendo.guid();
 
@@ -1300,7 +1300,7 @@ var __meta__ = { // jshint ignore:line
                 value = that.value();
 
                 that.value([]);
-                that._bound = false;
+                that.bound(false);
 
                 that.value(value);
             } else {
@@ -1545,7 +1545,7 @@ var __meta__ = { // jshint ignore:line
                 that._valueDeferred = deferred = $.Deferred();
             }
 
-            if (that.isBound()) {
+            if (that.bound()) {
                 indices = that._valueIndices(that._values);
 
                 if (that.options.selectable === "multiple") {
@@ -1993,7 +1993,7 @@ var __meta__ = { // jshint ignore:line
 
             that._render();
 
-            that._bound = true;
+            that.bound(true);
 
             if (action === "itemchange") {
                 changedItems = findChangedItems(that._dataItems, e.items);
@@ -2019,8 +2019,12 @@ var __meta__ = { // jshint ignore:line
             that.trigger("dataBound");
         },
 
-        isBound: function() {
-            return this._bound;
+        bound: function(bound) {
+            if (bound === undefined) {
+                return this._bound;
+            }
+
+            this._bound = bound;
         },
 
         isGrouped: function() {

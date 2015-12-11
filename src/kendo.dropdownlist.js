@@ -204,7 +204,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            if (!that.listView.isBound() || that._state === STATE_ACCEPT) {
+            if (!that.listView.bound() || that._state === STATE_ACCEPT) {
                 that._open = true;
                 that._state = "rebind";
 
@@ -332,7 +332,7 @@ var __meta__ = { // jshint ignore:line
                 that._initialIndex = null;
             }
 
-            if (that._request && that.options.cascadeFrom && that.listView.isBound()) {
+            if (that._request && that.options.cascadeFrom && that.listView.bound()) {
                 if (that._valueSetter) {
                     dataSource.unbind(CHANGE, that._valueSetter);
                 }
@@ -828,7 +828,7 @@ var __meta__ = { // jshint ignore:line
                     that._word = "";
                 }, that.options.delay);
 
-                if (!that.listView.isBound()) {
+                if (!that.listView.bound()) {
                     dataSource.fetch().done(function () {
                         that._selectNext();
                     });

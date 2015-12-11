@@ -105,7 +105,7 @@
             template: "new #:data#"
         });
 
-        ok(!list.isBound());
+        ok(!list.bound());
     });
 
     test("setValue method updates values of the widget silently", function() {
@@ -1316,17 +1316,30 @@
         equal(list.args("scroll")[0], children[2]);
     });
 
-    test("isBound returns bound state of the list", function() {
+    test("bound returns bound state of the list", function() {
         var list = new StaticList(element, {
             dataSource: ["item1", "item2", "item3"],
             template: "#:data#"
         });
 
-        equal(list.isBound(), false);
+        equal(list.bound(), false);
 
         list.dataSource.read();
 
-        equal(list.isBound(), true);
+        equal(list.bound(), true);
+    });
+
+    test("bound sets bound state of the widget", function() {
+        var list = new StaticList(element, {
+            dataSource: ["item1", "item2", "item3"],
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        list.bound(false);
+
+        equal(list.bound(), false);
     });
 
     test("filter method prevent value selection on re-bind", function() {
