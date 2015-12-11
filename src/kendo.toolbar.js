@@ -877,7 +877,7 @@ var __meta__ = { // jshint ignore:line
                     threshold: 5,
                     allowSelection: true,
                     filter:
-                        "[" + KENDO_UID_ATTR + "=" + this.uid + "] ." + BUTTON + ", " +
+                        "[" + KENDO_UID_ATTR + "=" + this.uid + "] a." + BUTTON + ", " +
                         "[" + KENDO_UID_ATTR + "=" + this.uid + "] ." + OVERFLOW_BUTTON,
                     tap: proxy(that._buttonClick, that),
                     press: toggleActive,
