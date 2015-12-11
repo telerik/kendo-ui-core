@@ -61,7 +61,7 @@ If a resource instance has its `color` field set, the Scheduler will use this va
 
 ### Multiple Instance Resources
 
-A multiple instance resource is a resource of which more than one instance can be assigned to a scheduler event. A typical example is a Scheduler displaying a list of meetings and the meeting atendees. Since more than one atendee can participate in a meeting, it can be considered a multiple instance resource.
+A multiple instance resource is a resource of which more than one instance can be assigned to a scheduler event. A typical example is a Scheduler displaying a list of meetings and the meeting attendees. Since more than one attendee can participate in a meeting, it can be considered a multiple instance resource.
 
 The example below demonstrates how to use multiple instance resources.
 
@@ -77,20 +77,20 @@ The example below demonstrates how to use multiple instance resources.
           start: new Date("2013/6/6 11:00 AM"),
           end: new Date("2013/6/6 1:00 PM"),
           title: "Meeting with investors",
-          atendees: [2, 3] // Bob (value: 2) and Charlie (value: 3)
+          attendees: [2, 3] // Bob (value: 2) and Charlie (value: 3)
         },
         {
           id: 2,
           start: new Date("2013/6/6 10:15 AM"),
           end: new Date("2013/6/6 12:30 PM"),
           title: "Job Interview",
-          atendees: [1, 2] // Alex (value: 1) and Bob (value: 2)
+          attendees: [1, 2] // Alex (value: 1) and Bob (value: 2)
         }
       ],
       resources: [
         {
-          field: "atendees", // The field of the scheduler event which contains the resource identifier
-          title: "Atendees", // The label displayed in the scheduler edit form for this resource
+          field: "attendees", // The field of the scheduler event which contains the resource identifier
+          title: "Attendees", // The label displayed in the scheduler edit form for this resource
           dataSource: [
             {
                 text: "Alex", // Text of the resource instance
@@ -127,7 +127,7 @@ Kendo UI Scheduler supports unlimited resource types. For instance, you are able
           end: new Date("2013/6/6 1:00 PM"),
           title: "Meeting with investors",
           roomId: 1, // Meeting Room 101 (value: 1)
-          atendees: [2, 3] // Bob (value: 2) and Charlie (value: 3)
+          attendees: [2, 3] // Bob (value: 2) and Charlie (value: 3)
         },
         {
           id: 2,
@@ -135,7 +135,7 @@ Kendo UI Scheduler supports unlimited resource types. For instance, you are able
           end: new Date("2013/6/6 12:30 PM"),
           title: "Job Interview",
           roomId: 2, // Meeting Room 102 (value: 2)
-          atendees: [1, 2] // Alex (value: 1) and Bob (value: 2)
+          attendees: [1, 2] // Alex (value: 1) and Bob (value: 2)
         }
       ],
       resources: [
@@ -154,8 +154,8 @@ Kendo UI Scheduler supports unlimited resource types. For instance, you are able
         },
         // Second resource type definition
         {
-          field: "atendees", // The field of the scheduler event which contains the resource identifier
-          title: "Atendees", // The label displayed in the scheduler edit form for this resource
+          field: "attendees", // The field of the scheduler event which contains the resource identifier
+          title: "Attendees", // The label displayed in the scheduler edit form for this resource
           dataSource: [
             {
                 text: "Alex", // Text of the resource instance
