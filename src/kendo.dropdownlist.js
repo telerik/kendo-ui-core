@@ -321,6 +321,7 @@ var __meta__ = { // jshint ignore:line
 
         value: function(value) {
             var that = this;
+            var listView = that.listView;
             var dataSource = that.dataSource;
 
             if (value === undefined) {
@@ -343,7 +344,14 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            that.listView.value(value).done(function() {
+            if (listView.bound() && listView.isFiltered()) {
+                listView.bound(false);
+                that._filterSource();
+            } else {
+                that._fetchData();
+            }
+
+            listView.value(value).done(function() {
                 if (that.selectedIndex === -1 && that.text()) {
                     that.text("");
                     that._accessor("", -1);
@@ -352,8 +360,6 @@ var __meta__ = { // jshint ignore:line
                 that._old = that.listView.value()[0];
                 that._oldIndex = that.selectedIndex;
             });
-
-            that._fetchData();
         },
 
         _optionLabel: function() {

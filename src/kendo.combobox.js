@@ -251,7 +251,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            if ((!that.listView.isBound() && state !== STATE_FILTER) || state === STATE_ACCEPT) {
+            if ((!that.listView.bound() && state !== STATE_FILTER) || state === STATE_ACCEPT) {
                 that._open = true;
                 that._state = STATE_REBIND;
                 that._filterSource();
@@ -544,7 +544,7 @@ var __meta__ = { // jshint ignore:line
 
             dataItem = that.dataItem();
 
-            if (that.options.autoBind === false && !that.listView.isBound()) {
+            if (that.options.autoBind === false && !that.listView.bound()) {
                 return;
             }
 
@@ -593,6 +593,7 @@ var __meta__ = { // jshint ignore:line
         value: function(value) {
             var that = this;
             var options = that.options;
+            var listView = that.listView;
 
             if (value === undefined) {
                 value = that._accessor() || that.listView.value()[0];
@@ -605,10 +606,17 @@ var __meta__ = { // jshint ignore:line
 
             that._accessor(value);
 
-            that.listView
+            if (listView.bound() && listView.isFiltered()) {
+                listView.bound(false);
+                that._filterSource();
+            } else {
+                that._fetchData();
+            }
+
+            listView
                 .value(value)
                 .done(function() {
-                    that._selectValue(that.listView.selectedDataItems()[0]);
+                    that._selectValue(listView.selectedDataItems()[0]);
 
                     if (that.selectedIndex === -1) {
                         that._accessor(value);
@@ -625,8 +633,6 @@ var __meta__ = { // jshint ignore:line
                         that._state = STATE_ACCEPT;
                     }
                 });
-
-            that._fetchData();
         },
 
         _click: function(e) {

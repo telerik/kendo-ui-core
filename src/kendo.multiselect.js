@@ -431,7 +431,7 @@ var __meta__ = { // jshint ignore:line
                 that._retrieveData = false;
             }
 
-            if (that._retrieveData || !that.listView.isBound() || that._state === ACCEPT) {
+            if (that._retrieveData || !that.listView.bound() || that._state === ACCEPT) {
                 that._open = true;
                 that._state = REBIND;
 
@@ -524,8 +524,10 @@ var __meta__ = { // jshint ignore:line
 
         value: function(value) {
             var that = this;
-            var oldValue = that.listView.value().slice();
+            var listView = that.listView;
+            var oldValue = listView.value().slice();
             var maxSelectedItems = that.options.maxSelectedItems;
+            var clearFilters = listView.bound() && listView.isFiltered();
 
             if (value === undefined) {
                 return oldValue;
@@ -537,11 +539,17 @@ var __meta__ = { // jshint ignore:line
                 value = value.slice(0, maxSelectedItems);
             }
 
-            that.listView.value(value);
+            if (clearFilters) {
+                listView.bound(false);
+                that._filterSource();
+            }
 
+            listView.value(value);
             that._old = value;
 
-            that._fetchData();
+            if (!clearFilters) {
+                that._fetchData();
+            }
         },
 
         _preselect: function(data, value) {
@@ -591,7 +599,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _isBound: function() {
-            return this.listView.isBound() && !this._retrieveData;
+            return this.listView.bound() && !this._retrieveData;
         },
 
         _dataSource: function() {

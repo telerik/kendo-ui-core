@@ -693,6 +693,65 @@
         equal(dropdownlist.selectedIndex, -1);
     });
 
+    test("value method selects item that exists only in unfiltered source", function() {
+        dropdownlist = createDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}],
+            filter: "contains"
+        });
+
+        dropdownlist.dataSource.filter({
+            field: "text",
+            operator: "contains",
+            value: "foo"
+        });
+
+        dropdownlist.value(2);
+
+        equal(dropdownlist.value(), "2");
+        equal(dropdownlist.text(), "bar");
+    });
+
+    asyncTest("value method selects item that exists only in unfiltered source (async)", 2, function() {
+        dropdownlist = createDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            if (options.data.filter && options.data.filter.filters[0]) {
+                                options.success([{text: "foo", value: 1}]);
+                            } else {
+                                options.success([{text: "foo", value: 1}, {text:"bar", value:2}]);
+                            }
+                        });
+                    }
+                },
+                serverFiltering: true
+            }
+        });
+
+        dropdownlist.one("dataBound", function() {
+            dropdownlist.dataSource.filter({
+                field: "text",
+                operator: "contains",
+                value: "foo"
+            });
+
+            dropdownlist.one("dataBound", function() {
+                dropdownlist.value(2);
+
+                dropdownlist.one("dataBound", function() {
+                    start();
+                    equal(dropdownlist.value(), "2");
+                    equal(dropdownlist.text(), "bar");
+                });
+            });
+        });
+    });
+
     test("dataItem() returns dataItem of the selected LI on init", function() {
         var select = $("<select><option value=''>Chai</option><option>Bar</option></select>").appendTo(QUnit.fixture);
         dropdownlist = new DropDownList(select);

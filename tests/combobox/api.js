@@ -722,6 +722,65 @@ asyncTest("ComboBox filter after value method is used", 1, function() {
     });
 });
 
+test("value method selects item that exists only in unfiltered source", function() {
+    var combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}],
+        filter: "contains"
+    });
+
+    combobox.dataSource.filter({
+        field: "text",
+        operator: "contains",
+        value: "foo"
+    });
+
+    combobox.value(2);
+
+    equal(combobox.value(), "2");
+    equal(combobox.text(), "bar");
+});
+
+asyncTest("value method selects item that exists only in unfiltered source (async)", 2, function() {
+    var combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: {
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        if (options.data.filter && options.data.filter.filters[0]) {
+                            options.success([{text: "foo", value: 1}]);
+                        } else {
+                            options.success([{text: "foo", value: 1}, {text:"bar", value:2}]);
+                        }
+                    });
+                }
+            },
+            serverFiltering: true
+        }
+    });
+
+    combobox.one("dataBound", function() {
+        combobox.dataSource.filter({
+            field: "text",
+            operator: "contains",
+            value: "foo"
+        });
+
+        combobox.one("dataBound", function() {
+            combobox.value(2);
+
+            combobox.one("dataBound", function() {
+                start();
+                equal(combobox.value(), "2");
+                equal(combobox.text(), "bar");
+            });
+        });
+    });
+});
+
 test("ComboBox does not change text if custom value is equal to options.value", function() {
     var combobox = new ComboBox(input, {
         dataSource: ["Item1", "Item2"],

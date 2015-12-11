@@ -108,7 +108,7 @@
         var multiSelect = QUnit.fixture.find("select").getKendoMultiSelect();
 
         equal(multiSelect.value()[0], "green");
-        equal(multiSelect.listView.isBound(), true);
+        equal(multiSelect.listView.bound(), true);
     });
 
     ngTest("multiselect honors autoBind:false option when valuePrimitive is false", 4, function() {
@@ -171,7 +171,7 @@
     function() {
         var widget = QUnit.fixture.find("select").getKendoMultiSelect();
 
-        equal(widget.listView.isBound(), false);
+        equal(widget.listView.bound(), false);
         equal(widget.value(), "");
     });
 })();
