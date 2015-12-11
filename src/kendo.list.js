@@ -648,6 +648,20 @@ var __meta__ = { // jshint ignore:line
         }
     });
 
+    function unifyType(value, type) {
+        if (value !== undefined && value !== "" && value !== null) {
+            if (type === "boolean") {
+                value = Boolean(value);
+            } else if (type === "number") {
+                value = Number(value);
+            } else if (type === "string") {
+                value = value.toString();
+            }
+        }
+
+        return value;
+    }
+
     extend(List, {
         inArray: function(node, parentNode) {
             var idx, length, siblings = parentNode.children;
@@ -663,7 +677,8 @@ var __meta__ = { // jshint ignore:line
             }
 
             return -1;
-        }
+        },
+        unifyType: unifyType
     });
 
     kendo.ui.List = List;
@@ -2059,20 +2074,6 @@ var __meta__ = { // jshint ignore:line
         }
 
         return found;
-    }
-
-    function unifyType(value, type) {
-        if (value !== undefined && value !== "" && value !== null) {
-            if (type === "boolean") {
-                value = Boolean(value);
-            } else if (type === "number") {
-                value = Number(value);
-            } else if (type === "string") {
-                value = value.toString();
-            }
-        }
-
-        return value;
     }
 
 })(window.kendo.jQuery);

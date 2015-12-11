@@ -33,6 +33,7 @@ var __meta__ = { // jshint ignore:line
         DataSource = kendo.data.DataSource,
         ARIA_DISABLED = "aria-disabled",
         ARIA_READONLY = "aria-readonly",
+        CHANGE = "change",
         DEFAULT = "k-state-default",
         DISABLED = "disabled",
         READONLY = "readonly",
@@ -95,10 +96,12 @@ var __meta__ = { // jshint ignore:line
             element
                 .addClass("k-input")
                 .on("keydown" + ns, proxy(that._keydown, that))
+                .on("keypress" + ns, proxy(that._keypress, that))
                 .on("paste" + ns, proxy(that._search, that))
                 .on("focus" + ns, function () {
                     that._active = true;
                     that._prev = that._accessor();
+                    that._oldText = that._prev;
                     that._placeholder(false);
                     wrapper.addClass(FOCUSED);
                 })
@@ -185,7 +188,7 @@ var __meta__ = { // jshint ignore:line
         events: [
             "open",
             "close",
-            "change",
+            CHANGE,
             "select",
             "filtering",
             "dataBinding",
@@ -370,6 +373,7 @@ var __meta__ = { // jshint ignore:line
 
                 this._accessor(value);
                 this._old = this._accessor();
+                this._oldText = this._accessor();
             } else {
                 return this._accessor();
             }
@@ -387,7 +391,7 @@ var __meta__ = { // jshint ignore:line
                 this.close();
                 return;
             }
-
+            this._oldText = element.val();
             this._select(item);
             this._blur();
 
@@ -490,6 +494,28 @@ var __meta__ = { // jshint ignore:line
             this._placeholder();
         },
 
+        _change: function() {
+            var that = this;
+            var value = that.value();
+            var trigger = value !== List.unifyType(that._old, typeof value);
+
+            var valueUpdated = trigger && !that._typing;
+            var itemSelected = that._oldText !== value;
+
+            if (valueUpdated || itemSelected) {
+                // trigger the DOM change event so any subscriber gets notified
+                that.element.trigger(CHANGE);
+            }
+
+            if (trigger) {
+                that._old = value;
+
+                that.trigger(CHANGE);
+            }
+
+            that.typing = false;
+        },
+
         _accessor: function (value) {
             var that = this,
                 element = that.element[0];
@@ -552,8 +578,12 @@ var __meta__ = { // jshint ignore:line
                 that.close();
             } else {
                 that._search();
-                that._typing = true;
             }
+        },
+
+        _keypress: function() {
+            this._oldText = this.element.val();
+            this._typing = true;
         },
 
         _move: function (action) {
