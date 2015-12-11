@@ -407,7 +407,7 @@ var __meta__ = { // jshint ignore:line
                         val = kNgModel;
                     }
 
-                    if (widget.options.autoBind === false && !widget.listView.isBound()) {
+                    if (widget.options.autoBind === false && !widget.listView.bound()) {
                         if (val) {
                             widget.value(val);
                         }
@@ -1033,7 +1033,7 @@ var __meta__ = { // jshint ignore:line
             val = val[valueField || options.dataTextField];
         }
 
-        if (self.options.autoBind === false && !self.listView.isBound()) {
+        if (self.options.autoBind === false && !self.listView.bound()) {
             if (!text && val && options.valuePrimitive) {
                 self.value(val);
             } else {
@@ -1073,7 +1073,7 @@ var __meta__ = { // jshint ignore:line
             });
         }
 
-        if (options.autoBind === false && !options.valuePrimitive && !self.listView.isBound()) {
+        if (options.autoBind === false && !options.valuePrimitive && !self.listView.bound()) {
             self._preselect(data, val);
         } else {
             self.value(val);

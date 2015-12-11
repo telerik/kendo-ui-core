@@ -1225,7 +1225,7 @@ var __meta__ = { // jshint ignore:line
                         }
                     }
 
-                    if (options.autoBind === false && !options.cascadeFrom && widget.listView && !widget.listView.isBound()) {
+                    if (options.autoBind === false && !options.cascadeFrom && widget.listView && !widget.listView.bound()) {
                         if (textField === valueField && !text) {
                             text = value;
                         }
