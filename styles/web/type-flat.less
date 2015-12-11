@@ -1365,6 +1365,10 @@ div.k-filebrowser-dropzone em
     background-color: darken(@alt-background-color, 10%);
 }
 
+.k-gantt .k-treelist tr:hover {
+    background-color: @hover-background;
+}
+
 .k-gantt .k-treelist .k-state-selected,
 .k-gantt .k-treelist .k-state-selected td,
 .k-gantt .k-treelist .k-alt.k-state-selected,
@@ -2056,7 +2060,7 @@ html .km-pane-wrapper .km-widget,
 
 .k-grid td.k-state-focused
 {
-    box-shadow: inset 0 0 0 1px @accent;
+    box-shadow: inset 0 0 0 1px darken(@accent, 8%);
 }
 
 .k-grid tr:hover .k-state-focused.k-state-selected,
