@@ -40,7 +40,6 @@ var __meta__ = { // jshint ignore:line
         DOCUMENT_ELEMENT = $(document.documentElement),
         WINDOW = $(window),
         SCROLL = "scroll",
-        RESIZE_SCROLL = "resize scroll",
         cssPrefix = support.transitions.css,
         TRANSFORM = cssPrefix + "transform",
         extend = $.extend,
@@ -373,7 +372,7 @@ var __meta__ = { // jshint ignore:line
         _resize: function(e) {
             var that = this;
 
-            if (e.type === "resize") {
+            if (support.resize.indexOf(e.type) !== -1) {
                 clearTimeout(that._resizeTimeout);
                 that._resizeTimeout = setTimeout(function() {
                     that._position();
@@ -390,7 +389,7 @@ var __meta__ = { // jshint ignore:line
             var method = toggle ? "on" : "off";
 
             this._scrollableParents()[method](SCROLL, this._resizeProxy);
-            WINDOW[method](RESIZE_SCROLL, this._resizeProxy);
+            WINDOW[method](support.resize + " scroll", this._resizeProxy);
         },
 
         _mousedown: function(e) {

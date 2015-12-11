@@ -742,21 +742,6 @@
         equal(anchor.css("font-style"), div.css("font-style"));
     });
 
-    asyncTest("re-position on resize", function() {
-        popup = new Popup(div, { anchor: anchor });
-        popup.open();
-
-        stub(popup, {
-            _position: popup._position
-        });
-
-        $(window).trigger("resize");
-        setTimeout(function() {
-            start();
-            equal(popup.calls("_position"), 1);
-        }, 100);
-    });
-
     test("calculate position correctly when content height is 'auto'", function() {
         popup = new Popup(div, { anchor: anchor });
         popup.open();
@@ -775,5 +760,39 @@
         var wrapperHeight = flipArgs[6];
 
         equal(elementHeight, wrapperHeight);
+    });
+
+    asyncTest("re-position on resize", function() {
+        popup = new Popup(div, { anchor: anchor });
+        popup.open();
+
+        stub(popup, {
+            _position: popup._position
+        });
+
+        $(window).trigger("resize");
+        setTimeout(function() {
+            start();
+            equal(popup.calls("_position"), 1);
+        }, 100);
+    });
+
+    asyncTest("re-positions if device orientation has changed", 1, function() {
+        kendo.support.resize = "orientationchange resize";
+
+        popup = new Popup(div, { anchor: anchor });
+        popup.open();
+
+        stub(popup, {
+            _position: popup._position
+        });
+
+        $(window).trigger("orientationchange");
+        setTimeout(function() {
+            start();
+            equal(popup.calls("_position"), 1);
+        }, 100);
+
+        kendo.support.resize = "resize";
     });
 })();
