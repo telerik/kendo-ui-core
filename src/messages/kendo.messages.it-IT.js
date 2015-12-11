@@ -500,9 +500,6 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
       "saveAsType": "Salva come tipo"
     }
   },
-  "excelExportDialog": {
-    "title": "Esporta in Excel..."
-  },
   "modifyMergedDialog": {
     "errorMessage": "Impossibile modificare parte di una cella unita."
   },
@@ -584,7 +581,6 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   "cut": "Taglia",
   "deleteColumn": "Rimuovi colonna",
   "deleteRow": "Rimuovi riga",
-  "excelExport": "Esporta in Excel...",
   "filter": "Filtro",
   "fontFamily": "Carattere",
   "fontSize": "Dimensione carattere",
@@ -618,11 +614,13 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
     "mergeVertically": "Unisci verticalmente",
     "unmerge": "Dividi celle"
   },
+  "open": "Apri...",
   "paste": "Incolla",
   "quickAccess": {
     "redo": "Ripristina",
     "undo": "Annulla"
   },
+  "saveAs": "Salva con nome...",
   "sortAsc": "Ordine crescente",
   "sortDesc": "Ordine decrescente",
   "sortButtons": {

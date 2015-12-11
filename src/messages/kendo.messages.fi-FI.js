@@ -627,9 +627,6 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
       "saveAsType": "Tiedoston tyyppi"
     }
   },
-  "excelExportDialog": {
-    "title": "Vie Exceliin..."
-  },
   "modifyMergedDialog": {
     "errorMessage": "Yhdistetyn solun osaa ei voi muuttaa."
   },
@@ -745,11 +742,13 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
     "mergeVertically": "Yhdistä pystysolut",
     "unmerge": "Poista solujen yhdistäminen"
   },
+  "open": "Avaa...",
   "paste": "Liitä",
   "quickAccess": {
     "redo": "Tee uudelleen",
     "undo": "Kumoa"
   },
+  "saveAs": "Tallenna nimellä...",
   "sortAsc": "Nouseva järjestys",
   "sortDesc": "Laskeva järjestys",
   "sortButtons": {
