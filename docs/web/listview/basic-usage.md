@@ -3,7 +3,7 @@ title: Walkthrough
 page_title: Walkthrough | Kendo UI ListView Widget
 description: "Learn how to display a custom layout of data-bound items through templates and easily implement the Kendo UI Listview widget in your application."
 slug: basic_usage_kendoui_listview_widget
-position: 2
+position: 1
 ---
 
 # Walkthrough

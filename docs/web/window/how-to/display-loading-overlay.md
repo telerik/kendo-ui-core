@@ -1,18 +1,17 @@
 ---
-title: Display loading overlay over the Window
-page_title: Display loading overlay over the Window
-description: Display loading overlay over the Window
+title: Display Loading Indicator over Window
+page_title: Display Loading Indicator over Window | Kendo UI Window Widget
+description: "Learn how to display a Kendo-UI-style loading indicator over the content area of the Kendo UI Window."
+slug: howto_displayloadingindicator_overwindow_window
 ---
 
-# Display a loading overlay over the Window content
+# Display Loading Indicator over Window
 
-The example below demonstrates how to display a [Kendo-UI-style loading indicator](/api/javascript/ui/ui#methods-progress)
-over the Window content area while (or before) a remote request is made.
+The example below demonstrates how to display a [Kendo-UI-style loading indicator](/api/javascript/ui/ui#methods-progress) over the Window content area while (or before) a remote request is made.
 
-The loading overlay must be displayed over the Window widget [**element**](/framework/widgets/wrapper-element) or some of its ancestors.
-This will ensure that the overlay will be removed automatically when the new content is loaded and rendered.
+The loading overlay must be displayed over the Window [widget `element`](/framework/widgets/wrapper-element) or some of its ancestors. This ensures that the overlay is removed automatically when the new content is loaded and rendered.
 
-#### Example:
+###### Example
 
 ```html
     <div id="example">
@@ -50,3 +49,18 @@ This will ensure that the overlay will be removed automatically when the new con
         </script>
     </div>
 ```
+
+## See Also
+
+Articles and other how-to examples on Kendo UI Window:
+
+* [JavaScript API Reference](/api/javascript/ui/window)
+* [How to Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
+* [How to Add **Close** Button inside Modal Windows]({% slug howto_addclosebutton_insidemodalwindows_window %})
+* [How to Cascade Open Windows]({% slug howto_cascadeopenwindows_window %})
+* [How to Create Confirmation Dialog via Promises]({% slug howto_createconfirmationdialog_viapromises_window %})
+* [How to Initialize the Grid]({% slug initialize_thegrid_window_widget %})
+* [How to Post to Iframe]({% slug howto_posttoiframe_window %})
+* [How to Restrict Window Positioning]({% slug howto_restrictpositioning_window %})
+* [How to Use Custom Action Icons]({% slug howto_posttoiframe_window %})
+* [How to Use MVVM Binding for Window Data Editing]({% slug howto_usemvvmbinding_forwindowdataediting_mvvm_window %})

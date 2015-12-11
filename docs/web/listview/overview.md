@@ -3,7 +3,7 @@ title: Overview
 page_title: Overview | Kendo UI ListView Widget
 description: "Learn how to initialize the Kendo UI ListView widget, customize its layout, and configure its behavior."
 slug: overview_kendoui_listview_widget
-position: 1
+position: 2
 ---
 
 # ListView Overview

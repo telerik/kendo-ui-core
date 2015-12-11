@@ -1,24 +1,20 @@
 ---
-title: Use custom Window action icons
-page_title: Use custom Window action icons
-description: Use custom Window action icons
+title: Use Custom Action Icons
+page_title: Use Custom Action Icons | Kendo UI Window Widget
+description: "Learn how to restrict the movement of a Kendo UI Window to a certain area."
+slug: howto_posttoiframe_window
 ---
 
-# Use custom Window action icons
+# Use Custom Action Icons
 
-The example below demonstrates how to use custom icons for the Window's action buttons. There are two options:
+There are two options to use custom icons for the action buttons of a Kendo UI Window:
 
-* use some of the [built-in Kendo UI icons, which are part of the theme sprite](http://demos.telerik.com/kendo-ui/styling/icons). Note that you can only use the **"normal"** icons
-that work with a `k-i-...` CSS class.
+* Use some of the [built-in Kendo UI icons, which are part of the theme sprite](http://demos.telerik.com/kendo-ui/styling/icons). Note that you can only use the `"normal"` icons that work with a `k-i-...` CSS class.
+* Use a custom icon, which is not provided by or related to Kendo UI.
 
-* use a custom icon, which is not provided by or related to Kendo UI.
+The example below demonstrates the two options of how to use custom icons for the action buttons of a Kendo UI Window. Note that the custom Window action name takes part in the generated CSS class of the icon's `span` element in the Window titlebar. For example, an action name `abc` is going to generate a `span.k-i-abc` element in the titlebar. When using Kendo UI icons, there is no need to write additional CSS code. When using non-Kendo UI icons, custom CSS is required, so that the generated CSS class is assigned the desired background image.
 
-The example below demonstrates both options.
-The important thing to note is that the custom Window action name takes part in the generated CSS class of the icon's `span` element in the Window titlebar.
-For example an action name `abc` will generate a `span.k-i-abc` element in the titlebar. When using Kendo UI icons, there is no need to write additional CSS code. When using
-non-Kendo UI icons, custom CSS is required, so that the generated CSS class is assigned the desired background image.
-
-#### Example:
+###### Example
 
 ```html
     <style>
@@ -61,3 +57,19 @@ non-Kendo UI icons, custom CSS is required, so that the generated CSS class is a
       });
     </script>
 ```
+
+## See Also
+
+Articles and other how-to examples on Kendo UI Window:
+
+* [JavaScript API Reference](/api/javascript/ui/window)
+* [How to Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
+* [How to Add **Close** Button inside Modal Windows]({% slug howto_addclosebutton_insidemodalwindows_window %})
+* [How to Cascade Open Windows]({% slug howto_cascadeopenwindows_window %})
+* [How to Create Confirmation Dialog via Promises]({% slug howto_createconfirmationdialog_viapromises_window %})
+* [How to Display Loading Indicator over Window]({% slug howto_displayloadingindicator_overwindow_window %})
+* [How to Initialize the Grid]({% slug initialize_thegrid_window_widget %})
+* [How to Post to Iframe]({% slug howto_posttoiframe_window %})
+* [How to Restrict Window Positioning]({% slug howto_restrictpositioning_window %})
+* [How to Use Custom Action Icons]({% slug howto_posttoiframe_window %})
+* [How to Use MVVM Binding for Window Data Editing]({% slug howto_usemvvmbinding_forwindowdataediting_mvvm_window %})
