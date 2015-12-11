@@ -256,7 +256,7 @@ The string that needs to be HTML encoded.
 
 ### parseDate
 
-Parses as a formatted string as a `Date`.
+Parses as a formatted string as a `Date`. Also see [Date Parsing](/framework/globalization/dateparsing)
 
 #### Example
     <script>
