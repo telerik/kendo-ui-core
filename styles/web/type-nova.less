@@ -162,6 +162,14 @@ textarea.k-textbox:hover,
     border-color: @widget-border-color;
 }
 
+.k-state-selected {
+    background-color: fadeout(@info, 75%);
+}
+
+.k-state-focused {
+    box-shadow: inset 0 0 0 1px darken(@widget-border-color, 35%);
+}
+
 .k-state-hover,
 .k-state-hover:hover,
 .k-splitbar-horizontal-hover:hover,
