@@ -1,14 +1,15 @@
 ---
-title: Restrict Window positioning
-page_title: Restrict Window positioning
-description: Restrict Window positioning
+title: Restrict Window Positioning
+page_title: Restrict Window Positioning | Kendo UI Window Widget
+description: "Learn how to restrict the movement of a Kendo UI Window to a certain area."
+slug: howto_restrictpositioning_window
 ---
 
-# Restrict Window positioning
+# Restrict Window Positioning
 
-The example below demonstrates how to restrict the movement of the Window to a certain area
+The example below demonstrates how to restrict the movement of a Kendo UI Window to a certain area.
 
-#### Example:
+###### Example
 
 ```html
     <div id="window">
@@ -55,3 +56,18 @@ The example below demonstrates how to restrict the movement of the Window to a c
       });
     </script>
 ```
+
+## See Also
+
+Articles and other how-to examples on Kendo UI Window:
+
+* [JavaScript API Reference](/api/javascript/ui/window)
+* [How to Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
+* [How to Add **Close** Button inside Modal Windows]({% slug howto_addclosebutton_insidemodalwindows_window %})
+* [How to Cascade Open Windows]({% slug howto_cascadeopenwindows_window %})
+* [How to Create Confirmation Dialog via Promises]({% slug howto_createconfirmationdialog_viapromises_window %})
+* [How to Display Loading Indicator over Window]({% slug howto_displayloadingindicator_overwindow_window %})
+* [How to Initialize the Grid]({% slug initialize_thegrid_window_widget %})
+* [How to Post to Iframe]({% slug howto_posttoiframe_window %})
+* [How to Use Custom Action Icons]({% slug howto_posttoiframe_window %})
+* [How to Use MVVM Binding for Window Data Editing]({% slug howto_usemvvmbinding_forwindowdataediting_mvvm_window %})
