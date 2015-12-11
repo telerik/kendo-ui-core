@@ -1345,12 +1345,22 @@ div.k-filebrowser-dropzone em
     background-color: darken(@alt-background-color, 10%);
 }
 
+.k-gantt .k-treelist tr:hover {
+    background-color: @hover-background;
+}
+
 .k-gantt .k-treelist .k-state-selected,
 .k-gantt .k-treelist .k-state-selected td,
 .k-gantt .k-treelist .k-alt.k-state-selected,
 .k-gantt .k-treelist .k-alt.k-state-selected > td
 {
     background-color: @selected-background-color;
+}
+
+.k-gantt .k-treelist .k-alt.k-state-selected:hover,
+.k-gantt .k-treelist .k-alt.k-state-selected:hover td
+{
+    background-color: darken(@selected-background, 4%);
 }
 
 .k-task-dot:after

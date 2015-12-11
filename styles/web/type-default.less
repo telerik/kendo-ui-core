@@ -1276,7 +1276,7 @@ div.k-filebrowser-dropzone em
 
 .k-grid tr:hover {
     .composite-background(@widget-gradient);
-    background-color: contrast(@widget-background-color, darken(@header-background-color, 20%), @header-background-color, .5)
+    background-color: contrast(@widget-background-color, darken(@header-background-color, 20%), @header-background-color, .5);
 }
 
 .k-grid td.k-state-selected.k-state-focused
@@ -1383,12 +1383,25 @@ div.k-filebrowser-dropzone em
     background-color: contrast(@alt-background-color, lighten(@alt-background-color, 5%), darken(@alt-background-color, 5%), 0.5);
 }
 
+.k-gantt .k-treelist tr:hover {
+   .composite-background(@widget-gradient);
+    background-color: contrast(@widget-background-color, darken(@header-background-color, 20%), @header-background-color, .5);
+}
+
 .k-gantt .k-treelist .k-state-selected,
 .k-gantt .k-treelist .k-state-selected td,
 .k-gantt .k-treelist .k-alt.k-state-selected,
 .k-gantt .k-treelist .k-alt.k-state-selected > td
 {
     background-color: @selected-background-color;
+    .composite-background(@selected-gradient);
+}
+
+.k-gantt .k-treelist .k-state-selected:hover,
+.k-gantt .k-treelist .k-state-selected:hover td
+{
+    background-color: saturate(@selected-background-color, 7%);
+    .composite-background(none);
 }
 
 .k-task-dot:after
