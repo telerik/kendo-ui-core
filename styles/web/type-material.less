@@ -818,6 +818,7 @@ html .km-pane-wrapper .k-header
 .k-state-focused,
 .k-list>.k-state-focused,
 .k-listview>.k-state-focused,
+.k-listview > .k-state-focused.k-state-selected,
 td.k-state-focused,
 .k-button.k-state-focused
 {
@@ -826,7 +827,6 @@ td.k-state-focused,
 
 .k-state-focused.k-state-selected,
 .k-list>.k-state-focused.k-state-selected,
-.k-listview>.k-state-focused.k-state-selected,
 td.k-state-focused.k-state-selected
 {
     .box-shadow(@focused-active-item-shadow);
@@ -2989,11 +2989,6 @@ color: @base;
 .k-grid tr:hover .k-state-selected,
 .k-grid tr.k-state-selected:hover td {
     background-color: darken(@selected-background, 4%);
-}
-
-.k-grid-header th.k-state-focused,
-.k-grid td.k-state-focused {
-    .box-shadow(inset @focused-item-shadow);
 }
 
 .k-grid-header .k-header .k-link,
