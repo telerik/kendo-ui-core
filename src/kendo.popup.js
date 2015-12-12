@@ -163,24 +163,17 @@ var __meta__ = { // jshint ignore:line
         },
 
         _animationClose: function() {
-            var that = this,
-                options = that.options;
+            var that = this;
+            var location = that.wrapper.data(LOCATION);
 
             that.wrapper.hide();
-
-            var location = that.wrapper.data(LOCATION);
-            var anchor = $(options.anchor);
 
             if (location) {
                 that.wrapper.css(location);
             }
 
-            if (options.anchor != BODY) {
+            if (that.options.anchor != BODY) {
                 that._hideDirClass();
-
-                anchor
-                    .children(ACTIVECHILDREN)
-                    .removeClass(ACTIVE);
             }
 
             that._closing = false;
@@ -273,10 +266,6 @@ var __meta__ = { // jshint ignore:line
 
                 if (options.anchor != BODY) {
                     that._showDirClass(animation);
-
-                    anchor
-                        .children(ACTIVECHILDREN)
-                        .addClass(ACTIVE);
                 }
 
                 element.data(EFFECTS, animation.effects)
@@ -297,7 +286,12 @@ var __meta__ = { // jshint ignore:line
             var direction = ((anchor.attr("class") || "").match(ACTIVEBORDERREGEXP) || ["", "down"])[1];
             var dirClass = ACTIVEBORDER + "-" + direction;
 
-            anchor.removeClass(dirClass);
+            anchor
+                .removeClass(dirClass)
+                .children(ACTIVECHILDREN)
+                .removeClass(ACTIVE)
+                .removeClass(dirClass);
+
             this.element.removeClass(ACTIVEBORDER + "-" + kendo.directions[direction].reverse);
         },
 
@@ -305,7 +299,12 @@ var __meta__ = { // jshint ignore:line
             var direction = animation.effects.slideIn ? animation.effects.slideIn.direction : "down";
             var dirClass = ACTIVEBORDER + "-" + direction;
 
-            $(this.options.anchor).addClass(dirClass);
+            $(this.options.anchor)
+                .addClass(dirClass)
+                .children(ACTIVECHILDREN)
+                .addClass(ACTIVE)
+                .addClass(dirClass);
+
             this.element.addClass(ACTIVEBORDER + "-" + kendo.directions[direction].reverse);
         },
 

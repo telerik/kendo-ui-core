@@ -742,6 +742,28 @@
         equal(anchor.css("font-style"), div.css("font-style"));
     });
 
+    test("add direction class to the anchor and popup", function() {
+        anchor = $("<div style='background:blue;position:absolute;left:100px;top:100px;'><div class='k-dropdown-wrap'>anchor</div></div>").appendTo(QUnit.fixture);
+        popup = new Popup(div, { anchor: anchor });
+        popup.open();
+
+        equal(anchor.hasClass("k-state-border-down"), true);
+        equal(anchor.find(".k-dropdown-wrap").hasClass("k-state-border-down"), true);
+        equal(div.hasClass("k-state-border-up"), true);
+    });
+
+    test("removes direction class from the anchor and popup", function() {
+        anchor = $("<div style='background:blue;position:absolute;left:100px;top:100px;'><div class='k-dropdown-wrap'>anchor</div></div>").appendTo(QUnit.fixture);
+        popup = new Popup(div, { anchor: anchor });
+
+        popup.open();
+        popup.close();
+
+        equal(anchor.hasClass("k-state-border-down"), false);
+        equal(anchor.find(".k-dropdown-wrap").hasClass("k-state-border-down"), false);
+        equal(div.hasClass("k-state-border-up"), false);
+    });
+
     test("calculate position correctly when content height is 'auto'", function() {
         popup = new Popup(div, { anchor: anchor });
         popup.open();
