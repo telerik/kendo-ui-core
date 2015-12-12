@@ -778,6 +778,7 @@
     });
 
     asyncTest("re-positions if device orientation has changed", 1, function() {
+        var defaultResize = kendo.support.resize;
         kendo.support.resize = "orientationchange resize";
 
         popup = new Popup(div, { anchor: anchor });
@@ -793,6 +794,6 @@
             equal(popup.calls("_position"), 1);
         }, 100);
 
-        kendo.support.resize = "resize";
+        kendo.support.resize = defaultResize;
     });
 })();

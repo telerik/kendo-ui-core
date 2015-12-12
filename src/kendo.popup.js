@@ -246,11 +246,9 @@ var __meta__ = { // jshint ignore:line
                                 .bind(that.downEvent, that._mousedownProxy);
 
                     // this binding hangs iOS in editor
-                    if (!(support.mobileOS.ios || support.mobileOS.android)) {
-                        // all elements in IE7/8 fire resize event, causing mayhem
-                        that._toggleResize(false);
-                        that._toggleResize(true);
-                    }
+                    // all elements in IE7/8 fire resize event, causing mayhem
+                    that._toggleResize(false);
+                    that._toggleResize(true);
                 }
 
                 that.wrapper = wrapper = kendo.wrap(element, options.autosize)
@@ -399,9 +397,14 @@ var __meta__ = { // jshint ignore:line
 
         _toggleResize: function(toggle) {
             var method = toggle ? "on" : "off";
+            var eventNames = support.resize;
+
+            if (!(support.mobileOS.ios || support.mobileOS.android)) {
+                eventNames += " " + SCROLL;
+            }
 
             this._scrollableParents()[method](SCROLL, this._resizeProxy);
-            WINDOW[method](support.resize + " scroll", this._resizeProxy);
+            WINDOW[method](eventNames, this._resizeProxy);
         },
 
         _mousedown: function(e) {
