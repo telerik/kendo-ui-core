@@ -436,9 +436,9 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (length) {
-                    if (!options.virtual) {
-                        that._resetFocusItem();
-                    } else {
+                    that._resetFocusItem();
+
+                    if (options.virtual) {
                         that.popup
                             .unbind("activate", that._resetFocusItemHandler)
                             .one("activate", that._resetFocusItemHandler);

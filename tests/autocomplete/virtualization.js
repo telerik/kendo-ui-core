@@ -176,4 +176,47 @@
 
         autocomplete.search("Item");
     });
+
+    asyncTest("do not focus first item on second search", 1, function() {
+        var autocomplete = new AutoComplete(select, {
+            close: function(e) { e.preventDefault(); },
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource : new kendo.data.DataSource({
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success({ data: generateData(options.data), total: 53 });
+                        }, 0);
+                    }
+                },
+                serverFiltering: true,
+                serverPaging: true,
+                pageSize: 40,
+                schema: {
+                    data: "data",
+                    total: "total"
+                }
+            }),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 20
+            }
+        });
+
+        autocomplete.one("dataBound", function() {
+            autocomplete.one("dataBound", function() {
+                start();
+                var firstItem = autocomplete.listView.content.find("li:first");
+
+                equal(firstItem.hasClass("k-state-focused"), false);
+            });
+
+            autocomplete.search("Item1");
+        });
+
+        autocomplete.search("Item");
+    });
 })();
