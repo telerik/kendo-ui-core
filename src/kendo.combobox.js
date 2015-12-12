@@ -98,8 +98,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (text) {
-                    that.input.val(text);
-                    that._prev = text;
+                    that._setText(text);
                 }
             }
 
@@ -542,21 +541,17 @@ var __meta__ = { // jshint ignore:line
                 return input.value;
             }
 
-            dataItem = that.dataItem();
-
             if (that.options.autoBind === false && !that.listView.bound()) {
+                that._setText(text);
                 return;
             }
 
+            dataItem = that.dataItem();
+
             if (dataItem && that._text(dataItem) === text) {
                 value = that._value(dataItem);
-                if (value === null) {
-                    value = "";
-                } else {
-                    value += "";
-                }
 
-                if (value === that._old) {
+                if (value === List.unifyType(that._old, typeof value)) {
                     that._triggerCascade();
                     return;
                 }
@@ -827,6 +822,11 @@ var __meta__ = { // jshint ignore:line
 
                 that._typingTimeout = null;
             }, that.options.delay);
+        },
+
+        _setText: function(text) {
+            this.input.val(text);
+            this._prev = text;
         },
 
         _wrapper: function() {

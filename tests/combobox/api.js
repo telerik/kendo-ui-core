@@ -451,6 +451,17 @@ test("text should set empty text to the combobox", function() {
     equal(combobox.text(), "");
 })
 
+test("text method should set input value when autoBind: false", function() {
+    var combobox = new ComboBox(input, {
+        dataSource: [{text: "foo", value: null}],
+        autoBind: false
+    });
+
+    combobox.text("Text");
+
+    equal(combobox.text(), "Text");
+});
+
 test('enable(false) should disable combobox', function() {
     var combobox = new ComboBox(input);
 
