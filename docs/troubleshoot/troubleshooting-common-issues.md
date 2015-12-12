@@ -100,6 +100,10 @@ There are two ways to avoid this problem:
 * Disable the modal popup's modality, so that elements outside it can be focused.
 * Use a [modal](/api/javascript/ui/window#configuration-modal) Kendo UI [Window](/web/window/overview) instead of a third-party popup.
 
+### Widgets do not work correctly on touch devices
+
+Client libraries, which interfere with touch events, such as FastClick, are not compatible with Kendo UI and may break the widgets' behavior, e.g. cause a dropdown to close immediately after opening. For more information, please refer to [What Exactly is the 300ms Click Delay](http://www.telerik.com/blogs/what-exactly-is.....-the-300ms-click-delay).
+
 ## CDN
 
 ### Scripts or Stylesheets Do Not Load from CDN
