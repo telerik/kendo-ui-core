@@ -99,7 +99,6 @@ var __meta__ = { // jshint ignore:line
                 .on("keypress" + ns, proxy(that._keypress, that))
                 .on("paste" + ns, proxy(that._search, that))
                 .on("focus" + ns, function () {
-                    that._active = true;
                     that._prev = that._accessor();
                     that._oldText = that._prev;
                     that._placeholder(false);
@@ -108,7 +107,6 @@ var __meta__ = { // jshint ignore:line
                 .on("focusout" + ns, function () {
                     that._change();
                     that._placeholder();
-                    that._active = false;
                     wrapper.removeClass(FOCUSED);
                 })
                 .attr({
@@ -468,7 +466,9 @@ var __meta__ = { // jshint ignore:line
         },
 
         _listChange: function() {
-            if (this._active && !this._muted) {
+            var isActive = this._active || this.element[0] === activeElement();
+
+            if (isActive && !this._muted) {
                 this._selectValue(this.listView.selectedDataItems()[0]);
             }
         },
@@ -666,7 +666,9 @@ var __meta__ = { // jshint ignore:line
         },
 
         _select: function(candidate) {
+            this._active = true;
             this.listView.select(candidate);
+            this._active = false;
         },
 
         _loader: function() {

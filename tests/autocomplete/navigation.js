@@ -130,7 +130,7 @@ test("pressing enter closes updates the value of the autocomplete", 1, function(
     });
 
     input.triggerHandler("focus");
-    input.val("b");
+    input.focus().val("b");
     autocomplete.search();
     input.press(kendo.keys.DOWN);
     input.press(kendo.keys.ENTER);
@@ -144,7 +144,7 @@ test("pressing tab closes updates the value of the autocomplete", 1, function() 
     });
 
     input.triggerHandler("focus");
-    input.val("b");
+    input.focus().val("b");
     autocomplete.search();
     input.press(kendo.keys.DOWN);
     input.press(kendo.keys.TAB);
@@ -163,12 +163,24 @@ test("select applies selected style", function() {
     ok(autocomplete.ul.children().first().is(".k-state-selected"));
 });
 
+test("select sets input value", function() {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: ["baz", "bar"]
+    });
+
+    input.focus().val("b");
+    autocomplete.search();
+    autocomplete.select(autocomplete.ul.children().first());
+
+    equal(input.val(), "baz");
+});
+
 test("select should accepts DOM element", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"]
     });
 
-    input.val("b");
+    input.focus().val("b");
     autocomplete.search();
     autocomplete.select(autocomplete.ul.children().first()[0]);
     ok(autocomplete.ul.children().first().is(".k-state-selected"));
@@ -228,7 +240,7 @@ test("esc closes the dropdown", function() {
         dataSource: ["baz", "bar"]
     });
 
-    input.val("b");
+    input.focus().val("b");
     autocomplete.search();
     input.press(kendo.keys.ESC);
     ok(!autocomplete.ul.is(":visible"));
