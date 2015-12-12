@@ -626,7 +626,7 @@ var __meta__ = { // jshint ignore:line
 
             e.keyCode = key;
 
-            if (altKey && key === keys.UP) {
+            if ((altKey && key === keys.UP) || key === keys.ESC) {
                 that._focusElement(that.wrapper);
             }
 
