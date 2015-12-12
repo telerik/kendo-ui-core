@@ -10,6 +10,12 @@ position: 251
 
 ## Kendo UI 2016 Q1
 
+### Changes from 2015 Q3 SP1 (2015.3.1111)
+
+#### Breaking Changes
+
+* **DropDownList/ComboBox/MultiSelect**: Widget will clear the applied filter if the user decides to set new value using the [value](/api/javascript/ui/dropdownlist#methods-value) method.
+
 ### Changes from 2015 Q3 (2015.2.930)
 
 #### Breaking Changes
@@ -417,9 +423,9 @@ This change will affect people using the private `_data` field of the data sourc
 
 **TabStrip**:
 
-* Q2 2014 introduces an additional TabStrip wrapper div which makes sure that the TabStrip changes in height won't affect the page scrolling position.  
+* Q2 2014 introduces an additional TabStrip wrapper div which makes sure that the TabStrip changes in height won't affect the page scrolling position.
 
-* TabStrip's **activate** event has been renamed to [**show**](/api/javascript/ui/tabstrip#events-show) event - which fires at the beginning of the open animation. A new [**activate**](/api/javascript/ui/tabstrip#events-activate) event has been introduced, which is fired at the end of the open animation. This is done for consistency with the rest of the widgets.  
+* TabStrip's **activate** event has been renamed to [**show**](/api/javascript/ui/tabstrip#events-show) event - which fires at the beginning of the open animation. A new [**activate**](/api/javascript/ui/tabstrip#events-activate) event has been introduced, which is fired at the end of the open animation. This is done for consistency with the rest of the widgets.
 
 * TabStrip automatically calls [**kendo.resize**](/api/javascript/kendo#methods-resize) to its contents in both [**show**](/api/javascript/ui/tabstrip#events-show) and [**activate**](/api/javascript/ui/tabstrip#events-activate) events.
 
@@ -456,7 +462,7 @@ This change is related to the introduction of the new FileBrowser tool.
 
 #### Breaking changes
 
-* **Grid**: Clicking on an input, link or button no longer triggers the selection.  
+* **Grid**: Clicking on an input, link or button no longer triggers the selection.
 
 * **ListView**: Clicking on an input, link or button no longer triggers the selection.
 
@@ -466,7 +472,7 @@ This change is related to the introduction of the new FileBrowser tool.
 
 #### Breaking changes
 
-* **Flat Theme**: Button background is now gray. The previous outcome can be achieved using **.k-primary** class.  
+* **Flat Theme**: Button background is now gray. The previous outcome can be achieved using **.k-primary** class.
 
 * **Kendo UI Web mobile skins**: The new skins for the mobile widgets in Kendo UI Web are **not compatible** with the Kendo UI Mobile platform themes and shouldn't be used together. However,
 you can style your app with them if you don't include any of the Kendo UI Mobile styling (even the common CSS) - **kendo.[skin-name].mobile.min.css** includes everything needed.
@@ -530,14 +536,14 @@ the new default import once functionality of @import directive).
 
 #### Breaking changes
 
-* **Core**: kendo.support.pointers now only shows support for IE11 pointer events - kendo.support.msPointers was added to indicate that IE10 pointer events are supported too.  
+* **Core**: kendo.support.pointers now only shows support for IE11 pointer events - kendo.support.msPointers was added to indicate that IE10 pointer events are supported too.
 
 * **Splitter**: the internal method `trigger("resize")`, which has been provided as a workaround in certain scenarios, no longer works. It has been replaced with a [public API method `resize()`](/using-kendo-in-responsive-web-pages), which now all Kendo UI widgets have.
 Also see [`kendo.resize()`](/api/javascript/kendo#methods-resize).
 
-* **Splitter**: the `layoutChange` event is now obsolete and will be removed in the future. Please use the `resize` event instead.  
+* **Splitter**: the `layoutChange` event is now obsolete and will be removed in the future. Please use the `resize` event instead.
 
-* **Kendo UI Scheduler for ASP.NET MVC**: "ISchedulerEvent" interface now includes two additional fields - "StartTimezone" and "EndTimezone" which stores the timezone information of the event.  
+* **Kendo UI Scheduler for ASP.NET MVC**: "ISchedulerEvent" interface now includes two additional fields - "StartTimezone" and "EndTimezone" which stores the timezone information of the event.
 
 * **Scheduler**: Changes in `recurrenceEditor` messages:
  -  `daily.days` becomes `daily.interval`
@@ -550,7 +556,7 @@ Also see [`kendo.resize()`](/api/javascript/kendo#methods-resize).
  -  `end.endCountOccurrence` becomes `end.occurrence`
  -  `end.endUntilOn` becomes `end.on`
 
-* **MVC DataSource**: The MVC DataSource transport now serializes numbers based on the used Kendo culture. As a result, if you are using an invariant culture number model binder, the numbers will not be parsed correctly. You should either use the the same culture to parse the numbers in the model binder or remove the model binder in order for numbers with a decimal separator to be parsed correctly.  
+* **MVC DataSource**: The MVC DataSource transport now serializes numbers based on the used Kendo culture. As a result, if you are using an invariant culture number model binder, the numbers will not be parsed correctly. You should either use the the same culture to parse the numbers in the model binder or remove the model binder in order for numbers with a decimal separator to be parsed correctly.
 
 * **ModalView**: The ModalView now supports autosizing when its content changes and when no height is set. Unfortunately we were able to implement this at the expense of
 the possibility to set the ModalView size in a CSS stylesheet. As a workaround please use the ModalView width and height options or set them through inline CSS instead.
@@ -561,7 +567,7 @@ the possibility to set the ModalView size in a CSS stylesheet. As a workaround p
 
 #### Breaking changes
 
-* **themes**: The icons in the sprite image have been rearranged to include more icons in two different sizes.  
+* **themes**: The icons in the sprite image have been rearranged to include more icons in two different sizes.
 
 * **Editor**: The default tool set now includes the newly introduced table editing. Toolbar tools are now grouped, so their dimensions have been increased by 2px. On the other hand,
 the "Font name" and "Font size" tools no longer appear by default. The idea is to encourage developers (and users respectively) to use the formatting dropdown, which provides a predefined (and customizable) set of options.
@@ -644,11 +650,11 @@ Enabling endless scrolling or press to load more configuration options now puts 
 
 #### Breaking Changes
 
-* jQuery is updated to 1.9.1  
+* jQuery is updated to 1.9.1
 
-* **Mobile:** Rename scrollTreshold option of the ListView to **scrollThreshold**  
+* **Mobile:** Rename scrollTreshold option of the ListView to **scrollThreshold**
 
-* **AutoComplete/ComboBox/DropDownList:** Rename enable option to **enabled**  
+* **AutoComplete/ComboBox/DropDownList:** Rename enable option to **enabled**
 
 * **TreeView/HierarchicalDataSource/Node:** The `children` field is initialized depending on the `hasChildren` field, as previously documented. Use the `append` and `load` methods to initialize it, and if accessing the children field directly, verify if it is present.
 
@@ -755,9 +761,9 @@ if using the Default skin, should be updated to:
 ```
 For more information check the [Styling Icons demo](http://demos.telerik.com/kendo-ui/web/styling/icons.html).
 
-*  **Popup:** Popup based widgets nested in other Popup based widgets create their Popup container inside the Popup parent. This means that a DropDownList created inside an already initialized Menu will create its list inside the Menu item's parent Popup.  
+*  **Popup:** Popup based widgets nested in other Popup based widgets create their Popup container inside the Popup parent. This means that a DropDownList created inside an already initialized Menu will create its list inside the Menu item's parent Popup.
 
-*  **TreeView:** The TreeView widget now depends on kendo.data.js  
+*  **TreeView:** The TreeView widget now depends on kendo.data.js
 
 *  **TreeView:** Using the API methods will re-create the HTML of the nodes. In order to get the new reference to the nodes, use the return value of the methods.
 
@@ -834,13 +840,13 @@ For more information check the [Styling Icons demo](http://demos.telerik.com/ken
 	<tr data-uid=”aaaaa-bbbbb-ddddd-gggg”><!--...--></tr>
 ```
 
-*  **DataViz:** The kendo.chart(.min).js file is replaced by kendo.dataviz(.min).js  
+*  **DataViz:** The kendo.chart(.min).js file is replaced by kendo.dataviz(.min).js
 
-*  **DataViz:** The axis orientation property deprecated in favor of dedicated verticalLine and verticalArea chart types  
+*  **DataViz:** The axis orientation property deprecated in favor of dedicated verticalLine and verticalArea chart types
 
-*  **DataViz:** The suite now requires kendo.dataviz.css to be included  
+*  **DataViz:** The suite now requires kendo.dataviz.css to be included
 
-*  **DataViz:** The Chart widget is now in the kendo.dataviz.ui namespace. Previously it was part of kendo.ui  
+*  **DataViz:** The Chart widget is now in the kendo.dataviz.ui namespace. Previously it was part of kendo.ui
 
 *  **Other:** `dataValueField` and `dataTextField` of DropDownList, ComboBox and AutoComplete, are set to empty string by default. In order to get your old code working, you will need to list the fields manually, like this:
 

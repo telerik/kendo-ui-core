@@ -1281,6 +1281,8 @@ Gets or sets the value of the MultiSelect.
 
 > **Important:** If there are no items, the value method will pre-fetch the data before continue with the value setting.
 
+> **Important:** The widget will **clear the applied filter** if a new value is set. Thus it ensures that the original/whole data set is available for selection.
+
 > **Important:** This method **does not trigger** [change](#events-change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
