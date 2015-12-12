@@ -1245,6 +1245,8 @@ Characters to force a suggestion.
 Gets or sets the text of the ComboBox. Widget will select the item with same text. If
 there are no matches then the text will be considered as a custom value of the widget.
 
+> **Important:** When the `autoBind` option is set to *false*, the widget will update only the selected text. The widget will stay **unbound**.
+
 > **Important:** This method **does not trigger** [change](#events-change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
