@@ -697,6 +697,10 @@ var __meta__ = { // jshint ignore:line
 
             that._dataSource();
 
+            if (that.listView.bound()) {
+                that._initialIndex = null;
+            }
+
             that.listView.setDataSource(that.dataSource);
 
             if (that.options.autoBind) {

@@ -1084,6 +1084,17 @@
         });
     });
 
+    test("setting source with setDataSource after widget is bound does not preselect first item", 2, function() {
+        dropdownlist = new DropDownList(input, { });
+
+        dropdownlist.setDataSource({
+            data: ["item1", "item2"]
+        });
+
+        equal(dropdownlist.select(), -1);
+        equal(dropdownlist.value(), "");
+    });
+
     test("Open popup when option label is defined", 1, function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: [],
