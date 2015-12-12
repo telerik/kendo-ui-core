@@ -702,6 +702,38 @@
         equal(dropdownlist.value(), "foo");
     });
 
+    test("widget triggers select event when select item with loop search", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: ["foo", "foo1", "foo2"],
+            select: function(e) {
+                equal(e.item.text(), "foo1");
+            }
+        });
+
+        dropdownlist.wrapper.focus()
+                    .trigger({
+                        type: "keypress",
+                        keyCode: "f".charCodeAt(0)
+                    });
+    });
+
+    test("widget prevents selection on loop search preventing select event", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: ["foo", "foo1", "foo2"],
+            select: function(e) {
+                e.preventDefault();
+            }
+        });
+
+        dropdownlist.wrapper.focus()
+                    .trigger({
+                        type: "keypress",
+                        keyCode: "f".charCodeAt(0)
+                    });
+
+        equal(dropdownlist.value(), "foo");
+    });
+
     test("widget passes optionLabel on select", 1, function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: [

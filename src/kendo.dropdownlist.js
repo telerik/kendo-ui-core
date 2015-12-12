@@ -693,6 +693,7 @@ var __meta__ = { // jshint ignore:line
             var dataLength = data.length + (!!this.optionLabel[0] ? 1 : 0);
             var isInLoop = sameCharsOnly(that._word, that._last);
             var startIndex = that.selectedIndex;
+            var oldFocusedItem;
             var text;
 
             if (startIndex === -1) {
@@ -715,7 +716,13 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (idx !== dataLength) {
+                oldFocusedItem = that._focus();
+
                 that._select(normalizeIndex(startIndex + idx, dataLength));
+
+                if (that.trigger("select", { item: that._focus() })) {
+                    that._select(oldFocusedItem);
+                }
 
                 if (!that.popup.visible()) {
                     that._change();
