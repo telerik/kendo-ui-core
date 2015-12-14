@@ -336,12 +336,16 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        skip: function() {
+            return this.dataSource.currentRangeStart();
+        },
+
         _triggerListBound: function () {
             var that = this;
-            var page = that.dataSource.page();
+            var skip = that.skip();
 
-            if (that.bound() && !that._selectingValue && that._lastPage !== page) {
-                that._lastPage = page;
+            if (that.bound() && !that._selectingValue && that._skip !== skip) {
+                that._skip = skip;
                 that.trigger(LISTBOUND);
             }
         },
@@ -845,7 +849,7 @@ var __meta__ = { // jshint ignore:line
         _clean: function() {
             this.result = undefined;
             this._lastScrollTop = undefined;
-            this._lastPage = undefined;
+            this._skip = undefined;
             $(this.heightContainer).remove();
             this.heightContainer = undefined;
             this.element.empty();
@@ -1023,9 +1027,9 @@ var __meta__ = { // jshint ignore:line
                 flatGroups = {};
 
             if (dataSource.pageSize() < pageSize) {
-                this._mute = true;
-                dataSource.pageSize(pageSize);
-                this._mute = false;
+                this.mute(function() {
+                    dataSource.pageSize(pageSize);
+                });
             }
 
             return function(index, rangeStart) {
@@ -1034,7 +1038,6 @@ var __meta__ = { // jshint ignore:line
                     if (lastRequestedRange !== rangeStart) {
                         lastRequestedRange = rangeStart;
                         lastRangeStart = rangeStart;
-                        that._fetching = true;
 
                         if (that._getterDeferred) {
                             that._getterDeferred.reject();
@@ -1056,14 +1059,10 @@ var __meta__ = { // jshint ignore:line
                     return null;
                 } else {
                     if (lastRangeStart !== rangeStart) {
-                        that._mute = true;
-                        that._fetching = true;
-
-                        dataSource.range(rangeStart, pageSize);
-                        lastRangeStart = rangeStart;
-
-                        that._fetching = false;
-                        that._mute = false;
+                        this.mute(function() {
+                            dataSource.range(rangeStart, pageSize);
+                            lastRangeStart = rangeStart;
+                        });
                     }
 
                     var result;

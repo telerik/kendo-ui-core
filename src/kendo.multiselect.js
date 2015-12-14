@@ -457,7 +457,7 @@ var __meta__ = { // jshint ignore:line
         _listBound: function() {
             var that = this;
             var data = that.dataSource.flatView();
-            var page = that.dataSource.page();
+            var skip = that.listView.skip();
             var length = data.length;
 
             that._angularItems("compile");
@@ -473,7 +473,7 @@ var __meta__ = { // jshint ignore:line
 
             that.popup.position();
 
-            if (that.options.highlightFirst && (page === undefined || page === 1)) {
+            if (that.options.highlightFirst && (skip === undefined || skip === 0)) {
                 that.listView.focusFirst();
             }
 

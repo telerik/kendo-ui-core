@@ -3525,11 +3525,11 @@ var __meta__ = { // jshint ignore:line
                 that._filter = options.filter;
                 that._group = options.group;
                 that._aggregate = options.aggregate;
-                that._skip = options.skip;
+                that._skip = that._currentRangeStart = options.skip;
                 that._take = options.take;
 
                 if(that._skip === undefined) {
-                    that._skip = that.skip();
+                    that._skip = that._currentRangeStart = that.skip();
                     options.skip = that.skip();
                 }
 
@@ -3622,7 +3622,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            that._skip = page * that.take();
+            that._skip = that._currentRangeStart = page * that.take();
 
             page += 1;
             options.page = page;
@@ -3642,7 +3642,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            that._skip = that._skip - that.take();
+            that._skip = that._currentRangeStart = that._skip - that.take();
 
             page -= 1;
             options.page = page;
@@ -3830,6 +3830,8 @@ var __meta__ = { // jshint ignore:line
 
                 that._skip = skip > that.skip() ? math.min(size, (that.totalPages() - 1) * that.take()) : pageSkip;
 
+                that._currentRangeStart = skip;
+
                 that._take = take;
 
                 var paging = that.options.serverPaging;
@@ -3965,6 +3967,10 @@ var __meta__ = { // jshint ignore:line
                 return (that._page !== undefined ? (that._page  - 1) * (that.take() || 1) : undefined);
             }
             return that._skip;
+        },
+
+        currentRangeStart: function() {
+            return this._currentRangeStart || 0;
         },
 
         take: function() {

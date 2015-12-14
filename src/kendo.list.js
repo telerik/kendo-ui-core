@@ -1317,6 +1317,10 @@ var __meta__ = { // jshint ignore:line
             that._fixedHeader();
         },
 
+        skip: function() {
+            return this.dataSource.skip();
+        },
+
         setOptions: function(options) {
             Widget.fn.setOptions.call(this, options);
 

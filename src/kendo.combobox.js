@@ -359,8 +359,8 @@ var __meta__ = { // jshint ignore:line
             var isActive = that.input[0] === activeElement();
 
             var data = that.dataSource.flatView();
-            var page = that.dataSource.page();
-            var isFirstPage = page === undefined || page === 1;
+            var skip = that.listView.skip();
+            var isFirstPage = skip === undefined || skip === 0;
 
             that._angularItems("compile");
 
