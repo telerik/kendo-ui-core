@@ -23,6 +23,9 @@ navigation:
     "web":
         title: "Web Widgets"
         position: 3
+    "web/styles-and-layout":
+        title: Styles and Layout
+        position: 1
     "dataviz":
         title: "Data Visualization"
         position: 4

@@ -15,17 +15,33 @@ Admittedly, RTL falls more into the internationalization space. However, we like
 
 ## Styles
 
-Kendo UI provides an out-of-the-box RTL support and adding the features to your applications is simple. All you need to do to get started is grab the `kendo.rtl.css` stylesheet from the Kendo UI `styles` folder in the latest release and add it to your application. Then, add an additional style declaration for the RTL stylesheet after the main Kendo UI styles:
+### Basic Usage
+
+Kendo UI provides out-of-the-box RTL support and adding the features to your applications is simple. To enable it, follow the steps below:
+
+1. Register the `kendo.rtl.css` stylesheet. It is found in the same folder as the `kendo.common.css` file - the Kendo UI `styles` folder in the latest release. Make sure you register the RTL stylesheet after the common stylesheet and before the theme stylesheet.
 
 	<link rel='stylesheet' href='/stylesheets/kendo.rtl.min.css' />
 
-Now, you need to activate the RTL support by adding the `k-rtl` class to a container element in your application. For example, you can add the class to the body tag:
+2. Wrap the Kendo UI widgets in an HTML element with the `k-rtl` CSS class. Assign this class to the `<body>` tag, so that no additional DOM elements are required.
 
-	<body class="k-rtl">
-		<!-- Your Amazing App -->
-	</body>
+		<body class="k-rtl">
+			<!-- Your Amazing App -->
+		</body>
 
-Once this class is applied, your entire application, including all Kendo UI widgets, will have RTL support. This includes the support for setting the `direction:rtl` CSS style and adjusting a widget layout and its behavior accordingly.
+The `k-rtl` class has the following effects:
+
+1. It applies a `direction:rtl` style, so you do not have to set it yourself when creating right-to-left applications.
+2. It causes the widgets to change their layout in accordance with the common RTL conventions. The `kendo.rtl.css` stylesheet is required for this to happen.
+3. It helps widget scripts to detect the RTL mode and, accordingly, widgets change their behavior.
+
+### Known Limitations
+
+* Vertical scrollbar position may be on the left or right side depending on the used browser. This cannot be controlled via CSS or script.
+* The layout of the Kendo UI ListView widget depends entirely on the defined template. The widget itself does nothing to convert an existing LTR template to RTL layout. If a `k-rtl` CSS class is present and applied to a wrapper element, text direction will be reversed, but floats, margins, paddings, etc., will keep their orientation.
+* Kendo UI Splitter does not reverse the order of its panes in RTL mode.
+
+For more information on appearance and layout in Kendo UI, refer to [this article on the themes and styles Kendo UI supports]({% slug themesandappearnce_kendoui_desktopwidgets %}).
 
 ## Configuration
 
