@@ -8,13 +8,13 @@ position: 1
 
 # Window Overview
 
-[Kendo UI Window widget](http://demos.telerik.com/kendo-ui/window/index) displays content in a modal or non-modal HTML window. By default, a Window can be moved, resized, and closed. Its content can also be defined with either as static HTML, or dynamically loaded via AJAX.
+The [Kendo UI Window widget](http://demos.telerik.com/kendo-ui/window/index) displays content in a modal or non-modal HTML window. By default, a Window can be moved, resized, and closed. Its content can also be defined with either as static HTML, or dynamically loaded via AJAX.
 
 ## Getting Started
 
 ### Initialize the Window
 
-Kendo UI Window can be initialized from virtually any DOM element. During initialization, the targeted content is going to be automatically wrapped in the `div` element of the widget. 
+Kendo UI Window can be initialized from virtually any DOM element. During initialization, the targeted content is going to be automatically wrapped in the `div` element of the widget.
 
 The example below demonstrates how to create the widget from a simple HTML element with the content of the Window and initialize it by using a jQuery selector.
 
@@ -50,8 +50,8 @@ The example below demonstrates how to configure this default Window behavior bef
 		</div>
 	</body>
 
-The example below demonstrates how to configure the Window behavior after initialization. 
-   
+The example below demonstrates how to configure the Window behavior after initialization.
+
 ###### Example
 
 	<body>
@@ -69,7 +69,7 @@ The example below demonstrates how to configure the Window behavior after initia
 		</div>
 	</body>
 
-## Configuration 
+## Configuration
 
 ### Defaults
 
@@ -119,7 +119,7 @@ The example below demonstrates how to set custom actions in a Window.
           e.preventDefault();
       });
 
-### Positioning and Opening 
+### Positioning and Opening
 
 In some scenarios, it is preferable to center a Window rather than open it near the HTML element used to define the content. It is also common to open a Window as the result of the action of a user rather than on the `load` event of a page. The [Window API](/api/javascript/ui/window) provides methods for handling these scenarios.
 
@@ -131,7 +131,7 @@ The example below demonstrates how to center a Kendo UI Window and open it on bu
         Content of the Window
     </div>
     <button id="openButton">Open Window</button>
-    
+
 The example below demonstrates how to initialize a Window, center, and configure the button click action.
 
 ###### Example
@@ -153,7 +153,7 @@ The example below demonstrates how to initialize a Window, center, and configure
 
 ### Dimensions
 
-By default, Kendo UI Window does not have any preset dimensions, so its size depends on its content. 
+By default, Kendo UI Window does not have any preset dimensions, so its size depends on its content.
 
 If the Window contains horizontally expandable block-level elements, including Kendo UI widgets such as the Grid, Editor, etc., the widget can expand horizontally to the point of touching the browser viewport's right edge. In such cases the widget sticks to the right viewport edge and cannot be separated from it. This issue is not related to Kendo UI, but rather to the fact that the Window is absolutely positioned with CSS. To avoid the issue, set some appropriate width to the Window, or set a (max-)width to its content.
 
@@ -166,7 +166,7 @@ When the Window uses an `iframe` element, it does not resize automatically accor
 Kendo UI Window provides built-in support for asynchronously loading content from a URL. This URL is expected to return an HTML fragment that can be loaded in a Window content area.
 
 > **Important**
-> 
+>
 > Loading full pages, i.e. pages with a DOCTYPE, `html`, `head`, and `body` tags, inside the Window with AJAX is incorrect and is going to cause all sorts of undesired side-effects, including a broken DOM tree, deleted widget instances, and Javascript errors.
 
 The example below demonstrates how to initialize the Window and configure its content loading.
@@ -188,18 +188,18 @@ If the Window has no set dimensions, it is probably going to resize after the AJ
 
 Kendo UI Window creates an iframe for its content if the content URL contains a protocol, i.e. it is assumed that in this case the nested page resides in another domain. If the URL does not contain a protocol, the assumption is that it is a local URL that is going to load a partial view (not a full page), so an iframe is not created. This behavior can be controlled explicitly through configuring the widget.
 
-> **Important** 
+> **Important**
 > * Loading HTML fragments (partial content) inside an iframe is incorrect. Iframe pages should include a DOCTYPE, `html`, `head`, and `body` tags, just like a standard web page does.
 >  * Using an iframe on iOS devices is not recommended. Iframes on these devices are not scrollable and always expand to match the content.
 
 The example below demonstrates how to access the `window` and `document` objects inside the `iframe`. Note that to achieve this, the nested page must belong to the same domain as the main page.
 
-###### Example 
+###### Example
 
     <div id="window"></div>
 
     <script>
-    
+
     var windowElement = $("#window").kendoWindow({
         iframe: true,
         content: "http://docs.telerik.com/kendo-ui/"
@@ -211,7 +211,7 @@ The example below demonstrates how to access the `window` and `document` objects
     // which is equivalent to
     // var iframeDocumentObject = iframeWindowObject.document;
     var iframejQuery = iframeWindowObject.$; // if jQuery is registered inside the iframe page, of course
-    
+
     </script>
 
 ### Use with Forms
@@ -225,7 +225,7 @@ By default, Kendo UI Window is moved in the DOM and placed as a child of the `bo
 
 When the Window contains a form, which is submitted via a standard POST request, the widget is going to close and the page reloaded. If you want to avoid this behavior, submit the form via Ajax. This is essentially recommended when the submitted data is validated on the server, because in such cases the Window should remain visible to display any validation messages that may be returned.
 
-### Destroy 
+### Destroy
 
 Unlike most widgets, Kendo UI Window is completely removed from the DOM when [destroyed](/framework/widgets/destroy). This means that the element, from which it was initialized, no longer exists on the page. Therefore, you are able to create a new Window instance only from another element.
 
@@ -243,7 +243,7 @@ To select only the Window content visible during printing and hide the rest of t
         {
             display: none !important;
         }
-        
+
         body > .k-window
         {
             display: block !important;
@@ -255,14 +255,14 @@ To select only the Window content visible during printing and hide the rest of t
             border-width: 0;
             box-shadow: none !important;
         }
-        
+
         .k-window .k-window-titlebar
         {
             display: none;
         }
     }
 
-## Reference 
+## Reference
 
 ### Existing Instances
 
@@ -290,27 +290,27 @@ The example below demonstrates how to access an existing Window instance from it
 
 If the Window is displaying a page in an iframe and the page needs to access the widget, you are able to achieve this by using `window.parent` from within the iframe.
 
-The example below demonstrates how to access an existing Window instance from within an iframe. 
+The example below demonstrates how to access an existing Window instance from within an iframe.
 
 ###### Example
 
     var win = window.parent.$("#window").data("kendoWindow");
 
 > **Important**
-> 
+>
 > The iframe-parent access is possible only if the iframe and the parent page belong to the same domain.
-    
+
 #### Access DOM elements
 
 Similar to other Kendo UI widgets, the Window has two DOM elements, which you may want to access and use to customize the appearance of the widget or its content. These are the widget's [`wrapper` and `element`](/framework/widgets/wrapper-element), which are provided as fields of the widget object. In specific scenarios, the Window wrapper can be used to tweak the widget's position or size, although this is normally done via the API and the [`setOptions` method](/api/javascript/ui/window#methods-setOptions).
 
-The example below demonstrates how to access the DOM elements of a Window. 
+The example below demonstrates how to access the DOM elements of a Window.
 
 ###### Example
 
     var win = $("#window").data("kendoWindow");
     var winWrapper = win.wrapper;
-    
+
     winWrapper.addClass("myWindowClass");
 
 ## Troubleshooting

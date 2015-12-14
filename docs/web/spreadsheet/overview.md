@@ -8,7 +8,7 @@ position: 1
 
 # Spreadsheet Overview
 
-[Kendo UI Spreadsheet widget](http://demos.telerik.com/kendo-ui/spreadsheet/index) allows editing and visualization of tabular data with a variety of cell formatting options, styles and themes. Out of the box, the Spreadsheet supports:
+The [Kendo UI Spreadsheet widget](http://demos.telerik.com/kendo-ui/spreadsheet/index) allows editing and visualization of tabular data with a variety of cell formatting options, styles and themes. Out of the box, the Spreadsheet supports:
 
 * Multiple sheets
 * Excel like selection and active cell
@@ -33,7 +33,7 @@ Each of these features is exposed as a UI for the end user, as well as is expose
 
 ## Getting Started
 
-### Initialize the Spreadsheet 
+### Initialize the Spreadsheet
 
 Intsantiate the Spreadsheet widget by using an empty `<div>` element:
 
@@ -82,15 +82,19 @@ The range is retrieved using a string with an [A1](https://msdn.microsoft.com/en
 
 ## Data Import/Export
 
-The Spreadsheet offers methods for storing and loading data in a JSON format. For more information on the data import and export functionality in the Spreadsheet, refer to the [Store as JSON](import-and-export-data/overview) help topic.
+The Spreadsheet offers methods for storing and loading data in a JSON format.
+
+For more information on the data import and export functionality in the Spreadsheet, refer to the [article on storing as JSON](import-and-export-data/overview).
 
 The Spreadsheet features a built-in [export-to-Excel](import-and-export/export-to-excel) functionality which is also fully actionable in the browser.
 
 ## Data Binding
 
-Individual sheets can be bound to a Data Source in a special data-driven mode. For more information on the data binding Spreadsheet functionality, refer to the [Bind to Data Source](import-and-export/bind-to-data-source) help topic.
+Individual sheets can be bound to a Data Source in a special data-driven mode.
 
-## See Also 
+For more information on the data-binding Spreadsheet functionality, refer to the [article on biding the Spreadsheet to a data source]({% slug bind_todata_source_spreadsheet_widget %}).
+
+## See Also
 
 Other articles on Kendo UI Spreadsheet:
 

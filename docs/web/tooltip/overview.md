@@ -8,7 +8,7 @@ position: 1
 
 # Tooltip Overview
 
-[Kendo UI Tooltip widget](http://demos.telerik.com/kendo-ui/tooltip/index) displays a popup hint for a given `html` element. Its content can be defined either as static text, or loaded dynamically via AJAX.
+The [Kendo UI Tooltip widget](http://demos.telerik.com/kendo-ui/tooltip/index) displays a popup hint for a given `html` element. Its content can be defined either as static text, or loaded dynamically via AJAX.
 
 ## Getting Started
 
@@ -16,7 +16,7 @@ position: 1
 
 The Tooltip can be initialized:
 
-* For a single element 
+* For a single element
 * For a container, where child elements are going to represent Tooltip targets
 
 
@@ -29,11 +29,11 @@ The example below demonstrates how to create a Tooltip for a single target and i
     <div id="target">
         Some Content
     </div>
-    
+
     $(document).ready(function() {
         $("#target").kendoTooltip({ content: "Tooltip content" });
     });
-    
+
 #### Initialize Tooltip for containers
 
 The example below demonstrates how to create a Tooltip for multiple targets within a container, initialize it using a jQuery selector and specfy the filter to match the target elements. By default, the Tooltip content is extracted from the `title` attribute of the target element.
@@ -92,7 +92,7 @@ The example below demonstrates how to asynchronously load content to the Tooltip
         });
     });
 
-## Reference 
+## Reference
 
 ### Existing Instances
 

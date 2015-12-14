@@ -9,7 +9,7 @@ position: 1
 
 # ToolBar Overview
 
-[Kendo UI ToolBar widget](http://demos.telerik.com/kendo-ui/toolbar/index) is designed to hold different types of controls such as buttons, button groups, toggle buttons, split buttons, and other customized elements. 
+The [Kendo UI ToolBar widget](http://demos.telerik.com/kendo-ui/toolbar/index) is designed to hold different types of controls such as buttons, button groups, toggle buttons, split buttons, and other customized elements. 
 
 The ToolBar consists of three main areas: ToolBar wrapper, overflow anchor, and command overflow popup. The wrapper holds all commands that can be placed within the available container width. The ones for which there is no space to fit in are moved to the command overflow popup.
 
@@ -84,7 +84,7 @@ The example below demonstrates how to initialize the ToolBar and apply its basic
 
 ### Button
 
-The example below demonstrates the properties of each button. 
+The example below demonstrates the properties of each button.
 
 ###### Example
 
@@ -147,7 +147,7 @@ The example below demonstrates the properties of each button.
     });
 
 
-When resizing is enabled, the control will be rendered twice: once in the ToolBar and once in the command overflow popup. 
+When resizing is enabled, the control will be rendered twice: once in the ToolBar and once in the command overflow popup.
 If the button has an `ID` set, it will be assigned to the element in the ToolBar wrapper. The corresponding element in the command overflow popup will receive the same `ID` with an `"_overflow"` suffix. For example, a button with `id: "foo"` and `overflow: "auto"` will render an element with `id="foo"` in the ToolBar and another element with `id="foo_overflow"` in the ToolBar command overflow popup.
 
 The `overflow` property accepts the following values:
@@ -214,8 +214,8 @@ The example below demonstrates how to define a button displayed only as an icon 
 
 The Toggle Button allows users to change a setting between two states. To define a Toggle Button, set the button `togglable` property to `true`. The Toggle Button supports the same configuration options as the standard button.
 
-> **Important** 
-> * Clicking on a Toggle Button triggers the `toggle` event. 
+> **Important**
+> * Clicking on a Toggle Button triggers the `toggle` event.
 > * Clicking on a Toggle Button does not trigger the `click` event.
 
 The example below demonstrates how to define a Toggle Button in the ToolBar widget.
@@ -312,7 +312,7 @@ The example below demonstrates how to define a Button Group in the ToolBar widge
             ]
         });
     </script>
-    
+
 The example below demonstrates how to define a Button Group with mutually exclusive options.
 
 ###### Example
@@ -366,9 +366,9 @@ Unlike all other commands the template command does not need a type set. If a te
 >
 > By default, a custom template command without `overflowTemplate` is not going to be shown in the command overflow popup, e.g. it is not going to be considered as `overflow: never`.
 
-The example below demonstrates how to add a template command. 
+The example below demonstrates how to add a template command.
 
-###### Example 
+###### Example
 
     <div id="toolbar"></div>
 
@@ -404,7 +404,7 @@ The example below demonstrates how to add a template command that is going to ap
         });
     </script>
 
-Custom template commands allow you to add other Kendo UI widgets in the ToolBar. 
+Custom template commands allow you to add other Kendo UI widgets in the ToolBar.
 
 The example below demonstrates how to implement a Kendo UI DropDown widget in the Kendo UI ToolBar.
 
@@ -434,7 +434,7 @@ The example below demonstrates how to implement a Kendo UI DropDown widget in th
 
 By design, the ToolBar detects changes in the viewport width and hides the overflowing controls in the command overflow popup. This feature may be disabled by setting `resizable` option to `false`. You are able to control the way a given command behaves on resizing with its `overflow` property.
 
-> **Imporatant** 
+> **Imporatant**
 > * Commands with `overflow: "never"` should be declared first, followed by those with `overflow: "auto"`. Commands with `overflow: "always"` should be declared last.
 > * Setting the min-width of the ToolBar's element is mandatory if you want to prevent the widget from resizing below a given width.
 
@@ -458,7 +458,7 @@ The example below demonstrates how to use the `overflow` property.
 
 ### Mobile Rendering
 
-The widget provides a mobile specific stylization when placed within the header or footer of a mobile View. 
+The widget provides a mobile specific stylization when placed within the header or footer of a mobile View.
 
 For more information on the mobile rendering feature, refer to the [demo page on the ToolBar acting as ActionBar](http://demos.telerik.com/kendo-ui/navbar/adaptive-toolbar).
 
@@ -475,7 +475,7 @@ The ToolBar widget exposes the following events:
 * `overflowOpen` - fires when the command overflow popup of the ToolBar opens.
 * `overflowClose` - fires when the command overflow popup of the ToolBar closes.
 
-You are also able to attach `click` and `toggle` event handlers to the buttons through the config options. 
+You are also able to attach `click` and `toggle` event handlers to the buttons through the config options.
 
 For more information on the configuration options Kendo UI ToolBar supports, refer to the [ToolBar API](/api/javascript/ui/toolbar).
 
@@ -513,7 +513,7 @@ The example below demonstrates how to use ToolBar events.
         });
     </script>
 
-    
+
 ## See Also
 
 Other articles on Kendo UI ToolBar:

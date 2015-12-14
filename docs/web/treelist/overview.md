@@ -8,7 +8,7 @@ position: 1
 
 # TreeList Overview
 
-[Kendo UI TreeList widget](http://demos.telerik.com/kendo-ui/treelist/index) enables the display of self-referencing tabular data and allows sorting, filtering, and data editing.
+The [Kendo UI TreeList widget](http://demos.telerik.com/kendo-ui/treelist/index) enables the display of self-referencing tabular data and allows sorting, filtering, and data editing.
 
 ## Getting Started
 
@@ -58,13 +58,13 @@ Note that the data objects contain both an `id` and a `parentId` field which des
 
 ### Bind to Remote Data
 
-You are able to bind the `TreeListDataSource` to remote data, which means that the TreeList is going to load items from a web service. Remote data binding is going to enable the retrieval of data from the server and the saving of TreeList data items to the server database. 
+You are able to bind the `TreeListDataSource` to remote data, which means that the TreeList is going to load items from a web service. Remote data binding is going to enable the retrieval of data from the server and the saving of TreeList data items to the server database.
 
 For additional information on Kendo UI DataSource, refer to [this article](/framework/datasource/overview).
 
 The example below demonstrates how to enable remote binding for the TreeList by setting the DataSource `transport`.
 
-###### Example 
+###### Example
 
 ```html
 
@@ -144,8 +144,8 @@ The example below demonstrates how to enable remote binding for the TreeList by 
 
 Note that the `parentId` is mapped from the `ReportsTo` field by the `parentId: { field: "ReportsTo", nullable: true }` line. The TreeList renders its hierarchy based on the `parentId` - `id` relationship.
 
-> **Important** 
-> 
+> **Important**
+>
 > List all fields when using the `schema.model.fields`. Also, set the field which represents the `id` of the event via the `schema.model.id`. If these are not set, they will still work for displaying data, but will post incomplete objects on the server when editing items.
 
 ## Features
@@ -175,7 +175,7 @@ When scrolling is enabled, the TreeList renders two tables&mdash;one for the hea
     </div>
 
 > **Important**
-> 
+>
 > If you want to achieve a maximum TreeList accessibility with assistive technologies, disable the scrolling feature.
 
 ## TreeList API
@@ -226,7 +226,7 @@ The event handler is the JavaScript function invoked when the event is fired. Th
 
 The example below demonstrates how to subscribe to a TreeList event during the initialization of the widget.
 
-###### Example 
+###### Example
 
 ```html
     <div id="treelist"></div>

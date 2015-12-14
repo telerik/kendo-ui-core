@@ -8,13 +8,13 @@ position: 1
 
 # Menu Overview
 
-[Kendo UI Menu widget](http://demos.telerik.com/kendo-ui/menu/index) displays hierarchical data as a multi-level menu. It provides rich styling for unordered lists of items, and can be used for both navigation and executing JavaScript commands. Items can be defined and initialized from HTML, or through the configuration options. [Kendo UI Menu API](/api/javascript/ui/menu) can be used to add and remove items.
+The [Kendo UI Menu widget](http://demos.telerik.com/kendo-ui/menu/index) displays hierarchical data as a multi-level menu. It provides rich styling for unordered lists of items, and can be used for both navigation and executing JavaScript commands. Items can be defined and initialized from HTML, or through the configuration options. [Kendo UI Menu API](/api/javascript/ui/menu) can be used to add and remove items.
 
 ## Getting Started
 
-### Initialize the Menu 
+### Initialize the Menu
 
-The Kendo UI Menu widget can be initialized in two ways: 
+The Kendo UI Menu widget can be initialized in two ways:
 
 * Through HTML markup
 * Through a JSON data object
@@ -47,11 +47,11 @@ The Kendo UI Menu widget can be initialized in two ways:
             $("#menu").kendoMenu();
         });
     </script>
-    
+
 #### Initialize Menu using JSON data object
 
 ###### Example
-    
+
     <ul id="menu"></ul>
 
     <script>
@@ -61,7 +61,7 @@ The Kendo UI Menu widget can be initialized in two ways:
           [{
             text: "Item 1",
             cssClass: "myClass",                         // (Optional) Add custom CSS class to the item, added 2012 Q3 SP1
-            url: "http://www.telerik.com"                // (Optional) Link URL if navigation is needed 
+            url: "http://www.telerik.com"                // (Optional) Link URL if navigation is needed
           },
            {
              text: "<b>Item 2</b>",
@@ -88,7 +88,7 @@ The Kendo UI Menu widget can be initialized in two ways:
 
 ### Sample Case
 
-The example below demonstrates the basic approach to build a Menu by using HTML markup. 
+The example below demonstrates the basic approach to build a Menu by using HTML markup.
 
 ###### Example
 
@@ -112,7 +112,7 @@ The example below demonstrates the basic approach to build a Menu by using HTML 
 
 To create a Kendo UI Menu based on the example above, elaborate on the DOM elements in the way demonstrated by the code below.
 
-###### Example 
+###### Example
 
     <ul id="MenuID" class="k-widget k-menu">
         <li class="k-item k-state-default"><span class="k-link">root item 1</span></li>
@@ -168,7 +168,7 @@ By default, the Menu uses a slide animation to expand sub-items on a mouse hover
 
 The example below demonstrates how to change Menu animation and open behavior.
 
-###### Example 
+###### Example
 
     <ul id="menu"></ul>
 
@@ -184,13 +184,13 @@ The example below demonstrates how to change Menu animation and open behavior.
 
 ### Dynamic Items
 
-[The Kendo UI Menu API](/api/javascript/ui/menu) provides methods for dynamically adding or removing Menu items. 
+[The Kendo UI Menu API](/api/javascript/ui/menu) provides methods for dynamically adding or removing Menu items.
 
-To add items, provide the new item as a JSON object along with a reference item. A reference item is a target Menu item HTML element that already exists in the Menu. The reference item will be used to determine the placement in the hierarchy of the new item. Any valid jQuery selector can be used to obtain a reference to the target item. 
+To add items, provide the new item as a JSON object along with a reference item. A reference item is a target Menu item HTML element that already exists in the Menu. The reference item will be used to determine the placement in the hierarchy of the new item. Any valid jQuery selector can be used to obtain a reference to the target item.
 
 For more information on configuring Menu items, see the [Menu API demos](http://demos.telerik.com/kendo-ui/web/menu/api.html).
 
-The example below demonstrates how to add a new root Menu item. 
+The example below demonstrates how to add a new root Menu item.
 
 ###### Example
 
@@ -221,7 +221,7 @@ The Menu renders as a `<ul>` element and expands horizontally by default. If a h
 
 In left-to-right layouts, shrinking the horizontal Menu will make the border of the last root item touch the right border of the Menu. The last item border can be removed as shwon int he example below.
 
-###### Example 
+###### Example
 
     #menu-id > .k-last /* for a specific menu instance */
     ,

@@ -9,7 +9,7 @@ position: 2
 
 # Grid Overview
 
-[Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) is a powerful control for displaying data in a tabular format. It provides many options, such as paging, sorting, filtering, grouping, and editing, which determine the way data is presented and manipulated. The Grid can be bound to local or remote data by using the Kendo UI DataSource component.
+The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) is a powerful control for displaying data in a tabular format. It provides many options, such as paging, sorting, filtering, grouping, and editing, which determine the way data is presented and manipulated. The Grid can be bound to local or remote data by using the Kendo UI DataSource component.
 
 ## Initialize the Grid
 
@@ -22,7 +22,7 @@ There are two primary ways to create a Kendo UI Grid:
 
 ###### Example
 
-    // define the HTML div that will contain the Grid 
+    // define the HTML div that will contain the Grid
     <div id="grid"></div>
 
     // initialize the Grid
@@ -52,14 +52,14 @@ There are two primary ways to create a Kendo UI Grid:
         });
 
     </script>
-    
+
 ### From an HTML Table
 
 ###### Example
 
 When creating the Grid from a table, it is usually already populated with data. This improves the accessibility and search engine optimization, and ensures that the user will see data even if JavaScript is disabled or there is a JavaScript error on the page.
 
-    // define the HTML table with rows, columns, and data 
+    // define the HTML table with rows, columns, and data
     <table id="grid">
         <colgroup>
             <col />
@@ -153,12 +153,12 @@ When binding to large data sets or when using large page sizes, reducing active 
              }
           });
       });
-      
+
 For more information on the layout features avaialbe in the Grid, refer to:
 
 * [Appearance of the Grid]({% slug appearance_kendoui_grid_widget %})
 
-## Reference 
+## Reference
 
 ### Existing Instances
 

@@ -54,11 +54,11 @@ The code from the snippet executes the following actions:
             var allNotificationPopups = $("body > .k-animation-container > .k-notification");
             if (allNotificationPopups[0]) {
               var firstPopupInstance = allNotificationPopups.first().data("kendoPopup");
-              
+
               // calculate the expected notification popup position, according to the widget settings and popup size
               var x = $(window).width() - firstPopupInstance.element.width() - notification.options.position.right;
               var y = $(window).height() - firstPopupInstance.element.height() - notification.options.position.bottom;
-              
+
               // compare the expected and actual popup position
               var diff = {
                 top: y - parseInt(firstPopupInstance.wrapper.css("top"), 10),
@@ -77,7 +77,7 @@ The code from the snippet executes the following actions:
               });
             }
           };
-          
+
           // attach a window.resize handler, which will be executed once, after the browser window resizing is complete
           $(window).resize(function() {
             if (timeOut != -1) {
@@ -98,3 +98,4 @@ Other articles on Kendo UI Notification:
 
 * [JavaScript API Reference](/api/javascript/ui/notification)
 * [How to Stack Static Notifications to the Left or Right]({% slug howto_stack_static_tothe_leftor_right_notification %})
+* [How to Move Visible Notifications after Hiding Others]({% slug howto_move_notifications_after_hiding_others %})

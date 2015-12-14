@@ -8,13 +8,13 @@ position: 1
 
 # ComboBox Overview
 
-[Kendo UI ComboBox widget](http://demos.telerik.com/kendo-ui/combobox/index) displays a list of values and allows single selection from that list. You are able to enter custom values by using a keyboard input. If you want to restrict the user input, you can use [Kendo UI DropDownList widget](http://demos.telerik.com/kendo-ui/dropdownlist/index). The ComboBox represents a richer version of the `<select>` element and provides support for local and remote data binding, item templates, and configurable options for controlling the list behavior.
+The [Kendo UI ComboBox widget](http://demos.telerik.com/kendo-ui/combobox/index) displays a list of values and allows single selection from that list. You are able to enter custom values by using a keyboard input. If you want to restrict the user input, you can use [Kendo UI DropDownList widget](http://demos.telerik.com/kendo-ui/dropdownlist/index). The ComboBox represents a richer version of the `<select>` element and provides support for local and remote data binding, item templates, and configurable options for controlling the list behavior.
 
 ## Getting Started
 
-### Initialize the ComboBox 
+### Initialize the ComboBox
 
-The Kendo UI ComboBox widget can be initialized in three ways: 
+The Kendo UI ComboBox widget can be initialized in three ways:
 
 1. By using the `<option>` tag of an existing `<select>` element with defined data items.
 2. By binding the widget to a local data array and using the `<input>` element.
@@ -24,7 +24,7 @@ The ComboBox looks and operates consistently regardless of the initialization ty
 
 > **Important**  
 > * As ComboBox should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
-> 
+>
 > * The widget copies any styles and CSS classes from the input element to the wrapper element and visible input.
 
 #### Initialize the ComboBox from an existing `<select>` element with defined data items
@@ -40,10 +40,10 @@ The ComboBox looks and operates consistently regardless of the initialization ty
             $("#comboBox").kendoComboBox();
         });
     </script>
-    
+
 #### Initialize the ComboBox by binding it to a local data array
 
-The ComboBox can be bound to local data arrays via the [DataSource component](/framework/datasource/overview) - an abstraction for local and remote data. Local arrays are appropriate for limited value options. 
+The ComboBox can be bound to local data arrays via the [DataSource component](/framework/datasource/overview) - an abstraction for local and remote data. Local arrays are appropriate for limited value options.
 
 ###### Example
 
@@ -63,7 +63,7 @@ The ComboBox can be bound to local data arrays via the [DataSource component](/f
     </script>
 
 #### Initialize the ComboBox by binding it to a remote data service   
-   
+
 The ComboBox can be bound to remote data arrays via the [DataSource component](/framework/datasource/overview) - an abstraction for local and remote data. Remote data binding is appropriate for larger data sets, so that items are loaded on-demand, when displayed. The DataSource can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
 ###### Example
@@ -91,13 +91,13 @@ The ComboBox can be bound to remote data arrays via the [DataSource component](/
 
 ## Templates
 
-The ComboBox uses [Kendo UI templates](/framework/templates/overview) to provide full control over the way pop-up items are rendered. 
+The ComboBox uses [Kendo UI templates](/framework/templates/overview) to provide full control over the way pop-up items are rendered.
 
 ### Item Templates
 
 The example below demonstrates how to define an item template.
 
-###### Example 
+###### Example
 
     <input id="comboBox" />
     <!-- Template -->
@@ -156,7 +156,7 @@ The ComboBox allows you to render a pop-up header. The example below demonstrate
     </script>
 
 ## Configuration
-    
+
 ### Drop-Down List
 
 You can customize the width of a drop-down list and change its dimensions by using the jQuery `width()` method.
@@ -176,7 +176,7 @@ You can customize the width of a drop-down list and change its dimensions by usi
 
 Because of its complex rendering, focusing the widget by using a `label` element requires additional implementation. For more information about how to do it, check [this Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
 
-## Reference 
+## Reference
 
 ### Existing Instances
 
@@ -207,7 +207,7 @@ Other articles on Kendo UI ComboBox:
 * [How to Expand Background of Long List Items]({% slug howto_expand_background_longlist_items_combobox %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/combobox/overview)
 * [Overview of the JSP Tag](/jsp/tags/combobox/overview)
-* [Overview of the PHP Class](/php/widgets/combobox/overview) 
+* [Overview of the PHP Class](/php/widgets/combobox/overview)
 * [JavaScript API Reference](/api/javascript/ui/combobox)
 
 Articles on Kendo UI DropDownList:

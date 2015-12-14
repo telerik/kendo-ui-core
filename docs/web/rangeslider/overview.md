@@ -8,11 +8,11 @@ position: 1
 
 # RangeSlider Overview
 
-[Kendo UI RangeSlider widget](http://demos.telerik.com/kendo-ui/slider/events) displays a range of values and allows you to select ranges of values. Unlike the HTML5 range input, the RangeSlider presents a consistent experience across browsers and provides a rich API and event model.
+The [Kendo UI RangeSlider widget](http://demos.telerik.com/kendo-ui/slider/events) displays a range of values and allows you to select ranges of values. Unlike the HTML5 range input, the RangeSlider presents a consistent experience across browsers and provides a rich API and event model.
 
 ## Getting Started
 
-### Create the RangeSlider 
+### Create the RangeSlider
 
 Create the RangeSlider by using two HTML `<input>` elements in a `<div>` one as demonstrated in the example below.
 
@@ -23,7 +23,7 @@ Create the RangeSlider by using two HTML `<input>` elements in a `<div>` one as 
         <input />
     </div>
 
-   
+
 ### Initialize the RangeSlider
 
 Initialize the RangeSlider using a jQuery selector as demonstrated in the example below.
@@ -35,14 +35,14 @@ Initialize the RangeSlider using a jQuery selector as demonstrated in the exampl
     });
 
 > **Important**  
-> * As the RangeSlider should be initialized after the DOM is fully loaded, make sure you initilaize it within a `$(document).ready()` statement. 
+> * As the RangeSlider should be initialized after the DOM is fully loaded, make sure you initilaize it within a `$(document).ready()` statement.
 > * The RangeSlider requires two inputs to capture both ends of the value range. This benefits scenarios where JavaScript is disabled, in which case users will be presented with two inputs, still allowing them to input a valid range.
 
 ## Customization
 
 ### Behaviors
 
-The aspects of the RangeSlider behavior can be customized by configuring its properties. These include: 
+The aspects of the RangeSlider behavior can be customized by configuring its properties. These include:
 
 *   Minimum and/or maximum values
 *   Horizontal or vertical orientation

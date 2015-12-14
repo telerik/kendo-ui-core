@@ -8,7 +8,7 @@ position: 1
 
 # ProgressBar Overview
 
-[Kendo UI ProgressBar widget](http://demos.telerik.com/kendo-ui/progressbar/index) offers rich functionalities for displaying and tracking the progress of a task. It supports multiple types, horizontal and vertical orientation, and also different directions.
+The [Kendo UI ProgressBar widget](http://demos.telerik.com/kendo-ui/progressbar/index) offers rich functionalities for displaying and tracking the progress of a task. It supports multiple types, horizontal and vertical orientation, and also different directions.
 
 ## Types
 
@@ -20,7 +20,7 @@ Kendo UI ProgressBar supports three different types:
 
 ## Getting Started
 
-### Create the ProgressBar 
+### Create the ProgressBar
 
 Create the ProgressBar by using a `<div>` element as demonstrated in the example below.
 
@@ -28,7 +28,7 @@ Create the ProgressBar by using a `<div>` element as demonstrated in the example
 
 	<div id="progressbar"></div>
 
-### Initialize the ProgressBar 
+### Initialize the ProgressBar
 
 Initialize the ProgressBar by using a jQuery selector as shown in the example below.
 
@@ -81,7 +81,7 @@ The example below demonstrates how to configure the properties of the ProgressBa
         duration: 600
       }
     });
-    
+
 ### Display
 
 #### Set a 100% Width and Auto-Resize
@@ -93,28 +93,28 @@ The example below demonstrates how to make the ProgressBar 100% wide and automat
 ###### Example
 
     <style>
-    
+
     #progressbar
     {
         width: auto;
         display: block;
     }
-    
+
     </style>
-    
+
     <div id="progressbar"></div>
-    
+
     <script>
-    
+
     $(function(){
         $("#progressbar").kendoProgressBar();
     });
-    
+
     </script>
-    
+
 ## ProgressBar API
 
-### Events 
+### Events
 
 Kendo UI ProgressBar supports the following [events](/api/web/progressbar#events):
 
@@ -126,7 +126,7 @@ There are two ways to handle events:
 * Specify the JavaScript function which will handle the event during the initialization of the widget.
 * Use the `bind` method of the widget after initialization.
 
-For examples demonstrating these two approaches, refer to the [ProgressBar API reference](/api/web/progressbar#events). 
+For examples demonstrating these two approaches, refer to the [ProgressBar API reference](/api/web/progressbar#events).
 
 ## Reference
 

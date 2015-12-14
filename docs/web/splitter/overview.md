@@ -8,13 +8,13 @@ position: 1
 
 # Splitter Overview
 
-[Kendo UI Splitter widget](http://demos.telerik.com/kendo-ui/splitter/index) provides a dynamic layout of resizable and collapsible panes. It converts the children of an HTML element into an interactive layout, adding resize and collapse handles depending on its configuration. The vertical and horizontal orientation of a Kendo UI Splitter can be combined to build complex layouts.
+The [Kendo UI Splitter widget](http://demos.telerik.com/kendo-ui/splitter/index) provides a dynamic layout of resizable and collapsible panes. It converts the children of an HTML element into an interactive layout, adding resize and collapse handles depending on its configuration. The vertical and horizontal orientation of a Kendo UI Splitter can be combined to build complex layouts.
 
 ## Getting Started
 
 ### Create the Splitter
 
-The layout and structure of a Kendo UI Splitter are defined within the DOM as a `<div>` container with child elements. 
+The layout and structure of a Kendo UI Splitter are defined within the DOM as a `<div>` container with child elements.
 
 The example below demonstrates how to create a Kendo UI Splitter with children that become panes in the resulting layout of the page. When the Splitter is initialized, a vertical split bar will be placed between the two `<div>` elements. This bar can be moved by users to the left and right to adjust the size of the panes.
 
@@ -25,13 +25,13 @@ The example below demonstrates how to create a Kendo UI Splitter with children t
         <div>Area 2</div>
     </div>
 
-    
+
 ### Initialize the Splitter
 
 > **Important**  
 > As the Splitter should be initialized after the DOM is fully loaded, make sure you create it within a $(document).ready() statement.
 
-The example below demonstrates how to initialize the Splitter using a jQuery selector. 
+The example below demonstrates how to initialize the Splitter using a jQuery selector.
 
 ###### Example
 
@@ -47,7 +47,7 @@ Kendo UI Splitter provides default configuration options that can be set during 
 
 *   Maximum and minimum pane sizes
 *   Resizable and collapsible/expandable pane behaviors
-*   Horizontal and vertical orientation 
+*   Horizontal and vertical orientation
 
 The properties of a pane must be specified during initialization and set for each individual pane in a Splitter.
 
@@ -162,7 +162,7 @@ The Splitter `<div>` can be resized manually by applying a new width or height s
 If the Splitter layout needs readjusting, but the dimensions of its `<div>` wrapper have not changed, execute the `resize` method with a parameter in order to take effect. This is useful when the Splitter has been initialized in an invisible container and its panes' dimensions and position have not been calculated correctly.
 
     splitterObject.resize(true);
-    
+
 Note that changing the pane sizes manually is not recommended. Use the [`size()`](/api/web/splitter#methods-size) method instead.
 
 ### Allow Elements to Overflow Panes
@@ -194,7 +194,7 @@ The solution to this issue is to disable pane-content scrolling and clipping by 
     }
 
 If there are several nested Splitters, then each pane, which is an ancestor of the Menu, requires the specified `overflow` and `z-index` styles. These styles can also be applied inline instead of externally.   
-   
+
 ## Reference
 
 ### Existing Instances

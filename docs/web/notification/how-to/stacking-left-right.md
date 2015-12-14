@@ -47,7 +47,7 @@ The example below demonstrates how to stack static notifications to the left or 
 
 <script>
 
-$(function() { 
+$(function() {
   var options = {
     stacking: "down",
     autoHideAfter: 0,
@@ -61,7 +61,7 @@ $(function() {
   };
   var ntfRight = $("#ntfRight").kendoNotification($.extend(options, {stacking: "down", appendTo: "#ntfRight"})).data("kendoNotification");
   var ntfLeft = $("#ntfLeft").kendoNotification($.extend(options, {stacking: "up", appendTo: "#ntfLeft"})).data("kendoNotification");
-  
+
   $(".k-button").click(function (e) {
     var notificationWidget = $(e.target).is("#buttonLeft") ? ntfLeft : ntfRight;
     var d = new Date();
@@ -73,7 +73,7 @@ $(function() {
     container.scrollTop(container[0].scrollHeight);
   });
 
-  
+
 });
 
 </script>
@@ -85,3 +85,4 @@ Other articles on Kendo UI Notification:
 
 * [JavaScript API Reference](/api/javascript/ui/notification)
 * [How to Move Popup Notifications on Window Resize]({% slug howto_move_popup_notifications_onwindow_resize_notification %})
+* [How to Move Visible Notifications after Hiding Others]({% slug howto_move_notifications_after_hiding_others %})
