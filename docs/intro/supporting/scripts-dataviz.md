@@ -116,7 +116,7 @@ Below are listed the script files for Kendo UI widgets rendering data visualizat
 
 Articles with script files for the other Kendo UI components:
 
-+ [List of Script Files for the Desktop UI Widgets]({% slug scirpt_filesfor_desktop_widgets %})  
++ [List of Script Files for the Desktop Widgets]({% slug scirpt_filesfor_desktop_widgets %})  
 + [List of Script Files for the Frameworks and Widgets for Mobile Applications]({% slug script_filesfor_hybridui_widgets %})
 + [List of Script Files for the Tools and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
 + [List of Script Files for the Server-Side Wrappers]({% slug script_filesfor_serverside_wrappers %})
