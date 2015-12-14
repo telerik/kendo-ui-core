@@ -7,7 +7,7 @@ slug: howto_move_notifications_after_hiding_others
 
 # Move Visible Notifications after Hiding Others
 
-The example below demonstrates how to move the remaining visible notifications, after some have been hidden and empty spaces in the stack have been created.
+The example below demonstrates how to move the remaining visible notifications after some have been hidden and empty spaces in the stack have been created.
 
 The idea is to use **static** notification messages inside a **positioned container**. This creates the impression that popup notification messages are used.
 
@@ -17,8 +17,8 @@ The example is based on the following API and widget functionality:
 
 * [`appendTo`](/api/javascript/ui/notification#configuration-appendTo) setting
 * [`stacking`](/api/javascript/ui/notification#configuration-stacking) setting
-* [Positioning and Stacking](/web/notification/overview#configuration-Position) documentation,
-which also explains how to [change the auto-hide timeout on the fly](web/notification/overview#change-settings-for-specific-notification-messages)
+* [Positioning and Stacking]({% slug overview_kendoui_notification_widget %}#configuration-Position) documentation,
+which also explains how to [change the auto-hide timeout on the fly]({% slug overview_kendoui_notification_widget %}#change-settings-for-specific-notification-messages)
 
 ###### Example
 
