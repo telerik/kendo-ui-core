@@ -1244,4 +1244,12 @@
         equal(dropdownlist.filterInput.attr("placeholder"),  placeholder);
     });
 
+    test("copy accesskey to the wrapper", function() {
+        input.attr("accesskey", "w");
+
+        var dropdownlist = new DropDownList(input);
+
+        equal(dropdownlist.wrapper.attr("accesskey"),  "w");
+    });
+
 })();

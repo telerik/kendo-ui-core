@@ -1122,6 +1122,7 @@ var __meta__ = { // jshint ignore:line
                               .addClass(DOMelement.className)
                               .css("display", "")
                               .attr({
+                                  accesskey: element.attr("accesskey"),
                                   unselectable: "on",
                                   role: "listbox",
                                   "aria-haspopup": true,
