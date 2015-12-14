@@ -25,3 +25,6 @@ After adjusting the theme via the ThemeBuilder click the "Download theme" button
 
 The LESS output of the ThemeBuilder depends on the less files that are distributed along with the Kendo UI source, so make sure the file reference points to the existing files. Refer to the [official LESS documentation](http://lesscss.org/#-client-side-usage) on the various ways you can process it.
 
+### Version Compatibility
+
+The ThemeBuilder generates CSS, LESS and JS code, which are compatible with the **current official** Kendo UI version. In case a custom theme for an older Kendo UI version is needed, it should be implemented via [manual coding or overrides](/web/appearance-styling#customizing-appearance).
