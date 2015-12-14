@@ -1,13 +1,13 @@
 ---
-title: Use FontAwesome Icons in Custom Command Buttons
+title: Use FontAwesome Icons in Kendo UI Grid
 page_title:  Use FontAwesome Icons in Custom Command Buttons | Kendo UI Grid Widget
-description: "Learn how to use FontAwesome icons in custom command buttons while working with the Kendo UI Grid widget."
+description: "Learn how to use FontAwesome icons in the Kendo UI Grid widget."
 slug: howto_use_fontawesomeiconsin_custom_command_buttons_grid
 ---
 
-# Use FontAwesome Icons in Custom Command Buttons
+# Use FontAwesome Icons in Kendo UI Grid
 
-The example below demonstrates how to use FontAwesome icons inside a Kendo UI Grid custom command button.
+The example below demonstrates how to use FontAwesome icons inside a Kendo UI Grid.
 
 ###### Example
 
@@ -28,6 +28,8 @@ The example below demonstrates how to use FontAwesome icons inside a Kendo UI Gr
               pageSize: 20,
               data: createRandomData(50)
             },
+			sortable: true,
+            columnMenu: true,
             pageable: true,
             height: 430,
             columns: [
@@ -74,6 +76,76 @@ The example below demonstrates how to use FontAwesome icons inside a Kendo UI Gr
                 </dl>
             </div>
       </script>
+      <style>
+      .k-header-column-menu .k-icon,
+      .k-column-menu .k-icon,
+      .k-column-menu .k-sprite,
+      .k-grid-pager .k-icon,
+      .k-grid .k-pager-numbers .k-current-page .k-pager-nav:after {
+        background-image: none;
+        font-size: 1em;
+        font-family: FontAwesome;
+      }
+
+      .k-header-column-menu .k-icon:before,
+      .k-header-column-menu .k-sprite:before,
+      .k-column-menu .k-icon:before,
+      .k-column-menu .k-sprite:before,
+      .k-grid-pager .k-icon:before {       
+        display: inline-block;
+        padding-top: 0.5em;
+        color: #2e2e2e;
+        width: 20px;
+        height: 20px;
+      }
+
+      .k-grid-pager .k-pager-numbers .k-current-page .k-pager-nav:after {
+        margin-top: -1em;
+      }
+
+      .k-column-menu .k-i-arrow-e:before {
+        content: "\f061";
+      }
+      .k-header-column-menu .k-i-arrowhead-s:before{
+        content: "\f063";
+      }
+
+      .k-column-menu .k-filter:before {
+        content: "\f0b0";
+      }
+
+      .k-column-menu .k-i-columns:before {
+        content: "\f0db";
+      }
+
+      .k-column-menu .k-i-sort-asc:before {
+        content: "\f0dd";
+      }
+
+      .k-column-menu .k-i-sort-desc:before {
+        content: "\f0de";
+      }
+
+      .k-grid-pager .k-i-arrow-e:before {
+        content: "\f061";
+      }
+
+      .k-grid-pager .k-i-seek-e:before {
+        content: "\f0da";
+      }
+
+      .k-grid-pager .k-i-seek-w:before {
+        content: "\f0d9";
+      }
+
+      .k-grid-pager .k-i-arrow-w:before {
+        content: "\f060";
+      }
+
+      .k-grid-pager .k-pager-numbers .k-current-page .k-pager-nav:after {
+        content: "\f047";
+      }
+    </style>				
 ```
 
 ## See Also
