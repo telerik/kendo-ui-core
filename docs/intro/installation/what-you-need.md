@@ -46,7 +46,7 @@ Below are the references to the script files which, whether minified or not, can
 
 ### With Download Builder
 
-Users with a commercial license may use the [custom download builder tool](https://www.telerik.com/login/v2/telerik?ReturnUrl=http%3a%2f%2fwww.telerik.com%2fdownload%2fcustom-download) to create a single JavaScript file which contains only the required widgets and features.
+Users with a commercial license may use the [custom download builder tool](http://www.telerik.com/download/custom-download) to create a single JavaScript file which contains only the required widgets and features.
 
 > **Important**  
 > Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
