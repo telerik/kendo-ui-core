@@ -122,7 +122,8 @@
 
     test("widget does not trigger change when an item is removed from the source", 0, function() {
         var list = new StaticList(element, {
-            dataSource: ["item", "item1"],
+            dataValueField: "text",
+            dataSource: [{ text: "item" }, { text: "item1" }],
             template: "#:data#",
             value: ["item"]
         });
@@ -131,6 +132,23 @@
 
         list.bind("change", function() {
             ok(false);
+        });
+
+        list.dataSource.remove(list.dataSource.at(1));
+    });
+
+    test("widget triggers change when selected item is removed from the source", 1, function() {
+        var list = new StaticList(element, {
+            dataValueField: "text",
+            dataSource: [{ text: "item" }, { text: "item1" }],
+            template: "#:data#",
+            value: ["item"]
+        });
+
+        list.dataSource.read();
+
+        list.bind("change", function() {
+            ok(true);
         });
 
         list.dataSource.remove(list.dataSource.at(0));

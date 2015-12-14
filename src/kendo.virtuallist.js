@@ -186,26 +186,39 @@ var __meta__ = { // jshint ignore:line
         });
     }
 
-    function findChangedItems(selected, changed) {
-        var changedLength = changed.length;
-        var result = [];
+    function mapChangedItems(selected, itemsToMatch) {
+        var itemsLength = itemsToMatch.length;
+        var selectedLength = selected.length;
         var dataItem;
+        var found;
         var i, j;
 
-        for (i = 0; i < selected.length; i++) {
-            dataItem = selected[i];
+        var changed = [];
+        var unchanged = [];
 
-            for (j = 0; j < changedLength; j++) {
-                if (dataItem === changed[j]) {
-                    result.push({
-                        index: i,
-                        item: dataItem
-                    });
+        if (selectedLength) {
+            for (i = 0; i < selectedLength; i++) {
+                dataItem = selected[i];
+                found = false;
+
+                for (j = 0; j < itemsLength; j++) {
+                    if (dataItem === itemsToMatch[j]) {
+                        found = true;
+                        changed.push({ index: i, item: dataItem });
+                        break;
+                    }
+                }
+
+                if (!found) {
+                    unchanged.push(dataItem);
                 }
             }
         }
 
-        return result;
+        return {
+            changed: changed,
+            unchanged: unchanged
+        };
     }
 
     var VirtualList = DataBoundWidget.extend({
@@ -350,11 +363,20 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _getValues: function(dataItems) {
+            var getter = this._valueGetter;
+
+            return $.map(dataItems, function(dataItem) {
+                return getter(dataItem);
+            });
+        },
+
         refresh: function(e) {
             var that = this;
             var action = e && e.action;
+            var isItemChange = action === "itemchange";
             var filtered = this.isFiltered();
-            var changedItems;
+            var result;
 
             if (that._mute) { return; }
 
@@ -385,12 +407,16 @@ var __meta__ = { // jshint ignore:line
                 that._triggerListBound();
             }
 
-            if (action === "itemchange") {
-                changedItems = findChangedItems(that._selectedDataItems, e.items);
-                if (changedItems.length) {
-                    that.trigger("selectedItemChange", {
-                        items: changedItems
-                    });
+            if (isItemChange || action === "remove") {
+                result = mapChangedItems(that._selectedDataItems, e.items);
+                if (result.changed.length) {
+                    if (isItemChange) {
+                        that.trigger("selectedItemChange", {
+                            items: result.changed
+                        });
+                    } else {
+                        that.value(that._getValues(result.unchanged));
+                    }
                 }
             }
 

@@ -131,6 +131,47 @@
         virtualList.dataSource.read();
     });
 
+    asyncTest("widget triggers change event if selected item is removed", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            value: [0]
+        }));
+
+        virtualList.one("listBound", function() {
+
+            virtualList.one("change", function(e) {
+                start();
+                equal(virtualList.value().length, 0);
+            });
+
+            virtualList.dataSource.remove(virtualList.dataSource.at(0));
+        });
+
+        virtualList.dataSource.read();
+    });
+
+    asyncTest("widget does not trigger change event if selected item is not removed", 0, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            value: [0]
+        }));
+
+        virtualList.one("listBound", function() {
+
+            virtualList.one("change", function(e) {
+                ok(false);
+            });
+
+            virtualList.dataSource.remove(virtualList.dataSource.at(1));
+
+            setTimeout(function() {
+                start();
+            });
+        });
+
+        virtualList.dataSource.read();
+    });
+
     asyncTest("fires the itemChange event", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             itemChange: function() {

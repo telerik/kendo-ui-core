@@ -560,4 +560,25 @@
 
         ok(!list.args("value")[0]);
     });
+
+    test("StaticList deselects selected item if removed from source", function() {
+        var list = new StaticList(element, {
+            selectable: "multiple",
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "a" },
+                    { name: "item3", type: "b" }
+                ]
+            },
+            value: ["item1", "item3"],
+            template: '#:data.name#'
+        });
+
+        list.dataSource.read();
+        list.dataSource.remove(list.dataSource.view()[2]); //remove item3
+
+        deepEqual(list.value(), ["item1"]);
+    });
 })();
