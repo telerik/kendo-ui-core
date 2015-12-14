@@ -896,4 +896,90 @@
         equal(observable.selectedItem[0], observable.items[0].id);
         equal(observable.selectedItem[1], observable.items[1].id);
     });
+
+    module('virtualized multiselect MVVM', {
+        setup: function() {
+
+        },
+
+        teardown: function() {
+            kendo.destroy(dom);
+        }
+    });
+
+    function generateData(parameters) {
+        var items = [];
+        for (var i = parameters.skip, len = parameters.skip + parameters.take; i < len; i++) {
+            items.push({
+                id: i,
+                value: i,
+                text: "Item " + i
+            });
+        }
+
+        return items;
+    }
+
+    function createAsyncDataSource() {
+        return new kendo.data.DataSource({
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        options.success({ data: generateData(options.data), total: 300 });
+                    }, 0);
+                }
+            },
+            serverFiltering: true,
+            serverPaging: true,
+            pageSize: 40,
+            schema: {
+                data: "data",
+                total: "total"
+            }
+        });
+    }
+
+    function scroll(element, height) {
+        element.scrollTop(height);
+        element.trigger("scroll");
+    }
+
+    asyncTest("widget scrolled to second range sets model to the correct data item", 1, function() {
+        var container_height = 200;
+
+        dom = $('<select data-bind="value:value" />').appendTo(QUnit.fixture);
+
+        var multiselect = new kendo.ui.MultiSelect(dom, {
+            close: function(e) { e.preventDefault(); },
+            height: container_height,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            }
+        });
+
+        var viewModel = kendo.observable({
+            value: null
+        });
+
+        kendo.bind(dom, viewModel);
+
+        multiselect.one("dataBound", function() {
+            scroll(multiselect.listView.content, 10 * container_height);
+
+            multiselect.one("dataBound", function() {
+                start();
+                multiselect.value(10);
+                multiselect.trigger("change");
+
+                equal(viewModel.value.length, multiselect.dataItems().length);
+            });
+        });
+
+        multiselect.open();
+    });
 })();

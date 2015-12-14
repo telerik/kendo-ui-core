@@ -1136,6 +1136,27 @@ var __meta__ = { // jshint ignore:line
                 this._initChange = false;
             },
 
+            _source: function() {
+                var source;
+
+                if (this.widget.dataItem) {
+                    source = this.widget.dataItem();
+                    if (source && source instanceof ObservableObject) {
+                        return [source];
+                    }
+                }
+
+                if (this.bindings.source) {
+                    source = this.bindings.source.get();
+                }
+
+                if (!source || source instanceof kendo.data.DataSource) {
+                    source = this.widget.dataSource.flatView();
+                }
+
+                return source;
+            },
+
             change: function() {
                 var value = this.widget.value(),
                     field = this.options.dataValueField || this.options.dataTextField,
@@ -1149,16 +1170,10 @@ var __meta__ = { // jshint ignore:line
 
                 if (field) {
 
-                    if (this.bindings.source) {
-                        source = this.bindings.source.get();
-                    }
-
                     if (value === "" && (isObservableObject || this.options.valuePrimitive)) {
                         value = null;
                     } else {
-                        if (!source || source instanceof kendo.data.DataSource) {
-                            source = this.widget.dataSource.flatView();
-                        }
+                        source = this._source();
 
                         if (isArray) {
                             valueLength = value.length;
