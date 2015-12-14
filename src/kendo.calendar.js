@@ -264,7 +264,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (index === views[depth]) {
-                if (+that._value != +value) {
+                if (!isEqualDate(that._value, value)) {
                     that.value(value);
                     that.trigger(CHANGE);
                 }
@@ -1428,6 +1428,14 @@ var __meta__ = { // jshint ignore:line
         return callback;
     }
 
+    function isEqualDate(oldValue, newValue) {
+       if (oldValue instanceof Date && newValue instanceof Date) {
+           oldValue = oldValue.getTime();
+           newValue = newValue.getTime();
+       }
+
+       return oldValue === newValue;
+    }
 
     calendar.isEqualDatePart = isEqualDatePart;
     calendar.makeUnselectable =  makeUnselectable;
