@@ -8,7 +8,7 @@ position: 1
 
 # Overview
 
-[Kendo UI TreeView widget](http://demos.telerik.com/kendo-ui/treeview/index) displays hierarchical data in a traditional tree structure. It supports user interaction through mouse or touch to perform re-ordering operations via drag-and-drop.
+The [Kendo UI TreeView widget](http://demos.telerik.com/kendo-ui/treeview/index) displays hierarchical data in a traditional tree structure. It supports user interaction through mouse or touch to perform re-ordering operations via drag-and-drop.
 
 ## Getting Started
 
@@ -16,7 +16,7 @@ position: 1
 
 Kendo UI TreeView can be created in two ways:
 
-1.  Through the definition of a hierarchical list by using static HTML. This approach is suitable for small hierarchies and for data that does not frequently change. 
+1.  Through the definition of a hierarchical list by using static HTML. This approach is suitable for small hierarchies and for data that does not frequently change.
 2.  Through the usage of dynamic data binding either to a local, or a remote data source. This approach is suitable for larger data sets and for data that frequently changes.
 
 > **Important**
@@ -44,7 +44,7 @@ The example below demonstrates how to initialize the TreeView through a hierarch
         $("#treeView").kendoTreeView();
     });
     </script>
-    
+
 #### Initialize TreeView through local array data binding
 
 The example below demonstrates how to create a TreeView and bind it to a local data source.
@@ -73,7 +73,7 @@ The example below demonstrates how to create a TreeView and bind it to a local d
 #### Initialize TreeView through remote service data binding
 
 The example below demonstrates how to create a TreeView and bind it to a remote HierarchicalDataSource.
-    
+
 ###### Example
 
     $("#treeView").kendoTreeView({
@@ -158,7 +158,7 @@ You can add arbitrary fields when binding through `dataSource`. These are stored
 
 The example below demonstrates how to get the node data in the `select` event handler.
 
-###### Example 
+###### Example
 
     function onSelect(e) {
         // this refers to the TreeView object
@@ -221,7 +221,7 @@ The example below demonstrates how to gather the checked nodes from a Kendo UI T
 
 ### Project TreeView State
 
-The `HierarchicalDataSource` does not support data projection. Therefore, you might need to remap state fields via the [`schema.parse`](/api/framework/datasource#configuration-schema.parse) configuration option. 
+The `HierarchicalDataSource` does not support data projection. Therefore, you might need to remap state fields via the [`schema.parse`](/api/framework/datasource#configuration-schema.parse) configuration option.
 
 The example below demonstrates how to project a TreeView state.
 
@@ -263,7 +263,7 @@ The example below demonstrates how to project a TreeView state.
 
 ## Reference
 
-### Existing Instances 
+### Existing Instances
 
 Refer to an existing TreeView instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference has been established, use the [TreeView API](/api/javascript/ui/treeview) to control its behavior.
 
@@ -272,7 +272,7 @@ The example below demonstrates how to access an existing TreeView instance.
 ###### Example
 
     var treeView = $("#treeView").data("kendoTreeView");
-    
+
 ## See Also
 
 Other articles on Kendo UI TreeView and how-to examples:

@@ -8,14 +8,14 @@ position: 1
 
 # NumericTextBox Overview
 
-[Kendo UI NumericTextBox widget](http://demos.telerik.com/kendo-ui/numerictextbox/index) can convert an `<input>` element into a numeric, percentage, or currency textbox. The conversion data type is defined by the specified format. The widget renders spin buttons and by using them you can increment/decrement the value with a predefined step. The NumericTextBox widget accepts only numeric entries. The widget uses `kendo.culture.current` culture to determine the number precision and other culture-specific properties.
+The [Kendo UI NumericTextBox widget](http://demos.telerik.com/kendo-ui/numerictextbox/index) can convert an `<input>` element into a numeric, percentage, or currency textbox. The conversion data type is defined by the specified format. The widget renders spin buttons and by using them you can increment/decrement the value with a predefined step. The NumericTextBox widget accepts only numeric entries. The widget uses `kendo.culture.current` culture to determine the number precision and other culture-specific properties.
 
 ## Getting Started
 
 ### Initialize the NumericTextBox
-    
+
     <input id="textBox" />
-    
+
     <script>
         $(document).ready(function(){
             $("#textBox").kendoNumericTextBox();
@@ -46,7 +46,7 @@ The example below demonstrates how to customize NumericTextBox defaults.
 ###### Example
 
      <input id="textbox">
-     
+
      <script>
         $("#textbox").kendoNumericTextBox({
             value: 10,
@@ -65,7 +65,7 @@ The example below demonstrates how to create a currency NumericTextBox widget.
 ###### Example
 
      <input id="textbox">
-     
+
      <script>
         $("#textbox").kendoNumericTextBox({
             format: "c2" //Define currency type and 2 digits precision
@@ -79,7 +79,7 @@ The example below demonstartes how to create a percentage NumericTextBox widget.
 ###### Example
 
     <input id="textbox">
-     
+
      <script>
         $("#textbox").kendoNumericTextBox({
             format: "p",
@@ -112,14 +112,14 @@ A side effect from using a `text` input type is that it prevents the numeric key
 
         /* widget is initialized */
         $("#my-numeric-textbox").kendoNumericTextBox({ /*...*/ });
-        
+
         /* set the input type to "number" */
         $("#my-numeric-textbox").attr("type", "number");
-        
+
         /* or if the widget object is already available */
         var numericTextBoxObject = $("#my-numeric-textbox").data("kendoNumericTextBox");
         numericTextBoxObject.element.attr("type", "number");
-        
+
 ## See Also
 
 Other articles on Kendo UI NumericTextBox and how-to examples:

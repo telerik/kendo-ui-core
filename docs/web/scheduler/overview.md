@@ -8,7 +8,7 @@ position: 1
 
 # Scheduler Overview
 
-[Kendo UI Scheduler widget](http://demos.telerik.com/kendo-ui/scheduler/index) displays a set of events&mdash;appointments or tasks. It can display scheduled events in different views&mdash;a single day, a whole week, or month and as a list of tasks which need to be accomplished.
+The [Kendo UI Scheduler widget](http://demos.telerik.com/kendo-ui/scheduler/index) displays a set of events&mdash;appointments or tasks. It can display scheduled events in different views&mdash;a single day, a whole week, or month and as a list of tasks which need to be accomplished.
 
 ## Getting Started
 
@@ -18,7 +18,7 @@ position: 1
 2. Kendo UI Scheduler needs a data source to be bound to and uses a special type of Kendo UI DataSource: [`kendo.data.SchedulerDataSource`](/api/framework/schedulerdatasource). The `SchedulerDataSource` contains instances of a custom Kendo UI model: [`kendo.data.SchedulerEvent`](/api/framework/schedulerevent), which represents the event data items of the Scheduler.
 
 > **Important**
-> 
+>
 > To enable editing of the events and working with recurring event, you must define all fields of the [`kendo.data.SchedulerEvent`](/api/framework/schedulerevent) in the dataSource [`schema.model`](/api/framework/datasource#configuration-schema.model).
 
 ### Bind to Local Array
@@ -177,7 +177,7 @@ The example below demonstrates how to map remote service fields to client-side s
         }
 
 > **Important**
-> 
+>
 > When using `schema.model.fields`, make sure you list all `kendo.data.SchedulerEvent` fields. The fields which represent the `id` of the event must also be set via `schema.model.id`.
 
 ### Best Practices
@@ -307,7 +307,7 @@ In addition, the Scheduler needs a fixed pixel width for itself or some of its a
     </script>
 
 > **Important**
-> 
+>
 > Due to an Internet Explorer bug, related to absolutely positioned elements inside tables, the Scheduler events will be printed over their correct time slots only if the widget fits on one page.
 
 ### Adaptive Rendering Mode
@@ -444,12 +444,12 @@ The example below demonstrates how to access an existing Scheduler instance.
     // Get reference to the kendo.ui.Scheduler instance
     var scheduler = $("#scheduler").data("kendoScheduler");
     </script>
-    
+
 ## Known Limitations
 
 ### Time-Frames between Two Days
 
-The built-in views of the widget are designed to render a time-frame that ends on the day it starts. If you want to render views which start on one day and end on another, build a custom view. 
+The built-in views of the widget are designed to render a time-frame that ends on the day it starts. If you want to render views which start on one day and end on another, build a custom view.
 
 For additional informatino on how to create custom views, refer to [this how-to example]({% slug howto_create_custom_view_inheriting_builtinview_scheduler %}).
 

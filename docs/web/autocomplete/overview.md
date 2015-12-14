@@ -8,16 +8,16 @@ position: 1
 
 # AutoComplete Overview
 
-[Kendo UI AutoComplete widget](http://demos.telerik.com/kendo-ui/autocomplete/index) provides suggestions depending on the typed text. It also allows multiple value entries. The suggestions shown by the widget can come from a local array or from a remote data service.
+The [Kendo UI AutoComplete widget](http://demos.telerik.com/kendo-ui/autocomplete/index) provides suggestions depending on the typed text. It also allows multiple value entries. The suggestions shown by the widget can come from a local array or from a remote data service.
 
 ## Getting Started
 
-### Initialize the AutoComplete 
+### Initialize the AutoComplete
 
 Initialize the AutoComplete widget by using a jQuery selector:
-    
+
     <input id="autoComplete" />
-    
+
     $(document).ready(function() {
      $("#autoComplete").kendoAutoComplete(["Item1", "Item2"]);
     });
@@ -52,9 +52,9 @@ To configure and provide AutoComplete suggestions locally, you can either pass a
 You can directly initialize a local data array in `constructor` as demonstrated in the example below.
 
 ###### Example
-    
+
     <input id="autoComplete" />
-    
+
     <script>
         $("#autoComplete").kendoAutoComplete(["Item1", "Item2", "Item3"]);
     </script>
@@ -62,7 +62,7 @@ You can directly initialize a local data array in `constructor` as demonstrated 
 You can bind the widget to a local data array by using the `dataSource` property as demonstrated int he example below.
 
 ###### Example
-    
+
     <input id="autoComplete" />
     <script>
         var data = ["Item1", "Item2", "Item3"];
@@ -123,7 +123,7 @@ You can bind the widget to a JSONP service by using Kendo UI `DataSource` as dem
       }
      })
     });
-    
+
 ### Drop-Down List
 
 You can customize the width of a drop-down list and change its dimensions by using the jQuery width() method.
@@ -131,7 +131,7 @@ You can customize the width of a drop-down list and change its dimensions by usi
 ###### Example
 
     <input id="autoComplete" />
-    
+
     <script>  
         $("#autoComplete").kendoAutoComplete();
         var autoComplete = $("#autocomplete").data("kendoAutoComplete");
@@ -181,8 +181,8 @@ The AutoComplete widget provides the rendering of a pop-up header.
 
 The example below demonstrates how to define a header template.
 
-###### Example 
-    
+###### Example
+
     <input id="autoComplete" />
     <!-- Template -->
     <script id="headerTemplate" type="text/x-kendo-template">

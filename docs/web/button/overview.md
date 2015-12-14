@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Button Widget 
+page_title: Overview | Kendo UI Button Widget
 description: "Learn how to initialize the Kendo UI Button widget and apply its other options."
 slug: overview_kendoui_button_widget
 position: 1
@@ -8,7 +8,7 @@ position: 1
 
 # Button Overview
 
-[Kendo UI Button widget](http://demos.telerik.com/kendo-ui/button/index) provides a styled clickable UI functionality with arbitrary content. Apart from consistent Kendo UI styling, the Button provides keyboard operability for elements, which natively do not have it (e.g., `span`). 
+The [Kendo UI Button widget](http://demos.telerik.com/kendo-ui/button/index) provides a styled clickable UI functionality with arbitrary content. Apart from consistent Kendo UI styling, the Button provides keyboard operability for elements, which natively do not have it (e.g., `span`). 
 
 Note that the content of this article necessitates your understanding of the [fundamental Kendo UI widget concepts](/widgets).
 
@@ -96,7 +96,7 @@ The business logic of an application often requires a certain button to be tempo
 	</script>
 
 For more information on the Button [`enable` property](/api/web/button#configuration-enable) and the [`enable` method](/api/web/button#methods-enable), please refer to the [Button API](/api/web/button/).    
-    
+
 ## Add Icons
 
 The Button can accommodate an icon, which enhances the meaning of the text content. The widget provides three ways to add an icon with a classic `img` element or with a background image (usually a sprite). From web standarts' point of view, using background images is better, because the icon does not represent structural content, but is simply a decoration.
@@ -244,7 +244,7 @@ The other option is to include the required HTML markup and CSS classes inside t
 </script>
 ```
 
-## Reference 
+## Reference
 
 ### Existing Instances
 
@@ -323,12 +323,12 @@ The example below demonstrates how to create a Floating Action Button.
         opacity: 1;
       }
     </style>
-    
+
 ## See Also
 
 Other articles on Kendo UI Button:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/button/overview)
 * [Overview of the JSP Tag](/jsp/tags/button/overview)
-* [Overview of the PHP Class](/php/widgets/button/overview) 
+* [Overview of the PHP Class](/php/widgets/button/overview)
 * [JavaScript API Reference](/api/javascript/ui/button)

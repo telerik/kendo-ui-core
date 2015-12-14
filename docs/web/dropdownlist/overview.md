@@ -8,13 +8,13 @@ position: 1
 
 # DropDownList Overview
 
-[Kendo UI DropDownList widget](http://demos.telerik.com/kendo-ui/dropdownlist/index) displays a list of values and allows for a single selection from the list. The user input is restricted within the predefined options. Use the Kendo UI ComboBox control if you want to apply a keyboard input.
+The [Kendo UI DropDownList widget](http://demos.telerik.com/kendo-ui/dropdownlist/index) displays a list of values and allows for a single selection from the list. The user input is restricted within the predefined options. Use the Kendo UI ComboBox control if you want to apply a keyboard input.
 
 ## Getting Started
 
-### Initialize the DropDownList 
+### Initialize the DropDownList
 
-The Kendo UI DropDownList widget can be initialized in three ways: 
+The Kendo UI DropDownList widget can be initialized in three ways:
 
 1. By using the `<option>` tag of an existing `<select>` element with defined data items.
 2. By binding the widget to a local data array and using the `<input>` or `<select>` element.
@@ -24,7 +24,7 @@ The DropDownList looks and operates consistently regardless of the initializatio
 
 > **Important**  
 > * As DropDownList should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
-> 
+>
 > * The widget copies any styles and CSS classes from the input element to the wrapper element and visible input.
 
 #### Initialize the DropDownList from an existing `<select>` element with defined data items
@@ -40,10 +40,10 @@ The DropDownList looks and operates consistently regardless of the initializatio
             $("#dropdownlist").kendoDropDownList();
         });
     </script>
-    
+
 #### Initialize the DropDownList by binding it to a local data array
 
-The DropDownList can be bound to local data arrays via the [DataSource component](/framework/datasource/overview) - an abstraction for local and remote data. Local arrays are appropriate for limited value options. 
+The DropDownList can be bound to local data arrays via the [DataSource component](/framework/datasource/overview) - an abstraction for local and remote data. Local arrays are appropriate for limited value options.
 
 ###### Example
 
@@ -63,7 +63,7 @@ The DropDownList can be bound to local data arrays via the [DataSource component
     </script>
 
 #### Initialize the DropDownList by binding it to a remote data service   
-   
+
 The DropDownList can be bound to remote data arrays via the [DataSource component](/framework/datasource/overview) - an abstraction for local and remote data. Remote data binding is appropriate for larger data sets, so that items are loaded on-demand, when displayed. The DataSource can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
 ###### Example
@@ -88,13 +88,13 @@ The DropDownList can be bound to remote data arrays via the [DataSource componen
 
 ## Templates
 
-The DropDownList uses [Kendo UI templates](/framework/templates/overview) to provide full control over the way an item, a selected value, or a pop-up header is rendered. 
+The DropDownList uses [Kendo UI templates](/framework/templates/overview) to provide full control over the way an item, a selected value, or a pop-up header is rendered.
 
 ### Item Templates
 
 The example below demonstrates how to define an item template.
 
-###### Example 
+###### Example
 
     <input id="dropdownlist" />
     <!-- Template -->
@@ -204,7 +204,7 @@ You can customize the width of a drop-down list and change its dimensions by usi
     </script>
 
 The example below demonstrates how to set the list dimensions through MVVM binding.
-    
+
 ###### Example
 
 ```html

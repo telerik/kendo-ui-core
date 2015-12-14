@@ -8,7 +8,7 @@ position: 1
 
 # TimePicker Overview
 
-[Kendo UI TimePicker widget](http://demos.telerik.com/kendo-ui/timepicker/index) lets users select time values from a predefined list or enter new ones. It supports configurable options for the format, minimum/maximum time, and interval between the predefined values in the list.
+The [Kendo UI TimePicker widget](http://demos.telerik.com/kendo-ui/timepicker/index) lets users select time values from a predefined list or enter new ones. It supports configurable options for the format, minimum/maximum time, and interval between the predefined values in the list.
 
 ## Getting Started
 
@@ -19,7 +19,7 @@ The DatePicker can be initialized via an `id` selector as demonstrated in the ex
 ###### Example
 
     <input id="timePicker" />
-    
+
     <script>
         $(document).ready(function(){
             $("#timePicker").kendoTimePicker();
@@ -39,14 +39,14 @@ Kendo UI DatePicker provides default configuration options that can be set durin
 *   Time format
 *   Define interval between predefined values in the list
 
-### Selected, Min, and Max Time 
+### Selected, Min, and Max Time
 
 The example below demonstrates how to define selected, min, and max times.
 
 ###### Example
 
     <input id="timePicker" />
-    
+
     <script>
         $("#timePicker").kendoTimePicker({
             value: new Date(2000, 10, 10, 10, 0, 0),
@@ -54,7 +54,7 @@ The example below demonstrates how to define selected, min, and max times.
             max: new Date(2049, 11, 31, 18, 0, 0)
         });
     </script>
-    
+
 The TimePicker will set the value only if the entered time is valid and within the defined range.
 
 ### Time Format
@@ -64,7 +64,7 @@ The exampe below demonstrates how to define the time format.
 ###### Example
 
     <input id="timePicker" />
-    
+
     <script>
         $("#timePicker").kendoTimePicker({
             format: "hh:mm:ss tt"
@@ -78,13 +78,13 @@ The example below demonstrates how to define the interval in minutes between val
 ###### Example
 
     <input id="timePicker" />
-    
+
     <script>
         $("#timePicker").kendoTimePicker({
             interval: 15
         });
     </script>
-    
+
 ## See Also
 
 Other articles on Kendo UI TimePicker:

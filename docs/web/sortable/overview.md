@@ -8,9 +8,9 @@ position: 1
 
 # Sortable Overview
 
-[Kendo UI Sortable widget](http://demos.telerik.com/kendo-ui/sortable/index) makes a group of DOM elements sortable by dragging and dropping with a mouse or a finger.
+The [Kendo UI Sortable widget](http://demos.telerik.com/kendo-ui/sortable/index) makes a group of DOM elements sortable by dragging and dropping with a mouse or a finger.
 
-## Getting Started 
+## Getting Started
 
 ### Initialize the Sortable
 
@@ -68,7 +68,7 @@ The example below demonstrates how to build the Placeholder from the dragged ele
     </script>
 ```
 
-The example below demonstrates how to build a static Placeholder. 
+The example below demonstrates how to build a static Placeholder.
 
 ###### Example
 
@@ -119,7 +119,7 @@ The example below demonstrates how to build the Hint from the dragged element.
     </script>
 ```
 
-The example below demonstrates how to build a static Hint. 
+The example below demonstrates how to build a static Hint.
 
 ###### Example
 
@@ -137,7 +137,7 @@ The example below demonstrates how to build a static Hint.
     </script>
 ```
 
-The example below demonstrates how to disable the Hint. 
+The example below demonstrates how to disable the Hint.
 
 ###### Example
 
@@ -341,7 +341,7 @@ The example below demonstrates how to persist the order of items in local storag
 
 ### Radio Buttons
 
-A Sortable with radio buttons and a Hint cloned from the Sortable element will lose the selected radio if dragged, because the clone will take over the selection. To avoid this, clear the name of the radio in the Hint, as demonstrated in the example below. 
+A Sortable with radio buttons and a Hint cloned from the Sortable element will lose the selected radio if dragged, because the clone will take over the selection. To avoid this, clear the name of the radio in the Hint, as demonstrated in the example below.
 
 ###### Example
 

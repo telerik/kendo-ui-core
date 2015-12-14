@@ -8,7 +8,7 @@ position: 2
 
 # ListView Overview
 
-[Kendo UI ListView widget](http://demos.telerik.com/kendo-ui/listview/index) is designed to give you the freedom to specify a custom type of layout for the items displayed in the control. It can be bound to local JSON data or to remote data using the Kendo UI DataSource component.
+The [Kendo UI ListView widget](http://demos.telerik.com/kendo-ui/listview/index) is designed to give you the freedom to specify a custom type of layout for the items displayed in the control. It can be bound to local JSON data or to remote data using the Kendo UI DataSource component.
 
 ## Getting Started
 
@@ -43,7 +43,7 @@ Then, initialize the widget in the way demonstrated below.
 
 ### Selection, Navigation, and Editing
 
-The ListView supports selection, navigation, and editing functionalities which, by default, are disabled. You can configure any of these behaviors by using simple Boolean options, as shown in the example below. 
+The ListView supports selection, navigation, and editing functionalities which, by default, are disabled. You can configure any of these behaviors by using simple Boolean options, as shown in the example below.
 
 ###### Example
 
@@ -58,7 +58,7 @@ The ListView supports selection, navigation, and editing functionalities which, 
       });
 
 ### Paging
-      
+
 To enable paging, instantiate a separate pager control and bind it to the same DataSource, as shown in the example below.
 
 ###### Example

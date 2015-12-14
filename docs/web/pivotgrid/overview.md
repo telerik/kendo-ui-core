@@ -8,19 +8,19 @@ position: 1
 
 # PivotGrid Overview
 
-[Kendo UI PivotGrid widget](http://demos.telerik.com/kendo-ui/pivotgrid/index) represents multidimensional data in a cross-tabular format. It allows the user to perform a complex analysis on the visualized data. Kendo UI PivotGrid uses the Online Analytical Processing ([OLAP](http://en.wikipedia.org/wiki/Online_analytical_processing)) approach to present the result of multidimensional queries in a comprehensive way. It also supports a drill-down functionality that represents the underlying data for calculated cells. The widget uses an instance of the [`kendo.data.PivotDataSource`](/api/framework/pivotdatasource) component as a data source. `PivotDataSource` communicates with an OLAP [cube](http://en.wikipedia.org/wiki/OLAP_cube) instance on HTTP using the [XMLA](http://en.wikipedia.org/wiki/XML_for_Analysis) protocol.
+The [Kendo UI PivotGrid widget](http://demos.telerik.com/kendo-ui/pivotgrid/index) represents multidimensional data in a cross-tabular format. It allows the user to perform a complex analysis on the visualized data. Kendo UI PivotGrid uses the Online Analytical Processing ([OLAP](http://en.wikipedia.org/wiki/Online_analytical_processing)) approach to present the result of multidimensional queries in a comprehensive way. It also supports a drill-down functionality that represents the underlying data for calculated cells. The widget uses an instance of the [`kendo.data.PivotDataSource`](/api/framework/pivotdatasource) component as a data source. `PivotDataSource` communicates with an OLAP [cube](http://en.wikipedia.org/wiki/OLAP_cube) instance on HTTP using the [XMLA](http://en.wikipedia.org/wiki/XML_for_Analysis) protocol.
 
 ## Prerequisites
 
 - [Get Acquainted with the PivotGrid Fundamentals](/web/pivotgrid/fundamentals)
-- [Set Up an OLAP Cube](/web/pivotgrid/olap-cube-setup), or 
+- [Set Up an OLAP Cube](/web/pivotgrid/olap-cube-setup), or
 - [Use Our OLAP Service](http://demos.telerik.com/olap/msmdpump.dll)
 
 ## Getting Started
 
 ### Initialize the PivotGrid
 
-The sections below demonstrate how to configure the Kendo UI PivotGrid widget to the "Adventure Works" cube hosted on http://demos.telerik.com. 
+The sections below demonstrate how to configure the Kendo UI PivotGrid widget to the "Adventure Works" cube hosted on http://demos.telerik.com.
 
 Create the PivotGrid by defining an HTML `<div>` element.
 
@@ -32,7 +32,7 @@ Create the PivotGrid by defining an HTML `<div>` element.
 
 The example below demonstrates how to further configure the Kendo UI PivotGrid widget.
 
-###### Example 
+###### Example
 
         <script>
         	$(document).ready(function () {

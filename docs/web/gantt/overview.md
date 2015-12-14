@@ -8,7 +8,7 @@ position: 1
 
 # Gantt Overview
 
-[Kendo UI Gantt widget](http://demos.telerik.com/kendo-ui/gantt/index) displays a set of tasks and dependencies, which are used to visualize project planning data. The widget provides a Treelist section where the tasks can be edited, sorted and reordered in a grid-like fashion, as well as a Timeline section, where the tasks and dependencies are visualized under an adjustable time ruler, and can be resized, moved, edited and removed. It can also display the Timeline in three different views – day, week and month.
+The [Kendo UI Gantt widget](http://demos.telerik.com/kendo-ui/gantt/index) displays a set of tasks and dependencies, which are used to visualize project planning data. The widget provides a Treelist section where the tasks can be edited, sorted and reordered in a grid-like fashion, as well as a Timeline section, where the tasks and dependencies are visualized under an adjustable time ruler, and can be resized, moved, edited and removed. It can also display the Timeline in three different views – day, week and month.
 
 ## Getting Started
 
@@ -18,7 +18,7 @@ The Kendo UI Gantt widget needs two special types of Kendo UI DataSource compone
 
 ### Bind to Local Arrays
 
-The easiest way to bind the Gantt is to provide the tasks and dependencies as an array of JavaScript objects. 
+The easiest way to bind the Gantt is to provide the tasks and dependencies as an array of JavaScript objects.
 
 The example below demonstrates how to bind the widget to an array of JavaScript objects.
 
@@ -197,23 +197,23 @@ If your remote service stores and returns the gantt tasks in a different format 
                         from: "End", // The 'End' server-side field is mapped to the 'end' client-side field
                         type: "date"
                     },
-                    orderId: { 
+                    orderId: {
                         from: "OrderID", // The 'OrderID' server-side field is mapped to the 'orderId' client-side field
                         type: "number"
                     },
-                    parentId: { 
+                    parentId: {
                         from: "ParentID", // The 'ParentID' server-side field is mapped to the 'parentId' client-side field
                         type: "number"
                     },
-                    percentComplete: { 
+                    percentComplete: {
                         from: "PercentComplete", // The 'PercentComplete' server-side field is mapped to the 'percentComplete' client-side field
                         type: "number"
                     },
-                    summary: { 
+                    summary: {
                         from: "Summary", // The 'Summary' server-side field is mapped to the 'summary' client-side field
                         type: "boolean"
                     },
-                    expanded: { 
+                    expanded: {
                         from: "Expanded", // The 'Expanded' server-side field is mapped to the 'expanded' client-side field
                         type: "boolean"
                     }
@@ -274,7 +274,7 @@ The columns in the Treelist section of the Kendo UI Gantt can be idividually con
 - `width` - the width of the column.
 - `format` - the format in which the data in the column is represented.
 
-To configure individual columns use the [views](/api/web/gantt#configuration-columns) option. 
+To configure individual columns use the [views](/api/web/gantt#configuration-columns) option.
 
 The example below demonstrates how to configure Gantt columns.
 
@@ -316,7 +316,7 @@ Kendo UI Gantt Timeline can display its tasks in different views. The supported 
 - `week` - the timeline is divided into weeks and days.
 - `month` - the timeline is divided into months and weeks.
 
-To enable or disable individual views or configure them, use the [views](/api/web/gantt#configuration-views) option. 
+To enable or disable individual views or configure them, use the [views](/api/web/gantt#configuration-views) option.
 
 The example below demonstrates how to enable all scheduler views.
 
@@ -442,7 +442,7 @@ The example below demonstrates how to subscribe to a Gantt event during initiali
     </script>
 
 The example below demonstrates how to subscribe to a Gantt event using the `bind` method.   
-    
+
 ###### Example
 
     <div id="gantt"></div>
@@ -464,7 +464,7 @@ The example below demonstrates how to subscribe to a Gantt event using the `bind
     var gantt = $("#gantt").data("kendoGantt");
     gantt.bind("navigate", gantt_navigate);
     </script>
-    
+
 ## See Also
 
 Other articles on Kendo UI Gantt:

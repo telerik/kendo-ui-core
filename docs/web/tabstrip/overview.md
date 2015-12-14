@@ -8,13 +8,13 @@ position: 1
 
 # TabStrip Overview
 
-[Kendo UI TabStrip widget](http://demos.telerik.com/kendo-ui/tabstrip/index) displays a collection of tabs with associated content. It is composed of an unordered list of items, representing tabs, and a collection of `div` elements, which contain the content for each tab.
+The [Kendo UI TabStrip widget](http://demos.telerik.com/kendo-ui/tabstrip/index) displays a collection of tabs with associated content. It is composed of an unordered list of items, representing tabs, and a collection of `div` elements, which contain the content for each tab.
 
 ## Getting Started
 
 ### Initialize the TabStrip
 
-The Kendo UI TabStrip widget can be initialized in two ways: 
+The Kendo UI TabStrip widget can be initialized in two ways:
 
 * From HTML markup
 * From a JSON data object
@@ -37,7 +37,7 @@ The example below demonstrates how to initialize Kendo UI TabStrip from HTML mar
         <div>First tab content</div>
         <div>Second tab content</div>
     </div>
-    
+
     <script>
         $(document).ready(function() {
             $("#tabstrip").kendoTabStrip();
@@ -104,7 +104,7 @@ The example below demonstrates how to load content asynchronously using AJAX.
         <div></div>
         <div></div>
      </div>
-     
+
      <script>
         $(document).ready(function(){
             $("#tabstrip").kendoTabStrip({
@@ -112,7 +112,7 @@ The example below demonstrates how to load content asynchronously using AJAX.
             });
         });
      </script>
-     
+
 ### Dynamic Tabs
 
 The TabStrip API provides methods for dynamically adding or removing TabStrip bars. To add items, provide the new item as a JSON object along with a reference item. A reference item is a target TabStrip tab HTML element that already exists in the TabStrip. The reference item will be used to determine the placement in the hierarchy of the new tab. Any valid jQuery selector can be used to obtain a reference to the target item.
@@ -131,7 +131,7 @@ The example below demonstrates how to add a new TabStrip tab.
         <div></div>
         <div></div>
     </div>
-    
+
     <script>
         var tabstrip = $("#tabstrip").data("kendoTabStrip");
         tabstrip.insertAfter(
@@ -147,7 +147,7 @@ As of 2015 Q2 (2015.2.624) version Kendo UI TabStrip supports scrollable tabs fo
 If the TabStrip has no fixed width and is placed in a fluid layout, it can re-check whether tab scrolling is necessary, or is no longer required. To achieve this, execute the widget's [`resize()` method](/using-kendo-in-responsive-web-pages#individual-widget-resizing), e.g. in `window.resize`. The `resize` method will also show the right scroll button if the last and selected tab becomes invisibile as a result of TabStrip shrinking.
 
 For additional information on the configuration, events, and methods of the widget, check the [TabStrip API](/api/javascript/ui/tabstrip).
-    
+
 ### Select Tab on Initial Load
 
 It is possible to select a tab and display its associated content upon the initial load. There are two ways to accomplish this task:
@@ -169,7 +169,7 @@ The example below demonstrates how to manually select a default tab using HTML.
         <div></div>
         <div></div>
     </div>
-   
+
 The example below demonstrates how to initialize a TabStrip and select the first tab via `select` (element).  
 
 ###### Example
@@ -182,7 +182,7 @@ The example below demonstrates how to initialize a TabStrip and select the first
         <div></div>
         <div></div>
     </div>
-    
+
     <script>
         $(document).ready(function(){
             var tabstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
@@ -192,7 +192,7 @@ The example below demonstrates how to initialize a TabStrip and select the first
 
 The example below demonstrates how to initialize a TabStrip and select the first tab via `select` (index).
 
-###### Example 
+###### Example
 
     <div id="tabstrip">
         <ul>
@@ -202,7 +202,7 @@ The example below demonstrates how to initialize a TabStrip and select the first
         <div></div>
         <div></div>
     </div>
-    
+
     <script>
         $(document).ready(function(){
             var tabstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");

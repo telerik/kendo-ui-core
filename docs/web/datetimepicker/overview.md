@@ -8,7 +8,7 @@ position: 1
 
 # DateTimePicker Overview
 
-[Kendo UI DateTimePicker widget](http://demos.telerik.com/kendo-ui/datetimepicker/index) allows the user to select a value from a calendar or a time drop-down list as well as direct input. It supports configurable options for minimum and maximum value, format, interval between predefined hours in the time view, custom templates for "month" view of the calendar, start view and the depth of the navigation.
+The [Kendo UI DateTimePicker widget](http://demos.telerik.com/kendo-ui/datetimepicker/index) allows the user to select a value from a calendar or a time drop-down list as well as direct input. It supports configurable options for minimum and maximum value, format, interval between predefined hours in the time view, custom templates for "month" view of the calendar, start view and the depth of the navigation.
 
 ## Getting Started
 

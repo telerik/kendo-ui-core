@@ -8,7 +8,7 @@ position: 1
 
 # Slider Overview
 
-[Kendo UI Slider widget](http://demos.telerik.com/kendo-ui/slider) provides a rich input for selecting values. Unlike the HTML5 range input, the Slider provides a consistent experience across browsers and delivers a rich API and event model.
+The [Kendo UI Slider widget](http://demos.telerik.com/kendo-ui/slider) provides a rich input for selecting values. Unlike the HTML5 range input, the Slider provides a consistent experience across browsers and delivers a rich API and event model.
 
 ## Getting Started
 
@@ -29,15 +29,15 @@ Initialize the Slider using a jQuery selector as demonstrated in the example bel
     $(document).ready(function() {
         $("#slider").kendoSlider();
     });
-    
+
 > **Important**  
-> As the Slider should be initialized after the DOM is fully loaded, make sure you initilaize it within a `$(document).ready()` statement. 
+> As the Slider should be initialized after the DOM is fully loaded, make sure you initilaize it within a `$(document).ready()` statement.
 
 ## Customization
 
 ### Behaviors
 
-The aspects of the Slider behavior can be customized by configuring its properties. These include: 
+The aspects of the Slider behavior can be customized by configuring its properties. These include:
 
 *   Minimum and/or maximum values
 *   Horizontal or vertical orientation

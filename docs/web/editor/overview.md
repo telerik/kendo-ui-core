@@ -8,11 +8,11 @@ position: 1
 
 # Editor Overview
 
-[Kendo UI Editor widget](http://demos.telerik.com/kendo-ui/editor/index) allows you to create rich textual content by means of a `WYSIWYG` interfance. The generated widget value is an `XHTML` markup.
+The [Kendo UI Editor widget](http://demos.telerik.com/kendo-ui/editor/index) allows you to create rich textual content by means of a `WYSIWYG` interfance. The generated widget value is an `XHTML` markup.
 
 ## Getting Started
 
-### Initialize the Editor 
+### Initialize the Editor
 
 Initialize the Editor widget by using an existing `HTML` element and a jQuery selector:
 
@@ -22,7 +22,7 @@ Initialize the Editor widget by using an existing `HTML` element and a jQuery se
           $("#editor").kendoEditor();
       });
 
-## Modes 
+## Modes
 
 The Editor assumes two mode types depending on the element from which it is created: classic and inline.
 
@@ -94,10 +94,10 @@ You can temporarily make the Editor readonly by using the following approach:
 
     var editor = $("#editor").data("kendoEditor"),
         editorBody = $(editor.body);
-     
+
     // make readonly
     editorBody.add("td", editorBody).removeAttr("contenteditable");
-     
+
     // make editable
     editorBody.add("td", editorBody).attr("contenteditable", true);
 

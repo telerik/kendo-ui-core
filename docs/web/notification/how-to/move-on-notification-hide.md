@@ -85,4 +85,4 @@ Other articles on Kendo UI Notification:
 
 * [JavaScript API Reference](/api/javascript/ui/notification)
 * [How to Stack Static Notifications to the Left or Right]({% slug howto_stack_static_tothe_leftor_right_notification %})
-* [Move Popup Notifications on Window Resize]({% slug howto_move_popup_notifications_onwindow_resize_notification %})
+* [How to Move Popup Notifications on Window Resize]({% slug howto_move_popup_notifications_onwindow_resize_notification %})
