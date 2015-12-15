@@ -195,6 +195,7 @@ The syntax of the generated classes is `k-[browser] k-[browser][majorVersion]`.
 
 Other articles on the styling and appearance of Kendo UI widgets:
 
+* [Responsive Web Design]({% slug responsivewebdesign_integration_kendoui %})
 * [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})
 * [How to Change Themes on the Client]({% slug howto_changethemes_ontheclient_styleskendoui %})
 * [Themes and Appearance of the Kendo UI Widgets for Data Visualization](/dataviz/appearance-styling)

@@ -1,13 +1,13 @@
 ---
-title: Kendo UI Bower Packages
-page_title: Kendo UI Bower Packages | Kendo UI Installation
+title: Bower Packages
+page_title: Bower Packages | Kendo UI Installation
 description: "Get HTML5 UI frameworks and widgets by installing Kendo UI Professional or Kendo UI Core bower package."
 previous_url: /install/bower
 slug: kendoui_bower_packages_kendoui_installation
 position: 2
 ---
 
-# Kendo UI Bower Packages
+# Bower Packages
 
 [Bower](http://bower.io/) is a popular package manager for the web.
 

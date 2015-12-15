@@ -1,20 +1,23 @@
 ---
-title: Angular 2 Support
-description: How to use Kendo UI widgets in AngularJS 2 applications (experimental)
-position: 240
+title: Angular 2.0
+page_title: Angular 2.0 | Kendo UI Third-Party Tools
+description: "Learn how to use Kendo UI widgets in Angular 2.0 applications (experimental)."
+previous_url: /angular2
+slug: angular2support_integration_kendoui
+position: 3
 ---
 
-{% raw %}
+# Angular 2.0
 
-# Angular 2 experimental support
+The 2015 Q3 release includes an experimental support for Angular 2.0. Unlike Angular 1.* versions, Angular 2.0 relies on the implementation of web components. If your browser does not support web components, add the [polyfill library](http://webcomponents.org/polyfills/).
 
-The Q3 2015 release includes an experimental support for Angular 2. Unlike the AngularJS 1 branch, the Angular 2 relies on the web components implementation.
-If your browser does not support web components, you should include the [polyfill library](http://webcomponents.org/polyfills/).
+> **Important**
+>
+> As of the time of the release, Angular 2 is still in alpha stage and relies on several moving parts (SystemJS, Traceur, etc). Things are changing pretty fast as the library advances forward, so chances are the setup below is not going to work with newer versions of any of the libraries.
 
 The example below is based on the [5 min quickstart](https://angular.io/docs/js/latest/quickstart.html) setup instructions.
 
-> By the time of the release, Angular 2 is still in alpha stage, and relies on several moving parts (SystemJS, traceur, etc).
-> Things are changing pretty fast as the library advances forward, so chances are the setup below won't work with newer versions of any of the libraries.
+###### Example
 
 ```html
 <!DOCTYPE html>
@@ -135,31 +138,39 @@ declare module "kendo/angular2" {
 }
 ```
 
-## Widget configuration and events
-
+## Widget Configuration and Events
 
 ### Configuration Options
 
-static widget configuration options may be set as regular attributes. For example, the format of the numeric textbox may be assigned like this:
+Static widget configuration options may be set as regular attributes. For example, the format of Kendo UI NumericTextBox may be assigned like this:
 
 ```
 <kendo-numerictextbox format="c0"></kendo-numerictextbox>
 ```
 
-### Bound configuration options
+### Bound Configuration Options
 
-The widget instance also supports bound configuration options, through the `[options]="widgetOptions"` syntax.
-If the options object is changed, the widget will be reinstantiated automatically with the new configuration, similar to the `k-rebind` behavior in Angular 1.
+The widget instance also supports bound configuration options, through the `[options]="widgetOptions"` syntax. If the options object is changed, the widget will be automatically re-instantiated with the new configuration, similar to the `k-rebind` behavior in Angular 1.
 
-> currently, changing properties to the existing options object will not trigger the rebind behavior.
+> **Important**
+>
+> Currently, changing properties to the existing options object is not going to trigger the `rebind` behavior.
 
-### ng-model and ng-control
+### `ng-model` and `ng-control`
 
-Just like in Angular 1, the widgets' value method is mapped to the `ng-model` directive. `ng-control` is also supported.
+Just like in Angular 1 versions, the widgets' `value` method is mapped to the `ng-model` directive. `ng-control` is also supported.
 
 ## Event Handling
 
-Widget events are handled through the standard DOM event handling syntax - the spin event of the numerictextbox widget is handled with the `(spin)="log($event)"` syntax.
-The kendo event data is available in the `$event.detail` field.
+Widget events are handled through the standard DOM event handling syntax. The `spin` event of the NumericTextBox widget is handled with the `(spin)="log($event)"` syntax. The Kendo UI event data is available in the `$event.detail` field.
 
-{% endraw %}
+## See Also
+
+Other articles on Kendo UI integration with third-party tools and frameworks:
+
+* [Twitter Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})
+* [Web Components]({% slug webcomponents_integration_kendoui %})
+* [RequireJS]({% slug requirejs_integration_kendoui %})
+* [TypeScript]({% slug typescript_integration_kendoui %})
+* [Visual Studio IntelliSense]({% slug visualstudiointellisense_integration_kendoui %})
+* [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})

@@ -1,18 +1,27 @@
 ---
-title: Use with RequireJS
-position: 210
+title: RequireJS
+page_title: RequireJS | Kendo UI Third-Party Tools
+description: "Learn how to work with Kendo UI and RequireJS compatible loader."
+previous_url: /using-kendo-with-requirejs
+slug: requirejs_integration_kendoui
+position: 4
 ---
 
-# Using Kendo UI with RequireJS
+# RequireJS
 
-The minified Kendo UI JavaScript files are [AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition) modules and work with compatible loaders such as [RequireJS](http://requirejs.org/).
-You can use this feature to load only the needed Kendo UI JavaScript files instead of `kendo.all.min.js`.
+The minified Kendo UI JavaScript files are [AMD modules](https://en.wikipedia.org/wiki/Asynchronous_module_definition) and work with compatible loaders such as [RequireJS](http://requirejs.org/). You can use this feature to load only the needed Kendo UI JavaScript files instead of `kendo.all.min.js`.
 
-> Only the minified Kendo UI JS files (.min.js) are AMD modules. The source files (.js) and combined files (kendo.all.min.js) are not AMD modules and require [additional configuration](#using-kendoallminjs-with-requirejs) in order to work with RequireJS.
+> **Important**
+>
+> Only the minified Kendo UI JS files (`.min.js`) are AMD modules. The source files (`.js`) and the combined files (`kendo.all.min.js`) are not AMD modules and require [additional configuration]({% slug requirejs_integration_kendoui %}#using-kendoallminjs-with-requirejs) to work with RequireJS.
 
-## Using RequireJS to load Kendo UI from CDN
+## Load Kendo UI Using RequireJS
 
-This example shows how to load the Kendo UI JavaScript files via [CDN](/intro/installation/getting-started#use-the-kendo-ui-cdn-service).
+### From CDN
+
+The example below demonstrates how to load the Kendo UI JavaScript files via [CDN]({% slug kendoui_cdn_services_installation %}).
+
+###### Example
 
 ```html
 <!doctype html>
@@ -55,9 +64,11 @@ This example shows how to load the Kendo UI JavaScript files via [CDN](/intro/in
 </html>
 ```
 
-## Using RequireJS to load Kendo UI from local directory
+### From Local Directory
 
-This example shows how to load the Kendo UI JavaScript files from a local directory e.g. `/js/kendo`.
+The example below demonstrates how to load the Kendo UI JavaScript files from a local directory, e.g. `/js/kendo`.
+
+###### Example
 
 ```
 <!doctype html>
@@ -102,15 +113,19 @@ This example shows how to load the Kendo UI JavaScript files from a local direct
 </html>
 ```
 
-## Creating AMD modules which depend on Kendo UI
+## Features
 
-This example shows how to create your own AMD module which depends on Kendo UI. The example assumes the following:
+### Create AMD Modules Depending on Kendo UI
+
+The example below demonstrates how to create your own AMD module which depends on Kendo UI and assumes the following:
 
 * The AMD module is called `main.js` and resides in the `/js/app` local directory.
 * The minified Kendo UI JavaScript files are located in the `/js/app` local directory.
 * The page that uses the AMD module is `index.html`
 
-### main.js
+#### `main.js`
+
+###### Example
 
     define(["jquery", "kendo/kendo.dropdownlist.min", "kendo/kendo.grid.min"], function($) {
         $("#grid").kendoGrid({
@@ -128,7 +143,9 @@ This example shows how to create your own AMD module which depends on Kendo UI. 
         });
     });
 
-### index.html
+#### `index.html`
+
+###### Example
 
     <!doctype html>
     <html>
@@ -159,9 +176,13 @@ This example shows how to create your own AMD module which depends on Kendo UI. 
         </body>
     </html>
 
-## Using kendo.all.min.js with RequireJS
+### Use `kendo.all.min.js` with RequireJS
 
-The combined kendo.all.min.js file is not an AMD module and requires a [shim](http://requirejs.org/docs/api.html#config-shim). This example shows how to do this.
+The combined `kendo.all.min.js` file is not an AMD module and requires a [shim](http://requirejs.org/docs/api.html#config-shim).
+
+The example below demonstrates how to achieve this.
+
+###### Example
 
 ```html
 <!doctype html>
@@ -208,9 +229,11 @@ The combined kendo.all.min.js file is not an AMD module and requires a [shim](ht
 </html>
 ```
 
-## Using AngularJS And Kendo UI with RequireJS
+### Use AngularJS and Kendo UI with RequireJS
 
-This example shows how to load AngularJS and initialize it with [angular.bootsrap](https://docs.angularjs.org/api/ng/function/angular.bootstrap) when all JS files are loaded.
+The example below demonstrates how to load AngularJS and initialize it with [`angular.bootsrap`](https://docs.angularjs.org/api/ng/function/angular.bootstrap) when all `.js` files are loaded.
+
+###### Example
 
 ```html
 <!doctype html>
@@ -261,10 +284,13 @@ This example shows how to load AngularJS and initialize it with [angular.bootsra
 </html>
 ```
 
-## Using JSZip with RequireJS
+### Use JSZip with RequireJS
 
-JSZip is required by the Excel export feature of Kendo UI. However it doesn"t come in AMD format and needs a shim similar to using `kendo.all.min.js`. The following example shows
-how to use JSZip with RequireJS.
+JSZip is required by the Excel export feature of Kendo UI. However it does not come in an AMD format and needs a shim, similar to using `kendo.all.min.js`.
+
+The example below demonstrates how to use JSZip with RequireJS.
+
+###### Example
 
 ```html
 <!doctype html>
@@ -322,9 +348,11 @@ how to use JSZip with RequireJS.
 </html>
 ```
 
-## Using Kendo UI Custom Download with AngularJS and RequireJS
+### Use Kendo UI Custom Download with AngularJS and RequireJS
 
-In this scenario a custom schim configuration is needed. The app will be initialized using `angular.bootstrap`, after all the scripts are loaded
+You are going to need a custom `shim` configuration for such a scenario. The application is initialized using `angular.bootstrap` only after all the scripts are loaded.
+
+###### Example
 
     <div id="example" ng-controller="MyCtrl">
         <br>
@@ -366,3 +394,14 @@ In this scenario a custom schim configuration is needed. The app will be initial
           angular.bootstrap(document, ["app"]); //initialize application
         }
       </script>
+
+## See Also
+
+Other articles on Kendo UI integration with third-party tools and frameworks:
+
+* [Twitter Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})
+* [Web Components]({% slug webcomponents_integration_kendoui %})
+* [Angular 2.0]({% slug angular2support_integration_kendoui %})
+* [TypeScript]({% slug typescript_integration_kendoui %})
+* [Visual Studio IntelliSense]({% slug visualstudiointellisense_integration_kendoui %})
+* [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})

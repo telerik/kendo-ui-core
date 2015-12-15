@@ -1,13 +1,13 @@
 ---
-title: Kendo UI CDN Services
-page_title: Kendo UI CDN Services | Kendo UI Installation
+title: CDN Services
+page_title: CDN Services | Kendo UI Installation
 description: "Install HTML5 UI frameworks and widgets by using Kendo UI CDN service."
 previous_url: /install/cdn
 slug: kendoui_cdn_services_installation
 position: 3
 ---
 
-# Kendo UI CDN Services
+# CDN Services
 
 The Kendo UI CDN is hosted on [Amazon CloudFront](https://aws.amazon.com/cloudfront/). In order to access the Kendo UI CDN Service, you can use either of the options described below.
 
@@ -39,7 +39,7 @@ To access the Kendo UI CDN service through the HTTPS protocol, use the same host
 
 ## Troubleshooting
 
-### Disruption and Connection Issues 
+### Disruption and Connection Issues
 
 Although the Amazon CloudFront service provides for a reliable level of uptime support, you may encounter disruption or connection troubles. After you have checked the status of the systems at [http://status.aws.amazon.com/](http://status.aws.amazon.com/), the CDN status is reported as healthy and is operating normally.
 

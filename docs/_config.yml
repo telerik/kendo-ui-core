@@ -8,9 +8,6 @@ navigation:
     "api":
         title: "API Reference"
         position: 0
-    "introduction":
-        title: "Introduction"
-        position: 1
     "intro":
         title: "Getting Started"
         position: 2
@@ -20,21 +17,9 @@ navigation:
     "intro/supporting":
         title: "Additional Resources"
         position: 2
-    "web":
-        title: "Web Widgets"
-        position: 3
-    "web/styles-and-layout":
-        title: Styles and Layout
-        position: 1
-    "dataviz":
-        title: "Data Visualization"
-        position: 4
-    "mobile":
-        title: "Mobile Framework and Widgets"
-        position: 5
     "framework":
         title: "Framework and Utilities"
-        position: 6
+        position: 3
     "framework/datasource":
         title: "DataSource"
         position: 1
@@ -77,27 +62,42 @@ navigation:
     "framework/widgets":
         title: "Widgets"
         position: 14
+    "third-party":
+        title: "Third-Party Tools and Frameworks"
+        position: 4
     "AngularJS":
         title: "AngularJS Directives"
+        position: 5
+    "web":
+        title: "Web Widgets"
+        position: 6
+    "web/styles-and-layout":
+        title: Styles and Layout
+        position: 1
+    "dataviz":
+        title: "Data Visualization"
         position: 7
+    "mobile":
+        title: "Mobile Framework and Widgets"
+        position: 8
     "aspnet-mvc":
         title: "UI for ASP.NET MVC"
-        position: 8
+        position: 9
     "jsp":
         title: "UI for JSP"
-        position: 9
+        position: 10
     "php":
         title: "UI for PHP"
-        position: 10
+        position: 11
     "webforms":
         title: "Use in ASP.NET Web Forms"
-        position: 11
-    "troubleshoot":
-        title: "Troubleshooting"
         position: 12
+    "troubleshoot":
+          title: "Troubleshooting"
+          position: 13
     "accessibility":
-        title: "Accessibility Support"
-        position: 13
+        title: "Accessibility"
+        position: 14
     "*how-to":
         title: "How To"
         position: 200
@@ -130,7 +130,6 @@ navigation:
         title: "NavBar"
     "mobile/scrollview":
         title: "ScrollView"
-    "*typescript":
     "*asp.net":
         title: "ASP.NET"
     "*widgets":
