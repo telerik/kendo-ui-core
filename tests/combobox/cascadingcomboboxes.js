@@ -788,4 +788,227 @@ test("third combo is bound when only local data is used", function() {
         equal(childSource[0].id, "1");
         equal(childSource[1].id, "1");
     });
+
+    test("child widget triggers change if selected value is cleared", 1, function() {
+        var combo = new ComboBox(parent, {
+            animation: false,
+            optionLabel: "Select",
+            dataValueField: "id",
+            dataTextField: "text",
+            dataSource: [
+                {text: "item1", id: "1", text2: "i"},
+                {text: "item3", id: "2", text2: "i"}
+            ]
+        });
+
+        var combo2 = new ComboBox(child.attr("id", "child"), {
+            optionLabel: "Select",
+            dataValueField: "text",
+            dataTextField: "text",
+            cascadeFrom: "parent",
+            dataSource: {
+                data: [
+                    {text: "item1", id: "1"},
+                    {text: "item2", id: "1"},
+                    {text: "item3", id: "2"},
+                    {text: "item4", id: "2"}
+                ]
+            }
+        });
+
+        combo2.bind("change", function() {
+            equal(combo2.value(), "");
+        });
+
+        combo.select(0);
+        combo2.select(0);
+
+        //clear value
+        combo.select(-1);
+    });
+
+    test("child widget with selected value triggers change if parent has custom value", 1, function() {
+        var combo = new ComboBox(parent, {
+            animation: false,
+            optionLabel: "Select",
+            dataValueField: "id",
+            dataTextField: "text",
+            dataSource: [
+                {text: "item1", id: "1", text2: "i"},
+                {text: "item3", id: "2", text2: "i"}
+            ]
+        });
+
+        var combo2 = new ComboBox(child.attr("id", "child"), {
+            optionLabel: "Select",
+            dataValueField: "text",
+            dataTextField: "text",
+            cascadeFrom: "parent",
+            dataSource: {
+                data: [
+                    {text: "item1", id: "1"},
+                    {text: "item2", id: "1"},
+                    {text: "item3", id: "2"},
+                    {text: "item4", id: "2"}
+                ]
+            }
+        });
+
+        combo2.bind("change", function() {
+            equal(combo2.value(), "");
+        });
+
+        combo.select(0);
+        combo2.select(0);
+
+        //clear value
+        combo.value("custom");
+    });
+
+    test("child widget does not trigger change event if cascade value hasn't changed", 0, function() {
+        var combo = new ComboBox(parent, {
+            animation: false,
+            optionLabel: "Select",
+            dataValueField: "id",
+            dataTextField: "text",
+            dataSource: [
+                {text: "item1", id: "1", text2: "i"},
+                {text: "item3", id: "2", text2: "i"}
+            ]
+        });
+
+        var combo2 = new ComboBox(child.attr("id", "child"), {
+            optionLabel: "Select",
+            dataValueField: "text",
+            dataTextField: "text",
+            cascadeFrom: "parent",
+            dataSource: {
+                data: [
+                    {text: "item1", id: "1"},
+                    {text: "item2", id: "1"},
+                    {text: "item3", id: "2"},
+                    {text: "item4", id: "2"}
+                ]
+            }
+        });
+
+        combo2.bind("change", function() {
+            ok(false);
+        });
+
+        combo.select(0);
+        combo2.select(0);
+    });
+
+    test("child widget triggers change when has pre-selected value on initialization", 1, function() {
+        var combo = new ComboBox(parent, {
+            index: 1,
+            animation: false,
+            dataValueField: "id",
+            dataTextField: "text",
+            dataSource: [
+                {text: "item1", id: "1", text2: "i"},
+                {text: "item3", id: "2", text2: "i"}
+            ]
+        });
+
+        var combo2 = new ComboBox(child.attr("id", "child"), {
+            index: 1,
+            dataValueField: "text",
+            dataTextField: "text",
+            cascadeFrom: "parent",
+            dataSource: {
+                data: [
+                    {text: "item1", id: "1"},
+                    {text: "item2", id: "1"},
+                    {text: "item3", id: "2"},
+                    {text: "item4", id: "2"}
+                ]
+            },
+            change: function() {
+                ok(true);
+            }
+        });
+    });
+
+    test("child widget does not trigger change during initialization", 0, function() {
+        var combo = new ComboBox(parent, {
+            animation: false,
+            dataValueField: "id",
+            dataTextField: "text",
+            dataSource: [
+                {text: "item1", id: "1", text2: "i"},
+                {text: "item3", id: "2", text2: "i"}
+            ]
+        });
+
+        var combo2 = new ComboBox(child.attr("id", "child"), {
+            dataValueField: "text",
+            dataTextField: "text",
+            cascadeFrom: "parent",
+            dataSource: {
+                data: [
+                    {text: "item1", id: "1"},
+                    {text: "item2", id: "1"},
+                    {text: "item3", id: "2"},
+                    {text: "item4", id: "2"}
+                ]
+            },
+            change: function() {
+                ok(false);
+            }
+        });
+    });
+
+    test("trigger change event on 2nd and 3rd level on parent reset", 2, function() {
+        var combo = new ComboBox(parent, {
+            dataValueField: "id",
+            dataTextField: "text2",
+            dataSource: [
+                {text: "item1", id: "1", text2: "i"},
+                {text: "item3", id: "2", text2: "i"}
+            ],
+            autoBind: false
+        });
+
+        var combo2 = new ComboBox(child.attr("id", "child"), {
+            dataValueField: "text",
+            dataTextField: "text",
+            dataSource: [
+                {text: "item1", id: "1"},
+                {text: "item2", id: "1"},
+                {text: "item3", id: "2"},
+                {text: "item4", id: "2"}
+            ],
+            cascadeFrom: "parent",
+            autoBind: false
+        });
+
+        var combo3 = new ComboBox(third, {
+            dataValueField: "text",
+            dataTextField: "text",
+            dataSource: [
+                {text: "item1", id: "1"},
+                {text: "item2", id: "1"},
+                {text: "item3", id: "2"},
+                {text: "item4", id: "2"}
+            ],
+            cascadeFrom: "child",
+            autoBind: false
+        });
+
+        combo.value("2");
+        combo2.value("item4");
+        combo3.value("item4");
+
+        combo2.bind("change", function() {
+            ok(true);
+        });
+
+        combo3.bind("change", function() {
+            ok(true);
+        });
+
+        combo.value("");
+    });
 })();

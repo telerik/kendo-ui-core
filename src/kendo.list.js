@@ -639,6 +639,12 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _triggerChange: function() {
+            if (this._valueBeforeCascade !== this.value()) {
+                this.trigger("change");
+            }
+        },
+
         _unbindDataSource: function() {
             var that = this;
 
@@ -1142,11 +1148,13 @@ var __meta__ = { // jshint ignore:line
                         return;
                     }
 
+                    var valueBeforeCascade = that.value();
+
                     if (that.listView.bound()) {
                         that._clearSelection(parent, true);
                     }
 
-                    that._cascadeSelect(parent);
+                    that._cascadeSelect(parent, valueBeforeCascade);
                 };
 
                 parent.first("cascade", cascadeHandler);
@@ -1181,15 +1189,18 @@ var __meta__ = { // jshint ignore:line
 
             that.enable();
             that._triggerCascade();
+            that._triggerChange();
             that._userTriggered = false;
         },
 
-        _cascadeSelect: function(parent) {
+        _cascadeSelect: function(parent, valueBeforeCascade) {
             var that = this;
             var dataItem = parent.dataItem();
             var filterValue = dataItem ? parent._value(dataItem) : null;
             var valueField = that.options.cascadeFromField || parent.options.dataValueField;
             var expressions, filters;
+
+            that._valueBeforeCascade = valueBeforeCascade !== undefined ? valueBeforeCascade : that.value();
 
             if (filterValue || filterValue === 0) {
                 expressions = that.dataSource.filter() || {};
@@ -1220,6 +1231,7 @@ var __meta__ = { // jshint ignore:line
                 that.enable(false);
                 that._clearSelection(parent);
                 that._triggerCascade();
+                that._triggerChange();
                 that._userTriggered = false;
             }
         }

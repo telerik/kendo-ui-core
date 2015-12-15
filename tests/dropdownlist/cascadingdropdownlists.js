@@ -802,4 +802,255 @@
         equal(childSource[0].id, "1");
         equal(childSource[1].id, "1");
     });
+
+    test("child widget triggers change if selected value is cleared", 1, function() {
+        var ddl = new DropDownList(parent, {
+            animation: false,
+            optionLabel: "Select",
+            dataValueField: "id",
+            dataTextField: "text",
+            dataSource: [
+                {text: "item1", id: "1", text2: "i"},
+                {text: "item3", id: "2", text2: "i"}
+            ]
+        });
+
+        var ddl2 = new DropDownList(child.attr("id", "child"), {
+            optionLabel: "Select",
+            dataValueField: "text",
+            dataTextField: "text",
+            cascadeFrom: "parent",
+            dataSource: {
+                data: [
+                    {text: "item1", id: "1"},
+                    {text: "item2", id: "1"},
+                    {text: "item3", id: "2"},
+                    {text: "item4", id: "2"}
+                ]
+            }
+        });
+
+        ddl2.bind("change", function() {
+            equal(ddl2.value(), "");
+        });
+
+        ddl.select(1);
+        ddl2.select(1);
+
+        //clear value
+        ddl.select(-1);
+    });
+
+    test("child widget triggers change if its value is set after cascade", 1, function() {
+        var ddl = new DropDownList(parent, {
+            animation: false,
+            dataValueField: "id",
+            dataTextField: "text",
+            dataSource: [
+                {text: "item1", id: "1", text2: "i"},
+                {text: "item3", id: "2", text2: "i"}
+            ]
+        });
+
+        var ddl2 = new DropDownList(child.attr("id", "child"), {
+            dataValueField: "text",
+            dataTextField: "text",
+            cascadeFrom: "parent",
+            dataSource: {
+                data: [
+                    {text: "item1", id: "1"},
+                    {text: "item2", id: "1"},
+                    {text: "item3", id: "2"},
+                    {text: "item4", id: "2"}
+                ]
+            },
+            change: function() {
+                equal(this.value(), "item1");
+            }
+        });
+    });
+
+    test("child widget triggers change if its value is set after parent is updated", 1, function() {
+        var ddl = new DropDownList(parent, {
+            animation: false,
+            optionLabel: "Select",
+            dataValueField: "id",
+            dataTextField: "text",
+            dataSource: [
+                {text: "item1", id: "1", text2: "i"},
+                {text: "item3", id: "2", text2: "i"}
+            ]
+        });
+
+        var ddl2 = new DropDownList(child.attr("id", "child"), {
+            dataValueField: "text",
+            dataTextField: "text",
+            cascadeFrom: "parent",
+            dataSource: {
+                data: [
+                    {text: "item1", id: "1"},
+                    {text: "item2", id: "1"},
+                    {text: "item3", id: "2"},
+                    {text: "item4", id: "2"}
+                ]
+            },
+            change: function() {
+                equal(this.value(), "item1");
+            }
+        });
+
+        ddl.select(1);
+    });
+
+    test("child widget does not trigger change if its value hasn't change during cascade", 0, function() {
+        var ddl = new DropDownList(parent, {
+            animation: false,
+            optionLabel: "Select",
+            dataValueField: "id",
+            dataTextField: "text",
+            dataSource: [
+                {text: "item1", id: "1", text2: "i"},
+                {text: "item3", id: "2", text2: "i"}
+            ]
+        });
+
+        var ddl2 = new DropDownList(child.attr("id", "child"), {
+            optionLabel: "Select",
+            dataValueField: "text",
+            dataTextField: "text",
+            cascadeFrom: "parent",
+            dataSource: {
+                data: [
+                    {text: "item1", id: "1"},
+                    {text: "item2", id: "1"},
+                    {text: "item3", id: "2"},
+                    {text: "item4", id: "2"}
+                ]
+            },
+            change: function() {
+                ok(false);
+            }
+        });
+
+        ddl.select(1);
+    });
+
+    test("child widget does not trigger change during initialization", 0, function() {
+        var ddl = new DropDownList(parent, {
+            animation: false,
+            optionLabel: "Select",
+            dataValueField: "id",
+            dataTextField: "text",
+            dataSource: [
+                {text: "item1", id: "1", text2: "i"},
+                {text: "item3", id: "2", text2: "i"}
+            ]
+        });
+
+        var ddl2 = new DropDownList(child.attr("id", "child"), {
+            optionLabel: "Select",
+            dataValueField: "text",
+            dataTextField: "text",
+            cascadeFrom: "parent",
+            dataSource: {
+                data: [
+                    {text: "item1", id: "1"},
+                    {text: "item2", id: "1"},
+                    {text: "item3", id: "2"},
+                    {text: "item4", id: "2"}
+                ]
+            },
+            change: function() {
+                ok(false);
+            }
+        });
+    });
+
+    test("child widget triggers change when has pre-selected value on initialization", 1, function() {
+        var ddl = new DropDownList(parent, {
+            index: 1,
+            animation: false,
+            optionLabel: "Select",
+            dataValueField: "id",
+            dataTextField: "text",
+            dataSource: [
+                {text: "item1", id: "1", text2: "i"},
+                {text: "item3", id: "2", text2: "i"}
+            ]
+        });
+
+        var ddl2 = new DropDownList(child.attr("id", "child"), {
+            index: 1,
+            optionLabel: "Select",
+            dataValueField: "text",
+            dataTextField: "text",
+            cascadeFrom: "parent",
+            dataSource: {
+                data: [
+                    {text: "item1", id: "1"},
+                    {text: "item2", id: "1"},
+                    {text: "item3", id: "2"},
+                    {text: "item4", id: "2"}
+                ]
+            },
+            change: function() {
+                ok(true);
+            }
+        });
+    });
+
+    test("trigger change event on 2nd and 3rd level on parent reset", 2, function() {
+        var ddl = new DropDownList(parent, {
+            optionLabel: "Select",
+            dataValueField: "id",
+            dataTextField: "text2",
+            dataSource: [
+                {text: "item1", id: "1", text2: "i"},
+                {text: "item3", id: "2", text2: "i"}
+            ],
+            autoBind: false
+        });
+
+        var ddl2 = new DropDownList(child.attr("id", "child"), {
+            optionLabel: "Select",
+            dataValueField: "text",
+            dataTextField: "text",
+            dataSource: [
+                {text: "item1", id: "1"},
+                {text: "item2", id: "1"},
+                {text: "item3", id: "2"},
+                {text: "item4", id: "2"}
+            ],
+            cascadeFrom: "parent",
+            autoBind: false
+        });
+
+        var ddl3 = new DropDownList(third, {
+            optionLabel: "Select",
+            dataValueField: "text",
+            dataTextField: "text",
+            dataSource: [
+                {text: "item1", id: "1"},
+                {text: "item2", id: "1"},
+                {text: "item3", id: "2"},
+                {text: "item4", id: "2"}
+            ],
+            cascadeFrom: "child",
+            autoBind: false
+        });
+
+        ddl.value("2");
+        ddl2.value("item4");
+        ddl3.value("item4");
+
+        ddl2.bind("change", function() {
+            ok(true);
+        });
+
+        ddl3.bind("change", function() {
+            ok(true);
+        });
+
+        ddl.value("");
+    });
 })();
