@@ -113,7 +113,7 @@ Here is how to configure the Kendo ComboBox for ajax binding to the Northwind Pr
                 .SelectedIndex(0) //Select first item.
             )
 
-> **Important**  
+> **Important**
 > The `ToDataSourceResult()` extension method will modify structure of the result and the widget will not be able to bind to it. Please return simple array of data in this case.
 
 ### Configure ComboBox to Work with the `ToDataSourceResult` Instance
@@ -261,7 +261,7 @@ Here is how the **GetProducts** method looks like:
             return Json(products, JsonRequestBehavior.AllowGet);
         }
 
-> **Important**  
+> **Important**
 > The Kendo ComboBox has default event handler for the DataSource's Data callback. If you do not
 define event handler, it will be used.
 
@@ -272,7 +272,7 @@ define event handler, it will be used.
             filters = combobox.dataSource.filter(),
             value = combobox.input.val();
 
-        if (!filters) {
+        if (!filter || !filter.filters.length) {
             value = "";
         }
 
