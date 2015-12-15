@@ -76,7 +76,7 @@ This will happen if two or more widgets are initialized from elements that have 
 
 **Solution**  
 
-The ID for each element on the page should be unique. 
+The ID for each element on the page should be unique.
 
 	<textarea id="editor"></textarea>
 	<textarea id="editor"></textarea>
@@ -84,7 +84,7 @@ The ID for each element on the page should be unique.
 		$('#editor').kendoEditor();
 		$('#editor').kendoEditor(); // problem
 	</script>
-    
+
 ### When Creating Multiple Widgets Only One of Them Works
 
 For a solution, see the [Creating Multiple Widgets Throws JavaScript Errors](#creating-multiple-widgets-throws-javascript-errors) section above.
@@ -93,16 +93,18 @@ For a solution, see the [Creating Multiple Widgets Throws JavaScript Errors](#cr
 
 Some third-party modal popups prevent access to focusable elements, which are rendered outside the modal popup. Such widgets include the Bootstrap modal dialog, the jQuery UI modal dialog, and possibly others. The Kendo UI widgets, which are affected by this behavior are all widgets, which render their own detached popups, e.g. AutoComplete, ColorPicker, ComboBox, DropDownList, DateTimePicker, Editor, Grid, and MultiSelect. The popups of these Kendo UI widgets are rendered as children of the `<body>` and as a result, the third-party modal popup will prevent access to them.
 
-**Solution** 
+**Solution**
 
 There are two ways to avoid this problem:
 
 * Disable the modal popup's modality, so that elements outside it can be focused.
 * Use a [modal](/api/javascript/ui/window#configuration-modal) Kendo UI [Window](/web/window/overview) instead of a third-party popup.
 
-### Widgets do not work correctly on touch devices
+### Widgets Do Not Work Correctly on Touch Devices
 
-Client libraries, which interfere with touch events, such as FastClick, are not compatible with Kendo UI and may break the widgets' behavior, e.g. cause a dropdown to close immediately after opening. For more information, please refer to [What Exactly is the 300ms Click Delay](http://www.telerik.com/blogs/what-exactly-is.....-the-300ms-click-delay).
+Client libraries, which interfere with touch events, such as FastClick, are not compatible with Kendo UI and may break the widgets' behavior, e.g. cause a dropdown to close immediately after opening.
+
+For more information on this issue, refer to [What Exactly Is... The 300ms Click Delay](http://www.telerik.com/blogs/what-exactly-is.....-the-300ms-click-delay).
 
 ## CDN
 
@@ -116,13 +118,13 @@ For a solution, refer to [Kendo UI CDN Fallback and Troubleshooting](/intro/inst
 
 For a solution, refer to [Serving Icon Fonts](/mobile/icons#serving-icon-fonts).
 
-## Ajax 
+## Ajax
 
 ### Widget Object Is Undefined after Loading a Page through AJAX
 
 This issue is usually caused when the page loaded via AJAX contains a script reference to jQuery. When jQuery is re-initialized, all jQuery-based data attributes are cleared, including the data(`kendoWidget`) attribute that holds the Kendo UI widget object.
 
-**Solution** 
+**Solution**
 
 Load a partial HTML fragment that does not contain any unneeded jQuery references, or use an `iframe` to load the complete page.
 

@@ -4,19 +4,19 @@ page_title: Web Font Icons | Kendo UI Desktop Widgets
 description: "Check out the full list of the web font icons for the Kendo UI desktop widgets."
 previous_url: /web/icons-web
 slug: webfonticons_kendoui_desktopwidgets
-position: 2
+position: 3
 ---
 
 # Web Font Icons
 
-Kendo UI delivers more than 150 integrated font icons for its [desktop widgets and controls for data visualization]({% slug bundle_supportfor_kendoui_components %}). They can be used directly in a Kendo UI web project by assigning one of the predefined CSS classes listed below. 
+Kendo UI delivers more than 150 integrated font icons for its [desktop widgets and controls for data visualization]({% slug bundle_supportfor_kendoui_components %}). They can be used directly in a Kendo UI web project by assigning one of the predefined CSS classes listed below.
 
-###### Example 
+###### Example
 
 ```html
     <span class="k-font-icon k-i-copy"></span>
 ```   
- 
+
 ###### Example - font icon in Kendo UI Button
 
 ```html
@@ -24,7 +24,7 @@ Kendo UI delivers more than 150 integrated font icons for its [desktop widgets a
         <span class="k-font-icon k-i-copy"></span> Copy
     </a>
 ```  
- 
+
 ## List of Font Icons
 
 ### Basic Actions
@@ -684,6 +684,7 @@ Kendo UI delivers more than 150 integrated font icons for its [desktop widgets a
 Other articles on the styling and appearance of Kendo UI widgets:
 
 * [Themes and Appearance of the Kendo UI Widgets]({% slug themesandappearnce_kendoui_desktopwidgets %})
+* [Responsive Web Design]({% slug responsivewebdesign_integration_kendoui %})
 * [How to Change Themes on the Client]({% slug howto_changethemes_ontheclient_styleskendoui %})
 * [Themes and Appearance of the Kendo UI Widgets for Data Visualization](/dataviz/appearance-styling)
 * [Themes and Appearance of the Kendo UI Hybrid Widgets](/mobile/styling)

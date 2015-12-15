@@ -1,56 +1,58 @@
 ---
-title: TypeScript Definitions
-page_title: Kendo UI TypeScript Definitions
-previous_url: /howto/typescript/overview
-position: 230
+title: TypeScript
+page_title: TypeScript | Kendo UI Third-Party Tools
+description: "Learn how to enable strongly-typed access to the Kendo UI widgets and their configuration."
+previous_url: /howto/typescript/overview, /typescript
+slug: typescript_integration_kendoui
+position: 5
 ---
 
-# Kendo UI TypeScript Support
+# TypeScript
 
 Kendo UI provides a [TypeScript](http://www.typescriptlang.org/) definitions file which enables strongly-typed access to the Kendo UI widgets and their configuration.
 
 ## Installation
 
-### From redistributable package
-Each Kendo UI distribution includes a *typescript* directory which contains a `.d.ts` file i.e. `kendo.all.d.ts`. Copy that file in your project.
-In your TypeScript file add a reference to that file:
+### From Redistributable Package
+
+Each Kendo UI distribution includes a `typescript` directory which contains a `.d.ts` file, i.e. `kendo.all.d.ts`. Copy this file to your project and in your TypeScript file add a reference to it as demonstrated below:
 
     /// <reference path="kendo.all.d.ts" />
 
-You can optionally include the latest jQuery TypeScript definition file as well:
+You are able to optionally include the latest jQuery TypeScript definition file as well:
 
     /// <reference path="jquery-1.8.d.ts" />
     /// <reference path="kendo.all.d.ts" />
 
-### As NuGet package
-The Kendo UI TypeScript definitions are available on nuget.org as
-[kendo-ui.TypeScript.DefinitelyTyped](https://www.nuget.org/packages/kendo-ui.TypeScript.DefinitelyTyped/)
+### As NuGet Package
 
-The package is maintained via the [DefinitelyTyped](http://definitelytyped.org/) project.
+The Kendo UI TypeScript definitions are available on https://www.nuget.org/ as [`kendo-ui.TypeScript.DefinitelyTyped`](https://www.nuget.org/packages/kendo-ui.TypeScript.DefinitelyTyped/). The package is maintained via the [DefinitelyTyped](http://definitelytyped.org/) project.
 
 ## Features
 
-### Get instance of existing Kendo UI widgets
+### Get Instance of Existing Widgets
 
 ![Get instance of existing Kendo UI widget](/images/get-instance.png)
 
-### Initialize and configure any Kendo UI widget
+### Initialize and Configure Widgets
 
 ![All Kendo UI widgets](/images/init.png)
 
-### Initialize a Kendo DataSource
+### Initialize Kendo UI DataSource
 
 ![Initialize a Kendo DataSource](/images/datasource.png)
 
-## Create Kendo UI widget via TypeScript inheritance
+### Create Widgets via TypeScript Inheritance
 
-The following code example shows how to inherit from an existing Kendo UI Widget.
+The example below demonstrates how to inherit from an existing Kendo UI widget.
+
+###### Example
 
     /// <reference path="jquery.d.ts" />
     /// <reference path="kendo.all.d.ts" />
 
     module KendoWidgets {
-        // Extend the default widget options (optional)
+        // (Optional) Extend the default widget options
         export interface MyDatePickerOptions extends kendo.ui.DatePickerOptions {
         }
 
@@ -59,7 +61,7 @@ The following code example shows how to inherit from an existing Kendo UI Widget
             constructor(element: Element, options?: MyDatePickerOptions) {
                 super(element, options);
             }
-            //Override a widget method (optional)
+            // (Otional) Override a widget method
             open() {
                 // Log to the console (optional)
                 console.log("open");
@@ -85,13 +87,13 @@ The following code example shows how to inherit from an existing Kendo UI Widget
     $(function () {
         // Initialize your custom widget
         $("#datepicker").kendoMyDatePicker();
-        // Get a reference to the widget instance.
+        // Get a reference to the widget instance
         var myDatePicker = <KendoWidgets.MyDatePicker>$("#datepicker").data("kendoMyDatePicker");
         // Call a widget method
         myDatePicker.open();
     });
 
-## Use Kendo UI MVVM in TypeScript
+### Use Kendo UI MVVM in TypeScript
 
 When inheriting from `kendo.data.ObservableObject` in TypeScript you should call the `super.init` method to properly set up dependency tracking.
 
@@ -128,3 +130,13 @@ The following example shows how to use Kendo UI MVVM in TypeScript.
         viewModel.set("person.name", "Jane Doe");
     });
 
+## See Also
+
+Other articles on Kendo UI integration with third-party tools and frameworks:
+
+* [Twitter Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})
+* [Web Components]({% slug webcomponents_integration_kendoui %})
+* [Angular 2.0]({% slug angular2support_integration_kendoui %})
+* [RequireJS]({% slug requirejs_integration_kendoui %})
+* [Visual Studio IntelliSense]({% slug visualstudiointellisense_integration_kendoui %})
+* [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})

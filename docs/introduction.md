@@ -69,7 +69,7 @@ HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to co
 
 Kendo UI Core is the free and open-source Kendo UI distribution, released under Apache v2.0 License.
 It provides access to a limited number of widgets and framework features, and to 1,000+ tests running across browsers for each commit to the [Kendo UI Core GitHub repository](https://github.com/telerik/kendo-ui-core).
-Kendo UI Core is suitable for open-source or commercial projects that do not require complex UI, such as Grid, Chart, etc., nor dedicated technical support. Kendo UI Core does not offer dedicated technical support. 
+Kendo UI Core is suitable for open-source or commercial projects that do not require complex UI, such as Grid, Chart, etc., nor dedicated technical support. Kendo UI Core does not offer dedicated technical support.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
