@@ -6,7 +6,7 @@ description: Set direction of the Kendo UI Mobile Drawer container, use methods 
 
 # kendo.mobile.ui.Drawer
 
-Represents the Kendo UI Mobile Drawer widget. Inherits from [kendo.mobile.ui.View](/api/framework/view).
+Represents the Kendo UI Mobile Drawer widget. Inherits from [kendo.mobile.ui.View](/api/javascript/mobile/ui/mobilewidget).
 
 ## Configuration
 
@@ -378,15 +378,15 @@ Holds information about the current state of the Drawer. If it is currenlty open
     <div data-role="view" id="drawer-settings" data-show="onShow">
         <h1>Settings</h1>
     </div>
-    
+
     <div data-role="drawer" id="my-drawer">
         Hi!
     </div>
-    
+
     <script>
     new kendo.mobile.Application();
     function onShow(){
         var isVisible = $('#my-drawer').getKendoMobileDrawer().visible;
         console.log(isVisible); //will output false
-    } 
+    }
     </script>

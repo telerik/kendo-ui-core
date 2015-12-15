@@ -6,7 +6,7 @@ description: Configuration, methods and events of Kendo UI Mobile Collapsible wi
 
 # kendo.mobile.ui.Collapsible
 
-Represents the Kendo UI Mobile Collapsible widget. Inherits from [kendo.mobile.ui.Widget](/api/framework/mobilewidget).
+Represents the Kendo UI Mobile Collapsible widget. Inherits from [kendo.mobile.ui.Widget](/api/javascript/mobile/ui/mobilewidget).
 
 ## Configuration
 
