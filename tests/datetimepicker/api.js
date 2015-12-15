@@ -864,4 +864,15 @@ test("manually setting disabled date, does not set the widget value", 2, functio
     equal(datetimepicker.value(), null);
 });
 
+test("time part from current is stripped when value is set to null", 3, function() {
+    var datetimepicker = new DateTimePicker(input, {
+        value: new Date()
+    });
+    datetimepicker.value(null);
+    equal(datetimepicker.dateView._current.getHours(), 0);
+    equal(datetimepicker.dateView._current.getMinutes(), 0);
+    equal(datetimepicker.dateView._current.getSeconds(), 0);
+});
+
+
 })();

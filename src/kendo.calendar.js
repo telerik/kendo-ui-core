@@ -375,6 +375,10 @@ var __meta__ = { // jshint ignore:line
                 return that._value;
             }
 
+            if (value === null) {
+                that._current = new Date(that._current.getFullYear(), that._current.getMonth(), that._current.getDate());
+            }
+
             value = parse(value, options.format, options.culture);
 
             if (value !== null) {
