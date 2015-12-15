@@ -6,7 +6,7 @@ description: Find which events to use in Mobile Button Widget.
 
 # kendo.mobile.ui.Button
 
-Represents the Kendo UI Mobile Button widget. Inherits from [kendo.mobile.ui.Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Mobile Button widget. Inherits from [kendo.mobile.ui.Widget](/api/javascript/mobile/ui/mobilewidget).
 
 ## Configuration
 

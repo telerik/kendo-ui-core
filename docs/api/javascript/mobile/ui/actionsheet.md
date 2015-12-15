@@ -6,7 +6,7 @@ description: Quickly configure mobile ActionSheet widget, close and open it usin
 
 # kendo.mobile.ui.ActionSheet
 
-Represents the Kendo UI Mobile ActionSheet widget. Inherits from [kendo.mobile.ui.Widget](/api/framework/mobilewidget).
+Represents the Kendo UI Mobile ActionSheet widget. Inherits from [kendo.mobile.ui.Widget](/api/javascript/mobile/ui/mobilewidget).
 
 ## Configuration
 

@@ -6,7 +6,7 @@ description: Documentation on how to initialize Kendo UI mobile DetailButton.
 
 # kendo.mobile.ui.DetailButton
 
-Represents the Kendo UI Mobile DetailButton widget. Inherits from [kendo.mobile.ui.Widget](/api/framework/mobilewidget).
+Represents the Kendo UI Mobile DetailButton widget. Inherits from [kendo.mobile.ui.Widget](/api/javascript/mobile/ui/mobilewidget).
 
 ## DetailButton
 

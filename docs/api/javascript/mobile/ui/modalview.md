@@ -6,7 +6,7 @@ description: Set height and width of the Kendo UI Mobile ModalView container in 
 
 # kendo.mobile.ui.ModalView
 
-Represents the Kendo UI Mobile ModalView widget. Inherits from [kendo.mobile.ui.Widget](/api/framework/mobilewidget).
+Represents the Kendo UI Mobile ModalView widget. Inherits from [kendo.mobile.ui.Widget](/api/javascript/mobile/ui/mobilewidget).
 
 ## Example
     <div data-role="view">
