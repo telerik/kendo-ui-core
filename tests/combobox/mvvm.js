@@ -660,4 +660,77 @@ test("widget with autoBind:false does not select first item when model value is 
     equal(combobox.select(), -1);
 });
 
+//virtuazation helpers
+
+function generateData(parameters) {
+    var items = [];
+    for (var i = parameters.skip, len = parameters.skip + parameters.take; i < len; i++) {
+        items.push({
+            id: i,
+            value: i,
+            text: "Item " + i
+        });
+    }
+
+    return items;
+}
+
+function createAsyncDataSource() {
+    return new kendo.data.DataSource({
+        transport: {
+            read: function(options) {
+                setTimeout(function() {
+                    options.success({ data: generateData(options.data), total: 300 });
+                }, 0);
+            }
+        },
+        serverPaging: true,
+        pageSize: 40,
+        schema: {
+            data: "data",
+            total: "total"
+        }
+    });
+}
+
+asyncTest("triggers change after same value is being set multiple times trough the ViewModel", 2, function() {
+    dom = $('<input ' +
+            'data-role="combobox" ' +
+            'data-auto-bind="false" ' +
+            'data-animation="false" ' +
+            'data-text-field="text" ' +
+            'data-value-field="value" ' +
+            'data-virtual="{itemHeight: 40, valueMapper: function(o) { o.success(o.value); }}" ' +
+            'data-value-primitive="true" ' +
+            'data-bind="value:Invoice.orderId, source: ds"/>');
+
+    var vm = kendo.observable({
+        ds: createAsyncDataSource(),
+        Invoice: { value: null },
+        setFoo: function(){
+            this.set('Invoice', { value: 2 });
+        },
+        setBar: function(){
+            this.set('Invoice', { value : 2 });
+        }
+    });
+
+    kendo.bind(dom, vm);
+
+    var combo = dom.data("kendoComboBox");
+
+    combo.dataSource.read().done(function() {
+        vm.setFoo();
+        vm.setBar();
+        combo.bind("change", function() {
+            start();
+            ok(true, "Widget change is fired");
+            equal(this.value(), 3);
+        });
+
+        combo.open();
+        $("[data-offset-index=3]").trigger("click");
+    });
+});
+
 })();
