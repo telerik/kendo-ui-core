@@ -17,9 +17,87 @@ navigation:
     "intro/supporting":
         title: "Additional Resources"
         position: 2
+    "controls":
+        title: "Widgets"
+        position: 3
+    "controls/data-management":
+        title: "Data Management"
+        position: 1
+    "controls/data-management/grid/how-to/AngularJS":
+        title: "AngularJS"
+        position: 1
+    "controls/data-management/grid/how-to/Editing":
+        title: "Editing"
+        position: 2
+    "controls/data-management/grid/how-to/Layout":
+        title: "Appearance"
+        position: 3
+    "controls/data-management/grid/how-to/Selection":
+        title: "Selection"
+        position: 4
+    "controls/data-management/grid/how-to/Templates":
+        title: "Templates"
+        position: 5
+    "controls/data-management/grid/how-to/excel":
+        title: "Excel Export"
+        position: 6
+    "controls/data-management/grid/how-to/pdf-export":
+        title: "PDF Export"
+        position: 7
+    "controls/editors":
+        title: "Editors"
+        position: 2
+    "controls/charts":
+        title: "Charts"
+        position: 3
+    "controls/gauges":
+        title: "Gauges"
+        position: 4
+    "controls/barcodes":
+        title: "Barcodes"
+        position: 5
+    "controls/diagrams-and-maps":
+        title: "Diagrams and Maps"
+        position: 6
+    "controls/scheduling":
+        title: "Scheduling"
+        position: 7
+    "controls/layout":
+        title: "Layout"
+        position: 8
+    "controls/navigation":
+        title: "Navigation"
+        position: 9
+    "controls/interactivity":
+        title: "Interactivity and UX"
+        position: 10
+    "controls/interactivity/fx":
+        title: "FX"
+    "controls/interactivity/draganddrop":
+        title: "Drag and Drop"
+    "controls/hybrid":
+        title: "Hybrd UI"
+        position: 11
+    "controls/hybrid/listview":
+        title: "Mobile ListView"
+        position: 9
+    "controls/hybrid/collapsible":
+        title: "Collapsible"
+        position: 14
+    "controls/hybrid/drawer":
+        title: "Drawer"
+    "controls/hybrid/forms":
+        title: "Forms"
+    "controls/hybrid/navbar":
+        title: "NavBar"
+    "controls/hybrid/scrollview":
+        title: "ScrollView"
+    "styles-and-layout":
+        title: "Styles and Appearance"
+        position: 13
     "framework":
         title: "Framework and Utilities"
-        position: 3
+        position: 15
     "framework/datasource":
         title: "DataSource"
         position: 1
@@ -38,66 +116,90 @@ navigation:
     "framework/excel":
         title: "Create Excel Documents"
         position: 6
-    "framework/draganddrop":
-        title: "Drag and Drop"
-        position: 7
     "framework/drawing":
         title: "Drawing API"
-        position: 8
-    "framework/fx":
-        title: "FX"
-        position: 9
+        position: 7
     "framework/globalization":
         title: "Globalization"
-        position: 10
+        position: 8
     "framework/localization":
         title: "Localization"
-        position: 11
+        position: 9
     "framework/validator":
         title: "Validator"
-        position: 12
+        position: 10
     "framework/save-files":
         title: "Save Files"
-        position: 13
+        position: 11
     "framework/widgets":
         title: "Widgets"
-        position: 14
+        position: 12
     "third-party":
         title: "Third-Party Tools and Frameworks"
-        position: 4
+        position: 16
     "AngularJS":
         title: "AngularJS Directives"
-        position: 5
-    "web":
-        title: "Web Widgets"
-        position: 6
-    "web/styles-and-layout":
-        title: Styles and Layout
-        position: 1
-    "dataviz":
-        title: "Data Visualization"
-        position: 7
-    "mobile":
-        title: "Mobile Framework and Widgets"
-        position: 8
+        position: 17
     "aspnet-mvc":
         title: "UI for ASP.NET MVC"
+        position: 18
+    "aspnet-mvc/mvc-6":
+        title: "ASP.NET MVC 6"
+        position: 4
+    "aspnet-mvc/vs-integration":
+        title: "Visual Studio Integration"
         position: 9
+    "aspnet-mvc/migration":
+        title: "Migrate From Telerik Extensions"
+        position: 12
+    "aspnet-mvc/helpers":
+        title: "View Helpers"
+        position: 11
+    "aspnet-mvc/tutorial-saleshub":
+        title: "Tutorial: Build the Sales Hub Project"
+        position: 20
+    "aspnet-mvc/tutorial-kendo-music-store":
+        title: "Tutorial: Build the Kendo Music Store"
+        position: 20
+    "aspnet-mvc/tutorial-kendo-music-store/music-store-web":
+        title: "Build the Web Application"
+        position: 2
+    "aspnet-mvc/tutorial-kendo-music-store/music-store-dashboard":
+        title: "Build the Dashboard"
+        position: 3
     "jsp":
         title: "UI for JSP"
-        position: 10
+        position: 19
     "php":
         title: "UI for PHP"
-        position: 11
+        position: 20
     "webforms":
         title: "Use in ASP.NET Web Forms"
-        position: 12
+        position: 21
     "troubleshoot":
-          title: "Troubleshooting"
-          position: 13
+        title: "Troubleshooting"
+        position: 22
     "accessibility":
         title: "Accessibility"
-        position: 14
+        position: 23
+    "backwards-compatibility":
+        title: "Backwards Compatibility"
+        position: 24
+    "backwards-compatibility/2012":
+        title: "2012"
+        position: 5
+    "backwards-compatibility/2013":
+        title: "2013"
+        position: 4
+    "backwards-compatibility/2014":
+        title: "2014"
+        position: 3
+    "backwards-compatibility/2015":
+        title: "2015"
+        position: 2
+    "backwards-compatibility/2016":
+        title: "2016"
+        position: 1
     "*how-to":
         title: "How To"
         position: 200
@@ -107,56 +209,12 @@ navigation:
     "*troubleshoot":
         title: "Troubleshooting"
         position: 201
-    "framework/geometry":
-        title: "Geometry"
-        position: 3
-    "*basics":
-        title: "The Basics"
-        position: 4
-    "aspnet-mvc/mvc-6":
-        title: "ASP.NET MVC 6"
-        position: 4
-    "mobile/listview":
-        title: "Mobile ListView"
-        position: 9
-    "mobile/collapsible":
-        title: "Collapsible"
-        position: 14
-    "mobile/drawer":
-        title: "Drawer"
-    "mobile/forms":
-        title: "Forms"
-    "mobile/navbar":
-        title: "NavBar"
-    "mobile/scrollview":
-        title: "ScrollView"
     "*asp.net":
         title: "ASP.NET"
     "*widgets":
         title: "Widgets"
     "*tags":
         title: "Tags"
-    "web/grid/how-to/AngularJS":
-        title: "AngularJS"
-        position: 1
-    "web/grid/how-to/Editing":
-        title: "Editing"
-        position: 2
-    "web/grid/how-to/Layout":
-        title: "Appearance"
-        position: 3
-    "web/grid/how-to/Selection":
-        title: "Selection"
-        position: 4
-    "web/grid/how-to/Templates":
-        title: "Templates"
-        position: 5
-    "web/grid/how-to/excel":
-        title: "Excel Export"
-        position: 6
-    "web/grid/how-to/pdf-export":
-        title: "PDF Export"
-        position: 7
     "*excel":
         title: "Excel"
     "*pdf-export":
@@ -191,6 +249,10 @@ navigation:
         title: "Stock Chart"
     "*chart":
         title: "Chart"
+    "*chart-types":
+        title: "Chart Types"
+    "*dataviz":
+        title: "Data Visualization"
     "*lineargauge":
         title: "LinearGauge"
     "*treemap":
