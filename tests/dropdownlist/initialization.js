@@ -13,7 +13,11 @@
             var element = $(document.body).find("[data-kendo-role=dropdownlist]")
 
             if (element[0]) {
-                element.data("kendoDropDownList").destroy();
+                try {
+                    element.data("kendoDropDownList").destroy();
+                } catch(e) {
+                    //destroy failed because widget is not fully initialized
+                }
                 element.closest(".k-dropdown").remove();
             }
 
@@ -937,10 +941,9 @@
         equal(dropdownlist.span.html(), "");
     });
 
-    /*
-    test("widget throws an exception when optionLabel does not match valueTemplate", 1, function() {
+    test("widget throws an error when optionLabel does not match valueTemplate",  function() {
         try {
-            var dropdownlist = new DropDownList(input, {
+            new DropDownList(input, {
                 optionLabel: "Select...",
                 dataTextField: "text",
                 dataValueField: "value",
@@ -950,7 +953,6 @@
             ok(true);
         }
     });
-    */
 
     test("widget renders filter header in input", function() {
         var dropdownlist = new DropDownList(input, {

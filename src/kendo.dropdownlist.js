@@ -42,6 +42,7 @@ var __meta__ = { // jshint ignore:line
         TABINDEX = "tabindex",
         STATE_FILTER = "filter",
         STATE_ACCEPT = "accept",
+        MSG_INVALID_OPTION_LABEL = "The `optionLabel` option is not valid due to missing fields. Define a custom optionLabel as shown here http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist#configuration-optionLabel",
         proxy = $.proxy;
 
     var DropDownList = Select.extend( {
@@ -59,13 +60,16 @@ var __meta__ = { // jshint ignore:line
             element = that.element.on("focus" + ns, proxy(that._focusHandler, that));
 
             that._focusInputHandler = $.proxy(that._focusInput, that);
+
+            that.optionLabel = $();
+            that._optionLabel();
+
             that._inputTemplate();
 
             that._reset();
 
             that._prev = "";
             that._word = "";
-            that.optionLabel = $();
 
             that._wrapper();
 
@@ -95,7 +99,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._initialIndex = options.index;
-            that._optionLabel();
             that._initList();
 
             that._cascade();
@@ -185,6 +188,8 @@ var __meta__ = { // jshint ignore:line
         destroy: function() {
             var that = this;
 
+            Select.fn.destroy.call(that);
+
             that.wrapper.off(ns);
             that.element.off(ns);
             that._inputWrapper.off(ns);
@@ -193,8 +198,6 @@ var __meta__ = { // jshint ignore:line
             that._arrow = null;
 
             that.optionLabel.off();
-
-            Select.fn.destroy.call(that);
         },
 
         open: function() {
@@ -1146,6 +1149,14 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.valueTemplate = template;
+
+            if (!!that.optionLabel[0]) {
+                try {
+                    that.valueTemplate(that._optionLabelDataItem());
+                } catch(e) {
+                    throw new Error(MSG_INVALID_OPTION_LABEL);
+                }
+            }
         },
 
         _textAccessor: function(text) {
