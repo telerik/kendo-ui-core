@@ -395,7 +395,7 @@ Defines a *formula* or *value* used for the comparison process. Used as *only* i
 ### sheets.rows.cells.validation.to `String`
 Defines a *formula* or *value* used for the comparison process. Will be used if comparer type requies second argument.
 
-### sheets.rows.cells.validation.allowNulls `String`
+### sheets.rows.cells.validation.allowNulls `Boolean`
 Specifies whether to allow nulls.
 
 ### sheets.rows.cells.validation.messageTemplate `String`
