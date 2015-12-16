@@ -633,6 +633,10 @@ test("parseExact method parses UTC milliseconds correctly", function() {
     equal(parse("2000-10-10T14:30:0.45Z", "yyyy-MM-ddTHH:mm:ss.fffzzz").getMilliseconds(), utcDate.getMilliseconds());
 });
 
+test("parseExact method parses milliseconds with leading zeros", function() {
+    equal(parse("2000-10-10T14:30:0.0400000Z", "yyyy-MM-ddTHH:mm:ss.fffffffzzz").getMilliseconds(), 40);
+});
+
 test("parseExact method parses UTC milliseconds correctly (no specific format)", function() {
     var utcDate = new Date(Date.UTC(2000, 9, 10, 14, 30, 0, 450));
     equal(kendo.parseDate("2000-10-10T14:30:0.45Z").getMilliseconds(), utcDate.getMilliseconds());

@@ -1339,18 +1339,12 @@ function pad(number, digits, end) {
                     count = lookAhead("f");
 
                     match = value.substr(valueIdx, count).match(numberRegExp[3]);
-                    milliseconds = getNumber(count);
+                    milliseconds = getNumber(count); //move value index position
 
                     if (milliseconds !== null) {
-                        match = match[0].length;
-
-                        if (match < 3) {
-                            milliseconds *= Math.pow(10, (3 - match));
-                        }
-
-                        if (count > 3) {
-                            milliseconds = parseInt(milliseconds.toString().substring(0, 3), 10);
-                        }
+                        milliseconds = parseFloat("0." + match[0], 10);
+                        milliseconds = kendo._round(milliseconds, 3);
+                        milliseconds *= 1000;
                     }
 
                     if (milliseconds === null || outOfRange(milliseconds, 0, 999)) {
