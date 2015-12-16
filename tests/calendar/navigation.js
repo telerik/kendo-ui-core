@@ -643,5 +643,11 @@ test("same value in previous month can be choosed when navigate to prev month", 
     equal(calendar._current.getMonth(), 11);
 });
 
+test("two consecutive selections can be made", 1, function() {
+    calendar.value(new Date(2015, 11, 16));
+    var currentCell = $(".k-state-selected");
+    currentCell.next().trigger("click");
+    equal(calendar.value().getDate(), 17);
+});
 
 })();
