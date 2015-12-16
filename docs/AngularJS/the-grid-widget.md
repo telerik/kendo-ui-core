@@ -18,7 +18,7 @@ If you assign a `k-on-change` event handler, it will be evaluated in a scope, wh
 - `selected` — the selected elements (a jQuery object)
 - `data` — the selected data items (an array of models)
 
-> **Important**  
+> **Important**
 > `selected` is a jQuery object which references DOM elements. As of AngularJS 1.2.24 release this is disallowed in template expressions "[for security reasons](https://docs.angularjs.org/error/$parse/isecdom)". Therefore, the following will not work with Angular 1.2.24:
 >
 >     k-on-change="myChangeHandler(selected)"
@@ -143,7 +143,7 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 
 As seen, if you select an item, it displays two input fields bound to the selected data model. Note that if you edit the data, the text in the grid will be updated seamlessly thanks to AngularJS. Grid functions, such as sorting, will still properly work.
 
-> **Important**  
+> **Important**
 > When using `rowTemplate`, include the `data-uid="#: uid #"` attribute in the toplevel row element as described in the [Grid documentation](/web/grid/how-to/Templates/row-template-using-dates). You must not use an AngularJS template like `data-uid="{{dataItem.uid}}"` because it is compiled after the grid is displayed and the widget cannot discriminate between the different rows and the data items they belong to.
 
 ## `$http` Service Binding the Grid
@@ -155,30 +155,29 @@ In order to take full control on the logic that performs the request to the serv
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
     <div kendo-grid k-options="gridOptions"></div>
-</div>
-<script>
-angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope, $http) {
-    $scope.gridOptions = {
-        columns: [ { field: "ProductID" }, { field: "ProductName" } ],
-        pageable: true,
-        dataSource: {
+ </div>
+   <script>
+      angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope, $http) {
+        $scope.gridOptions = {
+          columns: [ { field: "ProductID" }, { field: "ProductName" } ],
+          pageable: true,
+          dataSource: {
             pageSize: 5,
             transport: {
-                read: function (e) {
-                  $http.jsonp('http://demos.telerik.com/kendo-ui/service/Products?callback=JSON_CALLBACK').
-                  success(function(data, status, headers, config) {
-                      e.success(data)
-                  }).
-                  error(function(data, status, headers, config) {
-                      alert('something went wrong')
-                      console.log(status);
-                  });
+              read: function (e) {
+                $http.jsonp('http://demos.telerik.com/kendo-ui/service/Products?callback=JSON_CALLBACK')
+                  .then(function success(response) {
+                  e.success(response.data)
+                }, function error(response) {
+                  alert('something went wrong')
+                  console.log(response);
+                })
               }
-           }
+            }
+          }
         }
-    }
-});
-</script>
+      });
+    </script>
 ```
 
 ## See Also
