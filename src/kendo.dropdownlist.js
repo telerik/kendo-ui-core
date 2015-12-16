@@ -180,7 +180,7 @@ var __meta__ = { // jshint ignore:line
             this._enable();
             this._aria();
 
-            if (!this.value() && this.optionLabel[0]) {
+            if (!this.value() && this.hasOptionLabel()) {
                 this.select(0);
             }
         },
@@ -229,7 +229,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _allowOpening: function() {
-            return this.optionLabel[0] || this.filterInput || this.dataSource.view().length;
+            return this.hasOptionLabel() || this.filterInput || this.dataSource.view().length;
         },
 
         toggle: function(toggle) {
@@ -242,7 +242,7 @@ var __meta__ = { // jshint ignore:line
             if (candidate === undefined) {
                 current = this.listView.focus();
 
-                if (!current && this.selectedIndex === 0 && this.optionLabel[0]) {
+                if (!current && this.selectedIndex === 0 && this.hasOptionLabel()) {
                     return this.optionLabel;
                 }
 
@@ -270,7 +270,7 @@ var __meta__ = { // jshint ignore:line
                     } else {
                         index = $(that.items()).index(index);
                     }
-                } else if (!!that.optionLabel[0]) {
+                } else if (that.hasOptionLabel()) {
                     index -= 1;
                 }
 
@@ -365,6 +365,10 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
+        hasOptionLabel: function() {
+            return this.optionLabel && !!this.optionLabel[0];
+        },
+
         _optionLabel: function() {
             var that = this;
             var options = that.options;
@@ -395,7 +399,7 @@ var __meta__ = { // jshint ignore:line
 
             that.optionLabelTemplate = template;
 
-            if (!that.optionLabel[0]) {
+            if (!that.hasOptionLabel()) {
                 that.optionLabel = $('<div class="k-list-optionlabel"></div>').prependTo(that.list);
             }
 
@@ -418,7 +422,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var optionLabel = that.options.optionLabel;
 
-            if (!!that.optionLabel[0]) {
+            if (that.hasOptionLabel()) {
                 return $.isPlainObject(optionLabel) ? new ObservableObject(optionLabel) : that._assignInstance(that._optionLabelText(), "");
             }
 
@@ -693,7 +697,7 @@ var __meta__ = { // jshint ignore:line
         _selectNext: function() {
             var that = this;
             var data = that.dataSource.flatView().toJSON();
-            var dataLength = data.length + (!!this.optionLabel[0] ? 1 : 0);
+            var dataLength = data.length + (that.hasOptionLabel() ? 1 : 0);
             var isInLoop = sameCharsOnly(that._word, that._last);
             var startIndex = that.selectedIndex;
             var oldFocusedItem;
@@ -860,7 +864,7 @@ var __meta__ = { // jshint ignore:line
             var isFunction = typeof candidate === "function";
             var jQueryCandidate = !isFunction ? $(candidate) : $();
 
-            if (this.optionLabel[0]) {
+            if (this.hasOptionLabel()) {
                 if (typeof candidate === "number") {
                     if (candidate > -1) {
                         candidate -= 1;
@@ -890,7 +894,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _firstItem: function() {
-            if (this.optionLabel[0]) {
+            if (this.hasOptionLabel()) {
                 this._focus(this.optionLabel);
             } else {
                 this.listView.focusFirst();
@@ -1150,7 +1154,7 @@ var __meta__ = { // jshint ignore:line
 
             that.valueTemplate = template;
 
-            if (!!that.optionLabel[0]) {
+            if (that.hasOptionLabel()) {
                 try {
                     that.valueTemplate(that._optionLabelDataItem());
                 } catch(e) {

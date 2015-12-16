@@ -1128,4 +1128,26 @@
 
         ok(dropdownlist.popup.visible());
     });
+
+    test("hasOptionLabel method returns true if optionLabel is defined", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            optionLabel: "Select",
+            dataSource: [],
+            filter: "contains"
+        });
+
+        ok(dropdownlist.hasOptionLabel());
+    });
+
+    test("hasOptionLabel method returns false if optionLabel is removed", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            optionLabel: "Select",
+            dataSource: [],
+            filter: "contains"
+        });
+
+        dropdownlist.setOptions({ optionLabel: "" });
+
+        ok(!dropdownlist.hasOptionLabel());
+    });
 })();
