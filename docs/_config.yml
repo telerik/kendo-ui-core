@@ -418,6 +418,8 @@ type_links:
     "kendo.Class": "/api/javascript/class"
     "kendo.data.DataSource": "/api/javascript/data/datasource"
     "Array": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array"
+    "Blob": "https://developer.mozilla.org/en/docs/Web/API/Blob"
+    "File": "https://developer.mozilla.org/en-US/docs/Web/API/File"
     "Boolean": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean"
     "Function": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function"
     "jQuery": "http://api.jquery.com/Types/#jQuery"

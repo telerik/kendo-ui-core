@@ -470,6 +470,33 @@ Returns an array with the sheets in the workbook.
 
 `Array` the available sheets.
 
+### fromFile
+Clears the spreadsheets and populates it with data from the specified Excel (.xlsx) file.
+
+> Requires Internet Explorer 10 or a recent version of other browsers.
+
+#### Parameters
+
+##### blob `Blob|File`
+The file or blob, usually obtained through a file input.
+
+#### Returns
+`Promise` a promise that will be resolved when the import operation completes.
+
+#### Example - import file
+```
+    <input id="file" type="file" />
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet();
+
+        $("#file").on("change", function() {
+            var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+            spreadsheet.fromFile(this.files[0]);
+        });
+    </script>
+```
+
 ### saveAsExcel
 
 Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) event.
@@ -711,7 +738,7 @@ The Excel [workbook configuration object](/api/javascript/ooxml/workbook#configu
 
 ##### e.preventDefault `Function`
 
-If invoked the grid will not save the generated file.
+If invoked the spreadsheet will not save the generated file.
 
 #### Example - subscribe to the "excelExport" event during initialization
 ```
@@ -768,3 +795,47 @@ If invoked the grid will not save the generated file.
     </script>
 ```
 
+### excelImport
+Fired when the user clicks the "Open" toolbar button.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.file `Blob|File`
+
+The file that is being imported.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will not import the file.
+
+##### e.progress `Promise`
+
+A promise that will be resolved when the import operation completes.
+
+The promise [progress handler](http://api.jquery.com/deferred.progress/) will be called periodically with the following arguments:
+* sheet - The current sheet. An instance of [kendo.spreadsheet.Sheet](/api/javascript/spreadsheet/sheet)
+* progress - Number if the range 0 to 1, indicating the progress of the current import operation
+
+#### Example - monitor the progress of an import operation
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            excelImport: function(e) {
+                e.promise
+                .progress(function(e) {
+                    console.log(kendo.format("{0:P} complete", e.progress));
+                })
+                .done(function() {
+                    alert("Export completed!");
+                });
+            }
+        });
+
+        // Click the Open command and select a file to import
+    </script>
+```
