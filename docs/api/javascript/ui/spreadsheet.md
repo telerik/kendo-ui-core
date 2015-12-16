@@ -380,6 +380,7 @@ The validation rule applied to the cell.
         });
     </script>
 ```
+
 ### sheets.rows.cells.validation.type `String`
 Defines the validation type. The acceptable options are *reject* or *warning*
 
