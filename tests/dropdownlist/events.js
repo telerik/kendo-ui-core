@@ -815,6 +815,29 @@
         dropdownlist.wrapper.focus().blur();
     });
 
+    test("change event is not raised when widget is empty", 0, function() {
+        var select = $("<select></select>").appendTo(QUnit.fixture);
+
+        var dropdownlist = new DropDownList(select, {
+            dataValueField: "id",
+            dataTextField: "name"
+        });
+
+        dropdownlist.setDataSource([
+            { id: 1, name: "name1" },
+            { id: 2, name: "name2" },
+            { id: 3, name: "name3" }
+        ]);
+
+        dropdownlist.bind("change", function() {
+            ok(false);
+        });
+
+        dropdownlist.value("");
+
+        dropdownlist.wrapper.focus().blur();
+    });
+
     test("cascading child triggers filtering event", 1, function() {
         var parent = $("<input id='parent' />").appendTo(QUnit.fixture);
         var child = $("<input />").appendTo(QUnit.fixture);

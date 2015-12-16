@@ -360,7 +360,7 @@ var __meta__ = { // jshint ignore:line
                     that._accessor("", -1);
                 }
 
-                that._old = that.listView.value()[0];
+                that._old = that._accessor();
                 that._oldIndex = that.selectedIndex;
             });
         },

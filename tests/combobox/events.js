@@ -677,4 +677,25 @@ test("change event is not raised when widget is not bound and value method is us
     combobox.input.focus().blur();
 });
 
+test("change event is not raised when widget value is cleared", 0, function() {
+    var select = $("<select></select>").appendTo(QUnit.fixture);
+
+    var combobox = new ComboBox(select, {
+        autoBind: false,
+        dataValueField: "id",
+        dataTextField: "name",
+        dataSource: [
+            { id: 1, name: "name1" },
+            { id: 2, name: "name2" },
+            { id: 3, name: "name3" }
+        ],
+        change: function() {
+            ok(false);
+        }
+    });
+
+    combobox.value("");
+    combobox.input.focus().blur();
+});
+
 })();
