@@ -264,7 +264,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (index === views[depth]) {
-                if (!isEqualDate(that._value, that._current)) {
+                if (!isEqualDate(that._value, that._current) || !isEqualDate(that._value, value)) {
                     that.value(value);
                     that.trigger(CHANGE);
                 }
