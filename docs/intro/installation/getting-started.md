@@ -24,7 +24,7 @@ Depending on your preferences and the requirements of your project, you can:
 
 Once you [download any of the Kendo UI bundles](http://www.telerik.com/download/kendo-ui), you will get the following folders in your local repository:
 
-* `/examples` - accommodates the quick start demo files. Although they are static HTML files, it is recommended to open them via a web server, instead of directly from the file system. The latter approach will break all Ajax data requests, which use protocol-less URLs.
+* `/examples` - accommodates the quick start demo files. **Although they are static HTML files, it is recommended to open them via a web server, instead of directly from the file system. The latter approach will break all Ajax data requests.**
 * `/js` - contains the minified JavaScript files
 * `/src` - holds the source code files. Note that it is not available in the 30-day trial version.
 * `/styles` - consists of the minified CSS files and theme images
