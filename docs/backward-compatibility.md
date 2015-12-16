@@ -19,6 +19,12 @@ position: 251
 * **DropDownList/ComboBox**: Cascading widget will trigger `change` event when its value is changed due to parent update. The benefit of this change is proper behavior in MVVM-like frameworks
 (related [issue](https://github.com/telerik/kendo-ui-core/issues/661)).
 
+* **DropDownList**: Widget will not select first item automatically, when data source is changed with `setDataSource` method. If you would like to mimic the old behavior, then you will need manually to select first item:
+
+    var dropdownlist = $({widget id}).data("kendoDropDownList");
+    dropdownlist.setDataSource(["Item1", "Item2"]);
+    dropdownlist.select(0); //force selection of the first item
+
 ### Changes from 2015 Q3 (2015.2.930)
 
 #### Breaking Changes
