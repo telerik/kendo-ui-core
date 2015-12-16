@@ -927,6 +927,31 @@
         equal(dropdownlist.span.html(), "Select...");
     });
 
+    test("ValueTemplate supports template with multiple fields", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataTextField: "text",
+            dataValueField: "value",
+            valueTemplate: "#=text# #=customField#"
+        });
+
+        equal(dropdownlist.span.html(), "");
+    });
+
+    /*
+    test("widget throws an exception when optionLabel does not match valueTemplate", 1, function() {
+        try {
+            var dropdownlist = new DropDownList(input, {
+                optionLabel: "Select...",
+                dataTextField: "text",
+                dataValueField: "value",
+                valueTemplate: "#=text# #=customField#"
+            });
+        } catch(e) {
+            ok(true);
+        }
+    });
+    */
+
     test("widget renders filter header in input", function() {
         var dropdownlist = new DropDownList(input, {
             autoBind: false,

@@ -1174,7 +1174,14 @@ var __meta__ = { // jshint ignore:line
                     };
                 };
                 this.angular("cleanup", getElements);
-                span.html(template(dataItem));
+
+                try {
+                    span.html(template(dataItem));
+                } catch(e) {
+                    //dataItem has missing fields required in custom template
+                    span.html("");
+                }
+
                 this.angular("compile", getElements);
             } else {
                 return span.text();
