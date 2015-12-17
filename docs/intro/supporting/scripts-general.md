@@ -312,7 +312,33 @@ Below are listed the script files for Kendo UI desktop widgets for mobile-ready 
 | 						| kendo.draganddrop.js						| 							|
 | 						| kendo.resizable.js						| 							|
 | 						| kendo.splitter.js							| 							|
-| [TabStrip](http://demos.telerik.com/kendo-ui/tabstrip/index)| jjquery.js|						|
+| [Spreadsheet](http://demos.telerik.com/kendo-ui/spreadsheet/index)| jquery.js|						|
+| 						| kendo.core.js								| 							|
+| 						| kendo.data.min.js						| 							|
+| 						| kendo.binder.min.js						| 							|
+| 						| kendo.color.min.js						| 							|
+| 						| kendo.popup.min.js							| 							|
+| 						| kendo.userevents.min.js					| 							|
+| 						| kendo.draganddrop.min.js					| 							|
+| 						| kendo.slider.min.js					| 							|
+| 						| kendo.colorpicker.min.js					| 							|
+| 						| kendo.list.min.js					| 							|
+| 						| kendo.combobox.min.js					| 							|
+| 						| kendo.dom.min.js					| 							|
+| 						| kendo.dropdownlist.min.js					| 							|
+| 						| kendo.menu.min.js					| 							|
+| 						| kendo.ooxml.min.js					| 							|
+| 						| kendo.sortable.min.js					| 							|
+| 						| kendo.tabstrip.min.js					| 							|
+| 						| kendo.toolbar.min.js					| 							|
+| 						| kendo.treeview.min.js					| 							|
+| 						| kendo.window.min.js					| 							|
+| 						| kendo.validator.min.js				| 							|
+| 						| kendo.excel.min.js				| 							|
+| 						| kendo.drawing.min.js				| 							|
+| 						| kendo.pdf.min.js				| 							|
+| 						| kendo.spreadsheet.min.js				| 							|
+| [TabStrip](http://demos.telerik.com/kendo-ui/tabstrip/index)| jquery.js|						|
 | 						| kendo.core.js								| 							|
 | 						| kendo.data.js								| 							|
 | 						| kendo.tabstrip.js							| 							|
