@@ -4229,7 +4229,7 @@ function pad(number, digits, end) {
         }
 
         var fileSaver = document.createElement("a");
-        var downloadAttribute = "download" in fileSaver;
+        var downloadAttribute = "download" in fileSaver && !kendo.support.browser.edge;
 
         function saveAsBlob(dataURI, fileName) {
             var blob = dataURI; // could be a Blob object
