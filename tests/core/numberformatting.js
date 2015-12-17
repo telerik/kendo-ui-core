@@ -320,6 +320,37 @@ test("group separators if more then one are applied to the number", function() {
     equal(toString(33111110, "n", "custom"), "3,31,11,110.00");
 });
 
+test("group separators with '0' length are applied correctly", function() {
+    kendo.cultures["custom"] = {
+        calendars: { standard: {}},
+        numberFormat: {
+            decimals: 2,
+            pattern: ["-n"],
+            ",": ",",
+            ".": ".",
+            groupSize: [3,0]
+        }
+    };
+
+    equal(toString(33111110, "n", "custom"), "33111,110.00");
+});
+
+test("'0' group separator does not group integer", function() {
+    kendo.cultures["custom"] = {
+        calendars: { standard: {}},
+        numberFormat: {
+            decimals: 2,
+            pattern: ["-n"],
+            ",": ",",
+            ".": ".",
+            groupSize: [0]
+        }
+    };
+
+    equal(toString(33111110, "n", "custom"), "33111110.00");
+    equal(toString(0, "n", "custom"), "0.00");
+});
+
 test("P toString", function() {
     var number = 0.00099;
     equal(toString(number, "P"), "0.10 %");

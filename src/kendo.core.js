@@ -1010,6 +1010,7 @@ function pad(number, digits, end) {
         var groupSize = groupSizes.shift();
         var integer, integerLength;
         var idx, parts, value;
+        var newGroupSize;
 
         end = decimalIndex !== -1 ? decimalIndex : end + 1;
 
@@ -1026,7 +1027,13 @@ function pad(number, digits, end) {
                     parts.push(value);
                 }
                 idx -= groupSize;
-                groupSize = groupSizes.shift() || groupSize;
+                newGroupSize = groupSizes.shift();
+                groupSize = newGroupSize !== undefined ? newGroupSize : groupSize;
+
+                if (groupSize === 0) {
+                    parts.push(integer.substring(0, idx));
+                    break;
+                }
             }
 
             integer = parts.reverse().join(numberFormat[COMMA]);
