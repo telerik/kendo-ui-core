@@ -807,6 +807,35 @@ test("ComboBox does not change text if custom value is equal to options.value", 
     equal(combobox.text(), "text");
 });
 
+test("ComboBox clears selected value even when text option is set to empty string", function() {
+    var combobox = new ComboBox(input, {
+        animation: false,
+        dataTextField: 'text',
+        dataValueField: 'value',
+        filter: 'contains',
+        autoBind: false,
+        ignoreCase: true,
+        suggest: false,
+        highLightFirst: true,
+        value: '',
+        text: '',
+        dataSource: [
+            { text: "User1", value: "1" },
+            { text: "User2", value: "2" },
+            { text: "User3", value: "3" },
+            { text: "User4", value: "4" }
+        ]
+    });
+
+    combobox.open();
+    combobox.select(0);
+    combobox.input.focus().val("").keydown();
+    combobox.input.blur();
+
+    equal(combobox.value(), "");
+    equal(combobox.text(), "");
+});
+
 test("suggest method outputs word parameter", function() {
     var combobox = new ComboBox(input, {
         dataSource: ["Item1", "Item2"]

@@ -188,12 +188,13 @@ var __meta__ = { // jshint ignore:line
 
         _inputFocusout: function() {
             var that = this;
+            var text = that.options.text;
 
             that._inputWrapper.removeClass(FOCUSED);
             clearTimeout(that._typingTimeout);
             that._typingTimeout = null;
 
-            if (that.options.text !== that.input.val()) {
+            if (!text || text !== that.input.val()) {
                 that.text(that.text());
             }
 
