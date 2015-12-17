@@ -109,6 +109,544 @@ The proxy should return the decoded file with the "Content-Disposition" header s
     </script>
 ```
 
+### pdf `Object`
+
+Configures the Kendo UI Spreadsheet PDF export settings.
+
+### pdf.area `String`
+The area to export. Possible values:
+
+* "workbook": Exports the full workbook, including all sheets.
+* "sheet": Exports the active sheet.
+* "selection": Exports the selected area on the active sheet.
+
+#### Example - set export area
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                rows: [{
+                    cells: [{ value: "A" }, { value: "B" }, { value: "C" }]
+                }, {
+                    cells: [{ value: "1" }, { value: "2" }, { value: "3" }]
+                }, {
+                    cells: [{ value: "4" }, { value: "5" }, { value: "6" }]
+                }]
+            }],
+            pdf: {
+                area: "selection"
+            }
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.saveAsPDF();
+    </script>
+```
+
+### pdf.author `String` *(default: null)*
+
+The author of the PDF document.
+
+#### Example - set the author
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                rows: [{
+                    cells: [{ value: "A" }, { value: "B" }, { value: "C" }]
+                }, {
+                    cells: [{ value: "1" }, { value: "2" }, { value: "3" }]
+                }, {
+                    cells: [{ value: "4" }, { value: "5" }, { value: "6" }]
+                }]
+            }],
+            pdf: {
+                author: "John Doe"
+            }
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.saveAsPDF();
+    </script>
+```
+
+### pdf.creator `String` *(default: "Kendo UI PDF Generator")*
+
+The creator of the PDF document.
+
+#### Example - set the creator
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                rows: [{
+                    cells: [{ value: "A" }, { value: "B" }, { value: "C" }]
+                }, {
+                    cells: [{ value: "1" }, { value: "2" }, { value: "3" }]
+                }, {
+                    cells: [{ value: "4" }, { value: "5" }, { value: "6" }]
+                }]
+            }],
+            pdf: {
+                creator: "John Doe"
+            }
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.saveAsPDF();
+    </script>
+```
+
+### pdf.date `Date`
+
+The date when the PDF document is created. Defaults to `new Date()`.
+
+#### Example - set the date
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                rows: [{
+                    cells: [{ value: "A" }, { value: "B" }, { value: "C" }]
+                }, {
+                    cells: [{ value: "1" }, { value: "2" }, { value: "3" }]
+                }, {
+                    cells: [{ value: "4" }, { value: "5" }, { value: "6" }]
+                }]
+            }],
+            pdf: {
+                date: new Date("2014/10/10")
+            }
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.saveAsPDF();
+    </script>
+```
+
+### pdf.fileName `String` *(default: "Export.pdf")*
+
+Specifies the file name of the exported PDF file.
+
+#### Example - set the default PDF file name
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                rows: [{
+                    cells: [{ value: "A" }, { value: "B" }, { value: "C" }]
+                }, {
+                    cells: [{ value: "1" }, { value: "2" }, { value: "3" }]
+                }, {
+                    cells: [{ value: "4" }, { value: "5" }, { value: "6" }]
+                }]
+            }],
+            pdf: {
+                fileName: "Foo.pdf"
+            }
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.saveAsPDF();
+    </script>
+```
+
+### pdf.fitWidth `Boolean` *(default: false)*
+An option indicating whether to fit the spreadsheet content to page width.
+
+#### Example - fit spreadsheet to page width
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                rows: [{
+                    cells: [
+                        { value: "A" }, { value: "B" }, { value: "C" },
+                        { value: "1" }, { value: "2" }, { value: "3" },
+                        { value: "4" }, { value: "5" }, { value: "6" },
+                        { value: "7" }, { value: "8" }, { value: "9" }
+                    ]
+                }]
+            }],
+            pdf: {
+                landscape: false,
+                fitWidth: true
+            }
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.saveAsPDF();
+    </script>
+```
+
+### pdf.forceProxy `Boolean` *(default: false)*
+If set to true, the content will be forwarded to [proxyURL](#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+
+### pdf.guidelines `Boolean` *(default: false)*
+An option indicating whether to export the cell guidelines.
+
+#### Example - disable guidelines
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                rows: [{
+                    cells: [{ value: "A" }, { value: "B" }, { value: "C" }]
+                }, {
+                    cells: [{ value: "1" }, { value: "2" }, { value: "3" }]
+                }, {
+                    cells: [{ value: "4" }, { value: "5" }, { value: "6" }]
+                }]
+            }],
+            pdf: {
+                guidelines: false
+            }
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.saveAsPDF();
+    </script>
+```
+
+### pdf.hCenter `Boolean` *(default: false)*
+An option indicating whether to center the content horizontally.
+
+See also [vCenter](#configuration-pdf.vCenter).
+
+#### Example - center content horizontally
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                rows: [{
+                    cells: [{ value: "A" }, { value: "B" }, { value: "C" }]
+                }, {
+                    cells: [{ value: "1" }, { value: "2" }, { value: "3" }]
+                }, {
+                    cells: [{ value: "4" }, { value: "5" }, { value: "6" }]
+                }]
+            }],
+            pdf: {
+                hCenter: true
+            }
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.saveAsPDF();
+    </script>
+```
+
+### pdf.keywords `String` *(default: null)*
+
+Specifies the keywords of the exported PDF file.
+
+#### Example - set the keywords
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                rows: [{
+                    cells: [{ value: "A" }, { value: "B" }, { value: "C" }]
+                }, {
+                    cells: [{ value: "1" }, { value: "2" }, { value: "3" }]
+                }, {
+                    cells: [{ value: "4" }, { value: "5" }, { value: "6" }]
+                }]
+            }],
+            pdf: {
+                keywords: "food order"
+            }
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.saveAsPDF();
+    </script>
+```
+
+### pdf.landscape `Boolean` *(default: true)*
+
+Set to `true` to reverse the paper dimensions if needed such that width is the larger edge.
+
+#### Example - set portrait mode
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                rows: [{
+                    cells: [{ value: "A" }, { value: "B" }, { value: "C" }]
+                }, {
+                    cells: [{ value: "1" }, { value: "2" }, { value: "3" }]
+                }, {
+                    cells: [{ value: "4" }, { value: "5" }, { value: "6" }]
+                }]
+            }],
+            pdf: {
+                landscape: false
+            }
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.saveAsPDF();
+    </script>
+```
+
+### pdf.margin `Object`
+
+Specifies the margins of the page (numbers or strings with units). Supported
+units are "mm", "cm", "in" and "pt" (default).
+
+#### Example - set the margins
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                rows: [{
+                    cells: [{ value: "A" }, { value: "B" }, { value: "C" }]
+                }, {
+                    cells: [{ value: "1" }, { value: "2" }, { value: "3" }]
+                }, {
+                    cells: [{ value: "4" }, { value: "5" }, { value: "6" }]
+                }]
+            }],
+            pdf: {
+                margin: {
+                    left: 10,
+                    right: "10pt",
+                    top: "10mm",
+                    bottom: "1in"
+                }
+            }
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.saveAsPDF();
+    </script>
+```
+
+### pdf.margin.bottom `Number|String` *(default: 0)*
+
+The bottom margin. Numbers are considered as "pt" units.
+
+### pdf.margin.left `Number|String` *(default: 0)*
+
+The left margin. Numbers are considered as "pt" units.
+
+### pdf.margin.right `Number|String` *(default: 0)*
+
+The right margin. Numbers are considered as "pt" units.
+
+### pdf.margin.top `Number|String` *(default: 0)*
+
+The top margin. Numbers are considered as "pt" units.
+
+### pdf.paperSize `String|Array` *(default: "auto")*
+
+Specifies the paper size of the PDF document.
+The default "auto" means paper size is determined by content.
+
+> The size of the content in pixels will match the size of the output in points (1 pixel = 1/72 inch).
+
+Supported values:
+
+* A predefined size: "A4", "A3" etc
+* An array of two numbers specifying the width and height in points (1pt = 1/72in)
+* An array of two strings specifying the width and height in units.
+  Supported units are "mm", "cm", "in" and "pt".
+
+#### Example - set custom paper size
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                rows: [{
+                    cells: [{ value: "A" }, { value: "B" }, { value: "C" }]
+                }, {
+                    cells: [{ value: "1" }, { value: "2" }, { value: "3" }]
+                }, {
+                    cells: [{ value: "4" }, { value: "5" }, { value: "6" }]
+                }]
+            }],
+            pdf: {
+                paperSize: ["100mm", "50mm"]
+            }
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.saveAsPDF();
+    </script>
+```
+
+### pdf.proxyURL `String` *(default: null)*
+
+The URL of the server side proxy which will stream the file to the end user.
+
+A proxy will be used when the browser isn't capable of saving files locally e.g. Internet Explorer 9 and Safari. PDF export is not supported in Internet Explorer 8 and below.
+
+The developer is responsible for implementing the server-side proxy.
+
+The proxy will receive a POST request with the following parameters in the request body:
+
+* contentType: The MIME type of the file
+* base64: The base-64 encoded file content
+* fileName: The file name, as requested by the caller.
+
+The proxy should return the decoded file with the "Content-Disposition" header set to
+`attachment; filename="<fileName.pdf>"`.
+
+#### Example - set the server proxy URL
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                rows: [{
+                    cells: [{ value: "A" }, { value: "B" }, { value: "C" }]
+                }, {
+                    cells: [{ value: "1" }, { value: "2" }, { value: "3" }]
+                }, {
+                    cells: [{ value: "4" }, { value: "5" }, { value: "6" }]
+                }]
+            }],
+            pdf: {
+                proxyURL: "/save"
+            }
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.saveAsPDF();
+    </script>
+```
+
+### pdf.proxyTarget `String` *(default: "_self")*
+
+A name or keyword indicating where to display the document returned from the proxy.
+
+If you want to display the document in a new window or iframe,
+the proxy should set the "Content-Disposition" header to `inline; filename="<fileName.pdf>"`.
+
+#### Example - open the generated document in a new window
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                rows: [{
+                    cells: [{ value: "A" }, { value: "B" }, { value: "C" }]
+                }, {
+                    cells: [{ value: "1" }, { value: "2" }, { value: "3" }]
+                }, {
+                    cells: [{ value: "4" }, { value: "5" }, { value: "6" }]
+                }]
+            }],
+            pdf: {
+                forceProxy: true,
+                proxyURL: "/save",
+                proxyTarget: "_blank"
+            }
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.saveAsPDF();
+    </script>
+```
+
+### pdf.subject `String` *(default: null)*
+
+Sets the subject of the PDF file.
+
+#### Example - set the subject
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                rows: [{
+                    cells: [{ value: "A" }, { value: "B" }, { value: "C" }]
+                }, {
+                    cells: [{ value: "1" }, { value: "2" }, { value: "3" }]
+                }, {
+                    cells: [{ value: "4" }, { value: "5" }, { value: "6" }]
+                }]
+            }],
+            pdf: {
+                subject: "Products"
+            }
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.saveAsPDF();
+    </script>
+```
+
+### pdf.title `String` *(default: null)*
+
+Sets the title of the PDF file.
+
+#### Example - set the title
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                rows: [{
+                    cells: [{ value: "A" }, { value: "B" }, { value: "C" }]
+                }, {
+                    cells: [{ value: "1" }, { value: "2" }, { value: "3" }]
+                }, {
+                    cells: [{ value: "4" }, { value: "5" }, { value: "6" }]
+                }]
+            }],
+            pdf: {
+                title: "Products"
+            }
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.saveAsPDF();
+    </script>
+```
+
+### pdf.vCenter `Boolean` *(default: false)*
+An option indicating whether to center the content vertically.
+
+See also [hCenter](#configuration-pdf.hCenter).
+
+#### Example - center content vertically
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                rows: [{
+                    cells: [{ value: "A" }, { value: "B" }, { value: "C" }]
+                }, {
+                    cells: [{ value: "1" }, { value: "2" }, { value: "3" }]
+                }, {
+                    cells: [{ value: "4" }, { value: "5" }, { value: "6" }]
+                }]
+            }],
+            pdf: {
+                vCenter: true
+            }
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.saveAsPDF();
+    </script>
+```
+
 ### rowHeight `Number` *(default: 20)*
 The default row height in pixels.
 
@@ -529,7 +1067,50 @@ Initiates the Excel export. Also fires the [`excelExport`](#events-excelExport) 
     </script>
 
     <!-- Load JSZIP library to enable Excel export -->
-    <script src="http://cdn.kendostatic.com/2015.2.624/js/jszip.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
+```
+
+### saveAsPDF
+
+Initiates the PDF export. Also fires the [`pdfExport`](#events-pdfExport) event.
+
+> Calling this method could trigger the browser built-in popup blocker in some cases. To avoid that, always call it as a response to an end-user action e.g. button click.
+
+#### Parameters
+##### options `Object`
+An options object with the same structure as the [pdf](#configuration-pdf) options.
+
+#### Returns
+`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](#events-pdfExport) event arguments.
+
+
+#### Example - manually initiate PDF export
+```
+    <button id="export">Export to PDF</button>
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                rows: [{
+                    cells: [{ value: "A" }, { value: "B" }, { value: "C" }]
+                }, {
+                    cells: [{ value: "1" }, { value: "2" }, { value: "3" }]
+                }, {
+                    cells: [{ value: "4" }, { value: "5" }, { value: "6" }]
+                }]
+            }],
+            pdf: {
+                fileName: "Test.pdf"
+            }
+        });
+        $("#export").click(function(e) {
+            var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+            spreadsheet.saveAsPDF({ area: "selection" });
+        });
+    </script>
+
+    <!-- Load Pako library to enable PDF compression -->
+    <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
 ```
 
 ### sheetByName
@@ -839,3 +1420,48 @@ The promise [progress handler](http://api.jquery.com/deferred.progress/) will be
         // Click the Open command and select a file to import
     </script>
 ```
+
+### pdfExport
+
+Fired when the user initiates PDF export.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.preventDefault `Function`
+
+If invoked the spreadsheet will not save the generated file.
+
+##### e.promise `Promise`
+
+A promise that will be resolved when the export completes.
+
+#### Example - Monitor export progress
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                rows: [{
+                    cells: [{ value: "A" }, { value: "B" }, { value: "C" }]
+                }, {
+                    cells: [{ value: "1" }, { value: "2" }, { value: "3" }]
+                }, {
+                    cells: [{ value: "4" }, { value: "5" }, { value: "6" }]
+                }]
+            }],
+            pdfExport: function(e) {
+                e.promise.done(function() {
+                    alert("Export completed!");
+                });
+            }
+        });
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        spreadsheet.saveAsPDF();
+    </script>
+```
+

@@ -5255,7 +5255,7 @@ Exports all grid pages, starting from the first one.
 > [Pako](http://nodeca.github.io/pako/) library, which is bundled with Kendo as `pako_deflate.min.js`.  Simply loading
 > this library with a `<script>` tag will enable compression in PDF, e.g.:
 >
-> `<script src="http://kendo.cdn.telerik.com/2015.1.318/js/pako_deflate.min.js"></script>`
+> `<script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>`
 >
 > The allPages export is not supported when virtual scrolling is enabled.
 
