@@ -11,24 +11,24 @@ position: 2
 | FORMULAS AND FUNCTIONS	| DESCRIPTION				                                    
 | :--- 						| :---						                                    
 | ABS                       | Returns the absolute (nonnegative) value of a number                      
-| ACOS                      | Returns the principal value of the arccosine of a number. The angle is returned in radians. 
+| ACOS                      | Returns the principal value of the arccosine of a number. The angle is returned in radians.
 | ACOSH                     | Returns the principal value of the inverse hyperbolic cosine of a number  
-| ACOT                      | Returns the principal value of the arccotangent of a number. The angle is returned in radians. 
+| ACOT                      | Returns the principal value of the arccotangent of a number. The angle is returned in radians.
 | ACOTH                     | Returns the hyperbolic arccotangent of a number                         
 | ADDRESS                   | Returns a cell address (reference) as a text                    
 | AGGREGATE                 | Returns an aggregate of a list or database                    
 | ARABIC                    | Converts Roman numbers to Arabic as numbers                                
 | AREAS                     | Returns the number of areas in a reference              
-| ASIN                      | Returns the principal value of the arcsine of a number. The angle is returned in radians. 
+| ASIN                      | Returns the principal value of the arcsine of a number. The angle is returned in radians.
 | ASINH                     | Returns the principal value of the inverse hyperbolic sine of a number
-| ATAN                      | Returns the principal value of the arctangent of a number. The angle is returned in radians. 
-| ATAN2                     | Returns the principal value of the arctangent from x- and y- coordinates in radians 
+| ATAN                      | Returns the principal value of the arctangent of a number. The angle is returned in radians.
+| ATAN2                     | Returns the principal value of the arctangent from x- and y- coordinates in radians
 | ATANH                     | Returns the principal value of the inverse hyperbolic tangent of a number               
 | AVEDEV                    | Calculates the average of the absolute deviations of listed values  
-| AVERAGE                   | Returns the average of a set of numbers 
+| AVERAGE                   | Returns the average of a set of numbers
 | AVERAGEA                  | Returns the average of values, including numbers, text, and logical values  
 | AVERAGEIF                 | Returns the average of all cells in a range based on a given criteria  
-| AVERAGEIFS                | Returns the average of all cells in a range based on multiple criteria 
+| AVERAGEIFS                | Returns the average of all cells in a range based on multiple criteria
 | BASE                      | Converts a number into a text representation with the given base
 | BETA.DIST                 | Returns the beta cumulative distribution function
 | BETA.INV                  | Returns the inverse of the cumulative distribution function for a specified beta distribution
@@ -69,7 +69,7 @@ position: 2
 | COVARIANCE.P              | Returns covariance, the average of the products of paired deviations    
 | COVARIANCE.S              | Returns the sample covariance, the average of the products deviations for each data point pair in two data sets
 | CRITBINOM                 | Returns the smallest value for which the cumulative binomial distribution is less than or equal to a criterion value
-| CSC                       | Returns the cosecant of an angle, specified in radians 
+| CSC                       | Returns the cosecant of an angle, specified in radians
 | CSCH                      | Returns the hyperbolic cosecant of an angle, specified in radians
 | DATE                      | Returns a date value constructed from a year, month, and day values
 | DATEVALUE                 | Returns the date converting it in the form of text to a serial number     
@@ -79,7 +79,7 @@ position: 2
 | DECIMAL                   | Converts a text representation of a number in a given base into a decimal number
 | DEGREES                   | Converts radians to degrees
 | DOLLAR                    | Converts a number to text, using the `$` currency format
-| EDATE                     | Returns the serial number of the date that is the indicated number of months before or after the start date 
+| EDATE                     | Returns the serial number of the date that is the indicated number of months before or after the start date
 | EOMONTH                   | Returns the serial number of the last day of the month before or after a specified number of months
 | ERF                       | Returns the error function
 | ERFC                      | Returns the complementary error function
@@ -87,7 +87,7 @@ position: 2
 | EXACT                     | Reports if two text values are equal using a case-sensitive comparison
 | EXP                       | Returns `e` raised to the power of a given number
 | EXPON.DIST                | Returns the exponential distribution
-| F.DIST                    | Returns the `F` probability distribution 
+| F.DIST                    | Returns the `F` probability distribution
 | F.DIST.RT                 | Returns the `F` probability distribution
 | F.INV                     | Returns the inverse of the `F` probability distribution
 | F.INV.RT                  | Returns the inverse of the `F` probability distribution
@@ -107,13 +107,13 @@ position: 2
 | FREQUENCY                 | Returns a frequency distribution as a vertical array
 | GAMMA                     | Return `Gamma` function value
 | GAMMA.DIST                | Returns the `Gamma` distribution
-| GAMMA.INV                 | Returns the inverse of the `Gamma` cumulative distribution 
+| GAMMA.INV                 | Returns the inverse of the `Gamma` cumulative distribution
 | GAMMALN                   | Returns the natural logarithm of the `Gamma` function
 | GAUSS                     | Returns 0.5 less than the standard normal cumulative distribution
 | GCD                       | Returns the greatest common divisor (GCD)
 | GEOMEAN                   | Returns the geometric mean of a sequence
 | HARMEAN                   | Returns the harmonic mean of a sequence
-| HLOOKUP                   | Looks for a matching value in the first row of a given table, and returns the value of the indicated row 
+| HLOOKUP                   | Looks for a matching value in the first row of a given table, and returns the value of the indicated row
 | HOUR                      | Converts a serial number to an hour
 | IF                        | Returns a value, if a condition is true
 | IFERROR                   | Returns a specified value if a forumla evaluates to an error; otherwise, returns the result of the formula
@@ -213,7 +213,7 @@ position: 2
 | SEC                       | Returns the secant of an angle specified in radians
 | SECH                      | Returns the hyperbolic secant of a given angle specified in radians
 | SECOND                    | Converts a serial number to a second. This function presumes that leap seconds never exist.
-| SERIESSUM                 | Returns the sum of a power series based on the formula 
+| SERIESSUM                 | Returns the sum of a power series based on the formula
 | SIGN                      | Returns the sign of a number
 | SIN                       | Returns the sine of an angle specified in radians
 | SINH                      | Returns the hyperbolic sine of a number
@@ -225,6 +225,7 @@ position: 2
 | STDEV.S                   | Estimates the standard deviation based on a sample
 | STEYX                     | Returns the standard error of the predicted y-value for each x in the regression
 | SUBSTITUTE                | Substitutes new text for old text string   
+| SUBTOTAL                  | Evaluates a function on a range   
 | SUM                       | Sums (adds) the set of numbers, including all numbers in a range
 | SUMIF                     | Sums the values of cells in a range that meet a criteria
 | SUMIFS                    | Sums the values of cells in a range that meet multiple criteria
