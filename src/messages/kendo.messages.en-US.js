@@ -633,6 +633,22 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
       "saveAsType": "Save as type"
     }
   },
+  "exportAsDialog": {
+    "title": "Export...",
+    "labels": {
+      "fileName": "File name",
+      "saveAsType": "Save as type",
+      "exportArea": "Export",
+      "paperSize": "Paper size",
+      "margins": "Margins",
+      "orientation": "Orientation",
+      "print": "Print",
+      "guidelines": "Guidelines",
+      "center": "Center",
+      "horizontally": "Horizontally",
+      "vertically": "Vertically"
+    }
+  },
   "modifyMergedDialog": {
     "errorMessage": "Cannot change part of a merged cell."
   },

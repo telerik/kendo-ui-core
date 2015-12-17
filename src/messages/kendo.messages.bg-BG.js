@@ -72,6 +72,22 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "cancel": "Откажи",
   "remove": "Премахни",
   "okText": "OK",
+  "exportAsDialog": {
+    "title": "Експортирай...",
+    "labels": {
+      "fileName": "Име на файл",
+      "saveAsType": "Запази като",
+      "exportArea": "Експортирай",
+      "paperSize": "Размер на лист",
+      "margins": "Отстояние",
+      "orientation": "Ориентация",
+      "print": "Отпечатай",
+      "guidelines": "Guidelines",
+      "center": "Центрирай",
+      "horizontally": "Хоризонтално",
+      "vertically": "Вертикално"
+    }
+  },
   "formatCellsDialog": {
     "title": "Форматиране",
     "categories": {
