@@ -674,8 +674,6 @@ function pad(number, digits, end) {
         culture = getCulture(culture);
 
         var numberFormat = culture.numberFormat,
-            groupSize = numberFormat.groupSize[0],
-            groupSeparator = numberFormat[COMMA],
             decimal = numberFormat[POINT],
             precision = numberFormat.decimals,
             pattern = numberFormat.pattern[0],
@@ -732,8 +730,6 @@ function pad(number, digits, end) {
             if (isCurrency || isPercent) {
                 //get specific number format information if format is currency or percent
                 numberFormat = isCurrency ? numberFormat.currency : numberFormat.percent;
-                groupSize = numberFormat.groupSize[0];
-                groupSeparator = numberFormat[COMMA];
                 decimal = numberFormat[POINT];
                 precision = numberFormat.decimals;
                 symbol = numberFormat.symbol;
@@ -768,19 +764,7 @@ function pad(number, digits, end) {
                 integer = integer.substring(1);
             }
 
-            value = integer;
-            integerLength = integer.length;
-
-            //add group separator to the number if it is longer enough
-            if (integerLength >= groupSize) {
-                value = EMPTY;
-                for (idx = 0; idx < integerLength; idx++) {
-                    if (idx > 0 && (integerLength - idx) % groupSize === 0) {
-                        value += groupSeparator;
-                    }
-                    value += integer.charAt(idx);
-                }
-            }
+            value = groupInteger(integer, 0, integer.length, numberFormat);
 
             if (fraction) {
                 value += decimal + fraction;
@@ -862,8 +846,6 @@ function pad(number, digits, end) {
         if (isCurrency || isPercent) {
             //get specific number format information if format is currency or percent
             numberFormat = isCurrency ? numberFormat.currency : numberFormat.percent;
-            groupSize = numberFormat.groupSize[0];
-            groupSeparator = numberFormat[COMMA];
             decimal = numberFormat[POINT];
             precision = numberFormat.decimals;
             symbol = numberFormat.symbol;
@@ -953,23 +935,6 @@ function pad(number, digits, end) {
                 negative = false;
             }
 
-            //add group separator to the number if it is longer enough
-            if (hasGroup) {
-                if (integerLength === groupSize && integerLength < decimalIndex - startZeroIndex) {
-                    integer = groupSeparator + integer;
-                } else if (integerLength > groupSize) {
-                    value = EMPTY;
-                    for (idx = 0; idx < integerLength; idx++) {
-                        if (idx > 0 && (integerLength - idx) % groupSize === 0) {
-                            value += groupSeparator;
-                        }
-                        value += integer.charAt(idx);
-                    }
-
-                    integer = value;
-                }
-            }
-
             number = format.substring(0, start);
 
             if (negative && !hasNegativeFormat) {
@@ -1009,6 +974,10 @@ function pad(number, digits, end) {
                 }
             }
 
+            if (hasGroup) {
+                number = groupInteger(number, start, end, numberFormat);
+            }
+
             if (end >= start) {
                 number += format.substring(end + 1);
             }
@@ -1034,6 +1003,38 @@ function pad(number, digits, end) {
 
         return number;
     }
+
+    var groupInteger = function(number, start, end, numberFormat) {
+        var decimalIndex = number.indexOf(numberFormat[POINT]);
+        var groupSizes = numberFormat.groupSize.slice();
+        var groupSize = groupSizes.shift();
+        var integer, integerLength;
+        var idx, parts, value;
+
+        end = decimalIndex !== -1 ? decimalIndex : end + 1;
+
+        integer = number.substring(start, end);
+        integerLength = integer.length;
+
+        if (integerLength >= groupSize) {
+            idx = integerLength;
+            parts = [];
+
+            while (idx > -1) {
+                value = integer.substring(idx - groupSize, idx);
+                if (value) {
+                    parts.push(value);
+                }
+                idx -= groupSize;
+                groupSize = groupSizes.shift() || groupSize;
+            }
+
+            integer = parts.reverse().join(numberFormat[COMMA]);
+            number = number.substring(0, start) + integer + number.substring(end);
+        }
+
+        return number;
+    };
 
     var round = function(value, precision) {
         precision = precision || 0;

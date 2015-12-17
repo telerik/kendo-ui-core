@@ -133,6 +133,25 @@ test("toString adds leading zero if number is shorter than format with group sep
     equal(toString(300, "0,000.##########"), "0,300");
 });
 
+test("toString adds group separator to a leading zeros number", function() {
+    equal(toString(300, "0,000,000.##########"), "0,000,300");
+});
+
+test("toString adds [3,2] group separators when custom format is used", function() {
+    kendo.cultures["custom"] = {
+        calendars: { standard: {}},
+        numberFormat: {
+            decimals: 2,
+            pattern: ["-n"],
+            ",": ",",
+            ".": ".",
+            groupSize: [3,2]
+        }
+    };
+
+    equal(toString(33111110, "#,##,##,##,###.00", "custom"), "3,31,11,110.00");
+});
+
 test("toString method rounds the number if custom format", function() {
     equal(toString(3.235555, "0.##"), "3.24");
     equal(toString(3.235555, "0.#0"), "3.24");
@@ -284,6 +303,21 @@ test("group separators are not applied to numbers with less digits", function() 
 
 test("group separators applied every n digits", function() {
     equal(toString(123456789, "C"), "$123,456,789.00");
+});
+
+test("group separators if more then one are applied to the number", function() {
+    kendo.cultures["custom"] = {
+        calendars: { standard: {}},
+        numberFormat: {
+            decimals: 2,
+            pattern: ["-n"],
+            ",": ",",
+            ".": ".",
+            groupSize: [3,2]
+        }
+    };
+
+    equal(toString(33111110, "n", "custom"), "3,31,11,110.00");
 });
 
 test("P toString", function() {
