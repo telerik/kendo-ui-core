@@ -8,25 +8,25 @@ position: 2
 
 # Drag and Drop
 
-Users can select files by dropping them over the Kendo UI Upload. 
+Users can select files by dropping them over the Kendo UI Upload.
 
-> **Important** 
-> 
+> **Important**
+>
 > The drag-and-drop functionality is only available in [async mode](modes#asynchronous-mode) and requires a [supported browser]({% slug browsersupport_upload_widget %}).
 
 ## Select and Upload Files
 
 ### File Upload
 
-To upload a file, follow the steps below: 
+To upload a file, follow the steps below:
 
-1. Drag a file over the browser window for the drop zone to appear. ![](/web/upload/upload-dd1.png)
-2. When you pass the mouse over the drop zone, it gets highligheted. ![](/web/upload/upload-dd2.png)
-3. Release the file over the drop zone so it adds it to the upload queue. ![](/web/upload/upload-dd3.png)
+1. Drag a file over the browser window for the drop zone to appear. ![](/controls/editors/upload/upload-dd1.png)
+2. When you pass the mouse over the drop zone, it gets highligheted. ![](/controls/editors/upload/upload-dd2.png)
+3. Release the file over the drop zone so it adds it to the upload queue. ![](/controls/editors/upload/upload-dd3.png)
 
 ###  Drop Zone Visibility
 
-By default, the drop zone is not visible. 
+By default, the drop zone is not visible.
 
 The example below demonstrates how to override this behavior by applying the CSS rules.
 

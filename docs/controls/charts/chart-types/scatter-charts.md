@@ -1,6 +1,6 @@
 ---
 title: Scatter Chart
-page_title: Guide for using HTML5 Scatter Charts 
+page_title: Guide for using HTML5 Scatter Charts
 description: How to use Scatter and Scatter Line charts in Kendo UI DataViz.
 ---
 
@@ -55,13 +55,13 @@ Each data point is an array that contains two values - X and Y.
 
 Produces the following Scatter Line chart.
 
- ![Scatter Line Chart](/dataviz/chart/chart-types/chart-scatter-line.png)
+ ![Scatter Line Chart](/controls/charts/chart-types/chart-scatter-line.png)
 
 #### Dash type
 
 The default line type is solid. The following dash styles are available through the "dashType" option:
 
-![Dash Type](/dataviz/chart/chart-types/chart-dash-types.png)
+![Dash Type](/controls/charts/chart-types/chart-dash-types.png)
 
 For example:
 
@@ -77,4 +77,4 @@ For example:
 
 Specifying "scatter" instead of "scatterLine" will remove the connecting lines
 
-![Scatter Chart](/dataviz/chart/chart-types/chart-scatter.png)
+![Scatter Chart](/controls/charts/chart-types/chart-scatter.png)

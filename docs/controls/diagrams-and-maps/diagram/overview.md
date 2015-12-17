@@ -60,7 +60,7 @@ Shapes can be connected using the connect() method:
 
 which results in something like the picture below
 
-![Two shapes connected.](/dataviz/diagram/diagram-connection.png)
+![Two shapes connected.](/controls/diagrams-and-maps/diagram/diagram-connection.png)
 
 ### Layout
 
@@ -68,7 +68,7 @@ Diagram layout consists in an automatic organization of a diagram on the basis h
 
     diagram.randomDiagram();
 
-this will give a random diagram, something like the follwing:
+this will give a random diagram, something like the following:
 
 and upon calling the layout method
 
@@ -161,4 +161,3 @@ If you need more flexibility you can fully control where and how data is display
 
 Note that the function returning a visual has a parameter containing the data item to be displayed.
 The result of this custom data binding would look something like this:
-

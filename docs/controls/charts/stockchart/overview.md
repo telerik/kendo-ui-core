@@ -11,9 +11,9 @@ The Stock Chart is a specialized widget for visualizing stock price and related 
 
 It includes extensive touch support and a navigator pane for easy browsing of extended time periods.
 
-The widget extends the [Chart widget](/dataviz/chart/overview) and shares most if its features. 
+The widget extends the [Chart widget](/dataviz/chart/overview) and shares most if its features.
 
-![Stock Chart](/dataviz/stockchart/stock-chart.png)
+![Stock Chart](/controls/charts/stockchart/stock-chart.png)
 
 Supported series types:
 
@@ -69,7 +69,7 @@ The name of the field is specified using the `dateField` option:
 		dateField: "SampleDate"
 		...
     });
-	
+
 It can be omitted if the field name is "date" (the default value).
 
 > Note: Data points must be sorted in ascending order by date. Consider sorting the data on the server or use the DataSource [sort option](/api/framework/datasource#sort-array--objectdefault).
@@ -153,4 +153,3 @@ Go ahead and define the main and the navigator series:
 			}
 		}
     });
-

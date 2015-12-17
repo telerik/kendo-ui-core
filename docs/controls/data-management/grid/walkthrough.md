@@ -74,7 +74,7 @@ At this point, regardless of the way the grid was created, you will have an empt
 
 For more detailed information on how to create a Grid, refer to [the Grid overview article]({% slug overview_kendoui_grid_widget %}).
 
-## Data Binding 
+## Data Binding
 
 ### Bind to Local Data
 
@@ -97,7 +97,7 @@ The next step is to bind the grid to data. The grid can be bound to local data v
          dataSource: people
      });
 
-![](/web/grid/grid2_1.png)
+![](/data-management/grid/grid2_1.png)
 
 ### Bind to Remote Data
 
@@ -113,7 +113,7 @@ You can bind your grid to remote data by specifying the `dataSource` option. The
              }
          }
     });
-    
+
 For more detailed information on binding the Grid to a remote data source, refer to [this article]({% slug remote_data_binding_grid %})
 
 ### Auto Binding
@@ -124,7 +124,7 @@ The grid is set to automatically bind to data by default, meaning it will cause 
         autoBind: false,
         // other configuration
     });
-    
+
 ## Size
 
 By default, the Grid has no height and expands vertically to fit its contents. For backwards compatibility, a scrollable MVC wrapper of the Grid has a height of 200px for its scrollable data area. You can control the height of your grid by specifying a static pixel value.
@@ -135,11 +135,11 @@ By default, the Grid has no height and expands vertically to fit its contents. F
     });
 
 
-![Grid With Fixed Height And Scrolling](/web/grid/grid3_1.png)
+![Grid With Fixed Height And Scrolling](/data-management/grid/grid3_1.png)
 
 Like all block elements, the Grid expands to a 100% width. Setting CSS width properties for the Grid itself, or for some of its ancestors, can control the width of the Grid. When using hierarchy, the detail template content cannot be wider than the total width of all master columns, unless the detail template is scrollable.
 
-### Set a 100% Height and Auto-Resize 
+### Set a 100% Height and Auto-Resize
 
 > **Important**  
 > This section is applicable to scrollable Grids only.
@@ -150,7 +150,7 @@ Second, subscribe to the browser window's `resize` event and execute the [`resiz
 
     $("#GridID").data("kendoGrid").dataSource.fetch();
 
-The above statements will take care of measuring the total height of the Grid and adjusting the height of the scrollable data area. 
+The above statements will take care of measuring the total height of the Grid and adjusting the height of the scrollable data area.
 
 If you use locked (frozen) columns in your grid, executing `resize` is not necessary.
 
@@ -194,7 +194,7 @@ If you use virtual scrolling and the Grid is initialized while hidden, you must 
 
 When the scrolling functionality is enabled, which is the default case except for the Grid MVC wrapper, the `table-layout` style of the Grid tables is set to `fixed`. This means that all columns without a defined width will appear equally wide, no matter what their content is. All set column widths will be obeyed no matter what the cell content is. If the content cannot fit, it will be either wrapped, or clipped.
 
-When the scrolling functionality is disabled, the `table-layout` style is set to `auto`. This means that if not explicitly set, the column widths are determined by the browser and cell content. The browser will try to obey all set column widths, but may readjust some columns depending on their content. 
+When the scrolling functionality is disabled, the `table-layout` style is set to `auto`. This means that if not explicitly set, the column widths are determined by the browser and cell content. The browser will try to obey all set column widths, but may readjust some columns depending on their content.
 
 If needed, a fixed table layout can be applied to a non-scrollable Grid:
 
@@ -226,12 +226,12 @@ If the Grid has no fixed width and resizes with the browser window, you can appl
     {
         min-width: 800px;
     }
-    
+
 Using the `Grid ID` (Name) in the above selectors is optional, so that the styles are applied to a particular Grid instance only.
-    
+
 ### Use a Wide Non-Scrollable Grid
 
-Basically, the Grid is a `<table>` element inside a `<div>` one. Tables can expand horizontally beyond 100% to enclose their content, while `<div>` elements lack this beahvior. As a result, if the scrolling functionality of the Grid is disabled, the widget `<table>` may overflow the wrapper `<div>` and lead to a visual glitch. 
+Basically, the Grid is a `<table>` element inside a `<div>` one. Tables can expand horizontally beyond 100% to enclose their content, while `<div>` elements lack this beahvior. As a result, if the scrolling functionality of the Grid is disabled, the widget `<table>` may overflow the wrapper `<div>` and lead to a visual glitch.
 
 Possible solutions for table overflowing are:
 
@@ -254,7 +254,7 @@ You can control vertical and horizontal scrolling independently.
 
 When scrolling is enabled, the Grid renders two tables - one for the header area and one for the scrollable data area. Take the two tables into account when you need to manually make Javascript or CSS updates to the Grid tables.
 
-###### Example 
+###### Example
 
     <div class="k-widget k-grid">
         <div class="k-grid-header">
@@ -329,7 +329,7 @@ The `#GridID` allows the application of styles only to a particular Grid instanc
 
 ### Locked Columns
 
-Locked (frozen) columns allow some columns to be visible at all times during horizontal Grid scrolling. 
+Locked (frozen) columns allow some columns to be visible at all times during horizontal Grid scrolling.
 
 The Grid allows you to freeze/lock columns on one side of the table. In order to work properly, the feature has the following requirements to the Grid configuration:
 
@@ -339,7 +339,7 @@ The Grid allows you to freeze/lock columns on one side of the table. In order to
 * All columns must have explicit pixel widths set.
 * The total width of all locked columns must be equal to or less than the Grid width minus three times the scrollbar width.
 
-The above ensures that at least one non-locked column is always visible and horizontal scrolling of the non-locked columns is possible. Note that the horizontal scrollbar will not appear if there is not enough horizontal space for it. 
+The above ensures that at least one non-locked column is always visible and horizontal scrolling of the non-locked columns is possible. Note that the horizontal scrollbar will not appear if there is not enough horizontal space for it.
 
 The row template and detail features are not supported in combination with column locking.
 
@@ -352,7 +352,7 @@ Enable selection in the Grid simply by setting the `selectable` option to `true`
             // other configuration
          });
 
-![Grid With Row Selection Enabled](/web/grid/grid4_1.png)
+![Grid With Row Selection Enabled](/data-management/grid/grid4_1.png)
 
 You can also set the `selectable` option to any of the following values:
 
@@ -395,7 +395,7 @@ Enable a multiple cell selection within the Grid:
 When the multiple selection is enabled, it is possible to select multiple rows/cells by dragging the mouse cursor to select them similar to the way you would select a block of text.
 
 > **Importnat**  
-> * Selection is not persisted when the Grid is rebound, i.e. when paging, filtering, sorting, editing, or virtual scrolling occurs. You can achieve this by a custom implementation, as shown in the help article on [how to persist a row selection while paging](/web/grid/how-to/Selection/persist-row-selection-while-paging).
+> * Selection is not persisted when the Grid is rebound, i.e. when paging, filtering, sorting, editing, or virtual scrolling occurs. You can achieve this by a custom implementation, as shown in the help article on [how to persist a row selection while paging]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %}).
 >
 > * Selection performance may decrease when the page size is too large, or if no paging is used, and the Grid is rendering hundreds or thousands of items. This behavior is most frequently seen in Internet Explorer. Grouping, hierarchy, and frozen columns also have a negative impact on the selection performance, because these features make the HTML output of the Grid more complex. Therefore, it is recommended to use paging and a reasonable page size.
 
@@ -428,9 +428,9 @@ Once grouping is enabled, a new area will be exposed in the header informing you
          // other configuration
     });
 
-![Grid With Grouping Enabled](/web/grid/grid5_1.png)
+![Grid With Grouping Enabled](/data-management/grid/grid5_1.png)
 
-![Grid Grouped By Last Name](/web/grid/grid6_1.png)
+![Grid Grouped By Last Name](/data-management/grid/grid6_1.png)
 
 You can additionally sort the grouped content by clicking on the grouping tab. In the example above, click on **lastName** to sort the grouped data in descending order. Click it again to toggle to ascending order. Each of the individual groups themselves can be toggled from expanded to collapsed by clicking on the arrow next to the respective header grouping.
 
@@ -471,7 +471,7 @@ Sorting is supported in two formats: either single-column sorting, or multi-colu
          // other configuration
     });
 
-![Grid With Sorting Enabled](/web/grid/grid7_1.png)
+![Grid With Sorting Enabled](/data-management/grid/grid7_1.png)
 
 The sortable attribute also has the following settings:
 
@@ -524,7 +524,7 @@ To get a Grid table row by the data item ID, follow the steps below:
     var rowModel = gridObject.dataSource.get(10249); // get method of the Kendo UI DataSource object
     var modelUID = rowModel.get("uid"); // get method of the Kendo UI Model object
     var tableRow = $("[data-uid='" + modelUID + "']"); // the data-uid attribute is applied to the desired table row element. This UID is rendered by the Grid automatically.
-    
+
 #### Add custom rows when no records are loaded
 
 When the datasource does not return any data, for example, as a result of filtering, a table row with some user-friendly message can be manually added:
@@ -540,10 +540,10 @@ When the datasource does not return any data, for example, as a result of filter
     }
 
 For more detailed information on the layout options, refer to [the article about the appearance of the Grid]({% slug appearance_kendoui_grid_widget %}).    
-    
+
 ## Templates
 
-Using templates within a script tag, or within the template option on the column object if the Grid is initialized from a `<div>` element, can format each cell in the Grid. 
+Using templates within a script tag, or within the template option on the column object if the Grid is initialized from a `<div>` element, can format each cell in the Grid.
 
 The example below demonstrates how to use a template to format the email address as a hyperlink by using a template, declared in a script block:
 
@@ -570,7 +570,7 @@ This is then specified as a template for each row by passing it in to the `rowTe
 
 Now the email address is an interactive hyperlink, which will open a new email message.
 
-![Grid With Row Template](/web/grid/grid8_1.png)
+![Grid With Row Template](/data-management/grid/grid8_1.png)
 
 ## Printing
 
@@ -585,7 +585,7 @@ When the Grid is scrollable, which is a default option except for the Grid MVC w
     <script type="text/x-kendo-template" id="toolbar-template">
         <button type="button" class="k-button" id="printGrid">Print Grid</button>
     </script>
-    
+
 
 ###### JavaScript
 

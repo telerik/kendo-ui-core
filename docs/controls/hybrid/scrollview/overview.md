@@ -56,8 +56,8 @@ The widget supports two operation modes - *standard* and *data bound*. The first
 ### Initialize mobile ScrollView bound to remote data using data attributes.
 
     <div data-role="view" data-stretch="true">
-        <div data-role="scrollview" 
-            data-source="dataSource" 
+        <div data-role="scrollview"
+            data-source="dataSource"
             data-template="scrollview-template"
             data-content-height="120px">
         </div>
@@ -172,7 +172,7 @@ When the Kendo Mobile ScrollView is in data bound mode, it will generate its pag
 When DataSource is populated with data the widget will use its `template` to render the pages' content.
 **Specifying the template is mandatory**, if it is missing the widget will not be able to render the content.
 
-By default the widget displays one data record per page. There is an opportunity for displaying multiple data records on a single page by setting the `itemsPerPage` configuration option. 
+By default the widget displays one data record per page. There is an opportunity for displaying multiple data records on a single page by setting the `itemsPerPage` configuration option.
 *In such case, the specified amount of data records will be passed to the template and it is responsibily of the developer to handle the way they will be displayed.*
 
 > **Important:** In order ensure smooth scrolling the **`pageSize` of the DataSource should be 6 times `itemsPerPage` amount** or higher. For example, if `itemsPerPage` is set to 4, then the `pageSize` must be 24 (4*6) or higher.
@@ -238,8 +238,8 @@ One possible approach is to use JavaScript logic (for loop) inside the template.
 #### Template with JavaScript for loop
 
     <div id="home" data-role="view" data-model="viewModel">
-        <div id="scrollview" data-role="scrollview" 
-            data-source="ds" 
+        <div id="scrollview" data-role="scrollview"
+            data-source="ds"
             data-template="tmpl"
             data-items-per-page="3">
         </div>
@@ -274,7 +274,7 @@ One possible approach is to use JavaScript logic (for loop) inside the template.
 
 ### Pager overlay
 
-![ScrollView pager overlay](/mobile/scrollview/pager-overlay.png)
+![ScrollView pager overlay](/controls/hybrid/scrollview/pager-overlay.png)
 
 To activate the feature add `km-scrollview-overlay` class to the ScrollView element.
 

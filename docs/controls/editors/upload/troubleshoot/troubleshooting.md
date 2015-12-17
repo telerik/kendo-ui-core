@@ -2,7 +2,7 @@
 title: Common Issues
 page_title: Common Issues | Kendo UI Upload Widget
 description: "Learn how to deal with issues you may encounter while using the Kendo UI Upload widget."
-previous_url: /web/upload/troubleshooting
+previous_url: /controls/editors/upload/troubleshooting
 slug: troubleshooting_upload_widget
 position: 1
 ---
@@ -15,11 +15,11 @@ position: 1
 
 Kendo UI Upload uses an opacity filter to overlay the default file input's **Select** button. This filter is implemented as an ActiveX control in Internet Explorer 8 versions and older. As such, it is subject to security settings and can be disabled. Below is the sample image of an affected component:
 
-![](/web/upload/upload-activex.png)
+![](/controls/editors/upload/upload-activex.png)
 
 **Solution** In Internet Explorer set the following option to **Enable**: **Internet Options** > **Security** > **Internet** (or Local intranet) > **Custom Level** > **Binary and script behaviors**.
 
-![](/web/upload/upload-ie-script-behaviors.png)
+![](/controls/editors/upload/upload-ie-script-behaviors.png)
 
 ## Performance Issues
 

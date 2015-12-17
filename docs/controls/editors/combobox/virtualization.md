@@ -8,13 +8,13 @@ position: 3
 
 # Virtualization
 
-[Kendo UI AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index), [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index), [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index) and [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) widgets support UI and data virtualization which is useful when  you want to display large data sets. The UI virtualization technique uses a fixed amount of list items in the widget's pop-up list regardless of the data set size. When the list is scrolled, the widget will reuse the existing items to display the relevant data, instead of creating new ones. 
+[Kendo UI AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index), [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index), [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index) and [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) widgets support UI and data virtualization which is useful when  you want to display large data sets. The UI virtualization technique uses a fixed amount of list items in the widget's pop-up list regardless of the data set size. When the list is scrolled, the widget will reuse the existing items to display the relevant data, instead of creating new ones.
 
 ## Data and UI Virtualization
 
 The virtualization feature combines data and User Interface (UI) virtualization in order to retrieve and display only a subset of the whole data set.
 
-### Data 
+### Data
 
 In the context of the widget, data virtualization is accomplished by using the `DataSource` paging functionality and remote data retrieval. Thus, the widget retrieves only a concrete data page instead of requesting the whole data set at once. The `DataSource` paging should be configured correctly in order to ensure the proper work of the widgets. Please refer to the [server paging](/api/javascript/data/datasource#configuration-serverPaging) configuration for more details.
 
@@ -150,7 +150,7 @@ On initial load, the widget will check whether the selected value is present in 
 7. The `service 2` returns the corresponding 25th page.
 8. The `dataSource` changes the page to `25` and displays the items showing the selected item too.
 
-![Virtualization process](/web/combobox/virtualization.png)
+![Virtualization process](/controls/editors/combobox/virtualization.png)
 
 ### `valueMapper` Return
 

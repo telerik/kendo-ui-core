@@ -108,7 +108,7 @@ By default the NavBar View Title is visible only in iOS and hidden in the rest o
 
 ### Color schemes
 
-![NavBar different color schemes](/mobile/navbar/NavBar.png)
+![NavBar different color schemes](/controls/hybrid/navbar/NavBar.png)
 
 There are three predefined color schemes - light, dark (default) and accent. To apply different than the default color scheme set `km-light` or `km-accent` class.
 

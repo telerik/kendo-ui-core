@@ -30,7 +30,7 @@ The original `input` element is kept in the DOM. The `value` attribute element g
 
 The default pop-up contains an HSV (hue, saturation, value) selector and looks like this:
 
-![HSV picker](/web/colorpicker/hsv-dropdown.png)
+![HSV picker](/controls/editors/colorpicker/hsv-dropdown.png)
 
 ### Simple Color Picker
 
@@ -46,7 +46,7 @@ Create a simple color picker in the following way:
 
 This renders a basic ColorPicker that contains 20 colors:
 
-![Simple picker with basic palette](/web/colorpicker/simple-basic.png)
+![Simple picker with basic palette](/controls/editors/colorpicker/simple-basic.png)
 
 ### Web-Safe Color Palette
 
@@ -62,7 +62,7 @@ Create the Web-safe color palette in the following way:
 
 This renders the 216-color "web-safe" palette that looks like this:
 
-![Simple picker with web-safe palette](/web/colorpicker/simple-web.png)
+![Simple picker with web-safe palette](/controls/editors/colorpicker/simple-web.png)
 
 ### Custom Colors
 

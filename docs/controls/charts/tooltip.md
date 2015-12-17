@@ -9,7 +9,7 @@ position: 4
 
 The Chart can display details about the data point that the mouse is currently hovering. The border of this tooltip matches the color of the series.
 
-![](/dataviz/chart/chart-tooltip.png)
+![](/controls/charts/chart-tooltip.png)
 
 ## Configuration
 
@@ -82,4 +82,3 @@ For example:
              template: "${category} - ${value}"
          }
     });
-

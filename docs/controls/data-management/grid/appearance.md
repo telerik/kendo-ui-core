@@ -8,7 +8,7 @@ position: 5
 
 # Appearance
 
-[Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) supports various options for you to apply to your project by setting its layout and appearance that best match your needs. 
+[Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) supports various options for you to apply to your project by setting its layout and appearance that best match your needs.
 
 ## Scrolling
 
@@ -59,7 +59,7 @@ The `#GridID` allows the application of styles only to a particular Grid instanc
 
 Here is an enhanced example, which shows how to hide or show the scrollbar, depending on the number of Grid rows.
 
-[Hide the Grid's vertical scrollbar when not needed](/web/grid/how-to/Layout/hide-scrollbar-when-not-needed)
+[Hide the Grid's vertical scrollbar when not needed]({% slug howto_hide_vertical_scrollbar_grid %})
 
 ### Restore Scroll Positions
 
@@ -148,14 +148,14 @@ Due to height-related browser limitations, which cannot be avoided, virtual scro
 When using mobile touch devices, which do not have a visible scrollbar that can be grabbed and dragged, virtual scrolling combined with a large number of data items, e.g. thousands, can impose a challenge to easily acccess all table rows, as this will require a great deal of touch scrolling. On the other hand, using virtual scrolling with a very small number of items, e.g. less than two hundred, does not make much sense either. Virtual scrolling on touch devices relies on drag and drop events, which are slower than native scrolling, so inferior scrolling performance may be noticable.
 
 In the cases listed above, when using virtual scrolling is not supported or recommended, revert to standard paging or non-virtual scrolling without paging, depending on the number of data items.
-    
+
 ## Width
 
-By default, the Grid has no width and behaves like a block-level element. This means that it expands to the width of its parent element. 
+By default, the Grid has no width and behaves like a block-level element. This means that it expands to the width of its parent element.
 
-If you enable the scrolling functionality of the Grid and the sum of all column widths is greater than the width of the Grid, a horizontal scrollbar will appear. 
+If you enable the scrolling functionality of the Grid and the sum of all column widths is greater than the width of the Grid, a horizontal scrollbar will appear.
 
-If you disable the scrolling functionality of the Grid and the columns are not able to fit, they will overflow the Grid `<div>`. This results in the widget's right border passing through the data cells. The reason for this is that, basically, the Grid is a `<table>` element inside a `<div>` one. Tables can expand horizontally beyond 100% to enclose their content, while `<div>` elements lack this beahvior. 
+If you disable the scrolling functionality of the Grid and the columns are not able to fit, they will overflow the Grid `<div>`. This results in the widget's right border passing through the data cells. The reason for this is that, basically, the Grid is a `<table>` element inside a `<div>` one. Tables can expand horizontally beyond 100% to enclose their content, while `<div>` elements lack this beahvior.
 
 Possible solutions for table overflowing are:
 
@@ -179,7 +179,7 @@ It makes sense to set a height to the Grid only if its scrolling is enabled.
 
 When the Grid has a set height, it calculates the appropriate height of its scrollable data area, so that the sum of the header rows, filter row, data, footer, and pager is equal to the expected Grid height. That is why, if the Grid height is changed via Javascript after you create the widget, you must call the [`resize` method of the Grid](/using-kendo-in-responsive-web-pages) afterwards. In this way, the Grid recalculates the height of its data area.
 
-![Grid With Fixed Height And Scrolling](/web/grid/grid3_1.png)
+![Grid With Fixed Height And Scrolling](/data-management/grid/grid3_1.png)
 
 In some special scenarios, it is possible to set a height style to the scrollable data area of the Grid, either via Javascript, or external CSS, which is a `div.k-grid-content` element. In this case, do not set height to the Grid.
 
@@ -197,7 +197,7 @@ It is possible to make the Grid expand and shrink vertically according to the nu
 
 You can use the `.k-grid` class instead of the `GridID` to target all widget instances.
 
-### Set a 100% Height and Auto-Resize 
+### Set a 100% Height and Auto-Resize
 
 > **Important**  
 > This section is applicable to scrollable Grids only.
@@ -223,13 +223,13 @@ The `resize` method will work for Kendo UI versions delivered after the Kendo UI
         gridElement.children(".k-grid-content").height(newHeight - otherElementsHeight);
     });
 
-The [help article on how to resize the Grid when the window is resized](/web/grid/how-to/Layout/resize-grid-when-the-window-is-resized) contains a runnable example of the discussed scenario.
+The [help article on how to resize the Grid when the window is resized]({% slug howto_resize_whenthe_windowis_resized_grid %}) contains a runnable example of the discussed scenario.
 
 ### Loading Indicator
 
 The Grid internally uses the [`kendo.ui.progress`](/api/javascript/ui/ui#methods-progress) method to display a loading overlay during remote `read` requests. If the scrolling Grid functionality is disabled, the overlay is displayed over the whole Grid. If scrolling is enabled, the overlay is displayed over the scrollable data area.
 
-If the scrolling Grid functionality is enabled and the Grid has no height, the data area will initially have a zero height, which will make the loading overlay invisible during the first remote request. This issue can be resolved in two ways: either set a Grid height, or apply a `min-height` style to the `div.k-grid-content` element. For more information, refer to the [the example of setting the height within certain limits](/web/grid/appearance#allow-the-grid-height-to-vary-within-certain-limits)).
+If the scrolling Grid functionality is enabled and the Grid has no height, the data area will initially have a zero height, which will make the loading overlay invisible during the first remote request. This issue can be resolved in two ways: either set a Grid height, or apply a `min-height` style to the `div.k-grid-content` element. For more information, refer to the [the example of setting the height within certain limits](#let-the-height-vary-within-limits).
 
 ## Columns
 
@@ -274,7 +274,7 @@ If the Grid has no fixed width and resizes with the browser window, you can appl
     {
         min-width: 800px;
     }
-    
+
     /* How to apply minimum width to the Grid tables when scrolling is enabled and nested tables (hierarchy) ARE USED */
 
     #GridID .k-grid-header-wrap > table, /* header table */
@@ -344,7 +344,7 @@ In some cases it may be possible to delay the initialization of the Grid, or cha
 * [Initialize the Grid inside the PanelBar]({% slug initialize_thegrid_panelbar_widget %})
 * [Initialize the Grid inside the TabStrib]({% slug initialize_thegrid_tabstrip_widget %})
 * [Initialize the Grid inside the Window]({% slug initialize_thegrid_window_widget %})
-    
+
 ## See Also
 
 Other articles on Kendo UI Grid:

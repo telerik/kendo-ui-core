@@ -10,13 +10,13 @@ position: 2
 
 By default the **Insert Image** tool opens a simple dialog which allows you to type in or paste the URL of an image and, optionally, specify a tooltip.
 
-![Insert Image Dialog](/web/editor/editor-insert-image.png)
+![Insert Image Dialog](/controls/editors/editor/editor-insert-image.png)
 
 ## Overview
 
 From Q3 2012 release onwards the Editor supports a new way of picking an image by browsing a list of predefined files and directories. Uploading new images is also supported.
 
-![Image Browser Dialog](/web/editor/editor-image-browser.png)
+![Image Browser Dialog](/controls/editors/editor/editor-image-browser.png)
 
 The image browser needs a server-side implementation to retrieve and upload the files and directories.
 
@@ -40,15 +40,15 @@ The image browser tool can be configured through the [`imagebrowser` configurati
              }
          });
       });
-      
+
 The default requests and responses for the `create/read/destroy/upload` operations are as follows:
- 
+
 - `create` - makes a request for the creation of a directory with the parameters below and does not expect a response:
 
         { "name": "New folder name", "type": "d", "path": "foo/" }
 
 - `read` - sends the `path` parameter to specify the path which is browsed and expects a file listing in the format below:
-   
+
         [
             { "name": "foo.png", "type": "f", "size": 73289 },
             { "name": "bar.jpg", "type": "f", "size": 15289 },

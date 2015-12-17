@@ -110,18 +110,18 @@ To do so, the navigational widget should have `data-rel="drawer"` and `href` att
 
 ### Nested ListView with different color scheme
 
-![Nested ListView with different color scheme](/mobile/drawer/ListView-in-Drawer.png)
+![Nested ListView with different color scheme](/controls/hybrid/drawer/ListView-in-Drawer.png)
 
 The ListView has different styling when placed in a Drawer.
 
 ### Nested Vertical TabStrip
 
-![Nested Vertical TabStrip](/mobile/drawer/TabStrip-in-Drawer.png)
+![Nested Vertical TabStrip](/controls/hybrid/drawer/TabStrip-in-Drawer.png)
 
 To activate this feature set `km-vertical-tabstrip` class to the TabStrip placed in a Drawer.
 
 #### Nested Vertical TabStrip example
-	
+
 	<div data-role="drawer">
         <div data-role="tabstrip" class="km-vertical-tabstrip">
             <!-- ... -->

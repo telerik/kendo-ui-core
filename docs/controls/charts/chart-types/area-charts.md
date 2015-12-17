@@ -40,14 +40,14 @@ Axes are configured through "categoryAxis" and "valueAxis". Multiple value axes 
 
 This configuration produces the following area chart:
 
-![Area Chart](/dataviz/chart/chart-types/chart-area.png)
+![Area Chart](/controls/charts/chart-types/chart-area.png)
 
 ## Line Style
 
-The area chart supports rendering the lines between the points with different styles. The supported styles are "normal", "step" and "smooth" and can be set with the [line.style](/api/dataviz/chart#configuration-series.line.style) option. The default style is "normal" and will produce a straight line between the data points. When the style is set to "step", the data points will be connected only with vertical and horizontal lines. This style can be used to indicate that the value is constant between the changes. 
- 
-![Step Line Chart](/dataviz/chart/chart-types/chart-step-area.png)
+The area chart supports rendering the lines between the points with different styles. The supported styles are "normal", "step" and "smooth" and can be set with the [line.style](/api/dataviz/chart#configuration-series.line.style) option. The default style is "normal" and will produce a straight line between the data points. When the style is set to "step", the data points will be connected only with vertical and horizontal lines. This style can be used to indicate that the value is constant between the changes.
 
-When the style is set to "smooth", the chart will display a fitted curve through the data points. The "smooth" style can be used if the data requires to be displayed with a curve or you just wish to connect the points with smooth instead of straight lines. 
+![Step Line Chart](/controls/charts/chart-types/chart-step-area.png)
 
-![Smooth Line Chart](/dataviz/chart/chart-types/chart-smooth-area.png)
+When the style is set to "smooth", the chart will display a fitted curve through the data points. The "smooth" style can be used if the data requires to be displayed with a curve or you just wish to connect the points with smooth instead of straight lines.
+
+![Smooth Line Chart](/controls/charts/chart-types/chart-smooth-area.png)

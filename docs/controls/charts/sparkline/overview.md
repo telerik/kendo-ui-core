@@ -200,7 +200,7 @@ For example:
 
 Produces the following sparkline. Note that values are displayed as-is:
 
-![Sparkline with date category axis](/dataviz/sparkline/sparkline-category-date-axis.png)
+![Sparkline with date category axis](/controls/charts/sparkline/sparkline-category-date-axis.png)
 
 Now change the base unit to "years":
 
@@ -217,7 +217,7 @@ Now change the base unit to "years":
 
 Notice how the sparkline now displays the maximum value for each year:
 
-![Sparkline with grouped date category axis](/dataviz/sparkline/sparkline-category-date-axis-grouped.png)
+![Sparkline with grouped date category axis](/controls/charts/sparkline/sparkline-category-date-axis-grouped.png)
 
 The aggregate function can be changed for each series:
 
@@ -283,4 +283,3 @@ For example:
         }
     });
     </script>
-

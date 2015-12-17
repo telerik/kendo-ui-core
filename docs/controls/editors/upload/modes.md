@@ -14,7 +14,7 @@ Kendo UI Upload supports two modes of operation: synchronous and asynchronous.
 
 From a developer's perspective, a Kendo UI Upload in a synchronous mode behaves much like a regular file input. The selected files are uploaded upon form submission. Users benefit from the opportunity to select a variable number of files. This feature does not require that the browser supports a multiple file selection.
 
-![](/web/upload/upload-sync.png)
+![](/controls/editors/upload/upload-sync.png)
 
 The Upload is initialized from an existing file input placed in a form.
 
@@ -49,7 +49,7 @@ For more information on how to handle the uploaded files, refer to the documenta
 
 In this mode Kendo UI Upload requires dedicated server handlers to store and remove uploaded files. Files are uploaded immediately or, optionally, after user confirmation. The upload request is executed out-of-band without interrupting the page flow.
 
-![](/web/upload/upload-async.png)
+![](/controls/editors/upload/upload-async.png)
 
 The asynchrnous mode is implemented using the [HTML5 File API](https://en.wikipedia.org/wiki/HTML5_File_API). The upload will gracefully degrade and continue to function in legacy browsers using a hidden `iframe`.
 
@@ -72,7 +72,7 @@ To implement the asynchronous mode of operation, follow the steps below:
             removeField: "fileNames[]"
         }
     });
-    
+
 The array syntax for the field name is used to hint the upload handler to treat `"photos"` as an array.
 
 ### Save Handler

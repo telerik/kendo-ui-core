@@ -76,7 +76,7 @@ then they'll be aggregated to display a single value.
 
 Note that the dates match the source:
 
-![Chart with date category axis](/dataviz/chart/chart-category-date-axis.png)
+![Chart with date category axis](/controls/charts/chart-category-date-axis.png)
 
 #### Example: Date series with grouping by year
 
@@ -116,7 +116,7 @@ Note that the dates match the source:
 
 Notice how the chart now displays the maximum value for each year:
 
-![Chart with grouped date category axis](/dataviz/chart/chart-category-date-axis-grouped.png)
+![Chart with grouped date category axis](/controls/charts/chart-category-date-axis-grouped.png)
 
 ### Aggregates
 
@@ -332,4 +332,3 @@ The [`labels.format` property](/api/dataviz/chart#xAxis.labels.format) property 
 
 The global KendoUI culture is used for formatting the dates.
 It can be overriden by setting [`labels.culture` property](/api/dataviz/chart#xAxis.labels.culture).
-

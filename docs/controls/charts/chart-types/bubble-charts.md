@@ -54,4 +54,4 @@ For example, let's visualize the following data points:
 
 This produces the following chart:
 
- ![Bubble Chart](/dataviz/chart/chart-types/chart-bubble.png)
+ ![Bubble Chart](/controls/charts/chart-types/chart-bubble.png)

@@ -9,7 +9,7 @@ position: 4
 
 The Chart can display the metadata of a point or a specific part of the axis.
 
-![](/dataviz/chart/chart-notes.png)
+![](/controls/charts/chart-notes.png)
 
 ## Configuration
 

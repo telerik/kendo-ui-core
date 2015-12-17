@@ -12,7 +12,7 @@ Kendo UI Mobile provides automatic platform dependent styling of form elements w
 *   Inputs of types **text**, **password**, **search**, **url**, **email**, **number**, **tel**, **file**(not in iOS), **date**, **time** **month** and **datetime**;
 *   Single **select** elements or Kendo DropDownList replacements.
 
-> **Important:** To make use of native-like forms layout and to properly align widgets without additional styling, it is advisable to build and organize your mobile forms using [Kendo UI Mobile ListView](/mobile/listview/overview). 
+> **Important:** To make use of native-like forms layout and to properly align widgets without additional styling, it is advisable to build and organize your mobile forms using [Kendo UI Mobile ListView](/mobile/listview/overview).
 
 The input elements with a picker use the native one from the current platform if it is supported.
 HTML5 form elements are fully functional only on the following platforms: iOS 5.x+, Android 4.x+, BlackBerry 6.x+, BlackBerry Playbook 1.x+.
@@ -108,19 +108,19 @@ and if older than Q3 2012, this rule instead:
 To activate this feature set `km-required` class to the label. This class renders asterisk symbol right after the label content.
 
 #### Required indicator example
-	
+
 	<label class="km-required km-label-above">First Name
         <input value="Eduardo" type="text" />
     </label>
 
 ### Inline fields
 
-![Inline fields](/mobile/forms/inline.png)
+![Inline fields](/controls/hybrid/forms/inline.png)
 
 There could be more than one input in a row. This outcome resuires **explicit width** and `km-inline-field` class set to the label.
 
 #### Inline fields example
-		
+
     <label class="km-inline-field km-label-above" style="width: 200px;">
     	Phone Number
     	<input type="text" value="+359 555 5555" />
@@ -135,12 +135,12 @@ There could be more than one input in a row. This outcome resuires **explicit wi
 
 ### Button as Legend
 
-![Button as Legend](/mobile/forms/button-as-legend.png)
+![Button as Legend](/controls/hybrid/forms/button-as-legend.png)
 
 Legend tags can have buttons inside. To achieve this outcome set `km-legend-button` class.
 
 #### Button as Legend example
-	
+
 	<fieldset>
         <legend><a href="#" class="km-legend-button">+ Email</a></legend>
         <input type="text" value="barista@telerik.com" />
@@ -148,12 +148,12 @@ Legend tags can have buttons inside. To achieve this outcome set `km-legend-butt
 
 ### Fieldset + Legend
 
-![Fieldset + Legend](/mobile/forms/fieldset-legend.png)
+![Fieldset + Legend](/controls/hybrid/forms/fieldset-legend.png)
 
 Legend can also be used as a first level Label.
 
 #### Fieldset + Legend example
-	
+
 	<fieldset>
         <legend>Volume</legend>
         <input data-role="slider" id="slider" max="100" class="km-full-width-slider" />
@@ -161,43 +161,43 @@ Legend can also be used as a first level Label.
 
 ### Label icons
 
-![Label icons](/mobile/forms/label-icons.png)
+![Label icons](/controls/hybrid/forms/label-icons.png)
 
 Labels can be icons only. To get this outcome set `km-icon-label` and **.km- + data-icon name** classes to the label.
 
 #### Label icon example
-	
+
 	<label class="km-icon-label k-i-calendar">
         <input value="Meeting" type="text" />
     </label>
 
 ### Labels above fields
 
-![Labels above fields](/mobile/forms/labels-above.png)
+![Labels above fields](/controls/hybrid/forms/labels-above.png)
 
 Labels can be positioned above the fields. To achieve this outcome set `km-label-above` class to the label.
 
 #### Labels above fields example
-	
+
     <label class="km-label-above">First Name
     	<input value="Eduardo" type="text" />
 	</label>
 
 ### Standalone Checkboxes and RadioButtons
 
-![Standalone Checkboxes and RadioButtons](/mobile/forms/standalone-checksandradios.png)
+![Standalone Checkboxes and RadioButtons](/controls/hybrid/forms/standalone-checksandradios.png)
 
 Nova theme provides customized presentation for standalone Checkboxes / RadioButtons with `km-checkbox` / `km-radio` classes. At this time these two types of input cannot be styled with CSS only - therefore the standalone Checkboxes / RadioButtons appearance relies that the `<input>` element is immediately followed by a `<label>` element with respectively `km-checkbox-label` / `km-radio-label` classes.
 
 #### Standalone Checkboxes example
-	
+
     <input type="checkbox" class="km-checkbox" id="chocolate" />
     <label class="km-checkbox-label" for="chocolate">Chocolate</label>
     <input type="checkbox" class="km-checkbox" id="ice-cream" checked="checked" />
     <label class="km-checkbox-label" for="ice-cream">Ice cream</label>
 
 #### Standalone RadioButtons example
-	
+
     <input type="radio" class="km-radio" name="sex" id="sex1" checked="checked"/>
     <label class="km-radio-label" class="km-label" for="sex1" >Male</label>
     <input type="radio" class="km-radio" name="sex" id="sex2"/>

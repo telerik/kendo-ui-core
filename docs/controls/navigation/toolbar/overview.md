@@ -9,11 +9,11 @@ position: 1
 
 # ToolBar Overview
 
-The [Kendo UI ToolBar widget](http://demos.telerik.com/kendo-ui/toolbar/index) is designed to hold different types of controls such as buttons, button groups, toggle buttons, split buttons, and other customized elements. 
+The [Kendo UI ToolBar widget](http://demos.telerik.com/kendo-ui/toolbar/index) is designed to hold different types of controls such as buttons, button groups, toggle buttons, split buttons, and other customized elements.
 
 The ToolBar consists of three main areas: ToolBar wrapper, overflow anchor, and command overflow popup. The wrapper holds all commands that can be placed within the available container width. The ones for which there is no space to fit in are moved to the command overflow popup.
 
-![ToolBar areas](/web/toolbar/toolbar-areas.png)
+![ToolBar areas](/controls/navigation/toolbar/toolbar-areas.png)
 
 ## Getting Started
 

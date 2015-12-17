@@ -109,7 +109,7 @@ The mobile pane in which the adaptive Grid is placed will not automatically expa
     </script>
 
 ### Use `height` Option    
-    
+
 ###### Example
 
     <div id="foo" data-role="view" data-init="onInit">
@@ -144,7 +144,7 @@ The mobile pane in which the adaptive Grid is placed will not automatically expa
 
 The column resizing feature on touch screen devices is triggered when the user holds a finger on the respective column header. When the resizing icon appears, the user will be able to resize the column by dragging.
 
-![](/web/grid/adaptive-resizing-icon.png)
+![](/data-management/grid/adaptive-resizing-icon.png)
 
 ## See Also
 
