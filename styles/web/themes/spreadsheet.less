@@ -5,6 +5,9 @@
 @spreadsheet-selection-background: fadeout(@selected-background, 80%);
 @spreadsheet-selection-border: @selected-background;
 @spreadsheet-header-selection-border: fadein(@spreadsheet-selection-background, 80%);
+@spreadsheet-page-orientation-background: @normal-background;
+@spreadsheet-page-orientation-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 14%), 0.5);
+@spreadsheet-page-orientation-gradient: @normal-gradient;
 
 .k-spreadsheet-row-header,
 .k-spreadsheet-column-header {
@@ -177,19 +180,21 @@
     }
 
     .k-edit-field > input[type="radio"]:checked+.k-orientation-label {
-        background: @accent;
-        color: @base;
+        .composite-background(@spreadsheet-page-orientation-gradient);
+        background-color: @accent;
+        color: lighten(@selected-text-color, 12%);
     }
 
     .k-page-orientation {
-        border-color: @widget-border-color;
+        border-color: @spreadsheet-page-orientation-border-color;
+        box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1)
     }
 
     .k-page-orientation:before {
-        background: @normal-background;
+        background: @spreadsheet-page-orientation-background;
         border-color: transparent;
-        border-bottom-color: @widget-border-color;
-        border-left-color: @widget-border-color;
+        border-bottom-color: @spreadsheet-page-orientation-border-color;
+        border-left-color: @spreadsheet-page-orientation-border-color;
     }
 
     .k-margins-horizontal,
