@@ -33,7 +33,7 @@ The example below demonstrates how to make the TabStrip widget 100% high and res
     }
 
     </style>
-    
+
     <div id="tabstrip">
       <ul>
         <li class="k-state-active">Item 1</li>
@@ -47,10 +47,10 @@ The example below demonstrates how to make the TabStrip widget 100% high and res
         Content 2
       </div>
     </div>
-    
+
     <script>
       var resizeAll = function() {
-        expandContentDivs(tabStripElement.children(".k-content")); 
+        expandContentDivs(tabStripElement.children(".k-content"));
       }
 
       var tabStripElement = $("#tabstrip").kendoTabStrip({
@@ -60,9 +60,9 @@ The example below demonstrates how to make the TabStrip widget 100% high and res
           }
         }
       });
-      
+
       tabStripElement.parent().attr("id", "tabstrip-parent");
-      
+
       var tabStrip = tabStripElement.data("kendoTabStrip");
 
       var expandContentDivs = function(divs) {

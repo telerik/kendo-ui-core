@@ -1,8 +1,8 @@
 ---
-title: Script Files for Desktop Widgets
-page_title: Script Files for Desktop Widgets | Kendo UI Installation
+title: Script Files for Data Management
+page_title: Script Files for Data Management | Kendo UI Installation
 description: "Learn which are the script files Kendo UI desktop widgets."
-slug: scirpt_filesfor_desktop_widgets
+slug: scirpt_filesfor_datamanagement_widgets
 position: 3
 ---
 
@@ -382,9 +382,17 @@ Below are listed the script files for Kendo UI desktop widgets for mobile-ready 
 
 ## See Also
 
-Articles with script files for the other Kendo UI components:
+Articles listing the script files for other Kendo UI components:
 
-+ [List of Script Files for the Widgets Rendering Data Visualization]({% slug script_filesfor_datavisualization_widgets %})
-+ [List of Script Files for the Frameworks and Widgets for Mobile Applications]({% slug script_filesfor_hybridui_widgets %})
-+ [List of Script Files for the Tools and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
-+ [List of Script Files for the Server-Side Wrappers]({% slug script_filesfor_serverside_wrappers %})
++ [Script Files for Editors]({% slug scirpt_filesfor_editors_widgets %})
++ [Script Files for Charts]({% slug script_filesfor_charts_widgets %})
++ [Script Files for Gauges]({% slug script_filesfor_gauges_widgets %})
++ [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})
++ [Script Files for Diagrams and Maps]({% slug script_filesfor_diagramsandmaps_widgets %})
++ [Script Files for Scheduling]({% slug scirpt_filesfor_scheduling_widgets %})
++ [Script Files for Layout]({% slug scirpt_filesfor_layout_widgets %})
++ [Script Files for Navigation]({% slug scirpt_filesfor_navigation_widgets %})
++ [Script Files for Interactivity and UX]({% slug scirpt_filesfor_interactivityandux_widgets %})
++ [Script Files for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})
++ [Script Files for Tools, Frameworks and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
++ [Script Files for Server-Side Wrappers]({% slug script_filesfor_serverside_wrappers %})

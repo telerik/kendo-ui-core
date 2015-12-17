@@ -46,9 +46,9 @@ Iframes cannot be scrollable in iOS and always expand to display all their conte
 
 ### Images and Tables Are Not Resizable
 
-Image and table resizing inside `contenteditable` elements depends on the browser. As a result of browser behavior, images may become non-resizable if a "classic" Editor (which uses an `iframe`) is created while hidden, or is hidden after its initialization and then displayed back. 
+Image and table resizing inside `contenteditable` elements depends on the browser. As a result of browser behavior, images may become non-resizable if a "classic" Editor (which uses an `iframe`) is created while hidden, or is hidden after its initialization and then displayed back.
 
-As the reason for thе issue lies in browser functionalities, it can be resolved by calling the Editor's [`refresh`](/api/javascript/ui/editor#methods-refresh) method after the Editor becomes visible. Refreshing the widget will recreate the `iframe`. 
+As the reason for thе issue lies in browser functionalities, it can be resolved by calling the Editor's [`refresh`](/api/javascript/ui/editor#methods-refresh) method after the Editor becomes visible. Refreshing the widget will recreate the `iframe`.
 
 Another possible approach is to use the Editor's inline mode, i.e., create the Editor from a `div` element.
 
@@ -125,7 +125,7 @@ Other articles on troubleshooting:
 * [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})
 * [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
 * [Common Issues in Kendo UI Upload](/web/upload/troubleshooting)
-* [Common Issues in Widgets Rendering Data Visualization](/dataviz/troubleshooting)
+* [Common Issues Related to Styling, Appearance, and Rendering]({% slug commonissues_troubleshooting_kendouistyling %})
 * [Common Issues in Telerik UI for ASP.NET MVC](/aspnet-mvc/troubleshooting)
 * [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/grid/troubleshooting)
 * [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/upload/troubleshooting)

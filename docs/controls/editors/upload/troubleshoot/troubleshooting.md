@@ -29,7 +29,7 @@ When working in Internet Explorer 10/11 with Windows authentication the upload e
 
 **Solution** For Internet Explorer 10, see [KB2980019](http://support.microsoft.com/kb/2980019). As of November 6, 2014 there is no official fix for Internet Explorer 11. For more information on this issue, refer to [Bug ID 819941](https://connect.microsoft.com/IE/feedback/details/819941/file-upload-stop-working-on-ie-with-windows-authentication).
 
-### Incorrect Progress Readings 
+### Incorrect Progress Readings
 
 When working in Internet Explorer 10/11 with Windows authentication the upload progress indicator can go over 100% or freeze. This does not indicate that the request is now complete. The issue is not related to Kendo UI and is caused by an Internet Explorer bug. It can be observed with any `FormData XMLHttpRequest`. The problem only seems to occur when accessing a web server on localhost.
 
@@ -78,7 +78,7 @@ Other articles on troubleshooting:
 * [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})
 * [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})
 * [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
-* [Common Issues in Widgets Rendering Data Visualization](/dataviz/troubleshooting)
+* [Common Issues Related to Styling, Appearance, and Rendering]({% slug commonissues_troubleshooting_kendouistyling %})
 * [Common Issues in Telerik UI for ASP.NET MVC](/aspnet-mvc/troubleshooting)
 * [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/grid/troubleshooting)
 * [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/upload/troubleshooting)

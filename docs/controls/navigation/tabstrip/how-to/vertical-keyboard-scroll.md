@@ -7,9 +7,9 @@ slug: howto_scrolltabstripwithkeyboard_tabstrip
 
 # Scroll TabStrip with Keyboard
 
-Keyboard navigation requires an element to be focused. Non-form elements normally do not receive focus. To overcome this, the TabStrip `<div>` wrapper has a `tabindex` attribute. Logically, `Left Arrow` and `Right Arrow` keys switch the active tab. `Up Arrow` and `Down Arrow` keys do the same as this is what accessibility standards require. When the TabStrip [wrapper](/framework/widgets/wrapper-element) has the focus, and its active content container is scrollable, then the `Up Arrow` and `Down Arrow` keys do not scroll the container even if the widget ignores these keystrokes. This is because the focused element is a parent of the scrollable one and the browser has no idea that it is supposed to scroll the child element in this situation. 
+Keyboard navigation requires an element to be focused. Non-form elements normally do not receive focus. To overcome this, the TabStrip `<div>` wrapper has a `tabindex` attribute. Logically, `Left Arrow` and `Right Arrow` keys switch the active tab. `Up Arrow` and `Down Arrow` keys do the same as this is what accessibility standards require. When the TabStrip [wrapper](/framework/widgets/wrapper-element) has the focus, and its active content container is scrollable, then the `Up Arrow` and `Down Arrow` keys do not scroll the container even if the widget ignores these keystrokes. This is because the focused element is a parent of the scrollable one and the browser has no idea that it is supposed to scroll the child element in this situation.
 
-There is a way to make the scrollable content container become focused: add a `tabindex` attribute to it. Then, scrolling with the `Up Arrow` and `Down Arrow` keys start working, but TabStrip keyboard navigation completely stops working. This is because Kendo UI TabStrip handles key events only if its wrapper is the focused element. The idea behind this behavior is that the widget is not supposed to interfere with the keyboard navigation of nested form elements, child widgets, etc. 
+There is a way to make the scrollable content container become focused: add a `tabindex` attribute to it. Then, scrolling with the `Up Arrow` and `Down Arrow` keys start working, but TabStrip keyboard navigation completely stops working. This is because Kendo UI TabStrip handles key events only if its wrapper is the focused element. The idea behind this behavior is that the widget is not supposed to interfere with the keyboard navigation of nested form elements, child widgets, etc.
 
 To vertically scroll the TabStrip content containers with the help of the keyboard, do the following:
 
@@ -17,7 +17,7 @@ To vertically scroll the TabStrip content containers with the help of the keyboa
 
         $("#tabstrip").kendoTabStrip();
         $("#tabstrip").removeAttr("tabindex");
-        
+
 2. Scroll the container using Javascript, as the example below demonstrates.
 
 ###### Example
@@ -62,7 +62,7 @@ To vertically scroll the TabStrip content containers with the help of the keyboa
                     e.stopImmediatePropagation();
                     // prevent page scroll
                     e.preventDefault();
-                    // get the visible TabStrip container 
+                    // get the visible TabStrip container
                     var visibleContainer = $(e.target).data("kendoTabStrip").wrapper.children(".k-content").filter(":visible");
                     if (e.keyCode == kendo.keys.DOWN) {
                         visibleContainer.scrollTop(visibleContainer.scrollTop() + 50);
@@ -81,7 +81,7 @@ To vertically scroll the TabStrip content containers with the help of the keyboa
                     }
                 }
             });
-            
+
             $("#tabstrip").focus();
 
         });

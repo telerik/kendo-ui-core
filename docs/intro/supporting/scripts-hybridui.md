@@ -1,14 +1,14 @@
 ---
-title: Script Files for Hybrid UI Widgets
-page_title: Script Files for Hybrid UI Widgets | Kendo UI Installation
-description: "Learn which are the script files for Kendo UI hybrid widgets and frameworks."
+title: Script Files for Hybrid UI
+page_title: Script Files for Hybrid UI | Kendo UI Installation
+description: "Check out the list with the script files for the Kendo UI Hybrid widgets and frameworks."
 slug: script_filesfor_hybridui_widgets
-position: 5
+position: 13
 ---
 
-# Script Files for Hybrid UI Widgets
+# Script Files for Hybrid UI
 
-Below are listed the script files for Kendo UI frameworks and widgets for mobile applications:
+Below are listed the script files for the Kendo UI Hybrid frameworks and widgets:
 
 | Widget				| Script Files								|
 | :---					| :---										|
@@ -134,16 +134,20 @@ Below are listed the script files for Kendo UI frameworks and widgets for mobile
 | [TabStrip](http://demos.telerik.com/kendo-ui/m/index#mobile-tabstrip/index)| jquery.js|
 | 						| kendo.core.js								|
 | 						| kendo.mobile.tabstrip.js					|
-| [Touch](http://demos.telerik.com/kendo-ui/m/index#touchevents/mobile)| jquery.js|
-| 						| kendo.core.js								|
-| 						| kendo.userevents.js						|
-| 						| kendo.touch.js							|
 
 ## See Also
 
-Articles with script files for the other Kendo UI components:
+Articles listing the script files for other Kendo UI components:
 
-+ [List of Script Files for the Desktop Widgets]({% slug scirpt_filesfor_desktop_widgets %})  
-+ [List of Script Files for the Widgets Rendering Data Visualization]({% slug script_filesfor_datavisualization_widgets %})
-+ [List of Script Files for the Tools and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
-+ [List of Script Files for the Server-Side Wrappers]({% slug script_filesfor_serverside_wrappers %})
++ [Script Files for Data Management]({% slug scirpt_filesfor_datamanagement_widgets %})  
++ [Script Files for Editors]({% slug scirpt_filesfor_editors_widgets %})
++ [Script Files for Charts]({% slug script_filesfor_charts_widgets %})
++ [Script Files for Gauges]({% slug script_filesfor_gauges_widgets %})
++ [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})
++ [Script Files for Diagrams and Maps]({% slug script_filesfor_diagramsandmaps_widgets %})
++ [Script Files for Scheduling]({% slug scirpt_filesfor_scheduling_widgets %})
++ [Script Files for Layout]({% slug scirpt_filesfor_layout_widgets %})
++ [Script Files for Navigation]({% slug scirpt_filesfor_navigation_widgets %})
++ [Script Files for Interactivity and UX]({% slug scirpt_filesfor_interactivityandux_widgets %})
++ [Script Files for Tools, Frameworks and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
++ [Script Files for Server-Side Wrappers]({% slug script_filesfor_serverside_wrappers %})

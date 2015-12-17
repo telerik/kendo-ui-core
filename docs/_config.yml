@@ -135,7 +135,7 @@ navigation:
         title: "Widgets"
         position: 12
     "third-party":
-        title: "Third-Party Tools and Frameworks"
+        title: "Third-Party Frameworks and Utilities"
         position: 16
     "AngularJS":
         title: "AngularJS Directives"

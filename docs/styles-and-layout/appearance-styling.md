@@ -1,24 +1,39 @@
 ---
-title: Themes and Appearance
-page_title: Themes and Appearance | Kendo UI Desktop Widgets
+title: Themes and Layout
+page_title: Themes and Layout | Kendo UI Styles and Appearance
 description: "Learn how to define CSS classes in the Kendo UI desktop widgets to change their appearance and customize their style further."
-previous_url: /web/appearance-styling, /web/appearance-rtl
+previous_url: /web/appearance-styling, /web/appearance-rtl, /dataviz/appearance-styling
 slug: themesandappearnce_kendoui_desktopwidgets
 position: 1
 ---
 
-# Themes and Appearance
+# Themes and Layout
 
 All [Kendo UI widgets](http://demos.telerik.com/kendo-ui/) arrive with a number of predefined themes:
 
-![Kendo UI DataViz Themes](/web/styles-and-layout/web-themes.png)
+![Kendo UI Web Themes](/styles-and-layout/web-themes.png)
 
-Setting a Kendo UI theme for any of the Kendo UI dekstop widgets, such as [Kendo UI Grid](http://demos.telerik.com/kendo-ui/grid/index), or Kendo UI controls for data visualization, such as [Kendo UI Bar Chart](http://demos.telerik.com/kendo-ui/bar-charts/index), requires you to include the following two stylesheets to your project:
+This is how the same themes are rendered in widgets that visualize data, such as Gauges, Charts, Barcodes, Diagrams, and Maps:
+
+![Kendo UI DataViz Themes](/styles-and-layout/dataviz-themes.png)
+
+Setting a Kendo UI theme for any of the Kendo UI widgets, such as [Kendo UI Grid](http://demos.telerik.com/kendo-ui/grid/index), or [Kendo UI Bar Chart](http://demos.telerik.com/kendo-ui/bar-charts/index), requires you to include the following two stylesheets to your project:
 
 * `kendo.common.css` - This is a common (base) stylesheet. It applies styles related to element positioning and widget dimensions. It is a must for the widgets to look and function in a proper way.
 * `kendo.[theme].css` - This stylesheet applies theme-specific styles such color palette, background gradients and patterns, etc.
 
-The example below demonstrates how to include these stylesheets to your project.
+Kendo UI Gauges, Charts, Barcodes, Diagrams, and Maps use a mix of browser technologies to attain the required precision and responsiveness. Visualization is rendered as vector graphics with computed layout. In contrast, interactive features are built using traditional HTML elements. As a result, the appearance settings of these widgets are split between declarative options and traditional CSS.
+
+The example below demonstrates how to define a theme for a Kendo UI Chart.
+
+###### Example
+
+    $("#chart").kendoChart({
+        theme: "[theme]"
+        ...
+    });
+
+The example below demonstrates how to include the stylesheets to your project.
 
 ###### Example
 
@@ -193,10 +208,13 @@ The syntax of the generated classes is `k-[browser] k-[browser][majorVersion]`.
 
 ## See Also
 
-Other articles on the styling and appearance of Kendo UI widgets:
+Other articles on styling, appearance, and rendering of Kendo UI widgets:
 
 * [Responsive Web Design]({% slug responsivewebdesign_integration_kendoui %})
 * [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})
 * [How to Change Themes on the Client]({% slug howto_changethemes_ontheclient_styleskendoui %})
-* [Themes and Appearance of the Kendo UI Widgets for Data Visualization](/dataviz/appearance-styling)
-* [Themes and Appearance of the Kendo UI Hybrid Widgets](/mobile/styling)
+* [ThemeBuilder Overview]({% slug themebuilder_overview_kendouistyling %})
+* [Rendering Modes for Data Visualization]({% slug renderingmodesfor_datavisualization_kendouistyling %})
+* [Tips and Tricks]({% slug tipsandtricks_kendouistyling %})
+* [Troubleshooting]({% slug commonissues_troubleshooting_kendouistyling %})
+* [Themes and Appearance of the Kendo UI Hybrid Widgets](/controls/hybrid/styling)

@@ -15,7 +15,7 @@ This page provides solutions for common issues you may encounter while working w
 
 ### Create/Destroy/Update Request Is Sent Multiple Times to the Remote Service
 
-In this case the server response of the create/destroy/update action is interpreted as an error by the `dataSource` and the [`error` event](/api/framework/datasource#events-error) of the dataSource is triggered. When such a request fails, the Scheduler `dataSource` will try to get a valid server response again on a subsequent dataSource sync until the request succeeds. 
+In this case the server response of the create/destroy/update action is interpreted as an error by the `dataSource` and the [`error` event](/api/framework/datasource#events-error) of the dataSource is triggered. When such a request fails, the Scheduler `dataSource` will try to get a valid server response again on a subsequent dataSource sync until the request succeeds.
 
 **Solution**: Update the remote service in use, so it can return valid responses. Make sure the server response is formatted in the same way as the `read` action response:
 
@@ -30,16 +30,16 @@ In this case the server response of the create/destroy/update action is interpre
 This behavior may be caused if the Scheduler [`timezone`](/api/javascript/ui/scheduler#configuration-timezone) option is not set, or if the remote service does not keep dates in the correct format.
 
 **Solution**: Set the timezone option of the Scheduler and make sure the dates on the remote service are saved in UTC. For more information about how to do this see the [Timezones help article](/web/scheduler/timezones).
-    
+
 ## Performance Issues
 
 ### When You Cancel Changes, Other Events Disappear
 
-It is possible to experience such behavior if the [id fields](/api/javascript/data/schedulerevent#fields-id) of the other events are not set to valid and unique values. 
+It is possible to experience such behavior if the [id fields](/api/javascript/data/schedulerevent#fields-id) of the other events are not set to valid and unique values.
 
 ### Editing Event Causes All Initial Events to be Sent to the <code>Create</code> Action
 
-This behavior can be experienced if the [id fields](/api/javascript/data/schedulerevent#fields-id) of all events are not set to valid and unique values during initial read. 
+This behavior can be experienced if the [id fields](/api/javascript/data/schedulerevent#fields-id) of all events are not set to valid and unique values during initial read.
 
 ### Remote Data Bound Scheduler Does Not Populate
 
@@ -54,7 +54,7 @@ Such behavior may be caused by various reasons. Follow the instructions below to
     - HTTP status code [404](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#404) indicates that the requested URL cannot be found. Check if the controller and action names are spelled correctly.
     - HTTP status code [500](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#500) indicates that a server error occurred while processing the request.
 
-3. Check if the server response is in the correct data type format. For more information see the [Binding to remote service](/web/scheduler/overview#binding-to-remote-service) help topic. 
+3. Check if the server response is in the correct data type format. For more information see the [Binding to remote service](/web/scheduler/overview#binding-to-remote-service) help topic.
 
 4. Check if the models returned from the sever match the required [kendo.data.SchedulerEvent](/api/javascript/data/schedulerevent) fields. For more information check the [Binding to remote service](/web/scheduler/overview#binding-to-remote-service) help topic.
 
@@ -78,7 +78,7 @@ Other articles on troubleshooting:
 * [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})
 * [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})
 * [Common Issues in Kendo UI Upload]({% slug troubleshooting_upload_widget %})
-* [Common Issues in Widgets Rendering Data Visualization](/dataviz/troubleshooting)
+* [Common Issues Related to Styling, Appearance, and Rendering]({% slug commonissues_troubleshooting_kendouistyling %})
 * [Common Issues in Telerik UI for ASP.NET MVC](/aspnet-mvc/troubleshooting)
 * [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/grid/troubleshooting)
 * [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/upload/troubleshooting)

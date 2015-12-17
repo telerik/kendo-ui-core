@@ -33,7 +33,7 @@ The example below demonstrates a sample issue.
     });
 
 The example below demonstrates the solution to the above issue.   
- 
+
 ###### Example
 
     var ds = new kendo.data.DataSource({ data: ["foo", "bar"] });
@@ -46,7 +46,7 @@ The example below demonstrates the solution to the above issue.
     $("#ms2").kendoMultiSelect({
         dataSource: new kendo.data.DataSource({ data: ds.data() });
     });
-    
+
 ## See Also
 
 Other articles on Kendo UI MultiSelect:
@@ -78,7 +78,7 @@ Other articles on troubleshooting:
 * [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})
 * [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
 * [Common Issues in Kendo UI Upload]({% slug troubleshooting_upload_widget %})
-* [Common Issues in Widgets Rendering Data Visualization](/dataviz/troubleshooting)
+* [Common Issues Related to Styling, Appearance, and Rendering]({% slug commonissues_troubleshooting_kendouistyling %})
 * [Common Issues in Telerik UI for ASP.NET MVC](/aspnet-mvc/troubleshooting)
 * [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/grid/troubleshooting)
 * [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/upload/troubleshooting)
