@@ -338,16 +338,18 @@ var __meta__ = { // jshint ignore:line
                 }, that[currentView.name])));
 
                 makeUnselectable(to);
-
+                var replace = from && from.data("start") === to.data("start");
                 that._animate({
                     from: from,
                     to: to,
                     vertical: vertical,
-                    future: future
+                    future: future,
+                    replace: replace
                 });
 
-                that._focus(value);
                 that.trigger(NAVIGATE);
+
+                that._focus(value);
             }
 
             if (view === views[options.depth] && selectedValue && !that.options.disableDates(selectedValue)) {
@@ -523,7 +525,7 @@ var __meta__ = { // jshint ignore:line
 
                 to.insertAfter(that.element[0].firstChild);
                 that._focusView(active);
-            } else if (!from.is(":visible") || that.options.animation === false) {
+            } else if (!from.is(":visible") || that.options.animation === false || options.replace) {
                 to.insertAfter(from);
                 from.off(ns).remove();
 
@@ -938,7 +940,7 @@ var __meta__ = { // jshint ignore:line
                 lastDayOfMonth = that.last(date),
                 toDateString = that.toDateString,
                 today = new DATE(),
-                html = '<table tabindex="0" role="grid" class="k-content" cellspacing="0"><thead><tr role="row">';
+                html = '<table tabindex="0" role="grid" class="k-content" cellspacing="0" data-start="' + toDateString(start) + '"><thead><tr role="row">';
 
                 for (; idx < 7; idx++) {
                     html += '<th scope="col" title="' + names[idx] + '">' + shortNames[idx] + '</th>';
