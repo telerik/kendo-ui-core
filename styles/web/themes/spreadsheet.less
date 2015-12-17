@@ -4,6 +4,7 @@
 @spreadsheet-cell-border: darken(@base, 10%);
 @spreadsheet-selection-background: fadeout(@selected-background, 80%);
 @spreadsheet-selection-border: @selected-background;
+@spreadsheet-header-selection-border: fadein(@spreadsheet-selection-background, 80%);
 
 .k-spreadsheet-row-header,
 .k-spreadsheet-column-header {
@@ -11,8 +12,8 @@
 }
 
 .k-spreadsheet-top-corner,
-.k-spreadsheet-row-header td,
-.k-spreadsheet-column-header td {
+.k-spreadsheet-row-header,
+.k-spreadsheet-column-header {
     background-color: @spreadsheet-header-background;
     background-image: none;
     color: contrast(@spreadsheet-header-background);
@@ -30,12 +31,13 @@
 .k-spreadsheet-pane {
     border-color: @spreadsheet-pane-border;
 
-    td {
+    .k-spreadsheet-vaxis,
+    .k-spreadsheet-haxis {
         border-color: @spreadsheet-cell-border;
     }
 
-    .k-spreadsheet-column-header td,
-    .k-spreadsheet-row-header td {
+    .k-spreadsheet-column-header,
+    .k-spreadsheet-row-header {
         border-color: @spreadsheet-header-border;
     }
 
@@ -55,49 +57,29 @@
 
     .k-spreadsheet-column-header .k-selection-partial,
     .k-spreadsheet-column-header .k-selection-full {
-        border-bottom-color: fadein(@spreadsheet-selection-background, 80%);
+        border-bottom-color: @spreadsheet-header-selection-border;
     }
 
     .k-spreadsheet-row-header .k-selection-partial,
     .k-spreadsheet-row-header .k-selection-full {
-        border-right-color: fadein(@spreadsheet-selection-background, 80%);
+        border-right-color: @spreadsheet-header-selection-border;
     }
+}
+
+.k-auto-fill,
+.k-spreadsheet-selection {
+    border-color: @spreadsheet-selection-border;
+    box-shadow: inset 0 0 0 1px @background, 0 0 0 1px @spreadsheet-selection-border;
 }
 
 .k-spreadsheet-selection {
     background-color: @spreadsheet-selection-background;
-    border-color: @spreadsheet-selection-border;
-}
-
-.k-spreadsheet-cell-editor {
-    box-shadow: inset 0 0 0 2px @spreadsheet-selection-border;
 }
 
 .k-spreadsheet-active-cell {
-    box-shadow: inset 0 0 0 1px @spreadsheet-selection-border;
-    border-color: @spreadsheet-selection-border;
-
-    td {
-        background-color: @background;
-        border-color: @spreadsheet-selection-border;
-        box-shadow: inset 1px 1px 0 1px @spreadsheet-selection-border, inset 0 0 0 1px @spreadsheet-selection-border;
-    }
-
-    &.k-right td {
-        box-shadow: inset 1px 1px 0 1px @spreadsheet-selection-border, inset -2px 0 0 1px @spreadsheet-selection-border;
-    }
-
-    &.k-bottom td {
-        box-shadow: inset 1px 1px 0 1px @spreadsheet-selection-border, inset 0 -2px 0 1px @spreadsheet-selection-border;
-    }
-
-    &.k-right.k-bottom td {
-        box-shadow: inset 1px 1px 0 1px @spreadsheet-selection-border, inset -2px -2px 0 1px @spreadsheet-selection-border;
-    }
-
-    .k-ff & td {
-        box-shadow: inset 0 0 0 1px @spreadsheet-selection-border;
-    }
+    // enforce border color of active cell to match selection
+    border-color: @spreadsheet-selection-border !important;
+    background-color: @background;
 }
 
 .k-spreadsheet-active-cell.k-single {
@@ -137,10 +119,6 @@
     .k-single-selection::after {
         background-color: @spreadsheet-selection-border;
         border-color: @background;
-    }
-
-    .k-auto-fill {
-        border-color: @spreadsheet-selection-border;
     }
 
     .k-auto-fill-punch {
@@ -190,6 +168,35 @@
 .k-spreadsheet-window .k-list {
     border-color: @widget-border-color;
     border-radius: @border-radius;
+}
+
+.k-spreadsheet-window {
+    .export-config,
+    .k-edit-field > .k-orientation-label {
+        border-color: @widget-border-color;
+    }
+
+    .k-edit-field > input[type="radio"]:checked+.k-orientation-label {
+        background: @accent;
+        color: @base;
+    }
+
+    .k-page-orientation {
+        border-color: @widget-border-color;
+    }
+
+    .k-page-orientation:before {
+        background: @normal-background;
+        border-color: transparent;
+        border-bottom-color: @widget-border-color;
+        border-left-color: @widget-border-color;
+    }
+
+    .k-margins-horizontal,
+    .k-margins-vertical {
+        background: transparent;
+        border-color: @widget-border-color;
+    }
 }
 
 .k-spreadsheet-toolbar {
