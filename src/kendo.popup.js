@@ -117,9 +117,17 @@ var __meta__ = { // jshint ignore:line
                 that._mousedown(e);
             };
 
-            that._resizeProxy = function(e) {
-                that._resize(e);
-            };
+            if (support.mobileOS.android) {
+                that._resizeProxy = function(e) {
+                    setTimeout(function() {
+                        that._resize(e);
+                    }, 600); //Logic from kendo.onResize
+                };
+            } else {
+                that._resizeProxy = function(e) {
+                    that._resize(e);
+                };
+            }
 
             if (options.toggleTarget) {
                 $(options.toggleTarget).on(options.toggleEvent + NS, $.proxy(that.toggle, that));
