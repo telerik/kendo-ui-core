@@ -821,6 +821,11 @@ var __meta__ = { // jshint ignore:line
 
                 if (that._prev !== value) {
                     that._prev = value;
+
+                    if (that.options.filter === "none") {
+                        that.listView.value("");
+                    }
+
                     that.search(value);
                 }
 

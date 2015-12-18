@@ -885,7 +885,7 @@ test("text method should set custom value to already added custom option", 2, fu
     input.blur();
 });
 
-test("keep selcted value when filtered from outside", 2, function() {
+test("keep selected value when filtered from outside", 2, function() {
     var values = ["unknown", "unknown2"];
     var select = $("<select></select>");
 
@@ -909,6 +909,23 @@ test("keep selcted value when filtered from outside", 2, function() {
 
     equal(combobox.value(), 2);
     equal(combobox.text(), "Bar");
+});
+
+asyncTest("clear selected value if search is started (filter: none)", 1, function() {
+    combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: data,
+        filter: "none",
+        value: 2
+    });
+
+    combobox.bind("open", function() {
+        start();
+        equal(combobox.value(), "Ba");
+    });
+
+    combobox.input.focus().val("Ba").trigger({ type: "keydown" });
 });
 
 })();
