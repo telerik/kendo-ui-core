@@ -836,6 +836,30 @@ test("ComboBox clears selected value even when text option is set to empty strin
     equal(combobox.text(), "");
 });
 
+test("ComboBox selects new item even though text is equal to text option", function() {
+    var combobox = new ComboBox(input, {
+        animation: false,
+        dataTextField: 'text',
+        dataValueField: 'value',
+        autoBind: false,
+        value: '1',
+        text: 'User1',
+        dataSource: [
+            { text: "User1", value: "1" },
+            { text: "User2", value: "2" },
+            { text: "User3", value: "3" },
+            { text: "User4", value: "4" }
+        ]
+    });
+
+    combobox.open();
+    combobox.select(2);
+    combobox.input.focus().val("User1").blur();
+
+    equal(combobox.value(), "1");
+    equal(combobox.text(), "User1");
+});
+
 test("suggest method outputs word parameter", function() {
     var combobox = new ComboBox(input, {
         dataSource: ["Item1", "Item2"]
