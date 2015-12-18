@@ -1157,7 +1157,7 @@ var __meta__ = { // jshint ignore:line
 
                 parent.first(CASCADE, cascadeHandler);
 
-                parent._focused.bind("focusin", function() {
+                parent._focused.bind("focus", function() {
                     parent.unbind(CASCADE, cascadeHandler);
                     parent.first(CHANGE, cascadeHandler);
                 });
