@@ -129,6 +129,8 @@ The example below demonstrates how to export a multi-page Kendo UI Grid and cust
 
   // Spacing between header, content and footer
   var LINE_SPACING = mm(5);
+	
+  var scale;	
 
   function formatPage(e) {
     var header = createHeader();
@@ -139,8 +141,14 @@ The example below demonstrates how to export a multi-page Kendo UI Grid and cust
     var contentRect = PAGE_RECT.clone();
     contentRect.size.height -= header.bbox().height() + footer.bbox().height() + 2 * LINE_SPACING;
 
-    // Fit the content in the available space
-    draw.fit(content, contentRect)
+    if(!scale){
+    	// Fit the content in the available space
+    	draw.fit(content, contentRect);
+    	scale = content.transform().matrix().a;
+    }
+    else {
+    	content.transform(kendo.geometry.transform().scale(scale));
+    }
 
     // Do a final layout with content
     var page = new draw.Layout(PAGE_RECT, {
