@@ -727,7 +727,7 @@
         ok(source.calls("filter") !== 0);
     });
 
-    test("widget does not filter child if popup is opened", 3, function() {
+    test("active widget does not filter child if popup is opened", 3, function() {
         var ddl = new DropDownList(parent, {
             animation: false,
             optionLabel: "Select",
@@ -754,7 +754,7 @@
             }
         });
 
-
+        ddl.wrapper.focus();
         ddl.open();
         ddl.select(1);
 
@@ -765,7 +765,7 @@
         equal(childSource[1].id, "2");
     });
 
-    test("widget filters child on popup close", 3, function() {
+    test("active widget filters child on change", 3, function() {
         var ddl = new DropDownList(parent, {
             animation: false,
             optionLabel: "Select",
@@ -792,9 +792,10 @@
             }
         });
 
+        ddl.wrapper.focus();
         ddl.open();
-        ddl.select(1);
-        ddl.close();
+        ddl.wrapper.trigger({ type: "keydown", keyCode: kendo.keys.UP });
+        ddl.wrapper.blur();
 
         var childSource = ddl2.dataSource.view();
 

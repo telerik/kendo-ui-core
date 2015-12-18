@@ -27,6 +27,7 @@ var __meta__ = { // jshint ignore:line
         LOADING = "k-loading",
         OPEN = "open",
         CLOSE = "close",
+        CASCADE = "cascade",
         SELECT = "select",
         SELECTED = "selected",
         REQUESTSTART = "requestStart",
@@ -635,13 +636,13 @@ var __meta__ = { // jshint ignore:line
 
             if (!that._cascadeTriggered || that._old !== that.value() || that._oldIndex !== that.selectedIndex) {
                 that._cascadeTriggered = true;
-                that.trigger("cascade", { userTriggered: that._userTriggered });
+                that.trigger(CASCADE, { userTriggered: that._userTriggered });
             }
         },
 
         _triggerChange: function() {
             if (this._valueBeforeCascade !== this.value()) {
-                this.trigger("change");
+                this.trigger(CHANGE);
             }
         },
 
@@ -1127,10 +1128,11 @@ var __meta__ = { // jshint ignore:line
         },
 
         _cascade: function() {
-            var that = this,
-                options = that.options,
-                cascade = options.cascadeFrom,
-                parent;
+            var that = this;
+            var options = that.options;
+            var cascade = options.cascadeFrom;
+            var cascadeHandler;
+            var parent;
 
             if (cascade) {
                 parent = that._parentWidget();
@@ -1141,24 +1143,29 @@ var __meta__ = { // jshint ignore:line
 
                 options.autoBind = false;
 
-                var cascadeHandler = function(e) {
-                    that._userTriggered = e.userTriggered;
+                cascadeHandler = proxy(function(e) {
+                    var valueBeforeCascade = this.value();
 
-                    if (parent.popup.visible()) {
-                        return;
+                    this._userTriggered = e.userTriggered;
+
+                    if (this.listView.bound()) {
+                        this._clearSelection(parent, true);
                     }
 
-                    var valueBeforeCascade = that.value();
+                    this._cascadeSelect(parent, valueBeforeCascade);
+                }, that);
 
-                    if (that.listView.bound()) {
-                        that._clearSelection(parent, true);
-                    }
+                parent.first(CASCADE, cascadeHandler);
 
-                    that._cascadeSelect(parent, valueBeforeCascade);
-                };
+                parent._focused.bind("focusin", function() {
+                    parent.unbind(CASCADE, cascadeHandler);
+                    parent.first(CHANGE, cascadeHandler);
+                });
 
-                parent.first("cascade", cascadeHandler);
-                parent.popup.bind("deactivate", cascadeHandler);
+                parent._focused.bind("focusout", function() {
+                    parent.unbind(CHANGE, cascadeHandler);
+                    parent.first(CASCADE, cascadeHandler);
+                });
 
                 //refresh was called
                 if (parent.listView.bound()) {
@@ -1294,7 +1301,7 @@ var __meta__ = { // jshint ignore:line
 
         events: [
            "click",
-           "change",
+            CHANGE,
            "activate",
            "deactivate",
            "dataBinding",
@@ -1527,7 +1534,7 @@ var __meta__ = { // jshint ignore:line
 
             if (added.length || removed.length) {
                 that._valueComparer = null;
-                that.trigger("change", {
+                that.trigger(CHANGE, {
                     added: added,
                     removed: removed
                 });
@@ -1726,7 +1733,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (removed.length) {
-                this.trigger("change", {
+                this.trigger(CHANGE, {
                     added: [],
                     removed: removed
                 });

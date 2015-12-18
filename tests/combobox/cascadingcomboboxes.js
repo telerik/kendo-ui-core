@@ -741,6 +741,7 @@ test("third combo is bound when only local data is used", function() {
         });
 
 
+        parentCB.input.focus();
         parentCB.open();
         parentCB.select(0);
 
@@ -1012,7 +1013,76 @@ test("third combo is bound when only local data is used", function() {
         combo.value("");
     });
 
-    asyncTest("keep custom value of the widget it is custom", 1, function() {
+    asyncTest("keep custom value of the widget it is custom", 3, function() {
+        var deferred = $.Deferred();
+        var combo = new ComboBox(parent, {
+            dataValueField: "combo1Id",
+            dataTextField: "text",
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success([
+                                {text: "item1", combo1Id: "1"},
+                                {text: "item3", combo1Id: "2"}
+                            ]);
+                        });
+                    }
+                }
+            }
+        });
+
+        var combo2 = new ComboBox(child.attr("id", "child"), {
+            dataValueField: "combo2Id",
+            dataTextField: "text",
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success([
+                                {text: "item4", combo2Id: "4", combo1Id: "2" }
+                            ]);
+                        });
+                    }
+                }
+            },
+            cascadeFrom: "parent",
+            autoBind: false
+        });
+
+        var combo3 = new ComboBox(third, {
+            dataValueField: "combo3Id",
+            dataTextField: "text",
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success([]);
+                            deferred.resolve();
+                        });
+                    }
+                }
+            },
+            cascadeFrom: "child",
+            autoBind: false
+        });
+
+        combo.value("2");
+        combo2.value("4");
+        combo3.value("custom");
+
+        deferred.done(function() {
+            start();
+            combo.open();
+            combo.close();
+
+            equal(combo.value(), "2");
+            equal(combo2.value(), "4");
+            equal(combo3.value(), "custom");
+        });
+    });
+
+    asyncTest("persist ", 1, function() {
         var deferred = $.Deferred();
         var combo = new ComboBox(parent, {
             dataValueField: "combo1Id",
