@@ -1115,9 +1115,13 @@ var __meta__ = { // jshint ignore:line
             dataTextField = self.options.dataTextField;
 
         if (dataTextField && !self.options.valuePrimitive) {
-            value = $.map(value, function(item){
-                return item[dataTextField];
-            });
+            if (value.length !== undefined) {
+                value = $.map(value, function(item){
+                    return item[dataTextField];
+                });
+            } else {
+                value = value[dataTextField];
+            }
         }
 
         self.value(value);
