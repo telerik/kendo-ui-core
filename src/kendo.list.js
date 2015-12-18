@@ -800,6 +800,7 @@ var __meta__ = { // jshint ignore:line
             } else {
                 if (selectedIndex > -1) {
                     element.options[selectedIndex].removeAttribute(SELECTED);
+                    element.options[selectedIndex].selected = false;
                 }
 
                 if (idx === undefined) {

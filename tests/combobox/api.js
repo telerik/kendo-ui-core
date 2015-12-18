@@ -154,6 +154,25 @@ test("value('') clear selection", function() {
    });
 
    test("value method does not add item with custom value 'null' (select)", function() {
+       select = $("<select></select>");
+
+       combobox = new ComboBox(select, {
+           dataTextField: "text",
+           dataValueField: "value",
+           dataSource: [{text: "foo", value: 1}, {text: "bar", value: 2}],
+       });
+
+       combobox.value("custom");
+       combobox.value(null);
+
+       var option = select.children(":last");
+
+       equal(option[0].value, "custom");
+       equal(option.attr("selected"), undefined)
+       equal(option[0].selected, false);
+   });
+
+   test("value method clears selected state of the custom option", function() {
        select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>");
 
        combobox = new ComboBox(select, {
