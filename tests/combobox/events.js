@@ -477,6 +477,43 @@ test("preventing select event during navigation reverts selection", 2, function(
     equal(current.html(), "foo");
 });
 
+test("trigger select event on blur when input text is changed", 1, function() {
+    var combobox = input.kendoComboBox({
+        dataSource: ["foo", "bar"],
+        select: function(e) {
+            equal(e.item[0], combobox.current()[0]);
+        }
+    }).data("kendoComboBox");
+
+    combobox.input.focus().val("bar").blur();
+});
+
+test("do not trigger select event on blur when input text is not changed", 0, function() {
+    var combobox = input.kendoComboBox({
+        dataSource: ["foo", "bar"],
+        select: function(e) {
+            ok(false);
+        }
+    }).data("kendoComboBox");
+
+    combobox.select(0);
+    combobox.input.focus().blur();
+});
+
+test("prevent select event on blur returns old value", 1, function() {
+    var combobox = input.kendoComboBox({
+        dataSource: ["foo", "bar"],
+        select: function(e) {
+            e.preventDefault();
+        }
+    }).data("kendoComboBox");
+
+    combobox.select(0);
+    combobox.input.focus().val("bar").blur();
+
+    equal(combobox.text(), "foo");
+});
+
 test("ComboBox trigger blur of the hidden input", 1, function() {
     combobox = input.kendoComboBox().data("kendoComboBox");
 
