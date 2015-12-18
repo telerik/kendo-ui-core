@@ -850,6 +850,10 @@ var __meta__ = { // jshint ignore:line
             var hasValue = parent.value();
             var custom = hasValue && parent.selectedIndex === -1;
 
+            if (this.selectedIndex == -1 && this.value()) {
+                return;
+            }
+
             if (isFiltered || !hasValue || custom) {
                 that.options.value = "";
                 that.value("");
