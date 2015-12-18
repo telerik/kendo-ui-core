@@ -34,6 +34,7 @@ The example below demonstrates how to disable mousewheel zoom in Kendo UI Map.
         });          
 
         $("#map").unbind("mousewheel");
+		$("#map").unbind("DOMMouseScroll");
       }
 
       $(document).ready(createMap);
