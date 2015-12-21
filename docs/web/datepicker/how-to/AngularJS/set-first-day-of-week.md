@@ -25,7 +25,7 @@ The example below demonstrates how to set the first day of the week on a Kendo U
     <script>
       angular.module("KendoDemos", [ "kendo.directives" ])
       .controller("MyCtrl", function($scope){
-       
+
       })
       .run(function() {
       	kendo.culture().calendar.firstDay= 3
@@ -42,7 +42,6 @@ Other articles on Kendo UI DatePicker:
 * [How to Create Date Masking]({% slug howto_create_date_masking_datepicker %})
 * [How to Use AngularJS Copy Functionality]({% slug howto_use_angularjs_copy_functionality_datepicker %})
 * [How to Integrate DatePicker with DateJS Library]({% slug howto_integrate_withdatejs_library_datepicker %})
-* [How to Disable Dates]({% slug howto_disable_dates_datepicker %})
 * [How to Hide the Deafult Button]({% slug howto_hide_default_button_datepicker %})
 * [How to Globally Modify Default Options]({% slug howto_globally_modify_default_options_datepicker %})
 * [How to Persist Entered Dates]({% slug howto_persist_entered_dates_datepicker %})

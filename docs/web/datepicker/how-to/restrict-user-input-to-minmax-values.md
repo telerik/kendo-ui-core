@@ -23,16 +23,16 @@ The example below demonstrates how to restrict user input to min/max values set 
         });
       });
     </script>
-  
+
     <script>
         function onDOBChange(e) {
             var dt = e.sender;
           	var value = dt.value();
-          	
+
           	if (value === null) {
               value = kendo.parseDate(dt.element.val(), dt.options.parseFormats);
             }
-          
+
             if (value < dt.min()) {
                 dt.value(dt.min());
             }else if (value > dt.max()) {
@@ -51,7 +51,6 @@ Other articles on Kendo UI DatePicker:
 * [How to Select Ranges between DatePickers]({% slug howto_select_ranges_between_datepicker %})
 * [How to Set the First Weekday]({% slug howto_set_first_weekday_datepicker %})
 * [How to Integrate DatePicker with DateJS Library]({% slug howto_integrate_withdatejs_library_datepicker %})
-* [How to Disable Dates]({% slug howto_disable_dates_datepicker %})
 * [How to Hide the Deafult Button]({% slug howto_hide_default_button_datepicker %})
 * [How to Globally Modify Default Options]({% slug howto_globally_modify_default_options_datepicker %})
 * [How to Persist Entered Dates]({% slug howto_persist_entered_dates_datepicker %})

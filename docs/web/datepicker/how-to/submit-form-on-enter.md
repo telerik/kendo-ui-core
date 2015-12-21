@@ -13,16 +13,16 @@ The example below demonstrates how to submit a form when the `Enter` key is pres
 
 ```html
     <form id="form1" style="border: 1px solid red">
-   	    <input id="datepicker" /> 
+   	    <input id="datepicker" />
         <button>Submit</button>
     </form>
-  
+
     <script>
         $(function() {
           var form = $("#form1");
-          
+
           $("#datepicker").kendoDatePicker();
-          
+
           form.on("submit", function(e) {
             e.preventDefault();
                 alert("submit!");    
@@ -40,7 +40,6 @@ Other articles on Kendo UI DatePicker:
 * [How to Select Ranges between DatePickers]({% slug howto_select_ranges_between_datepicker %})
 * [How to Set the First Weekday]({% slug howto_set_first_weekday_datepicker %})
 * [How to Integrate DatePicker with DateJS Library]({% slug howto_integrate_withdatejs_library_datepicker %})
-* [How to Disable Dates]({% slug howto_disable_dates_datepicker %})
 * [How to Hide the Deafult Button]({% slug howto_hide_default_button_datepicker %})
 * [How to Globally Modify Default Options]({% slug howto_globally_modify_default_options_datepicker %})
 * [How to Persist Entered Dates]({% slug howto_persist_entered_dates_datepicker %})

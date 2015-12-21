@@ -161,7 +161,6 @@ Other articles on Kendo UI Calendar:
 Articles on Kendo UI DatePicker:
 
 * [Overview]({% slug overview_kendoui_datepicker_widget %})
-* [How to Disable Dates]({% slug howto_disable_dates_datepicker %})
 * [How to Set the First Weekday]({% slug howto_set_first_weekday_datepicker %})
 * [How to Create Date Masking]({% slug howto_create_date_masking_datepicker %})
 * [How to Persist Entered Dates]({% slug howto_persist_entered_dates_datepicker %})

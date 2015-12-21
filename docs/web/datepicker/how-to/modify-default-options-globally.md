@@ -49,7 +49,6 @@ Other articles on Kendo UI DatePicker:
 * [How to Set the First Weekday]({% slug howto_set_first_weekday_datepicker %})
 * [How to Use AngularJS Copy Functionality]({% slug howto_use_angularjs_copy_functionality_datepicker %})
 * [How to Integrate DatePicker with DateJS Library]({% slug howto_integrate_withdatejs_library_datepicker %})
-* [How to Disable Dates]({% slug howto_disable_dates_datepicker %})
 * [How to Hide the Deafult Button]({% slug howto_hide_default_button_datepicker %})
 * [How to Persist Entered Dates]({% slug howto_persist_entered_dates_datepicker %})
 * [How to Make Input Elements Readonly]({% slug howto_make_input_elements_readonly_datepicker %})
