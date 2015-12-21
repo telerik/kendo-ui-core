@@ -30,7 +30,7 @@ Open Visual Studio. All of these examples use Visual Studio 2010 and .NET Versio
 
 Select **File/New Project** and select the **ASP.NET Web Application** project template. Name the application **HellojQuery**.
 
-**Figure 1. File a New Project**
+**Figure 1. New project creation**
 
 ![File New Project](/images/webforms/hello-jquery-file-new-project.png)
 
@@ -38,7 +38,7 @@ Open the **Default.aspx** page. Switch to a **Design** view and delete all the c
 
 Name the first text box `txtFirstName`, the second one `txtLastName`. Name the Button `btnSayHello` and change its `Text` property to `Say Hello`. Set the Label ID to `lblResult` and clear out the `Text` property.
 
-**Figure 2. Default Design View**
+**Figure 2. Default design view**
 
 ![Default Design View](/images/webforms/hello-jquery-default-design-view.png)
 
@@ -66,19 +66,19 @@ Refresh the page. Notice that the **Network** tab now shows three items. The fir
 
 Note that the method for all three requests is a [GET](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html). This means that the browser requested three files from the server and did that with an HTTP [GET](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html). A [GET](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) is commonly used when requesting information from a server. By default when you visit a URL, your browser will do a [GET](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) to retrieve the requested site.
 
-**Figure 4. Network Traffic For a GET**
+**Figure 4. Network traffic for a GET**
 
 ![Network Traffic For A Get](/images/webforms/hello-jquery-network-traffic-get.png)
 
 Now fill out the form in the application with your first name and click the **Say Hello** button. The server responds as expected by setting the label text equal to the first name field plus the last name field. Have another look at the network traffic pane. It looks nearly identical, but the **Default.aspx** page was retrieved this time with a [POST](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html). This is because this time the browser sent some data to the server specifically the values of the first name and last name text boxes. When browsers send information to the server and expect a response, this is typically done with a [POST](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) method.
 
-**Figure 5. Network Traffic For a POST**
+**Figure 5. Network traffic for a POST**
 
 ![Network Traffic For A Post](/images/webforms/hello-jquery-network-traffic-post.png)
 
 In ASP.NET Web Forms, the page posts back to itself, or to the same URL. To inspect the information that was sent to the server, double-click on the [POST](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) method and click on the **Request Body** tab.
 
-**Figure 6. Network Request Body**
+**Figure 6. Network request body**
 
 ![Network Request Body](/images/webforms/hello-jquery-network-request-body.png)
 
@@ -89,13 +89,13 @@ This requires a complete round trip to the server. This means that the browser h
 [jQuery](http://jquery.com/) is a simple JavaScript library that allows the developer to interact with the HTML of the page (amongst many other things) in a very
 straightforward way.
 
-### Add jQuery to the Project
+### Add jQuery to Project
 
 Visual Studio projects actually come with [jQuery](http://jquery.com/) in the `Scripts` folder by default. However, these [`jQuery`](http://jquery.com/) and `VSDoc` files may be out of date and not connected with a [Nuget](http://msdn.microsoft.com/en-us/library/dd565622) installation. Delete the [jQuery](http://jquery.com/) files in the `Scripts` folder, including the `VSDoc` file.
 
 To install [jQuery](http://jquery.com/) from [Nuget](http://msdn.microsoft.com/en-us/library/dd565622.aspx), right-click the project and select **Add Library Package Reference** > **Online** from the left-hand side and enter `jquery` in the search box. Click the **Install** button on the [`jQuery`](http://jquery.com/) package. This will install the `VSDoc` files as well. There is no need to install them separately.
 
-**Figure 7. Nuget jQuery Search**
+**Figure 7. Nuget jQuery search**
 
 ![Nuget jQuery Search](/images/webforms/hello-jquery-nuget-jquery-search.png)
 
@@ -107,7 +107,7 @@ This is going to put the latest version of [jQuery](http://jquery.com/) in the `
 
 Open up the **Site.Master** page. Drag the full [jQuery](http://jquery.com/) source into the `head` of the page, directly below the `link` tag to `Site.css`. This creates a new `link` tag pointing to the `jQuery-1.9.1.js` file. [JQuery](http://jquery.com/) is now added to the project.
 
-**Figure 8. jQuery Added to the Master Page**
+**Figure 8. jQuery added to the master page**
 
 ![jQuery Added To The Master Page](/images/webforms/hello-jquery-jquery-added-to-master.png)
 
@@ -115,7 +115,7 @@ Open up the **Site.Master** page. Drag the full [jQuery](http://jquery.com/) sou
 
 Run the application again. When it comes up, open the developer tools by selecting `F12`. Switch to the **Console** tab in the developer tools. The console allows a developer to execute arbitrary JavaScript commands at runtime. As a test, type `alert("Hello!");` in the console and press **Enter**.
 
-**Figure 9. Alert Hello**
+**Figure 9. Hello alert popup**
 
 ![Alert Hello](/images/webforms/hello-jquery-alert-hello.png)
 
@@ -123,7 +123,7 @@ Run the application again. When it comes up, open the developer tools by selecti
 
 For this project, you are expected to know that [jQuery](http://jquery.com/) selects items out of the [DOM](http://en.wikipedia.org/wiki/Minification). The [DOM](http://en.wikipedia.org/wiki/Minification) is the Document Object Model, but you can think of this as just your page. [jQuery](http://jquery.com/) allows you to select elements out of your page and get or set different properties on the elements. [jQuery](http://jquery.com/) has many types of selectors, but it is important to be very comfortable with the following two basic types of selectors:
 
-1. ID Selectors - This is when you select an element based upon its unique ID. Every HTML element on your page must have a unique ID. This is done by using the `#` (number) sign.
+**Type 1.** ID Selectors - This is when you select an element based upon its unique ID. Every HTML element on your page must have a unique ID. This is done by using the `#` (number) sign.
 
 The example below demonstrates how to select an element by ID with jQuery.
 
@@ -132,7 +132,7 @@ The example below demonstrates how to select an element by ID with jQuery.
     // gets the First Name text box
     var txtFirstName = $("#txtFirstName");
 
-2. Class Selectors - When an element, or a group of elements, is selected by the `CSS` class. If you have several elements on a page with the same class, all of them will be returned. This is done by using the `.` (dot) sign.
+**Type 2.** Class Selectors - When an element, or a group of elements, is selected by the `CSS` class. If you have several elements on a page with the same class, all of them will be returned. This is done by using the `.` (dot) sign.
 
 The example below demonstrates how to select elements by class with jQuery.
 
@@ -154,13 +154,13 @@ The example below demonstrates how to get the text of `txtFirstName` by entering
 
 Notice that the command is echoed out into the console, but there is no value. This mistake was made on purpose to demonstrate an important feature of ASP.NET Web Forms.
 
-**Figure 10. `txtFirstName` Has No Value**
+**Figure 10. No-value `txtFirstName`**
 
 ![txtFirstName Has No Value](/images/webforms/hello-jquery-txtfirstname-no-value.png)
 
 To figure out why this did not work, click on the white arrow which is the element selector. Then go up into the page and click on the text box that you named `txtFirstName`. The HTML tab opens and the element in the page is highlighted. Notice that its ID is not `txtFirstName`, but rather `MainContent_txtFirstName`. This is because the controls were added to a content container in `Default.aspx`. In ASP.NET Web Forms, controls added to a parent server control are prefixed with the parent name. If parents are nested within parents, they may have multiple values appended onto the front. This is to make sure that IDs do in fact remain unique.
 
-**Figure 11. Main Content Prefixed `txtFirstName`**
+**Figure 11. `txtFirstName` prefixed**
 
 ![Main Content Prefixed txtFirstName](/images/webforms/hello-jquery-main-content-txt-firstname.png)
 
@@ -173,11 +173,11 @@ Switch back to the **Console** tab and, keeping in mind the actual ID of `txtFir
 
 Notice that the text value of the first name text box is returned.
 
-**Figure 12. `txtFirstName` Has a Value**
+**Figure 12. `txtFirstName` having value**
 
 ![txtFirstName Has A Value](/images/webforms/hello-jquery-txtfirstname-has-value.png)
 
-### Refactor Application To Use jQuery
+### Refactor Application to Use jQuery
 
 Given that you can select any element in the page, and get or set its value, switch back to Visual Studio and open up the `Default.aspx` file. Right above the closing `</asp:Content>` tag, open a new script block. You do not have to specify the type of the script block. All script blocks are assumed to be JavaScript unless otherwise specified.
 
@@ -189,7 +189,7 @@ The example below demonstrates how to open a new script block.
         // ... JavaScript will go here
     </script>
 
-#### Document Ready
+### Execute Document Ready
 
 Another important concept in jQuery is the [`Document Ready`](http://api.jquery.com/ready/) function. This is a function that jQuery executes when the page finishes loading. This is important as you do not want to execute any code until all libraries, CSS, and HTML elements have been loaded on the page.
 
@@ -278,4 +278,7 @@ The code from this module can be downloaded from the [GitHub repository course](
 
 Tutorials on how to build an HTML application in ASP.NET:
 
-* [Part 2: Hallo Services]()
+* [Part 2 - Hello Services]({% slug part2_halloservices_aspnetwebforms_tutorials %})
+* [Part 3 - Hello HTML5]({% slug part3_aspnetwebforms_tutorials %})
+* [Part 4 - Hello Kendo UI]({% slug part4_aspnetwebforms_tutorials %})
+* [Part 5 - Hello Kendo UI Grid CRUD Operations]({% slug part5_aspnetwebforms_tutorials %})

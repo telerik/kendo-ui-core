@@ -1,32 +1,30 @@
 ---
-title: Part 5 - Hello Kendo UI  - Grid CRUD
-page_title: Second tutorial for HTML5 development with ASP.NET - Crud Operations
-description: Learn how to enable CRUD operations in Kendo UI Grid widget, handle editing the grid and failed requests.
+title: Part 5 - Hello CRUD Data Operations
+page_title: Part 5 - Hello CRUD Data Operations | Kendo UI Third-Party Frameworks
+description: "Learn how to enable CRUD operations, handle the editing functionality and failed requests in the Kendo UI Grid widget."
+slug: part5_aspnetwebforms_tutorials
 position: 5
 ---
 
-In this tutorial, you will learn how to fully enable CRUD operations in the
-grid and how to additionally handle errors on your server and bubble them up
-to the browser.
+# Part 5 - Hello CRUD Data Operations
+
+In this tutorial, you will learn how to fully enable the Create, Read, Update, Destroy (CRUD) data operations in the Grid and how to additionally handle errors on your server and bubble them up to the browser.
 
 ## Screencast
 
 <iframe height="360" src="http://www.youtube.com/embed/BRv7Gvf1w6A?rel=0" frameborder="0" width="640"></iframe>
 
-## Written Content
+## Written Summary
 
-You can build off of [Part 1](https://github.com/telerik/html5-dev-for-aspnet-devs/tree/master/hello-kendo-ui-part-1), or you can download the completed code
-for Part 2 [here](https://github.com/telerik/html5-dev-for-aspnet-devs/tree/master/hello-kendo-ui-part-2).
+You can build off of [Part 1](https://github.com/telerik/html5-dev-for-aspnet-devs/tree/master/hello-kendo-ui-part-1), or you can download the completed code for Part 2 [here](https://github.com/telerik/html5-dev-for-aspnet-devs/tree/master/hello-kendo-ui-part-2).
 
-To start with, return some additional data from the database. Add in the
-Title, BirthDate and City Fields to the **Employee** model object. Also add a
-constructor that takes in a **Data.Employee** object and maps that object to
-the model properties. This will make the code in the **EmployeesController**
-cleaner.
+## Create Sample Application
 
-The **Employee** model object now looks like this:
+To start with, return some additional data from the database. Add in the **Title**, **BirthDate** and **City** fields to the `Employee` model object. Add a constructor that takes in a `Data.Employee` object and maps that object to the model properties. This makes the code in the `EmployeesController` cleaner.
 
-### Employee Model Object
+The example below demonstrates how the `Employee` model object now looks like.
+
+###### Example
 
     public class Employee {
 
@@ -47,13 +45,13 @@ The **Employee** model object now looks like this:
         }
     }
 
-> You will need to modify the LinqToSQL context to make BirthDate a non- nullable field. That should really be fixed in the database. While it's more than possible to handle nullable dates, having a nullable BirthDate column lacks a strong use case.
+> **Important**
+>
+> Modify the LinqToSQL context to make BirthDate a non- nullable field. That should be fixed in the database. While it is more than possible to handle nullable dates, having a nullable BirthDate column lacks a strong use case.
 
-The **EmployeesController** **Get** method now looks a bit different. You will
-notice that it's become quite slim and consists mostly of comments by now:
+The `EmployeesController` `Get` method now looks a bit different. Notice that it is now quite slim and consists mostly of comments, as demonstrated in the example below.
 
-### EmployeesController Get Method
-
+###### Example
 
     // WebAPI will respond to an HTTP GET with this method
     public Models.Response Get() {
@@ -74,38 +72,32 @@ notice that it's become quite slim and consists mostly of comments by now:
         return new Models.Response(employees, _context.Employees.Count());
     }
 
-## Enable Editing In The Grid
+<!--_-->
+### Enable Editing in Grid
 
-In order to enable full CRUD operations in the grid, you need to add the
-interactive bit of UI. Kendo UI has several options for how to do this. You
-can edit grid rows in a [popup](http://demos.telerik.com/kendo-ui/web/grid/editing-popup.html), or [inline](http://demos.telerik.com/kendo-ui/web/grid/editing-inline.html). You can get very
-granular control over the look and feel of the editing experience with
-[custom editors](http://demos.telerik.com/kendo-ui/web/grid/editing-custom.html).
+To enable full CRUD operations in the Grid, add the interactive bit of UI. Kendo UI has several options for how to do this. You can edit grid rows in a [popup](http://demos.telerik.com/kendo-ui/web/grid/editing-popup.html), or [inline](http://demos.telerik.com/kendo-ui/web/grid/editing-inline.html). You can get very granular control over the look and feel of the editing experience with [custom editors](http://demos.telerik.com/kendo-ui/web/grid/editing-custom.html).
 
-For this example, I am going to use the built-in [inline](http://demos.telerik.com/kendo-ui/web/grid/editing-inline.html) editing that
-comes with Kendo UI grid.
+This example uses the built-in [inline](http://demos.telerik.com/kendo-ui/web/grid/editing-inline.html) editing that comes with the Kendo UI Grid widget.
 
-To start, open the **Default.aspx** file. On the grid, you are going to need
-to specify `editable: true` With this one change, you can save the page and
-launch it with Visual Studio. You will notice that when you click on a row, it
-becomes editable.
+To start, open the `Default.aspx` file. Specify `editable: true` in the Grid, as demonstrated in the example below. With this change, you can now save the page and launch it with Visual Studio. When you click on a row, it becomes editable.
 
-### Make The Grid Editable
+###### Example
 
     editable: true
 
+**Figure 1. An editable Grid**
+
 ![grid_is_editable](/images/webforms/grid_is_editable.png)
+
+### Use Command Columns
 
 To get a better editing experience, use a [command column](http://demos.telerik.com/kendo-ui/web/grid/editing-inline.html) in the grid.
 
-In the **Default.aspx** file, add a column to the columns definition that
-specifies the commands that you want to include. For this example, specify
-`edit` and `destroy` Make the `title` an empty string.
+In the `Default.aspx` file, add a column to the columns definition that specifies the commands that you want to include. For this example, specify `edit` and `destroy` Make the `title` an empty string. Also, format the DateTime that will be coming back as the `BirthDate` to make the date cleaner.
 
-Also format the DateTime that will be coming back as the **BirthDate** so that
-it's a bit of a cleaner date.
+The example below demonstrates how to specify command columns.
 
-### Specify Command Columns
+###### Example
 
     // specify the columns on the grid
     columns: [
@@ -117,39 +109,25 @@ it's a bit of a cleaner date.
         { command: ["edit", "destroy"], title: " " }
     ],
 
-This will create **Edit** and **Delete** buttons in the last column of the
-grid with no title on the column. At this point, the application will show the
-buttons, but if you click on them, nothing will happen because the grid is
-expecting you to click on the cell to edit the field. To fix this, change the
-`editable: true` to `editable: "inline"`.
+### Use Inline Edit Mode
 
-### Specify Inline Editing
+This will create the **Edit** and **Delete** buttons in the last column of the Grid with no title on the column. At this point, the application shows the buttons. However, if you click them, nothing happens, because the Grid is expecting you to click on the cell to edit the field. To fix this, change the `editable: true` to `editable: "inline"`, as demonstrated in the example below.
+
+###### Example
 
     editable: "inline"
 
-With this change, the grid will put the entire row in edit mode when you click
-the "Edit" button. Also notice that the grid automatically gives you
-**Cancel** and **Update** buttons when you go into edit mode. If you click the
-**Delete** button, you will get a prompt asking you if you are sure you want
-to delete this item.
+With this change, the Grid puts the entire row in edit mode when you click the **Edit** button. Notice that the Grid automatically gives you **Cancel** and **Update** buttons when you go into the edit mode. If you click **Delete**, you get a prompt asking you if you are sure you want to delete this item.
 
-However you will notice that the grid currently has the **BirthDate** field as
-a textbox and allows you to completely null out the **LastName**. This is not
-ideal. You can add constraints for column editing by specifying a model in the
-schema on the DataSource.
+### Specify Model for DataSource
 
-The [Model](http://api/framework/model) object will specify a client-side model structure that can
-describe the data in terms of type and validation rules.
+However, you will notice that the Grid currently has the `BirthDate` field as a textbox and allows you to completely null out the **LastName**. This is not ideal. You can add constraints for column editing by specifying a model in the schema on the DataSource. The [`Model`](http://api/framework/model) object specifies a client-side model structure that can describe the data in terms of type and validation rules.
 
-Add a `model` to the `schema` declaration specifying that the `id` is
-mapped to the "Id" field from the database. Then specify a `fields` object.
-Each object in the fields can be either a simple string, or an object that
-provides some more information about the model field. In order to specify that
-fields are required, you will need to add a `validation` object. Also, so
-that the grid will know to give you a [DatePicker](http://demos.telerik.com/kendo-ui/web/datepicker) for the
-**BirthDate** column when in edit mode, specify that it's type is `date`.
+Add a `model` to the `schema` declaration specifying that the `id` is mapped to the **Id** field from the database. Then specify a `fields` object. Each object in the fields can be either a simple string, or an object that provides some more information about the `model` field. To specify that fields are required, add a `validation` object. Also, specify that its type is `date`, so that the Grid gives you a [DatePicker](http://demos.telerik.com/kendo-ui/web/datepicker) for the **BirthDate** column when in edit mode.
 
-### Specify A Model For The DataSource
+The example below demonstrates how to specify a model for the DataSource.
+
+###### Example
 
     // the schema defines the schema of the JSON coming
     // back from the server so the datasource can parse it
@@ -170,21 +148,17 @@ that the grid will know to give you a [DatePicker](http://demos.telerik.com/kend
         }
     }
 
-In the above declaration, the **FirstName** field is additionally marked as
-being not editable.
+In the above declaration, the `FirstName` field is additionally marked as being not editable.
 
-Run the application now and notice that when you put the grid into edit mode
-you get a Kendo UI [DatePicker](http://demos.telerik.com/kendo-ui/web/datepicker) for the **BirthDate** column. You also
-can't edit the **FirstName** column. If you try and null out the **LastName**
-field, the grid will display a popup message telling you that the **LastName**
-is required.
+Run the application now and notice that when you put the grid into edit mode you get a Kendo UI [DatePicker](http://demos.telerik.com/kendo-ui/web/datepicker) for the **BirthDate** column. You cannot edit the **FirstName** column either. If you try and null out the **LastName** field, the Grid displays a popup message telling you that the **LastName** is required.
+
+**Figure 2. An editable Grid with model**
 
 ![grid_is_editable_with_model](/images/webforms/grid_is_editable_with_model.png)
 
-If you wanted to tweak this validation message, you could change the model
-definition for the **LastName** to look like this:
+If you want to tweak this validation message, change the model definition for the **LastName** so it looks like the one demonstrated in the example below.
 
-### A Custom Validation Message
+###### Example
 
     LastName: {
         editable: true,
@@ -196,27 +170,17 @@ definition for the **LastName** to look like this:
         }
     }
 
-## Specify CRUD Endpoints In The Grid
+### Set CRUD Endpoints in Grid
 
-Right now the grid looks like it's editable, but it really isn't because it's
-not connected to the server in any way. The first step in doing that is
-specifying the `update` and `destroy` objects on the transport. The
-endpoints that we are going to be calling are very RESTful. This means that
-the `update` action will be at `api/employees/id` with an HTTP verb of
-**POST**. An example request might be `http://myapp.com/api/employees/31`
-This will update the employee with an Id of 31, sending in all of the
-information to update.
+Right now the Grid seems to be editable, but is actually not, because it is not connected to the server in any way. The first step in doing that is specifying the `update` and `destroy` objects on the transport. The endpoints that you are going to call are very RESTful. This means that the `update` action is at `api/employees/id` with an HTTP verb of `POST`. See an example request [here](http://myapp.com/api/employees/31). This updates the employee with an `Id` of 31, sending in all of the information to update.
 
-The `delete` method needs to be handled in much the same way, except that
-it's `type` is **DELETE**. We also don't use `delete` as the object name
-because "delete" is a reserved keyword in JavaScript.  We use `destroy`
-instead.
+The `delete` method needs to be handled in much the same way, except that its `type` is `DELETE`. Do not use `delete` as the object name because `delete` is a reserved keyword in JavaScript. Use `destroy` instead.
 
-The required `Id` parameter can be retrieved by setting the `url` portion
-of the transport to a function. Kendo UI will automatically pass in the
-current model item to these functions off of which you can get the `Id`
+The required `Id` parameter can be retrieved by setting the `url` portion of the transport to a function. Kendo UI automatically passes in the current model item to these functions off of which you can get the `Id`.
 
-### Add update, create and destroy To The Transport
+The example below demonstrates how to add updates, create, and destroy to the transport.
+
+###### Example
 
     // the transport tells the datasource what endpoints
     // to use for CRUD actions
@@ -236,27 +200,15 @@ current model item to these functions off of which you can get the `Id`
         }
     }
 
-## Handle CRUD Operations On The Server
+## Handle CRUD Operations Server-Side
 
-The next step is to handle the different HTTP request types in the
-**EmployeesController**. Since this project built off of **Hello Services**,
-the **DELETE** type is already handled. You just need to add one for
-`update` In this method, you are going to select the employee that needs to
-be updated from the database based on the `id` parameter that is passed in.
-Then set the fields one by one based on the request parameters.
+The next step is to handle the different HTTP request types in the `EmployeesController`. Since this project builds off of [Hello Services]({% slug part2_halloservices_aspnetwebforms_tutorials %}), the `DELETE` type is already handled. Just add one for `update`. In this method, you are going to select the employee that needs to be updated from the database based on the `id` parameter that is passed in. Then set the fields one by one based on the request parameters.
 
-Since you cannot rely on client side validation (as anything in the browser
-can be circumvented), check to make sure the fields are not null before you
-assign them to the database object. Also make sure that the date is valid.
+Since you cannot rely on client-side validation, as anything in the browser can be circumvented, check to make sure the fields are not null before you assign them to the database object. Also, make sure that the date is valid. Return a status message of **OK** or **200** to the Grid for it to know that the update succeeded. You can do that by using the `HTTPResponseMessage` object. If the update succeeds, return a **200**. If it fails, return a **500** and give a little more info in the response body about what went wrong.
 
-You only need to return a status message of "OK" or 200 to the grid for it to
-know that the update succeeded. You can do that by using the
-`HTTPResponseMessage` object. If the update succeeds, return a 200. If it
-fails, return a 500 and give a little more info in the response body about
-what went wrong.
+The example below demonstrates how to add `POST` to the transport.
 
-### Add POST To The Transport
-
+###### Example
 
     public HttpResponseMessage Post(int id) {
         // create a response message to send back
@@ -301,31 +253,20 @@ what went wrong.
         return response;
     }
 
-Test this method out by going to the grid and editing an item. Note that if
-you don't make any changes, the grid will not make a request to the server.
-Open the developer tools (F12) and switch to the Network Tab. If it tells you
-to refresh to start capturing requests, do so. Place the grid in edit mode and
-make an update to a field,then click the **Update** button.
+<!--_-->
+Test this method out by going to the Grid and editing an item. If you do not make any changes, the Grid is not going to make a request to the server. Open the Developer Tools by pressing `F12`, and switch to the **Network** tab. If it tells you to refresh to start capturing requests, do so. Place the Grid in edit mode and make an update to a field. Click **Update**.
 
-You should see an error in the Network requests. If you click into the error,
-it should be telling you that it was unable to convert the BirthDate to a
-valid DateTime. If you examine the parameters of the request, you will see
-that indeed a very strange date format has been sent back by the server.
+You are expected to see an error in the Network requests. If you click into the error, it tells you that it was unable to convert the BirthDate to a valid DateTime. If you examine the parameters of the request, you see that some strange date format has been sent back by the server.
+
+**Figure 3. Strange date format appearing in the Grid**
 
 ![grid_bad_datetime](/images/webforms/grid_bad_datetime.png)
 
-This is because Dates (which are notoriously awful to work with) are formatted
-for JavaScript. You need to get the date formatted correctly. To do this, add
-a `parameterMap` method to the `transport` on the DataSource. The
-`parameterMap` takes in two parameters: `options` and `operation` The
-`options` will be the parameters as Kendo UI is about to try to send them.
-The `operation` will be either a `read` `update` `create` or
-`destroy` You ALWAYS need to return at least `options` out of this
-function when you specify it. In this case, check for the `update`
-operation. If the current operation is indeed an update, format the date and
-reset the parameter value on the options.
+This is because Dates are formatted for JavaScript and you need to get the date formatted correctly. To do so, add a `parameterMap` method to the `transport` on the DataSource. The `parameterMap` takes in two parameters: `options` and `operation`. `options` are the parameters as Kendo UI is about to try to send them. `operation` is `read`, `update`, `create`, or `destroy`. You must always return at least `options` out of this function when you specify it. In this case, check for the `update` operation. If the current operation is indeed an update, format the date and reset the parameter value on the options.
 
-### Cleanse The BirthDate In The Parameter Map
+The example below demonstrates how to cleanse the  BirthDate in the parameter map.
+
+###### Example
 
     // the transport tells the datasource what endpoints
     // to use for CRUD actions
@@ -360,18 +301,15 @@ reset the parameter value on the options.
         }
     }
 
-The `update` should now work flawlessly.
+The `update` is now expected to work flawlessly.
 
-### Other Ways Of Raising Errors
+### Raise Errors in Other Ways
 
-There is more than one way to tell Kendo UI that there has been an error. All
-you really need to do is to provide a return value for an `errors` field in
-the model. Modify the `Models.Response` object to have an `Errors` field.
-Additionally, add a constructor that takes in just an `error` parameter and
-sets the value, and a constructor that takes no parameters.
+There is more than one way to tell Kendo UI that there has been an error. All you must do is provide a return value for an `errors` field in the model. Modify the `Models.Response` object to have an `Errors` field. Additionally, add a constructor that takes in just an `error` parameter and sets the value, and a constructor that takes no parameters.
 
-### Add Errors Field To The Response Object
+The example below demonstrates how to add an `Errors` field  to the response object.
 
+###### Example
 
     public class Response {
 
@@ -389,12 +327,12 @@ sets the value, and a constructor that takes no parameters.
         }
     }
 
-In the case that the update succeeds, you can return an empty
-`Models.Response` object. If it fails, you will set the value of the
-`Errors` field on the `Models.Response` object.
 
-### Return An Errors Property On Error
+If the update succeeds, you can return an empty `Models.Response` object. If it fails, set the value of the `Errors` field on the `Models.Response` object.
 
+The example below demonstrates how to return an `Errors` property on error.
+
+###### Example
 
     public Models.Response Delete(int id) {
 
@@ -425,17 +363,12 @@ In the case that the update succeeds, you can return an empty
         }
     }
 
-Now you need to modify the schema to map the `Errors` property of the
-response to the `errors` field. When this field has a value, it will
-automatically raise the `error` event on the DataSource. Specify an action
-here for that as well.
+<!--_-->
+Now modify the `schema` to map the `Errors` property of the response to the `Errors` field. When this field has a value, it will automatically raise the `error` event on the DataSource. Specify an action here for that as well.
 
-Of course you don't want to do things differently on the `update` and
-`delete` but I wanted to show you more than one way to accomplish the same
-thing.
+This demonstration is made for the sake of showing how to do things differently on the `update` and `delete` for accomplishing the same thing. The example below demonstrates how to map the `errors` field int he `schema`.  
 
-### Map The Errors Field In The Schema
-
+###### Example
 
     // the schema defines the schema of the JSON coming
     // back from the server so the datasource can parse it
@@ -464,54 +397,52 @@ thing.
         alert(e.errors);
     }
 
-### Handling Errors
+### Handle Errors
 
-In the above scenario, the error is simply thrown out to the screen. In fact,
-if you try to delete certain people from the **Employees** table - like Nancy
-Davalio - you will get an error back from the server.
+In the above scenario, the error is thrown out to the screen. If you try to delete certain people from the **Employees** table, i.e. Nancy Davalio, you get an error back from the server.
+
+**Figure 4. A sample server error**
 
 ![sample_error](/images/webforms/sample_error.png)
 
-**DO NOT EVER EXPOSE THIS MUCH INFORMATION ABOUT YOUR DATABASE TO THE USER!**
+> **Important**
+>
+> You must never expose so much information about your database to the user.
 
-You will want to pick a notification strategy and standard error platform.
-It's better to just log the error and give the user only the information that
-they need. The delete failed because Nancy has related records in the Orders
-table.
+Pick a notification strategy and a standard error platform. It is better to just log the error and give the user only the information that they need. The deletion failed because Nancy has related records in the **Orders** table.
 
-You will also notice that if you didn't throw the error, the user would never
-know that the `delete` failed because the row has disappeared from the grid.
-This is not what you want. However the DataSource needs to know how to handle
-this situation. It's currently storing the object as dirty and will try to
-sync it again when it gets the chance. In this situation, it's best to simply
-rollback the change by calling `cancelChanges` on the DataSource. This can
-also be called directly on the grid.
+If you did not throw the error, the user is not aware that the `delete` failed because the row has disappeared from the grid. This is not what you want. However, the DataSource needs to know how to handle this situation. It is currently storing the object as dirty and is going to try and sync it again when it gets the chance. In this situation, it is best to rollback the change by calling `cancelChanges` on the DataSource. This can also be called directly on the Grid.
 
-### Cancel The Changes On A Failed Request
+The example below demonstartes how to cancel changes on a failed request.
+
+###### Example
 
     error: function (e) {
         alert("The action failed. Please see the logs.");
         this.cancelChanges();
     }
 
-This will rollback the changes to the grid and put the row back.
+The code above roll backs the changes made to the Grid and puts the row back.
 
-## Wrap Up
+## Further Reading
 
-You have now learned how to do grid actions on the server (like paging), as
-well as how to handle grid editing and failed requests. Download the finished
-code for this module [here](https://github.com/telerik/html5-dev-for-aspnet-devs/tree/master/hello-kendo-ui-part-2).
+Download the finished code for this module from [here](https://github.com/telerik/html5-dev-for-aspnet-devs/tree/master/hello-kendo-ui-part-2).
 
-   [2]: https://github.com/telerik/html5-dev-for-aspnet-devs/tree/master/hello-kendo-ui-part-1
+Build on this tutorial by gradually adding more advanced functionalities to this application and consider the information from these pages:
 
-   [3]: https://github.com/telerik/html5-dev-for-aspnet-devs/tree/master/hello-kendo-ui-part-2
+* [Hello Kendo UI Tutorial Part 1 on GitHub](https://github.com/telerik/html5-dev-for-aspnet-devs/tree/master/hello-kendo-ui-part-1)
+* [Hello Kendo UI Tutorial Part 2 on GitHub](https://github.com/telerik/html5-dev-for-aspnet-devs/tree/master/hello-kendo-ui-part-2)
+* [Kendo UI Grid Editing Functionality in Popups](http://demos.telerik.com/kendo-ui/web/grid/editing-popup.html)
+* [Kendo UI Grid Editing Functionality Inline](http://demos.telerik.com/kendo-ui/web/grid/editing-inline.html)
+* [Kendo UI Grid Custom Editing](http://demos.telerik.com/kendo-ui/web/grid/editing-custom.html)
+* [JavaScript `model` API](/api/javascript/data/model)
+* [Kendo UI DatePicker Demo Online](http://demos.telerik.com/kendo-ui/web/datepicker)
 
-   [4]: http://demos.telerik.com/kendo-ui/web/grid/editing-popup.html
+## See Also
 
-   [5]: http://demos.telerik.com/kendo-ui/web/grid/editing-inline.html
+Tutorials on how to build an HTML application in ASP.NET:
 
-   [6]: http://demos.telerik.com/kendo-ui/web/grid/editing-custom.html
-
-   [9]: http://api/framework/model
-
-   [10]: http://demos.telerik.com/kendo-ui/web/datepicker
+* [Part 1 - Hello jQuery]({% slug part1_aspnetwebforms_tutorials %})
+* [Part 2 - Hello Services]({% slug part2_halloservices_aspnetwebforms_tutorials %})
+* [Part 3 - Hello HTML5]({% slug part3_aspnetwebforms_tutorials %})
+* [Part 4 - Hello Kendo UI]({% slug part4_aspnetwebforms_tutorials %})
