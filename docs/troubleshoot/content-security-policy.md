@@ -17,7 +17,7 @@ Kendo UI uses `eval()` calls. This is how the Kendo UI templates work internally
 If CSP mode is enabled for a Kendo UI application, the `unsafe-eval` keyword should be added as part of the `meta` tag used for enabling the CSP mode:
 
     <meta http-equiv="Content-Security-Policy" content="script-src 'unsafe-eval' 'self' https://kendo.cdn.telerik.com;">
-    
+
 ## See Also
 
 Other articles on troubleshooting:
@@ -30,7 +30,7 @@ Other articles on troubleshooting:
 * [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})
 * [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
 * [Common Issues in Kendo UI Upload]({% slug troubleshooting_upload_widget %})
-* [Common Issues in Widgets Rendering Data Visualization](/dataviz/troubleshooting)
+* [Common Issues Related to Styling, Appearance, and Rendering]({% slug commonissues_troubleshooting_kendouistyling %})
 * [Common Issues in Telerik UI for ASP.NET MVC](/aspnet-mvc/troubleshooting)
 * [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/grid/troubleshooting)
 * [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/upload/troubleshooting)

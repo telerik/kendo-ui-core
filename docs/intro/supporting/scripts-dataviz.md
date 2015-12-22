@@ -1,23 +1,17 @@
 ---
-title: Script Files for Data Visualization Widgets
-page_title: Script Files for Data Visualization Widgets | Kendo UI Installation
-description: "Learn which are the script files for Kendo UI widgets that render data visualization."
-slug: script_filesfor_datavisualization_widgets
-position: 4
+title: Script Files for Charts
+page_title: Script Files for Charts | Kendo UI Installation
+description: "Check out the list with the script files for the Kendo UI Charts widgets."
+slug: script_filesfor_charts_widgets
+position: 5
 ---
 
-# Script Files for Data Visualization Widgets
+# Script Files for Charts
 
-Below are listed the script files for Kendo UI widgets rendering data visualization for desktop and mobile web applications:
+Below are listed the script files for the Kendo UI Charts widgets:
 
 | Widget				| Script Files								|Comments					|
 | :---					| :---										|:---						|
-| [Barcode](http://demos.telerik.com/kendo-ui/barcode/index)| jquery.js| 						|
-| 						| kendo.core.js								| 							|
-| 						| kendo.color.js							| 							|
-| 						| kendo.drawing.js							| 							|
-| 						| kendo.dataviz.core.js						| 							|
-| 						| kendo.dataviz.barcode.js					| 							|
 | [Chart](http://demos.telerik.com/kendo-ui/chart-api/index)| jquery.js|						|
 | 						| kendo.core.js								| 							|
 | 						| kendo.data.js								| 							|
@@ -32,56 +26,6 @@ Below are listed the script files for Kendo UI widgets rendering data visualizat
 | 						| kendo.dataviz.chart.funnel.js				| Funnel chart feature		|
 | 						| kendo.pdf.js 								| PDF export feature		|
 | 						| kendo.dataviz.chart.js					| 							|
-| [Diagram](http://demos.telerik.com/kendo-ui/diagram/index)| jquery.js|						|
-| 						| kendo.core.js								| 							|
-| 						| kendo.data.js								| 							|
-| 						| kendo.userevents.js						|  							|
-| 						| kendo.fx.js								| 							|
-| 						| kendo.draganddrop.js						| 							|
-| 						| kendo.mobile.scroller.js					| 							|
-| 						| kendo.color.js							| 							|
-| 						| kendo.drawing.js							| 							|
-| 						| kendo.dataviz.core.js						| 							|
-| 						| kendo.dataviz.themes.js					| 							|
-| 						| kendo.toolbar.js							| 							|
-| 						| kendo.pdf.js 								| PDF export feature		|
-| 						| kendo.calendar.js							| Editing feature			|
-| 						| kendo.popup.js 							| Editing feature			|
-| 						| kendo.datepicker.js 						| Editing feature			|
-| 						| kendo.numerictextbox.js 					| Editing feature			|
-| 						| kendo.validator.js 						| Editing feature			|
-| 						| kendo.binder.js 							| Editing feature			|
-| 						| kendo.editable.js 						| Editing feature			|
-| 						| kendo.window.js 							| Editing feature			|
-| 						| kendo.list.js 							| Editing feature			|
-| 						| kendo.dropdownlist.js 					| Editing feature			|
-| 						| kendo.dataviz.diagram.js					| 							|
-| [Gauge](http://demos.telerik.com/kendo-ui/linear-gauge/index)| jquery.js|						|
-| 						| kendo.core.js								| 							|
-| 						| kendo.color.js							| 							|
-| 						| kendo.drawing.js							| 							|
-| 						| kendo.dataviz.core.js						| 							|
-| 						| kendo.dataviz.themes.js					| 							|
-| 						| kendo.dataviz.gauge.js					| 							|
-| [Map](http://demos.telerik.com/kendo-ui/map/index)| jquery.js|								|
-| 						| kendo.core.js								| 							|
-| 						| kendo.data.js								| 							|
-| 						| kendo.userevents.js						| 							|
-| 						| kendo.popup.js							| 							|
-| 						| kendo.tooltip.js							| 							|
-| 						| kendo.color.js							| 							|
-| 						| kendo.drawing.js							| 							|
-| 						| kendo.dataviz.core.js						| 							|
-| 						| kendo.fx.js								| 							|
-| 						| kendo.draganddrop.js						| 							|
-| 						| kendo.mobile.scroller.js					| 							|
-| 						| kendo.dataviz.map.js						| 							|
-| [QRCode](http://demos.telerik.com/kendo-ui/qrcode/index)| jquery.js|							|
-| 						| kendo.core.js								| 							|
-| 						| kendo.color.js							| 							|
-| 						| kendo.drawing.js							| 							|
-| 						| kendo.dataviz.core.js						| 							|
-| 						| kendo.dataviz.qrcode.js					| 							|
 | [Sparklines](http://demos.telerik.com/kendo-ui/sparklines/index)| jquery.js| 					|
 | 						| kendo.core.js								| 							|
 | 						| kendo.data.js								| 							|
@@ -114,9 +58,17 @@ Below are listed the script files for Kendo UI widgets rendering data visualizat
 
 ## See Also
 
-Articles with script files for the other Kendo UI components:
+Articles listing the script files for other Kendo UI components:
 
-+ [List of Script Files for the Desktop Widgets]({% slug scirpt_filesfor_desktop_widgets %})  
-+ [List of Script Files for the Frameworks and Widgets for Mobile Applications]({% slug script_filesfor_hybridui_widgets %})
-+ [List of Script Files for the Tools and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
-+ [List of Script Files for the Server-Side Wrappers]({% slug script_filesfor_serverside_wrappers %})
++ [Script Files for Data Management]({% slug scirpt_filesfor_datamanagement_widgets %})  
++ [Script Files for Editors]({% slug scirpt_filesfor_editors_widgets %})
++ [Script Files for Gauges]({% slug script_filesfor_gauges_widgets %})
++ [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})
++ [Script Files for Diagrams and Maps]({% slug script_filesfor_diagramsandmaps_widgets %})
++ [Script Files for Scheduling]({% slug scirpt_filesfor_scheduling_widgets %})
++ [Script Files for Layout]({% slug scirpt_filesfor_layout_widgets %})
++ [Script Files for Navigation]({% slug scirpt_filesfor_navigation_widgets %})
++ [Script Files for Interactivity and UX]({% slug scirpt_filesfor_interactivityandux_widgets %})
++ [Script Files for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})
++ [Script Files for Tools, Frameworks and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
++ [Script Files for Server-Side Wrappers]({% slug script_filesfor_serverside_wrappers %})

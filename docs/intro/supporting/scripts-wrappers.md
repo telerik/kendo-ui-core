@@ -1,7 +1,7 @@
 ---
 title: Script Files for Server-Side Wrappers
 page_title: Script Files for Server-Side Wrappers | Kendo UI Installation
-description: "Learn which are the script files for ASP.NET MVC server-side wrapper for Kendo UI widgets."
+description: "Check out the list with the script files for the ASP.NET MVC server-side wrapper for Kendo UI widgets."
 slug: script_filesfor_serverside_wrappers
 position: 7
 ---
@@ -25,9 +25,17 @@ Below are listed the script files for Kendo UI supplementary scripts for integra
 
 ## See Also
 
-Articles with script files for the other Kendo UI components:
+Articles listing the script files for other Kendo UI components:
 
-+ [List of Script Files for the Desktop Widgets]({% slug scirpt_filesfor_desktop_widgets %})  
-+ [List of Script Files for the Widgets Rendering Data Visualization]({% slug script_filesfor_datavisualization_widgets %})
-+ [List of Script Files for the Frameworks and Widgets for Mobile Applications]({% slug script_filesfor_hybridui_widgets %})
-+ [List of Script Files for the Tools and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
++ [Script Files for Data Management]({% slug scirpt_filesfor_datamanagement_widgets %})  
++ [Script Files for Editors]({% slug scirpt_filesfor_editors_widgets %})
++ [Script Files for Charts]({% slug script_filesfor_charts_widgets %})
++ [Script Files for Gauges]({% slug script_filesfor_gauges_widgets %})
++ [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})
++ [Script Files for Diagrams and Maps]({% slug script_filesfor_diagramsandmaps_widgets %})
++ [Script Files for Scheduling]({% slug scirpt_filesfor_scheduling_widgets %})
++ [Script Files for Layout]({% slug scirpt_filesfor_layout_widgets %})
++ [Script Files for Navigation]({% slug scirpt_filesfor_navigation_widgets %})
++ [Script Files for Interactivity and UX]({% slug scirpt_filesfor_interactivityandux_widgets %})
++ [Script Files for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})
++ [Script Files for Tools, Frameworks and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
