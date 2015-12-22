@@ -89,6 +89,10 @@ The [configuration](#configuration) options for the path.
 The element clipping path.
 Inherited from [Element.clip](element#configuration-clip)
 
+### cursor `String`
+The element cursor.
+Inherited from [Element.cursor](element#configuration-cursor)
+
 ### fill `kendo.drawing.FillOptions`
 The fill options of the shape.
 
