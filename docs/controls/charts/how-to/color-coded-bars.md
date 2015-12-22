@@ -12,7 +12,7 @@ This is usually implemented through stacked bar series,
 but at times we might need a little bit more flexibility.
 
 Consider the type of chart illustrated below:
-![Color-coded ranges](images/color-coded-bars.png)
+![Color-coded ranges](/controls/charts/how-to/images/color-coded-bars.png)
 
 We can implement it by defining a [series visual](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#configuration-series.visual)
 that draws the ranges dynamically.
