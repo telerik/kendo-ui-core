@@ -1942,7 +1942,8 @@ html .km-pane-wrapper .km-widget,
     .box-shadow(none);
 }
 
-.k-tabstrip-items .k-state-default
+.k-tabstrip-items .k-state-default,
+.k-panelbar .k-tabstrip-items .k-state-default
 {
     border-color: @tabstrip-items-border;
 }
@@ -1950,14 +1951,6 @@ html .km-pane-wrapper .km-widget,
 .k-tabstrip-items .k-state-hover
 {
     border-color: @hover-border-color;
-}
-
-.k-tabstrip-items .k-state-active,
-.k-panelbar .k-tabstrip-items .k-state-active
-{
-    background-color: @active-background-color;
-    .composite-background(@active-gradient);
-    border-color: @active-border-color;
 }
 
 .k-tabstrip .k-content.k-state-active
@@ -2761,7 +2754,8 @@ border-radius: 0;
     border-radius: 0;
 }
 
-.k-tabstrip-items .k-state-active {
+.k-tabstrip-items .k-state-active,
+.k-panelbar .k-tabstrip-items .k-state-active {
 background-color: @header-background-color;
 .composite-background(@active-gradient);
 border-color: @selected-background;
@@ -3088,7 +3082,9 @@ background-color: @hover-background-color;
 
 .k-panelbar > .k-item > .k-link,
 .k-panelbar.k-header,
-.k-panelbar .k-content, .k-panelbar .k-panel, .k-panelbar .k-item {
+.k-panelbar .k-content,
+.k-panelbar .k-panel,
+.k-panelbar .k-item {
 border-color: @panelbar-items-border;
 }
 
