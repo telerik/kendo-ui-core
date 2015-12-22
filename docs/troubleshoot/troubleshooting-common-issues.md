@@ -120,10 +120,11 @@ For a solution, refer to [Serving Icon Fonts](/mobile/icons#serving-icon-fonts).
 
 ### 404 Status Code Is Thrown for JSON Files on IIS
 
-By default, IIS will not serve files with unknown extensions.
-The mime types can be specified either through the IIS management console (inetmgr) or in the site Web.config, like this:
+By default, IIS does not serve files with unknown extensions. The mime types can be specified either through the IIS management console (inetmgr) or in the site `Web.config`.
 
-#### Example: Configure IIS Web.config
+The example below demonstrates how to configure the IIS Web.config. Note the mime is removed first to avoid clashes if it is already defined.
+
+###### Example
 
 ```xml
     <?xml version="1.0"?>
@@ -138,8 +139,6 @@ The mime types can be specified either through the IIS management console (inetm
         </system.webServer>
     </configuration>
 ```
-
-Here we're removing the mime type first to avoid clashes if it is already defined.
 
 ## Ajax
 

@@ -1,23 +1,30 @@
 ---
 title: Overview
-page_title: Documentation Guide for Kendo UI Barcode widget
-description: How to create and set a Barcode widget in Kendo UI DataViz.
+page_title: Overview | Kendo UI Barcode Widget
+description: "Learn how to create and set a Kendo UI Barcode widget."
+slug: overview_kendoui_barcode_widget
 position: 1
 ---
 
 # Barcode Overview
 
-The Barcode widget is used to represent data in a machine-readable format.
-All graphics are rendered on the client using SVG with a fallback to VML for legacy browsers.
+The [Kendo UI Barcode widget](http://demos.telerik.com/kendo-ui/barcode/index) is used to represent data in a machine-readable format. All graphics are rendered on the client using Scalable Vector Graphics (SVG) with a fallback to Vector Markup Language (VML) for legacy browsers.
 
+## Getting Started
 
-## Basic setup
+### Create the Barcode
 
-### 1\. Create a simple HTML div (optionally set a height and width with CSS)
+Create the Kendo UI Barcode widget by using a simple HTML `div` and, optionally, set a height and width via CSS.
+
+###### Example
 
     <div id="barcode"></div>
 
-### 2\. Initialize the Kendo UI Barcode with default configuration. Default Encoding is "code39".
+### Initialize the Barcode
+
+Initialize the Barcode widget with its default configuration as demonstrated in the example below. Note that the default Encoding is `code39`.
+
+###### Example
 
     $(document).ready(function() {
         $("#barcode").kendoBarcode({
@@ -25,9 +32,15 @@ All graphics are rendered on the client using SVG with a fallback to VML for leg
         });
     });
 
-### 3\. Specifying the type
+## Configuration
 
-The most important setting when configuring the Barcode widget after specifying the value is to choose the encoding type (symbology).
+### Specify Barcode Type
+
+The most important setting after providing its value is for you to choose the encoding type (symbology) as demonstrated in the example below.
+
+For more information on what type of encoding to select, refer to the [article about encoding]({% slug encodings_kendoui_barcode_widget %}).
+
+###### Example
 
     $(document).ready(function() {
         $("#barcode").kendoBarcode({
@@ -36,8 +49,16 @@ The most important setting when configuring the Barcode widget after specifying 
         });
     });
 
-Refer to the [encodings](dataviz/barcode/overview) section to choose the right encoding.
+### Fine-Tune Color, Background, Padding Margin
 
-### 4\. Fine tune the color, background, padding margin of the text and more.
+To fine-tune the color, background, padding margin of the text and to find more Barcode configuration options, refer to the [Barcode API](/api/javascript/dataviz/ui/barcode).
 
-Refer to the complete [API reference](/api/dataviz/barcode) for examples and complete list of settings that the Barcode provides.
+## See Also
+
+Other articles on Kendo UI Barcode:
+
+* [Encodings]({% slug encodings_kendoui_barcode_widget %})
+* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/barcode/overview)
+* [Overview of the JSP Tag](/jsp/tags/barcode/overview)
+* [Overview of the PHP Class](/php/widgets/barcode/overview)
+* [JavaScript API Reference](/api/javascript/dataviz/ui/barcode)

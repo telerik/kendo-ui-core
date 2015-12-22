@@ -1,18 +1,18 @@
 ---
 title: Encodings
-page_title: Specific characteristics of the different symbologies of the Barcode widget
-description: Check information about the character set, length and check digit of the Barcode symbologies.
+page_title: Encodings | Kendo UI Barcode Widget
+description: "Learn more about the character set and length, and check the digits of the Barcode symbologies when configuring the Kendo UI Barcode widget."
+slug: encodings_kendoui_barcode_widget
 position: 2
 ---
 
-## What is Encoding/Symbology?
+# Encodings
 
-The mapping between messages and barcodes is called a symbology (encoding).
-The specification of a symbology includes the encoding of the single digits/characters of the message
-as well as the start and stop markers into bars and space,
-the size of the quiet zone required to be before and after the barcode as well as the computation of a checksum.
+The mapping between messages and barcodes is called symbology (encoding). The symbology specification includes the encoding of the individual digits/characters of the message, the start and stop markers into bars and space, the size of the quiet zone required to be before and after the barcode, as well as the computation of a checksum.
 
-Currently the Kendo Barcode widget supports the following symbologies with the their specifications:
+## Supported Symbologies
+
+The [Kendo UI Barcode widget](http://demos.telerik.com/kendo-ui/barcode/index) supports the following symbologies and their specifications:
 
 <style scoped>
     .stripes
@@ -40,7 +40,9 @@ Currently the Kendo Barcode widget supports the following symbologies with the t
     }
 </style>
 
-> Error will be thrown if the value provided for a particular encoding does not meet the expected length or character set.
+> *Important**
+>
+> If the value for a particular encoding you provide does not meet the expected length or character set, it is going to throw an error.
 
 <table class="stripes" style="margin-top: 1.2em;">
    <tbody>
@@ -166,3 +168,10 @@ Currently the Kendo Barcode widget supports the following symbologies with the t
         </tr>
     </tbody>
 </table>
+
+## See Also
+
+Other articles on Kendo UI Barcode:
+
+* [Overview]({% slug overview_kendoui_barcode_widget %})
+* [JavaScript API Reference](/api/javascript/dataviz/ui/barcode)

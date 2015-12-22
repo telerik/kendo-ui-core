@@ -289,19 +289,20 @@ If the Grid has no fixed width and resizes with the browser window, you can appl
         min-width: initial;
     }
 
+<!--*-->
 Using the `Grid ID` (Name) in the above selectors is optional, so that the styles are applied to a particular Grid instance only.
 
 Setting column widths in percent is possible, but if the sum of all widths is greater than 100%, i.e. a horizontal scrollbar is desired, the Grid tables must have a (min-)width style. Otherwise, the tables will be 100% wide (as wide as the Grid) and the columns will be narrower than desired. Note that when column widths are set in percent, resizing one column may lead to other columns changing their widths as well.
 
 ### Column Resizing
 
-When Grid scrolling is **disabled** and a column is resized, other columns will **change** widths too, so that the sum of all column widths remains constant.
+When Grid scrolling is `disabled` and a column is resized, other columns will change widths too, so that the sum of all column widths remains constant.
 
-When Grid scrolling is **enabled** and a column is resized, all other columns will **maintain** their widths. There are three possible outcomes of column resizing with regard to the sum of all column widths:
+When Grid scrolling is `enabled` and a column is resized, all other columns will maintain their widths. There are three possible outcomes of column resizing with regard to the sum of all column widths:
 
-* if it is greater than the Grid width, then a horizontal scrollbar will appear;
-* if it is equal to the Grid width, then no horizontal scrollbar will be visible;
-* if it is less than the Grid width, then empty space after the last column will appear;
+* If it is greater than the Grid width, then a horizontal scrollbar will appear.
+* If it is equal to the Grid width, then no horizontal scrollbar will be visible.
+* If it is less than the Grid width, then empty space after the last column will appear.
 
 ### Lock Columns
 

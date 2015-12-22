@@ -11,9 +11,9 @@ The example below demonstrates how to create a date masking functionality for th
 
 There are three notable points to mention:
 
-* The MaskedTextBox must be initialized first
-* The MaskedTextBox mask and the DatePicker format must match
-* The whole approach is not officially supported, and may be prone to limitations and undesired side effects.
+* The MaskedTextBox must be initialized first.
+* The MaskedTextBox mask and the DatePicker format must match.
+* The whole approach is not officially supported, and may be prone to limitations and undesired side-effects.
 
 ###### Example
 
