@@ -239,7 +239,7 @@ The Grid columns behave differently, depending on whether scrolling is enabled, 
 
 When the scrolling functionality is enabled, which is the default case except for the Grid MVC wrapper, the `table-layout` style of the Grid tables is set to `fixed`. This means that all columns without a defined width will appear equally wide, no matter what their content is, and will expand or shrink depending on the available space. If there is not enough horizontal space, columns without a defined width may even shrink to a zero width. All set column widths will be obeyed no matter what the cell content is. If the content cannot fit, it will be either wrapped, or clipped. During column resizing, only the resized column will change its width and the other column widths will be persisted. To achieve this, the table width will change.
 
-When the scrolling functionality is disabled, the `table-layout` style is set to `auto`. This is the default behavior of HTML tables. If not explicitly set, the column widths are determined by the browser and cell content. The browser will try to obey all set column widths, but may readjust some columns depending on their content. The column widths may change on paging, sorting, and other data operations. The width of multiple columns changes during resizing, because the table width remains constant.
+When the scrolling functionality is disabled, the `table-layout` style is set to `auto`. This is the default behavior of HTML tables. If not explicitly set, the column widths are determined by the browser and cell content. The browser will try to obey all set column widths, but may readjust some columns depending on their content. The column widths may change on paging, sorting, and other data operations.
 
 If needed, a fixed table layout can be applied to a non-scrollable Grid:
 
@@ -292,6 +292,16 @@ If the Grid has no fixed width and resizes with the browser window, you can appl
 Using the `Grid ID` (Name) in the above selectors is optional, so that the styles are applied to a particular Grid instance only.
 
 Setting column widths in percent is possible, but if the sum of all widths is greater than 100%, i.e. a horizontal scrollbar is desired, the Grid tables must have a (min-)width style. Otherwise, the tables will be 100% wide (as wide as the Grid) and the columns will be narrower than desired. Note that when column widths are set in percent, resizing one column may lead to other columns changing their widths as well.
+
+### Column Resizing
+
+When Grid scrolling is **disabled** and a column is resized, other columns will **change** widths too, so that the sum of all column widths remains constant.
+
+When Grid scrolling is **enabled** and a column is resized, all other columns will **maintain** their widths. There are three possible outcomes of column resizing with regard to the sum of all column widths:
+
+* if it is greater than the Grid width, then a horizontal scrollbar will appear;
+* if it is equal to the Grid width, then no horizontal scrollbar will be visible;
+* if it is less than the Grid width, then empty space after the last column will appear;
 
 ### Lock Columns
 
