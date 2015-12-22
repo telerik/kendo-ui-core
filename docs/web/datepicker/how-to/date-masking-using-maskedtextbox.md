@@ -9,6 +9,12 @@ slug: howto_create_date_masking_datepicker
 
 The example below demonstrates how to create a date masking functionality for the Kendo UI DatePicker by using the Kendo UI MaskedTextBox.
 
+There are three notable points to mention:
+
+* The MaskedTextBox must be initialized first
+* The MaskedTextBox mask and the DatePicker format must match
+* The whole approach is not officially supported, and may be prone to limitations and undesired side effects.
+
 ###### Example
 
 ```html
@@ -27,7 +33,9 @@ The example below demonstrates how to create a date masking functionality for th
           mask: "00/00/0000"
         });
 
-        datepicker2.kendoDatePicker();
+        datepicker2.kendoDatePicker({
+            format: "MM/dd/yyyy"
+        });
 
         datepicker2.closest(".k-datepicker")
         .add(datepicker2)
