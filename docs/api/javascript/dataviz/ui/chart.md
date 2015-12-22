@@ -31940,6 +31940,28 @@ The [configuration](#configuration) options with which the chart is initialized.
     chart.refresh();
     </script>
 
+### surface `kendo.drawing.Surface`
+The drawing surface of the Chart. See [Drawing API](http://docs.telerik.com/kendo-ui/api/javascript/drawing).
+
+#### Example - bind to surface events
+
+    <div id="chart"></div>
+    <script>
+        $("#chart").kendoChart({
+            series: [{
+                type: "column", data: [1, 2]
+            }],
+            render: function(e) {
+                e.surface.bind("mouseenter", onShapeMouseEnter);
+            }
+        });
+
+        function onShapeMouseEnter(e) {
+            // http://docs.telerik.com/kendo-ui/api/javascript/drawing/surface#events-mouseenter
+            console.log(e);
+        }
+    </script>
+
 ## Methods
 
 ### destroy
