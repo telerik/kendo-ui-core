@@ -36,6 +36,10 @@ A rectange defining the position and size of the image.
 The element clipping path.
 Inherited from [Element.clip](element#configuration-clip)
 
+### cursor `String`
+The element cursor.
+Inherited from [Element.cursor](element#configuration-cursor)
+
 ### opacity `Number`
 The element opacity.
 Inherited from [Element.opacity](element#configuration-opacity)
