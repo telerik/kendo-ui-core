@@ -118,6 +118,29 @@ For a solution, refer to [Kendo UI CDN Fallback and Troubleshooting](/intro/inst
 
 For a solution, refer to [Serving Icon Fonts](/mobile/icons#serving-icon-fonts).
 
+### 404 Status Code Is Thrown for JSON Files on IIS
+
+By default, IIS will not serve files with unknown extensions.
+The mime types can be specified either through the IIS management console (inetmgr) or in the site Web.config, like this:
+
+#### Example: Configure IIS Web.config
+
+```xml
+    <?xml version="1.0"?>
+    <configuration>
+        ...
+        <system.webServer>
+            ...
+            <staticContent>
+                <remove fileExtension=".json" />
+                <mimeMap fileExtension=".json" mimeType="application/json" />
+            </staticContent>
+        </system.webServer>
+    </configuration>
+```
+
+Here we're removing the mime type first to avoid clashes if it is already defined.
+
 ## Ajax
 
 ### Widget Object Is Undefined after Loading a Page through AJAX
