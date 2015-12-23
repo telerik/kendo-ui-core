@@ -1,74 +1,96 @@
 ---
 title: Overview
-page_title: Documentation Guide for Kendo UI QRCode widget
-description: How to create and set a QRCode widget in Kendo UI DataViz.
+page_title: Overview | Kendo UI QRCode Widget
+description: "Learn how to create and set the  Kendo UI QRCode widget."
+slug: overview_kendoui_qrcode_widget
+position: 1
 ---
 
 # QRCode Overview
-QRCode widget helps you easily generate canvas/svg image representing a QRCode. QR is short for Quick Response (they can be read quickly by a cell phone). 
-They are used to take a piece of information from a transitory media and put it in to your cell phone.
-All graphics are rendered on the client using Canvas/SVG with a fallback to VML for legacy browsers.
 
+The [Kendo UI QRCode widget](http://demos.telerik.com/kendo-ui/qrcode/index) helps you easily generate [Canvas](https://en.wikipedia.org/wiki/Canvas_X) and [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) images representing QR codes. QR is short for Quick Response, intended to signify that they can be read quickly by a cell phone. [QR codes](https://en.wikipedia.org/wiki/QR_code) are used to take a piece of information from a transitory media and put it in to your cell phone. All graphics are rendered on the client by using Canvas or SVG with a fallback to [Vector Markup Language (VML)](https://en.wikipedia.org/wiki/Vector_Markup_Language) for legacy browsers.
 
-## Getting started
+## Getting Started
 
-### Creating a **QRCode** from existing HTML DIV element
+### Create the QRCode
+
+Create the Kendo UI QRCode widget from an existing `div` element, as demonstrated in the example below.
+
+###### Example
 
     <div id="qrcode"></div>
 
-### Initialize the Kendo UI QRCode with default configuration and simple value.
+### Initialize the QRCode
+
+Initialize the QRCode with its default configuration and simple value, as demonstrated in the example below.
+
+###### Example
 
     $("#qrcode").kendoQRCode({
         value: "FOO"
     });
 
-### Specifying [error correction level](http://en.wikipedia.org/wiki/QR_code#Error_correction) and the size.
+## Configuration
+
+### Specify Error Correction Level and Size
+
+Specify the [error correction level](http://en.wikipedia.org/wiki/QR_code#Error_correction) and size of the QRCode widget as demonstrated in the example below.
+
+###### Example
 
     $("#qrcode").kendoQRCode({
         value: "Hello world!",
-		errorCorrection: "M", 
+		errorCorrection: "M",
 		size: 120 // the overall size of the side of the Barcode in pixels
     });
 
-## General conventions for the different types of values
+### Set Border, Color, Background, and Encoding
 
-In many cases the value of the widget is processed by the device in a special way, for example Geo Locations are displayed on the GPS/Map application on the device, URLs are opened with the browser and so on.
+To set up the border, color, background, and encoding of the Kendo UI QRCode, refer to its methods and configuration options in the [QRCode API](/api/javascript/dataviz/ui/qrcode).
 
-#### URL
+## General Conventions
 
-The most common application of barcodes is to encode the text of URL such as http://www.telerik.com/. To do so, simply encode exactly the text of the URL in the barcode: "http://www.telerik.com/". Include the protocol ("http://", here) to ensure it is recognized as a URL.
+There are several conventions for the different types of values in a QR code. In many cases the value of the widget is processed by the device in a special way. For example, geolocations are displayed in the Global Positioning System (GPS) or Map application on the device, URLs are opened by the browser, etc.
 
-#### E-mail address
+### URL
 
-To encode an e-mail address like kendo@telerik.com, one could simply encode "kendo@telerik.com". However to ensure it is recognized as an e-mail address, it is advisable to create a proper mailto URI from the address: "mailto:kendo@telerik.com".
+The most common application of barcodes is to encode the text of URL such as http://www.telerik.com/. To do so, encode the `http://www.telerik.com/` URL text in the barcode. Include the protocol&mdash;`http://` in the example&mdash;to ensure it is recognized as a URL.
 
-Readers should open a blank e-mail message to the given address.
+### Email Address
 
-#### Telephone numbers
+To encode an email address, such as `kendo@telerik.com`, encode `kendo@telerik.com`. To ensure it is recognized as an email address, it is advisable that you create a proper `mailto` Uniform Resource Identifier (URI) from the address&mdash;`mailto:kendo@telerik.com`.
 
-A tel URI should be used to encode a telephone number, to ensure that the digits are understood as a telephone number. Further, it is advisable to include prefixes that make the number accessible internationally. For example, to encode the US phone number 212-555-1212, one should encode "tel:+1-212-555-1212". This tel URI includes a "+1" prefix that will make it usable outside the United States.
+As a result, readers are able to open a blank email message to the given address.
 
-Readers should invoke the device's dialer, if applicable, and pre-fill it with the given number, but not automatically initiate a call.
+### Telephone Numbers
 
-#### Contact information
+A telephone URI should be used to encode a telephone number, to ensure that the digits are understood as a telephone number. Further, it is advisable to include prefixes that make the number internationally accessible. For example, to encode the `212-555-1212` US phone number, encode `tel:+1-212-555-1212`. This telephone URI includes a `+1` prefix that makes it usable outside the United States.
+
+As a result, readers are able to invoke the device's dialer, if applicable, and pre-fill it with the given number, but not automatically initiate a call.
+
+### Contact Information
+
 You can use the [vCard](http://en.wikipedia.org/wiki/VCard) format for encoding contact information as text. This format proves a bit verbose for use in 2D barcodes, whose information capacity is limited. It is not clear whether vCard is or should be used to encode contact information.
 
-Readers should open a new address book entry, populated with the given data, and prompt the user to add a new contact.
+As a result, readers are able to open a new address book entry, populated with the given data, and prompt the user to add a new contact.
 
-#### SMS
+### SMS
 
-Much like an e-mail address, one can encode an SMS shortcode or number by creating an sms URI. For example to create a link to the number "12345" one would encode "sms:12345". 
+Much like an email address, encode an SMS shortcode or number by creating an sms URI. For example, to create a link to the `12345` number, encode `sms:12345`. Some developers use other URI forms, such as `sms:number:subject`, and other prefixes, such as `smsto:`.
 
-We have heard of URIs of the form "sms:number:subject", and likewise for other prefixes like "smsto:".
+As a result, readers are able to open a new SMS message that is ready for users to compose and send it.
 
-Readers should open a new SMS message, ready for the user to compose and send it.
+### Geolocation
 
-### Geolocation / Geographic information
+A geo URI may be used to encode a point on the earth, including altitude. For example, to encode the Telerik's Bulgarian office, encode `geo:42.65049,23.37925,100`.
 
-A geo URI may be used to encode a point on the earth, including altitude. For example, to encode the Telerik's Bulgarian office, one would encode "geo:42.65049,23.37925,100".
+As a result, readers are able to either open a local mapping application, such as [Google Maps](https://www.google.bg/maps/), to this location and zoom accordingly, or a link to this location on a mapping website like Google Maps in the web browser of the device.
 
-A reader might open a local mapping application like Google Maps to this location and zoom accordingly, or could open a link to this location on a mapping web site like Google Maps in the device's web browser.
+## See Also
 
-### Configure the border, color, background, encoding.
+Other articles on Kendo UI QRCode:
 
-Refer to the complete [API reference](/api/dataviz/qrcode) for examples and complete list of settings/methods that the QRCode provides.
+* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/qrcode/overview)
+* [Overview of the JSP Tag](/jsp/tags/qrcode/overview)
+* [Overview of the PHP Class](/php/widgets/qrcode/overview)
+* [QRCode JavaScript API Reference](/api/javascript/dataviz/ui/qrcode)

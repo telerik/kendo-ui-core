@@ -8,7 +8,7 @@ position: 1
 
 # Barcode Overview
 
-The [Kendo UI Barcode widget](http://demos.telerik.com/kendo-ui/barcode/index) is used to represent data in a machine-readable format. All graphics are rendered on the client using Scalable Vector Graphics (SVG) with a fallback to Vector Markup Language (VML) for legacy browsers.
+The [Kendo UI Barcode widget](http://demos.telerik.com/kendo-ui/barcode/index) is used to represent data in a machine-readable format. All graphics are rendered on the client using [Scalable Vector Graphics (SVG)](http://www.w3.org/Graphics/SVG/) with a fallback to [Vector Markup Language (VML)](https://en.wikipedia.org/wiki/Vector_Markup_Language) for legacy browsers.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ Create the Kendo UI Barcode widget by using a simple HTML `div` and, optionally,
 
 ### Initialize the Barcode
 
-Initialize the Barcode widget with its default configuration as demonstrated in the example below. Note that the default Encoding is `code39`.
+Initialize the Barcode with its default configuration as demonstrated in the example below. Note that the default Encoding is `code39`.
 
 ###### Example
 
@@ -61,4 +61,4 @@ Other articles on Kendo UI Barcode:
 * [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/barcode/overview)
 * [Overview of the JSP Tag](/jsp/tags/barcode/overview)
 * [Overview of the PHP Class](/php/widgets/barcode/overview)
-* [JavaScript API Reference](/api/javascript/dataviz/ui/barcode)
+* [Barcode JavaScript API Reference](/api/javascript/dataviz/ui/barcode)

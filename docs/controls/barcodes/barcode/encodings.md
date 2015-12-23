@@ -12,7 +12,7 @@ The mapping between messages and barcodes is called symbology (encoding). The sy
 
 ## Supported Symbologies
 
-The [Kendo UI Barcode widget](http://demos.telerik.com/kendo-ui/barcode/index) supports the following symbologies and their specifications:
+The [Kendo UI Barcode widget](http://demos.telerik.com/kendo-ui/barcode/index) supports the symbologies and their specifications as listed in the table below.
 
 <style scoped>
     .stripes
@@ -40,7 +40,7 @@ The [Kendo UI Barcode widget](http://demos.telerik.com/kendo-ui/barcode/index) s
     }
 </style>
 
-> *Important**
+> **Important**
 >
 > If the value for a particular encoding you provide does not meet the expected length or character set, it is going to throw an error.
 
@@ -174,4 +174,4 @@ The [Kendo UI Barcode widget](http://demos.telerik.com/kendo-ui/barcode/index) s
 Other articles on Kendo UI Barcode:
 
 * [Overview]({% slug overview_kendoui_barcode_widget %})
-* [JavaScript API Reference](/api/javascript/dataviz/ui/barcode)
+* [Barcode JavaScript API Reference](/api/javascript/dataviz/ui/barcode)
