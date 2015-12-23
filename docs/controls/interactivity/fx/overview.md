@@ -1,17 +1,22 @@
 ---
 title: Overview
+page_title: Overview | Kendo UI Interactivity and UX
+description: "Learn how to create and set the Kendo UI Effects instances."
+slug: overview_kendoui_fxeffects_widget
+position: 1
 ---
-# Kendo UI FX Overview
 
-Kendo UI FX provides a rich, extensible and performance-optimized toolset for element transitions.
-Each effect utilizes CSS tranisions if possible, with a fallback to manual property value modification in older browsers. Animations can be played in reverse which is very convenient for showing and hiding certain parts of the UI.
-Kendo FX uitilizes [jQuery Deffered utility](http://api.jquery.com/category/deferred-object/) for chaining/callbacks.
+# FX Overview
 
-This document provides an overview of the Kendo UI FX library. [Please refer to the FX API docs for complete API details.](/api/framework/fx/common)
+The [Kendo UI FX (Effects) instances](http://demos.telerik.com/kendo-ui/fx/expand) provide a rich, extensible, and performance-optimized toolset for element transitions. Each effect utilizes CSS transitions if possible, with a fallback to manual property value modification in older browsers. Animations can be played in reverse, which is very convenient for showing and hiding certain parts of the user interface (UI). Kendo FX uitilizes the [jQuery Deffered utility](http://api.jquery.com/category/deferred-object/) for chaining and callbacks.
 
 ## Getting Started
 
-Kendo UI Effect instances are created through the `kendo.fx` jQuery selector wrapper. A single wrapper can be used to create multiple effects.
+### Initialize FX Instances
+
+Kendo UI Effect instances are created through the `kendo.fx` jQuery selector wrapper, as demonstrated in the example below. A single wrapper can be used to create multiple effects.
+
+###### Example
 
     <div id="foo">
         I will be animated
@@ -23,7 +28,9 @@ Kendo UI Effect instances are created through the `kendo.fx` jQuery selector wra
         fadeOutEffect.play();
     </script>
 
-The code above can also be compressed to a single line:
+The code above can also be compressed to a single line.
+
+###### Example
 
     <div id="foo">
         I will be animated
@@ -33,10 +40,31 @@ The code above can also be compressed to a single line:
         kendo.fx($("#foo")).fadeOut().play();
     </script>
 
-## Specifying Effect Direction
+## Configuration
 
-Most of the effects support several directions (check the respective effect page for details). Direction can be specified either as the first parameter in the effect constructor method, or by calling the constructor with direction shortcut.
-The following three lines will produce identical effects:
+### Apply Available Effects
+
+The Kendo UI FX library supports the following effects:
+
+- [FX Expand: API Reference](/api/javascript/effects/expand) and [Demo Example](http://demos.telerik.com/kendo-ui/fx/expand)
+- [FX Fade: API Reference](/api/javascript/effects/fade) and [Demo Example](http://demos.telerik.com/kendo-ui/fx/fade)
+- [FX Flip: API Reference](/api/javascript/effects/flip) and [Demo Example](http://demos.telerik.com/kendo-ui/fx/flip)
+- [FX PageTurn: API Reference](/api/javascript/effects/pageturn) and [Demo Example](http://demos.telerik.com/kendo-ui/fx/pageturn)
+- [FX SlideIn: API Reference](/api/javascript/effects/slidein) and [Demo Example](http://demos.telerik.com/kendo-ui/fx/slidein)
+- [FX Tile: API Reference](/api/javascript/effects/tile) and [Demo Example](http://demos.telerik.com/kendo-ui/fx/tile)
+- [FX Transfer: API Reference](/api/javascript/effects/transfer) and [Demo Example](http://demos.telerik.com/kendo-ui/fx/transfer)
+- [FX Zoom: API Reference](/api/javascript/effects/zoom) and [Demo Example](http://demos.telerik.com/kendo-ui/fx/zoom)
+- [FX Replace: API Reference](/api/javascript/effects/replace) and [Demo Example](http://demos.telerik.com/kendo-ui/fx/replace)
+
+When possible, effects are hardware accelerated via CSS transitions, making them ideal for desktop and mobile devices. Unlike CPU intensive JavaScript animations, animations done with CSS can provide better frame-rates and battery life.
+
+### Specify Direction
+
+Most of the effects support several directions as shown in each respective [Kendo UI Effect demo page](http://demos.telerik.com/kendo-ui/fx/expand). Direction can be specified either as the first parameter in the effect constructor method, or by calling the constructor with direction shortcut.
+
+The example below demonstrates how to specify a direction for the desired effect. Note that the three lines produce identical effects.
+
+###### Example
 
     <div id="foo">
         I will be animated
@@ -50,9 +78,13 @@ The following three lines will produce identical effects:
         //Call .play() to run any of the above animations
     </script>
 
-## Composite effects
+### Use Composite Effects
 
-Most of the effects can be combined, provided that they run on the same element (for running effects on different elements, use [jQuery.when](http://api.jquery.com/jQuery.when/)).
+Most of the effects can be combined, provided that they run on the same element, as demonstrated in the example below.
+
+For running effects on different elements, use [`jQuery.when`](http://api.jquery.com/jQuery.when/)).
+
+###### Example
 
     <div id="foo">
         I will be faded out and zoomed out.
@@ -66,7 +98,9 @@ Most of the effects can be combined, provided that they run on the same element 
         // Calling reverse will zoom in and fade in.
     </script>
 
-Example working with multiple elements:
+The example below works with multiple elements.
+
+###### Example
 
     <div id="foo">
         I will fade out.
@@ -87,19 +121,9 @@ Example working with multiple elements:
             });
     </script>
 
-## Available Effects
+## See Also
 
-The Kendo UI FX library currently supports the following effects:
+Other articles on Kendo UI FX instances:
 
-- [Expand](/api/framework/fx/expand)
-- [Fade](/api/framework/fx/fade)
-- [Flip](/api/framework/fx/flip)
-- [PageTurn](/api/framework/fx/pageturn)
-- [SlideIn](/api/framework/fx/slidein)
-- [Tile](/api/framework/fx/tile)
-- [Transfer](/api/framework/fx/transfer)
-- [Zoom](/api/framework/fx/zoom)
-- [Replace](/api/framework/fx/replace)
-
-When possible, effects are hardware accelerated via CSS transitions, making them ideal for desktop and mobile devices. Unlike CPU intensive JavaScript animations, animations done with CSS can provide better framerates and battery life.
-
+* [Common FX JavaScript API Reference](/api/javascript/effects/common)
+* [Replace Effects]({% slug replaceffect_fxeffects_widget %})

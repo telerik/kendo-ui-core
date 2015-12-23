@@ -1,13 +1,23 @@
 ---
-title: Replace Effect
+title: Replace Effects
+page_title: Replace Effects | Kendo UI Interactivity and UX
+description: "Learn how to create complex animated transitions between two elements with a common container by using the Kendo UI Replace Effect."
+slug: replaceffect_fxeffects_widget
+position: 2
 ---
-# Kendo UI Replace Effect
 
-The Kendo UI Replace effect (introduced in the 2014 Q1 release) provides the means to create complex animated transitions between two elements with a common container.
+# Replace Effects
 
-> Unlike the other effects available, the replace effect relies on CSS classes to define the transition states of the two elements. The effect works only in [browsers which support transitions](http://caniuse.com/css-transitions).
+The [Kendo UI Replace effect](http://demos.telerik.com/kendo-ui/fx/replace), which was first introduced in the Kendo UI 2014 Q1 release, provides the means to create complex animated transitions between two elements with a common container.
 
-## Replace effect
+> **Important**
+>
+> Unlike the other available effects, the Kendo UI Replace effect relies on CSS classes to define the transition states of the two elements. The effect works only in [browsers which support transitions](http://caniuse.com/css-transitions).
+
+The example below demonstrates how to apply the Kendo UI Replace effect.
+
+###### Example
+
     <style>
         #container {
             position: relative;
@@ -53,23 +63,25 @@ The Kendo UI Replace effect (introduced in the 2014 Q1 release) provides the mea
         kendo.fx("#step1").replace("#step2", "swap").run();
     </script>
 
+<!--*-->
 
-## How it works
+This is how the Kendo UI Replace effect works:
 
-* The effect assigns several CSS classes to common container based on the effect configuration.
-For instance, if the effect is configured as `kendo.fx("#step1").relace("#step2", "swap").direction("up")`, the assigned classes will be `k-fx` (always assigned), `k-fx-swap` (the transition class), and `k-fx-up`.
-If the effect is played in reverse, an additional `k-fx-reverse` gets assigned.
-
-* The effect element receives `k-fx-next` CSS class.
-* The element which will be hidden receives `k-fx-current` CSS class.
-* The container gets `k-fx-start` CSS class, which then replaced by `k-fx-end`.
-* In `kendo.common.css` and `kendo.mobile.all.css` The `.k-fx .k-fx-current` and `.k-fx .k-fx-next` CSS selectors have their transition CSS property set to `all 350ms ease-out`.
+* The effect assigns several CSS classes to a common container based on the effect configuration. For instance, if the effect is configured as `kendo.fx("#step1").relace("#step2", "swap").direction("up")`, the assigned classes are `k-fx` (always assigned), `k-fx-swap` (the transition class), and `k-fx-up`. If the effect is to be played in reverse, assign an additional `k-fx-reverse` class.
+* The effect element receives the `k-fx-next` CSS class.
+* The element which is going to be hidden receives the `k-fx-current` CSS class.
+* The container gets the `k-fx-start` CSS class, which is then replaced by `k-fx-end`.
+* In `kendo.common.css` and `kendo.mobile.all.css` the `.k-fx .k-fx-current` and `.k-fx .k-fx-next` CSS selectors have their transition CSS property set to `all 350ms ease-out`.
 
 As a result, both elements transition their state from the one defined in the `.k-fx-swap.k.fx-start` to the one defined in `.k-fx-swap.k-fx-end`.
 
-## Customizing the transition duration
+## Configuration
 
-The transition duration is configured through the following CSS selectors, present in kendo.common.css
+### Customize Duration of Transition
+
+The transition duration is configured through the CSS selectors demonstrated in the example below, which are present in `kendo.common.css`.
+
+###### Example
 
     .k-fx-end .k-fx-next,
     .k-fx-end .k-fx-current {
@@ -80,9 +92,11 @@ The transition duration is configured through the following CSS selectors, prese
         transition:all 350ms ease-out;
     }
 
-You can override the default duration for the entire document using a [higher specificity selector](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity), or by including the same selector after Kendo UI stylesheet references.
+You are able to override the default duration for the entire document using a [higher specificity selector](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity), or by including the same selector after Kendo UI stylesheet references.
 
-### Faster replace effect transition
+The example below demonstrates how to apply a faster Replace effect transition.
+
+###### Example
 
     <html>
         <head>
@@ -104,13 +118,18 @@ You can override the default duration for the entire document using a [higher sp
         </body>
     </html>
 
-> This technique may be used to customize the Kendo UI Mobile view transitions.
+> **Importnat**
+>
+> You may use this technique to customize the Kendo UI Mobile view transitions.
 
-## Animating nested elements
+### Animate Nested Elements
 
-In addition to two elements themselves, the elements' contents may perform additional transitions, too. This approach is used to implement the complex iOS transition in Kendo UI Mobile (the cross-browser definitions are omitted from the source).
+In addition to the two elements themselves, the contents of the elements may perform additional transitions, too. This approach is used to implement the complex iOS transition in Kendo UI Mobile. Note that the cross-browser definitions are omitted from the source.
 
-### Multi-element transition definition (Kendo UI Mobile iOS transition)
+The example below demonstrates the multi-element transition definition&mdash;the Kendo UI Mobile iOS transition.
+
+###### Example  
+
     .k-fx-slide.k-fx-end .k-fx-next .km-content,
     .k-fx-slide.k-fx-end .k-fx-next .km-header,
     .k-fx-slide.k-fx-end .k-fx-next .km-footer,
@@ -164,3 +183,9 @@ In addition to two elements themselves, the elements' contents may perform addit
     .k-fx-slide.k-fx-reverse.k-fx-end .k-fx-current .km-footer {
       opacity: 0;
     }
+<!--*-->
+
+## See Also
+
+* [Common FX JavaScript API Reference](/api/javascript/effects/common)
+* [FX Overview]({% slug overview_kendoui_fxeffects_widget %})
