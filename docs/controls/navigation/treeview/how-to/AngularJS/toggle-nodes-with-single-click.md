@@ -34,8 +34,11 @@ The example below demonstrates how to toggle nodes of a Kendo UI TreeView betwee
               ]});
 
               $scope.toggle = function(e) {
-                var dataItem = this.tree.dataItem(e.target);
-                dataItem.set("expanded", !dataItem.expanded);
+                  var toggleIcon = $(e.target).closest(".k-icon");
+                  if (!toggleIcon.length) {
+                      var dataItem = this.tree.dataItem(e.target);
+                      dataItem.set("expanded", !dataItem.expanded);
+                  }
               };
         })
     </script>
