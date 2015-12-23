@@ -1,17 +1,24 @@
 ---
 title: Editing
-page_title: Documentation for enabling editing in Kendo UI Diagram widget
-description: Which steps to follow in order to enable the editing support of Kendo UI Diagram widget.
-position: 3
+page_title: Editing | Kendo UI Diagram Widget
+description: "Learn how to enable the editing functionality of the Kendo UI Diagram widget."
+slug: editing_kendoui_diagram_widget
+position: 2
 ---
 
-# Diagram Editing
+# Editing
 
-To enable the editing support for Kendo UI Diagram widget, perform the following steps:
+By enabling the editing support for the [Kendo UI Diagram widget](http://demos.telerik.com/kendo-ui/diagram/index), you can add tools and shape forms to it, and take full advantage of its layout options, which adds value to your application or website.
 
-## DataSource Configuration for Remote CRUD Data Operations
+## Enable Editing Support
 
-Configure the dataSource (shapeDataSource) for remote CRUD (Create, Read, Update, Destroy) data operations in the way demonstrated below:
+To enable the editing support for Kendo UI Diagram widget, perform the steps below.
+
+### Configure DataSource for Remote CRUD Operations
+
+The example below demonstrates how to configure the Kendo UI dataSource (shapeDataSource) for remote CRUD (Create, Read, Update, Destroy) data operations.
+
+###### Example
 
     var dataSource = new kendo.data.DataSource({
       transport: {
@@ -35,9 +42,11 @@ Configure the dataSource (shapeDataSource) for remote CRUD (Create, Read, Update
 	  }
     });
 
-## ConnectionsDataSource Configuration for Remote CRUD Data Operations
+### Configure `connectionsDataSource` for Remote CRUD Operations
 
-Configure the connectionsDataSource for remote CRUD (Create, Read, Update, Destroy) data operations in the way demonstrated below. Note that without connectionsDataSource the editing will be turned off:
+Configure the `connectionsDataSource` for remote CRUD data operations in the way demonstrated by the example below. Note that without the `connectionsDataSource`, the editing support is going to be turned off.
+
+###### Example
 
     var connectionsDataSource = new kendo.data.DataSource({
       transport: {
@@ -61,9 +70,11 @@ Configure the connectionsDataSource for remote CRUD (Create, Read, Update, Destr
 	  }
     });
 
-## Declare Fields Definition (dataSource Schema)
+### Declare Fields Definition (`dataSource schema`)
 
-Declare fields definition through the dataSource schema:
+Declare the fields definition through the `dataSource schema`, as demonstrated below.
+
+###### Example
 
     var dataSource = new kendo.data.DataSource({
       //..
@@ -78,9 +89,11 @@ Declare fields definition through the dataSource schema:
       }
     });
 
-## Declare Fields Definition (connectionsDataSource Schema)
+### Declare Fields Definition (`connectionsDataSource schema`)
 
-Declare fields definition through the connectionsDataSource schema:
+Declare the fields definition through the `connectionsDataSource schema`, as demonstrated below.
+
+###### Example
 
     var connectionsDataSource = new kendo.data.DataSource({
       //..
@@ -99,9 +112,11 @@ Declare fields definition through the connectionsDataSource schema:
       }
     });
 
-## Configure the Toolbar
+## Configure Toolbar
 
-Configure the Toolbar if you want to enable new records insertion. The createShape will be added by default.
+If you want to enable new records insertion, configure the Toolbar, as demonstrated below. The `createShape` is added by default.
+
+###### Example
 
     $("#diagram").kendoDiagram({
       dataSource: dataSource,
@@ -111,9 +126,11 @@ Configure the Toolbar if you want to enable new records insertion. The createSha
 	  }
     });
 
-## Add a delete tool
+### Add Delete Tool
 
-Add a delete tool if you want to be able to delete records.
+If you want to be able to delete records, add a delete tool, as demonstrated below.
+
+###### Example
 
     $("#diagram").kendoDiagram({
       dataSource: dataSource,
@@ -123,19 +140,25 @@ Add a delete tool if you want to be able to delete records.
 	  }
     });
 
-## Shape Model Fileds
+## Model Fields
+
+### Shape Model Fields
 
 The shape model has the following fields:
 
-* id `Number` - the unique identifier of the shape. Shape without `id` field will not be connected.
-* type `String` - the shape type.
-* text `String` - the shape text.
-* x `Number` - the shape x position.
-* y `Number` - the shape y position.
-* width `Number` - the shape width.
-* height `Number` - the shape height.
+* id `Number`&mdash;The unique identifier of the shape. Shape without `id` field will not be connected.
+* type `String`&mdash;The shape type
+* text `String`&mdash;The shape text
+* x `Number`&mdash;The shape `x` position
+* y `Number`&mdash;The shape `y` position
+* width `Number`&mdash;The shape width
+* height `Number`&mdash;The shape height
 
-Each field will be updated with user interaction. All fields except `id` are not required. DataSource model definition:
+Each field gets updated upon user interaction. All fields except `id` are optional.
+
+The example below demonstrates the DataSource `model` definition.
+
+###### Example
 
 	schema: {
 	  model: {
@@ -174,22 +197,26 @@ Each field will be updated with user interaction. All fields except `id` are not
 	  }
 	}
 
-## Connection Model Fields
+### Connection Model Fields
 
 The connection model has the following fields:
 
-* id `Number` - the unique identifier of the connection.
-* text `String` - the connection text.
-* from `Number` - the connection from shape id.
-* to `Number` - the connection to shape id.
-* fromX `Number` - the connection from x position. (If from is set this position will not be applied)
-* fromY `Number` - the connection from y position. (If from is set this position will not be applied)
-* toX `Number` - the connection to x position. (If from is set this position will not be applied)
-* toY `Number` - the connection to y position. (If from is set this position will not be applied)
-* fromConnector `String` - the name of the source shape connector.
-* toConnector `String` - the name of the target shape connector.
+* id `Number`&mdash;The unique identifier of the connection
+* text `String`&mdash;The connection text
+* from `Number`&mdash;The connection from shape `id`
+* to `Number`&mdash;The connection to shape `id`
+* fromX `Number`&mdash;The connection from `x` position. If `from` is set, this position is not applied.
+* fromY `Number`&mdash;The connection from `y` position. If `from` is set, this position is not applied.
+* toX `Number`&mdash;The connection to `x` position. If `from` is set, this position is not applied.
+* toY `Number`&mdash;The connection to `y` position. If `from` is set, this position is not applied.
+* fromConnector `String`&mdash;The name of the source shape connector.
+* toConnector `String`&mdash;The name of the target shape connector.
 
-Each field will be updated with user interaction. ConnectionsDataSource model definition:
+Each field gets updated upon user interaction.
+
+The example below demonstrates the `connectionsDataSource model` definition.
+
+###### Example
 
 	schema: {
 	  model: {
@@ -239,3 +266,10 @@ Each field will be updated with user interaction. ConnectionsDataSource model de
 		}
 	  }
 	}
+
+## See Also
+
+Other articles on Kendo UI Diagram:
+
+* [Overview]({% slug overview_kendoui_diagram_widget %})
+* [Diagram JavaScript API Reference](/api/javascript/dataviz/ui/diagram)

@@ -1,14 +1,15 @@
 ---
-title: Dynamically changing shape visual elements
-page_title: Dynamically changing shape visual elements
-description: Dynamically changing shape visual elements
+title: Change Shape Visual Elements Dynamically
+page_title: Change Shape Visual Elements Dynamically | Kendo UI Diagram Widget
+description: "Learn how to find a particular element from the shape visual and dynamically change it in a Kendo UI Diagram."
+slug: howto_changeshapevisualelements_dynamically_diagram
 ---
 
-# Dynamically changing shape visual elements
+# Change Shape Visual Elements Dynamically
 
-This example demonstrates how to find particular element from the shape visual and dynamically change it.
+The example below demonstrates how to find a particular element from the shape visual and dynamically change it in a Kendo UI Diagram widget, i.e. change the rectangle fill and stroke options on `hover`.
 
-#### Example - change rectangle fill and stroke options on hover
+###### Example
 
 ```html
 
@@ -157,3 +158,14 @@ This example demonstrates how to find particular element from the shape visual a
     </script>
 
 ```
+
+## See Also
+
+Other articles on Kendo UI Diagram:
+
+* [JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
+* [How to Drag and Drop on Shapes]({% slug howto_draganddrop_onshapes_diagram %})
+* [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
+* [How to Render External Content in Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})
+* [How to Use Scrollbars]({% slug howto_usescrollbar_diagram %})
+* [How to Wrap Text]({% slug howto_wraptext_diagram %})

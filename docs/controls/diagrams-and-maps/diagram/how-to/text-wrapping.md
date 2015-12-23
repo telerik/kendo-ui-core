@@ -1,14 +1,15 @@
 ---
-title: Text wrapping
-page_title: Text wrapping
-description: Text wrapping
+title: Wrap Text
+page_title: Wrap Text | Kendo UI Diagram Widget
+description: "Learn how to use the layout element to wrap text in the Kendo UI Diagram widget."
+slug: howto_wraptext_diagram
 ---
 
-# Text wrapping
+# Wrap Text
 
-This example demonstrates how to use the [Layout](/api/javascript/dataviz/diagram/layout) element in order to arrange long text so that it fits in the shape.
+The example below demonstrates how to use the [`layout`](/api/javascript/dataviz/diagram/layout) element to make long chunks of text fit in a shape.
 
-#### Example
+###### Example
 
 ```html
 
@@ -69,3 +70,14 @@ This example demonstrates how to use the [Layout](/api/javascript/dataviz/diagra
     </script>
 
 ```
+
+## See Also
+
+Other articles on Kendo UI Diagram:
+
+* [JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
+* [How to Change Shape Visual Elements Dynamically]({% slug howto_changeshapevisualelements_dynamically_diagram %})
+* [How to Drag and Drop on Shapes]({% slug howto_draganddrop_onshapes_diagram %})
+* [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
+* [How to Render External Content in Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})
+* [How to Use Scrollbars]({% slug howto_usescrollbar_diagram %})

@@ -1,22 +1,19 @@
 ---
-title: External Content in Shapes
-page_title: Render external content in shape visuals
-description: Render external content in shape visuals
+title: Render External Content in Shapes
+page_title: Render External Content in Shapes | Kendo UI Diagram Widget
+description: "Learn how to render HTML content in Kendo UI Diagram shapes."
+slug: howto_renderexternalcontent_inshapes_diagram
 ---
 
-# Render External Content in Shape Visuals
+# Render External Content in Shapes
 
-This help topic demonstrates how to render HTML content in Diagram shapes.
+The Kendo UI Diagram is rendered by using the [Drawing API](http://docs.telerik.com/kendo-ui/framework/drawing/overview). The shape visual templates allow you to override the rendering entirely, as illustrated in the [Basic Usage](http://demos.telerik.com/kendo-ui/diagram/index) demo.
 
-The Diagram is rendered using the [Drawing API](http://docs.telerik.com/kendo-ui/framework/drawing/overview).
-The shape visual templates allow you to override the rendering entirely,
-as illustrated in the [Basic Usage](http://demos.telerik.com/kendo-ui/diagram/index) demo.
+In addition to manually drawing the shapes, you are able to use the [HTML Drawing](/framework/drawing/drawing-dom) feature to convert existing document content into static drawings.
 
-In addition to manually drawing the shapes, you can use the [HTML Drawing](/framework/drawing/drawing-dom) feature to convert existing document content into static drawings.
+The example below demonstrates how to render HTML content in Kendo UI Diagram shapes by placing a chart into the Diagram shapes.
 
-This is what we'll demonstrate here by placing a chart into the diagram shapes.
-
-#### Example - Draw external content in Diagram shape
+###### Example
 
 ```html
     <style>
@@ -107,3 +104,14 @@ This is what we'll demonstrate here by placing a chart into the diagram shapes.
       });
     </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Diagram:
+
+* [JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
+* [How to Change Shape Visual Elements Dynamically]({% slug howto_changeshapevisualelements_dynamically_diagram %})
+* [How to Drag and Drop on Shapes]({% slug howto_draganddrop_onshapes_diagram %})
+* [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
+* [How to Use Scrollbars]({% slug howto_usescrollbar_diagram %})
+* [How to Wrap Text]({% slug howto_wraptext_diagram %})
