@@ -1,16 +1,17 @@
 ---
-title: Enable/Disable dragging at runtime
-page_title: Enable/Disable dragging at runtime
-description: How to enable/disable Kendo UI Draggable dragging at runtime
+title: Enable and Disable Dragging at Runtime
+page_title: Enable and Disable Dragging at Runtime | Kendo UI Interactivity and UX
+description: "Learn how to enable and disable the Kendo UI Drag and Drop functionality at runtime."
+slug: howto_enableanddisabledraggingatruntime_intercativityandux
 ---
 
-# Enable/Disable dragging at runtime
+# Enable and Disable Dragging at Runtime
 
-The example below demonstrates how to enable/disable dragging at runtime.
+The example below demonstrates how to enable or disable the Kendo UI Drag and Drop functionality during runtime.
 
-In order to disable and/or enable the draggable functionality you may use a filter - initialize the draggable widget on the parent container and use filter to specify which items should be draggable. Change the class of the items in order to enable/disable them.
+To disable and/or enable the Kendo UI Drag and Drop functionality, use a filter&mdash;initialize the Kendo UI Drag and Drop functionality on the parent container and use filter to specify which items should be draggable. Change the class of the items to enable and disable them.
 
-#### Example:
+###### Example
 
 ```html
   <button id="btn">Enable/Disable</button>
@@ -28,3 +29,12 @@ In order to disable and/or enable the draggable functionality you may use a filt
     });
   </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Drag and Drop functionality:
+
+* [Draggable API Reference](/api/javascript/ui/draggable)
+* [DropTarget API Reference](/api/javascript/ui/droptarget)
+* [DropTargetArea API Reference](/api/javascript/ui/droptargetarea)
+* [Overview]({% slug overview_kendoui_draganddrop_intercativityandux %})

@@ -1,19 +1,24 @@
 ---
 title: Overview
-page_title: Overview of DOM element Draggable functionality | Kendo UI Docs
-description: Lear more about the draggable functionality on any DOM element and how to enable and initialize it. We guide you how to enable DOM elements to be targets for draggable elements.
+page_title: Overview | Kendo UI Interactivity and UX
+description: "Learn more about the draggable functionality on DOM elements and how to enable and intiialize it."
+slug: overview_kendoui_draganddrop_intercativityandux
+position: 1
 ---
 
-# Drag & Drop Overview
+# Drag and Drop Overview
 
-There are two separate Kendo UI widgets which, combined together, allow the developer to implement Drag & Drop scenarios - `kendoDraggable` and `kendoDropTarget`.
-The first one enables the draggable functionality, while the second one creates the drop-able zones.
+There are two separate Kendo UI widgets which, combined together, allow you to implement [drag and drop scenarios](http://demos.telerik.com/kendo-ui/dragdrop/index)&mdash;`kendoDraggable` and `kendoDropTarget`. The first one enables the Kendo UI Draggable functionality, while the second one creates the droppable zones.
 
 ## Draggable
 
-The Draggable widget allows a DOM element to be moved using the mouse or finger on touch devices.
+Kendo UI Draggable (`kendoDraggable`) allows a DOM element to be moved using the mouse or finger on touch devices.
 
-### Initialization
+### Initialize the Draggable
+
+The example below demonstrates how to initialize the Kendo UI Draggable widget.
+
+###### Example
 
     <div id="draggable" style="width: 200px; height: 200px; background-color: #0ff;">drag me</div>
     <script>
@@ -24,15 +29,120 @@ The Draggable widget allows a DOM element to be moved using the mouse or finger 
         });
     </script>
 
+> **Important**
+>
 > The `hint` configuration option must be specified in order for the user to have a visual indication of the dragged item.
 
-### Creating a list/table with draggable items
+## DropTarget
 
-The Draggable widget itself does not support binding to DataSource. The developer may bind a DataSource instance to a ListView or a Grid widget and initialize a Draggable widget for it.
-If the data is retrieved from a remote server **asynchronously**, by the time the Draggable is initialized the items that should be draggable will not be rendered yet.
-Because of this, you should initialize the Draggable widget on the parent container and use the `filter` draggable configuration option with a selector that matches the Grid/ListView item elements.
+The Kendo UI DropTarget element marks a DOM element as a drop target for the Kendo UI Draggable widget.
 
-#### ListView with draggable items
+### Initialize the DropTarget
+
+The example below demonstrates how to initialize the Kendo UI DropTarget element.
+
+###### Example
+
+    <div id="listB"></div>
+    <script>
+        $("#listB").kendoDropTarget();
+    </script>
+    <style>
+        #listB {
+            width: 300px;
+            height: 280px;
+            border: 3px solid black;
+            border-radius: 3px;
+        }
+    </style>
+
+> **Important**
+>
+> If the DropTarget element is initially empty, you must set the `height` or `min-height` properties of the element via CSS like in the example above. The user is not going to be able to drag on targets with zero height.
+
+## DropTargetArea
+
+The DropTargetArea allows you to create multiple DropTarget elements located in the area container. This is useful when the DropTarget elements is going to be added dynamically.
+
+> **Important**
+>
+> Specifying `filter` for the DropTargetArea is mandatory.
+
+### Initialize the DropTargetArea
+
+The example below demonstrates how to initialize the DropTargetArea element.
+
+###### Example
+
+    <div id="area">
+      <div class="orange"></div>
+      <div class="purple"></div>
+      <div class="orange"></div>
+      <div class="purple"></div>
+    </div>
+
+    <div id="draggable"></div>
+
+    <script>
+      $("#draggable").kendoDraggable({
+        hint: function(element) {
+          return element.clone();
+        }
+      });
+
+      $("#area").kendoDropTargetArea({
+          filter: ".orange",
+          drop: onDrop
+      });
+
+      function onDrop(e) {
+        e.dropTarget.removeClass("orange").addClass("purple");
+      }
+    </script>
+
+    <style>
+      #draggable {
+        width: 50px;
+        height: 50px;
+        border: 2px solid green;
+        margin: 5px;
+        display: inline-block;
+        background-color: orange;
+      }
+      .orange, .purple {
+        width: 50px;
+        height: 50px;
+        margin: 10px;
+        display: inline-block;
+      }
+      .orange { background-color: orange; }
+      .purple { background-color: purple; }
+      #area {
+          width: 300px;
+          height: 300px;
+          background-color: gray;
+      }
+      #droptarget {
+        width: 100px;
+        height: 100px;
+        border: 2px solid green;
+        margin: 0 96px;
+        display: inline-block;
+        vertical-align: middle;
+      }
+    </style>
+
+## Draggable and DropTarget Events
+
+The Kendo UI Draggable, DropTarget, and DropTargetArea widgets provide various [events](/api/javascript/ui/draggable#events) that enable you to implement specific business requirements.
+
+### Create Lists or Tables with Draggable Items
+
+The Kendo UI Draggable widget itself does not support binding to DataSource. You are able to bind a DataSource instance to a Kendo UI ListView or Grid widget and initialize a Draggable widget for it. If the data is retrieved from a remote server asynchronously, by the time the Draggable is initialized, the items that should be draggable will not be rendered yet. Because of this, you must initialize the Draggable widget on the parent container and use the `filter` draggable configuration option with a selector that matches the Grid or ListView item elements.
+
+The example below demonstrates how to create a Kendo UI ListView with draggable items.
+
+###### Example
 
     <div id="listA"></div>
 
@@ -88,34 +198,11 @@ Because of this, you should initialize the Draggable widget on the parent contai
         }
     </style>
 
-## DropTarget
+### Get Corresponding `dataItem` Dragged Element
 
-The DropTarget widget marks a DOM element as a drop target for a draggable widget.
+Data management widgets such as the Kendo UI Grid or ListView automatically append an `uid` data attribute to their items' DOM elements. You are able to use the `uid` attribute to get reference to the `dataItem` from the DataSource instance, as demonstrated in the example below.
 
-### Initialization
-
-    <div id="listB"></div>
-    <script>
-        $("#listB").kendoDropTarget();
-    </script>
-    <style>
-        #listB {
-            width: 300px;
-            height: 280px;
-            border: 3px solid black;
-            border-radius: 3px;
-        }
-    </style>
-
-> If the DropTarget element is initially empty, the developer should set the element `height` or `min-height` with CSS, like in the example above. The user will not be able to drag on target with zero height.
-
-## Using the Draggable/DropTarget events
-
-The Draggable, DropTarget and DropTargetArea widgets provide various [events](/api/javascript/ui/draggable#events) that the developer may use to implement specific business requirements.
-
-### Getting the dragged element corresponding dataItem
-
-Data management widgets such as the Grid or the ListView automatically append an `uid` data attribute to their items' DOM elements. The developer may use the `uid` attribute to get reference to the dataItem from the DataSource instance.
+###### Example
 
     <div id="listA"></div>
     <script>
@@ -141,10 +228,11 @@ Data management widgets such as the Grid or the ListView automatically append an
         });
     </script>
 
-### Add visual indications
+### Add Visual Indications
 
-The developer may use the DropTarget events such as `dragenter` and `dragleave` to visually indicate that when the dragged item enters/leaves the DropTarget element boundaries.
+You can also use the DropTarget events such as `dragenter` and `dragleave` to visually indicate when the dragged item enters or leaves the DropTarget element boundaries, as demonstrated in the example below.
 
+###### Example
 
     <div id="listA"></div>
     <div id="listB"></div>
@@ -240,10 +328,12 @@ The developer may use the DropTarget events such as `dragenter` and `dragleave` 
         }
     </style>
 
-### Moving items from one list to another
+<!--*-->
+### Move Items between Lists
 
-The Drag & Drop components don't automatically change the data bound widget data.
-To have the move changes applied to the DataSource instances, the developer may use the `drop` event and the DataSource's `add` and `remove` methods.
+Kendo UI Drag and Drop components do not automatically change the data-bound widget data. To apply the move changes to the DataSource instances, use the `drop` event and the DataSource's `add` and `remove` methods, as demonstrated in the example below.
+
+###### Example
 
     <div id="listA"></div>
     <div id="listB"></div>
@@ -347,75 +437,14 @@ To have the move changes applied to the DataSource instances, the developer may 
         }
     </style>
 
-## DropTargetArea
+<!--*-->
 
-The DropTargetArea allows the developer to create multiple DropTarget elements located in the area container. This is useful when the DropTarget elements will be added dynamically.
+## See Also
 
-> Specifying `filter` for the DropTargetArea is mandatory!
+Other articles on Kendo UI Drag and Drop functionality:
 
-### Initialization
-
-    <div id="area">
-      <div class="orange"></div>
-      <div class="purple"></div>
-      <div class="orange"></div>
-      <div class="purple"></div>
-    </div>
-
-    <div id="draggable"></div>
-
-    <script>
-      $("#draggable").kendoDraggable({
-        hint: function(element) {
-          return element.clone();
-        }
-      });
-
-      $("#area").kendoDropTargetArea({
-          filter: ".orange",
-          drop: onDrop
-      });
-
-      function onDrop(e) {
-        e.dropTarget.removeClass("orange").addClass("purple");
-      }
-    </script>
-
-    <style>
-      #draggable {
-        width: 50px;
-        height: 50px;
-        border: 2px solid green;
-        margin: 5px;
-        display: inline-block;
-        background-color: orange;
-      }
-      .orange, .purple {
-        width: 50px;
-        height: 50px;
-        margin: 10px;
-        display: inline-block;
-      }
-      .orange { background-color: orange; }
-      .purple { background-color: purple; }
-      #area {
-          width: 300px;
-          height: 300px;
-          background-color: gray;
-      }
-      #droptarget {
-        width: 100px;
-        height: 100px;
-        border: 2px solid green;
-        margin: 0 96px;
-        display: inline-block;
-        vertical-align: middle;
-      }
-    </style>
-
-### Next Steps
-
-- [Online demos](http://demos.telerik.com/kendo-ui/dragdrop/index)
-- [Draggable API reference](/api/javascript/ui/draggable)
-- [DropTarget API reference](/api/javascript/ui/droptarget)
-- [DropTargetArea API reference](/api/javascript/ui/droptargetarea)
+* [Kendo UI Online Demos](http://demos.telerik.com/kendo-ui/dragdrop/index)
+* [Draggable API Reference](/api/javascript/ui/draggable)
+* [DropTarget API Reference](/api/javascript/ui/droptarget)
+* [DropTargetArea API Reference](/api/javascript/ui/droptargetarea)
+* [How to Enable and Disable Dragging at Runtime]({%slug howto_enableanddisabledraggingatruntime_intercativityandux %})
