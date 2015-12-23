@@ -8,7 +8,7 @@ position: 1
 
 # Slider Overview
 
-The [Kendo UI Slider widget](http://demos.telerik.com/kendo-ui/slider) provides a rich input for selecting values. Unlike the HTML5 range input, the Slider provides a consistent experience across browsers and delivers a rich API and event model.
+The [Kendo UI Slider widget](http://demos.telerik.com/kendo-ui/slider) provides a rich input for selecting numeric values. Unlike the HTML5 range input, the Slider provides a consistent experience across browsers and delivers a rich API and event model.
 
 ## Getting Started
 
