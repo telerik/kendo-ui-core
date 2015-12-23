@@ -3709,7 +3709,7 @@ The command instance
     <script>
     $("#editor").kendoEditor({
       execute: function(e) {
-        console.log("executing command", e.name, e.value);
+        console.log("executing command", e.name, e.command);
       }
     });
     </script>
@@ -3719,7 +3719,7 @@ The command instance
     <textarea id="editor"></textarea>
     <script>
     function editor_execute(e) {
-      console.log("executing command", e.name, e.value);
+      console.log("executing command", e.name, e.command);
     }
     $("#editor").kendoEditor();
     var editor = $("#editor").data("kendoEditor");
