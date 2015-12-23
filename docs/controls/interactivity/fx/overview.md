@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Interactivity and UX
+page_title: Overview | Kendo UI FX
 description: "Learn how to create and set the Kendo UI Effects instances."
 slug: overview_kendoui_fxeffects_widget
 position: 1

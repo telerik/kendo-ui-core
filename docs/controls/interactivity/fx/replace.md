@@ -1,6 +1,6 @@
 ---
 title: Replace Effects
-page_title: Replace Effects | Kendo UI Interactivity and UX
+page_title: Replace Effects | Kendo UI FX
 description: "Learn how to create complex animated transitions between two elements with a common container by using the Kendo UI Replace Effect."
 slug: replaceffect_fxeffects_widget
 position: 2

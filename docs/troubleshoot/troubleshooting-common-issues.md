@@ -38,7 +38,8 @@ Depending on the browser, the following JavaScript errors will be thrown:
 * Object does not support this property or method (in older versions of Internet Explorer)
 
 > **Important**  
-> All Kendo widgets will be affected by this problem, not just the Kendo Grid. Just the error message will be different e.g. "kendoChart is not a function" or "Object has no method kendoEditor".
+>
+> All Kendo UI widgets are going to be affected by this issue, not just the Kendo UI Grid. Only the error message is different e.g. `kendoChart is not a function` or `Object has no method kendoEditor`.
 
 **Solution**
 
@@ -54,6 +55,7 @@ The problem is reported to Microsoft on `https://connect.microsoft.com/IE/feedba
 where more information can be found.
 
 > **Important**  
+>
 > All Kendo widgets, which add ARIA attributes to HTML elements, will be affected.
 
 **Solution**  

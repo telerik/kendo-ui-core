@@ -1,7 +1,7 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Interactivity and UX
-description: "Learn more about the draggable functionality on DOM elements and how to enable and intiialize it."
+page_title: Overview | Kendo UI Drag and Drop Functionality
+description: "Learn more about the draggable functionality on DOM elements and how to enable and initialize it."
 slug: overview_kendoui_draganddrop_intercativityandux
 position: 1
 ---

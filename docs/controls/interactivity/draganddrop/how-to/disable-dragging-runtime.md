@@ -1,6 +1,6 @@
 ---
 title: Enable and Disable Dragging at Runtime
-page_title: Enable and Disable Dragging at Runtime | Kendo UI Interactivity and UX
+page_title: Enable and Disable Dragging at Runtime | Kendo UI Drag and Drop Functionality
 description: "Learn how to enable and disable the Kendo UI Drag and Drop functionality at runtime."
 slug: howto_enableanddisabledraggingatruntime_intercativityandux
 ---
