@@ -3633,7 +3633,7 @@ The name of the tool that will be tested if formatted.
     range.selectNodeContents(editor.body.firstChild);
     editor.selectRange(range);
     console.log(editor.state("italic")); // logs true
-    console.log(editor.state("bold")); // logs true
+    console.log(editor.state("bold")); // logs false
     </script>
 
 ### value
@@ -3718,7 +3718,7 @@ The command instance
 
     <textarea id="editor"></textarea>
     <script>
-    function editor_execute() {
+    function editor_execute(e) {
       console.log("executing command", e.name, e.value);
     }
     $("#editor").kendoEditor();
@@ -3745,8 +3745,8 @@ Fires when the user depresses a keyboard key. Triggered multiple times if the us
 
     <textarea id="editor"></textarea>
     <script>
-    function editor_keydown() {
-      console.log("keydown : keyCode=",e.keyCode);
+    function editor_keydown(e) {
+      console.log("keydown : keyCode=", e.keyCode);
     }
     $("#editor").kendoEditor();
     var editor = $("#editor").data("kendoEditor");
@@ -3772,7 +3772,7 @@ Fires when the user releases a keyboard key.
 
     <textarea id="editor"></textarea>
     <script>
-    function editor_keyup() {
+    function editor_keyup(e) {
       console.log("keyup : keyCode=",e.keyCode);
     }
     $("#editor").kendoEditor();
