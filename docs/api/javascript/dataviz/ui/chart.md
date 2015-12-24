@@ -31990,6 +31990,7 @@ The height of the exported image. Defaults to the chart height.
     <div id="chart"></div>
     <script>
         $("#chart").kendoChart({
+            transitions: false,
             series: [{
                 type: "column",
                 data: [1, 2, 3]
@@ -32031,6 +32032,7 @@ Parameters for the exported PDF file.
     <div id="chart"></div>
     <script>
         $("#chart").kendoChart({
+            transitions: false,
             series: [{
                 type: "column",
                 data: [1, 2, 3]
@@ -32075,6 +32077,7 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
     <div id="chart"></div>
     <script>
         $("#chart").kendoChart({
+            transitions: false,
             series: [{
                 type: "column",
                 data: [1, 2, 3]
