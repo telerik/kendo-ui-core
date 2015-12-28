@@ -1,31 +1,31 @@
 ---
-title: Layers
-page_title: Map Layers
-description: How to create and configure tile layers for the Kendo UI Map widgets.
+title: Map Layers
+page_title: Map Layers | Kendo UI Map Widget
+description: "Learn how to create and configure tile layers for the Kendo UI Map widget."
+slug: maplayers_mapwidget
 position: 2
 ---
 
-# Map layers
+# Map Layers
 
-The information shown on the map is organized into layers.
-They are stacked from bottom to top in the order of definition.
+The information presented by the [Kendo UI Map widget](http://demos.telerik.com/kendo-ui/map/index) is organized into layers. They are stacked from bottom to top in the order of definition and are oblivious of each other. The Map layers respond to [the Map events](/kendo-ui/api/dataviz/map#events) to keep their content in sync.
 
-Layers are oblivious of each other.
-They respond to [/kendo-ui/api/dataviz/map#events](map events) to keep their content in sync.
+## Tile Layers
 
-## Tile layers
+### Basic Usage
 
-This layer is suitable for displaying raster maps from popular online providers such as
-[OpenStreetMap](http://www.openstreetmap.org/),
-[OpenWeatherMap](http://openweathermap.org/),
-[MapQuestOpen](http://open.mapquest.com/),
-[ArcGIS](https://developers.arcgis.com/en/),
-[Here (Nokia) Maps](https://developer.here.com/rest-apis/documentation/enterprise-map-tile) and others.
+Tile layers are suitable for displaying raster maps from popular online providers such as:
+* [OpenStreetMap](http://www.openstreetmap.org/)
+* [OpenWeatherMap](http://openweathermap.org/)
+* [MapQuestOpen](http://open.mapquest.com/)
+* [ArcGIS](https://developers.arcgis.com/en/)
+* [Here (Nokia) Maps](https://developer.here.com/rest-apis/documentation/enterprise-map-tile) and many more
 
-Dedicated support is available for [Microsoft Bing](http://msdn.microsoft.com/en-us/library/ff701713.aspx).
-Note that it requires you to [obtain an API key](http://msdn.microsoft.com/en-us/library/ff428642.aspx).
+Dedicated support is available for [Microsoft Bing](http://msdn.microsoft.com/en-us/library/ff701713.aspx). Note that it requires you to [obtain an API key](http://msdn.microsoft.com/en-us/library/ff428642.aspx).
 
-### Example - Displaying a MapQuest Open tile layer
+The example below demonstrates how to display a MapQuest open tile layer.
+
+###### Example
 
     <div id="map"></div>
     <script>
@@ -38,16 +38,21 @@ Note that it requires you to [obtain an API key](http://msdn.microsoft.com/en-us
         }]
     });
     </script>
+<!--_-->
 
-### Zoom levels
+### Zoom Levels
 
-Raster maps are divided into images (tiles) for serving over the web.
-Tiles are typically 256px squares.
-
-The top level (zoom level 0) displays the whole world as a single tile.
-Each progressive zoom level doubles the size of the map:
+Raster maps are divided into images (tiles) for serving over the web. Tiles are typically 256px squares. The top level (zoom level 0) displays the whole world as a single tile. Each progressive zoom level doubles the size of the map in the following way:
 
 - Zoom level 0: 1x1 tiles (256px)
 - Zoom level 1: 2x2 tiles (512px)
 - Zoom level 2: 4x4 tiles (1024px)
 - ...
+
+## See Also
+
+Other articles on Kendo UI Map:
+
+* [Overview]({% slug overview_kendoui_mapwidget %})
+* [Map Authoring]({% slug mapauthoring_mapwidget %})
+* [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)

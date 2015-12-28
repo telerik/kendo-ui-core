@@ -1,14 +1,15 @@
 ---
 title: Display Shape Tooltips
-page_title: Display Shape Tooltips
-description: Configuring per-shape tooltips in the Kendo UI Map Shape Layer
+page_title: Display Shape Tooltips | Kendo UI Map Widget
+description: "Learn how to  configure per-shape tooltips in the Kendo UI Map shape layer."
+slug: howto_displayshapetooltip_map
 ---
 
 # Display Shape Tooltips
 
-The example below demonstrates how to display a tooltip for individual shapes.
+The example below demonstrates how to display a tooltip for individual shapes in a Kendo UI Map widget.
 
-#### Example: Display Shape Tooltips
+###### Example
 
 ```html
     <div id="map"></div>
@@ -158,3 +159,19 @@ The example below demonstrates how to display a tooltip for individual shapes.
       createMap();
     </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Map:
+
+* [JavaScript API Reference](/api/javascript/dataviz/ui/map)
+* [How to Add Shape Titles]({% slug howto_addhspaetitles_map %})
+* [How to Customize Markers on Map]({% slug howto_customizemarkersonmap_map %})
+* [How to Disable Mousewheel Zoom]({% slug howto_disablemousezoom_map %})
+* [How to Drag and Drop Markers]({% slug howto_draganddropmarkers_map %})
+* [How to Highlight Map Shapes by ID]({% slug howto_highlightmapshapesbyid_map %})
+* [How to Link Marker to Location]({% slug howto_linkmarkertolocation_map %})
+* [How to Render Custom Symbols for Bubble Layers]({% slug howto_rendercustomsymbols_forbubblelayers_map %})
+* [How to Set 100% Height in Mobile Applications]({% slug howto_set100percentheight_inmobileapps_map %})
+* [How to Update Map Shapes by ID]({% slug howto_updatemapshapesbyid_map %})
+* [How to Zoom on Area]({% slug howto_zoomonarea_map %})

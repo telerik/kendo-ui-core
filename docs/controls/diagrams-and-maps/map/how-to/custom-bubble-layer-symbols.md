@@ -1,22 +1,17 @@
 ---
-title: Custom symbols for Bubble layers
-page_title: Custom symbols for Bubble layers
-description: Render custom symbols on Map Bubble layers
+title: Render Custom Symbols for Bubble Layers
+page_title: Render Custom Symbols for Bubble Layers | Kendo UI Map Widget
+description: "Learn how to render custom symbols on Kendo UI Map Bubble layers."
+slug: howto_rendercustomsymbols_forbubblelayers_map
 ---
 
-# Render custom symbols on Map Bubble layers
+# Render Custom Symbols for Bubble Layers
 
-The Bubble Layer allows you to define how symbols are rendered.
+The Bubble Layer allows you to define the way symbols are rendered. This works by defining a [`symbol` function](http://docs.telerik.com/KENDO-UI/api/javascript/dataviz/ui/map#configuration-layers.symbol) that uses the [Drawing API](/framework/drawing/overview) to define the shape. The symbol is typically a [Group](http://docs.telerik.com/kendo-ui/api/javascript/drawing/group) of shapes.
 
-This works by defining a [symbol function](http://docs.telerik.com/KENDO-UI/api/javascript/dataviz/ui/map#configuration-layers.symbol)
-that uses the [Drawing API](/framework/drawing/overview) to define the shape.
+The example below demonstrates how to render 200-kilometer lines in West-East direction as a symbol. Notice that the lines get longer the farther you go North, which is due to that fact that the [Mercator Projection](https://en.wikipedia.org/wiki/Mercator_projection) is used.
 
-The symbol is typically a [Group](http://docs.telerik.com/kendo-ui/api/javascript/drawing/group) of shapes.
-
-In the demo below we'll render 200km lines in West-East direction as a symbol.
-Notice how the lines are longer the farther you go North as we're using [Mercator Projection](https://en.wikipedia.org/wiki/Mercator_projection).
-
-#### Example: Draw custom bubble layer symbols
+###### Example
 
 ```html
     <div id="map"></div>
@@ -88,3 +83,19 @@ Notice how the lines are longer the farther you go North as we're using [Mercato
       });
     </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Map:
+
+* [JavaScript API Reference](/api/javascript/dataviz/ui/map)
+* [How to Add Shape Titles]({% slug howto_addhspaetitles_map %})
+* [How to Customize Markers on Map]({% slug howto_customizemarkersonmap_map %})
+* [How to Disable Mousewheel Zoom]({% slug howto_disablemousezoom_map %})
+* [How to Display Shape Tooltips]({% slug howto_displayshapetooltip_map %})
+* [How to Drag and Drop Markers]({% slug howto_draganddropmarkers_map %})
+* [How to Highlight Map Shapes by ID]({% slug howto_highlightmapshapesbyid_map %})
+* [How to Link Marker to Location]({% slug howto_linkmarkertolocation_map %})
+* [How to Set 100% Height in Mobile Applications]({% slug howto_set100percentheight_inmobileapps_map %})
+* [How to Update Map Shapes by ID]({% slug howto_updatemapshapesbyid_map %})
+* [How to Zoom on Area]({% slug howto_zoomonarea_map %})

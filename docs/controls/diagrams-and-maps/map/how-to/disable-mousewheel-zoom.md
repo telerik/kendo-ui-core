@@ -1,14 +1,15 @@
 ---
-title: Disable mousewheel zoom
-page_title: Disable mousewheel zoom
-description: Disable mousewheel zoom.
+title: Disable Mousewheel Zoom
+page_title: Disable Mousewheel Zoom | Kendo UI Map Widget
+description: "Learn how to disable the nousewheel zoom in a Kendo UI Map widget."
+slug: howto_disablemousezoom_map
 ---
 
-# Disable mousewheel zoom
+# Disable Mousewheel Zoom
 
-The example below demonstrates how to disable mousewheel zoom in Kendo UI Map.
+The example below demonstrates how to disable mousewheel zoom in a Kendo UI Map.
 
-#### Example:
+###### Example
 
 ```html
     <div id="map"></div>
@@ -40,3 +41,19 @@ The example below demonstrates how to disable mousewheel zoom in Kendo UI Map.
       $(document).ready(createMap);
     </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Map:
+
+* [JavaScript API Reference](/api/javascript/dataviz/ui/map)
+* [How to Add Shape Titles]({% slug howto_addhspaetitles_map %})
+* [How to Customize Markers on Map]({% slug howto_customizemarkersonmap_map %})
+* [How to Display Shape Tooltips]({% slug howto_displayshapetooltip_map %})
+* [How to Drag and Drop Markers]({% slug howto_draganddropmarkers_map %})
+* [How to Highlight Map Shapes by ID]({% slug howto_highlightmapshapesbyid_map %})
+* [How to Link Marker to Location]({% slug howto_linkmarkertolocation_map %})
+* [How to Render Custom Symbols for Bubble Layers]({% slug howto_rendercustomsymbols_forbubblelayers_map %})
+* [How to Set 100% Height in Mobile Applications]({% slug howto_set100percentheight_inmobileapps_map %})
+* [How to Update Map Shapes by ID]({% slug howto_updatemapshapesbyid_map %})
+* [How to Zoom on Area]({% slug howto_zoomonarea_map %})

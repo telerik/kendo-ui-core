@@ -1,19 +1,16 @@
 ---
 title: Zoom on Area
-page_title: Zoom on Map Area
-description: This article demonstrates how to center the map view on a specified area
+page_title: Zoom on Area | Kendo UI Map Widget
+description: "Learn how to center the Kendo UI Map view on a specified area."
+slug: howto_zoomonarea_map
 ---
 
-# Zoom on Map Area
+# Zoom on Area
 
-This example demonstrates how to center the map view on a specified area.
+The example below demonstrates how to center the map view on a specified area in a Kendo UI Map widget. The area is defined by a set of markers&mdash;any list of locations can do. Then build an [extent](/api/javascript/dataviz/map/extent) that encompasses all locations and [set it as a visible area](/api/javascript/dataviz/ui/map#methods-extent) on the map.
 
-In this demo, the area will be defined by a set of markers, but any list of locations will do.
+###### Example
 
-We'll built an [extent](/api/dataviz/map/extent.md) that encompasses all locations
-and [set it as a visible area](/api/javascript/dataviz/ui/map#methods-extent) on the map.
-
-#### Example: Zoom on Area
 ```html
 <button id="center">Center on markers</button>
 <div id="map"></div>
@@ -62,3 +59,19 @@ and [set it as a visible area](/api/javascript/dataviz/ui/map#methods-extent) on
     $("#center").click(centerMap);
 </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Map:
+
+* [JavaScript API Reference](/api/javascript/dataviz/ui/map)
+* [How to Add Shape Titles]({% slug howto_addhspaetitles_map %})
+* [How to Customize Markers on Map]({% slug howto_customizemarkersonmap_map %})
+* [How to Disable Mousewheel Zoom]({% slug howto_disablemousezoom_map %})
+* [How to Display Shape Tooltips]({% slug howto_displayshapetooltip_map %})
+* [How to Drag and Drop Markers]({% slug howto_draganddropmarkers_map %})
+* [How to Highlight Map Shapes by ID]({% slug howto_highlightmapshapesbyid_map %})
+* [How to Link Marker to Location]({% slug howto_linkmarkertolocation_map %})
+* [How to Render Custom Symbols for Bubble Layers]({% slug howto_rendercustomsymbols_forbubblelayers_map %})
+* [How to Set 100% Height in Mobile Applications]({% slug howto_set100percentheight_inmobileapps_map %})
+* [How to Update Map Shapes by ID]({% slug howto_updatemapshapesbyid_map %})

@@ -1,19 +1,18 @@
 ---
 title: Add Shape Titles
-page_title: Add Titles for Map Shapes
-description: This article demonstrates how to add a title for shapes loaded from GeoJSON.
+page_title: Add Shape Titles | Kendo UI Map Widget
+description: "Learn how to add titles for shapes loaded from GeoJSON in a Kendo UI Map widget."
+slug: howto_addhspaetitles_map
 ---
 
-# Add Titles for Map Shapes
+# Add Shape Titles
 
-This example demonstrates how to add a title text for shapes loaded from GeoJSON.
+The example below demonstrates how to add a title text for shapes loaded from GeoJSON in a Kendo UI Map widget&mdash;in particular, how to add a [`Text`](/api/javascript/drawing/text) element positioned over the shape center.
 
-Shape layers are rendered using the [Drawing API](/framework/drawing/overview).
-The [shapeCreated](/api/javascript/dataviz/ui/map#events-shapeCreated) event can be used to render additional elements.
+Shape layers are rendered using the [Drawing API](/framework/drawing/overview). The [`shapeCreated`](/api/javascript/dataviz/ui/map#events-shapeCreated) event can be used to render additional elements.
 
-We'll add a [Text](/api/javascript/drawing/text) element positioned over the shape center.
+###### Example
 
-#### Example: Add shape title
 ```html
   <div id="map"></div>
   <script>
@@ -81,3 +80,19 @@ We'll add a [Text](/api/javascript/drawing/text) element positioned over the sha
     });
   </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Map:
+
+* [JavaScript API Reference](/api/javascript/dataviz/ui/map)
+* [How to Customize Markers on Map]({% slug howto_customizemarkersonmap_map %})
+* [How to Disable Mousewheel Zoom]({% slug howto_disablemousezoom_map %})
+* [How to Display Shape Tooltips]({% slug howto_displayshapetooltip_map %})
+* [How to Drag and Drop Markers]({% slug howto_draganddropmarkers_map %})
+* [How to Highlight Map Shapes by ID]({% slug howto_highlightmapshapesbyid_map %})
+* [How to Link Marker to Location]({% slug howto_linkmarkertolocation_map %})
+* [How to Render Custom Symbols for Bubble Layers]({% slug howto_rendercustomsymbols_forbubblelayers_map %})
+* [How to Set 100% Height in Mobile Applications]({% slug howto_set100percentheight_inmobileapps_map %})
+* [How to Update Map Shapes by ID]({% slug howto_updatemapshapesbyid_map %})
+* [How to Zoom on Area]({% slug howto_zoomonarea_map %})

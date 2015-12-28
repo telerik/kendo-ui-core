@@ -1,17 +1,16 @@
 ---
 title: Drag and Drop Markers
-page_title: Drag and Drop Markers
-description: This article demonstrates how to integrate the Draggable widget with the Map
+page_title: Drag and Drop Markers | Kendo UI Map Widget
+description: "Learn how to integrate the Kendo UI Draggable widget with the Kendo UI Map widget."
+slug: howto_draganddropmarkers_map
 ---
 
-# How to integrate the Kendo UI Draggable widget with the Map
+# Drag and Drop Markers
 
-This article demonstrates how to integrate the Draggable widget with the Map.
+The example below demonstrates how to integrate the Kendo UI Draggable widget with the Kendo UI Map. Markers are allowed to be dragged and dropped within the visible extent of the Map. The location of the marker is updated on drop.
 
-We will allow markers to be dragged and drop within the visible extent of the map.
-Marker location will be updated on drop.
+###### Example
 
-#### Example: Zoom on Area
 ```html
 <div id="map"></div>
 <script>
@@ -82,3 +81,19 @@ Marker location will be updated on drop.
     });
 </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Map:
+
+* [JavaScript API Reference](/api/javascript/dataviz/ui/map)
+* [How to Add Shape Titles]({% slug howto_addhspaetitles_map %})
+* [How to Customize Markers on Map]({% slug howto_customizemarkersonmap_map %})
+* [How to Disable Mousewheel Zoom]({% slug howto_disablemousezoom_map %})
+* [How to Display Shape Tooltips]({% slug howto_displayshapetooltip_map %})
+* [How to Highlight Map Shapes by ID]({% slug howto_highlightmapshapesbyid_map %})
+* [How to Link Marker to Location]({% slug howto_linkmarkertolocation_map %})
+* [How to Render Custom Symbols for Bubble Layers]({% slug howto_rendercustomsymbols_forbubblelayers_map %})
+* [How to Set 100% Height in Mobile Applications]({% slug howto_set100percentheight_inmobileapps_map %})
+* [How to Update Map Shapes by ID]({% slug howto_updatemapshapesbyid_map %})
+* [How to Zoom on Area]({% slug howto_zoomonarea_map %})
