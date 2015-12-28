@@ -1,22 +1,24 @@
 ---
-title: Develop and register custom ToolBar tools
-page_title: Develop and register custom ToolBar tools | Kendo UI ToolBar Widget
+title: Develop and Register Custom ToolBar Tools
+page_title: Develop and Register Custom ToolBar Tools | Kendo UI ToolBar Widget
 description: "Learn how to develop and register custom ToolBar tools."
 slug: howto_customtool_toolbar
 ---
 
-# Close ToolBar Popup Manually
+# Develop and Register Custom ToolBar Tools
 
-The example below demonstrates how to develop and register custom ToolBar tools.
+The example below demonstrates how to develop and register custom ToolBar tools, and in particular how to close ToolBar popup manually.
 
-> The following approach works in Kendo UI Q3 2015 release. It will not work with previous versions of the framework!
+> **Importnat**
+>
+> The following approach works in the Kendo UI Q3 2015 release, while not in previous versions of the framework
 
-##### Example
+###### Example
 
 ```html
   <div id="toolbar"></div>
   <script>
-    //ToolBar tool - inherit from base tool
+    //ToolBar tool - inherits from base tool
     var OptionList = kendo.toolbar.Item.extend({
       init: function(options, toolbar) {
         this.options = options;
@@ -45,7 +47,7 @@ The example below demonstrates how to develop and register custom ToolBar tools.
       }
     });
 
-    //Overflow tool - inherit from existing tool
+    //Overflow tool - inherits from the existing tool
     var OptionDialog = kendo.toolbar.OverflowButton.extend({
       init: function(options, toolbar) {
         kendo.toolbar.OverflowButton.fn.init.call(this, options, toolbar);
@@ -96,7 +98,7 @@ The example below demonstrates how to develop and register custom ToolBar tools.
           click: onMyButtonClick
         },
         { //initialize the tool with options
-          type: "optionList", //specify the tool type as it is registered via registerComponent method
+          type: "optionList", //specify the tool type as it is registered via the registerComponent method
           text: "Choose an option",
           list: [ //we will use this array as data for the DropDownList/ListView
             { text: "Option 1", value: 1 },
@@ -105,15 +107,23 @@ The example below demonstrates how to develop and register custom ToolBar tools.
             { text: "Option 4", value: 4 },
             { text: "Option 5", value: 5 }
           ],
-          change: function(value) { //do something when value changes
+          change: function(value) { //do something when the value changes
             console.log("Option " + value + " is selected");
           }
         }
       ]
     });
-    
+
     function onMyButtonClick(e) {
       console.log("myButton click");
     }
   </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI ToolBar:
+
+* [JavaScript API Reference](/api/javascript/ui/toolbar)
+* [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_toolbar %})
+* [How to Close ToolBar Popup Manually]({% slug howto_closetoolbarpopupmanually_toolbar %})

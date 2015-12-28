@@ -522,5 +522,6 @@ Other articles on Kendo UI ToolBar:
 * [Overview of the JSP Tag](/jsp/tags/toolbar/overview)
 * [Overview of the PHP Class](/php/widgets/toolbar/overview)
 * [How to Close ToolBar Popup Manually]({% slug howto_closetoolbarpopupmanually_toolbar %})
+* [How to Develop and Register Custom ToolBar Tools]({% slug howto_customtool_toolbar %})
 * [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_toolbar %})
 * [JavaScript API Reference](/api/javascript/ui/toolbar)
