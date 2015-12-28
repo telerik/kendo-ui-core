@@ -1,39 +1,17 @@
 ---
 title: Overview
-page_title: Documentation for Chart widget in Kendo UI DataViz
-description: How to create a chart, enable the visualization of a series that displays inline data, explore the quick overview of Chart widget major features.
+page_title: Overview | Kendo UI Charts
+description: "Learn how to create a chart, enable the visualization of a series that displays inline data, and explore the major features of Kendo UI Charts."
 previous_url: /howto/add-charts-and-graphs-to-an-application
+slug: overview_kendoui_charts_widget
 position: 1
 ---
 
 # Chart Overview
 
-## Contents
+The [Kendo UI Charts](http://demos.telerik.com/kendo-ui/) use modern browser technologies to render high-quality data visualizations. All graphics are rendered on the client using [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) with a fallback to [Canvas](http://www.canvasgfx.com/) and [Vector Markup Language (VML)](https://en.wikipedia.org/wiki/Vector_Markup_Language).
 
-* [Getting started](#getting-started)
-
-* [Categorical charts](#categorical-charts)
-    * [Category axis](#category-axis)
-    * [Value axis](#value-axis)
-    * [Multiple value axes](#multiple-value-axes)
-    * [Axis crossing value(s)](#axis-crossing-values)
-
-* [Scatter charts](#scatter-charts)
-    * [Multiple X/Y axes](#multiple-xy-axes)
-    * [Axis crossing value(s)](#axis-crossing-values)
-
-* [Common features](#common-features)
-    * [Axis title](#axis-title)
-    * [Plot bands](#plot-bands)
-    * [Global settings](#global-settings)
-
-
-## Getting started
-
-The Chart widget uses modern browser technologies to render high-quality data visualizations.
-All graphics are rendered on the client using SVG with a fallback to Canvas and VML.
-
-Kendo UI Chart supports the following series types:
+Kendo UI Charts support the following series types:
 
 * Bar and Column
 * Line and Vertical Line
@@ -45,36 +23,39 @@ Kendo UI Chart supports the following series types:
 * Bubble
 * Radar and Polar
 
-Please visit the [Kendo UI Roadmap](http://www.telerik.com/support/whats-new/kendo-ui-web/roadmap) for additional information about
-new Chart types and features.
+For additional information on new Kendo UI Chart types and features, refer to the [Kendo UI Roadmap](http://www.telerik.com/support/whats-new/kendo-ui-web/roadmap).
 
-### Creating a Chart
+## Getting Started
 
-To create a chart, add an empty div in the HTML and give it an ID.
+### Create the Chart
 
-#### Example
+To create a chart, add an empty `div` in the HTML, provide it with an ID, and, optionally, set the width and height of the desired chart inline or via CSS, as demonstrated in the example below.
 
-    <div id="chart"></div>
-
-Optionally, set the width and height of the desired chart inline or with CSS.
-
-#### Example
+###### Example
 
     <div id="chart" style="width: 400px; height: 600px"></div>
 
-The chart is rendered by selecting the div with a jQuery selector and calling the kendoChart() function.
+### Initialize the Chart
 
-#### Example
+The Kendo UI Chart widget is rendered by selecting the `div` with a jQuery selector and calling the `kendoChart()` function, as demonstrated below.
+
+###### Example
 
     $("#chart").kendoChart();
 
-This will render the chart shown below:
+This results in the chart below.
+
+**Figure 1. An empty chart**
 
 ![Empty Chart](/controls/charts/chart-empty.png)</img>
 
-The chart can then be given a title by specifying the "text" property of the "title" object in the Kendo Chart.
+## Configuration
 
-#### Example
+### Add Title
+
+This chart can be given a title by specifying the `text` property of the `title` object, as demonstrated in the example below.
+
+###### Example
 
     $("#chart").kendoChart({
         title: {
@@ -82,13 +63,15 @@ The chart can then be given a title by specifying the "text" property of the "ti
         }
     });
 
-### Data Binding
+### Bind to Data
 
-The Charts can visualize series bound to both local and remote data.
+Kendo UI Charts can visualize series bound to both local and remote data.
+
+#### Bind to local arrays
 
 Start by creating a series that displays inline data.
 
-#### Example
+###### Example
 
     $("#chart").kendoChart({
         title: {
@@ -99,14 +82,15 @@ Start by creating a series that displays inline data.
         ]
     });
 
-This will render a column chart by default.
+This results in the chart below.
+
+**Figure 2. A chart without ctegories**
 
 ![Column Chart without categories](/controls/charts/chart-column-no-categories.png)</img>
 
-You will notice that the columns have no label across the category axis.
-You specify the labeling for the series in the [`categoryAxis` property](/api/dataviz/chart#categoryAxis).
+Notice that the columns have no label across the category axis. Specify the labeling for the series in the [`categoryAxis` property](/api/dataviz/chart#categoryAxis), as demonstrated in the example below.
 
-#### Example
+###### Example
 
     $("#chart").kendoChart({
         title: {
@@ -120,15 +104,22 @@ You specify the labeling for the series in the [`categoryAxis` property](/api/da
         }
     });
 
+
+This results in the chart below.
+
+**Figure 3. A chart with categories**
+
 ![Column Chart with categories](/controls/charts/chart-column-categories.png)</img>
 
-## Categorical charts
+## Categorical Charts
 
-Categorical charts such as Bar, Column and Line use one category axis and one value axis. The axis orientation (horizontal or vertical) is inferred from the series type.
+Categorical charts, such as [Kendo UI Bar](http://demos.telerik.com/kendo-ui/bar-charts/index), [Column](http://demos.telerik.com/kendo-ui/bar-charts/column), and [Line Charts](http://demos.telerik.com/kendo-ui/line-charts/index), use one category axis and one value axis. The axis orientation (horizontal or vertical) is inferred from the series type.
 
-### Category axis
+### Category Axis
 
-Use the categoryAxis object to set the category names:
+Use the `categoryAxis` object to set the category names, as demonstrated in the example below.
+
+###### Example
 
     $("#chart").kendoChart({
         series: [{
@@ -140,7 +131,9 @@ Use the categoryAxis object to set the category names:
         }
     });
 
-The category name can also be bound to a field of the data item:
+The category name can also be bound to a field of the data item, as demonstrated below.
+
+###### Example
 
     var internetUsers = [ {
         "country": "United States",
@@ -165,11 +158,13 @@ The category name can also be bound to a field of the data item:
         }
     });
 
-### Value axis
+### Value Axis
 
-The Chart currently supports only Numeric value axes.
+The Kendo UI Chart currently supports only Numeric value axes. Configuration options are accessible through the [`valueAxis` object](/api/dataviz/chart#valueaxis-object).
 
-Configuration options are accessible through the [`valueAxis` object](/api/dataviz/chart#valueaxis-object):
+The example below demonstrates how to configure a Numeric axis with a minimum value of 0 and a maximum value of 100.
+
+###### Example
 
     $("#chart").kendoChart({
         series: [{
@@ -185,12 +180,13 @@ Configuration options are accessible through the [`valueAxis` object](/api/datav
         }
     });
 
+### Multiple Value Axes
 
-Here we have configured a Numeric axis with a minimum value of 0 and a maximum value of 100.
+A Kendo UI Chart might have more than one value axis. These additional axes must have unique names.
 
-### Multiple value axes
+The example below demonstrates how to define the `temperature` and `humidity` axes. Series are associated to a value axis by specifying its name.
 
-A chart might have more than one value axis. These additional axes must have unique names. For example:
+###### Example
 
     $("#container").kendoChart({
         title: {
@@ -224,14 +220,17 @@ A chart might have more than one value axis. These additional axes must have uni
         }]
     });
 
+This results in the chart below.
+
+**Figure 4. A chart with multiple axes**
 
 ![Chart with multiple axes](/controls/charts/chart-multiple-axes.png)
 
-In this example we have defined "temperature" and "humidity" axes. Series are associated to a value axis by specifying its name.
+### Axis-Crossing Values
 
-### Axis crossing value(s)
+You are able to control the arrangement of the value axes by specifying the values (category indices) at which they cross the category axis, as demonstrated below.
 
-You can control the arrangement of the value axes by specifying the values (category indices) at which they cross the category axis. For example:
+###### Example
 
     categoryAxis: {
         categories: ["Aug", "Sep", "Oct"],
@@ -239,14 +238,19 @@ You can control the arrangement of the value axes by specifying the values (cate
     }
 
 
-The first value axis will cross the category axis at the first category (leftmost). The second value axis will cross it at the last category.
+The first value axis crosses the category axis at the first category (leftmost). The second value axis crosses it at the last category.
+
+**Figure 5. A chart with customized axis-crossing values**
 
 ![Bar chart with customized axis crossing values](/controls/charts/chart-axis-crossing-values.png)
 
-
 ## Scatter Charts
 
-XY charts such as Scatter and Scatter Line use one or more X and Y axes. These axes are configured through the xAxis and the yAxis objects:
+### Primary X/Y Axes
+
+XY Kendo UI Charts, such as [Scatter](http://demos.telerik.com/kendo-ui/scatter-charts/index) and [Scatter Line](http://demos.telerik.com/kendo-ui/scatter-charts/scatter-line) ones, use one or more X and Y axes. These axes are configured through the `xAxis` and the `yAxis` objects, as demonstrated in the example below.
+
+###### Example
 
     $("#chart").kendoChart({
         series: [{
@@ -262,12 +266,15 @@ XY charts such as Scatter and Scatter Line use one or more X and Y axes. These a
         }
     });
 
+### Multiple X/Y Axes
 
-### Multiple X/Y axes
+You are also able to define more X and Y axes in addition to the primary axes, as demonstrated in the example below. These additional axes must have unique names. Series are associated to a X and Y axes by specifying their name.
 
-You can define more X and Y axes in addition to the primary axes. These additional axes must have unique names. Series are associated to a X and Y axes by specifying their name.
+> **Important**
+>
+> Do not specify a name for the primary X and Y axes.
 
-**Note:** Do not specify a name for the primary X and Y axes.
+###### Example
 
     $("#container").kendoChart({
         title: {
@@ -303,13 +310,17 @@ You can define more X and Y axes in addition to the primary axes. These addition
     });
 
 
-The first series is associated with the default Y axis, as no axis name is specified. The "torque" series will be plotted on the "torque" Y axis.
+The first series is associated with the default Y axis, as no axis name is specified. The `torque` series are plotted on the `torque` Y axis.
+
+**Figure 6. A Scatter chart with multiple axes**
 
 ![Scatter chart with multiple axes](/controls/charts/chart-scatter-line-multiple-axes.png)
 
-### Axis crossing value(s)
+### Axis-Crossing Values
 
-You can control the arrangement of the X and Y axes by specifying the values at which they cross the primary axes.
+You are able to control the arrangement of the X and Y axes by specifying the values at which they cross the primary axes.
+
+###### Example
 
     xAxis: {
         title: "Engine rpm",
@@ -317,16 +328,19 @@ You can control the arrangement of the X and Y axes by specifying the values at 
     }
 
 
-The primary Y axis will cross the X axis at 0 (leftmost). The second, "torque" Y axis will cross the X axis at the 2500 mark or at its right end, whichever is first.
+The primary Y axis crosses the X axis at 0 (leftmost). The second, `torque` Y axis crosses the X axis at the 2500 mark or at its right end, whichever comes first.
+
+**Figure 7. A Scatter chart with customized axis-crossing values**
 
 ![Scatter line chart with customized axis crossing value](/controls/charts/chart-scatter-line-axis-crossing-value.png)
 
-
-## Common features
+## Common Chart Features
 
 ### Axis Title
 
-A title can be added to clearly indicate the role of the axis.For example:
+You can add a title to clearly indicate the role of the axis, as demonstrated below.
+
+###### Example
 
     $("#container").kendoChart({
         title: {
@@ -361,16 +375,15 @@ A title can be added to clearly indicate the role of the axis.For example:
         }]
     });
 
+**Figure 8. A chart with axis titles**
 
 ![Chart with axis titles](/controls/charts/chart-axis-titles.png)
 
 ### Plot Bands
 
-Each axis can be configured to display bands with different colors for predefined value ranges.
+Each axis can be configured to display bands with different colors for predefined value ranges. The category index (zero based) is used as a value for the category axis.
 
-The category index (zero based) is used as a value for the category axis.
-
-For example:
+###### Example
 
     valueAxis: [{
         name: "temperature",
@@ -390,11 +403,15 @@ For example:
     }]
 
 
+**Figure 9. A chart with axis plot bands**
+
 ![Chart with axis plot bands](/controls/charts/chart-plot-bands.png)
 
-## Global settings
+### Global Settings
 
-Sometimes you need to apply settings to all axes. In this case it is convenient to use the [`axisDefaults` object](/api/dataviz/chart#axisdefaults-object):
+Sometimes you need to apply settings to all axes. In such cases it is convenient to use the [`axisDefaults` object](/api/dataviz/chart#axisdefaults-object).
+
+###### Example
 
     $("#chart").kendoChart({
         series: [{
@@ -408,3 +425,14 @@ Sometimes you need to apply settings to all axes. In this case it is convenient 
             }
         }
     });
+
+## See Also
+
+Other articles and how-to examples on Kendo UI Charts:
+
+* [Data Binding]({% slug databinding_charts_widget %})
+* [Date Series]({% slug dateseries_charts_widget %})
+* [Tooltip]({% slug tooltip_charts_widget %})
+* [Chart Notes]({% slug chartnotes_charts_widget %})
+* [Appearance]({% slug appearance_charts_widget %})
+* [Error Bars]({% slug errorbars_charts_widget %})

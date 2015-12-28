@@ -1,19 +1,24 @@
 ---
 title: Tooltip
-page_title: Configuration guide for the chart tooltip
-description: How to configure the tooltip of a chart, make it visible and set its properties upon your preferences.
+page_title: Tooltip | Kendo UI Charts
+description: "Learn how to configure the tooltip in Kendo UI Charts, make it visible, and set its properties depending on your preferences."
+slug: tooltip_charts_widget
 position: 4
 ---
 
 # Tooltip
 
-The Chart can display details about the data point that the mouse is currently hovering. The border of this tooltip matches the color of the series.
+The Kendo UI Charts can display details about the data point the mouse is currently hovering. The border of this tooltip matches the color of the series.
+
+**Figure 1. Tooltip in a Kendo UI Chart widget**
 
 ![](/controls/charts/chart-tooltip.png)
 
 ## Configuration
 
-The tooltip is not visible by default. You can enable it by setting the visible property of the tooltip object to true:
+The tooltip is not visible by default. You can enable it by setting the visible property of the tooltip object to `true`, as demonstrated below.
+
+###### Example
 
     $("#chart").kendoChart({
         series: [{
@@ -29,7 +34,9 @@ The tooltip is not visible by default. You can enable it by setting the visible 
         }
     });
 
-The tooltip can also be configured per-series:
+The tooltip can also be configured per-series.
+
+###### Example
 
     series: [{
         type: "bar",
@@ -40,31 +47,35 @@ The tooltip can also be configured per-series:
         }
     }]
 
-## Formating values
+## Options
 
-The point value can be formatted using the format property:
+### Format Values
+
+The point value can be formatted using the `format` property, as demonstrated in the example below.
+
+###### Example
 
     tooltip: {
         visible: true,
         format: "Value: {0:N0}"
     }
 
-The format string supports a subset of the syntax available in Java and C#.
+The format string supports a subset of the syntax available in Java and C#. Here "N0" indicates that the value should be rounded to a whole number and should have a thousands separator.
 
-Here "N0" indicates that the value should be rounded to a whole number and should have a thousands separator.
+> **Important**
+>
+> Points in categorical (XY) Kendo UI Charts have two values&mdash;{0} and {1} (X and Y).
 
-**Note: **Points in XY charts have two values - {0} and {1} (X and Y).
+### Templates
 
-## Templates
+When you desire a higher level of flexibility, define the content of a tooltip via a Kendo UI template. The template provides access to all information associated with the point:
 
-Tooltip content can be defined with a Kendo Template when more flexibility is desired. The template provides access to all information associated with the point:
+*   `value`&mdash;The point value. Value dimensions are available as properties, e.g. `value.x` and `value.y`.
+*   `category`&mdash;The category name.
+*   `series`&mdash;The data series.
+*   `dataItem`&mdash;The original data item (when binding to dataSource).
 
-*   value - the point value. Value dimensions are available as properties, for example, **value.x** and **value.y**
-*   category - the category name.
-*   series - the data series.
-*   dataItem - the original data item (when binding to dataSource).
-
-For example:
+###### Example
 
     $("#chart").kendoChart({
          title: {
@@ -82,3 +93,14 @@ For example:
              template: "${category} - ${value}"
          }
     });
+
+## See Also
+
+Other articles on Kendo UI Charts:
+
+* [Overview]({% slug overview_kendoui_charts_widget %})
+* [Data Binding]({% slug databinding_charts_widget %})
+* [Date Series]({% slug dateseries_charts_widget %})
+* [Chart Notes]({% slug chartnotes_charts_widget %})
+* [Appearance]({% slug appearance_charts_widget %})
+* [Error Bars]({% slug errorbars_charts_widget %})

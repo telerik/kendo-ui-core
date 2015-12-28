@@ -1,47 +1,32 @@
 ---
 title: Date Series
-page_title: Working with date series in Kendo UI Javascript Chart widget
-description: How to handle date series and date grouping in Chart UI widget.
+page_title: Date Series | Kendo UI Charts
+description: "Learn how to handle date series and date grouping in the Kendo UI Charts."
+slug: dateseries_charts_widget
 position: 3
 ---
 
 # Date Series
 
-* [Categorical date series](#categorical-date-series)
+## Categorical Date Series
 
-    * [Category binding](#category-binding)
-    * [Date grouping](#date-grouping)
-    * [Aggregates](#aggregates)
-    * [Base units](#base-units)
-
-* [Scatter date series](#scatter-date-series)
-
-## Categorical date series
-
-Categorical series have built-in support for displaying dates. This includes:
+Categorical series, such as [Bar](http://demos.telerik.com/kendo-ui/bar-charts/index), [Line](http://demos.telerik.com/kendo-ui/line-charts/index), [Area](http://demos.telerik.com/kendo-ui/area-charts/index) and other Kendo UI Charts, have built-in support for displaying dates. This includes:
 
 * Automatic selection of granularity/base unit (minutes, hours, days, etc.)
 * Label formatting matched to the granularity
 * Grouping of categories into base units and series aggregates
 
-Specifying categories of type Date will switch the axis to date mode.
+Specifying categories of type `Date` switches the axis to a date mode. The automatic mode selection can be overridden by setting [`categoryAxis.type`](/api/dataviz/chart#configuration-categoryAxis.type) to `Date`.
 
-The automatic mode selection can be overriden by setting
-[categoryAxis.type](/api/dataviz/chart#configuration-categoryAxis.type) to "Date".
+### Category Binding
 
-### Category binding
+Date series must be bound by using [`categoryField`](/api/dataviz/chart#configuration-series.categoryField). The categories (dates) for all series are sorted and merged during data binding.
 
-Date series should be bound using
-[categoryField](/api/dataviz/chart#configuration-series.categoryField).
+### Date Grouping
 
-The categories (dates) for all series will be sorted and merged during data binding.
+If the series contain more than one value for a given period (base unit), they are aggregated to display a single value, as demonstrated in the example below.
 
-### Date grouping
-
-If series contain more than one value for a given period (base unit),
-then they'll be aggregated to display a single value.
-
-#### Example: Date series
+###### Example
 
     <div id="chart" style="width: 350px; height: 250px;"></div>
     <script>
@@ -74,11 +59,15 @@ then they'll be aggregated to display a single value.
     });
     </script>
 
-Note that the dates match the source:
+Note that the dates match the source.
+
+**Figure 1. A chart with date category axis**
 
 ![Chart with date category axis](/controls/charts/chart-category-date-axis.png)
 
-#### Example: Date series with grouping by year
+The example below demonstrates date series grouped by year.
+
+###### Example
 
     <div id="chart" style="width: 350px; height: 250px;"></div>
     <script>
@@ -114,23 +103,27 @@ Note that the dates match the source:
     });
     </script>
 
-Notice how the chart now displays the maximum value for each year:
+Notice the way the chart now displays the maximum value for each year.
+
+**Figure 2. A chart with a grouped date category axis.**
 
 ![Chart with grouped date category axis](/controls/charts/chart-category-date-axis-grouped.png)
 
 ### Aggregates
 
-The aggregate type can be set for each series. Available options are:
+You are able to set the aggregate type for each series. The available options are:
 
-* min
-* max (default)
-* count
-* sum
-* avg
-* first
-* function (values, series) (Custom aggregate)
+* `min`
+* `max` (default)
+* `count`
+* `sum`
+* `avg`
+* `first`
+* `function` (values, series) (Custom aggregate)
 
-#### Example: Date grouping with "sum" aggregate
+The example below demonstrates how to handle date grouping with the `sum` aggregate.
+
+###### Example
 
     <div id="chart" style="width: 350px; height: 250px;"></div>
     <script>
@@ -167,10 +160,13 @@ The aggregate type can be set for each series. Available options are:
     });
     </script>
 
-### Base units
+### Base Units
 
-The default base unit is determined from the smallest duration between categories.
-For example:
+#### Default configuration
+
+The default base unit is determined by the smallest duration between categories, as demonstrated below.
+
+###### Example
 
     categoryAxis: {
         categories: [new Date(2005, 0, 1), new Date(2006, 0, 1)]
@@ -182,8 +178,9 @@ For example:
         // baseUnit is set to "days"
     }
 
-The [baseUnit](/api/dataviz/chart#configuration-categoryAxis.baseUnit) can be specified manually.
-Valid options are:
+#### Manual configuration
+
+The [`baseUnit`](/api/dataviz/chart#configuration-categoryAxis.baseUnit) can be specified manually. The valid options are:
 
 * seconds
 * minutes
@@ -194,20 +191,15 @@ Valid options are:
 * years
 * fit (see [Automatic fitting](#automatic-fitting))
 
-You can also choose to show every n-th base unit by setting the
-[baseUnitStep](/api/dataviz/chart#configuration-categoryAxis.baseUnitStep)
-option.
+You can also choose to display every n-th base unit by setting the [`baseUnitStep`](/api/dataviz/chart#configuration-categoryAxis.baseUnitStep) option.
 
 #### Automatic fitting
 
-Setting [baseUnit](/api/dataviz/chart#configuration-categoryAxis.baseUnit)
-to "fit" will constraint the total number of base units to
-[maxDateGroups](/api/dataviz/chart#configuration-categoryAxis.baseUnit).
+Setting the [`baseUnit`](/api/dataviz/chart#configuration-categoryAxis.baseUnit) to `fit`, constraints the total number of base units to [`maxDateGroups`](/api/dataviz/chart#configuration-categoryAxis.baseUnit). The `baseUnit` and `baseUnitStep` are chosen according to the [`autoBaseUnitSteps`](/api/dataviz/chart#configuration-categoryAxis.autoBaseUnitSteps).
 
-The baseUnit and baseUnitStep will be chosen according to
-[autoBaseUnitSteps](/api/dataviz/chart#configuration-categoryAxis.autoBaseUnitSteps)
+The example below demonstrates how to fit the date series.
 
-##### Example: Fit date series
+###### Example
 
     <div id="chart" style="width: 350px; height: 250px;"></div>
     <script>
@@ -249,9 +241,11 @@ The baseUnit and baseUnitStep will be chosen according to
     });
     </script>
 
-##### Labels format
+#### Labels format
 
 The date category axis supports specifying one format per base unit.
+
+###### Example
 
     categoryAxis: {
         labels: {
@@ -261,38 +255,33 @@ The date category axis supports specifying one format per base unit.
         }
     }
 
-The [`labels.format` property](/api/dataviz/chart#categoryaxis.labels.format-string) takes priority, if specified.
+The [`labels.format` property](/api/dataviz/chart#categoryaxis.labels.format-string) takes priority, if specified. The global `KendoUI` culture is used for formatting the dates. It can be overridden by setting `labels.culture`.
 
-The global KendoUI culture is used for formatting the dates.
-It can be overriden by setting `labels.culture`.
+## Scatter Date Series
 
-
-## Scatter date series
-
-Scatter series have built-in support for displaying dates.
-This includes:
+Scatter series have built-in support for displaying dates. This includes:
 
 * Automatic selection of granularity/base unit (minutes, hours, days, etc.)
 * Label formatting matched to the granularity
 
-The X/Y axis will switch to date mode if the series values are of type Date.
-The automatic mode selection can be overriden by specifying `type: "Date"`
+The X/Y axis switch to a date mode if the series values are of type `Date`. The automatic mode selection can be overridden by specifying `type: "Date"`. The following options accept dates:
 
-The following options accept dates:
-
-* [min](/api/dataviz/chart#configuration-xAxis.min)
-* [max](/api/dataviz/chart#configuration-xAxis.max)
-* [axisCrossingValue](/api/dataviz/chart#configuration-xAxis.axisCrossingValue)
+* [`min`](/api/dataviz/chart#configuration-xAxis.min)
+* [`max`](/api/dataviz/chart#configuration-xAxis.max)
+* [`axisCrossingValue`](/api/dataviz/chart#configuration-xAxis.axisCrossingValue)
 
 The following options are expressed in base units:
 
-* [minorUnit](/api/dataviz/chart#configuration-xAxis.minorUnit)
-* [majorUnit](/api/dataviz/chart#configuration-xAxis.majorUnit)
+* [`minorUnit`](/api/dataviz/chart#configuration-xAxis.minorUnit)
+* [`majorUnit`](/api/dataviz/chart#configuration-xAxis.majorUnit)
 
 ### Base Units
 
-The default base unit is determined from the axis (or series) range.
-For example:
+#### Default configuration
+
+The default base unit is determined by the axis (or series) range, as demonstrated below.
+
+###### Example
 
     xAxis: {
         min: new Date(2005, 0, 1),
@@ -306,7 +295,9 @@ For example:
         // baseUnit is set to "days"
     }
 
-The base unit can also be specified manually. Valid options are:
+#### Manual configuration
+
+The base unit can also be specified manually. The valid options are:
 
 * seconds
 * minutes
@@ -316,9 +307,11 @@ The base unit can also be specified manually. Valid options are:
 * months
 * years
 
-#### Labels format
+#### Labels Format
 
 The date axis supports specifying one format per base unit.
+
+###### Example
 
     xAxis: {
         labels: {
@@ -328,7 +321,15 @@ The date axis supports specifying one format per base unit.
         }
     }
 
-The [`labels.format` property](/api/dataviz/chart#xAxis.labels.format) property takes priority, if specified.
+The [`labels.format` property](/api/dataviz/chart#xAxis.labels.format) takes priority, if specified. The global `KendoUI` culture is used for formatting the dates. It can be overriden by setting [`labels.culture` property](/api/dataviz/chart#xAxis.labels.culture).
 
-The global KendoUI culture is used for formatting the dates.
-It can be overriden by setting [`labels.culture` property](/api/dataviz/chart#xAxis.labels.culture).
+## See Also
+
+Other articles on Kendo UI Charts:
+
+* [Overview]({% slug overview_kendoui_charts_widget %})
+* [Data Binding]({% slug databinding_charts_widget %})
+* [Tooltip]({% slug tooltip_charts_widget %})
+* [Chart Notes]({% slug chartnotes_charts_widget %})
+* [Appearance]({% slug appearance_charts_widget %})
+* [Error Bars]({% slug errorbars_charts_widget %})

@@ -1,19 +1,18 @@
 ---
 title: Appearance
-page_title: Instructions for Kendo UI DataViz Chart Widget appearance
-description: How to control the appearance of the chart, change the theme of the widget and manage the animated transitions.
-position: 5
+page_title: Appearance | Kendo UI Charts
+description: "Learn how to control the appearance of Kendo UI Charts, change their themes and manage their animated transitions."
+slug: appearance_charts_widget
+position: 6
 ---
 
-## Chart Appearance
+# Appearance
 
-The appearance of the Chart is controlled with style options.
+The appearance of Kendo UI Charts is controlled via style options unlike the other Kendo UI components in the suite, which use CSS for styling.
 
-This is in contrast with the other components in the suite that use CSS for styling.
+## Chart Structure
 
-### Chart structure
-
-The main building blocks of the chart are:
+The main building blocks of a Kendo UI Chart are:
 
 *   Title
 *   Legend
@@ -22,51 +21,59 @@ The main building blocks of the chart are:
 *   Axes
 *   Series
 
+**Figure 1. Chart structure**
+
 ![Chart Structure](/controls/charts/chart-structure.png)
 
 ### Title
 
-The title location can be controlled with the `position` option of the `title` object. Available options are:
+The title location is controlled via the `position` option of the `title` object. Available options are:
 
-*   "top"
-*   "bottom"
+* `"top"`
+* `"bottom"`
 
 ### Legend
 
-The legend position is also controllable. Supported `position` values:
+The legend position is also controllable. The supported `position` values are:
 
-*   "top"
-*   "bottom"
-*   "left"
-*   "right"
-*   "custom"
+* `"top"`
+* `"bottom"`
+* `"left"`
+* `"right"`
+* `"custom"`
 
-Custom positioning is configured through the `offsetX`  and `offsetY` options. For example:
+Custom positioning is configured through the `offsetX` and `offsetY` options.
+
+**Figure 2. Custom legend position**
 
 ![Custom legend position](/controls/charts/chart-legend-custom-position.png)
 
-Series can be excluded from the legend by setting their `visibleInLegend` option to `false`.
+You are able to exclude series from the legend by setting their `visibleInLegend` option to `false`.
 
 ### Themes
 
-The Chart comes with a number of predefined themes:
+The Kendo UI Chart widgets come with [a number of predefined themes](http://demos.telerik.com/kendo-ui/themebuilder), which are:
 
-*   Black
-*   BlueOpal
-*   Bootstrap
-*   Default
-*   Flat
-*   HighContrast
-*   Material
-*   MaterialBlack
-*   Metro
-*   MetroBlack
-*   Moonlight
-*   Silver
-*   Uniform
+* Black
+* BlueOpal
+* Bootstrap
+* Default
+* Fiori
+* Flat
+* HighContrast
+* Material
+* MaterialBlack
+* Metro
+* MetroBlack
+* Moonlight
+* Nova
+* Silver
+* Office 365
+* Uniform
 
-Use the `theme` option to select a theme:
+Use the `theme` option to select a theme, as demonstrated in the example below.
 
+###### Example
 
     $("#chart").kendoChart({
         theme: "blueOpal",
@@ -80,12 +87,13 @@ Use the `theme` option to select a theme:
         }
     });
 
-
 Note that theme names are case insensitive.
 
 ### Transitions
 
-The Chart uses animated transitions to display new and updated data. These transitions can be disabled through the `transitions` option:
+Kendo UI Charts use animated transitions to display new and updated data. These transitions can be disabled through the `transitions` option, as demonstrated below.
+
+###### Example
 
     $("#chart").kendoChart({
         series: [{
@@ -98,3 +106,14 @@ The Chart uses animated transitions to display new and updated data. These trans
         },
         transitions: false
     });
+
+## See Also
+
+Other articles on Kendo UI Charts:
+
+* [Overview]({% slug overview_kendoui_charts_widget %})
+* [Data Binding]({% slug databinding_charts_widget %})
+* [Date Series]({% slug dateseries_charts_widget %})
+* [Tooltip]({% slug tooltip_charts_widget %})
+* [Chart Notes]({% slug chartnotes_charts_widget %})
+* [Error Bars]({% slug errorbars_charts_widget %})

@@ -1,13 +1,17 @@
 ---
 title: Error Bars
-page_title: Configuration guide for the chart ErrorBars
-description: How to configure the error bars of a chart, bind them to the series data and set the value.
+page_title: Error Bars | Kendo UI Charts
+description: "Learn how to configure the error bars of Kendo UI Charts, bind them to the series data and set their value."
+slug: errorbars_charts_widget
+position: 7
 ---
 
-#Error bars
-Error bars can be used to show variability of data. This help topic describes how to use them in a Kendo UI Chart. 
+# Error Bars
 
-##Configuring the chart error bars
+Error bars can be used to show variability of data. This article describes the way you can use them in a Kendo UI Chart widget.
+
+## Configuration
+
 The Error bars are specified as part of the series definition and are supported for the following series types:
 
 * Area
@@ -19,14 +23,15 @@ The Error bars are specified as part of the series definition and are supported 
 * Scatter
 * ScatterLine
 
-The low and high value for the error bars can either be bound to the data or be calculated from the point or series values. 
+The low and high value for the error bars can either be bound to the data or be calculated from the point or series values.
 
-##Data binding
+## Data Binding
 
-###Binding to categorical series
-To bind the error bars low and high value when using categorical series, you should set the [errorLowField](/api/dataviz/chart#configuration-series.errorLowField) and [errorHighField](/api/dataviz/chart#configuration-series.errorHighField) options to the fields in the data that hold the low and high value.
+### Bind to Categorical Series
 
-#### Example
+To bind the error bars low and high values when using categorical series, set the [`errorLowField`](/api/dataviz/chart#configuration-series.errorLowField) and [`errorHighField`](/api/dataviz/chart#configuration-series.errorHighField) options to the fields in the data that hold the low and high value, as demonstrated below.
+
+###### Example
 
     <div id="chart"></div>
     <script>
@@ -35,16 +40,19 @@ To bind the error bars low and high value when using categorical series, you sho
         type: "column",
         errorLowField: "low",
         errorHighField: "high",
-        data: [{value: 4.743, low: 4.5, high: 5}, {value: 7.295, low: 7, high: 8}, 
+        data: [{value: 4.743, low: 4.5, high: 5}, {value: 7.295, low: 7, high: 8},
           {value: 6.376, low: 5, high: 6.5}]
       }]
     });
     </script>
 
-###Binding to scatter series
-Error bars can be displayed for the series x value, y value or both. To set the low and high fields for the series x value, you should set the [xErrorLowField](/api/dataviz/chart#configuration-series.xErrorLowField) and [xErrorHighField](/api/dataviz/chart#configuration-series.xErrorHighField) series options. The low and high fields for the series y value, can be specified with the [yErrorLowField](/api/dataviz/chart#configuration-series.yErrorLowField) and [yErrorHighField](/api/dataviz/chart#configuration-series.yErrorHighField) options.
+### Bind to Scatter Series
 
-#### Example: binding the error bars for the series x value
+Error bars can be displayed for the series `x` value, `y` value or both. To set the low and high fields for the series `x` value, set the [`xErrorLowField`](/api/dataviz/chart#configuration-series.xErrorLowField) and [`xErrorHighField`](/api/dataviz/chart#configuration-series.xErrorHighField) series options. The low and high fields for the series `y` value, can be specified with the [`yErrorLowField`](/api/dataviz/chart#configuration-series.yErrorLowField) and [`yErrorHighField`](/api/dataviz/chart#configuration-series.yErrorHighField) options.
+
+The example below demonstrates how to bind the error bars for the series `x` value.
+
+###### Example
 
     <div id="chart"></div>
     <script>
@@ -53,13 +61,15 @@ Error bars can be displayed for the series x value, y value or both. To set the 
         type: "scatter",
         xErrorLowField: "low",
         xErrorHighField: "high",
-        data: [{x: 6.4, y: 13.4, low: 5, high: 7}, {x: 1.7, y: 11, low: 1, high: 3}, 
+        data: [{x: 6.4, y: 13.4, low: 5, high: 7}, {x: 1.7, y: 11, low: 1, high: 3},
           {x: 5.4, y: 8, low: 3, high: 6}]
       }]
     });
     </script>
 
-#### Example: binding the error bars for the series y value
+The example below demonstrates how to bind the error bars for the series `y` value.
+
+###### Example
 
     <div id="chart"></div>
     <script>
@@ -68,20 +78,23 @@ Error bars can be displayed for the series x value, y value or both. To set the 
         type: "scatter",
         yErrorLowField: "low",
         yErrorHighField: "high",
-        data: [{x: 6.4, y: 13.4, low: 12, high: 14}, {x: 1.7, y: 11, low: 11, high: 14}, 
+        data: [{x: 6.4, y: 13.4, low: 12, high: 14}, {x: 1.7, y: 11, low: 11, high: 14},
           {x: 5.4, y: 8, low: 5, high: 8}]
       }]
     });
     </script>
 
-##Setting the error bars value
-The error bars low and high value can be calculated based on the series point values. To set the error bars value for categorical series, you should specify the [series.errorBars.value](/api/dataviz/chart#configuration-series.errorBars.value) option. For scatter series, you should set the [series.errorBars.xValue](/api/dataviz/chart#configuration-series.errorBars.xValue) or [series.errorBars.yValue](/api/dataviz/chart#configuration-series.errorBars.yValue) options or both.
+## Set Error Bars Value
 
-###Setting a numeric value
+The error bars low and high value can be calculated based on the series point values. To set the error bars value for categorical series, specify the [`series.errorBars.value`](/api/dataviz/chart#configuration-series.errorBars.value) option. For scatter series set the [`series.errorBars.xValue`](/api/dataviz/chart#configuration-series.errorBars.xValue) or [`series.errorBars.yValue`](/api/dataviz/chart#configuration-series.errorBars.yValue) options or both.
 
-If the error bars value is set to a number(must not be negative), then the low and high value will be calculated by subtracting/adding the value to the series value.
+### Set Numeric Value
 
-####Example: setting a numeric value for categorical series
+If the error bars value is set to a number (must not be negative), the low and high value are calculated by subtracting or adding the value to the series value.
+
+The example below demonstrates how to set a numeric values for categorical series.
+
+###### Example
 
     <div id="chart"></div>
     <script>
@@ -96,7 +109,9 @@ If the error bars value is set to a number(must not be negative), then the low a
     });
     </script>
 
-####Example: setting a numeric value for scatter series
+The example below demonstrates how to set a numeric values for scatter series.
+
+###### Example
 
     <div id="chart"></div>
     <script>
@@ -111,11 +126,13 @@ If the error bars value is set to a number(must not be negative), then the low a
     });
     </script>
 
-###Setting an array value
+### Set Array Values
 
-The difference can also be set separately for the low and high value by setting an array with two numeric values. In this case, the low value will be calculated by subtracting the array first value from the point value and the high value will be calculated by adding the second value to the point value.
+The difference can also be set separately for the low and high value by setting an array with two numeric values. In this case, the low value is calculated by subtracting the array first value from the point value. The high value is calculated by adding the second value to the point value.
 
-####Example: setting an array value for categorical series
+The example below demonstrates how to set an array for categorical series.
+
+###### Example
 
     <div id="chart"></div>
     <script>
@@ -130,7 +147,9 @@ The difference can also be set separately for the low and high value by setting 
     });
     </script>
 
-####Example: setting an array value for scatter series
+The example below demonstrates how to set an array for scatter series.
+
+###### Example
 
     <div id="chart"></div>
     <script>
@@ -145,11 +164,11 @@ The difference can also be set separately for the low and high value by setting 
     });
     </script>
 
-###Setting a percentage value
+### Set Percentage Values
 
-It is also possible to set the difference as percentage of the point value. To achieve this, you should set a string value in the format "percenatage(n)" where `n` indicates the percent value.
+It is also possible to set the difference of the point value as percentage. To achieve this, set a string value in the format `"percenatage(n)"` where `n` indicates the percent value, as demonstrated in the example below.
 
-####Example: setting a percentage value
+###### Example
 
     <div id="chart"></div>
     <script>
@@ -163,11 +182,13 @@ It is also possible to set the difference as percentage of the point value. To a
     });
     </script>
 
-###Setting a statistical value
+### Set Statistical Values
 
-The error bars support statistical calculations based on the series data. The supported types are [standard error](http://en.wikipedia.org/wiki/Standard_error) and [population standard deviation](http://en.wikipedia.org/wiki/Standard_deviation). To specify that standard error should be used, you should set `"stderr"` as value. To use standard deviation, you should set `"stddev"` with an optional number between parentheses appended at the end. The number will be multiplied by the calculated standard deviation value.
+The error bars support statistical calculations based on the series data. The supported types are [standard error](http://en.wikipedia.org/wiki/Standard_error) and [population standard deviation](http://en.wikipedia.org/wiki/Standard_deviation). To specify that standard error is to be used, set `"stderr"` as a value. To use standard deviation, set `"stddev"` with an optional number between parentheses appended at the end. The number is going to be multiplied by the calculated standard deviation value.
 
-####Example: using standard error
+The example below demonstrates how to use the standard error type.
+
+###### Example
 
     <div id="chart"></div>
     <script>
@@ -181,7 +202,9 @@ The error bars support statistical calculations based on the series data. The su
     });
     </script>
 
-####Example: using standard deviation
+The example below demonstrates how to use the standard deviation type.
+
+###### Example
 
     <div id="chart"></div>
     <script>
@@ -195,19 +218,19 @@ The error bars support statistical calculations based on the series data. The su
     });
     </script>
 
-###Calculating the low and high value with a custom function.
+### Calculate Low and High Values by Custom Functions
 
-If a custom algorithm is needed to calculate the low and high value, then you can specify a function. The function accepts an object with the following fields as parameter:
+If a custom algorithm is needed to calculate the low and high value, specify a function. The function accepts an object and returns a valid error bar value. The following fields as object parameters are available:
 
-* dataItem – the point data item
-* value - the point value
-* index – the point index in the series data
-* category – the point category value if a categorical chart is used
-* series – the series configuration 
+* `dataItem`&mdash;The point data item.
+* `value`&mdash;The point value.
+* `index`&mdash;The point index in the series data.
+* `category`&mdash;The point category value if a categorical chart is used.
+* `series`&mdash;The series configuration.
 
-and should return a valid error bar value.
+The example below demonstrates how to use different percentages for the low and high value.
 
-####Example: using different percentages for the low and high value
+###### Example
 
     <div id="chart"></div>
     <script>
@@ -224,4 +247,15 @@ and should return a valid error bar value.
         data: [{value: 4.743}, {value: 7.295}, {value: 6.376}]
       }]
     });
-    </script> 
+    </script>
+
+## See Also
+
+Other articles on Kendo UI Charts:
+
+* [Overview]({% slug overview_kendoui_charts_widget %})
+* [Data Binding]({% slug databinding_charts_widget %})
+* [Date Series]({% slug dateseries_charts_widget %})
+* [Tooltip]({% slug tooltip_charts_widget %})
+* [Chart Notes]({% slug chartnotes_charts_widget %})
+* [Appearance]({% slug appearance_charts_widget %})

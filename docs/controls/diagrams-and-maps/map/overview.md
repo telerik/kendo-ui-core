@@ -21,7 +21,7 @@ For more detailed information on any new features, refer to [Kendo UI Roadmap](h
 
 ### Create the Map
 
-To create a Kendo UI Map, add an empty `div` in the HTML, and provide it with an ID, and, optionally, set its desired width and height inline or via CSS, as demonstrated in the example below.
+To create a Kendo UI Map, add an empty `div` in the HTML, provide it with an ID, and, optionally, set its desired width and height inline or via CSS, as demonstrated in the example below.
 
 ###### Example
 
@@ -53,6 +53,8 @@ The example below demonstrates how to add a basic tile layer to the Map that is 
         }]
     });
     </script>
+
+**Figure 1. A basic map**
 
 ![Basic map](/controls/diagrams-and-maps/map/images/map-basic.png)
 

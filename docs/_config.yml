@@ -254,6 +254,7 @@ navigation:
         title: "Chart"
     "*chart-types":
         title: "Chart Types"
+        position: 8
     "*dataviz":
         title: "Data Visualization"
     "*lineargauge":
