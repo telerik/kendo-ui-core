@@ -92,7 +92,7 @@ if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "daily": {
-    "days": "dia(s)",
+    "interval": "dia(s)",
     "repeatEvery": "Repetir todo:"
   },
   "end": {
@@ -112,7 +112,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   },
   "monthly": {
     "day": "Dia",
-    "months": "mês(es)",
+    "interval": "mês(es)",
     "repeatEvery": "Repetir todo:",
     "repeatOn": "Repetir em:"
   },
@@ -126,13 +126,13 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "weekly": {
     "repeatEvery": "Repetir todo:",
     "repeatOn": "Repetir em:",
-    "weeks": "semana(s)"
+    "interval": "semana(s)"
   },
   "yearly": {
     "of": "de",
     "repeatEvery": "Repetir todo:",
     "repeatOn": "Repetir em:",
-    "years": "ano(s)"
+    "interval": "ano(s)"
   }
 });
 }
@@ -358,9 +358,7 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "statusFailed": "falhou",
   "statusUploaded": "enviado",
   "statusUploading": "enviando",
-  "statusUploading1": "enviando",
-  "uploadSelectedFiles": "Enviar arquivos",
-  "uploadSelectedFiles1": "Enviar arquivos"
+  "uploadSelectedFiles": "Enviar arquivos"
 });
 }
 })(window.kendo.jQuery);
