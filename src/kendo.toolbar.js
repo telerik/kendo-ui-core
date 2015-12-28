@@ -1360,7 +1360,7 @@ var __meta__ = { // jshint ignore:line
                     return;
                 }
 
-                if (keyCode === keys.SPACEBAR || keyCode === keys.ENTER) {
+                if ((keyCode === keys.SPACEBAR || keyCode === keys.ENTER) && !target.is("input, checkbox")) {
 
                     e.preventDefault(); //prevent pspacebar to scroll the page down
 
