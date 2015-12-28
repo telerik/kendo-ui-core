@@ -171,9 +171,7 @@ var __meta__ = { // jshint ignore:line
 
                 if (options.group) {
                     element.attr(kendo.attr("group"), options.group);
-                    if ((this.overflow && this.options.overflow === OVERFLOW_ALWAYS) || !this.overflow) {
-                        this.group = this.toolbar.addToGroup(this, options.group);
-                    }
+                    this.group = this.toolbar.addToGroup(this, options.group);
                 }
 
                 if (!options.togglable && options.click && isFunction(options.click)) {
@@ -811,12 +809,12 @@ var __meta__ = { // jshint ignore:line
                     tmp = this.buttons[i];
 
                     tmp.select(false);
-                    if (tmp.twin()) {
-                        tmp.twin().select(false);
-                    }
                 }
 
                 button.select(true);
+                if (button.twin()) {
+                    button.twin().select(true);
+                }
             }
         });
 
@@ -1094,9 +1092,7 @@ var __meta__ = { // jshint ignore:line
                     if (item.toolbar.options.type === "button" && item.toolbar.options.isChild) {
                         item.toolbar.getParentGroup().refresh();
                     }
-                }
-
-                if (item.overflow) {
+                } else if (item.overflow) {
                     item.overflow.show();
 
                     if (item.overflow.options.type === "button" && item.overflow.options.isChild) {
@@ -1360,7 +1356,7 @@ var __meta__ = { // jshint ignore:line
                     return;
                 }
 
-                if (keyCode === keys.SPACEBAR || keyCode === keys.ENTER) {
+                if ((keyCode === keys.SPACEBAR || keyCode === keys.ENTER) && !target.is("input, checkbox")) {
 
                     e.preventDefault(); //prevent pspacebar to scroll the page down
 

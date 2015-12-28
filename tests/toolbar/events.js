@@ -661,4 +661,24 @@
         ok(window.location.href.indexOf("#foo") !== -1);
     });
 
+    test("click on overflow toggle button (part of group) selects it", function() {
+         var toolbar = container.kendoToolBar({
+            items: [
+                {
+                    type: "buttonGroup",
+                    buttons: [
+                        { text: "Left", id: "left", togglable: true, group: "text-align" },
+                        { text: "Center", id: "center", togglable: true, group: "text-align" },
+                        { text: "Right", id: "right", togglable: true, group: "text-align" }
+                    ]
+                }
+            ]
+         }).data("kendoToolBar");
+
+        click($("#left_overflow"));
+
+        ok($("#left").hasClass("k-state-active"));
+        ok($("#left_overflow").hasClass("k-state-active"));
+    });
+
 })();
