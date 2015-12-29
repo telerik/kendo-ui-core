@@ -170,10 +170,12 @@ var __meta__ = { // jshint ignore:line
                 that._unbindDataSource();
             } else {
                 that._progressHandler = proxy(that._showBusy, that);
+                that._errorHandler = proxy(that._hideBusy, that);
             }
 
             that.dataSource = DataSource.create(that.options.dataSource)
-                .bind("progress", that._progressHandler);
+                .bind("progress", that._progressHandler)
+                .bind("error", that._errorHandler);
         },
 
         setDataSource: function(dataSource) {

@@ -915,4 +915,25 @@ test("suggest method accepts a data item", function() {
 
     equal(combobox.text(), "Item2");
 });
+
+test("calls hideBusy on dataSource transport error", 1, function() {
+    var combobox = new ComboBox(input, {
+        autoBind: false,
+        dataSource: {
+            transport: {
+                read: function(o) {
+                    o.error();
+                }
+            }
+        }
+    });
+
+    stub(combobox, {
+        _hideBusy: combobox._hideBusy
+    });
+
+    combobox.dataSource.read();
+    equal(combobox.calls("_hideBusy"), 1);
+});
+
 })();

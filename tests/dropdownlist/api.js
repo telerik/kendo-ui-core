@@ -211,6 +211,26 @@
         $.mockjaxClear();
     });
 
+    test("calls hideBusy on dataSource transport error", 1, function() {
+        dropdownlist = new DropDownList(input, {
+            autoBind: false,
+            dataSource: {
+                transport: {
+                    read: function(o) {
+                        o.error();
+                    }
+                }
+            }
+        });
+
+        stub(dropdownlist, {
+            _hideBusy: dropdownlist._hideBusy
+        });
+
+        dropdownlist.dataSource.read();
+        equal(dropdownlist.calls("_hideBusy"), 1);
+    });
+
     test("close should close popup", 1, function () {
         dropdownlist = createDropDownList();
         dropdownlist.bind("close", function(){

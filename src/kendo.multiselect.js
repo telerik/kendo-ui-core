@@ -618,10 +618,12 @@ var __meta__ = { // jshint ignore:line
                 that._unbindDataSource();
             } else {
                 that._progressHandler = proxy(that._showBusy, that);
+                that._errorHandler = proxy(that._hideBusy, that);
             }
 
             that.dataSource = kendo.data.DataSource.create(dataSource)
-                                   .bind(PROGRESS, that._progressHandler);
+                                   .bind(PROGRESS, that._progressHandler)
+                                   .bind("error", that._errorHandler);
         },
 
         _reset: function() {
