@@ -961,6 +961,14 @@ var __meta__ = { // jshint ignore:line
                     rootUid: that.uid
                 });
 
+                if (options.menuButtons) {
+                    for (var i = 0; i < options.menuButtons.length; i++) {
+                        $.extend(options.menuButtons[i], {
+                            uid: kendo.guid()
+                        });
+                    }
+                }
+
                 if (template && !overflowTemplate) {
                     options.overflow = OVERFLOW_NEVER;
                 } else if (!options.overflow) {
@@ -1019,30 +1027,36 @@ var __meta__ = { // jshint ignore:line
                     isResizable = this.options.resizable,
                     type;
 
+                //find toolbar item
+
                 element = this.element.find(candidate);
+                if (!element.length) {
+                    element = $(".k-split-container[data-uid=" + this.uid + "]").find(candidate);
+                }
+
                 type = element.length ? element.data("type") : "";
                 toolbarItem = element.data(type);
 
-                if (toolbarItem && toolbarItem.main) {
-                    element = element.parent("." + SPLIT_BUTTON);
-                    type = "splitButton";
-                    toolbarItem = element.data(type);
-                }
+                if (toolbarItem) {
+                    if (toolbarItem.main) {
+                        element = element.parent("." + SPLIT_BUTTON);
+                        type = "splitButton";
+                        toolbarItem = element.data(type);
+                    }
 
-                if (!element.length && isResizable) {
+                    if (isResizable) {
+                        overflowItem = toolbarItem.twin();
+                    }
+                } else if (isResizable) { //find overflow item
                     element = this.popup.element.find(candidate);
-                    type = element.data("type");
+                    type = element.length ? element.data("type") : "";
                     overflowItem = element.data(type);
-                }
 
-                if (overflowItem && overflowItem.main) {
-                    element = element.parent("." + SPLIT_BUTTON);
-                    type = "splitButton";
-                    overflowItem = element.data(type);
-                }
-
-                if (toolbarItem && isResizable) {
-                    overflowItem = toolbarItem.twin();
+                    if (overflowItem && overflowItem.main) {
+                        element = element.parent("." + SPLIT_BUTTON);
+                        type = "splitButton";
+                        overflowItem = element.data(type);
+                    }
                 }
 
                 return {
