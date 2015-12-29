@@ -9,7 +9,7 @@ slug: pietypecharts_widget
 
 The [Kendo UI Pie Chart widget](http://demos.telerik.com/kendo-ui/pie-charts/index) displays data as single-series sectors from a two-dimensional circle. It is useful for rendering data as part of a whole.
 
-## Configuration
+## Getting Started
 
 ### Create the Pie Chart
 
@@ -52,6 +52,8 @@ To create a Kendo UI Pie Chart, define a single series of type `"pie"`. Addition
 **Figure 1. A sample Pie Chart**
 
 ![Pie Chart](/controls/charts/chart-types/chart-pie.png)
+
+## Configuration
 
 ### Effects Overlay
 
@@ -101,4 +103,6 @@ Other articles on Kendo UI Charts and chart types:
 * [Funnel Charts]({% slug funnelcharts_widget %})
 * [Line Charts]({% slug linetypeoscharts_widget %})
 * [Scatter Charts]({% slug scattercharts_widget %})
+* [Sparklines]({% slug overview_kendoui_sparklinescharts %})
+* [Stock Charts]({% slug overview_kendoui_stockcharts %})
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)

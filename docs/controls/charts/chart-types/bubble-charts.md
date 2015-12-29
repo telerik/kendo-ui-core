@@ -19,7 +19,7 @@ Kendo UI Bubble Charts are well suited for displaying dozens to hundreds of valu
 
 By default, negative values are not displayed. Yet, if you wish to show these, their area is going to be calculated as if their value was positive. The point label displays their actual value and they are also going to have a different color. This behavior is controlled by using the `negativeValues.visible` and `negativeValues.color` options that are applicable to each series.
 
-## Configuration
+## Getting Sarted
 
 ### Create the Bubble Chart
 
@@ -66,4 +66,6 @@ The example below visualizes several data points.
  * [Line Charts]({% slug linetypeoscharts_widget %})
  * [Pie Charts]({% slug pietypecharts_widget %})
  * [Scatter Charts]({% slug scattercharts_widget %})
+ * [Sparklines]({% slug overview_kendoui_sparklinescharts %})
+ * [Stock Charts]({% slug overview_kendoui_stockcharts %})
  * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)

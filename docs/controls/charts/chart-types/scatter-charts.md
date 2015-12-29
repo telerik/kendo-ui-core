@@ -9,7 +9,7 @@ slug: scattercharts_widget
 
 The [Kendo UI Scatter Chart widget](http://demos.telerik.com/kendo-ui/scatter-charts/index) shows data as points defined by the values of their items. Scatter Charts are useful for displaying the relation between different sets of data, such as scientific experimental results, and plotting two-dimensional data.
 
-## Configuration
+## Getting Started
 
 ### Create the Scatter Chart
 
@@ -64,6 +64,8 @@ The example below demonstrates how to create a Scatter Line Chart.
 
  ![Scatter Line Chart](/controls/charts/chart-types/chart-scatter-line.png)
 
+## Configuration
+
 ### Types of Lines
 
 The default line type is solid. However, dash styles are also available through the `dashType` option, as demonstrated in the example below.
@@ -101,4 +103,6 @@ Other articles on Kendo UI Charts and chart types:
 * [Funnel Charts]({% slug funnelcharts_widget %})
 * [Line Charts]({% slug linetypeoscharts_widget %})
 * [Pie Charts]({% slug pietypecharts_widget %})
+* [Sparklines]({% slug overview_kendoui_sparklinescharts %})
+* [Stock Charts]({% slug overview_kendoui_stockcharts %})
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)

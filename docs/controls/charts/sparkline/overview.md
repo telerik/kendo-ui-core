@@ -1,19 +1,18 @@
 ---
 title: Overview
-page_title: Documentation for Sparkline widget in Kendo UI DataViz
-description: How to create a sparkline, enable the visualization of a series that displays inline data, explore the quick overview of Sparkline widget major features.
+page_title: Overview | Kendo UI Sparklines
+description: "Learn how to create the Kendo UI Sparklines and explore its major features."
+slug: overview_kendoui_sparklinescharts
+position: 1
 ---
 
-# Sparkline Overview
+# Sparklines Overview
 
-## Getting started
+The [Kendo UI Sparklines widget](http://demos.telerik.com/kendo-ui/sparklines/index) is a very small chart, drawn without axes, coordinates, legends, titles or other chart-specific elements. It behaves like an inline element, as it is rendered inside a `span`, as opposed to the standard Kendo UI Charts, which behave like block elements, as they are rendered inside `div` elements, so that it can be easily embedded in text.
 
-Sparklines are simple, word-sized graphics that can be embedded in text, tables or headlines.
-The concept for such graphics was developed by Edward Tufte.
+Generally, the Sparklines are simple, word-sized graphics that can be embedded in chunks of text, tables, or headlines. The concept for such graphics was developed by [Edward Tufte](https://en.wikipedia.org/wiki/Edward_Tufte).
 
-Kendo UI Sparkline is a version of the Chart widget tailored for this specific application.
-
-While sparklines are typically line charts, other types are supported as well:
+The Kendo UI Sparklines widget is a version of the Kedno UI Chart widget, tailored for this specific application. While Sparklines are typically line charts, other types are supported as well:
 
 *   Line (default)
 *   Bar (Data Bars)
@@ -22,47 +21,44 @@ While sparklines are typically line charts, other types are supported as well:
 *   Pie
 *   Bullet
 
-Please visit the [Kendo UI Roadmap](http://www.telerik.com/support/whats-new/kendo-ui-web/roadmap) for additional information about
-new Sparkline types and features.
+For additional information on new Kendo UI Chart types and features, refer to the [Kendo UI Roadmap](http://www.telerik.com/support/whats-new/kendo-ui-web/roadmap).
 
-### Creating a Sparkline
+## Getting Started
 
-To create a sparkline, add an empty span in the HTML and give it an ID.
+### Create the Sparklines
 
-#### Example
+To create the Sparklines, add an empty `span` in the HTML, provide it with an ID, and, optionally, set the width and height of the desired chart inline or via CSS, as demonstrated in the example below.
 
-    <span id="sparkline"></span>
-
-Optionally, set the line-height of the desired sparkline inline or with CSS.
-
-Notes:
-* The width of line, area and column sparklines is determined by the number of data points.
-* Bar and Bullet graphs have a default width that can be overriden with CSS.
-* The Pie width equals the line-height to make a square.
-
-#### Example
+###### Example
 
     <span id="sparkline" style="line-height: 60px"></span>
 
-The sparkline is rendered by selecting the span with a jQuery selector and calling the kendoSparkline() function.
+> **Important**
+> * The width of the line, area, and column Sparklines is determined by the number of data points.
+> * Bar and Bullet graphs have a default width that can be overridden via CSS.
+> * The Pie width equals the line-height to make a square.
 
-#### Example
+### Initialize the Sparklines
+
+The Kendo UI Sparklines widget is rendered by selecting the `span` with a jQuery selector and calling the `kendoSparkline()` function, as demonstrated below.
+
+###### Example
 
     $("#sparkline").kendoSparkline([1, 2, 3, 2, 1]);
 
-### Data Binding
+## Data Binding
 
 The Sparklines can visualize series bound to both local and remote data.
 
-#### Binding to local data
+### Bind to Local Data
 
-Binding to local data can be done by:
+Binding to local data can be done through:
 
-* Passing an array with values to the widget constructor
-* Setting the root-level *data* field to an array with values
-* Configuring a series and setting its *data* option
+* Passing an array with values to the widget constructor.
+* Setting the root-level `data` field to an array with values.
+* Configuring a series and setting its `data` option.
 
-#### Example
+###### Example
 
     // The following configurations are identical
 
@@ -80,22 +76,21 @@ Binding to local data can be done by:
         }]
     });
 
-#### Binding to remote data
+### Bind to Remote Data
 
-See [Binding to a Data Source](/dataviz/chart/data-binding#binding-to-a-data-source)
+For detailed information on remote data binding, refer to the article on [binding Kendo UI Charts to a Data Source]({% slug databinding_charts_widget %}).
 
 ## Axes
 
-Sparklines are categorical (discrete) charts and have an implicit category and value axis.
-The awareness for their existence is important even though they are not typically visible.
+The Sparklines widget is a categorical (discrete) chart and has an implicit category and a value axis. The axis orientation (horizontal or vertical) is inferred from the series type.
 
-The axis orientation (horizontal or vertical) is inferred from the series type.
+### Category Axis
 
-### Category axis
+While category names are not visible by default, they are displayed in tooltips.
 
-While category names are not visible (by default), they will be displayed in tooltips.
+The example below demonstrates how to use the `categoryAxis` object to set the category names.
 
-Use the categoryAxis object to set the category names:
+###### Example
 
     <span id="sparkline"></span>
     <script>
@@ -110,7 +105,9 @@ Use the categoryAxis object to set the category names:
     });
     <script>
 
-The category name can also be bound to a field of the data item:
+The category name can also be bound to a field of the data item.
+
+###### Example
 
     <span id="sparkline"></span>
     <script>
@@ -138,7 +135,7 @@ The category name can also be bound to a field of the data item:
     });
     </script>
 
-#### Displaying Dates
+#### Date display
 
 The category axis provides built-in support for displaying dates. This includes:
 
@@ -146,13 +143,15 @@ The category axis provides built-in support for displaying dates. This includes:
 * Label formatting matched to the granularity
 * Grouping of categories into base units and series aggregates
 
-Specifying categories of type Date will switch the axis to date mode.
-The automatic mode selection can be overriden by specifying `type: "Date"`
+Specifying categories of type `Date` switches the axis to a date mode. The automatic mode selection can be overridden by specifying `type: "Date"`.
 
-##### Base Unit
+#### Base units
 
-The default base unit is determined from the smallest duration between categories.
-For example:
+##### Default configuration
+
+The default base unit is determined by the smallest duration between categories, as demonstrated in the example below.
+
+###### Example
 
     categoryAxis: {
         categories: [new Date(2005, 0, 1), new Date(2006, 0, 1)]
@@ -164,7 +163,9 @@ For example:
         // baseUnit is set to "days"
     }
 
-The base unit can also be specified manually. Valid options are:
+##### Manual configuration
+
+The [`base unit`](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) can also be specified manually. The valid options are:
 
 * minutes
 * hours
@@ -172,12 +173,11 @@ The base unit can also be specified manually. Valid options are:
 * months
 * years
 
-##### Series Aggregates
+#### Series aggregates
 
-If more than one category falls within a base unit, then its
-values are aggregated to display a single point.
+If more than one category falls within a base unit, then its values are aggregated to display a single point, as demonstrated in the example below.
 
-For example:
+###### Example
 
     <span id="sparkline"></span>
     <script>
@@ -198,11 +198,15 @@ For example:
     });
     </script>
 
-Produces the following sparkline. Note that values are displayed as-is:
+This code results in the following Sparklines. Note that values are displayed as are.
+
+**Figure 1. Sparklines with a date category axis**
 
 ![Sparkline with date category axis](/controls/charts/sparkline/sparkline-category-date-axis.png)
 
-Now change the base unit to "years":
+The example below demonstrates the Sparklines with its base unit changed to `"years"`.
+
+###### Example
 
     categoryAxis: {
         baseUnit: "years",
@@ -215,11 +219,15 @@ Now change the base unit to "years":
         ]
     }
 
-Notice how the sparkline now displays the maximum value for each year:
+Notice below how the Sparklines display the maximum value for each year.
+
+**Figure 2. Sparklines with a grouped date category axis**
 
 ![Sparkline with grouped date category axis](/controls/charts/sparkline/sparkline-category-date-axis-grouped.png)
 
-The aggregate function can be changed for each series:
+The aggregate function can be changed for each series, as demonstrated below.
+
+###### Example
 
     series: [{
         aggregate: "sum",
@@ -227,16 +235,16 @@ The aggregate function can be changed for each series:
         data: [20, 40, 45, 30, 50]
     }]
 
-Available options are:
+The available options are:
 
-* min
-* max
-* count
-* sum
-* avg
-* function (values, series) (Custom aggregate)
+* `min`
+* `max`
+* `count`
+* `sum`
+* `avg`
+* `function` (values, series) (Custom aggregate)
 
-### Value axis
+### Value Axis
 
 The Sparkline currently supports only Numeric value axes.
 
@@ -262,13 +270,11 @@ Configuration options are accessible through the [`valueAxis` object](/api/datav
 
 Here we have configured a Numeric axis with a minimum value of 0 and a maximum value of 100.
 
-## Plot Bands
+#### Plot Bands
 
-Each axis can be configured to display bands with different colors for predefined value ranges.
+Each axis can be configured to display bands with different colors for predefined value ranges. The category index (zero based) is used as a value for the category axis, as demonstrated in the example below.
 
-The category index (zero based) is used as a value for the category axis.
-
-For example:
+###### Example
 
     <span id="sparkline"></span>
     <script>
@@ -283,3 +289,18 @@ For example:
         }
     });
     </script>
+
+## See Also
+
+Other articles on Kendo UI Charts and chart types:
+
+* [Data Series Charts]({% slug seriestypeofcharts_widget %})
+* [Area Charts]({% slug areacharts_widget %})
+* [Bar Charts]({% slug bartypeofcharts_widget %})
+* [Bubble Charts]({% slug bubblecharts_widget %})
+* [Funnel Charts]({% slug funnelcharts_widget %})
+* [Line Charts]({% slug linetypeoscharts_widget %})
+* [Pie Charts]({% slug pietypecharts_widget %})
+* [Scatter Charts]({% slug scattercharts_widget %})
+* [Stock Charts]({% slug overview_kendoui_stockcharts %})
+* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)

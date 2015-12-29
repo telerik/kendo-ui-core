@@ -1,49 +1,58 @@
 ---
 title: Overview
-related: chart-overview
+page_title: Overview | Kendo UI Stock Charts
+description: "Learn how to create a Kendo UI Stock Chart and explore its major features."
+slug: overview_kendoui_stockcharts
+position: 1
 ---
 
 # Stock Chart Overview
 
-## Getting started
+The [Kendo UI Stock Chart widget](http://demos.telerik.com/kendo-ui/financial/index) is a specialized control visualizing the price movement of any financial instrument over a certain period of time. It includes extensive touch support and a navigator pane for easy browsing of extended time periods. Generally, the Stock Chart extends the [Kendo UI Chart widget]({% slug overview_kendoui_charts_widget %}) and shares most of its features.
 
-The Stock Chart is a specialized widget for visualizing stock price and related graphs.
-
-It includes extensive touch support and a navigator pane for easy browsing of extended time periods.
-
-The widget extends the [Chart widget](/dataviz/chart/overview) and shares most if its features.
+**Figure 1. A sample Stock Chart**
 
 ![Stock Chart](/controls/charts/stockchart/stock-chart.png)
 
-Supported series types:
+The series types supported by the Stock Charts are:
 
-*   Candlestick
-*   OHLC
-*   Column
-*   Line
-*   Area
+* [Candlestick](https://en.wikipedia.org/wiki/Candlestick_chart)
+* [Open-high-low-close (OHLC)](https://en.wikipedia.org/wiki/Open-high-low-close_chart)
+* Column
+* Line
+* Area
 
-Note that all of the above are also accessible from the Chart widget.
+Note that all of the above are also accessible from the Kendo UI Chart widget.
 
-Please visit the [Kendo UI Roadmap](http://www.telerik.com/support/whats-new/kendo-ui-web/roadmap) for additional information about new Chart types and features.
+For additional information on new Kendo UI Chart types and features, refer to the [Kendo UI Roadmap](http://www.telerik.com/support/whats-new/kendo-ui-web/roadmap).
 
-### Creating a Stock Chart
+## Getting Started
 
-To create a chart, add an empty div in the HTML and give it an ID.
+### Create the Stock Chart
 
-    <div id="stockChart"></div>
+To create a chart, add an empty `div` in the HTML, provide it with an ID, and, optionally, set the width and height of the desired chart inline or via CSS, as demonstrated in the example below.
 
-Optionally, set the width and height of the desired chart inline or with CSS.
+###### Example
 
     <div id="stockChart" style="width: 600px; height: 400px"></div>
 
-The chart is rendered by selecting the div with a jQuery selector and calling the kendoStockChart() function.
+### Initialize the Stock Chart
+
+The Kendo UI Stock Chart widget is rendered by selecting the `div` with a jQuery selector and calling the `kendoStockChart()` function, as demonstrated below.
+
+###### Example
 
     $("#stockChart").kendoStockChart({
 		// Options
     });
 
-The chart can be given a title by specifying the "text" property of the "title" option.
+## Configuration
+
+### Add Title
+
+This chart can be given a title by specifying the `text` property of the `title` object, as demonstrated in the example below.
+
+###### Example
 
     $("#stockChart").kendoStockChart({
         title: {
@@ -51,32 +60,34 @@ The chart can be given a title by specifying the "text" property of the "title" 
         }
     });
 
-### Data Binding
+### Configure Date Field
 
-The Stock Chart can be bound to both local and remota data via its DataSource. Binding is limited to time series only.
-
-#### Date field
-
-Each data point must have an associated date. The date field value must be either:
+Each data point must have an associated date. The date field value must be any of the below values:
 
 * Date instance
-* String parsable by new Date([field value])
-* String in ASP.NET JSON format, i.e. "\/Date(1320825600000-0800)\/"
+* String, parsable by `new Date([field value])`
+* String in an ASP.NET JSON format, e.g. `"\/Date(1320825600000-0800)\/"`
 
-The name of the field is specified using the `dateField` option:
+The name of the field is specified by using the `dateField` option, as demonstrated below.
+
+###### Example
 
     $("#stockChart").kendoStockChart({
 		dateField: "SampleDate"
 		...
     });
 
-It can be omitted if the field name is "date" (the default value).
+It can be omitted if the field name is `"date"` (the default value).
 
-> Note: Data points must be sorted in ascending order by date. Consider sorting the data on the server or use the DataSource [sort option](/api/framework/datasource#sort-array--objectdefault).
+> **Importnat**
+>
+> Data points must be sorted by date in ascending order. Consider sorting the data on the server or use the DataSource [`sort` option](/api/framework/datasource#sort-array--objectdefault).
 
-#### Navigator binding
+### Set Navigator Pane
 
-The navigator pane has its own set of series. They share the same syntax and are bound to the chart data source.
+The navigator pane has its own set of series. They share the same syntax and are bound to the chart data source, as demonstrated in the example below.
+
+###### Example
 
     $("#stockChart").kendoStockChart({
 		...
@@ -91,7 +102,9 @@ The navigator pane has its own set of series. They share the same syntax and are
 		}
     });
 
-You can omit the array if defining a single series:
+You can omit the array if defining a single series.
+
+###### Example
 
     $("#stockChart").kendoStockChart({
 		...
@@ -103,9 +116,13 @@ You can omit the array if defining a single series:
 		}
     });
 
-#### Example
+### Bind to Data
 
-Let's assume a service that returns stock price history data as JSON:
+Kendo UI Stock Charts can be bound to both local and remote data via its DataSource. Binding is limited to time series only.
+
+The example below demonstrates a service that returns stock price history data as JSON.
+
+###### Example
 
 		[
     		{
@@ -119,7 +136,9 @@ Let's assume a service that returns stock price history data as JSON:
 			...
 		]
 
-Start by binding the Stock Chart to the remote service:
+Bind the Stock Chart to the remote service, as shown below.
+
+###### Example
 
     $("#stockChart").kendoStockChart({
 		dataSource: {
@@ -130,7 +149,9 @@ Start by binding the Stock Chart to the remote service:
 		dateField: "Date"
     });
 
-Go ahead and define the main and the navigator series:
+Define the main and the Navigator series.
+
+###### Example
 
     $("#stockChart").kendoStockChart({
 		dataSource: {
@@ -153,3 +174,18 @@ Go ahead and define the main and the navigator series:
 			}
 		}
     });
+
+## See Also
+
+Other articles on Kendo UI Charts and chart types:
+
+* [Data Series Charts]({% slug seriestypeofcharts_widget %})
+* [Area Charts]({% slug areacharts_widget %})
+* [Bar Charts]({% slug bartypeofcharts_widget %})
+* [Bubble Charts]({% slug bubblecharts_widget %})
+* [Funnel Charts]({% slug funnelcharts_widget %})
+* [Line Charts]({% slug linetypeoscharts_widget %})
+* [Pie Charts]({% slug pietypecharts_widget %})
+* [Scatter Charts]({% slug scattercharts_widget %})
+* [Sparklines]({% slug overview_kendoui_sparklinescharts %})
+* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)

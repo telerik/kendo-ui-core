@@ -107,4 +107,4 @@ Other articles on Kendo UI Spreadsheet:
 * [Export to Excel]({% slug export_toexcel_spreadsheet_widget %})
 * [Server-Side Processing]({% slug serverside_processing_spreadsheet_widget %})
 * [User Guide]({% slug user_guide_spreadsheet_widget %})
-* [API Reference](/api/javascript/ui/spreadsheet)
+* [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
