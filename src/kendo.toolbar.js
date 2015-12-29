@@ -1325,7 +1325,8 @@ var __meta__ = { // jshint ignore:line
 
                 if (keyCode === keys.TAB) {
                     var element = target.parentsUntil(this.element).last(),
-                        lastHasFocus = false;
+                        lastHasFocus = false,
+                        firstHasFocus = false;
 
                     if (!element.length) {
                         element = target;
@@ -1351,9 +1352,22 @@ var __meta__ = { // jshint ignore:line
                         }
                     }
 
-                    if (lastHasFocus) {
+                    if (e.shiftKey && items.index(element) === 1) {
+                        if (element.is("." + BUTTON_GROUP)) {
+                            firstHasFocus = target.is(":first-child");
+                        } else {
+                            firstHasFocus = true;
+                        }
+                    }
+
+                    if (lastHasFocus && this.overflowAnchor.css("visibility") !== "hidden") {
                         e.preventDefault();
                         this.overflowAnchor.focus();
+                    }
+
+                    if (firstHasFocus) {
+                        e.preventDefault();
+                        this.wrapper.prev(":kendoFocusable").focus();
                     }
                 }
 
