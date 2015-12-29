@@ -218,7 +218,7 @@ The example below demonstrates how to use the standard deviation type.
     });
     </script>
 
-### Calculate Low and High Values by Custom Functions
+### Calculate Low and High Values with Custom Functions
 
 If a custom algorithm is needed to calculate the low and high value, specify a function. The function accepts an object and returns a valid error bar value. The following fields as object parameters are available:
 

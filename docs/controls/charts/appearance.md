@@ -117,3 +117,4 @@ Other articles on Kendo UI Charts:
 * [Tooltip]({% slug tooltip_charts_widget %})
 * [Chart Notes]({% slug chartnotes_charts_widget %})
 * [Error Bars]({% slug errorbars_charts_widget %})
+* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)

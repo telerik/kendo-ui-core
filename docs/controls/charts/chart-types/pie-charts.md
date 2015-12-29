@@ -1,16 +1,21 @@
 ---
-title: Pie Chart
-page_title: Pie charts in Kendo UI DataViz
-description: How to create a pie chart and specify the point value, category label and other properties of the chart.
+title: Pie Charts
+page_title: Pie Charts | Kendo UI Charts
+description: "Learn how to create a Kendo UI Pie Chart and specify its point value, category label, and other properties."
+slug: pietypecharts_widget
 ---
 
-## Pie Charts
+# Pie Charts
 
-Pie charts are suitable for displaying data points as a proportion of the whole.
+The [Kendo UI Pie Chart widget](http://demos.telerik.com/kendo-ui/pie-charts/index) displays data as single-series sectors from a two-dimensional circle. It is useful for rendering data as part of a whole.
 
-In order to create a pie chart, define a single series with type "pie". Additional series are not supported.
+## Configuration
 
-Each data point is an object that specifies the point value, category label and other properties.
+### Create the Pie Chart
+
+To create a Kendo UI Pie Chart, define a single series of type `"pie"`. Additional series are not supported and each data point is an object that specifies the point value, category label, and other properties, as demonstrated in the example below.
+
+###### Example
 
     $("#chart").kendoChart({
         title: {
@@ -44,13 +49,15 @@ Each data point is an object that specifies the point value, category label and 
     });
 
 
-This produces the following Pie Chart.
+**Figure 1. A sample Pie Chart**
 
 ![Pie Chart](/controls/charts/chart-types/chart-pie.png)
 
-## Effects Overlay
+### Effects Overlay
 
-Each segment has a transparent effect overlay that adds depth to the two-dimensional shape. The overlay transparent gradient is configurable.
+Each segment has a transparent effect overlay that adds depth to the two-dimensional shape. The overlay transparent gradient is configurable, as demonstrated below.
+
+###### Example
 
     $("#chart").kendoChart({
         series: [{
@@ -64,14 +71,34 @@ Each segment has a transparent effect overlay that adds depth to the two-dimensi
 
 The following gradient options are available:
 
-*   roundedBevel - default
+* `roundedBevel`&mdash;This is the default gradient option.
+* `sharpBevel`
+* none
+
+The figure below demonstrate the usage of each of these options.
+
+**Figure 2. A Pie Chart with the `roundedBevel` overlay applied**
 
 ![Pie Chart with roundedBevel overlay](/controls/charts/chart-types/chart-pie-overlay-roundbevel.png)
 
-*   sharpBevel
+**Figure 3. A Pie Chart with the `sharpBevel` overlay applied**
 
 ![Pie Chart with sharpBevel overlay](/controls/charts/chart-types/chart-pie-overlay-sharpbevel.png)
 
-*   none
+**Figure 4. A Pie Chart with no overlay**
 
 ![Pie Chart with no overlay](/controls/charts/chart-types/chart-pie-overlay-none.png)
+
+## See Also
+
+Other articles on Kendo UI Charts and chart types:
+
+* [Chart Overview]({% slug overview_kendoui_charts_widget %})
+* [Data Series Charts]({% slug seriestypeofcharts_widget %})
+* [Area Charts]({% slug areacharts_widget %})
+* [Bar Charts]({% slug bartypeofcharts_widget %})
+* [Bubble Charts]({% slug bubblecharts_widget %})
+* [Funnel Charts]({% slug funnelcharts_widget %})
+* [Line Charts]({% slug linetypeoscharts_widget %})
+* [Scatter Charts]({% slug scattercharts_widget %})
+* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)

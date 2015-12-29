@@ -1,31 +1,39 @@
 ---
 title: Funnel Charts
-page_title: jQuery Funnel Chart UI in Kendo UI DataViz
-description: Overview of Kendo jQuery Funnel Chart with Funnel Series. How to create it and use the different options it provides.
+page_title: Funnel Charts | Kendo UI Charts
+description: "Learn how to create a Kendo UI Funnel Chart and use the different options it provides."
+slug: funnelcharts_widget
 ---
 
-## Funnel Chart
+# Funnel Charts
 
-The Funnel Chart represents its data in trapezoid area splitted into several segments.
+The [Kendo UI Funnel Chart widget](http://demos.telerik.com/kendo-ui/funnel-charts/index) displays a single series of data in progressively decreasing or increasing proportions, organized in segments, where each segment represents the value for the particular item from the series. The values of the items can also influence the height and the shape of the corresponding segments.
 
-Each segment represents the different values for each of the items of the series. The value of the dataItem can control both the height and/or the form of the different segments.
+## Basic Usage
 
-### When to use a Funnel Chart
-Funnel charts are a type of chart, often used to represent stages in a sales process and show the amount of potential revenue for each stage. This type of chart can also be useful in identifying potential problem areas in an organization’s sales processes. A funnel chart is similar to a stacked percent bar chart. The Funnel charts are well suited for displaying several values.
+### Suitability
 
-### Understanding dynamicHeight, dynamicSlope and neckRatio
+Kendo UI Funnel Charts are often used to represent stages in a sales process and to show the amount of potential revenue from each stage. They are also useful when identifying potential problem areas in the sales processes of an organization. The Funnel Charts are similar to the [Kendo UI Stacked Bar Charts](http://demos.telerik.com/kendo-ui/bar-charts/stacked-bar) and are well suited for displaying several values.
 
-Dynamic Height specifies whether the different elements should have equal height (when dynamicHeight is equal to false) or the height of each element should be based on its value.
+### Concepts
 
-If dynamicSlope is disabled then the neckRatio option is taken into account which specifies the ratio between the top and the bottom bases of the whole funnel series.
-For example if neckRatio is set to ten then the top base will be ten times smaller than the bottom base.
-The following example shows a funnel chart with neckRatio set to 10.
+The basic conceptual options of a Kendo UI Funnel Chart are:
+
+* `dynamicHeight`&mdah;It specifies whether the different elements should have equal height, when equal to `false`, or the height of each element should be based on its value.
+* `dynamicSlope`&mdash;When disabled, the `neckRatio` option is taken into account. When enabled, the `neckRatio` is neglected and each segment creates its form based on the ratio between the current value and the next value.
+* `neckRatio`&mdash;It specifies the ratio between the top and the bottom bases of the whole funnel series. For example, if set to `ten`, the top base will be ten times smaller than the bottom base, as demonstrated below.
+
+**Figure 1. A Funnel Chart with its `neckRatio` set to 10**
 
 ![Funnel Chart](/controls/charts/chart-types/funnel-neckratio.png)
 
-When dynamicSlope is enabled then the neckRatio is neglected and each segment creates its form based on the ratio between the current value and the next value.
+## Configuration
 
-You can see how the widths of the bases for each segment are based on the ratio currentValue/nextValue in the next example.
+### Create the Funnel Chart
+
+The example below demonstrates the way the widths of the bases for each segment are based on the `currentValue/nextValue` ratio.
+
+###### Example
 
     <div id="chart"></div>
     <script>
@@ -53,4 +61,20 @@ You can see how the widths of the bases for each segment are based on the ratio 
         });
     </script>
 
+**Figure 2. A sample Funnel Chart**
+
 ![Funnel Chart](/controls/charts/chart-types/funnel-dynamicslope.png)
+
+## See Also
+
+Other articles on Kendo UI Charts and chart types:
+
+* [Chart Overview]({% slug overview_kendoui_charts_widget %})
+* [Data Series Charts]({% slug seriestypeofcharts_widget %})
+* [Area Charts]({% slug areacharts_widget %})
+* [Bar Charts]({% slug bartypeofcharts_widget %})
+* [Bubble Charts]({% slug bubblecharts_widget %})
+* [Line Charts]({% slug linetypeoscharts_widget %})
+* [Pie Charts]({% slug pietypecharts_widget %})
+* [Scatter Charts]({% slug scattercharts_widget %})
+* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)

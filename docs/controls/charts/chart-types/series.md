@@ -1,12 +1,24 @@
 ---
-title: Series Chart
-page_title: Series in Kendo UI Chart  widget
-description: How to use different series of data of a specified type, combine series to be shown in a single chart.
+title: Data Series Charts
+page_title: Data Series Charts | Kendo UI Charts
+description: "Learn how to create Kendo UI Series Charts by using different data series."
+slug: seriestypeofcharts_widget
+position: 1
 ---
 
-## Defining Series
+# Data Series Charts
 
-The Chart plots one or more series of data of a specified type. Series are defined by adding them to the "series" array.
+The [Kendo UI Charts](http://demos.telerik.com/kendo-ui/) plot one or more data series of a specified type.
+
+## Configuration
+
+### Define Data Series
+
+Data series are defined by adding them to the `series` array.
+
+The example below demonstrates how to define two Bar series bound to inline data.
+
+###### Example
 
     $("#chart").kendoChart({
         series: [{
@@ -24,11 +36,11 @@ The Chart plots one or more series of data of a specified type. Series are defin
     });
 
 
-In this example we have defined two Bar series bound to inline data.
+### Apply Default Options
 
-### Default options
+Users can specify options to be applied to all series by using `seriesDefaults`, as demonstrated below.
 
-Users can specify options to be applied to all series using "seriesDefaults":
+###### Example
 
     $("#chart").kendoChart({
         seriesDefaults: {
@@ -47,7 +59,9 @@ Users can specify options to be applied to all series using "seriesDefaults":
     });
 
 
-In addition, default options can be defined for all series of a specified type:
+In addition, default options can be defined for all series of a specified type.
+
+###### Example
 
     $("#chart").kendoChart({
         seriesDefaults: {
@@ -69,12 +83,30 @@ In addition, default options can be defined for all series of a specified type:
     });
 
 
-**Note:** Options for individual series take precedence over options specified in seriesDefaults.
+> **Important**
+>
+> Options for individual series take precedence over options specified in `seriesDefaults`.
 
-## Combining Series
+### Combine Data Series
 
-Series of different types can be shown in a single chart. Please note the following limitations:
+Series of different types can be displayed in a single chart.
 
-*   A chart can contain Bar or Column series, but not both.
-*   A Pie series can't be used with other series, including other Pie series.
-*   Scatter / Scatter Line series can't be used together with other series.
+## Known Limitations
+
+* A Kendo UI Chart can contain either Bar, or Column series, but not both of them.
+* A Pie series cannot be used with other series, including other Pie series.
+* Scatter and Scatter Line series cannot be used together with other series.
+
+## See Also
+
+Other articles on Kendo UI Charts and chart types:
+
+* [Chart Overview]({% slug overview_kendoui_charts_widget %})
+* [Area Charts]({% slug areacharts_widget %})
+* [Bar Charts]({% slug bartypeofcharts_widget %})
+* [Bubble Charts]({% slug bubblecharts_widget %})
+* [Funnel Charts]({% slug funnelcharts_widget %})
+* [Line Charts]({% slug linetypeoscharts_widget %})
+* [Pie Charts]({% slug pietypecharts_widget %})
+* [Scatter Charts]({% slug scattercharts_widget %})
+* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)

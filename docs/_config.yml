@@ -50,6 +50,18 @@ navigation:
     "controls/charts":
         title: "Charts"
         position: 3
+    "controls/charts/chart-types":
+        title: "Chart Types"
+        position: 8
+    "controls/charts/stockchart":
+        title: "Stock Charts"
+        position: 9
+    "controls/charts/sparkline":
+        title: "Sparklines"
+        position: 10
+    "controls/charts/treemap":
+        title: "TreeMap"
+        position: 11
     "controls/gauges":
         title: "Gauges"
         position: 4

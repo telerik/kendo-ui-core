@@ -1,14 +1,23 @@
 ---
-title: Area
-page_title: Area Charts in Kendo UI DataViz
-description: Learn how to define area charts in Kendo UI DataViz HTML5 charting widget.
+title: Area Charts
+page_title: Area Charts | Kendo UI Charts
+description: "Learn how to define Kendo UI Area Charts."
+slug: areacharts_widget
 ---
 
-## Area Charts
+# Area Charts
 
-Use "area" and "verticalArea" to define area charts.
+The [Kendo UI Area Chart widget](http://demos.telerik.com/kendo-ui/area-charts/index) is suitable for displaying quantitative data by using continuous lines passing through points defined by the values of their items. The portion of the graph beneath the lines is filled with a particular color for each series. The different colors in an Area Chart are useful for emphasizing changes in values coming from several sets of similar data.
 
-Axes are configured through "categoryAxis" and "valueAxis". Multiple value axes are supported.
+## Configuration
+
+Use `area` and `verticalArea` to define the Kendo UI Area Charts.
+
+### Axes
+
+Axes are configured through `categoryAxis` and `valueAxis`. Multiple value axes are supported.
+
+###### Example
 
     $("#chart").kendoChart({
         title: {
@@ -38,16 +47,38 @@ Axes are configured through "categoryAxis" and "valueAxis". Multiple value axes 
     });
 
 
-This configuration produces the following area chart:
+This configuration results in the Area Chart below.
+
+**Figure 1. A sample Area Chart**
 
 ![Area Chart](/controls/charts/chart-types/chart-area.png)
 
-## Line Style
+### Line Styles
 
-The area chart supports rendering the lines between the points with different styles. The supported styles are "normal", "step" and "smooth" and can be set with the [line.style](/api/dataviz/chart#configuration-series.line.style) option. The default style is "normal" and will produce a straight line between the data points. When the style is set to "step", the data points will be connected only with vertical and horizontal lines. This style can be used to indicate that the value is constant between the changes.
+Kendo UI Area Charts support the rendering of lines between the points with different styles. The supported styles can be set via the [`line.style`](/api/dataviz/chart#configuration-series.line.style) option and are:
+
+* Normal&mdash;This is the default style. It produces a straight line between data points.
+* Step&mdash;The style renders the connection between data points through vertical and horizontal lines. It is suitable for indicating that the value is constant between the changes.
+* Smooth&mdash;This style causes the Area Chart to display a fitted curve through data points. It is suitable when the data requires to be displayed with a curve, or when you wish to connect the points with smooth instead of straight lines.
+
+**Figure 2. A step-line Area Chart**
 
 ![Step Line Chart](/controls/charts/chart-types/chart-step-area.png)
 
-When the style is set to "smooth", the chart will display a fitted curve through the data points. The "smooth" style can be used if the data requires to be displayed with a curve or you just wish to connect the points with smooth instead of straight lines.
+**Figure 3. A smooth-line Area Chart**
 
 ![Smooth Line Chart](/controls/charts/chart-types/chart-smooth-area.png)
+
+## See Also
+
+Other articles on Kendo UI Charts and chart types:
+
+* [Chart Overview]({% slug overview_kendoui_charts_widget %})
+* [Data Series Charts]({% slug seriestypeofcharts_widget %})
+* [Bar Charts]({% slug bartypeofcharts_widget %})
+* [Bubble Charts]({% slug bubblecharts_widget %})
+* [Funnel Charts]({% slug funnelcharts_widget %})
+* [Line Charts]({% slug linetypeoscharts_widget %})
+* [Pie Charts]({% slug pietypecharts_widget %})
+* [Scatter Charts]({% slug scattercharts_widget %})
+* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)

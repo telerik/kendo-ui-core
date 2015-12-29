@@ -409,7 +409,7 @@ Each axis can be configured to display bands with different colors for predefine
 
 ### Global Settings
 
-Sometimes you need to apply settings to all axes. In such cases it is convenient to use the [`axisDefaults` object](/api/dataviz/chart#axisdefaults-object).
+Sometimes you need to apply settings to all axes. In such cases it is convenient to use the [`axisDefaults` object](/api/javascript/dataviz/ui/chart#axisdefaults-object).
 
 ###### Example
 
@@ -428,7 +428,7 @@ Sometimes you need to apply settings to all axes. In such cases it is convenient
 
 ## See Also
 
-Other articles and how-to examples on Kendo UI Charts:
+Other articles on Kendo UI Charts:
 
 * [Data Binding]({% slug databinding_charts_widget %})
 * [Date Series]({% slug dateseries_charts_widget %})
@@ -436,3 +436,7 @@ Other articles and how-to examples on Kendo UI Charts:
 * [Chart Notes]({% slug chartnotes_charts_widget %})
 * [Appearance]({% slug appearance_charts_widget %})
 * [Error Bars]({% slug errorbars_charts_widget %})
+* [Types of Kendo UI Charts]({% slug areacharts_widget %})
+* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+
+For the how-to examples on Kendo UI Charts, refer to the [respective Charts section]().
