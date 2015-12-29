@@ -105,4 +105,5 @@ Other articles on Kendo UI Charts and chart types:
 * [Pie Charts]({% slug pietypecharts_widget %})
 * [Sparklines]({% slug overview_kendoui_sparklinescharts %})
 * [Stock Charts]({% slug overview_kendoui_stockcharts %})
+* [TreeMap]({% slug overview_treemap_widget %})
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)

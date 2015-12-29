@@ -83,4 +83,5 @@ Other articles on Kendo UI Charts and chart types:
 * [Scatter Charts]({% slug scattercharts_widget %})
 * [Sparklines]({% slug overview_kendoui_sparklinescharts %})
 * [Stock Charts]({% slug overview_kendoui_stockcharts %})
+* [TreeMap]({% slug overview_treemap_widget %})
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Sparklines
+page_title: Overview | Kendo UI Sparklines Widget
 description: "Learn how to create the Kendo UI Sparklines and explore its major features."
 slug: overview_kendoui_sparklinescharts
 position: 1
@@ -303,4 +303,5 @@ Other articles on Kendo UI Charts and chart types:
 * [Pie Charts]({% slug pietypecharts_widget %})
 * [Scatter Charts]({% slug scattercharts_widget %})
 * [Stock Charts]({% slug overview_kendoui_stockcharts %})
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [TreeMap]({% slug overview_treemap_widget %})
+* [Sparklines JavaScript API Reference](/api/javascript/dataviz/ui/sparkline)

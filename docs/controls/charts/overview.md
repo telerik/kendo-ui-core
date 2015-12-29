@@ -439,4 +439,4 @@ Other articles on Kendo UI Charts:
 * [Types of Kendo UI Charts]({% slug areacharts_widget %})
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
 
-For the how-to examples on Kendo UI Charts, refer to the [respective Charts section]().
+For runnable examples on Kendo UI Charts, refer to the [How-To Charts section]().
