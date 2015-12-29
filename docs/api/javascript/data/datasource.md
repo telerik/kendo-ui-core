@@ -1133,7 +1133,7 @@ The type of the response. The supported values are "xml" and "json". By default 
 
 If set to `true` the data source will leave the aggregate calculation to the remote service. By default the data source calculates aggregates client-side.
 
-> Don't forget to set [schema.aggreagates](#configuration-schema.aggregates) if you set `serverAggregates` to `true`.
+> Don't forget to set [schema.aggregates](#configuration-schema.aggregates) if you set `serverAggregates` to `true`.
 
 #### Example - enable server aggregates
 
