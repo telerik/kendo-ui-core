@@ -14,6 +14,10 @@ The Kendo UI DataSource syncs all changes with the remote service when a connect
 
 > Offline storage support is available since the 2014 Q2 SP1 release.
 
+**Figure 1. Offline storage**
+
+![Offline Storage](/framework/datasource/OfflineStorage.gif)
+
 ## Configure offline storage
 
 Set the [offlineStorage](/api/javascript/data/datasource#configuration-offlineStorage) option to enable offline storage. The DataSource uses this value as a key when saving and loading its state.
@@ -228,7 +232,7 @@ different `offlineStorage` keys, otherwise they will overwrite one another's sav
 
 * **How do I check the currently used local storage space?** There are different ways to do that, depending on how you store your data and what exactly you want to check.
 One possible option to measure the amount of data stored by a Kendo UI DataSource instance is:
-        
+
         // check amount of used offline storage space for a specific key
         JSON.stringify(localStorage.getItem("your-offlineStorage-key-here")).length
         // check overall used offline storage space
