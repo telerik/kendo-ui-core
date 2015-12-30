@@ -14,7 +14,7 @@ Our documentation hub online aims at providing well-structured, up-to-date, and 
 
 ### Submit a New Issue to GitHub
 
-[Opening](https://github.com/telerik/kendo-docs/issues?q=is%3Aopen) a new issue on a topic is the fastest way for you to submit your feedback:
+[Opening](https://github.com/telerik/kendo-ui-core/issues) a new issue on a topic is the fastest way for you to submit your feedback:
 
 **Step 1:** Use the **Search** box first to check if the issue has not been raised before and submitted to us already  
 **Step 2:** If not, then go ahead and [create a new issue](https://help.github.com/articles/creating-an-issue/). Make sure you elaborate on your suggestion and include a link to the document you refer to, or a link to the closest anchor to the issue.
