@@ -436,7 +436,8 @@ Other articles on Kendo UI Charts:
 * [Chart Notes]({% slug chartnotes_charts_widget %})
 * [Appearance]({% slug appearance_charts_widget %})
 * [Error Bars]({% slug errorbars_charts_widget %})
+* [Data Series Charts]({% slug seriestypeofcharts_widget %})
 * [Types of Kendo UI Charts]({% slug areacharts_widget %})
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
 
-For runnable examples on Kendo UI Charts, refer to the [How-To Charts section]().
+For runnable examples on Kendo UI Charts, refer to the [how-to articles]({% slug howto_createdynamicplotbands_charts %}).

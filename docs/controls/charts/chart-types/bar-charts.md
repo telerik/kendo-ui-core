@@ -9,6 +9,10 @@ slug: bartypeofcharts_widget
 
 The [Kendo UI Bar Chart widget](http://demos.telerik.com/kendo-ui/bar-charts/index) displays data via horizontal or vertical bars whose lengths vary according to their value. Bar Charts are suitable for displaying a comparison between several sets of data. For example, for showing a summary of unique and total site visitors over a certain period of time.
 
+The [Kendo UI Bullet Chart widget](http://demos.telerik.com/kendo-ui/bullet-charts/index) is a variation of a Kendo UI Bar Chart. You can use it as a replacement for dashboard gauges and meters. The bullet graph compares a given quantitative measure, such as temperature, against qualitative ranges, such as warm, hot, mild, cool, chilly, cold, etc., and a symbol marker that encodes the comparative measure, such as the max temperature a year ago.
+
+The [Kendo UI Range Bar Chart widget](http://demos.telerik.com/kendo-ui/range-bar-charts/index) is yet another variation of the Kendo UI Bar Chart. It displays data as bars where each bar represents a value range that spans between its minimum and maximum levels. A Range Bar type has floating bars unlike the standard Kendo UI Bar Chart that has anchored bars to its `x`-axis.
+
 ## Configuration
 
 ### Column Chart

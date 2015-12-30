@@ -52,16 +52,16 @@ navigation:
         position: 3
     "controls/charts/chart-types":
         title: "Chart Types"
-        position: 8
+        position: 9
     "controls/charts/stockchart":
         title: "Stock Charts"
-        position: 9
+        position: 10
     "controls/charts/sparkline":
         title: "Sparklines"
-        position: 10
+        position: 11
     "controls/charts/treemap":
         title: "TreeMap"
-        position: 11
+        position: 12
     "controls/gauges":
         title: "Gauges"
         position: 4

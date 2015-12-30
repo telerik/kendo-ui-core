@@ -1,14 +1,15 @@
 ---
-title: Show treemap tooltip
-page_title: Show treemap tooltip
-description: Use the Kendo Tooltip for the treemap tiles
+title: Show TreeMap Tooltip
+page_title: Show TreeMap Tooltip | Kendo UI TreeMap Widget
+description: "Learn how to use the Kendo UI Tooltip for the Kendo UI TreeMap tiles."
+slug: howto_showtreemaptooltip_treemap
 ---
 
-# Show treemap tooltip
+# Show TreeMap Tooltip
 
 The example below demonstrates how to use the Kendo UI Tooltip for the Kendo UI TreeMap tiles.
 
-#### Example:
+###### Example
 
 ```html
     <div id="treemap">
@@ -49,3 +50,10 @@ The example below demonstrates how to use the Kendo UI Tooltip for the Kendo UI 
       });
     </script>
 ```
+
+## See Also
+
+Other articles and how-to examples on Kendo UI TreeMap:
+
+* [JavaScript API Reference](/api/javascript/dataviz/ui/treemap)
+* [How to Set Header Items Color]({% slug howto_setheaderitemscolor_treemap %})

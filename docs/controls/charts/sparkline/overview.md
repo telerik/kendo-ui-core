@@ -294,6 +294,7 @@ Each axis can be configured to display bands with different colors for predefine
 
 Other articles on Kendo UI Charts and chart types:
 
+* [Chart Overview]({% slug overview_kendoui_charts_widget %})
 * [Data Series Charts]({% slug seriestypeofcharts_widget %})
 * [Area Charts]({% slug areacharts_widget %})
 * [Bar Charts]({% slug bartypeofcharts_widget %})

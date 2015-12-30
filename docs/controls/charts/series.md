@@ -3,7 +3,7 @@ title: Data Series Charts
 page_title: Data Series Charts | Kendo UI Charts
 description: "Learn how to create Kendo UI Series Charts by using different data series."
 slug: seriestypeofcharts_widget
-position: 1
+position: 8
 ---
 
 # Data Series Charts
@@ -99,17 +99,14 @@ Series of different types can be displayed in a single chart.
 
 ## See Also
 
-Other articles on Kendo UI Charts and chart types:
+Other articles on Kendo UI Charts:
 
 * [Chart Overview]({% slug overview_kendoui_charts_widget %})
-* [Area Charts]({% slug areacharts_widget %})
-* [Bar Charts]({% slug bartypeofcharts_widget %})
-* [Bubble Charts]({% slug bubblecharts_widget %})
-* [Funnel Charts]({% slug funnelcharts_widget %})
-* [Line Charts]({% slug linetypeoscharts_widget %})
-* [Pie Charts]({% slug pietypecharts_widget %})
-* [Scatter Charts]({% slug scattercharts_widget %})
-* [Sparklines]({% slug overview_kendoui_sparklinescharts %})
-* [Stock Charts]({% slug overview_kendoui_stockcharts %})
-* [TreeMap]({% slug overview_treemap_widget %})
+* [Data Binding]({% slug databinding_charts_widget %})
+* [Date Series]({% slug dateseries_charts_widget %})
+* [Tooltip]({% slug tooltip_charts_widget %})
+* [Chart Notes]({% slug chartnotes_charts_widget %})
+* [Appearance]({% slug appearance_charts_widget %})
+* [Error Bars]({% slug errorbars_charts_widget %})
+* [Types of Kendo UI Charts]({% slug areacharts_widget %})
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)

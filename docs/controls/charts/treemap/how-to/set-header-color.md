@@ -1,14 +1,15 @@
 ---
-title: Set header items color
-page_title: Set header items color
-description: Set header items color
+title: Set Header Items Color
+page_title: Set Header Items Color | Kendo UI TreeMap Widget
+description: "Learn how to set the Kendo UI TreeMap widget tiles color from the items."
+slug: howto_setheaderitemscolor_treemap
 ---
 
-# Set header items color
+# Set Header Items Color
 
 The example below demonstrates how to set the Kendo UI TreeMap tiles color from the items.
 
-#### Example:
+###### Example
 
 ```html
 
@@ -42,3 +43,10 @@ The example below demonstrates how to set the Kendo UI TreeMap tiles color from 
     </script>
 
 ```
+
+## See Also
+
+Other articles and how-to examples on Kendo UI TreeMap:
+
+* [JavaScript API Reference](/api/javascript/dataviz/ui/treemap)
+* [How to Show TreeMap Tooltip]({% slug howto_showtreemaptooltip_treemap %})

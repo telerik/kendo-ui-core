@@ -1,17 +1,17 @@
 ---
-title: Donut Chart - Text in the Center
-page_title: Placing Text in the Center of a Donut Chart
-description: This article describes how to render text in the center (hole) of a Donut Chart
+title: Place Text in Donut Chart Center
+page_title: Place Text in Donut Chart Center | Kendo UI Charts
+description: "Learn how to place some text in the center of a Kendo UI Donut Chart."
+slug: howto_placetextinthecentre_donutcharts
 ---
 
-# Placing Text in the Center of a Donut Chart
+# Place Text in Donut Chart Center
 
-We can use the [render event]() to plot [Text]() and other [Shapes]().
+To display some text in the center of a Kendo UI Donut Chart, use the [`render` event](/api/javascript/dataviz/ui/chart#events-render) to plot Text and other Shapes. First of all, you must locate the center point. The [`series.visual`](/api/javascript/dataviz/ui/chart#configuration-series.visual) provides this information.
 
-The first problem to solve is locating the center point. The [series visual]()
-provides this information.
+The example below demonstrates how to place some text in the center of a Kendo UI Donut Chart.
 
-#### Example - Place Text in a Donut Chart
+###### Example
 
 ```html
     <div id="chart"></div>
@@ -175,7 +175,7 @@ As an alternative, we can position an overlay using CSS:
         background-color: #3f3f3f;
       }
 
-      /* Width and Height of the chart must be equal to the width and height of the .donut-wrapper in order to be horizontally and vertically centered  */
+      /* The width and height of the chart must be equal to the width and height of the .donut-wrapper in order to be horizontally and vertically centered  */
       .donut-chart {
         width: 280px;
         height: 280px;
@@ -197,3 +197,32 @@ As an alternative, we can position an overlay using CSS:
       }
     </style>
 ```
+
+## See Also
+
+Other articles and how-to examples on Kendo UI Charts:
+
+* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [How to Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
+* [How to Create Dynamic Plot Bands]({% slug howto_createdynamicplotbands_charts %})
+* [How to Create Stock Charts in AngularJS]({% slug howto_createstockcharts_angularjs %})
+* [How to Create Timeline Using Range Bars]({% slug howto_createtimeline_usingrangebars_charts %})
+* [How to Customize Chart Themes]({% slug howto_customizechartthemes_charts %})
+* [How to Display Checkboxes Next to Legend Items]({% slug howto_displaycheckboxes_nexttolegenditems_charts %})
+* [How to Display Time on Value Axis]({% slug howto_displaytimeonvalueaxis_charts %})
+* [How to Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})
+* [How to Expand Clickable Area of Points]({% slug howto_extendclickableareaofpoints_charts %})
+* [How to Explode Clicked Segment in Pie Charts]({% slug howto_explodeclickedsegment_piecharts %})
+* [How to Fit PDF Exported Chart to Page]({% slug howto_fitpdfexportedcharttopage_charts %})
+* [How to Handle Right Click in Charts]({% slug howto_setdifrerentmarkers_forgroupedlinecharts_charts %})
+* [How to Implement Color-Coded Ranges in Bars]({% slug howto_implementcolorcodedranges_inbars_charts %})
+* [How to Render Custom Plot Bands]({% slug howto_rendercustomplotbands_charts %})
+* [How to Set Different Marker Types for Grouped Line Charts]({% slug howto_setdifrerentmarkers_forgroupedlinecharts_charts %})
+* [How to Shorten Chart Labels]({% slug howto_shortenchartlabels_charts %})
+* [How to Show Message When Chart Has No Data]({% slug howto_showemptymessage_whencharthasnodata_charts %})
+* [How to Show Overlay While Loading]({% slug howto_showoverlaywhileloading_charts %})
+* [How to Show Tooltip on `seriesClick`]({% slug howto_showoverlaywhileloading_charts %})
+* [How to Show Total for Stacked Series]({% slug howto_showoverlaywhileloading_charts %})
+* [How to Sort Categories in Grouped Charts]({% slug howto_sortcategorisinagroupedchart_charts %})
+* [How to Use Fixed Bar Size]({% slug howto_usefixedbarsize_charts %})
+* [How to Use Hyperlinks in Axes Labels]({% slug howto_usehyperlinks_inaxislabels_charts %})

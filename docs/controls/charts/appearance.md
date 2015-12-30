@@ -111,10 +111,12 @@ Kendo UI Charts use animated transitions to display new and updated data. These 
 
 Other articles on Kendo UI Charts:
 
-* [Overview]({% slug overview_kendoui_charts_widget %})
+* [Chart Overview]({% slug overview_kendoui_charts_widget %})
 * [Data Binding]({% slug databinding_charts_widget %})
 * [Date Series]({% slug dateseries_charts_widget %})
 * [Tooltip]({% slug tooltip_charts_widget %})
 * [Chart Notes]({% slug chartnotes_charts_widget %})
 * [Error Bars]({% slug errorbars_charts_widget %})
+* [Data Series Charts]({% slug seriestypeofcharts_widget %})
+* [Types of Kendo UI Charts]({% slug areacharts_widget %})
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)

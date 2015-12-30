@@ -7,7 +7,9 @@ slug: pietypecharts_widget
 
 # Pie Charts
 
-The [Kendo UI Pie Chart widget](http://demos.telerik.com/kendo-ui/pie-charts/index) displays data as single-series sectors from a two-dimensional circle. It is useful for rendering data as part of a whole.
+The [Kendo UI Pie Chart widget](http://demos.telerik.com/kendo-ui/pie-charts/index) displays data as single-series sectors from a two-dimensional circle. It is useful for rendering data as a part of the whole.
+
+The [Kendo UI Donut Chart widget](http://demos.telerik.com/kendo-ui/donut-charts/index) is a Kendo UI Pie Chart variation with the same ability to display a single data series in a two-dimensional circle and is likewise useful for displaying data as a part of the whole.
 
 ## Getting Started
 
