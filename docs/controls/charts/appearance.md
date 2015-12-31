@@ -3,7 +3,7 @@ title: Appearance
 page_title: Appearance | Kendo UI Charts
 description: "Learn how to control the appearance of Kendo UI Charts, change their themes and manage their animated transitions."
 slug: appearance_charts_widget
-position: 7
+position: 5
 ---
 
 # Appearance
@@ -21,34 +21,11 @@ The main building blocks of a Kendo UI Chart are:
 *   Axes
 *   Series
 
+For detailed information on [Chart titles and legends, refer to the article about them]({% slug titlelegend_features_charts %}).
+
 **Figure 1. Chart structure**
 
 ![Chart Structure](/controls/charts/chart-structure.png)
-
-### Title
-
-The title location is controlled via the `position` option of the `title` object. Available options are:
-
-* `"top"`
-* `"bottom"`
-
-### Legend
-
-The legend position is also controllable. The supported `position` values are:
-
-* `"top"`
-* `"bottom"`
-* `"left"`
-* `"right"`
-* `"custom"`
-
-Custom positioning is configured through the `offsetX` and `offsetY` options.
-
-**Figure 2. Custom legend position**
-
-![Custom legend position](/controls/charts/chart-legend-custom-position.png)
-
-You are able to exclude series from the legend by setting their `visibleInLegend` option to `false`.
 
 ### Themes
 
@@ -116,7 +93,8 @@ Other articles on Kendo UI Charts:
 * [Date Series]({% slug dateseries_charts_widget %})
 * [Tooltip]({% slug tooltip_charts_widget %})
 * [Chart Notes]({% slug chartnotes_charts_widget %})
+* [Title and Legend]({% slug titlelegend_features_charts %})
 * [Error Bars]({% slug errorbars_charts_widget %})
-* [Data Series Charts]({% slug seriestypeofcharts_widget %})
+* [Data Series]({% slug seriestypeofcharts_widget %})
 * [Types of Kendo UI Charts]({% slug areacharts_widget %})
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)

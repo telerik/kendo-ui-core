@@ -2,8 +2,9 @@
 title: Error Bars
 page_title: Error Bars | Kendo UI Charts
 description: "Learn how to configure the error bars of Kendo UI Charts, bind them to the series data and set their value."
+previous_url: /controls/charts/error-bars
 slug: errorbars_charts_widget
-position: 8
+position: 4
 ---
 
 # Error Bars
@@ -258,7 +259,8 @@ Other articles on Kendo UI Charts:
 * [Date Series]({% slug dateseries_charts_widget %})
 * [Tooltip]({% slug tooltip_charts_widget %})
 * [Chart Notes]({% slug chartnotes_charts_widget %})
+* [Title and Legend]({% slug titlelegend_features_charts %})
 * [Appearance]({% slug appearance_charts_widget %})
-* [Data Series Charts]({% slug seriestypeofcharts_widget %})
+* [Data Series]({% slug seriestypeofcharts_widget %})
 * [Types of Kendo UI Charts]({% slug areacharts_widget %})
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)

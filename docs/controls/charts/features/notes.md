@@ -1,12 +1,13 @@
 ---
-title: Chart Notes
-page_title: Chart Notes | Kendo UI Charts
+title: Notes
+page_title: Notes | Kendo UI Charts
 description: "Learn how to configure the notes of a Kendo UI Chart widget."
+previous_url: /controls/charts/notes
 slug: chartnotes_charts_widget
-position: 6
+position: 2
 ---
 
-# Chart Notes
+# Notes
 
 Kendo UI Charts can display the metadata of a point or a specific part of the axis.
 
@@ -127,8 +128,9 @@ Other articles on Kendo UI Charts:
 * [Data Binding]({% slug databinding_charts_widget %})
 * [Date Series]({% slug dateseries_charts_widget %})
 * [Tooltip]({% slug tooltip_charts_widget %})
+* [Title and Legend]({% slug titlelegend_features_charts %})
 * [Appearance]({% slug appearance_charts_widget %})
 * [Error Bars]({% slug errorbars_charts_widget %})
-* [Data Series Charts]({% slug seriestypeofcharts_widget %})
+* [Data Series]({% slug seriestypeofcharts_widget %})
 * [Types of Kendo UI Charts]({% slug areacharts_widget %})
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)

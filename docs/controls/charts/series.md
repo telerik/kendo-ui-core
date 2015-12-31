@@ -1,12 +1,12 @@
 ---
-title: Data Series Charts
-page_title: Data Series Charts | Kendo UI Charts
+title: Data Series
+page_title: Data Series | Kendo UI Charts
 description: "Learn how to create Kendo UI Series Charts by using different data series."
 slug: seriestypeofcharts_widget
 position: 2
 ---
 
-# Data Series Charts
+# Data Series
 
 The [Kendo UI Charts](http://demos.telerik.com/kendo-ui/) plot one or more data series of a specified type.
 
@@ -106,6 +106,7 @@ Other articles on Kendo UI Charts:
 * [Date Series]({% slug dateseries_charts_widget %})
 * [Tooltip]({% slug tooltip_charts_widget %})
 * [Chart Notes]({% slug chartnotes_charts_widget %})
+* [Title and Legend]({% slug titlelegend_features_charts %})
 * [Appearance]({% slug appearance_charts_widget %})
 * [Error Bars]({% slug errorbars_charts_widget %})
 * [Types of Kendo UI Charts]({% slug areacharts_widget %})
