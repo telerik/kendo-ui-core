@@ -3,7 +3,7 @@ title: Appearance
 page_title: Appearance | Kendo UI Charts
 description: "Learn how to control the appearance of Kendo UI Charts, change their themes and manage their animated transitions."
 slug: appearance_charts_widget
-position: 6
+position: 7
 ---
 
 # Appearance

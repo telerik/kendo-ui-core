@@ -3,7 +3,7 @@ title: Data Binding
 page_title: Data Binding | Kendo UI Charts
 description: "Learn how to handle the Kendo UI Charts data binding to inline data and to a data source."
 slug: databinding_charts_widget
-position: 2
+position: 3
 ---
 
 # Data Binding

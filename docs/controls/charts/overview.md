@@ -334,7 +334,7 @@ The primary Y axis crosses the X axis at 0 (leftmost). The second, `torque` Y ax
 
 ![Scatter line chart with customized axis crossing value](/controls/charts/chart-scatter-line-axis-crossing-value.png)
 
-## Common Chart Features
+## Axis Features
 
 ### Axis Title
 

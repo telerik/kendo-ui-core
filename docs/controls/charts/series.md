@@ -3,7 +3,7 @@ title: Data Series Charts
 page_title: Data Series Charts | Kendo UI Charts
 description: "Learn how to create Kendo UI Series Charts by using different data series."
 slug: seriestypeofcharts_widget
-position: 8
+position: 2
 ---
 
 # Data Series Charts

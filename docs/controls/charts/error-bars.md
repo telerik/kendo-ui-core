@@ -3,7 +3,7 @@ title: Error Bars
 page_title: Error Bars | Kendo UI Charts
 description: "Learn how to configure the error bars of Kendo UI Charts, bind them to the series data and set their value."
 slug: errorbars_charts_widget
-position: 7
+position: 8
 ---
 
 # Error Bars

@@ -3,7 +3,7 @@ title: Tooltip
 page_title: Tooltip | Kendo UI Charts
 description: "Learn how to configure the tooltip in Kendo UI Charts, make it visible, and set its properties depending on your preferences."
 slug: tooltip_charts_widget
-position: 4
+position: 5
 ---
 
 # Tooltip

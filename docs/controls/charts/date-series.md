@@ -3,7 +3,7 @@ title: Date Series
 page_title: Date Series | Kendo UI Charts
 description: "Learn how to handle date series and date grouping in the Kendo UI Charts."
 slug: dateseries_charts_widget
-position: 3
+position: 4
 ---
 
 # Date Series

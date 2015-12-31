@@ -3,7 +3,7 @@ title: Chart Notes
 page_title: Chart Notes | Kendo UI Charts
 description: "Learn how to configure the notes of a Kendo UI Chart widget."
 slug: chartnotes_charts_widget
-position: 5
+position: 6
 ---
 
 # Chart Notes
