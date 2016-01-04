@@ -8,7 +8,7 @@ position: 1
 
 # Diagram Overview
 
-The [Kendo UI Diagram widget](http://demos.telerik.com/kendo-ui/diagram/index) represents information in a schematic way and according to particular visualization techniques. 
+The [Kendo UI Diagram widget](http://demos.telerik.com/kendo-ui/diagram/index) represents information in a schematic way and according to particular visualization techniques.
 
 ## Getting Started
 
@@ -108,7 +108,7 @@ For detailed information on the layout types and options, refer to the [Kendo UI
 
 ### Data Binding
 
-This section requires that you are comfortable with the [general overview on the way databinding in Kendo UI works](http://docs.kendoui.com/framework/datasource/overview "Kendo UI Data Binding."), as Kendo UI dataSource is an essential concept that applies to the diagramming framework.
+This section requires that you are comfortable with the [general overview on the way data binding in Kendo UI works]({% slug overview_kendoui_datasourcecomponent %}), as Kendo UI dataSource is an essential concept that applies to the diagramming framework.
 
 You are able to define and customize data binding in various ways. To create a hierarchical Diagram, the easiest way is to pass a dataSource as an option together with a Kendo UI template, as demonstrated in the example below.
 
