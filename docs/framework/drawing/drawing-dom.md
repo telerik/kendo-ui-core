@@ -290,25 +290,27 @@ do with CSS or display resolution.
 
 ## Known limitations
 
-- no support for RTL text
+- Right-to-left text is not supported
 
-- no rendering of shadow DOM
-
-- no CSS box-shadow, text-shadow, radial gradients (linear gradients are supported).
-
-- only `solid` border-style
-
-- the content of the following elements is not rendered: `<iframe>`, `<svg>`.  A `<canvas>` will be rendered as an image, but only if it's “non-tainted” (does not display images from another domain).
-
-- SVG-s referenced with `<img>` tag will not render in Internet Explorer, because [IE taints the canvas](http://stackoverflow.com/questions/31484379/ie-canvas-datauri-security-error).
-
-- rendering of `<select>` elements is imperfect (some minor issues can be noticed, like wrong padding or missing the drop down arrow).  We recommend using a Kendo DropDown or ListView widget instead of a plain `<select>`.
-
-- images hosted on different domains might not be rendered, unless permissive [Cross-Origin HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image) are provided by the server.  Similarly, fonts might not be possible to load cross-domain.
+- Images hosted on different domains might not be rendered, unless permissive [Cross-Origin HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image) are provided by the server.  Similarly, fonts might not be possible to load cross-domain.
 
   Even with the proper CORS headers, IE9 will *not* be able to load images or fonts from another domain, and could raise an uncatcheable security exception.  If you need to support IE9, make sure to host images and fonts on the same domain as the application.
 
-- when the generated document is opened with Acrobat Reader and you try to use the `Save As` option from the file menu an error is thrown.
+- The content of the following elements is not rendered: `<iframe>`, `<svg>`.  A `<canvas>` will be rendered as an image, but only if it's “non-tainted” (does not display images from another domain).
+
+- CSS box-shadow, text-shadow and radial gradients are omitted. Linear gradients are supported.
+
+- Only border-style`solid` is rendered.
+
+- Maximum document size is limited to 5080x5080mm (200x200 inches) by the PDF 1.5 specification. Larger files might not open in all viewers.
+
+- Shadow DOM is not rendered
+
+- SVG referenced with `<img>` tag will not render in Internet Explorer, because [IE taints the canvas](http://stackoverflow.com/questions/31484379/ie-canvas-datauri-security-error).
+
+- Rendering of `<select>` elements is imperfect. Some minor issues can be noticed, like wrong padding or missing the drop down arrow.  We recommend using a Kendo DropDown or ListView widget instead of a plain `<select>`.
+
+- When the generated document is opened with Acrobat Reader and you try to use the `Save As` option from the file menu an error is thrown.
 `"The document could not be saved. There was a problem reading(23)"`. The solution is to open Acrobat Reader options (Edit → Preferences) and in the "Documents" section uncheck “Save As optimizes for Fast Web View”, which is enabled by default. After this, Save As will work without errors.
 
 
