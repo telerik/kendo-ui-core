@@ -184,7 +184,7 @@ The example below demonstrates how to initialize the Window and configure its co
 
 If the Window has no set dimensions, it is probably going to resize after the AJAX content is loaded. This naturally changes the position of the widget on the screen and it is no longer centered. If this is a requirement, then either [`center`](/api/javascript/ui/window#methods-center) the Window in its [`refresh`](/api/javascript/ui/window#events-refresh) event, or set some explicit dimensions.
 
-### Iframe
+### Apply with Iframe
 
 Kendo UI Window creates an iframe for its content if the content URL contains a protocol, i.e. it is assumed that in this case the nested page resides in another domain. If the URL does not contain a protocol, the assumption is that it is a local URL that is going to load a partial view (not a full page), so an iframe is not created. This behavior can be controlled explicitly through configuring the widget.
 

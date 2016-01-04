@@ -9,6 +9,8 @@ slug: howto_reorder_using_draganddrop_kendouitouch_listview
 
 The example below demonstrates how to implement the drag-and-drop reordering in Kendo UI ListView by using the `kendoTouch` tap event. The approach is suitable for mobile devices as it does not prevent the scrolling of the page/widget.
 
+###### Example
+
 ```html
     <!-- kendo Web ListView -->
     <div id="listview"></div>
@@ -122,7 +124,7 @@ The example below demonstrates how to implement the drag-and-drop reordering in 
     </script>
 
     <style>
-        .item { 
+        .item {
             border: 2px solid green;
             border-radius: 0.5em;
             margin: 5px;
@@ -133,7 +135,7 @@ The example below demonstrates how to implement the drag-and-drop reordering in 
             background-color: yellow;
         }
 
-        .dragged { 
+        .dragged {
             padding: 1em;
             background-color: orange;
             border: 2px solid orange;
@@ -141,7 +143,7 @@ The example below demonstrates how to implement the drag-and-drop reordering in 
          }
 
          .red { background-color: red; }
-        
+
          #listview {
              -webkit-user-select: none;
              -moz-user-select: none;
@@ -155,5 +157,6 @@ The example below demonstrates how to implement the drag-and-drop reordering in 
 
 Other articles on Kendo UI ListView:
 
-* [JavaScript API Reference](/api/javascript/ui/listview)
+* [ListView JavaScript API Reference](/api/javascript/ui/listview)
 * [How to Filter Using Slider Selection]({% slug howto_filter_using_slider_selection_listview %})
+* [How to Persist Row Selection during Data Operations]({% slug howto_persists_row_selection_listview %})

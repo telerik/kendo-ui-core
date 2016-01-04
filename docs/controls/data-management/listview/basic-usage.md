@@ -160,7 +160,7 @@ $("#listView").kendoListView({
 ```
 ### Alternate Items
 
-From a design perspective, it may be useful to visually differentiate each alternating item in a ListView. You may wish that every second item from the example above has a slightly darker background, i.e. banded rows. Defining the `altTemplate` property accomplishes this through the use of a template that you define. 
+From a design perspective, it may be useful to visually differentiate each alternating item in a ListView. You may wish that every second item from the example above has a slightly darker background, i.e. banded rows. Defining the `altTemplate` property accomplishes this through the use of a template that you define.
 
 The example below demonstrates the way you can update your working project to include a template for alternating items:
 
@@ -367,3 +367,4 @@ Other articles on Kendo UI ListView and how-to examples:
 * [Overview]({% slug overview_kendoui_listview_widget %})
 * [How to Reorder Using Drag-and-Drop and Kendo UI Touch]({% slug howto_reorder_using_draganddrop_kendouitouch_listview %})
 * [How to Filter Using Slider Selection]({% slug howto_filter_using_slider_selection_listview %})
+* [How to Persist Row Selection during Data Operations]({% slug howto_persists_row_selection_listview %})

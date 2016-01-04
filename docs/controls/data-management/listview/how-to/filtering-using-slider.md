@@ -9,6 +9,8 @@ slug: howto_filter_using_slider_selection_listview
 
 The example below demonstrates how to filter Kendo UI ListView datasource based on a Kendo UI Slider selection and dispalys the inclusive/exclusive fitlering functionality.
 
+###### Example
+
 ```html
     <div id="rangeslider1" class="slider">
       <input />
@@ -105,5 +107,6 @@ The example below demonstrates how to filter Kendo UI ListView datasource based 
 
 Other articles on Kendo UI ListView:
 
-* [JavaScript API Reference](/api/javascript/ui/listview)
+* [ListView JavaScript API Reference](/api/javascript/ui/listview)
+* [How to Persist Row Selection during Data Operations]({% slug howto_persists_row_selection_listview %})
 * [How to Reorder Using Drag-and-Drop and Kendo UI Touch]({% slug howto_reorder_using_draganddrop_kendouitouch_listview %})

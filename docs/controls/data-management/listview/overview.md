@@ -94,6 +94,7 @@ Other articles on Kendo UI ListView and how-to examples:
 
 * [Walkthrough]({% slug basic_usage_kendoui_listview_widget %})
 * [How to Reorder Using Drag-and-Drop and Kendo UI Touch]({% slug howto_reorder_using_draganddrop_kendouitouch_listview %})
+* [How to Persist Row Selection during Data Operations]({% slug howto_persists_row_selection_listview %})
 * [How to Filter Using Slider Selection]({% slug howto_filter_using_slider_selection_listview %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/listview/overview)
 * [Overview of the JSP Tag](/jsp/tags/listview/overview)

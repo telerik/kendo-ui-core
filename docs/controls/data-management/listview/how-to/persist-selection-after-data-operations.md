@@ -1,13 +1,15 @@
 ---
-title: Persist row selection during data operations
-page_title: Persist row selection during data operations | Kendo UI ListView Widget
-description: "Learn how to persist row selection during data operations."
+title: Persist Row Selection during Data Operations
+page_title: Persist Row Selection during Data Operations | Kendo UI ListView Widget
+description: "Learn how to persist row selection during data operations in a Kendo UI ListView widget."
 slug: howto_persists_row_selection_listview
 ---
 
-# Persist row selection during data operations
+# Persist Row Selection during Data Operations
 
-The example below demonstrates how to persist row selection during data operations.
+The example below demonstrates how to persist row selection during data operations in a Kendo UI ListView widget.
+
+###### Example
 
 ```html
   <div id="listview"></div>
@@ -82,4 +84,6 @@ The example below demonstrates how to persist row selection during data operatio
 
 Other articles on Kendo UI ListView:
 
-* [JavaScript API Reference](/api/javascript/ui/listview)
+* [ListView JavaScript API Reference](/api/javascript/ui/listview)
+* [How to Filter Using Slider Selection]({% slug howto_filter_using_slider_selection_listview %})
+* [How to Reorder Using Drag-and-Drop and Kendo UI Touch]({% slug howto_reorder_using_draganddrop_kendouitouch_listview %})
