@@ -1,14 +1,24 @@
 ---
-title: Custom binding
-page_title: Binding a Kendo UI HierarchicalDataSource component
-description: See how to fetch custom hierarchical data and represent it in a HierarchicalDataSource.
+title: Custom Binding
+page_title: Custom Binding | Kendo UI Hierarchical Data Source
+description: "Learn how to fetch custom hierarchical data and represent it in a Kendo UI HierarchicalDataSource component."
+slug: custombinding_ofhthehierarchical_datasourcecomponent
+position: 2
 ---
 
-# Custom binding of the HierarchicalDataSource
+# Custom Binding
 
-## Binding through a custom transport
+Below are a couple of ways to bind the Kendo UI HierarchicalDataSource component in a custom way when the default configuration is not actionable.
 
-If you have a way of fetching data that cannot be achieved through the default [dataSource transport configuration](/api/framework/hierarchicaldatasource#configuration-transport), you can provide a [custom read function](/api/framework/datasource#configuration-transport.read) that fetches the data and delivers them to the datasource (the so-called "custom transport"). This enables you to query different URLs conditionally, or provide generated authentication tokens for each request.
+## Configuration
+
+### Customize Transport Binding
+
+If you have a way of fetching data that cannot be achieved through the default [dataSource transport configuration](/api/framework/hierarchicaldatasource#configuration-transport), you can provide a [custom `read` function](/api/framework/datasource#configuration-transport.read) that fetches the data and delivers it to the datasource, which is the so-called custom transport. This enables you to query different URLs conditionally, or provide generated authentication tokens for each request.
+
+The example below demonstrates how to bind the HierarchicalDataSource component through a custom transport.
+
+###### Example
 
     <script>
     var datasource = new kendo.data.HierarchicalDataSource({
@@ -45,9 +55,13 @@ If you have a way of fetching data that cannot be achieved through the default [
     </script>
 
 
-## Fetching a complete hierarchy through a single request
+### Fetch Hierarchy through Single Request
 
-Because the HierarchicalDataSource loads data on demand, loading all available data can result in multiple requests to the server. In order to prevent this, you can make a single AJAX request to get all the data, and then provide it to the datasource.
+Because the HierarchicalDataSource component loads data on demand, loading all available data can result in multiple requests to the server. To prevent this, make a single AJAX request to get all the data, and then provide it to the dataSource.
+
+The example below demonstrates how to fetch a complete hierarchy through a single request.
+
+###### Example
 
     <script>
       var datasource = new kendo.data.HierarchicalDataSource({
@@ -81,3 +95,12 @@ Because the HierarchicalDataSource loads data on demand, loading all available d
       console.log(rootItems[0].children.data().length); // logs 2
 
     </script>
+
+## See Also
+
+Articles on the Kendo UI DataSource and HierarchicalDataSource components:
+
+* [HierarchicalDataSource JavaScript API Reference](/api/javascript/data/hierarchicaldatasource)
+* [HierarchicalDataSource Overview]({% slug custombinding_ofhthehierarchical_datasourcecomponent %})
+* [DataSource JavaScript API Reference](/api/javascript/data/datasource)
+* [DataSource Overview]({% slug overview_kendoui_datasourcecomponent %})

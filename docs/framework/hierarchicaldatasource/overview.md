@@ -1,19 +1,24 @@
 ---
 title: Overview
-page_title: HierarchicalDataSource component in Kendo UI framework
-description: See how to represent hierarchical data using HierarchicalDataSource component, an extension of Kendo UI DataSource.
+page_title: Overview | Kendo UI Hierarchical Data Source
+description: "Learn how to represent hierarchical data using the Kendo UI HierarchicalDataSource component, an extension of Kendo UI DataSource."
+slug: overview_hierarchical_datasourcecomponent
+position: 1
 ---
 
-# Overview
+# HierarchicalDataSource Overview
 
-The HierarchicalDataSource component extends the [DataSource component](/api/framework/datasource), allowing
-representation of hierarchical data. This help topic assumes that you are familiar with the
-Kendo UI DataSource, and builds upon that knowledge with information that is specific to
-hierarchical data.
+The Kendo UI HierarchicalDataSource component extends the [DataSource component](/api/javascript/data/datasource), allowing the representation of hierarchical data. This article assumes that you are familiar with the Kendo UI DataSource, and builds upon that knowledge with specific information about hierarchical data.
 
 ## Getting Started
 
-### Creating a HierarchicalDataSource bound to local data
+### Bind HierarchicalDataSource to Local Data
+
+#### Create the HierarchicalDataSource and bind to local data
+
+The example below demonstrates how to create a `HierarchicalDataSource` component bound to local data.
+
+###### Example
 
     var categorizedMovies = [ {
           categoryName: "SciFi",
@@ -34,7 +39,11 @@ hierarchical data.
 
     var localDataSource = new kendo.data.HierarchicalDataSource({ data: categorizedMovies });
 
-### Creating a HierarchicalDataSource bound to local heterogeneous data
+#### Create the HierarchicalDataSource and bind to heterogeneous local data
+
+The example below demonstrates how to create a `HierarchicalDataSource` component and bind it to heterogeneous local data by configuring it to bind the children when the fields holding the children items have different names.
+
+###### Example
 
       var data = [{
         CategoryName: "Category 1",
@@ -70,9 +79,13 @@ hierarchical data.
         }
       });
 
-The example demonstrates how to configure the HierarchicalDataSource in order to bind the children when the fields holding the children items have different names.
+### Bind HierarchicalDataSource to Remote Service
 
-### Creating a HierarchicalDataSource bound to a homogeneous remote data service
+#### Create the HierarchicalDataSource and bind to homogeneous remote service
+
+The example below demonstrates how to create a `HierarchicalDataSource` component that is bound to a homogeneous remote data service.
+
+###### Example
 
     var homogeneous = new kendo.data.HierarchicalDataSource({
         transport: {
@@ -89,21 +102,25 @@ The example demonstrates how to configure the HierarchicalDataSource in order to
         }
     });
 
-The above snippet will target the HierarchicalDataSource to a single service end-point.
-The data service is homogeneous, i.e. it always returns objects of the same type.
-After executing `homogeneous.read()`, the service end-point is hit without a EmployeeId parameter:
+The snippet above targets the HierarchicalDataSource to a single service end-point. The data service is homogeneous, i.e. it always returns objects of the same type. After executing `homogeneous.read()`, the service end-point is hit without an `EmployeeId` parameter,m as demonstrated below.
+
+###### Example
 
     GET http://demos.telerik.com/kendo-ui/service/Employees
 
     => [ { "EmployeeId": 2, "Name": "Andrew", "HasEmployees": true } ]
 
-Reading the children of the returned item is achieved by calling the [`load` method](/api/framework/node#load) of the data item:
+Reading the children of the returned item is achieved by calling the [`load` method](/api/framework/node#load) of the data item.
+
+###### Example
 
     var ceo = homogeneous.view()[0];
 
     ceo.load();
 
-This will hit the service end-point and will supply the id of the data item:
+This hits the service end-point and supplies the id of the data item.
+
+###### Example
 
     GET http://demos.telerik.com/kendo-ui/service/Employees?EmployeeId=2
 
@@ -112,16 +129,19 @@ This will hit the service end-point and will supply the id of the data item:
           { "EmployeeId": 4, "Name": "Charlie", "HasEmployees": false }
        ]
 
-Now, the children can be accessed:
+Now, the children can be accessed.
+
+###### Example
 
     // ceo.children is a HierarchicalDataSource, too
     var middleManagement = ceo.children.view();
 
 
-### The `hasChildren` property
+#### The `hasChildren` property
 
-The `hasChildren` boolean property indicates whether a data item contains children that can be fetched from the server.
-You can either hard-code it, map it to another property, or compute it with a function:
+The `hasChildren` Boolean property indicates whether a data item contains children that can be fetched from the server. You can either hard-code it, map it to another property, or compute it with a function, as demonstrated below.
+
+###### Example
 
     // hard-code that the item will always have children
     hasChildren: true
@@ -134,7 +154,11 @@ You can either hard-code it, map it to another property, or compute it with a fu
         return item.HasEmployees && item.RelatedDepartment;
     }
 
-### Binding a HierarchicalDataSource to remote data with multiple service end-points
+#### Bind HierarchicalDataSource to remote data with multiple service end-points
+
+The example below demonstrates how to create the HierarchicalDataSource component and bind it to remote data with multiple service end-points.
+
+###### Example
 
     // configuration of the products service end-point
     var Products = {
@@ -175,16 +199,19 @@ You can either hard-code it, map it to another property, or compute it with a fu
         }
     });
 
-The configuration above creates a two-level HierarchicalDataSource (categories and products) that
-fetches data from two different end-points (/service/Categories and /service/Products, respectively).
+The configuration above creates a two-level HierarchicalDataSource&mdash;categories and products&mdash;that fetches data from two different end-points&mdash;`/service/Categories` and `/service/Products` respectively.
 
-## Binding UI widgets to HierarchicalDataSource
+## Widget Binding
 
-At this time, the only widget that is aware of the datasource hierarchy is the TreeView. However,
-since the HierarchicalDataSource inherits the DataSource component, you can share the root level of
-the hierarchy with any DataSource-enabled component.
+### Bind Widgets to HierarchicalDataSource
 
-### Sharing a HierarchicalDataSource between a TreeView and a Grid
+At this time, the only widget that is aware of the dataSource hierarchy is the TreeView. However, since the HierarchicalDataSource component inherits from the DataSource component, you can share the root level of the hierarchy with any DataSource-enabled component.
+
+### Share HierarchicalDataSource between Widgets
+
+The example below demonstartes how to share the HierarchicalDataSource component between a Kendo UI TreeView and a Kendo UI Grid.
+
+###### Example
 
     <ul id="treeview"></ul>
     <div id="grid"></div>
@@ -233,3 +260,12 @@ the hierarchy with any DataSource-enabled component.
     });
     </script>
 
+
+## See Also
+
+Articles on the Kendo UI DataSource and HierarchicalDataSource components:
+
+* [HierarchicalDataSource JavaScript API Reference](/api/javascript/data/hierarchicaldatasource)
+* [Custom Binding of HierarchicalDataSource]({% slug custombinding_ofhthehierarchical_datasourcecomponent %})
+* [DataSource Overview]({% slug overview_kendoui_datasourcecomponent %})
+* [DataSource JavaScript API Reference](/api/javascript/data/datasource)
