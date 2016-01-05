@@ -27,10 +27,10 @@ Create the PivotConfigurator by defining an HTML `<div>` element.
         <!-- Define	 the HTML div that will hold the PivotGrid -->
         <div id="pivotgrid">
         </div>
-        
+
 The example below demonstrates how to further configure the Kendo UI PivotConfigurator widget.
 
-###### Example 
+###### Example
 
         <script>
         $(document).ready(function () {
@@ -60,7 +60,7 @@ The example below demonstrates how to further configure the Kendo UI PivotConfig
             });
         });
         </script>
-        
+
 The code above results in the following widgets:
 
 ![Kendo UI PivotConfigurator](/images/pivotconfigurator.png)
