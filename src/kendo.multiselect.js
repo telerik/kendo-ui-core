@@ -252,7 +252,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _setListValue: function() {
-            List.fn._setListValue.call(this, this._initialValues);
+            List.fn._setListValue.call(this, this._initialValues.slice(0));
         },
 
         _listChange: function(e) {

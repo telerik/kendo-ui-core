@@ -183,4 +183,30 @@
         });
     });*/
 
+    asyncTest("MultiSelect triggers change on item select", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            close: function(e) { e.preventDefault(); },
+            height: CONTAINER_HEIGHT,
+            autoBind: false,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            },
+            change: function() {
+                start();
+                ok(true, "change is fired");
+            }
+        });
+
+        multiselect.one("dataBound", function() {
+            var item = $(multiselect.items()[1]);
+            item.click();
+        });
+        multiselect.open();
+    });
+
 })();
