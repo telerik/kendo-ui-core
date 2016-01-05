@@ -37,7 +37,7 @@ The example below demonstrates how to edit data in a Kendo UI Window by using MV
           <span class="k-invalid-msg" data-for="UnitPrice"></span>
         </li>
         <li>
-          <label for="UnitsInStock">UnitsInStock</label> 
+          <label for="UnitsInStock">UnitsInStock</label>
           <!-- bind the UnitsInStock field of the selected product -->
           <input data-role="numerictextbox" name="UnitsInStock" data-bind="value: selected.UnitsInStock" required min="0" />
           <span class="k-invalid-msg" data-for="UnitsInStock"></span>
@@ -185,7 +185,7 @@ The example below demonstrates how to edit data in a Kendo UI Window by using MV
 
 Articles and other how-to examples on Kendo UI Window:
 
-* [JavaScript API Reference](/api/javascript/ui/window)
+* [Window JavaScript API Reference](/api/javascript/ui/window)
 * [How to Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
 * [How to Add **Close** Button inside Modal Windows]({% slug howto_addclosebutton_insidemodalwindows_window %})
 * [How to Cascade Open Windows]({% slug howto_cascadeopenwindows_window %})

@@ -5,7 +5,7 @@ description: "Learn how to dynamically set DataSource in a Kendo UI DropDownList
 slug: howto_set_datasource_dynamically_dropdownlist
 ---
 
-# Set DataSource Dynamically 
+# Set DataSource Dynamically
 
 The example below demonstrates how to dynamically set the DataSource in a Kendo UI DropDownList widget.
 
@@ -106,7 +106,7 @@ The example below demonstrates how to dynamically set the DataSource in a Kendo 
 
 Other articles on Kendo UI DropDownList:
 
-* [JavaScript API Reference](/api/javascript/ui/dropdownlist)
+* [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
 * [How to Detect Input Change Events]({% slug howto_detect_input_change_events_dropdownlist %})
 * [How to Detect Wrapper Blur Events]({% slug howto_detect_wrapper_blur_events_dropdownlist %})
 * [How to Detect Wrapper Focus Events]({% slug howto_detect_wrapper_focus_events_dropdownlist %})

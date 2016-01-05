@@ -50,6 +50,6 @@ The example below demonstrates how to include custom [FontAwesome](http://fortaw
 
 Other articles on Kendo UI Menu:
 
-* [JavaScript API Reference](/api/javascript/ui/menu)
+* [Menu JavaScript API Reference](/api/javascript/ui/menu)
 * [How to Create Split Button]({% slug howto_createa_split_button_menu %})
 * [How to Execute Custom Click Actions Based on Class Name]({% slug howto_execute_custom_click_actions_basedon_classnames_menu %})

@@ -59,7 +59,7 @@ The example below demonstrates how to detect the Kendo UI DropDownList input cha
 
 Other articles on Kendo UI DropDownList:
 
-* [JavaScript API Reference](/api/javascript/ui/dropdownlist)
+* [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
 * [How to Cascade DropDownLists Using `ng-repeat`]({% slug howto_cascade_withngrepeat_distinct_values_dropdownlist %})
 * [How to Validate DropDownLists by Using Required Attributes]({% slug howto_validate_using_required_attributes_dropdownlist %})
 * [How to Automatically Adjust the Width of a DropDownList]({% slug howto_automatically_adjust_width_dropdownlist %})

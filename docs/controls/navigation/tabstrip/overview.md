@@ -23,7 +23,7 @@ The Kendo UI TabStrip widget can be initialized in two ways:
 > * As TabStrip should be initialized after the DOM is fully loaded, make sure you create it within a $(document).ready() statement.
 > * It is not required for the tabs of the widget to have content. Therefore, if you need to have tabs with no content, it is safe to omit their associated `div` elements.
 
-#### By using HTML markup
+#### Using HTML Markup
 
 The example below demonstrates how to initialize Kendo UI TabStrip from HTML markup.
 
@@ -44,7 +44,7 @@ The example below demonstrates how to initialize Kendo UI TabStrip from HTML mar
         });
     </script>
 
-#### By using a JSON data object
+#### Using JSON Data Object
 
 The example below demonstrates how to initialize Kendo UI TabStrip from a JSON data object.
 
@@ -214,11 +214,11 @@ The example below demonstrates how to initialize a TabStrip and select the first
 
 Other articles on Kendo UI TabStrip:
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/tabstrip/overview)
-* [Overview of the JSP Tag](/jsp/tags/tabstrip/overview)
-* [Overview of the PHP Class](/php/widgets/tabstrip/overview)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the TabStrip Widget](/aspnet-mvc/helpers/tabstrip/overview)
+* [Overview of the TabStrip JSP Tag](/jsp/tags/tabstrip/overview)
+* [Overview of the TabStrip PHP Class](/php/widgets/tabstrip/overview)
 * [How to Display Buttons at the Bottom]({% slug howto_displaybuttonsatthebottom_tabstrip %})
 * [How to Expand to 100% Height and Auto-Resize]({% slug howto_expandto100percentheightautoresize_tabstrip %})
 * [How to Initialize the Grid in Kendo UI TabStrip]({% slug initialize_thegrid_tabstrip_widget %})
 * [How to Scroll TabStrip with Keyboard]({% slug howto_scrolltabstripwithkeyboard_tabstrip %})
-* [JavaScript API Reference](/api/javascript/ui/tabstrip)
+* [TabStrip JavaScript API Reference](/api/javascript/ui/tabstrip)

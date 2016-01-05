@@ -7,16 +7,16 @@ slug: howto_insert_html_content_custom_popup_tool_editor
 
 # Insert HTML Content via Custom Popup Tools
 
-The HTML markup in the Window resembles the one used internally by the Kendo UI widgets (e.g. Grid popup editing, Editor dialogs, etc.). However, this is not required. 
+The HTML markup in the Window resembles the one used internally by the Kendo UI widgets (e.g. Grid popup editing, Editor dialogs, etc.). However, this is not required.
 
 For additional information about the code used below, refer to:
 
-* [How to configure Editor tools](/api/javascript/ui/editor#configuration-tools)
-* [How to execute Editor commands](/api/javascript/ui/editor#methods-exec)
-* [Editor custom tools demo](http://demos.telerik.com/kendo-ui/editor/custom-tools)
-* [How to configure a Window](/api/javascript/ui/window)
-* [How to obtain a widget's element from its client object](/framework/widgets/wrapper-element)
-* [Notes on destroying Windows](/web/window/overview#destroying-a-kendo-ui-window)
+* [How to Configure Editor Tools](/api/javascript/ui/editor#configuration-tools)
+* [How to Execute Editor Commands](/api/javascript/ui/editor#methods-exec)
+* [Editor Custom Tools Demo](http://demos.telerik.com/kendo-ui/editor/custom-tools)
+* [How to Configure a Window](/api/javascript/ui/window)
+* [How to Obtain Widget's Element from Its Client Object](/framework/widgets/wrapper-element)
+* [Notes on Destroying Windows]({% slug overview_kendoui_window_widget %}#configuration-Destroy)
 
 The example below demonstrates how to use a custom Kendo UI Editor tool and a Kendo UI Window for inserting HTML content in the Editor.
 
@@ -39,8 +39,8 @@ The example below demonstrates how to use a custom Kendo UI Editor tool and a Ke
     $(function(){
 
         function onCustomToolClick (e) {
-            var popupHtml = 
-                '<div class="k-editor-dialog k-popup-edit-form k-edit-form-container" style="width:auto;">' + 
+            var popupHtml =
+                '<div class="k-editor-dialog k-popup-edit-form k-edit-form-container" style="width:auto;">' +
                   '<div style="padding: 0 1em;">' +
                     '<p><textarea cols="60" rows="10" style="width:90%"></textarea></p>' +
                   '</div>' +
@@ -101,7 +101,7 @@ The example below demonstrates how to use a custom Kendo UI Editor tool and a Ke
 
 Other articles on Kendo UI Editor:
 
-* [JavaScript API Reference](/api/javascript/ui/editor)
+* [Editor JavaScript API Reference](/api/javascript/ui/editor)
 * [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
 * [How to Add Max-Length Validation]({% slug howto_add_max_length_validation_editor %})
 * [How to Get Reference to Child Widgets]({% slug howto_get_referenceto_child_widgets_editor %})

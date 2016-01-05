@@ -1,11 +1,11 @@
 ---
-title: Show Tooltip on <code>seriesClick</code>
+title: Show Tooltip on seriesClick
 page_title: Show Tooltip on seriesClick | Kendo UI Charts
 description: "Learn how to show the tooltip of a Kendo UI Chart on seriesClick."
 slug: howto_showoverlaywhileloading_charts
 ---
 
-# Show Tooltip on `seriesClick`
+# Show Tooltip on seriesClick
 
 The example below demonstrates how to show the Kendo UI Chart tooltip on `seriesClick`.
 

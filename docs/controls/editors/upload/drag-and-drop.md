@@ -40,11 +40,12 @@ The example below demonstrates how to override this behavior by applying the CSS
         visibility: visible;
     }
 
+<!--*-->
 ## See Also
 
 Other articles on Kendo UI Upload:
 
-* [Overview]({% slug overview_kendoui_upload_widget %})
+* [Overview of the Upload Widget]({% slug overview_kendoui_upload_widget %})
 * [Send and Receive Metadata]({% slug metadata_upload_widget %})
 * [Modes of Operation]({% slug modes_upload_widget %})
 * [Browser Support]({% slug browsersupport_upload_widget %})

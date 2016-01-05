@@ -198,7 +198,7 @@ The example below demonstrates how to create a Kendo UI ListView with draggable 
         }
     </style>
 
-### Get Corresponding `dataItem` Dragged Element
+### Get Corresponding dataItem Dragged Element
 
 Data management widgets such as the Kendo UI Grid or ListView automatically append an `uid` data attribute to their items' DOM elements. You are able to use the `uid` attribute to get reference to the `dataItem` from the DataSource instance, as demonstrated in the example below.
 
@@ -438,7 +438,6 @@ Kendo UI Drag and Drop components do not automatically change the data-bound wid
     </style>
 
 <!--*-->
-
 ## See Also
 
 Other articles on Kendo UI Drag and Drop functionality:

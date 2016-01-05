@@ -77,4 +77,4 @@ The example below demonstrates how to access an existing RangeSlider instance.
 
 Other articles on Kendo UI RangeSlider:
 
-* [JavaScript API Reference](/api/javascript/ui/rangeslider)
+* [RangeSlider JavaScript API Reference](/api/javascript/ui/rangeslider)

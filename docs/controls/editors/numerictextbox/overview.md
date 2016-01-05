@@ -87,7 +87,7 @@ The example below demonstartes how to create a percentage NumericTextBox widget.
         });
     </script>
 
-### `label` Element Support
+### Support fro label Element
 
 Because of its complex rendering, focusing the widget by using a label element requires additional implementation. For more information about how to do it, check this [this Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
 
@@ -120,9 +120,10 @@ A side effect from using a `text` input type is that it prevents the numeric key
         var numericTextBoxObject = $("#my-numeric-textbox").data("kendoNumericTextBox");
         numericTextBoxObject.element.attr("type", "number");
 
+<!--*-->
 ## See Also
 
-Other articles on Kendo UI NumericTextBox and how-to examples:
+Other articles and how-to examples on Kendo UI NumericTextBox:
 
 * [How to Add Title Attribute]({% slug howto_add_title_attribute_numerictextbox %})
 * [How to Change Text Color]({% slug howto_change_text_color_numerictextbox %})
@@ -132,7 +133,7 @@ Other articles on Kendo UI NumericTextBox and how-to examples:
 * [How to Update Value on Keyup]({% slug howto_update_valueon_keyup_angularjs_numerictextbox %})
 * [How to Update Value on Spin]({% slug howto_update_valueon_spin_angularjs_numerictextbox %})
 * [How to Use Custom Culture Script]({% slug howto_use_custom_culture_script_numerictextbox %})
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/numerictextbox/overview)
-* [Overview of the JSP Tag](/jsp/tags/numerictextbox/overview)
-* [Overview of the PHP Class](/php/widgets/numerictextbox/overview)
-* [JavaScript API Reference](/api/javascript/ui/numerictextbox)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the NumericTextBox Widget](/aspnet-mvc/helpers/numerictextbox/overview)
+* [Overview of the NumericTextBox JSP Tag](/jsp/tags/numerictextbox/overview)
+* [Overview of the NumericTextBox PHP Class](/php/widgets/numerictextbox/overview)
+* [NumericTextBox JavaScript API Reference](/api/javascript/ui/numerictextbox)

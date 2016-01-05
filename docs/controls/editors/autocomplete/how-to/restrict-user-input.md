@@ -137,6 +137,6 @@ Other articles on Kendo UI AutoComplete:
 
 * [JavaScript API Reference](/api/javascript/ui/autocomplete)
 * [How to Use Custom AngularJS Templates]({% slug howto_use_custom_angularjs_templates_autocomplete %})
-* [How to Show a `No results found` Message]({% slug howto_add_customized_templates_autocomplete %})
-* [How to Dynamically Change `DataSource` Based on User Selections]({% slug howto_change_datasource_dynamically_autocomplete %})
+* [How to Show a No results found Message]({% slug howto_add_customized_templates_autocomplete %})
+* [How to Dynamically Change DataSource Based on User Selections]({% slug howto_change_datasource_dynamically_autocomplete %})
 * [How to Highlight Matched Values]({% slug howto_highlight_matched_values_autocomplete %})

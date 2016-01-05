@@ -49,7 +49,7 @@ The inline Editor is not able to post its value and [this is something you must 
 
 The Editor tools can be configured through the [`tools` configuration option](/api/web/editor#tools).
 
-### Specify a Set of Editor Tools
+### Specify Set of Editor Tools
 
 ###### Example
 
@@ -70,7 +70,9 @@ If you define no specific tools, the Editor creates its default set of tools for
 
 Beside the available built-in tools, the Editor functionality can be extended through custom tools, defined in the `tools` array.
 
-###### Example - add a custom tool button
+The example below demonstrates how to add a custom tool button.
+
+###### Example
 
        $("#editor").kendoEditor({
            tools: [
@@ -117,6 +119,8 @@ Note that `<textarea>` `cols` and `rows` are required attributes and they can in
 ### Default Content Styling
 
 Kendo UI Editor uses an `iframe` and applies some default CSS styles to its content when the [classic mode](#classic-mode) is enabled. This allows the widget to override the default browser styling. The styles are shown in the code snippet below. They are targeting mostly headings, paragraphs, links, lists, and tables. All tables inside the Editor obtain a `k-table` class, which is not included in the widget's value.
+
+###### Example
 
     html,
     body {
@@ -210,7 +214,7 @@ To override the above styles, use custom styles with [higher specificity](https:
 
 Other articles on Kendo UI Editor:
 
-* [JavaScript API Reference](/api/javascript/ui/editor)
+* [Editor JavaScript API Reference](/api/javascript/ui/editor)
 * [Image Browser]({% slug image_browser_editor_widget %})
 * [Post-Process Content]({% slug post_process_content_editor_widget %})
 * [Set Selections]({% slug set_selections_editor_widget %})
@@ -222,6 +226,6 @@ Other articles on Kendo UI Editor:
 * [How to Set Caret Position]({% slug howto_set_caret_position_editor %})
 * [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
 * [How to Use Inline Editor inside Windows]({% slug howto_use_inline_editor_inside_windows_editor %})
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/editor/overview)
-* [Overview of the JSP Tag](/jsp/tags/editor/overview)
-* [Overview of the PHP Class](/php/widgets/editor/overview)
+* [Overview of the ASP.NET MVC HtmlHelper Extension of the Editor Widget](/aspnet-mvc/helpers/editor/overview)
+* [Overview of the Editor JSP Tag](/jsp/tags/editor/overview)
+* [Overview of the Editor PHP Class](/php/widgets/editor/overview)

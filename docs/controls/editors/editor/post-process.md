@@ -35,13 +35,14 @@ If the Editor is within a `<form>` element, the convenient moment to post-proces
     });
     </script>
 
+<!--*-->
 ## See Also
 
 Other articles on Kendo UI Editor:
 
-* [Overview]({% slug overview_kendoui_editor_widget %})
+* [Overview of the Editor Widget]({% slug overview_kendoui_editor_widget %})
 * [Image Browser]({% slug image_browser_editor_widget %})
 * [Set Selections]({% slug set_selections_editor_widget %})
 * [Prevent Cross-Site Scripting]({% slug prevent_xss_editor_widget %})
 * [Troubleshooting]({% slug troubleshooting_editor_widget %})
-* [JavaScript API Reference](/api/javascript/ui/editor)
+* [Editor JavaScript API Reference](/api/javascript/ui/editor)

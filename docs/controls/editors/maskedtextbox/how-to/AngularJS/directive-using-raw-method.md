@@ -120,7 +120,7 @@ The example below demonstrates how to implement [a custom AngularJS directive](h
 
 Other articles on Kendo UI MaskedTextBox:
 
-* [JavaScript API Reference](/api/javascript/ui/maskedtextbox)
+* [MaskedTextBox JavaScript API Reference](/api/javascript/ui/maskedtextbox)
 * [How to Customize Masks through MVVM Binding]({% slug howto_customize_masks_through_mvvmbinding_mvvm_maskedtextbox %})
 * [How to Show Custom Placeholder on Blur]({% slug howto_show_custom_placeholderon_blur_maskedtextbox %})
 * [How to Use Custom MVVM Binding to Set Model Value]({% slug howto_use_custommvvm_bindingto_setmodel_value_maskedtextbox %})

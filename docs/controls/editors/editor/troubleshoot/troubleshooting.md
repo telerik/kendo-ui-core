@@ -12,7 +12,7 @@ This page provides solutions for common issues you may encounter while working w
 
 ## Pasting
 
-### Pasting Displays Nothing (Internet Explorer)
+### Pasting Displays Nothing: Internet Explorer
 
 Pasting in the Editor requires permission to access **Clipboard** data. This may require users with strict security settings to add the site in the trusted site zone, or to adjust their Internet options so that the **Allow Programmatic Clipboard Access** setting is set to either **Allowed** or **Prompt**.
 
@@ -34,7 +34,7 @@ The Editor uses BOM characters to correctly handle some ranges. These characters
 
 1. If the problem is still visible on your page, and the scripts are loaded via the CDN, then it is likely that the page is served with the wrong formatting. Make sure the page, as well as its layout pages, are saved and served in UTF-8.
 
-### Editor in Popup Is Readonly (Firefox)
+### Editor in Popup Is Readonly: Firefox
 
 Firefox cannot handle `iframe` elements properly when they are moved to the DOM. When an Editor is used inside a popup, which moves elements to the DOM, the popup (e.g., a Kendo UI Window, a jQuery dialog, etc.) must be initialized first, or you must call the [`refresh` method](/api/javascript/ui/editor#methods-refresh).
 
@@ -101,7 +101,7 @@ Since the inline Editor is initialized from a non-`form` element, it is not post
 
 Other articles on Kendo UI Editor:
 
-* [JavaScript API Reference](/api/javascript/ui/editor)
+* [Editor JavaScript API Reference](/api/javascript/ui/editor)
 * [How to Add Max-Length Validation]({% slug howto_add_max_length_validation_editor %})
 * [How to Get Reference to Child Widgets]({% slug howto_get_referenceto_child_widgets_editor %})
 * [How to Insert HTML Content via Custom Popup Tools]({% slug howto_insert_html_content_custom_popup_tool_editor %})
@@ -112,7 +112,7 @@ Other articles on Kendo UI Editor:
 * [Post-Process Content]({% slug post_process_content_editor_widget %})
 * [Prevent Cross-Site Scripting]({% slug prevent_xss_editor_widget %})
 * [Set Selections]({% slug set_selections_editor_widget %})
-* [Overview]({% slug overview_kendoui_editor_widget %})
+* [Overview of the Editor Widget]({% slug overview_kendoui_editor_widget %})
 
 Other articles on troubleshooting:
 

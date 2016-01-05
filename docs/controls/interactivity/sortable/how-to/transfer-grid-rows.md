@@ -98,17 +98,17 @@ The example below demonstrates how to move a row from one Kendo UI Grid to anoth
 
   function insertNoRecordsRow() {
     if (!this.dataSource.data().length) {
-      this.tbody.append($("<tr class='no-drag' colspan='2'><td>No records</td></tr>")); 
+      this.tbody.append($("<tr class='no-drag' colspan='2'><td>No records</td></tr>"));
     }
   }
 </script>
 ```
 
-## See Also 
+## See Also
 
 Other articles and how-to examples on Kendo UI Sortable:
 
-* [JavaScript API Reference](/api/javascript/ui/sortable)
+* [Sortable JavaScript API Reference](/api/javascript/ui/sortable)
 * [How to Nest Sortables]({% slug howto_nestsortables_sortable %})
 * [How to Persist Order in `localStorage`]({% slug howto_persistoderinlocalstorage_sortable %})
 * [How to Reorder AngularJS Grid Rows]({% slug howto_reorderangularjsgridrows_angular_sortable %})

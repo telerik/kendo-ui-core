@@ -20,7 +20,7 @@ The Tooltip can be initialized:
 * For a container, where child elements are going to represent Tooltip targets
 
 
-#### Initialize Tooltip for single elements
+#### Initialize Tooltip for Single Elements
 
 The example below demonstrates how to create a Tooltip for a single target and initialize it.
 
@@ -34,7 +34,7 @@ The example below demonstrates how to create a Tooltip for a single target and i
         $("#target").kendoTooltip({ content: "Tooltip content" });
     });
 
-#### Initialize Tooltip for containers
+#### Initialize Tooltip for Containers
 
 The example below demonstrates how to create a Tooltip for multiple targets within a container, initialize it using a jQuery selector and specfy the filter to match the target elements. By default, the Tooltip content is extracted from the `title` attribute of the target element.
 
@@ -108,10 +108,10 @@ The example below demonstrates how to access an existing Tooltip instance.
 
 Other articles on Kendo UI Tooltip:
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/tooltip/overview)
-* [Overview of the JSP Tag](/jsp/tags/tooltip/overview)
-* [Overview of the PHP Class](/php/widgets/tooltip/overview)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the Tooltip Widget](/aspnet-mvc/helpers/tooltip/overview)
+* [Overview of the Tooltip JSP Tag](/jsp/tags/tooltip/overview)
+* [Overview of the Tooltip PHP Class](/php/widgets/tooltip/overview)
 * [How to Calculate Tooltip Content Width]({% slug howto_calculatetooltipcontentlength_tooltip %})
 * [How to Show Only If Text Exceeds Certain Length]({% slug howto_showonlyiftextexceedscertainlength_tooltip %})
 * [How to Show Only If Text Overflows with Ellipsis]({% slug howto_showonlyiftextoverflowswithellipsis_tooltip %})
-* [JavaScript API Reference](/api/javascript/ui/tooltip)
+* [Tooltip JavaScript API Reference](/api/javascript/ui/tooltip)

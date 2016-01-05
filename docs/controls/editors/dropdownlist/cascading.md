@@ -14,6 +14,6 @@ The casacding functionality described in the related help article for [Kendo UI 
 
 Other articles on Kendo UI DropDownList:
 
-* [Overview]({% slug overview_kendoui_dropdownlist_widget %})
+* [Overview of the DropDownList Widget]({% slug overview_kendoui_dropdownlist_widget %})
 * [Grouping Functionality]({% slug grouping_kendoui_combobox_widget %})
 * [Virtualization]({% slug virtualization_kendoui_combobox_widget %})

@@ -179,10 +179,10 @@ To build a better understanding of resources, see the [online demo](http://demos
 
 ## See  Also
 
-Other articles on Kendo UI Scheduler and how-to examples:
+Other articles and how-to examples on Kendo UI Scheduler:
 
-* [JavaScript API Reference](/api/javascript/ui/scheduler)
-* [Overview]({% slug overview_kendoui_scheduler_widget %})
+* [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
+* [Overview of the Scheduler Widget]({% slug overview_kendoui_scheduler_widget %})
 * [Timezones]({% slug timezones_kendoui_scheduler_widget %})
 * [How to Filter Events by Resource Using MultiSelect]({% slug howto_filter_eventsby_resourceusing_multiselect_scheduler %})
 * [How to Persist Resource Values on `move`]({% slug howto_persistresourcevalues_onamoveevent_scheduler %})

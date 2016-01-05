@@ -11,6 +11,7 @@ position: 1
 The [Kendo UI ReponsivePanel widget](http://demos.telerik.com/kendo-ui/responsive-panel/index) allows you to hide part of a page content on small screens. This allows more space for content on mobile screens.
 
 > **Important**  
+>
 > CSS3 media queries are supported in Internet Explorer 9 and later versions. This means that Kendo UI ResponsivePanel does not support Internet Explorer 7 and Internet Explorer 8.
 
 ## Configuration
@@ -94,4 +95,4 @@ The example below demonstrates how to collapse the menu on the left of small scr
 
 Other articles on Kendo UI ResponsivePanel:
 
-* [JavaScript API Reference](/api/javascript/ui/responsivepanel)
+* [ResponsivePanel JavaScript API Reference](/api/javascript/ui/responsivepanel)

@@ -274,7 +274,7 @@ The example below demonstrates how to access an existing Window instance.
 
     var win = $("#window").data("kendoWindow");
 
-#### Reference from non-`iframe` content
+#### Reference from non-iframe Content
 
 An easy way to obtain reference to a Kendo UI Window instance from within its non-`iframe` content is to use DOM traversal.
 
@@ -315,7 +315,7 @@ The example below demonstrates how to access the DOM elements of a Window.
 
 ## Troubleshooting
 
-### Scrollbar Overlaps in OS X
+### Scrollbar Overlaps: OS X
 
 In Safari and Chrome browsers running on OS X, a scrollbar of an element below the Window popup may be displayed incorrectly over the Window popup. Resolve this issue by applying the CSS style demonstrated in the example to the scrollbar container below the Window.
 
@@ -327,11 +327,11 @@ In Safari and Chrome browsers running on OS X, a scrollbar of an element below t
 
 Other articles on Kendo UI Upload:
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/window/overview)
-* [Overview of the JSP Tag](/jsp/tags/window/overview)
-* [Overview of the PHP Class](/php/widgets/window/overview)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the Upload Widget](/aspnet-mvc/helpers/window/overview)
+* [Overview of the Upload JSP Tag](/jsp/tags/window/overview)
+* [Overview of the Upload PHP Class](/php/widgets/window/overview)
 * [How to Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
-* [How to Add **Close** Button inside Modal Windows]({% slug howto_addclosebutton_insidemodalwindows_window %})
+* [How to Add Close Button inside Modal Windows]({% slug howto_addclosebutton_insidemodalwindows_window %})
 * [How to Cascade Open Windows]({% slug howto_cascadeopenwindows_window %})
 * [How to Create Confirmation Dialog via Promises]({% slug howto_createconfirmationdialog_viapromises_window %})
 * [How to Display Loading Indicator over Window]({% slug howto_displayloadingindicator_overwindow_window %})
@@ -340,4 +340,4 @@ Other articles on Kendo UI Upload:
 * [How to Restrict Window Positioning]({% slug howto_restrictpositioning_window %})
 * [How to Use Custom Action Icons]({% slug howto_posttoiframe_window %})
 * [How to Use MVVM Binding for Window Data Editing]({% slug howto_usemvvmbinding_forwindowdataediting_mvvm_window %})
-* [JavaScript API Reference](/api/javascript/ui/window)
+* [Upload JavaScript API Reference](/api/javascript/ui/window)

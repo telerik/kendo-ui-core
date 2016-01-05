@@ -12,7 +12,9 @@ The Editor widget works with standard [`range` objects](https://developer.mozill
 
 To set the Editor selection, you need to create a `Range` object that specifies the desired selection, and pass it to the [`selectRange` method](/kendo-ui/api/javascript/ui/editor#methods-selectRange)
 
-###### Example - set Editor selections
+The example below demonstrates how to set the Editor selections.
+
+###### Example
 
     <textarea id="editor"></textarea>
     <script>
@@ -36,7 +38,7 @@ To set the Editor selection, you need to create a `Range` object that specifies 
       editor.selectRange(range);
     </script>
 
-Notice that the second parameter of the `setStart` and `setEnd` methods work differently with the `Element` and `Text` nodes. For `Text` nodes the range boundary is set between the characters of the node: 0 means "before all characters", 1 means "between the first and the second character". For `Element` nodes the range boundary is set between the child nodes: 0 means "at the start of the element", and `element.childNodes.length` means "after all children". 
+Notice that the second parameter of the `setStart` and `setEnd` methods work differently with the `Element` and `Text` nodes. For `Text` nodes the range boundary is set between the characters of the node: 0 means "before all characters", 1 means "between the first and the second character". For `Element` nodes the range boundary is set between the child nodes: 0 means "at the start of the element", and `element.childNodes.length` means "after all children".
 
 For more information, see the [in-depth tutorial on `Range` objects on Quirksmode](http://www.quirksmode.org/dom/range_intro.html).
 
@@ -44,9 +46,9 @@ For more information, see the [in-depth tutorial on `Range` objects on Quirksmod
 
 Other articles on Kendo UI Editor:
 
-* [Overview]({% slug overview_kendoui_editor_widget %})
+* [Overview of the Editor Widget]({% slug overview_kendoui_editor_widget %})
 * [Image Browser]({% slug image_browser_editor_widget %})
 * [Post-Process Content]({% slug post_process_content_editor_widget %})
 * [Prevent Cross-Site Scripting]({% slug prevent_xss_editor_widget %})
 * [Troubleshooting]({% slug troubleshooting_editor_widget %})
-* [JavaScript API Reference](/api/javascript/ui/editor)
+* [Editor JavaScript API Reference](/api/javascript/ui/editor)

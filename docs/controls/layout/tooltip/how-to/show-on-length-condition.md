@@ -17,14 +17,14 @@ The example below demonstrates how to show a Kendo UI Tooltip only if the text o
     </div>
 
     <style>
-      .k-tooltip.k-popup{ 
+      .k-tooltip.k-popup{
         visibility: hidden;
       }
 
     </style>
     <script src="http://demos.kendoui.com/content/shared/js/products.js"></script>
     <script>
-      $(document).ready(function () { 
+      $(document).ready(function () {
         var dataSource = new kendo.data.DataSource({
           data: products,
           schema: {
@@ -45,12 +45,12 @@ The example below demonstrates how to show a Kendo UI Tooltip only if the text o
           height: 500,
           toolbar: ["create"],
           columns: [
-            { field: "ProductName", title: "Product Name", width: "100px" }, 
-            { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "100px" } 
+            { field: "ProductName", title: "Product Name", width: "100px" },
+            { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "100px" }
           ],
           editable: "incell",
         }).data("kendoGrid");
-        
+
         $("#grid").kendoTooltip({
           show: function(e){
             if(this.content.text().length > 40){
@@ -76,6 +76,6 @@ The example below demonstrates how to show a Kendo UI Tooltip only if the text o
 
 Other articles on Kendo UI Tooltip:
 
-* [JavaScript API Reference](/api/javascript/ui/tooltip)
+* [Tooltip JavaScript API Reference](/api/javascript/ui/tooltip)
 * [How to Calculate Tooltip Content Width]({% slug howto_calculatetooltipcontentlength_tooltip %})
 * [How to Show Only If Text Overflows with Ellipsis]({% slug howto_showonlyiftextoverflowswithellipsis_tooltip %})

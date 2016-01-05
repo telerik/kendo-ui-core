@@ -85,7 +85,7 @@ Shape layers are rendered using the [Drawing API](/framework/drawing/overview). 
 
 Other articles on Kendo UI Map:
 
-* [JavaScript API Reference](/api/javascript/dataviz/ui/map)
+* [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
 * [How to Customize Markers on Map]({% slug howto_customizemarkersonmap_map %})
 * [How to Disable Mousewheel Zoom]({% slug howto_disablemousezoom_map %})
 * [How to Display Shape Tooltips]({% slug howto_displayshapetooltip_map %})

@@ -58,7 +58,7 @@ To fine-tune the color, background, padding margin of the text and to find more 
 Other articles on Kendo UI Barcode:
 
 * [Encodings]({% slug encodings_kendoui_barcode_widget %})
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/barcode/overview)
-* [Overview of the JSP Tag](/jsp/tags/barcode/overview)
-* [Overview of the PHP Class](/php/widgets/barcode/overview)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the Barcode Widget](/aspnet-mvc/helpers/barcode/overview)
+* [Overview of the Barcode JSP Tag](/jsp/tags/barcode/overview)
+* [Overview of the Barcode PHP Class](/php/widgets/barcode/overview)
 * [Barcode JavaScript API Reference](/api/javascript/dataviz/ui/barcode)

@@ -69,7 +69,7 @@ The example below demonstrates the way the widths of the bases for each segment 
 
 Other articles on Kendo UI Charts and chart types:
 
-* [Chart Overview]({% slug overview_kendoui_charts_widget %})
+* [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
 * [Data Series Charts]({% slug seriestypeofcharts_widget %})
 * [Area Charts]({% slug areacharts_widget %})
 * [Bar Charts]({% slug bartypeofcharts_widget %})

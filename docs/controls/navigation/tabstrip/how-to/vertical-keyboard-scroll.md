@@ -13,12 +13,12 @@ There is a way to make the scrollable content container become focused: add a `t
 
 To vertically scroll the TabStrip content containers with the help of the keyboard, do the following:
 
-1. Drop the keyboard navigation of the TabStrip altogether by removing the wrapper's `tabindex` after widget initialization. In this way the TabStrip is not able to receive focus and capture keyboard events.
+**Step 1.** Drop the keyboard navigation of the TabStrip altogether by removing the wrapper's `tabindex` after widget initialization. In this way the TabStrip is not able to receive focus and capture keyboard events.
 
         $("#tabstrip").kendoTabStrip();
         $("#tabstrip").removeAttr("tabindex");
 
-2. Scroll the container using Javascript, as the example below demonstrates.
+**Step 2.** Scroll the container using Javascript, as the example below demonstrates.
 
 ###### Example
 
@@ -92,7 +92,7 @@ To vertically scroll the TabStrip content containers with the help of the keyboa
 
 Other articles on Kendo UI TabStrip:
 
-* [JavaScript API Reference](/api/javascript/ui/tabstrip)
+* [TabStrip JavaScript API Reference](/api/javascript/ui/tabstrip)
 * [How to Display Buttons at the Bottom]({% slug howto_displaybuttonsatthebottom_tabstrip %})
 * [How to Expand to 100% Height and Auto-Resize]({% slug howto_expandto100percentheightautoresize_tabstrip %})
 * [How to Initialize the Grid in Kendo UI TabStrip]({% slug initialize_thegrid_tabstrip_widget %})

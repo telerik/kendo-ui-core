@@ -123,7 +123,7 @@ The example below demonstrates how to bind the Scheduler to a remote service.
 
 Note the way the fields of the scheduler event are configured in the `schema.model` section and mapped to the fields returned by the remote service using the `from` option.
 
-### <code>kendo.data.SchedulerEvent</code>
+### kendo.data.SchedulerEvent
 
 The `kendo.data.SchedulerEvent` object has the following fields:
 
@@ -277,6 +277,7 @@ The example below demonstrates how to trigger the same behavior in Firefox as it
         }
     }
 
+<!--*-->
 `17px` is a hard-coded value, which should match the scrollbar width. It can be calculated and set with Javascript before printing if desired.
 
 In addition, the Scheduler needs a fixed pixel width for itself or some of its ancestors. Otherwise, it may resize during printing, which will cause the displayed absolutely positioned events to become misaligned. If the widget is part of a fluid layout, a fixed width can be set only for the printing task and then removed, as demonstrated in the example below.
@@ -457,12 +458,12 @@ For additional informatino on how to create custom views, refer to [this how-to 
 
 Other articles on Kendo UI Scheduler:
 
-* [JavaScript API Reference](/api/javascript/ui/scheduler)
+* [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [Resources]({% slug resources_kendoui_scheduler_widget %})
 * [Timezones]({% slug timezones_kendoui_scheduler_widget %})
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/scheduler/mvc-scheduler-overview)
-* [Overview of the JSP Tag](/jsp/tags/scheduler/overview)
-* [Overview of the PHP Class](/php/widgets/scheduler/overview)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the Scheduler Widget](/aspnet-mvc/helpers/scheduler/mvc-scheduler-overview)
+* [Overview of the Scheduler JSP Tag](/jsp/tags/scheduler/overview)
+* [Overview of the Scheduler PHP Class](/php/widgets/scheduler/overview)
 
 How-to examples on Kendo UI Scheduler in AngularJS:
 
@@ -496,4 +497,4 @@ Other how-to examples on Kendo UI Scheduler:
 * [How to Nest Editors inside Event Templates]({% slug howto_nest_editorsinside_event_templates_scheduler %})
 * [How to Use Custom Event Template with Specific Background Color]({% slug howto_use_custom_event_templatewith_specific_background_color_scheduler %})
 
-For additional runnable examples on Kendo UI Scheduler, browse the [Scheduler **How To** documentation folder](http://docs.telerik.com/kendo-ui/web/scheduler/how-to).
+For additional runnable examples on Kendo UI Scheduler, browse the [Scheduler **How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).

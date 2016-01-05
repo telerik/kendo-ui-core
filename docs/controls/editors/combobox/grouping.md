@@ -8,7 +8,7 @@ position: 2
 
 # Grouping
 
-As of Kendo UI Q1 2015 (2015.1.318) [Kendo UI AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index), [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index), [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index) and [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) widgets support binding to a grouped [datasource](http://docs.telerik.com/kendo-ui/framework/datasource/overview). This functionality allows you to display data items categorized by a specific model field. 
+As of Kendo UI Q1 2015 (2015.1.318) [Kendo UI AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index), [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index), [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index) and [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) widgets support binding to a grouped [datasource](http://docs.telerik.com/kendo-ui/framework/datasource/overview). This functionality allows you to display data items categorized by a specific model field.
 
 For more details about the data source grouping functionality, refer to the [group configuration article](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-group).
 
@@ -50,11 +50,11 @@ The widget exposes [groupTemplate](http://docs.telerik.com/kendo-ui/api/javascri
 
 ### Inline Group Title
 
-To customize the inline group title displayed next to the suggestion item in the popup element, you will need to use the [groupTemplate](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#configuration-groupTemplate) option. It is rendered in the absolute positioned, right aligned group element displayed in every first element of each new group.
+To customize the inline group title displayed next to the suggestion item in the popup element, you will need to use the [groupTemplate](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#configuration-groupTemplate) option. It is rendered in the absolute positioned, right aligned group element displayed in every first element of each new group. The parameter passed to the template is the group title value.
 
-The parameter passed to the template is the group title value.
+The example below demonstrates how to define a custom group template.
 
-###### Example - define a custom group template
+###### Example
 
 ```html
 <div class="demo-section k-header">
@@ -83,11 +83,11 @@ The parameter passed to the template is the group title value.
 
 ### Fixed Group Header
 
-To customize the group title displayed in the fixed group header positioned on top of the list, you will need to use the [fixedGroupTemplate](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#configuration-fixedGroupTemplate) option. It shows the group title of the current visible group. This means that the value is updated dynamically on the scroll position of the grouped list.
+To customize the group title displayed in the fixed group header positioned on top of the list, you will need to use the [fixedGroupTemplate](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#configuration-fixedGroupTemplate) option. It shows the group title of the current visible group. This means that the value is updated dynamically on the scroll position of the grouped list. The parameter passed to the template is the group title value.
 
-The parameter passed to the template is the group title value.
+The example below demonstrates how to define a custom fixed group template.
 
-###### Example - define a custom fixed group template
+###### Example
 
 ```html
 <div class="demo-section k-header">
@@ -127,4 +127,4 @@ Other articles on Kendo UI ComboBox:
 * [How to Bypass Boundary Detection]({% slug howto_bypass_boudary_detection_combobox %})
 * [How to Disable Child Cascading ComboBoxes]({% slug howto_disable_child_cascading_combobox %})
 * [How to Expand Background of Long List Items]({% slug howto_expand_background_longlist_items_combobox %})
-* [JavaScript API Reference](/api/javascript/ui/combobox)
+* [ComboBox JavaScript API Reference](/api/javascript/ui/combobox)

@@ -18,14 +18,14 @@ The example below demonstrates the two options of how to use custom icons for th
 
 ```html
     <style>
-      
+
       /* "foo" matches the custom action name */
       .k-i-foo
       {
       	background-color: #f00;
         background-image: url(".place.your.own.icon.here.");
       }
-      
+
     </style>
 
     <div id="window">
@@ -44,16 +44,16 @@ The example below demonstrates the two options of how to use custom icons for th
         win.wrapper.find(".k-i-foo").click(function(e) {
           $("#time-foo").html(returnTimeString());
         });
-        
+
         win.wrapper.find(".k-i-clock").click(function(e) {
           $("#time-clock").html(returnTimeString());
         });
-        
+
         function returnTimeString() {
           var d = new Date();
           return kendo.toString(d, 'HH:MM:ss.') + kendo.toString(d.getMilliseconds(), "000");
         }
-        
+
       });
     </script>
 ```
@@ -62,9 +62,9 @@ The example below demonstrates the two options of how to use custom icons for th
 
 Articles and other how-to examples on Kendo UI Window:
 
-* [JavaScript API Reference](/api/javascript/ui/window)
+* [Window JavaScript API Reference](/api/javascript/ui/window)
 * [How to Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
-* [How to Add **Close** Button inside Modal Windows]({% slug howto_addclosebutton_insidemodalwindows_window %})
+* [How to Add Close Button inside Modal Windows]({% slug howto_addclosebutton_insidemodalwindows_window %})
 * [How to Cascade Open Windows]({% slug howto_cascadeopenwindows_window %})
 * [How to Create Confirmation Dialog via Promises]({% slug howto_createconfirmationdialog_viapromises_window %})
 * [How to Display Loading Indicator over Window]({% slug howto_displayloadingindicator_overwindow_window %})

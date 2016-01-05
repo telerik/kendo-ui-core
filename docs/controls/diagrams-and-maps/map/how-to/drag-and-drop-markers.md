@@ -86,7 +86,7 @@ The example below demonstrates how to integrate the Kendo UI Draggable widget wi
 
 Other articles on Kendo UI Map:
 
-* [JavaScript API Reference](/api/javascript/dataviz/ui/map)
+* [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
 * [How to Add Shape Titles]({% slug howto_addhspaetitles_map %})
 * [How to Customize Markers on Map]({% slug howto_customizemarkersonmap_map %})
 * [How to Disable Mousewheel Zoom]({% slug howto_disablemousezoom_map %})

@@ -46,7 +46,7 @@ The example below demonstrates how to restrict user input to min/max values set 
 
 Other articles on Kendo UI DatePicker:
 
-* [JavaScript API Reference](/api/javascript/ui/datepicker)
+* [DatePicker JavaScript API Reference](/api/javascript/ui/datepicker)
 * [How to Create Date Masking]({% slug howto_create_date_masking_datepicker %})
 * [How to Select Ranges between DatePickers]({% slug howto_select_ranges_between_datepicker %})
 * [How to Set the First Weekday]({% slug howto_set_first_weekday_datepicker %})
@@ -58,4 +58,4 @@ Other articles on Kendo UI DatePicker:
 * [How to Resize Calendar Based on Input Width]({% slug howto_use_resize_calendar_basedon_input_width_datepicker %})
 * [How to Use AngularJS Copy Functionality]({% slug howto_use_angularjs_copy_functionality_datepicker %})
 * [How to Show Out-of-Range Dates as Disabled]({% slug howto_show_outofrange_dates_disabled_datepicker %})
-* [How to Submit Forms on ENTER]({% slug howto_submmit_forms_onenter_datepicker %})
+* [How to Submit Forms on Enter]({% slug howto_submmit_forms_onenter_datepicker %})

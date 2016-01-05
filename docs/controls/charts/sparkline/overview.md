@@ -145,7 +145,7 @@ The category axis provides built-in support for displaying dates. This includes:
 
 Specifying categories of type `Date` switches the axis to a date mode. The automatic mode selection can be overridden by specifying `type: "Date"`.
 
-#### Base units
+#### Base Units
 
 ##### Default configuration
 
@@ -173,7 +173,7 @@ The [`base unit`](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.ba
 * months
 * years
 
-#### Series aggregates
+#### Series Aggregates
 
 If more than one category falls within a base unit, then its values are aggregated to display a single point, as demonstrated in the example below.
 
@@ -294,7 +294,7 @@ Each axis can be configured to display bands with different colors for predefine
 
 Other articles on Kendo UI Charts and chart types:
 
-* [Chart Overview]({% slug overview_kendoui_charts_widget %})
+* [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
 * [Data Series Charts]({% slug seriestypeofcharts_widget %})
 * [Area Charts]({% slug areacharts_widget %})
 * [Bar Charts]({% slug bartypeofcharts_widget %})

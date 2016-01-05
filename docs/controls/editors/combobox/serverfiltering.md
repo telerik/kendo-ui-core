@@ -38,7 +38,7 @@ Another benefit that server filtering brings about is the option to bind the wid
 - The server filtering feature (as its name says) only filters the source. If you would like to page (and filter) the data set, then you will need to use
 the [Virtualization](/kendo-ui/web/combobox/virtualization) feature of the widget.
 
-## See Also 
+## See Also
 
 Other articles on Kendo UI ComboBox:
 
@@ -46,6 +46,6 @@ Other articles on Kendo UI ComboBox:
 * [How to Expand Background of Long List Items]({% slug howto_expand_background_longlist_items_combobox %})
 * [How to Expand ComboBox Located in Bootstrap Layout]({% slug howto_expand_widget_bootstrap_widget_combobox %})
 * [How to Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
-* [How to Select Items on TAB]({% slug howto_select_items_ontab_combobox %})
+* [How to Select Items on Tab]({% slug howto_select_items_ontab_combobox %})
 * [How to Disable Child Cascading ComboBoxes]({% slug howto_disable_child_cascading_combobox %})
-* [JavaScript API Reference](/api/javascript/ui/combobox)
+* [ComboBox JavaScript API Reference](/api/javascript/ui/combobox)

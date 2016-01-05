@@ -21,7 +21,7 @@ The example below demonstrates how to calculate the width of a Kendo UI Tooltip 
             border-spacing: 0;
             border-collapse: collapse;
         }
-        
+
         #table td {
             white-space: nowrap;
             overflow: hidden;
@@ -30,9 +30,9 @@ The example below demonstrates how to calculate the width of a Kendo UI Tooltip 
             padding: .3em .6em;
         }
     </style>
-    
+
     <p>Hover the table cells from the second column. Tooltips with variable width will appear.</p>
-    
+
     <table id="table">
         <colgroup><col style="width:16em"><col></colgroup>
         <tbody>
@@ -41,7 +41,7 @@ The example below demonstrates how to calculate the width of a Kendo UI Tooltip 
             <tr><td>table cell with no tooltip</td><td>Duis ut nulla eget lectus posuere tempor. </td></tr>
         </tbody>
     </table>
-    
+
     <script>
       $("#table").kendoTooltip({
         filter: "td + td",
@@ -59,6 +59,6 @@ The example below demonstrates how to calculate the width of a Kendo UI Tooltip 
 Other articles on Kendo UI Tooltip:
 
 * [Content Property of the Tooltip](/api/javascript/ui/tooltip#configuration-content)
-* [JavaScript API Reference](/api/javascript/ui/tooltip)
+* [Tooltip JavaScript API Reference](/api/javascript/ui/tooltip)
 * [How to Show Only If Text Exceeds Certain Length]({% slug howto_showonlyiftextexceedscertainlength_tooltip %})
 * [How to Show Only If Text Overflows with Ellipsis]({% slug howto_showonlyiftextoverflowswithellipsis_tooltip %})

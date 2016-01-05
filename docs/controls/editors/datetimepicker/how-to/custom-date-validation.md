@@ -41,7 +41,7 @@ The example below demonstrates how to create a custom date validation.
             }
           },
           messages: {
-            datepicker: "Please enter valid date!" 
+            datepicker: "Please enter valid date!"
           }
         }).data("kendoValidator");
 
@@ -65,7 +65,7 @@ The example below demonstrates how to create a custom date validation.
 
 Other articles on Kendo UI DateTimePicker:
 
-* [JavaScript API Reference](/api/javascript/ui/datetimepicker)
+* [DateTimePicker JavaScript API Reference](/api/javascript/ui/datetimepicker)
 * [How to Prevent Invalid Values]({% slug howto_prevent_invalid_values_datetimepicker %})
 * [How to Limit Navigation to Months]({% slug howto_limit_navigation_tomonths_datetimepicker %})
 * [How to Override Hours in the Popup]({% slug howto_override_hours_inpopup_datetimepicker %})

@@ -24,10 +24,13 @@ The DropDownList looks and operates consistently regardless of the initializatio
 
 > **Important**  
 > * As DropDownList should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
->
 > * The widget copies any styles and CSS classes from the input element to the wrapper element and visible input.
 
-#### Initialize the DropDownList from an existing `<select>` element with defined data items
+#### From Existing <select> Element
+
+The example below demonstrates how to initialize the DropDownList from an existing `<select>` element with defined data items.
+
+###### Example
 
     <select id="dropdownlist">
         <option>Item 1</option>
@@ -41,9 +44,11 @@ The DropDownList looks and operates consistently regardless of the initializatio
         });
     </script>
 
-#### Initialize the DropDownList by binding it to a local data array
+#### By Binding to Local Array
 
 The DropDownList can be bound to local data arrays via the [DataSource component](/framework/datasource/overview) - an abstraction for local and remote data. Local arrays are appropriate for limited value options.
+
+The example below demonstrates how to initialize the DropDownList by binding it to a local data array.
 
 ###### Example
 
@@ -62,9 +67,11 @@ The DropDownList can be bound to local data arrays via the [DataSource component
       });
     </script>
 
-#### Initialize the DropDownList by binding it to a remote data service   
+#### By Binding to Remote Service
 
 The DropDownList can be bound to remote data arrays via the [DataSource component](/framework/datasource/overview) - an abstraction for local and remote data. Remote data binding is appropriate for larger data sets, so that items are loaded on-demand, when displayed. The DataSource can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
+
+The example below demonstrates how to initialize the DropDownList by binding it to a remote data service.   
 
 ###### Example
 
@@ -224,7 +231,7 @@ The example below demonstrates how to set the list dimensions through MVVM bindi
 
 Other articles on Kendo UI DropDownList:
 
-* [JavaScript API Reference](/api/javascript/ui/dropdownlist)
+* [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
 * [Grouping Functionality]({% slug grouping_kendoui_combobox_widget %})
 * [Virtualization]({% slug virtualization_kendoui_combobox_widget %})
 * [Cascading DropDownLists]({% slug cascading_kendoui_dropdownlist_widget %})
@@ -242,20 +249,20 @@ Other articles on Kendo UI DropDownList:
 * [How to Set DataSource Dynamically]({% slug howto_set_datasource_dynamically_dropdownlist %})
 * [How to Remove Items]({% slug howto_remove_items_dropdownlist %})
 * [How to Prevent Popup Closure on Scroll]({% slug howto_prevent_popup_closure_onscroll_dropdownlist %})
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/dropdownlist/overview)
-* [Overview of the JSP Tag](/jsp/tags/dropdownlist/overview)
-* [Overview of the PHP Class](/php/widgets/dropdownlist/overview)
+* [Overview of the ASP.NET MVC HtmlHelper Extension fro the DropDownList Widget](/aspnet-mvc/helpers/dropdownlist/overview)
+* [Overview of the DropDownList JSP Tag](/jsp/tags/dropdownlist/overview)
+* [Overview of the DropDownList PHP Class](/php/widgets/dropdownlist/overview)
 
 Articles on Kendo UI ComboBox:
 
-* [Overview]({% slug overview_kendoui_combobox_widget %})
+* [Overview of the ComboBox Widget]({% slug overview_kendoui_combobox_widget %})
 * [Grouping Functionality]({% slug grouping_kendoui_combobox_widget %})
 * [Virtualization]({% slug virtualization_kendoui_combobox_widget %})
 * [Cascading ComboBoxes]({% slug cascading_kendoui_combobox_widget %})
 * [Server Filtering]({% slug server_filtering_kendoui_combobox_widget %})
-* [JavaScript API Reference](/api/javascript/ui/combobox)
+* [ComboBox JavaScript API Reference](/api/javascript/ui/combobox)
 
 Articles on Kendo UI MultiSelect:
 
-* [Overview]({% slug overview_kendoui_multiselect_widget %})
-* [JavaScript API Reference](/api/javascript/ui/multiselect)
+* [Overview of the MultiSelect Widget]({% slug overview_kendoui_multiselect_widget %})
+* [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)

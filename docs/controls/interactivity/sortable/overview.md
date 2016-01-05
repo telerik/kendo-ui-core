@@ -206,6 +206,7 @@ The example below demonstrates how to grab the cursor on `hover`.
 ```
 
 > **Important**  
+>
 > It is advisable not to use a custom cursor in Internet Explorer, as due to the browser's specifics in custom cursor icon rendering, this may cause performace issues.
 
 ### Filter and Disable Items
@@ -319,9 +320,9 @@ The example below demonstrates how to persist the order of items in local storag
     </style>
 ```
 
-### `<input>` Elements inside Sortable Items
+### Sortable Items Containing <input> Elements
 
-`<input>` elements inside Sortable items cannot be focused because the items are draggable. To avoid that, use the `ignore` option, as demonstrated in the example below.
+The `<input>` elements inside Sortable items cannot be focused because the items are draggable. To avoid that, use the `ignore` option, as demonstrated in the example below.
 
 ###### Example
 
@@ -388,7 +389,7 @@ Other articles on Kendo UI Sortable:
 * [How to Reorder Grid Rows]({% slug howto_reordergridrows_sortable %})
 * [How to Reorder Rows in Nested Grid]({% slug howto_reorderrowsinnestedgrid_sortable %})
 * [How to Transfer Grid Rows]({% slug howto_transfergridrows_sortable %})
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/sortable/overview)
-* [Overview of the JSP Tag](/jsp/tags/sortable/overview)
-* [Overview of the PHP Class](/php/widgets/sortable/overview)
-* [JavaScript API Reference](/api/javascript/ui/sortable)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the Sortable Widget](/aspnet-mvc/helpers/sortable/overview)
+* [Overview of the Sortable JSP Tag](/jsp/tags/sortable/overview)
+* [Overview of the Sortable PHP Class](/php/widgets/sortable/overview)
+* [Sortable JavaScript API Reference](/api/javascript/ui/sortable)

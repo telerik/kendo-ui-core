@@ -14,7 +14,7 @@ The virtualization functionality described in the related help article for [Kend
 
 Other articles on Kendo UI MultiSelect:
 
-* [Overview]({% slug overview_kendoui_multiselect_widget %})
-* [JavaScript API Reference](/api/javascript/ui/multiselect)
+* [Overview of the MultiSelect Widget]({% slug overview_kendoui_multiselect_widget %})
+* [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
 * [Grouping Functionality]({% slug grouping_kendoui_multiselect_widget %})
 * [Troubleshooting]({% slug troubleshooting_common_issues_multiselect_kendoui %})

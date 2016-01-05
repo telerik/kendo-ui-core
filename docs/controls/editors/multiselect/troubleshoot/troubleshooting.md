@@ -10,6 +10,7 @@ slug: troubleshooting_common_issues_multiselect_kendoui
 This page provides solutions for common problems you may encounter while working with the Kendo UI MultiSelect widget.
 
 > **Important**  
+>
 > This issue can also be observed in [Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %}) and [Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %}). The solution demonstrated in the examples below is fully applicable to the case of them both as well.
 
 ## DataSource
@@ -51,7 +52,7 @@ The example below demonstrates the solution to the above issue.
 
 Other articles on Kendo UI MultiSelect:
 
-* [JavaScript API Reference](/api/javascript/ui/multiselect)
+* [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
 * [Grouping Functionality]({% slug grouping_kendoui_multiselect_widget %})
 * [Virtualization]({% slug virtualization_kendoui_multiselect_widget %})
 * [How to Bind Values to Template]({% slug howto_bind_values_totemplate_multiselect %})
@@ -67,7 +68,7 @@ Other articles on Kendo UI MultiSelect:
 * [How to Select the First Item on TAB]({% slug howto_select_thefirst_itemon_tab_multiselect %})
 * [How to Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
 * [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})
-* [Overview]({% slug overview_kendoui_multiselect_widget %})
+* [Overview of the MultiSelect Widget]({% slug overview_kendoui_multiselect_widget %})
 
 Other articles on troubleshooting:
 

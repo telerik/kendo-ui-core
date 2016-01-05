@@ -10,7 +10,7 @@ position: 2
 
 [Kendo UI TreeView widget](http://demos.telerik.com/kendo-ui/treeview/index) expects hierarchical data, so any flat structure must be converted to a hierarchical one before binding the widget to it. This article shows two methods for the conversion of flat data into hierarchical one, which differ from each other in the amount of time necessary for their completion and the resulting tree.
 
-## Methods 
+## Methods
 
 ### Initial All-Data Pre-processing
 
@@ -66,7 +66,7 @@ The example below demonstrates how to pre-process all data before binding the Tr
 
 This second method allows nodes to be loaded on demand, but is more computationally intensive as it requires the collection to be filtered each time a node gets expanded.
 
-The exampel below demonstrates how to filter data incrementally.
+The example below demonstrates how to filter data incrementally.
 
 ###### Example
 
@@ -122,5 +122,5 @@ The exampel below demonstrates how to filter data incrementally.
 
 Other articles on Kendo UI TreeView:
 
-* [Overview]({% slug overview_kendoui_treeview_widget %})
-* [JavaScript API Reference](/api/javascript/ui/treeview)
+* [Overview of the TreeView Widget]({% slug overview_kendoui_treeview_widget %})
+* [TreeView JavaScript API Reference](/api/javascript/ui/treeview)

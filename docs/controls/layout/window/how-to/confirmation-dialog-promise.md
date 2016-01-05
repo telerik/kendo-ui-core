@@ -72,16 +72,16 @@ The example below demonstrates how to create a confirmation dialog in a Kendo UI
           alert('Cancel');
         }
       });
-    </script> 
+    </script>
 ```
 
 ## See Also
 
 Articles and other how-to examples on Kendo UI Window:
 
-* [JavaScript API Reference](/api/javascript/ui/window)
+* [Window JavaScript API Reference](/api/javascript/ui/window)
 * [How to Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
-* [How to Add **Close** Button inside Modal Windows]({% slug howto_addclosebutton_insidemodalwindows_window %})
+* [How to Add Close Button inside Modal Windows]({% slug howto_addclosebutton_insidemodalwindows_window %})
 * [How to Cascade Open Windows]({% slug howto_cascadeopenwindows_window %})
 * [How to Display Loading Indicator over Window]({% slug howto_displayloadingindicator_overwindow_window %})
 * [How to Initialize the Grid]({% slug initialize_thegrid_window_widget %})

@@ -37,4 +37,4 @@ Other articles on Kendo UI Drag and Drop functionality:
 * [Draggable API Reference](/api/javascript/ui/draggable)
 * [DropTarget API Reference](/api/javascript/ui/droptarget)
 * [DropTargetArea API Reference](/api/javascript/ui/droptargetarea)
-* [Overview]({% slug overview_kendoui_draganddrop_intercativityandux %})
+* [Overview of the Drag and Drop functionality]({% slug overview_kendoui_draganddrop_intercativityandux %})

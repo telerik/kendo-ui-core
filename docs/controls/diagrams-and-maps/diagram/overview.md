@@ -194,9 +194,9 @@ Note that the function, returning a visual, has a parameter containing the data 
 
 Other articles and how-to examples on Kendo UI Diagram:
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/diagram/overview)
-* [Overview of the JSP Tag](/jsp/tags/diagram/overview)
-* [Overview of the PHP Class](/php/widgets/diagram/overview)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the Diagram Widget](/aspnet-mvc/helpers/diagram/overview)
+* [Overview of the Diagram JSP Tag](/jsp/tags/diagram/overview)
+* [Overview of the Diagram PHP Class](/php/widgets/diagram/overview)
 * [How to Change Shape Visual Elements Dynamically]({% slug howto_changeshapevisualelements_dynamically_diagram %})
 * [How to Drag and Drop on Shapes]({% slug howto_draganddrop_onshapes_diagram %})
 * [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})

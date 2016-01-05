@@ -14,6 +14,6 @@ The grouping functionality described in the related help article for [Kendo UI C
 
 Other articles on Kendo UI DropDownList:
 
-* [Overview]({% slug overview_kendoui_dropdownlist_widget %})
+* [Overview of the DropDownList Widget]({% slug overview_kendoui_dropdownlist_widget %})
 * [Virtualization]({% slug virtualization_kendoui_combobox_widget %})
 * [Cascading DropDownLists]({% slug cascading_kendoui_dropdownlist_widget %})

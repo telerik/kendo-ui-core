@@ -24,10 +24,11 @@ The MultiSelect looks and operates consistently regardless of the initialization
 
 > **Important**  
 > * As MultiSelect should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
->
 > * The widget copies any styles and CSS classes from the input element to the wrapper element and visible input.
 
-#### Initialize the MultiSelect from an existing `<select>` element with defined data items
+#### From Existing <slect> Element with Defined Data Items
+
+The example below demonstrates how to initialize the MultiSelect from an existing `<select>` element with defined data items.
 
 ###### Example
 
@@ -43,9 +44,11 @@ The MultiSelect looks and operates consistently regardless of the initialization
         });
     </script>
 
-#### Initialize the MultiSelect by binding it to a local data array
+#### By Binding to Local Data
 
 The MultiSelect can be bound to local data arrays via the [DataSource component](/framework/datasource/overview) - an abstraction for local and remote data. Local arrays are appropriate for limited value options.
+
+The example below demonstrates how to initialize the MultiSelect by binding it to local data arrays.
 
 ###### Example
 
@@ -64,9 +67,11 @@ The MultiSelect can be bound to local data arrays via the [DataSource component]
       });
     </script>
 
-#### Initialize the MultiSelect by binding it to a remote data service   
+#### By Binding to Remote Service
 
 The MultiSelect can be bound to remote data arrays via the [DataSource component](/framework/datasource/overview) - an abstraction for local and remote data. Remote data binding is appropriate for larger data sets, so that items are loaded on-demand, when displayed. The DataSource can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
+
+The example below demonstrates how to initialize the MultiSelect by binding it to a remote data service.
 
 ###### Example
 
@@ -240,7 +245,7 @@ The example below demonstrates how to pre-select values on initial loading.
 
 By design, when adding items that do not fit in the existing free space, the MultiSelect expands vertically. Limited expansion and scrolling can be achieved with the help of some CSS and JavaScript code. [The example in the Dojo](http://dojo.telerik.com/axeMa) demonstrates how to do this.
 
-### `label` Element Support
+### Support for label Element
 
 Because of its complex rendering, focusing the widget by using a label element requires additional implementation. For more information about how to do it, check this [Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
 
@@ -248,7 +253,7 @@ Because of its complex rendering, focusing the widget by using a label element r
 
 Other articles on Kendo UI MultiSelect:
 
-* [JavaScript API Reference](/api/javascript/ui/multiselect)
+* [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
 * [Grouping Functionality]({% slug grouping_kendoui_multiselect_widget %})
 * [Virtualization]({% slug virtualization_kendoui_multiselect_widget %})
 * [Troubleshooting]({% slug troubleshooting_common_issues_multiselect_kendoui %})
@@ -266,21 +271,21 @@ Other articles on Kendo UI MultiSelect:
 * [How to Select the First Item on TAB]({% slug howto_select_thefirst_itemon_tab_multiselect %})
 * [How to Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
 * [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/multiselect/overview)
-* [Overview of the JSP Tag](/jsp/tags/multiselect/overview)
-* [Overview of the PHP Class](/php/widgets/multiselect/overview)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the MultiSelect Widget](/aspnet-mvc/helpers/multiselect/overview)
+* [Overview of the MultiSelect JSP Tag](/jsp/tags/multiselect/overview)
+* [Overview of the MultiSelect PHP Class](/php/widgets/multiselect/overview)
 
 Articles on Kendo UI ComboBox:
 
-* [Overview]({% slug overview_kendoui_combobox_widget %})
+* [Overview of the ComboBox Widget]({% slug overview_kendoui_combobox_widget %})
 * [Grouping Functionality]({% slug grouping_kendoui_combobox_widget %})
 * [Virtualization]({% slug virtualization_kendoui_combobox_widget %})
 * [Cascading ComboBoxes]({% slug cascading_kendoui_combobox_widget %})
 * [Server Filtering]({% slug server_filtering_kendoui_combobox_widget %})
-* [JavaScript API Reference](/api/javascript/ui/combobox)
+* [ComboBox JavaScript API Reference](/api/javascript/ui/combobox)
 
 Articles on Kendo UI DropDownList:
 
-* [Overview]({% slug overview_kendoui_dropdownlist_widget %})
+* [Overview of the DropDownList Widget]({% slug overview_kendoui_dropdownlist_widget %})
 * [Cascading DropDownLists]({% slug cascading_kendoui_dropdownlist_widget %})
-* [JavaScript API Reference](/api/javascript/ui/dropdownlist)
+* [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)

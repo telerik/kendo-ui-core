@@ -47,7 +47,7 @@ The example below demonstrates how to limit the calendar navigation of the DateT
 
 Other articles on Kendo UI DateTimePicker:
 
-* [JavaScript API Reference](/api/javascript/ui/datetimepicker)
+* [DateTimePicker JavaScript API Reference](/api/javascript/ui/datetimepicker)
 * [How to Prevent Invalid Values]({% slug howto_prevent_invalid_values_datetimepicker %})
 * [How to Validate Custom Dates]({% slug howto_validate_custom_dates_datetimepicker %})
 * [How to Override Hours in the Popup]({% slug howto_override_hours_inpopup_datetimepicker %})

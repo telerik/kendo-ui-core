@@ -1,11 +1,11 @@
 ---
-title: Filter Using <code>include</code> Operator
+title: Filter Using include Operator
 page_title: Filter Using include Operator | Kendo UI PivotGrid Widget
 description: "Learn how to use the include operator to filter the data in a Kendo UI PivotGrid widget."
 slug: howto_use_include_operator_pivotgrid
 ---
 
-# Filter Using `include` Operator
+# Filter Using include Operator
 
 The example below demonstrates how to use the `include` operator to filter the data in a Kendo UI PivotGrid widget.
 

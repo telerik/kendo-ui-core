@@ -15,8 +15,8 @@ The example below demonstrates how to use the Kendo UI Multiselect widget with a
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <div id="game-container">
       GameList
-      <div id="game-list" 
-           data-role="listview" 
+      <div id="game-list"
+           data-role="listview"
            data-template="gameTemplate"
            data-bind="source: games">
       </div>
@@ -32,8 +32,8 @@ The example below demonstrates how to use the Kendo UI Multiselect widget with a
           </div>
           <div class="modal-body">
 
-            <div 
-                 id="people-multiselect" 
+            <div
+                 id="people-multiselect"
                  data-role="multiselect"
                  data-filter="startswith"
                  data-placeholder="Select People..."
@@ -106,7 +106,7 @@ The example below demonstrates how to use the Kendo UI Multiselect widget with a
 
 Other articles on Kendo UI MultiSelect:
 
-* [JavaScript API Reference](/api/javascript/ui/multiselect)
+* [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
 * [How to Bind Values to Template]({% slug howto_bind_values_totemplate_multiselect %})
 * [How to Cascade from DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %})
 * [How to Create Cascading MultiSelects]({% slug howto_create_cascading_widgets_multiselect %})

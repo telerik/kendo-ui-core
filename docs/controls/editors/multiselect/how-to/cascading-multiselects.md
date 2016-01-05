@@ -94,7 +94,7 @@ The example below demonstrates how to cascade multiple Kendo UI MultiSelect widg
 
 Other articles on Kendo UI MultiSelect:
 
-* [JavaScript API Reference](/api/javascript/ui/multiselect)
+* [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
 * [How to Bind Values to Template]({% slug howto_bind_values_totemplate_multiselect %})
 * [How to Cascade from DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %})
 * [How to Create Checkbox Custom Item Template]({% slug howto_checkbox_custom_item_template_multiselect %})

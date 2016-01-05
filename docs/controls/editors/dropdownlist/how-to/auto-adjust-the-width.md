@@ -116,7 +116,7 @@ The example below demonstrates how to automatically adjust the width of a DropDo
 
 Other articles on Kendo UI DropDownList:
 
-* [JavaScript API Reference](/api/javascript/ui/dropdownlist)
+* [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
 * [How to Cascade DropDownLists Using `ng-repeat`]({% slug howto_cascade_withngrepeat_distinct_values_dropdownlist %})
 * [How to Validate DropDownLists by Using Required Attributes]({% slug howto_validate_using_required_attributes_dropdownlist %})
 * [How to Cascade from Multiple Parents]({% slug howto_cascade_multiple_parents_dropdownlist %})

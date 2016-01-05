@@ -108,7 +108,7 @@ Other articles and how-to examples on Kendo UI Charts:
 * [How to Shorten Chart Labels]({% slug howto_shortenchartlabels_charts %})
 * [How to Show Message When Chart Has No Data]({% slug howto_showemptymessage_whencharthasnodata_charts %})
 * [How to Show Overlay While Loading]({% slug howto_showoverlaywhileloading_charts %})
-* [How to Show Tooltip on `seriesClick`]({% slug howto_showoverlaywhileloading_charts %})
+* [How to Show Tooltip on seriesClick]({% slug howto_showoverlaywhileloading_charts %})
 * [How to Show Total for Stacked Series]({% slug howto_showoverlaywhileloading_charts %})
 * [How to Sort Categories in Grouped Charts]({% slug howto_sortcategorisinagroupedchart_charts %})
 * [How to Use Fixed Bar Size]({% slug howto_usefixedbarsize_charts %})

@@ -11,7 +11,9 @@ The examples below demonstrate how to set the position of the caret inside a Ken
 
 The first sample uses a position index, while the second one searches for a string. The exact implementation in other scenarios will vary, depending on the business logic and used DOM/Range APIs.
 
-###### Example 1 - set caret position to a specified index
+The example below demonstrates how to set a caret position to a specified index.
+
+###### Example
 
 ```html
     <div id="example" style="margin: 2em;">
@@ -42,7 +44,9 @@ The first sample uses a position index, while the second one searches for a stri
     </script>
 ```
 
-###### Example 2 - set caret position to the start of a string
+The example below demonstrates how to set a caret position to the start of a string.
+
+###### Example
 
 ```html
     <div id="example" style="margin: 2em;">
@@ -57,7 +61,7 @@ The first sample uses a position index, while the second one searches for a stri
       $(document).ready(function() {
         $("#editor").kendoEditor();
 
-        
+
         function findNodeOfString(container, str) {
           var nodeIterator = document.createNodeIterator(
             container,
@@ -65,15 +69,15 @@ The first sample uses a position index, while the second one searches for a stri
             function(node) {
         			return node.nodeValue.indexOf(str) >= 0 ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
     				});
-          
+
           return nodeIterator.nextNode();
         }
 
         function moveCaret(editor, str) {
           var range = editor.getRange();
           if (range.collapsed) {
-            
-            
+
+
             var textNode = findNodeOfString(editor.body, str);
             if (textNode !== null) {
               var position = textNode.nodeValue.indexOf(str);
@@ -83,13 +87,13 @@ The first sample uses a position index, while the second one searches for a stri
             editor.selectRange(range);
           }
         }
-        
+
         $("#setPosition").click(function () {
           $("#editor").focus().trigger("click");
           var editor = $("#editor").data("kendoEditor");
           moveCaret(editor, $("#stringToFocus").val());
         });
-        
+
       });
     </script>
 ```
@@ -98,7 +102,7 @@ The first sample uses a position index, while the second one searches for a stri
 
 Other articles on Kendo UI Editor:
 
-* [JavaScript API Reference](/api/javascript/ui/editor)
+* [Editor JavaScript API Reference](/api/javascript/ui/editor)
 * [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
 * [How to Add Max-Length Validation]({% slug howto_add_max_length_validation_editor %})
 * [How to Get Reference to Child Widgets]({% slug howto_get_referenceto_child_widgets_editor %})

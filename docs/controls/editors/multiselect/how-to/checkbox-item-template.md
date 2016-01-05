@@ -42,7 +42,7 @@ The example below demonstrates how to create a Kendo UI MultiSelect widget with 
             .k-list .k-item {
                 position: relative;
             }  
-          
+
           .k-item input {
             position: absolute;
             right: 0
@@ -54,7 +54,7 @@ The example below demonstrates how to create a Kendo UI MultiSelect widget with 
                   elements.each(function() {
                         var element = $(this);     
                     var input = element.children("input");
-                    
+
                     input.prop("checked", element.hasClass("k-state-selected"));
                   });
                 };
@@ -82,7 +82,7 @@ The example below demonstrates how to create a Kendo UI MultiSelect widget with 
 
 Other articles on Kendo UI MultiSelect:
 
-* [JavaScript API Reference](/api/javascript/ui/multiselect)
+* [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
 * [How to Bind Values to Template]({% slug howto_bind_values_totemplate_multiselect %})
 * [How to Cascade from DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %})
 * [How to Create Cascading MultiSelects]({% slug howto_create_cascading_widgets_multiselect %})

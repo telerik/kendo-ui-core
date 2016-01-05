@@ -99,7 +99,7 @@ The example below demonstrates how to show a custom placeholder text on blur whe
 
 Other articles on Kendo UI MaskedTextBox:
 
-* [JavaScript API Reference](/api/javascript/ui/maskedtextbox)
+* [MaskedTextBox JavaScript API Reference](/api/javascript/ui/maskedtextbox)
 * [How to Customize Masks through MVVM Binding]({% slug howto_customize_masks_through_mvvmbinding_mvvm_maskedtextbox %})
 * [How to Use Custom Directive to Set Model Value]({% slug howto_use_raw_methodtoset_modelvalue_angularjs_maskedtextbox %})
 * [How to Use Custom MVVM Binding to Set Model Value]({% slug howto_use_custommvvm_bindingto_setmodel_value_maskedtextbox %})

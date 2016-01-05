@@ -40,7 +40,7 @@ $(function() {
         height: 350,
         visible: false
     });
-    
+
     $("#editor").kendoEditor();
 });
 // widget initialization code end
@@ -61,7 +61,7 @@ $(function() {
 
 Other articles on Kendo UI Editor:
 
-* [JavaScript API Reference](/api/javascript/ui/editor)
+* [Editor JavaScript API Reference](/api/javascript/ui/editor)
 * [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
 * [How to Add Max-Length Validation]({% slug howto_add_max_length_validation_editor %})
 * [How to Get Reference to Child Widgets]({% slug howto_get_referenceto_child_widgets_editor %})

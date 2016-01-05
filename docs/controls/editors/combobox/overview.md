@@ -27,7 +27,7 @@ The ComboBox looks and operates consistently regardless of the initialization ty
 >
 > * The widget copies any styles and CSS classes from the input element to the wrapper element and visible input.
 
-#### Initialize the ComboBox from an existing `<select>` element with defined data items
+#### Initialize the ComboBox from an existing <select> element with defined data items
 
     <select id="comboBox">
         <option>Item 1</option>
@@ -172,7 +172,7 @@ You can customize the width of a drop-down list and change its dimensions by usi
         combobox.list.width(400);
     </script>
 
-### `label` Element Support
+### Support for label Elements
 
 Because of its complex rendering, focusing the widget by using a `label` element requires additional implementation. For more information about how to do it, check [this Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
 
@@ -205,18 +205,18 @@ Other articles on Kendo UI ComboBox:
 * [How to Bypass Boundary Detection]({% slug howto_bypass_boudary_detection_combobox %})
 * [How to Disable Child Cascading ComboBoxes]({% slug howto_disable_child_cascading_combobox %})
 * [How to Expand Background of Long List Items]({% slug howto_expand_background_longlist_items_combobox %})
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/combobox/overview)
-* [Overview of the JSP Tag](/jsp/tags/combobox/overview)
-* [Overview of the PHP Class](/php/widgets/combobox/overview)
-* [JavaScript API Reference](/api/javascript/ui/combobox)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the ComboBox Widget](/aspnet-mvc/helpers/combobox/overview)
+* [Overview of the ComboBox JSP Tag](/jsp/tags/combobox/overview)
+* [Overview of the ComboBox PHP Class](/php/widgets/combobox/overview)
+* [ComboBox JavaScript API Reference](/api/javascript/ui/combobox)
 
 Articles on Kendo UI DropDownList:
 
-* [Overview]({% slug overview_kendoui_dropdownlist_widget %})
+* [Overview of the DropDown Widget]({% slug overview_kendoui_dropdownlist_widget %})
 * [Cascading DropDownLists]({% slug cascading_kendoui_dropdownlist_widget %})
-* [JavaScript API Reference](/api/javascript/ui/dropdownlist)
+* [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
 
 Articles on Kendo UI MultiSelect:
 
-* [Overview]({% slug overview_kendoui_multiselect_widget %})
-* [JavaScript API Reference](/api/javascript/ui/multiselect)
+* [Overview of the MultiSelect Widget]({% slug overview_kendoui_multiselect_widget %})
+* [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)

@@ -22,7 +22,7 @@ The example below demonstrates how to show a Kendo UI Tooltip only if the text o
 
       [role="tooltip"]{
         visibility: hidden;
-      } 
+      }
     </style>
     <div id="example">
       <table>
@@ -38,9 +38,9 @@ The example below demonstrates how to show a Kendo UI Tooltip only if the text o
       $("#example").kendoTooltip({
         filter: "td",
         show: function(e){
-          if(this.content.text() !=""){ 
+          if(this.content.text() !=""){
             $('[role="tooltip"]').css("visibility", "visible");
-          } 
+          }
         },
         hide: function(){
           $('[role="tooltip"]').css("visibility", "hidden");
@@ -61,6 +61,6 @@ The example below demonstrates how to show a Kendo UI Tooltip only if the text o
 
 Other articles on Kendo UI Tooltip:
 
-* [JavaScript API Reference](/api/javascript/ui/tooltip)
+* [Tooltip JavaScript API Reference](/api/javascript/ui/tooltip)
 * [How to Calculate Tooltip Content Width]({% slug howto_calculatetooltipcontentlength_tooltip %})
 * [How to Show Only If Text Exceeds Certain Length]({% slug howto_showonlyiftextexceedscertainlength_tooltip %})

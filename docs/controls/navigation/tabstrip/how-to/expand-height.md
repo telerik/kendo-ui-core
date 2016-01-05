@@ -91,7 +91,7 @@ The example below demonstrates how to make the TabStrip widget 100% high and res
 
 Other articles on Kendo UI TabStrip:
 
-* [JavaScript API Reference](/api/javascript/ui/tabstrip)
+* [TabStrip JavaScript API Reference](/api/javascript/ui/tabstrip)
 * [How to Display Buttons at the Bottom]({% slug howto_displaybuttonsatthebottom_tabstrip %})
 * [How to Initialize the Grid in Kendo UI TabStrip]({% slug initialize_thegrid_tabstrip_widget %})
 * [How to Scroll TabStrip with Keyboard]({% slug howto_scrolltabstripwithkeyboard_tabstrip %})

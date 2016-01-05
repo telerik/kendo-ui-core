@@ -8,7 +8,7 @@ position: 1
 
 # Upload Overview
 
-The [Kendo UI Upload widget](http://demos.telerik.com/kendo-ui/upload/index) uses progressive enhancement to deliver the best possible uploading experience to users, without requiring extra developer effort. 
+The [Kendo UI Upload widget](http://demos.telerik.com/kendo-ui/upload/index) uses progressive enhancement to deliver the best possible uploading experience to users, without requiring extra developer effort.
 
 ## Getting Started
 
@@ -80,12 +80,12 @@ The example below demonstrates how to access an existing Upload instance.
 
 Other articles on Kendo UI Upload:
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/upload/overview)
-* [Overview of the JSP Tag](/jsp/tags/upload/overview)
-* [Overview of the PHP Class](/php/widgets/upload/overview)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the Upload Widget](/aspnet-mvc/helpers/upload/overview)
+* [Overview of the Upload JSP Tag](/jsp/tags/upload/overview)
+* [Overview of the Upload PHP Class](/php/widgets/upload/overview)
 * [Drag and Drop]({% slug dragandrop_upload_widget %})
 * [Send and Receive Metadata]({% slug metadata_upload_widget %})
 * [Modes of Operation]({% slug modes_upload_widget %})
 * [Browser Support]({% slug browsersupport_upload_widget %})
 * [Troubleshooting]({% slug troubleshooting_upload_widget %})
-* [JavaScript API Reference](/api/javascript/ui/upload)
+* [Upload JavaScript API Reference](/api/javascript/ui/upload)

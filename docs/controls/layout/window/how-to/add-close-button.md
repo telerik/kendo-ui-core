@@ -1,11 +1,11 @@
 ---
-title: Add <strong>Close</strong> Button inside Modal Windows
+title: Add Close Button inside Modal Windows
 page_title: Add Close Button inside Modal Windows | Kendo UI Window Widget
 description: "Learn how to add a Close button to a modal Kendo UI Window."
 slug: howto_addclosebutton_insidemodalwindows_window
 ---
 
-# Add **Close** Button inside Modal Windows
+# Add Close Button inside Modal Windows
 
 The example below demonstrates how to add a **Close** button to a modal Kendo UI Window.
 
@@ -21,7 +21,7 @@ The example below demonstrates how to add a **Close** button to a modal Kendo UI
       <script>
         $(document).ready(function() {
           var wnd = $("#window");
-          
+
           $(".open-button").bind("click", function() {
             wnd.data("kendoWindow").open();
             $(this).hide();
@@ -51,7 +51,7 @@ The example below demonstrates how to add a **Close** button to a modal Kendo UI
 
 Articles and other how-to examples on Kendo UI Window:
 
-* [JavaScript API Reference](/api/javascript/ui/window)
+* [Window JavaScript API Reference](/api/javascript/ui/window)
 * [How to Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
 * [How to Cascade Open Windows]({% slug howto_cascadeopenwindows_window %})
 * [How to Create Confirmation Dialog via Promises]({% slug howto_createconfirmationdialog_viapromises_window %})

@@ -37,11 +37,11 @@ The example below demonstrates how to focus the Kendo UI NumericTextBox widget w
 </script>
 ```
 
-## See Also 
+## See Also
 
 Other articles on Kendo UI NumericTextBox:
 
-* [JavaScript API Reference](/api/javascript/ui/numerictextbox)
+* [NumericTextBox JavaScript API Reference](/api/javascript/ui/numerictextbox)
 * [How to Add Title Attribute]({% slug howto_add_title_attribute_numerictextbox %})
 * [How to Change Text Color]({% slug howto_change_text_color_numerictextbox %})
 * [How to Persist Old Value]({% slug howto_persist_old_value_numerictextbox %})

@@ -104,12 +104,12 @@ The example below demonstrates how to define a palette and apply it based on pro
     });
     </script>
 
-The *provnum_ne* field goes from 1 to 9 denoting each mainland state and territory. This project uses the [`shapeCreated`](/api/dataviz/map#events-shapeCreated) event to set the fill color of the newly created shape.
+The `provnum_ne` field goes from 1 to 9 denoting each mainland state and territory. This project uses the [`shapeCreated`](/api/dataviz/map#events-shapeCreated) event to set the fill color of the newly created shape.
 
 ## See Also
 
 Other articles on Kendo UI Map:
 
-* [Overview]({% slug overview_kendoui_mapwidget %})
+* [Overview of the Map Widget]({% slug overview_kendoui_mapwidget %})
 * [Map Layers]({% slug maplayers_mapwidget %})
 * [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)

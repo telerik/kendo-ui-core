@@ -1,13 +1,13 @@
 ---
-title: Make <strong>Include fields</strong> Window Modal
+title: Make Include fields Window Modal
 page_title: Make Include fields Window Modal | Kendo UI PivotGrid Widget
 description: "Learn how to make the Include fields filter window modal in a Kendo UI PivotGrid widget."
 slug: howto_make_include_fields_window_modal_pivotgrid
 ---
 
-# Make **Include fields** Window Modal
+# Make Include fields Window Modal
 
-The example below demonstrates how to make the "Include fields" filter window modal in a Kendo UI PivotGrid widget.
+The example below demonstrates how to make the **Include fields** filter window modal in a Kendo UI PivotGrid widget.
 
 ###### Example
 

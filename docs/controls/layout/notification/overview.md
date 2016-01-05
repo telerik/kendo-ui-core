@@ -295,10 +295,10 @@ For further reading on Kendo UI Notification settings, refer to [Kendo UI Notifi
 
 Other articles on Kendo UI Notification:
 
-* [JavaScript API Reference](/api/javascript/ui/notification)
+* [Notification JavaScript API Reference](/api/javascript/ui/notification)
 * [How to Move Popup Notifications on Window Resize]({% slug howto_move_popup_notifications_onwindow_resize_notification %})
 * [How to Move Visible Notifications after Hiding Others]({% slug howto_move_notifications_after_hiding_others %})
 * [How to Stack Static Notifications to the Left or Right]({% slug howto_stack_static_tothe_leftor_right_notification %})
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/notification/overview)
-* [Overview of the JSP Tag](/jsp/tags/notification/overview)
-* [Overview of the PHP Class](/php/widgets/notification/overview)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the Notification Widget](/aspnet-mvc/helpers/notification/overview)
+* [Overview of the Notification JSP Tag](/jsp/tags/notification/overview)
+* [Overview of the Notification PHP Class](/php/widgets/notification/overview)

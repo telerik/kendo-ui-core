@@ -62,9 +62,9 @@ The example below demonstrates how to bind to the `blur` event of the `filter` i
             $(document).ready(function() {
                 // create MultiSelect from select HTML element
                 var required = $("#required").kendoMultiSelect().data("kendoMultiSelect");
-              
+
                 //add the autocomplete="off" attribute
-              
+
                 required.input.bind("blur", function() {
                                 alert(1);
                 });
@@ -77,7 +77,7 @@ The example below demonstrates how to bind to the `blur` event of the `filter` i
 
 Other articles on Kendo UI MultiSelect:
 
-* [JavaScript API Reference](/api/javascript/ui/multiselect)
+* [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
 * [How to Bind Values to Template]({% slug howto_bind_values_totemplate_multiselect %})
 * [How to Cascade from DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %})
 * [How to Create Cascading MultiSelects]({% slug howto_create_cascading_widgets_multiselect %})

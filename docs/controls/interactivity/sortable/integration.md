@@ -18,16 +18,18 @@ Before going on reading, make sure you are familiar with the following topics:
 * [Overview of Kendo UI Grid]({% slug overview_kendoui_grid_widget %})
 * [Kendo UI DataSource API](/api/javascript/data/datasource#methods)
 
-## Reorder 
+## Reorder
 
 > **Important**  
+>
 > The Sortable widget reorders the HTML DOM elements. It does not automatically update the order of the items in the DataSource. This means that you should explicitly implement this behavior.
 
-### Grid Table Rows 
+### Grid Table Rows
 
 To reorder the table rows of the Grid, initialize the Sortable widget on the Grid's [`table` element](/api/javascript/ui/grid#fields-table). Normally, the `filter` property of the Sortable should select all `tr` elements that are direct children of the table's `tbody` element, e.g. `filter: ">tbody >tr"`.
 
 > **Important**  
+>
 > In an AngularJS application initialize the Sortable widget as a parent directive. The `filter` configuration option selects all `tr` elements that are children of the `.k-grid` wrapper. For detailed information, refer to [this example](http://docs.telerik.com/kendo-ui/web/sortable/how-to/angularjs-reorder-grid-rows).
 
 If the editing functionality of the Grid is enabled, use a more specific filter selector that excludes the item, which is currently in editing mode, e.g. `.filter(">tbody >tr:not(.k-grid-edit-row)")`. In this way the Sortable functionality will not interfere with the editing feature of the Grid.
@@ -36,13 +38,13 @@ If the Grid is configured to display details, use a selector that matches only t
 
 For additional information on the Sortable events, refer to [this article](/api/javascript/ui/sortable#events) and the [Grid/Sortable integration demo](http://demos.telerik.com/kendo-ui/web/sortable/integration-grid.html).
 
-### ListView Items 
+### ListView Items
 
 Sortable widget should be initialized on the ListView element. In the general case the `filter` property of the widget should select all elements that are direct children of the ListView's element. For example: `.filter(">div")`.
 
 If the editing functionality of the ListView is enabled, use a more specific filter selector that excludes the item, which is currently in editing mode, e.g. `.filter(">div:not(.k-edit-item)"`. In this way the Sortable functionality will not interfere with the editing feature of the ListView.
 
-The ListView `dataItems` can be reordered in [the same way as the Grid ones](#grid-table-rows). 
+The ListView `dataItems` can be reordered in [the same way as the Grid ones](#grid-table-rows).
 
 For additional information on the Sortable events, refer to [this article](/api/javascript/ui/sortable#events) and the [ListView/Sortable integration demo](http://demos.telerik.com/kendo-ui/web/sortable/integration-listview.html).
 
@@ -82,7 +84,7 @@ The example below demonstrates how to shift the position of the items in the Dat
     }
 
 The example below demonstrates how to send the `newIndex` and `oldIndex` to the server.    
-    
+
 ###### Example
 
     //the change event handler of the Sortable widget
@@ -109,7 +111,7 @@ The example below demonstrates how to send the `newIndex` and `oldIndex` to the 
 ## Customization
 
 ### Editing
-    
+
 In order for the draggable functionality of the Sortable widget to work, prevent the `mousedown` event. This keeps the `change` event of the editor input from firing, which in turn prevents the MVVM from saving the updated value.
 
 If you use the `inline` or `popup` editing mode, set a more specific filter which excludes the item that is currently in editing mode.
@@ -118,12 +120,13 @@ If you use the `inline` or `popup` editing mode, set a more specific filter whic
 
 Note that if you use the `batch` or `incell` editing modes, the above is not working. The solution to this issue is to apply [custom editors](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.editor) and configure them to [update when the `input` event fires](http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value#controlling-when-the-view-model-is-updated)&mdash;by deafult, the framework listens for the `change` event. To implement the solution, add the `data-value-update="input"` attribute to the editor inputs. The downside of this approach is that the input event does not work for old versions of the Internet Explorer.
 
-> **Important**  
+> **Important**
+>
 > The `data-value-update` approach works with regular inputs. However, you must configure the Kendo UI widgets manually as they do nto support the `data-value-update` attribute.
 
 ### Hint
 
-The `hint` element of the Sortable is appended to the `<body>` element. As a result, its width is different from the width of the Grid. 
+The `hint` element of the Sortable is appended to the `<body>` element. As a result, its width is different from the width of the Grid.
 
 The example below demonstrates how to style the `hint` element, so it looks like the `row` element that is currently dragged.
 
@@ -184,4 +187,4 @@ The Sortable widget uses the index of the DOM elements. When the Grid displays g
 Other articles on Kendo UI Sortable:
 
 * [Integration with TabStrip]({% slug integrationwith_tabstrip_sortable_widget %})
-* [JavaScript API Reference](/api/javascript/ui/sortable)
+* [Sortable JavaScript API Reference](/api/javascript/ui/sortable)

@@ -79,11 +79,11 @@ The example below demonstrates how to reorder Grid rows using the Kendo UI Sorta
     </style>
 ```
 
-## See Also 
+## See Also
 
 Other articles and how-to examples on Kendo UI Sortable:
 
-* [JavaScript API Reference](/api/javascript/ui/sortable)
+* [Sortable JavaScript API Reference](/api/javascript/ui/sortable)
 * [How to Nest Sortables]({% slug howto_nestsortables_sortable %})
 * [How to Persist Order in `localStorage`]({% slug howto_persistoderinlocalstorage_sortable %})
 * [How to Reorder AngularJS Grid Rows]({% slug howto_reorderangularjsgridrows_angular_sortable %})

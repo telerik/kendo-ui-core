@@ -10,7 +10,7 @@ position: 3
 
 Asynchronous uploading usually means that you lose the association between the files and the context they originate from. For example, in an application the save handler must associate the uploaded files with a particular message. The message and the file might even be processed on different servers in a load balancing or cloud computing scenario.
 
-## Send and Receive 
+## Send and Receive
 
 ### Send Metadata
 
@@ -44,13 +44,13 @@ To send metadata over to the the save handler, follow the steps below:
             upload: onUpload
         });
 
-**Step 4.** Process the file and the associated description. 
+**Step 4.** Process the file and the associated description.
 
-The description, and any other fields of the `e.data` object, are going to be serialized in the POST request. 
+The description, and any other fields of the `e.data` object, are going to be serialized in the POST request.
 
 For more information on how to read posted form fields, refer to the documentation of your server-side platform.
 
-### Receive Metadata 
+### Receive Metadata
 
 The save handler can sometimes produce a result that needs to be routed back to the page. The Upload requires a response in a JSON format with a `Content-Type` set to `"text/plain"`. Responses that are not empty and in a format ither than JSON are going to be treated as a server error.
 
@@ -97,7 +97,7 @@ To receive metadata from the save handler, follow the steps below:
 
 Other articles on Kendo UI Upload:
 
-* [Overview]({% slug overview_kendoui_upload_widget %})
+* [Overview of the Upload Widget]({% slug overview_kendoui_upload_widget %})
 * [Drag and Drop]({% slug dragandrop_upload_widget %})
 * [Modes of Operation]({% slug modes_upload_widget %})
 * [Browser Support]({% slug browsersupport_upload_widget %})

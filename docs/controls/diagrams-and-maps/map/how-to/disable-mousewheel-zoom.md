@@ -46,7 +46,7 @@ The example below demonstrates how to disable mousewheel zoom in a Kendo UI Map.
 
 Other articles on Kendo UI Map:
 
-* [JavaScript API Reference](/api/javascript/dataviz/ui/map)
+* [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
 * [How to Add Shape Titles]({% slug howto_addhspaetitles_map %})
 * [How to Customize Markers on Map]({% slug howto_customizemarkersonmap_map %})
 * [How to Display Shape Tooltips]({% slug howto_displayshapetooltip_map %})

@@ -62,10 +62,10 @@ Such behavior may be caused by various reasons. Follow the instructions below to
 
 Other articles on Kendo UI Scheduler:
 
-* [JavaScript API Reference](/api/javascript/ui/scheduler)
+* [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [Resources]({% slug resources_kendoui_scheduler_widget %})
 * [Timezones]({% slug timezones_kendoui_scheduler_widget %})
-* [Overview]({% slug overview_kendoui_scheduler_widget %})
+* [Overview of the Scheduler Widget]({% slug overview_kendoui_scheduler_widget %})
 
 Other articles on troubleshooting:
 

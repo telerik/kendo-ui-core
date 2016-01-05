@@ -66,7 +66,7 @@ Setting the `type` property on the `series` object to `"bar"` renders horizontal
 
 Other articles on Kendo UI Charts and chart types:
 
-* [Chart Overview]({% slug overview_kendoui_charts_widget %})
+* [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
 * [Data Series Charts]({% slug seriestypeofcharts_widget %})
 * [Area Charts]({% slug areacharts_widget %})
 * [Bubble Charts]({% slug bubblecharts_widget %})

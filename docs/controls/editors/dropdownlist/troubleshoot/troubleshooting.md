@@ -51,7 +51,7 @@ The example below demonstrates the solution to the above issue.
 
 Other articles on Kendo UI DropDownList:
 
-* [JavaScript API Reference](/api/javascript/ui/dropdownlist)
+* [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
 * [Grouping Functionality]({% slug grouping_kendoui_combobox_widget %})
 * [Virtualization]({% slug virtualization_kendoui_combobox_widget %})
 * [Cascading DropDownLists]({% slug cascading_kendoui_dropdownlist_widget %})
@@ -68,7 +68,7 @@ Other articles on Kendo UI DropDownList:
 * [How to Set DataSource Dynamically]({% slug howto_set_datasource_dynamically_dropdownlist %})
 * [How to Remove Items]({% slug howto_remove_items_dropdownlist %})
 * [How to Prevent Popup Closure on Scroll]({% slug howto_prevent_popup_closure_onscroll_dropdownlist %})
-* [Overview]({% slug overview_kendoui_dropdownlist_widget %})
+* [Overview of the DropDownList Widget]({% slug overview_kendoui_dropdownlist_widget %})
 
 Other articles on troubleshooting:
 

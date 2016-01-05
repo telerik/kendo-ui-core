@@ -55,5 +55,5 @@ The example below demonstrates how to use the Kendo UI Tooltip for the Kendo UI 
 
 Other articles and how-to examples on Kendo UI TreeMap:
 
-* [JavaScript API Reference](/api/javascript/dataviz/ui/treemap)
+* [TreeMap JavaScript API Reference](/api/javascript/dataviz/ui/treemap)
 * [How to Set Header Items Color]({% slug howto_setheaderitemscolor_treemap %})

@@ -162,7 +162,7 @@ The example below demonstrates how to handle date grouping with the `sum` aggreg
 
 ### Base Units
 
-#### Default configuration
+#### Default Configuration
 
 The default base unit is determined by the smallest duration between categories, as demonstrated below.
 
@@ -178,7 +178,7 @@ The default base unit is determined by the smallest duration between categories,
         // baseUnit is set to "days"
     }
 
-#### Manual configuration
+#### Manual Configuration
 
 The [`baseUnit`](/api/dataviz/chart#configuration-categoryAxis.baseUnit) can be specified manually. The valid options are:
 
@@ -193,7 +193,7 @@ The [`baseUnit`](/api/dataviz/chart#configuration-categoryAxis.baseUnit) can be 
 
 You can also choose to display every n-th base unit by setting the [`baseUnitStep`](/api/dataviz/chart#configuration-categoryAxis.baseUnitStep) option.
 
-#### Automatic fitting
+#### Automatic Fitting
 
 Setting the [`baseUnit`](/api/dataviz/chart#configuration-categoryAxis.baseUnit) to `fit`, constraints the total number of base units to [`maxDateGroups`](/api/dataviz/chart#configuration-categoryAxis.baseUnit). The `baseUnit` and `baseUnitStep` are chosen according to the [`autoBaseUnitSteps`](/api/dataviz/chart#configuration-categoryAxis.autoBaseUnitSteps).
 
@@ -241,7 +241,7 @@ The example below demonstrates how to fit the date series.
     });
     </script>
 
-#### Labels format
+#### Labels Format
 
 The date category axis supports specifying one format per base unit.
 
@@ -277,7 +277,7 @@ The following options are expressed in base units:
 
 ### Base Units
 
-#### Default configuration
+#### Default Configuration
 
 The default base unit is determined by the axis (or series) range, as demonstrated below.
 
@@ -295,7 +295,7 @@ The default base unit is determined by the axis (or series) range, as demonstrat
         // baseUnit is set to "days"
     }
 
-#### Manual configuration
+#### Manual Configuration
 
 The base unit can also be specified manually. The valid options are:
 
@@ -327,7 +327,7 @@ The [`labels.format` property](/api/dataviz/chart#xAxis.labels.format) takes pri
 
 Other articles on Kendo UI Charts:
 
-* [Chart Overview]({% slug overview_kendoui_charts_widget %})
+* [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
 * [Data Binding]({% slug databinding_charts_widget %})
 * [Tooltip]({% slug tooltip_charts_widget %})
 * [Chart Notes]({% slug chartnotes_charts_widget %})

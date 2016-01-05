@@ -260,7 +260,7 @@ Scatter series are bound to the fields specified as `xField` and `yField`, as de
 
 Other articles on Kendo UI Charts:
 
-* [Chart Overview]({% slug overview_kendoui_charts_widget %})
+* [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
 * [Date Series]({% slug dateseries_charts_widget %})
 * [Tooltip]({% slug tooltip_charts_widget %})
 * [Chart Notes]({% slug chartnotes_charts_widget %})

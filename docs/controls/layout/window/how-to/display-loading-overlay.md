@@ -19,9 +19,9 @@ The loading overlay must be displayed over the Window [widget `element`](/framew
         <p>Click on the Refresh button to remove the overlay.</p>
         <p>In real-world scenarios the loading overlay will be removed automatically when the new content is rendered
             (e.g. when loaded with Ajax).</p>
-        
+
         <div id="window"></div>
-        
+
         <script>
         // Window initialization code start
         // when Kendo UI using server wrappers, the initialization script will be generated automatically
@@ -37,11 +37,11 @@ The loading overlay must be displayed over the Window [widget `element`](/framew
             });
         });
         // initialization code end
-        
+
         // example code start
         $(function() {
             var windowWidget = $("#window").data("kendoWindow");
-            
+
             $("#showOverlay").click(function(){
                 kendo.ui.progress(windowWidget.element, true);
             });
@@ -54,7 +54,7 @@ The loading overlay must be displayed over the Window [widget `element`](/framew
 
 Articles and other how-to examples on Kendo UI Window:
 
-* [JavaScript API Reference](/api/javascript/ui/window)
+* [Window JavaScript API Reference](/api/javascript/ui/window)
 * [How to Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
 * [How to Add **Close** Button inside Modal Windows]({% slug howto_addclosebutton_insidemodalwindows_window %})
 * [How to Cascade Open Windows]({% slug howto_cascadeopenwindows_window %})

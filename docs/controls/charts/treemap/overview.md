@@ -12,7 +12,11 @@ The [Kendo UI TreeMap widget](http://demos.telerik.com/kendo-ui/treemap/index) d
 
 ## Getting Started
 
-### Initialize a TreeMap using a selector within $(document).ready()
+### Initialize TreeMap
+
+The example below demonstrates how to initialize the TreeMap widget by using a selector within `$(document).ready()`.
+
+###### Example
 
     $(document).ready(function() {
         $("#treeMap").kendoTreeMap();
@@ -63,7 +67,7 @@ You can refer an existing TreeMap widget via [jQuery.data()](http://api.jquery.c
 
 Other articles on Kendo UI Charts and chart types:
 
-* [Chart Overview]({% slug overview_kendoui_charts_widget %})
+* [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
 * [Data Series Charts]({% slug seriestypeofcharts_widget %})
 * [Area Charts]({% slug areacharts_widget %})
 * [Bar Charts]({% slug bartypeofcharts_widget %})

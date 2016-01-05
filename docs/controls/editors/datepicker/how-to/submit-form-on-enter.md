@@ -1,11 +1,11 @@
 ---
-title: Submit Forms on ENTER
-page_title: Submit Forms on ENTER | Kendo UI DatePicker Widget
+title: Submit Forms on Enter
+page_title: Submit Forms on Enter | Kendo UI DatePicker Widget
 description: "Learn how to submit a form in the Kendo UI datePicker widget when users press `Enter`."
 slug: howto_submmit_forms_onenter_datepicker
 ---
 
-# Submit Forms on ENTER
+# Submit Forms on Enter
 
 The example below demonstrates how to submit a form when the `Enter` key is pressed by the user.
 
@@ -35,7 +35,7 @@ The example below demonstrates how to submit a form when the `Enter` key is pres
 
 Other articles on Kendo UI DatePicker:
 
-* [JavaScript API Reference](/api/javascript/ui/datepicker)
+* [DatePicker JavaScript API Reference](/api/javascript/ui/datepicker)
 * [How to Create Date Masking]({% slug howto_create_date_masking_datepicker %})
 * [How to Select Ranges between DatePickers]({% slug howto_select_ranges_between_datepicker %})
 * [How to Set the First Weekday]({% slug howto_set_first_weekday_datepicker %})

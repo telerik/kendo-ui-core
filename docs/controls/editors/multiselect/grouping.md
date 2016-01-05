@@ -14,7 +14,7 @@ The grouping functionality described in the related help article for [Kendo UI C
 
 Other articles on Kendo UI MultiSelect:
 
-* [Overview]({% slug overview_kendoui_multiselect_widget %})
-* [JavaScript API Reference](/api/javascript/ui/multiselect)
+* [Overview of the MultiSelect Widget]({% slug overview_kendoui_multiselect_widget %})
+* [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
 * [Virtualization]({% slug virtualization_kendoui_multiselect_widget %})
 * [Troubleshooting]({% slug troubleshooting_common_issues_multiselect_kendoui %})

@@ -16,7 +16,7 @@ The [Kendo UI Gantt widget](http://demos.telerik.com/kendo-ui/gantt/index) displ
 
 The Kendo UI Gantt widget needs two special types of Kendo UI DataSource components – the [`kendo.data.GanttDataSource`](/api/framework/ganttdatasource) for loading tasks, and [`kendo.data.GanttDependencyDataSource`](/api/framework/ganttdependencydatasource) for loading dependencies, although the widget can work when only tasks are loaded as well. The `GanttDataSource` contains instances of a custom Kendo UI model – [`kendo.data.GanttTask`](/api/framework/gantttask), which represents the Gantt task data items - and the `GanttDependencyDataSource` contains instances of the custom [`kendo.data.GanttDependency`](/api/framework/ganttdependency) model, which represents the Gantt dependency data items.
 
-### Bind to Local Arrays
+### Bind to Local Data
 
 The easiest way to bind the Gantt is to provide the tasks and dependencies as an array of JavaScript objects.
 
@@ -57,11 +57,12 @@ The example below demonstrates how to bind the widget to an array of JavaScript 
 
 This example initializes a Gantt widget with two tasks and one dependency between them. You can switch the views, edit the tasks, create and delete new tasks and dependencies. Any changes, however, are kept in-memory and are lost once the user refreshes the page. That is why it is better to bind the Gantt to a remote service, which persists the Gantt tasks and dependencies.
 
-### Bind to Remote Data
+### Bind to Remote Service
 
 In most cases the Kendo UI Gantt widget would be bound to a remote service which will return, create, update or delete Gantt tasks and dependencies. The Kendo UI [online demos](http://demos.telerik.com/kendo-ui/web/gantt/) use a demo remote service, which returns sample Gantt tasks and dependencies. That service uses [JSONP](http://en.wikipedia.org/wiki/JSONP) in order to support cross-domain requests.
 
-> **Important**  
+> **Important**
+>
 > The demo service uses JSONP so it can be accessible across domains. If your own service lives in the same domain as the website, you do not need to use JSONP. Use JSON instead. More information about cross-domain requests can be found [here](/howto/use-cors-with-all-modern-browsers).
 
 The example below demonstrates how to bind the widget to a remote service.
@@ -160,7 +161,7 @@ It is important to note how the fields of the scheduler event in the `schema.mod
 
 ## Configuration
 
-### `kendo.data.GanttTask` Fields
+### Fields: kendo.data.GanttTask
 
 The `kendo.data.GanttTask` object has the following fields:
 
@@ -221,10 +222,11 @@ If your remote service stores and returns the gantt tasks in a different format 
             }
         }
 
-> **Important**  
+> **Important**
+>
 > List all `kendo.data.GanttTask` fields when using the `schema.model.fields`. Set the fields which represent the `id` of the event via the `schema.model.id`.
 
-### `kendo.data.GanttDependency` Fields
+### Fields: kendo.data.GanttDependency
 
 The `kendo.data.GanttDependency` object has the following fields:
 
@@ -261,6 +263,7 @@ If your remote service stores and returns the Gantt dependencies in a different 
         }
 
 > **Important**  
+>
 > List all `kendo.data.GanttDependency` fields when using the `schema.model.fields`. Set the fields which represent the `id` of the event via the `schema.model.id`.
 
 ### Columns
@@ -469,9 +472,9 @@ The example below demonstrates how to subscribe to a Gantt event using the `bind
 
 Other articles on Kendo UI Gantt:
 
-* [JavaScript API Reference](/api/javascript/ui/gantt)
+* [Gantt JavaScript API Reference](/api/javascript/ui/gantt)
 * [How to Create Custom Views]({% slug howto_create_custom_views_gantt %})
 * [How to Colorize Tasks]({% slug howto_colorize_tasks_gantt %})
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/gantt/overview)
-* [Overview of the JSP Tag](/jsp/tags/gantt/overview)
-* [Overview of the PHP Class](/php/widgets/gantt/overview)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the Gantt Widget](/aspnet-mvc/helpers/gantt/overview)
+* [Overview of the Gantt JSP Tag](/jsp/tags/gantt/overview)
+* [Overview of the Gantt PHP Class](/php/widgets/gantt/overview)

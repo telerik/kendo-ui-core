@@ -124,6 +124,6 @@ The example below demonstrates how to develop and register custom ToolBar tools,
 
 Other articles on Kendo UI ToolBar:
 
-* [JavaScript API Reference](/api/javascript/ui/toolbar)
+* [ToolBar JavaScript API Reference](/api/javascript/ui/toolbar)
 * [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_toolbar %})
 * [How to Close ToolBar Popup Manually]({% slug howto_closetoolbarpopupmanually_toolbar %})

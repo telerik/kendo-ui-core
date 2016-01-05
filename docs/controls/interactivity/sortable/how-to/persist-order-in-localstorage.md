@@ -7,7 +7,7 @@ slug: howto_persistoderinlocalstorage_sortable
 
 # Persist Order in `localStorage`
 
-The example below demonstrates how to save the order of items in `localStorage` and restore it on page `load` in Kendo UI Sortable. 
+The example below demonstrates how to save the order of items in `localStorage` and restore it on page `load` in Kendo UI Sortable.
 
 ###### Example
 
@@ -74,11 +74,11 @@ The example below demonstrates how to save the order of items in `localStorage` 
     </style>
 ```
 
-## See Also 
+## See Also
 
 Other articles and how-to examples on Kendo UI Sortable:
 
-* [JavaScript API Reference](/api/javascript/ui/sortable)
+* [Sortable JavaScript API Reference](/api/javascript/ui/sortable)
 * [How to Nest Sortables]({% slug howto_nestsortables_sortable %})
 * [How to Reorder AngularJS Grid Rows]({% slug howto_reorderangularjsgridrows_angular_sortable %})
 * [How to Reorder Grid Rows]({% slug howto_reordergridrows_sortable %})

@@ -58,4 +58,4 @@ The example below demonstrates how to control the header format of Kendo UI Cale
 
 Other articles on Kendo UI Calendar:
 
-* [JavaScript API Reference](/api/javascript/ui/calendar)
+* [Calendar JavaScript API Reference](/api/javascript/ui/calendar)

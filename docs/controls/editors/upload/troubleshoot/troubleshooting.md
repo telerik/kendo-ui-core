@@ -11,9 +11,9 @@ position: 1
 
 ## Layout Related
 
-### **Select** Button Is Partially Visible and Has No Text
+### The Select Button Is Partially Visible and Has No Text
 
-Kendo UI Upload uses an opacity filter to overlay the default file input's **Select** button. This filter is implemented as an ActiveX control in Internet Explorer 8 versions and older. As such, it is subject to security settings and can be disabled. Below is the sample image of an affected component:
+The [Kendo UI Upload widget](http://demos.telerik.com/kendo-ui/upload/index) uses an opacity filter to overlay the default file input's **Select** button. This filter is implemented as an ActiveX control in Internet Explorer 8 versions and older. As such, it is subject to security settings and can be disabled. Below is the sample image of an affected component:
 
 ![](/controls/editors/upload/upload-activex.png)
 
@@ -61,7 +61,7 @@ When a server error occurs, the complete server response is logged in the consol
 
 Other articles on Kendo UI Upload:
 
-* [Overview]({% slug overview_kendoui_upload_widget %})
+* [Overview of the Upload Widget]({% slug overview_kendoui_upload_widget %})
 * [Drag and Drop]({% slug dragandrop_upload_widget %})
 * [Send and Receive Metadata]({% slug metadata_upload_widget %})
 * [Modes of Operation]({% slug modes_upload_widget %})

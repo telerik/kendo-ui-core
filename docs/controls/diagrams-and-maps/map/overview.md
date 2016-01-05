@@ -64,7 +64,7 @@ Other articles and how-to examples on Kendo UI Map:
 
 * [Map Layers]({% slug maplayers_mapwidget %})
 * [Map Authoring]({% slug mapauthoring_mapwidget %})
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/map/overview)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the Map Widget](/aspnet-mvc/helpers/map/overview)
 * [How to Add Shape Titles]({% slug howto_addhspaetitles_map %})
 * [How to Customize Markers on Map]({% slug howto_customizemarkersonmap_map %})
 * [How to Disable Mousewheel Zoom]({% slug howto_disablemousezoom_map %})

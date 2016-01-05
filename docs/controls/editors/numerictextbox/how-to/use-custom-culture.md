@@ -40,11 +40,11 @@ The example below demonstrates how to extend an existing culture script, create 
 </div>
 ```
 
-## See Also 
+## See Also
 
 Other articles on Kendo UI NumericTextBox:
 
-* [JavaScript API Reference](/api/javascript/ui/numerictextbox)
+* [NumericTextBox JavaScript API Reference](/api/javascript/ui/numerictextbox)
 * [How to Add Title Attribute]({% slug howto_add_title_attribute_numerictextbox %})
 * [How to Change Text Color]({% slug howto_change_text_color_numerictextbox %})
 * [How to Focus Widget on Label Click]({% slug howto_focus_widgeton_label_click_numerictextbox %})

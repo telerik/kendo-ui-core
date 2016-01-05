@@ -7,17 +7,17 @@ slug: initialize_thegrid_panelbar_widget
 
 # Initialize the Grid
 
-The example below demonstrates how to use the `activate` event when initializing the Grid within the PanelBar so as it is resized according to the dimensions of its container. 
+The example below demonstrates how to use the `activate` event when initializing the Grid within the PanelBar so as it is resized according to the dimensions of its container.
 
 > **Important**  
-> In addition to the Kendo UI PanelBar, this example can be applied to the TabStrip and Window widgets, which, too, act as hidden containers for the Grid. 
+> In addition to the Kendo UI PanelBar, this example can be applied to the TabStrip and Window widgets, which, too, act as hidden containers for the Grid.
 
 ###### Example
 
 ```html
     <body>
       <button id="openBtn">Open</button>
-      
+
       <ul id="panelbar">
         <li id="item1">Item 1
           <div id="grid"></div>
@@ -30,7 +30,7 @@ The example below demonstrates how to use the `activate` event when initializing
           </ul>
         </li>
       </ul>
-      
+
       <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
       <script>
         var panelbar = $("#panelbar").kendoPanelBar().data("kendoPanelBar");
@@ -66,6 +66,6 @@ The example below demonstrates how to use the `activate` event when initializing
 
 Other articles on Kendo UI PanelBar:
 
-* [JavaScript API Reference](/api/javascript/ui/panelbar)
+* [PanelBar JavaScript API Reference](/api/javascript/ui/panelbar)
 * [Initialize the Grid inside a Hidden Container]({% slug appearance_kendoui_grid_widget %}#hidden-containers)
-* [API Reference for Configuring PanelBar Animations](/api/javascript/ui/panelbar#configuration-animation)
+* [JavaScript API Reference: Configure PanelBar Animations](/api/javascript/ui/panelbar#configuration-animation)

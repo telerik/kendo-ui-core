@@ -20,9 +20,12 @@ The Kendo UI Menu widget can be initialized in two ways:
 * Through a JSON data object
 
 > **Important**  
+>
 > As Menu should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
 
-#### Initialize Menu using HTML markup
+#### Using HTML Markup
+
+The example below demonstrates how to initialize the Menu by using HTML markup.
 
 ###### Example
 
@@ -48,7 +51,9 @@ The Kendo UI Menu widget can be initialized in two ways:
         });
     </script>
 
-#### Initialize Menu using JSON data object
+#### Using JSON Data Object
+
+The example below demonstrates how to initialize the Menu by using a JSON data object
 
 ###### Example
 
@@ -230,6 +235,7 @@ In left-to-right layouts, shrinking the horizontal Menu will make the border of 
        border-width: 0;
     }
 
+<!--*-->
 ## Keyboard Navigation
 
 The Menu provides a keyboard navigation functionality. When on focus, the first root item is activated.
@@ -247,13 +253,13 @@ Kendo UI Menu supports the following keyboard shortcuts and user actions:
 
 ## See Also
 
-Other articles on Kendo UI Menu and how-to examples:
+Other articles and how-to examples on Kendo UI Menu:
 
 * [Context Menu]({% slug overview_kendoui_contextmenu_widget %})
 * [How to Create Split Button]({% slug howto_createa_split_button_menu %})
 * [How to Execute Custom Click Actions Based on Class Name]({% slug howto_execute_custom_click_actions_basedon_classnames_menu %})
 * [How to Use FontAwesome Icons]({% slug howto_use_fontawesome_icons_menu %})
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/menu/overview)
-* [Overview of the JSP Tag](/jsp/tags/menu/overview)
-* [Overview of the PHP Class](/php/widgets/menu/overview)
-* [JavaScript API Reference](/api/javascript/ui/menu)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the Menu Widget](/aspnet-mvc/helpers/menu/overview)
+* [Overview of the Menu JSP Tag](/jsp/tags/menu/overview)
+* [Overview of the Menu PHP Class](/php/widgets/menu/overview)
+* [Menu JavaScript API Reference](/api/javascript/ui/menu)

@@ -1,11 +1,11 @@
 ---
-title: Create Custom <code>month</code> View with Event Count in <strong>Show More</strong> Button
+title: Create Custom month View with Event Count in Show More Button
 page_title: Create Custom month View with Event Count in Show More Button | Kendo UI Scheduler Widget
 description: "Learn how to inherit some of the built-in views and implement specific custom logic in a Kendo UI Scheduler widget."
 slug: howto_create_custom_monthview_eventcount_showmore_button_scheduler
 ---
 
-# Create Custom `month` View with Event Count in **Show More** Button
+# Create Custom month View with Event Count in Show More Button
 
 The example below demonstrates how to inherit the built-in `month` view and implement showing the hidden events count when the **Show More** button is rendered.
 
@@ -16,18 +16,18 @@ The example below demonstrates how to inherit the built-in `month` view and impl
     <script>
         var MORE_BUTTON_TEMPLATE = kendo.template(
             '<div style="width:#=width#px;left:#=left#px;top:#=top#px" class="k-more-events k-button"><span style="font-size:8pt; margin-top: 0;"> #=getEventCountForRange(startSlot, endSlot, rowsCount)# more events..</span></div>');
-    
-    
+
+
         function getEventCountForRange(startSlot, endSlot, rowsCount) {
             var scheduler = $(startSlot.element).closest("[data-role=scheduler]").getKendoScheduler();
-    
+
             var currentTimezoneOffset = kendo.date.MS_PER_MINUTE * new Date().getTimezoneOffset();
             var rangeStart = new Date(startSlot.start + currentTimezoneOffset);
             var rangeEnd = new Date(endSlot.end + currentTimezoneOffset);
-    
+
             return scheduler.occurrencesInRange(rangeStart, rangeEnd).length - rowsCount + 1;
         }
-    
+
         var CustomMonthView = kendo.ui.MonthView.extend({
             options: {
                 name: "CustomMonthView",
@@ -37,45 +37,45 @@ The example below demonstrates how to inherit the built-in `month` view and impl
             _positionEvent: function(slotRange, element, group) {
                 var eventHeight = this.options.eventHeight;
                 var startSlot = slotRange.start;
-    
+
                 if (slotRange.start.offsetLeft > slotRange.end.offsetLeft) {
                     startSlot = slotRange.end;
                 }
-    
+
                 var startIndex = slotRange.start.index;
                 var endIndex = slotRange.end.index;
                 var eventCount = startSlot.eventCount;
                 var events = kendo.ui.SchedulerView.collidingEvents(slotRange.events(), startIndex, endIndex);
                 var rightOffset = startIndex !== endIndex ? 5 : 4;
-    
+
                 events.push({
                     element: element,
                     start: startIndex,
                     end: endIndex
                 });
-    
+
                 var rows = kendo.ui.SchedulerView.createRows(events);
-    
+
                 for (var idx = 0, length = Math.min(rows.length, eventCount); idx < length; idx++) {
                     var rowEvents = rows[idx].events;
                     var eventTop = startSlot.offsetTop + startSlot.firstChildHeight + idx * eventHeight + 3 * idx + "px";
-    
+
                     for (var j = 0, eventLength = rowEvents.length; j < eventLength; j++) {
                         rowEvents[j].element[0].style.top = eventTop;
                     }
                 }
-    
-    
+
+
                 if (rows.length > eventCount) {
                     for (var slotIndex = startIndex; slotIndex <= endIndex; slotIndex++) {
                         var collection = slotRange.collection;
-    
+
                         var slot = collection.at(slotIndex);
-    
+
                         if (slot.more) {
                             return;
                         }
-    
+
                         slot.more = $(MORE_BUTTON_TEMPLATE({
                             startSlot: slotRange.start,
                             endSlot: slotRange.end,
@@ -87,11 +87,11 @@ The example below demonstrates how to inherit the built-in `month` view and impl
                             left: slot.offsetLeft + 2,
                             top: slot.offsetTop + slot.firstChildHeight + eventCount * eventHeight + 3 * eventCount
                         }));
-    
-    
+
+
                         this.content[0].appendChild(slot.more[0]);
                     }
-    
+
                 } else {
                     slotRange.addEvent({
                         element: element,
@@ -99,23 +99,23 @@ The example below demonstrates how to inherit the built-in `month` view and impl
                         end: endIndex,
                         groupIndex: startSlot.groupIndex
                     });
-    
+
                     element[0].style.width = slotRange.innerWidth() - rightOffset + "px";
                     element[0].style.left = startSlot.offsetLeft + 2 + "px";
                     element[0].style.height = eventHeight + "px";
-    
+
                     group._continuousEvents.push({
                         element: element,
                         uid: element.attr(kendo.attr("uid")),
                         start: slotRange.start,
                         end: slotRange.end
                     });
-    
+
                     element.appendTo(this.content);
                 }
             },
         });
-    
+
         $(function() {
             var scheduler = $("#scheduler").kendoScheduler({
                 date: new Date("2013/6/13"),
@@ -237,7 +237,7 @@ The example below demonstrates how to inherit the built-in `month` view and impl
                     }]
                 }]
             }).data("kendoScheduler");
-    
+
             $("#days").change(function() {
                 //change the number of days option of the view
                 scheduler.setOptions({
@@ -250,37 +250,37 @@ The example below demonstrates how to inherit the built-in `month` view and impl
     </script>
 ```
 
-## See Also 
+## See Also
 
 Other articles and how-to examples on Kendo UI Scheduler:
 
-* [JavaScript API Reference](/api/javascript/ui/scheduler)
+* [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [How to Add Controls to Custom Editor]({% slug howto_add_controlsto_custom_event_editor_scheduler %})
-* [How to Add Events Programatically]({% slug howto_add_events_programatically_scheduler %})
+* [How to Add Events Programmatically]({% slug howto_add_events_programatically_scheduler %})
 * [How to Calculate Scheduler Height Dynamically]({% slug howto_calculate_scheduler_height_dunamically_scheduler %})
 * [How to Calculate Scheduler Height Dynamically on Mobile]({% slug howto_calculate_scheduler_height_dunamically_onmobile_scheduler %})
-* [How to Clone Events on `Ctrl`+`move`]({% slug howto_clone_eventson_ctrlplus_move_scheduler %})
+* [How to Clone Events on Ctrl + move]({% slug howto_clone_eventson_ctrlplus_move_scheduler %})
 * [How to Create Custom Views Inheriting Built-In Views]({% slug howto_create_custom_view_inheriting_builtinview_scheduler %})
 * [How to Create Custom Restrictions]({% slug howto_create_custom_restrivtions_scheduler %})
 * [How to Customize Edit and Events Templates]({% slug howto_customize_editand_event_templates_scheduler %})
 * [How to Create External Editor Form]({% slug howto_create_external_editor_form_scheduler %})
-* [How to Edit Records on `touchend`]({% slug howto_edit_records_using_touchendonmobile_scheduler %})
+* [How to Edit Records on touchend]({% slug howto_edit_records_using_touchendonmobile_scheduler %})
 * [How to Edit Using ContextMenu]({% slug howto_edit_using_kendouicontextmenu_scheduler %})
 * [How to Expand Scheduler to 100% Width and Height]({% slug howto_expand_scheduler_to100percent_widthandheight_scheduler %})
 * [How to Filter Events by Resource Using MultiSelect]({% slug howto_filter_eventsby_resourceusing_multiselect_scheduler %})
-* [How to Get `next` Occurance]({% slug howto_getthe_next_occurance_scheduler %})
+* [How to Get next Occurrence]({% slug howto_getthe_next_occurance_scheduler %})
 * [How to Get Reference to the Built-In Validator]({% slug howto_get_referencetothe_builtin_validator_scheduler %})
 * [How to Hide Edit Buttons]({% slug howto_hidethe_editbutons_scheduler %})
-* [How to Implement Custom Editing in `agenda` View]({% slug howto_implement_custom_editing_inagenda_view_scheduler %})
+* [How to Implement Custom Editing in agenda View]({% slug howto_implement_custom_editing_inagenda_view_scheduler %})
 * [How to Nest Editors inside Event Templates]({% slug howto_nest_editorsinside_event_templates_scheduler %})
 * [How to Use Custom Event Template with Specific Background Color]({% slug howto_use_custom_event_templatewith_specific_background_color_scheduler %})
 
 How-to examples on Kendo UI Scheduler in AngularJS:
 
-* [How to Create and Set `ObservableArray` Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
+* [How to Create and Set ObservableArray Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
 * [How to Edit Using ContextMenu]({% slug howto_edit_using_contectmenu_angularjs_scheduler %})
 * [How to Set Initial Data Manually]({% slug howto_set_intial_data_manually_angularjs_scheduler %})
-* [How to Show Тooltip on `hover`]({% slug howto_show_tooltipon_hover_angularjs_scheduler %})
+* [How to Show Тooltip on hover]({% slug howto_show_tooltipon_hover_angularjs_scheduler %})
 * [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
 
-For additional runnable examples on Kendo UI Scheduler, browse the [Scheduler **How To** documentation folder](http://docs.telerik.com/kendo-ui/web/scheduler/how-to).
+For additional runnable examples on Kendo UI Scheduler, browse the [Scheduler **How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).

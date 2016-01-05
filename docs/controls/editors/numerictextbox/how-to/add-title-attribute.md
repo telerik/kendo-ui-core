@@ -24,11 +24,11 @@ The example below demonstrates how to add a title attribute to the input element
 </script>
 ```
 
-## See Also 
+## See Also
 
 Other articles on Kendo UI NumericTextBox:
 
-* [JavaScript API Reference](/api/javascript/ui/numerictextbox)
+* [NumericTextBox JavaScript API Reference](/api/javascript/ui/numerictextbox)
 * [How to Change Text Color]({% slug howto_change_text_color_numerictextbox %})
 * [How to Focus Widget on Label Click]({% slug howto_focus_widgeton_label_click_numerictextbox %})
 * [How to Persist Old Value]({% slug howto_persist_old_value_numerictextbox %})

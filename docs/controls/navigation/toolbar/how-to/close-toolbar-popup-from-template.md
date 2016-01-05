@@ -37,6 +37,6 @@ The example below demonstrates how to close the Kendo UI ToolBar popup from a bu
 
 Other articles on Kendo UI ToolBar:
 
-* [JavaScript API Reference](/api/javascript/ui/toolbar)
+* [ToolBar JavaScript API Reference](/api/javascript/ui/toolbar)
 * [How to Develop and Register Custom ToolBar Tools]({% slug howto_customtool_toolbar %})
 * [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_toolbar %})

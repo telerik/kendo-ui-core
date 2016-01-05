@@ -55,8 +55,8 @@ The example below demonstrates how to add a Splitter that resizes automatically 
 
 Articles and other how-to examples on Kendo UI Window:
 
-* [JavaScript API Reference](/api/javascript/ui/window)
-* [How to Add **Close** Button inside Modal Windows]({% slug howto_addclosebutton_insidemodalwindows_window %})
+* [Window JavaScript API Reference](/api/javascript/ui/window)
+* [How to Add Close Button inside Modal Windows]({% slug howto_addclosebutton_insidemodalwindows_window %})
 * [How to Cascade Open Windows]({% slug howto_cascadeopenwindows_window %})
 * [How to Create Confirmation Dialog via Promises]({% slug howto_createconfirmationdialog_viapromises_window %})
 * [How to Display Loading Indicator over Window]({% slug howto_displayloadingindicator_overwindow_window %})

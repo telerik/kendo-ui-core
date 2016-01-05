@@ -67,7 +67,7 @@ How-to examples on Kendo UI TreeView in AngularJS:
 
 Articles and other how-to examples on Kendo UI TreeView:
 
-* [JavaScript API Reference](/api/javascript/ui/treeview)
+* [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
 * [How to Check Nodes Programatically]({% slug howto_checknodeprogramatically_treeview %})
 * [How to Combine Local Data with Remote Loading]({% slug howto_combinelocaldatawithremoteloading_treeview %})
 * [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})

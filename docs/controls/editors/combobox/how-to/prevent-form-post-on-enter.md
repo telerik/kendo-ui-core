@@ -1,13 +1,13 @@
 ---
-title: Prevent POST on ENTER Key Press
-page_title: Prevent POST on ENTER Key Press | Kendo UI ComboBox Widget
+title: Prevent POST on Enter Key Press
+page_title: Prevent POST on Enter Key Press | Kendo UI ComboBox Widget
 description: "Learn how to prevent POST on pressing the `Enter` key in the Kendo UI ComboBox widget."
 slug: howto_prevent_post_onpressing_enter_combobox
 ---
 
-# Prevent POST on ENTER Key Press
+# Prevent POST on Enter Key Press
 
-The example below demonstrates how to prevent POST on ENTER key press.
+The example below demonstrates how to prevent POST on `Enter` key press.
 
 ###### Example
 
@@ -55,7 +55,7 @@ The example below demonstrates how to prevent POST on ENTER key press.
 
           function preventPost(e) {
             if (e.keyCode === 13) {
-              e.preventDefault(); 
+              e.preventDefault();
             }
           }
 
@@ -70,9 +70,9 @@ The example below demonstrates how to prevent POST on ENTER key press.
 
 Other articles on Kendo UI ComboBox:
 
-* [JavaScript API Reference](/api/javascript/ui/combobox)
+* [ComboBox JavaScript API Reference](/api/javascript/ui/combobox)
 * [How to Add Option Label Manually]({% slug howto_add_option_label_manually_combobox %})
-* [How to Open ComboBox When `onfocus` is Triggered]({% slug howto_open_onfocus_combobox %})
+* [How to Open ComboBox When onfocus is Triggered]({% slug howto_open_onfocus_combobox %})
 * [How to Search for Items by Dragging to Input]({% slug howto_search_items_dragging_toinput_combobox %})
 * [How to Blur the ComboBox after Select]({% slug howto_blur_after_select_combobox %})
 * [How to Bypass Boundary Detection]({% slug howto_bypass_boudary_detection_combobox %})
@@ -85,5 +85,5 @@ Other articles on Kendo UI ComboBox:
 * [How to Expand ComboBox Located in Bootstrap Layout]({% slug howto_expand_widget_bootstrap_widget_combobox %})
 * [How to Prevent Adding Custom Values]({% slug howto_prevent_adding_custom_values_combobox %})
 * [How to Make Visible Input Readonly]({% slug howto_make_visible_inputs_readonly_combobox %})
-* [How to Select Items on TAB]({% slug howto_select_items_ontab_combobox %})
+* [How to Select Items on Tab]({% slug howto_select_items_ontab_combobox %})
 * [How to Underline Matched Search]({% slug howto_underline_matched_search_combobox %})

@@ -7,7 +7,7 @@ slug: howto_get_referenceto_child_widgets_editor
 
 # Get Reference to Child Widgets
 
-The Editor's ImageBrowser and FileBrowser widgets internally use the Kendo UI Upload, ListView, and DropDownList widgets. The example below demonstrates how to obtain these widgets' client-side objects. 
+The Editor's ImageBrowser and FileBrowser widgets internally use the Kendo UI Upload, ListView, and DropDownList widgets. The example below demonstrates how to obtain these widgets' client-side objects.
 
 The FileBrowser-related code is identical to the ImageBrowser one, with two exceptions:
 
@@ -24,7 +24,7 @@ Note that the `transport` configurations below are over-simplified and invalid.
     <textarea name="editor" id="editor"></textarea>
 
     <script>
-    
+
     $(function(){
         // initialize the Editor. When using Kendo UI server wrappers, the following statement will be auto-generated
         $("#editor").kendoEditor({
@@ -49,10 +49,10 @@ Note that the `transport` configurations below are over-simplified and invalid.
         });
 
         // example start
-        
+
         // retrieve the Editor widget object
         var editor = $("#editor").data("kendoEditor");
-        
+
         // attach a click handler on the tool button, which opens the ImageBrowser dialog
         editor.toolbar.element.find(".k-insertImage").parent().click(function(){
             // a setTimeout is required, otherwise the ImageBrowser widget will still not be initialized
@@ -60,11 +60,11 @@ Note that the `transport` configurations below are over-simplified and invalid.
                 // retrieve the ImageBrowser widget object
                 var imageBrowser = $(".k-imagebrowser").data("kendoImageBrowser");
                 console.log(imageBrowser);
-                
+
                 // retrieve the ListView widget object
                 var listView = imageBrowser.listView;
                 console.log(listView);
-                
+
                 // retrieve the Upload widget object
                 var upload = imageBrowser.upload;
                 console.log(upload);
@@ -74,7 +74,7 @@ Note that the `transport` configurations below are over-simplified and invalid.
                 console.log(dropdownlist);
             });
         });
-        
+
         // attach a click handler on the tool button, which opens the FileBrowser dialog
         editor.toolbar.element.find(".k-insertFile").parent().click(function(){
             // a setTimeout is required, otherwise the FileBrowser widget will still not be initialized
@@ -82,11 +82,11 @@ Note that the `transport` configurations below are over-simplified and invalid.
                 // retrieve the ImageBrowser widget object
                 var fileBrowser = $(".k-filebrowser").data("kendoFileBrowser");
                 console.log(fileBrowser);
-                
+
                 // retrieve the ListView widget object
                 var listView = fileBrowser.listView;
                 console.log(listView);
-                
+
                 // retrieve the Upload widget object
                 var upload = fileBrowser.upload;
                 console.log(upload);
@@ -105,7 +105,7 @@ Note that the `transport` configurations below are over-simplified and invalid.
 
 Other articles on Kendo UI Editor:
 
-* [JavaScript API Reference](/api/javascript/ui/editor)
+* [Editor JavaScript API Reference](/api/javascript/ui/editor)
 * [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
 * [How to Add Max-Length Validation]({% slug howto_add_max_length_validation_editor %})
 * [How to Use Inline Editor inside Windows]({% slug howto_use_inline_editor_inside_windows_editor %})

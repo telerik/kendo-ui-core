@@ -17,7 +17,7 @@ Before going on reading, make sure you are familiar with the following topics:
 * [Overview of the Sortable Widget]({% slug overview_kendoui_sortable_widget %})
 * [Overview of Kendo UI TabStrip](/web/tabstrip/overview)
 
-## Reorder 
+## Reorder
 
 ### TabStrip Items
 
@@ -77,4 +77,4 @@ For additional information on the Sortable events, refer to [this article](/api/
 Other articles on Kendo UI Sortable:
 
 * [Integration with Grid and ListView]({% slug integrationwith_gridandlistview_sortable_widget %})
-* [JavaScript API Reference](/api/javascript/ui/sortable)
+* [Sortable JavaScript API Reference](/api/javascript/ui/sortable)

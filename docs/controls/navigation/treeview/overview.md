@@ -23,7 +23,7 @@ Kendo UI TreeView can be created in two ways:
 >
 > As TreeView should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
 
-#### Initialize TreeView through a hierarchical HTML list
+#### Through Hierarchical HTML List
 
 The example below demonstrates how to initialize the TreeView through a hierarchical list in HTML.
 
@@ -45,7 +45,7 @@ The example below demonstrates how to initialize the TreeView through a hierarch
     });
     </script>
 
-#### Initialize TreeView through local array data binding
+#### Through Data Binding to Local Array
 
 The example below demonstrates how to create a TreeView and bind it to a local data source.
 
@@ -70,7 +70,7 @@ The example below demonstrates how to create a TreeView and bind it to a local d
     });
     </script>
 
-#### Initialize TreeView through remote service data binding
+#### Through Data Binding to Remote Service
 
 The example below demonstrates how to create a TreeView and bind it to a remote HierarchicalDataSource.
 
@@ -154,7 +154,7 @@ You can add arbitrary fields when binding through `dataSource`. These are stored
 
 ## Common Scenarios
 
-### Get Node Data in `select` Event Handler
+### Get Node Data in select Event Handler
 
 The example below demonstrates how to get the node data in the `select` event handler.
 
@@ -275,11 +275,11 @@ The example below demonstrates how to access an existing TreeView instance.
 
 ## See Also
 
-Other articles on Kendo UI TreeView and how-to examples:
+Other articles and how-to examples on Kendo UI TreeView:
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/treeview/overview)
-* [Overview of the JSP Tag](/jsp/tags/treeview/overview)
-* [Overview of the PHP Class](/php/widgets/treeview/overview)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the TreeView](/aspnet-mvc/helpers/treeview/overview)
+* [Overview of the TreeView JSP Tag](/jsp/tags/treeview/overview)
+* [Overview of the TreeView PHP Class](/php/widgets/treeview/overview)
 * [Bind to Flat Tables]({% slug bindtoflattables_treeview_widget %})
 * [How to Attach Methods to Data Items]({% slug howto_attache_methodsto_dataitems_treeview %})
 * [How to Check Nodes Programatically]({% slug howto_checknodeprogramatically_treeview %})
@@ -297,7 +297,7 @@ Other articles on Kendo UI TreeView and how-to examples:
 * [How to Show Node Context Menu]({% slug howto_shiwnodecontextmenu_treeview %})
 * [How to Sort Child Nodes]({% slug howto_sortchildnodes_treeview %})
 * [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})
-* [JavaScript API Reference](/api/javascript/ui/treeview)
+* [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
 
 How-to examples on Kendo UI TreeView in AngularJS:
 

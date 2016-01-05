@@ -45,9 +45,9 @@ Depending on your server-side platform, here are some libraries that allow proce
 
 Other articles on Kendo UI Editor:
 
-* [Overview]({% slug overview_kendoui_editor_widget %})
+* [Overview of the Editor Widget]({% slug overview_kendoui_editor_widget %})
 * [Image Browser]({% slug image_browser_editor_widget %})
 * [Post-Process Content]({% slug post_process_content_editor_widget %})
 * [Set Selections]({% slug set_selections_editor_widget %})
 * [Troubleshooting]({% slug troubleshooting_editor_widget %})
-* [JavaScript API Reference](/api/javascript/ui/editor)
+* [Editor JavaScript API Reference](/api/javascript/ui/editor)

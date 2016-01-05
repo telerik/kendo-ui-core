@@ -68,7 +68,7 @@ For more information about why a widget does not trigger a `change` event, refer
 
 ## FAQ
 
-**1. I am using cascading ComboBoxes with the `"autoBind: true"` option set and I need to pre-set the selected items. How to do that?**
+### I am using cascading ComboBoxes with the "autoBind: true" option set and I need to pre-set the selected items. How to do that?
 
 You need to set the value of the ComboBoxes. For instance, you can define it before initialization:
 
@@ -85,7 +85,7 @@ You need to set the value of the ComboBoxes. For instance, you can define it bef
 
 You also can use the [`value`](/api/javascript/ui/combobox#configuration) option.
 
-**2. I am using ComboBoxes with load on demand (`autoBind: false`) and I need to pre-set the selected items. How to do that?**
+### I am using ComboBoxes with load on demand (autoBind: false) and I need to pre-set the selected items. How to do that?
 
 You need to set the [`value`](/api/javascript/ui/combobox#configuration) and [`text`](/api/javascript/ui/combobox#configuration) options:
 
@@ -119,11 +119,11 @@ You need to set the [`value`](/api/javascript/ui/combobox#configuration) and [`t
        });
     </script>
 
-**3. The `serverFiltering` is disabled and the `child` ComboBox does not work. What is the reason for that?**
+### The serverFiltering is disabled and the child ComboBox does not work. What is the reason for that?
 
 When [`serverFiltering`](/api/framework/datasource#configuration) is disabled, the ComboBox does not make any additional requests to the server. Hence it filters the initial data using the `parent`'s `dataValueField` property. If no items are found, the `child` ComboBox is left empty. If you want to use a `child` ComboBox with disabled server filtering, provide all the neccessary data on the client.
 
-**4. Cannot get the request parameters on the server. What to do now?**
+### I cannot get the request parameters on the server. What to do now?
 
 Check the format of the request parameters as displayed at the end of the Initialize Cascading ComboBoxes section of this article. Modify your server code in order to get them correctly. Another way to handle the issue is to pass the ID of the parent ComboBox manually, using the data callback of the DataSource's `Transport.Read` object:
 
@@ -147,7 +147,7 @@ Check the format of the request parameters as displayed at the end of the Initia
       });
     </script>
 
-## See Also 
+## See Also
 
 Other articles on Kendo UI ComboBox:
 
@@ -158,4 +158,4 @@ Other articles on Kendo UI ComboBox:
 * [How to Search for Items by Dragging to Input]({% slug howto_search_items_dragging_toinput_combobox %})
 * [How to Underline Matched Search]({% slug howto_underline_matched_search_combobox %})
 * [How to Clear Filter on Open]({% slug howto_clear_filter_open_combobox %})
-* [JavaScript API Reference](/api/javascript/ui/combobox)
+* [ComboBox JavaScript API Reference](/api/javascript/ui/combobox)

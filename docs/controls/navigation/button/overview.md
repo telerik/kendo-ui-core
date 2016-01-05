@@ -8,7 +8,7 @@ position: 1
 
 # Button Overview
 
-The [Kendo UI Button widget](http://demos.telerik.com/kendo-ui/button/index) provides a styled clickable UI functionality with arbitrary content. Apart from consistent Kendo UI styling, the Button provides keyboard operability for elements, which natively do not have it (e.g., `span`). 
+The [Kendo UI Button widget](http://demos.telerik.com/kendo-ui/button/index) provides a styled clickable UI functionality with arbitrary content. Apart from consistent Kendo UI styling, the Button provides keyboard operability for elements, which natively do not have it (e.g., `span`).
 
 Note that the content of this article necessitates your understanding of the [fundamental Kendo UI widget concepts](/widgets).
 
@@ -30,7 +30,6 @@ Placing clickable elements with their own special behavior inside the Button wid
 	});
 	</script>
 
-
 ### Initialize Multiple Buttons
 
 Although each Button represents a separate widget instance on the page, multiple buttons can be initialized simultaneously. There are two ways to do this:
@@ -38,7 +37,9 @@ Although each Button represents a separate widget instance on the page, multiple
 * Use a jQuery selector, which returns multiple elements.
 * Use `kendo.init()`.
 
-#### Use a jQuery selector
+#### Use a jQuery Selector
+
+###### Example
 
     <button type="button" class="myButton">Edit</button>
     <button type="button" class="myButton">Delete</button>
@@ -50,9 +51,11 @@ Although each Button represents a separate widget instance on the page, multiple
 	});
 	</script>
 
-#### Use `kendo.init()`
+#### Apply kendo.init()
 
 This approach allows you to initialize multiple Button widgets at once, but with different configuration options. For more information, refer to [Data Attribute Initialization](/data-attribute-initialization) and [`kendo.init()` method description](/api/framework/kendo#methods-init).
+
+###### Example
 
 	<div id="buttonsContainer">
 		<span data-role="button" data-sprite-css-class="myEditIcon">Edit</span>
@@ -76,7 +79,9 @@ This approach allows you to initialize multiple Button widgets at once, but with
 
 The business logic of an application often requires a certain button to be temporarily disabled or enabled. Kendo UI Button can be configured to be initially disabled via its `enable` property or by initializing it from an element, which has a `disabled="disabled"` HTML attribute. The Button can also be disabled or enabled at any time with Javascript by using its `enable()` method with a boolean argument.
 
-###### Example - enable and disable the Button
+The example below demonstrates how to enable and disable the Button.
+
+###### Example
 
 	<button type="button" id="editButton">Edit</button>
 
@@ -107,7 +112,9 @@ Kendo UI Button provides three properties for configuring icons - `icon`, `sprit
 
 Background icons are applied via the `icon` or `spriteCssClass` property and are displayed as a background of a `span` element. The `span` element can be rendered by the Button automatically, or an existing `span` element can be used, if it has a `k-sprite` CSS class (or `k-icon` if the `icon` property is used). The difference between the two properties is that `icon` is intended to be used for built-in Kendo UI icons, which are part of the theme sprite. For a list of available icon names, please refer to the [Icons demo](http://demos.telerik.com/kendo-ui/web/styling/icons.html).
 
-###### Example - use icons
+The example below demonstrates how to use icons in the Button widget.
+
+###### Example
 
 	<button type="button" id="editButton">Edit</button>
 	<button type="button" id="deleteButton"><span class="k-icon"></span>Delete</button>
@@ -131,7 +138,9 @@ The `icon` configuration in this example will produce the following HTML output:
 	<button type="button" id="editButton" class="k-button k-button-icontext"><span class="k-icon k-edit"></span>Edit</button>
 	<button type="button" id="deleteButton" class="k-button k-button-icontext"><span class="k-icon k-delete"></span>Delete</button>
 
-###### Example - use `spriteCssClass`
+The example below demonstrates how to apply the `spriteCssClass`.
+
+###### Example
 
 	<button type="button" id="editButton">Edit</button>
 	<button type="button" id="deleteButton"><span class="k-sprite"></span>Delete</button>
@@ -152,6 +161,8 @@ The `icon` configuration in this example will produce the following HTML output:
 
 Technically, `spriteCssClass` can be used to achieve the same result as `icon`, but `icon` spares you the need to set two CSS classes at the same time and provides a certain level of abstraction. For example, the following two configurations are practically identical. `#button2` also applies a `k-sprite` CSS class to the `span` element, but it does not change the button appearance.
 
+###### Example
+
 	$(function(){
 		$("#button1").kendoButton({
 			icon: "foo"
@@ -164,7 +175,9 @@ Technically, `spriteCssClass` can be used to achieve the same result as `icon`, 
 
 In some cases you may want to use a Button with no text and only an icon inside. In order to increase the accessibility of the widget in this case, a text label can be included inside the sprite `span`.
 
-###### Example - use the Button with no text
+The example below demonstrates how to use the Button with no text.
+
+###### Example
 
 	<button type="button" id="deleteButton"><span class="k-sprite">Delete</span></button>
 
@@ -182,7 +195,9 @@ In some cases you may want to use a Button with no text and only an icon inside.
 
 Image icons are applied via the `imageUrl` property and are displayed as a `img` element. This element can be rendered by the Button automatically, or an existing `img` element can be used if it has a `k-image` CSS class.
 
-###### Example - use `imageUrl`
+The example below demonstrates how to use the `imageUrl`.
+
+###### Example
 
 	<button type="button" id="editButton">Edit</button>
 	<button type="button" id="deleteButton"><img class="k-image" alt="Delete" />Delete</button>
@@ -203,11 +218,13 @@ Image icons are applied via the `imageUrl` property and are displayed as a `img`
 
 In order to increase the accessibility of the widget when adding an `img` element manually, an `alt` attribute is required.
 
-### Font icons
+### Font Icons
 
 It is possible to use FontAwesome or other font icons inside the Kendo UI button by setting the required third-party CSS classes via the `spriteCssClass` property.
 However, this will cause a `k-sprite` CSS class to be rendered and it applies some font and size styles, which may interfere with the font icons styles.
-There are two ways to proceed in this case. One is to override the Kendo UI styles, which break the font icons:
+There are two ways to proceed in this case. One is to override the Kendo UI styles, which break the font icons.
+
+###### Example
 
 ```html
 <link rel="stylesheet"
@@ -233,6 +250,8 @@ There are two ways to proceed in this case. One is to override the Kendo UI styl
 
 The other option is to include the required HTML markup and CSS classes inside the Kendo UI Button directly, as template content. In this way a `k-sprite` class will not be rendered by the Button.
 
+###### Example
+
 ```html
 <link rel="stylesheet"
     href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" />
@@ -250,7 +269,7 @@ The other option is to include the required HTML markup and CSS classes inside t
 
 Similar to all other Kendo UI widgets, you can access an existing Button instance via the `.data()` jQuery method, executed by the jQuery object of the originating element.
 
-The exampel below demonstrates how to access a Button instance.
+The example below demonstrates how to access a Button instance.
 
 ###### Example
 
@@ -328,7 +347,7 @@ The example below demonstrates how to create a Floating Action Button.
 
 Other articles on Kendo UI Button:
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/button/overview)
-* [Overview of the JSP Tag](/jsp/tags/button/overview)
-* [Overview of the PHP Class](/php/widgets/button/overview)
-* [JavaScript API Reference](/api/javascript/ui/button)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the Button Widget](/aspnet-mvc/helpers/button/overview)
+* [Overview of the Button JSP Tag](/jsp/tags/button/overview)
+* [Overview of the Button PHP Class](/php/widgets/button/overview)
+* [Button JavaScript API Reference](/api/javascript/ui/button)

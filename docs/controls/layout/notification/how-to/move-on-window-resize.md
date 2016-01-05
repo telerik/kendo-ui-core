@@ -96,6 +96,6 @@ The code from the snippet executes the following actions:
 
 Other articles on Kendo UI Notification:
 
-* [JavaScript API Reference](/api/javascript/ui/notification)
+* [Notification JavaScript API Reference](/api/javascript/ui/notification)
 * [How to Stack Static Notifications to the Left or Right]({% slug howto_stack_static_tothe_leftor_right_notification %})
 * [How to Move Visible Notifications after Hiding Others]({% slug howto_move_notifications_after_hiding_others %})

@@ -31,6 +31,7 @@ Initialize the Slider using a jQuery selector as demonstrated in the example bel
     });
 
 > **Important**  
+>
 > As the Slider should be initialized after the DOM is fully loaded, make sure you initilaize it within a `$(document).ready()` statement.
 
 ## Customization
@@ -81,14 +82,15 @@ Kendo UI Slider draghandles are able to receive focus via tabbing. When focused 
 | `Home`                        | Places the focused draghandle at the minimum value |
 | `End`                         | Places the focused draghandle at the maximum value |
 
-> **Important**  
+> **Important**
+>
 > In right-to-left (RTL) mode the behavior of the left and right `Arrow` keys is reversed.
 
 ## See Also
 
 Other articles on Kendo UI Slider:
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/slider/overview)
-* [Overview of the JSP Tag](/jsp/tags/slider/overview)
-* [Overview of the PHP Class](/php/widgets/slider/overview)
-* [JavaScript API Reference](/api/javascript/ui/slider)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the Slider Widget](/aspnet-mvc/helpers/slider/overview)
+* [Overview of the Slider JSP Tag](/jsp/tags/slider/overview)
+* [Overview of the Slider PHP Class](/php/widgets/slider/overview)
+* [Slider JavaScript API Reference](/api/javascript/ui/slider)

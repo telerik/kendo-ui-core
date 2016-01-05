@@ -48,5 +48,5 @@ The example below demonstrates how to set the Kendo UI TreeMap tiles color from 
 
 Other articles and how-to examples on Kendo UI TreeMap:
 
-* [JavaScript API Reference](/api/javascript/dataviz/ui/treemap)
+* [TreeMap JavaScript API Reference](/api/javascript/dataviz/ui/treemap)
 * [How to Show TreeMap Tooltip]({% slug howto_showtreemaptooltip_treemap %})

@@ -107,5 +107,5 @@ The example below demonstrates how to create a custom view in the Kendo UI Gantt
 
 Other articles on Kendo UI Gantt:
 
-* [JavaScript API Reference](/api/javascript/ui/gantt)
+* [Gantt JavaScript API Reference](/api/javascript/ui/gantt)
 * [How to Colorize Tasks]({% slug howto_colorize_tasks_gantt %})

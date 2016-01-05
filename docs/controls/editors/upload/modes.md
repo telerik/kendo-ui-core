@@ -55,13 +55,13 @@ The asynchrnous mode is implemented using the [HTML5 File API](https://en.wikipe
 
 To implement the asynchronous mode of operation, follow the steps below:
 
-1. Create an HTML `input` of type `"file"` (no `form` is required).
+**Step 1.** Create an HTML `input` of type `"file"` (no `form` is required).
 
 ###### Example
 
     <input name="photos[]" id="photos" type="file" />
 
-2. Initialize the Upload and configure asynchronous upload end-points.
+**Step 2.** Initialize the Upload and configure asynchronous upload end-points.
 
 ###### Example
 
@@ -105,7 +105,7 @@ The uploaded files must be handled both in the save handler and in the form subm
 
 Other articles on Kendo UI Upload:
 
-* [Overview]({% slug overview_kendoui_upload_widget %})
+* [Overview of the Upload Widget]({% slug overview_kendoui_upload_widget %})
 * [Drag and Drop]({% slug dragandrop_upload_widget %})
 * [Send and Receive Metadata]({% slug metadata_upload_widget %})
 * [Browser Support]({% slug browsersupport_upload_widget %})

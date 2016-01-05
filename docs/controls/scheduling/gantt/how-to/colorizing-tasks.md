@@ -144,5 +144,5 @@ The example below demonstrates how to colorize each task based on a condition in
 
 Other articles on Kendo UI Gantt:
 
-* [JavaScript API Reference](/api/javascript/ui/gantt)
+* [Gantt JavaScript API Reference](/api/javascript/ui/gantt)
 * [How to Create Custom Views]({% slug howto_create_custom_views_gantt %})

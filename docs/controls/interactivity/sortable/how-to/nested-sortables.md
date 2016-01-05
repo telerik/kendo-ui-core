@@ -44,11 +44,11 @@ The example below demonstrates how to create nested Kendo UI Sortable widgets.
   </script>
 ```
 
-## See Also 
+## See Also
 
 Other articles and how-to examples on Kendo UI Sortable:
 
-* [JavaScript API Reference](/api/javascript/ui/sortable)
+* [Sortable JavaScript API Reference](/api/javascript/ui/sortable)
 * [How to Persist Order in `localStorage`]({% slug howto_persistoderinlocalstorage_sortable %})
 * [How to Reorder AngularJS Grid Rows]({% slug howto_reorderangularjsgridrows_angular_sortable %})
 * [How to Reorder Grid Rows]({% slug howto_reordergridrows_sortable %})

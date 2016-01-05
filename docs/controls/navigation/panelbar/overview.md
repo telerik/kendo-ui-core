@@ -19,10 +19,11 @@ You can create a PanelBar in the following ways:
 * Through HTML markup
 * Through JSON data object
 
-> **Important**  
+> **Important**
+>
 > As PanelBar should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
 
-#### Initialize PanelBar using HTML markup
+#### Using HTML Markup
 
 You can create a Kendo UI PanelBar by targeting the root element of an HTML list. The widget utilizes this list to define its structure and content.
 
@@ -45,7 +46,7 @@ You can create a Kendo UI PanelBar by targeting the root element of an HTML list
         });
     </script>
 
-#### Initialize PanelBar using JSON data object
+#### Using JSON Data Object
 
 The example below demonstrates how to initialize a PanelBar by using a JSON data object.
 
@@ -116,7 +117,7 @@ PanelBar items may contain nested content, including markup, within a `<div>` el
 
 The PanelBar provides built-in support for asynchronously loading content from remote URLs. These URLs should return HTML content that can be loaded in the PanelBar item content area. Content `<div>` elements should be empty for AJAX loading to work.
 
-The example below demonstrates how to load a PanelBar item content aynchronously via AJAX.
+The example below demonstrates how to load a PanelBar item content asynchronously via AJAX.
 
 ###### Example
 
@@ -191,10 +192,10 @@ The example below demonstrates how to add a new root PanelBar item.
 
 ## See Also
 
-Other articles on Kendo UI PanelBar and how-to examples:
+Other articles and how-to examples on Kendo UI PanelBar:
 
 * [How to Initialize the Grid in PanelBar]({% slug initialize_thegrid_panelbar_widget %})
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/panelbar/overview)
-* [Overview of the JSP Tag](/jsp/tags/panelbar/overview)
-* [Overview of the PHP Class](/php/widgets/panelbar/overview)
-* [JavaScript API Reference](/api/javascript/ui/panelbar)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the PanelBar Widget](/aspnet-mvc/helpers/panelbar/overview)
+* [Overview of the PanelBar JSP Tag](/jsp/tags/panelbar/overview)
+* [Overview of the PanelBar PHP Class](/php/widgets/panelbar/overview)
+* [PanelBar JavaScript API Reference](/api/javascript/ui/panelbar)

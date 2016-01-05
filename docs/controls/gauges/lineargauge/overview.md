@@ -55,7 +55,7 @@ For a detailed list with all configuration options of the Kendo UI Linear Gauge,
 
 Other articles on Kendo UI Linear Gauge:
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/lineargauge/overview)
-* [Overview of the JSP Tag](/jsp/tags/lineargauge/overview)
-* [Overview of the PHP Class](/php/widgets/lineargauge/overview)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the Linear Gauge Widget](/aspnet-mvc/helpers/lineargauge/overview)
+* [Overview of the Linear Gauge JSP Tag](/jsp/tags/lineargauge/overview)
+* [Overview of the Linear Gauge PHP Class](/php/widgets/lineargauge/overview)
 * [Linear Gauge JavaScript API Reference](/api/javascript/dataviz/ui/lineargauge)

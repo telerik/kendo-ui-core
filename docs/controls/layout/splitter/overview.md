@@ -67,7 +67,7 @@ The example below demonstrates how to intiialize a Splitter and the properties o
 
 While any valid technique for loading content via AJAX may be used, Kendo UI Splitter provides built-in support for asynchronously loading content from URLs. These URLs return HTML fragments that can be loaded in the pane of a Splitter. If you want to load a whole page in an `iframe`, specify the complete URL, e.g. http://telerik.com/.
 
-#### Load content asynchronously
+#### Load Content Asynchronously
 
 ###### Example
 
@@ -77,7 +77,9 @@ While any valid technique for loading content via AJAX may be used, Kendo UI Spl
         <div></div>
     </div>
 
-#### Load content for one pane asynchronously and load a third pane in an `iframe`
+#### Load Third Pane in iframe
+
+The example below demonstrates how to load content for one pane asynchronously and load a third pane in an `iframe`.
 
 ###### Example
 
@@ -116,7 +118,7 @@ The pane settings (`collapsible` and `resizable`) of the Splitter can be changed
 
 The Splitter supports nested layouts to achieve complex layouts.
 
-#### Create nested Splitter layouts
+#### Create Nested Splitter Layouts
 
 ###### Example
 
@@ -130,7 +132,7 @@ The Splitter supports nested layouts to achieve complex layouts.
         </div>
     </div>
 
-#### Initialize two Splitters with different orientations
+#### Initialize Two Splitters with Different Orientations
 
 ###### Example
 
@@ -138,6 +140,7 @@ The Splitter supports nested layouts to achieve complex layouts.
     $("#verticalSplitter").kendoSplitter({ orientation: "vertical" });
 
 > **Important**  
+>
 > Using the same `<div>` element for a Splitter pane and for a nested Splitter is not recommended. Nested Splitters are sized automatically to match the parent pane's height if the nested Splitter has 100% width and height styles. Using a nested Splitter which is a direct child of the parent Splitter's pane is recommended instead.
 
 ### Set a 100% Height and Auto-Resize
@@ -211,13 +214,13 @@ The example below demonstrates how to access an existing Splitter instance.
 
 Other articles on Kendo UI Splitter:
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/splitter/overview)
-* [Overview of the JSP Tag](/jsp/tags/splitter/overview)
-* [Overview of the PHP Class](/php/widgets/splitter/overview)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the Splitter Widget](/aspnet-mvc/helpers/splitter/overview)
+* [Overview of the Splitter JSP Tag](/jsp/tags/splitter/overview)
+* [Overview of the Splitter PHP Class](/php/widgets/splitter/overview)
 * [How to Nest Sortables]({% slug howto_nestsortables_sortable %})
 * [How to Persist Order in `localStorage`]({% slug howto_persistoderinlocalstorage_sortable %})
 * [How to Reorder AngularJS Grid Rows]({% slug howto_reorderangularjsgridrows_angular_sortable %})
 * [How to Reorder Grid Rows]({% slug howto_reordergridrows_sortable %})
 * [How to Reorder Rows in Nested Grid]({% slug howto_reorderrowsinnestedgrid_sortable %})
 * [How to Transfer Grid Rows]({% slug howto_transfergridrows_sortable %})
-* [JavaScript API Reference](/api/javascript/ui/splitter)
+* [Splitter JavaScript API Reference](/api/javascript/ui/splitter)

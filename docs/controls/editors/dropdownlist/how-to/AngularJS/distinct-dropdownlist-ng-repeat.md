@@ -10,7 +10,7 @@ slug: howto_cascade_withngrepeat_distinct_values_dropdownlist
 The example below demonstrates how to use `ng-repeat` to add extra drop-down lists on a parent selection. Every new child is bound with distinct values.
 
 > **Important**  
-> Note that the use of `ng-repeat` has some limitations that need to be taken into account. For more information on this, refer to the [notes on `ng-repeat`](http://docs.telerik.com/kendo-ui/AngularJS/notes-on-ng-repeat) help article. 
+> Note that the use of `ng-repeat` has some limitations that need to be taken into account. For more information on this, refer to the [notes on `ng-repeat`](http://docs.telerik.com/kendo-ui/AngularJS/notes-on-ng-repeat) help article.
 
 ```html
     <script type="text/javascript">
@@ -138,7 +138,7 @@ The example below demonstrates how to use `ng-repeat` to add extra drop-down lis
 
 Other articles on Kendo UI DropDownList:
 
-* [JavaScript API Reference](/api/javascript/ui/dropdownlist)
+* [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
 * [How to Validate DropDownLists by Using Required Attributes]({% slug howto_validate_using_required_attributes_dropdownlist %})
 * [How to Automatically Adjust the Width of a DropDownList]({% slug howto_automatically_adjust_width_dropdownlist %})
 * [How to Cascade from Multiple Parents]({% slug howto_cascade_multiple_parents_dropdownlist %})

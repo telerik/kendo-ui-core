@@ -87,7 +87,7 @@ Enable virtualization in a ComboBox by using the example below. It demonstrates 
 
 The following list of options describes how to configure the virtualization specific options:
 
-### `itemHeight`
+### itemHeight
 
 All items in the virtualized list must have the same height. If you do not specify a height value, the framework automatically sets `itemHeight` in the way they are set in the current theme and font size.
 
@@ -98,7 +98,7 @@ All items in the virtualized list must have the same height. If you do not speci
 
 The virtualized list container must have a `height` option set in pixels. If you do not specify one, the list will use the default `height`, which is `200px`.
 
-### `pageSize`
+### pageSize
 
 The virtualized widget will calculate the `pageSize` value automatically based on the (([`height`](/api/javascript/ui/combobox#configuration-height) / [`itemHeight`](#itemheight)) * 4) formula and will override the custom `pageSize` value. This is done to ensure the proper work of the virtualized list.
 
@@ -110,7 +110,7 @@ In this case, the `pageSize` will be set to `80`, because ((520 / 26) * 4) is eq
 > **Important**  
 > To prevent the DataSource from making multiple requests for the same data, set the correct `pageSize` value using the aforementioned formula.
 
-### `valueMapper`
+### valueMapper
 
 The `valueMapper` function is mandatory for the functionality of the virtualized widget. The widget calls the `valueMapper` function when the widget receives a value, which is not fetched from the remote server yet. The widget will pass the selected values in the `valueMapper` function. In turn, the `valueMapper` implementation should return the respective data item indices.
 
@@ -127,7 +127,7 @@ The `valueMapper` function is mandatory for the functionality of the virtualized
     }
 ```
 
-## `valueMapper` Function
+## The valueMapper Function
 
 ### Overview
 
@@ -152,7 +152,7 @@ On initial load, the widget will check whether the selected value is present in 
 
 ![Virtualization process](/controls/editors/combobox/virtualization.png)
 
-### `valueMapper` Return
+### Function Result
 
 The `valueMapper` callback expects to receive a row index or list of indices (when multiple selection is available). That being said, the service should return either an index (number) or a list of indices. For instance, examine the result of [the test service](/service/Orders/ValueMapper) used in the online demos:
 
@@ -177,7 +177,7 @@ The result is:
 
     callback([413]) //the result is JSONP
 
-### `valueMapper` Implementation
+### Function Implementation
 
 As mentioned in the previous section, the service should map the selected value to a concrete row index. The implementation of this functionality is completely under your control. However, the most simplified implementation includes the iteration of all items counting the index of the rows. A more optimized solution still is to use a dedicated SQL method that handles this action internally. You can do this by using the [`ROW_NUMBER()`](https://msdn.microsoft.com/en-us/library/ms186734.aspx) function.
 
@@ -195,7 +195,7 @@ Other articles on Kendo UI ComboBox:
 * [How to Expand Background of Long List Items]({% slug howto_expand_background_longlist_items_combobox %})
 * [How to Expand ComboBox Located in Bootstrap Layout]({% slug howto_expand_widget_bootstrap_widget_combobox %})
 * [How to Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
-* [How to Select Items on TAB]({% slug howto_select_items_ontab_combobox %})
+* [How to Select Items on Tab]({% slug howto_select_items_ontab_combobox %})
 * [How to Disable Child Cascading ComboBoxes]({% slug howto_disable_child_cascading_combobox %})
 * [JavaScript API Reference](/api/javascript/ui/combobox)
 

@@ -16,11 +16,11 @@ The example below demonstrates how to detect the Kendo UI DropDownList wrapper f
   <input id="ddl2" class="ddl" />
   <input id="ddl3" class="ddl" />
   <input id="ddl4" class="ddl" />
-  
+
   <script>
     $(function() {
       $(".ddl").kendoDropDownList();
-      
+
       $(".ddl").on("focus", function() {
         alert("focus");
       });
@@ -32,7 +32,7 @@ The example below demonstrates how to detect the Kendo UI DropDownList wrapper f
 
 Other articles on Kendo UI DropDownList:
 
-* [JavaScript API Reference](/api/javascript/ui/dropdownlist)
+* [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
 * [How to Detect Input Change Events]({% slug howto_detect_input_change_events_dropdownlist %})
 * [How to Detect Wrapper Blur Events]({% slug howto_detect_wrapper_blur_events_dropdownlist %})
 * [How to Cascade DropDownLists Using `ng-repeat`]({% slug howto_cascade_withngrepeat_distinct_values_dropdownlist %})

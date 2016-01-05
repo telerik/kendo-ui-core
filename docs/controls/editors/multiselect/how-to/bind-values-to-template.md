@@ -88,7 +88,7 @@ The example below demonstrates how to bind the Kendo UI MultiSelect value to a t
 
 Other articles on Kendo UI MultiSelect:
 
-* [JavaScript API Reference](/api/javascript/ui/multiselect)
+* [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
 * [How to Cascade from DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %})
 * [How to Create Cascading MultiSelects]({% slug howto_create_cascading_widgets_multiselect %})
 * [How to Create Checkbox Custom Item Template]({% slug howto_checkbox_custom_item_template_multiselect %})

@@ -70,7 +70,7 @@ Configure the `connectionsDataSource` for remote CRUD data operations in the way
 	  }
     });
 
-### Declare Fields Definition (`dataSource schema`)
+### Declare Fields Definition: dataSource schema
 
 Declare the fields definition through the `dataSource schema`, as demonstrated below.
 
@@ -89,7 +89,7 @@ Declare the fields definition through the `dataSource schema`, as demonstrated b
       }
     });
 
-### Declare Fields Definition (`connectionsDataSource schema`)
+### Declare Fields Definition: connectionsDataSource schema
 
 Declare the fields definition through the `connectionsDataSource schema`, as demonstrated below.
 
@@ -271,5 +271,5 @@ The example below demonstrates the `connectionsDataSource model` definition.
 
 Other articles on Kendo UI Diagram:
 
-* [Overview]({% slug overview_kendoui_diagram_widget %})
+* [Overview of the Diagram Widget]({% slug overview_kendoui_diagram_widget %})
 * [Diagram JavaScript API Reference](/api/javascript/dataviz/ui/diagram)

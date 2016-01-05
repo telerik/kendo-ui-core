@@ -73,7 +73,7 @@ Kendo UI Area Charts support the rendering of lines between the points with diff
 
 Other articles on Kendo UI Charts and chart types:
 
-* [Chart Overview]({% slug overview_kendoui_charts_widget %})
+* [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
 * [Data Series Charts]({% slug seriestypeofcharts_widget %})
 * [Bar Charts]({% slug bartypeofcharts_widget %})
 * [Bubble Charts]({% slug bubblecharts_widget %})

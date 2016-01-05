@@ -36,7 +36,7 @@ The example below demonstrates how to prevent invalid values in a Kendo UI DateT
 
           //uncomment if you do not want to wire the input change event
           /*if (this.value() === null) {
-                       this.value(""); 
+                       this.value("");
                       }*/
         }
 
@@ -65,7 +65,7 @@ The example below demonstrates how to prevent invalid values in a Kendo UI DateT
 
 Other articles on Kendo UI DateTimePicker:
 
-* [JavaScript API Reference](/api/javascript/ui/datetimepicker)
+* [DateTimePicker JavaScript API Reference](/api/javascript/ui/datetimepicker)
 * [How to Validate Custom Dates]({% slug howto_validate_custom_dates_datetimepicker %})
 * [How to Limit Navigation to Months]({% slug howto_limit_navigation_tomonths_datetimepicker %})
 * [How to Override Hours in the Popup]({% slug howto_override_hours_inpopup_datetimepicker %})

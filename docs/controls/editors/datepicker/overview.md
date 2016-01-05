@@ -139,27 +139,27 @@ Other articles on Kendo UI DatePicker:
 * [How to Restrict User Input to Min/Max Values]({% slug howto_restrict_user_input_minandmax_values_datepicker %})
 * [How to Show Out-of-Range Dates as Disabled]({% slug howto_show_outofrange_dates_disabled_datepicker %})
 * [How to Submit Forms on ENTER]({% slug howto_submmit_forms_onenter_datepicker %})
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/datepicker/overview)
-* [Overview of the JSP Tag](/jsp/tags/datepicker/overview)
-* [Overview of the PHP Class](/php/widgets/datepicker/overview)
-* [JavaScript API Reference](/api/javascript/ui/datepicker)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the DatePicker Widget](/aspnet-mvc/helpers/datepicker/overview)
+* [Overview of the DatePicker JSP Tag](/jsp/tags/datepicker/overview)
+* [Overview of the DatePicker PHP Class](/php/widgets/datepicker/overview)
+* [DatePicker JavaScript API Reference](/api/javascript/ui/datepicker)
 
 Articles on Kendo UI Calendar:
 
-* [Overview]({% slug overview_kendoui_calendar_widget %})
+* [Overview of the Calendar Widget]({% slug overview_kendoui_calendar_widget %})
 * [How to Control the Header Format]({% slug howto_control_header_format_calendar %})
-* [JavaScript API Reference](/api/javascript/ui/calendar)
+* [Calendar JavaScript API Reference](/api/javascript/ui/calendar)
 
 Articles on Kendo UI DateTimePicker:
 
-* [Overview]({% slug overview_kendoui_datetimepicker_widget %})
+* [Overview of the DateTimePicker Widget]({% slug overview_kendoui_datetimepicker_widget %})
 * [How to Prevent Invalid Values]({% slug howto_prevent_invalid_values_datetimepicker %})
 * [How to Validate Custom Dates]({% slug howto_validate_custom_dates_datetimepicker %})
 * [How to Limit Navigation to Months]({% slug howto_limit_navigation_tomonths_datetimepicker %})
 * [How to Override Hours in the Popup]({% slug howto_override_hours_inpopup_datetimepicker %})
-* [JavaScript API Reference](/api/javascript/ui/datetimepicker)
+* [DateTimePicker JavaScript API Reference](/api/javascript/ui/datetimepicker)
 
 Articles on Kendo UI TimePicker:
 
-* [Overview]({% slug overview_kendoui_timepicker_widget %})
-* [JavaScript API Reference](/api/javascript/ui/timepicker)
+* [Overview of the TimePicker Widget]({% slug overview_kendoui_timepicker_widget %})
+* [TimePicker JavaScript API Reference](/api/javascript/ui/timepicker)

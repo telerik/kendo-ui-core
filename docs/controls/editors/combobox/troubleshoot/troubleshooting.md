@@ -51,7 +51,7 @@ The example below demonstrates the solution to the above issue.
 
 Other articles on Kendo UI ComboBox:
 
-* [JavaScript API Reference](/api/javascript/ui/combobox)
+* [ComboBox JavaScript API Reference](/api/javascript/ui/combobox)
 * [Grouping Functionality]({% slug grouping_kendoui_combobox_widget %})
 * [Virtualization]({% slug virtualization_kendoui_combobox_widget %})
 * [Cascading ComboBoxes]({% slug cascading_kendoui_combobox_widget %})
@@ -65,7 +65,7 @@ Other articles on Kendo UI ComboBox:
 * [How to Bypass Boundary Detection]({% slug howto_bypass_boudary_detection_combobox %})
 * [How to Disable Child Cascading ComboBoxes]({% slug howto_disable_child_cascading_combobox %})
 * [How to Expand Background of Long List Items]({% slug howto_expand_background_longlist_items_combobox %})
-* [Overview]({% slug overview_kendoui_combobox_widget %})
+* [Overview of the ComboBox Widget]({% slug overview_kendoui_combobox_widget %})
 
 Other articles on troubleshooting:
 
