@@ -7,7 +7,7 @@ slug: howto_filter_dimensions_pivotgrid
 
 # Filter Dimensions
 
-The example below demonstrates how use the data source [`filter`](docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-filter) option to filter the result set.
+The example below demonstrates how use the data source [`filter`](/api/javascript/data/datasource#configuration-filter) option to filter the result set.
 
 ###### Example
 
