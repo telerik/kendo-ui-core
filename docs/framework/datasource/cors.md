@@ -56,7 +56,7 @@ That's not bad. Until recently Opera was missing from that list, but with the re
 
 We'll talk about handling old Opera versions more in a minute, but let's first address IE.
 
-#### Internet Explorer and `XDomainRequest`
+#### Internet Explorer and XDomainRequest
 
 Internet Explorer, pre IE10, approaches cross-origin resource sharing a bit differently. Rather than go the route of Webkit and Gecko, IE 8 and 9 do not reuse the standard Ajax `XMLHttpRequest` object for CORS requests. Instead, they introduce a brand new object for cross-origin resource sharing called [`XDomainRequest`](https://msdn.microsoft.com/en-us/library/cc288060(v=vs.85).aspx).
 
@@ -109,7 +109,7 @@ In the [Kendo UI Feed Reader demo](http://www.telerik.com/blogs/rss-feed-reader-
 
 Version 1 of this demo did not support non-CORS browsers. To add support for these browsers, we modified the code to use XDR with IE and YQL JSONP with Opera and all non-CORS browsers.
 
-#### Fixing IE with `jQuery $.ajax` transports
+#### Fixing IE with jQuery $.ajax transports
 
 Making CORS code work with IE 8/9 is actually very easy thanks to [some code](https://github.com/dkastner/jquery.iecors) written by [Derek Kastner](https://twitter.com/dkastner). With jQuery 1.5+, you can create custom transport implementations to control the inner-workings of jQuery $.ajax. Derek has done just that with XDR.
 

@@ -180,7 +180,7 @@ At the time of this writing there is not a cross-browser way to determine whethe
 
 For more information on browser online mode, refer to [this MDN article](https://developer.mozilla.org/en-US/docs/Web/API/NavigatorOnLine/onLine).
 
-### Use `online` and `offline` Events
+### Use online and offline Events
 
 The `online` and `offline` events behave differently among the browsers. Firefox and Internet Explorer fire those events when the user switches between offline and online mode. However, the `online` and `offline` events work as expected in mobile devices and Phonegap applications.
 
