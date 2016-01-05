@@ -21,6 +21,7 @@
 @wp-third-text-light: #ccc;
 
 @error: #f44336;
+@warning: #f52312;
 
 .km-wp,
 .km-wp .km-content,
@@ -553,4 +554,16 @@
 
 .km-wp-light input.km-radio:checked+.km-radio-label:after {
     background: @wp-main-text-light;
+}
+
+/* Validation */
+.km-wp .km-list > li label.km-invalid,
+.km-wp .km-list fieldset .km-legend-button.km-invalid,
+.km-wp .km-list > li label.km-invalid.km-required:after {
+    color: @warning;
+}
+
+.km-wp .km-invalid-msg {
+    color: #fff;
+    background: @warning;
 }

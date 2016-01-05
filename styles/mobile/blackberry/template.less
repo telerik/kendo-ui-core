@@ -10,6 +10,7 @@
 @blackberry-light-background: #e6e6e6;
 
 @error: #ef5350;
+@warning: #cf2e2d;
 
 .km-blackberry,
 .km-blackberry .km-content
@@ -701,4 +702,16 @@
 .km-blackberry .km-list fieldset > .k-dropdown-wrap,
 .km-blackberry .km-list fieldset > textarea {
     background: none;
+}
+
+/* Validation */
+.km-blackberry .km-list > li label.km-invalid,
+.km-blackberry .km-list fieldset .km-legend-button.km-invalid,
+.km-blackberry .km-list > li label.km-invalid.km-required:after {
+    color: @warning;
+}
+
+.km-blackberry .km-invalid-msg {
+    color: @blackberry-active-color;
+    background: @warning;
 }

@@ -26,6 +26,7 @@
 @transparent-color: rgba(0,0,0,0);
 
 @error: #f44336;
+@warning: #c60f0f;
 
 .km-ios,
 .km-ios .km-listview-wrapper .km-filter-wrap
@@ -878,4 +879,16 @@ html .km-ios .km-tabstrip .km-button:active:last-child
     background-color: #44648f;
     background-image: linear-gradient(to bottom, rgba(255,255,255,.9), rgba(255,255,255,0));
     border-color: @button-active-background-color;
+}
+
+/* Validation */
+.km-ios .km-list > li label.km-invalid,
+.km-ios .km-list fieldset .km-legend-button.km-invalid,
+.km-ios .km-list > li label.km-invalid.km-required:after {
+    color: @warning;
+}
+
+.km-ios .km-invalid-msg {
+    color: @ios-widget-color;
+    background: @warning;
 }
