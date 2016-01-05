@@ -24,7 +24,7 @@ This example demonstrates how to export all Kendo UI Grid pages and their full p
 			var progress = $.Deferred();
 
 			kendo.drawing.drawDOM($("#header"))
-			.done(function(header) { 
+			.done(function(header) {
 			  kendo.drawing.drawDOM($("#footer"))
 			  .done(function(footer) {
 				grid._drawPDF(progress)
@@ -144,7 +144,7 @@ This example demonstrates how to export all Kendo UI Grid pages and their full p
 
 Other articles on Kendo UI Grid and how-to examples related to its export in PDF:
 
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Customize Page Layout]({% slug howto_customize_page_layout_pdf_grid %})
 * [How to Export All Pages]({% slug howto_export_all_pagesto_pdf_grid %})
 * [How to Export Multiple Pages with Variable Row Height]({% slug howto_export_multiple_pageswith_variable_rowheight_pdf_grid %})

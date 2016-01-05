@@ -8,7 +8,7 @@ slug: howto_customize_page_layout_pdf_grid
 
 # Customize Page Layout
 
-When exporting a Kendo UI Grid in PDF, the goal is to fit the grid in the center of the exported page and add a header and a footer that are not part of the original page. 
+When exporting a Kendo UI Grid in PDF, the goal is to fit the grid in the center of the exported page and add a header and a footer that are not part of the original page.
 
 ![Result](custom-page-layout.png)
 
@@ -129,8 +129,8 @@ The example below demonstrates how to export a multi-page Kendo UI Grid and cust
 
   // Spacing between header, content and footer
   var LINE_SPACING = mm(5);
-	
-  var scale;	
+
+  var scale;
 
   function formatPage(e) {
     var header = createHeader();
@@ -202,9 +202,9 @@ For further details, see [Custom fonts](/framework/drawing/pdf-output#using-cust
 
 Other articles on Kendo UI Grid and how-to examples related to its export in PDF:
 
-* [API Reference for `kendo.drawing`](/api/javascript/drawing)
-* [API Reference for `kendo.geometry`](/api/javascript/geometry)
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [JavaScript API Reference: kendo.drawing](/api/javascript/drawing)
+* [JavaScript API Reference: kendo.geometry](/api/javascript/geometry)
+* [Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Customize Page Layout]({% slug howto_customize_page_layout_pdf_grid %})
 * [How to Export All Pages]({% slug howto_export_all_pagesto_pdf_grid %})
 * [How to Export All Pages and Full Page Content]({% slug howto_export_allpagesand_full_page_content_pdf_grid %})
