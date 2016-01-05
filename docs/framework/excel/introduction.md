@@ -16,13 +16,13 @@ The Excel generation feature needs the [JSZip](http://stuk.github.io/jszip/) Jav
 ```
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js"></script>
-<script src="http://kendo.cdn.telerik.com/2014.3.1029/js/kendo.all.min.js"></script>
+<script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
 ```
 
 JSZip is part of the Kendo UI distribution and is also available via the Kendo UI CDN:
 
 ```
-<script src="http://kendo.cdn.telerik.com/2014.3.1029/js/jszip.min.js"></script>
+<script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
 ```
 
 > If JSZip is not included in the page Kendo UI will raise a runtime exception.
