@@ -1070,7 +1070,7 @@ Gets or sets the vertical alignment of the cells in the range.
 
 ##### value `String` *optional*
 
-One of the following values: "top", "middle" and "bottom".
+One of the following values: "top", "center" and "bottom".
 
 #### Returns
 
@@ -1089,8 +1089,8 @@ One of the following values: "top", "middle" and "bottom".
     sheet.rowHeight(2, 40);
     sheet.range("A1").value("top");
     sheet.range("A1").verticalAlign("top");
-    sheet.range("A2").value("middle");
-    sheet.range("A2").verticalAlign("middle");
+    sheet.range("A2").value("center");
+    sheet.range("A2").verticalAlign("center");
     sheet.range("A3").value("bottom");
     sheet.range("A3").verticalAlign("bottom");
 </script>

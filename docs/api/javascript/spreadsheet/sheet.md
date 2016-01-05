@@ -324,6 +324,12 @@ The zero-based index of the row
 
 Inserts a new, empty column at the provided index. The contents of the spreadsheet (including the ones in the current column index) are shifted to the right.
 
+#### Parameters
+
+##### index `Number`
+
+The zero-based index of the column
+
 #### Example
 
 ```
@@ -341,12 +347,6 @@ Inserts a new, empty column at the provided index. The contents of the spreadshe
         sheet.insertColumn(1);
     </script>
 ```
-
-#### Parameters
-
-##### index `Number`
-
-The zero-based index of the column
 
 ### insertRow
 
