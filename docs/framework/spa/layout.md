@@ -1,13 +1,22 @@
 ---
 title: Layout
+page_title: Layout | Kendo UI Single-Page Application
+description: "Learn how to handle the Layout class in a Kendo UI Single-Page Application."
+slug: layout_kendoui_singlepageapplication
 position: 3
 ---
 
-# Layout Overview
+# Layout
 
-The Layout class inherits from the View and provides the additional functionality of rendering other views/layouts in a given child element.
+The Layout class inherits from the `View` one and provides the additional functionality of rendering other views and layouts in a given child element.
 
-## Layout Showing a View
+## Functionalities
+
+### Show Views
+
+The example below demonstrates a layout showing a view.
+
+###### Example
 
     <div id="app"></div>
 
@@ -25,7 +34,11 @@ As the layout itself is a view, a layout instance can also be passed to the `sho
 
 When a view is rendered in a location already used for the rendering of a view, the previous view is hidden (its element is detached from the DOM), and the previous view `hide` event is triggered.
 
-## Layout Switching Views
+### Switch Views
+
+The example below demonstrates a layout switching views.
+
+###### Example
 
     <div id="app"></div>
 
@@ -41,11 +54,11 @@ When a view is rendered in a location already used for the rendering of a view, 
         layout.showIn("#content", bar);
     </script>
 
-## View Transitions
+### View Transitions
 
-If you call `showIn` method with an additional third parameter, the new view will replace the current one with a [replace effect](/framework/fx/replace).
+If you call the `showIn` method with an additional third parameter, the new view replaces the current one with a [replace effect]({% slug replaceffect_fxeffects_widget %}).
 
-### Example
+####### Example
 
     <style>
         /* the initial position of the next div */
@@ -77,3 +90,12 @@ If you call `showIn` method with an additional third parameter, the new view wil
         layout.showIn("#content", foo);
         layout.showIn("#content", bar, "swap");
     </script>
+
+<!--*-->
+## See Also
+
+Other articles on Kendo UI Single-Page Application:
+
+* [Single-Page Application Overview]({% slug overview_kendoui_singlepageapplication %})
+* [SPA Router]({% slug router_kendoui_singlepageapplication %})
+* [SPA View]({% slug viewclass_kendoui_singlepageapplication %})

@@ -32,7 +32,7 @@ Performance claims are never set in stone as libraries are evolving all the time
 
 ## Optimization
 
-### Disabling: with-Block
+### Disabling with Blocking
 
 By default, Kendo UI Templates use `with` blocking. This makes it more convenient to configure templates, but has a big impact on template performance. To enhance template performance, disable `with` blocking in Kendo UI by using the overriding code below:
 
@@ -66,7 +66,7 @@ $("#results").html(window.kendouiTemplate(sharedVariables));
 
 ```
 
-### with-Disabling Impact
+### Disabling with Blocking: Impact
 
 `with` JavaScript keyword is used to extend the scope chain for a statement. Anything inside a `with` block will use the context defined by `with`, thus saving repetitive scope code. It is generally considered to be a feature of JavaScript that should be avoided.
 
