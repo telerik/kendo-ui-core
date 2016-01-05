@@ -220,4 +220,4 @@ Other articles on Kendo UI Templates:
 
 * [Templates Overview]({% slug overview_kendoui_templatescomponent %})
 * [Performance]({% slug performance_kendoui_templatescomponent %})
-* [`template` JavaScript API Reference](/api/javascript/kendo#methods-template)
+* [JavaScript API Reference: template](/api/javascript/kendo#methods-template)

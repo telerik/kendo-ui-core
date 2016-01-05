@@ -24,7 +24,7 @@ There are three ways to use the hash syntax:
 2. Use HTML encoding to display values: `#: #`.
 3. Execute arbitrary Javascript code: `# if (true) { # ... non-script content here ... # } #`.
 
-## `#` Literals
+## Hash Literals
 
 > **Important**
 > * If your template includes a literal `#` character, which is not part of a binding expression and is not a script code marker, then you must escape that character or it causes a template compilation error. For example, this can happen if a `#` is used inside a hyperlink URL or a CSS color value. Literal `#` in Javascript strings are escaped via `\\\\#`, while literal `#` in external HTML script templates are escaped via `\\#`.
@@ -255,6 +255,6 @@ The example below demonstrates a summarized sample case.
 
 Other articles on Kendo UI Templates:
 
-* [Performance]({% slug performance_kendoui_templatescomponent %})
+* [Template Performance]({% slug performance_kendoui_templatescomponent %})
 * [Load Templates from External Files]({% slug externalteplateloading_templatescomponent %})
-* [`template` JavaScript API Reference](/api/javascript/kendo#methods-template)
+* [JavaScript API Reference: template](/api/javascript/kendo#methods-template)

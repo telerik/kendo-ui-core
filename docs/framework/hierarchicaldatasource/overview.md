@@ -137,7 +137,7 @@ Now, the children can be accessed.
     var middleManagement = ceo.children.view();
 
 
-#### The `hasChildren` property
+#### The hasChildren property
 
 The `hasChildren` Boolean property indicates whether a data item contains children that can be fetched from the server. You can either hard-code it, map it to another property, or compute it with a function, as demonstrated below.
 
