@@ -229,6 +229,49 @@ The example below demonstrates how to bind with `categoryField`
     });
     </script>
 
+### Bind to Grouped Data
+
+The Chart can be bound to grouped data. In this case the categories are created depending on the first group.
+
+> **Important**
+>
+> All series must contain the same number of points. If there is a different number of points in the groups **series.categoryField** must be used instead of categoryAxis.field.
+
+The example below demonstrates a grouped chart with different number of points in the groups.
+
+###### Example
+
+    <div id="chart"></div>
+    <script>
+    var data =  [
+          { "group": "Group 1", "value": 200, "category": "category 1" },
+          { "group": "Group 2", "value": 400, "category": "category 1"  },
+          { "group": "Group 3", "value": 500, "category": "category 1"  },
+          { "group": "Group 1", "value": 300, "category": "category 2" },
+          { "group": "Group 2", "value": 600, "category": "category 4" },
+          { "group": "Group 3", "value": 500, "category": "category 2" },
+          { "group": "Group 1", "value": 100, "category": "category 3" },
+          { "group": "Group 3", "value": 200, "category": "category 4" }]
+
+    $("#chart").kendoChart({
+        dataSource: {
+            data: data,
+            group: {
+                field: "group"
+            },  
+            sort: {
+                field: "category",
+                dir: "asc"
+            }
+        },
+        series: [{
+            type: "column",
+            field: "value",
+            categoryField: "category"
+        }]
+    });
+    </script>
+
 ### Scatter Series
 
 Scatter series are bound to the fields specified as `xField` and `yField`, as demonstrated below.
