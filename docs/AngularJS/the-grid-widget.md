@@ -10,16 +10,19 @@ position: 4
 
 The Grid is one of the most complex Kendo UI widgets. This chapter outlines some of its particularities regarding the AngularJS integration supported by Kendo UI.
 
-## `k-on-change` Attribute
+## Attributes
 
-If you assign a `k-on-change` event handler, it will be evaluated in a scope, which contains additional local variables:
+### k-on-change
 
-- `kendoEvent` — the `change` event as triggered by Kendo UI
-- `selected` — the selected elements (a jQuery object)
-- `data` — the selected data items (an array of models)
+If you assign a `k-on-change` event handler, it is evaluated in a scope, which contains additional local variables:
+
+- `kendoEvent`&mdash;The `change` event as triggered by Kendo UI.
+- `selected`&mdash;The selected elements (a jQuery object).
+- `data`&mdash;The selected data items (an array of models).
 
 > **Important**
-> `selected` is a jQuery object which references DOM elements. As of AngularJS 1.2.24 release this is disallowed in template expressions "[for security reasons](https://docs.angularjs.org/error/$parse/isecdom)". Therefore, the following will not work with Angular 1.2.24:
+>
+> The `selected` object is a jQuery one which references DOM elements. As of AngularJS 1.2.24 release this is disallowed in template expressions "[for security reasons](https://docs.angularjs.org/error/$parse/isecdom)". Therefore, the following will not work with Angular 1.2.24:
 >
 >     k-on-change="myChangeHandler(selected)"
 >
@@ -29,9 +32,11 @@ If you assign a `k-on-change` event handler, it will be evaluated in a scope, wh
 >
 > Obviously, the handler function needs to take that into account.
 
-When the grid is not in a multiple selection mode, the `data` above will not be an array, but a single data item, and that item is also accessible as `dataItem`. When the cell selection is allowed, an additional `columns` variable is present. This variable is an array containing the indexes of the columns where cells are selected. Choose the grid's selection mode and then select items from the grid and see what variables are available:
+When the Grid is not in a multiple selection mode, the `data` above will not be an array, but a single data item, and that item is also accessible as `dataItem`. When the cell selection is allowed, an additional `columns` variable is present. This variable is an array containing the indexes of the columns where cells are selected. Choose the grid's selection mode and then select items from the grid and see what variables are available.
 
-###### Example - handle the `change` event in AngularJS
+The example below demonstrates how to handle the `change` event in AngularJS.
+
+###### Example
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -76,11 +81,15 @@ When the grid is not in a multiple selection mode, the `data` above will not be 
 </script>
 ```
 
-## Dynamic Column Settings
+## Features
+
+### Dynamic Columns
 
 When you need to, say, load a column definition from the server, you need to postpone the widget initialization until the data is available, because the Grid does not support the option to define columns once the widget is created. That is where the `k-ng-delay` attribute comes in handy. You can use `$timeout` to emulate networking as the data is asynchronously set in scope.
 
-###### Example - dynamically set the grid columns in AngularJS
+The example below demonstrates how to dynamically set the Grid columns in AngularJS.
+
+###### Example
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -106,11 +115,13 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 </script>
 ```
 
-## Templates
+### Templates
 
 The Grid supports a lot of user-customizable templates. You can define the `rowTemplate` if you want to completely customize the way each row is displayed, or define individual cell templates by adding a `template` property to your column definitions. The difference from applying plain Kendo is that when the Grid is created with the AngularJS directive, the templates can contain live `\{\{angular\}\}` bits. Both `rowTemplate` and `columns.template` are compiled with AngularJS in a scope containing a `dataItem` variable, which points to the data model of the current item.
 
-###### Example - set the grid row template in AngularJS (`rowTemplate`)
+The example below demonstrates how to set the Grid row template (`rowTemplate`) in AngularJS.
+
+###### Example
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -144,13 +155,18 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 As seen, if you select an item, it displays two input fields bound to the selected data model. Note that if you edit the data, the text in the grid will be updated seamlessly thanks to AngularJS. Grid functions, such as sorting, will still properly work.
 
 > **Important**
+>
 > When using `rowTemplate`, include the `data-uid="#: uid #"` attribute in the toplevel row element as described in the [Grid documentation](/web/grid/how-to/Templates/row-template-using-dates). You must not use an AngularJS template like `data-uid="{{dataItem.uid}}"` because it is compiled after the grid is displayed and the widget cannot discriminate between the different rows and the data items they belong to.
 
-## `$http` Service Binding the Grid
+## Server Requests
 
-In order to take full control on the logic that performs the request to the server all you have to do is to define the different transport operations as functions. Inside the function you can use the $http or the $.ajax methods to perform the needed. When done (inside the success callback) you just need to pass the result to the `success` function part of the events arguments object.
+### HTTP Service Binding the Grid
 
-###### Example - use `$http` to bind the Grid
+To take full control on the logic that performs the request to the server, all you have to do is to define the different transport operations as functions. Inside the function you can use the `$http` or the `$.ajax` methods to perform what is needed. When done (inside the success callback), just pass the result to the `success` function part of the events arguments object.
+
+The example below demonstrates how to use `$http` to bind the Grid.
+
+###### Example
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">

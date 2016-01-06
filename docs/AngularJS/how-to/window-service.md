@@ -1,22 +1,19 @@
 ---
-title: Load a View in a Window
-page_title: Load a View in a Window
-description: "Learn how to load partial views with their own controllers in a Window"
+title: Load View in Window
+page_title: Load View in Window | AngularJS Directives
+description: "Learn how to load partial views with their own controllers in a Kendo UI Window."
 slug: window_service_angularjs_directives
-position: 7
 ---
 
-# Load a View in a Window
+# Load View in Window
 
-Contributed by Kjartan Valur
+This article is contributed by Kjartan Valur.
 
-$kWindow is a service to dynamically create Kendo UI windows with a separate template and controller.
+The `$kWindow` is a service that dynamically creates Kendo UI windows with a separate template and controller. The complete source code is available in the [kjartanvalur/angular-kendo-window](https://github.com/kjartanvalur/angular-kendo-window) GitHub repository.
 
-The complete source code is available in the
-[kjartanvalur/angular-kendo-window](https://github.com/kjartanvalur/angular-kendo-window)
-GitHub repository.
+The example below demonstrates how to open a modal Kendo UI Window.
 
-###### Example - Open a Modal Kendo UI Window
+###### Example
 
     <div ng-app="KendoDemos">
         <div ng-controller="MyCtrl">
@@ -81,17 +78,22 @@ GitHub repository.
         mycontroller.$inject = ['$scope', '$kWindow'];
     </script>
 
-###### modal.html
+###### Example
 
+    // modal.html
     <h3>{{message}}</h3>
-
 
     <button type="button" ng-click="confirm()">Confirm</button>
     <button type="button" ng-click="cancel()">Cancel</button>
 
 ## See Also
 
-Other articles on AngularJS directives and integration with Kendo UI:
+Other articles and how-to examples on AngularJS directives and Kendo UI:
 
 * [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
 * [ng-* Directives in Widget Markup]({% slug ngrepeat_ngif_ngbind_support_angularjs %})
+* [Global Events]({% slug global_events_angularjs_directives %})
+* [Grid Settings]({% slug grid_settings_angularjs_directives %})
+* [Directives with DataSource]({% slug datasource_updates_angularjs_directives %})
+* [Memory Leaks]({% slug memory_leaks_angularjs_directives %})
+* [How to Nest Widgets in AngularJS]({% slug nest_widgets_angularjs_directives %})

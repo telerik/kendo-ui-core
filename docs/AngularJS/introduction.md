@@ -16,19 +16,24 @@ Read on below to learn about the integration between Kendo UI and AngularJS and 
 Kendo UI can be used seamlessly with AngularJS. The integration between both frameworks is baked-in via AngularJS directives for Kendo UI widgets, which are part of the product distribution and officially supported by our team. Thus, you can benefit from the features available in AngularJS (such as declarative data binding, routing, form validation, and others) and employ them when building up your project.
 
 > **Important**
+>
 > AngularJS Kendo UI widget initialization is not designed to be combined with the Kendo UI server wrappers. Using wrappers is equivalent to [jQuery plugin syntax initialization](/intro/installation/jquery-initialization "Initialize a Widget Using jQuery Plug-in Syntax"). If you want to create Kendo UI widget instances with AngularJS, do not use server wrappers for these instances. Also, bear in mind that the two frameworks have some overlapping features, such as Angular binding and Kendo UI MVVM, which must not be mixed.
 
 ## AngularJS-Kendo UI Bindings
 
 The AngularJS bindings are now integrated into Kendo UI. If you are using one of the bundles, such as `kendo.all.min.js`, then the required code is already there. If you load individual Kendo UI files, you need to also load `kendo.angular.js` (or `kendo.angular.min.js`). It must be loaded after `kendo.core`.
 
-In order to activate the Angular bindings, load `angular.js` before you load Kendo UI. Therefore, load the scripts in this order:
+To activate the Angular bindings, load `angular.js` before you load Kendo UI. Therefore, load the scripts in the order shown below.
+
+###### Example
 
     <script src="jquery.js"></script>
     <script src="angular.js"></script>
     <script src="kendo.all.js"></script>
 
-Do not forget to load the Kendo UI stylesheets too. Next when creating your AngularJS application, declare dependency on "kendo.directives":
+Do not forget to load the Kendo UI stylesheets too. Next when creating your AngularJS application, declare dependency on `"kendo.directives"`, as showne below.
+
+###### Example
 
     var app = angular.module("your-angular-app", [ "kendo.directives" ]);
 
@@ -47,11 +52,12 @@ When AngularJS compiles the HTML, the Kendo UI directive will turn the `<input>`
 You can specify any options supported by Kendo UI widgets in element attributes by converting the option name from camelCase to dash-separated-words, and prefixing it with `k-`.
 
 > **Important**
-> A widget will not initialize if any of the defined attribute options are `undefined`. For instance, if the NumericTextBox `k-max` attribute points to a `$scope.maxNumber` field which is `undefined`, it will not initialize.
->
-> Kendo bindings will parse attributes without prefixes if they match the widget's options. For instance, the HTML5 `placeholder` attribute defined in the NumericTextBox element will be parsed as Angular expression, because the widget has a `placeholder` option. Because of this built-in functionality, you will need to ensure that the attribute has a valid Angular expression or a valid string value, rendered between `'` (single quote) characters.
+> * A widget will not initialize if any of the defined attribute options are `undefined`. For instance, if the NumericTextBox `k-max` attribute points to a `$scope.maxNumber` field which is `undefined`, it will not initialize.
+> * Kendo bindings will parse attributes without prefixes if they match the widget's options. For instance, the HTML5 `placeholder` attribute defined in the NumericTextBox element will be parsed as Angular expression, because the widget has a `placeholder` option. Because of this built-in functionality, you will need to ensure that the attribute has a valid Angular expression or a valid string value, rendered between `'` (single quote) characters.
 
-#### Set widget options as attributes in AngularJS
+#### Set Options As Attributes in AngularJS
+
+###### Example
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -65,7 +71,9 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 
 Note an important detail in the example above: the strings `'Increment'` and `'Decrement'` are quoted inside the attribute values. Without the single quote inside they will be interpreted as variable names and Angular-Kendo will look for `$scope.Increment` and `$scope.Decrement` variables. Because omitting the quotes is a common error, Angular-Kendo will emit a warning in the JS console when such variables are not found.
 
-#### Specify widget options from `controller` in AngularJS
+#### Specify Options from Controller in AngularJS
+
+###### Example
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -79,9 +87,11 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 </script>
 ```
 
-#### Set widget `array` and `object` options as attributes in AngularJS
+#### Set array and object Options as attributes in AngularJS
 
-You can use declarative attributes for **array** and **object** configuration options, too:
+You can use declarative attributes for `array` and `object` configuration options, too.
+
+###### Example
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -104,7 +114,9 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 
 ### Widget Configuration in Controller
 
-If you want to store the whole widget configuration in the `controller`, you can use the special `k-options` attribute:
+If you want to store the whole widget configuration in the `controller`, you can use the special `k-options` attribute.
+
+###### Example
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -122,11 +134,14 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 ```
 
 > **Important**
+>
 > A widget will not initialize if any of the defined attribute options are `undefined`. For instance, if the NumericTextBox `k-max` attribute points to a `$scope.maxNumber` field which is `undefined`, it will not initialize.
 
 ### Template Directives
 
-The data-bound container widgets may have their template options specified as nested directives. Refer to the example below to set templates via AngularJS directives:
+The data-bound container widgets may have their template options specified as nested directives. Refer to the example below to set templates via AngularJS directives.
+
+###### Example
 
 ``` html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -156,20 +171,22 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 
 The following widgets support template directives:
 
-* TreeMap -  `k-template`
-* MobileListView -  `k-header-template`, `k-template`
-* MobileScrollView -  `k-empty-template`, `k-template`
-* Grid -  `k-alt-row-template`, `k-detail-template`, `k-row-template`
-* ListView -  `k-edit-template`, `k-template`, `k-alt-template`
-* Pager -  `k-select-template`, `k-link-template`
-* PivotGrid -  `k-column-header-template`, `k-data-cell-template`, `k-row-header-template`
-* Scheduler -  `k-all-day-event-template`, `k-date-header-template`, `k-event-template`, `k-major-time-header-template`, `k-minor-time-header-template`
-* TreeView -  `k-template`,
-* Validator -  `k-error-template`
+* TreeMap&mdash;The widget supports the `k-template`.
+* MobileListView&mdash;Supports the`k-header-template` and `k-template`.
+* MobileScrollView&mdash;Supports the`k-empty-template` and `k-template`.
+* Grid&mdash;Supports the`k-alt-row-template`, `k-detail-template`, and `k-row-template`.
+* ListView&mdash;Supports the`k-edit-template`, `k-template`, and `k-alt-template`.
+* Pager&mdash;Supports the`k-select-template` and `k-link-template`.
+* PivotGrid&mdash;Supports the`k-column-header-template`, `k-data-cell-template`, and `k-row-header-template`.
+* Scheduler&mdash;Supports the`k-all-day-event-template`, `k-date-header-template`, `k-event-template`, `k-major-time-header-template`, and `k-minor-time-header-template`.
+* TreeView&mdash;Supports the`k-template`.
+* Validator&mdash;Supports the`k-error-template`.
 
 ### Form Validation
 
-AngularJS provides built-in form validation functionality, however `k-ng-model` does not update the internal [`$dirty` and `$pristine` properties](https://docs.angularjs.org/api/ng/type/form.FormController). That is why, in order to use `$dirty` and `$pristine` you should manually update them when the value of the widget changes. You may do it using `$watch` like this:
+AngularJS provides built-in form validation functionality, however `k-ng-model` does not update the internal [`$dirty` and `$pristine` properties](https://docs.angularjs.org/api/ng/type/form.FormController). That is why, in order to use `$dirty` and `$pristine` you should manually update them when the value of the widget changes. You may do it using `$watch`, as demonstrated in the example below.
+
+###### Example
 
 ``` html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -196,9 +213,11 @@ AngularJS provides built-in form validation functionality, however `k-ng-model` 
 
 ### Scope Bindings
 
-#### Bind widget values via `ng-model`
+#### Bind Values: ng-model
 
-For all widgets which provide a `value()` method you can use the standard `ng-model` directive to bind their value into the AngularJS scope:
+For all widgets which provide a `value()` method you can use the standard `ng-model` directive to bind their value into the AngularJS scope.
+
+###### Example
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -215,11 +234,13 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 
 The input field is now bound to the scope variable. When you select a date, the `birthday` variable will be set to the input field's value (as a string).
 
-#### Bind widget values via `k-ng-model`
+#### Bind Values: k-ng-model
 
 If your element is a form field like `<input>` or `<textarea>` (which has a text value), `ng-model` will bind the field contents, which is what most AngularJS users would expect. So, for the DatePicker example above, you would get a string date instead of a JavaScript Date object, in the scope.
 
-If you need to get the actual `widget.value()` you can use `k-ng-model`:
+If you need to get the actual `widget.value()` you can use `k-ng-model`.
+
+###### Example
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -237,17 +258,20 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 The directive will update the `birthday` variable with the selected `Date` object whenever the `change` event occurs on the widget.
 
 > **Important**
+>
 > If you are using AngularJS, then you probably want to use Angular's own routing mechanism and data binding. Do not mix that with Kendo UI MVVM.
 
-### `k-value-primitive` Attribute
+### The k-value-primitive Attribute
 
 As of Kendo UI Q3 2014 (2014.3.1119) release, the `k-value-primitve` attribute has been introduced for DropDownList, ComboBox, MultiSelect, and AutoComplete widgets.
 
 With this option you can set the widget to either use primitive or object values. It will work in a similar way to the `data-value-primitive` option in the [MVVM value binding](http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value#use-the-value-binding-with-a-select-widget-to-update-the-view-model-field-with-the-value-field-when-the-initial-value-is-null). By using this option you can always apply the `k-ng-model` attribute no matter if you are using primitive or non-primitive values. By default the attribute is set to `false`.
 
-#### Set `k-value-primitive` to `false`
+#### Set to False
 
-Setting the `k-value-primitive` to `false` will force the widget to accept or return an object, or an array of objects, for the MultiSelect, holding the current value selected:
+Setting the `k-value-primitive` to `false` will force the widget to accept or return an object, or an array of objects, for the MultiSelect, holding the current value selected.
+
+###### Example
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -276,9 +300,11 @@ Setting the `k-value-primitive` to `false` will force the widget to accept or re
 ```
 Here the MultiSelect will display `Chai` as selected and the widget's value will be set to `[{"ProductName":"Chai","ProductID":1}]`.
 
-#### Set `k-value-primitive` to `true`
+#### Set to True
 
-In this scenario, when `k-value-primitive` is set to `true`, you can pass an array of primitive values holding the IDs of the elements that you want to select:
+In this scenario, when `k-value-primitive` is set to `true`, you can pass an array of primitive values holding the IDs of the elements that you want to select.
+
+###### Example
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -310,9 +336,11 @@ In this case the widget will display `Chai` and `Mishi Kobe Niku` as selected an
 
 ### Event Handlers
 
-#### Set event handlers via widget configuration options
+#### Set Handlers via Widget Configuration Options
 
-If you store the whole configuration in the `controller`, then you can add an event handler in the same way as you would do with plain Kendo UI:
+If you store the whole configuration in the `controller`, then you can add an event handler in the same way as you would do with plain Kendo UI.
+
+###### Example
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -338,9 +366,11 @@ If you store the whole configuration in the `controller`, then you can add an ev
 
 The sample above includes a paragraph that is using Angular's `ng-show` directive and will be displayed only after a month was picked. Note that in the event handler `$scope.$digest()` had to be called to make this trick work.
 
-#### Set event handlers via the `k-on` attribute
+#### Set Handlers via k-on Attribute
 
-It is possible to specify event handlers using attributes as well. They require the `k-on-` prefix:
+It is possible to specify event handlers using attributes as well. They require the `k-on-` prefix.
+
+###### Example
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -360,23 +390,22 @@ It is possible to specify event handlers using attributes as well. They require 
 
 Note that the `kendoEvent` variable will be defined in scope and you must pass it to the event handler. If you are using the `k-on-` attributes, you do not need to call `$digest()` on the scope. Your bindings take care of it.
 
-#### Special `change` event on some widgets
+#### Special Change Event on Some Widgets
 
 The Grid, TreeView, and ListView widgets will evaluate handlers defined with `k-on-change` in a scope, containing additional information about the selected items, as local variables. The following locals are defined:
 
-- `selected` (jQuery object) - the selected elements
-
-- `data` (array or data item) - the selected data models. It will be an array when a multiple selection is enabled, or a single item otherwise.
-
-- `dataItem` - when multiple selection is not enabled, this is provided for consistency and will be the same item as `data`.
-
-- `columns` - for the Grid, when the cell selection is enabled, it will be an array with zero-based column indexes for the selected columns. Also, in this case, the `selected` object will contain the respective `<td>` elements instead of the `<tr>` ones.
+- `selected` (jQuery object)&mdash;The selected elements.
+- `data` (array or data item)&mdash;The selected data models. It will be an array when a multiple selection is enabled, or a single item otherwise.
+- `dataItem`&mdash;When multiple selection is not enabled, this is provided for consistency and will be the same item as `data`.
+- `columns`&mdash;For the Grid, when the cell selection is enabled, it will be an array with zero-based column indexes for the selected columns. Also, in this case, the `selected` object will contain the respective `<td>` elements instead of the `<tr>` ones.
 
 The `kendoEvent` is available as well.
 
 ### Widget Update upon Option Changes
 
-You can update a widget from `controller`. Use the special `k-rebind` attribute to create a widget which automatically updates when some scope variable changes. This option will destroy the original widget and will recreate it using the changed options:
+You can update a widget from `controller`. Use the special `k-rebind` attribute to create a widget which automatically updates when some scope variable changes. This option will destroy the original widget and will recreate it using the changed options.
+
+###### Example
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -397,17 +426,21 @@ You can update a widget from `controller`. Use the special `k-rebind` attribute 
 </script>
 ```
 
-To watch multiple options for change, just use `k-options` and pass the same variable to `k-rebind`:
+To watch multiple options for change, just use `k-options` and pass the same variable to `k-rebind`, as shown below.
+
+###### Example
 
     <ul kendo-menu k-options="menuOptions" k-rebind="menuOptions"> ... </ul>
 
-### State Changes via `k-ng-disabled` and `k-ng-readonly`
+### State Changes
 
 Kendo UI Q1 2015 release intorduced support for `k-ng-disabled` and `k-ng-readonly` directives. By using them, you can change the `disabled` or `readonly` state of the widget based on a scope variable.
 
 `k-ng-disabled` is supported by all widgets containing an `enabled` method, except the PanelBar and Menu widget. `k-ng-readonly` is supported by all widgets containing a `readonly` method.
 
-#### Change the `disabled` state
+#### Change Disabled State
+
+###### Example
 
 ```html
     <div id="example" ng-app="KendoDemos">
@@ -439,7 +472,9 @@ Kendo UI Q1 2015 release intorduced support for `k-ng-disabled` and `k-ng-readon
     </script>
 ```
 
-#### Change the `readonly` state
+#### Change Readonly State
+
+###### Example
 
 ```html
     <div id="example" ng-app="KendoDemos">
@@ -475,9 +510,11 @@ Kendo UI Q1 2015 release intorduced support for `k-ng-disabled` and `k-ng-readon
 
 It is sometimes useful to postpone creating a widget until after some asynchronously-loaded data is available. For example, you would need this feature to initialize a Grid widget when you load the column definitions from the server as the Grid does not support re-defining columns after the widget is instantiated.
 
-#### Use the `k-ng-delay` attribute
+#### Use k-ng-delay Attribute
 
-You can use the special `k-ng-delay` attribute to delay the initialization of a widget:
+You can use the special `k-ng-delay` attribute to delay the initialization of a widget.
+
+###### Example
 
     // in controller
     $http({ method: "GET", url: "customers.json" })
@@ -497,9 +534,11 @@ You can use the special `k-ng-delay` attribute to delay the initialization of a 
 
 The grid will be created only when the `gridOptions` variable becomes available.
 
-#### Use a `$http` call
+#### Use HTTP Call
 
-You can load the widget data with a `$http` call and initialize the widget when the data is available:
+You can load the widget data with a `$http` call and initialize the widget when the data is available.
+
+###### Example
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -523,9 +562,11 @@ You can load the widget data with a `$http` call and initialize the widget when 
 
 ### Widget References
 
-#### Get widget instances in `controller`
+#### Get Instances in Controller
 
-Sometimes you might need a reference to a widget in order to call methods on it from your controller. To get one, just assign a name to the `kendo-widget-name` attribute:
+Sometimes you might need a reference to a widget in order to call methods on it from your controller. To get one, just assign a name to the `kendo-widget-name` attribute.
+
+###### Example
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -540,9 +581,11 @@ Sometimes you might need a reference to a widget in order to call methods on it 
 </script>
 ```
 
-#### Get widget instances in `controller` (tag directive)
+#### Get Instances in Controller: Tag Directive
 
-As of Kendo UI Q1 2015 release, if you use the tag directive variant, you can set the `k-scope-field` to achieve the same:
+As of Kendo UI Q1 2015 release, if you use the tag directive variant, you can set the `k-scope-field` to achieve the same.
+
+###### Example
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -557,9 +600,11 @@ As of Kendo UI Q1 2015 release, if you use the tag directive variant, you can se
 </script>
 ```
 
-#### Set options in link function
+#### Set Options in Link Function
 
-As of Kendo UI Q2 2015 release, the timeout initialization of the widgets has been removed. To set the options of a widget as part of the link function of a custom directive, use `k-ng-delay` and `timeout`:
+As of Kendo UI Q2 2015 release, the timeout initialization of the widgets has been removed. To set the options of a widget as part of the link function of a custom directive, use `k-ng-delay` and `timeout`.
+
+###### Example
 
 ````html
 <div id="example" ng-app="KendoDemos">
@@ -583,13 +628,15 @@ As of Kendo UI Q2 2015 release, the timeout initialization of the widgets has be
 </script>
 ````
 
-### Widgets Placed in `window`
+### Widgets Placed in Window
 
 AngularJS will create a new scope for the content placed in a window. This is due to the dynamic scoping behavior of the framework. A widget placed in the window or popup will loose its connection to the parent scope and hence it will not handle any changes to the parent scope.
 
-#### Get AngularJS scope attached to the pop-up window
+#### Get AngularJS Scope Attached to Pop-Up Window
 
-The available workaround is to either access the widget directly, using its jQuery object, or to access the newly created child scope. Basically, you will need to find the window or popup element and get the scope from it:
+The available workaround is to either access the widget directly, using its jQuery object, or to access the newly created child scope. Basically, you will need to find the window or popup element and get the scope from it.
+
+###### Example
 
 ````html
 <div id="example" ng-app="KendoDemos">
@@ -608,9 +655,11 @@ The available workaround is to either access the widget directly, using its jQue
 </script>
 ````
 
-#### Use a separate controller to resolve window scopes
+#### Use Separate Controller to Resolve Window Scopes
 
-The best solution in this case would be for you to use a separate `controller` that will handle the scope of the window:
+The best solution in this case would be for you to use a separate `controller` that will handle the scope of the window.
+
+###### Example
 
 ````html
 <div ng-controller="Host">
@@ -653,10 +702,9 @@ The best solution in this case would be for you to use a separate `controller` t
 </div>
 ````
 
-## Known limitations
+## Known Limitations
 
-Since the Q2 release when the widgets `k-options` is bound to non-existing object, the widget will not be initialized and will fail silently. This is caused by a change introduced to accomodate the AngularJS router implementation
-which makes the widget "wait" for the options object to be set.
+Since the Kendo UI 2015 Q2 release when the widget's `k-options` is bound to a non-existing object, the widget is not initialized and fails silently. This is caused by a change introduced to accommodate the AngularJS router implementation, which makes the widget wait for the options object to be set.
 
 ## See Also
 

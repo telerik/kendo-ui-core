@@ -10,11 +10,15 @@ position: 2
 
 Kendo UI directives emit a `kendoWidgetCreated` event for each widget that is created, and a `kendoRendered` event after all widgets, defined in the page, were created.
 
-## `kendoWidgetCreated`
+## Types
 
-Suppose you want to create a TreeView widget that automatically expands the checked items upon initialization. You cannot easily do it without the `kendoWidgetCreated` event, because the widget is not instantiated at the time your `controller` function runs, but after it was finalized. This is logical as the widget is built from data which is defined within the `controller`:
+### Upon Widget Creation: kendoWidgetCreated
 
-###### Example - listen to the `kendoWidgetCreated` event
+Suppose you want to create a TreeView widget that automatically expands the checked items upon initialization. You cannot easily do it without the `kendoWidgetCreated` event, because the widget is not instantiated at the time your `controller` function runs, but after it was finalized. This is logical as the widget is built from data which is defined within the `controller`.
+
+The example below demonstrates how to listen to the `kendoWidgetCreated` event.
+
+###### Example
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -87,11 +91,13 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 </script>
 ```
 
-## `kendoRendered`
+### After Widget Creation: kendoRendered
 
 Because browsers render data asynchronously, the `kendoRendered` event is useful to manipulate the view of a page while the widgets, defined on this page, finish their rendering. For example, you can use `kendoRendered` to initially hide the view and then display it when the widgets are already initialized, or you can show a **Loading...** overlay, or whatever you decide fits to your project.
 
-###### Example - listen to the `kendoRendered` event
+The example below demonstrates how to listen to the `kendoRendered` event.
+
+###### Example
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
