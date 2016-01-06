@@ -27,6 +27,7 @@ Use the following URL to load the minified Kendo UI Core script (available since
 `https://kendo.cdn.telerik.com/2014.1.416/js/kendo.ui.core.min.js`
 
 > **Important**  
+>
 > The `http://cdn.kendostatic.com/` URL will remain active, but is no longer recommended for new projects.
 
 ### Via HTTPS Protocol
@@ -34,7 +35,8 @@ Use the following URL to load the minified Kendo UI Core script (available since
 To access the Kendo UI CDN service through the HTTPS protocol, use the same host name as above, only replacing the scheme (protocol) with `https`:  
 `https://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js`
 
-> **Important**  
+> **Important**
+>
 > The `https://da7xgjtj801h2.cloudfront.net/` URL will remain active, but is no longer recommended for new projects.
 
 ## Troubleshooting
@@ -43,15 +45,15 @@ To access the Kendo UI CDN service through the HTTPS protocol, use the same host
 
 Although the Amazon CloudFront service provides for a reliable level of uptime support, you may encounter disruption or connection troubles. After you have checked the status of the systems at [http://status.aws.amazon.com/](http://status.aws.amazon.com/), the CDN status is reported as healthy and is operating normally.
 
-**Cause:** You could be experiencing Internet or network connectivity problems, or DNS problems, or it is possible that firewalls, antivirus or other security software incorrectly filters out the CDN scripts or modifies (breaks) them on-the-fly.
+**Cause** You could be experiencing Internet or network connectivity problems, or DNS problems, or it is possible that firewalls, antivirus or other security software incorrectly filters out the CDN scripts or modifies (breaks) them on-the-fly.
 
-**Fix:** Contact your system administrator, as remote investigation of connection problems is outside the scope of Kendo UI support.
+**Fix** Contact your system administrator, as remote investigation of connection problems is outside the scope of Kendo UI support.
 
 ### Refer Kendo UI from CDN with Local Script Fallback
 
-**Cause:** Kendo UI internal builds are not uploaded on CDN, because they are intended only for clients with a commercial license. Only major releases and service packs are uploaded on the Kendo UI CDN.
+**Cause** Kendo UI internal builds are not uploaded on CDN, because they are intended only for clients with a commercial license. Only major releases and service packs are uploaded on the Kendo UI CDN.
 
-**Fix:** You should use a private CDN for internal builds. It is recommendable to implement a local fallback when using any kind of CDN in the way displayed here:
+**Fix** You should use a private CDN for internal builds. It is recommendable to implement a local fallback when using any kind of CDN in the way displayed here:
 
     <!DOCTYPE html>
     <html>
@@ -90,6 +92,7 @@ Although the Amazon CloudFront service provides for a reliable level of uptime s
     </html>
 
 > **Important**  
+>
 > You will be able to find more information on the topic at [Scott HanselMann - Fallback from CDN to Local Scripts](http://www.hanselman.com/blog/CDNsFailButYourScriptsDontHaveToFallbackFromCDNToLocalJQuery.aspx).
 
 ## See Also

@@ -13,7 +13,8 @@ position: 5
 
 The Kendo UI library is based on [jQuery](http://jquery.com/). All Kendo UI bundles include the corresponding minified jQuery library in the `js` directory.
 
-> **Important**  
+> **Important**
+>  
 > In order for the Kendo UI scripts to work as expected, make sure you include a reference to the jQuery library in the document before the scripts.
 
 ### Supported jQuery Versions
@@ -46,7 +47,8 @@ Occasionally, a legacy web application might require an older jQuery version wit
 
 From Q2 2014 release onward, Kendo UI widgets support [AngularJS](https://angularjs.org/) integration. To activate the AngularJS directives, you need to install the AngularJS library. Just like jQuery, its minified format is located is in the `js` directory of the Kendo UI bundle you have downloaded.
 
-> **Important**  
+> **Important**
+>
 > Unlike jQuery, Kendo UI distributions do not need AngularJS in order to function correctly.
 
 ### Supported AngularJS Versions
@@ -65,7 +67,7 @@ From Q2 2014 release onward, Kendo UI widgets support [AngularJS](https://angula
 
 The [JSZip library](https://stuk.github.io/jszip/) is a necessary prerequisite if you want to configure your widgets so as to support the [Excel export feature](http://docs.telerik.com/kendo-ui/framework/excel/introduction). The Excel export feature was first included in the [Kendo UI 2014.3.1119 (Q3 2014) release](/install/changes-and-backward-compatibility). However, you will not need the JSZip library if you do not need the Excel export feature to be supported.
 
-### `script` Tag Placement
+### Placement of script Tags
 
 Generally, we recommend that you place `script` tags before the closing `body` tag, so that the scripts are loaded and executed after the HTML markup. Usually, the Kendo UI widget initialization statements are executed in the `document.ready` event via a jQuery handler. This means that jQuery must be registered before any Kendo UI widget initialization statements. When using the client-side Kendo UI widgets, you can control the placement of the initialization statements, so that the jQuery script file can be registered at the bottom of the document.
 

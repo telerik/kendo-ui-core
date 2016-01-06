@@ -3,7 +3,7 @@ title: Getting Started with Kendo UI
 page_title: Getting Started with Kendo UI | Kendo UI Installation
 description: "Get your HTML5 UI frameworks and widgets by hosting Kendo UI, downloading Kendo UI bower package, or using Kendo UI CDN service."
 previous_url: /install/onsite, /getting-started, /intro/getting-started
-slug: getting_started_installation_kendoui 
+slug: getting_started_installation_kendoui
 position: 1
 ---
 
@@ -20,7 +20,7 @@ Depending on your preferences and the requirements of your project, you can:
 * [Get Your Commercial License for Telerik UI for PHP](http://www.telerik.com/purchase/php-ui)
 * [Use the GitHub Open-Source License for Telerik Kendo UI® Core](https://github.com/telerik/kendo-ui-core)
 
-### Step 1: Download
+### Download
 
 Once you [download any of the Kendo UI bundles](http://www.telerik.com/download/kendo-ui), you will get the following folders in your local repository:
 
@@ -31,12 +31,12 @@ Once you [download any of the Kendo UI bundles](http://www.telerik.com/download/
 * `/wrappers` - includes the server-side wrappers. As it is necessary for the Telerik UI for ASP.NET MVC, UI for JSP or UI for PHP distributions only, the folder is available in the commercial packages of these versions.
 * `changelog.html` - provides the Kendo UI release notes
 
-### Step 2: Add CSS and JavaScript References
+### Add CSS and JavaScript References
 
 To use Kendo UI in your project, you need to include the required JavaScript and CSS files.
 
-**Step 1:** Extract the `/js` and `/styles` directories from the bundle archive and copy them to your web application root directory.  
-**Step 2:** Include the Kendo UI JavaScript and CSS files in the `head` tag of your HTML document. Make sure the common CSS file is registered before the theme CSS file.
+**Step 1** Extract the `/js` and `/styles` directories from the bundle archive and copy them to your web application root directory.  
+**Step 2** Include the Kendo UI JavaScript and CSS files in the `head` tag of your HTML document. Make sure the common CSS file is registered before the theme CSS file.
 
 ###### Example
 
@@ -68,9 +68,10 @@ To use Kendo UI in your project, you need to include the required JavaScript and
 	        </html>
 
 > **Important**  
+>
 > The code examples onwards assume that the Kendo UI scripts and stylesheets were added to the document.
 
-**Step 3:** Initialize a Widget.
+**Step 3** Initialize a Widget.
 
 The example below demonstrates how to initialize the [DatePicker widget](http://demos.telerik.com/kendo-ui/datepicker/index).
 
@@ -84,8 +85,8 @@ The example below demonstrates how to initialize the [DatePicker widget](http://
             $("#datepicker").kendoDatePicker();
         });
         </script>
-        
-The example below demonstrates the full initialization of the [DatePicker widget](http://demos.telerik.com/kendo-ui/datepicker/index). 
+
+The example below demonstrates the full initialization of the [DatePicker widget](http://demos.telerik.com/kendo-ui/datepicker/index).
 
 ###### Example
 
@@ -112,9 +113,7 @@ The example below demonstrates the full initialization of the [DatePicker widget
 
 ### Kendo UI Bower Packages
 
-[Bower](http://bower.io/) is a popular package manager for the web.
-
-Kendo UI maintains 2 bower packages, namely Kendo UI Core and Kendo UI Professional. Official releases, service packs and internal builds are uploaded to both of them.
+[Bower](http://bower.io/) is a popular package manager for the web. Kendo UI maintains 2 bower packages, namely Kendo UI Core and Kendo UI Professional. Official releases, service packs and internal builds are uploaded to both of them.
 
 For more information on installing Kendo UI as a Bower package, see [this article]({% slug kendoui_bower_packages_kendoui_installation %}).
 
