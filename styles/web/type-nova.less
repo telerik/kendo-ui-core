@@ -565,8 +565,24 @@ input.k-textbox:active {
         color: lighten(@hover-text-color, 23%);
     }
 
+    .k-today {
+        background-color: @selected-background;
+    }
+
+    .k-today .k-link {
+        color: @selected-text-color;
+    }
+
+    .k-today.k-state-hover {
+        background-color: @accent-hover-background;
+        border-color: @accent-hover-background;
+    }
+
     .k-state-selected,
-    .k-state-selected.k-state-hover {        
+    .k-state-selected.k-state-hover,
+    .k-today.k-state-focused,
+    .k-today:active,
+    .k-today.k-state-selected:active {        
         background-color: @selected-background;
         border-color: @selected-background;
         box-shadow: none;
