@@ -95,7 +95,7 @@ By default, the Kendo UI Grid exports only the current page of data. To export a
 
 ### Server Proxy
 
-Internet Explorer 9, or older, and Safari do not support the option for saving a file and require the implementation of a [server proxy](/framework/save-files/introduction#browser-support). Set the [`proxyURL`](/api/javascript/ui/grid#configuration-pdf.proxyURL) option to specify the server proxy URL.
+Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a [server proxy](/framework/save-files/introduction#browser-support). Set the [`proxyURL`](/api/javascript/ui/grid#configuration-pdf.proxyURL) option to specify the server proxy URL.
 
 ###### Example - using server proxy
 
@@ -229,7 +229,7 @@ All [Known Limitations](/framework/drawing/drawing-dom#known-limitations) of the
 
 * Maximum document size is limited to 5080x5080mm (200x200 inches) by the PDF 1.5 specification. Larger files might not open in all viewers.
 
-* Older browsers, such as Internet Explorer 9, or older, and Safari, requires the implementation of a server proxy. For more information on this, refer to [the `proxyUrl` configuration section](/api/javascript/ui/grid#configuration-pdf.proxyURL).
+* Older browsers, such as Internet Explorer 9 and Safari, requires the implementation of a server proxy. For more information on this, refer to [the `proxyUrl` configuration section](/api/javascript/ui/grid#configuration-pdf.proxyURL).
 
 * PDF export is not supported in Internet Explorer 8 and older.
 
