@@ -10,7 +10,7 @@ position: 6
 
 From Kendo UI Q3 2013 release onwards, the Grid widget supports "adaptive" enhancements like changes in styling and behavior in order to remain consistent with the client device experience. For instance, when filtering or editing data on a mobile device, Kendo UI slides in a new screen for the user, which is a departure from the more desktop-like inline and popup behaviors. To see those features in action, check the [adaptive rendering demos](http://demos.telerik.com/kendo-ui/m/index#grid/adaptive).
 
-## Enable
+## Set Up
 
 To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/grid#configuration-mobile) propery to `true`, `phone` or `tablet`.
 
@@ -38,7 +38,9 @@ To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/
 
 Each adaptive Grid is rendered inside a separate mobile Pane. Since the position of the Panes is absolute, the Panes overlap. To avoid this issue, wrap each grid inside a `<div>` container that is relatively positioned and has a set height. The absolute position is required for the transition between main and edit views to work correctly.
 
-###### Example - add multiple adaptive Grids to the same page
+The example below demonstrates how to add multiple adaptive Grids to the same page.
+
+###### Example
 
     <div class="adaptive-grid-wrapper">
         <div id="grid1"></div>
@@ -77,7 +79,7 @@ Each adaptive Grid is rendered inside a separate mobile Pane. Since the position
 
 The mobile pane in which the adaptive Grid is placed will not automatically expand in height. To add an adaptive Grid to a kendo UI mobile aplication, set the `stretch` configuration of the respective view to `true`, or explicitly define the height of the widget.
 
-### Use `stretch` Option
+### Apply Options: stretch
 
 ###### Example
 
@@ -108,7 +110,7 @@ The mobile pane in which the adaptive Grid is placed will not automatically expa
         var app = new kendo.mobile.Application();
     </script>
 
-### Use `height` Option    
+### Apply Options: height    
 
 ###### Example
 
@@ -144,17 +146,23 @@ The mobile pane in which the adaptive Grid is placed will not automatically expa
 
 The column resizing feature on touch screen devices is triggered when the user holds a finger on the respective column header. When the resizing icon appears, the user will be able to resize the column by dragging.
 
-![](/data-management/grid/adaptive-resizing-icon.png)
+**Figure 1. Grid with resizable columns on a mobile device**
+
+![](/controls/data-management/grid/adaptive-resizing-icon.png)
 
 ## See Also
 
 Other articles on Kendo UI Grid:
 
 * [Blog Post for Building An Adaptive Grid and Scheduler for Kendo UI](http://blogs.telerik.com/kendoui/posts/13-10-10/building-an-adaptive-grid-and-scheduler-for-kendo-ui)
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})
-* [Remote Data Binding]({% slug remote_data_binding_grid %})
 * [Editing Functionality]({% slug editing_kendoui_grid_widget %})
+* [Appearance of the Grid]({% slug appearance_kendoui_grid_widget %})
+* [Remote Data Binding]({% slug remote_data_binding_grid %})
 * [Localization of Messages]({% slug localization_kendoui_grid_widget %})
-* [Exporting Content to Excel]({% slug exporting_excel_kendoui_grid_widget %})
-* [Printing Your Grid]({% slug printing_kendoui_grid %})
+* [Export the Grid to Excel]({% slug exporting_excel_kendoui_grid_widget %})
+* [Export the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %})
+* [Print the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
+
+For how-to examples on the Kendo UI Grid widget, browse [its How-to section]({% slug howto_bindto_telerik_backend_services_grid %}).

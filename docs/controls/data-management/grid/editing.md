@@ -10,9 +10,9 @@ position: 4
 
 Editing is one of the basic functionalities Kendo UI Grid supports and it allows you to manipulate the way the data is presented.
 
-## Enable Editing
+## Set Up
 
-To enable the editing support for the Kendo UI Grid widget, perform the steps demonstrated below.
+To enable the editing support for the Kendo UI Grid widget, perform the steps described below.
 
 ### Configure DataSource
 
@@ -41,7 +41,7 @@ The example below demonstrates how to configure the dataSource for CRUD (Create,
          //...
     });
 
-### Define Fileds through `schema`
+### Define Fields: schema
 
 The example below demonstrates how to declare fields definitions through the DataSource `schema`.
 
@@ -79,19 +79,19 @@ The example below demonstrates how to declare fields definitions through the Dat
       }
     });
 
-### Set `editable` Option
+### Set Options: editable
 
-The examples below demonstrate the two options to set the `editable` configuration option in the Grid.
+The example below demonstrates the two alternatives to set the `editable` configuration option in the Grid.
 
 ###### Example
 
+    // Choice 1
     $("#grid").kendoGrid({
           dataSource: dataSource,
           editable: true
     });
 
-###### Example
-
+    // Choice 2
     $("#grid").kendoGrid({
           dataSource: dataSource,
           editable: { //disables the deletion functionality
@@ -100,10 +100,9 @@ The examples below demonstrate the two options to set the `editable` configurati
           }
     });
 
-If you want to enable the insertion of new records, configure the Toolbar.
+If you want to enable the insertion of new records, configure the Toolbar, as shown below.
 
 ###### Example
-
 
     $("#grid").kendoGrid({
          dataSource: dataSource,
@@ -111,7 +110,7 @@ If you want to enable the insertion of new records, configure the Toolbar.
          editable: true
     });
 
-If you want to delete records, define a delete command column.
+If you want to delete records, define a delete command column, as demonstrated below.
 
 ###### Example
 
@@ -131,10 +130,14 @@ If you want to delete records, define a delete command column.
 
 Other articles on Kendo UI Grid:
 
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})
 * [Remote Data Binding]({% slug remote_data_binding_grid %})
 * [Localization of Messages]({% slug localization_kendoui_grid_widget %})
+* [Appearance of the Grid]({% slug appearance_kendoui_grid_widget %})
 * [Adaptive Rendering]({% slug adaptive_rendering_kendoui_grid_widget %})
-* [Exporting Content to Excel]({% slug exporting_excel_kendoui_grid_widget %})
-* [Printing Your Grid]({% slug printing_kendoui_grid %})
+* [Export the Grid to Excel]({% slug exporting_excel_kendoui_grid_widget %})
+* [Export the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %})
+* [Print the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
+
+For how-to examples on the Kendo UI Grid widget, browse [its How-to section]({% slug howto_bindto_telerik_backend_services_grid %}).

@@ -18,7 +18,7 @@ There are two primary ways to create a Kendo UI Grid:
 * From an empty `<div>` element. In this case all Grid settings are provided in the initialization script statement.
 * From an existing HTML `<table>` element. In this case some of the Grid settings can be inferred from the table structure and the HTML attributes of the elements.
 
-### From an Empty `<div>`
+### From HTML Element: div
 
 ###### Example
 
@@ -53,11 +53,11 @@ There are two primary ways to create a Kendo UI Grid:
 
     </script>
 
-### From an HTML Table
-
-###### Example
+### From HTML Table
 
 When creating the Grid from a table, it is usually already populated with data. This improves the accessibility and search engine optimization, and ensures that the user will see data even if JavaScript is disabled or there is a JavaScript error on the page.
+
+###### Example
 
     // define the HTML table with rows, columns, and data
     <table id="grid">
@@ -96,8 +96,8 @@ When creating the Grid from a table, it is usually already populated with data. 
     </script>
 
 > **Important**  
-> The Grid uses a Kendo UI DataSource instance even when the widget is created from a table. The cell content is extracted and populates the DataSource in this way:  
 >
+> The Grid uses a Kendo UI DataSource instance even when the widget is created from a table. The cell content is extracted and populates the DataSource in this way:  
 > 1. The data field names in the DataSource are either created from the header cell content, or from the `data-field` attributes of the header cells.  
 > 2. The data field names must be valid JavaScript identifiers. Therefore, it is recommended to use `data-field` attributes. Otherwise the header cell content must comply with the following limitations:  
 >   * No spaces
@@ -108,18 +108,18 @@ If the Grid is created from a `<table>`, but the DataSource is configured to use
 
 When creating the Grid from an existing table, you can define the following `column` settings via HTML attributes:
 
-* Data field names via the `data-field` attributes
-* Column widths via the `width` styles applied to the respective `<col>` elements
-* Data types via the `data-type` attributes
-* Column templates via the `data-template` attributes
-* Enable or disable the column menu via the `data-menu` attributes
-* Enable or disable sorting via the `data-sortable` attributes
-* Enable or disable filtering via the `data-filterable` attributes
-* Enable or disable grouping via the `data-groupable` attributes
+* Define data field names via the `data-field` attributes.
+* Set column widths via the `width` styles applied to the respective `<col>` elements.
+* Define data types via the `data-type` attributes.
+* Set column templates via the `data-template` attributes.
+* Enable or disable the column menu via the `data-menu` attributes.
+* Enable or disable sorting via the `data-sortable` attributes.
+* Enable or disable filtering via the `data-filterable` attributes.
+* Enable or disable grouping via the `data-groupable` attributes.
 
 All attributes must be applied to the `<th>` elements, except for the column width styles.
 
-Other column-related settings cannot be defined via HTML attributes in the `<table>`. If you must use such settings (e.g., commands, locking, editors, custom row, or cell CSS classes, etc.), the above attribute configuration should be abandoned and all settings should be included in the Grid's JavaScript initialization statement. Note that when using a declarative widget initialization, you must set the column properties via the `data-columns` attribute.
+Other column-related settings cannot be defined via HTML attributes in the `<table>`. If you must use such settings, e.g. commands, locking, editors, custom row, or cell CSS classes, etc., the above attribute configuration should be abandoned and all settings should be included in the Grid's JavaScript initialization statement. Note that when using a declarative widget initialization, you must set the column properties via the `data-columns` attribute.
 
 As seen from the code snippets above, in the first case the Grid client object is attached to a `<div>`, while in the second one the object is attached to a `<table>`. However, the generated HTML output of the Grid depends entirely on the widget settings and it will always be the same, no matter how the widget is initialized.
 
@@ -174,14 +174,16 @@ The example below demonstrates how to access and existing Grid instance.
 
 Other articles on Kendo UI Grid:
 
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})
-* [Remote Data Binding]({% slug remote_data_binding_grid %})
 * [Editing Functionality]({% slug editing_kendoui_grid_widget %})
 * [Localization of Messages]({% slug localization_kendoui_grid_widget %})
 * [Adaptive Rendering]({% slug adaptive_rendering_kendoui_grid_widget %})
-* [Exporting Content to Excel]({% slug exporting_excel_kendoui_grid_widget %})
-* [Printing Your Grid]({% slug printing_kendoui_grid %})
-* [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/grid/overview)
-* [Overview of the JSP Tag](/jsp/tags/grid/overview)
-* [Overview of the PHP Class](/php/widgets/grid/overview)
+* [Export the Grid to Excel]({% slug exporting_excel_kendoui_grid_widget %})
+* [Export the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %})
+* [Print the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the Grid Widget](/aspnet-mvc/helpers/grid/overview)
+* [Overview of the Grid JSP Tag](/jsp/tags/grid/overview)
+* [Overview of the Grid PHP Class](/php/widgets/grid/overview)
+
+For how-to examples on the Kendo UI Grid widget, browse [its How-to section]({% slug howto_bindto_telerik_backend_services_grid %}).

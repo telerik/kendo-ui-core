@@ -25,7 +25,7 @@ The Grid widget provides a way to localize the user interface by using configura
 
 Find more info in the [`toolbar`](/api/javascript/ui/grid#configuration-toolbar) section of the Grid API reference.
 
-## Columns 
+## Columns
 
 ### Menu
 
@@ -40,7 +40,7 @@ Find more info in the [`toolbar`](/api/javascript/ui/grid#configuration-toolbar)
         }
     }
 
-Find more info in the [`columnMenu.messages`](/api/javascript/ui/grid#configuration-columnMenu.messages) section of the Grid API reference.
+Find more information in the [`columnMenu.messages`](/api/javascript/ui/grid#configuration-columnMenu.messages) section of the Grid JavaScript API reference.
 
 ### Commands
 
@@ -57,15 +57,15 @@ Find more info in the [`columnMenu.messages`](/api/javascript/ui/grid#configurat
                         update: "CustomUpdate",
                         cancel: "CustomCancel"
                     }
-                }, 
+                },
                 { name: "destroy", text: "CustomDelete" } // sets the text of the "Delete" button
             ],
             title: "&nbsp;"
         }
     ]
 
-Find more info in the [`columns.command`](/api/javascript/ui/grid#configuration-columns.command) section of the Grid API reference.
-    
+Find more information in the [`columns.command`](/api/javascript/ui/grid#configuration-columns.command) section of the Grid JavaScript API reference.
+
 ## Filter
 
 ###### Example
@@ -75,11 +75,11 @@ Find more info in the [`columns.command`](/api/javascript/ui/grid#configuration-
 			info: "Custom header text:", // sets the text on top of the Filter menu
 			filter: "CustomFilter", // sets the text for the "Filter" button
 			clear: "CustomClear", // sets the text for the "Clear" button
-			
+
 			// when filtering boolean numbers
 			isTrue: "custom is true", // sets the text for "isTrue" radio button
 			isFalse: "custom is false", // sets the text for "isFalse" radio button
-			
+
 			//changes the text of the "And" and "Or" of the Filter menu
 			and: "CustomAnd",
 			or: "CustomOr"
@@ -119,7 +119,7 @@ Find more info in the [`columns.command`](/api/javascript/ui/grid#configuration-
 		}
 	}
 
-Find more info in the [`filterable`](/api/javascript/ui/grid#configuration-filterable.messages) section of the Grid API reference.
+Find more information in the [`filterable`](/api/javascript/ui/grid#configuration-filterable.messages) section of the Grid JavaScript API reference.
 
 ## Grouping Header
 
@@ -131,7 +131,7 @@ Find more info in the [`filterable`](/api/javascript/ui/grid#configuration-filte
         }
     }
 
-Find more info in the [`groupable.messages`](/api/javascript/ui/grid#configuration-columnMenu.messages) section of the Grid API reference.
+Find more information in the [`groupable.messages`](/api/javascript/ui/grid#configuration-columnMenu.messages) section of the Grid JavaScript API reference.
 
 ## Pager
 
@@ -152,16 +152,20 @@ Find more info in the [`groupable.messages`](/api/javascript/ui/grid#configurati
         }
     }
 
-Find more info in the [`messages`](/api/javascript/ui/pager#messages-object) section of the Pager API reference.
+Find more information in the [`messages`](/api/javascript/ui/pager#messages-object) section of the Pager JavaScript API reference.
 
 ## See Also
 
 Other articles on Kendo UI Grid:
 
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})
-* [Remote Data Binding]({% slug remote_data_binding_grid %})
 * [Editing Functionality]({% slug editing_kendoui_grid_widget %})
+* [Appearance of the Grid]({% slug appearance_kendoui_grid_widget %})
+* [Remote Data Binding]({% slug remote_data_binding_grid %})
 * [Adaptive Rendering]({% slug adaptive_rendering_kendoui_grid_widget %})
-* [Exporting Content to Excel]({% slug exporting_excel_kendoui_grid_widget %})
-* [Printing Your Grid]({% slug printing_kendoui_grid %})
+* [Export the Grid to Excel]({% slug exporting_excel_kendoui_grid_widget %})
+* [Export the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %})
+* [Print the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
+
+For how-to examples on the Kendo UI Grid widget, browse [its How-to section]({% slug howto_bindto_telerik_backend_services_grid %}).

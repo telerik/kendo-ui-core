@@ -26,7 +26,7 @@ Kendo UI provides a very powerful [data binding framework](http://demos.telerik.
         <thead>
             <tr>
                 <th>
-                    
+
                 </th>
                 <th>
                     Details
@@ -41,7 +41,7 @@ Kendo UI provides a very powerful [data binding framework](http://demos.telerik.
     </table>
 
     <script>
-    
+
         $(function() {
             $("#grid").kendoGrid({
                 dataSource: {   
@@ -60,16 +60,16 @@ Kendo UI provides a very powerful [data binding framework](http://demos.telerik.
                 selectable: true
             });
         });
-        
+
     </script>   
-    
+
 ```
 
-For a better understanding of the example above, refer to the following explanations: 
+For a better understanding of the example above, refer to the following explanations:
 
 * `dataSource` - creates a new Kendo UI data source and assigns it as the data source for the Grid.
 * `transport` - defines how you will communicate with your remote data source.
-* `url` - points the location of the data you want to bind the widget to. 
+* `url` - points the location of the data you want to bind the widget to.
 * `dataType` - tells the data source the format you expect the response to be in. In this case, it is JSONP. JSONP is a way of returning JSON from a cross-browser request without getting blocked. It is also a way to get malicious code injected into your page. It basically wraps the JSON response in a callback to intentionally mislead the browser. It is recommended not to do it unless you fully trust your data.
 * `schema` - tells the Grid what the schema of your response is. Think of it as the "JSON element to repeat on". Kendo UI looks for this element to represent each row in the Grid. The server returns an array of `data` elements so your repeating item is just "data". </li>
 
@@ -85,7 +85,7 @@ When you run the example, you see a grid with no data in it. Therefore, you must
         <thead>
             <tr>
                 <th>
-                    
+
                 </th>
                 <th>
                     Details
@@ -137,7 +137,7 @@ Now you have some data as well as some issues with its visualization. The Grid r
         <thead>
             <tr>
                 <th>
-                    
+
                 </th>
                 <th>
                     Details
@@ -155,7 +155,7 @@ Now you have some data as well as some issues with its visualization. The Grid r
 
         $(function() {
             $("#grid").kendoGrid({
-                columns: [{ template: '<img src="#= images.thumbnail.url #" />' }, 
+                columns: [{ template: '<img src="#= images.thumbnail.url #" />' },
                           { field: 'user.username' }, { field: 'comments' }],
                 dataSource: {
                     transport: {
@@ -181,7 +181,7 @@ Now you have some data as well as some issues with its visualization. The Grid r
 
 The rest of the columns need some more specific templating since they are complex displays, not single fields. You can do that by moving the template outside of the Grid and then setting the template for the details to contain the name of the user that created the photo, the filter they used to create it, and the photo caption. In the last cell, use JavaScript in your templates to enumerate over the comments to display them in a list.
 
-All markup is now removed from your JavaScript. Add a little bit of style and your grid is now fully customized.
+All markup is now removed from your JavaScript. Add some style, as demonstrated in the example below, so that you fully customize the Grid.
 
 ###### Example
 
@@ -191,7 +191,7 @@ All markup is now removed from your JavaScript. Add a little bit of style and yo
         <thead>
             <tr>
                 <th>
-                    
+
                 </th>
                 <th>
                     Details
@@ -214,7 +214,7 @@ All markup is now removed from your JavaScript. Add a little bit of style and yo
             </td>
             <td>
               <div><span class="strong">Caption: </span># if ( caption ) { #
-                  #= caption.text # 
+                  #= caption.text #
                   # } #
               </div>
               <div><span class="strong">Username: </span>
@@ -224,7 +224,7 @@ All markup is now removed from your JavaScript. Add a little bit of style and yo
                 #= filter #
               </div>
             </td>
-            <td> 
+            <td>
               <div class="comments">
                 # $.each(comments.data, function(data) { #
                 <div class="comment">
@@ -235,7 +235,7 @@ All markup is now removed from your JavaScript. Add a little bit of style and yo
             </td>
         </tr>
    </script>
-   
+
    <script>
    $(function() {
             $("#grid").kendoGrid({
@@ -257,7 +257,7 @@ All markup is now removed from your JavaScript. Add a little bit of style and yo
             });
         });
     </script>
-    
+
     <style>
         .row {
             margin-bottom: 20px;
@@ -271,7 +271,7 @@ All markup is now removed from your JavaScript. Add a little bit of style and yo
         .comments {
             height: 100px;
           }
-          
+
           .comment {
             margin-top: 3px;
             margin-bottom: 3px;
@@ -284,16 +284,21 @@ All markup is now removed from your JavaScript. Add a little bit of style and yo
 ```
 
 > **Important**  
+>
 > When you check out the `html` code in the above example, you see the templating syntax for [Kendo UI templates](/framework/templates/overview). Templates represent HTML content inside of special script blocks. Note that JavaScript is also mixed right along with the `html` content. The syntax is familiar to the one used when doing PHP, Razor, or other server-side templating engine.
 
 ## See Also
 
 Other articles on Kendo UI Grid:
 
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})
 * [Editing Functionality]({% slug editing_kendoui_grid_widget %})
+* [Appearance of the Grid]({% slug appearance_kendoui_grid_widget %})
 * [Localization of Messages]({% slug localization_kendoui_grid_widget %})
 * [Adaptive Rendering]({% slug adaptive_rendering_kendoui_grid_widget %})
-* [Exporting Content to Excel]({% slug exporting_excel_kendoui_grid_widget %})
-* [Printing Your Grid]({% slug printing_kendoui_grid %})
+* [Export the Grid to Excel]({% slug exporting_excel_kendoui_grid_widget %})
+* [Export the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %})
+* [Print the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
+
+For how-to examples on the Kendo UI Grid widget, browse [its How-to section]({% slug howto_bindto_telerik_backend_services_grid %}).

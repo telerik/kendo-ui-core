@@ -8,17 +8,17 @@ position: 10
 
 # Printing
 
-In most cases the Grid is not the only content on a page and, yet, you might want to print the Grid only. 
+In most cases the Grid is not the only content on a page and, yet, you might want to print the Grid only.
 
 ## Options
 
 There are two ways to print the content of the Grid only, though the Grid itself may not be the only content displayed on a page.
 
-### Print the Existing Web Page
+### Print Existing Web Page
 
 Print the existing web pag, but use a print stylesheet to hide the parts of the page that are not needed.
 
-### Print a New Web Page
+### Print New Web Page
 
 The example below demonstrates how to retrieve the Grid HTML, inject it in a new browser window, and trigger the printing of the new page. It also addresses some other important things you must keep in mind as follows:
 
@@ -28,17 +28,17 @@ The example below demonstrates how to retrieve the Grid HTML, inject it in a new
 
 Printing a Grid with locked (frozen) columns is likely to produce misaligned columns, or rows, or a broken overall layout. In such cases it is advisable to use a separate print-friendly page with no frozen columns.
 
-###### HTML
+###### Example
 
+   //HTML
     <div id="grid"></div>
 
     <script type="text/x-kendo-template" id="toolbar-template">
         <button type="button" class="k-button" id="printGrid">Print Grid</button>
     </script>
 
-###### JavaScript
-
-	function printGrid() {
+   //JavaScript
+	 function printGrid() {
 		var gridElement = $('#grid'),
 			printableContent = '',
 			win = window.open('', '', 'width=800, height=500'),
@@ -124,10 +124,14 @@ Printing a Grid with locked (frozen) columns is likely to produce misaligned col
 
 Other articles on Kendo UI Grid:
 
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})
-* [Remote Data Binding]({% slug remote_data_binding_grid %})
 * [Editing Functionality]({% slug editing_kendoui_grid_widget %})
+* [Appearance of the Grid]({% slug appearance_kendoui_grid_widget %})
+* [Remote Data Binding]({% slug remote_data_binding_grid %})
 * [Localization of Messages]({% slug localization_kendoui_grid_widget %})
 * [Adaptive Rendering]({% slug adaptive_rendering_kendoui_grid_widget %})
-* [Exporting Content to Excel]({% slug exporting_excel_kendoui_grid_widget %})
+* [Export the Grid to Excel]({% slug exporting_excel_kendoui_grid_widget %})
+* [Export the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %})
+
+For how-to examples on the Kendo UI Grid widget, browse [its How-to section]({% slug howto_bindto_telerik_backend_services_grid %}).
