@@ -653,7 +653,7 @@ Inserts an item into a **Menu** after the specified referenceItem.
 
 #### Parameters
 
-##### item `String|Element|jQuery`
+##### item `Object|Array`
 
 Target item, specified as a JSON object. Can also handle an array of such objects.
 
@@ -722,7 +722,7 @@ Inserts an item into a **Menu** before the specified referenceItem.
 
 #### Parameters
 
-##### item `String|Element|jQuery`
+##### item `Object|Array`
 
 Target item, specified as a JSON object. Can also handle an array of such objects.
 
