@@ -10,7 +10,8 @@ slug: howto_use_crud_operationswith_apsnet_action_methods_bound_grid
 This article illustrates the remote CRUD (Create, Read, Update, Destroy) data operations using a Kendo UI Grid bound to ASP.NET MVC action methods. To see the example, refer to the [example source code](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/grid-crud), which is available in the [Kendo UI ASP.NET MVC code samples GitHub repository](https://github.com/telerik/kendo-examples-asp-net-mvc).
 
 > **Important**  
-> You need to save the changes to commit the `destroy` operations to the server. Clicking the **Delete** button will not immediately hit the server.
+>
+> You need to save the changes to commit the `destroy` operations to the server. Clicking **Delete** does not immediately hit the server.
 
 ## See Also
 

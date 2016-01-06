@@ -96,7 +96,7 @@ The sample application Visual Studio solution contains the following.
 
 ## Next Steps
 
-After you run the sample application you can continue with the following articles.
+After you run the sample application, continue with the following articles:
 
 * [Fundamentals](/aspnet-mvc/fundamentals)
 * [Scaffolding](/aspnet-mvc/scaffolding)
@@ -105,3 +105,9 @@ After you run the sample application you can continue with the following article
 * [Using Telerik UI for ASP.NET MVC in MVC 5 application](/aspnet-mvc/asp-net-mvc-5)
 * [Using Telerik UI for ASP.NET MVC Visual Studio Extensions](/aspnet-mvc/vs-integration/introduction)
 * [Troubleshooting](/aspnet-mvc/troubleshooting)
+
+For more examples on how to use Kendo UI with ASP.NET MVC, visit the following repositories on GitHub:
+
+* [Collected Kendo UI Examples on Using ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc)
+* [Collected Kendo UI Examples on Using ASP.NET Web Technologies](https://github.com/telerik/kendo-examples-asp-net)
+* [Collected Examples on Telerik UI for ASP.NET MVC](https://github.com/telerik/ui-for-aspnet-mvc-examples)
