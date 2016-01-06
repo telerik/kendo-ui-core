@@ -3904,7 +3904,6 @@ function pad(number, digits, end) {
             }
         }
 
-        //TODO: Test!
         function setHours(date, time) {
             date = new Date(kendo.date.getDate(date).getTime() + kendo.date.getMilliseconds(time));
             adjustDST(date, time.getHours());
