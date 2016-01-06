@@ -1,18 +1,20 @@
 ---
-title: Exporting
-page_title: Exporting | Kendo UI Grid Widget
-description: "Learn how to set the exporting functionality of the Kendo UI Grid widget."
+title: Exporting to Excel
+page_title: Exporting to Excel | Kendo UI Grid Widget
+description: "Learn how to set the Excel export functionality of the Kendo UI Grid widget."
 slug: exporting_excel_kendoui_grid_widget
 position: 8
 ---
 
-# Exporting
+# Exporting to Excel
 
-As of Kendo UI Q3 2014 (2014.3.1119) onwards, the Grid widget provides a built-in PDF and Excel export functionality.
+As of Kendo UI Q3 2014 (2014.3.1119) onwards, the Grid widget provides a built-in Excel export functionality.
 
-## Enable Export
+## Set up
 
 To enable Excel export, include the corresponding toolbar command and configure the export settings.
+
+You need to include JSZip script on the page. See [Requirements](/framework/excel/introduction#requirements).
 
 * [Toolbar Configuration](/api/javascript/ui/grid#configuration-toolbar)
 * [Excel Export Configuration](/api/javascript/ui/grid#configuration-excel)
@@ -21,6 +23,8 @@ To enable Excel export, include the corresponding toolbar command and configure 
 ###### Example - enable Excel export
 
 ```html
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
+
     <div id="grid"></div>
     <script>
         $("#grid").kendoGrid({
@@ -48,8 +52,8 @@ To enable Excel export, include the corresponding toolbar command and configure 
 
 To initiate Excel export via code, call the [`saveAsExcel`](/api/javascript/ui/grid.html#methods-saveAsExcel) method.
 
-> **Important**  
-> * By default, Kendo UI Grid exports the current page of the data with sorting, filtering, grouping, and aggregates applied. 
+> **Important**
+> * By default, Kendo UI Grid exports the current page of the data with sorting, filtering, grouping, and aggregates applied.
 > * The Grid uses the current column order, visibility, and dimensions to generate the Excel file.
 > * The Grid does not export the current CSS theme in the Excel file. For more information on how to change the visual appearance of the Excel document, refer to the below section about [customization of the Excel document](#customize-the-excel-document).
 > * The Grid exports only data-bound columns. All columns that do not have their [field](/api/javascript/ui/grid#configuration-columns.field) option set are ignored.
@@ -63,12 +67,14 @@ To initiate Excel export via code, call the [`saveAsExcel`](/api/javascript/ui/g
 
 By default, the Kendo UI Grid exports only the current page of data. To export all pages set the [`allPages`](/api/javascript/ui/grid#configuration-excel.allPages) option to `true`.
 
-> **Important**  
+> **Important**
 > When the `allPages` option is set to `true` and `serverPaging` is enabled, the Grid will make a `"read"` request for all data. If the data items are too many the browser may become unresponsive. Consider implementing server-side export for such cases.
 
 ###### Example - export all data
 
 ```html
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
+
     <div id="grid"></div>
     <script>
         $("#grid").kendoGrid({
@@ -95,7 +101,7 @@ By default, the Kendo UI Grid exports only the current page of data. To export a
 
 ### Excel Customization
 
-The [`excelExport`](/api/javascript/ui/grid#events-excelExport) event allows customization of the generated Excel document. 
+The [`excelExport`](/api/javascript/ui/grid#events-excelExport) event allows customization of the generated Excel document.
 
 The `workbook` event argument exposes the generated Excel workbook configuration.
 
@@ -110,6 +116,8 @@ The [`excelExport`](/api/javascript/ui/grid#events-excelExport) event allows rev
 ###### Example - RTL export
 
 ```html
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
+
     <div class="k-rtl">
       <div id="grid" ></div>
     </div>
@@ -151,7 +159,7 @@ Kendo UI Grid does not use [column templates](/api/javascript/ui/grid#configurat
 
 ### Column Format
 
-Kendo UI Grid does not use [column formats](/api/javascript/ui/grid.html#configuration-columns.format) during Excel export because some Kendo UI formats are incompatible with Excel. To format the cell values, set the [`format`](/api/javascript/ooxml/workbook.html#configuration-sheets.rows.cells.format) option of the cells. 
+Kendo UI Grid does not use [column formats](/api/javascript/ui/grid.html#configuration-columns.format) during Excel export because some Kendo UI formats are incompatible with Excel. To format the cell values, set the [`format`](/api/javascript/ooxml/workbook.html#configuration-sheets.rows.cells.format) option of the cells.
 
 For more information on the formats supported by Excel, visit [this page](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4).
 
@@ -170,6 +178,8 @@ Each Grid is exported in a separate Excel sheet. For more information on how to 
 In some cases it is useful to send the generated file to a remote service. Do this by preventing the default file saving and posting the `base64` encoded contents.
 
 ###### Example - post files to the server
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
 
     <div id="grid"></div>
     <script>
@@ -216,6 +226,8 @@ Internet Explorer 9, or older, and Safari do not support the option for saving a
 
 ###### Example - user server proxy
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
+
     <div id="grid"></div>
     <script>
         $("#grid").kendoGrid({
@@ -244,12 +256,11 @@ Internet Explorer 9, or older, and Safari do not support the option for saving a
 ### Limitations
 
 * As discussed in the previous section, exporting in older browsers, such as Internet Explorer 9, or older, and Safari, requires the implementation of a server proxy. For more information on this, refer to [the `proxyUrl` configuration section](/api/javascript/ui/grid#configuration-excel.proxyURL).
-* PDF export is not supported in Internet Explorer 8 and older.
 * If you use Kendo UI Q2 2014 SP2 (2014.2.1008) or older, exporting requires a custom implementation and there are two ways to approach the task:
     * Use a server-side implementation to directly export the data that is otherwise displayed by the Grid.
     * Use a client-side implementation to export the table HTML markup or the dataSource items of the Grid.
-    
-> **Important**  
+
+> **Important**
 > The Grid and its dataSource contain only the data items from the current page during client-side export. As a result, either make the export in chunks, or disable the paging feature.
 
 ## Further Reading

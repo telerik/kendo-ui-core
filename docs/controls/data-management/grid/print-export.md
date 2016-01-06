@@ -3,7 +3,7 @@ title: Printing
 page_title: Printing | Kendo UI Grid Widget
 description: "Learn how to print the Kendo UI Grid widget."
 slug: printing_kendoui_grid
-position: 9
+position: 10
 ---
 
 # Printing
