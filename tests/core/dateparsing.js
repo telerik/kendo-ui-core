@@ -908,5 +908,11 @@ test("parseExact method parses date string with UTC 'Z' zone designator", functi
     deepEqual(result, utcDate);
 });
 
+test('time portion is copied to new date', function() {
+    var time = new Date(2016, 0, 1, 12, 15, 0);
+    var date = new Date(2016, 0, 15, 14, 0, 0);
+    var result = kendo.date.setHours(date, time);
+    deepEqual(result, new Date("2016/01/15 12:15:00"));
+});
 
 }());

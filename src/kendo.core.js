@@ -3904,6 +3904,13 @@ function pad(number, digits, end) {
             }
         }
 
+        //TODO: Test!
+        function setHours(date, time) {
+            date = new Date(kendo.date.getDate(date).getTime() + kendo.date.getMilliseconds(time));
+            adjustDST(date, time.getHours());
+            return date;
+        }
+
         function today() {
             return getDate(new Date());
         }
@@ -3941,13 +3948,13 @@ function pad(number, digits, end) {
             MS_PER_HOUR: 60 * MS_PER_MINUTE,
             MS_PER_MINUTE: MS_PER_MINUTE,
             setTime: setTime,
+            setHours: setHours,
             addDays: addDays,
             today: today,
             toInvariantTime: toInvariantTime,
             firstDayOfMonth: firstDayOfMonth,
             lastDayOfMonth: lastDayOfMonth,
             getMilliseconds: getMilliseconds
-            //TODO methods: combine date portion and time portion from arguments - date1, date 2
         };
     })();
 

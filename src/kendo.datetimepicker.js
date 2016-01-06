@@ -542,6 +542,10 @@ var __meta__ = { // jshint ignore:line
                         }
                     }
 
+                    if (that._value) {
+                        value = kendo.date.setHours(new Date(value), that._value);
+                    }
+
                     that._change(value);
                     that.close("date");
                 },

@@ -464,6 +464,20 @@ test("DateTimePicker does set focused date of calendar if no text change", funct
     equal(+datetimepicker.dateView._current, +date);
 });
 
+test("DateTimePicker does set focused date of calendar if no text change", function() {
+    datetimepicker = input.kendoDateTimePicker({
+        value: new Date(2016,0,1),
+        parseFormats: ["MM/dd/yyyy"]
+    }).data("kendoDateTimePicker");
+
+    datetimepicker.min(new Date(new Date(2016, 0, 10, 10, 10, 10).getTime() + 30*60000));
+    datetimepicker.open();
+    $(".k-weekend").eq(1).trigger("click");
+
+    equal(input.val(), "1/16/2016 12:00 AM");
+})
+
+
 test("TimeView uses input value on open", function() {
     var date = new Date(1919, 0, 1),
         datetimepicker = input.kendoDateTimePicker({
