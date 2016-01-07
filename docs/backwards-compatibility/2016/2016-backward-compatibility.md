@@ -24,6 +24,9 @@ slug: breakingchanges2016_kendoui
     dropdownlist.setDataSource(["Item1", "Item2"]);
     dropdownlist.select(0); //force selection of the first item
 
+* **Remove support for Globalize 0.1**: More details in [issue 1354](https://github.com/telerik/kendo-ui-core/issues/1354).
+For those who want to return the behavior, add the code from this [Gist](https://gist.github.com/ggkrustev/52bf4558ecd1794e5d94#file-kendo-ui-support-for-globalize-0-1) after Kendo UI scripts.
+
 ### Changes from 2015 Q3 (2015.2.930)
 
 #### Breaking Changes

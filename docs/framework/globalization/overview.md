@@ -59,7 +59,7 @@ For more detail information check [this help topic](/framework/globalization/dat
 
 Loading globalize.js will override the default globalization features in Kendo UI. Not everything is guaranteed to work, for example custom number formats are unsupported in this case.
 
-> The Globalization 0.1 library is no longer supported. Using it is not recommended.
+> The Globalization 0.1 library is no longer supported. Using it is not recommended. More details in [#1354](https://github.com/telerik/kendo-ui-core/issues/1354).
 
 ## Widgets that depend on culture info
 
