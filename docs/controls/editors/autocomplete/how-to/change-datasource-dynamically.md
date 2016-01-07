@@ -135,7 +135,7 @@ The example below demonstrates how to dynamically change the `DataSource` based 
 
 Other articles on Kendo UI AutoComplete:
 
-* [JavaScript API Reference](/api/javascript/ui/autocomplete)
+* [AutoComplete JavaScript API Reference](/api/javascript/ui/autocomplete)
 * [How to Use Custom AngularJS Templates]({% slug howto_use_custom_angularjs_templates_autocomplete %})
 * [How to Show a No results found Message]({% slug howto_add_customized_templates_autocomplete %})
 * [How to Highlight Matched Values]({% slug howto_highlight_matched_values_autocomplete %})
