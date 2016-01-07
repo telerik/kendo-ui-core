@@ -17,9 +17,15 @@ Before going on reading, make sure you are familiar with the following topics:
 * [Overview of the Sortable Widget]({% slug overview_kendoui_sortable_widget %})
 * [Overview of Kendo UI TabStrip](/web/tabstrip/overview)
 
-## Reorder
+## Reordering of Items
 
-### TabStrip Items
+> **Important**
+>
+> The Sortable widget reorders the HTML DOM elements. It does not automatically update the order of the items in the DataSource. This means that you should explicitly implement this behavior.
+
+## Sortable and TabStrip
+
+### Reorder TabStrip Items
 
 To reorder the tabs of a TabStrip, initialize the Sortable widget on the TabStrip's `ul.k-tabstrip-items` element. Normally, the `filter` property of the widget should select all `li.k-item` elements. If required, the Hint movement can be restricted within the `ul.k-tabstrip-items` element.
 
@@ -70,7 +76,7 @@ After a tab is sorted, update its order in the TabStrip widget.
         }
     }
 
-For additional information on the Sortable events, refer to [this article](/api/javascript/ui/sortable#events) and the [TabStrip/Sortable integration demo](http://demos.telerik.com/kendo-ui/web/sortable/integration-tabstrip.html).
+For additional information on the Sortable events, refer to the [JavaScript API article on Sortable events](/api/javascript/ui/sortable#events) and the [TabStrip/Sortable integration demo](http://demos.telerik.com/kendo-ui/web/sortable/integration-tabstrip.html).
 
 ## See Also
 

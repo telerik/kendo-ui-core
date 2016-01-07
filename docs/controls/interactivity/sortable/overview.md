@@ -39,6 +39,7 @@ The example below demonstrates how to initialize Kendo UI Sortable by using jQue
 The Placeholder is the element which indicates where the dragged item will be placed when dropped. By default, the Placeholder is a clone of the dragged element with a removed `id` attribute, and `visibility` set to `hidden` to form a visual gap.
 
 > **Important**  
+>
 > The placeholder element is appended to the Sortable DOM element container. Because of this, jQuery's `index` method returns unexpected results while dragging. If you want to get the index of a given item in the Sortable collection, use widget's [`indexOf`](/api/javascript/ui/sortable#methods-indexof) method.
 
 #### Customize the Placeholder
@@ -320,7 +321,7 @@ The example below demonstrates how to persist the order of items in local storag
     </style>
 ```
 
-### Sortable Items Containing <input> Elements
+### Sortable Items Containing input Elements
 
 The `<input>` elements inside Sortable items cannot be focused because the items are draggable. To avoid that, use the `ignore` option, as demonstrated in the example below.
 
@@ -389,6 +390,8 @@ Other articles on Kendo UI Sortable:
 * [How to Reorder Grid Rows]({% slug howto_reordergridrows_sortable %})
 * [How to Reorder Rows in Nested Grid]({% slug howto_reorderrowsinnestedgrid_sortable %})
 * [How to Transfer Grid Rows]({% slug howto_transfergridrows_sortable %})
+* [How to Use Sortable in AngularJS with Grid in Batch Editing Mode]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %})
+* [How to Use Sortable with Grid in Batch Editing Mode]({% slug howto_usesortablewithgrid_inbatchediting_sortable %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Sortable Widget](/aspnet-mvc/helpers/sortable/overview)
 * [Overview of the Sortable JSP Tag](/jsp/tags/sortable/overview)
 * [Overview of the Sortable PHP Class](/php/widgets/sortable/overview)

@@ -9,7 +9,7 @@ position: 4
 
 # CORS Data Fetching
 
-This article was written by Todd Anglin and [originally published in the Kendo UI Blogs](http://www.telerik.com/blogs/using-cors-with-all-modern-browsers) on October 3, 2011 and consequently updated in July 2012. The original spelling, grammar, and structure of the item is preserved here for consistency.
+This article was written by Todd Anglin, [originally published in the Kendo UI Blogs](http://www.telerik.com/blogs/using-cors-with-all-modern-browsers) on October 3, 2011 and consequently updated in July 2012. The original spelling, grammar, and structure of the item is preserved here for consistency.
 
 ## Using CORS with All (Modern) Browsers
 

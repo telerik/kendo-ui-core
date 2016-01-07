@@ -49,8 +49,10 @@ The example below demonstrates how to create nested Kendo UI Sortable widgets.
 Other articles and how-to examples on Kendo UI Sortable:
 
 * [Sortable JavaScript API Reference](/api/javascript/ui/sortable)
-* [How to Persist Order in `localStorage`]({% slug howto_persistoderinlocalstorage_sortable %})
+* [How to Persist Order in localStorage]({% slug howto_persistoderinlocalstorage_sortable %})
 * [How to Reorder AngularJS Grid Rows]({% slug howto_reorderangularjsgridrows_angular_sortable %})
 * [How to Reorder Grid Rows]({% slug howto_reordergridrows_sortable %})
 * [How to Reorder Rows in Nested Grid]({% slug howto_reorderrowsinnestedgrid_sortable %})
 * [How to Transfer Grid Rows]({% slug howto_transfergridrows_sortable %})
+* [How to Use Sortable in AngularJS with Grid in Batch Editing Mode]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %})
+* [How to Use Sortable with Grid in Batch Editing Mode]({% slug howto_usesortablewithgrid_inbatchediting_sortable %})
