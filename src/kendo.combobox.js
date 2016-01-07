@@ -304,8 +304,6 @@ var __meta__ = { // jshint ignore:line
 
             if (custom && custom[0].selected) {
                 that._custom(custom.val());
-            } else if (!hasChild) {
-                that._custom("");
             }
         },
 
@@ -341,7 +339,9 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            that._custom(that._value(dataItem) || "");
+            if (that._value(dataItem) !== that.value()) {
+                that._custom(that._value(dataItem));
+            }
 
             if (that.text() && that.text() !== that._text(dataItem)) {
                 that._selectValue(dataItem);
