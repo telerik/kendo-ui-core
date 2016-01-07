@@ -12,7 +12,7 @@ position: 3
 
 The Kendo UI Chart data points can be specified as part of the series definitions. The type of the data points depends on the type of the series.
 
-### Categorical Series
+### Categorical Series Inline Data Binding
 
 Categorical series, such as [Bar](http://demos.telerik.com/kendo-ui/bar-charts/index), [Line](http://demos.telerik.com/kendo-ui/line-charts/index), [Area](http://demos.telerik.com/kendo-ui/area-charts/index) and other Kendo UI Charts, expect a data point of type `Number`. The category names are populated independently in the category axis.
 
@@ -42,7 +42,7 @@ The example below demonstrates inline binding of column series.
     });
     </script>
 
-### Scatter Series
+### Scatter Series Inline Data Binding
 
 This category of Kendo UI Charts includes the two-dimensional [Scatter](http://demos.telerik.com/kendo-ui/scatter-charts/index) and [Scatter Line](http://demos.telerik.com/kendo-ui/scatter-charts/scatter-line) series. The data point should be an array containing two values&mdash;X and Y, as demonstrated in the example below.
 
@@ -147,7 +147,50 @@ Bind the data source to this service and sort it by year, as demonstrated below.
     });
     </script>
 
-### Categorical Series
+### Bind to Grouped Data
+
+The Chart can be bound to grouped data. In this case the categories are created depending on the first group.
+
+> **Important**
+>
+> All series must contain the same number of points. If there is a different number of points in the `series.categoryField` groups must be used instead of `categoryAxis.field`.
+
+The example below demonstrates a grouped chart with different number of points in the groups.
+
+###### Example
+
+    <div id="chart"></div>
+    <script>
+    var data =  [
+          { "group": "Group 1", "value": 200, "category": "category 1" },
+          { "group": "Group 2", "value": 400, "category": "category 1"  },
+          { "group": "Group 3", "value": 500, "category": "category 1"  },
+          { "group": "Group 1", "value": 300, "category": "category 2" },
+          { "group": "Group 2", "value": 600, "category": "category 4" },
+          { "group": "Group 3", "value": 500, "category": "category 2" },
+          { "group": "Group 1", "value": 100, "category": "category 3" },
+          { "group": "Group 3", "value": 200, "category": "category 4" }]
+
+    $("#chart").kendoChart({
+        dataSource: {
+            data: data,
+            group: {
+                field: "group"
+            },  
+            sort: {
+                field: "category",
+                dir: "asc"
+            }
+        },
+        series: [{
+            type: "column",
+            field: "value",
+            categoryField: "category"
+        }]
+    });
+    </script>
+
+### Categorical Series Data Source Binding
 
 #### Value Field
 
@@ -194,7 +237,7 @@ The example below demonstrates data-bound categorical series.
 
 In addition to value fields, each series allows for specifying a category field. The category values from all series are concatenated and each point is mapped to its category. Point order is not significant. Series points are [aggregated](/api/dataviz/chart#configuration-series.aggregate) to produce one value per category.
 
-The example below demonstrates how to bind with `categoryField`
+The example below demonstrates how to bind with `categoryField`.
 
 ###### Example
 
@@ -229,50 +272,7 @@ The example below demonstrates how to bind with `categoryField`
     });
     </script>
 
-### Bind to Grouped Data
-
-The Chart can be bound to grouped data. In this case the categories are created depending on the first group.
-
-> **Important**
->
-> All series must contain the same number of points. If there is a different number of points in the groups **series.categoryField** must be used instead of categoryAxis.field.
-
-The example below demonstrates a grouped chart with different number of points in the groups.
-
-###### Example
-
-    <div id="chart"></div>
-    <script>
-    var data =  [
-          { "group": "Group 1", "value": 200, "category": "category 1" },
-          { "group": "Group 2", "value": 400, "category": "category 1"  },
-          { "group": "Group 3", "value": 500, "category": "category 1"  },
-          { "group": "Group 1", "value": 300, "category": "category 2" },
-          { "group": "Group 2", "value": 600, "category": "category 4" },
-          { "group": "Group 3", "value": 500, "category": "category 2" },
-          { "group": "Group 1", "value": 100, "category": "category 3" },
-          { "group": "Group 3", "value": 200, "category": "category 4" }]
-
-    $("#chart").kendoChart({
-        dataSource: {
-            data: data,
-            group: {
-                field: "group"
-            },  
-            sort: {
-                field: "category",
-                dir: "asc"
-            }
-        },
-        series: [{
-            type: "column",
-            field: "value",
-            categoryField: "category"
-        }]
-    });
-    </script>
-
-### Scatter Series
+### Scatter Series Data Spurce Binding
 
 Scatter series are bound to the fields specified as `xField` and `yField`, as demonstrated below.
 
