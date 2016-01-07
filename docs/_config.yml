@@ -129,7 +129,7 @@ navigation:
         title: "Single Page Applications"
         position: 5
     "framework/excel":
-        title: "Create Excel Documents"
+        title: "Excel Export"
         position: 6
     "framework/drawing":
         title: "Drawing API"

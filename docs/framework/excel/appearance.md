@@ -1,27 +1,34 @@
 ---
 title: Appearance
-page_title: Customize the appearance of the cells
-description: This article shows how to change the look and feel of the cells
+page_title: Appearance | Kendo UI Excel Export
+description: "Learn how to change the look and feel of the cells while exporting Kendo UI components to Excel."
+slug: appearance_excelexport_kendoui
 position: 2
 ---
 
-# Customize The Appearance
+# Appearance
 
-By default Excel shows all cells with the default font settings (color, font name and size).
+By default, Excel shows all cells according to their default font settings&mdash;color, font name, and size.
+
+## Customization
+
+### Configuration Options
 
 Kendo UI allows you to change the appearance of the cells via the following configuration options:
 
-* [background](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.background) - sets the background color of the cell.
-* [bold](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.bold) - the cell value is displayed in bold.
-* [color](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.color) - sets the cell text color.
-* [fontName](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.fontName) - sets the font used to display the cell value.
-* [fontSize](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.fontSize) - sets the font size of the cell value.
-* [hAlign](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.hAlign) - sets the horizontal text alignment.
-* [italic](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.italic) - the cell value is displayed in italic.
-* [underline](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.underline) - the cell value is underlined.
-* [vAlign](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.vAlign) - sets the vertical text alignment.
+* [`background`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.background)&mdash;This option sets the background color of the cell.
+* [`bold`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.bold)&mdash;Displays the cell value in bold.
+* [`color`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.color)&mdash;Sets the cell text color.
+* [`fontName`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.fontName)&mdash;Sets the font used to display the cell value.
+* [`fontSize`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.fontSize)&mdash;Sets the font size of the cell value.
+* [`hAlign`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.hAlign)&mdash;Sets the horizontal text alignment.
+* [`italic`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.italic)&mdash;Dispalys the cell value in italic.
+* [`underline`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.underline)&mdash;Displays the cell value as underlined.
+* [`vAlign`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.vAlign)&mdash;Sets the vertical text alignment.
 
-#### Example - customize the cell appearance
+The example below demonstrates how to customize the appearance of the cells.
+
+###### Example
 
 ```html
 <script>
@@ -85,3 +92,14 @@ kendo.saveAs({
 });
 </script>
 ```
+
+## See Also
+
+Articles on the Excel export functionality in Kendo UI:
+
+* [Introduction to the Excel Export Functionality]({% slug introduction_excelexport_kendoui %})
+* [Freeze Rows and Columns]({% slug freezerowsandcolumns_excelexport_kendoui %})
+* [Set the Column Width]({% slug columnwidth_excelexport_kendoui %})
+* [Set the Colspan and Rowspan]({% slug colaspanandrowspan_excelexport_kendoui %})
+* [Create Multiple Sheets]({% slug sheets_excelexport_kendoui %})
+* [Export Kendo UI DataSource to Excel]({% slug exportdatasource_excelexport_kendoui %})
