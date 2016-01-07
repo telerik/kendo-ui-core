@@ -347,4 +347,30 @@
             scroll(combobox.listView.content, 5 * CONTAINER_HEIGHT);
         });
     });
+
+    asyncTest("widget focuses the item found during text search", 1, function() {
+        var combobox = new ComboBox(select, {
+            delay: 0,
+            close: function(e) { e.preventDefault(); },
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            }
+        });
+
+        combobox.one("dataBound", function() {
+            combobox.input.focus().val("Item 1");
+            combobox.input.trigger({ type: "keydown" });
+
+            setTimeout(function() {
+                start();
+                ok($("[data-offset-index=1]").hasClass("k-state-focused"));
+            }, 100);
+        });
+    });
 })();
