@@ -34,8 +34,7 @@ var __meta__ = { // jshint ignore:line
         UNDEFINED = "undefined",
         getterCache = {},
         setterCache = {},
-        slice = [].slice,
-        globalize = window.Globalize;
+        slice = [].slice;
 
     kendo.version = "$KENDO_VERSION".replace(/^\s+|\s+$/g, '');
 
@@ -557,12 +556,6 @@ function pad(number, digits, end) {
         return culture || kendo.cultures.current;
     }
 
-    function expandNumberFormat(numberFormat) {
-        numberFormat.groupSizes = numberFormat.groupSize;
-        numberFormat.percent.groupSizes = numberFormat.percent.groupSize;
-        numberFormat.currency.groupSizes = numberFormat.currency.groupSize;
-    }
-
     kendo.culture = function(cultureName) {
         var cultures = kendo.cultures, culture;
 
@@ -570,11 +563,6 @@ function pad(number, digits, end) {
             culture = findCulture(cultureName) || cultures[EN];
             culture.calendar = culture.calendars.standard;
             cultures.current = culture;
-
-            if (globalize && !globalize.load) {
-                expandNumberFormat(culture.numberFormat);
-            }
-
         } else {
             return cultures.current;
         }
@@ -1066,16 +1054,6 @@ function pad(number, digits, end) {
 
         return value !== undefined ? value : "";
     };
-
-    if (globalize && !globalize.load) {
-        toString = function(value, format, culture) {
-            if ($.isPlainObject(culture)) {
-                culture = culture.name;
-            }
-
-            return globalize.format(value, format, culture);
-        };
-    }
 
     kendo.format = function(fmt) {
         var values = arguments;
@@ -1628,34 +1606,6 @@ function pad(number, digits, end) {
 
         return value;
     };
-
-    if (globalize && !globalize.load) {
-        kendo.parseDate = function (value, format, culture) {
-            if (objectToString.call(value) === "[object Date]") {
-                return value;
-            }
-
-            return globalize.parseDate(value, format, culture);
-        };
-
-        kendo.parseFloat = function (value, culture) {
-            if (typeof value === NUMBER) {
-                return value;
-            }
-
-            if (value === undefined || value === null) {
-               return null;
-            }
-
-            if ($.isPlainObject(culture)) {
-                culture = culture.name;
-            }
-
-            value = globalize.parseFloat(value, culture);
-
-            return isNaN(value) ? null : value;
-        };
-    }
 })();
 
     function getShadows(element) {
