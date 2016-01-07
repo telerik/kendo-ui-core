@@ -109,10 +109,10 @@ navigation:
         title: "ScrollView"
     "styles-and-layout":
         title: "Styles and Appearance"
-        position: 13
+        position: 4
     "framework":
         title: "Framework and Utilities"
-        position: 15
+        position: 5
     "framework/datasource":
         title: "DataSource"
         position: 1
@@ -151,7 +151,7 @@ navigation:
         position: 12
     "third-party":
         title: "Third-Party Frameworks and Utilities"
-        position: 16
+        position: 6
     "third-party/tutorials":
         title: "Tutorials"
         position: 8
@@ -160,10 +160,10 @@ navigation:
         position: 1
     "AngularJS":
         title: "AngularJS Directives"
-        position: 17
+        position: 7
     "aspnet-mvc":
         title: "UI for ASP.NET MVC"
-        position: 18
+        position: 8
     "aspnet-mvc/mvc-6":
         title: "ASP.NET MVC 6"
         position: 4
@@ -190,19 +190,19 @@ navigation:
         position: 3
     "jsp":
         title: "UI for JSP"
-        position: 19
+        position: 9
     "php":
         title: "UI for PHP"
-        position: 20
+        position: 10
     "troubleshoot":
         title: "Troubleshooting"
-        position: 22
+        position: 11
     "accessibility":
         title: "Accessibility"
-        position: 23
+        position: 12
     "backwards-compatibility":
         title: "Backwards Compatibility"
-        position: 24
+        position: 13
     "backwards-compatibility/2012":
         title: "2012"
         position: 5
@@ -218,6 +218,9 @@ navigation:
     "backwards-compatibility/2016":
         title: "2016"
         position: 1
+    "updates":
+        title: "Documentation Updates"
+        position: 14
     "*how-to":
         title: "How To"
         position: 200
