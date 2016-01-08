@@ -144,7 +144,7 @@ navigation:
         title: "Validator"
         position: 10
     "framework/save-files":
-        title: "Save Files"
+        title: "Saving Files"
         position: 11
     "framework/widgets":
         title: "Widgets"

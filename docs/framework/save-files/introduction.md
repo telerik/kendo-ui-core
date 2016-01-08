@@ -1,19 +1,24 @@
 ---
-title: Introduction
-page_title: Save files on the client machine
-description: This article shows how save files on the client machine using Kendo UI
+title: Overview
+page_title: Overview | Kendo UI Saving Files
+description: "Learn how to save files on the client machine when working with Kendo UI."
+slug: overview_savingfiles_kendoui
 position: 1
 ---
 
-# Introduction
+# Overview of File Saving
 
-Kendo UI allows developers to save files on the client machine since the 2014 Q3 release. This is done via the [kendo.saveAs](/api/javascript/kendo#methods-saveAs) method.
+Since its 2014 Q3 release, Kendo UI allows you to save files on the client machine. This is done via the [`kendo.saveAs`](/api/javascript/kendo#methods-saveAs) method.
 
-## Save files
+## Configuration
 
-To save a file on the client machine call the `kendo.saveAs` method and pass a valid [data URI](https://developer.mozilla.org/en-US/docs/Web/HTTP/data_URIs) and a file name.
+### Save Files
 
-#### Example - save a text file
+To save a file on the client machine, call the `kendo.saveAs` method, and pass a valid [data URI](https://developer.mozilla.org/en-US/docs/Web/HTTP/data_URIs) and a file name.
+
+The example below demonstrates how to save a text file on the client.
+
+###### Example
 
 ```html
 <script>
@@ -28,11 +33,12 @@ kendo.saveAs({
 ## Browser Support
 
 The `kendo.saveAs` will attempt to save the file using client-side API in browsers that support file creation (IE10+, Google Chrome and FireFox).
-If the browser doesn't implement an API for saving files then `kendo.saveAs` could POST the content to a server-side proxy which will stream the file back to the end user.
-The server-side proxy approach works in all [supported browsers](/intro/supporting/browser-support). Set the `proxyURL` option to enable the server proxy. You can make `kendo.saveAs` always use the server proxy
-by setting the `forceProxy` option to `true`.
 
-#### Example - set server proxy
+### Set Server Proxy
+
+If the browser does not implement an API for saving files, then `kendo.saveAs` could POST the content to a server-side proxy, which will stream the file back to the end user. The server-side proxy approach works in all [supported browsers]({% slug wbe_browserand_operating_system_support %}). Set the `proxyURL` option to enable the server proxy, as demonstrated below.
+
+###### Example
 
 ```
 <script>
@@ -45,7 +51,11 @@ kendo.saveAs({
 </script>
 ```
 
-#### Example - force proxy usage
+### Force Proxy Usage
+
+You are also able to make `kendo.saveAs` always use the server proxy by setting the `forceProxy` option to `true`, as shown below.
+
+###### Example
 
 ```
 <script>
@@ -61,25 +71,34 @@ kendo.saveAs({
 
 ## Server Proxy Implementations
 
-The proxy will receive a POST request with the following parameters in the request body:
+### Parameters
 
-* contentType: The MIME type of the file
-* base64: The base-64 encoded file content
-* fileName: The file name, as requested by the caller.
+The proxy receives a POST request with the following parameters in the request body:
 
-The proxy should return the decoded file with set "Content-Disposition" header.
+* `contentType`&mdash;This is the MIME type of the file.
+* `base64`&mdash;The `base-64`-encoded file content.
+* `fileName`&mdash;The file name as requested by the caller.
+
+The proxy is expected to return the decoded file with set `"Content-Disposition"` header.
+
+### Examples
 
 Here are a few sample implementations of a server-side proxy for different platforms.
 
-### ASP.NET WebForms
+#### ASP.NET WebForms
 
-#### ASPX
+##### ASPX
+
+###### Example
 
 ```
 <%@ Page Language="C#" AutoEventWireup="true" CodeFile="SaveFile.aspx.cs" Inherits="SaveFile" %>
 ```
 
-#### Code-behind
+##### Code-Behind
+
+###### Example
+
 ```
 public partial class SaveFile : System.Web.UI.Page
 {
@@ -98,7 +117,9 @@ public partial class SaveFile : System.Web.UI.Page
     }
 }
 ```
-#### Usage
+##### Usage
+
+###### Example
 
 ```
 <script>
@@ -111,7 +132,9 @@ kendo.saveAs({
 </script>
 ```
 
-### ASP.NET WebAPI Controller
+#### ASP.NET WebAPI Controller
+
+###### Example
 
 ```
 public class SaveFile : ApiController
@@ -145,9 +168,11 @@ public class SaveFile : ApiController
 }
 ```
 
-### ASP.NET MVC Proxy
+#### ASP.NET MVC Proxy
 
-#### Controller
+##### Controller
+
+###### Example
 
 ```
 public class HomeController
@@ -162,7 +187,9 @@ public class HomeController
 }
 ```
 
-#### View (Razor)
+##### View (Razor)
+
+###### Example
 
 ```
 <script>
@@ -175,7 +202,9 @@ kendo.saveAs({
 </script>
 ```
 
-### PHP Proxy
+#### PHP Proxy
+
+###### Example
 
 ```
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -193,7 +222,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ```
 
-### Java (Spring MVC)
+#### Java (Spring MVC)
+
+###### Example
 
 ```
 @RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -210,3 +241,11 @@ public @ResponseBody void save(String fileName, String base64, String contentTyp
     response.flushBuffer();
 }
 ```
+
+## See also
+
+Articles related to the Kendo UI file-saving functionality:
+
+* [Overview of the Excel Export Feature]({% slug introduction_excelexport_kendoui %})
+* [Overview of Kendo UI Drawing API](/framework/drawing/overview)
+* [JavaScript API Reference on PDF Export](/api/javascript/drawing/pdfoptions)

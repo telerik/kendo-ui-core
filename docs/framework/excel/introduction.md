@@ -6,7 +6,7 @@ slug: introduction_excelexport_kendoui
 position: 1
 ---
 
-# Overview
+# Overview of Excel Export
 
 Since Kendo UI 2014 Q3 release Kendo UI has provided Excel generation support. It allows you to create Excel documents in JavaScript and save them on the client machine.
 

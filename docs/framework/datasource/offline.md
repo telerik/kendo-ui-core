@@ -152,7 +152,7 @@ The example below demonstrates how to get the offline state.
 
 ### Use Custom Offline Storage
 
-To use custom offline storage set the `offlineStorage` option to a JavaScript object that has two methods&mdash;`getItem` and `setItem`. The `setItem` method saves the sate and `getItem` returns it.
+To use custom offline storage set the `offlineStorage` option to a JavaScript object that has two methods&mdash;`getItem` and `setItem`. The `setItem` method saves the date and `getItem` returns it.
 
 ###### Example
 
