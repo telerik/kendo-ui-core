@@ -165,7 +165,8 @@ var __meta__ = { // jshint ignore:line
             "filtering",
             "dataBinding",
             "dataBound",
-            "cascade"
+            "cascade",
+            "set"
         ],
 
         setOptions: function(options) {
@@ -335,6 +336,8 @@ var __meta__ = { // jshint ignore:line
             if (value) {
                 that._initialIndex = null;
             }
+
+            this.trigger("set", { value: value });
 
             if (that._request && that.options.cascadeFrom && that.listView.bound()) {
                 if (that._valueSetter) {

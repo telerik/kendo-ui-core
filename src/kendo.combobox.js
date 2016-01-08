@@ -149,7 +149,8 @@ var __meta__ = { // jshint ignore:line
             "filtering",
             "dataBinding",
             "dataBound",
-            "cascade"
+            "cascade",
+            "set"
         ],
 
         setOptions: function(options) {
@@ -598,6 +599,8 @@ var __meta__ = { // jshint ignore:line
                 value = that._accessor() || that.listView.value()[0];
                 return value === undefined || value === null ? "" : value;
             }
+
+            that.trigger("set", { value: value });
 
             if (value === options.value && that.input.val() === options.text) {
                 return;
