@@ -32,7 +32,7 @@ To create a new `ObservableObject` use its constructor or the `kendo.observable`
 > **Important:** Complex fields are automatically wrapped in nested `ObservableObject` instances.
 > Array fields are wrapped as `kendo.data.ObservableArray` objects.
 > The `change` event of the child objects will bubble to the parent `ObservableObject`.
-> Fields, which name are prefixed with an underscore will not be wrapped.
+> Fields with names that are prefixed with an underscore will not be wrapped.
 
 #### Example - creating ObservableObject with complex and array fields
 
