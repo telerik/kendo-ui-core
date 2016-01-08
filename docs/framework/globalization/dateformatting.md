@@ -16,31 +16,31 @@ The purpose of date formatting is to convert Date object to a human readable str
 
 - "D" - long date pattern (dddd, MMMM dd, yyyy" for en-US)
 
-    `kendo.toString(new Date(2000, 10, 6), "D")` -> Monday, November 06, 2000
+    `kendo.toString(new Date(2000, 10, 6), "D")` -> Friday, October 06, 2000
 
 - *F* - Full date/time pattern ("dddd, MMMM dd, yyyy h:mm:ss tt" for en-US)
 
-    kendo.toString(new Date(2000, 10, 6), "F") -> Monday, November 06, 2000 12:00:00 AM
+    kendo.toString(new Date(2000, 10, 6), "F") -> Friday, October 06, 2000 12:00:00 AM
 
 - *g* - General date/time pattern (short time) ("M/d/yyyy h:mm tt" for en-US)
 
-    `kendo.toString(new Date(2000, 10, 6), "g")` -> 11/6/2000 12:00 AM
+    `kendo.toString(new Date(2000, 10, 6), "g")` -> 10/6/2000 12:00 AM
 
 - *G* - General date/time pattern (long time) ("M/d/yyyy h:mm:ss tt" for en-US)
 
-    `kendo.toString(new Date(2000, 10, 6), "G")` -> 11/6/2000 12:00:00 AM
+    `kendo.toString(new Date(2000, 10, 6), "G")` -> 10/6/2000 12:00:00 AM
 
 - *M/m* - Month/day pattern ("MMMM dd" for en-US)
 
-    `kendo.toString(new Date(2000, 10, 6), "m")` -> November 06
+    `kendo.toString(new Date(2000, 10, 6), "m")` -> October 06
 
 - *u* - Universal sortable date/time pattern ("yyyy'-'MM'-'dd HH':'mm':'ss'Z'" for en-US)
 
-    `kendo.toString(new Date(2000, 10, 6), "u")` -> 2000-11-06 00:00:00Z
+    `kendo.toString(new Date(2000, 10, 6), "u")` -> 2000-10-06 00:00:00Z
 
 - *Y/y* - Year/month pattern ("MMMM, yyyy" for en-US)
 
-    `kendo.toString(new Date(2000, 10, 6), "y")` -> November, 2000
+    `kendo.toString(new Date(2000, 10, 6), "y")` -> October, 2000
 
 ## Custom date formats
 
