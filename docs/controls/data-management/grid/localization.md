@@ -6,7 +6,7 @@ slug: localization_kendoui_grid_widget
 position: 7
 ---
 
-# Localization
+# Grid Localization
 
 Localization is the process of adapting software to meet the requirements of local markets and different languages. Kendo widgets allow you to change the text messages that are displayed to the end user.
 
