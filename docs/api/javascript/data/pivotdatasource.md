@@ -1248,6 +1248,94 @@ The options of the discover request
         });
     </script>
 
+### expandColumn
+
+Expands a column tuple member that has children.
+
+> The path should includes the unique member names until the significant (the one that needs to be expanded) member is reached.
+
+#### Parameters
+
+##### path `Array`
+
+The path that uniquely specifies the tuple member that needs to be expanded.
+
+#### Example - expand second level tuple member
+
+    <!-- Real life demo: http://docs.telerik.com/kendo-ui/web/pivotgrid/how-to/expand-multiple-dimensions -->
+
+    <script>
+    var dataSource = new kendo.data.DataSource({
+      type: "xmla",
+      columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]" } ],
+      rows: [{ name: "[Geography].[City]" }],
+      measures: ["[Measures].[Reseller Freight Cost]"],
+      transport: {
+        connection: {
+            catalog: "Adventure Works DW 2008R2"
+        },
+        read: "http://demos.telerik.com/olap/msmdpump.dll"
+      },
+      schema: {
+        type: "xmla"
+      }
+    });
+
+    dataSource.one("dataBound", function() {
+        //Expand CY 2005 - first dimension
+        dataSource.expandColumn(["[Date].[Calendar].[Calendar Year].&[2005]"]);
+
+        //Expand All Products under CY 2015 - second dimension
+        dataSource.expandColumn(["[Date].[Calendar].[Calendar Year].&[2005]","[Product].[Category].[All Products]"]);
+    });
+
+    dataSource.read();
+    </script>
+
+### expandRow
+
+Expands a row tuple member that has children.
+
+> The path should includes the unique member names until the significant (the one that needs to be expanded) member is reached.
+
+#### Parameters
+
+##### path `Array`
+
+The path that uniquely specifies the tuple member that needs to be expanded.
+
+#### Example - expand second level tuple member
+
+    <!-- Real life demo: http://docs.telerik.com/kendo-ui/web/pivotgrid/how-to/expand-multiple-dimensions -->
+
+    <script>
+    var dataSource = new kendo.data.DataSource({
+      type: "xmla",
+      rows: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]" } ],
+      columns: [{ name: "[Geography].[City]" }],
+      measures: ["[Measures].[Reseller Freight Cost]"],
+      transport: {
+        connection: {
+            catalog: "Adventure Works DW 2008R2"
+        },
+        read: "http://demos.telerik.com/olap/msmdpump.dll"
+      },
+      schema: {
+        type: "xmla"
+      }
+    });
+
+    dataSource.one("dataBound", function() {
+        //Expand CY 2005 - first dimension
+        dataSource.expandRow(["[Date].[Calendar].[Calendar Year].&[2005]"]);
+
+        //Expand All Products under CY 2015 - second dimension
+        dataSource.expandRow(["[Date].[Calendar].[Calendar Year].&[2005]","[Product].[Category].[All Products]"]);
+    });
+
+    dataSource.read();
+    </script>
+
 ### measures
 
 Get or sets the measures configuration.
