@@ -1,35 +1,24 @@
 ---
-title: Draw basic shapes
-page_title: Draw basic shapes with the Kendo UI Drawing API
+title: Drawing of Basic Shapes
+page_title: Drawing of Basic Shapes | Kendo UI Drawing API
+description: "Learn how to draw basic forms by using the Kendo UI Drawing API."
+slug: basicshapes_drawingapi
 position: 2
 ---
 
-# Draw Basic Shapes
+# Drawing of Basic Shapes
 
-- [Our goal](#our-goal)
-- [Walk-through](#walk-through)
-    - [Import namespaces](#import-namespaces)
-    - [Draw the path](#draw-the-path)
-    - [Draw the image](#draw-the-image)
-    - [Draw the text](#draw-the-text)
-    - [Group the shapes](#group-the-shapes)
-    - [Render the scene](#render-the-scene)
+## Sample Case
 
-## Our goal
+Scenes are constructed from a set of built-in basic shapes. **Figure 1.** below demonstrates a simple, static scene.
 
-Scenes are constructed from a set of built-in basic shapes.
-Let's take a simple, static scene and try to replicate it.
+**Figure 1. Basic scene**
 
 ![Basic Scene](images/basic-scene.png)
 
-In terms of the Drawing API this scene consists of a path (the violet border),
-text and an image. We'll also add an enclosing group for positioning.
+In terms of the Drawing API this scene consists of a path (the violet border), text, and an image. The example below demonstrates the full code required to render the scene. Notice a number of structures that define the position, size, and appearance of each element.
 
-This is the full code required to render this scene.
-You'll notice a number of structures that define the
-position, size and appearance of each element.
-
-We'll go into detail in the following sections.
+###### Example
 
     <div id="surface" style="width: 250px; height: 165px;"></div>
     <script>
@@ -81,31 +70,36 @@ We'll go into detail in the following sections.
         surface.draw(group);
     </script>
 
-## Walk-through
+## Walkthrough
 
-### Import namespaces
+This section demonstrates how to replicate the static scene from above and add an enclosing group for positioning.
 
-We'll start by importing two name spaces:
+### Import Namespaces
+
+The example below demonstrates how to import the two namespaces.
+
+###### Example
 
     var geom = kendo.geometry;
     var draw = kendo.drawing;
 
-The `kendo.geometry` namespace contains primitives such as
-[Point](/api/dataviz/geometry/point),
-[Rect](/api/dataviz/geometry/rect) and
-[Size](/api/dataviz/geometry/size).
+The `kendo.geometry` namespace contains primitives, such as:
+* [`Point`](/api/dataviz/geometry/point)
+* [`Rect`](/api/dataviz/geometry/rect)
+* [`Size`](/api/dataviz/geometry/size)
 
-Drawing elements such as
-[Path](/api/dataviz/drawing/path),
-[Image](/api/dataviz/drawing/image) and
-[Group](/api/dataviz/drawing/group)
-live in the `kendo.drawing` namespace.
+The `kendo.drawing` namespace contains elements, such as:
+* [`Path`](/api/dataviz/drawing/path)
+* [`Image`](/api/dataviz/drawing/image)
+* [`Group`](/api/dataviz/drawing/group)
 
-### Draw the path
-A [Path](/api/dataviz/drawing/path) element is used to
-draw straight lines, curves or a combination of both.
+### Draw the Path
 
-We'll set the stroke (line) color and width to match the picture:
+A [`Path`](/api/dataviz/drawing/path) element is used to draw straight lines, curves, or a combination of both.
+
+Set the stroke (line) color and width to match the picture, as demonstrated in the example below.
+
+###### Example
 
     var path = new draw.Path({
         stroke: {
@@ -114,26 +108,21 @@ We'll set the stroke (line) color and width to match the picture:
         }
     });
 
-The [configuration](/api/dataviz/drawing/path#configuration) object
-can contain other appearance options as well.
+The [`configuration`](/api/dataviz/drawing/path#configuration) object can contain other appearance options as well.
 
-We can now construct the path by issuing commands:
+Now construct the path by issuing the commands shown below.
+
+###### Example
 
     path.moveTo(0, 0)
         .lineTo(150, 0).lineTo(150, 65).lineTo(0, 65)
         .close();
 
-We set the line initial position with a
-[moveTo](/api/dataviz/drawing/path#methods-moveTo) command.
-The three sides are drawn using
-[lineTo](/kendo-ui/api/dataviz/drawing/path#methods-lineTo) commands.
-The last command
-[closes](/api/dataviz/drawing/path#methods-close)
-the path, drawing a straight line to the initial position.
+Set the line initial position with a [`moveTo`](/api/dataviz/drawing/path#methods-moveTo) command. The three sides are drawn by using the [`lineTo`](/kendo-ui/api/dataviz/drawing/path#methods-lineTo) commands. The last command [`closes`](/api/dataviz/drawing/path#methods-close) the path, drawing a straight line to the initial position.
 
-Since this is a rectangle we can use the alternative
-[fromRect](/api/dataviz/drawing/path#fromrect)
-static method:
+Since this is a rectangle, use the alternative [`fromRect`](/api/dataviz/drawing/path#fromrect) static method, as demonstrated below.
+
+###### Example
 
     var borderRect = new geom.Rect(
         new geom.Point(0, 0),
@@ -146,31 +135,39 @@ static method:
         }
     });
 
-### Draw the image
-The [Image](/api/dataviz/drawing/image) element draws a bitmap image from a given URL.
-The image position and size is defined as a [Rect](/api/dataviz/geometry/rect).
+### Draw the Image
+
+The [`Image`](/api/dataviz/drawing/image) element draws a bitmap image from a given URL. The image position and size is defined as a [`Rect`](/api/dataviz/geometry/rect).
+
+###### Example
 
     var imageRect = new geom.Rect(
         new geom.Point(5, 5),
         new geom.Size(50, 50)
     );
 
-This statement can be shortened to:
+This statement can be shortened to the code shown below.
+
+###### Example
 
     var imageRect = new geom.Rect([5, 5], [50, 50]);
 
-> Any method that expects Point and Size will also accept [x, y] and [width, height] arrays.
+> **Important**
+>
+> Any method that expects `Point` and `Size` also accepts `[x, y]` and `[width, height]` arrays.
 
-We can now create the image:
+Now create the image in the way demonstrated in the example below.
+
+###### Example
 
     var imageUrl = "http://demos.telerik.com/content/dataviz/diagram/people/diego.jpg";
     var image = new draw.Image(imageUrl, imageRect);
 
-### Draw the text
-The [Text](/api/dataviz/drawing/text) element draws a single line of text.
-Appearance options, such as font are set through
-[configuration](/api/dataviz/drawing/text#configuration).
+### Draw the Text
 
+The [`Text`](/api/dataviz/drawing/text) element draws a single line of text. Appearance options, such as the font, are set through [`configuration`](/api/dataviz/drawing/text#configuration).
+
+###### Example
         var text = new draw.Text(
             "Diego Roel",
             new geom.Point(60, 25),
@@ -179,26 +176,28 @@ Appearance options, such as font are set through
 
 The point defines the position of the top left corner.
 
-### Group the shapes
-It's often convenient to treat a group of shapes as a single entity.
-In this case we'll use a group to set the position of all elements at once.
+### Group the Shapes
 
-Create a [Group](/api/dataviz/drawing/group) element and append the rest of the elements as children:
+It is convenient to treat a group of shapes as a single entity. In this case, use a group to set the position of all elements at once. Create a [`Group`](/api/dataviz/drawing/group) element and append the rest of the elements as children, as demonstrated in the example below.
+
+###### Example
 
         var group = new draw.Group();
         group.append(path, image, text);
 
-A transformation applies to all group children. In this case it's a fairly simple translate.
-We effectively make the element coordinates relative by translating their parent group.
+A transformation applies to all group children. In this case, it is a fairly simple translate. You effectively make the element coordinates relative by translating their parent group.
+
+###### Example
 
         group.transform(
             geom.transform().translate(50, 50)
         );
 
-### Render the scene
-All that is left is to render the scene on the screen.
-The [Surface.create](/api/dataviz/drawing/surface#create) method will
-choose an implementation that matches the capabilities of the browser:
+### Render the Scene
+
+The [`Surface.create`](/api/dataviz/drawing/surface#create) method, as demonstrated in the example below, chooses an implementation that matches the capabilities of the browser.
+
+###### Example
 
         <div id="surface" style="width: 250px; height: 165px;"></div>
         <script>
@@ -206,5 +205,13 @@ choose an implementation that matches the capabilities of the browser:
             surface.draw(group);
         </script>
 
-The default is SVG with fallback to Canvas or VML.
-See [Supported Browsers](supported-browsers).
+The default output is an SVG with fallback to Canvas or VML.
+
+## See Also
+
+Other articles on Kendo UI Drawing API:
+
+* [Overview of the Drawing API]({% slug overview_kendoui_drawingapi %})
+* [Export a Drawing in PDF]({% slug pdfderawingexport_drawingapi %})
+* [Drawing of HTML Elements]({% slug drawingofhtmlelements_drawingapi %})
+* [Supported Browsers for Kendo UI Drawing API]({% slug drawingofhtmlelements_drawingapi %})
