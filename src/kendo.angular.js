@@ -639,6 +639,12 @@ var __meta__ = { // jshint ignore:line
 
                 var _wrapper = $(widget.wrapper)[0];
                 var _element = $(widget.element)[0];
+                var isUpload = widget.options.name === "Upload";
+
+                if (isUpload) {
+                    element = $(_element);
+                }
+
                 var compile = element.injector().get("$compile");
                 widget._destroy();
 
