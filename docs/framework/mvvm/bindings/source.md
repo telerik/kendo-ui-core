@@ -15,7 +15,7 @@ used depending on element tag name.
 
 > *Important*: `Source` binding does not support nesting widgets with source binding, e.g. `treeview` with source binding to the view model.
 The nested widgets will trigger **source change**, which will force the root source binging to re-render its content, leading to infinitive loops.
-The proper way to nest widgets with source is to use `data-source` attribute [demo](/web/treeview/how-to/MVVM/multiple-treeviews-source-binding).
+The proper way to nest widgets with source is to use `data-source` attribute [demo]({% slug howto_rendermultipleusing_htmlsourcebinding_mvvm_treeview %}).
 
 ## Source binding to array
 
@@ -55,8 +55,8 @@ Adding or removing items from the array will update the HTML contents of the tar
 
 ### Source binding to array of objects
 
-> *Important:* Source binding requires the result set to be either an [ObservableArray](http://docs.telerik.com/kendo-ui/api/javascript/data/observablearray) or
-a list of [ObservableObject](http://docs.telerik.com/kendo-ui/api/javascript/data/observableobject) instances.
+> *Important:* Source binding requires the result set to be either an [ObservableArray](/api/javascript/data/observablearray) or
+a list of [ObservableObject](/api/javascript/data/observableobject) instances.
 
     <ul data-template="ul-template" data-bind="source: products">
     </ul>
@@ -164,7 +164,7 @@ This binding can also be used with elements, which are containers for items (e.g
               data-bind="source: fruits"
               data-text-field="name"
               data-value-field="id"></select>
-              
+
         <p>Select</p>
         <select data-bind="source: fruits" data-template="select-template"></select>
 
@@ -192,7 +192,7 @@ This binding can also be used with elements, which are containers for items (e.g
             <tr><td>#: id #</td><td>#: name #</td></tr>
         </script>
     </div>
-    
+
     <script>
 
       var viewModel = kendo.observable({
@@ -216,20 +216,20 @@ This binding can also be used with elements, which are containers for items (e.g
       kendo.bind("#example", viewModel);
 
     </script>
-    
+
     <style>
-    
+
         table {
             border-collapse: collapse;
         }
-    
+
         table th,
         table td {
             border: 1px solid #999;
             padding: .3em .6em;
             text-align: left;
         }
-    
+
     </style>
 ```
 

@@ -53,7 +53,7 @@ The Telerik UI for ASP.NET MVC contains the following directories.
 * **js** - minified JavaScript files.
 * **styles** - minified CSS files and images used by the themes.
 * **src** - complete JavaScript, CSS and C# source code. **N/A** in the trial version.
-* **spreadsheet** - [Telerik.Web.Spreadsheet](/web/spreadsheet/import-and-export-data/server-side-processing) assembly and its dependencies from the Telerik Document Processing library
+* **spreadsheet** - [Telerik.Web.Spreadsheet]({% slug serverside_processing_spreadsheet_widget %}) assembly and its dependencies from the Telerik Document Processing library
 * **wrappers\aspnetmvc\Binaries\MVC3** - assemblies for ASP.NET MVC 3 applications.
 * **wrappers\aspnetmvc\Binaries\MVC4**- assemblies for ASP.NET MVC 4 applications.
 * **wrappers\aspnetmvc\Binaries\MVC5**- assemblies for ASP.NET MVC 5 applications.

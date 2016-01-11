@@ -11,9 +11,9 @@ position: 7
 
 In addition to the [jQuery plugin syntax](/intro/installation/jquery-initialization), the Kendo UI widgets may be instantiated based on custom HTML attributes in several ways:
 
-**Option 1** The [View](/framework/spa/view) and the [mobile Application](/mobile/application) instantiate widgets based on the `role` HTML 5 data attributes. Both use the [MVVM](/framework/mvvm/overview) internally.  
+**Option 1** The [View](/framework/spa/view) and the [mobile Application](/controls/hybrid/application) instantiate widgets based on the `role` HTML 5 data attributes. Both use the [MVVM](/framework/mvvm/overview) internally.  
 **Option 2** The `kendo.bind` method will scan the passed DOM element contents for the `data-role` attributes and will instantiate the respective widgets.  
-**Option 3** The Kendo UI [AngularJS](/AngularJS/introduction) directives support declarative initialization based on custom element attributes or custom tag names.
+**Option 3** The Kendo UI [AngularJS]({% slug angularjs_integration_directives %}) directives support declarative initialization based on custom element attributes or custom tag names.
 
 > **Important**  
 >
@@ -70,7 +70,7 @@ Here is an example referring to an MVVM-bound DOM element with an AutoComplete w
 
 ### In Hybrid UI Application
 
-Below is an example referring to Kendo Hybrid UI application with a view and an AutoComplete widget. More information about Hybrid UI applications is available in the [Building Hybrid Mobile Applications topic](/framework/spa/overview).
+Below is an example referring to Kendo Hybrid UI application with a view and an AutoComplete widget. More information about Hybrid UI applications is available in the [Building Hybrid Mobile Applications topic]({% slug overview_kendoui_singlepageapplication %}).
 
 ###### Example
 

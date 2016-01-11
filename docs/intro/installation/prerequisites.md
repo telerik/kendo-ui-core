@@ -30,14 +30,14 @@ The following list provides jQuery compatibility information about the major Ken
 | [Kendo UI 2015.1.318 (Q1 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q1-2015)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2014.3.1119 (Q3 2014)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2014)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2014.2.716 (Q2 2014)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q2-2014)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
-| [Kendo UI 2014.1.318 (Q1 2014)](/backward-compatibility#kendo-ui-2014-q1)	                    |1.9.1| Also compatible with 1.10.x and 2.0.x|
-| [Kendo UI 2013.3.1119 (Q3 2013)](/backward-compatibility#kendo-ui-2013-q3)	                |1.9.1| Also compatible with 1.10.x and 2.0.x|
-| [Kendo UI 2013.2.716 (Q2 2013)](/backward-compatibility#kendo-ui-2013-q2)	                    |1.9.1| - |
-| [Kendo UI 2013.1.319 (Q1 2013)](/backward-compatibility#kendo-ui-2013-q1)	                    |1.9.1| - |
-| [Kendo UI 2012.3.1114 (Q3 2012)](/backward-compatibility#kendo-ui-2012-q3)	                |1.8.2| - |
-| [Kendo UI 2012.2.710 (Q2 2012)](/backward-compatibility#kendo-ui-2012-q2)	                    |1.7.1| - |
-| [Kendo UI 2012.1.322 (Q1 2012)](/backward-compatibility#kendo-ui-2012-q1-20121322)	        |1.7.1| - |
-| [Kendo UI 2011.3.1129 (Q3 2011)](/backward-compatibility#changes-from-2011-q3-sp1-201131407)  |1.7.1| - |
+| [Kendo UI 2014.1.318 (Q1 2014)]({%slug breakingchanges2014_kendoui%}#kendo-ui-2014-q1)	                    |1.9.1| Also compatible with 1.10.x and 2.0.x|
+| [Kendo UI 2013.3.1119 (Q3 2013)]({%slug breakingchanges2014_kendoui%}#kendo-ui-2014-q3)	                |1.9.1| Also compatible with 1.10.x and 2.0.x|
+| [Kendo UI 2013.2.716 (Q2 2013)]({% slug breakingchanges2013_kendoui%}#kendo-ui-2013-q2)	                    |1.9.1| - |
+| [Kendo UI 2013.1.319 (Q1 2013)]({% slug breakingchanges2013_kendoui %}#kendo-ui-2013-q1)	                    |1.9.1| - |
+| [Kendo UI 2012.3.1114 (Q3 2012)]({% slug breakingchanges2012_kendoui %}#kendo-ui-2012-q3)	                |1.8.2| - |
+| [Kendo UI 2012.2.710 (Q2 2012)]({% slug breakingchanges2012_kendoui %}#kendo-ui-2012-q2)	                    |1.7.1| - |
+| [Kendo UI 2012.1.322 (Q1 2012)]({% slug breakingchanges2012_kendoui %}#kendo-ui-2012-q1-20121322)	        |1.7.1| - |
+| [Kendo UI 2011.3.1129 (Q3 2011)]({% slug breakingchanges2012_kendoui %}#changes-from-2011-q3-sp1-201131407)  |1.7.1| - |
 
 ### Previous Versions Required
 
@@ -65,7 +65,7 @@ From Q2 2014 release onward, Kendo UI widgets support [AngularJS](https://angula
 
 ### JSZip Library
 
-The [JSZip library](https://stuk.github.io/jszip/) is a necessary prerequisite if you want to configure your widgets so as to support the [Excel export feature](http://docs.telerik.com/kendo-ui/framework/excel/introduction). The Excel export feature was first included in the [Kendo UI 2014.3.1119 (Q3 2014) release](/install/changes-and-backward-compatibility). However, you will not need the JSZip library if you do not need the Excel export feature to be supported.
+The [JSZip library](https://stuk.github.io/jszip/) is a necessary prerequisite if you want to configure your widgets so as to support the [Excel export feature]({% slug introduction_excelexport_kendoui %}). The Excel export feature was first included in the [Kendo UI 2014.3.1119 (Q3 2014) release]({% slug breakingchanges2014_kendoui%}). However, you will not need the JSZip library if you do not need the Excel export feature to be supported.
 
 ### Placement of script Tags
 

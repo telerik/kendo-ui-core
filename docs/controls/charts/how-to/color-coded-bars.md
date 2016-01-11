@@ -70,7 +70,7 @@ The example below demonstrates how to implement color-coded ranges (stripes) in 
 Other articles and how-to examples on Kendo UI Charts:
 
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
-* [Drawing API](http://docs.telerik.com/kendo-ui/framework/drawing/overview)
+* [Drawing API]({% slug overview_kendoui_drawingapi %})
 * [How to Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
 * [How to Create Dynamic Plot Bands]({% slug howto_createdynamicplotbands_charts %})
 * [How to Create Stock Charts in AngularJS]({% slug howto_createstockcharts_angularjs %})

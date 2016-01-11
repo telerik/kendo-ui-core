@@ -101,7 +101,7 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 </script>
 ```
 
-Note that the recommended way to update the object is to use the `set` method of the [ObservableObject](/api/framework/observableobject.md). However, in this particular case the following approach works too.
+Note that the recommended way to update the object is to use the `set` method of the [ObservableObject](/api/javascript/data/observableobject). However, in this particular case the following approach works too.
 
 ###### Example
 
