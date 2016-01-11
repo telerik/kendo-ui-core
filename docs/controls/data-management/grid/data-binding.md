@@ -127,7 +127,7 @@ When you run the example, you see a grid with no data in it. Therefore, you must
 
 ### Handle Visualization
 
-Now you have some data as well as some issues with its visualization. The Grid renders the URL of an image in its **Image** column and the other columns show arrays of objects. Now you need indicate to the Grid that the way you want it to display each of the columns. Do this by an inline template for the image, ademonstrated below.
+Now you have some data as well as some issues with its visualization. The Grid renders the URL of an image in its **Image** column and the other columns show arrays of objects. Now you need indicate to the Grid that the way you want it to display each of the columns. Do this by an inline template for the image, as demonstrated below.
 
 ###### Example
 

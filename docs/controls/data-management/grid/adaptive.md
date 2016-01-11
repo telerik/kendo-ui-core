@@ -12,7 +12,7 @@ From Kendo UI Q3 2013 release onwards, the Grid widget supports "adaptive" enhan
 
 ## Set Up
 
-To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/grid#configuration-mobile) propery to `true`, `phone` or `tablet`.
+To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/grid#configuration-mobile) property to `true`, `phone` or `tablet`.
 
 ###### Example
 
@@ -77,7 +77,7 @@ The example below demonstrates how to add multiple adaptive Grids to the same pa
 
 ## Add to Mobile
 
-The mobile pane in which the adaptive Grid is placed will not automatically expand in height. To add an adaptive Grid to a kendo UI mobile aplication, set the `stretch` configuration of the respective view to `true`, or explicitly define the height of the widget.
+The mobile pane in which the adaptive Grid is placed will not automatically expand in height. To add an adaptive Grid to a kendo UI mobile application, set the `stretch` configuration of the respective view to `true`, or explicitly define the height of the widget.
 
 ### Apply Options: stretch
 

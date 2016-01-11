@@ -18,7 +18,7 @@ To enable Excel export, include the corresponding toolbar command and configure 
 * [Excel Export Configuration](/api/javascript/ui/grid#configuration-excel)
 * [Online Demo](http://demos.telerik.com/kendo-ui/grid/excel-export)
 
-You need to include JSZip script on the page. For more information on the requirements to do this, refer to [Requirements](/framework/excel/introduction#requirements).
+You need to include JSZip script on the page. For more information on the requirements to do this, refer to [Requirements]({% slug introduction_excelexport_kendoui %}#requirements).
 
 The example below demonstrates how to enable the Excel export functionality of a Kendo UI Grid.
 
@@ -110,9 +110,9 @@ The [`excelExport`](/api/javascript/ui/grid#events-excelExport) event allows cus
 
 The `workbook` event argument exposes the generated Excel workbook configuration.
 
-For a better understanding about how Excel documents work, check the [introductory help topic on Excel](/framework/excel/introduction#create-excel-document).
+For a better understanding about how Excel documents work, check the [introductory help topic on Excel]({% slug introduction_excelexport_kendoui %}#excel-document-creation).
 
-For information on how to use the `background` option to set the background color of alternating rows while exporting the Grid to Excel, refer to [this example](/web/grid/how-to/excel/alternating-rows).
+For information on how to use the `background` option to set the background color of alternating rows while exporting the Grid to Excel, refer to [this example]({% slug howto_configure_color_alternating_rows_grid %}).
 
 ### Right-to-Left Support
 
@@ -225,11 +225,11 @@ The example below demonstrates how to post files to the server.
 
 ### JavaScript Error Is Thrown That JSZip Is Not Found
 
-Clicking **Export to Excel** or calling the `saveAsExcel` throws an exception if the JSZip JavaScript library is not found. To solve this issue, include JSZip in the page. For more information on this, see [the introductory help topic about exporting to Excel](/framework/excel/introduction#requirements).
+Clicking **Export to Excel** or calling the `saveAsExcel` throws an exception if the JSZip JavaScript library is not found. To solve this issue, include JSZip in the page. For more information on this, see [the introductory help topic about exporting to Excel]({% slug howto_configure_color_alternating_rows_grid %}#requirements).
 
 ### Excel Export Is Not Working in Internet Explorer and Safari
 
-Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a [server proxy](/framework/save-files/introduction#browser-support). Set the [`proxyURL`](/api/javascript/ui/grid#configuration-excel.proxyURL) option to specify the server proxy URL, as shown below.
+Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). Set the [`proxyURL`](/api/javascript/ui/grid#configuration-excel.proxyURL) option to specify the server proxy URL, as shown below.
 
 ###### Example
 
