@@ -1,17 +1,24 @@
 ---
-title: Define culture information
-page_title: Define Culture Information | Kendo UI Framework Globalization documentation
-description: How to define culture information in culture files and extend it, default culture information settings.
+title: Culture Definition
+page_title: Culture Definition | Kendo UI Globalization
+description: "Learn about the default culture information settings in Kendo UI and how to define culture information in culture files and then extend it."
+slug: culture_definition_kendoui_globalization
+position: 2
 ---
-# Define culture information
 
-Each culture info is placed in a separate JS file with the naming convention *`kendo.culture.<language code>[-<country/region code>].js`*. You can include as many culture files as you want. Every included file will extend the kendo.cultures mapping. Please note that the included culture file will not automatically become current culture used by Kendo.
+# Culture Definition
 
-## Default culture information
+The information on each culture is placed in a separate JavaScript file and shares the `kendo.culture.<language code>[-<country/region code>].js` naming convention. You are able to include as many culture files as you want. Every file that is included extends the `kendo.cultures` mapping. Note that the included culture file does not automatically become the current culture used by Kendo UI.
 
-The English culture is defined directly in kendo.core.js and it is considered as "default". The name is "en-US".
+## Customization
 
-The default culture info is listed here:
+### Apply the Defaults
+
+The default English culture is defined directly in `kendo.core.js` and by the name of `"en-US"`.
+
+The example below lists the default culture information.
+
+###### Example
 
     kendo.cultures["en-US"] = {
 	    //<language code>-<country/region code>
@@ -105,6 +112,16 @@ The default culture info is listed here:
         }
     }};
 
-## Extending culture information
+### Extend Culture Information
 
-If you examine the source code of the script for each culture, you will notice that each script just adds the culture info object to the the kendo.cultures mappings. You can easily define your own culture file and extend current kendo.cultures mapping. The only requirement is to follow the structure of the default culture information listed above.
+If you examine the source code of the script for each culture, you will notice that each script just adds the culture info object to the the `kendo.cultures` mappings. You can easily define your own culture file and extend the current `kendo.cultures` mapping. The only requirement is to follow the structure of the default culture information listed above.
+
+## See Also
+
+Articles on globalization in Kendo UI:
+
+* [Overview of Globalization in Kendo UI]({% slug overview_kendoui_globalization %})
+* [Date Formatting]({% slug dateformatting_kendoui_globalization %})
+* [Date Parsing]({% slug dateparsing_kendoui_globalization %})
+* [Number Formatting]({% slug numberformatting_kendoui_globalization %})
+* [Number Parsing]({% slug numberparsing_kendoui_globalization %})
