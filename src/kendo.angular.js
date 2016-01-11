@@ -1195,7 +1195,7 @@ var __meta__ = { // jshint ignore:line
 
             if (!multiple) {
                 locals.dataItem = locals.data = items[0];
-                locals.angularDataItem = kendo.proxyModelSetters(locals.dataItem)
+                locals.angularDataItem = kendo.proxyModelSetters(locals.dataItem);
                 locals.selected = elems[0];
             }
 

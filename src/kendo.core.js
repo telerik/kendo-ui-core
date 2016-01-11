@@ -4260,7 +4260,7 @@ function pad(number, digits, end) {
         });
 
         return observable;
-    }
+    };
 
 })(jQuery, window);
 
