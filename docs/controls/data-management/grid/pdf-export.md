@@ -8,7 +8,7 @@ position: 9
 
 # PDF Export
 
-Since Kendo UI Q3 2014 (2014.3.1119) the Grid widget provides a built-in PDF export functionality.
+Since [Kendo UI Q3 2014 (2014.3.1119)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2014) the Grid widget provides a built-in PDF export functionality.
 
 ## Set Up
 
@@ -100,7 +100,7 @@ The example below demonstrates how to export all the pages of a Kendo UI Grid in
 
 ### Server Proxy
 
-Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a [server proxy](/framework/save-files/introduction#browser-support). Set the [`proxyURL`](/api/javascript/ui/grid#configuration-pdf.proxyURL) option to specify the server proxy URL, as shown below.
+Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). Set the [`proxyURL`](/api/javascript/ui/grid#configuration-pdf.proxyURL) option to specify the server proxy URL, as shown below.
 
 ###### Example
 
@@ -168,7 +168,7 @@ The example below demonstrates how to post files to the server.
 
 The default fonts in PDF files do not support Unicode. To support international characters we need to embed an external font.
 
-Kendo UI ships the [Deja Vu font family](http://dejavu-fonts.org/wiki/Main_Page) as part of its distributions. For more details on this, see the article on [custom fonts and PDF](/framework/drawing/drawing-dom.html#custom-fonts-and-pdf).
+Kendo UI ships the [Deja Vu font family](http://dejavu-fonts.org/wiki/Main_Page) as part of its distributions. For more details on this, see the article on [custom fonts and PDF]({% slug drawingofhtmlelements_drawingapi %}#configuration-Custom).
 
 The example below demonstrates how to handle custom fonts.
 
@@ -227,7 +227,7 @@ The example below demonstrates how to handle custom fonts.
 
 ## Known Limitations
 
-All [known limitations](/framework/drawing/drawing-dom#known-limitations) of the HTML Drawing module apply. Most importantly:
+All [known limitations]({% slug drawingofhtmlelements_drawingapi %}#known-limitations) of the HTML Drawing module apply. Most importantly:
 
 * Right-to-left text is not supported.
 * Images hosted on different domains might not be rendered, unless permissive [Cross-Origin HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image) are provided by the server. Similarly, fonts might not be possible to load cross-domain.
@@ -240,10 +240,10 @@ Note that even with the proper CORS headers, IE9 will not be able to load images
 
 ## Further Reading
 
-* [Drawing HTML](/framework/drawing/drawing-dom)
+* [Drawing HTML]({% s;ug drawingofhtmlelements_drawingapi %})
 * [Export MVC Grid to PDF](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/pdf-export-server-side)
 * [Export MVC Grid to CSV](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/csv-export-server-side)
-* [Save Files with Kendo UI](/framework/save-files/introduction)
+* [Save Files with Kendo UI]({% slug overview_savingfiles_kendoui %})
 
 ## See Also
 

@@ -16,7 +16,7 @@ There are two ways to print the content of the Grid only, though the Grid itself
 
 ### Print Existing Web Page
 
-Print the existing web pag, but use a print stylesheet to hide the parts of the page that are not needed.
+Print the existing web page, but use a print stylesheet to hide the parts of the page that are not needed.
 
 ### Print New Web Page
 

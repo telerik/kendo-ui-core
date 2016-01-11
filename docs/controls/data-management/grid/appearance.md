@@ -21,7 +21,7 @@ Though the scrolling functionality is enabled, the scrollbars do not necessarily
 
 You can control vertical and horizontal scrolling independently.
 
-When scrolling is enabled, the Grid renders two tables - one for the header area and one for the scrollable data area. This ensures that the header area of the Grid is always visible during vertical scrolling. Take the two tables into account when you need to manually make Javascript or CSS updates to the Grid tables.
+When scrolling is enabled, the Grid renders two tables - one for the header area and one for the scrollable data area. This ensures that the header area of the Grid is always visible during vertical scrolling. Take the two tables into account when you need to manually make JavaScript or CSS updates to the Grid tables.
 
 ###### Example
 
@@ -127,7 +127,7 @@ When you apply virtual scrolling, the HTML output is a little different as compa
 
 Note that when you use virtual scrolling, the Grid data table is not placed inside a scrollable container. The scrollbar belongs to a separate `div.k-scrollbar` shown above. This matters in scenarios when the data rows should be manually scrolled to a particular position.
 
-The virtual scrolling behavior and implementation imposes limitations with regard to some other Grid features. Virtual scrolling cannot be used together with grouping and hierarchy. CRUD operations are also not supported.
+The virtual scrolling behavior and implementation imposes limitations with regard to some other Grid features. Virtual scrolling cannot be used together with grouping and hierarchy. CRUD operations are not supported either.
 
 Virtual scrolling relies on a fake scrollbar. Its size is not determined by the browser, but is calculated based on the average row height of the data that is already loaded. As a result, variable row heights may cause unexpected behavior, such as inability to scroll to the last rows on the last page. There are two ways to ensure that all table rows have the same heights&mdash;either disable text wrapping, or set an explicit large-enough row height, as demonstrated below.
 
@@ -149,9 +149,9 @@ Virtual scrolling relies on a fake scrollbar. Its size is not determined by the 
 > * The page size of the Grid must be large-enough, so that the table rows do not fit in the scrollable data area. Otherwise the vertical virtual scrollbar will not be created.
 > * The page size of the Grid must be over three times larger than the number of visible table rows in the data area.
 
-Due to height-related browser limitations, which cannot be avoided, virtual scrolling works with up to a couple of million records. The exact number of records depends on the browser. Note that if you use a row count that is larger than, can produce unexpected widget behavior, or Javascript errors. Adjusting the scroll position programmatically, so that a certain row becomes visible is not supported.
+Due to height-related browser limitations, which cannot be avoided, virtual scrolling works with up to a couple of million records. The exact number of records depends on the browser. Note that if you use a row count that is larger than, can produce unexpected widget behavior, or JavaScript errors. Adjusting the scroll position programmatically, so that a certain row becomes visible is not supported.
 
-When using mobile touch devices, which do not have a visible scrollbar that can be grabbed and dragged, virtual scrolling combined with a large number of data items, e.g. thousands, can impose a challenge to easily acccess all table rows, as this will require a great deal of touch scrolling. On the other hand, using virtual scrolling with a very small number of items, e.g. less than two hundred, does not make much sense either. Virtual scrolling on touch devices relies on drag and drop events, which are slower than native scrolling, so inferior scrolling performance may be noticable.
+When using mobile touch devices, which do not have a visible scrollbar that can be grabbed and dragged, virtual scrolling combined with a large number of data items, e.g. thousands, can impose a challenge to easily access all table rows, as this will require a great deal of touch scrolling. On the other hand, using virtual scrolling with a very small number of items, e.g. less than two hundred, does not make much sense either. Virtual scrolling on touch devices relies on drag and drop events, which are slower than native scrolling, so inferior scrolling performance may be noticeable.
 
 In the cases listed above, when using virtual scrolling is not supported or recommended, revert to standard paging or non-virtual scrolling without paging, depending on the number of data items.
 
@@ -161,7 +161,7 @@ By default, the Grid has no width and behaves like a block-level element. This m
 
 If you enable the scrolling functionality of the Grid and the sum of all column widths is greater than the width of the Grid, a horizontal scrollbar will appear.
 
-If you disable the scrolling functionality of the Grid and the columns are not able to fit, they will overflow the Grid `<div>`. This results in the widget's right border passing through the data cells. The reason for this is that, basically, the Grid is a `<table>` element inside a `<div>` one. Tables can expand horizontally beyond 100% to enclose their content, while `<div>` elements lack this beahvior.
+If you disable the scrolling functionality of the Grid and the columns are not able to fit, they will overflow the Grid `<div>`. This results in the widget's right border passing through the data cells. The reason for this is that, basically, the Grid is a `<table>` element inside a `<div>` one. Tables can expand horizontally beyond 100% to enclose their content, while `<div>` elements lack this behavior.
 
 Possible solutions for table overflowing are:
 
@@ -183,17 +183,21 @@ Set the height of the Grid in one of the following ways:
 
 It makes sense to set a height to the Grid only if its scrolling is enabled.
 
-When the Grid has a set height, it calculates the appropriate height of its scrollable data area, so that the sum of the header rows, filter row, data, footer, and pager is equal to the expected Grid height. That is why, if the Grid height is changed via Javascript after you create the widget, you must call the [`resize` method of the Grid](/using-kendo-in-responsive-web-pages) afterwards. In this way, the Grid recalculates the height of its data area.
+When the Grid has a set height, it calculates the appropriate height of its scrollable data area, so that the sum of the header rows, filter row, data, footer, and pager is equal to the expected Grid height. That is why, if the Grid height is changed via JavaScript after you create the widget, you must call the [`resize` method of the Grid](/using-kendo-in-responsive-web-pages) afterwards. In this way, the Grid recalculates the height of its data area.
 
 **Figure 1. Grid with a fixed height and its scrolling functionality enabled**
 
 ![Grid With Fixed Height And Scrolling](/controls/data-management/grid/grid3_1.png)
 
-In some special scenarios, it is possible to set a height style to the scrollable data area of the Grid, either via Javascript, or external CSS, which is a `div.k-grid-content` element. In this case, do not set height to the Grid.
+In some special scenarios, it is possible to set a height style to the scrollable data area of the Grid, either via JavaScript, or external CSS, which is a `div.k-grid-content` element. In this case, do not set height to the Grid.
 
 ### Let the Height Vary within Limits
 
-It is possible to make the Grid expand and shrink vertically according to the number of its rows, but within certain limits. To achieve this, do not set any Grid height and apply a min and/or max height style to the scrollable data area. Make sure you [remove the default data area height](/aspnet-mvc/helpers/grid/configuration#scrolling) if you use the MVC wrapper. **Please note that this whole approach is not applicable when virtual scrolling is enabled.**
+It is possible to make the Grid expand and shrink vertically according to the number of its rows, but within certain limits. To achieve this, do not set any Grid height and apply a min and/or max height style to the scrollable data area. Make sure you [remove the default data area height](/aspnet-mvc/helpers/grid/configuration#scrolling) if you use the MVC wrapper.
+
+> **Important**
+>
+> This whole approach is not applicable when virtual scrolling is enabled.
 
 ###### Example
 
@@ -344,7 +348,7 @@ Frozen columns rely on row height synchronization between the frozen and non-fro
 
 ## Hidden Containers
 
-Depending on the Grid configuration, the widget may need to perform Javascript calculations to adjust its layout during initialization inside hidden containers, e.g. when scrolling, virtual scrolling, or frozen columns are used. Generally, Javascript size calculations do not work for elements, which are hidden with a `display:none` style and the Grid can also be affected.
+Depending on the Grid configuration, the widget may need to perform JavaScript calculations to adjust its layout during initialization inside hidden containers, e.g. when scrolling, virtual scrolling, or frozen columns are used. Generally, JavaScript size calculations do not work for elements, which are hidden with a `display:none` style and the Grid can also be affected.
 
 Depending on the exact scenario, the following behavior can be observed when the widget is eventually displayed:
 

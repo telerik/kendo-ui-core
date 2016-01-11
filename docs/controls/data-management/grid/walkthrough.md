@@ -160,7 +160,7 @@ Like all block elements, the Grid expands to a 100% width. Setting CSS width pro
 
 To configure the height of the Grid to 100% and resize together with its parent element, first make the Grid `<div>` 100% high. According to web standards, elements with a percentage height require that their parent has an explicit height. This requirement applies recursively either until an element with a pixel height, or the `html` element is reached. 100% high elements cannot have margins, paddings, borders, or sibling elements, so remove the default border of the Grid as well.
 
-Second, subscribe to the browser window's `resize` event and execute the [`resize`](/using-kendo-in-responsive-web-pages) method of the Grid. If the virtual scrolling Grid functionality is used, instead of `resize`, execute the code below.
+Second, subscribe to the browser window's `resize` event and execute the [`resize`]({% slug responsivewebdesign_integration_kendoui %}) method of the Grid. If the virtual scrolling Grid functionality is used, instead of `resize`, execute the code below.
 
 ###### Example
 
@@ -170,7 +170,7 @@ The above statements will take care of measuring the total height of the Grid an
 
 If you use locked (frozen) columns in your grid, executing `resize` is not necessary.
 
-The `resize` method works for Kendo UI versions delivered after the Kendo UI Q3 2013 release. For older versions, use the Javascript code from the example below instead of `resize`, which practically does the same.
+The `resize` method works for Kendo UI versions delivered after the Kendo UI Q3 2013 release. For older versions, use the JavaScript code from the example below instead of `resize`, which practically does the same.
 
 ###### Example
 
@@ -189,7 +189,7 @@ The `resize` method works for Kendo UI versions delivered after the Kendo UI Q3 
 
 ### Initialize inside Hidden Containers
 
-If a scrollable Grid with a set height is initialized while inside a hidden container, the Grid will not be able to adjust its vertical layout correctly, because Javascript size calculations do not work for elements with a `display:none` style. Depending on the exact configuration, the widget may appear smaller than expected, or the scrollable data area may overflow.
+If a scrollable Grid with a set height is initialized while inside a hidden container, the Grid will not be able to adjust its vertical layout correctly, because JavaScript size calculations do not work for elements with a `display:none` style. Depending on the exact configuration, the widget may appear smaller than expected, or the scrollable data area may overflow.
 
 If you apply virtual scrolling, the vertical scrollbar will not appear.
 
@@ -281,7 +281,7 @@ Though the scrolling functionality is enabled, the scrollbars do not necessarily
 
 You can control vertical and horizontal scrolling independently.
 
-When scrolling is enabled, the Grid renders two tables - one for the header area and one for the scrollable data area. Take the two tables into account when you need to manually make Javascript or CSS updates to the Grid tables.
+When scrolling is enabled, the Grid renders two tables - one for the header area and one for the scrollable data area. Take the two tables into account when you need to manually make JavaScript or CSS updates to the Grid tables.
 
 ###### Example
 
@@ -336,7 +336,7 @@ Virtual scrolling loads the data from the remote data source as you scroll down 
 > **Important**  
 > * It is not recommended to use virtual scrolling together with grouping, hierarchy or editing. Virtual scrolling relies on calculating average row height, based on already loaded data, so having a large variance of row heights, or an unknown number of non-databound rows, such as group headers, may cause unexpected behavior.
 > * A scrollable Grid with a set height needs to be visible when initialized. In this way the Grid can adjust the height of its scrollable data area in accordance with the total height of the widget. In certain scenarios the Grid may be invisible when initialized - for example, when placed inside an initially inactive TabStrip tab, or in another widget. In such cases there are generally two options: initialize the Grid while its element is still visible, or initialize the Grid in a suitable event of the parent widget, e.g. in the TabStrip `activate` event.
-> * Due to height-related browser limitations, which cannot be avoided, virtual scrolling works with up to a couple of million records. The exact number of records depends on the browser. Note that if you use a row count that is larger than, can produce unexpected widget behavior, or Javascript errors. In such cases, revert to standard paging.
+> * Due to height-related browser limitations, which cannot be avoided, virtual scrolling works with up to a couple of million records. The exact number of records depends on the browser. Note that if you use a row count that is larger than, can produce unexpected widget behavior, or JavaScript errors. In such cases, revert to standard paging.
 > * Keyboard navigation does not work with virtual scrolling.
 
 #### Remove Vertical Scrollbar
@@ -436,7 +436,6 @@ When the multiple selection is enabled, it is possible to select multiple rows/c
 
 > **Important**  
 > * Selection is not persisted when the Grid is rebound, i.e. when paging, filtering, sorting, editing, or virtual scrolling occurs. You can achieve this by a custom implementation, as shown in the help article on [how to persist a row selection while paging]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %}).
->
 > * Selection performance may decrease when the page size is too large, or if no paging is used, and the Grid is rendering hundreds or thousands of items. This behavior is most frequently seen in Internet Explorer. Grouping, hierarchy, and frozen columns also have a negative impact on the selection performance, because these features make the HTML output of the Grid more complex. Therefore, it is recommended to use paging and a reasonable page size.
 
 ### Paging
@@ -562,7 +561,7 @@ If needed, you can avoid the described procedure. The custom hyperlinks can be a
 
 ### Rows
 
-#### Retrieve rows by model IDs
+#### Retrieve Rows by Model IDs
 
 To get a Grid table row by the data item ID, follow the steps below:
 
@@ -573,11 +572,13 @@ To get a Grid table row by the data item ID, follow the steps below:
     var modelUID = rowModel.get("uid"); // get method of the Kendo UI Model object
     var tableRow = $("[data-uid='" + modelUID + "']"); // the data-uid attribute is applied to the desired table row element. This UID is rendered by the Grid automatically.
 
-#### Add custom rows when no records are loaded
+#### Add Custom Rows When No Records Are Loaded
 
-When the datasource does not return any data, for example, as a result of filtering, a table row with some user-friendly message can be manually added:
+When the datasource does not return any data, for example, as a result of filtering, a table row with some user-friendly message can be manually added.
 
-###### Example - add a table row in the [dataBound](/api/javascript/ui/grid#events-dataBound) event handler of the Grid
+The example below demonstrates how to add a table row in the [dataBound](/api/javascript/ui/grid#events-dataBound) event handler of the Grid.
+
+###### Example
 
     function onGridDataBound(e) {
         if (!e.sender.dataSource.view().length) {
@@ -628,16 +629,16 @@ The following example demonstrates how to inject the HTML output of the Grid in 
 
 When the Grid is scrollable, which is a default option except for the Grid MVC wrapper, it renders a [separate table for the header area](#scrolling). Since the browser cannot understand the relationship between the two Grid tables, it will not repeat the header row on top of every printed page. The code below addresses this issue by cloning the header row and prepending it to the printable Grid. Another option is to [disable the scrolling functionality of the Grid](#scrolling).
 
-###### HTML
+###### Example
 
+    //HTML
     <div id="grid"></div>
 
     <script type="text/x-kendo-template" id="toolbar-template">
         <button type="button" class="k-button" id="printGrid">Print Grid</button>
     </script>
 
-###### JavaScript
-
+    //JavaScript
 	function printGrid() {
 		var gridElement = $('#grid'),
 			printableContent = '',
