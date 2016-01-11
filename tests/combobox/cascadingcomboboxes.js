@@ -1145,4 +1145,87 @@ test("third combo is bound when only local data is used", function() {
             equal(combo3.value(), "custom");
         });
     });
+
+    asyncTest("select the value of 3rd widget when it is bound and still not cascaded", 1, function() {
+        var combo = new ComboBox(parent, {
+            optionLabel: "Select",
+            dataValueField: "id",
+            dataTextField: "text2",
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success([
+                                {text: "item1", id: "1", text2: "i"},
+                                {text: "item3", id: "2", text2: "i"}
+                            ]);
+                        });
+                    }
+                }
+            },
+            autoBind: false
+        });
+
+        var combo2 = new ComboBox(child.attr("id", "child"), {
+            optionLabel: "Select",
+            dataValueField: "text",
+            dataTextField: "text",
+            dataSource: {
+                serverFiltering: true,
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success([
+                                {text: "item1", id: "1"},
+                                {text: "item2", id: "1"},
+                                {text: "item3", id: "2"},
+                                {text: "item4", id: "2"}
+                            ]);
+                        });
+                    }
+                }
+            },
+            cascadeFrom: "parent",
+            autoBind: false
+        });
+
+        var combo3 = new ComboBox(third, {
+            optionLabel: "Select",
+            dataValueField: "text",
+            dataTextField: "text",
+            dataSource: {
+                serverFiltering: true,
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success([
+                                {text: "item1", id: "1"},
+                                {text: "item2", id: "1"},
+                                {text: "item3", id: "2"},
+                                {text: "item4", id: "2"}
+                            ]);
+                        });
+                    }
+                }
+            },
+            cascadeFrom: "child",
+            autoBind: false
+        });
+
+        combo3.one("dataBound", function() {
+            combo.value("1");
+            combo2.value("item2");
+            combo3.value("item2");
+
+            combo3.one("dataBound", function() {
+                start();
+                equal(combo3.value(), "item2");
+            });
+        });
+
+        combo.value("2");
+        combo2.value("item4");
+        combo3.value("item4");
+    });
+
 })();

@@ -294,7 +294,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             var custom = that._customOption;
-            var hasChild = that.element[0].children[0];
 
             if (that._state === STATE_REBIND) {
                 that._state = "";
