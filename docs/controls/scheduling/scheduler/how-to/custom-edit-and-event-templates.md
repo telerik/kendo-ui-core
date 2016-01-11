@@ -97,6 +97,14 @@ The example below demonstrates how to create and use custom templates for the Ke
             template: $("#customEditorTemplate").html(),
           },
           eventTemplate: $("#event-template").html(),
+          edit: function(e) {
+              var recurrenceEditor = e.container.find("[data-role=recurrenceeditor]").data("kendoRecurrenceEditor");
+
+              //set start option value, used to define the week 'Repeat on' selected checkboxes
+              recurrenceEditor.setOptions({
+                start: new Date(e.event.start);
+              });
+          },
           timezone: "Etc/UTC",
           dataSource: {
             batch: true,
