@@ -1020,6 +1020,45 @@ Allows customization on the logic that renderes the checkboxes when using checkb
         });
     </script>
 
+### columns.filterable.search `Boolean` *(default: false)*
+Controls whether to show a search box when [checkbox filtering](#configuration-columns.filterable.multi) is enabled.
+
+#### Example - Enable checkbox filter search
+    <div id="grid"></div>
+    <script>
+        $("#grid").kendoGrid({
+            columns: [{
+                field: "country",
+                filterable: {
+                    multi: true,
+                    search: true
+                }
+            }],
+            filterable: true,
+            dataSource: [{ country: "BG" }, { country: "USA" }]
+        });
+    </script>
+
+### columns.filterable.ignoreCase `Boolean` *(default: true)*
+Toggles between case-insensitive (default) and case-sensitive [searching](#configuration-columns.filterable.search).
+
+#### Example - Enable checkbox filter search
+    <div id="grid"></div>
+    <script>
+        $("#grid").kendoGrid({
+            columns: [{
+                field: "country",
+                filterable: {
+                    multi: true,
+                    search: true,
+                    ignoreCase: true
+                }
+            }],
+            filterable: true,
+            dataSource: [{ country: "BG" }, { country: "USA" }]
+        });
+    </script>
+
 ### columns.filterable.ui `String|Function`
 
 The role data attribute of the widget used in the filter menu or a JavaScript function which initializes that widget.
