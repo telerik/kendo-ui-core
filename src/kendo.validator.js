@@ -412,7 +412,9 @@ var __meta__ = { // jshint ignore:line
 
             customMessage = kendo.isFunction(customMessage) ? customMessage(input) : customMessage;
 
-            return kendo.format(input.attr(kendo.attr(ruleKey + "-msg")) || input.attr("validationMessage") || input.attr("title") || customMessage || "", fieldName, input.attr(ruleKey));
+            return kendo.format(input.attr(kendo.attr(ruleKey + "-msg")) || input.attr("validationMessage") || input.attr("title") || customMessage || "",
+                fieldName,
+                input.attr(ruleKey) || input.attr(kendo.attr(ruleKey)));
         },
 
         _checkValidity: function(input) {
@@ -445,4 +447,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
