@@ -156,7 +156,7 @@ As seen, if you select an item, it displays two input fields bound to the select
 
 > **Important**
 >
-> When using `rowTemplate`, include the `data-uid="#: uid #"` attribute in the toplevel row element as described in the [Grid documentation](/web/grid/how-to/Templates/row-template-using-dates). You must not use an AngularJS template like `data-uid="{{dataItem.uid}}"` because it is compiled after the grid is displayed and the widget cannot discriminate between the different rows and the data items they belong to.
+> When using `rowTemplate`, include the `data-uid="#: uid #"` attribute in the toplevel row element as described in the [Grid documentation]({% slug howto_use_dates_inside_row_template_grid %}). You must not use an AngularJS template like `data-uid="{{dataItem.uid}}"` because it is compiled after the grid is displayed and the widget cannot discriminate between the different rows and the data items they belong to.
 
 ## Server Requests
 

@@ -19,7 +19,7 @@ This error will be triggered in the following cases:
 * jQuery is included after the Telerik UI for ASP.NET MVC script files
 * jQuery is included after a Kendo UI widget or MVC wrapper declaration
 
-Check the [Kendo UI troubleshooting help topic](/troubleshooting#jquery-is-unavailable-or-undefined) for more symptoms.
+Check the [Kendo UI troubleshooting help topic]({% slug troubleshooting_common_issues_kendoui %}#jquery-is-unavailable-or-undefined) for more symptoms.
 
 Make sure that jQuery is included **before** the Telerik UI for ASP.NET MVC JavaScript files, and **before** any Kendo UI widget or MVC wrapper declarations,
 unless [deferred initialization](/aspnet-mvc/introduction#deferring-kendo-ui-initialization-scripts) is used.
@@ -28,11 +28,11 @@ If using ASP.NET bundles move the `Scripts.Render("~/bundles/jquery")` block **b
 ### Kendo UI Widgets Are Unavailable or Undefined
 
 If jQuery is included more than once in the page all existing jQuery plugins (including Kendo UI) will be wiped out. Will also occur
-if the [required Kendo UI JavaScript files](/intro/installation/prerequisites) are not included.
+if the [required Kendo UI JavaScript files]({% slug javascript_prerequisites_kendoui_installation%}) are not included.
 
-Check the [Kendo UI troubleshooting help topic](/troubleshooting#kendo-ui-widgets-are-unavailable-or-undefined) for more symptoms.
+Check the [Kendo UI troubleshooting help topic]({% slug troubleshooting_common_issues_kendoui %}#kendo-ui-widgets-are-unavailable-or-undefined) for more symptoms.
 
-Make sure jQuery is not included more than once in your page. Remove any duplicate `script` references to jQuery. Include all [required Kendo UI JavaScript files](/intro/installation/prerequisites).
+Make sure jQuery is not included more than once in your page. Remove any duplicate `script` references to jQuery. Include all [required Kendo UI JavaScript files]({% slug javascript_prerequisites_kendoui_installation %}).
 
 If the application is also using Telerik Extensions for ASP.NET MVC tell the `ScriptRegistrar` not to include jQuery:
 
@@ -199,7 +199,7 @@ it is perfectly valid value. When the widget is initialized on the client, it ca
 
 This will happen if two or more widgets or MVC server wrappers have the same `Name()`. The value specified via the `Name()` method is used as the `id` HTML attribute of the widget. The latter must be unique in the page.
 
-**Solution**: Always use unique widget or MVC sevver wrappers names. For example you can append an index to make the name unique.
+**Solution**: Always use unique widget or MVC server wrappers names. For example you can append an index to make the name unique.
 
 ## Loading Partial View that Contains a Widget Works Only the First Time
 

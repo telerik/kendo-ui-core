@@ -80,7 +80,7 @@ Currently, translations are not available for every language and some of the loc
 
 ## See Also
 
-Other articles related to the localization of Kendo UI widgets:
+Articles on the localization of Kendo UI widgets:
 
 * [Localize the Grid Widget]({% slug localization_kendoui_grid_widget %})
 * [Globalization and Localization in Telerik UI for ASP.NET MVC](/aspnet-mvc/globalization)

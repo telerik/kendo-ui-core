@@ -27,7 +27,7 @@ The `kendo.bind($("#container"))` statement finds all elements that have the `ro
 > The value of the `role` data attribute is the name of the widget in lower case e.g. "autocomplete", "dropdownlist" etc.
 
 By default, `kendo.bind` initializes only widgets from the `kendo.ui` namespace, excluding the mobile widgets to avoid ambiguity. This behavior can be
-changed by passing additional namespaces as parameters.  The Kendo UI mobile [Application](/mobile/application) initializes
+changed by passing additional namespaces as parameters.  The Kendo UI mobile [Application](/controls/hybrid/application) initializes
 widgets *from the `kendo.mobile.ui` namespace first*. This means that an element with `data-role="listview"` will
 be automatically be initialized as a mobile listview widget in the mobile application context.
 
