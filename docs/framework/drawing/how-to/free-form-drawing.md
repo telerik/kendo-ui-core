@@ -1,14 +1,16 @@
 ---
-title: Free-form drawing
-page_title: Free-form drawing
-description: Free-form drawing
+title: Implement Free-Form Drawing
+page_title: Implement Free-Form Drawing | Kendo UI Drawing API
+description: "Learn how to implement a free-form drawing surface while working with the Kendo UI Drawing API."
+slug: howto_embedfontawesome_inexportedpdf_drawingapi
 ---
 
-# Free-form drawing
+# Implement Free-Form Drawing
 
-This example demonstrates how to implement free-form drawing surface.
+The example below demonstrates how to implement a free-form drawing surface while working with the Kendo UI Drawing API.
 
-## Example
+###### Example
+
 ```html
     <div id="surface" style="width: 1000px; height: 1000px;border: 1px solid black;cursor: crosshair"></div>
     <script>
@@ -20,11 +22,11 @@ This example demonstrates how to implement free-form drawing surface.
           color: "#000"
         }
       });
-      
+
       var element = $("#surface")
       var surface = draw.Surface.create(element);
       surface.draw(path);
-      
+
       element.kendoTouch({
         dragstart: function (e) {
           e.event.preventDefault();
@@ -49,3 +51,14 @@ This example demonstrates how to implement free-form drawing surface.
       }
     </script>
 ```
+
+## See Also
+
+Other articles and how-to examples on Kendo UI Drawing API:
+
+* [JavaScript API Reference: kendo.drawing.surface](/api/javascript/drawing/surface)
+* [JavaScript API Reference: kendo.geometry.Transformation](/api/javascript/geometry/transformation)
+* [PDF Options JavaScript API Reference](/api/javascript/drawing/pdfoptions)
+* [Overview of the Drawing API]({% slug overview_kendoui_drawingapi %})
+* [How to Apply Transformations During Export]({% slug howto_applytransformationsduringexport_drawingapi %})
+* [How to Embed Font Awesome in Exported PDF]({% slug howto_embedfontawesome_inexportedpdf_drawingapi %})
