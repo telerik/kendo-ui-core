@@ -1,20 +1,26 @@
 ---
 title: Overview
-page_title: Overview of Globalization in Kendo UI framework
-description: Documentation how to define current culture settings, format number or date objects in the process of globalization.
+page_title: Overview | Kendo UI Globalization
+description: "Learn how to define current culture settings, format number or date objects in the process of globalization when working with Kendo UI."
+slug: overview_kendoui_globalization
 position: 1
 ---
-# Kendo Globalization Overview
 
-Globalization is the process of designing and developing an application that works in multiple cultures. The culture defines specific information for the number formats, week and month names, date and time formats and etc.
+# Globalization Overview
 
-Kendo UI provides a way to internationalize the current page using a culture script. Kendo UI exposes culture(cultureName) method which allows to select the culture script coresponding to the "`<language code>-<country/region code>`". For complete overview of the *culture* method, [review the Kendo API Reference](/api/javascript/kendo#methods-culture).
+Globalization is the process of designing and developing an application that works in multiple cultures. The culture defines specific information for the number formats, week and month names, date and time formats, etc.
 
-## Define the current culture
+## Getting Started
 
-First let's start by adding the required culture script:
+[Kendo UI provides a way to internationalize the current page using a culture script](http://demos.telerik.com/kendo-ui/globalization/index). Kendo UI exposes culture (`cultureName`) method which allows you to select the culture script corresponding to the `<language code>-<country/region code>`.
 
-### Add culture scripts to the page:
+For detailed information on the `culture` method, refer to the [API reference article on this method](/api/javascript/kendo#methods-culture).
+
+### Define Current Culture
+
+First, add the required culture script to the page, as demonstrated in the example below.
+
+###### Example
 
     <script src="jquery.js"></script>
     <script src="kendo.all.min.js"></script>
@@ -26,9 +32,9 @@ First let's start by adding the required culture script:
     <script src="http://kendo.cdn.telerik.com/<version>/js/cultures/kendo.culture.en-GB.min.js"></script>
 
 
-Now, you just need to set the culture script, which Kendo UI should use:
+Now, set the culture script, which Kendo UI should use, as shown below.
 
-### Set current culture:
+###### Example
 
     <script type="text/javascript">
          //set current to the "en-GB" culture script
@@ -37,41 +43,59 @@ Now, you just need to set the culture script, which Kendo UI should use:
 
 The default culture, which Kendo UI widgets uses is "en-US".
 
-## Format Number or Date object
+## Configuration
 
-Kendo UI exposes methods which can format number or date object using specific format string and the current specified culture:
+### Format Number or Date Objects
 
-- [kendo.toString(object, format, [culture])](/api/javascript/kendo#methods-toString) - returns a string representation of the current object taking into account the given format and culture.
-- [kendo.format(format, arguments)](/api/javascript/kendo#methods-format) -  replaces each format item in a specified string with the text equivalent of a corresponding object's value.
+Kendo UI exposes methods, which can format the number or date objects using a specific format string and the current specified culture. These are:
 
-For more detail information check [this help topic](/framework/globalization/dateformatting).
+- [`kendo.toString(object, format, [culture])`](/api/javascript/kendo#methods-toString)&mdash;This method returns a string representation of the current object while taking into account the given format and culture.
+- [`kendo.format(format, arguments)`](/api/javascript/kendo#methods-format)&mdash;Replaces each format item in a specified string with the text equivalent of a corresponding object's value.
 
-## Parsing a string
-Kendo UI exposes methods which converts the specified string to date or number object:
+For detailed information, refer to [this article]({%slug dateformatting_kendoui_globalization %}).
 
-- [kendo.parseInt(string, [culture])](/api/javascript/kendo#methods-parseInt) - converts a string to a whole number using the specified culture (current culture by default).
-- [kendo.parseFloat(string, [culture])](/api/javascript/kendo#methods-parseFloat) - converts a string to a number with floating point using the specified culture (current culture by default).
-- [kendo.parseDate(string, [formats], [culture])](/api/javascript/kendo#methods-parseDate) - converts a string to a JavaScript Date object, taking into account the given format/formats (or the given culture's set of default formats).
+### Parse Strings
 
-For more detail information check [this help topic](/framework/globalization/dateparsing).
+Kendo UI exposes methods which convert the specified string to a date or number object.
 
-## Support for jQuery Globalize.js 0.1 (deprecated)
+- [`kendo.parseInt(string, [culture])`](/api/javascript/kendo#methods-parseInt)&mdash;This method converts a string to a whole number using the specified culture (current culture by default).
+- [`kendo.parseFloat(string, [culture])`](/api/javascript/kendo#methods-parseFloat)&mdash;Converts a string to a number with floating point using the specified culture (current culture by default).
+- [`kendo.parseDate(string, [formats], [culture])`](/api/javascript/kendo#methods-parseDate)&mdash;Converts a string to a JavaScript Date object, taking into account the given format/formats (or the given culture's set of default formats).
 
-Loading globalize.js will override the default globalization features in Kendo UI. Not everything is guaranteed to work, for example custom number formats are unsupported in this case.
+For detailed information, refer to [this article]({% slug dateparsing_kendoui_globalization %}).
 
-> The Globalization 0.1 library is no longer supported. Using it is not recommended. More details in [#1354](https://github.com/telerik/kendo-ui-core/issues/1354).
+## Support
 
-## Widgets that depend on culture info
+### (Deprecated) jQuery Globalize.js 0.1
 
-Here is a list of widgets which depends on the current culture:
+If you load globalize.js, the default globalization features in Kendo UI are overridden. Some features might not work. For example, custom number formats are unsupported in this case.
 
-- Calendar
-- DatePicker
-- TimePicker
-- DateTimePicker
-- NumericTextBox
-- MaskedTextBox (globalized mask literals)
-- Scheduler
-- Gantt
+> **Important**
+>
+> The Globalization 0.1 library is no longer supported. It is advisable not to use it. For more details, refer to the [#1354 issue](https://github.com/telerik/kendo-ui-core/issues/1354).
 
-All widgets that support date or numeric formatting also depend on current culture. These widgets are the more complex ones like Grid, ListView, Charts and etc.
+## Widgets Depending on Culture Information
+
+Here is a list of Kendo UI widgets which depend on the current culture:
+
+- [Calendar](http://demos.telerik.com/kendo-ui/calendar/index)
+- [DatePicker](http://demos.telerik.com/kendo-ui/datepicker/index)
+- [TimePicker](http://demos.telerik.com/kendo-ui/timepicker/index)
+- [DateTimePicker](http://demos.telerik.com/kendo-ui/datetimepicker/index)
+- [NumericTextBox](http://demos.telerik.com/kendo-ui/numerictextbox/index)
+- [MaskedTextBox (globalized mask literals)](http://demos.telerik.com/kendo-ui/maskedtextbox/index)
+- [Scheduler](http://demos.telerik.com/kendo-ui/scheduler/index)
+- [Gantt](http://demos.telerik.com/kendo-ui/gantt/index)
+
+All Kendo UI widgets which support date or numeric formatting also depend on current culture. These widgets are the more complex ones such as Kendo UI [Grid](http://demos.telerik.com/kendo-ui/grid/index), [ListView](http://demos.telerik.com/kendo-ui/listview/index), [Charts](http://demos.telerik.com/kendo-ui/area-charts/index), etc.
+
+## See Also
+
+Articles on globalization in Kendo UI:
+
+* [Overview of Globalization in Kendo UI]({% slug overview_kendoui_globalization %})
+* [Culture Definition]({% slug culture_definition_kendoui_globalization %})
+* [Date Formatting]({% slug dateformatting_kendoui_globalization %})
+* [Date Parsing]({% slug dateparsing_kendoui_globalization %})
+* [Number Formatting]({% slug numberformatting_kendoui_globalization %})
+* [Number Parsing]({% slug numberparsing_kendoui_globalization %})
