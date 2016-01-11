@@ -397,6 +397,7 @@ The Grid, TreeView, and ListView widgets will evaluate handlers defined with `k-
 - `selected` (jQuery object)&mdash;The selected elements.
 - `data` (array or data item)&mdash;The selected data models. It will be an array when a multiple selection is enabled, or a single item otherwise.
 - `dataItem`&mdash;When multiple selection is not enabled, this is provided for consistency and will be the same item as `data`.
+- `angularDataItem`&mdash;When multiple selection is not enabled, this is the `dataItem` object that has its properties wrapped with getter/setters.
 - `columns`&mdash;For the Grid, when the cell selection is enabled, it will be an array with zero-based column indexes for the selected columns. Also, in this case, the `selected` object will contain the respective `<td>` elements instead of the `<tr>` ones.
 
 The `kendoEvent` is available as well.

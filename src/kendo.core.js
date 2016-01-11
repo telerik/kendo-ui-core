@@ -4242,6 +4242,26 @@ function pad(number, digits, end) {
             save(options.dataURI, options.fileName, options.proxyURL, options.proxyTarget);
         };
     })();
+
+    // kendo proxySetters
+    kendo.proxyModelSetters = function proxyModelSetters(data) {
+        var observable = {};
+
+        Object.keys(data).forEach(function(property) {
+          Object.defineProperty(observable, property, {
+            get: function() {
+              return data[property];
+            },
+            set: function(value) {
+              data[property] = value;
+              data.dirty = true;
+            }
+          });
+        });
+
+        return observable;
+    }
+
 })(jQuery, window);
 
 return window.kendo;
