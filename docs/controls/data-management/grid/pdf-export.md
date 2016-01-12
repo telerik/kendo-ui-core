@@ -240,7 +240,7 @@ Note that even with the proper CORS headers, IE9 will not be able to load images
 
 ## Further Reading
 
-* [Drawing HTML]({% s;ug drawingofhtmlelements_drawingapi %})
+* [Drawing HTML]({% slug drawingofhtmlelements_drawingapi %})
 * [Export MVC Grid to PDF](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/pdf-export-server-side)
 * [Export MVC Grid to CSV](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/csv-export-server-side)
 * [Save Files with Kendo UI]({% slug overview_savingfiles_kendoui %})
