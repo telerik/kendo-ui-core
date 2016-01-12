@@ -1,14 +1,15 @@
 ---
-title: Add red border and hide tooltip
-page_title: Add red border and hide tooltip
-description: Add red border and hide tooltip
+title: Add Red Border and Hide Tooltip
+page_title: Add Red Border and Hide Tooltip | Kendo UI Validator Widget
+description: "Learn how to add a red border and hide the tooltip in the Kendo UI Validator."
+slug: howto_addredborderandhidetooltip_validator
 ---
 
-# Add red border and hide tooltip
+# Add Red Border and Hide Tooltip
 
-The example below demonstrates how to hide the validation tooltips and add a red border around input elements and widgets that failed to validate.
+The example below demonstrates how to hide the validation tooltip and add a red border around `input` elements and widgets, which failed to validate, in Kendo UI.
 
-#### Example:
+###### Example
 
 ```html
     <style scoped>
@@ -101,9 +102,6 @@ The example below demonstrates how to hide the validation tooltips and add a red
       </form>
     </div>
 
-
-
-
     <script>
       $(document).ready(function() {
         var data = [
@@ -146,5 +144,15 @@ The example below demonstrates how to hide the validation tooltips and add a red
           }
         });
       });
-    </script> 
+    </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Validator:
+
+* [Validator JavaScript API Reference](/api/javascript/ui/validator)
+* [How to Show Tooltip on Mouse Over]({% slug howto_showtooltiponmouseover_validator %})
+* [How to Use Use MutationObserver to Add Red Border and Hide Tooltip]({% slug howto_usemutationobserver_addborderandhidetooltip_validator %})
+* [How to Use Templates to Customize Tooltips]({% slug howto_usetemplatestocustomizetooltips_validator %})
+* [How to Validate Radio Buttons with Only One Error Message]({% slug howto_validateradiowithonemessage_validator %})
