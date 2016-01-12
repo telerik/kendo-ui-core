@@ -26,7 +26,7 @@ The DropDownList looks and operates consistently regardless of the initializatio
 > * As DropDownList should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
 > * The widget copies any styles and CSS classes from the input element to the wrapper element and visible input.
 
-#### From Existing <select> Element
+#### From Existing select Element
 
 The example below demonstrates how to initialize the DropDownList from an existing `<select>` element with defined data items.
 

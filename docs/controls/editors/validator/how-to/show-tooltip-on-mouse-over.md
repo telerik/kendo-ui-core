@@ -1,25 +1,27 @@
 ---
-title: Use MutationObserver to add red border and hide tooltip
-page_title: Use MutationObserver to add red border and hide tooltip
-description: Use MutationObserver to add red border and hide tooltip
+title: Show Tooltip on Mouse Over
+page_title: Show Tooltip on Mouse Over | Kendo UI Validator Widget
+description: "Learn how to show a toolbar on mouse over in the Kendo UI Validator."
+slug: howto_showtooltiponmouseover_validator
 ---
 
-# Use MutationObserver to add red border and hide tooltip
+# Show Tooltip on Mouse Over
 
-The example below demonstrates how to hide the validation tooltip and add a red border around input elements and widgets that failed to validate using a MutationObserver.
+The example below demonstrates how to show the validation tooltip in Kendo UI only when moving the mouse cursor over the input that failed to validate.
 
 #### Example:
 
 ```html
     <style scoped>
-      /*hide validation message*/
-      .k-tooltip-validation {
-        visibility: hidden; 
-        /*or*/
-        /*display:none !important;*/
+      .k-invalid-msg
+      {
+        display: none !important;
       }
 
-      /*add red border*/
+      .k-invalid
+      {
+        border: 1px solid red;
+      }
       .k-widget > span.k-invalid,
       input.k-invalid
       {
@@ -31,7 +33,6 @@ The example below demonstrates how to hide the validation tooltip and add a red 
 
       .demo-section {
         width: 700px;
-        font-size: 12px;
       }
 
       #tickets {
@@ -46,8 +47,6 @@ The example below demonstrates how to hide the validation tooltip and add a red 
         font-weight: normal;
         font-size: 1.4em;
         border-bottom: 1px solid #ccc;
-        margin: 10px 0 0;
-        padding: 0;
       }
 
       #tickets ul {
@@ -56,7 +55,7 @@ The example below demonstrates how to hide the validation tooltip and add a red 
         padding: 0;
       }
       #tickets li {
-        margin: 10px 0 0 0;
+        margin: 7px 0 0 0;
       }
 
       label {
@@ -91,38 +90,21 @@ The example below demonstrates how to hide the validation tooltip and add a red 
           <ul>
             <li>
               <label for="fullname" class="required">Your Name</label>
-              <input type="text" id="fullname" name="fullname" class="k-textbox" placeholder="Full name" required validationMessage="Enter {0}" style="width: 200px;" />
-            </li>
-            <li>
-              <label for="search" class="required">Movie</label>
-              <input type="search" id="search" name="search" required validationMessage="Select movie" style="width: 200px;"/><span class="k-invalid-msg" data-for="search"></span>
-            </li>
-            <li>
-              <label for="time">Start time</label>
-              <select name="time" id="time" required data-required-msg="Select start time" style="width: 200px;">
-                <option>14:00</option>
-                <option>15:30</option>
-                <option>17:00</option>
-                <option>20:15</option>
-              </select>
-              <span class="k-invalid-msg" data-for="time"></span>
-            </li>
-            <li>
-              <label for="amount">Amount</label>
-              <input id="amount" name="Amount" type="text" min="1" max="10" value="1" required data-max-msg="Enter value between 1 and 10" style="width: 200px;" />
-              <span class="k-invalid-msg" data-for="Amount"></span>
+              <div style="display:inline-block">
+                <input type="text" id="fullname" name="fullname" class="k-textbox" placeholder="Full name" required validationMessage="Enter {0}" style="width: 200px;" />
+              </div>
             </li>
             <li>
               <label for="email" class="required">Email</label>
-              <input type="email" id="email" name="Email" class="k-textbox" placeholder="e.g. myname@example.net"  required data-email-msg="Email format is not valid" style="width: 200px;" />
+              <div style="display:inline-block">
+                <input type="email" id="email" name="email" class="k-textbox" placeholder="Email" required style="width: 200px;" />
+              </div>
             </li>
             <li>
-              <label for="tel" class="required">Phone</label>
-              <input type="tel" id="tel" name="tel" class="k-textbox" pattern="\d{10}" placeholder="Please enter a ten digit phone number" required
-                     validationMessage="Enter at least ten digits" style="width: 200px;"/>
-            </li>
-            <li  class="accept">
-              <input type="checkbox" name="Accept" required validationMessage="Acceptance is required" /> I accept the terms of service
+              <label for="age" class="required">Age</label>
+              <div style="display:inline-block">
+                <input id="age" name="age" placeholder="Age" style="width: 200px;" required />
+              </div>
             </li>
             <li  class="accept">
               <button class="k-button" type="submit">Submit</button>
@@ -134,35 +116,32 @@ The example below demonstrates how to hide the validation tooltip and add a red 
       </div>
 
 
-
       <script>
         $(document).ready(function() {
-          var data = [
-            "12 Angry Men",
-            "Il buono, il brutto, il cattivo.",
-            "Inception",
-            "One Flew Over the Cuckoo's Nest",
-            "Pulp Fiction",
-            "Schindler's List",
-            "The Dark Knight",
-            "The Godfather",
-            "The Godfather: Part II",
-            "The Shawshank Redemption"
-          ];
+          var errorTemplate = '<div class="k-widget k-tooltip k-tooltip-validation"' +
+              'style="margin:0.5em"><span class="k-icon k-warning"> </span>' +
+              '#=message#<div class="k-callout k-callout-n"></div></div>'
 
-          $("#search").kendoAutoComplete({
-            dataSource: data,
-            separator: ", "
+          var validator = $("#tickets").kendoValidator({
+            errorTemplate: errorTemplate
+          }).data("kendoValidator");
+
+          $("#age").kendoNumericTextBox();
+
+          var tooltip = $("#tickets").kendoTooltip({
+            filter: ".k-invalid",
+            content: function(e) {
+              var name = e.target.attr("name") || e.target.closest(".k-widget").find(".k-invalid:input").attr("name");
+              var errorMessage = $("#tickets").find("[data-for=" + name + "]");
+
+              return '<span class="k-icon k-warning"> </span>' + errorMessage.text();
+            },
+            show: function() {
+              this.refresh();
+            }
           });
 
-          $("#time").kendoDropDownList({
-            optionLabel: "--Start time--"
-          });
-
-          $("#amount").kendoNumericTextBox();
-
-          var validator = $("#tickets").kendoValidator().data("kendoValidator"),
-              status = $(".status");
+          var status = $(".status");
 
           $("form").submit(function(event) {
             event.preventDefault();
@@ -177,7 +156,6 @@ The example below demonstrates how to hide the validation tooltip and add a red 
             }
           });
 
-          /* Bind Mutation Events */
           var elements = $("#tickets").find("[data-role=autocomplete],[data-role=combobox],[data-role=dropdownlist],[data-role=numerictextbox]");
 
           //correct mutation event detection
@@ -221,3 +199,13 @@ The example below demonstrates how to hide the validation tooltip and add a red 
       </script>
     </div>
 ```
+
+## See Also
+
+Other articles on Kendo UI Validator:
+
+* [Validator JavaScript API Reference](/api/javascript/ui/validator)
+* [How to Add Red Border and Hide Tooltip]({% slug howto_addredborderandhidetooltip_validator %})
+* [How to Use Use MutationObserver to Add Red Border and Hide Tooltip]({% slug howto_usemutationobserver_addborderandhidetooltip_validator %})
+* [How to Use Templates to Customize Tooltips]({% slug howto_usetemplatestocustomizetooltips_validator %})
+* [How to Validate Radio Buttons with Only One Error Message]({% slug howto_validateradiowithonemessage_validator %})
