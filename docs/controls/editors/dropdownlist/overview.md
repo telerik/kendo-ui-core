@@ -133,7 +133,7 @@ The example below demonstrates how to define an item template.
 The example below demonstrates how to define a value template.
 
 > **Important**  
-> Note that value template should be consisted of inline HTML elements only.
+> Note that value templates should consist of inline HTML elements only.
 
 ###### Example
 
