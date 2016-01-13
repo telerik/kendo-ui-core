@@ -1054,4 +1054,86 @@
 
         ddl.value("");
     });
+
+    asyncTest("select the value of 3rd widget when it is bound and still not cascaded", 1, function() {
+        var ddl = new DropDownList(parent, {
+            optionLabel: "Select",
+            dataValueField: "id",
+            dataTextField: "text2",
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success([
+                                {text: "item1", id: "1", text2: "i"},
+                                {text: "item3", id: "2", text2: "i"}
+                            ]);
+                        });
+                    }
+                }
+            },
+            autoBind: false
+        });
+
+        var ddl2 = new DropDownList(child.attr("id", "child"), {
+            optionLabel: "Select",
+            dataValueField: "text",
+            dataTextField: "text",
+            dataSource: {
+                serverFiltering: true,
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success([
+                                {text: "item1", id: "1"},
+                                {text: "item2", id: "1"},
+                                {text: "item3", id: "2"},
+                                {text: "item4", id: "2"}
+                            ]);
+                        });
+                    }
+                }
+            },
+            cascadeFrom: "parent",
+            autoBind: false
+        });
+
+        var ddl3 = new DropDownList(third, {
+            optionLabel: "Select",
+            dataValueField: "text",
+            dataTextField: "text",
+            dataSource: {
+                serverFiltering: true,
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success([
+                                {text: "item1", id: "1"},
+                                {text: "item2", id: "1"},
+                                {text: "item3", id: "2"},
+                                {text: "item4", id: "2"}
+                            ]);
+                        });
+                    }
+                }
+            },
+            cascadeFrom: "child",
+            autoBind: false
+        });
+
+        ddl3.one("dataBound", function() {
+            ddl.value("1");
+            ddl2.value("item2");
+            ddl3.value("item2");
+
+            ddl3.one("dataBound", function() {
+                start();
+                equal(ddl3.value(), "item2");
+            });
+        });
+
+        ddl.value("2");
+        ddl2.value("item4");
+        ddl3.value("item4");
+    });
 })();

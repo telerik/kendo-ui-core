@@ -1142,6 +1142,12 @@ var __meta__ = { // jshint ignore:line
                     return;
                 }
 
+                parent.bind("set", function() { //will cascade
+                    that.one("set", function(e) { //get your value
+                        that._selectedValue = e.value;
+                    });
+                });
+
                 options.autoBind = false;
 
                 cascadeHandler = proxy(function(e) {
@@ -1179,7 +1185,9 @@ var __meta__ = { // jshint ignore:line
 
         _cascadeChange: function(parent) {
             var that = this;
-            var value = that._accessor();
+            var value = that._accessor() || that._selectedValue;
+
+            that._selectedValue = null;
 
             if (that._userTriggered) {
                 that._clearSelection(parent, true);

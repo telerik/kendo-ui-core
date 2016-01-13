@@ -347,4 +347,60 @@
             scroll(combobox.listView.content, 5 * CONTAINER_HEIGHT);
         });
     });
+
+    asyncTest("widget focuses the item found during text search", 1, function() {
+        var combobox = new ComboBox(select, {
+            delay: 0,
+            close: function(e) { e.preventDefault(); },
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            }
+        });
+
+        combobox.one("dataBound", function() {
+            combobox.input.focus().val("Item 1");
+            combobox.input.trigger({ type: "keydown" });
+
+            setTimeout(function() {
+                start();
+                ok($("[data-offset-index=1]").hasClass("k-state-focused"));
+            }, 100);
+        });
+    });
+
+    asyncTest("keep selected value when list is scrolled", 1, function() {
+        var combobox = new ComboBox(select, {
+            close: function(e) { e.preventDefault(); },
+            height: CONTAINER_HEIGHT,
+            autoBind: false,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 20
+            }
+        });
+
+        combobox.one("dataBound", function() {
+            combobox.open();
+
+            debugger;
+            combobox.one("dataBound", function() {
+                start();
+                equal(select.val(), 10);
+            });
+
+            scroll(combobox.listView.content, 5 * CONTAINER_HEIGHT);
+        });
+
+        combobox.value(10);
+    });
 })();
