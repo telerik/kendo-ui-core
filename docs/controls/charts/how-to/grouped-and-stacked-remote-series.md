@@ -1,22 +1,20 @@
 ---
-title: Stacked and Grouped Series Bound to Remote Data
-page_title: Stacked and Grouped Series Bound to Remote Data | Kendo UI Charts
-description: "Learn how to bind a chart with multiple stack groups to remote data."
+title: Create Stacked and Grouped Series Bound to Remote Data
+page_title: Create Stacked and Grouped Series Bound to Remote Data | Kendo UI Charts
+description: "Learn how to bind a Kendo UI Chart with multiple stack groups to remote data."
 slug: howto_stackedgroupedseriesremote_charts
 ---
 
-# Stacked and Grouped Series Bound to Remote Data
+# Create Stacked and Grouped Series Bound to Remote Data
 
-The example below demonstrates how to create a stacked and grouped chart bound to remote data.
-
-The [Bar Charts / Stacked and grouped bars](http://demos.telerik.com/kendo-ui/bar-charts/grouped-stacked-bar) demonstrates the same scenario for inline data.
+The example below demonstrates how to create a stacked and grouped Kendo UI Chart bound to remote data. The [**Bar Charts** > **Stacked and grouped bars** demo](http://demos.telerik.com/kendo-ui/bar-charts/grouped-stacked-bar) demonstrates the same scenario for inline data.
 
 The implementation consists of two steps:
 
 1. Assign an unique Group ID value to each Gender / Age Group combination.
-1. Set the stack name for each series to match the Gender field in the [`dataBound ` event](/api/javascript/dataviz/ui/chart#events-dataBound)
+1. Set the stack name for each series to match the Gender field in the [`dataBound ` event](/api/javascript/dataviz/ui/chart#events-dataBound).
 
-###### Example - Stacked and Grouped Series Bound to Remote Data
+###### Example
 
 ```html
     <div id="chart"></div>
@@ -685,3 +683,17 @@ The implementation consists of two steps:
 Other articles and how-to examples on Kendo UI Charts:
 
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [How to Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
+* [How to Customize Chart Themes]({% slug howto_customizechartthemes_charts %})
+* [How to Display Checkboxes Next to Legend Items]({% slug howto_displaycheckboxes_nexttolegenditems_charts %})
+* [How to Expand Clickable Area of Points]({% slug howto_extendclickableareaofpoints_charts %})
+* [How to Fit PDF Exported Chart to Page]({% slug howto_fitpdfexportedcharttopage_charts %})
+* [How to Handle Right Click in Charts]({% slug howto_setdifrerentmarkers_forgroupedlinecharts_charts %})
+* [How to Place Text in the Center of Donut Charts]({% slug howto_placetextinthecentre_donutcharts %})
+* [How to Render Custom Plot Bands]({% slug howto_rendercustomplotbands_charts %})
+* [How to Set Different Marker Types for Grouped Line Charts]({% slug howto_setdifrerentmarkers_forgroupedlinecharts_charts %})
+* [How to Shorten Chart Labels]({% slug howto_shortenchartlabels_charts %})
+* [How to Show Message When Chart Has No Data]({% slug howto_showemptymessage_whencharthasnodata_charts %})
+* [How to Sort Categories in Grouped Charts]({% slug howto_sortcategorisinagroupedchart_charts %})
+
+For more runnable examples on Kendo UI Charts, browse the [how-to section of articles]({% slug howto_createdynamicplotbands_charts %}).
