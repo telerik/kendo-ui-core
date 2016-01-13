@@ -838,6 +838,25 @@
         dropdownlist.wrapper.focus().blur();
     });
 
+    test("trigger set when setting value", 1, function() {
+        var value = "test";
+
+        var dropdownlist = new DropDownList(input, {
+            dataValueField: "id",
+            dataTextField: "name",
+            dataSource: [
+                { id: 1, name: "name1" },
+                { id: 2, name: "name2" },
+                { id: 3, name: "name3" }
+            ],
+            set: function(e) {
+                equal(e.value, value);
+            }
+        });
+
+        dropdownlist.value(value);
+    });
+
     test("cascading child triggers filtering event", 1, function() {
         var parent = $("<input id='parent' />").appendTo(QUnit.fixture);
         var child = $("<input />").appendTo(QUnit.fixture);

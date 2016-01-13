@@ -735,4 +735,23 @@ test("change event is not raised when widget value is cleared", 0, function() {
     combobox.input.focus().blur();
 });
 
+test("trigger set when setting value", 1, function() {
+    var value = "test";
+
+    var combobox = new ComboBox(input, {
+        dataValueField: "id",
+        dataTextField: "name",
+        dataSource: [
+            { id: 1, name: "name1" },
+            { id: 2, name: "name2" },
+            { id: 3, name: "name3" }
+        ],
+        set: function(e) {
+            equal(e.value, value);
+        }
+    });
+
+    combobox.value(value);
+});
+
 })();
