@@ -1,7 +1,7 @@
 ---
 title: Stacked and Grouped Series Bound to Remote Data
 page_title: Stacked and Grouped Series Bound to Remote Data | Kendo UI Charts
-description: "Learn how to ."
+description: "Learn how to bind a chart with multiple stack groups to remote data."
 slug: howto_stackedgroupedseriesremote_charts
 ---
 
