@@ -91,7 +91,7 @@ navigation:
     "controls/interactivity/draganddrop":
         title: "Drag and Drop"
     "controls/hybrid":
-        title: "Hybrd UI"
+        title: "Hybrid UI"
         position: 11
     "controls/hybrid/listview":
         title: "Mobile ListView"
