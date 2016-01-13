@@ -24,6 +24,7 @@ var __meta__ = { // jshint ignore:line
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        List = ui.List,
         Select = ui.Select,
         support = kendo.support,
         activeElement = kendo._activeElement,
@@ -432,17 +433,34 @@ var __meta__ = { // jshint ignore:line
             return null;
         },
 
+        _buildOptions: function(data) {
+            var that = this;
+            if (!that._isSelect) {
+                return;
+            }
+
+            var value = that.value();
+            var optionLabel = that._optionLabelDataItem();
+
+            if (optionLabel) {
+                optionLabel = '<option value="' + that._value(optionLabel) + '">' + that._text(optionLabel) + "</option>";
+            }
+
+            that._options(data, optionLabel, value);
+
+            if (value !== List.unifyType(that._accessor(), typeof value)) {
+                that._customOption = null;
+                that._custom(value);
+            }
+        },
+
         _listBound: function() {
             var that = this;
             var initialIndex = that._initialIndex;
-            var optionLabel = that.options.optionLabel;
             var filtered = that._state === STATE_FILTER;
 
             var data = that.dataSource.flatView();
-            var length = data.length;
             var dataItem;
-
-            var value;
 
             that._angularItems("compile");
 
@@ -452,19 +470,7 @@ var __meta__ = { // jshint ignore:line
 
             that.popup.position();
 
-            if (that._isSelect) {
-                value = that.value();
-
-                if (length) {
-                    if (optionLabel) {
-                        optionLabel = that._option("", that._optionLabelText());
-                    }
-                } else if (value) {
-                    optionLabel = that._option(value, that.text());
-                }
-
-                that._options(data, optionLabel, value);
-            }
+            that._buildOptions(data);
 
             that._makeUnselectable();
 
@@ -476,7 +482,7 @@ var __meta__ = { // jshint ignore:line
                 that._open = false;
 
                 if (!that._fetch) {
-                    if (length) {
+                    if (data.length) {
                         if (!that.listView.value().length && initialIndex > -1 && initialIndex !== null) {
                             that.select(initialIndex);
                         }
@@ -603,10 +609,6 @@ var __meta__ = { // jshint ignore:line
 
             wrapper.attr(ARIA_DISABLED, disable)
                    .attr(ARIA_READONLY, readonly);
-        },
-
-        _option: function(value, text) {
-            return '<option value="' + value + '">' + text + "</option>";
         },
 
         _keydown: function(e) {

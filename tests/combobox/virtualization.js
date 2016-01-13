@@ -373,4 +373,34 @@
             }, 100);
         });
     });
+
+    asyncTest("keep selected value when list is scrolled", 1, function() {
+        var combobox = new ComboBox(select, {
+            close: function(e) { e.preventDefault(); },
+            height: CONTAINER_HEIGHT,
+            autoBind: false,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 20
+            }
+        });
+
+        combobox.one("dataBound", function() {
+            combobox.open();
+
+            debugger;
+            combobox.one("dataBound", function() {
+                start();
+                equal(select.val(), 10);
+            });
+
+            scroll(combobox.listView.content, 5 * CONTAINER_HEIGHT);
+        });
+
+        combobox.value(10);
+    });
 })();
