@@ -198,6 +198,10 @@ The solution to this issue is to disable pane-content scrolling and clipping by 
 
 If there are several nested Splitters, then each pane, which is an ancestor of the Menu, requires the specified `overflow` and `z-index` styles. These styles can also be applied inline instead of externally.   
 
+### Integration with Flexbox
+
+The Splitter relies on JavaScript size calculations to construct its layout, while Flexbox relies on pure CSS. The two techniques are difficult to combine, so the Splitter is not designed to work with Flexbox. Actually, one of its purposes is to spare the need to use Flexbox in general. To avoid CSS conflicts, please do not apply Flexbox styles to the Splitter elements.
+
 ## Reference
 
 ### Existing Instances
