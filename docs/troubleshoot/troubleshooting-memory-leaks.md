@@ -13,7 +13,7 @@ This page provides solutions for issues related to performance issues that you m
 
 ### Browser Extensions
 
-Try disabling browser extensions as a first step when faced performance issues.
+Try disabling browser extensions as a first step when facing performance issues.
 
 Most browsers provide a way to temporary disable all add-ons:
 
@@ -31,7 +31,7 @@ There are multiple possible reasons for leaking JavaScript Heap memory. To narro
 
 ### Application Becomes Unresponsive or Hangs
 
-For a solution, see the [Browser Memory Usage Increases over Time](# ...) section above.
+Try disabling extensions as [suggested above](#browser-extensions). If that does not help see the [Browser Memory Usage Increases over Time](#browser-memory-usage-increases-over-time) section above.
 
 ## See Also
 
