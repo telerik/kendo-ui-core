@@ -102,7 +102,7 @@ The example below demonstrates how to create and use custom templates for the Ke
 
               //set start option value, used to define the week 'Repeat on' selected checkboxes
               recurrenceEditor.setOptions({
-                start: new Date(e.event.start);
+                start: new Date(e.event.start)
               });
           },
           timezone: "Etc/UTC",
