@@ -7,11 +7,11 @@ slug: howto_format_cell_values_grid
 
 # Set Cell Format During Excel export
 
-To format the cell values, set the [`format`](/api/javascript/ooxml/workbook.html#configuration-sheets.rows.cells.format) option of the cells. The page about [creating a custom number format](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4) describes the formats, supported by Excel. 
+To format the cell values, set the [`format`](/api/javascript/ooxml/workbook.html#configuration-sheets.rows.cells.format) option of the cells. The page about [creating a custom number format](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4) describes the formats, supported by Excel.
 
-The example below demonstrates how to format cell values of the Kendo UI Grid during Excel export. 
+The example below demonstrates how to format cell values of the Kendo UI Grid during Excel export.
 
-###### Example 
+###### Example
 
 ```html
 <div id="grid"></div>
@@ -91,6 +91,7 @@ The example below demonstrates how to set a custom format for `date` values.
 Other articles on Kendo UI Grid and how-to examples related to its export to Excel:
 
 * [JavaScript API Reference](/api/javascript/ui/grid#configuration-excel)
+* [How to Align Footer Cells]({% slug howto_alignfootercells_grid %})
 * [How to Configure Color for Alternating Rows]({% slug howto_configure_color_alternating_rows_grid %})
 * [How to Export Checked Columns Only]({% slug howto_export_checked_columns_only_grid %})
 * [How to Export Detail Grids]({% slug howto_exportto_excel_masterand_detail_grid %})d
