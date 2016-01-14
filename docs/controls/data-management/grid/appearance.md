@@ -371,6 +371,18 @@ In some cases it may be possible to delay the initialization of the Grid, or cha
 * [Initialize the Grid inside the TabStrib]({% slug initialize_thegrid_tabstrip_widget %})
 * [Initialize the Grid inside the Window]({% slug initialize_thegrid_window_widget %})
 
+## Interactive States
+
+### Hover effect on table rows
+
+As of Q1 2016 row hover state styles were added to all Kendo UI themes. Hover is a useful UI state providing visual affordance especially across long table rows and in editing mode of the Grid. However, there are scenarios in which the hover state might be misleading and is not needed. To remove the hover style, apply the following CSS:
+
+        .k-grid tr:hover 
+        {
+            background: none;
+        }
+
+
 ## See Also
 
 Other articles on Kendo UI Grid:
