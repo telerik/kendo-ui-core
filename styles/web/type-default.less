@@ -740,17 +740,14 @@ html .km-pane-wrapper .k-header
         border-radius: @calendar-border-radius;
     }
 
-    .k-today {
-        background-color: saturate(@selected-background-color, 7%);
-    }
-
     .k-today .k-link {
-        color: @selected-text-color;
+        color: @selected-background-color;
+        font-weight: bold;
     }
 
-    .k-today.k-state-hover {
-        background-color: @accent;
-    }    
+    td.k-today.k-state-hover .k-link {
+        color: @hover-text-color;
+    } 
 
     .k-footer .k-link {
         border-radius: 0;
