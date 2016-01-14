@@ -38,7 +38,7 @@ When scrolling is enabled, the Grid renders two tables - one for the header area
 
 > **Important**  
 >
-> If you want to achieve a maximum Grid accessibility with assistive technologies, disable the scrolling feature.
+> If you want to achieve maximum Grid accessibility with assistive technologies, disable the scrolling feature.
 
 ### Remove Vertical Scrollbars
 
@@ -221,7 +221,9 @@ Second, ensure that the inner Grid layout adapts to changes in the height of the
 
 If the available vertical space for the Grid depends on a custom layout resizing controlled by the user, use a suitable event or method related to the layout changes to execute the `resize` method of the Grid. In this case, call the `resize` method even if you use locked (frozen) columns.
 
-The `resize` method will work for Kendo UI versions delivered after the Kendo UI Q3 2013 release. For older versions, use the following Javascript code instead of `resize`, which practically does the same:
+The `resize` method will work for Kendo UI versions delivered after the Kendo UI Q3 2013 release. For older versions, use the following Javascript code instead of `resize`, which practically does the same.
+
+###### Example
 
     $(window).resize(function() {
         var gridElement = $("#GridID"),
@@ -254,7 +256,9 @@ When the scrolling functionality is enabled, which is the default case except fo
 
 When the scrolling functionality is disabled, the `table-layout` style is set to `auto`. This is the default behavior of HTML tables. If not explicitly set, the column widths are determined by the browser and cell content. The browser will try to obey all set column widths, but may readjust some columns depending on their content. The column widths may change on paging, sorting, and other data operations.
 
-If needed, a fixed table layout can be applied to a non-scrollable Grid:
+If needed, a fixed table layout can be applied to a non-scrollable Grid.
+
+###### Example
 
     #GridID > table /* includes both the header and the data cells */
     {
@@ -272,6 +276,8 @@ If all columns have pixel widths and their sum exceeds the width of the Grid, a 
 Column resizing and hiding trigger the following behavior when scrolling is enabled: if all currently visible columns have explicit widths, the Grid applies a pixel width to its table elements, so that the widths of all remaining columns, i.e. except the column that is currently resized or hidden, are maintained.
 
 If the Grid has no fixed width and resizes with the browser window, you can apply a min-width to the Grid if scrolling is disabled, or its two table elements if scrolling is enabled. This prevents undesired side effects if the browser window size is reduced too much.
+
+###### Example
 
     /* How to apply minimum width to the Grid when scrolling is disabled */
 
@@ -341,6 +347,8 @@ Frozen columns cannot be touch-scrolled, because they are wrapped in a container
 
 Frozen columns rely on row height synchronization between the frozen and non-frozen parts. Some browsers, such as Internet Explorer 9 and Firefox, require a `line-height` style set in pixels. Otherwise the synchronization may not work properly, probably due to some sub-pixel quirks.
 
+###### Example
+
     div.k-grid td
     {
         line-height: 18px;
@@ -373,11 +381,15 @@ In some cases it may be possible to delay the initialization of the Grid, or cha
 
 ## Interactive States
 
-### Hover effect on table rows
+### Hover Effect on Table Rows
 
-As of Q1 2016 row hover state styles were added to all Kendo UI themes. Hover is a useful UI state providing visual affordance especially across long table rows and in editing mode of the Grid. However, there are scenarios in which the hover state might be misleading and is not needed. To remove the hover style, apply the following CSS:
+As of Kendo UI 2016 Q1 row hover state styles are added to all Kendo UI themes. Hover is a useful UI state providing visual affordance especially across long table rows and in the editing mode of the Grid. However, there are scenarios in which the `hover` state might be misleading and is not needed.
 
-        .k-grid tr:hover 
+The example below demonstrates the CSS necessary to remove the hover style.
+
+###### Example
+
+        .k-grid tr:hover
         {
             background: none;
         }
