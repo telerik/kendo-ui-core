@@ -7,7 +7,7 @@ slug: howto_configure_color_alternating_rows_grid
 
 # Configure Color for Alternating Rows
 
-The example below demonstrates how to customize the Excel document that the Grid generates during exporting. The demo uses the [`background`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.background) option of the cell to set the background color of the alternating rows. 
+The example below demonstrates how to customize the Excel document that the Grid generates during exporting. The demo uses the [`background`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.background) option of the cell to set the background color of the alternating rows.
 
 For more information about how Excel documents work, refer to the [introductory help topic on Excel](/framework/excel/introduction#create-excel-document).
 
@@ -52,6 +52,7 @@ For more information about how Excel documents work, refer to the [introductory 
 Other articles on Kendo UI Grid and how-to examples related to its export to Excel:
 
 * [JavaScript API Reference](/api/javascript/ui/grid#configuration-excel)
+* [How to Align Footer Cells]({% slug howto_alignfootercells_grid %})
 * [How to Export Checked Columns Only]({% slug howto_export_checked_columns_only_grid %})
 * [How to Export Detail Grids]({% slug howto_exportto_excel_masterand_detail_grid %})
 * [How to Export Multiple Grids]({% slug howto_export_excel_multiple_grids_grid %})

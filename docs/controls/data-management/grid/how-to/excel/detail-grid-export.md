@@ -7,7 +7,7 @@ slug: howto_exportto_excel_masterand_detail_grid
 
 # Export Detail Grids
 
-The examples below demonstrate how to export to Excel detail Kendo UI Grids and merge their workbooks with the master grid workbook. They use the [`excelExport`](/api/javascript/ui/grid#events-excelExport) event to get the workbook of the detail grids. The event is prevented to avoid saving an Excel file for every detail grid. 
+The examples below demonstrate how to export to Excel detail Kendo UI Grids and merge their workbooks with the master grid workbook. They use the [`excelExport`](/api/javascript/ui/grid#events-excelExport) event to get the workbook of the detail grids. The event is prevented to avoid saving an Excel file for every detail grid.
 
 For additional information about how Excel documents work, refer to the [introductory help topic on Excel](/framework/excel/introduction#create-excel-document).
 
@@ -345,6 +345,7 @@ For additional information about how Excel documents work, refer to the [introdu
 Other articles on Kendo UI Grid and how-to examples related to its export to Excel:
 
 * [JavaScript API Reference](/api/javascript/ui/grid#configuration-excel)
+* [How to Align Footer Cells]({% slug howto_alignfootercells_grid %})
 * [How to Configure Color for Alternating Rows]({% slug howto_configure_color_alternating_rows_grid %})
 * [How to Export Checked Columns Only]({% slug howto_export_checked_columns_only_grid %})
 * [How to Export Multiple Grids]({% slug howto_export_excel_multiple_grids_grid %})
