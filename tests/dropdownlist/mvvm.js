@@ -823,7 +823,7 @@
                 dropdownlist.one("dataBound", function() {
                     start();
                     dropdownlist.trigger("change");
-                    equal(viewModel.value, dropdownlist.dataItem());
+                    deepEqual(viewModel.value, dropdownlist.dataItem());
                 });
 
                 dropdownlist.value(10);

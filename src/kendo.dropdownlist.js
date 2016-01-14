@@ -439,8 +439,12 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            var value = that.value();
+            var value = that.listView.value()[0];
             var optionLabel = that._optionLabelDataItem();
+
+            if (value === undefined || value === null) {
+                value = "";
+            }
 
             if (optionLabel) {
                 optionLabel = '<option value="' + that._value(optionLabel) + '">' + that._text(optionLabel) + "</option>";
