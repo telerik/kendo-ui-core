@@ -18,12 +18,12 @@ var mangle = {
 };
 
 function renameModules(match) {
-    return match.replace(/['"]([\w\.\/]+)?['"]/g, '"$1.min"');
+    return match.replace(/['"]([\w\.\-\/]+)?['"]/g, '"$1.min"');
 }
 
 
 module.exports = lazypipe()
     .pipe(logger, { after: 'uglify complete', extname: '.min.js', showChange: true })
     .pipe(uglify, { compress, mangle, preserveComments: "license" })
-    .pipe(replace, /define\("[\w\.\/]+".+?\]/g, renameModules)
+    .pipe(replace, /define\("[\w\.\-\/]+".+?\]/g, renameModules)
     .pipe(rename, { suffix: ".min" });
