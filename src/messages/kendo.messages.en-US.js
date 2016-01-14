@@ -839,6 +839,17 @@ $.extend(true, kendo.ui.TreeList.prototype.options.messages,{
 });
 }
 
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.columnMenu =
+$.extend(true, kendo.ui.TreeList.prototype.options.columnMenu, {
+    "messages": {
+        "columns": "Choose columns",
+        "filter": "Apply filter",
+        "sortAscending": "Sort (asc)",
+        "sortDescending": "Sort (desc)"
+    }
+});
+
 /* TreeView messages */
 
 if (kendo.ui.TreeView) {
