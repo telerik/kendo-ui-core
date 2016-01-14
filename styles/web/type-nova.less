@@ -543,6 +543,10 @@ input.k-textbox:active {
         color: @link-text-color;
     }
 
+    .k-state-disabled .k-link{
+        color: lighten(@hover-text-color, 23%);
+    }
+
     .k-header .k-link,
     .k-state-selected .k-link {
         color: @inversed-text-color;
@@ -562,7 +566,7 @@ input.k-textbox:active {
 
     .k-other-month,
     .k-other-month .k-link {
-        color: lighten(@hover-text-color, 23%);
+        color: lighten(@hover-text-color, 8%);
     }
 
     .k-today {
