@@ -14,6 +14,8 @@ slug: breakingchanges2016_kendoui
 
 #### Breaking Changes
 
+* **Grunt was replaced with Gulp as the preferred build tool for Kendo UI. From now on the Gruntfile.js file is replaced with Gulpfile.js as part of the Kendo UI distribution.
+
 * **DropDownList/ComboBox/MultiSelect**: The widget will clear the applied filter if the user decides to set new value using the [`value`](/api/javascript/ui/dropdownlist#methods-value) method.
 
 * **DropDownList/ComboBox**: Cascading widget will trigger `change` event when its value is changed due to parent update. The benefit of this change is proper behavior in MVVM-like frameworks  (related [issue](https://github.com/telerik/kendo-ui-core/issues/661)).
