@@ -31,7 +31,7 @@ There are multiple possible reasons for leaking JavaScript Heap memory. To narro
 
 ### Application Becomes Unresponsive or Hangs
 
-Try disabling extensions as [suggested above](#browser-extensions). If that does not help see the [Browser Memory Usage Increases over Time](#browser-memory-usage-increases-over-time) section above.
+Try disabling extensions as [suggested above](#browser-extensions). If that does not help, see the [Browser Memory Usage Increases over Time](#browser-memory-usage-increases-over-time) section above.
 
 ## See Also
 
