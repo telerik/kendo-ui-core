@@ -200,7 +200,11 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "startswith": "Starts with",
     "contains": "Contains",
     "doesnotcontain": "Does not contain",
-    "endswith": "Ends with"
+    "endswith": "Ends with",
+    "isnull": "Is null",
+    "isnotnull": "Is not null",
+    "isempty": "Is empty",
+    "isnotempty": "Is not empty"
   },
   "number": {
     "eq": "Is equal to",
@@ -208,7 +212,9 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "gte": "Is greater than or equal to",
     "gt": "Is greater than",
     "lte": "Is less than or equal to",
-    "lt": "Is less than"
+    "lt": "Is less than",
+    "isnull": "Is null",
+    "isnotnull": "Is not null"
   },
   "date": {
     "eq": "Is equal to",
@@ -216,11 +222,15 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "gte": "Is after or equal to",
     "gt": "Is after",
     "lte": "Is before or equal to",
-    "lt": "Is before"
+    "lt": "Is before",
+    "isnull": "Is null",
+    "isnotnull": "Is not null"
   },
   "enums": {
     "eq": "Is equal to",
-    "neq": "Is not equal to"
+    "neq": "Is not equal to",
+    "isnull": "Is null",
+    "isnotnull": "Is not null"
   }
 });
 }
@@ -849,6 +859,7 @@ $.extend(true, kendo.ui.TreeList.prototype.options.columnMenu, {
         "sortDescending": "Sort (desc)"
     }
 });
+}
 
 /* TreeView messages */
 
