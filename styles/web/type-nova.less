@@ -281,6 +281,16 @@ textarea.k-textbox:hover,
     opacity: .2;
 }
 
+/* Loading indicator */
+.k-loading,
+.k-state-hover .k-loading {
+    background-image: url('@{image-folder}/loading.gif');
+    background-position: 50% 50%;
+}
+
+.k-loading-image { background-image: url('@{image-folder}/loading-image.gif'); }
+.k-loading-color { background-color: @background; }
+
 /* Button */
 .k-button {
     color: lighten(@hover-text-color, 8%);
