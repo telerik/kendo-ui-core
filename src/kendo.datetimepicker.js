@@ -531,7 +531,7 @@ var __meta__ = { // jshint ignore:line
                         msValue = +value,
                         msMin = +options.min,
                         msMax = +options.max,
-                        current;
+                        current, adjustedDate;
 
                     if (msValue === msMin || msValue === msMax) {
                         current = new DATE(+that._value);
@@ -543,7 +543,12 @@ var __meta__ = { // jshint ignore:line
                     }
 
                     if (that._value) {
-                        value = kendo.date.setHours(new Date(value), that._value);
+
+                       adjustedDate = kendo.date.setHours(new Date(value), that._value);
+
+                       if (isInRange(adjustedDate, msMin, msMax)) {
+                           value = adjustedDate;
+                       }
                     }
 
                     that._change(value);
