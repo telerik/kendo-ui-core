@@ -32,6 +32,14 @@ Below is demonstrated how a typical XSS attack is done.
 
 The Editor widget itself can do little in order to protect you from XSS attacks, because malicious users can edit form fields manually and post forged requests to the server, as shown in step #2 above. To protect your users from these attacks, clean the posted content on the server through an HTML parsing and a whitelist of allowed tags.
 
+## Script tags
+
+By design, the Editor does not allow execution of scripts inside its content area. This is achieved by transforming all `script` tags in the content to `k:script` tags.
+
+When the Editor content is submitted, then the `k:script` tags are either completely removed, or transformed back to `script` tags. This depends on the [`serialization.scripts`](/api/javascript/ui/editor#configuration-serialization.scripts) property.
+
+If execution of scripts inside the Editor's content is desired, a possible workaround is to enable script serialization, obtain the Editor's value via the widget's [`value()`](/api/javascript/ui/editor#methods-value) method, extract the `script` tags and place them somewhere else on the page where they can be evaluated by the browser.
+
 ## Whitelist Tags
 
 Depending on your server-side platform, here are some libraries that allow processing HTML with a whitelist:
