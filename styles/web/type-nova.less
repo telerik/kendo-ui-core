@@ -502,9 +502,13 @@ input.k-textbox:active {
     border-color: @selected-background; 
 }
 
-.k-popup .k-list .k-state-focused {
-    border-color: multiply(@accent, #9a9a9a);
+.k-popup .k-list .k-state-focused {    
+    border-color: darken(@widget-border-color, 27%);
     box-shadow: none; 
+}
+
+.k-popup .k-list .k-state-selected.k-state-focused {
+    border-color: multiply(@accent, #9a9a9a);
 }
 
 .k-popup .k-list .k-state-selected.k-state-hover {
