@@ -1,14 +1,15 @@
 ---
-title: Source and template binding using Model with computed field
-page_title: Source and template binding using Model with computed field
-description: Source and template binding using Model with computed field
+title: Apply Source and Template Binding Using Model with Computed Field
+page_title: Apply Source and Template Binding Using Model with Computed Field | Kendo UI MVVM
+description: "Apply source and template binding by using a Model with a computed field in Kendo UI MVVM."
+slug: howto_applysourceandtemplatebinding_usingmodelcomputedfield_mvvm
 ---
 
-# Source and template binding using Model with computed field
+# Apply Source and Template Binding Using Model with Computed Field
 
-The example below demonstrates how to use source and template binding using Model with computed field.
+The example below demonstrates how to apply source and template binding by using a Model with a computed field in Kendo UI MVVM.
 
-#### Example:
+###### Example
 
 ```html
   <div data-bind="source: data" data-template="tmp"></div>
@@ -43,3 +44,13 @@ The example below demonstrates how to use source and template binding using Mode
     kendo.bind($(document.body), viewModel);
   </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI MVVM:
+
+* [MVVM Overview]({% slug overview_mvvmpattern_kendoui %})
+* [ObservableObject Overview]({% slug overview_observabeobject_kendoui %})
+* [Tutorial on How to Build MVVM Bound Forms]({% slug mvvmboundforms_mvvmpattern_kendoui %})
+
+For detailed information on the bindings Kendo UI MVVM supports, refer to the section about [Kendo UI MVVM bindings]({% slug attributebinding_mvvm_kendoui %}).

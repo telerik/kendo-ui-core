@@ -1,32 +1,31 @@
 ---
 title: Value
-page_title: Value binding in Kendo UI MVVM | Kendo UI Documentation
-description: Keep the value of a DOM widget and the value of a View-Model field in sync by using value binding in Kendo UI MVVM.
+page_title: Value | Kendo UI MVVM
+description: "Learn how to keep the value of a DOM widget and the value of a View-Model field in sync by using the value binding in Kendo UI MVVM."
+slug: valuebinding_mvvm_kendoui
 ---
 
-# Value binding
+# Value Binding
 
-The `value` binding keeps the value of a DOM element or widget and the value of a View-Model field in sync.
-When the end-user changes the value of the DOM element (or widget), the bound View-Model value is updated. If the
-View-Model value is updated from code, then the value of the bound DOM element (or widget) is updated visually.
+The `value` binding keeps the value of a DOM element or widget and the value of a View-Model field in sync. When the end-user changes the value of the DOM element or widget, the bound View-Model value is updated. If the View-Model value is updated from code, then the value of the bound DOM element or widget is updated visually.
 
-> Value binding supports only DOM elements with a `value` property and widgets that have a `value()` method. The DOM element or widget also must fire a `change` event
-when the user changes its value. Changing the widget's value programmatically via the `value()` method must not fire the `change` event.
+> **Important**
+>
+> Value binding supports only DOM elements with a `value` property and widgets that have a `value()` method. The DOM element or widget also must fire a `change` event when the user changes its value. Changing the widget's value programmatically via the `value()` method must not fire the `change` event.
 
-Supported elements are `input`, `textarea` and `select`.
-All widgets that have the notion of a value are supported, i.e. `AutoComplete`, `ColorPicker`, `ComboBox`, `DropDownList`, `DatePicker`,
-`DateTimePicker`, `Editor`, `MaskedTextBox`, `MultiSelect`, `NumericTextBox`, `Slider`, `TimePicker`, and `Upload`.
+The elements that are supported are `input`, `textarea`, and `select`. The widgets that are supported are all that have the notion of a value&mdash;Kendo UI AutoComplete, ColorPicker, ComboBox, DropDownList, DatePicker, DateTimePicker, Editor, MaskedTextBox, MultiSelect, NumericTextBox, Slider, TimePicker, and Upload.
 
-If you want to set the text or html content of a DOM element, then use the `text` or `html` bindings instead of the `value` binding.
+If you want to set the text or HTML content of a DOM element, use the `text` or `html` bindings instead of the `value` binding.
 
-Checkboxes (`<input type="checkbox" />`) and radio buttons (`<input type="radio" />`) should use
-the [checked](checked) binding instead.
+Checkboxes (`<input type="checkbox" />`) and radio buttons (`<input type="radio" />`) should use the [`checked`]({% slug checkedbinding_mvvm_kendoui %}) binding instead.
 
-## Input and textarea value binding
+## Value Binding of Elements: input and textarea
 
-Kendo MVVM will display the View-Model value as the value of an `input` or `textarea` element.
+Kendo UI MVVM displays the View-Model value as the value of an `input` or `textarea` element.
 
-### Use the value binding with an input and a textarea
+The example below demonstrates how to use the `value` binding with an `input` or `textarea` element.
+
+###### Example
 
     <div id="view">
         <input data-bind="value: inputValue" />
@@ -41,21 +40,19 @@ Kendo MVVM will display the View-Model value as the value of an `input` or `text
     kendo.bind($("#view"), viewModel);
     </script>
 
-After calling `kendo.bind` the `input` element would display the value of the `inputValue` field.
-The `textarea` will display the value of the `textareaValue` field. If the value of the `input`
-changes the `inputValue` field will change as well.
-Likewise, if the value of the `textarea` changes so will `textareaValue`. Changing `inputValue` or
-`textareaValue` View-Model fields from code will visually update the value of the bound elements.
+After calling `kendo.bind` the `input` element displays the value of the `inputValue` field. The `textarea` displays the value of the `textareaValue` field. If the value of the `input` changes, the `inputValue` field changes as well. Likewise, if the value of the `textarea` changes, so is `textareaValue`. Changing `inputValue` or `textareaValue` View-Model fields from code visually updates the value of the bound elements.
 
-### Controlling when the View-Model is updated
+### Control upon View-Model Update
 
-By default the `value` binding relies on the `change` DOM event which is raised after blurring the element whose value has changed. This means that the value from the View-Model will be updated when the element loses focus. The `data-value-update` attribute can be used to specify a different DOM event e.g. `keyup` or `keypress`. The `keydown` event is **not** supported because the DOM element value is not yet updated when that event triggers.
+By default the `value` binding relies on the `change` DOM event, which is raised after blurring the element whose value has changed. This means that the value from the View-Model is updated when the element loses focus. The `data-value-update` attribute can be used to specify a different DOM event, such as `keyup` or `keypress`. The `keydown` event is not supported, because the DOM element value is not yet updated when that event triggers.
 
-> The [input DOM event](https://developer.mozilla.org/en-US/docs/Web/Events/input) may be used in case you need to update the viewmodel value on each keypress *and* when the user pastes content in the field. Keep in mind that the input event is supported in IE9+.
+> **Important**
+> * The [`input` DOM event](https://developer.mozilla.org/en-US/docs/Web/Events/input) may be used if you need to update the ViewModel value on each keypress and when the user pastes content in the field. Keep in mind that the input event is supported in Internet Explorer 9 and later.
+> * This is applicable only when the `value` binding is applied to a DOM element. The widgets do not support this attribute, because they do not expose a specific `keyup` event.
 
-> This is applicable only when `value` binding is applied to DOM element. The widgets does not support this attribute, because they do not expose specific *keyup* event.
+The example below demonstrates how to use the data-value-update attribute.
 
-### Using the data-value-update attribute
+###### Example
 
     <div id="view">
         <input data-value-update="keyup" data-bind="value: inputValue" />
@@ -68,12 +65,15 @@ By default the `value` binding relies on the `change` DOM event which is raised 
     kendo.bind($("#view"), viewModel);
     </script>
 
-## Select value binding
+## Value Binding of select Elements
 
-When the `select` element has a set of predefined options
-Kendo MVVM will select the `option` whose `value` attribute is equal to value of the View-Model field.
+When the `select` element has a set of predefined options, Kendo UI MVVM selects the `option` whose `value` attribute is equal to the value of the View-Model field.
 
-### Use the value binding with a select with predefined options
+### Select with Predefined Options
+
+The example below demonstrates how to use the `value` binding with a `select` element with predefined options.
+
+###### Example
 
     <select data-bind="value: selectedColor">
         <option value="red">Red</option>
@@ -88,13 +88,15 @@ Kendo MVVM will select the `option` whose `value` attribute is equal to value of
     kendo.bind($("select"), viewModel);
     </script>
 
+In the example, the second `option` is selected because its `value` attribute is equal to the value of the `selectedColor` View-Model field. Changing the selected `option` updates the value of the `selectedColor` View-Model field.
 
-In this example the second `option` will be selected because its `value` attribute is equal to the value of the `selectedColor` View-Model field.
-Changing the selected `option` will update the value of the `selectedColor` View-Model field.
+### Select with Non-Value Predefined Options
 
-If the `value` attribute of an `option` is not set its text content will be used instead:
+If the `value` attribute of an `option` is not set, its text content is used instead.
 
-### Use the value binding with a select with predefined options that don't have a value
+The example below demonstrates how to use the `value` binding with a `select` element with predefined options that have no value.
+
+###### Example
 
     <select data-bind="value: selectedColor">
         <option>Red</option>
@@ -109,13 +111,15 @@ If the `value` attribute of an `option` is not set its text content will be used
     kendo.bind($("select"), viewModel);
     </script>
 
-In this case the third `option` will be selected because its text content is equal to the value of the `selectedColor` View-Model field.
+In this case, the third `option` is selected because its text content is equal to the value of the `selectedColor` View-Model field.
 
-When the `select` element options are created by the [source](source) binding
-Kendo MVVM will select the `option` which corresponds to the View-Model value specified by the `value` binding.
-The `data-value-field` attribute specifies the field of the current item to which the `option` value is bound.
+### Select with Options Created by Source Binding
 
-### Use the value binding with a select whose options are created by the source binding
+When the `select` element options are created by the [`source` binding]({% slug sourceblebinding_mvvm_kendoui %}), Kendo UI MVVM selects the `option` which corresponds to the View-Model value specified by the `value` binding. The `data-value-field` attribute specifies the field of the current item to which the `option` value is bound.
+
+The example below demonstrates how to use the `value` binding with a `select` element, whose options are created by the `source` binding.
+
+###### Example
 
     <select data-value-field="id" data-text-field="name"
            data-bind="value: selectedProduct, source: products">
@@ -135,13 +139,15 @@ The `data-value-field` attribute specifies the field of the current item to whic
     kendo.bind($("select"), viewModel);
     </script>
 
+In the example, the second `option` is selected after calling the `kendo.bind` method. Its `value` attribute is equal to the value of the `id` field of the `selectedProduct`. If the user selects another option, the `selectedProduct` is set to the corresponding item from the `products` array.
 
-In this example the second `option` will be selected after calling `kendo.bind`. It's `value` attribute is equal to the value of the `id`
-field of the `selectedProduct`. If the user selects another option the `selectedProduct` will be set to the corresponding item from the `products` array.
+### Update View-Model Fields with Value Field of Primitive Value
 
 You can also use the `value` binding with a View-Model field which is of primitive type.
 
-### Use the value binding with a select widget to update the View-Model field with the value field when the initial value is null.
+The example below demonstrates how to use the `value` binding with `select` to update the Vie-Model field with the value field when the initial value is `null`.
+
+###### Example
 
     <select data-role="dropdownlist" data-option-label="Select product..." data-value-primitive="true"
       data-value-field="id" data-text-field="name" data-bind="value: selectedProductId, source: products">
@@ -159,9 +165,13 @@ You can also use the `value` binding with a View-Model field which is of primiti
     kendo.bind($("select"), viewModel);
     </script>
 
-By default the value binding for the select widgets(`AutoComplete`, `DropDownList`, `ComboBox`, `MultiSelect`) uses the selected item from the data to update the View-Model field when the initial value is `null`. The `data-value-primitive` attribute can be used to specify that the View-Model field should be updated with the item value field instead.
+By default, the `value` binding for the `select` widgets&mdash;`AutoComplete`, `DropDownList`, `ComboBox`, `MultiSelect`&mdash;uses the selected item from the data to update the View-Model field when the initial value is `null`. The `data-value-primitive` attribute can be used to specify that the View-Model field should be updated with the item value field instead.
 
-### Use the value binding with a select whose options are created by the source binding
+### Select with Options Created by Source Binding
+
+The example below demonstrates how to use the `value` binding with a `select` whose options are created by the `source` binding.
+
+###### Example
 
     <select data-value-field="id" data-text-field="name"
         data-bind="value: selectedProduct, source: products">
@@ -179,16 +189,15 @@ By default the value binding for the select widgets(`AutoComplete`, `DropDownLis
     kendo.bind($("select"), viewModel);
     </script>
 
+Again the second `option` is selected because its `value` is equal to the `selectedProduct` View-Model field. If the user selects another option, the `id` field of the corresponding item from the `products` array is set as the `selectedProduct`.
 
-Again the second `option` will be selected because its `value` is equal to the `selectedProduct` View-Model field.
-If the user selects another option the `id` field of the corresponding item from the `products` array will be set as the `selectedProduct`.
+## Multiple Selections
 
-### Multiple selection
+Kendo UI MVVM supports `select` elements with multiple selection enabled. The bound View-Model field should be an array. Here are a few examples showing different configuration scenarios&mdash;with and without the `source` binding.
 
-Kendo MVVM supports select elements with multiple selection enabled. The bound View-Model field should be an array. Here are a few examples
-showing different configuration scenarios - with and without the `source` binding.
+### Multiple Selection with Predefined Options
 
-#### Multiple selection with predefined options
+###### Example
 
     <select data-bind="value: selectedColors" multiple="multiple">
         <option>Red</option>
@@ -203,10 +212,11 @@ showing different configuration scenarios - with and without the `source` bindin
     kendo.bind($("select"), viewModel);
     </script>
 
-The third `option` will be displayed as selected. Selecting another `option` will append its `value` (or text content if the value is not set) to the
-`selectedColors` array. Unselecting an `option` will remove it from the `selectedColors` array.
+The third `option` is displayed as selected. Selecting another `option` appends its `value`, or text content if the value is not set, to the `selectedColors` array. Unselecting an `option` removes it from the `selectedColors` array.
 
-#### Multiple selection with options created by the source binding
+### Multiple Selection with Options Created by Source Binding
+
+###### Example
 
     <select data-value-field="id" data-text-field="name"
        data-bind="value: selectedProducts, source: products" multiple="multiple">
@@ -225,20 +235,23 @@ The third `option` will be displayed as selected. Selecting another `option` wil
     kendo.bind($("select"), viewModel);
     </script>
 
-The second `option` will be displayed as selected. Selecting another `option` will append the corresponding item from the `products` array to the
-`selectedProducts` array. Unselecting an `option` will remove its corresponding item from the `selectedProducts` array.
+The second `option` is displayed as selected. Selecting another `option` appends the corresponding item from the `products` array to the `selectedProducts` array. Unselecting an `option` removes its corresponding item from the `selectedProducts` array.
 
-## Strongly typed value binding
-By default the View-Model fields are updated with string values, as this is what the DOM element's value property contains. Since the 2015 Q1 release, Kendo MVVM allows strongly typed value binding by parsing the element's value before updating the View-Model field bound to it. Supported types are `text`, `number`, `date`, `datetime-local` and `boolean`.
+## Strongly Typed Value Binding
 
-> To be correctly parsed, the `date` and `datetime-local` values should use strict formatting rules, including the leading zeroes:
->
-> - `date` - "yyyy-MM-dd"
-> - `datetime-local` - "yyyy-MM-ddTHH:mm:ss"
+By default, the View-Model fields are updated with string values as this is what the `value` property of the DOM element contains. Since the 2015 Q1 release, Kendo UI MVVM allows strongly-typed `value` binding by parsing the value of the element before updating the View-Model field bound to it. The supported types are `text`, `number`, `date`, `datetime-local`, and `boolean`.
 
+> **Important**
+> * To be correctly parsed, the `date` and `datetime-local` values should use strict formatting rules, including the leading zeroes:
+>   * `date`&mdash;"yyyy-MM-dd"
+>   * `datetime-local`&mdash;"yyyy-MM-ddTHH:mm:ss"
 
-### Using the type attribute
-Kendo MVVM automatically uses strongly typed value binding based on the input element's `type` attribute.
+### Use the type Attribute
+
+Kendo UI MVVM automatically uses strongly-typed `value` binding based on the `type` attribute of the `input` element.
+
+###### Example
+
 ```html
     <div id="view">
         <input type="number" data-bind="value: Quantity"/>
@@ -256,8 +269,12 @@ Kendo MVVM automatically uses strongly typed value binding based on the input el
     </script>
 ```
 
-### Using the data-type attribute
-Explicitly specifying the data type is also supported, via the `data-type` attribute.
+### Use the data-type Attribute
+
+Explicitly specifying the `data-type` is also supported via the `data-type` attribute.
+
+###### Example
+
 ```html
     <div id="view">
         <input type="text" data-type="number" data-bind="value: Quantity"/>
@@ -287,3 +304,23 @@ Explicitly specifying the data type is also supported, via the `data-type` attri
         });
     </script>
 ```
+
+## See Also
+
+Other articles on the Kendo UI MVVM component and bindings:
+
+* [MVVM Overview]({% slug overview_mvvmpattern_kendoui %})
+* [Overview of the Attribute Binding]({% slug attributebinding_mvvm_kendoui %})
+* [Overview of the Checked Binding]({% slug checkedbinding_mvvm_kendoui %})
+* [Overview of the Click Binding]({% slug clickbinding_mvvm_kendoui %})
+* [Overview of the CSS Binding]({% slug cssbinding_mvvm_kendoui %})
+* [Overview of the Custom Binding]({% slug custombinding_mvvm_kendoui %})
+* [Overview of the Disabled Binding]({% slug disabledbinding_mvvm_kendoui %})
+* [Overview of the Enabled Binding]({% slug enabledbinding_mvvm_kendoui %})
+* [Overview of the Events Binding]({% slug eventsbinding_mvvm_kendoui %})
+* [Overview of the HTML Binding]({% slug htmlbinding_mvvm_kendoui %})
+* [Overview of the Invisible Binding]({% slug invisiblebinding_mvvm_kendoui %})
+* [Overview of the Source Binding]({% slug sourceblebinding_mvvm_kendoui %})
+* [Overview of the Style Binding]({% slug stylebinding_mvvm_kendoui %})
+* [Overview of the Text Binding]({% slug textbinding_mvvm_kendoui %})
+* [Overview of the Visible Binding]({% slug visiblebinding_mvvm_kendoui %})

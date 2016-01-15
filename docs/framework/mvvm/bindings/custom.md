@@ -1,18 +1,27 @@
 ---
 title: Custom
+page_title: Custom | Kendo UI MVVM
+description: "Learn how to create custom bindings in Kendo UI MVVM."
+slug: custombinding_mvvm_kendoui
 ---
 
-# Custom binding
+# Custom Binding
 
-Kendo MVVM provides the ability to create custom bindings.
+The [Kendo UI MVVM component](http://demos.telerik.com/kendo-ui/mvvm/index) allows for the [custom bindings](http://demos.telerik.com/kendo-ui/mvvm/custom).
 
-> **Important:** The custom binding should be registered **before**  `kendo.bind` is called.
+> **Important**
+>
+> The custom binding should be registered before the `kendo.bind` method is called.
 
-## Registering a custom binding
+## Getting Started
 
-A custom binding is registered by extending the [`kendo.data.Binder`](/api/framework/binder) object.
+A custom binding is registered by extending the [`kendo.data.Binder`](/api/javascript/data/binder) object.
 
-#### Example: one-way binding (the HTML element will be updated when the view-model changes)
+### One-Way Custom Bindings
+
+The example below demonstrates how to register a one-way binding. As a result, the HTML element is updated when the view-model changes.  
+
+###### Example
 
     <script>
         kendo.data.binders.slide = kendo.data.Binder.extend({
@@ -38,7 +47,11 @@ A custom binding is registered by extending the [`kendo.data.Binder`](/api/frame
         One Big Orange Square.
     </div>
 
-#### Example: two-way binding (both HTML element and View-Model will be updated)
+### Two-Way Custom Bindings
+
+The example below demonstrates how to register a two-way binding. As a result, both the HTML element and the View-Model are updated.
+
+###### Example
 
     <script>
         kendo.data.binders.numericValue = kendo.data.Binder.extend({
@@ -79,9 +92,12 @@ A custom binding is registered by extending the [`kendo.data.Binder`](/api/frame
     <input data-bind="numericValue: number" />
     Input value: <span data-bind="text: number" />
 
-#### Example: custom widget binding (the widget will be updated when the view-model changes)
+### Custom Widget Binding
 
-    //the following example demonstrates how to bind the max value of a NumericTextBox widget
+The example below demonstrates how to bind the max value of a Kendo UI NumericTextBox widget. As a result, the widget is updated when the View-Model changes.
+
+###### Example
+
     kendo.data.binders.widget.max = kendo.data.Binder.extend({
         init: function(widget, bindings, options) {
             //call the base constructor
@@ -97,44 +113,67 @@ A custom binding is registered by extending the [`kendo.data.Binder`](/api/frame
     <!-- View source -->
     <input data-role="numerictextbox" id="numeric" data-bind="value: value, max: max" />​
 
-### init
+#### Breakdown of Code Elements
 
-This is the binding constructor. If this function is overriden the base Binder constructor should be called explicitly.
+* `init`&mdash;This is the binding constructor. If this function is overridden, the base `Binder` constructor should be called explicitly.
+* `refresh`&mdash;This is the handler responsible for updating the HTML element. It is executed each time when the value of the bound MVVM field changes. The bound DOM element and the attached MVVM bindings could be retrieved through the context of the function.
 
-### refresh
-
-The `refresh` handler is responsible for updating the HTML element. It will be executed each time when the value of the bound MVVM field changes. The bound DOM element and attached MVVM bindings could be retrieved through the context of the function.
+###### Example
 
     refresh: function() {
         this.bindings //contains all bindings for the current element
         this.element //reference the to the DOM element
     }
 
-### change
+* `change`&mdash;This is the handler responsible for updating the View-Model. It listens for the change event of the bound HTML input element. The View-Model is updated through the `set(value)` method of the binding.
 
-The `change` handler is responsible for updating the View-Model. It listens for the change event of the bound HTML input element. The View-Model is updated through the `set(value)` method of the binding.
+###### Example
 
     change: function() {
         this.bindings //contains all bindings for the current element
         this.element //reference to the DOM element
     }
 
-### bindings - methods
+* Binding methods&mdash;Bindings have two important methods: `get()` and `set(value)`.
 
-Bindings have two important methods - `get()` and `set(value)`.
+The `get` method returns the value from the View-Model.
 
-The **get** method will return the value from the View-Model.
+###### Example
 
     this.bindings["slide"].get() //outputs true
 
-The **set** method accepts one parameter and sets it as a new value of the bound field from the View-Model.
+The `set` method accepts one parameter and sets it as a new value of the bound field from the View-Model.
+
+###### Example
 
     this.bindings["slide"].set(false) //sets the slideValue to false
 
-## Using the custom binding
+## Basic Usage
 
-Custom bindings are set via `data-bind` attribute.
+Custom bindings are set via `data-bind` attribute, as demonstrated in the example below.
+
+###### Example
 
     <div id="target" data-bind="slide: slideValue">
         One Big Orange Square.
     </div>
+
+## See Also
+
+Other articles on the Kendo UI MVVM component and bindings:
+
+* [MVVM Overview]({% slug overview_mvvmpattern_kendoui %})
+* [Overview of the Attribute Binding]({% slug attributebinding_mvvm_kendoui %})
+* [Overview of the Checked Binding]({% slug checkedbinding_mvvm_kendoui %})
+* [Overview of the Click Binding]({% slug clickbinding_mvvm_kendoui %})
+* [Overview of the CSS Binding]({% slug cssbinding_mvvm_kendoui %})
+* [Overview of the Disabled Binding]({% slug disabledbinding_mvvm_kendoui %})
+* [Overview of the Enabled Binding]({% slug enabledbinding_mvvm_kendoui %})
+* [Overview of the Events Binding]({% slug eventsbinding_mvvm_kendoui %})
+* [Overview of the HTML Binding]({% slug htmlbinding_mvvm_kendoui %})
+* [Overview of the Invisible Binding]({% slug invisiblebinding_mvvm_kendoui %})
+* [Overview of the Source Binding]({% slug sourceblebinding_mvvm_kendoui %})
+* [Overview of the Style Binding]({% slug stylebinding_mvvm_kendoui %})
+* [Overview of the Text Binding]({% slug textbinding_mvvm_kendoui %})
+* [Overview of the Value Binding]({% slug valuebinding_mvvm_kendoui %})
+* [Overview of the Visible Binding]({% slug visiblebinding_mvvm_kendoui %})
