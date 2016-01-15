@@ -51,6 +51,30 @@ Creating widgets on the fly is also supported, as demonstrated in the example be
 </script>
 ```
 
+## Access Widget Fields and Methods
+
+When a Kendo UI widget is created as a web component from a custom HTML element, all its methods and fields are copied to this custom element. This spares the need to know which descendant of the custom element holds the widget instance.
+
+###### Example
+
+```html
+<kendo-grid id="grid1"></kendo-grid>
+<kendo-grid id="grid2"></kendo-grid>
+
+<script>
+
+    // get reference to the columns collection of Grid 1
+    var grid1 = document.getElementById("grid1");
+    var columns1 = grid1.columns;
+    
+    // resize Grid 2
+    var grid2 = document.getElementById("grid2");
+    grid2.wrapper.height(900); // wrapper is a jQuery object
+    grid2.resize();
+
+</script>
+```
+
 ## Event Handling
 
 Event handlers can be set either using the attributes of the element or by attaching them after the initialization of the widget using the  [`bind` method](api/javascript/ui/widget#methods-bind).  Attributes should follow the `on-eventname` convention and point to a handler living in the global scope.
