@@ -40,34 +40,34 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
 if (kendo.ui.FilterMenu) {
 kendo.ui.FilterMenu.prototype.options.operators =
 $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
-  "date": {
-    "eq": "Ist gleich",
-    "gt": "Ist nach",
-    "gte": "Ist nach oder gleich",
-    "lt": "Ist vor",
-    "lte": "Ist vor oder gleich",
-    "neq": "Ist nicht gleich"
-  },
-  "enums": {
-    "eq": "Ist gleich",
-    "neq": "Ist nicht gleich"
-  },
-  "number": {
-    "eq": "Ist gleich",
-    "gt": "Ist größer als",
-    "gte": "Ist größer als oder gleich",
-    "lt": "Ist kleiner",
-    "lte": "Ist kleiner als oder gleich",
-    "neq": "Ist nicht gleich"
-  },
-  "string": {
-    "contains": "Beinhaltet",
-    "doesnotcontain": "Beinhaltet nicht",
-    "endswith": "Endet mit",
-    "eq": "Ist gleich",
-    "neq": "Ist nicht gleich",
-    "startswith": "Beginnt mit"
-  }
+    "date": {
+        "eq": "Ist gleich",
+        "gt": "Ist nach",
+        "gte": "Ist nach oder gleich",
+        "lt": "Ist vor",
+        "lte": "Ist vor oder gleich",
+        "neq": "Ist nicht gleich"
+    },
+    "enums": {
+        "eq": "Ist gleich",
+        "neq": "Ist nicht gleich"
+    },
+    "number": {
+        "eq": "Ist gleich",
+        "gt": "Ist größer als",
+        "gte": "Ist größer als oder gleich",
+        "lt": "Ist kleiner",
+        "lte": "Ist kleiner als oder gleich",
+        "neq": "Ist nicht gleich"
+    },
+    "string": {
+        "contains": "Beinhaltet",
+        "doesnotcontain": "Beinhaltet nicht",
+        "endswith": "Endet mit",
+        "eq": "Ist gleich",
+        "neq": "Ist nicht gleich",
+        "startswith": "Beginnt mit"
+    }
 });
 }
 
@@ -329,6 +329,28 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
   "previous": "Gehen Sie zur vorherigen Seite",
   "refresh": "Aktualisieren",
   "morePages": "Weitere Seiten"
+});
+}
+
+/* TreeList messages */
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.messages =
+$.extend(true, kendo.ui.TreeList.prototype.options.messages, {
+    noRows: "Es sind keine Daten vorhanden",
+    loading: "Lade Daten...",
+    requestFailed: "Laden fehlgeschlagen",
+    retry: "Neu laden",
+    commands: {
+        edit: "Bearbeiten",
+        update: "Aktualisiere",
+        canceledit: "Abbrechen",
+        create: "Neuen Datensatz hinzufügen",
+        createchild: "Kind-Datensatz hinzufügen",
+        destroy: "Löschen",
+        excel: "Als Excel exportieren",
+        pdf: "Als PDF exportieren"
+    }
 });
 }
 
