@@ -741,12 +741,19 @@ html .km-pane-wrapper .k-header
     }
 
     .k-today .k-link {
-        color: @selected-background-color;
+        color: contrast(@widget-background-color, @accent, @selected-text-color, 0.5);
+        box-shadow: 0 0 0 1px @accent;
         font-weight: bold;
     }
 
+    td.k-today.k-state-focused .k-link,
+    td.k-today.k-state-selected .k-link {
+        box-shadow: none;
+    }
+
     td.k-today.k-state-hover .k-link {
-        color: @hover-text-color;
+        color: @calendar-content-text-color;
+        box-shadow: none;        
     } 
 
     .k-footer .k-link {
@@ -762,7 +769,8 @@ html .km-pane-wrapper .k-header
         .composite-background(none);
     }
 
-    td.k-state-selected .k-link {
+    td.k-state-selected .k-link,
+    td.k-today.k-state-selected.k-state-hover .k-link {
         color: @selected-text-color;    
     }
 
