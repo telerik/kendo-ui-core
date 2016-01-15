@@ -25,7 +25,6 @@ navigation:
         position: 1
     "controls/data-management/grid/how-to/AngularJS":
         title: "AngularJS"
-        position: 1
     "controls/data-management/grid/how-to/Editing":
         title: "Editing"
         position: 2
@@ -122,6 +121,15 @@ navigation:
     "framework/mvvm":
         title: "MVVM"
         position: 3
+    "framework/mvvm/bindings":
+        title: "Bindings"
+        position: 3
+    "framework/mvvm/how-to":
+        title: "How To"
+        position: 4
+    "framework/mvvm/tutorials":
+        title: "Tutorials"
+        position: 5
     "framework/templates":
         title: "Templates"
         position: 4

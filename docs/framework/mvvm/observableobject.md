@@ -1,22 +1,24 @@
 ---
 title: ObservableObject
-page_title: ObservableObject in Kendo UI MVVM framework | Kendo UI Documentation
-description: Initialize ObservableObject in Kendo UI MVVM framework, get a field value, set a field value to change tracking and notify any subscribers when a change occurs.
+page_title: ObservableObject | Kendo UI MVVM
+description: "Learn how to initialize the ObservableObject in the Kendo UI MVVM framework, get a field value, set a field value to change tracking, and notify any subscribers when a change occurs."
+slug: overview_observabeobject_kendoui
 position: 2
 ---
 
 # ObservableObject
 
-## Overview
+The [`kendo.data.ObservableObject`](/api/javascript/data/observableobject) is an important part of the Kendo UI MVVM framework, specifically of the View-Model. It supports change tracking and notifies any subscribers when a change occurs. All View-Model objects inherit from `kendo.data.ObservableObject`.
 
-The [kendo.data.ObservableObject](/api/framework/observableobject) is an important part of the Kendo MVVM framework - the View-Model.
-It supports change tracking and notifies any subscribers when a change occurs.
-All View-Model objects inherit from `kendo.data.ObservableObject`. From now on ObservableObject and View-Model would be used interchangeably.
+Note that from now on ObservableObject and View-Model are going to be used interchangeably.
 
-To initialize an `ObservableObject` create a new instance of the `kendo.data.ObservableObject` type or use the `kendo.observable` method.
-The end result is the same.
+## Getting Started
 
-## Initializing an ObservableObject
+### Initialize the ObservableObject
+
+To initialize an `ObservableObject`, create a new instance of the `kendo.data.ObservableObject` type or use the `kendo.observable` method, as demonstrated in the example below. The end result is the same.
+
+###### Example
 
     var viewModel1 = new kendo.data.ObservableObject( {
       field1: "value1",
@@ -31,10 +33,13 @@ The end result is the same.
 
 The `kendo.bind` method converts internally the provided View-Model object to an `ObservableObject` unless that object is already an `ObservableObject`.
 
-### Important: when to use each method of initializing a View-Model
+### Important Notes on Getting Started
 
-If the View-Model object is going to be used after initialization (before or after calling `kendo.bind`) the `kendo.observable` method or `new kendo.data.ObservableObject` must be used. Here is an example:
+#### When to Use Each Method for Initializing a View-Model
 
+If the View-Model object is going to be used after initialization (before or after calling `kendo.bind`), the `kendo.observable` method or the `new kendo.data.ObservableObject` must be used, as shown in the example below.
+
+###### Example
 
     var viewModel = kendo.observable({
     name: "John Doe"
@@ -43,8 +48,9 @@ If the View-Model object is going to be used after initialization (before or aft
     viewModel.set("name", "Jane Doe"); // use the View-Model object after initialization
 
 
-If the View-Model object is not going to be used after declaration you can define it as a regular JavaScript object. The
-`kendo.bind` method will **not** convert the original View-Model object to `kendo.data.ObservableObject`. This is why the following will **not** work:
+If the View-Model object is not going to be used after declaration, you can define it as a regular JavaScript object. The `kendo.bind` method will not convert the original View-Model object to `kendo.data.ObservableObject`. That is why the code, demonstrated in the example below, is not going to work. Therefore, it is strongly recommended to always use the `kendo.observable` to initialize the View-Model object.
+
+###### Example
 
     var viewModel = {
        name: "John Doe"
@@ -58,15 +64,16 @@ If the View-Model object is not going to be used after declaration you can defin
     */
     viewModel.set("name", "Jane Doe");
 
+<!--*-->
+## Field Values
 
-This is why it is strongly recommended to **always** use `kendo.observable` to initialize the View-Model object.
+### Get Field Values
 
-## Getting field values of an ObservableObject
+#### Get the Value of an ObservableObject Field
 
-Use the `get` method to get the value of an `ObservableObject` field:
+Use the `get` method to get the value of an `ObservableObject` field, as demonstrated in the example below.
 
-
-### Getting a field value
+###### Example
 
     var viewModel = kendo.observable({
      name: "John Doe"
@@ -75,10 +82,11 @@ Use the `get` method to get the value of an `ObservableObject` field:
     var name = viewModel.get("name");
     alert(name); // shows "John Doe"
 
+#### Get the Nested Field Value
 
-Getting nested fields is supported as well:
+Getting a nested field value is also supported, as shown in the example below.
 
-### Getting a nested field value
+###### Example
 
     var viewModel = kendo.observable({
      person: {
@@ -88,13 +96,13 @@ Getting nested fields is supported as well:
     var personName = viewModel.get("person.name");
     alert(personName); // shows "John Doe"
 
+### Set Field Values
 
-## Setting field values of an ObservableObject
+#### Set the Value of an ObservableObject Field
 
-Use the `set` method to set the value of an `ObservableObject` field.
+Use the `set` method to set the value of an `ObservableObject` field, as demonstrated in the example below.
 
-
-### Setting a field value
+###### Example
 
     var viewModel = kendo.observable({
         name: "John Doe"
@@ -105,10 +113,11 @@ Use the `set` method to set the value of an `ObservableObject` field.
     var name = viewModel.get("name");
     alert(name); // shows "Jane Doe"
 
+#### Set the Nested Field Value
 
-Setting nested fields is supported as well:
+Setting a nested field value is also supported, as shown in the example below.
 
-### Setting a nested field value
+###### Example
 
     var viewModel = kendo.observable({
      person: {
@@ -121,11 +130,15 @@ Setting nested fields is supported as well:
     var personName = viewModel.get("person.name");
     alert(personName); // shows "Jane Doe"
 
-## Creating dependent methods (also known as calculated fields)
+## Dependent Methods
 
-There is often need to convert a View-Model field value to a format more suitable for display in the View. In such cases extending the View-Model with a dependent method is essential. Here is an example:
+### Create Dependent Methods
 
-### Creating a dependent method
+Often there is need to convert a View-Model field value to a format more suitable for display in the View. In such cases, extending the View-Model with a dependent method is essential.
+
+The example below demonstrates how to create dependent methods, also known as calculated fields.
+
+###### Example
 
     <span data-bind="text: fullName"></span>
     <script>
@@ -140,33 +153,13 @@ There is often need to convert a View-Model field value to a format more suitabl
     kendo.bind($("span"), viewModel);
     </script>
 
+In the example, `fullName` is a dependent method because it depends on `firstName` and `lastName`. Changing the value of either `firstName` or `lastName` via the `set` method would also change `fullName`. As a result, all bindings referring to `fullName` are going to be updated.
 
-In that example `fullName` is a dependent method because it depends on `firstName` and `lastName`.
-Changing the value of either `firstName` or `lastName` via the `set` method would also change
-`fullName`. As a result all bindings referring to `fullName` will be updated.
+### Set Values of Dependent Properties
 
-### Important: dependent methods must use the `get` method to get field values
+The example below demonstrates how to set values of dependent properties.
 
-If the `get` method is not used Kendo MVVM would fail to detect any dependencies of the dependent method.
-As a result changing any of the dependencies would not be reflected properly. Here is an example:
-
-    var viewModel = kendo.observable({
-        firstName: "John",
-        lastName: "Doe",
-        fullName: function() {
-            return this.firstName + " " + this.lastName;
-        }
-    });
-
-
-In this implementation of `fullName` direct field access is used instead of the `get` method. As a result
-the depencencies of `fullName` are not tracked. Changing the value of either `firstName`
-or `lastName` via the `set` method would **not** cause the change of `fullName`.
-This means that  **no** binding referring to `fullName` is going to be updated.
-
-Avoid using direct field access when implementing dependent methods. Always use the `get` method to obtain the field values.
-
-### Setting values of dependent properties
+###### Example
 
     <p>Full Name: <input data-bind="value: fullName"></p>
     <p>First Name: <span data-bind="text: firstName"></span></p>
@@ -190,3 +183,32 @@ Avoid using direct field access when implementing dependent methods. Always use 
 
       kendo.bind(document.body, vm);
     </script>
+
+### Important Notes on Dependent Methods
+
+#### Dependent Methods Must Use the get Method for Getting Field Values
+
+If the `get` method is not used, the Kendo UI MVVM fails to detect any dependencies of the dependent method. As a result, changing any of the dependencies would not be reflected properly.
+
+###### Example
+
+    var viewModel = kendo.observable({
+        firstName: "John",
+        lastName: "Doe",
+        fullName: function() {
+            return this.firstName + " " + this.lastName;
+        }
+    });
+
+This implementation of the `fullName` uses direct field access instead of the `get` method. As a result, the dependencies of `fullName` are not tracked. Changing the value of either `firstName` or `lastName` via the `set` method would not cause the change of `fullName`. This means that no binding referring to `fullName` is going to be updated.
+
+Avoid using direct field access when implementing dependent methods. Always use the `get` method to obtain the field values.
+
+## See Also
+
+Articles and how-to examples on Kendo UI MVVM:
+
+* [MVVM Overview]({% slug overview_mvvmpattern_kendoui %})
+* [Tutorial on How to Build MVVM Bound Forms]({% slug mvvmboundforms_mvvmpattern_kendoui %})
+
+For detailed information on the bindings Kendo UI MVVM supports, refer to the section about [Kendo UI MVVM bindings]({% slug attributebinding_mvvm_kendoui %}).
