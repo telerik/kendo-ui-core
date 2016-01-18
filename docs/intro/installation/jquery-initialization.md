@@ -79,7 +79,7 @@ The example below demonstrates the chain jQuery method calls after the widget in
     </script>
 ```
 
-### Initialization within Iframes
+### Initialize within Iframes
 
 It is theoretically possible to initialize a Kendo UI widget, which is inside an `iframe`, from the context of the parent page. This may work in specific scenarios, but is not officially supported. For example, widgets that render popups may not be able to display them.
 
@@ -131,7 +131,7 @@ When using a Kendo UI server-side wrapper (as the server-side wrappers are autom
 
 A common mistake is to recreate a widget instance when the goal is only to get the instance object. Duplicate initialization is not supported and results in unexpected side effects.
 
-### Incorrect Duplicate Initialization
+### Duplicate Initialization Incorrectly
 
 ###### Example
 
