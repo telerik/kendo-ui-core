@@ -567,7 +567,7 @@ The sheet instance.
 #### Example - subscribe to the "change" event during initialization
 
 ```
-    <input id="dropdownlist" />
+    <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet();
 
