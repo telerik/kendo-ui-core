@@ -755,6 +755,10 @@ html .km-pane-wrapper .k-header
         background-color: @base;
     }
 
+    .k-today.k-state-selected {
+        background-color: @selected-background-color;
+    }
+
     .k-today .k-link {
         color: @normal-background;
     }
@@ -766,7 +770,7 @@ html .km-pane-wrapper .k-header
     .k-today.k-state-focused,
     .k-today:active,
     .k-today.k-state-selected:active {
-        box-shadow: inset 0 0 0px 1px darken(@base, 15%);
+        box-shadow: @focused-item-shadow;
     }
 
     .k-footer .k-link {
