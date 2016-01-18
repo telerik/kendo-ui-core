@@ -35,7 +35,7 @@ To get a reference to a widget instance, use the [jQuery data](http://api.jquery
     </script>
 ```
 
-### getKendo<WidgetName>
+### getKendo* Approach
 
 To get a reference to a widget instance, you may also use the `getKendo<WidgetName>` method. Note that the jQuery convention of returning the selected DOM element(s) applies to widget initialization plug-in methods too. This means that the plug-in method, for example `kendoAutoComplete()`, does not return the widget instance, but the jQuery selector that the method was used on.
 

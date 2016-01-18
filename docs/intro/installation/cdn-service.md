@@ -41,9 +41,9 @@ To access the Kendo UI CDN service through the HTTPS protocol, use the same host
 
 ## Troubleshooting
 
-### Disruption and Connection Issues
+### Handle Disruption and Connection Issues
 
-Although the Amazon CloudFront service provides for a reliable level of uptime support, you may encounter disruption or connection troubles. After you have checked the status of the systems at [http://status.aws.amazon.com/](http://status.aws.amazon.com/), the CDN status is reported as healthy and is operating normally.
+Although the [Amazon CloudFront service](https://aws.amazon.com/cloudfront/) provides for a reliable level of uptime support, you may encounter disruption or connection troubles. After you have checked the status of the systems at [http://status.aws.amazon.com/](http://status.aws.amazon.com/), the CDN status is reported as healthy and is operating normally.
 
 **Cause** You could be experiencing Internet or network connectivity problems, or DNS problems, or it is possible that firewalls, antivirus or other security software incorrectly filters out the CDN scripts or modifies (breaks) them on-the-fly.
 

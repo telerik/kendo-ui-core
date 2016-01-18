@@ -55,7 +55,7 @@ Below are the references to the script files which, whether minified or not, can
 
 ## Build Scripts
 
-### With Download Builder
+### Employ Download Builder
 
 Users with a commercial license may use the [custom download builder tool](http://www.telerik.com/download/custom-download) to create a single JavaScript file which contains only the required widgets and features.
 
