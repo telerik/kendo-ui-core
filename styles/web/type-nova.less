@@ -592,7 +592,8 @@ input.k-textbox:active {
         background-color: @selected-background;
     }
 
-    .k-today .k-link {
+    .k-today .k-link,
+    .k-today.k-state-hover .k-link {
         color: @selected-text-color;
     }
 
@@ -611,16 +612,16 @@ input.k-textbox:active {
         border-color: lighten(@info, 11%);
     }
 
-    .k-today.k-state-focused,
-    .k-today:active,
     .k-today.k-state-selected:active {        
-        background-color: @selected-background;
-        border-color: @selected-background;
-        box-shadow: none;
+        border-color: darken(@widget-border-color, 27%);
     }
 
-    .k-today.k-state-selected.k-state-hover {
-        background-color: @accent-hover-background;
+    .k-today:active {
+        border-color: multiply(@accent, #9a9a9a);
+    }
+
+    .k-today.k-state-selected .k-link {
+        color: @link-text-color;
     }
 
     .k-state-selected.k-state-focused {
