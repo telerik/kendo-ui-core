@@ -66,7 +66,7 @@ Here is an example referring to an MVVM-bound DOM element with an AutoComplete w
 
 > **Important**  
 >
-> The `data-bind` attribute syntax establishes a two-way binding between the widget options (in that case, the data source) and the view model field (the `source`). For more information, refer to the [MVVM introduction help topic]({% slug overview_mvvmpattern_kendoui }).
+> The `data-bind` attribute syntax establishes a two-way binding between the widget options (in that case, the data source) and the view model field (the `source`). For more information, refer to the [MVVM introduction help topic]({% slug overview_mvvmpattern_kendoui %}).
 
 ### In Hybrid UI Application
 
