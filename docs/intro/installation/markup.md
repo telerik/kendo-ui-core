@@ -11,17 +11,17 @@ position: 7
 
 In addition to the [jQuery plugin syntax](/intro/installation/jquery-initialization), the Kendo UI widgets may be instantiated based on custom HTML attributes in several ways:
 
-**Option 1** The [View](/framework/spa/view) and the [mobile Application](/controls/hybrid/application) instantiate widgets based on the `role` HTML 5 data attributes. Both use the [MVVM](/framework/mvvm/overview) internally.  
-**Option 2** The `kendo.bind` method will scan the passed DOM element contents for the `data-role` attributes and will instantiate the respective widgets.  
+**Option 1** The [View](/framework/spa/view) and the [mobile Application](/controls/hybrid/application) instantiate widgets based on the `role` HTML 5 data attributes. Both use the [MVVM](/framework/mvvm/overview) internally.
+**Option 2** The `kendo.bind` method will scan the passed DOM element contents for the `data-role` attributes and will instantiate the respective widgets.
 **Option 3** The Kendo UI [AngularJS]({% slug angularjs_integration_directives %}) directives support declarative initialization based on custom element attributes or custom tag names.
 
-> **Important**  
+> **Important**
 >
 > The `data` attribute initialization is not designed to be combined with the Kendo UI server wrappers. Using wrappers is equivalent to [jQuery plug-in syntax initialization]({% slug initialize_widgets_using_jquery_plugins_installation %}). If you want to create Kendo UI widget instances via the [MVVM](/framework/mvvm/overview) or [AngularJS]({% slug angularjs_integration_directives %}) mechanisms, then do not use server wrappers for these instances.
 
 While it is theoretically possible to initialize several different Kendo UI widgets from the same DOM element via [jQuery plugin syntax]({% slug initialize_widgets_using_jquery_plugins_installation %}), this is not recommended and is not supported with declarative initialization from markup.
 
-> **Important**  
+> **Important**
 >
 > It is strongly recommended to initialize Kendo UI widgets from HTML elements, which are part of the DOM tree.
 Creating widgets from [document fragments](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) may cause undesired side effects or Javascript errors.
@@ -64,7 +64,7 @@ Here is an example referring to an MVVM-bound DOM element with an AutoComplete w
     </script>
 ```
 
-> **Important**  
+> **Important**
 >
 > The `data-bind` attribute syntax establishes a two-way binding between the widget options (in that case, the data source) and the view model field (the `source`). For more information, refer to the [MVVM introduction help topic]({% slug overview_mvvmpattern_kendoui %}).
 

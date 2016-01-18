@@ -235,6 +235,9 @@ navigation:
     "*angular":
         title: "AngularJS"
         position: 1
+    "*webpack":
+        title: "Webpack Integration"
+        position: 200
     "*troubleshoot":
         title: "Troubleshooting"
         position: 201
