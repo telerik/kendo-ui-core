@@ -15,10 +15,11 @@ position: 1
 
 ### Web Browser Support General
 
-Most [Kendo UI widgets](/intro/supporting/list-of-widgets) have no limitations as of the browser versions they support.
+Most [Kendo UI widgets](/intro/supporting/list-of-widgets) have no specific limitations as of the browser versions they support.
 
 | Browser           | Supported Versions            | Limitations
 | :---------------- | :---------------------------- | :---------------
+| Edge              | 20 or later ([officially supported versions by Microsoft only](https://en.wikipedia.org/wiki/Microsoft_Edge#Release_history)) |
 | Internet Explorer | 8 or later                    | Kendo UI [Spreadsheet](http://demos.telerik.com/kendo-ui/spreadsheet/index) and [Responsive panel](http://demos.telerik.com/kendo-ui/responsive-panel/index) require IE9 or later
 | Chrome            | 21 or later                   |
 | Firefox           | [Current and ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history) ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/))|
@@ -34,7 +35,6 @@ The [hybrid UI widgets and frameworks](/intro/supporting/list-of-widgets) are in
 | Internet Explorer | 10 or later                   |
 | Chrome            | 21 or later                   |
 | Firefox           | Not supported                 |
-| Opera             | 15 or later                   |
 | OS X Safari       | [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
 
 ### Charts, Gauges, Barcodes, Diagrams and Maps
@@ -45,6 +45,7 @@ The [hybrid UI widgets and frameworks](/intro/supporting/list-of-widgets) are in
 
 | Browser           | Supported Versions            |
 | :---------------- | :---------------------------- |
+| Edge              | 20 or later ([officially supported versions by Microsoft only](https://en.wikipedia.org/wiki/Microsoft_Edge#Release_history)) |
 | Internet Explorer | 9 or later                    |
 | Chrome            | 21 or later                   |
 | Firefox           | [Current and ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history) ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/))|
