@@ -740,20 +740,27 @@ html .km-pane-wrapper .k-header
         border-radius: @calendar-border-radius;
     }
 
+    .k-today {
+        box-shadow: inset 0 0 0 1px @accent;
+    }
+
     .k-today .k-link {
-        color: contrast(@widget-background-color, @accent, @selected-text-color, 0.5);
-        box-shadow: 0 0 0 1px @accent;
+        color: contrast(@widget-background-color, @accent, @selected-text-color, 0.5);        
         font-weight: bold;
     }
 
-    td.k-today.k-state-focused .k-link,
-    td.k-today.k-state-selected .k-link {
+    td.k-today.k-state-focused,
+    td.k-today.k-state-focused.k-state-hover {
+        box-shadow: @focused-item-shadow;
+    }
+
+    td.k-today.k-state-hover,
+    td.k-today.k-state-selected {
         box-shadow: none;
     }
 
     td.k-today.k-state-hover .k-link {
-        color: @calendar-content-text-color;
-        box-shadow: none;        
+        color: @calendar-content-text-color;            
     } 
 
     .k-footer .k-link {
