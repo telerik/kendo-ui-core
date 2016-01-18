@@ -746,13 +746,16 @@ html .km-pane-wrapper .k-header
         border-radius: @calendar-border-radius;
     }
 
-    .k-today {
-        background-color: @hover-background;
+    .k-today .k-link {
+        box-shadow: 0 0 0 1px @accent;
+        font-weight: bold;
     }
 
-    .k-today.k-state-hover {
-        background-color: @accent;
-    }
+    .k-today.k-state-hover .k-link,
+    .k-today.k-state-focused .k-link,
+    .k-today.k-state-selected .k-link {
+        box-shadow: none;
+    } 
 
     .k-footer .k-link {
         border-radius: 0;
