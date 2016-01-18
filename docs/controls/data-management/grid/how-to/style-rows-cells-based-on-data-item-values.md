@@ -134,13 +134,7 @@ The three options are:
                 dataBound: function(e) {
                     // get the index of the UnitsInStock cell
                     var columns = e.sender.columns;
-                    var columnIndex = 0;
-                    for (var j = 0; j < columns.length; j++) {
-                        if (columns[j].field == "UnitsInStock") {
-                            break;
-                        }
-                        columnIndex++;
-                    }
+                    var columnIndex = this.wrapper.find(".k-grid-header [data-field=" + "UnitsInStock" + "]").index();
                     
                     // iterate the table rows and apply custom row and cell styling
                     var rows = e.sender.tbody.children();
@@ -165,13 +159,7 @@ The three options are:
                 dataBound: function(e) {
                     // get the index of the UnitsInStock cell
                     var columns = e.sender.columns;
-                    var columnIndex = 0;
-                    for (var j = 0; j < columns.length; j++) {
-                        if (columns[j].field == "UnitsInStock") {
-                            break;
-                        }
-                        columnIndex++;
-                    }
+                    var columnIndex = this.wrapper.find(".k-grid-header [data-field=" + "UnitsInStock" + "]").index();
                     
                     // iterate the data items and apply row styles where necessary
                     var dataItems = e.sender.dataSource.view();
