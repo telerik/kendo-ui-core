@@ -248,7 +248,7 @@ If the scrolling Grid functionality is enabled and the Grid has no height, the d
 
 ## Columns
 
-### Width
+### Widths
 
 The Grid columns behave differently, depending on whether scrolling is enabled, or not.
 
