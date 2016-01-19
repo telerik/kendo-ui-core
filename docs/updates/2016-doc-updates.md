@@ -7,9 +7,24 @@ slug: documentation_updates_2016_kendoui
 
 # Kendo UI 2016 Documentation Updates
 
-## Kendo UI 2016 Q1
+## Kendo UI Q1 2016 SP1
 
-### Changes from Kendo UI 2015 Q3
+### Changes from Kendo UI 2016 Q1
+
+Some articles were moved to other locations, which better correspond to the topics they tackle.
+
+| **Name of Article**                       | **Previous Location**       | **New Location**        |
+|:---                                       |:---                         |:---                     |
+| **Widget wrapper and widget element**     | **Framework and Utilities** > **Widgets** > **Widget wrapper and widget element** | **Getting Started** > **Widget Basics** > **Widget DOM Elements** |
+| **Destroy Kendo UI Widgets**              | **Framework and Utilities** > **Widgets** > **Destroy Kendo UI Widgets**          | **Getting Started** > **Widget Basics** > **Destroy Widgets**     |
+| *Create Your Own Kendo UI Widget by Inheriting from the Base Widget Class** | **Framework and Utilities** > **Widgets** > **Create Your Own Kendo UI Widget by Inheriting from the Base Widget Class** | **Getting Started** > **Widget Basics** > **Create Custom Widgets** |
+| **Data Attribute Initialization**         | **Framework and Utilities** > **Data Attribute Initialization** | **Getting Started** > **Widget Basics** > **Data Attributes** |
+| **Class-based Inheritance with Kendo UI** | **Framework and Utilities** > **Class-based Inheritance with Kendo UI** | **Framework and Utilities** > **Class** > **Overview**
+| **Methods and Events**                    | **Getting Started** > **Methods and Events** | **Getting Started** > **Widget Basics** > **Methods and Events** |
+
+## Kendo UI Q1 2016
+
+### Changes from Kendo UI Q3 2015
 
 * The conceptual topic documentation on Kendo UI widgets is reorganized to correspond to the structure of the [Kendo UI live demo page](http://demos.telerik.com/kendo-ui/). The articles on Kendo UI controls are now listed in the **Widgets** folder. For example, **Widgets** > **Data Management** > **Grid** > **Overview**.
 * The new **Styles and Appearance** folder contains the combined articles on the layout and general appearance of the Kendo UI widgets that were previously referred to as Web and DataViz, such as the **Responsive Web Design** and **ThemeBuilder Overview** help topics.

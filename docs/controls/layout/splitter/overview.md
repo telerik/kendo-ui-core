@@ -29,10 +29,8 @@ The example below demonstrates how to create a Kendo UI Splitter with children t
 ### Initialize the Splitter
 
 > **Important**  
->
-> The Splitter should be initialized after the DOM is fully loaded, so make sure you create it within a $(document).ready() statement.
-> 
-> In addition, the widget must be visible at the time of initialization. If it is nested in a hidden container, then execute the Splitter's [`resize`](#resize-manually) method as soon as it becomes visible.
+> * The Splitter should be initialized after the DOM is fully loaded, so make sure you create it within a $(document).ready() statement.
+> * The widget must be visible at the time of initialization. If it is nested in a hidden container, then execute the Splitter's [`resize`](#resize-manually) method as soon as it becomes visible.
 
 The example below demonstrates how to initialize the Splitter using a jQuery selector.
 

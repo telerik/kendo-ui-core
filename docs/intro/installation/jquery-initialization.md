@@ -1,13 +1,13 @@
 ---
-title: Initialize Widgets Using jQuery Plug-Ins
-page_title: Initialize Widgets Using jQuery Plug-Ins | Kendo UI Installation
+title: jQuery Plug-Ins Widget Initialization
+page_title: jQuery Plug-Ins Initialization | Kendo UI Getting Started
 previous_url: /widgets, /howto/add-widgets, /basics/jquery-initialization, /intro/jquery-initialization
-description: "Use jQuery plug-in sytax to add Kendo UI widgets and frameworks to your mobile website or web application."
+description: "Use jQuery plug-in syntax to add Kendo UI widgets and frameworks to your mobile website or web application."
 slug: initialize_widgets_using_jquery_plugins_installation
 position: 6
 ---
 
-# Initialize Widgets Using jQuery Plug-Ins
+# jQuery Plug-Ins Initialization
 
 All Kendo UI widgets are registered as [jQuery plug-ins](http://learn.jquery.com/plugins/), which allows them to be instantiated on a jQuery object instance.
 The jQuery plug-in method is formed by the widget name in Pascal case, prefixed with `kendo` as in `kendoGrid` and `kendoListView`.
@@ -153,7 +153,7 @@ A common mistake is to recreate a widget instance when the goal is only to get t
 ### Check for Existing Instances
 
 In order to check whether a widget instance already exists for a certain DOM element, use the
-[standard way to obtain the widget instance](/intro/installation/events-and-methods#obtain-a-reference-to-a-kendo-ui-widget-instance-using-jquery). If the returned value is `undefined`, then the widget instance does not exist.
+[standard way to obtain the widget instance]({% slug widget_methodsand_events_kendoui_installation %}#jquery-data-method). If the returned value is `undefined`, then the widget instance does not exist.
 
 ###### Example
 
@@ -178,10 +178,14 @@ In order to check whether a widget instance already exists for a certain DOM ele
 
 Other articles on getting started with Kendo UI:
 
-* [Getting Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
 * [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
 * [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
+* [Access Widget DOM Elements: wrapper and element]({% slug widgetwrapperandelement_references_gettingstarted %})
+* [Set Data Attributes]({% slug dataattributes_configuration_installation %})
 * [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})
+* [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
+* [Create Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})

@@ -1,6 +1,6 @@
 ---
 title: Bower Packages
-page_title: Bower Packages | Kendo UI Installation
+page_title: Bower Packages | Kendo UI Getting Started
 description: "Get HTML5 UI frameworks and widgets by installing Kendo UI Professional or Kendo UI Core bower package."
 previous_url: /install/bower
 slug: kendoui_bower_packages_kendoui_installation
@@ -15,7 +15,7 @@ Kendo UI maintains 2 bower packages, namely Kendo UI Core and Kendo UI Professio
 
 > **Important**
 >  
-> Kendo UI Professional bower package is available only for **commercial license holders**. Check out the [list of Kendo UI components and their bundle support](/intro/supporting/list-of-widgets).
+> Kendo UI Professional bower package is available only for **commercial license holders**. Check out the [list of Kendo UI components and their bundle support]({% slug bundle_supportfor_kendoui_components %}).
 
 ## Install Bower Packages
 
@@ -129,7 +129,7 @@ ECMDERR Failed to execute "git ls-remote --tags --heads https://bower.telerik.co
 
 **Solution** Use a Windows port of Git and stored credentials instead of the built-in client.
 
-1. Setup [stored credentials](#store-your-credentials-on-windows)
+1. Setup [stored credentials](#store-credentials-windows)
 1. Install [Git for Windows](https://git-for-windows.github.io/)
 1. Right click on Bower folder under Dependencies
 1. Select `Configure external tools`
@@ -144,10 +144,14 @@ ECMDERR Failed to execute "git ls-remote --tags --heads https://bower.telerik.co
 
 Other articles on getting started with Kendo UI:
 
-* [Getting Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
 * [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
 * [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
 * [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
+* [Access Widget DOM Elements: wrapper and element]({% slug widgetwrapperandelement_references_gettingstarted %})
+* [Set Data Attributes]({% slug dataattributes_configuration_installation %})
 * [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})
+* [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
+* [Create Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})

@@ -1,19 +1,19 @@
 ---
-title: Include Only What You Need
-page_title: Include Only What You Need | Kendo UI Installation
+title: Only What You Need
+page_title: Only What You Need | Kendo UI Getting Started
 description: "Customize Kendo UI for your project and add the HTML5 UI controls you need."
 previous_url: /install/custom
 slug: include_only_what_you_need_kendoui_installation
 position: 4
 ---
 
-# Include Only What You Need
+# Only What You Need
 
 ## Combined Scripts
 
 The following combined scripts are available in the bundles or at the CDN in order to facilitate the common project types:
 
-*  `kendo.ui.core.min.js` contains all widgets supported by the [Kendo UI Core distribution](/intro/supporting/list-of-widgets). The relevant script is available in the Kendo UI Core package as well.
+*  `kendo.ui.core.min.js` contains all widgets supported by the [Kendo UI Core distribution]({% slug bundle_supportfor_kendoui_components %}). The relevant script is available in the Kendo UI Core package as well.
 *  `kendo.all.min.js` contains a minified version of all features provided by Kendo UI.
 
 > **Important**  
@@ -88,10 +88,14 @@ List the components you want to be included in the custom build and separated th
 
 Other articles on getting started with Kendo UI:
 
-* [Getting Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
 * [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
-* [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
 * [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
+* [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Access Widget DOM Elements: wrapper and element]({% slug widgetwrapperandelement_references_gettingstarted %})
+* [Set Data Attributes]({% slug dataattributes_configuration_installation %})
 * [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})
+* [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
+* [Create Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})

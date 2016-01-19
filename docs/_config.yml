@@ -8,15 +8,20 @@ navigation:
     "api":
         title: "API Reference"
         position: 0
+    "api/javascript/dataviz":
+        title: "dataviz"
     "intro":
         title: "Getting Started"
         position: 2
     "intro/installation":
         title: "Prerequisites and Installation"
         position: 1
+    "intro/widget-basics":
+        title: "Widget Basics"
+        position: 2
     "intro/supporting":
         title: "Additional Resources"
-        position: 2
+        position: 3
     "controls":
         title: "Widgets"
         position: 3
@@ -148,14 +153,14 @@ navigation:
     "framework/localization":
         title: "Localization"
         position: 9
+    "framework/class":
+        title: "Class"
+        position: 10
     "framework/validator":
         title: "Validator"
-        position: 10
+        position: 11
     "framework/save-files":
         title: "Saving Files"
-        position: 11
-    "framework/widgets":
-        title: "Widgets"
         position: 12
     "third-party":
         title: "Third-Party Frameworks and Utilities"

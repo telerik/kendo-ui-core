@@ -1,13 +1,13 @@
 ---
-title: Getting Started with Kendo UI
-page_title: Getting Started with Kendo UI | Kendo UI Installation
+title: Get Started with Kendo UI
+page_title: Get Started with Kendo UI | Kendo UI Getting Started
 description: "Get your HTML5 UI frameworks and widgets by hosting Kendo UI, downloading Kendo UI bower package, or using Kendo UI CDN service."
 previous_url: /install/onsite, /getting-started, /intro/getting-started
 slug: getting_started_installation_kendoui
 position: 1
 ---
 
-# Getting Started with Kendo UI
+# Get Started with Kendo UI
 
 ## Host Kendo UI in Your Project
 
@@ -141,4 +141,8 @@ Other articles on getting started with Kendo UI:
 * [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
 * [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
 * [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
+* [Access Widget DOM Elements: wrapper and element]({% slug widgetwrapperandelement_references_gettingstarted %})
+* [Set Data Attributes]({% slug dataattributes_configuration_installation %})
 * [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})
+* [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
+* [Create Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})

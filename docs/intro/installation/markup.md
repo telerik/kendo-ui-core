@@ -1,23 +1,23 @@
 ---
-title: Initialize Widgets Using Markup
-page_title: Initialize Widgets Using Markup | Kendo UI Installation
+title: Markup Widget Initialization
+page_title: Markup Widget Initialization | Kendo UI Getting Started
 previous_url: /data-attribute-initialization, /howto/declarative_initialization, /basics/markup, /intro/markup
 description: "Initialize Kendo UI widgets from markup, add Kendo UI frameworks to your application, and use AngularJS or MVVM to configure Kendo UI."
 slug: initialize_widgets_using_markup_installation
 position: 7
 ---
 
-# Initialize Widgets Using Markup
+# Markup Widget Initialization
 
-In addition to the [jQuery plugin syntax](/intro/installation/jquery-initialization), the Kendo UI widgets may be instantiated based on custom HTML attributes in several ways:
+In addition to the [jQuery plugin syntax]({% slug initialize_widgets_using_jquery_plugins_installation %}), the Kendo UI widgets may be instantiated based on custom HTML attributes in several ways:
 
-**Option 1** The [View](/framework/spa/view) and the [mobile Application](/controls/hybrid/application) instantiate widgets based on the `role` HTML 5 data attributes. Both use the [MVVM](/framework/mvvm/overview) internally.
-**Option 2** The `kendo.bind` method will scan the passed DOM element contents for the `data-role` attributes and will instantiate the respective widgets.
+**Option 1** The [View]({% slug viewclass_kendoui_singlepageapplication %}) and the [mobile Application](/controls/hybrid/application) instantiate widgets based on the `role` HTML 5 data attributes. Both use the [MVVM]({% slug overview_mvvmpattern_kendoui %}) internally.  
+**Option 2** The `kendo.bind` method will scan the passed DOM element contents for the `data-role` attributes and will instantiate the respective widgets.  
 **Option 3** The Kendo UI [AngularJS]({% slug angularjs_integration_directives %}) directives support declarative initialization based on custom element attributes or custom tag names.
 
 > **Important**
 >
-> The `data` attribute initialization is not designed to be combined with the Kendo UI server wrappers. Using wrappers is equivalent to [jQuery plug-in syntax initialization]({% slug initialize_widgets_using_jquery_plugins_installation %}). If you want to create Kendo UI widget instances via the [MVVM](/framework/mvvm/overview) or [AngularJS]({% slug angularjs_integration_directives %}) mechanisms, then do not use server wrappers for these instances.
+> The `data` attribute initialization is not designed to be combined with the Kendo UI server wrappers. Using wrappers is equivalent to [jQuery plug-in syntax initialization]({% slug initialize_widgets_using_jquery_plugins_installation %}). If you want to create Kendo UI widget instances via the [MVVM]({% slug overview_mvvmpattern_kendoui %}) or [AngularJS]({% slug angularjs_integration_directives %}) mechanisms, then do not use server wrappers for these instances.
 
 While it is theoretically possible to initialize several different Kendo UI widgets from the same DOM element via [jQuery plugin syntax]({% slug initialize_widgets_using_jquery_plugins_installation %}), this is not recommended and is not supported with declarative initialization from markup.
 
@@ -128,10 +128,14 @@ Below is an example referring to the Kendo UI AngularJS AutoComplete directive. 
 
 Other articles on getting started with Kendo UI:
 
-* [Getting Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
 * [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
 * [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Access Widget DOM Elements: wrapper and element]({% slug widgetwrapperandelement_references_gettingstarted %})
+* [Set Data Attributes]({% slug dataattributes_configuration_installation %})
 * [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})
+* [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
+* [Create Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
