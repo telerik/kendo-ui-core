@@ -1678,11 +1678,24 @@ Defines the connectors the shape owns.
 * "left" - left connector.
 * "auto" - auto connector.
 
-You can easily define your own custom connectors or mix-match with the above defined custom connectors.
+You can define your own custom connectors or use the predefined types.
 
-Example - custom shape with custom connectors
+#### Example - Include only some connectors
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        dataSource: [{name: "item1"}],
+        shapeDefaults: {
+          connectors: [{ name: "top" }, { name: "left" }]
+        }
+      });
+    </script>
+
 
 The following defines a custom shape with connectors adapted to the shape's outline. Note in particular the various helpful methods (right(), left(), top()) to define positions relative to the shape.
+
+#### Example - Custom shape with custom connectors
 
     <div id="diagram"></div>
     <script>
