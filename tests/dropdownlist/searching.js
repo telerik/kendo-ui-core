@@ -607,4 +607,22 @@
         dropdownlist.open();
         dropdownlist.filterInput.val("or").keydown();
     });
+
+    test("search select first match of grouped list", function() {
+        var data = [{text: "Foo", value: 1, type: "a"}, {text:"Bar", value:2, type: "b"}, {text:"Baz", value:3, type: "a"}];
+        var dropdownlist = new DropDownList(input, {
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                data: data,
+                group: { field: "type" }
+            }
+        });
+
+        dropdownlist.wrapper.focus().press("b");
+        dropdownlist.wrapper.focus().press("b");
+
+        ok(dropdownlist.ul.children().eq(2).text(), "Bar");
+        ok(dropdownlist.ul.children().eq(2).hasClass("k-state-selected"));
+    });
 })();

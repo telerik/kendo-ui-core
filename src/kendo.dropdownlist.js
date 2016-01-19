@@ -705,7 +705,7 @@ var __meta__ = { // jshint ignore:line
 
         _selectNext: function() {
             var that = this;
-            var data = that.dataSource.flatView().toJSON();
+            var data = that.dataSource.flatView();
             var dataLength = data.length + (that.hasOptionLabel() ? 1 : 0);
             var isInLoop = sameCharsOnly(that._word, that._last);
             var startIndex = that.selectedIndex;
@@ -719,6 +719,7 @@ var __meta__ = { // jshint ignore:line
                 startIndex = normalizeIndex(startIndex, dataLength);
             }
 
+            data = data.toJSON ? data.toJSON() : data.slice();
             data = that._shuffleData(data, startIndex);
 
             for (var idx = 0; idx < dataLength; idx++) {
