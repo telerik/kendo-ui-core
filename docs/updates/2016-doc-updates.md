@@ -11,16 +11,56 @@ slug: documentation_updates_2016_kendoui
 
 ### Changes from Kendo UI 2016 Q1
 
-Some articles were moved to other locations, which better correspond to the topics they tackle.
+Some articles now share new locations, which conceptually better match the topics they tackle.
 
-| **Name of Article**                       | **Previous Location**       | **New Location**        |
-|:---                                       |:---                         |:---                     |
-| **Widget wrapper and widget element**     | **Framework and Utilities** > **Widgets** > **Widget wrapper and widget element** | **Getting Started** > **Widget Basics** > **Widget DOM Elements** |
-| **Destroy Kendo UI Widgets**              | **Framework and Utilities** > **Widgets** > **Destroy Kendo UI Widgets**          | **Getting Started** > **Widget Basics** > **Destroy Widgets**     |
-| **Create Your Own Kendo UI Widget by Inheriting from the Base Widget Class** | **Framework and Utilities** > **Widgets** > **Create Your Own Kendo UI Widget by Inheriting from the Base Widget Class** | **Getting Started** > **Widget Basics** > **Create Custom Widgets** |
-| **Data Attribute Initialization**         | **Framework and Utilities** > **Data Attribute Initialization** | **Getting Started** > **Widget Basics** > **Data Attributes** |
-| **Class-based Inheritance with Kendo UI** | **Framework and Utilities** > **Class-based Inheritance with Kendo UI** | **Framework and Utilities** > **Class** > **Overview**
-| **Methods and Events**                    | **Getting Started** > **Methods and Events** | **Getting Started** > **Widget Basics** > **Methods and Events** |
+<table style="width:100%">
+  <col width="25%">
+  <col width="25%">
+  <col width="25%">
+  <col width="25%">
+    <tr>
+      <th>Article</th>
+      <th>New Name</th>
+      <th>Previous Location</th>
+      <th>New Location</th>
+    </tr>
+    <tr>
+      <td>Widget wrapper and widget element</td>
+      <td>Widget DOM Elements</td>
+      <td><strong>Framework and Utilities</strong> > <strong>Widgets</strong></td>
+      <td><strong>Getting Started</strong> > <strong>Widget Basics</strong></td>
+    </tr>
+    <tr>
+      <td>Destroy Kendo UI Widgets</td>
+      <td>Destroy Widgets</td>
+      <td><strong>Framework and Utilities</strong> > <strong>Widgets</strong></td>
+      <td><strong>Getting Started</strong> > <strong>Widget Basics</strong></td>
+    </tr>
+    <tr>
+      <td>Create Your Own Kendo UI Widget by Inheriting from the Base Widget Class</td>
+      <td>Create Custom Widgets</td>
+      <td><strong>Framework and Utilities</strong> > <strong>Widgets</strong></td>
+      <td><strong>Getting Started</strong> > <strong>Widget Basics</strong></td>
+    </tr>
+    <tr>
+      <td>Data Attribute Initialization</td>
+      <td>Data Attributes</td>
+      <td><strong>Framework and Utilities</strong></td>
+      <td><strong>Getting Started</strong> > <strong>Widget Basics</strong></td>
+    </tr>
+    <tr>
+      <td>Class-based Inheritance with Kendo UI</td>
+      <td>Class Overview</td>
+      <td><strong>Framework and Utilities</strong></td>
+      <td><strong>Framework and Utilities</strong> > <strong>Class</strong></td>
+    </tr>
+    <tr>
+      <td>Methods and Events</td>
+      <td>Methods and Events</td>
+      <td><strong>Getting Started</strong> > <strong>Widgets</strong></td>
+      <td><strong>Getting Started</strong> > <strong>Widget Basics</strong></td>
+    </tr>
+</table>
 
 ## Kendo UI Q1 2016
 
