@@ -63,9 +63,9 @@ Users with a commercial license may use the [custom download builder tool](http:
 >
 > Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
 
-### Use Grunt
+### Use Gulp
 
-If you use the Kendo UI Core package, you can build a custom distribution using the `grunt` build tool by following the instructions in [README](https://github.com/telerik/kendo-ui-core#building-only-what-you-need).
+If you use the Kendo UI Core package, you can build a custom distribution using the `gulp` build tool by following the instructions in [README](https://github.com/telerik/kendo-ui-core#building-only-what-you-need).
 
 Since Q3 2014, the necessary build scripts are shipped in the `src/` directory of the downloadable commercial bundles. To build a custom distribution from the shipped source, run the following shell commands.
 
@@ -73,16 +73,16 @@ Since Q3 2014, the necessary build scripts are shipped in the `src/` directory o
 
 ```sh
     cd src
-    npm install -g grunt-cli
+    npm install -g gulp
     npm install
-    grunt custom:autocomplete,dropdownlist
+    gulp custom -c autocomplete,dropdownlist
 ```
 
 List the components you want to be included in the custom build and separated them with comma (`,`). The example above will build a custom minified script which includes the AutoComplete and the DropDownList widgets.
 
 > **Important**  
 >
-> When complete, the Grunt command outputs a `kendo.custom.min.js` file in the `src/dist` directory. The Grunt build task automatically resolves the needed dependencies for each component, so you do not have to list them. Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
+> When complete, the `gulp` command outputs a `kendo.custom.min.js` file in the `src/dist` directory. The gulp build task automatically resolves the needed dependencies for each component, so you do not have to list them. Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
 
 ## See Also
 
