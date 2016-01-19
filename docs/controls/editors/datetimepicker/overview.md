@@ -180,7 +180,7 @@ The other way to disable dates is by adding a function and determine its return 
 
 The widget is designed to keep the input value unchanged, even when the typed date is invalid. This is due the following facts:
 
-- The widget allows different date parse formats, which require unrestricted user input. Refer to the [`parseFormats`](/api/javascript/ui/datepicker#configuration-parseFormats) option for more details.
+- The widget allows different date parse formats, which require unrestricted user input. Refer to the [`parseFormats`](/api/javascript/ui/datetimepicker#configuration-parseFormats) option for more details.
 - The widget does not update automatically the typed text, when it is invalid. This would lead to unexpected behavior if the widget changes the input value.
 
 The best way to validate the DateTimePicker widget is to use a client-validation framework, such as the [Kendo UI Validator]({% slug overview_kendoui_validator_widget %}). Thus you are able to provide meaningful error message to end users pointing them to the right actions to resolve the issue. Check our online validation demos for more details:
