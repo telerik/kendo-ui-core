@@ -17,7 +17,7 @@ Some articles were moved to other locations, which better correspond to the topi
 |:---                                       |:---                         |:---                     |
 | **Widget wrapper and widget element**     | **Framework and Utilities** > **Widgets** > **Widget wrapper and widget element** | **Getting Started** > **Widget Basics** > **Widget DOM Elements** |
 | **Destroy Kendo UI Widgets**              | **Framework and Utilities** > **Widgets** > **Destroy Kendo UI Widgets**          | **Getting Started** > **Widget Basics** > **Destroy Widgets**     |
-| *Create Your Own Kendo UI Widget by Inheriting from the Base Widget Class** | **Framework and Utilities** > **Widgets** > **Create Your Own Kendo UI Widget by Inheriting from the Base Widget Class** | **Getting Started** > **Widget Basics** > **Create Custom Widgets** |
+| **Create Your Own Kendo UI Widget by Inheriting from the Base Widget Class** | **Framework and Utilities** > **Widgets** > **Create Your Own Kendo UI Widget by Inheriting from the Base Widget Class** | **Getting Started** > **Widget Basics** > **Create Custom Widgets** |
 | **Data Attribute Initialization**         | **Framework and Utilities** > **Data Attribute Initialization** | **Getting Started** > **Widget Basics** > **Data Attributes** |
 | **Class-based Inheritance with Kendo UI** | **Framework and Utilities** > **Class-based Inheritance with Kendo UI** | **Framework and Utilities** > **Class** > **Overview**
 | **Methods and Events**                    | **Getting Started** > **Methods and Events** | **Getting Started** > **Widget Basics** > **Methods and Events** |
