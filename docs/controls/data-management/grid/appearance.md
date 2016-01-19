@@ -383,17 +383,26 @@ In some cases it may be possible to delay the initialization of the Grid, or cha
 
 ### Hover Effect on Table Rows
 
-As of Kendo UI 2016 Q1 row hover state styles are added to all Kendo UI themes. Hover is a useful UI state providing visual affordance especially across long table rows and in the editing mode of the Grid. However, there are scenarios in which the `hover` state might be misleading and is not needed.
+As of Kendo UI Q1 2016 row hover state styles are added to all Kendo UI themes. Hover is a useful UI state providing visual affordance especially across long table rows and in the editing mode of the Grid. However, there are scenarios in which the `hover` state might be misleading and is not needed.
 
-The example below demonstrates the CSS necessary to remove the hover style.
+There are two ways to remove the hover styling. One is to open the Kendo UI theme CSS file (e.g. `kendo.default.min.css`) and remove the following CSS rule:
 
-###### Example
+    .k-grid tr:hover {
+        /* ...background styles here... */
+    }
+    
+The other option is to use the following CSS code to override the hover styling.
 
-        .k-grid tr:hover
-        {
-            background: none;
-        }
+    .k-grid tr:not(.k-state-selected):hover {
+        background: none;
+        color: inherit;
+    }
+    
+    .k-grid tr.k-alt:not(.k-state-selected):hover {
+        background: #f1f1f1;
+    }
 
+The `#f1f1f1` value corresponds to the background color of `.k-alt` table rows. You can find the correct value for the Kendo UI theme that you are using by using the browser's DOM inspector. Alternatively, set a background color value or your preference.
 
 ## See Also
 
