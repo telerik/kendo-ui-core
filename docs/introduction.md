@@ -78,14 +78,18 @@ Kendo UI is also incorporated into products such as [Telerik Platform](http://ww
 
 ## Next Steps
 
-* [Getting Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Install Kendo UI as a Bower Package]({% slug kendoui_bower_packages_kendoui_installation %})
 * [Use Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
 * [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
-* [Initialize a Kendo UI Widget As a jQuery Plug-In]({% slug initialize_widgets_using_jquery_plugins_installation %})
-* [Initialize a Kendo UI Widget from Markup]({% slug initialize_widgets_using_markup_installation %})
-* [Call Widget Methods and Bind to Widget Events]({% slug widget_methodsand_events_kendoui_installation %})
+* [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
+* [Access Widget DOM Elements: wrapper and element]({% slug widgetwrapperandelement_references_gettingstarted %})
+* [Set Data Attributes]({% slug dataattributes_configuration_installation %})
+* [Call Widget Methods and Bind to Events]({% slug widget_methodsand_events_kendoui_installation %})
+* [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
+* [Create Custom Kendo UI Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
 
 ## Learning Resources
 

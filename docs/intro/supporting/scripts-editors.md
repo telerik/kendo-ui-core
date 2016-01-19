@@ -1,6 +1,6 @@
 ---
 title: Script Files for Editors
-page_title: Script Files for Editors | Kendo UI Installation
+page_title: Script Files for Editors | Kendo UI Getting Started
 description: "Check out the list with the script files for the Kendo UI Editors widgets."
 slug: scirpt_filesfor_editors_widgets
 position: 4
@@ -121,12 +121,12 @@ Below are listed the script files for the Kendo UI Editors widgets:
 
 Articles listing the script files for other Kendo UI components:
 
-+ [Script Files for Data Management]({% slug scirpt_filesfor_datamanagement_widgets %})  
++ [Script Files for Data Management Widgets]({% slug scirpt_filesfor_datamanagement_widgets %})  
 + [Script Files for Charts]({% slug script_filesfor_charts_widgets %})
 + [Script Files for Gauges]({% slug script_filesfor_gauges_widgets %})
 + [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})
 + [Script Files for Diagrams and Maps]({% slug script_filesfor_diagramsandmaps_widgets %})
-+ [Script Files for Scheduling]({% slug scirpt_filesfor_scheduling_widgets %})
++ [Script Files for Scheduling Widgets]({% slug scirpt_filesfor_scheduling_widgets %})
 + [Script Files for Layout]({% slug scirpt_filesfor_layout_widgets %})
 + [Script Files for Navigation]({% slug scirpt_filesfor_navigation_widgets %})
 + [Script Files for Interactivity and UX]({% slug scirpt_filesfor_interactivityandux_widgets %})

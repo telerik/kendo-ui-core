@@ -1,6 +1,6 @@
 ---
 title: CDN Services
-page_title: CDN Services | Kendo UI Installation
+page_title: CDN Services | Kendo UI Getting Started
 description: "Install HTML5 UI frameworks and widgets by using Kendo UI CDN service."
 previous_url: /install/cdn
 slug: kendoui_cdn_services_installation
@@ -99,10 +99,14 @@ Although the [Amazon CloudFront service](https://aws.amazon.com/cloudfront/) pro
 
 Other articles on getting started with Kendo UI:
 
-* [Getting Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
 * [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
 * [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
 * [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
 * [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
+* [Access Widget DOM Elements: wrapper and element]({% slug widgetwrapperandelement_references_gettingstarted %})
+* [Set Data Attributes]({% slug dataattributes_configuration_installation %})
 * [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})
+* [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
+* [Create Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})

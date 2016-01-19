@@ -1,6 +1,6 @@
 ---
 title: Web Browser and Operating System Support
-page_title: Web Browser and Operating System Support | Kendo UI Installation
+page_title: Web Browser and Operating System Support | Kendo UI Getting Started
 previous_url: /technical-requirements.html, /getting-started/technical-requirements, /browsers-support, /intro/browser-support
 description: "Browsers and operating systems supported by Kendo UI widgets and frameworks."
 slug: wbe_browserand_operating_system_support
@@ -15,7 +15,7 @@ position: 1
 
 ### Web Browser Support General
 
-Most [Kendo UI widgets](/intro/supporting/list-of-widgets) have no specific limitations as of the browser versions they support.
+Most [Kendo UI widgets]({% slug bundle_supportfor_kendoui_components %}) have no specific limitations as of the browser versions they support.
 
 | Browser           | Supported Versions            | Limitations
 | :---------------- | :---------------------------- | :---------------
@@ -28,7 +28,7 @@ Most [Kendo UI widgets](/intro/supporting/list-of-widgets) have no specific limi
 
 ### Hybrid UI
 
-The [hybrid UI widgets and frameworks](/intro/supporting/list-of-widgets) are intended for Cordova based deployments, and support the following mobile device browsers and their corresponding web view components:
+The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_components %}) are intended for Cordova based deployments, and support the following mobile device browsers and their corresponding web view components:
 
 | Browser           | Supported Versions            |
 | :---------------- | :---------------------------- |
@@ -39,7 +39,7 @@ The [hybrid UI widgets and frameworks](/intro/supporting/list-of-widgets) are in
 
 ### Charts, Gauges, Barcodes, Diagrams and Maps
 
-[Kendo UI widgets rendering data visualization](/intro/supporting/list-of-widgets) may require more recent browser versions as well. If you want to use them in your project, consider the information below.
+[Kendo UI widgets rendering data visualization]({% slug bundle_supportfor_kendoui_components %}) may require more recent browser versions as well. If you want to use them in your project, consider the information below.
 
 #### Fully supported browsers
 
@@ -127,10 +127,15 @@ To ensure the best performance of your project, make sure that you:
 
 Other articles on getting started with Kendo UI:
 
-* [Getting Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
 * [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
-* [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
 * [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
+* [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
+* [Access Widget DOM Elements: wrapper and element]({% slug widgetwrapperandelement_references_gettingstarted %})
+* [Set Data Attributes]({% slug dataattributes_configuration_installation %})
 * [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})
+* [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
+* [Create Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})

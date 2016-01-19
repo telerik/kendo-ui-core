@@ -1,6 +1,6 @@
 ---
 title: Script Files for Scheduling
-page_title: Script Files for Scheduling | Kendo UI Installation
+page_title: Script Files for Scheduling | Kendo UI Getting Started
 description: "Check out the list with the script files for the Kendo UI Scheduling widgets."
 slug: scirpt_filesfor_scheduling_widgets
 position: 9
@@ -80,7 +80,7 @@ Below are listed the script files for the Kendo UI Scheduling widgets:
 
 Articles listing the script files for other Kendo UI components:
 
-+ [Script Files for Data Management]({% slug scirpt_filesfor_datamanagement_widgets %})  
++ [Script Files for Data Management Widgets]({% slug scirpt_filesfor_datamanagement_widgets %})  
 + [Script Files for Editors]({% slug scirpt_filesfor_editors_widgets %})
 + [Script Files for Charts]({% slug script_filesfor_charts_widgets %})
 + [Script Files for Gauges]({% slug script_filesfor_gauges_widgets %})

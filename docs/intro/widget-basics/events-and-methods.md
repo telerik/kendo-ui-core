@@ -1,10 +1,10 @@
 ---
 title: Methods and Events
-page_title: Methods and Events | Kendo UI Installation
+page_title: Methods and Events | Kendo UI Getting Started
 description: "Learn how to obtain a reference to an initialized Kendo UI widget instance and call its methods and events."
-previous_url: /basics/events-and-methods, /intro/events-and-methods
+previous_url: /basics/events-and-methods, /intro/events-and-methods, /intro/installation/events-and-methods
 slug: widget_methodsand_events_kendoui_installation
-position: 8
+position: 3
 ---
 
 # Methods and Events
@@ -226,12 +226,10 @@ To unbind from a given event, you should keep a reference to the event handler f
 
 ## See Also
 
-Other articles on getting started with Kendo UI:
+Other articles on Kendo UI widget basics:
 
-* [Getting Started with Kendo UI]({% slug getting_started_installation_kendoui %})
-* [Kendo UI Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
-* [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
-* [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
-* [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
-* [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
-* [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
+* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Access Widget DOM Elements: wrapper and element]({% slug widgetwrapperandelement_references_gettingstarted %})
+* [Set Data Attributes]({% slug dataattributes_configuration_installation %})
+* [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
+* [Create Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
