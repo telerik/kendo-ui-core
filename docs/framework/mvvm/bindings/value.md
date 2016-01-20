@@ -141,6 +141,128 @@ The example below demonstrates how to use the `value` binding with a `select` el
 
 In the example, the second `option` is selected after calling the `kendo.bind` method. Its `value` attribute is equal to the value of the `id` field of the `selectedProduct`. If the user selects another option, the `selectedProduct` is set to the corresponding item from the `products` array.
 
+### Select with Options Created by Source Binding
+
+The example below demonstrates how to use the `value` binding with a `select` whose options are created by the `source` binding.
+
+###### Example
+
+    <select data-value-field="id" data-text-field="name"
+        data-bind="value: selectedProduct, source: products">
+    </select>
+    <script>
+    var viewModel = kendo.observable({
+        selectedProduct: 2, // note that the "id" of the second product is 2\. Thus the second product will be selected
+        products: [
+            { id: 1, name: "Coffee" },
+            { id: 2, name: "Tea" },
+            { id: 3, name: "Juice" }
+        ]
+    });
+
+    kendo.bind($("select"), viewModel);
+    </script>
+
+Again the second `option` is selected because its `value` is equal to the `selectedProduct` View-Model field. If the user selects another option, the `id` field of the corresponding item from the `products` array is set as the `selectedProduct`.
+
+## Data-bound widgets and value binding
+
+Kendo `select` widgets, like `AutoComplete`, `DropDownList`, `ComboBox`, `MultiSelect`, has a built-in [auto-binding](/api/javascript/ui/dropdownlist#configuration-autoBind) feature that defers the data loading.
+The `value` binding honors that option and behaves differently when widget is forced to deferred its loading. There are two basic cases based on the `autoBind` configuration value:
+
+### autoBind: true (default)
+
+When the [autoBind option](/api/javascript/ui/dropdownlist#configuration-autoBind) is set to `true`, the `value` binding will set the widget value using its [value](/api/javascript/ui/dropdownlist#methods-value) method. If the data is not loaded, then the widget will first load the data.
+
+###### Example
+
+    <select data-role="dropdownlist"
+            data-value-field="id"
+            data-text-field="name"
+            data-value-primitive="true"
+            data-bind="value: selectedProductId, source: products, events: { dataBound: widgetBound }">
+    </select>
+    <script>
+    var viewModel = kendo.observable({
+        selectedProductId: 2,
+        products: new kendo.data.DataSource({
+            data: [
+                { id: 1, name: "Coffee" },
+                { id: 2, name: "Tea" },
+                { id: 3, name: "Juice" }
+            ]
+        }),
+        widgetBound: function() {
+            alert("Widget is bound!");
+        }
+    });
+
+    kendo.bind($("select"), viewModel);
+    </script>
+
+### autoBind: false
+
+When the [autoBind option](/api/javascript/ui/dropdownlist#configuration-autoBind) is set to `false`, the `value` binding will not force the data loading, unless the `model` field is
+[**primitive value**](#use-the-value-binding-with-a-select-widget-to-update-the-view-model-field-with-the-value-field-when-the-initial-value-is-null).
+In other words, if the `model` field, bound to the widget, is a *complex object*, then the `value` binding will retrieve the [dataValueField](/api/javascript/ui/dropdownlist#configuration-dataTextField) and
+[dataTextField](/api/javascript/ui/dropdownlist#configuration-dataValueField) values without forcing the widget to request its data. If the `model` field is a **primitive value**,
+however, then the binding will force the data loading, it will call the widget's [value](/api/javascript/ui/dropdownlist#methods-value) method.
+
+###### Widget with autoBind: false and object value does not force binding
+
+    <!-- widget is not bound on load, even though the selected item is shown -->
+    <select data-role="dropdownlist"
+            data-value-field="id"
+            data-text-field="name"
+            data-auto-bind="false"
+            data-bind="value: selectedProductId, source: products, events: { dataBound: widgetBound }">
+    </select>
+    <script>
+    var viewModel = kendo.observable({
+        selectedProductId: { id: 2, name: "Tea" },
+        products: new kendo.data.DataSource({
+            data: [
+                { id: 1, name: "Coffee" },
+                { id: 2, name: "Tea" },
+                { id: 3, name: "Juice" }
+            ]
+        }),
+        widgetBound: function() {
+            alert("Widget is bound!");
+        }
+    });
+
+    kendo.bind($("select"), viewModel);
+    </script>
+
+###### Widget with autoBind: false and primitive value forces binding
+
+    <!-- widget is not bound on load, even though the selected item is shown -->
+    <select data-role="dropdownlist"
+            data-value-field="id"
+            data-text-field="name"
+            data-auto-bind="false"
+            data-value-primitive="true"
+            data-bind="value: selectedProductId, source: products, events: { dataBound: widgetBound }">
+    </select>
+    <script>
+    var viewModel = kendo.observable({
+        selectedProductId: 2,
+        products: new kendo.data.DataSource({
+            data: [
+                { id: 1, name: "Coffee" },
+                { id: 2, name: "Tea" },
+                { id: 3, name: "Juice" }
+            ]
+        }),
+        widgetBound: function() {
+            alert("Widget is bound!");
+        }
+    });
+
+    kendo.bind($("select"), viewModel);
+    </script>
+
 ### Update View-Model Fields with Value Field of Primitive Value
 
 You can also use the `value` binding with a View-Model field which is of primitive type.
@@ -165,31 +287,8 @@ The example below demonstrates how to use the `value` binding with `select` to u
     kendo.bind($("select"), viewModel);
     </script>
 
-By default, the `value` binding for the `select` widgets&mdash;`AutoComplete`, `DropDownList`, `ComboBox`, `MultiSelect`&mdash;uses the selected item from the data to update the View-Model field when the initial value is `null`. The `data-value-primitive` attribute can be used to specify that the View-Model field should be updated with the item value field instead.
-
-### Select with Options Created by Source Binding
-
-The example below demonstrates how to use the `value` binding with a `select` whose options are created by the `source` binding.
-
-###### Example
-
-    <select data-value-field="id" data-text-field="name"
-        data-bind="value: selectedProduct, source: products">
-    </select>
-    <script>
-    var viewModel = kendo.observable({
-        selectedProduct: 2, // note that the "id" of the second product is 2\. Thus the second product will be selected
-        products: [
-            { id: 1, name: "Coffee" },
-            { id: 2, name: "Tea" },
-            { id: 3, name: "Juice" }
-        ]
-    });
-
-    kendo.bind($("select"), viewModel);
-    </script>
-
-Again the second `option` is selected because its `value` is equal to the `selectedProduct` View-Model field. If the user selects another option, the `id` field of the corresponding item from the `products` array is set as the `selectedProduct`.
+By default, the `value` binding for the `select` widgets&mdash;`AutoComplete`, `DropDownList`, `ComboBox`, `MultiSelect`&mdash;uses the selected item from the data to update the View-Model field when the initial value is `null`.
+The `data-value-primitive` attribute, that sets [valuePrimitive](/api/javascript/ui/dropdownlist#configuration-valuePrimitive) option, can be used to specify that the View-Model field should be updated with the item value field instead.
 
 ## Multiple Selections
 
