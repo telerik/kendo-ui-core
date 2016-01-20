@@ -331,7 +331,7 @@ The last Grid column has no right border by design, so that no double border app
         border-right: 1px solid #ccc;
     }
 
-The `#ccc` border color value should match the cell border color from the [Kendo UI theme](/styles-and-layout/appearance-styling). It can be obtained by checking the table cell styles with a DOM inspector.
+The `#ccc` border color value should match the cell border color from the [Kendo UI theme]({% slug themesandappearnce_kendoui_desktopwidgets %}). It can be obtained by checking the table cell styles with a DOM inspector.
 
 ### Locking
 
@@ -399,14 +399,14 @@ There are two ways to remove the hover styling. One is to open the Kendo UI them
     .k-grid tr:hover {
         /* ...background styles here... */
     }
-    
+
 The other option is to use the following CSS code to override the hover styling.
 
     .k-grid tr:not(.k-state-selected):hover {
         background: none;
         color: inherit;
     }
-    
+
     .k-grid tr.k-alt:not(.k-state-selected):hover {
         background: #f1f1f1;
     }
