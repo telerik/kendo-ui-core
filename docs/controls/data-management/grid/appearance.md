@@ -324,6 +324,15 @@ When Grid scrolling is `enabled` and a column is resized, all other columns will
 * If it is equal to the Grid width, then no horizontal scrollbar will be visible.
 * If it is less than the Grid width, then empty space after the last column will appear.
 
+The last Grid column has no right border by design, so that no double border appears at the right end of the Grid if the Grid table width matches the Grid widget width, which is the most common scenario. If needed, a right border can be applied with the following CSS code:
+
+    .k-grid-header-wrap > table,
+    .k-grid-content > table {
+        border-right: 1px solid #ccc;
+    }
+
+The `#ccc` border color value should match the cell border color from the [Kendo UI theme](/styles-and-layout/appearance-styling). It can be obtained by checking the table cell styles with a DOM inspector.
+
 ### Locking
 
 Locked (frozen) columns allow some columns to be visible at all times during horizontal Grid scrolling.
