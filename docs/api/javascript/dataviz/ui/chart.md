@@ -11071,6 +11071,8 @@ The top margin of the labels.
 
 The padding of the labels. A numeric value will set all paddings.
 
+> Bar and column series always apply full padding and will ignore this setting.
+
 #### Example - set the chart series label padding as a number
 
     <div id="chart"></div>
