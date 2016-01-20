@@ -9,96 +9,38 @@ position: 4
 
 # RequireJS
 
-The minified Kendo UI JavaScript files are [AMD modules](https://en.wikipedia.org/wiki/Asynchronous_module_definition) and work with compatible loaders such as [RequireJS](http://requirejs.org/). You can use this feature to load only the needed Kendo UI JavaScript files instead of `kendo.all.min.js`.
+> As of 2016, The RequireJS project is mostly superseeded by solutions like [Webpack](http://webpack.github.io/), [Browserify](http://browserify.org/) and [SystemJS](https://github.com/systemjs/systemjs), which provide much more extensible API.
+> You may check the respective help articles about their integration, too.
 
-> **Important**
->
-> Only the minified Kendo UI JS files (`.min.js`) are AMD modules. The source files (`.js`) and the combined files (`kendo.all.min.js`) are not AMD modules and require [additional configuration]({% slug requirejs_integration_kendoui %}#using-kendoallminjs-with-requirejs) to work with RequireJS.
+The minified Kendo UI JavaScript files are [AMD modules](https://en.wikipedia.org/wiki/Asynchronous_module_definition) and work with compatible loaders such as [RequireJS](http://requirejs.org/). You can use this feature to load only the needed Kendo UI JavaScript files instead of `kendo.all.min.js`.
 
 ## Load Kendo UI Using RequireJS
 
-### From CDN
-
-The example below demonstrates how to load the Kendo UI JavaScript files via [CDN]({% slug kendoui_cdn_services_installation %}).
-
-###### Example
-
-```html
-<!doctype html>
-<html>
-    <head>
-        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.805/styles/kendo.common-material.min.css">
-        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.805/styles/kendo.material.min.css">
-        <!-- Include RequireJS and use the data-main attribute to specify the default JS file location -->
-        <script data-main="http://kendo.cdn.telerik.com/2015.2.805/js/" src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.min.js"></script>
-    </head>
-    <body>
-        <div id="grid"></div>
-        <select id="dropdownlist"></select>
-        <script>
-        require.config({
-           paths: {
-               // Specify the location of the jQuery JS file since it is loaded from the jQuery CDN
-              "jquery": "http://code.jquery.com/jquery-1.9.1.min"
-           }
-        });
-
-        require([ "jquery", "kendo.dropdownlist.min", "kendo.grid.min" ], function($) {
-          // Initialize the Kendo UI widgets here
-          $("#grid").kendoGrid({
-            dataSource:{
-              data: [{name: "John Doe"}]
-            }
-          });
-
-          $("#dropdownlist").kendoDropDownList({
-            dataSource: {
-              data: [{name:"Jane Doe", value: 1}, {name:"John Doe", value: 2}]
-            },
-            dataTextField: "name",
-            dataValueField: "value"
-          });
-        });
-        </script>
-    </body>
-</html>
-```
-
 ### From Local Directory
 
-The example below demonstrates how to load the Kendo UI JavaScript files from a local directory, e.g. `/js/kendo`.
+The example below demonstrates how to load the Kendo UI JavaScript files from a local directory, e.g. `js/kendo`.
 
-###### Example
-
-```
-<!doctype html>
+```html
+<!DOCTYPE HTML>
 <html>
     <head>
-        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.805/styles/kendo.common-material.min.css">
-        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.805/styles/kendo.material.min.css">
+        <link rel="stylesheet" href="../dist/styles/web/kendo.common-material.core.min.css">
+        <link rel="stylesheet" href="../dist/styles/web/kendo.material.min.css">
         <!-- Include RequireJS -->
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
     </head>
     <body>
-        <div id="grid"></div>
         <select id="dropdownlist"></select>
         <script>
         require.config({
-           paths: {
-              // Specify the location of the jQuery JS file
-              "jquery": "http://code.jquery.com/jquery-1.9.1.min",
-              // Specify the directory which contains the minified Kendo UI JS files. It should be used when requiring the Kendo UI JS files.
-              "kendo": "/js/kendo"
-           }
+          baseUrl: "js/kendo", // the path where the kendo scripts are present
+          paths: {
+            "jquery": "http://code.jquery.com/jquery-1.9.1.min",
+          }
         });
-        // Require jquery and the Kendo UI JS files. Note that the "kendo" path is prepended (configured above)
-        require([ "jquery", "kendo/kendo.dropdownlist.min", "kendo/kendo.grid.min" ], function($) {
-          // Initialize the Kendo UI widgets here
-          $("#grid").kendoGrid({
-            dataSource:{
-              data: [{name: "John Doe"}]
-            }
-          });
+
+        require([ "jquery", "kendo.dropdownlist.min" ], function($, kendo) {
+          console.log(kendo)
 
           $("#dropdownlist").kendoDropDownList({
             dataSource: {
@@ -113,109 +55,27 @@ The example below demonstrates how to load the Kendo UI JavaScript files from a 
 </html>
 ```
 
-## Features
-
-### Create AMD Modules Depending on Kendo UI
-
-The example below demonstrates how to create your own AMD module which depends on Kendo UI and assumes the following:
-
-* The AMD module is called `main.js` and resides in the `/js/app` local directory.
-* The minified Kendo UI JavaScript files are located in the `/js/app` local directory.
-* The page that uses the AMD module is `index.html`
-
-#### `main.js`
-
-###### Example
-
-    define(["jquery", "kendo/kendo.dropdownlist.min", "kendo/kendo.grid.min"], function($) {
-        $("#grid").kendoGrid({
-            dataSource:{
-                data: [{name: "John Doe"}]
-            }
-        });
-
-        $("#dropdownlist").kendoDropDownList({
-          dataSource: {
-            data: [{name:"Jane Doe", value: 1}, {name:"John Doe", value: 2}]
-          },
-          dataTextField: "name",
-          dataValueField: "value"
-        });
-    });
-
-#### `index.html`
-
-###### Example
-
-    <!doctype html>
-    <html>
-        <head>
-            <title>AMD module that uses Kendo UI</title>
-            <!-- Include RequireJS -->
-            <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.min.js"></script>
-        </head>
-        <body>
-            <div id="grid"></div>
-            <select id="dropdownlist"></select>
-            <script>
-            require.config({
-               paths: {
-                  // Specify the location of the jQuery JS file
-                  "jquery": "http://code.jquery.com/jquery-1.9.1.min",
-                  // Specify the directory which contains the minified Kendo UI JS files. It should be used when requiring the Kendo UI JS files.
-                  "kendo": "/js/kendo",
-                  // Specify the directory which contains the AMD module. It should be used when requiring that file.
-                  "app": "/js/app"
-               }
-            });
-
-            // Require the main.js AMD module. RequireJS will load its dependencies - jQuery and the Kendo UI Grid and DropDownList.
-            require(["app/main" ], function() {
-            });
-            </script>
-        </body>
-    </html>
-
-### Use `kendo.all.min.js` with RequireJS
-
-The combined `kendo.all.min.js` file is not an AMD module and requires a [shim](http://requirejs.org/docs/api.html#config-shim).
-
-The example below demonstrates how to achieve this.
-
-###### Example
+### Use a bundle script with RequireJS
 
 ```html
-<!doctype html>
+<!DOCTYPE HTML>
 <html>
     <head>
-        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.805/styles/kendo.common-material.min.css">
-        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.805/styles/kendo.material.min.css">
-        <!-- Include RequireJS -->
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.min.js"></script>
+        <link rel="stylesheet" href="../dist/styles/web/kendo.common-material.core.min.css">
+        <link rel="stylesheet" href="../dist/styles/web/kendo.material.min.css">
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
     </head>
     <body>
-        <div id="grid"></div>
         <select id="dropdownlist"></select>
         <script>
         require.config({
-           paths: {
-              "jquery": "http://code.jquery.com/jquery-1.9.1.min",
-              "kendo.all.min": "http://kendo.cdn.telerik.com/2015.2.902/js/kendo.all.min"
-           },
-           shims: {
-              "kendo.all.min": {
-                 deps: [ "jquery" ]
-              }
-           }
+          baseUrl: "js/kendo", // the path where the kendo scripts are present
+          paths: {
+            "jquery": "http://code.jquery.com/jquery-1.9.1.min",
+         }
         });
 
-        require([ "jquery", "kendo.all.min" ], function($) {
-          $("#grid").kendoGrid({
-            dataSource:{
-              data: [{name: "John Doe"}]
-            }
-          });
-
+        require([ "jquery", "kendo.ui.core.min" ], function($, kendo) {
           $("#dropdownlist").kendoDropDownList({
             dataSource: {
               data: [{name:"Jane Doe", value: 1}, {name:"John Doe", value: 2}]
@@ -236,35 +96,35 @@ The example below demonstrates how to load AngularJS and initialize it with [`an
 ###### Example
 
 ```html
-<!doctype html>
+<!DOCTYPE HTML>
 <html>
     <head>
-        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.805/styles/kendo.common-material.min.css">
-        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.805/styles/kendo.material.min.css">
-        <!-- Include RequireJS -->
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.min.js"></script>
+        <link rel="stylesheet" href="../dist/styles/web/kendo.common-material.core.min.css">
+        <link rel="stylesheet" href="../dist/styles/web/kendo.material.min.css">
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
     </head>
     <body>
         <div ng-controller="controller">
           <select kendo-drop-down-list k-options="options"></select>
         </div>
-        <script>
-          require.config({
-            paths: {
-              "jquery": "http://code.jquery.com/jquery-1.9.1.min",
-              "angular": "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min",
-              "kendo": "http://kendo.cdn.telerik.com/2015.2.902/js/"
-            },
-            shim: {
-              "angular": { deps: ["jquery"] },
-              "kendo/kendo.angular.min": { deps: ["angular"] },
-              "app": {
-                 "deps": ["angular"]
-              }
-            }
-          });
 
-          require([ "angular", "kendo/kendo.dropdownlist.min", "kendo/kendo.angular.min" ], function() {
+        <script>
+        require.config({
+          baseUrl: "../dist/js/", // the path where the kendo scripts are present
+          paths: {
+            "angular": "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min",
+            "jquery": "http://code.jquery.com/jquery-1.9.1.min",
+           },
+          shim: {
+            "angular": { deps: ["jquery"] },
+            "kendo.angular.min": { deps: ["angular"] },
+            "app": {
+               "deps": ["angular"]
+            }
+          }
+        });
+
+        require([ "angular", "kendo.angular.min", "kendo.dropdownlist.min" ], function() {
             var app = angular.module("app", ["kendo.directives"]);
 
             app.controller("controller", ["$scope", function($scope) {
@@ -278,122 +138,11 @@ The example below demonstrates how to load AngularJS and initialize it with [`an
             }]);
 
             angular.bootstrap(document, ["app"]);
-          });
-        </script>
-    </body>
-</html>
-```
-
-### Use JSZip with RequireJS
-
-JSZip is required by the Excel export feature of Kendo UI. However it does not come in an AMD format and needs a shim, similar to using `kendo.all.min.js`.
-
-The example below demonstrates how to use JSZip with RequireJS.
-
-###### Example
-
-```html
-<!doctype html>
-<html>
-    <head>
-        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.805/styles/kendo.common-material.min.css">
-        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.2.805/styles/kendo.material.min.css">
-        <!-- Include RequireJS and use the data-main attribute to specify the default JS file location -->
-        <script data-main="http://kendo.cdn.telerik.com/2015.2.805/js/" src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.min.js"></script>
-    </head>
-    <body>
-        <div id="grid"></div>
-        <script>
-        require.config({
-           paths: {
-               // Specify the location of the jQuery JS file since it is loaded from the jQuery CDN
-              "jquery": "http://code.jquery.com/jquery-1.9.1.min",
-              "jszip" : "http://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip"
-           },
-        });
-
-        require([ "jquery", "jszip", "kendo.grid.min" ], function($, JSZip) {
-          // Expose JSZip as a global
-          window.JSZip = JSZip;
-          // Initialize the Kendo UI widgets
-          $("#grid").kendoGrid({
-            toolbar: ["excel"],
-            excel: {
-              fileName: "Kendo UI Grid Export.xlsx",
-              proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
-            },
-            dataSource: {
-              type: "odata",
-              transport: {
-                read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
-              },
-              schema:{
-                model: {
-                  fields: {
-                    ProductName: { type: "string" },
-                    UnitPrice: { type: "number" }
-                  }
-                }
-              },
-              pageSize: 7,
-            },
-            columns: [
-              { width: 300, field: "ProductName", title: "Product Name"},
-              { width: 300, field: "UnitPrice", title: "Unit Price"}
-            ]
-          });
         });
         </script>
     </body>
 </html>
 ```
-
-### Use Kendo UI Custom Download with AngularJS and RequireJS
-
-You are going to need a custom `shim` configuration for such a scenario. The application is initialized using `angular.bootstrap` only after all the scripts are loaded.
-
-###### Example
-
-    <div id="example" ng-controller="MyCtrl">
-        <br>
-        <select kendo-drop-down-list k-options="myOptions"></select>
-      </div>
-      <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.min.js"></script>
-      <script>
-        require.config({
-          paths: {
-            "jquery" : "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min",
-            "angular": "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min",
-            "kendo": "path-to-your-kendo-custom.min.js file"
-          },
-          shim: {
-            "kendo": ["jquery"],
-            "angular" : ["jquery"],
-            "app": {
-              deps: ["angular", "kendo"] //set dependencies
-            }
-          }
-        });
-
-        require([
-          "angular",
-          "kendo"
-        ], initApp);
-
-        function initApp() {
-          var app = angular.module("app", ["kendo.directives"]);
-          app.controller("MyCtrl", function($scope){
-            $scope.myOptions = {
-              dataSource: {
-                data: [{name:"Jane Doe", value: 1}, {name:"John Doe", value: 2}]
-              },
-              dataTextField: "name",
-              dataValueField: "value"
-            }
-          })
-          angular.bootstrap(document, ["app"]); //initialize application
-        }
-      </script>
 
 ## See Also
 
