@@ -19,12 +19,12 @@ The minified versions of all JavaScript files are available via the following UR
 `http://kendo.cdn.telerik.com/VERSION/js/FILENAME.min.js`
 `http://kendo.cdn.telerik.com/VERSION/styles/FILENAME.min.css`
 
-For example, the 2014.1.318 version can be loaded from:
-`http://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js`
-`http://kendo.cdn.telerik.com/2014.1.318/styles/kendo.common.min.css`
+For example, the {{ site.cdnVersion }} version can be loaded from:  
+`http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js`
+`http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css`
 
 Use the following URL to load the minified Kendo UI Core script (available since Q1 2014 SP1):
-`http://kendo.cdn.telerik.com/2014.1.416/js/kendo.ui.core.min.js`
+`http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.ui.core.min.js`
 
 > **Important**
 >
@@ -32,8 +32,8 @@ Use the following URL to load the minified Kendo UI Core script (available since
 
 ### Via HTTPS Protocol
 
-To access the Kendo UI CDN service through the HTTPS protocol, use the same host name as above, only replacing the scheme (protocol) with `https`:
-`https://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js`
+To access the Kendo UI CDN service through the HTTPS protocol, use the same host name as above, only replacing the scheme (protocol) with `https`:  
+`https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js`
 
 > **Important**
 >
@@ -59,10 +59,10 @@ Although the [Amazon CloudFront service](https://aws.amazon.com/cloudfront/) pro
     <html>
     <head>
         <title>Welcome to Kendo UI</title>
-        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2014.1.318/styles/kendo.common.min.css" />
-        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2014.1.318/styles/kendo.blueopal.min.css" />
+        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css" />
+        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.blueopal.min.css" />
 
-        <script src="http://kendo.cdn.telerik.com/2014.1.318/js/jquery.min.js"></script>
+        <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jquery.min.js"></script>
         <script>
             if (typeof jQuery == "undefined") {
                 // fallback to local jQuery
@@ -70,7 +70,7 @@ Although the [Amazon CloudFront service](https://aws.amazon.com/cloudfront/) pro
             }
         </script>
 
-        <script src="http://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js"></script>
+        <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
         <script>
             if (typeof kendo == "undefined") {
                 // checking for loaded CSS files is cumbersome,
@@ -93,7 +93,7 @@ Although the [Amazon CloudFront service](https://aws.amazon.com/cloudfront/) pro
 
 > **Important**
 >
-> You will be able to find more information on the topic at [Scott HanselMann - Fallback from CDN to Local Scripts](http://www.hanselman.com/blog/CDNsFailButYourScriptsDontHaveToFallbackFromCDNToLocalJQuery.aspx).
+> Find more information on the topic at [Scott HanselMann - Fallback from CDN to Local Scripts](http://www.hanselman.com/blog/CDNsFailButYourScriptsDontHaveToFallbackFromCDNToLocalJQuery.aspx).
 
 ## See Also
 
