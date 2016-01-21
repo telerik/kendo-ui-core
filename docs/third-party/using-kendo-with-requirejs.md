@@ -69,9 +69,9 @@ The example below demonstrates how to load the Kendo UI JavaScript files from a 
         <select id="dropdownlist"></select>
         <script>
         require.config({
-          baseUrl: "js/kendo", // the path where the kendo scripts are present
           paths: {
             "jquery": "http://code.jquery.com/jquery-1.9.1.min",
+            "kendo.ui.core.min": "js/kendo/kendo.ui.core.min" // the name of the module should match the file name - paths won't work.
          }
         });
 
@@ -110,21 +110,18 @@ The example below demonstrates how to load AngularJS and initialize it with [`an
 
         <script>
         require.config({
-          baseUrl: "../dist/js/", // the path where the kendo scripts are present
           paths: {
             "angular": "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min",
             "jquery": "http://code.jquery.com/jquery-1.9.1.min",
-           },
+            "kendo.ui.core.min": "../dist/js/kendo.ui.core.min"
+          },
           shim: {
             "angular": { deps: ["jquery"] },
-            "kendo.angular.min": { deps: ["angular"] },
-            "app": {
-               "deps": ["angular"]
-            }
+            "kendo.ui.core.min": { deps: ["angular"] }
           }
         });
 
-        require([ "angular", "kendo.angular.min", "kendo.dropdownlist.min" ], function() {
+        require([ "angular", "kendo.ui.core.min" ], function() {
             var app = angular.module("app", ["kendo.directives"]);
 
             app.controller("controller", ["$scope", function($scope) {
