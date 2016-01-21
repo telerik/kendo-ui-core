@@ -22,7 +22,7 @@ The Kendo UI DropDownList widget can be initialized in three ways:
 
 The DropDownList looks and operates consistently regardless of the initialization type you choose to apply.
 
-> **Important**  
+> **Important**
 > * As DropDownList should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
 > * The widget copies any styles and CSS classes from the input element to the wrapper element and visible input.
 
@@ -71,7 +71,7 @@ The example below demonstrates how to initialize the DropDownList by binding it 
 
 The DropDownList can be bound to remote data arrays via the [DataSource component](/framework/datasource/overview) - an abstraction for local and remote data. Remote data binding is appropriate for larger data sets, so that items are loaded on-demand, when displayed. The DataSource can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
-The example below demonstrates how to initialize the DropDownList by binding it to a remote data service.   
+The example below demonstrates how to initialize the DropDownList by binding it to a remote data service.
 
 ###### Example
 
@@ -132,7 +132,7 @@ The example below demonstrates how to define an item template.
 
 The example below demonstrates how to define a value template.
 
-> **Important**  
+> **Important**
 > Note that value templates should consist of inline HTML elements only.
 
 ###### Example
@@ -226,6 +226,10 @@ The example below demonstrates how to set the list dimensions through MVVM bindi
     $("#ddl").data("kendoDropDownList").list.width(400);
   </script>
 ```
+
+### Support for label Elements
+
+Because of its complex rendering, focusing the widget by using a `label` element requires additional implementation. For more information about how to do it, check [this Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
 
 ## See Also
 
