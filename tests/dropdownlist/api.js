@@ -735,6 +735,7 @@
 
     asyncTest("value method selects item that exists only in unfiltered source (async)", 2, function() {
         dropdownlist = createDropDownList({
+            filter: "startswith",
             dataTextField: "text",
             dataValueField: "value",
             dataSource: {
@@ -770,6 +771,29 @@
                 });
             });
         });
+    });
+
+    test("value method keeps datasource filters if widget filtration is not enabled", function() {
+        dropdownlist = createDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}],
+            filter: "none"
+        });
+
+        dropdownlist.dataSource.filter({
+            field: "text",
+            operator: "contains",
+            value: "foo"
+        });
+
+        dropdownlist.value(1);
+
+        var filter = dropdownlist.dataSource.filter();
+        filter = filter.filters[0];
+
+        ok(filter);
+        equal(filter.value, "foo");
     });
 
     test("dataItem() returns dataItem of the selected LI on init", function() {
