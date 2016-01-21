@@ -491,6 +491,29 @@ The [Create a custom number format](https://support.office.com/en-us/article/Cre
     });
     </script>
 
+### sheets.rows.cells.formula `String`
+
+Sets the formula that Excel uses to compute and display the cell value
+
+#### Example - set the cell formula
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+      sheets: [
+          {
+              rows: [
+                  { cells: [ { value: 1 }, { formula: "=SUM(A:A)" } ] },
+                  { cells: [ { value: 2 } ] }
+              ]
+          }
+      ]
+    });
+    kendo.saveAs({
+      dataURI: workbook.toDataURL(),
+      fileName: "Test.xlsx"
+    });
+    </script>
+
 ### sheets.rows.cells.hAlign `String`
 
 Deprecated in versions 2015.3 and newer. Use [textAlign](#configuration-sheets.rows.cells.textAlign) instead.
