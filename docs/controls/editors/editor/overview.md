@@ -98,10 +98,10 @@ You can temporarily make the Editor readonly by using the following approach:
         editorBody = $(editor.body);
 
     // make readonly
-    editorBody.add("td", editorBody).removeAttr("contenteditable");
+    editorBody.removeAttr("contenteditable");
 
     // make editable
-    editorBody.add("td", editorBody).attr("contenteditable", true);
+    editorBody.attr("contenteditable", true);
 
 ## Display
 
