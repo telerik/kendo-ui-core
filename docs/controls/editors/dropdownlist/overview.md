@@ -133,6 +133,7 @@ The example below demonstrates how to define an item template.
 The example below demonstrates how to define a value template.
 
 > **Important**
+>
 > Note that value templates should consist of inline HTML elements only.
 
 ###### Example
@@ -227,7 +228,7 @@ The example below demonstrates how to set the list dimensions through MVVM bindi
   </script>
 ```
 
-### Support for label Elements
+### Support for Elements: label
 
 Because of its complex rendering, focusing the widget by using a `label` element requires additional implementation. For more information about how to do it, check [this Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
 
