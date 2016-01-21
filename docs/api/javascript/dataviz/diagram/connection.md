@@ -248,6 +248,17 @@ Specifies the name of the target shape connector that should be used by default.
 
 Specifies the connection type. The supported values are `"polyline"` and `"cascading"`.
 
+## Fields
+
+### dataItem `Object`
+The data item, if any, for the connection.
+
+### from `kendo.dataviz.diagram.Shape`
+The shape, if any, that the connection originates from.
+
+### to `kendo.dataviz.diagram.Shape`
+The shape, if any, that the connection points to.
+
 ## Methods
 
 ### source
@@ -352,8 +363,6 @@ This is the union of the endpoints and the intermediate points.
 Redraws the Connection with the given options.
 
 ##### Example - changing the Connection after it has been added
-
-![Connection redraw.](/api/dataviz/diagram/connectionredraw.png)
 
     <div id="diagram"></div>
     <script>

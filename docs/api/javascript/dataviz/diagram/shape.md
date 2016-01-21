@@ -273,3 +273,31 @@ One of the four sides of a bound; "left", "right", "top", "bottom". If none spec
 ### redraw
 
 Renders the shape with the given options. It redefines the options and redraws the shape accordingly.
+
+#### Parameters
+
+##### options `Object`
+The object containing a subset of options to change. Follows the same structure as the [configuration](#configuration).
+
+##### Example - Redraw shape with new options
+
+    <div id="diagram"></div>
+    <script>
+        $("#diagram").kendoDiagram({
+          dataSource: {
+              data: [{ "items": [{ items: [{}] }] }],
+              schema: { model: { children: "items" } }
+          },
+          layout: {
+              type: "tree"
+          },
+          dataBound: function(e) {
+              e.sender.shapes[0].redraw({
+                  fill: {
+                      color: "green"
+                  }
+              });
+          }
+        });
+    </script>
+
