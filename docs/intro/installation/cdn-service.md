@@ -15,24 +15,24 @@ The Kendo UI CDN is hosted on [Amazon CloudFront](https://aws.amazon.com/cloudfr
 
 ### Via HTTP Protocol
 
-The minified versions of all JavaScript files are available via the following URLs:  
-`https://kendo.cdn.telerik.com/VERSION/js/FILENAME.min.js`
-`https://kendo.cdn.telerik.com/VERSION/styles/FILENAME.min.css`
+The minified versions of all JavaScript files are available via the following URLs:
+`http://kendo.cdn.telerik.com/VERSION/js/FILENAME.min.js`
+`http://kendo.cdn.telerik.com/VERSION/styles/FILENAME.min.css`
 
-For example, the 2014.1.318 version can be loaded from:  
-`https://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js`
-`https://kendo.cdn.telerik.com/2014.1.318/styles/kendo.common.min.css`
+For example, the 2014.1.318 version can be loaded from:
+`http://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js`
+`http://kendo.cdn.telerik.com/2014.1.318/styles/kendo.common.min.css`
 
 Use the following URL to load the minified Kendo UI Core script (available since Q1 2014 SP1):
-`https://kendo.cdn.telerik.com/2014.1.416/js/kendo.ui.core.min.js`
+`http://kendo.cdn.telerik.com/2014.1.416/js/kendo.ui.core.min.js`
 
-> **Important**  
+> **Important**
 >
 > The `http://cdn.kendostatic.com/` URL will remain active, but is no longer recommended for new projects.
 
 ### Via HTTPS Protocol
 
-To access the Kendo UI CDN service through the HTTPS protocol, use the same host name as above, only replacing the scheme (protocol) with `https`:  
+To access the Kendo UI CDN service through the HTTPS protocol, use the same host name as above, only replacing the scheme (protocol) with `https`:
 `https://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js`
 
 > **Important**
@@ -91,7 +91,7 @@ Although the [Amazon CloudFront service](https://aws.amazon.com/cloudfront/) pro
     </body>
     </html>
 
-> **Important**  
+> **Important**
 >
 > You will be able to find more information on the topic at [Scott HanselMann - Fallback from CDN to Local Scripts](http://www.hanselman.com/blog/CDNsFailButYourScriptsDontHaveToFallbackFromCDNToLocalJQuery.aspx).
 
