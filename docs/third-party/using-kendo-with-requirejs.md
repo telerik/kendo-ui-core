@@ -9,16 +9,19 @@ position: 4
 
 # RequireJS
 
-> As of 2016, The RequireJS project is mostly superseeded by solutions like [Webpack](http://webpack.github.io/), [Browserify](http://browserify.org/) and [SystemJS](https://github.com/systemjs/systemjs), which provide much more extensible API.
-> You may check the respective help articles about their integration, too.
+>**Important**
+> * As of 2016, the RequireJS project is mostly superseded by solutions like [Webpack](http://webpack.github.io/), [Browserify](http://browserify.org/) and [SystemJS](https://github.com/systemjs/systemjs), which provide much more extensible API.
+> * You may check the help articles on their integration too&mdash;[Webpack support]({% slug webpacksupport_integration_kendoui %}) and [SystemJS support]({% slug systemjs_integration_kendoui %}).
 
 The minified Kendo UI JavaScript files are [AMD modules](https://en.wikipedia.org/wiki/Asynchronous_module_definition) and work with compatible loaders such as [RequireJS](http://requirejs.org/). You can use this feature to load only the needed Kendo UI JavaScript files instead of `kendo.all.min.js`.
 
 ## Load Kendo UI Using RequireJS
 
-### From Local Directory
+### Load Kendo UI from Local Directory
 
 The example below demonstrates how to load the Kendo UI JavaScript files from a local directory, e.g. `js/kendo`.
+
+###### Example
 
 ```html
 <!DOCTYPE HTML>
@@ -55,7 +58,11 @@ The example below demonstrates how to load the Kendo UI JavaScript files from a 
 </html>
 ```
 
-### Use a bundle script with RequireJS
+### Use Bundle Scripts with RequireJS
+
+The example below demonstrates how to use a bundle script with RequireJS.
+
+###### Example
 
 ```html
 <!DOCTYPE HTML>
