@@ -491,7 +491,6 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var options = that.options;
             var ignoreCase = options.ignoreCase;
-            var filter = options.filter;
             var field = options.dataTextField;
             var inputValue = that.input.val();
             var expression;
@@ -514,7 +513,7 @@ var __meta__ = { // jshint ignore:line
                 expression = {
                     value: ignoreCase ? word.toLowerCase() : word,
                     field: field,
-                    operator: filter,
+                    operator: options.filter,
                     ignoreCase: ignoreCase
                 };
 

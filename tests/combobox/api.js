@@ -776,6 +776,7 @@ asyncTest("value method selects item that exists only in unfiltered source (asyn
     var combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
+        filter: "startswith",
         dataSource: {
             transport: {
                 read: function(options) {
@@ -809,6 +810,29 @@ asyncTest("value method selects item that exists only in unfiltered source (asyn
             });
         });
     });
+});
+
+test("value method keeps datasource filters if widget filtration is not enabled", function() {
+    combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}],
+        filter: "none"
+    });
+
+    combobox.dataSource.filter({
+        field: "text",
+        operator: "contains",
+        value: "foo"
+    });
+
+    combobox.value(1);
+
+    var filter = combobox.dataSource.filter();
+    filter = filter.filters[0];
+
+    ok(filter);
+    equal(filter.value, "foo");
 });
 
 test("ComboBox does not change text if custom value is equal to options.value", function() {
