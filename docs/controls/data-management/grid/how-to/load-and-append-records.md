@@ -13,6 +13,8 @@ There are two things for you to do as prerequisites for applying this functional
 1. Subscribe to the `scroll` event of the Grid data container and increment the page size by a desired value.
 2. Use a flag to prevent multiple simultaneous page size increments. The flag should be set in the `scroll` event handler, and cleared in the `dataBound` event handler of the Grid.
 
+**Please note that the functionality below is not intended to be used together with virtual scrolling.**
+
 ###### Example
 
 ```html
