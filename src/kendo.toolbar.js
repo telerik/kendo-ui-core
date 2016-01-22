@@ -461,7 +461,7 @@ var __meta__ = { // jshint ignore:line
                 this.options = options;
                 this.toolbar = toolbar;
 
-                this.mainButton = new ToolBarButton(options, toolbar);
+                this.mainButton = new ToolBarButton($.extend({}, options, { hidden: false }), toolbar);
                 this.arrowButton = $('<a class="' + BUTTON + " " + SPLIT_BUTTON_ARROW + '"><span class="' + (options.mobile ? "km-icon km-arrowdown" : "k-icon k-i-arrow-s") + '"></span></a>');
                 this.popupElement = $('<ul class="' + LIST_CONTAINER + '"></ul>');
 
@@ -490,6 +490,12 @@ var __meta__ = { // jshint ignore:line
                 this._navigatable();
 
                 this.mainButton.main = true;
+
+                this.enable(options.enable);
+
+                if (options.hidden) {
+                    this.hide();
+                }
 
                 element.data({
                     type: "splitButton",
@@ -580,6 +586,20 @@ var __meta__ = { // jshint ignore:line
 
             focus: function() {
                 this.element.focus();
+            },
+
+            hide: function() {
+                if (this.popup) {
+                    this.popup.close();
+                }
+
+                this.element.addClass(STATE_HIDDEN).hide();
+                this.options.hidden = true;
+            },
+
+            show: function() {
+                this.element.removeClass(STATE_HIDDEN).hide();
+                this.options.hidden = false;
             }
         });
 
