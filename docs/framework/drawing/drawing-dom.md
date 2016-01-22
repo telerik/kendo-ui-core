@@ -69,6 +69,37 @@ The example below demonstrates how to make all Kendo widgets use this font.
 > * In order for automatic font discovery to work, your CSS must reside on the same domain as the web page.
 > * Kendo UI bundles the DejaVu font family and will fall back to it for a few names, such as Times New Roman, Arial, or Courier, or generics, such as serif, sans-serif, or monospace, if no alternate fonts are specified. This is so that Unicode works by default. However, the layout problem will remain&mdash;the PDF output will be slightly different from the browser unless the exact same fonts are used.
 
+### Hyperlinks in PDF
+
+By default the [drawDOM](/api/javascript/drawing#methods-drawDOM) method will create clickable
+hyperlinks in the generated PDF document. You can disable this behavior with the
+`avoidLinks` option:
+
+#### Example - Disable hyperlinks
+
+```html
+    <div id="content">
+        This is <a href="http://www.telerik.com">a non-clickable link</a>.
+    </div>
+    <script>
+        var draw = kendo.drawing;
+
+        draw.drawDOM($("#content"), {
+            avoidLinks: true,
+            paperSize: "A4"
+        })
+        .then(function(root) {
+            return draw.exportPDF(root);
+        })
+        .done(function(data) {
+            kendo.saveAs({
+                dataURI: data,
+                fileName: "avoid-links.pdf"
+            });
+        });
+    </script>
+```
+
 ### Multi-Page PDF Output
 
 The `drawing.drawDOM` allows you to create a [multi-page PDF](/framework/drawing/pdf-output.html#multiple-pages-output) by specifying manual page breaks. A page break occurs before each element that matches the `forcePageBreak` CSS selector.
