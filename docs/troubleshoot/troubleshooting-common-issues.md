@@ -10,6 +10,16 @@ slug: troubleshooting_common_issues_kendoui
 
 This page provides solutions for common problems you may encounter while working with Kendo UI widgets.
 
+## Offline examples
+
+### Examples fail to load sample data
+
+The most common cause for this error is loading the demos from the file system. Google Chrome, for example, will disallow accessing the JSON files needed for the demos to run.
+
+**Solution**
+
+Host the offline demos on a web server and load them from there.
+
 ## jQuery
 
 ### jQuery Is Unavailable or Undefined
