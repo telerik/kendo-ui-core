@@ -119,7 +119,7 @@ The cause of this issue is the underlying Git installation is missing the certif
 > * 1.9.5 Git build will not work with the Bower package.
 > * When using @ symbol in the url for accessing the Kendo UI Bower repository (due to network restrictions or admin rules, for instance), make sure you encode it as follows: `https://firstname.lasname**%40**domain.com@bower.telerik.com/bower-kendo-ui.git`.
 
-### Restore Packages in Visual Studio 2015
+### Restore fails in ASP.NET MVC 6 RC projects in Visual Studio 2015
 
 The Git client bundled in Visual Studio is unable to authenticate with our Bower repository. You can get an error message such as:
 
