@@ -276,6 +276,16 @@ Here is how the **GetProducts** method looks like:
 
 As you can see the dropdownlist sends the input's value only if the end-user starts to type in it.
 
+### Grouping
+
+The widget supports binding to a grouped data source. The only requirement is to define a datasource group expression in order to group the data.
+This can be done using a [Custom DataSource configuration](/aspnet-mvc/custom-datasource). Refer to our online demo for more details:
+
+- [Grouping demo](http://demos.telerik.com/aspnet-mvc/dropdownlist/grouping)
+
+> The data source will sort the grouped data either ascending or descending. If you would like to persist a specific group order, then you will need to use
+a [server grouping](/api/javascript/data/datasource#configuration-serverGrouping). Use the DataSource ServerGrouping method to define the `serverGrouping` option.
+
 ## Access an Existing DropDownList
 
 You can reference an existing DropDownList instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).

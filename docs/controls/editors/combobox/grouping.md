@@ -44,6 +44,9 @@ Enable the grouping functionality in a ComboBox by using the remote transport an
 
 In order to display grouped items in the widget, you will need to group the data source component using its [group configuration](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-group). Once the group option is defined, the widget will automatically display the suggestion items grouped.
 
+> The grouped data **will be sorted** either ascending or descending. This behavior is expected and cannot be modified. If you would like to group the data in a specific order,
+then you will need to use a [server grouping](/api/javascript/data/datasource#configuration-serverGrouping).
+
 ## Customize
 
 The widget exposes [groupTemplate](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#configuration-groupTemplate) and [fixedGroupedTemplate](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#configuration-fixedGroupTemplate) templates that allow to configure rendering of the group titles.
