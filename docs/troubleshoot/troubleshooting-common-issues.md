@@ -47,7 +47,7 @@ Depending on the browser, the following JavaScript errors will be thrown:
 * Object does not support property or method 'kendoGrid' (in Internet Explorer 9 and later)
 * Object does not support this property or method (in older versions of Internet Explorer)
 
-> **Important**  
+> **Important**
 >
 > All Kendo UI widgets are going to be affected by this issue, not just the Kendo UI Grid. Only the error message is different e.g. `kendoChart is not a function` or `Object has no method kendoEditor`.
 
@@ -64,11 +64,11 @@ Kendo widgets provide a WAI-ARIA support, which means that some ARIA-specific at
 The problem is reported to Microsoft on `https://connect.microsoft.com/IE/feedback/details/774078`. Also there is a [jQuery bug report](http://bugs.jquery.com/ticket/12577)
 where more information can be found.
 
-> **Important**  
+> **Important**
 >
 > All Kendo widgets, which add ARIA attributes to HTML elements, will be affected.
 
-**Solution**  
+**Solution**
 
 **Option 1** Force the Internet Explorer to use the Edge mode:
 
@@ -86,7 +86,7 @@ The change event of an input widget is triggered only by user action. DOM elemen
 
 This will happen if two or more widgets are initialized from elements that have same IDs. jQuery will find only the first one every time it searches for it and thus try to initialize the first element in the DOM multiple times.
 
-**Solution**  
+**Solution**
 
 The ID for each element on the page should be unique.
 
@@ -117,6 +117,13 @@ There are two ways to avoid this problem:
 Client libraries, which interfere with touch events, such as FastClick, are not compatible with Kendo UI and may break the widgets' behavior, e.g. cause a dropdown to close immediately after opening.
 
 For more information on this issue, refer to [What Exactly Is... The 300ms Click Delay](http://www.telerik.com/blogs/what-exactly-is.....-the-300ms-click-delay).
+
+### Widget popup is offset incorrectly in IE
+
+When Kendo UI is used with jQuery `1.12.0` or `2.2.0` some issues with the popup positioning could occur. The popup is offset incorrectly when page is scrolled. The investigation showed that the issue due to
+a bug in the aforementioned jQuery version. According to their bug tracker it will be addressed in the next patch release of jQuery. More details can be found here:
+
+- [https://github.com/telerik/kendo-ui-core/issues/1375](https://github.com/telerik/kendo-ui-core/issues/1375)
 
 ## CDN
 
