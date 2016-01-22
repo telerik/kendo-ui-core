@@ -32004,6 +32004,21 @@ The width of the exported image. Defaults to the chart width.
 ##### options.height `String`
 The height of the exported image. Defaults to the chart height.
 
+##### options.cors `String` *(default: "anonymous")*
+Specifies how [cross-origin images](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image)
+should be requested.
+
+Requesting images without CORS will "taint" the canvas. It will still be visible on the page, but all
+script access to it is disabled to prevent information disclosure.
+
+By default they're requested anonymously. Available options are:
+* "anonymous" - do not send user credentials as part of the request
+* "use-credentials" - send credentials as part of the request
+* false - fetch images without CORS, possibly tainting the canvas
+
+See [crossorigin attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-crossorigin)
+for more details.
+
 #### Returns
 `Promise` A promise that will be resolved with a PNG image encoded as a Data URI.
 
