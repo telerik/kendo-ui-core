@@ -102,7 +102,7 @@ Here is how to configure the AutoComplete for Ajax binding to the Northwind Prod
                 })
              )
 
-> **Important**  
+> **Important**
 > The `ToDataSourceResult()` extension method will modify structure of the result and the widget will not be able to bind to it. Please return simple array of data in this case.
 
 ### Configure AutoComplete to Work with the `ToDataSourceResult` Instance
@@ -171,11 +171,11 @@ Here is how to configure the autocomplete to use a custom datasource and thus to
 
 ### Send Parameters to the Server
 
-Here is how to configure the Kendo ComboBox to send parameters to the server:
+Here is how to configure the Kendo AutoComplete to send parameters to the server:
 
 - WebForms
 
-        <%: Html.Kendo().ComboBox()
+        <%: Html.Kendo().AutoComplete()
                 .Name("productAutoComplete")
                 .DataTextField("ProductName") //Specifies which property of the Product to be used by the autocomplete.
                 .DataSource(source =>
@@ -197,7 +197,7 @@ Here is how to configure the Kendo ComboBox to send parameters to the server:
 
 - Razor
 
-        @(Html.Kendo().ComboBox()
+        @(Html.Kendo().AutoComplete()
               .Name("productAutoComplete")
               .DataTextField("ProductName") //Specifies which property of the Product to be used by the autocomplete.
               .DataSource(source =>
@@ -241,6 +241,16 @@ Here is how the **GetProducts** method looks like:
 
             return Json(products, JsonRequestBehavior.AllowGet);
         }
+
+### Grouping
+
+The widget supports binding to a grouped data source. The only requirement is to define a datasource group expression in order to group the data.
+This can be done using a [Custom DataSource configuration](/aspnet-mvc/custom-datasource). Refer to our online demo for more details:
+
+- [Grouping demo](http://demos.telerik.com/aspnet-mvc/autocomplete/grouping)
+
+> The data source will sort the grouped data either ascending or descending. If you would like to persist a specific group order, then you will need to use
+a [server grouping](/api/javascript/data/datasource#configuration-serverGrouping). Use the DataSource ServerGrouping method to define the `serverGrouping` option.
 
 ## Access an Existing AutoComplete
 
