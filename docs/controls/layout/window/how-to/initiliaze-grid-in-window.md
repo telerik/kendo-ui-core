@@ -69,5 +69,5 @@ Articles and how-to examples on Kendo UI Window:
 * [How to Display Loading Indicator over Window]({% slug howto_displayloadingindicator_overwindow_window %})
 * [How to Post to Iframe]({% slug howto_posttoiframe_window %})
 * [How to Restrict Window Positioning]({% slug howto_restrictpositioning_window %})
-* [How to Use Custom Action Icons]({% slug howto_posttoiframe_window %})
+* [How to Use Custom Action Icons]({% slug howto_customactionicons_window %})
 * [How to Use MVVM Binding for Window Data Editing]({% slug howto_usemvvmbinding_forwindowdataediting_mvvm_window %})
