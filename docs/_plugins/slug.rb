@@ -11,8 +11,23 @@ class SlugTag < Liquid::Block
         @@page_by_slug = Hash.new
         Jekyll.logger.info "      Indexing slugs in #{site.pages.length} pages..."
 
+        duplicates = false
         page = site.pages.each do |p|
-            @@page_by_slug[p.data['slug']] = p
+            slug = p.data['slug']
+            if (slug)
+                if @@page_by_slug.has_key?(slug)
+                    Jekyll.logger.warn "Duplicate slug '#{slug}' on #{p.url}"
+                    duplicates = true
+                end
+
+                @@page_by_slug[slug] = p
+            end
+        end
+
+        if duplicates
+            raise "Duplicate slugs found. Aborting"
+        else
+            Jekyll.logger.info "      Done. Found #{@@page_by_slug.length} unique slugs."
         end
     end
 

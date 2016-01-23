@@ -2,7 +2,7 @@
 title: Implement Free-Form Drawing
 page_title: Implement Free-Form Drawing | Kendo UI Drawing API
 description: "Learn how to implement a free-form drawing surface while working with the Kendo UI Drawing API."
-slug: howto_embedfontawesome_inexportedpdf_drawingapi
+slug: howto_freeformdrawing_drawingapi
 ---
 
 # Implement Free-Form Drawing

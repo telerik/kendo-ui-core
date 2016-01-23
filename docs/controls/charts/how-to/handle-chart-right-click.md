@@ -2,7 +2,7 @@
 title: Handle Right Click in Charts
 page_title: Handle Right Click in Charts | Kendo UI Charts
 description: "Learn how to handle the right click in Kendo UI Charts."
-slug: howto_setdifrerentmarkers_forgroupedlinecharts_charts
+slug: howto_handlerightclick_charts
 ---
 
 # Handle Right Click in Charts

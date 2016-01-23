@@ -2,7 +2,7 @@
 title: Show Total for Stacked Series
 page_title: Show Total for Stacked Series | Kendo UI Charts
 description: "Learn how to place a label with the stack total on top of column or bar series in a Kendo UI Chart."
-slug: howto_showoverlaywhileloading_charts
+slug: howto_showtotalstacked_charts
 ---
 
 # Show Total for Stacked Series
