@@ -1,11 +1,25 @@
 class SlugTag < Liquid::Block
+    @@page_by_slug = nil
+
     def initialize(tag_name, text, tokens)
         @text = text.strip
     end
 
+    def index_slugs(site)
+        return if @@page_by_slug
+
+        @@page_by_slug = Hash.new
+        Jekyll.logger.info "      Indexing slugs in #{site.pages.length} pages..."
+
+        page = site.pages.each do |p|
+            @@page_by_slug[p.data['slug']] = p
+        end
+    end
+
     def render(context)
-        site = context.registers[:site]
-        page = site.pages.find {|p| p.data['slug'] == @text }
+        index_slugs context.registers[:site]
+
+        page = @@page_by_slug[@text]
         if page
             page.url.sub('.html', '')
         else
