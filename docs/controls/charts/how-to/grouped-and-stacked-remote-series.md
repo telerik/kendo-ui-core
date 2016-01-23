@@ -688,7 +688,7 @@ Other articles and how-to examples on Kendo UI Charts:
 * [How to Display Checkboxes Next to Legend Items]({% slug howto_displaycheckboxes_nexttolegenditems_charts %})
 * [How to Expand Clickable Area of Points]({% slug howto_extendclickableareaofpoints_charts %})
 * [How to Fit PDF Exported Chart to Page]({% slug howto_fitpdfexportedcharttopage_charts %})
-* [How to Handle Right Click in Charts]({% slug howto_setdifrerentmarkers_forgroupedlinecharts_charts %})
+* [How to Handle Right Click in Charts]({% slug howto_handlerightclick_charts %})
 * [How to Place Text in the Center of Donut Charts]({% slug howto_placetextinthecentre_donutcharts %})
 * [How to Render Custom Plot Bands]({% slug howto_rendercustomplotbands_charts %})
 * [How to Set Different Marker Types for Grouped Line Charts]({% slug howto_setdifrerentmarkers_forgroupedlinecharts_charts %})
