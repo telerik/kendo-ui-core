@@ -84,18 +84,18 @@ The example below demonstrates how to import the two namespaces.
     var draw = kendo.drawing;
 
 The `kendo.geometry` namespace contains primitives, such as:
-* [`Point`](/api/dataviz/geometry/point)
-* [`Rect`](/api/dataviz/geometry/rect)
-* [`Size`](/api/dataviz/geometry/size)
+* [`Point`](/api/javascript/geometry/point)
+* [`Rect`](/api/javascript/geometry/rect)
+* [`Size`](/api/javascript/geometry/size)
 
 The `kendo.drawing` namespace contains elements, such as:
-* [`Path`](/api/dataviz/drawing/path)
-* [`Image`](/api/dataviz/drawing/image)
-* [`Group`](/api/dataviz/drawing/group)
+* [`Path`](/api/javascript/dataviz/drawing/path)
+* [`Image`](/api/javascript/dataviz/drawing/image)
+* [`Group`](/api/javascript/dataviz/drawing/group)
 
 ### Draw the Path
 
-A [`Path`](/api/dataviz/drawing/path) element is used to draw straight lines, curves, or a combination of both.
+A [`Path`](/api/javascript/dataviz/drawing/path) element is used to draw straight lines, curves, or a combination of both.
 
 Set the stroke (line) color and width to match the picture, as demonstrated in the example below.
 
@@ -108,7 +108,7 @@ Set the stroke (line) color and width to match the picture, as demonstrated in t
         }
     });
 
-The [`configuration`](/api/dataviz/drawing/path#configuration) object can contain other appearance options as well.
+The [`configuration`](/api/javascript/dataviz/drawing/path#configuration) object can contain other appearance options as well.
 
 Now construct the path by issuing the commands shown below.
 
@@ -118,9 +118,9 @@ Now construct the path by issuing the commands shown below.
         .lineTo(150, 0).lineTo(150, 65).lineTo(0, 65)
         .close();
 
-Set the line initial position with a [`moveTo`](/api/dataviz/drawing/path#methods-moveTo) command. The three sides are drawn by using the [`lineTo`](/kendo-ui/api/dataviz/drawing/path#methods-lineTo) commands. The last command [`closes`](/api/dataviz/drawing/path#methods-close) the path, drawing a straight line to the initial position.
+Set the line initial position with a [`moveTo`](/api/javascript/dataviz/drawing/path#methods-moveTo) command. The three sides are drawn by using the [`lineTo`](/kendo-ui/api/javascript/dataviz/drawing/path#methods-lineTo) commands. The last command [`closes`](/api/javascript/dataviz/drawing/path#methods-close) the path, drawing a straight line to the initial position.
 
-Since this is a rectangle, use the alternative [`fromRect`](/api/dataviz/drawing/path#fromrect) static method, as demonstrated below.
+Since this is a rectangle, use the alternative [`fromRect`](/api/javascript/dataviz/drawing/path#fromrect) static method, as demonstrated below.
 
 ###### Example
 
@@ -137,7 +137,7 @@ Since this is a rectangle, use the alternative [`fromRect`](/api/dataviz/drawing
 
 ### Draw the Image
 
-The [`Image`](/api/dataviz/drawing/image) element draws a bitmap image from a given URL. The image position and size is defined as a [`Rect`](/api/dataviz/geometry/rect).
+The [`Image`](/api/javascript/drawing/image) element draws a bitmap image from a given URL. The image position and size is defined as a [`Rect`](/api/javascript/geometry/rect).
 
 ###### Example
 
@@ -165,7 +165,7 @@ Now create the image in the way demonstrated in the example below.
 
 ### Draw the Text
 
-The [`Text`](/api/dataviz/drawing/text) element draws a single line of text. Appearance options, such as the font, are set through [`configuration`](/api/dataviz/drawing/text#configuration).
+The [`Text`](/api/javascript/drawing/text) element draws a single line of text. Appearance options, such as the font, are set through [`configuration`](/api/javascript/drawing/text#configuration).
 
 ###### Example
         var text = new draw.Text(
@@ -178,7 +178,7 @@ The point defines the position of the top left corner.
 
 ### Group the Shapes
 
-It is convenient to treat a group of shapes as a single entity. In this case, use a group to set the position of all elements at once. Create a [`Group`](/api/dataviz/drawing/group) element and append the rest of the elements as children, as demonstrated in the example below.
+It is convenient to treat a group of shapes as a single entity. In this case, use a group to set the position of all elements at once. Create a [`Group`](/api/javascript/drawing/group) element and append the rest of the elements as children, as demonstrated in the example below.
 
 ###### Example
 
@@ -195,7 +195,7 @@ A transformation applies to all group children. In this case, it is a fairly sim
 
 ### Render the Scene
 
-The [`Surface.create`](/api/dataviz/drawing/surface#create) method, as demonstrated in the example below, chooses an implementation that matches the capabilities of the browser.
+The [`Surface.create`](/api/javascript/drawing/surface#create) method, as demonstrated in the example below, chooses an implementation that matches the capabilities of the browser.
 
 ###### Example
 
