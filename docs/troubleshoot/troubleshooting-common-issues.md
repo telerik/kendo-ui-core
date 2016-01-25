@@ -10,9 +10,9 @@ slug: troubleshooting_common_issues_kendoui
 
 This page provides solutions for common problems you may encounter while working with Kendo UI widgets.
 
-## Offline examples
+## Offline Examples
 
-### Examples fail to load sample data
+### Examples Fail to Load Sample Data
 
 The most common cause for this error is loading the demos from the file system. Google Chrome, for example, will disallow accessing the JSON files needed for the demos to run.
 
@@ -118,12 +118,11 @@ Client libraries, which interfere with touch events, such as FastClick, are not 
 
 For more information on this issue, refer to [What Exactly Is... The 300ms Click Delay](http://www.telerik.com/blogs/what-exactly-is.....-the-300ms-click-delay).
 
-### Widget popup is offset incorrectly in IE
+### Widget Popup Is Offset Incorrectly in Internet Explorer
 
-When Kendo UI is used with jQuery `1.12.0` or `2.2.0` some issues with the popup positioning could occur. The popup is offset incorrectly when page is scrolled. The investigation showed that the issue due to
-a bug in the aforementioned jQuery version. According to their bug tracker it will be addressed in the next patch release of jQuery. More details can be found here:
+When Kendo UI is used with jQuery `1.12.0` or `2.2.0`, some issues with the popup positioning could occur. The popup is offset incorrectly when the page is scrolled. The investigation showed that the issue is due to a bug in the aforementioned jQuery version. According to their bug tracker, it will be addressed in the next patch release of jQuery.
 
-- [https://github.com/telerik/kendo-ui-core/issues/1375](https://github.com/telerik/kendo-ui-core/issues/1375)
+Find more details at [https://github.com/telerik/kendo-ui-core/issues/1375](https://github.com/telerik/kendo-ui-core/issues/1375).
 
 ## CDN
 
