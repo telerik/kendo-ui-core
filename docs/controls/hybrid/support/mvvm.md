@@ -2,6 +2,7 @@
 title: MVVM Integration
 page_title: Documentation guide for Kendo MVVM framework in a mobile application
 description: How to start using Kendo MVVM in a mobile app. Learn how to bind the mobile widget's configuration options and manage them through a view model.
+previous_url: /controls/hybrid/mvvm
 ---
 
 # Using Kendo MVVM in a mobile application

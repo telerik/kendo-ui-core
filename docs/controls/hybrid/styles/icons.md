@@ -1,5 +1,6 @@
 ---
 title: Icons
+previous_url: /controls/hybrid/icons
 position: 7
 ---
 

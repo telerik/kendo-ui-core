@@ -97,20 +97,72 @@ navigation:
     "controls/hybrid":
         title: "Hybrid UI"
         position: 11
-    "controls/hybrid/listview":
-        title: "Mobile ListView"
+    "controls/hybrid/styles":
+        title: "Styles and Appearance"
+        position: 4
+    "controls/hybrid/support":
+        title: "Support and Integration"
+        position: 5
+    "controls/hybrid/support/angular/tutorials":
+        title: "Tutorials"
+        position: 100
+    "controls/hybrid/actionsheet":
+        title: "ActionSheet"
+        position: 6
+    "controls/hybrid/application":
+        title: "Application"
+        position: 7
+    "controls/hybrid/button":
+        title: "Button"
+        position: 8
+    "controls/hybrid/buttongroup":
+        title: "ButtonGroup"
         position: 9
     "controls/hybrid/collapsible":
         title: "Collapsible"
-        position: 14
+        position: 10
     "controls/hybrid/drawer":
         title: "Drawer"
-    "controls/hybrid/forms":
-        title: "Forms"
+        position: 11
+    "controls/hybrid/listview":
+        title: "ListView"
+        position: 12
+    "controls/hybrid/modalview":
+        title: "ModalView"
+        position: 13
     "controls/hybrid/navbar":
         title: "NavBar"
+        position: 14
+    "controls/hybrid/pane":
+        title: "Pane"
+        position: 15
+    "controls/hybrid/popover":
+        title: "PopOver"
+        position: 16
+    "controls/hybrid/scroller":
+        title: "Scroller"
+        position: 17
     "controls/hybrid/scrollview":
         title: "ScrollView"
+        position: 18
+    "controls/hybrid/splitview":
+        title: "SplitView"
+        position: 19
+    "controls/hybrid/switch":
+        title: "Switch"
+        position: 20
+    "controls/hybrid/tabstrip":
+        title: "TabStrip"
+        position: 21
+    "controls/hybrid/view":
+        title: "View"
+        position: 22
+    "controls/hybrid/how-to":
+        title: "How To"
+        position: 23
+    "controls/hybrid/faq":
+        title: "Frequently Asked Questions"
+        position: 24
     "styles-and-layout":
         title: "Styles and Appearance"
         position: 4

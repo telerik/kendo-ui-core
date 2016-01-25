@@ -2,6 +2,7 @@
 title: Styling
 page_title: User guide to styling Kendo UI Mobile applications
 description: How to style Kendo UI Mobile applications with CSS.
+previous_url: /controls/hybrid/styling
 position: 0
 ---
 

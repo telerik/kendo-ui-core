@@ -2,6 +2,7 @@
 title: Forms
 page_title: User guide to supported and styled Kendo UI Mobile forms
 description: Detailed steps how to use Kendo UI Mobile Forms in mobile app development.
+previous_url: /controls/hybrid/forms/forms
 position: 6
 ---
 

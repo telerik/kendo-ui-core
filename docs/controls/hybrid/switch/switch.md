@@ -58,4 +58,3 @@ or the `checked` attribute of the widget element.
     <script>
         var switchInstance = $("#switch").kendoMobileSwitch({ onLabel: "YES", offLabel: "NO" });
     </script>
-

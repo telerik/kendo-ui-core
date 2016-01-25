@@ -1,6 +1,7 @@
 ---
 title: AngularJS Integration
 page_title: Kendo UI Mobile Application AngularJS Directive
+previous_url: /controls/hybrid/angular/angular
 position: 1
 ---
 
@@ -138,4 +139,3 @@ The widget is instantiated from the `kendo-mobile-layout` directive. The header 
 
 The mobile widgets may be configured via the `k-` prefixed attributes. More information about the attributes parsing is available in the [Using Kendo UI
 with AngularJS](/AngularJS/introduction#widget-options-in-html) help topic.
-

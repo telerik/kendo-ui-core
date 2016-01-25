@@ -44,4 +44,3 @@ application, use `data-target="_top"`.
      <div data-role="view" id="baz">
         <a data-role="button" href="#main">Go back to splitview</a>
      </div>
-

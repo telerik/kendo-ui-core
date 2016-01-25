@@ -2,6 +2,7 @@
 title: "Building applications with Kendo UI Mobile and AngularJS"
 page_title: "Tutorial: Building Sushi sample app"
 description: "Tutorial: Building applications with Kendo UI Mobile and AngularJS"
+previous_url: /controls/hybrid/angular/sushi-angular-tutorial
 position: 2
 ---
 

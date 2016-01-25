@@ -1,48 +1,39 @@
 ---
-title: Introduction
-page_title: Build mobile apps with Kendo UI mobile framework
+title: Overview
+page_title: Overview | Kendo UI Hybrid Components
+description: "Build mobile applications using the Kendo UI hybrid components."
 previous_url: /tutorials/build-apps-with-kendo-ui-mobile
-position: -1
+slug: overview_hybridkendoui
+position: 1
 ---
 
-In this article, we'll examine the basics of building apps with [Kendo UI Mobile](http://www.telerik.com/kendo-ui-mobile). You will learn:
+# Overview
 
-- The basics of the Kendo UI mobile framework;
-- How to use Kendo UI to build a basic mobile app
-- How to preview an app on different mobile platforms
-- How to utilize the adaptive rendering feature
-- Next steps for putting a Kendo UI mobile app in app stores
+This article elaborates on the basics of building applications with [the Hybrid UI components in Kendo UI](http://www.telerik.com/kendo-ui-mobile).
 
-The Kendo UI mobile framework is designed to help developers build mobile app experiences using HTML and JavaScript that automatically adapt to the native
-look-and-feel of different mobile platforms. Developers using Kendo UI Mobile can focus on their app's function and content and let the Kendo UI
-framework handle differences between platforms like iOS and Android.
+The Kendo UI hybrid framework is designed to help developers build mobile app experiences through using HTML and JavaScript that automatically adapt to the native look and feel of different mobile platforms. Developers using Kendo UI hybrid components can focus on the content and functions of their apps and let the Kendo UI framework handle differences between platforms such as iOS and Android.
+
+**Figure 1. Adaptive rendering of Kendo UI hybrid components**
 
 ![Illustration of Kendo UI mobile adaptive rendering](/images/mobile/km-adaptive-rending-illustration.png)
-*Fig 1: Illustration of Kendo UI mobile adaptive rendering*
 
-Where some mobile HTML frameworks focus on providing a "one size fits all" experience, the Kendo UI mobile framework focuses on delivering perfectly tailored
-experiences for different mobile platforms. **Built and packaged correctly, the goal of a such app is to be virtually indistinguishable to
-end-users from a native SDK app.**
+Where some mobile HTML frameworks focus on providing a one-size-fits-all experience, the Kendo UI hybrid framework focuses on delivering perfectly tailored experiences for different mobile platforms. Built and packaged correctly, the goal of such an application is to be virtually indistinguishable to end-users from a native SDK app.
 
-The advantage of building apps with HTML, JavaScript, and Kendo UI, of course, is that developers can maintain a single code base to target all
-major app platforms. Your team can focus on becoming masters of HTML, JavaScript, and CSS, rather than being average practitioners of Objective-C, Java,
-.NET, UIKit, and the myriad of other developer skills need for cross-platform mobile app development.
+The advantage of building apps with HTML, JavaScript, and Kendo UI is that you are able to maintain a single code base to target all major app platforms. Your team can focus on becoming masters of HTML, JavaScript, and CSS, rather than being average practitioners of Objective-C, Java, .NET, UIKit, and the myriad of other developer skills needed for cross-platform mobile app development.
 
-## Building Blocks of a Kendo UI Mobile App
+## Getting Started
 
-First of all, Kendo UI mobile apps are built entirely with HTML, JavaScript, and CSS. Those are the only skills you will need to build a Kendo UI
-mobile app that looks and feels native across mobile platforms. If you plan to work with data, you should also be familiar with
-[JSON](http://en.wikipedia.org/wiki/JSON).
+### Building Blocks of Kendo UI Hybrid App
 
-Apps do not need to be "cross compiled" in to a native SDK language. Your HTML and JavaScript code will ultimately run on mobile devices, even if you
-eventually use tools like [Cordova](http://incubator.apache.org/cordova/) to package your app for an app store.
+The Kendo UI hybrid apps are built entirely with HTML, JavaScript, and CSS. Those are the only skills you will need to build a Kendo UI mobile app that looks and feels native across mobile platforms. If you plan to work with data, make sure you are familiar with [JSON](http://en.wikipedia.org/wiki/JSON).
 
-There are a few key, "non-visual" pieces of Kendo UI Mobile used in virtually all apps:
+Applications do not need to be cross-compiled into a native [software-development kit (SDK)](https://en.wikipedia.org/wiki/Software_development_kit) language. Your HTML and JavaScript code is ultimately intended to run on mobile devices, even if you eventually use tools like [Cordova](http://incubator.apache.org/cordova/) to package your application for an app store.
 
-1. **[Application](http://demos.telerik.com/kendo-ui/mobile/application/index.html)**:
-The shell of a Kendo UI mobile app. Application manages all navigation, application history, loading views, rendering mobile meta tags, and other essential mobile app tasks.
-2. **[Layout](http://demos.telerik.com/kendo-ui/mobile/layout/index.html)**: Defines the reusable portions of a mobile app, similar to a MasterPage or template. Layouts are often used improve app maintainability by defining things used across multiple views, like navigation. Layouts are not required, but encouraged.
-3. **[Views](http://demos.telerik.com/kendo-ui/mobile/view/index.html)**: Individual pages of a mobile app. Views contain the majority of an app's content. Every app will have one or more views.
+There are a few key, non-visual pieces of Kendo UI hybrid components used in virtually all applications. These are:
+
+1. [Application](http://demos.telerik.com/kendo-ui/mobile/application/index.html)&mdash;This is the shell of Kendo UI hybrid apps. Application manages all navigation, application history, loading views, rendering mobile meta tags, and other essential mobile app tasks.
+2. [Layout](http://demos.telerik.com/kendo-ui/mobile/layout/index.html)&mdash;Defines the reusable portions of a mobile app, similar to a MasterPage or template. Layouts are often used improve app maintainability by defining things used across multiple views, like navigation. Layouts are not required, but encouraged.
+3. [Views](http://demos.telerik.com/kendo-ui/mobile/view/index.html)&mdash;Individual pages of a mobile app. Views contain the majority of an app's content. Every app will have one or more views.
 
 Layouts and Views are defined with HTML; the Application is simply JavaScript. There is no markup associated with an Application. Let's create the basic structure of a Kendo UI Mobile app using these building blocks.
 
@@ -328,3 +319,10 @@ As a next step, make sure to check the features provided by the [mobile applicat
 
 ## Tutorial - Kendo UI mobile guidance
 If you would like to see a complete tutorial including guidelines and recommendations about how to build mobile applications for phones and tables with Kendo UI mobile widgets and application tools, please visit the [following link](http://www.kendouimobileguide.com/).
+
+## See Also
+
+Articles on Hybrid UI components in Kendo UI:
+
+* [Performance Tips and Tricks]({% slug performance_hybridkendoui %})
+* [Native Scrolling]({% slug nativescrolling_hybrid_kendoui %})
