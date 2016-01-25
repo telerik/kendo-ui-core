@@ -2,6 +2,7 @@
 title: Change options dynamically
 page_title: Change options dynamically
 description: Change options dynamically
+previous_url: /controls/hybrid/mobileactionsheet/how-to/change-options-dynamically
 ---
 
 # Change options dynamically

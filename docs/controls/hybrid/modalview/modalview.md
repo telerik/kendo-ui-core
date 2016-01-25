@@ -78,4 +78,3 @@ To do so, the navigational widget should have `data-rel="modalview"` and `href` 
             modalView.close();
         }
     </script>
-

@@ -1,5 +1,6 @@
 ---
 title: Touch
+previous_url: /controls/hybrid/touch
 ---
 
 # Touch

@@ -82,4 +82,3 @@ After the callback has been executed, the ActionSheet closes automatically.
             }
         }
     </script>
-

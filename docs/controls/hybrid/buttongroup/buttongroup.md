@@ -54,7 +54,7 @@ A Button icon can be set in two ways:
 
 1. By adding an `img` element inside the Button `li` element
 2. By setting a `data-icon` attribute to the Button `li` element
-   
+
 ### Example - using font icons with `data-icon` attribute
 
     <ul id="buttongroup" data-role="buttongroup">
@@ -125,4 +125,3 @@ To achieve this outcome don't set text to the buttons in the ButtonGroup.
         <li data-icon="fastforward"></li>
         <li data-icon="globe"></li>
     </ul>
-
