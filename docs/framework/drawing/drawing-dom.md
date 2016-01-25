@@ -71,11 +71,9 @@ The example below demonstrates how to make all Kendo widgets use this font.
 
 ### Hyperlinks in PDF
 
-By default the [drawDOM](/api/javascript/drawing#methods-drawDOM) method will create clickable
-hyperlinks in the generated PDF document. You can disable this behavior with the
-`avoidLinks` option:
+By default the [`drawDOM`](/api/javascript/drawing#methods-drawDOM) method creates clickable hyperlinks in the generated PDF document. You can disable this behavior with the `avoidLinks` option, as demonstrated in the example below.
 
-#### Example - Disable hyperlinks
+###### Example
 
 ```html
     <div id="content">
