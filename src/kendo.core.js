@@ -4247,7 +4247,7 @@ function pad(number, digits, end) {
     kendo.proxyModelSetters = function proxyModelSetters(data) {
         var observable = {};
 
-        Object.keys(data).forEach(function(property) {
+        Object.keys(data || {}).forEach(function(property) {
           Object.defineProperty(observable, property, {
             get: function() {
               return data[property];
