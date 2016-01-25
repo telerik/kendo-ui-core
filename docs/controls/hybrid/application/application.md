@@ -1,12 +1,13 @@
 ---
-title: Application
-page_title: Documentation for Kendo UI Mobile Application
-description: How to initiate Kendo UI Mobile Application and handle the navigation.
+title: Overview
+page_title: Overview | Kendo UI Hybrid Application
+description: "Initiate the Kendo UI hybrid Application and handle its navigation."
 previous_url: /howto/universal-mobile-apps-html5
-position: 0
+slug: overview_hybridapplication
+position: 1
 ---
 
-# Application
+# Hybrid Application Overview
 
 The Kendo UI Mobile **Application** provides the necessary tools for building native-looking web based mobile applications.
 
