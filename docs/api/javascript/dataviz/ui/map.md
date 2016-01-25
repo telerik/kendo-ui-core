@@ -1970,8 +1970,6 @@ The bing map tile types. Possible options:
 
     * aerial - Aerial imagery.
     * aerialWithLabels - Aerial imagery with a road overlay.
-    * birdseye - Bird’s eye (oblique-angle) imagery
-    * birdseyeWithLabels - Bird’s eye imagery with a road overlay.
     * road - Roads without additional imagery. (default)
     
 ### layerDefaults.bing.culture `String` *(default: "en-US")*

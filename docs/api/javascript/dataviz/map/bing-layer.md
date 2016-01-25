@@ -43,8 +43,6 @@ Sets the preferred imagery set for the map.
 Available imagery sets:
 * "aerial" - Aerial imagery.
 * "aerialWithLabels" - Aerial imagery with a road overlay.
-* "birdseye" - Bird's eye (oblique-angle) imagery
-* "birdseyeWithLabels" - Bird's eye imagery with a road overlay.
 * "road" - Roads without additional imagery.
 
 #### Example - Set Bing layer imagery set
