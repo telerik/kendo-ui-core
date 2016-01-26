@@ -297,3 +297,7 @@ contains another grid which is bound to the `Products_Read` action.
 ![Client hierarchy](/aspnet-mvc/helpers/grid/images/grid-hierarchy.png)
 
 [Download Visual Studio Project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/client-hierarchy)
+
+## Nested Client Template Scenarios
+
+Nesting client templates is not supported out-of-the-box with the Kendo UI MVC wrappers. Please check [Invalid Template error when nesting client templates](/aspnet-mvc/helpers/grid/troubleshooting#invalid-template-error-when-nesting-client-templates).
