@@ -13,7 +13,7 @@ position: 1
 
 Depending on your preferences and the requirements of your project, you can:
 
-* [Download Kendo UI for a 30-day Trial Period](http://www.telerik.com/download/kendo-ui)
+* [Download Kendo UI for a Trial Period](http://www.telerik.com/download/kendo-ui)
 * [Get Your Commercial License for Telerik Kendo UI® Professional](http://www.telerik.com/purchase/kendo-ui)
 * [Get Your Commercial License for Telerik UI for ASP.NET MVC](http://www.telerik.com/purchase/aspnet-mvc)
 * [Get Your Commercial License for Telerik UI for JSP](http://www.telerik.com/purchase/jsp-ui)
@@ -24,12 +24,12 @@ Depending on your preferences and the requirements of your project, you can:
 
 Once you [download any of the Kendo UI bundles](http://www.telerik.com/download/kendo-ui), you will get the following folders in your local repository:
 
-* `/examples` - accommodates the quick start demo files. **Although they are static HTML files, it is recommended to open them via a web server, instead of directly from the file system. The latter approach will break all Ajax data requests.**
-* `/js` - contains the minified JavaScript files
-* `/src` - holds the source code files. Note that it is not available in the 30-day trial version.
-* `/styles` - consists of the minified CSS files and theme images
-* `/wrappers` - includes the server-side wrappers. As it is necessary for the Telerik UI for ASP.NET MVC, UI for JSP or UI for PHP distributions only, the folder is available in the commercial packages of these versions.
-* `changelog.html` - provides the Kendo UI release notes
+* `/examples`&mdash;This folder accommodates the quick start demo files. Although they are static HTML files, it is recommended to open them via a web server, instead of directly from the file system. The latter approach will break all Ajax data requests.
+* `/js`&mdash;Contains the minified JavaScript files.
+* `/src`&mdash;Holds the source code files. Note that it is not available in the trial version.
+* `/styles`&mdash;Consists of the minified CSS files and theme images. The folder also includes the LESS files, which can be passed to the compiler, located on the first-level folders inside `styles/folder: styles/web/` and `styles/mobile/`. However, note that the LESS files are not available in the trial version.
+* `/wrappers`&mdash;Includes the server-side wrappers. As it is necessary for the Telerik UI for ASP.NET MVC, UI for JSP or UI for PHP distributions only, the folder is available in the commercial packages of these versions.
+* `changelog.html`&mdash;Provides the Kendo UI release notes.
 
 ### Add CSS and JavaScript References
 
