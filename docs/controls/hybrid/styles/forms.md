@@ -1,14 +1,15 @@
 ---
 title: Forms
-page_title: User guide to supported and styled Kendo UI Mobile forms
-description: Detailed steps how to use Kendo UI Mobile Forms in mobile app development.
+page_title: Forms | Kendo UI Hybrid Components
+description: "Use Kendo UI hybrid forms in mobile application development"
 previous_url: /controls/hybrid/forms/forms
-position: 6
+slug: overview_hybridkendoui
+position: 1
 ---
 
-# Mobile forms support
+# Forms
 
-Kendo UI Mobile provides automatic platform dependent styling of form elements when they are added to a mobile View. Currently the following form elements are supported and styled:
+The Hybrid UI in the Kendo UI framework provides automatic platform dependent styling of form elements when they are added to a mobile View. Currently the following form elements are supported and styled:
 
 *   Inputs of types **text**, **password**, **search**, **url**, **email**, **number**, **tel**, **file**(not in iOS), **date**, **time** **month** and **datetime**;
 *   Single **select** elements or Kendo DropDownList replacements.
