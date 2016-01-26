@@ -99,6 +99,25 @@ An exception that templates can be used only with field access, property access,
 * [Documentation: Grid TemplateName setting](/api/aspnet-mvc/kendo.mvc.ui.fluent/grideditingsettingsbuilder#methods-TemplateName(System.String)) - use it
 to set a single edit form template for the whole edit form
 
+### Invalid Template error when nesting client templates
+
+The Kendo UI widgets are unable to detect if they are used in **nested client template** scenarios. Such a setup requires `#` literals and closing `</script>` tags in the nested widgets' HTML markup and JavaScript initialization statements to be escaped, but this cannot happen automatically. As a result, nested client template scenarios are not supported out-of-the-box.
+
+Consider the following scenario:
+
+* Grid "A" is placed in a View; Grid "A" has a popup edit template
+* Grid "B" is placed in a partial view, which represents the popup edit template of Grid "A"
+* Kendo UI widget "C" is placed in the same partial view as Grid "B"; Widget "C" belongs to the client detail template of Grid "B"
+
+In the above scenario, widget "C" will not be rendered correctly and will cause an "Invalid template" JavaScript error.
+
+The easiest way to avoid the JavaScript error is the following:
+
+1. Move the declaration of widget "C" to a separate partial view.
+2. Render the partial view in the main View where Grid "A" is defined.
+
+In this case widget "C" will not exist in a nested template context and its HTML/JavaScript output will not need any escaping.
+
 ## Different Cultural Formats 
 
 By default Kendo UI Grid formats dates and numbers using the **en-US** culture. If the Grid does not display numbers and dates in the right format that corresponds to your culture, change the culture by including the JavaScript for your culture and then call `kendo.culture`.
