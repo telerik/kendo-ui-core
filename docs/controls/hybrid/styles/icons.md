@@ -1,16 +1,20 @@
 ---
-title: Icons
+title: Layout
+page_title: Layout | Kendo UI Hybrid Components
+description: "Use the Kendo UI hybrid font icons in application intended for mobile devices."
 previous_url: /controls/hybrid/icons
-position: 7
+position: 5
 ---
 
-# Icons in Kendo UI Mobile
+# Hybrid Font Icons
 
-> **Important:** Current WP8 versions do not support web fonts loaded from a local CSS when used in PhoneGap or HTML5 applications!
-Unfortunately there are no known workarounds yet. Use [images for icons](#custom-icons-in-wp8) when targeting WP8 applications.
+> **Important**
+>
+> The current Windows Phone 8 versions do not support web fonts loaded from a local CSS file when used in PhoneGap or HTML5 applications. Unfortunately, there are no known workarounds yet. Use the [images for icons](#custom-icons-in-wp8) when targeting WP8 applications.
 
-Kendo UI Mobile includes 38 integrated font icons, which can be used directly in a Kendo UI Mobile project by specifying a `data-icon` attribute with one of the following icon names
-(supported by all Button widgets and the ListView items):
+The Kendo UI Hybrid framework includes 38 integrated font icons, which can be used directly in a Kendo UI project intended to run on mobile devices by specifying a `data-icon` attribute with any of the icon names listed below, which are supported by all Button widgets and ListView items.
+
+## List of Hybrid Font Icons
 
 <ul class="additional-icons">
     <li><span class="button km-about"></span>about</li>
@@ -53,11 +57,16 @@ Kendo UI Mobile includes 38 integrated font icons, which can be used directly in
     <li><span class="button km-wifi"></span>wifi</li>
 </ul>
 
-In addition to these icons, there are more icons available inside the font file distributed with Kendo UI Mobile. For a full list of them, check the [end of this document](#additional-icons-in-kendo-ui-mobile-font).
+In addition to these icons, there are more icons available inside the font file distributed with the Kendo UI Hybrid framework. For a full list of them, check [this section of the article](#additional-icons-in-kendo-ui-mobile-font).
 
-# Creating custom icon font
+## Custom Font Icons
 
-Currently there are two options - using a font generator service like [Fontello](http://fontello.com/) to simplify the task, or prepare the icon, SVG and fonts manually.
+### Create Custom Font Icons
+
+Currently, to create custom font icons you have two options:
+
+* To use a font generator service like [Fontello](http://fontello.com/) to simplify the task, or
+* To manually prepare the icon, SVG, and fonts.
 
 Using [Fontello](http://fontello.com/) is pretty straightforward - pick the icons, choose the Unicode characters for them, type a font name and click Download to get a ZIP file
 with the needed for mobile TTF and WOFF font formats, which can be directly used for icons. From the other files in there, EOT is not needed as it targets only IE6-8 and the
@@ -106,11 +115,11 @@ After creating the SVG font, convert it to TTF/WOFF formats, using [Online Font 
 
 Where mycustomicon is the icon name set in the data-icon attribute and \E03a is the Unicode character code of the icon.
 
-## Serving icon fonts
+## Specification of Mime Types
 
 As of Q3 2012, Kendo UI Mobile employs an icon font for its icon rendering. To be able to render it in most mobile and supported Desktop browsers out there, there are two font formats included in the Kendo UI distribution - TTF and WOFF. Most web servers out there doesn't support serving these fonts with a specific mime type. Since currently there is no standardized mime types for fonts, you only need to serve them both with mime type application/octet-stream or you can come up with any valid mime type (like application/x-font-ttf and application/x-font-woff for instance).
 
-## Configure IIS
+### Configure IIS
 
 The two mime types can be specified either through the IIS management console (inetmgr) or in the site Web.config, like this:
 
@@ -132,7 +141,7 @@ The two mime types can be specified either through the IIS management console (i
 
 Removing the mime type first is there to avoid clashes if the mime types for these files are already defined /IIS throws exception if they are/. Can be removed if not needed.
 
-## Configure Apache
+### Configure Apache
 
 Apache configuration in some distributions includes mime-types application/x-font-ttf and application/x-font-woff by default. If these mime types are not listed, they can be added easily like this:
 
@@ -146,7 +155,7 @@ Apache configuration in some distributions includes mime-types application/x-fon
     application/x-font-ttf .ttf
     application/x-font-woff .woff
 
-## Configure Nginx
+### Configure Nginx
 
 For Nginx the configuration is similar:
 
@@ -156,7 +165,9 @@ For Nginx the configuration is similar:
     application/x-font-woff .woff
 
 
-## Configure CORS headers
+## Configuration of CORS Headers
+
+### Configure CORS Headers
 
 Since fonts are usually copyrighted, most browsers doesn't allow using them across different domains. If serving multiple domains from one font location is needed, the fonts should be served with a Access-Control-Allow-Origin header. This header also supports using * instead of the domain name list, and while using it for normal text fonts is not advisable, it can be freely used for our icon font if the icons are living in a Kendo UI Mobile application. Configuration goes like this:
 
@@ -185,11 +196,16 @@ Since fonts are usually copyrighted, most browsers doesn't allow using them acro
         }
     }
 
-## Using Custom Icons with background-image
+<!--*-->
+## Usage of Custom Icons
+
+### Custom Icons with Background-Image
 
 To use any image for an icon in Kendo UI Mobile, raise the specificity of the background-image style to at least 40 in order to override the defaults. Use background-size to resize the image accordingly.
 
-### Define custom background-image icon
+The example below demonstrates how to define custom background-image icon.
+
+###### Example
 
     <style>
         .km-root .km-pane .km-view .km-custom
@@ -203,17 +219,21 @@ To use any image for an icon in Kendo UI Mobile, raise the specificity of the ba
         <a href="#index" data-icon="custom">Home</a>
     </div>
 
-## Using Custom Icons with WebKit masks
+### Custom Icons with WebKit Masks
 
 To use colorizable icon masks, specify the icon image as a **box mask** (either as dataURI or as a separate image).
 The image should be **PNG8** or **PNG24** with alpha channel (**PNG8+Alpha** is supported by only few graphic editors, so **better stick with PNG24** if not sure).
 The image color is not important - it will be used as a mask only - the alpha transparency will clip the colorized content.
 
-> **Important:** WebKit masks have numerous bugs across most platforms - **consider using them only if necessary**! <br /><br />
+> **Important**
+>
+> WebKit masks have numerous bugs across most platforms - **consider using them only if necessary**! <br /><br />
 In Android and MeeGo Webkit masks are unreliable - they can be turned into colorized rectangles by a simple CSS transformation at the wrong place.
 In BBOS 7.0 WebKit masks are completely broken - though they work in BBOS 6.0 and 7.1!
 
-### Define custom WebKit mask for an icon
+The example below demonstrates how to define a custom WebKit mask for an icon.
+
+###### Example
 
     <style>
         .km-custom {

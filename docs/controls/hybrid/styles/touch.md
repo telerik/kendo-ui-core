@@ -1,9 +1,12 @@
 ---
-title: Touch
+title: Touch Events
+page_title: Touch Events | Kendo UI Hybrid Components
+description: "Handle user-initiated touch events in the Hybrid UI framework of Kendo UI."
 previous_url: /controls/hybrid/touch
+position: 4
 ---
 
-# Touch
+# Touch Events
 
 The kendo Touch widget provides a cross-platform compatible API for handling user-initiated touch events, multi-touch gestures and event sequences (drag, swipe, etc.).
 On pointer enabled devices (i.e. desktops and laptops), mouse events are treated as touch events.

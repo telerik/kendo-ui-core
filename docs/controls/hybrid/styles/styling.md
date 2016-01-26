@@ -1,13 +1,14 @@
 ---
 title: Styling
-page_title: User guide to styling Kendo UI Mobile applications
-description: How to style Kendo UI Mobile applications with CSS.
+page_title: Styling | Kendo UI Hybrid Components
+description: "Style Kendo UI hybrid applications by using CSS."
 previous_url: /controls/hybrid/styling
-position: 0
+slug: overview_hybridkendoui
+position: 2
 ---
 
 
-## Kendo UI Mobile CSS Dependencies
+## Styling
 
 <br/>
 Kendo UI Mobile is shipped with several separate CSS files:
