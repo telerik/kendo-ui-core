@@ -5,32 +5,32 @@ if (kendo.ui.FilterCell) {
 kendo.ui.FilterCell.prototype.options.operators =
 $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
   "date": {
-    "eq": "Ist gleich",
-    "gt": "Ist nach",
-    "gte": "Ist nach oder gleich",
-    "lt": "Ist vor",
-    "lte": "Ist vor oder gleich",
-    "neq": "Ist nicht gleich"
+    "eq": "gleich sind",
+    "gt": "später sind als",
+    "gte": "gleich oder später sind als",
+    "lt": "früher sind als",
+    "lte": "früher oder gleich sind",
+    "neq": "nicht gleich sind"
   },
   "enums": {
-    "eq": "Ist gleich",
-    "neq": "Ist nicht gleich"
+    "eq": "gleich sind",
+    "neq": "nicht gleich sind"
   },
   "number": {
-    "eq": "Ist gleich",
-    "gt": "Ist größer als",
-    "gte": "Ist größer als oder gleich",
-    "lt": "Ist kleiner",
-    "lte": "Ist kleiner als oder gleich",
-    "neq": "Ist nicht gleich"
+    "eq": "gleich sind",
+    "gt": "größer als sind",
+    "gte": "größer als oder gleich sind",
+    "lt": "kleiner sind",
+    "lte": "kleiner als oder gleich sind",
+    "neq": "nicht gleich sind"
   },
   "string": {
-    "contains": "Beinhaltet",
-    "doesnotcontain": "Beinhaltet nicht",
-    "endswith": "Endet mit",
-    "eq": "Ist gleich",
-    "neq": "Ist nicht gleich",
-    "startswith": "Beginnt mit"
+    "contains": "beinhalten",
+    "doesnotcontain": "beinhalten nicht",
+    "endswith": "enden mit",
+    "eq": "gleich sind",
+    "neq": "nicht gleich sind",
+    "startswith": "beginnen mit"
   }
 });
 }
@@ -41,32 +41,32 @@ if (kendo.ui.FilterMenu) {
 kendo.ui.FilterMenu.prototype.options.operators =
 $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "date": {
-        "eq": "Ist gleich",
-        "gt": "Ist nach",
-        "gte": "Ist nach oder gleich",
-        "lt": "Ist vor",
-        "lte": "Ist vor oder gleich",
-        "neq": "Ist nicht gleich"
+        "eq": "gleich sind",
+        "gt": "später sind als",
+        "gte": "gleich oder später sind als",
+        "lt": "früher sind als",
+        "lte": "früher oder gleich sind",
+        "neq": "nicht gleich sind"
     },
     "enums": {
-        "eq": "Ist gleich",
-        "neq": "Ist nicht gleich"
+        "eq": "gleich sind",
+        "neq": "nicht gleich sind"
     },
     "number": {
-        "eq": "Ist gleich",
-        "gt": "Ist größer als",
-        "gte": "Ist größer als oder gleich",
-        "lt": "Ist kleiner",
-        "lte": "Ist kleiner als oder gleich",
-        "neq": "Ist nicht gleich"
+        "eq": "gleich sind",
+        "gt": "größer als sind",
+        "gte": "größer als oder gleich sind",
+        "lt": "kleiner sind",
+        "lte": "kleiner als oder gleich sind",
+        "neq": "nicht gleich sind"
     },
     "string": {
-        "contains": "Beinhaltet",
-        "doesnotcontain": "Beinhaltet nicht",
-        "endswith": "Endet mit",
-        "eq": "Ist gleich",
-        "neq": "Ist nicht gleich",
-        "startswith": "Beginnt mit"
+        "contains": "beinhalten",
+        "doesnotcontain": "beinhalten nicht",
+        "endswith": "enden mit",
+        "eq": "gleich sind",
+        "neq": "nicht gleich sind",
+        "startswith": "beginnen mit"
     }
 });
 }
@@ -79,11 +79,11 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "columns": "Spalten",
   "sortAscending": "Aufsteigend sortieren",
   "sortDescending": "Absteigend sortieren",
-  "settings": "Column Einstellungen",
-  "done": "Geschehen",
+  "settings": "Einstellungen zu Spalten",
+  "done": "Erledigt",
   "lock": "Sperren",
-  "unlock": "Aufschließen",
-  "filter": "Filter"
+  "unlock": "Entsperren",
+  "filter": "Filtern"
 });
 }
 
@@ -102,7 +102,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "label": "Beenden:",
     "never": "Nie",
     "on": "Am",
-    "mobileLabel": "Ends"
+    "mobileLabel": "Endet"
   },
   "frequencies": {
     "daily": "Täglich",
@@ -202,11 +202,11 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "addRowBelow": "Zeile unterhalb einfügen",
   "deleteColumn": "Spalte löschen",
   "deleteRow": "Zeile löschen",
-  "dropFilesHere": "drop files here to upload",
+  "dropFilesHere": "Dateien hier fallen lassen zum hochladen",
   "formatting": "Format",
   "viewHtml": "View HTML",
-  "dialogUpdate": "Update",
-  "insertFile": "Insert file"
+  "dialogUpdate": "Aktualisieren",
+  "insertFile": "Datei einfügen"
 });
 }
 
@@ -255,10 +255,10 @@ kendo.ui.FilterMenu.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "and": "Und",
   "clear": "Löschen",
-  "filter": "Filter",
-  "info": "Zeigt Zeilen mit Werten, die",
-  "isFalse": "ist falsch",
-  "isTrue": "ist richtig",
+  "filter": "Filtern",
+  "info": "Zeilen mit Werten anzeigen, die",
+  "isFalse": "falsch",
+  "isTrue": "richtig",
   "or": "Oder",
   "selectValue": "-Wählen Sie-",
   "cancel": "Abbrechen",
@@ -278,11 +278,11 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "create": "Neuen Datensatz hinzufügen",
     "destroy": "Löschen",
     "edit": "Bearbeiten",
-    "excel": "Export to Excel",
-    "pdf": "Export to PDF",
+    "excel": "Export nach Excel",
+    "pdf": "Export als PDF",
     "save": "Änderungen speichern",
     "select": "Wähle",
-    "update": "Aktualisiere"
+    "update": "Aktualisieren"
   },
   "editable": {
     "confirmation": "Sind Sie sicher, dass Sie diesen Datensatz löschen wollen?",
@@ -318,15 +318,15 @@ if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
   "allPages": "All",
-  "display": "Anzeigen der Elemente {0} - {1} von {2}",
+  "display": "Einträge {0} - {1} von {2}",
   "empty": "keine Daten",
-  "first": "Gehen Sie zur ersten Seite",
+  "first": "Zur ersten Seite",
   "itemsPerPage": "Elemente pro Seite",
-  "last": "Gehen Sie zur letzten Seite",
-  "next": "Gehen Sie zur nächsten Seite",
+  "last": "Zur letzten Seite",
+  "next": "Zur nächsten Seite",
   "of": "von {0}",
   "page": "Seite",
-  "previous": "Gehen Sie zur vorherigen Seite",
+  "previous": "Zur vorherigen Seite",
   "refresh": "Aktualisieren",
   "morePages": "Weitere Seiten"
 });
@@ -343,7 +343,7 @@ $.extend(true, kendo.ui.TreeList.prototype.options.messages, {
     retry: "Neu laden",
     commands: {
         edit: "Bearbeiten",
-        update: "Aktualisiere",
+        update: "Aktualisieren",
         canceledit: "Abbrechen",
         create: "Neuen Datensatz hinzufügen",
         createchild: "Kind-Datensatz hinzufügen",
@@ -365,11 +365,11 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "retry": "Wiederholen",
   "select": "Wählen Sie...",
   "statusFailed": "nicht erfolgreich",
-  "statusWarning": "warnung",
-  "statusUploaded": "hochgeladet",
+  "statusWarning": "Warnung",
+  "statusUploaded": "hochgeladen",
   "statusUploading": "hochladen",
   "uploadSelectedFiles": "Dateien hochladen",
-  "headerStatusUploaded": "Abgeschlossen",
+  "headerStatusUploaded": "Hochgeladen",
   "headerStatusUploading": "Hochladen..."
 });
 }
@@ -413,7 +413,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "editRecurring": "Möchten Sie nur diesen Termin oder alle Wiederholungen bearbeiten?",
     "editWindowOccurrence": "Aktuelles Ereignis bearbeiten",
     "editWindowSeries": "Serie bearbeiten",
-    "editWindowTitle": "Wiederholungs-Eintrag bearbeiten"
+    "editWindowTitle": "Wiederholungseintrag bearbeiten"
   },
   "save": "Speichern",
   "time": "Zeit",
