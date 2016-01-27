@@ -116,6 +116,50 @@ If the `<textarea>` width and height аре applied via external CSS styles, use
 
 Note that `<textarea>` `cols` and `rows` are required attributes and they can influence the dimensions of a `<textarea>` element as well. However, browsers do not apply them in a consistent manner, so the Editor ignores them when its size is rendered.
 
+When using the classic (iframe) mode, the Editor cannot assume a very small height, because it needs some minimum reasonable space for its toolbar and editable area. The default widget height is 250px. In order to set a height, which is smaller than 200px, the following approach should be used:
+
+```html
+<style>
+
+    table.small-editor
+    {
+        height: 100px;
+    }
+
+    table.small-editor iframe.k-content
+    {
+        height: 50px; /* 50px less than the Editor height */
+    }
+
+</style>
+
+<p>Smallest possible height for the classic Editor is 100px:</p>
+
+<textarea cols="20" rows="3" class="small-editor" name="classicEditor" id="classicEditor">&lt;Editor content&gt;</textarea>
+
+<p>The smallest reasonable height for the inline Editor is 2em:</p>
+
+<div id="inlineEditor" style="height:2em;"><p>Editor content</p></div>
+
+<script>
+
+    $(function () {
+        // initialize the classic Editor
+        $("#classicEditor").kendoEditor();
+        // apply custom sizing
+        $("textarea.small-editor").closest("table.k-editor").addClass("small-editor");
+
+        // initialize the inline Editor
+        $("#inlineEditor").kendoEditor();
+    });
+
+</script>
+```
+
+If the Editor's height should be smaller than 100px, then use the widget's [inline mode](#inline-mode).
+
+When using the MVC wrapper of Editor, apply the CSS class via `.HtmlAttributes()`.
+
 ### Default Content Styling
 
 Kendo UI Editor uses an `iframe` and applies some default CSS styles to its content when the [classic mode](#classic-mode) is enabled. This allows the widget to override the default browser styling. The styles are shown in the code snippet below. They are targeting mostly headings, paragraphs, links, lists, and tables. All tables inside the Editor obtain a `k-table` class, which is not included in the widget's value.
