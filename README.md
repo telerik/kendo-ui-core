@@ -179,7 +179,7 @@ gulp build
 
 There are several other tasks available:
 ```sh
-gulp --help
+gulp --tasks
 ```
 
 ### Building only what you need
