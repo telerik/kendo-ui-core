@@ -130,8 +130,8 @@ The example below demonstrates how to display a tooltip for individual shapes in
           }],
           shapeMouseEnter: function(e) {
             var oe = e.originalEvent;
-            var x = oe.pageX || oi.clientX;
-            var y = oe.pageY || oi.clientY;
+            var x = oe.pageX || oe.clientX;
+            var y = oe.pageY || oe.clientY;
 
             var name = e.shape.dataItem.properties.name;
             popup.element.html(name);
