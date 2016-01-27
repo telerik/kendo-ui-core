@@ -50,3 +50,4 @@ Articles on Hybrid UI components in Kendo UI:
 
 * [Overview of the Hybrid UI Components in Kendo UI]({% slug overview_hybridkendoui %})
 * [Native Scrolling]({% slug nativescrolling_hybrid_kendoui %})
+* [Overview of the Application for Mobile]({% slug overview_hybridapplication %})

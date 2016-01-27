@@ -341,3 +341,4 @@ Articles on Hybrid UI components in Kendo UI:
 
 * [Performance Tips and Tricks]({% slug performance_hybridkendoui %})
 * [Native Scrolling]({% slug nativescrolling_hybrid_kendoui %})
+* [Overview of the Application for Mobile]({% slug overview_hybridapplication %})
