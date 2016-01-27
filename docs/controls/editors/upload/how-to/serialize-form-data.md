@@ -1,17 +1,17 @@
 ---
-title: Serialize Form Data
-page_title: Serialize Form Data During Async Upload | Kendo UI Upload Widget
-description: "Learn how to serialize form data with a Kendo Upload"
+title: Serialize Form Data during Async Upload
+page_title: Serialize Form Data during Async Upload | Kendo UI Upload Widget
+description: "Learn how to serialize form data with the Kendo UI Upload widget."
 slug: howto_serialize_form_data_upload
 ---
 
-# Serialize Form Data During Async Upload
+# Serialize Form Data during Async Upload
 
 It can be desirable to include a collection of form fields as [Metadata]({% slug metadata_upload_widget %}) during asynchronous uploads.
 
-The output from the commonly used [jQuery.serializeArray](http://api.jquery.com/serializeArray/) helper is not usable directly in the [upload event](/api/javascript/ui/upload#events-upload) and needs to be processed as illustrated below.
+The output from the commonly used [`jQuery.serializeArray`](http://api.jquery.com/serializeArray/) helper is not usable directly in the [`upload` event](/api/javascript/ui/upload#events-upload) and needs to be processed as illustrated in the example below.
 
-###### Example - Serialize form data for async upload
+###### Example
 
 ```html
     <form id="form"/>
@@ -40,7 +40,10 @@ The output from the commonly used [jQuery.serializeArray](http://api.jquery.com/
     </script>
 ```
 
-The network request will look like:
+The network request is expected to look like the one shown below.
+
+###### Example
+
 ```
 ------WebKitFormBoundaryXLTaUOP1FzKWJJlD
 Content-Disposition: form-data; name="name1"
