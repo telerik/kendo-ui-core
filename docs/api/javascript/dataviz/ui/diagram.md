@@ -98,6 +98,43 @@ The static text displayed on the connection.
 
 A function returning a visual element to render for the content of a connection.
 
+#### Example - Connection content visual
+```html
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        dataSource: [{
+          "name" : "Telerik",
+          "items": [
+            {"name": "Kendo"},
+            {"name": "Icenium"}
+          ]
+        }],
+        connectionDefaults: {
+          content: {
+            visual: function(e) {
+              var g = new kendo.dataviz.diagram.Group({
+                autoSize: true
+              });
+              var text = new kendo.dataviz.diagram.TextBlock({
+                text: "Foo",
+                fontSize: 16,
+                x: 10,
+                y: 5
+              });
+
+              g.append(text);
+              return g;
+            }
+          }
+        },
+        layout: {
+          type: "tree"
+        }
+      });
+    </script>
+```
+
 ### connectionDefaults.editable `Boolean|Object` *(default: true)*
 
 Defines the editing behavior of the connections.
