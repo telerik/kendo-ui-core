@@ -3,28 +3,31 @@ title: Styling
 page_title: Styling | Kendo UI Hybrid Components
 description: "Style Kendo UI hybrid applications by using CSS."
 previous_url: /controls/hybrid/styling
-slug: overview_hybridkendoui
+slug: styling_hybridkendoui
 position: 2
 ---
 
+# Styling
 
-## Styling
+The Kendo UI Hybrid framework is shipped with several separate CSS files:
 
-<br/>
-Kendo UI Mobile is shipped with several separate CSS files:
+* `kendo.mobile.all.min.css`&mdash;This is the default one and includes all supported themes, common and icon CSS.
+* `kendo.mobile.\*.min.css`&mdash;The separate CSS files for every supported platform and skin, which are self-sufficient.
+* `kendo.mobile.common.min.css`&mdash;The common and icon CSS needed for the Kendo UI Mobile theme skeleton - use this one if you want to start a skin from scratch.
 
-* **kendo.mobile.all.min.css** - is the default one and includes all supported themes, common and icon CSS.
-* **kendo.mobile.\*.min.css** - separate CSS files for every supported platform and skin, which are self-sufficient.
-* **kendo.mobile.common.min.css** - common and icon CSS needed for the Kendo UI Mobile theme skeleton - use this one if you want to start a skin from scratch.
+> **Important**
+>
+> All themes and skins require the `images` sub-folder, which contains a mask for the iOS back button, icon fonts and the Windows Phone 8 PhoneGap icon workaround images.
 
-All themes and skins ***require*** the **images** sub-folder, which contains a mask for the iOS back button, icon fonts and the WP8 PhoneGap icon workaround images.
+Depending on the project requirements, the mobile application may be styled in several different ways. Each approach requires a different set of stylesheets and `mobile.Application` configuration options.
 
-Depending on the project requirements, the mobile application may be styled in several different ways.
-Each approach requires a different set of stylesheets and `mobile.Application` configuration options.
+## Common Scenarios
 
-## Mobile Application Which Changes its Theme Based on the Device It Is Deployed on
+### Mobile Application Which Changes Its Theme Depending on the Device
 
 For the platform-adaptive styling to work as expected, the `kendo.mobile.all.min.css` CSS should be referred.
+
+###### Example
 
 ```html
 <!DOCTYPE html>
@@ -53,10 +56,11 @@ For the platform-adaptive styling to work as expected, the `kendo.mobile.all.min
 </html>
 ```
 
-## Mobile Application with iOS Look on All Devices
+### Mobile Application with iOS Look on All Devices
 
-If you are targeting iOS devices only, or you want your application to have the iOS look regardless of the device, you may use either `kendo.mobile.all.min.css` or `kendo.mobile.ios.min.css`.
-Both stylesheet files include both the *iOS6* (default) and *iOS7+* looks. The `majorVersion` of the `platform` configuration option determines which one will be used.
+If you are targeting iOS devices only, or you want your application to have the iOS look regardless of the device, you may use either `kendo.mobile.all.min.css` or `kendo.mobile.ios.min.css`. Each of the two stylesheet files includes both the iOS6 (default) and iOS7+ looks. The `majorVersion` of the `platform` configuration option determines which one is going to be used.
+
+###### Example
 
 ```html
 <!DOCTYPE html>
@@ -91,13 +95,13 @@ Both stylesheet files include both the *iOS6* (default) and *iOS7+* looks. The `
 </html>
 ```
 
-## Mobile Application with Android Look on All Devices
+### Mobile Application with Android Look on All Devices
 
-If you are targeting Android devices only, or you want your application to have the Android look regardless of the device,
-you may use either `kendo.mobile.all.min.css`, `kendo.mobile.android.dark.min.css` (for dark, default mode) or `kendo.mobile.android.light.min.css`.
-The platform configuration option should be set, too.
+If you are targeting Android devices only, or you want your application to have the Android look regardless of the device, you may use either `kendo.mobile.all.min.css`, `kendo.mobile.android.dark.min.css` (for dark, default mode) or `kendo.mobile.android.light.min.css`. The platform configuration option should be set, too.
 
-### Mobile Application with Android Halo Dark Look
+#### Mobile Application with Android Halo Dark Look
+
+###### Example
 
 ```html
 <!DOCTYPE html>
@@ -127,7 +131,9 @@ The platform configuration option should be set, too.
 </html>
 ```
 
-### Mobile Application with Android Halo Light Look
+#### Mobile Application with Android Halo Light Look
+
+###### Example
 
 ```html
 <!DOCTYPE html>
@@ -157,13 +163,13 @@ The platform configuration option should be set, too.
 </html>
 ```
 
-## Mobile Application with Windows Phone 8 Look on All Devices
+### Mobile Application with Windows Phone 8 Look on All Devices
 
-If you are targeting Windows Phone devices only, or you want your application to have the
-Windows Phone look regardless of the device, you may use either `kendo.mobile.all.min.css` or `kendo.mobile.wp8.min.css`.
-The platform configuration option should be set, too.
+If you are targeting Windows Phone devices only, or you want your application to have the Windows Phone look regardless of the device, you may use either `kendo.mobile.all.min.css` or `kendo.mobile.wp8.min.css`. The platform configuration option should be set, too.
 
-### Mobile Application with Windows Phone 8 Look
+#### Mobile Application with Windows Phone 8 Look
+
+###### Example
 
 ```html
 <!DOCTYPE html>
@@ -193,19 +199,21 @@ The platform configuration option should be set, too.
 </html>
 ```
 
-## Mobile Application with a Platform Agnostic Skin
+### Mobile Application with Platform Agnostic Skin
 
-Kendo UI Mobile ships several device agnostic skins:
+The Kendo UI Hybrid framework ships several device agnostic skins:
 
- * `flat` - kendo.mobile.flat.min.css
- * `nova` - kendo.mobile.nova.min.css
- * `material` - kendo.mobile.material.min.css
- * `fiori` - kendo.mobile.fiori.min.css
- * `office365` - kendo.mobile.office365.min.css
+ * `flat`&mdash;`kendo.mobile.flat.min.css`
+ * `nova`&mdash;`kendo.mobile.nova.min.css`
+ * `material`&mdash;`kendo.mobile.material.min.css`
+ * `fiori`&mdash;`kendo.mobile.fiori.min.css`
+ * `office365`&mdash;`kendo.mobile.office365.min.css`
 
 The skin should be activated by including the respective skin CSS file `kendo.mobile.${skin}.min.css` and setting the `skin` option.
 
-### Mobile Application with a Nova Skin
+### Mobile Application with Nova Skin
+
+###### Example
 
 ```html
 <!DOCTYPE html>
@@ -233,26 +241,23 @@ The skin should be activated by including the respective skin CSS file `kendo.mo
 </html>
 ```
 
-## Using the Mobile Widgets in a Web Context without a Mobile Application Instance
+### Hybrid Widgets in Web Context without Mobile Application Instance
 
-The case is described in further details in the [Using with Kendo UI Web](/mobile/regular-usage) help article.
+The case is described in further details in [this article](/controls/hybrid/support/regular-usage).
 
-<br/>
+## ThemeBuilder for Mobile
 
-## Kendo UI Mobile ThemeBuilder
+The Kendo UI themes for mobile are designed to be easily customizable with different colors and backgrounds. To further ease the task, Kendo UI also provides a special tool called [Kendo UI ThemeBuilder for mobile](http://demos.telerik.com/kendo-ui/mobilethemebuilder/index.html). It is very simple to use&mdash;just drag and drop your chosen colors, gradients, patterns and font styles onto the platform theme you want to restyle and finally click the export button to get the needed CSS stylesheet.
 
-<br/>
-Kendo UI Mobile's themes are designed to be easily customizable with different colors and backgrounds.
-To further ease the task, we also provide a special tool called [Kendo UI Mobile ThemeBuilder](http://demos.telerik.com/kendo-ui/mobilethemebuilder/index.html).
-It is very simple to use - just drag and drop your chosen colors, gradients, patterns and font styles onto the platform theme you need restyled and finally click the export button to get
-the needed CSS stylesheet.
+## Color Modifications
 
-## Changing iOS7 tint color
+### Change iOS7 Tint Color
 
-On 10th September 2013 Kendo UI Mobile released an iOS7 theme as an internal build which will be also included in the upcoming Q2 service pack.
+On 10th September 2013 Kendo UI released an iOS7 theme for mobile devices as an internal build which is also included in the Q2 service pack.
 
-In iOS7 every application can have the ability to set "tint color" which is used for highlighting specific interactive elements throughout the whole application.
-The tint color can be also set per single view. The Kendo UI Mobile's iOS7 theme is created to be similarly easy to change the application tint color with this simple CSS rule:
+In iOS7 every application can have the ability to set a tint color which is used for highlighting specific interactive elements throughout the whole application. The tint color can be also set per single view. The Kendo UI iOS7 theme for mobile is created to be similarly easy to change the application tint color with the simple CSS rule shown below.
+
+###### Example
 
     .km-ios7 .k-list,
     .km-ios7 .k-slider,
@@ -261,10 +266,11 @@ The tint color can be also set per single view. The Kendo UI Mobile's iOS7 theme
         color: green;
     }
 
-Additionally a single View tint color can be changed by simply adding a CSS class to it and changing the above CSS accordingly. Make sure to avoid raising the CSS specificity above 20
-(avoid #ID selectors and !important), or all text in the View will be colorized.
+### Change iOS7 Tint Color for Specific Views
 
-### Change the iOS7 tint color for a specific View
+Additionally, a single View tint color can be changed by simply adding a CSS class to it and changing the above CSS accordingly. Make sure to avoid raising the CSS specificity above 20 (avoid `#ID` selectors and `!important`), otherwise all the text in the View will be colorized.
+
+###### Example
 
     .specific-view .k-list,
     .specific-view .k-slider,
@@ -273,7 +279,9 @@ Additionally a single View tint color can be changed by simply adding a CSS clas
         color: green;
     }
 
-### Example with application and View-specific tint
+The example below demonstrates an application and a View-specific tint.
+
+###### Example
 
     <style scoped>
       .km-ios7 .k-list,
@@ -320,10 +328,11 @@ Additionally a single View tint color can be changed by simply adding a CSS clas
       new kendo.mobile.Application();
     </script>
 
-## Changing Android tint color
+### Change Android Tint Color
 
-As of Q1 2014, every Android application also can have the ability to set "tint color" which is used for highlighting specific interactive elements throughout the whole application.
-The tint color can be also set per single view. The Kendo UI Mobile's Android theme (android-light and android-dark) are created to be similarly easy to change the application tint color with this CSS rule:
+As of Kendo UI Q1 2014 release, every Android application can also have the ability to set a tint color which is used for highlighting specific interactive elements throughout the whole application. The tint color can also be set per a single view. The Kendo UI Android themes for mobile (`android-light` and `android-dark`) are created to be similarly easy to change the application tint color with the CSS rule demonstrated below.
+
+###### Example
 
     .km-android .km-shim,
     .km-android .km-popup,
@@ -342,12 +351,14 @@ The tint color can be also set per single view. The Kendo UI Mobile's Android th
         color: pink;
     }
 
-The CSS rule is bigger than the iOS one, as the Android theme mostly has highlight colors on its active states.
+The CSS rule is longer than the iOS one, as the Android theme has mostly highlight colors on its active states.
 
-Additionally a single View tint color can be changed by simply adding a CSS class to it and changing the above CSS accordingly. Make sure to avoid raising the CSS specificity above 20
-(avoid #ID selectors and !important).
+### Change Android Tint Color for Specific Views
 
-### Change the iOS7 tint color for a specific View
+Additionally, a single View tint color can be changed by simply adding a CSS class to it and changing the above CSS accordingly. Make sure to avoid raising the CSS specificity above 20
+(avoid `#ID` selectors and `!important`).
+
+###### Example
 
     .specific-view .km-shim,
     .specific-view .km-popup,
@@ -366,7 +377,9 @@ Additionally a single View tint color can be changed by simply adding a CSS clas
         color: green;
     }
 
-### Example with application and View-specific tint
+The example below demonstrates an application and a View-specific tint.
+
+###### Example
 
     <style scoped>
       .km-android .km-shim,
@@ -433,12 +446,13 @@ Additionally a single View tint color can be changed by simply adding a CSS clas
       new kendo.mobile.Application();
     </script>
 
-## Changing Flat skin active color
+### Change Flat Skin Active Color
 
-<br/>
-The Flat skin shipped with Kendo UI Mobile Q2 2013, was created to provide maximum performance. Also the active color of the skin can be easily changed with several CSS rules.
+The Flat skin, shipped with Kendo UI Q2 2013 release for mobile, was created to provide a maximum performance. Also the active color of the skin can be easily changed with several CSS rules.
 
-### Change the Flat skin active background to blue
+The example below demonstrates how to change the flat skin active background to blue.
+
+###### Example
 
     .km-flat .km-switch-handle,
     .km-flat .k-slider-selection,
@@ -476,7 +490,9 @@ The Flat skin shipped with Kendo UI Mobile Q2 2013, was created to provide maxim
         border-color: #369;
     }
 
-### Change the Flat skin active background to red and the color to beige
+The example below demonstrates how to change the flat skin active background to red and the color to beige.
+
+###### Example
 
     .km-flat .km-badge,
     .km-flat .km-rowinsert,
@@ -551,17 +567,20 @@ The Flat skin shipped with Kendo UI Mobile Q2 2013, was created to provide maxim
         border-color: #ff6363;
     }
 
-## Nova theme features
+<!--*-->
+## Nova Theme Features
 
-### Generic content styles
+### Generic Content Styles
 
-Nova theme provides predefined generic styles for **h1, h2, h3, h4 ,h5, h6** and **p** elements which are in a mobile view.
+The Kendo UI Nova theme provides predefined generic styles for the `h1`, `h2`, `h3`, `h4`, `h5`, `h6` and `p` elements which are in a mobile view.
 
-### Font weights
+### Font Weights
 
-Nova theme provides three predefined font weights - light, medium and bold. To activate them use `km-light-font`, `km-medium-font` or `km-bold-font` classes.
+The Kendo UI Nova theme provides three predefined font weights&mdash;light, medium, and bold. To activate them, use the `km-light-font`, `km-medium-font`, or `km-bold-font` classes.
 
-#### Font weights example
+The example below demonstrates Nova theme font weights.
+
+###### Example
 
 	<div data-role="view" data-title="Typography">
 		<!-- h1 with bold font weight -->
@@ -571,3 +590,12 @@ Nova theme provides three predefined font weights - light, medium and bold. To a
 		<!-- h1 with light font weight -->
 		<h1 class="km-light-font">Heading 1</h1>
 	</div>
+
+## See Also
+
+Other articles related to the appearance and styling of Kendo UI hybrid distribution:
+
+* [Style the Hybrid UI Form Elements]({% slug forms_hybridkendoui %})
+* [Define the Layout]({% slug layout_hybridkendoui %})
+* [Touch Events]({% slug touchevents_hybridkendoui %})
+* [Hybrid UI Font Icons]({% slug hybridiconfonts_hybridkendoui %})

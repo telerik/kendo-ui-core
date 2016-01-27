@@ -99,18 +99,15 @@ navigation:
         position: 11
     "controls/hybrid/styles":
         title: "Styles and Appearance"
-        position: 4
+        position: 5
     "controls/hybrid/support":
         title: "Support and Integration"
-        position: 5
+        position: 6
     "controls/hybrid/support/angular/tutorials":
         title: "Tutorials"
         position: 100
     "controls/hybrid/actionsheet":
         title: "ActionSheet"
-        position: 6
-    "controls/hybrid/application":
-        title: "Application"
         position: 7
     "controls/hybrid/button":
         title: "Button"
