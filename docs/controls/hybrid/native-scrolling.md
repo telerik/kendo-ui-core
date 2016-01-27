@@ -66,3 +66,4 @@ Other articles on Hybrid UI components in Kendo UI:
 
 * [Overview of the Hybrid UI Components in Kendo UI]({% slug overview_hybridkendoui %})
 * [Performance Tips and Tricks]({% slug performance_hybridkendoui %})
+* [Overview of the Application for Mobile]({% slug overview_hybridapplication %})
