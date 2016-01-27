@@ -106,12 +106,12 @@ There are some CSS classes, which you can use to apply borders and background co
 
 The following LESS-related information is applicable only if you want to modify the Kendo UI CSS source code.
 
-In the 2014 Q1 release the Kendo UI Web common LESS file was split to seprate LESS files for each widget and Kendo UI Mobile platform themes were also divided in parts to file per widget. The LESS command-line compiler can be used to build LESS source files to CSS skins and themes. The LESS files, which can be passed to the compiler, are located in the first-level folders inside `styles/folder`: `styles/web/` and `styles/mobile/`. Kendo UI Mobile files are self explanatory. Except `meego.less`, which is deprecated, the rest of the files can be built with LESS and produce all platform themes. Some use CSS files, including `kendo.mobile.all.css`. The LESS files of Kendo UI are named as follows.
+In the Q1 2014 release, the Kendo UI Web common LESS file was split to separate LESS files for each widget, and Kendo UI mobile platform themes were also divided in parts to files per widget. The LESS command-line compiler can be used to build LESS source files to CSS skins and themes. The LESS files, which can be passed to the compiler, are located in the first-level folders inside `styles/folder`: `styles/web/` and `styles/mobile/`. Kendo UI Mobile files are self explanatory. Except `meego.less`, which is deprecated, the rest of the files can be built with LESS and produce all platform themes. Some use CSS files, including `kendo.mobile.all.css`. The LESS files of Kendo UI are named as follows.
 
 | LESS Files  | Contents and Application  |
 |:---         |:---                       |
 | **`kendo.[theme-name].less`** | The file contains theme variables, but does not include styles for hybrid widgets. Building it produces a theme file. |
-| **`kendo.[theme-name].mobile.less`** | Contains styling for all widgets, including hybrid ones. Builing it produces a theme file for all widgets. |
+| **`kendo.[theme-name].mobile.less`** | Contains styling for all widgets, including hybrid ones. Building it produces a theme file for all widgets. |
 | **`kendo.common.less`**| This a default sizing file for all Kendo UI widgets. Building it produces a common file for all Kendo UI widgets.|
 | **`kendo.common-[theme-name].less`** | Contains sizing adjustments for [theme-name] for all Kendo UI widgets. Building it produces a common file for all Kendo UI widgets. |
 | **`kendo.common.core.less`** | This is a default sizing file for Kendo UI Core widgets. Building it produces a common file for Kendo UI Core widgets. |

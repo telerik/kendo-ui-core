@@ -1,18 +1,19 @@
 ---
-title: Overview
-page_title: Overview | Kendo UI Hybrid Application
-description: "Initiate the Kendo UI hybrid Application and handle its navigation."
+title: Application
+page_title: Application | Kendo UI Hybrid Application
+description: "Initiate the Kendo UI Application for mobile and handle its navigation."
 previous_url: /howto/universal-mobile-apps-html5
 slug: overview_hybridapplication
-position: 1
+position: 4
 ---
 
-# Hybrid Application Overview
+# Application
 
-The Kendo UI Mobile **Application** provides the necessary tools for building native-looking web based mobile applications.
+The Kendo UI Application for mobile devices provides the necessary tools for building native-looking web based mobile applications.
 
-> **Important:** Kendo UI Mobile Application init takes care of adding a Viewport meta tag to your app, in order to set the correct options it needs to function properly. Additional Viewport meta tags
-or at least the **width** and **height** options are not supported and may result in unexpected behavior.
+> **Important**
+>
+> Kendo UI Application for mobile initially takes care of adding a Viewport meta tag to your app, in order to set the correct options it needs to function properly. Additional Viewport meta tags or at least the **width** and **height** options are not supported and may result in unexpected behavior.
 
 ## Getting Started
 
