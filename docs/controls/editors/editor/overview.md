@@ -43,6 +43,7 @@ The inline Editor is not able to post its value and [this is something you must 
 [Inline Editor Demo](http://demos.telerik.com/kendo-ui/web/editor/inline-editing.html)
 
 > **Important**  
+>
 > Due to the iOS Safari browser's limited `iframe` support, the inline mode of the Editor is recommended to use on iOS devices.
 
 ## Configuration
@@ -116,7 +117,9 @@ If the `<textarea>` width and height аре applied via external CSS styles, use
 
 Note that `<textarea>` `cols` and `rows` are required attributes and they can influence the dimensions of a `<textarea>` element as well. However, browsers do not apply them in a consistent manner, so the Editor ignores them when its size is rendered.
 
-When using the classic (iframe) mode, the Editor cannot assume a very small height, because it needs some minimum reasonable space for its toolbar and editable area. The default widget height is 250px. In order to set a height, which is smaller than 200px, the following approach should be used:
+When using the classic (iframe) mode, the Editor cannot assume a very small height, because it needs some minimum reasonable space for its toolbar and editable areas. The default widget height is 250px. To set a height, which is smaller than 200px, use the approach shown in the example below.
+
+###### Example
 
 ```html
 <style>
@@ -158,7 +161,7 @@ When using the classic (iframe) mode, the Editor cannot assume a very small heig
 
 If the Editor's height should be smaller than 100px, then use the widget's [inline mode](#inline-mode).
 
-When using the MVC wrapper of Editor, apply the CSS class via `.HtmlAttributes()`.
+When using the MVC wrapper of the Editor, apply the CSS class via `.HtmlAttributes()`.
 
 ### Default Content Styling
 
