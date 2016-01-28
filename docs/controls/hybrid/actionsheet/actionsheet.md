@@ -87,9 +87,9 @@ The example below demonstrates ActionSheet actions and context.
 
 Other articles and how-to examples on the Hybrid UI components and on the ActionSheet:
 
-* [Hybrid UI ActionSheet API Reference](/api/javascript/mobile/ui/actionsheet)
-* [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})
+* [Hybrid UI ActionSheet JavaScript API Reference](/api/javascript/mobile/ui/actionsheet)
 * [How to Change Options Dynamically in the ActionSheet]({% slug howto_changeoptiojnsdynamically_hybridactionsheet %})
+* [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})
 * [How to Create Fixed Content Areas with Scroller]({% slug howto_createfixedcontentarea_hybridui %})
 * [How to Create Relative Content Size Using Flexboxes]({% slug howto_createrelative_contentsize_usingflexboxes_hybridui %})
 * [How to Select Value from Another View]({% slug howto_selectvaluefrom_anotherview_hybridui %})
