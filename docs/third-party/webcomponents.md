@@ -117,7 +117,7 @@ DataSource can be specified as any other option through the attributes of the el
 ###### Example
 
 ```html
-<kendo-dropdownlist dataSource="['Black', 'Orange', 'Grey']"></kendo-dropdownlist>
+<kendo-dropdownlist data-source="['Black', 'Orange', 'Grey']"></kendo-dropdownlist>
 <script>
     var dataSource = new kendo.data.DataSource({
         data:['Red', 'Green', 'Blue']
