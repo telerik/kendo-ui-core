@@ -272,6 +272,7 @@ var __meta__ = { // jshint ignore:line
                     duration: 200
                 }
             },
+            contentUrls: [],
             expandMode: "multiple"
         },
 
