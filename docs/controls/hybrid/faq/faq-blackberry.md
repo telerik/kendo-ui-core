@@ -1,21 +1,31 @@
 ---
-title: Frequently Asked Questions
-page_title: Kendo UI Mobile Frequently Asked Questions
-description: Answers to Frequently Asked Questions about how Kendo UI mobile works and behaves
+title: Blackberry-Specific FAQ
+page_title: Blackberry-Specific FAQ
+description: "Check out the frequently asked questions and their answers about how Kendo UI hybrid components work and behave on the Blackberry platform."
+slug: blackberry_specific_faq
 position: 4
 ---
 
-# Frequently Asked Questions
+# Blackberry-Specific FAQ
 
-This is a collection of frequently asked questions about how Kendo UI mobile framework works and behaves.
+This is a collection of frequently asked questions and their answers about how Kendo UI hybrid mobile components work and behave on the Blackeberry platform.
 
-## BlackBerry
+## List of FAQ
 
-### Q: I have webkit mask icons in my application and they are rendered as squares in BlackBerry OS 7.0?
+### I have WebKit mask icons in my application and they are rendered as squares in BlackBerry OS 7.0. Why?
 
-A: WebKit masks are completely broken in BlackBerry OS 7.0, though they work fine in 6.x and 7.1. Either use font icons or normal images.
+WebKit masks are completely broken in BlackBerry OS 7.0, though they work fine in 6.x and 7.1. Either use font icons, or normal images.
 
-### Q: My trackball doesn't seem to work properly, how should I scroll?
+### My trackball does not seem to work properly. How do I scroll?
 
-A: Kendo UI Mobile supports only touchscreen BlackBerry devices. The trackball/pad that can be found on the older phone models fires mouse events (which are handled), but
-doesn't support content dragging. This limitation is listed in Kendo UI Mobile requirements.
+The Hybrid UI framework supports only touchscreen BlackBerry devices. The trackball/pad that can be found on the older phone models fires mouse events&mdash;which are handled&mdash;but
+does not support content dragging. This limitation is listed in the requirement for the Hybrid UI.
+
+## See Also
+
+Other articles on frequently asked questions about the Hybrid UI components:
+
+* [All Platforms FAQ]({% slug all_platforms_faq %})
+* [iOS-Specific FAQ]({% slug ios_specific_faq %})
+* [Android-Specific FAQ]({% slug android_specific_faq %})
+* [Windows Phone 8 FAQ]({% slug windowsphone8_specific_faq %})

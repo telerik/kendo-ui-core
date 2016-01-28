@@ -1,24 +1,30 @@
 ---
-title: Frequently Asked Questions
-page_title: Kendo UI Mobile Frequently Asked Questions
-description: Answers to Frequently Asked Questions about how Kendo UI mobile works and behaves
+title: iOS-Specific FAQ
+page_title: iOS-Specific FAQ
+description: "Check out the frequently asked questions and their answers about how Kendo UI hybrid components work and behave on the iOS platform."
+slug: ios_specific_faq
 position: 2
 ---
 
-# Frequently Asked Questions
+# iOS-Specific FAQ
 
-This is a collection of frequently asked questions about how Kendo UI mobile framework works and behaves.
+This is a collection of frequently asked questions and their answers about how Kendo UI hybrid mobile components work and behave on the iOS platform.
 
-## iOS
+## List of FAQ
 
-### Q: I run a PhoneGap application in iOS7 and the status bar overlays my NavBar, what gives?
+### I run a PhoneGap application in iOS7 and the status bar overlays my NavBar. Why?
 
-A: According to the [official iOS7 design guidelines](https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/MobileHIG/Bars.html#//apple_ref/doc/uid/TP40006556-CH12-SW1),
-the iOS7 status bar should be transparent and always visible. Kendo Mobile allows this by using the [Application's statusBarStyle option](/mobile/application#seamless-status-bar-in-ios7)
-set to "black-transparent". If you still wish to use the old black non-transparent status bar style, you can change it through the PhoneGap XCode project's [plist](http://stackoverflow.com/a/4053237/258445).
+According to the [official iOS7 design guidelines](https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/MobileHIG/Bars.html#//apple_ref/doc/uid/TP40006556-CH12-SW1), the iOS7 status bar should be transparent and always visible. The Hybrid UI allows this by using the [`statusBarStyle` option of the Application]({% slug overview_hybridapplication %}#hide-status-bar-in-ios-and-cordova) set to `black-transparent`. If you still wish to use the old black non-transparent status bar style, change it through the PhoneGap XCode project's [plist](http://stackoverflow.com/a/4053237/258445).
 
-### Q: My TabStrip looks different on different versions of the OS or even between iPad and iPhone, why?
+### My TabStrip looks different on different versions of the iOS or even between iPad and iPhone. Why?
 
-A: Kendo UI Mobile tries to match the native look of several iOS platform versions and devices. Thus some widgets look slightly different on iOS 5 versus iOS 6.
-Additionally tablet and phone styling is slightly different too. If you want to have the same styling on all iOS devices, choose the one you want and force it
-through the Application [platform](./mobile/application#force-ios-5-look) option.
+The Hybrid UI framework tries to match the native look of several iOS platform versions and devices. Thus, some widgets look slightly different on iOS 5 versus iOS 6. Additionally, tablet and phone styling is slightly different too. If you want to have the same styling on all iOS devices, choose the one you want and force it through the Application `platform` option.
+
+## See Also
+
+Other articles on frequently asked questions about the Hybrid UI components:
+
+* [All Platforms FAQ]({% slug all_platforms_faq %})
+* [Android-Specific FAQ]({% slug android_specific_faq %})
+* [Blackberry-Specific FAQ]({% slug blackberry_specific_faq %})
+* [Windows Phone 8 FAQ]({% slug windowsphone8_specific_faq %})
