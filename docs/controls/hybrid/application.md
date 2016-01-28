@@ -1,6 +1,6 @@
 ---
 title: Application
-page_title: Application | Kendo UI Hybrid Application
+page_title: Application | Kendo UI Hybrid Components
 description: "Initiate the Kendo UI Application for mobile and handle its navigation."
 previous_url: /howto/universal-mobile-apps-html5
 slug: overview_hybridapplication
@@ -379,8 +379,9 @@ The example below demonstrates how to initialize a Kendo UI hybrid mobile applic
 
 ## See Also
 
-Articles on Hybrid UI components in Kendo UI:
+Articles on Application and other Hybrid UI components in Kendo UI:
 
+* [Hybrid UI Application API Reference](/api/javascript/mobile/application)
 * [Overview of the Hybrid UI Components in Kendo UI]({% slug overview_hybridkendoui %})
 * [Performance Tips and Tricks]({% slug performance_hybridkendoui %})
 * [Native Scrolling]({% slug nativescrolling_hybrid_kendoui %})
