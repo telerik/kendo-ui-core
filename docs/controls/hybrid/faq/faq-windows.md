@@ -1,6 +1,6 @@
 ---
 title: Windows Phone 8 FAQ
-page_title: Windows Phone 8 FAQ
+page_title: Windows Phone 8 FAQ | Kendo UI Hybrid Components
 description: "Check out the frequently asked questions and their answers about how Kendo UI hybrid components work and behave on the Windows Phone 8 platform."
 slug: windowsphone8_specific_faq
 position: 5

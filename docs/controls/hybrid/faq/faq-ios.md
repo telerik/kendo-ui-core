@@ -1,6 +1,6 @@
 ---
 title: iOS-Specific FAQ
-page_title: iOS-Specific FAQ
+page_title: iOS-Specific FAQ | Kendo UI Hybrid Components
 description: "Check out the frequently asked questions and their answers about how Kendo UI hybrid components work and behave on the iOS platform."
 slug: ios_specific_faq
 position: 2

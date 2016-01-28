@@ -1,6 +1,6 @@
 ---
 title: Performance
-page_title: Performance | Hybrid Kendo UI
+page_title: Performance | Kendo UI Hybrid Components
 description: "Efficiently use the hybrid Kendo UI components and handle performance issues to speed up View transitions."
 slug: performance_hybridkendoui
 position: 3

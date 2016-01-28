@@ -1,6 +1,6 @@
 ---
 title: All Platforms FAQ
-page_title: All Platforms FAQ
+page_title: All Platforms FAQ | Kendo UI Hybrid Components
 description: "Check out the frequently asked questions and their answers about how Kendo UI hybrid components generally work and behave on all platforms."
 slug: all_platforms_faq
 previous_url: /kendo-mobile-faq

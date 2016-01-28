@@ -1,14 +1,15 @@
 ---
-title: Select value from another view
-page_title: Select value from another view
-description: Select value from another view
+title: Select Value from Another View
+page_title: Select Value from Another View | Kendo UI Hybrid Components
+description: "Learn how to select value from another view when working with the Hybrid UI components of Kendo UI."
+slug: howto_selectvaluefrom_anotherview_hybridui
 ---
 
-# Select value from another view
+# Select Value from Another View
 
-The example below demonstrates how to navigate to a child view from a ListView, select an item and return back to the parent view showing the selected item.
+The example below demonstrates how to navigate to a child view from a ListView, select an item and return back to the parent view showing the selected item when working with the Hybrid UI components of Kendo UI.
 
-#### Example:
+###### Example
 
 ```html
     <div data-role="view" data-model="app.models.survey" data-title="Survey" data-stretch="true" id="survey">
@@ -67,3 +68,12 @@ The example below demonstrates how to navigate to a child view from a ListView, 
       }());
     </script>
 ```
+
+## See Also
+
+Articles and other how-to examples on Kendo UI hybrid components:
+
+* [Overview of the Hybrid UI Components in Kendo UI]({% slug overview_hybridkendoui %})
+* [How to Create Fixed Content Areas with Scroller]({% slug howto_createfixedcontentarea_hybridui %})
+* [How to Create Relative Content Size Using Flexboxes]({% slug howto_createrelative_contentsize_usingflexboxes_hybridui %})
+* [How to Set Initial View Prior to Initialization in AngularJS]({% slug howto_setinitiaviewpriortoinitialization_angular_hybridui %})
