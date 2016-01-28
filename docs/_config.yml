@@ -103,6 +103,9 @@ navigation:
     "controls/hybrid/support":
         title: "Support and Integration"
         position: 6
+    "controls/hybrid/support/angular":
+        title: "AngularJS"
+        position: 100    
     "controls/hybrid/support/angular/tutorials":
         title: "Tutorials"
         position: 100

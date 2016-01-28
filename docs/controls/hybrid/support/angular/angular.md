@@ -1,16 +1,21 @@
 ---
-title: AngularJS Integration
-page_title: Kendo UI Mobile Application AngularJS Directive
+title: AngularJS Support
+page_title: AngularJS Support | Kendo UI Hybrid Components
+description: "Use the AngularJS directives with hybrid mobile Kendo UI components."
 previous_url: /controls/hybrid/angular/angular
+slug: angularjssupport_hybridkendoui
 position: 1
 ---
 
-# AngularJS Integration
+# AngularJS Support
 
-Since Q3 2014, Kendo UI includes AngularJS directives for the mobile application and the mobile view, SplitView, and ModalView components. In that
-context, The mobile views support AngularJS controllers, directives and two way data binding expressions.
+As of the Kendo UI Q3 2014 release, Kendo UI includes AngularJS directives for some of its Hybrid UI components, such as the hybrid mobile Application and View, the SplitView, and the ModalView. In this context, the mobile views support AngularJS controllers, directives and tw- way data binding expressions.
 
-## Kendo UI Mobile Application directive
+## Getting Started
+
+### Use the Hybrid UI Application Directive
+
+###### Example
 
     <body kendo-mobile-application ng-app="foo">
         <kendo-mobile-view ng-controller="MyCtrl" k-title="'My Title'" k-layout="'default'">
@@ -33,37 +38,34 @@ context, The mobile views support AngularJS controllers, directives and two way 
 
 By default, the `kendo-mobile-application` directive should be set to the `body` element with the `ng-app` one.
 
-## Routing Integration
+## Routing
 
-The mobile application instantiates and maintains its own routing mechanism based on the [router component](/framework/spa/router), which
-automatically matches and instantiates views when navigating.
-Unlike the [ng-route/ng-view](https://docs.angularjs.org/api/ngRoute) and the [ui-router](https://github.com/angular-ui/ui-router) implementations,
-the mobile application **does not unload** the previous view when navigating to the new one. Note that AngularJS routing mechanisms are **not supported**.
+The mobile application instantiates and maintains its own routing mechanism based on the [`router` component]({% slug router_kendoui_singlepageapplication %}), which automatically matches and instantiates views when navigating.
 
-## AngularJS Controllers Support
+Note that unlike the [`ng-route`, `ng-view`](https://docs.angularjs.org/api/ngRoute) and the [`ui-router`](https://github.com/angular-ui/ui-router) implementations, the mobile application does not unload the previous view when navigating to the new one. Also, AngularJS routing mechanisms are not supported.
 
-If an `ng-controller` directive is set to the `view` element, the controller definition will be executed each time the view is shown (matching the view `show`
-event).
+## Controllers
 
-## Mobile Widget Directives
+If an `ng-controller` directive is set to the `view` element, the controller definition is executed each time the view is shown, matching the view `show`
+event.
 
-All directives may be used as elements or as **attributes**. If the directive is used as an element name, it **will be replaced** with a standard HTML
-element once the directive is compiled. Each mobile widget features an AngularJS in the [Kendo UI demos web site](http://demos.telerik.com/kendo-ui/).
+## Hybrid UI Widget Directives
+
+All directives may be used as elements or as attributes. If a directive is used as an element name, it is replaced with a standard HTML element once the directive is compiled. Each mobile widget features AngularJS on the [Kendo UI demos web site](http://demos.telerik.com/kendo-ui/).
 
 ### ActionSheet
 
-the widget is instantiated from the `kendo-mobile-action-sheet` directive. The item actions are assigned with the `k-action` attribute and are
-resolved from the widget scope.
+The widget is instantiated from the `kendo-mobile-action-sheet` directive. The item actions are assigned with the `k-action` attribute and are resolved from the widget scope.
 
-### Mobile Button
+### Button
 
 The widget is instantiated from the `kendo-mobile-button` directive.
 
-### Mobile BackButton
+### BackButton
 
 The widget is instantiated from the `kendo-mobile-back-button` directive.
 
-### Mobile DetailButton
+### DetailButton
 
 The widget is instantiated from the `kendo-mobile-detail-button` directive.
 
@@ -73,7 +75,7 @@ The widget is instantiated from the `kendo-mobile-button-group` directive.
 
 ### Collapsible
 
-the widget is instantiated from the `kendo-mobile-collapsible` directive. The inner markup follows follows the same convention as the non-angular widget.
+The widget is instantiated from the `kendo-mobile-collapsible` directive. The inner markup follows the same convention as the non-Angular widget.
 
 ### Drawer
 
@@ -89,12 +91,11 @@ The widget is instantiated from the `kendo-mobile-modal-view` directive. Like th
 
 ### NavBar
 
-The widget is instantiated from the `kendo-mobile-nav-bar` directive. The element displaying the view title is instantiated from the
-`kendo-view-title` directive.
+The widget is instantiated from the `kendo-mobile-nav-bar` directive. The element displaying the view title is instantiated from the `kendo-view-title` directive.
 
 ### PopOver
 
-The widget is instantiated from the `kendo-mobile-pop-over` directive. `ng-controller` directives may be set to the popover views.
+The widget is instantiated from the `kendo-mobile-pop-over` directive. The `ng-controller` directives may be set to the popover views.
 
 ### Scroller
 
@@ -106,8 +107,7 @@ The widget is instantiated from the `kendo-mobile-scroll-view` directive.
 
 ### Switch
 
-The widget is instantiated from the `kendo-mobile-switch` directive. The directive should be used as an **attribute** of an input element if the
-value should be submitted with a form.
+The widget is instantiated from the `kendo-mobile-switch` directive. The directive should be used as an attribute of an `input` element if the value should be submitted with a form.
 
 ### TabStrip
 
@@ -123,8 +123,7 @@ The widget is instantiated from the `kendo-touch` directive.
 
 ### View
 
-The widget is instantiated from the `kendo-view` directive. The header and footer elements may be instantiated from the `kendo-mobile-header` and
-`kendo-mobile-footer` directives, respectively.
+The widget is instantiated from the `kendo-view` directive. The header and footer elements may be instantiated from the `kendo-mobile-header` and `kendo-mobile-footer` directives, respectively.
 
 ### SplitView
 
@@ -132,10 +131,16 @@ The widget is instantiated from the `kendo-mobile-split-view` directive. The pan
 
 ### Layout
 
-The widget is instantiated from the `kendo-mobile-layout` directive. The header and footer elements may be instantiated from the `kendo-mobile-header` and
-`kendo-mobile-footer` directives, respectively.
+The widget is instantiated from the `kendo-mobile-layout` directive. The header and footer elements may be instantiated from the `kendo-mobile-header` and `kendo-mobile-footer` directives, respectively.
 
 ## Widget Directives Attributes
 
-The mobile widgets may be configured via the `k-` prefixed attributes. More information about the attributes parsing is available in the [Using Kendo UI
-with AngularJS](/AngularJS/introduction#widget-options-in-html) help topic.
+The hybrid mobile widgets may be configured via the `k-` prefixed attributes. More information about the attributes parsing is available in the [introductory article on AngularJS]({% slug angularjs_integration_directives %}).
+
+## See also
+
+Other articles on the integration of Kendo UI hybrid components:
+
+* [Integration with Kendo UI for the Web]({% slug integrationkendouiweb_hybridkendoui %})
+* [MVVM Integration]({% slug mvvmintegration_hybridkendoui %})
+* [Build Applications with AngularJS and the Hybrid UI]({% slug buildappswithangular_tutorial_hybridkendoui %})
