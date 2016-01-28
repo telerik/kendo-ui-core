@@ -1,14 +1,15 @@
 ---
-title: Text binding
-page_title: Text binding
-description: Example that shows how to implement custom Kendo MVVM binding that sets the button's text
+title: Configure Text Binding
+page_title: Configure Text Binding | Hybrid UI Button
+description: "Learn how to implement a custom Kendo UI MVVM binding that sets the Hybrid UI Button's text in Kendo UI."
+slug: howto_configuretextbinding_hybridactionsheet
 ---
 
-# How to configure text binding
+# Configure Text Binding
 
-The example below demonstrates how to configure text binding for Kendo UI Mobile Button.
+The example below demonstrates how to configure text binding for the Hybrid UI Button in Kendo UI.
 
-#### Example:
+###### Example
 
 ```html
 <div data-role="view" id="view" data-model="viewModel">
@@ -35,3 +36,10 @@ The example below demonstrates how to configure text binding for Kendo UI Mobile
   });
 </script>
 ```
+
+## See Also
+
+Other articles on the Hybrid UI Button:
+
+* [Hybrid UI Button JavaScript API Reference](/api/javascript/mobile/ui/button)
+* [Overview of the Hybrid UI Button]({% slug overview_hybridbutton %})
