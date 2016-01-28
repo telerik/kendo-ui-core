@@ -1,6 +1,6 @@
 ---
 title: Native Scrolling
-page_title: Native Scrolling | Hybrid Kendo UI
+page_title: Native Scrolling | Kendo UI Hybrid Components
 description: "Learn more about the native scrolling configuration option in hybrid Kendo UI widgets."
 slug: nativescrolling_hybrid_kendoui
 position: 2

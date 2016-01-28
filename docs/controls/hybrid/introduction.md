@@ -337,8 +337,12 @@ To see a complete tutorial including guidelines and recommendations about how to
 
 ## See Also
 
-Articles on Hybrid UI components in Kendo UI:
+Articles and how-to examples on the Hybrid UI components in Kendo UI:
 
 * [Performance Tips and Tricks]({% slug performance_hybridkendoui %})
 * [Native Scrolling]({% slug nativescrolling_hybrid_kendoui %})
 * [Overview of the Application for Mobile]({% slug overview_hybridapplication %})
+* [How to Create Fixed Content Areas with Scroller]({% slug howto_createfixedcontentarea_hybridui %})
+* [How to Create Relative Content Size Using Flexboxes]({% slug howto_createrelative_contentsize_usingflexboxes_hybridui %})
+* [How to Select Value from Another View]({% slug howto_selectvaluefrom_anotherview_hybridui %})
+* [How to Set Initial View Prior to Initialization in AngularJS]({% slug howto_setinitiaviewpriortoinitialization_angular_hybridui %})

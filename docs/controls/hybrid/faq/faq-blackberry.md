@@ -1,6 +1,6 @@
 ---
 title: Blackberry-Specific FAQ
-page_title: Blackberry-Specific FAQ
+page_title: Blackberry-Specific FAQ | Kendo UI Hybrid Components
 description: "Check out the frequently asked questions and their answers about how Kendo UI hybrid components work and behave on the Blackberry platform."
 slug: blackberry_specific_faq
 position: 4

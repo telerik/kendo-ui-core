@@ -1,6 +1,6 @@
 ---
 title: Android-Specific FAQ
-page_title: Android-Specific FAQ
+page_title: Android-Specific FAQ | Kendo UI Hybrid Components
 description: "Check out the frequently asked questions and their answers about how Kendo UI hybrid components work and behave on the Android platform."
 slug: android_specific_faq
 position: 3
