@@ -119,13 +119,22 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 
 The Grid supports a lot of user-customizable templates. You can define the `rowTemplate` if you want to completely customize the way each row is displayed, or define individual cell templates by adding a `template` property to your column definitions. The difference from applying plain Kendo is that when the Grid is created with the AngularJS directive, the templates can contain live `\{\{angular\}\}` bits. Both `rowTemplate` and `columns.template` are compiled with AngularJS in a scope containing a `dataItem` variable, which points to the data model of the current item.
 
-The example below demonstrates how to set the Grid row template (`rowTemplate`) in AngularJS.
+The example below demonstrates how to set the Grid row template (`rowTemplate`) in AngularJS via markup. It is also possible to define it in the Grid options object, as when not using Angular.
 
 ###### Example
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
-  <div kendo-grid k-options="gridOptions" k-ng-delay="gridOptions"></div>
+  <div kendo-grid k-options="gridOptions" k-ng-delay="gridOptions">
+    <table>
+        <tr k-row-template data-uid="#: uid #">
+            <td colspan="2" style="text-align:center">This is <strong>{{dataItem.text}}</strong> and has an ID of {{dataItem.id}}</td>
+        </tr>
+        <tr k-alt-row-template class="k-alt" data-uid="#: uid #">
+            <td colspan="2" style="text-align:center">This is <strong>{{dataItem.text}}</strong> and has an ID of {{dataItem.id}}</td>
+        </tr>
+    </table>
+  </div>
 </div>
 <script>
 angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope) {
@@ -143,16 +152,11 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
     columns: [
       { field: "text", title: "Text" },
       { field: "id", title: "Id" }
-    ],
-    rowTemplate: "<tr data-uid='#: uid #'><td colspan='2' style='text-align: center'>" +
-      "This is <b>{{dataItem.text}}</b> and has ID={{dataItem.id}}" +
-      "</td></tr>"
+    ]
   };
 });
 </script>
 ```
-
-As seen, if you select an item, it displays two input fields bound to the selected data model. Note that if you edit the data, the text in the grid will be updated seamlessly thanks to AngularJS. Grid functions, such as sorting, will still properly work.
 
 > **Important**
 >
