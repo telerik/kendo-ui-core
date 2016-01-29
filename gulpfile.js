@@ -172,7 +172,7 @@ gulp.task("custom", function() {
 gulp.task("jshint", function() {
     var packageJSON = require('./package');
 
-    return gulp.src(packageJSON.jshintFiles)
+    return gulp.src(argv.files || packageJSON.jshintFiles)
         .pipe(jshint(packageJSON.jshintConfig))
         .pipe(jshint.reporter('jshint-stylish'))
         .pipe(jshint.reporter('fail'));
