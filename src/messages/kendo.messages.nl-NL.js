@@ -250,8 +250,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "create": "Item toevoegen",
     "destroy": "Verwijderen",
     "edit": "Bewerken",
-    "excel": "Export to Excel",
-    "pdf": "Export to PDF",
+    "excel": "Export naar Excel",
+    "pdf": "Export naar PDF",
     "save": "Wijzigingen opslaan",
     "select": "Selecteren",
     "update": "Bijwerken"
@@ -333,7 +333,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "editWindowSeries": "Bewerken reeks",
     "editWindowTitle": "Bewerken terugkeerpatroon"
   },
-  "save": "Opslaan",
+  "save": "Bewaren",
   "showFullDay": "Toon hele dag",
   "showWorkDay": "Toon werktijden",
   "time": "Tijd",
@@ -343,7 +343,8 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "day": "Dag",
     "month": "Maand",
     "week": "Week",
-    "workWeek": "Work Week"
+    "workWeek": "Work Week",
+    "timeline": "Tijdlijn"
   }
 });
 }
