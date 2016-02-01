@@ -93,16 +93,16 @@ The custom buttons get a `k-toolName` CSS class to allow styling, where `toolNam
 
 ### Apply Readonly Functionality
 
-You can temporarily make the Editor readonly by using the following approach:
+You can make the Editor readonly by removing the `contenteditable` attribute of the widget's [`body`](/api/javascript/ui/editor#fields-body). While the Editor is readonly, the hyperlinks in its content become active and clicking on them will navigate the page. If this is undesired, prevent the hyperlink clicks.
 
     var editor = $("#editor").data("kendoEditor"),
         editorBody = $(editor.body);
 
     // make readonly
-    editorBody.removeAttr("contenteditable");
+    editorBody.removeAttr("contenteditable").find("a").on("click.readonly", false);
 
     // make editable
-    editorBody.attr("contenteditable", true);
+    editorBody.attr("contenteditable", true).find("a").off("click.readonly");
 
 ## Display
 
