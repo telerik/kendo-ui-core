@@ -1063,7 +1063,7 @@ Toggles between case-insensitive (default) and case-sensitive [searching](#confi
 
 The role data attribute of the widget used in the filter menu or a JavaScript function which initializes that widget.
 
-> This feature is not supported for columns which have their [values](#configuration-columns.values) option set.
+> This feature is not supported for columns which have their [values](#configuration-columns.values) option set and Boolean columns.
 
 > If [filterable.mode](#configuration-filterable.mode) is set to 'row', [columns.filterable.cell.template](#configuration-columns.filterable.cell.template) should be used to customize the input.
 
