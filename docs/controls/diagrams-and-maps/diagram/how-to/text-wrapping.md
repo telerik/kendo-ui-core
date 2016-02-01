@@ -7,7 +7,9 @@ slug: howto_wraptext_diagram
 
 # Wrap Text
 
-The example below demonstrates how to use the [`layout`](/api/javascript/dataviz/diagram/layout) element to make long chunks of text fit in a shape.
+The example below demonstrates how to use the [`Layout element`](/api/javascript/dataviz/diagram/layout) to make long chunks of text fit in a shape.
+
+> The Layout element is available in version 2015.3 and later.
 
 ###### Example
 
