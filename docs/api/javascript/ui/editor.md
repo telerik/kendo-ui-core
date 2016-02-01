@@ -3325,7 +3325,7 @@ Defines text for search box pleaceholder.
 
 ### body `Element`
 
-The HTML element which represents the editor content area. In the classic Editor mode, this is the `<body>` element inside the `iframe`. In the inline Editor mode, this is the element, from which the Editor is initialized.
+The HTML element which represents the editor content area. In the [classic Editor mode](/controls/editors/editor/overview#classic-mode), this is the `<body>` element inside the `iframe`. In the [inline Editor mode](/controls/editors/editor/overview#inline-mode), this is the [element, from which the Editor is initialized](/intro/widget-basics/wrapper-element).
 
 #### Example
 
