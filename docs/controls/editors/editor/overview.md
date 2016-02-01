@@ -14,7 +14,9 @@ The [Kendo UI Editor widget](http://demos.telerik.com/kendo-ui/editor/index) all
 
 ### Initialize the Editor
 
-Initialize the Editor widget by using an existing `HTML` element and a jQuery selector:
+Initialize the Editor widget by using an existing `HTML` element and a jQuery selector.
+
+###### Example
 
       <textarea id="editor" rows="10" cols="30"></textarea>
 
@@ -94,6 +96,8 @@ The custom buttons get a `k-toolName` CSS class to allow styling, where `toolNam
 ### Apply Readonly Functionality
 
 You can make the Editor readonly by removing the `contenteditable` attribute of the widget's [`body`](/api/javascript/ui/editor#fields-body). While the Editor is readonly, the hyperlinks in its content become active and clicking on them will navigate the page. If this is undesired, prevent the hyperlink clicks.
+
+###### Example
 
     var editor = $("#editor").data("kendoEditor"),
         editorBody = $(editor.body);

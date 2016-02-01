@@ -60,15 +60,17 @@ Such behavior may be caused by various reasons. Follow the instructions below to
 
 ## Navigation
 
-### Widget jumps on focus
+### Widget Jumps on Focus
 
-When widget navigation is enabled, the widget wrapper becomes a focusable element. On click, the browser focuses it and preform so called "scroll into view" action. If the widget exceeds the height/width of the view-port,
-then it will scroll the page automatically. The goal is to position the focusable element at the **top left** corner of the view-port. During this process, actions like *double click*, *drag* or *resize* would not be available
-due to the movement of the page. **The page re-position is a default browser behavior, which cannot be prevented nor modified**.
+When widget navigation is enabled, the widget wrapper becomes a focusable element. On click, the browser focuses it and preforms the so called scroll-into-view action. If the widget exceeds the height/width of the view-port, then it scrolls the page automatically. The goal is to position the focusable element at the top left corner of the view-port. During this process, actions like `double click`, `drag` or `resize` would not be available due to the movement of the page.
 
-If you would like to avoid this behavior, then you can choose one of the available options:
-    - [Disable widget's navigation](/api/javascript/ui/scheduler#configuration-selectable), if it is not needed in your business case
-    - [Size the widget to the view-port dimensions](/controls/scheduling/scheduler/how-to/dynamic-calc-of-height)
+> **Important**
+>
+> The page re-positioning is a default browser behavior, which cannot be prevented nor modified.
+
+If you want to avoid this behavior, choose one of the available options:
+* [Disable widget's navigation](/api/javascript/ui/scheduler#configuration-selectable), if it is not needed in your business case.
+* [Size the widget to the view-port dimensions]({% slug howto_calculate_scheduler_height_dunamically_onmobile_scheduler %}).
 
 ## See Also
 
