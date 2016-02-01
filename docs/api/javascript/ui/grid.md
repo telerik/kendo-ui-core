@@ -6873,7 +6873,7 @@ Expands specified master row.
 ### getOptions
 
 Retrieves the options that are currently enabled or disabled on the Grid, also gives the current state of the dataSource.
-Use this method if you want to save the state of the Grid into a variable.
+Use this method if you want to save the state of the Grid into a variable. It is also possible to extract and store only some of the Grid options.
 
 > Please refer to the [`setOptions()`](#methods-setOptions) method documentation for more important information.
 
@@ -6901,6 +6901,9 @@ Use this method if you want to save the state of the Grid into a variable.
     var grid = $("#grid").data("kendoGrid");
     var options = grid.getOptions();
     console.log(options.sortable); //outputs true
+    
+    // get only the Grid column settings
+    var columnOptionsForSaving = kendo.stringify(options.columns);
     </script>
 
 ### hideColumn
