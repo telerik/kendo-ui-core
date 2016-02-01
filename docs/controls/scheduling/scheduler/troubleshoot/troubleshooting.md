@@ -58,6 +58,18 @@ Such behavior may be caused by various reasons. Follow the instructions below to
 
 4. Check if the models returned from the sever match the required [kendo.data.SchedulerEvent](/api/javascript/data/schedulerevent) fields. For more information check the [Binding to remote service](/web/scheduler/overview#binding-to-remote-service) help topic.
 
+## Navigation
+
+### Widget jumps on focus
+
+When widget navigation is enabled, the widget wrapper becomes a focusable element. On click, the browser focuses it and preform so called "scroll into view" action. If the widget exceeds the height/width of the view-port,
+then it will scroll the page automatically. The goal is to position the focusable element at the **top left** corner of the view-port. During this process, actions like *double click*, *drag* or *resize* would not be available
+due to the movement of the page. **The page re-position is a default browser behavior, which cannot be prevented nor modified**.
+
+If you would like to avoid this behavior, then you can choose one of the available options:
+    - [Disable widget's navigation](/api/javascript/ui/scheduler#configuration-selectable), if it is not needed in your business case
+    - [Size the widget to the view-port dimensions](/controls/scheduling/scheduler/how-to/dynamic-calc-of-height)
+
 ## See Also
 
 Other articles on Kendo UI Scheduler:
