@@ -19,9 +19,9 @@ The `dataItem` is made dirty via `ng-change` for HTML elements, and `k-on-change
         <kendo-grid options="mainGridOptions"></kendo-grid>
 
         <script type="text/x-kendo-template" id="template">
-            <label>Product Name <input k-on-change="dataItem.dirty=true" kendo-dropdownlist k-data-source="productNames" ng-model="dataItem.ProductName" /><label>
+            <label>Product Name <input k-on-change="dataItem.dirty=true" kendo-dropdownlist k-data-source="productNames" data-bind="value: ProductName" /><label>
             <br />
-            <label>Unit Price <input k-on-change="dataItem.dirty=true" kendo-numeric-text-box k-ng-model="dataItem.UnitPrice" /></label>
+            <label>Unit Price <input k-on-change="dataItem.dirty=true" kendo-numeric-text-box data-bind="value: UnitPrice" /></label>
             <br />
             <label my-directive>Discontinued <input type="checkbox" ng-change="dataItem.dirty=true" ng-model="dataItem.Discontinued" /></label>
         </script>
