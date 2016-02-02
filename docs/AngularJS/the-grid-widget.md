@@ -8,7 +8,7 @@ position: 4
 
 # Grid Settings
 
-The Grid is one of the most complex Kendo UI widgets. This chapter outlines some of its particularities regarding the AngularJS integration supported by Kendo UI.
+[The Grid](http://www.telerik.com/kendo-ui/grid) is one of the most complex Kendo UI widgets. This chapter outlines some of its particularities regarding the AngularJS integration supported by Kendo UI.
 
 ## Attributes
 
