@@ -30,7 +30,7 @@ The example below demonstrates how to initialize the Hybrid UI Button based on t
 
 ## Appearance
 
-### Color 
+### Color
 
 The Hybrid UI Button color can be customized by setting its `background-color` CSS property inline or by using a CSS selector with specificity of 20+. You can target platforms separately using their respective root CSS classes.
 
@@ -128,7 +128,7 @@ Other articles and how-to examples on the Hybrid UI components and on the Button
 
 * [Hybrid UI Button JavaScript API Reference](/api/javascript/mobile/ui/button)
 * [Hybrid UI ButtonGroup JavaScript API Reference](/api/javascript/mobile/ui/buttongroup)
-* [Hot to Configure Custom Text Binding of the Button]({% slug howto_configuretextbinding_hybridactionsheet %})
+* [How to Configure Custom Text Binding of the Button]({% slug howto_configuretextbinding_hybridactionsheet %})
 * [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})
 * [How to Create Fixed Content Areas with Scroller]({% slug howto_createfixedcontentarea_hybridui %})
 * [How to Create Relative Content Size Using Flexboxes]({% slug howto_createrelative_contentsize_usingflexboxes_hybridui %})

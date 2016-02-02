@@ -12,7 +12,7 @@ The [Hybrid UI ButtonGroup widget](http://demos.telerik.com/kendo-ui/m/index#but
 
 ## Getting Started
 
-The Kendo UI mobile Application automatically initializes a mobile ButtonGroup for every element with `role` data attribute set to `buttongroup` and present in the views/layouts markup. Alternatively, it can be initialized using jQuery plugin syntax in the containing mobile View `init` event handler. The ButtonGroup element should be a `ul` element.
+The Kendo UI mobile Application automatically initializes a mobile ButtonGroup for every element with `role` data attribute set to `buttongroup` and present in the views/layouts markup. Alternatively, it can be initialized by using jQuery plugin syntax in the containing mobile View `init` event handler. The ButtonGroup element should be a `ul` element.
 
 ### Initialize from Markup
 
@@ -153,7 +153,7 @@ Other articles and how-to examples on the Hybrid UI components and on the Button
 
 * [Hybrid UI ButtonGroup JavaScript API Reference](/api/javascript/mobile/ui/buttongroup)
 * [Hybrid UI Button JavaScript API Reference](/api/javascript/mobile/ui/button)
-* [Hot to Configure Custom Text Binding of the Button]({% slug howto_configuretextbinding_hybridactionsheet %})
+* [How to Configure Custom Text Binding of the Button]({% slug howto_configuretextbinding_hybridactionsheet %})
 * [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})
 * [How to Create Fixed Content Areas with Scroller]({% slug howto_createfixedcontentarea_hybridui %})
 * [How to Create Relative Content Size Using Flexboxes]({% slug howto_createrelative_contentsize_usingflexboxes_hybridui %})
