@@ -794,7 +794,7 @@ test("setOptions updates options.dates", 1, function() {
 test("disabled date does get k-state-focused class", 1, function() {
     var calendar = new Calendar(div, {
         value: new Date(2015,9,3),
-		disableDates: ["mo", "sa"]
+		disableDates: ["MON", "sa"]
     });
     var cell = calendar.element.find("td").eq(6);
     cell.trigger("click");
