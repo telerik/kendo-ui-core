@@ -1410,7 +1410,6 @@ var __meta__ = { // jshint ignore:line
     }
 
     function createDisabledExpr(dates) {
-    debugger;
         var body, callback,
             disabledDates = [],
             days = ["su", "mo", "tu", "we", "th", "fr", "sa"];
