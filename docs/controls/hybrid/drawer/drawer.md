@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Hybrid UI Drawer
 description: "Initialize and use a Hybrid UI Drawer component in Kendo UI framework."
-slug: overview_hybridcdrawer
+slug: overview_hybriddrawer
 position: 1
 ---
 
