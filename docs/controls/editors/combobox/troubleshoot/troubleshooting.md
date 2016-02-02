@@ -73,6 +73,7 @@ Other articles on troubleshooting:
 * [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
 * [JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
+* [Common Issues in Kendo UI Charts]({% slug troubleshooting_chart_widget %})
 * [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})
 * [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
 * [Common Issues in Kendo UI Upload]({% slug troubleshooting_upload_widget %})

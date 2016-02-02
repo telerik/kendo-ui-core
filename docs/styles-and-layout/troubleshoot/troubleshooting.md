@@ -8,24 +8,11 @@ position: 7
 
 # Common Issues
 
-This page provides solutions for common problems related to the styling and appearance of Kendo UI widgets.
+This page provides resource links to possible solutions for issues related to Kendo UI components.
 
 ## Article Index
 
-Articles on styling, appearance, and rendering of Kendo UI widgets:
-
-* [Themes and Appearance of the Kendo UI Widgets]({% slug themesandappearnce_kendoui_desktopwidgets %})
-* [Responsive Web Design]({% slug responsivewebdesign_integration_kendoui %})
-* [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})
-* [How to Change Themes on the Client]({% slug howto_changethemes_ontheclient_styleskendoui %})
-* [ThemeBuilder Overview]({% slug themebuilder_overview_kendouistyling %})
-* [Rendering Modes for Data Visualization]({% slug renderingmodesfor_datavisualization_kendouistyling %})
-* [Tips and Tricks]({% slug tipsandtricks_kendouistyling %})
-* [Themes and Appearance of the Kendo UI Hybrid Widgets](/mobile/styling)
-
-## See Also
-
-Other articles on troubleshooting:
+Troubleshooting articles on common issues in Kendo UI:
 
 * [JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
@@ -40,3 +27,16 @@ Other articles on troubleshooting:
 * [Common Issues in Telerik UI for ASP.NET MVC](/aspnet-mvc/troubleshooting)
 * [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/grid/troubleshooting)
 * [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/upload/troubleshooting)
+
+## See Also
+
+Articles on styling, appearance, and rendering of Kendo UI widgets:
+
+* [Themes and Appearance of the Kendo UI Widgets]({% slug themesandappearnce_kendoui_desktopwidgets %})
+* [Responsive Web Design]({% slug responsivewebdesign_integration_kendoui %})
+* [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})
+* [How to Change Themes on the Client]({% slug howto_changethemes_ontheclient_styleskendoui %})
+* [ThemeBuilder Overview]({% slug themebuilder_overview_kendouistyling %})
+* [Rendering Modes for Data Visualization]({% slug renderingmodesfor_datavisualization_kendouistyling %})
+* [Tips and Tricks]({% slug tipsandtricks_kendouistyling %})
+* [Themes and Appearance of the Kendo UI Hybrid Widgets]({% slug styling_hybridkendoui %})

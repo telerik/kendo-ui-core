@@ -24,6 +24,7 @@ Other articles on troubleshooting:
 
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
 * [JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
+* [Common Issues in Kendo UI Charts]({% slug troubleshooting_chart_widget %})
 * [Common Issues in Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %})
 * [Common Issues in Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %})
 * [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})

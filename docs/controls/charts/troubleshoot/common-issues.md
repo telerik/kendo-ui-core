@@ -11,9 +11,11 @@ position: 1
 
 This page provides solutions for common problems related to the Kendo UI Charts.
 
-## Rendering issues
+## Rendering
 
 ### Chart Graphics Do Not Render in Internet Explorer
+
+**Figure 1. Chart in the Internet Explorer with its graphics failing to render**
 
 ![Chart in IE](/styles-and-layout/chart-ie.png)
 
@@ -24,6 +26,8 @@ This page provides solutions for common problems related to the Kendo UI Charts.
 **Solution**
 
 Select **Internet Options** > **Security** > **Internet** (or **Local intranet**) > **Custom Level**  and enable **Binary and script behaviors** by ticking the **Enable** radio button.
+
+**Figure 2. Options and settings to apply to render the chart graphics**
 
 ![IEscript behaviors](/styles-and-layout/chart-ie-script-behaviors.png)
 
@@ -43,21 +47,24 @@ The browser must support SVG as the below ones do:
 2.  Opera Mobile 10.0 and later versions
 3.  Android 3.0 and later versions
 
-## Export issues
+## Export
 
-### Layout is Different in Exported PDF Files
+### Layout Is Different in Exported PDF Files
 
 Such issues are typically caused by the different fonts that are used on screen and in the PDF.
 
-For display, the browser will substitute the selected font with whatever is provided by the system.
-During export, we will take the metrics from the actual font in use and determine the PDF layout from that.
-It's likely that the resulting PDF will be displayed with a different font, leading to layout and encoding issues.
+For display, the browser will substitute the selected font with whatever is provided by the system. During export, you will take the metrics from the actual font in use and determine the PDF layout from that. It is likely that the resulting PDF will be displayed with a different font, leading to layout and encoding issues.
 
-The solution is to [make the fonts available for embedding](http://docs.telerik.com/kendo-ui/framework/drawing/pdf-output#configuration-Custom). This means that the fonts should be available as binary TTF files and registered for export.
+**Solution**
 
-This is demonstrated in the Chart / PDF Export demo as well.
+The solution is to [make the fonts available for embedding]({% slug pdfderawingexport_drawingapi %}#configuration-Custom). This means that the fonts should be available as binary TTF files and registered for export.
 
-#### Example - Embed Fonts in Exported PDF
+This is demonstrated in the [PDF Export demo on Charts](http://demos.telerik.com/kendo-ui/pdf-export/index) as well.
+
+The example below demonstrates how to embed fonts in exported PDF.
+
+###### Example
+
 ```html
 <button class='export-pdf k-button'>Save as PDF</button>
 

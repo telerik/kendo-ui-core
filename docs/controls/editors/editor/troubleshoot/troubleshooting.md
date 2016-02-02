@@ -120,6 +120,7 @@ Other articles on troubleshooting:
 * [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
 * [JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
+* [Common Issues in Kendo UI Charts]({% slug troubleshooting_chart_widget %})
 * [Common Issues in Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %})
 * [Common Issues in Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %})
 * [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})
