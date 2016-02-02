@@ -99,7 +99,7 @@ var __meta__ = { // jshint ignore:line
                             e.preventDefault();
                         }
 
-                        if (that.options.disableDates(value)) {
+                        if (that.options.disableDates(value) && that._view.name == "month") {
                             return;
                         }
 
@@ -680,7 +680,7 @@ var __meta__ = { // jshint ignore:line
 
             adjustDST(value, 0);
 
-            if (that.options.disableDates(value)) {
+            if (that.options.disableDates(value) && that._view.name == "month") {
                 value = that._value;
             }
 
