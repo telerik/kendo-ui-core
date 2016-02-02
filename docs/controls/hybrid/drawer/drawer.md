@@ -1,26 +1,32 @@
 ---
-title: Drawer
-page_title: Documentation for Kendo UI Drawer mobile widget
-description: How to initialize and use a mobile Drawer component in Kendo UI Mobile framework.
-position: 5
+title: Overview
+page_title: Overview | Hybrid UI Drawer
+description: "Initialize and use a Hybrid UI Drawer component in Kendo UI framework."
+slug: overview_hybridcdrawer
+position: 1
 ---
 
-# Drawer
+# Drawer Overview
 
-The Kendo UI Mobile Drawer widget provides slide to reveal global mobile application toolbox or navigation.
+The [Hybrid UI Drawer widget](http://demos.telerik.com/kendo-ui/m/index#drawer/index) provides a slide to reveal the global mobile application toolbox or navigation.
 
 ## Getting Started
 
-The Kendo UI Mobile Application will automatically initialize a mobile Drawer widget for every `div` element with `role` data attribute set to `drawer` present in the **mobile application DOM element** (same level as the application views).
-The Drawer element may contain optional header and/or footer. A mobile scroller is automatically initialized around the contents of the element.
+The Kendo UI mobile Application automatically initializes a mobile Drawer widget for every `div` element with the `role` data attribute set to `drawer` present in the mobile application DOM element (same level as the application views). The Drawer element may contain optional header and/or footer. A mobile scroller is automatically initialized around the contents of the element.
 
-By default, the drawer will be revealed at the left side when swiping from from left to right.  The position can be changed using the `position` configuration option (`left` or `right`). One application can have up to two drawers (left and right one) active at the same time.
+By default, the Drawer is revealed at the left side when swiping from left to right.  The position can be changed using the `position` configuration option&mdash;`left` or `right`. One application can have up to two Drawers&mdash;left and right one&mdash;active at the same time.
 
-The drawer automatically hides when the user swipes back or taps the remaining visible area of the view. The drawer also hides automatically when the application navigates to another view.
+The Drawer automatically hides when the user swipes back or taps the remaining visible area of the view. The Drawer also hides automatically when the application navigates to another view.
 
-> **Important:** If the Drawer is used for navigation View transition should be turned off.
+> **Important**
+>
+> If the Drawer is used for navigation, the View transition should be turned off.
 
-### Drawer and a reveal button
+### Initialize the Drawer
+
+The example below demonstrates a Drawer and a **Reveal** button.
+
+###### Example
 
     <div data-role="view">
         <a href="#foo" data-rel="drawer" data-role="button">Drawer</a>
@@ -44,8 +50,9 @@ The drawer automatically hides when the user swipes back or taps the remaining v
         </div>
     </div>
 
+The example below demonstrates a Drawer with view navigation links.
 
-### Drawer with view navigation links
+###### Example
 
     <div data-role="view" id="foo">
         Foo
@@ -62,11 +69,19 @@ The drawer automatically hides when the user swipes back or taps the remaining v
         </ul>
     </div>
 
-## Associating the Drawer with remote Views
+## Customization
 
-`views` array allows the developer to associate the Drawer with a list of view IDs on which the drawer will appear. In case when the Drawer has to be linked with a remote View, the developer should include in the views array its relative path, **not** the ID of the element.
+### Associate Drawer with Remote Views
 
-### Drawer associated with remote View
+The `views` array allows you to associate the Drawer with a list of view IDs on which the Drawer will appear.
+
+> **Important**
+>
+> If the Drawer has to be linked with a remote View, include in the views array its relative path, and not the ID of the element.
+
+The example below demonstrates a Drawer associated with a remote View.
+
+###### Example
 
     <!-- local view -->
     <div id="foo" data-role="view">
@@ -91,12 +106,13 @@ The drawer automatically hides when the user swipes back or taps the remaining v
         <p>Swipe to reveal the drawer</p>
     </div>
 
-## Revealing a Drawer
+### Reveal Drawer
 
-In addition to responding to user swipes, the widget can be open when any mobile navigational widget (listview, button, tabstrip, etc.) is tapped.
-To do so, the navigational widget should have `data-rel="drawer"` and `href` attribute pointing to the Drawer's element `id` set (prefixed with `#`, like an anchor).
+In addition to responding to user swipes, the Drawer widget can be opened when any mobile navigational widget, such as the ListView, Button, and TabStrip among others, is tapped. To do so, the navigational widget should have the `data-rel="drawer"` and `href` attribute pointing to the Drawer's element `id` set, prefixed with `#`, like an anchor.
 
-### Button revealing a Drawer
+The example below demonstrates a button revealing a Drawer.
+
+###### Example
 
     <div data-role="view">
         <a href="#foo" data-rel="drawer" data-role="button">Foo</a>
@@ -106,24 +122,39 @@ To do so, the navigational widget should have `data-rel="drawer"` and `href` att
         ...
     </div>
 
-## Nova theme features
+## Nova Theme Features
 
-### Nested ListView with different color scheme
+### Nested ListView
+
+**Figure 1. Nested ListView with different color schemes**
 
 ![Nested ListView with different color scheme](/controls/hybrid/drawer/ListView-in-Drawer.png)
 
 The ListView has different styling when placed in a Drawer.
 
-### Nested Vertical TabStrip
+### Nested TabStrip
+
+**Figure 2. Nested vertical TabStrip**
 
 ![Nested Vertical TabStrip](/controls/hybrid/drawer/TabStrip-in-Drawer.png)
 
-To activate this feature set `km-vertical-tabstrip` class to the TabStrip placed in a Drawer.
+To activate this feature, set the `km-vertical-tabstrip` class to the TabStrip placed in a Drawer, as demonstrated in the example below.
 
-#### Nested Vertical TabStrip example
+###### Example
 
 	<div data-role="drawer">
         <div data-role="tabstrip" class="km-vertical-tabstrip">
             <!-- ... -->
         </div>
     </div>
+
+## See Also
+
+Other articles and how-to examples on the Hybrid UI components and on the Drawer:
+
+* [Hybrid UI Drawer JavaScript API Reference](/api/javascript/mobile/ui/drawer)
+* [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})
+* [How to Create Fixed Content Areas with Scroller]({% slug howto_createfixedcontentarea_hybridui %})
+* [How to Create Relative Content Size Using Flexboxes]({% slug howto_createrelative_contentsize_usingflexboxes_hybridui %})
+* [How to Select Value from Another View]({% slug howto_selectvaluefrom_anotherview_hybridui %})
+* [How to Set Initial View Prior to Initialization in AngularJS]({% slug howto_setinitiaviewpriortoinitialization_angular_hybridui %})
