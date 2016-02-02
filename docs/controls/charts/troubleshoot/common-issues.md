@@ -1,0 +1,128 @@
+---
+title: Common Issues
+page_title: Common Issues | Kendo UI Chart Widget
+description: "Learn how to deal with issues you may encounter while using the Kendo UI Chart widget."
+previous_url: /dataviz/troubleshooting
+slug: troubleshooting_chart_widget
+position: 1
+---
+
+# Common Issues
+
+This page provides solutions for common problems related to the Kendo UI Charts.
+
+## Rendering issues
+
+### Chart Graphics Do Not Render in Internet Explorer
+
+![Chart in IE](/styles-and-layout/chart-ie.png)
+
+> **Important**
+>
+> A security message suggesting that you enable the Intranet settings might appear. If you choose to do so, then you do not need to follow the steps below.
+
+**Solution**
+
+Select **Internet Options** > **Security** > **Internet** (or **Local intranet**) > **Custom Level**  and enable **Binary and script behaviors** by ticking the **Enable** radio button.
+
+![IEscript behaviors](/styles-and-layout/chart-ie-script-behaviors.png)
+
+### Chart Does Not Render with JavaScript Disabled
+
+The Kendo UI Chart widgets requires JavaScript to run.
+
+**Solution**
+
+Enable JavaScript.
+
+### Chart Does Not Render on Mobile Device or Tablet
+
+The browser must support SVG as the below ones do:
+
+1.  iOS Safari 3.2 and later versions
+2.  Opera Mobile 10.0 and later versions
+3.  Android 3.0 and later versions
+
+## Export issues
+
+### Layout is Different in Exported PDF Files
+
+Such issues are typically caused by the different fonts that are used on screen and in the PDF.
+
+For display, the browser will substitute the selected font with whatever is provided by the system.
+During export, we will take the metrics from the actual font in use and determine the PDF layout from that.
+It's likely that the resulting PDF will be displayed with a different font, leading to layout and encoding issues.
+
+The solution is to [make the fonts available for embedding](http://docs.telerik.com/kendo-ui/framework/drawing/pdf-output#configuration-Custom). This means that the fonts should be available as binary TTF files and registered for export.
+
+This is demonstrated in the Chart / PDF Export demo as well.
+
+#### Example - Embed Fonts in Exported PDF
+```html
+<button class='export-pdf k-button'>Save as PDF</button>
+
+<div id="chart"></div>
+
+<script>
+    // Import DejaVu Sans font for embedding
+
+    kendo.pdf.defineFont({
+        "DejaVu Sans"             : "//kendo.cdn.telerik.com/2014.3.1314/styles/fonts/DejaVu/DejaVuSans.ttf",
+        "DejaVu Sans|Bold"        : "//kendo.cdn.telerik.com/2014.3.1314/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+        "DejaVu Sans|Bold|Italic" : "//kendo.cdn.telerik.com/2014.3.1314/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+        "DejaVu Sans|Italic"      : "//kendo.cdn.telerik.com/2014.3.1314/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+    });
+</script>
+
+<!-- Load Pako ZLIB library to enable PDF compression -->
+<script src="//kendo.cdn.telerik.com/2016.1.112/js/pako_deflate.min.js"></script>
+
+<script>
+     $(".export-pdf").click(function() {
+         $("#chart").getKendoChart().saveAsPDF();
+     });
+
+     $("#chart").kendoChart({
+        pdf: {
+            fileName: "Kendo UI Chart Export.pdf",
+            proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
+        },
+        title: {
+            text: "Gross domestic product growth \n /GDP annual %/",
+            font: "bold 16px 'DejaVu Sans'"
+        },
+        legend: {
+            position: "bottom"
+        },
+        seriesDefaults: {
+            type: "area",
+            area: {
+                line: {
+                    style: "smooth"
+                }
+            }
+        },
+        series: [{
+            name: "India",
+            data: [3.907, 7.943, 7.848, 9.284, 9.263, 9.801, 3.890, 8.238, 9.552, 6.855]
+        }, {
+            name: "World",
+            data: [1.988, 2.733, 3.994, 3.464, 4.001, 3.939, 1.333, -2.245, 4.339, 2.727]
+        }]
+    });
+</script>
+```
+
+## See Also
+
+Other articles on styling, appearance, and rendering of Kendo UI widgets:
+
+* [Themes and Appearance of the Kendo UI Widgets]({% slug themesandappearnce_kendoui_desktopwidgets %})
+* [Rendering Modes for Data Visualization]({% slug renderingmodesfor_datavisualization_kendouistyling %})
+
+Other articles on troubleshooting:
+
+* [JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
+* [Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
+* [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
+* [Common Issues in Telerik UI for ASP.NET MVC](/aspnet-mvc/troubleshooting)
