@@ -30,10 +30,9 @@ The example below demonstrates how to initialize the Hybrid UI Button based on t
 
 ## Appearance
 
-### Color Customization
+### Color 
 
-The Hybrid UI Button color can be customized by setting its `background-color` CSS property inline or by using a CSS selector with specificity of 20+.
-You can target platforms separately using their respective root CSS classes.
+The Hybrid UI Button color can be customized by setting its `background-color` CSS property inline or by using a CSS selector with specificity of 20+. You can target platforms separately using their respective root CSS classes.
 
 The example below demonstrates how to make a Hybrid UI Button green.
 
@@ -56,8 +55,8 @@ The example below demonstrates how to make the green Button in iOS and a red one
 
 A Button icon can be set in two ways:
 
-1. By adding an `img` element inside the Button element.
-2. By setting a `data-icon` attribute to the Button element.
+1. By adding an `img` element inside the Button `li` element.
+2. By setting a `data-icon` attribute to the Button `li` element.
 
 The example below demonstrates how to use font icons with the `data-icon` attribute.
 
@@ -117,7 +116,7 @@ To activate this feature set `km-link-button` class.
 
 ### Icon-Only Button
 
-To achieve this outcome don't set text to the button.
+To achieve this outcome do not set text to the button.
 
 ###### Example
 
@@ -128,6 +127,7 @@ To achieve this outcome don't set text to the button.
 Other articles and how-to examples on the Hybrid UI components and on the Button:
 
 * [Hybrid UI Button JavaScript API Reference](/api/javascript/mobile/ui/button)
+* [Hybrid UI ButtonGroup JavaScript API Reference](/api/javascript/mobile/ui/buttongroup)
 * [Hot to Configure Custom Text Binding of the Button]({% slug howto_configuretextbinding_hybridactionsheet %})
 * [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})
 * [How to Create Fixed Content Areas with Scroller]({% slug howto_createfixedcontentarea_hybridui %})
