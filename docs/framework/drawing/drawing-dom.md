@@ -198,7 +198,7 @@ If the algorithm decides to move a node to the next page, all the DOM nodes whic
 
 It can happen that this element ends up in a position where all the text fits on the current page, but the image is higher and would fall on the boundary. In this case, the image and some text after will move to the next page.
 
-### Page Template (headers and footers)
+### Page Template: Headers and Footers
 
 When multi-page output is requested via `forcePageBreak` or `paperSize`, you can additionally specify a page template. This template will be inserted into each page before producing the output. You can easily position it relatively to the page via CSS. The template can be a function, or a Kendo UI template, and it receives the number of the current page and the total number of pages.
 
@@ -251,11 +251,12 @@ When multi-page output is requested via `forcePageBreak` or `paperSize`, you can
       });
     </script>
 
+<!--*-->
 ### Scaling
 
-Using the `scale` option you can obtain a drawing that's bigger or smaller than the original elements.  This is useful when you are generating multi-page PDF output using the automatic page breaking feature.  In most cases, the original dimensions will look too big in PDF, so you can specify for example a scale factor of 0.8 to get output more suitable for print.
+By using the `scale` option you can obtain a drawing that is bigger or smaller than the original elements. This is useful when you are generating a multi-page PDF output using the automatic page breaking feature. In most cases, the original dimensions look too big in PDF, so you can specify, for example, a scale factor of 0.8 to get a more suitable output for print.
 
-##### Example
+###### Example
 
     drawing.drawDOM("#content", {
       paperSize: "A4",
@@ -265,13 +266,15 @@ Using the `scale` option you can obtain a drawing that's bigger or smaller than 
       drawing.pdf.saveAs(group, "filename.pdf");
     });
 
-Note that `scale` affects only content, so in the above case the output paper size will still be A4 and it will still have a 2cm margin.  However, you need to take scaling into account when positioning headers / footers if you are using a page template.
+Note that `scale` affects only the content, so in the case above the output paper size is still A4 and has a 2cm margin. However, you need to take scaling into account when you position headers and footers while using a page template.
 
-If you need different horizontal / vertical scale factors, pass either an array `[ xScale, yScale ]` or an object `{ x: xScale, y: yScale }`.
+If you need different horizontal or vertical scale factors, pass either an array&mdash;`[ xScale, yScale ]`&mdash;or an object&mdash;`{ x: xScale, y: yScale }`.
 
-### Keeping elements from being split across pages
+### Split Page Content
 
-You can use the `keepTogether` option to prevent certain elements from being split across pages.  It should be a CSS selector (passable to jQuery).  Example:
+To prevent elements from being split across pages, use the `keepTogether` option. It should be a CSS selector, passable to jQuery.  
+
+###### Example
 
     drawing.drawDOM("#content", {
       paperSize: "A4",
@@ -281,13 +284,12 @@ You can use the `keepTogether` option to prevent certain elements from being spl
       drawing.pdf.saveAs(group, "filename.pdf");
     });
 
-Now all elements having the CSS class `"prevent-split"` will not be split across pages; if they fall on a margin, they will be moved to the next page instead.
+Now all elements having the CSS class `"prevent-split"` are kept within the boundaries of pages and their content is not split. If they fall on a margin, they are altogether moved to the next page instead.
 
-### Repeating table headers
+### Recurrent Table Headers
 
-If you would like `<thead>` elements (or headers of Kendo Grid widgets) to be repeated on each page, pass option `repeatHeaders: true`.
+If you want the `<thead>` elements, or the headers of Kendo UI Grid widgets, to be repeated on each page, pass the `repeatHeaders: true` option.
 
-<!--*-->
 ## Customize Appearance
 
 If you want to change the appearance of the PDF output as it appears in the browser, you have several options to write CSS rules that apply only to the PDF output.

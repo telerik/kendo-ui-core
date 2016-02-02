@@ -1,19 +1,24 @@
 ---
-title: Cascading DropDownList Editors
-page_title: Cascading DropDownList Editors | Kendo UI Grid Widget
+title: Add Cascading DropDownList Editors
+page_title: Add Cascading DropDownList Editors | Kendo UI Grid Widget
 description: "Learn how to add cascading DropDownList editors to the Kendo UI Grid widget."
 previous_url: /controls/data-management/grid/how-to/grid-cascading-dropdown-editors
 slug: howto_add_cascading_dropdown_list_editors_grid
 ---
 
-# Cascading DropDownList Editors
+# Add Cascading DropDownList Editors
 
 The examples below demonstrates how to add cascading DropDownList editors to a Kendo UI Grid.
 
 > **Important**  
+>
 > The approach is supported only in `inline` and `popup` editing mode.
 
-###### Example 1 - inline editing
+## Editing Modes
+
+### Inline Editing Mode
+
+###### Example
 
 ```html
 <div id="grid"></div>
@@ -49,7 +54,7 @@ The examples below demonstrates how to add cascading DropDownList editors to a K
         editable: "inline", // use inline mode so both dropdownlists are visible (required for cascading)
         columns: [
         { field: "id" },
-        { 
+        {
             // the brandId column
             title: "Brand",
             field: "brandId", // bound to the brandId field
@@ -57,7 +62,7 @@ The examples below demonstrates how to add cascading DropDownList editors to a K
             editor: function(container) { // use a dropdownlist as an editor
                 // create an input element with id and name set as the bound field (brandId)
                 var input = $('<input id="brandId" name="brandId">');
-                // append to the editor container 
+                // append to the editor container
                 input.appendTo(container);
 
                 // initialize a dropdownlist
@@ -68,7 +73,7 @@ The examples below demonstrates how to add cascading DropDownList editors to a K
                 }).appendTo(container);
             }
         },
-        { 
+        {
             //The modelId column
             title: "Model",
             field: "modelId",  // bound to the modelId field
@@ -106,7 +111,11 @@ The examples below demonstrates how to add cascading DropDownList editors to a K
 </script>
 ```
 
-###### Example 2 - popup editing with null default values for new items
+### Popup Editing Mode
+
+The example below demonstrates the popup editing mode of a Kendo UI Grid with null default values for new items.
+
+###### Example
 
 ```html
 <div id="grid"></div>    
@@ -147,7 +156,7 @@ $(function () {
     }, {
         ID: 3, Category: { CategoryID: 3, CategoryName: "Confections"}, Product: {ProductID: 16, ProductName: "Pavlova"}, Order: {OrderID: 10255, Quantity: 35}
     }];
-    
+
     var gridDataNextID = gridData.length + 1;
 
     var gridDataSource = new kendo.data.DataSource({
@@ -242,7 +251,9 @@ $(function () {
 </script>
 ```
 
-###### Example 3 - popup editing with non-null default values for new items
+The example below demonstrates the popup editing mode of a Kendo UI Grid with non-null default values for new items.
+
+###### Example
 
 ```html
 <div id="grid"></div>    
@@ -282,7 +293,7 @@ $(function () {
     }, {
         ID: 3, Category: { CategoryID: 3, CategoryName: "Confections"}, Product: {ProductID: 16, ProductName: "Pavlova"}, Order: {OrderID: 10255, Quantity: 35}
     }];
-    
+
     var gridDataNextID = gridData.length + 1;
 
     var gridDataSource = new kendo.data.DataSource({

@@ -7,12 +7,13 @@ slug: howto_sortcategorisinagroupedchart_charts
 
 # Sort Categories in Grouped Charts
 
-The order of the categories in a grouped chart cannot be set using the `sort` option of the data source.
-This is due to the fact that grouping overrides the sort order as part of its implementation. In effect the sort order is respected only within the resulting groups.
+The order of the categories in a grouped chart cannot be set using the `sort` option of the data source. This is due to the fact that grouping overrides the sort order as part of its implementation. In effect the sort order is respected only within the resulting groups.
 
 Still, you can influence the final order of the categories during the `dataBound` event.
 
-###### Example - Sort categories in a grouped Kendo UI Chart
+The example below demonstrates how to sort categories in a grouped Kendo UI Chart.
+
+###### Example
 
 ```html
     <div id="chart"></div>
