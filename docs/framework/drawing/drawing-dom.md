@@ -251,6 +251,42 @@ When multi-page output is requested via `forcePageBreak` or `paperSize`, you can
       });
     </script>
 
+### Scaling
+
+Using the `scale` option you can obtain a drawing that's bigger or smaller than the original elements.  This is useful when you are generating multi-page PDF output using the automatic page breaking feature.  In most cases, the original dimensions will look too big in PDF, so you can specify for example a scale factor of 0.8 to get output more suitable for print.
+
+##### Example
+
+    drawing.drawDOM("#content", {
+      paperSize: "A4",
+      margin: "2cm",
+      scale: 0.8
+    }).then(function(group){
+      drawing.pdf.saveAs(group, "filename.pdf");
+    });
+
+Note that `scale` affects only content, so in the above case the output paper size will still be A4 and it will still have a 2cm margin.  However, you need to take scaling into account when positioning headers / footers if you are using a page template.
+
+If you need different horizontal / vertical scale factors, pass either an array `[ xScale, yScale ]` or an object `{ x: xScale, y: yScale }`.
+
+### Keeping elements from being split across pages
+
+You can use the `keepTogether` option to prevent certain elements from being split across pages.  It should be a CSS selector (passable to jQuery).  Example:
+
+    drawing.drawDOM("#content", {
+      paperSize: "A4",
+      margin: "2cm",
+      keepTogether: ".prevent-split"
+    }).then(function(group){
+      drawing.pdf.saveAs(group, "filename.pdf");
+    });
+
+Now all elements having the CSS class `"prevent-split"` will not be split across pages; if they fall on a margin, they will be moved to the next page instead.
+
+### Repeating table headers
+
+If you would like `<thead>` elements (or headers of Kendo Grid widgets) to be repeated on each page, pass option `repeatHeaders: true`.
+
 <!--*-->
 ## Customize Appearance
 
