@@ -1410,12 +1410,13 @@ var __meta__ = { // jshint ignore:line
     }
 
     function createDisabledExpr(dates) {
+    debugger;
         var body, callback,
             disabledDates = [],
             days = ["su", "mo", "tu", "we", "th", "fr", "sa"];
 
         for (var i = 0; i < dates.length; i++) {
-            var day = dates[i].toLowerCase();
+            var day = dates[i].slice(0,2).toLowerCase();
             var index = $.inArray(day, days);
             if (index > -1) {
                 disabledDates.push(index);
