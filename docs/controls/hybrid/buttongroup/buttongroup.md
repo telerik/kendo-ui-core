@@ -1,78 +1,93 @@
 ---
-title: ButtonGroup
-page_title: Using jQuery Mobile button group in Kendo UI
-description: Visualize a linear set of grouped buttons in your app by the initialization of Kendo ButtonGroup. Learn how to customize the appearance of the mobile button and set its icons.
-position: 4
+title: Overview
+page_title: Overview | Hybrid UI ButtonGroup
+description: "Visualize a linear set of grouped buttons in your app by using the hybrid mobile Kendo UI ButtonGroup widget and customize its appearance."
+slug: overview_hybridbuttongroup
+position: 1
 ---
 
-# ButtonGroup
+# ButtonGroup Overview
 
-The Kendo mobile ButtonGroup widget presents a linear set of grouped buttons.
+The [Hybrid UI ButtonGroup widget](http://demos.telerik.com/kendo-ui/m/index#buttongroup/mobile) presents a linear set of grouped buttons.
 
 ## Getting Started
 
-The Kendo mobile Application will automatically initialize a mobile ButtonGroup for every element with `role` data attribute set to `buttongroup`
-present in the views/layouts markup. Alternatively, it can be initialized using jQuery plugin syntax in the containing mobile View **init event handler**. The ButtonGroup element should be `UL` element.
+The Kendo UI mobile Application automatically initializes a mobile ButtonGroup for every element with `role` data attribute set to `buttongroup` and present in the views/layouts markup. Alternatively, it can be initialized using jQuery plugin syntax in the containing mobile View `init` event handler. The ButtonGroup element should be a `ul` element.
 
-### Initialize Kendo mobile ButtonGroup based on role data attribute.
+### Initialize from Markup
+
+The example below demonstrates how to initialize the Hybrid UI ButtonGroup based on the `data-role` attribute.
+
+###### Example
 
     <ul id="buttongroup" data-role="buttongroup">
         <li>Option 1</li>
         <li>Option 2</li>
     </ul>
 
-### Initialize Kendo mobile ButtonGroup using jQuery plugin syntax
+### Initialize Using jQuery
+
+###### Example
 
     var buttongroup = $("#buttongroup").kendoMobileButtonGroup();
 
-## Customizing Mobile ButtonGroup Appearance
+## Appearance
 
+Every Hybrid UI ButtonGroup color can be customized by setting the respective `background-color` CSS property inline or with a CSS selector.
 
-Every Kendo Mobile ButtonGroup color can be customized by setting the respective `background-color` CSS property inline or with a CSS selector.
+### Color
 
-### Green Kendo mobile ButtonGroup
+The example below demonstrates how to make a Hybrid UI ButtonGroup green.
+
+###### Example
 
     <ul id="buttongroup" data-role="buttongroup">
         <li style="background-color: green">Option1</li>
         <li style="beckground-color: red">Option2</li>
     </ul>
 
-## Button Badges
+### Badges
 
-Every button can have a badge, which is set using the `data-badge` attribute of the Button's `li` element.
+Every button can have a badge, which is set by using the `data-badge` attribute of the Button's `li` element.
 
-### Example - setting badges to ButtonGroup's buttons
+The example below demonstrates how to set the badges to the buttons of a ButtonGroup.
+
+###### Example
 
     <ul id="buttongroup" data-role="buttongroup">
         <li data-badge="5">Option 1</li>
         <li data-badge="105">Option 2</li>
     </ul>
 
-## Button Icons
+### Icons
 
 A Button icon can be set in two ways:
 
-1. By adding an `img` element inside the Button `li` element
-2. By setting a `data-icon` attribute to the Button `li` element
+1. By adding an `img` element inside the Button `li` element.
+2. By setting a `data-icon` attribute to the Button `li` element.
 
-### Example - using font icons with `data-icon` attribute
+The example below demonstrates how to use font icons with the `data-icon` attribute.
+
+###### Example
 
     <ul id="buttongroup" data-role="buttongroup">
         <li data-icon="mostrecent">Most Recent</li>
         <li data-icon="mostviewed">Most Viewed</li>
     </ul>
 
-Kendo UI ships with several ready to use icons. The full list of predefined icons can be seen in the [Icons](./icons) article.
+Kendo UI ships with several ready to use icons. The full list of predefined icons can be seen in the [article on icons]({% slug hybridiconfonts_hybridkendoui %}).
 
-> **Important:** Check the [Icons](./icons) article for more information and how you can use custom icons in Kendo UI.
+> **Important**
+>
+> Check the [article on icons]({% slug hybridiconfonts_hybridkendoui %}) for more information and how you can use custom icons in Kendo UI.
 
-## Nova theme features
+## Nova Theme Features
 
-### Primary ButtonGroup state
+### Primary Button State
 
-To activate the feature set `km-primary` class to the ButtonGroup.
+To activate the feature set `km-primary` class to the button.
 
-#### Primary ButtonGroup example
+###### Example
 
     <ul data-role="buttongroup" data-index="0" class="km-primary">
         <li>One</li>
@@ -80,11 +95,13 @@ To activate the feature set `km-primary` class to the ButtonGroup.
         <li>Three</li>
     </ul>
 
-### ButtonGroup sizes
+### Size
 
 There are three predefined sizes - small, medium (default) and large. To apply different than the default size set `km-small` or `km-large` class.
 
-#### Small ButtonGroup example
+The example below demonstrates a small ButtonGroup.
+
+###### Example
 
     <ul data-role="buttongroup" data-index="0" class="km-small">
         <li>One</li>
@@ -92,7 +109,9 @@ There are three predefined sizes - small, medium (default) and large. To apply d
         <li>Three</li>
     </ul>
 
-#### Large ButtonGroup example
+The example below demonstrates a large ButtonGroup.
+
+###### Example
 
     <ul data-role="buttongroup" data-index="0" class="km-large">
         <li>One</li>
@@ -100,11 +119,13 @@ There are three predefined sizes - small, medium (default) and large. To apply d
         <li>Three</li>
     </ul>
 
-### Justified ButtonGroup
+### Position
 
-To activate this feature set `km-justified` class to the ButtonGroup.
+To activate this feature set `km-justified` class to the button.
 
-#### Justified ButtonGroup example
+The example below demonstrates how to justify the position of the ButtonGroup.
+
+###### Example
 
     <ul data-role="buttongroup" data-index="0" class="km-justified">
         <li>One</li>
@@ -112,11 +133,11 @@ To activate this feature set `km-justified` class to the ButtonGroup.
         <li>Three</li>
     </ul>
 
-### Icons only ButtonGroup
+### Icon-Only ButtonGroup
 
-To achieve this outcome don't set text to the buttons in the ButtonGroup.
+To achieve this outcome do not set text to the ButtonGroup.
 
-#### Icons only ButtonGroup example
+###### Example
 
     <ul data-role="buttongroup" data-index="1">
         <li data-icon="play"></li>
@@ -125,3 +146,16 @@ To achieve this outcome don't set text to the buttons in the ButtonGroup.
         <li data-icon="fastforward"></li>
         <li data-icon="globe"></li>
     </ul>
+
+## See Also
+
+Other articles and how-to examples on the Hybrid UI components and on the ButtonGroup:
+
+* [Hybrid UI ButtonGroup JavaScript API Reference](/api/javascript/mobile/ui/buttongroup)
+* [Hybrid UI Button JavaScript API Reference](/api/javascript/mobile/ui/button)
+* [Hot to Configure Custom Text Binding of the Button]({% slug howto_configuretextbinding_hybridactionsheet %})
+* [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})
+* [How to Create Fixed Content Areas with Scroller]({% slug howto_createfixedcontentarea_hybridui %})
+* [How to Create Relative Content Size Using Flexboxes]({% slug howto_createrelative_contentsize_usingflexboxes_hybridui %})
+* [How to Select Value from Another View]({% slug howto_selectvaluefrom_anotherview_hybridui %})
+* [How to Set Initial View Prior to Initialization in AngularJS]({% slug howto_setinitiaviewpriortoinitialization_angular_hybridui %})
