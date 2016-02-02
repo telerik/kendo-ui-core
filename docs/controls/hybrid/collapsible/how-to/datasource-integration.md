@@ -1,14 +1,15 @@
 ---
-title: Use DataSource to render the content
-page_title: Display content loaded via DataSource in Kendo UI Collapsible
-description: Example that shows how to display content loaded via DataSource in Kendo UI Collapsible
+title: Use DataSource to Render Content
+page_title: Use DataSource to Render Content | Hybrid UI Collapsible
+description: "Learn how to display content loaded via the DataSource in the hybrid mobile Kendo UI Collapsible widget ."
+slug: howto_usedatasourcetorebdercontent_hybridcollapsible
 ---
 
-# How to display content loaded via DataSource in Kendo UI Collapsible
+# Use DataSource to Render Content
 
-Example that shows how to display content loaded via DataSource in Kendo UI Collapsible.
+The example below demonstrates how to display content loaded via the DataSource in the hybrid mobile Kendo UI Collapsible widget.
 
-#### Example:
+###### Example
 
 ```html
 <div data-role="view" data-init="onInit">
@@ -17,7 +18,7 @@ Example that shows how to display content loaded via DataSource in Kendo UI Coll
         <div id="content"></div>
     </div>
 </div>
-  
+
 <script id="template" type="text/x-kendo-template">
 	<div>#:name#</div>
 </script>
@@ -42,3 +43,10 @@ Example that shows how to display content loaded via DataSource in Kendo UI Coll
     var app = new kendo.mobile.Application(document.body);
 </script>
 ```
+
+## See Also
+
+Other articles on the Hybrid UI Collapsible:
+
+* [Hybrid UI Collapsible JavaScript API Reference](/api/javascript/mobile/ui/collapsible)
+* [Overview of the Hybrid UI Collapsible]({% slug overview_hybridcollapsible %})
