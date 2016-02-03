@@ -1310,7 +1310,7 @@ var __meta__ = { // jshint ignore:line
                     if (item.options.attributes && item.options.attributes.target) {
                         urlTarget = item.options.attributes.target;
                     }
-                    window.open(item.options.url, urlTarget);
+                    window.open(item.options.url, urlTarget || "_self");
                 }
 
                 if (target.hasClass(OVERFLOW_BUTTON)) {
