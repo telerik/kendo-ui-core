@@ -1264,7 +1264,7 @@ var __meta__ = { // jshint ignore:line
                 var that = this, popup,
                     target, item, splitContainer,
                     isSplitButtonArrow = e.target.closest("." + SPLIT_BUTTON_ARROW).length,
-                    handler, eventData;
+                    handler, eventData, urlTarget;
 
                 e.preventDefault();
 
@@ -1307,7 +1307,10 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (item.options.url) {
-                    window.location.href = item.options.url;
+                    if (item.options.attributes && item.options.attributes.target) {
+                        urlTarget = item.options.attributes.target;
+                    }
+                    window.open(item.options.url, urlTarget);
                 }
 
                 if (target.hasClass(OVERFLOW_BUTTON)) {
