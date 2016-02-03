@@ -10,7 +10,8 @@ slug: howto_export_all_pagesto_pdf_grid
 This example demonstrates how to export the content of all Kendo UI Grid pages in a PDF file, including all data pages as well as any possible scrolled content. The content will be scaled to fit in the specified page size.
 
 > **Important**  
-> This help article is obsolete. The information you are looking for is located in the [PDF Export](/controls/data-management/grid/pdf-export#pdf-export-of-all-pages) help article and refers to the corresponding built-in functionality.
+>
+> This help article is obsolete. The information you are looking for is located in the [PDF Export]({% slug exporting_pdf_kendoui_grid_widget %}#pdf-export-of-all-pages) help article and refers to the corresponding built-in functionality.
 
 ## See Also
 
