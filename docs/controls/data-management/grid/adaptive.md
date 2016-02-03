@@ -8,9 +8,11 @@ position: 6
 
 # Adaptive Rendering
 
-From Kendo UI Q3 2013 release onwards, the Grid widget supports "adaptive" enhancements like changes in styling and behavior in order to remain consistent with the client device experience. For instance, when filtering or editing data on a mobile device, Kendo UI slides in a new screen for the user, which is a departure from the more desktop-like inline and popup behaviors. To see those features in action, check the [adaptive rendering demos](http://demos.telerik.com/kendo-ui/m/index#grid/adaptive).
+As of the Kendo UI Q3 2013 release, the Grid widget supports adaptive enhancements, such as changes in styling and behavior, to provide consistency to the client device experience. For instance, when filtering or editing data on a mobile device, Kendo UI slides in a new screen for the user, which is a departure from the more desktop-like inline and popup behaviors. To see those features in action, check the [adaptive rendering demos](http://demos.telerik.com/kendo-ui/m/index#grid/adaptive).
 
-## Set Up
+## Getting Started
+
+### Enable Adaptive Rendering
 
 To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/grid#configuration-mobile) property to `true`, `phone` or `tablet`.
 
@@ -34,55 +36,9 @@ To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/
     });
     </script>
 
-## Apply height and position styles to the Grid parent element
+## Pane Configuration
 
-This section applies to the following cases:
-
-* multiple adaptive Grids are used on the same page
-* the Grid is not the only content on the page
-
-Each adaptive Grid is rendered inside a separate mobile Pane. Since the position of the Panes is absolute, the Panes overlap. To avoid this issue, wrap each grid inside a `<div>` container that is relatively positioned and has a set height. The absolute position is required for the transition between main and edit views to work correctly.
-
-The example below demonstrates how to add multiple adaptive Grids to the same page.
-
-###### Example
-
-    <div class="adaptive-grid-wrapper">
-        <div id="grid1"></div>
-    </div>
-
-    <div class="adaptive-grid-wrapper">
-        <div id="grid2"></div>
-    </div>
-    <style>
-        .adaptive-grid-wrapper {
-            position: relative;
-            height: 130px;
-         }
-    </style>
-    <script>
-        var gridConfig = {
-            columns: [
-                { field: "name" },
-                { field: "age" },
-                { command: "destroy" }
-            ],
-            dataSource: [
-                { name: "Jane Doe", age: 30 },
-                { name: "John Doe", age: 33 }
-            ],
-            filterable: true,
-            columnMenu: true,
-            mobile: "phone"
-        };
-
-        $("#grid1").kendoGrid(gridConfig);
-        $("#grid2").kendoGrid(gridConfig);
-    </script>
-
-## Add to Mobile
-
-The mobile pane in which the adaptive Grid is placed will not automatically expand in height. To add an adaptive Grid to a kendo UI mobile application, set the `stretch` configuration of the respective view to `true`, or explicitly define the height of the widget.
+The mobile pane in which the adaptive Grid is placed does not automatically expand in height. To add an adaptive Grid to a kendo UI mobile application, set the `stretch` configuration of the respective view to `true`, or explicitly define the height of the widget.
 
 ### Apply Options: stretch
 
@@ -147,13 +103,61 @@ The mobile pane in which the adaptive Grid is placed will not automatically expa
         var app = new kendo.mobile.Application();
     </script>
 
-## Resize Columns on Mobile
+### Resize Columns
 
 The column resizing feature on touch screen devices is triggered when the user holds a finger on the respective column header. When the resizing icon appears, the user will be able to resize the column by dragging.
 
 **Figure 1. Grid with resizable columns on a mobile device**
 
 ![](/controls/data-management/grid/adaptive-resizing-icon.png)
+
+## Grid Specifics
+
+### Apply Height and Position Styles to Grid Parent Element
+
+This section applies to the following cases:
+
+* Multiple adaptive Grids are used on the same page.
+* The Grid is not the only content on the page.
+
+Each adaptive Grid is rendered inside a separate mobile Pane. Since the position of the Panes is absolute, the Panes overlap. To avoid this issue, wrap each grid inside a `<div>` container that is relatively positioned and has a set height. The absolute position is required for the transition between main and edit views to work correctly.
+
+The example below demonstrates how to add multiple adaptive Grids to the same page.
+
+###### Example
+
+    <div class="adaptive-grid-wrapper">
+        <div id="grid1"></div>
+    </div>
+
+    <div class="adaptive-grid-wrapper">
+        <div id="grid2"></div>
+    </div>
+    <style>
+        .adaptive-grid-wrapper {
+            position: relative;
+            height: 130px;
+         }
+    </style>
+    <script>
+        var gridConfig = {
+            columns: [
+                { field: "name" },
+                { field: "age" },
+                { command: "destroy" }
+            ],
+            dataSource: [
+                { name: "Jane Doe", age: 30 },
+                { name: "John Doe", age: 33 }
+            ],
+            filterable: true,
+            columnMenu: true,
+            mobile: "phone"
+        };
+
+        $("#grid1").kendoGrid(gridConfig);
+        $("#grid2").kendoGrid(gridConfig);
+    </script>
 
 ## See Also
 

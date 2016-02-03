@@ -82,7 +82,7 @@ To activate the feature set `km-primary` class to the button.
 
 ### Size
 
-There are three predefined sizes - small, medium (default) and large. To apply different than the default size set `km-small` or `km-large` class.
+There are three predefined sizes&mdash;small, medium (default) and large. To apply different than the default size set `km-small` or `km-large` class.
 
 The example below demonstrates a small Button.
 
