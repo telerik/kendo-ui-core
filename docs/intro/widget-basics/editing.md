@@ -8,7 +8,15 @@ position: 5
 
 # Editing Functionality
 
-The editing functionality in some Kendo UI widgets, such as the [Grid]({% slug overview_kendoui_grid_widget %}), [Scheduler]({% slug overview_kendoui_scheduler_widget %}), [ListView]({% slug overview_kendoui_listview_widget %}), [TreeList]({% slug overview_kendoui_treelist_widget %}), etc., is implemented with a specific editor element/form that is bound to the model using the [Kendo MVVM]({% slug overview_mvvmpattern_kendoui %}) bindings.
+The editing functionality in some Kendo UI widgets is implemented with a specific editor element/form that is bound to the model using the [Kendo UI MVVM]({% slug overview_mvvmpattern_kendoui %}) bindings.
+
+These Kendo UI widgets are:
+
+* [Grid]({% slug overview_kendoui_grid_widget %})
+* [ListView]({% slug overview_kendoui_listview_widget %})
+* [TreeList]({% slug overview_kendoui_treelist_widget %})
+* [Scheduler]({% slug overview_kendoui_scheduler_widget %})
+* [Gantt]({% slug overview_kendoui_gantt_widget %})
 
 ## Getting Started
 
