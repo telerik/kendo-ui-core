@@ -34,7 +34,12 @@ To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/
     });
     </script>
 
-## Add Multiple Grids to Pages
+## Apply height and position styles to the Grid parent element
+
+This section applies to the following cases:
+
+* multiple adaptive Grids are used on the same page
+* the Grid is not the only content on the page
 
 Each adaptive Grid is rendered inside a separate mobile Pane. Since the position of the Panes is absolute, the Panes overlap. To avoid this issue, wrap each grid inside a `<div>` container that is relatively positioned and has a set height. The absolute position is required for the transition between main and edit views to work correctly.
 
