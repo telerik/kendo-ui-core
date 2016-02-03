@@ -27,23 +27,27 @@ The Kendo UI widgets which support editing have the following configuration opti
 - `editable`&mdash;This option controls whether the editing is enabled or not. For instance, the editing functionality in the Kendo UI Grid widget is disabled by default. For detailed information, refer to [the API article on editing of the Grid](/api/javascript/ui/grid#configuration-editable).
 - `editable.template`&mdash;Allows you to define a custom editor template.
 
+> **Important**
+> * Some widgets provides additional `editable` options. Refer to the particular widget API documentation for additional details.
+> For instance, the Grid widget can disable `remove` functionality using [editable.destroy](/api/javascript/ui/grid#configuration-editable.destroy) option.
+
 ### Events
 
 The Kendo UI widgets which support editing have the following common events:
 
 - `edit`&mdash;This event is triggered before the editor form is shown. The UI elements are already bound to the model.
-- `save`&mdash;Triggered before the model is saved.
+- `save`&mdash;Triggered before the model is saved. The editor form is still open.
 - `remove`&mdash;Triggered before the model is removed.
 
 > **Important**
-> * All three common events&mdash;`edit`, `save`, and `remove`&mdash;are preventable.
+> * Only the **Scheduler** widget supports prevention of the [edit](/api/javascript/ui/scheduler#events-edit), [save](/api/javascript/ui/scheduler#events-edit), and [remove](/api/javascript/ui/scheduler#events-edit) events.
 > * The widget can use only one editor form. It applies the same editor template for the `create` and `update` actions.
 
 ### Setup
 
 To enable the editing functionality of the widget, perform the following steps:
 
-1. Configure the CRUD (Create, Read, Update, Destroy) data operation actions of the DataSource.
+1. Configure the [CRUD](/framework/datasource/crud) (Create, Read, Update, Destroy) data operation actions of the DataSource.
 2. Define the model fields by using the [`schema.model`](/api/javascript/data/datasource#configuration-schema.model) option.
 3. Enable the `editable` option.
 
@@ -82,7 +86,7 @@ Once the form is created, the widget performs the following actions:
 2. Triggers the `edit` event.
 3. Shows the editor form.
 4. Updates the model based on the changes made in the editors.
-5. When an editor form is closed, the widget triggers the `save` event. At this stage, the changes can be either accepted or declined.
+5. When the editor form is about to close, the widget triggers the `save` event. At this stage, the changes can be either accepted or declined.
 
 > **Important**
 >
@@ -179,6 +183,10 @@ Wire the `edit` event of the widget. You will get the model from the passed argu
     function edit(e) {
         var model = e.model;
     }
+
+> **Important**
+>
+> The **Scheduler** passes `e.event` field instead of `model`. The event is instance of the [SchedulerEvent](/api/javascript/data/schedulerevent) class.
 
 > **Important**
 >
