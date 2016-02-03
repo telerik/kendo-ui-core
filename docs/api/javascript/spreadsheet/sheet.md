@@ -75,6 +75,43 @@ If passed, the method will set the width of the column at the passed index.
     </script>
 ```
 
+### batch
+
+Suppresses triggering of change events for a sequence of actions. Triggers a single change event at the end of the sequence.
+
+Greatly improves performance when calling multiple methods that change the sheet state, as the widget will be refreshed once.
+
+#### Parameters
+
+##### callback `Function`
+
+The sequence of actions that will be executed without triggering a change event.
+
+##### changeEventArgs `Object`
+
+The change event arguments that will be used for the change event triggered after the callback finishes executing.
+
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        sheet.batch(function() {
+            for (var i = 0; i < 10; i += 2) {
+                sheet.hideColumn(i);
+                sheet.hideRow(i);
+            }
+        }, { layout: true });
+    </script>
+```
+
 ### deleteColumn
 
 Deletes the contents of the column at the provided index and shifts the remaining contents of the sheet to the left.
