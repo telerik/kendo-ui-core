@@ -204,54 +204,97 @@ When multi-page output is requested via `forcePageBreak` or `paperSize`, you can
 
 ###### Example
 
+```html
     <script type="x/kendo-template" id="page-template">
-      <div class="page-template">
-        <div class="header">
-          <div style="float: right">Page #:pageNum# of #:totalPages#</div>
-          This is a header.
+        <div class="page-template">
+            <div class="header">
+                <div style="float: right">Page #:pageNum# of #:totalPages#</div>
+                This is a header.
+            </div>
+            <div class="footer">
+                This is a footer.
+                Page #:pageNum# of #:totalPages#
+            </div>
         </div>
-        <div class="footer">
-          This is a footer.
-          Page #:pageNum# of #:totalPages#
-        </div>
-      </div>
     </script>
 
     <div id="grid"></div>
 
     <style>
-      /* make sure everything in the page template is absolutely positioned.
-       * since the pages will be embedded in an element with position: relative,
-       * all positions here are actually relative to the page element.
-       */
-      .page-template > * {
-        position: absolute;
-        left: 20px;
-        right: 20px;
-        font-size: 90%;
-      }
-      .page-template .header {
-        top: 20px;
-        border-bottom: 1px solid #000;
-      }
-      .page-template .footer {
-        bottom: 20px;
-        border-top: 1px solid #000;
-      }
+        /*
+            Make sure everything in the page template is absolutely positioned.
+            All positions are relative to the page container.
+        */
+        .page-template > * {
+            position: absolute;
+            left: 20px;
+            right: 20px;
+            font-size: 90%;
+        }
+        .page-template .header {
+            top: 20px;
+            border-bottom: 1px solid #000;
+        }
+        .page-template .footer {
+            bottom: 20px;
+            border-top: 1px solid #000;
+        }
+
+        /*
+            Use the DejaVu Sans font for display and embedding in the PDF file.
+            The standard PDF fonts have no support for Unicode characters.
+        */
+        .k-grid {
+            font-family: "DejaVu Sans", "Arial", sans-serif;
+            width: 400px;
+        }
+
     </style>
 
     <script>
-      $("#grid").kendoGrid(...);
-      drawing.drawDOM("#grid", {
-        paperSize: "A4",
-        margin: "3cm",
-        template: $("#page-template").html()
-      }).then(function(group){
-        drawing.pdf.saveAs(group, "filename.pdf");
-      });
+        $("#grid").kendoGrid({
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: {
+                        url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                    }
+                }
+            },
+            scrollable: false,
+            columns: [{
+              title: "Name",
+              field: "ProductName"
+            }, {
+              title: "Units",
+              field: "UnitsInStock"
+            }],
+            dataBound: function() {
+              kendo.drawing.drawDOM("#grid", {
+                  paperSize: "A4",
+                  margin: "3cm",
+                  template: $("#page-template").html()
+              }).then(function(group){
+                  kendo.drawing.pdf.saveAs(group, "filename.pdf");
+              });
+            }
+        });
     </script>
 
-<!--*-->
+    <script>
+        // Import DejaVu Sans font for embedding
+
+        // NOTE: Only required if the Kendo UI stylesheets are loaded
+        // from a different origin, e.g. cdn.kendostatic.com
+        kendo.pdf.defineFont({
+            "DejaVu Sans"             : "http://cdn.kendostatic.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans.ttf",
+            "DejaVu Sans|Bold"        : "http://cdn.kendostatic.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+            "DejaVu Sans|Bold|Italic" : "http://cdn.kendostatic.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "DejaVu Sans|Italic"      : "http://cdn.kendostatic.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+        });
+    </script>
+```
+
 ### Scaling
 
 By using the `scale` option you can obtain a drawing that is bigger or smaller than the original elements. This is useful when you are generating a multi-page PDF output using the automatic page breaking feature. In most cases, the original dimensions look too big in PDF, so you can specify, for example, a scale factor of 0.8 to get a more suitable output for print.
