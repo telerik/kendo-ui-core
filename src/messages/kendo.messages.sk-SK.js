@@ -495,6 +495,318 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
 });
 }
 
+/* Spreadsheet messages */
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.borderPalette) {
+kendo.spreadsheet.messages.borderPalette =
+$.extend(true, kendo.spreadsheet.messages.borderPalette, {
+    "allBorders": "Všetky orámovania",
+    "insideBorders": "Vnútorné orámovania",
+    "insideHorizontalBorders": "Vnútorné vodorovné orámovania",
+    "insideVerticalBorders": "Vnútorné zvislé orámovania",
+    "outsideBorders": "Vonkajšie orámovania",
+    "leftBorder": "Ľavé orámovanie",
+    "topBorder": "Horné orámovanie",
+    "rightBorder": "Pravé orámovanie",
+    "bottomBorder": "Dolné orámovanie",
+    "noBorders": "Bez orámovania",
+    "reset": "Nulovať farbu",
+    "customColor": "Vlastná farba...",
+    "apply": "Použiť",
+    "cancel": "Storno"
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.dialogs) {
+kendo.spreadsheet.messages.dialogs =
+$.extend(true, kendo.spreadsheet.messages.dialogs, {
+    "apply": "Použiť",
+    "save": "Uložiť",
+    "cancel": "Storno",
+    "remove": "Odstrániť",
+    "okText": "OK",
+    "formatCellsDialog": {
+        "title": "Formátovanie",
+        "categories": {
+            "number": "Číslo",
+            "currency": "Mena",
+            "date": "Dátum"
+        }
+    },
+    "fontFamilyDialog": {
+        "title": "Písmo"
+    },
+    "fontSizeDialog": {
+        "title": "Veľkosť písma"
+    },
+    "bordersDialog": {
+        "title": "Orámovania"
+    },
+    "alignmentDialog": {
+        "title": "Zarovnanie",
+        "buttons": {
+            "justtifyLeft": "Zarovnať vľavo",
+            "justifyCenter": "Centrovať",
+            "justifyRight": "Zarovnať vpravo",
+            "justifyFull": "Zarovnať do bloku",
+            "alignTop": "Zarovnať nahor",
+            "alignMiddle": "Zarovnať na stred",
+            "alignBottom": "Zarovnať nadol"
+        }
+    },
+    "mergeDialog": {
+        "title": "Spájanie buniek",
+        "buttons": {
+            "mergeCells": "Spojiť všetko",
+            "mergeHorizontally": "Spojiť vodorovne",
+            "mergeVertically": "Spojiť zvisle",
+            "unmerge": "Rozpojiť"
+        }
+    },
+    "freezeDialog": {
+        "title": "Zmrazenie panelov",
+        "buttons": {
+            "freezePanes": "Zmraziť panely",
+            "freezeRows": "Zmraziť riadky",
+            "freezeColumns": "Zmraziť stĺpce",
+            "unfreeze": "Rozmraziť panely"
+        }
+    },
+    "validationDialog": {
+        "title": "Overenie údajom",
+        "hintMessage": "Prosím zadajte platnú {0} hodnotu {1}.",
+        "hintTitle": "Overenie {0}",
+        "criteria": {
+            "any": "Akákoľvek hodnota",
+            "number": "Číslo",
+            "text": "Text",
+            "date": "Dátum",
+            "custom": "Vlastný vzorec",
+            "list": "Zoznam"
+        },
+        "comparers": {
+            "greaterThan": "väčšie ako",
+            "lessThan": "menšie ako",
+            "between": "medzi",
+            "notBetween": "nie medzi",
+            "equalTo": "rovná sa",
+            "notEqualTo": "nerovná sa",
+            "greaterThanOrEqualTo": "väčšie alebo sa rovná",
+            "lessThanOrEqualTo": "menšie alebo sa rovná"
+        },
+        "comparerMessages": {
+            "greaterThan": "väčšie ako {0}",
+            "lessThan": "menšie ako {0}",
+            "between": "medzi {0} a {1}",
+            "notBetween": "nie medzi {0} a {1}",
+            "equalTo": "rovná sa {0}",
+            "notEqualTo": "nerovná sa {0}",
+            "greaterThanOrEqualTo": "väčšie alebo rovná sa {0}",
+            "lessThanOrEqualTo": "menšie alebo rovná sa {0}",
+            "custom": "ktoré vyhovuje: {0}"
+        },
+        "labels": {
+            "criteria": "Kritériá",
+            "comparer": "Porovnávač",
+            "min": "Min",
+            "max": "Max",
+            "value": "Hodnota",
+            "start": "Začiatok",
+            "end": "Koniec",
+            "onInvalidData": "Pri platných údajoch",
+            "rejectInput": "Odmietnuť vstup",
+            "showWarning": "Zobraziť varovanie",
+            "showHint": "Zobraziť pomôcku",
+            "hintTitle": "Titulok pomôcky",
+            "hintMessage": "Správa pomôcky",
+            "ignoreBlank": "Ignorovať prázdne"
+        },
+        "placeholders": {
+            "typeTitle": "Titulok typu",
+            "typeMessage": "Správa typu"
+        }
+    },
+    "saveAsDialog": {
+        "title": "Uložiť Ako...",
+        "labels": {
+            "fileName": "Meno súboru",
+            "saveAsType": "Uložiť ako typ"
+        }
+    },
+    "exportAsDialog": {
+        "title": "Exportovať...",
+        "labels": {
+            "fileName": "Meno súboru",
+            "saveAsType": "Uložiť ako typ",
+            "exportArea": "Exportovať",
+            "paperSize": "Veľkosť papiera",
+            "margins": "Okraje",
+            "orientation": "Orientácia",
+            "print": "Tlačiť",
+            "guidelines": "Pomocné čiary",
+            "center": "Centrovať",
+            "horizontally": "Vodorovne",
+            "vertically": "Zvisle"
+        }
+    },
+    "modifyMergedDialog": {
+        "errorMessage": "Nemožno zmeniť časť spojenej bunky."
+    },
+    "useKeyboardDialog": {
+        "title": "Kopírovanie a vkladanie",
+        "errorMessage": "Tieto akcie sa nemožno ovládať cez menu. Prosím, použite klávesové skratky namiesto:",
+        "labels": {
+            "forCopy": "na kopírovanie",
+            "forCut": "na vystrihnutie",
+            "forPaste": "na vloženie"
+        }
+    },
+    "unsupportedSelectionDialog": {
+        "errorMessage": "Táto akcia nemôže byť vykonaná na viacnásobnom výbere."
+    }
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.filterMenu) {
+kendo.spreadsheet.messages.filterMenu =
+$.extend(true, kendo.spreadsheet.messages.filterMenu, {
+    "sortAscending": "Usporiadať výber od A do Z",
+    "sortDescending": "Usporiadať výber od Z do A",
+    "filterByValue": "Filtrovať podľa hodnoty",
+    "filterByCondition": "Filtrovať podľa podmienky",
+    "apply": "Použiť",
+    "search": "Hľadať",
+    "addToCurrent": "Pridať do aktuálneho výberu",
+    "clear": "Vyčistiť",
+    "blanks": "(Prázdne)",
+    "operatorNone": "Žiadne",
+    "and": "A",
+    "or": "ALEBO",
+    "operators": {
+        "string": {
+            "contains": "Text obsahuje",
+            "doesnotcontain": "Text neobsahuje",
+            "startswith": "Text začína s",
+            "endswith": "Text končí s"
+        },
+        "date": {
+            "eq": "Dátum je",
+            "neq": "Dátum nie je",
+            "lt": "Dátum je pred",
+            "gt": "Dátum je po"
+        },
+        "number": {
+            "eq": "Rovná sa",
+            "neq": "Nerovná sa",
+            "gte": "Je väčšie alebo rovná sa",
+            "gt": "Je väčšie ako",
+            "lte": "Je menšie alebo rovná sa",
+            "lt": "Je menšie ako"
+        }
+    }
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.toolbar) {
+kendo.spreadsheet.messages.toolbar =
+$.extend(true, kendo.spreadsheet.messages.toolbar, {
+    "addColumnLeft": "Pridať stĺpec vľavo",
+    "addColumnRight": "Pridať stĺpec vpravo",
+    "addRowAbove": "Pridať riadok nad",
+    "addRowBelow": "Pridať riadok pod",
+    "alignment": "Zarovnanie",
+    "alignmentButtons": {
+        "justtifyLeft": "Zarovnať vľavo",
+        "justifyCenter": "Centrovať",
+        "justifyRight": "Zarovnať vpravo",
+        "justifyFull": "Zarovnať do bloku",
+        "alignTop": "Zarovnať nahor",
+        "alignMiddle": "Zarovnať na stred",
+        "alignBottom": "Zarovnať nadol"
+    },
+    "backgroundColor": "Pozadie",
+    "bold": "Tučné",
+    "borders": "Orámovania",
+    "colorPicker": {
+        "reset": "Nulovať farbu",
+        "customColor": "Vlastná farba..."
+    },
+    "copy": "Kopírovať",
+    "cut": "Vystrihnúť",
+    "deleteColumn": "Odstrániť stĺpec",
+    "deleteRow": "Odstrániť riadok",
+    "excelImport": "Importovať z Excelu...",
+    "filter": "Filtrovať",
+    "fontFamily": "Písmo",
+    "fontSize": "Veľkosť písma",
+    "format": "Vlastný formát...",
+    "formatTypes": {
+        "automatic": "Automatický",
+        "number": "Číslo",
+        "percent": "Percentá",
+        "financial": "Finančný",
+        "currency": "Mena",
+        "date": "Dátum",
+        "time": "Čas",
+        "dateTime": "Dátum a čas",
+        "duration": "Časový úsek",
+        "moreFormats": "Viac formátov..."
+    },
+    "formatDecreaseDecimal": "Znížiť destinné miesta",
+    "formatIncreaseDecimal": "Zvýšiť desatinné miesta",
+    "freeze": "Zmraziť panely",
+    "freezeButtons": {
+        "freezePanes": "Zmraziť panely",
+        "freezeRows": "Zmraziť riadky",
+        "freezeColumns": "Zmraziť stĺpce",
+        "unfreeze": "Rozmraziť panely"
+    },
+    "italic": "Šikmé",
+    "merge": "Spojiť bunky",
+    "mergeButtons": {
+        "mergeCells": "Spojiť všetko",
+        "mergeHorizontally": "Spojiť vodorovne",
+        "mergeVertically": "Spojiť zvisle",
+        "unmerge": "Rozpojiž"
+    },
+    "open": "Otvoriť...",
+    "paste": "Vložiť",
+    "quickAccess": {
+        "redo": "Znova",
+        "undo": "Späť"
+    },
+    "saveAs": "Uložiť Ako...",
+    "sortAsc": "Usporiadať vzostupne",
+    "sortDesc": "Usporiadať zostupne",
+    "sortButtons": {
+        "sortSheetAsc": "Usporiadať list od A do Z",
+        "sortSheetDesc": "Usporiadať list od Z do A",
+        "sortRangeAsc": "Usporiadať výber od A do Z",
+        "sortRangeDesc": "Usporiadať výber od o Z do A"
+    },
+    "textColor": "Farba Textu",
+    "textWrap": "Zalomiť text",
+    "underline": "Podčiarknuté",
+    "validation": "Overenie údajov..."
+});
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.view) {
+kendo.spreadsheet.messages.view =
+$.extend(true, kendo.spreadsheet.messages.view, {
+    "errors": {
+        "shiftingNonblankCells": "Nemožno vložiť bunky kvôli možnosti straty dát. Vyberte iné miesto na vloženie alebo odstráňte údaje z konca listu.",
+        "filterRangeContainingMerges": "Nemožno vytvoriť filter na výbere, ktoré obsahuje spájania",
+        "validationError": "Hodnota, ktorú ste zadali porušuje pravidlá platnosti stanovené pre bunku."
+    },
+    "tabs": {
+        "home": "Domov",
+        "insert": "Vložiť",
+        "data": "Údaje"
+    }
+});
+}
+
 /* Slider messages */
 
 if (kendo.ui.Slider) {
@@ -508,23 +820,23 @@ $.extend(true, kendo.ui.Slider.prototype.options,{
 /* TreeList messages */
 
 if (kendo.ui.TreeList) {
-    kendo.ui.TreeList.prototype.options.messages =
-    $.extend(true, kendo.ui.TreeList.prototype.options.messages,{
-        "noRows": "Žiadne záznamy na zobrazenie",
-        "loading": "Nahrávanie...",
-        "requestFailed": "Požiadavka zlyhala.",
-        "retry": "Znova",
-        "commands": {
-            "edit": "Upraviť",
-            "update": "Uložiť",
-            "canceledit": "Strono",
-            "create": "Pridať nový záznam",
-            "createchild": "Pridať podzáznam",
-            "destroy": "Odstrániť",
-            "excel": "Exportovať do Excelu",
-            "pdf": "Exportovať do PDF"
-        }
-    });
+kendo.ui.TreeList.prototype.options.messages =
+$.extend(true, kendo.ui.TreeList.prototype.options.messages,{
+    "noRows": "Žiadne záznamy na zobrazenie",
+    "loading": "Nahrávanie...",
+    "requestFailed": "Požiadavka zlyhala.",
+    "retry": "Znova",
+    "commands": {
+        "edit": "Upraviť",
+        "update": "Uložiť",
+        "canceledit": "Strono",
+        "create": "Pridať nový záznam",
+        "createchild": "Pridať podzáznam",
+        "destroy": "Odstrániť",
+        "excel": "Exportovať do Excelu",
+        "pdf": "Exportovať do PDF"
+    }
+});
 }
 
 /* TreeView messages */
