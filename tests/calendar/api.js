@@ -802,6 +802,17 @@ test("disabled date does get k-state-focused class", 1, function() {
     equal(focused, false);
 });
 
+test("dates are disabled when array of dates is used", 1, function() {
+    var calendar = new Calendar(div, {
+        value: new Date(2015,9,3),
+        disableDates: [new Date(2015,9,12)]
+    });
+    var cell = calendar.element.find("td").eq(15);
+    var disabled = cell.hasClass("k-state-disabled");
+    equal(disabled, true);
+});
+
+
 test("disabled date does get k-state-focused class when calleback is used", 1, function() {
     var calendar = new Calendar(div, {
         value: new Date(2015,9,3),
