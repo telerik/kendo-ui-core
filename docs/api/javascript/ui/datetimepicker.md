@@ -212,6 +212,16 @@ An array or function that will be used to determine which dates to be disabled f
     });
     </script>
 
+#### Example - specify an array of dates to be disabled
+
+    <input id="datetimepicker">
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+		value: new Date(2015,9,3),
+        disableDates: [new Date(2015,9,12), new Date(2015,9,22)]
+    });
+    </script>
+
 you can also pass a function that will be dynamically resolved for each date of the calendar. Note that when the function returns true, the date will be disabled.
 
 #### Example - use a function to disabled dates
