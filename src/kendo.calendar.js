@@ -1409,25 +1409,37 @@ var __meta__ = { // jshint ignore:line
         return $.noop;
     }
 
+    function convertDatesArray(dates) {
+        var result = [];
+        for (var i = 0; i < dates.length; i++) {
+            result.push(dates[i].setHours(0, 0, 0, 0));
+        }
+        return result;
+    }
+
     function createDisabledExpr(dates) {
         var body, callback,
             disabledDates = [],
-            days = ["su", "mo", "tu", "we", "th", "fr", "sa"];
+            days = ["su", "mo", "tu", "we", "th", "fr", "sa"],
+            searchExpression = "if (found) {"+
+                    " return true " +
+                "} else {" +
+                    "return false" +
+                "}";
 
-        for (var i = 0; i < dates.length; i++) {
-            var day = dates[i].slice(0,2).toLowerCase();
-            var index = $.inArray(day, days);
-            if (index > -1) {
-                disabledDates.push(index);
+        if (dates[0] instanceof DATE) {
+            disabledDates = convertDatesArray(dates);
+            body = "var found = date && $.inArray(date.setHours(0, 0, 0, 0),["+ disabledDates +"]) > -1;" + searchExpression;
+        } else {
+            for (var i = 0; i < dates.length; i++) {
+                var day = dates[i].slice(0,2).toLowerCase();
+                var index = $.inArray(day, days);
+                if (index > -1) {
+                    disabledDates.push(index);
+                }
             }
+            body = "var found = date && $.inArray(date.getDay(),["+ disabledDates +"]) > -1;" + searchExpression;
         }
-
-        body = "var found = date && $.inArray(date.getDay(),["+ disabledDates +"]) > -1;" +
-            "if (found) {"+
-                " return true " +
-            "} else {" +
-                "return false" +
-            "}";
 
         callback = new Function("date", body); //jshint ignore:line
 
