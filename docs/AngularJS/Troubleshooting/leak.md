@@ -4,7 +4,7 @@ page_title: Memory Leaks | AngularJS Directives
 description: "Learn where to look for memory leaks and how to handle them while working with Kendo UI controls and AngularJS."
 previous_url: /AngularJS/leak
 slug: memory_leaks_angularjs_directives
-position: 5
+position: 2
 ---
 
 # Memory Leaks
@@ -168,8 +168,10 @@ A fix that works is to clean up before a route change. So, wherever you change t
 Other articles on AngularJS directives and integration with Kendo UI:
 
 * [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
-* [ng-* Directives in Widget Markup]({% slug ngrepeat_ngif_ngbind_support_angularjs %})
 * [Global Events]({% slug global_events_angularjs_directives %})
 * [Grid Settings]({% slug grid_settings_angularjs_directives %})
 * [Directives with DataSource]({% slug datasource_updates_angularjs_directives %})
+* [ng-* Directives in Widget Markup]({% slug ngrepeat_ngif_ngbind_support_angularjs %})
+* [How to Load View in Window]({% slug window_service_angularjs_directives %})
 * [How to Nest Widgets]({% slug nest_widgets_angularjs_directives %})
+* [Troubleshooting: Common Issues]({% slug common_issues_support_angularjs %})
