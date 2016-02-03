@@ -1,9 +1,10 @@
 ---
 title: ng-* Directives in Widget Markup
 page_title: ng-* Directives in Widget Markup | AngularJS Directives
-description: "Learn more about the `ng-repeat`, `ng-if`, `ng-bind` directives supported by Kendo UI controls in AngularJS."
+description: "Learn more about the `ng-repeat`, `ng-if`, and `ng-bind` directives supported by Kendo UI controls in AngularJS."
 previous_url: /AngularJS/notes-on-ng-repeat
 slug: ngrepeat_ngif_ngbind_support_angularjs
+position: 3
 ---
 
 # ng-* Directives in Widget Markup
@@ -225,4 +226,6 @@ Other articles on AngularJS directives and integration with Kendo UI:
 * [Grid Settings]({% slug grid_settings_angularjs_directives %})
 * [Directives with DataSource]({% slug datasource_updates_angularjs_directives %})
 * [Memory Leaks]({% slug memory_leaks_angularjs_directives %})
+* [How to Load View in Window]({% slug window_service_angularjs_directives %})
 * [How to Nest Widgets]({% slug nest_widgets_angularjs_directives %})
+* [Troubleshooting: Common Issues]({% slug common_issues_support_angularjs %})
