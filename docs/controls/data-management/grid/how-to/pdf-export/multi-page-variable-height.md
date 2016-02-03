@@ -7,15 +7,15 @@ slug: howto_export_multiple_pageswith_variable_rowheight_pdf_grid
 
 # Export Multiple Pages with Variable Row Height
 
-You can split pages based on actual row hight by using external paging.
+You can split pages based on actual row height by using external paging.
 
-The built-in [multi-page PDF export functionality](/api/javascript/ui/grid#configuration-pdf.allPages) splits pages by record count according to the page definition at the data source level. However, this might not be desired if you have a grid with varying row-height. If so, render the grid in full and use the [page breaking](/framework/drawing/drawing-dom#automatic-page-breaking-q1-2015) functionality of the export module.
+The built-in [multi-page PDF export functionality](/api/javascript/ui/grid#configuration-pdf.allPages) splits pages by record count according to the page definition at the data source level. However, this might not be desired if you have a grid with varying row-height. If so, render the grid in full and use the [page breaking]({% slug drawingofhtmlelements_drawingapi %}#automatic-page-breaking-q1-2015) functionality of the export module.
 
-> **Important**  
+> **Important**
+>
 > Run the demo in the Dojo to ensure fonts are properly embedded.
 
-The example below demonstrates how to export a multi-page Grid with a variable row height. 
-It also adds a header and footer using a [page template](/framework/drawing/drawing-dom#configuration-Page).
+The example below demonstrates how to export a multi-page Grid with a variable row height. It also adds a header and a footer by using a [page template]({% slug drawingofhtmlelements_drawingapi %}#configuration-Page).
 
 ###### Example
 
@@ -142,7 +142,7 @@ It also adds a header and footer using a [page template](/framework/drawing/draw
 
 Other articles on Kendo UI Grid and how-to examples related to its export in PDF:
 
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Customize Page Layout]({% slug howto_customize_page_layout_pdf_grid %})
 * [How to Export All Pages]({% slug howto_export_all_pagesto_pdf_grid %})
 * [How to Export All Pages and Full Page Content]({% slug howto_export_allpagesand_full_page_content_pdf_grid %})
