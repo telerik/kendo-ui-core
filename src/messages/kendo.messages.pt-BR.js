@@ -361,4 +361,21 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "uploadSelectedFiles": "Enviar arquivos"
 });
 }
+
+/* Validator messages */
+
+if (kendo.ui.Validator) {
+kendo.ui.Validator.prototype.options.messages =
+$.extend(true, kendo.ui.Validator.prototype.options.messages,{
+  "required": "{0} é obrigatório",
+  "pattern": "{0} não é válido",
+  "min": "{0} deve ser maior ou igual a {1}",
+  "max": "{0} deve ser menor ou igual a {1}",
+  "step": "{0} não é válido",
+  "email": "{0} não é um email válido",
+  "url": "{0} não é um endereço web válido",
+  "date": "{0} não é uma data válida",
+  "dateCompare": "A data final deve ser posterior à data inicial"
+});
+}
 })(window.kendo.jQuery);
