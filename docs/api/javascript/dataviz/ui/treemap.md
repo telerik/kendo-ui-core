@@ -81,7 +81,7 @@ The fields which can be used in the template are:
 
 ### colors `Array`
 
-The default colors for the treemap tiles. When all colors are used, new colors are pulled from the start again. Can be set to array of specific colors or array of color ranges.
+The default colors for the TreeMap items (tiles). Can be set to array of specific colors or array of color ranges. For more information on the widget behavior, see the [Colors](/controls/charts/treemap/overview#colors) section on the TreeMap Overview page.
 
 #### Example - set the treemap tile colors
 
