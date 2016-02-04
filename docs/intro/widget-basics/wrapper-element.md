@@ -48,3 +48,4 @@ Other articles on Kendo UI widget basics:
 * [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})
 * [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
 * [Create Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
+* [Editing Functionality]({% slug kendoui_editing_gettingstarted %})
