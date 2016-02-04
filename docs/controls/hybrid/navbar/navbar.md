@@ -185,7 +185,7 @@ To nest a ButtonGroup, set the `km-navbar-buttongroup` class and add the ButtonG
 
 ## See Also
 
-Other articles and how-to examples on the Hybrid UI components and on the ModalView:
+Other articles and how-to examples on the Hybrid UI components and on the NavBar:
 
 * [Hybrid UI NavBar JavaScript API Reference](/api/javascript/mobile/ui/navbar)
 * [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})
