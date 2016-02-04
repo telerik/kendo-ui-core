@@ -3079,13 +3079,13 @@ Transforms a point from View coordinates to Page document coordinates. View orig
 
 #### Parameters
 
-##### point `Object`
+##### point `kendo.dataviz.diagram.Point`
 
 The point in Page document coordinates.
 
 #### Returns
 
-`Object` the transformed point
+`kendo.dataviz.diagram.Point` the transformed point
 
 ### viewToModel
 
@@ -3093,13 +3093,13 @@ Transforms a point from View coordinates to Model coordinates. Model coordinates
 
 #### Parameters
 
-##### point `Object`
+##### point `kendo.dataviz.diagram.Point`
 
 The point in View coordinates.
 
 #### Returns
 
-`Object` the transformed point
+`kendo.dataviz.diagram.Point` the transformed point
 
 ### viewport
 
@@ -3119,7 +3119,7 @@ Gets or sets the current zoom level of the diagram.
 
 The zoom factor.
 
-##### point `Object`
+##### point `kendo.dataviz.diagram.Point`
 
 The point to zoom into or out of.
 
