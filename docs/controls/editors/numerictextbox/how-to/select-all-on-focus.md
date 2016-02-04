@@ -13,18 +13,22 @@ The example below demonstrates how to select the whole input value on focus in t
 
 ```html
 <input id="numeric" type="number" value="17" min="0" max="100" step="1" />
-<script>
-    $(document).ready(function() {
-        $("#numeric").kendoNumericTextBox();
+<script type="text/javascript">
+$(function () {
+    //wire focus of all numerictextbox widgets on the page
+    $("input[type=text]").bind("focus", function () {
+        var input = $(this);
+            clearTimeout(input.data("selectTimeId")); //stop started time out if any
 
-        //wire focus of all numerictextbox widgets on the page
-        $("[data-role=numerictextbox]").on("focus", function() {
-            var element = this;
-            setTimeout(function() {
-                $(element).select();
+            var selectTimeId = setTimeout(function()  {
+                input.select();
             });
+
+            input.data("selectTimeId", selectTimeId);
+        }).blur(function(e) {
+            clearTimeout($(this).data("selectTimeId")); //stop started timeout
         });
-    });
+    })
 </script>
 ```
 
