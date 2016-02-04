@@ -367,7 +367,7 @@ The height of the suggestion popup in pixels. The default value is 200 pixels.
     });
     </script>
 
-### ignoreCase `String`*(default: true)*
+### ignoreCase `Boolean`*(default: true)*
 
 If set to `false` case-sensitive search will be performed to find suggestions. The widget performs case-insensitive searching by default.
 
