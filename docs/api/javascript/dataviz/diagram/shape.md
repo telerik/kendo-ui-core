@@ -216,6 +216,30 @@ Specifies if the shape can be selected.
 
 A function returning a visual element to render for this shape.
 
+## Fields
+
+### connectors `Array`
+
+The connectors defined on this shape.
+
+### dataItem `Object`
+
+The data item that this shape is bound to, if any.
+
+### shapeVisual `Object`
+
+The visual element representing the shape.
+
+This is either the result returned from
+[shape.visual](/api/javascript/dataviz/ui/diagram#configuration-shapeDefaults.visual)
+or a [predefined type](/api/javascript/dataviz/ui/diagram#configuration-shapes.type).
+
+### visual `kendo.dataviz.diagram.Group`
+
+A container for the [shapeVisual](#fields-shapeVisual) element.
+
+Positioning and transformations are applied on this container.
+
 ## Methods
 
 ### position

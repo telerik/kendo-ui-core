@@ -6,12 +6,22 @@ title: Point
 
 Represents a point in two-dimensional space.
 
-## Configuration
+## Constructor Parameters
 
 ### x `Number`
 
-Defines the x-coordinate of the point.
+The x coordinate of the point.
 
 ### y `Number`
 
-Defines the y-coordinate of the point.
+The y coordinate of the point.
+
+## Fields
+
+### x `Number`
+
+The x coordinate of the point.
+
+### y `Number`
+
+The y coordinate of the point.

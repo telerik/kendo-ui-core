@@ -2326,6 +2326,14 @@ The zoom step when using the mouse-wheel to zoom in or out.
 
 An array holding the diagram connections.
 
+### connectionsDataSource `kendo.ui.data.DataSource`
+
+The connections data source, if any.
+
+### dataSource `kendo.ui.data.DataSource`
+
+The shapes data source, if any.
+
 ### shapes `Array`
 
 An array holding the diagram shapes.
@@ -3103,7 +3111,7 @@ The bounds of the diagramming canvas.
 
 ### zoom
 
-Zooms in or out of the diagram.
+Gets or sets the current zoom level of the diagram.
 
 #### Parameters
 
@@ -3114,6 +3122,9 @@ The zoom factor.
 ##### point `Object`
 
 The point to zoom into or out of.
+
+#### Returns
+`Number` The current zoom level
 
 ## Events
 
