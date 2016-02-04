@@ -456,6 +456,8 @@ If you decide to use server paging, be prepared to handle the requests to the se
 
 For instance, if you want to show page 3 out of a 60-record dataset split into 10 records per page, the grid would send `skip: 20`, `top: 10`.
 
+In general, Kendo UI Grid is platform-agnostic, which means that it works with HTTP requests sending and receiving JSON payload.For instance, if you want to bind the widget to a specific data subset (only to а particular page), instruct the DataSource to use [`serverPaging`](/api/javascript/data/datasource#configuration-serverPaging). Thus, it will use the received data directly. The same rule applies to the filtering, grouping, aggregation, and sorting operations.
+
 ### Grouping
 
 Setting the `groupable` option to `true` turns on the grouping functionality in the Grid. You can set this option either to `true`, or `false`. By default, it is set to `false`.
