@@ -66,3 +66,4 @@ Other articles on Kendo UI ComboBox:
 * [How to Select Items on Tab]({% slug howto_select_items_ontab_combobox %})
 * [How to Blur the ComboBox after Select]({% slug howto_blur_after_select_combobox %})
 * [How to Disable Child Cascading ComboBoxes]({% slug howto_disable_child_cascading_combobox %})
+* [How to Define Virtual Configuration Declaratively]({% slug howto_define_virtual_option_combobox %})
