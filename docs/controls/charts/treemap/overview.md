@@ -53,16 +53,18 @@ Initialize the TreeMap and bind it in the way demonstrated below.
 
 For detailed information on how to bind the Kendo UI TreeMap to different service end-points, refer to the [hierarchical Data Source API article](/api/framework/hierarchicaldatasource).
 
-## Colors
+### Colors
 
-The TreeMap applies various colors to its **leaf** items. These are the items that have no children. The following algorithms are used:
+The TreeMap applies various colors to its `leaf` items. These are the items that have no children.
 
-* if colors (or color ranges) are defined via the [`colors`](/api/javascript/dataviz/ui/treemap#configuration-colors) configuration option, the TreeMap will use one color (or range) for **all sibling leaf items**. The next color (range) will be used for the next collection of sibling leaf items. When all colors (ranges) have been used, the TreeMap will start over from the first one.
-* if colors are defined in the dataSource and a [`colorField`](/api/javascript/dataviz/ui/treemap#configuration-colorField) is set, the TreeMap will apply the colors from the data.
+The following algorithms are used:
 
-The two methods can be combined. In this case, colors from the dataSource take precedence, and the TreeMap will only use the colors from the `colors` setting for items, which have no color defined in the data.
+* If the colors, or the color ranges, are defined via the [`colors`](/api/javascript/dataviz/ui/treemap#configuration-colors) configuration option, the TreeMap uses one color or range of colors for all sibling `leaf` items. The next color or range of colors are used for the next collection of sibling leaf items. When all colors or ranges have been used, the TreeMap starts over from the first one.
+* If the colors are defined in the dataSource and a [`colorField`](/api/javascript/dataviz/ui/treemap#configuration-colorField) is set, the TreeMap applies the colors from the data.
 
-In order to set different colors to sibling leaf items without having the colors in the data, use the [`itemCreated`](/api/javascript/dataviz/ui/treemap#events-itemCreated) or the [`dataBound`](/api/javascript/dataviz/ui/treemap#events-dataBound) event of the TreeMap.
+The two methods can be combined. In this case, colors from the dataSource take precedence, and the TreeMap only uses the colors from the `colors` setting for items, which have no color defined in the data.
+
+To set different colors to sibling `leaf` items without having the colors in the data, use the [`itemCreated`](/api/javascript/dataviz/ui/treemap#events-itemCreated) or the [`dataBound`](/api/javascript/dataviz/ui/treemap#events-dataBound) event of the TreeMap.
 
 ## Reference
 

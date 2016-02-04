@@ -105,3 +105,4 @@ Other articles on Kendo UI ComboBox:
 * [How to Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
 * [How to Blur the ComboBox after Select]({% slug howto_blur_after_select_combobox %})
 * [How to Disable Child Cascading ComboBoxes]({% slug howto_disable_child_cascading_combobox %})
+* [How to Define Virtual Configuration Declaratively]({% slug howto_define_virtual_option_combobox %})
