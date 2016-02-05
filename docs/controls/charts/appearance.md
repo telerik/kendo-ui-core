@@ -8,7 +8,7 @@ position: 5
 
 # Appearance
 
-The appearance of Kendo UI Charts is controlled via style options unlike the other Kendo UI components in the suite, which use CSS for styling.
+The appearance of Kendo UI Charts is controlled by some CSS, but mostly by JavaScript style options, unlike the other Kendo UI components in the suite, which use only CSS for styling.
 
 ## Chart Structure
 
@@ -29,26 +29,7 @@ For detailed information on [Chart titles and legends, refer to the article abou
 
 ### Themes
 
-The Kendo UI Chart widgets come with [a number of predefined themes](http://demos.telerik.com/kendo-ui/themebuilder), which are:
-
-* Black
-* BlueOpal
-* Bootstrap
-* Default
-* Fiori
-* Flat
-* HighContrast
-* Material
-* MaterialBlack
-* Metro
-* MetroBlack
-* Moonlight
-* Nova
-* Silver
-* Office 365
-* Uniform
-
-Use the `theme` option to select a theme, as demonstrated in the example below.
+The Kendo UI Chart widgets come with [a set of predefined themes](/styles-and-layout/appearance-styling). Use the `theme` option to select a theme, as demonstrated in the example below. The theme name is case insensitive.
 
 ###### Example
 
@@ -64,7 +45,7 @@ Use the `theme` option to select a theme, as demonstrated in the example below.
         }
     });
 
-Note that theme names are case insensitive.
+> As of Kendo UI Q2 2015 (2015.2.624), [all dataviz-related CSS code has been moved to the web widgets' CSS files](backwards-compatibility/2015/2015-backward-compatibility#changes-from-2015-q1-sp2-20151429). Please remove any legacy references to kendo.dataviz.css and kendo.dataviz.[theme].css.
 
 ### Transitions
 
