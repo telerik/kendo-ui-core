@@ -76,7 +76,7 @@ Since the layout of the Grid is defined by the HTML, it is only necessary to cal
 
     $("#grid").kendoGrid();
 
-At this point, regardless of the way the grid was created, you have an empty grid.
+When you create the Grid from an existing HTML table, each row from the table is added as a data-item to the DataSource of the Grid. As a result, your Grid is populated with the content from the table to reflect the information it contains.
 
 For more detailed information on how to create a Grid, refer to [the Grid overview article]({% slug overview_kendoui_grid_widget %}).
 

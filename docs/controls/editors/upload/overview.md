@@ -64,6 +64,14 @@ For detailed information on the modes of operation Kendo UI Upload supports, ref
 
 For detailed information on the drag-and-drop functionality Kendo UI Upload supports, refer to [this article]({% slug dragandrop_upload_widget %}).
 
+## Common Scenarios
+
+### Identify Files When Uploading
+
+Regardless of the mode of operation, a unique identifier (`uid`) is generated for each file. In the case of a synchronous or asynchronous upload with the [batch option](/api/javascript/ui/upload#configuration-async.batch) enabled, the single `uid` that is generated, stands for the whole batch of files, selected at the same time. In the case of asynchronous upload with the [batch option](/api/javascript/ui/upload#configuration-async.batch) disabled, a `uid` is generated for each separate file.   
+
+The generated `uid` is added to the `cancel`, `error`, `progress`, `remove`, `select`, and `upload`[events](/api/javascript/ui/upload#events) as a property of the `e.files` collection.
+
 ## Reference
 
 ### Existing Instances
