@@ -334,7 +334,7 @@ var __meta__ = { // jshint ignore:line
                 return value === undefined || value === null ? "" : value;
             }
 
-            if (value) {
+            if (value || !that.hasOptionLabel()) {
                 that._initialIndex = null;
             }
 

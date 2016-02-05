@@ -1238,6 +1238,37 @@
         dropdownlist.value("");
     });
 
+    asyncTest("DropDownList does not select first item if its value is set to null (no option label)", 1, function() {
+        dropdownlist = input.kendoDropDownList({
+          dataTextField: "Name",
+          dataValueField: "Name",
+          dataSource: new kendo.data.DataSource({
+            schema: {
+              model: {
+                id: "StateId"
+              }
+            },
+            transport: {
+              read: function(options) {
+                setTimeout(function() {
+                  options.success([
+                    { Name: "foo" }
+                  ]);
+                });
+              }
+            }
+          })
+        }).data("kendoDropDownList");
+
+        dropdownlist.one("dataBound", function() {
+            start();
+
+            equal(dropdownlist.value(), "");
+        });
+
+        dropdownlist.value("");
+    });
+
     test("DropDownList does not trigger cascade event on click when source is empty", 0, function() {
         dropdownlist = input.kendoDropDownList({
           optionLabel: "--Select Value--",
