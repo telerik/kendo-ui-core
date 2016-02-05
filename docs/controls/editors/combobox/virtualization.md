@@ -185,6 +185,7 @@ As mentioned in the previous section, the service should map the selected value 
 
 - The virtualization feature can work with objects, while virtualization of primitive values is not supported.
 - The rendered items should have equal height. In other words, every single item in the virtualized list will display a height that is set through the [`itemHeight`](#itemheight) option.
+- The virtualization feature performs complex data pre-fetching and relies that the DataSource state will not change without the knowledge of the widget. Any manual data operations (such as `read`, `page`, `filter`, `add`, `remove`, etc.) may lead to unexpected behaviour of the widget and are not supported.
 
 ## See Also
 
