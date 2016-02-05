@@ -19,7 +19,13 @@ Admittedly, RTL falls more into the internationalization space. However, we like
 
 Kendo UI provides out-of-the-box RTL support and adding the features to your applications is simple. To enable it, follow the steps below:
 
-1. Register the `kendo.rtl.css` stylesheet. It is found in the same folder as the `kendo.common.css` file - the Kendo UI `styles` folder in the latest release. **Make sure you register the RTL stylesheet after the common stylesheet and before the theme stylesheet.**
+1. Register the `kendo.rtl.css` stylesheet. It is found in the same folder as the `kendo.common.css` file&mdash;the Kendo UI `styles` folder in the latest release.
+
+> **Important**
+>
+> Make sure you register the RTL stylesheet after the common stylesheet and before the theme stylesheet.
+
+###### Example 
 
 	<link rel='stylesheet' href='/stylesheets/kendo.rtl.min.css' />
 

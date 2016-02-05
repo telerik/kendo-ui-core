@@ -45,7 +45,9 @@ The Kendo UI Chart widgets come with [a set of predefined themes](/styles-and-la
         }
     });
 
-> As of Kendo UI Q2 2015 (2015.2.624), [all dataviz-related CSS code has been moved to the web widgets' CSS files](backwards-compatibility/2015/2015-backward-compatibility#changes-from-2015-q1-sp2-20151429). Please remove any legacy references to kendo.dataviz.css and kendo.dataviz.[theme].css.
+> **Important**
+>
+> As of the Kendo UI Q2 2015 (2015.2.624) release, [all CSS code related to the rendering of data visualization, i.e. referring to Gauges, Charts, Barcodes, Diagrams, and Maps, has been moved to the web widgets' CSS files]({% slug breakingchanges2015_kendoui %}). Please remove any legacy references to `kendo.dataviz.css` and `kendo.dataviz.[theme].css`.
 
 ### Transitions
 
