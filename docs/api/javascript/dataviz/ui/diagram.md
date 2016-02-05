@@ -2326,11 +2326,11 @@ The zoom step when using the mouse-wheel to zoom in or out.
 
 An array holding the diagram connections.
 
-### connectionsDataSource `kendo.ui.data.DataSource`
+### connectionsDataSource `kendo.data.DataSource`
 
 The connections data source, if any.
 
-### dataSource `kendo.ui.data.DataSource`
+### dataSource `kendo.data.DataSource`
 
 The shapes data source, if any.
 
