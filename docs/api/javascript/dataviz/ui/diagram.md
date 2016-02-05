@@ -302,6 +302,14 @@ Defines the handles stroke options.
 
 Defines the handles stroke color.
 
+### connectionDefaults.selection.handles.width `Number`
+
+The width of the handle elements.
+
+### connectionDefaults.selection.handles.height `Number`
+
+The height of the handle elements.
+
 ### connectionDefaults.startCap `String|Object`
 
 The connection start cap configuration or type name.
@@ -589,6 +597,14 @@ Defines the handles stroke options.
 ### connections.selection.handles.stroke.color `String`
 
 Defines the handles stroke color.
+
+### connections.selection.handles.width `Number`
+
+The width of the handle elements.
+
+### connections.selection.handles.height `Number`
+
+The height of the handle elements.
 
 ### connections.startCap `String|Object`
 
