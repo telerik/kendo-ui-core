@@ -98,15 +98,15 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | **Tools, Frameworks and Utilities**   |
 | [Chrome Inspector](https://chrome.google.com/webstore/category/apps)  | :white_check_mark:   | :white_check_mark: | :white_check_mark:         |
 | [DataSource](http://demos.telerik.com/kendo-ui/datasource/index)      | :white_check_mark:   | :white_check_mark: | :white_check_mark:         |
-| [Drawing API](http://demos.telerik.com/kendo-ui/drawing/index)        | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
-| [Excel Export](http://docs.telerik.com/kendo-ui/framework/excel/introduction) | :white_check_mark: | :white_check_mark: | :white_check_mark:   |
+| [Drawing API](http://demos.telerik.com/kendo-ui/drawing/index)        | :x: | :white_check_mark: | :white_check_mark:           |
+| [Excel Export](http://docs.telerik.com/kendo-ui/framework/excel/introduction) | :x: | :white_check_mark: | :white_check_mark:   |
 | [Globalization](http://demos.telerik.com/kendo-ui/globalization/index)| :white_check_mark:   | :white_check_mark: | :white_check_mark: |
 | [HierarchicalDataSource](http://docs.telerik.com/kendo-ui/framework/hierarchicaldatasource/overview) | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | [AngularJS Integration](http://demos.telerik.com/kendo-ui/integration/index)| :white_check_mark: | :white_check_mark: | :white_check_mark:     |
 | [Bootstrap Friendly](http://demos.telerik.com/kendo-ui/integration/bootstrap)| :white_check_mark: | :white_check_mark: | :white_check_mark:    |
 | [Localization](http://docs.telerik.com/kendo-ui/framework/localization/overview) | :white_check_mark: | :white_check_mark: | :white_check_mark:|
 | [MVVM Integration](http://demos.telerik.com/kendo-ui/mvvm/index)      | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
-| [PDF Export](http://demos.telerik.com/kendo-ui/pdf-export/index)      | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
+| [PDF Export](http://demos.telerik.com/kendo-ui/pdf-export/index)      | :x: | :white_check_mark: | :white_check_mark:           |
 | [Single-Page Application](http://demos.telerik.com/kendo-ui/spa/index)| :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [Templates](http://demos.telerik.com/kendo-ui/templates/index)        | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder)        | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
