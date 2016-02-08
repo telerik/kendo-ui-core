@@ -40,6 +40,8 @@ You need to extract the data for the target region and convert it to GeoJSON for
 
 When it comes to converting between different vector formats the first project that comes to mind is the [OGR Library and utilities](http://www.gdal.org/ogr/index.html), part of the [Geospatial Data Abstraction Library](http://www.gdal.org/). The [ogr2ogr](http://www.gdal.org/ogr2ogr.html) command-line tool is also included in it.
 
+> [Mapshaper](http://www.mapshaper.org/) is also a great tool that allows you to do many edits directly in the browser. Be sure to check it out.
+
 The example below demonstrates the command that converts the dataset to GeoJSON and filters it out.
 
 ###### Example
@@ -51,6 +53,9 @@ Your dataset is now ready and you can display it.
 ### Load Data
 
 Set up a simple Kendo UI Map and add a single shape layer to it, as demonstrated in the example below. Its GeoJSON data source will point to your processed dataset.
+
+> **Important**
+> Make sure the GeoJSON files are properly encoded, preferably in UTF-8.
 
 ###### Example
 
