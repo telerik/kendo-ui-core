@@ -7,7 +7,7 @@ slug: howto_use_fontawesomeiconsin_custom_command_buttons_grid
 
 # Use FontAwesome Icons in Kendo UI Grid
 
-The example below demonstrates how to use FontAwesome icons inside a Kendo UI Grid.
+The example below demonstrates how to use FontAwesome icons with the Kendo UI Grid's built-in buttons.
 
 ###### Example
 
@@ -22,7 +22,7 @@ The example below demonstrates how to use FontAwesome icons inside a Kendo UI Gr
         var wnd,
             detailsTemplate;
 
-        $(document).ready(function () {
+        $(function () {
           var grid = $("#grid").kendoGrid({
             dataSource: {
               pageSize: 20,
@@ -43,7 +43,12 @@ The example below demonstrates how to use FontAwesome icons inside a Kendo UI Gr
               }, 
                title: " ", 
                width: "140px" 
-              }]
+              }],
+              dataBound: function (e) {
+                e.sender.tbody.find(".k-button.fa").each(function(idx, element){
+                  $(element).removeClass("fa fa-map-marker").find("span").addClass("fa fa-map-marker");
+                });
+              }
           }).data("kendoGrid");
 
           wnd = $("#details")
