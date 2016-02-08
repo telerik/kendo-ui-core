@@ -10,7 +10,7 @@ position: 3
 
 This article illustrates the process of creating a map from scratch and by using freely available datasets. The goal of this tutorial is a map of the Australian states and mainland territories.
 
-This is how the finished map should look like:
+**Figure 1. The expected outlook of a finished map**
 
 ![Finished map](/controls/diagrams-and-maps/map/images/map-au.png)
 
@@ -30,6 +30,8 @@ A traditional [desktop geographic information system (GIS)](https://en.wikipedia
 
 Start by [importing the Esri Shapefile](http://www.qgis.org/en/docs/user_manual/working_with_vector/supported_data.html#esri-shapefiles) for the data set. With the help of the [Identify tool](http://www.qgis.org/en/docs/user_manual/introduction/general_tools.html#identify) you can quickly inspect the available metadata.
 
+**Figure 2. Identifying of the results**
+
 ![Identify results](/controls/diagrams-and-maps/map/images/map-qgis-identify.png)
 
 You are also able to narrow down your interest to features with the "AU" [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code.
@@ -40,7 +42,9 @@ You need to extract the data for the target region and convert it to GeoJSON for
 
 When it comes to converting between different vector formats the first project that comes to mind is the [OGR Library and utilities](http://www.gdal.org/ogr/index.html), part of the [Geospatial Data Abstraction Library](http://www.gdal.org/). The [ogr2ogr](http://www.gdal.org/ogr2ogr.html) command-line tool is also included in it.
 
-> [Mapshaper](http://www.mapshaper.org/) is also a great tool that allows you to do many edits directly in the browser. Be sure to check it out.
+> **Important**
+>
+> [Mapshaper](http://www.mapshaper.org/) is also a great tool that allows you to do many edits directly in the browser. Make sure you check it out.
 
 The example below demonstrates the command that converts the dataset to GeoJSON and filters it out.
 
@@ -55,6 +59,7 @@ Your dataset is now ready and you can display it.
 Set up a simple Kendo UI Map and add a single shape layer to it, as demonstrated in the example below. Its GeoJSON data source will point to your processed dataset.
 
 > **Important**
+>
 > Make sure the GeoJSON files are properly encoded, preferably in UTF-8.
 
 ###### Example
