@@ -1,19 +1,26 @@
 ---
-title: SplitView
-page_title: Kendo UI jQuery Mobile SplitView widget documentation
-description: Overview of jQuery-based Kendo tablet UI pane widget. Quick tips for the customization of Kendo UI SplitView component.
+title: Overview
+page_title: Overview | Hybrid UI SplitView
+description: "Learn about the jQuery-based Kendo UI tablet pane and customize the Hybrid UI SplitView component."
+slug: overview_hybridsplitview
+position: 1
 ---
 
-# SplitView
+# SplitView Overview
 
-The mobile SplitView is a tablet-specific view that consists of two or more **mobile Pane widgets**. The
-Mobile Application automatically instantiates a mobile SplitView for each element with a `role` data attribute set
-to **splitview**.
+The [Hybrid UI SplitView widget](http://demos.telerik.com/kendo-ui/m/index#splitview/index) is a tablet-specific view that consists of two or more mobile Pane widgets.
 
-**Important:** unlike most widgets, the splitview element **should not be nested**
-in a view, but should be put as an immediate child of the mobile application element.
+## Getting Started
 
-## Mobile SplitView with two panes
+The mobile Kendo UI Application automatically initializes a mobile SplitView for each element with a `role` data- attribute set to `splitview`.
+
+> **Important**
+>
+> Unlike most widgets, the SplitView element should not be nested in a view, but rather put as an immediate child of the mobile application element.
+
+### Initialize SplitView with Two Panes
+
+###### Example
 
     <div data-role="splitview">
 
@@ -44,13 +51,16 @@ in a view, but should be put as an immediate child of the mobile application ele
 
     </div>
 
+## Appearance
 
-## Collapsible panes
+### Collapsible Panes
 
-Collapsible panes are automatically hidden when the device is in portrait orientation. The `expandPanes` method can be wired to a button in order to display the collapsed pane(s) overlayed on top of the main pane. Tapping on the main pane will collapse the overlayed pane(s).
-The expanded panes can also be collapsed when a navigation happens in the mane pane.
+Collapsible panes are automatically hidden when the device is in portrait orientation. The `expandPanes` method can be wired to a button to display the collapsed panes overlaid on top of the main pane. Tapping on the main pane collapses the overlaid panes. The expanded panes can also be collapsed when a navigation happens in the mane pane.
 
-### Collapsible pane with button which expands it
+The example below demonstrates a collapsible pane with a button, which expands it.
+
+###### Example
+
     <style scoped>
         /* do not show side pane activation button in landscape mode */
         .km-horizontal #side-pane-button {
@@ -101,11 +111,14 @@ The expanded panes can also be collapsed when a navigation happens in the mane p
         }
     </script>
 
-## Header and Footer support
+<!--*-->
+### Headers and Footers
 
-In Q2 2014 and later versions, the SplitView supports top-level header and footer elements like a regular view.
+As of Kendo UI Q2 2014, the SplitView supports top-level header and footer elements like a regular view.
 
-### SplitView with top-level footer
+The example below demonstrates a SplitView with a top-level footer.
+
+###### Example
 
     <div data-role="splitview">
 
@@ -149,13 +162,15 @@ In Q2 2014 and later versions, the SplitView supports top-level header and foote
         });
     </script>
 
+## Customization
 
-## Customizing appearance
+### Configure Proportions
 
-By default Kendo UI Mobile is configured to show a horizontal SplitView with smaller left and bigger right pane in 1:2 proportion.
-In order to resize one of the panes, use CSS to set its width or adjust the flexibility of the flex boxes (if the width is set, the other pane flexibility should be set to a high number, like 1000).
+By default, the Hybrid UI platform is configured to show a horizontal SplitView with smaller left and bigger right pane in a 1:2 proportion. To resize one of the panes, use CSS to set its width, or adjust the flexibility of the flex boxes. Note that if the width is set, the other pane flexibility should be set to a high number such as 1000.
 
-### Set pane width to 300px or change the proportions to 1:3
+The example below demonstrates how to set the pane width to 300px or change the proportions to 1:3.
+
+###### Example
 
     <div data-role="splitview" id="main">
       <div data-role="pane" id="side-pane">
@@ -193,10 +208,14 @@ In order to resize one of the panes, use CSS to set its width or adjust the flex
         }
     </style>
 
-Additionally you can split your view to more panes by adding them directly. You can also make them stack vertically
-by setting data-style="vertical" on your SplitView.
+<!--_-->
+### Split Views to Many Panes
 
-## Make SplitView to stack vertically.
+Additionally, you are able to split your view to more panes by adding them directly. You can also make them stack vertically by setting `data-style="vertical"` on your SplitView.
+
+The example below demonstrates how to make the SplitView stack vertically.
+
+###### Example
 
     <div data-role="splitview" id="main" data-style="vertical">
       <div data-role="pane" id="side-pane">
@@ -214,3 +233,15 @@ by setting data-style="vertical" on your SplitView.
         </div>
       </div>
     </div>
+
+<!--_-->
+## See Also
+
+Other articles and how-to examples on the Hybrid UI components and on the SplitView:
+
+* [Hybrid UI SplitView JavaScript API Reference](/api/javascript/mobile/ui/splitview)
+* [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})
+* [How to Create Fixed Content Areas with Scroller]({% slug howto_createfixedcontentarea_hybridui %})
+* [How to Create Relative Content Size Using Flexboxes]({% slug howto_createrelative_contentsize_usingflexboxes_hybridui %})
+* [How to Select Value from Another View]({% slug howto_selectvaluefrom_anotherview_hybridui %})
+* [How to Set Initial View Prior to Initialization in AngularJS]({% slug howto_setinitiaviewpriortoinitialization_angular_hybridui %})
