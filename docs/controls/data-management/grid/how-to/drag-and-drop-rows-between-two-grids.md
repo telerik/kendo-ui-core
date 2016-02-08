@@ -21,7 +21,7 @@ The example below demonstrates how to Drag and Drop rows between two grids.
           data: [
             { "ID": 1, "Name": "James" },
             { "ID": 2, "Name": "John" },
-            { "ID": 3, "Name": "Jane" },
+            { "ID": 3, "Name": "Jane" }
           ],
           pageSize: 5
         });
@@ -30,7 +30,7 @@ The example below demonstrates how to Drag and Drop rows between two grids.
           data: [
             { "ID": 4, "Name": "Alex" },
             { "ID": 5, "Name": "Allen" },
-            { "ID": 6, "Name": "Anton" },
+            { "ID": 6, "Name": "Anton" }
           ],
           pageSize: 5
         });
