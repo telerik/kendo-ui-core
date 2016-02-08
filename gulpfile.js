@@ -180,6 +180,8 @@ gulp.task("jshint", function() {
 
 gulp.task('build', [ 'scripts', 'styles' ]);
 
+gulp.task('tests', [ 'karma-unit' ]);
+
 gulp.task('ci', function(done) {
   runSequence('build', 'karma-jenkins', done);
 });
