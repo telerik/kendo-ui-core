@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Overview | JSP AutoComplete Tag
-description: "Get started with the JSP AutoComplete tag in Kendo UI."
+description: "Get started with the AutoComplete JSP tag in Kendo UI."
 slug: overview_autocomplete_uiforjsp
 position: 1
 ---
@@ -23,7 +23,7 @@ There are two ways to bind a Kendo UI AutoComplete:
 
 Below are listed the steps for you to follow when configuring the Kendo UI AutoComplete for binding to data, passed as a model attribute in Spring MVC.
 
-**Step 1** Make sure you have followed all the steps from the [introductory article on Telerik UI for JSP]({% slug overview_uiforjsp %}).
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for JSP]({% slug overview_uiforjsp %}).
 
 **Step 2** Create a new action method and pass the **Products** table to the View.
 

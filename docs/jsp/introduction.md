@@ -90,7 +90,7 @@ Follow the steps below to add Kendo UI to your JSP application.
 
 **Step 3** Copy the Kendo UI JavaScript files from the `\js` folder of the installation to the `WebContent/resources/js` folder of your application.
 
-If you intend to use CDN services, skip steps 3, 4, and 5, and check the [section on CDN below](#using-cdn).
+If you intend to use CDN services, skip steps 3, 4, and 5, and check the [section on CDN below](#use-cdn-services).
 
 **Step 4** Copy the Kendo UI CSS files and folders from the `\styles` folder of the installation to the `WebContent/resources/styles` folder of your application. If you want to use only one theme, copy `kendo.common.min.css`, the theme file (e.g. `kendo.default.min.css`), the theme folder (e.g. `Default`) and the `textures` folder.
 
