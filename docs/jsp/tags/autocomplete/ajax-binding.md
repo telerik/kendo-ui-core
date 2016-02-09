@@ -1,7 +1,7 @@
 ---
 title: Ajax Binding
 page_title: Ajax Binding | JSP AutoComplete Tag
-description: "Get started with the Ajax binding of the JSP AutoComplete tag in Kendo UI."
+description: "Get started with the Ajax binding of the AutoComplete JSP tag in Kendo UI."
 slug: ajaxbinding_autocomplete_uiforjsp
 position: 2
 ---
