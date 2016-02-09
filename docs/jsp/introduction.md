@@ -1,70 +1,120 @@
 ---
-title: Introduction
+title: Overview
+page_title: Overview | Telerik UI for JSP
+description: "Download and install Telerik UI for JSP, and run a sample application."
+slug: overview_uiforjsp
+position: 1
 ---
 
-## Downloading and Installing Telerik UI for JSP
+# Telerik UI for JSP Overview
+
+[Telerik UI for JSP (JavaScript Pages)](http://www.telerik.com/jsp-ui) is a complete web development framework for building HTML5 applications. It extends the core Kendo UI client-side framework by enabling Java developers to initialize and work with the widgets completely on the server-side. As a set of helpers that sit on top of Kendo UI tools, Telerik UI for JSP cannot be used without the Kendo UI client-side libraries.
+
+Telerik UI for JSP includes a Model-View-ViewModel (MVVM) framework and lets you write JSP code to generate widgets that easily integrate with your server-side backend. The distribution consists of [Kendo UI Professional](http://www.telerik.com/purchase/kendo-ui) and JSP wrappers, tailored to be used with Java Server Pages in either a standalone JSP app, or as the view engine of an MVC framework, such as Spring MVC or Struts.
+
+In its current version, Telerik UI for JSP contains server wrappers for all Kendo UI components except for its Hybrid UI.
+
+## Getting Started
+
+### Download and Install
 
 The distribution files contain the following:
 
-*   **\js** - Kendo UI minified JavaScript files.
-*   **\styles** - Kendo UI minified CSS files and background images used by the themes.
-*   **\wrappers\jsp\kendo-taglib** - Telerik UI for JSP jar files.
-*   **\wrappers\jsp\spring-demos** - a sample JSP Spring MVC application.
+* `\js`&mdash;These are the Kendo UI minified JavaScript files.
+* `\styles`&mdash;The Kendo UI minified CSS files and background images used by the themes.
+* `\wrappers\jsp\kendo-taglib`&mdash;The Telerik UI for JSP jar files.
+* `\wrappers\jsp\spring-demos`&mdash;A sample JSP Spring MVC application.
 
-## Running the sample application
+## Sample Application Setup
 
-#### Requirements
+### Meet the Requirements
 
-*   JDK 1.8 or 1.7
-*   Eclipse for Enterprise Developers (J2EE support) - Luna, Kepler or newer
-*   Maven support for Eclipse - m2e
-*   Configured server (tested with Tomcat 7)
+* [Java Development Kit (JDK)](http://www.oracle.com/technetwork/java/javase/downloads/index.html), version 1.8 or 1.7
+* [Eclipse for Enterprise Developers (J2EE support)&mdash;Luna, Kepler, or later](https://eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/keplersr2)
+* [Maven support for Eclipse (M2E)](http://www.eclipse.org/m2e/)
+* Configured server, tested with [Tomcat 7](http://tomcat.apache.org/tomcat-7.0-doc/)
+
+**Figure 1. Eclipse with Tomcat7 configured**
 
 ![Eclipse with Tomcat7 configured](images/eclipse.png)
 
-You can find a sample JSP Spring MVC application in the **\wrappers\jsp\spring-demos** folder.
+Find a sample a JSP Spring MVC application in the `\wrappers\jsp\spring-demos` folder.
 
-#### Steps to run the project
+### Run the Application
 
-1.  Extract the Telerik UI for JSP package.
-1.  Start Eclipse.
-1.  Choose "File -> Import".
-1.  Choose "Maven -> Existing Maven Projects". Click "Next". If you don't see that option make sure your Eclipse has Maven support installed.
+**Step 1** Extract the Telerik UI for JSP package.
 
-    ![Import Maven projects](images/existing_maven_project.png)
-1.  Browse to the location where you extracted Telerik UI for JSP. Then pick "wrappers\jsp\spring-demos" for "Root Directory". Click "Finish".
+**Step 2** Start Eclipse.
 
-    ![Import Kendo UI JSP demos](images/import_maven_project.png)
-1.  Right-click "spring-demos" in Eclipse Project Explorer. Pick "Properties".
-1.  In the properties window pick "Project Facets".
-1.  From the "Project Facets" menu select "Dynamic Web Module".
+**Step 3** Choose **File** > **Import**.
 
-    ![Project facets](images/project_facets.png)
-1. Click the "Runtimes" tab. Pick a runtime (Tomcat 7 for example).
+**Step 4** Choose **Maven** > **Existing Maven Projects**. Click **Next**. If you do not see that option, make sure your Eclipse has Maven support installed.
 
-    ![Project facets - Tomcat 7](images/project_facets_tomcat.png)
-1. Press "OK" to close the "Properties" window.
-1. Right-click "spring-demos" in Eclipse Project Explorer. Pick "Run As -> Run on server".
+**Figure 2. Eclipse with Tomcat7 configured**
 
-## Using Kendo UI in JSP application
+![Import Maven projects](images/existing_maven_project.png)
 
-1.  Create a new **"Dynamic Web Project"** from Eclipse or open an existing one.
-1.  Add **\wrappers\jsp\kendo-taglib\kendo-taglib-[version].jar** to project's **/WebContent/WEB-INF/lib folder**.
-1.  Copy the Kendo UI JavaScript files from the **\js** folder of the installation to the **WebContent/resources/js** folder of your application.
+**Step 5** Browse to the location where you extracted Telerik UI for JSP. Then pick "wrappers\jsp\spring-demos" for "Root Directory". Click "Finish".
 
-    If you want to use CDN skip steps 3, 4 and 5 and check the [Using CDN](#using-cdn) section.
-1.  Copy the Kendo UI CSS files and folders from the **\styles** folder of the installation to the **WebContent/resources/styles** folder of your application. If you want to use only one theme copy **kendo.common.min.css**, the theme file (e.g. **kendo.default.min.css**), the theme folder (e.g. **Default**) and the **textures** folder.
-1. Add a JSP page.
-    *   Right-mouse click on WebContent folder
-    *   Select New -> JSP file
-    *   Enter file name and click Finish
-1.  Configure your page to include the Kendo UI Web JavaScript and CSS files to the page:
+**Figure 3. Import od the Kendo UI JSP demos**
+
+![Import Kendo UI JSP demos](images/import_maven_project.png)
+
+**Step 6** Right-click **spring-demos** in the Eclipse Project Explorer. Pick **Properties**.
+
+**Step 7** In the properties window pick **Project Facets**.
+
+**Step 8** From the "Project Facets" menu select "Dynamic Web Module".
+
+**Figure 4. Project facets**
+
+![Project facets](images/project_facets.png)
+
+**Step 9** Click the **Runtimes** tab. Pick a runtime&mdash;Tomcat7, for example.
+
+**Figure 5. Project facets&mdash;Tomcat 7**
+
+![Project facets - Tomcat 7](images/project_facets_tomcat.png)
+
+**Step 10** Click **OK** to close the **Properties** window.
+
+**Step 11** Right-click **spring-demos** in the Eclipse Project Explorer. Pick **Run As** > **Run on server**.
+
+### Add Kendo UI
+
+Follow the steps below to add Kendo UI to your JSP application.
+
+**Step 1** Create a new **Dynamic Web Project** from Eclipse or open an existing one.
+
+**Step 2** Add `\wrappers\jsp\kendo-taglib\kendo-taglib-[version].jar` to project's `/WebContent/WEB-INF/lib folder`.
+
+**Step 3** Copy the Kendo UI JavaScript files from the `\js` folder of the installation to the `WebContent/resources/js` folder of your application.
+
+If you intend to use CDN services, skip steps 3, 4, and 5, and check the [section on CDN below](#using-cdn).
+
+**Step 4** Copy the Kendo UI CSS files and folders from the `\styles` folder of the installation to the `WebContent/resources/styles` folder of your application. If you want to use only one theme, copy `kendo.common.min.css`, the theme file (e.g. `kendo.default.min.css`), the theme folder (e.g. `Default`) and the `textures` folder.
+
+**Step 5** Add a JSP page.
+1. Right-click the `WebContent` folder.
+2. Select **New** > **JSP file**.
+3. Enter a file name and click **Finish**.
+
+**Step 6** Configure your page to include the Kendo UI web JavaScript and CSS files to the page, as shown in the example below.
+
+###### Example
 
         <link href="resources/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
         <link href="resources/styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
         <script src="resources/js/jquery.min.js"></script>
         <script src="resources/js/kendo.web.min.js"></script>
-1.  Configure your page to include the Kendo UI DataViz JavaScript and CSS files. **Important**: If you want to use Kendo UI Web and DataViz at the same time you should include **kendo.all.min.js** instead of **kendo.web.min.js** and **kendo.dataviz.min.js**. You can also create a custom JavaScript file using the [Custom Download Builder](https://www.telerik.com/login/v2/telerik?ReturnUrl=http%3a%2f%2fwww.telerik.com%2fdownload%2fcustom-download).
+
+**Step 6** Configure your page to include the Kendo UI dataviz JavaScript and CSS files.
+
+> **Important**
+>
+> If you want to use Kendo UI web and data visualization widgets at the same time, include `kendo.all.min.js` instead of `kendo.web.min.js` and `kendo.dataviz.min.js`. You can also create a custom JavaScript file by using the [Custom Download Builder](https://www.telerik.com/login/v2/telerik?ReturnUrl=http%3a%2f%2fwww.telerik.com%2fdownload%2fcustom-download).
+
+###### Example
 
         <link href="resources/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
         <link href="resources/styles/kendo.dataviz.min.css" rel="stylesheet" type="text/css" />
@@ -72,32 +122,45 @@ You can find a sample JSP Spring MVC application in the **\wrappers\jsp\spring-d
 
         <script src="resources/js/jquery.min.js"></script>
         <script src="resources/js/kendo.dataviz.min.js"></script>
-1.  Add taglib mapping to the kendo tags
+
+**Step 7** Add taglib mapping to the Kendo UI tags.
+
+###### Example
 
         <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
-1.  Use any Kendo UI HtmlHelper extension:
+
+**Step 8** Use any Kendo UI HtmlHelper extension.
+
+###### Example
 
         <kendo:datePicker name="datePicker"></kendo:datePicker>
 
-### Using CDN
+### Use CDN Services
 
-You can include the JavaScript and CSS files from CDN. Don't forget to specify the version (e.g. 2012.2.710)
+You are also able to include the JavaScript and CSS files from CDN. Do not forget to specify the version, e.g. 2012.2.710.
 
-    <link href="http://kendo.cdn.telerik.com/<VERSION>/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
-    <link href="http://kendo.cdn.telerik.com/<VERSION>/styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
+###### Example
 
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/<VERSION>/js/kendo.all.min.js"></script>
+       <link href="http://kendo.cdn.telerik.com/<VERSION>/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
+       <link href="http://kendo.cdn.telerik.com/<VERSION>/styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
+
+       <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+       <script src="http://kendo.cdn.telerik.com/<VERSION>/js/kendo.all.min.js"></script>
 
 ## Next Steps
 
-Watch the videos in the [Kendo UI YouTube channel](http://www.youtube.com/kendouitv):
+To gain more practice on Telerik UI for JSP, watch the video tutorials on the [Kendo UI YouTube Channel](http://www.youtube.com/kendouitv):
 
-1. [Getting Started With Telerik UI for JSP - Episode 1](https://www.youtube.com/watch?v=3VH75XVhLCI)
-1. [Getting Started With Telerik UI for JSP - Episode 2](https://www.youtube.com/watch?v=LyGHeRMmq5I)
-1. [Getting Started With Telerik UI for JSP - Episode 3](https://www.youtube.com/watch?v=sCwqj_ZRGI8)
-1. [Getting Started With Telerik UI for JSP - Episode 4](https://www.youtube.com/watch?v=fcbw4YR4P2I)
+1. [Getting Started With Telerik UI for JSP (Episode 1)](https://www.youtube.com/watch?v=3VH75XVhLCI)
+1. [Getting Started With Telerik UI for JSP (Episode 2)](https://www.youtube.com/watch?v=LyGHeRMmq5I)
+1. [Getting Started With Telerik UI for JSP (Episode 3)](https://www.youtube.com/watch?v=sCwqj_ZRGI8)
+1. [Getting Started With Telerik UI for JSP (Episode 4)](https://www.youtube.com/watch?v=fcbw4YR4P2I)
 
-For more examples on how to use Kendo UI with JSP wrappers, visit the following GitHub repository:
+For more examples on how to use Kendo UI with JSP wrappers, visit the [GitHub repository with the collected Kendo UI examples on using JSP](https://github.com/telerik/kendo-examples-java).
 
-* [Collected Kendo UI Examples on Using JSP](https://github.com/telerik/kendo-examples-java)
+## See Also
+
+Other articles on Telerik UI for JSP:
+
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})
