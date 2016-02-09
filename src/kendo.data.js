@@ -534,6 +534,7 @@ var __meta__ = { // jshint ignore:line
 
         set: function(field, value) {
             var that = this,
+                isSetPrevented = false,
                 composite = field.indexOf(".") >= 0,
                 current = kendo.getter(field, true)(that);
 
@@ -545,7 +546,9 @@ var __meta__ = { // jshint ignore:line
                     current.unbind(CHANGE, this._handlers[field].change);
                 }
 
-                if (!that.trigger("set", { field: field, value: value })) {
+                isSetPrevented = that.trigger("set", { field: field, value: value });
+
+                if (!isSetPrevented) {
                     if (!composite) {
                         value = that.wrap(value, field, function() { return that; });
                     }
@@ -554,6 +557,8 @@ var __meta__ = { // jshint ignore:line
                     }
                 }
             }
+
+            return isSetPrevented;
         },
 
         parent: noop,
@@ -741,13 +746,17 @@ var __meta__ = { // jshint ignore:line
 
         set: function(field, value, initiator) {
             var that = this;
+            var dirty = that.dirty;
 
             if (that.editable(field)) {
                 value = that._parse(field, value);
 
                 if (!equal(value, that.get(field))) {
                     that.dirty = true;
-                    ObservableObject.fn.set.call(that, field, value, initiator);
+
+                    if (ObservableObject.fn.set.call(that, field, value, initiator) && !dirty) {
+                        that.dirty = dirty;
+                    }
                 }
             }
         },
