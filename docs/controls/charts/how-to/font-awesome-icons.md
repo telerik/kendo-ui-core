@@ -7,15 +7,11 @@ slug: howto_fontawesomeicons_charts
 
 # Use FontAwesome in Labels
 
-Visual templates allow us to render font icons in Chart labels.
+Visual templates allow you to render font icons in Chart labels. The Chart labels cannot contain HTML markup. To get around this, use visual templates and construct the labels by using the [Drawing API]({% slug overview_kendoui_drawingapi %}).
 
-The Chart labels can't contain HTML markup. To get around this we can use visual templates and construct the labels using the [Drawing API](/framework/drawing).
+The example below demonstrates font icons in category axis labels&mdash;that is, how to construct two [Text](/api/javascript/drawing/text) shapes and position them in a [Layout](/api/javascript/drawing/layout). The first `Text` element contains the FontAwesome icon. The second one is a plain text label.
 
-In the example below, we'll construct two [Text](/api/javascript/drawing/text) shapes and position them in a [Layout](/api/javascript/drawing/layout).
-
-The first Text element will contain the FontAwesome icon. The second one will be plain text label.
-
-###### Example - Font Icons in Category Axis Labels
+###### Example
 
 ```html
     <!-- Include FontAwesome -->
@@ -75,8 +71,8 @@ The first Text element will contain the FontAwesome icon. The second one will be
 Other articles and how-to examples on Kendo UI Charts:
 
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
-* [Embed Font Awesome in Exported PDF]({% slug howto_embedfontawesome_inexportedpdf_drawingapi %})
-* [Drawing API / Layout](/api/javascript/drawing/layout)
+* [How to Embed Font Awesome in Exported PDF]({% slug howto_embedfontawesome_inexportedpdf_drawingapi %})
+* [Drawing API: layout](/api/javascript/drawing/layout)
 * [How to Display Checkboxes Next to Legend Items]({% slug howto_displaycheckboxes_nexttolegenditems_charts %})
 * [How to Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})
 * [How to Render Custom Plot Bands]({% slug howto_rendercustomplotbands_charts %})
