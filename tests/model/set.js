@@ -44,6 +44,45 @@ test("model is dirty during change event", 1, function() {
     m.set("foo", "foo");
 });
 
+test("model is dirty during set event", 1, function() {
+    var m = new Model();
+
+    m.bind("set", function() {
+        ok(m.dirty);
+    });
+    m.set("foo", "foo");
+});
+
+test("model is dirty after set event", 1, function() {
+    var m = new Model();
+
+    m.set("foo", "foo");
+
+    ok(m.dirty);
+});
+
+test("model is not dirty if set event is prevented", 1, function() {
+    var m = new Model();
+
+    m.bind("set", function(e) {
+        e.preventDefault();
+    });
+    m.set("foo", "foo");
+
+    ok(!m.dirty);
+});
+
+test("model is dirty if is already dirty and set event is prevented", 1, function() {
+    var m = new Model();
+
+    m.dirty = true;
+    m.bind("set", function(e) {
+        e.preventDefault();
+    });
+    m.set("foo", "foo");
+
+    ok(m.dirty);
+});
 
 test("model is not dirty if the same string value is set", function() {
     var m = new Model({
