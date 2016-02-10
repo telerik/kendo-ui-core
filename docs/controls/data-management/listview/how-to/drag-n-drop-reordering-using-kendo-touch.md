@@ -9,7 +9,7 @@ slug: howto_reorder_using_draganddrop_kendouitouch_listview
 
 > **Important**
 >
-> The example that used to demonstrate how to implement the drag-and-drop reordering in Kendo UI ListView by using the `kendoTouch` tap event is now obsolete. For viewing this functionality, refer to [this live demo](http://demos.telerik.com/kendo-ui/sortable/integration-listview).
+> The example that used to demonstrate how to implement the drag-and-drop reordering in a Kendo UI ListView by using the `kendoTouch` tap event is now obsolete. For viewing this functionality, refer to [this live demo](http://demos.telerik.com/kendo-ui/sortable/integration-listview).
 
 ## See Also
 
