@@ -1,12 +1,12 @@
 ---
 title: Overview
-page_title: Overview | JSP AutoComplete Tag
+page_title: Overview | Barcode JSP Tag
 description: "Get started with the Barcode JSP tag in Kendo UI."
 slug: overview_barcode_uiforjsp
 position: 1
 ---
 
-# Barcode
+# Barcode JSP Tag Overview
 
 The Barcode JSP tag is a server-side wrapper for the [Kendo UI Barcode](/api/javascript/dataviz/ui/barcode) widget.
 

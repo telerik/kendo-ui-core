@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | JSP AutoComplete Tag
+page_title: Overview | AutoComplete JSP Tag
 description: "Get started with the AutoComplete JSP tag in Kendo UI."
 slug: overview_autocomplete_uiforjsp
 position: 1
