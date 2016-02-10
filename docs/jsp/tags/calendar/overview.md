@@ -45,7 +45,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Calen
 
 ### Subscribe to Events
 
-You can subscribe to all [events exposed by Kendo UI Calendar](/api/web/autocomplete#events) by the handler name.
+You can subscribe to all [events exposed by Kendo UI Calendar](/api/javascript/ui/calendar#events) by the handler name.
 
 ###### Example
 
