@@ -36,7 +36,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
             return "web/autocomplete/index";
         }
 
-**Step 3** Add Kendo UI taglib mapping to the page.
+**Step 3** Add the Kendo UI `taglib` mapping to the page.
 
 ###### Example
 
@@ -54,7 +54,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 ### Subscribe to Events
 
-You can subscribe to all [events exposed by Kendo UI AutoComplete](/api/web/autocomplete#events) by handler name.
+You can subscribe to all [events exposed by Kendo UI AutoComplete](/api/web/autocomplete#events) by the handler name.
 
 ###### Example
 
@@ -73,7 +73,7 @@ You can subscribe to all [events exposed by Kendo UI AutoComplete](/api/web/auto
 
 ### Existing Instances
 
-You are able to reference an existing AutoComplete instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [AutoComplete API](/api/web/autocomplete#methods) to control its behavior.
+You are able to reference an existing AutoComplete instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [AutoComplete API](/api/javascript/ui/autocomplete#methods) to control its behavior.
 
 ###### Example
 
@@ -90,6 +90,6 @@ You are able to reference an existing AutoComplete instance via the [`jQuery.dat
 Other articles on Telerik UI for JSP and on the AutoComplete:
 
 * [Ajax Binding of the AutoComplete]({% slug ajaxbinding_autocomplete_uiforjsp %})
-* [Overview of the AutoComplete]({% slug overview_kendoui_autocomplete_widget %})
+* [Overview of the Kendo UI AutoComplete Widget]({% slug overview_kendoui_autocomplete_widget %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
 * [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})
