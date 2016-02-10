@@ -1,16 +1,24 @@
 ---
 title: Ajax Binding
+page_title: Ajax Binding | ComboBox JSP Tag
+description: "Get started with the Ajax binding of the ComboBox JSP tag in Kendo UI."
+slug: ajaxbinding_combobox_uiforjsp
+position: 2
 ---
 
 # Ajax Binding
 
-## Getting started
+## Getting Started
 
-When configured for ajax binding the Kendo ComboBox for JSP will make ajax requests when doing filtering.
+When configured for Ajax binding, the Kendo UI ComboBox for JSP makes Ajax requests when doing filtering.
 
-To configure the Kendo ComboBox for ajax binding follow these steps (using Spring MVC framework):
+### Configuration
 
-1.  Add a new action method which will return data to populate the combobox:
+To configure the Kendo UI ComboBox for Ajax binding, follow the steps below (using the Spring MVC framework).
+
+**Step 1** Add a new action method which will return data to populate the ComboBox.
+
+###### Example
 
         @Autowired
         private ProductDao product;
@@ -20,14 +28,18 @@ To configure the Kendo ComboBox for ajax binding follow these steps (using Sprin
 
         }
 
-2.  Add a new parameter which will be populated with current combobox request information - filter.
+**Step 2** Add a new parameter, which is to be populated with the current ComboBox request information&mdash;filter.
+
+###### Example
 
         @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
         public @ResponseBody DataSourceResult read(@RequestBody DataSourceRequest request) {
 
         }
 
-3.  Use the request information to proccess the data and return the result as JSON.
+**Step 3** Use the request information to process the data and return the result as JSON.
+
+###### Example
 
         @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
         public @ResponseBody DataSourceResult read(@RequestBody DataSourceRequest request) {
@@ -35,7 +47,10 @@ To configure the Kendo ComboBox for ajax binding follow these steps (using Sprin
             return product.getList(request);
         }
 
-    *The result format in this case have similar to the following signiture:
+The result format in this case is similar to the signature, demonstrated in the example below.
+
+###### Example
+
 
         public class DataSourceResult {
             public long getTotal() {
@@ -63,7 +78,10 @@ To configure the Kendo ComboBox for ajax binding follow these steps (using Sprin
             }
         }
 
-5.  In the view configure the combobox to use the action method created in the previous steps:
+**Step 4** In the view, configure the ComboBox to use the action method created in the previous steps.
+
+###### Example
+
         <c:url value="/web/combobox/remote-data/read" var="readUrl" />
 
         <kendo:combobox name="productComboBox" dataTextField="productName" dataValueField="productId" filter="contains">
@@ -76,13 +94,23 @@ To configure the Kendo ComboBox for ajax binding follow these steps (using Sprin
             </kendo:dataSource>
         </kendo:comboBox>
 
-## Enable Client Data Processing during Ajax Binding
+### Client Data Processing
 
-In this configuration, Kendo ComboBox for JSP will request data from the server every time the user types in the widget. This behavior
-can be changed by DataSource server operaion options to false:
+In the configuration that enables client data processing during Ajax binding, Kendo UI ComboBox for JSP requests data from the server every time the user types in the widget. This behavior can be changed by setting the DataSource server operation options to `false`.
+
+###### Example
 
        <kendo:dataSource serverFiltering="false">
            <kendo:dataSource-transport>
                <kendo:dataSource-transport-read url="${readUrl}"/>
            </kendo:dataSource-transport>
        </kendo:dataSource>
+
+## See Also
+
+Other articles on Telerik UI for JSP and on the ComboBox:
+
+* [Overview of the ComboBox JSP Tag]({% slug overview_combobox_uiforjsp %})
+* [Overview of the ComboBox Widget]({% slug overview_kendoui_combobox_widget %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

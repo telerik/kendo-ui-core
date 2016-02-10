@@ -14,7 +14,7 @@ When configured for Ajax binding, the Kendo UI AutoComplete for JSP makes Ajax r
 
 ### Configuration
 
-To configure the Kendo AutoComplete for Ajax binding, follow the steps below (using the Spring MVC framework).
+To configure the Kendo UI AutoComplete for Ajax binding, follow the steps below (using the Spring MVC framework).
 
 **Step 1** Add a new action method which will return data to populate the AutoComplete.
 
@@ -77,7 +77,7 @@ The result format in this case is similar to the signature, demonstrated in the 
             }
         }
 
-**Step 5** In the view, configure the AutoComplete to use the action method created in the previous steps.
+**Step 4** In the view, configure the AutoComplete to use the action method created in the previous steps.
 
 ###### Example
 
