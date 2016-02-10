@@ -93,6 +93,7 @@ To vertically scroll the TabStrip content containers with the help of the keyboa
 Other articles on Kendo UI TabStrip:
 
 * [TabStrip JavaScript API Reference](/api/javascript/ui/tabstrip)
+* [How to Add Close Button to Tabs]({% slug howto_addclosebuttontotabs_tabstrip %})
 * [How to Display Buttons at the Bottom]({% slug howto_displaybuttonsatthebottom_tabstrip %})
 * [How to Expand to 100% Height and Auto-Resize]({% slug howto_expandto100percentheightautoresize_tabstrip %})
 * [How to Initialize the Grid in Kendo UI TabStrip]({% slug initialize_thegrid_tabstrip_widget %})
