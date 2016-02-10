@@ -1,18 +1,26 @@
 ---
 title: Overview
+page_title: Overview | DatePicker JSP Tag
+description: "Get started with the DatePicker JSP tag in Kendo UI."
+slug: overview_datepicker_uiforjsp
+position: 1
 ---
 
-# DatePicker
+# DatePicker JSP Tag Overview
 
-The DatePicker JSP tag is a server-side wrapper for the [Kendo UI DatePicker](/api/web/datepicker) widget.
+The DatePicker JSP tag is a server-side wrapper for the [Kendo UI DatePicker](/api/javascript/ui/datepicker) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo DatePicker:
+### Configuration
 
-1.  Make sure you have followed all the steps from the [Introduction](/jsp/introduction) help topic.
+Below are listed the steps for you to follow when configuring the Kendo UI DatePicker.
 
-2.  Create a new action method which renders the view:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for JSP]({% slug overview_uiforjsp %}).
+
+**Step 2** Create a new action method which renders the view.
+
+###### Example
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index() {
@@ -20,40 +28,56 @@ Here is how to configure a simple Kendo DatePicker:
             return "web/datepicker/index";
         }
 
-3. Add kendo taglib mapping to the page
+**Step 3** Add the Kendo UI `taglib` mapping to the page.
+
+###### Example
 
         <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 
-4.  Add a datepicker tag:
+**Step 4** Add a `datepicker` tag.
+
+###### Example
 
         <kendo:datePicker name="datepicker" value="<%= new java.util.Date() %>">
         </kendo:datePicker>
 
-## Accessing an Existing DatePicker
+## Event Handling
 
-You can reference an existing DatePicker instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/datepicker#methods) to control its behavior.
+### Subscribe to Events
 
-### Accessing an existing DatePicker instance
+You can subscribe to all [events exposed by Kendo UI DatePicker](/api/javascript/ui/datepicker#events) by the handler name.
 
-    //Put this after your Kendo DatePicker tag declaration
-    <script>
-    $(function() {
-        // Notice that the Name() of the datepicker is used to get its client-side instance
-        var datepicker = $("#datepicker").data("kendoDatePicker");
-    });
-    </script>
+###### Example
 
-## Handling Kendo UI DatePicker events
+        <kendo:datePicker name="datepicker" change="datepicker_change"></kendo:datePicker>
 
-You can subscribe to all [events](/api/web/datepicker#events) exposed by Kendo UI datepicker:
+        <script>
+            function datepicker_change() {
+                //Handle the change event
+            }
+        </script>
 
-### Subscribe by handler name
+## Reference
 
-    <kendo:datePicker name="datepicker" change="datepicker_change"></kendo:datePicker>
+### Existing Instances
 
-    <script>
-        function datepicker_change() {
-            //Handle the change event
-        }
-    </script>
+You are able to reference an existing DatePicker instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [DatePicker API](/api/javascript/ui/datepicker#methods) to control its behavior.
+
+###### Example
+
+        //Put this after your Kendo DatePicker tag declaration
+        <script>
+        $(function() {
+            // Notice that the Name() of the datepicker is used to get its client-side instance
+            var datepicker = $("#datepicker").data("kendoDatePicker");
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for JSP and on the DatePicker:
+
+* [Overview of the Kendo UI DatePicker Widget]({% slug overview_kendoui_datepicker_widget %})
+* [Overview of the DateTimePicker JSP Tag]({% slug overview_datetimepicker_uiforjsp %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})
