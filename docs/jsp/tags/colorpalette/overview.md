@@ -34,7 +34,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Color
 
         <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 
-**Step 4** Add a ColorPalette tag.
+**Step 4** Add a `colorPalette` tag.
 
 ###### Example
 
@@ -78,5 +78,6 @@ You are able to reference an existing ColorPalette instance via the [`jQuery.dat
 Other articles on Telerik UI for JSP and on the ColorPalette:
 
 * [Overview of the Kendo UI ColorPicker Widget]({% slug overview_kendoui_colorpicker_widget %})
+* [Overview of the ColorPicker JSP Tag]({% slug overview_colorpicker_uiforjsp %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
 * [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})
