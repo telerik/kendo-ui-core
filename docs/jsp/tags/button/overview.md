@@ -8,7 +8,7 @@ position: 1
 
 # Button JSP Tag Overview
 
-The Button JSP tag is a server-side wrapper for the [Kendo UI Button](api/web/button) widget.
+The Button JSP tag is a server-side wrapper for the [Kendo UI Button](/api/javascript/ui/button) widget.
 
 ## Getting Started
 
@@ -148,6 +148,6 @@ To reference an existing Button instance, refer to the [introductory article on 
 
 Other articles on Telerik UI for JSP and on the Button:
 
-* [Overview of the Button Widget]({% slug overview_kendoui_button_widget %})
+* [Overview of the Kendo UI Button Widget]({% slug overview_kendoui_button_widget %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
 * [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})
