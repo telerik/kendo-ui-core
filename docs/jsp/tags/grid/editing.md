@@ -1,14 +1,22 @@
 ---
 title: Ajax Editing
+page_title: Ajax Editing | Grid JSP Tag
+description: "Get started with the Ajax editing of the Grid JSP tag in Kendo UI."
+slug: ajaxediting_grid_uiforjsp
+position: 4
 ---
 
-# Editing
+# Ajax Editing
 
-## Getting started
+## Getting Started
 
-To configure Kendo Grid for JSP for editing follow these steps (using Spring MVC framework):
+### Configuration
 
-1.  Define a command column for the `Edit` and `Destroy` commands:
+To configure the Kendo UI Grid for JSP Ajax editing, follow the steps below (using the Spring MVC framework).
+
+**Step 1** Define a command column for the `Edit` and `Destroy` commands.
+
+###### Example
 
 	       <kendo:grid name="grid">
 		        <kendo:grid-columns>
@@ -25,7 +33,9 @@ To configure Kendo Grid for JSP for editing follow these steps (using Spring MVC
 		        </kendo:grid-columns>
 		    </kendo:grid>
 
-2.  Set the editing mode to `InLine`:
+**Step 2** Set the editing mode to `InLine`.
+
+###### Example
 
         <kendo:grid name="grid">
     		<kendo:grid-editable mode="inline"/>
@@ -43,7 +53,9 @@ To configure Kendo Grid for JSP for editing follow these steps (using Spring MVC
 	        </kendo:grid-columns>
 	    </kendo:grid>
 
-3.  Add the `Create` command to the grid toolbar:
+**Step 3** Add the `Create` command to the Grid toolbar.
+
+###### Example
 
         <kendo:grid name="grid">
 			<kendo:grid-toolbar>
@@ -64,7 +76,9 @@ To configure Kendo Grid for JSP for editing follow these steps (using Spring MVC
 	        </kendo:grid-columns>
 	    </kendo:grid>
 
-4.  Specify the parameterMap and the action methods which will handle the Create, Update and Destroy operations:
+**Step 4** Specify the `parameterMap` and the action methods which will handle the `Create`, `Update`, and `Destroy` operations.
+
+###### Example
 
    		<kendo:grid name="grid">
 			<kendo:grid-toolbar>
@@ -100,7 +114,9 @@ To configure Kendo Grid for JSP for editing follow these steps (using Spring MVC
 	        </kendo:dataSource>
 	    </kendo:grid>
 
-5.  Specify the properties of the model as well as the unique identifier (primary key):
+**Step 5** Specify the properties of the model as well as the unique identifier (primary key).
+
+###### Example
 
         <kendo:grid name="grid">
 			<kendo:grid-toolbar>
@@ -144,7 +160,10 @@ To configure Kendo Grid for JSP for editing follow these steps (using Spring MVC
 	            </kendo:dataSource-schema>
 	        </kendo:dataSource>
 	    </kendo:grid>
-6.  Implement the `Read` action method:
+
+**Step 6** Implement the `Read` action method.
+
+###### Example
 
 		@Autowired
 		private ProductDao product;
@@ -154,7 +173,9 @@ To configure Kendo Grid for JSP for editing follow these steps (using Spring MVC
 			return product.getList();
 		}
 
-7.  Implement the `Create` action method:
+**Step 7** Implement the `Create` action method.
+
+###### Example
 
 		@RequestMapping(value = "/editing-inline/create", method = RequestMethod.POST)
     	public @ResponseBody Product create(@RequestBody Map<String, Object> model) {
@@ -170,7 +191,9 @@ To configure Kendo Grid for JSP for editing follow these steps (using Spring MVC
 	        return target;
 	    }
 
-8.  Implement the `Update` action method:
+**Step 8** Implement the `Update` action method.
+
+###### Example
 
         @RequestMapping(value = "/editing-inline/update", method = RequestMethod.POST)
 		public @ResponseBody Product update(@RequestBody Map<String, Object> model) {
@@ -187,7 +210,10 @@ To configure Kendo Grid for JSP for editing follow these steps (using Spring MVC
 
 	        return target;
 	    }
-9.  Implement the `Destroy` action method:
+
+**Step 9** Implement the `Destroy` action method.
+
+###### Example
 
         @RequestMapping(value = "/editing-inline/destroy", method = RequestMethod.POST)
     	public @ResponseBody Product destroy(@RequestBody Map<String, Object> model) {
@@ -199,3 +225,14 @@ To configure Kendo Grid for JSP for editing follow these steps (using Spring MVC
 
 	        return target;
 	    }
+
+## See Also
+
+Other articles on Telerik UI for JSP and on the Grid:
+
+* [Overview of the Grid JSP Tag]({% slug overview_grid_uiforjsp %})
+* [Batch Editing of the Grid]({% slug batchediting_grid_uiforjsp %})
+* [Ajax Binding of the Grid]({% slug ajaxbinding_grid_uiforjsp %})
+* [Overview of the Kendo UI Grid Widget]({% slug overview_kendoui_grid_widget %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

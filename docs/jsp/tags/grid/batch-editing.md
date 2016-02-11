@@ -1,22 +1,33 @@
 ---
 title: Batch Editing
+page_title: Batch Editing | Grid JSP Tag
+description: "Apply cell editing and batch updates to the Grid JSP tag in Kendo UI."
+slug: batchediting_grid_uiforjsp
+position: 2
 ---
 
-# Cell Editing and Batch Updates
+# Batch Editing
 
-## Getting started
+## Getting Started
 
-Cell editing mode allows the user to edit data in a way similar to popular spreadsheet programs - double clicking a cell puts it in edit mode.
-Clicking outside the cell accepts the new value. All modified grid records are updated (saved, inserted or deleted) when the "Save changes" button is clicked.
+The cell editing mode of the Grid allows the user to edit data in a way similar to popular spreadsheet programs&mdash;double-clicking a cell puts it in editing mode. Clicking outside the cell accepts the new value. All modified Grid records are updated (saved, inserted, or deleted) when the **Save changes** button is clicked.
 
-To enable this mode follow these steps (using Spring MVC framework):
+### Configuration
 
-1.  Set the edit mode to `InCell`:
+Below are listed the steps for you to follow when enabling this mode for the Kendo UI Grid (using the Spring MVC framework).
+
+**Step 1** Set the edit mode to `InCell`.
+
+###### Example
 
         <kendo:grid name="grid">
 			<kendo:grid-editable mode="incell"/>
 	    </kendo:grid>
-2.  Add `Create` and `Save` commands:
+
+
+**Step 2** Add the `Create` and `Save` commands.
+
+###### Example
 
 		 <kendo:grid name="grid">
 			<kendo:grid-editable mode="incell"/>
@@ -36,7 +47,9 @@ To enable this mode follow these steps (using Spring MVC framework):
 	        </kendo:grid-columns>
 	    </kendo:grid>
 
-3.  Specify the parameterMap and the action methods which will handle the `Create`, `Update` and `Destroy` operations:
+**Step 3** Specify the `parameterMap` and the action methods which will handle the `Create`, `Update` and `Destroy` operations.
+
+###### Example
 
 	       <kendo:grid name="grid">
 				<kendo:grid-editable mode="incell"/>
@@ -61,7 +74,7 @@ To enable this mode follow these steps (using Spring MVC framework):
 		                <kendo:dataSource-transport-destroy url="${destroyUrl}" dataType="json" type="POST" contentType="application/json" />
 						<kendo:dataSource-transport-parameterMap>
 							<script>
-								function parameterMap(options,type) { 
+								function parameterMap(options,type) {
 									if(type==="read"){
 										return JSON.stringify(options);
 									} else {
@@ -74,7 +87,10 @@ To enable this mode follow these steps (using Spring MVC framework):
 					// <-- CRUD configuration
 		        </kendo:dataSource>
 		    </kendo:grid>
-4.  Specify the property of the model which is the unique identifier (primary key):
+
+**Step 4** Specify the property of the model which is the unique identifier (primary key).
+
+###### Example
 
     	<kendo:grid name="grid">
 			<kendo:grid-editable mode="incell"/>
@@ -115,7 +131,10 @@ To enable this mode follow these steps (using Spring MVC framework):
 	            </kendo:dataSource-schema>
 	        </kendo:dataSource>
 	    </kendo:grid>
-5.  Enable batch mode:
+
+**Step 5** Enable the batch mode.
+
+###### Example
 
    		<kendo:grid name="grid">
 			<kendo:grid-editable mode="incell"/>
@@ -136,7 +155,10 @@ To enable this mode follow these steps (using Spring MVC framework):
 	        </kendo:dataSource>
 	    </kendo:grid>
 
-6.  Implement the `Read` action method.
+**Step 6** Implement the `Read` action method.
+
+###### Example
+
 		@Autowired
 		private ProductDao product;
 
@@ -145,7 +167,9 @@ To enable this mode follow these steps (using Spring MVC framework):
 			return product.getList();
 		}
 
-7.  Implement the `Create` action method:
+**Step 7** Implement the `Create` action method.
+
+###### Example
 
         @RequestMapping(value = "/editing/create", method = RequestMethod.POST)
     	public @ResponseBody List<Product> create(@RequestBody ArrayList<Map<String, Object>> models) {
@@ -166,7 +190,10 @@ To enable this mode follow these steps (using Spring MVC framework):
 
 	        return products;
 	    }
-8.  Implement the `Update` action method:
+
+**Step 8** Implement the `Update` action method.
+
+###### Example
 
         @RequestMapping(value = "/editing/update", method = RequestMethod.POST)
     	public @ResponseBody List<Product> update(@RequestBody ArrayList<Map<String, Object>> models) {
@@ -189,7 +216,10 @@ To enable this mode follow these steps (using Spring MVC framework):
 
 	        return products;
 	    }
-9.  Implement the `Destroy` action method:
+
+**Step 9** Implement the `Destroy` action method.
+
+###### Example
 
 	    @RequestMapping(value = "/editing/destroy", method = RequestMethod.POST)
    		public @ResponseBody List<Product> destroy(@RequestBody ArrayList<Map<String, Object>> models) {
@@ -207,3 +237,14 @@ To enable this mode follow these steps (using Spring MVC framework):
 
 	        return products;
 	    }
+
+## See Also
+
+Other articles on Telerik UI for JSP and on the Grid:
+
+* [Overview of the Grid JSP Tag]({% slug overview_grid_uiforjsp %})
+* [Ajax Binding of the Grid]({% slug ajaxbinding_grid_uiforjsp %})
+* [Ajax Editing of the Grid]({% slug ajaxediting_grid_uiforjsp %})
+* [Overview of the Kendo UI Grid Widget]({% slug overview_kendoui_grid_widget %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})
