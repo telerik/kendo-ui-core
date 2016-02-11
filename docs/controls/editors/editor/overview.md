@@ -52,7 +52,7 @@ The inline Editor is not able to post its value and [this is something you must 
 
 The Editor tools can be configured through the [`tools` configuration option](/api/web/editor#tools).
 
-### Specify Set of Editor Tools
+### Define Sets of Editor Tools
 
 ###### Example
 
