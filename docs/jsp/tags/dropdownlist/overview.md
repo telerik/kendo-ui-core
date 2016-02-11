@@ -1,23 +1,33 @@
 ---
 title: Overview
+page_title: Overview | DropDownList JSP Tag
+description: "Get started with the DropDownList JSP tag in Kendo UI."
+slug: overview_dropdownlist_uiforjsp
+position: 1
 ---
 
-# DropDownList
+# DropDownList JSP Tag Overview
 
 The DropDownList JSP tag is a server-side wrapper for the [Kendo UI DropDownList](/api/javascript/ui/dropdownlist) widget.
 
 ## Getting Started
 
-There are two ways to bind a Kendo DropDownList:
+### The Basics
 
-*   **server** - the data will be serialized to the client. No Ajax requests will be made.
-*   **ajax** - the dropdownlist will make ajax request to get the data. [Here](/jsp/tags/dropdownlist/ajax-binding) you can find more information about this binding.
+There are two ways to bind a Kendo UI DropDownList:
 
-Here is how to configure the Kendo DropDownList for binding to a data passed as model attribute in Spring MVC:
+* `server`&mdash;The data is serialized to the client. No Ajax requests are going to be made.
+* `ajax`&mdash;The DropDownList is going to make Ajax requests to get the data. For more information on this type of binding, refer to the [DropDownList API reference article on Ajax binding]({% slug ajaxbinding_dropdownlist_uiforjsp %}).
 
-1.  Make sure you have followed all the steps from the [Introduction](/jsp/introduction) help topic.
+### Configuration
 
-2.  Create a new action method and pass the Products table to the View:
+Below are listed the steps for you to follow when configuring the Kendo UI DropDownList for binding to data, passed as a model attribute in Spring MVC.
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for JSP]({% slug overview_uiforjsp %}).
+
+**Step 2** Create a new action method and pass the **Products** table to the View.
+
+###### Example
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index(Model model) {
@@ -26,22 +36,46 @@ Here is how to configure the Kendo DropDownList for binding to a data passed as 
             return "web/dropdownlist/index";
         }
 
-3. Add kendo taglib mapping to the page
+**Step 3** Add the Kendo UI `taglib` mapping to the page.
+
+###### Example
 
         <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 
-4.  Add a server bound dropdownlist:
+**Step 4** Add a server-bound DropDownList.
+
+###### Example
 
         <kendo:dropdownlist name="productDropDownList" taTextField="productName" dataValueField="productId">
             <kendo:dataSource data="${products}"></kendo:dataSource>
         </kendo:dropdownlist>
 
-## Accessing an Existing DropDownList
+## Event Handling
 
-You can reference an existing DropDownList instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/javascript/ui/dropdownlist#methods) to control its behavior.
+### Subscribe to Events
 
-### Accessing an existing DropDownList instance
+You can subscribe to all [events exposed by Kendo UI DropDownList](/api/javascript/ui/dropdownlist#events) by the handler name.
+
+###### Example
+
+        <kendo:dropDownList name="productDropDownList" dataTextField="productName" dataValueField="productId" change="dropdownlist_change">
+            <kendo:dataSource data="${products}">
+            </kendo:dataSource>
+        </kendo:dropDownList>
+
+        <script>
+            function dropdownlist_change() {
+                //Handle the change event
+            }
+        </script>
+
+## Reference
+
+### Existing Instances
+
+You are able to reference an existing DropDownList instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [DropDownList API](/api/javascript/ui/dropdownlist#methods) to control its behavior.
+
+###### Example
 
     //Put this after your Kendo DropDownList tag declaration
     <script>
@@ -51,19 +85,11 @@ Once a reference has been established, you can use the [API](/api/javascript/ui/
     });
     </script>
 
-## Handling Kendo UI DropDownList events
+## See Also
 
-You can subscribe to all [events](/api/javascript/ui/dropdownlist#events) exposed by Kendo UI dropdownlist:
+Other articles on Telerik UI for JSP and on the DropDownList:
 
-### Subscribe by handler name
-
-    <kendo:dropDownList name="productDropDownList" dataTextField="productName" dataValueField="productId" change="dropdownlist_change">
-        <kendo:dataSource data="${products}">
-        </kendo:dataSource>
-    </kendo:dropDownList>
-
-    <script>
-        function dropdownlist_change() {
-            //Handle the change event
-        }
-    </script>
+* [Ajax Binding of the DropDownList]({% slug ajaxbinding_autocomplete_uiforjsp %})
+* [Overview of the Kendo UI DropDownList Widget]({% slug ajaxbinding_dropdownlist_uiforjsp %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

@@ -29,7 +29,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Chart
 	        return "/dataviz/bar-charts/local-data";
 	    }
 
-**Step 3**  Add a server-bound chart.
+**Step 3** Add a server-bound chart.
 
 ###### Example
 

@@ -34,7 +34,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Calen
 
         <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 
-**Step 4**  Add a calendar tag.
+**Step 4** Add a `calendar` tag.
 
 ###### Example
 

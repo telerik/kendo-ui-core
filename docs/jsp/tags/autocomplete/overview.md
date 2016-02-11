@@ -17,7 +17,7 @@ The AutoComplete JSP tag is a server-side wrapper for the [Kendo UI AutoComplete
 There are two ways to bind a Kendo UI AutoComplete:
 
 * `server`&mdash;The data is serialized to the client. No Ajax requests are going to be made.
-* `ajax`&mdash;The AutoComplete is going to make Ajax requests to get the data. For more information on this type of binding, refer to the [AutoComplete API reference article on Ajax binding](/jsp/tags/autocomplete/ajax-binding).
+* `ajax`&mdash;The AutoComplete is going to make Ajax requests to get the data. For more information on this type of binding, refer to the [AutoComplete API reference article on Ajax binding]({% slug ajaxbinding_autocomplete_uiforjsp %}).
 
 ### Configuration
 
