@@ -81,8 +81,8 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "sortDescending": "Sortera fallande",
   "settings": "Kolumninställningar",
   "done": "Klar",
-  "lock": "Закључати",
-  "unlock": "Откључати"
+  "lock": "Lås",
+  "unlock": "Lås upp"
 });
 }
 
