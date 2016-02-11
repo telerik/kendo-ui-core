@@ -6545,6 +6545,8 @@ Clears the currently selected table rows or cells (depending on the current sele
 
 Stops editing the table cell which is in edit mode. Requires "incell" [edit mode](#configuration-editable.mode).
 
+> When keyboard navigation is used, the Grid [`table`](#fields-table) must be focused programmatically after calling `closeCell`.
+
 #### Parameters
 
 ##### isCancel `Boolean` *optional*
@@ -6554,21 +6556,28 @@ A flag specifying whether to fire the `cancel` event. By default the event is no
 #### Example - cancel cell editing
 
     <div id="grid"></div>
+
     <script>
     $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 },
-      ],
-      editable: "incell"
+        columns: [
+            { field: "name" },
+            { field: "age" }
+        ],
+        dataSource: [
+            { name: "Jane Doe", age: 30 },
+            { name: "John Doe", age: 33 },
+        ],
+        editable: "incell",
+        navigatable: true
     });
+
     var grid = $("#grid").data("kendoGrid");
-    grid.addRow();
-    grid.closeCell();
+
+    grid.editCell(grid.tbody.find("td").first());
+    setTimeout(function(){
+        grid.closeCell();
+        grid.table.focus();
+    }, 1500);
     </script>
 
 ### collapseGroup
