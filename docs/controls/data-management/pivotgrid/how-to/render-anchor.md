@@ -76,7 +76,7 @@ Apply the same approach when [`columnHeaderTemplate`](/api/javascript/ui/pivotgr
 
 Other articles on Kendo UI PivotGrid and how-to examples:
 
-* [JavaScript API Reference](/api/javascript/ui/pivotgrid)
+* [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
 * [How to Access MDX Query]({% slug howto_access_mdx_query_pivotgrid %})
 * [How to Add Dimension to Column Axis]({% slug howto_add_dimension_column_axis_pivotgrid %})
 * [How to Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
@@ -90,6 +90,7 @@ Other articles on Kendo UI PivotGrid and how-to examples:
 * [How to Modify Exported Excel Files]({% slug howto_modify_exported_excel_files_pivotgrid %})
 * [How to Modify Measure Tag Captions]({% slug howto_modify_measure_tag_captions_pivotgrid %})
 * [How to Reload PivotGrid Configuration Options]({% slug howto_reload_configuration_options_pivotgrid %})
+* [How to Reset Expand State]({% slug howto_reset_expand_state_pivotgrid %})
 * [How to Right-Align Text]({% slug howto_right_align_text_pivotgrid %})
 * [How to Show Tooltip with Data Cell Information]({% slug howto_show_tooltip_withdata_cellinformation_pivotgrid %})
 * [How to Sort Dimensions]({% slug howto_sort_dimensions_pivotgrid %})

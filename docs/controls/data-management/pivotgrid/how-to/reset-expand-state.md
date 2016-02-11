@@ -1,13 +1,13 @@
 ---
-title: Reset expand state
-page_title: Reset expand state | Kendo UI PivotGrid Widget
+title: Reset Expand State
+page_title: Reset Expand State | Kendo UI PivotGrid Widget
 description: "Learn how to reset expand/collapse state and fetch the data again in a Kendo UI PivotGrid widget."
 slug: howto_reset_expand_state_pivotgrid
 ---
 
-# Reset expand state
+# Reset Expand State
 
-The example below demonstrates how to reset expand/collapse state and fetch the data again in a Kendo UI PivotGrid widget.
+The example below demonstrates how to reset the expand/collapse state and fetch the data again in a Kendo UI PivotGrid widget.
 
 ###### Example
 
@@ -69,7 +69,7 @@ The example below demonstrates how to reset expand/collapse state and fetch the 
 
 Other articles on Kendo UI PivotGrid and how-to examples:
 
-* [JavaScript API Reference](/api/javascript/ui/pivotgrid)
+* [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
 * [How to Add Dimension to Column Axis]({% slug howto_add_dimension_column_axis_pivotgrid %})
 * [How to Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
 * [How to Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
