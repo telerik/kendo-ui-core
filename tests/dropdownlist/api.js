@@ -211,6 +211,26 @@
         $.mockjaxClear();
     });
 
+    test("calls hideBusy on dataSource transport error", 1, function() {
+        dropdownlist = new DropDownList(input, {
+            autoBind: false,
+            dataSource: {
+                transport: {
+                    read: function(o) {
+                        o.error();
+                    }
+                }
+            }
+        });
+
+        stub(dropdownlist, {
+            _hideBusy: dropdownlist._hideBusy
+        });
+
+        dropdownlist.dataSource.read();
+        equal(dropdownlist.calls("_hideBusy"), 1);
+    });
+
     test("close should close popup", 1, function () {
         dropdownlist = createDropDownList();
         dropdownlist.bind("close", function(){
@@ -693,6 +713,89 @@
         equal(dropdownlist.selectedIndex, -1);
     });
 
+    test("value method selects item that exists only in unfiltered source", function() {
+        dropdownlist = createDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}],
+            filter: "contains"
+        });
+
+        dropdownlist.dataSource.filter({
+            field: "text",
+            operator: "contains",
+            value: "foo"
+        });
+
+        dropdownlist.value(2);
+
+        equal(dropdownlist.value(), "2");
+        equal(dropdownlist.text(), "bar");
+    });
+
+    asyncTest("value method selects item that exists only in unfiltered source (async)", 2, function() {
+        dropdownlist = createDropDownList({
+            filter: "startswith",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            if (options.data.filter && options.data.filter.filters[0]) {
+                                options.success([{text: "foo", value: 1}]);
+                            } else {
+                                options.success([{text: "foo", value: 1}, {text:"bar", value:2}]);
+                            }
+                        });
+                    }
+                },
+                serverFiltering: true
+            }
+        });
+
+        dropdownlist.one("dataBound", function() {
+            dropdownlist.dataSource.filter({
+                field: "text",
+                operator: "contains",
+                value: "foo"
+            });
+
+            dropdownlist.one("dataBound", function() {
+                dropdownlist.value(2);
+
+                dropdownlist.one("dataBound", function() {
+                    start();
+                    equal(dropdownlist.value(), "2");
+                    equal(dropdownlist.text(), "bar");
+                });
+            });
+        });
+    });
+
+    test("value method keeps datasource filters if widget filtration is not enabled", function() {
+        dropdownlist = createDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}],
+            filter: "none"
+        });
+
+        dropdownlist.dataSource.filter({
+            field: "text",
+            operator: "contains",
+            value: "foo"
+        });
+
+        dropdownlist.value(1);
+
+        var filter = dropdownlist.dataSource.filter();
+        filter = filter.filters[0];
+
+        ok(filter);
+        equal(filter.value, "foo");
+    });
+
     test("dataItem() returns dataItem of the selected LI on init", function() {
         var select = $("<select><option value=''>Chai</option><option>Bar</option></select>").appendTo(QUnit.fixture);
         dropdownlist = new DropDownList(select);
@@ -1025,6 +1128,17 @@
         });
     });
 
+    test("setting source with setDataSource after widget is bound does not preselect first item", 2, function() {
+        dropdownlist = new DropDownList(input, { });
+
+        dropdownlist.setDataSource({
+            data: ["item1", "item2"]
+        });
+
+        equal(dropdownlist.select(), -1);
+        equal(dropdownlist.value(), "");
+    });
+
     test("Open popup when option label is defined", 1, function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: [],
@@ -1057,5 +1171,27 @@
         dropdownlist.open();
 
         ok(dropdownlist.popup.visible());
+    });
+
+    test("hasOptionLabel method returns true if optionLabel is defined", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            optionLabel: "Select",
+            dataSource: [],
+            filter: "contains"
+        });
+
+        ok(dropdownlist.hasOptionLabel());
+    });
+
+    test("hasOptionLabel method returns false if optionLabel is removed", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            optionLabel: "Select",
+            dataSource: [],
+            filter: "contains"
+        });
+
+        dropdownlist.setOptions({ optionLabel: "" });
+
+        ok(!dropdownlist.hasOptionLabel());
     });
 })();

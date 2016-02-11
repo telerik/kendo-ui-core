@@ -835,6 +835,14 @@ Focuses the widget.
     autocomplete.focus();
     </script>
 
+### items
+
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view) (e.g. the ones that match the user's last filtering input).
+
+#### Returns
+
+`Array` The currently rendered dropdown list items (`<li>` elements).
+
 ### readonly
 
 Toggles the readonly state of the widget. When the widget is readonly it doesn't allow user input.
@@ -893,6 +901,9 @@ The value to search for. All matches are displayed in the suggestion popup.
 ### select
 
 Selects the item provided as an argument and updates the value of the widget.
+
+> **Important:** When **virtualization** is enabled, the method **does not support** selection with a *function predicate*. The predicate function looks only
+in the current datasource view, which represents only the active range/page. Hence it will not work properly.
 
 > **Important:** This method **does not trigger** [change](#events-change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.

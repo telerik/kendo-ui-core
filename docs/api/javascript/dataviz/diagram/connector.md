@@ -28,6 +28,16 @@ Defines the fill color of the connector.
 
 Defines the fill opacity of the connector.
 
+## Fields
+
+### connections `Array`
+
+An array of [Connections](connection) that originate or terminate in this connector.
+
+### shape `kendo.dataviz.diagram.Shape`
+
+The [Shape](shape) that owns the connector.
+
 ## Methods
 
 ### position

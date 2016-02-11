@@ -6,7 +6,7 @@ description: How to configure Mobile Tabstrip widget with a few clicks, change i
 
 # kendo.mobile.ui.TabStrip
 
-Represents the Kendo UI Mobile TabStrip widget. Inherits from [kendo.mobile.ui.Widget](/api/framework/mobilewidget).
+Represents the Kendo UI Mobile TabStrip widget. Inherits from [kendo.mobile.ui.Widget](/api/javascript/mobile/ui/mobilewidget).
 
 ## Configuration
 

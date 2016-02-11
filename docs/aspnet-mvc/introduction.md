@@ -53,7 +53,7 @@ The Telerik UI for ASP.NET MVC contains the following directories.
 * **js** - minified JavaScript files.
 * **styles** - minified CSS files and images used by the themes.
 * **src** - complete JavaScript, CSS and C# source code. **N/A** in the trial version.
-* **spreadsheet** - [Telerik.Web.Spreadsheet](/web/spreadsheet/import-and-export-data/server-side-processing) assembly and its dependencies from the Telerik Document Processing library
+* **spreadsheet** - [Telerik.Web.Spreadsheet]({% slug serverside_processing_spreadsheet_widget %}) assembly and its dependencies from the Telerik Document Processing library
 * **wrappers\aspnetmvc\Binaries\MVC3** - assemblies for ASP.NET MVC 3 applications.
 * **wrappers\aspnetmvc\Binaries\MVC4**- assemblies for ASP.NET MVC 4 applications.
 * **wrappers\aspnetmvc\Binaries\MVC5**- assemblies for ASP.NET MVC 5 applications.
@@ -96,7 +96,7 @@ The sample application Visual Studio solution contains the following.
 
 ## Next Steps
 
-After you run the sample application you can continue with the following articles.
+After you run the sample application, continue with the following articles:
 
 * [Fundamentals](/aspnet-mvc/fundamentals)
 * [Scaffolding](/aspnet-mvc/scaffolding)
@@ -105,3 +105,9 @@ After you run the sample application you can continue with the following article
 * [Using Telerik UI for ASP.NET MVC in MVC 5 application](/aspnet-mvc/asp-net-mvc-5)
 * [Using Telerik UI for ASP.NET MVC Visual Studio Extensions](/aspnet-mvc/vs-integration/introduction)
 * [Troubleshooting](/aspnet-mvc/troubleshooting)
+
+For more examples on how to use Kendo UI with ASP.NET MVC, visit the following repositories on GitHub:
+
+* [Collected Kendo UI Examples on Using ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc)
+* [Collected Kendo UI Examples on Using ASP.NET Web Technologies](https://github.com/telerik/kendo-examples-asp-net)
+* [Collected Examples on Telerik UI for ASP.NET MVC](https://github.com/telerik/ui-for-aspnet-mvc-examples)

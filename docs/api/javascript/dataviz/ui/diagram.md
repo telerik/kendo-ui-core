@@ -98,6 +98,43 @@ The static text displayed on the connection.
 
 A function returning a visual element to render for the content of a connection.
 
+#### Example - Connection content visual
+```html
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        dataSource: [{
+          "name" : "Telerik",
+          "items": [
+            {"name": "Kendo"},
+            {"name": "Icenium"}
+          ]
+        }],
+        connectionDefaults: {
+          content: {
+            visual: function(e) {
+              var g = new kendo.dataviz.diagram.Group({
+                autoSize: true
+              });
+              var text = new kendo.dataviz.diagram.TextBlock({
+                text: "Foo",
+                fontSize: 16,
+                x: 10,
+                y: 5
+              });
+
+              g.append(text);
+              return g;
+            }
+          }
+        },
+        layout: {
+          type: "tree"
+        }
+      });
+    </script>
+```
+
 ### connectionDefaults.editable `Boolean|Object` *(default: true)*
 
 Defines the editing behavior of the connections.
@@ -264,6 +301,14 @@ Defines the handles stroke options.
 ### connectionDefaults.selection.handles.stroke.color `String`
 
 Defines the handles stroke color.
+
+### connectionDefaults.selection.handles.width `Number`
+
+The width of the handle elements.
+
+### connectionDefaults.selection.handles.height `Number`
+
+The height of the handle elements.
 
 ### connectionDefaults.startCap `String|Object`
 
@@ -552,6 +597,14 @@ Defines the handles stroke options.
 ### connections.selection.handles.stroke.color `String`
 
 Defines the handles stroke color.
+
+### connections.selection.handles.width `Number`
+
+The width of the handle elements.
+
+### connections.selection.handles.height `Number`
+
+The height of the handle elements.
 
 ### connections.startCap `String|Object`
 
@@ -1678,11 +1731,24 @@ Defines the connectors the shape owns.
 * "left" - left connector.
 * "auto" - auto connector.
 
-You can easily define your own custom connectors or mix-match with the above defined custom connectors.
+You can define your own custom connectors or use the predefined types.
 
-Example - custom shape with custom connectors
+#### Example - Include only some connectors
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        dataSource: [{name: "item1"}],
+        shapeDefaults: {
+          connectors: [{ name: "top" }, { name: "left" }]
+        }
+      });
+    </script>
+
 
 The following defines a custom shape with connectors adapted to the shape's outline. Note in particular the various helpful methods (right(), left(), top()) to define positions relative to the shape.
+
+#### Example - Custom shape with custom connectors
 
     <div id="diagram"></div>
     <script>
@@ -2276,6 +2342,14 @@ The zoom step when using the mouse-wheel to zoom in or out.
 
 An array holding the diagram connections.
 
+### connectionsDataSource `kendo.data.DataSource`
+
+The connections data source, if any.
+
+### dataSource `kendo.data.DataSource`
+
+The shapes data source, if any.
+
 ### shapes `Array`
 
 An array holding the diagram shapes.
@@ -2607,6 +2681,21 @@ The width of the exported image. Defaults to the diagram content width.
 
 ##### options.height `String`
 The height of the exported image. Defaults to the diagram content height.
+
+##### options.cors `String` *(default: "anonymous")*
+Specifies how [cross-origin images](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image)
+should be requested.
+
+Requesting images without CORS will "taint" the canvas. It will still be visible on the page, but all
+script access to it is disabled to prevent information disclosure.
+
+By default they're requested anonymously. Available options are:
+* "anonymous" - do not send user credentials as part of the request
+* "use-credentials" - send credentials as part of the request
+* false - fetch images without CORS, possibly tainting the canvas
+
+See [crossorigin attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-crossorigin)
+for more details.
 
 #### Returns
 `Promise` A promise that will be resolved with a PNG image encoded as a Data URI.
@@ -3006,13 +3095,13 @@ Transforms a point from View coordinates to Page document coordinates. View orig
 
 #### Parameters
 
-##### point `Object`
+##### point `kendo.dataviz.diagram.Point`
 
 The point in Page document coordinates.
 
 #### Returns
 
-`Object` the transformed point
+`kendo.dataviz.diagram.Point` the transformed point
 
 ### viewToModel
 
@@ -3020,21 +3109,25 @@ Transforms a point from View coordinates to Model coordinates. Model coordinates
 
 #### Parameters
 
-##### point `Object`
+##### point `kendo.dataviz.diagram.Point`
 
 The point in View coordinates.
 
 #### Returns
 
-`Object` the transformed point
+`kendo.dataviz.diagram.Point` the transformed point
 
 ### viewport
 
 The bounds of the diagramming canvas.
 
+#### Returns
+
+`kendo.dataviz.diagram.Rect` as viewport bounds
+
 ### zoom
 
-Zooms in or out of the diagram.
+Gets or sets the current zoom level of the diagram.
 
 #### Parameters
 
@@ -3042,9 +3135,12 @@ Zooms in or out of the diagram.
 
 The zoom factor.
 
-##### point `Object`
+##### point `kendo.dataviz.diagram.Point`
 
 The point to zoom into or out of.
+
+#### Returns
+`Number` The current zoom level
 
 ## Events
 

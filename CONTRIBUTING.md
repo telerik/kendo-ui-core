@@ -55,19 +55,19 @@ Kendo UI uses [QUnit](https://qunitjs.com/) for a test framework and [karma](htt
 To run the tests, execute the following command:
 
 ```
-grunt tests
+gulp tests
 ```
 
 To run the tests for a single widget, pass a `tests` option:
 
 ```
-grunt tests --tests="tests/listview/**.*.js"
+gulp tests --tests="tests/listview/**.*.js"
 ```
 
 By default, the tests run in Chrome. Other browser may be used using the `browser` option:
 
 ```
-grunt tests --browser=Firefox
+gulp tests --browser=Firefox
 ```
 
 #### (optional) Squash your commits
@@ -106,6 +106,6 @@ All code contributed to this project should adhere to a consistent style, so ple
 - Return early
 - Be JSHint Valid
 
-You can verify if your code passes the project JSHint options by running `grunt jshint`.
+You can verify if your code passes the project JSHint options by running `gulp jshint`.
 
 Beyond these, your best bet when in doubt is to follow [idiomatic.js](https://github.com/rwldrn/idiomatic.js).

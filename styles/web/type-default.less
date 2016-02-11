@@ -10,7 +10,7 @@
 @select-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 20%), 0.5);
 @select-hover-background-color: saturate(@hover-background, 1%);
 @select-group-background-color: @base;
-@input-background-color: contrast(@normal-text-color, @content-background-color, #fff, 0.5);
+@input-background-color: contrast(@normal-text-color, @base, #fff, 0.5);
 @input-text-color: @normal-text-color;
 @link-text-color: saturate(@normal-text-color, 1%);
 @header-text-color: contrast(@selected-background, lighten(@normal-text-color, 1%), darken(@normal-text-color, 13%), 0.5);
@@ -26,7 +26,7 @@
 @selected-background-color: @accent;
 @selected-border-color: contrast(@selected-background, lighten(@accent, 1%), darken(@accent, 13%), 0.5);
 @selected-shadow: none;
-@focused-border-color: darken(@success, 23%);
+@focused-border-color: @widget-border-color;
 @focused-shadow: 0 0 3px 0 @shadow-color;
 @focused-item-shadow: inset 0 0 3px 1px contrast(@selected-background, lighten(@normal-text-color, 50%), lighten(@normal-text-color, 30%), 0.5);
 @focused-active-item-shadow: inset 0 0 3px 1px darken(@selected-border-color, 10%);
@@ -701,81 +701,99 @@ html .km-pane-wrapper .k-header
     border-color: @focused-border-color;
 }
 
-.k-calendar .k-link
-{
-    color: @calendar-content-text-color;
+.k-calendar {
+    .k-link {
+        color: @calendar-content-text-color;
+    }
+
+    .k-footer {
+        padding: 0;
+    }
+
+    .k-footer .k-nav-today {
+        color: @form-widget-color;
+        text-decoration: @calendar-footer-text-decoration;
+        background-color: @calendar-footer-background;
+    }
+
+    .k-footer .k-nav-today:hover,
+    .k-footer .k-nav-today.k-state-hover {
+        background-color: @calendar-footer-hover-background;
+        text-decoration: @calendar-footer-hover-text-decoration;
+    }
+
+    .k-footer .k-nav-today:active {
+        background-color: @calendar-footer-active-background;
+    }
+
+    .k-link.k-nav-fast {
+        color: @form-widget-color;
+    }
+
+    .k-nav-fast.k-state-hover {
+        text-decoration: @calendar-header-hover-text-decoration;
+        background-color: @calendar-header-hover-background;
+        color: @hover-text-color;
+    }
+
+    .k-link.k-state-hover {
+        border-radius: @calendar-border-radius;
+    }
+
+    .k-today {
+        box-shadow: inset 0 0 0 1px @accent;
+    }
+
+    .k-today .k-link {
+        color: contrast(@widget-background-color, @accent, @selected-text-color, 0.5);        
+        font-weight: bold;
+    }
+
+    td.k-today.k-state-focused,
+    td.k-today.k-state-focused.k-state-hover {
+        box-shadow: @focused-item-shadow;
+    }
+
+    td.k-today.k-state-hover,
+    td.k-today.k-state-selected {
+        box-shadow: none;
+    }
+
+    td.k-today.k-state-hover .k-link {
+        color: @calendar-content-text-color;            
+    } 
+
+    .k-footer .k-link {
+        border-radius: 0;
+    }
+
+    th {
+        background-color: @calendar-group-background-color;
+    }
+
+    td.k-state-selected.k-state-hover {
+        background-color: saturate(@selected-background-color, 7%);
+        .composite-background(none);
+    }
+
+    td.k-state-selected .k-link,
+    td.k-today.k-state-selected.k-state-hover .k-link {
+        color: @selected-text-color;    
+    }
+
+    td.k-state-focused.k-state-selected,
+    td.k-state-selected.k-state-active,
+    td.k-state-selected:active,
+    td.k-state-selected.k-state-hover:active {
+        .box-shadow(@focused-item-shadow);
+    }
 }
 
-.k-calendar .k-footer
-{
-    padding: 0;
-}
-
-.k-calendar .k-footer .k-nav-today
-{
-    color: @form-widget-color;
-    text-decoration: @calendar-footer-text-decoration;
-    background-color: @calendar-footer-background;
-}
-
-.k-calendar .k-footer .k-nav-today:hover,
-.k-calendar .k-footer .k-nav-today.k-state-hover
-{
-    background-color: @calendar-footer-hover-background;
-    text-decoration: @calendar-footer-hover-text-decoration;
-}
-
-.k-calendar .k-footer .k-nav-today:active
-{
-    background-color: @calendar-footer-active-background;
-}
-
-.k-calendar .k-link.k-nav-fast
-{
-    color: @form-widget-color;
-}
-
-.k-calendar .k-nav-fast.k-state-hover
-{
-    text-decoration: @calendar-header-hover-text-decoration;
-    background-color: @calendar-header-hover-background;
-    color: @hover-text-color;
-}
-
-.k-calendar .k-link.k-state-hover,
-.k-window-titlebar .k-link
-{
+.k-window-titlebar .k-link {
     border-radius: @calendar-border-radius;
 }
 
-.k-calendar .k-footer .k-link
-{
-    border-radius: 0;
-}
-
-.k-calendar th
-{
-    background-color: @calendar-group-background-color;
-}
-
-.k-calendar td.k-state-selected.k-state-hover {
-    background-color: saturate(@selected-background-color, 7%);
-    .composite-background(none);
-}
-
-.k-calendar td.k-state-selected .k-link {
-    color: @selected-text-color;    
-}
-
-.k-calendar td.k-state-focused.k-state-selected,
-.k-calendar td.k-state-selected.k-state-active,
-.k-calendar td.k-state-selected:active,
-.k-calendar td.k-state-selected.k-state-hover:active {
-    .box-shadow(@focused-item-shadow);
-}
-
-.k-calendar-container.k-group
-{
+.k-calendar-container.k-group {
     border-color: @group-border-color;
 }
 
@@ -1270,7 +1288,11 @@ div.k-filebrowser-dropzone em
 
 .k-grid tr:hover {
     .composite-background(@widget-gradient);
-    background-color: contrast(@widget-background-color, darken(@header-background-color, 20%), @header-background-color, .5)
+    background-color: contrast(@widget-background-color, darken(@header-background-color, 20%), @header-background-color, .5);
+}
+
+.k-pivot-rowheaders .k-grid tr:hover {
+    background: none;
 }
 
 .k-grid td.k-state-selected.k-state-focused
@@ -1377,12 +1399,25 @@ div.k-filebrowser-dropzone em
     background-color: contrast(@alt-background-color, lighten(@alt-background-color, 5%), darken(@alt-background-color, 5%), 0.5);
 }
 
+.k-gantt .k-treelist tr:hover {
+   .composite-background(@widget-gradient);
+    background-color: contrast(@widget-background-color, darken(@header-background-color, 20%), @header-background-color, .5);
+}
+
 .k-gantt .k-treelist .k-state-selected,
 .k-gantt .k-treelist .k-state-selected td,
 .k-gantt .k-treelist .k-alt.k-state-selected,
 .k-gantt .k-treelist .k-alt.k-state-selected > td
 {
     background-color: @selected-background-color;
+    .composite-background(@selected-gradient);
+}
+
+.k-gantt .k-treelist .k-state-selected:hover,
+.k-gantt .k-treelist .k-state-selected:hover td
+{
+    background-color: saturate(@selected-background-color, 7%);
+    .composite-background(none);
 }
 
 .k-task-dot:after
@@ -1810,12 +1845,6 @@ html .km-pane-wrapper .km-widget,
     div.km-pane-wrapper a
     {
         color: @widget-text-color;
-    }
-
-    .km-pane-wrapper .k-icon
-    {
-        background-image: url('@{image-folder}/sprite_2x.png');
-        background-size: 21.2em 21em;
     }
 }
 
@@ -2441,10 +2470,6 @@ textarea.k-textbox,
         &[data-property='format'] { width: 100px; }
         &[data-property='fontFamily'] { width: 130px; }
     }
-
-    .k-spreadsheet-sheets-remove {
-        margin: .5em .5em .5em -.5em;
-    }
 }
 
 .k-spreadsheet-toolbar .k-combobox {
@@ -2462,3 +2487,4 @@ textarea.k-textbox,
     }
 }
 
+@spreadsheet-page-orientation-gradient: @primary-gradient;

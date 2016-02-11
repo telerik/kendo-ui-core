@@ -407,7 +407,7 @@ var __meta__ = { // jshint ignore:line
                         val = kNgModel;
                     }
 
-                    if (widget.options.autoBind === false && !widget.listView.isBound()) {
+                    if (widget.options.autoBind === false && !widget.listView.bound()) {
                         if (val) {
                             widget.value(val);
                         }
@@ -537,10 +537,7 @@ var __meta__ = { // jshint ignore:line
             deregister();
             if (widget) {
                 if (widget.element) {
-                    widget = kendoWidgetInstance(widget.element);
-                    if (widget) {
-                        widget.destroy();
-                    }
+                    widget.destroy();
                 }
                 widget = null;
             }
@@ -639,6 +636,12 @@ var __meta__ = { // jshint ignore:line
 
                 var _wrapper = $(widget.wrapper)[0];
                 var _element = $(widget.element)[0];
+                var isUpload = widget.options.name === "Upload";
+
+                if (isUpload) {
+                    element = $(_element);
+                }
+
                 var compile = element.injector().get("$compile");
                 widget._destroy();
 
@@ -1033,7 +1036,7 @@ var __meta__ = { // jshint ignore:line
             val = val[valueField || options.dataTextField];
         }
 
-        if (self.options.autoBind === false && !self.listView.isBound()) {
+        if (self.options.autoBind === false && !self.listView.bound()) {
             if (!text && val && options.valuePrimitive) {
                 self.value(val);
             } else {
@@ -1073,7 +1076,7 @@ var __meta__ = { // jshint ignore:line
             });
         }
 
-        if (options.autoBind === false && !options.valuePrimitive && !self.listView.isBound()) {
+        if (options.autoBind === false && !options.valuePrimitive && !self.listView.bound()) {
             self._preselect(data, val);
         } else {
             self.value(val);
@@ -1115,9 +1118,13 @@ var __meta__ = { // jshint ignore:line
             dataTextField = self.options.dataTextField;
 
         if (dataTextField && !self.options.valuePrimitive) {
-            value = $.map(value, function(item){
-                return item[dataTextField];
-            });
+            if (value.length !== undefined) {
+                value = $.map(value, function(item){
+                    return item[dataTextField];
+                });
+            } else {
+                value = value[dataTextField];
+            }
         }
 
         self.value(value);
@@ -1185,6 +1192,7 @@ var __meta__ = { // jshint ignore:line
 
             if (!multiple) {
                 locals.dataItem = locals.data = items[0];
+                locals.angularDataItem = kendo.proxyModelSetters(locals.dataItem);
                 locals.selected = elems[0];
             }
 

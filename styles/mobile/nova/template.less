@@ -550,3 +550,18 @@
 .km-nova span.km-loading-right {
    background: @background;
 }
+
+/* Validation */
+.km-nova .km-list > li label.km-invalid,
+.km-nova .km-list fieldset .km-legend-button.km-invalid,
+.km-nova .km-list > li label.km-invalid.km-required:after {
+    color: @warning;
+}
+
+.km-nova .km-invalid-msg {
+    background: @warning;
+}
+
+.km-nova .km-invalid-msg {
+    color: @background;
+}

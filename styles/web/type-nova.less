@@ -162,6 +162,14 @@ textarea.k-textbox:hover,
     border-color: @widget-border-color;
 }
 
+.k-state-selected {
+    background-color: fadeout(@info, 75%);
+}
+
+.k-state-focused {
+    box-shadow: inset 0 0 0 1px darken(@widget-border-color, 35%);
+}
+
 .k-state-hover,
 .k-state-hover:hover,
 .k-splitbar-horizontal-hover:hover,
@@ -272,6 +280,16 @@ textarea.k-textbox:hover,
 .k-state-disabled .k-icon {
     opacity: .2;
 }
+
+/* Loading indicator */
+.k-loading,
+.k-state-hover .k-loading {
+    background-image: url('@{image-folder}/loading.gif');
+    background-position: 50% 50%;
+}
+
+.k-loading-image { background-image: url('@{image-folder}/loading-image.gif'); }
+.k-loading-color { background-color: @background; }
 
 /* Button */
 .k-button {
@@ -405,6 +423,7 @@ textarea.k-textbox:hover,
 .k-multiselect.k-header.k-state-focused {
     background-color: @normal-background;
     border-color: lighten(@hover-text-color, 8%);
+    box-shadow: none;
 }
 
 .k-autocomplete.k-state-active,
@@ -483,8 +502,17 @@ input.k-textbox:active {
     border-color: @selected-background; 
 }
 
-.k-popup .k-list .k-state-focused {
-    border-color: @selected-background; 
+.k-popup .k-list .k-state-focused {    
+    border-color: darken(@widget-border-color, 27%);
+    box-shadow: none; 
+}
+
+.k-popup .k-list .k-state-selected.k-state-focused {
+    border-color: multiply(@accent, #9a9a9a);
+}
+
+.k-popup .k-list .k-state-selected.k-state-hover {
+    background-color: multiply(@accent, #cccccc);
 }
 
 .k-multiselect {
@@ -534,8 +562,11 @@ input.k-textbox:active {
         color: @link-text-color;
     }
 
-    .k-header .k-link,
-    .k-state-selected .k-link {
+    .k-state-disabled .k-link{
+        color: lighten(@hover-text-color, 23%);
+    }
+
+    .k-header .k-link {
         color: @inversed-text-color;
     }
 
@@ -545,6 +576,7 @@ input.k-textbox:active {
 
     .k-state-focused {
         border-color: lighten(@hover-text-color, 8%);
+        box-shadow: none;
     }
 
     .k-header .k-state-hover {
@@ -553,22 +585,48 @@ input.k-textbox:active {
 
     .k-other-month,
     .k-other-month .k-link {
-        color: lighten(@hover-text-color, 23%);
+        color: lighten(@hover-text-color, 8%);
     }
 
-    .k-state-selected,
-    .k-state-selected.k-state-hover {        
+    .k-today {
         background-color: @selected-background;
-        border-color: @selected-background;
-        box-shadow: none;
+    }
+
+    .k-today .k-link,
+    .k-today.k-state-hover .k-link {
+        color: @selected-text-color;
+    }
+
+    .k-today.k-state-hover {
+        background-color: @accent-hover-background;
+        border-color: @accent-hover-background;
+    }
+
+    .k-state-selected {
+        background-color: lighten(@info, 22%);
+        border-color: lighten(@info, 22%);
     }
 
     .k-state-selected.k-state-hover {
-        background-color: @accent-hover-background;
+        background-color: lighten(@info, 11%);
+        border-color: lighten(@info, 11%);
+    }
+
+    .k-today.k-state-selected:active {        
+        border-color: darken(@widget-border-color, 27%);
+    }
+
+    .k-today:active {
+        border-color: multiply(@accent, #9a9a9a);
+    }
+
+    .k-today.k-state-selected .k-link {
+        color: @link-text-color;
     }
 
     .k-state-selected.k-state-focused {
-        border-color: multiply(@accent, #9a9a9a);
+        border-color: darken(@widget-border-color, 27%);
+        box-shadow: none;
     }
 
     .k-footer {
@@ -942,6 +1000,10 @@ input.k-textbox:active {
 .k-grid-footer td,
 .k-pivot-rowheaders .k-grid-footer {
     font-weight: bold;
+}
+
+.k-pivot-rowheaders .k-grid tr:hover {
+    background: none;
 }
 
 /* Pager */
@@ -1367,11 +1429,6 @@ html .km-pane-wrapper .km-widget,
               and (-ms-high-contrast: none) {
     div.km-pane-wrapper a     {
         color: @normal-text-color;
-    }
-
-    .km-pane-wrapper .k-icon {
-        background-image: url('@{image-folder}/sprite_2x.png');
-        background-size: 21.2em 21em;
     }
 }
 
@@ -1888,16 +1945,23 @@ html .km-pane-wrapper .km-widget,
     }
 
     .k-spreadsheet-sheets-bar .k-button {
-        left: 0;
-        bottom: 0;
         padding-top: .5em;
         padding-bottom: .5em;
         line-height: 2.2em;
     }
 
+    .k-spreadsheet-sheets-bar-add {
+        left: 0;
+        bottom: 0;
+    }
+
     .k-spreadsheet-sheets-remove {
         margin: 0 0 0 -1em;
     }
+}
+
+.k-spreadsheet-sheets-items {
+    .composite-background(@tabs-normal-gradient);
 }
 
 .k-spreadsheet-sheets-items,
@@ -1928,3 +1992,5 @@ html .km-pane-wrapper .km-widget,
         border-color: transparent;
     }
 }
+
+@spreadsheet-page-orientation-border-color: lighten(@hover-text-color, 8%);

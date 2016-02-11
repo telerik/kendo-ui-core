@@ -246,6 +246,24 @@
         ok($("#splitButton").hasClass("k-state-disabled"));
     });
 
+    test("enable method disables menuButton from SplitButton", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "splitButton", id: "splitButton", text: "Split Button", menuButtons: [
+                    { id: "option1", text: "Option 1" },
+                    { id: "option2", text: "Option 2" },
+                    { id: "option3", text: "Option 3" }
+                ]
+                }
+            ]
+        }).data("kendoToolBar");
+
+        toolbar.enable("#option2", false);
+
+        ok($("#option2").hasClass("k-state-disabled"));
+        ok($("#option2_overflow").hasClass("k-state-disabled"));
+    });
+
     test("get selected item from group returns the selected toggle button", 1, function() {
         var toolbar = container.kendoToolBar({
             items: [
@@ -356,6 +374,45 @@
         ok($("#foo_overflow").is(":hidden"));
     });
 
+    test("Hide method hides a button from SplitButton", 3, function() {
+        var toolbar = container.kendoToolBar({
+            items: [{
+                type: "splitButton",
+                text: "main",
+                menuButtons: [
+                    { text: "foo", id: "foo" },
+                    { text: "bar", id: "bar" }
+                ]
+            }]
+        }).data("kendoToolBar");
+
+        toolbar.hide("#foo");
+        ok($("#foo").is(":hidden"));
+
+        ok($("#foo_overflow").hasClass("k-state-hidden"));
+        ok($("#foo_overflow").is(":hidden"));
+    });
+
+    test("Hide method hides a SplitButton", 3, function() {
+        var toolbar = container.kendoToolBar({
+            items: [{
+                type: "splitButton",
+                text: "main",
+                menuButtons: [
+                    { text: "foo", id: "foo" },
+                    { text: "bar", id: "bar" }
+                ]
+            }]
+        }).data("kendoToolBar");
+
+        //toolbar element is `div`, overflow element is `li`
+        toolbar.hide("div.k-split-button");
+        ok($("div.k-split-button").is(":hidden"));
+
+        ok($("li.k-split-button").hasClass("k-state-hidden"));
+        ok($("li.k-split-button").is(":hidden"));
+    });
+
     test("After hiding a button the button group updates k-group-start button", 2, function() {
         var toolbar = container.kendoToolBar({
             items: [
@@ -423,7 +480,7 @@
         ok(!($("#foo").hasClass("k-state-hidden")));
         ok($("#foo").is(":visible"));
 
-        ok(!($("#foo_overflow").hasClass("k-state-hidden")));
+        ok(($("#foo_overflow").hasClass("k-state-hidden")));
     });
 
     test("Show method shows hidden button from Button group", 2, function() {
@@ -440,10 +497,29 @@
         toolbar.show("#foo");
         ok($("#foo").is(":visible"));
 
-        ok(!($("#foo_overflow").hasClass("k-state-hidden")));
+        ok(($("#foo_overflow").hasClass("k-state-hidden")));
     });
 
-    test("After showing hidden button the button group updates k-group-start button", 2, function() {
+    test("Show method shows SplitButton", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [{
+                type: "splitButton",
+                id: "splitButton",
+                hidden: true,
+                text: "split button",
+                menuButtons: [
+                    { text: "foo", id: "foo" },
+                    { text: "bar", id: "bar" }
+                ]
+            }]
+        }).data("kendoToolBar");
+
+        toolbar.show("#splitButton_wrapper");
+        //toolbar element is `div`, overflow element is `li`
+        ok($("#splitButton_wrapper").is(":visible"));
+    });
+
+    test("After showing hidden button the button group updates k-group-start button", 1, function() {
         var toolbar = container.kendoToolBar({
             items: [
                 { type: "buttonGroup", buttons: [
@@ -457,11 +533,9 @@
 
         toolbar.show("#btn1");
         ok($("#btn1").hasClass("k-group-start"));
-
-        ok($("#btn1_overflow").hasClass("k-group-start"));
     });
 
-    test("After showing hidden button the button group updates k-group-end button", 2, function() {
+    test("After showing hidden button the button group updates k-group-end button", 1, function() {
         var toolbar = container.kendoToolBar({
             items: [
                 { type: "buttonGroup", buttons: [
@@ -475,8 +549,6 @@
 
         toolbar.show("#btn3");
         ok($("#btn3").hasClass("k-group-end"));
-
-        ok($("#btn3_overflow").hasClass("k-group-end"));
     });
 
     test("Show method shows hidden SplitButton", 1, function() {

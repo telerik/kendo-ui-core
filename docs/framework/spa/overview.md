@@ -1,18 +1,36 @@
 ---
 title: Overview
+page_title: Overview | Kendo UI Single-Page Application
+description: "Learn how to create a Kendo UI Single-Page Application."
+slug: overview_kendoui_singlepageapplication
 position: 1
 ---
-# Kendo Single Page Application Overview
 
-Kendo Single-Page Application (sometimes abbreviated as SPA) is a set of classes which aim at simplifying the building rich client-side based web applications.
-More information about the Single-page Application pattern can be found in the [Single-page Application Wikipedia article](http://en.wikipedia.org/wiki/Single-page_application).
+# Single-Page Application Overview
 
-The **Router** class is responsible for tracking the application state and navigating between the application states. The router integrates into the browser history using the fragment version of the url (`#page`), making the application states bookmarkable and linkable.
-The router instance is also used for programmatic navigation to a given state.
+The [Kendo UI Single-Page Application (SPA)](http://demos.telerik.com/kendo-ui/spa/index) is a set of classes which aim at simplifying the building of rich client-side based web applications.
 
-The **View** and **Layout** classes are used for the UI rendering. UI Event handling and data binding can be performed either through **MVVM** or **declarative data attribute initialization**.
+For more information about the Single-page Application pattern, refer to the [Single-page Application Wikipedia article](http://en.wikipedia.org/wiki/Single-page_application).
 
-## Hello World Single Page Application
+## Basics
+
+### Router Class
+
+The `Router` class is responsible for tracking the application state and navigating between the application states. The router integrates into the browser history using the fragment version of the URL (`#page`), making the application states book-markable and linkable. The router instance is also used for programmatic navigation to a given state.
+
+For detailed information on Kendo UI `Router` class, refer to [its overview article]({% slug router_kendoui_singlepageapplication %}).
+
+### View and Layout Classes
+
+The `View` and `Layout` classes are used for the UI rendering. UI event handling and data binding can be performed either through MVVM or through declarative data attribute initialization.
+
+## Getting Started
+
+### Create the SPA
+
+The example below demonstrates how to create a Kendo UI Single-Page Application.
+
+###### Example
 
 ```html
     <div id="app"></div>
@@ -77,3 +95,11 @@ The **View** and **Layout** classes are used for the UI rendering. UI Event hand
     </script>
 
 ```
+
+## See Also
+
+Other articles on Kendo UI Single-Page Application:
+
+* [Single-Page Application Router]({% slug router_kendoui_singlepageapplication %})
+* [SPA Layout]({% slug layout_kendoui_singlepageapplication %})
+* [SPA View]({% slug viewclass_kendoui_singlepageapplication %})

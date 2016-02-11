@@ -6,7 +6,7 @@ description: How to quickly configure the checked and unchecked state of Mobile 
 
 # kendo.mobile.ui.Switch
 
-Represents the Kendo UI Mobile Switch widget. Inherits from [kendo.mobile.ui.Widget](/api/framework/mobilewidget).
+Represents the Kendo UI Mobile Switch widget. Inherits from [kendo.mobile.ui.Widget](/api/javascript/mobile/ui/mobilewidget).
 
 ## Configuration
 

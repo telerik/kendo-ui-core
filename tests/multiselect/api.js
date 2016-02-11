@@ -213,6 +213,63 @@
         ok(multiselect.value() instanceof Array);
     });
 
+test("value method selects item that exists only in unfiltered source", function() {
+    var multiselect = new MultiSelect(select, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}],
+        filter: "contains"
+    });
+
+    multiselect.dataSource.filter({
+        field: "text",
+        operator: "contains",
+        value: "foo"
+    });
+
+    multiselect.value(2);
+
+    deepEqual(multiselect.value(), [2]);
+});
+
+asyncTest("value method selects item that exists only in unfiltered source (async)", 1, function() {
+    var multiselect = new MultiSelect(select, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: {
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        if (options.data.filter && options.data.filter.filters[0]) {
+                            options.success([{text: "foo", value: 1}]);
+                        } else {
+                            options.success([{text: "foo", value: 1}, {text:"bar", value:2}]);
+                        }
+                    });
+                }
+            },
+            serverFiltering: true
+        }
+    });
+
+    multiselect.one("dataBound", function() {
+        multiselect.dataSource.filter({
+            field: "text",
+            operator: "contains",
+            value: "foo"
+        });
+
+        multiselect.one("dataBound", function() {
+            multiselect.value(2);
+
+            multiselect.one("dataBound", function() {
+                start();
+                deepEqual(multiselect.value(), [2]);
+            });
+        });
+    });
+});
+
     test("MultiSelect opens popup", function() {
         popuplateSelect();
         var multiselect = new MultiSelect(select);

@@ -404,7 +404,7 @@ Renamed. use **closeCell* instead.
 
 Removed. Use the following code snippet instead:
 
-    var inserted = $.grep(grid.DataSource.data(), function(model) {
+    var inserted = $.grep(grid.dataSource.data(), function(model) {
         return model.isNew();
     });
 
@@ -412,7 +412,7 @@ Removed. Use the following code snippet instead:
 
 Removed. Use the following code snippet instead:
 
-    var inserted = $.grep(grid.dataSource.data(), function(model) {
+    var updated = $.grep(grid.dataSource.data(), function(model) {
         return model.dirty;
     });
 

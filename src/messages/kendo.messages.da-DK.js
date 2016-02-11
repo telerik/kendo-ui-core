@@ -274,7 +274,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "imageAltText": "Alternativ tekst",
   "imageWebAddress": "Web adresse",
   "linkOpenInNewWindow": "Åben link i nyt vindue",
-  "linkText": "Teskt",
+  "linkText": "Tekst",
   "linkToolTip": "Tooltip",
   "linkWebAddress": "Web adresse",
   "search": "Søg",
@@ -359,7 +359,8 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "day": "Dag",
     "month": "Måned",
     "week": "Uge",
-    "workWeek": "Arbejdsuge"
+    "workWeek": "Arbejdsuge",
+    "timeline": "Tidslinie"
   },
   "deleteWindowTitle": "Slet begivenhed",
   "showFullDay": "Vis hel dag",

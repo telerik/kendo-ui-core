@@ -742,19 +742,26 @@
         equal(anchor.css("font-style"), div.css("font-style"));
     });
 
-    asyncTest("re-position on resize", function() {
+    test("add direction class to the anchor and popup", function() {
+        anchor = $("<div style='background:blue;position:absolute;left:100px;top:100px;'><div class='k-dropdown-wrap'>anchor</div></div>").appendTo(QUnit.fixture);
         popup = new Popup(div, { anchor: anchor });
         popup.open();
 
-        stub(popup, {
-            _position: popup._position
-        });
+        equal(anchor.hasClass("k-state-border-down"), true);
+        equal(anchor.find(".k-dropdown-wrap").hasClass("k-state-border-down"), true);
+        equal(div.hasClass("k-state-border-up"), true);
+    });
 
-        $(window).trigger("resize");
-        setTimeout(function() {
-            start();
-            equal(popup.calls("_position"), 1);
-        }, 100);
+    test("removes direction class from the anchor and popup", function() {
+        anchor = $("<div style='background:blue;position:absolute;left:100px;top:100px;'><div class='k-dropdown-wrap'>anchor</div></div>").appendTo(QUnit.fixture);
+        popup = new Popup(div, { anchor: anchor });
+
+        popup.open();
+        popup.close();
+
+        equal(anchor.hasClass("k-state-border-down"), false);
+        equal(anchor.find(".k-dropdown-wrap").hasClass("k-state-border-down"), false);
+        equal(div.hasClass("k-state-border-up"), false);
     });
 
     test("calculate position correctly when content height is 'auto'", function() {
@@ -775,5 +782,40 @@
         var wrapperHeight = flipArgs[6];
 
         equal(elementHeight, wrapperHeight);
+    });
+
+    asyncTest("re-position on resize", function() {
+        popup = new Popup(div, { anchor: anchor });
+        popup.open();
+
+        stub(popup, {
+            _position: popup._position
+        });
+
+        $(window).trigger("resize");
+        setTimeout(function() {
+            start();
+            equal(popup.calls("_position"), 1);
+        }, 100);
+    });
+
+    asyncTest("re-positions if device orientation has changed", 1, function() {
+        var defaultResize = kendo.support.resize;
+        kendo.support.resize = "orientationchange resize";
+
+        popup = new Popup(div, { anchor: anchor });
+        popup.open();
+
+        stub(popup, {
+            _position: popup._position
+        });
+
+        $(window).trigger("orientationchange");
+        setTimeout(function() {
+            start();
+            equal(popup.calls("_position"), 1);
+        }, 100);
+
+        kendo.support.resize = defaultResize;
     });
 })();

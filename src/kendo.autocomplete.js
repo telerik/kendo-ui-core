@@ -33,6 +33,7 @@ var __meta__ = { // jshint ignore:line
         DataSource = kendo.data.DataSource,
         ARIA_DISABLED = "aria-disabled",
         ARIA_READONLY = "aria-readonly",
+        CHANGE = "change",
         DEFAULT = "k-state-default",
         DISABLED = "disabled",
         READONLY = "readonly",
@@ -95,17 +96,17 @@ var __meta__ = { // jshint ignore:line
             element
                 .addClass("k-input")
                 .on("keydown" + ns, proxy(that._keydown, that))
+                .on("keypress" + ns, proxy(that._keypress, that))
                 .on("paste" + ns, proxy(that._search, that))
                 .on("focus" + ns, function () {
-                    that._active = true;
                     that._prev = that._accessor();
+                    that._oldText = that._prev;
                     that._placeholder(false);
                     wrapper.addClass(FOCUSED);
                 })
                 .on("focusout" + ns, function () {
                     that._change();
                     that._placeholder();
-                    that._active = false;
                     wrapper.removeClass(FOCUSED);
                 })
                 .attr({
@@ -169,10 +170,12 @@ var __meta__ = { // jshint ignore:line
                 that._unbindDataSource();
             } else {
                 that._progressHandler = proxy(that._showBusy, that);
+                that._errorHandler = proxy(that._hideBusy, that);
             }
 
             that.dataSource = DataSource.create(that.options.dataSource)
-                .bind("progress", that._progressHandler);
+                .bind("progress", that._progressHandler)
+                .bind("error", that._errorHandler);
         },
 
         setDataSource: function(dataSource) {
@@ -185,7 +188,7 @@ var __meta__ = { // jshint ignore:line
         events: [
             "open",
             "close",
-            "change",
+            CHANGE,
             "select",
             "filtering",
             "dataBinding",
@@ -370,6 +373,7 @@ var __meta__ = { // jshint ignore:line
 
                 this._accessor(value);
                 this._old = this._accessor();
+                this._oldText = this._accessor();
             } else {
                 return this._accessor();
             }
@@ -387,7 +391,7 @@ var __meta__ = { // jshint ignore:line
                 this.close();
                 return;
             }
-
+            this._oldText = element.val();
             this._select(item);
             this._blur();
 
@@ -434,9 +438,9 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (length) {
-                    if (!options.virtual) {
-                        that._resetFocusItem();
-                    } else {
+                    that._resetFocusItem();
+
+                    if (options.virtual) {
                         that.popup
                             .unbind("activate", that._resetFocusItemHandler)
                             .one("activate", that._resetFocusItemHandler);
@@ -464,7 +468,9 @@ var __meta__ = { // jshint ignore:line
         },
 
         _listChange: function() {
-            if (this._active && !this._muted) {
+            var isActive = this._active || this.element[0] === activeElement();
+
+            if (isActive && !this._muted) {
                 this._selectValue(this.listView.selectedDataItems()[0]);
             }
         },
@@ -488,6 +494,28 @@ var __meta__ = { // jshint ignore:line
             this._prev = text;
             this._accessor(text);
             this._placeholder();
+        },
+
+        _change: function() {
+            var that = this;
+            var value = that.value();
+            var trigger = value !== List.unifyType(that._old, typeof value);
+
+            var valueUpdated = trigger && !that._typing;
+            var itemSelected = that._oldText !== value;
+
+            if (valueUpdated || itemSelected) {
+                // trigger the DOM change event so any subscriber gets notified
+                that.element.trigger(CHANGE);
+            }
+
+            if (trigger) {
+                that._old = value;
+
+                that.trigger(CHANGE);
+            }
+
+            that.typing = false;
         },
 
         _accessor: function (value) {
@@ -552,8 +580,12 @@ var __meta__ = { // jshint ignore:line
                 that.close();
             } else {
                 that._search();
-                that._typing = true;
             }
+        },
+
+        _keypress: function() {
+            this._oldText = this.element.val();
+            this._typing = true;
         },
 
         _move: function (action) {
@@ -636,7 +668,9 @@ var __meta__ = { // jshint ignore:line
         },
 
         _select: function(candidate) {
+            this._active = true;
             this.listView.select(candidate);
+            this._active = false;
         },
 
         _loader: function() {

@@ -32,6 +32,10 @@ The configuration of this Group.
 The group clipping path.
 Inherited from [Element.clip](element#configuration-clip)
 
+### cursor `String`
+The group cursor.
+Inherited from [Element.cursor](element#configuration-cursor)
+
 ### opacity `Number`
 The group opacity.
 Inherited from [Element.opacity](element#configuration-opacity)

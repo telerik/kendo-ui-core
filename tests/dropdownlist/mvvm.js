@@ -665,7 +665,7 @@
     });
 
     test("selecting the default value sets the view model field to null", function() {
-        dom = $('<select data-bind="value:bar, source:items" data-role="dropdownlist" data-value-field="text" data-option-label="placeholder"/>');
+        dom = $('<select data-bind="value:bar, source:items" data-role="dropdownlist" data-value-field="text" data-text-field="text" data-option-label="placeholder"/>');
 
         var observable = kendo.observable({
             items: [{text:"foo"}, {text:"bar"}],
@@ -682,7 +682,7 @@
     });
 
     test("selecting the default value sets the view model field to emtpy string", function() {
-        dom = $('<select data-bind="value:bar, source:items" data-role="dropdownlist" data-value-field="text" data-option-label="placeholder"/>');
+        dom = $('<select data-bind="value:bar, source:items" data-role="dropdownlist" data-value-field="text" data-text-field="text" data-option-label="placeholder"/>');
 
         var observable = kendo.observable({
             items: [{text:"foo"}, {text:"bar"}],
@@ -742,5 +742,92 @@
         dropdownlist.dataSource.read();
 
         equal(dropdownlist.select(), -1);
+    });
+
+    module('virtualized dropdownlist MVVM', {
+        setup: function() {
+
+        },
+
+        teardown: function() {
+            kendo.destroy(dom);
+        }
+    });
+
+    function generateData(parameters) {
+        var items = [];
+        for (var i = parameters.skip, len = parameters.skip + parameters.take; i < len; i++) {
+            items.push({
+                id: i,
+                value: i,
+                text: "Item " + i
+            });
+        }
+
+        return items;
+    }
+
+    function createAsyncDataSource() {
+        return new kendo.data.DataSource({
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        options.success({ data: generateData(options.data), total: 300 });
+                    }, 0);
+                }
+            },
+            serverFiltering: true,
+            serverPaging: true,
+            pageSize: 40,
+            schema: {
+                data: "data",
+                total: "total"
+            }
+        });
+    }
+
+    function scroll(element, height) {
+        element.scrollTop(height);
+        element.trigger("scroll");
+    }
+
+    asyncTest("widget scrolled to second range sets model to the correct data item", 1, function() {
+        var container_height = 200;
+
+        dom = $('<select data-bind="value:value" />').appendTo(QUnit.fixture);
+
+        var dropdownlist = new kendo.ui.DropDownList(dom, {
+            close: function(e) { e.preventDefault(); },
+            height: container_height,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            }
+        });
+
+        var viewModel = kendo.observable({
+            value: null
+        });
+
+        kendo.bind(dom, viewModel);
+
+        dropdownlist.one("dataBound", function() {
+            dropdownlist.open();
+            scroll(dropdownlist.listView.content, 10 * container_height);
+
+            dropdownlist.one("dataBound", function() {
+                dropdownlist.one("dataBound", function() {
+                    start();
+                    dropdownlist.trigger("change");
+                    deepEqual(viewModel.value, dropdownlist.dataItem());
+                });
+
+                dropdownlist.value(10);
+            });
+        });
     });
 })();

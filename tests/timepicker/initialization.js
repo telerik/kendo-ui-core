@@ -345,5 +345,15 @@
         deepEqual(timepicker.options.max, new Date(2000, 0, 2, 22, 0, 0));
     });
 
+    test("DateTimePicker scrolls to selected value", function() {
+        var timepicker = input.kendoTimePicker({
+            value: "10:00 AM"
+        }).data("kendoTimePicker")
+        timepicker.open();
+        var isScrolled = !timepicker.timeView.list[0].scrollTop == 0;
+        equal(isScrolled, true)
+    });
+
+
 
 })();

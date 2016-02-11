@@ -1,24 +1,20 @@
 ---
 title: Apply Transformations During Export
-page_title: Apply Transformations During Export
-description: This article demonstrates how to transform the content during export
+page_title: Apply Transformations During Export | Kendo UI Drawing API
+description: "Learn how to transform the content during export while applying the Kendo UI Drawing API."
+slug: howto_applytransformationsduringexport_drawingapi
 ---
 
 # Apply Transformations During Export
 
-This example will show how to apply geometric transformations during export.
+The example below demonstrates how to apply geometric transformations during export while applying the Kendo UI Drawing API.
 
-Our goal is to produce a PNG image of a section of the page at 4x the original resolution.
-We'll do this by applying an uniform 2x scale on the X and Y dimension.
+The aim of the example is to produce a PNG image of a section of the page at 4x the original resolution. This is done by applying an uniform 2x scale on the X and Y dimensions. The operation is carried out while the content is still represented in a vector form. No loss of quality occurs.
 
-The operation is carried out while the content is still represented in a vector form.
-No loss of quality occurs.
+For more information, refer to the [Transformation API article](/api/javascript/geometry/transformation#methods-scale).
 
-See [Transformation](/api/javascript/geometry/transformation#methods-scale) API reference for more information.
+###### Example
 
-The full code of the example follows with additional discussion in the comments.
-
-## Example - Applying transformations during export
 ```html
     <button class='export-img k-button'>Export as Image</button>
     <div class="content">
@@ -84,3 +80,14 @@ The full code of the example follows with additional discussion in the comments.
     </script>
 </script>
 ```
+
+## See Also
+
+Other articles and how-to examples on Kendo UI Drawing API:
+
+* [JavaScript API Reference: kendo.drawing.surface](/api/javascript/drawing/surface)
+* [JavaScript API Reference: kendo.geometry.Transformation](/api/javascript/geometry/transformation)
+* [PDF Options JavaScript API Reference](/api/javascript/drawing/pdfoptions)
+* [Overview of the Drawing API]({% slug overview_kendoui_drawingapi %})
+* [How to Embed Font Awesome in Exported PDF]({% slug howto_embedfontawesome_inexportedpdf_drawingapi %})
+* [How to Implement Free-Form Drawing]({% slug howto_embedfontawesome_inexportedpdf_drawingapi %})

@@ -317,6 +317,16 @@ This functionality is supported in Q1 SP1 2013 release and later versions of Ken
               })
         )
 
+### Grouping
+
+The widget supports binding to a grouped data source. The only requirement is to define a datasource group expression in order to group the data.
+This can be done using a [Custom DataSource configuration](/aspnet-mvc/custom-datasource). Refer to our online demo for more details:
+
+- [Grouping demo](http://demos.telerik.com/aspnet-mvc/multiselect/grouping)
+
+> The data source will sort the grouped data either ascending or descending. If you would like to persist a specific group order, then you will need to use
+a [server grouping](/api/javascript/data/datasource#configuration-serverGrouping). Use the DataSource ServerGrouping method to define the `serverGrouping` option.
+
 ## Accessing an Existing MultiSelect
 
 You can reference an existing MultiSelect instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).

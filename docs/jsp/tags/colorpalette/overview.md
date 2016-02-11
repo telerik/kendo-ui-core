@@ -1,18 +1,26 @@
 ---
 title: Overview
+page_title: Overview | ColorPalette JSP Tag
+description: "Get started with the ColorPalette JSP tag in Kendo UI."
+slug: overview_colorpalette_uiforjsp
+position: 1
 ---
 
-# ColorPalette
+# ColorPalette JSP Tag Overview
 
-The ColorPalette JSP tag is a server-side wrapper for the [Kendo UI ColorPalette](/api/web/colorpalette) widget.
+The ColorPalette JSP tag is a server-side wrapper for the [Kendo UI Chart](/api/javascript/ui/colorpalette) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo ColorPalette:
+### Configuration
 
-1.  Make sure you have followed all the steps from the [Introduction](/jsp/introduction) help topic.
+Below are listed the steps for you to follow when configuring the Kendo UI ColorPalette.
 
-2.  Create a new action method which renders the view:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for JSP]({% slug overview_uiforjsp %}).
+
+**Step 2** Create a new action method which renders the view.
+
+###### Example
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index() {
@@ -20,21 +28,42 @@ Here is how to configure a simple Kendo ColorPalette:
             return "web/colorpalette/index";
         }
 
-3. Add kendo taglib mapping to the page
+**Step 3** Add the Kendo UI `taglib` mapping to the page.
+
+###### Example
 
         <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 
-4.  Add a colorpalette tag:
+**Step 4** Add a `colorPalette` tag.
+
+###### Example
 
         <kendo:colorPalette name="colorpalette" value="#ff0000">
         </kendo:colorPalette>
 
-## Accessing an Existing ColorPalette
+## Event Handling
 
-You can reference an existing ColorPalette instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/colorpalette#methods) to control its behavior.
+### Subscribe to Events
 
-### Accessing an existing ColorPalette instance
+You can subscribe to all [events exposed by Kendo UI ColorPalette](/api/javascript/ui/colorpalette#events) by the handler name.
+
+###### Example
+
+    <kendo:colorPalette name="colorpalette" change="colorpalette_change"></kendo:colorPalette>
+
+    <script>
+        function colorpalette_change() {
+            // Handle the change event
+        }
+    </script>
+
+## Reference
+
+### Existing Instances
+
+You are able to reference an existing ColorPalette instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [ColorPalette API](/api/javascript/ui/colorpalette#methods) to control its behavior.
+
+###### Example
 
     // Put this after your Kendo ColorPalette tag declaration
     <script>
@@ -44,16 +73,11 @@ Once a reference has been established, you can use the [API](/api/web/colorpalet
     });
     </script>
 
-## Handling Kendo UI ColorPalette events
+## See Also
 
-You can subscribe to all [events](/api/web/colorpalette#events) exposed by Kendo UI ColorPalette:
+Other articles on Telerik UI for JSP and on the ColorPalette:
 
-### Subscribe by handler name
-
-    <kendo:colorPalette name="colorpalette" change="colorpalette_change"></kendo:colorPalette>
-
-    <script>
-        function colorpalette_change() {
-            // Handle the change event
-        }
-    </script>
+* [Overview of the Kendo UI ColorPicker Widget]({% slug overview_kendoui_colorpicker_widget %})
+* [Overview of the ColorPicker JSP Tag]({% slug overview_colorpicker_uiforjsp %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

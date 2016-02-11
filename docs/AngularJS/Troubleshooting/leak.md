@@ -4,14 +4,16 @@ page_title: Memory Leaks | AngularJS Directives
 description: "Learn where to look for memory leaks and how to handle them while working with Kendo UI controls and AngularJS."
 previous_url: /AngularJS/leak
 slug: memory_leaks_angularjs_directives
-position: 5
+position: 2
 ---
 
 # Memory Leaks
 
 Under certain conditions, the browser memory usage continuously increases when data-bound widgets, such as the Grid, are created and destroyed in the AngularJS context. Many of these reports are related to the AngularJS routing.
 
-## Look for Memory Leaks
+## Handle Memory Leaks
+
+### Look for Memory Leaks
 
 Memory leak reports are not unique to Kendo UI directives. The [Angular JS repository](https://github.com/angular/angular.js) features several threads which dig into various aspects of the problem, [Issue #4864](https://github.com/angular/angular.js/issues/4864) being among the most prominent ones. The [post from Igor Minar](https://github.com/angular/angular.js/issues/4864#issuecomment-29394307) offers several insights, which highlight most of the problems our team has stumbled upon too. The takeaways are the following:
 
@@ -19,9 +21,11 @@ Memory leak reports are not unique to Kendo UI directives. The [Angular JS repos
 - Triggering the garbage collect causes many "leaked" detached DOM nodes to be collected. If this is not so, then there is a real problem present.
 - According to Igor, the Chrome browser must be started with `--js-flags="--nocrankshaft --noopt"`. We did not notice any effect of these flags in our test cases, though.
 
-## Create a Test Case
+### Create a Test Case
 
-To verify that your implementation does not differ from the default AngularJS behavior, create a simplified test case which uses the `ng-repeat` directive and the router. The code is available in [the Dojo](http://dojo.telerik.com/@petyosi/ipaJE), too:
+To verify that your implementation does not differ from the default AngularJS behavior, create a simplified test case which uses the `ng-repeat` directive and the router. The code is available in [the Dojo](http://dojo.telerik.com/@petyosi/ipaJE), too.
+
+###### Example
 
 ```html
 <!DOCTYPE html>
@@ -81,7 +85,7 @@ The DOM count increases as the routes toggle with each other. This looks like a 
 
 The seemingly retained detached nodes are getting collected by the garbage collector.
 
-## Extend the Test Case
+### Extend the Test Case
 
 Replace the `repeat` directive above with a Kendo UI Grid:
 
@@ -148,21 +152,26 @@ The sample above performs in the same way. Nodes are retained, but collecting th
 
 Based on this research, you can consider the memory usage of the Kendo UI directives (although not perfect) to be unavoidable given the AngularJS context.
 
-> **Important**  
-> Note that the majority of Kendo UI widgets do not exhibit such leaks outside of the AngularJS context. 
+> **Important**
+>  
+> Note that the majority of Kendo UI widgets do not exhibit such leaks outside of the AngularJS context.
 
-A fix that works is to clean up before a route change. So, wherever you change to a new route via `$location.path('/my/new/route')`, you execute some extra code to clear out the HTML in the prior view using: 
+A fix that works is to clean up before a route change. So, wherever you change to a new route via `$location.path('/my/new/route')`, you execute some extra code to clear out the HTML in the prior view using.
+
+###### Example
 
     kendo.destroy(document.body);
     $('.view-root-node').html('');
-    
+
 ## See Also
 
 Other articles on AngularJS directives and integration with Kendo UI:
 
 * [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
-* [ng-* Directives in Widget Markup]({% slug ngrepeat_ngif_ngbind_support_angularjs %})
 * [Global Events]({% slug global_events_angularjs_directives %})
 * [Grid Settings]({% slug grid_settings_angularjs_directives %})
 * [Directives with DataSource]({% slug datasource_updates_angularjs_directives %})
+* [ng-* Directives in Widget Markup]({% slug ngrepeat_ngif_ngbind_support_angularjs %})
+* [How to Load View in Window]({% slug window_service_angularjs_directives %})
 * [How to Nest Widgets]({% slug nest_widgets_angularjs_directives %})
+* [Troubleshooting: Common Issues]({% slug common_issues_support_angularjs %})

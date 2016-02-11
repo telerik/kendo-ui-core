@@ -39,6 +39,26 @@ It can be replaced by calling the [clip](#methods-clip) method.
         surface.draw(circle);
     </script>
 
+### cursor `String`
+The element [CSS cursor](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor).
+
+Applicable to SVG and VML outputs.
+
+#### Example - set hand cursor on an element
+    <div id="surface"></div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var circle = new draw.Circle(new geom.Circle([100, 100], 80), {
+            cursor: "pointer",
+            stroke: { color: "red", width: 1 }
+        });
+
+        var surface = draw.Surface.create($("#surface"));
+        surface.draw(circle);
+    </script>
+
 ### opacity `Number`
 The element opacity.
 

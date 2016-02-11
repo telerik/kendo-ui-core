@@ -720,7 +720,7 @@ Returns the page size - maximum number of items allowed on one page.
 
 ### page
 
-Sets or gets the current page.
+Gets or sets the current page.
 
 #### Example - get current page
     <div id="pager"></div>

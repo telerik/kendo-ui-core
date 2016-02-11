@@ -256,7 +256,7 @@ The string that needs to be HTML encoded.
 
 ### parseDate
 
-Parses as a formatted string as a `Date`.
+Parses as a formatted string as a `Date`. Also see [Date Parsing](/framework/globalization/dateparsing)
 
 #### Example
     <script>
@@ -369,6 +369,16 @@ If you pass `true` then this function will return `undefined` rather than throwi
 #### Returns
 
 `kendo.Color` A Color object.
+
+### proxyModelSetters
+
+Creates a wrapper object over the passed one, with get/set properties that set the original object `dirty` flag. Suitable for a scenario where a dataSource item is used in a third-party MVVM implementation, like AngularJS.
+
+#### Parameters
+
+##### data `kendo.data.Model`
+
+The model that will be wrapped.
 
 ### render
 

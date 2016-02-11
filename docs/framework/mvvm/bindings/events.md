@@ -1,12 +1,21 @@
 ---
 title: Events
+page_title: Events | Kendo UI MVVM
+description: "Learn how to enable the target DOM element by having the View-Model value return true values in Kendo UI MVVM."
+slug: eventsbinding_mvvm_kendoui
 ---
 
-# Events binding
+# Events Binding
 
-The `events` binding will attach methods of the View-Model to specified DOM events. The methods will be invoked when the associated DOM event is raised.
+The [Kendo UI Events (`events`) binding](http://demos.telerik.com/kendo-ui/mvvm/event) attaches methods of the View-Model to specified DOM events. The methods will be invoked when the associated DOM event is raised.
 
-## Using the events binding
+## Getting Started
+
+### Setup
+
+The example below demonstrates how to use the `events` binding.
+
+###### Example  
 
     <div id="view">
         <span data-bind="events: { mouseover: showDescription, mouseout: hideDescription }">Show description</span>
@@ -29,16 +38,19 @@ The `events` binding will attach methods of the View-Model to specified DOM even
         kendo.bind($("#view"), viewModel);
     </script>
 
+## DOM Events and Actions   
 
-## Accessing the DOM event argument
+### Access DOM Event Argument
 
-Kendo MVVM supplies the DOM event argument wrapped in a jQuery [Event object](http://api.jquery.com/category/events/event-object/).
+Kendo UI MVVM supplies the DOM event argument wrapped in a jQuery [`Event` object](http://api.jquery.com/category/events/event-object/).
 
-## Stopping DOM event bubbling
+### Stop DOM Event Bubbling
 
-To stop the event from bubbling up the DOM tree use the [stopPropagation](http://api.jquery.com/event.stopPropagation/) method.
+To stop the event from bubbling up the DOM tree use the [`stopPropagation`](http://api.jquery.com/event.stopPropagation/) method.
 
-### Stop event bubbling
+The example below demonstrates how to stop DOM event bubbling.
+
+###### Example
 
     <span data-bind="events: { click: click }">Click</span>
     <script>
@@ -51,12 +63,13 @@ To stop the event from bubbling up the DOM tree use the [stopPropagation](http:/
         kendo.bind($("span"), viewModel);
     </script>
 
-## Preventing the default action of the DOM event
+### Prevent Default Actions of DOM Events
 
-Some DOM events have a default action. For example the click event may navigate to another page or submit a form.
-To prevent the default action use the [preventDefault](http://api.jquery.com/event.preventDefault/) method.
+Some DOM events have a default action. For example, the `click` event may navigate to another page or submit a form. To prevent the default action, use the [`preventDefault`](http://api.jquery.com/event.preventDefault/) method.
 
-### Prevent default event action
+The example below demonstrates how to prevent default actions of DOM events.
+
+###### Example
 
     <a href="http://example.com" data-bind="events: { click: click }">Click</a>
     <script>
@@ -69,3 +82,23 @@ To prevent the default action use the [preventDefault](http://api.jquery.com/eve
 
         kendo.bind($("a"), viewModel);
     </script>
+
+## See Also
+
+Other articles on the Kendo UI MVVM component and bindings:
+
+* [MVVM Overview]({% slug overview_mvvmpattern_kendoui %})
+* [Overview of the Attribute Binding]({% slug attributebinding_mvvm_kendoui %})
+* [Overview of the Checked Binding]({% slug checkedbinding_mvvm_kendoui %})
+* [Overview of the Click Binding]({% slug clickbinding_mvvm_kendoui %})
+* [Overview of the CSS Binding]({% slug cssbinding_mvvm_kendoui %})
+* [Overview of the Custom Binding]({% slug custombinding_mvvm_kendoui %})
+* [Overview of the Disabled Binding]({% slug disabledbinding_mvvm_kendoui %})
+* [Overview of the Enabled Binding]({% slug enabledbinding_mvvm_kendoui %})
+* [Overview of the HTML Binding]({% slug htmlbinding_mvvm_kendoui %})
+* [Overview of the Invisible Binding]({% slug invisiblebinding_mvvm_kendoui %})
+* [Overview of the Source Binding]({% slug sourceblebinding_mvvm_kendoui %})
+* [Overview of the Style Binding]({% slug stylebinding_mvvm_kendoui %})
+* [Overview of the Text Binding]({% slug textbinding_mvvm_kendoui %})
+* [Overview of the Value Binding]({% slug valuebinding_mvvm_kendoui %})
+* [Overview of the Visible Binding]({% slug visiblebinding_mvvm_kendoui %})

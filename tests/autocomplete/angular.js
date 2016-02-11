@@ -31,6 +31,19 @@
         equal(QUnit.fixture.find("input").getKendoAutoComplete().value(), "red,green");
     });
 
+    ngTest("autocomplete accepts single selected object with k-ng-model if separator is not defined", 1, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            $scope.colors = [ { color: "red" }, { color: "green" }, { color: "blue" } ];
+            $scope.selectedColors = $scope.colors[1];
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><input kendo-autocomplete k-ng-model=selectedColors k-data-source=colors k-data-text-field="\'color\'"></div>');
+    },
+
+    function() {
+        equal(QUnit.fixture.find("input").getKendoAutoComplete().value(), "green");
+    });
+
     ngTest("autocomplete works with data-value-primitive in k-ng-model", 1, function() {
         angular.module("kendo.tests").controller("mine", function($scope) {
             $scope.colors = [ { color: "red" }, { color: "green" }, { color: "blue" } ];

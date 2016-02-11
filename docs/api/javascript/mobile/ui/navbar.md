@@ -6,7 +6,7 @@ description: How to use methods in Mobile NavBar widget.
 
 # kendo.mobile.ui.NavBar
 
-Represents the Kendo UI Mobile NavBar widget. Inherits from [kendo.mobile.ui.Widget](/api/framework/mobilewidget).
+Represents the Kendo UI Mobile NavBar widget. Inherits from [kendo.mobile.ui.Widget](/api/javascript/mobile/ui/mobilewidget).
 
 ## Methods
 

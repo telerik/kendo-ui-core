@@ -477,6 +477,43 @@ test("preventing select event during navigation reverts selection", 2, function(
     equal(current.html(), "foo");
 });
 
+test("trigger select event on blur when input text is changed", 1, function() {
+    var combobox = input.kendoComboBox({
+        dataSource: ["foo", "bar"],
+        select: function(e) {
+            equal(e.item[0], combobox.current()[0]);
+        }
+    }).data("kendoComboBox");
+
+    combobox.input.focus().val("bar").blur();
+});
+
+test("do not trigger select event on blur when input text is not changed", 0, function() {
+    var combobox = input.kendoComboBox({
+        dataSource: ["foo", "bar"],
+        select: function(e) {
+            ok(false);
+        }
+    }).data("kendoComboBox");
+
+    combobox.select(0);
+    combobox.input.focus().blur();
+});
+
+test("prevent select event on blur returns old value", 1, function() {
+    var combobox = input.kendoComboBox({
+        dataSource: ["foo", "bar"],
+        select: function(e) {
+            e.preventDefault();
+        }
+    }).data("kendoComboBox");
+
+    combobox.select(0);
+    combobox.input.focus().val("bar").blur();
+
+    equal(combobox.text(), "foo");
+});
+
 test("ComboBox trigger blur of the hidden input", 1, function() {
     combobox = input.kendoComboBox().data("kendoComboBox");
 
@@ -527,6 +564,29 @@ test("ComboBox trigger cascade when selected index is changed", 2, function() {
 
     combobox.search("f");
     combobox.ul.children(":first").click();
+});
+
+test("ComboBox triggers cascade only once when setting value externally", 1, function() {
+    combobox = input.kendoComboBox({
+        dataSource: {
+            transport: {
+                read: function(options) {
+                    options.success([
+                        { text: "foo", value: "1" },
+                        { text: "bar", value: "2" }
+                    ]);
+                }
+            }
+        },
+        dataTextField: "text",
+        dataValueField: "value"
+    }).data("kendoComboBox");
+
+    combobox.bind("cascade", function() {
+        ok(true);
+    });
+
+    combobox.value("2");
 });
 
 test("ComboBox trigger change on blur after filtration", 1, function() {
@@ -675,6 +735,46 @@ test("change event is not raised when widget is not bound and value method is us
 
     combobox.value(2);
     combobox.input.focus().blur();
+});
+
+test("change event is not raised when widget value is cleared", 0, function() {
+    var select = $("<select></select>").appendTo(QUnit.fixture);
+
+    var combobox = new ComboBox(select, {
+        autoBind: false,
+        dataValueField: "id",
+        dataTextField: "name",
+        dataSource: [
+            { id: 1, name: "name1" },
+            { id: 2, name: "name2" },
+            { id: 3, name: "name3" }
+        ],
+        change: function() {
+            ok(false);
+        }
+    });
+
+    combobox.value("");
+    combobox.input.focus().blur();
+});
+
+test("trigger set when setting value", 1, function() {
+    var value = "test";
+
+    var combobox = new ComboBox(input, {
+        dataValueField: "id",
+        dataTextField: "name",
+        dataSource: [
+            { id: 1, name: "name1" },
+            { id: 2, name: "name2" },
+            { id: 3, name: "name3" }
+        ],
+        set: function(e) {
+            equal(e.value, value);
+        }
+    });
+
+    combobox.value(value);
 });
 
 })();

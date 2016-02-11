@@ -128,7 +128,7 @@ You can subscribe to all events exposed by Kendo UI DateTimePicker:
 ## Troubleshooting
 
 ### Display [DateTimeOffset](http://msdn.microsoft.com/en-us/library/system.datetimeoffset.aspx) value in widget
-The DateTimePicker widget supports only DateTime structure. You will need to convert DateTimeOffset into DatePicker in order to show date and time correctly.
+The DateTimePicker widget supports only DateTime structures. You will need to convert DateTimeOffset to DateTime in order to show date and time correctly.
 
 ### Client Validation Fails with Invalid Date
 By default ASP.NET MVC project uses jQuery validate framework, which does not provide support for internationalized dates.

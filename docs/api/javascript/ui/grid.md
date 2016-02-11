@@ -1020,11 +1020,50 @@ Allows customization on the logic that renderes the checkboxes when using checkb
         });
     </script>
 
+### columns.filterable.search `Boolean` *(default: false)*
+Controls whether to show a search box when [checkbox filtering](#configuration-columns.filterable.multi) is enabled.
+
+#### Example - Enable checkbox filter search
+    <div id="grid"></div>
+    <script>
+        $("#grid").kendoGrid({
+            columns: [{
+                field: "country",
+                filterable: {
+                    multi: true,
+                    search: true
+                }
+            }],
+            filterable: true,
+            dataSource: [{ country: "BG" }, { country: "USA" }]
+        });
+    </script>
+
+### columns.filterable.ignoreCase `Boolean` *(default: true)*
+Toggles between case-insensitive (default) and case-sensitive [searching](#configuration-columns.filterable.search).
+
+#### Example - Enable checkbox filter search
+    <div id="grid"></div>
+    <script>
+        $("#grid").kendoGrid({
+            columns: [{
+                field: "country",
+                filterable: {
+                    multi: true,
+                    search: true,
+                    ignoreCase: true
+                }
+            }],
+            filterable: true,
+            dataSource: [{ country: "BG" }, { country: "USA" }]
+        });
+    </script>
+
 ### columns.filterable.ui `String|Function`
 
 The role data attribute of the widget used in the filter menu or a JavaScript function which initializes that widget.
 
-> This feature is not supported for columns which have their [values](#configuration-columns.values) option set.
+> This feature is not supported for columns which have their [values](#configuration-columns.values) option set and Boolean columns.
 
 > If [filterable.mode](#configuration-filterable.mode) is set to 'row', [columns.filterable.cell.template](#configuration-columns.filterable.cell.template) should be used to customize the input.
 
@@ -5255,7 +5294,7 @@ Exports all grid pages, starting from the first one.
 > [Pako](http://nodeca.github.io/pako/) library, which is bundled with Kendo as `pako_deflate.min.js`.  Simply loading
 > this library with a `<script>` tag will enable compression in PDF, e.g.:
 >
-> `<script src="http://kendo.cdn.telerik.com/2015.1.318/js/pako_deflate.min.js"></script>`
+> `<script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>`
 >
 > The allPages export is not supported when virtual scrolling is enabled.
 
@@ -6834,7 +6873,7 @@ Expands specified master row.
 ### getOptions
 
 Retrieves the options that are currently enabled or disabled on the Grid, also gives the current state of the dataSource.
-Use this method if you want to save the state of the Grid into a variable.
+Use this method if you want to save the state of the Grid into a variable. It is also possible to extract and store only some of the Grid options.
 
 > Please refer to the [`setOptions()`](#methods-setOptions) method documentation for more important information.
 
@@ -6862,6 +6901,9 @@ Use this method if you want to save the state of the Grid into a variable.
     var grid = $("#grid").data("kendoGrid");
     var options = grid.getOptions();
     console.log(options.sortable); //outputs true
+    
+    // get only the Grid column settings
+    var columnOptionsForSaving = kendo.stringify(options.columns);
     </script>
 
 ### hideColumn
@@ -6936,6 +6978,14 @@ When using multicolumn headers, using an index will hide a top-level column toge
     var grid = $("#grid").data("kendoGrid");
     grid.hideColumn(grid.columns[0].columns[1]);
     </script>
+
+### items
+
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view) (e.g. the ones on the current page).
+
+#### Returns
+
+`Array` The currently rendered data table rows (`<tr>` elements).
 
 ### lockColumn
 

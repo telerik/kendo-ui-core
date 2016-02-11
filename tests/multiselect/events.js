@@ -192,7 +192,7 @@
             start();
         });
 
-        multiselect.input.focus().val("baz").keydown();
+        multiselect.search("baz");
     });
 
     test("MultiSelect filtering event can be prevented", 0, function() {
@@ -229,6 +229,6 @@
             multiselect.open();
         });
 
-        multiselect.input.focus().val("bar").keydown();
+        multiselect.search("bar");
     });
 })();

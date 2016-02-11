@@ -171,9 +171,7 @@ var __meta__ = { // jshint ignore:line
 
                 if (options.group) {
                     element.attr(kendo.attr("group"), options.group);
-                    if ((this.overflow && this.options.overflow === OVERFLOW_ALWAYS) || !this.overflow) {
-                        this.group = this.toolbar.addToGroup(this, options.group);
-                    }
+                    this.group = this.toolbar.addToGroup(this, options.group);
                 }
 
                 if (!options.togglable && options.click && isFunction(options.click)) {
@@ -463,7 +461,7 @@ var __meta__ = { // jshint ignore:line
                 this.options = options;
                 this.toolbar = toolbar;
 
-                this.mainButton = new ToolBarButton(options, toolbar);
+                this.mainButton = new ToolBarButton($.extend({}, options, { hidden: false }), toolbar);
                 this.arrowButton = $('<a class="' + BUTTON + " " + SPLIT_BUTTON_ARROW + '"><span class="' + (options.mobile ? "km-icon km-arrowdown" : "k-icon k-i-arrow-s") + '"></span></a>');
                 this.popupElement = $('<ul class="' + LIST_CONTAINER + '"></ul>');
 
@@ -492,6 +490,12 @@ var __meta__ = { // jshint ignore:line
                 this._navigatable();
 
                 this.mainButton.main = true;
+
+                this.enable(options.enable);
+
+                if (options.hidden) {
+                    this.hide();
+                }
 
                 element.data({
                     type: "splitButton",
@@ -582,6 +586,20 @@ var __meta__ = { // jshint ignore:line
 
             focus: function() {
                 this.element.focus();
+            },
+
+            hide: function() {
+                if (this.popup) {
+                    this.popup.close();
+                }
+
+                this.element.addClass(STATE_HIDDEN).hide();
+                this.options.hidden = true;
+            },
+
+            show: function() {
+                this.element.removeClass(STATE_HIDDEN).hide();
+                this.options.hidden = false;
             }
         });
 
@@ -811,12 +829,12 @@ var __meta__ = { // jshint ignore:line
                     tmp = this.buttons[i];
 
                     tmp.select(false);
-                    if (tmp.twin()) {
-                        tmp.twin().select(false);
-                    }
                 }
 
                 button.select(true);
+                if (button.twin()) {
+                    button.twin().select(true);
+                }
             }
         });
 
@@ -877,7 +895,7 @@ var __meta__ = { // jshint ignore:line
                     threshold: 5,
                     allowSelection: true,
                     filter:
-                        "[" + KENDO_UID_ATTR + "=" + this.uid + "] ." + BUTTON + ", " +
+                        "[" + KENDO_UID_ATTR + "=" + this.uid + "] a." + BUTTON + ", " +
                         "[" + KENDO_UID_ATTR + "=" + this.uid + "] ." + OVERFLOW_BUTTON,
                     tap: proxy(that._buttonClick, that),
                     press: toggleActive,
@@ -963,6 +981,14 @@ var __meta__ = { // jshint ignore:line
                     rootUid: that.uid
                 });
 
+                if (options.menuButtons) {
+                    for (var i = 0; i < options.menuButtons.length; i++) {
+                        $.extend(options.menuButtons[i], {
+                            uid: kendo.guid()
+                        });
+                    }
+                }
+
                 if (template && !overflowTemplate) {
                     options.overflow = OVERFLOW_NEVER;
                 } else if (!options.overflow) {
@@ -1021,30 +1047,36 @@ var __meta__ = { // jshint ignore:line
                     isResizable = this.options.resizable,
                     type;
 
+                //find toolbar item
+
                 element = this.element.find(candidate);
+                if (!element.length) {
+                    element = $(".k-split-container[data-uid=" + this.uid + "]").find(candidate);
+                }
+
                 type = element.length ? element.data("type") : "";
                 toolbarItem = element.data(type);
 
-                if (toolbarItem && toolbarItem.main) {
-                    element = element.parent("." + SPLIT_BUTTON);
-                    type = "splitButton";
-                    toolbarItem = element.data(type);
-                }
+                if (toolbarItem) {
+                    if (toolbarItem.main) {
+                        element = element.parent("." + SPLIT_BUTTON);
+                        type = "splitButton";
+                        toolbarItem = element.data(type);
+                    }
 
-                if (!element.length && isResizable) {
+                    if (isResizable) {
+                        overflowItem = toolbarItem.twin();
+                    }
+                } else if (isResizable) { //find overflow item
                     element = this.popup.element.find(candidate);
-                    type = element.data("type");
+                    type = element.length ? element.data("type") : "";
                     overflowItem = element.data(type);
-                }
 
-                if (overflowItem && overflowItem.main) {
-                    element = element.parent("." + SPLIT_BUTTON);
-                    type = "splitButton";
-                    overflowItem = element.data(type);
-                }
-
-                if (toolbarItem && isResizable) {
-                    overflowItem = toolbarItem.twin();
+                    if (overflowItem && overflowItem.main) {
+                        element = element.parent("." + SPLIT_BUTTON);
+                        type = "splitButton";
+                        overflowItem = element.data(type);
+                    }
                 }
 
                 return {
@@ -1094,9 +1126,7 @@ var __meta__ = { // jshint ignore:line
                     if (item.toolbar.options.type === "button" && item.toolbar.options.isChild) {
                         item.toolbar.getParentGroup().refresh();
                     }
-                }
-
-                if (item.overflow) {
+                } else if (item.overflow) {
                     item.overflow.show();
 
                     if (item.overflow.options.type === "button" && item.overflow.options.isChild) {
@@ -1234,7 +1264,7 @@ var __meta__ = { // jshint ignore:line
                 var that = this, popup,
                     target, item, splitContainer,
                     isSplitButtonArrow = e.target.closest("." + SPLIT_BUTTON_ARROW).length,
-                    handler, eventData;
+                    handler, eventData, urlTarget;
 
                 e.preventDefault();
 
@@ -1277,7 +1307,10 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (item.options.url) {
-                    window.location.href = item.options.url;
+                    if (item.options.attributes && item.options.attributes.target) {
+                        urlTarget = item.options.attributes.target;
+                    }
+                    window.open(item.options.url, urlTarget || "_self");
                 }
 
                 if (target.hasClass(OVERFLOW_BUTTON)) {
@@ -1315,7 +1348,8 @@ var __meta__ = { // jshint ignore:line
 
                 if (keyCode === keys.TAB) {
                     var element = target.parentsUntil(this.element).last(),
-                        lastHasFocus = false;
+                        lastHasFocus = false,
+                        firstHasFocus = false;
 
                     if (!element.length) {
                         element = target;
@@ -1341,9 +1375,22 @@ var __meta__ = { // jshint ignore:line
                         }
                     }
 
-                    if (lastHasFocus) {
+                    if (e.shiftKey && items.index(element) === 1) {
+                        if (element.is("." + BUTTON_GROUP)) {
+                            firstHasFocus = target.is(":first-child");
+                        } else {
+                            firstHasFocus = true;
+                        }
+                    }
+
+                    if (lastHasFocus && this.overflowAnchor.css("visibility") !== "hidden") {
                         e.preventDefault();
                         this.overflowAnchor.focus();
+                    }
+
+                    if (firstHasFocus) {
+                        e.preventDefault();
+                        this.wrapper.prev(":kendoFocusable").focus();
                     }
                 }
 
@@ -1360,7 +1407,7 @@ var __meta__ = { // jshint ignore:line
                     return;
                 }
 
-                if (keyCode === keys.SPACEBAR || keyCode === keys.ENTER) {
+                if ((keyCode === keys.SPACEBAR || keyCode === keys.ENTER) && !target.is("input, checkbox")) {
 
                     e.preventDefault(); //prevent pspacebar to scroll the page down
 

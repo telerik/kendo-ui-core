@@ -5505,6 +5505,14 @@ The event which should be put in edit mode. Also accepts a string which is the `
     scheduler.editEvent(event);
     </script>
 
+### items
+
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view).
+
+#### Returns
+
+`Array` The currently rendered events (`<div>` elements).
+
 ### occurrenceByUid
 
 Gets the event occurrence with the specified [uid](/api/javascript/data/model#fields-uid).

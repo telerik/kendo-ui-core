@@ -367,7 +367,7 @@ The height of the suggestion popup in pixels. The default value is 200 pixels.
     });
     </script>
 
-### ignoreCase `String`*(default: true)*
+### ignoreCase `Boolean`*(default: true)*
 
 If set to `false` case-sensitive search will be performed to find suggestions. The widget performs case-insensitive searching by default.
 
@@ -1031,6 +1031,7 @@ The zero-based index of the data record.
     </script>
 
 ### destroy
+
 Prepares the **DropDownList** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
 
 > **Important:** This method does not remove the DropDownList element from DOM.
@@ -1057,27 +1058,13 @@ Focuses the widget.
     dropdownlist.focus();
     </script>
 
-### open
+### items
 
-Opens the popup.
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view).
 
-#### Example
+#### Returns
 
-    <input id="dropdownlist" />
-    <script>
-    $("#dropdownlist").kendoDropDownList({
-      dataSource: [
-        { id: 1, name: "Apples" },
-        { id: 2, name: "Oranges" }
-      ],
-      dataTextField: "name",
-      dataValueField: "id",
-      index: 1
-    });
-
-    var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
-    dropdownlist.open();
-    </script>
+`Array` The currently rendered dropdown list items (`<li>` elements).
 
 ### enable
 
@@ -1101,6 +1088,28 @@ If set to `true` the widget will be enabled. If set to `false` the widget will b
     });
     var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
     dropdownlist.enable(true);
+    </script>
+
+### open
+
+Opens the popup.
+
+#### Example
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      index: 1
+    });
+
+    var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+    dropdownlist.open();
     </script>
 
 ### readonly
@@ -1191,6 +1200,9 @@ The search value.
 ### select
 
 Gets or sets the selected item. Selects the item provided as an argument and updates the value and text of the widget.
+
+> **Important:** When **virtualization** is enabled, the method **does not support** selection with a *function predicate*. The predicate function looks only
+in the current datasource view, which represents only the active range/page. Hence it will not work properly.
 
 > **Important:** This method **does not trigger** [change](#events-change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
@@ -1373,6 +1385,8 @@ Gets or sets the value of the DropDownList. The value will not be set if there i
 
 > **Important:** If the widget is not bound (e.g. `autoBind` is set to `false`), the `value` method will pre-fetch the data before continuing with the value setting.
 **This does not apply when MVVM binding is used.**
+
+> **Important:** The widget will **clear the applied filter** if a new value is set. Thus it ensures that the original/whole data set is available for selection.
 
 > **Important:** This method **does not trigger** [change](#events-change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.

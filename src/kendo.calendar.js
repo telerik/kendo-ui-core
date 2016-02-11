@@ -99,7 +99,7 @@ var __meta__ = { // jshint ignore:line
                             e.preventDefault();
                         }
 
-                        if (that.options.disableDates(value)) {
+                        if (that.options.disableDates(value) && that._view.name == "month") {
                             return;
                         }
 
@@ -264,7 +264,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (index === views[depth]) {
-                if (+that._value != +value) {
+                if (!isEqualDate(that._value, that._current) || !isEqualDate(that._value, value)) {
                     that.value(value);
                     that.trigger(CHANGE);
                 }
@@ -338,16 +338,18 @@ var __meta__ = { // jshint ignore:line
                 }, that[currentView.name])));
 
                 makeUnselectable(to);
-
+                var replace = from && from.data("start") === to.data("start");
                 that._animate({
                     from: from,
                     to: to,
                     vertical: vertical,
-                    future: future
+                    future: future,
+                    replace: replace
                 });
 
-                that._focus(value);
                 that.trigger(NAVIGATE);
+
+                that._focus(value);
             }
 
             if (view === views[options.depth] && selectedValue && !that.options.disableDates(selectedValue)) {
@@ -373,6 +375,10 @@ var __meta__ = { // jshint ignore:line
 
             if (value === undefined) {
                 return that._value;
+            }
+
+            if (value === null) {
+                that._current = new Date(that._current.getFullYear(), that._current.getMonth(), that._current.getDate());
             }
 
             value = parse(value, options.format, options.culture);
@@ -519,7 +525,7 @@ var __meta__ = { // jshint ignore:line
 
                 to.insertAfter(that.element[0].firstChild);
                 that._focusView(active);
-            } else if (!from.is(":visible") || that.options.animation === false) {
+            } else if (!from.is(":visible") || that.options.animation === false || options.replace) {
                 to.insertAfter(from);
                 from.off(ns).remove();
 
@@ -674,7 +680,7 @@ var __meta__ = { // jshint ignore:line
 
             adjustDST(value, 0);
 
-            if (that.options.disableDates(value)) {
+            if (that.options.disableDates(value) && that._view.name == "month") {
                 value = that._value;
             }
 
@@ -934,7 +940,7 @@ var __meta__ = { // jshint ignore:line
                 lastDayOfMonth = that.last(date),
                 toDateString = that.toDateString,
                 today = new DATE(),
-                html = '<table tabindex="0" role="grid" class="k-content" cellspacing="0"><thead><tr role="row">';
+                html = '<table tabindex="0" role="grid" class="k-content" cellspacing="0" data-start="' + toDateString(start) + '"><thead><tr role="row">';
 
                 for (; idx < 7; idx++) {
                     html += '<th scope="col" title="' + names[idx] + '">' + shortNames[idx] + '</th>';
@@ -1403,31 +1409,51 @@ var __meta__ = { // jshint ignore:line
         return $.noop;
     }
 
+    function convertDatesArray(dates) {
+        var result = [];
+        for (var i = 0; i < dates.length; i++) {
+            result.push(dates[i].setHours(0, 0, 0, 0));
+        }
+        return result;
+    }
+
     function createDisabledExpr(dates) {
         var body, callback,
             disabledDates = [],
-            days = ["su", "mo", "tu", "we", "th", "fr", "sa"];
+            days = ["su", "mo", "tu", "we", "th", "fr", "sa"],
+            searchExpression = "if (found) {"+
+                    " return true " +
+                "} else {" +
+                    "return false" +
+                "}";
 
-        for (var i = 0; i < dates.length; i++) {
-            var day = dates[i].toLowerCase();
-            var index = $.inArray(day, days);
-            if (index > -1) {
-                disabledDates.push(index);
+        if (dates[0] instanceof DATE) {
+            disabledDates = convertDatesArray(dates);
+            body = "var found = date && $.inArray(date.setHours(0, 0, 0, 0),["+ disabledDates +"]) > -1;" + searchExpression;
+        } else {
+            for (var i = 0; i < dates.length; i++) {
+                var day = dates[i].slice(0,2).toLowerCase();
+                var index = $.inArray(day, days);
+                if (index > -1) {
+                    disabledDates.push(index);
+                }
             }
+            body = "var found = date && $.inArray(date.getDay(),["+ disabledDates +"]) > -1;" + searchExpression;
         }
-
-        body = "var found = date && $.inArray(date.getDay(),["+ disabledDates +"]) > -1;" +
-            "if (found) {"+
-                " return true " +
-            "} else {" +
-                "return false" +
-            "}";
 
         callback = new Function("date", body); //jshint ignore:line
 
         return callback;
     }
 
+    function isEqualDate(oldValue, newValue) {
+       if (oldValue instanceof Date && newValue instanceof Date) {
+           oldValue = oldValue.getTime();
+           newValue = newValue.getTime();
+       }
+
+       return oldValue === newValue;
+    }
 
     calendar.isEqualDatePart = isEqualDatePart;
     calendar.makeUnselectable =  makeUnselectable;

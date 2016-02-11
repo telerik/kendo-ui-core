@@ -15,6 +15,7 @@
 @android-light-background-color: #fcfcfc;
 
 @error: #ef5350;
+@warning: #ff0030;
 
 /* Colors */
 
@@ -784,3 +785,14 @@
     border-color: fade(@android-light-main-color, 40%);
 }
 
+/* Validation */
+.km-android .km-list > li label.km-invalid,
+.km-android .km-list fieldset .km-legend-button.km-invalid,
+.km-android .km-list > li label.km-invalid.km-required:after {
+    color: @warning;
+}
+
+.km-android .km-invalid-msg {
+    color: @android-active-color;
+    background: @warning;
+}

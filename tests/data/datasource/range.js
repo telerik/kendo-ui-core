@@ -385,6 +385,7 @@ test("read clear previous ranges", function() {
     equal(dataSource._ranges[0].start, 0);
     equal(dataSource._ranges[0].end, 16);
 });
+
 test("range page given number of items from index", function() {
     var dataSource = new DataSource({
         pageSize: 3,
@@ -1685,5 +1686,27 @@ test("error event is raised if error occurs during fetching", 1, function() {
     dataSource.prefetch(0, 1);
 });
 
+test("currentRangeStart returns start of the last requested range", function() {
+    var dataSource = new DataSource({
+        pageSize: 3,
+        data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}]
+    });
+    dataSource.read();
+    dataSource.range(2, 4);
+
+    equal(dataSource.currentRangeStart(), 2);
+});
+
+test("currentRangeStart returns start of the last requested page", function() {
+    var dataSource = new DataSource({
+        pageSize: 3,
+        data: [{age: 1}, {age: 2},{age: 3}, {age: 4},{age: 5}, {age: 6},{age: 7}, {age: 8}]
+    });
+    dataSource.read();
+    dataSource.range(2, 4);
+    dataSource.page(1);
+
+    equal(dataSource.currentRangeStart(), 0);
+});
 
 }());

@@ -6,14 +6,14 @@ description: Step-by-step instructions how to configure Kendo UI Slider for ASP.
 
 # Slider
 
-The Slider HtmlHelper extension is a server-side wrapper for the&nbsp;[Kendo UI Slider](/api/web/slider)&nbsp;widget.
+The Slider HtmlHelper extension is a server-side wrapper for the [Kendo UI Slider](/api/web/slider) widget.
 
 ## Getting Started
 
-There are two types of Slider:
+There are two types of Sliders:
 
-*   Kendo Slider for ASP.NET MVC, which presents one thumb and two opposing buttons for selecting a single value
-*   Kendo RangeSlider for ASP.NET MVC, which present two thumbs for defining a range of values
+*   Kendo Slider for ASP.NET MVC, which presents one thumb and two opposing buttons for selecting a single numeric value
+*   Kendo RangeSlider for ASP.NET MVC, which present two thumbs for defining a range of numeric values
 
 Here is how to configure a simple Kendo Slider:
 

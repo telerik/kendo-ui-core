@@ -172,13 +172,15 @@ gulp.task("custom", function() {
 gulp.task("jshint", function() {
     var packageJSON = require('./package');
 
-    return gulp.src(packageJSON.jshintFiles)
+    return gulp.src(argv.files || packageJSON.jshintFiles)
         .pipe(jshint(packageJSON.jshintConfig))
         .pipe(jshint.reporter('jshint-stylish'))
         .pipe(jshint.reporter('fail'));
 });
 
 gulp.task('build', [ 'scripts', 'styles' ]);
+
+gulp.task('tests', [ 'karma-unit' ]);
 
 gulp.task('ci', function(done) {
   runSequence('build', 'karma-jenkins', done);

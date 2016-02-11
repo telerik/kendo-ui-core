@@ -1,7 +1,7 @@
 ---
 title: JavaScript Prerequisites
-page_title: JavaScript Prerequisites | Kendo UI Installation
-description: "Learn more abour the JavaScript prerequisites for installing Kendo UI widgets and frameworks."
+page_title: JavaScript Prerequisites | Kendo UI Getting Started
+description: "Learn more about the JavaScript prerequisites for installing Kendo UI widgets and frameworks."
 previous_url: /install/prerequisites, /javascript-dependencies, /intro/prerequisites
 slug: javascript_prerequisites_kendoui_installation
 position: 5
@@ -13,7 +13,8 @@ position: 5
 
 The Kendo UI library is based on [jQuery](http://jquery.com/). All Kendo UI bundles include the corresponding minified jQuery library in the `js` directory.
 
-> **Important**  
+> **Important**
+>  
 > In order for the Kendo UI scripts to work as expected, make sure you include a reference to the jQuery library in the document before the scripts.
 
 ### Supported jQuery Versions
@@ -22,21 +23,22 @@ The current official version of Kendo UI requires jQuery 1.9.1. There are occasi
 
 The following list provides jQuery compatibility information about the major Kendo UI releases and their corresponding service packs:
 
-| Major Releases												                                        | jQuery Version       | Comments|
-| :---															                                        | :---			       | :---	  |
+| Major Releases												                                         | jQuery Version    | Comments  |
+| :---															                                             | :---			         | :---	     |
+| [Kendo UI 2016.1.112 (Q1 2016)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q1-2016)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2015.3.930 (Q3 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2015)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2015.2.624 (Q2 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q2-2015)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2015.1.318 (Q1 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q1-2015)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2014.3.1119 (Q3 2014)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2014)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2014.2.716 (Q2 2014)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q2-2014)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
-| [Kendo UI 2014.1.318 (Q1 2014)](/backward-compatibility#kendo-ui-2014-q1)	                    |1.9.1| Also compatible with 1.10.x and 2.0.x|
-| [Kendo UI 2013.3.1119 (Q3 2013)](/backward-compatibility#kendo-ui-2013-q3)	                |1.9.1| Also compatible with 1.10.x and 2.0.x|
-| [Kendo UI 2013.2.716 (Q2 2013)](/backward-compatibility#kendo-ui-2013-q2)	                    |1.9.1| - |
-| [Kendo UI 2013.1.319 (Q1 2013)](/backward-compatibility#kendo-ui-2013-q1)	                    |1.9.1| - |
-| [Kendo UI 2012.3.1114 (Q3 2012)](/backward-compatibility#kendo-ui-2012-q3)	                |1.8.2| - |
-| [Kendo UI 2012.2.710 (Q2 2012)](/backward-compatibility#kendo-ui-2012-q2)	                    |1.7.1| - |
-| [Kendo UI 2012.1.322 (Q1 2012)](/backward-compatibility#kendo-ui-2012-q1-20121322)	        |1.7.1| - |
-| [Kendo UI 2011.3.1129 (Q3 2011)](/backward-compatibility#changes-from-2011-q3-sp1-201131407)  |1.7.1| - |
+| [Kendo UI 2014.1.318 (Q1 2014)]({%slug breakingchanges2014_kendoui%}#kendo-ui-2014-q1)	                    |1.9.1| Also compatible with 1.10.x and 2.0.x|
+| [Kendo UI 2013.3.1119 (Q3 2013)]({%slug breakingchanges2014_kendoui%}#kendo-ui-2014-q3)	                |1.9.1| Also compatible with 1.10.x and 2.0.x|
+| [Kendo UI 2013.2.716 (Q2 2013)]({% slug breakingchanges2013_kendoui%}#kendo-ui-2013-q2)	                    |1.9.1| - |
+| [Kendo UI 2013.1.319 (Q1 2013)]({% slug breakingchanges2013_kendoui %}#kendo-ui-2013-q1)	                    |1.9.1| - |
+| [Kendo UI 2012.3.1114 (Q3 2012)]({% slug breakingchanges2012_kendoui %}#kendo-ui-2012-q3)	                |1.8.2| - |
+| [Kendo UI 2012.2.710 (Q2 2012)]({% slug breakingchanges2012_kendoui %}#kendo-ui-2012-q2)	                    |1.7.1| - |
+| [Kendo UI 2012.1.322 (Q1 2012)]({% slug breakingchanges2012_kendoui %}#kendo-ui-2012-q1-20121322)	        |1.7.1| - |
+| [Kendo UI 2011.3.1129 (Q3 2011)]({% slug breakingchanges2012_kendoui %}#changes-from-2011-q3-sp1-201131407)  |1.7.1| - |
 
 ### Previous Versions Required
 
@@ -46,26 +48,28 @@ Occasionally, a legacy web application might require an older jQuery version wit
 
 From Q2 2014 release onward, Kendo UI widgets support [AngularJS](https://angularjs.org/) integration. To activate the AngularJS directives, you need to install the AngularJS library. Just like jQuery, its minified format is located is in the `js` directory of the Kendo UI bundle you have downloaded.
 
-> **Important**  
+> **Important**
+>
 > Unlike jQuery, Kendo UI distributions do not need AngularJS in order to function correctly.
 
 ### Supported AngularJS Versions
 
-| Major Releases												 | AngularJS Version| Comments|
-| :---															 | :---				| :---	  |
-| [Kendo UI 2015.3.930 (Q3 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2015)		|1.4.0+|- |
-| [Kendo UI 2015.2.624 (Q2 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q2-2015)		|1.3.16|- |
-| [Kendo UI 2015.1.318 (Q1 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q1-2015)		|1.3.0 |- |
-| [Kendo UI 2014.3.1119 (Q3 2014)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2014)		|1.3.0 |- |
-| [Kendo UI 2014.2.716 (Q2 2014)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q2-2014)		|1.2.16|Upgraded to 1.2.21 in subsequent internal builds|
+| Major Releases												           | AngularJS Version     | Comments  |
+| :---															               | :---			       	     | :---	     |
+| [Kendo UI 2016.1.112 (Q1 2016)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q1-2016) |1.4.0+|- |
+| [Kendo UI 2015.3.930 (Q3 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2015)		      |1.4.0+|- |
+| [Kendo UI 2015.2.624 (Q2 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q2-2015)		      |1.3.16|- |
+| [Kendo UI 2015.1.318 (Q1 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q1-2015)		      |1.3.0 |- |
+| [Kendo UI 2014.3.1119 (Q3 2014)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2014)		      |1.3.0 |- |
+| [Kendo UI 2014.2.716 (Q2 2014)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q2-2014)		      |1.2.16|Upgraded to 1.2.21 in subsequent internal builds|
 
 ## Other
 
 ### JSZip Library
 
-The [JSZip library](https://stuk.github.io/jszip/) is a necessary prerequisite if you want to configure your widgets so as to support the [Excel export feature](http://docs.telerik.com/kendo-ui/framework/excel/introduction). The Excel export feature was first included in the [Kendo UI 2014.3.1119 (Q3 2014) release](/install/changes-and-backward-compatibility). However, you will not need the JSZip library if you do not need the Excel export feature to be supported.
+The [JSZip library](https://stuk.github.io/jszip/) is a necessary prerequisite if you want to configure your widgets so as to support the [Excel export feature]({% slug introduction_excelexport_kendoui %}). The Excel export feature was first included in the [Kendo UI 2014.3.1119 (Q3 2014) release]({% slug breakingchanges2014_kendoui%}). However, you will not need the JSZip library if you do not need the Excel export feature to be supported.
 
-### `script` Tag Placement
+### Tag Placement: script
 
 Generally, we recommend that you place `script` tags before the closing `body` tag, so that the scripts are loaded and executed after the HTML markup. Usually, the Kendo UI widget initialization statements are executed in the `document.ready` event via a jQuery handler. This means that jQuery must be registered before any Kendo UI widget initialization statements. When using the client-side Kendo UI widgets, you can control the placement of the initialization statements, so that the jQuery script file can be registered at the bottom of the document.
 
@@ -75,10 +79,14 @@ The server-wrappers for the Kendo UI widgets are self-initialized, which means t
 
 Other articles on getting started with Kendo UI:
 
-* [Getting Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
-* [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
 * [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
+* [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Access Widget DOM Elements: wrapper and element]({% slug widgetwrapperandelement_references_gettingstarted %})
+* [Set Data Attributes]({% slug dataattributes_configuration_installation %})
 * [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})
+* [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
+* [Create Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})

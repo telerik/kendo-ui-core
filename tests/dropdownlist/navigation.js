@@ -325,6 +325,21 @@
         dropdownlist.wrapper.focus().press(keys.ESC);
     });
 
+    test("press esc should return focus to the wrapper", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            animation: false,
+            filter: "startswith",
+            data: data
+        });
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.open();
+
+        dropdownlist.filterInput.press(keys.ESC);
+
+        equal(document.activeElement, dropdownlist.wrapper[0]);
+    });
+
     test("pressing enter closes popup", function() {
         var dropdownlist = new DropDownList(input, {
             animation: false,

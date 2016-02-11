@@ -838,7 +838,7 @@ Inserts an item into a **ContextMenu** after the specified referenceItem.
 
 #### Parameters
 
-##### item `String|Element|jQuery`
+##### item `Object|Array`
 
 Target item, specified as a JSON object. Can also handle an array of such objects.
 
@@ -911,7 +911,7 @@ Inserts an item into a **ContextMenu** before the specified referenceItem.
 
 #### Parameters
 
-##### item `String|Element|jQuery`
+##### item `Object|Array`
 
 Target item, specified as a JSON object. Can also handle an array of such objects.
 

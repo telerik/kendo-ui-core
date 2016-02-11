@@ -186,32 +186,46 @@ var __meta__ = { // jshint ignore:line
         });
     }
 
-    function findChangedItems(selected, changed) {
-        var changedLength = changed.length;
-        var result = [];
+    function mapChangedItems(selected, itemsToMatch) {
+        var itemsLength = itemsToMatch.length;
+        var selectedLength = selected.length;
         var dataItem;
+        var found;
         var i, j;
 
-        for (i = 0; i < selected.length; i++) {
-            dataItem = selected[i];
+        var changed = [];
+        var unchanged = [];
 
-            for (j = 0; j < changedLength; j++) {
-                if (dataItem === changed[j]) {
-                    result.push({
-                        index: i,
-                        item: dataItem
-                    });
+        if (selectedLength) {
+            for (i = 0; i < selectedLength; i++) {
+                dataItem = selected[i];
+                found = false;
+
+                for (j = 0; j < itemsLength; j++) {
+                    if (dataItem === itemsToMatch[j]) {
+                        found = true;
+                        changed.push({ index: i, item: dataItem });
+                        break;
+                    }
+                }
+
+                if (!found) {
+                    unchanged.push(dataItem);
                 }
             }
         }
 
-        return result;
+        return {
+            changed: changed,
+            unchanged: unchanged
+        };
     }
 
     var VirtualList = DataBoundWidget.extend({
         init: function(element, options) {
             var that = this;
-            that._listCreated = false;
+
+            that.bound(false);
             that._fetching = false;
 
             Widget.fn.init.call(that, element, options);
@@ -311,7 +325,7 @@ var __meta__ = { // jshint ignore:line
                 that.dataSource.unbind(CHANGE, that._refreshHandler);
 
                 that._clean();
-                that._listCreated = false;
+                that.bound(false);
 
                 that._deferValueSet = true;
                 value = that.value();
@@ -335,21 +349,34 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        skip: function() {
+            return this.dataSource.currentRangeStart();
+        },
+
         _triggerListBound: function () {
             var that = this;
-            var page = that.dataSource.page();
+            var skip = that.skip();
 
-            if (that.isBound() && !that._selectingValue && that._lastPage !== page) {
-                that._lastPage = page;
+            if (that.bound() && !that._selectingValue && that._skip !== skip) {
+                that._skip = skip;
                 that.trigger(LISTBOUND);
             }
+        },
+
+        _getValues: function(dataItems) {
+            var getter = this._valueGetter;
+
+            return $.map(dataItems, function(dataItem) {
+                return getter(dataItem);
+            });
         },
 
         refresh: function(e) {
             var that = this;
             var action = e && e.action;
+            var isItemChange = action === "itemchange";
             var filtered = this.isFiltered();
-            var changedItems;
+            var result;
 
             if (that._mute) { return; }
 
@@ -364,12 +391,12 @@ var __meta__ = { // jshint ignore:line
                 if (!action && that._values.length && !filtered && !that.options.skipUpdateOnBind) {
                     that._selectingValue = true;
                     that.value(that._values, true).done(function() {
-                        that._listCreated = true;
+                        that.bound(true);
                         that._selectingValue = false;
                         that._triggerListBound();
                     });
                 } else {
-                    that._listCreated = true;
+                    that.bound(true);
                     that._triggerListBound();
                 }
             } else {
@@ -380,12 +407,16 @@ var __meta__ = { // jshint ignore:line
                 that._triggerListBound();
             }
 
-            if (action === "itemchange") {
-                changedItems = findChangedItems(that._selectedDataItems, e.items);
-                if (changedItems.length) {
-                    that.trigger("selectedItemChange", {
-                        items: changedItems
-                    });
+            if (isItemChange || action === "remove") {
+                result = mapChangedItems(that._selectedDataItems, e.items);
+                if (result.changed.length) {
+                    if (isItemChange) {
+                        that.trigger("selectedItemChange", {
+                            items: result.changed
+                        });
+                    } else {
+                        that.value(that._getValues(result.unchanged));
+                    }
                 }
             }
 
@@ -433,7 +464,7 @@ var __meta__ = { // jshint ignore:line
 
             that._values = value;
 
-            if ((that.isBound() && !that._mute && !that._deferValueSet) || _forcePrefetch) {
+            if ((that.bound() && !that._mute && !that._deferValueSet) || _forcePrefetch) {
                 that._prefetchByValue(value);
             }
 
@@ -807,8 +838,12 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        isBound: function() {
-            return this._listCreated;
+        bound: function(bound) {
+            if (bound === undefined) {
+                return this._listCreated;
+            }
+
+            this._listCreated = bound;
         },
 
         mute: function(callback) {
@@ -840,7 +875,7 @@ var __meta__ = { // jshint ignore:line
         _clean: function() {
             this.result = undefined;
             this._lastScrollTop = undefined;
-            this._lastPage = undefined;
+            this._skip = undefined;
             $(this.heightContainer).remove();
             this.heightContainer = undefined;
             this.element.empty();
@@ -945,7 +980,7 @@ var __meta__ = { // jshint ignore:line
                 options = that.options,
                 dataSource = that.dataSource;
 
-            if (that._listCreated) {
+            if (that.bound()) {
                 that._clean();
             }
 
@@ -1018,9 +1053,9 @@ var __meta__ = { // jshint ignore:line
                 flatGroups = {};
 
             if (dataSource.pageSize() < pageSize) {
-                this._mute = true;
-                dataSource.pageSize(pageSize);
-                this._mute = false;
+                this.mute(function() {
+                    dataSource.pageSize(pageSize);
+                });
             }
 
             return function(index, rangeStart) {
@@ -1029,7 +1064,6 @@ var __meta__ = { // jshint ignore:line
                     if (lastRequestedRange !== rangeStart) {
                         lastRequestedRange = rangeStart;
                         lastRangeStart = rangeStart;
-                        that._fetching = true;
 
                         if (that._getterDeferred) {
                             that._getterDeferred.reject();
@@ -1051,14 +1085,10 @@ var __meta__ = { // jshint ignore:line
                     return null;
                 } else {
                     if (lastRangeStart !== rangeStart) {
-                        that._mute = true;
-                        that._fetching = true;
-
-                        dataSource.range(rangeStart, pageSize);
-                        lastRangeStart = rangeStart;
-
-                        that._fetching = false;
-                        that._mute = false;
+                        this.mute(function() {
+                            dataSource.range(rangeStart, pageSize);
+                            lastRangeStart = rangeStart;
+                        });
                     }
 
                     var result;
@@ -1229,7 +1259,7 @@ var __meta__ = { // jshint ignore:line
                     range2 = diff > 0 ? list2.slice(-diff) : list2.slice(0, -diff);
                 }
 
-                reorder(range, range2, that._listCreated);
+                reorder(range, range2, that.bound());
 
                 currentOffset = offset;
             };

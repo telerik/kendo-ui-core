@@ -1149,6 +1149,26 @@
         ok($("#btn3").hasClass("baz"));
     });
 
+    test("splitButton is initially hidden if hidden option is set to true", 3, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "splitButton", id: "foo", text: "foo", hidden: true, menuButtons: [
+                        { id: "btn1", text: "Btn1", attributes: { "class": "foo" } },
+                        { id: "btn2", text: "Btn2", attributes: { "class": "bar" } },
+                        { id: "btn3", text: "Btn3", attributes: { "class": "baz" } }
+                    ]
+                }
+            ]
+        }).data("kendoToolBar");
+
+        var button = toolbar.element.find(".k-split-button");
+        ok(button.hasClass("k-state-hidden"));
+        ok(button.is(":hidden"));
+
+        var overflowButton = toolbar.popup.element.find("#foo_overflow");
+        ok(overflowButton.hasClass("k-state-hidden"));
+    });
+
     /* SEPARATOR */
 
     test("renders separator from JSON", 1, function() {

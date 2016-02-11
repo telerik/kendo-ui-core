@@ -190,6 +190,29 @@
         asyncDataSource.read();
     });
 
+    asyncTest("fires the listBound event after new dataItems are rendered", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings));
+        asyncDataSource.read().then(function() {
+            virtualList.one("listBound", function() {
+               start(); 
+               ok(true, "ListBound is fired");
+            });
+            scroll(virtualList.content, 16 * ITEM_HEIGHT);
+        });
+    });
+
+    asyncTest("skip returns the start of the dataSource range", 2, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings));
+        asyncDataSource.read().then(function() {
+            virtualList.one("listBound", function() {
+               start(); 
+               ok(this.skip() !== this.dataSource.page(), "Skip is different from page");
+               equal(this.skip(), 11);
+            });
+            scroll(virtualList.content, 16 * ITEM_HEIGHT);
+        });
+    });
+
     asyncTest("listBound event is fired after all values are prefetched", 2, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,
@@ -802,17 +825,27 @@
         });
     });
 
-    test("isBound returns false if the list is not bound yet", 1, function() {
+    test("bound returns false if the list is not bound yet", 1, function() {
         var virtualList = new VirtualList(container, virtualSettings);
         asyncDataSource.read();
-        ok(!virtualList.isBound());
+        ok(!virtualList.bound());
     });
 
-    asyncTest("isBound returns true if the list is bound", 1, function() {
+    asyncTest("bound returns true if the list is bound", 1, function() {
         var virtualList = new VirtualList(container, virtualSettings);
         asyncDataSource.read().then(function() {
             start();
-            ok(virtualList.isBound());
+            ok(virtualList.bound());
+        });
+    });
+
+    asyncTest("bound sets the bound stat of the widget", 1, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+        asyncDataSource.read().then(function() {
+            start();
+            virtualList.bound(false);
+
+            ok(!virtualList.bound());
         });
     });
 
@@ -1429,7 +1462,7 @@
                 }
             });
 
-            ok(!virtualList.isBound());
+            ok(!virtualList.bound());
             ok(!virtualList.element.html());
             start();
         });

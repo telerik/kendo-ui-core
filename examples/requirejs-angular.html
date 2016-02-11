@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link rel="stylesheet" href="../dist/styles/web/kendo.common-material.core.min.css">
+        <link rel="stylesheet" href="../dist/styles/web/kendo.material.min.css">
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
+    </head>
+    <body>
+        <div ng-controller="controller">
+          <select kendo-drop-down-list k-options="options"></select>
+        </div>
+
+        <script>
+        require.config({
+          paths: {
+            "angular": "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min",
+            "jquery": "http://code.jquery.com/jquery-1.9.1.min",
+            "kendo.ui.core.min": "../dist/js/kendo.ui.core.min"
+          },
+          shim: {
+            "angular": { deps: ["jquery"] },
+            "kendo.ui.core.min": { deps: ["angular"] }
+          }
+        });
+
+        require([ "angular", "kendo.ui.core.min" ], function() {
+            var app = angular.module("app", ["kendo.directives"]);
+
+            app.controller("controller", ["$scope", function($scope) {
+              $scope.options = {
+                dataSource: {
+                  data: [{name:"Jane Doe", value: 1}, {name:"John Doe", value: 2}]
+                },
+                dataTextField: "name",
+                dataValueField: "value"
+              };
+            }]);
+
+            angular.bootstrap(document, ["app"]);
+        });
+        </script>
+    </body>
+</html>

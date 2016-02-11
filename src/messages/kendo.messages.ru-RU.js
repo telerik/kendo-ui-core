@@ -309,8 +309,8 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "statusUploaded": "загружено",
   "statusUploading": "загружается",
   "uploadSelectedFiles": "Загрузить выбранные файлы",
-  "headerStatusUploaded": "Done",
-  "headerStatusUploading": "Uploading..."
+  "headerStatusUploaded": "Готово",
+  "headerStatusUploading": "Загружается..."
 });
 }
 

@@ -18,6 +18,8 @@
 @ios7-overlay-background: rgba(0,0,0,.4);
 @ios7-tabstrip-color: #929292;
 
+@warning: #ff3b30;
+
 .km-ios7 .km-navbar,
 .km-ios7 .k-toolbar,
 .km-ios7 .km-tabstrip
@@ -310,9 +312,7 @@
     text-decoration: none;
 }
 
-.km-ios7 .km-list > li label,
-.km-ios7 .km-list fieldset textarea,
-.km-ios7 .km-list fieldset input,
+.km-ios7 .km-list .km-label-above,
 .km-ios7 .km-checkbox-label,
 .km-ios7 .km-radio-label {
     color: darken(@ios7-second-color, 17%);
@@ -407,4 +407,12 @@
 
 .km-ios7 .km-radio-label:after {
     background-color: @ios7-active-background;
+}
+
+/* Validation */
+.km-ios7 .km-list > li label.km-invalid,
+.km-ios7 .km-list fieldset .km-legend-button.km-invalid,
+.km-ios7 .km-list > li label.km-invalid.km-required:after,
+.km-ios7 .km-invalid-msg {
+    color: @warning;
 }

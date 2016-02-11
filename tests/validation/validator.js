@@ -988,6 +988,24 @@
         equal(validator.errors()[0], "Field is required");
     });
 
+    test("message for custom rule is applied with custom rule data attribute value", function() {
+        var input = $('<input name="Foo" type="number" data-kendo-custom="42" value="1" />'),
+        validator = setup(input, {
+            rules: {
+                custom: function() {
+                    return false;
+                },
+            },
+            messages: {
+                custom: "{0}, {1}"
+            }
+        });
+
+        validator.validate();
+
+        equal(validator.errors()[0], "Foo, 42");
+    });
+
     test("message for min is applied with min attribute value", function() {
         var input = $('<input name="Foo" type="number" min="2" value="1" />'),
         validator = setup(input);

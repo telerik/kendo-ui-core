@@ -254,6 +254,30 @@
         return n;
     }
 
+    function hue2rgb(p, q, t) {
+        if (t < 0) {
+            t += 1;
+        }
+
+        if (t > 1) {
+            t -= 1;
+        }
+
+        if (t < 1/6) {
+            return p + (q - p) * 6 * t;
+        }
+
+        if (t < 1/2) {
+            return q;
+        }
+
+        if (t < 2/3) {
+            return p + (q - p) * (2/3 - t) * 6;
+        }
+
+        return p;
+    }
+
     var _Color = kendo.Class.extend({
         toHSV: function() { return this; },
         toRGB: function() { return this; },
@@ -323,6 +347,30 @@
             }
             return new _HSV(h, s, v, this.a);
         },
+        toHSL: function() {
+            var r = this.r, g = this.g, b = this.b;
+            var max = Math.max(r, g, b), min = Math.min(r, g, b);
+            var h, s, l = (max + min) / 2;
+
+            if(max == min) {
+                h = s = 0;
+            }
+            else {
+                var d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch(max) {
+                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                    case g: h = (b - r) / d + 2; break;
+                    case b: h = (r - g) / d + 4; break;
+                }
+
+                h *= 60;
+                s *= 100;
+                l *= 100;
+            }
+
+            return new _HSL(h, s, l, this.a);
+        },
         toBytes: function() {
             return new _Bytes(this.r * 255, this.g * 255, this.b * 255, this.a);
         }
@@ -337,6 +385,9 @@
         },
         toHSV: function() {
             return this.toRGB().toHSV();
+        },
+        toHSL: function() {
+            return this.toRGB().toHSL();
         },
         toHex: function() {
             return hex(this.r, 2) + hex(this.g, 2) + hex(this.b, 2);
@@ -373,6 +424,42 @@
             }
             return new _RGB(r, g, b, this.a);
         },
+        toHSL: function() {
+            return this.toRGB().toHSL();
+        },
+        toBytes: function() {
+            return this.toRGB().toBytes();
+        }
+    });
+
+    var _HSL = _Color.extend({
+        init: function(h, s, l, a) {
+            this.h = h; this.s = s; this.l = l; this.a = a;
+        },
+        toRGB: function() {
+            var h = this.h, s = this.s, l = this.l;
+            var r, g, b;
+
+            if (s === 0) {
+                r = g = b = l; // achromatic
+            }
+            else {
+                h /= 360;
+                s /= 100;
+                l /= 100;
+
+                var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                var p = 2 * l - q;
+                r = hue2rgb(p, q, h + 1/3);
+                g = hue2rgb(p, q, h);
+                b = hue2rgb(p, q, h - 1/3);
+            }
+
+            return new _RGB(r, g, b, this.a);
+        },
+        toHSV: function() {
+            return this.toRGB().toHSV();
+        },
         toBytes: function() {
             return this.toRGB().toBytes();
         }
@@ -388,6 +475,10 @@
 
     Color.fromHSV = function(h, s, v, a) {
         return new _HSV(h, s, v, a != null ? a : 1);
+    };
+
+    Color.fromHSL = function(h, s, l, a) {
+        return new _HSL(h, s, l, a != null ? a : 1);
     };
 
     // Exports ================================================================

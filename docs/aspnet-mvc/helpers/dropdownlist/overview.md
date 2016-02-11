@@ -111,7 +111,7 @@ Here is how to configure the Kendo DropDownList for ajax binding to the Northwin
                 .SelectedIndex(0) //Select first item.
             )
 
-> **Important**  
+> **Important**
 > The `ToDataSourceResult()` extension method will modify the structure of the result and the widget will not be able to bind to it. Please return simple array of data in this case.
 
 ### Configure the DropDownList to Work with the `ToDataSourceResult` Instance
@@ -257,7 +257,7 @@ Here is how the **GetProducts** method looks like:
             return Json(products, JsonRequestBehavior.AllowGet);
         }
 
-> **Important**  
+> **Important**
 > The DropDownList has default event handler for the DataSource's Data callback. If you do not define an event handler, the default one will be used.
 
 *Default event handler for the DataSource's Data callback*
@@ -267,7 +267,7 @@ Here is how the **GetProducts** method looks like:
             filters = dropdownlist.dataSource.filter(),
             value = dropdownlist.filterInput.val();
 
-        if (!filters) {
+        if (!filter || !filter.filters.length) {
             value = "";
         }
 
@@ -275,6 +275,16 @@ Here is how the **GetProducts** method looks like:
     }
 
 As you can see the dropdownlist sends the input's value only if the end-user starts to type in it.
+
+### Grouping
+
+The widget supports binding to a grouped data source. The only requirement is to define a datasource group expression in order to group the data.
+This can be done using a [Custom DataSource configuration](/aspnet-mvc/custom-datasource). Refer to our online demo for more details:
+
+- [Grouping demo](http://demos.telerik.com/aspnet-mvc/dropdownlist/grouping)
+
+> The data source will sort the grouped data either ascending or descending. If you would like to persist a specific group order, then you will need to use
+a [server grouping](/api/javascript/data/datasource#configuration-serverGrouping). Use the DataSource ServerGrouping method to define the `serverGrouping` option.
 
 ## Access an Existing DropDownList
 

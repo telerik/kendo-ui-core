@@ -534,7 +534,8 @@ var __meta__ = { // jshint ignore:line
         },
 
         destroy: function() {
-            var that = this;
+            var that = this,
+            scrollWrap = that.scrollWrap;
 
             Widget.fn.destroy.call(that);
 
@@ -550,9 +551,8 @@ var __meta__ = { // jshint ignore:line
                 that._scrollNextButton.off().remove();
             }
 
-            that.scrollWrap.children(".k-tabstrip").unwrap();
-
             kendo.destroy(that.wrapper);
+            scrollWrap.children(".k-tabstrip").unwrap();
         },
 
         select: function (element) {

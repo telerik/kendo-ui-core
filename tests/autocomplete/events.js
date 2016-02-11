@@ -158,6 +158,22 @@ test("clicking an item raises the change event of the dom element", 1, function(
     autocomplete.ul.children().first().trigger(CLICK);
 });
 
+test("clicking an item raises the change event of the dom element even when same item is selected", 1, function() {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: ["foo"],
+        value: "foo"
+    });
+
+    input.focus().val("f");
+    autocomplete.search();
+
+    input.change(function() {
+        ok(true);
+    });
+
+    autocomplete.ul.children().first().trigger(CLICK);
+});
+
 test("does not force element's DOM change event when the user manually edits the value and presses 'Enter'", 0, function() {
     input.kendoAutoComplete({
         dataSource: ["foo"]
@@ -170,6 +186,7 @@ test("does not force element's DOM change event when the user manually edits the
     input.focus()
         .trigger($.Event("keydown", {keyCode: 70}))
         .val("f")
+        .trigger($.Event("keypress", {keyCode: 70}))
         .trigger($.Event("keydown", {keyCode: 13}));
 });
 

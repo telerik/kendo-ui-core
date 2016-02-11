@@ -72,6 +72,22 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "cancel": "Откажи",
   "remove": "Премахни",
   "okText": "OK",
+  "exportAsDialog": {
+    "title": "Експортирай...",
+    "labels": {
+      "fileName": "Име на файл",
+      "saveAsType": "Запази като",
+      "exportArea": "Експортирай",
+      "paperSize": "Размер на лист",
+      "margins": "Отстояние",
+      "orientation": "Ориентация",
+      "print": "Отпечатай",
+      "guidelines": "Guidelines",
+      "center": "Центрирай",
+      "horizontally": "Хоризонтално",
+      "vertically": "Вертикално"
+    }
+  },
   "formatCellsDialog": {
     "title": "Форматиране",
     "categories": {
@@ -178,9 +194,6 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
       "saveAsType": "Запиши като"
     }
   },
-  "excelExportDialog": {
-    "title": "Експортиране към Excel..."
-  },
   "modifyMergedDialog": {
     "errorMessage": "Не може да се промени част от обединена клетка."
   },
@@ -262,7 +275,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   "cut": "Изрежи",
   "deleteColumn": "Изтрий колона",
   "deleteRow": "Изтрии ред",
-  "excelExport": "Експортиране към Excel...",
+  "excelImport": "Импортиране от Excel...",
   "filter": "Филтриране",
   "fontFamily": "Шрифт",
   "fontSize": "Размер на шрифт",
@@ -296,11 +309,13 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
     "mergeVertically": "Обединяване по колони",
     "unmerge": "Разделяне на клетки"
   },
+  "open": "Отвори...",
   "paste": "Поставяне",
   "quickAccess": {
     "redo": "Стъпка напред",
     "undo": "Стъпка назад"
   },
+  "saveAs": "Запиши като...",
   "sortAsc": "Сортирай възходящо",
   "sortDesc": "Сортирай низходящо",
   "sortButtons": {

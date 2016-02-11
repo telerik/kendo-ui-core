@@ -26,7 +26,7 @@ kendo.ui.ColumnMenu.prototype.options.messages =
 $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "sortAscending": "Nouseva järjestys",
   "sortDescending": "Laskeva järjestys",
-  "filter": "Suodatus",
+  "filter": "Suodata",
   "columns": "Sarakkeet",
   "done": "Valmis",
   "settings": "Sarakeasetukset",
@@ -128,7 +128,7 @@ kendo.ui.FilterCell.prototype.options.messages =
 $.extend(true, kendo.ui.FilterCell.prototype.options.messages,{
   "isTrue": "on",
   "isFalse": "ei ole",
-  "filter": "Suodatus",
+  "filter": "Suodata",
   "clear": "Tyhjennä",
   "operator": "Operaattori"
 });
@@ -178,7 +178,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "info": "Näytä tulokset, joiden arvo:",
   "isTrue": "on",
   "isFalse": "ei ole",
-  "filter": "Suodatus",
+  "filter": "Suodata",
   "clear": "Tyhjennä",
   "and": "Ja",
   "or": "Tai",
@@ -359,7 +359,7 @@ kendo.ui.PivotFieldMenu.prototype.options.messages =
 $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages,{
   "info": "Näytä tulokset, joiden arvo:",
   "filterFields": "Kenttien suodatus",
-  "filter": "Suodatus",
+  "filter": "Suodata",
   "include": "Sisällytä kentät...",
   "title": "Sisällytettävät kentät",
   "clear": "Tyhjennä",
@@ -627,9 +627,6 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
       "saveAsType": "Tiedoston tyyppi"
     }
   },
-  "excelExportDialog": {
-    "title": "Vie Exceliin..."
-  },
   "modifyMergedDialog": {
     "errorMessage": "Yhdistetyn solun osaa ei voi muuttaa."
   },
@@ -712,7 +709,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   "deleteColumn": "Poista sarake",
   "deleteRow": "Poista rivi",
   "excelExport": "Vie Exceliin...",
-  "filter": "Suodatus",
+  "filter": "Suodata",
   "fontFamily": "Fontti",
   "fontSize": "Fonttikoko",
   "format": "Mukautettu muotoilu...",
@@ -745,11 +742,13 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
     "mergeVertically": "Yhdistä pystysolut",
     "unmerge": "Poista solujen yhdistäminen"
   },
+  "open": "Avaa...",
   "paste": "Liitä",
   "quickAccess": {
     "redo": "Tee uudelleen",
     "undo": "Kumoa"
   },
+  "saveAs": "Tallenna nimellä...",
   "sortAsc": "Nouseva järjestys",
   "sortDesc": "Laskeva järjestys",
   "sortButtons": {

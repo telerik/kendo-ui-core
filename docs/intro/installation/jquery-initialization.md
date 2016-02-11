@@ -1,13 +1,13 @@
 ---
-title: Initialize Widgets Using jQuery Plug-Ins
-page_title: Initialize Widgets Using jQuery Plug-Ins | Kendo UI Installation
+title: jQuery Plug-Ins Widget Initialization
+page_title: jQuery Plug-Ins Widget Initialization | Kendo UI Getting Started
 previous_url: /widgets, /howto/add-widgets, /basics/jquery-initialization, /intro/jquery-initialization
-description: "Use jQuery plug-in sytax to add Kendo UI widgets and frameworks to your mobile website or web application."
+description: "Use jQuery plug-in syntax to add Kendo UI widgets and frameworks to your mobile website or web application."
 slug: initialize_widgets_using_jquery_plugins_installation
 position: 6
 ---
 
-# Initialize Widgets Using jQuery Plug-Ins
+# jQuery Plug-Ins Widget Initialization
 
 All Kendo UI widgets are registered as [jQuery plug-ins](http://learn.jquery.com/plugins/), which allows them to be instantiated on a jQuery object instance.
 The jQuery plug-in method is formed by the widget name in Pascal case, prefixed with `kendo` as in `kendoGrid` and `kendoListView`.
@@ -18,6 +18,7 @@ Some Kendo UI widgets have specific requirements about the element types they sh
 While it is theoretically possible to initialize several different Kendo UI widgets from the same DOM element, this is not recommended and may lead to undesired side effects.
 
 > **Important**  
+>
 > It is strongly recommended to initialize Kendo UI widgets from HTML elements, which are part of the DOM tree.
 Creating widgets from [document fragments](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) may cause undesired side effects or Javascript errors.
 
@@ -40,6 +41,7 @@ The example below demonstrates how to instantiate Kendo UI AutoComplete.
 ```
 
 > **Important**  
+>
 > If the jQuery object includes more than one DOM element, a separate widget will be instantiated for each.
 
 ### Instantiate Multiple Buttons
@@ -58,9 +60,10 @@ The example below demonstrates how to instantiate multiple buttons with a single
 ```
 
 > **Important**  
+>
 > The jQuery convention of returning the selected DOM element from most methods applies to the widget initialization methods. This allows jQuery methods to be chained.
 
-### Chain jQuery Method Calls 
+### Chain jQuery Method Calls
 
 The example below demonstrates the chain jQuery method calls after the widget instantiation plug-in method.
 
@@ -76,7 +79,7 @@ The example below demonstrates the chain jQuery method calls after the widget in
     </script>
 ```
 
-### Initialization within `iframes`
+### Initialize within Iframes
 
 It is theoretically possible to initialize a Kendo UI widget, which is inside an `iframe`, from the context of the parent page. This may work in specific scenarios, but is not officially supported. For example, widgets that render popups may not be able to display them.
 
@@ -128,7 +131,7 @@ When using a Kendo UI server-side wrapper (as the server-side wrappers are autom
 
 A common mistake is to recreate a widget instance when the goal is only to get the instance object. Duplicate initialization is not supported and results in unexpected side effects.
 
-### Incorrect Duplicate Initialization
+### Duplicate Initialization Incorrectly
 
 ###### Example
 
@@ -150,7 +153,7 @@ A common mistake is to recreate a widget instance when the goal is only to get t
 ### Check for Existing Instances
 
 In order to check whether a widget instance already exists for a certain DOM element, use the
-[standard way to obtain the widget instance](/intro/installation/events-and-methods#obtain-a-reference-to-a-kendo-ui-widget-instance-using-jquery). If the returned value is `undefined`, then the widget instance does not exist.
+[standard way to obtain the widget instance]({% slug widget_methodsand_events_kendoui_installation %}#jquery-data-method). If the returned value is `undefined`, then the widget instance does not exist.
 
 ###### Example
 
@@ -159,7 +162,7 @@ In order to check whether a widget instance already exists for a certain DOM ele
     <script>
         // try to obtain the widget instance
         var autocomplete = $("#autocomplete").data("kendoAutoComplete");
-        
+
         // check the returned value
         if (typeof autocomplete === "undefined") {
             // widget instance does not exist
@@ -175,10 +178,14 @@ In order to check whether a widget instance already exists for a certain DOM ele
 
 Other articles on getting started with Kendo UI:
 
-* [Getting Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
 * [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
 * [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
+* [Access Widget DOM Elements: wrapper and element]({% slug widgetwrapperandelement_references_gettingstarted %})
+* [Set Data Attributes]({% slug dataattributes_configuration_installation %})
 * [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})
+* [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
+* [Create Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})

@@ -1611,13 +1611,13 @@ The data field containing the point color.
 
 ### navigator.series.downColor `String`
 
-The series color when open value is smoller then close value.
+The series color when the open value is greater than the close value.
 
 ** Available for candlestick series only **
 
 ### navigator.series.downColorField `String`
 
-The data field containing the body color.
+The data field containing the color applied when the open value is greater than the close value.
 
 ** Available for candlestick series only **
 
@@ -5821,13 +5821,13 @@ The data field containing the point color.
 
 ### series.downColor `String|Function`
 
-The series color when open value is smoller then close value.
+The series color when the open value is greater than the close value.
 
 ** Available for candlestick series only **
 
 ### series.downColorField `String`
 
-The data field containing the body color.
+The data field containing the color applied when the open value is greater than the close value.
 
 ** Available for candlestick series only **
 

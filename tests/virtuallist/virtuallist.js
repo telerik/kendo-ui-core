@@ -22,6 +22,34 @@
         return items;
     }
 
+    var Async = kendo.Class.extend({
+        init: function() {
+            this.promises = [];
+        },
+
+        exec: function(callback) {
+            var promise = $.Deferred();
+
+            promise.done(callback);
+
+            this.promises.push(promise);
+        },
+
+        resolve: function(idx) {
+            var promise = this.promises[idx];
+
+            if (!promise) {
+                throw new Error("There is no promise to resolve!");
+            }
+
+            promise.resolve();
+        },
+
+        allDone: function(callback) {
+            $.when.apply(null, this.promises).done(callback);
+        }
+    });
+
     module("VirtualList: ", {
         setup: function() {
             container = $("<div id='container'></div>").appendTo(QUnit.fixture);
@@ -546,14 +574,14 @@
     });
 
     asyncTest("renders only datasource range relevant to the scrollTop 2000px (first request comes later)", 1, function() {
-        var requestTimeout = 0;
+        var async = new Async();
 
         asyncDataSource = createAsyncDataSource({
             transport: {
                 read: function(options) {
-                    setTimeout(function() {
+                    async.exec(function() {
                         options.success({ data: generateData(options.data), total: 1000 });
-                    }, requestTimeout);
+                    });
                 }
             }
         });
@@ -566,35 +594,36 @@
         }));
 
         asyncDataSource.read().then(function() {
-            requestTimeout = 50;
             scroll(virtualList.content, 5 * CONTAINER_HEIGHT); //scroll the list 5 screens down
-
-            requestTimeout = 10;
             scroll(virtualList.content, 10 * CONTAINER_HEIGHT); //scroll the list 10 screens down
 
-            setTimeout(function() {
+            async.resolve(3);
+            async.resolve(1);
+            async.resolve(2);
+
+            async.allDone(function() {
                 start();
 
-                var li = virtualList.element
-                                    .children()
-                                    .filter(function() {
-                                        return $(this).position().top >= 0;
-                                    }).first();
+                var li = virtualList.element.children()
+                                    .filter(function() { return $(this).offset().top >= 0; })
+                                    .first();
 
                 equal(li.text().trim(), "Item 100");
-            }, 100);
+            });
         });
+
+        async.resolve(0); //initial request
     });
 
     asyncTest("renders only datasource range relevant to the scrollTop 2000px (second request comes later)", 1, function() {
-        var requestTimeout = 0;
+        var async = new Async();
 
         asyncDataSource = createAsyncDataSource({
             transport: {
                 read: function(options) {
-                    setTimeout(function() {
+                    async.exec(function() {
                         options.success({ data: generateData(options.data), total: 1000 });
-                    }, requestTimeout);
+                    });
                 }
             }
         });
@@ -607,35 +636,36 @@
         }));
 
         asyncDataSource.read().then(function() {
-            requestTimeout = 10;
             scroll(virtualList.content, 5 * CONTAINER_HEIGHT); //scroll the list 5 screens down
-
-            requestTimeout = 50;
             scroll(virtualList.content, 10 * CONTAINER_HEIGHT); //scroll the list 10 screens down
 
-            setTimeout(function() {
+            async.resolve(1);
+            async.resolve(2);
+            async.resolve(3);
+
+            async.allDone(function() {
                 start();
 
-                var li = virtualList.element
-                                    .children()
-                                    .filter(function() {
-                                        return $(this).position().top >= 0;
-                                    }).first();
+                var li = virtualList.element.children()
+                                    .filter(function() { return $(this).offset().top >= 0; })
+                                    .first();
 
                 equal(li.text().trim(), "Item 100");
-            }, 100);
+            });
         });
+
+        async.resolve(0); //initial request
     });
 
     asyncTest("renders only datasource range relevant to the scrollTop 1000px (second request comes later)", 1, function() {
-        var requestTimeout = 0;
+        var async = new Async();
 
         asyncDataSource = createAsyncDataSource({
             transport: {
                 read: function(options) {
-                    setTimeout(function() {
+                    async.exec(function() {
                         options.success({ data: generateData(options.data), total: 1000 });
-                    }, requestTimeout);
+                    });
                 }
             }
         });
@@ -648,35 +678,35 @@
         }));
 
         asyncDataSource.read().then(function() {
-            requestTimeout = 10;
             scroll(virtualList.content, 10 * CONTAINER_HEIGHT); //scroll the list 10 screens down
-
-            requestTimeout = 50;
             scroll(virtualList.content, 5 * CONTAINER_HEIGHT); //scroll the list 5 screens down
 
-            setTimeout(function() {
+            async.resolve(3);
+            async.resolve(2);
+            async.resolve(1);
+
+            async.allDone(function() {
                 start();
 
-                var li = virtualList.element
-                                    .children()
-                                    .filter(function() {
-                                        return $(this).position().top >= 0;
-                                    }).first();
+                var li = virtualList.element.children()
+                                    .filter(function() { return $(this).offset().top >= 0; })
+                                    .first();
 
                 equal(li.text().trim(), "Item 50");
-            }, 100);
+            });
         });
+        async.resolve(0); //initial request
     });
 
     asyncTest("renders only datasource range relevant to the scrollTop 1000px (first request comes later)", 1, function() {
-        var requestTimeout = 0;
+        var async = new Async();
 
         asyncDataSource = createAsyncDataSource({
             transport: {
                 read: function(options) {
-                    setTimeout(function() {
+                    async.exec(function() {
                         options.success({ data: generateData(options.data), total: 1000 });
-                    }, requestTimeout);
+                    });
                 }
             }
         });
@@ -689,35 +719,36 @@
         }));
 
         asyncDataSource.read().then(function() {
-            requestTimeout = 50;
             scroll(virtualList.content, 10 * CONTAINER_HEIGHT); //scroll the list 10 screens down
-
-            requestTimeout = 10;
             scroll(virtualList.content, 5 * CONTAINER_HEIGHT); //scroll the list 5 screens down
 
-            setTimeout(function() {
+            async.resolve(1);
+            async.resolve(2);
+            async.resolve(3);
+
+            async.allDone(function() {
                 start();
 
-                var li = virtualList.element
-                                    .children()
-                                    .filter(function() {
-                                        return $(this).position().top >= 0;
-                                    }).first();
+                var li = virtualList.element.children()
+                                    .filter(function() { return $(this).offset().top >= 0; })
+                                    .first();
 
                 equal(li.text().trim(), "Item 50");
-            }, 100);
+            });
         });
+
+        async.resolve(0); //initial request
     });
 
     asyncTest("renders only datasource range relevant to the scrollTop 700px (four mixed request, last comes last)", 1, function() {
-        var requestTimeout = 0;
+        var async = new Async();
 
         asyncDataSource = createAsyncDataSource({
             transport: {
                 read: function(options) {
-                    setTimeout(function() {
+                    async.exec(function() {
                         options.success({ data: generateData(options.data), total: 1000 });
-                    }, requestTimeout);
+                    });
                 }
             }
         });
@@ -730,41 +761,38 @@
         }));
 
         asyncDataSource.read().then(function() {
-            requestTimeout = 0;
             scroll(virtualList.content, 500);
-
-            requestTimeout = 20;
             scroll(virtualList.content, 1000);
-
-            requestTimeout = 10;
             scroll(virtualList.content, 2000);
-
-            requestTimeout = 50;
             scroll(virtualList.content, 700);
 
-            setTimeout(function() {
+            async.resolve(1);
+            async.resolve(3);
+            async.resolve(2);
+
+            async.allDone(function() {
                 start();
 
-                var li = virtualList.element
-                                    .children()
-                                    .filter(function() {
-                                        return $(this).position().top >= 0;
-                                    }).first();
+                var li = virtualList.element.children()
+                                    .filter(function() { return $(this).offset().top >= 0; })
+                                    .first();
 
                 equal(li.text().trim(), "Item 35");
-            }, 100);
+            });
         });
+
+        async.resolve(0); //initial request
     });
 
     asyncTest("renders only datasource range relevant to the scrollTop 700px (four mixed request, last comes first)", 1, function() {
-        var requestTimeout = 0;
+        var async = new Async();
 
         asyncDataSource = createAsyncDataSource({
             transport: {
                 read: function(options) {
-                    setTimeout(function() {
+                    async.exec(function() {
                         options.success({ data: generateData(options.data), total: 1000 });
-                    }, requestTimeout);
+                    });
                 }
             }
         });
@@ -777,30 +805,27 @@
         }));
 
         asyncDataSource.read().then(function() {
-            requestTimeout = 10;
             scroll(virtualList.content, 500);
-
-            requestTimeout = 10;
             scroll(virtualList.content, 1000);
-
-            requestTimeout = 20;
             scroll(virtualList.content, 2000);
-
-            requestTimeout = 0;
             scroll(virtualList.content, 700);
 
-            setTimeout(function() {
+            async.resolve(1);
+            async.resolve(3);
+            async.resolve(2);
+
+            async.allDone(function() {
                 start();
 
-                var li = virtualList.element
-                                    .children()
-                                    .filter(function() {
-                                        return $(this).position().top >= 0;
-                                    }).first();
+                var li = virtualList.element.children()
+                                    .filter(function() { return $(this).offset().top >= 0; })
+                                    .first();
 
                 equal(li.text().trim(), "Item 35");
             }, 100);
         });
+
+        async.resolve(0); //initial request
     });
 
     function deferredScroll(list, scrollTop, timeout) {

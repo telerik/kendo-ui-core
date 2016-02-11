@@ -1,27 +1,28 @@
 ---
 title: Overview
-page_title: Kendo UI MVVM pattern, integrated with Kendo UI jQuery-powered framework
-description: Kendo UI Model View ViewModel is an implementation of the MVVM pattern, integrated with Kendo UI framework.
+page_title: Overview | Kendo UI MVVM
+description: "Learn more about the Kendo UI Model View ViewModel, which is an implementation of the MVVM pattern, integrated with the Kendo UI framework."
+slug: overview_mvvmpattern_kendoui
 position: 1
 ---
 
 # Kendo MVVM Overview
 
-Model View ViewModel ([MVVM](http://en.wikipedia.org/wiki/Model_View_ViewModel)) is a design pattern which helps developers separate the Model (the data) from the View (the UI).
-The View-Model part of MVVM is responsible for exposing the data objects from the Model in such a way that those objects are easily consumed in the View.
+[Model View ViewModel (MVVM)](http://en.wikipedia.org/wiki/Model_View_ViewModel) is a design pattern which helps developers separate the Model, which is the data, from the View, which is the user interface (UI). The View-Model part of the MVVM is responsible for exposing the data objects from the Model in such a way that those objects are easily consumed in the View.
 
-Kendo MVVM is an implementation of the MVVM pattern which seamlessly integrates with the rest of the Kendo framework (widgets and DataSource).
+The [Kendo UI MVVM component](http://demos.telerik.com/kendo-ui/mvvm/index) is an implementation of the MVVM pattern which seamlessly integrates with the rest of the Kendo UI framework&mdash;Kendo UI widgets and Kendo UI DataSource.
 
-> Kendo UI MVVM initialization is not designed to be combined with the Kendo UI server wrappers.
-Using wrappers is equivalent to [jQuery plugin syntax initialization](/intro/installation/jquery-initialization).
-If you want to create Kendo UI widget instances via the MVVM pattern, then do not use server wrappers for these instances.
+> **Important**
+>
+> Kendo UI MVVM initialization is not designed to be combined with the Kendo UI server wrappers. Using wrappers is equivalent to [jQuery plugin syntax initialization]({% slug initialize_widgets_using_jquery_plugins_installation %}). If you want to create Kendo UI widget instances via the MVVM pattern, then do not use server wrappers for these instances.
 
 ## Getting Started
 
-First let's start by creating a View-Model object. The View-Model is a representation of your data (the Model) which will be displayed in the View.
-To declare your View-Model use the `kendo.observable` function and pass it a JavaScript object:
+### Create the View-Model
 
-### View-Model declaration:
+First, start by creating a View-Model object. The View-Model is a representation of your data (the Model) which will be displayed in the View. To declare your View-Model use the `kendo.observable` function and pass it a JavaScript object, as demonstrated in the example below.
+
+###### Example
 
     var viewModel = kendo.observable({
         name: "John Doe",
@@ -31,38 +32,44 @@ To declare your View-Model use the `kendo.observable` function and pass it a Jav
         }
     });
 
+### Create the View
 
-Now, let's create a View. The View is the UI (a set of HTML elements) which will be bound to the View-Model.
+Now declare a View, as shown in the example below. The View is the UI, i.e. a set of HTML elements, which will be bound to the View-Model.
 
-
-### View declaration:
+###### Example
 
     <div id="view">
         <input data-bind="value: name" />
         <button data-bind="click: displayGreeting">Display Greeting</button>
     </div>
 
-The `input` value (its text) is bound via the `data-bind` attribute to the `name` field of the View-Model. When that field changes the `input` value will be updated to reflect that change.
-The opposite is also true - when the value of the `input` changes the field will be updated.
+The `input` value (its text) is bound via the `data-bind` attribute to the `name` field of the View-Model. When that field changes, the `input` value is updated to reflect that change. The opposite is also true: when the value of the `input` changes, the field is updated. The `click` event of the `button` is bound via the `data-bind` attribute to the `displayGreeting` method of the View-Model. That method will be invoked when the user clicks the `button`.
 
-The click event of the `button` is bound via the `data-bind` attribute to the `displayGreeting` method of the View-Model. That method will be invoked when user clicks the `button`.
+### Bind the View to the View-Model
 
-Finally, let's bind the View to the View-Model. This is done by calling the `kendo.bind` method:
+Finally, bind the View to the View-Model. This is done by calling the `kendo.bind` method:
 
-
-### Binding the View to the View-Model:
+###### Example
 
     kendo.bind($("#view"), viewModel);
 
-> **Important:** Kendo UI Mobile is not included in the default list of initialized namespaces. You can initialize it explicitly by
-  running _kendo.bind(element, viewModel, kendo.mobile.ui);_
+> **Important**
+>
+> The hybrid widgets and frameworks in Kendo UI are not included in the default list of initialized namespaces. You can initialize them explicitly by running `kendo.bind(element, viewModel, kendo.mobile.ui);`.
 
 ## Bindings
 
-A binding pairs a DOM element (or widget) property to a field or method of the View-Model. Bindings are specified via the `data-bind` attribute in the form `<binding name>: <view model field or method>` e.g. `value: name`. Two bindings were used in the aforementioned example - `value` and `click`.
-Kendo MVVM supports binding to other properties as well: `source, html, attr, visible, enabled` etc. The `data-bind` may contain a comma-separated list of bindings e.g. `data-bind="value: name, visible: isNameVisible"`. Kendo MVVM also supports data binding to nested View-Model fields:
+A binding pairs a DOM element (or widget) property to a field or method of the View-Model. Bindings are specified via the `data-bind` attribute in the form `<binding name>: <view model field or method>`, e.g. `value: name`. Two bindings were used in the aforementioned example: `value` and `click`.
 
-### Binding to nested fields:
+The Kendo UI MVVM supports binding to other properties as well: `source`, `html`, `attr`, `visible`, `enabled`, etc. The `data-bind` may contain a comma-separated list of bindings e.g. `data-bind="value: name, visible: isNameVisible"`.
+
+For detailed information on each Kendo UI MVVM binding, refer to the [MVVM bindings articles]({% slug attributebinding_mvvm_kendoui %}).
+
+### Bind to Nested View-Model Fields
+
+The Kendo UI MVVM also supports data binding to nested View-Model fields, as demonstrated in the example below.
+
+###### Example
 
     <div data-bind="text: person.name">
     </div>
@@ -75,13 +82,13 @@ Kendo MVVM supports binding to other properties as well: `source, html, attr, vi
     kendo.bind($("div"), viewModel);
     </script>
 
-### Important: bindings are not JavaScript
+### Important Notes
 
-Although bindings look like JavaScript code they are not. The following is **NOT** a valid Kendo MVVM binding declaration:
-`<div data-bind="text: person.name.toLowerCase()"></div>`
+#### Bindings Are Not JavaScript Code
 
-If a value from the View-Model requires processing before displaying it in the View, a method should be created and used instead:
+Although bindings look like JavaScript code, they are not. The `<div data-bind="text: person.name.toLowerCase()"></div>` chunk of code is not a valid Kendo UI MVVM binding declaration. If a value from the View-Model requires processing before displaying it in the View, a method should be created and used instead, as demonstrated below.
 
+###### Example
 
     <div data-bind="text: person.lowerCaseName"></div>
 
@@ -96,3 +103,13 @@ If a value from the View-Model requires processing before displaying it in the V
     });
     kendo.bind($("div"), viewModel);
     </script>
+
+## See Also
+
+Articles and how-to examples on Kendo UI MVVM:
+
+* [ObservableObject Overview]({% slug overview_observabeobject_kendoui %})
+* [Tutorial on How to Build MVVM Bound Forms]({% slug mvvmboundforms_mvvmpattern_kendoui %})
+* [How to Apply Source and Template Binding Using Model with Computed Field]({% slug howto_applysourceandtemplatebinding_usingmodelcomputedfield_mvvm %})
+
+For detailed information on the bindings Kendo UI MVVM supports, refer to the section about [Kendo UI MVVM bindings]({% slug attributebinding_mvvm_kendoui %}).

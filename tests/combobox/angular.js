@@ -135,7 +135,7 @@
     function() {
         var widget = QUnit.fixture.find("select").getKendoComboBox();
 
-        equal(widget.listView.isBound(), false);
+        equal(widget.listView.bound(), false);
         equal(widget.value(), 2);
         equal(widget.text(), "green");
     });
@@ -173,7 +173,7 @@
     function() {
         var widget = QUnit.fixture.find("select").getKendoComboBox();
 
-        equal(widget.listView.isBound(), false);
+        equal(widget.listView.bound(), false);
         equal(widget.value(), 2);
         equal(widget.text(), "custom text");
     });
@@ -194,7 +194,7 @@
     function() {
         var widget = QUnit.fixture.find("select").getKendoComboBox();
 
-        equal(widget.listView.isBound(), false);
+        equal(widget.listView.bound(), false);
         equal(widget.value(), "");
     });
 })();

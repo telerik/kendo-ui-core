@@ -150,4 +150,31 @@
             scroll(dropdownlist.listView.content, 5 * CONTAINER_HEIGHT);
         });
     });
+
+    asyncTest("keep selected value when list is scrolled", 1, function() {
+        var dropdownlist = new DropDownList(select, {
+            close: function(e) { e.preventDefault(); },
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 20
+            }
+        });
+
+        dropdownlist.one("dataBound", function() {
+            dropdownlist.open();
+            dropdownlist.one("dataBound", function() {
+                start();
+                equal(select.val(), 10);
+            });
+
+            scroll(dropdownlist.listView.content, 5 * CONTAINER_HEIGHT);
+        });
+
+        dropdownlist.value(10);
+    });
 })();

@@ -635,4 +635,19 @@ test("do not navigate to disabled date in the max range", 1, function() {
     equal(focusedValue, 22);
 });
 
+test("same value in previous month can be choosed when navigate to prev month", 1, function() {
+    calendar.value(new Date(2015, 11, 1));
+    $(".k-nav-prev").trigger("click");
+    var valueCell = $(".k-other-month").eq(7);
+    valueCell.trigger("click");
+    equal(calendar._current.getMonth(), 11);
+});
+
+test("two consecutive selections can be made", 1, function() {
+    calendar.value(new Date(2015, 11, 16));
+    var currentCell = $(".k-state-selected");
+    currentCell.next().trigger("click");
+    equal(calendar.value().getDate(), 17);
+});
+
 })();

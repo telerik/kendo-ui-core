@@ -140,7 +140,7 @@
 @form-widgets-border-color: darken(@base, 12%);
 @pager-text-color: darken(@base, 27%);
 @draghandle-selected-background: darken(@base, 12%);
-@upload-status-color: darken(@error, 17%);
+@upload-status-color: @normal-text-color;
 @form-widgets-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 @menu-active-background: darken(@base, 1%);
 @concave-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
@@ -710,65 +710,87 @@ html .km-pane-wrapper .k-header
     border-color: @focused-border-color;
 }
 
-.k-calendar .k-link
-{
-    color: @calendar-content-text-color;
+.k-calendar {
+    .k-link {
+        color: @calendar-content-text-color;
+    }
+
+    .k-footer {
+        padding: 0;
+    }
+
+    .k-footer .k-nav-today {
+        color: @form-widget-color;
+        text-decoration: @calendar-footer-text-decoration;
+        background-color: @calendar-footer-background;
+    }
+
+    .k-footer .k-nav-today:hover,
+    .k-footer .k-nav-today.k-state-hover {
+        background-color: @calendar-footer-hover-background;
+        text-decoration: @calendar-footer-hover-text-decoration;
+    }
+
+    .k-footer .k-nav-today:active {
+        background-color: @calendar-footer-active-background;
+    }
+
+    .k-link.k-nav-fast {
+        color: @form-widget-color;
+    }
+
+    .k-nav-fast.k-state-hover {
+        text-decoration: @calendar-header-hover-text-decoration;
+        background-color: @calendar-header-hover-background;
+        color: @hover-text-color;
+    }
+
+    .k-link.k-state-hover {
+        border-radius: @calendar-border-radius;
+    }
+
+    .k-state-focused.k-state-hover {
+        background-color: lighten(@selected-background-color, 37%);
+    }
+
+    .k-state-selected.k-state-hover {
+        background-color: darken(@selected-background, 8%);
+    }
+
+    .k-state-selected.k-state-hover .k-link {
+        color: @selected-text-color;
+    }
+
+    td.k-state-focused.k-state-selected.k-state-hover {
+        box-shadow: inset 0 0 7px 0 darken(@selected-background, 25%); 
+    }
+
+    .k-today {
+        background-color: @base;
+    }
+
+    .k-today.k-state-hover {
+        background-color: darken(@base, 7%);
+    }
+
+    .k-today.k-state-focused.k-state-hover {
+        background-color: lighten(@selected-background-color, 37%);
+    }
+
+    .k-footer .k-link {
+        border-radius: 0;
+    }
+
+    th {
+        background-color: @calendar-group-background-color;
+    }
 }
 
-.k-calendar .k-footer
-{
-    padding: 0;
-}
-
-.k-calendar .k-footer .k-nav-today
-{
-    color: @form-widget-color;
-    text-decoration: @calendar-footer-text-decoration;
-    background-color: @calendar-footer-background;
-}
-
-.k-calendar .k-footer .k-nav-today:hover,
-.k-calendar .k-footer .k-nav-today.k-state-hover
-{
-    background-color: @calendar-footer-hover-background;
-    text-decoration: @calendar-footer-hover-text-decoration;
-}
-
-.k-calendar .k-footer .k-nav-today:active
-{
-    background-color: @calendar-footer-active-background;
-}
-
-.k-calendar .k-link.k-nav-fast
-{
-    color: @form-widget-color;
-}
-
-.k-calendar .k-nav-fast.k-state-hover
-{
-    text-decoration: @calendar-header-hover-text-decoration;
-    background-color: @calendar-header-hover-background;
-    color: @hover-text-color;
-}
-
-.k-calendar .k-link.k-state-hover,
-.k-window-titlebar .k-link
-{
+.k-window-titlebar .k-link {
     border-radius: @calendar-border-radius;
 }
 
-.k-calendar .k-footer .k-link
-{
-    border-radius: 0;
-}
-
-.k-calendar th
-{
-    background-color: @calendar-group-background-color;
-}
-
-.k-calendar-container.k-group
-{
+ .k-calendar-container.k-group {
     border-color: @group-border-color;
 }
 
@@ -1345,6 +1367,10 @@ div.k-filebrowser-dropzone em
     background-color: darken(@alt-background-color, 10%);
 }
 
+.k-gantt .k-treelist tr:hover {
+    background-color: @hover-background;
+}
+
 .k-gantt .k-treelist .k-state-selected,
 .k-gantt .k-treelist .k-state-selected td,
 .k-gantt .k-treelist .k-alt.k-state-selected,
@@ -1789,12 +1815,6 @@ html .km-pane-wrapper .km-widget,
     {
         color: @widget-text-color;
     }
-
-    .km-pane-wrapper .k-icon
-    {
-        background-image: url('@{image-folder}/sprite_2x.png');
-        background-size: 21.2em 21em;
-    }
 }
 
 .km-pane-wrapper .k-mobile-list .k-item,
@@ -2055,6 +2075,10 @@ html .km-pane-wrapper .km-widget,
 
 .k-grid tr:hover {
     background-color: @hover-background;
+}
+
+.k-pivot-rowheaders .k-grid tr:hover {
+    background: none;
 }
 
 .k-grid td.k-state-focused

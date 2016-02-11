@@ -1,9 +1,10 @@
 ---
 title: ng-* Directives in Widget Markup
 page_title: ng-* Directives in Widget Markup | AngularJS Directives
-description: "Learn more about the `ng-repeat`, `ng-if`, `ng-bind` directives supported by Kendo UI controls in AngularJS."
+description: "Learn more about the `ng-repeat`, `ng-if`, and `ng-bind` directives supported by Kendo UI controls in AngularJS."
 previous_url: /AngularJS/notes-on-ng-repeat
 slug: ngrepeat_ngif_ngbind_support_angularjs
+position: 3
 ---
 
 # ng-* Directives in Widget Markup
@@ -16,11 +17,15 @@ The widgets which exhibited that behavior were the TabStrip, PanelBar, Menu, Tre
 
 The timeout initialization caused several other issues as well. The widget instances were not accessible in a reliable manner. Each widget instantiation required several additional `$scope.digest` cycles to be executed. Performance was negatively affected and the widget initialization was visible to the end user in certain scenarios. The [change from June 17](https://github.com/telerik/kendo-ui-core/commit/0a4912ea9c14b2924d9914a5108ae2c2f636e4ed) removed the timeout implementation, effectively breaking the accidental `ng-repeat` support in later releases.
 
-## `dataSource` Approach
+## Approaches
+
+### dataSource
 
 The recommended approach to achieve dynamic content generation for the listed widgets is through the `dataSource` configuration option.  
 
-###### Example - TreeView with `DataSource` in AngularJS
+The example below demonstrates a Kedno UI TreeView widget with `DataSource` in AngularJS.
+
+###### Example
 
 ```html
 <div ng-app="app" ng-controller="MyCtrl">
@@ -47,7 +52,9 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 </script>
 ```
 
-###### Example - PanelBar with `DataSource` in AngularJS
+The example below demonstrates a Kendo UI PanelBar widget with `DataSource` in AngularJS.
+
+###### Example
 
 ```html
   <div ng-app="foo">
@@ -94,7 +101,9 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
   </script>
 ```
 
-###### Example - TabStrip with `DataSource` in AngularJS
+The example below demonstrates a Kendo UI TabStrip widget with `DataSource` in AngularJS.
+
+###### Example
 
 ```html
   <div ng-app="foo">
@@ -122,7 +131,9 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
   </script>
 ```
 
-###### Example - Menu with `DataSource` in AngularJS
+The example below demonstrates a Kendo UI TabStrip with `DataSource` in AngularJS Menu widget with `DataSource` in AngularJS.
+
+###### Example
 
 ```html
     <div ng-app="foo">
@@ -162,14 +173,17 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
     </script>
 ```
 
-## `k-ng-delay` Approach
+### k-ng-delay
 
 If generating content with `DataSource` is not desired, a possible workaround of the behavior may be implemented using the `k-ng-delay` configuration option.
 
 > **Important**
+>
 > The approach is not recommended and has some side effects, such as FOUC (flash of unstyled content), and decreased performance.
 
-###### Example - TabStrip with directives and delayed initialization
+The example below demonstrates a Kendo UI TabStrip widget with directives and delayed initialization.
+
+###### Example
 
 ```html
 <div id="example" ng-app="KendoDemos">
@@ -212,4 +226,6 @@ Other articles on AngularJS directives and integration with Kendo UI:
 * [Grid Settings]({% slug grid_settings_angularjs_directives %})
 * [Directives with DataSource]({% slug datasource_updates_angularjs_directives %})
 * [Memory Leaks]({% slug memory_leaks_angularjs_directives %})
+* [How to Load View in Window]({% slug window_service_angularjs_directives %})
 * [How to Nest Widgets]({% slug nest_widgets_angularjs_directives %})
+* [Troubleshooting: Common Issues]({% slug common_issues_support_angularjs %})

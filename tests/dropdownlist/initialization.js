@@ -13,7 +13,11 @@
             var element = $(document.body).find("[data-kendo-role=dropdownlist]")
 
             if (element[0]) {
-                element.data("kendoDropDownList").destroy();
+                try {
+                    element.data("kendoDropDownList").destroy();
+                } catch(e) {
+                    //destroy failed because widget is not fully initialized
+                }
                 element.closest(".k-dropdown").remove();
             }
 
@@ -927,6 +931,29 @@
         equal(dropdownlist.span.html(), "Select...");
     });
 
+    test("ValueTemplate supports template with multiple fields", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataTextField: "text",
+            dataValueField: "value",
+            valueTemplate: "#=text# #=customField#"
+        });
+
+        equal(dropdownlist.span.html(), "");
+    });
+
+    test("widget throws an error when optionLabel does not match valueTemplate",  function() {
+        try {
+            new DropDownList(input, {
+                optionLabel: "Select...",
+                dataTextField: "text",
+                dataValueField: "value",
+                valueTemplate: "#=text# #=customField#"
+            });
+        } catch(e) {
+            ok(true);
+        }
+    });
+
     test("widget renders filter header in input", function() {
         var dropdownlist = new DropDownList(input, {
             autoBind: false,
@@ -1211,6 +1238,37 @@
         dropdownlist.value("");
     });
 
+    asyncTest("DropDownList does not select first item if its value is set to null (no option label)", 1, function() {
+        dropdownlist = input.kendoDropDownList({
+          dataTextField: "Name",
+          dataValueField: "Name",
+          dataSource: new kendo.data.DataSource({
+            schema: {
+              model: {
+                id: "StateId"
+              }
+            },
+            transport: {
+              read: function(options) {
+                setTimeout(function() {
+                  options.success([
+                    { Name: "foo" }
+                  ]);
+                });
+              }
+            }
+          })
+        }).data("kendoDropDownList");
+
+        dropdownlist.one("dataBound", function() {
+            start();
+
+            equal(dropdownlist.value(), "");
+        });
+
+        dropdownlist.value("");
+    });
+
     test("DropDownList does not trigger cascade event on click when source is empty", 0, function() {
         dropdownlist = input.kendoDropDownList({
           optionLabel: "--Select Value--",
@@ -1230,6 +1288,26 @@
          $(input).wrap('<fieldset disabled="disabled"></fieldset>');
          input.kendoDropDownList().data("kendoDropDownList");
          equal(input.attr("disabled"), "disabled");
+    });
+
+    test("copy placeholder value to the filter input", function() {
+        var placeholder = "Type...";
+
+        input.attr("placeholder", placeholder);
+
+        var dropdownlist = new DropDownList(input, {
+            filter: "contains"
+        });
+
+        equal(dropdownlist.filterInput.attr("placeholder"),  placeholder);
+    });
+
+    test("copy accesskey to the wrapper", function() {
+        input.attr("accesskey", "w");
+
+        var dropdownlist = new DropDownList(input);
+
+        equal(dropdownlist.wrapper.attr("accesskey"),  "w");
     });
 
 })();

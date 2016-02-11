@@ -6,7 +6,7 @@ description: 'Guide to Kendo UI Mobile PopOver configuration options: set width 
 
 # kendo.mobile.ui.PopOver
 
-Represents the Kendo UI Mobile PopOver widget. Inherits from [kendo.mobile.ui.Widget](/api/framework/mobilewidget).
+Represents the Kendo UI Mobile PopOver widget. Inherits from [kendo.mobile.ui.Widget](/api/javascript/mobile/ui/mobilewidget).
 
 ## Configuration
 

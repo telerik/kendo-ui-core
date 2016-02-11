@@ -98,8 +98,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (text) {
-                    that.input.val(text);
-                    that._prev = text;
+                    that._setText(text);
                 }
             }
 
@@ -150,7 +149,8 @@ var __meta__ = { // jshint ignore:line
             "filtering",
             "dataBinding",
             "dataBound",
-            "cascade"
+            "cascade",
+            "set"
         ],
 
         setOptions: function(options) {
@@ -189,13 +189,17 @@ var __meta__ = { // jshint ignore:line
 
         _inputFocusout: function() {
             var that = this;
+            var value = that.value();
 
             that._inputWrapper.removeClass(FOCUSED);
             clearTimeout(that._typingTimeout);
             that._typingTimeout = null;
 
-            if (that.options.text !== that.input.val()) {
-                that.text(that.text());
+            that.text(that.text());
+
+            if (value !== that.value() && that.trigger("select", { item: that._focus() })) {
+                that.value(value);
+                return;
             }
 
             that._placeholder();
@@ -251,7 +255,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            if ((!that.listView.isBound() && state !== STATE_FILTER) || state === STATE_ACCEPT) {
+            if ((!that.listView.bound() && state !== STATE_FILTER) || state === STATE_ACCEPT) {
                 that._open = true;
                 that._state = STATE_REBIND;
                 that._filterSource();
@@ -290,7 +294,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             var custom = that._customOption;
-            var hasChild = that.element[0].children[0];
 
             if (that._state === STATE_REBIND) {
                 that._state = "";
@@ -301,8 +304,6 @@ var __meta__ = { // jshint ignore:line
 
             if (custom && custom[0].selected) {
                 that._custom(custom.val());
-            } else if (!hasChild) {
-                that._custom("");
             }
         },
 
@@ -338,7 +339,9 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            that._custom(that._value(dataItem) || "");
+            if (that._value(dataItem) !== that.value()) {
+                that._custom(that._value(dataItem));
+            }
 
             if (that.text() && that.text() !== that._text(dataItem)) {
                 that._selectValue(dataItem);
@@ -360,8 +363,8 @@ var __meta__ = { // jshint ignore:line
             var isActive = that.input[0] === activeElement();
 
             var data = that.dataSource.flatView();
-            var page = that.dataSource.page();
-            var isFirstPage = page === undefined || page === 1;
+            var skip = that.listView.skip();
+            var isFirstPage = skip === undefined || skip === 0;
 
             that._angularItems("compile");
 
@@ -542,21 +545,17 @@ var __meta__ = { // jshint ignore:line
                 return input.value;
             }
 
-            dataItem = that.dataItem();
-
-            if (that.options.autoBind === false && !that.listView.isBound()) {
+            if (that.options.autoBind === false && !that.listView.bound()) {
+                that._setText(text);
                 return;
             }
 
+            dataItem = that.dataItem();
+
             if (dataItem && that._text(dataItem) === text) {
                 value = that._value(dataItem);
-                if (value === null) {
-                    value = "";
-                } else {
-                    value += "";
-                }
 
-                if (value === that._old) {
+                if (value === List.unifyType(that._old, typeof value)) {
                     that._triggerCascade();
                     return;
                 }
@@ -593,11 +592,14 @@ var __meta__ = { // jshint ignore:line
         value: function(value) {
             var that = this;
             var options = that.options;
+            var listView = that.listView;
 
             if (value === undefined) {
                 value = that._accessor() || that.listView.value()[0];
                 return value === undefined || value === null ? "" : value;
             }
+
+            that.trigger("set", { value: value });
 
             if (value === options.value && that.input.val() === options.text) {
                 return;
@@ -605,11 +607,16 @@ var __meta__ = { // jshint ignore:line
 
             that._accessor(value);
 
-            that.listView
+            if (that._isFilterEnabled() && listView.bound() && listView.isFiltered()) {
+                listView.bound(false);
+                that._filterSource();
+            } else {
+                that._fetchData();
+            }
+
+            listView
                 .value(value)
                 .done(function() {
-                    that._selectValue(that.listView.selectedDataItems()[0]);
-
                     if (that.selectedIndex === -1) {
                         that._accessor(value);
                         that.input.val(value);
@@ -625,8 +632,6 @@ var __meta__ = { // jshint ignore:line
                         that._state = STATE_ACCEPT;
                     }
                 });
-
-            that._fetchData();
         },
 
         _click: function(e) {
@@ -816,11 +821,21 @@ var __meta__ = { // jshint ignore:line
 
                 if (that._prev !== value) {
                     that._prev = value;
+
+                    if (that.options.filter === "none") {
+                        that.listView.select(-1);
+                    }
+
                     that.search(value);
                 }
 
                 that._typingTimeout = null;
             }, that.options.delay);
+        },
+
+        _setText: function(text) {
+            this.input.val(text);
+            this._prev = text;
         },
 
         _wrapper: function() {
@@ -842,6 +857,10 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var hasValue = parent.value();
             var custom = hasValue && parent.selectedIndex === -1;
+
+            if (this.selectedIndex == -1 && this.value()) {
+                return;
+            }
 
             if (isFiltered || !hasValue || custom) {
                 that.options.value = "";

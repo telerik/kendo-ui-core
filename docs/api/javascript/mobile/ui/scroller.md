@@ -6,7 +6,7 @@ description: How to configure a mobile scroller in Kendo UI HTML5 mobile framewo
 
 # kendo.mobile.ui.Scroller
 
-Represents the Kendo UI Mobile Scroller widget. Inherits from [kendo.mobile.ui.Widget](/api/framework/mobilewidget).
+Represents the Kendo UI Mobile Scroller widget. Inherits from [kendo.mobile.ui.Widget](/api/javascript/mobile/ui/mobilewidget).
 
 ## Configuration
 

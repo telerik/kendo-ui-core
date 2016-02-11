@@ -154,6 +154,25 @@ test("value('') clear selection", function() {
    });
 
    test("value method does not add item with custom value 'null' (select)", function() {
+       select = $("<select></select>");
+
+       combobox = new ComboBox(select, {
+           dataTextField: "text",
+           dataValueField: "value",
+           dataSource: [{text: "foo", value: 1}, {text: "bar", value: 2}],
+       });
+
+       combobox.value("custom");
+       combobox.value(null);
+
+       var option = select.children(":last");
+
+       equal(option[0].value, "custom");
+       equal(option.attr("selected"), undefined)
+       equal(option[0].selected, false);
+   });
+
+   test("value method clears selected state of the custom option", function() {
        select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>");
 
        combobox = new ComboBox(select, {
@@ -451,6 +470,17 @@ test("text should set empty text to the combobox", function() {
     equal(combobox.text(), "");
 })
 
+test("text method should set input value when autoBind: false", function() {
+    var combobox = new ComboBox(input, {
+        dataSource: [{text: "foo", value: null}],
+        autoBind: false
+    });
+
+    combobox.text("Text");
+
+    equal(combobox.text(), "Text");
+});
+
 test('enable(false) should disable combobox', function() {
     var combobox = new ComboBox(input);
 
@@ -722,6 +752,105 @@ asyncTest("ComboBox filter after value method is used", 1, function() {
     });
 });
 
+test("value method selects item that exists only in unfiltered source", function() {
+    var combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}],
+        filter: "contains"
+    });
+
+    combobox.dataSource.filter({
+        field: "text",
+        operator: "contains",
+        value: "foo"
+    });
+
+    combobox.value(2);
+
+    equal(combobox.value(), "2");
+    equal(combobox.text(), "bar");
+});
+
+asyncTest("value method selects item that exists only in unfiltered source (async)", 2, function() {
+    var combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        filter: "startswith",
+        dataSource: {
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        if (options.data.filter && options.data.filter.filters[0]) {
+                            options.success([{text: "foo", value: 1}]);
+                        } else {
+                            options.success([{text: "foo", value: 1}, {text:"bar", value:2}]);
+                        }
+                    });
+                }
+            },
+            serverFiltering: true
+        }
+    });
+
+    combobox.one("dataBound", function() {
+        combobox.dataSource.filter({
+            field: "text",
+            operator: "contains",
+            value: "foo"
+        });
+
+        combobox.one("dataBound", function() {
+            combobox.value(2);
+
+            combobox.one("dataBound", function() {
+                start();
+                equal(combobox.value(), "2");
+                equal(combobox.text(), "bar");
+            });
+        });
+    });
+});
+
+test("value method keeps datasource filters if widget filtration is not enabled", function() {
+    combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}],
+        filter: "none"
+    });
+
+    combobox.dataSource.filter({
+        field: "text",
+        operator: "contains",
+        value: "foo"
+    });
+
+    combobox.value(1);
+
+    var filter = combobox.dataSource.filter();
+    filter = filter.filters[0];
+
+    ok(filter);
+    equal(filter.value, "foo");
+});
+
+test("value method sets text if it has been cleared", function() {
+    combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}],
+        filter: "none"
+    });
+
+    combobox.value(1);
+    combobox.text("");
+
+    combobox.value(1);
+
+    equal(combobox.text(), "foo");
+});
+
 test("ComboBox does not change text if custom value is equal to options.value", function() {
     var combobox = new ComboBox(input, {
         dataSource: ["Item1", "Item2"],
@@ -735,6 +864,59 @@ test("ComboBox does not change text if custom value is equal to options.value", 
 
     equal(combobox.value(), "value");
     equal(combobox.text(), "text");
+});
+
+test("ComboBox clears selected value even when text option is set to empty string", function() {
+    var combobox = new ComboBox(input, {
+        animation: false,
+        dataTextField: 'text',
+        dataValueField: 'value',
+        filter: 'contains',
+        autoBind: false,
+        ignoreCase: true,
+        suggest: false,
+        highLightFirst: true,
+        value: '',
+        text: '',
+        dataSource: [
+            { text: "User1", value: "1" },
+            { text: "User2", value: "2" },
+            { text: "User3", value: "3" },
+            { text: "User4", value: "4" }
+        ]
+    });
+
+    combobox.open();
+    combobox.select(0);
+    combobox.input.focus().val("").keydown();
+    combobox.input.blur();
+
+    equal(combobox.value(), "");
+    equal(combobox.text(), "");
+});
+
+test("ComboBox selects new item even though text is equal to text option", function() {
+    var combobox = new ComboBox(input, {
+        animation: false,
+        dataTextField: 'text',
+        dataValueField: 'value',
+        autoBind: false,
+        value: '1',
+        text: 'User1',
+        dataSource: [
+            { text: "User1", value: "1" },
+            { text: "User2", value: "2" },
+            { text: "User3", value: "3" },
+            { text: "User4", value: "4" }
+        ]
+    });
+
+    combobox.open();
+    combobox.select(2);
+    combobox.input.focus().val("User1").blur();
+
+    equal(combobox.value(), "1");
+    equal(combobox.text(), "User1");
 });
 
 test("suggest method outputs word parameter", function() {
@@ -773,4 +955,25 @@ test("suggest method accepts a data item", function() {
 
     equal(combobox.text(), "Item2");
 });
+
+test("calls hideBusy on dataSource transport error", 1, function() {
+    var combobox = new ComboBox(input, {
+        autoBind: false,
+        dataSource: {
+            transport: {
+                read: function(o) {
+                    o.error();
+                }
+            }
+        }
+    });
+
+    stub(combobox, {
+        _hideBusy: combobox._hideBusy
+    });
+
+    combobox.dataSource.read();
+    equal(combobox.calls("_hideBusy"), 1);
+});
+
 })();

@@ -226,6 +226,33 @@ test("combobox does not select first item if initialized from empty select", fun
    ok(!combobox.text());
 });
 
+test("combobox do not select custom option when value is empty string", function() {
+   var select = $("<select></select>").appendTo(QUnit.fixture);
+
+   combobox = new ComboBox(select, {
+       dataSource: [{text: "Foo", value: "Foo"}],
+       dataTextField: "text",
+       dataValueField: "value"
+   });
+
+   equal(select[0].selectedIndex, -1);
+});
+
+test("combobox keeps selected index on rebind", function() {
+   var select = $("<select></select>").appendTo(QUnit.fixture);
+
+   select.append(document.createTextNode(""));
+
+   combobox = new ComboBox(select, {
+       dataSource: [{text: "Foo", value: "Foo"}],
+       dataTextField: "text",
+       dataValueField: "value",
+       value: "Foo"
+   });
+
+   equal(select[0].selectedIndex, 0);
+});
+
 test("combobox selects first item when initalized from select with TEXT node", function() {
    var select = $("<select></select>").appendTo(QUnit.fixture);
 

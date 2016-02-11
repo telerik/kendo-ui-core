@@ -92,7 +92,7 @@ if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "daily": {
-    "days": "dia(s)",
+    "interval": "dia(s)",
     "repeatEvery": "Repetir todo:"
   },
   "end": {
@@ -112,7 +112,7 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   },
   "monthly": {
     "day": "Dia",
-    "months": "mês(es)",
+    "interval": "mês(es)",
     "repeatEvery": "Repetir todo:",
     "repeatOn": "Repetir em:"
   },
@@ -126,13 +126,13 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "weekly": {
     "repeatEvery": "Repetir todo:",
     "repeatOn": "Repetir em:",
-    "weeks": "semana(s)"
+    "interval": "semana(s)"
   },
   "yearly": {
     "of": "de",
     "repeatEvery": "Repetir todo:",
     "repeatOn": "Repetir em:",
-    "years": "ano(s)"
+    "interval": "ano(s)"
   }
 });
 }
@@ -358,9 +358,24 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "statusFailed": "falhou",
   "statusUploaded": "enviado",
   "statusUploading": "enviando",
-  "statusUploading1": "enviando",
-  "uploadSelectedFiles": "Enviar arquivos",
-  "uploadSelectedFiles1": "Enviar arquivos"
+  "uploadSelectedFiles": "Enviar arquivos"
+});
+}
+
+/* Validator messages */
+
+if (kendo.ui.Validator) {
+kendo.ui.Validator.prototype.options.messages =
+$.extend(true, kendo.ui.Validator.prototype.options.messages,{
+  "required": "{0} é obrigatório",
+  "pattern": "{0} não é válido",
+  "min": "{0} deve ser maior ou igual a {1}",
+  "max": "{0} deve ser menor ou igual a {1}",
+  "step": "{0} não é válido",
+  "email": "{0} não é um email válido",
+  "url": "{0} não é um endereço web válido",
+  "date": "{0} não é uma data válida",
+  "dateCompare": "A data final deve ser posterior à data inicial"
 });
 }
 })(window.kendo.jQuery);

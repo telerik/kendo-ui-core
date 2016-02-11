@@ -6,7 +6,7 @@ description: Examples how to initialize Kendo UI mobile BackButton based on role
 
 # kendo.mobile.ui.BackButton
 
-Represents the Kendo UI Mobile BackButton widget. Inherits from [kendo.mobile.ui.Widget](/api/framework/mobilewidget).
+Represents the Kendo UI Mobile BackButton widget. Inherits from [kendo.mobile.ui.Widget](/api/javascript/mobile/ui/mobilewidget).
 
 ## BackButton
 

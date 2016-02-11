@@ -1,16 +1,24 @@
 ---
 title: Ajax Binding
+page_title: Ajax Binding | AutoComplete JSP Tag
+description: "Get started with the Ajax binding of the AutoComplete JSP tag in Kendo UI."
+slug: ajaxbinding_autocomplete_uiforjsp
+position: 2
 ---
 
 # Ajax Binding
 
-## Getting started
+## Getting Started
 
-When configured for ajax binding the Kendo AutoComplete for JSP will make ajax requests when doing filtering.
+When configured for Ajax binding, the Kendo UI AutoComplete for JSP makes Ajax requests when doing filtering.
 
-To configure the Kendo AutoComplete for ajax binding follow these steps (using Spring MVC framework):
+### Configuration
 
-1.  Add a new action method which will return data to populate the autocomplete:
+To configure the Kendo UI AutoComplete for Ajax binding, follow the steps below (using the Spring MVC framework).
+
+**Step 1** Add a new action method which will return data to populate the AutoComplete.
+
+###### Example
 
         @Autowired
         private ProductDao product;
@@ -20,14 +28,18 @@ To configure the Kendo AutoComplete for ajax binding follow these steps (using S
 
         }
 
-2.  Add a new parameter which will be populated with current autocomplete request information - filter.
+**Step 2** Add a new parameter, which is to be populated with the current AutoComplete request information&mdash;filter.
+
+###### Example
 
         @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
         public @ResponseBody DataSourceResult read(@RequestBody DataSourceRequest request) {
 
         }
 
-3.  Use the request information to proccess the data and return the result as JSON.
+**Step 3** Use the request information to process the data and return the result as JSON.
+
+###### Example
 
         @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
         public @ResponseBody DataSourceResult read(@RequestBody DataSourceRequest request) {
@@ -35,7 +47,9 @@ To configure the Kendo AutoComplete for ajax binding follow these steps (using S
             return product.getList(request);
         }
 
-    *The result format in this case have similar to the following signiture:
+The result format in this case is similar to the signature, demonstrated in the example below.
+
+###### Example
 
         public class DataSourceResult {
             public long getTotal() {
@@ -63,7 +77,10 @@ To configure the Kendo AutoComplete for ajax binding follow these steps (using S
             }
         }
 
-5.  In the view configure the autocomplete to use the action method created in the previous steps:
+**Step 4** In the view, configure the AutoComplete to use the action method created in the previous steps.
+
+###### Example
+
         <c:url value="/web/autocomplete/remote-data/read" var="readUrl" />
 
         <kendo:autoComplete name="products" dataTextField="productName">
@@ -76,13 +93,23 @@ To configure the Kendo AutoComplete for ajax binding follow these steps (using S
             </kendo:dataSource>
         </kendo:autoComplete>
 
-## Enable Client Data Processing during Ajax Binding
+### Client Data Processing
 
-In this configuration, Kendo AutoComplete for JSP will request data from the server every time the user types in the widget. This behavior
-can be changed by DataSource server operaion options to false:
+In the configuration that enables client data processing during Ajax binding, Kendo UI AutoComplete for JSP requests data from the server every time the user types in the widget. This behavior can be changed by setting the DataSource server operation options to `false`.
+
+###### Example
 
        <kendo:dataSource serverFiltering="false">
            <kendo:dataSource-transport>
                <kendo:dataSource-transport-read url="${readUrl}"/>
            </kendo:dataSource-transport>
        </kendo:dataSource>
+
+## See Also
+
+Other articles on Telerik UI for JSP and on the AutoComplete:
+
+* [Overview of the AutoComplete JSP Tag]({% slug overview_autocomplete_uiforjsp %})
+* [Overview of the AutoComplete Widget]({% slug overview_kendoui_autocomplete_widget %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

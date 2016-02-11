@@ -1,15 +1,16 @@
 ---
 title: Sheets
-page_title: Create multiple sheets in the Excel workbook
-description: This article shows how to create multiple sheets in an Excel workbook
+page_title: Sheets | Kendo UI Excel Export
+description: "Learn how to create multiple sheets when exporting a Kendo UI component to Excel."
+slug: sheets_excelexport_kendoui
 position: 6
 ---
 
 # Sheets
 
-To define multiple sheets in an Excel workbook use the [sheets](/api/javascript/ooxml/workbook#configuration-sheets) option. Every item from that array represents a new sheet with its own rows and cells.
+To create multiple sheets in an Excel workbook, use the [`sheets`](/api/javascript/ooxml/workbook#configuration-sheets) option, as demonstrated in the example below. Every item from that array represents a new sheet with its own rows and cells.
 
-#### Example - create multiple sheets
+###### Example
 
 ```html
 <script>
@@ -77,3 +78,14 @@ kendo.saveAs({
 });
 </script>
 ```
+
+## See Also
+
+Articles on the Excel export functionality in Kendo UI:
+
+* [Introduction to the Excel Export Functionality]({% slug introduction_excelexport_kendoui %})
+* [Customize the Appearance]({% slug appearance_excelexport_kendoui %})
+* [Freeze Rows and Columns]({% slug freezerowsandcolumns_excelexport_kendoui %})
+* [Set the Column Width]({% slug columnwidth_excelexport_kendoui %})
+* [Set the Colspan and Rowspan]({% slug colaspanandrowspan_excelexport_kendoui %})
+* [Export Kendo UI DataSource to Excel]({% slug exportdatasource_excelexport_kendoui %})

@@ -1,14 +1,24 @@
 ---
 title: Ajax Binding
+page_title: Ajax Binding | Chart JSP Tag
+description: "Get started with the Ajax binding of the Chart JSP tag in Kendo UI."
+slug: ajaxbinding_chart_uiforjsp
+position: 2
 ---
 
-## Ajax Binding
+# Ajax Binding
 
-When configured for ajax binding the Kendo Chart for JSP will make an ajax requests to populate its series.
+## Getting Started
 
-To configure the Kendo Chart for ajax binding follow these steps (using Spring MVC framework):
+When configured for Ajax binding, the Kendo UI Chart for JSP makes Ajax requests to populate its series.
 
-1.  Add a new action method which will return data to populate the chart:
+### Configuration
+
+To configure the Kendo Chart for Ajax binding, follow the steps below (using the Spring MVC framework).
+
+**Step 1** Add a new action method which will return data to populate the Chart.
+
+###### Example
 
 	    @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
 	    public @ResponseBody List<ElectricityProduction> read() {
@@ -16,7 +26,9 @@ To configure the Kendo Chart for ajax binding follow these steps (using Spring M
 				ChartDataRepository.SpainElectricityProduction();
 	    }
 
-2.  Return the data as JSON:
+**Step 2** Return the data as JSON.
+
+###### Example
 
 	    @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
 	    public @ResponseBody List<ElectricityProduction> read() {
@@ -25,7 +37,9 @@ To configure the Kendo Chart for ajax binding follow these steps (using Spring M
 			return data;
 	    }
 
-3.  In the view configure the chart to use the action method created in the previous steps:
+**Step 3** In the view configure the Chart to use the action method created in the previous steps.
+
+###### Example
 
 		<kendo:chart name="chart">
 			 <kendo:dataSource>
@@ -45,3 +59,12 @@ To configure the Kendo Chart for ajax binding follow these steps (using Spring M
 		 	 	<kendo:chart-categoryAxisItem field="year" />
 		 	 </kendo:chart-categoryAxis>
 		</kendo:chart>
+
+## See Also
+
+Other articles on Telerik UI for JSP and on the AutoComplete:
+
+* [Overview of the Chart JSP Tag]({% slug overview_chart_uiforjsp %})
+* [Overview of the Kendo UI Chart Widget]({% slug overview_kendoui_charts_widget %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

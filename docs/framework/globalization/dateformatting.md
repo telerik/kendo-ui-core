@@ -1,68 +1,100 @@
 ---
 title: Date Formatting
-page_title: Date Formatting | Kendo UI Framework Globalization documentation
-description: Learn how with date formatting you can convert Date object to human readable string, supporting standard and custom date formats.
+page_title: Date Formatting | Kendo UI Globalization
+description: "Learn how to convert the date object to a human readable string, and support standard and custom date formats in Kendo UI."
+slug: dateformatting_kendoui_globalization
+position: 3
 ---
 
-#Date Formatting
+# Date Formatting
 
-The purpose of date formatting is to convert Date object to a human readable string using culture's specific settings. [kendo.format](/api/javascript/kendo#format) and [kendo.toString](/api/javascript/kendo#tostring) methods support standard and custom date formats:
+The purpose of date formatting is to convert the `Date` object to a human readable string by using the culture's specific settings. The [`kendo.format`](/api/javascript/kendo#format) and [`kendo.toString`](/api/javascript/kendo#tostring) methods support standard and custom date formats.
 
-## Standard date formats
+## Types of Date Formats
 
-- *d* - short date pattern ("M/d/yyyy" for en-US)
+### Standard
 
-    `kendo.toString(new Date(2000, 10, 6), "d")` -> 10/6/2000
+The `"d"` specifier renders a short date pattern (`"M/d/yyyy"` for en-US), as shown below.
 
-- "D" - long date pattern (dddd, MMMM dd, yyyy" for en-US)
+###### Example
 
-    `kendo.toString(new Date(2000, 10, 6), "D")` -> Monday, November 06, 2000
+    kendo.toString(new Date(2000, 10, 6), "d") -> 10/6/2000
 
-- *F* - Full date/time pattern ("dddd, MMMM dd, yyyy h:mm:ss tt" for en-US)
+The `"D"` specifier renders a long date pattern (`"dddd, MMMM dd, yyyy"` for en-US).
+
+###### Example
+
+    kendo.toString(new Date(2000, 10, 6), "D") -> Monday, November 06, 2000
+
+The `"F"` specifier renders a full date/time pattern (`"dddd, MMMM dd, yyyy h:mm:ss tt"` for en-US).
+
+###### Example
 
     kendo.toString(new Date(2000, 10, 6), "F") -> Monday, November 06, 2000 12:00:00 AM
 
-- *g* - General date/time pattern (short time) ("M/d/yyyy h:mm tt" for en-US)
+The `"g"` specifier renders a general date/time pattern (short time) (`"M/d/yyyy h:mm tt"` for en-US).
 
-    `kendo.toString(new Date(2000, 10, 6), "g")` -> 11/6/2000 12:00 AM
+###### Example
 
-- *G* - General date/time pattern (long time) ("M/d/yyyy h:mm:ss tt" for en-US)
+    kendo.toString(new Date(2000, 10, 6), "g") -> 11/6/2000 12:00 AM
 
-    `kendo.toString(new Date(2000, 10, 6), "G")` -> 11/6/2000 12:00:00 AM
+The `"G"` specifier renders a general date/time pattern (long time) (`"M/d/yyyy h:mm:ss tt"` for en-US).
 
-- *M/m* - Month/day pattern ("MMMM dd" for en-US)
+###### Example
 
-    `kendo.toString(new Date(2000, 10, 6), "m")` -> November 06
+    kendo.toString(new Date(2000, 10, 6), "G") -> 11/6/2000 12:00:00 AM
 
-- *u* - Universal sortable date/time pattern ("yyyy'-'MM'-'dd HH':'mm':'ss'Z'" for en-US)
+The `"M"` or `"m"` specifiers render a month/day pattern (`"MMMM dd"` for en-US).
 
-    `kendo.toString(new Date(2000, 10, 6), "u")` -> 2000-11-06 00:00:00Z
+###### Example
 
-- *Y/y* - Year/month pattern ("MMMM, yyyy" for en-US)
+    kendo.toString(new Date(2000, 10, 6), "m") -> November 06
 
-    `kendo.toString(new Date(2000, 10, 6), "y")` -> November, 2000
+The `"u"` specifier renders universal sortable date/time pattern (`"yyyy-MM-dd HH:mm:ssZ"` for en-US).
 
-## Custom date formats
+###### Example
 
-- "d" - The day of the month, from 1 through 31
-- "dd" - The day of the month, from 01 through 31.
-- "ddd" - The abbreviated name of the day of the week.
-- "dddd" - The full name of the day of the week.
-- "f" - The tenths of a second in a date and time value.
-- "ff" - The hundredths of a second in a date and time value.
-- "fff" - The milliseconds in a date and time value.
-- "M" - The month, from 1 through 12.
-- "MM" - The month, from 01 through 12.
-- "MMM" - The abbreviated name of the month.
-- "MMMM" - The full name of the month.
-- "h" - The hour, using a 12-hour clock from 1 to 12.
-- "hh" - The hour, using a 12-hour clock from 01 to 12.
-- "H" - The hour, using a 24-hour clock from 1 to 23.
-- "HH" - The hour, using a 24-hour clock from 01 to 23.
-- "m" - The minute, from 0 through 59.
-- "mm" - The minute, from 00 through 59.
-- "s" - The second, from 0 through 59.
-- "ss" - The second, from 00 through 59.
-- "tt" - The AM/PM designator.
-- "yy" - The last two characters from year value.
-- "yyyy" - The year full value.
+    kendo.toString(new Date(2000, 10, 6), "u") -> 2000-11-06 00:00:00Z
+
+The `"Y"` or `"y"` specifiers renders a year/month pattern (`"MMMM, yyyy"` for en-US).
+
+###### Example
+
+    kendo.toString(new Date(2000, 10, 6), "y") -> November, 2000
+
+### Custom
+
+| Specifier     | Result  |
+|:---           |:---     |
+| **`"d"`**     | Renders the day of the month, from 1 through 31.|
+| **`"dd"`**    | The day of the month, from 01 through 31.|
+| **`"ddd"`**   | The abbreviated name of the day of the week.
+| **`"dddd"`**  | The full name of the day of the week.
+| **`"f"`**     | The tenths of a second in a date and time value.
+| **`"ff"`**    | The hundredths of a second in a date and time value.
+| **`"fff"`**   | The milliseconds in a date and time value.
+| **`"M"`**     | The month, from 1 through 12.
+| **`"MM"`**    | The month, from 01 through 12.
+| **`"MMM"`**   | The abbreviated name of the month.
+| **`"MMMM"`**  | The full name of the month.
+| **`"h"`**     | The hour, using a 12-hour clock from 1 to 12.
+| **`"hh"`**    | The hour, using a 12-hour clock from 01 to 12.
+| **`"H"`**     | The hour, using a 24-hour clock from 1 to 23.
+| **`"HH"`**    | The hour, using a 24-hour clock from 01 to 23.
+| **`"m"`**     | The minute, from 0 through 59.
+| **`"mm"`**    | The minute, from 00 through 59.
+| **`"s"`**     | The second, from 0 through 59.
+| **`"ss"`**    | The second, from 00 through 59.
+| **`"tt"`**    | The AM/PM designator.
+| **`"yy"`**    | The last two characters from the year value.
+| **`"yyyy"`**  | The year full value.
+
+## See Also
+
+Articles on globalization in Kendo UI:
+
+* [Overview of Globalization in Kendo UI]({% slug overview_kendoui_globalization %})
+* [Culture Definition]({% slug culture_definition_kendoui_globalization %})
+* [Date Parsing]({% slug dateparsing_kendoui_globalization %})
+* [Number Formatting]({% slug numberformatting_kendoui_globalization %})
+* [Number Parsing]({% slug numberparsing_kendoui_globalization %})

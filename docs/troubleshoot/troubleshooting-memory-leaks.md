@@ -13,7 +13,7 @@ This page provides solutions for issues related to performance issues that you m
 
 ### Browser Extensions
 
-Try disabling browser extensions as a first step when faced performance issues.
+Try disabling browser extensions as a first step when facing performance issues.
 
 Most browsers provide a way to temporary disable all add-ons:
 
@@ -31,7 +31,7 @@ There are multiple possible reasons for leaking JavaScript Heap memory. To narro
 
 ### Application Becomes Unresponsive or Hangs
 
-For a solution, see the [Browser Memory Usage Increases over Time](# ...) section above.
+Try disabling extensions as [suggested above](#browser-extensions). If that does not help, see the [Browser Memory Usage Increases over Time](#browser-memory-usage-increases-over-time) section above.
 
 ## See Also
 
@@ -40,13 +40,15 @@ Other articles on troubleshooting:
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
 * [JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
+* [Common Issues in Kendo UI Excel Export]({% slug troubleshooting_excel_export_kendoui %})
+* [Common Issues in Kendo UI Charts]({% slug troubleshooting_chart_widget %})
 * [Common Issues in Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %})
 * [Common Issues in Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %})
 * [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})
 * [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})
 * [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
-* [Common Issues in Kendo UI Upload](/web/upload/troubleshooting)
-* [Common Issues in Widgets Rendering Data Visualization](/dataviz/troubleshooting)
+* [Common Issues in Kendo UI Upload]({% slug troubleshooting_upload_widget %})
+* [Common Issues Related to Styling, Appearance, and Rendering]({% slug commonissues_troubleshooting_kendouistyling %})
 * [Common Issues in Telerik UI for ASP.NET MVC](/aspnet-mvc/troubleshooting)
 * [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/grid/troubleshooting)
 * [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/upload/troubleshooting)

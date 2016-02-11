@@ -33,7 +33,7 @@ This should add a similar line in your `project.json`:
 
         "dependencies": {
             ...
-            "Kendo.Mvc": "2015.3.1120"
+            "Kendo.Mvc": "2016.1.112"
         }
 
 1. Open `Startup.cs` and locate the `ConfigureServices` method. Add the following snippet:

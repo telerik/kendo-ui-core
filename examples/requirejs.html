@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../dist/styles/web/kendo.common-material.core.min.css">
+        <link rel="stylesheet" href="../dist/styles/web/kendo.material.min.css">
+        <!-- Include RequireJS -->
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
+    </head>
+    <body>
+        <select id="dropdownlist"></select>
+        <script>
+        require.config({
+          baseUrl: "../dist/js/", // the path where the kendo scripts are present
+          paths: {
+            "jquery": "http://code.jquery.com/jquery-1.9.1.min",
+          }
+        });
+
+        require([ "jquery", "kendo.dropdownlist.min" ], function($, kendo) {
+          console.log(kendo)
+
+          $("#dropdownlist").kendoDropDownList({
+            dataSource: {
+              data: [{name:"Jane Doe", value: 1}, {name:"John Doe", value: 2}]
+            },
+            dataTextField: "name",
+            dataValueField: "value"
+          });
+        });
+        </script>
+    </body>
+</html>

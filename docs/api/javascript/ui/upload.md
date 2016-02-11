@@ -652,6 +652,8 @@ List of the files that were uploaded or removed . Each file has:
 *   extension - the file extension
         including the leading dot - ".jpg", ".png", etc.
 *   size - the file size in bytes (null if not available)
+*   uid - the unique identifier of the file or batch of files
+
 
 ### complete
 
@@ -721,6 +723,7 @@ List of the files that were uploaded or removed . Each file has:
 *   extension - the file extension
         including the leading dot - ".jpg", ".png", etc.
 *   size - the file size in bytes (null if not available)
+*   uid - the unique identifier of the file or batch of files
 
 ##### e.operation `String`
 
@@ -778,6 +781,7 @@ List of the files that are being uploaded. Each file has:
 *   extension - the file extension
         including the leading dot - ".jpg", ".png", etc.
 *   size - the file size in bytes (null if not available)
+*   uid - the unique identifier of the file or batch of files
 
 ##### percentComplete `Number`
 
@@ -821,6 +825,7 @@ List of the files that were uploaded or removed . Each file has:
 *   extension - the file extension
         including the leading dot - ".jpg", ".png", etc.
 *   size - the file size in bytes (null if not available)
+*   uid - the unique identifier of the file or batch of files
 
 ##### data `Object`
 
@@ -867,6 +872,7 @@ An array of the selected files. Each item of the array is an object with the fol
 *   extension - the file extension of a selected file, including the leading dot (i.e. ".jpg")
 *   size - the size (in bytes) of a selected file (null, if unavailable)
 *   rawFile - an in-memory representation of a selected file
+*   uid - the unique identifier of the file or batch of files
 
 ### success
 
@@ -906,6 +912,7 @@ List of the files that were uploaded or removed. Each file has:
 *   name
 *   extension - the file extension including the leading dot - ".jpg", ".png", etc.
 *   size - the file size in bytes (null if not available)
+*   uid - the unique identifier of the file or batch of files
 
 ##### e.operation `String`
 
@@ -944,6 +951,7 @@ List of the files that will be uploaded. File fields:
 *   name
 *   extension - the file extension including the leading dot - ".jpg", ".png", etc.
 *   size - the file size in bytes (null if not available)
+*   uid - the unique identifier of the file or batch of files
 
 ##### data `Object`
 
@@ -1046,4 +1054,3 @@ The request will be in UNSENT state.
             e.formData.append("foo", "bar");
         }
     </script>
-

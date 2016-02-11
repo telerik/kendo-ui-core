@@ -11071,6 +11071,8 @@ The top margin of the labels.
 
 The padding of the labels. A numeric value will set all paddings.
 
+> Bar and column series always apply full padding and will ignore this setting.
+
 #### Example - set the chart series label padding as a number
 
     <div id="chart"></div>
@@ -31940,6 +31942,28 @@ The [configuration](#configuration) options with which the chart is initialized.
     chart.refresh();
     </script>
 
+### surface `kendo.drawing.Surface`
+The drawing surface of the Chart. See [Drawing API](http://docs.telerik.com/kendo-ui/api/javascript/drawing).
+
+#### Example - bind to surface events
+
+    <div id="chart"></div>
+    <script>
+        $("#chart").kendoChart({
+            series: [{
+                type: "column", data: [1, 2]
+            }],
+            render: function(e) {
+                e.surface.bind("mouseenter", onShapeMouseEnter);
+            }
+        });
+
+        function onShapeMouseEnter(e) {
+            // http://docs.telerik.com/kendo-ui/api/javascript/drawing/surface#events-mouseenter
+            console.log(e);
+        }
+    </script>
+
 ## Methods
 
 ### destroy
@@ -31980,6 +32004,21 @@ The width of the exported image. Defaults to the chart width.
 ##### options.height `String`
 The height of the exported image. Defaults to the chart height.
 
+##### options.cors `String` *(default: "anonymous")*
+Specifies how [cross-origin images](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image)
+should be requested.
+
+Requesting images without CORS will "taint" the canvas. It will still be visible on the page, but all
+script access to it is disabled to prevent information disclosure.
+
+By default they're requested anonymously. Available options are:
+* "anonymous" - do not send user credentials as part of the request
+* "use-credentials" - send credentials as part of the request
+* false - fetch images without CORS, possibly tainting the canvas
+
+See [crossorigin attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-crossorigin)
+for more details.
+
 #### Returns
 `Promise` A promise that will be resolved with a PNG image encoded as a Data URI.
 
@@ -31987,6 +32026,7 @@ The height of the exported image. Defaults to the chart height.
     <div id="chart"></div>
     <script>
         $("#chart").kendoChart({
+            transitions: false,
             series: [{
                 type: "column",
                 data: [1, 2, 3]
@@ -32028,6 +32068,7 @@ Parameters for the exported PDF file.
     <div id="chart"></div>
     <script>
         $("#chart").kendoChart({
+            transitions: false,
             series: [{
                 type: "column",
                 data: [1, 2, 3]
@@ -32072,6 +32113,7 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
     <div id="chart"></div>
     <script>
         $("#chart").kendoChart({
+            transitions: false,
             series: [{
                 type: "column",
                 data: [1, 2, 3]

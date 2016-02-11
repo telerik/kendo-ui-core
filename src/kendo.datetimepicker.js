@@ -319,21 +319,28 @@ var __meta__ = { // jshint ignore:line
         },
 
         _change: function(value) {
-            var that = this;
+            var that = this,
+            oldValue = that.element.val(),
+            dateChanged;
 
             value = that._update(value);
+            dateChanged = +that._old != +value;
 
-            if (+that._old != +value) {
+            var valueUpdated = dateChanged && !that._typing;
+            var textFormatted = oldValue !== that.element.val();
+
+            if (valueUpdated || textFormatted) {
+                that.element.trigger(CHANGE);
+            }
+
+            if (dateChanged) {
                 that._old = value;
                 that._oldText = that.element.val();
 
                 that.trigger(CHANGE);
-
-                if (!that._typing) {
-                    // trigger the DOM change event so any subscriber gets notified
-                    that.element.trigger(CHANGE);
-                }
             }
+
+            that._typing = false;
         },
 
         _option: function(option, value) {
@@ -524,7 +531,7 @@ var __meta__ = { // jshint ignore:line
                         msValue = +value,
                         msMin = +options.min,
                         msMax = +options.max,
-                        current;
+                        current, adjustedDate;
 
                     if (msValue === msMin || msValue === msMax) {
                         current = new DATE(+that._value);
@@ -533,6 +540,15 @@ var __meta__ = { // jshint ignore:line
                         if (isInRange(current, msMin, msMax)) {
                             value = current;
                         }
+                    }
+
+                    if (that._value) {
+
+                       adjustedDate = kendo.date.setHours(new Date(value), that._value);
+
+                       if (isInRange(adjustedDate, msMin, msMax)) {
+                           value = adjustedDate;
+                       }
                     }
 
                     that._change(value);

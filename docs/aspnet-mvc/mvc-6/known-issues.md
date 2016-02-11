@@ -34,7 +34,7 @@ Come back often for updates.
 
 ### Grid
 
-- Server-side rendering is not supported
+- Server-side rendering is not supported (Toolbar template, Column Header template, Column Template are no longet rendered on the server)
 
 ### Chart
 

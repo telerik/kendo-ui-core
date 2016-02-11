@@ -1,6 +1,6 @@
 ---
 title: Welcome to Kendo UI!
-page_title: Welcome to Kendo UI! | Kendo UI
+page_title: Introduction | Kendo UI Docs
 description: "Learn about the Kendo UI controls, their distributions, frameworks, tools, and utilities."
 previous_url: /index
 slug: welcometo_kendoui
@@ -69,7 +69,7 @@ HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to co
 
 Kendo UI Core is the free and open-source Kendo UI distribution, released under Apache v2.0 License.
 It provides access to a limited number of widgets and framework features, and to 1,000+ tests running across browsers for each commit to the [Kendo UI Core GitHub repository](https://github.com/telerik/kendo-ui-core).
-Kendo UI Core is suitable for open-source or commercial projects that do not require complex UI, such as Grid, Chart, etc., nor dedicated technical support. Kendo UI Core does not offer dedicated technical support. 
+Kendo UI Core is suitable for open-source or commercial projects that do not require complex UI, such as Grid, Chart, etc., nor dedicated technical support. Kendo UI Core does not offer dedicated technical support.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
@@ -78,14 +78,18 @@ Kendo UI is also incorporated into products such as [Telerik Platform](http://ww
 
 ## Next Steps
 
-* [Getting Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Install Kendo UI as a Bower Package]({% slug kendoui_bower_packages_kendoui_installation %})
 * [Use Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
 * [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
-* [Initialize a Kendo UI Widget As a jQuery Plug-In]({% slug initialize_widgets_using_jquery_plugins_installation %})
-* [Initialize a Kendo UI Widget from Markup]({% slug initialize_widgets_using_markup_installation %})
-* [Call Widget Methods and Bind to Widget Events]({% slug widget_methodsand_events_kendoui_installation %})
+* [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
+* [Access Widget DOM Elements: wrapper and element]({% slug widgetwrapperandelement_references_gettingstarted %})
+* [Set Data Attributes]({% slug dataattributes_configuration_installation %})
+* [Call Widget Methods and Bind to Events]({% slug widget_methodsand_events_kendoui_installation %})
+* [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
+* [Create Custom Kendo UI Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
 
 ## Learning Resources
 

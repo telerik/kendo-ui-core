@@ -91,11 +91,14 @@ and check the [JavaScript Dependencies](/intro/installation/prerequisites) help 
         </body>
     </html>
 
-## Next Steps
+## Next Step
 
-You can watch the videos in the [Kendo UI YouTube channel](http://www.youtube.com/kendouitv):
+Watch the videos in the [Kendo UI YouTube channel](http://www.youtube.com/kendouitv):
 
 1. [Getting Started With The PHP Wrappers For Kendo UI: Part 1](http://www.youtube.com/watch?v=2Kpgp_nocEI)
 1. [Getting Started With The PHP Wrappers For Kendo UI: Part 2](https://www.youtube.com/watch?v=RQCLqA6Pu_E)
 1. [Getting Started With The PHP Wrappers For Kendo UI: Part 3](https://www.youtube.com/watch?v=zYh6cuU_leQ)
 
+For more examples on how to use Kendo UI with PHP wrappers, visit the following GitHub repository:
+
+* [Collected Kendo UI Examples on Using PHP](https://github.com/telerik/kendo-examples-php)

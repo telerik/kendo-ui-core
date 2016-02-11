@@ -979,27 +979,6 @@ If set to `true` the widget will be enabled. If set to `false` the widget will b
     combobox.enable(true);
     </script>
 
-### readonly
-
-Toggles the readonly state of the widget. When the widget is readonly it doesn't allow user input.
-
-> There is a difference between disabled and readonly mode. The value of a disabled widget is **not** posted as part of a `form` whereas the value of a readonly widget is posted.
-
-#### Parameters
-
-##### readonly `Boolean`
-
-If set to `true` the widget will not allow user input. If set to `false` the widget will allow user input.
-
-#### Example - make the widget readonly
-
-    <input id="combobox" />
-    <script>
-    $("#combobox").kendoComboBox();
-    var combobox = $("#combobox").data("kendoComboBox");
-    combobox.readonly(true);
-    </script>
-
 ### focus
 
 Focuses the widget.
@@ -1012,6 +991,14 @@ Focuses the widget.
     var combobox = $("#combobox").data("kendoComboBox");
     combobox.focus();
     </script>
+
+### items
+
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view).
+
+#### Returns
+
+`Array` The currently rendered dropdown list items (`<li>` elements).
 
 ### open
 
@@ -1033,6 +1020,27 @@ Opens the popup.
 
     var combobox = $("#combobox").data("kendoComboBox");
     combobox.open();
+    </script>
+
+### readonly
+
+Toggles the readonly state of the widget. When the widget is readonly it doesn't allow user input.
+
+> There is a difference between disabled and readonly mode. The value of a disabled widget is **not** posted as part of a `form` whereas the value of a readonly widget is posted.
+
+#### Parameters
+
+##### readonly `Boolean`
+
+If set to `true` the widget will not allow user input. If set to `false` the widget will allow user input.
+
+#### Example - make the widget readonly
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox();
+    var combobox = $("#combobox").data("kendoComboBox");
+    combobox.readonly(true);
     </script>
 
 ### refresh
@@ -1090,6 +1098,9 @@ The filter value.
 ### select
 
 Gets or sets the selected item. Selects the item provided as an argument and updates the value and text of the widget.
+
+> **Important:** When **virtualization** is enabled, the method **does not support** selection with a *function predicate*. The predicate function looks only
+in the current datasource view, which represents only the active range/page. Hence it will not work properly.
 
 > **Important:** This method **does not trigger** [change](#events-change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
@@ -1242,6 +1253,8 @@ Characters to force a suggestion.
 Gets or sets the text of the ComboBox. Widget will select the item with same text. If
 there are no matches then the text will be considered as a custom value of the widget.
 
+> **Important:** When the `autoBind` option is set to *false*, the widget will update only the selected text. The widget will stay **unbound**.
+
 > **Important:** This method **does not trigger** [change](#events-change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
@@ -1308,6 +1321,8 @@ Defines the whether to open/close the drop-down list.
 Gets or sets the value of the ComboBox.
 
 > **Important:** If the widget is not bound, value method will pre-fetch the data before continue with the value setting.
+
+> **Important:** The widget will **clear the applied filter** if a new value is set. Thus it ensures that the original/whole data set is available for selection.
 
 > **Important:** This method **does not trigger** [change](#events-change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.

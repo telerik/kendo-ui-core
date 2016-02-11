@@ -329,6 +329,9 @@ var __meta__ = { // jshint ignore:line
         expand: function (element, useAnimation) {
             var that = this,
                 animBackup = {};
+
+            element = this.element.find(element);
+
             if (that._animating && element.find("ul").is(":visible")) {
                  that.one("complete", function() {
                     setTimeout(function() {
@@ -340,8 +343,6 @@ var __meta__ = { // jshint ignore:line
             that._animating = true;
 
             useAnimation = useAnimation !== false;
-
-            element = this.element.find(element);
 
             element.each(function (index, item) {
                 item = $(item);

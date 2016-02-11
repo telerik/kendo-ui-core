@@ -200,7 +200,11 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "startswith": "Starts with",
     "contains": "Contains",
     "doesnotcontain": "Does not contain",
-    "endswith": "Ends with"
+    "endswith": "Ends with",
+    "isnull": "Is null",
+    "isnotnull": "Is not null",
+    "isempty": "Is empty",
+    "isnotempty": "Is not empty"
   },
   "number": {
     "eq": "Is equal to",
@@ -208,7 +212,9 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "gte": "Is greater than or equal to",
     "gt": "Is greater than",
     "lte": "Is less than or equal to",
-    "lt": "Is less than"
+    "lt": "Is less than",
+    "isnull": "Is null",
+    "isnotnull": "Is not null"
   },
   "date": {
     "eq": "Is equal to",
@@ -216,11 +222,15 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "gte": "Is after or equal to",
     "gt": "Is after",
     "lte": "Is before or equal to",
-    "lt": "Is before"
+    "lt": "Is before",
+    "isnull": "Is null",
+    "isnotnull": "Is not null"
   },
   "enums": {
     "eq": "Is equal to",
-    "neq": "Is not equal to"
+    "neq": "Is not equal to",
+    "isnull": "Is null",
+    "isnotnull": "Is not null"
   }
 });
 }
@@ -633,8 +643,21 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
       "saveAsType": "Save as type"
     }
   },
-  "excelExportDialog": {
-    "title": "Export to Excel..."
+  "exportAsDialog": {
+    "title": "Export...",
+    "labels": {
+      "fileName": "File name",
+      "saveAsType": "Save as type",
+      "exportArea": "Export",
+      "paperSize": "Paper size",
+      "margins": "Margins",
+      "orientation": "Orientation",
+      "print": "Print",
+      "guidelines": "Guidelines",
+      "center": "Center",
+      "horizontally": "Horizontally",
+      "vertically": "Vertically"
+    }
   },
   "modifyMergedDialog": {
     "errorMessage": "Cannot change part of a merged cell."
@@ -722,7 +745,7 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
   "cut": "Cut",
   "deleteColumn": "Delete column",
   "deleteRow": "Delete row",
-  "excelExport": "Export to Excel...",
+  "excelImport": "Import from Excel...",
   "filter": "Filter",
   "fontFamily": "Font",
   "fontSize": "Font size",
@@ -756,11 +779,13 @@ $.extend(true, kendo.spreadsheet.messages.toolbar,{
     "mergeVertically": "Merge vertically",
     "unmerge": "Unmerge"
   },
+  "open": "Open...",
   "paste": "Paste",
   "quickAccess": {
     "redo": "Redo",
     "undo": "Undo"
   },
+  "saveAs": "Save As...",
   "sortAsc": "Sort ascending",
   "sortDesc": "Sort descending",
   "sortButtons": {
@@ -821,6 +846,18 @@ $.extend(true, kendo.ui.TreeList.prototype.options.messages,{
       "excel": "Export to Excel",
       "pdf": "Export to PDF"
   }
+});
+}
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.columnMenu =
+$.extend(true, kendo.ui.TreeList.prototype.options.columnMenu, {
+    "messages": {
+        "columns": "Choose columns",
+        "filter": "Apply filter",
+        "sortAscending": "Sort (asc)",
+        "sortDescending": "Sort (desc)"
+    }
 });
 }
 

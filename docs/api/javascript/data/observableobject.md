@@ -7,7 +7,7 @@ description: The documentation contains examples for the configuration of a new 
 # kendo.data.ObservableObject
 
 The `kendo.data.ObservableObject` is the building block of [Kendo MVVM](/framework/mvvm/overview). In addition
-the items of the [kendo.dat.DataSource](/framework/datasource/overview) are `kendo.data.ObservableObject` instances.
+the items of the [kendo.data.DataSource](/framework/datasource/overview) are `kendo.data.ObservableObject` instances.
 
 Inherits from [kendo.Observable](/api/javascript/observable).
 
@@ -32,7 +32,7 @@ To create a new `ObservableObject` use its constructor or the `kendo.observable`
 > **Important:** Complex fields are automatically wrapped in nested `ObservableObject` instances.
 > Array fields are wrapped as `kendo.data.ObservableArray` objects.
 > The `change` event of the child objects will bubble to the parent `ObservableObject`.
-> Fields, which name are prefixed with an underscore will not be wrapped.
+> Fields with names that are prefixed with an underscore will not be wrapped.
 
 #### Example - creating ObservableObject with complex and array fields
 

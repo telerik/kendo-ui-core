@@ -1090,6 +1090,7 @@ Returns list of raw data records corresponding to the selected items.
     </script>
 
 ### destroy
+
 Prepares the **MultiSelect** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
 
 > **Important:** This method does not remove the MultiSelect element from DOM.
@@ -1130,6 +1131,47 @@ If set to `true` the widget will be enabled. If set to `false` the widget will b
     multiselect.enable(true);
     </script>
 
+### focus
+
+Focuses the widget.
+
+#### Example - focus the widget
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect();
+    var multiselect = $("#multiselect").data("kendoMultiSelect");
+    multiselect.focus();
+    </script>
+
+### items
+
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view).
+
+#### Returns
+
+`Array` The currently rendered dropdown list items (`<li>` elements).
+
+### open
+
+Opens the popup.
+
+#### Example
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect();
+
+    var multiselect = $("#multiselect").data("kendoMultiSelect");
+    multiselect.focus();
+    </script>
+
 ### readonly
 
 Toggles the readonly state of the widget. When the widget is readonly it doesn't allow user input.
@@ -1152,39 +1194,6 @@ If set to `true` the widget will not allow user input. If set to `false` the wid
     $("#multiselect").kendoMultiSelect();
     var multiselect = $("#multiselect").data("kendoMultiSelect");
     multiselect.readonly(true);
-    </script>
-
-### focus
-
-Focuses the widget.
-
-#### Example - focus the widget
-
-    <select id="multiselect" multiple="multiple">
-        <option>Item1</option>
-        <option>Item2</option>
-    </select>
-    <script>
-    $("#multiselect").kendoMultiSelect();
-    var multiselect = $("#multiselect").data("kendoMultiSelect");
-    multiselect.focus();
-    </script>
-
-### open
-
-Opens the popup.
-
-#### Example
-
-    <select id="multiselect" multiple="multiple">
-        <option>Item1</option>
-        <option>Item2</option>
-    </select>
-    <script>
-    $("#multiselect").kendoMultiSelect();
-
-    var multiselect = $("#multiselect").data("kendoMultiSelect");
-    multiselect.focus();
     </script>
 
 ### refresh
@@ -1280,6 +1289,8 @@ Defines the whether to open/close the drop-down list.
 Gets or sets the value of the MultiSelect.
 
 > **Important:** If there are no items, the value method will pre-fetch the data before continue with the value setting.
+
+> **Important:** The widget will **clear the applied filter** if a new value is set. Thus it ensures that the original/whole data set is available for selection.
 
 > **Important:** This method **does not trigger** [change](#events-change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.

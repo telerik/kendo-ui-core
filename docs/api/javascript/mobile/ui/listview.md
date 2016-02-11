@@ -6,7 +6,7 @@ description: How to display flat or grouped list of items with Kendo UI Mobile L
 
 # kendo.mobile.ui.ListView
 
-Represents the Kendo UI Mobile ListView widget. Inherits from [kendo.mobile.ui.Widget](/api/framework/mobilewidget).
+Represents the Kendo UI Mobile ListView widget. Inherits from [kendo.mobile.ui.Widget](/api/javascript/mobile/ui/mobilewidget).
 
 ## Configuration
 
@@ -750,7 +750,7 @@ Specifies the comparison operator used in the filter expression. The operator mu
 ### virtualViewSize `Number`
 
  Used when virtualization of local data is used. This configuration is needed to determine the items displayed, since the datasource does not (and should not) have paging set.
- 
+
 #### Example - virtualization using local data
 
     <script src="../content/shared/js/products.js"></script>
@@ -1220,4 +1220,3 @@ Fires when a new item is added to the listview (usually in virtual mode).
 
     new kendo.mobile.Application();
     </script>
-

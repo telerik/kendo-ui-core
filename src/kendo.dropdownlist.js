@@ -24,6 +24,7 @@ var __meta__ = { // jshint ignore:line
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        List = ui.List,
         Select = ui.Select,
         support = kendo.support,
         activeElement = kendo._activeElement,
@@ -42,6 +43,7 @@ var __meta__ = { // jshint ignore:line
         TABINDEX = "tabindex",
         STATE_FILTER = "filter",
         STATE_ACCEPT = "accept",
+        MSG_INVALID_OPTION_LABEL = "The `optionLabel` option is not valid due to missing fields. Define a custom optionLabel as shown here http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist#configuration-optionLabel",
         proxy = $.proxy;
 
     var DropDownList = Select.extend( {
@@ -59,13 +61,16 @@ var __meta__ = { // jshint ignore:line
             element = that.element.on("focus" + ns, proxy(that._focusHandler, that));
 
             that._focusInputHandler = $.proxy(that._focusInput, that);
+
+            that.optionLabel = $();
+            that._optionLabel();
+
             that._inputTemplate();
 
             that._reset();
 
             that._prev = "";
             that._word = "";
-            that.optionLabel = $();
 
             that._wrapper();
 
@@ -95,7 +100,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._initialIndex = options.index;
-            that._optionLabel();
             that._initList();
 
             that._cascade();
@@ -162,7 +166,8 @@ var __meta__ = { // jshint ignore:line
             "filtering",
             "dataBinding",
             "dataBound",
-            "cascade"
+            "cascade",
+            "set"
         ],
 
         setOptions: function(options) {
@@ -177,13 +182,15 @@ var __meta__ = { // jshint ignore:line
             this._enable();
             this._aria();
 
-            if (!this.value() && this.optionLabel[0]) {
+            if (!this.value() && this.hasOptionLabel()) {
                 this.select(0);
             }
         },
 
         destroy: function() {
             var that = this;
+
+            Select.fn.destroy.call(that);
 
             that.wrapper.off(ns);
             that.element.off(ns);
@@ -193,8 +200,6 @@ var __meta__ = { // jshint ignore:line
             that._arrow = null;
 
             that.optionLabel.off();
-
-            Select.fn.destroy.call(that);
         },
 
         open: function() {
@@ -204,7 +209,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            if (!that.listView.isBound() || that._state === STATE_ACCEPT) {
+            if (!that.listView.bound() || that._state === STATE_ACCEPT) {
                 that._open = true;
                 that._state = "rebind";
 
@@ -226,7 +231,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _allowOpening: function() {
-            return this.optionLabel[0] || this.filterInput || this.dataSource.view().length;
+            return this.hasOptionLabel() || this.filterInput || this.dataSource.view().length;
         },
 
         toggle: function(toggle) {
@@ -239,7 +244,7 @@ var __meta__ = { // jshint ignore:line
             if (candidate === undefined) {
                 current = this.listView.focus();
 
-                if (!current && this.selectedIndex === 0 && this.optionLabel[0]) {
+                if (!current && this.selectedIndex === 0 && this.hasOptionLabel()) {
                     return this.optionLabel;
                 }
 
@@ -252,8 +257,6 @@ var __meta__ = { // jshint ignore:line
         dataItem: function(index) {
             var that = this;
             var dataItem = null;
-            var hasOptionLabel = !!that.optionLabel[0];
-            var optionLabel = that.options.optionLabel;
 
             if (index === null) { return index; }
 
@@ -269,15 +272,15 @@ var __meta__ = { // jshint ignore:line
                     } else {
                         index = $(that.items()).index(index);
                     }
-                } else if (hasOptionLabel) {
+                } else if (that.hasOptionLabel()) {
                     index -= 1;
                 }
 
                 dataItem = that.dataSource.flatView()[index];
             }
 
-            if (!dataItem && hasOptionLabel) {
-                dataItem = $.isPlainObject(optionLabel) ? new ObservableObject(optionLabel) : that._assignInstance(that._optionLabelText(), "");
+            if (!dataItem) {
+                dataItem = that._optionLabelDataItem();
             }
 
             return dataItem;
@@ -323,6 +326,7 @@ var __meta__ = { // jshint ignore:line
 
         value: function(value) {
             var that = this;
+            var listView = that.listView;
             var dataSource = that.dataSource;
 
             if (value === undefined) {
@@ -330,11 +334,13 @@ var __meta__ = { // jshint ignore:line
                 return value === undefined || value === null ? "" : value;
             }
 
-            if (value) {
+            if (value || !that.hasOptionLabel()) {
                 that._initialIndex = null;
             }
 
-            if (that._request && that.options.cascadeFrom && that.listView.isBound()) {
+            this.trigger("set", { value: value });
+
+            if (that._request && that.options.cascadeFrom && that.listView.bound()) {
                 if (that._valueSetter) {
                     dataSource.unbind(CHANGE, that._valueSetter);
                 }
@@ -345,17 +351,26 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            that.listView.value(value).done(function() {
+            if (that._isFilterEnabled() && listView.bound() && listView.isFiltered()) {
+                listView.bound(false);
+                that._filterSource();
+            } else {
+                that._fetchData();
+            }
+
+            listView.value(value).done(function() {
                 if (that.selectedIndex === -1 && that.text()) {
                     that.text("");
                     that._accessor("", -1);
                 }
 
-                that._old = that.listView.value()[0];
+                that._old = that._accessor();
                 that._oldIndex = that.selectedIndex;
             });
+        },
 
-            that._fetchData();
+        hasOptionLabel: function() {
+            return this.optionLabel && !!this.optionLabel[0];
         },
 
         _optionLabel: function() {
@@ -388,7 +403,7 @@ var __meta__ = { // jshint ignore:line
 
             that.optionLabelTemplate = template;
 
-            if (!that.optionLabel[0]) {
+            if (!that.hasOptionLabel()) {
                 that.optionLabel = $('<div class="k-list-optionlabel"></div>').prependTo(that.list);
             }
 
@@ -407,17 +422,49 @@ var __meta__ = { // jshint ignore:line
             return (typeof optionLabel === "string") ? optionLabel : this._text(optionLabel);
         },
 
+        _optionLabelDataItem: function() {
+            var that = this;
+            var optionLabel = that.options.optionLabel;
+
+            if (that.hasOptionLabel()) {
+                return $.isPlainObject(optionLabel) ? new ObservableObject(optionLabel) : that._assignInstance(that._optionLabelText(), "");
+            }
+
+            return null;
+        },
+
+        _buildOptions: function(data) {
+            var that = this;
+            if (!that._isSelect) {
+                return;
+            }
+
+            var value = that.listView.value()[0];
+            var optionLabel = that._optionLabelDataItem();
+
+            if (value === undefined || value === null) {
+                value = "";
+            }
+
+            if (optionLabel) {
+                optionLabel = '<option value="' + that._value(optionLabel) + '">' + that._text(optionLabel) + "</option>";
+            }
+
+            that._options(data, optionLabel, value);
+
+            if (value !== List.unifyType(that._accessor(), typeof value)) {
+                that._customOption = null;
+                that._custom(value);
+            }
+        },
+
         _listBound: function() {
             var that = this;
             var initialIndex = that._initialIndex;
-            var optionLabel = that.options.optionLabel;
             var filtered = that._state === STATE_FILTER;
 
             var data = that.dataSource.flatView();
-            var length = data.length;
             var dataItem;
-
-            var value;
 
             that._angularItems("compile");
 
@@ -427,19 +474,7 @@ var __meta__ = { // jshint ignore:line
 
             that.popup.position();
 
-            if (that._isSelect) {
-                value = that.value();
-
-                if (length) {
-                    if (optionLabel) {
-                        optionLabel = that._option("", that._optionLabelText());
-                    }
-                } else if (value) {
-                    optionLabel = that._option(value, that.text());
-                }
-
-                that._options(data, optionLabel, value);
-            }
+            that._buildOptions(data);
 
             that._makeUnselectable();
 
@@ -451,7 +486,7 @@ var __meta__ = { // jshint ignore:line
                 that._open = false;
 
                 if (!that._fetch) {
-                    if (length) {
+                    if (data.length) {
                         if (!that.listView.value().length && initialIndex > -1 && initialIndex !== null) {
                             that.select(initialIndex);
                         }
@@ -580,10 +615,6 @@ var __meta__ = { // jshint ignore:line
                    .attr(ARIA_READONLY, readonly);
         },
 
-        _option: function(value, text) {
-            return '<option value="' + value + '">' + text + "</option>";
-        },
-
         _keydown: function(e) {
             var that = this;
             var key = e.keyCode;
@@ -611,7 +642,7 @@ var __meta__ = { // jshint ignore:line
 
             e.keyCode = key;
 
-            if (altKey && key === keys.UP) {
+            if ((altKey && key === keys.UP) || key === keys.ESC) {
                 that._focusElement(that.wrapper);
             }
 
@@ -646,10 +677,12 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _matchText: function(text, index) {
-            var that = this;
-            var ignoreCase = that.options.ignoreCase;
-            var found = false;
+        _matchText: function(text, word) {
+            var ignoreCase = this.options.ignoreCase;
+
+            if (text === undefined || text === null) {
+                return false;
+            }
 
             text = text + "";
 
@@ -657,48 +690,61 @@ var __meta__ = { // jshint ignore:line
                 text = text.toLowerCase();
             }
 
-            if (text.indexOf(that._word) === 0) {
-                if (that.optionLabel[0]) {
-                    index += 1;
+            return text.indexOf(word) === 0;
+        },
+
+        _shuffleData: function(data, splitIndex) {
+            var optionDataItem = this._optionLabelDataItem();
+
+            if (optionDataItem) {
+                data = [optionDataItem].concat(data);
+            }
+
+            return data.slice(splitIndex).concat(data.slice(0, splitIndex));
+        },
+
+        _selectNext: function() {
+            var that = this;
+            var data = that.dataSource.flatView();
+            var dataLength = data.length + (that.hasOptionLabel() ? 1 : 0);
+            var isInLoop = sameCharsOnly(that._word, that._last);
+            var startIndex = that.selectedIndex;
+            var oldFocusedItem;
+            var text;
+
+            if (startIndex === -1) {
+                startIndex = 0;
+            } else {
+                startIndex += isInLoop ? 1 : 0;
+                startIndex = normalizeIndex(startIndex, dataLength);
+            }
+
+            data = data.toJSON ? data.toJSON() : data.slice();
+            data = that._shuffleData(data, startIndex);
+
+            for (var idx = 0; idx < dataLength; idx++) {
+                text = that._text(data[idx]);
+
+                if (isInLoop && that._matchText(text, that._last)) {
+                    break;
+                } else if (that._matchText(text, that._word)) {
+                    break;
+                }
+            }
+
+            if (idx !== dataLength) {
+                oldFocusedItem = that._focus();
+
+                that._select(normalizeIndex(startIndex + idx, dataLength));
+
+                if (that.trigger("select", { item: that._focus() })) {
+                    that._select(oldFocusedItem);
                 }
 
-                that._select(index);
                 if (!that.popup.visible()) {
                     that._change();
                 }
-
-                found = true;
             }
-
-            return found;
-        },
-
-        _selectNext: function(index) {
-            var that = this;
-            var startIndex = index;
-            var data = that.dataSource.flatView();
-            var length = data.length;
-            var text;
-
-            for (; index < length; index++) {
-                text = that._text(data[index]);
-
-                if (text && that._matchText(text, index) && !(that._word.length === 1 && startIndex === that.selectedIndex)) {
-                    return true;
-                }
-            }
-
-            if (startIndex > 0 && startIndex < length) {
-                index = 0;
-                for (; index <= startIndex; index++) {
-                    text = that._text(data[index]);
-                    if (text && that._matchText(text, index)) {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
         },
 
         _keypress: function(e) {
@@ -709,8 +755,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             var character = String.fromCharCode(e.charCode || e.keyCode);
-            var index = that.selectedIndex;
-            var length = that._word.length;
 
             if (that.options.ignoreCase) {
                 character = character.toLowerCase();
@@ -720,20 +764,7 @@ var __meta__ = { // jshint ignore:line
                 e.preventDefault();
             }
 
-            if (!length) {
-                that._word = character;
-            }
-
-            if (that._last === character && length <= 1 && index > -1) {
-                if (that._selectNext(index)) {
-                    return;
-                }
-            }
-
-            if (length) {
-                that._word += character;
-            }
-
+            that._word += character;
             that._last = character;
 
             that._search();
@@ -800,16 +831,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 that._select(function(dataItem) {
-                    var text = that._text(dataItem);
-
-                    if (text !== undefined) {
-                        text = (text + "");
-                        if (ignoreCase) {
-                            text = text.toLowerCase();
-                        }
-
-                        return text.indexOf(word) === 0;
-                    }
+                    return that._matchText(that._text(dataItem), word);
                 });
             }
         },
@@ -817,11 +839,10 @@ var __meta__ = { // jshint ignore:line
         _search: function() {
             var that = this;
             var dataSource = that.dataSource;
-            var index = that.selectedIndex;
 
             clearTimeout(that._typingTimeout);
 
-            if (that.options.filter !== "none") {
+            if (that._isFilterEnabled()) {
                 that._typingTimeout = setTimeout(function() {
                     var value = that.filterInput.val();
 
@@ -837,20 +858,14 @@ var __meta__ = { // jshint ignore:line
                     that._word = "";
                 }, that.options.delay);
 
-                if (index === -1) {
-                    index = 0;
-                }
-
-                if (!that.ul[0].firstChild) {
+                if (!that.listView.bound()) {
                     dataSource.fetch().done(function () {
-                        if (dataSource.data()[0] && index > -1) {
-                            that._selectNext(index);
-                        }
+                        that._selectNext();
                     });
                     return;
                 }
 
-                that._selectNext(index);
+                that._selectNext();
             }
         },
 
@@ -859,7 +874,7 @@ var __meta__ = { // jshint ignore:line
             var isFunction = typeof candidate === "function";
             var jQueryCandidate = !isFunction ? $(candidate) : $();
 
-            if (this.optionLabel[0]) {
+            if (this.hasOptionLabel()) {
                 if (typeof candidate === "number") {
                     if (candidate > -1) {
                         candidate -= 1;
@@ -889,7 +904,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _firstItem: function() {
-            if (this.optionLabel[0]) {
+            if (this.hasOptionLabel()) {
                 this._focus(this.optionLabel);
             } else {
                 this.listView.focusFirst();
@@ -1054,8 +1069,6 @@ var __meta__ = { // jshint ignore:line
 
         _filterHeader: function() {
             var icon;
-            var options = this.options;
-            var filterEnalbed = options.filter !== "none";
 
             if (this.filterInput) {
                 this.filterInput
@@ -1066,11 +1079,12 @@ var __meta__ = { // jshint ignore:line
                 this.filterInput = null;
             }
 
-            if (filterEnalbed) {
+            if (this._isFilterEnabled()) {
                 icon = '<span unselectable="on" class="k-icon k-i-search">select</span>';
 
                 this.filterInput = $('<input class="k-textbox"/>')
                                       .attr({
+                                          placeholder: this.element.attr("placeholder"),
                                           role: "listbox",
                                           "aria-haspopup": true,
                                           "aria-expanded": false
@@ -1123,6 +1137,7 @@ var __meta__ = { // jshint ignore:line
                               .addClass(DOMelement.className)
                               .css("display", "")
                               .attr({
+                                  accesskey: element.attr("accesskey"),
                                   unselectable: "on",
                                   role: "listbox",
                                   "aria-haspopup": true,
@@ -1146,6 +1161,14 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.valueTemplate = template;
+
+            if (that.hasOptionLabel()) {
+                try {
+                    that.valueTemplate(that._optionLabelDataItem());
+                } catch(e) {
+                    throw new Error(MSG_INVALID_OPTION_LABEL);
+                }
+            }
         },
 
         _textAccessor: function(text) {
@@ -1174,7 +1197,14 @@ var __meta__ = { // jshint ignore:line
                     };
                 };
                 this.angular("cleanup", getElements);
-                span.html(template(dataItem));
+
+                try {
+                    span.html(template(dataItem));
+                } catch(e) {
+                    //dataItem has missing fields required in custom template
+                    span.html("");
+                }
+
                 this.angular("compile", getElements);
             } else {
                 return span.text();
@@ -1230,6 +1260,22 @@ var __meta__ = { // jshint ignore:line
         }
 
         instance[fields[lastIndex]] = value;
+    }
+
+    function normalizeIndex(index, length) {
+        if (index >= length) {
+            index -= length;
+        }
+        return index;
+    }
+
+    function sameCharsOnly(word, character) {
+        for (var idx = 0; idx < word.length; idx++) {
+            if (word.charAt(idx) !== character) {
+                return false;
+            }
+        }
+        return true;
     }
 
     ui.plugin(DropDownList);

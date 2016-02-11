@@ -1,23 +1,18 @@
 ---
 title: Supported Browsers
-page_title: Supported browsers for Kendo UI Drawing API
-position: 100
+page_title: Supported Browsers | Kendo UI Drawing API
+description: "Learn about the browsers which the Kendo UI Drawing API supports."
+slug: supportedbrowsers_drawingapi
+position: 5
 ---
 
 # Supported Browsers
 
-The Drawing API adapts to the browser capabilities by using dedicated
-[Surface](/api/dataviz/drawing/surface) implementations.
+The [Kendo UI Drawing API](http://demos.telerik.com/kendo-ui/drawing/index) adapts to the browser capabilities by using dedicated [`Surface`](/api/dataviz/drawing/surface) implementations. The [`Surface.create`](/api/dataviz/drawing/surface#create) method uses feature detection to determine the default `surface` type.
 
-The [Surface.create](/api/dataviz/drawing/surface#create) method
-uses feature detection to determine the default surface type.
+## Surfaces by Browser
 
-## Supported surfaces by browser
-
-Surfaces are listed in order of preference.
-
-The user can request a specific [type](/api/dataviz/drawing/surface#configuration-type),
-e.g. "canvas", if desired. The preference will be ignored if no support is provided by the browser.
+Surfaces are listed in their order of preference. You can request a specific [`type`](/api/dataviz/drawing/surface#configuration-type), such as `canvas`, if desired. The preference will be ignored if no support is provided by the browser.
 
 | Surface | IE   | Chrome| Firefox | Safari | iOS | Android
 | ---     | ---  | ---   | ---     | ---    | --- | ---
@@ -27,9 +22,17 @@ e.g. "canvas", if desired. The preference will be ignored if no support is provi
 
 ## PDF Output
 
-Generating PDF files is supported in IE 9+ and all other major desktop browsers.
+Generating PDF files is supported in Internet Explorer 9 and later and in all other major desktop browsers.
 
-## Known limitations
+## Known Limitations
 
-- The Canvas surface doesn't fire [events](/api/dataviz/drawing/surface#events)
+- The Canvas surface does not fire [`events`](/api/dataviz/drawing/surface#events).
 
+## See Also
+
+Other articles on Kendo UI Drawing API:
+
+* [Overview of the Drawing API]({% slug overview_kendoui_drawingapi %})
+* [Drawing of Basic Shapes]({% slug basicshapes_drawingapi %})
+* [Export a Drawing in PDF]({% slug pdfderawingexport_drawingapi %})
+* [Drawing of HTML Elements]({% slug drawingofhtmlelements_drawingapi %})

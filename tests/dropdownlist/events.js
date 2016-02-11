@@ -702,6 +702,38 @@
         equal(dropdownlist.value(), "foo");
     });
 
+    test("widget triggers select event when select item with loop search", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: ["foo", "foo1", "foo2"],
+            select: function(e) {
+                equal(e.item.text(), "foo1");
+            }
+        });
+
+        dropdownlist.wrapper.focus()
+                    .trigger({
+                        type: "keypress",
+                        keyCode: "f".charCodeAt(0)
+                    });
+    });
+
+    test("widget prevents selection on loop search preventing select event", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: ["foo", "foo1", "foo2"],
+            select: function(e) {
+                e.preventDefault();
+            }
+        });
+
+        dropdownlist.wrapper.focus()
+                    .trigger({
+                        type: "keypress",
+                        keyCode: "f".charCodeAt(0)
+                    });
+
+        equal(dropdownlist.value(), "foo");
+    });
+
     test("widget passes optionLabel on select", 1, function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: [
@@ -781,6 +813,48 @@
 
         dropdownlist.value(2);
         dropdownlist.wrapper.focus().blur();
+    });
+
+    test("change event is not raised when widget is empty", 0, function() {
+        var select = $("<select></select>").appendTo(QUnit.fixture);
+
+        var dropdownlist = new DropDownList(select, {
+            dataValueField: "id",
+            dataTextField: "name"
+        });
+
+        dropdownlist.setDataSource([
+            { id: 1, name: "name1" },
+            { id: 2, name: "name2" },
+            { id: 3, name: "name3" }
+        ]);
+
+        dropdownlist.bind("change", function() {
+            ok(false);
+        });
+
+        dropdownlist.value("");
+
+        dropdownlist.wrapper.focus().blur();
+    });
+
+    test("trigger set when setting value", 1, function() {
+        var value = "test";
+
+        var dropdownlist = new DropDownList(input, {
+            dataValueField: "id",
+            dataTextField: "name",
+            dataSource: [
+                { id: 1, name: "name1" },
+                { id: 2, name: "name2" },
+                { id: 3, name: "name3" }
+            ],
+            set: function(e) {
+                equal(e.value, value);
+            }
+        });
+
+        dropdownlist.value(value);
     });
 
     test("cascading child triggers filtering event", 1, function() {
