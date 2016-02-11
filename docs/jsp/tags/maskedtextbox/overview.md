@@ -1,20 +1,26 @@
 ---
 title: Overview
-page_title: User guide for Kendo UI MaskedTextBox widget | Kendo UI documentation
-description: How to configure a simple Kendo UI MaskedTextBox widget, add MaskedTextBox, handle events to control widget's behavior.
+page_title: Overview | MaskedTextBox JSP Tag
+description: "Get started with the MaskedTextBox JSP tag in Kendo UI."
+slug: overview_maskedtextbox_uiforjsp
+position: 1
 ---
 
-# MaskedTextBox
+# MaskedTextBox JSP Tag Overview
 
-The MaskedTextBox JSP tag is a server-side wrapper for the [Kendo UI MaskedTextBox](/api/web/maskedtextbox) widget.
+The MaskedTextBox JSP tag is a server-side wrapper for the [Kendo UI MaskedTextBox](/api/javascript/ui/maskedtextbox) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo MaskedTextBox:
+### Configuration
 
-1.  Make sure you have followed all the steps from the [Introduction](/jsp/introduction) help topic.
+Below are listed the steps for you to follow when configuring the Kendo UI MaskedTextBox for binding to data, passed as a model attribute in Spring MVC.
 
-2.  Create a new action method which renders the view:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for JSP]({% slug overview_uiforjsp %}).
+
+**Step 2** Create a new action method which renders the view.
+
+###### Example
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index() {
@@ -22,33 +28,41 @@ Here is how to configure a simple Kendo MaskedTextBox:
             return "web/maskedtextbox/index";
         }
 
-3. Add kendo taglib mapping to the page
+**Step 3** Add the Kendo UI `taglib` mapping to the page.
+
+###### Example
 
         <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 
-4.  Add a maskedtextbox tag:
+**Step 4** Add a `maskedtextbox` tag.
+
+###### Example
 
         <kendo:maskedTextBox name="maskedtextbox" mask="(999) 000-0000" value="555 123 4567">
         </kendo:maskedTextBox>
 
-### Define widget's mask value
+### Mask Values Definition
 
-The MaskedTextBox has [a list of predefined mask rules](/web/maskedtextbox/overview#predefined-mask-rules),
-which can be used to compose the widget's mask.
+The MaskedTextBox has [a list of predefined mask rules]({% slug overview_kendoui_maskedtextbox_widget %}##configuration-Rules), which can be used to compose the mask of the widget.
 
-#### Set a `zip code` mask
+The example below demonstrates how to set a `zip code` mask.
+
+###### Example
 
         <kendo:maskedTextBox name="maskedtextbox" mask="00000-9999">
         </kendo:maskedTextBox>
 
-> If no mask is defined widget will allow any input.
+> **Important**
+>
+> If no mask is defined, widget allows for any input.
 
-### Define a custom mask rule
+### Custom Mask Rules Setup
 
-The MaskedTextBox gives the ability to define custom mask rules if no of the predefined ones is sufficient.
-To add a custom rule use the **rules** attribute:
+The MaskedTextBox enables you to define custom mask rules if none of the predefined ones is sufficient. To add a custom rule, use the `rules` attribute.
 
-#### Define a custom rule for "-" and "+" symbols
+The example below demonstrates how to defines a custom rule for the `-` and `+` symbols.
+
+###### Example
 
         <%
             HashMap<String, String> rules = new HashMap<String, String>();
@@ -59,15 +73,33 @@ To add a custom rule use the **rules** attribute:
         <kendo:maskedTextBox name="maskedtextbox" mask="~0000" rules="<%=rules%>">
         </kendo:maskedTextBox>
 
-> Widgets supports [JavaScript Reguler Expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
-defined as a string or JavaScript function.
+> **Important**
+>
+> The widgets support [JavaScript Reguler Expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions), defined as a string or a JavaScript function.
 
-## Accessing an Existing MaskedTextBox
+## Event Handling
 
-You can reference an existing MaskedTextBox instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/maskedtextbox#methods) to control its behavior.
+### Subscribe to Events
 
-### Accessing an existing MaskedTextBox instance
+You can subscribe to all [events exposed by Kendo UI MaskedTextBox](/api/javascript/ui/maskedtextbox#events) by the handler name.
+
+###### Example
+
+    <kendo:maskedTextBox name="maskedtextbox" change="maskedtextbox_change"></kendo:maskedTextBox>
+
+    <script>
+        function maskedtextbox_change() {
+            //Handle the change event
+        }
+    </script>
+
+## Reference
+
+### Existing Instances
+
+You are able to reference an existing MaskedTextBox instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [MaskedTextBox API](/api/javascript/ui/maskedtextbox#methods) to control its behavior.
+
+###### Example
 
     //Put this after your Kendo MaskedTextBox tag declaration
     <script>
@@ -77,16 +109,10 @@ Once a reference has been established, you can use the [API](/api/web/maskedtext
     });
     </script>
 
-## Handling Kendo UI MaskedTextBox events
+## See Also
 
-You can subscribe to all [events](/api/web/maskedtextbox#events) exposed by Kendo UI MaskedTextBox:
+Other articles on Telerik UI for JSP and on the MaskedTextBox:
 
-### Subscribe by handler name
-
-    <kendo:maskedTextBox name="maskedtextbox" change="maskedtextbox_change"></kendo:maskedTextBox>
-
-    <script>
-        function maskedtextbox_change() {
-            //Handle the change event
-        }
-    </script>
+* [Overview of the Kendo UI MaskedTextBox Widget]({% slug overview_kendoui_maskedtextbox_widget %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

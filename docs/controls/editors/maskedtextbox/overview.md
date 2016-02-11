@@ -33,6 +33,7 @@ For a complete overview of the methods and configuration options MaskedTextBox a
 When a MaskedTextBox is initialized, it will decorate the `<input>` element with a `k-textbox` CSS class.
 
 > **Important**  
+>
 > The default mask is an empty string, which allows any input. If you need to restrict user input, define a mask value.
 
 ## Configuration
@@ -47,7 +48,7 @@ MaskedTextBox provides configuration options that can be easily set during initi
 
 For a complete overview of the methods and configuration options MaskedTextBox applies, [review its API Reference](/api/web/maskedtextbox).
 
-### Mask Rules
+### Rules
 
 The following mask rules are available and predefined:
 
@@ -62,9 +63,10 @@ The following mask rules are available and predefined:
 - `a` - Alphanumeric or space. Accepts letters, digits and space only.
 
 > **Important**  
+>
 > Any mask rule can be escaped using the `\` character. An escaped rule is turned into a literal.
 
-### Mask Literals
+### Literals
 
 The following mask literals are globalized based on the current culture:
 
@@ -73,6 +75,7 @@ The following mask literals are globalized based on the current culture:
 - `$` - Currency symbol. The display character will be set according to current culture used by Kendo UI.
 
 > **Importnat**  
+>
 > Any of the aforementioned literals can be escaped using the `\` character.
 
 ### Customize Mask Rules
@@ -98,6 +101,7 @@ The MaskedTextBox widget provides the option to define custom mask rules during 
     </script>
 
 > **Important**  
+>
 > Any of the predefined rules can be overridden through the [`rules`](/api/web/maskedtextbox#configuration-rules) option.
 
 ## See Also

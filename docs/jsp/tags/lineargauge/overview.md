@@ -1,27 +1,35 @@
 ---
 title: Overview
-page_title: How to use LinearGauge JSP tag | Kendo UI documentation
-description: User Guide for server-side wrapper for Kendo UI LinearGauge for JSP.
+page_title: Overview | LinearGauge JSP Tag
+description: "Get started with the LinearGauge JSP tag in Kendo UI."
+slug: overview_lineargauge_uiforjsp
+position: 1
 ---
 
-# Linear Gauge
+# LinearGauge JSP Tag Overview
 
-The LinearGauge tag is a server-side wrapper for the [Kendo UI DataViz LinearGauge](/api/dataviz/lineargauge) widget.
+The LinearGauge tag is a server-side wrapper for the [Kendo UI LinearGauge](/api/javascript/dataviz/ui/lineargauge) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo UI LinearGauge:
+### Configuration
 
-1.  Make sure you have followed all the steps from the [Introduction](/jsp/introduction) help topic.
+Below are listed the steps for you to follow when configuring the Kendo UI AutoComplete for binding to data, passed as a model attribute in Spring MVC.
 
-2.  Create a new action method to render the view:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for JSP]({% slug overview_uiforjsp %}).
+
+**Step 2** Create a new action method to render the view.
+
+###### Example
 
         @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
         public String index() {
             return "/lineargauge/index";
         }
 
-3.  Add a LinearGauge:
+**Step 3** Add the LinearGauge.
+
+###### Example
 
          <kendo:linearGauge name="gauge">
             <kendo:linearGauge-pointer value="10" />
@@ -29,12 +37,13 @@ Here is how to configure a simple Kendo UI LinearGauge:
             </kendo:linearGauge-scale>
          </kendo:linearGauge>
 
-## Accessing an Existing LinearGauge
+## Reference
 
-You can reference an existing LinearGauge instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/dataviz/lineargauge#methods) to control its behavior.
+### Existing Instances
 
-### Accessing an existing LinearGauge instance
+You are able to reference an existing LinearGauge instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [LinearGauge API](/api/javascript/dataviz/ui/lineargauge#methods) to control its behavior.
+
+###### Example
 
         //Put this after your Kendo UI LinearGauge tag
         <script>
@@ -45,3 +54,10 @@ Once a reference has been established, you can use the [API](/api/dataviz/linear
         });
         </script>
 
+## See Also
+
+Other articles on Telerik UI for JSP and on the LinearGauge:
+
+* [Overview of the Kendo UI LinearGauge Widget]({% slug overview_kendoui_lineargauge_widget %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})
