@@ -9,7 +9,7 @@ position: 1
 
 # Widget DOM Elements
 
-Each Kendo UI widget instance keeps references to two elements - `element` and `wrapper`. Hybrid Kendo UI widgets have an `element` reference only.
+Each Kendo UI widget instance keeps references to two elements&mdash;`element` and `wrapper`. Hybrid Kendo UI widgets have an `element` reference only.
 
 ## References
 
