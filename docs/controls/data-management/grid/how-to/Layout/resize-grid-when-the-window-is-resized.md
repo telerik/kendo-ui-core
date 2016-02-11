@@ -7,7 +7,7 @@ slug: howto_resize_whenthe_windowis_resized_grid
 
 # Resize Grid When Window Is Resized
 
-Web standards require elements with a percentage height to have a parent with an explicit height. The rule applies recursively until an element with a pixel height is reached, or the root HTML element is reached. In the latter case the `body` and `html` elements need a 100% height style as well. 100% high elements cannot have margins, paddings, borders, and siblings.
+Web standards require elements with a percentage height to have a parent with an explicit height. The rule applies recursively until an element with a pixel height is reached, or the root `<html>` element is reached. In the latter case the `body` and `html` elements need a 100% height style as well. 100% high elements cannot have margins, paddings, borders, and siblings.
 
 The example below demonstrates how to resize the Kendo UI Grid when the parent window is resized.
 
