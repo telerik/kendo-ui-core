@@ -14,6 +14,7 @@ The milestones of the approach are:
 * The buttons must be placed in a `<span>` element, which wraps the whole tab text.
 * When adding a new tab with a button programmatically, `encoded` should be set to `false`.
 * The [`tabGroup`](/api/javascript/ui/tabstrip#fields-tabGroup) field. and the [`append`](/api/javascript/ui/tabstrip#methods-append) and [`remove`](/api/javascript/ui/tabstrip#methods-remove) TabStrip methods are used.
+* A `data-type="remove"` attribute is used to distinguish the tab remove buttons.
 
 ###### Example
 
@@ -36,7 +37,7 @@ The milestones of the approach are:
 <div id="tabstrip">
   <ul>
     <li class="k-state-active">Item 1</li>
-    <li><span>Item 2 <button class="k-button k-button-icon"><span class="k-icon k-i-close"></span></button></span></li>
+    <li><span>Item 2 <button data-type="remove" class="k-button k-button-icon"><span class="k-icon k-i-close"></span></button></span></li>
   </ul>
   <div>
     Content 1
@@ -49,30 +50,28 @@ The milestones of the approach are:
 
 <script>
   $(function(){
-    var tabstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+    // initialize the TabStrip. Server wrappers will generate the below line automatically
+    $("#tabstrip").kendoTabStrip();
 
-    function attachRemoveHandlers() {
-      tabstrip.tabGroup.children().each(function() {
-        var element = $(this);
-        element.find(".k-button").off().click(function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          tabstrip.remove(element.index());
-        });
-      });          
-    }
+    // get the widget reference
+    var tabstrip = $("#tabstrip").data("kendoTabStrip");
 
-    attachRemoveHandlers();
+    tabstrip.tabGroup.on("click", "[data-type='remove']", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var item = $(e.target).closest(".k-item");
+        tabstrip.remove(item.index());
+    });
 
     var tabCounter = tabstrip.items().length;
 
     $("#appendButton").click(function(){
       tabstrip.append({
-        text: 'Item ' + (++tabCounter) + ' <button class="k-button k-button-icon"><span class="k-icon k-i-close"></span></button>',
+        text: 'Item ' + (++tabCounter) + ' <button data-type="remove" class="k-button k-button-icon"><span class="k-icon k-i-close"></span></button>',
         encoded: false,
-        content: "Appended Item Content"
+        content: "<p>Appended item " + tabCounter + " content</p>"
       });
-      attachRemoveHandlers();
     });
 
   });
