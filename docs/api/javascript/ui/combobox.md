@@ -979,27 +979,6 @@ If set to `true` the widget will be enabled. If set to `false` the widget will b
     combobox.enable(true);
     </script>
 
-### readonly
-
-Toggles the readonly state of the widget. When the widget is readonly it doesn't allow user input.
-
-> There is a difference between disabled and readonly mode. The value of a disabled widget is **not** posted as part of a `form` whereas the value of a readonly widget is posted.
-
-#### Parameters
-
-##### readonly `Boolean`
-
-If set to `true` the widget will not allow user input. If set to `false` the widget will allow user input.
-
-#### Example - make the widget readonly
-
-    <input id="combobox" />
-    <script>
-    $("#combobox").kendoComboBox();
-    var combobox = $("#combobox").data("kendoComboBox");
-    combobox.readonly(true);
-    </script>
-
 ### focus
 
 Focuses the widget.
@@ -1012,6 +991,14 @@ Focuses the widget.
     var combobox = $("#combobox").data("kendoComboBox");
     combobox.focus();
     </script>
+
+### items
+
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view).
+
+#### Returns
+
+`Array` The currently rendered dropdown list items (`<li>` elements).
 
 ### open
 
@@ -1033,6 +1020,27 @@ Opens the popup.
 
     var combobox = $("#combobox").data("kendoComboBox");
     combobox.open();
+    </script>
+
+### readonly
+
+Toggles the readonly state of the widget. When the widget is readonly it doesn't allow user input.
+
+> There is a difference between disabled and readonly mode. The value of a disabled widget is **not** posted as part of a `form` whereas the value of a readonly widget is posted.
+
+#### Parameters
+
+##### readonly `Boolean`
+
+If set to `true` the widget will not allow user input. If set to `false` the widget will allow user input.
+
+#### Example - make the widget readonly
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox();
+    var combobox = $("#combobox").data("kendoComboBox");
+    combobox.readonly(true);
     </script>
 
 ### refresh

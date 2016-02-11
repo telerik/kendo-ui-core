@@ -385,6 +385,7 @@ Returns the array that is bound to the widget
     </script>
 
 ### destroy
+
 Prepares the **ListView** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
 
 > **Important:** This method does not remove the ListView element from DOM.
@@ -436,6 +437,14 @@ Edit specified ListView item. Fires the [edit](#events-edit) event.
 ##### item `jQuery`
 
 jQuery object which represents the item to be edited.
+
+### items
+
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view).
+
+#### Returns
+
+`Array` The currently rendered ListView items (`<div>`, `<li>`, `<tr>` elements, etc., depending on the item template).
 
 ### refresh
 

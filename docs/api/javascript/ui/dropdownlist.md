@@ -1031,6 +1031,7 @@ The zero-based index of the data record.
     </script>
 
 ### destroy
+
 Prepares the **DropDownList** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
 
 > **Important:** This method does not remove the DropDownList element from DOM.
@@ -1057,27 +1058,13 @@ Focuses the widget.
     dropdownlist.focus();
     </script>
 
-### open
+### items
 
-Opens the popup.
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view).
 
-#### Example
+#### Returns
 
-    <input id="dropdownlist" />
-    <script>
-    $("#dropdownlist").kendoDropDownList({
-      dataSource: [
-        { id: 1, name: "Apples" },
-        { id: 2, name: "Oranges" }
-      ],
-      dataTextField: "name",
-      dataValueField: "id",
-      index: 1
-    });
-
-    var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
-    dropdownlist.open();
-    </script>
+`Array` The currently rendered dropdown list items (`<li>` elements).
 
 ### enable
 
@@ -1101,6 +1088,28 @@ If set to `true` the widget will be enabled. If set to `false` the widget will b
     });
     var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
     dropdownlist.enable(true);
+    </script>
+
+### open
+
+Opens the popup.
+
+#### Example
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      index: 1
+    });
+
+    var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+    dropdownlist.open();
     </script>
 
 ### readonly
