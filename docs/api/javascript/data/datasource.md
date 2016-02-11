@@ -3055,7 +3055,7 @@ The filter configuration. Accepts the same values as the [filter](#configuration
 
 #### Returns
 
-`Object` the current filter configuration.
+`Object` the current filter configuration. Returns `null` if no filter criteria are currently applied. Returns `undefined` if the DataSource instance has not performed filtering so far.
 
 #### Example - set the data source filter
     <script>
@@ -3837,7 +3837,7 @@ The sort configuration. Accepts the same values as the [sort](#configuration-sor
 
 #### Returns
 
-`Array` the current sort configuration.
+`Array` The current sort configuration. Returns `undefined` instead of an empty array, if the DataSource instance has not performed any sorting so far.
 
 #### Example - sort the data items
     <script>
