@@ -6979,6 +6979,14 @@ When using multicolumn headers, using an index will hide a top-level column toge
     grid.hideColumn(grid.columns[0].columns[1]);
     </script>
 
+### items
+
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view) (e.g. the ones on the current page).
+
+#### Returns
+
+`Array` The currently rendered data table rows (`<tr>` elements).
+
 ### lockColumn
 
 Locks (freezes) a column, allowing users to see it at all times when scrolling.

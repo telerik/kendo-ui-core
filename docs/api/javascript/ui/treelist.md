@@ -3389,6 +3389,7 @@ Returns the rendered HTML element for a given model.
 A model from the DataSource, or the id of a model in the DataSource.
 
 #### Returns
+
 `jQuery` the row that corresponds to the model
 
 #### Example - get row from model
@@ -3409,6 +3410,14 @@ A model from the DataSource, or the id of a model in the DataSource.
         var jane = treeList.dataSource.get(1);
         var row = treeList.itemFor(jane);
     </script>
+
+### items
+
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view).
+
+#### Returns
+
+`Array` The currently rendered data table rows (`<tr>` elements).
 
 ### refresh
 
