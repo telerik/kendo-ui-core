@@ -6,6 +6,45 @@ title: Widget
 
 Base class of all Kendo UI widgets. Inherits from [Observable](/api/javascript/observable).
 
+## Fields
+
+### element `jQuery`
+
+The element, from which the widget is initialized. Depending on the widget, it may be visible, such as in the AutoComplete, Calendar, DatePicker, inline Editor and others, or hidden, such as in the DropDownList, classic Editor and Upload. A reference to this element is also returned by the initialization statement.
+
+See [Widget DOM Elements](/intro/widget-basics/wrapper-element) for more information.
+
+#### Example
+
+    <div id="myWindow">...window content...</div>
+    <script>
+        // initialize the widget, which also returns the widget element
+        var winElement1 = $("#myWindow").kendoWindow( { /*...*/ } ); // returns div#myWindow as a jQuery object
+        var winObject = $("#myWindow").data("kendoWindow");
+        
+        // other ways to get the widget element
+        var winElement2 = $("#myWindow");
+        var winElement3 = $("#myWindow").data("kendoWindow").element;
+        var winElement4 = winObject.element;
+    </script>
+
+### wrapper `jQuery`
+
+The outermost element, which is part of the widget. Depending on the widget and the exact scenario, the wrapper and the element may match. For example, if the Grid is initialized from a `<div>`, the two references match. But if the Grid is initialized from a `<table>`, then element points to the `<table>`, while wrapper points to the wrapper `<div>`.
+
+See [Widget DOM Elements](/intro/widget-basics/wrapper-element) for more information.
+
+#### Example
+
+    <div id="myWindow">...window content...</div>
+    <script>
+        // initialize the widget
+        $("#myWindow").kendoWindow( { /*...*/ } );
+        
+        // get the wrapper
+        var winWrapper = $("#myWindow").data("kendoWindow").wrapper; // returns div.k-window as a jQuery object
+    </script>
+
 ## Methods
 
 ### bind
