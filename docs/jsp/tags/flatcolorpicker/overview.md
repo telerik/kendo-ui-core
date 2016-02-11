@@ -1,18 +1,26 @@
 ---
 title: Overview
+page_title: Overview | FlatColorPicker JSP Tag
+description: "Get started with the FlatColorPicker JSP tag in Kendo UI."
+slug: overview_flatcolorpicker_uiforjsp
+position: 1
 ---
 
-# FlatColorPicker
+# FlatColorPicker JSP Tag Overview
 
-The FlatColorPicker JSP tag is a server-side wrapper for the [Kendo UI FlatColorPicker](/api/web/flatcolorpicker) widget.
+The FlatColorPicker JSP tag is a server-side wrapper for the [Kendo UI FlatColorPicker](/api/javascript/ui/flatcolorpicker) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo FlatColorPicker:
+### Configuration
 
-1.  Make sure you have followed all the steps from the [Introduction](/jsp/introduction) help topic.
+Below are listed the steps for you to follow when configuring the Kendo UI FlatColorPicker.
 
-2.  Create a new action method which renders the view:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for JSP]({% slug overview_uiforjsp %}).
+
+**Step 2** Create a new action method to render the view.
+
+###### Example
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index() {
@@ -20,21 +28,42 @@ Here is how to configure a simple Kendo FlatColorPicker:
             return "web/flatcolorpicker/index";
         }
 
-3. Add kendo taglib mapping to the page
+**Step 3** Add the Kendo UI `taglib` mapping to the page.
+
+###### Example
 
         <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 
-4.  Add a flatcolorpicker tag:
+**Step 4** Add the `flatcolorpicker` tag.
+
+###### Example
 
         <kendo:flatColorPicker name="flatcolorpicker" value="#ff0000">
         </kendo:flatColorPicker>
 
-## Accessing an Existing FlatColorPicker
+## Event Handling
 
-You can reference an existing FlatColorPicker instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/flatcolorpicker#methods) to control its behavior.
+### Subscribe to Events
 
-### Accessing an existing FlatColorPicker instance
+You can subscribe to all [events exposed by Kendo UI FlatColorPicker](/api/javascript/ui/flatcolorpicker#events) by the handler name.
+
+###### Example
+
+    <kendo:flatColorPicker name="flatcolorpicker" change="flatcolorpicker_change"></kendo:flatColorPicker>
+
+    <script>
+        function flatcolorpicker_change() {
+            // Handle the change event
+        }
+    </script>
+
+## Reference
+
+### Existing Instances
+
+You are able to reference an existing FlatColorPicker instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [FlatColorPicker API](/api/javascript/ui/flatcolorpicker#methods) to control its behavior.
+
+###### Example
 
     // Put this after your Kendo FlatColorPicker tag declaration
     <script>
@@ -44,16 +73,11 @@ Once a reference has been established, you can use the [API](/api/web/flatcolorp
     });
     </script>
 
-## Handling Kendo UI FlatColorPicker events
+## See Also
 
-You can subscribe to all [events](/api/web/flatcolorpicker#events) exposed by Kendo UI FlatColorPicker:
+Other articles on Telerik UI for JSP and on the FlatColorPicker:
 
-### Subscribe by handler name
-
-    <kendo:flatColorPicker name="flatcolorpicker" change="flatcolorpicker_change"></kendo:flatColorPicker>
-
-    <script>
-        function flatcolorpicker_change() {
-            // Handle the change event
-        }
-    </script>
+* [FlatColorPicker JavaScript API](/api/javascript/ui/flatcolorpicker)
+* [FlatColorPicker JSP API](/api/jsp/flatcolorpicker/messages)
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})
