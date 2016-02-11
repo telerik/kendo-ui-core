@@ -7,7 +7,7 @@ slug: howto_expandto100percentheightautoresize_tabstrip
 
 # Expand to 100% Height and Auto-Resize
 
-When making the TabStrip 100% high, keep in mind that web standards require elements with percentage height to have a parent element with an explicit height. This rule applies recursively until either an element with a pixel height, or the <html> element, is reached. 100% high elements cannot have borders, paddings, margins, or visible siblings.
+When making the TabStrip 100% high, keep in mind that web standards require elements with percentage height to have a parent element with an explicit height. This rule applies recursively until either an element with a pixel height, or the `<html>` element, is reached. 100% high elements cannot have borders, paddings, margins, or visible siblings.
 
 The milestones of the approach are:
 
