@@ -56,7 +56,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
             <kendo:dataSource data="${products}"></kendo:dataSource>
         </kendo:multiSelect>
 
-### Pre-Select Values on Initial Loading
+### Pre-Selection of Values on Initial Loading
 
 When deferred binding (`autoBind="false"`) is used, you need to specify a list of data items instead of just a list of strings. This functionality is supported in the Kendo UI Q1 2013 SP1 release and later versions of Kendo UI.
 
