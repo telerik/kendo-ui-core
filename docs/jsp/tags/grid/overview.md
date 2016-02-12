@@ -8,7 +8,7 @@ position: 1
 
 # Grid JSP Tag Overview
 
-The Grid tag is a server-side wrapper for the [Kendo UI Grid](/api/javascript/ui/grid) widget.
+The Grid JSP tag is a server-side wrapper for the [Kendo UI Grid](/api/javascript/ui/grid) widget.
 
 ## Getting Started
 
