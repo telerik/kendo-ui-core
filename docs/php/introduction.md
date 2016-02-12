@@ -11,7 +11,7 @@ Telerik UI for PHP is a set of PHP classes which help you configure Kendo UI wid
 
 ## Requirements
 
-Telerik UI for PHP requires PHP 5.3+. The sample application uses [PDO](http://www.php.net/manual/en/intro.pdo.php)
+Telerik UI for PHP requires PHP 5.3.3+. The sample application uses [PDO](http://www.php.net/manual/en/intro.pdo.php)
 and [SQLite](http://www.php.net/manual/en/ref.pdo-sqlite.php).
 Both extensions should be enabled in the PHP configuration (php.ini). The
 [phpinfo](http://php.net/manual/en/function.phpinfo.php) function can be used to verify that PDO and the SQLite extensions are successfully installed.
