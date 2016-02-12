@@ -408,7 +408,7 @@ The feature requires `"top"` or `"bottom"` [`tabPosition`](#configuration-tabPos
 
 Unless disabled, `scrollable` must be set to a JavaScript object, which represents the scrolling configuration.
 
-See [Scrollable Tabs](/web/tabstrip/overview#scrollable-tabs) for more information.
+See [Scrollable Tabs](/controls/navigation/tabstrip/overview#configuration-Scrollable) for more information.
 
 #### Example - disable scrolling
 
