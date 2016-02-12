@@ -57,23 +57,12 @@ The small step value determines the amount of Slider value change when the end u
 Denotes the location of the tick marks in the **Slider**. The available options are:
 
 
-#### *"topLeft"*
-
-Tick marks are located on the top of the horizontal widget or on the left of
+* topLeft - Tick marks are located on the top of the horizontal widget or on the left of
   the vertical widget.
-
-#### *"bottomRight"*
-
-Tick marks are located on the bottom of the horizontal widget or on the
+* bottomRight - Tick marks are located on the bottom of the horizontal widget or on the
   right side of the vertical widget.
-
-#### *"both"*
-
-Tick marks are located on both sides of the widget.
-
-#### *"none"*
-
-Tick marks are not visible.
+* both - Tick marks are located on both sides of the widget.
+* none - Tick marks are not visible.
 
 ### tooltip `Object`
 
