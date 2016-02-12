@@ -51,11 +51,13 @@ The proper way to handle such unevaluated templates is to use a custom AngularJS
 
 Fore more details, refer to the [article on the priorities of AngularJS directives](https://docs.angularjs.org/api/ng/service/$compile).
 
-### Widget loses its value
+### Widget Loses Its Value
 
-When `ng-model` and `k-ng-model` directives are applied together, there is a chance the widget to lose its value. This is due the fact that both directives updates the element value simultaneously, which will result in a 'race' issue.
+When the `ng-model` and `k-ng-model` directives are applied together, there is a chance for the widget to lose its value. This is due the fact that both directives update the element value simultaneously, which results in a conflict issue.
 
-The solution is to use only one `directive` - either `k-ng-model` or `ng-model`.
+**Solution**
+
+Use only one of the two directives&mdash;either `k-ng-model` or `ng-model`.
 
 ## See Also
 

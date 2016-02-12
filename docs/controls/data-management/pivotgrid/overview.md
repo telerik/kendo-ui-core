@@ -110,21 +110,23 @@ The example below demonstrates how to access an existing PivotGrid instance.
 
 ## Limitations
 
-### Binding to a large flat data
+### Bind to Large Flat Data
 
-When the pivogrid is bound to a `flat data structure`, it process the data on the client (browser) creating a *client cube representation* [(configuration)](http://docs.telerik.com/kendo-ui/api/javascript/data/pivotdatasource#configuration-schema.cube).
-This means that the widget uses the **browser's processing power** to project the data, producing the required categorized data output. Although we do not restrict the maximum data amount bound to the widget,
-*it certainly has limits, directly related to the browser capability to handle the loaded dataset*.
+When the PivotGrid is bound to a `flat data structure`, it processes the data on the client (browser) creating a client cube representation [(configuration)](/api/javascript/data/pivotdatasource#configuration-schema.cube). This means that the widget uses the browser's processing power to project the data, producing the required categorized data output. Although we do not restrict the maximum data amount bound to the widget, it certainly has limits, directly related to the browser capability to handle the loaded dataset.
 
-The **symptoms** for an overloaded browser are:
+The symptoms for an overloaded browser are:
 
-- extremely slowly loading / unresponsive long time
-- crashing on load or on dimensions/measures update
+- The browser is extremely slowly loading or unresponsive for a long time.
+- The browser is crashing on load or on the dimensions/measures update.
 
 If any of the above symptoms are observable, then you hit the browser processing limit.
 
-The **solution** in this case is to use a dedicated [OLAP](https://en.wikipedia.org/wiki/Online_analytical_processing) solution, like Microsoft's [SSAS](https://technet.microsoft.com/en-us/library/ms175609(v=sql.90).aspx).
+**Solution**
 
+Use a dedicated [OLAP](https://en.wikipedia.org/wiki/Online_analytical_processing) solution, like Microsoft's [SSAS](https://technet.microsoft.com/en-us/library/ms175609(v=sql.90).aspx).
+
+> **Important**
+>
 > The server solution should be able to communicate with the client accepting HTTP requests. It should support the [XMLA 1.1 protocol](https://en.wikipedia.org/wiki/XML_for_Analysis).
 
 ## See Also
