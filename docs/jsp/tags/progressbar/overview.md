@@ -39,22 +39,6 @@ Below are listed the steps for you to follow when configuring the Kendo UI Progr
 
 		<kendo:progressBar name="progressBar" type="percent"></kendo:progressBar>
 
-## Reference
-
-### Existing Instances
-
-You are able to reference an existing ProgressBar instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [ProgressBar API](/api/javascript/ui/progressbar#methods) to control its behavior.
-
-###### Example
-
-		// Put this after your Kendo ProgressBar tag declaration
-		  <script>
-		    $(function() {
-		      // Notice that the name attribute of the progressbar is used to get its client-side instance
-		      var progressbar = $("#progressBar").data("kendoProgressBar");
-		    });
-		  </script>
-
 ## Event Handling
 
 ### Subscribe to Events
@@ -74,6 +58,22 @@ You can subscribe to all [events exposed by Kendo UI ProgressBar](/api/javascrip
 		      // Handle the complete event
 		    }
 		  </script>
+
+## Reference
+
+### Existing Instances
+
+You are able to reference an existing ProgressBar instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [ProgressBar API](/api/javascript/ui/progressbar#methods) to control its behavior.
+
+###### Example
+
+			// Put this after your Kendo ProgressBar tag declaration
+			  <script>
+			    $(function() {
+			      // Notice that the name attribute of the progressbar is used to get its client-side instance
+			      var progressbar = $("#progressBar").data("kendoProgressBar");
+			    });
+			  </script>
 
 ## See Also
 
