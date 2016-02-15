@@ -1,17 +1,26 @@
 ---
 title: Overview
+page_title: Overview | Scheduler JSP Tag
+description: "Get started with the Scheduler JSP tag in Kendo UI."
+slug: overview_scheduler_uiforjsp
+position: 1
 ---
 
-# Scheduler
+# Scheduler JSP Tag Overview
 
-The Scheduler tag is a server-side wrapper for the [Kendo UI Scheduler](/web/scheduler/overview) widget.
+The Scheduler JSP tag is a server-side wrapper for the [Kendo UI Scheduler](/api/javascript/ui/scheduler) widget.
 
 ## Getting Started
 
-Here is how to configure the Kendo UI Scheduler for displaying and editing scheduler events.
+### Configuration
 
-1. Make sure you have followed all the steps from the [Introduction](/jsp/introduction) help topic.
-1. Create a class which will represent the scheduler event. We will call it `Task`.
+Below are listed the steps for you to follow when configuring the Kendo UI Scheduler to display and edit Scheduler events.
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for JSP]({% slug overview_uiforjsp %}).
+
+**Step 2** Create a class which will represent the Scheduler event. Call it `Task`.
+
+###### Example
 
         @Entity
         @Table(name="Tasks")
@@ -122,10 +131,16 @@ Here is how to configure the Kendo UI Scheduler for displaying and editing sched
             }
 
         }
-1. Register the Telerik UI for JSP taglib in your JSP page
+
+**Step 3** Register the Telerik UI for JSP `taglib` in your JSP page.
+
+###### Example
 
         <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
-1. Declare a scheduler tag. Configure it's data source model's fields.
+
+**Step 4** Declare a `scheduler` tag. Configure the fields of its data source model.
+
+###### Example
 
         <kendo:scheduler name="scheduler" timezone="Etc/UTC" height="600" date="<%= date %>" startTime="<%= startTime %>">
             <kendo:dataSource batch="true">
@@ -147,7 +162,10 @@ Here is how to configure the Kendo UI Scheduler for displaying and editing sched
                 </kendo:dataSource-schema>
             </kendo:dataSource>
         </kendo:scheduler>
-1. Specify the action methods which will perform the "create", "read", "update" and "destroy" operations:
+
+**Step 5** Specify the action methods which will perform the `create`, `read`, `update` and `destroy` operations.
+
+###### Example
 
         <kendo:scheduler name="scheduler" timezone="Etc/UTC" height="600" date="<%= date %>" startTime="<%= startTime %>">
             <kendo:dataSource batch="true">
@@ -186,7 +204,10 @@ Here is how to configure the Kendo UI Scheduler for displaying and editing sched
             </kendo:dataSource-transport>
             </kendo:dataSource>
         </kendo:scheduler>
-1. Implement the "create" method.
+
+**Step 6** Implement the `create` method.
+
+###### Example
 
         @Autowired
         private TaskDao task;
@@ -219,14 +240,20 @@ Here is how to configure the Kendo UI Scheduler for displaying and editing sched
 
             return tasks;
         }
-1. Implement the "read" method.
+
+**Step 7** Implement the `read` method.
+
+###### Example
 
         // Return a list of Tasks as JSON
         @RequestMapping(value = "/index/read", method = RequestMethod.POST)
         public @ResponseBody List<Task> read() {
             return task.getList();
         }
-1. Implement the "update" method.
+
+**Step 8** Implement the `update` method.
+
+###### Example
 
         @RequestMapping(value = "/index/update", method = RequestMethod.POST)
         public @ResponseBody List<Task> update(@RequestBody ArrayList<Map<String, Object>> models) throws ParseException {
@@ -256,7 +283,10 @@ Here is how to configure the Kendo UI Scheduler for displaying and editing sched
 
             return tasks;
         }
-1. Implement the "destroy" method.
+
+**Step 9** Implement the `destroy` method.
+
+###### Example
 
         @RequestMapping(value = "/index/destroy", method = RequestMethod.POST)
         public @ResponseBody List<Task> destroy(@RequestBody ArrayList<Map<String, Object>> models) {
@@ -274,25 +304,17 @@ Here is how to configure the Kendo UI Scheduler for displaying and editing sched
 
             return tasks;
         }
-## Getting reference to a Kendo UI Scheduler
 
-To get a reference to a Kendo UI Scheduler instance, use the jQuery `data` and pass "kendoScheduler" as argument.
+## Event Handling
 
-### Example - get reference to a Kendo UI Scheduler
+### Subscribe to Events
 
-    <kendo:scheduler name="scheduler">
-        <!-- snip -->
-    </kendo:scheduler>
-    <script>
-    // Get reference to the kendo.ui.Scheduler instance
-    var scheduler = $("#scheduler").data("kendoScheduler");
-    </script>
+You can subscribe to all [events exposed by Kendo UI Scheduler](/api/javascript/ui/scheduler#events) by the handler name. All events are exposed as attributes and nested tags of the Scheduler JSP tag.
 
-## Subscribing to the events of Kendo UI Scheduler
+The example below demonstrates how to handle Scheduler events by setting their attributes.
 
-The scheduler widget supports a set of [events](/api/web/scheduler#events) which the developer can subscribe to. All events are exposed as attributes and nested tags of the scheduler JSP tag.
+###### Example
 
-### Example - handle scheduler events by setting their attributes
     <kendo:scheduler name="scheduler" dataBound="scheduler_dataBound">
         <!-- snip -->
     </kendo:scheduler>
@@ -302,7 +324,10 @@ The scheduler widget supports a set of [events](/api/web/scheduler#events) which
     }
     </script>
 
-### Example - handle scheduler events by setting a nested tag
+The example below demonstrates how to handle Scheduler events by setting a nested tag.
+
+###### Example
+
     <kendo:scheduler name="scheduler">
         <!-- snip -->
         <kendo:scheduler-dataBound>
@@ -313,3 +338,27 @@ The scheduler widget supports a set of [events](/api/web/scheduler#events) which
             </script>
         </kendo:scheduler-dataBound>
     </kendo:scheduler>
+
+## Reference
+
+### Existing Instances
+
+You are able to reference an existing Scheduler instance by using [`jQuery.data()`](http://api.jquery.com/jQuery.data/) and then passing `kendoScheduler` as an argument.
+
+###### Example
+
+    <kendo:scheduler name="scheduler">
+        <!-- snip -->
+    </kendo:scheduler>
+    <script>
+    // Get reference to the kendo.ui.Scheduler instance
+    var scheduler = $("#scheduler").data("kendoScheduler");
+    </script>
+
+## See Also
+
+Other articles on Telerik UI for JSP and on the Scheduler:
+
+* [Overview of the Kendo UI Scheduler Widget]({% slug overview_kendoui_scheduler_widget %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})
