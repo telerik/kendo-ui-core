@@ -1,36 +1,52 @@
 ---
 title: Overview
+page_title: Overview | Sortable JSP Tag
+description: "Get started with the Sortable JSP tag in Kendo UI."
+slug: overview_sortable_uiforjsp
+position: 1
 ---
 
-# Sortable
+# Sortable JSP Tag Overview
 
-The Sortable JSP tag is a server-side wrapper for the [Kendo UI Sortable](/api/web/sortable) widget.
+The Sortable JSP tag is a server-side wrapper for the [Kendo UI Sortable](/api/javascript/ui/sortable) widget.
 
 ## Getting Started
 
-Unlike most of the server side wrapper the Sortable one does not render HTML mark-up. **The Sortable should be initialized for already existing DOM element.**
+### The Basics
 
-Here is how to configure a Kendo Sortable:
+Unlike most of the server-side wrappers, the Kendo UI Sortable does not render HTML markup. The Sortable should be initialized for already existing DOM element.
 
-1.  Make sure you have followed all the steps from the [Introduction](/jsp/introduction) help topic.
+### Configuration
 
-2.  Create a new action method which renders the view:
+Below are listed the steps for you to follow when configuring the Kendo UI Sortable.
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for JSP]({% slug overview_uiforjsp %}).
+
+**Step 2** Create a new action method to render the view.
+
+###### Example
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index() {
             return "web/sortable/index";
         }
 
-3. Add kendo taglib mapping to the page
+**Step 3** Add kendo taglib mapping to the page.
+
+###### Example
 
         <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 
-4. Add a sortable tag (use the element with `sortable-basic` id and initialize Sortable instance for it):
+**Step 4** Add a sortable tag (use the element with `sortable-basic` id and initialize Sortable instance for it).
+
+###### Example
 
     <kendo:sortable name="#sortable-basic" hint="hint" placeholder="placeholder">
     </kendo:sortable>
 
-5. Add the HTML markup from which the widget will be initialized and define the hint/placeholder functions.
+**Step 5** Add the HTML markup from which the widget will be initialized and define the hint/placeholder functions.
+
+###### Example
 
     <ul id="sortable-basic">
         <li>Item 1</li>
@@ -42,32 +58,32 @@ Here is how to configure a Kendo Sortable:
         function hint(element) {
             return element.clone().addClass("hint");
         }
-    
+
         function placeholder(element) {
             return element.clone().addClass("placeholder").text("drop here");
         }
     </script>
 
-## Accessing an Existing Sortable
+### Hint Disabling
 
-You can reference an existing Sortable instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/sortable#methods) to control its behavior.
+The Kendo UI Sortable widget can operate without a hint. To disable the hint, set it to an empty function via [`jQuery.noop`](http://api.jquery.com/jQuery.noop/).
 
-### Accessing an existing Sortable instance
+###### Example
 
-    // Put this after your Kendo Sortable tag declaration
+    <kendo:sortable name="#sortable-basic" hint="noHint">
+    </kendo:sortable>
+
     <script>
-    $(function() {
-        // Notice that the name attribute of the sortable is used to get its client-side instance
-        var sortable = $("#sortable-basic").data("kendoSortable");
-    });
+        var noHint = $.noop;
     </script>
 
-## Handling Kendo UI Sortable events
+## Event Handling
 
-You can subscribe to all [events](/api/web/sortable#events) exposed by Kendo UI Sortable:
+### Subscribe to Events
 
-### Subscribe by handler name
+You can subscribe to all [events exposed by Kendo UI Sortable](/api/javascript/ui/sortable#events) by the handler name.
+
+###### Example
 
     <kendo:sortable name="#sortable-basic" start="onStart" change="onChange">
     </kendo:sortable>
@@ -88,14 +104,26 @@ You can subscribe to all [events](/api/web/sortable#events) exposed by Kendo UI 
         }
     </script>
 
-## Disabling the hint
+## Reference
 
-The Sortable widget can operate without hint. To disable the hint you should set it to an empty function ([jQuery.noop](http://api.jquery.com/jQuery.noop/)).
+### Existing Instances
 
-    <kendo:sortable name="#sortable-basic" hint="noHint">
-    </kendo:sortable>
-    
+You are able to reference an existing Sortable instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Sortable API](/api/javascript/ui/sortable#methods) to control its behavior.
+
+###### Example
+
+    // Put this after your Kendo Sortable tag declaration
     <script>
-        var noHint = $.noop;
+    $(function() {
+        // Notice that the name attribute of the sortable is used to get its client-side instance
+        var sortable = $("#sortable-basic").data("kendoSortable");
+    });
     </script>
 
+## See Also
+
+Other articles on Telerik UI for JSP and on the Sortable:
+
+* [Overview of the Kendo UI Sortable Widget]({% slug overview_kendoui_sortable_widget %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

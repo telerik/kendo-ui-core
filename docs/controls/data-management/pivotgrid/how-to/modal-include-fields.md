@@ -76,6 +76,7 @@ Other articles on Kendo UI PivotGrid and how-to examples:
 * [How to Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})
 * [How to Filter by Using the include Operator]({% slug howto_use_include_operator_pivotgrid %})
 * [How to Filter Dimensions]({% slug howto_filter_dimensions_pivotgrid %})
+* [How to Format Dates in Dimension Labels]({% slug howto_format_date_query_pivotgrid %})
 * [How to Integrate with Kendo UI Chart]({% slug howto_integratewith_kendoui_chart_pivotgrid %})
 * [How to Modify Exported Excel Files]({% slug howto_modify_exported_excel_files_pivotgrid %})
 * [How to Modify Measure Tag Captions]({% slug howto_modify_measure_tag_captions_pivotgrid %})
