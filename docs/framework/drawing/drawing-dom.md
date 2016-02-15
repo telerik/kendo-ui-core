@@ -424,7 +424,7 @@ The HTML renderer has been tested in recent versions of Chrome, Firefox, Safari,
 - Images hosted on different domains might not be rendered, unless permissive [Cross-Origin HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image) are provided by the server. Similarly, fonts might not be possible to load cross-domain. Even with the proper CORS headers, Internet Explorer 9 will not be able to load images or fonts from another domain, and could raise an uncatchable security exception. If you need to support Internet Explorer 9, make sure to host images and fonts on the same domain as the application.
 - The content of the `<iframe>` and `<svg>` elements is not rendered. A `<canvas>` will be rendered as an image, but only if it is non-tainted, meaning if it does not display images from another domain.
 - CSS box-shadow, text-shadow, and radial gradients are omitted. Linear gradients are supported.
-- Using browser zoom different than 100% is not supported
+- Using browser zoom other than 100% is not supported.
 - Only border-style `solid` is rendered.
 - Maximum document size is limited to 5080x5080mm (200x200 inches) by the PDF 1.5 specification. Larger files might not open in some viewers.
 - Shadow DOM is not rendered.
