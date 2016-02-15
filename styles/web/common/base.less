@@ -812,7 +812,15 @@ input.k-checkbox,
     opacity: 0;
     width: 0;
     margin: 0;
-    position: absolute;
+    -webkit-appearance: none;
+    overflow: hidden;
+
+    .k-ff & {
+        // -moz-appearance: none does not remove all styles
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=605985
+        position: absolute;
+
+    }
 }
 
 .k-checkbox-label {
