@@ -1,13 +1,14 @@
 ---
-title: Format a date in dimension label
-page_title: Format a date in dimension label | Kendo UI PivotGrid Widget
-description: "Learn how to format date values in dimension labels of the Kendo UI PivotGrid widget."
+title: Format Dates in Dimension Labels
+page_title: Format Dates in Dimension Labels | Kendo UI PivotGrid Widget
+description: "Learn how to format date values in dimension labels in the Kendo UI PivotGrid widget."
 slug: howto_format_date_query_pivotgrid
 ---
 
-# Format a date in dimension label
+# Format Dates in Dimension Labels
 
-The example below demonstrates how to format date values in dimension labels of the Kendo UI PivotGrid widget.
+The example below demonstrates how to format date values in the dimension labels in the Kendo UI PivotGrid widget.
+
 ###### Example
 
 ```html
