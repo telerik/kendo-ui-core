@@ -1,6 +1,6 @@
 ---
 title: Underline Matched Search
-page_title: Underline Matched Search | Kendo UI ComboBox Widget
+page_title: Underline Matched Search | Kendo UI ComboBox
 description: "Learn how to underline a matched input field search in the Kendo UI ComboBox widget."
 slug: howto_underline_matched_search_combobox
 ---

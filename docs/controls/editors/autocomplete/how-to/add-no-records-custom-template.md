@@ -1,6 +1,6 @@
 ---
 title: Show No results found Message
-page_title: Show No results found Message | Kendo UI AutoComplete Widget
+page_title: Show No results found Message | Kendo UI AutoComplete
 description: "Learn how to add customized templates in a Kendo UI AutoComplete widget."
 slug: howto_add_customized_templates_autocomplete
 ---

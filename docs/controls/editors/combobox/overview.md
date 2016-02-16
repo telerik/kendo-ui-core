@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI ComboBox Widget
+page_title: Overview | Kendo UI ComboBox
 description: "Learn how to initialize the Kendo UI ComboBox widget, configure its options and customize templates."
 slug: overview_kendoui_combobox_widget
 position: 1

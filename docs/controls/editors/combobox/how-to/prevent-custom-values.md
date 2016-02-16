@@ -1,6 +1,6 @@
 ---
 title: Prevent Adding Custom Values
-page_title: Prevent Adding Custom Values | Kendo UI ComboBox Widget
+page_title: Prevent Adding Custom Values | Kendo UI ComboBox
 description: "Learn how to prevent adding a custom values to the Kendo UI ComboBox widget."
 slug: howto_prevent_adding_custom_values_combobox
 ---

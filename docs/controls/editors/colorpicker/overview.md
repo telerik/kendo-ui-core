@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI ColorPicker Widget
+page_title: Overview | Kendo UI ColorPicker
 description: "Learn how to initialize the Kendo UI ColorPicker widget and configure its options."
 slug: overview_kendoui_colorpicker_widget
 position: 1

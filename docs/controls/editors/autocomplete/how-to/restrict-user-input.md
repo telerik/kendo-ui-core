@@ -1,6 +1,6 @@
 ---
 title: Restrict User Input
-page_title: Restrict User Input | Kendo UI AutoComplete Widget
+page_title: Restrict User Input | Kendo UI AutoComplete
 description: "Learn how to restrict user input in a Kendo UI AutoComplete widget."
 slug: howto_restrict_user_input_autocomplete
 ---

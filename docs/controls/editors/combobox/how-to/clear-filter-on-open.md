@@ -1,6 +1,6 @@
 ---
 title: Clear Filter on Open
-page_title: Clear Filter on Open | Kendo UI ComboBox Widget
+page_title: Clear Filter on Open | Kendo UI ComboBox
 description: "Learn how to clear Kendo UI ComboBox filter on open."
 slug: howto_clear_filter_open_combobox
 ---

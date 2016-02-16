@@ -1,6 +1,6 @@
 ---
 title: Grouping
-page_title: Grouping | Kendo UI AutoComplete Widget
+page_title: Grouping | Kendo UI AutoComplete
 description: "Learn about the grouping functionality of the Kendo UI AutoComplete widget."
 slug: grouping_kendoui_autocomplete_widget
 position: 2

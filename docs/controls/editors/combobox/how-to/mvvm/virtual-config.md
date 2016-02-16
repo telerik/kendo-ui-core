@@ -1,6 +1,6 @@
 ---
 title: Define Virtual Configuration Declaratively
-page_title: Define Virtual Configuration Declaratively | Kendo UI ComboBox Widget
+page_title: Define Virtual Configuration Declaratively | Kendo UI ComboBox
 description: "Learn how to define the virtual configuration option of the Kendo UI ComboBox widget declaratively."
 slug: howto_define_virtual_option_combobox
 ---

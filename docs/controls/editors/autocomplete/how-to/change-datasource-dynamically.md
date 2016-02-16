@@ -1,6 +1,6 @@
 ---
 title: Change DataSource Dynamically
-page_title: Change DataSource Dynamically | Kendo UI AutoComplete Widget
+page_title: Change DataSource Dynamically | Kendo UI AutoComplete
 description: "Learn how to change DataSource dynamically in a Kendo UI AutoComplete widget."
 slug: howto_change_datasource_dynamically_autocomplete
 ---

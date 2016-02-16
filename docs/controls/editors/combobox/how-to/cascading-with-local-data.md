@@ -1,6 +1,6 @@
 ---
 title: Implement Cascading with Local Data
-page_title: Implement Cascading with Local Data | Kendo UI ComboBox Widget
+page_title: Implement Cascading with Local Data | Kendo UI ComboBox
 description: "Learn how to implement cascading with local data in Kendo UI ComboBox."
 slug: howto_implement_cascading_local_data_combobox
 ---
