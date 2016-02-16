@@ -78,6 +78,5 @@ You are able to reference an existing DatePicker instance via the [`jQuery.data(
 Other articles on Telerik UI for JSP and on the DatePicker:
 
 * [Overview of the Kendo UI DatePicker Widget]({% slug overview_kendoui_datepicker_widget %})
-* [Overview of the DateTimePicker JSP Tag]({% slug overview_datetimepicker_uiforjsp %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
 * [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})
