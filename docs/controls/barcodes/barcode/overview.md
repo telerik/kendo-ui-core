@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Barcode Widget
+page_title: Overview | Kendo UI Barcode
 description: "Learn how to create and set a Kendo UI Barcode widget."
 slug: overview_kendoui_barcode_widget
 position: 1
