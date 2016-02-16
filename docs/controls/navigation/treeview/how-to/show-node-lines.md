@@ -1,6 +1,6 @@
 ---
 title: Show Lines between Nodes
-page_title: Show Lines between Nodes | Kendo UI TreeView Widget
+page_title: Show Lines between Nodes | Kendo UI TreeView
 description: "Learn how to show lines between Kendo UI TreeView nodes."
 slug: howto_showlinesbetweennodes_treeview
 ---

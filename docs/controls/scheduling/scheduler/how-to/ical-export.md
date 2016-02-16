@@ -1,6 +1,6 @@
 ---
 title: Export to iCal
-page_title: Export to iCal | Kendo UI Scheduler Widget
+page_title: Export to iCal | Kendo UI Scheduler
 description: "Learn how to extract Kendo UI Scheduler events to an .ical file."
 slug: howto_exportto_ical_scheduler
 ---

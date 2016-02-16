@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI ToolBar Widget
+page_title: Overview | Kendo UI ToolBar
 description: "Learn how to initialize the Kendo UI ToolBar widget and configure its command types and behaviors."
 slug: overview_kendoui_toolbar_widget
 relatedDocs: api-web-toolbar

@@ -1,6 +1,6 @@
 ---
 title: Persist Resource Values on move
-page_title: Persist Resource Values on move | Kendo UI Scheduler Widget
+page_title: Persist Resource Values on move | Kendo UI Scheduler
 description: "Learn how to persist resource values on a move event in a Kendo UI Scheduler widget."
 slug: howto_persistresourcevalues_onamoveevent_scheduler
 ---

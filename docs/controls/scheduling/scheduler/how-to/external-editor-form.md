@@ -1,6 +1,6 @@
 ---
 title: Create External Editor Form
-page_title: Create External Editor Form | Kendo UI Scheduler Widget
+page_title: Create External Editor Form | Kendo UI Scheduler
 description: "Learn how to create an external editor form in a Kendo UI Scheduler widget."
 slug: howto_create_external_editor_form_scheduler
 ---

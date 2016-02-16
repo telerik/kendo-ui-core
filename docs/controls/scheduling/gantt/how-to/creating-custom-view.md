@@ -1,6 +1,6 @@
 ---
 title: Create Custom Views
-page_title: Create Custom Views | Kendo UI Gantt Widget
+page_title: Create Custom Views | Kendo UI Gantt
 description: "Learn how to create custom views in the Kendo UI Gantt widget."
 slug: howto_create_custom_views_gantt
 ---

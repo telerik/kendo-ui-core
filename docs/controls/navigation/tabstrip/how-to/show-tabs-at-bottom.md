@@ -1,6 +1,6 @@
 ---
 title: Display Buttons at the Bottom
-page_title: Display Buttons at the Bottom | Kendo UI TabStrip Widget
+page_title: Display Buttons at the Bottom | Kendo UI TabStrip
 description: "Learn how to display tab buttons at the bottom of the Kendo UI TabStrip widget."
 slug: howto_displaybuttonsatthebottom_tabstrip
 ---

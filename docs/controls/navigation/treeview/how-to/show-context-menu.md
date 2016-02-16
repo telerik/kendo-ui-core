@@ -1,6 +1,6 @@
 ---
 title: Show Node Context Menu
-page_title: Show Node Context Menu | Kendo UI TreeView Widget
+page_title: Show Node Context Menu | Kendo UI TreeView
 description: "Learn how to show a context menu with tree item actions in a Kendo UI TreeView widget."
 slug: howto_shiwnodecontextmenu_treeview
 ---

@@ -1,6 +1,6 @@
 ---
 title: Execute Custom Click Actions Based on Class Name
-page_title: Execute Custom Click Actions Based on Class Name | Kendo UI Menu Widget
+page_title: Execute Custom Click Actions Based on Class Name | Kendo UI Menu
 description: "Learn how to execute a custom click action depending on the class name of the clicked item in the Kendo UI Menu widget."
 slug: howto_execute_custom_click_actions_basedon_classnames_menu
 ---

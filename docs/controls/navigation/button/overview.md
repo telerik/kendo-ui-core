@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Button Widget
+page_title: Overview | Kendo UI Button
 description: "Learn how to initialize the Kendo UI Button widget and apply its other options."
 slug: overview_kendoui_button_widget
 position: 1

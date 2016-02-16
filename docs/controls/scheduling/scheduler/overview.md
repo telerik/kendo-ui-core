@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Scheduler Widget
+page_title: Overview | Kendo UI Scheduler
 description: "Learn how to initialize and configure the Kendo UI Scheduler widget."
 slug: overview_kendoui_scheduler_widget
 position: 1

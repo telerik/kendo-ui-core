@@ -1,6 +1,6 @@
 ---
 title: Expand Nodes during Drag
-page_title: Expand Nodes during Drag | Kendo UI TreeView Widget
+page_title: Expand Nodes during Drag | Kendo UI TreeView
 description: "Learn how to expand Kendo UI TreeView items that are hovered when the user drags a node."
 slug: howto_expandnodesduringdrag_treeview
 ---

@@ -1,6 +1,6 @@
 ---
 title: Update Opposite Picker Value on model Change
-page_title: Update Opposite Picker Value on model Change | Kendo UI Scheduler Widget
+page_title: Update Opposite Picker Value on model Change | Kendo UI Scheduler
 description: "Learn how to update the opposite start/end picker value on model change in a Kendo UI Scheduler widget."
 slug: howto_updateoppositepickervalue_onmodelchange_scheduler
 ---

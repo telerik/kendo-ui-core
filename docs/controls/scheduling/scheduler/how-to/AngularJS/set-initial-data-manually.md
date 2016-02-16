@@ -1,6 +1,6 @@
 ---
 title: Set Initial Data Manually
-page_title: Set Initial Data Manually | Kendo UI Scheduler Widget
+page_title: Set Initial Data Manually | Kendo UI Scheduler
 description: "Learn how to manually set the initial data of the Kendo UI Scheduler widget when using AngularJS."
 slug: howto_set_intial_data_manually_angularjs_scheduler
 ---

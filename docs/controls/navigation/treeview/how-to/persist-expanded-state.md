@@ -1,6 +1,6 @@
 ---
 title: Persist Expanded State
-page_title: Persist Expanded State | Kendo UI TreeView Widget
+page_title: Persist Expanded State | Kendo UI TreeView
 description: "Learn how to persist the expanded nodes in a cookie and restore them upon page refresh in a Kendo UI TreeView widget."
 slug: howto_persistexpandedstate_treeview
 ---

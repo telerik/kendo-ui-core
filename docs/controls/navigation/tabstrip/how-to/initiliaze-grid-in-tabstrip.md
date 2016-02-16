@@ -1,6 +1,6 @@
 ---
 title: Initialize Grids in TabStrips
-page_title: Initialize Grids in TabStrips | Kendo UI TabStrip Widget
+page_title: Initialize Grids in TabStrips | Kendo UI TabStrip
 description: "Learn how to initialize the Grid inside the Kendo UI TabStrip by resizing it according to the dimensions of its container."
 slug: initialize_thegrid_tabstrip_widget
 ---

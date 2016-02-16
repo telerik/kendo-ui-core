@@ -1,6 +1,6 @@
 ---
 title: Bind to Flat Tables
-page_title: Bind to Flat Tables | Kendo UI TreeView Widget
+page_title: Bind to Flat Tables | Kendo UI TreeView
 description: "Learn how to bind the Kendo UI TreeView widget to a flat data table that keeps references about the hierarchical structure."
 slug: bindtoflattables_treeview_widget
 position: 2

@@ -1,6 +1,6 @@
 ---
 title: Use FontAwesome Icons
-page_title: Use FontAwesome Icons | Kendo UI TreeView Widget
+page_title: Use FontAwesome Icons | Kendo UI TreeView
 description: "Learn how to use FontAwesome icons in the Kendo UI TreeView widget."
 slug: howto_usefontawesomeicons_treeview
 ---

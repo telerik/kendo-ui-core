@@ -1,6 +1,6 @@
 ---
 title: Set Slot Background Color Using Slot Templates
-page_title: Set Slot Background Color Using Slot Templates | Kendo UI Scheduler Widget
+page_title: Set Slot Background Color Using Slot Templates | Kendo UI Scheduler
 description: "Learn how to set the cell background color by using slotTemplate and allDaySlotTemplate, based on the slot date, in a Kendo UI Scheduler widget."
 slug: howto_setslotbackgroundcolor_usingslottemplates_scheduler
 ---

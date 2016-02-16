@@ -1,6 +1,6 @@
 ---
 title: Close ToolBar Popup Manually
-page_title: Close ToolBar Popup Manually | Kendo UI ToolBar Widget
+page_title: Close ToolBar Popup Manually | Kendo UI ToolBar
 description: "Learn how to close the Kendo UI ToolBar popup manually."
 slug: howto_closetoolbarpopupmanually_toolbar
 ---

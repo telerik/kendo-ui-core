@@ -1,6 +1,6 @@
 ---
 title: Create and Set ObservableArray Events
-page_title: Create and Set ObservableArray Events | Kendo UI Scheduler Widget
+page_title: Create and Set ObservableArray Events | Kendo UI Scheduler
 description: "Learn how to create and set events using Kendo UI ObservableArray and AngularJS while working with the Kendo UI Scheduler widget."
 slug: howto_createand_set_observablearray_events_angularjs_scheduler
 ---

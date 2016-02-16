@@ -1,6 +1,6 @@
 ---
 title: Resources
-page_title: Resources | Kendo UI Scheduler Widget
+page_title: Resources | Kendo UI Scheduler
 description: "Learn how to use resources with the Kendo UI Scheduler widget."
 slug: resources_kendoui_scheduler_widget
 position: 2

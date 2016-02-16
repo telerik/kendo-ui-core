@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI TabStrip Widget
+page_title: Overview | Kendo UI TabStrip
 description: "Learn how to initialize the Kendo UI TabStrip widget and configure its behaviors."
 slug: overview_kendoui_tabstrip_widget
 position: 1

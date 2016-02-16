@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Menu Widget
+page_title: Overview | Kendo UI Menu
 description: "Learn how to initialize the Kendo UI Menu widget, configure its behaviors and customize animations."
 slug: overview_kendoui_menu_widget
 position: 1

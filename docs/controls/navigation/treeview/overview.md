@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI TreeView Widget
+page_title: Overview | Kendo UI TreeView
 description: "Learn how to initialize the Kendo UI TreeView widget and configure its behavior."
 slug: overview_kendoui_treeview_widget
 position: 1

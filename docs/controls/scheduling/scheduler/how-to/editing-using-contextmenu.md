@@ -1,6 +1,6 @@
 ---
 title: Edit Using ContextMenu
-page_title: Edit Using ContextMenu | Kendo UI Scheduler Widget
+page_title: Edit Using ContextMenu | Kendo UI Scheduler
 description: "Learn how to edit the Kendo UI Scheduler widget by using Kendo UI ContextMenu."
 slug: howto_edit_using_kendouicontextmenu_scheduler
 ---

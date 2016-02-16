@@ -1,6 +1,6 @@
 ---
 title: Prevent Dragging Nodes to Root Level
-page_title: Prevent Dragging Nodes to Root Level | Kendo UI TreeView Widget
+page_title: Prevent Dragging Nodes to Root Level | Kendo UI TreeView
 description: "Learn how to handle the Kendo UI TreeView drag event to prevent nodes from being dragged to the root level of the tree."
 slug: howto_preventdragging_nodestorootlevel_treeview
 ---

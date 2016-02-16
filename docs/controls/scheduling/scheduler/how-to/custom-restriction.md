@@ -1,6 +1,6 @@
 ---
 title: Create Custom Restrictions
-page_title: Create Custom Restrictions | Kendo UI Scheduler Widget
+page_title: Create Custom Restrictions | Kendo UI Scheduler
 description: "Learn how to create a custom restriction for the Kendo UI Scheduler widget events."
 slug: howto_create_custom_restrivtions_scheduler
 ---

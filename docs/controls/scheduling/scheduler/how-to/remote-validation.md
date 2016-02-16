@@ -1,6 +1,6 @@
 ---
 title: Use Remote Validation
-page_title: Use Remote Validation | Kendo UI Scheduler Widget
+page_title: Use Remote Validation | Kendo UI Scheduler
 description: "Learn how to use a remote validation in a Kendo UI Scheduler widget."
 slug: howto_useremotevalidation_scheduler
 ---

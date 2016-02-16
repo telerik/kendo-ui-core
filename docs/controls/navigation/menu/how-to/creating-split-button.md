@@ -1,6 +1,6 @@
 ---
 title: Create Split Button
-page_title: Create Split Button | Kendo UI Menu Widget
+page_title: Create Split Button | Kendo UI Menu
 description: "Learn how to create a Split button in the Kendo UI Menu widget."
 slug: howto_createa_split_button_menu
 ---
