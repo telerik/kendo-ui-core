@@ -584,6 +584,33 @@
         equal(dataSource.total(), 1);
     });
 
+    test("synced inserted item remains after cancelChanges - with projection", function() {
+        var dataSource = new kendo.data.DataSource({
+            offlineStorage: "key",
+            data: [{ Foo: "baz", id: 1 } ],
+            schema: {
+                model: {
+                    id: "id",
+                    fields: {
+                        foo: { from: "Foo" }
+                    }
+                }
+            }
+        });
+
+        dataSource.read();
+
+        dataSource.online(false);
+
+        dataSource.add( { foo : "foo" });
+        dataSource.sync();
+
+        dataSource.cancelChanges();
+
+        equal(dataSource.total(), 2);
+        equal(dataSource.at(1).foo, "foo");
+    });
+
     test("synced inserted item remains after cancelChanges", function() {
         var dataSource = new kendo.data.DataSource({
             offlineStorage: "key",
