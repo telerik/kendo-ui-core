@@ -1,6 +1,6 @@
 ---
 title: Common Issues
-page_title: Common Issues | Kendo UI Diagram Widget
+page_title: Common Issues | Kendo UI Diagram
 description: "Learn how to deal with issues you may encounter while using the Kendo UI Diagram widget."
 slug: troubleshooting_diagram_widget
 position: 1
@@ -32,7 +32,7 @@ Select **Internet Options** > **Security** > **Internet** (or **Local intranet**
 
 Such issues are typically caused by the different fonts that are used on screen and in the PDF.
 
-For display, the browser will substitute the selected font with whatever is provided by the system. During export, you will take the metrics from the actual font in use and determine the PDF layout from that. It is likely that the resulting PDF will be displayed with a different font, leading to layout and encoding issues.
+For display, the browser substitutes the selected font with whatever is provided by the system. During export, you take the metrics from the actual font in use and determine the PDF layout from that. It is likely that the resulting PDF is displayed with a different font, leading to layout and encoding issues.
 
 **Solution**
 
@@ -196,7 +196,19 @@ Other articles on styling, appearance, and rendering of Kendo UI widgets:
 
 Other articles on troubleshooting:
 
+* [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
 * [JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
 * [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
+* [Common Issues in Kendo UI Excel Export]({% slug troubleshooting_excel_export_kendoui %})
+* [Common Issues in Kendo UI Charts]({% slug troubleshooting_chart_widget %})
+* [Common Issues in Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %})
+* [Common Issues in Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %})
+* [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})
+* [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})
+* [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
+* [Common Issues in Kendo UI Upload]({% slug troubleshooting_upload_widget %})
+* [Common Issues Related to Styling, Appearance, and Rendering]({% slug commonissues_troubleshooting_kendouistyling %})
 * [Common Issues in Telerik UI for ASP.NET MVC](/aspnet-mvc/troubleshooting)
+* [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/grid/troubleshooting)
+* [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/upload/troubleshooting)
