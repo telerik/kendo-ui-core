@@ -131,9 +131,14 @@ The example below demonstrates how to embed fonts in exported PDF.
                 fill: dataItem.colorScheme
             }));
 
+            /*
+                Use the DejaVu Sans font for display and embedding in the PDF file.
+                The standard PDF fonts have no support for Unicode characters.
+            */
             g.append(new dataviz.diagram.TextBlock({
                 text: dataItem.firstName + " " + dataItem.lastName,
-                fontFamily: "DejaVu, sans-serif",
+                fontFamily: "DejaVu Sans",
+                fontSize: "14px",
                 x: 10,
                 y: 20,
                 fill: "#fff"
@@ -141,7 +146,8 @@ The example below demonstrates how to embed fonts in exported PDF.
 
             g.append(new dataviz.diagram.TextBlock({
                 text: dataItem.title,
-                fontFamily: "DejaVu, sans-serif",
+                fontFamily: "DejaVu Sans",
+                fontSize: "14px",
                 x: 10,
                 y: 40,
                 fill: "#fff"
