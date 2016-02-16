@@ -38,6 +38,7 @@ Printing a Grid with locked (frozen) columns is likely to produce misaligned col
     </script>
 
    //JavaScript
+   
 	 function printGrid() {
 		var gridElement = $('#grid'),
 			printableContent = '',
