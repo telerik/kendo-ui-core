@@ -8,7 +8,7 @@ position: 1
 
 # Walkthrough
 
-[Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) is a powerful piece of the Kendo UI framework and an essential part of almost any user interface. The Grid control is quick to set up and is packed with features like sorting, grouping, paging, and editing.
+The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) is a powerful piece of the Kendo UI framework and an essential part of almost any user interface. The Grid control is quick to set up and is packed with features like sorting, grouping, paging, and editing.
 
 ## Initialize the Grid
 

@@ -1,32 +1,48 @@
 ---
-title: Modes
+title: Modes of Operation
+page_title: Modes of Operation | Upload JSP Tag
+description: "Use the synchronous and asynchronous operational modes of the Upload JSP tag in Kendo UI."
+slug: modesofoperation_upload_uiforjsp
+position: 2
 ---
-# Upload Modes
 
-The Upload supports two modes of operation - synchronous and asynchronous.
+# Modes of Operation
 
-This help topic explains how to use these modes with the Spring MVC framework.
-Please review the main [Upload Modes](/web/upload/modes) help topic for general information.
+The Kendo UI Upload supports two modes of operation&mdash;synchronous and asynchronous. This article explains how to use these modes with the Spring MVC framework.
 
-## Synchronous mode
+For general information, refer to the article on the [widget's modes of operation]({% slug modes_upload_widget %}).
 
-In this mode the upload is executed as part of the form submit (synchronously). No dedicated action methods are required.
+## Synchronous Mode
 
-1. Add a form declaration and set a controller action.
+In the synchronous mode, the upload is executed synchronously, as part of the form submit. No dedicated action methods are required.
+
+### Configuration
+
+Below are listed the steps for you to follow when configuring the synchronous mode of operation for the Kendo UI Upload.
+
+**Step 1** Add a `form` declaration and set a `controller` action.
+
+###### Example
 
         <form method="post" action="<c:url value='/web/upload/' />">
         </form>
 
-2. Add the Upload inside the form. The only required setting is a Name.
+**Step 2** Add the Upload inside the form. The only required setting is `name`.
+
+###### Example
 
         <kendo:upload name="files" />
 
-3. Add a submit and reset buttons to the form.
+**Step 3** Add a submit and reset buttons to the form.
+
+###### Example
 
         <input type="submit" value="Send" class="t-button" />
         <input type="reset" value="Reset" class="t-button" />
 
-4. The form should look like this:
+**Step 4** The form should look like the one demonstrated in the example below.
+
+###### Example
 
         <form method="post" action="<c:url value='/web/upload/' />">
             <kendo:upload name="files" />
@@ -34,7 +50,9 @@ In this mode the upload is executed as part of the form submit (synchronously). 
             <input type="reset" value="Reset" class="t-button" />
         </form>
 
-5. Process the files in the action. It requires no special server handling compared to a regular input.
+**Step 5** Process the files in the action. It requires no special server handling compared to a regular input.
+
+###### Example
 
         @RequestMapping(value = {"/", "/index"}, method = RequestMethod.POST)
         public String save(@RequestParam List<MultipartFile> files, Model model) {
@@ -43,22 +61,27 @@ In this mode the upload is executed as part of the form submit (synchronously). 
             return "web/upload/results";
         }
 
-## Asynchronous mode
+## Asynchronous Mode
 
 In this mode the files are uploaded to a controller action without interrupting the user interaction with the page.
 
-### Save handler
+### Save Handler
 
-1.  Add the upload to the view:
+Below are listed the steps for you to follow when configuring the saving of the handler in the asynchronous mode of operation of the Kendo UI Upload.
+
+**Step 1** Add the Upload to the view.
+
+###### Example
 
         <kendo:upload name="files">
             <kendo:upload-async saveUrl="${saveUrl}"/>
         </kendo:upload>
 
-    The name attribute is required and must be unique.
-    It will be used as a form field name in the requests to the server.
+The `name` attribute is required and must be unique. It is used as a `form` field name in the requests to the server.
 
-2. Implement the Save controller action:
+**Step 2** Implement the **Save** controller action.
+
+###### Example
 
         @RequestMapping(value = "/async/save", method = RequestMethod.POST)
         public @ResponseBody String save(@RequestParam List<MultipartFile> files) {
@@ -70,17 +93,23 @@ In this mode the files are uploaded to a controller action without interrupting 
             return "";
         }
 
-### Remove handler
+### Remove Handler
 
-Users can remove files even after they've been uploaded asynchronously. To enable this feature you need a Remove action.
+Users can remove files after they are uploaded asynchronously. To enable this feature, a `Remove` action is needed.
 
-1. Specify a Remove action
+Below are listed the steps for you to follow when configuring the removing of the handler in the asynchronous mode of operation of the Kendo UI Upload.
+
+**Step 1** Specify a `Remove` action.
+
+###### Example
 
         <kendo:upload name="files">
             <kendo:upload-async saveUrl="${saveUrl}" removeUrl="${removeUrl}"/>
         </kendo:upload>
 
-2. Implement the Remove action. It takes a fileNames parameter of type string[]
+**Step 2** Implement the `Remove` action. It takes a `fileNames` parameter of type `string[]`.
+
+###### Example
 
         @RequestMapping(value = "/async/remove", method = RequestMethod.POST)
         public @ResponseBody String remove(@RequestParam String[] fileNames) {
@@ -91,14 +120,26 @@ Users can remove files even after they've been uploaded asynchronously. To enabl
             return "";
         }
 
-> The Remove action can be used as an attack vector if implemented poorly. Always sanitize the file names and verify that the user has the appropriate permissions before actually deleting any files.
+> **Important**
+>
+> The `Remove` action can be used as an attack vector if implemented poorly. Always sanitize the file names and verify that the user has the appropriate permissions before actually deleting any files.
 
-### Disabling automatic upload
+### Disable Automatic Upload
 
-The selected files will be uploaded immediately by default.
-You can change this behavior by setting AutoUpload to false.
+The selected files are uploaded immediately by default. You can change this behavior by setting `AutoUpload` to `false`.
+
+###### Example
 
         <kendo:upload name="files">
             <kendo:upload-async autoUpload="false" saveUrl="${saveUrl}" removeUrl="${removeUrl}"/>
         </kendo:upload>
 
+## See Also
+
+Other articles on Telerik UI for JSP and on the Upload:
+
+* [Overview of the Upload JSP Tag]({% slug overview_upload_uiforjsp %})
+* [Sending and Receiving Metadata with the Upload JSP Tag]({% slug metadata_upload_uiforjsp %})
+* [Overview of the Kendo UI Upload Widget]({% slug overview_kendoui_upload_widget %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

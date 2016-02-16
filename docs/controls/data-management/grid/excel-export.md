@@ -8,7 +8,7 @@ position: 8
 
 # Excel Export
 
-Since Kendo UI Q3 2014 (2014.3.1119) the Grid widget provides a built-in Excel export functionality.
+As of the Kendo UI Q3 2014 (2014.3.1119) release, the Grid widget provides a built-in Excel export functionality.
 
 ## Set Up
 
