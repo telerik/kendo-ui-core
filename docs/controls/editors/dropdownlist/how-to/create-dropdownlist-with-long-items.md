@@ -1,6 +1,6 @@
 ---
 title: Create Lists with Long Items
-page_title: Create Lists with Long Items | Kendo UI DropDownList Widget
+page_title: Create Lists with Long Items | Kendo UI DropDownList
 description: "Learn how to create Kendo UI DropDownLists with long items."
 slug: howto_create_listswith_long_items_dropdownlist
 ---

@@ -1,6 +1,6 @@
 ---
 title: Create Confirmation Dialog via Promises
-page_title: Create Confirmation Dialog via Promises | Kendo UI Window Widget
+page_title: Create Confirmation Dialog via Promises | Kendo UI Window
 description: "Learn how to create a confirmation dialog in a Kendo UI Window by using Promises for deferred execution."
 slug: howto_createconfirmationdialog_viapromises_window
 ---

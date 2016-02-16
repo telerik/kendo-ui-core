@@ -1,6 +1,6 @@
 ---
 title: Validate Lists by Using Required Attributes
-page_title: Validate Lists by Using Required Attributes | Kendo UI DropDownList Widget
+page_title: Validate Lists by Using Required Attributes | Kendo UI DropDownList
 description: "Learn how to use a required attribute to validate the Kendo UI DropDownList widget in AngualrJS applications."
 slug: howto_validate_using_required_attributes_dropdownlist
 ---

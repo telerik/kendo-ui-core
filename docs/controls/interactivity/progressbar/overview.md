@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI ProgressBar Widget
+page_title: Overview | Kendo UI ProgressBar
 description: "Learn how to initialize the Kendo UI ProgressBar widget and configure its behaviors."
 slug: overview_kendoui_progressbar_widget
 position: 1

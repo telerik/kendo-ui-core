@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Editor Widget
+page_title: Overview | Kendo UI Editor
 description: "Learn how to initialize and configure the Kendo UI Editor widget."
 slug: overview_kendoui_editor_widget
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Add Title Attribute
-page_title: Add Title Attribute | Kendo UI NumericTextBox Widget
+page_title: Add Title Attribute | Kendo UI NumericTextBox
 description: "Learn how to add a title attribute in the Kendo UI NumericTextBox widget."
 slug: howto_add_title_attribute_numerictextbox
 ---

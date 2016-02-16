@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Sortable Widget
+page_title: Overview | Kendo UI Sortable
 description: "Learn how to initialize the Kendo UI Sortable widget and configure its behaviors."
 slug: overview_kendoui_sortable_widget
 position: 1

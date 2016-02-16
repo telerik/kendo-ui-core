@@ -1,6 +1,6 @@
 ---
 title: Customize Masks through MVVM Binding
-page_title: Customize Masks through MVVM Binding | Kendo UI MaskedTextBox Widget
+page_title: Customize Masks through MVVM Binding | Kendo UI MaskedTextBox
 description: "Learn how to set the Kendo UI MaskedTextBox masks using a custom MVVM binding."
 slug: howto_customize_masks_through_mvvmbinding_mvvm_maskedtextbox
 ---

@@ -1,6 +1,6 @@
 ---
 title: Persist Entered Dates
-page_title: Persist Entered Dates | Kendo UI DatePicker Widget
+page_title: Persist Entered Dates | Kendo UI DatePicker
 description: "Learn how to persist an entered date in the Kendo UI DatePicker upon user navigation between pages for Internet Explorer 9 or older."
 slug: howto_persist_entered_dates_datepicker
 ---

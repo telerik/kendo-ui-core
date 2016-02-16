@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Slider Widget
+page_title: Overview | Kendo UI Slider
 description: "Learn how to initialize the Kendo UI Slider widget and configure its behaviors."
 slug: overview_kendoui_slider_widget
 position: 1

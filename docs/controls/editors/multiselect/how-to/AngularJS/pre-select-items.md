@@ -1,6 +1,6 @@
 ---
 title: Preselect Items on Load
-page_title: Preselect Items on Load | Kendo UI MultiSelect Widget
+page_title: Preselect Items on Load | Kendo UI MultiSelect
 description: "Learn how to pre-select items on load in the Kendo UI MultiSelect widget."
 slug: howto_preselect_itemson_load_angular_multiselect
 ---

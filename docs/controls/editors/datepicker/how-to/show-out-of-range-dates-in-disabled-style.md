@@ -1,6 +1,6 @@
 ---
 title: Show Out-of-Range Dates as Disabled
-page_title: Show Out-of-Range Dates as Disabled | Kendo UI DatePicker Widget
+page_title: Show Out-of-Range Dates as Disabled | Kendo UI DatePicker
 description: "Learn how to show dates that are out of range in a disabled style in the Kendo UI datePicker widget."
 slug: howto_show_outofrange_dates_disabled_datepicker
 ---

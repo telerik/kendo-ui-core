@@ -1,6 +1,6 @@
 ---
 title: Select Ranges between DatePickers
-page_title: Select Ranges between DatePickers | Kendo UI DatePicker Widget
+page_title: Select Ranges between DatePickers | Kendo UI DatePicker
 description: "Learn how to select ranges between two Kendo UI DatePickers in AngularJS environment."
 slug: howto_select_ranges_between_datepicker
 ---

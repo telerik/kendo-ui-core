@@ -1,6 +1,6 @@
 ---
 title: Change Text Color
-page_title: Change Text Color | Kendo UI NumericTextBox Widget
+page_title: Change Text Color | Kendo UI NumericTextBox
 description: "Learn how to change the text color in the Kendo UI NumericTextBox widget."
 slug: howto_change_text_color_numerictextbox
 ---

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI NumericTextBox Widget
+page_title: Overview | Kendo UI NumericTextBox
 description: "Learn how to initialize the Kendo UI NumericTextBox widget and configure its behaviors."
 slug: overview_kendoui_numerictextbox_widget
 position: 1

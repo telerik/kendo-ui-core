@@ -1,6 +1,6 @@
 ---
 title: Use Sortable with Grid in Batch Editing Mode
-page_title: Use Sortable with Grid in Batch Editing Mode | Kendo UI Sortable Widget
+page_title: Use Sortable with Grid in Batch Editing Mode | Kendo UI Sortable
 description: "Learn how to use the Kendo UI Sortable widget with a Kendo UI Grid in a batch editable mode."
 slug: howto_usesortablewithgrid_inbatchediting_sortable
 ---

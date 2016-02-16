@@ -1,6 +1,6 @@
 ---
 title: Integration with TabStrip
-page_title: Integration with TabStrip | Kendo UI Sortable Widget
+page_title: Integration with TabStrip | Kendo UI Sortable
 description: "Learn how to reorder Kendo UI TabStrip items with the Kendo UI Sortable widget."
 slug: integrationwith_tabstrip_sortable_widget
 position: 3

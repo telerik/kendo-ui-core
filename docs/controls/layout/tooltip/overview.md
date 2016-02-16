@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Tooltip Widget
+page_title: Overview | Kendo UI Tooltip
 description: "Learn how to initialize the Kendo UI Tooltip widget and configure its behaviors."
 slug: overview_kendoui_tooltip_widget
 position: 1

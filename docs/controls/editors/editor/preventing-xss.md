@@ -1,6 +1,6 @@
 ---
 title: Prevent Cross-Site Scripting
-page_title: Prevent Cross-Site Scripting | Kendo UI Editor Widget
+page_title: Prevent Cross-Site Scripting | Kendo UI Editor
 description: "Learn the security implications of allowing an HTML editing in your pages and how to secure them in the Kendo UI Editor widget."
 slug: prevent_xss_editor_widget
 position: 5

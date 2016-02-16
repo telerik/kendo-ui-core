@@ -1,6 +1,6 @@
 ---
 title: Post to Iframe
-page_title: Post to Iframe | Kendo UI Window Widget
+page_title: Post to Iframe | Kendo UI Window
 description: "Learn how to post to the iframe content of the Kendo UI Window."
 slug: howto_posttoiframe_window
 ---

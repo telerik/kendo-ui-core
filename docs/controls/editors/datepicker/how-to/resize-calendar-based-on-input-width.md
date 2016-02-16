@@ -1,6 +1,6 @@
 ---
 title: Resize Calendar Based on Input Width
-page_title: Resize Calendar Based on Input Width | Kendo UI DatePicker Widget
+page_title: Resize Calendar Based on Input Width | Kendo UI DatePicker
 description: "Learn how to resize the nested calendar based on the widthe of the input element of the Kendo UI DatePicker widget."
 slug: howto_use_resize_calendar_basedon_input_width_datepicker
 ---

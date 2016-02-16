@@ -1,6 +1,6 @@
 ---
 title: Reorder Selected Items
-page_title: Reorder Selected Items | Kendo UI MultiSelect Widget
+page_title: Reorder Selected Items | Kendo UI MultiSelect
 description: "Learn how to reorder selected items in the Kendo UI Multiselect widget by using Kendo UI Sortable."
 slug: howto_reorder_selected_items_multiselect
 ---

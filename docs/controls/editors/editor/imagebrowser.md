@@ -1,6 +1,6 @@
 ---
 title: Image Browser
-page_title: Image Browser | Kendo UI Editor Widget
+page_title: Image Browser | Kendo UI Editor
 description: "Learn how to initialize and configure the Kendo UI Editor widget."
 slug: image_browser_editor_widget
 position: 2

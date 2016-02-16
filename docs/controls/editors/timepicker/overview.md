@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI TimePicker Widget
+page_title: Overview | Kendo UI TimePicker
 description: "Learn how to initialize the Kendo UI TimePicker widget and configure its behaviors."
 slug: overview_kendoui_timepicker_widget
 position: 1

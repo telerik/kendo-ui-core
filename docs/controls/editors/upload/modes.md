@@ -1,6 +1,6 @@
 ---
 title: Modes of Operation
-page_title: Modes of Operation | Kendo UI Upload Widget
+page_title: Modes of Operation | Kendo UI Upload
 description: "Learn how to use the different modes of operation supported by the Kendo UI Upload widget, initialize it from an existing file and how to use its asynchronous mode."
 slug: modes_upload_widget
 position: 4

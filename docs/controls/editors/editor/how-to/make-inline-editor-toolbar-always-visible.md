@@ -1,6 +1,6 @@
 ---
 title: Make Inline Editor Toolbar Always Visible
-page_title: Make Inline Editor Toolbar Always Visible
+page_title: Make Inline Editor Toolbar Always Visible | Kendo UI Editor
 description: "Learn how to make the inline Editor toolbar always visible."
 slug: howto_make_inline_editor_toolbar_always_visible
 ---

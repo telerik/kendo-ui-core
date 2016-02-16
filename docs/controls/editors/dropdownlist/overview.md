@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI DropDownList Widget
+page_title: Overview | Kendo UI DropDownList
 description: "Learn how to initialize the Kendo UI DropDownList widget, configure its options and customize templates."
 slug: overview_kendoui_dropdownlist_widget
 position: 1

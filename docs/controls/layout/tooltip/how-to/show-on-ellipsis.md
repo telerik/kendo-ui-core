@@ -1,6 +1,6 @@
 ---
 title: Show Only If Text Overflows with Ellipsis
-page_title: Show Only If Text Overflows with Ellipsis | Kendo UI ToolBar Widget
+page_title: Show Only If Text Overflows with Ellipsis | Kendo UI ToolBar
 description: "Learn how to show a Kendo UI Tooltip only if the target text overflows with ellipsis."
 slug: howto_showonlyiftextoverflowswithellipsis_tooltip
 ---

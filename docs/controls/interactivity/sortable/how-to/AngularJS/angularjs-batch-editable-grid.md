@@ -1,6 +1,6 @@
 ---
 title: Use Sortable in AngularJS with Grid in Batch Editing Mode
-page_title: Use Sortable in AngularJS with Grid in Batch Editing Mode | Kendo UI Sortable Widget
+page_title: Use Sortable in AngularJS with Grid in Batch Editing Mode | Kendo UI Sortable
 description: "Learn how to reorder AngularJS Grid rows by using the Kendo UI Sortable widget."
 slug: howto_usesortablewith_gridinbatcheditablemode_angular_sortable
 ---

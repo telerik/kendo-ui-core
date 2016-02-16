@@ -1,6 +1,6 @@
 ---
 title: Set the First Weekday
-page_title: Set the First Weekday | Kendo UI DatePicker Widget
+page_title: Set the First Weekday | Kendo UI DatePicker
 description: "Learn how to set the first day of the week on a Kendo UI DatePicker width using AngularJS."
 slug: howto_set_first_weekday_datepicker
 ---

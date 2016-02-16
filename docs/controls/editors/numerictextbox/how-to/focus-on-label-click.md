@@ -1,6 +1,6 @@
 ---
 title: Focus Widget on Label Click
-page_title: Focus Widget on Label Click | Kendo UI NumericTextBox Widget
+page_title: Focus Widget on Label Click | Kendo UI NumericTextBox
 description: "Learn how to focus the Kendo UI NumericTextBox widget when the label element is clicked."
 slug: howto_focus_widgeton_label_click_numerictextbox
 ---

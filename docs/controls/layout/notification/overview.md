@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Notification Widget
+page_title: Overview | Kendo UI Notification
 description: "Learn how to initialize the Kendo UI Notification widget and customize it functionalities."
 slug: overview_kendoui_notification_widget
 position: 1

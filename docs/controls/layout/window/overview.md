@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Window Widget
+page_title: Overview | Kendo UI Window
 description: "Learn how to initialize the Kendo UI Window widget and configure its behaviors."
 slug: overview_kendoui_window_widget
 position: 1

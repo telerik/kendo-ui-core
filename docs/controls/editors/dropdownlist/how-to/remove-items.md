@@ -1,6 +1,6 @@
 ---
 title: Remove Items
-page_title: Remove Items | Kendo UI DropDownList Widget
+page_title: Remove Items | Kendo UI DropDownList
 description: "Learn how to remove items from a Kendo UI DropDownList widget."
 slug: howto_remove_items_dropdownlist
 ---

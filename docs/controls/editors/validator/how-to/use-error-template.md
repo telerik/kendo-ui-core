@@ -1,6 +1,6 @@
 ---
 title: Use Templates to Customize Tooltips
-page_title: Use Templates to Customize Tooltips | Kendo UI Validator Widget
+page_title: Use Templates to Customize Tooltips | Kendo UI Validator
 description: "Learn how to use a template to customize a tooltip in the Kendo UI Validator."
 slug: howto_usetemplatestocustomizetooltips_validator
 ---
