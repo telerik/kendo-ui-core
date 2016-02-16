@@ -14,11 +14,14 @@ This page provides resource links to possible solutions for issues related to Ke
 
 Troubleshooting articles on common issues in Kendo UI:
 
+* [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
 * [JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
 * [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
+* [Common Issues in Kendo UI Excel Export]({% slug troubleshooting_excel_export_kendoui %})
 * [Common Issues in Kendo UI Charts]({% slug troubleshooting_chart_widget %})
 * [Common Issues in Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %})
+* [Common Issues in Kendo UI Diagram]({% slug troubleshooting_diagram_widget %})
 * [Common Issues in Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %})
 * [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})
 * [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})

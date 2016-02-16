@@ -132,4 +132,5 @@ Other articles on troubleshooting:
 * [JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
 * [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
+* [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
 * [Common Issues in Telerik UI for ASP.NET MVC](/aspnet-mvc/troubleshooting)

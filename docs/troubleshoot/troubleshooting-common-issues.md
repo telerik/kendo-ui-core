@@ -25,10 +25,11 @@ Host the offline demos on a web server and load them from there.
 ### jQuery Is Unavailable or Undefined
 
 If jQuery is not included, or is included after the Kendo UI JavaScript files, or is included after Kendo UI widget initialization statements, the Kendo UI widgets will not function as expected.
+
 The following JavaScript errors will be thrown (depending on the browser):
 
-* ReferenceError: jQuery is not defined (in Google Chrome and Firefox)
-* 'jQuery' is undefined (in Internet Explorer)
+* `ReferenceError: jQuery is not defined` (in Google Chrome and Firefox)
+* `jQuery is undefined` (in Internet Explorer)
 
 **Solution**
 
@@ -168,14 +169,18 @@ This issue is usually caused when the page loaded via AJAX contains a script ref
 
 Load a partial HTML fragment that does not contain any unneeded jQuery references, or use an `iframe` to load the complete page.
 
-###### Example - a test issue
+The example below demonstrates a test issue.
+
+###### Example
 
     $("#dialog").kendoWinodow({
         // loads complete page
         content: "/foo"
     });
 
-###### Example - the solution of the issue above
+The example below demonstrates the solution of the test issue above.
+
+###### Example
 
     $("#dialog").kendoWinodow({
         // load complete page...
@@ -201,6 +206,7 @@ Other articles on troubleshooting:
 * [Common Issues in Kendo UI Excel Export]({% slug troubleshooting_excel_export_kendoui %})
 * [Common Issues in Kendo UI Charts]({% slug troubleshooting_chart_widget %})
 * [Common Issues in Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %})
+* [Common Issues in Kendo UI Diagram]({% slug troubleshooting_diagram_widget %})
 * [Common Issues in Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %})
 * [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})
 * [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})

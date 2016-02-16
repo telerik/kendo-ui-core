@@ -14,11 +14,11 @@ In most cases the Grid is not the only content on a page and, yet, you might wan
 
 There are two ways to print the content of the Grid only, though the Grid itself may not be the only content displayed on a page.
 
-### Print Existing Web Page
+### Print Existing Web Pages
 
 Print the existing web page, but use a print stylesheet to hide the parts of the page that are not needed.
 
-### Print New Web Page
+### Print New Web Pages
 
 The example below demonstrates how to retrieve the Grid HTML, inject it in a new browser window, and trigger the printing of the new page. It also addresses some other important things you must keep in mind as follows:
 

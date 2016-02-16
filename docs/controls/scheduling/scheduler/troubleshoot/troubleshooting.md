@@ -1,6 +1,6 @@
 ---
 title: Common Issues
-page_title: Common Issues | Kendo UI Scheduler Troubleshooting
+page_title: Common Issues | Kendo UI Scheduler
 description: "Learn how to deal with issues you may encounter while using the Kendo UI Scheduler widget."
 previous_url: /web/scheduler/troubleshooting
 slug: troubleshooting_scheduler_widget
@@ -84,13 +84,16 @@ Other articles on Kendo UI Scheduler:
 Other articles on troubleshooting:
 
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
-* [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
 * [JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
+* [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
+* [Common Issues in Kendo UI Excel Export]({% slug troubleshooting_excel_export_kendoui %})
+* [Common Issues in Kendo UI Charts]({% slug troubleshooting_chart_widget %})
 * [Common Issues in Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %})
+* [Common Issues in Kendo UI Diagram]({% slug troubleshooting_diagram_widget %})
 * [Common Issues in Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %})
-* [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})
 * [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})
+* [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})
 * [Common Issues in Kendo UI Upload]({% slug troubleshooting_upload_widget %})
 * [Common Issues Related to Styling, Appearance, and Rendering]({% slug commonissues_troubleshooting_kendouistyling %})
 * [Common Issues in Telerik UI for ASP.NET MVC](/aspnet-mvc/troubleshooting)

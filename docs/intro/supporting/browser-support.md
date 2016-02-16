@@ -41,7 +41,7 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 
 [Kendo UI widgets rendering data visualization]({% slug bundle_supportfor_kendoui_components %}) may require more recent browser versions as well. If you want to use them in your project, consider the information below.
 
-#### Fully supported browsers
+#### Fully Supported Browsers
 
 | Browser           | Supported Versions            |
 | :---------------- | :---------------------------- |
@@ -54,7 +54,7 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 | iOS Safari        | iOS 8 or later                |
 | Chrome for Mobile | 21 or later                   |
 
-#### Browsers with limited support
+#### Browsers with Limited Support
 
 | Browser           | Supported Versions            | Limitations                               |
 | :---------------- | :---------------------------- | :-----------                              |
@@ -120,9 +120,9 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 
 To ensure the best performance of your project, make sure that you:
 
- * Always use an up-to-date browser version
- * Check **Disable Script Debugging** from your browser configuration options
- * Activate Caching in Internet Explorer
+* Always use an up-to-date browser version
+* Check **Disable Script Debugging** from your browser configuration options
+* Activate Caching in Internet Explorer
 
 ## See Also
 
