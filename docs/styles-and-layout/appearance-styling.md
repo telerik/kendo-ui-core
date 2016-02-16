@@ -62,6 +62,15 @@ Some themes require a different common (base) stylesheet that applies different 
 | **`kendo.common-fiori.css`**          | The base stylesheet for the Fiori theme available in the enterprise bundles of Kendo UI. Use this file instead of `kendo.common.css` and only with `kendo.fiori.css`. |
 | **`kendo.common-office365.css`**      | The base stylesheet for the Office365 theme available in the enterprise bundles of Kendo UI. Use this file instead of `kendo.common.css` and only with `kendo.office365.css`. |
 
+## Theme-related Folders
+
+Apart from the common stylesheet and theme stylesheet, the following folders must be available in your application.
+
+* /*ThemeName*/ - this is the folder, which contains all images required by the used Kendo UI theme. The folder name matches the theme name, e.g. "Default", "Bootstrap", "Silver", etc. The theme image folders for unused themes can be removed.
+* /fonts/ - this is where the KendoUIGlyphs and DejaVu font files reside. The KendoUIGlyphs font describes the Kendo UI font icons used by web widgets. The DejaVu font is used by default during [PDF export](/framework/drawing/drawing-dom).
+* /images/ - this where the Kendo UI font icons for the mobile widgets reside.
+* /textures/ - this is where some fallback theme images are stored for browsers that do not support CSS3 linear gradients.
+
 ## Primitives
 
 Kendo UI widgets use primitives, meaning that different HTML elements in different widgets use the same CSS classes to provide a level of abstraction and allow common styling.
