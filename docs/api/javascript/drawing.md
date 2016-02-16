@@ -128,10 +128,14 @@ The [page template](/framework/drawing/drawing-dom#page-template-headers-and-foo
 ### exportImage
 Exports a group of drawing elements as an image.
 
+The group will be positioned at [0, 0] in the exported image. It's dimensions will be used as default dimensions for the image.
+
 The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
 
 The promise will be resolved with a PNG image encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
+> *Important*
+>
 > Scene images must be of same origin or [CORS-enabled](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image).
 
 #### Parameters
@@ -185,9 +189,58 @@ for more details.
         });
     </script>
 
+#### Example - Position the scene within a larger image
+    <div class="content" style="background: #ffffff;">
+        <p>Lorem ípsum dolor sit amét, pro éu facilis vulputáte témporibus. Eu méi modus requé. Unum gloriátur has et. Modo stet vix ei, apéirian iñsolens plátoñem has ex. Cum eí oporteat inímicus, prí soluta torquatos témporibus éu.</p>
+        <p>Ut eos assúm mazim vócent, cu gloríatur expetéñdis pro. Héñdrerit ádversarium reprehendunt eos ad, dúo an noster feugiat cotidieque. Vocent erroribus repudiáre ad meí. Oratio soluta eripuit sed éx. Vis et meliore appellañtur, át has discere convenire ocurreret. Eos at mazim melius aliquip, aperiam alterum commuñé pro id, zril soluta efficiantur in sit. Duis mundi duo ex, pér offendit probatus suavítate iñ.</p>
+        <p>Nec id fácilis similique, audiam moderatius ad eum. Persecuti liberavisse eum ex. Qui anímal audiré et, éum vitae coñsul dolorum eu, ín sed partem antíopam. Velít suscipit te usu. Mea ea melius scripta.</p>
+        <p>Illum delenit neglegentúr te cum, in errór inimicus disseñtias mel, placérat ocurreret ea vix. Vix ea latine voluptatum. Cúm eu albucius democritum coñsetetur, vix eu dicat deleniti, omñes ínimicus nám no. Nihil molestiae vel ex.</p>
+        <p>Eú ñominavi placerat his, eu vix timeam qualisque. Príma recusabo torquatós eos ad, ín meí próbo aequé. Ex ñoñumy vóluptua accommodare seá, sit át sanctus detráxit, ín eos case probatus tractatos. Id sit nihíl coñtentíones, ñec ut audiré elaboraret, quo alia ferri múñere ét.</p>
+    </div>
+    <script>
+        var draw = kendo.drawing;
+        var geom = kendo.geometry;
+
+        var contentSize = new geom.Rect([0, 0], [800, 600]);
+        var imageSize = new geom.Rect([0, 0], [1200, 800]);
+
+        draw.drawDOM($(".content")).then(function (group) {
+            // Fill the background and set the dimensions for the exported image
+            var background = draw.Path.fromRect(imageSize, {
+                fill: {
+                    color: "#ffffff",
+                },
+                stroke: null
+            });
+
+            // Fit content to size, if needed
+            draw.fit(group, contentSize);
+
+            // Note that the following methods accept arrays
+            draw.align([group], imageSize, "center");
+            draw.vAlign([group], imageSize, "center");
+
+            // Bundle it all together
+            var wrap = new draw.Group();
+            wrap.append(background, group);
+
+            // export the image and crop it for our desired size
+            return draw.exportImage(wrap, {
+                cors: "anonymous"
+            });
+        })
+        .done(function(data) {
+            kendo.saveAs({
+                dataURI: data,
+                fileName: "frame.png"
+            });
+        });
+    </script>
 
 ### exportPDF
 Exports a group of drawing elements as a PDF file.
+
+The group will be positioned at [0, 0] in the exported file. It's dimensions will be used as default dimensions for the image.
 
 The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
 
@@ -227,6 +280,8 @@ Parameters for the exported PDF file.
 
 ### exportSVG
 Exports a group of drawing elements as an SVG document.
+
+The group will be positioned at [0, 0] in the exported file. It's dimensions will be used as default dimensions for the image.
 
 The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
 
