@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI QRCode Widget
+page_title: Overview | Kendo UI QRCode
 description: "Learn how to create and set the  Kendo UI QRCode widget."
 slug: overview_kendoui_qrcode_widget
 position: 1
