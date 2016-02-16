@@ -1,6 +1,6 @@
 ---
 title: Expand to 100% Height and Auto-Resize
-page_title: Expand to 100% Height and Auto-Resize | Kendo UI TabStrip Widget
+page_title: Expand to 100% Height and Auto-Resize | Kendo UI TabStrip
 description: "Learn how to expand the Kendo UI TabStrip widget to 100% height and make it resize together with the browser window."
 slug: howto_expandto100percentheightautoresize_tabstrip
 ---

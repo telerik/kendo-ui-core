@@ -1,6 +1,6 @@
 ---
 title: Wrap Scheduler in Custom Directives
-page_title: Wrap Scheduler in Custom Directives | Kendo UI Scheduler Widget
+page_title: Wrap Scheduler in Custom Directives | Kendo UI Scheduler
 description: "Learn how to render Kendo UI Scheduler using a custom AngularJS directive."
 slug: howto_wrap_schedulerin_custom_directives_angularjs_scheduler
 ---

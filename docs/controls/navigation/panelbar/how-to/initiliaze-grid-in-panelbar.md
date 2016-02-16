@@ -1,6 +1,6 @@
 ---
 title: Initialize the Grid
-page_title: Initialize the Grid | Kendo UI PanelBar Widget
+page_title: Initialize the Grid | Kendo UI PanelBar
 description: "Learn how to initialize the Grid inside the Kendo UI PanelBar by resizing it according to the dimensions of its container."
 slug: initialize_thegrid_panelbar_widget
 ---

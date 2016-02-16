@@ -1,6 +1,6 @@
 ---
 title: Toggle Nodes with Single Click
-page_title: Toggle Nodes with Single Click | Kendo UI TreeView Widget
+page_title: Toggle Nodes with Single Click | Kendo UI TreeView
 description: "Learn how to toggle nodes between expanded and collapsed states with a single click in the Kendo UI TreeView widget in AngularJS."
 slug: howto_togglenodeswithsingleclick_angularjs_treeview
 ---

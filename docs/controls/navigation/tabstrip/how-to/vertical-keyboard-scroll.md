@@ -1,6 +1,6 @@
 ---
 title: Scroll TabStrip with Keyboard
-page_title: Scroll TabStrip with Keyboard | Kendo UI TabStrip Widget
+page_title: Scroll TabStrip with Keyboard | Kendo UI TabStrip
 description: "Learn how to vertically scroll the Knedo UI TabStrip widget using keyboard navigation."
 slug: howto_scrolltabstripwithkeyboard_tabstrip
 ---

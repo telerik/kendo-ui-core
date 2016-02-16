@@ -1,6 +1,6 @@
 ---
 title: Filter Out Search Results
-page_title: Filter Out Search Results | Kendo UI TreeView Widget
+page_title: Filter Out Search Results | Kendo UI TreeView
 description: "Learn how to search for tree nodes and show thema long with their parent nodes in a Kendo UI TreeView widget."
 slug: howto_filetroutserachresults_treeview
 ---

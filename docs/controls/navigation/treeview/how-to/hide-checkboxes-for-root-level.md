@@ -1,6 +1,6 @@
 ---
 title: Hide Checkboxes for Root Level
-page_title: Hide Checkboxes for Root Level | Kendo UI TreeView Widget
+page_title: Hide Checkboxes for Root Level | Kendo UI TreeView
 description: "Learn how to use the checkboxes.template configuration option to hide checkboxes for root level items in a Kendo UI TreeView widget."
 slug: howto_hidecheckboxesforrootlevel_treeview
 ---

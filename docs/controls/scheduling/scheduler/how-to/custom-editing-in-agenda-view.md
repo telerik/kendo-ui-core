@@ -1,6 +1,6 @@
 ---
 title: Implement Custom Editing in agenda View
-page_title: Implement Custom Editing in agenda View | Kendo UI Scheduler Widget
+page_title: Implement Custom Editing in agenda View | Kendo UI Scheduler
 description: "Learn how to implement custom editing in the `agenda` view of a Kendo UI Scheduler widget."
 slug: howto_implement_custom_editing_inagenda_view_scheduler
 ---

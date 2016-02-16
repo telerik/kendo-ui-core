@@ -1,6 +1,6 @@
 ---
 title: Edit Nodes via Form
-page_title: Edit Nodes via Form | Kendo UI TreeView Widget
+page_title: Edit Nodes via Form | Kendo UI TreeView
 description: "Learn how to allow users to edit nodes via a standalone form in a Kendo UI TreeView widget."
 slug: howto_editnodesviaform_treeview
 ---

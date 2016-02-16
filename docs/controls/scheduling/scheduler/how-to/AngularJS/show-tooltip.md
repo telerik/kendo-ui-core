@@ -1,6 +1,6 @@
 ---
 title: Show Тooltip on hover
-page_title: Show Тooltip on hover | Kendo UI Scheduler Widget
+page_title: Show Тooltip on hover | Kendo UI Scheduler
 description: "Learn how to add a tooltip that opens upon a hover event to the Kendo UI Scheduler widget."
 slug: howto_show_tooltipon_hover_angularjs_scheduler
 ---

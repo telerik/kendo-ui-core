@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI PanelBar Widget
+page_title: Overview | Kendo UI PanelBar
 description: "Learn how to initialize the Kendo UI PanelBar widget and configure its behaviors."
 slug: overview_kendoui_panelbar_widget
 position: 1

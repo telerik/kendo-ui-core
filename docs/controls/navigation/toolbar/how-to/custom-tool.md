@@ -1,6 +1,6 @@
 ---
 title: Develop and Register Custom ToolBar Tools
-page_title: Develop and Register Custom ToolBar Tools | Kendo UI ToolBar Widget
+page_title: Develop and Register Custom ToolBar Tools | Kendo UI ToolBar
 description: "Learn how to develop and register custom ToolBar tools."
 slug: howto_customtool_toolbar
 ---

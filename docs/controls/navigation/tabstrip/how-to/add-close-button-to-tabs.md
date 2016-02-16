@@ -1,6 +1,6 @@
 ---
 title: Add Close Button to Tabs
-page_title: Add Close Button to Tabs | Kendo UI TabStrip Widget
+page_title: Add Close Button to Tabs | Kendo UI TabStrip
 description: Learn how to add close buttons in the Kendo UI TabStrip tabs.
 slug: howto_addclosebuttontotabs_tabstrip
 ---

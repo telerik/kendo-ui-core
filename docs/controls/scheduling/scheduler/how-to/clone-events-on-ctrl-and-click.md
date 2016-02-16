@@ -1,6 +1,6 @@
 ---
 title: Clone Events on Ctrl + move
-page_title: Clone Events on Ctrl + move | Kendo UI Scheduler Widget
+page_title: Clone Events on Ctrl + move | Kendo UI Scheduler
 description: "Learn how to clone events on Ctrl + move in the Kendo UI Scheduler widget."
 slug: howto_clone_eventson_ctrlplus_move_scheduler
 ---

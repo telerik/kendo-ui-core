@@ -1,6 +1,6 @@
 ---
 title: Customize Edit and Events Templates
-page_title: Customize Edit and Events Templates | Kendo UI Scheduler Widget
+page_title: Customize Edit and Events Templates | Kendo UI Scheduler
 description: "Learn how to create and use custom templates for the events and edit window of the Kendo UI Scheduler widget in AngularJS."
 slug: howto_customize_editand_events_templates_angularjs_scheduler
 ---

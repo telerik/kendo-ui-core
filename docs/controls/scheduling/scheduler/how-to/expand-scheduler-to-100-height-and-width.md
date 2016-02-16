@@ -1,6 +1,6 @@
 ---
 title: Expand Scheduler to 100% Width and Height
-page_title: Expand Scheduler to 100% Width and Height | Kendo UI Scheduler Widget
+page_title: Expand Scheduler to 100% Width and Height | Kendo UI Scheduler
 description: "Learn how to expand a Kendo UI Scheduler widget to a width and height of 100%."
 slug: howto_expand_scheduler_to100percent_widthandheight_scheduler
 ---

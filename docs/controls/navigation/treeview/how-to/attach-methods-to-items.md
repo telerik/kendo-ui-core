@@ -1,6 +1,6 @@
 ---
 title: Attach Methods to Data Items
-page_title: Attach Methods to Data Items | Kendo UI TreeView Widget
+page_title: Attach Methods to Data Items | Kendo UI TreeView
 description: "Learn how to attach methods to data items at different levels of the Kendo UI TreeView widget and use them in a template."
 slug: howto_attache_methodsto_dataitems_treeview
 ---

@@ -1,6 +1,6 @@
 ---
 title: Get Reference to the Built-In Validator
-page_title: Get Reference to the Built-In Validator | Kendo UI Scheduler Widget
+page_title: Get Reference to the Built-In Validator | Kendo UI Scheduler
 description: "Learn how to get a reference to the built-in Kendo UI Validator using the edit event of the Kendo UI Scheduler widget."
 slug: howto_get_referencetothe_builtin_validator_scheduler
 ---

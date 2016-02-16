@@ -1,6 +1,6 @@
 ---
 title: Timezones
-page_title: Timezones | Kendo UI Scheduler Widget
+page_title: Timezones | Kendo UI Scheduler
 description: "Learn more about how to configure the timezones in the Kendo UI Scheduler widget."
 slug: timezones_kendoui_scheduler_widget
 position: 3

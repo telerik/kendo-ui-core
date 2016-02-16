@@ -1,6 +1,6 @@
 ---
 title: Scroll to Item
-page_title: Scroll to Item | Kendo UI TreeView Widget
+page_title: Scroll to Item | Kendo UI TreeView
 description: "Learn how to scroll to an item of a Kendo UI TreeView widget with a given id in AngularJS."
 slug: howto_scrolltoitem_angularjs_treeview
 ---

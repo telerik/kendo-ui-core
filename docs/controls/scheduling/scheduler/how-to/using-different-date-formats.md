@@ -1,6 +1,6 @@
 ---
 title: Use Different Date Formats
-page_title: Use Different Date Formats | Kendo UI Scheduler Widget
+page_title: Use Different Date Formats | Kendo UI Scheduler
 description: "Learn how to use different date formats for a Kendo UI Scheduler events."
 slug: howto_usedifferentdateformats_scheduler
 ---

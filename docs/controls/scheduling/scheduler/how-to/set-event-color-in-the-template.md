@@ -1,6 +1,6 @@
 ---
 title: Set Event Color in the Template
-page_title: Set Event Color in the Template | Kendo UI Scheduler Widget
+page_title: Set Event Color in the Template | Kendo UI Scheduler
 description: "Learn how to set the event color in the template of a Kendo UI Scheduler widget."
 slug: howto_seteventcolorinthetemplate_scheduler
 ---

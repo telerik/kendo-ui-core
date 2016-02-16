@@ -1,6 +1,6 @@
 ---
 title: Create Custom month View with Event Count in Show More Button
-page_title: Create Custom month View with Event Count in Show More Button | Kendo UI Scheduler Widget
+page_title: Create Custom month View with Event Count in Show More Button | Kendo UI Scheduler
 description: "Learn how to inherit some of the built-in views and implement specific custom logic in a Kendo UI Scheduler widget."
 slug: howto_create_custom_monthview_eventcount_showmore_button_scheduler
 ---

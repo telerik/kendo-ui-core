@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Gantt Widget
+page_title: Overview | Kendo UI Gantt
 description: "Learn how to initialize and configure the Kendo UI Gantt widget."
 slug: overview_kendoui_gantt_widget
 position: 1

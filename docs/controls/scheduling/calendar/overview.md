@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Calendar Widget
+page_title: Overview | Kendo UI Calendar
 description: "Learn how to initialize the Kendo UI Calendar widget, configure its options and make use of custom templates."
 slug: overview_kendoui_calendar_widget
 position: 1

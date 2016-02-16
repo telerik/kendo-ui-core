@@ -1,6 +1,6 @@
 ---
 title: Calculate Scheduler Height Dynamically on Mobile
-page_title: Calculate Scheduler Height Dynamically on Mobile | Kendo UI Scheduler Widget
+page_title: Calculate Scheduler Height Dynamically on Mobile | Kendo UI Scheduler
 description: "Learn how to dynamically calculate the height of the Kendo UI Scheduler widget on mobile."
 slug: howto_calculate_scheduler_height_dunamically_onmobile_scheduler
 ---

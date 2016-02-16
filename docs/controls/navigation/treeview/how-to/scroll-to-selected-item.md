@@ -1,6 +1,6 @@
 ---
 title: Scroll to Selected Item
-page_title: Scroll to Selected Item | Kendo UI TreeView Widget
+page_title: Scroll to Selected Item | Kendo UI TreeView
 description: "Learn how to scroll the Kendo UI TreeView viewport to the selected node."
 slug: howto_scrolltoselecteditem_treeview
 ---

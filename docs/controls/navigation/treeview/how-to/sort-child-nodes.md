@@ -1,6 +1,6 @@
 ---
 title: Sort Child Nodes
-page_title: Sort Child Nodes | Kendo UI TreeView Widget
+page_title: Sort Child Nodes | Kendo UI TreeView
 description: "Learn how to programmatically change the order of all Kendo UI TreeView nodes."
 slug: howto_sortchildnodes_treeview
 ---

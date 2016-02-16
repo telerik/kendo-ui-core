@@ -1,6 +1,6 @@
 ---
 title: Get next Occurrence
-page_title: Get next Occurrence | Kendo UI Scheduler Widget
+page_title: Get next Occurrence | Kendo UI Scheduler
 description: "Learn how to get a next occurrence of the Kendo UI SchedulerEvent in the Kendo UI Scheduler widget."
 slug: howto_getthe_next_occurance_scheduler
 ---
