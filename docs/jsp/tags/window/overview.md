@@ -1,18 +1,26 @@
 ---
 title: Overview
+page_title: Overview | Window JSP Tag
+description: "Get started with the Window JSP tag in Kendo UI."
+slug: overview_window_uiforjsp
+position: 1
 ---
 
-# Window
+# Window JSP Tag Overview
 
-The Window JSP tag is a server-side wrapper for the [Kendo UI Window](/api/web/window) widget.
+The Window JSP tag is a server-side wrapper for the [Kendo UI Window](/api/javascript/ui/window) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo Window:
+### Configuration
 
-1.  Make sure you have followed all the steps from the [Introduction](/jsp/introduction) help topic.
+Below are listed the steps for you to follow when configuring the Kendo UI Window.
 
-2.  Create a new action method which renders the view:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for JSP]({% slug overview_uiforjsp %}).
+
+**Step 2** Create a new action method which renders the view.
+
+###### Example
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index() {
@@ -20,11 +28,15 @@ Here is how to configure a simple Kendo Window:
             return "web/window/index";
         }
 
-3. Add kendo taglib mapping to the page
+**Step 3** Add the Kendo UI `taglib` mapping to the page.
+
+###### Example
 
         <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 
-4.  Add a window tag:
+**Step 4** Add the `window` tag.
+
+###### Example
 
     <kendo:window name="window" title="About us" draggable="true" resizable="true">
         <kendo:window-content>
@@ -33,34 +45,13 @@ Here is how to configure a simple Kendo Window:
         </kendo:window-content>
     </kendo:window>
 
-## Accessing an Existing Window
+## Event Handling
 
-You can reference an existing Window instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/window#methods) to control its behavior.
+### Subscribe to Events
 
-### Accessing an existing Window instance
+You can subscribe to all [events exposed by Kendo UI Window](/api/javascript/ui/window#events) by the handler name.
 
-    // Put this after your Kendo Window tag declaration
-    <script>
-    $(function() {
-        // Notice that the Name() of the window is used to get its client-side instance
-        var windowObject = $("#window").data("kendoWindow");
-    });
-    </script>
-
-## Loading the window contents through an asynchronous call
-
-You can load views asynchronously through the `content` attribute:
-
-    <c:url value="/web/window/content" var="remoteUrl" />
-
-    <kendo:window name="window" title="About us" content="${remoteUrl}" />
-
-## Handling Kendo UI Window events
-
-You can subscribe to all [events](/api/web/window#events) exposed by Kendo UI Window:
-
-### Subscribe by handler name
+###### Example
 
     <kendo:window name="window" orientation="horizontal" open="window_open" close="window_close">
     </kendo:window>
@@ -74,3 +65,39 @@ You can subscribe to all [events](/api/web/window#events) exposed by Kendo UI Wi
             // Handle the collapse event
         }
     </script>
+
+## Reference
+
+### Existing Instances
+
+You are able to reference an existing Window instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Window API](/api/javascript/ui/window#methods) to control its behavior.
+
+###### Example
+
+    // Put this after your Kendo Window tag declaration
+    <script>
+    $(function() {
+        // Notice that the Name() of the window is used to get its client-side instance
+        var windowObject = $("#window").data("kendoWindow");
+    });
+    </script>
+
+### Asynchronous Loading
+
+You are able to load views asynchronously through the `content` attribute.
+
+The example below demonstrates how to load the contents of the Window by using an asynchronous call.
+
+###### Example
+
+    <c:url value="/web/window/content" var="remoteUrl" />
+
+    <kendo:window name="window" title="About us" content="${remoteUrl}" />
+
+## See Also
+
+Other articles on Telerik UI for JSP and on the Window:
+
+* [Overview of the Kendo UI Window Widget]({% slug overview_kendoui_window_widget %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})
