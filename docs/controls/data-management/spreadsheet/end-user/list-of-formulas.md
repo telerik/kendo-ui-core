@@ -1,6 +1,6 @@
 ---
 title: List of Formulas and Functions
-page_title: List of Formulas and Functions | Kendo UI Spreadsheet Widget
+page_title: List of Formulas and Functions | Kendo UI Spreadsheet
 description: "A list of the formulas and functions available in the Kendo UI Spreadsheet widget."
 slug: list_offormulas_andfunctions_spreadsheet_widget
 position: 2

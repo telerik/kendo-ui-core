@@ -1,6 +1,6 @@
 ---
 title: Right-Align Text
-page_title: Right-Align Text | Kendo UI PivotGrid Widget
+page_title: Right-Align Text | Kendo UI PivotGrid
 description: "Learn how to right-align the text of data cells in a Kendo UI PivotGrid widget."
 slug: howto_right_align_text_pivotgrid
 ---

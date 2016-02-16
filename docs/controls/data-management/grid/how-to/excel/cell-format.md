@@ -1,6 +1,6 @@
 ---
 title: Format Cell Values
-page_title: Format Cell Values | Kendo UI Grid Widget
+page_title: Format Cell Values | Kendo UI Grid
 description: "Learn how to format the cell values of the Kendo UI Grid widget during Excel export."
 slug: howto_format_cell_values_grid
 ---

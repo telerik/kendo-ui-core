@@ -1,6 +1,6 @@
 ---
 title: Edit Records in Child Grids
-page_title: Edit Records in Child Grids | Kendo UI Grid Widget
+page_title: Edit Records in Child Grids | Kendo UI Grid
 description: "Learn how to edit records in hierarchical Kendo UI Grids."
 slug: howto_edit_recordsin_children_grid
 ---
@@ -79,7 +79,7 @@ function detailInit(e) {
       return item.OrderID == id;
     });
   };
-  
+
   $("<div/>").appendTo(e.detailCell).kendoGrid({
     dataSource: {
       transport: {
@@ -94,16 +94,16 @@ function detailInit(e) {
               parentItem[field] = data[field];
             }
           }
-          
+
           e.data.dirty = true;
           options.success();
         },
         destroy: function (options) {
           var parentItem = findByID(options.data.OrderID);
           preventBinding = true;
-          
+
           e.data.Orders.results.remove(parentItem);
-          
+
           options.success();
         },
       },

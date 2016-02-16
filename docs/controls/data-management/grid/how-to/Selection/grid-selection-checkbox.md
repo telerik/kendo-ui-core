@@ -1,6 +1,6 @@
 ---
 title: Make Selection with Checkbox Column
-page_title:  Make Selection with Checkbox Column | Kendo UI Grid Widget
+page_title:  Make Selection with Checkbox Column | Kendo UI Grid
 description: "Learn how to select a Kendo UI Grid row with a checkbox column, preserve the selection and get the IDs of all selected items."
 slug: howto_make_selection_checkbox_column_grid
 ---

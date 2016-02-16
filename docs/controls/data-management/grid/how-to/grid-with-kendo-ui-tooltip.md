@@ -1,6 +1,6 @@
 ---
 title: Show Tooltip for Column Records
-page_title: Show Tooltip for Column Records | Kendo UI Grid Widget
+page_title: Show Tooltip for Column Records | Kendo UI Grid
 description: "Learn how to show Kendo UI Tooltip for Kendo UI Grid columns."
 slug: howto_show_tooltipfor_column_records_grid
 ---
@@ -12,7 +12,7 @@ The example below demonstrates how to show Kendo UI Tooltip for Kendo UI Grid co
 ###### Example
 
 ```html
-    <div id="grid"></div> 
+    <div id="grid"></div>
     <style>
       #grid{
         width:300px;
@@ -21,7 +21,7 @@ The example below demonstrates how to show Kendo UI Tooltip for Kendo UI Grid co
     <script>
       var grid = null;
 
-      $(document).ready(function () { 
+      $(document).ready(function () {
         var dataSource = new kendo.data.DataSource({
           data: [
             {ID:1 ,Text: "Integer arcu odio, egestas nec pretium sit amet, aliquet vel nibh. Aliquam ac ante fringilla, consectetur erat at, dapibus est. Pellentesque facilisis iaculis neque, in auctor eros fringilla ut. Proin sit amet aliquet lorem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer porttitor vel neque ac dapibus. Nullam bibendum, velit quis tristique placerat, nibh ante vulputate sem, vel sodales tellus felis nec mi. In hac habitasse platea dictumst. Suspendisse in lacus nec ligula elementum interdum. Mauris at bibendum elit. Mauris dignissim, quam quis blandit rutrum, nunc nulla porttitor eros, eget volutpat magna nulla eu massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce consectetur blandit est ut commodo. Vestibulum vel tellus a purus accumsan venenatis."},
@@ -31,29 +31,29 @@ The example below demonstrates how to show Kendo UI Tooltip for Kendo UI Grid co
           schema: {
             model: {
               fields: {
-                ID: { type: "number" }, 
-                Text: { type: "string" } 
+                ID: { type: "number" },
+                Text: { type: "string" }
               }}
           },
           pageSize: 20
         });
 
-        grid = $("#grid").kendoGrid({ 
-          dataSource: dataSource, 
-          scrollable: true, 
-          filterable: true, 
+        grid = $("#grid").kendoGrid({
+          dataSource: dataSource,
+          scrollable: true,
+          filterable: true,
           toolbar: ["create"],
           columns: [
-            { field: "ID", width: "50px" }, 
+            { field: "ID", width: "50px" },
             { field: "Text", width: "200px", attributes: {
               style: 'white-space: nowrap '
-            }  }], 
+            }  }],
           editable: "incell"
         }).data("kendoGrid");  
 
         $("#grid").kendoTooltip({
           filter: "td:nth-child(2)", //this filter selects the second column's cells
-          position: "right", 
+          position: "right",
           content: function(e){
             var dataItem = $("#grid").data("kendoGrid").dataItem(e.target.closest("tr"));
             var content = dataItem.Text;

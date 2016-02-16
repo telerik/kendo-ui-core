@@ -1,6 +1,6 @@
 ---
 title: Translate PivotConfigurator Messages
-page_title: Translate PivotConfigurator Messages | Kendo UI PivotGrid Widget
+page_title: Translate PivotConfigurator Messages | Kendo UI PivotGrid
 description: "Learn how to access PivotConfigurator TreeView widget and rename the Measures and KPIs messages in a Kendo UI PivotGrid widget."
 slug: howto_translate_pivotconfigurator_messages_pivotgrid
 ---

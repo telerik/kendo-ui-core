@@ -1,6 +1,6 @@
 ---
 title: Filter Array Columns Using MultiSelect
-page_title: Filter Array Columns Using MultiSelect | Kendo UI Grid Widget
+page_title: Filter Array Columns Using MultiSelect | Kendo UI Grid
 description: "Learn how to enable filtering on a Kendo UI Grid column which is bound to an array field by using the Kendo UI Multiselect widget."
 slug: howto_filetr_array_columns_using_multiselect_grid
 ---
@@ -15,7 +15,7 @@ The example below demonstrates how to enable filtering on a Grid column which is
 
     <h3>Filter array field using custom filter operator:</h3>
     <div id="grid"></div>
-    
+
     <script>
         $(document).ready(function() {
           $("#grid").kendoGrid({
@@ -65,21 +65,21 @@ The example below demonstrates how to enable filtering on a Grid column which is
             }]
           });
         });
-        
+
         function onFilterMenuInit(e) {
           if (e.field == "Ids") {
             initMultiSelectFilter.call(this, e);
           }
         }
-        
+
         function initMultiSelectFilter(e) {
           var popup = e.container.data("kendoPopup");
           var dataSource = this.dataSource;
           var field = e.field;
-          
+
           var helpTextElement = e.container.children(":first").children(":first");
           helpTextElement.nextUntil(":has(.k-button)").remove();
-          
+
            var element = $("<select></select>").insertAfter(helpTextElement).kendoMultiSelect({
               dataSource: [{
                 value: 1,
@@ -97,12 +97,12 @@ The example below demonstrates how to enable filtering on a Grid column which is
               dataTextField: "text",
               dataValueField: "value"
             });
-          
+
           e.container.find("[type='submit']").click(function (e) {
             e.preventDefault();
             e.stopPropagation();
-            
-            
+
+
             var editorValue = element.getKendoMultiSelect().value();
                 var operator = function(item, value) {
                   var found = true;
@@ -113,13 +113,13 @@ The example below demonstrates how to enable filtering on a Grid column which is
                   }
                   return found;
                 };
-        
+
                 dataSource.filter({
                   operator: operator,
                   field: "Ids"
                 });
-            
-            
+
+
             popup.close();
           })
         }

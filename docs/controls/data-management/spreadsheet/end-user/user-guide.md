@@ -1,6 +1,6 @@
 ---
 title: User Guide
-page_title: User Guide | Kendo UI Spreadsheet Widget
+page_title: User Guide | Kendo UI Spreadsheet
 description: "A user guide for the Kendo UI Spreadsheet widget."
 slug: user_guide_spreadsheet_widget
 position: 1

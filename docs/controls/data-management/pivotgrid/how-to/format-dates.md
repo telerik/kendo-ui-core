@@ -1,6 +1,6 @@
 ---
 title: Format Dates in Dimension Labels
-page_title: Format Dates in Dimension Labels | Kendo UI PivotGrid Widget
+page_title: Format Dates in Dimension Labels | Kendo UI PivotGrid
 description: "Learn how to format date values in dimension labels in the Kendo UI PivotGrid widget."
 slug: howto_format_date_query_pivotgrid
 ---

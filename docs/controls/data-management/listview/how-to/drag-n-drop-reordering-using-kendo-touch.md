@@ -1,6 +1,6 @@
 ---
 title: Reorder Using Drag-and-Drop and Kendo UI Touch
-page_title: Reorder Using Drag-and-Drop and Kendo UI Touch | Kendo UI ListView Widget
+page_title: Reorder Using Drag-and-Drop and Kendo UI Touch | Kendo UI ListView
 description: "Learn how to implement drag-and-drop reordering of in the Kendo UI ListView widget using `kendoTouch` tap event."
 slug: howto_reorder_using_draganddrop_kendouitouch_listview
 ---

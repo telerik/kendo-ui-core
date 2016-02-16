@@ -1,11 +1,11 @@
 ---
 title: Create Custom Edit Buttons
-page_title: Create Custom Edit Buttons | Kendo UI Grid Widget
+page_title: Create Custom Edit Buttons | Kendo UI Grid
 description: "Learn how to create a custom Edit button in the Kendo UI Grid widget by using AngularJS."
 slug: howto_create_custom_edit_buttons_grid
 ---
 
-# Create Custom Edit Buttons 
+# Create Custom Edit Buttons
 
 The example below demonstrates how to create a custom **Edit** button in the Toolbar of the Kendo UI Grid widget by using AngularJS.
 

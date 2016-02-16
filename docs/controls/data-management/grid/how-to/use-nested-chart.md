@@ -1,6 +1,6 @@
 ---
 title: Use Nested Chart
-page_title: Use Nested Chart | Kendo UI Grid Widget
+page_title: Use Nested Chart | Kendo UI Grid
 description: "Learn how to nest a Kendo UI Chart inside the Grid template."
 slug: howto_use_nested_charts_grid
 ---
@@ -12,7 +12,7 @@ The example below demonstrates how to nest a Kendo UI Chart inside the Grid temp
 ###### Example
 
 ```html
-    <script> 
+    <script>
       var firstNames = ["Nancy", "Andrew", "Janet", "Margaret", "Steven", "Michael", "Robert", "Laura", "Anne", "Nige"],
           lastNames = ["Davolio", "Fuller", "Leverling", "Peacock", "Buchanan", "Suyama", "King", "Callahan", "Dodsworth", "White"],
           cities = ["Seattle", "Tacoma", "Kirkland", "Redmond", "London", "Philadelphia", "New York", "Seattle", "London", "Boston"],
@@ -71,7 +71,7 @@ The example below demonstrates how to nest a Kendo UI Chart inside the Grid temp
               var chart = $(this);
               var tr = chart.closest('tr');
               var model = grid.dataItem(tr);
-              chart.kendoChart({ 
+              chart.kendoChart({
                 legend:{
                   visible:false
                 },

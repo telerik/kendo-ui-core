@@ -1,6 +1,6 @@
 ---
 title: Customize Confirmation Window
-page_title: Customize Confirmation Window | Kendo UI Grid Widget
+page_title: Customize Confirmation Window | Kendo UI Grid
 description: "Learn how to customize a confirmation dialog in the Kendo UI Grid widget."
 slug: howto_customize_delete_confirmation_dialog_grid
 previous_url: /web/grid/how-to/Editing/grid-custom-delete-confirmation-window
@@ -17,8 +17,8 @@ The example below demonstrates how to customize the default **Delete** confirmat
 <div id="window"></div>
 
 <script type="text/x-kendo-template" id="windowTemplate">
-    Delete <strong>#= ProductName #</strong> ? </p> 
-    We have #= UnitsInStock # units in stock. </p> 
+    Delete <strong>#= ProductName #</strong> ? </p>
+    We have #= UnitsInStock # units in stock. </p>
     <button class="k-button" id="yesButton">Yes</button>
     <button class="k-button" id="noButton"> No</button>
 </script>
@@ -95,7 +95,7 @@ The example below demonstrates how to customize the default **Delete** confirmat
                         window.open().center();  
 
                         $("#yesButton").click(function(){
-                            grid.dataSource.remove(data)  //prepare a "destroy" request 
+                            grid.dataSource.remove(data)  //prepare a "destroy" request
                             grid.dataSource.sync()  //actually send the request (might be ommited if the autoSync option is enabled in the dataSource)
                             window.close();
                         })

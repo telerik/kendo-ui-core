@@ -1,6 +1,6 @@
 ---
 title: Preserve Dirty Indicator in Incell Editing and Client Operations
-page_title: Preserve Dirty Indicator in Incell Editing and Client Operations | Kendo UI Grid Widget
+page_title: Preserve Dirty Indicator in Incell Editing and Client Operations | Kendo UI Grid
 description: "Learn how to preserve dirty indicator in incell editing and client operations in the Kendo UI Grid widget."
 slug: howto_preserve_dirty_indicator_incell_editing_client_operations_grid
 ---

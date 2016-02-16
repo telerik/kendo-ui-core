@@ -1,6 +1,6 @@
 ---
 title: Use Dates inside Row Template
-page_title:  Use Dates inside Row Template | Kendo UI Grid Widget
+page_title:  Use Dates inside Row Template | Kendo UI Grid
 description: "Learn how to use dates inside a Kendo UI Grid row template."
 slug: howto_use_dates_inside_row_template_grid
 ---

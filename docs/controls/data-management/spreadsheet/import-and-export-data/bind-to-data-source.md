@@ -1,6 +1,6 @@
 ---
 title: Bind to Data Source
-page_title: Bind to Data Source | Kendo UI Spreadsheet Widget
+page_title: Bind to Data Source | Kendo UI Spreadsheet
 description: "Learn how to bind a sheet in the Kendo UI Spreadsheet widget to a Data Source."
 slug: bind_todata_source_spreadsheet_widget
 position: 3

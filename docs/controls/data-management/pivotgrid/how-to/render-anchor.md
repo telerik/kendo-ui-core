@@ -1,6 +1,6 @@
 ---
 title: Render Row Header Caption As Anchor
-page_title: Render Row Header Caption As Anchor | Kendo UI PivotGrid Widget
+page_title: Render Row Header Caption As Anchor | Kendo UI PivotGrid
 description: "Learn how to render a row header captino as an anchor in a Kendo UI PivotGrid widget."
 slug: howto_render_rowheader_captionas_anchor_pivotgrid
 ---

@@ -1,6 +1,6 @@
 ---
 title: Customize Rows and Cells Based on Data Item Values
-page_title: Customize Rows and Cells Based on Data Item Values | Kendo UI Grid Widget
+page_title: Customize Rows and Cells Based on Data Item Values | Kendo UI Grid
 description: "Learn how to customize kendo UI Grid cells and rows, based on data items values."
 slug: howto_customize_rowsand_cells_basedon_dataitem_values_grid
 ---
@@ -81,7 +81,7 @@ The three options are:
             { ID: 2, ProductName: "Bar", UnitsInStock: 16, Discontinued: false },
             { ID: 3, ProductName: "Baz", UnitsInStock: 3, Discontinued: true }
         ];
-        
+
         // configuration settings, which are shared by all Grids
         var commonSettings = {
             dataSource: {
@@ -105,15 +105,15 @@ The three options are:
                 { field: "Discontinued", width: "120px" }
             ]
         };
-        
+
         var rowTemplateString = '<tr class="#: Discontinued ? "discontinued" : "" #" data-uid="#: uid #">' +
             '<td>#: ProductName #</td>' +
             '<td class="#: getUnitsInStockClass(UnitsInStock) #">#: UnitsInStock #</td>' +
             '<td>#: Discontinued #</td>' +
         '</tr>';
-        
+
         var altRowTemplateString = rowTemplateString.replace('tr class="', 'tr class="k-alt ');
-        
+
         function getUnitsInStockClass(units) {
             if (units < 5) {
                 return "critical";
@@ -129,26 +129,26 @@ The three options are:
                 rowTemplate: rowTemplateString,
                 altRowTemplate: altRowTemplateString
             }, commonSettings));
-            
+
             $("#grid-databound-rows").kendoGrid($.extend({
                 dataBound: function(e) {
                     // get the index of the UnitsInStock cell
                     var columns = e.sender.columns;
                     var columnIndex = this.wrapper.find(".k-grid-header [data-field=" + "UnitsInStock" + "]").index();
-                    
+
                     // iterate the table rows and apply custom row and cell styling
                     var rows = e.sender.tbody.children();
                     for (var j = 0; j < rows.length; j++) {
                         var row = $(rows[j]);
                         var dataItem = e.sender.dataItem(row);
-                        
+
                         var units = dataItem.get("UnitsInStock");
                         var discontinued = dataItem.get("Discontinued");
-                        
+
                         if (discontinued) {
                             row.addClass("discontinued");
                         }
-                        
+
                         var cell = row.children().eq(columnIndex);
                         cell.addClass(getUnitsInStockClass(units));
                     }
@@ -160,24 +160,24 @@ The three options are:
                     // get the index of the UnitsInStock cell
                     var columns = e.sender.columns;
                     var columnIndex = this.wrapper.find(".k-grid-header [data-field=" + "UnitsInStock" + "]").index();
-                    
+
                     // iterate the data items and apply row styles where necessary
                     var dataItems = e.sender.dataSource.view();
                     for (var j = 0; j < dataItems.length; j++) {
                         var units = dataItems[j].get("UnitsInStock");
                         var discontinued = dataItems[j].get("Discontinued");
-                        
+
                         var row = e.sender.tbody.find("[data-uid='" + dataItems[j].uid + "']");
                         if (discontinued) {
                             row.addClass("discontinued");
                         }
-                        
+
                         var cell = row.children().eq(columnIndex);
                         cell.addClass(getUnitsInStockClass(units));
                     }
                 }
             }, commonSettings));
-            
+
         });
     </script>
 

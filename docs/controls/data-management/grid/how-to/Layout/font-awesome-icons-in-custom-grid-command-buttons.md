@@ -1,6 +1,6 @@
 ---
 title: Use FontAwesome Icons in Kendo UI Grid
-page_title:  Use FontAwesome Icons in Custom Command Buttons | Kendo UI Grid Widget
+page_title:  Use FontAwesome Icons in Custom Command Buttons | Kendo UI Grid
 description: "Learn how to use FontAwesome icons in the Kendo UI Grid widget."
 slug: howto_use_fontawesomeiconsin_custom_command_buttons_grid
 ---
@@ -36,13 +36,13 @@ The example below demonstrates how to use FontAwesome icons with the Kendo UI Gr
               { field: "FirstName", title: "First Name", width: "140px" },
               { field: "LastName", title: "Last Name", width: "140px" },
               { field: "Title" },
-              { command: { 
-                text: " View Details", 
+              { command: {
+                text: " View Details",
                 click: showDetails,
                 className: "fa fa-map-marker"
-              }, 
-               title: " ", 
-               width: "140px" 
+              },
+               title: " ",
+               width: "140px"
               }],
               dataBound: function (e) {
                 e.sender.tbody.find(".k-button.fa").each(function(idx, element){

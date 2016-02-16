@@ -1,6 +1,6 @@
 ---
 title: Resize Grid When Window Is Resized
-page_title:  Resize Grid When Window Is Resized | Kendo UI Grid Widget
+page_title:  Resize Grid When Window Is Resized | Kendo UI Grid
 description: "Learn how to resize a Kendo UI Grid widget when the parent window is resized too."
 slug: howto_resize_whenthe_windowis_resized_grid
 ---

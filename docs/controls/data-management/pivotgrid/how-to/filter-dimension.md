@@ -1,6 +1,6 @@
 ---
 title: Filter Dimensions
-page_title: Filter Dimensions | Kendo UI PivotGrid Widget
+page_title: Filter Dimensions | Kendo UI PivotGrid
 description: "Learn how to filter a dimension in a Kendo UI PivotGrid widget."
 slug: howto_filter_dimensions_pivotgrid
 ---

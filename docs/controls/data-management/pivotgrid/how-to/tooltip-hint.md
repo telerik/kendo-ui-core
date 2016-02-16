@@ -1,6 +1,6 @@
 ---
 title: Show Tooltip with Data Cell Information
-page_title: Show Tooltip with Data Cell Information | Kendo UI PivotGrid Widget
+page_title: Show Tooltip with Data Cell Information | Kendo UI PivotGrid
 description: "Learn how to display a tooltip hint on hover a data cell element in a Kendo UI PivotGrid widget."
 slug: howto_show_tooltip_withdata_cellinformation_pivotgrid
 ---

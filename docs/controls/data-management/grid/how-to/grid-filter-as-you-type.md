@@ -1,6 +1,6 @@
 ---
 title: Filter Grid as You Type
-page_title: Filter Grid as You Type | Kendo UI Grid Widget
+page_title: Filter Grid as You Type | Kendo UI Grid
 description: "Learn how to filter Kendo UI Grid on the fly, as the user types in the filter row textbox."
 slug: howto_filter_gridas_you_type_grid
 ---
@@ -10,7 +10,7 @@ slug: howto_filter_gridas_you_type_grid
 To filter the Grid as the user types, you must provide for the following requirements:
 
 * Enable the [row filtering mode](/api/javascript/ui/grid#configuration-filterable.mode).
-* Use a custom [filter cell template](/api/javascript/ui/grid#configuration-columns.filterable.cell.template) for the desired Grid column. 
+* Use a custom [filter cell template](/api/javascript/ui/grid#configuration-columns.filterable.cell.template) for the desired Grid column.
 * The purpose of the filter cell template is to attach a `keydown` or `keypress` event handler to the textbox (`args.element`) and, within this handler, to trigger the `change` event of the textbox. The `change` event will trigger the filtering functionality of the Grid.
 * [Change the default `"eq"` operator](/api/javascript/ui/grid#configuration-columns.filterable.cell.operator) of the column with `"contains"`, `"startswith"` or any other [supported operator](/api/javascript/data/datasource#configuration-filter.operator).
 

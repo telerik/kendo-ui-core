@@ -1,6 +1,6 @@
 ---
 title: Show Custom Editor Using the Selected Item outside the Grid
-page_title: Show Custom Editor Using the Selected Item outside the Grid | Kendo UI Grid Widget
+page_title: Show Custom Editor Using the Selected Item outside the Grid | Kendo UI Grid
 description: "Learn how to show a custom editor, which uses the currently selected item, outside the Kendo UI Grid widget."
 slug: howto_use_show_custom_editor_selected_item_outside_grid
 ---
@@ -75,7 +75,7 @@ The example below demonstrates how to use a custom editor outside Kendo UI Grid,
               });
 
           var selectedRow = null;
-          
+
           $("#gridEditor").kendoValidator();
 
           var grid = $("#grid").kendoGrid({
@@ -83,7 +83,7 @@ The example below demonstrates how to use a custom editor outside Kendo UI Grid,
             change: function(e){
               selectedRow = e.sender.select();
               var item = e.sender.dataItem(selectedRow);
-              kendo.bind($("#gridEditor"), item); 
+              kendo.bind($("#gridEditor"), item);
             },
             dataBound: function(e){
               if (selectedRow) {

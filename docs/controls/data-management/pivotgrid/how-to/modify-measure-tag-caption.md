@@ -1,6 +1,6 @@
 ---
 title: Modify Measure Tag Captions
-page_title: Modify Measure Tag Captions | Kendo UI PivotGrid Widget
+page_title: Modify Measure Tag Captions | Kendo UI PivotGrid
 description: "Learn how to measure tags in the header and modify their captions in a Kendo UI PivotGrid widget."
 slug: howto_modify_measure_tag_captions_pivotgrid
 ---

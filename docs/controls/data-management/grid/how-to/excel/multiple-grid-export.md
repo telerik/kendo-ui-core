@@ -1,6 +1,6 @@
 ---
 title: Export Multiple Grids
-page_title: Export Multiple Grids | Kendo UI Grid Widget
+page_title: Export Multiple Grids | Kendo UI Grid
 description: "Learn how to export to Excel more than one Kendo UI Grid."
 slug: howto_export_excel_multiple_grids_grid
 ---

@@ -1,6 +1,6 @@
 ---
 title: Filter Using Slider Selection
-page_title: Filter Using Slider Selection | Kendo UI ListView Widget
+page_title: Filter Using Slider Selection | Kendo UI ListView
 description: "Learn how to filter the ListView datasource based on Kendo UI Slider selection."
 slug: howto_filter_using_slider_selection_listview
 ---

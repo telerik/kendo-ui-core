@@ -1,6 +1,6 @@
 ---
 title: Custom Functions
-page_title: Custom Functions | Kendo UI Spreadsheet Widget
+page_title: Custom Functions | Kendo UI Spreadsheet
 description: "Learn how to make your own JavaScript functions in the Kendo UI Spreadsheet widget."
 slug: custom_functions_spreadsheet_widget
 position: 3
@@ -70,10 +70,10 @@ As of now, the following basic specifiers are supported:
 - `"number+"` — requires a number bigger than or equal to zero.
 - `"number++"` — requires a non-zero positive number.
 - `"integer"`, `"integer+"` and `"integer++"` — similar to `number`-s, but requires integer argument. Note that these may actually modify the argument value: if a number is specified and it has a decimal part, it will silently be truncated to integer, instead of returning an error. This is similar to Excel.
-- `"divisor"` — requires a non-zero number. Produces a `#DIV/0!` error if the argument is zero. 
+- `"divisor"` — requires a non-zero number. Produces a `#DIV/0!` error if the argument is zero.
 - `"string"` — requires a string argument.
 - `"boolean"` — requires a boolean argument. Most times you may want to use `"logical"` though.
-- `"logical"` — requires a `logical` argument. That is, booleans `true` or `false`, but `1` and `0` are also accepted. It gets converted to an actual boolean. 
+- `"logical"` — requires a `logical` argument. That is, booleans `true` or `false`, but `1` and `0` are also accepted. It gets converted to an actual boolean.
 - `"date"` — requires a date argument. Internally, dates are stored as numbers (the number of days since December 31 1899), so this works the same as `"integer"`. It was added for consistency.
 - `"datetime"` — this is like `"number"`, because the time part is represented as a fraction of a day.
 - `"anyvalue"` — accepts any value type.
@@ -199,13 +199,13 @@ In most cases, “optional” means that the argument takes some default value i
         [ "?", [ "assert", "$base != 1", "DIV/0" ] ]
     ]);
 
-The type spec for `base` is: `[ "or", "number++", [ "null", 10 ] ]`. This says it should accept any number greater than zero, but if the argument is missing, defaults to 10. The implementation does not have to deal with the case that the argument is missing — it will get 10 instead. 
+The type spec for `base` is: `[ "or", "number++", [ "null", 10 ] ]`. This says it should accept any number greater than zero, but if the argument is missing, defaults to 10. The implementation does not have to deal with the case that the argument is missing — it will get 10 instead.
 
 Also, note that it uses an assertion to make sure the `base` is not 1. If it is, return a `#DIV/0!` error.
 
 ### Return Errors
- 
-If you need to return an error code, you must return a `spreadsheet.CalcError` object. 
+
+If you need to return an error code, you must return a `spreadsheet.CalcError` object.
 
 ###### Example
 
@@ -238,7 +238,7 @@ The type checking mechanism will error out when your primitive receives more arg
 
 #### The `"rest"` type specifier
 
-The simplest way is to use the `"rest"` type specifier. In such cases the last argument will be an array containing all remaining arguments, whatever types they might be. 
+The simplest way is to use the `"rest"` type specifier. In such cases the last argument will be an array containing all remaining arguments, whatever types they might be.
 
 The example below demonstrates how to use a function that joins arguments with a separatorm producing a string.
 
@@ -305,7 +305,7 @@ In order to be compatible with Excel, and to avoid implementing this bug, the Sp
 
 Time is kept as a fraction of a day, i.e., 0.5 means 12:00:00. For example, the date and time `Sep 27 1983 12:35:59` is numerically stored as `30586.524988425925`. To verify that in Excel, paste this number in a cell and then format it as date/time.
 
-Functions to pack/unpack dates are available in `spreadsheet.calc.runtime`. 
+Functions to pack/unpack dates are available in `spreadsheet.calc.runtime`.
 
 ###### Example
 
@@ -330,7 +330,7 @@ Note that the serial date representation does not carry any timezone information
 
 ## References
 
-As mentioned earlier, certain type specifiers allow you to get a reference in your function rather than the resolved value. It is important to note that when you do so, you cannot rely on the values in those cells to be calculated, so if your function might need the values as well, you have to compute them. Since the function that does that is asynchronous, your primitive must be defined in asynchronous style as well. 
+As mentioned earlier, certain type specifiers allow you to get a reference in your function rather than the resolved value. It is important to note that when you do so, you cannot rely on the values in those cells to be calculated, so if your function might need the values as well, you have to compute them. Since the function that does that is asynchronous, your primitive must be defined in asynchronous style as well.
 
 ###### Example
 
@@ -347,7 +347,7 @@ As mentioned earlier, certain type specifiers allow you to get a reference in yo
         [ "x", "cell" ]
     ]);
 
-This function accepts a cell argument, so you can only call it like `=test(B4)`. It calls `this.resolveCells` from the context object in order to make sure the cell value is calculated. Without this step, if the cell actually contains a formula, the value returned by `this.getRefData` could be outdated. Then it prints some information about that cell. 
+This function accepts a cell argument, so you can only call it like `=test(B4)`. It calls `this.resolveCells` from the context object in order to make sure the cell value is calculated. Without this step, if the cell actually contains a formula, the value returned by `this.getRefData` could be outdated. Then it prints some information about that cell.
 
 The subsections below discuss the types of references that your primitive can receive.
 
@@ -400,7 +400,7 @@ The example below demonstrates how to use a function that takes an arbitrary ref
     ]);
 
 The example below demonstrates how to use a function that takes an arbitrary reference and returns the total number of cells it covers.
-    
+
 ###### Example
 
     defineFunction("countcells", function(x){
@@ -444,7 +444,7 @@ It uses `this.workbook()` to retrieve the workbook, and then uses the Workbook/S
 
 Matrices are defined by `spreadsheet.calc.runtime.Matrix`. Your primitive can request a `Matrix` object by using the `"matrix"` type spec. In this case, it will accept a cell reference, a range reference, or a literal array. You can type literal arrays in formulas like in Excel, e.g., `{ 1, 2; 3, 4 }` (rows separated by semicolons).
 
-Matrices were primarily added to deal with the “array formulas” concept in Excel. A function can return multiple values, and those will be in a `Matrix` object. 
+Matrices were primarily added to deal with the “array formulas” concept in Excel. A function can return multiple values, and those will be in a `Matrix` object.
 
 The example below demonstrates how to use a function that doubles each number in a range and returns a matrix of the same shape.
 
@@ -488,7 +488,7 @@ Additionally, there is a `formula` property, an object representing the current 
 
 ## `args` or `argsAsync` Not Called
 
-If `args` or `argsAsync` are not called, the primitive function will receive exactly two arguments: a callback to be invoked with the result, and an array that will contain the arguments passed in the formula. 
+If `args` or `argsAsync` are not called, the primitive function will receive exactly two arguments: a callback to be invoked with the result, and an array that will contain the arguments passed in the formula.
 
 The example below demonstrates how to use a function that adds two <del>numbers</del> things.
 
@@ -507,7 +507,7 @@ Results:
 
 In other words, if you use this raw form you are responsible for type-checking the arguments and your primitive is always expected to be asynchonous.
 
-## See Also 
+## See Also
 
 Other articles on Kendo UI Spreadsheet:
 

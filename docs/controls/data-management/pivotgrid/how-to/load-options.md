@@ -1,6 +1,6 @@
 ---
 title: Reload PivotGrid Configuration Options
-page_title: Reload PivotGrid Configuration Options | Kendo UI PivotGrid Widget
+page_title: Reload PivotGrid Configuration Options | Kendo UI PivotGrid
 description: "Learn how to reload the configuration options of the Kendo UI PivotGrid widget on button click in a Kendo UI PivotGrid widget."
 slug: howto_reload_configuration_options_pivotgrid
 ---

@@ -1,6 +1,6 @@
 ---
 title: Filter Using include Operator
-page_title: Filter Using include Operator | Kendo UI PivotGrid Widget
+page_title: Filter Using include Operator | Kendo UI PivotGrid
 description: "Learn how to use the include operator to filter the data in a Kendo UI PivotGrid widget."
 slug: howto_use_include_operator_pivotgrid
 ---

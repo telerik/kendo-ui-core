@@ -1,6 +1,6 @@
 ---
 title: Add Cascading DropDownList Editors
-page_title: Add Cascading DropDownList Editors | Kendo UI Grid Widget
+page_title: Add Cascading DropDownList Editors | Kendo UI Grid
 description: "Learn how to add cascading DropDownList editors to the Kendo UI Grid widget."
 previous_url: /controls/data-management/grid/how-to/grid-cascading-dropdown-editors
 slug: howto_add_cascading_dropdown_list_editors_grid

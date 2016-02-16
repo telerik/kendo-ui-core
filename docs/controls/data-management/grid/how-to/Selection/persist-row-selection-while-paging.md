@@ -1,6 +1,6 @@
 ---
 title: Persist Row Selection during Data Operations
-page_title: Persist Row Selection during Data Operations | Kendo UI Grid Widget
+page_title: Persist Row Selection during Data Operations | Kendo UI Grid
 description: "Learn how to persist row selection while performing the paging, sorting, and filtering data operations in the Kendo UI Grid."
 slug: howto_persist_row_selection_paging_sorting_filtering_grid
 ---
@@ -16,11 +16,11 @@ The example below demonstrates how to persist the row selection in a Kendo UI Gr
 
 ```html
     <div id="grid"></div>
-    
+
     <script>
 
       $(function () {
-      
+
         var selectedOrders = [];
         var idField = "OrderID";
 

@@ -1,6 +1,6 @@
 ---
 title: Prevent Selection for Checkbox Cells
-page_title:  Prevent Selection for Checkbox Cells | Kendo UI Grid Widget
+page_title:  Prevent Selection for Checkbox Cells | Kendo UI Grid
 description: "Learn how to prevent selection for checkbox cells in Kendo UI Grid."
 slug: howto_prevent_selection_checkbox_cells_grid
 ---

@@ -1,6 +1,6 @@
 ---
 title: Build Custom dataSource for Custom Editor
-page_title: Build Custom dataSource for Custom Editor | Kendo UI Grid Widget
+page_title: Build Custom dataSource for Custom Editor | Kendo UI Grid
 description: "Learn how to build custom dataSource with currying for a custom editor in the Kendo UI Grid widget."
 slug: howto_build_custom_datasourcefor_custom_editor_grid
 ---
@@ -63,7 +63,7 @@ The example below demonstrates how to create a custom dataSource based on the da
             transport: {
               read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
             },
-            change: function() { 
+            change: function() {
               alert(id);
             }
           });

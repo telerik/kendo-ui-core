@@ -1,6 +1,6 @@
 ---
 title: Adaptive Rendering
-page_title: Adaptive Rendering | Kendo UI Grid Widget
+page_title: Adaptive Rendering | Kendo UI Grid
 description: "Learn how to apply the adaptive rendering feature of the Kendo UI Grid widget."
 slug: adaptive_rendering_kendoui_grid_widget
 position: 6

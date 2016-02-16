@@ -1,6 +1,6 @@
 ---
 title: Modify Exported Excel Files
-page_title: Modify Exported Excel Files | Kendo UI PivotGrid Widget
+page_title: Modify Exported Excel Files | Kendo UI PivotGrid
 description: "Learn how to modify the generated Excel file from a Kendo UI PivotGrid widget so you can apply different styles and values to it."
 slug: howto_modify_exported_excel_files_pivotgrid
 ---

@@ -1,6 +1,6 @@
 ---
 title: Reset Expand State
-page_title: Reset Expand State | Kendo UI PivotGrid Widget
+page_title: Reset Expand State | Kendo UI PivotGrid
 description: "Learn how to reset expand/collapse state and fetch the data again in a Kendo UI PivotGrid widget."
 slug: howto_reset_expand_state_pivotgrid
 ---

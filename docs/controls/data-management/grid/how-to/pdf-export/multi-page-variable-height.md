@@ -1,6 +1,6 @@
 ---
 title: Export Multiple Pages with Variable Row Height
-page_title: Export Multiple Pages with Variable Row Height | Kendo UI Grid Widget
+page_title: Export Multiple Pages with Variable Row Height | Kendo UI Grid
 description: "Learn how to export multiple pages of a Kendo UI Grid in PDF with a varying row height."
 slug: howto_export_multiple_pageswith_variable_rowheight_pdf_grid
 ---

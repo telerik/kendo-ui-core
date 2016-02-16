@@ -1,6 +1,6 @@
 ---
 title: Show Context Menu
-page_title: Show Context Menu | Kendo UI TreeList Widget
+page_title: Show Context Menu | Kendo UI TreeList
 description: "Learn how to show a context menu for the Kendo UI TreeList rows."
 slug: howto_showcontextmenu_treelist
 ---

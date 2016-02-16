@@ -1,6 +1,6 @@
 ---
 title: Load and Append More Records While Scrolling Down
-page_title: Load and Append More Records While Scrolling Down | Kendo UI Grid Widget
+page_title: Load and Append More Records While Scrolling Down | Kendo UI Grid
 description: "Learn how to load and append more records as the user scrolls down the Kendo UI Grid."
 slug: howto_loadand_append_morerecords_while_scrollingdown_grid
 ---

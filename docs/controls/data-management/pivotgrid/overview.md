@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI PivotGrid Widget
+page_title: Overview | Kendo UI PivotGrid
 description: "Learn how to create and configure the Kendo UI PivotGrid widget."
 slug: overview_kendoui_pivotgrid_widget
 position: 1
