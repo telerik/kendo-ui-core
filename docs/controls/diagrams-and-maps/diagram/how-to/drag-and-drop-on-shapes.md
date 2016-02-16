@@ -1,6 +1,6 @@
 ---
 title: Drag and Drop on Shapes
-page_title: Drag and Drop on Shapes | Kendo UI Diagram Widget
+page_title: Drag and Drop on Shapes | Kendo UI Diagram
 description: "Learn how to find a particular element from the shape visual and dynamically change it in a Kendo UI Diagram."
 slug: howto_draganddrop_onshapes_diagram
 ---

@@ -1,6 +1,6 @@
 ---
 title: Add Shape Titles
-page_title: Add Shape Titles | Kendo UI Map Widget
+page_title: Add Shape Titles | Kendo UI Map
 description: "Learn how to add titles for shapes loaded from GeoJSON in a Kendo UI Map widget."
 slug: howto_addhspaetitles_map
 ---

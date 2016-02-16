@@ -1,6 +1,6 @@
 ---
 title: Editing
-page_title: Editing | Kendo UI Diagram Widget
+page_title: Editing | Kendo UI Diagram
 description: "Learn how to enable the editing functionality of the Kendo UI Diagram widget."
 slug: editing_kendoui_diagram_widget
 position: 2

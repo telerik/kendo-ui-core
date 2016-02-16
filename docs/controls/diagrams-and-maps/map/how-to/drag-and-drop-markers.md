@@ -1,6 +1,6 @@
 ---
 title: Drag and Drop Markers
-page_title: Drag and Drop Markers | Kendo UI Map Widget
+page_title: Drag and Drop Markers | Kendo UI Map
 description: "Learn how to integrate the Kendo UI Draggable widget with the Kendo UI Map widget."
 slug: howto_draganddropmarkers_map
 ---

@@ -1,6 +1,6 @@
 ---
 title: Map Layers
-page_title: Map Layers | Kendo UI Map Widget
+page_title: Map Layers | Kendo UI Map
 description: "Learn how to create and configure tile layers for the Kendo UI Map widget."
 slug: maplayers_mapwidget
 position: 2

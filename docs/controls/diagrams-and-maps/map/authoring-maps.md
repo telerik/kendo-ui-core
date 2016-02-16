@@ -1,6 +1,6 @@
 ---
 title: Map Authoring
-page_title: Map Authoring | Kendo UI Map Widget
+page_title: Map Authoring | Kendo UI Map
 description: "Learn how to process and transform maps from external sources so they can be used with the Kendo UI Map widget."
 slug: mapauthoring_mapwidget
 position: 3

@@ -1,6 +1,6 @@
 ---
 title: Implement Local Data Editing
-page_title: Implement Local Data Editing | Kendo UI Diagram Widget
+page_title: Implement Local Data Editing | Kendo UI Diagram
 description: "Learn how to implement editing with local data in a Kendo UI Diagram by using custom functions for the dataSource transport operations."
 slug: howto_editlocaladata_diagram
 ---

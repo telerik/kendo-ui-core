@@ -1,6 +1,6 @@
 ---
 title: Use Scrollbars
-page_title: Use Scrollbars | Kendo UI Diagram Widget
+page_title: Use Scrollbars | Kendo UI Diagram
 description: "Learn how to use a scrollbar for a Kendo UI Diagram widget."
 slug: howto_usescrollbar_diagram
 ---

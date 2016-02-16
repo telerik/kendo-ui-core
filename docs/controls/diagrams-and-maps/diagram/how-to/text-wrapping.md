@@ -1,6 +1,6 @@
 ---
 title: Wrap Text
-page_title: Wrap Text | Kendo UI Diagram Widget
+page_title: Wrap Text | Kendo UI Diagram
 description: "Learn how to use the layout element to wrap text in the Kendo UI Diagram widget."
 slug: howto_wraptext_diagram
 ---
