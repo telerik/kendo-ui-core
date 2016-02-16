@@ -1,6 +1,6 @@
 ---
 title: Use Custom MVVM Binding to Set Model Value
-page_title: Use Custom MVVM Binding to Set Model Value | Kendo UI MaskedTextBox Widget
+page_title: Use Custom MVVM Binding to Set Model Value | Kendo UI MaskedTextBox
 description: "Learn how to use custom MVVM bindings to retrieve unmasked widget values in the Kendo UI MaskedTextBox widget."
 slug: howto_use_custommvvm_bindingto_setmodel_value_maskedtextbox
 ---

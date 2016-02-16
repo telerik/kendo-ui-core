@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI ResponsivePanel Widget
+page_title: Overview | Kendo UI ResponsivePanel
 description: "Learn how to initialize the Kendo UI ResponsivePanel widget and configure its behaviors."
 slug: overview_kendoui_responsivepanel_widget
 position: 1

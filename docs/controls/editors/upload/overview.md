@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Upload Widget
+page_title: Overview | Kendo UI Upload
 description: "Learn how to initialize the Kendo UI Upload widget and configure its behavior."
 slug: overview_kendoui_upload_widget
 position: 1

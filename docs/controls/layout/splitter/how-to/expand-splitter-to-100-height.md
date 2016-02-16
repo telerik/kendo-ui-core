@@ -1,6 +1,6 @@
 ---
 title: Expand to 100% Height and Auto-Resize
-page_title: Expand to 100% Height and Auto-Resize | Kendo UI Splitter Widget
+page_title: Expand to 100% Height and Auto-Resize | Kendo UI Splitter
 description: "Learn how to expand the Kendo UI Splitter to a 100% height and make it resize automatically."
 slug: howto_expandto100heightandautoresize_splitter
 ---

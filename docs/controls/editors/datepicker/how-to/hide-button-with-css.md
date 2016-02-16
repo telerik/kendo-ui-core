@@ -1,6 +1,6 @@
 ---
 title: Hide the Deafult Button
-page_title: Hide the Deafult Button | Kendo UI DatePicker Widget
+page_title: Hide the Deafult Button | Kendo UI DatePicker
 description: "Learn how to hide the default widget button in the Kendo UI DatePicker."
 slug: howto_hide_default_button_datepicker
 ---

@@ -1,6 +1,6 @@
 ---
 title: Detect Wrapper Focus Events
-page_title: Detect Wrapper Focus Events | Kendo UI DropDownList Widget
+page_title: Detect Wrapper Focus Events | Kendo UI DropDownList
 description: "Learn how to detect the Kendo UI DropDownList wrapper focus event."
 slug: howto_detect_wrapper_focus_events_dropdownlist
 ---

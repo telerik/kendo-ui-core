@@ -1,6 +1,6 @@
 ---
 title: Validate Radio Buttons with Only One Error Message
-page_title: Validate Radio Buttons with Only One Error Message | Kendo UI Validator Widget
+page_title: Validate Radio Buttons with Only One Error Message | Kendo UI Validator
 description: "Learn how to validate radio buttons with only one error message in Kendo UI."
 slug: howto_validateradiowithonemessage_validator
 ---

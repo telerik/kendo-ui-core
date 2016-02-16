@@ -1,6 +1,6 @@
 ---
 title: Override Hours in the Popup
-page_title: Override Hours in the Popup | Kendo UI DateTimePicker Widget
+page_title: Override Hours in the Popup | Kendo UI DateTimePicker
 description: "Learn how to override hours in the popup of the Kendo UI DateTimePicker widget."
 slug: howto_override_hours_inpopup_datetimepicker
 ---

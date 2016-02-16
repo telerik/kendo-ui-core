@@ -1,6 +1,6 @@
 ---
 title: Use Inline Editor inside Windows
-page_title: Use Inline Editor inside Windows | Kendo UI Editor Widget
+page_title: Use Inline Editor inside Windows | Kendo UI Editor
 description: "Learn how to use an inline Kendo UI Editor inside a window."
 slug: howto_use_inline_editor_inside_windows_editor
 ---

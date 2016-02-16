@@ -1,6 +1,6 @@
 ---
 title: Create Date Masking
-page_title: Create Date Masking | Kendo UI DatePicker Widget
+page_title: Create Date Masking | Kendo UI DatePicker
 description: "Learn how to create date masking by using the MaskedTextBox in Kendo UI DatePicker."
 slug: howto_create_date_masking_datepicker
 ---

@@ -1,6 +1,6 @@
 ---
 title: Set Selections
-page_title: Set Selections | Kendo UI Editor Widget
+page_title: Set Selections | Kendo UI Editor
 description: "Learn how to use the `range` object and set desired selections in the Kendo UI Editor widget."
 slug: set_selections_editor_widget
 position: 4

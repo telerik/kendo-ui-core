@@ -1,6 +1,6 @@
 ---
 title: Stack Static Notifications to the Left or Right
-page_title: Stack Static Notifications to the Left or Right | Kendo UI Notification Widget
+page_title: Stack Static Notifications to the Left or Right | Kendo UI Notification
 description: "Learn how to stack static notifications to the left or to the right in the Kendo UI Notfication widget."
 slug: howto_stack_static_tothe_leftor_right_notification
 ---

@@ -1,6 +1,6 @@
 ---
 title: Get Reference to Child Widgets
-page_title: Get Reference to Child Widgets | Kendo UI Editor Widget
+page_title: Get Reference to Child Widgets | Kendo UI Editor
 description: "Learn how to get a reference to the ImageBrowser's and FileBrowser's child widgets in the Kendo UI Editor widget."
 slug: howto_get_referenceto_child_widgets_editor
 ---

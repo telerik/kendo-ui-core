@@ -1,6 +1,6 @@
 ---
 title: Select All Text on Focus
-page_title: Select All Text on Focus | Kendo UI NumericTextBox Widget
+page_title: Select All Text on Focus | Kendo UI NumericTextBox
 description: "Learn how to select all the text when on focus in the Kendo UI NumericTextBox widget."
 slug: howto_select_all_texton_focus_numerictextbox
 ---

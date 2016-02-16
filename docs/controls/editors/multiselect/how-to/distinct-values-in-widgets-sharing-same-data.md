@@ -1,6 +1,6 @@
 ---
 title: Filter Values in Widgets Sharing the Same Data
-page_title: Filter Values in Widgets Sharing the Same Data | Kendo UI MultiSelect Widget
+page_title: Filter Values in Widgets Sharing the Same Data | Kendo UI MultiSelect
 description: "Learn how to filter values in two Kendo UI Multiselect widgets that share the same data."
 slug: howto_filter_valuesin_widgetswith_shared_data_multiselect
 ---

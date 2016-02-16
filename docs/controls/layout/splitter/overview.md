@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Splitter Widget
+page_title: Overview | Kendo UI Splitter
 description: "Learn how to initialize the Kendo UI Splitter widget and achieve complex layouts."
 slug: overview_kendoui_splitter_widget
 position: 1

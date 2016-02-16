@@ -1,6 +1,6 @@
 ---
 title: Persist Order in localStorage
-page_title: Persist Order in localStorage | Kendo UI Sortable Widget
+page_title: Persist Order in localStorage | Kendo UI Sortable
 description: "Learn how to save the order in localStorage and restore it on page load in the Kendo UI Sortable widget."
 slug: howto_persistoderinlocalstorage_sortable
 ---

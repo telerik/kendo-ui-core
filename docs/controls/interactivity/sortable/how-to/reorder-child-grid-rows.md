@@ -1,6 +1,6 @@
 ---
 title: Reorder Rows in Nested Grid
-page_title: Reorder Rows in Nested Grid | Kendo UI Sortable Widget
+page_title: Reorder Rows in Nested Grid | Kendo UI Sortable
 description: "Learn how to reorder rows in a child Grid using the Kendo UI Sortable widget."
 slug: howto_reorderrowsinnestedgrid_sortable
 ---

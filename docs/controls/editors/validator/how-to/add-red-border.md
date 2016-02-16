@@ -1,6 +1,6 @@
 ---
 title: Add Red Border and Hide Tooltip
-page_title: Add Red Border and Hide Tooltip | Kendo UI Validator Widget
+page_title: Add Red Border and Hide Tooltip | Kendo UI Validator
 description: "Learn how to add a red border and hide the tooltip in the Kendo UI Validator."
 slug: howto_addredborderandhidetooltip_validator
 ---

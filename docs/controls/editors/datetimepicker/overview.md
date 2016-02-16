@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI DateTimePicker Widget
+page_title: Overview | Kendo UI DateTimePicker
 description: "Learn how to initialize the Kendo UI DateTimePicker widget, configure its options and define the interval between values int he time drop-down list."
 slug: overview_kendoui_datetimepicker_widget
 position: 1

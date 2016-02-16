@@ -1,6 +1,6 @@
 ---
 title: Make Input Elements Readonly
-page_title: Make Input Elements Readonly | Kendo UI DatePicker Widget
+page_title: Make Input Elements Readonly | Kendo UI DatePicker
 description: "Learn how to make input elements readonly in Kendo UI DatePicker."
 slug: howto_make_input_elements_readonly_datepicker
 ---

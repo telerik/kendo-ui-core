@@ -1,6 +1,6 @@
 ---
 title: Persist Old Value
-page_title: Persist Old Value | Kendo UI NumericTextBox Widget
+page_title: Persist Old Value | Kendo UI NumericTextBox
 description: "Learn how to persist the old value of the Kendo UI NumericTextBox widget."
 slug: howto_persist_old_value_numerictextbox
 ---

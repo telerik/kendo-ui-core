@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI DatePicker Widget
+page_title: Overview | Kendo UI DatePicker
 description: "Learn how to initialize the Kendo UI DatePicker widget and configure its options."
 slug: overview_kendoui_datepicker_widget
 position: 1

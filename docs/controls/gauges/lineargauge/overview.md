@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Linear Gauge Widget
+page_title: Overview | Kendo UI Linear Gauge
 description: "Learn how to initialize and set the Kendo UI Linear gauge."
 slug: overview_kendoui_lineargauge_widget
 position: 1

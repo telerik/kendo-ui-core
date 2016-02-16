@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Validator Widget
+page_title: Overview | Kendo UI Validator
 description: "Learn how to initialize the Kendo UI Validator and configure its behavior."
 previous_url: /framework/validator/overview
 slug: overview_kendoui_validator_widget

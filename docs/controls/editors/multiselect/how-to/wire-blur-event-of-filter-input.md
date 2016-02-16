@@ -1,6 +1,6 @@
 ---
 title: Wire Blur Event of the Filter Input
-page_title: Wire Blur Event of the Filter Input | Kendo UI MultiSelect Widget
+page_title: Wire Blur Event of the Filter Input | Kendo UI MultiSelect
 description: "Learn how to bind to the blur event of the filter input element in the Kendo UI MultiSelect widget."
 slug: howto_wire_blur_event_ofthe_filtеr_input_multiselect
 ---

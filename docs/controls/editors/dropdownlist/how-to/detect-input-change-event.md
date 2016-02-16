@@ -1,6 +1,6 @@
 ---
 title: Detect Input Change Events
-page_title: Detect Input Change Events | Kendo UI DropDownList Widget
+page_title: Detect Input Change Events | Kendo UI DropDownList
 description: "Learn how to detect the Kendo UI DropDownList input change event."
 slug: howto_detect_input_change_events_dropdownlist
 ---

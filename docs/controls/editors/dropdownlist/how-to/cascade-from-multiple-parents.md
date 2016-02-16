@@ -1,6 +1,6 @@
 ---
 title: Cascade from Multiple Parents
-page_title: Cascade from Multiple Parents | Kendo UI DropDownList Widget
+page_title: Cascade from Multiple Parents | Kendo UI DropDownList
 description: "Learn how to cascade Kendo UI DropDownList widgets from multiple parents."
 slug: howto_cascade_multiple_parents_dropdownlist
 ---

@@ -1,6 +1,6 @@
 ---
 title: Show Editor in Full Screen
-page_title: Show Editor in Full Screen | Kendo UI Editor Widget
+page_title: Show Editor in Full Screen | Kendo UI Editor
 description: "Learn how to show the Kendo UI Editor widget in full screen."
 slug: howto_show_infull_screen_editor
 ---

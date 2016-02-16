@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI MultiSelect Widget
+page_title: Overview | Kendo UI MultiSelect
 description: "Learn how to initialize the Kendo UI MultiSelect widget, use templates and customize it functionalities."
 slug: overview_kendoui_multiselect_widget
 position: 1

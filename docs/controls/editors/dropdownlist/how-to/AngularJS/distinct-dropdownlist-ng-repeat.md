@@ -1,6 +1,6 @@
 ---
 title: Cascade Lists Using `ng-repeat`
-page_title: Cascade Lists Using `ng-repeat` | Kendo UI DropDownList Widget
+page_title: Cascade Lists Using `ng-repeat` | Kendo UI DropDownList
 description: "Learn how to cascade Kendo UI DropDownList widgets with `ng-repeat` and using distinct values."
 slug: howto_cascade_withngrepeat_distinct_values_dropdownlist
 ---

@@ -1,6 +1,6 @@
 ---
 title: Move Popup Notifications on Window Resize
-page_title: Move Popup Notifications on Window Resize | Kendo UI Notification Widget
+page_title: Move Popup Notifications on Window Resize | Kendo UI Notification
 description: "Learn how to move popup notifications on window resize in the Kendo UI Notification widget."
 slug: howto_move_popup_notifications_onwindow_resize_notification
 ---

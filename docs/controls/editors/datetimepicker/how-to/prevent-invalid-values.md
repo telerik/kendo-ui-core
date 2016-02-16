@@ -1,6 +1,6 @@
 ---
 title: Prevent Invalid Values
-page_title: Prevent Invalid Values | Kendo UI DateTimePicker Widget
+page_title: Prevent Invalid Values | Kendo UI DateTimePicker
 description: "Learn how to prevent invalid values in a Kendo UI DateTimePicker widget."
 slug: howto_prevent_invalid_values_datetimepicker
 ---

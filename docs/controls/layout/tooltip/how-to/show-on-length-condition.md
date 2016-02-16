@@ -1,6 +1,6 @@
 ---
 title: Show Only If Text Exceeds Certain Length
-page_title: Show Only If Text Exceeds Certain Length | Kendo UI Tooltip Widget
+page_title: Show Only If Text Exceeds Certain Length | Kendo UI Tooltip
 description: "Learn how to show a Kendo UI Tooltip only if the target text exceeds a certain length."
 slug: howto_showonlyiftextexceedscertainlength_tooltip
 ---

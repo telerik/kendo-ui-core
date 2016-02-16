@@ -1,6 +1,6 @@
 ---
 title: Globally Modify Default Options
-page_title: Globally Modify Default Options | Kendo UI DatePicker Widget
+page_title: Globally Modify Default Options | Kendo UI DatePicker
 description: "Learn how to globally modify default options in the Kendo UI DatePicker widget."
 slug: howto_globally_modify_default_options_datepicker
 ---

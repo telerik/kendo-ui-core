@@ -1,6 +1,6 @@
 ---
 title: Transfer Grid Rows
-page_title: Transfer Grid Rows | Kendo UI Sortable Widget
+page_title: Transfer Grid Rows | Kendo UI Sortable
 description: "Learn how to move a row from one Grid to another using the Kendo UI Sortable widget."
 slug: howto_transfergridrows_sortable
 ---

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI MaskedTextBox Widget
+page_title: Overview | Kendo UI MaskedTextBox
 description: "Learn how to initialize the Kendo UI MaskedTextBox widget and configure its behaviors."
 slug: overview_kendoui_maskedtextbox_widget
 position: 1

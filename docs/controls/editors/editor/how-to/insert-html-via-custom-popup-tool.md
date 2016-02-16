@@ -1,6 +1,6 @@
 ---
 title: Insert HTML Content via Custom Popup Tools
-page_title: Insert HTML Content via Custom Popup Tools | Kendo UI Editor Widget
+page_title: Insert HTML Content via Custom Popup Tools | Kendo UI Editor
 description: "Learn how to insert HTML content via custom Kendo UI Editor tools."
 slug: howto_insert_html_content_custom_popup_tool_editor
 ---

@@ -1,6 +1,6 @@
 ---
 title: Integration with Grid and ListView
-page_title: Integration with Grid and ListView | Kendo UI Sortable Widget
+page_title: Integration with Grid and ListView | Kendo UI Sortable
 description: "Learn how to reorder Kendo UI Grid and ListView items with the Kendo UI Sortable widget."
 slug: integrationwith_gridandlistview_sortable_widget
 position: 2

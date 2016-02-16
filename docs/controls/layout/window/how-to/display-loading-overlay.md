@@ -1,6 +1,6 @@
 ---
 title: Display Loading Indicator over Window
-page_title: Display Loading Indicator over Window | Kendo UI Window Widget
+page_title: Display Loading Indicator over Window | Kendo UI Window
 description: "Learn how to display a Kendo-UI-style loading indicator over the content area of the Kendo UI Window."
 slug: howto_displayloadingindicator_overwindow_window
 ---

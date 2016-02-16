@@ -1,6 +1,6 @@
 ---
 title: Update Value on Keyup
-page_title: Update Value on Keyup | Kendo UI NumericTextBox Widget
+page_title: Update Value on Keyup | Kendo UI NumericTextBox
 description: "Learn how to update the value of the Kendo UI NumericTextBox widget on keyup in AngularJS."
 slug: howto_update_valueon_keyup_angularjs_numerictextbox
 ---
