@@ -8,7 +8,7 @@ position: 5
 
 # Appearance
 
-[Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) supports various options for you to apply to your project by setting its layout and appearance that best match your needs.
+The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) supports various options for you to apply to your project by setting its layout and appearance that best match your needs.
 
 ## Scrolling
 

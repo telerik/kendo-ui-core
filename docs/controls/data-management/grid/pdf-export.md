@@ -8,7 +8,7 @@ position: 9
 
 # PDF Export
 
-Since [Kendo UI Q3 2014 (2014.3.1119)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2014) the Grid widget provides a built-in PDF export functionality.
+As of the [Kendo UI Q3 2014 (2014.3.1119) release](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2014) the Grid widget provides a built-in PDF export functionality.
 
 ## Set Up
 
