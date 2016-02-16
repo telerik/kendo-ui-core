@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI AutoComplete Widget
+page_title: Overview | Kendo UI AutoComplete
 description: "Learn how to initialize the Kendo UI AutoComplete widget, provide AutoComplete suggestions and customize AutoComplete templates."
 slug: overview_kendoui_autocomplete_widget
 position: 1

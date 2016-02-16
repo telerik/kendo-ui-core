@@ -1,6 +1,6 @@
 ---
 title: Make Visible Inputs Readonly
-page_title: Make Visible Inputs Readonly | Kendo UI ComboBox Widget
+page_title: Make Visible Inputs Readonly | Kendo UI ComboBox
 description: "Learn how to make a visible input readonly in the Kendo UI ComboBox widget."
 slug: howto_make_visible_inputs_readonly_combobox
 ---

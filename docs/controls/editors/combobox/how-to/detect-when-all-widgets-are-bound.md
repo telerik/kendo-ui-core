@@ -1,6 +1,6 @@
 ---
 title: Detect When All Widgets Are Bound
-page_title: Detect When All Widgets Are Bound | Kendo UI ComboBox Widget
+page_title: Detect When All Widgets Are Bound | Kendo UI ComboBox
 description: "Learn how to use promises to detect when all widgets are bound in Kendo UI ComboBox."
 slug: howto_detect_when_widgets_bound_combobox
 ---

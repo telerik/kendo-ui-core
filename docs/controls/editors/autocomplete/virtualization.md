@@ -1,6 +1,6 @@
 ---
 title: Virtualization
-page_title: Virtualization | Kendo UI AutoComplete Widget
+page_title: Virtualization | Kendo UI AutoComplete
 description: "Learn how to configure the virtualization functionality in Kendo UI AutoComplete widget."
 slug: virtualization_kendoui_autocomplete_widget
 position: 3

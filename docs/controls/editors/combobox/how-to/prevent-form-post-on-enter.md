@@ -1,6 +1,6 @@
 ---
 title: Prevent POST on Enter Key Press
-page_title: Prevent POST on Enter Key Press | Kendo UI ComboBox Widget
+page_title: Prevent POST on Enter Key Press | Kendo UI ComboBox
 description: "Learn how to prevent POST on pressing the `Enter` key in the Kendo UI ComboBox widget."
 slug: howto_prevent_post_onpressing_enter_combobox
 ---

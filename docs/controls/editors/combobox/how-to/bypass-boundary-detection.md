@@ -1,6 +1,6 @@
 ---
 title: Bypass Boundary Detection
-page_title: Bypass Boundary Detection | Kendo UI ComboBox Widget
+page_title: Bypass Boundary Detection | Kendo UI ComboBox
 description: "Learn how to bypass boundary detection in Kendo UI ComboBox."
 slug: howto_bypass_boudary_detection_combobox
 ---

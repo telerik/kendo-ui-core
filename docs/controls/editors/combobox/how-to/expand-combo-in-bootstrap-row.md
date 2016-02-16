@@ -1,6 +1,6 @@
 ---
 title: Expand ComboBox Located in Bootstrap Layout
-page_title: Expand ComboBox Located in Bootstrap Layout | Kendo UI ComboBox Widget
+page_title: Expand ComboBox Located in Bootstrap Layout | Kendo UI ComboBox
 description: "Learn how to expand Kendo UI ComboBox located in a Bootstrap layout."
 slug: howto_expand_widget_bootstrap_widget_combobox
 ---

@@ -1,6 +1,6 @@
 ---
 title: Add Option Label Manually
-page_title: Add Option Label Manually | Kendo UI ComboBox Widget
+page_title: Add Option Label Manually | Kendo UI ComboBox
 description: "Learn how to add option label manually in Kendo UI ComboBox."
 slug: howto_add_option_label_manually_combobox
 ---

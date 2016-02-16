@@ -1,6 +1,6 @@
 ---
 title: Preselect Items
-page_title: Preselect Items | Kendo UI ComboBox Widget
+page_title: Preselect Items | Kendo UI ComboBox
 description: "Learn how to preselect items in a Kendo UI ComboBox widget."
 slug: howto_preselect_items_combobox
 ---

@@ -1,6 +1,6 @@
 ---
 title: Configure Deferred Value Binding
-page_title: Configure Deferred Value Binding | Kendo UI ComboBox Widget
+page_title: Configure Deferred Value Binding | Kendo UI ComboBox
 description: "Learn how to configure deferred value binding in Kendo UI ComboBox."
 slug: howto_configure_deffered_value_binding_combobox
 ---

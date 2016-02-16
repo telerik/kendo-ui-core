@@ -1,6 +1,6 @@
 ---
 title: Search for Items by Dragging to Input
-page_title: Search for Items by Dragging to Input | Kendo UI ComboBox Widget
+page_title: Search for Items by Dragging to Input | Kendo UI ComboBox
 description: "Learn how to suport the search for an external item by dragging it to the input field of the Kendo UI ComboBox widget."
 slug: howto_search_items_dragging_toinput_combobox
 ---

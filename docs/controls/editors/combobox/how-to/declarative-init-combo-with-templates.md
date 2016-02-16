@@ -1,6 +1,6 @@
 ---
 title: Declaratively Initialize ComboBox with Templates
-page_title: Declaratively Initialize ComboBox with Templates | Kendo UI ComboBox Widget
+page_title: Declaratively Initialize ComboBox with Templates | Kendo UI ComboBox
 description: "Learn how to declaratively initialize Kendo UI ComboBox with templates."
 slug: howto_declaratively_initialize_with_templates_combobox
 ---

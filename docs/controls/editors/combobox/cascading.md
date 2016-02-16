@@ -1,6 +1,6 @@
 ---
 title: Cascading ComboBoxes
-page_title: Cascading ComboBoxes | Kendo UI ComboBox Widget
+page_title: Cascading ComboBoxes | Kendo UI ComboBox
 description: "Learn how Kendo UI cascading ComboBox works and helps you handle the most common scenarios with illustrative examples and FAQ."
 slug: cascading_kendoui_combobox_widget
 position: 5

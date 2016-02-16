@@ -1,6 +1,6 @@
 ---
 title: Use Custom Templates
-page_title: Use Custom Templates | Kendo UI AutoComplete Widget
+page_title: Use Custom Templates | Kendo UI AutoComplete 
 description: "Learn how to use templates with AngularJS inside the Kendo UI templates of the AutoComplete widget."
 slug: howto_use_custom_angularjs_templates_autocomplete
 ---
