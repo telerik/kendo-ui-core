@@ -1,6 +1,6 @@
 ---
 title: Disable Mousewheel Zoom
-page_title: Disable Mousewheel Zoom | Kendo UI Map Widget
+page_title: Disable Mousewheel Zoom | Kendo UI Map
 description: "Learn how to disable the nousewheel zoom in a Kendo UI Map widget."
 slug: howto_disablemousezoom_map
 ---

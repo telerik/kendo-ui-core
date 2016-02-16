@@ -1,6 +1,6 @@
 ---
 title: Customize Markers on Map
-page_title: Customize Markers on Map | Kendo UI Map Widget
+page_title: Customize Markers on Map | Kendo UI Map
 description: "Learn how to custyomize markers on a Kendo UI Map widget."
 slug: howto_customizemarkersonmap_map
 ---

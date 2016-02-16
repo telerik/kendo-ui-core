@@ -1,6 +1,6 @@
 ---
 title: Render External Content in Shapes
-page_title: Render External Content in Shapes | Kendo UI Diagram Widget
+page_title: Render External Content in Shapes | Kendo UI Diagram
 description: "Learn how to render HTML content in Kendo UI Diagram shapes."
 slug: howto_renderexternalcontent_inshapes_diagram
 ---

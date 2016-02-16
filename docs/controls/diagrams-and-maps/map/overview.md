@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Map Widget
+page_title: Overview | Kendo UI Map
 description: "Learn how to initialize the Kendo UI Map widget, and create and bind layers to it."
 slug: overview_kendoui_mapwidget
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Display Shape Tooltips
-page_title: Display Shape Tooltips | Kendo UI Map Widget
+page_title: Display Shape Tooltips | Kendo UI Map
 description: "Learn how to  configure per-shape tooltips in the Kendo UI Map shape layer."
 slug: howto_displayshapetooltip_map
 ---

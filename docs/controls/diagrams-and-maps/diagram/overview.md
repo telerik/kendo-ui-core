@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Diagram Widget
+page_title: Overview | Kendo UI Diagram
 description: "Learn how to initialize the Kendo UI Diagram widget, add diagram elements, change properties and get an overview of its major features."
 slug: overview_kendoui_diagram_widget
 position: 1
