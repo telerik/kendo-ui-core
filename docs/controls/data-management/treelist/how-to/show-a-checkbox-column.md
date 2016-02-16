@@ -1,6 +1,6 @@
 ---
 title: Show Checkbox Column
-page_title: Show Checkbox Column | Kendo UI TreeList Widget
+page_title: Show Checkbox Column | Kendo UI TreeList
 description: "Learn how to show a checkbox column bound to the item model in a Kendo UI TreeList widget."
 slug: howto_showcheckboxcolumn_treelist
 ---

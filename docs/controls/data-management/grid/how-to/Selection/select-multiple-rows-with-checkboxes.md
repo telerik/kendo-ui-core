@@ -1,6 +1,6 @@
 ---
 title: Select Multiple Rows with Checkboxes
-page_title:  Select Multiple Rows with Checkboxes | Kendo UI Grid Widget
+page_title:  Select Multiple Rows with Checkboxes | Kendo UI Grid
 description: "Learn how to select multiple rows with checkboxes in the Kendo UI Grid widget."
 slug: howto_select_multiple_rowswith_checkboxes_grid
 ---
@@ -31,7 +31,7 @@ The example below demonstrates how to select multiple rows using the checkbox te
         columns: [{
           title: "select",
           template: '<input class="checkbox" type="checkbox" />'
-        }, 
+        },
                   { field: "id" },
                   { field: "foo" },
                   { field: "bar" }],

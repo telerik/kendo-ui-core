@@ -1,6 +1,6 @@
 ---
 title: Expand Include fields TreeView
-page_title: Expand Include fields TreeView | Kendo UI PivotGrid Widget
+page_title: Expand Include fields TreeView | Kendo UI PivotGrid
 description: "Learn how to access the Include fields TreeView widget and expand the root node on window open in a Kendo UI PivotGrid widget."
 slug: howto_expand_include_fields_treeview_pivotgrid
 ---

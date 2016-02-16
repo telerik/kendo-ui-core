@@ -1,6 +1,6 @@
 ---
 title: Update Field in All Child Nodes
-page_title: Update Field in All Child Nodes | Kendo UI TreeList Widget
+page_title: Update Field in All Child Nodes | Kendo UI TreeList
 description: "Learn how to update the checked state on all child nodes of a Kendo UI TreeList widget in AngularJS."
 slug: howto_updatefieldinallchildnodes_angularjs_treelist
 ---

@@ -1,6 +1,6 @@
 ---
 title: Add Dimension to Column Axis
-page_title: Add Dimension to Column Axis | Kendo UI PivotGrid Widget
+page_title: Add Dimension to Column Axis | Kendo UI PivotGrid
 description: "Learn how to use the PivotGrid API to add a new dimension to the column axis in a Kendo UI PivotGrid widget."
 slug: howto_add_dimension_column_axis_pivotgrid
 ---

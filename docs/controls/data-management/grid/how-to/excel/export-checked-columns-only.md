@@ -1,6 +1,6 @@
 ---
 title: Export Checked Columns Only
-page_title:  Export Checked Columns Only | Kendo UI Grid Widget
+page_title:  Export Checked Columns Only | Kendo UI Grid
 description: "Learn how to create Excel documents by exporting the checked columns only from a Kendo UI Grid widget."
 slug: howto_export_checked_columns_only_grid
 ---

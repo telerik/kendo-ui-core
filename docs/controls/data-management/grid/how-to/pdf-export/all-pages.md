@@ -1,6 +1,6 @@
 ---
 title: Export All Pages
-page_title: Export All Pages | Kendo UI Grid Widget
+page_title: Export All Pages | Kendo UI Grid
 description: "Learn how to export the whole Kendo UI Grid content in a PDF file."
 slug: howto_export_all_pagesto_pdf_grid
 ---

@@ -1,6 +1,6 @@
 ---
 title: Drag and Drop Rows between Grids
-page_title: Drag and Drop Rows between Grids | Kendo UI Grid Widget
+page_title: Drag and Drop Rows between Grids | Kendo UI Grid
 description: "Learn how to drag and drop rows between two Kendo UI Grids."
 slug: howto_dragand_drop_rows_between_twogrids_grid
 ---

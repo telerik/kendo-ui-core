@@ -1,6 +1,6 @@
 ---
 title: OLAP Cube Setup
-page_title: OLAP Cube Setup | Kendo UI PivotGrid Widget
+page_title: OLAP Cube Setup | Kendo UI PivotGrid
 description: "Learn how to set up the OLAP Cube when working with the Kendo UI PivotGrid widget."
 slug: olap_cube_setup_pivotgrid_widget
 position: 5
@@ -20,9 +20,9 @@ For detailed information on how to create, define, and deploy the OLAP multidime
 
 ## Configure HTTP Access
 
-HTTP access to SQL Server Analysis Services can be enabled by using a MSMDPUMP.ddl ISAPI extension. 
+HTTP access to SQL Server Analysis Services can be enabled by using a MSMDPUMP.ddl ISAPI extension.
 
-For detailed information on how to set up the MSMDPUMP.ddl extension, follow the [MSDN HTTP access tutorial](http://technet.microsoft.com/en-us/library/gg492140.aspx). 
+For detailed information on how to set up the MSMDPUMP.ddl extension, follow the [MSDN HTTP access tutorial](http://technet.microsoft.com/en-us/library/gg492140.aspx).
 
 To find an online accessible OLAP service for test purposes, follow [this link](http://demos.telerik.com/olap/msmdpump.dll).
 
@@ -45,9 +45,9 @@ To configure HTTP Response Headers, specify:
 * HTTP Headers that can be used in the requests.
 * User credentials that are going to be required if an authenticated access is used.
 
-The example below demontrates the list of HTTP Response Headers that show the settings required to enable the IIS CORS behavior. 
+The example below demontrates the list of HTTP Response Headers that show the settings required to enable the IIS CORS behavior.
 
-###### Example 
+###### Example
 
 <table>
     <tbody>
@@ -105,13 +105,13 @@ The example below demontrates the list of HTTP Response Headers that show the se
     </tbody>
 </table>
 
-### Configure `OPTIONS` Method Server Response 
+### Configure `OPTIONS` Method Server Response
 
 To configure the `OPTIONS` method server response, specify the server response to the `OPTIONS` method requests. In IIS the `OPTIONS` method behavior should be configured via the `OPTIONSVerbHandler` mapping settings.
 
 The example below demonstrates the list of settings that should be applied.
 
-###### Example 
+###### Example
 
 <table>
     <tbody>
@@ -138,7 +138,7 @@ There are two possible approaches to implement a secured access to the OLAP inst
 
 * Send the credentials with a request header, even though thus the **Username** and **Password** will be visible on the client side (browser). For details on how to pass credentials with request headers, refer to this [StackOverflow discussion](http://stackoverflow.com/questions/14579478/how-to-pass-credentials-for-a-webservice-using-jquery-ajax-call). You can define the required callbacks and settings directly in the [`transport.read`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-transport.read) object, as they will be passed to the `$.ajax` method.
 
-## See Also 
+## See Also
 
 Other article on Kendo UI PivotGrid:
 

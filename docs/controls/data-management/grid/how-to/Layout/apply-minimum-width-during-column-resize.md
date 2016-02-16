@@ -1,6 +1,6 @@
 ---
 title: Apply Minimum Width during Column Resize
-page_title:  Apply Minimum Width during Column Resize | Kendo UI Grid Widget
+page_title:  Apply Minimum Width during Column Resize | Kendo UI Grid
 description: "Learn how to access an editor control in the edit event handler of the Kendo UI Grid widget."
 slug: howto_apply_min_width_during_column_resize_grid
 ---

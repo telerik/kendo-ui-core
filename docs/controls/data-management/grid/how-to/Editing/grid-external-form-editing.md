@@ -1,6 +1,6 @@
 ---
 title: Edit Records Using External Forms
-page_title: Edit Records Using External Forms | Kendo UI Grid Widget
+page_title: Edit Records Using External Forms | Kendo UI Grid
 description: "Learn how to edit records in Kendo UI Grid by using an external form."
 slug: howto_edit_records_using_external_forms_grid
 ---
@@ -26,7 +26,7 @@ The example below demonstrates how to configure editing by using a custom UI for
             <span class="k-invalid-msg" data-for="UnitPrice"></span>
         </li>
         <li>
-            <label for="UnitsInStock">UnitsInStock</label> 
+            <label for="UnitsInStock">UnitsInStock</label>
             <input data-role="numerictextbox" name="UnitsInStock" data-bind="value: selected.UnitsInStock" required min="0" />
             <span class="k-invalid-msg" data-for="UnitsInStock"></span>
         </li>

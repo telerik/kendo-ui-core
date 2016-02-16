@@ -1,6 +1,6 @@
 ---
 title: Prevent Page Navigation in Edit Mode
-page_title: Prevent Page Navigation in Edit Mode | Kendo UI Grid Widget
+page_title: Prevent Page Navigation in Edit Mode | Kendo UI Grid
 description: "Learn how to prevent page navigation in the Kendo UI Grid widget while in edit mode."
 slug: howto_prevent_page_navigation_inedit_mode_grid
 ---

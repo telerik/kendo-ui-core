@@ -1,6 +1,6 @@
 ---
 title: Remote Data Binding
-page_title: Remote Data Binding | Kendo UI Grid Widget
+page_title: Remote Data Binding | Kendo UI Grid
 description: "Learn how to use the Kendo UI Grid widget in your web application and bind it to a remote data source."
 previous_url: /howto/bind-the-grid-to-remote-data
 slug: remote_data_binding_grid

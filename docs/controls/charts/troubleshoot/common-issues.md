@@ -1,6 +1,6 @@
 ---
 title: Common Issues
-page_title: Common Issues | Kendo UI Chart Widget
+page_title: Common Issues | Kendo UI Charts
 description: "Learn how to deal with issues you may encounter while using the Kendo UI Chart widget."
 previous_url: /dataviz/troubleshooting
 slug: troubleshooting_chart_widget

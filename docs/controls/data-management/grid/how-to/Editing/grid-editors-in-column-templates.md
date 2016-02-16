@@ -1,6 +1,6 @@
 ---
 title: Render Grid Editor in Column Template
-page_title: Render Grid Editor in Column Template | Kendo UI Grid Widget
+page_title: Render Grid Editor in Column Template | Kendo UI Grid
 description: "Learn how to edit the Kendo UI Grid widget by using a column template."
 slug: howto_render_editor_column_template_grid
 ---
@@ -21,9 +21,9 @@ The example below demonstrates how to render an input editor in a column templat
       function editAll() {
         var theGrid = $("#grid").data("kendoGrid");
         $("#grid tbody").find('tr').each(function () {
-          var model =  theGrid.dataItem(this); 
+          var model =  theGrid.dataItem(this);
           kendo.bind(this,model);
-        }); 
+        });
         $("#grid").focus();
       }
 

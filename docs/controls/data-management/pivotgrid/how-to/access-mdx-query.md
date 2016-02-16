@@ -1,6 +1,6 @@
 ---
 title: Access MDX Query
-page_title: Access MDX Query | Kendo UI PivotGrid Widget
+page_title: Access MDX Query | Kendo UI PivotGrid
 description: "Learn how to access a MultiDimensional eXpressions (MDS) query in a Kendo UI PivotGrid widget."
 slug: howto_access_mdx_query_pivotgrid
 ---

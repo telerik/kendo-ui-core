@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Sparklines Widget
+page_title: Overview | Kendo UI Sparklines
 description: "Learn how to create the Kendo UI Sparklines and explore its major features."
 slug: overview_kendoui_sparklinescharts
 position: 1

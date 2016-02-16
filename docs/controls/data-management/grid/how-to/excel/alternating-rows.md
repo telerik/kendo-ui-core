@@ -1,6 +1,6 @@
 ---
 title: Configure Color for Alternating Rows
-page_title:  Configure Color for Alternating Rows | Kendo UI Grid Widget
+page_title:  Configure Color for Alternating Rows | Kendo UI Grid
 description: "Learn how to configure the background color for alternating rows in the Kendo UI Grid widget."
 slug: howto_configure_color_alternating_rows_grid
 ---

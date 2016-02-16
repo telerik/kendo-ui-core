@@ -1,6 +1,6 @@
 ---
 title: Fit Grid on Page
-page_title: Fit Grid On Page | Kendo UI Grid Widget
+page_title: Fit Grid On Page | Kendo UI Grid
 description: "Learn how to export a Kendo UI Grid in PDF and fit it on the page."
 previous_url: /framework/drawing/how-to/custom-page-layout
 slug: howto_customize_page_layout_pdf_grid

@@ -1,6 +1,6 @@
 ---
 title: Store Data as JSON
-page_title: Store Data as JSON | Kendo UI Spreadsheet Widget
+page_title: Store Data as JSON | Kendo UI Spreadsheet
 description: "Overview of the data persistence options in the Kendo UI Spreadsheet widget."
 slug: loadand_saveas_json_spreadsheet_widget
 position: 1

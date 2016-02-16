@@ -1,6 +1,6 @@
 ---
 title: Sort Dimensions
-page_title: Sort Dimensions | Kendo UI PivotGrid Widget
+page_title: Sort Dimensions | Kendo UI PivotGrid
 description: "Learn how to sort dimensions in a Kendo UI PivotGrid widget."
 slug: howto_sort_dimensions_pivotgrid
 ---

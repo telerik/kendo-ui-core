@@ -1,6 +1,6 @@
 ---
 title: Preserve Grid State in a Cookie
-page_title: Preserve Grid State in a Cookie | Kendo UI Grid Widget
+page_title: Preserve Grid State in a Cookie | Kendo UI Grid
 description: "Learn how to preserve the Kendo UI Grid state in a cookie and restore it when the page is re-visited."
 slug: howto_preserve_gridstate_inacookie_grid
 ---

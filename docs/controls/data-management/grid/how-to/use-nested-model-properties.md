@@ -1,6 +1,6 @@
 ---
 title: Use Nested Model Properties
-page_title: Use Nested Model Properties | Kendo UI Grid Widget
+page_title: Use Nested Model Properties | Kendo UI Grid
 description: "Learn how to use use nested model properties in the Kendo UI Grid widget."
 slug: howto_use_nested_model_properties_grid
 ---
@@ -22,8 +22,8 @@ The example below demonstrates how to use nested model properties. CRUD operatio
             id: j
           };
           data[j - 1].person = {
-            fname: "First Name " + j, 
-            lname: "Last Name " + j, 
+            fname: "First Name " + j,
+            lname: "Last Name " + j,
             bdate: new Date(sampleDate.getTime() - j * 1000 * 60 * 60 * 24)
           }
         }

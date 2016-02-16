@@ -1,6 +1,6 @@
 ---
 title: Export All Pages and Full Page Content
-page_title: Export All Pages and Full Page Content | Kendo UI Grid Widget
+page_title: Export All Pages and Full Page Content | Kendo UI Grid
 description: "Learn how to export all Kendo UI Grid pages and their full data and visual content."
 slug: howto_export_allpagesand_full_page_content_pdf_grid
 ---

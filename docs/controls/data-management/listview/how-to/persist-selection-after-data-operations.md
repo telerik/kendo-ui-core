@@ -1,6 +1,6 @@
 ---
 title: Persist Row Selection during Data Operations
-page_title: Persist Row Selection during Data Operations | Kendo UI ListView Widget
+page_title: Persist Row Selection during Data Operations | Kendo UI ListView
 description: "Learn how to persist row selection during data operations in a Kendo UI ListView widget."
 slug: howto_persists_row_selection_listview
 ---

@@ -1,6 +1,6 @@
 ---
 title: Change DataSource Dynamically
-page_title: Change DataSource Dynamically | Kendo UI PivotGrid Widget
+page_title: Change DataSource Dynamically | Kendo UI PivotGrid
 description: "Learn how to change the PivotGrid data source dynamically in a Kendo UI PivotGrid widget."
 slug: howto_change_datasource_dynamically_pivotgrid
 ---

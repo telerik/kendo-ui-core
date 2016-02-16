@@ -1,6 +1,6 @@
 ---
 title: Use AngularJS in Popup Editor Templates
-page_title: Use AngularJS in Popup Editor Templates | Kendo UI Grid Widget
+page_title: Use AngularJS in Popup Editor Templates | Kendo UI Grid
 description: "Learn how to use AngularJS in a Kendo UI Grid popup editor template."
 slug: howto_use_angularin_popup_editor_templates_grid
 ---

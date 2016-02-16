@@ -1,6 +1,6 @@
 ---
 title: Bind to Telerik Backend Services
-page_title: Bind to Telerik Backend Services | Kendo UI Grid Widget
+page_title: Bind to Telerik Backend Services | Kendo UI Grid
 description: "Learn how to use AngularJS directives to bind a Kendo UI Grid widget to Telerik Backend Services."
 slug: howto_bindto_telerik_backend_services_grid
 ---

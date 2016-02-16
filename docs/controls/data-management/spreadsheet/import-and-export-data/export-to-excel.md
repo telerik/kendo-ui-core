@@ -1,6 +1,6 @@
 ---
 title: Export to Excel
-page_title: Export to Excel | Kendo UI Spreadsheet Widget
+page_title: Export to Excel | Kendo UI Spreadsheet
 description: "Learn how to export the Kendo UI Spreadsheet widget to an Excel file in the browser."
 slug: export_toexcel_spreadsheet_widget
 position: 2

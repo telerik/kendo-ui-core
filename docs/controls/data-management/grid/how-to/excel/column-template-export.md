@@ -1,6 +1,6 @@
 ---
 title: Use Column Template
-page_title:  Use Column Template | Kendo UI Grid Widget
+page_title:  Use Column Template | Kendo UI Grid
 description: "Learn how to use the column template as the value of a corresponding cell in the Excel document while exporting Kendo UI Grid."
 slug: howto_use_column_template_grid
 ---

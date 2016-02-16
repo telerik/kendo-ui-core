@@ -1,6 +1,6 @@
 ---
 title: Use WebAPI with Server-Side Operations
-page_title: Use WebAPI with Server-Side Operations | Kendo UI Grid Widget
+page_title: Use WebAPI with Server-Side Operations | Kendo UI Grid
 description: "Learn how to implement the server-side data operations of paging, sorting, and filtering with WebAPI and Kendo UI Grid."
 slug: howto_use_webapi_withserverside_operations_grid
 ---

@@ -1,6 +1,6 @@
 ---
 title: Update Field in All Child Nodes
-page_title: Update Field in All Child Nodes | Kendo UI TreeList Widget
+page_title: Update Field in All Child Nodes | Kendo UI TreeList
 description: "Learn how to update all child nodes recursively, propagating the state of a row in a Kendo UI TreeList widget."
 slug: howto_updatefieldinallchildnodes_treelist
 ---

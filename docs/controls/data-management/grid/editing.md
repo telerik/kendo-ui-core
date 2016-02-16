@@ -1,6 +1,6 @@
 ---
 title: Editing
-page_title: Editing | Kendo UI Grid Widget
+page_title: Editing | Kendo UI Grid
 description: "Learn how to enable the editing support for the Kendo UI Grid widget."
 slug: editing_kendoui_grid_widget
 position: 4
