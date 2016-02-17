@@ -547,11 +547,11 @@ To see the example on remote CRUD operations with a Kendo UI Grid, refer to the 
 
 ### Remote CRUD Operations in ASP.NET MVC
 
-To see the example on remote CRUD operations in ASP.NET MVC, refer to [this GutHub page](https://github.com/telerik/kendo-examples-asp-net).
+To see the example on remote CRUD operations in ASP.NET MVC, refer to [this GitHub page](https://github.com/telerik/kendo-examples-asp-net).
 
-### Sample CRUD Application on Mobile
+### OpenEdge Integration Using JSDO
 
-To run a sample mobile application, which uses the Kendo UI DataSource component to list and update records from an employee table, refer to this [this GutHub page](https://github.com/CloudDataObject/sample-crud-app).
+To run a sample mobile application, which uses the Kendo UI DataSource component to list and update records from an employee table, refer to [this GitHub page](https://github.com/CloudDataObject/sample-crud-app).
 
 ## See Also
 
