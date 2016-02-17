@@ -539,15 +539,19 @@ The example below demonstrates a custom error.
 <!--*-->
 When an `error` event is fired, the DataSource does not process any data items, which may also be part of the server response. For example, if an update action fails due to conflicting edits, and the data needs to be refreshed from the server, you need to call the [`read`](/api/javascript/data/datasource#methods-read) method of the DataSource in the error handler. Sending the new data together with the error response is not going to populate the DataSource with the new values.
 
-### Examples
+## Sample Apps and Examples
 
-#### Remote CRUD Operations with the Grid
+### Remote CRUD Operations with the Grid
 
 To see the example on remote CRUD operations with a Kendo UI Grid, refer to the [online Grid Editing demos](http://demos.telerik.com/kendo-ui/grid/editing-inline).
 
-#### Remote CRUD Operations in ASP.NET MVC
+### Remote CRUD Operations in ASP.NET MVC
 
 To see the example on remote CRUD operations in ASP.NET MVC, refer to [this GutHub page](https://github.com/telerik/kendo-examples-asp-net).
+
+### Sample CRUD Application on Mobile
+
+To run a sample mobile application, which uses the Kendo UI DataSource component to list and update records from an employee table, refer to this [this GutHub page](https://github.com/CloudDataObject/sample-crud-app).
 
 ## See Also
 
