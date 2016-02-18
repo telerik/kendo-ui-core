@@ -153,7 +153,7 @@ Other articles on Kendo UI Calendar:
 
 * [How to Control the Header Format]({% slug howto_control_header_format_calendar %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Calendar Widget](/aspnet-mvc/helpers/calendar/overview)
-* [Overview of the Calendar JSP Tag](/jsp/tags/calendar/overview)
+* [Overview of the Calendar JSP Tag]({% slug overview_calendar_uiforjsp %})
 * [Overview of the Calendar PHP Class](/php/widgets/calendar/overview)
 * [Calendar JavaScript API Reference](/api/javascript/ui/calendar)
 

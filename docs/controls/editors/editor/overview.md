@@ -278,5 +278,5 @@ Other articles on Kendo UI Editor:
 * [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
 * [How to Use Inline Editor inside Windows]({% slug howto_use_inline_editor_inside_windows_editor %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension of the Editor Widget](/aspnet-mvc/helpers/editor/overview)
-* [Overview of the Editor JSP Tag](/jsp/tags/editor/overview)
+* [Overview of the Editor JSP Tag]({% slug overview_editor_uiforjsp %})
 * [Overview of the Editor PHP Class](/php/widgets/editor/overview)

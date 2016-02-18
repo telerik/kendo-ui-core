@@ -476,5 +476,5 @@ Other articles on Kendo UI Gantt:
 * [How to Create Custom Views]({% slug howto_create_custom_views_gantt %})
 * [How to Colorize Tasks]({% slug howto_colorize_tasks_gantt %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Gantt Widget](/aspnet-mvc/helpers/gantt/overview)
-* [Overview of the Gantt JSP Tag](/jsp/tags/gantt/overview)
+* [Overview of the Gantt JSP Tag]({% slug overview_gantt_uiforjsp %})
 * [Overview of the Gantt PHP Class](/php/widgets/gantt/overview)

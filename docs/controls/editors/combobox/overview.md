@@ -24,7 +24,6 @@ The ComboBox looks and operates consistently regardless of the initialization ty
 
 > **Important**  
 > * As ComboBox should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
->
 > * The widget copies any styles and CSS classes from the input element to the wrapper element and visible input.
 
 #### Initialize the ComboBox from an existing <select> element with defined data items
@@ -206,7 +205,7 @@ Other articles on Kendo UI ComboBox:
 * [How to Disable Child Cascading ComboBoxes]({% slug howto_disable_child_cascading_combobox %})
 * [How to Expand Background of Long List Items]({% slug howto_expand_background_longlist_items_combobox %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the ComboBox Widget](/aspnet-mvc/helpers/combobox/overview)
-* [Overview of the ComboBox JSP Tag](/jsp/tags/combobox/overview)
+* [Overview of the ComboBox JSP Tag]({% slug overview_combobox_uiforjsp %})
 * [Overview of the ComboBox PHP Class](/php/widgets/combobox/overview)
 * [ComboBox JavaScript API Reference](/api/javascript/ui/combobox)
 

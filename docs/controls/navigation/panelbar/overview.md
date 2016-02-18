@@ -196,6 +196,6 @@ Other articles and how-to examples on Kendo UI PanelBar:
 
 * [How to Initialize the Grid in PanelBar]({% slug initialize_thegrid_panelbar_widget %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the PanelBar Widget](/aspnet-mvc/helpers/panelbar/overview)
-* [Overview of the PanelBar JSP Tag](/jsp/tags/panelbar/overview)
+* [Overview of the PanelBar JSP Tag]({% slug overview_panelbar_uiforjsp %})
 * [Overview of the PanelBar PHP Class](/php/widgets/panelbar/overview)
 * [PanelBar JavaScript API Reference](/api/javascript/ui/panelbar)

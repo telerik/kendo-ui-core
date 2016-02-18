@@ -54,6 +54,6 @@ For a detailed list with all configuration options of the Kendo UI Radial Gauge,
 Other articles on Kendo UI Radial Gauge:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Radial Gauge Widget](/aspnet-mvc/helpers/radialgauge/overview)
-* [Overview of the Radial Gauge JSP Tag](/jsp/tags/radialgauge/overview)
+* [Overview of the Radial Gauge JSP Tag]({% slug overview_radialgauge_uiforjsp %})
 * [Overview of the Radial Gauge PHP Class](/php/widgets/radialgauge/overview)
 * [Radial Gauge JavaScript API Reference](/api/javascript/dataviz/ui/radialgauge)

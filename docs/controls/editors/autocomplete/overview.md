@@ -219,6 +219,6 @@ Other articles on Kendo UI AutoComplete:
 * [How to Highlight Matched Values]({% slug howto_highlight_matched_values_autocomplete %})
 * [How to Restrict Other Users]({% slug howto_restrict_user_input_autocomplete %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the AutoComplete Widget](/aspnet-mvc/helpers/autocomplete/overview)
-* [Overview of the AutoComplete JSP Tag](/jsp/tags/autocomplete/overview)
+* [Overview of the AutoComplete JSP Tag]({% slug overview_autocomplete_uiforjsp %})
 * [Overview of the AutoComplete PHP Class](/php/widgets/autocomplete/overview)
 * [AutoComplete JavaScript API Reference](/api/javascript/ui/autocomplete)

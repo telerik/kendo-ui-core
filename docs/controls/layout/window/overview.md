@@ -328,7 +328,7 @@ In Safari and Chrome browsers running on OS X, a scrollbar of an element below t
 Other articles on Kendo UI Upload:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Upload Widget](/aspnet-mvc/helpers/window/overview)
-* [Overview of the Upload JSP Tag](/jsp/tags/window/overview)
+* [Overview of the Upload JSP Tag]({% slug overview_window_uiforjsp %})
 * [Overview of the Upload PHP Class](/php/widgets/window/overview)
 * [How to Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
 * [How to Add Close Button inside Modal Windows]({% slug howto_addclosebutton_insidemodalwindows_window %})
