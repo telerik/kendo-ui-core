@@ -1,0 +1,3 @@
+{% for directory in site.redirect_directories %}
+~/kendo-ui/{{ directory.path }}/?$ /kendo-ui/{{ directory.url }};
+{% endfor %}
