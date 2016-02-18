@@ -109,6 +109,87 @@ The available workarounds in this case are:
 </script>
 ```
 
+### MultiSelect Throws An Exception
+
+Widget could throw an exception telling the developer that it cannot 'get length from undefined' (or similar error). The most common reason for such error is
+that the field set to the `k-ng-model` directive is `undefined`:
+
+##### Example showing incorrect definition
+
+```
+<div id="example" ng-app="KendoDemos">
+    <div class="demo-section k-content" ng-controller="MyCtrl">
+        <h4>Select product</h4>
+        <select kendo-multi-select k-options="selectOptions" k-ng-model="selectedIds"></select>
+        <p ng-show="selectedIds.length" style="padding-top: 1em;">Selected: {{ selectedIds }}</p>
+    </div>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ])
+    .controller("MyCtrl", function($scope){
+        $scope.selectOptions = {
+            placeholder: "Select products...",
+            dataTextField: "ProductName",
+            dataValueField: "ProductID",
+            valuePrimitive: true,
+            autoBind: false,
+            dataSource: {
+                type: "odata",
+                serverFiltering: true,
+                transport: {
+                    read: {
+                        url: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                    }
+                }
+            }
+        };
+
+        //$scope.selectedIds is undefined
+      })
+</script>
+```
+
+#### Solution
+
+The solution is to define the `k-ng-model` field to an empty array.
+
+##### Example showing correct definition
+
+```
+<div id="example" ng-app="KendoDemos">
+    <div class="demo-section k-content" ng-controller="MyCtrl">
+        <h4>Select product</h4>
+        <select kendo-multi-select k-options="selectOptions" k-ng-model="selectedIds"></select>
+        <p ng-show="selectedIds.length" style="padding-top: 1em;">Selected: {{ selectedIds }}</p>
+    </div>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ])
+    .controller("MyCtrl", function($scope){
+        $scope.selectOptions = {
+            placeholder: "Select products...",
+            dataTextField: "ProductName",
+            dataValueField: "ProductID",
+            valuePrimitive: true,
+            autoBind: false,
+            dataSource: {
+                type: "odata",
+                serverFiltering: true,
+                transport: {
+                    read: {
+                        url: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                    }
+                }
+            }
+        };
+
+        $scope.selectedIds = [];
+      })
+</script>
+```
+
 ### Widget Loses Its Value
 
 When the `ng-model` and `k-ng-model` directives are applied together, there is a chance for the widget to lose its value. This is due the fact that both directives update the element value simultaneously, which results in a conflict issue.
