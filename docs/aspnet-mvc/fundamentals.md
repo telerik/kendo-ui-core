@@ -192,6 +192,32 @@ The approach is not required if the form is placed inside a partial view, which 
         }).Render();
     }
 
+## Bundling Overview
+
+The bundling technique is used to combine resources and improve the loading time by reducing 
+the number of requests to the server. Bundling is disabled in development (debug configuration)
+by default.
+ 
+There are two ways to enable bundling in development. The first one is to disable debugging, 
+by setting `debug="false"` in web.config within the compilation element.
+The second one is to set `BundleTable.EnableOptimizations=true` within the RegisterBundles 
+static method. The latter setting will override the "debug" value in web.config.
+
+It is important to note that bundling can cause problems with relative paths in stylesheets. 
+For example, the DejaVu font included in the common stylesheet uses such path. 
+The solution is to rewrite the urls to absolute ones using the CssRewriteUrlTransform as shown
+in the following example.
+```csharp
+bundles.Add(new StyleBundle("~/Content/kendo/css")
+    .Include("~/Content/web/kendo.common.min.css", new CssRewriteUrlTransform())
+    .Include("~/Content/web/kendo.rtl.min.css", new CssRewriteUrlTransform())
+    .Include("~/Content/web/kendo.default.min.css", new CssRewriteUrlTransform()));
+```
+
+More detailed description of the topic is available below:
+
+[Bundling and Minification](http://www.asp.net/mvc/overview/performance/bundling-and-minification) 
+
 ## CSS Bundling
 
 ASP.NET bundling allows multiple stylesheets to be combined on the web server, so that the browser loads them as a single file.
