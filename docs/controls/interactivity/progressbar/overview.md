@@ -145,6 +145,6 @@ The example below denmonstrates how to access an existing ProgressBer instance.
 Other articles on Kendo UI ProgressBar:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the ProgressBar Widget](/aspnet-mvc/helpers/progressbar/overview)
-* [Overview of the ProgressBar JSP Tag](/jsp/tags/progressbar/overview)
+* [Overview of the ProgressBar JSP Tag]({% slug overview_progressbar_uiforjsp %})
 * [Overview of the ProgressBar PHP Class](/php/widgets/progressbar/overview)
 * [ProgressBar JavaScript API Reference](/api/javascript/ui/progressbar)

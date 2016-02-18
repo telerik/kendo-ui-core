@@ -158,6 +158,6 @@ Other articles on Kendo UI PivotGrid:
 * [How to Sort Dimensions]({% slug howto_sort_dimensions_pivotgrid %})
 * [How to Translate PivotConfigurator Field Items]({% slug howto_translate_pivotconfigurator_messages_pivotgrid %})
 * [How to Translate PivotGrid Messages]({% slug howto_translate_pivotgrid_messages_pivotgrid %})
-* [Overview of the JSP Tag](/jsp/tags/pivotgrid/overview)
+* [Overview of the JSP Tag]({% slug overview_pivotgrid_uiforjsp %})
 * [Overview of the PHP Class](/php/widgets/pivotgrid/overview)
 * [JavaScript API Reference](/api/javascript/ui/pivotgrid)

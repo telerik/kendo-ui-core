@@ -113,6 +113,6 @@ Other articles on Kendo UI MaskedTextBox and how-to examples:
 * [How to Use Custom Directive to Set Model Value]({% slug howto_use_raw_methodtoset_modelvalue_angularjs_maskedtextbox %})
 * [How to Use Custom MVVM Binding to Set Model Value]({% slug howto_use_custommvvm_bindingto_setmodel_value_maskedtextbox %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the MaskedTextBox Widegt](/aspnet-mvc/helpers/maskedtextbox/overview)
-* [Overview of the MaskedTextBox JSP Tag](/jsp/tags/maskedtextbox/overview)
+* [Overview of the MaskedTextBox JSP Tag]({% slug overview_maskedtextbox_uiforjsp %})
 * [Overview of the MaskedTextBox PHP Class](/php/widgets/maskedtextbox/overview)
 * [JavaScript API Reference](/api/javascript/ui/maskedtextbox)

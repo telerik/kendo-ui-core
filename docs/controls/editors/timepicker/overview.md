@@ -101,7 +101,7 @@ The best way to validate the TimePicker widget is to use a client-validation fra
 Other articles on Kendo UI TimePicker:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the TimePicker Widget](/aspnet-mvc/helpers/timepicker/overview)
-* [Overview of the TimePicker JSP Tag](/jsp/tags/timepicker/overview)
+* [Overview of the TimePicker JSP Tag]({% slug overview_timepicker_uiforjsp %})
 * [Overview of the TimePicker PHP Class](/php/widgets/timepicker/overview)
 * [TimePicker JavaScript API Reference](/api/javascript/ui/timepicker)
 

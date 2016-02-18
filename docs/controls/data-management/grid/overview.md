@@ -195,7 +195,7 @@ Other articles on Kendo UI Grid:
 * [Export the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %})
 * [Print the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Grid Widget](/aspnet-mvc/helpers/grid/overview)
-* [Overview of the Grid JSP Tag](/jsp/tags/grid/overview)
+* [Overview of the Grid JSP Tag]({% slug overview_grid_uiforjsp %})
 * [Overview of the Grid PHP Class](/php/widgets/grid/overview)
 
 For how-to examples on the Kendo UI Grid widget, browse [its How-to section]({% slug howto_bindto_telerik_backend_services_grid %}).

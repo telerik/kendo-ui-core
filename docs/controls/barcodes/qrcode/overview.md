@@ -91,6 +91,6 @@ As a result, readers are able to either open a local mapping application, such a
 Other articles on Kendo UI QRCode:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the QRCode Widget](/aspnet-mvc/helpers/qrcode/overview)
-* [Overview of the QRCode JSP Tag](/jsp/tags/qrcode/overview)
+* [Overview of the QRCode JSP Tag]({% slug overview_qrcode_uiforjsp %})
 * [Overview of the QRCode PHP Class](/php/widgets/qrcode/overview)
 * [QRCode JavaScript API Reference](/api/javascript/dataviz/ui/qrcode)

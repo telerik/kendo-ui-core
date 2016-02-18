@@ -462,7 +462,7 @@ Other articles on Kendo UI Scheduler:
 * [Resources]({% slug resources_kendoui_scheduler_widget %})
 * [Timezones]({% slug timezones_kendoui_scheduler_widget %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Scheduler Widget](/aspnet-mvc/helpers/scheduler/mvc-scheduler-overview)
-* [Overview of the Scheduler JSP Tag](/jsp/tags/scheduler/overview)
+* [Overview of the Scheduler JSP Tag]({% slug overview_scheduler_uiforjsp %})
 * [Overview of the Scheduler PHP Class](/php/widgets/scheduler/overview)
 
 How-to examples on Kendo UI Scheduler in AngularJS:

@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Splitter JSP Tag
 description: "Get started with the Splitter JSP tag in Kendo UI."
-slug: overview_aplitter_uiforjsp
+slug: overview_splitter_uiforjsp
 position: 1
 ---
 

@@ -272,7 +272,7 @@ Other articles on Kendo UI MultiSelect:
 * [How to Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
 * [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the MultiSelect Widget](/aspnet-mvc/helpers/multiselect/overview)
-* [Overview of the MultiSelect JSP Tag](/jsp/tags/multiselect/overview)
+* [Overview of the MultiSelect JSP Tag]({% slug overview_multiselect_uiforjsp %})
 * [Overview of the MultiSelect PHP Class](/php/widgets/multiselect/overview)
 
 Articles on Kendo UI ComboBox:

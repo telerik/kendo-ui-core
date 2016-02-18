@@ -300,5 +300,5 @@ Other articles on Kendo UI Notification:
 * [How to Move Visible Notifications after Hiding Others]({% slug howto_move_notifications_after_hiding_others %})
 * [How to Stack Static Notifications to the Left or Right]({% slug howto_stack_static_tothe_leftor_right_notification %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Notification Widget](/aspnet-mvc/helpers/notification/overview)
-* [Overview of the Notification JSP Tag](/jsp/tags/notification/overview)
+* [Overview of the Notification JSP Tag]({% slug overview_notification_uiforjsp %})
 * [Overview of the Notification PHP Class](/php/widgets/notification/overview)

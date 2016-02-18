@@ -260,6 +260,6 @@ Other articles and how-to examples on Kendo UI Menu:
 * [How to Execute Custom Click Actions Based on Class Name]({% slug howto_execute_custom_click_actions_basedon_classnames_menu %})
 * [How to Use FontAwesome Icons]({% slug howto_use_fontawesome_icons_menu %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Menu Widget](/aspnet-mvc/helpers/menu/overview)
-* [Overview of the Menu JSP Tag](/jsp/tags/menu/overview)
+* [Overview of the Menu JSP Tag]({% slug overview_menu_uiforjsp %})
 * [Overview of the Menu PHP Class](/php/widgets/menu/overview)
 * [Menu JavaScript API Reference](/api/javascript/ui/menu)

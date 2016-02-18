@@ -196,7 +196,7 @@ Other articles on Kendo UI DateTimePicker:
 * [How to Limit Navigation to Months]({% slug howto_limit_navigation_tomonths_datetimepicker %})
 * [How to Override Hours in the Popup]({% slug howto_override_hours_inpopup_datetimepicker %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the DateTimePicker Widget](/aspnet-mvc/helpers/datetimepicker/overview)
-* [Overview of the DateTimePicker JSP Tag](/jsp/tags/datetimepicker/overview)
+* [Overview of the DateTimePicker JSP Tag]({% slug overview_datetimepicker_uiforjsp %})
 * [Overview of the DateTimePicker PHP Class](/php/widgets/datetimepicker/overview)
 * [DateTimePicker JavaScript API Reference](/api/javascript/ui/datetimepicker)
 

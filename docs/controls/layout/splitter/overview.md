@@ -222,7 +222,7 @@ The example below demonstrates how to access an existing Splitter instance.
 Other articles on Kendo UI Splitter:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Splitter Widget](/aspnet-mvc/helpers/splitter/overview)
-* [Overview of the Splitter JSP Tag](/jsp/tags/splitter/overview)
+* [Overview of the Splitter JSP Tag]({% slug overview_splitter_uiforjsp %})
 * [Overview of the Splitter PHP Class](/php/widgets/splitter/overview)
 * [How to Nest Sortables]({% slug howto_nestsortables_sortable %})
 * [How to Persist Order in `localStorage`]({% slug howto_persistoderinlocalstorage_sortable %})

@@ -51,20 +51,22 @@ The proper way to handle such unevaluated templates is to use a custom AngularJS
 
 Fore more details, refer to the [article on the priorities of AngularJS directives](https://docs.angularjs.org/api/ng/service/$compile).
 
-### Widget With 'ng-model' Directive Does Not Reflect Model Value
+### Widgets with ng-model Directives Reflect No Model Value
 
-Since `Angular 1.4.9` widgets initialized from `SELECT` element **does not reflect changes to the model field**. This is due to a change in the Angular implementation related to `ngModel.$render`. In the new Angular versions, that method is **overridden** in favor
-to a custom Angular implementation that supports adding custom `OPTION` elements. This enhancement, however, breaks our `ngModel` support, because we also depends on `ngModel.$render` method to reflect any changes done in the model.
-Basically our [ngModel.$render](https://github.com/telerik/kendo-ui-core/blob/master/src/kendo.angular.js#L388) is **directly overridden** by the Angular new function.
+As of Angular 1.4.9 widgets initialized from the `SELECT` element do not reflect changes to the model field. This is due to a change in the Angular implementation related to `ngModel.$render`. In the new Angular versions, that method is overridden in favor of a custom Angular implementation that supports adding custom `OPTION` elements. This enhancement, however, breaks the Kendo UI `ngModel` support, because it also depends on the `ngModel.$render` method to reflect any changes done in the model.
 
-#### Solution
+Basically, the Kendo UI [`ngModel.$render`](https://github.com/telerik/kendo-ui-core/blob/master/src/kendo.angular.js#L388) is directly overridden by the Angular new function.
+
+**Solution**
 
 The available workarounds in this case are:
 
-- Use `k-ng-model` directive instead. Check the [corresponding documentation](http://docs.telerik.com/kendo-ui/AngularJS/introduction#scope-bindings) for more details.
-- Use `k-ng-delay` mapped to the `ng-model` model field. The purpose of this code is to postpone the `ngModel.$render` set on our side, hence it will win over the Angular `ngModel.$render` custom method
+- Use the `k-ng-model` directive instead. Check the [corresponding documentation]({% slug angularjs_integration_directives %}#scope-bindings) for more details.
+- Use `k-ng-delay` mapped to the `ng-model` model field. The purpose of this code is to postpone the `ngModel.$render` set on the Kendo UI side, hence it will win over the Angular `ngModel.$render` custom method.
 
-##### Example using `ng-model` directive
+The example below demonstrates how to use the `ng-model` directive.
+
+###### Example
 
 ```
 <div id="example" ng-app="KendoDemos">
@@ -109,12 +111,13 @@ The available workarounds in this case are:
 </script>
 ```
 
-### MultiSelect Throws An Exception
+### MultiSelects Throw Exceptions
 
-Widget could throw an exception telling the developer that it cannot 'get length from undefined' (or similar error). The most common reason for such error is
-that the field set to the `k-ng-model` directive is `undefined`:
+MultiSelect widgets sometimes throw an exception stating that it cannot `get length from undefined` (or similar). The most common reason for such an error is that the field set to the `k-ng-model` directive is `undefined`.
 
-##### Example showing incorrect definition
+The example below demonstrates an incorrect definition of the `k-ng-model` field.
+
+###### Example
 
 ```
 <div id="example" ng-app="KendoDemos">
@@ -150,11 +153,13 @@ that the field set to the `k-ng-model` directive is `undefined`:
 </script>
 ```
 
-#### Solution
+**Solution**
 
-The solution is to define the `k-ng-model` field to an empty array.
+Define the `k-ng-model` field to an empty array.
 
-##### Example showing correct definition
+The example below demonstrates the correct definition of the `k-ng-model` field.
+
+###### Example
 
 ```
 <div id="example" ng-app="KendoDemos">

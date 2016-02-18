@@ -151,7 +151,7 @@ Other articles on Kendo UI DatePicker:
 * [How to Show Out-of-Range Dates as Disabled]({% slug howto_show_outofrange_dates_disabled_datepicker %})
 * [How to Submit Forms on ENTER]({% slug howto_submmit_forms_onenter_datepicker %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the DatePicker Widget](/aspnet-mvc/helpers/datepicker/overview)
-* [Overview of the DatePicker JSP Tag](/jsp/tags/datepicker/overview)
+* [Overview of the DatePicker JSP Tag]({% slug overview_datepicker_uiforjsp %})
 * [Overview of the DatePicker PHP Class](/php/widgets/datepicker/overview)
 * [DatePicker JavaScript API Reference](/api/javascript/ui/datepicker)
 

@@ -314,7 +314,7 @@ The example below demonstrates how to access an existing TreeList instance.
 Other articles on Kendo UI TreeList and how-to examples:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/treelist/overview)
-* [Overview of the JSP Tag](/jsp/tags/treelist/overview)
+* [Overview of the JSP Tag]({% slug overview_treelist_uiforjsp %})
 * [Overview of the PHP Class](/php/widgets/treelist/overview)
 * [How to Hide Edit Fields on Different Levels]({% slug howto_hideeditfieldsondifferentlevels_treelist %})
 * [How to Show Checkbox Column]({% slug howto_showcheckboxcolumn_treelist %})
