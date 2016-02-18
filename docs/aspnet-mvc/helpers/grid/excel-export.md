@@ -20,7 +20,7 @@ To enable Excel export include the corresponding toolbar command and configure t
     .Name("grid")
     .ToolBar(tools => tools.Excel())
     .Excel(excel => excel
-        .FileName("Products.xslx")
+        .FileName("Products.xlsx")
     )
     .DataSource(dataSource => dataSource
         .Ajax()
