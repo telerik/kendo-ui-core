@@ -10,7 +10,7 @@ position: 3
 
 The Spreadsheet widget supports binding individual sheets to a [Data Source](/framework/datasource/overview) instance. This allows you to quickly bring data from external data sources into the Spreadsheet and, optionally, edit it.
 
-Data Source binidng switches the sheet to a special data-bound mode. It differs from the standard behavior in a number of important ways:
+Data Source binding switches the sheet to a special data-bound mode. It differs from the standard behavior in a number of important ways:
 
 * Column headers are inferred from the data item fields.
 * Cell styles, formulas, and formats are not persisted in the data source.
