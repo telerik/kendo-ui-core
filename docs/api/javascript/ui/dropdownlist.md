@@ -444,12 +444,14 @@ refer to [Popup](/api/javascript/ui/popup) documentation.
  Define the text of the default empty item. If the value is an object, then the widget will use it as a valid data item.
  Note that the optionLabel will not be available if the widget is empty.
 
+> **Important:** If `optionLabel` is an object, it needs to have at least `dataValueField` and `dataTextField` properties. Otherwise, widget will show `undefined`.
+Note that the very same optionLabel object will be passed to the [valueTemplate](/api/javascript/ui/dropdownlist#configuration-valueTemplate). **You need to ensure that all required by the valueTemplate properties are present
+in the optionLabel object**.
+
 > **Important:** Since Q1 2015 (2015.1.318), the option label is rendered as a separate header template. The benefits of this change are:
 - the widget's value will be empty string even when `dataValueField` and `dataTextField` options are equal or not defined
 - the widget will not throw an exception when a custom item template is used and `optionLabel` is string
 - option label has a separate template, that gives more freedom for customization
-
-> **Important:** If `optionLabel` is an object, it needs to have at least `dataValueField` and `dataTextField` properties. Otherwise, widget will show `undefined`.
 
 > **Important:** [Not relevant after Q1 2015] Widget's value will be equal to the `optionLabel` if the `dataValueField` and `dataTextField` options are equal or not defined
 
