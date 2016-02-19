@@ -1,10 +1,12 @@
 ---
 title: Overview
-page_title: How to use the AutoComplete PHP class, server-side wrapper for Kendo UI AutoComplete widget
-description: Learn how to bind Kendo UI AutoComplete for PHP, handle Kendo UI AutoComplete Events, access an existing autocomplete.
+page_title: Overview | AutoComplete PHP Wrapper
+description: "Get started with the AutoComplete PHP wrapper in Kendo UI."
+slug: overview_autocomplete_uiforphp
+position: 1
 ---
 
-# AutoComplete
+# AutoComplete PHP Wrapper Overview
 
 The Kendo AutoComplete for PHP is a server-side wrapper for the [Kendo UI AutoComplete](/api/web/autocomplete) widget.
 
