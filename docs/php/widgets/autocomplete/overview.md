@@ -8,19 +8,26 @@ position: 1
 
 # AutoComplete PHP Wrapper Overview
 
-The Kendo AutoComplete for PHP is a server-side wrapper for the [Kendo UI AutoComplete](/api/web/autocomplete) widget.
+The Kendo UI AutoComplete for PHP is a server-side wrapper for the [Kendo UI AutoComplete](/api/javascript/ui/autocomplete) widget.
 
 ## Getting Started
 
-There are two ways to bind Kendo AutoComplete for PHP:
+### The Basics
 
-* [local](/php/widgets/autocomplete/local-binding) - the autocomplete is bound to PHP array
-* [remote](/php/widgets/autocomplete/remote-binding) - the autocomplete makes AJAX requests and is bound to JSON result
+There are two ways to bind a Kendo UI AutoComplete for PHP:
 
-Here is how to configure the autocomplete for local binding:
+* [Locally]({% slug localbinding_autocomplete_uiforphp %})&mdash;Local binding binds the AutoComplete to a PHP array.
+* [Remotely]({% slug remotebinding_autocomplete_uiforphp %})&mdash;During remote binding the AutoComplete makes AJAX requests and is bound to the JSON result.
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-2. Create an array which to which the autocomplete will be bound to
+### Configuration
+
+Below are listed the steps for you to follow when configuring the Kendo UI AutoComplete for local binding.
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Create an array to which the AutoComplete will be bound.
+
+###### Example
 
         <?php
         $data = array(
@@ -28,13 +35,19 @@ Here is how to configure the autocomplete for local binding:
             array('name' => 'Jane Doe', 'age' => 29)
         );
         ?>
-3. Create a [data source](/api/php/Kendo/Data/DataSource) and set its [data](/api/php/Kendo/Data/DataSource#data):
+
+**Step 3** Create a [data source](/api/php/Kendo/Data/DataSource) and set its [`data`](/api/php/Kendo/Data/DataSource#data).
+
+###### Example
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
         $dataSource->data($data);
         ?>
-4. Create a [autocomplete](/api/php/Kendo/UI/AutoComplete), configure its [dataTextField](/api/php/Kendo/UI/AutoComplete#datatextfield) option and set its [data source](/api/php/Kendo/UI/AutoComplete#datasource).
+
+**Step 4** Create an [AutoComplete](/api/php/Kendo/UI/AutoComplete), configure its [`dataTextField`](/api/php/Kendo/UI/AutoComplete#datatextfield) option and set its [`DataSource`](/api/php/Kendo/UI/AutoComplete#datasource).
+
+###### Example
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -44,19 +57,56 @@ Here is how to configure the autocomplete for local binding:
         $autoComplete->dataSource($dataSource);
         $autoComplete->dataTextField('name');
         ?>
-5. Output the autocomplete by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+
+**Step 5** Output the AutoComplete by echoing the result of the [`render`](/api/php/Kendo/UI/Widget#render) method.
+
+###### Example
 
         <?php
         echo $autoComplete->render();
         ?>
 
-## Getting Client-side Reference
+        ## Handling Events
 
-You can reference the client-side Kendo AutoComplete instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/autocomplete#methods) to control its behavior.
+        You can subscribe to all autocomplete [events](/api/web/autocomplete#events).
 
+        ### Example - subscribing by specifying JavaScript function name
 
-### Example
+            <?php
+            $autoComplete = new \Kendo\UI\AutoComplete('autocomplete');
+
+            // The 'autocomplete_change' JavaScript function will handle the 'change' event of the autocomplete
+            $autoComplete->change('autocomplete_change');
+
+            echo $autoComplete->render();
+            ?>
+            <script>
+            function autocomplete_change() {
+                // Handle the change event
+            }
+            </script>
+
+The example below demonstrates how to provide inline JavaScript code.
+
+###### Example
+
+            <?php
+            $autoComplete = new \Kendo\UI\AutoComplete('autocomplete');
+
+            // Provide inline JavaScript code that will handle the 'change' event of the autocomplete
+            $autoComplete->change('function() { /* Handle the change event */ }');
+
+            echo $autoComplete->render();
+            ?>
+
+<!--*-->
+## Reference
+
+### Client-Side Instances
+
+You can reference the client-side Kendo UI AutoComplete instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [AutoComplete API](/api/javascript/ui/autocomplete#methods) to control its behavior.
+
+###### Example
 
     <?php
     $autoComplete = new \Kendo\UI\AutoComplete('autocomplete');
@@ -69,33 +119,12 @@ Once a reference has been established, you can use the [API](/api/web/autocomple
     });
     </script>
 
-## Handling Events
+## See Also
 
-You can subscribe to all autocomplete [events](/api/web/autocomplete#events).
+Other articles on Telerik UI for PHP and on the AutoComplete:
 
-### Example - subscribing by specifying JavaScript function name
-
-    <?php
-    $autoComplete = new \Kendo\UI\AutoComplete('autocomplete');
-
-    // The 'autocomplete_change' JavaScript function will handle the 'change' event of the autocomplete
-    $autoComplete->change('autocomplete_change');
-
-    echo $autoComplete->render();
-    ?>
-    <script>
-    function autocomplete_change() {
-        // Handle the change event
-    }
-    </script>
-
-### Example - providing inline JavaScript code
-
-    <?php
-    $autoComplete = new \Kendo\UI\AutoComplete('autocomplete');
-
-    // Provide inline JavaScript code that will handle the 'change' event of the autocomplete
-    $autoComplete->change('function() { /* Handle the change event */ }');
-
-    echo $autoComplete->render();
-    ?>
+* [Local Binding of the AutoComplete for PHP]({% slug localbinding_autocomplete_uiforphp %})
+* [Remote Binding of the AutoComplete for PHP]({% slug remotebinding_autocomplete_uiforphp %})
+* [Overview of the Kendo UI AutoComplete Widget]({% slug overview_kendoui_autocomplete_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Tags Folder]({% slug overview_autocomplete_uiforphp %})
