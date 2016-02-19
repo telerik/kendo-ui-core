@@ -170,4 +170,4 @@ Other articles on Telerik UI for PHP and on the AutoComplete:
 * [Remote Binding of the AutoComplete PHP Class]({% slug remotebinding_autocomplete_uiforphp %})
 * [Overview of the Kendo UI AutoComplete Widget]({% slug overview_kendoui_autocomplete_widget %})
 * [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
-* [Telerik UI for PHP Tags Folder]({% slug overview_autocomplete_uiforphp %})
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})
