@@ -22,20 +22,20 @@ Below are listed the steps for you to follow when configuring the Kendo UI Calen
 
 ###### Example
 
-        <?php
-        $calendar = new \Kendo\UI\Calendar('calendar');
-        $calendar->min(new DateTime('1900-01-01'))
-                 ->max(new DateTime('2099-12-31'))
-                 ->value(new DateTime('today', new DateTimeZone('UTC')));
-        ?>
+    <?php
+    $calendar = new \Kendo\UI\Calendar('calendar');
+    $calendar->min(new DateTime('1900-01-01'))
+             ->max(new DateTime('2099-12-31'))
+             ->value(new DateTime('today', new DateTimeZone('UTC')));
+    ?>
 
 ## Event Handling
 
-You can subscribe to all Calendar [events](/api/web/calendar#events).
+You can subscribe to all Calendar [events](/api/javascript/ui/calendar#events).
 
 ### Specify Function Names
 
-The example below demonstrates how to subscribe for events by specifying JavaScript function name.
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
 ###### Example
 
@@ -77,16 +77,16 @@ You are able to reference an existing Calendar instance via the [`jQuery.data()`
 
 ###### Example
 
-        <?php
-        $calendar = new \Kendo\UI\Calendar('calendar');
-        echo $calendar->render();
-        ?>
-        <script>
-        $(function() {
-            // The constructor parameter is used as the 'id' HTML attribute of the calendar
-            var calendar = $("#calendar").data("kendoCalendar")
-        });
-        </script>
+    <?php
+    $calendar = new \Kendo\UI\Calendar('calendar');
+    echo $calendar->render();
+    ?>
+    <script>
+    $(function() {
+        // The constructor parameter is used as the 'id' HTML attribute of the calendar
+        var calendar = $("#calendar").data("kendoCalendar")
+    });
+    </script>
 
 ## See Also
 
