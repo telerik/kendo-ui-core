@@ -16,7 +16,7 @@ The Kendo UI Barcode for PHP is a server-side wrapper for the [Kendo UI Barcode]
 
 Below are listed the steps for you to follow when configuring the Kendo UI Barcode fro PHP.
 
-**Step 1** Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
 
 **Step 2** Add a Barcode with the default [`type`](/api/javascript/dataviz/ui/barcode#configuration-type) (Code39).
 
