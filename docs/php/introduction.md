@@ -7,7 +7,7 @@ slug: overview_uiforphp
 position: 1
 ---
 
-# Overview
+# Telerik UI for PHP Overview
 
 [Telerik UI for PHP](http://www.telerik.com/php-ui) is a set of PHP classes which help you configure Kendo UI widgets by using server-side code in PHP web sites.
 
