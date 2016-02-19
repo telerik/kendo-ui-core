@@ -1,7 +1,7 @@
 ---
 title: Remote Binding
-page_title: Remote Binding | AutoComplete PHP Wrapper
-description: "Bind Kendo UI AutoComplete for PHP to JSON."
+page_title: Remote Binding | AutoComplete PHP Class
+description: "Bind Kendo UI AutoComplete PHP class to JSON."
 slug: remotebinding_autocomplete_uiforphp
 position: 3
 ---
@@ -230,8 +230,8 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 Other articles on Telerik UI for PHP and on the AutoComplete:
 
-* [Overview of the AutoComplete for PHP]({% slug overview_autocomplete_uiforphp %})
-* [Local Binding of the AutoComplete for PHP]({% slug localbinding_autocomplete_uiforphp %})
+* [Overview of the AutoComplete PHP Class]({% slug overview_autocomplete_uiforphp %})
+* [Local Binding of the AutoComplete PHP Class]({% slug localbinding_autocomplete_uiforphp %})
 * [Overview of the Kendo UI AutoComplete Widget]({% slug overview_kendoui_autocomplete_widget %})
 * [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
 * [Telerik UI for PHP Tags Folder]({% slug overview_autocomplete_uiforphp %})

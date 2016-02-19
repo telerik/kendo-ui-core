@@ -1,7 +1,7 @@
 ---
 title: Local Binding
-page_title: Local Binding | AutoComplete PHP Wrapper
-description: "Bind Kendo UI AutoComplete for PHP to an array of data."
+page_title: Local Binding | AutoComplete PHP Class
+description: "Bind Kendo UI AutoComplete PHP class to an array of data."
 slug: localbinding_autocomplete_uiforphp
 position: 2
 ---
@@ -166,8 +166,8 @@ The `DataSourceResult` class is a helper utility on top of PDO which simplifies 
 
 Other articles on Telerik UI for PHP and on the AutoComplete:
 
-* [Overview of the AutoComplete for PHP]({% slug overview_autocomplete_uiforphp %})
-* [Remote Binding of the AutoComplete for PHP]({% slug remotebinding_autocomplete_uiforphp %})
+* [Overview of the AutoComplete PHP Class]({% slug overview_autocomplete_uiforphp %})
+* [Remote Binding of the AutoComplete PHP Class]({% slug remotebinding_autocomplete_uiforphp %})
 * [Overview of the Kendo UI AutoComplete Widget]({% slug overview_kendoui_autocomplete_widget %})
 * [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
 * [Telerik UI for PHP Tags Folder]({% slug overview_autocomplete_uiforphp %})

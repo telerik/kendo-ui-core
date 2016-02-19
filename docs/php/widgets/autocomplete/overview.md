@@ -1,12 +1,12 @@
 ---
 title: Overview
-page_title: Overview | AutoComplete PHP Wrapper
-description: "Get started with the AutoComplete PHP wrapper in Kendo UI."
+page_title: Overview | AutoComplete PHP Class
+description: "Get started with the AutoComplete PHP class in Kendo UI."
 slug: overview_autocomplete_uiforphp
 position: 1
 ---
 
-# AutoComplete PHP Wrapper Overview
+# AutoComplete PHP Class Overview
 
 The Kendo UI AutoComplete for PHP is a server-side wrapper for the [Kendo UI AutoComplete](/api/javascript/ui/autocomplete) widget.
 
@@ -123,8 +123,8 @@ You can reference the client-side Kendo UI AutoComplete instance via [`jQuery.da
 
 Other articles on Telerik UI for PHP and on the AutoComplete:
 
-* [Local Binding of the AutoComplete for PHP]({% slug localbinding_autocomplete_uiforphp %})
-* [Remote Binding of the AutoComplete for PHP]({% slug remotebinding_autocomplete_uiforphp %})
+* [Local Binding of the AutoComplete PHP Class]({% slug localbinding_autocomplete_uiforphp %})
+* [Remote Binding of the AutoComplete PHP Class]({% slug remotebinding_autocomplete_uiforphp %})
 * [Overview of the Kendo UI AutoComplete Widget]({% slug overview_kendoui_autocomplete_widget %})
 * [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
 * [Telerik UI for PHP Tags Folder]({% slug overview_autocomplete_uiforphp %})
