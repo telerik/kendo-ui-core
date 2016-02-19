@@ -523,7 +523,7 @@ The available "x" positions are:
     });
     </script>
 
-### popup.position `String`*(default: "top left")*
+### popup.position `String`
 
 Specifies which point of the popup element to attach to the anchor's origin point. The value is
 space separated "y" plus "x" position.
