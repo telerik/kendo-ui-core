@@ -14,7 +14,7 @@ The Kendo UI Barcode for PHP is a server-side wrapper for the [Kendo UI Barcode]
 
 ### Configuration
 
-Below are listed the steps for you to follow when configuring the Kendo UI Barcode fro PHP.
+Below are listed the steps for you to follow when configuring the Kendo UI Barcode for PHP.
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
 
@@ -22,22 +22,22 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
 
 ###### Example
 
-        $barcode = new \Kendo\Dataviz\UI\Barcode('barcode');
-        $barcode->value("foo");
+    $barcode = new \Kendo\Dataviz\UI\Barcode('barcode');
+    $barcode->value("foo");
 
 **Step 3** Change the symbology to match your scenario.
 
 ###### Example
 
-        $barcode = new \Kendo\Dataviz\UI\Barcode('barcode');
-        $barcode->value("foo");
-        $barcode->type("ean8");
+    $barcode = new \Kendo\Dataviz\UI\Barcode('barcode');
+    $barcode->value("foo");
+    $barcode->type("ean8");
 
 **Step 4** Output the chart by echoing the result of the `render` method.
 
 ###### Example
 
-        echo $barcode->render();
+    echo $barcode->render();
 
 ## Reference
 
@@ -47,14 +47,14 @@ You are able to reference an existing Barcode instance via the [`jQuery.data()`]
 
 ###### Example
 
-        // Put this after your Kendo Barcode for PHP render() call
-        <script>
-        $(function() {
-            // Notice that the name of the barcode is used to get its client-side instance
-            var barcode = $("#barcode").data("kendoBarcode");
-            barcode.value("foo");
-        });
-        </script>
+    // Put this after your Kendo Barcode for PHP render() call
+    <script>
+    $(function() {
+        // Notice that the name of the barcode is used to get its client-side instance
+        var barcode = $("#barcode").data("kendoBarcode");
+        barcode.value("foo");
+    });
+    </script>
 
 ## See Also
 

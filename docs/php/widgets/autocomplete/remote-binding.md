@@ -22,53 +22,53 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 ###### Example
 
-        <?php
-        $transport = new \Kendo\Data\DataSourceTransport();
+    <?php
+    $transport = new \Kendo\Data\DataSourceTransport();
 
-        $read = new \Kendo\Data\DataSourceTransportRead();
+    $read = new \Kendo\Data\DataSourceTransportRead();
 
-        // Specify the url of the PHP page which will act as the remote service
-        $read->url('products.php')
-             ->type('POST');
+    // Specify the url of the PHP page which will act as the remote service
+    $read->url('products.php')
+         ->type('POST');
 
-        $transport->read($read);
+    $transport->read($read);
 
-        // Configure the model
-        $model = new \Kendo\Data\DataSourceSchemaModel();
+    // Configure the model
+    $model = new \Kendo\Data\DataSourceSchemaModel();
 
-        $productNameField = new \Kendo\Data\DataSourceSchemaModelField('ProductName');
-        $productNameField->type('string');
+    $productNameField = new \Kendo\Data\DataSourceSchemaModelField('ProductName');
+    $productNameField->type('string');
 
-        $model->addField($productNameField);
+    $model->addField($productNameField);
 
-        $schema = new \Kendo\Data\DataSourceSchema();
+    $schema = new \Kendo\Data\DataSourceSchema();
 
-        $schema->model($model);
+    $schema->model($model);
 
-        $dataSource = new \Kendo\Data\DataSource();
+    $dataSource = new \Kendo\Data\DataSource();
 
-        // Configure data source
-        $dataSource->transport($transport)
-                   ->schema($schema);
-        ?>
+    // Configure data source
+    $dataSource->transport($transport)
+               ->schema($schema);
+    ?>
 
 **Step 3** Create an AutoComplete, configure its `dataTextField` option and set its data source.
 
 ###### Example
 
-        <?php
-        $autoComplete = new \Kendo\UI\AutoComplete('AutoComplete');
-        $autoComplete->dataSource($dataSource);
-        $autoComplete->dataTextField('ProductName');
-        ?>
+    <?php
+    $autoComplete = new \Kendo\UI\AutoComplete('AutoComplete');
+    $autoComplete->dataSource($dataSource);
+    $autoComplete->dataTextField('ProductName');
+    ?>
 
 **Step 4** Output the AutoComplete by echoing the result of the `render` method.
 
 ###### Example
 
-        <?php
-        echo $autoComplete->render();
-        ?>
+    <?php
+    echo $autoComplete->render();
+    ?>
 
 ### JSON-Returning File Creation
 
@@ -80,30 +80,30 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 ###### Example
 
-        <?php
-        $db = new PDO('sqlite:../sample.db');
-        ?>
+    <?php
+    $db = new PDO('sqlite:../sample.db');
+    ?>
 
 **Step 3** Retrieve all records from the `Products` table.
 
 ###### Example
 
-        <?php
-        $statement = $db->prepare('SELECT * FROM Products');
-        $products = $statement->fetchAll(PDO::FETCH_ASSOC);
-        ?>
+    <?php
+    $statement = $db->prepare('SELECT * FROM Products');
+    $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+    ?>
 
 **Step 4** Return the records as JSON.
 
 ###### Example
 
-        <?php
-        // Set response content type
-        header('Content-Type: application/json');
-        // Return JSON
+    <?php
+    // Set response content type
+    header('Content-Type: application/json');
+    // Return JSON
 
-        echo json_encode($products);
-        ?>
+    echo json_encode($products);
+    ?>
 
 ## Use DataSourceResult Helpers
 
@@ -125,63 +125,63 @@ Below are listed the steps for you to follow when configuring the AutoComplete f
 
 ###### Example
 
-        <?php
-        $transport = new \Kendo\Data\DataSourceTransport();
+   <?php
+   $transport = new \Kendo\Data\DataSourceTransport();
 
-        $read = new \Kendo\Data\DataSourceTransportRead();
+   $read = new \Kendo\Data\DataSourceTransportRead();
 
-        // Specify the url of the PHP page which will act as the remote service
-        $read->url('products.php')
-             ->contentType('application/json')
-             ->type('POST');
+   // Specify the url of the PHP page which will act as the remote service
+   $read->url('products.php')
+           ->contentType('application/json')
+           ->type('POST');
 
-        // Configure the transport to send the data source parameters as JSON.
-        // This is required by the DataSourceResult helper.
-        $transport->read($read)
-                  ->parameterMap('function(data) {
-                      return kendo.stringify(data);
-                  }');
+    // Configure the transport to send the data source parameters as JSON.
+    // This is required by the DataSourceResult helper.
+    $transport->read($read)
+              ->parameterMap('function(data) {
+                  return kendo.stringify(data);
+              }');
 
-        // Configure the model
-        $model = new \Kendo\Data\DataSourceSchemaModel();
+    // Configure the model
+    $model = new \Kendo\Data\DataSourceSchemaModel();
 
-        $productNameField = new \Kendo\Data\DataSourceSchemaModelField('ProductName');
-        $productNameField->type('string');
+    $productNameField = new \Kendo\Data\DataSourceSchemaModelField('ProductName');
+    $productNameField->type('string');
 
-        $model->addField($productNameField);
+    $model->addField($productNameField);
 
-        $schema = new \Kendo\Data\DataSourceSchema();
-        // Configure the schema to accept the format returned by DataSourceResult
-        $schema->model($model)
-               ->data('data')
-               ->errors('errors')
-               ->total('total');
+    $schema = new \Kendo\Data\DataSourceSchema();
+    // Configure the schema to accept the format returned by DataSourceResult
+    $schema->model($model)
+           ->data('data')
+           ->errors('errors')
+           ->total('total');
 
-        $dataSource = new \Kendo\Data\DataSource();
+    $dataSource = new \Kendo\Data\DataSource();
 
-        // Configure data source and enable server filtering operation.
-        $dataSource->transport($transport)
-                   ->schema($schema)
-                   ->serverFiltering(true);
-        ?>
+    // Configure data source and enable server filtering operation.
+    $dataSource->transport($transport)
+               ->schema($schema)
+               ->serverFiltering(true);
+    ?>
 
 **Step 3** Create an AutoComplete, configure its `dataTextField` option and set its `dataSource`.
 
 ###### Example
 
-        <?php
-        $autoComplete = new \Kendo\UI\AutoComplete('AutoComplete');
-        $autoComplete->dataSource($dataSource);
-        $autoComplete->dataTextField('ProductName');
-        ?>
+    <?php
+    $autoComplete = new \Kendo\UI\AutoComplete('AutoComplete');
+    $autoComplete->dataSource($dataSource);
+    $autoComplete->dataTextField('ProductName');
+    ?>
 
 **Step 4** Output the AutoComplete by echoing the result of the `render` method.
 
 ###### Example
 
-        <?php
-        echo $autoComplete->render();
-        ?>
+    <?php
+    echo $autoComplete->render();
+    ?>
 
 ### JSON-Returning File Creation (DataSourceResult)
 

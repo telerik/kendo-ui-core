@@ -259,6 +259,8 @@ navigation:
     "php":
         title: "UI for PHP"
         position: 10
+    "php/widgets":
+        title: "Classes"
     "troubleshoot":
         title: "Troubleshooting"
         position: 11
