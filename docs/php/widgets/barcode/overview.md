@@ -1,40 +1,51 @@
 ---
 title: Overview
-page_title: How to use Barcode PHP class | Kendo UI documentation
-description: User Guide for server-side wrapper for Kendo UI Barcode for PHP.
+page_title: Overview | Barcode PHP Class
+description: "Get started with the Barcode PHP class in Kendo UI."
+slug: overview_barcode_uiforphp
+position: 1
 ---
 
-# Barcode
+# Barcode PHP Class Overview
 
-The Barcode for PHP is a server-side wrapper for the [Kendo UI Barcode](/api/web/barcode) widget.
+The Kendo UI Barcode for PHP is a server-side wrapper for the [Kendo UI Barcode](/api/javascript/dataviz/ui/barcode) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo UI Barcode:
+### Configuration
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
+Below are listed the steps for you to follow when configuring the Kendo UI Barcode fro PHP.
 
-1. Add a barcode with the default [type](/api/web/barcode#configuration-type) (Code39):
+**Step 1** Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
+
+**Step 2** Add a Barcode with the default [`type`](/api/javascript/dataviz/ui/barcode#configuration-type) (Code39).
+
+###### Example
 
         $barcode = new \Kendo\Dataviz\UI\Barcode('barcode');
         $barcode->value("foo");
 
-1. Change the symbology to match your scenario:
+**Step 3** Change the symbology to match your scenario.
+
+###### Example
 
         $barcode = new \Kendo\Dataviz\UI\Barcode('barcode');
         $barcode->value("foo");
         $barcode->type("ean8");
 
-1. Output the chart by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+**Step 4** Output the chart by echoing the result of the `render` method.
+
+###### Example
 
         echo $barcode->render();
 
-## Accessing an Existing Barcode
+## Reference
 
-You can reference an existing Barcode instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/barcode#methods) to control its behavior.
+### Existing Instances
 
-### Accessing an existing Barcode instance
+You are able to reference an existing Barcode instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Barcode API](/api/javascript/dataviz/ui/barcode#methods) to control its behavior.
+
+###### Example
 
         // Put this after your Kendo Barcode for PHP render() call
         <script>
@@ -44,3 +55,11 @@ Once a reference has been established, you can use the [API](/api/web/barcode#me
             barcode.value("foo");
         });
         </script>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the Barcode:
+
+* [Overview of the Kendo UI Barcode Widget]({% slug overview_kendoui_barcode_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Tags Folder]({% slug overview_autocomplete_uiforphp %})
