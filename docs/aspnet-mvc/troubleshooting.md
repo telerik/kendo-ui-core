@@ -311,3 +311,16 @@ which returns the cached `XmlHttpRequest` result instead of making new request. 
         //TODO: return the updated data here!
         return Json(new string[] {});
     }
+
+## High Memory Consumption On The Server
+
+Using the [ASP.NET Bundling](http://www.asp.net/mvc/overview/performance/bundling-and-minification) with the
+large, pre-minified files such as kendo.all.min can result in high memory usage.
+
+The solution is to use plain Bundle instead of ScriptBudle for those files:
+
+    bundles.Add(new Bundle("~/bundles/kendo").Include(
+                "~/Scripts/kendo.all.min.js",
+                "~/Scripts/kendo.aspnetmvc.min.js",
+                "~/Scripts/kendo.timezones.min.js"));
+
