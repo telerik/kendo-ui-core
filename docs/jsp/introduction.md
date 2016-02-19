@@ -151,10 +151,10 @@ You are also able to include the JavaScript and CSS files from CDN. Do not forge
 
 To gain more practice on Telerik UI for JSP, watch the video tutorials on the [Kendo UI YouTube Channel](http://www.youtube.com/kendouitv):
 
-1. [Getting Started With Telerik UI for JSP (Episode 1)](https://www.youtube.com/watch?v=3VH75XVhLCI)
-1. [Getting Started With Telerik UI for JSP (Episode 2)](https://www.youtube.com/watch?v=LyGHeRMmq5I)
-1. [Getting Started With Telerik UI for JSP (Episode 3)](https://www.youtube.com/watch?v=sCwqj_ZRGI8)
-1. [Getting Started With Telerik UI for JSP (Episode 4)](https://www.youtube.com/watch?v=fcbw4YR4P2I)
+1. [Get Started with Telerik UI for JSP: Episode 1](https://www.youtube.com/watch?v=3VH75XVhLCI)
+1. [Get Started with Telerik UI for JSP: Episode 2](https://www.youtube.com/watch?v=LyGHeRMmq5I)
+1. [Get Started with Telerik UI for JSP: Episode 3](https://www.youtube.com/watch?v=sCwqj_ZRGI8)
+1. [Get Started with Telerik UI for JSP: Episode 4](https://www.youtube.com/watch?v=fcbw4YR4P2I)
 
 For more examples on how to use Kendo UI with JSP wrappers, visit the [GitHub repository with the collected Kendo UI examples on using JSP](https://github.com/telerik/kendo-examples-java).
 
