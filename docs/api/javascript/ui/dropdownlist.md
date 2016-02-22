@@ -529,7 +529,7 @@ The available "x" positions are:
       }
     });
     </script>
-    
+
 
 ### optionLabel `String | Object`*(default: "")*
 
@@ -578,6 +578,8 @@ in the optionLabel object**.
 ### optionLabelTemplate `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) used to render the option label.
+
+> **Important:** Define the [optionLabel](/api/javascript/kendo#configuration-optionLabel) as **object** if complex template structure is used
 
 ### headerTemplate `String|Function`
 
