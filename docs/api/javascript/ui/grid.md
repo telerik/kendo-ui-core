@@ -355,7 +355,7 @@ The text displayed by the command button and the "cancel", "edit" and "update" t
         { field: "name" },
         { field: "age" },
         { command: [{ name: "edit",
-                      text: { edit: "Custom edit", cancel: "Custom cancel", update: "Custom update" } }]  }
+                      text: { edit: "Custom edit", cancel: "Custom cancel", update: "Custom update" } }] }
       ],
       dataSource: {
         data: [
@@ -5599,6 +5599,20 @@ Supported values:
     });
     </script>
 
+> As of Q2 2016, when `paperSize` is specified the Grid will use `drawDOM`'s [automatic page breaking](/framework/drawing/drawing-dom#configuration-Automatic) algorithm.  This makes available a few new options: `template`, `repeatHeaders` and `scale`.
+
+### pdf.template `String` *(default: null)*
+
+A piece of HTML to be included in each page.  Can be used to display headers and footers.  See the documentation in [/framework/drawing/drawing-dom#Template](drawDOM).
+
+### pdf.repeatHeaders `boolean` *(default: false)*
+
+Set this to `true` to repeat the grid headers on each page.
+
+### pdf.scale `Number|Array|Object` *(default: null)*
+
+A scale factor.  In many cases, text size on screen will be too big for print, so you can use this option to scale down the output in PDF.  See the documentation in [/framework/drawing/drawing-dom#Scaling](drawDOM).
+
 ### pdf.proxyURL `String` *(default: null)*
 
 The URL of the server side proxy which will stream the file to the end user.
@@ -6910,7 +6924,7 @@ Use this method if you want to save the state of the Grid into a variable. It is
     var grid = $("#grid").data("kendoGrid");
     var options = grid.getOptions();
     console.log(options.sortable); //outputs true
-    
+
     // get only the Grid column settings
     var columnOptionsForSaving = kendo.stringify(options.columns);
     </script>
