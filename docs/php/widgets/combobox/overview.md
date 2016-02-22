@@ -1,24 +1,33 @@
 ---
 title: Overview
-page_title: How to use the ComboBox PHP class, server-side wrapper for Kendo UI ComboBox widget
-description: Learn how to bind Kendo UI ComboBox for PHP, handle Kendo UI ComboBox Events, access an existing combobox.
+page_title: Overview | ComboBox PHP Class
+description: "Get started with the ComboBox PHP class in Kendo UI."
+slug: overview_combobox_uiforphp
+position: 1
 ---
 
-# ComboBox
+# ComboBox PHP Class Overview
 
-The Kendo ComboBox for PHP is a server-side wrapper for the [Kendo UI ComboBox](/api/javascript/ui/combobox) widget.
+The Kendo UI ComboBox for PHP is a server-side wrapper for the [Kendo UI ComboBox](/api/javascript/ui/combobox) widget.
 
 ## Getting Started
 
-There are two ways to bind Kendo ComboBox for PHP:
+### The Basics
 
-* [local](/php/widgets/combobox/local-binding) - the combobox is bound to PHP array
-* [remote](/php/widgets/combobox/remote-binding) - the combobox makes AJAX requests and is bound to JSON result
+There are two ways to bind a Kendo UI ComboBox for PHP:
 
-Here is how to configure the combobox for local binding:
+* [Locally]({% slug localbinding_combobox_uiforphp %})&mdash;Local binding binds the ComboBox to a PHP array.
+* [Remotely]({% slug remotebinding_combobox_uiforphp %})&mdash;During remote binding the ComboBox makes AJAX requests and is bound to the JSON result.
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-2. Create an array which to which the combobox will be bound to
+### Configuration
+
+Below are listed the steps for you to follow when configuring the Kendo UI ComboBox for local binding.
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Create an array to which the ComboBox will be bound.
+
+###### Example
 
         <?php
         $data = array(
@@ -26,14 +35,18 @@ Here is how to configure the combobox for local binding:
             array('name' => 'Jane Doe', 'age' => 29)
         );
         ?>
-3. Create a [data source](/api/php/Kendo/Data/DataSource) and set its [data](/api/php/Kendo/Data/DataSource#data):
+**Step 3** Create a [data source](/api/php/Kendo/Data/DataSource) and set its [`data`](/api/php/Kendo/Data/DataSource#data).
+
+###### Example
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
         $dataSource->data($data);
         ?>
-4. Create a [combobox](/api/php/Kendo/UI/ComboBox), configure its [dataTextField](/api/php/Kendo/UI/ComboBox#datatextfield) and
-[dataValueField](/api/php/Kendo/UI/ComboBox#datavaluefield) options and set its [data source](/api/php/Kendo/UI/ComboBox#datasource).
+
+**Step 4** Create an [ComboBox](/api/php/Kendo/UI/ComboBox), configure its [`dataTextField`](/api/php/Kendo/UI/ComboBox#datatextfield) [`dataValueField`](/api/php/Kendo/UI/ComboBox#datavaluefield) options and set its [`DataSource`](/api/php/Kendo/UI/AutoComplete#datasource).
+
+###### Example
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -44,58 +57,80 @@ Here is how to configure the combobox for local binding:
         $comboBox->dataTextField('name');
         $comboBox->dataValueField('age');
         ?>
-5. Output the combobox by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+
+**Step 5** Output the ComboBox by echoing the result of the `render` method.
+
+###### Example
 
         <?php
         echo $comboBox->render();
         ?>
 
-## Getting Client-side Reference
+## Event Handling
 
-You can reference the client-side Kendo ComboBox instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/javascript/ui/combobox#methods) to control its behavior.
+You can subscribe to all ComboBox [events](/api/web/combobox#events).
 
+### Specify Function Names
 
-### Example
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-    <?php
-    $comboBox = new \Kendo\UI\ComboBox('combobox');
-    echo $comboBox->render();
-    ?>
-    <script>
-    $(function() {
-        // The constructor parameter is used as the 'id' HTML attribute of the combobox
-        var combobox = $("#combobox").data("kendoComboBox")
-    });
-    </script>
+###### Example
 
-## Handling Events
+        <?php
+        $comboBox = new \Kendo\UI\ComboBox('combobox');
 
-You can subscribe to all combobox [events](/api/javascript/ui/combobox#events).
+        // The 'combobox_change' JavaScript function will handle the 'change' event of the combobox
+        $comboBox->change('combobox_change');
 
-### Example - subscribing by specifying JavaScript function name
+        echo $comboBox->render();
+        ?>
+        <script>
+        function combobox_change() {
+            // Handle the change event
+        }
+        </script>
 
-    <?php
-    $comboBox = new \Kendo\UI\ComboBox('combobox');
+### Provide Inline Code
 
-    // The 'combobox_change' JavaScript function will handle the 'change' event of the combobox
-    $comboBox->change('combobox_change');
+The example below demonstrates how to provide inline JavaScript code.
 
-    echo $comboBox->render();
-    ?>
-    <script>
-    function combobox_change() {
-        // Handle the change event
-    }
-    </script>
+###### Example
 
-### Example - providing inline JavaScript code
+        <?php
+        $comboBox = new \Kendo\UI\ComboBox('combobox');
 
-    <?php
-    $comboBox = new \Kendo\UI\ComboBox('combobox');
+        // Provide inline JavaScript code that will handle the 'change' event of the combobox
+        $comboBox->change('function() { /* Handle the change event */ }');
 
-    // Provide inline JavaScript code that will handle the 'change' event of the combobox
-    $comboBox->change('function() { /* Handle the change event */ }');
+        echo $comboBox->render();
+        ?>
 
-    echo $comboBox->render();
-    ?>
+<!--*-->
+## Reference
+
+### Client-Side Instances
+
+You can reference the client-side Kendo UI ComboBox instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [ComboBox API](/api/javascript/ui/combobox#methods) to control its behavior.
+
+###### Example
+
+        <?php
+        $comboBox = new \Kendo\UI\ComboBox('combobox');
+        echo $comboBox->render();
+        ?>
+        <script>
+        $(function() {
+            // The constructor parameter is used as the 'id' HTML attribute of the combobox
+            var combobox = $("#combobox").data("kendoComboBox")
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the ComboBox:
+
+* [Local Binding of the ComboBox PHP Class]({% slug localbinding_combobox_uiforphp %})
+* [Remote Binding of the ComboBox PHP Class]({% slug remotebinding_combobox_uiforphp %})
+* [Overview of the Kendo UI ComboBox Widget]({% slug overview_kendoui_combobox_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

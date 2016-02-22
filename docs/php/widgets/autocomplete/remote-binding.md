@@ -113,13 +113,13 @@ The `DataSourceResult` class is a helper utility on top of PDO which simplifies 
 >
 > The following demo is using the sample SQLite database shipped with the Telerik UI for PHP** demos (`/wrappers/php/sample.db`).
 
-First, configure a Kendo AutoComplete for PHP binding and then implement the remote service which will return JSON.
+First, configure a Kendo UI AutoComplete for PHP binding and then implement the remote service which will return JSON.
 
 ### Configuration (DataSourceResult)
 
-Below are listed the steps for you to follow when configuring the AutoComplete for remote binding, using DataSourceResult.
+Below are listed the steps for you to follow when configuring the AutoComplete for remote binding, using `DataSourceResult`.
 
-**Step 1** Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
+**Step 1** Follow the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript and CSS files.
 
 **Step 2** Create a data source and configure it.
 
