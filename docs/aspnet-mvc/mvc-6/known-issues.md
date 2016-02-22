@@ -39,3 +39,7 @@ Come back often for updates.
 ### Chart
 
 - `ChartAreaStyle` enum is now by `ChartLineStyle`
+
+### MultiSelect
+
+- `TagMode` enum is now by `MultiSelectTagMode`
