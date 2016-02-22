@@ -84,7 +84,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
     $db = new PDO('sqlite:../sample.db');
     ?>
 
-**Step 3** Retrieve all records from the `Products` table.
+**Step 3** Retrieve all records from the **Products** table.
 
 ###### Example
 

@@ -81,7 +81,7 @@ Below are listed the steps for you to follow when binding the Kendo UI AutoCompl
     $autoComplete->dataTextField('ProductName');
     ?>
 
-**Step 6** Output the AutoComplete by echoing the result of the [`render`](/api/php/Kendo/UI/Widget#render) method.
+**Step 6** Output the AutoComplete by echoing the result of the `render` method.
 
 ###### Example
 
