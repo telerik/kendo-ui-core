@@ -978,6 +978,62 @@ The status of the request, as returned from [jQuery.ajax](http://api.jquery.com/
     dialog.bind("error", window_error);
     </script>
 
+### maximize
+
+Triggered when the window has been minimized by the user. Introduced in 2016.Q1.SP1
+
+#### Example - subscribe to the "maximize" event during initialization
+
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoWindow({
+      actions: ["Maximize"],
+      maximize: function(e) {
+        console.log("Window was maximized")
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "maximize" event after initialization
+
+    <div id="dialog"></div>
+    <script>
+    function window_maximize(e) {
+      console.log("Window was maximized")
+    }
+    $("#dialog").kendoWindow({ actions: ["Maximize"] });
+    var dialog = $("#dialog").data("kendoWindow");
+    dialog.bind("maximize", window_maximize);
+    </script>
+
+### minimize
+
+Triggered when the window has been minimized by the user. Introduced in 2016.Q1.SP1
+
+#### Example - subscribe to the "minimize" event during initialization
+
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoWindow({
+      actions: ["Minimize"],
+      minimize: function(e) {
+        console.log("Window was minimized")
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "minimize" event after initialization
+
+    <div id="dialog"></div>
+    <script>
+    function window_minimize(e) {
+      console.log("Window was minimized")
+    }
+    $("#dialog").kendoWindow({ actions: ["Minimize"] });
+    var dialog = $("#dialog").data("kendoWindow");
+    dialog.bind("minimize", window_minimize);
+    </script>
+
 ### open
 
 Triggered when a Window is opened (i.e. the open() method is called).

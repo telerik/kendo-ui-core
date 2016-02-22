@@ -79,6 +79,34 @@
         equal(triggers, 1);
     });
 
+    test("minimize triggers minimize event", function() {
+        var triggers = 0,
+            dialog = createWindow({
+                actions: ["Minimize", "Restore"],
+                minimize: function() {
+                    triggers++;
+                }
+            });
+
+        dialog.wrapper.find(".k-i-minimize").trigger("click");
+
+        equal(triggers, 1);
+    });
+
+    test("maximize triggers maximize event", function() {
+        var triggers = 0,
+            dialog = createWindow({
+                actions: ["Maximize", "Restore"],
+                maximize: function() {
+                    triggers++;
+                }
+            });
+
+        dialog.wrapper.find(".k-i-maximize").trigger("click");
+
+        equal(triggers, 1);
+    });
+
     asyncTest("error event gets triggered with proper information", function() {
         var dialog = createWindow({
                 error: function(e) {
