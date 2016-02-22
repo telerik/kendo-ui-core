@@ -1247,7 +1247,15 @@ var __meta__ = { // jshint ignore:line
             },
 
             _toggleOverflowAnchor: function() {
-                if (this.popup.element.children(":not(." + OVERFLOW_HIDDEN + ", ." + POPUP + ")").length > 0) {
+                var hasVisibleChildren = false;
+
+                if (this.options.mobile) {
+                    hasVisibleChildren = this.popup.element.find("." + OVERFLOW_CONTAINER).children(":not(." + OVERFLOW_HIDDEN + ", ." + POPUP + ")").length > 0;
+                } else {
+                    hasVisibleChildren = this.popup.element.children(":not(." + OVERFLOW_HIDDEN + ", ." + POPUP + ")").length > 0;
+                }
+
+                if (hasVisibleChildren) {
                     this.overflowAnchor.css({
                         visibility: "visible",
                         width: ""
