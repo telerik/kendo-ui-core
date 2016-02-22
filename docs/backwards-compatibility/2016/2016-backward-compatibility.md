@@ -8,6 +8,14 @@ slug: breakingchanges2016_kendoui
 
 # Kendo UI 2016 Breaking Changes
 
+## Kendo UI 2016 Q2
+
+### Changes from 2016 Q2 SP1 (2016.1)
+
+#### Breaking Changes
+
+* **Notification**: Content passed to the [show method](/api/javascript/ui/notification#methods-show) will be HTML-encoded. This neutralizes an attack vector for XSS. Use templates if you need to output raw HTML.
+
 ## Kendo UI 2016 Q1
 
 ### Changes from 2015 Q3 SP1 (2015.3.1111)

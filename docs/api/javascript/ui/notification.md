@@ -449,7 +449,7 @@ In order to encode script tags as HTML entities, use `#: #` expressions in the [
 
 ### show
 
-Displays a notification.
+Displays a notification with the provided content.
 
 #### Parameters
 
@@ -457,12 +457,14 @@ Displays a notification.
 
 **Required**. The string content for the notification; or the object with the values for the variables inside the notification template; or the function, which returns the required string or an object.
 
-##### type `String`
+> **Important** Starting with 2016.2 the content will be HTML-encoded. This makes it more resilient to XSS attacks. Use templates if you need to output markup. See the examples below.
+
+##### type `String` *(optional)*
 
 The notification type. Built-in types include `"info"`, `"success"`, `"warning"` and `"error"`. Custom types should match the types from the [template configuration](#configuration-templates).
 If this argument is not supplied, then `"info"` is assumed.
 
-#### Example - use the show method with a string argument
+#### Example - Use the show method to display a string
 
     <span id="notification"></span>
     <script>
@@ -471,7 +473,25 @@ If this argument is not supplied, then `"info"` is assumed.
     notificationWidget.show("foo text", "warning");
     </script>
 
-#### Example - use the show method with an object argument
+#### Example - Override the default template to include markup
+    <span id="notification"></span>
+    <script>
+        var notificationWidget = $("#notification").kendoNotification({
+            templates: [{
+                type: "info",
+                template:
+                '<div class="k-notification-wrap">' +
+                    '<span class="k-icon k-i-note">info</span>' +
+                        '<span style="color: red;">#: content #</span>' +
+                    '<span class="k-icon k-i-close">Hide</span>' +
+                '</div>'
+            }]
+        }).data("kendoNotification");
+
+        notificationWidget.show("foo bar");
+    </script>
+
+#### Example - Use the show method with a template and custom arguments
 
     <span id="notification"></span>
     <script>
@@ -484,7 +504,7 @@ If this argument is not supplied, then `"info"` is assumed.
     notificationWidget.show({ myMessage: "foo text" }, "myAlert");
     </script>
 
-#### Example - use the show method with a function argument
+#### Example - Use the show method and return the message from a function
 
     <span id="notification"></span>
     <script>
