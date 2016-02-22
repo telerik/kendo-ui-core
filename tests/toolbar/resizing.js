@@ -287,4 +287,29 @@
         equal(toolbar.overflowAnchor.css("visibility"), "hidden");
     });
 
+    module("Mobile Toolbar: resizing", {
+        setup: function() {
+            kendo.effects.disable();
+            container = $("<div id='toolbar' />").appendTo(QUnit.fixture);
+        },
+
+        teardown: function() {
+            if (container.data("kendoToolBar")) {
+                container.kendoToolBar("destroy");
+            }
+        }
+    });
+
+    test("Overflow anchor is NOT shown if the widget is wide enough to display all tools", 1, function() {
+        var toolbar = container.kendoToolBar({
+            mobile: true,
+            items: [
+                { type: "button", id: "foo", text: "foo" },
+                { type: "button", id: "bar", text: "bar" }
+            ]
+        }).data("kendoToolBar");
+
+        equal(toolbar.overflowAnchor.css("visibility"), "hidden");
+    });
+
 })();
