@@ -45,6 +45,8 @@ var __meta__ = { // jshint ignore:line
         DEACTIVATE = "deactivate",
         CLOSE = "close",
         REFRESH = "refresh",
+        MINIMIZE = "minimize",
+        MAXIMIZE = "maximize",
         RESIZE = "resize",
         RESIZEEND = "resizeEnd",
         DRAGSTART = "dragstart",
@@ -66,39 +68,6 @@ var __meta__ = { // jshint ignore:line
 
     function constrain(value, low, high) {
         return Math.max(Math.min(parseInt(value, 10), high === Infinity ? high : parseInt(high, 10)), parseInt(low, 10));
-    }
-
-    function sizingAction(actionId, callback) {
-        return function() {
-            var that = this,
-                wrapper = that.wrapper,
-                style = wrapper[0].style,
-                options = that.options;
-
-            if (options.isMaximized || options.isMinimized) {
-                return that;
-            }
-
-            that.restoreOptions = {
-                width: style.width,
-                height: style.height
-            };
-
-            wrapper
-                .children(KWINDOWRESIZEHANDLES).hide().end()
-                .children(KWINDOWTITLEBAR).find(MINIMIZE_MAXIMIZE).parent().hide()
-                    .eq(0).before(templates.action({ name: "Restore" }));
-
-            callback.call(that);
-
-            if (actionId == "maximize") {
-                that.wrapper.children(KWINDOWTITLEBAR).find(PIN_UNPIN).parent().hide();
-            } else {
-                that.wrapper.children(KWINDOWTITLEBAR).find(PIN_UNPIN).parent().show();
-            }
-
-            return that;
-        };
     }
 
     function executableScript() {
@@ -407,6 +376,8 @@ var __meta__ = { // jshint ignore:line
             ACTIVATE,
             DEACTIVATE,
             CLOSE,
+            MINIMIZE,
+            MAXIMIZE,
             REFRESH,
             RESIZE,
             RESIZEEND,
@@ -968,45 +939,78 @@ var __meta__ = { // jshint ignore:line
             return that;
         },
 
-        maximize: sizingAction("maximize", function() {
+        _sizingAction: function(actionId, callback) {
             var that = this,
                 wrapper = that.wrapper,
-                position = wrapper.position(),
-                doc = $(document);
+                style = wrapper[0].style,
+                options = that.options;
 
-            extend(that.restoreOptions, {
-                left: position.left,
-                top: position.top
+            if (options.isMaximized || options.isMinimized) {
+                return that;
+            }
+
+            that.restoreOptions = {
+                width: style.width,
+                height: style.height
+            };
+
+            wrapper
+                .children(KWINDOWRESIZEHANDLES).hide().end()
+                .children(KWINDOWTITLEBAR).find(MINIMIZE_MAXIMIZE).parent().hide()
+                    .eq(0).before(templates.action({ name: "Restore" }));
+
+            callback.call(that);
+
+            that.wrapper.children(KWINDOWTITLEBAR).find(PIN_UNPIN).parent().toggle(actionId !== "maximize");
+
+            that.trigger(actionId);
+
+            return that;
+        },
+
+        maximize: function() {
+            this._sizingAction("maximize", function() {
+                var that = this,
+                    wrapper = that.wrapper,
+                    position = wrapper.position(),
+                    doc = $(document);
+
+                extend(that.restoreOptions, {
+                    left: position.left,
+                    top: position.top
+                });
+
+                wrapper.css({
+                        left: 0,
+                        top: 0,
+                        position: "fixed"
+                    })
+                    .addClass(MAXIMIZEDSTATE);
+
+                this._documentScrollTop = doc.scrollTop();
+                this._documentScrollLeft = doc.scrollLeft();
+                $("html, body").css(OVERFLOW, HIDDEN);
+
+                that.options.isMaximized = true;
+
+                that._onDocumentResize();
             });
+        },
 
-            wrapper.css({
-                    left: 0,
-                    top: 0,
-                    position: "fixed"
-                })
-                .addClass(MAXIMIZEDSTATE);
+        minimize: function() {
+            this._sizingAction("minimize", function() {
+                var that = this;
 
-            this._documentScrollTop = doc.scrollTop();
-            this._documentScrollLeft = doc.scrollLeft();
-            $("html, body").css(OVERFLOW, HIDDEN);
+                that.wrapper.css({
+                    height: "",
+                    minHeight: ""
+                });
 
-            that.options.isMaximized = true;
+                that.element.hide();
 
-            that._onDocumentResize();
-        }),
-
-        minimize: sizingAction("minimize", function() {
-            var that = this;
-
-            that.wrapper.css({
-                height: "",
-                minHeight: ""
+                that.options.isMinimized = true;
             });
-
-            that.element.hide();
-
-            that.options.isMinimized = true;
-        }),
+        },
 
         pin: function(force) {
             var that = this,
