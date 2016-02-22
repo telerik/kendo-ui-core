@@ -36,7 +36,8 @@ var __meta__ = { // jshint ignore:line
                 '<span class="k-icon k-i-note">#=typeIcon#</span>' +
                 '#=content#' +
                 '<span class="k-icon k-i-close">Hide</span>' +
-            '</div>';
+            '</div>',
+        SAFE_TEMPLATE = TEMPLATE.replace("#=content#", "#:content#");
 
     var Notification = Widget.extend({
         init: function(element, options) {
@@ -105,13 +106,13 @@ var __meta__ = { // jshint ignore:line
             });
 
             that._defaultCompiled = kendoTemplate(TEMPLATE);
+            that._safeCompiled = kendoTemplate(SAFE_TEMPLATE);
         },
 
-        _getCompiled: function(type) {
-            var that = this;
-            var defaultCompiled = that._defaultCompiled;
+        _getCompiled: function(type, safe) {
+            var defaultCompiled = safe ? this._safeCompiled : this._defaultCompiled;
 
-            return type ? that._compiled[type] || defaultCompiled : defaultCompiled;
+            return type ? this._compiled[type] || defaultCompiled : defaultCompiled;
         },
 
         _compileStacking: function(stacking, top, left) {
@@ -342,7 +343,7 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
-        show: function(content, type) {
+        show: function(content, type, safe) {
             var that = this,
                 options = that.options,
                 wrapper = $(WRAPPER),
@@ -371,7 +372,7 @@ var __meta__ = { // jshint ignore:line
                     .toggleClass(KNOTIFICATION + "-button", options.button)
                     .attr("data-role", "alert")
                     .css({width: options.width, height: options.height})
-                    .append(that._getCompiled(type)(args));
+                    .append(that._getCompiled(type, safe)(args));
 
                 that.angular("compile", function(){
                     return {
@@ -390,6 +391,10 @@ var __meta__ = { // jshint ignore:line
             }
 
             return that;
+        },
+
+        showText: function(content, type) {
+            this.show(content, type, true);
         },
 
         info: function(content) {
