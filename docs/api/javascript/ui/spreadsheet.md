@@ -1290,6 +1290,20 @@ The object to load data from.  This should be **the deserialized object**, not t
 
 ## Events
 
+### change
+
+Triggered when a value in the spreadsheet has been changed. Introduced in 2016.Q1.SP1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.range `kendo.spreadsheet.Range`
+
+The [Range](/api/javascript/spreadsheet/range) that has triggered the change.
+
 ### render
 Triggered after the widget has completed rendering.
 
