@@ -1162,7 +1162,7 @@ var __meta__ = { // jshint ignore:line
 
             that.valueTemplate = template;
 
-            if (that.hasOptionLabel()) {
+            if (that.hasOptionLabel() && !that.options.optionLabelTemplate) {
                 try {
                     that.valueTemplate(that._optionLabelDataItem());
                 } catch(e) {

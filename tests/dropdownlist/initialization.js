@@ -954,6 +954,26 @@
         }
     });
 
+    test("widget doesn't throw an error when optionLabelTemplate is defined", 1, function() {
+        var widget;
+        try {
+            widget = new DropDownList(input, {
+                optionLabel: {
+                    text: "Select...",
+                    value: ""
+                },
+                optionLabelTemplate: "#=text#",
+                dataTextField: "text",
+                dataValueField: "value",
+                valueTemplate: "#=text# #=customField#"
+            });
+        } catch(e) {
+            ok(false);
+        }
+
+        equal(widget.span.text(), "Select...");
+    });
+
     test("widget renders filter header in input", function() {
         var dropdownlist = new DropDownList(input, {
             autoBind: false,
