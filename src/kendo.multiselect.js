@@ -454,6 +454,18 @@ var __meta__ = { // jshint ignore:line
             this.listView.refresh();
         },
 
+        _angularItems: function(cmd) {
+            var that = this;
+            that.angular(cmd, function(){
+                return {
+                    elements: that.items(),
+                    data: $.map(that.dataSource.flatView(), function(dataItem){
+                        return { dataItem: dataItem };
+                    })
+                };
+            });
+        },
+
         _listBound: function() {
             var that = this;
             var data = that.dataSource.flatView();
