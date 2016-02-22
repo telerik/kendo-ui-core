@@ -1,25 +1,33 @@
 ---
 title: Overview
-page_title: How to use the Chart PHP class, server-side wrapper for Kendo UI Chart widget
-description: Learn how to bind Kendo UI Chart for PHP, handle Kendo UI Chart Events, access an existing chart.
+page_title: Overview | Chart PHP Class
+description: "Get started with the Chart PHP class in Kendo UI."
+slug: overview_chart_uiforphp
+position: 1
 ---
 
-# Chart
+# Chart PHP Class Overview
 
-The Kendo Chart for PHP is a server-side wrapper for the [Kendo UI Chart](/api/dataviz/chart) widget.
+The Kendo UI Chart for PHP is a server-side wrapper for the [Kendo UI Chart](/api/javascript/dataviz/ui/chart) widget.
 
 ## Getting Started
 
-There are two ways to bind Kendo Chart for PHP:
+### The Basics
 
-* [local](/php/widgets/chart/local-binding) - the chart is bound to PHP array
-* [remote](/php/widgets/chart/remote-binding) - the chart makes AJAX requests and is bound to JSON result
+There are two ways to bind a Kendo UI Chart for PHP:
 
-Here is how to configure the chart for local binding:
+* [Locally]({% slug localbinding_chart_uiforphp %})&mdash;Local binding binds the Chart to a PHP array.
+* [Remotely]({% slug remotebinding_chart_uiforphp %})&mdash;During remote binding the Chart makes AJAX requests and is bound to the JSON result.
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
+### Configuration
 
-2. Create an array which to which the chart will be bound to
+Below are listed the steps for you to follow when configuring the Kendo UI Chart for local binding.
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Create an array to which the AutoComplete will be bound.
+
+###### Example
 
         <?php
         $data = array(
@@ -27,13 +35,19 @@ Here is how to configure the chart for local binding:
             array('name' => 'Jane Doe', 'age' => 29)
         );
         ?>
-3. Create a [data source](/api/php/Kendo/Data/DataSource) and set its [data](/api/php/Kendo/Data/DataSource#data):
+
+**Step 3** Create a [data source](/api/php/Kendo/Data/DataSource) and set its [`data`](/api/php/Kendo/Data/DataSource#data).
+
+###### Example
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
         $dataSource->data($data);
         ?>
-4. Create a [chart](/api/php/Kendo/Dataviz/UI/Chart), configure its [series](/api/php/Kendo/Dataviz/UI/Chart#addSeriesItem), [categoryAxis](/api/php/Kendo/Dataviz/UI/Chart#addCategoryAxisItem) and set its [data source](/api/php/Kendo/Dataviz/UI/Chart#datasource).
+
+**Step 4** Create a [Chart](/api/php/Kendo/Dataviz/UI/Chart), configure its [`series`](/api/php/Kendo/Dataviz/UI/Chart#addSeriesItem), [`categoryAxis`](/api/php/Kendo/Dataviz/UI/Chart#addCategoryAxisItem) and set its [`DataSource`](/api/php/Kendo/Dataviz/UI/Chart#datasource).
+
+###### Example
 
         <?php
         $ageSeries = new \Kendo\Dataviz\UI\ChartSeriesItem();
@@ -47,57 +61,80 @@ Here is how to configure the chart for local binding:
               ->addCategoryAxisItem($categoryAxis)
               ->dataSource($dataSource);
         ?>
-5. Output the chart by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+
+**Step 5** Output the Chart by echoing the result of the `render` method.
+
+###### Example
 
         <?php
         echo $chart->render();
         ?>
 
-## Getting Client-side Reference
+## Event Handling
 
-You can reference the clien-side Kendo Chart instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/dataviz/chart#methods) to control its behavior.
+You can subscribe to all Chart [events](/api/javascript/dataviz/ui/chart).
 
-### Example
+### Specify Function Names
 
-    <?php
-    $chart = new \Kendo\Dataviz\UI\Chart('chart');
-    echo $chart->render();
-    ?>
-    <script>
-    $(function() {
-        // The constructor parameter is used as the 'id' HTML attribute of the chart
-        var chart = $("#chart").data("kendoChart")
-    });
-    </script>
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-## Handling Events
+###### Example
 
-You can subscribe to all Chart [events](/api/dataviz/chart#events).
+        <?php
+        $chart = new \Kendo\Dataviz\UI\Chart('chart');
 
-### Example - subscribing by specifying JavaScript function name
+        // The 'chart_dataBound' JavaScript function will handle the 'dataBound' event of the chart
+        $chart->dataBound('chart_dataBound');
 
-    <?php
-    $chart = new \Kendo\Dataviz\UI\Chart('chart');
+        echo $chart->render();
+        ?>
+        <script>
+        function chart_dataBound() {
+            // Handle the dataBound event
+        }
+        </script>
 
-    // The 'chart_dataBound' JavaScript function will handle the 'dataBound' event of the chart
-    $chart->dataBound('chart_dataBound');
+### Provide Inline Code
 
-    echo $chart->render();
-    ?>
-    <script>
-    function chart_dataBound() {
-        // Handle the dataBound event
-    }
-    </script>
+The example below demonstrates how to provide inline JavaScript code.
 
-### Example - providing inline JavaScript code
+###### Example
 
-    <?php
-    $chart = new \Kendo\Dataviz\UI\Chart('chart');
+        <?php
+        $chart = new \Kendo\Dataviz\UI\Chart('chart');
 
-    // Provide inline JavaScript code that will handle the 'dataBound' event of the chart
-    $chart->dataBound('function() { /* Handle the dataBound event */ }');
+        // Provide inline JavaScript code that will handle the 'dataBound' event of the chart
+        $chart->dataBound('function() { /* Handle the dataBound event */ }');
 
-    echo $chart->render();
-    ?>
+        echo $chart->render();
+        ?>
+
+<!--*-->
+## Reference
+
+### Client-Side Instances
+
+You can reference the client-side Kendo UI Chart instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Chart API](/api/javascript/dataviz/ui/chart#methods) to control its behavior.
+
+###### Example
+
+        <?php
+        $chart = new \Kendo\Dataviz\UI\Chart('chart');
+        echo $chart->render();
+        ?>
+        <script>
+        $(function() {
+            // The constructor parameter is used as the 'id' HTML attribute of the chart
+            var chart = $("#chart").data("kendoChart")
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the Chart:
+
+* [Local Binding of the Chart PHP Class]({% slug localbinding_chart_uiforphp %})
+* [Remote Binding of the Chart PHP Class]({% slug remotebinding_chart_uiforphp %})
+* [Overview of the Kendo UI Chart Widget]({% slug overview_kendoui_charts_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})
