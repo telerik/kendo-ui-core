@@ -3,7 +3,7 @@ title: Walkthrough
 page_title: Walkthrough | Kendo UI Grid
 description: "Learn how to create a grid, add an HTML table and control the features of the Kendo UI Grid widget."
 slug: walkthrough_kendoui_grid_widget
-position: 1
+position: 2
 ---
 
 # Walkthrough
