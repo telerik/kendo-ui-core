@@ -163,6 +163,17 @@
         equal($(document.body).find("div.k-widget.k-notification").find("#foo").length, 1);
     });
 
+    test("showText method escapes passed markup content", function() {
+        createNotification();
+
+        notification.showText("<span>Foo</span>");
+
+        contains(
+            $(document.body).find("div.k-widget.k-notification").html(),
+            "&lt;span&gt;Foo&lt;/span&gt;"
+        );
+    });
+
     test("show method renders passed object content", function() {
         createNotification({
             templates: [{
@@ -186,6 +197,21 @@
         });
 
         ok($(document.body).find("div.k-widget.k-notification").html().indexOf(html) > -1);
+    });
+
+    test("showText method escapes passed function content", function() {
+        createNotification();
+
+        var html = '<div id="foo"></div>';
+
+        notification.showText(function(){
+            return html;
+        });
+
+        contains(
+            $(document.body).find("div.k-widget.k-notification").html(),
+            "&lt;div id=\"foo\"&gt;&lt;/div&gt;"
+        );
     });
 
     test("show method renders passed function object content", function() {
