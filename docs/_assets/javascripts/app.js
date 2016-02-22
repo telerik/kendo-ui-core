@@ -177,6 +177,8 @@ $(function(){
         tabstrip.kendoTabStrip({ animation: false });
     });
 
+    $(document).on("click", ".current-topic > div a", false);
+
     $("pre").addClass("prettyprint");
 
     prettyPrint();
