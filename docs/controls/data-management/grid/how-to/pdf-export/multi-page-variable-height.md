@@ -7,6 +7,14 @@ slug: howto_export_multiple_pageswith_variable_rowheight_pdf_grid
 
 # Export Multiple Pages with Variable Row Height
 
+> **Note:** As of Q2 2016, the method described here is obsolete.  It will
+> continue to work, but there should be no reason to do it manually like this,
+> as the grid will automatically do the right thing when the `pdf.paperSize`
+> option is passed.  It supports page template as well via the `pdf.template`
+> option.
+>
+> See [the demo](http://demos.telerik.com/kendo-ui/grid/pdf-export).
+
 You can split pages based on actual row height by using external paging.
 
 The built-in [multi-page PDF export functionality](/api/javascript/ui/grid#configuration-pdf.allPages) splits pages by record count according to the page definition at the data source level. However, this might not be desired if you have a grid with varying row-height. If so, render the grid in full and use the [page breaking]({% slug drawingofhtmlelements_drawingapi %}#automatic-page-breaking-q1-2015) functionality of the export module.
