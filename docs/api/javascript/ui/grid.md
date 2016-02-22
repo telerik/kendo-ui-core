@@ -5603,7 +5603,7 @@ Supported values:
 
 ### pdf.template `String` *(default: null)*
 
-A piece of HTML to be included in each page.  Can be used to display headers and footers.  See the documentation in [/framework/drawing/drawing-dom#Template](drawDOM).
+A piece of HTML to be included in each page.  Can be used to display headers and footers.  See the documentation in [drawDOM](/framework/drawing/drawing-dom#Template).
 
 ### pdf.repeatHeaders `boolean` *(default: false)*
 
@@ -5611,7 +5611,7 @@ Set this to `true` to repeat the grid headers on each page.
 
 ### pdf.scale `Number|Array|Object` *(default: null)*
 
-A scale factor.  In many cases, text size on screen will be too big for print, so you can use this option to scale down the output in PDF.  See the documentation in [/framework/drawing/drawing-dom#Scaling](drawDOM).
+A scale factor.  In many cases, text size on screen will be too big for print, so you can use this option to scale down the output in PDF.  See the documentation in [drawDOM](/framework/drawing/drawing-dom#Scaling).
 
 ### pdf.proxyURL `String` *(default: null)*
 
