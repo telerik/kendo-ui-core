@@ -662,8 +662,9 @@ Indicates whether the content should be fetched within an iframe, or with AJAX a
     });
 
     dialog.refresh({
-        url: "/userInfo",
+        url: "/userInfo", // returns JSON, { firstName: "Alyx", lastName: "Vance" }
         data: { userId: 42 },
+        dataType: "json",
         template: "Hello, #= firstName # #= lastName #"
     });
     </script>
