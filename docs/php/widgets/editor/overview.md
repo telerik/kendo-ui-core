@@ -1,84 +1,107 @@
 ---
 title: Overview
-page_title: How to use the Editor PHP class, server-side wrapper for Kendo UI Editor widget
-description: Getting started with Kendo UI Editor for PHP in quick steps - configure Kendo UI Editor widget and operate Kendo UI Editor events.
+page_title: Overview | Editor PHP Class
+description: "Get started with the Editor PHP class in Kendo UI."
+slug: overview_editor_uiforphp
+position: 1
 ---
 
-# Editor
+# Editor PHP Class Overview
 
-The Kendo Editor for PHP is a server-side wrapper for the [Kendo UI Editor](/api/javascript/ui/editor) widget.
+The Kendo UI Editor for PHP is a server-side wrapper for the [Kendo UI Editor](/api/javascript/ui/editor) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo Editor:
+### Configuration
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
+Below are listed the steps for you to follow when configuring the Kendo UI Editor for PHP.
 
-2. Create a [editor](/api/php/Kendo/UI/Editor).
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Create an [Editor](/api/javascript/ui/editor).
+
+###### Example
 
         <?php
         $editor = new \Kendo\UI\Editor('editor');
         $editor->value('#ff0000');
         ?>
 
-3. Output the editor by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+**Step 3** Output the Editor by echoing the result of the `render` method.
+
+###### Example
 
         <?php
         echo $editor->render();
         ?>
 
-## Getting the editor value on the server
+## Event Handling
 
-The editor posts its value HTML-encoded by default.
-You can either disable this functionality through the [encoded](/api/javascript/ui/editor#encoded-boolean-default) configuration option,
-or use [html_entity_decode](http://php.net/manual/en/function.html-entity-decode.php).
+You can subscribe to all Editor [events](/api/javascript/ui/datepicker#events).
 
-## Getting Client-side Reference
+### Specify Function Names
 
-You can reference the client-side Kendo Editor instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/javascript/ui/editor#methods) to control its behavior.
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
+###### Example
 
-### Example
+        <?php
+        $editor = new \Kendo\UI\Editor('editor');
 
-    <?php
-    $editor = new \Kendo\UI\Editor('editor');
-    echo $editor->render();
-    ?>
-    <script>
-    $(function() {
-        // The constructor parameter is used as the 'id' HTML attribute of the editor
-        var editor = $("#editor").data("kendoEditor")
-    });
-    </script>
+        // The 'editor_change' JavaScript function will handle the 'change' event of the editor
+        $editor->change('editor_change');
 
-## Handling Events
+        echo $editor->render();
+        ?>
+        <script>
+        function editor_change() {
+            // Handle the change event
+        }
+        </script>
 
-You can subscribe to all editor [events](/api/javascript/ui/editor#events).
+### Provide Inline Code
 
-### Example - subscribing by specifying JavaScript function name
+The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-    <?php
-    $editor = new \Kendo\UI\Editor('editor');
+###### Example
 
-    // The 'editor_change' JavaScript function will handle the 'change' event of the editor
-    $editor->change('editor_change');
+        <?php
+        $editor = new \Kendo\UI\Editor('editor');
 
-    echo $editor->render();
-    ?>
-    <script>
-    function editor_change() {
-        // Handle the change event
-    }
-    </script>
+        // Provide inline JavaScript code that will handle the 'change' event of the editor
+        $editor->change('function() { /* Handle the change event */ }');
 
-### Example - providing inline JavaScript code
+        echo $editor->render();
+        ?>
 
-    <?php
-    $editor = new \Kendo\UI\Editor('editor');
+<!--*-->
+## Reference
 
-    // Provide inline JavaScript code that will handle the 'change' event of the editor
-    $editor->change('function() { /* Handle the change event */ }');
+### Server-Side Value
 
-    echo $editor->render();
-    ?>
+The Editor posts its value HTML-encoded by default. You can either disable this functionality through the [`encoded`](/api/javascript/ui/editor#encoded-boolean-default) configuration option, or use [`html_entity_decode`](http://php.net/manual/en/function.html-entity-decode.php).
+
+### Client-Side Instances
+
+You are able to reference an existing Editor instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Editor API](/api/javascript/ui/editor#methods) to control its behavior.
+
+###### Example
+
+        <?php
+        $editor = new \Kendo\UI\Editor('editor');
+        echo $editor->render();
+        ?>
+        <script>
+        $(function() {
+            // The constructor parameter is used as the 'id' HTML attribute of the editor
+            var editor = $("#editor").data("kendoEditor")
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the Editor:
+
+* [Overview of the Kendo UI Editor Widget]({% slug overview_kendoui_editor_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})
