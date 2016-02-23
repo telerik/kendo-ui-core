@@ -1,20 +1,26 @@
 ---
 title: Overview
-page_title: How to use the DatePicker PHP class, server-side wrapper for Kendo UI DatePicker widget
-description: Getting started with Kendo UI DatePicker for PHP in quick steps - configure Kendo UI DatePicker widget and operate Kendo UI DatePicker events.
+page_title: Overview | DatePicker PHP Class
+description: "Get started with the DatePicker PHP class in Kendo UI."
+slug: overview_datepicker_uiforphp
+position: 1
 ---
 
-# DatePicker
+# DatePicker PHP Class Overview
 
-The Kendo DatePicker for PHP is a server-side wrapper for the [Kendo UI DatePicker](/api/web/datepicker) widget.
+The Kendo UI DatePicker for PHP is a server-side wrapper for the [Kendo UI DatePicker](/api/javascript/ui/datepicker) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo DatePicker:
+### Configuration
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
+Below are listed the steps for you to follow when configuring the Kendo UI DatePicker for PHP.
 
-2. Create a [datepicker](/api/php/Kendo/UI/DatePicker).
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Create a [DatePicker](/api/javascript/ui/datepicker).
+
+###### Example
 
         <?php
         $datepicker = new \Kendo\UI\DatePicker('datepicker');
@@ -23,59 +29,77 @@ Here is how to configure a simple Kendo DatePicker:
                    ->value(new DateTime('today', new DateTimeZone('UTC')));
         ?>
 
-3. Output the datepicker by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+**Step 3** Output the DatePicker by echoing the result of the `render` method.
+
+###### Example
 
         <?php
         echo $datepicker->render();
         ?>
 
+## Event Handling
 
-## Getting Client-side Reference
+You can subscribe to all DatePicker [events](/api/javascript/ui/datepicker#events).
 
-You can reference the client-side Kendo DatePicker instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/datepicker#methods) to control its behavior.
+### Specify Function Names
 
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-### Example
+###### Example
 
-    <?php
-    $datepicker = new \Kendo\UI\DatePicker('datepicker');
-    echo $datepicker->render();
-    ?>
-    <script>
-    $(function() {
-        // The constructor parameter is used as the 'id' HTML attribute of the datepicker
-        var datepicker = $("#datepicker").data("kendoDatePicker")
-    });
-    </script>
+        <?php
+        $datepicker = new \Kendo\UI\DatePicker('datepicker');
 
-## Handling Events
+        // The 'datepicker_change' JavaScript function will handle the 'change' event of the datepicker
+        $datepicker->change('datepicker_change');
 
-You can subscribe to all datepicker [events](/api/web/datepicker#events).
+        echo $datepicker->render();
+        ?>
+        <script>
+        function datepicker_change() {
+            // Handle the change event
+        }
+        </script>
 
-### Example - subscribing by specifying JavaScript function name
+### Provide Inline Code
 
-    <?php
-    $datepicker = new \Kendo\UI\DatePicker('datepicker');
+The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-    // The 'datepicker_change' JavaScript function will handle the 'change' event of the datepicker
-    $datepicker->change('datepicker_change');
+###### Example
 
-    echo $datepicker->render();
-    ?>
-    <script>
-    function datepicker_change() {
-        // Handle the change event
-    }
-    </script>
+        <?php
+        $datepicker = new \Kendo\UI\DatePicker('datepicker');
 
-### Example - providing inline JavaScript code
+        // Provide inline JavaScript code that will handle the 'change' event of the datepicker
+        $datepicker->change('function() { /* Handle the change event */ }');
 
-    <?php
-    $datepicker = new \Kendo\UI\DatePicker('datepicker');
+        echo $datepicker->render();
+        ?>
 
-    // Provide inline JavaScript code that will handle the 'change' event of the datepicker
-    $datepicker->change('function() { /* Handle the change event */ }');
+<!--*-->
+## Reference
 
-    echo $datepicker->render();
-    ?>
+### Client-Side Instances
+
+You are able to reference an existing DatePicker instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [DatePicker API](/api/javascript/ui/datepicker#methods) to control its behavior.
+
+###### Example
+
+        <?php
+        $datepicker = new \Kendo\UI\DatePicker('datepicker');
+        echo $datepicker->render();
+        ?>
+        <script>
+        $(function() {
+            // The constructor parameter is used as the 'id' HTML attribute of the datepicker
+            var datepicker = $("#datepicker").data("kendoDatePicker")
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the DatePicker:
+
+* [Overview of the Kendo UI DatePicker Widget]({% slug overview_kendoui_datepicker_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})
