@@ -4166,7 +4166,9 @@ var __meta__ = { // jshint ignore:line
                 kendo.data.transports = kendo.data.transports || {};
                 kendo.data.schemas = kendo.data.schemas || {};
 
-                if (kendo.data.transports[options.type] && !isPlainObject(kendo.data.transports[options.type])) {
+                if (!kendo.data.transports[options.type]) {
+                    kendo.logToConsole("Unknown DataSource transport type '" + options.type + "'.\nVerify that registration scripts for this type are included after Kendo UI on the page.", "warn");
+                } else if (!isPlainObject(kendo.data.transports[options.type])) {
                     transport = new kendo.data.transports[options.type](extend(transportOptions, { data: data }));
                 } else {
                     transportOptions = extend(true, {}, kendo.data.transports[options.type], transportOptions);
