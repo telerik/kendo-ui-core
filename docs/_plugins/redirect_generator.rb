@@ -15,20 +15,19 @@ module Jekyll
             FileUtils.mkdir_p(site.dest)
             File.write(File.join(site.dest, 'web.config'), web_config.output)
 
-            write_redirects(site, 'redirect-perm.map');
-            write_redirects(site, 'redirect-temp.map');
+            write_redirects(site);
 
             site.static_files << web_config
         end
 
-        def write_redirects(site, name)
+        def write_redirects(site)
+            name = 'redirects.conf'
             redirect = Page.new(site, site.source, '', name)
             redirect.content = File.read(File.join(site.source, name))
             redirect.render(Hash.new, site.site_payload)
-            redirect_output = redirect.output.gsub(/^$\n/, '')
 
             FileUtils.mkdir_p(site.dest)
-            File.write(File.join(site.dest, name), redirect_output);
+            File.write(File.join(site.dest, name), redirect.output);
 
             site.static_files << redirect
         end
