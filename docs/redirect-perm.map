@@ -1,5 +1,0 @@
-{% for page in site.redirect_pages %}
-{%   for redirect in page.previous_url %}
-~/kendo-ui/{{ redirect | remove_first: '/' }}$ /kendo-ui/{{ page.url | remove_first: '/' | replace: '.html', '' }};
-{%   endfor %}
-{% endfor %}
