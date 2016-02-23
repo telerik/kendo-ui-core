@@ -1,20 +1,26 @@
 ---
 title: Overview
-page_title: Kendo UI Menu for PHP widget documentation
-description: How to add and bind Kendo UI Menu for PHP widget.
+page_title: Overview | Menu PHP Class
+description: "Get started with the Menu PHP class in Kendo UI."
+slug: overview_menu_uiforphp
+position: 1
 ---
 
-# Menu
+# Menu PHP Class Overview
 
-The Menu class is a server-side wrapper for the [Kendo UI Menu](/api/web/menu) widget.
+The Kendo UI Menu for PHP is a server-side wrapper for the [Kendo UI Menu](/api/javascript/ui/menu) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo Menu:
+### Configuration
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
+Below are listed the steps for you to follow when configuring the Kendo UI Menu for PHP.
 
-1. Create a [menu](/api/php/Kendo/UI/Menu) and set its [items](/api/php/Kendo/UI/Menu#additem)
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Create a [Menu](/api/php/Kendo/UI/Menu) and set its [items](/api/php/Kendo/UI/Menu#additem).
+
+###### Example
 
         <?php
         $menu = new \Kendo\UI\Menu('menu');
@@ -38,59 +44,76 @@ Here is how to configure a simple Kendo Menu:
         $menu.addItem($item1, $item2);
         ?>
 
-1. Output the menu by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+**Step 3** Output the Menu by echoing the result of the `render` method.
+
+###### Example
 
         <?php
         echo $menu->render();
         ?>
 
-## Getting Client-side Reference
+## Event Handling
 
-You can reference the client-side Kendo Menu instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/menu#methods) to control its behavior.
+You can subscribe to all Editor [events](/api/javascript/ui/menu#events).
 
-### Example
+### Specify Function Names
 
-    <?php
-    $menu = new \Kendo\UI\Menu('menu');
-    echo $menu->render();
-    ?>
-    <script>
-    $(function() {
-        // The constructor parameter is used as the 'id' HTML attribute of the menu
-        var menu = $("#menu").data("kendoMenu");
-    });
-    </script>
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-## Handling Events
+###### Example
 
-You can subscribe to all menu [events](/api/web/menu#events).
+        <?php
+        $menu = new \Kendo\UI\Menu('menu');
 
-### Example - subscribing by specifying JavaScript function name
+        // The 'menu_select' JavaScript function will handle the 'select' event of the menu
+        $menu->expand('menu_select');
 
-    <?php
-    $menu = new \Kendo\UI\Menu('menu');
+        echo $menu->render();
+        ?>
+        <script>
+        function menu_select() {
+            // Handle the select event
+        }
+        </script>
 
-    // The 'menu_select' JavaScript function will handle the 'select' event of the menu
-    $menu->expand('menu_select');
+### Provide Inline Code
 
-    echo $menu->render();
-    ?>
-    <script>
-    function menu_select() {
-        // Handle the select event
-    }
-    </script>
+The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-### Example - providing inline JavaScript code
+###### Example
 
-    <?php
-    $menu = new \Kendo\UI\Menu('menu');
+        <?php
+        $menu = new \Kendo\UI\Menu('menu');
 
-    // Provide inline JavaScript code that will handle the 'select' event of the menu
-    $menu->select('function() { /* Handle the select event */ }');
+        // Provide inline JavaScript code that will handle the 'select' event of the menu
+        $menu->select('function() { /* Handle the select event */ }');
 
-    echo $menu->render();
-    ?>
+        echo $menu->render();
+        ?>
 
+<!--*-->
+## Reference
 
+### Client-Side Instances
+
+You are able to reference an existing Menu instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Menu API](/api/javascript/ui/editor#methods) to control its behavior.
+
+###### Example
+        <?php
+        $menu = new \Kendo\UI\Menu('menu');
+        echo $menu->render();
+        ?>
+        <script>
+        $(function() {
+            // The constructor parameter is used as the 'id' HTML attribute of the menu
+            var menu = $("#menu").data("kendoMenu");
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the Menu:
+
+* [Overview of the Kendo UI Menu Widget]({% slug overview_kendoui_menu_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})
