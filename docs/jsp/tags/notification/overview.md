@@ -10,9 +10,9 @@ position: 1
 
 The Notification JSP tag is a server-side wrapper for the [Kendo UI Notification](/api/javascript/ui/notification) widget.
 
-Before reading through this article, make sure you are familiar with the fundamental [Kendo UI widget concepts]({% slug initialize_widgets_using_jquery_plugins_installation %}) and the [Kendo UI Java wrappers]({% slug overview_uiforjsp %}) are set up correctly.
+Before reading on, make sure you are familiar with the fundamental [Kendo UI widget concepts]({% slug initialize_widgets_using_jquery_plugins_installation %}) and the [Kendo UI Java wrappers]({% slug overview_uiforjsp %}) are set up correctly.
 
-The Kendo UI Notification provides a styled UI widget with arbitrary content, which provides information to the user on various occasions.
+The Kendo UI Notification widget provides a styled UI widget with arbitrary content, which provides information to the user on various occasions.
 
 ## Getting Started
 
@@ -92,7 +92,7 @@ By default, popups are pinned&mdash;they do not move when the page is scrolled. 
 
 If the popup content varies and stacking is likely to occur, it is recommendable to define explicit dimensions, so that the popups are aligned and look better when stacked next to one another.
 
-The example below demonstrates how to manage the position, stacking and size of a notification.
+The example below demonstrates how to manage the position, stacking, and the size of a notification.
 
 ###### Example
 
@@ -114,9 +114,9 @@ The example below demonstrates how to enable static notifications.
 
 ### Templates
 
-Before reading through this section, make sure you are familiar with the [Kendo UI templates]({% slug overview_kendoui_templatescomponent %}).
+Before reading on, make sure you are familiar with the [Kendo UI templates]({% slug overview_kendoui_templatescomponent %}).
 
-The Notification widget allows the configuration of multiple templates. Each template is used together with its corresponding [notification type](#configuration-Notification) (either build-in or custom). If you define a custom template for a built-in notification type, you are no longer able to use the corresponding built-in template, but you are still able to use the shorthand show methods.
+The Notification widget allows the configuration of multiple templates. Each template is used together with its corresponding [notification type](#configuration-Notification) (either build-in or custom). If you define a custom template for a built-in notification type, you are no longer able to use the corresponding built-in template, but you can still use the shorthand show methods.
 
 The example below demonstrates how to use templates when configuring the Notification.
 
