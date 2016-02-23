@@ -54,7 +54,28 @@ The example below demonstrates how to set a set a `zip code` mask (Web Forms).
 
 > **Important**
 >
-> If no mask is defined, the widget allows any input.
+> If no mask is defined, the widget will allow any input.
+
+### Customize Mask Rules
+
+The MaskedTextBox enables you to define custom mask rules if none of the predefined ones is sufficient. To add a custom rule, use the `rules` method.
+
+The example below demonstrates how to define a custom rule for the `-` and `+` symbols.
+
+###### Example
+
+        <?php
+        $rules = array('~' => '/[+-]/');
+
+        $maskedtextbox = new \Kendo\UI\MaskedTextBox('maskedtextbox');
+        $maskedtextbox->rules($rules);
+        $maskedtextbox->mask("~0000");
+        echo $maskedtextbox->render();
+        ?>
+
+> **Important**
+>
+> The widget supports [JavaScript Reguler Expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) defined as a string or a JavaScript function.
 
 ## Event Handling
 
@@ -94,29 +115,7 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
         echo $maskedtextbox->render();
         ?>
-
 <!--*-->
-### Customize Mask Rules
-
-The MaskedTextBox enables you to define custom mask rules if none of the predefined ones is sufficient. To add a custom rule, use the `rules` method.
-
-The example below demonstrates how to define a custom rule for the `-` and `+` symbols.
-
-###### Example
-
-        <?php
-        $rules = array('~' => '/[+-]/');
-
-        $maskedtextbox = new \Kendo\UI\MaskedTextBox('maskedtextbox');
-        $maskedtextbox->rules($rules);
-        $maskedtextbox->mask("~0000");
-        echo $maskedtextbox->render();
-        ?>
-
-> **Important**
->
-> The widget supports [JavaScript Reguler Expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) defined as a string or a JavaScript function.
-
 ## Reference
 
 ### Client-Side Instances
