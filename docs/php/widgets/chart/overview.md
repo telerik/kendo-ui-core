@@ -25,7 +25,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Chart
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
 
-**Step 2** Create an array to which the AutoComplete will be bound.
+**Step 2** Create an array to which the Chart will be bound.
 
 ###### Example
 
