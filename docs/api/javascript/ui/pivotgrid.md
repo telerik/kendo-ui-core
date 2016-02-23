@@ -1073,7 +1073,7 @@ About the data item structure review this [help topic](/api/javascript/data/pivo
 
     <div id="pivotgrid"></div>
 
-    <script id="datacelltemplate" type="text/x-kendo-template">
+    <script id="dataCellTemplate" type="text/x-kendo-template">
         # if (columnTuple.members[0].name === "[Date].[Calendar].[Year].&[2005]") { #
             <em>#: kendo.toString(kendo.parseFloat(dataItem.value), "c2") #</em>
         # } else { #
