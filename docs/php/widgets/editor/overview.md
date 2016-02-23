@@ -37,7 +37,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Edito
 
 ## Event Handling
 
-You can subscribe to all Editor [events](/api/javascript/ui/datepicker#events).
+You can subscribe to all Editor [events](/api/javascript/ui/editor#events).
 
 ### Specify Function Names
 
