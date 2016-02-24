@@ -1,19 +1,26 @@
 ---
 title: Overview
-page_title: How to use the TabStrip PHP class, server-side wrapper for Kendo UI TabStrip widget
-description: Learn how to create Kendo UI TabStrip for PHP, handle Kendo UI TabStrip Events, access an existing tabstrip.
+page_title: Overview | TabStrip PHP Class
+description: "Get started with the TabStrip PHP class in Kendo UI."
+slug: overview_tabstrip_uiforphp
+position: 1
 ---
 
-# TabStrip
+# TabStrip PHP Class Overview
 
-The Kendo TabStrip for PHP is a server-side wrapper for the [Kendo UI TabStrip](/api/web/tabstrip) widget.
+The Kendo UI TabStrip for PHP is a server-side wrapper for the [Kendo UI TabStrip](/api/javascript/ui/tabstrip) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo TabStrip:
+### Configuration
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-1. Create a [tabstrip](/api/php/Kendo/UI/TabStrip) and set its [items](/api/php/Kendo/UI/TabStrip#addItem)
+Below are listed the steps for you to follow when configuring the Kendo UI TabStrip for PHP.
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Create a [TabStrip](/api/php/Kendo/UI/TabStrip) and set its [items](/api/php/Kendo/UI/TabStrip#addItem).
+
+###### Example
 
         <?php
         $tabstrip = new \Kendo\UI\TabStrip('tabstrip');
@@ -41,57 +48,77 @@ Here is how to configure a simple Kendo TabStrip:
         $tabstrip.addItem($item1, $item2);
         ?>
 
-1. Output the tabstrip by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+**Step 3** Output the TabStrip by echoing the result of the `render` method.
+
+###### Example
 
         <?php
         echo $tabstrip->render();
         ?>
 
-## Getting Client-side Reference
+## Event Handling
 
-You can reference the client-side Kendo TabStrip instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/tabstrip#methods) to control its behavior.
+You can subscribe to all TabStrip [events](/api/javascript/ui/tabstrip#events).
 
-### Example
+### Specify Function Names
 
-    <?php
-    $tabstrip = new \Kendo\UI\TabStrip('tabstrip');
-    echo $tabstrip->render();
-    ?>
-    <script>
-    $(function() {
-        // The constructor parameter is used as the 'id' HTML attribute of the tabstrip
-        var tabstrip = $("#tabstrip").data("kendoTabStrip");
-    });
-    </script>
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-## Handling Events
+###### Example
 
-You can subscribe to all tabstrip [events](/api/web/tabstrip#events).
+        <?php
+        $tabstrip = new \Kendo\UI\TabStrip('tabstrip');
 
-### Example - subscribing by specifying JavaScript function name
+        // The 'tabstrip_select' JavaScript function will handle the 'tabstrip_select' event of the tabstrip
+        $tabstrip->select('tabstrip_select');
 
-    <?php
-    $tabstrip = new \Kendo\UI\TabStrip('tabstrip');
+        echo $tabstrip->render();
+        ?>
+        <script>
+        function tabstrip_select() {
+            // Handle the select event
+        }
+        </script>
 
-    // The 'tabstrip_select' JavaScript function will handle the 'tabstrip_select' event of the tabstrip
-    $tabstrip->select('tabstrip_select');
+### Provide Inline Code
 
-    echo $tabstrip->render();
-    ?>
-    <script>
-    function tabstrip_select() {
-        // Handle the select event
-    }
-    </script>
+The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-### Example - providing inline JavaScript code
+###### Example
 
-    <?php
-    $tabstrip = new \Kendo\UI\TabStrip('tabstrip');
+        <?php
+        $tabstrip = new \Kendo\UI\TabStrip('tabstrip');
 
-    // Provide inline JavaScript code that will handle the 'select' event of the tabstrip
-    $tabstrip->select('function() { /* Handle the select event */ }');
+        // Provide inline JavaScript code that will handle the 'select' event of the tabstrip
+        $tabstrip->select('function() { /* Handle the select event */ }');
 
-    echo $tabstrip->render();
-    ?>
+        echo $tabstrip->render();
+        ?>
+
+<!--*-->
+## Reference
+
+### Client-Side Instances
+
+You are able to reference an existing TabStrip instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [TabStrip API](/api/javascript/ui/tabstrip#methods) to control its behavior.
+
+###### Example
+
+        <?php
+        $tabstrip = new \Kendo\UI\TabStrip('tabstrip');
+        echo $tabstrip->render();
+        ?>
+        <script>
+        $(function() {
+            // The constructor parameter is used as the 'id' HTML attribute of the tabstrip
+            var tabstrip = $("#tabstrip").data("kendoTabStrip");
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the TabStrip:
+
+* [Overview of the Kendo UI TabStrip Widget]({% slug overview_kendoui_tabstrip_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})
