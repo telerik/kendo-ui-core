@@ -188,15 +188,18 @@
             combobox.search("1");
             combobox.one("dataBound", function() {
                 combobox.select(2); //select "Item 111"
-                combobox.dataSource.filter([]);
 
-                setTimeout(function() {
-                    start();
-                    equal(combobox.select(), 111);
-                    equal(combobox.dataItem().value, 111);
-                    ok($("[data-offset-index=111]").hasClass("k-state-focused"));
-                    ok($("[data-offset-index=111]").hasClass("k-state-selected"));
-                }, 300);
+                combobox.bind("dataBound", function() {
+                    if (combobox.dataSource.page() > 1) { //wait until the binding is done
+                        start();
+                        equal(combobox.select(), 111);
+                        equal(combobox.dataItem().value, 111);
+                        ok($("[data-offset-index=111]").hasClass("k-state-focused"));
+                        ok($("[data-offset-index=111]").hasClass("k-state-selected"));
+                    }
+                });
+
+                combobox.dataSource.filter([]);
             });
         });
     });
