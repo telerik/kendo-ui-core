@@ -4226,6 +4226,7 @@ function pad(number, digits, end) {
                 0, 0, 0, 0, 0, false, false, false, false, 0, null);
 
             fileSaver.dispatchEvent(e);
+            URL.revokeObjectURL(dataURI);
         }
 
         kendo.saveAs = function(options) {
