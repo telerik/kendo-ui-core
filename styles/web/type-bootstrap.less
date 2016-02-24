@@ -2086,12 +2086,11 @@ html .km-pane-wrapper .km-widget,
     box-shadow: inset 0 0 0 1px @focused-item-shadow;
 }
 
-.k-grid tr:hover .k-state-focused,
 .k-grid tr.k-state-focused:hover td {
     background-color: lighten(@selected-background-color, 37%);
 }
 
-.k-grid tr:hover .k-state-selected,
+.k-grid td.k-state-selected:hover,
 .k-grid tr.k-state-selected:hover td {
     background-color: darken(@selected-background-color, 7%);
 }

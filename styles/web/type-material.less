@@ -2667,9 +2667,9 @@ border-color: @hover-background-color;
 border-color: @form-widgets-border-color;
 }
 
-td.k-state-focused.k-state-selected
+.k-grid td.k-state-focused.k-state-selected
 {
-.box-shadow(@focused-active-item-shadow);
+.box-shadow(@focused-item-shadow);
 }
 
 .k-calendar td.k-state-focused,
@@ -2981,7 +2981,7 @@ color: @base;
     border-color: darken(@selected-background, 10%);
 }
 
-.k-grid tr:hover .k-state-selected,
+.k-grid td.k-state-selected:hover,
 .k-grid tr.k-state-selected:hover td {
     background-color: darken(@selected-background, 4%);
 }
