@@ -1,54 +1,49 @@
 ---
 title: Overview
-page_title: How to use the Slider PHP class, server-side wrapper for Kendo UI Slider widget
-description: Learn how to create Kendo UI Slider for PHP, handle Kendo UI Slider Events, access an existing Slider.
+page_title: Overview | Slider PHP Class
+description: "Get started with the Slider PHP class in Kendo UI."
+slug: overview_slider_uiforphp
+position: 1
 ---
 
-# Slider
+# Slider PHP Class Overview
 
-The Kendo Slider for PHP is a server-side wrapper for the [Kendo UI Slider](/api/web/slider) widget.
+The Kendo UI Slider for PHP is a server-side wrapper for the [Kendo UI Slider](/api/javascript/ui/slider) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo Slider:
+### Configuration
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-1. Create a [slider](/api/php/Kendo/UI/Slider).
+Below are listed the steps for you to follow when configuring the Kendo UI Slider for PHP.
 
-        <?php
-        $slider = new \Kendo\UI\Slider('slider');
-        $slider->value(42);
-        ?>
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
 
-1. Output the slider by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+**Step 2** Create a [Slider](/api/php/Kendo/UI/Slider).
 
-        <?php
-        echo $slider->render();
-        ?>
-
-## Getting Client-side Reference
-
-You can reference the client-side Kendo Slider instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/slider#methods) to control its behavior.
-
-### Example
+###### Example
 
     <?php
     $slider = new \Kendo\UI\Slider('slider');
+    $slider->value(42);
+    ?>
+
+**Step 3** Output the Slider by echoing the result of the `render` method.
+
+###### Example
+
+    <?php
     echo $slider->render();
     ?>
-    <script>
-    $(function() {
-        // The constructor parameter is used as the 'id' HTML attribute of the slider
-        var slider = $("#slider").data("kendoSlider");
-    });
-    </script>
 
-## Handling Events
+## Event Handling
 
-You can subscribe to all slider [events](/api/web/slider#events).
+You can subscribe to all Slider [events](/api/javascript/ui/slider#events).
 
-### Example - subscribing by specifying JavaScript function name
+### Specify Function Names
+
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
+
+###### Example
 
     <?php
     $slider = new \Kendo\UI\Slider('slider');
@@ -64,7 +59,11 @@ You can subscribe to all slider [events](/api/web/slider#events).
     }
     </script>
 
-### Example - providing inline JavaScript code
+### Provide Inline Code
+
+The example below demonstrates how to subscribe to events by providing inline JavaScript code.
+
+###### Example
 
     <?php
     $slider = new \Kendo\UI\Slider('slider');
@@ -74,3 +73,31 @@ You can subscribe to all slider [events](/api/web/slider#events).
 
     echo $slider->render();
     ?>
+
+<!--*-->
+## Reference
+
+### Client-Side Instances
+
+You are able to reference an existing Slider instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Slider API](/api/javascript/ui/slider#methods) to control its behavior.
+
+###### Example
+
+    <?php
+    $slider = new \Kendo\UI\Slider('slider');
+    echo $slider->render();
+    ?>
+    <script>
+    $(function() {
+        // The constructor parameter is used as the 'id' HTML attribute of the slider
+        var slider = $("#slider").data("kendoSlider");
+    });
+    </script>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the Slider:
+
+* [Overview of the Kendo UI Slider Widget]({% slug overview_kendoui_slider_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})
