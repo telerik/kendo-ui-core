@@ -1106,7 +1106,9 @@ var __meta__ = { // jshint ignore:line
                     if (item.toolbar.options.type === "button" && item.toolbar.options.isChild) {
                         item.toolbar.getParentGroup().refresh();
                     }
-                } else if (item.overflow) {
+                }
+
+                if (item.overflow) {
                     item.overflow.show();
 
                     if (item.overflow.options.type === "button" && item.overflow.options.isChild) {

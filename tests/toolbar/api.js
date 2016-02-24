@@ -460,7 +460,7 @@
         ok(!($("#foo").hasClass("k-state-hidden")));
         ok($("#foo").is(":visible"));
 
-        ok(($("#foo_overflow").hasClass("k-state-hidden")));
+        ok(($("#foo_overflow").hasClass("k-overflow-hidden")));
     });
 
     test("Show method shows hidden button from Button group", 2, function() {
@@ -477,7 +477,7 @@
         toolbar.show("#foo");
         ok($("#foo").is(":visible"));
 
-        ok(($("#foo_overflow").hasClass("k-state-hidden")));
+        ok($("#foo_overflow").is(":hidden"));
     });
 
     test("After showing hidden button the button group updates k-group-start button", 1, function() {
