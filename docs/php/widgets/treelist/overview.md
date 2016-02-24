@@ -1,25 +1,34 @@
 ---
 title: Overview
-page_title: How to use the TreeList PHP class, server-side wrapper for Kendo UI TreeList widget
-description: Learn how to bind Kendo UI TreeList for PHP, handle Kendo UI TreeList Events, access an existing treelist.
+page_title: Overview | TreeList PHP Class
+description: "Get started with the TreeList PHP class in Kendo UI."
+slug: overview_treelist_uiforphp
+position: 1
 ---
 
-# TreeList
+# TreeList PHP Class Overview
 
-The Kendo TreeList for PHP is a server-side wrapper for the [Kendo UI TreeList](/api/web/treelist) widget.
+The Kendo UI TreeList for PHP is a server-side wrapper for the [Kendo UI TreeList](/api/javascript/ui/editor) widget.
 
 ## Getting Started
 
-There are three ways to bind Kendo TreeList for PHP:
+### The Basics
 
-* [local](/php/widgets/treelist/local-data-binding) - the treelist is bound to PHP array
-* [remote loading of all items](/php/widgets/treelist/index) - the treelist makes a single AJAX request that fetches all elements and is bound to JSON result
-* [remote loading on demand](/php/widgets/treelist/remote-data-binding) - the treelist makes AJAX requests when the user expands an item and is bound to JSON result
+There are three ways to bind a Kendo UI TreeList for PHP:
 
-Here is how to configure the treelist for local binding:
+* [Locally](/api/php/Kendo/UI/TreeList#methods-dataBinding)&mdash;Local binding binds the TreeList to a PHP array.
+* [Remotely, loading all items](/api/php/Kendo/UI/TreeList#methods-dataBinding)&mdash;During the remote loading of all items the TreeList makes a single AJAX request that fetches all elements, and is bound to the JSON result.
+* [Remotely, loading on demand](/api/php/Kendo/UI/TreeList#methods-dataBinding)&mdash;During the remote loading on demand the TreeList makes AJAX requests when the user expands an item, and is bound to the JSON result.
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-2. Create an array which to which the treelist will be bound to
+### Configuration
+
+Below are listed the steps for you to follow when configuring the Kendo UI TreeList for PHP for local binding.
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Create an array to which the [TreeList](/api/php/Kendo/UI/TreeList) will be bound to.
+
+###### Example
 
         <?php
         $data = array(
@@ -27,13 +36,19 @@ Here is how to configure the treelist for local binding:
             array('name' => 'Jane Doe', 'age' => 29, 'parentId' => null)
         );
         ?>
-3. Create a [data source](/api/php/Kendo/Data/DataSource) and set its [data](/api/php/Kendo/Data/DataSource#data):
+
+**Step 3** Create a [`dataSource`](/api/php/Kendo/Data/DataSource) and set its [`data`](/api/php/Kendo/Data/DataSource#data).
+
+###### Example
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
         $dataSource->data($data);
         ?>
-4. Create a [treelist](/api/php/Kendo/UI/TreeList), configure its [columns](/api/php/Kendo/UI/TreeList#addcolumn) and set its [data source](/api/php/Kendo/UI/TreeList#datasource).
+
+**Step 4** Create a [TreeList](/api/php/Kendo/UI/TreeList), configure its [columns](/api/php/Kendo/UI/TreeList#addcolumn) and set its [`dataSource`](/api/php/Kendo/UI/TreeList#datasource).
+
+###### Example
 
         <?php
         $nameColumn = new \Kendo\UI\TreeListColumn();
@@ -46,58 +61,78 @@ Here is how to configure the treelist for local binding:
         $treelist->addColumn($nameColumn, $ageColumn)
              ->dataSource($dataSource);
         ?>
-5. Output the treelist by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+
+**Step 5** Output the TreeList by echoing the result of the `render` method.
+
+###### Example
 
         <?php
         echo $treelist->render();
         ?>
 
-## Getting Client-side Reference
+## Event Handling
 
-You can reference the clien-side Kendo TreeList instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/treelist#methods) to control its behavior.
+You can subscribe to all TreeList [events](/api/javascript/ui/treelist#events).
 
+### Specify Function Names
 
-### Example
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-    <?php
-    $treelist = new \Kendo\UI\TreeList('employees');
-    echo $treelist->render();
-    ?>
-    <script>
-    $(function() {
-        // The constructor parameter is used as the 'id' HTML attribute of the treelist
-        var treelist = $("#employees").data("kendoTreeList")
-    });
-    </script>
+###### Example
 
-## Handling Events
+        <?php
+        $treelist = new \Kendo\UI\TreeList('treelist');
 
-You can subscribe to all treelist [events](/api/web/treelist#events).
+        // The 'treelist_dataBound' JavaScript function will handle the 'dataBound' event of the treelist
+        $treelist->dataBound('treelist_dataBound');
 
-### Example - subscribing by specifying JavaScript function name
+        echo $treelist->render();
+        ?>
+        <script>
+        function treelist_dataBound() {
+            // Handle the dataBound event
+        }
+        </script>
 
-    <?php
-    $treelist = new \Kendo\UI\TreeList('treelist');
+### Provide Inline Code
 
-    // The 'treelist_dataBound' JavaScript function will handle the 'dataBound' event of the treelist
-    $treelist->dataBound('treelist_dataBound');
+The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-    echo $treelist->render();
-    ?>
-    <script>
-    function treelist_dataBound() {
-        // Handle the dataBound event
-    }
-    </script>
+###### Example
 
-### Example - providing inline JavaScript code
+        <?php
+        $treelist = new \Kendo\UI\TreeList('treelist');
 
-    <?php
-    $treelist = new \Kendo\UI\TreeList('treelist');
+        // Provide inline JavaScript code that will handle the 'dataBound' event of the treelist
+        $treelist->dataBound('function() { /* Handle the dataBound event */ }');
 
-    // Provide inline JavaScript code that will handle the 'dataBound' event of the treelist
-    $treelist->dataBound('function() { /* Handle the dataBound event */ }');
+        echo $treelist->render();
+        ?>
 
-    echo $treelist->render();
-    ?>
+<!--*-->
+## Reference
+
+### Client-Side Instances
+
+You are able to reference an existing TreeList instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [TreeList API](/api/javascript/ui/treelist#methods) to control its behavior.
+
+###### Example
+
+          <?php
+          $treelist = new \Kendo\UI\TreeList('employees');
+          echo $treelist->render();
+          ?>
+          <script>
+          $(function() {
+              // The constructor parameter is used as the 'id' HTML attribute of the treelist
+              var treelist = $("#employees").data("kendoTreeList")
+          });
+          </script>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the TreeList:
+
+* [Overview of the Kendo UI TreeList Widget]({% slug overview_kendoui_treelist_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})
