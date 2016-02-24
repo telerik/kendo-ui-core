@@ -6,7 +6,7 @@ var lazypipe = require('lazypipe');
 var umdBegin = `
 (function(f){
     if (typeof define === 'function' && define.amd) {
-        define([ "../kendo.core" ], f);
+        define(["kendo.core"], f);
     } else {
         f();
     }
