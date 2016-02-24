@@ -78,7 +78,7 @@ As of now, the following basic specifiers are supported:
 - `"datetime"` — this is like `"number"`, because the time part is represented as a fraction of a day.
 - `"anyvalue"` — accepts any value type.
 - `"matrix"` — accepts a matrix argument. Тhis is either a range, e.g., `A1:C3`, or a literal matrix (see the **Matrices** section below).
-- `"null"` — requires a null (missing) argument. The reason for this specifier will be clarifuied in the **Optional Arguments** section.
+- `"null"` — requires a null (missing) argument. The reason for this specifier will be clarified in the **Optional Arguments** section.
 
 Again, to make it clear, some specifiers will actually modify the value that your function receives. For example, you could implement a function that truncates the argument to integer like this:
 
