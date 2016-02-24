@@ -1,76 +1,103 @@
 ---
 title: Overview
-page_title: How to use the ProgressBar PHP class, server-side wrapper for Kendo UI ProgressBar widget
-description: Learn how to create Kendo UI ProgressBar for PHP, handle Kendo UI ProgressBar Events, access an existing ProgressBar.
+page_title: Overview | ProgressBar PHP Class
+description: "Get started with the ProgressBar PHP class in Kendo UI."
+slug: overview_progressbar_uiforphp
+position: 1
 ---
 
-# ProgressBar
+# ProgressBar PHP Class Overview
 
-The Kendo ProgressBar for PHP is a server-side wrapper for the [Kendo UI ProgressBar](/api/web/progressbar) widget.
+The Kendo UI ProgressBar for PHP is a server-side wrapper for the [Kendo UI ProgressBar](/api/javascript/ui/progressbar) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo ProgressBar:
+### Configuration
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-2. Create a [ProgressBar](/api/php/Kendo/UI/ProgressBar).
+Below are listed the steps for you to follow when configuring the Kendo UI ProgressBar for PHP.
 
-		<?php
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Create a [ProgressBar](/api/javascript/ui/editor).
+
+###### Example
+
+  	<?php
 		  $pb = new \Kendo\UI\ProgressBar('progressBar');
 		  $pb->type('percent');
-		?>
+		 ?>
 
-3. Output the ProgressBar by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+**Step 3** Output the ProgressBar by echoing the result of the render method.
+
+###### Example
+
+ 	<?php
+	    echo $pb->render();
+	   ?>
+
+## Event Handling
+
+You can subscribe to all ProgressBar [events](/api/javascript/ui/progressbar#events).
+
+### Specify Function Names
+
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
+
+###### Example
 
 		<?php
-          echo $pb->render();
-        ?>
+	      $pb = new \Kendo\UI\ProgressBar('progressBar');
 
-## Getting Client-side Reference
+	      // The 'progressbar_change' JavaScript function will handle the 'change' event of the ProgressBar
+	      $pb->change('progressbar_change');
 
-You can reference the client-side Kendo ProgressBar instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/progressbar#methods) to control its behavior.
+	      echo $pb->render();
+	    ?>
+	    <script>
+	      function progressbar_change() {
+	        // Handle the change event
+	      }
+	    </script>
 
-### Example
+### Provide Inline Code
 
-	<?php
-      $pb = new \Kendo\UI\ProgressBar('progressBar');
-      echo $pb->render();
-    ?>
-    <script>
-      $(function() {
-        // The constructor parameter is used as the 'id' HTML attribute of the ProgressBar
-        var progressbar = $("#progressBar").data("kendoProgressBar");
-      });
-    </script>
+The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-## Handling Events
+###### Example
 
-You can subscribe to all ProgressBar [events](/api/web/progressbar#events).
+		<?php
+	      $pb = new \Kendo\UI\ProgressBar('progressBar');
 
-### Example - subscribing by specifying JavaScript function name
+	      // Provide inline JavaScript code that will handle the 'change' event of the ProgressBar
+	      $pb->change('function() { /* Handle the change event */ }');
 
-	<?php
-      $pb = new \Kendo\UI\ProgressBar('progressBar');
+	      echo $pb->render();
+	    ?>
 
-      // The 'progressbar_change' JavaScript function will handle the 'change' event of the ProgressBar
-      $pb->change('progressbar_change');
+<!--*-->
+## Reference
 
-      echo $pb->render();
-    ?>
-    <script>
-      function progressbar_change() {
-        // Handle the change event
-      }
-    </script>
+### Client-Side Instances
 
-### Example - providing inline JavaScript code
+You are able to reference an existing ProgressBar instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Editor API](/api/javascript/ui/progressbar#methods) to control its behavior.
 
-	<?php
-      $pb = new \Kendo\UI\ProgressBar('progressBar');
+###### Example
 
-      // Provide inline JavaScript code that will handle the 'change' event of the ProgressBar
-      $pb->change('function() { /* Handle the change event */ }');
+			<?php
+		      $pb = new \Kendo\UI\ProgressBar('progressBar');
+		      echo $pb->render();
+		    ?>
+		    <script>
+		      $(function() {
+		        // The constructor parameter is used as the 'id' HTML attribute of the ProgressBar
+		        var progressbar = $("#progressBar").data("kendoProgressBar");
+		      });
+  	    </script>
 
-      echo $pb->render();
-    ?>
+## See Also
+
+Other articles on Telerik UI for PHP and on the ProgressBar:
+
+* [Overview of the Kendo UI ProgressBar Widget]({% slug overview_kendoui_progressbar_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})
