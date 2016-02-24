@@ -1,35 +1,44 @@
 ---
 title: Overview
-page_title: How to use RadialGauge PHP class | Kendo UI documentation
-description: User Guide for server-side wrapper for Kendo UI RadialGauge for PHP.
+page_title: Overview | RadialGauge PHP Class
+description: "Get started with the RadialGauge PHP class in Kendo UI."
+slug: overview_radialgauge_uiforphp
+position: 1
 ---
 
-# Radial Gauge
+# RadialGauge PHP Class Overview
 
-The RadialGauge PHP class is a server-side wrapper for the [Kendo UI DataViz RadialGauge](/api/dataviz/radialgauge) widget.
+The Kendo UI RadialGauge for PHP is a server-side wrapper for the [Kendo UI RadialGauge](/api/javascript/dataviz/ui/radialgauge) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo UI RadialGauge:
+### Configuration
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
+Below are listed the steps for you to follow when configuring the Kendo UI RadialGauge for PHP.
 
-3.  Add a radial gauge:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Add a [RadialGauge](/api/php/Kendo/Dataviz/UI/RadialGauge).
+
+###### Example
 
         $gauge = new \Kendo\Dataviz\UI\RadialGauge('gauge');
         $gauge->pointer(array('value' => 10))
               ->scale(array('min' => 0, 'max' => 100));
 
-1. Output the chart by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+**Step 3** Output the RadialGauge by echoing the result of the `render` method.
+
+###### Example
 
         echo $gauge->render();
 
-## Accessing an Existing Radial Gauge
+## Reference
 
-You can reference an existing RadialGauge instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/dataviz/radialgauge#methods) to control its behavior.
+### Client-Side Instances
 
-### Accessing an existing RadialGauge instance
+You are able to reference an existing RadialGauge instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [RadialGauge API](/api/javascript/dataviz/ui/radialgauge#methods) to control its behavior.
+
+###### Example
 
         // Put this after your Kendo RadialGauge for PHP render() call
         <script>
@@ -40,3 +49,10 @@ Once a reference has been established, you can use the [API](/api/dataviz/radial
         });
         </script>
 
+## See Also
+
+Other articles on Telerik UI for PHP and on the RadialGauge:
+
+* [Overview of the Kendo UI RadialGauge Widget]({% slug overview_kendoui_radialgaugewidget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})
