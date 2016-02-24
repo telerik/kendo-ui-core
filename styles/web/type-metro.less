@@ -1290,11 +1290,6 @@ div.k-filebrowser-dropzone em
     .box-shadow(@active-shadow);
 }
 
-.k-grid td.k-state-selected.k-state-focused
-{
-    background-color: lighten(@selected-background-color, 3%);
-}
-
 .k-popup,
 .k-menu .k-menu-group,
 .k-grid .k-filter-options,
@@ -2071,7 +2066,8 @@ html .km-pane-wrapper .km-widget,
     color: @secondary-text-color;
 }
 
-.k-grid tr:hover {
+.k-grid tr:hover,
+.k-grid td.k-state-selected:hover {
     color: @hover-text-color;
     background-color: @hover-background;
 }
@@ -2086,7 +2082,6 @@ html .km-pane-wrapper .km-widget,
 }
 
 .k-grid tr:hover .k-state-focused,
-.k-grid tr.k-state-selected:hover td,
 .k-grid tr .k-state-focused.k-state-selected,
 .k-grid tr.k-state-selected td.k-state-focused,
 .k-grid tr:hover .k-state-focused.k-state-selected,
