@@ -430,6 +430,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "timelineMonth": "Zeitstrahl Monat"
   },
   "deleteWindowTitle": "Termin löschen",
+  "defaultRowText": "Alle Termine",
   "showFullDay": "Ganzen Tag anzeigen",
   "showWorkDay": "Geschäftszeiten anzeigen",
   "ariaSlotLabel": "Ausgewählt von {0:t} bis {1:t}",

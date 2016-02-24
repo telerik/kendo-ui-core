@@ -534,6 +534,7 @@ var __meta__ = { // jshint ignore:line
 
         set: function(field, value) {
             var that = this,
+                isSetPrevented = false,
                 composite = field.indexOf(".") >= 0,
                 current = kendo.getter(field, true)(that);
 
@@ -545,7 +546,9 @@ var __meta__ = { // jshint ignore:line
                     current.unbind(CHANGE, this._handlers[field].change);
                 }
 
-                if (!that.trigger("set", { field: field, value: value })) {
+                isSetPrevented = that.trigger("set", { field: field, value: value });
+
+                if (!isSetPrevented) {
                     if (!composite) {
                         value = that.wrap(value, field, function() { return that; });
                     }
@@ -554,6 +557,8 @@ var __meta__ = { // jshint ignore:line
                     }
                 }
             }
+
+            return isSetPrevented;
         },
 
         parent: noop,
@@ -741,13 +746,17 @@ var __meta__ = { // jshint ignore:line
 
         set: function(field, value, initiator) {
             var that = this;
+            var dirty = that.dirty;
 
             if (that.editable(field)) {
                 value = that._parse(field, value);
 
                 if (!equal(value, that.get(field))) {
                     that.dirty = true;
-                    ObservableObject.fn.set.call(that, field, value, initiator);
+
+                    if (ObservableObject.fn.set.call(that, field, value, initiator) && !dirty) {
+                        that.dirty = dirty;
+                    }
                 }
             }
         },
@@ -3261,7 +3270,7 @@ var __meta__ = { // jshint ignore:line
                 this.offlineData(state.concat(destroyed));
 
                 if (updatePristine) {
-                    this._pristineData = state;
+                    this._pristineData = this._readData(state);
                 }
             }
         },
@@ -4157,7 +4166,9 @@ var __meta__ = { // jshint ignore:line
                 kendo.data.transports = kendo.data.transports || {};
                 kendo.data.schemas = kendo.data.schemas || {};
 
-                if (kendo.data.transports[options.type] && !isPlainObject(kendo.data.transports[options.type])) {
+                if (!kendo.data.transports[options.type]) {
+                    kendo.logToConsole("Unknown DataSource transport type '" + options.type + "'.\nVerify that registration scripts for this type are included after Kendo UI on the page.", "warn");
+                } else if (!isPlainObject(kendo.data.transports[options.type])) {
                     transport = new kendo.data.transports[options.type](extend(transportOptions, { data: data }));
                 } else {
                     transportOptions = extend(true, {}, kendo.data.transports[options.type], transportOptions);

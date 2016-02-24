@@ -31,7 +31,7 @@ This is a `POCO` object that mirrors the object structure of the JSON and provid
 
 The following section contains typical usage scenarios, as they would appear in an ASP.NET MVC application.
 
-> **Important**  
+> **Important**
 > There is no strict dependency on the type of server framework used. Popular choices like MVC, WebAPI and WebForms work equally well.
 
 ### Load Data from an External File
@@ -67,6 +67,22 @@ public class HomeController : Controller
         });
     });
 </script>
+```
+
+### Load Data from an External File using BindTo method
+
+Here we'll load a file from the file system and use it populate Spreadsheet widget. The supported file extensions are .xlsx, .csv, .txt, and .json.
+
+```cshtml
+@{
+    var path = Server.MapPath("~/App_Data/path/to/document.xlsx");
+    var workbook = Telerik.Web.Spreadsheet.Workbook.Load(path);
+}
+
+@(Html.Kendo().Spreadsheet()
+    .Name("spreadsheet")
+    .BindTo(workbook)
+)
 ```
 
 ### Save a Workbook to an External File

@@ -1,33 +1,46 @@
 ---
 title: Overview
-page_title: How to use the Sortable PHP class, server-side wrapper for Kendo UI Sortable widget
-description: Learn how to create Kendo UI Sortable for PHP, handle Kendo UI Sortable Events, access an existing sortable.
+page_title: Overview | Sortable PHP Class
+description: "Get started with the Sortable PHP class in Kendo UI."
+slug: overview_sortable_uiforphp
+position: 1
 ---
 
-# Sortable
+# Sortable PHP Class Overview
 
-The Kendo Sortable for PHP is a server-side wrapper for the [Kendo UI Sortable](/api/web/sortable) widget.
+The Kendo UI Sortable for PHP is a server-side wrapper for the [Kendo UI Sortable](/api/javascript/ui/sortable) widget.
 
 ## Getting Started
 
-Unlike most of the server side wrapper the Sortable one does not render HTML mark-up. **The Sortable should be initialized for already existing DOM element.**
+Unlike most of the server-side wrappers, the Kendo UI Sortable one does not render HTML markup. Therefore, the Sortable should be initialized for a DOM element that already exists.
 
-Here is how to configure a simple Kendo Sortable:
+### Configuration
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-2. Create a [sortable](/api/php/Kendo/UI/Sortable), set its container and customize the hint and placeholder of the widget
+Below are listed the steps for you to follow when configuring the Kendo UI Sortable for PHP.
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Create a [Sortable](/api/php/Kendo/UI/Sortable), set its container, and customize the hint and placeholder of the widget.
+
+###### Example
 
         <?php
         $sortable = new \Kendo\UI\Sortable('#sortable-basic'); // select the container for the Sortable
         $sortable->hint(new \Kendo\JavaScriptFunction('hint'))
                  ->placeholder(new \Kendo\JavaScriptFunction('placeholder'));
         ?>
-3. Output the sortable by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+
+**Step 3** Output the Sortable by echoing the result of the `render` method.
+
+###### Example
 
         <?php
         echo $sortable->render();
         ?>
-4. Define the HTML mark-up and hint/placeholder JavaScript functions
+
+**Step 4** Define the HTML markup and the hint/placeholder JavaScript functions.
+
+###### Example
 
         <ul id="sortable-basic">
             <li class="sortable">Papercut <span>3:04</span></li>
@@ -38,71 +51,90 @@ Here is how to configure a simple Kendo Sortable:
             function hint(element) {
                 return element.clone().addClass("hint");
             }
-    
+
             function placeholder(element) {
                 return element.clone().addClass("placeholder").text("drop here");
             }
         </script>
 
-## Getting Client-side Reference
+## Event Handling
 
-You can reference the client-side Kendo Sortable instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/sortable#methods) to control its behavior.
+You can subscribe to all Sortable [events](/api/javascript/ui/sortable#events).
 
-### Example
+### Specify Function Names
 
-    <?php
-    $sortable = new \Kendo\UI\Sortable('#sortable');
-    echo $sortable->render();
-    ?>
-    <script>
-    $(function() {
-        // The constructor parameter is used as a selector for getting sortable's element
-        var sortable = $("#sortable").data("kendoSortable");
-    });
-    </script>
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-## Handling Events
+###### Example
 
-You can subscribe to all sortable [events](/api/web/sortable#events).
+        <?php
+        $sortable = new \Kendo\UI\Sortable('#sortable');
 
-### Example - subscribing by specifying JavaScript function name
+        // The 'onChange' JavaScript function will handle the 'change' event of the sortable
+        $sortable->change('onChange');
 
-    <?php
-    $sortable = new \Kendo\UI\Sortable('#sortable');
+        echo $sortable->render();
+        ?>
+        <script>
+        function onChange(e) {
+            // Handle the show event
+        }
+        </script>
 
-    // The 'onChange' JavaScript function will handle the 'change' event of the sortable
-    $sortable->change('onChange');
+### Provide Inline Code
 
-    echo $sortable->render();
-    ?>
-    <script>
-    function onChange(e) {
-        // Handle the show event
-    }
-    </script>
+The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-### Example - providing inline JavaScript code
+###### Example
 
-    <?php
-    $sortable = new \Kendo\UI\Sortable('#sortable');
+        <?php
+        $sortable = new \Kendo\UI\Sortable('#sortable');
 
-    // Provide inline JavaScript code that will handle the 'change' event of the sortable
-    $sortable->change('function(e) { /* Handle the change event */ }');
+        // Provide inline JavaScript code that will handle the 'change' event of the sortable
+        $sortable->change('function(e) { /* Handle the change event */ }');
 
-    echo $sortable->render();
-    ?>
+        echo $sortable->render();
+        ?>
 
-## Disabling the hint
+<!--*-->
+## Disable Hints
 
-The Sortable widget can operate without hint. To disable the hint you should set it to an empty function ([jQuery.noop](http://api.jquery.com/jQuery.noop/)).
+The Sortable widget can operate without a hint. To disable the hint, set it to an empty function ([jQuery.noop](http://api.jquery.com/jQuery.noop/)).
 
-    <?php
-        $sortable = new \Kendo\UI\Sortable('#sortable-basic'); // select the container for the Sortable
-        $sortable->hint(new \Kendo\JavaScriptFunction('noHint'));
-    ?>
-    
-    <script>
-        var noHint = $.noop;
-    </script>
+###### Example
 
+        <?php
+            $sortable = new \Kendo\UI\Sortable('#sortable-basic'); // select the container for the Sortable
+            $sortable->hint(new \Kendo\JavaScriptFunction('noHint'));
+        ?>
+
+        <script>
+            var noHint = $.noop;
+        </script>
+
+## Reference
+
+### Client-Side Instances
+
+You are able to reference an existing Sortable instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Sortable API](/api/javascript/ui/sortable#methods) to control its behavior.
+
+###### Example
+
+        <?php
+        $sortable = new \Kendo\UI\Sortable('#sortable');
+        echo $sortable->render();
+        ?>
+        <script>
+        $(function() {
+            // The constructor parameter is used as a selector for getting sortable's element
+            var sortable = $("#sortable").data("kendoSortable");
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the Sortable:
+
+* [Overview of the Kendo UI Sortable Widget]({% slug overview_kendoui_sortable_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

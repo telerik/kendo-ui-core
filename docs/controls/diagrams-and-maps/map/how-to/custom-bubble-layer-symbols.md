@@ -1,6 +1,6 @@
 ---
 title: Render Custom Symbols for Bubble Layers
-page_title: Render Custom Symbols for Bubble Layers | Kendo UI Map Widget
+page_title: Render Custom Symbols for Bubble Layers | Kendo UI Map
 description: "Learn how to render custom symbols on Kendo UI Map Bubble layers."
 slug: howto_rendercustomsymbols_forbubblelayers_map
 ---

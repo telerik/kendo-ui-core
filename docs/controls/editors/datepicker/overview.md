@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI DatePicker Widget
+page_title: Overview | Kendo UI DatePicker
 description: "Learn how to initialize the Kendo UI DatePicker widget and configure its options."
 slug: overview_kendoui_datepicker_widget
 position: 1
@@ -23,6 +23,7 @@ The [Kendo UI DatePicker widget](http://demos.telerik.com/kendo-ui/datepicker/in
     </script>
 
 > **Important**
+>
 > The widget copies any styles and CSS classes from the input element to the wrapper element.
 
 ## Configuration
@@ -130,9 +131,7 @@ The widget is designed to keep the input value unchanged, even when the typed da
 - The widget allows different date parse formats, which require unrestricted user input. Refer to the [`parseFormats`](/api/javascript/ui/datepicker#configuration-parseFormats) option for more details.
 - The widget does not update automatically the typed text, when it is invalid. This would lead to unexpected behavior if the widget changes the input value.
 
-The best way to validate the DatePicker widget is to use a client-validation framework, such as the [Kendo UI Validator]({% slug overview_kendoui_validator_widget %}). Thus you are able to provide meaningful error message to end users pointing them to the right actions to resolve the issue. Check our online validation demos for more details:
-
-- [Custom validation](http://demos.telerik.com/kendo-ui/validator/custom-validation)
+The best way to validate the DatePicker widget is to use a client-validation framework, such as the [Kendo UI Validator]({% slug overview_kendoui_validator_widget %}). Thus you are able to provide meaningful error message to end users pointing them to the right actions to resolve the issue. For more details, check the [online custom validation demos](http://demos.telerik.com/kendo-ui/validator/custom-validation).
 
 ## See Also
 
@@ -152,7 +151,7 @@ Other articles on Kendo UI DatePicker:
 * [How to Show Out-of-Range Dates as Disabled]({% slug howto_show_outofrange_dates_disabled_datepicker %})
 * [How to Submit Forms on ENTER]({% slug howto_submmit_forms_onenter_datepicker %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the DatePicker Widget](/aspnet-mvc/helpers/datepicker/overview)
-* [Overview of the DatePicker JSP Tag](/jsp/tags/datepicker/overview)
+* [Overview of the DatePicker JSP Tag]({% slug overview_datepicker_uiforjsp %})
 * [Overview of the DatePicker PHP Class](/php/widgets/datepicker/overview)
 * [DatePicker JavaScript API Reference](/api/javascript/ui/datepicker)
 

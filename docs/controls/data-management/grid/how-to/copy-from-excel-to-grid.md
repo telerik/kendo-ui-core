@@ -1,6 +1,6 @@
 ---
 title: Copy Data from Excel
-page_title: Copy Data from Excel | Kendo UI Grid Widget
+page_title: Copy Data from Excel | Kendo UI Grid
 description: "Learn how to copy data from Excel in a Kendo UI Grid."
 slug: howto_copy_datafrom_excel_grid
 ---

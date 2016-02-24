@@ -1,6 +1,6 @@
 ---
 title: Show Only All-Day Events
-page_title: Show Only All-Day Events | Kendo UI Scheduler Widget
+page_title: Show Only All-Day Events | Kendo UI Scheduler
 description: "Learn how to show only all-day events in a Kendo UI Scheduler widget."
 slug: howto_showonlyalldayevents_scheduler
 ---

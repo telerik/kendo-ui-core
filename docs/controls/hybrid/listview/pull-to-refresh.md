@@ -1,20 +1,25 @@
 ---
-title: Pull to refresh
+title: Pull-to-Refresh Pattern
+page_title: Pull-to-Refresh Pattern | Hybrid UI ListView
+description: "Learn how to use the pull-to-refresh pattern of the Hybrid UI ListView in the Kendo UI framework."
 previous_url: /howto/howto-use-the-mobile-listview-with-pull-to-refresh
+slug: pulltorefreshfeature_hybridlistview
 position: 3
 ---
 
-# Use the Mobile ListView with pull-to-refresh
+# Pull-to-Refresh Pattern
 
-The Kendo UI mobile ListView widget is used to display flat or grouped list of items. It can be either used in unbound mode by enhancing an HTML `UL` element, or bound to a DataSource instance.
+The [Hybrid UI ListView widget](http://demos.telerik.com/kendo-ui/m/index#mobile-listview/index) is used to display flat or grouped lists of items. It can be either used in the unbound mode by enhancing an HTML `ul` element, or bound to a DataSource instance.
 
-'Pull to refresh' pattern solves the problem when the developer has to display a data with dynamic character.
+The Pull-to-refresh pattern solves the issue that occurs when you have to display data of dynamic character.
 
-## Create a Mobile ListView with pull-to-refresh
+## Getting Started
 
-Let's see how the mobile ListView works by building a simple example that integrates the Twitter API.
+### Create ListViews with Pull-to-Refresh
 
-First, we'll define a target HTML element such as a list:
+**Step 1** Define a target HTML element such as a list.
+
+###### Example
 
     <ul id="localListView"></ul>
 
@@ -29,7 +34,10 @@ First, we'll define a target HTML element such as a list:
         </div>
     </script>
 
-Next, we will initialize the Mobile ListView by referring the template and a result set from the Twitter API to be displayed:
+<!--_-->
+**Step 2** Initialize the ListView by referring the template and a result set from the Twitter API to be displayed.
+
+###### Example
 
     var dataSource = new kendo.data.DataSource({
         serverPaging: true,
@@ -59,16 +67,17 @@ Next, we will initialize the Mobile ListView by referring the template and a res
         template: $("#pull-to-refresh-template").text(),
     });
 
-Here's the live example of the representation (above):
+This is the live example of the representation above:
 
 <a class="jsbin-embed" href="http://jsbin.com/ukitas/1/embed?live">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
 
-## Send Additional Parameters
+### Send Additional Parameters
 
-The Mobile ListView provides a way to define [pullParameters](/api/mobile/listview#pullparameters-function) function, which will add its result to the data send to the server.
-These data will be available in the DataSource's [parameterMap](/api/framework/datasource#transportparametermap-function) function.
+The Hybrid UI ListView provides a way to define the [`pullParameters`](/api/mobile/listview#pullparameters-function) function, which will add its result to the data that is sent to the server. This data will be available in the DataSource's [`parameterMap`](/api/framework/datasource#transportparametermap-function) function.
 
-Let's modify the above example to send [an additional parameter](https://dev.twitter.com/docs/api/1.1/get/search/tweets#api-param-since_id) to Twitter service:
+**Step 1** Modify the above example to send [an additional parameter](https://dev.twitter.com/docs/api/1.1/get/search/tweets#api-param-since_id) to the Twitter service.
+
+###### Example
 
     $("#pull-to-refresh-listview").kendoMobileListView({
         dataSource: dataSource,
@@ -84,7 +93,9 @@ Let's modify the above example to send [an additional parameter](https://dev.twi
         }
     });
 
-Now we can use this additional parameter in the `parameterMap` function of the DataSource:
+**Step 2** Use this additional parameter in the `parameterMap` function of the DataSource.
+
+###### Example
 
     var dataSource = new kendo.data.DataSource({
         serverPaging: true,
@@ -108,6 +119,15 @@ Now we can use this additional parameter in the `parameterMap` function of the D
         }
     });
 
-Here's the live example of the above example:
+This is the live example of the representation above:
 
 <a class="jsbin-embed" href="http://jsbin.com/iloqid/1/embed?live">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
+
+## See Also
+
+Other articles and how-to examples on the Hybrid UI ListView:
+
+* [Hybrid UI ListView JavaScript API Reference](/api/javascript/mobile/ui/listview)
+* [Overview of the Hybrid UI ListView]({% slug overview_hybridlistview %})
+* [Endless Scrolling Feature]({% slug endlessscrolling_hybridlistview %})
+* [How to Use jsSignature]({% slug howto_usejssignature_hybridlistview %})

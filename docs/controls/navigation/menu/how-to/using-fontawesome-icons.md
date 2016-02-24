@@ -1,6 +1,6 @@
 ---
 title: Use FontAwesome Icons
-page_title: Use FontAwesome Icons | Kendo UI Menu Widget
+page_title: Use FontAwesome Icons | Kendo UI Menu
 description: "Learn how to include custom FontAwesome icons in the Kendo UI Menu widget."
 slug: howto_use_fontawesome_icons_menu
 ---

@@ -1,6 +1,6 @@
 ---
 title: Set Different Start Weekday
-page_title: Set Different Start Weekday | Kendo UI Scheduler Widget
+page_title: Set Different Start Weekday | Kendo UI Scheduler
 description: "Learn how to set a different start weekday in the Kendo UI Scheduler widget."
 slug: howto_setdifferent_startweekday_scheduler
 ---

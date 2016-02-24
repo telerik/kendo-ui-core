@@ -33,6 +33,14 @@ A function returning a visual element to render for the content of a connection.
 
 Specifies the name of the source shape connector that should be used by default.
 
+### fromX `Number`
+
+The absolute point (X-coordinate), if any, that the connection is originating from.
+
+### fromY `Number`
+
+The absolute point (Y-coordinate), if any, that the connection is originating from.
+
 ### stroke `Object`
 
 Defines the stroke configuration.
@@ -244,6 +252,14 @@ Specifies if the connection can be selected.
 
 Specifies the name of the target shape connector that should be used by default.
 
+### toX `Number`
+
+The absolute point (X-coordinate), if any, that the connection is pointing to.
+
+### toY `Number`
+
+The absolute point (Y-coordinate), if any, that the connection is pointing to.
+
 ### type `String`
 
 Specifies the connection type. The supported values are `"polyline"` and `"cascading"`.
@@ -255,6 +271,12 @@ The data item, if any, for the connection.
 
 ### from `kendo.dataviz.diagram.Shape`
 The shape, if any, that the connection originates from.
+
+### sourceConnector `kendo.dataviz.diagram.Connector`
+The connector, if any, that the connection originates from.
+
+### targetConnector `kendo.dataviz.diagram.Connector`
+The connector, if any, that the connection points to.
 
 ### to `kendo.dataviz.diagram.Shape`
 The shape, if any, that the connection points to.
@@ -361,6 +383,12 @@ This is the union of the endpoints and the intermediate points.
 ### redraw
 
 Redraws the Connection with the given options.
+
+#### Parameters
+
+##### options `Object` *optional*
+The new options for the connection. This object should follow the configuration structure.
+
 
 ##### Example - changing the Connection after it has been added
 

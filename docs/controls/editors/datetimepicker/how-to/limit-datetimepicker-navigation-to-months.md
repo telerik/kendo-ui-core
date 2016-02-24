@@ -1,6 +1,6 @@
 ---
 title: Limit Navigation to Months
-page_title: Limit Navigation to Months | Kendo UI DateTimePicker Widget
+page_title: Limit Navigation to Months | Kendo UI DateTimePicker
 description: "Learn how to limit the Kendo UI DateTimePicker navigation to months only."
 slug: howto_limit_navigation_tomonths_datetimepicker
 ---

@@ -1,47 +1,60 @@
 ---
 title: Endless Scrolling
+page_title: Endless Scrolling | Hybrid UI ListView
+description: "Use the endless scrolling feature of the Hybrid UI ListView in the Kendo UI framework."
 previous_url: /howto/howto-use-the-mobile-listview-with-endless-scrolling
+slug: endlessscrolling_hybridlistview
+position: 2
 ---
 
-# Use the ListView of Kendo UI Mobile With Endless Scrolling
+# Endless Scrolling
 
-The listview widget supports displaying large amounts of data by appending additional pages of data on demand.
-Loading can happen automatically by enabling [endless scrolling](/api/mobile/listview#configuration-endlessScroll), or by displaying a button at the bottom ([ press to load more ](/api/mobile/listview#configuration-loadMore)).
-Enabling endless scrolling or press to load more options triggers the **virtual mode** of the ListView.
+The [Hybrid UI ListView widget](http://demos.telerik.com/kendo-ui/m/index#mobile-listview/index) supports displaying large amounts of data by appending additional pages of data on demand. Loading can happen automatically by enabling the [endless scrolling functionality](/api/mobile/listview#configuration-endlessScroll), or by displaying a button at the bottom ([ press to load more ](/api/mobile/listview#configuration-loadMore)).
 
-In order for the listview virtual mode to be working as expected, the listview should be the only widget in the scrolling container. In case more widgets are needed in the view in question, the listview should be wrapped in a mobile scroller container.
+## Virtual Mode
 
-The virtual mode interacts and alters the behavior of the containing scroller widget (by default, the view scroller). Native scrolling (view with `use-native-scrolling=true` or scroller with `use-native=true` attributes) **is not supported**.
+Enabling endless scrolling or pressing to load more options trigger the virtual mode of the ListView. In order for the ListView virtual mode to be working as expected, the ListView should be the only widget in the scrolling container. If more widgets are needed in the view in question, the ListView should be wrapped in a mobile scroller container.
 
-In virtual mode, fixed amount of DOM elements is rendered, and then dynamically repositioned and updated when the user scrolls the view. In endless scrolling mode, the next page is automatically prefetched when the user scrolls past two thirds of the current set of items.
+The virtual mode interacts and alters the behavior of the containing scroller widget&mdash;by default, the view scroller. Native scrolling&mdash;a view with the `use-native-scrolling=true`, or scroller with the `use-native=true` attribute&mdash;is not supported.
 
+In virtual mode, a fixed amount of DOM elements is rendered, and then dynamically repositioned and updated when the user scrolls the view. In the endless scrolling mode, the next page is automatically pre-fetched when the user scrolls past two thirds of the current set of items.
+
+> **Important**
+>
 > The amount of actual DOM elements used in virtual mode is equal to half of the datasource page size option.
 
-In order for the scrolling to occur smoothly, the page size should **not be too low**.
-For example, if 5 items are visible on the page, at least 15 physical DOM elements are needed, which means that the DataSource page size should be 30 or greater.
+In order for the scrolling to occur smoothly, the page size should not be too low. For example, if five items are visible on the page, at least fifteen physical DOM elements are needed, which means that the DataSource page size should be thirty or more.
 
 > Bigger DataSource page size ensures smooth scrolling, but has adverce effects on view transition performance.
 
-Once the listview reaches the amount of items specified by the [schema.total](/api/framework/datasource#configuration-schema.total) setting of the datasource, the loadmore button/endless scrolling indicator is hidden.
+Once the ListView reaches the amount of items specified by the [schema.total](/api/framework/datasource#configuration-schema.total) setting of the datasource, the loadmore button/endless scrolling indicator is hidden.
 
-> Currently, certain features (**grouped mode** and **inset styling**) are **not supported** in virtual mode.
+> **Important**
+>
+> Currently, certain features, such as the grouped mode and inset styling, are not supported in virtual mode.
 
-## Create a Mobile ListView with Endless Scrolling
+## Getting Started
 
-First step is to decide what will be the best way to get the additional data. Here are the possible ways:
+### Create ListViews with Endless Scrolling
 
-- **local** - The whole data is serialized on the client. As the user scrolls down, new data is displayed.
-- **remote** - Only the first page of the data will serialized and rendered on the client. When the user reaches the end of the list an Ajax request will be made to fetch the next portion of the data.
+First, decide what the best way to get the additional data is. The possible ways to do this are:
 
-### Bind the Mobile ListView to a Local Data
+- `local`&mdash;The whole data is serialized on the client. As the user scrolls down, new data is displayed.
+- `remote`&mdash;Only the first page of the data is serialized and rendered on the client. When the user reaches the end of the list, an Ajax request is made to fetch the next portion of the data.
 
-Let's see how the Mobile ListView works by building a simple example that uses locally generated data.
+## Data Binding
 
-First, we'll define a target HTML element such as a list:
+### Bind to Local Arrays
+
+**Step 1** Define a target HTML element such as a list.
+
+###### Example
 
     <ul id="localListView"></ul>
 
-Next we will define a function, which will return a list of generated data:
+**Step 2** Define a function, which will return a list of generated data, as demonstrated in the example below.
+
+###### Example
 
         //generate local data
         function getData() {
@@ -55,12 +68,16 @@ Next we will define a function, which will return a list of generated data:
             return data;
         }
 
-Next task is to create a DataSource instance. Please note that the `pageSize` is required:
+**Step 3** Create a DataSource instance. Note that the `pageSize` is required.
+
+###### Example
 
         //define the DataSource
         var dataSource = new kendo.data.DataSource({ data: getData() });
 
-Finally, we will initialize the Mobile ListView:
+**Step 4** Initialize the ListView.
+
+###### Example
 
         //initialize the Mobile ListView
         $("#listView").kendoMobileListView({
@@ -71,13 +88,15 @@ Finally, we will initialize the Mobile ListView:
             virtualViewSize: 50 // needed setting, since local data virtualization does not use paging
         });
 
-Here's the live example of the representation (above):
+This is the live example of the representation above:
 
 <a class="jsbin-embed" href="http://jsbin.com/ituVUTE/3/embed?live">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
 
-### Bind the Mobile ListView to a Remote Data
+### Bind to Remote Data
 
-For this example we will use the Northwind odata data. The ListView may be defined via a declarative binding:
+**Step 1** Define the ListView via a declarative binding.
+
+###### Example
 
     <div data-role="view" data-init="viewInit">
          <header data-role="header">
@@ -91,7 +110,9 @@ For this example we will use the Northwind odata data. The ListView may be defin
         #: ProductName #
     </script>
 
-Next, we will need to define a DataSource instance, which will fetch the data from the Northwind oData service:
+**Step 2** Define a DataSource instance that will fetch the data from the Northwind oData service.
+
+###### Example
 
     var dataSource = new kendo.data.DataSource({
       type: "odata",
@@ -112,8 +133,16 @@ Next, we will need to define a DataSource instance, which will fetch the data fr
       pageSize: 50
     });
 
-
-Here's the live example of the representation (above):
+<!--__-->
+This is the live example of the representation above:
 
 <a class="jsbin-embed" href="http://jsbin.com/eHocUTI/2/embed?live">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
 
+## See Also
+
+Other articles and how-to examples on the Hybrid UI ListView:
+
+* [Hybrid UI ListView JavaScript API Reference](/api/javascript/mobile/ui/listview)
+* [Overview of the Hybrid UI ListView]({% slug overview_hybridlistview %})
+* [Pull-to-Refresh Feature]({% slug pulltorefreshfeature_hybridlistview %})
+* [How to Use jsSignature]({% slug howto_usejssignature_hybridlistview %})

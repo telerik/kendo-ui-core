@@ -1,6 +1,6 @@
 ---
 title: Detect When All Widgets Are Bound
-page_title: Detect When All Widgets Are Bound | Kendo UI ComboBox Widget
+page_title: Detect When All Widgets Are Bound | Kendo UI ComboBox
 description: "Learn how to use promises to detect when all widgets are bound in Kendo UI ComboBox."
 slug: howto_detect_when_widgets_bound_combobox
 ---
@@ -121,3 +121,4 @@ Other articles on Kendo UI ComboBox:
 * [How to Select Items on Tab]({% slug howto_select_items_ontab_combobox %})
 * [How to Blur the ComboBox after Select]({% slug howto_blur_after_select_combobox %})
 * [How to Disable Child Cascading ComboBoxes]({% slug howto_disable_child_cascading_combobox %})
+* [How to Define Virtual Configuration Declaratively]({% slug howto_define_virtual_option_combobox %})

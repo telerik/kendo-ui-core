@@ -1,6 +1,6 @@
 ---
 title: Align Footer Cells
-page_title: Align Footer Cells | Kendo UI Grid Widget
+page_title: Align Footer Cells | Kendo UI Grid
 description: "Learn how to export to Excel more than one Kendo UI Grid."
 slug: howto_alignfootercells_grid
 ---

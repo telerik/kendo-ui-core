@@ -1,6 +1,6 @@
 ---
 title: Use Custom Culture Script
-page_title: Use Custom Culture Script | Kendo UI NumericTextBox Widget
+page_title: Use Custom Culture Script | Kendo UI NumericTextBox
 description: "Learn how to use a custom culture script in the Kendo UI NumericTextBox widget."
 slug: howto_use_custom_culture_script_numerictextbox
 ---

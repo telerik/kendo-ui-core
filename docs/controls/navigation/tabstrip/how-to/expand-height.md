@@ -1,13 +1,13 @@
 ---
 title: Expand to 100% Height and Auto-Resize
-page_title: Expand to 100% Height and Auto-Resize | Kendo UI TabStrip Widget
+page_title: Expand to 100% Height and Auto-Resize | Kendo UI TabStrip
 description: "Learn how to expand the Kendo UI TabStrip widget to 100% height and make it resize together with the browser window."
 slug: howto_expandto100percentheightautoresize_tabstrip
 ---
 
 # Expand to 100% Height and Auto-Resize
 
-When making the TabStrip 100% high, keep in mind that web standards require elements with percentage height to have a parent element with an explicit height. This rule applies recursively until either an element with a pixel height, or the <html> element, is reached. 100% high elements cannot have borders, paddings, margins, or visible siblings.
+When making the TabStrip 100% high, keep in mind that web standards require elements with percentage height to have a parent element with an explicit height. This rule applies recursively until either an element with a pixel height, or the `<html>` element, is reached. 100% high elements cannot have borders, paddings, margins, or visible siblings.
 
 The milestones of the approach are:
 
@@ -92,6 +92,7 @@ The example below demonstrates how to make the TabStrip widget 100% high and res
 Other articles on Kendo UI TabStrip:
 
 * [TabStrip JavaScript API Reference](/api/javascript/ui/tabstrip)
+* [How to Add Close Button to Tabs]({% slug howto_addclosebuttontotabs_tabstrip %})
 * [How to Display Buttons at the Bottom]({% slug howto_displaybuttonsatthebottom_tabstrip %})
 * [How to Initialize the Grid in Kendo UI TabStrip]({% slug initialize_thegrid_tabstrip_widget %})
 * [How to Scroll TabStrip with Keyboard]({% slug howto_scrolltabstripwithkeyboard_tabstrip %})

@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: Appearance | Kendo UI Grid Widget
+page_title: Appearance | Kendo UI Grid
 description: "Learn how to control the layout and appearance of the Kendo UI Grid widget."
 slug: appearance_kendoui_grid_widget
 position: 5
@@ -8,7 +8,7 @@ position: 5
 
 # Appearance
 
-[Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) supports various options for you to apply to your project by setting its layout and appearance that best match your needs.
+The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) supports various options for you to apply to your project by setting its layout and appearance that best match your needs.
 
 ## Scrolling
 

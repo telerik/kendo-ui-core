@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Button Widget
+page_title: Overview | Kendo UI Button
 description: "Learn how to initialize the Kendo UI Button widget and apply its other options."
 slug: overview_kendoui_button_widget
 position: 1
@@ -348,6 +348,6 @@ The example below demonstrates how to create a Floating Action Button.
 Other articles on Kendo UI Button:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Button Widget](/aspnet-mvc/helpers/button/overview)
-* [Overview of the Button JSP Tag](/jsp/tags/button/overview)
+* [Overview of the Button JSP Tag]({% slug overview_button_uiforjsp %})
 * [Overview of the Button PHP Class](/php/widgets/button/overview)
 * [Button JavaScript API Reference](/api/javascript/ui/button)

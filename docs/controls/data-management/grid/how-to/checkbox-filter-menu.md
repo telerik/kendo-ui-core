@@ -1,6 +1,6 @@
 ---
 title: Create Checkbox Filter Menu
-page_title: Create Checkbox Filter Menu | Kendo UI Grid Widget
+page_title: Create Checkbox Filter Menu | Kendo UI Grid
 description: "Learn how to create a checkbox filter menu functionality in the Kendo UI Grid widget."
 slug: howto_create_checkbox_filter_menu_grid
 ---
@@ -146,7 +146,7 @@ The example below demonstrates how to create a checkbox filter menu functionalit
       }
     </script>
     <style type="text/css">
-      .checkbox-ontainer 
+      .checkbox-ontainer
       {
         max-height: 200px;
         overflow:auto;

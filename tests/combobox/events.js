@@ -566,6 +566,29 @@ test("ComboBox trigger cascade when selected index is changed", 2, function() {
     combobox.ul.children(":first").click();
 });
 
+test("ComboBox triggers cascade only once when setting value externally", 1, function() {
+    combobox = input.kendoComboBox({
+        dataSource: {
+            transport: {
+                read: function(options) {
+                    options.success([
+                        { text: "foo", value: "1" },
+                        { text: "bar", value: "2" }
+                    ]);
+                }
+            }
+        },
+        dataTextField: "text",
+        dataValueField: "value"
+    }).data("kendoComboBox");
+
+    combobox.bind("cascade", function() {
+        ok(true);
+    });
+
+    combobox.value("2");
+});
+
 test("ComboBox trigger change on blur after filtration", 1, function() {
     combobox = input.kendoComboBox({
         dataSource: ["foo", "bar"],

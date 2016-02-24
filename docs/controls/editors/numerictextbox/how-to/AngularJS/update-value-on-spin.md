@@ -1,6 +1,6 @@
 ---
 title: Update Value on Spin
-page_title: Update Value on Spin | Kendo UI NumericTextBox Widget
+page_title: Update Value on Spin | Kendo UI NumericTextBox
 description: "Learn how to update the value of the Kendo UI NumericTextBox widget on spin in AngularJS."
 slug: howto_update_valueon_spin_angularjs_numerictextbox
 ---

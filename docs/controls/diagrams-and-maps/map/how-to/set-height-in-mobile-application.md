@@ -1,6 +1,6 @@
 ---
 title: Set 100% Height in Mobile Applications
-page_title: Set 100% Height in Mobile Applications | Kendo UI Map Widget
+page_title: Set 100% Height in Mobile Applications | Kendo UI Map
 description: "Learn how to set a 100% height of a Kendo UI Map widget in mobile applications."
 slug: howto_set100percentheight_inmobileapps_map
 ---

@@ -1,57 +1,68 @@
 ---
 title: Overview
+page_title: Overview | ToolBar JSP Tag
+description: "Get started with the ToolBar JSP tag in Kendo UI."
+slug: overview_toolbar_uiforjsp
+position: 1
 ---
 
-# ToolBar
+# ToolBar JSP Tag Overview
 
-The ToolBar HtmlHelper extension is a server-side wrapper for the [Kendo UI ToolBar](/api/web/toolbar) widget.
+The ToolBar JSP tag is a server-side wrapper for the [Kendo UI ToolBar](/api/javascript/ui/toolbar) widget.
 
 ## Getting Started
 
-### Example - initialization and basic usage
+### Initialization
 
-    <kendo:toolBar name="toolbar">
-        <kendo:toolBar-items>
+The example below demonstrates how to initialize the ToolBar and also its basic usage.
 
-            <!-- regular button -->
-            <kendo:toolBar-item type="button" text="Button"></kendo:toolBar-item>
+###### Example
 
-            <!-- toggle button -->
-            <kendo:toolBar-item type="button" togglable="true" text="Toggle Button"></kendo:toolBar-item>
+      <kendo:toolBar name="toolbar">
+          <kendo:toolBar-items>
 
-            <!-- split button -->
-            <kendo:toolBar-item type="splitButton" text="Split Button">
-                <kendo:toolBar-item-menuButtons>
-                    <kendo:toolBar-item-menuButton text="Option 1" id="option1"></kendo:toolBar-item-menuButton>
-                    <kendo:toolBar-item-menuButton text="Option 2" id="option2"></kendo:toolBar-item-menuButton>
-                    <kendo:toolBar-item-menuButton text="Option 3" id="option3"></kendo:toolBar-item-menuButton>
-                </kendo:toolBar-item-menuButtons>
-            </kendo:toolBar-item>
+              <!-- regular button -->
+              <kendo:toolBar-item type="button" text="Button"></kendo:toolBar-item>
 
-            <!-- button group -->
-            <kendo:toolBar-item type="buttonGroup">
-                <kendo:toolBar-item-buttons>
-                    <kendo:toolBar-item-button text="Left" togglable="true" group="text-align" spriteCssClass="k-tool-icon k-justifyLeft"></kendo:toolBar-item-button>
-                    <kendo:toolBar-item-button text="Center" togglable="true" group="text-align" spriteCssClass="k-tool-icon k-justifyCenter"></kendo:toolBar-item-button>
-                    <kendo:toolBar-item-button text="Right" togglable="true" group="text-align" spriteCssClass="k-tool-icon k-justifyRight"></kendo:toolBar-item-button>
-                </kendo:toolBar-item-buttons>
-            </kendo:toolBar-item>
+              <!-- toggle button -->
+              <kendo:toolBar-item type="button" togglable="true" text="Toggle Button"></kendo:toolBar-item>
 
-            <!-- separator -->
-            <kendo:toolBar-item type="separator"></kendo:toolBar-item>
+              <!-- split button -->
+              <kendo:toolBar-item type="splitButton" text="Split Button">
+                  <kendo:toolBar-item-menuButtons>
+                      <kendo:toolBar-item-menuButton text="Option 1" id="option1"></kendo:toolBar-item-menuButton>
+                      <kendo:toolBar-item-menuButton text="Option 2" id="option2"></kendo:toolBar-item-menuButton>
+                      <kendo:toolBar-item-menuButton text="Option 3" id="option3"></kendo:toolBar-item-menuButton>
+                  </kendo:toolBar-item-menuButtons>
+              </kendo:toolBar-item>
 
-            <!-- custom template
-            <kendo:toolBar-item template="<input id='dropdown' style='width: 150px' />" overflow="never"></kendo:toolBar-item>
+              <!-- button group -->
+              <kendo:toolBar-item type="buttonGroup">
+                  <kendo:toolBar-item-buttons>
+                      <kendo:toolBar-item-button text="Left" togglable="true" group="text-align" spriteCssClass="k-tool-icon k-justifyLeft"></kendo:toolBar-item-button>
+                      <kendo:toolBar-item-button text="Center" togglable="true" group="text-align" spriteCssClass="k-tool-icon k-justifyCenter"></kendo:toolBar-item-button>
+                      <kendo:toolBar-item-button text="Right" togglable="true" group="text-align" spriteCssClass="k-tool-icon k-justifyRight"></kendo:toolBar-item-button>
+                  </kendo:toolBar-item-buttons>
+              </kendo:toolBar-item>
 
-        </kendo:toolBar-items>
-    </kendo:toolBar>
+              <!-- separator -->
+              <kendo:toolBar-item type="separator"></kendo:toolBar-item>
 
-### Configure the Kendo ToolBar
+              <!-- custom template -->
+              <kendo:toolBar-item template="<input id='dropdown' style='width: 150px' />" overflow="never"></kendo:toolBar-item>
 
-Here is how to configure the Kendo AutoComplete:
+          </kendo:toolBar-items>
+      </kendo:toolBar>
 
- 1.  Make sure you have followed all the steps from the [Introduction](/jsp/introduction) help topic.
- 2.  Create a new action method:
+### Configuration
+
+Below are listed the steps for you to follow when configuring the Kendo UI ToolBar.
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for JSP]({% slug overview_uiforjsp %}).
+
+**Step 2** Create a new action method.
+
+###### Example
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index() {
@@ -59,45 +70,60 @@ Here is how to configure the Kendo AutoComplete:
             return "web/window/index";
         }
 
- 3. Add kendo taglib mapping to the page
+ **Step 3** Add the Kendo UI `taglib` mapping to the page.
+
+###### Example
 
         <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 
- 4.  Add a toolbar tag and specify the widget controls:
+**Step 4** Add a `toolbar` tag and specify the widget controls.
 
-    <kendo:toolBar name="toolbar">
-        <kendo:toolBar-items>
-            <kendo:toolBar-item type="button" text="Button"></kendo:toolBar-item>
-        </kendo:toolBar-items>
-    </kendo:toolBar>
+###### Example
 
- 5. For more information regarding supported command types please check [this link](/web/toolbar/overview#command-types).
+      <kendo:toolBar name="toolbar">
+          <kendo:toolBar-items>
+              <kendo:toolBar-item type="button" text="Button"></kendo:toolBar-item>
+          </kendo:toolBar-items>
+      </kendo:toolBar>
 
-## Accessing an Existing ToolBar
+For more information on the supported command types, refer to [this link]({% slug overview_kendoui_toolbar_widget %}#command-types).
 
-You can reference an existing ToolBar instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
+## Event Handling
 
-### Accessing an existing ToolBar instance
+### Subscribe to Events
 
-    // Put this after your Kendo ToolBar tag declaration
-    <script>
-    $(function() {
-        var toolbar = $("#container").data("kendoToolBar");
-    });
-    </script>
+You can subscribe to all [events exposed by Kendo UI ToolBar](/api/javascript/ui/toolbar#events) by the handler name.
 
+###### Example
 
-## Handling Kendo UI ToolBar events
+      <kendo:toolBar name="toolbar" click="onClick" toggle="onToggle"></kendo:toolBar>
+      <script>
+          function onClick(e) {
+              //Handle the click event
+          }
 
-You can subscribe to all [events](/api/web/toolbar#events) exposed by Kendo UI ToolBar:
+          //.....
+      </script>
 
-### WebForms - subscribe by handler name
+## Reference
 
-    <kendo:toolBar name="toolbar" click="onClick" toggle="onToggle"></kendo:toolBar>
-    <script>
-        function onClick(e) {
-            //Handle the click event
-        }
+### Existing Instances
 
-        //.....
-    </script>
+You are able to reference an existing ToolBar instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [ToolBar API](/api/javascript/ui/toolbar#methods) to control its behavior.
+
+###### Example
+
+      // Put this after your Kendo ToolBar tag declaration
+      <script>
+      $(function() {
+          var toolbar = $("#container").data("kendoToolBar");
+      });
+      </script>
+
+## See Also
+
+Other articles on Telerik UI for JSP and on the ToolBar:
+
+* [Overview of the Kendo UI ToolBar Widget]({% slug overview_kendoui_toolbar_widget %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

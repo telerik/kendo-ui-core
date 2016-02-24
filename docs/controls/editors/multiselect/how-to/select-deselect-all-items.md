@@ -1,6 +1,6 @@
 ---
 title: Select or Deselect All Items
-page_title: Select or Deselect All Items | Kendo UI MultiSelect Widget
+page_title: Select or Deselect All Items | Kendo UI MultiSelect
 description: "Learn how to select or deselect all items in the Kendo UI MultiSelect widget."
 slug: howto_select_and_deselect_allitems_multiselect
 ---

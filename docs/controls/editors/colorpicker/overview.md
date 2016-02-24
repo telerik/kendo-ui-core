@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI ColorPicker Widget
+page_title: Overview | Kendo UI ColorPicker
 description: "Learn how to initialize the Kendo UI ColorPicker widget and configure its options."
 slug: overview_kendoui_colorpicker_widget
 position: 1
@@ -91,13 +91,13 @@ For more options please see the [API page](../../api/javascript/color).
 Other articles on Kendo UI ColorPicker:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the ColorPicker Widget](/aspnet-mvc/helpers/colorpicker/overview)
-* [Overview of the ColorPicker JSP Tag](/jsp/tags/colorpicker/overview)
+* [Overview of the ColorPicker JSP Tag]({% slug overview_colorpicker_uiforjsp %})
 * [Overview of the ColorPicker PHP Class](/php/widgets/colorpicker/overview)
 * [ColorPicker JavaScript API Reference](/api/javascript/ui/colorpicker)
 
 Articles on Kendo UI ColorPalette:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the ColorPalette Widget](/aspnet-mvc/helpers/colorpalette/overview)
-* [Overview of the ColorPalette JSP Tag](/jsp/tags/colorpalette/overview)
+* [Overview of the ColorPalette JSP Tag]({% slug overview_colorpalette_uiforjsp %})
 * [Overview of the ColorPalette PHP Class](/php/widgets/colorpalette/overview)
 * [ColorPalette JavaScript API Reference](/api/javascript/ui/colorpalette)

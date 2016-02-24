@@ -1,6 +1,6 @@
 ---
 title: Move Visible Notifications after Hiding Others
-page_title: Move Visible Notifications after Hiding Others
+page_title: Move Visible Notifications after Hiding Others | Kendo UI Notification
 description: "Learn how to reposition notification messages after hiding others"
 slug: howto_move_notifications_after_hiding_others
 ---

@@ -1,6 +1,6 @@
 ---
 title: Welcome to Kendo UI!
-page_title: Welcome to Kendo UI! | Kendo UI
+page_title: Introduction | Kendo UI Docs
 description: "Learn about the Kendo UI controls, their distributions, frameworks, tools, and utilities."
 previous_url: /index
 slug: welcometo_kendoui

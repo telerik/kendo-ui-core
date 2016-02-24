@@ -1,6 +1,6 @@
 ---
 title: Reorder Multiple Items
-page_title: Reorder Multiple Items | Kendo UI Sortable Widget
+page_title: Reorder Multiple Items | Kendo UI Sortable
 description: "Learn how to reorder multiple items using the Kendo UI Sortable widget."
 slug: howto_reordermultipleitems_sortable
 ---

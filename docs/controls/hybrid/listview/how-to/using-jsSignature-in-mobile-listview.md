@@ -1,13 +1,18 @@
 ---
-title: Using jsSignature in a Kendo UI Mobile ListView
-page_title: Using jsSignature in a Kendo UI Mobile ListView
-description: Using jsSignature in a Kendo UI Mobile ListView
+title: Use jsSignature
+page_title: Use jsSignature | Hybrid UI Button
+description: "Learn how to use jsSignature in the Hybrid UI ListView."
+slug: howto_usejssignature_hybridlistview
 ---
 
-The following runnable sample demonstrates how to include signing functionality in a Kendo UI Mobile ListView using jsSignature.
+# Use jsSignature
+
+The example below demonstrates how to include a signing functionality by using jsSignature in a hybrid Kendo UI ListView.
+
+###### Example
 
 ```html
-    <script src="http://willowsystems.github.io/jSignature/js/libs/jSignature.min.js"></script> 
+    <script src="http://willowsystems.github.io/jSignature/js/libs/jSignature.min.js"></script>
     <div data-role="view" data-title="Views" data-init="attachToScroller">
       <header data-role="header">
         <div data-role="navbar">
@@ -96,3 +101,12 @@ The following runnable sample demonstrates how to include signing functionality 
       $("#signature").jSignature();
     </script>
 ```
+
+## See Also
+
+Other articles and how-to examples on the Hybrid UI ListView:
+
+* [Hybrid UI ListView JavaScript API Reference](/api/javascript/mobile/ui/listview)
+* [Overview of the Hybrid UI ListView]({% slug overview_hybridlistview %})
+* [Endless Scrolling Feature]({% slug endlessscrolling_hybridlistview %})
+* [Pull-to-Refresh Feature]({% slug pulltorefreshfeature_hybridlistview %})

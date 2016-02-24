@@ -1,6 +1,6 @@
 ---
 title: Highlight Matched Values
-page_title: Highlight Matched Values | Kendo UI AutoComplete Widget
+page_title: Highlight Matched Values | Kendo UI AutoComplete
 description: "Learn how to highlight matched values in a Kendo UI AutoComplete widget."
 slug: howto_highlight_matched_values_autocomplete
 ---

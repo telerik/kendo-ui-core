@@ -1,14 +1,15 @@
 ---
-title: Show Tab text in Android skin
-page_title: Show Tab text in Android skin
-description: Example that shows how to show TabStrip's Tab text in Android skin
+title: Show Tab Text in Android Skin
+page_title: Show Tab Text in Android Skin | Hybrid UI ScrollView
+description: "Learn how to show the tab text of the TabStrip in Android skin."
+slug: howto_showtabtextandroidskin_hybridtabstrip
 ---
 
-# How to show tab text in Android skin
+# Show Tab Text in Android Skin
 
-The example below demonstrates how to show TabStrip's Tab text in Android skin.
+The example below demonstrates how to show the tab text of a Hybrid UI TabStrip widget in Android skin.
 
-#### Example:
+###### Example
 
 ```html
   <div data-role="view" data-layout="mobile-tabstrip">
@@ -47,3 +48,10 @@ The example below demonstrates how to show TabStrip's Tab text in Android skin.
     var app = new kendo.mobile.Application(document.body, { skin: "android-dark" });
   </script>
 ```
+
+## See Also
+
+Other articles on the Hybrid UI TabStrip:
+
+* [Hybrid UI TabStrip JavaScript API Reference](/api/javascript/mobile/ui/tabstrip)
+* [Overview of the Hybrid UI TabStrip]({% slug overview_hybridtabstrip %})

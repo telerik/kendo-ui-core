@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI RangeSlider Widget
+page_title: Overview | Kendo UI RangeSlider
 description: "Learn how to initialize the Kendo UI RangeSlider widget and configure its behaviors."
 slug: overview_kendoui_rangeslider_widget
 position: 1

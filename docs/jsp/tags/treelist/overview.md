@@ -1,31 +1,43 @@
 ---
 title: Overview
+page_title: Overview | TreeList JSP Tag
+description: "Get started with the TreeList JSP tag in Kendo UI."
+slug: overview_treelist_uiforjsp
+position: 1
 ---
 
-# TreeList
+# TreeList JSP Tag Overview
 
-The TreeList tag is a server-side wrapper for the [Kendo UI TreeList](/api/web/treelist) widget.
+The TreeList JSP tag is a server-side wrapper for the [Kendo UI TreeList](/api/javascript/ui/treelist) widget.
 
 ## Getting Started
 
-Here is how to configure the Kendo TreeList for binding to a data passed as model attribute in Spring MVC:
+### Configuration
 
-1.  Make sure you have followed all the steps from the [Introduction](/jsp/introduction) help topic.
+Below are listed the steps for you to follow when configuring the Kendo UI TreeList.
 
-2.  Create a new action method and pass the Products table to the View:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for JSP]({% slug overview_uiforjsp %}).
+
+**Step 2** Create a new action method which renders the view.
+
+###### Example
 
         @RequestMapping(value = "/local-data", method = RequestMethod.GET)
         public String index(Locale locale, Model model) {
             model.addAttribute("products", product.getList());
-    
+
             return "web/treelist/local-data";
         }
 
-3.  Add kendo taglib mapping to the page
+**Step 3** Add the Kendo UI `taglib` mapping to the page.
+
+###### Example
 
         <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 
-4.  Add a server bound treelist:
+**Step 4** Add a server-bound TreeList.
+
+###### Example
 
         <kendo:treeList name="employees" pageable="true">
             <kendo:treeList-columns>
@@ -37,40 +49,48 @@ Here is how to configure the Kendo TreeList for binding to a data passed as mode
             <kendo:treeList-pageable input="true" numeric="false" />
         </kendo:treeList>
 
-## Accessing an Existing TreeList
+## Event Handling
 
-You can reference an existing TreeList instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/treelist#methods) to control its behavior.
+### Subscribe to Events
 
-### Accessing an existing TreeList instance
+You can subscribe to all [events exposed by Kendo UI TreeList](/api/javascript/ui/treelist#events) by the handler name.
 
-    //Put this after your Kendo TreeList tag declaration
-    <script>
-    $(function() {
-        // Notice that the name attribute of the treelist is used to get its client-side instance
-        var treelist = $("#employees").data("kendoTreeList");
-    });
-    </script>
+###### Example
 
+      <kendo:treeList name="employees" dataBound="employees_dataBound" change="employees_change">
+          <kendo:dataSource data="${data}" pageSize="10"/>
+      </kendo:treeList>
 
-## Handling Kendo UI TreeList events
+      <script>
+      function employees_dataBound() {
+          //Handle the dataBound event
+      }
 
-You can subscribe to all [events](/api/web/treelist#events) exposed by Kendo UI TreeList:
+      function employees_change() {
+          //Handle the change event
+      }
+      </script>
 
+## Reference
 
-### Subscribe by handler name
+### Existing Instances
 
-    <kendo:treeList name="employees" dataBound="employees_dataBound" change="employees_change">
-        <kendo:dataSource data="${data}" pageSize="10"/>
-    </kendo:treeList>
+You are able to reference an existing TreeList instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [TreeList API](/api/javascript/ui/treelist#methods) to control its behavior.
 
-    <script>
-    function employees_dataBound() {
-        //Handle the dataBound event
-    }
+###### Example
 
-    function employees_change() {
-        //Handle the change event
-    }
-    </script>
+      //Put this after your Kendo TreeList tag declaration
+      <script>
+      $(function() {
+          // Notice that the name attribute of the treelist is used to get its client-side instance
+          var treelist = $("#employees").data("kendoTreeList");
+      });
+      </script>
 
+## See Also
+
+Other articles on Telerik UI for JSP and on the TreeList:
+
+* [Overview of the Kendo UI TreeList Widget]({% slug overview_kendoui_treelist_widget %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

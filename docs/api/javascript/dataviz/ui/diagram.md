@@ -302,6 +302,14 @@ Defines the handles stroke options.
 
 Defines the handles stroke color.
 
+### connectionDefaults.selection.handles.width `Number`
+
+The width of the handle elements.
+
+### connectionDefaults.selection.handles.height `Number`
+
+The height of the handle elements.
+
 ### connectionDefaults.startCap `String|Object`
 
 The connection start cap configuration or type name.
@@ -589,6 +597,14 @@ Defines the handles stroke options.
 ### connections.selection.handles.stroke.color `String`
 
 Defines the handles stroke color.
+
+### connections.selection.handles.width `Number`
+
+The width of the handle elements.
+
+### connections.selection.handles.height `Number`
+
+The height of the handle elements.
 
 ### connections.startCap `String|Object`
 
@@ -2326,6 +2342,14 @@ The zoom step when using the mouse-wheel to zoom in or out.
 
 An array holding the diagram connections.
 
+### connectionsDataSource `kendo.data.DataSource`
+
+The connections data source, if any.
+
+### dataSource `kendo.data.DataSource`
+
+The shapes data source, if any.
+
 ### shapes `Array`
 
 An array holding the diagram shapes.
@@ -3071,13 +3095,13 @@ Transforms a point from View coordinates to Page document coordinates. View orig
 
 #### Parameters
 
-##### point `Object`
+##### point `kendo.dataviz.diagram.Point`
 
 The point in Page document coordinates.
 
 #### Returns
 
-`Object` the transformed point
+`kendo.dataviz.diagram.Point` the transformed point
 
 ### viewToModel
 
@@ -3085,21 +3109,25 @@ Transforms a point from View coordinates to Model coordinates. Model coordinates
 
 #### Parameters
 
-##### point `Object`
+##### point `kendo.dataviz.diagram.Point`
 
 The point in View coordinates.
 
 #### Returns
 
-`Object` the transformed point
+`kendo.dataviz.diagram.Point` the transformed point
 
 ### viewport
 
 The bounds of the diagramming canvas.
 
+#### Returns
+
+`kendo.dataviz.diagram.Rect` as viewport bounds
+
 ### zoom
 
-Zooms in or out of the diagram.
+Gets or sets the current zoom level of the diagram.
 
 #### Parameters
 
@@ -3107,9 +3135,12 @@ Zooms in or out of the diagram.
 
 The zoom factor.
 
-##### point `Object`
+##### point `kendo.dataviz.diagram.Point`
 
 The point to zoom into or out of.
+
+#### Returns
+`Number` The current zoom level
 
 ## Events
 

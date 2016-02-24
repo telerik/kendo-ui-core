@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI ProgressBar Widget
+page_title: Overview | Kendo UI ProgressBar
 description: "Learn how to initialize the Kendo UI ProgressBar widget and configure its behaviors."
 slug: overview_kendoui_progressbar_widget
 position: 1
@@ -145,6 +145,6 @@ The example below denmonstrates how to access an existing ProgressBer instance.
 Other articles on Kendo UI ProgressBar:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the ProgressBar Widget](/aspnet-mvc/helpers/progressbar/overview)
-* [Overview of the ProgressBar JSP Tag](/jsp/tags/progressbar/overview)
+* [Overview of the ProgressBar JSP Tag]({% slug overview_progressbar_uiforjsp %})
 * [Overview of the ProgressBar PHP Class](/php/widgets/progressbar/overview)
 * [ProgressBar JavaScript API Reference](/api/javascript/ui/progressbar)

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Editor Widget
+page_title: Overview | Kendo UI Editor
 description: "Learn how to initialize and configure the Kendo UI Editor widget."
 slug: overview_kendoui_editor_widget
 position: 1
@@ -14,7 +14,9 @@ The [Kendo UI Editor widget](http://demos.telerik.com/kendo-ui/editor/index) all
 
 ### Initialize the Editor
 
-Initialize the Editor widget by using an existing `HTML` element and a jQuery selector:
+Initialize the Editor widget by using an existing `HTML` element and a jQuery selector.
+
+###### Example
 
       <textarea id="editor" rows="10" cols="30"></textarea>
 
@@ -50,7 +52,7 @@ The inline Editor is not able to post its value and [this is something you must 
 
 The Editor tools can be configured through the [`tools` configuration option](/api/web/editor#tools).
 
-### Specify Set of Editor Tools
+### Define Sets of Editor Tools
 
 ###### Example
 
@@ -93,16 +95,18 @@ The custom buttons get a `k-toolName` CSS class to allow styling, where `toolNam
 
 ### Apply Readonly Functionality
 
-You can temporarily make the Editor readonly by using the following approach:
+You can make the Editor readonly by removing the `contenteditable` attribute of the widget's [`body`](/api/javascript/ui/editor#fields-body). While the Editor is readonly, the hyperlinks in its content become active and clicking on them will navigate the page. If this is undesired, prevent the hyperlink clicks.
+
+###### Example
 
     var editor = $("#editor").data("kendoEditor"),
         editorBody = $(editor.body);
 
     // make readonly
-    editorBody.removeAttr("contenteditable");
+    editorBody.removeAttr("contenteditable").find("a").on("click.readonly", false);
 
     // make editable
-    editorBody.attr("contenteditable", true);
+    editorBody.attr("contenteditable", true).find("a").off("click.readonly");
 
 ## Display
 
@@ -274,5 +278,5 @@ Other articles on Kendo UI Editor:
 * [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
 * [How to Use Inline Editor inside Windows]({% slug howto_use_inline_editor_inside_windows_editor %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension of the Editor Widget](/aspnet-mvc/helpers/editor/overview)
-* [Overview of the Editor JSP Tag](/jsp/tags/editor/overview)
+* [Overview of the Editor JSP Tag]({% slug overview_editor_uiforjsp %})
 * [Overview of the Editor PHP Class](/php/widgets/editor/overview)

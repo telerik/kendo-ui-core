@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI DropDownList Widget
+page_title: Overview | Kendo UI DropDownList
 description: "Learn how to initialize the Kendo UI DropDownList widget, configure its options and customize templates."
 slug: overview_kendoui_dropdownlist_widget
 position: 1
@@ -255,7 +255,7 @@ Other articles on Kendo UI DropDownList:
 * [How to Remove Items]({% slug howto_remove_items_dropdownlist %})
 * [How to Prevent Popup Closure on Scroll]({% slug howto_prevent_popup_closure_onscroll_dropdownlist %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension fro the DropDownList Widget](/aspnet-mvc/helpers/dropdownlist/overview)
-* [Overview of the DropDownList JSP Tag](/jsp/tags/dropdownlist/overview)
+* [Overview of the DropDownList JSP Tag]({% slug overview_dropdownlist_uiforjsp %})
 * [Overview of the DropDownList PHP Class](/php/widgets/dropdownlist/overview)
 
 Articles on Kendo UI ComboBox:

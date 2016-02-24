@@ -1,6 +1,6 @@
 ---
 title: Restrict Window Positioning
-page_title: Restrict Window Positioning | Kendo UI Window Widget
+page_title: Restrict Window Positioning | Kendo UI Window
 description: "Learn how to restrict the movement of a Kendo UI Window to a certain area."
 slug: howto_restrictpositioning_window
 ---

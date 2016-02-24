@@ -1,24 +1,28 @@
 ---
-title: Collapsible
-page_title: Using Kendo UI Mobile Collapsible widget
-description: Kendo UI Mobile Collapsible widget allows the developer to create collapsible blocks of content.
+title: Overview
+page_title: Overview | Hybrid UI Collapsible
+description: "Create collapsible blocks of content by using the hybrid mobile Kendo UI Collapsible widget and learn how to nest widgets inside it."
+slug: overview_hybridcollapsible
+position: 1
 ---
 
-# Collapsible
+# Overview Collapsible
 
-Kendo UI Mobile Collapsible widget allows the developer to create collapsible blocks of content.
+The [Hybrid UI Collapsible widget](http://demos.telerik.com/kendo-ui/m/index#collapsible/index) allows you to create collapsible blocks of content.
 
 ## Getting Started
 
-The Kendo mobile Application will automatically initialize a mobile Collapsible for every element with `role` data attribute set to `collapsible` present in the views markup.
-Alternatively, it can be initialized using jQuery plugin syntax in the containing mobile View **init event handler**. 
+The Kendo UI mobile Application automatically initializes a mobile Collapsible for every element with the `role` data attribute set to `collapsible` and present in the views markup. Alternatively, it can be initialized by using jQuery plugin syntax in the containing mobile View `init` event handler.
 
-The Collapsible element should be a `div` element. Directly inside this container, add a header element `h1` - `h6`. The framework will style the header as a click-able button with icon to indicate that it is expandable.
-After the header, add any HTML markup you want to be collapsible. The framework will wrap this content in a container that will be hidden/shown when user taps on the Collapsible header.
+The Collapsible element should be a `div` element. Directly inside this container, add a header element `h1`&mdash;`h6`. The framework styles the header as a clickable button with an icon to indicate that it is expandable. After the header, add any HTML markup you want to be collapsible. The framework wraps this content in a container that is hidden/shown when users tap on the Collapsible header.
 
 By default the content is initially hidden.
 
-### Initialize Kendo UI Mobile Collapsible based on role data attribute.
+### Initialize from Markup
+
+The example below demonstrates how to initialize Hybrid UI Collapsible based on the `data-role` attribute.
+
+###### Example
 
     <div id="home" data-role="view">
         <div id="collapsible" data-role="collapsible">
@@ -31,16 +35,21 @@ By default the content is initially hidden.
         var app = new kendo.mobile.Application();
     </script>
 
-### Initialize Kendo UI Mobile Collapsible using jQuery plugin syntax
+### Initialize Using jQuery
+
+###### Example
 
     var collapsible = $("#collapsible").kendoMobileButtonGroup();
 
-## Creating a scrollable collapsible content
+## Customization
 
-To create a scrollable collapsible content wrap the content in a `div` element with `data-role="scroller"` and specify its `height`.
+### Create Scrollable Collapsible Content
 
-### Example - scrollable collapsible content
+To create some scrollable collapsible content, wrap the content in a `div` element with `data-role="scroller"` and specify its `height`.
 
+###### Example
+
+```html
     <div id="home" data-role="view">
         <div id="collapsible" data-role="collapsible">
             <h2>Header</h2>
@@ -68,15 +77,19 @@ To create a scrollable collapsible content wrap the content in a `div` element w
     <script>
         var app = new kendo.mobile.Application();
     </script>
+```
 
-## Nested Collapsible panels
+### Nest Collapsible Panels
 
-Collapsible widgets can be nested inside each other.
+Collapsible widgets can be nested inside each other, as demonstrated in the example below.
 
+> **Important**
+>
 > In this scenario the animation of the parent Collapsible content should be disabled.
 
-### Example - nested Collapsible widgets
+###### Example
 
+```html
     <div id="home" data-role="view" data-init="onInit">
         <div id="collapsible" data-role="collapsible" data-animation="false" data-collapsed="false">
             <h2>Header</h2>
@@ -127,3 +140,16 @@ Collapsible widgets can be nested inside each other.
     <script>
         var app = new kendo.mobile.Application();
     </script>
+```
+
+## See Also
+
+Other articles and how-to examples on the Hybrid UI components and on the Collapsible:
+
+* [Hybrid UI Collapsible JavaScript API Reference](/api/javascript/mobile/ui/collapsible)
+* [How to Use DataSource to Render Content]({% slug howto_usedatasourcetorebdercontent_hybridcollapsible %})
+* [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})
+* [How to Create Fixed Content Areas with Scroller]({% slug howto_createfixedcontentarea_hybridui %})
+* [How to Create Relative Content Size Using Flexboxes]({% slug howto_createrelative_contentsize_usingflexboxes_hybridui %})
+* [How to Select Value from Another View]({% slug howto_selectvaluefrom_anotherview_hybridui %})
+* [How to Set Initial View Prior to Initialization in AngularJS]({% slug howto_setinitiaviewpriortoinitialization_angular_hybridui %})

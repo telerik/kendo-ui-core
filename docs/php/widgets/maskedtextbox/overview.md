@@ -1,22 +1,26 @@
 ---
 title: Overview
-page_title: How to use the MaskedTextBox PHP class, server-side wrapper for Kendo UI MaskedTextBox widget
-description: Getting started with Kendo UI MaskedTextBox for PHP in quick steps - configure Kendo UI MaskedTextBox widget and operate Kendo UI MaskedTextBox events.
+page_title: Overview | MaskedTextBox PHP Class
+description: "Get started with the MaskedTextBox PHP class in Kendo UI."
+slug: overview_maskedtextbox_uiforphp
+position: 1
 ---
 
-# MaskedTextBox
+# MaskedTextBox PHP Class Overview
 
-The Kendo MaskedTextBox for PHP is a server-side wrapper for the [Kendo UI MaskedTextBox](/api/web/maskedtextbox) widget.
+The Kendo UI MaskedTextBox for PHP is a server-side wrapper for the [Kendo UI MaskedTextBox](/api/javascript/ui/maskedtextbox) widget.
 
 ## Getting Started
 
-### Configure Kendo MaskedTextBox
+### Configuration
 
-Here is how to configure a simple Kendo MaskedTextBox:
+Below are listed the steps for you to follow when configuring the Kendo UI MaskedTextBox for PHP.
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
 
-2. Create a [maskedtextbox](/api/php/Kendo/UI/MaskedTextBox).
+**Step 2** Create a [MaskedTextBox](/api/php/Kendo/UI/MaskedTextBox).
+
+###### Example
 
         <?php
         $maskedtextbox = new \Kendo\UI\MaskedTextBox('maskedtextbox');
@@ -24,92 +28,117 @@ Here is how to configure a simple Kendo MaskedTextBox:
                       ->value("(123) 345-6789");
         ?>
 
-3. Output the maskedtextbox by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+**Step 3** Output the MaskedTextBox by echoing the result of the `render` method.
+
+###### Example
 
         <?php
         echo $maskedtextbox->render();
         ?>
 
-### Define widget's mask value
+## Functionalities
 
-The MaskedTextBox has [a list of predefined mask rules](/web/maskedtextbox/overview#predefined-mask-rules),
-which can be used to compose the widget's mask.
+### Define Mask Values
 
-#### WebForms - set a `zip code` mask
+The MaskedTextBox has [a list of predefined mask rules]({% slug overview_kendoui_maskedtextbox_widget %}#configuration-Rules), which can be used to compose the mask of the widget.
 
-    <?php
-    $maskedtextbox = new \Kendo\UI\MaskedTextBox('maskedtextbox');
-    $maskedtextbox->mask("00000-9999");
-    echo $maskedtextbox->render();
-    ?>
+The example below demonstrates how to set a set a `zip code` mask (Web Forms).
 
-> If no mask is defined widget will allow any input.
+###### Example
 
-### Define a custom mask rule
+        <?php
+        $maskedtextbox = new \Kendo\UI\MaskedTextBox('maskedtextbox');
+        $maskedtextbox->mask("00000-9999");
+        echo $maskedtextbox->render();
+        ?>
 
-The MaskedTextBox gives the ability to define custom mask rules if no of the predefined ones is sufficient.
-To add a custom rule use the **rules** method:
+> **Important**
+>
+> If no mask is defined, the widget will allow any input.
 
-#### Define a custom rule for "-" and "+" symbols
+### Customize Mask Rules
 
-    <?php
-    $rules = array('~' => '/[+-]/');
+The MaskedTextBox enables you to define custom mask rules if none of the predefined ones is sufficient. To add a custom rule, use the `rules` method.
 
-    $maskedtextbox = new \Kendo\UI\MaskedTextBox('maskedtextbox');
-    $maskedtextbox->rules($rules);
-    $maskedtextbox->mask("~0000");
-    echo $maskedtextbox->render();
-    ?>
+The example below demonstrates how to define a custom rule for the `-` and `+` symbols.
 
-> Widgets supports [JavaScript Reguler Expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
-defined as a string or JavaScript function.
+###### Example
 
-## Getting Client-side Reference
+        <?php
+        $rules = array('~' => '/[+-]/');
 
-You can reference the client-side Kendo MaskedTextBox instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/maskedtextbox#methods) to control its behavior.
+        $maskedtextbox = new \Kendo\UI\MaskedTextBox('maskedtextbox');
+        $maskedtextbox->rules($rules);
+        $maskedtextbox->mask("~0000");
+        echo $maskedtextbox->render();
+        ?>
 
+> **Important**
+>
+> The widget supports [JavaScript Reguler Expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) defined as a string or a JavaScript function.
 
-### Example
+## Event Handling
 
-    <?php
-    $maskedtextbox = new \Kendo\UI\MaskedTextBox('maskedtextbox');
-    echo $maskedtextbox->render();
-    ?>
-    <script>
-    $(function() {
-        // The constructor parameter is used as the 'id' HTML attribute of the maskedtextbox
-        var maskedtextbox = $("#maskedtextbox").data("kendoMaskedTextBox")
-    });
-    </script>
+You can subscribe to all MaskedTextBox [events](/api/javascript/ui/maskedtextbox#events).
 
-## Handling Events
+### Specify Function Names
 
-You can subscribe to all maskedtextbox [events](/api/web/maskedtextbox#events).
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-### Example - subscribing by specifying JavaScript function name
+###### Example
 
-    <?php
-    $maskedtextbox = new \Kendo\UI\MaskedTextBox('maskedtextbox');
+        <?php
+        $maskedtextbox = new \Kendo\UI\MaskedTextBox('maskedtextbox');
 
-    // The 'maskedtextbox' JavaScript function will handle the 'change' event of the maskedtextbox
-    $maskedtextbox->change('maskedtextbox_change');
+        // The 'maskedtextbox' JavaScript function will handle the 'change' event of the maskedtextbox
+        $maskedtextbox->change('maskedtextbox_change');
 
-    echo $maskedtextbox->render();
-    ?>
-    <script>
-    function maskedtextbox_change() {
-        // Handle the change event
-    }
-    </script>
+        echo $maskedtextbox->render();
+        ?>
+        <script>
+        function maskedtextbox_change() {
+            // Handle the change event
+        }
+        </script>
 
-### Example - providing inline JavaScript code
+### Provide Inline Code
 
-    <?php
-    $maskedtextbox = new \Kendo\UI\MaskedTextBox('maskedtextbox');
+The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-    // Provide inline JavaScript code that will handle the 'change' event of the maskedtextbox
-    $maskedtextbox->change('function() { /* Handle the change event */ }');
+###### Example
 
-    echo $maskedtextbox->render();
-    ?>
+        <?php
+        $maskedtextbox = new \Kendo\UI\MaskedTextBox('maskedtextbox');
+
+        // Provide inline JavaScript code that will handle the 'change' event of the maskedtextbox
+        $maskedtextbox->change('function() { /* Handle the change event */ }');
+
+        echo $maskedtextbox->render();
+        ?>
+<!--*-->
+## Reference
+
+### Client-Side Instances
+
+You are able to reference an existing MaskedTextBox instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [MaskedTextBox API](/api/javascript/ui/maskedtextbox#methods) to control its behavior.
+
+###### Example
+
+        <?php
+        $maskedtextbox = new \Kendo\UI\MaskedTextBox('maskedtextbox');
+        echo $maskedtextbox->render();
+        ?>
+        <script>
+        $(function() {
+            // The constructor parameter is used as the 'id' HTML attribute of the maskedtextbox
+            var maskedtextbox = $("#maskedtextbox").data("kendoMaskedTextBox")
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the MaskedTextBox:
+
+* [Overview of the Kendo UI MaskedTextBox Widget]({% slug overview_kendoui_maskedtextbox_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

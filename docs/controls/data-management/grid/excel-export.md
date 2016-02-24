@@ -1,6 +1,6 @@
 ---
 title: Excel Export
-page_title: Excel Export | Kendo UI Grid Widget
+page_title: Excel Export | Kendo UI Grid
 description: "Learn how to set the Excel export functionality of the Kendo UI Grid widget."
 slug: exporting_excel_kendoui_grid_widget
 position: 8
@@ -8,7 +8,7 @@ position: 8
 
 # Excel Export
 
-Since Kendo UI Q3 2014 (2014.3.1119) the Grid widget provides a built-in Excel export functionality.
+As of the Kendo UI Q3 2014 (2014.3.1119) release, the Grid widget provides a built-in Excel export functionality.
 
 ## Set Up
 

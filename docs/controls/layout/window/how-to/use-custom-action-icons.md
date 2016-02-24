@@ -1,6 +1,6 @@
 ---
 title: Use Custom Action Icons
-page_title: Use Custom Action Icons | Kendo UI Window Widget
+page_title: Use Custom Action Icons | Kendo UI Window
 description: "Learn how to restrict the movement of a Kendo UI Window to a certain area."
 slug: howto_customactionicons_window
 ---

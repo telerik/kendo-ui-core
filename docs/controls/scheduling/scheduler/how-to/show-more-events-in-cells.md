@@ -1,6 +1,6 @@
 ---
 title: Show More Events in View Cells
-page_title: Show More Events in View Cells | Kendo UI Scheduler Widget
+page_title: Show More Events in View Cells | Kendo UI Scheduler
 description: "Learn how to use a remote validation in a Kendo UI Scheduler widget."
 slug: howto_showmoreevents_inviewcells_scheduler
 ---

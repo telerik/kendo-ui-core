@@ -1,6 +1,6 @@
 ---
 title: Context Menu
-page_title: Context Menu | Kendo UI Menu Widget
+page_title: Context Menu | Kendo UI Menu
 description: "Learn how to initialize Kendo UI ContextMenu, configure its behaviors and customize animations."
 slug: overview_kendoui_contextmenu_widget
 position: 2

@@ -233,3 +233,4 @@ Other articles on Kendo UI widget basics:
 * [Set Data Attributes]({% slug dataattributes_configuration_installation %})
 * [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
 * [Create Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
+* [Editing Functionality]({% slug kendoui_editing_gettingstarted %})

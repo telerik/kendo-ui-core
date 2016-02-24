@@ -1,6 +1,6 @@
 ---
 title: Change Group Header Position When Columns Are Locked
-page_title: Change Group Header Position When Columns Are Locked | Kendo UI Grid Widget
+page_title: Change Group Header Position When Columns Are Locked | Kendo UI Grid
 description: "Learn how to change the position of the group header when locked columns are used in the Kendo UI Grid widget."
 slug: howto_change_group_header_position_wthlocked_columns_grid
 ---

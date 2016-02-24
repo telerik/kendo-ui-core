@@ -291,7 +291,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "pdf": "PDF export",
     "save": "Uložit změny",
     "select": "Vybrat",
-    "update": "Odemknout"
+    "update": "Uložit"
   },
   "editable": {
     "confirmation": "Opravdu chcete smazat tento záznam?",

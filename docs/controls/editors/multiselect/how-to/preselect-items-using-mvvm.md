@@ -1,6 +1,6 @@
 ---
 title: Preselect Items Using MVVM Binding
-page_title: Preselect Items Using MVVM Binding | Kendo UI MultiSelect Widget
+page_title: Preselect Items Using MVVM Binding | Kendo UI MultiSelect
 description: "Learn how to preselect items by using MVVM in the Kendo UI Multiselect widget."
 slug: howto_preselect_items_byusing_mvvm_binding_multiselect
 ---

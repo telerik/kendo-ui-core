@@ -1,53 +1,43 @@
 ---
 title: Overview
-page_title: How to use the Calendar PHP class, server-side wrapper for Kendo UI Calendar widget
-description: Getting started with Kendo UI Calendar for PHP in quick steps - configure Kendo UI Calendar widget and operate Kendo UI Calendar events.
+page_title: Overview | Calendar PHP Class
+description: "Get started with the Calendar PHP class in Kendo UI."
+slug: overview_calendar_uiforphp
+position: 1
 ---
 
-# Calendar
+# Calendar PHP Class Overview
 
-The Kendo Calendar for PHP is a server-side wrapper for the [Kendo UI Calendar](/api/web/calendar) widget.
+The Kendo UI Calendar for PHP is a server-side wrapper for the [Kendo UI Calendar](/api/javascript/ui/calendar) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo Calendar:
+### Configuration
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
+Below are listed the steps for you to follow when configuring the Kendo UI Calendar for PHP.
 
-2. Create a [calendar](/api/php/Kendo/UI/Calendar), configure its [min](/api/php/Kendo/UI/Calendar#min),
-[max](/api/php/Kendo/UI/Calendar#max) and [value](/api/php/Kendo/UI/Calendar#value) options.
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
 
-        <?php
-        $calendar = new \Kendo\UI\Calendar('calendar');
-        $calendar->min(new DateTime('1900-01-01'))
-                 ->max(new DateTime('2099-12-31'))
-                 ->value(new DateTime('today', new DateTimeZone('UTC')));
-        ?>
+**Step 2** Create a [Calendar](/api/php/Kendo/UI/Calendar), configure its [`min`](/api/php/Kendo/UI/Calendar#min), [`max`](/api/php/Kendo/UI/Calendar#max), and [`value`](/api/php/Kendo/UI/Calendar#value) options.
 
-## Getting Client-side Reference
-
-You can reference the client-side Kendo Calendar instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/calendar#methods) to control its behavior.
-
-
-### Example
+###### Example
 
     <?php
     $calendar = new \Kendo\UI\Calendar('calendar');
-    echo $calendar->render();
+    $calendar->min(new DateTime('1900-01-01'))
+             ->max(new DateTime('2099-12-31'))
+             ->value(new DateTime('today', new DateTimeZone('UTC')));
     ?>
-    <script>
-    $(function() {
-        // The constructor parameter is used as the 'id' HTML attribute of the calendar
-        var calendar = $("#calendar").data("kendoCalendar")
-    });
-    </script>
 
-## Handling Events
+## Event Handling
 
-You can subscribe to all calendar [events](/api/web/calendar#events).
+You can subscribe to all Calendar [events](/api/javascript/ui/calendar#events).
 
-### Example - subscribing by specifying JavaScript function name
+### Specify Function Names
+
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
+
+###### Example
 
     <?php
     $calendar = new \Kendo\UI\Calendar('calendar');
@@ -63,7 +53,11 @@ You can subscribe to all calendar [events](/api/web/calendar#events).
     }
     </script>
 
-### Example - providing inline JavaScript code
+### Provide Inline Code
+
+The example below demonstrates how to subscribe to events by providing inline JavaScript code.
+
+###### Example
 
     <?php
     $calendar = new \Kendo\UI\Calendar('calendar');
@@ -73,3 +67,31 @@ You can subscribe to all calendar [events](/api/web/calendar#events).
 
     echo $calendar->render();
     ?>
+
+<!--*-->
+## Reference
+
+### Client-Side Instances
+
+You are able to reference an existing Calendar instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Calendar API](/api/javascript/ui/calendar#methods) to control its behavior.
+
+###### Example
+
+    <?php
+    $calendar = new \Kendo\UI\Calendar('calendar');
+    echo $calendar->render();
+    ?>
+    <script>
+    $(function() {
+        // The constructor parameter is used as the 'id' HTML attribute of the calendar
+        var calendar = $("#calendar").data("kendoCalendar")
+    });
+    </script>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the Calendar:
+
+* [Overview of the Kendo UI Calendar Widget]({% slug overview_kendoui_calendar_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

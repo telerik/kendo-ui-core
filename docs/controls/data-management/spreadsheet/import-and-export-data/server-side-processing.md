@@ -1,6 +1,6 @@
 ---
 title: Server-Side Processing
-page_title: Server-Side Processing | Kendo UI Spreadsheet Widget
+page_title: Server-Side Processing | Kendo UI Spreadsheet
 description: "Learn how to process Kendo UI Spreadsheet data using the Telerik Document Processing library."
 slug: serverside_processing_spreadsheet_widget
 position: 4

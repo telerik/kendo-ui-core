@@ -1,6 +1,6 @@
 ---
 title: Prevent Popup Closure on Scroll
-page_title: Prevent Popup Closure on Scroll | Kendo UI DropDownList Widget
+page_title: Prevent Popup Closure on Scroll | Kendo UI DropDownList
 description: "Learn how to prevent popup closure on scrolling when users reach the end of the list in a Kendo UI DropDownList widget."
 slug: howto_prevent_popup_closure_onscroll_dropdownlist
 ---

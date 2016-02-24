@@ -1,6 +1,6 @@
 ---
 title: Zoom on Area
-page_title: Zoom on Area | Kendo UI Map Widget
+page_title: Zoom on Area | Kendo UI Map
 description: "Learn how to center the Kendo UI Map view on a specified area."
 slug: howto_zoomonarea_map
 ---

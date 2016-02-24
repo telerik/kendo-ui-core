@@ -1,6 +1,6 @@
 ---
 title: Edit Records on touchend
-page_title: Edit Records on touchend | Kendo UI Scheduler Widget
+page_title: Edit Records on touchend | Kendo UI Scheduler
 description: "Learn how to edit an event in a Kendo UI Scheduler widget by using touchend on mobile devices."
 slug: howto_edit_records_using_touchendonmobile_scheduler
 ---

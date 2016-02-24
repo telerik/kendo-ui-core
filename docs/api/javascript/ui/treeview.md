@@ -1096,6 +1096,14 @@ The node that follows the inserted node.
     treeview.insertBefore(foo, treeview.findByText("bar"));
     </script>
 
+### items
+
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view).
+
+#### Returns
+
+`Array` The currently rendered tree items (`<div>` elements, that are children of the `<li>` elements).
+
 ### parent
 
 Gets the parent node of the item

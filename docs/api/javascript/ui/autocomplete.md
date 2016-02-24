@@ -835,6 +835,14 @@ Focuses the widget.
     autocomplete.focus();
     </script>
 
+### items
+
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view) (e.g. the ones that match the user's last filtering input).
+
+#### Returns
+
+`Array` The currently rendered dropdown list items (`<li>` elements).
+
 ### readonly
 
 Toggles the readonly state of the widget. When the widget is readonly it doesn't allow user input.

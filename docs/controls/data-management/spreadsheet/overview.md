@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Spreadsheet Widget
+page_title: Overview | Kendo UI Spreadsheet
 description: "Learn about how to initialize and configure the Kendo UI Spreadsheet widget."
 slug: overview_spreadsheet_widget
 position: 1

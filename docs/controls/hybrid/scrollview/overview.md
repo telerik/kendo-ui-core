@@ -1,44 +1,36 @@
 ---
-title: ScrollView
-page_title: Technical documentation for Kendo UI Mobile ScrollView widget
-description: Learn how to initialize Mobile ScrollView widget and define content pages in order to display one item per page.
+title: Overview
+page_title: Overview | Hybrid UI ScrollView
+description: "Initialize the hybrid Kendo UI ScrollView widget and define content pages to display one item per page."
+slug: overview_hybridscrollview
+position: 1
 ---
 
 # ScrollView Overview
 
-The Kendo Mobile ScrollView widget is used to scroll content wider than the device screen.
+The [Hybrid UI ScrollView widget](http://demos.telerik.com/kendo-ui/m/index#scrollview/mobile) is used to scroll content that is wider than the device screen.
 
-  - [Initialization](#initialization)
-    - [Initialize mobile ScrollView using data-role attribute.](#initialize-mobile-scrollview-using-data-role-attribute)
-    - [Initialize mobile ScrollView using jQuery plugin syntax.](#initialize-mobile-scrollview-using-jquery-plugin-syntax)
-    - [Initialize mobile ScrollView bound to remote data using data attributes.](#initialize-mobile-scrollview-bound-to-remote-data-using-data-attributes)
-    - [Initialize mobile ScrollView bound to remote data using jQuery plug-in syntax.](#initialize-mobile-scrollview-bound-to-remote-data-using-jquery-plug-in-syntax)
-  - [Local pages](#local-pages)
-    - [ScrollView with local pages](#scrollview-with-local-pages)
-    - [Clearing the whitespaces](#clearing-the-whitespaces)
-  - [Binding to data](#binding-to-data)
-    - [Pages in data bound mode](#pages-in-data-bound-mode)
-      - [Single item template](#single-item-template)
-      - [Multiple items template](#multiple-items-template)
-    - [Displaying incomplete pages](#displaying-incomplete-pages)
-      - [Template with JavaScript for loop](#template-with-javascript-for-loop)
-  - [Nova theme features](#nova-theme-features)
-  - [Troubleshooting](#troubleshooting)
+## Getting Started
 
-## Initialization
+The Kendo UI mobile Application automatically initializes the mobile ScrollView for every element with `role` data attribute set to `scrollview` and present in the markup of the views. Alternatively, it can be initialized by using jQuery plugin syntax in the containing mobile View `init` event handler.
 
-The Kendo Mobile Application automatically initializes the Mobile ScrollView for every element with `role` data attribute set to `scrollview` present in the views' markup.
-Alternatively, it can be initialized using jQuery plugin syntax in the containing mobile View **init event handler**.
+The ScrollView widget supports two operation modes&mdash;standard and data-bound. The first one is suitable for displaying static content, while the second one provides remote data virtualization. If the ScrollView has a DataSource set during the initialization, it operates in a data-bound mode.
 
-The widget supports two operation modes - *standard* and *data bound*. The first one is suitable for displaying static content, while the second one provides remote data virtualization. If the ScrollView has a DataSource set during the initialization it will operate in data bound mode.
+### Initialize from Markup
 
-### Initialize mobile ScrollView using data-role attribute.
+The example below demonstrates how to initialize the Hybrid UI ScrollView by using the data-role attribute.
+
+###### Example
 
     <div data-role="scrollview">
         Foo
     </div>
 
-### Initialize mobile ScrollView using jQuery plugin syntax.
+### Initialize Using jQuery
+
+The example below demonstrates how to initialize the Hybrid UI ScrollView by using jQuery plugin syntax.
+
+###### Example
 
     <div data-role="view" data-init="initScrollView">
         <div id="scrollView">
@@ -53,7 +45,27 @@ The widget supports two operation modes - *standard* and *data bound*. The first
         }
     </script>
 
-### Initialize mobile ScrollView bound to remote data using data attributes.
+## Data Binding
+
+### Grasp the Basics
+
+The Hybrid UI ScrollView widget can be bound to both local JavaScript arrays and remote data via the Kendo UI DataSource component. Local JavaScript arrays are appropriate for small data sets, while remote data binding with `serverPaging` applies better to larger data sets.
+
+> **Important**
+>
+> If the total amount of displayed data is large, it is recommended to turn off the pager by setting `enablePager: false` in the configuration options or via `data-enable-pager="false"` data attribute.
+
+If the `dataSource` configuration option of the ScrollView is set, the widget operates in a data-bound mode. In it, a fixed amount of DOM elements are rendered and then dynamically repositioned and updated while the user scrolls the widget.
+
+Once the ScrollView reaches the total amount of DataSource items, forward scrolling is automatically prevented.
+
+### Initialize Data-Bound ScrollViews
+
+#### Use Data Attributes
+
+The example below demonstrates how to initialize a Hybrid UI ScrollView bound to remote data by using the data attributes.
+
+###### Example
 
     <div data-role="view" data-stretch="true">
         <div data-role="scrollview"
@@ -88,7 +100,11 @@ The widget supports two operation modes - *standard* and *data bound*. The first
         }
     </script>
 
-### Initialize mobile ScrollView bound to remote data using jQuery plug-in syntax.
+#### Use jQuery Plugin Syntax
+
+The example below demonstrates how to initialize a Hybrid UI ScrollView bound to remote data by using jQuery plugin syntax.
+
+###### Example
 
     <div data-role="view" data-stretch="true" data-init="onInit">
         <div id="scrollview"></div>
@@ -125,66 +141,36 @@ The widget supports two operation modes - *standard* and *data bound*. The first
         }
     </script>
 
-## Local pages
+### Render Content of Pages
 
-To define a local page, wrap the content in a `div` tag with `data-role="page"` attribute set.
+When the ScrollView is in a data-bound mode, it generates its page elements automatically. When the DataSource is populated with data, the widget uses its `template` to render the content of the pages.
 
-### ScrollView with local pages
+> **Important**
+>
+> It is mandatory that you specify the template. If it is missing, the widget is not able to render the content.
 
-    <div data-role="scrollView">
-        <div data-role="page">Foo</div>
-        <div data-role="page">Bar</div>
-    </div>
+By default, the widget displays one data-record per page. There is an opportunity for displaying multiple data records on a single page by setting the `itemsPerPage` configuration option. In such cases, the specified amount of data records is passed to the template and it is your responsibility to handle the way they are going to be displayed.
 
-### Clearing the whitespaces
+> **Important**
+>
+> To ensure smooth scrolling, the `pageSize` of the DataSource should be 6 times `itemsPerPage` amount or higher. For example, if the `itemsPerPage` is set to 4, the `pageSize` must be 24 (4*6) or higher.
 
-Whitespaces between page elements in the mark-up causes the ScrollView pager to display an extra page. In order to fix this any whitespace between page elements should be removed.
+#### Single-Item Templates
 
-    <div data-role="page">
-        <!--page content-->
-    </div><div data-role="page">
-        <!--page content-->
-    </div><div data-role="page">
-        <!--page content-->
-    </div>
+The example below demonstrates a single-item template.
 
-If a Kendo template is used to generate the pages the whitespace gaps can be avoided in the following way.
-
-    <script type="text/x-kendo-template" id="tmp"><div data-role="page" >
-        <!-- page content -->
-    </div></script>
-
-## Binding to data
-
-The Mobile ScrollView can be bound to both local JavaScript arrays and remote data via the Kendo DataSource component.
-Local JavaScript arrays are appropriate for small data sets, while remote data binding with `serverPaging` is better for larger data sets.
-
-> **Important:** In case the total amount of displayed data is large, it is recommended to turn off the pager by setting `enablePager: false` in the configuration options or via `data-enable-pager="false"` data attribute.
-
-If `dataSource` configuration option of the Mobile ScrollView is set, the widget will operate in data bound mode.
-In this mode, fixed amount of DOM elements are rendered, and then dynamically repositioned and updated while the user scrolls the widget.
-
-Once the ScrollView reaches the total amount of DataSource items forward scrolling will be prevented automatically.
-
-### Pages in data bound mode
-
-When the Kendo Mobile ScrollView is in data bound mode, it will generate its page elements automatically.
-When DataSource is populated with data the widget will use its `template` to render the pages' content.
-**Specifying the template is mandatory**, if it is missing the widget will not be able to render the content.
-
-By default the widget displays one data record per page. There is an opportunity for displaying multiple data records on a single page by setting the `itemsPerPage` configuration option.
-*In such case, the specified amount of data records will be passed to the template and it is responsibily of the developer to handle the way they will be displayed.*
-
-> **Important:** In order ensure smooth scrolling the **`pageSize` of the DataSource should be 6 times `itemsPerPage` amount** or higher. For example, if `itemsPerPage` is set to 4, then the `pageSize` must be 24 (4*6) or higher.
-
-#### Single item template
+###### Example
 
     <script id="scrollview-template" type="text/x-kendo-template">
         <div style="width: 110px; height: 110px; background-image: #=setBackground(ProductID)#;"></div>
         <p>#= ProductName #</p>
     </script>
 
-#### Multiple items template
+#### Multiple-Item Templates
+
+The example below demonstrates a multiple-item template.
+
+###### Example
 
     <!-- Note! data is accessed via data[index].fieldName -->
     <script id="scrollview-template" type="text/x-kendo-template">
@@ -229,13 +215,15 @@ By default the widget displays one data record per page. There is an opportunity
         }
     </script>
 
-### Displaying incomplete pages
+### Display of Incomplete Pages
 
-When the ScrollView is configured to **display multiple items per page**, in some cases the last data view may not be complete. For example, if `itemsPerPage: 3` and there are total 7 records in the DataSource, the widget should render 3 pages in total. First two will contain 3 items, while the last one will have only 1 remaining item to display. **In such case, the developer is responsible to configure the widget's template so it will be able to handle the missing records, else a JavaScript error will occur.**
+When the ScrollView is configured to display multiple items per page, sometimes the last data view may not be complete. For example, if `itemsPerPage: 3` and there are a total of seven records in the DataSource, the widget should render 3 pages in total. The first two contain 3 items, while the last one has only 1 remaining item to display. In such cases, it is your responsibility to configure the template of the widget so it is able to handle the missing records. Otherwise, a JavaScript error occurs.
 
-One possible approach is to use JavaScript logic (for loop) inside the template.
+A possible approach to handle this issue is to use JavaScript logic (the `for` loop) inside the template.
 
-#### Template with JavaScript for loop
+The example below demonstrates a template with a JavaScript `for` loop.
+
+###### Example
 
     <div id="home" data-role="view" data-model="viewModel">
         <div id="scrollview" data-role="scrollview"
@@ -270,15 +258,52 @@ One possible approach is to use JavaScript logic (for loop) inside the template.
         var app = new kendo.mobile.Application();
     </script>
 
-## Nova theme features
+## Local Pages
 
-### Pager overlay
+### Define Local Pages
+
+To define a local page, wrap the content in a `div` tag with `data-role="page"` attribute set.
+
+###### Example
+
+    <div data-role="scrollView">
+        <div data-role="page">Foo</div>
+        <div data-role="page">Bar</div>
+    </div>
+
+### Clear Whitespaces
+
+Whitespaces between page elements in markup causes the ScrollView pager to display an extra page. To fix this, remove any whitespace between the page elements.
+
+###### Example
+
+    <div data-role="page">
+        <!--page content-->
+    </div><div data-role="page">
+        <!--page content-->
+    </div><div data-role="page">
+        <!--page content-->
+    </div>
+
+If a Kendo UI template is used to generate the pages, the whitespace gaps can be avoided in the way shown in the example below.
+
+###### Example
+
+    <script type="text/x-kendo-template" id="tmp"><div data-role="page" >
+        <!-- page content -->
+    </div></script>
+
+## Nova Theme Features
+
+### Pager Overlay
+
+**Figure 1. ScrollView pager overlay**
 
 ![ScrollView pager overlay](/controls/hybrid/scrollview/pager-overlay.png)
 
-To activate the feature add `km-scrollview-overlay` class to the ScrollView element.
+To activate the feature, add the `km-scrollview-overlay` class to the ScrollView element.
 
-#### Pager overlay - example
+###### Example
 
     <div data-role="scrollView" class="km-scrollview-overlay">
         <div data-role="page">Foo</div>
@@ -287,13 +312,39 @@ To activate the feature add `km-scrollview-overlay` class to the ScrollView elem
 
 ## Troubleshooting
 
-If a dataBound ScrollView does not display any data the reason might be:
+### Display Issues
 
-- the [pageSize](/api/framework/datasource#configuration-pageSize) of the DataSource is undefined. Setting `pageSize` is mandatory.
-- the [total](/api/framework/datasource#configuration-schema.total) amount of records in the DataSource is undefined. Setting the `total` is mandatory.
-- the widget's [template](/api/mobile/scrollview#configuration-template) is undefined. Setting `template` is mandatory.
-- the widget content height is zero - if `contentHeight` is set to 100% the ScrollView element should be immediate child of the View and the View's stretch option should be set to true. Code sample could be found [here](/api/mobile/scrollview#configuration-contentHeight)
+A data-bound ScrollView does not display any data. Below are listed some of the possible reasons and solutions for that.
 
-If the widget loads data but the application hangs or crashes:
+The [`pageSize`](/api/javascript/data/datasource#configuration-pageSize) of the DataSource is undefined.
 
-- most probably the total amount of records that you are loading is large and you have to set [enablePager](/api/mobile/scrollview#configuration-enablePager) to false.
+* **Solution** Set the `pageSize`. Setting the `pageSize` is mandatory.
+
+The [`total`](/api/javascript/data/datasource#configuration-schema.total) amount of records in the DataSource is undefined.
+
+* **Solution** Set the `total`. Setting the `total` is mandatory.
+
+The widget's [`template`](/api/javascript/mobile/ui/scrollview#configuration-template) is undefined.
+
+* **Solution** Set the `template`. Setting the `template` is mandatory.
+
+The widget's content height is zero.
+
+* **Solution** If the `contentHeight` is set to 100%, the ScrollView element should be the immediate child of the View and the View's `stretch` option should be set to `true`. For a code sample, refer to [this demo](/api/javascript/mobile/ui/scrollview#configuration-contentHeight).
+
+### Performance Issues
+
+The widget loads data, but the application hangs or crashes. The possible reason is that the total amount of records that you are loading is large.
+
+**Solution** Set the [`enablePager`](/api/mobile/scrollview#configuration-enablePager) to `false`.
+
+## See Also
+
+Other articles and how-to examples on the Hybrid UI components and on the ScrollView:
+
+* [Hybrid UI ScrollView JavaScript API Reference](/api/javascript/mobile/ui/scrollview)
+* [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})
+* [How to Create Fixed Content Areas with Scroller]({% slug howto_createfixedcontentarea_hybridui %})
+* [How to Create Relative Content Size Using Flexboxes]({% slug howto_createrelative_contentsize_usingflexboxes_hybridui %})
+* [How to Select Value from Another View]({% slug howto_selectvaluefrom_anotherview_hybridui %})
+* [How to Set Initial View Prior to Initialization in AngularJS]({% slug howto_setinitiaviewpriortoinitialization_angular_hybridui %})

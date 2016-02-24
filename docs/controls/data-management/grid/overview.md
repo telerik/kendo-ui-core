@@ -1,24 +1,36 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Grid Widget
+page_title: Overview | Kendo UI Grid
 description: "Learn how to create, initialize, and enable the Kendo UI Grid widget."
 previous_url: /web/grid/introduction
 slug: overview_kendoui_grid_widget
-position: 2
+position: 1
 ---
 
 # Grid Overview
 
 The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) is a powerful control for displaying data in a tabular format. It provides many options, such as paging, sorting, filtering, grouping, and editing, which determine the way data is presented and manipulated. The Grid can be bound to local or remote data by using the Kendo UI DataSource component.
 
-## Initialize the Grid
+## Getting Started
+
+### Read in Advance
+
+Because of the numerous functionalities it supports, the Grid is the most complex of the Kendo UI widgets so far. To gain greater confidence before you start working with it, make sure you get familiar with the concepts listed below in advance:
+
+* [DataSource]({% slug overview_kendoui_datasourcecomponent %})&mdash;The DataSource is one of the pivotal Kendo UI components. It is an abstraction for using local or remote data and is, therefore, a key concept in understanding how the Grid functions.
+* [Remote CRUD Operations]({% slug cruddataoperations_kendoui_datasourcecomponent %}#remote-transport-crud-operations)&mdash;The section elaborates on scenarios, in which data is retrieved from and submitted to a remote data service via HTTP requests made by the Kendo UI DataSource.
+* [Remote Data Binding]({% slug remote_data_binding_grid %})&mdash;The article provides information on server filtering, paging, and other features of the Grid.
+* [Grid Editing Functionality]({% slug editing_kendoui_grid_widget %})&mdash;The editing functionality of the Grid allows you to manipulate the way the data in it is presented.
+* [Kendo UI Editing Functionality]({% slug kendoui_editing_gettingstarted %})&mdash;The editing functionality in some Kendo UI widgets, including the Grid, is implemented with a specific editor element/form that is bound to the model using the [Kendo UI MVVM bindings]({% slug overview_mvvmpattern_kendoui %}).
+
+### Initialize the Grid
 
 There are two primary ways to create a Kendo UI Grid:
 
 * From an empty `<div>` element. In this case all Grid settings are provided in the initialization script statement.
 * From an existing HTML `<table>` element. In this case some of the Grid settings can be inferred from the table structure and the HTML attributes of the elements.
 
-### From HTML Element: div
+#### From HTML Element: div
 
 ###### Example
 
@@ -53,7 +65,7 @@ There are two primary ways to create a Kendo UI Grid:
 
     </script>
 
-### From HTML Table
+#### From HTML Table
 
 When creating the Grid from a table, it is usually already populated with data. This improves the accessibility and search engine optimization, and ensures that the user will see data even if JavaScript is disabled or there is a JavaScript error on the page.
 
@@ -127,7 +139,7 @@ As seen from the code snippets above, in the first case the Grid client object i
 
 ### Paging, Sorting, Grouping, and Scrolling
 
-To configure any of these Grid behaviors, use simple Boolean configuration options. Note that by default, paging, grouping, and sorting are disabled, and scrolling is enabled.
+To configure the paging, sorting, grouping, or scrolling functionality of the Grid, use simple Boolean configuration options. Note that, by default, paging, grouping, and sorting are disabled, and scrolling is enabled.
 
 ###### Example
 
@@ -183,7 +195,7 @@ Other articles on Kendo UI Grid:
 * [Export the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %})
 * [Print the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Grid Widget](/aspnet-mvc/helpers/grid/overview)
-* [Overview of the Grid JSP Tag](/jsp/tags/grid/overview)
+* [Overview of the Grid JSP Tag]({% slug overview_grid_uiforjsp %})
 * [Overview of the Grid PHP Class](/php/widgets/grid/overview)
 
 For how-to examples on the Kendo UI Grid widget, browse [its How-to section]({% slug howto_bindto_telerik_backend_services_grid %}).

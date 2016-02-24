@@ -1,26 +1,33 @@
 ---
 title: Overview
-title: How to use the ToolBar PHP class, server-side wrapper for Kendo UI ToolBar widget
-description: Learn how to create Kendo UI ToolBar for PHP, handle Kendo UI ToolBar Events, access an existing toolbar.
+page_title: Overview | ToolBar PHP Class
+description: "Get started with the ToolBar PHP class in Kendo UI."
+slug: overview_toolbar_uiforphp
+position: 1
 ---
 
-# ToolBar
+# ToolBar PHP Class Overview
 
-The Kendo ToolBar for PHP is a server-side wrapper for the [Kendo UI ToolBar](/api/web/toolbar) widget.
+The Kendo UI ToolBar for PHP is a server-side wrapper for the [Kendo UI ToolBar](/api/javascript/ui/toolbar) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo ToolBar:
+### Configuration
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-2. Create a [toolbar](/api/php/Kendo/UI/ToolBar), specify the widget's commands.
+Below are listed the steps for you to follow when configuring the Kendo UI ToolBar for PHP.
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Create a [ToolBar](/api/php/Kendo/UI/ToolBar) and specify the widget's commands.
+
+###### Example
 
         <?php
-        
+
         $toolbar = new \Kendo\UI\ToolBar('toolbar');
 
         $toolbar->addItem(
-            
+
             //regular button
             array("type" => "button", "text" => "Button"),
 
@@ -57,64 +64,85 @@ Here is how to configure a simple Kendo ToolBar:
 
         ?>
 
-3. Output the toolbar by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+**Step 3** Output the ToolBar by echoing the result of the `render` method.
+
+###### Example
 
         <?php echo $toolbar->render(); ?>
 
-## Getting Client-side Reference
+## Event Handling
 
-You can reference the client-side Kendo ToolBar instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
+You can subscribe to all ToolBar [events](/api/javascript/ui/toolbar#events).
 
-### Example
+### Specify Function Names
 
-    <?php
-    $toolbar = new \Kendo\UI\ToolBar('#container');
-    $toolbar->addItem(
-        //regular button
-        array("type" => "button", "text" => "Button"),
-    );
-    echo $toolbar->render();
-    ?>
-    <script>
-    $(function() {
-        // The constructor parameter is used as a selector for getting toolbar's container
-        var toolbar = $("#container").data("kendoToolBar");
-    });
-    </script>
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-## Handling Events
+###### Example
 
-You can subscribe to all toolbar [events](/api/web/toolbar#events).
+        <?php
+        $toolbar = new \Kendo\UI\ToolBar('#container');
+        $toolbar->addItem(
+            array("type" => "button", "text" => "Button"),
+        );
 
-### Example - subscribing by specifying JavaScript function name
+        // The 'onClick' JavaScript function will handle the 'click' event of the toolbar
+        $toolbar->click('onClick');
 
-    <?php
-    $toolbar = new \Kendo\UI\ToolBar('#container');
-    $toolbar->addItem(
-        array("type" => "button", "text" => "Button"),
-    );
+        echo $toolbar->render();
+        ?>
+        <script>
+        function onClick() {
+            // Handle the show event
+        }
+        </script>
 
-    // The 'onClick' JavaScript function will handle the 'click' event of the toolbar
-    $toolbar->click('onClick');
+### Provide Inline Code
 
-    echo $toolbar->render();
-    ?>
-    <script>
-    function onClick() {
-        // Handle the show event
-    }
-    </script>
+The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-### Example - providing inline JavaScript code
+###### Example
 
-    <?php
-    $toolbar = new \Kendo\UI\ToolBar('#container');
-    $toolbar->addItem(
-        array("type" => "button", "text" => "Button"),
-    );
+        <?php
+        $toolbar = new \Kendo\UI\ToolBar('#container');
+        $toolbar->addItem(
+            array("type" => "button", "text" => "Button"),
+        );
 
-    // Provide inline JavaScript code that will handle the 'click' event of the toolbar
-    $toolbar->click('function() { /* Handle the show event */ }');
+        // Provide inline JavaScript code that will handle the 'click' event of the toolbar
+        $toolbar->click('function() { /* Handle the show event */ }');
 
-    echo $toolbar->render();
-    ?>
+        echo $toolbar->render();
+        ?>
+
+<!--*-->
+## Reference
+
+### Client-Side Instances
+
+You are able to reference an existing ToolBar instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [ToolBar API](/api/javascript/ui/toolbar#methods) to control its behavior.
+
+###### Example
+
+        <?php
+        $toolbar = new \Kendo\UI\ToolBar('#container');
+        $toolbar->addItem(
+            //regular button
+            array("type" => "button", "text" => "Button"),
+        );
+        echo $toolbar->render();
+        ?>
+        <script>
+        $(function() {
+            // The constructor parameter is used as a selector for getting toolbar's container
+            var toolbar = $("#container").data("kendoToolBar");
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the ToolBar:
+
+* [Overview of the Kendo UI ToolBar Widget]({% slug overview_kendoui_toolbar_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

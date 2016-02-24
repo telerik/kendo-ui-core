@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI TreeMap Widget  
+page_title: Overview | Kendo UI TreeMap  
 description: "Learn how to create a Kendo UI TreeMap widget and explore its major features."
 slug: overview_treemap_widget
 position: 1
@@ -52,6 +52,19 @@ Initialize the TreeMap and bind it in the way demonstrated below.
 ### Bind to Remote Data
 
 For detailed information on how to bind the Kendo UI TreeMap to different service end-points, refer to the [hierarchical Data Source API article](/api/framework/hierarchicaldatasource).
+
+### Colors
+
+The TreeMap applies various colors to its `leaf` items. These are the items that have no children.
+
+The following algorithms are used:
+
+* If the colors, or the color ranges, are defined via the [`colors`](/api/javascript/dataviz/ui/treemap#configuration-colors) configuration option, the TreeMap uses one color or range of colors for all sibling `leaf` items. The next color or range of colors are used for the next collection of sibling leaf items. When all colors or ranges have been used, the TreeMap starts over from the first one.
+* If the colors are defined in the dataSource and a [`colorField`](/api/javascript/dataviz/ui/treemap#configuration-colorField) is set, the TreeMap applies the colors from the data.
+
+The two methods can be combined. In this case, colors from the dataSource take precedence, and the TreeMap only uses the colors from the `colors` setting for items, which have no color defined in the data.
+
+To set different colors to sibling `leaf` items without having the colors in the data, use the [`itemCreated`](/api/javascript/dataviz/ui/treemap#events-itemCreated) or the [`dataBound`](/api/javascript/dataviz/ui/treemap#events-dataBound) event of the TreeMap.
 
 ## Reference
 

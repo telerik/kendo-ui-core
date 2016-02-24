@@ -1,35 +1,44 @@
 ---
 title: Overview
-page_title: How to use LinearGauge PHP class | Kendo UI documentation
-description: User Guide for server-side wrapper for Kendo UI LinearGauge for PHP.
+page_title: Overview | LinearGauge PHP Class
+description: "Get started with the LinearGauge PHP class in Kendo UI."
+slug: overview_lineargauge_uiforphp
+position: 1
 ---
 
-# Linear Gauge
+# LinearGauge PHP Class Overview
 
-The LinearGauge PHP class is a server-side wrapper for the [Kendo DataViz LinearGauge](/api/dataviz/lineargauge) widget.
+The Kendo UI LinearGauge for PHP is a server-side wrapper for the [Kendo UI LinearGauge](/api/javascript/dataviz/ui/lineargauge) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo LinearGauge:
+### Configuration
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
+Below are listed the steps for you to follow when configuring the Kendo UI LinearGauge for PHP.
 
-1. Add a linear gauge:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Create a [LinearGauge](/api/javascript/dataviz/ui/lineargauge).
+
+###### Example
 
         $gauge = new \Kendo\Dataviz\UI\LinearGauge('gauge');
         $gauge->pointer(array('value' => 10))
               ->scale(array('min' => 0, 'max' => 100));
 
-1. Output the chart by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+**Step 3** Output the LinearGauge by echoing the result of the `render` method.
+
+###### Example
 
         echo $gauge->render();
 
-## Accessing an Existing LinearGauge
+## Reference
 
-You can reference an existing LinearGauge instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/dataviz/lineargauge#methods) to control its behavior.
+### Client-Side Instances
 
-### Accessing an existing LinearGauge instance
+You are able to reference an existing LinearGauge instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [LinearGauge API](/api/javascript/dataviz/ui/lineargauge#methods) to control its behavior.
+
+###### Example
 
         // Put this after your Kendo LinearGauge for PHP render() call
         <script>
@@ -40,3 +49,10 @@ Once a reference has been established, you can use the [API](/api/dataviz/linear
         });
         </script>
 
+## See Also
+
+Other articles on Telerik UI for PHP and on the LinearGauge:
+
+* [Overview of the Kendo UI LinearGauge Widget]({% slug overview_kendoui_lineargauge_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

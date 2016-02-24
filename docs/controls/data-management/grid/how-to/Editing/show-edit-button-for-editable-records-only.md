@@ -1,6 +1,6 @@
 ---
 title: Show Edit Buttons for Editable Records Only
-page_title: Show Edit Buttons for Editable Records Only | Kendo UI Grid Widget
+page_title: Show Edit Buttons for Editable Records Only | Kendo UI Grid
 description: "Learn how to show edit buttons for editable records only in the Kendo UI Grid widget."
 slug: howto_show_editfor_editable_records_only_grid
 ---
@@ -14,7 +14,7 @@ The example below demonstrates how to show **Edit** buttons only for records tha
 ```html
     <div id="example" class="k-content">
       <div id="grid"></div>
-      
+
       <script>
         $(document).ready(function () {
           var crudServiceBaseUrl = "http://demos.telerik.com/kendo-ui/service",
@@ -57,7 +57,7 @@ The example below demonstrates how to show **Edit** buttons only for records tha
                   }
                  }
                 });
-          
+
           $("#grid").kendoGrid({
             dataSource: dataSource,
              pageable: true,
@@ -68,7 +68,7 @@ The example below demonstrates how to show **Edit** buttons only for records tha
                  if( item.UnitPrice % 5 == 0) {
                    $(this).find('.k-grid-edit,.k-grid-delete').hide();
                  }
-                 
+
                });               
              },
              height: 430,

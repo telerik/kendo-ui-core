@@ -1,6 +1,6 @@
 ---
 title: Expand Background of Long List Items
-page_title: Expand Background of Long List Items | Kendo UI ComboBox Widget
+page_title: Expand Background of Long List Items | Kendo UI ComboBox
 description: "Learn how to expand the background of long list items in Kendo UI ComboBox, AutoComplete, DropDownList, and MultiSelect widgets."
 slug: howto_expand_background_longlist_items_combobox
 ---
@@ -80,3 +80,4 @@ Other articles on Kendo UI ComboBox:
 * [How to Select Items on Tab]({% slug howto_select_items_ontab_combobox %})
 * [How to Blur the ComboBox after Select]({% slug howto_blur_after_select_combobox %})
 * [How to Disable Child Cascading ComboBoxes]({% slug howto_disable_child_cascading_combobox %})
+* [How to Define Virtual Configuration Declaratively]({% slug howto_define_virtual_option_combobox %})

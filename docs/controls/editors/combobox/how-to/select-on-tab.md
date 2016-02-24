@@ -1,6 +1,6 @@
 ---
 title: Select Items on Tab
-page_title: Select Items on Tab | Kendo UI ComboBox Widget
+page_title: Select Items on Tab | Kendo UI ComboBox
 description: "Learn how to select an item on pressing `Tab` in the Kendo UI ComboBox widget."
 slug: howto_select_items_ontab_combobox
 ---
@@ -105,3 +105,4 @@ Other articles on Kendo UI ComboBox:
 * [How to Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
 * [How to Blur the ComboBox after Select]({% slug howto_blur_after_select_combobox %})
 * [How to Disable Child Cascading ComboBoxes]({% slug howto_disable_child_cascading_combobox %})
+* [How to Define Virtual Configuration Declaratively]({% slug howto_define_virtual_option_combobox %})

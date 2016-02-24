@@ -408,4 +408,22 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "showWorkDay": "Montrer les heures ouvrables"
 });
 }
+
+
+/* Validator messages */
+
+if (kendo.ui.Validator) {
+kendo.ui.Validator.prototype.options.messages =
+$.extend(true, kendo.ui.Validator.prototype.options.messages,{
+  "required": "{0} est requis",
+  "pattern": "{0} n'est pas valide",
+  "min": "{0} doit être plus grand ou égal à {1}",
+  "max": "{0} doit être plus petit ou égal à {1}",
+  "step": "{0} n'est pas valide",
+  "email": "{0} n'est pas un courriel valide",
+  "url": "{0} n'est pas une adresse web valide",
+  "date": "{0} n'est pas une date valide",
+  "dateCompare": "La date de fin doit être postérieure à la date de début"
+});
+}
 })(window.kendo.jQuery);

@@ -1,6 +1,6 @@
 ---
 title: List of <code>borderPalette</code> Messages
-page_title: List of borderPalette Messages | Kendo UI Spreadsheet Widget
+page_title: List of borderPalette Messages | Kendo UI Spreadsheet
 description: "A list of the borderPalette messages used for localization of the Kendo UI Spreadsheet widget via JavaScript."
 slug: localization_borderpalette_messages_spreadsheet_widget
 ---
@@ -12,7 +12,7 @@ Below is the list of the messages and their namespaces under the `borderPalette`
     if (kendo.spreadsheet && kendo.spreadsheet.messages.borderPalette) {
         kendo.spreadsheet.messages.borderPalette =
         $.extend(true, kendo.spreadsheet.messages.borderPalette,{
-          //"nameSpace": "Message" 
+          //"nameSpace": "Message"
           "allBorders": "All borders",
           "insideBorders": "Inside borders",
           "insideHorizontalBorders": "Inside horizontal borders",
@@ -25,7 +25,7 @@ Below is the list of the messages and their namespaces under the `borderPalette`
           "noBorders": "No border"
         });
         }
-        
+
 ## See Also
 
 * [List of `dialogs` Messages]({% slug localization_dialogs_messages_spreadsheet_widget %})

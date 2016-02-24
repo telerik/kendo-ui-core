@@ -1,6 +1,6 @@
 ---
 title: Submit Forms on Enter
-page_title: Submit Forms on Enter | Kendo UI DatePicker Widget
+page_title: Submit Forms on Enter | Kendo UI DatePicker
 description: "Learn how to submit a form in the Kendo UI datePicker widget when users press `Enter`."
 slug: howto_submmit_forms_onenter_datepicker
 ---

@@ -1,6 +1,6 @@
 ---
 title: Bind Values to Template
-page_title: Bind Values to Template | Kendo UI MultiSelect Widget
+page_title: Bind Values to Template | Kendo UI MultiSelect
 description: "Learn how to bind values to a template by using MVVM in the Kendo UI MultiSelect widget."
 slug: howto_bind_values_totemplate_multiselect
 ---

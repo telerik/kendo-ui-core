@@ -1,6 +1,6 @@
 ---
 title: Add Close Button inside Modal Windows
-page_title: Add Close Button inside Modal Windows | Kendo UI Window Widget
+page_title: Add Close Button inside Modal Windows | Kendo UI Window
 description: "Learn how to add a Close button to a modal Kendo UI Window."
 slug: howto_addclosebutton_insidemodalwindows_window
 ---

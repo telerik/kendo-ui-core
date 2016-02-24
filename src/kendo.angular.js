@@ -537,10 +537,7 @@ var __meta__ = { // jshint ignore:line
             deregister();
             if (widget) {
                 if (widget.element) {
-                    widget = kendoWidgetInstance(widget.element);
-                    if (widget) {
-                        widget.destroy();
-                    }
+                    widget.destroy();
                 }
                 widget = null;
             }

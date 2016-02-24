@@ -835,6 +835,22 @@ test("value method keeps datasource filters if widget filtration is not enabled"
     equal(filter.value, "foo");
 });
 
+test("value method sets text if it has been cleared", function() {
+    combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}],
+        filter: "none"
+    });
+
+    combobox.value(1);
+    combobox.text("");
+
+    combobox.value(1);
+
+    equal(combobox.text(), "foo");
+});
+
 test("ComboBox does not change text if custom value is equal to options.value", function() {
     var combobox = new ComboBox(input, {
         dataSource: ["Item1", "Item2"],

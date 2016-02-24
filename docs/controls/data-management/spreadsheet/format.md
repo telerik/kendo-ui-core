@@ -1,6 +1,6 @@
 ---
 title: Cell Formatting
-page_title: Cell Formatting | Kendo UI Spreadsheet Widget
+page_title: Cell Formatting | Kendo UI Spreadsheet
 description: "Learn how to format cells in the Kendo UI Spreadsheet widget."
 slug: cell_formatting_spreadsheet_widget
 position: 2
@@ -8,15 +8,15 @@ position: 2
 
 # Cell Formatting
 
-Kendo UI Spreadsheet supports many cell-formatting options such as formatting of strings, text, numbers, dates, and time. 
+Kendo UI Spreadsheet supports many cell-formatting options such as formatting of strings, text, numbers, dates, and time.
 
-## Formatting 
+## Formatting
 
 ### Strings
 
 The format strings are compatible with the [Excel number formats](https://support.office.com/en-au/article/Create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4), with some [notable exceptions](#differences-to-excel).
 
-A format string consists of one or more sections, separated by semicolons. A section optionally specifies a color and a condition. 
+A format string consists of one or more sections, separated by semicolons. A section optionally specifies a color and a condition.
 
 The example below demonstrates how to display a number with up to three decimals.
 
@@ -25,17 +25,17 @@ The example below demonstrates how to display a number with up to three decimals
     #.###
 
 The example below demonstrates how to display positive numbers, or zero, in green, and negative numbers in red.     
-    
+
 ###### Example
 
     [Green]#.###;[Red]#.###
-    
+
 The example below demonstrates how to display positive numbers in green, negative numbers in red, and the the "Zero" text in blue if the number is zero.
 
 ###### Example
 
     [Green]#.###;[Red]#.###;[Blue]"Zero"
-    
+
 This example is the same as the previous one, with the difference to display any possible text in the cell in magenta.
 
 ###### Example
@@ -49,9 +49,9 @@ Excel documentation mentions that a maximum of four sections are supported, and 
 - Format for zero
 - Format for text
 
-Excel also supports a more flexible conditional formatting. 
+Excel also supports a more flexible conditional formatting.
 
-The example below demonstrates how to display numbers greater than 100 in green, numbers less than minus 100 in yellow, and other numbers in cyan. 
+The example below demonstrates how to display numbers greater than 100 in green, numbers less than minus 100 in yellow, and other numbers in cyan.
 
 ###### Example
 
@@ -130,7 +130,7 @@ The Spreadsheet does not support the following options otherwise available in Ex
 - Exponent (“scientific”) notation (`E+`, `E-` Excel formats)
 - Filling cell width (`*` Excel format)
 
-## See Also 
+## See Also
 
 Other articles on Kendo UI Spreadsheet:
 

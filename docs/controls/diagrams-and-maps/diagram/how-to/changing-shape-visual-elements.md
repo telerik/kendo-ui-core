@@ -1,6 +1,6 @@
 ---
 title: Change Shape Visual Elements Dynamically
-page_title: Change Shape Visual Elements Dynamically | Kendo UI Diagram Widget
+page_title: Change Shape Visual Elements Dynamically | Kendo UI Diagram
 description: "Learn how to find a particular element from the shape visual and dynamically change it in a Kendo UI Diagram."
 slug: howto_changeshapevisualelements_dynamically_diagram
 ---

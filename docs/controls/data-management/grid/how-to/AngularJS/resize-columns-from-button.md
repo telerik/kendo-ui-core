@@ -1,6 +1,6 @@
 ---
 title: Resize Columns from a Button
-page_title: Resize Columns from a Button | Kendo UI Grid Widget
+page_title: Resize Columns from a Button | Kendo UI Grid
 description: "Learn how to resize or disable the resizing option inside the Kendo UI Grid widget by using custom buttons and AngularJS handlers."
 slug: howto_resize_columnsfrom_abutton_grid
 ---
@@ -28,7 +28,7 @@ The example below demonstrates how to resize the columns of a Kendo UI Grid widg
         $scope.onClick = function(){
           $scope.isDisabled=true;
         }
-        
+
         $scope.expandButton = function(){
           $scope.kg.thead.prev().find("col").eq(0).width(200);
           $scope.kg.tbody.prev().find("col").eq(0).width(200);
@@ -63,7 +63,7 @@ The example below demonstrates how to resize the columns of a Kendo UI Grid widg
           },{
             field: "Title",
             width: "120px"
-          },{ 
+          },{
             field: "Button",
             width: "120px",
             template: '<button class="k-button" ng-click="expandButton()" ng-disabled="isDisabled">Resize</button>'

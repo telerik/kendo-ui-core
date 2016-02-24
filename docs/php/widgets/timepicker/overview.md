@@ -1,19 +1,26 @@
 ---
 title: Overview
-page_title: How to use the Timepicker PHP class, server-side wrapper for Kendo UI Timepicker widget
-description: Learn how to create Kendo UI Timepicker for PHP, handle Kendo UI Timepicker Events, access an existing Timepicker.
+page_title: Overview | TimePicker PHP Class
+description: "Get started with the TimePicker PHP class in Kendo UI."
+slug: overview_timepicker_uiforphp
+position: 1
 ---
 
-# Timepicker
+# TimePicker PHP Class Overview
 
-The Kendo TimePicker for PHP is a server-side wrapper for the [Kendo UI TimePicker](/api/web/timepicker) widget.
+The Kendo UI TimePicker for PHP is a server-side wrapper for the [Kendo UI TimePicker](/api/javascript/ui/timepicker) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo Timepicker:
+### Configuration
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-1. Create a [timepicker](/api/php/Kendo/UI/TimePicker).
+Below are listed the steps for you to follow when configuring the Kendo UI TimePicker for PHP.
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Create a [TimePicker](/api/php/Kendo/UI/TimePicker).
+
+###### Example
 
         <?php
         $timePicker = new \Kendo\UI\TimePicker('timepicker');
@@ -21,57 +28,77 @@ Here is how to configure a simple Kendo Timepicker:
         $timePicker->value('10:00 AM');
         ?>
 
-1. Output the timepicker by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+**Step 3** Output the TimePicker by echoing the result of the `render` method.
+
+###### Example
 
         <?php
         echo $timePicker->render();
         ?>
 
-## Getting Client-side Reference
+## Event Handling
 
-You can reference the client-side Kendo TimePicker instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/timepicker#methods) to control its behavior.
+You can subscribe to all TimePicker [events](/api/javascript/ui/tabstrip#events).
 
-### Example
+### Specify Function Names
 
-    <?php
-    $timepicker = new \Kendo\UI\TimePicker('timepicker');
-    echo $timepicker->render();
-    ?>
-    <script>
-    $(function() {
-        // The constructor parameter is used as the 'id' HTML attribute of the treeview
-        var timepicker = $("#timepicker").data("kendoTimePicker");
-    });
-    </script>
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-## Handling Events
+###### Example
 
-You can subscribe to all timepicker [events](/api/web/timepicker#events).
+        <?php
+        $timepicker = new \Kendo\UI\TimePicker('timepicker');
 
-### Example - subscribing by specifying JavaScript function name
+        // The 'timepicker_change' JavaScript function will handle the 'change' event of the timepicker
+        $timepicker->change('timepicker_change');
 
-    <?php
-    $timepicker = new \Kendo\UI\TimePicker('timepicker');
+        echo $timepicker->render();
+        ?>
+        <script>
+        function timepicker_change() {
+            // Handle the change event
+        }
+        </script>
 
-    // The 'timepicker_change' JavaScript function will handle the 'change' event of the timepicker
-    $timepicker->change('timepicker_change');
+### Provide Inline Code
 
-    echo $timepicker->render();
-    ?>
-    <script>
-    function timepicker_change() {
-        // Handle the change event
-    }
-    </script>
+The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-### Example - providing inline JavaScript code
+###### Example
 
-    <?php
-    $timepicker = new \Kendo\UI\TimePicker('timepicker');
+        <?php
+        $timepicker = new \Kendo\UI\TimePicker('timepicker');
 
-    // Provide inline JavaScript code that will handle the 'change' event of the timepicker
-    $timepicker->change('function() { /* Handle the change event */ }');
+        // Provide inline JavaScript code that will handle the 'change' event of the timepicker
+        $timepicker->change('function() { /* Handle the change event */ }');
 
-    echo $timepicker->render();
-    ?>
+        echo $timepicker->render();
+        ?>
+
+<!--*-->
+## Reference
+
+### Client-Side Instances
+
+You are able to reference an existing TimePicker instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [TimePicker API](/api/javascript/ui/timepicker#methods) to control its behavior.
+
+###### Example
+
+        <?php
+        $timepicker = new \Kendo\UI\TimePicker('timepicker');
+        echo $timepicker->render();
+        ?>
+        <script>
+        $(function() {
+            // The constructor parameter is used as the 'id' HTML attribute of the treeview
+            var timepicker = $("#timepicker").data("kendoTimePicker");
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the TimePicker:
+
+* [Overview of the Kendo UI TimePicker Widget]({% slug overview_kendoui_timepicker_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

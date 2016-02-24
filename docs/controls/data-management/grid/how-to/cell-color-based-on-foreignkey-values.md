@@ -1,6 +1,6 @@
 ---
 title: Set Cell Color Based on ForeignKey Values
-page_title: Set Cell Color Based on ForeignKey Values | Kendo UI Grid Widget
+page_title: Set Cell Color Based on ForeignKey Values | Kendo UI Grid
 description: "Learn how to create custom a custom editor in a Kendo UI Grid detail template."
 slug: howto_set_cell_color_basedon_foreignkey_values_grid
 ---
@@ -16,7 +16,7 @@ The example below demonstrates how to set a text cell color based on ForeignKey 
     .red{
     	color:red;
     }
-      
+
     .green {
     	color:green;
     }
@@ -80,7 +80,7 @@ The example below demonstrates how to set a text cell color based on ForeignKey 
             columns: [
               { field: "ProductName", title: "Product Name" },
               { field: "CategoryID", width: "200px", values: categories, title: "Category",attributes: {
-                class: "#=ProductID % 2 ? 'red' : 'green' # #console.log(data)#" 
+                class: "#=ProductID % 2 ? 'red' : 'green' # #console.log(data)#"
               },
                template:  function(dataItem) {
                  var value = dataItem.CategoryID;
@@ -90,7 +90,7 @@ The example below demonstrates how to set a text cell color based on ForeignKey 
                  })[0].text;
 
                  return text;
-               } 
+               }
               },
               { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "200px" },
               { command: "destroy", title: " ", width: "150px"}],

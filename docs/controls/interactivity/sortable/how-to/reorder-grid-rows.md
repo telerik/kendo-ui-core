@@ -1,6 +1,6 @@
 ---
 title: Reorder Grid Rows
-page_title: Reorder Grid Rows | Kendo UI Sortable Widget
+page_title: Reorder Grid Rows | Kendo UI Sortable
 description: "Learn how to reorder Grid rows using a Kendo UI Sortable widget."
 slug: howto_reordergridrows_sortable
 ---

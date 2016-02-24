@@ -254,4 +254,51 @@
 
         equal(dropdown.value(), "");
     });
+
+    ngTest("dropdownlist compiles item template", 3, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            $scope.selectedColors = [ "red", "green" ];
+
+            $scope.selectOptions = {
+                dataSource: [ "red", "green", "blue" ],
+                template: "{{dataItem}} - {{text}}",
+                valuePrimitive: true
+            };
+
+            $scope.text = "My text";
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-drop-down-list k-ng-model=selectedColors k-options=selectOptions></select></div>');
+    },
+
+    function() {
+        var items = QUnit.fixture.find("select").getKendoDropDownList().items();
+        equal($(items[0]).text(), "red - My text");
+        equal($(items[1]).text(), "green - My text");
+        equal($(items[2]).text(), "blue - My text");
+    });
+
+    ngTest("dropdownlist compiles optionLabel template", 1, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            $scope.selectedColors = [ "red", "green" ];
+
+            $scope.selectOptions = {
+                optionLabel: "Select...",
+                optionLabelTemplate: "{{dataItem}} - {{text}}",
+                dataSource: [ "red", "green", "blue" ],
+                valuePrimitive: true
+            };
+
+            $scope.text = "My text";
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-drop-down-list k-ng-model=selectedColors k-options=selectOptions></select></div>');
+    },
+
+    function() {
+        var widget = QUnit.fixture.find("select").getKendoDropDownList();
+        var optionLabel = widget.optionLabel;
+
+        equal(optionLabel.text(), "Select... - My text");
+    });
 })();

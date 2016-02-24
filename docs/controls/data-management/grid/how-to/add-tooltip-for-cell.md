@@ -1,6 +1,6 @@
 ---
 title: Add Tooltip to Grid Cells
-page_title: Add Tooltip to Grid Cells | Kendo UI Grid Widget
+page_title: Add Tooltip to Grid Cells | Kendo UI Grid
 description: "Learn how to add Kendo UI Tooltip to a cell record in the Kendo UI Grid widget."
 slug: howto_add_tooltipto_grid_cell_record_grid
 ---
@@ -12,7 +12,7 @@ The example below demonstrates how to add a Kendo UI Tooltip to a Kendo UI Grid 
 ###### Example
 
 ```html
-    <div id="grid"></div> 
+    <div id="grid"></div>
 
     <style>
       #grid{
@@ -22,7 +22,7 @@ The example below demonstrates how to add a Kendo UI Tooltip to a Kendo UI Grid 
     <script>
       var grid = null;
 
-      $(document).ready(function () { 
+      $(document).ready(function () {
         var dataSource = new kendo.data.DataSource({
           data: [
             {ID:1 ,Text: "Integer arcu odio, egestas nec pretium sit amet, aliquet vel nibh."},
@@ -33,22 +33,22 @@ The example below demonstrates how to add a Kendo UI Tooltip to a Kendo UI Grid 
             model: {
               fields: {
                 ID: { type: "number" },
-                Text: { type: "string" } 
+                Text: { type: "string" }
               }}
           },
           pageSize: 20
         });
 
-        grid = $("#grid").kendoGrid({ 
-          dataSource: dataSource, 
-          scrollable: true, 
-          filterable: true, 
+        grid = $("#grid").kendoGrid({
+          dataSource: dataSource,
+          scrollable: true,
+          filterable: true,
           toolbar: ["create"],
           columns: [
-            { field: "ID", width: "50px" }, 
+            { field: "ID", width: "50px" },
             { field: "Text", width: "200px", attributes: {
               style: 'white-space: nowrap '
-            }  }], 
+            }  }],
           editable: "incell"
         }).data("kendoGrid");  
 
@@ -56,7 +56,7 @@ The example below demonstrates how to add a Kendo UI Tooltip to a Kendo UI Grid 
 
         $("#grid").kendoTooltip({
           filter: "td:nth-child(2)", //this filter selects the first column cells
-          position: "right", 
+          position: "right",
           content: function(e){
             var dataItem = $("#grid").data("kendoGrid").dataItem(e.target.closest("tr"));
             var content = dataItem.Text;

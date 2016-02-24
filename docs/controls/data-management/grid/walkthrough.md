@@ -1,14 +1,14 @@
 ---
 title: Walkthrough
-page_title: Walkthrough | Kendo UI Grid Widget
+page_title: Walkthrough | Kendo UI Grid
 description: "Learn how to create a grid, add an HTML table and control the features of the Kendo UI Grid widget."
 slug: walkthrough_kendoui_grid_widget
-position: 1
+position: 2
 ---
 
 # Walkthrough
 
-[Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) is a powerful piece of the Kendo UI framework and an essential part of almost any user interface. The Grid control is quick to set up and is packed with features like sorting, grouping, paging, and editing.
+The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) is a powerful piece of the Kendo UI framework and an essential part of almost any user interface. The Grid control is quick to set up and is packed with features like [sorting](/api/javascript/ui/grid#configuration-sortable), [grouping](/api/javascript/ui/grid#configuration-groupable), [paging](/api/javascript/ui/grid#configuration-pageable), and [editing](/api/javascript/ui/grid#events-edit).
 
 ## Initialize the Grid
 
@@ -76,7 +76,7 @@ Since the layout of the Grid is defined by the HTML, it is only necessary to cal
 
     $("#grid").kendoGrid();
 
-At this point, regardless of the way the grid was created, you have an empty grid.
+When you create the Grid from an existing HTML table, each row from the table is added as a data-item to the DataSource of the Grid. As a result, your Grid is populated with the content from the table to reflect the information it contains.
 
 For more detailed information on how to create a Grid, refer to [the Grid overview article]({% slug overview_kendoui_grid_widget %}).
 
@@ -455,6 +455,8 @@ If you decide to use server paging, be prepared to handle the requests to the se
 * `skip` - the number of records to skip from the start of the dataset.
 
 For instance, if you want to show page 3 out of a 60-record dataset split into 10 records per page, the grid would send `skip: 20`, `top: 10`.
+
+In general, Kendo UI Grid is platform-agnostic, which means that it works with HTTP requests sending and receiving JSON payload.For instance, if you want to bind the widget to a specific data subset (only to а particular page), instruct the DataSource to use [`serverPaging`](/api/javascript/data/datasource#configuration-serverPaging). Thus, it will use the received data directly. The same rule applies to the filtering, grouping, aggregation, and sorting operations.
 
 ### Grouping
 

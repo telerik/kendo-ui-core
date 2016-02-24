@@ -1,66 +1,75 @@
 ---
 title: Overview
-page_title: How to use the PivotGrid PHP class, server-side wrapper for Kendo UI PivotGrid widget
-description: Learn how to bind Kendo UI PivotGrid for PHP, handle Kendo UI PivotGrid Events, access an existing pivotgrid.
+page_title: Overview | PivotGrid PHP Class
+description: "Get started with the PivotGrid PHP class in Kendo UI."
+slug: overview_pivotgrid_uiforphp
+position: 1
 ---
 
-# PivotGrid
+# PivotGrid PHP Class Overview
 
-The Kendo PivotGrid for PHP is a server-side wrapper for the [Kendo UI PivotGrid](/api/web/pivotgrid) widget.
+The Kendo UI PivotGrid for PHP is a server-side wrapper for the [Kendo UI PivotGrid](/api/javascript/ui/pivotgrid) widget.
 
-More information about OLAP concepts supported by Kendo PivotGrid for PHP can be found here:
-
-- [PivotGrid Fundamentals](/web/pivotgrid/fundamentals)
-- [Setup an OLAP cube](/web/pivotgrid/olap-cube-setup) or use our OLAP service ([http://demos.telerik.com/olap/msmdpump.dll](http://demos.telerik.com/olap/msmdpump.dll))
+For more information on the OLAP concept supported by the Kendo UI PivotGrid for PHP, refer to the articles about [OLAP fundamentals]({% slug fundamentals_pivotgrid_widget %}), [setup an OLAP cube]({% slug olap_cube_setup_pivotgrid_widget %}), or [use the Kendo UI OLAP service](http://demos.telerik.com/olap/msmdpump.dll).
 
 ## Getting Started
 
-The following tutorial shows how to configure Kendo UI PivotGrid for PHP to do ajax binding to an **Adventure Works** cube hosted on [http://demos.telerik.com/olap/msmdpump.dll](http://demos.telerik.com/olap/msmdpump.dll)
+### Configuration
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
- 
-1. Create a PivotDataSourceTransport and define the service URL:
+Below are listed the steps for you to follow when configuring the Kendo UI PivotGrid for PHP to do Ajax binding to an **Adventure Works** cube hosted on [http://demos.telerik.com/olap/msmdpump.dll](http://demos.telerik.com/olap/msmdpump.dll).
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Create a `PivotDataSourceTransport` and define the service URL.
+
+###### Example
 
         $transport = new \Kendo\Data\PivotDataSourceTransport();
-        
+
         $read = new \Kendo\Data\PivotDataSourceTransportRead();
-        
+
         $read->url('http://demos.telerik.com/olap/msmdpump.dll')
              ->contentType('text/xml')
              ->dataType('text')
              ->type('POST');
-        
+
         $connection = new \Kendo\Data\PivotDataSourceTransportConnection();
-        
+
         $connection->catalog('Adventure Works DW 2008R2')
                     ->cube('Adventure Works');
-        
+
         $discover = new \Kendo\Data\PivotDataSourceTransportDiscover();
-        
+
         $discover->url('http://demos.telerik.com/olap/msmdpump.dll')
              ->contentType('text/xml')
              ->dataType('text')
              ->type('POST');
-        
+
         $transport ->read($read)
                     ->connection($connection)
                     ->discover($discover);
 
-1. Create a PivotDataSourceSchema and set its type:
+**Step 3** Create a `PivotDataSourceSchema` and set its type.
+
+###### Example
 
         $schema = new \Kendo\Data\PivotDataSourceSchema();
         $schema->type('xmla');
 
-1. Define column and row dimensions of pivotgrid:
+**Step 4** Define the column and row dimensions of the PivotGrid.
+
+###### Example
 
         $dateColumn = new \Kendo\Data\PivotDataSourceColumn();
         $dateColumn->name('[Date].[Calendar]')
                     ->expand(true);
-        
+
         $cityColumn = new \Kendo\Data\PivotDataSourceColumn();
         $cityColumn->name('[Geography].[City]');
 
-4. Create a PivotDataSource instance:
+**Step 5** Create a `PivotDataSource` instance.
+
+###### Example
 
         $dataSource = new \Kendo\Data\PivotDataSource();
 
@@ -71,66 +80,87 @@ The following tutorial shows how to configure Kendo UI PivotGrid for PHP to do a
             ->addMeasure(array('[Measures].[Internet Sales Amount]'))
             ->schema($schema);
 
-4. Create a [pivotgrid](/api/php/Kendo/UI/PivotGrid) and set its data source:
+**Step 6** Create a [PivotGrid](/api/php/Kendo/UI/PivotGrid) and set its `dataSource`.
+
+###### Example
 
         $pivotgrid = new \Kendo\UI\PivotGrid('pivotgrid');
         $pivotgrid->dataSource($dataSource);
 
-4. Render the pivotgrid:
+**Step 7** Render the PivotGrid.
+
+###### Example
 
         <?php
         echo $pivotgrid->render();
         ?>
 
-## Getting Client-side Reference
+## Event Handling
 
-You can reference the clien-side Kendo Grid instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/pivotgrid#methods) to control its behavior.
+You can subscribe to all PivotGrid [events](/api/javascript/ui/pivotgrid#events).
 
+### Specify Function Names
 
-### Example
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-    <script>
-    $(function() {
-        // The constructor parameter is used as the 'id' HTML attribute of the pivotgrid
-        var pivotgrid = $("#pivotgrid").data("kendoPivotGrid");
-    });
-    </script>
+###### Example
 
-## Handling Events
+        <?php
+        $pivotgrid = new \Kendo\UI\PivotGrid('pivotgrid');
+        $pivotgrid->dataSource($dataSource);
 
-You can subscribe to all grid [events](/api/web/pivotgrid#events).
+        // The 'pivotgrid_dataBound' JavaScript function will handle the 'dataBound' event of the pivotgrid
+        $grid->dataBound('pivotgrid_dataBound');
 
-### Example - subscribing by specifying JavaScript function name
+        echo $pivotgrid->render();
+        ?>
+        <script>
+        function pivotgrid_dataBound() {
+            // Handle the dataBound event
+        }
+        </script>
 
-    <?php
-    $pivotgrid = new \Kendo\UI\PivotGrid('pivotgrid');
-    $pivotgrid->dataSource($dataSource);
+### Provide Inline Code
 
-    // The 'pivotgrid_dataBound' JavaScript function will handle the 'dataBound' event of the pivotgrid
-    $grid->dataBound('pivotgrid_dataBound');
+The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-    echo $pivotgrid->render();
-    ?>
-    <script>
-    function pivotgrid_dataBound() {
-        // Handle the dataBound event
-    }
-    </script>
+###### Example
 
-### Example - providing inline JavaScript code
+        <?php
+        $pivotgrid = new \Kendo\UI\PivotGrid('pivotgrid');
+        $pivotgrid->dataSource($dataSource);
 
-    <?php
-    $pivotgrid = new \Kendo\UI\PivotGrid('pivotgrid');
-    $pivotgrid->dataSource($dataSource);
+        // Provide inline JavaScript code that will handle the 'dataBound' event of the grid
+        $pivotgrid->dataBound('function() { /* Handle the dataBound event */ }');
 
-    // Provide inline JavaScript code that will handle the 'dataBound' event of the grid
-    $pivotgrid->dataBound('function() { /* Handle the dataBound event */ }');
+        echo $pivotgrid->render();
+        ?>
+        <script>
+        function pivotgrid_dataBound() {
+            // Handle the dataBound event
+        }
+        </script>
 
-    echo $pivotgrid->render();
-    ?>
-    <script>
-    function pivotgrid_dataBound() {
-        // Handle the dataBound event
-    }
-    </script>
+<!--*-->
+## Reference
+
+### Client-Side Instances
+
+You are able to reference an existing PivotGrid instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [PivotGrid API](/api/javascript/ui/pivotgrid#methods) to control its behavior.
+
+###### Example
+
+        <script>
+        $(function() {
+            // The constructor parameter is used as the 'id' HTML attribute of the pivotgrid
+            var pivotgrid = $("#pivotgrid").data("kendoPivotGrid");
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the PivotGrid:
+
+* [Overview of the Kendo UI PivotGrid Widget]({% slug overview_kendoui_pivotgrid_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI PivotGrid Widget
+page_title: Overview | Kendo UI PivotGrid
 description: "Learn how to create and configure the Kendo UI PivotGrid widget."
 slug: overview_kendoui_pivotgrid_widget
 position: 1
@@ -79,7 +79,7 @@ The PivotGrid widget uses [`kendo.data.PivotDataSource`](/api/framework/pivotdat
 
 For a demo, see the runnable how-to example about [filtering a dimension](/web/pivotgrid/how-to/filter-dimension).
 
-> **Important**  
+> **Important**
 > Filtering is supported both in OLAP and flat-data (client cube) binding scenarios.
 
 ### Sorting
@@ -93,7 +93,7 @@ All inner members of the sorted dimension will be sorted with the same sort dime
 
 For a demo, see the runnable how-to example about [sorting a dimension](/web/pivotgrid/how-to/sort-dimension).
 
-> **Important**  
+> **Important**
 > Sorting is supported only in OLAP binding scenarios. Client cube cannot be sorted for the time being.
 
 ## Reference
@@ -107,6 +107,27 @@ The example below demonstrates how to access an existing PivotGrid instance.
 ###### Example
 
     var pivotgrid = $("#pivotgrid").data("kendoPivotGrid");
+
+## Limitations
+
+### Bind to Large Flat Data
+
+When the PivotGrid is bound to a `flat data structure`, it processes the data on the client (browser) creating a client cube representation [(configuration)](/api/javascript/data/pivotdatasource#configuration-schema.cube). This means that the widget uses the browser's processing power to project the data, producing the required categorized data output. Although we do not restrict the maximum data amount bound to the widget, it certainly has limits, directly related to the browser capability to handle the loaded dataset.
+
+The symptoms for an overloaded browser are:
+
+- The browser is extremely slowly loading or unresponsive for a long time.
+- The browser is crashing on load or on the dimensions/measures update.
+
+If any of the above symptoms are observable, then you hit the browser processing limit.
+
+**Solution**
+
+Use a dedicated [OLAP](https://en.wikipedia.org/wiki/Online_analytical_processing) solution, like Microsoft's [SSAS](https://technet.microsoft.com/en-us/library/ms175609(v=sql.90).aspx).
+
+> **Important**
+>
+> The server solution should be able to communicate with the client accepting HTTP requests. It should support the [XMLA 1.1 protocol](https://en.wikipedia.org/wiki/XML_for_Analysis).
 
 ## See Also
 
@@ -137,6 +158,6 @@ Other articles on Kendo UI PivotGrid:
 * [How to Sort Dimensions]({% slug howto_sort_dimensions_pivotgrid %})
 * [How to Translate PivotConfigurator Field Items]({% slug howto_translate_pivotconfigurator_messages_pivotgrid %})
 * [How to Translate PivotGrid Messages]({% slug howto_translate_pivotgrid_messages_pivotgrid %})
-* [Overview of the JSP Tag](/jsp/tags/pivotgrid/overview)
+* [Overview of the JSP Tag]({% slug overview_pivotgrid_uiforjsp %})
 * [Overview of the PHP Class](/php/widgets/pivotgrid/overview)
 * [JavaScript API Reference](/api/javascript/ui/pivotgrid)

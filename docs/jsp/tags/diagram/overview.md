@@ -1,36 +1,48 @@
 ---
 title: Overview
-page_title: How to use Diagram JSP tag | Kendo UI documentation
-description: User Guide for server-side wrapper for Kendo UI Diagram for JSP.
+page_title: Overview | Diagram JSP Tag
+description: "Get started with the Diagram JSP tag in Kendo UI."
+slug: overview_diagram_uiforjsp
+position: 1
 ---
 
-# Diagram
+# Diagram JSP Tag Overview
 
-The Diagram tag is a server-side wrapper for the [Kendo UI Diagram](/api/dataviz/diagram) widget.
+The Diagram tag is a server-side wrapper for the [Kendo UI Diagram](/api/javascript/dataviz/ui/diagram) widget.
 
 ## Getting Started
 
-You can bind a Kendo Diagram for JSP via ajax binding(the diagram will make ajax requests when binding)
+### The Basics
 
-Here is how to configure the Kendo Diagram with ajax binding:
+The Kendo UI Diagram for JSP can be bound via an Ajax binding&mdash;the Diagram would make Ajax requests when binding.
 
-1.  Make sure you have followed all the steps from the [Introduction](/jsp/introduction) help topic.
+### Configuration
 
-2.  Create a new action method to render the view:
+Below are listed the steps for you to follow when configuring the Kendo UI Diagram Ajax binding.
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for JSP]({% slug overview_uiforjsp %}).
+
+**Step 2** Create a new action method to render the view.
+
+###### Example
 
         @RequestMapping(value = {"/", "index"}, method = RequestMethod.GET)
         public String index() {
             return "/dataviz/diagram/index";
         }
 
-1.  Create a new action method which will return the data as JSON:
+**Step 3** Create a new action method to return the data as JSON.
+
+###### Example
 
         @RequestMapping(value = "/read", method = RequestMethod.POST)
         public @ResponseBody List<DiagramNode> read() {
             return DiagramDataRepository.DiagramNodes();
         }
 
-3.  In the view configure the diagram to use the action method created in the previous steps:
+**Step 4** In the view, configure the Diagram to use the action method created in the previous steps.
+
+###### Example
 
         <c:url value="/read" var="readUrl" />
         <kendo:diagram name="diagram">
@@ -46,27 +58,13 @@ Here is how to configure the Kendo Diagram with ajax binding:
              <kendo:diagram-shapeDefaults width="40" height="40" />
         </kendo:diagram>
 
-## Accessing an Existing Diagram
+## Event Handling
 
-You can reference an existing diagram instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/dataviz/diagram#methods) to control its behavior.
+### Subscribe to Events
 
-### Accessing an existing Diagram instance
+You can subscribe to all [events exposed by Kendo UI Diagram](/api/javascript/dataviz/ui/diagram#events) by the handler name.
 
-        // Put this after your Kendo Diagram tag
-        <script>
-            $(function() {
-                // Notice that the Name() of the diagram is used to get its client-side instance
-                var diagram = $("#diagram").data("kendoDiagram");
-                diagram.layout()
-            });
-        </script>
-
-## Handling Kendo UI Diagram events
-
-You can subscribe to all [events](/api/dataviz/diagram#events) exposed by Kendo UI Diagram:
-
-### Subscribe by handler name
+###### Example
 
         <%= Html.Kendo().Diagram()
                 .Name("diagram")
@@ -87,4 +85,28 @@ You can subscribe to all [events](/api/dataviz/diagram#events) exposed by Kendo 
                 // Handle the click event
             }
         </script>
+<!--_-->
+## Reference
 
+### Existing Instances
+
+You are able to reference an existing Diagram instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Diagram API](/api/javascript/dataviz/ui/diagram#methods) to control its behavior.
+
+###### Example
+
+        // Put this after your Kendo Diagram tag
+        <script>
+            $(function() {
+                // Notice that the Name() of the diagram is used to get its client-side instance
+                var diagram = $("#diagram").data("kendoDiagram");
+                diagram.layout()
+            });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for JSP and on the Diagram:
+
+* [Overview of the Kendo UI Diagram Widget]({% slug overview_kendoui_diagram_widget %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

@@ -1,6 +1,6 @@
 ---
 title: Control the Header Format
-page_title: Control the Header Format | Kendo UI Calendar Widget
+page_title: Control the Header Format | Kendo UI Calendar
 description: "Learn how to control the header format of the Kendo UI Calendar widget."
 slug: howto_control_header_format_calendar
 ---

@@ -1,60 +1,84 @@
 ---
 title: Overview
+page_title: Overview | ProgressBar JSP Tag
+description: "Get started with the ProgressBar JSP tag in Kendo UI."
+slug: overview_progressbar_uiforjsp
+position: 1
 ---
 
-# ProgressBar
+# ProgressBar JSP Tag Overview
 
-The ProgressBar tag is a server-side wrapper for the [Kendo UI ProgressBar](/api/web/progressbar) widget.
+The ProgressBar JSP tag is a server-side wrapper for the [Kendo UI ProgressBar](/api/javascript/ui/progressbar) widget.
 
 ## Getting Started
 
-Here is how to configure the Kendo ProgressBar in Spring MVC:
+### Configuration
 
-1. Make sure you have followed all the steps from the [Introduction](/jsp/introduction) help topic.
-2. Create a new action method:
+Below are listed the steps for you to follow when configuring the Kendo UI ProgressBar in the Spring MVC framework.
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for JSP]({% slug overview_uiforjsp %}).
+
+**Step 2** Create a new action method.
+
+###### Example
 
 		@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
-	    public String index() {       
-	        return "web/progressbar/index";
-	    }  
+		  public String index() {       
+		      return "web/progressbar/index";
+		  }  
 
-3. Add kendo taglib mapping to the page:
+**Step 3** Add the Kendo UI `taglib` mapping to the page.
+
+###### Example
 
 		<%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 
-4. Add a progressbar:
+**Step 4** Add a `progressbar` tag.
+
+###### Example
 
 		<kendo:progressBar name="progressBar" type="percent"></kendo:progressBar>
 
-## Accessing an Existing ProgressBar
+## Event Handling
 
-You can reference the client-side Kendo ProgressBar instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/progressbar#methods) to control its behavior.
+### Subscribe to Events
 
-### Example
+You can subscribe to all [events exposed by Kendo UI ProgressBar](/api/javascript/ui/progressbar#events) by the handler name.
 
-	// Put this after your Kendo ProgressBar tag declaration
-    <script>
-      $(function() {
-        // Notice that the name attribute of the progressbar is used to get its client-side instance
-        var progressbar = $("#progressBar").data("kendoProgressBar");
-      });
-    </script>
+###### Example
 
-## Handling Events
+		<kendo:progressBar name="progressBar" type="percent" min="0" max="10" change="onChange" complete="onComplete"></kendo:progressBar>
 
-You can subscribe to all ProgressBar [events](/api/web/progressbar#events).
+		<script>
+		    function onChange(e) {
+		      // Handle the change event
+		    }
 
-### Subscribe by handler name
+		    function onComplete(e) {
+		      // Handle the complete event
+		    }
+		  </script>
 
-	<kendo:progressBar name="progressBar" type="percent" min="0" max="10" change="onChange" complete="onComplete"></kendo:progressBar>
+## Reference
 
-	<script>
-      function onChange(e) {
-        // Handle the change event
-      }
+### Existing Instances
 
-      function onComplete(e) {
-        // Handle the complete event
-      }
-    </script>
+You are able to reference an existing ProgressBar instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [ProgressBar API](/api/javascript/ui/progressbar#methods) to control its behavior.
+
+###### Example
+
+			// Put this after your Kendo ProgressBar tag declaration
+			  <script>
+			    $(function() {
+			      // Notice that the name attribute of the progressbar is used to get its client-side instance
+			      var progressbar = $("#progressBar").data("kendoProgressBar");
+			    });
+			  </script>
+
+## See Also
+
+Other articles on Telerik UI for JSP and on the ProgressBar:
+
+* [Overview of the Kendo UI ProgressBar Widget]({% slug overview_kendoui_progressbar_widget %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

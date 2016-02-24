@@ -1,6 +1,6 @@
 ---
 title: Use Custom Templates
-page_title: Use Custom Templates | Kendo UI AutoComplete Widget
+page_title: Use Custom Templates | Kendo UI AutoComplete 
 description: "Learn how to use templates with AngularJS inside the Kendo UI templates of the AutoComplete widget."
 slug: howto_use_custom_angularjs_templates_autocomplete
 ---
@@ -89,7 +89,7 @@ The example below demonstrates how to use AngularJS templates inside the Kendo U
     </div>
 
     <script>
-      angular.module("KendoDemos", [ "kendo.directives" ]);
+      angular.module("KendoDemos", [ "kendo.directives" ]).controller('MyCtrl',
       function MyCtrl($scope) {
         $scope.customersDataSource = {
           transport: {
@@ -113,7 +113,7 @@ The example below demonstrates how to use AngularJS templates inside the Kendo U
           template: '<span class="k-state-default"><img src=\"http://demos.telerik.com/kendo-ui/content/web/Customers/{{dataItem.CustomerID}}.jpg\" alt=\"{{dataItem.CustomerID}}\" /></span>' +
           '<span class="k-state-default"><h3>{{dataItem.ContactName}}</h3><p>{{dataItem.CompanyName}}</p></span>',
         };
-      }
+      });
     </script>
 
 ```

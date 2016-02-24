@@ -1,6 +1,6 @@
 ---
 title: Printing
-page_title: Printing | Kendo UI Grid Widget
+page_title: Printing | Kendo UI Grid
 description: "Learn how to print the Kendo UI Grid widget."
 slug: printing_kendoui_grid
 position: 10
@@ -14,16 +14,16 @@ In most cases the Grid is not the only content on a page and, yet, you might wan
 
 There are two ways to print the content of the Grid only, though the Grid itself may not be the only content displayed on a page.
 
-### Print Existing Web Page
+### Print Existing Web Pages
 
 Print the existing web page, but use a print stylesheet to hide the parts of the page that are not needed.
 
-### Print New Web Page
+### Print New Web Pages
 
 The example below demonstrates how to retrieve the Grid HTML, inject it in a new browser window, and trigger the printing of the new page. It also addresses some other important things you must keep in mind as follows:
 
 * If the Grid is scrollable, some rows or columns may not be visible on the printed paper. Make sure that during printing the Grid has no set height, and the scrollability of the data area is disabled.
-* Depending on the column width, some of the cell content may not be fully visible. This problem is resolved by forcing an automatic `table-layout` to the Grid table, which disables the ellipsis (...).
+* Depending on the column width, some of the cell content may not be fully visible. This problem is resolved by forcing an automatic `table-layout` to the Grid table, which disables the ellipsis (`...`).
 * Browsers repeat table headers on each printed page automatically. However, when the Grid is scrollable, it renders a separate table for the header area. Since the browser cannot understand the relationship between the two Grid tables, it will not repeat the header row. This problem is resolved by cloning the header row inside the data table.
 
 Printing a Grid with locked (frozen) columns is likely to produce misaligned columns, or rows, or a broken overall layout. In such cases it is advisable to use a separate print-friendly page with no frozen columns.
@@ -38,6 +38,7 @@ Printing a Grid with locked (frozen) columns is likely to produce misaligned col
     </script>
 
    //JavaScript
+
 	 function printGrid() {
 		var gridElement = $('#grid'),
 			printableContent = '',

@@ -461,7 +461,8 @@ textarea.k-textbox:hover,
     border-color: @selected-background;
 }
 
-.k-numeric-wrap .k-link.k-state-selected {
+.k-numeric-wrap .k-link.k-state-selected,
+.k-grid .k-numeric-wrap .k-link.k-state-selected {
     background-color: @selected-background;
 }
 
@@ -961,9 +962,9 @@ input.k-textbox:active {
     background-color: lighten(@info, 22%);
 }
 
-.k-grid tr:hover .k-state-selected,
+.k-grid td.k-state-selected:hover,
 .k-grid tr.k-state-selected:hover td {
-    background-color: fadeout(@info, 75%);
+    background-color: lighten(@info, 17%);
 }
 
 .k-grid tr:hover .k-state-focused.k-state-selected,
@@ -1429,11 +1430,6 @@ html .km-pane-wrapper .km-widget,
               and (-ms-high-contrast: none) {
     div.km-pane-wrapper a     {
         color: @normal-text-color;
-    }
-
-    .km-pane-wrapper .k-icon {
-        background-image: url('@{image-folder}/sprite_2x.png');
-        background-size: 21.2em 21em;
     }
 }
 

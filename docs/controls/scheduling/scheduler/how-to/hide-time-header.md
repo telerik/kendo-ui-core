@@ -1,6 +1,6 @@
 ---
 title: Hide Time Headers
-page_title: Hide Time Headers | Kendo UI Scheduler Widget
+page_title: Hide Time Headers | Kendo UI Scheduler
 description: "Learn how to hide the time headers of the day/week/workWeek views in a Kendo UI Scheduler widget."
 slug: howto_hide_time_headers_scheduler
 ---

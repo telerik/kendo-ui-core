@@ -14,7 +14,7 @@ The [Kendo UI Drawing API](http://demos.telerik.com/kendo-ui/drawing/index) supp
 
 Using the `drawing.drawDOM` function you can draw a DOM element into a [`drawing.Group`](/api/dataviz/drawing/group), which you are then able to render with one of the supported backends into SVG, PDF, HTML5 `<canvas>`, or VML format.
 
-The DOM element must be appended to the document and must be visible, meaning that you cannot draw an element which has `display: none`, or `visibility: hidden`. Assume you have this HTML in the page:
+The DOM element must be appended to the document and must be visible, meaning that you cannot draw an element which has the `display: none`, or the `visibility: hidden` options. Assume that you have the following HTML in the page:
 
     <div id="drawMe" class="...">
       ... more HTML code here...
@@ -198,60 +198,141 @@ If the algorithm decides to move a node to the next page, all the DOM nodes whic
 
 It can happen that this element ends up in a position where all the text fits on the current page, but the image is higher and would fall on the boundary. In this case, the image and some text after will move to the next page.
 
-### Page Template (headers and footers)
+### Template: Headers and Footers
 
 When multi-page output is requested via `forcePageBreak` or `paperSize`, you can additionally specify a page template. This template will be inserted into each page before producing the output. You can easily position it relatively to the page via CSS. The template can be a function, or a Kendo UI template, and it receives the number of the current page and the total number of pages.
 
 ###### Example
 
+```html
     <script type="x/kendo-template" id="page-template">
-      <div class="page-template">
-        <div class="header">
-          <div style="float: right">Page #:pageNum# of #:totalPages#</div>
-          This is a header.
+        <div class="page-template">
+            <div class="header">
+                <div style="float: right">Page #:pageNum# of #:totalPages#</div>
+                This is a header.
+            </div>
+            <div class="footer">
+                This is a footer.
+                Page #:pageNum# of #:totalPages#
+            </div>
         </div>
-        <div class="footer">
-          This is a footer.
-          Page #:pageNum# of #:totalPages#
-        </div>
-      </div>
     </script>
 
     <div id="grid"></div>
 
     <style>
-      /* make sure everything in the page template is absolutely positioned.
-       * since the pages will be embedded in an element with position: relative,
-       * all positions here are actually relative to the page element.
-       */
-      .page-template > * {
-        position: absolute;
-        left: 20px;
-        right: 20px;
-        font-size: 90%;
-      }
-      .page-template .header {
-        top: 20px;
-        border-bottom: 1px solid #000;
-      }
-      .page-template .footer {
-        bottom: 20px;
-        border-top: 1px solid #000;
-      }
+        /*
+            Make sure everything in the page template is absolutely positioned.
+            All positions are relative to the page container.
+        */
+        .page-template > * {
+            position: absolute;
+            left: 20px;
+            right: 20px;
+            font-size: 90%;
+        }
+        .page-template .header {
+            top: 20px;
+            border-bottom: 1px solid #000;
+        }
+        .page-template .footer {
+            bottom: 20px;
+            border-top: 1px solid #000;
+        }
+
+        /*
+            Use the DejaVu Sans font for display and embedding in the PDF file.
+            The standard PDF fonts have no support for Unicode characters.
+        */
+        .k-grid {
+            font-family: "DejaVu Sans", "Arial", sans-serif;
+            width: 400px;
+        }
+
     </style>
 
     <script>
-      $("#grid").kendoGrid(...);
-      drawing.drawDOM("#grid", {
-        paperSize: "A4",
-        margin: "3cm",
-        template: $("#page-template").html()
-      }).then(function(group){
-        drawing.pdf.saveAs(group, "filename.pdf");
-      });
+        $("#grid").kendoGrid({
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: {
+                        url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                    }
+                }
+            },
+            scrollable: false,
+            columns: [{
+              title: "Name",
+              field: "ProductName"
+            }, {
+              title: "Units",
+              field: "UnitsInStock"
+            }],
+            dataBound: function() {
+              kendo.drawing.drawDOM("#grid", {
+                  paperSize: "A4",
+                  margin: "3cm",
+                  template: $("#page-template").html()
+              }).then(function(group){
+                  kendo.drawing.pdf.saveAs(group, "filename.pdf");
+              });
+            }
+        });
     </script>
 
-<!--*-->
+    <script>
+        // Import DejaVu Sans font for embedding
+
+        // NOTE: Only required if the Kendo UI stylesheets are loaded
+        // from a different origin, e.g. cdn.kendostatic.com
+        kendo.pdf.defineFont({
+            "DejaVu Sans"             : "http://cdn.kendostatic.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans.ttf",
+            "DejaVu Sans|Bold"        : "http://cdn.kendostatic.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+            "DejaVu Sans|Bold|Italic" : "http://cdn.kendostatic.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "DejaVu Sans|Italic"      : "http://cdn.kendostatic.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+        });
+    </script>
+```
+
+### Scaling
+
+By using the `scale` option you can obtain a drawing that is bigger or smaller than the original elements. This is useful when you are generating a multi-page PDF output using the automatic page breaking feature. In most cases, the original dimensions look too big in PDF, so you can specify, for example, a scale factor of 0.8 to get a more suitable output for print.
+
+###### Example
+
+    drawing.drawDOM("#content", {
+      paperSize: "A4",
+      margin: "2cm",
+      scale: 0.8
+    }).then(function(group){
+      drawing.pdf.saveAs(group, "filename.pdf");
+    });
+
+Note that `scale` affects only the content, so in the case above the output paper size is still A4 and has a 2cm margin. However, you need to take scaling into account when you position headers and footers while using a page template.
+
+If you need different horizontal or vertical scale factors, pass either an array&mdash;`[ xScale, yScale ]`&mdash;or an object&mdash;`{ x: xScale, y: yScale }`.
+
+### Split Page Content
+
+To prevent elements from being split across pages, use the `keepTogether` option. It should be a CSS selector, passable to jQuery.  
+
+###### Example
+
+    drawing.drawDOM("#content", {
+      paperSize: "A4",
+      margin: "2cm",
+      keepTogether: ".prevent-split"
+    }).then(function(group){
+      drawing.pdf.saveAs(group, "filename.pdf");
+    });
+
+Now all elements having the CSS class `"prevent-split"` are kept within the boundaries of pages and their content is not split. If they fall on a margin, they are altogether moved to the next page instead.
+
+### Recurrent Table Headers
+
+If you want the `<thead>` elements, or the headers of Kendo UI Grid widgets, to be repeated on each page, pass the `repeatHeaders: true` option.
+
 ## Customize Appearance
 
 If you want to change the appearance of the PDF output as it appears in the browser, you have several options to write CSS rules that apply only to the PDF output.
@@ -343,6 +424,7 @@ The HTML renderer has been tested in recent versions of Chrome, Firefox, Safari,
 - Images hosted on different domains might not be rendered, unless permissive [Cross-Origin HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image) are provided by the server. Similarly, fonts might not be possible to load cross-domain. Even with the proper CORS headers, Internet Explorer 9 will not be able to load images or fonts from another domain, and could raise an uncatchable security exception. If you need to support Internet Explorer 9, make sure to host images and fonts on the same domain as the application.
 - The content of the `<iframe>` and `<svg>` elements is not rendered. A `<canvas>` will be rendered as an image, but only if it is non-tainted, meaning if it does not display images from another domain.
 - CSS box-shadow, text-shadow, and radial gradients are omitted. Linear gradients are supported.
+- Using browser zoom other than 100% is not supported.
 - Only border-style `solid` is rendered.
 - Maximum document size is limited to 5080x5080mm (200x200 inches) by the PDF 1.5 specification. Larger files might not open in some viewers.
 - Shadow DOM is not rendered.

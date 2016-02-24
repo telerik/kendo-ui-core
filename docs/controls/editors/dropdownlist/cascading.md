@@ -1,6 +1,6 @@
 ---
 title: Cascading DropDownLists
-page_title: Cascading DropDownLists | Kendo UI DropDownList Widget
+page_title: Cascading DropDownLists | Kendo UI DropDownList
 description: "Learn how Kendo UI cascading DropDownList works and helps you handle the most common scenarios with illustrative examples and FAQ."
 slug: cascading_kendoui_dropdownlist_widget
 position: 4

@@ -699,3 +699,4 @@ Other articles on Kendo UI widget basics:
 * [Set Data Attributes]({% slug dataattributes_configuration_installation %})
 * [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})
 * [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
+* [Editing Functionality]({% slug kendoui_editing_gettingstarted %})

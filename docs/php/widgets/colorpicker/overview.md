@@ -1,59 +1,52 @@
 ---
 title: Overview
-page_title: How to use the ColorPicker PHP class, server-side wrapper for Kendo UI ColorPicker widget
-description: Getting started with Kendo UI ColorPicker for PHP in quick steps - configure Kendo UI ColorPicker widget and operate Kendo UI ColorPicker events.
+page_title: Overview | ColorPicker PHP Class
+description: "Get started with the ColorPicker PHP class in Kendo UI."
+slug: overview_colorpicker_uiforphp
+position: 1
 ---
 
-# ColorPicker
+# ColorPicker PHP Class Overview
 
-The Kendo ColorPicker for PHP is a server-side wrapper for the [Kendo UI ColorPicker](/api/web/colorpicker) widget.
+The Kendo UI ColorPicker for PHP is a server-side wrapper for the [Kendo UI ColorPicker](/api/javascript/ui/colorpicker) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo ColorPicker:
+### Configuration
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
+Below are listed the steps for you to follow when configuring the Kendo UI ColorPicker for PHP.
 
-2. Create a [colorpicker](/api/php/Kendo/UI/ColorPicker).
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
 
-        <?php
-        $colorpicker = new \Kendo\UI\ColorPicker('colorpicker');
-        $colorpicker->value('#ff0000');
-        ?>
+**Step 2** Create a [ColorPicker](/api/php/Kendo/UI/ColorPicker).
 
-3. Output the colorpicker by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
-
-        <?php
-        echo $colorpicker->render();
-        ?>
-
-## Getting Client-side Reference
-
-You can reference the client-side Kendo ColorPicker instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/colorpicker#methods) to control its behavior.
-
-
-### Example
+###### Example
 
     <?php
     $colorpicker = new \Kendo\UI\ColorPicker('colorpicker');
+    $colorpicker->value('#ff0000');
+    ?>
+
+**Step 3** Output the ColorPicker by echoing the result of the `render` method.
+
+###### Example
+
+    <?php
     echo $colorpicker->render();
     ?>
-    <script>
-    $(function() {
-        // The constructor parameter is used as the 'id' HTML attribute of the colorpicker
-        var colorpicker = $("#colorpicker").data("kendoColorPicker")
-    });
-    </script>
 
-## Handling Events
+## Event Handling
 
-You can subscribe to all colorpicker [events](/api/web/colorpicker#events).
+You can subscribe to all ColorPicker [events](/api/javascript/ui/colorpicker#events).
 
-### Example - subscribing by specifying JavaScript function name
+### Specify Function Names
 
-    <?php
-    $colorpicker = new \Kendo\UI\ColorPicker('colorpicker');
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
+
+###### Example
+
+   <?php
+   $colorpicker = new \Kendo\UI\ColorPicker('colorpicker');
 
     // The 'colorpicker_change' JavaScript function will handle the 'change' event of the colorpicker
     $colorpicker->change('colorpicker_change');
@@ -66,7 +59,11 @@ You can subscribe to all colorpicker [events](/api/web/colorpicker#events).
     }
     </script>
 
-### Example - providing inline JavaScript code
+### Provide Inline Code
+
+The example below demonstrates how to subscribe to events by providing inline JavaScript code.
+
+###### Example
 
     <?php
     $colorpicker = new \Kendo\UI\ColorPicker('colorpicker');
@@ -76,3 +73,31 @@ You can subscribe to all colorpicker [events](/api/web/colorpicker#events).
 
     echo $colorpicker->render();
     ?>
+
+<!--*-->
+## Reference
+
+### Client-Side Instances
+
+You are able to reference an existing ColorPicker instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [ColorPicker API](/api/javascript/ui/colorpicker#methods) to control its behavior.
+
+###### Example
+
+    <?php
+    $colorpicker = new \Kendo\UI\ColorPicker('colorpicker');
+    echo $colorpicker->render();
+    ?>
+    <script>
+    $(function() {
+        // The constructor parameter is used as the 'id' HTML attribute of the colorpicker
+        var colorpicker = $("#colorpicker").data("kendoColorPicker")
+    });
+    </script>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the ColorPicker:
+
+* [Overview of the Kendo UI ColorPicker Widget]({% slug overview_kendoui_colorpicker_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

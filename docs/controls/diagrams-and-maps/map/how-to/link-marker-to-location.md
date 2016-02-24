@@ -1,6 +1,6 @@
 ---
 title: Link Marker to Location
-page_title: Link Marker to Location | Kendo UI Map Widget
+page_title: Link Marker to Location | Kendo UI Map
 description: "Learn how to link markers to locations in a Kendo UI Map widget."
 slug: howto_linkmarkertolocation_map
 ---

@@ -1,6 +1,6 @@
 ---
 title: Nest Sortables
-page_title: Nest Sortables | Kendo UI Sortable Widget
+page_title: Nest Sortables | Kendo UI Sortable
 description: "Learn how to create nested Kendo UI Sortable widgets."
 slug: howto_nestsortables_sortable
 ---

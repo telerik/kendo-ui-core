@@ -1,6 +1,6 @@
 ---
 title: Hide Edit Fields on Different Levels
-page_title: Hide Edit Fields on Different Levels | Kendo UI TreeList Widget
+page_title: Hide Edit Fields on Different Levels | Kendo UI TreeList
 description: "Learn how to hide editors for different columns on different levels in a Kendo UI TreeList widget."
 slug: howto_hideeditfieldsondifferentlevels_treelist
 ---

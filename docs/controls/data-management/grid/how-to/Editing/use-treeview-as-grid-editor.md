@@ -1,6 +1,6 @@
 ---
 title: Use TreeView as Custom Editor
-page_title: Use TreeView as Custom Editor | Kendo UI Grid Widget
+page_title: Use TreeView as Custom Editor | Kendo UI Grid
 description: "Learn how to use Kendo UI TreeView as an editor in the Kendo UI Grid widget."
 slug: howto_usethe_treeview_aseditor_grid
 ---

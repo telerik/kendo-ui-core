@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI NumericTextBox Widget
+page_title: Overview | Kendo UI NumericTextBox
 description: "Learn how to initialize the Kendo UI NumericTextBox widget and configure its behaviors."
 slug: overview_kendoui_numerictextbox_widget
 position: 1
@@ -134,6 +134,6 @@ Other articles and how-to examples on Kendo UI NumericTextBox:
 * [How to Update Value on Spin]({% slug howto_update_valueon_spin_angularjs_numerictextbox %})
 * [How to Use Custom Culture Script]({% slug howto_use_custom_culture_script_numerictextbox %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the NumericTextBox Widget](/aspnet-mvc/helpers/numerictextbox/overview)
-* [Overview of the NumericTextBox JSP Tag](/jsp/tags/numerictextbox/overview)
+* [Overview of the NumericTextBox JSP Tag]({% slug overview_numerictextbox_uiforjsp %})
 * [Overview of the NumericTextBox PHP Class](/php/widgets/numerictextbox/overview)
 * [NumericTextBox JavaScript API Reference](/api/javascript/ui/numerictextbox)

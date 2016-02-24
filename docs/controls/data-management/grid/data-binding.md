@@ -1,6 +1,6 @@
 ---
 title: Remote Data Binding
-page_title: Remote Data Binding | Kendo UI Grid Widget
+page_title: Remote Data Binding | Kendo UI Grid
 description: "Learn how to use the Kendo UI Grid widget in your web application and bind it to a remote data source."
 previous_url: /howto/bind-the-grid-to-remote-data
 slug: remote_data_binding_grid
@@ -9,7 +9,7 @@ position: 3
 
 # Remote Data Binding
 
-[Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) features a rapid templating engine and a built-in dataSource, which allow you to set up the widget very quickly and use it in your project.
+The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) features a rapid templating engine and a built-in dataSource, which allow you to set up the widget very quickly and use it in your project.
 
 ## Bind to Remote Data
 
@@ -71,7 +71,7 @@ For a better understanding of the example above, refer to the following explanat
 * `transport` - defines how you will communicate with your remote data source.
 * `url` - points the location of the data you want to bind the widget to.
 * `dataType` - tells the data source the format you expect the response to be in. In this case, it is JSONP. JSONP is a way of returning JSON from a cross-browser request without getting blocked. It is also a way to get malicious code injected into your page. It basically wraps the JSON response in a callback to intentionally mislead the browser. It is recommended not to do it unless you fully trust your data.
-* `schema` - tells the Grid what the schema of your response is. Think of it as the "JSON element to repeat on". Kendo UI looks for this element to represent each row in the Grid. The server returns an array of `data` elements so your repeating item is just "data". </li>
+* `schema` - tells the Grid what the schema of your response is. Think of it as the "JSON element to repeat on". Kendo UI looks for this element to represent each row in the Grid. The server returns an array of `data` elements so your repeating item is just `"data"`.
 
 ### Add Data
 

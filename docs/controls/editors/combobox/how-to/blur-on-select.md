@@ -1,6 +1,6 @@
 ---
 title: Blur the ComboBox after Select
-page_title: Blur the ComboBox after Select | Kendo UI ComboBox Widget
+page_title: Blur the ComboBox after Select | Kendo UI ComboBox
 description: "Learn how to blur the Kendo UI ComboBox after it has been selected."
 slug: howto_blur_after_select_combobox
 ---
@@ -68,3 +68,4 @@ Other articles on Kendo UI ComboBox:
 * [How to Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
 * [How to Select Items on Tab]({% slug howto_select_items_ontab_combobox %})
 * [How to Disable Child Cascading ComboBoxes]({% slug howto_disable_child_cascading_combobox %})
+* [How to Define Virtual Configuration Declaratively]({% slug howto_define_virtual_option_combobox %})

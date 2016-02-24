@@ -1,6 +1,6 @@
 ---
 title: Post-Process Content
-page_title: Post-Process Content | Kendo UI Editor Widget
+page_title: Post-Process Content | Kendo UI Editor
 description: "Learn how to post-process the content of the Kendo UI Editor widget so it fits your needs."
 slug: post_process_content_editor_widget
 position: 3

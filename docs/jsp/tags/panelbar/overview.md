@@ -1,18 +1,26 @@
 ---
 title: Overview
+page_title: Overview | PanelBar JSP Tag
+description: "Get started with the PanelBar JSP tag in Kendo UI."
+slug: overview_panelbar_uiforjsp
+position: 1
 ---
 
-# PanelBar
+# PanelBar JSP Tag Overview
 
-The PanelBar JSP tag is a server-side wrapper for the [Kendo UI PanelBar](/api/web/panelbar) widget.
+The PanelBar JSP tag is a server-side wrapper for the [Kendo UI PanelBar](/api/javascript/ui/panelbar) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo PanelBar:
+### Configuration
 
-1.  Make sure you have followed all the steps from the [Introduction](/jsp/introduction) help topic.
+Below are listed the steps for you to follow when configuring the Kendo UI PanelBar.
 
-2.  Create a new action method which renders the view:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for JSP]({% slug overview_uiforjsp %}).
+
+**Step 2** Create a new action method which renders the view.
+
+###### Example
 
         @RequestMapping(value = "index", method = RequestMethod.GET)
         public String index() {
@@ -20,11 +28,15 @@ Here is how to configure a simple Kendo PanelBar:
             return "web/panelbar/index";
         }
 
-3. Add kendo taglib mapping to the page
+**Step 3** Add the Kendo UI `taglib` mapping to the page.
+
+###### Example
 
         <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 
-4.  Add a panelbar tag:
+**Step 4** Add the `panelbar` tag.
+
+###### Example
 
     <kendo:panelBar name="panelBar" expandMode="single">
         <kendo:panelBar-items>
@@ -43,26 +55,13 @@ Here is how to configure a simple Kendo PanelBar:
         </kendo:panelBar-items>
     </kendo:panelBar>
 
-## Accessing an Existing PanelBar
+## Event Handling
 
-You can reference an existing PanelBar instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/panelbar#methods) to control its behavior.
+### Subscribe to Events
 
-### Accessing an existing PanelBar instance
+You can subscribe to all [events exposed by Kendo UI PanelBar](/api/javascript/ui/panelbar#events) by the handler name.
 
-    //Put this after your Kendo PanelBar tag declaration
-    <script>
-    $(function() {
-        // Notice that the Name() of the panelbar is used to get its client-side instance
-        var panelbar = $("#panelbar").data("kendoPanelBar");
-    });
-    </script>
-
-## Handling Kendo UI PanelBar events
-
-You can subscribe to all [events](/api/web/panelbar#events) exposed by Kendo UI PanelBar:
-
-### Subscribe by handler name
+###### Example
 
     <kendo:panelBar name="panelbar" expand="panelbar_expand" collapse="panelbar_collapse">
         <kendo:panelBar-items>
@@ -80,3 +79,27 @@ You can subscribe to all [events](/api/web/panelbar#events) exposed by Kendo UI 
             //Handle the collapse event
         }
     </script>
+
+## Reference
+
+### Existing Instances
+
+You are able to reference an existing PanelBar instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [PanelBar API](/api/javascript/ui/panelbar#methods) to control its behavior.
+
+###### Example
+
+      //Put this after your Kendo PanelBar tag declaration
+      <script>
+      $(function() {
+          // Notice that the Name() of the panelbar is used to get its client-side instance
+          var panelbar = $("#panelbar").data("kendoPanelBar");
+      });
+      </script>
+
+## See Also
+
+Other articles on Telerik UI for JSP and on the PanelBar:
+
+* [Overview of the Kendo UI PanelBar Widget]({% slug overview_kendoui_panelbar_widget %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

@@ -1,6 +1,6 @@
 ---
 title: Use Grid in Kendo UI SPA Application
-page_title: Use Grid in Kendo UI SPA Application | Kendo UI Grid Widget
+page_title: Use Grid in Kendo UI SPA Application | Kendo UI Grid
 description: "Learn how to initialize a Kendo UI Grid widget in a Kendo UI SPA application."
 slug: howto_use_gridin_kendouispa_app_grid
 ---
@@ -55,7 +55,7 @@ The example below demonstrates how to initialize a Kendo UI Grid widget in a SPA
 
       var categoryEditor = function(container, options) {     
         $('<input data-bind="value: ' + options.field + '" />')
-        .appendTo(container) 
+        .appendTo(container)
         .kendoDropDownList({
           dataSource: roleViewModel.categories,
           dataTextField: 'Description',
@@ -63,7 +63,7 @@ The example below demonstrates how to initialize a Kendo UI Grid widget in a SPA
         });
       };
 
-      var view = new kendo.View($("#grid-view").html(), { 
+      var view = new kendo.View($("#grid-view").html(), {
         model: roleViewModel,
         init: function() {
           var widget = this.element.find("[data-role=grid]").data("kendoGrid");

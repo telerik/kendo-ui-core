@@ -14,11 +14,17 @@ The purpose of date formatting is to convert the `Date` object to a human readab
 
 ### Standard
 
+The `standard` formats are retrieved from the used Kendo culture script defined with [kendo.culture]()  method.
+
+#### The 'd' Specifier
+
 The `"d"` specifier renders a short date pattern (`"M/d/yyyy"` for en-US), as shown below.
 
 ###### Example
 
     kendo.toString(new Date(2000, 10, 6), "d") -> 10/6/2000
+
+#### The 'D' Specifier
 
 The `"D"` specifier renders a long date pattern (`"dddd, MMMM dd, yyyy"` for en-US).
 
@@ -26,11 +32,15 @@ The `"D"` specifier renders a long date pattern (`"dddd, MMMM dd, yyyy"` for en-
 
     kendo.toString(new Date(2000, 10, 6), "D") -> Monday, November 06, 2000
 
+#### The 'F' Specifier
+
 The `"F"` specifier renders a full date/time pattern (`"dddd, MMMM dd, yyyy h:mm:ss tt"` for en-US).
 
 ###### Example
 
     kendo.toString(new Date(2000, 10, 6), "F") -> Monday, November 06, 2000 12:00:00 AM
+
+#### The 'g' Specifier
 
 The `"g"` specifier renders a general date/time pattern (short time) (`"M/d/yyyy h:mm tt"` for en-US).
 
@@ -38,11 +48,15 @@ The `"g"` specifier renders a general date/time pattern (short time) (`"M/d/yyyy
 
     kendo.toString(new Date(2000, 10, 6), "g") -> 11/6/2000 12:00 AM
 
+#### The 'G' Specifier
+
 The `"G"` specifier renders a general date/time pattern (long time) (`"M/d/yyyy h:mm:ss tt"` for en-US).
 
 ###### Example
 
     kendo.toString(new Date(2000, 10, 6), "G") -> 11/6/2000 12:00:00 AM
+
+#### The 'M' or 'm' Specifiers
 
 The `"M"` or `"m"` specifiers render a month/day pattern (`"MMMM dd"` for en-US).
 
@@ -50,13 +64,41 @@ The `"M"` or `"m"` specifiers render a month/day pattern (`"MMMM dd"` for en-US)
 
     kendo.toString(new Date(2000, 10, 6), "m") -> November 06
 
-The `"u"` specifier renders universal sortable date/time pattern (`"yyyy-MM-dd HH:mm:ssZ"` for en-US).
+#### The 't' Specifier
+
+The `"t"` specifier renders a short time pattern (`"h:mm tt"` for en-US).
+
+###### Example
+
+    kendo.toString(new Date(2000, 10, 6, 14, 30, 45), "t") -> 2:30 PM
+
+#### The 'T' Specifier
+
+The `"T"` specifier renders a long time pattern (`"h:mm:ss tt"` for en-US).
+
+###### Example
+
+    kendo.toString(new Date(2000, 10, 6, 14, 30, 45), "T") -> 2:30:45 PM
+
+#### The 's' Specifier
+
+The `"s"` specifier renders universal sortable **local** date/time pattern (`"yyyy-MM-dd HH:mm:ssZ"` for en-US).
 
 ###### Example
 
     kendo.toString(new Date(2000, 10, 6), "u") -> 2000-11-06 00:00:00Z
 
-The `"Y"` or `"y"` specifiers renders a year/month pattern (`"MMMM, yyyy"` for en-US).
+#### The 'u' Specifier
+
+The `"u"` specifier renders universal sortable **UTC** date/time pattern (`"yyyy-MM-dd HH:mm:ssZ"` for en-US).
+
+###### Example
+
+    kendo.toString(new Date(2000, 10, 6), "u") -> 2000-11-06 00:00:00Z
+
+#### The 'Y' or 'y' Specifiers
+
+The `"Y"` or `"y"` specifier renders a year/month pattern (`"MMMM, yyyy"` for en-US).
 
 ###### Example
 

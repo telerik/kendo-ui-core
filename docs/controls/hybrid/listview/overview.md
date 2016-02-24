@@ -1,30 +1,35 @@
 ---
 title: Overview
-page_title: User guide for Kendo UI Mobile ListView Widget
-description: Documentation how to use capabilities of Kendo UI Mobile ListVeiw widget.
+page_title: Overview | Hybrid UI ListView
+description: "Initialize and take full advantage of the Hybrid UI ListView widget in the Kendo UI framework."
+slug: overview_hybridlistview
 position: 1
 ---
 
-# ListView
+# Hybrid UI ListView Overview
 
-The Kendo Mobile ListView widget is used to display flat or grouped list of items.
-It can be either used in unbound mode by enhancing an HTML `ul` element, or bound to a DataSource instance.
+The [Hybrid UI ListView widget](http://demos.telerik.com/kendo-ui/m/index#mobile-listview/index) is used to display flat or grouped lists of items. It can be either used in the unbound mode by enhancing an HTML `ul` element, or bound to a DataSource instance.
 
 ## Getting Started
 
-The Kendo mobile Application automatically initializes the mobile ListView for every `ul` element with `role` data attribute set to
-`listview` present in the application Views.
-Alternatively, it can be initialized using jQuery plugin syntax in the containing mobile View **init event handler**.
-The mobile ListView element may contain one or more `li` elements.
+The Kendo UI mobile Application automatically initializes a mobile ListView for every `ul` element with the `role` data attribute set to `listview` and present in the application Views. Alternatively, it can be initialized using jQuery plugin syntax in the containing mobile View `init` event handler. The mobile ListView element may contain one or more `li` elements.
 
-### Initialize mobile ListView using a role data attribute
+### Initialize from Markup
+
+The example below demonstrates how to initialize the Hybrid UI Listview widget from markup.
+
+###### Example
 
     <ul data-role="listview">
         <li>Foo</li>
         <li>Bar</li>
     </ul>
 
-### Initialize mobile ListView using jQuery plugin syntax
+### Initialize Using jQuery
+
+The example below demonstrates how to initialize the Hybrid UI ListView widgets using jQuery plugin syntax.
+
+###### Example
 
     <div data-role="view" data-init="initListView">
         <ul id="listView"></ul>
@@ -36,26 +41,32 @@ The mobile ListView element may contain one or more `li` elements.
         }
     </script>
 
-## Inset Mobile ListView
+## Display
 
-In iOS, the mobile ListView appearance can be changed to **inset**, to achieve an effect similar to iOS grouped table views,
-where the list items are padded from the container, and have rounded corners.
-To do so, set the `style` data attribute to `inset`.
-**Note:** This setting will not affect the appearance of the mobile ListView on Android/Blackberry devices.
+### Inset ListViews
 
-### Create inset mobile ListView
+In iOS, the mobile ListView appearance can be changed to `inset`, to achieve an effect similar to the iOS grouped table views, where the list items are padded from the container, and have rounded corners. To do so, set the `style` data attribute to `inset`.
+
+> **Important**
+>
+> This setting does not affect the appearance of the mobile ListView on Android/Blackberry devices.
+
+The example below demonstrates how to create an inset mobile ListView.
+
+###### Example
 
     <ul data-role="listview" data-style="inset">
       <li>Foo</li>
       <li>Bar</li>
     </ul>
 
-## Grouped mobile ListView
+### Grouped ListViews
 
-The mobile ListView can display items in groups, with optional headers. This can be achieved by nesting unordered lists in items,
-and setting the widget's element `type` data attribute to `group`.
+The mobile ListView can display items in groups, with optional headers. This can be achieved by nesting unordered lists in items, and setting the widget's element `type` data-attribute to `group`.
 
-### Create grouped mobile ListView
+The example below demonstrates how to create a grouped Hybrid UI ListView.
+
+###### Example
 
     <ul data-role="listview" data-type="group">
         <li>
@@ -74,13 +85,15 @@ and setting the widget's element `type` data attribute to `group`.
         </li>
     </ul>
 
-## Binding to Data
+## Data Binding
 
-The mobile ListView can be bound to both local JavaScript arrays and remote data via the
-**Kendo DataSource component**. Local JavaScript arrays are appropriate for limited value
-options, while remote data binding is better for larger data sets.
+### Bind to Local Arrays
 
-### Bind mobile ListView to a local data source.
+The Hybrid UI ListView widget can be bound to both local JavaScript arrays and remote data via the Kendo UI DataSource component. Local JavaScript arrays are appropriate for limited value options, while remote data binding is better for larger data sets.
+
+The example below demonstrates how to bind a Hybrid UI ListView to a local data source.
+
+###### Example
 
     function initListView(e) {
         e.view.element.find("#listview").kendoMobileListView({
@@ -88,15 +101,19 @@ options, while remote data binding is better for larger data sets.
          });
     });
 
-## Customizing Item Templates
+## Customization
 
-The mobile ListView leverages Kendo UI high-performance Templates to provide complete control
-over item rendering. For a complete overview of Kendo UI Template capabilities and syntax,
-please review the [Kendo UI Templates](/framework/templates/overview) documentation.
+### Item Templates
 
-> The ListView automatically wraps the template content in `<li>` tag. Putting a `<li>` tag inside the template creates invalid nesting of elements.
+The hybrid mobile ListView leverages Kendo UI high-performance Templates to provide complete control over item rendering. For a complete overview of Kendo UI Template capabilities and syntax, refer to the [article on Kendo UI Templates]({% slug overview_kendoui_templatescomponent %}).
 
-### Basic item template customization
+> **Important**
+>
+> The ListView automatically wraps the template content in a `<li>` tag. Putting a `<li>` tag inside the template creates invalid nesting of elements.
+
+The example below demonstrates basic item template customization.
+
+###### Example
 
     <ul id="listview"></ul>
 
@@ -109,7 +126,9 @@ please review the [Kendo UI Templates](/framework/templates/overview) documentat
         });
     </script>
 
-### Setting item template via data attribute
+The example below demonstrates how to set an item template via the data attribute.
+
+###### Example
 
     <div id="foo" data-role="view">
         <ul id="list" data-role="listview" data-source="dataSource" data-template="tmp"></ul>
@@ -129,24 +148,33 @@ please review the [Kendo UI Templates](/framework/templates/overview) documentat
         });
     </script>
 
-## Link Items
+### Link Items
 
-The mobile ListView will automatically style items with a single link element inside, adding a details indicator.
+The mobile ListView automatically styles items with a single link element inside, adding a details indicator.
 
-### ListView with link items
+The example below demonstrates a Hybrid UI ListView with link items.
+
+###### Example
 
     <ul data-role="listview">
       <li><a href="#foo">Foo</a></li>
       <li><a href="#bar">Bar</a></li>
     </ul>
 
-## Detail Buttons
+### Detail Buttons
 
-Mobile ListView integrates with nested DetailButton widgets. These buttons are best suited when the user should be able to execute more than one action on a given row.
-Detail buttons support 4 default data-styles: **contactadd**, **detaildisclose**, **rowinsert** and **rowdelete**, along custom icons
-through the data-icon attribute. One row can contain both regular links and detail buttons.
+Mobile ListView integrates with nested DetailButton widgets. These buttons are best suited when users should be able to execute more than one action on a given row. besides custom icons, the detail buttons support four default data-styles through the data-icon attribute:
 
-### ListView with Detail Buttons
+* `contactadd`
+* `detaildisclose`
+* `rowinsert`
+* `rowdelete`
+
+One row can contain both regular links and detail buttons.
+
+The example below demonstrates a Hybrid UI ListView with detail buttons.
+
+###### Example
 
     <ul data-role="listview" data-style="inset" data-type="group">
         <li>
@@ -173,14 +201,16 @@ through the data-icon attribute. One row can contain both regular links and deta
         </li>
     </ul>
 
-## Item Icons
+## Item Icons Configuration
 
-An icon can be set in two ways:
+An item icon can be set in two ways:
 
-1. By adding an `img` element inside the `li` element
+1. By adding an `img` element inside the `li` element.
 2. By setting a `data-icon` attribute to the `li` element. In this case an `a` element should be placed inside the `li` element. The icon CSS class will be applied to the `a` element.
-   
-### Example - using font icons with `data-icon` attribute
+
+The example below demonstrates how to use font icons with the `data-icon` attribute.
+
+###### Example
 
     <ul data-role="listview" data-style="inset">
       <li data-icon="home">
@@ -188,20 +218,23 @@ An icon can be set in two ways:
       </li>
     </ul>
 
-> **Important:** Kendo UI ships with several ready to use icons. The full list of predefined icons can be seen in the [Icons](./icons) article.
+> **Important**
+>
+> Kendo UI ships with several ready to use icons. The full list of predefined icons can be seen in the [article on icons]({% slug hybridiconfonts_hybridkendoui %}).
 
-Additional icons may be added by defining the respective CSS class.
-If the `data-icon` attribute is set to `custom`, the item will receive `km-custom` CSS class.
+Additional icons may be added by defining the respective CSS class. If the `data-icon` attribute is set to `custom`, the item receives the `km-custom` CSS class.
 
-### Creating Custom Icons
+### Create Custom Icons before Q3 2012
 
-In order to create colorizable icons like the default ones in Kendo UI Mobile, specify the icon image as a **box mask**
-(either as dataURI or as a separate image). The image should be **PNG8** or **PNG24** with alpha channel (**PNG8+Alpha** is supported by
-only few graphic editors, so **better stick with PNG24**). The image color is not important - it will be used as a mask only.
+To create colorizable icons like the default ones in the hybrid Kendo UI platform, specify the icon image as a box mask&mdash;either as a `dataURI` or as a separate image. The image should be `PNG8` or `PNG24` with an alpha channel&mdash;`PNG8+Alpha` is supported only by few graphic editors, so better stick with `PNG24`. The image color is not important as it is going to be used as a mask only.
 
-**Note**: **BlackBerry 7.0** has a bug that renders its masks as background-image, so it is recommended to use white in order to support it. The bug is fixed in **7.1**.
+> **Important**
+>
+> BlackBerry 7.0 has a bug that renders its masks as a background-image, so it is recommended to use white to support it. The bug is fixed in the 7.1 release.
 
-#### Define custom list item icon
+The example below demonstrates how to defined a custom list item icon.
+
+###### Example
 
     <style>
         .km-custom {
@@ -218,10 +251,13 @@ only few graphic editors, so **better stick with PNG24**). The image color is no
       </li>
     </ul>
 
-In Q3 2012 due to numerous issues with WebKit mask icons, they were deprecated and Kendo UI Mobile introduced font icons. Since the font is not easy editable,
-the previous method for a mask icon can be used, but with some additional styling. Please note that the below example will restyle all font icons.
+### Create Custom Icons after Q3 2012
 
-### Define custom list item icon after Q3 2012
+In the Kendo UI Q3 2012 release, due to numerous issues with the WebKit mask icons, they were deprecated and Kendo UI introduced font icons for its hybrid mobile platform. Since the font is not easily editable, the previous method for a mask icon can be used with some additional styling.
+
+The example below demonstrates how to define custom list item icons after the Kendo UI Q3 2012 release. Note that the code from this demo will restyle all font icons.
+
+###### Example
 
     <style>
         /* Remove font icons styling, use .km- + data-icon name if only one should be overridden */
@@ -246,9 +282,13 @@ the previous method for a mask icon can be used, but with some additional stylin
       </li>
     </ul>
 
-If you want to add only one or two custom icons, specify them with their respective classes (.km- + data-icon name):
+<!--*-->
 
-### Restyle only the added Kendo UI Mobile custom icon.
+### Restyle Added Custom Icons Only
+
+If you want to add only one or two custom icons, specify them with their respective classes&mdash;`.km-` and the data-icon name, as shown in the example below.
+
+###### Example
 
     .km-root .km-pane .km-view .km-question {
         background-size: 100% 100%;
@@ -261,9 +301,13 @@ If you want to add only one or two custom icons, specify them with their respect
         background-color: red;
     }
 
-When custom icons are used and their names are the same as the integrated Kendo UI Mobile icon names, make sure that the font icons are not rendered.
+### Hide All Hybrid UI Font Icons
 
-### Hide all Kendo UI Mobile font icons.
+When custom icons are used and their names are the same as the integrated Hybrid UI icon names, make sure that the font icons are not rendered.
+
+The example below demonstrates how to hide all Hybrid UI font icons.
+
+###### Example
 
     /* Don't render all internal Kendo UI font icons
     .km-root .km-pane .km-view .km-icon:after,
@@ -272,9 +316,11 @@ When custom icons are used and their names are the same as the integrated Kendo 
         visibility: hidden;
     }
 
-Again if only several icons should be overridden, specify them with their classes instead:
+### Hide Specific Hybrid UI Font Icons
 
-### Hide specific Kendo UI Mobile font icons.
+Again if only several icons should be overridden, specify them with their classes instead, as demonstrated in the example below.
+
+###### Example
 
     .km-root .km-pane .km-view .km-favorites:after,
     .km-root .km-pane .km-view .km-favorites:before
@@ -282,13 +328,13 @@ Again if only several icons should be overridden, specify them with their classe
         visibility: hidden;
     }
 
-## Nova theme features
+## Nova Theme Features
 
 ### Tags
 
-To activate this feature add span with `km-badge` class.
+To activate this feature add span with `km-badge` class, as demonstrated in the example below.
 
-#### Mobile ListView tags example
+###### Example
 
     <ul data-role="listview" data-style="inset">
   		<li>
@@ -301,9 +347,9 @@ To activate this feature add span with `km-badge` class.
 
 ### Icons
 
-Icons shift the whole listview to right. The grouping headers are also indented. To activate this feature set `km-listview-icons` class.
+Icons shift the whole ListView to the right. The grouping headers are also indented. To activate this feature, set `km-listview-icons` class, as shown in the example below.
 
-#### Mobile ListView icons example
+###### Example
 
      <ul data-role="listview" class="km-listview-icons">
        <li data-icon="downloads"><a href="#drawer-home">Inbox</a></li>
@@ -312,9 +358,9 @@ Icons shift the whole listview to right. The grouping headers are also indented.
 
 ### Thumbnails
 
-Thumbnails shift the whole listview to right. The grouping headers are also indented. To activate this feature set `km-thumbnail` to the images.
+Thumbnails shift the whole ListView to the right. The grouping headers are also indented. To activate this feature, set `km-thumbnail` to the images, as demonstrated in the example below.
 
-#### Mobile ListView thumbnails example
+###### Example
 
       <ul data-role="listview" class="km-listview-icons">
         <li>
@@ -322,3 +368,21 @@ Thumbnails shift the whole listview to right. The grouping headers are also inde
           <!-- ... -->
         </li>
       </ul>
+
+## See Also
+
+Other articles and how-to examples on the Hybrid UI ListView:
+
+* [Hybrid UI ListView JavaScript API Reference](/api/javascript/mobile/ui/listview)
+* [Overview of the Hybrid UI ListView]({% slug overview_hybridlistview %})
+* [Endless Scrolling Feature]({% slug endlessscrolling_hybridlistview %})
+* [Pull-to-Refresh Feature]({% slug pulltorefreshfeature_hybridlistview %})
+* [How to Use jsSignature]({% slug howto_usejssignature_hybridlistview %})
+
+Articles and how-to examples on Hybrid UI components:
+
+* [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})
+* [How to Create Fixed Content Areas with Scroller]({% slug howto_createfixedcontentarea_hybridui %})
+* [How to Create Relative Content Size Using Flexboxes]({% slug howto_createrelative_contentsize_usingflexboxes_hybridui %})
+* [How to Select Value from Another View]({% slug howto_selectvaluefrom_anotherview_hybridui %})
+* [How to Set Initial View Prior to Initialization in AngularJS]({% slug howto_setinitiaviewpriortoinitialization_angular_hybridui %})

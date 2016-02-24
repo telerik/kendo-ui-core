@@ -1,6 +1,6 @@
 ---
 title: Set Caret Position
-page_title: Set Caret Position | Kendo UI Editor Widget
+page_title: Set Caret Position | Kendo UI Editor
 description: "Learn how to set the caret position in a Kendo UI Editor widget."
 slug: howto_set_caret_position_editor
 ---

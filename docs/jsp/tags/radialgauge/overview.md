@@ -1,39 +1,48 @@
 ---
 title: Overview
-page_title: How to use RadialGauge JSP tag | Kendo UI documentation
-description: User Guide for server-side wrapper for Kendo UI RadialGauge for JSP.
+page_title: Overview | Radial Gauge JSP Tag
+description: "Get started with the Radial Gauge JSP tag in Kendo UI."
+slug: overview_radialgauge_uiforjsp
+position: 1
 ---
 
-# Radial Gauge
+# Radial Gauge JSP Tag Overview
 
-The RadialGauge tag is a server-side wrapper for the [Kendo UI DataViz RadialGauge](/api/dataviz/radialgauge) widget.
+The Radial Gauge JSP tag is a server-side wrapper for the [Kendo UI RadialGauge](/api/javascript/dataviz/ui/radialgauge) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo UI RadialGauge:
+### Configuration
 
-1.  Make sure you have followed all the steps from the [Introduction](/jsp/introduction) help topic.
+Below are listed the steps for you to follow when configuring the Kendo UI Radial Gauge.
 
-2.  Create a new action method to render the view:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for JSP]({% slug overview_uiforjsp %}).
+
+**Step 2** Create a new action method to render the view.
+
+###### Example
 
         @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
         public String index() {
             return "/radialgauge/index";
         }
 
-3.  Add a RadialGauge:
+**Step 3** Add a `radialGauge` tag.
+
+###### Example
 
          <kendo:radialGauge name="gauge">
             <kendo:radialGauge-pointer value="10" />
             <kendo:radialGauge-scale min="0" max="100" />
          </kendo:radialGauge>
 
-## Accessing an Existing Radial Gauge
+## Reference
 
-You can reference an existing RadialGauge instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/dataviz/radialgauge#methods) to control its behavior.
+### Existing Instances
 
-### Accessing an existing RadialGauge instance
+You are able to reference an existing Radial Gauge instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Radial Gauge API](/api/javascript/dataviz/ui/radialgauge#methods) to control its behavior.
+
+###### Example
 
         //Put this after your Kendo UI RadialGauge tag
         <script>
@@ -44,3 +53,10 @@ Once a reference has been established, you can use the [API](/api/dataviz/radial
         });
         </script>
 
+## See Also
+
+Other articles on Telerik UI for JSP and on the Radial Gauge:
+
+* [Overview of the Kendo UI Radial Gauge Widget]({% slug overview_kendoui_radialgaugewidget %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

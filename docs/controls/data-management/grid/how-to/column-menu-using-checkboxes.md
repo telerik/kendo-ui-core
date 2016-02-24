@@ -1,6 +1,6 @@
 ---
 title: Use Checkboxes inside Column Menus
-page_title: Use Checkboxes inside Column Menus | Kendo UI Grid Widget
+page_title: Use Checkboxes inside Column Menus | Kendo UI Grid
 description: "Learn how to use checkboxes inside a Kendo UI Grid column menu."
 slug: howto_use_checkboxes_inside_column_menu_grid
 ---
@@ -28,11 +28,11 @@ The example below demonstrates how to use checkboxes inside a Kendo UI Grid colu
         columnMenuInit:function(e){    
           var menu = e.container.children().data("kendoMenu");
           var handler = $.proxy(enableCheckbox, menu);
-          
+
           menu.bind("open", handler).bind("select", handler);    
         }
       });
-      
+
       function enableCheckbox() {
         this.element.find(".k-columns-item :checkbox").prop("disabled", false);
       }

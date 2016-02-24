@@ -248,16 +248,20 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            var ul = this.ul[0],
+            var content = this.list[0],
                 itemOffsetTop = item.offsetTop,
                 itemOffsetHeight = item.offsetHeight,
-                ulScrollTop = ul.scrollTop,
-                ulOffsetHeight = ul.clientHeight,
+                contentScrollTop = content.scrollTop,
+                contentOffsetHeight = content.clientHeight,
                 bottomDistance = itemOffsetTop + itemOffsetHeight;
 
-            ul.scrollTop = ulScrollTop > itemOffsetTop ?
-                           itemOffsetTop : bottomDistance > (ulScrollTop + ulOffsetHeight) ?
-                           bottomDistance - ulOffsetHeight : ulScrollTop;
+                if (contentScrollTop > itemOffsetTop) {
+                    contentScrollTop = itemOffsetTop;
+                } else if (bottomDistance > (contentScrollTop + contentOffsetHeight)) {
+                    contentScrollTop = (bottomDistance - contentOffsetHeight);
+                }
+
+                content.scrollTop = contentScrollTop;
         },
 
         select: function(li) {

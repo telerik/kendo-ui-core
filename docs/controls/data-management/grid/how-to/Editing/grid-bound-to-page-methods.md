@@ -1,6 +1,6 @@
 ---
 title: Use CRUD Operations when Grid Is Bound to Web Methods
-page_title: Use CRUD Operations when Grid Is Bound to Web Methods | Kendo UI Grid Widget
+page_title: Use CRUD Operations when Grid Is Bound to Web Methods | Kendo UI Grid
 description: "Learn how to use CRUD operations when the Kendo UI Grid widget is bound to web methods."
 slug: howto_use_crud_boundto_web_methods_grid
 ---

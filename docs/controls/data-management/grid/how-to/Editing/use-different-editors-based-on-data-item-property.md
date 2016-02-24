@@ -1,6 +1,6 @@
 ---
 title: Use Editors Based on Data Item Property
-page_title: Use Editors Based on Data Item Property | Kendo UI Grid Widget
+page_title: Use Editors Based on Data Item Property | Kendo UI Grid
 description: "Learn how to use different editors based on the data item property in the Kendo UI Grid widget."
 slug: howto_use_editors_basedon_dataitem_property_grid
 ---
@@ -14,7 +14,7 @@ The example below demonstrates how to use different editors based on a property 
 ```html
     <div id="example" class="k-content">
       <div id="grid"></div>
-      
+
       <script>
         $(document).ready(function () {
           var crudServiceBaseUrl = "http://demos.telerik.com/kendo-ui/service",
@@ -57,7 +57,7 @@ The example below demonstrates how to use different editors based on a property 
                   }
                  }
                 });
-          
+
           $("#grid").kendoGrid({
             dataSource: dataSource,
              pageable: true,
@@ -68,7 +68,7 @@ The example below demonstrates how to use different editors based on a property 
                  if( item.UnitPrice % 5 == 0) {
                    $(this).find('.k-grid-edit,.k-grid-delete').hide();
                  }
-                 
+
                });               
              },
              height: 430,

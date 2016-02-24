@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Upload Widget
+page_title: Overview | Kendo UI Upload
 description: "Learn how to initialize the Kendo UI Upload widget and configure its behavior."
 slug: overview_kendoui_upload_widget
 position: 1
@@ -64,6 +64,14 @@ For detailed information on the modes of operation Kendo UI Upload supports, ref
 
 For detailed information on the drag-and-drop functionality Kendo UI Upload supports, refer to [this article]({% slug dragandrop_upload_widget %}).
 
+## Common Scenarios
+
+### Identify Files When Uploading
+
+Regardless of the mode of operation, a unique identifier (`uid`) is generated for each file. In the case of a synchronous or asynchronous upload with the [batch option](/api/javascript/ui/upload#configuration-async.batch) enabled, the single `uid` that is generated, stands for the whole batch of files, selected at the same time. In the case of asynchronous upload with the [batch option](/api/javascript/ui/upload#configuration-async.batch) disabled, a `uid` is generated for each separate file.   
+
+The generated `uid` is added to the [`cancel`](/api/javascript/ui/upload#events-cancel) [`error`](/api/javascript/ui/upload#events-error), [`progress`](/api/javascript/ui/upload#events-progress), [`remove`](/api/javascript/ui/upload#events-remove), [`select`](/api/javascript/ui/upload#events-select), and [`upload`](/api/javascript/ui/upload#events-upload) events as a property of the `e.files` collection.
+
 ## Reference
 
 ### Existing Instances
@@ -81,7 +89,7 @@ The example below demonstrates how to access an existing Upload instance.
 Other articles and how-to examples on Kendo UI Upload:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Upload Widget](/aspnet-mvc/helpers/upload/overview)
-* [Overview of the Upload JSP Tag](/jsp/tags/upload/overview)
+* [Overview of the Upload JSP Tag]({% slug overview_upload_uiforjsp %})
 * [Overview of the Upload PHP Class](/php/widgets/upload/overview)
 * [Drag and Drop]({% slug dragandrop_upload_widget %})
 * [Send and Receive Metadata]({% slug metadata_upload_widget %})

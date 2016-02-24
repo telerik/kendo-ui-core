@@ -1,6 +1,6 @@
 ---
 title: Use AngularJS Copy Functionality
-page_title: Use AngularJS Copy Functionality | Kendo UI DatePicker Widget
+page_title: Use AngularJS Copy Functionality | Kendo UI DatePicker
 description: "Learn how to usе the AngularJS copy functionality in the Kendo UI DatePicker."
 slug: howto_use_angularjs_copy_functionality_datepicker
 ---

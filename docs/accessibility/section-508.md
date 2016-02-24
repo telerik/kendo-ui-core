@@ -10,7 +10,7 @@ position: 2
 
 Voluntary Product Accessibility Template (VPAT)
 
-The following table shows the level of support that Kendo UI provides for the [Section 508 Web content standards](http://www.section508.gov/section-508-standards-guide#Web).
+The following table shows the level of support that Kendo UI provides for the [Section 508 Web content standards](https://www.section508.gov/content/learn/standards/quick-reference-guide#1194.22).
 
 **Section 1194.22 Web Information and Application Standards:**
 

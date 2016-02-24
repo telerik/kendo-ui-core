@@ -1,6 +1,6 @@
 ---
 title: Show TreeMap Tooltip
-page_title: Show TreeMap Tooltip | Kendo UI TreeMap Widget
+page_title: Show TreeMap Tooltip | Kendo UI TreeMap
 description: "Learn how to use the Kendo UI Tooltip for the Kendo UI TreeMap tiles."
 slug: howto_showtreemaptooltip_treemap
 ---

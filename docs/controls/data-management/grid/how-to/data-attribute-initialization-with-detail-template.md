@@ -1,6 +1,6 @@
 ---
 title: Initialize Data Attribute with Detail Template
-page_title: Initialize Data Attribute with Detail Template | Kendo UI Grid Widget
+page_title: Initialize Data Attribute with Detail Template | Kendo UI Grid
 description: "Learn how to initialize a Kendo UI Grid widget by using data attributes and including a detail template."
 slug: howto_initialize_data_attributewith_detail_template_grid
 ---
@@ -12,7 +12,7 @@ The example below demonstrates how to initialize a Kendo UI Grid using data attr
 ###### Example
 
 ```html
-     <div id="grid" 
+     <div id="grid"
          data-role="grid"
          data-sortable="true"
          data-pageable="true"

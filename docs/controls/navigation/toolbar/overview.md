@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI ToolBar Widget
+page_title: Overview | Kendo UI ToolBar
 description: "Learn how to initialize the Kendo UI ToolBar widget and configure its command types and behaviors."
 slug: overview_kendoui_toolbar_widget
 relatedDocs: api-web-toolbar
@@ -519,7 +519,7 @@ The example below demonstrates how to use ToolBar events.
 Other articles on Kendo UI ToolBar:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the ToolBar Widget](/aspnet-mvc/helpers/toolbar/overview)
-* [Overview of the ToolBar JSP Tag](/jsp/tags/toolbar/overview)
+* [Overview of the ToolBar JSP Tag]({% slug overview_toolbar_uiforjsp %})
 * [Overview of the ToolBar PHP Class](/php/widgets/toolbar/overview)
 * [How to Close ToolBar Popup Manually]({% slug howto_closetoolbarpopupmanually_toolbar %})
 * [How to Develop and Register Custom ToolBar Tools]({% slug howto_customtool_toolbar %})

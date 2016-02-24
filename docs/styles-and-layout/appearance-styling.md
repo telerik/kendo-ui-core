@@ -44,8 +44,8 @@ The example below demonstrates how to include the stylesheets to your project.
     </head>
 
 > **Important**
->
-> Make sure you include the common CSS file before the theme CSS file. In some cases, the theme CSS file may override basic styles as it uses selectors with the same specificity.
+> * The common CSS file must be registered before the theme CSS file. This is because the theme CSS file may need to override common styles via selectors with the same CSS specificity.
+> * Only one pair of common and theme CSS file should be registered on the page at any given time.
 
 The appearance of the Kendo UI widgets entirely depends on styles defined by the applied CSS classes. No inline styles are used, except for some very specific cases, in which these styles must be set with Javascript, depending on the browser or configuration.
 
@@ -61,6 +61,15 @@ Some themes require a different common (base) stylesheet that applies different 
 | **`kendo.common-nova.css`**           | The base stylesheet for the Nova theme. Use this file instead of `kendo.common.css` and only with `kendo.nova.css`. |
 | **`kendo.common-fiori.css`**          | The base stylesheet for the Fiori theme available in the enterprise bundles of Kendo UI. Use this file instead of `kendo.common.css` and only with `kendo.fiori.css`. |
 | **`kendo.common-office365.css`**      | The base stylesheet for the Office365 theme available in the enterprise bundles of Kendo UI. Use this file instead of `kendo.common.css` and only with `kendo.office365.css`. |
+
+## Theme-Related Folders
+
+Apart from the common stylesheet and theme stylesheet, the following folders must be available in your application.
+
+* `/ThemeName/`&mdash;This is the folder, which contains all images required by the used Kendo UI theme. The folder name matches the theme name, e.g. `Default`, `Bootstrap`, `Silver`, etc. The theme image folders for unused themes can be removed.
+* `/fonts/`&mdash;This is where the `KendoUIGlyphs` and `DejaVu` font files reside. The `KendoUIGlyphs` font describes the Kendo UI font icons used by the web widgets. The `DejaVu` font is used by default during [PDF export]({% slug drawingofhtmlelements_drawingapi %}).
+* `/images/`&mdash;This where the Kendo UI font icons for the mobile widgets reside.
+* `/textures/`&mdash;This is where some fallback theme images are stored for browsers that do not support the CSS3 linear gradients.
 
 ## Primitives
 

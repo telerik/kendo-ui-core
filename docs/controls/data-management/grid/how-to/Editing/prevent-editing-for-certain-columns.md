@@ -1,6 +1,6 @@
 ---
 title: Prevent Editing for Boolean Based Records
-page_title: Prevent Editing for Boolean Based Records | Kendo UI Grid Widget
+page_title: Prevent Editing for Boolean Based Records | Kendo UI Grid
 description: "Learn how to prevent editing for records based on Boolean values in the Kendo UI Grid widget."
 slug: howto_prevent_editingfor_boolean_based_records_grid
 ---
@@ -16,7 +16,7 @@ The example below demonstrates how to prevent editing for a record based on a Bo
     <div id="grid"></div>
 
     <script>
-      $(document).ready(function () { 
+      $(document).ready(function () {
         var dataSource1 = new kendo.data.DataSource({
           data: [
             {
@@ -42,15 +42,15 @@ The example below demonstrates how to prevent editing for a record based on a Bo
           pageable: true,
           height: 500,
           toolbar: ["create"],
-          columns: [ 
+          columns: [
             { field: "ProductName", title: "Product Name", width: "200px",
              editor: CustomEditor
             },
             { field: "Discontinued", width: "100px" }],
-          editable: "incell", 
+          editable: "incell",
         }).data("kendoGrid");
 
-        function CustomEditor(container, options) { 
+        function CustomEditor(container, options) {
           if(!options.model.Discontinued){
             var input = $('<input required validationMessage="This field is required" data-text-field="'
                           + options.field +'" data-value-field="'
@@ -58,12 +58,12 @@ The example below demonstrates how to prevent editing for a record based on a Bo
                           + options.field +'"/>');
             $(container).append(input);
           }
-          else{ 
+          else{
             var input = kendo.toString(options.model[options.field]);
             $(container).text(input);
             $(container).toggleClass("k-edit-cell");
           }
-        }; 
+        };
       });
     </script>
 ```

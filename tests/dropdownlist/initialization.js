@@ -954,6 +954,26 @@
         }
     });
 
+    test("widget doesn't throw an error when optionLabelTemplate is defined", 1, function() {
+        var widget;
+        try {
+            widget = new DropDownList(input, {
+                optionLabel: {
+                    text: "Select...",
+                    value: ""
+                },
+                optionLabelTemplate: "#=text#",
+                dataTextField: "text",
+                dataValueField: "value",
+                valueTemplate: "#=text# #=customField#"
+            });
+        } catch(e) {
+            ok(false);
+        }
+
+        equal(widget.span.text(), "Select...");
+    });
+
     test("widget renders filter header in input", function() {
         var dropdownlist = new DropDownList(input, {
             autoBind: false,
@@ -1233,6 +1253,37 @@
             start();
 
             equal(dropdownlist.text(), dropdownlist.options.optionLabel);
+        });
+
+        dropdownlist.value("");
+    });
+
+    asyncTest("DropDownList does not select first item if its value is set to null (no option label)", 1, function() {
+        dropdownlist = input.kendoDropDownList({
+          dataTextField: "Name",
+          dataValueField: "Name",
+          dataSource: new kendo.data.DataSource({
+            schema: {
+              model: {
+                id: "StateId"
+              }
+            },
+            transport: {
+              read: function(options) {
+                setTimeout(function() {
+                  options.success([
+                    { Name: "foo" }
+                  ]);
+                });
+              }
+            }
+          })
+        }).data("kendoDropDownList");
+
+        dropdownlist.one("dataBound", function() {
+            start();
+
+            equal(dropdownlist.value(), "");
         });
 
         dropdownlist.value("");

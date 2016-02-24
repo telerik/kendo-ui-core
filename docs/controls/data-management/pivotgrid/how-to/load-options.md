@@ -1,6 +1,6 @@
 ---
 title: Reload PivotGrid Configuration Options
-page_title: Reload PivotGrid Configuration Options | Kendo UI PivotGrid Widget
+page_title: Reload PivotGrid Configuration Options | Kendo UI PivotGrid
 description: "Learn how to reload the configuration options of the Kendo UI PivotGrid widget on button click in a Kendo UI PivotGrid widget."
 slug: howto_reload_configuration_options_pivotgrid
 ---
@@ -65,7 +65,7 @@ The example below demonstrates how to reload the configuration options of the Ke
 
 Other articles on Kendo UI PivotGrid and how-to examples:
 
-* [JavaScript API Reference](/api/javascript/ui/pivotgrid)
+* [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
 * [How to Access MDX Query]({% slug howto_access_mdx_query_pivotgrid %})
 * [How to Add Dimension to Column Axis]({% slug howto_add_dimension_column_axis_pivotgrid %})
 * [How to Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
@@ -74,11 +74,13 @@ Other articles on Kendo UI PivotGrid and how-to examples:
 * [How to Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})
 * [How to Filter by Using the include Operator]({% slug howto_use_include_operator_pivotgrid %})
 * [How to Filter Dimensions]({% slug howto_filter_dimensions_pivotgrid %})
+* [How to Format Dates in Dimension Labels]({% slug howto_format_date_query_pivotgrid %})
 * [How to Integrate with Kendo UI Chart]({% slug howto_integratewith_kendoui_chart_pivotgrid %})
 * [How to Make the Include fields Window Modal]({% slug howto_make_include_fields_window_modal_pivotgrid %})
 * [How to Modify Exported Excel Files]({% slug howto_modify_exported_excel_files_pivotgrid %})
 * [How to Modify Measure Tag Captions]({% slug howto_modify_measure_tag_captions_pivotgrid %})
 * [How to Render Row Header Caption As Anchor]({% slug howto_render_rowheader_captionas_anchor_pivotgrid %})
+* [How to Reset Expand State]({% slug howto_reset_expand_state_pivotgrid %})
 * [How to Right-Align Text]({% slug howto_right_align_text_pivotgrid %})
 * [How to Show Tooltip with Data Cell Information]({% slug howto_show_tooltip_withdata_cellinformation_pivotgrid %})
 * [How to Sort Dimensions]({% slug howto_sort_dimensions_pivotgrid %})

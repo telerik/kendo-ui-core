@@ -367,7 +367,7 @@ The height of the suggestion popup in pixels. The default value is 200 pixels.
     });
     </script>
 
-### ignoreCase `String`*(default: true)*
+### ignoreCase `Boolean`*(default: true)*
 
 If set to `false` case-sensitive search will be performed to find suggestions. The widget performs case-insensitive searching by default.
 
@@ -439,17 +439,111 @@ refer to [Popup](/api/javascript/ui/popup) documentation.
     </script>
 
 
+### popup.appendTo `String`
+
+Defines a jQuery selector that will be used to find a container element, where the popup will be appended to.
+
+#### Example - append the popup to a specific element
+
+    <div id="container">
+        <input id="dropdownlist" />
+    </div>
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      popup: {
+        appendTo: $("#container")
+      }
+    });
+    </script>
+
+### popup.origin `String`
+
+Specifies how to position the popup element based on achor point. The value is
+space separated "y" plus "x" position.
+
+The available "y" positions are:
+- "bottom"
+- "center"
+- "top"
+
+The available "x" positions are:
+- "left"
+- "center"
+- "right"
+
+#### Example - append the popup to a specific element
+
+    <div id="container">
+        <input id="dropdownlist" />
+    </div>
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      popup: {
+        origin: "top left"
+      }
+    });
+    </script>
+
+### popup.position `String`
+
+Specifies which point of the popup element to attach to the anchor's origin point. The value is
+space separated "y" plus "x" position.
+
+The available "y" positions are:
+- "bottom"
+- "center"
+- "top"
+
+The available "x" positions are:
+- "left"
+- "center"
+- "right"
+
+#### Example - append the popup to a specific element
+
+    <div id="container">
+        <input id="dropdownlist" />
+    </div>
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      popup: {
+        origin: "top left"
+      }
+    });
+    </script>
+
+
 ### optionLabel `String | Object`*(default: "")*
 
  Define the text of the default empty item. If the value is an object, then the widget will use it as a valid data item.
  Note that the optionLabel will not be available if the widget is empty.
 
+> **Important:** If `optionLabel` is an object, it needs to have at least `dataValueField` and `dataTextField` properties. Otherwise, widget will show `undefined`.
+Note that the very same optionLabel object will be passed to the [valueTemplate](/api/javascript/ui/dropdownlist#configuration-valueTemplate). **You need to ensure that all required by the valueTemplate properties are present
+in the optionLabel object**.
+
 > **Important:** Since Q1 2015 (2015.1.318), the option label is rendered as a separate header template. The benefits of this change are:
 - the widget's value will be empty string even when `dataValueField` and `dataTextField` options are equal or not defined
 - the widget will not throw an exception when a custom item template is used and `optionLabel` is string
 - option label has a separate template, that gives more freedom for customization
-
-> **Important:** If `optionLabel` is an object, it needs to have at least `dataValueField` and `dataTextField` properties. Otherwise, widget will show `undefined`.
 
 > **Important:** [Not relevant after Q1 2015] Widget's value will be equal to the `optionLabel` if the `dataValueField` and `dataTextField` options are equal or not defined
 
@@ -484,6 +578,8 @@ refer to [Popup](/api/javascript/ui/popup) documentation.
 ### optionLabelTemplate `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) used to render the option label.
+
+> **Important:** Define the [optionLabel](/api/javascript/kendo#configuration-optionLabel) as **object** if complex template structure is used
 
 ### headerTemplate `String|Function`
 
@@ -1031,6 +1127,7 @@ The zero-based index of the data record.
     </script>
 
 ### destroy
+
 Prepares the **DropDownList** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
 
 > **Important:** This method does not remove the DropDownList element from DOM.
@@ -1057,27 +1154,13 @@ Focuses the widget.
     dropdownlist.focus();
     </script>
 
-### open
+### items
 
-Opens the popup.
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view).
 
-#### Example
+#### Returns
 
-    <input id="dropdownlist" />
-    <script>
-    $("#dropdownlist").kendoDropDownList({
-      dataSource: [
-        { id: 1, name: "Apples" },
-        { id: 2, name: "Oranges" }
-      ],
-      dataTextField: "name",
-      dataValueField: "id",
-      index: 1
-    });
-
-    var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
-    dropdownlist.open();
-    </script>
+`Array` The currently rendered dropdown list items (`<li>` elements).
 
 ### enable
 
@@ -1101,6 +1184,28 @@ If set to `true` the widget will be enabled. If set to `false` the widget will b
     });
     var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
     dropdownlist.enable(true);
+    </script>
+
+### open
+
+Opens the popup.
+
+#### Example
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      index: 1
+    });
+
+    var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+    dropdownlist.open();
     </script>
 
 ### readonly

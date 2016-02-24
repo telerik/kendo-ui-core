@@ -1,6 +1,6 @@
 ---
 title: Serialize Form Data during Async Upload
-page_title: Serialize Form Data during Async Upload | Kendo UI Upload Widget
+page_title: Serialize Form Data during Async Upload | Kendo UI Upload
 description: "Learn how to serialize form data with the Kendo UI Upload widget."
 slug: howto_serialize_form_data_upload
 ---

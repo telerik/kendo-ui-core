@@ -1,17 +1,17 @@
 ---
 title: Implement Stable Sort in Chrome
-page_title: Implement Stable Sort in Chrome | Kendo UI Grid Widget
+page_title: Implement Stable Sort in Chrome | Kendo UI Grid
 description: "Learn how to implement a stable sort in Google Chrome when using the Kendo UI Grid widget."
 slug: howto_implement_stable_sortin_chrome_grid
 ---
 
 # Implement Stable Sort in Chrome
 
-The implementation of the built-in sorting algorithm in Google Chrome [is not guaranteed to be stable](https://code.google.com/p/v8/issues/detail?id=90). A [non-stable sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability) may cause items with the same sorting order to change places. 
+The implementation of the built-in sorting algorithm in Google Chrome [is not guaranteed to be stable](https://code.google.com/p/v8/issues/detail?id=90). A [non-stable sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability) may cause items with the same sorting order to change places.
 
-The example below demonstrates that when run in Chrome and items are sorted by **Address**, they change places. This is visible if you look at the **Name** column.
+The example below demonstrates that when run in Chrome and items are sorted by **Address**, they change places. This is visible if you look at the **Name** column. The example represents a typical case where a non-stable sort causes side effects.
 
-###### Example - a typical case where non-stable sort will cause side effects
+###### Example
 
 ```html
     <div id="grid"></div>

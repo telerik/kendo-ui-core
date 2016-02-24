@@ -1,6 +1,6 @@
 ---
 title: Common Issues
-page_title: Common Issues | Kendo UI Scheduler Troubleshooting
+page_title: Common Issues | Kendo UI Scheduler
 description: "Learn how to deal with issues you may encounter while using the Kendo UI Scheduler widget."
 previous_url: /web/scheduler/troubleshooting
 slug: troubleshooting_scheduler_widget
@@ -58,6 +58,20 @@ Such behavior may be caused by various reasons. Follow the instructions below to
 
 4. Check if the models returned from the sever match the required [kendo.data.SchedulerEvent](/api/javascript/data/schedulerevent) fields. For more information check the [Binding to remote service](/web/scheduler/overview#binding-to-remote-service) help topic.
 
+## Navigation
+
+### Widget Jumps on Focus
+
+When widget navigation is enabled, the widget wrapper becomes a focusable element. On click, the browser focuses it and preforms the so called scroll-into-view action. If the widget exceeds the height/width of the view-port, then it scrolls the page automatically. The goal is to position the focusable element at the top left corner of the view-port. During this process, actions like `double click`, `drag` or `resize` would not be available due to the movement of the page.
+
+> **Important**
+>
+> The page re-positioning is a default browser behavior, which cannot be prevented nor modified.
+
+If you want to avoid this behavior, choose one of the available options:
+* [Disable widget's navigation](/api/javascript/ui/scheduler#configuration-selectable), if it is not needed in your business case.
+* [Size the widget to the view-port dimensions]({% slug howto_calculate_scheduler_height_dunamically_onmobile_scheduler %}).
+
 ## See Also
 
 Other articles on Kendo UI Scheduler:
@@ -70,13 +84,16 @@ Other articles on Kendo UI Scheduler:
 Other articles on troubleshooting:
 
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
-* [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
 * [JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
+* [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
+* [Common Issues in Kendo UI Excel Export]({% slug troubleshooting_excel_export_kendoui %})
+* [Common Issues in Kendo UI Charts]({% slug troubleshooting_chart_widget %})
 * [Common Issues in Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %})
+* [Common Issues in Kendo UI Diagram]({% slug troubleshooting_diagram_widget %})
 * [Common Issues in Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %})
-* [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})
 * [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})
+* [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})
 * [Common Issues in Kendo UI Upload]({% slug troubleshooting_upload_widget %})
 * [Common Issues Related to Styling, Appearance, and Rendering]({% slug commonissues_troubleshooting_kendouistyling %})
 * [Common Issues in Telerik UI for ASP.NET MVC](/aspnet-mvc/troubleshooting)

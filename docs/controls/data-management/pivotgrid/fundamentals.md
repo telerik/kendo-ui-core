@@ -1,6 +1,6 @@
 ---
 title: OLAP Fundamentals
-page_title: OLAP Fundamentals | Kendo UI PivotGrid Widget
+page_title: OLAP Fundamentals | Kendo UI PivotGrid
 description: "Review all fundamental concepts related to the Kendo UI PivotGrid widget."
 slug: fundamentals_pivotgrid_widget
 position: 4
@@ -14,7 +14,7 @@ Kendo UI PivotGrid resembles a [pivot-table](http://en.wikipedia.org/wiki/Pivot_
 
 ### What Is OLAP?
 
-OLAP is an acronym that stands for Online Analytical Processing. It allows access to data that is aggregated and organized in a multidimensional structure called a "cube". OLAP tools enable users to interactively perform analysis over multidimensional data. 
+OLAP is an acronym that stands for Online Analytical Processing. It allows access to data that is aggregated and organized in a multidimensional structure called a "cube". OLAP tools enable users to interactively perform analysis over multidimensional data.
 
 For detailed information on what OLAP is and the way it processes data, refer to the following articles:
 
@@ -23,14 +23,14 @@ For detailed information on what OLAP is and the way it processes data, refer to
 
 ### What Is an OLAP Cube?
 
-The OLAP Cube is a data-set organized in a multidimensional manner. Every cube has 0 or more dimensions. The cube allows the performance of different operations, which answer complex analytical queries. 
+The OLAP Cube is a data-set organized in a multidimensional manner. Every cube has 0 or more dimensions. The cube allows the performance of different operations, which answer complex analytical queries.
 
 For detailed information on what an OLAP Cube is, refer to the following articles:
 
 * [OLAP Cube, Wikipedia](http://en.wikipedia.org/wiki/OLAP_cube)
 * [Understanding OLAP Cubes, MSDN Knoweldge Base](http://msdn.microsoft.com/en-us/library/aa140038%28v=office.10%29.aspx#odc_da_whatrcubes_topic2)
 
-The OLAP Cube introduces concepts like facts, measures, and dimensions. For more information on these, refer to the sections below. 
+The OLAP Cube introduces concepts like facts, measures, and dimensions. For more information on these, refer to the sections below.
 
 ### What Is a Fact?
 
@@ -46,7 +46,7 @@ A [dimension](http://social.technet.microsoft.com/wiki/contents/articles/1192.di
 
 ### What Is XMLA?
 
-XMLA is an acronym that stands for [XML for Analysis](http://en.wikipedia.org/wiki/XML_for_Analysis). XMLA is a protocol designed for universal data access to a multidimensional data source, which resides on the Web. 
+XMLA is an acronym that stands for [XML for Analysis](http://en.wikipedia.org/wiki/XML_for_Analysis). XMLA is a protocol designed for universal data access to a multidimensional data source, which resides on the Web.
 
 For detailed information on XMLA, refer to [this article](http://technet.microsoft.com/en-us/library/ms187178(v=sql.90).aspx).
 

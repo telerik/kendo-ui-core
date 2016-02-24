@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Slider Widget
+page_title: Overview | Kendo UI Slider
 description: "Learn how to initialize the Kendo UI Slider widget and configure its behaviors."
 slug: overview_kendoui_slider_widget
 position: 1
@@ -91,6 +91,6 @@ Kendo UI Slider draghandles are able to receive focus via tabbing. When focused 
 Other articles on Kendo UI Slider:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Slider Widget](/aspnet-mvc/helpers/slider/overview)
-* [Overview of the Slider JSP Tag](/jsp/tags/slider/overview)
+* [Overview of the Slider JSP Tag]({% slug overview_slider_uiforjsp %})
 * [Overview of the Slider PHP Class](/php/widgets/slider/overview)
 * [Slider JavaScript API Reference](/api/javascript/ui/slider)

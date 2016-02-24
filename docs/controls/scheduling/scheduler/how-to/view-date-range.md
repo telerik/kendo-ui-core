@@ -1,6 +1,6 @@
 ---
 title: Retrieve Current View Date Range
-page_title: Retrieve Current View Date Range | Kendo UI Scheduler Widget
+page_title: Retrieve Current View Date Range | Kendo UI Scheduler
 description: "Learn how to retrieve the date range of the current Kendo UI Scheduler view."
 slug: howto_retrievecurrent_viewdaterange_scheduler
 ---

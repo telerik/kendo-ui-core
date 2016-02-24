@@ -1,6 +1,6 @@
 ---
 title: Adjust Width Automatically
-page_title: Adjust Width Automatically | Kendo UI DropDownList Widget
+page_title: Adjust Width Automatically | Kendo UI DropDownList
 description: "Learn how to automatically adjust the width of a Kendo UI DropDownList widget."
 slug: howto_automatically_adjust_width_dropdownlist
 ---

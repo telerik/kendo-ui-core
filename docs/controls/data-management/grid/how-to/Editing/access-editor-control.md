@@ -1,6 +1,6 @@
 ---
 title: Access Editor Controls in Edit Events
-page_title:  Access Editor Controls in Edit Events | Kendo UI Grid Widget
+page_title:  Access Editor Controls in Edit Events | Kendo UI Grid
 description: "Learn how to access an editor control in the edit event handler of the Kendo UI Grid widget."
 slug: howto_access_editor_controlsin_edit_events_grid
 ---

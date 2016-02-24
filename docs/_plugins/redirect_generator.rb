@@ -15,7 +15,21 @@ module Jekyll
             FileUtils.mkdir_p(site.dest)
             File.write(File.join(site.dest, 'web.config'), web_config.output)
 
+            write_redirects(site);
+
             site.static_files << web_config
+        end
+
+        def write_redirects(site)
+            name = 'redirects.conf'
+            redirect = Page.new(site, site.source, '', name)
+            redirect.content = File.read(File.join(site.source, name))
+            redirect.render(Hash.new, site.site_payload)
+
+            FileUtils.mkdir_p(site.dest)
+            File.write(File.join(site.dest, name), redirect.output);
+
+            site.static_files << redirect
         end
 
         def redirect_pages(site)

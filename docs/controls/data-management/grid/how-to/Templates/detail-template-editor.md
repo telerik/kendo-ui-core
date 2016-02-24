@@ -1,6 +1,6 @@
 ---
 title: Create Custom Editor in Detail Template
-page_title: Create Custom Editor in Detail Template | Kendo UI Grid Widget
+page_title: Create Custom Editor in Detail Template | Kendo UI Grid
 description: "Learn how to create custom a custom editor in a Kendo UI Grid detail template."
 slug: howto_create_custom_editorin_detail_template_grid
 ---

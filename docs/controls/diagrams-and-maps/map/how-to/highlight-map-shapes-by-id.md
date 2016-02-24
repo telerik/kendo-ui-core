@@ -1,6 +1,6 @@
 ---
 title: Highlight Map Shapes by ID
-page_title: Highlight Map Shapes by ID | Kendo UI Map Widget
+page_title: Highlight Map Shapes by ID | Kendo UI Map
 description: "Learn how to highlight Kendo UI Map shapes by a specified ID."
 slug: howto_highlightmapshapesbyid_map
 ---

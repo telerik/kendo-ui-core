@@ -1,6 +1,6 @@
 ---
 title: Combine Local Data with Remote Loading
-page_title: Combine Local Data with Remote Loading | Kendo UI TreeView Widget
+page_title: Combine Local Data with Remote Loading | Kendo UI TreeView
 description: "Learn how to partially preload Kendo UI TreeView items and request data that has not yet been loaded from a remote service."
 slug: howto_combinelocaldatawithremoteloading_treeview
 ---

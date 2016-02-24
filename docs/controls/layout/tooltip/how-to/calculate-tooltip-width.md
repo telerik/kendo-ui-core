@@ -1,6 +1,6 @@
 ---
 title: Calculate Tooltip Content Width
-page_title: Calculate Tooltip Content Width | Kendo UI Tooltip Widget
+page_title: Calculate Tooltip Content Width | Kendo UI Tooltip
 description: "Learn how to calculate the content width of a Kendo UI Tooltip."
 slug: howto_calculatetooltipcontentlength_tooltip
 ---

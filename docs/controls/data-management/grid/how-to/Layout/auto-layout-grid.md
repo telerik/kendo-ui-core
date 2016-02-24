@@ -1,6 +1,6 @@
 ---
 title: Create and Use Auto Layout
-page_title:  Create and Use Auto Layout | Kendo UI Grid Widget
+page_title:  Create and Use Auto Layout | Kendo UI Grid
 description: "Learn how to create and use auto layout in the Kendo UI Grid widget."
 slug: howto_create_and_use_autolayout_grid
 ---
@@ -46,7 +46,7 @@ The example below demonstrates how to create auto layout for the Kendo UI Grid. 
 
     <h3>Minimal Grid with auto layout.</h3>
 
-    <div id="grid3"></div> 
+    <div id="grid3"></div>
     <script>
       var gridConfig = {
         dataSource: {

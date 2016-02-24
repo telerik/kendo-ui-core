@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI TreeView Widget
+page_title: Overview | Kendo UI TreeView
 description: "Learn how to initialize the Kendo UI TreeView widget and configure its behavior."
 slug: overview_kendoui_treeview_widget
 position: 1
@@ -278,7 +278,7 @@ The example below demonstrates how to access an existing TreeView instance.
 Other articles and how-to examples on Kendo UI TreeView:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the TreeView](/aspnet-mvc/helpers/treeview/overview)
-* [Overview of the TreeView JSP Tag](/jsp/tags/treeview/overview)
+* [Overview of the TreeView JSP Tag]({% slug overview_treeview_uiforjsp %})
 * [Overview of the TreeView PHP Class](/php/widgets/treeview/overview)
 * [Bind to Flat Tables]({% slug bindtoflattables_treeview_widget %})
 * [How to Attach Methods to Data Items]({% slug howto_attache_methodsto_dataitems_treeview %})

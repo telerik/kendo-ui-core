@@ -1,6 +1,6 @@
 ---
 title: Cascade Open Windows
-page_title: Cascade Open Windows | Kendo UI Window Widget
+page_title: Cascade Open Windows | Kendo UI Window
 description: "Learn how to add a Close button to a modal Kendo UI Window."
 slug: howto_cascadeopenwindows_window
 ---

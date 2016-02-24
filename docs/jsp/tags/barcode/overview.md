@@ -1,43 +1,54 @@
 ---
 title: Overview
-page_title: How to use Barcode JSP tag | Kendo UI documentation
-description: User Guide for server-side wrapper for Kendo UI Barcode for JSP.
+page_title: Overview | Barcode JSP Tag
+description: "Get started with the Barcode JSP tag in Kendo UI."
+slug: overview_barcode_uiforjsp
+position: 1
 ---
 
-# Barcode
+# Barcode JSP Tag Overview
 
-The Barcode tag is a server-side wrapper for the [Kendo UI Barcode](/api/web/barcode) widget.
+The Barcode JSP tag is a server-side wrapper for the [Kendo UI Barcode](/api/javascript/dataviz/ui/barcode) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo UI Barcode:
+### Configuration
 
-1.  Make sure you have followed all the steps from the [Introduction](/jsp/introduction) help topic.
+Below are listed the steps for you to follow when configuring the Kendo UI Barcode.
 
-2.  Create a new action method to render the view:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for JSP]({% slug overview_uiforjsp %}).
+
+**Step 2** Create a new action method to render the view.
+
+###### Example
 
         @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
         public String index() {
             return "/dataviz/barcode/index";
         }
 
-3.  Add a barcode with the default [type](/api/web/barcode#configuration-type) (Code39):
+**Step 3** Add a barcode with the default [`type`](/api/web/barcode#configuration-type) (Code39).
+
+###### Example
 
         <kendo:barcode name="barcode" value="foo">
         </kendo:barcode>
 
-4. Change the symbology to match your scenario:
+**Step 4** Change the symbology to match your scenario.
+
+###### Example
 
         <kendo:barcode name="barcode" type="ean8" value="2346722">
         </kendo:barcode>
 
 
-## Accessing an Existing Barcode
+## Reference
 
-You can reference an existing Barcode instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/barcode#methods) to control its behavior.
+### Existing Instances
 
-### Accessing an existing Barcode instance
+You are able to reference an existing Barcode instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Barcode API](/api/web/barcode#methods) to control its behavior.
+
+###### Example
 
         //Put this after your Kendo UI Barcode tag
         <script>
@@ -47,3 +58,11 @@ Once a reference has been established, you can use the [API](/api/web/barcode#me
             barcode.value("foo")
         });
         </script>
+
+## See Also
+
+Other articles on Telerik UI for JSP and on the Barcode:
+
+* [Overview of the Kendo UI Barcode Widget]({% slug overview_kendoui_barcode_widget %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

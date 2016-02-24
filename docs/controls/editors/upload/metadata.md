@@ -1,6 +1,6 @@
 ---
 title: Metadata
-page_title: Metadata | Kendo UI Upload Widget
+page_title: Metadata | Kendo UI Upload
 description: "Learn how to send metadata to the save handler and receive metadata in the Kendo UI Upload widget."
 slug: metadata_upload_widget
 position: 3

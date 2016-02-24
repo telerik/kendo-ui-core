@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI ListView Widget
+page_title: Overview | Kendo UI ListView
 description: "Learn how to initialize the Kendo UI ListView widget, customize its layout, and configure its behavior."
 slug: overview_kendoui_listview_widget
 position: 2
@@ -97,6 +97,6 @@ Other articles on Kendo UI ListView and how-to examples:
 * [How to Persist Row Selection during Data Operations]({% slug howto_persists_row_selection_listview %})
 * [How to Filter Using Slider Selection]({% slug howto_filter_using_slider_selection_listview %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/listview/overview)
-* [Overview of the JSP Tag](/jsp/tags/listview/overview)
+* [Overview of the JSP Tag]({% slug overview_listview_uiforjsp %})
 * [Overview of the PHP Class](/php/widgets/listview/overview)
 * [JavaScript API Reference](/api/javascript/ui/listview)

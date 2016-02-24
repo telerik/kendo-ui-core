@@ -355,7 +355,7 @@ The text displayed by the command button and the "cancel", "edit" and "update" t
         { field: "name" },
         { field: "age" },
         { command: [{ name: "edit",
-                      text: { edit: "Custom edit", cancel: "Custom cancel", update: "Custom update" } }]  }
+                      text: { edit: "Custom edit", cancel: "Custom cancel", update: "Custom update" } }] }
       ],
       dataSource: {
         data: [
@@ -1063,7 +1063,7 @@ Toggles between case-insensitive (default) and case-sensitive [searching](#confi
 
 The role data attribute of the widget used in the filter menu or a JavaScript function which initializes that widget.
 
-> This feature is not supported for columns which have their [values](#configuration-columns.values) option set.
+> This feature is not supported for columns which have their [values](#configuration-columns.values) option set and Boolean columns.
 
 > If [filterable.mode](#configuration-filterable.mode) is set to 'row', [columns.filterable.cell.template](#configuration-columns.filterable.cell.template) should be used to customize the input.
 
@@ -5599,6 +5599,20 @@ Supported values:
     });
     </script>
 
+> As of Q2 2016, when `paperSize` is specified the Grid will use `drawDOM`'s [automatic page breaking](/framework/drawing/drawing-dom#configuration-Automatic) algorithm.  This makes available a few new options: `template`, `repeatHeaders` and `scale`.
+
+### pdf.template `String` *(default: null)*
+
+A piece of HTML to be included in each page.  Can be used to display headers and footers.  See the documentation in [drawDOM](/framework/drawing/drawing-dom#Template).
+
+### pdf.repeatHeaders `Boolean` *(default: false)*
+
+Set this to `true` to repeat the grid headers on each page.
+
+### pdf.scale `Number|Array|Object` *(default: null)*
+
+A scale factor.  In many cases, text size on screen will be too big for print, so you can use this option to scale down the output in PDF.  See the documentation in [drawDOM](/framework/drawing/drawing-dom#Scaling).
+
 ### pdf.proxyURL `String` *(default: null)*
 
 The URL of the server side proxy which will stream the file to the end user.
@@ -6545,6 +6559,8 @@ Clears the currently selected table rows or cells (depending on the current sele
 
 Stops editing the table cell which is in edit mode. Requires "incell" [edit mode](#configuration-editable.mode).
 
+> When keyboard navigation is used, the Grid [`table`](#fields-table) must be focused programmatically after calling `closeCell`.
+
 #### Parameters
 
 ##### isCancel `Boolean` *optional*
@@ -6554,21 +6570,28 @@ A flag specifying whether to fire the `cancel` event. By default the event is no
 #### Example - cancel cell editing
 
     <div id="grid"></div>
+
     <script>
     $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 },
-      ],
-      editable: "incell"
+        columns: [
+            { field: "name" },
+            { field: "age" }
+        ],
+        dataSource: [
+            { name: "Jane Doe", age: 30 },
+            { name: "John Doe", age: 33 },
+        ],
+        editable: "incell",
+        navigatable: true
     });
+
     var grid = $("#grid").data("kendoGrid");
-    grid.addRow();
-    grid.closeCell();
+
+    grid.editCell(grid.tbody.find("td").first());
+    setTimeout(function(){
+        grid.closeCell();
+        grid.table.focus();
+    }, 1500);
     </script>
 
 ### collapseGroup
@@ -6873,7 +6896,7 @@ Expands specified master row.
 ### getOptions
 
 Retrieves the options that are currently enabled or disabled on the Grid, also gives the current state of the dataSource.
-Use this method if you want to save the state of the Grid into a variable.
+Use this method if you want to save the state of the Grid into a variable. It is also possible to extract and store only some of the Grid options.
 
 > Please refer to the [`setOptions()`](#methods-setOptions) method documentation for more important information.
 
@@ -6901,6 +6924,9 @@ Use this method if you want to save the state of the Grid into a variable.
     var grid = $("#grid").data("kendoGrid");
     var options = grid.getOptions();
     console.log(options.sortable); //outputs true
+
+    // get only the Grid column settings
+    var columnOptionsForSaving = kendo.stringify(options.columns);
     </script>
 
 ### hideColumn
@@ -6975,6 +7001,14 @@ When using multicolumn headers, using an index will hide a top-level column toge
     var grid = $("#grid").data("kendoGrid");
     grid.hideColumn(grid.columns[0].columns[1]);
     </script>
+
+### items
+
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view) (e.g. the ones on the current page).
+
+#### Returns
+
+`Array` The currently rendered data table rows (`<tr>` elements).
 
 ### lockColumn
 

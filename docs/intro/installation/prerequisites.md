@@ -23,8 +23,9 @@ The current official version of Kendo UI requires jQuery 1.9.1. There are occasi
 
 The following list provides jQuery compatibility information about the major Kendo UI releases and their corresponding service packs:
 
-| Major Releases												                                        | jQuery Version       | Comments|
-| :---															                                        | :---			       | :---	  |
+| Major Releases												                                         | jQuery Version    | Comments  |
+| :---															                                             | :---			         | :---	     |
+| [Kendo UI 2016.1.112 (Q1 2016)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q1-2016)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2015.3.930 (Q3 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2015)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2015.2.624 (Q2 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q2-2015)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
 | [Kendo UI 2015.1.318 (Q1 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q1-2015)	|1.9.1| Also compatible with 1.10.x and 2.1.x|
@@ -53,13 +54,14 @@ From Q2 2014 release onward, Kendo UI widgets support [AngularJS](https://angula
 
 ### Supported AngularJS Versions
 
-| Major Releases												 | AngularJS Version| Comments|
-| :---															 | :---				| :---	  |
-| [Kendo UI 2015.3.930 (Q3 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2015)		|1.4.0+|- |
-| [Kendo UI 2015.2.624 (Q2 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q2-2015)		|1.3.16|- |
-| [Kendo UI 2015.1.318 (Q1 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q1-2015)		|1.3.0 |- |
-| [Kendo UI 2014.3.1119 (Q3 2014)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2014)		|1.3.0 |- |
-| [Kendo UI 2014.2.716 (Q2 2014)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q2-2014)		|1.2.16|Upgraded to 1.2.21 in subsequent internal builds|
+| Major Releases												           | AngularJS Version     | Comments  |
+| :---															               | :---			       	     | :---	     |
+| [Kendo UI 2016.1.112 (Q1 2016)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q1-2016) |1.4.0+|- |
+| [Kendo UI 2015.3.930 (Q3 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2015)		      |1.4.0+|- |
+| [Kendo UI 2015.2.624 (Q2 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q2-2015)		      |1.3.16|- |
+| [Kendo UI 2015.1.318 (Q1 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q1-2015)		      |1.3.0 |- |
+| [Kendo UI 2014.3.1119 (Q3 2014)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2014)		      |1.3.0 |- |
+| [Kendo UI 2014.2.716 (Q2 2014)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q2-2014)		      |1.2.16|Upgraded to 1.2.21 in subsequent internal builds|
 
 ## Other
 

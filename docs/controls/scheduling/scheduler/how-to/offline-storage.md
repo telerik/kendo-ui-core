@@ -1,6 +1,6 @@
 ---
 title: Work with Scheduler Offline
-page_title: Work with Scheduler Offline | Kendo UI Scheduler Widget
+page_title: Work with Scheduler Offline | Kendo UI Scheduler
 description: "Learn how to set up the Kendo UI Scheduler widget to work offline."
 slug: howto_setupthewidget_toworkoffline_scheduler
 ---

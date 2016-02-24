@@ -1,6 +1,6 @@
 ---
 title: Reorder AngularJS Grid Rows
-page_title: Reorder AngularJS Grid Rows | Kendo UI Sortable Widget
+page_title: Reorder AngularJS Grid Rows | Kendo UI Sortable
 description: "Learn how to reorder AngularJS Grid rows by using the Kendo UI Sortable widget."
 slug: howto_reorderangularjsgridrows_angular_sortable
 ---

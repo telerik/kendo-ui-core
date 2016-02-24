@@ -1,6 +1,6 @@
 ---
 title: Frequently Asked Questions
-page_title: Frequently Asked Questions | Kendo UI PivotGrid Widget
+page_title: Frequently Asked Questions | Kendo UI PivotGrid
 description: "Find the most frequent questions related to the Kendo UI PivotGrid widget and their answers."
 slug: frequently_asked_questions_pivotgrid
 position: 6

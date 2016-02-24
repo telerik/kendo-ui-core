@@ -1,6 +1,6 @@
 ---
 title: Enable ForeignKey Column Sorting by Text
-page_title: Enable ForeignKey Column Sorting by Text | Kendo UI Grid Widget
+page_title: Enable ForeignKey Column Sorting by Text | Kendo UI Grid
 description: "Learn how to enable ForeignKey sroting by text in the Kendo UI Grid widget."
 slug: howto_enable_foreignkey_sotringby_text_grid
 ---
@@ -27,7 +27,7 @@ The example below demonstrates how to enable sorting by text in a ForeignKey col
             { "value": 6, "text": "Meat/Poultry"},
             { "value": 7, "text": "Produce"},
             {"value": 8, "text": "Seafood"}];
-        
+
         //create dictionary of text-values for the FKC
         var categoriesDict = {};
         for (var i=0; i<categories.length;i++) {

@@ -1,6 +1,6 @@
 ---
 title: Hide the Vertical Scrollbar
-page_title:  Hide the Vertical Scrollbar | Kendo UI Grid Widget
+page_title:  Hide the Vertical Scrollbar | Kendo UI Grid
 description: "Learn how to hide the vertical scrollbar of the Kendo UI Grid widget when you do not need it."
 slug: howto_hide_vertical_scrollbar_grid
 ---

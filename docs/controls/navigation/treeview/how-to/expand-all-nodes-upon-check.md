@@ -1,6 +1,6 @@
 ---
 title: Expand All Nodes upon Check
-page_title: Expand All Nodes upon Check | Kendo UI TreeView Widget
+page_title: Expand All Nodes upon Check | Kendo UI TreeView
 description: "Learn how to expand all child nodes of a Kendo UI TreeView widget when checking a root node."
 slug: howto_expandallnodes_uponcheck_treeview
 ---
