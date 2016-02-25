@@ -1,40 +1,52 @@
 ---
-title: Local binding
-page_title: How to bind Kendo Grid for PHP to PHP array
-description: Learn how to bind Kendo UI Grid for PHP to array of data
+title: Local Binding
+page_title: Local Binding | Grid PHP Class
+description: "Bind Kendo UI Grid PHP class to an array of data."
+slug: localbinding_grid_uiforphp
+position: 2
 ---
 
-# Local Binding to Array
+# Local Binding
 
-This help topic shows how to bind Kendo Grid for PHP to a PHP [array](http://php.net/manual/en/language.types.array.php). This array
-can be populated from a data base or declared inline (in the page). Local binding means that all data operations (paging, sorting, filtering etc.)
-will happen on the client-side.
+This article shows how to bind a Kendo UI Grid for PHP to a PHP [array](http://php.net/manual/en/language.types.array.php). This array can be populated from a database or declared inline (in the page). Local binding means that all data operations&mdash;paging, sorting, filtering, etc.&mdash;happens on the client-side.
 
-## Binding to array returned by PDO
+## Approaches
 
-PHP Data Objects ([PDO](http://www.php.net/manual/en/intro.pdo.php)) is an interface for accessing various databases in PHP. Here is how to bind Kendo Grid to array
-returned by PDO.
+This PHP array can be populated from a database, or declared inline (in the page). Local binding means that all data operations&mdash;paging, sorting, filtering, etc.&mdash;happen on the client side.
 
-First we will configure a Kendo Grid for PHP binding and then we will implement the remote service which will return JSON.
+### Bind to PDO-Returned Arrays
 
+[PHP Data Objects (PDO)](http://www.php.net/manual/en/intro.pdo.php) is an interface for accessing various databases in PHP.
 
-> The following demo is using the sample SQLite database shipped with the Telerik UI for PHP** demos (**/wrappers/php/sample.db).
+Below are listed the steps for you to follow when binding the Kendo UI Grid for PHP to an array returned by PDO.
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-1. Create a PDO connection
+> **Important**
+>
+> The following demo is using the sample SQLite database shipped with the Telerik UI for PHP demos (`/wrappers/php/sample.db`).
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Create a PDO connection.
+
+###### Example
 
         <?php
         $db = new PDO('sqlite:../sample.db');
         ?>
-1. Retrieve all records from the `Products` table
+
+**Step 3** Retrieve all records from the **Products** table.
+
+###### Example
 
         <?php
         $statement = $db->prepare('SELECT * FROM Products');
         $statement->execute();
         $products = $statement->fetchAll(PDO::FETCH_ASSOC);
         ?>
-1. Create a [data source](/api/php/Kendo/Data/DataSource) and set its [data](/api/php/Kendo/Data/DataSource#data) and [schema](/api/php/Kendo/Data/DataSource#schema). Setting the schema is required
-to specify the model fields. Those fields are required for filtering and editing.
+
+**Step 4** Create a [data source](/api/php/Kendo/Data/DataSource) and set its [`data`](/api/php/Kendo/Data/DataSource#data) and [`schema`](/api/php/Kendo/Data/DataSource#schema). Setting the `schema` is required to specify the model fields. These fields are required for filtering and editing.
+
+###### Example
 
         <?php
         // Create the schema model
@@ -67,7 +79,10 @@ to specify the model fields. Those fields are required for filtering and editing
         $dataSource->data($products)
                    ->schema($schema);
         ?>
-1. Create a [grid](/api/php/Kendo/UI/Grid), configure its [columns](/api/php/Kendo/UI/Grid#addcolumn) and set its [data source](/api/php/Kendo/UI/Grid#datasource).
+
+**Step 5** Create a [Grid](/api/php/Kendo/UI/Grid), configure its [columns](/api/php/Kendo/UI/Grid#addcolumn) and set its [data source](/api/php/Kendo/UI/Grid#datasource).
+
+###### Example
 
         <?php
         $grid = new \Kendo\UI\Grid('grid');
@@ -88,22 +103,30 @@ to specify the model fields. Those fields are required for filtering and editing
 
         $grid->addColumn($productNameColumn, $unitPriceColumn, $discontinuedColumn);
         ?>
-1. Output the grid by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+
+**Step 6** Output the Grid by echoing the result of the `render` method.
+
+###### Example
 
         <?php
         echo $grid->render();
         ?>
 
-## Using the DataSourceResult Helper
+### Use DataSourceResult Helpers
 
-The `DataSourceResult` class is a helper utility on top of PDO which simplifies common CRUD operations.
-It is distributed with the Telerik UI for PHP** demos and can be found in the **/wrappers/php/lib/** directory of the **Telerik UI for PHP distribution.
+The `DataSourceResult` class is a helper utility on top of PDO which simplifies common CRUD operations. It is distributed with the Telerik UI for PHP demos and can be found in the `/wrappers/php/lib/` directory of the Telerik UI for PHP distribution.
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-1. Copy **/wrappers/php/lib/DataSourceResult.php** to your web site root and include it.
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Copy `/wrappers/php/lib/DataSourceResult.php` to your web site root and include it.
+
+###### Example
 
         <?php require_once 'lib/DataSourceResult.php'; ?>
-1. Create a new instance of the DataSourceResult and use its read method to retrieve data from the database.
+
+**Step 3** Create a new instance of the `DataSourceResult` and use its `read` method to retrieve data from the database.
+
+###### Example
 
         <?php
         // The constructor accepts the PDO DSN for the target database
@@ -113,7 +136,10 @@ It is distributed with the Telerik UI for PHP** demos and can be found in the **
         $data = $result->read('Products', array('ProductName', 'UnitPrice', 'Discontinued'));
         // The result of the 'read' method is an array with two elements 'data' and 'total'.
         ?>
-1. Configure a data source and schema.
+
+**Step 4** Configure a `DataSource` and `schema`.
+
+###### Example
 
         <?php
         // Create the schema model
@@ -148,7 +174,10 @@ It is distributed with the Telerik UI for PHP** demos and can be found in the **
         $dataSource->data($data)
                    ->schema($schema);
         ?>
-1. Create a grid, configure its columns and set its data source.
+
+**Step 5** Create a Grid, configure its columns and set its `DataSource`.
+
+###### Example
 
         <?php
         $grid = new \Kendo\UI\Grid('grid');
@@ -164,8 +193,22 @@ It is distributed with the Telerik UI for PHP** demos and can be found in the **
 
         $grid->addColumn($productNameColumn, $unitPriceColumn, $discontinuedColumn);
         ?>
-1. Output the grid by echo-ing the result of the render method.
+
+**Step 6** Output the Grid by echoing the result of the `render` method.
+
+###### Example
 
         <?php
         echo $grid->render();
         ?>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the Grid:
+
+* [Overview of the Grid PHP Class]({% slug overview_grid_uiforphp %})
+* [Remote Binding of the Grid PHP Class]({% slug remotebinding_grid_uiforphp %})
+* [Editing of the Grid PHP Class]({% slug editing_grid_uiforphp %})
+* [Overview of the Kendo UI Grid Widget]({% slug overview_kendoui_gantt_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})
