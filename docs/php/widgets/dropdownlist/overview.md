@@ -1,24 +1,33 @@
 ---
 title: Overview
-page_title: How to use the DropDownList PHP class, server-side wrapper for Kendo UI DropDownList widget
-description: Learn how to bind Kendo UI DropDownList for PHP, handle Kendo UI DropDownList Events, access an existing dropdownlist.
+page_title: Overview | DropDownList PHP Class
+description: "Get started with the DropDownList PHP class in Kendo UI."
+slug: overview_dropdownlist_uiforphp
+position: 1
 ---
 
-# DropDownList
+# DropDownList PHP Class Overview
 
-The Kendo DropDownList for PHP is a server-side wrapper for the [Kendo UI DropDownList](/api/javascript/ui/dropdownlist) widget.
+The Kendo UI DropDownList for PHP is a server-side wrapper for the [Kendo UI DropDownList](/api/javascript/ui/dropdownlist) widget.
 
 ## Getting Started
 
-There are two ways to bind Kendo DropDownList for PHP:
+### The Basics
 
-* [local](/php/widgets/dropdownlist/local-binding) - the dropdownlist is bound to PHP array
-* [remote](/php/widgets/dropdownlist/remote-binding) - the dropdownlist makes AJAX requests and is bound to JSON result
+There are two ways to bind a Kendo UI DropDownList for PHP:
 
-Here is how to configure the dropdownlist for local binding:
+* [Locally]({% slug localbinding_autocomplete_uiforphp %})&mdash;Local binding binds the DropDownList to a PHP array.
+* [Remotely]({% slug remotebinding_autocomplete_uiforphp %})&mdash;During remote binding the DropDownList makes AJAX requests and is bound to the JSON result.
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-2. Create an array which to which the dropdownlist will be bound to
+### Configuration
+
+Below are listed the steps for you to follow when configuring the Kendo UI DropDownList for local binding.
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Create an array to which the DropDownList will be bound.
+
+###### Example
 
         <?php
         $data = array(
@@ -26,14 +35,20 @@ Here is how to configure the dropdownlist for local binding:
             array('name' => 'Jane Doe', 'age' => 29)
         );
         ?>
-3. Create a [data source](/api/php/Kendo/Data/DataSource) and set its [data](/api/php/Kendo/Data/DataSource#data):
+
+**Step 3** Create a [`DataSource`](/api/php/Kendo/Data/DataSource) and set its [`data`](/api/php/Kendo/Data/DataSource#data).
+
+###### Example
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
         $dataSource->data($data);
         ?>
-4. Create a [dropdownlist](/api/php/Kendo/UI/DropDownList), configure its [dataTextField](/api/php/Kendo/UI/DropDownList#datatextfield) and
-[dataValueField](/api/php/Kendo/UI/DropDownList#datavaluefield) options and set its [data source](/api/php/Kendo/UI/DropDownList#datasource).
+
+**Step 4** Create a [DropDownList](/api/php/Kendo/UI/DropDownList), configure its [`dataTextField`](/api/php/Kendo/UI/DropDownList#datatextfield) and
+[`dataValueField`](/api/php/Kendo/UI/DropDownList#datavaluefield) options, and set its [`dataSource`](/api/php/Kendo/UI/DropDownList#datasource).
+
+###### Example
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -44,58 +59,80 @@ Here is how to configure the dropdownlist for local binding:
         $dropdownlist->dataTextField('name');
         $dropdownlist->dataValueField('age');
         ?>
-5. Output the dropdownlist by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+
+**Step 5** Output the DropDownList by echoing the result of the `render` method.
+
+###### Example
 
         <?php
         echo $dropdownlist->render();
         ?>
 
-## Getting Client-side Reference
+## Event Handling
 
-You can reference the client-side Kendo DropDownList instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/javascript/ui/dropdownlist#methods) to control its behavior.
+You can subscribe to all DropDownList [events](/api/javascript/ui/dropdownlist#events).
 
+### Specify Function Names
 
-### Example
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-    <?php
-    $dropdownlist = new \Kendo\UI\DropDownList('dropdownlist');
-    echo $dropdownlist->render();
-    ?>
-    <script>
-    $(function() {
-        // The constructor parameter is used as the 'id' HTML attribute of the dropdownlist
-        var dropdownlist = $("#dropdownlist").data("kendoDropDownList")
-    });
-    </script>
+###### Example
 
-## Handling Events
+        <?php
+        $dropdownlist = new \Kendo\UI\DropDownList('dropdownlist');
 
-You can subscribe to all dropdownlist [events](/api/javascript/ui/dropdownlist#events).
+        // The 'dropdownlist_change' JavaScript function will handle the 'change' event of the dropdownlist
+        $dropdownlist->change('dropdownlist_change');
 
-### Example - subscribing by specifying JavaScript function name
+        echo $dropdownlist->render();
+        ?>
+        <script>
+        function dropdownlist_change() {
+            // Handle the change event
+        }
+        </script>
 
-    <?php
-    $dropdownlist = new \Kendo\UI\DropDownList('dropdownlist');
+### Provide Inline Code
 
-    // The 'dropdownlist_change' JavaScript function will handle the 'change' event of the dropdownlist
-    $dropdownlist->change('dropdownlist_change');
+The example below demonstrates how to provide inline JavaScript code.
 
-    echo $dropdownlist->render();
-    ?>
-    <script>
-    function dropdownlist_change() {
-        // Handle the change event
-    }
-    </script>
+###### Example
 
-### Example - providing inline JavaScript code
+        <?php
+        $dropdownlist = new \Kendo\UI\DropDownList('dropdownlist');
 
-    <?php
-    $dropdownlist = new \Kendo\UI\DropDownList('dropdownlist');
+        // Provide inline JavaScript code that will handle the 'change' event of the dropdownlist
+        $dropdownlist->change('function() { /* Handle the change event */ }');
 
-    // Provide inline JavaScript code that will handle the 'change' event of the dropdownlist
-    $dropdownlist->change('function() { /* Handle the change event */ }');
+        echo $dropdownlist->render();
+        ?>
 
-    echo $dropdownlist->render();
-    ?>
+<!--*-->
+# Reference
+
+### Client-Side Instances
+
+You can reference the client-side Kendo UI DropDownList instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [DropDownList API](/api/javascript/ui/dropdownlist#methods) to control its behavior.
+
+###### Example
+
+        <?php
+        $dropdownlist = new \Kendo\UI\DropDownList('dropdownlist');
+        echo $dropdownlist->render();
+        ?>
+        <script>
+        $(function() {
+            // The constructor parameter is used as the 'id' HTML attribute of the dropdownlist
+            var dropdownlist = $("#dropdownlist").data("kendoDropDownList")
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the DropDownList:
+
+* [Local Binding of the DropDownList PHP Class]({% slug localbinding_dropdownlist_uiforphp %})
+* [Remote Binding of the DropDownList PHP Class]({% slug remotebinding_dropdownlist_uiforphp %})
+* [Overview of the Kendo UI DropDownList Widget]({% slug overview_kendoui_dropdownlist_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

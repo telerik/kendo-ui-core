@@ -68,7 +68,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 ## Event Handling
 
-You can subscribe to all AutoComplete [events](/api/web/autocomplete#events).
+You can subscribe to all AutoComplete [events](/api/javascript/ui/autocomplete#events).
 
 ### Specify Function Names
 
