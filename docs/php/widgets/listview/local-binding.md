@@ -1,30 +1,42 @@
 ---
-title: Local binding
-page_title: How to bind Kendo ListView for PHP to PHP array
-description: Learn how to bind Kendo UI ListView for PHP to array of data
+title: Local Binding
+page_title: Local Binding | ListView PHP Class
+description: "Bind Kendo UI ListView PHP class to an array of data."
+slug: localbinding_listview_uiforphp
+position: 2
 ---
 
-# Local Binding to Array
+# Local Binding
 
-This help topic shows how to bind Kendo ListView for PHP to a PHP [array](http://php.net/manual/en/language.types.array.php). This array
-can be populated from a data base or declared inline (in the page). Local binding means that all data operations (paging, sorting, filtering etc.)
-will happen on the client-side.
+This article shows how to bind a Kendo UI ListView for PHP to a PHP [array](http://php.net/manual/en/language.types.array.php). This array can be populated from a database or declared inline (in the page). Local binding means that all data operations&mdash;paging, sorting, filtering, etc.&mdash;happens on the client-side.
 
-## Binding to array returned by PDO
+## Approaches
 
-PHP Data Objects ([PDO](http://www.php.net/manual/en/intro.pdo.php)) is an interface for accessing various databases in PHP. Here is how to bind Kendo ListView to array
-returned by PDO.
+This PHP array can be populated from a database, or declared inline (in the page). Local binding means that all data operations&mdash;paging, sorting, filtering, etc.&mdash;happen on the client side.
 
-> The following demo is using the sample SQLite database shipped with the Telerik UI for PHP** demos (**/wrappers/php/sample.db).
+### Bind to PDO-Returned Arrays
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-2. Create a PDO connection
+[PHP Data Objects (PDO)](http://www.php.net/manual/en/intro.pdo.php) is an interface for accessing various databases in PHP.
+
+Below are listed the steps for you to follow when binding the Kendo UI Grid for PHP to an array returned by PDO.
+
+> **Important**
+>
+> The following demo is using the sample SQLite database shipped with the Telerik UI for PHP demos (`/wrappers/php/sample.db`).
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Create a PDO connection.
+
+###### Example
 
         <?php
         $db = new PDO('sqlite:../sample.db');
         ?>
 
-3. Retrieve all records from the `Products` table
+**Step 3** Retrieve all records from the **Products** table.
+
+###### Example
 
         <?php
         $statement = $db->prepare('SELECT * FROM Products');
@@ -32,8 +44,9 @@ returned by PDO.
         $products = $statement->fetchAll(PDO::FETCH_ASSOC);
         ?>
 
-4. Create a [data source](/api/php/Kendo/Data/DataSource) and set its [data](/api/php/Kendo/Data/DataSource#data) and [schema](/api/php/Kendo/Data/DataSource#schema). Setting the schema is required
-to specify the model fields. Those fields are required for filtering and editing.
+**Step 4** Create a [`DataSource`](/api/php/Kendo/Data/DataSource) and set its [`data`](/api/php/Kendo/Data/DataSource#data) and [`schema`](/api/php/Kendo/Data/DataSource#schema). Setting the `schema` is required to specify the model fields. These fields are required for filtering and editing.
+
+###### Example
 
         <?php
         // Create the schema model
@@ -66,7 +79,10 @@ to specify the model fields. Those fields are required for filtering and editing
         $dataSource->data($products)
                    ->schema($schema);
         ?>
-5. Create a [listview](/api/php/Kendo/UI/ListView), configure its [template](/api/php/Kendo/UI/ListView#template) and set its [data source](/api/php/Kendo/UI/ListView#datasource).
+
+**Step 5** Create a [ListView](/api/php/Kendo/UI/ListView), configure its [`template`](/api/php/Kendo/UI/ListView#template) and set its [`dataSource`](/api/php/Kendo/UI/ListView#datasource).
+
+###### Example
 
 		<script type="text/x-kendo-tmpl" id="template">
     		<div class="product">
@@ -81,24 +97,32 @@ to specify the model fields. Those fields are required for filtering and editing
 
         $listview->templateId('template')
              ->dataSource($dataSource);
-        
+
         ?>
-6. Output the listview by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+
+**Step 6** Output the ListView by echoing the result of the `render` method.
+
+###### Example
 
         <?php
         echo $listview->render();
         ?>
 
-## Using the DataSourceResult Helper
+### Use DataSourceResult Helpers
 
-The `DataSourceResult` class is a helper utility on top of PDO which simplifies common CRUD operations.
-It is distributed with the Telerik UI for PHP** demos and can be found in the **/wrappers/php/lib/** directory of the **Telerik UI for PHP distribution.
+The `DataSourceResult` class is a helper utility on top of PDO which simplifies common CRUD operations. It is distributed with the Telerik UI for PHP demos and can be found in the `/wrappers/php/lib/` directory of the Telerik UI for PHP distribution.
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-2. Copy **/wrappers/php/lib/DataSourceResult.php** to your web site root and include it.
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Copy `/wrappers/php/lib/DataSourceResult.php` to your web site root and include it.
+
+###### Example
 
         <?php require_once 'lib/DataSourceResult.php'; ?>
-3. Create a new instance of the DataSourceResult and use its read method to retrieve data from the database.
+
+**Step 3** Create a new instance of the `DataSourceResult` and use its `read` method to retrieve data from the database.
+
+###### Example
 
         <?php
         // The constructor accepts the PDO DSN for the target database
@@ -108,7 +132,10 @@ It is distributed with the Telerik UI for PHP** demos and can be found in the **
         $data = $result->read('Products', array('ProductName', 'UnitPrice', 'Discontinued'));
         // The result of the 'read' method is an array with two elements 'data' and 'total'.
         ?>
-4. Configure a data source and schema.
+
+**Step 4** Configure a `DataSource` and `schema`.
+
+###### Example
 
         <?php
         // Create the schema model
@@ -143,7 +170,10 @@ It is distributed with the Telerik UI for PHP** demos and can be found in the **
         $dataSource->data($data)
                    ->schema($schema);
         ?>
-5. Create a listview, configure its template and set its data source.
+
+**Step 5** Create a ListView, configure its `template` and set its `dataSource`.
+
+###### Example
 
         <script type="text/x-kendo-tmpl" id="template">
     		<div class="product">
@@ -158,10 +188,24 @@ It is distributed with the Telerik UI for PHP** demos and can be found in the **
 
         $listview->templateId('template')
              ->dataSource($dataSource);
-        
+
         ?>
-6. Output the listview by echo-ing the result of the render method.
+
+**Step 6** Output the ListView by echoing the result of the `render` method.
+
+###### Example
 
         <?php
         echo $listview->render();
         ?>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the ListView:
+
+* [Overview of the ListView PHP Class]({% slug overview_listview_uiforphp %})
+* [Remote Binding of the ListView PHP Class]({% slug remotebinding_listview_uiforphp %})
+* [Editing of the ListView PHP Class]({% slug editing_listview_uiforphp %})
+* [Overview of the Kendo UI ListView Widget]({% slug overview_kendoui_listview_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})
