@@ -1,24 +1,33 @@
 ---
 title: Overview
-page_title: How to use the MultiSelect PHP class, server-side wrapper for Kendo UI MultiSelect widget
-description: Learn how to bind Kendo UI MultiSelect for PHP, handle Kendo UI MultiSelect Events, access an existing multiselect.
+page_title: Overview | MultiSelect PHP Class
+description: "Get started with the MultiSelect PHP class in Kendo UI."
+slug: overview_multiselect_uiforphp
+position: 1
 ---
 
-# MultiSelect
+# MultiSelect PHP Class Overview
 
-The Kendo MultiSelect for PHP is a server-side wrapper for the [Kendo UI MultiSelect](/api/web/multiselect) widget.
+The Kendo UI MultiSelect for PHP is a server-side wrapper for the [Kendo UI MultiSelect](/api/javascript/ui/multiselect) widget.
 
 ## Getting Started
 
-There are two ways to bind Kendo MultiSelect for PHP:
+### The Basics
 
-* [local](/php/widgets/multiselect/local-binding) - the multiselect is bound to PHP array
-* [remote](/php/widgets/multiselect/remote-binding) - the multiselect makes AJAX requests and is bound to JSON result
+There are two ways to bind a Kendo UI MultiSelect for PHP:
 
-Here is how to configure the multiselect for local binding:
+* [Locally]({% slug localbinding_autocomplete_uiforphp %})&mdash;Local binding binds the MultiSelect to a PHP array.
+* [Remotely]({% slug remotebinding_autocomplete_uiforphp %})&mdash;During remote binding the MultiSelect makes AJAX requests and is bound to the JSON result.
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-2. Create an array which to which the multiselect will be bound to
+### Configuration
+
+Below are listed the steps for you to follow when configuring the Kendo UI MultiSelect for local binding.
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Create an array to which the MultiSelect will be bound.
+
+###### Example
 
         <?php
         $data = array(
@@ -27,13 +36,19 @@ Here is how to configure the multiselect for local binding:
             array('name' => 'Jane Doe', 'age' => 27)
         );
         ?>
-3. Create a [data source](/api/php/Kendo/Data/DataSource) and set its [data](/api/php/Kendo/Data/DataSource#data):
+
+**Step 3** Create a [data source](/api/php/Kendo/Data/DataSource) and set its [`data`](/api/php/Kendo/Data/DataSource#data).
+
+###### Example
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
         $dataSource->data($data);
         ?>
-4. Create a [multiselect](/api/php/Kendo/UI/MultiSelect).
+
+**Step 4** Create a [MultiSelect](/api/php/Kendo/UI/MultiSelect).
+
+###### Example
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -45,15 +60,20 @@ Here is how to configure the multiselect for local binding:
         $multiSelect->dataValueField('age');
         $multiSelect->value(array(27, 29));
         ?>
-5. Output the multiselect by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+
+**Step 5** Output the MultiSelect by echoing the result of the `render` method.
+
+###### Example
 
         <?php
         echo $multiSelect->render();
         ?>
-## Pre-select values on initial loading
 
-When deffered binding (autoBind: false) is used you will need to specify a list of data items instead of just list of strings.
-This functionality is supported in Q1 SP1 2013 release and later versions of Kendo UI.
+### Value Pre-Selection on Initial Loading
+
+When deferred binding (`autoBind: false`) is used, you need to specify a list of data items instead of just a list of strings. This functionality is first supported in Kendo UI Q1 SP1 2013 release and all later versions.
+
+###### Example
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -69,52 +89,72 @@ This functionality is supported in Q1 SP1 2013 release and later versions of Ken
             array('name' => 'Jane Doe', 'age' => 29)
         ));
         ?>
-## Getting Client-side Reference
 
-You can reference the client-side Kendo MultiSelect instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/multiselect#methods) to control its behavior.
+## Event Handling
 
+You can subscribe to all MultiSelect [events](/api/javascript/ui/autocomplete#events).
 
-### Example
+### Specify Function Names
 
-    <?php
-    $multiSelect = new \Kendo\UI\MultiSelect('multiselect');
-    echo $multiSelect->render();
-    ?>
-    <script>
-    $(function() {
-        // The constructor parameter is used as the 'id' HTML attribute of the multiselect
-        var multiselect = $("#multiselect").data("kendoMultiSelect")
-    });
-    </script>
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-## Handling Events
+###### Example
 
-You can subscribe to all multiselect [events](/api/web/multiselect#events).
+        <?php
+        $multiSelect = new \Kendo\UI\MultiSelect('multiselect');
 
-### Example - subscribing by specifying JavaScript function name
+        // The 'multiselect_change' JavaScript function will handle the 'change' event of the multiselect
+        $multiSelect->change('multiselect_change');
 
-    <?php
-    $multiSelect = new \Kendo\UI\MultiSelect('multiselect');
+        echo $multiSelect->render();
+        ?>
+        <script>
+        function multiselect_change() {
+            // Handle the change event
+        }
+        </script>
 
-    // The 'multiselect_change' JavaScript function will handle the 'change' event of the multiselect
-    $multiSelect->change('multiselect_change');
+### Provide Inline Code
 
-    echo $multiSelect->render();
-    ?>
-    <script>
-    function multiselect_change() {
-        // Handle the change event
-    }
-    </script>
+The example below demonstrates how to provide inline JavaScript code.
 
-### Example - providing inline JavaScript code
+###### Example
 
-    <?php
-    $multiSelect = new \Kendo\UI\MultiSelect('multiselect');
+        <?php
+        $multiSelect = new \Kendo\UI\MultiSelect('multiselect');
 
-    // Provide inline JavaScript code that will handle the 'change' event of the multiselect
-    $multiSelect->change('function() { /* Handle the change event */ }');
+        // Provide inline JavaScript code that will handle the 'change' event of the multiselect
+        $multiSelect->change('function() { /* Handle the change event */ }');
 
-    echo $multiSelect->render();
-    ?>
+        echo $multiSelect->render();
+        ?>
+
+<!--*-->
+## Reference
+
+### Client-Side Instances
+
+You can reference the client-side Kendo UI MultiSelect instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [MultiSelect API](/api/javascript/ui/multiselect#methods) to control its behavior.
+
+###### Example
+
+        <?php
+        $multiSelect = new \Kendo\UI\MultiSelect('multiselect');
+        echo $multiSelect->render();
+        ?>
+        <script>
+        $(function() {
+            // The constructor parameter is used as the 'id' HTML attribute of the multiselect
+            var multiselect = $("#multiselect").data("kendoMultiSelect")
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the MultiSelect:
+
+* [Local Binding of the MultiSelect PHP Class]({% slug localbinding_multiselect_uiforphp %})
+* [Remote Binding of the MultiSelect PHP Class]({% slug remotebinding_multiselect_uiforphp %})
+* [Overview of the Kendo UI MultiSelect Widget]({% slug overview_kendoui_multiselect_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})
