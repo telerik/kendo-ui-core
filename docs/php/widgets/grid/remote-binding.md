@@ -280,5 +280,6 @@ Other articles on Telerik UI for PHP and on the Grid:
 * [Overview of the Grid PHP Class]({% slug overview_grid_uiforphp %})
 * [Local Binding of the Grid PHP Class]({% slug localbinding_grid_uiforphp %})
 * [Editing of the Grid PHP Class]({% slug editing_grid_uiforphp %})
+* [Overview of the Kendo UI Grid Widget]({% slug overview_kendoui_grid_widget %})
 * [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
 * [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})
