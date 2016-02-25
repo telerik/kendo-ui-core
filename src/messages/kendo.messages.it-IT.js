@@ -10,7 +10,9 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "gte": "È dopo o uguale a",
     "lt": "È prima",
     "lte": "È prima o uguale a",
-    "neq": "Non è uguale a"
+    "neq": "Non è uguale a",
+    "isnull": "È nullo",
+    "isnotnull": "Non è nullo"
   },
   "number": {
     "eq": "È uguale a",
@@ -18,7 +20,9 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "gte": "È più grande o uguale a",
     "lt": "È più piccolo di",
     "lte": "È più piccolo o uguale a",
-    "neq": "Non è uguale a"
+    "neq": "Non è uguale a",
+    "isnull": "È nullo",
+    "isnotnull": "Non è nullo"
   },
   "string": {
     "contains": "Contiene",
@@ -26,11 +30,17 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "endswith": "Finisce con",
     "eq": "È uguale a",
     "neq": "Non è uguale a",
-    "startswith": "Inizia con"
+    "startswith": "Inizia con",
+    "isnull": "È nullo",
+    "isnotnull": "Non è nullo",
+    "isempty": "È vuoto",
+    "isnotempty": "Non è vuoto"
   },
   "enums": {
     "eq": "È uguale a",
-    "neq": "Non è uguale a"
+    "neq": "Non è uguale a",
+    "isnull": "È nullo",
+    "isnotnull": "Non è nullo"
   }
 });
 }
@@ -46,7 +56,9 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "gte": "È dopo o uguale a",
     "lt": "È prima",
     "lte": "È prima o uguale a",
-    "neq": "Non è uguale a"
+    "neq": "Non è uguale a",
+    "isnull": "È nullo",
+    "isnotnull": "Non è nullo"
   },
   "number": {
     "eq": "È uguale a",
@@ -54,7 +66,9 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "gte": "È più grande o uguale a",
     "lt": "È più piccolo di",
     "lte": "È più piccolo o uguale a",
-    "neq": "Non è uguale a"
+    "neq": "Non è uguale a",
+    "isnull": "È nullo",
+    "isnotnull": "Non è nullo"
   },
   "string": {
     "contains": "Contiene",
@@ -62,11 +76,17 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "endswith": "Finisce con",
     "eq": "È uguale a",
     "neq": "Non è uguale a",
-    "startswith": "Inizia con"
+    "startswith": "Inizia con",
+    "isnull": "È nullo",
+    "isnotnull": "Non è nullo",
+    "isempty": "È vuoto",
+    "isnotempty": "Non è vuoto"
   },
   "enums": {
     "eq": "È uguale a",
-    "neq": "Non è uguale a"
+    "neq": "Non è uguale a",
+    "isnull": "È nullo",
+    "isnotnull": "Non è nullo"
   }
 });
 }
