@@ -1022,6 +1022,10 @@ div.k-filebrowser-dropzone em
         > input {
             background: @background;
             border-color: contrast(@base, lighten(@base, 1%), darken(@base, 14%), 0.5);
+
+            &:focus {
+                .box-shadow(@focused-shadow);
+            }
         }
     }
 }
