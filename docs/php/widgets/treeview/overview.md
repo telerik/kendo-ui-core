@@ -1,20 +1,26 @@
 ---
 title: Overview
-page_title: How to use the TreeView PHP class, server-side wrapper for Kendo UI TreeView widget
-description: Learn how to bind Kendo UI TreeView for PHP, handle Kendo UI TreeView Events, access an existing treeview.
+page_title: Overview | TreeView PHP Class
+description: "Get started with the TreeView PHP class in Kendo UI."
+slug: overview_treeview_uiforphp
+position: 1
 ---
 
-# TreeView
+# TreeView PHP Class Overview
 
-The Kendo TreeView for PHP is a server-side wrapper for the [Kendo UI TreeView](/api/web/treeview) widget.
+The Kendo UI TreeView for PHP is a server-side wrapper for the [Kendo UI TreeView](/api/javascript/ui/treeview) widget.
 
 ## Getting Started
 
-Here is how to configure simple treeview:
+### Configuration
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
+Below are listed the steps for you to follow when configuring the Kendo UI TreeView.
 
-1. Create a [treeview](/api/php/Kendo/UI/TreeView), configure its [items](/api/php/Kendo/UI/TreeView#addItem).
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Create a [TreeView](/api/php/Kendo/UI/TreeView), configure its [items](/api/php/Kendo/UI/TreeView#addItem).
+
+###### Example
 
         <?php
         $treeview = new \Kendo\UI\TreeView('treeview');
@@ -28,36 +34,23 @@ Here is how to configure simple treeview:
         $treeview->addItem($root);
         ?>
 
-1. Output the treeview by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+**Step 3** Output the TreeView by echoing the result of the `render` method.
+
+###### Example
 
         <?php
         echo $treeview->render();
         ?>
 
-## Getting Client-side Reference
+## Event Handling
 
-You can reference the clien-side Kendo TreeView instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/treeview#methods) to control its behavior.
+You can subscribe to all TreeView [events](/api/javascript/ui/treeview#events).
 
+### Specify Function Names
 
-### Example
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-        <?php
-        $treeview = new \Kendo\UI\TreeView('treeview');
-        echo $treeview->render();
-        ?>
-        <script>
-        $(function() {
-            // The constructor parameter is used as the 'id' HTML attribute of the treeview
-            var treeview = $("#treeview").data("kendoTreeView")
-        });
-        </script>
-
-## Handling Events
-
-You can subscribe to all treeview [events](/api/web/treeview#events).
-
-### Example - subscribing by specifying JavaScript function name
+###### Example
 
         <?php
         $treeview = new \Kendo\UI\TreeView('treeview');
@@ -73,7 +66,11 @@ You can subscribe to all treeview [events](/api/web/treeview#events).
         }
         </script>
 
-### Example - providing inline JavaScript code
+### Provide Inline Code
+
+The example below demonstrates how to provide inline JavaScript code.
+
+###### Example
 
         <?php
         $treeview = new \Kendo\UI\TreeView('treeview');
@@ -83,3 +80,33 @@ You can subscribe to all treeview [events](/api/web/treeview#events).
 
         echo $treeview->render();
         ?>
+
+<!--*-->
+## Reference
+
+### Client-Side Instances
+
+You can reference the client-side Kendo UI TreeView instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [TreeView API](/api/javascript/ui/treeview#methods) to control its behavior.
+
+###### Example
+
+        <?php
+        $treeview = new \Kendo\UI\TreeView('treeview');
+        echo $treeview->render();
+        ?>
+        <script>
+        $(function() {
+            // The constructor parameter is used as the 'id' HTML attribute of the treeview
+            var treeview = $("#treeview").data("kendoTreeView")
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the TreeView:
+
+* [Local Binding of the TreeView PHP Class]({% slug localbinding_treeview_uiforphp %})
+* [Remote Binding of the TreeView PHP Class]({% slug remotebinding_treeview_uiforphp %})
+* [Overview of the Kendo UI TreeView Widget]({% slug overview_kendoui_treeview_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})
