@@ -8,7 +8,7 @@ position: 1
 
 # Upload JSP Tag Overview
 
-The Window JSP tag is a server-side wrapper for the [Kendo UI Window](/api/javascript/ui/upload) widget.
+The Upload JSP tag is a server-side wrapper for the [Kendo UI Upload](/api/javascript/ui/upload) widget.
 
 ## Getting Started
 
