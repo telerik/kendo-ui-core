@@ -525,4 +525,20 @@ asyncTest("value method selects item that exists only in unfiltered source (asyn
 
         equal(multiselect.listView.options.template, "#:data.anotherName#");
     });
+
+    test("accept value after source is updated", function() {
+        var multiselect = new MultiSelect(select, {
+            autoBind: false
+        });
+
+        multiselect.open(); //open to force binding
+
+        multiselect.setDataSource([
+            "item1", "item2"
+        ]);
+
+        multiselect.value("item2");
+
+        equal(multiselect.tagList.children().length, 1)
+    });
 })();
