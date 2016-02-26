@@ -984,8 +984,121 @@ The sorted range, e.g. "A1:D5".
 ### sheetsbar `Boolean` *(default: true)*
 A boolean value indicating if the sheetsbar should be displayed.
 
-### toolbar `Boolean` *(default: true)*
+### toolbar `Boolean|Object` *(default: true)*
 A boolean value indicating if the toolbar should be displayed.
+
+### toolbar.home `Boolean|Array` *(default: true)*
+A boolean value indicating if the "home" tab should be displayed or a collection of tools that will be shown in the "home" tab.
+
+The available tools are:
+
+* **open**
+* **exportAs**
+* [**cut**, **copy**, **paste**]
+* [**bold**, **italic**, **underline**]
+* **backgroundColor**, **textColor**
+* **borders**
+* **fontSize**, **fontFamily**
+* **alignment**
+* **textWrap**
+* [**formatDecreaseDecimal**, **formatIncreateDecimal**]
+* **format**
+* **merge**
+* **freeze**
+* **filter**
+
+Those tools which are part of a tool group are defined as array. For example `["bold", "italic", "underline"]`
+
+#### Example - customize home tab
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                home: [ ["bold", "italic"], "format" ]
+            }
+        });
+    </script>
+```
+
+#### Example - disable home tab
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                home: false
+            }
+        });
+    </script>
+```
+
+### toolbar.insert `Boolean|Array` *(default: true)*
+A boolean value indicating if the "insert" tab should be displayed or a collection of tools that will be shown in the "insert" tab.
+
+The available tools are:
+
+* [ **addColumnLeft**, **addColumnRight**, **addRowBelow**, **addRowAbove** ]
+* [ **deleteColumn**, **deleteRow** ]
+
+Those tools which are part of a tool group are defined as array. For example `["deleteColumn", "deleteRow"]`
+
+#### Example - customize insert tab
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                insert: [ ["deleteColumn", "deleteRow"] ]
+            }
+        });
+    </script>
+```
+
+#### Example - disable insert tab
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                insert: false
+            }
+        });
+    </script>
+```
+
+### toolbar.data `Boolean|Array` *(default: true)*
+A boolean value indicating if the "insert" tab should be displayed or a collection of tools that will be shown in the "insert" tab.
+
+The available tools are:
+
+* **sort**
+* **filter**
+* **validation**
+
+#### Example - customize data tab
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                data: ["validation"]
+            }
+        });
+    </script>
+```
+
+#### Example - disable data tab
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                data: false
+            }
+        });
+    </script>
+```
 
 ## Methods
 
