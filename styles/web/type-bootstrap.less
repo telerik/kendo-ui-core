@@ -1003,6 +1003,25 @@ div.k-filebrowser-dropzone em
     color: @widget-text-color;
 }
 
+.km-pane-wrapper .km-pane .k-mobile-list.k-filter-menu {
+    .k-space-right {
+        .composite-background(@widget-gradient);
+        background-position: 50% 50%;
+        background: @base;
+        border-color: @base;
+
+        > input {
+            background: @background;
+            border-color: @widget-border-color;
+        }
+
+        > input:focus {
+            border-color: lighten(@accent, 13%);
+            .box-shadow(@focused-shadow);
+        }
+    }
+}
+
 .k-dropdown .k-state-hover .k-input
 {
     color: @hover-text-color;

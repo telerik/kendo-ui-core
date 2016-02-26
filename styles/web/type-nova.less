@@ -1505,6 +1505,22 @@ html .km-pane-wrapper .km-widget,
     border-top-color: transparent;
 }
 
+.km-pane-wrapper .km-pane .k-mobile-list.k-filter-menu {
+    .k-space-right {
+        background: @base;
+        border-color: @widget-border-color;
+
+        > input {
+            background-color: @background;
+            border-color: @widget-border-color;
+        }
+
+        > input:focus {
+            border-color: lighten(@hover-text-color, 8%);
+        }
+    }
+}
+
 /* Responsive styles */
 @media only screen and (max-width: 1450px) {
     .k-webkit,

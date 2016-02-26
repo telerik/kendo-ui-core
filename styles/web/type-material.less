@@ -976,6 +976,26 @@ div.k-filebrowser-dropzone em
     color: @widget-text-color;
 }
 
+.km-pane-wrapper .km-pane .k-mobile-list.k-filter-menu {
+    .k-space-right {
+        background: @background;
+        border-color: @widget-border-color;
+
+        > input {
+            background-color: @input-background-color;
+            border-color: @drop-down-border-color;
+
+            +.k-i-search:before {
+                color: green;
+            }
+        }
+
+        > input:focus {
+            .box-shadow(@focused-shadow);
+        }
+    }
+}
+
 .k-dropdown .k-state-hover .k-input
 {
     color: @hover-text-color;
