@@ -163,6 +163,7 @@ var __meta__ = { // jshint ignore:line
         setDataSource: function(dataSource) {
             this.options.dataSource = dataSource;
 
+            this._state = "";
             this._dataSource();
 
             this.listView.setDataSource(this.dataSource);
