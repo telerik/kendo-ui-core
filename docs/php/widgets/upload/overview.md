@@ -1,24 +1,33 @@
 ---
 title: Overview
-page_title: How to use the Upload PHP class, server-side wrapper for Kendo UI Upload widget
-description: Learn how to bind Kendo UI Upload for PHP, handle Kendo UI Upload Events, access an existing upload.
+page_title: Overview | Upload PHP Class
+description: "Get started with the Upload PHP class in Kendo UI."
+slug: overview_upload_uiforphp
+position: 1
 ---
 
-# Upload
+# Upload PHP Class Overview
 
-The Kendo Upload for PHP is a server-side wrapper for the [Kendo UI Upload](/api/web/upload) widget.
+The Upload JSP tag is a server-side wrapper for the [Kendo UI Upload](/api/javascript/ui/upload) widget.
 
 ## Getting Started
 
-The Upload supports two main modes:
+### Modes of Operation
 
-* [sync](/php/widgets/upload/modes#sync) - files are uploaded when the form is submitted
-* [async](/php/widgets/upload/modes#async) - files are uploaded out-of-band using AJAX requests
+The Upload supports two main modes of operation:
 
-Here is how to configure the Upload for asynchronous operation:
+* [Sync](/php/widgets/upload/modes#sync)&mdash;During the synchronous mode files are uploaded when the form is submitted.
+* [Async](/php/widgets/upload/modes#async)&mdash;During the asynchronous mode files are uploaded out-of-band using AJAX requests.
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-2. Create an [upload](/api/php/Kendo/UI/Upload), configure its [async](/api/php/Kendo/UI/Upload#async) options
+### Configuration
+
+Below are listed the steps for you to follow when configuring the Upload for asynchronous operations.
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for JSP]({% slug overview_uiforjsp %}).
+
+**Step 2** Create an [Upload](/api/php/Kendo/UI/Upload) and configure its [`async`](/api/php/Kendo/UI/Upload#async) options.
+
+###### Example
 
         <?php
         $upload = new \Kendo\UI\Upload('files[]');
@@ -26,12 +35,18 @@ Here is how to configure the Upload for asynchronous operation:
                 'saveUrl' => 'save.php'
         ));
         ?>
-3. Output the upload by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+
+**Step 3** Output the Upload by echoing the result of the `render` method.
+
+###### Example
 
         <?php
         echo $upload->render();
         ?>
-4. Create the "save.php" handler.
+
+**Step 4** Create the `save.php` handler.
+
+###### Example
 
         <?php
         $files = $_FILES['files'];
@@ -44,52 +59,72 @@ Here is how to configure the Upload for asynchronous operation:
         }
         ?>
 
-## Getting Client-side Reference
+<!--_-->
+### Event Handling
 
-You can reference the client-side Kendo Upload instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/upload#methods) to control its behavior.
+You can subscribe to all Upload [events](/api/javascript/ui/upload#events).
+
+### Specify Function Names
+
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
+
+###### Example
 
 
-### Example
+        <?php
+        $upload = new \Kendo\UI\Upload('upload');
 
-    <?php
-    $upload = new \Kendo\UI\Upload('upload');
-    echo $upload->render();
-    ?>
-    <script>
-    $(function() {
-        // The constructor parameter is used as the 'id' HTML attribute of the upload
-        var upload = $("#upload").data("kendoUpload")
-    });
-    </script>
+        // The 'upload_select' JavaScript function will handle the 'select' event of the upload
+        $upload->select('upload_select');
 
-## Handling Events
+        echo $upload->render();
+        ?>
+        <script>
+        function upload_select() {
+            // Handle the select event
+        }
+        </script>
 
-You can subscribe to all upload [events](/api/web/upload#events).
+### Provide Inline Code
 
-### Example - subscribing by specifying JavaScript function name
+The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-    <?php
-    $upload = new \Kendo\UI\Upload('upload');
+###### Example
 
-    // The 'upload_select' JavaScript function will handle the 'select' event of the upload
-    $upload->select('upload_select');
+        <?php
+        $upload = new \Kendo\UI\Upload('upload');
 
-    echo $upload->render();
-    ?>
-    <script>
-    function upload_select() {
-        // Handle the select event
-    }
-    </script>
+        // Provide inline JavaScript code that will handle the 'select' event of the upload
+        $upload->select('function() { /* Handle the select event */ }');
 
-### Example - providing inline JavaScript code
+        echo $upload->render();
+        ?>
 
-    <?php
-    $upload = new \Kendo\UI\Upload('upload');
+<!--*-->
+## Reference
 
-    // Provide inline JavaScript code that will handle the 'select' event of the upload
-    $upload->select('function() { /* Handle the select event */ }');
+### Client-Side Instances
 
-    echo $upload->render();
-    ?>
+You are able to reference an existing Upload instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Upload API](/api/javascript/ui/upload#methods) to control its behavior.
+
+###### Example
+
+        <?php
+        $upload = new \Kendo\UI\Upload('upload');
+        echo $upload->render();
+        ?>
+        <script>
+        $(function() {
+            // The constructor parameter is used as the 'id' HTML attribute of the upload
+            var upload = $("#upload").data("kendoUpload")
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the Upload:
+
+* [Modes of Operation of the Upload PHP Class]({% slug modesofoperation_upload_uiforphp %})
+* [Overview of the Kendo UI Upload Widget]({% slug overview_kendoui_upload_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

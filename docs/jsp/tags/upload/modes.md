@@ -65,7 +65,7 @@ Below are listed the steps for you to follow when configuring the synchronous mo
 
 In this mode the files are uploaded to a controller action without interrupting the user interaction with the page.
 
-### Save Handler
+### Save Handlers
 
 Below are listed the steps for you to follow when configuring the saving of the handler in the asynchronous mode of operation of the Kendo UI Upload.
 
@@ -93,7 +93,7 @@ The `name` attribute is required and must be unique. It is used as a `form` fiel
             return "";
         }
 
-### Remove Handler
+### Remove Handlers
 
 Users can remove files after they are uploaded asynchronously. To enable this feature, a `Remove` action is needed.
 
@@ -124,7 +124,7 @@ Below are listed the steps for you to follow when configuring the removing of th
 >
 > The `Remove` action can be used as an attack vector if implemented poorly. Always sanitize the file names and verify that the user has the appropriate permissions before actually deleting any files.
 
-### Disable Automatic Upload
+### Disable Automatic Uploads
 
 The selected files are uploaded immediately by default. You can change this behavior by setting `AutoUpload` to `false`.
 
