@@ -2851,7 +2851,11 @@ function pad(number, digits, end) {
             if (value !== undefined) {
 
                 if (templateRegExp.test(option)) {
-                    value = kendo.template($("#" + value).html());
+                    if(typeof value === "string") {
+                        value = kendo.template($("#" + value).html());
+                    } else {
+                        value = element.getAttribute(option);
+                    }
                 }
 
                 result[option] = value;
