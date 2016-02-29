@@ -496,7 +496,7 @@ Closes a Window.
 
 ### content
 
-Gets or set the content of a window.
+Gets or set the content of a window. Supports chaining when used as a setter.
 
 #### Parameters
 
@@ -507,7 +507,7 @@ The content of the Window. Can be an HTML string or jQuery object.
 
 #### Returns
 
-`Object` If the content parameter is provided, this method will return the widget object to support chaining. Otherwise, it will return the current content of the widget.
+`String` The current window content, if used as a getter. If used as a setter, the method will return the window object to support chaining.
 
 #### Example - get the window content
 
@@ -718,7 +718,7 @@ The configuration options to be set.
 
 ### title
 
-Gets or set the title of a **Window**.
+Gets or sets the title of a Window. Supports chaining when used as a setter.
 
 #### Parameters
 
@@ -728,7 +728,7 @@ The title of the Window.
 
 #### Returns
 
-`kendo.ui.Window` If a title is provided, this method will return the window object to support chaining. Otherwise, it will return the current title of the window.
+`String` The current window title, if used as a getter. If used as a setter, the method will return the window object to support chaining.
 
 #### Example - get the title of the window
 
