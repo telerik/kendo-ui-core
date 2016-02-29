@@ -18,23 +18,23 @@ Telerik UI for ASP.NET MVC requires ASP.NET MVC.
 
 The offline sample application requires:
 
-* .NET 4.5
-* ASP.NET MVC 4 or ASP.NET MVC 5
-* Visual Studio 2012 or Visual Studio 2013
+* [.NET 4.5](https://www.microsoft.com/en-us/download/details.aspx?id=30653)
+* [ASP.NET MVC 4](http://www.asp.net/mvc/mvc4) or [ASP.NET MVC 5](http://www.asp.net/mvc/mvc5)
+* [Visual Studio 2012](https://www.microsoft.com/en-us/download/details.aspx?id=34673) or [Visual Studio 2013](https://www.visualstudio.com/downloads/download-visual-studio-vs)
 * LocalDB
 
-## Supported Environments
+## Environments
 
 Telerik UI for ASP.NET MVC supports:
 
-* .NET Framework 3.5+
-* ASP.NET MVC 3+
-* Visual Studio 2010+
-* IIS 5+
-* C# / VB.NET
-* SharePoint 2010+
+* [.NET Framework 3.5](https://www.microsoft.com/en-us/download/details.aspx?id=21) and later
+* [ASP.NET MVC 3](http://www.asp.net/mvc/mvc3) and later
+* [Visual Studio 2010](https://www.microsoft.com/en-us/download/details.aspx?id=23507) and later
+* [IIS 5](https://www.microsoft.com/en-us/download/details.aspx?id=24843) and later
+* [C#](https://msdn.microsoft.com/en-us/library/aa288436(v=vs.71).aspx) / [VB.NET](http://www.tutorialspoint.com/vb.net/)
+* [SharePoint 2010](https://msdn.microsoft.com/en-us/library/office/dd776256(v=office.12).aspx) and later
 
-Telerik UI for ASP.NET MVC Visual Studio Extensions support Visual Studio 2010+.
+Telerik UI for ASP.NET MVC Visual Studio Extensions support Visual Studio 2010 and later.
 
 ## Download
 
@@ -114,15 +114,15 @@ The sample application Visual Studio solution contains the following:
 
 ## Next Steps
 
-After you run the sample application, read through the following articles:
+After you run the sample application, read through the following articles, related to Telerik UI for ASP.NET MVC:
 
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding]({% slug scaffolding_aspnetmvc %})
+* [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
 * [Use Telerik UI for ASP.NET MVC in MVC 3 Applications](/aspnet-mvc/asp-net-mvc-3)
 * [Use Telerik UI for ASP.NET MVC in MVC 4 Applications](/aspnet-mvc/asp-net-mvc-4)
 * [Use Telerik UI for ASP.NET MVC in MVC 5 Applications](/aspnet-mvc/asp-net-mvc-5)
 * [Use Telerik UI for ASP.NET MVC Visual Studio Extensions](/aspnet-mvc/vs-integration/introduction)
-* [Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
 
 ## See Also
 
@@ -131,17 +131,17 @@ Other articles and examples on Telerik UI for MVC:
 * [Collected ASP.NET MVC Examples](https://github.com/telerik/kendo-examples-asp-net-mvc)
 * [Collected Examples on ASP.NET Web Technologies](https://github.com/telerik/kendo-examples-asp-net)
 * [Collected Examples on Telerik UI for ASP.NET MVC](https://github.com/telerik/ui-for-aspnet-mvc-examples)
-* [Custom DataSource]({% slug customdatasource_aspnetmvc %})
-* [Validation]({% slug validation_aspnetmvc %})
-* [Globalization]({% slug globalization_aspnetmvc %})
-* [Localization]({% slug localization_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Custom DataSource]({% slug customdatasource_aspnetmvc %})
+* [Validation with Telerik UI for ASP.NET MVC]({% slug validation_aspnetmvc %})
+* [Globalization with Telerik UI for ASP.NET MVC]({% slug globalization_aspnetmvc %})
+* [Localization with Telerik UI for ASP.NET MVC]({% slug localization_aspnetmvc %})
 * [Visual Basic Syntax]({% slug visualbasic_aspnetmvc %})
-* [Wrappers vs Widgets]({% slug wrappersvswidgets_aspnetmvc %})
-* [Visual Studio Integration]({% slug overview_visualstudio_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Wrappers vs Kendo UI Widgets]({% slug wrappersvswidgets_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Visual Studio Integration]({% slug overview_visualstudio_aspnetmvc %})
 * [Migration from Telerik Extensions]({% slug overview_migrationextensions_aspnetmvc %})
-* [HtmlHelpers]({% slug overview_autocompletehelper_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC HtmlHelpers]({% slug overview_autocompletehelper_aspnetmvc %})
 * [ASP.NET MVC 3]({% slug aspnetmvc3_aspnetmvc %})
 * [ASP.NET MVC 4]({% slug aspnetmvc4_aspnetmvc %})
 * [ASP.NET MVC 5]({% slug aspnetmvc5_aspnetmvc %})
 * [ASP.NET MVC 6]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Tutorials]({% slug overview_muscistoretutorial_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_muscistoretutorial_aspnetmvc %})

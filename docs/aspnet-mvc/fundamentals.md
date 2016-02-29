@@ -6,7 +6,7 @@ slug: fundamentals_aspnetmvc
 position: 2
 ---
 
-# Telerik UI for ASP.NET MVC Fundamentals
+# Fundamentals
 
 ## Overview of Server-Side Wrappers
 

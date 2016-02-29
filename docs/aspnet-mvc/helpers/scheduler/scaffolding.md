@@ -2,6 +2,7 @@
 title: Scaffolding
 page_title: How to use the Kendo UI Scaffolder extension.
 description: Learn how to scaffold Kendo UI Scheduler for ASP.NET MVC using the Kendo UI Scaffolder extension for Visual Studio.
+slug: scaffoldingscheduler_aspnetmvc
 ---
 
 # Scheduler Scaffolding
@@ -14,10 +15,10 @@ This chapter provides information on how to scaffold a Kendo UI Scheduler for AS
 
 # Getting Started
 
-1. Create a new ASP.NET MVC application, include an Entity Framework Data Model and add Telerik UI for ASP.NET MVC. On how to do this, follow steps 1-5 from the [Telerik UI for ASP.NET MVC in MVC 5 Applications tutorial](/aspnet-mvc/helpers/scheduler/ajax-editing#getting-started). 
- 
+1. Create a new ASP.NET MVC application, include an Entity Framework Data Model and add Telerik UI for ASP.NET MVC. On how to do this, follow steps 1-5 from the [Telerik UI for ASP.NET MVC in MVC 5 Applications tutorial](/aspnet-mvc/helpers/scheduler/ajax-editing#getting-started).
+
 2. Right-click on the location where the `Scheduler Controller` should be generated. Select **Add** -> **New Scaffolded Item...** from the displayed menu. In this example we generate it in the `Controllers` folder:
-<br> 
+<br>
 ![New Scaffolded Item](/aspnet-mvc/helpers/scheduler/images/scaffolding/scheduler_new_scaffolded_item.png)
 
 3. Select **Kendo UI Scaffolder** from the list of available scaffolders. Then choose the desired Scheduler option:
@@ -39,7 +40,7 @@ This chapter provides information on how to scaffold a Kendo UI Scheduler for AS
 <br>
 The newly created class will later be added to the `~/Models` folder:  
 ![View Model Class](/aspnet-mvc/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_7.png)
-  
+
 6. Click **Scheduler Options**:  
 ![Scheduler options](/aspnet-mvc/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_5.png)
 <br>
@@ -48,7 +49,7 @@ This screen contains the Scheduler functionalities that can be configured before
 	- **Edit operations** - configures the operations to be included (**Create**, **Update**, **Destroy**, **Resize**, **Move**)  
     - **Other options** -> **PDF Export** - enables the PDF export functionality
     - **Other options** -> **Selectable** - enables the selection functionality  
-    - **Scheduler Views** - opts for the desired views 
+    - **Scheduler Views** - opts for the desired views
 
 7. Click **Events**. Select the Scheduler events that you want to attach handlers to:  
 ![Scheduler options](/aspnet-mvc/helpers/scheduler/images/scaffolding/ui_for_aspnetmvc_scheduler_6.png)  
