@@ -18,7 +18,7 @@ Below are listed the steps for you to follow when you want to make Telerik UI fo
 
 **Step 2** Include the corresponding culture JavaScript file after the other JavaScript product files.
 
-ASPX
+**I. ASPX**
 
 ###### Example
 
@@ -27,7 +27,7 @@ ASPX
       <script src="<%= Url.Content("~/Scripts/kendo.aspnetmvc.min.js") %>"></script>
       <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js") %>"></script>
 
-Razor
+**II. Razor**
 
 ###### Example
 
@@ -90,7 +90,7 @@ Below are listed the steps for you to follow when you want to make the widgets u
 
 **Step 2** Get the current culture.
 
-ASPX
+**I. ASPX**
 
 ###### Example
 
@@ -98,7 +98,7 @@ ASPX
         var culture =  System.Globalization.CultureInfo.CurrentCulture.ToString();
       %>
 
-Razor
+**II. Razor**
 
 ###### Example
 
@@ -108,13 +108,13 @@ Razor
 
 **Step 3** Include the corresponding culture JavaScript file.
 
-ASPX
+**I. ASPX**
 
 ###### Example
 
       <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js") %>"></script>
 
-Razor
+**II. Razor**
 
 ###### Example
 
@@ -122,7 +122,7 @@ Razor
 
 **Step 4** Set the current culture by calling the [`kendo.culture`](/api/javascript/kendo#methods-culture) method. Note that you must add the script block after the culture JavaScript file.
 
-ASPX
+**I. ASPX**
 
 ###### Example
 
@@ -130,7 +130,7 @@ ASPX
           kendo.culture("<%= culture %>");
       </script>
 
-Razor
+**II. Razor**
 
 ###### Example
 
