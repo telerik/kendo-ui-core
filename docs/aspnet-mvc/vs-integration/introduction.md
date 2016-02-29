@@ -1,5 +1,6 @@
 ---
 title: Introduction
+slug: overview_visualstudio_aspnetmvc
 ---
 
 #Introduction
@@ -43,5 +44,3 @@ These are available in the language specific nodes of the dialog as well:
 ![Mvc Wizard](/aspnet-mvc/vs-integration/images/mvc_wizard.png)
 
 -   The Add New Project dialog contains Telerik UI for ASP.NET MVC Web Application under both CSharp\Web and Visual Basic\Web nodes.
-
-
