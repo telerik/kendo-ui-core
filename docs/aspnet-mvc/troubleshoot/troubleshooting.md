@@ -2,6 +2,8 @@
 title: Troubleshooting
 page_title: Troubleshooting guide for Telerik UI for ASP.NET MVC
 description: Find solutions for common problems which you may face while using Telerik UI for ASP.NET MVC
+previous_url: /aspnet-mvc/troubleshooting
+slug: troubleshooting_aspnetmvc
 position: 7
 ---
 
@@ -323,4 +325,3 @@ The solution is to use plain Bundle instead of ScriptBudle for those files:
                 "~/Scripts/kendo.all.min.js",
                 "~/Scripts/kendo.aspnetmvc.min.js",
                 "~/Scripts/kendo.timezones.min.js"));
-

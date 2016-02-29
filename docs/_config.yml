@@ -231,27 +231,39 @@ navigation:
         position: 8
     "aspnet-mvc/mvc-6":
         title: "ASP.NET MVC 6"
-        position: 4
+        position: 13
     "aspnet-mvc/vs-integration":
         title: "Visual Studio Integration"
-        position: 9
+        position: 14
     "aspnet-mvc/migration":
         title: "Migrate From Telerik Extensions"
-        position: 12
+        position: 15
     "aspnet-mvc/helpers":
-        title: "View Helpers"
-        position: 11
-    "aspnet-mvc/tutorial-saleshub":
-        title: "Tutorial: Build the Sales Hub Project"
-        position: 20
-    "aspnet-mvc/tutorial-kendo-music-store":
-        title: "Tutorial: Build the Kendo Music Store"
-        position: 20
-    "aspnet-mvc/tutorial-kendo-music-store/music-store-web":
+        title: "HtmlHelpers"
+        position: 16
+    "aspnet-mvc/troubleshoot":
+        title: "Troubleshooting"
+        position: 17
+    "aspnet-mvc/tutorials":
+        title: "Tutorials"
+        position: 18
+    "aspnet-mvc/tutorials/tutorial-kendo-music-store":
+        title: "Build the Kendo UI Music Store"
+        position: 1
+    "aspnet-mvc/tutorials/tutorial-kendo-music-store/music-store-web":
         title: "Build the Web Application"
         position: 2
-    "aspnet-mvc/tutorial-kendo-music-store/music-store-dashboard":
+    "aspnet-mvc/tutorials/tutorial-kendo-music-store/music-store-dashboard":
         title: "Build the Dashboard"
+        position: 3
+    "aspnet-mvc/tutorials/tutorial-saleshub":
+        title: "Build the Sales Hub Project"
+        position: 2
+    "aspnet-mvc/tutorials/tutorial-saleshub/home-page":
+        title: "Build the Home Page"
+        position: 2
+    "aspnet-mvc/tutorials/tutorial-saleshub/order-page":
+        title: "Build the Order Page"
         position: 3
     "jsp":
         title: "UI for JSP"
@@ -474,27 +486,6 @@ navigation:
         title: "Order Page"
     "*localization":
         title: "Localization"
-    "aspnet-mvc/vs-integration":
-        title: "Visual Studio Integration"
-        position: 9
-    "aspnet-mvc/migration":
-        title: "Migrate From Telerik Extensions"
-        position: 12
-    "aspnet-mvc/helpers":
-        title: "View Helpers"
-        position: 11
-    "aspnet-mvc/tutorial-saleshub":
-        title: "Tutorial: Build the Sales Hub Project"
-        position: 20
-    "aspnet-mvc/tutorial-kendo-music-store":
-        title: "Tutorial: Build the Kendo Music Store"
-        position: 20
-    "aspnet-mvc/tutorial-kendo-music-store/music-store-web":
-        title: "Build the Web Application"
-        position: 2
-    "aspnet-mvc/tutorial-kendo-music-store/music-store-dashboard":
-        title: "Build the Dashboard"
-        position: 3
     "api/javascript":
         title: "JavaScript"
         position: 2

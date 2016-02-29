@@ -1,8 +1,9 @@
 ---
 title: Custom DataSource
-page_title: Custom DataSource guide for Telerik UI for ASP.NET MVC
-description: Using Custom DataSource MVC
-position: 7
+page_title: Custom DataSource | Telerik UI for ASP.NET MVC
+description: "Use the CustomDataSource builder available for the Telerik UI for ASP.NET MVC HtmlHelpers."
+slug: customdatasource_aspnetmvc
+position: 4
 ---
 
 # Custom DataSource
@@ -87,13 +88,13 @@ The demo below shows how to set a JavaScript function for the `Read` operation o
                     m.Field("startTimezone", typeof(string)).From("StartTimezone");
                     m.Field("endTimezone", typeof(string)).From("EndTimezone");
                 }))
-            .Transport(new { 
+            .Transport(new {
                 //the ClientHandlerDescriptor is a special type that allows code rendering as-is (not as a string)
                 read = new Kendo.Mvc.ClientHandlerDescriptor() {HandlerName = "customRead" }
             })
         )
     )
-    
+
     <script>
         function customRead(options) {
             $.ajax({
@@ -143,14 +144,14 @@ The example below demonstrates how to set the default value of the `EmployeeID` 
             )
         )
     )
-    
+
     <script>    
         function defaultValue(e) {
             if (typeof this.EmployeeID === "function") {
                 var grid = $("#grid").data("kendoGrid");
                 var ds = grid.dataSource;
                 var filter = ds.filter();
-             
+
                 if (filter && filter.filters[0].field === "EmployeeID") {
                     return filter.filters[0].value;
                 } else {
@@ -240,7 +241,7 @@ This example demonstrates how to bind the Grid to the oData service. [See the fu
             .Type("odata")
             .Transport(transport =>
                transport.Read(read => read.Url("http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"))
-            ) 
+            )
             .PageSize(20)
             .ServerPaging(true)
             .ServerSorting(true)
