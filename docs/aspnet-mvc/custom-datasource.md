@@ -313,22 +313,22 @@ To see the full demo, refer to this [Grid how-to example]({% slug howto_useodata
 
 ## See Also
 
-Other articles on Telerik UI for MVC:
+Other articles on Telerik UI for ASP.NET MVC:
 
 * [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
-* [Fundamentals]({% slug fundamentals_aspnetmvc %})
-* [Scaffolding]({% slug scaffolding_aspnetmvc %})
-* [Validation]({% slug validation_aspnetmvc %})
-* [Globalization]({% slug globalization_aspnetmvc %})
-* [Localization]({% slug localization_aspnetmvc %})
+* [Validation with Telerik UI for ASP.NET MVC]({% slug validation_aspnetmvc %})
+* [Globalization with Telerik UI for ASP.NET MVC]({% slug globalization_aspnetmvc %})
+* [Localization with Telerik UI for ASP.NET MVC]({% slug localization_aspnetmvc %})
 * [Visual Basic Syntax]({% slug visualbasic_aspnetmvc %})
-* [Wrappers vs Widgets]({% slug wrappersvswidgets_aspnetmvc %})
-* [Visual Studio Integration]({% slug overview_visualstudio_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Wrappers vs Kendo UI Widgets]({% slug wrappersvswidgets_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Visual Studio Integration]({% slug overview_visualstudio_aspnetmvc %})
 * [Migration from Telerik Extensions]({% slug overview_migrationextensions_aspnetmvc %})
-* [HtmlHelpers]({% slug overview_autocompletehelper_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC HtmlHelpers]({% slug overview_autocompletehelper_aspnetmvc %})
 * [ASP.NET MVC 3]({% slug aspnetmvc3_aspnetmvc %})
 * [ASP.NET MVC 4]({% slug aspnetmvc4_aspnetmvc %})
 * [ASP.NET MVC 5]({% slug aspnetmvc5_aspnetmvc %})
 * [ASP.NET MVC 6]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Troubleshooting]({% slug troubleshooting_aspnetmvc %})
-* [Tutorials]({% slug overview_muscistoretutorial_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_muscistoretutorial_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
