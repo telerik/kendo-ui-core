@@ -57,7 +57,7 @@ The Controller will be generated in the currently selected location along with t
 
 ## Troubleshooting
 
-For a list of issues and solutions to common problems you may encounter while working with the Kendo UI Scaffolder Vosual Studio extension, refer to the [troubleshooting article on scaffolding]({% slug troubleshooting_scaffolding_aspnetmvc %}).
+For a list of issues and solutions to common problems you may encounter while working with the Kendo UI Scaffolder Visual Studio extension, refer to the [troubleshooting article on scaffolding]({% slug troubleshooting_scaffolding_aspnetmvc %}).
 
 ## See Also
 
