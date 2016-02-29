@@ -8,44 +8,57 @@ position: 6
 
 # Globalization
 
-Globalization is the process of designing and developing an application that works in multiple cultures and languages.
-The culture defines specific information for the number formats, week and month names, date and time formats etc.
+Globalization is the process of designing and developing an application that works in multiple cultures and languages. The culture defines specific information for the number formats, week and month names, date and time formats, etc.
 
-To make Telerik UI for ASP.NET MVC use a different culture than the default (which is "en-US") you should perform the following steps:
+## Apply Cultures
 
-1. Copy the required culture JavaScript file from the **\js\culture\** directory of your Telerik UI for ASP.NET MVC installation
-to the **~/Scripts/cultures/** directory of your application. Let's use the Spanish (es-ES) culture for the example.
-1. Include the corresponding culture JavaScript file *after* the other JavaScript product files.
-    - ASPX
+Below are listed the steps for you to follow when you want to make Telerik UI for ASP.NET MVC use a culture that is different from the default one, which is `en-US`.
 
-            <script src="<%= Url.Content("~/Scripts/jquery.min.js") %>"></script>
-            <script src="<%= Url.Content("~/Scripts/kendo.all.min.js") %>"></script>
-            <script src="<%= Url.Content("~/Scripts/kendo.aspnetmvc.min.js") %>"></script>
-            <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js") %>"></script>
-    - Razor
+**Step 1** Copy the required culture JavaScript file from the `\js\culture\` directory of your Telerik UI for ASP.NET MVC installation to the `~/Scripts/cultures/` directory of your application. Use the Spanish `es-ES` culture for the example.
 
-            <script src="@Url.Content("~/Scripts/jquery.min.js")"></script>
-            <script src="@Url.Content("~/Scripts/kendo.all.min.js")"></script>
-            <script src="@Url.Content("~/Scripts/kendo.aspnetmvc.min.js")"></script>
-            <script src="@Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js")"></script>
-1. Set the current culture by calling the [kendo.culture](/api/javascript/kendo#methods-culture) method. The script block should come *after* the culture JavaScript file.
+**Step 2** Include the corresponding culture JavaScript file after the other JavaScript product files.
+
+* ASPX
+
+###### Example
+
+      <script src="<%= Url.Content("~/Scripts/jquery.min.js") %>"></script>
+      <script src="<%= Url.Content("~/Scripts/kendo.all.min.js") %>"></script>
+      <script src="<%= Url.Content("~/Scripts/kendo.aspnetmvc.min.js") %>"></script>
+      <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js") %>"></script>
+
+* Razor
+
+###### Example
+
+      <script src="@Url.Content("~/Scripts/jquery.min.js")"></script>
+      <script src="@Url.Content("~/Scripts/kendo.all.min.js")"></script>
+      <script src="@Url.Content("~/Scripts/kendo.aspnetmvc.min.js")"></script>
+      <script src="@Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js")"></script>
+
+**Step 3** Set the current culture by calling the [`kendo.culture`](/api/javascript/kendo#methods-culture) method. Note that you must add the script block after the culture JavaScript file.
+
+###### Example
 
         <script>
         kendo.culture("es-ES");
         </script>
 
-After performing those steps all UI widgets included in the product will use the "es-ES" culture for parsing and formatting dates and numbers.
+After performing these steps, all Kendo UI widgets included in the product will use the `es-ES` culture for parsing and formatting dates and numbers.
 
-### Use the same culture on the server and client-side
+## Match Cultures
 
-It's important to have matching culture set on the client and on the server. This will ensure that dates and numbers are displayed and parsed correctly.
+It is important to have matching cultures set on the client and on the server. This ensures that dates and numbers are displayed and parsed correctly.
 
-#### Set the server-side culture
+### Set the Server-Side Culture
 
 You can choose to set the server-side culture globally or per-request.
 
-##### Globally
-To set the server-side culture you need to update the **web.config** file of your ASP.NET MVC application:
+#### Global Setup
+
+To set the server-side culture, update the `web.config` file of your ASP.NET MVC application.
+
+###### Example
 
     <system.web>
         <!-- snip --!>
@@ -53,9 +66,12 @@ To set the server-side culture you need to update the **web.config** file of you
         <!-- snip --!>
     </system.web>
 
-##### Per-request
-Override the [Controller.Initialize](https://msdn.microsoft.com/en-us/library/system.web.mvc.controller.initialize(v=vs.118).aspx) method to set the [CurrentCulture](https://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.currentculture.aspx)
-and [CurrentUICulture](https://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.currentuiculture.aspx).
+<!-- -->
+#### Per-Request Setup
+
+Override the [`Controller.Initialize`](https://msdn.microsoft.com/en-us/library/system.web.mvc.controller.initialize(v=vs.118).aspx) method to set the [`CurrentCulture`](https://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.currentculture.aspx) and [`CurrentUICulture`](https://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.currentuiculture.aspx).
+
+###### Example
 
     protected override void Initialize(System.Web.Routing.RequestContext requestContext)
     {
@@ -66,37 +82,55 @@ and [CurrentUICulture](https://msdn.microsoft.com/en-us/library/system.globaliza
         base.Initialize(requestContext);
     }
 
-#### Set the client-side culture to match the one on the server
+### Set Matching Client-Side Cultures
 
-To make the widgets use the same culture as the server-side follow these steps:
+Below are listed the steps for you to follow when you want to make the widgets use the same culture as the one set on the server side.
 
-1. Copy the required culture JavaScript files from the **\js\culture\** directory of your Telerik UI for ASP.NET MVC installation
-to the **~/Scripts/cultures/** directory of your application.
-1. Get the current culture
-    - ASPX
+**Step 1** Copy the required culture JavaScript files from the `\js\culture\` directory of your Telerik UI for ASP.NET MVC installation to the `~/Scripts/cultures/` directory of your application.
+
+**Step 2** Get the current culture.
+
+* ASPX
+
+###### Example
 
             <%
                 var culture =  System.Globalization.CultureInfo.CurrentCulture.ToString();
             %>
-    - Razor
+* Razor
+
+###### Example
 
             @{
                 var culture =  System.Globalization.CultureInfo.CurrentCulture.ToString();
             }
-1. Include the corresponding culture JavaScript file.
-    - ASPX
+
+**Step 3** Include the corresponding culture JavaScript file.
+
+* ASPX
+
+###### Example
 
             <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js") %>"></script>
-    - Razor
+* Razor
+
+###### Example
 
             <script src="@Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js")"></script>
-1. Set the current culture by calling the [kendo.culture](/api/javascript/kendo#methods-culture) method. The script block should come *after* the culture JavaScript file.
-    - ASPX
+
+**Step 4** Set the current culture by calling the [`kendo.culture`](/api/javascript/kendo#methods-culture) method. Note that you must add the script block after the culture JavaScript file.
+
+* ASPX
+
+###### Example
 
             <script>
                 kendo.culture("<%= culture %>");
             </script>
-    - Razor
+
+* Razor
+
+###### Example
 
             <script>
                 kendo.culture("@culture");
