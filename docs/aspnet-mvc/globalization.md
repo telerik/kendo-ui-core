@@ -18,7 +18,7 @@ Below are listed the steps for you to follow when you want to make Telerik UI fo
 
 **Step 2** Include the corresponding culture JavaScript file after the other JavaScript product files.
 
-* ASPX
+ASPX
 
 ###### Example
 
@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when you want to make Telerik UI fo
       <script src="<%= Url.Content("~/Scripts/kendo.aspnetmvc.min.js") %>"></script>
       <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js") %>"></script>
 
-* Razor
+Razor
 
 ###### Example
 
@@ -40,9 +40,9 @@ Below are listed the steps for you to follow when you want to make Telerik UI fo
 
 ###### Example
 
-        <script>
-        kendo.culture("es-ES");
-        </script>
+      <script>
+      kendo.culture("es-ES");
+      </script>
 
 After performing these steps, all Kendo UI widgets included in the product will use the `es-ES` culture for parsing and formatting dates and numbers.
 
@@ -60,11 +60,11 @@ To set the server-side culture, update the `web.config` file of your ASP.NET MVC
 
 ###### Example
 
-    <system.web>
-        <!-- snip --!>
-        <globalization uiCulture="es-ES" culture="es-ES"></globalization>
-        <!-- snip --!>
-    </system.web>
+      <system.web>
+          <!-- snip --!>
+          <globalization uiCulture="es-ES" culture="es-ES"></globalization>
+          <!-- snip --!>
+      </system.web>
 
 <!-- -->
 #### Per-Request Setup
@@ -73,14 +73,14 @@ Override the [`Controller.Initialize`](https://msdn.microsoft.com/en-us/library/
 
 ###### Example
 
-    protected override void Initialize(System.Web.Routing.RequestContext requestContext)
-    {
-        Thread.CurrentThread.CurrentCulture =
-            Thread.CurrentThread.CurrentUICulture =
-                new CultureInfo(requestContext.HttpContext.Request["my-culture"]);
+      protected override void Initialize(System.Web.Routing.RequestContext requestContext)
+      {
+          Thread.CurrentThread.CurrentCulture =
+              Thread.CurrentThread.CurrentUICulture =
+                  new CultureInfo(requestContext.HttpContext.Request["my-culture"]);
 
-        base.Initialize(requestContext);
-    }
+          base.Initialize(requestContext);
+      }
 
 ### Set Matching Client-Side Cultures
 
@@ -90,51 +90,53 @@ Below are listed the steps for you to follow when you want to make the widgets u
 
 **Step 2** Get the current culture.
 
-* ASPX
+ASPX
 
 ###### Example
 
-            <%
-                var culture =  System.Globalization.CultureInfo.CurrentCulture.ToString();
-            %>
-* Razor
+      <%
+        var culture =  System.Globalization.CultureInfo.CurrentCulture.ToString();
+      %>
+
+Razor
 
 ###### Example
 
-            @{
-                var culture =  System.Globalization.CultureInfo.CurrentCulture.ToString();
-            }
+      @{
+          var culture =  System.Globalization.CultureInfo.CurrentCulture.ToString();
+      }
 
 **Step 3** Include the corresponding culture JavaScript file.
 
-* ASPX
+ASPX
 
 ###### Example
 
-            <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js") %>"></script>
-* Razor
+      <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js") %>"></script>
+
+Razor
 
 ###### Example
 
-            <script src="@Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js")"></script>
+      <script src="@Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js")"></script>
 
 **Step 4** Set the current culture by calling the [`kendo.culture`](/api/javascript/kendo#methods-culture) method. Note that you must add the script block after the culture JavaScript file.
 
-* ASPX
+ASPX
 
 ###### Example
 
-            <script>
-                kendo.culture("<%= culture %>");
-            </script>
+      <script>
+          kendo.culture("<%= culture %>");
+      </script>
 
-* Razor
+Razor
 
 ###### Example
 
-            <script>
-                kendo.culture("@culture");
-            </script>
+      <script>
+          kendo.culture("@culture");
+      </script>
 
 ## See Also
 
