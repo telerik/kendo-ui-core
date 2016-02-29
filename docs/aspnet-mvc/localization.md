@@ -69,7 +69,7 @@ Below are listed the steps for you to follow when willing to change the provided
 
 Apart from building a custom version of `Kendo.Mvc.dll`, you can specify a new value for the corresponding message in the MVC HtmlHelper configuration. For example, to change the default message for the `create` Grid toolbar command, you can do the following:
 
-ASPX
+**I. ASPX**
 
 ###### Example
 
@@ -80,7 +80,7 @@ ASPX
              })
       %>
 
-Razor
+**II. Razor**
 
 ###### Example
 

@@ -6,12 +6,13 @@ slug: visualbasic_aspnetmvc
 position: 8
 ---
 
-# VB Syntax
+# Visual Basic Syntax
 
-The following examples show the correct Visual Basic (VB) syntax when using [lamba expressions](http://msdn.microsoft.com/en-us/library/bb531253.aspx) and
-[anonymous types](http://msdn.microsoft.com/en-us/library/bb384767.aspx) inside Kendo UI MVC wrapper declarations.
+The examples below demonstrate the correct Visual Basic (VB) syntax when using [lamba expressions](http://msdn.microsoft.com/en-us/library/bb531253.aspx) and [anonymous types](http://msdn.microsoft.com/en-us/library/bb384767.aspx) inside Kendo UI MVC wrapper declarations.
 
 ## Editor
+
+###### Example
 
     @Code
 
@@ -41,6 +42,8 @@ The following examples show the correct Visual Basic (VB) syntax when using [lam
     End Code
 
 ## TabStrip
+
+###### Example
 
     @Code
 
@@ -74,6 +77,8 @@ The following examples show the correct Visual Basic (VB) syntax when using [lam
 
 ### View
 
+###### Example
+
     @Code
         Html.Kendo().Grid(Of KendoUIMvcVB.Person)() _
             .Name("Grid") _
@@ -105,7 +110,9 @@ The following examples show the correct Visual Basic (VB) syntax when using [lam
         .Render()
     End Code
 
-#### Alternative ToolBar configurations
+The example below demonstrates alternative ToolBar configurations.
+
+###### Example
 
     ...
     .ToolBar(Function(t)
@@ -123,6 +130,8 @@ The following examples show the correct Visual Basic (VB) syntax when using [lam
 
 ### Controller
 
+###### Example
+
     Imports Kendo.Mvc.Extensions
     Imports Kendo.Mvc.UI
 
@@ -137,6 +146,8 @@ The following examples show the correct Visual Basic (VB) syntax when using [lam
     End Class
 
 ## Editor Template
+
+###### Example
 
     @ModelType Nullable(Of Integer)
 
