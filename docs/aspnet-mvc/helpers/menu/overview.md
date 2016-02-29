@@ -2,6 +2,7 @@
 title: Overview
 page_title: Menu HtmlHelper extension for Kendo UI Menu for ASP.NET MVC widget documentation
 description: How to add and bind Menu HtmlHelper extension for Kendo UI Menu for ASP.NET MVC widget.
+slug: overview_menu_aspnetmvc
 ---
 
 # Menu
@@ -245,4 +246,3 @@ You can subscribe to all [events](/api/web/menu#events) exposed by Kendo UI Menu
                 </text>)
           )
     )
-
