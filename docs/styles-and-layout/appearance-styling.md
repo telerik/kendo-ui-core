@@ -9,13 +9,21 @@ position: 1
 
 # Themes and Layout
 
-All [Kendo UI widgets](http://demos.telerik.com/kendo-ui/) arrive with a number of predefined themes:
+All [Kendo UI widgets](http://demos.telerik.com/kendo-ui/) arrive with a number of predefined themes.
+
+**Figure 1. Kendo UI themes for the Web**
 
 ![Kendo UI Web Themes](/styles-and-layout/web-themes.png)
 
-This is how the same themes are rendered in widgets that visualize data, such as Gauges, Charts, Barcodes, Diagrams, and Maps:
+This is how the same themes are rendered in widgets that visualize data, such as Gauges, Charts, Barcodes, Diagrams, and Maps.
+
+**Figure 2. Kendo UI themes for widgets rendering data visualization**
 
 ![Kendo UI DataViz Themes](/styles-and-layout/dataviz-themes.png)
+
+## Getting Started
+
+### The Basics
 
 Setting a Kendo UI theme for any of the Kendo UI widgets, such as [Kendo UI Grid](http://demos.telerik.com/kendo-ui/grid/index), or [Kendo UI Bar Chart](http://demos.telerik.com/kendo-ui/bar-charts/index), requires you to include the following two stylesheets to your project:
 
@@ -49,7 +57,7 @@ The example below demonstrates how to include the stylesheets to your project.
 
 The appearance of the Kendo UI widgets entirely depends on styles defined by the applied CSS classes. No inline styles are used, except for some very specific cases, in which these styles must be set with Javascript, depending on the browser or configuration.
 
-## Common CSS Files
+### Common CSS Files
 
 Some themes require a different common (base) stylesheet that applies different dimensions. There are four `common` styleshees shipped with Kendo UI.
 
@@ -62,7 +70,7 @@ Some themes require a different common (base) stylesheet that applies different 
 | **`kendo.common-fiori.css`**          | The base stylesheet for the Fiori theme available in the enterprise bundles of Kendo UI. Use this file instead of `kendo.common.css` and only with `kendo.fiori.css`. |
 | **`kendo.common-office365.css`**      | The base stylesheet for the Office365 theme available in the enterprise bundles of Kendo UI. Use this file instead of `kendo.common.css` and only with `kendo.office365.css`. |
 
-## Theme-Related Folders
+### Theme-Related Folders
 
 Apart from the common stylesheet and theme stylesheet, the following folders must be available in your application.
 
@@ -70,6 +78,21 @@ Apart from the common stylesheet and theme stylesheet, the following folders mus
 * `/fonts/`&mdash;This is where the `KendoUIGlyphs` and `DejaVu` font files reside. The `KendoUIGlyphs` font describes the Kendo UI font icons used by the web widgets. The `DejaVu` font is used by default during [PDF export]({% slug drawingofhtmlelements_drawingapi %}).
 * `/images/`&mdash;This where the Kendo UI font icons for the mobile widgets reside.
 * `/textures/`&mdash;This is where some fallback theme images are stored for browsers that do not support the CSS3 linear gradients.
+
+### Browser-Specific CSS
+
+While most of the CSS code is cross-browser compatible, some layouts require different styles for different browsers. Kendo UI targets specific browsers by adding browser-specific classes to the document root element instead of relying on CSS parsing hacks.
+
+The example below demonstrates how to take advantage of these classes.
+
+###### Example
+
+    .k-ie { /* styles to be applied to all versions of Internet Explorer */ }
+    .k-ie7 { /* styles to be applied to IE7 only */ }
+    .k-ff { /* styles to be applied to all versions of Firefox */ }
+
+<!--*-->
+The syntax of the generated classes is `k-[browser] k-[browser][majorVersion]`.
 
 ## Primitives
 
@@ -93,7 +116,7 @@ Kendo UI widgets use primitives, meaning that different HTML elements in differe
 | **`k-item`**    | Applied to various repeating widget items, e.g. Menu, TabStrip, TreeView, PanelBar, ComboBox, DropDownList, etc. This CSS class does not apply any particular global styles and sports `display: block`.|
 | **`k-first`** and **`k-last`** | Set on the first and the last `k-item` respectively, where a special type of styling is needed, e.g. rounded corners and removing borders. |
 
-### `k-state` Classes
+### The k-state Classes
 
 The appearance of a component may well depend on its state, which is also tied to CSS classes.
 
@@ -111,30 +134,7 @@ The appearance of a component may well depend on its state, which is also tied t
 
 There are some CSS classes, which you can use to apply borders and background colors to containers, such as `k-info-colored`, `k-success-colored`, and `k-error-colored`. They are demonstrated in the [StylingPanels demo](http://demos.telerik.com/kendo-ui/styling/panels).
 
-## LESS Files
-
-The following LESS-related information is applicable only if you want to modify the Kendo UI CSS source code.
-
-In the Q1 2014 release, the Kendo UI Web common LESS file was split to separate LESS files for each widget, and Kendo UI mobile platform themes were also divided in parts to files per widget. The LESS command-line compiler can be used to build LESS source files to CSS skins and themes. The LESS files, which can be passed to the compiler, are located in the first-level folders inside `styles/folder`: `styles/web/` and `styles/mobile/`. Kendo UI Mobile files are self explanatory. Except `meego.less`, which is deprecated, the rest of the files can be built with LESS and produce all platform themes. Some use CSS files, including `kendo.mobile.all.css`. The LESS files of Kendo UI are named as follows.
-
-| LESS Files  | Contents and Application  |
-|:---         |:---                       |
-| **`kendo.[theme-name].less`** | The file contains theme variables, but does not include styles for hybrid widgets. Building it produces a theme file. |
-| **`kendo.[theme-name].mobile.less`** | Contains styling for all widgets, including hybrid ones. Building it produces a theme file for all widgets. |
-| **`kendo.common.less`**| This a default sizing file for all Kendo UI widgets. Building it produces a common file for all Kendo UI widgets.|
-| **`kendo.common-[theme-name].less`** | Contains sizing adjustments for [theme-name] for all Kendo UI widgets. Building it produces a common file for all Kendo UI widgets. |
-| **`kendo.common.core.less`** | This is a default sizing file for Kendo UI Core widgets. Building it produces a common file for Kendo UI Core widgets. |
-| **`kendo.common-[theme-name].core.less`** | Contains sizing adjustments for [theme-name] for Kendo UI Core widgets. Building it produces a common file for Kendo UI Core widgets.|
-| **`kendo.rtl.css`** | Contains styles for widgets in RTL mode, CSS only. |
-| **`type-[theme-name].less`** | Contains supporting files that cannot be built. Translates the colors from `kendo.[theme-name].less` to the theme colors to a usable theme. |
-
-The Kendo UI Web LESS files, including the styling of the Kendo UI hybrid widgets, can be built using the LESS 1.7.5 version.
-
-> **Important**
->
-> Kendo UI versions before 2015.2.805 (inclusive) had to be built with [our fork of LESS, located on GitHub](https://github.com/telerik/less.js). This is no longer a requirement.
-
-## Customize Appearance
+## Customization of Appearance
 
 ### Override Primitives
 
@@ -186,7 +186,7 @@ can be styled by using its ID:
 
 The above CSS rule is not going to affect any other widget instances, which are outside `#menu1`.
 
-### Checkboxes and Radio Buttons
+### Customize Checkboxes and Radio Buttons
 
 With the 2014 Q3 release Kendo UI provides customized presentation for checkboxes and radio buttons via the `k-checkbox` and `k-radio` classes respectively. At this time these two types of input cannot be styled with CSS only. Therefore, Kendo UI Checkboxes and Radio buttons appearance relies on the `<input>` element being immediately followed by a `<label>` element with the respective `k-checkbox-label` or `k-radio-label` class. The expected HTML is demonstrated in the example below.
 
@@ -200,20 +200,43 @@ With the 2014 Q3 release Kendo UI provides customized presentation for checkboxe
 	<input type="radio" id="radiobutton" class="k-radio">
 	<label class="k-radio-label" for="radiobutton"></label>
 
+## Custom Themes Creation
 
-## Browser-Specific CSS
+Kendo UI supports a number of `.less` files, which are only used when you want to modify the Kendo UI CSS source code and create a custom theme.
 
-While most of the CSS code is cross-browser compatible, some layouts require different styles for different browsers. Kendo UI targets specific browsers by adding browser-specific classes to the document root element instead of relying on CSS parsing hacks.
+### LESS Files Overview
 
-The example below demonstrates how to take advantage of these classes.
+In the Kendo UI Q1 2014 release, the Kendo UI `web.common.less` file was split, which resulted in the construction of `.less` files for each widget. The Kendo UI mobile platform themes were also divided in parts to create files per widget.
 
-###### Example
+The [`LESS` command-line compiler](http://lesscss.org/#using-less-command-line-usage) is used for building the `LESS` source files to CSS skins and themes. The `.less` files, which can be passed to the compiler, are located in the first-level folders inside `styles/folder`&mdash;`styles/web/` and `styles/mobile/`. Kendo UI files for mobile are self-explanatory. Except `meego.less`, which is deprecated, the rest of the files can be built by using the `.less` files modification and produce all platform themes. Some use CSS files, including `kendo.mobile.all.css`.
 
-    .k-ie { /* styles to be applied to all versions of Internet Explorer */ }
-    .k-ie7 { /* styles to be applied to IE7 only */ }
-    .k-ff { /* styles to be applied to all versions of Firefox */ }
+### Available LESS Files
 
-The syntax of the generated classes is `k-[browser] k-[browser][majorVersion]`.
+The list below demonstrates the names of the `.less` files supported by Kendo UI.
+
+| LESS Files  | Contents and Application  |
+|:---         |:---                       |
+| **`kendo.[theme-name].less`** | The file contains theme variables, but does not include styles for hybrid widgets. Building it produces a theme file. |
+| **`kendo.[theme-name].mobile.less`** | Contains styling for all widgets, including hybrid ones. Building it produces a theme file for all widgets. |
+| **`kendo.common.less`**| This a default sizing file for all Kendo UI widgets. Building it produces a common file for all Kendo UI widgets.|
+| **`kendo.common-[theme-name].less`** | Contains sizing adjustments for [theme-name] for all Kendo UI widgets. Building it produces a common file for all Kendo UI widgets. |
+| **`kendo.common.core.less`** | This is a default sizing file for Kendo UI Core widgets. Building it produces a common file for Kendo UI Core widgets. |
+| **`kendo.common-[theme-name].core.less`** | Contains sizing adjustments for [theme-name] for Kendo UI Core widgets. Building it produces a common file for Kendo UI Core widgets.|
+| **`kendo.rtl.css`** | Contains styles for widgets in RTL mode, CSS only. |
+| **`type-[theme-name].less`** | Contains supporting files that cannot be built. Translates the colors from `kendo.[theme-name].less` to the theme colors to a usable theme. |
+
+The Kendo UI `.less` files, including the styling of the Kendo UI hybrid widgets, can be built using the LESS 1.7.5 version.
+
+> **Important**
+>
+> Kendo UI versions before 2015.2.805 inclusive had to be built with [Telerik `LESS` fork, located on GitHub](https://github.com/telerik/less.js). This is no longer a requirement.
+
+### Customization of Themes
+
+To create a custom theme with Kendo UI, choose either of the two possible ways:
+
+1. Use the [Kendo UI ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder/). For detailed information on how to configure its options, refer to the [ThemeBuilder overview article]({% slug themebuilder_overview_kendouistyling %}).
+2. Modify a `.less` file to achieve a theme of your liking. To do so, choose one of the available `kendo.*.less` files depending on what you want to achieve. Copy it to your project and rename it. Change the colors and run the [`LESS` command-line compiler](http://lesscss.org/#using-less-command-line-usage) on it.   
 
 ## See Also
 
