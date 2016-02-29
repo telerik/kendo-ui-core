@@ -1,13 +1,13 @@
 ---
-title: Troubleshooting
-page_title: Troubleshooting guide for Telerik UI for ASP.NET MVC
-description: Find solutions for common problems which you may face while using Telerik UI for ASP.NET MVC
+title: Common Issues
+page_title: Common Issues | UI for ASP.NET MVC Troubleshooting
+description: "Learn about the solutions of common issues that may occur while working with Telerik UI for ASP.NET MVC."
 previous_url: /aspnet-mvc/troubleshooting
 slug: troubleshooting_aspnetmvc
-position: 7
+position: 1
 ---
 
-# Troubleshooting
+# Common Issues
 
 This page provides solutions for common problems you may encounter while working with Telerik UI for ASP.NET MVC. In addition you could check the general [Kendo UI troubleshooting help topic](/troubleshooting), which is relevant since Telerik UI for ASP.NET MVC is powered by Kendo UI.
 
