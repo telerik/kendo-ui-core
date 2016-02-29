@@ -1,8 +1,9 @@
 ---
-title: VB Syntax
-page_title: Visual Basic syntax in Kendo UI MVC wrapper declarations
-description: Example of correct VB Syntax which is applicable to anonymous types and lambda expressions in Kendo UI MVC wrapper declarations.
-position: 7
+title: Visual Basic Syntax
+page_title: Visual Basic Syntax | Telerik UI for ASP.NET MVC
+description: "Apply a proper Visual Basic syntax when using lamba expressions and anonymous types inside Kendo UI MVC wrapper declarations."
+slug: visualbasic_aspnetmvc
+position: 8
 ---
 
 # VB Syntax
@@ -42,9 +43,9 @@ The following examples show the correct Visual Basic (VB) syntax when using [lam
 ## TabStrip
 
     @Code
-        
+
         Dim tab As Kendo.Mvc.UI.Fluent.TabStripBuilder = Html.Kendo().TabStrip().Name("TabStrip1")
-        
+
         tab.Items(Function(f) f.Add().Text("tab 1").Content(Sub()
                                 @<text>HTML content</text>
                                                             End Sub))
@@ -111,7 +112,7 @@ The following examples show the correct Visual Basic (VB) syntax when using [lam
                      t.Template("template as a string")
              End Function) _
     ...
-    
+
     ...
     .ToolBar(Function(t)
                      t.Template(Sub()
@@ -119,7 +120,7 @@ The following examples show the correct Visual Basic (VB) syntax when using [lam
                                 End Sub)
              End Function) _
     ...
-    
+
 ### Controller
 
     Imports Kendo.Mvc.Extensions

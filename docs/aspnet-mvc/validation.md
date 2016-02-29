@@ -1,8 +1,9 @@
 ---
 title: Validation
-page_title: Validation guide for Telerik UI for ASP.NET MVC
-description: Using Validation in MVC
-position: 7
+page_title: Validation | Telerik UI for ASP.NET MVC
+description: "Use client-side validation with Telerik UI for ASP.NET MVC."
+slug: validation_aspnetmvc
+position: 5
 ---
 
 # Validation

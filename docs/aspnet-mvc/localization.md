@@ -1,9 +1,9 @@
 ---
-title: Globalization
-page_title: Globalization | Telerik UI for ASP.NET MVC
-description: "Use different cultures with Telerik UI for ASP.NET MVC."
-slug: globalization_aspnetmvc
-position: 6
+title: Localization
+page_title: Localization | Telerik UI for ASP.NET MVC
+description: "Localize the content of a Telerik UI for ASP.NET MVC application."
+slug: localization_aspnetmvc
+position: 7
 ---
 
 # Globalization and Localization

@@ -1,8 +1,9 @@
 ---
 title: ASP.NET MVC 3
-page_title: Using Telerik UI for ASP.NET MVC with MVC 3
-description: How to use Telerik UI  for ASP.NET MVC in ASP.NET MVC 3 applications
-position: 1
+page_title: ASP.NET MVC 3 | Telerik UI for ASP.NET MVC
+description: "Use Telerik UI for ASP.NET MVC in ASP.NET MVC 3 applications."
+slug: aspnetmvc3_aspnetmvc
+position: 10
 ---
 
 # Telerik UI for ASP.NET MVC in MVC 3 applications

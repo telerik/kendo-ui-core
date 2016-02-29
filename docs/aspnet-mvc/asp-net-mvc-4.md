@@ -1,8 +1,9 @@
 ---
 title: ASP.NET MVC 4
-page_title: Using Telerik UI for ASP.NET MVC with MVC 4
-description: How to use Telerik UI for ASP.NET MVC in ASP.NET MVC 4 applications
-position: 2
+page_title: ASP.NET MVC 4 | Telerik UI for ASP.NET MVC
+description: "Use Telerik UI for ASP.NET MVC in ASP.NET MVC 4 applications."
+slug: aspnetmvc4_aspnetmvc
+position: 11
 ---
 
 # Telerik UI for ASP.NET MVC in MVC 4 applications
