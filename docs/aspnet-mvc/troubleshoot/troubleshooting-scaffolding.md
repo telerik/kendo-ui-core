@@ -10,7 +10,7 @@ position: 2
 
 This page provides solutions to common issues you may encounter while working with the Kendo UI Scaffolder Visual Studio extension.
 
-## Scenarios
+## Common Scaffolding Issues
 
 ### New Scaffolded Item Menu Is Not Displayed When Right-Clicking Project Locations
 

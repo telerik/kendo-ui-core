@@ -126,7 +126,7 @@ After you run the sample application, read through the following articles, relat
 
 ## See Also
 
-Other articles and examples on Telerik UI for MVC:
+Other articles and examples on Telerik UI for ASP.NET MVC:
 
 * [Collected ASP.NET MVC Examples](https://github.com/telerik/kendo-examples-asp-net-mvc)
 * [Collected Examples on ASP.NET Web Technologies](https://github.com/telerik/kendo-examples-asp-net)
