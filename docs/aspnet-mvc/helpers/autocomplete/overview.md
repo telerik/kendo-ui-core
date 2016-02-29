@@ -2,6 +2,7 @@
 title: Overview
 page_title: Help Guide for AutoComplete HtmlHelper extension | Kendo UI documentation
 description: Instructions how to configure the Kendo UI AutoComplete for ASP.NET MVC widget for server binding and add AutoComplete HtmlHelper extension.
+slug: overview_autocompletehelper_aspnetmvc
 ---
 
 # AutoComplete
@@ -332,4 +333,3 @@ You can subscribe to all [events](/api/web/autocomplete#events) exposed by Kendo
             </text>)
       )
     )
-

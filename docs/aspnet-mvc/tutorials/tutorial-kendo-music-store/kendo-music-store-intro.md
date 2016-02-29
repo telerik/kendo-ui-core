@@ -1,5 +1,6 @@
 ---
 title: Introduction
+slug: overview_muscistoretutorial_aspnetmvc
 position: 1
 ---
 
