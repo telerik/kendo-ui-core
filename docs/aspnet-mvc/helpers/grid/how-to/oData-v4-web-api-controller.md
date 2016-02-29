@@ -2,6 +2,7 @@
 title: oData v4 with WebAPI controller
 page_title: oData v4 with WebAPI controller
 description: oData v4 with WebAPI controller
+slug: howto_useodata4webapicontroller_gridaspnetmvc
 ---
 
 # Using oData v4 with WebAPI controller

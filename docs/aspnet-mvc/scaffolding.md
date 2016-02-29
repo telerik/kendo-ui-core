@@ -6,53 +6,77 @@ slug: scaffolding_aspnetmvc
 position: 3
 ---
 
-# Kendo UI Scaffolder Visual Studio extension
+# Scaffolding
 
-Since the **Q1 2015** release, **Telerik UI for ASP.NET MVC** contains the **Kendo UI Scaffolder** extension. It
-allows the developer to generate an MVC wrapper widget declarations together with the related Controller action methods. Currently the Kendo UI Grid, Scheduler and Chart widgets can be scaffolded. More widgets will be added in future releases.
+As of the Kendo UI Q1 2015 release, Telerik UI for ASP.NET MVC contains the Kendo UI Scaffolder extension. It allows you to generate MVC-wrapper widget declarations together with the related Controller action methods. Currently, the Kendo UI Grid, Scheduler, and Chart widgets can be scaffolded. More widgets will be added in future releases.
 
-# Requirements and Supported Environments
+## Getting Started
+
+### Requirements
 
 * Visual Studio 2013 (with Update 2 or higher) or Visual Studio 2015
 * ASP.NET MVC 4 or ASP.NET MVC 5
 * C#
 * Entity Framework Data Model
 
-# Installation
+### Installation
 
 The extension will be automatically installed by the **Telerik UI for ASP.NET MVC** installer.
 
 You could also manually install it by navigating to the **wrappers\aspnetmvc\Scaffolding** folder of the distribution package and opening the included **vsix** file. It will automatically detect compatible Visual Studio versions.
 
-# Usage
+### Initial Setup
 
-The **Kendo UI Scaffolder** extension could be accessed through the **New Scaffolded Item...** menu which has different items depending on the currently installed Scaffolders:
+To use the Kendo UI Scaffolder Visual Studio extension, follow the steps below.
+
+**Step 1** The Kendo UI Scaffolder extension could be accessed through the **New Scaffolded Item...** menu which has different items depending on the currently installed Scaffolders.
+
+**Figure 1. New scaffolded items**
 
 ![New Scaffolded Item](/aspnet-mvc/images/scaffolding/new_scaffolded_item.png)
 
-Select the **Kendo UI Scaffolder** from the next menu:
+**Step 2** Select the **Kendo UI Scaffolder** from the next menu.
+
+**Figure 2. Kendo UI Scaffolder**
 
 ![Kendo UI Scaffolder](/aspnet-mvc/images/scaffolding/kendo_ui_scaffolder.png)
 
-This will bring up the **Kendo UI** scaffolding configuration panel to choose between Kendo UI Grid, Chart and Scheduler:
+**Step 3** This brings up the Kendo UI scaffolding configuration panel to choose between the Kendo UI Grid, Chart, or Scheduler controls.
+
+**Figure 3. Kendo UI Scaffolder widget selection**
 
 ![Kendo UI Scaffolder Widget Selection](/aspnet-mvc/images/scaffolding/widget_select.png)
 
-Detailed information about the possible configuration options could be found in the [scaffolding section of the Grid Helper documentation](/aspnet-mvc/helpers/grid/scaffolding), [scaffolding section of the Chart Helper documentation](/aspnet-mvc/helpers/chart/scaffolding) and [scaffolding section of the Scheduler Helper documentation](/aspnet-mvc/helpers/scheduler/scaffolding). The Controller will be generated in the currently selected location along with the corresponding view.
+For detailed information on possible configuration options, refer to the following articles:
 
-# Troubleshooting
+* [Scaffolding of the Grid HtmlHelper]({% slug scaffoldinggrid_aspnetmvc %})
+* [Scaffolding of the Chart HtmlHelper]({% slug scaffoldingchart_aspnetmvc %})
+* [Scaffolding of the Scheduler HtmlHelper]({% slug scaffoldingscheduler_aspnetmvc %})
 
-This list provides solutions to common problems you may encounter while working with the **Kendo UI Scaffolder** extension.
+The Controller will be generated in the currently selected location along with the corresponding view.
 
-### The "New Scaffolded Item..." menu is not displayed when right clicking a project location.
+## Troubleshooting
 
-* Make sure that a compatible Visual Studio version is used and all of the listed requirements are fulfilled.
-* Check if the **Kendo UI Scaffolder** extension is listed in the **Tools | Extensions and Updates** list.
+For a list of issues and solutions to common problems you may encounter while working with the Kendo UI Scaffolder Vosual Studio extension, refer to the [troubleshooting article on scaffolding]({% slug troubleshooting_scaffolding_aspnetmvc %}).
 
-### The "Data Context Class" DropDownList is empty.
+## See Also
 
-* Make sure that the current project contains a valid **Entity Framework Data Model**. If this is true, rebuild the solution.
+Other articles on Telerik UI for MVC:
 
-### I get "Invalid model configuration" error when running the scaffolder.
-
-* The most probable reason for this error is that the selected **Model Class** is not a valid entity in the current **Data Context**. Make sure that a valid entity is selected.
+* [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
+* [Fundamentals]({% slug fundamentals_aspnetmvc %})
+* [Custom DataSource]({% slug customdatasource_aspnetmvc %})
+* [Validation]({% slug validation_aspnetmvc %})
+* [Globalization]({% slug globalization_aspnetmvc %})
+* [Localization]({% slug localization_aspnetmvc %})
+* [Visual Basic Syntax]({% slug visualbasic_aspnetmvc %})
+* [Wrappers vs Widgets]({% slug wrappersvswidgets_aspnetmvc %})
+* [Visual Studio Integration]({% slug overview_visualstudio_aspnetmvc %})
+* [Migration from Telerik Extensions]({% slug overview_migrationextensions_aspnetmvc %})
+* [HtmlHelpers]({% slug overview_autocompletehelper_aspnetmvc %})
+* [ASP.NET MVC 3]({% slug aspnetmvc3_aspnetmvc %})
+* [ASP.NET MVC 4]({% slug aspnetmvc4_aspnetmvc %})
+* [ASP.NET MVC 5]({% slug aspnetmvc5_aspnetmvc %})
+* [ASP.NET MVC 6]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Tutorials]({% slug overview_muscistoretutorial_aspnetmvc %})

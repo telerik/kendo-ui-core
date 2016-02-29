@@ -2,6 +2,7 @@
 title: Scaffolding
 page_title: How to use the Kendo UI Scaffolder extension.
 description: Learn how to scaffold Kendo UI Chart for ASP.NET MVC using the Kendo UI Scaffolder extension for Visual Studio.
+slug: scaffoldingchart_aspnetmvc
 ---
 
 # Chart Scaffolding
@@ -58,6 +59,6 @@ This screen contains the Chart functionalities that could be configured before s
 ![Series options](/aspnet-mvc/helpers/chart/images/scaffolding/series_options_1.png)
     - Add More Series - Adds one additional configuration panel for a series.
 
-Each field marked with a star * is mandatory and the rest of the fields are optional. 
+Each field marked with a star * is mandatory and the rest of the fields are optional.
 
 When finished with the Chart configuration, click the **Add** button at the bottom. The Chart Controller and the corresponding View will be generated.

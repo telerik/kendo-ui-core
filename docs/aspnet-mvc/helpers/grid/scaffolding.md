@@ -2,6 +2,7 @@
 title: Scaffolding
 page_title: How to use the Kendo UI Scaffolder extension.
 description: Learn how to scaffold Kendo UI Grid for ASP.NET MVC using the Kendo UI Scaffolder extension for Visual Studio.
+slug: scaffoldinggrid_aspnetmvc
 ---
 
 # Grid Scaffolding
