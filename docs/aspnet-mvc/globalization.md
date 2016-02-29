@@ -6,17 +6,7 @@ slug: globalization_aspnetmvc
 position: 6
 ---
 
-# Globalization and Localization
-
-- [Globalization](#globalization)
-    - [Use the same culture on the server and client-side](#use-the-same-culture-on-the-server-and-client-side)
-      - [Set the server-side culture](#set-the-server-side-culture)
-      - [Set the client-side culture to match the one on the server](#set-the-client-side-culture-to-match-the-one-on-the-server)
-- [Localization](#localization)
-    - [Changing the localization messages](#changing-the-localization-messages)
-    - [Adding new localizations](#adding-new-localizations)
-
-## Globalization
+# Globalization
 
 Globalization is the process of designing and developing an application that works in multiple cultures and languages.
 The culture defines specific information for the number formats, week and month names, date and time formats etc.
@@ -111,80 +101,3 @@ to the **~/Scripts/cultures/** directory of your application.
             <script>
                 kendo.culture("@culture");
             </script>
-
-## Localization
-
-If the `CurrentUICulture` is set (from code or **web.config**) Telerik UI for ASP.NET MVC will use localized user interface messages.
-
-Telerik UI for ASP.NET MVC comes with localized messages for the following cultures:
-
-- bg-BG - Bulgarian (Bulgaria)
-- da-DK - Danish (Denmark)
-- de-DE - German (Germany)
-- es-ES - Spanish (Spain)
-- en-US - English (US)
-- fr-FR - French (French)
-- nl-NL - Dutch (Netherlands)
-- pl-PL - Polish (Poland)
-- pt-BR - Portuguese (Brazil)
-- pt-PT - Portuguese (Portugal)
-- ro-RO - Romanian (Romania)
-- ru-RU - Russian (Russia)
-- sv-SE - Swedish (Sweden)
-- uk-UA - Ukrainian (Ukraine)
-- zh-CN - Chinese (PRC)
-
-If the `CurrentUICulture` is not supported the default "en-US" will be used.
-
-> The culture used for the localization messages is determined by the `CurrentUICulture` property and **not** by `CurrentCulture`.
-
-### Changing the localization messages
-
-Telerik UI for ASP.NET MVC uses [satellite assemblies](http://blogs.msdn.com/b/global_developer/archive/2011/07/22/introduction-to-satellite-assemblies.aspx) to support localization (user interface messages localized for a set of cultures).
-
-To change the provided localization messages a custom version of Kendo.Mvc.dll must be built. This is required because Kendo.Mvc.dll is a strongly named assembly and its private key is not shipped as part of the Telerik UI for ASP.NET MVC distribution.
-
-1. Open the **\src\Kendo.Mvc\Kendo.Mvc.csproj** Visual Studio project. The **\src** directory is available only with the commercial version of Telerik UI for ASP.NET MVC.
-1. Locate the **Resources** directory in the solution explorer. It contains the resource files for the supported cultures.
-![Resources](/aspnet-mvc/images/resources.png)
-1. Open the resource file which corresponds to the target culture e.g. "Messages.es-ES.resx".
-1. Edit the resource file and save it.
-1. Change the solution configuration to "Release".
-1. Build the project.
-1. Copy **\src\Kendo.Mvc\bin\Release\Kendo.Mvc.dll** and **\src\Kendo.Mvc\bin\Release\es-ES\Kendo.Mvc.resources.dll** to your ASP.NET MVC application.
-1. Update the Kendo.Mvc.dll assembly reference to the newly copied one.
-
-Apart from building a custom version of Kendo.Mvc.dll you can specify a new value for the corresponding message in the MVC HtmlHelper configuration.
-
-For example to change the default message for the "create" grid toolbar command you can do the following:
-- ASPX
-
-        <%:Html.Kendo().Grid<Product>()
-               .Toolbar(toolbar =>
-               {
-                   toolbar.Create().Text("Add new product");
-               })
-        %>
-- Razor
-
-        @(Html.Kendo().Grid<Product>()
-              .Toolbar(toolbar =>
-              {
-                toolbar.Create().Text("Add new product");
-              })
-        )
-
-### Adding new localizations
-
-To add a localization for a new language a custom version of Kendo.Mvc.dll must be built. This is required because Kendo.Mvc.dll is a strongly named assembly and its private key is not shipped as part of the Telerik UI for ASP.NET MVC distribution.
-
-1. Open the **\src\Kendo.Mvc\Kendo.Mvc.csproj** Visual Studio project. The **\src** directory is available only with the commercial version of Telerik UI for ASP.NET MVC.
-1. Locate the **Resources** directory in the solution explorer. It contains the resource files for the supported cultures.
-![Resources](/aspnet-mvc/images/resources.png)
-1. Copy **Messages.resx** and paste it. Rename the copy to **Messages.culture-code.resx** e.g. **Messages.es-MX.resx**.
-1. Open the newly created resource file.
-1. Edit the resource file and save it. The **Messagex.resx** file contains the English messages.
-1. Change the solution configuration to "Release".
-1. Build the project.
-1. Copy **\src\Kendo.Mvc\bin\Release\Kendo.Mvc.dll** and **\src\Kendo.Mvc\bin\Release\es-MX\Kendo.Mvc.resources.dll** to your ASP.NET MVC application.
-1. Update the Kendo.Mvc.dll assembly reference to the newly copied one.
