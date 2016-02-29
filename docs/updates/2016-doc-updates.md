@@ -104,6 +104,7 @@ Some UI for ASP.NET MVC articles now share new locations, which conceptually bet
 In addition to the renaming and relocation of the above articles, some new ones are now created&mdash;from scratch or as a result of splitting existing ones&mdash;to the purpose of making the documented information more handy.
 
 * A new troubleshooting article on Scaffolding when using the Kendo UI Scaffolder Visual Studio Extension is now available. Go to **UI for ASP.NET MVC** > **Troubleshooting** > **Scaffolding** to check it out.
+* A new troubleshooting article on Validation is now available. Go to **UI for ASP.NET MVC** > **Troubleshooting** > **Validation** to check it out.
 * The **Globalization and Localization** article on Telerik UI for ASP.NET MVC is now split to list the two topics separately for a better navigation. The current location of them both is **UI for ASP.NET MVC** > **Globalization** and **UI for ASP.NET MVC** > **Localization** respectively.
 
 ## Kendo UI Q1 2016
