@@ -2,6 +2,7 @@
 title: Editor Templates
 page_title: Editor Templates for Kendo UI Grid ASP.NET MVC
 description: How to create the editing UI of Kendo Grid ASP.NET MVC with ASP.NET MVC editor templates.
+slug: editortemplates_grid_aspnetmvc
 ---
 
 # Editor Templates
@@ -101,4 +102,3 @@ step 3 sans the extension i.e. `"EmployeeEditor"`.
             [UIHint("EmployeeEditor")]
             public Employee Employee { get; set; }
         }
-

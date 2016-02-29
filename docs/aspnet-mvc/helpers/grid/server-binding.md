@@ -2,6 +2,7 @@
 title: Server Binding
 page_title: Server binding in Telerik UI for ASP.NET MVC | Kendo UI Documentation
 description: Set the data source and render the view to bind Kendo UI Grid for ASP.NET MVC with data by using server binding.
+slug: serverbinding_grid_aspnetmvc
 ---
 
 # Server Binding
