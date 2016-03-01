@@ -1052,7 +1052,7 @@ function pad(number, digits, end) {
             }
         }
 
-        return value !== undefined && value !== null ? value : "";
+        return value !== undefined ? value : "";
     };
 
     kendo.format = function(fmt) {
