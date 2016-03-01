@@ -7,7 +7,7 @@ slug: howto_dynamic_language_change
 
 # Change Languages Dynamically
 
-The example below demonstrates how to dynamically change the language of the Kendo UI Grid. This is an AngularJS version of [this demo](http://demos.telerik.com/kendo-ui/grid/localization)
+The example below demonstrates how to dynamically change the language of the Kendo UI Grid. This is an AngularJS version of [this demo](http://demos.telerik.com/kendo-ui/grid/localization).
 
 ###### Example
 
