@@ -121,9 +121,9 @@ The example below demonstrates how to set custom actions in a Window.
 
 ### Positioning and Opening
 
-In some scenarios, it is preferable to center a Window rather than open it near the HTML element used to define the content. It is also common to open a Window as the result of the action of a user rather than on the `load` event of a page. The [Window API](/api/javascript/ui/window) provides methods for handling these scenarios.
+In lots of scenarios, it is preferable to center the Window rather than open it near the HTML element used to define its content. It is also common to open a Window as the result of a user action, rather than on the `load` event of the page. The [Window API](/api/javascript/ui/window) provides methods for handling these scenarios. Basically, the widget can be initialized as non-visible and opened when needed.
 
-The example below demonstrates how to center a Kendo UI Window and open it on button click.
+The example below demonstrates how to center and open a Kendo UI Window on button click.
 
 ###### Example
 
@@ -137,18 +137,17 @@ The example below demonstrates how to initialize a Window, center, and configure
 ###### Example
 
     $(document).ready(function(){
-        var win = $("#window").kendoWindow({
-            height: "200px",
+        $("#window").kendoWindow({
+            width: 200,
+            height: 200,
             title: "Centered Window",
-            visible: false,
-            width: "200px"
+            visible: false            
         }).data("kendoWindow");
     });
 
     $("#openButton").click(function(){
         var win = $("#window").data("kendoWindow");
-        win.center();
-        win.open();
+        win.center().open();
     });
 
 ### Dimensions
