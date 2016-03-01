@@ -1,13 +1,13 @@
 ---
-title: Show Category Axis labels in two rows
-page_title: Show Category Axis labels in two rows | Kendo UI Charts
-description: "Learn how to show Category Axis labels in two rows."
+title: Show Category Axis Labels in Two Rows
+page_title: Show Category Axis Labels in Two Rows | Kendo UI Charts
+description: "Learn how to show Category Axis labels in two rows when working with Kendo UI Charts."
 slug: howto_showlabelsintworows_charts
 ---
 
-# Show Category Axis labels in two rows
+# Show Category Axis Labels in Two Rows
 
-The example below demonstrates how to show Category Axis labels in two rows.
+The example below demonstrates how to show Category Axis labels in two rows when working with Kendo UI Charts.
 
 ###### Example
 
@@ -113,3 +113,5 @@ Other articles and how-to examples on Kendo UI Charts:
 * [How to Sort Categories in Grouped Charts]({% slug howto_sortcategorisinagroupedchart_charts %})
 * [How to Use Fixed Bar Size]({% slug howto_usefixedbarsize_charts %})
 * [How to Use Hyperlinks in Axes Labels]({% slug howto_usehyperlinks_inaxislabels_charts %})
+
+For more runnable examples on Kendo UI Charts, browse the [how-to section of articles]({% slug howto_createdynamicplotbands_charts %}).

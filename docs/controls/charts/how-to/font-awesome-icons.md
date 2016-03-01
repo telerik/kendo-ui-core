@@ -77,3 +77,6 @@ Other articles and how-to examples on Kendo UI Charts:
 * [How to Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})
 * [How to Render Custom Plot Bands]({% slug howto_rendercustomplotbands_charts %})
 * [How to Shorten Chart Labels]({% slug howto_shortenchartlabels_charts %})
+* [How to Use Linear Gradient As Background in Bars]({% slug howto_uselineargradient_inbars_charts %})
+
+For more runnable examples on Kendo UI Charts, browse the [how-to section of articles]({% slug howto_createdynamicplotbands_charts %}).
