@@ -4249,6 +4249,8 @@ The event handler function context (available via the `this` keyword) will be se
 
 It is possible to prevent the remote request. To achieve this, execute `e.preventDefault()` in the handler function.
 
+> This event can be prevented only for `read` requests.
+
 #### Event Data
 
 ##### e.sender `kendo.data.DataSource`
