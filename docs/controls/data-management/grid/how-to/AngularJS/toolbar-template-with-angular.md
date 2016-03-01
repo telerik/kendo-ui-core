@@ -48,6 +48,7 @@ Other articles on [Kendo UI Grid](http://www.telerik.com/kendo-ui/grid) and how-
 
 * [JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Bind to Telerik Backend Services]({% slug howto_bindto_telerik_backend_services_grid %})
+* [How to Change Languages Dynamically]({% slug howto_dynamic_language_change %})
 * [How to Create Custom Editors]({% slug howto_create_custom_editors_grid %})
 * [How to Create Custom Edit Buttons]({% slug howto_create_custom_edit_buttons_grid %})
 * [How to Use AngularJS in Popup Editor Templates]({% slug howto_use_angularin_popup_editor_templates_grid %})

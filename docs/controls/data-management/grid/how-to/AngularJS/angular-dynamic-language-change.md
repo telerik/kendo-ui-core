@@ -1,13 +1,13 @@
 ---
-title: Dynamically change the langulage
-page_title: Dynamically change the language | Kendo UI Grid
-description: "Learn how to dynamically change the laguage of Kendo UI Grid widget in AngularJS application."
+title: Change Languages Dynamically
+page_title: Change Languages Dynamically | Kendo UI Grid
+description: "Learn how to dynamically change the language of a Kendo UI Grid widget in an AngularJS application."
 slug: howto_dynamic_language_change
 ---
 
-# Create Custom Editors
+# Change Languages Dynamically
 
-The example below demonstrates how to dynamically change the language of Kendo UI Grid. This is an AngularJS version of [this demo](http://demos.telerik.com/kendo-ui/grid/localization)
+The example below demonstrates how to dynamically change the language of the Kendo UI Grid. This is an AngularJS version of [this demo](http://demos.telerik.com/kendo-ui/grid/localization)
 
 ###### Example
 
@@ -85,3 +85,15 @@ The example below demonstrates how to dynamically change the language of Kendo U
         });
 </script>
 ```
+
+## See Also
+
+Other articles on Kendo UI Grid and how-to examples related to AngularJS:
+
+* [JavaScript API Reference](/api/javascript/ui/grid)
+* [How to Bind to Telerik Backend Services]({% slug howto_bindto_telerik_backend_services_grid %})
+* [How to Create Custom Editors]({% slug howto_create_custom_editors_grid %})
+* [How to Create Custom ToolBar Templates]({% slug howto_create_custom_toolbar_templates_grid %})
+* [How to Create Custom Edit Buttons]({% slug howto_create_custom_edit_buttons_grid %})
+* [How to Use Resize Columns from a Button]({% slug howto_resize_columnsfrom_abutton_grid %})
+* [How to Use AngularJS in Popup Editor Templates]({% slug howto_use_angularin_popup_editor_templates_grid %})
