@@ -1218,20 +1218,13 @@ var __meta__ = { // jshint ignore:line
             var dataItem = parent.dataItem();
             var filterValue = dataItem ? parent._value(dataItem) : null;
             var valueField = that.options.cascadeFromField || parent.options.dataValueField;
-            var expressions, filters;
+            var expressions;
 
             that._valueBeforeCascade = valueBeforeCascade !== undefined ? valueBeforeCascade : that.value();
 
             if (filterValue || filterValue === 0) {
                 expressions = that.dataSource.filter() || {};
                 removeFiltersForField(expressions, valueField);
-                filters = (expressions.filters || []).slice(0);
-
-                filters.push({
-                    field: valueField,
-                    operator: "eq",
-                    value: filterValue
-                });
 
                 var handler = function() {
                     that.unbind("dataBound", handler);
