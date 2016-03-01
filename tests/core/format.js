@@ -45,8 +45,8 @@ test("format replaces multiple placeholders when there are missing arguments", f
     equal(format("foo {0} {1}", "bar"), "foo bar ");
 });
 
-test("format with null arguments", function() {
-    equal(format("{0}", null), "null");
+test("format with null arguments return empty string", function() {
+    equal(format("{0}", null), "");
 });
 
 test("format with reverse order of placeholders", function() {
