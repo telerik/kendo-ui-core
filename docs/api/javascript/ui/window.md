@@ -464,7 +464,7 @@ Centers the window within the viewport.
 
 #### Returns
 
-`kendo.ui.Window` Returns the window object to support chaining.
+`kendo.ui.Window` Returns the window object to support chaining, for example center and open the Window with a single expression.
 
 #### Example
 
@@ -473,6 +473,8 @@ Centers the window within the viewport.
     $("#dialog").kendoWindow();
     var dialog = $("#dialog").data("kendoWindow");
     dialog.center();
+    // chaining example
+    // dialog.center().open();
     </script>
 
 ### close
