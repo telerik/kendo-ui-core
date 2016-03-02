@@ -6,123 +6,182 @@ slug: aspnetmvc5_aspnetmvc
 position: 12
 ---
 
-# Telerik UI for ASP.NET MVC in MVC 5 applications
-This tutorial shows how to use Telerik UI for ASP.NET MVC in ASP.NET MVC 5 applications. The tutorial uses Visual Studio 2013 but will work with all Visual Studio versions that support ASP.NET MVC 5. The tutorial also creates a new ASP.NET MVC 5 application but the steps to use Telerik UI for ASP.NET MVC in existing ASP.NET MVC 5 application are the same.
+# ASP.NET MVC 5
 
-**The Telerik UI for ASP.NET MVC Visual Studio extensions (http://docs.telerik.com/kendo-ui/aspnet-mvc/vs-integration/introduction) automate the whole procedure which this document describes.**
-## Create a new ASP.NET MVC 5 Application
+This article demonstrates how to use Telerik UI for ASP.NET MVC in ASP.NET MVC 5 applications. It uses Visual Studio 2013 but the examples are applicable to all Visual Studio versions that support ASP.NET MVC 5. The examples create a new ASP.NET MVC 5 application but the steps to use Telerik UI for ASP.NET MVC in existing ASP.NET MVC 5 applications are the same.
 
-To create a new ASP.NET MVC 5 Application follow these steps.
+> **Important**
+>
+> The Telerik UI for ASP.NET MVC Visual Studio extensions ({% slug overview_visualstudio_aspnetmvc %}) automate the whole procedure which this document describes.
 
-1. Open **Visual Studio 2013**.
-2. Press **CTRL+SHIFT+N** to create a new project.
-3. Select the **Visual C#** node and then **Web** to show all available web project templates for C#.
-4. Select **ASP.NET Web Application** and click **OK**. This will start the **New ASP.NET  Project** wizard.
-5. Select **MVC** from the available templates and click **OK**.
-6. Press **CTRL+F5** to build and run the application.
+## Create New ASP.NET MVC 5 Applications
+
+Below are listed the steps for you to follow when creating a new ASP.NET MVC 5 application.
+
+**Step 1** Open Visual Studio 2013.
+
+**Step 2** Press `CTRL+SHIFT+N` to create a new project.
+
+**Step 3** Select the **Visual C#** > **Web** to show all available web project templates for C#.
+
+**Step 4** Select **ASP.NET Web Application** > **OK**. This starts the **New ASP.NET Project** wizard.
+
+**Step 5** Select **MVC** from the available templates and click **OK**.
+
+**Step 6** Press `CTRL+F5` to build and run the application.
+
+**Figure 1. The new ASP.NET MVC 5 application**
+
 ![New ASP.NET MVC 5 Application](/aspnet-mvc/images/mvc5-new-app.png)
 
-## Add Telerik UI for ASP.NET MVC to the application
+## Add Telerik UI for ASP.NET MVC
 
-To use Telerik UI for ASP.NET MVC you need to include the required JavaScript and CSS files, reference the Kendo.Mvc.dll assembly and update the web.config file of the application.
+To use Telerik UI for ASP.NET MVC, include the required JavaScript and CSS files, reference the `Kendo.Mvc.dll` assembly and update the `web.config` file of the application.
 
-### Include the JavaScript and CSS files
+### Include JavaScript and CSS Files
 
-Telerik UI for ASP.NET MVC requires certain JavaScript and CSS files to be included in the page. There are two options - either to include a local copy of those files **or** to use our CDN (Content Delivery Network).
+Telerik UI for ASP.NET MVC requires certain JavaScript and CSS files to be included in the page.
 
-#### Using local JavaScript and CSS
+There are two options:
+* Either include a local copy of those files
+* Or use the Kendo UI CDN (Content Delivery Network) services
 
-To copy the Telerik UI for ASP.NET MVC JavaScript and CSS files in the Visual Studio Solution of the application follow these steps.
+#### Use Local JavaScript and CSS
 
-1. Navigate to the install location of Telerik UI for ASP.NET MVC**. By default it is in **C:\Program Files (x86)\Telerik\.
-2. Copy the **js** directory from the install location and paste it in the **Script** folder of the application.
-3. Copy the **styles** directory from the install location and paste it in the **Content** folder of the application.
-4. Rename the **Scripts/js** directory to **Scripts/kendo**. Rename **Content/styles** to **Content/kendo**.
+Below are listed the steps for you to follow when copying the required JavaScript and CSS files in the Visual Studio Solution of the application.
+
+**Step 1** Navigate to the install location of Telerik UI for ASP.NET MVC. By default, it is in `C:\Program Files (x86)\Telerik\`.
+
+**Step 2** Copy the `js` directory from the install location and paste it in the `Scripts` folder of the application.
+
+**Step 3** Copy the `styles` directory from the install location and paste it in the `Content` folder of the application.
+
+**Step 4** Rename the `Scripts/js` directory to `Scripts/kendo`. Rename `Content/styles` to `Content/kendo`.
+
+**Figure 2. Kendo UI directories in the Solution Explorer**
 
 ![Kendo directories in Solution Explorer](/aspnet-mvc/images/mvc5-solution.png)
 
-After the required JavaScript and CSS files are added in the application you can include them.
+After the needed JavaScript and CSS files are added to the application, you can include them.
 
-1. Open **App_Start/BundleConfig.cs** to add bundles for Telerik UI for ASP.NET MVC.
-2. Add a script bundle for Telerik UI for ASP.NET MVC.
+**Step 5** Open `App_Start/BundleConfig.cs` to add bundles for Telerik UI for ASP.NET MVC.
+
+**Step 6** Add a script bundle for Telerik UI for ASP.NET MVC.
+
+###### Example
 
         bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
                     "~/Scripts/kendo/kendo.all.min.js",
                     // "~/Scripts/kendo/kendo.timezones.min.js", // uncomment if using the Scheduler
                     "~/Scripts/kendo/kendo.aspnetmvc.min.js"));
 
-3. Add a style bundle for Telerik UI for ASP.NET MVC. **It is important to read the [CSS Bundling](/aspnet-mvc/fundamentals#css-bundling) documentation**.
+**Step 7** Add a style bundle for Telerik UI for ASP.NET MVC.
+
+> **Important**
+>
+> Make sure you are familiar with the article on the Telerik UI for ASP.NET MVC [fundamentals and CSS bundling]({% slug fundamentals_aspnetmvc %}#css-bundling).
+
+###### Example
 
         bundles.Add(new StyleBundle("~/Content/kendo/css").Include(
                     "~/Content/kendo/kendo.common-bootstrap.min.css",
                     "~/Content/kendo/kendo.bootstrap.min.css"));
 
-4. Tell ASP.NET bundles to allow minified files in debug mode.
+**Step 8** Tell the ASP.NET bundles to allow minified files in debug mode.
+
+###### Example
 
         bundles.IgnoreList.Clear();
 
-5. Open the layout of the application. By default it is **Views/Shared/_Layout.cshtml** (or **Site.master** if using **ASPX**).
-6. Render the Telerik UI for ASP.NET MVC style bundle.
+**Step 9** Open the layout of the application. By default, it is `Views/Shared/_Layout.cshtml`, or `Site.master` if using ASPX.
 
-    - Razor
+**Step 10** Render the Telerik UI for ASP.NET MVC style bundle.
 
-            @Styles.Render("~/Content/kendo/css")
+**I. Razor**
 
-    - ASPX
+###### Example
 
-            <%: Styles.Render("~/Content/kendo/css") %>
+        @Styles.Render("~/Content/kendo/css")
 
-7. Move the jQuery bundle to the **head** tag of the page. It is at the end of the page by default.
-8. Render the Telerik UI for ASP.NET MVC script bundle **after** jQuery.
+**II. ASPX**
 
-    - Razor
+###### Example
 
-            @Scripts.Render("~/bundles/jquery")
-            @Scripts.Render("~/bundles/kendo")
+        <%: Styles.Render("~/Content/kendo/css") %>
 
-    - ASPX
+**Step 11** Move the jQuery bundle to the `head` tag of the page. It is at the end of the page by default.
 
-            <%: Scripts.Render("~/bundles/jquery") %>
-            <%: Scripts.Render("~/bundles/kendo") %>
+**Step 12** Render the Telerik UI for ASP.NET MVC script bundle after jQuery.
 
-#### Using CDN
+**I. Razor**
 
-To include the Telerik UI for ASP.NET MVC JavaScript and CSS files from CDN follow these steps. Important! Don't forget to replace "kendo ui version" from the code snippets below with the current version of the product, e.g. "2013.2.918".
+###### Example
 
-1. Open the layout of the application. By default it is **Views/Shared/_Layout.cshtml** (or **Site.master** if using ASPX).
-2. Include **kendo.common-bootstrap.min.css** and **kendo.bootstrap.min.css**. Add a **link** tag within the **head** tag of the layout.
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/kendo")
+
+**II. ASPX**
+
+###### Example
+
+        <%: Scripts.Render("~/bundles/jquery") %>
+        <%: Scripts.Render("~/bundles/kendo") %>
+
+#### Use CDN Services
+
+Below are listed the steps for you to follow when including the Telerik UI for ASP.NET MVC JavaScript and CSS files from CDN.
+
+> **Important**
+>
+> Make sure you replace the `kendo ui version` from the code snippets below with the current version of the product&mdash;for example, `2013.2.918`.
+
+**Step 1** Open the layout of the application. By default, it is `Views/Shared/_Layout.cshtml`, or `Site.master` if using ASPX.
+
+**Step 2** Include `kendo.common-bootstrap.min.css` and `kendo.bootstrap.min.css`. Add a `link` tag within the `head` tag of the layout.
+
+###### Example
 
         <link rel="stylesheet" href="http://kendo.cdn.telerik.com/<kendo ui version>/styles/kendo.common-bootstrap.min.css" />
         <link rel="stylesheet" href="http://kendo.cdn.telerik.com/<kendo ui version>/styles/kendo.bootstrap.min.css" />
 
-3. Move the jQuery bundle to the **head** tag of the page. It is at the end of the page by default.
-4. Include **kendo.all.min.js** and **kendo.aspnetmvc.min.js** _after_ jQuery.
+**Step 3** Include `kendo.all.min.js` and `kendo.aspnetmvc.min.js` after jQuery.
+
+###### Example
 
         <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.all.min.js"></script>
         <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.aspnetmvc.min.js"></script>
 
-5. If using Telerik MVC Scheduler wrapper, include **kendo.timezones.min.js** _after_ **kendo.all.min.js**
+**Step 4** If using the Telerik MVC Scheduler wrapper, include `kendo.timezones.min.js` after `kendo.all.min.js`.
+
+###### Example
 
         <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.all.min.js"></script>
         <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.timezones.min.js"></script>
         <script src="http://kendo.cdn.telerik.com/<kendo ui version>/js/kendo.aspnetmvc.min.js"></script>
 
-### Add reference to Kendo.Mvc.dll
+### Add Kendo.Mvc.dll Reference
 
-The next step is to add a reference to **Kendo.Mvc.dll** which is the assembly containing the Kendo UI MVC server-side wrappers.
+The next step is to add a reference to `Kendo.Mvc.dll` which is the assembly containing the Kendo UI MVC server-side wrappers.
 
-1. Right-click the **References** node in Solution Explorer and click **Add Reference**.
-2. Select the **Browse** tab of the **Add Reference** dialog and navigate to the install location of Telerik UI for ASP.NET MVC.
-3. Navigate to **wrappers/aspnetmvc/Binaries/MVC5**. This directory contains the ASP.NET MVC 5 version of Telerik UI for ASP.NET MVC.
-4. Select **Kendo.Mvc.dll** and click **OK**.
+**Step 1** Right-click the **References** node in Solution Explorer. Click **Add Reference**.
 
-### Update the web.config
+**Step 2** Select the **Browse** tab of the **Add Reference** dialog. Navigate to the install location of Telerik UI for ASP.NET MVC.
 
-The next step is to let ASP.NET MVC know of the Kendo.Mvc.UI namespace where the server-side wrappers are. To do this update the web.config file of the web application.
+**Step 3** Navigate to `wrappers/aspnetmvc/Binaries/MVC5`. This directory contains the ASP.NET MVC 5 version of Telerik UI for ASP.NET MVC.
 
-1. Open **Views/Web.config** (or root **Web.config** if using **ASPX**).
-1. Locate the **namespaces** tag.
-1. Append an **add** tag to the **namespaces** tag.
+**Step 4** Select `Kendo.Mvc.dll`. Click **OK**.
+
+### Update web.config
+
+The next step is to let ASP.NET MVC know of the `Kendo.Mvc.UI` namespace where the server-side wrappers are. To do this, update the `web.config` file of the web application.
+
+**Step 1** Open `Views/Web.config`, or root `Web.config` if using ASPX.
+
+**Step 2** Locate the `namespaces` tag.
+
+**Step 3** Append an `add` tag to the `namespaces` tag.
+
+###### Example
 
         <namespaces>
             <add namespace="System.Web.Mvc" />
@@ -132,36 +191,46 @@ The next step is to let ASP.NET MVC know of the Kendo.Mvc.UI namespace where the
             <add namespace="Kendo.Mvc.UI" />
         </namespaces>
 
-1. Add a binding redirect to your current System.Web.Mvc version
+**Step 4** Add a binding redirect to your current `System.Web.Mvc` version.
+
+###### Example
 
         <dependentAssembly>
             <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
             <bindingRedirect oldVersion="0.0.0.0-5.2.3.0" newVersion="5.2.3.0" />
         </dependentAssembly>
 
-## Use a Kendo UI widget
+## Use Kendo UI Widgets
 
-Finally lets use a Kendo UI widget via its MVC server wrapper initialization.
+Below are listed the steps for you to follow when using a Kendo UI widget through its MVC server-side wrapper initialization.
 
-1. Open the **Views/Home/Index.cshtml** view (or **Index.aspx** if using **ASPX**).
-2. Add a Kendo UI DatePicker widget.
-    - Razor
+**Step 1** Open the `Views/Home/Index.cshtml` view, or `Index.aspx` if using ASPX.
 
-            @(Html.Kendo().DatePicker().Name("datepicker"))
-    - ASPX
+**Step 2** Add a Kendo UI DatePicker widget.
 
-            <%: Html.Kendo().DatePicker().Name("datepicker") %>
+**I. Razor**
 
-3. Press **CTRL+F5** to build and run the application.
+###### Example
 
+        @(Html.Kendo().DatePicker().Name("datepicker"))
+
+**II. ASPX**
+
+###### Example
+
+        <%: Html.Kendo().DatePicker().Name("datepicker") %>
+
+**Step 3** Press `CTRL+F5` to build and run the application.
+
+**Figure 3. The final result**
 
 ![Final result](/aspnet-mvc/images/mvc5-final.png)
 
-## Next steps
+## Next Steps
 
-* [Fundamentals](/aspnet-mvc/fundamentals)
-* [Using the Telerik UI for ASP.NET MVC Visual Studio Extensions](/aspnet-mvc/vs-integration/introduction)
-* [Troubleshooting](/aspnet-mvc/troubleshooting)
+* [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
+* [Use the Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
 
 ## See Also
 

@@ -24,7 +24,7 @@ Below are listed the steps for you to follow when creating a new ASP.NET MVC 3 a
 
 **Step 3** Select the **Visual C#** > **Web** to show all available web project templates for C#.
 
-**Step 4** Select **ASP.NET MVC 3 Web Application** > **OK**. This starts the New ASP.NET MVC 3 Project wizard.
+**Step 4** Select **ASP.NET MVC 3 Web Application** > **OK**. This starts the **New ASP.NET MVC 3 Project** wizard.
 
 **Step 5** Select **Internet Application** from the available templates and click **OK**. Alternatively, you can select other templates&mdash;the remaining steps are the same.
 
