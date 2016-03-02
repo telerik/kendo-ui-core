@@ -24,7 +24,7 @@ Below are listed the steps for you to follow when creating a new ASP.NET MVC 4 a
 
 **Step 3** Select the **Visual C#** > **Web** to show all available web project templates for C#.
 
-**Step 4** Select **ASP.NET MVC 4 Web Application** > **OK**. This starts the New ASP.NET MVC 3 Project wizard.
+**Step 4** Select **ASP.NET MVC 4 Web Application** > **OK**. This starts the **New ASP.NET MVC 4 Project** wizard.
 
 **Step 5** Select **Internet Application** from the available templates and click **OK**. Alternatively, you can select other templates&mdash;the remaining steps are the same.
 
@@ -127,7 +127,7 @@ After the needed JavaScript and CSS files are added to the application, you can 
         <%: Scripts.Render("~/bundles/jquery") %>
         <%: Scripts.Render("~/bundles/kendo") %>
 
-#### Using CDN
+#### Use CDN Services
 
 Below are listed the steps for you to follow when including the Telerik UI for ASP.NET MVC JavaScript and CSS files from CDN.
 
