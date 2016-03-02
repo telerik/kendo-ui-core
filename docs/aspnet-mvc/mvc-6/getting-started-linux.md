@@ -1,50 +1,75 @@
 ---
-title: Getting Started On Linux
-page_title: Getting started with Telerik UI for ASP.NET MVC 6 on Linux
-description: How to configure a project to use Telerik UI for ASP.NET MVC 6 on Linux.
-position: 2
+title: Get Started on Linux
+page_title: Get Started on Linux | Telerik UI for ASP.NET MVC 6
+description: "Learn the basics when working with Telerik UI for ASP.NET MVC 6 on Linux."
+slug: gettingstartedlinux_aspnetmvc6_aspnetmvc
+position: 3
 ---
 
-# Using Telerik UI for ASP.NET MVC in MVC 6 applications on Linux
+# Get Started on Linux
 
-This tutorial shows how to configure an ASP.NET MVC6 project that enables you to use Telerik UI for ASP.NET MVC on Linux.
+This article demonstrates how to configure an ASP.NET MVC6 project that enables you to use Telerik UI for ASP.NET MVC on Linux.
 
 > **Important**  
+>
 > The following steps are tested on Ubuntu 14.04.
 
-## Prerequisites 
+## Prerequisites
 
-Make sure you have the [Microsoft ASP.NET (RC1)](http://docs.asp.net/en/latest/getting-started/installing-on-linux.html) installed.
+Make sure you install the [Microsoft ASP.NET (RC1)](http://docs.asp.net/en/latest/getting-started/installing-on-linux.html).
 
-## Create an ASP.NET MVC 6 Website
+## Configuration
 
-Please skip this step if you are configuring an existing project. We will use [Yeoman](http://yeoman.io/) to scaffold an empty ASP.NET application. 
+To configure an ASP.NET MVC6 project that enables you to use Telerik UI for ASP.NET MVC on Linux, do the following:
 
-**Step 1.** Install [Node.js](https://github.com/nodesource/distributions) v.4.x (if not yet installed):
-        
+1. Create an ASP.NET MVC web site.
+2. Add the Kendo UI NuGet package.
+
+### Create ASP.NET MVC 6 Web Sites
+
+Below are listed the steps for you to follow when creating an ASP.NET MVC 6 web site. The examples use [Yeoman](http://yeoman.io/) to scaffold an empty ASP.NET application.
+
+> **Important**
+>
+> Skip this step if you are configuring an existing project.
+
+**Step 1.** Install [Node.js](https://github.com/nodesource/distributions) v.4.x.
+
+###### Example
+
         curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
         sudo apt-get install -y nodejs
 
-**Step 2.** Check if the Node.js version is the desired one:
-        
+**Step 2.** Check if the Node.js version is the desired one.
+
+###### Example
+
         kendo@kendo-docker:~$ nodejs -v
         v4.2.2
 
-**Step 3.** Install Yeoman and an [aspnet](https://github.com/omnisharp/generator-aspnet#readme) generator:
+**Step 3.** Install Yeoman and an [aspnet](https://github.com/omnisharp/generator-aspnet#readme) generator.
+
+###### Example
 
         sudo npm install -g yo generator-aspnet
 
-**Step 4.** Navigate to the folder where you want to create the project folder using Terminal:
+**Step 4.** Navigate to the folder where you want to create the project folder using Terminal.
+
+###### Example
 
         kendo@kendo-docker:~$ mkdir Projects$
         kendo@kendo-docker:~$ cd Projects/
         kendo@kendo-docker:~/Projects$
-        
-**Step 5.** Type the following command:
+
+**Step 5.** Type the command from the example below.
+
+###### Example
 
         yo aspnet
-   
-**Result:** Now you are able to see the following response:
+
+As a result, the response demonstrated in the example below is shown.
+
+###### Example
 
         kendo@kendo-docker:~/Projects$ yo aspnet
 
@@ -56,86 +81,112 @@ Please skip this step if you are configuring an existing project. We will use [Y
             /___A___\    '--------------------------'
              |  ~  |     
            __'.___.'__   
-         ´   `  |° ´ Y ` 
-        
-        ? What type of application do you want to create? 
-          Empty Application 
-          Console Application 
-          Web Application 
-        ❯ Web Application Basic [without Membership and Authorization] 
-          Web API Application 
-          Nancy ASP.NET Application 
-          Class Library 
-          Unit test project 
+         ´   `  |° ´ Y `
 
-        
-**Step 6.** Navigate using the keyboard arrow keys to select the **Web Application Basic** option, and press `Enter`. Then create the name of the new application (you can skip this step and use the default name by pressing `Enter`). After setting the name, the generator will create the desired folder and the selected application. 
+        ? What type of application do you want to create?
+          Empty Application
+          Console Application
+          Web Application
+        ❯ Web Application Basic [without Membership and Authorization]
+          Web API Application
+          Nancy ASP.NET Application
+          Class Library
+          Unit test project
 
-**Result:** Now you are able to see the following response:
+
+**Step 6.** Select the **Web Application Basic** option by using the keyboard arrow keys and press `Enter`. Create the name of the new application. Note that you can skip this step and use the default name by pressing `Enter`. After setting the name, the generator creates the desired folder and the selected application.
+
+As a result, the response demonstrated in the example below is shown.
+
+###### Example
 
         Your project is now created, you can use the following commands to get going
             cd "WebApplicationBasic"
             dnu restore
             dnu build (optional, build will also happen when it's run)
             dnx web
-        
-**Step 7.** As stated in the above response, navigate to the created folder and execute the following command:
+
+**Step 7.** Navigate to the created folder and execute the command from the example below.
+
+###### Example
 
         dnu restore
-        
-**Result:** After typing the command above, the packages is downloaded from nuget. The end of the response looks like the following:
+
+As a result, the packages are downloaded from NuGet. The end of the response looks similar to the one demonstrated in the example below.
+
+###### Example
 
         Restore complete, 10070ms elapsed
-        
+
         Feeds used:
             https://api.nuget.org/v3-flatcontainer/
-        kendo@kendo-docker:~/Projects/WebApplicationBasic$ 
-        
-**Step 8.** Start the application using the following command:
+        kendo@kendo-docker:~/Projects/WebApplicationBasic$
+
+**Step 8.** Start the application by using the command from the example below.
+
+###### Example
 
         dnx web
-        
-**Result:** This delivers the following response:
+
+As a result, the response demonstrated in the example below is delivered.
+
+###### Example
 
         Hosting environment: Production
         Now listening on: http://localhost:5000
         Application started. Press Ctrl+C to shut down.
 
-**Step 9.** Finally, use your favorite browser to navigate to the above location and make sure the application is working in the way shown below. After checking the application in the browser, stop the server.
+**Step 9.** Use your favorite browser to navigate to the above location and make sure the application is working in the way shown below. After checking the application in the browser, stop the server.
+
+**Figure 1. The web application in the browser**
 
 ![Web application in browser](images/website.png)
 
-## Add Kendo UI MVC NuGet Package
+### Add NuGet Packages
 
-**Step 1.** Open the `project.json` file, using your favorite text editor, and add the `Kendo.Mvc` dependency:
+**Step 1.** Open the `project.json` file, using a text editor, and add the `Kendo.Mvc` dependency.
+
+###### Example
 
         "dependencies": {
             ...
             "Kendo.Mvc": "2015.3.1120"
         }
 
-**Step 2.** Navigate to the project folder and restore the packages again:
+**Step 2.** Navigate to the project folder and restore the packages again.
+
+###### Example
 
         dnu restore
 
-**Step 3.** Open `Startup.cs`, using your favorite text editor (IDE), and locate the `ConfigureServices` method. Add the following snippet:
+**Step 3.** Open `Startup.cs`, using a text editor (IDE), and locate the `ConfigureServices` method. Add the snippet demonstrated in the example below.
+
+###### Example
 
         // Register UI for ASP.NET MVC helpers
         services.AddKendo();
 
-**Step 4.** Import the `Kendo.Mvc.UI` namespace in `~/Views/_ViewImports.cshtml`:
+**Step 4.** Import the `Kendo.Mvc.UI` namespace in `~/Views/_ViewImports.cshtml`.
+
+###### Example
 
         @using Kendo.Mvc.UI
 
 **Step 5.** Copy the Kendo UI client-side resources.
 
-* Install manually by copying the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\lib\kendo-ui`:
+* **Manual installation**
+
+Copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\lib\kendo-ui`.
+
+**Figure 2. Kendo UI resources**
 
 ![Kendo UI resources](images/resources.png)
 
-* [Install Kendo UI Professional as a Bower package](/install/bower#install-kendo-ui-professional-bower-package)
+* **[Kendo UI Professional Bower package installation]({% slug kendoui_bower_packages_kendoui_installation %})**
 
-**Step 6.** Register Kendo UI styles and scripts in `~/Views/Shared/Layout.cshtml`:
+**Step 6.** Register Kendo UI styles and scripts in `~/Views/Shared/Layout.cshtml`.
+
+###### Example
 
         <head>
         ...
@@ -153,7 +204,9 @@ Please skip this step if you are configuring an existing project. We will use [Y
         @RenderSection("scripts", required: false)
         </body>
 
-**Step 7.** Use a Kendo UI widget, such as the DatePicker in the example below, by adding the following snippet to `~/Views/Home/Index.cshtml`:
+**Step 7.** Use a Kendo UI widget by adding the snippet demonstrated in the example below to `~/Views/Home/Index.cshtml`.
+
+###### Example
 
         <h2>Kendo UI DatePicker</h2>
 
@@ -166,10 +219,22 @@ Please skip this step if you are configuring an existing project. We will use [Y
             @Html.Kendo().DeferredScripts()
         }
 
-**Step 8.** Navigate to the project folder using Terminal and run it using the following command:
- 
+**Step 8.** Navigate to the project folder by using the Terminal and run it using the command shown in the example below.
+
+###### Example
+
         dnx web
 
-**Result:** All done
+Now that all is done, you can see the sample page.
+
+**Figure 3. The end result&mdash;a sample page**
 
 ![Sample page](images/sample-page.png)
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC in ASP.NET MVC 6 applications:
+
+* [Overview of Telerik UI for ASP.NET MVC 6 - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET MVC in MVC 6 Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Known Issues with Telerik UI for ASP.NET MVC 6]({% slug knownissues_aspnetmvc6_aspnetmvc %})

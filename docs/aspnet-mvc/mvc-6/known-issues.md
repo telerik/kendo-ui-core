@@ -1,29 +1,33 @@
 ---
 title: Known Issues
-page_title: Known issues when using Telerik UI for ASP.NET MVC in ASP.NET 5 and MVC 6
-description: Known issues when using Telerik UI for ASP.NET MVC in ASP.NET 5 and MVC 6
-position: 100
+page_title: Known Issues | Telerik UI for ASP.NET MVC 6
+description: "Read about known issues when using Telerik UI for ASP.NET MVC in ASP.NET 5 and MVC 6."
+slug: knownissues_aspnetmvc6_aspnetmvc
+position: 4
 ---
 
 # Known Issues
 
-This page contains a summary of all known issues with the Telerik UI for ASP.NET MVC version 6.
-Come back often for updates.
+This articles summarizes all known issues related to Telerik UI for ASP.NET MVC, version 6.
 
-> The ASP.NET 5 Framework is still actively developed. Tooling and APIs change frequently, often requiring extensive changes.
+> **Important**
+>
+> The ASP.NET 5 Framework is still actively being developed. Tooling and APIs change frequently, often requiring extensive changes.
 
-## ASP.NET 5 / MVC 6 Framework
+## MVC 6 Framework
 
-- Data Tables are not supported. See [dotnet/corefx#1039](https://github.com/dotnet/corefx/issues/1039)
-- Localization resources are not supported. See [dotnet/coreclr#2007](https://github.com/dotnet/coreclr/issues/2007).
+- Data Tables are not supported. For more information on this limitation, refer to [dotnet/corefx#1039](https://github.com/dotnet/corefx/issues/1039).
+- Localization resources are not supported. For more information on this limitation, refer to [dotnet/coreclr#2007](https://github.com/dotnet/coreclr/issues/2007).
 
-## UI Helpers
+## HtmlHelpers
 
-### Common
+### Common Issues
 
 - Limited set of helpers. Interim releases will add more widgets.
-- Localization is work in progress. See [aspnet/Home/issues/1124](https://github.com/aspnet/Home/issues/1142) for a discussion.
-- [Deferred()](/aspnet-mvc/fundamentals.html#deferred-initialization) can be invoked only as a last setting.
+- Localization is a work in progress.For a discussion, refer to [aspnet/Home/issues/1124](https://github.com/aspnet/Home/issues/1142).
+- [`Deferred()`](/aspnet-mvc/fundamentals.html#deferred-initialization) can be invoked only as a last setting.
+
+###### Example
 
         @(Html.Kendo().NumericTextBox()
               .Name("age")
@@ -31,15 +35,22 @@ Come back often for updates.
               .Deferred()
         )
 
-
 ### Grid
 
-- Server-side rendering is not supported (Toolbar template, Column Header template, Column Template are no longet rendered on the server)
+- Server-side rendering is not supported. The Toolbar template, Column Header template, and Column Template are no longer rendered on the server.
 
 ### Chart
 
-- `ChartAreaStyle` enum is now by `ChartLineStyle`
+- `ChartAreaStyle` enum is now by `ChartLineStyle`.
 
 ### MultiSelect
 
-- `TagMode` enum is now by `MultiSelectTagMode`
+- `TagMode` enum is now by `MultiSelectTagMode`.
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC in ASP.NET MVC 6 applications:
+
+* [Overview of Telerik UI for ASP.NET MVC 6 - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET MVC in MVC 6 Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET MVC in MVC 6 Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
