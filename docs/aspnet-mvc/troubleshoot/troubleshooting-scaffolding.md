@@ -37,9 +37,14 @@ Make sure that a valid entity is selected.
 
 Other articles on troubleshooting:
 
+* [Common Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_common_issues_kendoui %})
+* [Validation Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_validation_aspnetmvc %})
+* [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/grid/troubleshooting)
+* [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/upload/troubleshooting)
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
-* [Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
-* [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
+* [Kendo UI JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
+* [Kendo UI Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
+* [Kendo UI Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
 * [Common Issues in Kendo UI Excel Export]({% slug troubleshooting_excel_export_kendoui %})
 * [Common Issues in Kendo UI Charts]({% slug troubleshooting_chart_widget %})
 * [Common Issues in Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %})
@@ -50,6 +55,3 @@ Other articles on troubleshooting:
 * [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
 * [Common Issues in Kendo UI Upload]({% slug troubleshooting_upload_widget %})
 * [Common Issues Related to Styling, Appearance, and Rendering]({% slug commonissues_troubleshooting_kendouistyling %})
-* [Common Issues in Telerik UI for ASP.NET MVC](/aspnet-mvc/troubleshooting)
-* [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/grid/troubleshooting)
-* [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/upload/troubleshooting)
