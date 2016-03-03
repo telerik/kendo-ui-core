@@ -19,7 +19,7 @@ The example below demonstrates how to update the NumericTextBox value on keyup.
                 <p>
                   <input kendo-numeric-text-box="numeric"
                          k-min="0" k-max="100"
-                         k-ng-model="value" />
+                         ng-model="value" />
                 </p>
             </div>
             <div>
