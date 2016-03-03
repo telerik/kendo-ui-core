@@ -23,11 +23,11 @@ JavaScript errors are likely to prevent a web page from working as expected. By 
 
 ### Application Is Limited to Static Content
 
-For a solution, see the [Application Does Not Function at All](#...) section above.
+For a solution, see the [Application Does Not Function at All](#application-does-not-function-at-all) section above.
 
 ### Kendo UI Widgets Are Not Instantiated
 
-For a solution, see the [Application Does Not Function at All](#...) section above.
+For a solution, see the [Application Does Not Function at All](#application-does-not-function-at-all) section above.
 
 ## See Also
 
@@ -46,6 +46,8 @@ Other articles on troubleshooting:
 * [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
 * [Common Issues in Kendo UI Upload]({% slug troubleshooting_upload_widget %})
 * [Common Issues Related to Styling, Appearance, and Rendering]({% slug commonissues_troubleshooting_kendouistyling %})
-* [Common Issues in Telerik UI for ASP.NET MVC](/aspnet-mvc/troubleshooting)
+* [Common Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_common_issues_kendoui %})
+* [Validation Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_validation_aspnetmvc %})
+* [Scaffolding Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_scaffolding_aspnetmvc %})
 * [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/grid/troubleshooting)
 * [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/upload/troubleshooting)
