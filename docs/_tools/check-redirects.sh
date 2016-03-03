@@ -71,15 +71,15 @@ urls="
 IFS='
 '
 
-echo "Checking documentation redirects on http://${host}"
+echo "Checking documentation redirects on ${host}"
 for line in $urls; do
     let count=$count+1
 
     url=`echo ${line} | awk '{print $1}'`
-    url="http://${host}${url}"
+    url="${host}${url}"
 
     target=`echo ${line} | awk '{print $2}'`
-    target="http://${host}${target}"
+    target="${host}${target}"
 
     printf '.'
     result=`curl --silent --head -w 'Destination %{url_effective}' --location "${url}"`
