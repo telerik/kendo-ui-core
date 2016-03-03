@@ -563,6 +563,50 @@ The font size (in pixels) that should be set.
 </script>
 ```
 
+### forEachCell
+
+Executes a function for each cell in the range.
+
+#### Parameters
+
+##### callback `Function`
+
+The function that will be executed against every cell. The function receives the following parameters:
+
+- **rowIndex** - the row index of the cell
+- **columnIndex** - the column index of the cell
+- **value** - the cell properties
+
+#### Example
+
+```
+<div id="spreadsheet"></div>
+<script>
+
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [
+            { rows: [
+                { cells: [
+                    { value: "A1" }, { value: "B1" }
+                ] },
+                { cells: [
+                    { value: "A2" }, { value: "B2" }
+                ] }
+            ] }
+        ]
+    });
+
+
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var sheet = spreadsheet.activeSheet();
+    var range = sheet.range("A1:B2");
+
+    range.forEachCell(function (row, column, value) {
+        console.log(row, column, value);
+    });
+</script>
+```
+
 ### format
 
 Gets or sets the format of the cells.
