@@ -68,32 +68,34 @@ The example below demonstrates how to use a bundle script with RequireJS.
 ```html
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <link rel="stylesheet" href="../dist/styles/web/kendo.common-material.core.min.css">
-        <link rel="stylesheet" href="../dist/styles/web/kendo.material.min.css">
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
-    </head>
-    <body>
-        <select id="dropdownlist"></select>
-        <script>
-        require.config({
-          paths: {
-            "jquery": "http://code.jquery.com/jquery-1.9.1.min",
-            "kendo.ui.core.min": "js/kendo/kendo.ui.core.min" // the name of the module should match the file name - paths won't work.
-         }
-        });
+  <head>
 
-        require([ "jquery", "kendo.ui.core.min" ], function($, kendo) {
-          $("#dropdownlist").kendoDropDownList({
-            dataSource: {
-              data: [{name:"Jane Doe", value: 1}, {name:"John Doe", value: 2}]
-            },
-            dataTextField: "name",
-            dataValueField: "value"
-          });
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.226/styles/kendo.common.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.226/styles/kendo.default.min.css">
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
+  </head>
+  <body>
+    <select id="dropdownlist"></select>
+    <script>
+      require.config({
+        paths: {
+          "jquery": "http://code.jquery.com/jquery-1.9.1.min",
+          "kendo.all.min": "http://kendo.cdn.telerik.com/2016.1.226/js/kendo.all.min"
+        }
+      });
+
+      require([ "jquery", "kendo.all.min" ], function($, kendo) {
+        $("#dropdownlist").kendoDropDownList({
+          dataSource: {
+            data: [{name:"Jane Doe", value: 1}, {name:"John Doe", value: 2}]
+          },
+          dataTextField: "name",
+          dataValueField: "value"
         });
-        </script>
-    </body>
+      });
+    </script>
+  </body>
 </html>
 ```
 
