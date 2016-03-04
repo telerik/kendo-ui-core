@@ -30,7 +30,7 @@ The project settings page allows you to modify the project-wise settings, such a
 
 - **Version**&mdash;Choose which version of Telerik UI for ASP.NET MVC to use.
 - **Add referenced assemblies to solution**&mdash;Choose whether to copy referenced assemblies to your solution folder. The assemblies will automatically be added to the source control when using the Microsoft Team Foundation Server.
-- **Copy Editor Templates**&mdash;Copy the predefined editor templates to `~/Views/Shared/EditorTemplates`.
+- **Copy Editor Templates**&mdash;Copy the predefined editor templates to `~/Views/Shared/EditorTemplates`. Existing editor templates will be overwritten.
 - **Use CDN Support**&mdash;Enable or disable Kendo UI [CDN]({% slug kendoui_cdn_services_installation %}) support.
 - **Copy Global Resources**&mdash;Copy the localization files to `~/Scripts/kendo/{version}/cultures`.
 
