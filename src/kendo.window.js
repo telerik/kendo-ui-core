@@ -1424,6 +1424,11 @@ var __meta__ = { // jshint ignore:line
 
             wnd.initialWindowPosition = kendo.getOffset(wnd.wrapper, "position");
 
+            wnd.initialPointerPosition = {
+                left: e.x.client,
+                top: e.y.client
+            };
+
             wnd.startPosition = {
                 left: e.x.client - wnd.initialWindowPosition.left,
                 top: e.y.client - wnd.initialWindowPosition.top
@@ -1446,18 +1451,22 @@ var __meta__ = { // jshint ignore:line
         },
 
         drag: function (e) {
-            var wnd = this.owner,
-                position = wnd.options.position,
-                newTop = Math.max(e.y.client - wnd.startPosition.top, wnd.minTopPosition),
-                newLeft = Math.max(e.x.client - wnd.startPosition.left, wnd.minLeftPosition),
-                coordinates = {
-                    left: newLeft,
-                    top: newTop
-                };
+            var wnd = this.owner;
+            var position = wnd.options.position;
 
-            $(wnd.wrapper).css(coordinates);
-            position.top = newTop;
-            position.left = newLeft;
+            position.top = Math.max(e.y.client - wnd.startPosition.top, wnd.minTopPosition);
+            position.left = Math.max(e.x.client - wnd.startPosition.left, wnd.minLeftPosition);
+
+            if (kendo.support.transforms) {
+                $(wnd.wrapper).css(
+                    "transform", "translate(" +
+                        (e.x.client - wnd.initialPointerPosition.left) + "px, " +
+                            (e.y.client - wnd.initialPointerPosition.top) + "px)"
+                );
+            } else {
+                $(wnd.wrapper).css(position);
+            }
+
         },
 
         _finishDrag: function() {
@@ -1477,6 +1486,10 @@ var __meta__ = { // jshint ignore:line
         },
 
         dragend: function () {
+            $(this.owner.wrapper)
+                .css(this.owner.options.position)
+                .css("transform", "");
+
             this._finishDrag();
 
             this.owner.trigger(DRAGEND);
