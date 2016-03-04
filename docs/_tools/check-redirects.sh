@@ -61,9 +61,9 @@ urls="
 /kendo-ui/tutorials/accessibility/accessibility-overview /kendo-ui/accessibility/accessibility-overview
 /kendo-ui/getting-started/introduction /kendo-ui/introduction
 /kendo-ui/using-kendo-with/introduction /kendo-ui/introduction
-/kendo-ui/tutorials/asp.net/kendo-music-store/kendo-music-store-intro /kendo-ui/aspnet-mvc/tutorial-kendo-music-store/kendo-music-store-intro
-/kendo-ui/aspnet-mvc/tutorial-kendo-music-store/kendo-music-store-intro /kendo-ui/aspnet-mvc/tutorial-kendo-music-store/kendo-music-store-intro
-/kendo-ui/aspnet-mvc/tutorial-saleshub/kendo-saleshub-intro /kendo-ui/aspnet-mvc/tutorial-saleshub/kendo-saleshub-intro
+/kendo-ui/tutorials/asp.net/kendo-music-store/kendo-music-store-intro /kendo-ui/aspnet-mvc/tutorials/tutorial-kendo-music-store/kendo-music-store-intro
+/kendo-ui/aspnet-mvc/tutorial-kendo-music-store/kendo-music-store-intro /kendo-ui/aspnet-mvc/tutorials/tutorial-kendo-music-store/kendo-music-store-intro
+/kendo-ui/aspnet-mvc/tutorial-saleshub/kendo-saleshub-intro /kendo-ui/aspnet-mvc/tutorials/tutorial-saleshub/kendo-saleshub-intro
 /kendo-ui/ /kendo-ui/introduction
 "
 
