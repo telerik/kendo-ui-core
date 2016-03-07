@@ -3825,6 +3825,28 @@ The data item which should be removed.
     });
     </script>
 
+### skip
+
+Gets the current skip parameter of the dataSource. The skip parameter indicates the number of data items that should be skipped when a new page is formed.
+
+#### Returns
+
+`Number` the current skip parameter.
+
+#### Example - get the current page
+
+    <script>
+    var dataSource = new kendo.data.DataSource({
+      data: [
+        { name: "Jane Doe" },
+        { name: "John Doe" }
+      ],
+      pageSize: 1,
+      page: 2
+    });
+    console.log(dataSource.skip()); // displays "1"
+    </script>
+
 ### sort
 
 Gets or sets the sort order which will be applied over the data items.
