@@ -33,7 +33,7 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | [Switch](http://demos.telerik.com/kendo-ui/switch/index)              | :x:  | :white_check_mark: | :white_check_mark:           |
 | [TimePicker](http://demos.telerik.com/kendo-ui/timepicker/index)      | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [Upload](http://demos.telerik.com/kendo-ui/upload/index)              | :x:  | :white_check_mark: | :white_check_mark:           |
-| [Validator](http://demos.telerik.com/kendo-ui/validator/index)        | :x:  | :white_check_mark: | :white_check_mark:           |
+| [Validator](http://demos.telerik.com/kendo-ui/validator/index)        | :white_check_mark:  | :white_check_mark: | :white_check_mark:           |
 | **Charts**                |
 | [Area Charts](http://demos.telerik.com/kendo-ui/area-charts/index)    | :x: | :white_check_mark: | :white_check_mark:            |
 | [Bar Charts](http://demos.telerik.com/kendo-ui/bar-charts/index)      | :x: | :white_check_mark: | :white_check_mark:            |
