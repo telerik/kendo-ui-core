@@ -2221,15 +2221,16 @@ html .km-pane-wrapper .km-widget,
 
 @import "themes/radiobutton.less";
 
-@radio-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 14%), 0.5);
-@radio-background-color: #fff;
-@radio-hover-border-color: contrast(@base, lighten(@base, 2%), darken(@base, 24%), 0.5);
-@radio-checked-background-color: contrast(@selected-background, lighten(@accent, 3%), darken(@accent, 29%), 0.5);
-@radio-active-border-color: contrast(@selected-background, lighten(@accent, 1%), darken(@accent, 29%), 0.5);
-@radio-active-box-shadow: 0 0 3px 0 @accent;
-@radio-disabled-background-color: lighten(@hover-background, 21%);
-@radio-disabled-color: contrast(@base, lighten(@base, 6%), darken(@base, 29%), 0.5);
-@radio-disabled-border-color: #bfbfbf;
+@radio-border-color: @normal-text-color;
+@radio-background-color: @normal-background;
+@radio-hover-border-color: @normal-text-color;
+@radio-hover-box-shadow: 0 0 0 1px @normal-text-color; 
+@radio-checked-background-color: @normal-text-color;
+@radio-active-border-color: @normal-text-color;
+@radio-active-box-shadow: 0 0 3px 0 @normal-text-color;
+@radio-disabled-background-color: @normal-background;
+@radio-disabled-color: @disabled-text-color;
+@radio-disabled-border-color: #634b5f;
 
 // Retina sprite
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
