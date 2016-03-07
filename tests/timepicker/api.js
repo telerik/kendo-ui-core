@@ -71,18 +71,6 @@
         tv.destroy();
     });
 
-     test("widget should select just single entry", function() {
-        var timepicker = input.kendoTimePicker({
-            value: new Date(),
-            max: new Date(),
-            interval: 1
-        }).data("kendoTimePicker");
-        timepicker.open();
-
-        equal(timepicker.timeView.ul.find("li.k-state-selected").length, 1);
-        timepicker.destroy();
-    });
-
     test("click() select li and set date", function() {
         var tv = new TimeView({
             anchor: input,
