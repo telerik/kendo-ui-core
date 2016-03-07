@@ -1,33 +1,46 @@
 ---
-title: Build the Store Sales page
+title: Build the Store Sales Page
+page_title: Build the Store Sales Page | Music Store Dashboard Tutorial
+description: "Learn how to build the Kendo UI Music Store Dashboard Store Sales page by using Telerik UI for ASP.NET MVC."
+slug: buildthestoressales_muscistoredashboard_aspnetmvc
 position: 4
 ---
 
-# Build the Store Sales page
+# Build the Store Sales Page
+
+**Figure 1. A snapshot of the Kendo UI Music Store Sales Overview page**
 
 ![sales-overview](/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-overview.png)
 
 This page is constructed to show a collection of data visualization graphs, exposing several different views of store data. The page is dominated by a general sales graph, which can be filtered by five different dimensions, selectable by the buttons to the left of graph.
 
-Two smaller graphs present data grouped by genre: Sales and Searches. These views provide a way to change the type of chart shown, changing the presentation of the data based on user selection of the graph type. The data can also be changed between Weekly, Monthly and Yearly data.
+Two smaller graphs present data grouped by genre&mdash;the Sales and Searches graphs. These views provide a way to change the type of chart shown, changing the presentation of the data based on the user selection of the graph type. The data can also be changed between **Weekly**, **Monthly** and **Yearly** data.
 
-This page is contained in the following files: **app/views/sales.html**, **app/sales-view.js**, and **Content/sales-view.css**.
+This page is contained in the `app/views/sales.html`, `app/sales-view.js`, and `Content/sales-view.css` files.
 
-## Change Chart Type Dynamically
+## Configuration
 
-The **Sales By Genre** chart allows for the chart type to be changed dynamically. The chart can be changed from, for instance, a bar graph
+### Change Chart Types Dynamically
+
+The **Sales By Genre** chart allows for the chart type to be changed dynamically.
+
+For example, the chart type can be changed from a bar graph to a line graph by using the buttons on the bottom-right side.
+
+**Figure 2. A bar graph representation of the Sales Overview page**
 
 ![sales-by-genre-bar](/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-by-genre-bar.png)
 
-to a line graph
+**Figure 3. A line graph representation of the Sales Overview page**
 
 ![sales-by-genre-line](/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-by-genre-line.png)
 
-using the buttons down the right side.
+**Figure 4. The side buttons through which the graphic representation of the data can be changed**
 
 ![sales-by-genre-bar-button-highlight](/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-by-genre-bar-button-highlight.png)
 
-The **Sales By Genre** and **Searches By Genre** charts are built similarly, with simple declarative markup and powerful JavaScript piping. The chart is contained within it's own **&lt;div&gt;**, with an accompanying **&lt;span&gt;** that contains the buttons for changing the chart type. The Sales By Genre chart is constructed like so:
+The **Sales By Genre** and **Searches By Genre** charts are built similarly, with simple declarative markup and powerful JavaScript piping. The chart is contained within its own `&lt;div&gt;`, with an accompanying `&lt;span&gt;` that contains the buttons for changing the chart type. The **Sales By Genre** chart is constructed as demonstrated in the example below.
+
+###### Example
 
 	<div class="sales-by-genre-chart half-width-chart"></div>
     <span class="store-sales-chart-type change-genre-sales-chart-type">
@@ -39,14 +52,18 @@ The **Sales By Genre** and **Searches By Genre** charts are built similarly, wit
         <span class="chart-type-item chart-type-stacked-bar " data-charttype="stacked-bar"></span>
 	</span>
 
-Note the **change-genre-sales-chart-type** class on the governing **&lt;span&gt;**, and the **chart-type-item** on the individual **&lt;span&gt;**s; these classes are use to register click events that lead to the chart type changing:
+Note the `change-genre-sales-chart-type` class on the governing `&lt;span&gt;`, and the `chart-type-item` on the individual `&lt;span&gt;`. These classes are used to register click events that lead to the chart type changing.
+
+###### Example
 
 	$(".chart-type-item", ".change-genre-sales-chart-type").click(function (e) {
         e.preventDefault();
         changeChartType.call(this, ".sales-by-genre-chart", ".change-genre-sales-chart-type");
     });
 
-**changeChartType** is a function that performs the chart type change, taking two parameters: the class of the chart to change and the class of the governing **&lt;span&gt;** containing the buttons. The use of the **call()** invocation, along with passing **this** tells the function to perform as a member of the button, rather than globally.
+The `changeChartType` is a function that performs the chart type change, taking two parameters&mdash;the class of the chart to change and the class of the governing `&lt;span&gt;` containing the buttons. The use of the `call()` invocation, along with passing `this` tells the function to perform as a member of the button, rather than globally.
+
+###### Example
 
 	function changeChartType(chartSelector, parentChartType) {
 
@@ -72,33 +89,31 @@ Note the **change-genre-sales-chart-type** class on the governing **&lt;span&gt;
 
             chart.options.series[i].color = colors[i];
             chart.options.series[i].opacity = 1;
-            
+
         }
 
         chart.redraw();
     }
 
-First, this function clears the buttons' selection state for the chart in question.
+This function clears the selection state of the buttons for the chart in question. The chart is located using jQuery and the first parameter `chartSelector`&mdash;this provides access to the chart options. The button that is called is marked as selected using the `$this` variable, provided through the `call()` invocation. The chart options are then changed to the selected chart type, and the chart is commanded to redraw, showing the new chart.
 
-The chart is location using jQuery and the first parameter **chartSelector** - this provides access to the chart's options.
+### Change Temporal Data Dynamically
 
-The button that was called is marked as selected using the **$this** variable, provided via the **call()** invocation.
+The **Sales By Genre** and **Searches By Genre** charts also provide a method to dynamically change the temporal data in use. For example, the **Sales By Genre** chart can be changed from showing **Weekly** data to showing **Monthly** data by using the buttons on top.
 
-The chart's options are then changed to the selected chart type, and the chart is then commanded to redraw, showing the new chart.
-
-## Change Temporal Data Dynamically
-
-The **Sales By Genre** and **Searches By Genre** charts also provide a method to dynamically change the temporal data in use. For example, using the buttons on top, the **Sales By Genre** chart can be changed from showing Weekly data
+**Figure 5. A chart graph displaying Weekly data**
 
 ![sales-by-genre-bar-weekly](/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-by-genre-bar.png)
 
-to showing Monthly data.
+**Figure 6. A chart graph displaying Monthly data**
 
 ![sales-by-genre-bar-monthly](/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-by-genre-bar-monthly.png)
 
-As before, the two charts are constructed similarly, with declarative markup and JavaScript. (And jQuery, of course!)
+As before, the two charts are constructed similarly, with declarative markup, JavaScript, and jQuery.
 
-The chart is defined with the buttons in the previous section, and so aren't included here with the declaration of the tabs used as buttons for the temporal data:
+The chart is defined by the buttons in the previous section, and so they are not included here with the declaration of the tabs used as buttons for the temporal data.
+
+###### Example
 
     <div class="chart-group-tabs">
         <span class="time-sales-tab time-sales-tab-selected genre-sales-tab" data-period="weekly">Weekly</span>
@@ -106,7 +121,9 @@ The chart is defined with the buttons in the previous section, and so aren't inc
         <span class="time-sales-tab genre-sales-tab" data-period="yearly">Yearly</span>
     </div>
 
-The **genre-sales-tab** class' click event handler is then defined in the Javascript:
+The `genre-sales-tab` class click event handler is then defined in the Javascript.
+
+###### Example
 
     $(".genre-sales-tab").click(function (e) {
 
@@ -132,6 +149,14 @@ The **genre-sales-tab** class' click event handler is then defined in the Javasc
         salesByGenreChartDataSource.read();
     });
 
-This function is set to only update the data if a different set of data has been selected, then updates the selection in the UI.
+This function is set to only update the data if a different set of data is selected. Then, it updates the selection in the UI. It retrieves the desired time period from the `data-period` attribute, then adjusts the data source that provides the chart with its data. This results in a different API call, and, therefore, new data. The `read()` function of the data source is then called to update the data in the chart. This makes the chart redraw, presenting the new data to the user.
 
-It retrieves the desired time period from the **data-period** attribute, then adjusts the data source that provides the chart its data. This results in a different API call, and therefore new data. The data source's **read()** function is then called to update the data in the chart, which makes the chart redraw, presenting the new data to the user.
+## See Also
+
+Other articles on the Kendo UI Music Store Dashboard sample project:
+
+* [Overview of the Kendo UI Music Store Sample Project]({% slug overview_muscistoretutorial_aspnetmvc %})
+* [Project Setup]({% slug projectsetup_muscistoredashboard_aspnetmvc %})
+* [Create the Single-Page App]({% slug createthespa_muscistoredashboard_aspnetmvc %})
+* [Create the Main Page]({% slug createthemainpage_muscistoredashboard_aspnetmvc %})
+* [Build the Social Stats Page]({% slug buildsocialstats_muscistoredashboard_aspnetmvc %})

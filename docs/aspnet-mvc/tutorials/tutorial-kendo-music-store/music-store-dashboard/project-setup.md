@@ -1,12 +1,29 @@
 ---
 title: Project Setup
+page_title: Project Setup | Music Store Dashboard Tutorial
+description: "Learn how to set up the Kendo UI Music Store Dashboard sample project by using Telerik UI for ASP.NET MVC."
+slug: projectsetup_muscistoredashboard_aspnetmvc
 position: 1
 ---
 
-# Project Setup - Kendo UI Music Store Dashboard
+# Project Setup
 
 ## Database
 
-The Kendo UI Music Store Dashboard demo application uses a SQL Server database with sample data for artists, albums, orders, etc. In order to populate the sample database, the application uses Entity Framework Code First migrations to create the database and seed the sample data. The migrations are configured to only run in DEBUG mode. If you run in RELEASE mode, the code will assume that the database has already been created and will not try to create or seed the data.
+The Kendo UI Music Store Dashboard demo application uses an SQL Server database with sample data for artists, albums, orders, etc.
 
-The connection string configured in the web.config file is set to use LocalDB and will connect to a local database file in the App_Data folder. LocalDB requires a SQL Server 2012 or later instance. To run the Kendo UI Music Store Dashboard demo, please ensure that your system meets these requirements or simply change the connection string to use a SQL Server instance available on your computer.
+To populate the sample database, the application uses Entity Framework Code First migrations to create the database and seed the sample data. The migrations are configured to only run in `DEBUG` mode. If you run it in the `RELEASE` mode, the code assumes that the database is already created and does not try to create or seed the data.
+
+The connection string configured in the `web.config` file is set to use `LocalDB` and will connect to a local database file in the `App_Data` folder. `LocalDB` requires an SQL Server 2012 or later.
+
+To run the Kendo UI Music Store Dashboard demo, make sure your system meets these requirements or change the connection string to use an SQL Server instance available on your computer.
+
+## See Also
+
+Other articles on the Kendo UI Music Store Dashboard sample project:
+
+* [Overview of the Kendo UI Music Store Sample Project]({% slug overview_muscistoretutorial_aspnetmvc %})
+* [Create the Single-Page App]({% slug createthespa_muscistoredashboard_aspnetmvc %})
+* [Create the Main Page]({% slug createthemainpage_muscistoredashboard_aspnetmvc %})
+* [Build the Store Sales Page]({% slug buildthestoressales_muscistoredashboard_aspnetmvc %})
+* [Build the Social Stats Page]({% slug buildsocialstats_muscistoredashboard_aspnetmvc %})
