@@ -34,7 +34,7 @@ The following table lists all Kendo UI components with regard to their support b
 | [Switch](http://demos.telerik.com/kendo-ui/switch/index)              | <span class="tag-neutral">No</span>  | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span>           |
 | [TimePicker](http://demos.telerik.com/kendo-ui/timepicker/index)      | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span>           |
 | [Upload](http://demos.telerik.com/kendo-ui/upload/index)              | <span class="tag-neutral">No</span>  | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span>           |
-| [Validator](http://demos.telerik.com/kendo-ui/validator/index)        | <span class="tag-neutral">No</span>  | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span>           |
+| [Validator](http://demos.telerik.com/kendo-ui/validator/index)        | <span class="tag-success">Yes</span>  | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span>           |
 | **Charts**                |
 | [Area Charts](http://demos.telerik.com/kendo-ui/area-charts/index)    | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span>            |
 | [Bar Charts](http://demos.telerik.com/kendo-ui/bar-charts/index)      | <span class="tag-neutral">No</span> | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span>            |
