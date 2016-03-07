@@ -964,6 +964,9 @@ The absolute row index. Required to ensure correct positioning.
 ### sheets.selection `String`
 The selected range in the sheet, e.g. "A1:B10".
 
+### sheets.showGridLines `Boolean` *(default: true)*
+A boolean value indicating if the sheet grid lines should be displayed.
+
 ### sheets.sort `Object`
 Defines the sort criteria for the sheet.
 
