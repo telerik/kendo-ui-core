@@ -80,7 +80,7 @@ var __meta__ = { // jshint ignore:line
                 "</#= tag(item) #>"
             ),
             item: template(
-                "<li class='#= wrapperCssClass(group, item) #' role='menuitem' #=item.items ? \"aria-haspopup='true'\": \"\"#" +
+                "<li class='#= wrapperCssClass(group, item) #' #= itemCssAttributes(item) # role='menuitem'  #=item.items ? \"aria-haspopup='true'\": \"\"#" +
                     "#=item.enabled === false ? \"aria-disabled='true'\" : ''#>" +
                     "#= itemWrapper(data) #" +
                     "# if (item.items) { #" +
@@ -118,6 +118,25 @@ var __meta__ = { // jshint ignore:line
 
                 if (item.cssClass) {
                     result += " " + item.cssClass;
+                }
+
+                if(item.attr && item.attr.hasOwnProperty("class")) {
+                    result += " " + item.attr["class"];
+                }
+
+                return result;
+            },
+
+            itemCssAttributes: function (item) {
+                var result = "";
+                var attributes = item.attr;
+
+                if (attributes) {
+                    for (var attr in attributes) {
+                        if(attributes.hasOwnProperty(attr) && attr !== "class") {
+                            result += attr + "=\"" + attributes[attr] + "\" ";
+                        }
+                    }
                 }
 
                 return result;
