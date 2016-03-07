@@ -1,11 +1,11 @@
 ---
-title: List of <code>dialogs</code> Messages
+title: List of dialogs Messages
 page_title: List of dialogs Messages | Kendo UI Spreadsheet
 description: "A list of the dialogs messages used for localization of the Kendo UI Spreadsheet widget via JavaScript."
 slug: localization_dialogs_messages_spreadsheet_widget
 ---
 
-# List of `dialogs` Messages
+# List of dialogs Messages
 
 Below is the list of the messages and their namespaces under the `dialogs` category. These are used to [localize the Kendo UI Spreadsheet widget via JavaScript]({% slug localization_ofmessages_spreadsheet_widget %}).
 
