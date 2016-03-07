@@ -2069,10 +2069,13 @@ function pad(number, digits, end) {
                 paste : document.queryCommandSupported ? document.queryCommandSupported("paste") : false
             };
 
-            if (support.browser.chrome && support.browser.version >= 43) {
-                //not using queryCommandSupported due to chromium issue #476508
-                commands.copy = true;
-                commands.cut = true;
+            if (support.browser.chrome) {
+                //not using queryCommandSupported due to chromium issues 476508 and 542948
+                commands.paste = false;
+                if(support.browser.version >= 43) {
+                    commands.copy = true;
+                    commands.cut = true;
+                }
             }
 
             return commands;
