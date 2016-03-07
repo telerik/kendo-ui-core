@@ -2239,7 +2239,7 @@ textarea.k-textbox,
 @checkbox-active-border-color: contrast(@selected-background, lighten(@accent, 1%), darken(@accent, 29%), 0.5);
 @checkbox-active-box-shadow: 0 0 3px 0 @accent;
 @checkbox-disabled-background-color: lighten(@hover-background, 21%);
-@checkbox-disabled-color: contrast(@base, lighten(@base, 6%), darken(@base, 29%), 0.5);
+@checkbox-disabled-color: @disabled-text-color;
 @checkbox-disabled-border-color: darken(@success, 21%);
 
 @import "themes/radiobutton.less";
@@ -2251,7 +2251,7 @@ textarea.k-textbox,
 @radio-active-border-color: contrast(@selected-background, lighten(@accent, 1%), darken(@accent, 29%), 0.5);
 @radio-active-box-shadow: 0 0 3px 0 @accent;
 @radio-disabled-background-color: lighten(@hover-background, 21%);
-@radio-disabled-color: contrast(@base, lighten(@base, 6%), darken(@base, 29%), 0.5);
+@radio-disabled-color: @disabled-text-color;
 @radio-disabled-border-color: #bfbfbf;
 
 // Retina sprite
