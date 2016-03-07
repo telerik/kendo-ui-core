@@ -1,11 +1,11 @@
 ---
-title: List of <code>view</code> Messages
+title: List of view Messages
 page_title: List of view Messages | Kendo UI Spreadsheet
 description: "A list of the view messages used for localization of the Kendo UI Spreadsheet widget via JavaScript."
 slug: localization_view_messages_spreadsheet_widget
 ---
 
-# List of `view` Messages
+# List of view Messages
 
 Below is the list of the messages and their namespaces under the `view` category. These are used to [localize the Kendo UI Spreadsheet widget via JavaScript]({% slug localization_ofmessages_spreadsheet_widget %}).
 

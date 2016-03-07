@@ -1,11 +1,11 @@
 ---
-title: List of <code>borderPalette</code> Messages
+title: List of borderPalette Messages
 page_title: List of borderPalette Messages | Kendo UI Spreadsheet
 description: "A list of the borderPalette messages used for localization of the Kendo UI Spreadsheet widget via JavaScript."
 slug: localization_borderpalette_messages_spreadsheet_widget
 ---
 
-# List of `borderPalette` Messages
+# List of borderPalette Messages
 
 Below is the list of the messages and their namespaces under the `borderPalette` category. These are used to [localize the Kendo UI Spreadsheet widget via JavaScript]({% slug localization_ofmessages_spreadsheet_widget %}).
 

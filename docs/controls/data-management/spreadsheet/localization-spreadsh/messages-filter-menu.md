@@ -1,11 +1,11 @@
 ---
-title: List of <code>filterMenu</code> Messages
+title: List of filterMenu Messages
 page_title: List of filterMenu Messages | Kendo UI Spreadsheet
 description: "A list of the filterMenu messages used for localization of the Kendo UI Spreadsheet widget via JavaScript."
 slug: localization_filter_menu_messages_spreadsheet_widget
 ---
 
-# List of `filterMenu` Messages
+# List of filterMenu Messages
 
 Below is the list of the messages and their namespaces under the `filterMenu` category. These are used to [localize the Kendo UI Spreadsheet widget via JavaScript]({% slug localization_ofmessages_spreadsheet_widget %}).
 
