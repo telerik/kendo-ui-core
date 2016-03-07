@@ -1,5 +1,8 @@
 ---
 title: Project Setup
+page_title: Project Setup | Music Store Web App Tutorial
+description: "Learn how to set up the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
+slug: projectsetup_muscistorewebapp_aspnetmvc
 position: 1
 ---
 
