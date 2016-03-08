@@ -1,9 +1,12 @@
 ---
-title: Create the Store Management Grid
+title: Create the Management Grid
+page_title: Create the Management Grid | Music Store Web App Tutorial
+description: "Learn how to create the Store Management grid in the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
+slug: createstoremanaggrid_muscistorewebapp_aspnetmvc
 position: 10
 ---
 
-# Create the Store Management Grid - Kendo UI Music Store
+# Create the Management Grid
 
 ![kendo-manage-grid-screenshot](/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-manage-grid-screenshot.png)
 
@@ -315,3 +318,19 @@ When this button is clicked the user will be presented with a file selection dia
 Because the **async.autoUpload** is set to **true** the image will be uploaded as soon as it is selected.
 On the server, after the file is uploaded a response is sent to the client that contains the url to the newly saved image.
 The upload widget in the editor uses the **success** event to read the returned URL from the server and display the image.
+
+## See Also
+
+Other articles on the Kendo UI Music Store Web Application sample project:
+
+* [Overview of the Kendo UI Music Store Sample Project]({% slug overview_muscistoretutorial_aspnetmvc %})
+* [Set Up the Kendo UI Music Store Web Application Project]({% slug projectsetup_muscistorewebapp_aspnetmvc %})
+* [Create the Main Menu]({% slug createthemainmenu_muscistorewebapp_aspnetmvc %})
+* [Create the Home Page]({% slug createthehomepage_muscistorewebapp_aspnetmvc %})
+* [Create the Genre Page]({% slug createthegenrepage_muscistorewebapp_aspnetmvc %})
+* [Display Album Details]({% slug displayalbumdetails_muscistorewebapp_aspnetmvc %})
+* [Create the Search Box]({% slug createsearchbox_muscistorewebapp_aspnetmvc %})
+* [Add the Shopping Cart]({% slug implementshoppingcart_muscistorewebapp_aspnetmvc %})
+* [Customize the Shopping Cart]({% slug customizeshoppingcart_muscistorewebapp_aspnetmvc %})
+* [Create the Checkout Page]({% slug createcheckoutpage_muscistorewebapp_aspnetmvc %})
+* [Create the Management Charts]({% slug createstoremanagcharts_muscistorewebapp_aspnetmvc %})

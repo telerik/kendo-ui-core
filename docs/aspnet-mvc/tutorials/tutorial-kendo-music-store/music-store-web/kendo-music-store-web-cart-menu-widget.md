@@ -1,9 +1,12 @@
 ---
-title: Custom Shopping Cart Menu Widget
+title: Customize the Shopping Cart
+page_title: Customize the Shopping Cart | Music Store Web App Tutorial
+description: "Learn how to create a custom Shopping Cart Menu widget in the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
+slug: customizeshoppingcart_muscistorewebapp_aspnetmvc
 position: 8
 ---
 
-# Custom Shopping Cart Menu Widget - Kendo UI Music Store
+# Customize the Shopping Cart
 
 Inevitably at some point in a project you will come across a feature that you need to implement that doesn't seem
 to fit a standard Kendo UI Widget. In the Music Store sample project, this is the case with the shopping cart
@@ -280,3 +283,18 @@ The second &lt;span&gt; element represents the remove button, and has the follow
 Within a ListView widget, elements of this special class *automatically* become a button that deletes the item from the bound DataSource.
 Note that we do not define any click event handler for this element in the widget.
 The removal from the DataSource is wired up automatically by the ListView widget.
+
+## See Also
+
+Other articles on the Kendo UI Music Store Web Application sample project:
+
+* [Overview of the Kendo UI Music Store Sample Project]({% slug overview_muscistoretutorial_aspnetmvc %})
+* [Set Up the Kendo UI Music Store Web Application Project]({% slug projectsetup_muscistorewebapp_aspnetmvc %})
+* [Create the Main Menu]({% slug createthemainmenu_muscistorewebapp_aspnetmvc %})
+* [Create the Home Page]({% slug createthehomepage_muscistorewebapp_aspnetmvc %})
+* [Create the Genre Page]({% slug createthegenrepage_muscistorewebapp_aspnetmvc %})
+* [Display Album Details]({% slug displayalbumdetails_muscistorewebapp_aspnetmvc %})
+* [Create the Search Box]({% slug createsearchbox_muscistorewebapp_aspnetmvc %})
+* [Add the Shopping Cart]({% slug implementshoppingcart_muscistorewebapp_aspnetmvc %})
+* [Create the Management Grid]({% slug createstoremanaggrid_muscistorewebapp_aspnetmvc %})
+* [Create the Management Charts]({% slug createstoremanagcharts_muscistorewebapp_aspnetmvc %})

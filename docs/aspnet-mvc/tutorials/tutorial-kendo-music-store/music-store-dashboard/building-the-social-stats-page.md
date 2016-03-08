@@ -1,12 +1,12 @@
 ---
-title: Build the Social Stats Page
-page_title: Build the Social Stats Page | Music Store Dashboard Tutorial
+title: Create the Social Stats Page
+page_title: Create the Social Stats Page | Music Store Dashboard Tutorial
 description: "Learn how to build the Kendo UI Music Store Dashboard Social Stats page by using Telerik UI for ASP.NET MVC."
 slug: buildsocialstats_muscistoredashboard_aspnetmvc
 position: 5
 ---
 
-# Build the Social Stats Page
+# Create the Social Stats Page
 
 **Figure 1. A snapshot of the Kendo UI Music Store Social Networking page**
 
@@ -161,7 +161,7 @@ Combined, these functions make the data presentation of the chart dynamic, and a
 Other articles on the Kendo UI Music Store Dashboard sample project:
 
 * [Overview of the Kendo UI Music Store Sample Project]({% slug overview_muscistoretutorial_aspnetmvc %})
-* [Project Setup]({% slug projectsetup_muscistoredashboard_aspnetmvc %})
+* [Set Up the Kendo UI Music Store Dashboard Project]({% slug projectsetup_muscistoredashboard_aspnetmvc %})
 * [Create the Single-Page App]({% slug createthespa_muscistoredashboard_aspnetmvc %})
 * [Create the Main Page]({% slug createthemainpage_muscistoredashboard_aspnetmvc %})
 * [Build the Store Sales Page]({% slug buildthestoressales_muscistoredashboard_aspnetmvc %})

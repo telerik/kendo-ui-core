@@ -1,18 +1,18 @@
 ---
-title: Project Setup
-page_title: Project Setup | Music Store Dashboard Tutorial
+title: Set Up the Project
+page_title: Set Up the Project | Music Store Dashboard Tutorial
 description: "Learn how to set up the Kendo UI Music Store Dashboard sample project by using Telerik UI for ASP.NET MVC."
 slug: projectsetup_muscistoredashboard_aspnetmvc
 position: 1
 ---
 
-# Project Setup
+# Set Up the Project
 
-## Database
+## Handle the Database
 
 The Kendo UI Music Store Dashboard demo application uses an SQL Server database with sample data for artists, albums, orders, etc.
 
-To populate the sample database, the application uses Entity Framework Code First migrations to create the database and seed the sample data. The migrations are configured to only run in `DEBUG` mode. If you run it in the `RELEASE` mode, the code assumes that the database is already created and does not try to create or seed the data.
+To populate the sample database, the application uses Entity Framework Code First migrations to create the database and seed the sample data. The migrations are configured to only run in the `Debug` mode. If you run it in the `Release` mode, the code assumes that the database is already created and does not try to create or seed the data.
 
 The connection string configured in the `web.config` file is set to use `LocalDB` and will connect to a local database file in the `App_Data` folder. `LocalDB` requires an SQL Server 2012 or later.
 

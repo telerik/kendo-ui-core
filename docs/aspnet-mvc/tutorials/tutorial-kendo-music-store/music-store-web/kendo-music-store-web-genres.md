@@ -1,9 +1,12 @@
 ---
 title: Create the Genre Page
+page_title: Create the Genre Page | Music Store Web App Tutorial
+description: "Learn how to create the Genre page in the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
+slug: createthegenrepage_muscistorewebapp_aspnetmvc
 position: 4
 ---
 
-# Create the Genre Page - Kendo UI Music Store
+# Create the Genre Page
 
 The Genre listing will display all the albums in a selected genre.
 The albums will be limited to 20 per page, and display paging navigation at both the top and bottom.
@@ -99,3 +102,19 @@ and when the JavaScript is run the element is bound to the viewModel.genre prope
 If the jQuery AJAX request has not finished, this will still be null. Once the AJAX request finishes
 it calls the **.set()** method on the viewModel to set the genre.
 This in turn notifies the &lt;h3&gt; tag that the genre property has changed, and it updates to get the loaded genre's name.
+
+## See Also
+
+Other articles on the Kendo UI Music Store Web Application sample project:
+
+* [Overview of the Kendo UI Music Store Sample Project]({% slug overview_muscistoretutorial_aspnetmvc %})
+* [Set Up the Kendo UI Music Store Web Application Project]({% slug projectsetup_muscistorewebapp_aspnetmvc %})
+* [Create the Main Menu]({% slug createthemainmenu_muscistorewebapp_aspnetmvc %})
+* [Create the Home Page]({% slug createthehomepage_muscistorewebapp_aspnetmvc %})
+* [Display Album Details]({% slug displayalbumdetails_muscistorewebapp_aspnetmvc %})
+* [Create the Search Box]({% slug createsearchbox_muscistorewebapp_aspnetmvc %})
+* [Add the Shopping Cart]({% slug implementshoppingcart_muscistorewebapp_aspnetmvc %})
+* [Customize the Shopping Cart]({% slug customizeshoppingcart_muscistorewebapp_aspnetmvc %})
+* [Create the Checkout Page]({% slug createcheckoutpage_muscistorewebapp_aspnetmvc %})
+* [Create the Management Grid]({% slug createstoremanaggrid_muscistorewebapp_aspnetmvc %})
+* [Create the Management Charts]({% slug createstoremanagcharts_muscistorewebapp_aspnetmvc %})

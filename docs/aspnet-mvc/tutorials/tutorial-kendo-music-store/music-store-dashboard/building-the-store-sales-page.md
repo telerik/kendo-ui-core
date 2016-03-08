@@ -1,12 +1,12 @@
 ---
-title: Build the Store Sales Page
-page_title: Build the Store Sales Page | Music Store Dashboard Tutorial
+title: Create the Sales Page
+page_title: Create the Sales Page | Music Store Dashboard Tutorial
 description: "Learn how to build the Kendo UI Music Store Dashboard Store Sales page by using Telerik UI for ASP.NET MVC."
 slug: buildthestoressales_muscistoredashboard_aspnetmvc
 position: 4
 ---
 
-# Build the Store Sales Page
+# Create the Sales Page
 
 **Figure 1. A snapshot of the Kendo UI Music Store Sales Overview page**
 
@@ -156,7 +156,7 @@ This function is set to only update the data if a different set of data is selec
 Other articles on the Kendo UI Music Store Dashboard sample project:
 
 * [Overview of the Kendo UI Music Store Sample Project]({% slug overview_muscistoretutorial_aspnetmvc %})
-* [Project Setup]({% slug projectsetup_muscistoredashboard_aspnetmvc %})
+* [Set Up the Kendo UI Music Store Dashboard Project]({% slug projectsetup_muscistoredashboard_aspnetmvc %})
 * [Create the Single-Page App]({% slug createthespa_muscistoredashboard_aspnetmvc %})
 * [Create the Main Page]({% slug createthemainpage_muscistoredashboard_aspnetmvc %})
 * [Build the Social Stats Page]({% slug buildsocialstats_muscistoredashboard_aspnetmvc %})

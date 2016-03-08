@@ -1,9 +1,12 @@
 ---
 title: Create the Checkout Page
+page_title: Create the Checkout Page | Music Store Web App Tutorial
+description: "Learn how to create the Checkout page in the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
+slug: createcheckoutpage_muscistorewebapp_aspnetmvc
 position: 9
 ---
 
-# Create the Checkout Page - Kendo UI Music Store
+# Create the Checkout Page
 
 ![kendo-checkout-screenshot](/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-checkout-screenshot.png)
 
@@ -116,3 +119,19 @@ For any item in the cart, if the quantity changes or it is removed, the **calcTo
 This then calls **viewModel.set("total", store.cart.getTotalPrice());** which updates the **total** property on
 the view model to the sum of all the items.
 The MVVM framework then updates the element's text to show the total amount.
+
+## See Also
+
+Other articles on the Kendo UI Music Store Web Application sample project:
+
+* [Overview of the Kendo UI Music Store Sample Project]({% slug overview_muscistoretutorial_aspnetmvc %})
+* [Set Up the Kendo UI Music Store Web Application Project]({% slug projectsetup_muscistorewebapp_aspnetmvc %})
+* [Create the Main Menu]({% slug createthemainmenu_muscistorewebapp_aspnetmvc %})
+* [Create the Home Page]({% slug createthehomepage_muscistorewebapp_aspnetmvc %})
+* [Create the Genre Page]({% slug createthegenrepage_muscistorewebapp_aspnetmvc %})
+* [Display Album Details]({% slug displayalbumdetails_muscistorewebapp_aspnetmvc %})
+* [Create the Search Box]({% slug createsearchbox_muscistorewebapp_aspnetmvc %})
+* [Add the Shopping Cart]({% slug implementshoppingcart_muscistorewebapp_aspnetmvc %})
+* [Customize the Shopping Cart]({% slug customizeshoppingcart_muscistorewebapp_aspnetmvc %})
+* [Create the Management Grid]({% slug createstoremanaggrid_muscistorewebapp_aspnetmvc %})
+* [Create the Management Charts]({% slug createstoremanagcharts_muscistorewebapp_aspnetmvc %})

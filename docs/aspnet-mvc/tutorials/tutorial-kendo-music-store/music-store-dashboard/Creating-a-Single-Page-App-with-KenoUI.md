@@ -248,7 +248,7 @@ Because the routes are defined using the Kendo UI Router, there is no real need 
 Other articles on the Kendo UI Music Store Dashboard sample project:
 
 * [Overview of the Kendo UI Music Store Sample Project]({% slug overview_muscistoretutorial_aspnetmvc %})
-* [Project Setup]({% slug projectsetup_muscistoredashboard_aspnetmvc %})
+* [Set Up the Kendo UI Music Store Dashboard Project]({% slug projectsetup_muscistoredashboard_aspnetmvc %})
 * [Create the Main Page]({% slug createthemainpage_muscistoredashboard_aspnetmvc %})
 * [Build the Store Sales Page]({% slug buildthestoressales_muscistoredashboard_aspnetmvc %})
 * [Build the Social Stats Page]({% slug buildsocialstats_muscistoredashboard_aspnetmvc %})
