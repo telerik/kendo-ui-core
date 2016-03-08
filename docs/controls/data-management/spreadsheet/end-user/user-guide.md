@@ -59,9 +59,9 @@ When you open the Spreadsheet, the widget automatically generates a worksheet an
 | Select/activate       | Click a cell		    |
 | Select a range of cells | <ol><li>Click a cell</li> <li>Extend the selection by holding down the mouse while marking the selection you want</li></ol> |
 | Edit 					| Double-click a cell 	|
-| Copy content			| <ol><li>Select a cell</li> <li>Click **Copy** [ <span class="k-font-icon k-i-copy"></span> ] on the **Toolbar**, or use the [`Ctrl` + `C`]({% slug list_ofkeyboard_shortcuts_spreadsheet_widget %}) keyboard shortcut</li></ol>|
-| Cut content			| <ol><li>Select a cell</li> <li>Click **Cut** [ <span class="k-font-icon k-i-cut"></span> ] on the **Toolbar**, or use the [`Ctrl` + `X`]({% slug list_ofkeyboard_shortcuts_spreadsheet_widget %}) keyboard shortcut</li></ol> |
-| Paste content			| <ol><li>Click the cell where you want to place the copied or cut content</li> <li>Click **Paste** [ <span class="k-font-icon k-i-paste"></span> ] on the **Toolbar**, or use the [`Ctrl` + `V`]({% slug list_ofkeyboard_shortcuts_spreadsheet_widget %}) keyboard shortcut</li></ol> |
+| Copy content			| <ol><li>Select a cell</li> <li>Click **Copy** [ <span class="k-font-icon k-i-copy"></span> ] on the **Toolbar**, or right-click the desired cell to display the context menu and choose **Copy** from it, or use the [`Ctrl` + `C`]({% slug list_ofkeyboard_shortcuts_spreadsheet_widget %}) keyboard shortcut</li></ol>|
+| Cut content			| <ol><li>Select a cell</li> <li>Click **Cut** [ <span class="k-font-icon k-i-cut"></span> ] on the **Toolbar**, or right-click the desired cell to display the context menu and choose **Cut** from it, or use the [`Ctrl` + `X`]({% slug list_ofkeyboard_shortcuts_spreadsheet_widget %}) keyboard shortcut</li></ol> |
+| Paste content			| <ol><li>Click the cell where you want to place the copied or cut content</li> <li>Click **Paste** [ <span class="k-font-icon k-i-paste"></span> ] on the **Toolbar**, or right-click the desired cell to display the context menu and choose **Paste** from it, or use the [`Ctrl` + `V`]({% slug list_ofkeyboard_shortcuts_spreadsheet_widget %}) keyboard shortcut</li></ol> |
 | Delete content		| <ol><li>Select a cell</li> <li>Press **Delete** on your keyboard to remove its content</li></ol> |
 | Align content			| <ol><li>Select a cell</li> <li>Click **Alignment** [ <span class="k-font-icon k-i-justify-left"></span> ] on the **Toolbar**</li> <li>Choose a style form the drop-down list</li></ol> |
 | Wrap content				| <ol><li>Select a cell that contains the content you want to wrap</li> <li>Click **Wrap Text** [ <span class="k-font-icon k-i-text-wrap"></span> ] on the **Toolbar**</li></ol> |
@@ -151,6 +151,10 @@ The Spreadsheet widget supports many of the Excel formulas and functions as seen
 ## Keyboard Navigation
 
 The Spreadsheet widget supports many of the Excel keyboard shortcuts as shown in the [List of Keyboard Shortcuts](/web/spreadsheet/end-user/list-of-shortcuts).
+
+## Known Limitations
+
+Because of specific requirements, browsers may not support the **Paste** command when initiated from the context menu or the **Toolbar**. If you try to apply the command in either of these ways, a popup message is displayed informing you about the limitation. Use the keyboard navigation to achieve the result.
 
 ## See Also
 
