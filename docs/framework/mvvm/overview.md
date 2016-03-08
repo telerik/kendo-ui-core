@@ -84,6 +84,14 @@ The Kendo UI MVVM also supports data binding to nested View-Model fields, as dem
 
 ### Important Notes
 
+#### Setting of numeric options as strings
+
+Some Kendo UI widgets accept string options, which represent numbers and can be parsed as such. For example:
+
+    <input data-role="maskedtextbox" data-mask="09">
+
+The above mask will be parsed as a number and the widget will receive a single 9 digit in its initialization method, instead of a `"09"` string. In such scenarios, the widget options must be [set with custom MVVM binding](/controls/editors/maskedtextbox/how-to/MVVM/custom-mask-binding).
+
 #### Bindings Are Not JavaScript Code
 
 Although bindings look like JavaScript code, they are not. The `<div data-bind="text: person.name.toLowerCase()"></div>` chunk of code is not a valid Kendo UI MVVM binding declaration. If a value from the View-Model requires processing before displaying it in the View, a method should be created and used instead, as demonstrated below.
