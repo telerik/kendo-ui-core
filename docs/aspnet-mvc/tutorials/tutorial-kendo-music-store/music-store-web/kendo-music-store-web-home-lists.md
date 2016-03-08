@@ -1,9 +1,12 @@
 ---
 title: Create the Home Page
+page_title: Create the Home Page | Music Store Web App Tutorial
+description: "Learn how to create the Home page in the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
+slug: createthehomepage_muscistorewebapp_aspnetmvc
 position: 3
 ---
 
-# Create the Home Page - Kendo UI Music Store
+# Create the Home Page
 
 For the main content of the "Home" page, we want to display a main banner image rotator, and 2 groups of Albums.
 One will be our "top sellers," and the other is a "featured artist."
@@ -205,3 +208,19 @@ Now we can make our HTML that uses our custom binding:
 We have indicated that this &lt;img&gt; element will be bound to our custom "rotateImages" binding, using the "bannerImages"
 property of the view model as its data. Through use of the additional **data-** attribute, we have also indicated that our
 image will update every 5000 milliseconds (5 seconds).
+
+## See Also
+
+Other articles on the Kendo UI Music Store Web Application sample project:
+
+* [Overview of the Kendo UI Music Store Sample Project]({% slug overview_muscistoretutorial_aspnetmvc %})
+* [Set Up the Kendo UI Music Store Web Application Project]({% slug projectsetup_muscistorewebapp_aspnetmvc %})
+* [Create the Main Menu]({% slug createthemainmenu_muscistorewebapp_aspnetmvc %})
+* [Create the Genre Page]({% slug createthegenrepage_muscistorewebapp_aspnetmvc %})
+* [Display Album Details]({% slug displayalbumdetails_muscistorewebapp_aspnetmvc %})
+* [Create the Search Box]({% slug createsearchbox_muscistorewebapp_aspnetmvc %})
+* [Add the Shopping Cart]({% slug implementshoppingcart_muscistorewebapp_aspnetmvc %})
+* [Customize the Shopping Cart]({% slug customizeshoppingcart_muscistorewebapp_aspnetmvc %})
+* [Create the Checkout Page]({% slug createcheckoutpage_muscistorewebapp_aspnetmvc %})
+* [Create the Management Grid]({% slug createstoremanaggrid_muscistorewebapp_aspnetmvc %})
+* [Create the Management Charts]({% slug createstoremanagcharts_muscistorewebapp_aspnetmvc %})

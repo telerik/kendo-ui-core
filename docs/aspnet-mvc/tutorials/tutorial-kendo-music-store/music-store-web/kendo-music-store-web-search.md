@@ -1,9 +1,12 @@
 ---
-title: Create the Album Search Box
+title: Create the Search Box
+page_title: Create the Search Box | Music Store Web App Tutorial
+description: "Learn how to create the Albums Search box in the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
+slug: createsearchbox_muscistorewebapp_aspnetmvc
 position: 6
 ---
 
-# Album Search - Kendo UI Music Store
+# Create the Search Box
 
 ![kendo-search-overview](/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-search-overview.png)
 
@@ -209,3 +212,19 @@ Then we can use a jQuery selector to get the &lt;div&gt; element within the &lt;
 
 Once we have the album ID, we can show our album details by calling **store.viewAlbumDetails(albumId);**, which
 will be discussed in more detail later in this tutorial.
+
+## See Also
+
+Other articles on the Kendo UI Music Store Web Application sample project:
+
+* [Overview of the Kendo UI Music Store Sample Project]({% slug overview_muscistoretutorial_aspnetmvc %})
+* [Set Up the Kendo UI Music Store Web Application Project]({% slug projectsetup_muscistorewebapp_aspnetmvc %})
+* [Create the Main Menu]({% slug createthemainmenu_muscistorewebapp_aspnetmvc %})
+* [Create the Home Page]({% slug createthehomepage_muscistorewebapp_aspnetmvc %})
+* [Create the Genre Page]({% slug createthegenrepage_muscistorewebapp_aspnetmvc %})
+* [Display Album Details]({% slug displayalbumdetails_muscistorewebapp_aspnetmvc %})
+* [Add the Shopping Cart]({% slug implementshoppingcart_muscistorewebapp_aspnetmvc %})
+* [Customize the Shopping Cart]({% slug customizeshoppingcart_muscistorewebapp_aspnetmvc %})
+* [Create the Checkout Page]({% slug createcheckoutpage_muscistorewebapp_aspnetmvc %})
+* [Create the Management Grid]({% slug createstoremanaggrid_muscistorewebapp_aspnetmvc %})
+* [Create the Management Charts]({% slug createstoremanagcharts_muscistorewebapp_aspnetmvc %})

@@ -1,9 +1,12 @@
 ---
-title: Create the Store Management Charts
+title: Create the Management Charts
+page_title: Create the Management Charts | Music Store Web App Tutorial
+description: "Learn how to create the Store Management charts in the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
+slug: createstoremanagcharts_muscistorewebapp_aspnetmvc
 position: 11
 ---
 
-# Create the Store Management Charts - Kendo UI Music Store
+# Create the Management Charts
 
 ![kendo-manage-charts-screenshot](/aspnet-mvc/tutorial-kendo-music-store/music-store-web/images/kendo-manage-charts-screenshot.png)
 
@@ -239,3 +242,19 @@ The **baseUnit** for the chart is also changed based on the date range.
 For Day, Week and Month, the scale is set to a single day.
 For Year, the scale is set to one month.
 This is done by setting the **options.categoryAxis.baseUnit** property on the chart before it is redrawn.
+
+## See Also
+
+Other articles on the Kendo UI Music Store Web Application sample project:
+
+* [Overview of the Kendo UI Music Store Sample Project]({% slug overview_muscistoretutorial_aspnetmvc %})
+* [Set Up the Kendo UI Music Store Web Application Project]({% slug projectsetup_muscistorewebapp_aspnetmvc %})
+* [Create the Main Menu]({% slug createthemainmenu_muscistorewebapp_aspnetmvc %})
+* [Create the Home Page]({% slug createthehomepage_muscistorewebapp_aspnetmvc %})
+* [Create the Genre Page]({% slug createthegenrepage_muscistorewebapp_aspnetmvc %})
+* [Display Album Details]({% slug displayalbumdetails_muscistorewebapp_aspnetmvc %})
+* [Create the Search Box]({% slug createsearchbox_muscistorewebapp_aspnetmvc %})
+* [Add the Shopping Cart]({% slug implementshoppingcart_muscistorewebapp_aspnetmvc %})
+* [Customize the Shopping Cart]({% slug customizeshoppingcart_muscistorewebapp_aspnetmvc %})
+* [Create the Checkout Page]({% slug createcheckoutpage_muscistorewebapp_aspnetmvc %})
+* [Create the Management Grid]({% slug createstoremanaggrid_muscistorewebapp_aspnetmvc %})

@@ -1,9 +1,12 @@
 ---
 title: Display Album Details
+page_title: Display Album Details | Music Store Web App Tutorial
+description: "Learn how to display the album details in the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
+slug: displayalbumdetails_muscistorewebapp_aspnetmvc
 position: 5
 ---
 
-# Display Album Details - Kendo UI Music Store
+# Display Album Details
 
 When an Album is clicked from any page, the album details are shown in a popup window.
 This window gives the user the ability to change the quantity, order and add the album to the cart.
@@ -177,3 +180,19 @@ This then calls the **updateQty()** function on the view model, which simply set
 
 Since the **total** function previously used the MVVM method **.get("quantity")**, view elements that are bound to **total** are notified
 that they need to update. This causes the total being displayed to the user to update.
+
+## See Also
+
+Other articles on the Kendo UI Music Store Web Application sample project:
+
+* [Overview of the Kendo UI Music Store Sample Project]({% slug overview_muscistoretutorial_aspnetmvc %})
+* [Set Up the Kendo UI Music Store Web Application Project]({% slug projectsetup_muscistorewebapp_aspnetmvc %})
+* [Create the Main Menu]({% slug createthemainmenu_muscistorewebapp_aspnetmvc %})
+* [Create the Home Page]({% slug createthehomepage_muscistorewebapp_aspnetmvc %})
+* [Create the Genre Page]({% slug createthegenrepage_muscistorewebapp_aspnetmvc %})
+* [Create the Search Box]({% slug createsearchbox_muscistorewebapp_aspnetmvc %})
+* [Add the Shopping Cart]({% slug implementshoppingcart_muscistorewebapp_aspnetmvc %})
+* [Customize the Shopping Cart]({% slug customizeshoppingcart_muscistorewebapp_aspnetmvc %})
+* [Create the Checkout Page]({% slug createcheckoutpage_muscistorewebapp_aspnetmvc %})
+* [Create the Management Grid]({% slug createstoremanaggrid_muscistorewebapp_aspnetmvc %})
+* [Create the Management Charts]({% slug createstoremanagcharts_muscistorewebapp_aspnetmvc %})

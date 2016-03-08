@@ -1,9 +1,12 @@
 ---
-title: Shopping Cart Implementation
+title: Add the Shopping Cart
+page_title: Add the Shopping Cart | Music Store Web App Tutorial
+description: "Learn how to add the Shopping Cart feature to the Kendo UI Music Store Web Application sample project by using Telerik UI for ASP.NET MVC."
+slug: implementshoppingcart_muscistorewebapp_aspnetmvc
 position: 7
 ---
 
-# Shopping Cart Implementation - Kendo UI Music Store
+# Add the Shopping Cart
 
 The shopping cart for the Kendo UI Music Store is in **Scripts\App\cart.js**.
 All the functionality for the cart is encapsulated in a single object, created by calling the **Cart()** constructor.
@@ -70,3 +73,19 @@ If the "Total" aggregate does not exist, we default to 0 since the cart is empty
 
 This gives us a convenient way of retrieving the total price for all items in the cart from anywhere in the Music Store
 by calling the **store.cart.getTotal()** function.
+
+## See Also
+
+Other articles on the Kendo UI Music Store Web Application sample project:
+
+* [Overview of the Kendo UI Music Store Sample Project]({% slug overview_muscistoretutorial_aspnetmvc %})
+* [Set Up the Kendo UI Music Store Web Application Project]({% slug projectsetup_muscistorewebapp_aspnetmvc %})
+* [Create the Main Menu]({% slug createthemainmenu_muscistorewebapp_aspnetmvc %})
+* [Create the Home Page]({% slug createthehomepage_muscistorewebapp_aspnetmvc %})
+* [Create the Genre Page]({% slug createthegenrepage_muscistorewebapp_aspnetmvc %})
+* [Display Album Details]({% slug displayalbumdetails_muscistorewebapp_aspnetmvc %})
+* [Create the Search Box]({% slug createsearchbox_muscistorewebapp_aspnetmvc %})
+* [Customize the Shopping Cart]({% slug customizeshoppingcart_muscistorewebapp_aspnetmvc %})
+* [Create the Checkout Page]({% slug createcheckoutpage_muscistorewebapp_aspnetmvc %})
+* [Create the Management Grid]({% slug createstoremanaggrid_muscistorewebapp_aspnetmvc %})
+* [Create the Management Charts]({% slug createstoremanagcharts_muscistorewebapp_aspnetmvc %})
