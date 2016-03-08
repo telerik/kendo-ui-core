@@ -499,6 +499,33 @@ Returns a range with the current active selection.
     </script>
 ```
 
+### showGridLines
+
+Gets or sets a flag indicating if the grid lines should be visible.
+
+#### Parameters
+
+##### showGridLiens `Boolean` *optional*
+
+If passed, the method will toggle the display of the grid lines according to the value.
+
+#### Returns
+
+`Boolean` True if the grid lines are currently visible, false otherwise.
+
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet();
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        var sheet = spreadsheet.activeSheet();
+
+        sheet.showGridLines(false);
+    </script>
+```
+
 ### toJSON
 Serializes the sheet in the format defined in the [sheet configuration](/api/javascript/ui/spreadsheet#configuration.sheets).
 
