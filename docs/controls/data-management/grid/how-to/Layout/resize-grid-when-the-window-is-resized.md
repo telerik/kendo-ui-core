@@ -1,17 +1,21 @@
 ---
-title: Resize Grid When Window Is Resized
-page_title:  Resize Grid When Window Is Resized | Kendo UI Grid
-description: "Learn how to resize a Kendo UI Grid widget when the parent window is resized too."
+title: Resize and Expand Grid to 100% Height
+page_title: Resize and Expand to 100% Height | Kendo UI Grid
+description: "Learn how to resize and expand a Kendo UI Grid widget to 100% height when the parent container or browser window is resized too."
 slug: howto_resize_whenthe_windowis_resized_grid
 ---
 
-# Resize Grid When Window Is Resized
+# Resize and Expand the Kendo UI Grid to 100% Height
 
 Web standards require elements with a percentage height to have a parent with an explicit height. The rule applies recursively until an element with a pixel height is reached, or the root `<html>` element is reached. In the latter case the `body` and `html` elements need a 100% height style as well. 100% high elements cannot have margins, paddings, borders, and siblings.
 
-The example below demonstrates how to resize the Kendo UI Grid when the parent window is resized.
+The examples below demonstrates how to resize the Kendo UI Grid in three different scenarios:
 
-###### Example
+1. a Kendo UI Grid resizes together with the browser viewport
+1. a Kendo UI Grid resizes together with a parent Kendo UI Window
+1. a Kendo UI Grid resizes together with a parent Kendo UI Splitter
+
+###### Example 1 - resize the Kendo UI Grid together with the browser viewport
 
 ```html
     <style>
@@ -71,13 +75,154 @@ The example below demonstrates how to resize the Kendo UI Grid when the parent w
         resizable: true,
         pageable: true,
         columns: [{
-          field:"OrderID",
-          filterable: false,
-          width: 200
+              field:"OrderID",
+              filterable: false,
+              width: 200
+            },
+            "ShipName",
+            "ShipCity"
+        ]
+      });
+    </script>
+```
+
+###### Example 2 - resize the Kendo UI Grid together with a Kendo UI Window
+
+```html
+    <style>
+      #grid
+      {
+        border-width: 0;
+        height: 100%; /* DO NOT USE !important for setting the Grid height! */
+      }
+      
+      #window
+      {
+        padding: 0;
+      }
+
+      html
+      {
+        font: 13px sans-serif;
+      }
+    </style>
+    <div id="window">
+      <div id="grid"></div>
+    </div>
+    <script>
+
+      $("#window").kendoWindow({
+        visible: false,
+        width: 600,
+        height: 300,
+        actions: ["maximize"],
+        title: "Kendo UI Window"
+      }).data("kendoWindow").center().open();
+    
+      $("#grid").kendoGrid({
+        dataSource: {
+          type: "odata",
+          transport: {
+            read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+          },
+          schema: {
+            model: {
+              fields: {
+                OrderID: { type: "number" },
+                ShipName: { type: "string" },
+                ShipCity: { type: "string" }
+              }
+            }
+          },
+          pageSize: 25,
+          serverPaging: true,
+          serverFiltering: true,
+          serverSorting: true
         },
-                  "ShipName",
-                  "ShipCity"
-                 ]
+        filterable: true,
+        sortable: true,
+        resizable: true,
+        pageable: true,
+        columns: [{
+                field:"OrderID",
+                filterable: false,
+                width: 200
+            },
+            "ShipName",
+            "ShipCity"
+        ]
+      });
+    </script>
+```
+
+###### Example 3 - resize the Kendo UI Grid together with a Kendo UI Splitter
+
+```html
+    <style>
+      html,
+      body,
+      #splitter,
+      #grid
+      {
+        margin: 0;
+        padding: 0;
+        border-width: 0;
+        height: 100%; /* DO NOT USE !important for setting the Grid height! */
+      }
+      
+      html
+      {
+        font: 13px sans-serif;
+        overflow: hidden;
+      }
+    </style>
+    <div id="splitter">
+      <div id="left-pane">left pane</div>
+      <div id="right-pane">
+        <div id="grid"></div>
+      </div>
+    </div>
+    <script>
+
+      $("#splitter").kendoSplitter({
+        panes: [
+            { size: 100 },
+            { }
+        ]
+      });
+    
+      $("#grid").kendoGrid({
+        dataSource: {
+          type: "odata",
+          transport: {
+            read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+          },
+          schema: {
+            model: {
+              fields: {
+                OrderID: { type: "number" },
+                ShipName: { type: "string" },
+                ShipCity: { type: "string" }
+              }
+            }
+          },
+          pageSize: 25,
+          serverPaging: true,
+          serverFiltering: true,
+          serverSorting: true
+        },
+        filterable: true,
+        sortable: true,
+        resizable: true,
+        pageable: true,
+        columns: [{
+                field:"OrderID",
+                filterable: false,
+                width: 200
+            },
+            "ShipName",
+            "ShipCity"
+        ]
       });
     </script>
 ```
