@@ -753,6 +753,9 @@ The row height in pixels.
     });
     </script>
 
+### sheets.showGridLines `Boolean` *(default: true)*
+A boolean value indicating if the sheet grid lines should be displayed.
+
 ### sheets.title `String`
 Deprecated in versions 2015.3 and newer. Use [name](#configuration-sheets.name) instead.
 
