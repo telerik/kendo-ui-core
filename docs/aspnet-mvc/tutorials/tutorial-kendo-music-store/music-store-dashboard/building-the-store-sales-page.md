@@ -38,7 +38,7 @@ For example, the chart type can be changed from a bar graph to a line graph by u
 
 ![sales-by-genre-bar-button-highlight](/tutorials/asp.net/kendo-music-store/music-store-dashboard/images/sales-by-genre-bar-button-highlight.png)
 
-The **Sales By Genre** and **Searches By Genre** charts are built similarly, with simple declarative markup and powerful JavaScript piping. The chart is contained within its own `&lt;div&gt;`, with an accompanying `&lt;span&gt;` that contains the buttons for changing the chart type. The **Sales By Genre** chart is constructed as demonstrated in the example below.
+The **Sales By Genre** and **Searches By Genre** charts are built similarly, with simple declarative markup and powerful JavaScript piping. The chart is contained within its own `<div>`, with an accompanying `<span>` that contains the buttons for changing the chart type. The **Sales By Genre** chart is constructed as demonstrated in the example below.
 
 ###### Example
 
@@ -52,7 +52,7 @@ The **Sales By Genre** and **Searches By Genre** charts are built similarly, wit
         <span class="chart-type-item chart-type-stacked-bar " data-charttype="stacked-bar"></span>
 	</span>
 
-Note the `change-genre-sales-chart-type` class on the governing `&lt;span&gt;`, and the `chart-type-item` on the individual `&lt;span&gt;`. These classes are used to register click events that lead to the chart type changing.
+Note the `change-genre-sales-chart-type` class on the governing `<span>`, and the `chart-type-item` on the individual `<span>`. These classes are used to register click events that lead to the chart type changing.
 
 ###### Example
 
@@ -61,7 +61,7 @@ Note the `change-genre-sales-chart-type` class on the governing `&lt;span&gt;`, 
         changeChartType.call(this, ".sales-by-genre-chart", ".change-genre-sales-chart-type");
     });
 
-The `changeChartType` is a function that performs the chart type change, taking two parameters&mdash;the class of the chart to change and the class of the governing `&lt;span&gt;` containing the buttons. The use of the `call()` invocation, along with passing `this` tells the function to perform as a member of the button, rather than globally.
+The `changeChartType` is a function that performs the chart type change, taking two parameters&mdash;the class of the chart to change and the class of the governing `<span>` containing the buttons. The use of the `call()` invocation, along with passing `this` tells the function to perform as a member of the button, rather than globally.
 
 ###### Example
 

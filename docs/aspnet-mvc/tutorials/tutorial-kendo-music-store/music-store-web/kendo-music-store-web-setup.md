@@ -154,7 +154,7 @@ The example below demonstrates how to use the `kendo.default.min.css` which is t
         @RenderSection("scripts", required: false)
     </body>
 
-It is a common practice to include as much JavaScript at the bottom of the `&lt;body&gt;` element as possible. In the Music Store project, you are actually including jQuery in the `&lt;head&gt;`. This aspect is discussed in the tutorial&mdash;however, the reason for it is that on a later stage you are going to use some of [UI for ASP.NET MVC]({% slug aspnetmvc4_aspnetmvc %}) which inserts `&lt;script&gt;` tags into the `&lt;body&gt;` of the page, and requires that jQuery is already defined.
+It is a common practice to include as much JavaScript at the bottom of the `<body>` element as possible. In the Music Store project, you are actually including jQuery in the `<head>`. This aspect is discussed in the tutorial&mdash;however, the reason for it is that on a later stage you are going to use some of [UI for ASP.NET MVC]({% slug aspnetmvc4_aspnetmvc %}) which inserts `<script>` tags into the `<body>` of the page, and requires that jQuery is already defined.
 
 ## Handle the Database
 
