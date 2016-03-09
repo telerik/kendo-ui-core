@@ -8754,6 +8754,10 @@ The widget instance which fired the event.
 
 The values entered by the user. **Available only when the [editable.mode](#configuration-editable.mode) option is set to "incell".**
 
+##### e.preventDefault `Function`
+
+If invoked, prevents the save action. In "incell" [editable.mode](#configuration-editable.mode) the edited table cell will exit edit mode. In "inline" and "popup" edit modes, the edit form will remain open.
+
 #### Example - subscribe to the "save" event during initialization
     <div id="grid"></div>
     <script>
@@ -8774,11 +8778,14 @@ The values entered by the user. **Available only when the [editable.mode](#confi
       },
       editable: true,
       save: function(e) {
-        if (e.values.name) {
+        if (e.values.name !== "") {
           // the user changed the name field
-          if (e.values.name != e.model.name) {
+          if (e.values.name !== e.model.name) {
             console.log("name is modified");
           }
+        } else {
+            e.preventDefault();
+            console.log("name cannot be empty");
         }
       }
     });
@@ -8788,12 +8795,15 @@ The values entered by the user. **Available only when the [editable.mode](#confi
     <div id="grid"></div>
     <script>
     function grid_save(e) {
-      if (e.values.name) {
-        // the user changed the name field
-        if (e.values.name != e.model.name) {
-          console.log("name is modified");
+        if (e.values.name !== "") {
+          // the user changed the name field
+          if (e.values.name !== e.model.name) {
+            console.log("name is modified");
+          }
+        } else {
+            e.preventDefault();
+            console.log("name cannot be empty");
         }
-      }
     }
     $("#grid").kendoGrid({
       columns: [
