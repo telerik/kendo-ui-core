@@ -1,9 +1,16 @@
 ---
+<<<<<<< 95eb6811b193ad526373e1750bf4185546c0555f
 title: Overview
 page_title: Overview | Telerik UI for ASP.NET MVC 6
 description: "Download and install Telerik UI for ASP.NET MVC 6, and run the sample application."
 slug: overview_aspnetmvc6_aspnetmvc
 position: 1
+=======
+title: Introductionw
+page_title: Introduction to Telerik UI for ASP.NET MVC 6
+description: How to download, install Telerik UI for ASP.NET MVC 6 and run the sample application.
+position: -1
+>>>>>>> Update MVC6 documentation with instructions for using Docker image for starting Sample application
 ---
 
 # Overview of Telerik UI for ASP.NET MVC 6 - RC1
@@ -54,6 +61,13 @@ To be able to run the sample application on Linux, make sure you provide for the
 - Restore the packages using the `dnu restore` command.
 - Run the application using the `dnx web` command.
 - In your browser, navigate to `localhost:5000`.
+
+# Running the Sample Application using Docker image
+
+- See [Install Docker Engine](https://docs.docker.com/engine/installation/) on one of the supported platforms
+- Pull the latest [Kendo offline demos image](https://hub.docker.com/r/telerik/kendo_offline_demos/)
+- Run the image inside the desired container using `sudo docker run -d -p 5000:5000 --name web telerik/kendo_offline_demos:latest`
+- In your browser navigate to `localhost:5000`
 
 ## See Also
 
