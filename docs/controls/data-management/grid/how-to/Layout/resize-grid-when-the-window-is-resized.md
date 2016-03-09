@@ -9,13 +9,15 @@ slug: howto_resize_whenthe_windowis_resized_grid
 
 Web standards require elements with a percentage height to have a parent with an explicit height. The rule applies recursively until an element with a pixel height is reached, or the root `<html>` element is reached. In the latter case the `body` and `html` elements need a 100% height style as well. 100% high elements cannot have margins, paddings, borders, and siblings.
 
-The examples below demonstrates how to resize the Kendo UI Grid in three different scenarios:
+The examples below demonstrate how to resize the Kendo UI Grid in three different scenarios:
 
-1. resize a Kendo UI Grid together with the browser viewport
-1. resize a Grid in a Kendo UI Window
-1. resize a Grid resizes in a Kendo UI Splitter
+1. Resize a Kendo UI Grid together with the browser viewport.
+1. Resize a Grid in a Kendo UI Window.
+1. Resize a Grid resizes in a Kendo UI Splitter.
 
-###### Example 1 - resize the Kendo UI Grid together with the browser viewport
+The example below demonstrates how to resize the Kendo UI Grid together with the browser viewport.
+
+###### Example
 
 ```html
     <style>
@@ -86,7 +88,9 @@ The examples below demonstrates how to resize the Kendo UI Grid in three differe
     </script>
 ```
 
-###### Example 2 - resize the Kendo UI Grid in a Kendo UI Window
+The example below demonstrates how to resize the Kendo UI Grid in a Kendo UI Window.
+
+###### Example
 
 ```html
     <style>
@@ -95,7 +99,7 @@ The examples below demonstrates how to resize the Kendo UI Grid in three differe
         border-width: 0;
         height: 100%; /* DO NOT USE !important for setting the Grid height! */
       }
-      
+
       #window
       {
         padding: 0;
@@ -118,7 +122,7 @@ The examples below demonstrates how to resize the Kendo UI Grid in three differe
         actions: ["maximize"],
         title: "Kendo UI Window"
       }).data("kendoWindow").center().open();
-    
+
       $("#grid").kendoGrid({
         dataSource: {
           type: "odata",
@@ -155,7 +159,9 @@ The examples below demonstrates how to resize the Kendo UI Grid in three differe
     </script>
 ```
 
-###### Example 3 - resize the Kendo UI Grid in a Kendo UI Splitter
+The example below demonstrates how to resize the Kendo UI Grid in a Kendo UI Splitter.
+
+###### Example
 
 ```html
     <style>
@@ -169,7 +175,7 @@ The examples below demonstrates how to resize the Kendo UI Grid in three differe
         border-width: 0;
         height: 100%; /* DO NOT USE !important for setting the Grid height! */
       }
-      
+
       html
       {
         font: 13px sans-serif;
@@ -190,7 +196,7 @@ The examples below demonstrates how to resize the Kendo UI Grid in three differe
             { }
         ]
       });
-    
+
       $("#grid").kendoGrid({
         dataSource: {
           type: "odata",

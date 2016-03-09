@@ -53,10 +53,8 @@ Kendo UI Upload is a widget based on standards and requires no plug-ins. It supp
 Progress tracking, file drag-and-drop, and in-progress cancellation of upload are automatically enabled if supported by the browser. For detailed information on the browser versions which support the Upload features, refer to [this article]({% slug browsersupport_upload_widget %}).
 
 > **Important**
->
-> Uploading large files in chunks is currently not supported, as it would require an additional plug-in&mdash;eitherFlash, or Silverlight&mdash;to compensate for the missing File API support in older browsers.
->
-> The Upload widget works in `<input type="file" />` elements, so it is only able to upload files selected by the user, which exist in the file system. For uploading of files generated with JavaScript on the fly, use another approach, e.g. an Ajax request.
+> * Uploading large files in chunks is currently not supported, as it would require an additional plug-in&mdash;eitherFlash, or Silverlight&mdash;to compensate for the missing File API support in older browsers.
+> * The Upload widget works in `<input type="file" />` elements, so it is only able to upload files selected by the user, which exist in the file system. For uploading files generated with JavaScript on the fly, use another approach, e.g. an Ajax request.
 
 ### Modes of Operation
 
