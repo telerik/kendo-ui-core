@@ -40,6 +40,7 @@ To be able to run the sample application on Windows, make sure you provide for t
 
 - Download [Visual Studio 2015](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx).
 - Download [Microsoft ASP.NET and Web Tools 2015 (RC1)](https://www.microsoft.com/en-us/download/details.aspx?id=49959).
+- Install [SQLite3](http://mislav.net/rails/install-sqlite3/).
 - Download the matching release of the [Sample Application](https://github.com/telerik/ui-for-aspnet-mvc-6-demos/releases).
 - Open the `Kendo.Mvc.Examples.sln` solution in Visual Studio.
 - Run the application.
@@ -49,18 +50,21 @@ To be able to run the sample application on Windows, make sure you provide for t
 To be able to run the sample application on Linux, make sure you provide for the requirements listed below.
 
 - For information on installing ASP.NET 5 on Linux, refer to [this article](http://docs.asp.net/en/latest/getting-started/installing-on-linux.html).
+- Install [SQLite3](http://mislav.net/rails/install-sqlite3/).
 - Download the matching release of the [Sample Application](https://github.com/telerik/ui-for-aspnet-mvc-6-demos/releases).
 - Navigate to the `Kendo.Mvc.Examples` folder using the Terminal.
 - Restore the packages using the `dnu restore` command.
 - Run the application using the `dnx web` command.
 - In your browser, navigate to `localhost:5000`.
 
-# Running the Sample Application using Docker image
+### On Docker Engine
 
-- See [Install Docker Engine](https://docs.docker.com/engine/installation/) on one of the supported platforms
-- Pull the latest [Kendo offline demos image](https://hub.docker.com/r/telerik/kendo_offline_demos/)
-- Run the image inside the desired container using `sudo docker run -d -p 5000:5000 --name web telerik/kendo_offline_demos:latest`
-- In your browser navigate to `localhost:5000`
+To be able to run the sample application on Docker Engine (multi-platform), make sure you provide for the requirements listed below.
+
+- See [Install Docker Engine](https://docs.docker.com/engine/installation/) on one of the supported platforms.
+- Pull the latest [Kendo offline demos image](https://hub.docker.com/r/telerik/kendo_offline_demos/).
+- Run the image inside the desired container using `sudo docker run -d -p 5000:5000 --name web telerik/kendo_offline_demos:latest`.
+- In your browser navigate to `localhost:5000`.
 
 ## See Also
 
