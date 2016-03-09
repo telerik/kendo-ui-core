@@ -176,7 +176,7 @@ kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
   "allPages": "Բոլորը",
   "page": "Էջ",
-  "display": "Ցուցադրված են {0} - {1} {2}-ից",
+  "display": "Ցուցադրված են {0}-{1} տողերը {2}-ից",
   "of": "{0}-ից",
   "empty": "Տվյալներ չկան",
   "refresh": "Թարմացնել",
