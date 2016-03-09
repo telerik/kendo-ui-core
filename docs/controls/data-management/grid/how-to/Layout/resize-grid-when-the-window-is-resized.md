@@ -11,9 +11,9 @@ Web standards require elements with a percentage height to have a parent with an
 
 The examples below demonstrates how to resize the Kendo UI Grid in three different scenarios:
 
-1. a Kendo UI Grid resizes together with the browser viewport
-1. a Kendo UI Grid resizes together with a parent Kendo UI Window
-1. a Kendo UI Grid resizes together with a parent Kendo UI Splitter
+1. resize a Kendo UI Grid together with the browser viewport
+1. resize a Grid in a Kendo UI Window
+1. resize a Grid resizes in a Kendo UI Splitter
 
 ###### Example 1 - resize the Kendo UI Grid together with the browser viewport
 
@@ -86,7 +86,7 @@ The examples below demonstrates how to resize the Kendo UI Grid in three differe
     </script>
 ```
 
-###### Example 2 - resize the Kendo UI Grid together with a Kendo UI Window
+###### Example 2 - resize the Kendo UI Grid in a Kendo UI Window
 
 ```html
     <style>
@@ -155,7 +155,7 @@ The examples below demonstrates how to resize the Kendo UI Grid in three differe
     </script>
 ```
 
-###### Example 3 - resize the Kendo UI Grid together with a Kendo UI Splitter
+###### Example 3 - resize the Kendo UI Grid in a Kendo UI Splitter
 
 ```html
     <style>
