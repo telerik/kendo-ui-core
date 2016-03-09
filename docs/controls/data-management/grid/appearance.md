@@ -145,6 +145,7 @@ Virtual scrolling relies on a fake scrollbar. Its size is not determined by the 
         white-space: nowrap;
     }
 
+<!--*-->
 > **Important**  
 > * The page size of the Grid must be large-enough, so that the table rows do not fit in the scrollable data area. Otherwise the vertical virtual scrollbar will not be created.
 > * The page size of the Grid must be over three times larger than the number of visible table rows in the data area.
@@ -183,7 +184,7 @@ Set the height of the Grid in one of the following ways:
 
 It makes sense to set a height to the Grid only if its scrolling is enabled.
 
-When the Grid has a set height, it calculates the appropriate height of its scrollable data area, so that the sum of the header rows, filter row, data, footer, and pager is equal to the expected Grid height. That is why, if the Grid height is changed via JavaScript after you create the widget, you must call the [`resize` method of the Grid](/using-kendo-in-responsive-web-pages) afterwards. In this way, the Grid recalculates the height of its data area.
+When the Grid has a set height, it calculates the appropriate height of its scrollable data area, so that the sum of the header rows, filter row, data, footer, and pager is equal to the expected Grid height. That is why, if the Grid height is changed via JavaScript after you create the widget, you must call the [`resize` method of the Grid]({% slug responsivewebdesign_integration_kendoui %}) afterwards. In this way, the Grid recalculates the height of its data area.
 
 **Figure 1. Grid with a fixed height and its scrolling functionality enabled**
 
@@ -217,7 +218,7 @@ You can use the `.k-grid` class instead of the `GridID` to target all widget ins
 
 To make the Grid 100% high and resize together with its parent, first apply a 100% height style to the Grid [(i.e. to the widget's `<div class="k-grid">` wrapper)]({% slug widgetwrapperandelement_references_gettingstarted %}). According to web standards, elements with a percentage height require that their parent has an explicit height. This requirement applies recursively either until an element with a pixel height, or the `html` element is reached. 100% high elements cannot have margins, paddings, borders, or sibling elements, so remove the default border of the Grid as well.
 
-Secondly, ensure that the inner Grid layout adapts to changes in the height of the Grid wrapper `<div>`. If those changes are triggered by browser window resizing, subscribe to the window `resize` event of the browser and execute the [`resize`](/using-kendo-in-responsive-web-pages) method of the Grid. The `resize` method will take care of measuring the height of the Grid `<div>` and adjusting the height of the scrollable data area. You do not need to call the `resize` method if the Grid is placed inside a Kendo UI Splitter or Kendo UI Window, because these widgets will execute it automatically. Also, you do not need the method if you use locked (frozen) columns.
+Secondly, ensure that the inner Grid layout adapts to changes in the height of the Grid wrapper `<div>`. If those changes are triggered by browser window resizing, subscribe to the window `resize` event of the browser and execute the [`resize`]({% slug responsivewebdesign_integration_kendoui %}) method of the Grid. The `resize` method will take care of measuring the height of the Grid `<div>` and adjusting the height of the scrollable data area. You do not need to call the `resize` method if the Grid is placed inside a Kendo UI Splitter or Kendo UI Window, because these widgets will execute it automatically. Also, you do not need the method if you use locked (frozen) columns.
 
 If the available vertical space for the Grid depends on a custom layout resizing controlled by the user, use a suitable event or method related to the layout changes to execute the `resize` method of the Grid. In this case, call the `resize` method even if you use locked (frozen) columns.
 
@@ -265,6 +266,7 @@ If needed, a fixed table layout can be applied to a non-scrollable Grid.
         table-layout: fixed;
     }
 
+<!--*-->
 Column widths should be set only via the `width` property of the Grid columns. Using table cell width styles is not recommended. When creating the Grid from an HTML `table`, column widths can be set via width styles of the table `col` elements.
 
 > **Important**
@@ -324,7 +326,9 @@ When Grid scrolling is `enabled` and a column is resized, all other columns will
 * If it is equal to the Grid width, then no horizontal scrollbar will be visible.
 * If it is less than the Grid width, then empty space after the last column will appear.
 
-The last Grid column has no right border by design, so that no double border appears at the right end of the Grid if the Grid table width matches the Grid widget width, which is the most common scenario. If needed, a right border can be applied with the following CSS code:
+The last Grid column has no right border by design, so that no double border appears at the right end of the Grid if the Grid table width matches the Grid widget width, which is the most common scenario. If needed, a right border can be applied with the following CSS code.
+
+###### Example
 
     .k-grid-header-wrap > table,
     .k-grid-content > table {
@@ -369,18 +373,22 @@ Depending on the Grid configuration, the widget may need to perform JavaScript c
 
 Depending on the exact scenario, the following behavior can be observed when the widget is eventually displayed:
 
-* The scrollable data area overflows the bottom border of the Grid. This can be resolved by executing the [`resize`](/using-kendo-in-responsive-web-pages#individual-widget-resizing) method when the Grid becomes visible. Alternatively, apply the desired height to the scrollable data area instead of the Grid widget:
+* The scrollable data area overflows the bottom border of the Grid. This can be resolved by executing the [`resize`]({% slug responsivewebdesign_integration_kendoui %}#individual-widget-resizing) method when the Grid becomes visible. Alternatively, apply the desired height to the scrollable data area instead of the Grid widget.
+
+###### Example
 
         #GridID .k-grid-content
         {
             height: 270px;
         }
 
-* The virtual scrollbar is not visible. This can be resolved by executing the [`resize`](/using-kendo-in-responsive-web-pages#individual-widget-resizing) method when the Grid becomes visible. For Kendo UI Q3 2014 (2014.3.1119) release and older, apply the following statement instead of `resize()`:
+* The virtual scrollbar is not visible. This can be resolved by executing the [`resize`](/using-kendo-in-responsive-web-pages#individual-widget-resizing) method when the Grid becomes visible. For Kendo UI Q3 2014 (2014.3.1119) release and older, apply the following statement instead of `resize()`.
+
+###### Example
 
         $("#GridID").data("kendoGrid").dataSource.fetch();
 
-* Frozen columns are too narrow and non-frozen columns are not visible. This can be resolved by executing the [`resize`](/using-kendo-in-responsive-web-pages#individual-widget-resizing) method when the Grid becomes visible.
+* Frozen columns are too narrow and non-frozen columns are not visible. This can be resolved by executing the [`resize`]({% slug responsivewebdesign_integration_kendoui %}#individual-widget-resizing) method when the Grid becomes visible.
 
 In some cases it may be possible to delay the initialization of the Grid, or change the order in which various Kendo UI widgets are initialized, so that the Grid is initialized while visible. For more information on how to initialize the Grid inside other Kendo UI widgets which act as hidden containers, see:
 
@@ -394,13 +402,18 @@ In some cases it may be possible to delay the initialization of the Grid, or cha
 
 As of Kendo UI Q1 2016 row hover state styles are added to all Kendo UI themes. Hover is a useful UI state providing visual affordance especially across long table rows and in the editing mode of the Grid. However, there are scenarios in which the `hover` state might be misleading and is not needed.
 
-There are two ways to remove the hover styling. One is to open the Kendo UI theme CSS file (e.g. `kendo.default.min.css`) and remove the following CSS rule:
+There are two ways to remove the hover styling. One is to open the Kendo UI theme CSS file (e.g. `kendo.default.min.css`) and remove the following CSS rule.
+
+###### Example
 
     .k-grid tr:hover {
         /* ...background styles here... */
     }
 
+<!--*-->
 The other option is to use the following CSS code to override the hover styling.
+
+###### Example
 
     .k-grid tr:not(.k-state-selected):hover {
         background: none;
