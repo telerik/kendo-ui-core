@@ -1,16 +1,9 @@
 ---
-<<<<<<< 95eb6811b193ad526373e1750bf4185546c0555f
 title: Overview
 page_title: Overview | Telerik UI for ASP.NET MVC 6
 description: "Download and install Telerik UI for ASP.NET MVC 6, and run the sample application."
 slug: overview_aspnetmvc6_aspnetmvc
 position: 1
-=======
-title: Introductionw
-page_title: Introduction to Telerik UI for ASP.NET MVC 6
-description: How to download, install Telerik UI for ASP.NET MVC 6 and run the sample application.
-position: -1
->>>>>>> Update MVC6 documentation with instructions for using Docker image for starting Sample application
 ---
 
 # Overview of Telerik UI for ASP.NET MVC 6 - RC1
