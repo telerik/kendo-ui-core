@@ -64,7 +64,7 @@ Here is an enhanced example, which shows how to hide or show the scrollbar, depe
 
 ### Restore Scroll Positions
 
-In some scenarios, the Grid scroll position may be reset when the widget is rebound. If you want to avoid this behavior, save the scroll position in the [`dataBinding`](/api/javascript/ui/grid#events-dataBinding) event and restore it in the [`dataBound`](/api/javascript/ui/grid#events-dataBound) event. The scrollable container is `div.k-grid-content` and you can retrieve it as a child element of the widget [`wrapper`](/framework/widgets/wrapper-element).
+In some scenarios, the Grid scroll position may be reset when the widget is rebound. If you want to avoid this behavior, save the scroll position in the [`dataBinding`](/api/javascript/ui/grid#events-dataBinding) event and restore it in the [`dataBound`](/api/javascript/ui/grid#events-dataBound) event. The scrollable container is `div.k-grid-content` and you can retrieve it as a child element of the widget [`wrapper`]({% slug widgetwrapperandelement_references_gettingstarted %}).
 
 ###### Example
 
@@ -215,9 +215,9 @@ You can use the `.k-grid` class instead of the `GridID` to target all widget ins
 >
 > This section is applicable to scrollable Grids only.
 
-To make the Grid 100% high and resize together with its parent, first apply a 100% height style to the Grid [(i.e. to the widget's `<div class="k-grid">` wrapper)](/framework/widgets/wrapper-element). According to web standards, elements with a percentage height require that their parent has an explicit height. This requirement applies recursively either until an element with a pixel height, or the `html` element is reached. 100% high elements cannot have margins, paddings, borders, or sibling elements, so remove the default border of the Grid as well.
+To make the Grid 100% high and resize together with its parent, first apply a 100% height style to the Grid [(i.e. to the widget's `<div class="k-grid">` wrapper)]({% slug widgetwrapperandelement_references_gettingstarted %}). According to web standards, elements with a percentage height require that their parent has an explicit height. This requirement applies recursively either until an element with a pixel height, or the `html` element is reached. 100% high elements cannot have margins, paddings, borders, or sibling elements, so remove the default border of the Grid as well.
 
-Second, ensure that the inner Grid layout adapts to changes in the height of the Grid wrapper `<div>`. If those changes are triggered by browser window resizing, subscribe to the window `resize` event of the browser and execute the [`resize`](/using-kendo-in-responsive-web-pages) method of the Grid. The `resize` method will take care of measuring the height of the Grid `<div>` and adjusting the height of the scrollable data area. You do not need to call the `resize` method if the Grid is placed inside a Kendo UI Splitter or Kendo UI Window, because these widgets will execute it automatically. Also, you do not need the method if you use locked (frozen) columns.
+Secondly, ensure that the inner Grid layout adapts to changes in the height of the Grid wrapper `<div>`. If those changes are triggered by browser window resizing, subscribe to the window `resize` event of the browser and execute the [`resize`](/using-kendo-in-responsive-web-pages) method of the Grid. The `resize` method will take care of measuring the height of the Grid `<div>` and adjusting the height of the scrollable data area. You do not need to call the `resize` method if the Grid is placed inside a Kendo UI Splitter or Kendo UI Window, because these widgets will execute it automatically. Also, you do not need the method if you use locked (frozen) columns.
 
 If the available vertical space for the Grid depends on a custom layout resizing controlled by the user, use a suitable event or method related to the layout changes to execute the `resize` method of the Grid. In this case, call the `resize` method even if you use locked (frozen) columns.
 

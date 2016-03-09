@@ -84,13 +84,15 @@ The Kendo UI MVVM also supports data binding to nested View-Model fields, as dem
 
 ### Important Notes
 
-#### Setting of numeric options as strings
+#### Set Numeric Options as Strings
 
-Some Kendo UI widgets accept string options, which represent numbers and can be parsed as such. For example:
+Some Kendo UI widgets accept string options, which represent numbers and can be parsed as such.
+
+###### Example
 
     <input data-role="maskedtextbox" data-mask="09">
 
-The above mask will be parsed as a number and the widget will receive a single 9 digit in its initialization method, instead of a `"09"` string. In such scenarios, the widget options must be [set with custom MVVM binding](/controls/editors/maskedtextbox/how-to/MVVM/custom-mask-binding).
+The above mask will be parsed as a number and the widget will receive a single 9-digit in its initialization method, instead of a `"09"` string. In such scenarios, the widget options must be [set with custom MVVM binding]({% slug howto_customize_masks_through_mvvmbinding_mvvm_maskedtextbox %}).
 
 #### Bindings Are Not JavaScript Code
 
