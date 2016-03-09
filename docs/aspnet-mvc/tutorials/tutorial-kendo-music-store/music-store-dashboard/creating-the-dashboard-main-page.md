@@ -43,7 +43,7 @@ To implement the listings of the Sales for the various times, start with some si
         </span>
     </section>
 
-Each of the amount `&lt;spans&gt;s` contain the `data-bind` attribute that specifies the name of the data in the scheme to place in that view.
+Each of the `<span>` elements contain the `data-bind` attribute that specifies the name of the data in the scheme to place in that view.
 
 This data is bound to an external `DataSource`, which is pulled and bound to these display widgets in the `main-view.js` file.
 
@@ -143,7 +143,7 @@ The `Albums` ListView is constructed similarly, with the same structure.
 
 ### Create Custom Backgrounds for Gauges
 
-The radial gauges on this page use a custom background image of a record. Every gauge is contained within its own `&lt;div&gt;`, as demonstrated in the example below.
+The radial gauges on this page use a custom background image of a record. Every gauge is contained within its own `<div>`, as demonstrated in the example below.
 
 ###### Example
 

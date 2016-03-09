@@ -63,7 +63,7 @@ These tiles are constructed by using standard declarative markup in HTML and Jav
         </span>
     </div>
 
-Each tile is its own `&lt;span&gt;`, each with a `social-tile-wrapper` class that is used to associate a click event in the JavaScript.
+Each tile is its own `<span>`, each with a `social-tile-wrapper` class that is used to associate a click event in the JavaScript.
 
 ###### Example
 

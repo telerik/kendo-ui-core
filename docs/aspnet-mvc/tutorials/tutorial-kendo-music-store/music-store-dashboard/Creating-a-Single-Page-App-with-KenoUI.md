@@ -71,7 +71,7 @@ A large amount of the structure is therefore included in `_Layout.cshtml`. Note 
         <script src="@Url.Content("~/js/debug/app.js")" type="text/javascript"></script>
     </body>
 
-References to various Kendo CSS&mdash;in `&lt;head&gt;`&mdash;are also required.
+References to various Kendo CSS&mdash;in `<head>`&mdash;are also required.
 
 ###### Example
 
@@ -225,7 +225,7 @@ When a view is requested, its create method is called. For the Music Store Dashb
 
 The various pages of the Music Dashboard are accessed through the navigation strip at the top.
 
-Because the Music Dashboard is a SPA, the strip must be placed in `_Layout.cshtml` so that the navigation is available on every page. Each page, other than the main one, must be placed in the `&lt;nav&gt;`.
+Because the Music Dashboard is a SPA, the strip must be placed in `_Layout.cshtml` so that the navigation is available on every page. Each page, other than the main one, must be placed in the `<nav>`.
 
 ###### Example
 
@@ -237,7 +237,7 @@ Because the Music Dashboard is a SPA, the strip must be placed in `_Layout.cshtm
 	        </nav>
 		</header>
 
-The `class` attributes in the `&lt;span&gt;` tags are defined in `Site.css`.
+The `class` attributes in the `<span>` tags are defined in `Site.css`.
 
 ### Set Up Clicks and Routing
 

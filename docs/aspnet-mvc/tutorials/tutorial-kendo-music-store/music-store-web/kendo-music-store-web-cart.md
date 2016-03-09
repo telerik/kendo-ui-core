@@ -8,30 +8,25 @@ position: 7
 
 # Add the Shopping Cart
 
-The shopping cart for the Kendo UI Music Store is in **Scripts\App\cart.js**.
-All the functionality for the cart is encapsulated in a single object, created by calling the **Cart()** constructor.
+The shopping cart for the Kendo UI Music Store is located in `Scripts\App\cart.js`. All of its functionalities are encapsulated in a single object, created by calling the `Cart()` constructor.
 
-## Store Cart Data
+## Configuration
 
-The data for the items in the cart is held in the browser's HTML5 Local Storage.
-No data is sent back to the server when items are added or removed from the cart.
+### Store Cart Data
 
-Anywhere in the Music Store that the cart needs to be accessed, the **cart.getCart()** method is called.
-This returns a Kendo UI DataSource object that contains the cart items.
-It also listens for the **change** event on the DataSource and on change will recalculate the total price for each item.
-Once the totals are updated, the cart data is also updated in the local storage.
+The data for the items in the cart is held in the HTML5 Local Storage of the browser. No data is sent back to the server when items are added or removed from the cart.
 
-## Benefits of a Shared Cart DataSource
+Anywhere in the Music Store that the cart needs to be accessed, the `cart.getCart()` method is called. This returns a Kendo UI DataSource object that contains the cart items. It also listens for the `change` event on the DataSource and recalculates the total price for each item on change. Once the totals are updated, the cart data is also updated in the local storage.
 
-By providing a DataSource to bind against for cart data we give all parts of the application a way to be notified
-of cart data updates.
-For example, since the cart menu widget and cart checkout view are bound to the same datasource, if you navigate
-to the checkout page and remove an item from the cart the cart menu widget will immediately update.
-No extra JavaScript has to be written to accomplish this. The widget is notified of the DataSource change and knows to update.
+### Use Shared Cart DataSource
 
-## Tracking the Total Price
+By providing a DataSource to bind against for cart data, all parts of the application are provided with a way to be notified of cart data updates. For example, since the cart menu widget and cart checkout view are bound to the same dataSource, if you navigate to the **Checkout** page and remove an item from the cart, the cart menu widget immediately updates. No extra JavaScript has to be written to accomplish this. The widget is notified of the DataSource change and knows to update.
 
-When the **getCart()** function creates a DataSource to represent the cart data and adds an aggregate for the totals.
+### Track the Total Price
+
+The example below demonstrates when the `getCart()` function creates a DataSource to represent the cart data and adds an aggregate for the totals.
+
+###### Example
 
     this.getCart = function () {
         if (!cartData) {
@@ -50,13 +45,14 @@ When the **getCart()** function creates a DataSource to represent the cart data 
         return cartData;
     };
 
-When any item changes the **change** event is triggered, which calls a function that loops over all the items
-and sets the "Total" property on the item to the Price * Quantity.
+<!--_-->
+When an item changes, the `change` event is triggered, which calls a function that loops over all the items and sets the `Total` property on the item to the Price * Quantity.
 
-There is also an **aggregate** defined on the DataSource that sums the values of the Total properties.
+There is also an `aggregate` defined on the DataSource that sums up the values of the `Total` properties.
 
-A convenience function is defined on the cart that retrieves the value of the aggregate:
+The example below demonstrates how to define a convenience function on the cart that retrieves the value of the aggregate.
 
+###### Example
 
     this.getTotalPrice = function () {
         // Return the aggregate of album totals.
@@ -65,21 +61,16 @@ A convenience function is defined on the cart that retrieves the value of the ag
         return aggregates.Total ? aggregates.Total.sum : 0;
     }
 
-When the set of items in the DataSource is empty, the aggregate will not be created,
-so we need to check for its existence before reading its value.
-The array of all the aggregates is retrieved by calling the **.aggregates()** function.
-The aggregate is then accessed by its field name, and finally its aggregate name.
-If the "Total" aggregate does not exist, we default to 0 since the cart is empty.
+When the set of items in the DataSource is empty, the aggregate is not created, so you need to check for its existence before reading its value. The array of all the aggregates is retrieved by calling the `.aggregates()` function. The aggregate is then accessed by its field name, and finally its aggregate name. If the `Total` aggregate does not exist, its value is defaulted to `0` since the cart is empty.
 
-This gives us a convenient way of retrieving the total price for all items in the cart from anywhere in the Music Store
-by calling the **store.cart.getTotal()** function.
+This provides a convenient way of retrieving the total price for all items in the cart from anywhere in the Music Store by calling the `store.cart.getTotal()` function.
 
 ## See Also
 
 Other articles on the Kendo UI Music Store Web Application sample project:
 
 * [Overview of the Kendo UI Music Store Sample Project]({% slug overview_muscistoretutorial_aspnetmvc %})
-* [Set Up the Kendo UI Music Store Web Application Project]({% slug projectsetup_muscistorewebapp_aspnetmvc %})
+* [Set Up the Kendo UI Music Store Web App]({% slug projectsetup_muscistorewebapp_aspnetmvc %})
 * [Create the Main Menu]({% slug createthemainmenu_muscistorewebapp_aspnetmvc %})
 * [Create the Home Page]({% slug createthehomepage_muscistorewebapp_aspnetmvc %})
 * [Create the Genre Page]({% slug createthegenrepage_muscistorewebapp_aspnetmvc %})
