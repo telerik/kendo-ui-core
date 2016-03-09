@@ -119,8 +119,9 @@ Quote the key if it contains spaces or other symbols which are not valid for a J
 
 ##### options.fields.fieldName.defaultValue
 
-Specifies the which will be used for the field when a new model instance is created. Default settings depend on the type of the field. Default for "string" is `""`,
-for "number" is `0` and for "date" is `new Date()` (today).
+Specifies the default value which will be used for the field when a new model instance is created. The default settings depend on the type of the field. The default value for "string" is `""`, for "number" is `0`, and for "date" is `new Date()` (today).
+
+The parameter can also be set to a function that returns the dynamic default values of the fields. For a live demo, refer to [this how-to example]({% slug howto_gridfiltering_dynamicdefaultvalues_grid %}).
 
 ##### options.fields.fieldName.editable `Boolean`
 
