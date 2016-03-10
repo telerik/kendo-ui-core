@@ -1136,15 +1136,18 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var options = that.options;
             var cascade = options.cascadeFrom;
-            var cascadeHandler;
             var parent;
 
             if (cascade) {
                 parent = that._parentWidget();
 
+                that._cascadeHandlerProxy = proxy(that._cascadeHandler, that);
+
                 if (!parent) {
                     return;
                 }
+
+                options.autoBind = false;
 
                 parent.bind("set", function() { //will cascade
                     that.one("set", function(e) { //get your value
@@ -1152,39 +1155,50 @@ var __meta__ = { // jshint ignore:line
                     });
                 });
 
-                options.autoBind = false;
-
-                cascadeHandler = proxy(function(e) {
-                    var valueBeforeCascade = this.value();
-
-                    this._userTriggered = e.userTriggered;
-
-                    if (this.listView.bound()) {
-                        this._clearSelection(parent, true);
-                    }
-
-                    this._cascadeSelect(parent, valueBeforeCascade);
-                }, that);
-
-                parent.first(CASCADE, cascadeHandler);
-
-                parent._focused.bind("focus", function() {
-                    parent.unbind(CASCADE, cascadeHandler);
-                    parent.first(CHANGE, cascadeHandler);
-                });
-
-                parent._focused.bind("focusout", function() {
-                    parent.unbind(CHANGE, cascadeHandler);
-                    parent.first(CASCADE, cascadeHandler);
-                });
+                parent.first(CASCADE, that._cascadeHandlerProxy);
 
                 //refresh was called
                 if (parent.listView.bound()) {
+                    that._toggleCascadeOnFocus();
                     that._cascadeSelect(parent);
-                } else if (!parent.value()) {
-                    that.enable(false);
+                } else {
+                    parent.one("dataBound", function() {
+                        that._toggleCascadeOnFocus();
+                    });
+
+                    if (!parent.value()) {
+                        that.enable(false);
+                    }
                 }
             }
+        },
+
+        _toggleCascadeOnFocus: function() {
+            var that = this;
+            var parent = that._parentWidget();
+
+            parent._focused.bind("focus", function() {
+                parent.unbind(CASCADE, that._cascadeHandlerProxy);
+                parent.first(CHANGE, that._cascadeHandlerProxy);
+            });
+
+            parent._focused.bind("focusout", function() {
+                parent.unbind(CHANGE, that._cascadeHandlerProxy);
+                parent.first(CASCADE, that._cascadeHandlerProxy);
+            });
+        },
+
+        _cascadeHandler: function(e) {
+            var parent = this._parentWidget();
+            var valueBeforeCascade = this.value();
+
+            this._userTriggered = e.userTriggered;
+
+            if (this.listView.bound()) {
+                this._clearSelection(parent, true);
+            }
+
+            this._cascadeSelect(parent, valueBeforeCascade);
         },
 
         _cascadeChange: function(parent) {
