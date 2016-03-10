@@ -556,7 +556,7 @@ The available "x" positions are:
       }
     });
     </script>
-    
+
 ### headerTemplate `String|Function`
 
 Specifies a static HTML content, which will be rendered as a header of the popup element.
@@ -778,9 +778,11 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
 
 ### virtual `Boolean|Object`*(default: false)*
 
-Enables the virtualization feature of the widget.
+Enables the virtualization feature of the widget. The configuration can be set on an object, which contains two properties&mdash;`itemHeight` and `valueMapper`.
 
-#### Example - MultiSelect with virtualized list
+For detailed information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}).
+
+#### Example - MultiSelect with a virtualized list
 
     <select id="orders" style="width: 400px;"></select>
     <script>
@@ -796,6 +798,7 @@ Enables the virtualization feature of the widget.
                         $.ajax({
                             url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
                             type: "GET",
+                            dataType: "jsonp",
                             data: convertValues(options.value),
                             success: function (data) {
                                 options.success(data);
@@ -839,7 +842,7 @@ Enables the virtualization feature of the widget.
         }
     </script>
 
-#### Example - MultiSelect widget with declarative virtualization config
+#### Example - MultiSelect widget with а declarative virtualization config
 
     <div class="demo-section k-header">
         <h4>Search for shipping name</h4>
@@ -914,6 +917,8 @@ Enables the virtualization feature of the widget.
 Specifies the height of the virtual item. All items in the virtualized list **must** have the same height.
 If the developer does not specify one, the framework will automatically set `itemHeight` based on the current theme and font size.
 
+#### Example - MultiSelect with a virtualized list
+
     <select id="orders" style="width: 400px;"></select>
     <script>
         $(document).ready(function() {
@@ -928,6 +933,7 @@ If the developer does not specify one, the framework will automatically set `ite
                         $.ajax({
                             url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
                             type: "GET",
+                            dataType: "jsonp",
                             data: convertValues(options.value),
                             success: function (data) {
                                 //the **data** is either index or array of indices.
@@ -982,6 +988,8 @@ The `valueMapper` function is **mandatory** for the functionality of the virtual
 The widget calls the `valueMapper` function when the widget receives a value, that is not fetched from the remote server yet.
 The widget will pass the selected value(s) in the `valueMapper` function. In turn, the `valueMapper` implementation should return the **respective data item(s) index/indices**.
 
+#### Example - MultiSelect with a virtualized list
+
     <select id="orders" style="width: 400px;"></select>
     <script>
         $(document).ready(function() {
@@ -996,6 +1004,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
                         $.ajax({
                             url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
                             type: "GET",
+                            dataType: "jsonp",
                             data: convertValues(options.value),
                             success: function (data) {
                                 options.success(data);

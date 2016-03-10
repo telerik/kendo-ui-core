@@ -461,9 +461,11 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
 
 ### virtual `Boolean|Object`*(default: false)*
 
-Enables the virtualization feature of the widget.
+Enables the virtualization feature of the widget. The configuration can be set on an object, which contains two properties&mdash;`itemHeight` and `valueMapper`.
 
-#### Example - AutoComplete with virtualized list
+For detailed information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}).
+
+#### Example - AutoComplete with a virtualized list
 
     <input id="orders" style="width: 400px" />
     <script>
@@ -497,7 +499,7 @@ Enables the virtualization feature of the widget.
         });
     </script>
 
-#### Example - AutoComplete widget with declarative virtualization config
+#### Example - AutoComplete widget with a declarative virtualization config
 
     <div class="demo-section k-header">
         <h4>Search for shipping name</h4>
@@ -568,7 +570,7 @@ Enables the virtualization feature of the widget.
 Specifies the height of the virtual item. All items in the virtualized list **must** have the same height.
 If the developer does not specify one, the framework will automatically set `itemHeight` based on the current theme and font size.
 
-#### Example - AutoComplete with virtualized list
+#### Example - AutoComplete with a virtualized list
 
     <input id="orders" style="width: 400px" />
     <script>
@@ -610,6 +612,8 @@ The `valueMapper` function is **mandatory** for the functionality of the virtual
 The widget calls the `valueMapper` function when the widget receives a value, that is not fetched from the remote server yet.
 The widget will pass the selected value(s) in the `valueMapper` function. In turn, the valueMapper implementation should return the **respective data item(s) index/indices**.
 
+#### Example - AutoComplete with a virtualized list
+
     <input id="orders" style="width: 400px" />
     <script>
         $(document).ready(function() {
@@ -622,6 +626,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
                         $.ajax({
                             url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
                             type: "GET",
+                            dataType: "jsonp",
                             data: convertValues(options.value),
                             success: function (data) {
                                 //the **data** is either index or array of indices.

@@ -689,9 +689,22 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
 
 ### virtual `Boolean|Object`*(default: false)*
 
-Enables the virtualization feature of the widget.
+Enables the virtualization feature of the widget. The configuration can be set on an object, which contains two properties&mdash;`itemHeight` and `valueMapper`.
 
-#### Example - ComboBox with virtualized list
+For detailed information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}).
+
+### virtual.itemHeight `Number`*(default: null)*
+
+Specifies the height of the virtual item. All items in the virtualized list **must** have the same height.
+If the developer does not specify one, the framework will automatically set `itemHeight` based on the current theme and font size.
+
+### virtual.valueMapper `Function`*(default: null)*
+
+The `valueMapper` function is **mandatory** for the functionality of the virtualized widget.
+The widget calls the `valueMapper` function when the widget receives a value, that is not fetched from the remote server yet.
+The widget will pass the selected value(s) in the `valueMapper` function. In turn, the valueMapper implementation should return the **respective data item(s) index/indices**.
+
+#### Example - ComboBox widget with a virtualized list
 
     <input id="orders" style="width: 400px" />
     <script>
@@ -700,7 +713,25 @@ Enables the virtualization feature of the widget.
                 template: '<span class="order-id">#= OrderID #</span> #= ShipName #, #= ShipCountry #',
                 dataTextField: "ShipName",
                 dataValueField: "OrderID",
-                virtual: true
+                virtual: {
+                    itemHeight: 26,
+                    valueMapper: function(options) {
+                        $.ajax({
+                            url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+                            type: "GET",
+                            dataType: "jsonp",
+                            data: convertValues(options.value),
+                            success: function (data) {
+                                //the **data** is either index or array of indices.
+                                //Example:
+                                // 10258 -> 10 (index in the Orders collection)
+                                // [10258, 10261] -> [10, 14] (indices in the Orders collection)
+
+                                options.success(data);
+                            }
+                        })
+                    }
+                },
                 height: 520,
                 dataSource: {
                     type: "odata",
@@ -713,6 +744,18 @@ Enables the virtualization feature of the widget.
                 }
             });
         });
+
+        function convertValues(value) {
+            var data = {};
+
+            value = $.isArray(value) ? value : [value];
+
+            for (var idx = 0; idx < value.length; idx++) {
+                data["values[" + idx + "]"] = value[idx];
+            }
+
+            return data;
+        }
     </script>
 
 #### Example - ComboBox widget with declarative virtualization config
@@ -771,114 +814,6 @@ Enables the virtualization feature of the widget.
               }
             })
         }
-
-        function convertValues(value) {
-            var data = {};
-
-            value = $.isArray(value) ? value : [value];
-
-            for (var idx = 0; idx < value.length; idx++) {
-                data["values[" + idx + "]"] = value[idx];
-            }
-
-            return data;
-        }
-    </script>
-
-### virtual.itemHeight `Number`*(default: null)*
-
-Specifies the height of the virtual item. All items in the virtualized list **must** have the same height.
-If the developer does not specify one, the framework will automatically set `itemHeight` based on the current theme and font size.
-
-    <input id="orders" style="width: 400px" />
-    <script>
-        $(document).ready(function() {
-            $("#orders").kendoComboBox({
-                template: '<span class="order-id">#= OrderID #</span> #= ShipName #, #= ShipCountry #',
-                dataTextField: "ShipName",
-                dataValueField: "OrderID",
-                virtual: {
-                    itemHeight: 26,
-                    valueMapper: function(options) {
-                        $.ajax({
-                            url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
-                            type: "GET",
-                            data: convertValues(options.value),
-                            success: function (data) {
-                                options.success(data);
-                            }
-                        })
-                    }
-                },
-                height: 520,
-                dataSource: {
-                    type: "odata",
-                    transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
-                    },
-                    pageSize: 80,
-                    serverPaging: true,
-                    serverFiltering: true
-                }
-            });
-        });
-
-        function convertValues(value) {
-            var data = {};
-
-            value = $.isArray(value) ? value : [value];
-
-            for (var idx = 0; idx < value.length; idx++) {
-                data["values[" + idx + "]"] = value[idx];
-            }
-
-            return data;
-        }
-    </script>
-
-### virtual.valueMapper `Function`*(default: null)*
-
-The `valueMapper` function is **mandatory** for the functionality of the virtualized widget.
-The widget calls the `valueMapper` function when the widget receives a value, that is not fetched from the remote server yet.
-The widget will pass the selected value(s) in the `valueMapper` function. In turn, the valueMapper implementation should return the **respective data item(s) index/indices**.
-
-    <input id="orders" style="width: 400px" />
-    <script>
-        $(document).ready(function() {
-            $("#orders").kendoComboBox({
-                template: '<span class="order-id">#= OrderID #</span> #= ShipName #, #= ShipCountry #',
-                dataTextField: "ShipName",
-                dataValueField: "OrderID",
-                virtual: {
-                    itemHeight: 26,
-                    valueMapper: function(options) {
-                        $.ajax({
-                            url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
-                            type: "GET",
-                            data: convertValues(options.value),
-                            success: function (data) {
-                                //the **data** is either index or array of indices.
-                                //Example:
-                                // 10258 -> 10 (index in the Orders collection)
-                                // [10258, 10261] -> [10, 14] (indices in the Orders collection)
-
-                                options.success(data);
-                            }
-                        })
-                    }
-                },
-                height: 520,
-                dataSource: {
-                    type: "odata",
-                    transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
-                    },
-                    pageSize: 80,
-                    serverPaging: true,
-                    serverFiltering: true
-                }
-            });
-        });
 
         function convertValues(value) {
             var data = {};
