@@ -2016,42 +2016,45 @@ A function returning a visual element to render for a given shape. The following
 * [Layout](/api/javascript/dataviz/diagram/Layout)
 
 #### Example - how to use the visual
-
-    var diagram = kendo.dataviz.diagram;
-    var getVisual = function(data) {
-        var g = new diagram.Group({
-            autoSize: true
+    <div id="diagram"></div>
+    <script>
+        var diagram = kendo.dataviz.diagram;
+        var getVisual = function(data) {
+            var g = new diagram.Group({
+                autoSize: true
+            });
+            var r = new diagram.Circle({
+                width : 100,
+                height: 60,
+                fill: "LimeGreen"
+            });
+            g.append(r);
+            var fn = new diagram.TextBlock({
+                text: data.dataItem.name,
+                fontSize: 16,
+                x: 25,
+                y: 20
+            });
+            g.append(fn);
+            
+            return g;
+        };
+    
+        $("#diagram").kendoDiagram({
+            dataSource: [{
+                "name" : "Telerik",
+                "items": [
+                    {"name": "Kendo"},
+                    {"name": "Icenium"}
+                ]
+            }],
+            shapeDefaults: {
+                visual: getVisual
+            }
         });
-        var r = new diagram.Circle({
-            width : 100,
-            height: 60,
-            fill: "LimeGreen"
-        });
-        g.append(r);
-        var fn = new diagram.TextBlock({
-            text: data.name,
-            fontSize: 16,
-            x: 30,
-            y: 30
-        });
-        g.append(fn);
-        return g;
-    };
 
-    $("#diagram").kendoDiagram({
-        dataSource: [{
-            "name" : "Telerik",
-            "items": [
-                {"name": "Kendo"},
-                {"name": "Icenium"}
-            ]
-        }],
-        shapeDefaults: {
-            visual: getVisual
-        }
-    });
-
-    $("#diagram").getKendoDiagram().layout();
+        $("#diagram").getKendoDiagram().layout();
+    </script>
 
 ### shapeDefaults.width `Number` *(default: 100)*
 
