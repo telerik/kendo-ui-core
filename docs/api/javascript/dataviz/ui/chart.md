@@ -8861,7 +8861,7 @@ If a type value is missing, the type is assumed to be the one specified in serie
     });
     </script>
 
-### series.aggregate `Object` *(default: "max")*
+### series.aggregate `String|Function` *(default: "max")*
 
 The aggregate function to apply for date series.
 
@@ -8899,22 +8899,6 @@ The supported values are:
       }]
     });
     </script>
-
-### series.aggregate.close `String|Function` *(default: "max")*
-
-Specifies the aggregate for the close value. **Applicable to "candlestick" series**.
-
-### series.aggregate.high `String|Function` *(default: "max")*
-
-Specifies the aggregate for the high value. **Applicable to "candlestick" series**.
-
-### series.aggregate.low `String|Function` *(default: "min")*
-
-Specifies the aggregate for the open value. **Applicable to "candlestick" series**.
-
-### series.aggregate.open `String|Function` *(default: "max")*
-
-Specifies the aggregate for the open value. **Applicable to "candlestick" series**.
 
 ### series.axis `String` *(default: "primary")*
 
