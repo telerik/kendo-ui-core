@@ -778,7 +778,7 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
 
 ### virtual `Boolean|Object`*(default: false)*
 
-Enables the virtualization feature of the widget. The configuration can be set on an object, which contains two properties&mdash;`itemHeight` and `valueMapper`.
+Enables the virtualization feature of the widget. The configuration can be set on an object, which contains two properties - `itemHeight` and `valueMapper`.
 
 For detailed information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}).
 
