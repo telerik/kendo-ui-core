@@ -2163,7 +2163,7 @@ html .km-pane-wrapper .km-widget,
 @checkbox-active-border-color: lighten(@normal-text-color, 23%);
 @checkbox-active-box-shadow: none;
 @checkbox-disabled-background-color: contrast(@background, lighten(@background, 20%), darken(@background, 4%), 0.5);
-@checkbox-disabled-color: darken(@hover-background, 17%);
+@checkbox-disabled-color: @disabled-text-color;
 @checkbox-disabled-border-color: contrast(@background, lighten(@background, 20%), darken(@background, 25%), 0.5);
 @checkbox-indeterminate-background-color: @accent;
 @checkbox-indeterminate-border-color: @accent;
@@ -2188,6 +2188,10 @@ html .km-pane-wrapper .km-widget,
 
 .k-checkbox:checked + .k-checkbox-label:active:after {
     box-shadow: 0 0 0 12px fadeout(@accent, 70%);
+}
+
+.k-checkbox:disabled + .k-checkbox-label:active:after {
+    box-shadow: none;
 }
 
 .k-checkbox:indeterminate + .k-checkbox-label:before {
