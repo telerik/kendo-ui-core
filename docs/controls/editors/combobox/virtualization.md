@@ -47,6 +47,7 @@ Enable virtualization in a ComboBox by using the example below. It demonstrates 
                         $.ajax({
                             url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
                             type: "GET",
+                            dataType: "jsonp",
                             data: convertValues(options.value),
                             success: function (data) {
                                 options.success(data);
