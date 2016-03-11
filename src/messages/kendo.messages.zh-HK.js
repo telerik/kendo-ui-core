@@ -485,4 +485,316 @@ $.extend(true, kendo.ui.Validator.prototype.options.messages,{
   "date": "{0} 不是合法的日期"
 });
 }
+
+/* Spreadsheet messages */
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.borderPalette) {
+    kendo.spreadsheet.messages.borderPalette =
+        $.extend(true, kendo.spreadsheet.messages.borderPalette, {
+            "allBorders": "所有邊框",
+            "insideBorders": "內邊框",
+            "insideHorizontalBorders": "水平內邊框",
+            "insideVerticalBorders": "垂直內邊框",
+            "outsideBorders": "外邊框",
+            "leftBorder": "左邊框",
+            "topBorder": "頂邊框",
+            "rightBorder": "右邊框",
+            "bottomBorder": "底邊框",
+            "noBorders": "沒有邊框",
+            "reset": "重設顏色",
+            "customColor": "自訂顏色...",
+            "apply": "生效",
+            "cancel": "取消"
+        });
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.dialogs) {
+    kendo.spreadsheet.messages.dialogs =
+        $.extend(true, kendo.spreadsheet.messages.dialogs, {
+            "apply": "生效",
+            "save": "儲存",
+            "cancel": "取消",
+            "remove": "移除",
+            "okText": "是",
+            "formatCellsDialog": {
+                "title": "格式",
+                "categories": {
+                    "number": "數字",
+                    "currency": "貨幣",
+                    "date": "日期"
+                }
+            },
+            "fontFamilyDialog": {
+                "title": "字體"
+            },
+            "fontSizeDialog": {
+                "title": "字體大小"
+            },
+            "bordersDialog": {
+                "title": "邊框"
+            },
+            "alignmentDialog": {
+                "title": "對齊",
+                "buttons": {
+                    "justtifyLeft": "向左對齊",
+                    "justifyCenter": "左右中央對齊",
+                    "justifyRight": "向右對齊",
+                    "justifyFull": "兩端對齊",
+                    "alignTop": "向頂對齊",
+                    "alignMiddle": "上下中央對齊",
+                    "alignBottom": "向底對齊"
+                }
+            },
+            "mergeDialog": {
+                "title": "合併儲存格",
+                "buttons": {
+                    "mergeCells": "全部合併",
+                    "mergeHorizontally": "水平合併",
+                    "mergeVertically": "垂直合併",
+                    "unmerge": "取消合併"
+                }
+            },
+            "freezeDialog": {
+                "title": "鎖定儲存格",
+                "buttons": {
+                    "freezePanes": "鎖定儲存格",
+                    "freezeRows": "鎖定行",
+                    "freezeColumns": "鎖定列",
+                    "unfreeze": "取消鎖定儲存格"
+                }
+            },
+            "validationDialog": {
+                "title": "數據驗證",
+                "hintMessage": "請輪入有效的 {0} 數值 {1}.",
+                "hintTitle": "驗證 {0}",
+                "criteria": {
+                    "any": "任何數值",
+                    "number": "數字",
+                    "text": "文字",
+                    "date": "日期",
+                    "custom": "自訂公式",
+                    "list": "列表"
+                },
+                "comparers": {
+                    "greaterThan": "大於",
+                    "lessThan": "小於",
+                    "between": "在 ... 之間",
+                    "notBetween": "不在 ... 之間",
+                    "equalTo": "等於",
+                    "notEqualTo": "不等於",
+                    "greaterThanOrEqualTo": "大於或等於",
+                    "lessThanOrEqualTo": "小於或等於"
+                },
+                "comparerMessages": {
+                    "greaterThan": "大於 {0}",
+                    "lessThan": "小於 {0}",
+                    "between": "在 {0} 和 {1} 之間",
+                    "notBetween": "不在 {0} 和 {1} 之間",
+                    "equalTo": "等於 {0}",
+                    "notEqualTo": "不等於 {0}",
+                    "greaterThanOrEqualTo": "大於或等於 {0}",
+                    "lessThanOrEqualTo": "小於或等於 {0}",
+                    "custom": "乎合公式: {0}"
+                },
+                "labels": {
+                    "criteria": "准則",
+                    "comparer": "比較的",
+                    "min": "最小",
+                    "max": "最大",
+                    "value": "數值",
+                    "start": "開始",
+                    "end": "完結",
+                    "onInvalidData": "在數據無效時",
+                    "rejectInput": "拒絕輸入",
+                    "showWarning": "顯示警告",
+                    "showHint": "顯示提示",
+                    "hintTitle": "提示標題",
+                    "hintMessage": "提示訊息",
+                    "ignoreBlank": "忽略空白"
+                },
+                "placeholders": {
+                    "typeTitle": "種類標題",
+                    "typeMessage": "種類訊息"
+                }
+            },
+            "saveAsDialog": {
+                "title": "另存...",
+                "labels": {
+                    "fileName": "檔案名稱",
+                    "saveAsType": "另存種類"
+                }
+            },
+            "exportAsDialog": {
+                "title": "滙出...",
+                "labels": {
+                    "fileName": "檔案名稱",
+                    "saveAsType": "另存種類",
+                    "exportArea": "滙出",
+                    "paperSize": "紙張大小",
+                    "margins": "邊距",
+                    "orientation": "方向",
+                    "print": "列印",
+                    "guidelines": "參考線",
+                    "center": "置中",
+                    "horizontally": "水平地",
+                    "vertically": "垂直地"
+                }
+            },
+            "modifyMergedDialog": {
+                "errorMessage": "不能轉換部份已合併的儲存格"
+            },
+            "useKeyboardDialog": {
+                "title": "Copying and pasting",
+                "errorMessage": "These actions cannot be invoked through the menu. Please use the keyboard shortcuts instead:",
+                "labels": {
+                    "forCopy": "for copy",
+                    "forCut": "for cut",
+                    "forPaste": "for paste"
+                }
+            },
+            "unsupportedSelectionDialog": {
+                "errorMessage": "That action cannot be performed on multiple selection."
+            }
+        });
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.filterMenu) {
+    kendo.spreadsheet.messages.filterMenu =
+        $.extend(true, kendo.spreadsheet.messages.filterMenu, {
+            "sortAscending": "Sort range A to Z",
+            "sortDescending": "Sort range Z to A",
+            "filterByValue": "Filter by value",
+            "filterByCondition": "Filter by condition",
+            "apply": "Apply",
+            "search": "Search",
+            "addToCurrent": "Add to current selection",
+            "clear": "Clear",
+            "blanks": "(Blanks)",
+            "operatorNone": "None",
+            "and": "AND",
+            "or": "OR",
+            "operators": {
+                "string": {
+                    "contains": "Text contains",
+                    "doesnotcontain": "Text does not contain",
+                    "startswith": "Text starts with",
+                    "endswith": "Text ends with"
+                },
+                "date": {
+                    "eq": "Date is",
+                    "neq": "Date is not",
+                    "lt": "Date is before",
+                    "gt": "Date is after"
+                },
+                "number": {
+                    "eq": "Is equal to",
+                    "neq": "Is not equal to",
+                    "gte": "Is greater than or equal to",
+                    "gt": "Is greater than",
+                    "lte": "Is less than or equal to",
+                    "lt": "Is less than"
+                }
+            }
+        });
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.toolbar) {
+    kendo.spreadsheet.messages.toolbar =
+        $.extend(true, kendo.spreadsheet.messages.toolbar, {
+            "addColumnLeft": "Add column left",
+            "addColumnRight": "Add column right",
+            "addRowAbove": "Add row above",
+            "addRowBelow": "Add row below",
+            "alignment": "Alignment",
+            "alignmentButtons": {
+                "justtifyLeft": "Align left",
+                "justifyCenter": "Center",
+                "justifyRight": "Align right",
+                "justifyFull": "Justify",
+                "alignTop": "Align top",
+                "alignMiddle": "Align middle",
+                "alignBottom": "Align bottom"
+            },
+            "backgroundColor": "Background",
+            "bold": "Bold",
+            "borders": "Borders",
+            "colorPicker": {
+                "reset": "Reset color",
+                "customColor": "Custom color..."
+            },
+            "copy": "Copy",
+            "cut": "Cut",
+            "deleteColumn": "Delete column",
+            "deleteRow": "Delete row",
+            "excelImport": "Import from Excel...",
+            "filter": "Filter",
+            "fontFamily": "Font",
+            "fontSize": "Font size",
+            "format": "Custom format...",
+            "formatTypes": {
+                "automatic": "Automatic",
+                "number": "Number",
+                "percent": "Percent",
+                "financial": "Financial",
+                "currency": "Currency",
+                "date": "Date",
+                "time": "Time",
+                "dateTime": "Date time",
+                "duration": "Duration",
+                "moreFormats": "More formats..."
+            },
+            "formatDecreaseDecimal": "Decrease decimal",
+            "formatIncreaseDecimal": "Increase decimal",
+            "freeze": "Freeze panes",
+            "freezeButtons": {
+                "freezePanes": "Freeze panes",
+                "freezeRows": "Freeze rows",
+                "freezeColumns": "Freeze columns",
+                "unfreeze": "Unfreeze panes"
+            },
+            "italic": "Italic",
+            "merge": "Merge cells",
+            "mergeButtons": {
+                "mergeCells": "Merge all",
+                "mergeHorizontally": "Merge horizontally",
+                "mergeVertically": "Merge vertically",
+                "unmerge": "Unmerge"
+            },
+            "open": "Open...",
+            "paste": "Paste",
+            "quickAccess": {
+                "redo": "Redo",
+                "undo": "Undo"
+            },
+            "saveAs": "Save As...",
+            "sortAsc": "Sort ascending",
+            "sortDesc": "Sort descending",
+            "sortButtons": {
+                "sortSheetAsc": "Sort sheet A to Z",
+                "sortSheetDesc": "Sort sheet Z to A",
+                "sortRangeAsc": "Sort range A to Z",
+                "sortRangeDesc": "Sort range Z to A"
+            },
+            "textColor": "Text Color",
+            "textWrap": "Wrap text",
+            "underline": "Underline",
+            "validation": "資料驗證..."
+        });
+}
+
+if (kendo.spreadsheet && kendo.spreadsheet.messages.view) {
+    kendo.spreadsheet.messages.view =
+        $.extend(true, kendo.spreadsheet.messages.view, {
+            "errors": {
+                "shiftingNonblankCells": "Cannot insert cells due to data loss possibility. Select another insert location or delete the data from the end of your worksheet.",
+                "filterRangeContainingMerges": "Cannot create a filter within a range containing merges",
+                "validationError": "The value that you entered violates the validation rules set on the cell."
+            },
+            "tabs": {
+                "home": "主頁",
+                "insert": "插入",
+                "data": "資料"
+            }
+        });
+}
 })(window.kendo.jQuery);
