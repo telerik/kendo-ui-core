@@ -1,23 +1,17 @@
 ---
-title: Creating and Editing Orders
-position: 0
-page_title: Tutorial SalesHub - Creating and Editing Orders
+title: Create and Edit Orders
+page_title: Create and Edit Orders | Kendo UI Sales Hub Tutorial
+description: "Learn how to create and edit customer orders in the Kendo UI Sales Hub project by using Telerik UI for ASP.NET MVC."
 previous_url: /tutorials/asp.net/saleshub/order-page/kendo-saleshub-creating-and-editing-orders
+slug: createeditorders_saleshubtutorial_aspnetmvc
+position: 1
 ---
 
-# Tutorial: SalesHub: Creating and Editing Orders
+# Create and Edit Orders
 
-  - [Set up the Partial View for an Order](#set-up-the-partial-view-for-an-order)
-  - [Set up the basic Order fields](#set-up-the-basic-order-fields)
-  - [Set up the TabStrip](#set-up-the-tabstrip)
-  - [Set up the Order details grid](#set-up-the-order-details-grid)
-  - [Set up the Order notes grid](#set-up-the-order-notes-grid)
-  - [Set up the Panel Bar](#set-up-the-panel-bar)
-  - [Set up the Payment Terms Section](#set-up-the-payment-terms-section)
-  - [Setting up the Comments Section](#setting-up-the-comments-section)
+Since there are many similarities between the create and edit views of an Order, this article demonstrates how both of them work.
 
-Since there are many similarities between the create and edit views for an Order, we'll discuss how
-both of them work in this article.
+**Figure 1. A screenshot of the Kendo UI Sales Hub Orders page**
 
 ![kendo-saleshub-order-edit-screenshot](/aspnet-mvc/tutorial-saleshub/order-page/images/kendo-saleshub-order-edit-screenshot.png)
 

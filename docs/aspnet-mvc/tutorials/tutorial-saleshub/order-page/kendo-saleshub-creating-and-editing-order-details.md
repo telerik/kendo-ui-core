@@ -1,15 +1,13 @@
 ---
-title: Creating and Editing Orders Details
-page_title: Tutorial SalesHub - Creating and Editing Order Details
+title: Handle Order Details
+page_title: Handle Order Details | Kendo UI Sales Hub Tutorial
+description: "Learn how to create and edit the details of customer orders in the Kendo UI Sales Hub project by using Telerik UI for ASP.NET MVC."
 previous_url: /tutorials/asp.net/saleshub/order-page/kendo-saleshub-creating-and-editing-order-details
+slug: handleorderdetails_saleshubtutorial_aspnetmvc
+position: 2
 ---
 
-# Tutorial: SalesHub: Creating and Editing Order Details
-
-  - [How to Setup the Custom Order Detail Editor](#how-to-setup-the-custom-order-detail-editor)
-  - [Auto Update Fields Based on Value Changes](#auto-update-fields-based-on-value-changes)
-  - [Add Server-side Validation](#add-server-side-validation)
-  - [Handle Errors from the Server](#handle-errors-from-the-server)
+# Handle Order Details
 
 ![kendo-saleshub-order-details-edit-dialog-screenshot](/aspnet-mvc/tutorial-saleshub/order-page/images/kendo-saleshub-order-details-edit-dialog-screenshot.png)
 

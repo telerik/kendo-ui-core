@@ -1,14 +1,13 @@
 ---
-title: Creating the Search Box
-page_title: Tutorial SalesHub - Creating the Search Box
+title: Create the Search Box
+page_title: Create the Search Box | Kendo UI Sales Hub Tutorial
+description: "Learn how to create the Search box in the Kendo UI Sales Hub project by using Telerik UI for ASP.NET MVC."
 previous_url: /tutorials/asp.net/saleshub/kendo-saleshub-search-box
+slug: createsearchbox_saleshubtutorial_aspnetmvc
+position: 3
 ---
 
-# Tutorial: SalesHub: Creating the Search Box
-
-  - [Set up the AutoComplete](#set-up-the-autocomplete)
-  - [Handle User Selection in the AutoComplete](#handle-user-selection-in-the-autocomplete)
-  - [Set up the Search Results Window and Grid](#set-up-the-search-results-window-and-grid)
+# Create the Search Box
 
 ![kendo-saleshub-search-box-screenshot](/aspnet-mvc/tutorial-saleshub/images/kendo-saleshub-search-box-screenshot.png)
 
