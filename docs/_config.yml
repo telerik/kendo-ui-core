@@ -251,7 +251,7 @@ navigation:
         title: "Tutorials"
         position: 16
     "aspnet-mvc/tutorials/tutorial-kendo-music-store":
-        title: "Build the Kendo UI Music Store"
+        title: "Build the Music Store Project"
         position: 1
     "aspnet-mvc/tutorials/tutorial-kendo-music-store/music-store-web":
         title: "Build the Web Application"

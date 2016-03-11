@@ -1,10 +1,13 @@
 ---
-title: Creating the Orders Grid
-page_title: Tutorial SalesHub - Creating the Orders Grid
+title: Create the Orders Grid
+page_title: Create the Orders Grid | Kendo UI Sales Hub Tutorial
+description: "Learn how to create the Orders grid in the Kendo UI Sales Hub project by using Telerik UI for ASP.NET MVC."
 previous_url: /tutorials/asp.net/saleshub/home-page/kend-saleshub-orders-grid
+slug: createordersgrid_saleshubtutorial_aspnetmvc
+position: 2
 ---
 
-# Tutorial: SalesHub: Creating the Orders Grid
+# Create the Orders Grid
 
 ![kendo-saleshub-orders-grid-screenshot](/aspnet-mvc/tutorial-saleshub/home-page/images/kendo-saleshub-orders-grid-screenshot.png)
 

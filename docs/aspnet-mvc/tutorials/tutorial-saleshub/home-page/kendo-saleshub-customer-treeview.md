@@ -1,28 +1,33 @@
 ---
-title: Creating the Customer TreeView
-page_title: Tutorial SalesHub - Creating the Customer TreeView
+title: Create the Customer TreeView
+page_title: Create the Customer TreeView | Kendo UI Sales Hub Tutorial
+description: "Learn how to create the customer TreeView in the Kendo UI Sales Hub project by using Telerik UI for ASP.NET MVC."
 previous_url: /tutorials/asp.net/saleshub/home-page/kendo-saleshub-customer-treeview
+slug: createcustomtreeview_saleshubtutorial_aspnetmvc
+position: 1
 ---
 
-# Tutorial: SalesHub: Creating the Customer TreeView
+# Create the Customer TreeView
+
+**Figure 1. The Kendo UI Sales Hub customer TreeView**
 
 ![kendo-saleshub-customer-TreeView-screenshot](/aspnet-mvc/tutorial-saleshub/home-page/images/kendo-saleshub-customer-treeview-screenshot.png)
 
-In this section of the tutorial you'll learn how to create a [Kendo TreeView](http://demos.telerik.com/kendo-ui/web/treeview/index.html)
-server-side.
+This article demonstrates how to create a [Kendo TreeView](http://demos.telerik.com/kendo-ui/web/treeview/index.html) on the server side.
 
-In the SalesHub application, a [Kendo TreeView](http://demos.telerik.com/kendo-ui/web/treeview/index.html) is used to display all of the Customers which belong to a Selling Company. The Selling Company appears as a root node in the TreeView and the Customers for each Selling Company are grouped by
-the region in which the customer is located. So the basic structure of the TreeView is: `Selling Company -> Region -> Customer Name`.
+In the Sales Hub application, a [Kendo TreeView](http://demos.telerik.com/kendo-ui/web/treeview/index.html) is used to display all customers of a selling company. The Selling Company appears as a root node in the TreeView and the Customers for each Selling Company are grouped by the region in which the customer is located. So, the basic structure of the TreeView is: **Selling Company** > **Region** > **Customer Name**.
 
-When a Customer is selected in the [Kendo TreeView](http://demos.telerik.com/kendo-ui/web/treeview/index.html) the Order's grid is updated to
-display only the Orders for the selected Customer. If you would like to learn how the Order's grid is updated depending on the selected
-Customer, please read [Filtering Order's Server-Side](kendo-saleshub-filtering-orders-server-side).
+When a Customer is selected in the [Kendo TreeView](http://demos.telerik.com/kendo-ui/web/treeview/index.html), the **Orders** grid is updated to display only the Orders for the selected Customer. If you want to learn how the **Orders** grid is updated depending on the selected Customer, refer to the article on [filtering orders on the server side]({% slug filterordersonserver_saleshubtutorial_aspnetmvc %}).
 
-The Customer TreeView is located in **Views/Home/Index.cshtml**
+The Customer TreeView is located in `Views/Home/Index.cshtml`.
 
-## Set up the Customer TreeView
+## Configuration
 
-To generate the Customer TreeView we use the following Razor code:
+### Customer TreeView Setup
+
+To generate the Customer TreeView, use the Razor code demonstrated in the example below.
+
+###### Example
 
     @using Kendo.Mvc.UI
     @model SalesHub.Client.ViewModels.Client.IndexViewModel
@@ -56,12 +61,17 @@ To generate the Customer TreeView we use the following Razor code:
         ))
         .Events(events => events.Select("window.SalesHub.CustomerTreeView_Select")))
 
-Let's walk step-by-step through this code and describe what it does.
+### Code Breakdown
+
+Below is the breakdown of the code from the example above.
+
+###### Example
 
     @using Kendo.Mvc.UI
 
-In order to use the Kendo UI MVC extensions we must first include the namespace for the extensions in our View. Including
-this namespace will cause the `Kendo()` extension method to become available and allow use to create Kendo UI widgets.
+To use the Kendo UI MVC extensions, first include the namespace for the extensions in your View. This makes the `Kendo()` extension method available and allows the creation of Kendo UI widgets.
+
+###### Example
 
     @functions
     {
@@ -69,34 +79,30 @@ this namespace will cause the `Kendo()` extension method to become available and
         { // Code... }
     }
 
-Before we create our TreeView we create a helper function that will generate a Dictionary of HTML data attributes and
-their corresponding value. This helper function will be used when the TreeView is bound. These HTML data attributes will
-eventually be used by our custom client-side code.
+Before you create your TreeView, set up a helper function that generates a Dictionary of HTML data attributes and their corresponding value. This helper function will be used when the TreeView is bound. These HTML data attributes will eventually be used by your custom client-side code.
+
+###### Example
 
     @Html.Kendo().TreeView().Name("customerTreeView")
 
-Here we use the `Kendo()` extension method to tell the Kendo UI MVC extensions that we want it to create a Kendo TreeView
-with `customerTreeView` as its `Name`. When using the Kendo UI MVC extensions the name of a Kendo UI widget is the `id`
-of the HTML element that the extensions generate.
+Here, the `Kendo()` extension method is used to tell the Kendo UI MVC extensions that you want it to create a Kendo UI TreeView with `customerTreeView` as its `Name`. When using the Kendo UI MVC extensions, the name of a Kendo UI widget is the `id` of the HTML element that the extensions generate.
 
-Just telling the extensions to generate a TreeView is not all that useful in and of itself. We also need to tell it what
-data we want it to bind against the TreeView. With the extensions we can either tell the TreeView to bind against a remote
-data-service or have it generate the complete markup for the tree server-side. In our case we have it generate the markup
-server-side using the `BindTo` function on a TreeView.
+Just telling the extensions to generate a TreeView itself is not all that useful. You must tell it what data should be bound against the TreeView. With the extensions you can either tell the TreeView to bind against a remote data-service or have it generate the complete markup for the tree server-side. In this case, you have it generate the markup server-side using the `BindTo` function on a TreeView.
+
+###### Example
 
     .BindTo(Model.TreeViewRoot.Items, binding => { // Our custom binding })
 
-Since we already know what data we want in our TreeView when we create it, we take advantage of the `BindTo` function. The
-`BindTo` function takes two parameters, the first parameter is the Enumerable that we would like to bind the tree against
-and the second parameter is an `Action` that takes a `NavigationBindingFactory` object as its parameter.
+Since you already know what data is to be displayed in the TreeView, take advantage of the `BindTo` function. The `BindTo` function takes two parameters&mdash;the first one is the `Enumerable` that is intended to bind the tree against, and the second one is an `Action` that takes a `NavigationBindingFactory` object as its parameter.
+
+###### Example
 
     .BindTo(Model.TreeViewRoot.Items,binding =>
         binding.For<SellingCompanyTreeViewItem>(mapping => { // Code to map our SellingCompanyTreeViewItem to a Kendo TreeViewItem. })
 
-We can use this binding factory to iterate over the objects in the Enumerable that we supplied to the `BindTo` function by calling
-it's `For` function. The generic type given to this function has to be the same type as the objects which are in the `Enumerable`
-that we gave to the `BindTo` function. In our case, the `Enumerable` is a list of `SellingCompanyTreeViewItems`. The `For`
-function takes an **Action&lt;NavigationBindingBuilder&gt;** as a parameter.
+Use this binding factory to iterate over the objects in the `Enumerable` that you supplied to the `BindTo` function by calling its `For` function. The generic type given to this function has to be the same type as the objects which are in the `Enumerable` that you gave to the `BindTo` function. In this case, the `Enumerable` is a list of `SellingCompanyTreeViewItems`. The `For` function takes an `Action&lt;NavigationBindingBuilder&gt;` as a parameter.
+
+###### Example
 
     binding.For<SellingCompanyTreeViewItem>(mapping => mapping
         .Children(sellingCompanyTreeViewItem => sellingCompanyTreeViewItem.Items)
@@ -111,13 +117,15 @@ function takes an **Action&lt;NavigationBindingBuilder&gt;** as a parameter.
             }
         })
 
-We use the `mapping` object to tell Kendo what property to use on our `SellingCompanyTreeViewItem` when it tries
-to render the children of that `SellingCompanyTreeViewItem` and we give it a function to call every time a Kendo TreeViewItem
-is bound to the TreeView.
+The examples use the `mapping` object to tell Kendo UI what property to use on the `SellingCompanyTreeViewItem` when it tries to render the children of that `SellingCompanyTreeViewItem` and it gives it a function to call every time a Kendo UI TreeViewItem is bound to the TreeView.
+
+###### Example
 
     .Children(sellingCompanyTreeViewItem => sellingCompanyTreeViewItem.Items)
 
-Is how we tell it where to look for children nodes when it's rendering the TreeView.
+This is how you tell it where to look for children nodes when it is rendering the TreeView.
+
+###### Example
 
     .ItemDataBound((item, sellingCompanyTreeViewItem) => {
         item.Text = sellingCompanyTreeViewItem.Text;
@@ -130,27 +138,36 @@ Is how we tell it where to look for children nodes when it's rendering the TreeV
         }
     })
 
-The function we give to `ItemDataBound` is called every time that a Kendo TreeViewItem is bound to the TreeView. The callback function
-takes two parameters. The first one is the Kendo TreeViewItem that is being bound to the TreeView and the second parameter is the
-`SellingCompanyTreeViewItem` that corresponds to that Kendo TreeViewItem. This is the point where we set the `Text` and the `Expanded` state
-of the resulting TreeViewItem.
+The function given to `ItemDataBound` is called every time that a Kendo UI `TreeViewItem` is bound to the TreeView. The callback function takes two parameters. The first one is the Kendo UI `TreeViewItem` that is being bound to the TreeView, and the second one is the `SellingCompanyTreeViewItem` that corresponds to that Kendo UI TreeViewItem. This is the point where you set the `Text` and the `Expanded` state of the resulting `TreeViewItem`.
 
-This is also the point where we call our Razor helper function to generate some HTML data attributes for the items in the TreeView.
+This is also the point where you call your Razor helper function to generate some HTML data attributes for the items in the TreeView.
+
+###### Example
 
     .Events(events => events.Select("window.SalesHub.CustomerTreeView_Select"))
 
-Since we want to update the Order's grid depending on the selected Customer, we attach an event handler for the `Select` event of
-the TreeView. If you'd like to read more on how we handle the `Select` event from the TreeView please read
-[Filtering Order's Server-Side](kendo-saleshub-filtering-orders-server-side).
+Since you want to update the **Orders** grid depending on the selected Customer, attach an event handler for the `Select` event of
+the TreeView.
 
-If you inspect the resulting HTML markup using your browsers Developer Tools, you'll notice that a `<script>` tag was created
-and placed after the markup for the TreeView. This script tag was generated by the Kendo UI MVC extensions and contains JavaScript,
-which runs automatically when the page is loaded, that turns the markup into an actual Kendo TreeView.
+For more information on how to handle the `Select` event from the TreeView, refer to the article on [filtering orders on the server side]({% slug filterordersonserver_saleshubtutorial_aspnetmvc %}).
 
-The contents of the script tag should look something like:
+If you inspect the resulting HTML markup using your browsers Developer Tools, notice that a `<script>` tag is created and placed after the markup for the TreeView. This script tag is generated by the Kendo UI MVC extensions and contains JavaScript, which runs automatically when the page is loaded, that turns the markup into an actual Kendo UI TreeView.
+
+The contents of the script tag should look similar to the script in the example below.
+
+###### Example
 
     jQuery(function(){jQuery("#customerTreeView").kendoTreeView({"select":window.SalesHub.CustomerTreeView_Select});});
 
-As you can see, the JavaScript generated by the extensions looks for the generated markup based on an `id`. The `id` it
-looks for is the same as the `Name` that we gave the Kendo TreeView when we declared it. After it finds the element, it turns
-it into a TreeView by calling `kendoTreeView` on it.
+The JavaScript generated by the extensions looks for the generated markup based on an `id`. The `id` it looks for is the same as the `Name` that you gave the Kendo UI TreeView when you declared it. After it finds the element, it turns it into a TreeView by calling `kendoTreeView` on it.
+
+## See Also
+
+Other articles on the Kendo UI Sales Hub project and its Home and Order pages:
+
+* [Overview of the Kendo UI Music Store Sample Project]({% slug overview_saleshubtutorial_aspnetmvc %})
+* [Create the Orders Grid]({% slug createordersgrid_saleshubtutorial_aspnetmvc %})
+* [Filter Orders on the Server]({% slug filterordersonserver_saleshubtutorial_aspnetmvc %})
+* [Create and Edit Orders]({% slug createeditorders_saleshubtutorial_aspnetmvc %})
+* [Handle Order Details]({% slug handleorderdetails_saleshubtutorial_aspnetmvc %})
+* [Create the Search Box]({% slug createsearchbox_saleshubtutorial_aspnetmvc %})

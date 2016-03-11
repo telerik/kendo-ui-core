@@ -22,7 +22,7 @@ The UI of the Music Store, however, is completely redesigned with Kendo UI. It f
 
 ### View the Live Site
 
-The live Kendo UI Music Store site is located at [demos.telerik.com/kendo-ui/musicstore](http://demos.telerik.com/kendo-ui/musicstore).
+To view the live Kendo UI Music Store sample project, refer to [demos.telerik.com/kendo-ui/musicstore](http://demos.telerik.com/kendo-ui/musicstore).
 
 ### Get the Source Code
 

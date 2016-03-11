@@ -1,14 +1,13 @@
 ---
-title: Filtering Order's Server-Side
-page_title: Tutorial SalesHub - Filtering Orders Server-Side
+title: Filter Orders on the Server
+page_title: Filter Orders on the Server | Kendo UI Sales Hub Tutorial
+description: "Learn how to do server-side filtering of customer orders in the Kendo UI Sales Hub project by using Telerik UI for ASP.NET MVC."
 previous_url: /tutorials/asp.net/saleshub/home-page/kendo-saleshub-filtering-orders-server-side
+slug: filterordersonserver_saleshubtutorial_aspnetmvc
+position: 3
 ---
 
-# Tutorial: SalesHub: Filtering Orders Server-Side
-
-  - [Configure Grid for Server-Side Operations](#configure-grid-for-server-side-operations)
-  - [Support Server-Side Operations](#support-server-side-operations)
-  - [Filter Orders by Customer](#filter-orders-by-customer)
+# Filter Orders on the Server
 
 ![kendo-saleshub-customer-TreeView-and-grid-screenshot](/aspnet-mvc/tutorial-saleshub/home-page/images/kendo-saleshub-customer-treeview-and-grid-screenshot.png)
 
