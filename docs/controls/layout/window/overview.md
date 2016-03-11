@@ -285,7 +285,7 @@ The example below demonstrates how to access an existing Window instance from it
 
 `elementInsideWindow` is a jQuery object containing and an element inside the Window content area.
 
-#### Reference from from within an iframe
+#### Reference from within an iframe
 
 If the Window is displaying a page in an iframe and the page needs to access the widget, you are able to achieve this by using `window.parent` from within the iframe.
 
