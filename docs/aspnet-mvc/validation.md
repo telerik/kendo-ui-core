@@ -3,7 +3,7 @@ title: Validation
 page_title: Validation | Telerik UI for ASP.NET MVC
 description: "Use client-side validation with Telerik UI for ASP.NET MVC."
 slug: validation_aspnetmvc
-position: 5
+position: 6
 ---
 
 # Validation
@@ -340,5 +340,6 @@ Other articles on Telerik UI for ASP.NET MVC:
 * [ASP.NET MVC 6]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_muscistoretutorial_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})
 * [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
