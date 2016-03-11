@@ -1,13 +1,13 @@
 ---
-title: Add HTML to the axes labels
-page_title: Add HTML to axes labels | Kendo UI Charts
-description: "Learn how to add HTML to the axes labels."
+title: Use HTML for axes labels
+page_title: Use HTML for axes labels | Kendo UI Charts
+description: "Learn how to use HTML for axes labels."
 slug: howto_addhtmltoaxeslabels_charts
 ---
 
-# Add HTML to the categoryAxis.labels
+# Use HTML for categoryAxis.labels
 
-The example below demonstrates how to add HTML to the categoryAxis labels via the [visual](/api/javascript/dataviz/ui/chart.html#configuration-categoryAxis.labels.visual) option.
+The example below demonstrates how to use HTML for categoryAxis labels via the [visual](/api/javascript/dataviz/ui/chart.html#configuration-categoryAxis.labels.visual) option.
 
 ###### Example
 
