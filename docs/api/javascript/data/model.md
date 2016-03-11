@@ -75,6 +75,8 @@ The name of the Model's ID field. This field is available **only** if the `id` i
 The unique identifier of the `Model`. Inherited from `ObservableObject`. More info can be found in the [uid](/api/javascript/data/observableobject#fields-uid) section of the
 ObservableObject API reference.
 
+The main benefit of uid's is to represent a link between data items (that may not have an ID of their own) and the corresponding rendered DOM elements (list items, table rows, etc). The uid's are generated randomly and they are not persisted across data or web page reloads.
+
 ### dirty `Boolean`
 
 Indicates whether the model is modified.
