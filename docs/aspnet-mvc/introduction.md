@@ -117,6 +117,7 @@ The sample application Visual Studio solution contains the following:
 After you run the sample application, read through the following articles, related to Telerik UI for ASP.NET MVC:
 
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})
 * [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
 * [Use Telerik UI for ASP.NET MVC in MVC 3 Applications](/aspnet-mvc/asp-net-mvc-3)
 * [Use Telerik UI for ASP.NET MVC in MVC 4 Applications](/aspnet-mvc/asp-net-mvc-4)

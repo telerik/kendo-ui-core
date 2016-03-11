@@ -3,7 +3,7 @@ title: Globalization
 page_title: Globalization | Telerik UI for ASP.NET MVC
 description: "Use different cultures with Telerik UI for ASP.NET MVC."
 slug: globalization_aspnetmvc
-position: 6
+position: 7
 ---
 
 # Globalization
@@ -157,5 +157,6 @@ Other articles on Telerik UI for ASP.NET MVC:
 * [ASP.NET MVC 6]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_muscistoretutorial_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})
 * [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

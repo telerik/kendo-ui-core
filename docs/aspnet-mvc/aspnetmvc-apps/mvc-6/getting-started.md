@@ -2,6 +2,7 @@
 title: Get Started
 page_title: Get Started | Telerik UI for ASP.NET MVC 6
 description: "Learn the basics when working with Telerik UI for ASP.NET MVC 6."
+previous_url: /aspnet-mvc/mvc-6/getting-started
 slug: gettingstarted_aspnetmvc6_aspnetmvc
 position: 2
 ---

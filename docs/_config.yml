@@ -229,24 +229,27 @@ navigation:
     "aspnet-mvc":
         title: "UI for ASP.NET MVC"
         position: 8
-    "aspnet-mvc/mvc-6":
+    "aspnet-mvc/aspnetmvc-apps":
+        title: "ASP.NET MVC Apps"
+        position: 11
+    "aspnet-mvc/aspnetmvc-apps/mvc-6":
         title: "ASP.NET MVC 6"
-        position: 13
+        position: 4
     "aspnet-mvc/vs-integration":
         title: "Visual Studio Integration"
-        position: 14
+        position: 12
     "aspnet-mvc/migration":
         title: "Migrate From Telerik Extensions"
-        position: 15
+        position: 13
     "aspnet-mvc/helpers":
         title: "HtmlHelpers"
-        position: 16
+        position: 14
     "aspnet-mvc/troubleshoot":
         title: "Troubleshooting"
-        position: 17
+        position: 15
     "aspnet-mvc/tutorials":
         title: "Tutorials"
-        position: 18
+        position: 16
     "aspnet-mvc/tutorials/tutorial-kendo-music-store":
         title: "Build the Kendo UI Music Store"
         position: 1

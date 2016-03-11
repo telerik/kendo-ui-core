@@ -3,7 +3,7 @@ title: Visual Basic Syntax
 page_title: Visual Basic Syntax | Telerik UI for ASP.NET MVC
 description: "Apply a proper Visual Basic syntax when using lamba expressions and anonymous types inside Kendo UI MVC wrapper declarations."
 slug: visualbasic_aspnetmvc
-position: 8
+position: 9
 ---
 
 # Visual Basic Syntax
@@ -176,5 +176,6 @@ Other articles on Telerik UI for ASP.NET MVC:
 * [ASP.NET MVC 6]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_muscistoretutorial_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})
 * [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

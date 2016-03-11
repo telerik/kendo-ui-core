@@ -3,7 +3,7 @@ title: Localization
 page_title: Localization | Telerik UI for ASP.NET MVC
 description: "Localize the content of a Telerik UI for ASP.NET MVC application."
 slug: localization_aspnetmvc
-position: 7
+position: 8
 ---
 
 # Localization
@@ -138,5 +138,6 @@ Other articles on Telerik UI for ASP.NET MVC:
 * [ASP.NET MVC 6]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_muscistoretutorial_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})
 * [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

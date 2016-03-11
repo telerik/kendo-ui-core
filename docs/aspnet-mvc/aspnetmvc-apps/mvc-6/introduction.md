@@ -2,6 +2,7 @@
 title: Overview
 page_title: Overview | Telerik UI for ASP.NET MVC 6
 description: "Download and install Telerik UI for ASP.NET MVC 6, and run the sample application."
+previous_url: /aspnet-mvc/mvc-6/introduction
 slug: overview_aspnetmvc6_aspnetmvc
 position: 1
 ---

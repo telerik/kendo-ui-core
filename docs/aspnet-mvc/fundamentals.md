@@ -296,9 +296,19 @@ The above explanation and requirements are applicable to all stylesheets that us
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC:
+Other articles on getting started with UI for ASP.NET MVC:
 
 * [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})
+* [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Use Telerik UI for ASP.NET MVC in MVC 3 Applications](/aspnet-mvc/asp-net-mvc-3)
+* [Use Telerik UI for ASP.NET MVC in MVC 4 Applications](/aspnet-mvc/asp-net-mvc-4)
+* [Use Telerik UI for ASP.NET MVC in MVC 5 Applications](/aspnet-mvc/asp-net-mvc-5)
+* [Use Telerik UI for ASP.NET MVC Visual Studio Extensions](/aspnet-mvc/vs-integration/introduction)
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+
+Articles on Telerik UI for ASP.NET MVC:
+
 * [Telerik UI for ASP.NET MVC Custom DataSource]({% slug customdatasource_aspnetmvc %})
 * [Validation with Telerik UI for ASP.NET MVC]({% slug validation_aspnetmvc %})
 * [Globalization with Telerik UI for ASP.NET MVC]({% slug globalization_aspnetmvc %})
@@ -313,5 +323,3 @@ Other articles on Telerik UI for ASP.NET MVC:
 * [ASP.NET MVC 5]({% slug aspnetmvc5_aspnetmvc %})
 * [ASP.NET MVC 6]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_muscistoretutorial_aspnetmvc %})
-* [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
