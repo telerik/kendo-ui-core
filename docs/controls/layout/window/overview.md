@@ -183,7 +183,7 @@ The example below demonstrates how to initialize the Window and configure its co
 
 If the Window has no set dimensions, it is probably going to resize after the AJAX content is loaded. This naturally changes the position of the widget on the screen and it is no longer centered. If this is a requirement, then either [`center`](/api/javascript/ui/window#methods-center) the Window in its [`refresh`](/api/javascript/ui/window#events-refresh) event, or set some explicit dimensions.
 
-### Apply with Iframe
+### Use with an iframe
 
 Kendo UI Window creates an iframe for its content if the content URL contains a protocol, i.e. it is assumed that in this case the nested page resides in another domain. If the URL does not contain a protocol, the assumption is that it is a local URL that is going to load a partial view (not a full page), so an iframe is not created. This behavior can be controlled explicitly through configuring the widget.
 
@@ -213,9 +213,9 @@ The example below demonstrates how to access the `window` and `document` objects
 
     </script>
 
-### Use with Forms
+### Integrate with Forms
 
-This section only applies to cases when the Window is not using an `iframe`.
+This section only applies to cases when the Window is **not** using an `iframe`.
 
 By default, Kendo UI Window is moved in the DOM and placed as a child of the `body` element after its initialization. In this way the widget is easily positioned on top of all other page content, but may lead to undesired side-effects if the Window is created from an element inside a form, because the moved form fields will not be submitted. To avoid this behavior, apply any of the following:
 
@@ -299,7 +299,7 @@ The example below demonstrates how to access an existing Window instance from wi
 >
 > The iframe-parent access is possible only if the iframe and the parent page belong to the same domain.
 
-#### Access DOM elements
+### Access DOM elements
 
 Similar to other Kendo UI widgets, the Window has two DOM elements, which you may want to access and use to customize the appearance of the widget or its content. These are the widget's [`wrapper` and `element`](/framework/widgets/wrapper-element), which are provided as fields of the widget object. In specific scenarios, the Window wrapper can be used to tweak the widget's position or size, although this is normally done via the API and the [`setOptions` method](/api/javascript/ui/window#methods-setOptions).
 
