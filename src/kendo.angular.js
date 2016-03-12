@@ -536,9 +536,7 @@ var __meta__ = { // jshint ignore:line
         var deregister = scope.$on("$destroy", function() {
             deregister();
             if (widget) {
-                if (widget.element) {
-                    widget.destroy();
-                }
+                kendo.destroy(widget.element);
                 widget = null;
             }
         });
