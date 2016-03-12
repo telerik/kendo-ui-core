@@ -15,6 +15,32 @@
         ok(colorPicker.data("kendoColorPicker") instanceof kendo.ui.ColorPicker);
    });
 
+   ngTest2("destroy widget", 1, function(root, controller, bootstrap) {
+        var numericTextBox = $("<input kendo-numerictextbox />").appendTo(root);
+        $("<div kendo-grid></div>").appendTo(root);
+
+        bootstrap();
+
+        angular.element(numericTextBox).scope().$destroy();
+
+        equal(numericTextBox.data("kendoNumericTextBox"), null);
+   });
+
+   ngTest2("do not throw exception when destroy scope", 1, function(root, controller, bootstrap) {
+        var dropDownList = $("<input kendo-drop-down-list />").appendTo(root);
+        $("<div kendo-grid></div>").appendTo(root);
+
+        bootstrap();
+
+        var scope = angular.element(dropDownList).scope();
+
+        dropDownList.data("kendoDropDownList").destroy();
+
+        scope.$destroy();
+
+        ok(!dropDownList.data("kendoDropDownList"));
+   });
+
     ngTest2("DropDown, ComboBox, MultiSelect -- k-ng-model returns items instead of string values", 6, function(dom, controller, bootstrap) {
         var theScope;
 
