@@ -23,14 +23,12 @@ The example below demonstrates how to use the Kendo UI Sortable widget with a Ke
 
        var textEditor = function (container, options) {
          $('<input data-value-update="input" data-bind="value:' + options.field + '"/>')
-         .appendTo(container);
-
+           .appendTo(container);
        };
 
        var numericEditor = function (container, options) {
          $('<input data-role="numerictextbox" data-bind="value:' + options.field + '"/>')
-         .appendTo(container);
-
+           .appendTo(container);
        };
 
        // Initialize the product Order field
@@ -44,6 +42,7 @@ The example below demonstrates how to use the Kendo UI Sortable widget with a Ke
            data: products,
            schema: {
              model: {
+               id: "ProductID",
                fields: {
                  ProductName: { type: "string" },
                  UnitPrice: { type: "number" },
@@ -52,7 +51,7 @@ The example below demonstrates how to use the Kendo UI Sortable widget with a Ke
                }
              }
            },
-           batch: true,
+           sort: { field: "Order", dir: "asc" }
          },
          scrollable: false,
          pageable: false,
@@ -69,25 +68,23 @@ The example below demonstrates how to use the Kendo UI Sortable widget with a Ke
          },
          toolbar: ["create", "cancel"],
          columns: [
+           { field: "Order" },
            { field: "ProductName", editor: textEditor},
            { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "130px",
             editor: numericEditor},
            { field: "UnitsInStock", title: "Units In Stock", width: "130px",editor: numericEditor },
-           { field: "Discontinued", width: "130px" },
-           { command: ["edit", "destroy"], title: "&nbsp;", width: 150 }
+           { field: "Discontinued", width: "130px" }
          ]
        }).data("kendoGrid");
 
        grid.table.kendoSortable({
-
          hint: hintElement,
          cursor: "move",
          placeholder: function(element) {
            return element.clone().addClass("k-state-hover").css("opacity", 0.65);
          },
          container: "#grid tbody",
-         // Filter editing rows
-         filter: ">tbody >tr:not(.k-grid-edit-row)",
+         filter: ">tbody >tr",
          change: function(e) {
            var grid = $("#grid").data("kendoGrid"),
                oldIndex = e.oldIndex , // The old position
@@ -111,7 +108,7 @@ The example below demonstrates how to use the Kendo UI Sortable widget with a Ke
              }
            }
 
-           grid.refresh();
+           grid.dataSource.sync();
          }
        });
      });
@@ -127,7 +124,7 @@ The example below demonstrates how to use the Kendo UI Sortable widget with a Ke
        table.find("thead").remove(); // Remove Grid's header from the hint
        table.find("tbody").empty(); // Remove the existing rows from the hint
        table.wrap(wrapper); // Wrap the table
-       table.append(element.clone()); // Append the dragged element
+       table.append(element.clone().removeAttr("uid")); // Append the dragged element
 
        hint = table.parent(); // Get the wrapper
 
