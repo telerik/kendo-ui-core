@@ -7,6 +7,38 @@ page_title: Configuration, methods and events of Kendo UI Spreadsheet Sheet Inst
 
 Represents a sheet instance in the [Kendo UI Spreadsheet](/api/javascript/ui/spreadsheet) widget. Inherits from [Observable](/api/javascript/observable).
 
+## Fields
+
+### dataSource `kendo.data.DataSource`
+
+The [DataSource](/framework/datasource/overview) instance to which the Sheet is bound to.
+
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+    <script>
+
+      var dataSource = new kendo.data.DataSource({
+        transport: {
+          read:  {
+            url: "//demos.telerik.com/kendo-ui/service/Products",
+            dataType: "jsonp"
+          }
+        }
+      });
+
+      $("#spreadsheet").kendoSpreadsheet();
+
+      var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+      var sheet = spreadsheet.activeSheet();
+      sheet.setDataSource(dataSource);
+
+      console.log(sheet.dataSource);
+
+    </script>
+```
+
 ## Methods
 
 ### clearFilter
