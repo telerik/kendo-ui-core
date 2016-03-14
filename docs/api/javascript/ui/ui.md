@@ -57,6 +57,8 @@ but may need a `height` or `min-height` style in order to expand and fill the br
 may need a high-enough `z-index` style in order to cover any other positioned elements with `z-index` on the page.
 * multiple loading indicators cannot be displayed at the same time if their target elements are nested;
 
+`<script>` elements, which define Kendo UI templates, are not valid arguments for the `kendo.ui.progress()` method. This is because the actual template contents is rendered elsewhere on the page and without copying the script element ID. Moreover, `<script>` elements are not visible.
+
 ##### toggle `Boolean`
 
 The flag, which indicates whether to show or hide the loading overlay.
