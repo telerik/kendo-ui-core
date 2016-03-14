@@ -82,6 +82,18 @@ Defines the defaults of the connections. Whenever a connection is created, the s
 
 Defines the label displayed on the connection path.
 
+### connectionDefaults.content.color `String`
+
+The color of the connection content text.
+
+### connectionDefaults.content.fontFamily `String`
+
+The font family of the connection content text.
+
+### connectionDefaults.content.fontSize `Number`
+
+The font size of the connection content text.
+
 ### connectionDefaults.content.template `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) which renders the labels.
@@ -400,7 +412,19 @@ Defines the connections configuration.
 
 ### connections.content `Object`
 
-Defines the shapes content settings.
+Defines the connection content settings.
+
+### connections.content.color `String`
+
+The color of the connection content text.
+
+### connections.content.fontFamily `String`
+
+The font family of the connection content text.
+
+### connections.content.fontSize `Number`
+
+The font size of the connection content text.
 
 ### connections.content.template `String|Function`
 
