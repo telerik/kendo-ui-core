@@ -499,6 +499,67 @@ Returns a range with the current active selection.
     </script>
 ```
 
+### setDataSource
+
+Binds the sheet to a DataSource instance.For more information on the data-binding Spreadsheet functionality, refer to the [article on binding the Spreadsheet to a data source](import-and-export-data/bind-to-data-source).
+
+#### Parameters
+
+##### dataSource `kendo.data.DataSource`
+
+The DataSource instance.
+
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+    <script>
+
+      var dataSource = new kendo.data.DataSource({
+        transport: {
+          read:  {
+            url: "//demos.telerik.com/kendo-ui/service/Products",
+            dataType: "jsonp"
+          }
+        }
+      });
+
+      $("#spreadsheet").kendoSpreadsheet();
+
+      var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+      var sheet = spreadsheet.activeSheet();
+      sheet.setDataSource(dataSource);
+
+    </script>
+```
+
+##### columns `Array` *optional*
+
+Columns configuration.
+
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+    <script>
+
+      var dataSource = new kendo.data.DataSource({
+        transport: {
+          read:  {
+            url: "//demos.telerik.com/kendo-ui/service/Products",
+            dataType: "jsonp"
+          }
+        }
+      });
+
+      $("#spreadsheet").kendoSpreadsheet();
+
+      var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+      var sheet = spreadsheet.activeSheet();
+      sheet.setDataSource(dataSource, [ "ProductName", "UnitPrice" ]);
+
+    </script>
+```
 ### toJSON
 Serializes the sheet in the format defined in the [sheet configuration](/api/javascript/ui/spreadsheet#configuration.sheets).
 
