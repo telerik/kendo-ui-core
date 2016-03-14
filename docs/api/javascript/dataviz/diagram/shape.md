@@ -200,13 +200,25 @@ The rotation angle.
 
 Defines the shapes content settings.
 
-### content.text `String`
-
-The text displayed in the shape.
-
 ### content.align `String`
 
 The alignment of the text inside the shape.
+
+### content.color `String`
+
+The color of the shape content text.
+
+### content.fontFamily `String`
+
+The font family of the shape content text.
+
+### content.fontSize `Number`
+
+The font size of the shape content text.
+
+### content.text `String`
+
+The text displayed in the shape.
 
 ### selectable `Boolean` *(default: true)*
 

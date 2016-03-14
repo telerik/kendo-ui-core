@@ -13,6 +13,18 @@ Connections are usually created by calling [connect](/api/dataviz/diagram#method
 
 Defines the label displayed on the connection path.
 
+### content.color `String`
+
+The color of the connection content text.
+
+### content.fontFamily `String`
+
+The font family of the connection content text.
+
+### content.fontSize `Number`
+
+The font size of the connection content text.
+
 ### content.template `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) which renders the labels.
