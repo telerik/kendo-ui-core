@@ -45,7 +45,7 @@ Below are listed the script files for the Kendo UI Charts widgets:
 | 						| kendo.dataviz.core.js						| 							|
 | 						| kendo.dataviz.themes.js					| 							|
 | 						| kendo.dataviz.chart.js					| 							|
-| 						| kendo.dataviz.stockchart.js				| 							|
+| 						| kendo.dataviz.stock.js				| 							|
 | [TreeMap](http://demos.telerik.com/kendo-ui/treemap/index)| jquery.js|						|
 | 						| kendo.core.js								| 							|
 | 						| kendo.data.js								| 							|
