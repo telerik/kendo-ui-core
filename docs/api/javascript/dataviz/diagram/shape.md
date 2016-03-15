@@ -228,6 +228,10 @@ Specifies if the shape can be selected.
 
 A function returning a visual element to render for this shape.
 
+### connectorDefaults `Object`
+
+Defines default options for the shape connectors.
+
 ### connectorDefaults.width `Number` *(default: 8)*
 
 Defines the width of the shape connectors.
