@@ -26,7 +26,7 @@ Creating widgets from [document fragments](https://developer.mozilla.org/en-US/d
 
 ### Instantiate the AutoComplete
 
-The example below demonstrates how to instantiate Kendo UI AutoComplete.
+The example below demonstrates how to instantiate a Kendo UI AutoComplete.
 
 ###### Example
 
@@ -39,6 +39,8 @@ The example below demonstrates how to instantiate Kendo UI AutoComplete.
         });
     </script>
 ```
+
+A similar approach is used for all other widgets, with the widget name being spelled in PascalCase. The widget initialization method follows the jQuery plugin paradigm and **returns the jQuery object of the same DOM element** used for widget creation. In other words, **it does not return the widget instance**, and the instance should be obtained via the [jQuery `data()` method](/intro/widget-basics/events-and-methods#jquery-data-method).
 
 > **Important**  
 >
