@@ -1948,6 +1948,10 @@ The stroke dash type.
 
 Defines the thickness or width of the shape connectors stroke.
 
+### shapeDefaults.connectorDefaults `Object`
+
+Defines default options for the shape connectors.
+
 ### shapeDefaults.connectorDefaults.width `Number` *(default: 8)*
 
 Defines the width of the shape connectors.
@@ -2437,6 +2441,10 @@ The stroke dash type.
 ### shapes.connectors.stroke.width `Number` *(default: 1)*
 
 Defines the thickness or width of the shape connectors stroke.
+
+### shapes.connectorDefaults `Object`
+
+Defines default options for the shape connectors.
 
 ### shapes.connectorDefaults.width `Number` *(default: 8)*
 
