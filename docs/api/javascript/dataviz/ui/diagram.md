@@ -3830,6 +3830,32 @@ The rest of the items (shapes and connections).
 
 The widget instance which fired the event.
 
+### toolBarClick
+
+Fired when the user clicks an item in the toolbar.
+
+#### Event Data
+
+##### e.action `String`
+
+The name of the clicked tool.
+
+##### e.shapes `Array`
+
+The selected shapes.
+
+##### e.connections `Array`
+
+The selected connections.
+
+##### e.target `jQuery`
+
+The jQuery object that represents the clicked toolbar element.
+
+##### e.sender `kendo.dataviz.ui.Diagram`
+
+The widget instance which fired the event.
+
 ### zoomEnd
 
 Fired when the user changes the diagram zoom level.
