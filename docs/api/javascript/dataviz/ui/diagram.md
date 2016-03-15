@@ -161,10 +161,52 @@ Specifies if the connections can be removed.
 
 ### connectionDefaults.editable.tools `Array`
 
-Specifies the the toolbar tools. Predefined tools are:
+Specifies the the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar#configuration-items). Predefined tools are:
 
 * "edit" - Selected item can be edit.
 * "delete" - Selected items can be deleted.
+
+#### Example - using predefined tools
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        connections: [{ from: {x: 100, y: 100}, to: {x: 200, y: 200}}],
+        connectionDefaults: {
+          editable: {
+            tools: [{
+              name: "delete"
+            }]
+          }
+        }
+      });
+    </script>
+
+#### Example - using custom tools
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        connections: [{ from: {x: 100, y: 100}, to: {x: 200, y: 200}}],
+        connectionDefaults: {
+          editable: {
+            tools: [{
+              type: "button",
+              text: "Set Content",
+              click: function() {
+                var selected = $("#diagram").getKendoDiagram().select();
+                var content = $("#content").val();
+                for (var idx = 0; idx < selected.length; idx++) {
+                  selected[idx].content(content);
+                }
+              }
+            }, {
+              template: "<input id='content' class='k-textbox' value='Foo' />"
+            }]
+          }
+        }
+      });
+    </script>
 
 ### connectionDefaults.editable.tools.name `String`
 
@@ -448,7 +490,7 @@ Defines the shape editable options.
 
 ### connections.editable.tools `Array`
 
-Specifies the the toolbar tools. Predefined tools are:
+Specifies the the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar#configuration-items). Predefined tools are:
 
 * "edit" - Selected item can be edit.
 * "delete" - Selected items can be deleted.
@@ -1056,21 +1098,6 @@ Specifies the width of the resizing handles. See the [editable.resize](#configur
 
 Specifies whether the shapes can be rotated. Note that changing this setting after creating the diagram will have no effect.
 
-#### Example - styling the rotation thumb
-
-     editable:{
-         rotate:{
-             fill:{
-                 color:"red",
-                 opacity:.5
-             },
-             stroke:{
-                 color:"blue",
-                 width:2
-             }
-         }
-     }
-
 ### editable.rotate.fill `Object`
 
 Specifies the fill settings of the rotation thumb.
@@ -1101,7 +1128,7 @@ Specifies the shape editor template. See the 'editable.connectionTemplate' for a
 
 ### editable.tools `Array`
 
-Specifies the the toolbar tools. Predefined tools are:
+Specifies the the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar#configuration-items). Predefined tools are:
 
 * "edit" - Selected item can be edit.
 * "createShape" - Adds an empty shape data item and a popup window will be displayed.
@@ -1112,6 +1139,48 @@ Specifies the the toolbar tools. Predefined tools are:
 * "rotateAnticlockwise" - Selected items can be rotated anticlockwise. Default value for rotation is 90 degree.
 
 > If the toolbar or toolbar items are not visible, please make sure the Kendo stylesheets are included in the header.
+
+#### Example - using predefined tools
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{}],
+        editable: {
+          tools: [{
+            name: "delete"
+          }, {
+            name: "rotateClockwise"
+          }, {
+            name: "rotateAnticlockwise"
+          }]
+        }
+      });
+    </script>
+
+#### Example - using custom tools
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{}],
+        editable: {
+          tools: [{
+            type: "button",
+            text: "Set Selected Content",
+            click: function() {
+              var selected = $("#diagram").getKendoDiagram().select();
+              var content = $("#content").val();
+              for (var idx = 0; idx < selected.length; idx++) {
+                selected[idx].content(content);
+              }
+            }
+          }, {
+            template: "<input id='content' class='k-textbox' value='Foo' />"
+          }]
+        }
+      });
+    </script>
 
 ### editable.tools.name `String`
 
@@ -1997,12 +2066,58 @@ Specifies if the shapes can be removed.
 
 ### shapeDefaults.editable.tools `Array`
 
-Specifies the the toolbar tools. Predefined tools are:
+Specifies the the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar#configuration-items). Predefined tools are:
 
 * "edit" - Selected item can be edit.
 * "delete" - Selected items can be deleted.
 * "rotateClockwise" - Selected items can be rotated clockwise. Default value for rotation is 90 degree.
 * "rotateAnticlockwise" - Selected items can be rotated anticlockwise. Default value for rotation is 90 degree.
+
+#### Example - using predefined tools
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{}],
+        shapeDefaults: {
+          editable: {
+            tools: [{
+              name: "delete"
+            }, {
+              name: "rotateClockwise"
+            }, {
+              name: "rotateAnticlockwise"
+            }]
+          }
+        }
+      });
+    </script>
+
+#### Example - using custom tools
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{}],
+        shapeDefaults: {
+          editable: {
+            tools: [{
+              type: "button",
+              text: "Set Content",
+              click: function() {
+                var selected = $("#diagram").getKendoDiagram().select();
+                var content = $("#content").val();
+                for (var idx = 0; idx < selected.length; idx++) {
+                  selected[idx].content(content);
+                }
+              }
+            }, {
+              template: "<input id='content' class='k-textbox' value='Foo' />"
+            }]
+          }
+        }
+      });
+    </script>
 
 ### shapeDefaults.editable.tools.name `String`
 
@@ -2433,7 +2548,7 @@ Specifies whether the connectors should appear on hover.
 
 ### shapes.editable.tools `Array`
 
-Specifies the the toolbar tools. Predefined tools are:
+Specifies the the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar#configuration-items). Predefined tools are:
 
 * "edit" - Selected item can be edit.
 * "delete" - Selected items can be deleted.
