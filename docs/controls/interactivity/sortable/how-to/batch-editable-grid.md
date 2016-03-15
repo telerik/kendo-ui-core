@@ -1,13 +1,45 @@
 ---
-title: Use Sortable with Grid in Batch Editing Mode
-page_title: Use Sortable with Grid in Batch Editing Mode | Kendo UI Sortable
-description: "Learn how to use the Kendo UI Sortable widget with a Kendo UI Grid in a batch editable mode."
-slug: howto_usesortablewithgrid_inbatchediting_sortable
+title: Use Sortable with Grid in Incell Editing Mode
+page_title: Use Sortable with Grid in Incell Editing Mode | Kendo UI Sortable
+description: "Learn how to use the Kendo UI Sortable widget with a Kendo UI Grid in a incell editable mode."
+slug: howto_usesortablewithgrid_inincellediting_sortable
 ---
 
-# Use Sortable with Grid in Batch Editing Mode
+# Use Sortable with Grid in Incell Editing Mode
 
-The example below demonstrates how to use the Kendo UI Sortable widget with a Kendo UI Grid in batch editable mode.
+The example below demonstrates how to use the Kendo UI Sortable widget with a Kendo UI Grid in incell editable mode.
+
+The main milestones of the approach are:
+
+* the standard HTML inputs that are used as editors should have `data-value-update="input"` attribute. If this attribute is not attached to the HTML element, the Grid will not update its data.
+
+       var textEditor = function (container, options) {
+         $('<input data-value-update="input" data-bind="value:' + options.field + '"/>')
+           .appendTo(container);
+       };
+
+* if a KendoUI widget is used as editor, its `change` event should be manually triggered at the `edit` event of the Grid widget.
+
+       //Kendo UI widget used as editor
+       var numericEditor = function (container, options) {
+         $('<input data-role="numerictextbox" data-bind="value:' + options.field + '"/>')
+           .appendTo(container);
+       };
+
+       //Grid edit event handler
+       edit: function(e) {
+         var input = e.container.find("[data-role=numerictextbox]");
+         var widget = input.data("kendoNumericTextBox");
+         var model = e.model;
+
+         input.on("keyup", function() {
+           widget.value(input.val());
+           widget.trigger("change");
+         });
+       },
+
+**For simplicity the demo uses local data whith dummy order field.** This may not be the case in a real world scenario.
+The change event handler of the Sortable widget updates the Order field, this is just a sample implementation. **The change event handler should be modified to fit your real world scenario.**
 
 ###### Example
 
@@ -36,7 +68,6 @@ The example below demonstrates how to use the Kendo UI Sortable widget with a Ke
          products[j].Order = j;
        }
 
-
        var grid = $("#grid").kendoGrid({
          dataSource: {
            data: products,
@@ -62,11 +93,11 @@ The example below demonstrates how to use the Kendo UI Sortable widget with a Ke
            var model = e.model;
 
            input.on("keyup", function() {
-             widget.value(input.val());  
+             widget.value(input.val());
              widget.trigger("change");
            });
          },
-         toolbar: ["create", "cancel"],
+         toolbar: ["cancel"],
          columns: [
            { field: "Order" },
            { field: "ProductName", editor: textEditor},
