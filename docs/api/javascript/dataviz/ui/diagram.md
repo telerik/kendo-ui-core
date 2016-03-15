@@ -1811,6 +1811,74 @@ The connector name.
 
 The function that positions the connector.
 
+### shapeDefaults.connectors.width `Number` *(default: 8)*
+
+Defines the width of the shape connectors.
+
+### shapeDefaults.connectors.height `Number` *(default: 8)*
+
+Defines the height of the shape connectors.
+
+### shapeDefaults.connectors.hover `Object`
+
+Defines the hover configuration of the shape connectors.
+
+### shapeDefaults.connectors.hover.fill `String|Object`
+
+Defines the hover fill options of the shape connectors.
+
+### shapeDefaults.connectors.hover.fill.color `String`
+
+Defines the hover fill color of the shape connectors.
+
+### shapeDefaults.connectors.hover.fill.opacity `Number` *(default: 1)*
+
+Defines the hover fill opacity of the shape connectors.
+
+### shapeDefaults.connectors.hover.stroke `String|Object`
+
+Defines the hover stroke options of the shape connectors.
+
+### shapeDefaults.connectors.hover.stroke.color `String` *(default: "Black")*
+
+Defines the hover stroke color.
+
+### shapeDefaults.connectors.hover.stroke.dashType `String`
+
+The hover stroke dash type.
+
+### shapeDefaults.connectors.hover.stroke.width `Number` *(default: 1)*
+
+Defines the thickness or width of the shape connectors stroke on hover.
+
+### shapeDefaults.connectors.fill `String|Object`
+
+Defines the fill options of the shape connectors.
+
+### shapeDefaults.connectors.fill.color `String`
+
+Defines the fill color of the shape connectors.
+
+### shapeDefaults.connectors.fill.opacity `Number` *(default: 1)*
+
+Defines the fill opacity of the shape connectors.
+
+### shapeDefaults.connectors.stroke `String|Object`
+
+Defines the stroke options of the shape connectors.
+
+### shapeDefaults.connectors.stroke.color `String` *(default: "Black")*
+
+Defines the stroke color.
+
+### shapeDefaults.connectors.stroke.dashType `String`
+
+The stroke dash type.
+
+### shapeDefaults.connectors.stroke.width `Number` *(default: 1)*
+
+Defines the thickness or width of the shape connectors stroke.
+
 ### shapeDefaults.connectorDefaults.width `Number` *(default: 8)*
 
 Defines the width of the shape connectors.
@@ -2186,6 +2254,74 @@ The connector name. Predefined names include:
 ### shapes.connectors.position `Function`
 
 The function that positions the connector.
+
+### shapes.connectors.width `Number` *(default: 8)*
+
+Defines the width of the shape connectors.
+
+### shapes.connectors.height `Number` *(default: 8)*
+
+Defines the height of the shape connectors.
+
+### shapes.connectors.hover `Object`
+
+Defines the hover configuration of the shape connectors.
+
+### shapes.connectors.hover.fill `String|Object`
+
+Defines the hover fill options of the shape connectors.
+
+### shapes.connectors.hover.fill.color `String`
+
+Defines the hover fill color of the shape connectors.
+
+### shapes.connectors.hover.fill.opacity `Number` *(default: 1)*
+
+Defines the hover fill opacity of the shape connectors.
+
+### shapes.connectors.hover.stroke `String|Object`
+
+Defines the hover stroke options of the shape connectors.
+
+### shapes.connectors.hover.stroke.color `String` *(default: "Black")*
+
+Defines the hover stroke color.
+
+### shapes.connectors.hover.stroke.dashType `String`
+
+The hover stroke dash type.
+
+### shapes.connectors.hover.stroke.width `Number` *(default: 1)*
+
+Defines the thickness or width of the shape connectors stroke on hover.
+
+### shapes.connectors.fill `String|Object`
+
+Defines the fill options of the shape connectors.
+
+### shapes.connectors.fill.color `String`
+
+Defines the fill color of the shape connectors.
+
+### shapes.connectors.fill.opacity `Number` *(default: 1)*
+
+Defines the fill opacity of the shape connectors.
+
+### shapes.connectors.stroke `String|Object`
+
+Defines the stroke options of the shape connectors.
+
+### shapes.connectors.stroke.color `String` *(default: "Black")*
+
+Defines the stroke color.
+
+### shapes.connectors.stroke.dashType `String`
+
+The stroke dash type.
+
+### shapes.connectors.stroke.width `Number` *(default: 1)*
+
+Defines the thickness or width of the shape connectors stroke.
 
 ### shapes.connectorDefaults.width `Number` *(default: 8)*
 
