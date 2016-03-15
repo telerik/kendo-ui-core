@@ -1563,6 +1563,8 @@ Each table row consists of table cells (`<td>`) which represent the grid columns
 
 The text that is displayed in the column header cell. If not set the [field](#configuration-columns.field) is used.
 
+> **Note:** Column title should not contain HTML entities. If such are exists, they should be encoded.
+
 #### Example - set the title of the column
 
     <div id="grid"></div>
