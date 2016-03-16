@@ -165,3 +165,5 @@ Other articles on Kendo UI Grid and how-to examples related to its layout:
 * [How to Disable Resizing for Specific Columns]({% slug howto_disable_column_resizing_grid %})
 * [How to Hide the Vertical Scrollbar When Not Needed]({% slug howto_hide_vertical_scrollbar_grid %})
 * [How to Resize Grid When Window Is Resized]({% slug howto_resize_whenthe_windowis_resized_grid %})
+
+For more runnable examples on Kendo UI Grid, browse the [how-to section of articles]({% slug howto_create_custom_editors_grid %}).

@@ -114,3 +114,5 @@ Other articles on Kendo UI Grid and how-to examples related to its editing funct
 * [How to Use CRUD Operations when Grid Is Bound to Web Methods]({% slug howto_use_crud_boundto_web_methods_grid %})
 * [How to Use MultiSelect as CSV Editor]({% slug howto_usethe_multiselect_aseditor_commaseparated_stringfields_grid %})
 * [How to Use TreeView as Custom Editor]({% slug howto_usethe_treeview_aseditor_grid %})
+
+For more runnable examples on Kendo UI Grid, browse the [how-to section of articles]({% slug howto_create_custom_editors_grid %}).

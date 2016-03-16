@@ -107,3 +107,5 @@ Other articles on Kendo UI Grid and how-to examples related to AngularJS:
 * [How to Create Custom Editors]({% slug howto_create_custom_editors_grid %})
 * [How to Use AngularJS in Popup Editor Templates]({% slug howto_use_angularin_popup_editor_templates_grid %})
 * [How to Use Resize Columns from a Button]({% slug howto_resize_columnsfrom_abutton_grid %})
+
+For more runnable examples on Kendo UI Grid, browse the [how-to section of articles]({% slug howto_create_custom_editors_grid %}).
