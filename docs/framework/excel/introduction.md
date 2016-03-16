@@ -52,7 +52,7 @@ Excel generation is available for all [supported browsers]({% slug wbe_browseran
 
 > **Important**
 >
-> Some mobile browsers will not allow you to save the file although.
+> Some mobile browsers will not allow you to save the file though.
 
 For detailed information on how to save files, refer to the [article about saving files with Kendo UI](/framework/save-files/introduction).
 
