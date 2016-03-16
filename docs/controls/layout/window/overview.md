@@ -215,7 +215,9 @@ The example below demonstrates how to access the `window` and `document` objects
 
 ### Integrate with Forms
 
-This section only applies to cases when the Window is **not** using an `iframe`.
+> **Important**
+>
+> This section only applies to cases when the Window is not using an `iframe`.
 
 By default, Kendo UI Window is moved in the DOM and placed as a child of the `body` element after its initialization. In this way the widget is easily positioned on top of all other page content, but may lead to undesired side-effects if the Window is created from an element inside a form, because the moved form fields will not be submitted. To avoid this behavior, apply any of the following:
 
@@ -273,7 +275,7 @@ The example below demonstrates how to access an existing Window instance.
 
     var win = $("#window").data("kendoWindow");
 
-#### Reference from non-iframe Content
+#### Reference from Non-iframe Content
 
 An easy way to obtain reference to a Kendo UI Window instance from within its non-`iframe` content is to use DOM traversal.
 
@@ -299,7 +301,7 @@ The example below demonstrates how to access an existing Window instance from wi
 >
 > The iframe-parent access is possible only if the iframe and the parent page belong to the same domain.
 
-### Access DOM elements
+### Access DOM Elements
 
 Similar to other Kendo UI widgets, the Window has two DOM elements, which you may want to access and use to customize the appearance of the widget or its content. These are the widget's [`wrapper` and `element`](/framework/widgets/wrapper-element), which are provided as fields of the widget object. In specific scenarios, the Window wrapper can be used to tweak the widget's position or size, although this is normally done via the API and the [`setOptions` method](/api/javascript/ui/window#methods-setOptions).
 
