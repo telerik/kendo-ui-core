@@ -30,7 +30,8 @@ The example below demonstrates how to instantiate a Kendo UI AutoComplete.
 
 ###### Example
 
-```
+```html
+
 	<p>Animal: <input id="animal" /></p>
 
 	<script>
@@ -40,11 +41,9 @@ The example below demonstrates how to instantiate a Kendo UI AutoComplete.
     </script>
 ```
 
-A similar approach is used for all other widgets, with the widget name being spelled in PascalCase. The widget initialization method follows the jQuery plugin paradigm and **returns the jQuery object of the same DOM element** used for widget creation. In other words, **it does not return the widget instance**, and the instance should be obtained via the [jQuery `data()` method](/intro/widget-basics/events-and-methods#jquery-data-method).
-
-> **Important**  
->
-> If the jQuery object includes more than one DOM element, a separate widget will be instantiated for each.
+> **Important**
+> * A similar approach is used for all other widgets, with the widget name being spelled in PascalCase. The widget initialization method follows the jQuery plugin paradigm and returns the jQuery object of the same DOM element used for widget creation. In other words, it does not return the widget instance, and the instance should be obtained via the [jQuery `data()` method]({% slug widget_methodsand_events_kendoui_installation %}#jquery-data-method).
+> * If the jQuery object includes more than one DOM element, a separate widget will be instantiated for each.
 
 ### Instantiate Multiple Buttons
 
