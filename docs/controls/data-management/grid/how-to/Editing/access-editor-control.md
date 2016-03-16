@@ -7,14 +7,14 @@ slug: howto_access_editor_controlsin_edit_events_grid
 
 # Access Editor Controls in Edit Events
 
-The example below demonstrates how to acccess an editor control in the `edit` event handler of the Kendo UI Grid widget.
+The example below demonstrates how to access an editor control in the `edit` event handler of the Kendo UI Grid widget.
 
-The functionality relies on the following:
+The functionality relies on the following concepts:
 
-* the [edit event](/api/javascript/ui/grid#events-edit) handler of the Grid provides reference to the edit container's DOM element
-* Kendo UI widgets have a `data-role` HTML attribute rendered for the DOM element, which holds the widget widget object
+* The [`edit` event](/api/javascript/ui/grid#events-edit) handler of the Grid provides a reference to the DOM element of the edit container.
+* Kendo UI widgets have a `data-role` HTML attribute rendered for the DOM element, which holds the widget object.
 
-Please note that the demo below has no Kendo UI DataSource transport configured for brevity. However, a transport configuration is required for [CRUD operations](/framework/datasource/crud)  to work.
+Note that for brevity the demo below has no Kendo UI DataSource transport configured. However, a transport configuration is required for [CRUD operations]({% slug cruddataoperations_kendoui_datasourcecomponent %}) to work.
 
 ###### Example
 
