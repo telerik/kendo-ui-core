@@ -1,13 +1,13 @@
 ---
-title: Use HTML for axes labels
-page_title: Use HTML for axes labels | Kendo UI Charts
+title: Use HTML for Axes Labels
+page_title: Use HTML for Axes Labels | Kendo UI Charts
 description: "Learn how to use HTML for axes labels."
 slug: howto_addhtmltoaxeslabels_charts
 ---
 
-# Use HTML for categoryAxis.labels
+# Use HTML for Axes Labels
 
-The example below demonstrates how to use HTML for categoryAxis labels via the [visual](/api/javascript/dataviz/ui/chart.html#configuration-categoryAxis.labels.visual) option.
+The example below demonstrates how to use HTML for `categoryAxis.labels` via the [`visual`](/api/javascript/dataviz/ui/chart.html#configuration-categoryAxis.labels.visual) option.
 
 ###### Example
 
@@ -68,29 +68,29 @@ The example below demonstrates how to use HTML for categoryAxis labels via the [
               // Build an HTML fragment and append it to the body
               var html = $('<div>Category <b>' + e.text + '</b></div>')
               	.appendTo(document.body);
-              
+
               // Create an empty group that will hold the rendered label
               var visual = new kendo.drawing.Group();
-              
+
               // Store a reference to the target rectangle, see below
               var rect = e.rect;
-             
+
               kendo.drawing.drawDOM(html)
 							.done(function(group) {
                 // Clean-up HTML fragment
                 html.remove();
-                
+
                 // Center the label using Layout
                 var layout = new kendo.drawing.Layout(rect, {
                   justifyContent: "center"
                 });
                 layout.append(group);
                 layout.reflow();
-                
+
                 // Render the content
                 visual.append(layout);
               });
-              
+
               return visual;
             }
           }
@@ -133,3 +133,5 @@ Other articles and how-to examples on Kendo UI Charts:
 * [How to Use Fixed Bar Size]({% slug howto_usefixedbarsize_charts %})
 * [How to Use Hyperlinks in Axes Labels]({% slug howto_usehyperlinks_inaxislabels_charts %})
 * [How to Use Linear Gradient As Background in Bars]({% slug howto_uselineargradient_inbars_charts %})
+
+For more runnable examples on Kendo UI Charts, browse the [how-to section of articles]({% slug howto_createdynamicplotbands_charts %}).
