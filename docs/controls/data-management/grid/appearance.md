@@ -12,7 +12,7 @@ The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) support
 
 ## Scrolling
 
-The scrolling functionality of the Grid is enabled by default. For historical reasons, however, the [Grid MVC wrapper](/aspnet-mvc/helpers/grid/configuration#scrolling) does not support it.
+The scrolling functionality of the Grid is enabled by default. For historical reasons, however, scrolling is disabled by default when using the [Grid MVC wrapper](/aspnet-mvc/helpers/grid/overview), but can be [enabled explicitly](/aspnet-mvc/helpers/grid/configuration#scrolling).
 
 Though the scrolling functionality is enabled, the scrollbars do not necessarily appear. The reason for this is that scrolling requires you to define some of the widget's dimensions:
 
