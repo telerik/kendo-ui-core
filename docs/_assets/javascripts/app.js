@@ -318,7 +318,7 @@ var dojoApi = (function($) {
 
             var pre = $(element).parent().nextAll("pre:first");
 
-            var iframe = $('<iframe class="snippet-runner">').attr("src", '/kendo-ui/runner.html');
+            var iframe = $('<iframe class="snippet-runner">').attr("src", 'javascript:""');
 
 
             var snippet = null;
