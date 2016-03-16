@@ -79,3 +79,5 @@ Other articles on Kendo UI Grid and how-to examples related to its export to Exc
 * [How to Export Multiple Grids]({% slug howto_export_excel_multiple_grids_grid %})
 * [How to Format Cell Values]({% slug howto_format_cell_values_grid %})
 * [How to Use Column Template]({% slug howto_use_column_template_grid %})
+
+For more runnable examples on Kendo UI Grid, browse the [how-to section of articles]({% slug howto_create_custom_editors_grid %}).

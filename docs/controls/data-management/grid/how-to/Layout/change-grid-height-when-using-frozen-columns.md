@@ -1,15 +1,15 @@
 ---
 title: Change Grid Height When Using Frozen Columns
-page_title:  Change Grid Height When Using Frozen Columns | Kendo UI Grid
+page_title: Change Grid Height When Using Frozen Columns | Kendo UI Grid
 description: "Learn how to resize the Grid when using frozen columns"
 slug: howto_change_grid_height_frozen_columns
 ---
 
-# Change the Grid Height When Using Frozen Columns
+# Change Grid Height When Using Frozen Columns
 
 Normally, the Grid height should be fixed when using frozen columns. This ensures the Grid is able to calculate and construct its layout properly.
 
-The example below demonstrates how to resize the Grid even when frozen columns are used. The idea is to change the height style of the Grid [wrapper `<div>`](/intro/widget-basics/wrapper-element) and then call the widget's [`resize` method](/styles-and-layout/using-kendo-in-responsive-web-pages#individual-widget-resizing).
+The example below demonstrates how to resize the Grid even when frozen columns are used. The idea is to change the height style of the Grid [wrapper `<div>`]({% slug widgetwrapperandelement_references_gettingstarted %}) and then call the widget's [`resize` method]({% slug responsivewebdesign_integration_kendoui %}#individual-widget-resizing).
 
 ###### Example
 
@@ -119,3 +119,5 @@ Other articles on Kendo UI Grid and how-to examples related to its layout:
 * [How to Hide the Vertical Scrollbar When Not Needed]({% slug howto_hide_vertical_scrollbar_grid %})
 * [How to Resize Grid When Window Is Resized]({% slug howto_resize_whenthe_windowis_resized_grid %})
 * [How to Use FontAwesome Icons in Custom Command Buttons]({% slug howto_use_fontawesomeiconsin_custom_command_buttons_grid %})
+
+For more runnable examples on Kendo UI Grid, browse the [how-to section of articles]({% slug howto_create_custom_editors_grid %}).
