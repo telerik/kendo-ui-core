@@ -185,3 +185,5 @@ Other articles on Kendo UI Grid and how-to examples:
 * [How to Use Nested Chart]({% slug howto_use_nested_charts_grid %})
 * [How to Use Nested Model Properties]({% slug howto_use_nested_model_properties_grid %})
 * [How to Use WebAPI with Server-Side Operations]({% slug howto_use_webapi_withserverside_operations_grid %})
+
+For more runnable examples on Kendo UI Grid, browse the [how-to section of articles]({% slug howto_create_custom_editors_grid %}).

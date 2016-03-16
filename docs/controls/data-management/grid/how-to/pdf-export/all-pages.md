@@ -19,3 +19,5 @@ Other articles on Kendo UI Grid and how-to examples related to its export in PDF
 * [How to Customize Page Layout]({% slug howto_customize_page_layout_pdf_grid %})
 * [How to Export All Pages and Full Page Content]({% slug howto_export_allpagesand_full_page_content_pdf_grid %})
 * [How to Export Multiple Pages with Variable Row Height]({% slug howto_export_multiple_pageswith_variable_rowheight_pdf_grid %})
+
+For more runnable examples on Kendo UI Grid, browse the [how-to section of articles]({% slug howto_create_custom_editors_grid %}).

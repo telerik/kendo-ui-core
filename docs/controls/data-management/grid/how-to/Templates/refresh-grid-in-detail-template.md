@@ -92,3 +92,5 @@ Other articles on Kendo UI Grid and how-to examples related to the usage of temp
 * [How to Create Custom Editor in Detail Template]({% slug howto_create_custom_editorin_detail_template_grid %})
 * [How to Use Checkbox Column Templates and Edit]({% slug howto_use_checkbox_column_templateand_edit_grid %})
 * [How to Use Dates inside Row Template]({% slug howto_use_dates_inside_row_template_grid %})
+
+For more runnable examples on Kendo UI Grid, browse the [how-to section of articles]({% slug howto_create_custom_editors_grid %}).
