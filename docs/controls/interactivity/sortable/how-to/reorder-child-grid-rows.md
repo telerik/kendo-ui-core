@@ -157,4 +157,4 @@ Other articles and how-to examples on Kendo UI Sortable:
 * [How to Reorder Multiple Items]({% slug howto_reordermultipleitems_sortable %})
 * [How to Transfer Grid Rows]({% slug howto_transfergridrows_sortable %})
 * [How to Use Sortable in AngularJS with Grid in Batch Editing Mode]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %})
-* [How to Use Sortable with Grid in Batch Editing Mode]({% slug howto_usesortablewithgrid_inbatchediting_sortable %})
+* [How to Use Sortable with Grid in Incell Editing Mode]({% slug howto_usesortablewithgrid_inincellediting_sortable %})

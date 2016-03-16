@@ -7,18 +7,22 @@ slug: howto_usesortablewithgrid_inincellediting_sortable
 
 # Use Sortable with Grid in Incell Editing Mode
 
-The example below demonstrates how to use the Kendo UI Sortable widget with a Kendo UI Grid in incell editable mode.
+The example below demonstrates how to use the Kendo UI Sortable widget with a Kendo UI Grid in its incell editable mode.
 
 The main milestones of the approach are:
 
-* the standard HTML inputs that are used as editors should have `data-value-update="input"` attribute. If this attribute is not attached to the HTML element, the Grid will not update its data.
+* The standard HTML inputs that are used as editors should have a `data-value-update="input"` attribute. If this attribute is not attached to the HTML element, the Grid will not update its data.
+
+###### Example
 
        var textEditor = function (container, options) {
          $('<input data-value-update="input" data-bind="value:' + options.field + '"/>')
            .appendTo(container);
        };
 
-* if a KendoUI widget is used as editor, its `change` event should be manually triggered at the `edit` event of the Grid widget.
+* If a Kendo UI widget is used as an editor, its `change` event should be manually triggered at the `edit` event of the Grid widget.
+
+###### Example
 
        //Kendo UI widget used as editor
        var numericEditor = function (container, options) {
@@ -38,8 +42,9 @@ The main milestones of the approach are:
          });
        },
 
-**For simplicity the demo uses local data whith dummy order field.** This may not be the case in a real world scenario.
-The change event handler of the Sortable widget updates the Order field, this is just a sample implementation. **The change event handler should be modified to fit your real world scenario.**
+> **Important**
+> * For simplicity the demo uses local data with a dummy order field. This may not be the case in a real-world scenario.
+> * The `change` event handler of the Sortable widget updates the **Order** field, which is a sample implementation. The `change` event handler should be modified to fit your real-world scenario.
 
 ###### Example
 
