@@ -1,7 +1,7 @@
 ---
-title: Disable Column Resizing for Specific Columns
-page_title:  Disable Column Resizing for Specific Columns | Kendo UI Grid
-description: "Learn how to disable column resizing for specific columns"
+title: Disable Resizing for Specific Columns
+page_title: Disable Resizing for Specific Columns | Kendo UI Grid
+description: "Learn how to disable column resizing for specific columns when working with the Kendo UI Grid widget."
 slug: howto_disable_column_resizing_grid
 ---
 
@@ -9,7 +9,7 @@ slug: howto_disable_column_resizing_grid
 
 Normally, column resizing is enabled or disabled for all Kendo UI Grid columns.
 
-The example below demonstrates how to prevent resizing for some columns.
+The example below demonstrates how to prevent resizing for specific columns.
 
 ###### Example
 
@@ -30,7 +30,7 @@ The example below demonstrates how to prevent resizing for some columns.
             });
 
             var grid = $("#grid").data("kendoGrid");
-              
+
             grid.resizable.bind("start", function(e) {
                 if ($(e.currentTarget).data("th").data("field") == "bar") {
                   e.preventDefault();
@@ -40,7 +40,7 @@ The example below demonstrates how to prevent resizing for some columns.
                   });
                 }
             });
-            
+
         });
     </script>
 ```
@@ -49,8 +49,8 @@ The example below demonstrates how to prevent resizing for some columns.
 
 Other articles on Kendo UI Grid and how-to examples related to its layout:
 
-* [JavaScript API Reference](/api/javascript/ui/grid)
-* [Apply Minimum Width during Column Resize]({% slug howto_apply_min_width_during_column_resize_grid %})
+* [Kendo UI Grid JavaScript API Reference](/api/javascript/ui/grid)
+* [How to Apply Minimum Width during Column Resize]({% slug howto_apply_min_width_during_column_resize_grid %})
 * [How to Adjust Row Height with Virtual Scrolling]({% slug howto_adjust_row_height_withvirtual_scrolling_grid %})
 * [How to Change Group Header Position with Locked Columns]({% slug howto_change_group_header_position_wthlocked_columns_grid %})
 * [How to Create and Use Auto Layout]({% slug howto_create_and_use_autolayout_grid %})
