@@ -410,6 +410,7 @@ Other articles on Kendo UI Grid and how-to examples:
 * [How to Preserve Grid State in a Cookie]({% slug howto_preserve_gridstate_inacookie_grid %})
 * [How to Set Cell Color Based on ForeignKey Values]({% slug howto_set_cell_color_basedon_foreignkey_values_grid %})
 * [How to Show Tooltip for Column Records]({% slug howto_show_tooltipfor_column_records_grid %})
+* [How to Skip Non-editable Cells When Tabbing]({% slug howto_skip_noneditable_cells_when_tabbing_grid %})
 * [How to Sort Multiple Checkbox Filter]({% slug howto_sort_multiple_checkbox_filter_grid %})
 * [How to Update Toolbar Content Using MVVM Binding]({% slug howto_update_toolbar_content_using_mvvmbinding_grid %})
 * [How to Use Checkboxes inside Column Menus]({% slug howto_use_checkboxes_inside_column_menu_grid %})

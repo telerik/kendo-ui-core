@@ -106,6 +106,7 @@ Other articles on Kendo UI Grid and how-to examples related to its editing funct
 * [How to Prevent Page Navigation in Edit Mode]({% slug howto_prevent_page_navigation_inedit_mode_grid %})
 * [How to Show Custom Editor Using the Selected Item outside the Grid]({% slug howto_use_show_custom_editor_selected_item_outside_grid %})
 * [How to Show Edit Buttons for Editable Records Only]({% slug howto_show_editfor_editable_records_only_grid %})
+* [How to Skip Non-editable Cells When Tabbing]({% slug howto_skip_noneditable_cells_when_tabbing_grid %})
 * [How to Use AutoComplete as Custom Column Editor]({% slug howto_use_autocompleteas_custom_column_editor_grid %})
 * [How to Use ASMX Service with CRUD Operations]({% slug howto_crud_web_service_grid %})
 * [How to Use WCF with CRUD Operations]({% slug howto_use_wcf_service_crud_operations_grid %})
