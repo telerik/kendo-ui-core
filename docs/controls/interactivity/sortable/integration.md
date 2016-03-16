@@ -108,7 +108,7 @@ If you use the `batch` (or `incell`) editing modes, the code from the example ab
 >
 > The `data-value-update` approach works with regular inputs. However, you must configure the Kendo UI widgets manually as they do not support the `data-value-update` attribute.
 
-For runnable examples, refer to the article on [how to use the Sortable with Grids in batch editing mode]({% slug howto_usesortablewithgrid_inbatchediting_sortable %}), or to the article on [how to use the Sortable with Grids in batch editing mode within an AngularJS application]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %}).
+For runnable examples, refer to the article on [how to use the Sortable with Grids in инцелл editing mode]({% slug howto_usesortablewithgrid_inincellediting_sortable %}), or to the article on [how to use the Sortable with Grids in batch editing mode within an AngularJS application]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %}).
 
 ## Sortable and ListView
 
