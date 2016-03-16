@@ -103,12 +103,6 @@ navigation:
     "controls/hybrid/support":
         title: "Support and Integration"
         position: 6
-    "controls/hybrid/support/angular":
-        title: "AngularJS"
-        position: 100
-    "controls/hybrid/support/angular/tutorials":
-        title: "Tutorials"
-        position: 100
     "controls/hybrid/actionsheet":
         title: "ActionSheet"
         position: 7
@@ -226,6 +220,15 @@ navigation:
     "AngularJS":
         title: "AngularJS Directives"
         position: 7
+    "AngularJS/how-to":
+        title: "How To"
+        position: 6
+    "AngularJS/Troubleshooting":
+        title: "Troubleshooting"
+        position: 7
+    "AngularJS/tutorials":
+        title: "Tutorials"
+        position: 8
     "aspnet-mvc":
         title: "UI for ASP.NET MVC"
         position: 8
