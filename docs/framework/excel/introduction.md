@@ -50,6 +50,10 @@ For detailed information on using [RequireJS](http://requirejs.org/) with the Ke
 
 Excel generation is available for all [supported browsers]({% slug wbe_browserand_operating_system_support %}). Saving the file needs a server-side proxy for older browser versions.
 
+> **Important**
+>
+> Some mobile browsers will not allow you to save the file although.
+
 For detailed information on how to save files, refer to the [article about saving files with Kendo UI](/framework/save-files/introduction).
 
 ## Excel Document Creation
