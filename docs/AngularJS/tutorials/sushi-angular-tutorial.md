@@ -1,15 +1,15 @@
 ---
-title: Build Applications with AngularJS and Hybrid UI Components
-page_title: Build Applications with AngularJS and Hybrid UI Components | Kendo UI Hybrid Components
-description: "Build Applications with AngularJS and Hybrid UI Components."
-previous_url: /controls/hybrid/angular/sushi-angular-tutorial
+title: Build the Hybrid UI Sushi Application
+page_title: Build the Hybrid UI Sushi Application | Kendo UI Hybrid Components
+description: "Build the Sushi single-page application by using the Kendo UI hybrid components in AngularJS."
+previous_url: /controls/hybrid/angular/sushi-angular-tutorial, /controls/hybrid/support/angular/tutorials/sushi-angular-tutorial
 slug: buildappswithangular_tutorial_hybridkendoui
 position: 1
 ---
 
-# Build Applications with AngularJS and Hybrid UI Components
+# Build the Hybrid UI Sushi Application
 
-As of the Kendo UI Q3 2014 release, Kendo UI includes AngularJS directives for some of its Hybrid UI components, such as the hybrid mobile Application and View, the SplitView, and the ModalView. In this context, the mobile views support AngularJS controllers, directives and tw- way data binding expressions.
+As of the Kendo UI Q3 2014 release, Kendo UI includes AngularJS directives for some of its Hybrid UI components, such as the hybrid mobile Application and View, the SplitView, and the ModalView. In this context, the mobile views support AngularJS controllers, directives and two-way data binding expressions.
 
 This article introduces the AngularJS integration with the hybrid mobile widgets in Kendo UI and walks you through the construction of an AngularJS Kendo UI mobile web application.
 
