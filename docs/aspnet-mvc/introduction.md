@@ -72,7 +72,7 @@ Telerik UI for ASP.NET MVC contains the following directories:
 * `wrappers\aspnetmvc\Examples\VS2012`&mdash;The ASP.NET MVC 4 sample application built with Visual Studio 2012.
 * `wrappers\aspnetmvc\Examples\VS2013`&mdash;The ASP.NET MVC 5 sample application built with Visual Studio 2013.
 * `wrappers\aspnetmvc\Examples\VS2015`&mdash;The ASP.NET MVC 5 sample application built with Visual Studio 2015.
-* `wrappers\aspnetmvc\Examples\MVC6`&mdash;The ASP.NET MVC 6 Beta sample application built with Visual Studio 2015.
+* `wrappers\aspnetmvc\Examples\MVC6`&mdash;The ASP.NET Core MVC Beta sample application built with Visual Studio 2015.
 * `wrappers\aspnetmvc\EditorTemplates`&mdash;The ready-to-use editor templates based on the Kendo UI widgets.
 * `wrappers\aspnetmvc\LegacyThemes`&mdash;The themes ported from Telerik Extensions for ASP.NET MVC. Note that this is a discontinued product, superseded by Telerik UI for ASP.NET MVC.
 * `wrappers\aspnetmvc\Scaffolding`&mdash;The Kendo UI Scaffolder Visual Studio extension. It enables generating the Kendo UI MVC wrapper widgets declarations inside Visual Studio projects and is added in the Kendo UI Q1 2015 release.
@@ -144,5 +144,5 @@ Other articles and examples on Telerik UI for ASP.NET MVC:
 * [ASP.NET MVC 3]({% slug aspnetmvc3_aspnetmvc %})
 * [ASP.NET MVC 4]({% slug aspnetmvc4_aspnetmvc %})
 * [ASP.NET MVC 5]({% slug aspnetmvc5_aspnetmvc %})
-* [ASP.NET MVC 6]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [ASP.NET Core MVC]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_muscistoretutorial_aspnetmvc %})
