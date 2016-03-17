@@ -8,7 +8,7 @@ position: 1
 
 # Overview
 
-The tutorial on how to build the Team Efficiency Dashboard application by using Telerik UI for ASP.NET MVC are contributed by Developer Advocate Ed Charbeneau.
+The tutorial on how to build the Team Efficiency Dashboard application by using Telerik UI for ASP.NET MVC is contributed by Developer Advocate Ed Charbeneau.
 
 ## Introduction
 

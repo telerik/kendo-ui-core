@@ -21,7 +21,7 @@ Make sure you install the [Microsoft ASP.NET (RC1)](http://docs.asp.net/en/lates
 
 ## Configuration
 
-To configure an ASP.NET MVC6 project that enables you to use Telerik UI for ASP.NET MVC on Linux, do the following:
+To configure an ASP.NET Core MVC project that enables you to use Telerik UI for ASP.NET MVC on Linux, do the following:
 
 1. Create an ASP.NET MVC web site.
 2. Add the Kendo UI NuGet package.
