@@ -32,11 +32,11 @@ For a list of all available drawing primitives, refer to the [Drawing API articl
           var axis = e.sender.getAxis("valueAxis");
           var slot = axis.slot(650);
 
-          // Locate category slot
+          // Locate right-most category slot
           //
-          // Index, will get the last slot on the right given that we have less than 1000 categories
           var categoryAxis = e.sender.getAxis("categoryAxis");
-          var categorySlot = categoryAxis.slot(1000);
+          var lastCategoryIndex = Math.max(1, categoryAxis.range().max - 1);
+          var categorySlot = categoryAxis.slot(lastCategoryIndex);
 
           // Render a line element
           //
