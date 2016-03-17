@@ -57,7 +57,7 @@ Other articles on Telerik UI for ASP.NET MVC:
 * [ASP.NET MVC 4]({% slug aspnetmvc4_aspnetmvc %})
 * [ASP.NET MVC 5]({% slug aspnetmvc5_aspnetmvc %})
 * [ASP.NET Core MVC]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_muscistoretutorial_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})
 * [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

@@ -9,7 +9,7 @@ position: 2
 
 # Get Started
 
-This article demonstrates how to configure an ASP.NET MVC6 project to use Telerik UI for ASP.NET MVC.
+This article demonstrates how to configure an ASP.NET Core MVC project to use Telerik UI for ASP.NET MVC.
 
 ## Prerequisites
 
@@ -18,7 +18,7 @@ This article demonstrates how to configure an ASP.NET MVC6 project to use Teleri
 
 ## Configuration
 
-To configure an ASP.NET MVC6 project to use Telerik UI for ASP.NET MVC, do the following:
+To configure an ASP.NET Core MVC project to use Telerik UI for ASP.NET MVC, do the following:
 
 1. Create an ASP.NET MVC web site.
 2. Add the Kendo UI NuGet package.
