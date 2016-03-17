@@ -22,8 +22,8 @@ for more details.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             }
         });
     </script>
@@ -38,8 +38,8 @@ The selected files will be uploaded immediately by default. You can change this 
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove",
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove",
                 autoUpload: false
             }
         });
@@ -59,8 +59,8 @@ Files selected one after the other will be uploaded in separate requests.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove",
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove",
                 batch: true
             }
         });
@@ -76,8 +76,8 @@ The name of the form field submitted to the Remove URL.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove",
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove",
                 removeField: "customRemoveField"
             }
         });
@@ -94,8 +94,8 @@ requests containing one or more "fileNames" fields specifying the files to be de
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             }
         });
     </script>
@@ -110,8 +110,8 @@ The HTTP verb to be used by the remove action.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove",
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove",
                 removeVerb: "DELETE"
             }
         });
@@ -127,8 +127,8 @@ The name of the form field submitted to the save URL. The default value is the i
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove",
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove",
                 saveField: "customSaveField"
             }
         });
@@ -145,8 +145,8 @@ containing one or more fields with the same name as the original input name.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             }
         });
     </script>
@@ -243,8 +243,8 @@ Sets the text of the cancel button text.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             localization: {
                 cancel: "customCancel"
@@ -262,8 +262,8 @@ Sets the drop zone hint.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             localization: {
                 dropFilesHere: "customDropFilesHere"
@@ -281,8 +281,8 @@ Sets the header status message for uploaded files.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             localization: {
                 headerStatusUploaded: "customHeaderStatusUploaded"
@@ -300,8 +300,8 @@ Sets the header status message for files that are being uploaded.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             localization: {
                 headerStatusUploading: "customHeaderStatusUploading"
@@ -319,8 +319,8 @@ Sets the text of the remove button text.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             localization: {
                 remove: "customRemove"
@@ -338,8 +338,8 @@ Sets the text of the retry button text.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             localization: {
                 retry: "customRetry"
@@ -357,8 +357,8 @@ Sets the "Select..." button text.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             localization: {
                 select: "customSelect"
@@ -376,8 +376,8 @@ Sets the status message for failed uploads.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             localization: {
                 statusFailed: "customStatusFailed"
@@ -395,8 +395,8 @@ Sets the status message for uploaded files.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             localization: {
                 statusUploaded: "customStatusUploaded"
@@ -414,8 +414,8 @@ Sets the status message for files that are being uploaded.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             localization: {
                 statusUploading: "customStatusUploading"
@@ -433,8 +433,8 @@ Sets the text of the "Upload files" button.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             localization: {
                 uploadSelectedFiles: "customUploadSelectedFiles"
@@ -454,8 +454,8 @@ limit the total number of uploaded files in an asynchronous configuration.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             multiple: false
         });
@@ -473,8 +473,8 @@ client-side events to build your own UI.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             showFileList: false
         });
@@ -627,8 +627,8 @@ Note: The cancel event fires only when the upload is in
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             cancel: onCancel
         });
@@ -670,8 +670,8 @@ Note: The complete event fires only when the upload is in
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             complete: onComplete
         });
@@ -696,8 +696,8 @@ Note: The error event fires only when the upload is in
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             error: onError
         });
@@ -756,8 +756,8 @@ See [Supported Browsers](/web/upload/supported-browsers)
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             progress: onProgress
         });
@@ -798,8 +798,8 @@ Cancelling the event will prevent the remove.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             remove: onRemove
         });
@@ -843,8 +843,8 @@ occurring.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             select: onSelect
         });
@@ -887,8 +887,8 @@ Note: The success event fires only when the upload is in
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             success: onSuccess
         });
@@ -979,8 +979,8 @@ The request will be in UNSENT state.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             upload: onUpload
         });
@@ -1004,8 +1004,8 @@ The request will be in UNSENT state.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             upload: onUpload
         });
@@ -1027,8 +1027,8 @@ The request will be in UNSENT state.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             upload: onUpload
         });
@@ -1043,8 +1043,8 @@ The request will be in UNSENT state.
     <script>
         $("#photos").kendoUpload({
             async: {
-                saveUrl: "save",
-                removeUrl: "remove"
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
             },
             upload: onUpload
         });
