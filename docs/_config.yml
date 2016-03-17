@@ -236,7 +236,7 @@ navigation:
         title: "ASP.NET MVC Apps"
         position: 11
     "aspnet-mvc/aspnetmvc-apps/mvc-6":
-        title: "ASP.NET MVC 6"
+        title: "ASP.NET Core MVC"
         position: 4
     "aspnet-mvc/vs-integration":
         title: "Visual Studio Integration"
@@ -253,9 +253,15 @@ navigation:
     "aspnet-mvc/tutorials":
         title: "Tutorials"
         position: 16
+    "aspnet-mvc/tutorials/tutorial-aspnetmvc-quick-start":
+        title: "Quick Start Guide"
+        position: 1
+    "aspnet-mvc/tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app":
+        title: "Build the Team Efficiency Project"
+        position: 2
     "aspnet-mvc/tutorials/tutorial-kendo-music-store":
         title: "Build the Music Store Project"
-        position: 1
+        position: 2
     "aspnet-mvc/tutorials/tutorial-kendo-music-store/music-store-web":
         title: "Build the Web Application"
         position: 2
