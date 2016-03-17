@@ -240,7 +240,7 @@ The type checking mechanism will error out when your primitive receives more arg
 
 The simplest way is to use the `"rest"` type specifier. In such cases the last argument will be an array containing all remaining arguments, whatever types they might be.
 
-The example below demonstrates how to use a function that joins arguments with a separatorm producing a string.
+The example below demonstrates how to use a function that joins arguments with a separator, producing a string.
 
 ###### Example
 
