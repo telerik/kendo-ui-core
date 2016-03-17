@@ -35,7 +35,7 @@ Each of these features is exposed as a UI for the end user, as well as is expose
 
 ### Initialize the Spreadsheet
 
-Intsantiate the Spreadsheet widget by using an empty `<div>` element, as demonstrated in the example below.
+Instantiate the Spreadsheet widget by using an empty `<div>` element, as demonstrated in the example below.
 
 ###### Example
 
