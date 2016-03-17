@@ -630,6 +630,10 @@ Any options specified here are passed to jQuery.ajax().
 
 The server URL that will be requested.
 
+##### options.cache `Boolean`
+
+Indicates whether the Ajax request may use a previously cached response. By default Ajax request caching is not used.
+
 ##### options.data `Object`
 
 A JSON object containing the data that will be passed to the server.
