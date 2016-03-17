@@ -51,6 +51,7 @@ var __meta__ = { // jshint ignore:line
         HOVERSTATE = "k-state-hover",
         FOCUSEDSTATE = "k-state-focused",
         DISABLEDSTATE = "k-state-disabled",
+        SELECTEDSTATE = "k-state-selected",
         menuSelector = ".k-menu",
         groupSelector = ".k-menu-group",
         popupSelector = groupSelector + ",.k-animation-container",
@@ -66,7 +67,7 @@ var __meta__ = { // jshint ignore:line
 
         templates = {
             content: template(
-                "<div class='k-content #= groupCssClass() #' tabindex='-1'>#= content(item) #</div>"
+                "<div #= contentCssAttributes(item) # tabindex='-1'>#= content(item) #</div>"
             ),
             group: template(
                 "<ul class='#= groupCssClass(group) #'#= groupAttributes(group) # role='menu' aria-hidden='true'>" +
@@ -75,7 +76,7 @@ var __meta__ = { // jshint ignore:line
             ),
             itemWrapper: template(
                 "<#= tag(item) # class='#= textClass(item) #'#= textAttributes(item) #>" +
-                    "#= image(item) ##= sprite(item) ##= text(item) #" +
+                    "#= image(data) ##= sprite(item) ##= text(item) #" +
                     "#= arrow(data) #" +
                 "</#= tag(item) #>"
             ),
@@ -90,7 +91,7 @@ var __meta__ = { // jshint ignore:line
                     "# } #" +
                 "</li>"
             ),
-            image: template("<img class='k-image' alt='' src='#= imageUrl #' />"),
+            image: template("<img #= imageCssAttributes(item) # alt='' src='#= item.imageUrl #' />"), // class='k-image'
             arrow: template("<span class='#= arrowClass(item, group) #'></span>"),
             sprite: template("<span class='k-sprite #= spriteCssClass #'></span>"),
             empty: template("")
@@ -124,18 +125,59 @@ var __meta__ = { // jshint ignore:line
                     result += " " + item.attr["class"];
                 }
 
+                if(item.selected) {
+                    result += " " + SELECTEDSTATE;
+                }
+
                 return result;
             },
 
             itemCssAttributes: function (item) {
                 var result = "";
-                var attributes = item.attr;
+                var attributes = item.attr || {};
 
-                if (attributes) {
-                    for (var attr in attributes) {
-                        if(attributes.hasOwnProperty(attr) && attr !== "class") {
-                            result += attr + "=\"" + attributes[attr] + "\" ";
-                        }
+                for (var attr in attributes) {
+                    if(attributes.hasOwnProperty(attr) && attr !== "class") {
+                        result += attr + "=\"" + attributes[attr] + "\" ";
+                    }
+                }
+
+                return result;
+            },
+
+            imageCssAttributes: function (item) {
+                var result = "";
+                var attributes = item.imageAttr || {};
+
+                if (!attributes['class']) {
+                    attributes['class'] = IMAGE;
+                } else {
+                    attributes['class'] += " " + IMAGE;
+                }
+
+                for (var attr in attributes) {
+                    if(attributes.hasOwnProperty(attr)) {
+                        result += attr + "=\"" + attributes[attr] + "\" ";
+                    }
+                }
+
+                return result;
+            },
+
+            contentCssAttributes: function (item) {
+                var result = "";
+                var attributes = item.contentAttr || {};
+                var defaultClasses = "k-content k-group k-menu-group";
+
+                if (!attributes['class']) {
+                    attributes['class'] = defaultClasses;
+                } else {
+                    attributes['class'] += " " + defaultClasses;
+                }
+
+                for (var attr in attributes) {
+                    if(attributes.hasOwnProperty(attr)) {
+                        result += attr + "=\"" + attributes[attr] + "\" ";
                     }
                 }
 

@@ -71,7 +71,7 @@
         equal(firstItem.attr("id"), "myId");
     });
 
-    test('Attributes is rendered in sub item', function(){
+    test('Attributes are rendered in sub item', function(){
         createMenu({
             dataSource: [{
               text: "Item 1",
@@ -87,5 +87,68 @@
         var subItem = menu.element.find(".myClass");
  
         equal(subItem.length, 1);
+    });
+
+    test('Image attributes are rendered in a item', 2, function(){
+        createMenu({
+            dataSource: [{
+              text: "Item 1",
+              items: [{
+                    text: "Item 2",
+                    imageUrl: "http://demos.telerik.com/kendo-ui/content/shared/icons/sports/swimming.png",
+                    imageAttr: {
+                       test: "myAttribute",
+                       class: "customClass"
+                    }
+                }]
+            }]
+        });
+
+        var img = menu.element.find("img");
+
+        equal(img.attr("test"), "myAttribute");
+        ok(img.hasClass("customClass"));
+    });
+
+    test('Content attributes are rendered in a item', 2, function(){
+        createMenu({
+            dataSource: [{
+              text: "Item 1",
+              items: [{
+                    text: "Item 2",
+                    content: "Item content",
+                    contentAttr: {
+                       test: "myAttribute",
+                       class: "customClass"
+                    }
+                }]
+            }]
+        });
+
+        var content = menu.element.find(".customClass");
+
+        equal(content.length, 1);
+        equal(content.attr("test"), "myAttribute");
+    });
+
+    test('Default classes are rendered in a item', 3, function(){
+        createMenu({
+            dataSource: [{
+              text: "Item 1",
+              items: [{
+                    text: "Item 2",
+                    content: "Item content",
+                    contentAttr: {
+                       class: "customClass"
+                    }
+                }]
+            }]
+        });
+
+        var content = menu.element.find(".customClass");
+
+        ok(content.hasClass("k-content"));
+        ok(content.hasClass("k-group"));
+        ok(content.hasClass("k-menu-group"));
     });
 })();   
