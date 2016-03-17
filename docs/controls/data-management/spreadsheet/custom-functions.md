@@ -428,7 +428,9 @@ You can now say:
 - `=COUNTCELLS(A1)` — returns 1.
 - `=COUNTCELLS(A1:C3)` — returns 9.
 - `=COUNTCELLS( (A1,A2,A1:C3) )` — returns 11. This is a union.
-- `=COUNTCELLS( (A1:C3 B:B) )` — returns 3. This is an intersection between the `A1:C3` range and the `B` column. Here is a function that returns the background color of some cell:
+- `=COUNTCELLS( (A1:C3 B:B) )` — returns 3. This is an intersection between the `A1:C3` range and the `B` column.
+
+Here is a function that returns the background color of some cell:
 
     defineFunction("backgroundof", function(cell){
         var workbook = this.workbook();
