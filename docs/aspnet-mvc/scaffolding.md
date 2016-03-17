@@ -87,5 +87,5 @@ Articles on Telerik UI for ASP.NET MVC:
 * [ASP.NET MVC 3]({% slug aspnetmvc3_aspnetmvc %})
 * [ASP.NET MVC 4]({% slug aspnetmvc4_aspnetmvc %})
 * [ASP.NET MVC 5]({% slug aspnetmvc5_aspnetmvc %})
-* [ASP.NET MVC 6]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [ASP.NET Core MVC]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_muscistoretutorial_aspnetmvc %})

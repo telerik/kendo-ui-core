@@ -256,7 +256,7 @@ Other articles on Telerik UI for ASP.NET MVC:
 * [Telerik UI for ASP.NET MVC HtmlHelpers]({% slug overview_autocompletehelper_aspnetmvc %})
 * [ASP.NET MVC 4]({% slug aspnetmvc4_aspnetmvc %})
 * [ASP.NET MVC 5]({% slug aspnetmvc5_aspnetmvc %})
-* [ASP.NET MVC 6]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [ASP.NET Core MVC]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_muscistoretutorial_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})
 * [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
