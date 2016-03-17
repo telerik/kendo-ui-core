@@ -65,6 +65,12 @@ urls="
 /kendo-ui/aspnet-mvc/tutorial-kendo-music-store/kendo-music-store-intro /kendo-ui/aspnet-mvc/tutorials/tutorial-kendo-music-store/kendo-music-store-intro
 /kendo-ui/aspnet-mvc/tutorial-saleshub/kendo-saleshub-intro /kendo-ui/aspnet-mvc/tutorials/tutorial-saleshub/kendo-saleshub-intro
 /kendo-ui/ /kendo-ui/introduction
+/kendo-ui/api/javascript/ui/RangeSlider /kendo-ui/api/javascript/ui/rangeslider
+/kendo-ui/api/javascript/ui/Splitter /kendo-ui/api/javascript/ui/splitter
+/kendo-ui/api/framework/validator /kendo-ui/api/javascript/ui/validator
+/kendo-ui/controls/data-management/grid/introduction /kendo-ui/controls/data-management/grid/overview
+/kendo-ui/api/javascript/mobile/ui/ButtonGroup /kendo-ui/api/javascript/mobile/ui/buttongroup
+/kendo-ui/api/javascript/mobile/ui/TabStrip /kendo-ui/api/javascript/mobile/ui/tabstrip
 "
 
 #Make `for` iterate over new lines
