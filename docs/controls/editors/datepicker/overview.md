@@ -133,11 +133,11 @@ The widget is designed to keep the input value unchanged, even when the typed da
 
 The best way to validate the DatePicker widget is to use a client-validation framework, such as the [Kendo UI Validator]({% slug overview_kendoui_validator_widget %}). Thus you are able to provide meaningful error message to end users pointing them to the right actions to resolve the issue. For more details, check the [online custom validation demos](http://demos.telerik.com/kendo-ui/validator/custom-validation).
 
-## Different calendars usage
+## Calendar Types
 
-The DatePicker widget works with JavaScript Date objects, that supports only [Gregorian](https://en.wikipedia.org/wiki/Gregorian_calendar) calendar. This means that the widget does not support other calendar types.
+The DatePicker widget works with JavaScript `Date` objects, that support only the [Gregorian](https://en.wikipedia.org/wiki/Gregorian_calendar) calendar. This means that the widget does not support other calendar types.
 
-If you would like to *simulate* different calendar date, like Lunar, then you can use JavaScript Date object and create a date that is just in the past. Here is a simple example that shows how this can be done:
+If you would like to simulate a different calendar date, like Lunar, use the JavaScript `Date` object and create a date that is just in the past. The example below demonstrates how to do this.
 
 ###### Example
 
@@ -150,7 +150,7 @@ If you would like to *simulate* different calendar date, like Lunar, then you ca
     <label for="lunarStyle">Lunar year:</label>
     <input id="lunarStyle" type="text" />
 </fieldset>
-<h4>Disclamer: In both cases 'Gregorian' calendar dates is used. In second widget we just show gregorian date with lunar year</h4>
+<h4>Disclamer: In both cases the Gregorian calendar date is used. The second widget just shows the Gregorian date with the Lunar year</h4>
 
 <script>
 $(function() {
