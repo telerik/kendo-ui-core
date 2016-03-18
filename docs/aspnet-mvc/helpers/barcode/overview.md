@@ -2,6 +2,7 @@
 title: Overview
 page_title: How to use Barcode HtmlHelper extension | Kendo UI documentation
 description: User Guide for server-side wrapper for Kendo UI Barcode for ASP.NET MVC widget.
+slug: overview_barcodehelper_aspnetmvc
 ---
 
 # Barcode
