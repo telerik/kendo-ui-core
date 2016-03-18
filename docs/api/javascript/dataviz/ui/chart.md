@@ -32388,9 +32388,17 @@ Toggles the highlight of the series points or a segment for pie, donut and funne
 
 A boolean value that specifies if the highlight should be shown or hidden.
 
-##### options `String|Object`
+##### options `String|Object|Function`
 
-A string representing the series name or the category name or an object with the series and category names.
+A string representing the series name or the category name or an object with the series and category names or a function which will be called for each point. The fields available in the function argument are:
+
+* category - the point category.
+* dataItem - the point dataItem.
+* value - the point value.
+* series - the point series.
+* percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
+* total - the sum of all previous series values. Available for waterfall series.
 
 ##### options.series `String`
 
@@ -32453,6 +32461,24 @@ The category name.
       chart.toggleHighlight(true, {
         series: "SeriesB",
         category: "A"
+      });
+    </script>
+
+#### Example - show the highlight for a point
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [
+          { name: "A", data: [1, 2] },
+          { name: "B", data: [3, 4] }
+        ]
+      });
+
+      var chart = $("#chart").data("kendoChart");
+
+      chart.toggleHighlight(true, function(point) {
+        return point.value === 3;
       });
     </script>
 
