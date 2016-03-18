@@ -187,11 +187,11 @@ The best way to validate the DateTimePicker widget is to use a client-validation
 
 - [Custom validation](http://demos.telerik.com/kendo-ui/validator/custom-validation)
 
-## Different calendars usage
+## Calendar Types
 
-The DateTimePicker widget works with JavaScript Date objects, that supports only [Gregorian](https://en.wikipedia.org/wiki/Gregorian_calendar) calendar. This means that the widget does not support other calendar types.
+The DateTimePicker widget works with JavaScript `Date` objects, that support only the [Gregorian](https://en.wikipedia.org/wiki/Gregorian_calendar) calendar. This means that the widget does not support other calendar types.
 
-If you would like to *simulate* different calendar date, like Lunar, then you can use JavaScript Date object and create a date that is just in the past. Here is a simple example that shows how this can be done:
+If you would like to simulate a different calendar date, like Lunar, use the JavaScript `Date` object and create a date that is just in the past.
 
 ## See Also
 
