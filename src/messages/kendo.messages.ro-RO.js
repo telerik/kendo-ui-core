@@ -316,7 +316,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "start": "Start",
     "startTimezone": "Start timezone",
     "timezone": " ",
-    "timezoneEditorButton": "Time zone",
+    "timezoneEditorButton": "Fus orar",
     "timezoneEditorTitle": "Timezones",
     "title": "Title",
     "noTimezone": "No timezone"
@@ -333,14 +333,14 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "editWindowTitle": "Edit Recurring Item"
   },
   "save": "Salvează",
-  "time": "Time",
-  "today": "Today",
+  "time": "Timp",
+  "today": "Astăzi",
   "views": {
     "agenda": "Agendă",
-    "day": "Day",
-    "month": "Month",
-    "week": "Week",
-    "workWeek": "Work Week"
+    "day": "Zi",
+    "month": "Lună",
+    "week": "Săptămână",
+    "workWeek": "Săptămână de lucru"
   },
   "deleteWindowTitle": "Delete event",
   "showFullDay": "Show full day",
