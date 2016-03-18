@@ -334,37 +334,27 @@
     test("searching always start from next item", 1, function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: [
-                { text: "Black", value: "1" },
-                { text: "Orange", value: "2" },
-                { text: "Grey", value: "3" }
+                { text: "First", value: "1" },
+                { text: "Small", value: "2" },
+                { text: "Same", value: "3" },
+                { text: "Same", value: "4" },
+                { text: "Small", value: "5" }
             ],
             dataTextField: "text",
             dataValueField: "value",
-            index: 2
+            delay: 0,
+            index: 0
         });
 
-        input.press("z");
-        input.press("z");
+        input.press("s");
+        input.press("m");
 
-        ok(true);
-    });
+        dropdownlist._word = "";
 
-    test("searching always start from next item", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            dataSource: [
-                { text: "Black", value: "1" },
-                { text: "Orange", value: "2" },
-                { text: "Grey", value: "3" }
-            ],
-            dataTextField: "text",
-            dataValueField: "value",
-            index: 2
-        });
+        input.press("s");
+        input.press("m");
 
-        input.press("z");
-        input.press("z");
-
-        ok(true);
+        equal(dropdownlist.selectedIndex, 4);
     });
 
     test("search honors optionLabel header", 1, function() {
