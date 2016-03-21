@@ -701,8 +701,11 @@ Restores a maximized or minimized Window to its previous state. Triggers the res
 
 ### setOptions
 
-Allows the window to be configured with new options. If you change the [content url](#configuration-content), call [`refresh`](#methods-refresh) afterwards.
-Another option is to execute the `refresh` method with the new URL directly.
+Allows the Window to be configured with new options.
+
+If you change the [content url](#configuration-content), call [`refresh`](#methods-refresh) afterwards. Another option is to execute the `refresh` method with the new URL directly.
+
+Changing the size or position of the Window requires the widget to not be in maximized or minimized state.
 
 #### Parameters
 
