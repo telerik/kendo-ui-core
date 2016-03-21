@@ -135,7 +135,7 @@ For a solution, refer to [Kendo UI CDN Fallback and Troubleshooting](/intro/inst
 
 ### 404 Status Code Is Thrown for WOFF or TTF Font Files
 
-For a solution, refer to [Serving Icon Fonts](/mobile/icons#serving-icon-fonts).
+For a solution, refer to [Serving Font Files](/controls/hybrid/styles/icons#serving-font-files).
 
 ### 404 Status Code Is Thrown for JSON Files on IIS
 
