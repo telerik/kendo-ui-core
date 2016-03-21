@@ -1117,6 +1117,18 @@ The sheet to set as active.
 
 `kendo.spreadsheet.Sheet` the active sheet.
 
+#### Example - change the active Sheet
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{ name: "Sheet1" }, { name: "Sheet2" }]
+        });
+        var sheets = $("#spreadsheet").data("kendoSpreadsheet").sheets();
+        $("#spreadsheet").data("kendoSpreadsheet").activeSheet(sheets[1]);
+    </script>
+```
+
 ### sheets
 Returns an array with the sheets in the workbook.
 
@@ -1594,4 +1606,3 @@ A promise that will be resolved when the export completes.
         spreadsheet.saveAsPDF();
     </script>
 ```
-
