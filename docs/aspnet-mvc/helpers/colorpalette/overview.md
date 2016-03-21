@@ -84,6 +84,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### By Template Delegate
 
+###### Example 
+
 **Razor**
 
         @(Html.Kendo().ColorPalette()
