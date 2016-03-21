@@ -4,7 +4,6 @@
   {% for post in site.html_pages %}{% unless post.sitemap == false %}
   <url>
     <loc>{{ site_url }}{{ post.url | replace:'.html','' }}</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>{% if post.url == "/" or post.url == "/index" %}1.0{% else %}0.7{% endif %}</priority>
   </url>
