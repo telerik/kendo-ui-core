@@ -12,12 +12,12 @@ The AutoComplete HtmlHelper extension is a server-side wrapper for the [Kendo UI
 
 ## Getting Started
 
+### The Basics
+
 There are two ways to bind a Kendo UI AutoComplete for ASP.NET MVC:
 
 * `server`&mdash;The data is serialized to the client. No Ajax requests are made.
 * `ajax`&mdash;The AutoComplete makes Ajax requests to get the data.
-
-## Configuration
 
 ### Server Binding
 

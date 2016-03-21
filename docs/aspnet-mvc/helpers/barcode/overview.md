@@ -10,7 +10,9 @@ position: 1
 
 The Barcode HtmlHelper extension is a server-side wrapper for the [Kendo UI Barcode](https://demos.telerik.com/kendo-ui/barcode/index) widget.
 
-## Configuration
+## Getting Started
+
+### Configuration
 
 Below are listed the steps for you to follow when configuring the Kendo UI Barcode.
 
