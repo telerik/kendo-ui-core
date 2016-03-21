@@ -61,7 +61,9 @@ module Jekyll
 
             categories.each do |key, category|
                 category.each do |item|
-                    redirect_directories << redirect('', item) if item.has_key?('items')
+                    if item.has_key?('items')
+                        redirect_directories << redirect('', item)
+                    end
                 end
             end
 
@@ -86,7 +88,10 @@ module Jekyll
             end
 
             directory['items'].each do |item|
-                result << redirect(path, item) if item.has_key?('items')
+                if item.has_key?('items')
+                    topic = directory['items'].find { |sibling| sibling['path'] == item['path'] + '.html' }
+                    result << redirect(path, item) unless topic
+                end
             end
             result
         end
