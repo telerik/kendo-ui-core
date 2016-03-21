@@ -1,100 +1,127 @@
 ---
 title: Overview
-page_title: How to use ColorPalette HtmlHelper extension | Kendo UI documentation
-description: User Guide for server-side wrapper for Kendo UI ColorPalette for ASP.NET MVC widget.
+page_title: Overview | Kendo UI ColorPalette HtmlHelper
+description: "Get started with the server-side wrapper for the Kendo UI ColorPalette widget for ASP.NET MVC."
+slug: overview_colorpalettehelper_aspnetmvc
+position: 1
 ---
 
-# ColorPalette
+# ColorPalette HtmlHelper Overview
 
-The ColorPalette HtmlHelper extension is a server-side wrapper for the [Kendo UI ColorPalette](/api/web/colorpalette) widget.
+The ColorPalette HtmlHelper extension is a server-side wrapper for the [Kendo UI ColorPalette](/api/javascript/ui/colorpalette) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo ColorPalette:
+### Configuration
 
-1.  Make sure you have followed all the steps from the [Introduction](/aspnet-mvc/introduction) help topic.
+Below are listed the steps for you to follow when configuring the Kendo UI ColorPalette.
 
-2.  Create a new action method which renders the view:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+**Step 2** Create a new action method which renders the view.
+
+###### Example
 
         public ActionResult Index()
         {
             return View();
         }
-3.  Add a color palette:
-    - WebForms
 
-            <%: Html.Kendo().ColorPalette()
-                    .Name("colorpalette") // The name of the colorpalette is mandatory. It specifies the "id" attribute of the widget.
-                    .Value("#ff0000") // Set the value of the colorpalette
-            %>
-    - Razor
+**Step 3** Add a ColorPalette.
 
-            @(Html.Kendo().ColorPalette()
-                  .Name("colorpalette") //The name of the colorpalette is mandatory. It specifies the "id" attribute of the widget.
-                  .Value("#ff0000") //Set the value of the colorpalette
-            )
+###### Example
 
-## Access an Existing ColorPalette
+**WebForms**
 
-You can reference an existing ColorPalette instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/colorpalette#methods) to control its behavior.
+        <%: Html.Kendo().ColorPalette()
+                .Name("colorpalette") // The name of the colorpalette is mandatory. It specifies the "id" attribute of the widget.
+                .Value("#ff0000") // Set the value of the colorpalette
+        %>
 
+**Razor**
 
-### Access an Existing ColorPalette Instance
+        @(Html.Kendo().ColorPalette()
+              .Name("colorpalette") //The name of the colorpalette is mandatory. It specifies the "id" attribute of the widget.
+              .Value("#ff0000") //Set the value of the colorpalette
+        )
 
-    //Put this after your Kendo ColorPalette for ASP.NET MVC declaration
-    <script>
-    $(function() {
-        // Notice that the Name() of the colorpalette is used to get its client-side instance
-        var colorpalette = $("#colorpalette").data("kendoColorPalette");
-    });
-    </script>
+## Event Handling
 
+You can subscribe to all ColorPalette [events](/api/javascript/ui/colorpalette#events).
 
-## Handle ColorPalette Events
+### By Handler Name
 
-You can subscribe to all [events](/api/web/colorpalette#events) exposed by Kendo UI ColorPalette:
+The examples below demonstrates how to subscribe to events by a handler name.
 
-### WebForms - Subscribe by Handler Name
+###### Example
 
-    <%: Html.Kendo().ColorPalette()
-            .Name("colorpalette")
-            .Events(e => e
-                .Change("colorpalette_change")
-            )
-    %>
-    <script>
-        function colorpalette_change() {
-            // Handle the change event
-        }
-    </script>
+**WebForms**
 
+        <%: Html.Kendo().ColorPalette()
+                .Name("colorpalette")
+                .Events(e => e
+                    .Change("colorpalette_change")
+                )
+        %>
+        <script>
+            function colorpalette_change() {
+                // Handle the change event
+            }
+        </script>
 
-### Razor - Subscribe by Handler Name
+**Razor**
 
-    @(Html.Kendo().ColorPalette()
-          .Name("colorpalette")
-          .Events(e => e
-                .Change("colorpalette_change")
-          )
-    )
-    <script>
-        function colorpalette_change() {
-            // Handle the change event
-        }
-    </script>
+        @(Html.Kendo().ColorPalette()
+              .Name("colorpalette")
+              .Events(e => e
+                    .Change("colorpalette_change")
+              )
+        )
+        <script>
+            function colorpalette_change() {
+                // Handle the change event
+            }
+        </script>
 
+### By Template Delegate
 
-### Razor - Subscribe by Template Delegate
+**Razor**
 
-    @(Html.Kendo().ColorPalette()
-          .Name("colorpalette")
-          .Events(e => e
-              .Change(@<text>
-                function() {
-                    // Handle the change event inline
-                }
-                </text>)
-          )
-    )
+        @(Html.Kendo().ColorPalette()
+              .Name("colorpalette")
+              .Events(e => e
+                  .Change(@<text>
+                    function() {
+                        // Handle the change event inline
+                    }
+                    </text>)
+              )
+        )
 
+## Reference
+
+### Existing Instances
+
+Reference an existing Kendo UI ColorPalette instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [ColorPalette API](/api/javascript/ui/colorpalette#methods) to control its behavior.
+
+###### Example
+
+        //Put this after your Kendo ColorPalette for ASP.NET MVC declaration
+        <script>
+        $(function() {
+            // Notice that the Name() of the colorpalette is used to get its client-side instance
+            var colorpalette = $("#colorpalette").data("kendoColorPalette");
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the ColorPalette:
+
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Overview of the Kendo UI ColorPicker Widget]({% slug overview_kendoui_colorpicker_widget %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
