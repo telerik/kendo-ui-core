@@ -25,6 +25,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
         {
             return View();
         }
+        
 **Step 3** Add a Barcode.
 
 ###### Example
