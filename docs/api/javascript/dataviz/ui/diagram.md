@@ -3731,6 +3731,10 @@ Fired when dragging shapes or connection.
 
 #### Event Data
 
+##### e.connectionHandle `String`
+
+A value indicating which handle of the connection is being dragged. The value will be `"source"` for the source handle, `"target"` for the target handle and `undefined` if the entire connection is being dragged. 
+
 ##### e.connections `Array`
 
 An array with the dragged connection.
@@ -3748,6 +3752,10 @@ The widget instance which fired the event.
 Fired after finishing dragging shapes or connection.
 
 #### Event Data
+
+##### e.connectionHandle `String`
+
+A value indicating which handle of the connection was dragged. The value will be `"source"` for the source handle, `"target"` for the target handle and `undefined` if the entire connection was dragged.
 
 ##### e.connections `Array`
 
@@ -3770,6 +3778,10 @@ A function that can be used prevent the default action. If invoked, the dragged 
 Fired before starting dragging shapes or connection.
 
 #### Event Data
+
+##### e.connectionHandle `String`
+
+A value indicating which handle of the connection will be dragged. The value will be `"source` for the source handle, `"target"` for the target handle and `undefined` if the entire connection will be dragged.
 
 ##### e.connections `Array`
 
