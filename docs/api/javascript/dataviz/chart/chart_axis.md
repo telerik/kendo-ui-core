@@ -37,9 +37,9 @@ The slot from value.
 
 The slot to value. If a to value is not specified, then the from value will be used.
 
-##### limit `Boolean` *(default: true)*
+##### limit `Boolean` *optional*
 
-A boolean value indicating whether the slot should be limited to the current range.
+A boolean value indicating whether the slot should be limited to the current range. By default the range is limited.
 
 #### Returns
 
