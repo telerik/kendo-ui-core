@@ -29,6 +29,34 @@ slug: breakingchanges2016_kendoui
 * **Remove support for Globalize 0.1**: More details in [issue 1354](https://github.com/telerik/kendo-ui-core/issues/1354).
 For those who want to return the behavior, add the code from this [Gist](https://gist.github.com/ggkrustev/52bf4558ecd1794e5d94#file-kendo-ui-support-for-globalize-0-1) after Kendo UI scripts.
 
+* **Chart**: CategoryAxis `max` and plotbands `to` values for not justified axis no longer refer to the category end but to the category start. For example limiting the shown categories to the first and the second of January:
+
+Old configuration:
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        categoryAxis: {
+          categories: [new Date(2016, 0, 1), new Date(2016, 0, 3)],
+          justified: false,
+          max: new Date(2016, 0, 2)
+        }
+      });
+    </script>
+
+New configuration:
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        categoryAxis: {
+          categories: [new Date(2016, 0, 1), new Date(2016, 0, 3)],
+          justified: false,
+          max: new Date(2016, 0, 3)
+        }
+      });
+    </script>
+
 ### Changes from 2015 Q3 (2015.2.930)
 
 #### Breaking Changes
