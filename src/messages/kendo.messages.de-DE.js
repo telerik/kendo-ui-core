@@ -293,6 +293,28 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
 });
 }
 
+/* TreeList messages */
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.messages =
+$.extend(true, kendo.ui.TreeList.prototype.options.messages,{
+    "noRows": "Keine Aufzeichnungen zur Verfügung.",
+    "loading": "Lade Daten...",
+    "requestFailed": "Laden fehlgeschlagen",
+    "retry": "Neu laden",
+    "commands": {
+        "edit": "Bearbeiten",
+        "update": "Aktualisieren",
+        "canceledit": "Abbrechen",
+        "create": "Neuen Datensatz hinzufügen",
+        "createchild": "Neue abhängige Daten",
+        "destroy": "Löschen",
+        "excel": "Export nach Excel",
+        "pdf": "Export als PDF"
+    }
+});
+}
+
 /* Groupable messages */
 
 if (kendo.ui.Groupable) {
