@@ -48,7 +48,7 @@ The resulting code should be like the one shown in the example below.
 	    width: 100%;
 	}
 <!--*-->
-![Date Picker Width](images/chapter10/datepicker-width.jpg)
+![Date Picker Width](../images/chapter10/datepicker-width.jpg)
 
 **Step 9** Add a style to offset the employee list so its content lines up with the left edge of its container.
 
@@ -58,7 +58,7 @@ The resulting code should be like the one shown in the example below.
     	margin: 0 -10px;
 	}
 
-![Date Picker Width](images/chapter10/list-view-container.jpg)
+![Date Picker Width](../images/chapter10/list-view-container.jpg)
 
 **Step 10** Find `/* Small Devices, Tablets, and Up */`. Here you'll find a media query that will hold some styles that are only applied to scree sizes above `768px`.
 
@@ -81,7 +81,7 @@ The resulting code should be like the one shown in the example below.
 	}
 
 <!--*-->
-![App Wrapper margin](images/chapter10/app-wrapper.jpg)
+![App Wrapper margin](../images/chapter10/app-wrapper.jpg)
 
 **Step 12** Finally, set the Kendo UI Chart themes. Open `_MontlySalesByEmployee.cshtml` and set the `Theme` property to `nova` on the `EmployeeAverageSales` chart.
 

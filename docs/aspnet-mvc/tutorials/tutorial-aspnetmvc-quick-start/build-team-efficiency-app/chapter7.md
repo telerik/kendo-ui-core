@@ -179,7 +179,7 @@ The resulting code should be like the one shown in the example below.
 
 **Step 11** Run the project to see the behavior. Now the `EmployeeList` and `EmployeeSales` grid are in sync. When an employee is selected, only that employee's data will show in the grid.
 
-![](images/chapter7/datasource-filter.jpg)
+![](../images/chapter7/datasource-filter.jpg)
 
 At this point, the `EmployeeList` is acting as a filter for the `EmployeeSales`. However, the data shown does not reflect the `StatsFrom`/`StatsTo` date range. With the filtering code in place, additional controls are wired up with relative ease. Let's wire up the `StatsFrom`/`StatsTo` DatePickers to `EmployeeSales`.
 
@@ -216,7 +216,7 @@ At this point, the `EmployeeList` is acting as a filter for the `EmployeeSales`.
 
 **Step 4** Save the changes and refresh the browser. `StatsFrom`/`StatsTo` and `EmployeeList` will update `EmployeeSales` with data based on the selected dates and employee.
 
-![](images/chapter7/datasource-filter2.jpg)
+![](../images/chapter7/datasource-filter2.jpg)
 
 Your Team Efficiency Dashboard is now interactive. Users can filter data using dates and employees. Next, you'll enhance the application by adding some data visualizations.
 

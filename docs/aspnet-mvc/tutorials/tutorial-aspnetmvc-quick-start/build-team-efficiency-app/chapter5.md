@@ -187,7 +187,7 @@ The resulting code should be like the one shown below.
 
 If everything was done correctly, the ListView should look like the one shown below.
 
-![employee list view](images/chapter5/employee-list.jpg)
+![employee list view](../images/chapter5/employee-list.jpg)
 
 At this point you can select items from the list, but before the dashboard can become truly interactive you'll need to work with the client-side APIs.
 

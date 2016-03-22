@@ -101,7 +101,7 @@ The resulting code should be like the one shown below.
 
 **Step 6** Refresh the page to see that the first item in the list is selected by default.
 
-![employee list selected](images\chapter6\employee-list-selected.jpg)
+![employee list selected](../images\chapter6\employee-list-selected.jpg)
 
 Selecting the first item using the `DataBound` event was a good start. Next we'll take it a step further by using the selected item to populate a Kendo UI template showing the selected employee on the dashboard.
 
@@ -176,7 +176,7 @@ Selecting the first item using the `DataBound` event was a good start. Next we'l
 
 **Step 8** Refresh the page and select an employee from the `EmployeeList`. Selecting an item should update the dashboard with the selected employee's data.
 
-![selected item to template](images/chapter6/selected-item-to-template.jpg)
+![selected item to template](../images/chapter6/selected-item-to-template.jpg)
 
 **Step 9** Find and remove the `<!-- Employee Avatar -->` placeholder code, it is no longer needed because the element is created dynamically. Remove the code shown in the example below.
 

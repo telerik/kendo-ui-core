@@ -2,6 +2,7 @@
 title: Common Issues
 page_title: Common Issues | Kendo UI MultiSelect
 description: "Learn how to handle possible issues while working with the Kendo UI MultiSelect widget."
+previous_url: /controls/editors/multiselect/troubleshooting 
 slug: troubleshooting_common_issues_multiselect_kendoui
 ---
 

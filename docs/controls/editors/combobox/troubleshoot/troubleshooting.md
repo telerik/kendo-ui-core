@@ -2,6 +2,7 @@
 title: Common Issues
 page_title: Common Issues | Kendo UI ComboBox
 description: "Learn how to handle possible issues while working with the Kendo UI ComboBox widget."
+previous_url: /controls/editors/combobox/troubleshooting 
 slug: troubleshooting_common_issues_combobox_kendoui
 ---
 

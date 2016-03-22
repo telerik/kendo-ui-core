@@ -196,7 +196,7 @@ The resulting code should be like the one shown in the example below.
 
 **Step 20** Run the application to see the chart render on the dashboard. Change the filter criteria to see the chart update along with other UI elements.
 
-![Bullet Chart](images/chapter8/bullet-chart.jpg)
+![Bullet Chart](../images/chapter8/bullet-chart.jpg)
 
 ## Line Chart
 
@@ -395,7 +395,7 @@ The resulting code should be like the one shown in the example below.
 
 **Step 22** Run the application to see the chart render on the dashboard. Change the filter criteria to see the chart update along with other UI elements.
 
-![Spark Line Chart](images/chapter8/spark-line-chart.jpg)
+![Spark Line Chart](../images/chapter8/spark-line-chart.jpg)
 
 ## Client-Side API
 
@@ -457,7 +457,7 @@ Add a function named `onQuarterSalesDataBound`, find the first element of the da
         .Events(e => e.DataBound("onQuarterSalesDataBound"))       
     )
 
-![Chart Client API](images/chapter8/chart-client-api.jpg)
+![Chart Client API](../images/chapter8/chart-client-api.jpg)
 
 The Team Efficiency Dashboard is starting to look complete, but it hasn't been tested for devices like mobile phones or tablets yet. In the next chapter you'll use responsive web design techniques to support devices beyond the desktop.
 

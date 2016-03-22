@@ -19,19 +19,19 @@ Telerik UI for ASP.NET MVC is a set of server-side wrappers. A server-wrapper do
 - Allows the developer to configure a Kendo UI widget via C# or VB.NET code&mdash;set its value, data source, etc.
 - Renders the HTML and JavaScript needed to initialize the Kendo UI widget. The widget options propagate to the client side via the widget initialization script.
 
-![Server-side wrapper outputs HTML and JavaScript](images/chapter2/wrapper-output.png)
+![Server-side wrapper outputs HTML and JavaScript](../images/chapter2/wrapper-output.png)
 
 ### Configuration
 
 The Kendo UI HtmlHelper exposes all Kendo UI server wrappers.
 
-![Kendo HtmlHelper extension method](images/chapter2/kendo-extension.png)
+![Kendo HtmlHelper extension method](../images/chapter2/kendo-extension.png)
 
 ### Widget Options
 
 The widget options are exposed via a fluent interface.
 
-![Fluent interface](images/chapter2/fluent-interface.png)
+![Fluent interface](../images/chapter2/fluent-interface.png)
 
 Below is an example of how a NumericTextBox input is created.
 
@@ -96,7 +96,7 @@ The Kendo UI HTML helper's fluent interface lets you configure a widget's behavi
 
 After you run your app with this change, you will see a calendar icon in the **Stats from** field. Click or tap the icon to reveal the date picker.
 
-![Tap to show a date picker](images/chapter2/date-picker-flyout.jpg)
+![Tap to show a date picker](../images/chapter2/date-picker-flyout.jpg)
 
 With the inputs upgraded, let's move on to the extremely robust Kendo UI Grid.
 
