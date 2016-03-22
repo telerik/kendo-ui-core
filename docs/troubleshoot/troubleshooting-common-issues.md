@@ -39,7 +39,7 @@ Make sure that jQuery is included only before the Kendo UI JavaScript files and 
 
 ### Widgets Are Unavailable or Undefined
 
-If jQuery is included more than once in the page all existing jQuery plugins (including Kendo UI) will be wiped out. Will also occur if the [required Kendo JavaScript files](/intro/installation/prerequisites) are not included.
+If jQuery is included more than once in the page all existing jQuery plugins (including Kendo UI) will be wiped out. Will also occur if the [required Kendo JavaScript files]({% slug javascript_prerequisites_kendoui_installation %}) are not included.
 
 Depending on the browser, the following JavaScript errors will be thrown:
 
@@ -54,7 +54,7 @@ Depending on the browser, the following JavaScript errors will be thrown:
 
 **Solution**
 
-Make sure jQuery is not included more than once in your page. Remove any duplicate `script` references to jQuery. Include all [required Kendo JavaScript files](/intro/installation/prerequisites).
+Make sure jQuery is not included more than once in your page. Remove any duplicate `script` references to jQuery. Include all [required Kendo JavaScript files]({% slug javascript_prerequisites_kendoui_installation %}).
 
 ### Widgets Cannot Be Initialized in Internet Explorer Compatibility Mode
 
@@ -111,7 +111,7 @@ Some third-party modal popups prevent access to focusable elements, which are re
 There are two ways to avoid this problem:
 
 * Disable the modal popup's modality, so that elements outside it can be focused.
-* Use a [modal](/api/javascript/ui/window#configuration-modal) Kendo UI [Window](/web/window/overview) instead of a third-party popup.
+* Use a [modal](/api/javascript/ui/window#configuration-modal) [Kendo UI Window]({% slug overview_kendoui_window_widget %}) instead of a third-party popup.
 
 ### Widgets Do Not Work Correctly on Touch Devices
 
@@ -129,13 +129,13 @@ Find more details at [https://github.com/telerik/kendo-ui-core/issues/1375](http
 
 ### Scripts or Stylesheets Do Not Load from CDN
 
-For a solution, refer to [Kendo UI CDN Fallback and Troubleshooting](/intro/installation/cdn-service#troubleshooting).
+For a solution, refer to [Kendo UI CDN Fallback and Troubleshooting]({% slug kendoui_cdn_services_installation %}#troubleshooting).
 
 ## Status Codes
 
 ### 404 Status Code Is Thrown for WOFF or TTF Font Files
 
-For a solution, refer to [Serving Font Files](/controls/hybrid/styles/icons#serving-font-files).
+For a solution, refer to [Serving Font Files]({% slug hybridiconfonts_hybridkendoui %}#serving-font-files).
 
 ### 404 Status Code Is Thrown for JSON Files on IIS
 
