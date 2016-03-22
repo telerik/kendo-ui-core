@@ -615,6 +615,28 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
 });
 }
 
+/* TreeList messages */
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.messages =
+$.extend(true, kendo.ui.TreeList.prototype.options.messages,{
+    "noRows": "Няма налични записи.",
+    "loading": "Зареждане...",
+    "requestFailed": "Грешка при заявка",
+    "retry": "Опитай отново",
+    "commands": {
+        "edit": "Редактиране",
+        "update": "Обнови",
+        "canceledit": "Отказ",
+        "create": "Добави",
+        "createchild": "Добави подзапис",
+        "destroy": "Изтриване",
+        "excel": "Експорт към Excel",
+        "pdf": "Експорт към PDF"
+    }
+});
+}
+
 /* Pager messages */
 
 if (kendo.ui.Pager) {
