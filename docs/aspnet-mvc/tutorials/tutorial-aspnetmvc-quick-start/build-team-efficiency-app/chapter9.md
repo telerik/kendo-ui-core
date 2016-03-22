@@ -46,7 +46,7 @@ Remove the `Salesperson` column completely. The sales person is already displaye
 
 **Step 4** Refresh the page, then shrink and grow the browser to different widths to see how the grid reacts at various sizes.
 
-![Responsive Grid](images/chapter9/responsive-grid.jpg)
+![Responsive Grid](../images/chapter9/responsive-grid.jpg)
 
 ## Responsive Panel
 
@@ -182,7 +182,7 @@ After the section's closing tag `</section>`, add a new `div` with a `class` of 
 
 **Step 13** Refresh the application. Expand and contract the browser's width until the **Menu** button is shown. Toggle the responsive panel using the **Menu** and **Close** buttons.
 
-![Responsive Grid](images/chapter9/responsive-panel.jpg)
+![Responsive Grid](../images/chapter9/responsive-panel.jpg)
 
 The application is almost complete, just apply a nice bright theme and it will be ready to ship.
 

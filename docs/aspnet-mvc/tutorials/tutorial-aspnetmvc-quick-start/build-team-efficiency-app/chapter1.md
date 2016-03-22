@@ -22,13 +22,13 @@ UI for ASP.NET MVC can easily be added to an existing ASP.NET MVC project using 
 
 **Step 2** In the **New Project** dialog, choose the **ASP.NET Web Application** template by expanding the **Templates** tree to **Templates** > **Visual C#** > **Web**.
 
-![](images/chapter1/file-new-mvc-project.jpg)
+![](../images/chapter1/file-new-mvc-project.jpg)
 
 **Step 3** Give the application a name, for example, **MyQuickStartApp**. Click **OK** to continue.
 
 **Step 4** In the **New ASP.NET Project** dialog, choose **MVC** from the 4.6 template selection.
 
-![](images/chapter1/file-new-mvc-project2.jpg)
+![](../images/chapter1/file-new-mvc-project2.jpg)
 
 **Step 5** Click **OK** to finish.
 
@@ -52,11 +52,11 @@ Alternatively, you can use the GUI package manager.
 
 **Step 2** From the Solution Explorer, right-click **References**, then choose **Manage NuGet Packages**.
 
-![](images/chapter1/nuget-gui.jpg)
+![](../images/chapter1/nuget-gui.jpg)
 
 **Step 3** Search for **KendoQsBoilerplate**.
 
-![](images/chapter1/nuget-gui2.jpg)
+![](../images/chapter1/nuget-gui2.jpg)
 
 **Step 4** Click **Install** to continue.
 
@@ -64,11 +64,11 @@ Alternatively, you can use the GUI package manager.
 
 **Step 6** It is normal for the quick start boilerplate to overwrite existing files. When prompted with a file conflict, choose **Yes to All**.
 
-![](images/chapter1/file-conflict.jpg)
+![](../images/chapter1/file-conflict.jpg)
 
 **Step 7** With the boilerplate installed, take a moment to run the application. If all went well, you should see something similar to what is shown below.
 
-![](images/chapter1/wire-frame.jpg)
+![](../images/chapter1/wire-frame.jpg)
 
 ## Convert to Telerik Applications
 
@@ -82,15 +82,15 @@ At this point, you have the wire frame for a basic MVC application. Next, you wi
 
 **Step 2** In the Solution Explorer, right-click the project name and select **Telerik UI for ASP.NET MVC** > **Convert to Telerik Application**. This will launch the **Project Configuration** wizard. From here you can choose settings for your Telerik project.
 
-![](images/chapter1/convert-to-telerik1.jpg)
+![](../images/chapter1/convert-to-telerik1.jpg)
 
 **Step 3** For this tutorial your project will use CDN support. This means that all Kendo UI resources are served from Telerik content delivery network (CDN) versus relying on your server for the assets. Mark the box **Use CDN support** and click **Next** to continue.
 
-![](images/chapter1/convert-to-telerik2.jpg)
+![](../images/chapter1/convert-to-telerik2.jpg)
 
 **Step 4** Since the boilerplate is designed with [Bootstrap](http://getbootstrap.com), choose **Bootstrap** from themes select box so the theme matches the current look of the boilerplate. You'll change the theme later when you're ready to customize the look of the application.
 
-![](images/chapter1/convert-to-telerik3.jpg)
+![](../images/chapter1/convert-to-telerik3.jpg)
 
 **Step 5** Open `\Views\Shared\_Layout.cshtml`. Find and remove the `@Scripts.Render("~/bundles/modernizr")` script bundle. This script is included with the Kendo UI assets.
 

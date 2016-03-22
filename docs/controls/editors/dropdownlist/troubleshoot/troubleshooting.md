@@ -2,6 +2,7 @@
 title: Common Issues
 page_title: Common Issues | Kendo UI DropDownList
 description: "Learn how to handle possible issues while working with the Kendo UI DropDownList widget."
+previous_url: /controls/editors/dropdownlist/troubleshooting 
 slug: troubleshooting_common_issues_dropdownlist_kendoui
 ---
 

@@ -28,19 +28,19 @@ A copy of the Northwind database is included in the Kendo UI Quick Start Boilerp
 
 **Step 1** Using Visual Studio's **Server Explorer**, expand **DataConnections**, and right-click **NorthwindDB** > **Modify Connection**.
 
-![](images/chapter3/upgrade-db-1.jpg)
+![](../images/chapter3/upgrade-db-1.jpg)
 
 **Step 2** Next, click **OK**.
 
-![](images/chapter3/upgrade-db-2.jpg)
+![](../images/chapter3/upgrade-db-2.jpg)
 
 **Step 3** Finally, click **Yes** to complete the upgrade.
 
-![](images/chapter3/upgrade-db-3.jpg)
+![](../images/chapter3/upgrade-db-3.jpg)
 
 **Step 4** Once the upgrade is complete, expand the Northwind Database Tables to verify connectivity.
 
-![](images/chapter3/upgrade-db-4.jpg)
+![](../images/chapter3/upgrade-db-4.jpg)
 
 With the database upgraded, use the scaffolding wizard to create an interactive grid view.
 
@@ -54,15 +54,15 @@ The scaffolding wizard will aid you in creating the view by providing point-and-
 
 **Step 1** Start the scaffolding wizard by right-clicking **Controllers** > **Add** > **New Scaffolded Item**.
 
-![](images/chapter3/scaffold-1.jpg)
+![](../images/chapter3/scaffold-1.jpg)
 
 **Step 2** Choose **Kendo UI Scaffolder** and click **Add** to continue.
 
-![](images/chapter3/scaffold-2.jpg)
+![](../images/chapter3/scaffold-2.jpg)
 
 **Step 3** Notice that the Scaffolder is capable of creating Grid, Chart, and Scheduler views for both C# and JavaScript. For this guide you'll be using the UI for MVC Grid scaffolding option. Choose **UI for MVC Grid** and click **Add** to continue.
 
-![](images/chapter3/scaffold-3.jpg)
+![](../images/chapter3/scaffold-3.jpg)
 
 **Step 4** From the **UI for MVC Grid** scaffolding dialog, the Grid's model options, Grid options and events are defined. The Model Options control the following settings:
 
@@ -78,7 +78,7 @@ The scaffolding wizard will aid you in creating the view by providing point-and-
 - **Model Class**: **Invoice**
 - **Data Context Class**: **NorthwindDBContext**
 
-![](images/chapter3/scaffold-4.jpg)
+![](../images/chapter3/scaffold-4.jpg)
 
 The Grid options control which features are scaffolded and enabled on the Grid, including:
 
@@ -103,7 +103,7 @@ The Grid options control which features are scaffolded and enabled on the Grid, 
 - `checked` Excel Export
 - `checked` PDF Export
 
-![](images/chapter3/scaffold-5.jpg)
+![](../images/chapter3/scaffold-5.jpg)
 
 **Step 7** Click **Add** to continue and create the scaffolded items.
 
@@ -118,7 +118,7 @@ The Scaffolder will create the following files:
 
 **Step 8** Run the application and navigate to `/Invoice/index` to see the generated Grid control. You should see the following output.
 
-![](images/chapter3/invoices-grid.jpg)
+![](../images/chapter3/invoices-grid.jpg)
 
 Now that the UI for MVC Scaffolder has generated a starting point for working with the Grid, you can modify the scaffolded code to meet your needs. In the next chapter we'll do just that.
 
