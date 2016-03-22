@@ -375,7 +375,7 @@ For more information on handling errors in such scenarios, refer to the section 
 
 ### Update (Remote)
 
-The `update` service expects the edited data items and should return the same items as a confirmation of the successful save operation. An empty response is also treated as a valid success response.
+The `update` service expects the edited data items and should return the same items (including all data fields) as a confirmation of the successful save operation. An empty response is also treated as a valid success response.
 
 ###### Example
 
