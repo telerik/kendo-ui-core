@@ -1077,4 +1077,29 @@ withAngularTests("Angular (UI Core)", function(runTest){
             start();
         });
     });
+
+    ngTest2("ng-model keep model value on initial scope.$render", 1, function(dom, controller, bootstrap) {
+        controller(function($scope) {
+            $scope.options = {
+                dataTextField  : "text",
+                dataValueField : "id"
+            };
+
+            $scope.data = [];
+            $scope.selectedValue = "";
+        });
+
+        $("<select kendo-dropdownlist ng-model='selectedValue' k-data-source='data' k-options='options'></select></div>").appendTo(dom);
+
+        bootstrap();
+
+        var $scope = dom.scope();
+
+        $scope.$apply(function() {
+            $scope.data = [{ id: 0, text: "text0" }, { id: 1, text: "text1" }, { id: 2, text: "text2" }];
+            $scope.selectedValue = 1;
+        });
+
+        equal($scope.selectedValue, 1);
+    });
 });
