@@ -155,7 +155,7 @@ On initial load, the widget will check whether the selected value is present in 
 
 ### Function Result
 
-The `valueMapper` callback expects to receive a row index or list of indices (when multiple selection is available). That being said, the service should return either an index (number) or a list of indices. For instance, examine the result of [the test service](/service/Orders/ValueMapper) used in the online demos:
+The `valueMapper` callback expects to receive a row index or list of indices (when multiple selection is available). That being said, the service should return either an index (number) or a list of indices. For instance, examine the result of [the test service](https://demos.telerik.com/kendo-ui/combobox/virtualization) used in the online demos:
 
 ```javascript
 $.ajax({
