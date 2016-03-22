@@ -232,7 +232,7 @@ Sets the intermediate points (in global coordinates) of the connection.
 
 #### Example - setting intermediate connection points
 
-![Intermediate connection points.](/api/dataviz/diagram/connectionpoints.png)
+![Intermediate connection points.](/api/dataviz/diagram/connection_points.png)
 
     <div id="diagram"></div>
     <script>
