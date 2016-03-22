@@ -29,9 +29,9 @@ Applications do not need to be cross-compiled into a native [software-developmen
 
 There are a few key, non-visual pieces of Kendo UI hybrid components used in virtually all applications. These are:
 
-1. [Application](http://demos.telerik.com/kendo-ui/mobile/application/index.html)&mdash;This is the shell of Kendo UI hybrid apps. Application manages all navigation, application history, loading views, rendering mobile meta tags, and other essential mobile app tasks.
-2. [Layout](http://demos.telerik.com/kendo-ui/mobile/layout/index.html)&mdash;Defines the reusable portions of a hybrid app, similar to a MasterPage or template. Layouts are often used improve app maintainability by defining things used across multiple views, like navigation. While not required, layouts are encouraged to use.
-3. [Views](http://demos.telerik.com/kendo-ui/mobile/view/index.html)&mdash;Individual pages of a hybrid app. Views contain the greater part of the application content. Every application has one or more views.
+1. [Application](http://demos.telerik.com/kendo-ui/m/index#application/loadingpopup)&mdash;This is the shell of Kendo UI hybrid apps. Application manages all navigation, application history, loading views, rendering mobile meta tags, and other essential mobile app tasks.
+2. [Layout]({% slug layout_hybridkendoui %})&mdash;Defines the reusable portions of a hybrid app, similar to a MasterPage or template. Layouts are often used improve app maintainability by defining things used across multiple views, like navigation. While not required, layouts are encouraged to use.
+3. [Views](http://demos.telerik.com/kendo-ui/m/index#mobile-view/index)&mdash;Individual pages of a hybrid app. Views contain the greater part of the application content. Every application has one or more views.
 
 Layouts and Views are defined through HTML. The Application is simply JavaScript. No markup associated with the Application is used.
 
