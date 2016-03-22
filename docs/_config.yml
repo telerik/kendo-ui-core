@@ -594,7 +594,7 @@ google_custom_search: '001595215763381649090:eblhnfskwrk'
 
 # Assets pipeline configuration
 assets:
-    cachebust: hard
+    cachebust: soft
     js_compressor: uglifier
     gzip: false
 
