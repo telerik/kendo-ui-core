@@ -348,6 +348,9 @@ The [Columns](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder#methods-Columns) m
 A bound column is declared via the `Bound` method, which specifies a data field. The data field names must be valid Javascript identifiers and
 should contain no spaces, no special characters, and the first character should be a letter.
 
+> **Important**
+> The field names in the Grid data should be valid JavaScript identifiers. They should contain no spaces, no special characters, and the first character should be a letter.
+
 Bound columns have the following settings:
 
 ### ClientTemplate
