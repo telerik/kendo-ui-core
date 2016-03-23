@@ -66,7 +66,7 @@ Supported types (case insensitive):
 - `vml`
 
 This option will be ignored if not supported by the browser.
-See [Supported Browsers](supported-browsers)
+See [Supported Browsers](/intro/supporting/browser-support).
 
 ### height `String` *(default: "100%")*
 The height of the surface element.

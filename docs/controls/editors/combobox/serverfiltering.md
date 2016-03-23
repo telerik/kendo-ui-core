@@ -36,7 +36,7 @@ Another benefit that server filtering brings about is the option to bind the wid
 ## Known Limitations
 
 - The server filtering feature (as its name says) only filters the source. If you would like to page (and filter) the data set, then you will need to use
-the [Virtualization](/kendo-ui/web/combobox/virtualization) feature of the widget.
+the [Virtualization]({% slug virtualization_kendoui_combobox_widget %}) feature of the widget.
 
 ## See Also
 

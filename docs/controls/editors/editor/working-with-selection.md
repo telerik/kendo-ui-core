@@ -10,7 +10,7 @@ position: 4
 
 The Editor widget works with standard [`range` objects](https://developer.mozilla.org/en/docs/Web/API/Range) that provide a polyfill for Internet Explorer versions that do not fully support them.
 
-To set the Editor selection, you need to create a `Range` object that specifies the desired selection, and pass it to the [`selectRange` method](/kendo-ui/api/javascript/ui/editor#methods-selectRange)
+To set the Editor selection, you need to create a `Range` object that specifies the desired selection, and pass it to the [`selectRange` method](/api/javascript/ui/editor#methods-selectRange)
 
 The example below demonstrates how to set the Editor selections.
 

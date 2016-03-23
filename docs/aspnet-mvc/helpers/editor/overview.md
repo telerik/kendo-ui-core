@@ -12,7 +12,7 @@ The Editor HtmlHelper extension is a server-side wrapper for the [Kendo UI Edito
 
 Here is how to configure a simple Kendo Editor:
 
-1.  Make sure you have followed all the steps from the [Introduction](/aspnet-mvc/introduction) help topic.
+1.  Make sure you have followed all the steps from the [Introduction]({% slug overview_aspnetmvc %}) help topic.
 
 2.  Create a new action method which renders the view:
 
@@ -116,9 +116,9 @@ You can subscribe to all [events](/api/javascript/ui/editor#events) exposed by K
           )
     )
 
- 
-## Troubleshooting 
-    
+
+## Troubleshooting
+
 ### Editor Shows HTML Tags after Validation
 
 After server-side validation the Editor displays the posted encoded value from the ModelState. The Razor view engine will encode it once again and as a result,
@@ -132,4 +132,4 @@ There are two alternative options to tackle this scenario:
 
 ### More Troubleshooting
 
-For additional tips, please check the [Troubleshooting section of the vanilla HTML/Javascript Kendo UI Editor](/web/editor/troubleshooting).
+For additional tips, please check the [Troubleshooting section of the vanilla HTML/Javascript Kendo UI Editor]({% slug troubleshooting_editor_widget %}).

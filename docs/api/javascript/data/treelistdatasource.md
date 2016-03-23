@@ -7,13 +7,13 @@ description: Learn more about the configuration of Kendo UI TreeListDataSource, 
 # kendo.data.TreeListDataSource
 
 The data source used by the [kendo.ui.TreeList](/api/javascript/ui/TreeList) widget.
-Inherits from [kendo.data.DataSource](/api/framework/datasource). The TreeListDataSource contains instances of the
+Inherits from [kendo.data.DataSource](/api/javascript/data/datasource). The TreeListDataSource contains instances of the
 [kendo.data.TreeListModel](/api/javascript/data/treelistmodel) class.
 
 
 ## Configuration
 
-See the [DataSource configuration](/api/framework/datasource#configuration) for all inherited configuration options.
+See the [DataSource configuration](/api/javascript/data/datasource#configuration) for all inherited configuration options.
 
 ### schema `Object`
 
@@ -25,7 +25,7 @@ The model configuration of the TreeListDataSource. See [kendo.data.TreeListModel
 
 ## Methods
 
-See the [DataSource methods](/api/framework/datasource#methods) for all inherited methods.
+See the [DataSource methods](/api/javascript/data/datasource#methods) for all inherited methods.
 
 ### load
 
