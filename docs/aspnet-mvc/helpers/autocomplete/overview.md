@@ -131,7 +131,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 > **Important**
 >
-> The `ToDataSourceResult()` extension method modifies the structure of the result and the widget is not able to bind to it. In this case, return simple array of data.
+> The `ToDataSourceResult()` extension method modifies the structure of the result and the widget is not able to bind to it. In this case, return a simple array of data.
 
 ### ToDataSourceResult Binding
 
