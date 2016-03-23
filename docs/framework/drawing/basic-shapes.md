@@ -10,7 +10,7 @@ position: 2
 
 ## Sample Case
 
-Scenes are constructed from a set of built-in basic shapes. **Figure 1.** below demonstrates a simple, static scene.
+Scenes are constructed from a set of built-in basic shapes. **Figure 1** below demonstrates a simple, static scene.
 
 **Figure 1. Basic scene**
 
@@ -95,7 +95,7 @@ The `kendo.drawing` namespace contains elements, such as:
 
 ### Draw the Path
 
-A [`Path`](/api/javascript/dataviz/drawing/path) element is used to draw straight lines, curves, or a combination of both.
+A [`Path`](/api/javascript/drawing/path) element is used to draw straight lines, curves, or a combination of both.
 
 Set the stroke (line) color and width to match the picture, as demonstrated in the example below.
 
@@ -108,7 +108,7 @@ Set the stroke (line) color and width to match the picture, as demonstrated in t
         }
     });
 
-The [`configuration`](/api/javascript/dataviz/drawing/path#configuration) object can contain other appearance options as well.
+The [`configuration`](/api/javascript/drawing/path#configuration) object can contain other appearance options as well.
 
 Now construct the path by issuing the commands shown below.
 
@@ -118,9 +118,9 @@ Now construct the path by issuing the commands shown below.
         .lineTo(150, 0).lineTo(150, 65).lineTo(0, 65)
         .close();
 
-Set the line initial position with a [`moveTo`](/api/javascript/dataviz/drawing/path#methods-moveTo) command. The three sides are drawn by using the [`lineTo`](/kendo-ui/api/javascript/dataviz/drawing/path#methods-lineTo) commands. The last command [`closes`](/api/javascript/dataviz/drawing/path#methods-close) the path, drawing a straight line to the initial position.
+Set the line initial position with a [`moveTo`](/api/javascript/drawing/path#methods-moveTo) command. The three sides are drawn by using the [`lineTo`](/api/javascript/drawing/path#methods-lineTo) commands. The last command [`closes`](/api/javascript/drawing/path#methods-close) the path, drawing a straight line to the initial position.
 
-Since this is a rectangle, use the alternative [`fromRect`](/api/javascript/dataviz/drawing/path#fromrect) static method, as demonstrated below.
+Since this is a rectangle, use the alternative [`fromRect`](/api/javascript/drawing/path#fromrect) static method, as demonstrated below.
 
 ###### Example
 

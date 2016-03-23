@@ -23,7 +23,7 @@ There are two ways to bind a Kendo UI MultiSelect:
 
 Below are listed the steps for you to follow when configuring the Kendo UI MultiSelect for binding to data, passed as a model attribute in Spring MVC.
 
-**Step 1** Make sure you have followed all the steps from the [Introduction](/jsp/introduction) help topic.
+**Step 1** Make sure you have followed all the steps from the [Introduction]({% slug overview_uiforjsp %}) help topic.
 
 **Step 2** Create a new action method and pass the **Products** table to the View.
 

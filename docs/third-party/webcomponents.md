@@ -22,20 +22,20 @@ Initializing Kendo UI widgets is as simple as adding the desired custom element 
 ###### Example
 
 ```html
-<kendo-datepicker value="09/16/2015"></kendo-datepicker>
+    <kendo-datepicker value="09/16/2015"></kendo-datepicker>
 
-<kendo-numerictextbox spinners="false" value="42"></kendo-numerictextbox>
+    <kendo-numerictextbox spinners="false" value="42"></kendo-numerictextbox>
 
-<kendo-dropdownlist value="Orange">
-    <option>Black</option>
-    <option>Orange</option>
-    <option>Grey</option>
-</kendo-dropdownlist>
+    <kendo-dropdownlist value="Orange">
+        <option>Black</option>
+        <option>Orange</option>
+        <option>Grey</option>
+    </kendo-dropdownlist>
 
-<kendo-rangeslider min="0" max="100" tooltip="{enabled: false}">
-    <input/>
-    <input/>
-</kendo-rangeslider>
+    <kendo-rangeslider min="0" max="100" tooltip="{enabled: false}">
+        <input/>
+        <input/>
+    </kendo-rangeslider>
 ```
 
 Creating widgets on the fly is also supported, as demonstrated in the example below. Widgets are initialized once the custom element is inserted into a document with a browsing context.
@@ -43,12 +43,12 @@ Creating widgets on the fly is also supported, as demonstrated in the example be
 ###### Example
 
 ```html
-<script>
-    var date = document.createElement("kendo-datepicker");
-    document.body.appendChild(date);
-    // the DatePicker is now live
-    date.value(new Date());
-</script>
+    <script>
+        var date = document.createElement("kendo-datepicker");
+        document.body.appendChild(date);
+        // the DatePicker is now live
+        date.value(new Date());
+    </script>
 ```
 
 ## Access Widget Fields and Methods
@@ -58,26 +58,26 @@ When a Kendo UI widget is created as a web component from a custom HTML element,
 ###### Example
 
 ```html
-<kendo-grid id="grid1"></kendo-grid>
-<kendo-grid id="grid2"></kendo-grid>
+    <kendo-grid id="grid1"></kendo-grid>
+    <kendo-grid id="grid2"></kendo-grid>
 
-<script>
+    <script>
 
-    // get reference to the columns collection of Grid 1
-    var grid1 = document.getElementById("grid1");
-    var columns1 = grid1.columns;
+        // get reference to the columns collection of Grid 1
+        var grid1 = document.getElementById("grid1");
+        var columns1 = grid1.columns;
 
-    // resize Grid 2
-    var grid2 = document.getElementById("grid2");
-    grid2.wrapper.height(900); // wrapper is a jQuery object
-    grid2.resize();
+        // resize Grid 2
+        var grid2 = document.getElementById("grid2");
+        grid2.wrapper.height(900); // wrapper is a jQuery object
+        grid2.resize();
 
-</script>
+    </script>
 ```
 
 ## Handle Events
 
-Event handlers can be set either using the attributes of the element or by attaching them after the initialization of the widget using the  [`bind` method](api/javascript/ui/widget#methods-bind).  Attributes should follow the `on-eventname` convention and point to a handler living in the global scope.
+Event handlers can be set either using the attributes of the element or by attaching them after the initialization of the widget using the  [`bind` method](/api/javascript/ui/widget#methods-bind). Attributes should follow the `on-eventname` convention and point to a handler living in the global scope.
 
 ### During Initialization
 
@@ -86,12 +86,12 @@ The example below demonstrates how to subscribe to events during initialization.
 ###### Example
 
 ```html
-<kendo-numerictextbox value="42" on-change="onChange"></kendo-numerictextbox>
-<script>
-    function onChange(){
-        alert(this.value());
-    }
-</script>
+    <kendo-numerictextbox value="42" on-change="onChange"></kendo-numerictextbox>
+    <script>
+        function onChange(){
+            alert(this.value());
+        }
+    </script>
 ```
 
 ### After Initialization
@@ -101,13 +101,13 @@ The example below demonstrates how to subscribe to events after initialization.
 ###### Example
 
 ```html
-<kendo-numerictextbox value="42"></kendo-numerictextbox>
-<script>
-    var numeric = document.querySelector("kendo-numerictextbox");
-    numeric.bind("change", function() {
-        alert(this.value());
-    });
-</script>
+    <kendo-numerictextbox value="42"></kendo-numerictextbox>
+    <script>
+        var numeric = document.querySelector("kendo-numerictextbox");
+        numeric.bind("change", function() {
+            alert(this.value());
+        });
+    </script>
 ```
 
 ## Set a DataSource
@@ -117,19 +117,19 @@ DataSource can be specified as any other option through the attributes of the el
 ###### Example
 
 ```html
-<kendo-dropdownlist data-source="['Black', 'Orange', 'Grey']"></kendo-dropdownlist>
-<script>
-    var dataSource = new kendo.data.DataSource({
-        data:['Red', 'Green', 'Blue']
-    });
-    var color = document.querySelector("kendo-dropdownlist");
-    color.setDataSource(dataSource);
-</script>
+    <kendo-dropdownlist data-source="['Black', 'Orange', 'Grey']"></kendo-dropdownlist>
+    <script>
+        var dataSource = new kendo.data.DataSource({
+            data:['Red', 'Green', 'Blue']
+        });
+        var color = document.querySelector("kendo-dropdownlist");
+        color.setDataSource(dataSource);
+    </script>
 ```
 
 ## Browser Support
 
-Web Components work using certain features that older browsers do not support. It is recommended to use the [`webcomponents.js`](http://webcomponents.org/polyfills/) polyfills library where wider Web Components support is required.
+Web Components work using certain features that older browsers do not support. It is recommended to use the [`webcomponents.js`](http://webcomponents.org/polyfills/) polyfill library where wider Web Components support is required.
 
 ## See Also
 

@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
             return "/dataviz/barcode/index";
         }
 
-**Step 3** Add a barcode with the default [`type`](/api/web/barcode#configuration-type) (Code39).
+**Step 3** Add a barcode with the default [`type`](/api/javascript/dataviz/ui/barcode#configuration-type) (Code39).
 
 ###### Example
 
@@ -46,7 +46,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
 
 ### Existing Instances
 
-You are able to reference an existing Barcode instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Barcode API](/api/web/barcode#methods) to control its behavior.
+You are able to reference an existing Barcode instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Barcode API](/api/javascript/dataviz/ui/barcode#methods) to control its behavior.
 
 ###### Example
 
