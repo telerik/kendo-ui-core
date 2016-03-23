@@ -34,7 +34,7 @@ When a Window is initialized, it is going to be automatically displayed as open 
 
 With regard to the CSS selectors or element discovery via Javascript, make sure you take into account that, by default, the Window is created as a child of the `<body>` element. This behavior is configurable via the [`appendTo` setting](/api/javascript/ui/window#configuration-appendTo).
 
-The example below demonstrates how to configure this default Window behavior before initialization.
+The HTML snippet below demonstrates how the page markup may look like before Kendo UI Window initialization.
 
 ###### Example
 
@@ -50,7 +50,7 @@ The example below demonstrates how to configure this default Window behavior bef
 		</div>
 	</body>
 
-The example below demonstrates how to configure the Window behavior after initialization.
+The HTML snippet below demonstrates how the above page markup will change after Kendo UI Window initialization, when the widget is moved to become a child of the `<body>` and its additional markup is generated (i.e. the wrapper and the titlebar).
 
 ###### Example
 
