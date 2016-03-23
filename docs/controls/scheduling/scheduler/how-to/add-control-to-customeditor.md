@@ -162,4 +162,4 @@ How-to examples on Kendo UI Scheduler in AngularJS:
 * [How to Show Тooltip on hover]({% slug howto_show_tooltipon_hover_angularjs_scheduler %})
 * [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
 
-For additional runnable examples on Kendo UI Scheduler, browse the [Scheduler **How To** documentation folder](controls/scheduling/scheduler/how-to/add-control-to-customeditor).
+For additional runnable examples on Kendo UI Scheduler, browse the [Scheduler **How To** documentation folder]({% slug howto_customize_editand_events_templates_angularjs_scheduler %}).
