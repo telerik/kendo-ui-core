@@ -1,40 +1,80 @@
 ---
 title: Scaffolding
-page_title: How to use the Kendo UI Scaffolder extension.
-description: Learn how to scaffold Kendo UI Chart for ASP.NET MVC using the Kendo UI Scaffolder extension for Visual Studio.
+page_title: Scaffolding | Kendo UI Chart HtmlHelper
+description: "Scaffold the Kendo UI Chart for ASP.NET MVC using the Kendo UI Scaffolder extension for Visual Studio."
 slug: scaffoldingchart_aspnetmvc
+position: 3
 ---
 
-# Chart Scaffolding
+# Scaffolding
 
-The following tutorial shows how to scaffold a Kendo UI Chart for ASP.NET MVC using the **Kendo UI Scaffolder** Visual Studio extension.
+This article demonstrates how to scaffold a Kendo UI Chart for ASP.NET MVC by using the Kendo UI Scaffolder Visual Studio extension.
 
 > **Important**  
-> The Kendo UI Scaffolder will not include the required **UI for ASP.NET MVC** files to the project. You could achieve this automatically using the [Telerik UI for ASP.NET MVC Visual Studio Extensions](/aspnet-mvc/vs-integration/introduction) or manually as demonstrated [here](/aspnet-mvc/asp-net-mvc-5).
+>
+> The Kendo UI Scaffolder will not include the required `UI for ASP.NET MVC` files to the project. To achieve this automatically, use the [Telerik UI for ASP.NET MVC Visual Studio extensions]({% slug overview_aspnetmvc %}). To achieve this manually, refer to [this article]({% slug aspnetmvc5_aspnetmvc %}).
 
 ## Getting Started
 
-1.  Create a new ASP.NET MVC application, include an Entity Framework Data Model and add **Telerik UI for ASP.NET MVC**. If you have already done so, you can skip to the next step, otherwise you can follow the first 4 steps of the [following tutorial](/aspnet-mvc/helpers/chart/overview#getting-started).
+Below are listed the steps for you to follow when scaffolding the Kendo UI Chart for ASP.NET MVC.
 
-2.  Right click on the location where the Chart Controller should be generated and select **Add | New Scaffolded item...** from the displayed menu. In this example we will generate it in the **Controllers** folder.
+### Create a New ASP.NET MVC Application
+
+Create a new ASP.NET MVC application. Include an Entity Framework Data Model and add `Telerik UI for ASP.NET MVC`. If you have already done so, you can move on to next step. Otherwise, follow the steps of the [steps described in the Getting Started section of this article]({% slug overview_charthelper_aspnetmvc %}).
+
+### Generate the Chart Controller
+
+Right-click the location where the Chart Controller should be generated. Select **Add** > **New Scaffolded item...** from the displayed menu. In this example, you are going to generate it in the **Controllers** folder.
+
+**Figure 1. A new scaffolded item**
+
 ![New Scaffolded Item](/aspnet-mvc/images/scaffolding/new_scaffolded_item.png)
 
-3.  Select **Kendo UI Scaffolder** from the list of available scaffolders.
+### Select the Scaffolder
+
+Select **Kendo UI Scaffolder** from the list of available scaffolders.
+
+**Figure 2. The Kendo UI Scaffolder**
+
 ![Kendo UI Scaffolder](/aspnet-mvc/images/scaffolding/kendo_ui_scaffolder.png)
 
-4.  Select Kendo UI Chart from the available widgets to scaffold on the left:
+### Select the Chart
+
+Select the Kendo UI Chart from the available widgets to the left to scaffold.
+
+**Figure 3. The Kendo UI Chart Scaffolder**
+
 ![Kendo UI Chart Scaffolder](/aspnet-mvc/helpers/chart/images/scaffolding/kendo_ui_chart.png)
 
-5.  On the next screen you will be presented with the Model and Data Context options.
-    - First enter the Controller and View names.  
+### Set Model and Data Context Options
+
+On the next screen, you are presented with the Model and Data Context options.
+
+**Step 1** Enter the Controller and View names.  
+
+**Figure 4. The Grid options**
+
 ![Grid options](/aspnet-mvc/helpers/grid/images/scaffolding/kendo_ui_grid1.png)
-    - The **Model Class** DropDownList will contain all model types from the active project. In this example we will list products in the Chart. Select the **Product** entity.  
+
+**Step 2** The **Model Class** DropDownList contains all model types from the active project. In this example, you are going to list products in the Chart. Select the **Product** entity.
+
+**Figure 5. The Model class**
+
 ![Model Class](/aspnet-mvc/helpers/grid/images/scaffolding/model_class.png)
-    - From the **Data Context Class** DropDownList you could select the **Entity Framework Data Model** class to be used. In this example it is **NorthwindEntities**.  
+
+**Step 3** From the **Data Context Class** DropDownList, select the **Entity Framework Data Model** class to be used. In this example, it is **NorthwindEntities**.  
+
+**Figure 6. The Data Context class**
+
 ![Data Context Class](/aspnet-mvc/helpers/grid/images/scaffolding/data_context_class.png)
 
-6. This step is optional. In some scenarios it is convenient to use view model objects instead of the entities returned by Entity Framework. If this is the case, check the **Use an existing ViewModel** checkbox. This will present you with a DropDownList similar to the first one, from which you could select the ViewModel to be used.
-    - If you have not yet created it, add a new class to the `~/Models` folder. Name it `ProductViewModel`.
+### Use View Model Objects
+
+(Optional) In some scenarios it is convenient to use view model objects instead of the entities returned by Entity Framework. If this is the case, check the **Use an existing ViewModel** checkbox. This presents you with a DropDownList similar to the first one, from which select the ViewModel to be used.
+
+**Step 1** If you have not yet created it, add a new class to the `~/Models` folder. Name it `ProductViewModel`.
+
+###### Example
 
 	        public class ProductViewModel
 	        {
@@ -42,23 +82,60 @@ The following tutorial shows how to scaffold a Kendo UI Chart for ASP.NET MVC us
 	            public string ProductName { get; set; }
 	            public short? UnitsInStock { get; set; }
 	        }
-    - Select the **ProductViewModel** class from the **ViewModel Class** DropDownList.  
-    ![ViewModel Class](/aspnet-mvc/helpers/grid/images/scaffolding/view_model_class.png)
 
-		> It is important that the names of the properties in the ViewModel are exactly the same as the corresponding ones in the Entity. Otherwise the Kendo UI Scaffolder won't be able to link them correctly.
+**Step 2** Select the **ProductViewModel** class from the **ViewModel Class** DropDownList.  
 
-7. Click the **Chart options** item on the left.  
+**Figure 7. The ViewModel class**
+
+![ViewModel Class](/aspnet-mvc/helpers/grid/images/scaffolding/view_model_class.png)
+
+> **Important**
+>
+> The names of the properties in the ViewModel must be exactly the same as the corresponding ones in the Entity. Otherwise, the Kendo UI Scaffolder is not able to link them correctly.
+
+### Set Chart Functionalities
+
+**Step 1** Click the **Chart options** item on the left.  
+
+**Figure 8. The options when setting the Chart functionalities**
+
 ![Grid options](/aspnet-mvc/helpers/chart/images/scaffolding/kendo_ui_chart2.png)  
-This screen contains the Chart functionalities that could be configured before scaffolding:
-    - Data Binding Type - Remote or Local.
-    - Title - Define the Title of the Chart.   
-    - Show Tooltip - Show the tooltip.    
-    - Show Legend - Show a legend. The available options are Bottom and Top.
+
+This screen contains the Chart functionalities that you can configure before scaffolding:
+* **Data Binding Type**&mdash;Remote or Local.
+* **Title**&mdash;Define the `Title` of the Chart.   
+* **Show Tooltip**&mdash;Show the tooltip.    
+* **Show Legend**&mdash;Show a legend. The available options are `Bottom` and `Top`.
+
+**Figure 9. The legend options**
+
 ![Legend options](/aspnet-mvc/helpers/chart/images/scaffolding/legend.png)
-    - Series Type - Select the series type. Each series type will show different Series Options configuration.
+
+* **Series Type**&mdash;Select the series type. Each series type shows different **Series Options** configuration.
+
+**Figure 10. The series options**
+
 ![Series options](/aspnet-mvc/helpers/chart/images/scaffolding/series_options_1.png)
-    - Add More Series - Adds one additional configuration panel for a series.
 
-Each field marked with a star * is mandatory and the rest of the fields are optional.
+* **Add More Series**&mdash;Add one additional configuration panel for a series.
 
-When finished with the Chart configuration, click the **Add** button at the bottom. The Chart Controller and the corresponding View will be generated.
+Each field marked with an asterisk `*` is mandatory and the rest of the fields are optional.
+
+When finished with the Chart configuration, click **Add** at the bottom. The Chart Controller and the corresponding View are generated.
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the Chart:
+
+* [Overview of the Kendo UI Chart for ASP.NET MVC]({% slug overview_charthelper_aspnetmvc %})
+* [How to Bind to SignalR Hubs in ASP.NET MVC Apps]({% slug howto_bindtosignalr_chartaspnetmvc %})
+* [How to Create View Model Bound Dynamic Series in ASP.NET MVC Apps]({% slug howto_cerateviewmodelboundseries_chartaspnetmvc %})
+* [Ajax Binding of the Kendo UI Chart for ASP.NET MVC]({% slug ajaxbinding_charthelper_aspnetmvc %})
+* [Overview of the Kendo UI Chart Widget]({% slug overview_kendoui_charts_widget %})
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
