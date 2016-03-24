@@ -3339,6 +3339,12 @@ The jQuery object which represents the table row.
 
 This method expands the row.
 
+#### Parameters
+
+##### row `String|Element|jQuery`
+
+A string, DOM element or jQuery object which represents the table row. A string is treated as a jQuery selector.
+
 #### Example
 
     <div id="treeList"></div>
