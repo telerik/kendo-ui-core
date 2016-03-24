@@ -2,6 +2,7 @@
 title: Overview
 page_title: How to use the Kendo UI MobileModalView HtmlHelper extension, server-side ASP.NET MVC wrapper for Kendo UI Mobile ModalView widget
 description: Learn how to initialize Kendo UI MobileModalView for ASP.NET MVC, handle Kendo UI MobileModalView Events, access an existing modalview with MobileModalView HtmlHelper extension documentation.
+previous_url: /aspnet-mvc/helpers/mobilemodalview/overview
 ---
 
 # MobileModalView

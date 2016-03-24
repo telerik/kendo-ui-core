@@ -247,6 +247,8 @@ navigation:
     "aspnet-mvc/helpers":
         title: "HtmlHelpers"
         position: 14
+    "aspnet-mvc/helpers/hybrid":
+        title: "Hybrid UI"
     "aspnet-mvc/troubleshoot":
         title: "Troubleshooting"
         position: 15
@@ -335,29 +337,35 @@ navigation:
     "*pdf-export":
         title: "PDF Export"
     "*mobileactionsheet":
-        title: "MobileActionSheet"
+        title: "ActionSheet"
     "*mobileapplication":
-        title: "MobileApplication"
+        title: "Application"
     "*mobilebuttongroup":
-        title: "MobileButtonGroup"
+        title: "ButtonGroup"
     "*mobilelayout":
-        title: "MobileLayout"
+        title: "Layout"
     "*mobilemodalview":
-        title: "MobileModalView"
+        title: "ModalView"
     "*mobilepopover":
-        title: "MobilePopOver"
+        title: "PopOver"
     "*mobilesplitview":
-        title: "MobileSplitView"
+        title: "SplitView"
     "*mobileswitch":
-        title: "MobileSwitch"
+        title: "Switch"
     "*mobiletabstrip":
-        title: "MobileTabStrip"
+        title: "TabStrip"
     "*mobilelistview":
-        title: "MobileListView"
+        title: "ListView"
     "*mobileview":
-        title: "MobileView"
+        title: "View"
     "*mobilebutton":
-        title: "MobileButton"
+        title: "Button"
+    "*mobiledrawer":
+        title: "Drawer"
+    "*mobilelanavbar":
+        title: "NavBar"
+    "*mobilescrollview":
+        title: "ScrollView"
     "*barcode":
         title: "Barcode"
     "*stockchart":

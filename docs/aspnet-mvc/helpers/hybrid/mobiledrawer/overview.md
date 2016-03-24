@@ -2,6 +2,7 @@
 title: Overview
 page_title: How to use the Kendo UI MobileDrawer HtmlHelper extension, server-side ASP.NET MVC wrapper for Kendo UI Mobile Drawer widget
 description: Learn how to initialize Kendo UI MobileDrawer for ASP.NET MVC, handle Kendo UI MobileDrawer Events, access an existing drawer with MobileDrawer HtmlHelper extension documentation.
+previous_url: /aspnet-mvc/helpers/mobiledrawer/overview
 ---
 
 # MobileDrawer

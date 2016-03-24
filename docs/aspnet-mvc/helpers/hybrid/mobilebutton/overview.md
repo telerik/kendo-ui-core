@@ -2,6 +2,7 @@
 title: Overview
 page_title: How to use the Kendo UI MobileButton HtmlHelper extension, server-side ASP.NET MVC wrapper for Kendo UI Mobile Button widget
 description: Learn how to initialize Kendo UI MobileButton for ASP.NET MVC, handle Kendo UI MobileButton Events, access an existing button with MobileButton HtmlHelper extension documentation.
+previous_url: /aspnet-mvc/helpers/mobilebutton/overview
 ---
 
 # MobileButton

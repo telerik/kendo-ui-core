@@ -2,6 +2,7 @@
 title: Overview
 page_title: How to use the Kendo UI MobileLayout HtmlHelper extension, server-side ASP.NET MVC wrapper for Kendo UI Mobile Layout widget
 description: Learn how to initialize Kendo UI MobileLayout for ASP.NET MVC, handle Kendo UI MobileLayout Events, access an existing layout with MobileLayout HtmlHelper extension documentation.
+previous_url: /aspnet-mvc/helpers/mobilelayout/overview
 ---
 
 # MobileLayout
