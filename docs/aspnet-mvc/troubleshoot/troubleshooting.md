@@ -440,6 +440,23 @@ By default, the ASP.NET MVC project uses jQuery validate framework, which does n
 
 As extending open source libraries is outside the Kendo UI scope, you need to resolve this issue manually. For more information, check [this link](http://www.dotnet-programming.com/post/2011/12/14/Globalization-Validation-and-DateNumber-Formats-in-AspNet-MVC.aspx), or use the [Kendo UI Validator](http://demos.telerik.com/kendo-ui/web/validator/index.html), which supports the validation of internationalized dates.
 
+## Editor HtmlHelper
+
+### Editor Shows HTML Tags after Validation
+
+After the server-side validation, the Editor displays the posted `encoded` value from the `ModelState`. The Razor view engine encodes it once again and, as a result,
+HTML tags appear inside the widget content area. More information about this behavior related to ASP.NET MVC is available at
+the blog post on [wrong value rendering by ASP.NET MVC's HtmlHelpers](http://blogs.msdn.com/b/simonince/archive/2010/05/05/asp-net-mvc-s-html-helpers-render-the-wrong-value.aspx).
+
+**Solution**
+
+You have two alternative options to tackle this scenario:
+
+* Clear the `ModelState` in the controller's action method after the `POST`.
+* Set `Encode(false)` for the Editor and set an `[AllowHtml]` attribute to the model property, so that the Editor's value is submitted non-encoded.
+
+For additional tips on the Editor widget, refer to the [troubleshooting article on common Kendo UI Editor issues]({% slug troubleshooting_editor_widget %}).
+
 ## See Also
 
 Other articles on troubleshooting:

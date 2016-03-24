@@ -1,12 +1,13 @@
 ---
-title: Add maxlength Validation
-page_title: Add max-length validation
-description: Add max-length validation
+title: Add maxlength Validations
+page_title: Add maxlength Validations | Kendo UI Editor HtmlHelper
+description: "Define custom Kendo UI validators to check the length of the text content through custom validation rules when working with the Editor HtmlHelper in ASP.NET MVC applications."
+slug: howto_addmaxlengthvalidation_editoraspnetmvc
 ---
 
-# Add `maxlength` Validation
+# Add maxlength Validations
 
-The snippet below demonstrates how to define custom kendo validators to check the length of the text content, or the length of the HTML content, via custom validation rules.
+The example below demonstrates how to define custom Kendo UI validators to check the length of the text content, or the length of the HTML content, through custom validation rules while working with the Editor HtmlHelper in ASP.NET MVC applications.
 
 ###### Example
 
@@ -51,3 +52,9 @@ The snippet below demonstrates how to define custom kendo validators to check th
         })(jQuery, kendo);
     </script>
 
+## See Also
+
+Other articles and how-to examples on the Kendo UI Editor HtmlHelper:
+
+* [Editor HtmlHelper Overview]({% slug overview_editorhelper_aspnetmvc %})
+* [How to Store Images in Databases]({% slug howto_storeimagesindatabases_editoraspnetmvc %})

@@ -1,135 +1,147 @@
 ---
 title: Overview
-page_title: How to use Editor HtmlHelper extension | Kendo UI documentation
-description: User Guide for server-side wrapper for Kendo UI Editor for ASP.NET MVC widget.
+page_title: Overview | Kendo UI Editor HtmlHelper
+description: "Get started with the server-side wrapper for the Kendo UI Editor widget for ASP.NET MVC."
+slug: overview_editorhelper_aspnetmvc
+position: 1
 ---
 
-# Editor
+# Editor HtmlHelper Overview
 
-The Editor HtmlHelper extension is a server-side wrapper for the [Kendo UI Editor](/api/javascript/ui/editor) widget.
+The Editor HtmlHelper extension is a server-side wrapper for the [Kendo UI Editor](https://demos.telerik.com/kendo-ui/editor/index) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo Editor:
+### Configuration
 
-1.  Make sure you have followed all the steps from the [Introduction]({% slug overview_aspnetmvc %}) help topic.
+Below are listed the steps for you to follow when configuring the Kendo UI Editor.
 
-2.  Create a new action method which renders the view:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+**Step 2** Create a new action method which renders the view.
+
+###### Example
 
         public ActionResult Index()
         {
             return View();
         }
 
-3.  Add an editor:
-    - WebForms
+**Step 3** Add an Editor.
 
-            <%: Html.Kendo().Editor()
-                    .Name("editor") // The name of the editor is mandatory. It specifies the "id" attribute of the widget.
-                    .Value("<p>Initial value</p>") // Set the value of the editor
-            %>
-    - Razor
+###### Example
 
-            @(Html.Kendo().Editor()
-                  .Name("editor") // The name of the editor is mandatory. It specifies the "id" attribute of the widget.
-                  .Value("<p>Initial value</p>") // Set the value of the editor
-            )
+**WebForms**
 
-## Process the Editor Value on the Server
+        <%: Html.Kendo().Editor()
+                .Name("editor") // The name of the editor is mandatory. It specifies the "id" attribute of the widget.
+                .Value("<p>Initial value</p>") // Set the value of the editor
+        %>
 
-The editor value will be posted as a string and mapped to a variable with the name of the widget.
-Note that the posted value is HTML-encoded by default, in order to circumvent the [ASP.NET request validation](http://msdn.microsoft.com/en-us/library/hh882339.aspx).
-In order to decode the value, use the [HttpUtility.HtmlDecode method](http://msdn.microsoft.com/en-us/library/7c5fyk1k.aspx).
+**Razor**
 
-    [HttpPost]
-    public ActionResult Save(string editor)
-    {
-        string value = HttpUtility.HtmlDecode(editor);
+        @(Html.Kendo().Editor()
+              .Name("editor") // The name of the editor is mandatory. It specifies the "id" attribute of the widget.
+              .Value("<p>Initial value</p>") // Set the value of the editor
+        )
 
-        return View();
-    }
+### Server Value Processing
+
+The Editor value is posted as a string and mapped to a variable with the name of the widget. Note that the posted value is HTML-encoded by default, to circumvent the [ASP.NET request validation](http://msdn.microsoft.com/en-us/library/hh882339.aspx). To decode the value, use the [`HttpUtility.HtmlDecode` method](http://msdn.microsoft.com/en-us/library/7c5fyk1k.aspx).
+
+###### Example
+
+        [HttpPost]
+        public ActionResult Save(string editor)
+        {
+            string value = HttpUtility.HtmlDecode(editor);
+
+            return View();
+        }
 
 > **Important**  
-> You can suppress the editor encoding by specifying Encode(false) via the fluent API and adding the [AllowHtml attribute](http://msdn.microsoft.com/en-us/library/system.web.mvc.allowhtmlattribute(v=vs.118).aspx) to the model field that stores the HTML.
+>
+> You can suppress the Editor encoding by specifying `Encode(false)` via the fluent API and adding the [`AllowHtml` attribute](http://msdn.microsoft.com/en-us/library/system.web.mvc.allowhtmlattribute(v=vs.118).aspx) to the model field that stores the HTML.
 
-## Access an Existing Editor
+## Event Handling
 
-You can reference an existing Editor instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/javascript/ui/editor#methods) to control its behavior.
+You can subscribe to all Editor [events](/api/javascript/ui/editor#events).
 
+### By Handler Name
 
-### Access an Еxisting Editor Instance
+The examples below demonstrates how to subscribe to events by a handler name.
 
-    // Put this after your Kendo Editor for ASP.NET MVC declaration
-    <script>
-    $(function() {
-        // Notice that the Name() of the editor is used to get its client-side instance
-        var editor = $("#editor").data("kendoEditor");
-    });
-    </script>
+###### Example
 
+**WebForms**
 
-## Handle Editor Events
+        <%: Html.Kendo().Editor()
+                .Name("editor")
+                .Events(e => e
+                    .Change("editor_change")
+                )
+        %>
+        <script>
+            function editor_change() {
+                // Handle the change event
+            }
+        </script>
 
-You can subscribe to all [events](/api/javascript/ui/editor#events) exposed by Kendo UI Editor:
+**Razor**
 
-### WebForms - Subscribe by Handler Name
+        @(Html.Kendo().Editor()
+              .Name("editor")
+              .Events(e => e
+                    .Change("editor_change")
+              )
+        )
+        <script>
+            function editor_change() {
+                // Handle the change event
+            }
+        </script>
 
-    <%: Html.Kendo().Editor()
-            .Name("editor")
-            .Events(e => e
-                .Change("editor_change")
-            )
-    %>
-    <script>
-        function editor_change() {
-            // Handle the change event
-        }
-    </script>
+### By Template Delegate
 
+**Razor**
 
-### Razor - Subscribe by Handler Name
+        @(Html.Kendo().Editor()
+              .Name("editor")
+              .Events(e => e
+                  .Change(@<text>
+                    function() {
+                        // Handle the change event inline
+                    }
+                    </text>)
+              )
+        )
 
-    @(Html.Kendo().Editor()
-          .Name("editor")
-          .Events(e => e
-                .Change("editor_change")
-          )
-    )
-    <script>
-        function editor_change() {
-            // Handle the change event
-        }
-    </script>
+## Reference
 
+### Existing Instances
 
-### Razor - Subscribe by Template Delegate
+You can reference an existing Kendo UI Editor instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Editor API](/api/javascript/ui/editor#methods) to control its behavior.
 
-    @(Html.Kendo().Editor()
-          .Name("editor")
-          .Events(e => e
-              .Change(@<text>
-                function() {
-                    // Handle the change event inline
-                }
-                </text>)
-          )
-    )
+###### Example
 
+        // Put this after your Kendo Editor for ASP.NET MVC declaration
+        <script>
+        $(function() {
+            // Notice that the Name() of the editor is used to get its client-side instance
+            var editor = $("#editor").data("kendoEditor");
+        });
+        </script>
 
-## Troubleshooting
+## See Also
 
-### Editor Shows HTML Tags after Validation
+Other articles on Telerik UI for ASP.NET MVC and on the Editor:
 
-After server-side validation the Editor displays the posted encoded value from the ModelState. The Razor view engine will encode it once again and as a result,
-HTML tags will appear inside the widget content area. More information about this behavior related to ASP.NET MVC is available at
-[ASP.NET MVC's Html Helpers Render the Wrong Value](http://blogs.msdn.com/b/simonince/archive/2010/05/05/asp-net-mvc-s-html-helpers-render-the-wrong-value.aspx).
-
-There are two alternative options to tackle this scenario:
-
-* Clear the ModelState in the controller's action method after the POST
-* Set `Encode(false)` for the Editor and set an `[AllowHtml]` attribute to the model property, so that the Editor's value is submitted non-encoded.
-
-### More Troubleshooting
-
-For additional tips, please check the [Troubleshooting section of the vanilla HTML/Javascript Kendo UI Editor]({% slug troubleshooting_editor_widget %}).
+* [How to Add maxlength Editor Validations in ASP.NET MVC Apps]({% slug howto_addmaxlengthvalidation_editoraspnetmvc %})
+* [How to Store Images in Databases when Working with the Editor HtmlHelper]({% slug howto_storeimagesindatabases_editoraspnetmvc %})
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Overview of the Kendo UI Editor Widget]({% slug overview_kendoui_editor_widget %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
