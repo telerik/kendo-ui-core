@@ -1,20 +1,22 @@
 ---
-title: Create Dynamic Series
-page_title: Create Dynamic Series
-description: How to create dynamic chart series bound to a view model.
+title: Create View Model Bound Dynamic Series
+page_title: Create View Model Bound Dynamic Series | Kendo UI Chart HtmlHelper
+description: "Create dynamic Chart series bound to a view model in ASP.NET MVC applications."
+slug: howto_cerateviewmodelboundseries_chartaspnetmvc
 ---
 
-# Create Dynamic Series bound to a View Model
+# Create View Model Bound Dynamic Series
 
-It is not always possible to know the series and model structure in advance.
+It is not always possible to know the series and model structure in advance. In such cases, build the series list dynamically and typically bind them to collections defined on the view model.
 
-In such case you can choose to build the series list dynamically,
-typically binding them to collections defined on the view model.
+> **Important**
+>
+> If you have a static model you want to split in multiple series based on a field value, refer to the demo on [binding to grouped data](http://demos.telerik.com/aspnet-mvc/bar-charts/grouped-data).
 
-> See [Binding to Grouped Data](http://demos.telerik.com/aspnet-mvc/bar-charts/grouped-data) if you have a static model that you want to split in
-multiple series based on a field value.
+A simple scenario might bind each series to an array of primitive values.
 
-A simple scenario might bind each series to an array of primitive values:
+###### Example
+
 ```
 @(Html.Kendo().Chart()
       .Name("Chart")
@@ -29,7 +31,9 @@ A simple scenario might bind each series to an array of primitive values:
   )
 ```
 
-You can also bind the series to a collection of data items, specifying field bindings:
+You can also bind the series to a collection of data items, specifying field bindings.
+
+###### Example
 
 ```
 @(Html.Kendo().Chart()
@@ -45,5 +49,11 @@ You can also bind the series to a collection of data items, specifying field bin
   )
 ```
 
-See the full [Dynamic Series sample project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/chart/dynamic-series) on GitHub.
+To see the full examples, refer to the GitHub repository of the [sample project on dynamic series](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/chart/dynamic-series).
 
+## See Also
+
+Other articles and how-to examples on the Kendo UI Chart HtmlHelper:
+
+* [Chart HtmlHelper Overview]({% slug overview_dropdownlisthelper_aspnetmvc %})
+* [How to Bind to SignalR Hubs in ASP.NET MVC Apps]({% slug howto_bindtosignalr_chartaspnetmvc %})
