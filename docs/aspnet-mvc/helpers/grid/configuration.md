@@ -525,6 +525,8 @@ In Razor the template is a [templated razor delegate](http://haacked.com/archive
 
 Sets the text displayed in the header of the column. By default the property name is used.
 
+The `Title` should not include non-encoded HTML content. Use a `HeaderTemplate` instead.
+
 ###### Example - set the column title
 
     @(Html.Kendo().Grid<Product>()
