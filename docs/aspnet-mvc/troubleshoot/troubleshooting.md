@@ -422,15 +422,15 @@ Choose either of the options to overcome this behavior:
         return Json(new string[] {});
     }
 
-## DatePicker HtmlHelper
+## Date Picker HtmlHelpers
 
 ### Display the DateTimeOffset Value in a Widget
 
-The DatePicker widget supports only the `DateTime` structure.
+The DatePicker and DateTimePicker widgets support only the `DateTime` structure.
 
 **Solution**
 
-Convert [`DateTimeOffset`](http://msdn.microsoft.com/en-us/library/system.datetimeoffset.aspx) into a DatePicker to show the date and time correctly.
+Convert [`DateTimeOffset`](http://msdn.microsoft.com/en-us/library/system.datetimeoffset.aspx) into a DatePicker or DateTimePicker to show the date and time correctly.
 
 ### Client Validation Fails with Invalid Date
 
