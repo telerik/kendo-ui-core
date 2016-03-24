@@ -362,3 +362,256 @@
 {
     cursor: pointer;
 }
+
+/* Nova theme features */
+.km-material {
+    .km-list {
+        .km-label-above {
+            .k-dropdown-wrap {
+                display: block;
+                border-radius: 0;
+                background: transparent;
+                .box-shadow(none);
+                transform: translateY(0);
+                -webkit-transform: translateY(0);
+
+                .k-input {
+                    text-indent: 0;
+                    padding: .2em 0;
+                }
+            }
+        }
+    }
+}
+
+.km-material .km-label-above {
+    width: 100%;
+    font-size: 0.87em;
+    display: block;
+    padding: .75em 0 1.5em;
+    margin-top: -1.3em;
+    margin-bottom: -1.5em;
+}
+
+.km-material .km-label-above textarea { 
+    top: 50%;
+}
+
+.km-material .km-label-above,
+.km-material label.km-inline-field {
+    font-size: .72em;
+    line-height: 1.2em;
+    padding-top: .92em;
+    padding-bottom: 3.3em;
+}
+
+.km-material {
+    .km-list {
+        .km-label-above {
+            input[type=text]:not(.k-input),
+            input[type=password],
+            input[type=search],
+            input[type=number],
+            input[type=tel],
+            input[type=url],
+            input[type=email], 
+            input[type=file], 
+            input[type=month],
+            input[type=color],
+            input[type=week],
+            input[type=date],
+            input[type=time],
+            input[type=datetime],
+            input[type=datetime-local],
+            select:not([multiple]),
+            .k-dropdown,
+            textarea {
+                width: 100%;       
+                left: .89em;
+                font-size: 1.2rem;
+                margin-top: 0;
+                padding: 0;
+            }
+        }
+
+        .km-inline-field {
+            input[type=text]:not(.k-input),
+            input[type=password],
+            input[type=search],
+            input[type=number],
+            input[type=tel],
+            input[type=url],
+            input[type=email],
+            input[type=file],
+            input[type=month],
+            input[type=color],
+            input[type=week],
+            input[type=date],
+            input[type=time],
+            input[type=datetime],
+            input[type=datetime-local],
+            select:not([multiple]),
+            .k-dropdown,
+            textarea {
+                position: absolute;
+                width: 100%;
+                left: 0;
+                padding-left: 0;
+                padding-left: 1em; 
+            }
+
+            &:first-of-type input[type=text]:not(.k-input),
+            &:first-of-type input[type=password],
+            &:first-of-type input[type=search],
+            &:first-of-type input[type=number],
+            &:first-of-type input[type=tel],
+            &:first-of-type input[type=url],
+            &:first-of-type input[type=email],
+            &:first-of-type input[type=file],
+            &:first-of-type input[type=month],
+            &:first-of-type input[type=color],
+            &:first-of-type input[type=week],
+            &:first-of-type input[type=date],
+            &:first-of-type input[type=time],
+            &:first-of-type input[type=datetime],
+            &:first-of-type input[type=datetime-local],
+            &:first-of-type select:not([multiple]),
+            &:first-of-type .k-dropdown,
+            &:first-of-type textarea {
+                margin-left: 0;
+                padding-left: 0;
+            }
+
+        }
+
+    }
+}
+
+.km-material .km-inline-field {
+    display: inline-block;
+    position: relative;
+    width: calc((100% - 3.22em)/2);
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.km-material .km-list fieldset .km-inline-field:first-of-type {
+    padding-left: 0;
+}
+
+.km-material .km-inline-field.km-label-above {
+    margin-bottom: 0;
+}
+
+.km-material .km-legend-button {
+    display: block;
+    padding: 1.17em 1.61em .39em;
+    margin: -1.17em -1.61em -.39em;
+}
+
+.km-material {
+    .km-list {
+        fieldset {
+            border: none;
+            padding: 0 1.61em;
+            margin: -1.18em -1.61em;
+
+            > input[type=password],
+            > input[type=search],
+            > input[type=number],
+            > input[type=tel],
+            > input[type=url],
+            > input[type=email],
+            > input[type=month],
+            > input[type=color],
+            > input[type=week],
+            > input[type=date],
+            > input[type=time],
+            > input[type=datetime],
+            > input[type=datetime-local],
+            > input[type=text]:not(.k-input),
+            > select:not([multiple]),
+            > .k-dropdown-wrap {
+                width: 100%;
+                position: relative;
+                padding: 1.23em 0;
+                margin-top: 0;
+                right: auto;
+            }
+
+            legend {
+                margin: 0 -1.61em;
+                font-weight: normal;
+                border-bottom-width: 1px;
+                border-bottom-style: solid;
+                padding: 1.28em 1.61em .55em;
+                width: 100%;
+                box-sizing: content-box;
+            }
+
+            .km-inline-field {
+                margin-top: 0;
+                margin-left: 0;
+                padding-left: 1.61em;
+                border-right-width: 1px;
+                border-right-style: solid;
+            }
+        }
+    }
+}
+
+.km-material {
+    .km-list {
+        .km-full-width-slider {
+            position: relative;
+            margin-top: 0;
+            padding: 1.55em 0;
+            width: auto;
+            display: block;
+
+        }
+    }    
+}
+
+/* Standalone Checkboxes and RadioButtons */
+.km-material .km-checkbox-label,
+.km-material .km-radio-label {
+    font-size: 1em;
+    line-height: 1.2em;
+    margin-left: .89em;
+}
+
+.km-material .km-checkbox-label:before,
+.km-material .km-checkbox-label:after {
+    font-size: 1.2em;
+    right: 1em;
+    width: 1.3rem;
+    height: 1.3rem;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 2px;
+    text-align: center;
+}
+
+//Radio buttons
+.km-material .km-radio-label {
+    line-height: 1.5em;
+    margin-left: .89em;
+}
+
+.km-material .km-radio-label:before {    
+    width: 1.3rem;
+    height: 1.3rem;
+    border-width: 2px;
+    border-style: solid;
+    right: 1em;
+    left: auto;
+}
+
+.km-material input.km-radio:checked + .km-radio-label:after {
+    width: .9rem;
+    height: .9rem;
+    top: 50%;
+    right: 1.33em;
+    left: auto;
+}

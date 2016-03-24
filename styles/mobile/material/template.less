@@ -746,3 +746,169 @@
     -webkit-transition-property: -webkit-box-shadow, background-color;
     transition-property: box-shadow, background-color;
 }
+
+/* Nova theme features */
+.km-material {
+    label.km-required:after {
+        color: @material-second-active-background;
+    }
+
+    .km-list {
+        fieldset {
+            legend,
+            .km-inline-field {
+                border-color: @material-border-color;
+            }
+        }
+
+        .km-label-above {
+            input[type=text]:not(.k-input),
+            input[type=password],
+            input[type=search],
+            input[type=number],
+            input[type=tel],
+            input[type=url],
+            input[type=email], 
+            input[type=file], 
+            input[type=month],
+            input[type=color],
+            input[type=week],
+            input[type=date],
+            input[type=time],
+            input[type=datetime],
+            input[type=datetime-local],
+            select:not([multiple]),
+            .k-dropdown,
+            textarea {
+                color: @material-main-color;
+                border-color: @material-input-text-color;
+            }
+
+            input[type=text]:not(.k-input):focus,
+            input[type=password]:focus,
+            input[type=search]:focus,
+            input[type=number]:focus,
+            input[type=tel]:focus,
+            input[type=url]:focus,
+            input[type=email]:focus, 
+            input[type=file]:focus, 
+            input[type=month]:focus,
+            input[type=color]:focus,
+            input[type=week]:focus,
+            input[type=date]:focus,
+            input[type=time]:focus,
+            input[type=datetime]:focus,
+            input[type=datetime-local]:focus,
+            select:not([multiple]):focus,
+            .k-dropdown:focus,
+            textarea:focus {
+                border-color: @material-primary-color;
+            }
+        }    
+    }
+
+    .km-label-above {
+        color: lighten(@material-dark-color, 44%);
+    }
+
+    .km-icon-label {
+        color: lighten(@material-dark-color, 25%);
+    }
+
+    .km-checkbox-label:before,
+    .km-checkbox-label:after {
+        background: @material-primary-inverse-color;
+        border-color: @material-icon-color;
+    }
+
+    .km-checkbox:checked + .km-checkbox-label:after {
+        color:  @material-background;
+        background: @material-primary-color;
+        border-color: @material-primary-color;
+    }
+
+    .km-radio-label:before {
+        border-color: @material-icon-color;
+    }
+
+    .km-radio-label:after {
+        background-color: @material-primary-color;
+    }
+
+    .km-radio:checked + .km-radio-label:before {
+        border-color: @material-primary-color;
+    }
+}
+
+.km-material-dark {
+    .km-list {
+        .km-label-above {
+            input[type=text]:not(.k-input),
+            input[type=password],
+            input[type=search],
+            input[type=number],
+            input[type=tel],
+            input[type=url],
+            input[type=email], 
+            input[type=file], 
+            input[type=month],
+            input[type=color],
+            input[type=week],
+            input[type=date],
+            input[type=time],
+            input[type=datetime],
+            input[type=datetime-local],
+            select:not([multiple]),
+            .k-dropdown,
+            textarea {
+                color: @material-dark-main-color;
+                border-color: @material-input-text-color;
+            }
+
+            input[type=text]:not(.k-input):focus,
+            input[type=password]:focus,
+            input[type=search]:focus,
+            input[type=number]:focus,
+            input[type=tel]:focus,
+            input[type=url]:focus,
+            input[type=email]:focus, 
+            input[type=file]:focus, 
+            input[type=month]:focus,
+            input[type=color]:focus,
+            input[type=week]:focus,
+            input[type=date]:focus,
+            input[type=time]:focus,
+            input[type=datetime]:focus,
+            input[type=datetime-local]:focus,
+            select:not([multiple]):focus,
+            .k-dropdown:focus,
+            textarea:focus {
+                border-color: @material-accent-color;
+            }
+        }    
+    }
+
+    .km-checkbox-label:before,
+    .km-checkbox-label:after {
+        border-color: @material-dark-icon-color;
+        background: @material-dark-inverse-color;
+    }
+
+    .km-checkbox:checked + .km-checkbox-label:after {
+        color: @material-dark-inverse-color;
+        background: @material-accent-color;
+        border-color: @material-accent-color;
+    }
+
+    .km-radio-label:before {
+        border-color: @material-dark-icon-color;
+    }
+
+    .km-radio-label:after {
+        background-color: @material-accent-color;
+    }
+
+    .km-radio:checked + .km-radio-label:before {
+        border-color: @material-accent-color;
+    }
+}
