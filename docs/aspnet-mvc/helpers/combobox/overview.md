@@ -336,7 +336,7 @@ For more information, refer to the [demo on grouping](http://demos.telerik.com/a
 
 ## Event Handling
 
-You can subscribe to all AutoComplete [events](/api/javascript/ui/combobox#events).
+You can subscribe to all ComboBox [events](/api/javascript/ui/combobox#events).
 
 ### By Handler Name
 

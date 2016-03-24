@@ -1,27 +1,32 @@
 ---
 title: Overview
-page_title: DropDownList HtmlHelper extension for Kendo UI DropDownList | Kendo UI documentation
-description: How to bind a Kendo UI DropDownList for ASP.NET MVC, configure a server-side wrapper for Kendo UI DropDownlist Widget.
+page_title: Overview | Kendo UI DropDownList HtmlHelper
+description: "Get started with the server-side wrapper for the Kendo UI DropDownList widget for ASP.NET MVC."
+slug: overview_dropdownlisthelper_aspnetmvc
+position: 1
 ---
 
-# DropDownList
+# DropDownList HtmlHelper Overview
 
-The DropDownList HtmlHelper extension is a server-side wrapper for the [Kendo UI DropDownList](/api/javascript/ui/dropdownlist) widget.
+The DropDownList HtmlHelper extension is a server-side wrapper for the [Kendo UI DropDownList](https://demos.telerik.com/kendo-ui/dropdownlist/index) widget.
 
 ## Getting Started
 
-There are two ways to bind a Kendo DropDownList for ASP.NET MVC:
+### The Basics
 
-*   **server** - the data will be serialized to the client. No Ajax requests will be made.
-*   **ajax** - the dropdownlist will make ajax request to get the data.
+There are two ways to bind a Kendo UI DropDownList for ASP.NET MVC:
 
-### Configure the DropDownList for Server Binding
+* `server`&mdash;The data is serialized to the client. No Ajax requests are made.
+* `ajax`&mdash;The DropDownList makes Ajax requests to get the data.
 
-Here is how to configure the Kendo DropDownList  for server binding to the Northwind Products table using Linq to SQL:
+### Server Binding
 
-1.  Make sure you have followed all the steps from the [Introduction](/aspnet-mvc/introduction) help topic.
+Below are listed the steps for you to follow when configuring the Kendo UI DropDownList for server binding to the Northwind **Products** table using Linq to SQL.
 
-2.  Create a new action method and pass the Products table as the model:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+**Step 2** Create a new action method and pass the **Products** table as the model.
+
+###### Example
 
         public ActionResult Index()
         {
@@ -29,47 +34,60 @@ Here is how to configure the Kendo DropDownList  for server binding to the North
 
             return View(northwind.Products);
         }
-3.  Make your view strongly typed:
-    - WebForms
 
-            <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
-               Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Product>>" %>
-    - Razor
+**Step 3** Make your view strongly typed.
 
-            @model IEnumerable<MvcApplication1.Models.Product>
-4.  Add a server bound dropdownlist:
-    - WebForms
+###### Example
 
-            <%: Html.Kendo().DropDownList()
-                .Name("productDropDownList") //The name of the dropdownlist is mandatory. It specifies the "id" attribute of the widget.
-                .DataTextField("ProductName") //Specifies which property of the Product to be used by the dropdownlist as a text.
-                .DataValueField("ProductID") //Specifies which property of the Product to be used by the dropdownlist as a value.
-                .BindTo(Model)   //Pass the list of Products to the dropdownlist.
-                .SelectedIndex(10) //Select an item with index 10\. Note that the indexes are zero based.
-            %>
-    - Razor
+**WebForms**
 
-            @(Html.Kendo().DropDownList()
-              .Name("productDropDownList") //The name of the dropdownlist is mandatory. It specifies the "id" attribute of the widget.
-              .DataTextField("ProductName") //Specifies which property of the Product to be used by the dropdownlist as a text.
-              .DataValueField("ProductID") //Specifies which property of the Product to be used by the dropdownlist as a value.
-              .BindTo(Model)   //Pass the list of Products to the dropdownlist.
-              .SelectedIndex(10) //Select an item with index 10\. Note that the indexes are zero based.
-            )
+        <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+           Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Product>>" %>
 
-### Configure the DropDownList for Ajax Binding
+**Razor**
 
-Here is how to configure the Kendo DropDownList for ajax binding to the Northwind Products table using Linq to SQL:
+        @model IEnumerable<MvcApplication1.Models.Product>
 
-1.  Make sure you have followed all the steps from the [Introduction](/aspnet-mvc/introduction) help topic.
+**Step 4** Add a server bound dropdownlist.
 
-2.  Create an action method which renders the view:
+###### Example
+
+**WebForms**
+
+        <%: Html.Kendo().DropDownList()
+            .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
+            .DataTextField("ProductName") //Specifies which property of the Product to be used by the DropDownList as a text.
+            .DataValueField("ProductID") //Specifies which property of the Product to be used by the DropDownList as a value.
+            .BindTo(Model)   //Pass the list of Products to the DropDownList.
+            .SelectedIndex(10) //Select an item with index 10. Note that the indexes are zero-based.
+        %>
+
+**Razor**
+
+        @(Html.Kendo().DropDownList()
+          .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
+          .DataTextField("ProductName") //Specifies which property of the Product to be used by the DropDownList as a text.
+          .DataValueField("ProductID") //Specifies which property of the Product to be used by the DropDownList as a value.
+          .BindTo(Model)   //Pass the list of Products to the DropDownList.
+          .SelectedIndex(10) //Select an item with index 10. Note that the indexes are zero-based.
+        )
+
+### Ajax Binding
+
+Below are listed the steps for you to follow when configuring the Kendo UI DropDownList for Ajax binding to the Northwind **Products** table using Linq to SQL.
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+
+**Step 2** Create an action method which renders the view.
 
         public ActionResult Index()
         {
             return View();
         }
-3.  Create a new action method and pass the Products table as Json result:
+
+**Step 3** Create a new action method and pass the **Products** table as JSON result.
+
+###### Example
 
         public JsonResult GetProducts()
         {
@@ -77,56 +95,67 @@ Here is how to configure the Kendo DropDownList for ajax binding to the Northwin
 
             return Json(northwind.Products, JsonRequestBehavior.AllowGet);
         }
-4.  Add a ajax bound dropdownlist:
-    - WebForms
 
-            <%: Html.Kendo().DropDownList()
-                .Name("productDropDownList") //The name of the dropdownlist is mandatory. It specifies the "id" attribute of the widget.
-                .DataTextField("ProductName") //Specifies which property of the Product to be used by the dropdownlist as a text.
-                .DataValueField("ProductID") //Specifies which property of the Product to be used by the dropdownlist as a value.
-                .DataSource(source =>
-                {
-                       source.Read(read =>
-                       {
-                            read.Action("GetProducts", "Home"); //Set the Action and Controller name
-                       })
-                       .ServerFiltering(true); //If true the DataSource will not filter the data on the client.
-                })
-                .SelectedIndex(0) //Select first item.
-            %>
-    - Razor
+**Step4** Add an Ajax-bound DropDownList.
 
-            @(Html.Kendo().DropDownList()
-                .Name("productDropDownList") //The name of the dropdownlist is mandatory. It specifies the "id" attribute of the widget.
-                .DataTextField("ProductName") //Specifies which property of the Product to be used by the dropdownlist as a text.
-                .DataValueField("ProductID") //Specifies which property of the Product to be used by the dropdownlist as a value.
-                .DataSource(source =>
-                {
-                       source.Read(read =>
-                       {
-                            read.Action("GetProducts", "Home"); //Set the Action and Controller name
-                       })
-                       .ServerFiltering(true); //If true the DataSource will not filter the data on the client.
-                })
-                .SelectedIndex(0) //Select first item.
-            )
+###### Example
+
+**WebForms**
+
+        <%: Html.Kendo().DropDownList()
+            .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
+            .DataTextField("ProductName") //Specifies which property of the Product to be used by the DropDownList as a text.
+            .DataValueField("ProductID") //Specifies which property of the Product to be used by the DropDownList as a value.
+            .DataSource(source =>
+            {
+                   source.Read(read =>
+                   {
+                        read.Action("GetProducts", "Home"); //Set the Action and Controller names.
+                   })
+                   .ServerFiltering(true); //If true the DataSource will not filter the data on the client.
+            })
+            .SelectedIndex(0) //Select first item.
+        %>
+
+**Razor**
+
+        @(Html.Kendo().DropDownList()
+            .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
+            .DataTextField("ProductName") //Specifies which property of the Product to be used by the DropDownList as a text.
+            .DataValueField("ProductID") //Specifies which property of the Product to be used by the DropDownList as a value.
+            .DataSource(source =>
+            {
+                   source.Read(read =>
+                   {
+                        read.Action("GetProducts", "Home"); //Set the Action and Controller names.
+                   })
+                   .ServerFiltering(true); //If true the DataSource will not filter the data on the client.
+            })
+            .SelectedIndex(0) //Select the first item.
+        )
 
 > **Important**
-> The `ToDataSourceResult()` extension method will modify the structure of the result and the widget will not be able to bind to it. Please return simple array of data in this case.
+>
+> The `ToDataSourceResult()` extension method modifies the structure of the result and the widget is not able to bind to it. In this case, return a simple array of data.
 
-### Configure the DropDownList to Work with the `ToDataSourceResult` Instance
+## ToDataSourceResult Binding
 
-Here is how to configure the dropdownlist to use a custom datasource and thus to bind to a ToDataSourceResult instance.
+Below are listed the steps for you to follow when configuring the Kendo UI DropDownList to use a custom DataSource and thus bind to a `ToDataSourceResult` instance.
 
-1.  Make sure you have followed all the steps from the [Introduction](/aspnet-mvc/introduction) help topic.
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-2.  Create an action method which renders the view:
+**Step 2** Create an action method which renders the view.
+
+###### Example
 
         public ActionResult Index()
         {
             return View();
         }
-3.  Create a new action method and pass the Products table as Json result:
+
+**Step 3** Create a new action method and pass the **Products** table as JSON result.
+
+###### Example
 
         public JsonResult GetProducts([DataSourceRequest] DataSourceRequest request)
         {
@@ -134,62 +163,69 @@ Here is how to configure the dropdownlist to use a custom datasource and thus to
 
             return Json(northwind.Products.ToDataSourceResult(request));
         }
-4.  Add a ajax bound dropdownlist:
-    - WebForms
 
-            <%: Html.Kendo().DropDownList()
-                .Name("productDropDownList") //The name of the dropdownlist is mandatory. It specifies the "id" attribute of the widget.
-                .DataTextField("ProductName") //Specifies which property of the Product to be used by the dropdownlist as a text.
-                .DataValueField("ProductID") //Specifies which property of the Product to be used by the dropdownlist as a value.
-                .DataSource(source =>
-                {
-                    source.Custom()
-                          .ServerFiltering(true)
-                          .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances
-                          .Transport(transport =>
-                          {
-                              transport.Read("GetProducts", "Home");
-                          })
-                          .Schema(schema =>
-                          {
-                              schema.Data("Data") //define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
-                                    .Total("Total"); //define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
-                          });
-                })
-            %>
-    - Razor
+**Step 4** Add an Ajax-bound DropDownList.
 
-            @(Html.Kendo().DropDownList()
-                .Name("productDropDownList") //The name of the dropdownlist is mandatory. It specifies the "id" attribute of the widget.
-                .DataTextField("ProductName") //Specifies which property of the Product to be used by the dropdownlist as a text.
-                .DataValueField("ProductID") //Specifies which property of the Product to be used by the dropdownlist as a value.
-                .DataSource(source =>
-                {
-                    source.Custom()
-                          .ServerFiltering(true)
-                          .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances
-                          .Transport(transport =>
-                          {
-                              transport.Read("GetProducts", "Home");
-                          })
-                          .Schema(schema =>
-                          {
-                              schema.Data("Data") //define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
-                                    .Total("Total"); //define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
-                          });
-                })
-            )
+###### Example
 
-### Send Parameters to the Server
-
-Here is how to configure the Kendo DropDownList to send parameters to the server:
-
-- WebForms
+**WebForms**
 
         <%: Html.Kendo().DropDownList()
-                .Name("productDropDownList") //The name of the dropdownlist is mandatory. It specifies the "id" attribute of the widget.
-                .DataTextField("ProductName") //Specifies which property of the Product to be used by the dropdownlist as a text.
-                .DataValueField("ProductID") //Specifies which property of the Product to be used by the dropdownlist as a value.
+            .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
+            .DataTextField("ProductName") //Specifies which property of the Product to be used by the DropDownList as a text.
+            .DataValueField("ProductID") //Specifies which property of the Product to be used by the DropDownList as a value.
+            .DataSource(source =>
+            {
+                source.Custom()
+                      .ServerFiltering(true)
+                      .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
+                      .Transport(transport =>
+                      {
+                          transport.Read("GetProducts", "Home");
+                      })
+                      .Schema(schema =>
+                      {
+                        schema.Data("Data") //define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
+                                .Total("Total"); //define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
+                      });
+            })
+        %>
+
+**Razor**
+
+        @(Html.Kendo().DropDownList()
+            .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
+            .DataTextField("ProductName") //Specifies which property of the Product to be used by the DropDownList as a text.
+            .DataValueField("ProductID") //Specifies which property of the Product to be used by the DropDownList as a value.
+            .DataSource(source =>
+            {
+                source.Custom()
+                      .ServerFiltering(true)
+                      .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
+                      .Transport(transport =>
+                      {
+                          transport.Read("GetProducts", "Home");
+                      })
+                      .Schema(schema =>
+                      {
+                          schema.Data("Data") //define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
+                                .Total("Total"); //define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
+                      });
+            })
+        )
+
+### Parameter Sending to Server
+
+Below are listed the steps for you to follow when configuring the Kendo UI DropDownList to send parameters to the server.
+
+###### Example
+
+**WebForms**
+
+        <%: Html.Kendo().DropDownList()
+                .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
+                .DataTextField("ProductName") //Specifies which property of the Product to be used by the DropDownList as a text.
+                .DataValueField("ProductID") //Specifies which property of the Product to be used by the DropDownList as a value.
                 .Filter(FilterType.Contains)
                 .DataSource(source =>
                 {
@@ -208,18 +244,18 @@ Here is how to configure the Kendo DropDownList to send parameters to the server
             }
         </script>
 
-- Razor
+**Razor**
 
         @(Html.Kendo().DropDownList()
-              .Name("productDropDownList") //The name of the dropdownlist is mandatory. It specifies the "id" attribute of the widget.
-              .DataTextField("ProductName") //Specifies which property of the Product to be used by the dropdownlist as a text.
-              .DataValueField("ProductID") //Specifies which property of the Product to be used by the dropdownlist as a value.
+              .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
+              .DataTextField("ProductName") //Specifies which property of the Product to be used by the DropDownList as a text.
+              .DataValueField("ProductID") //Specifies which property of the Product to be used by the DropDownList as a value.
               .Filter(FilterType.Contains)
               .DataSource(source =>
               {
                  source.Read(read =>
                  {
-                      read.Action("GetProducts", "Home") //Set the Action and Controller name
+                      read.Action("GetProducts", "Home") //Set the Action and Controller names.
                           .Data("onAdditionalData");
                  });
               })
@@ -233,7 +269,9 @@ Here is how to configure the Kendo DropDownList to send parameters to the server
             }
         </script>
 
-Here is how the **GetProducts** method looks like:
+The example below demonstrates how the `GetProducts` method is used.
+
+###### Example
 
         public JsonResult GetProducts(string text)
         {
@@ -258,114 +296,136 @@ Here is how the **GetProducts** method looks like:
         }
 
 > **Important**
-> The DropDownList has default event handler for the DataSource's Data callback. If you do not define an event handler, the default one will be used.
+>
+> The DropDownList has a default event handler for the Data callback of the DataSource. It is used when no event handler is defined.
 
-*Default event handler for the DataSource's Data callback*
+The example below demonstrates the default event handler for the Data callback of the DataSource.
 
-    function requestData(selector) {
-        var dropdownlist = $(selector).data("kendoDropDownList"),
-            filters = dropdownlist.dataSource.filter(),
-            value = dropdownlist.filterInput.val();
+###### Example
 
-        if (!filter || !filter.filters.length) {
-            value = "";
+        function requestData(selector) {
+            var dropdownlist = $(selector).data("kendoDropDownList"),
+                filters = dropdownlist.dataSource.filter(),
+                value = dropdownlist.filterInput.val();
+
+            if (!filter || !filter.filters.length) {
+                value = "";
+            }
+
+            return { text: value };
         }
 
-        return { text: value };
-    }
-
-As you can see the dropdownlist sends the input's value only if the end-user starts to type in it.
+As seen from the example above, the DropDownList sends the input's value only if the end-user starts to type in it.
 
 ### Grouping
 
-The widget supports binding to a grouped data source. The only requirement is to define a datasource group expression in order to group the data.
-This can be done using a [Custom DataSource configuration](/aspnet-mvc/custom-datasource). Refer to our online demo for more details:
+The DropDownList supports binding to a grouped data source. Define a `datasource` group expression to group the data by using the [Custom DataSource configuration]({% slug customdatasource_aspnetmvc %}).
 
-- [Grouping demo](http://demos.telerik.com/aspnet-mvc/dropdownlist/grouping)
+For more information, refer to the [demo on grouping](http://demos.telerik.com/aspnet-mvc/autocomplete/grouping).
 
-> The data source will sort the grouped data either ascending or descending. If you would like to persist a specific group order, then you will need to use
-a [server grouping](/api/javascript/data/datasource#configuration-serverGrouping). Use the DataSource ServerGrouping method to define the `serverGrouping` option.
+> **Important**
+>
+> The data source sorts the grouped data either in ascending or descending order. If you want to persist a specific group order, use the [server grouping feature](/api/javascript/data/datasource#configuration-serverGrouping). Use the DataSource `ServerGrouping` method to define the `serverGrouping` option.
 
-## Access an Existing DropDownList
+## Event Handling
 
-You can reference an existing DropDownList instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/javascript/ui/dropdownlist#methods) to control its behavior.
+You can subscribe to all DropDownList [events](/api/javascript/ui/dropdownlist#events).
 
+### By Handler Name
 
-### Access an Existing DropDownList Instance
+The examples below demonstrates how to subscribe to events by a handler name.
 
-    //Put this after your Kendo DropDownList for ASP.NET MVC declaration
-    <script>
-    $(function() {
-    // Notice that the Name() of the dropdownlist is used to get its client-side instance
-    var dropdownlist = $("#productDropDownList").data("kendoDropDownList");
-    });
-    </script>
+###### Example
 
+**WebForms**
 
-## Handle DropDownList Events
+        <%: Html.Kendo().DropDownList()
+            .Name("dropdownlist")
+            .BindTo(new string[] { "Item1", "Item2", "Item3" })
+            .Events(e => e
+                .Select("dropdownlist_select")
+                .Change("dropdownlist_change")
+            )
+        %>
+        <script>
+        function dropdownlist_select() {
+            //Handle the select event
+        }
 
-You can subscribe to all [events](/api/javascript/ui/dropdownlist#events) exposed by Kendo UI DropDownList:
+        function dropdownlist_change() {
+            //Handle the change event
+        }
+        </script>
 
+**Razor**
 
-### WebForms - Subscribe by Handler Name
-
-    <%: Html.Kendo().DropDownList()
-        .Name("dropdownlist")
-        .BindTo(new string[] { "Item1", "Item2", "Item3" })
-        .Events(e => e
-            .Select("dropdownlist_select")
-            .Change("dropdownlist_change")
+        @(Html.Kendo().DropDownList()
+          .Name("dropdownlist")
+          .BindTo(new string[] { "Item1", "Item2", "Item3" })
+          .Events(e => e
+                .Select("dropdownlist_select")
+                .Change("dropdownlist_change")
+          )
         )
-    %>
-    <script>
-    function dropdownlist_select() {
-        //Handle the select event
-    }
+        <script>
+        function dropdownlist_select() {
+            //Handle the select event.
+        }
 
-    function dropdownlist_change() {
-        //Handle the change event
-    }
-    </script>
+        function dropdownlist_change() {
+            //Handle the change event.
+        }
+        </script>
 
+### By Template Delegate
 
-### Razor - Subscribe by Handler Name
+**Razor**
 
-    @(Html.Kendo().DropDownList()
-      .Name("dropdownlist")
-      .BindTo(new string[] { "Item1", "Item2", "Item3" })
-      .Events(e => e
-            .Select("dropdownlist_select")
-            .Change("dropdownlist_change")
-      )
-    )
-    <script>
-    function dropdownlist_select() {
-        //Handle the select event
-    }
+        @(Html.Kendo().DropDownList()
+          .Name("dropdownlist")
+          .BindTo(new string[] { "Item1", "Item2", "Item3" })
+          .Events(e => e
+              .Select(@<text>
+                function() {
+                    //Handle the select event inline.
+                }
+              </text>)
+              .Change(@<text>
+                function() {
+                    //Handle the change event inline.
+                }
+                </text>)
+          )
+        )
 
-    function dropdownlist_change() {
-        //Handle the change event
-    }
-    </script>
+## Reference
 
+### Existing Instances
 
-### Razor - Subscribe by Template Delegate
+You can reference an existing Kendo UI DropDownList instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [DropDownList API](/api/javascript/ui/dropdownlist#methods) to control its behavior.
 
-    @(Html.Kendo().DropDownList()
-      .Name("dropdownlist")
-      .BindTo(new string[] { "Item1", "Item2", "Item3" })
-      .Events(e => e
-          .Select(@<text>
-            function() {
-                //Handle the select event inline
-            }
-          </text>)
-          .Change(@<text>
-            function() {
-                //Handle the change event inline
-            }
-            </text>)
-      )
-    )
+###### Example
 
+        //Put this after your Kendo DropDownList for ASP.NET MVC declaration.
+        <script>
+        $(function() {
+        //Notice that the Name() of the DropDownList is used to get its client-side instance.
+        var dropdownlist = $("#productDropDownList").data("kendoDropDownList");
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the DropDownList:
+
+* [How to Cascade DropDownLists Using WebApi Service in ASP.NET MVC Apps]({% slug howto_cascadeddlusingwebapiservice_ddlaspnetmvc %})
+* [How to Cascade DropDownLists with Enabled Virtualization in ASP.NET MVC Apps]({% slug howto_cascadeddlenabledvirtualization_ddlaspnetmvc %})
+* [How to Use Custom DataSource to Bind to ToDataSourceResult Output in ASP.NET MVC Apps]({% slug howto_usecustomdatasource_bindtodatasourceoutput_ddlaspnetmvc %})
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Overview of the Kendo UI DropDownList Widget]({% slug overview_kendoui_dropdownlist_widget %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
