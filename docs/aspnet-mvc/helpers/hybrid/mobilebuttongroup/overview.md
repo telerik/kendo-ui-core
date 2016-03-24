@@ -2,6 +2,7 @@
 title: Overview
 page_title: How to use the Kendo UI MobileButtonGroup HtmlHelper extension, server-side ASP.NET MVC wrapper for Kendo UI Mobile ButtonGroup widget
 description: Learn how to initialize Kendo UI MobileButtonGroup for ASP.NET MVC, handle Kendo UI MobileButtonGroup Events, access an existing buttongroup with MobileButtonGroup HtmlHelper extension documentation.
+previous_url: /aspnet-mvc/helpers/mobilebuttongroup/overview
 ---
 
 # MobileButtonGroup

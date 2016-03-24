@@ -2,6 +2,7 @@
 title: Overview
 page_title: How to use the Kendo UI MobileNavBar HtmlHelper extension, server-side ASP.NET MVC wrapper for Kendo UI Mobile NavBar widget
 description: Learn how to initialize Kendo UI MobileNavBar for ASP.NET MVC, access an existing navbar with MobileNavBar HtmlHelper extension documentation.
+previous_url: /aspnet-mvc/helpers/mobilelanavbar/overview
 ---
 
 # MobileNavBar

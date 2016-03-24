@@ -2,6 +2,7 @@
 title: Overview
 page_title: How to use the Kendo UI MobileScrollView HtmlHelper extension, server-side ASP.NET MVC wrapper for Kendo UI Mobile ScrollView widget
 description: Learn how to initialize Kendo UI MobileScrollView for ASP.NET MVC, handle Kendo UI MobileScrollView Events, access an existing scrollview with MobileScrollView HtmlHelper extension documentation.
+previous_url: /aspnet-mvc/helpers/mobilescrollview/overview
 ---
 
 # MobileScrollView

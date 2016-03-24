@@ -2,6 +2,7 @@
 title: Overview
 page_title: How to use the Kendo UI MobileActionSheet HtmlHelper extension, server-side ASP.NET MVC wrapper for Kendo UI Mobile ActionSheet widget
 description: Learn how to initialize Kendo UI MobileActionSheet for ASP.NET MVC, handle Kendo UI MobileActionSheet Events, access an existing actionsheet with MobileActionSheet HtmlHelper extension documentation.
+previous_url: /aspnet-mvc/helpers/mobileactionsheet/overview
 ---
 
 # MobileActionSheet

@@ -2,6 +2,7 @@
 title: Overview
 page_title: How to use the Kendo UI MobilePopOver HtmlHelper extension, server-side ASP.NET MVC wrapper for Kendo UI Mobile PopOver widget
 description: Learn how to initialize Kendo UI MobilePopOver for ASP.NET MVC, handle Kendo UI MobilePopOver Events, access an existing popover with MobilePopOver HtmlHelper extension documentation.
+previous_url: /aspnet-mvc/helpers/mobilepopover/overview
 ---
 
 # MobilePopOver

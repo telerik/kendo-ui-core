@@ -2,6 +2,7 @@
 title: Overview
 page_title: How to use the Kendo UI MobileSplitView HtmlHelper extension, server-side ASP.NET MVC wrapper for Kendo UI Mobile SplitView widget
 description: Learn how to initialize Kendo UI MobileSplitView for ASP.NET MVC, handle Kendo UI MobileSplitView Events, access an existing splitview with MobileSplitView HtmlHelper extension documentation.
+previous_url: /aspnet-mvc/helpers/mobilesplitview/overview
 ---
 
 # MobileSplitView
