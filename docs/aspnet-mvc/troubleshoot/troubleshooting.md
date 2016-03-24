@@ -422,6 +422,24 @@ Choose either of the options to overcome this behavior:
         return Json(new string[] {});
     }
 
+## DatePicker HtmlHelper
+
+### Display the DateTimeOffset Value in a Widget
+
+The DatePicker widget supports only the `DateTime` structure.
+
+**Solution**
+
+Convert [`DateTimeOffset`](http://msdn.microsoft.com/en-us/library/system.datetimeoffset.aspx) into a DatePicker to show the date and time correctly.
+
+### Client Validation Fails with Invalid Date
+
+By default, the ASP.NET MVC project uses jQuery validate framework, which does not provide support for internationalized dates. This means that every string which [`Date.parse`](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Date/parse) is not able to define as a valid date, is reported as invalid.
+
+**Solution**
+
+As extending open source libraries is outside the Kendo UI scope, you need to resolve this issue manually. For more information, check [this link](http://www.dotnet-programming.com/post/2011/12/14/Globalization-Validation-and-DateNumber-Formats-in-AspNet-MVC.aspx), or use the [Kendo UI Validator](http://demos.telerik.com/kendo-ui/web/validator/index.html), which supports the validation of internationalized dates.
+
 ## See Also
 
 Other articles on troubleshooting:

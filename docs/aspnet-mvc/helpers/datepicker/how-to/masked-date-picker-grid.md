@@ -1,12 +1,15 @@
 ---
-title: Create a Masked DatePicker
-page_title: Create masking functionality for the Date Picker widget
-description: Create masking functionality for the Date Picker widget
+title: Create Masked DatePickers
+page_title: Create Masked DatePickers | Kendo UI Grid
+description: "Create a masking functionality for the Kendo UI DatePicker widget in ASP.NET MVC applications."
+slug: howto_create_masked_datepickers_datepickaspnetmvc
 ---
 
-# Create a Masked DatePicker
+# Create Masked DatePickers
 
-The following example demonstrates how to add a mask to the Kendo UI DatePicker via a custom Kendo UI widget.
+The example below demonstrates how to add a mask to the Kendo UI DatePicker through a custom Kendo UI widget.
+
+###### Example
 
 ```html
     <script>
@@ -56,7 +59,7 @@ The following example demonstrates how to add a mask to the Kendo UI DatePicker 
             var datepicker = this.element.data("kendoDatePicker");
 
             if (value === undefined) {
-              return datepicker.value(); 
+              return datepicker.value();
             }
 
             datepicker.value(value);
@@ -67,7 +70,7 @@ The following example demonstrates how to add a mask to the Kendo UI DatePicker 
 
       })(window.kendo.jQuery);
     </script>
-    
+
     <div id="example">
       <input id="maskedDatePicker" />
       <script>
@@ -77,3 +80,9 @@ The following example demonstrates how to add a mask to the Kendo UI DatePicker 
       </script>
     </div>
 ```
+
+## See Also
+
+Other articles on the Kendo UI DataPicker HtmlHelper:
+
+* [DatePicker HtmlHelper Overview]({% slug overview_datepickerhelper_aspnetmvc %})
