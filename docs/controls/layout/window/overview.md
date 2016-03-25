@@ -123,7 +123,7 @@ The example below demonstrates how to set custom actions in a Window.
 
 In lots of scenarios, it is preferable to center the Window rather than open it near the HTML element used to define its content. It is also common to open a Window as the result of a user action, rather than on the `load` event of the page. The [Window API](/api/javascript/ui/window) provides methods for handling these scenarios. Basically, the widget can be initialized as non-visible and opened when needed.
 
-The example below demonstrates how to center and open a Kendo UI Window on button click.
+The example below demonstrates how to center and open a Kendo UI Window on button click. Note that if content is loaded via Ajax, [centering should occur after request is complete](#configuration-Load).
 
 ###### Example
 
@@ -167,6 +167,8 @@ Kendo UI Window provides built-in support for asynchronously loading content fro
 > **Important**
 >
 > Loading full pages, i.e. pages with a DOCTYPE, `html`, `head`, and `body` tags, inside the Window with AJAX is incorrect and is going to cause all sorts of undesired side-effects, including a broken DOM tree, deleted widget instances, and Javascript errors.
+>
+> If the Window has no set dimensions, it is probably going to resize after the AJAX content is loaded. This naturally changes the position of the widget on the screen. If the Window should be centered, then either [`center`](/api/javascript/ui/window#methods-center) it in the [`refresh`](/api/javascript/ui/window#events-refresh) event handler, or set some explicit [dimensions](/api/javascript/ui/window#configuration-height).
 
 The example below demonstrates how to initialize the Window and configure its content loading.
 
@@ -180,8 +182,6 @@ The example below demonstrates how to initialize the Window and configure its co
             title: "Async Window Content"
         });
     });
-
-If the Window has no set dimensions, it is probably going to resize after the AJAX content is loaded. This naturally changes the position of the widget on the screen and it is no longer centered. If this is a requirement, then either [`center`](/api/javascript/ui/window#methods-center) the Window in its [`refresh`](/api/javascript/ui/window#events-refresh) event, or set some explicit dimensions.
 
 ### Use with an iframe
 
