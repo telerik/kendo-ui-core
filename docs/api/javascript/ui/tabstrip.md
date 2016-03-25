@@ -798,10 +798,9 @@ Inserts a newly-created tab after a specified tab.
 
 #### Parameters
 
-##### item `String|Element|jQuery`
+##### item `Array|Object|String|Element|jQuery`
 
-Target tab, specified as a JSON object. You can pass tab `text`, `content` or `contentUrl` here. Can handle an
-HTML string or array of such strings or JSON.
+Target tab(s), specified as a JSON object or array of objects. You can pass tab `text`, `content` or `contentUrl` here. Accepts also existing tab(s) specified as a string selector or jQuery object or DOM elements.
 
 ##### referenceTab `String|Element|jQuery`
 
@@ -854,10 +853,9 @@ Inserts a newly-created tab before a specified tab.
 
 #### Parameters
 
-##### item `String|Element|jQuery`
+##### item `Array|Object|String|Element|jQuery`
 
-Target tab, specified as a JSON object. You can pass tab `text`, `content` or `contentUrl` here. Can handle an
-HTML string or array of such strings or JSON.
+Target tab(s), specified as a JSON object or array of objects. You can pass tab `text`, `content` or `contentUrl` here. Accepts also existing tab(s) specified as a string selector or jQuery object or DOM elements.
 
 ##### referenceTab `String|Element|jQuery`
 
