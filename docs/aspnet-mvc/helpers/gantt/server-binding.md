@@ -1,16 +1,20 @@
 ---
 title: Server Binding
-page_title: Server binding in Telerik UI for ASP.NET MVC | Kendo UI Documentation
-description: Set the data source and render the view to bind Kendo UI Gantt for ASP.NET MVC with data by using server binding.
+page_title: Server Binding | Kendo UI Gantt HtmlHelper
+description: "Configure the Kendo UI Gamtt for ASP.NET MVC for server binding."
+slug: serverbinding_gantthelper_aspnetmvc
+position: 2
 ---
 
 # Server Binding
 
-By default the Kendo Gantt for ASP.NET MVC performs HTTP GET requests to load both its tasks and dependencies from the server.
+By default, the Kendo UI Gantt for ASP.NET MVC performs `HTTP GET` requests to load both its tasks and dependencies from the server.
 
-There is an option to render the view with the data for the tasks and dependences. The data models for the GanttTasks and GantDependencies should implement `IGanttTask` and `IGanttDependency` interfaces respectively.
+There is an option to render the view with the data for the tasks and dependences. The data models for the `GanttTasks` and `GantDependencies` should implement `IGanttTask` and `IGanttDependency` interfaces respectively.
 
-Below are the data model classes for the Tasks and Dependencies and the available options on how to bind the Kendo Gantt for ASP.NET MVC.
+## Set Data Model Classes
+
+Below are listed the data model classes for the Tasks and Dependencies and the available options on how to bind the Kendo UI Gantt for ASP.NET MVC.
 
 ### TaskViewModel
 
@@ -91,7 +95,7 @@ Below are the data model classes for the Tasks and Dependencies and the availabl
         }
     }
 
-## Bind to an Item from `ViewData`
+## Bind to Items from ViewData
 
 ### Action
 
@@ -194,7 +198,7 @@ Below are the data model classes for the Tasks and Dependencies and the availabl
         )
     )
 
-## Bind to an Item from `ViewBag`
+## Bind to Items from ViewBag
 
 ### Action
 
@@ -296,3 +300,16 @@ Below are the data model classes for the Tasks and Dependencies and the availabl
             })
         )
     )
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the Chart:
+
+* [Overview of the Kendo UI Gantt HtmlHelper]({% slug overview_gantthelper_aspnetmvc %})
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
