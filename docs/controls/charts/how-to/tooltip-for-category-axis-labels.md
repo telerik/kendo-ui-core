@@ -1,17 +1,17 @@
 ---
-title: Show tooltip for categoryAxis labels
-page_title: Show tooltip for categoryAxis labels | Kendo UI Charts
-description: "Learn how to show tooltip for categoryAxis labels."
-slug: howto_showtooltipforaxislabels
+title: Show Tooltip for categoryAxis Labels
+page_title: Show Tooltip for categoryAxis Labels | Kendo UI Charts
+description: "Learn how to show tooltips for the categoryAxis labels."
+slug: howto_showtooltipforaxislabels_charts
 ---
 
-# Show tooltip for categoryAxis labels
+# Show Tooltip for categoryAxis Labels
 
-The example below demonstrates how to display tooltip for categoryAxis labels via the [drawing API](http://docs.telerik.com/kendo-ui/framework/drawing/overview). The tooltip will show when hoverring a categoryAxis label. 
+The example below demonstrates how to display a tooltip for `categoryAxis` labels through the [drawing API]({% slug overview_kendoui_drawingapi %}). The tooltip is displayed when hovering a `categoryAxis` label.
 
 ###### Example
 ```html
-    
+
 	<div id="chart"></div>
     <div class="customTooltip">CustomTooltip</div>
     <script>
