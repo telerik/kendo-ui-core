@@ -6,7 +6,7 @@ slug: overview_colorpickerhelper_aspnetmvc
 position: 1
 ---
 
-# ColorPicker
+# ColorPicker HtmlHelper Overview
 
 The ColorPicker HtmlHelper extension is a server-side wrapper for the [Kendo UI ColorPicker](/api/javascript/ui/colorpicker) widget.
 

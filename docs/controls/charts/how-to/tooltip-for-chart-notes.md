@@ -1,17 +1,17 @@
 ---
-title: Show tooltip for Chart notes
-page_title: Show tooltip for Chart notes | Kendo UI Charts
-description: "Learn how to show tooltip for Chart notes."
-slug: howto_showtooltipfornotes
+title: Show Tooltip for Chart Notes
+page_title: Show Tooltip for Chart Notes | Kendo UI Charts
+description: "Learn how to show tooltips for Chart notes."
+slug: howto_showtooltipfornotes_charts
 ---
 
-# Show tooltip for chart notes
+# Show Tooltip for Chart Notes
 
-The example below demonstrates how to attach [Kendo UI Tootlip](http://docs.telerik.com/kendo-ui/api/javascript/ui/tooltip) to chart notes and display it when a [note is hovered](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#events-noteHover).
+The example below demonstrates how to attach a [Kendo UI Tootlip](/api/javascript/ui/tooltip) to Chart notes and display it when a [note is hovered](/api/javascript/dataviz/ui/chart#events-noteHover).
 
 ###### Example
 ```html
-    
+
 	<div class="chartWrapper" content="tooltipContent" >
       <div id="chart"></div>
     </div>
@@ -110,9 +110,9 @@ The example below demonstrates how to attach [Kendo UI Tootlip](http://docs.tele
         showOn: "click",
         content: tooltipContent
       }).data("kendoTooltip");
-      
+
       var noteValue = "";
-      
+
       function tooltipContent(){
         return noteValue;
       }
