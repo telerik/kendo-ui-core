@@ -244,6 +244,28 @@ Explicitly states whether a content iframe should be created. For more informati
     });
     </script>
 
+### height `Number | String`
+
+Specifies height of the window.
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoWindow({
+      height: 400
+    });
+    </script>
+
+#### Example - specify window height in percent
+
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoWindow({
+      height: "50%"
+    });
+    </script>
+
 ### maxHeight `Number` *(default: Infinity)*
 
 The maximum height (in pixels) that may be achieved by resizing the window.
@@ -434,33 +456,13 @@ Specifies width of the window.
     });
     </script>
 
-### height `Number | String`
-
-Specifies height of the window.
-
-#### Example
-
-    <div id="dialog"></div>
-    <script>
-    $("#dialog").kendoWindow({
-      height: 400
-    });
-    </script>
-
-#### Example - specify window height in percent
-
-    <div id="dialog"></div>
-    <script>
-    $("#dialog").kendoWindow({
-      height: "50%"
-    });
-    </script>
-
 ## Methods
 
 ### center
 
 Centers the window within the viewport.
+
+If the Window has no set dimensions and is centered before its content is loaded with Ajax, it is probably going to resize after the content is loaded. This naturally changes the position of the widget on the screen and it is no longer centered. If this is a requirement, then either center the Window in its [`refresh`](#events-refresh) event, or set some [explicit dimensions](#configuration-height).
 
 #### Returns
 
