@@ -65,7 +65,21 @@ The example below demonstrates how to use hyperlinks in the axes labels of Kendo
           },
           line: {
             visible: false
-          }
+          },
+		  labels: {
+            color: "#0487c4",
+            cursor: "pointer",
+            padding: {
+              top: 2,
+              bottom: 2,
+              left: 3,
+              right: 3
+            },
+            border: {
+              width: 1,
+              color: "#0487c4"
+            }
+          }	
         },
         axisLabelClick: function(e) {
           window.location = e.dataItem.url;
