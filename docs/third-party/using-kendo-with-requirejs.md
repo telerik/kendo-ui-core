@@ -13,7 +13,7 @@ position: 4
 > * As of 2016, the RequireJS project is mostly superseded by solutions like [Webpack](http://webpack.github.io/), [Browserify](http://browserify.org/) and [SystemJS](https://github.com/systemjs/systemjs), which provide much more extensible API.
 > * You may check the help articles on their integration too&mdash;[Webpack support]({% slug webpacksupport_integration_kendoui %}) and [SystemJS support]({% slug systemjs_integration_kendoui %}).
 > * Due to a bug, the examples below do not work with the official Kendo UI Q1 2016 release. They should work as expected with the versions 2016.1.118 and later.
-> * It is not possible to load packages produced by the [Download Builder](/intro/installation/what-you-need#employ-download-builder) using RequireJS.
+> * It is not possible to load packages produced by the [Download Builder]({% slug include_only_what_you_need_kendoui_installation %}#employ-download-builder) using RequireJS.
 
 The minified Kendo UI JavaScript files are [AMD modules](https://en.wikipedia.org/wiki/Asynchronous_module_definition) and work with compatible loaders such as [RequireJS](http://requirejs.org/). You can use this feature to load only the needed Kendo UI JavaScript files instead of `kendo.all.min.js`.
 

@@ -165,10 +165,8 @@ When the Window uses an `iframe` element, it does not resize automatically accor
 Kendo UI Window provides built-in support for asynchronously loading content from a URL. This URL is expected to return an HTML fragment that can be loaded in a Window content area.
 
 > **Important**
->
-> Loading full pages, i.e. pages with a DOCTYPE, `html`, `head`, and `body` tags, inside the Window with AJAX is incorrect and is going to cause all sorts of undesired side-effects, including a broken DOM tree, deleted widget instances, and Javascript errors.
->
-> If the Window has no set dimensions, it is probably going to resize after the AJAX content is loaded. This naturally changes the position of the widget on the screen. If the Window should be centered, then either [`center`](/api/javascript/ui/window#methods-center) it in the [`refresh`](/api/javascript/ui/window#events-refresh) event handler, or set some explicit [dimensions](/api/javascript/ui/window#configuration-height).
+> * Loading full pages, i.e. pages with a DOCTYPE, `html`, `head`, and `body` tags, inside the Window with AJAX is incorrect and is going to cause all sorts of undesired side-effects, including a broken DOM tree, deleted widget instances, and Javascript errors.
+> * If the Window has no set dimensions, it is probably going to resize after the AJAX content is loaded. This naturally changes the position of the widget on the screen. If the Window should be centered, then either [`center`](/api/javascript/ui/window#methods-center) it in the [`refresh`](/api/javascript/ui/window#events-refresh) event handler, or set some explicit [dimensions](/api/javascript/ui/window#configuration-height).
 
 The example below demonstrates how to initialize the Window and configure its content loading.
 

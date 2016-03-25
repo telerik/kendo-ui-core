@@ -1,41 +1,47 @@
 ---
 title: Tag Helpers
-page_title: Tag Helpers | Telerik UI for ASP.NET MVC 6
-description: "Learn the basics when working with Telerik Tag Helpers for ASP.NET MVC 6."
+page_title: Tag Helpers | Telerik UI for ASP.NET Core MVC
+description: "Learn the basics when working with Telerik Tag Helpers for ASP.NET Core MVC."
 previous_url: /aspnet-mvc/mvc-6/tag-helpers
 slug: taghelpers_aspnetmvc6_aspnetmvc
 position: 4
 ---
 
-# Overview of Kendo Tag Helpers
+# Tag Helpers
 
-Kendo Tag Helpers lets the users configure kendo widgets using the new Tag Helpers feature in MVC 6.
+The Kendo UI Tag Helpers let the user configure Kendo UI widgets by using the new Tag Helpers feature in ASP.NET Core MVC.
 
-## Adding Tag Helpers to a view
+## Getting Started
 
-To configure an ASP.NET MVC6 project that enables you to use Kendo Tag Helpers, you need to add the @addTagHelper directive to your cshtml file:
+### Add Tag Helpers
 
-            @addTagHelper "*, Kendo.Mvc"
-            
+To configure an ASP.NET Core MVC project that enables you to use the Kendo UI Tag Helpers, you need to add the @addTagHelper directive to your cshtml file:
+
+      @addTagHelper "*, Kendo.Mvc"
+
+<!--*-->
 You can also add the directive globally in the Views/_ViewImports.cshtml.
 
-## Configuration
+<!--_-->
+### Configure Tag Helpers
 
-Configuring the Tag Helpers is done through predefined strongly typed attributes, which also provide intellisense.
-Complex and composite properties are not supported, as well as nested configuration tags.
+Configuring the Tag Helpers is done through predefined strongly typed attributes, which also provide IntelliSense. Complex and composite properties are not supported, as well as nested configuration tags.
 
-###### Example: configuring NumericTextBox Tag Helper
+The example below demonstrates how to configure the `NumericTextBox` Tag Helper.
 
-        <kendo-numerictextbox name="currency" format="c" min="0"
-            enable="true" max="100" value="30">
-        </kendo-numerictextbox>
+###### Example
 
-## Events
+      <kendo-numerictextbox name="currency" format="c" min="0"
+          enable="true" max="100" value="30">
+      </kendo-numerictextbox>
 
-All widget events are supported in the Tag Helpers. The event can only be set as a string literal, pointing to a javascript function handler.
-The event is set as an attribute, preceded by the 'on-' prefix.
+### Handle Events
 
- ###### Example: setting the change event of a NumericTextBox
+All widget events are supported in the Tag Helpers. The event can only be set as a string literal, pointing to a JavaScript function handler. The event is set as an attribute, preceded by the `on-` prefix.
+
+The example below demonstrates how to set the `change` event of a NumericTextBox.
+
+###### Example
 
         <kendo-numerictextbox name="currency" on-change="changeEvent">
         </kendo-numerictextbox>
@@ -44,13 +50,13 @@ The event is set as an attribute, preceded by the 'on-' prefix.
 
 ### Overview
 
-Here is an example of how you can define a kendo NumericTextBox using a Tag Helper
+The example below demonstrates how to define a Kendo UI NumericTextBox by using a Tag Helper.
 
 ###### Example
 
         <kendo-numerictextbox name="numeric"></kendo-numerictextbox>
-        
-You can also bind the numerictextbox to a particular model field using the 'for' attribute, which is the equivalen of using the 'Html.Kendo().NumericTextBoxFor<decimal>()' Html Helper
+
+You can also bind the NumericTextBox to a particular model field using the `for` attribute. This is the equivalent of using the `Html.Kendo().NumericTextBoxFor<decimal>()` HtmlHelper.
 
 ###### Example
 
@@ -60,9 +66,11 @@ You can also bind the numerictextbox to a particular model field using the 'for'
 
 ### Configuration
 
-The NumericTextBox Tag Helper supports all the configuration options that the Html Helper does. They are passed as attributes of the tag
+The NumericTextBox Tag Helper supports all the configuration options that the HtmlHelper does. They are passed as attributes of the tag.
 
-###### cshtml
+**cshtml**
+
+###### Example
 
         @(Html.Kendo().NumericTextBox<decimal>()
             .Name("currency")
@@ -73,7 +81,9 @@ The NumericTextBox Tag Helper supports all the configuration options that the Ht
             .Value(30)
         )
 
-###### tag helper
+**tag helper**
+
+###### Example
 
         <kendo-numerictextbox name="currency" format="c" min="0"
             enable="true" max="100" value="30">
@@ -83,18 +93,19 @@ The NumericTextBox Tag Helper supports all the configuration options that the Ht
 
 ### Overview
 
-Here is an example of how you can define a kendo Button using a Tag Helper
+The example below demonstrates how to define a Kendo UI Button by using a Tag Helper.
 
 ###### Example
 
         <kendo-button name="button1">Click here!</kendo-button>
 
-
 ### Configuration
 
 The Button Tag Helper configuration options are passed as attributes of the tag.
 
-###### cshtml
+**cshtml**
+
+###### Example
 
         @(Html.Kendo().Button()
             .Name("imageButton")
@@ -102,7 +113,9 @@ The Button Tag Helper configuration options are passed as attributes of the tag.
             .ImageUrl(Url.Content("/shared/icons/sports/snowboarding.png"))
             .Content("Image icon"))
 
-###### tag helper
+**tag helper**
+
+###### Example
 
         <kendo-button name="button1" type="button"
             image-url="/shared/icons/sports/snowboarding.png">Image icon</kendo-button>
@@ -111,17 +124,19 @@ The Button Tag Helper configuration options are passed as attributes of the tag.
 
 ### Overview
 
-Here is an example of how you can define a kendo Window using a Tag Helper
+The example below demonstrates how to define a Kendo UI Window by using a Tag Helper.
 
 ###### Example
 
         <kendo-window name="window1">Window contents</kendo-window>
-        
+
 ### Configuration
 
-The Window Tag Helper configuration options are passed as attributes of the tag. The window contents are simply placed between the opening and closing tag.
+The Window Tag Helper configuration options are passed as attributes of the tag. The Window contents is placed between the opening and closing tag.
 
-###### cshtml
+**cshtml**
+
+###### Example
 
         @(Html.Kendo().Window()
             .Name("window")
@@ -146,7 +161,9 @@ The Window Tag Helper configuration options are passed as attributes of the tag.
             .Events(ev => ev.Close("onClose"))
         )
 
-###### tag helper
+**tag helper**
+
+###### Example
 
         <kendo-window name="window" title="About Alvar Aalto" draggable="true"
             width="400" on-close="onClose">
@@ -169,7 +186,7 @@ The Window Tag Helper configuration options are passed as attributes of the tag.
 
 ### Overview
 
-Here is an example of how you can define a kendo DatePicker using a Tag Helper
+The example below demonstrates how to define a Kendo UI DatePicker by using a Tag Helper.
 
 ###### Example
 
@@ -180,7 +197,9 @@ Here is an example of how you can define a kendo DatePicker using a Tag Helper
 
 The DatePicker Tag Helper configuration options are passed as attributes of the tag.
 
-###### cshtml
+**cshtml**
+
+###### Example
 
         @(Html.Kendo().DatePicker()
                 .Name("monthpicker")
@@ -190,15 +209,17 @@ The DatePicker Tag Helper configuration options are passed as attributes of the 
                 .Value(DateTime.Now)
         )
 
-###### tag helper
+**tag helper**
+
+###### Example
 
         <kendo-datepicker name="monthpicker" start="CalendarView.Year" depth="CalendarView.Year"
             format="MMMM yyyy" value="DateTime.Now">
         </kendo-datepicker>
 
-The ParseFormats option is of type string[] and can be assigned either by a ViewBag property, or a property of the model
+The `ParseFormats` option is of type `string[]` and can be assigned either by a `ViewBag` property, or a property of the model.
 
-###### example
+###### Example
 
         @{
             ViewBag.ParseDates = new string[] { "MMMM yyyy", "MMMM" };
@@ -210,7 +231,7 @@ The ParseFormats option is of type string[] and can be assigned either by a View
 
 ### Overview
 
-Here is an example of how you can define a kendo TimePicker using a Tag Helper
+The example below demonstrates how to define a Kendo UI TimePicker by using a Tag Helper.
 
 ###### Example
 
@@ -221,7 +242,9 @@ Here is an example of how you can define a kendo TimePicker using a Tag Helper
 
 The TimePicker Tag Helper configuration options are passed as attributes of the tag.
 
-###### cshtml
+**cshtml**
+
+###### Example
 
         @(Html.Kendo().TimePicker()
                 .Name("end")
@@ -230,15 +253,17 @@ The TimePicker Tag Helper configuration options are passed as attributes of the 
                 .Max("7:30 AM")
         )
 
-###### tag helper
+**tag helper**
+
+###### Example
 
         <kendo-timepicker name="end" value="new DateTime(1900, 1, 1, 8, 30, 0)"
             min="new DateTime(1900, 1, 1, 8, 0, 0)" max="new DateTime(1900, 1, 1, 7, 30, 0)">
         </kendo-timepicker>
 
-The ParseFormats option is of type string[] and can be assigned either by a ViewBag property, or a property of the model
+The `ParseFormats` option is of type `string[]` and can be assigned either by a `ViewBag` property, or a property of the model.
 
-###### example
+###### Example
 
         @{
             ViewBag.ParseDates = new string[] { "MMMM yyyy", "MMMM" };
@@ -250,7 +275,7 @@ The ParseFormats option is of type string[] and can be assigned either by a View
 
 ### Overview
 
-Here is an example of how you can define a kendo DateTimePicker using a Tag Helper
+The example below demonstrates how to define a Kendo UI DateTimePicker by using a Tag Helper.
 
 ###### Example
 
@@ -261,7 +286,9 @@ Here is an example of how you can define a kendo DateTimePicker using a Tag Help
 
 The DateTimePicker Tag Helper configuration options are passed as attributes of the tag.
 
-###### cshtml
+**cshtml**
+
+###### Example
 
         @(Html.Kendo().DateTimePicker()
                 .Name("end")
@@ -270,15 +297,17 @@ The DateTimePicker Tag Helper configuration options are passed as attributes of 
                 .Events(e => e.Change("endChange"))
         )
 
-###### tag helper
+**tag helper**
+
+###### Example
 
         <kendo-datetimepicker name="end" value="DateTime.Today"
             min="DateTime.Today" on-change="endChange">
         </kendo-datetimepicker>
 
-The ParseFormats option is of type string[] and can be assigned either by a ViewBag property, or a property of the model
+The `ParseFormats` option is of type `string[]` and can be assigned either by a `ViewBag` property, or a property of the model.
 
-###### example
+###### Example
 
         @{
             ViewBag.ParseDates = new string[] { "MMMM yyyy", "MMMM" };
@@ -289,8 +318,9 @@ The ParseFormats option is of type string[] and can be assigned either by a View
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC in ASP.NET MVC 6 applications:
+Other articles on Telerik UI for ASP.NET MVC in ASP.NET Core MVC applications:
 
-* [Overview of Telerik UI for ASP.NET MVC 6 - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
-* [Get Started with Telerik UI for ASP.NET MVC in MVC 6 Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
-* [Known Issues with Telerik UI for ASP.NET MVC 6]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Overview of Telerik UI for ASP.NET Core MVC - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core MVC Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core MVC Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
+* [Known Issues with Telerik UI for ASP.NET Core MVC]({% slug knownissues_aspnetmvc6_aspnetmvc %})
