@@ -8,6 +8,14 @@ slug: breakingchanges2016_kendoui
 
 # Kendo UI 2016 Breaking Changes
 
+## Kendo UI 2016 Q2
+
+### Changes from 2016 Q1 SP1 (2016.1.226)
+
+#### Breaking Changes
+
+* **Scheduler**: The widget will keep the selection state on blur. The change was introduced to behave similarly to Kendo UI Grid. If you would like to bring the old behavior use [select](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#methods-select) method to clear the selection on blur.
+
 ## Kendo UI 2016 Q1
 
 ### Changes from 2015 Q3 SP1 (2015.3.1111)
