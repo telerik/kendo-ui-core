@@ -822,6 +822,10 @@ html .km-pane-wrapper .k-header
     border-top-color: @hover-border-color;
 }
 
+.k-group-header + div > .k-list > .k-item.k-first {
+    box-shadow: 0 -1px 0px 0px contrast(@widget-background-color, darken(@header-background-color, 20%), @alt-background-color, .5);
+}
+
 .k-popup > .k-group-header,
 .k-popup > .k-virtual-wrap > .k-group-header
 {
@@ -831,8 +835,8 @@ html .km-pane-wrapper .k-header
 
 .k-popup .k-list .k-item > .k-group
 {
-    background: @hover-border-color;
-    color: @selected-text-color;
+    background: contrast(@widget-background-color, darken(@header-background-color, 20%), @alt-background-color, .5);
+    color: contrast(darken(@header-background-color, 20%), #fff, @hover-text-color, .6);
     border-bottom-left-radius: @inner-border-radius;
 }
 
