@@ -389,4 +389,21 @@
             click(element, 10, 10);
         }, 200);
     });
+
+    /* global press */
+    /* global move */
+    /* global release */
+    module("touch events (mvvm)", {
+        setup: function() {
+            element = $("<div data-role=touch data-filter=i><i>I</i><b>B</b></div>");
+            kendo.bind(element, {});
+        },
+        teardown: function() {
+            kendo.destroy(element);
+        }
+    });
+
+    test("filter is read from the attribute", function() {
+        equal(element.data('kendoTouch').options.filter, 'i')
+    })
 })();

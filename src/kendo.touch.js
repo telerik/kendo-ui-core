@@ -85,6 +85,7 @@ var __meta__ = { // jshint ignore:line
             surface: null,
             global: false,
             fastTap: false,
+            filter: null,
             multiTouch: false,
             enableSwipe: false,
             minXDelta: 30,
