@@ -76,7 +76,7 @@ Gets or sets the state of the bottom border of the cells. If the range includes 
 The border configuration object. It may contain `size` and `color` keys.
 
 The `color` may be set to any valid [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value).
-The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/docs/Web/CSS/length).
+The `size` should be the border width in pixels (numeric, not string).
 
 #### Returns
 
@@ -94,7 +94,7 @@ The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/
 
     var sheet = spreadsheet.activeSheet();
 
-    sheet.range("A2:B3").borderBottom({ size: "2px", color: "green" });
+    sheet.range("A2:B3").borderBottom({ size: 2, color: "green" });
 </script>
 ```
 
@@ -109,7 +109,7 @@ Gets or sets the state of the left border of the cells. If the range includes mo
 The border configuration object. It may contain `size` and `color` keys.
 
 The `color` may be set to any valid [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value).
-The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/docs/Web/CSS/length).
+The `size` should be the border width in pixels (numeric, not string).
 
 #### Returns
 
@@ -127,7 +127,7 @@ The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/
 
     var sheet = spreadsheet.activeSheet();
 
-    sheet.range("A2:B3").borderLeft({ size: "2px", color: "green" });
+    sheet.range("A2:B3").borderLeft({ size: 2, color: "green" });
 </script>
 ```
 
@@ -142,7 +142,7 @@ Gets or sets the state of the right border of the cells. If the range includes m
 The border configuration object. It may contain `size` and `color` keys.
 
 The `color` may be set to any valid [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value).
-The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/docs/Web/CSS/length).
+The `size` should be the border width in pixels (numeric, not string).
 
 #### Returns
 
@@ -160,7 +160,7 @@ The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/
 
     var sheet = spreadsheet.activeSheet();
 
-    sheet.range("A2:B3").borderRight({ size: "2px", color: "green" });
+    sheet.range("A2:B3").borderRight({ size: 2, color: "green" });
 </script>
 ```
 
@@ -175,7 +175,7 @@ Gets or sets the state of the top border of the cells. If the range includes mor
 The border configuration object. It may contain `size` and `color` keys.
 
 The `color` may be set to any valid [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value).
-The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/docs/Web/CSS/length).
+The `size` should be the border width in pixels (numeric, not string).
 
 #### Returns
 
@@ -193,7 +193,7 @@ The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/
 
     var sheet = spreadsheet.activeSheet();
 
-    sheet.range("A2:B3").borderTop({ size: "2px", color: "green" });
+    sheet.range("A2:B3").borderTop({ size: 2, color: "green" });
 </script>
 ```
 
