@@ -179,6 +179,10 @@ If set to `true` the chart will display the axis crosshair. By default the axis 
 
 The width of the crosshair in pixels.
 
+### axisDefaults.labels `Object`
+
+The axis labels configuration.
+
 ### axisDefaults.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
 The font style of the labels.
@@ -481,12 +485,6 @@ The end position of the plot band in axis units.
 ### axisDefaults.reverse `Boolean` *(default: false)*
 
 If set to `true` the axis direction will be reversed. By default categories are listed from left to right and from bottom to top.
-
-### axisDefaults.roundToBaseUnit `Boolean` *(default: true)*
-
-If set to `true` the chart will round the first and last date to the nearest base unit.
-
-The `roundToBaseUnit` option will be ignored if [series.type](#configuration-series.type) is set to "bar", "column", "boxPlot", "ohlc", "candlestick" or "waterfall".
 
 ### axisDefaults.startAngle `Number` *(default: 90)*
 
