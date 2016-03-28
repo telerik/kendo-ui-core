@@ -55,6 +55,569 @@ The default options for all chart axes. Accepts the options supported by [catego
     });
     </script>
 
+### axisDefaults.background `String`
+
+The background color of the axis.
+
+### axisDefaults.color `String`
+
+The color to apply to all axis elements. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.crosshair `Object`
+
+The crosshair configuration options.
+
+> The crosshair is displayed when the [axisDefaults.crosshair.visible](#configuration-axisDefaults.crosshair.visible) option is set to `true`.
+
+### axisDefaults.crosshair.color `String`
+
+The color of the crosshair. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.crosshair.dashType `string` *(default: "solid")*
+
+The dash type of the crosshair.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### axisDefaults.crosshair.opacity `Number` *(default: 1)*
+
+The opacity of the crosshair. By default the crosshair is opaque.
+
+### axisDefaults.crosshair.tooltip `Object`
+
+The crosshar tooltip options.
+
+> The crosshair tooltip is displayed when the [axisDefaults.crosshair.tooltip.visible](#configuration-axisDefaults.crosshair.tooltip.visible) option is set to `true`.
+
+### axisDefaults.crosshair.tooltip.background `String`
+
+The background color of the tooltip. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.crosshair.tooltip.border `Object`
+
+The border options.
+
+### axisDefaults.crosshair.tooltip.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.crosshair.tooltip.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### axisDefaults.crosshair.tooltip.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### axisDefaults.crosshair.tooltip.color `String`
+
+The text color of the tooltip. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.crosshair.tooltip.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
+
+The tooltip font.
+
+### axisDefaults.crosshair.tooltip.format `String` *(default: "{0}")*
+
+The format used to display the tooltip. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+
+### axisDefaults.crosshair.tooltip.padding `Number|Object` *(default: 0)*
+
+The padding of the crosshair tooltip. A numeric value will set all paddings.
+
+### axisDefaults.crosshair.tooltip.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the crosshair tooltip.
+
+### axisDefaults.crosshair.tooltip.padding.left `Number` *(default: 0)*
+
+The left padding of the crosshair tooltip.
+
+### axisDefaults.crosshair.tooltip.padding.right `Number` *(default: 0)*
+
+The right padding of the crosshair tooltip.
+
+### axisDefaults.crosshair.tooltip.padding.top `Number` *(default: 0)*
+
+The top padding of the crosshair tooltip.
+
+### axisDefaults.crosshair.tooltip.template `String|Function`
+
+The [template](/api/javascript/kendo#methods-template) which renders the tooltip.
+
+The fields which can be used in the template are:
+
+* value - the category value
+
+### axisDefaults.crosshair.tooltip.visible `Boolean` *(default: false)*
+
+If set to `true` the chart will display the axis crosshair tooltip. By default the axis crosshair tooltip is not visible.
+
+### axisDefaults.crosshair.visible `Boolean` *(default: false)*
+
+If set to `true` the chart will display the axis crosshair. By default the axis crosshair is not visible.
+
+### axisDefaults.crosshair.width `Number` *(default: 1)*
+
+The width of the crosshair in pixels.
+
+### axisDefaults.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
+
+The font style of the labels.
+
+### axisDefaults.labels.format `String` *(default: "{0}")*
+
+The format used to display the labels. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+
+### axisDefaults.labels.margin `Number|Object` *(default: 0)*
+
+The margin of the labels. A numeric value will set all margins.
+
+### axisDefaults.labels.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the labels.
+
+### axisDefaults.labels.margin.left `Number` *(default: 0)*
+
+The left margin of the labels.
+
+### axisDefaults.labels.margin.right `Number` *(default: 0)*
+
+The right margin of the labels.
+
+### axisDefaults.labels.margin.top `Number` *(default: 0)*
+
+The top margin of the labels.
+
+### axisDefaults.labels.mirror `Boolean` *(default: false)*
+
+If set to `true` the chart will mirror the axis labels and ticks. If the labels are normally on the left side of the axis, mirroring the axis will render them to the right.
+
+### axisDefaults.labels.padding `Object|Number` *(default: 0)*
+
+The padding of the labels. A numeric value will set all paddings.
+
+### axisDefaults.labels.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the labels.
+
+### axisDefaults.labels.padding.left `Number` *(default: 0)*
+
+The left padding of the labels.
+
+### axisDefaults.labels.padding.right `Number` *(default: 0)*
+
+The right padding of the labels.
+
+### axisDefaults.labels.padding.top `Number` *(default: 0)*
+
+The top padding of the labels.
+
+### axisDefaults.labels.rotation `Number|String|Object` *(default: 0)*
+
+The rotation angle of the labels. By default the labels are not rotated. Can be set to `"auto"` if the axis is horizontal in which case the labels will be rotated only if the slot size is not sufficient for the entire labels.
+
+### axisDefaults.labels.rotation.align `String` *(default: "end")*
+
+The alignment of the rotated labels relative to the slot center. The supported values are `"end"` and `"center"`. By default the closest end of the label will be aligned to the center. If set to `"center"`, the center of the rotated label will be aligned instead.
+
+### axisDefaults.labels.rotation.angle `Number|String` *(default: 0)*
+
+The rotation angle of the labels. By default the labels are not rotated. Can be set to `"auto"` if the axis is horizontal in which case the labels will be rotated only if the slot size is not sufficient for the entire labels.
+
+### axisDefaults.labels.skip `Number` *(default: 0)*
+
+The number of labels to skip. By default no labels are skipped.
+
+### axisDefaults.labels.step `Number` *(default: 1)*
+
+The label rendering step - render every n-th label. By default every label is rendered.
+
+### axisDefaults.labels.template `String|Function`
+
+The [template](/api/javascript/kendo#methods-template) which renders the labels.
+
+The fields which can be used in the template are:
+
+* value - the category value
+* dataItem - the data item, in case a field has been specified. If the category does not have a corresponding item in the data then an empty object will be passed.
+* format - the default format of the label
+* culture - the default culture (if set) on the label
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+### axisDefaults.labels.visible `Boolean` *(default: true)*
+
+If set to `true` the chart will display the axis labels. By default the axis labels are visible.
+
+### axisDefaults.labels.visual `Function`
+
+A function that can be used to create a custom visual for the labels. The available argument fields are:
+
+* createVisual - a function that can be used to get the default visual.
+* culture - the default culture (if set) on the label
+* dataItem - the data item, in case a field has been specified
+* format - the default format of the label
+* options - the label options.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
+* text - the label text.
+* value - the category value
+
+### axisDefaults.line `Object`
+
+The configuration of the axis lines. Also affects the major and minor ticks, but not the grid lines.
+
+### axisDefaults.line.color `String` *(default: "black")*
+
+The color of the lines. Accepts a valid CSS color string, including hex and rgb.
+
+> Setting the `color` option affects the major and minor ticks, but not the grid lines.
+
+### axisDefaults.line.dashType `String` *(default: "solid")*
+
+The dash type of the line.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### axisDefaults.line.visible `Boolean` *(default: true)*
+
+If set to `true` the chart will display the axis lines. By default the axis lines are visible.
+
+### axisDefaults.line.width `Number` *(default: 1)*
+
+The width of the line in pixels. Also affects the major and minor ticks, but not the grid lines.
+
+### axisDefaults.majorGridLines `Object`
+
+The configuration of the major grid lines. These are the lines that are an extension of the major ticks through the
+body of the chart.
+
+### axisDefaults.majorGridLines.color `String` *(default: "black")*
+
+The color of the major grid lines. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.majorGridLines.dashType `String` *(default: "solid")*
+
+The dash type of the major grid lines.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### axisDefaults.majorGridLines.visible `Boolean` *(default: false)*
+
+If set to `true` the chart will display the major grid lines. By default the major grid lines are visible.
+
+### axisDefaults.majorGridLines.width `Number` *(default: 1)*
+
+The width of the axis major grid lines in pixels.
+
+### axisDefaults.majorGridLines.step `Number` *(default: 1)*
+
+The step of the axis major grid lines.
+
+### axisDefaults.majorGridLines.skip `Number` *(default: 0)*
+
+The skip of the axis major grid lines.
+
+### axisDefaults.majorTicks `Object`
+
+The configuration of the axis major ticks.
+
+### axisDefaults.majorTicks.color `String` *(default: "black")*
+
+The color of the axis major ticks lines. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.majorTicks.size `Number` *(default: 4)*
+
+The length of the tick line in pixels.
+
+### axisDefaults.majorTicks.visible `Boolean` *(default: true)*
+
+If set to `true` the chart will display the axis major ticks. By default the axis major ticks are visible.
+
+### axisDefaults.majorTicks.width `Number` *(default: 1)*
+
+The width of the major ticks in pixels.
+
+### axisDefaults.majorTicks.step `Number` *(default: 1)*
+
+The step of the axis major ticks.
+
+### axisDefaults.majorTicks.skip `Number` *(default: 0)*
+
+The skip of the axis major ticks.
+
+### axisDefaults.minorGridLines `Object`
+
+The configuration of the minor grid lines. These are the lines that are an extension of the minor ticks through the
+body of the chart.
+
+### axisDefaults.minorGridLines.color `String` *(default: "black")*
+
+The color of the minor grid lines. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.minorGridLines.dashType `String` *(default: "solid")*
+
+The dash type of the minor grid lines.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### axisDefaults.minorGridLines.visible `Boolean` *(default: false)*
+
+If set to `true` the chart will display the minor grid lines. By default the minor grid lines are visible.
+
+### axisDefaults.minorGridLines.width `Number` *(default: 1)*
+
+The width of the axis minor grid lines in pixels.
+
+### axisDefaults.minorGridLines.step `Number` *(default: 1)*
+
+The step of the axis minor grid lines.
+
+### axisDefaults.minorGridLines.skip `Number` *(default: 0)*
+
+The skip of the axis minor grid lines.
+
+### axisDefaults.minorTicks `Object`
+
+The configuration of the axis minor ticks.
+
+### axisDefaults.minorTicks.color `String` *(default: "black")*
+
+The color of the axis minor ticks lines. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.minorTicks.size `Number` *(default: 4)*
+
+The length of the tick line in pixels.
+
+### axisDefaults.minorTicks.visible `Boolean` *(default: true)*
+
+If set to `true` the chart will display the axis minor ticks. By default the axis minor ticks are visible.
+
+### axisDefaults.minorTicks.width `Number` *(default: 1)*
+
+The width of the minor ticks in pixels.
+
+### axisDefaults.minorTicks.step `Number` *(default: 1)*
+
+The step of the axis minor ticks.
+
+### axisDefaults.minorTicks.skip `Number` *(default: 0)*
+
+The skip of the axis minor ticks.
+
+### axisDefaults.narrowRange `Boolean` *(default: false)*
+
+If set to `true` the chart will prevent the axis range from snapping to 0.
+Setting it to `false` will force the axis range to snap to 0.
+
+### axisDefaults.pane `String`
+
+The name of the pane that the axis should be rendered in.
+The axis will be rendered in the first (default) pane if not set.
+
+### axisDefaults.plotBands `Array`
+
+The plot bands of the axis.
+
+### axisDefaults.plotBands.color `String`
+
+The color of the plot band.
+
+### axisDefaults.plotBands.from `Number`
+
+The start position of the plot band in axis units.
+
+### axisDefaults.plotBands.opacity `Number`
+
+The opacity of the plot band.
+
+### axisDefaults.plotBands.to `Number`
+
+The end position of the plot band in axis units.
+
+### axisDefaults.reverse `Boolean` *(default: false)*
+
+If set to `true` the axis direction will be reversed. By default categories are listed from left to right and from bottom to top.
+
+### axisDefaults.roundToBaseUnit `Boolean` *(default: true)*
+
+If set to `true` the chart will round the first and last date to the nearest base unit.
+
+The `roundToBaseUnit` option will be ignored if [series.type](#configuration-series.type) is set to "bar", "column", "boxPlot", "ohlc", "candlestick" or "waterfall".
+
+### axisDefaults.startAngle `Number` *(default: 90)*
+
+The angle (degrees) of the first category on the axis.
+
+Angles increase clockwise and zero is to the left. Negative values are acceptable.
+
+### axisDefaults.title `Object`
+
+The title configuration of the axis.
+
+> The [axisDefaults.title.text](#configuration-axisDefaults.title.text) option must be set in order to display the title.
+
+### axisDefaults.title.background `String`
+
+The background color of the title. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.title.border `Object`
+
+The border of the title.
+
+### axisDefaults.title.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.title.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### axisDefaults.title.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### axisDefaults.title.color `String`
+
+The text color of the title. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.title.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
+
+The font style of the title.
+
+### axisDefaults.title.margin `Number|Object` *(default: 5)*
+
+The margin of the title. A numeric value will set all margins.
+
+### axisDefaults.title.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the title.
+
+### axisDefaults.title.margin.left `Number` *(default: 0)*
+
+The left margin of the title.
+
+### axisDefaults.title.margin.right `Number` *(default: 0)*
+
+The right margin of the title.
+
+### axisDefaults.title.margin.top `Number` *(default: 0)*
+
+The top margin of the title.
+
+### axisDefaults.title.padding `Number|Object` *(default: 0)*
+
+The padding of the title. A numeric value will set all paddings.
+
+### axisDefaults.title.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the title.
+
+### axisDefaults.title.padding.left `Number` *(default: 0)*
+
+The left padding of the title.
+
+### axisDefaults.title.padding.right `Number` *(default: 0)*
+
+The right padding of the title.
+
+### axisDefaults.title.padding.top `Number` *(default: 0)*
+
+The top padding of the title.
+
+### axisDefaults.title.position `String` *(default: "center")*
+
+The position of the title.
+
+The supported values are:
+
+* "top" - the axis title is positioned on the top (applicable to vertical axis)
+* "bottom" - the axis title is positioned on the bottom (applicable to vertical axis)
+* "left" - the axis title is positioned on the left (applicable to horizontal axis)
+* "right" - the axis title is positioned on the right (applicable to horizontal axis)
+* "center" - the axis title is positioned in the center
+
+### axisDefaults.title.rotation `Number` *(default: 0)*
+
+The rotation angle of the title. By default the title is not rotated.
+
+### axisDefaults.title.text `String`
+
+The text of the title.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+### axisDefaults.title.visible `Boolean` *(default: true)*
+
+If set to `true` the chart will display the axis title. By default the axis title is visible.
+
+### axisDefaults.title.visual `Function`
+
+A function that can be used to create a custom visual for the title. The available argument fields are:
+
+* text - the label text.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
+* options - the label options.
+* createVisual - a function that can be used to get the default visual.
+
+### axisDefaults.visible `Boolean` *(default: true)*
+
+If set to `true` the chart will display the axis. By default the axis is visible.
+
 ### categoryAxis `Array|Object`
 
 The category axis configuration options.
