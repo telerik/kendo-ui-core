@@ -408,4 +408,20 @@
             }
         );
     });
+
+    module("kendo.mobile.Application (history: false)", {
+        setup: function() {
+            var root = $("<div><div data-role=view></div></div>");
+            QUnit.fixture.html(root);
+            application = new kendo.mobile.Application(root, { browserHistory: false });
+        },
+
+        teardown: function() {
+            application.destroy();
+        }
+    });
+
+    test("destroy works when app has history disabled", 0, function() {
+        // rely on teardown failing
+    });
 })();
