@@ -8,13 +8,13 @@ position: 3
 
 # NuGet Packages
 
+Telerik maintains a NuGet Feed for registered users.
+
 [NuGet](https://www.nuget.org) is a popular .NET package manager.
 
-Telerik maintains a number of NuGet packages for UI for ASP.NET MVC.
+Official releases, service packs and internal builds of UI for ASP.NET MVC are available for registered users.
 
-Official releases, service packs and internal builds are available for registered users.
-
-## Installation Instructions
+## Using the Telerik Private NuGet Feed
 
 To use the Telerik NuGet Feed as a Package Source, use the [NuGet CLI](http://docs.nuget.org/consume/Command-Line-Reference).
 
