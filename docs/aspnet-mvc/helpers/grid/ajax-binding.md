@@ -51,6 +51,9 @@ Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. That
                 DataSourceResult result = products.ToDataSourceResult(request);
             }
         }
+
+    > The `ToDataSourceResult()` method will page, sort, filter and group the collection that is passed to it. If that collection is already paged, the method will return an empty result. If you need to perform the data operations manually, use [custom binding](/aspnet-mvc/helpers/grid/custom-binding#custom-ajax-binding) instead.
+
 1.  Return the `DataSourceResult` as JSON. Now let's configure Kendo UI Grid for ajax binding.
 
         public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
