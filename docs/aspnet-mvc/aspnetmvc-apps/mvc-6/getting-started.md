@@ -43,13 +43,15 @@ Below are listed the steps for you to follow when creating an ASP.NET Core MVC w
 
 ### Add NuGet Packages
 
+Set up the [Telerik NuGet Private Feed]({% slug aspnetmvc_nuget %}#set-up-nuget-package-source) before continuing.
+
 **Step 1** Open the NuGet Package Manager.
 
 **Figure 1. The NuGet package manager**
 
 ![NuGet package manager](images/manage-nuget-packages.png)
 
-**Step 2** Choose `api.nuget.org` as a package source and search for `Kendo.Mvc`.
+**Step 2** Choose the [Telerik package source]({% slug aspnetmvc_nuget %}#set-up-nuget-package-source) and search for `Kendo.Mvc`. Preview releases are also available on `api.nuget.org`.
 
 **Step 3** Install the `Kendo.Mvc` package version 2015.2.909 or later. This should add a line to you `project.json` similar to the one shown below.
 
@@ -147,7 +149,7 @@ Copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive t
 
 Add the snippet from the example below to `~/Views/Home/Index.cshtml`.
 
-###### Example
+###### Example - Using HTML Helpers
 
             <h2>Kendo UI DatePicker</h2>
 
