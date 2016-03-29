@@ -1020,6 +1020,10 @@ Allows customization on the logic that renderes the checkboxes when using checkb
         });
     </script>
 
+### columns.filterable.operators `Object`
+
+The property is identical to [`filterable.operators`](#configuration-filterable.operators), but is used for a specific column.
+
 ### columns.filterable.search `Boolean` *(default: false)*
 Controls whether to show a search box when [checkbox filtering](#configuration-columns.filterable.multi) is enabled.
 
