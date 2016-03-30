@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Kendo UI LinearGauge HtmlHelper
 description: "Get started with the server-side wrapper for the Kendo UI LinearGauge widget for ASP.NET MVC."
-slug: overviewlineargaugehelper_aspnetmvc
+slug: overview_lineargaugehelper_aspnetmvc
 position: 1
 ---
 
@@ -14,7 +14,7 @@ The LinearGauge HtmlHelper extension is a server-side wrapper for the [Kendo Lin
 
 ### Configuration
 
-Below are listed the steps for you to follow when configuring the Kendo UI Linear Gauge.
+Below are listed the steps for you to follow when configuring the Kendo UI LinearGauge.
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 **Step 2** Create a new action method which renders the view.
