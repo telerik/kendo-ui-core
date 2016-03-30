@@ -56,8 +56,15 @@ Obtaining a reference to the widget `element` from the widget object is a relati
 Other articles on Kendo UI widget basics:
 
 * [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
+* [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
+* [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
+* [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
 * [Set Data Attributes]({% slug dataattributes_configuration_installation %})
 * [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})
 * [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
+* [Edit Widgets]({% slug kendoui_editing_gettingstarted %})
 * [Create Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
-* [Editing Functionality]({% slug kendoui_editing_gettingstarted %})
+* [Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
+* [NuGet Packages]({% slug kendoui_nuget_packages %})

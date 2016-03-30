@@ -154,4 +154,6 @@ Other articles on getting started with Kendo UI:
 * [Set Data Attributes]({% slug dataattributes_configuration_installation %})
 * [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})
 * [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
+* [Edit Widgets]({% slug kendoui_editing_gettingstarted %})
 * [Create Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
+* [NuGet Packages]({% slug kendoui_nuget_packages %})
