@@ -14,7 +14,7 @@ Telerik maintains a NuGet Feed for registered users.
 
 Official releases, service packs and internal builds of UI for ASP.NET MVC are available for registered users.
 
-## Using the Telerik Private NuGet Feed
+## Use the Telerik Private NuGet Feed
 
 To use the Telerik NuGet Feed as a Package Source, use the [NuGet CLI](http://docs.nuget.org/consume/Command-Line-Reference).
 

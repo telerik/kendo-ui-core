@@ -147,9 +147,9 @@ Copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive t
 <!--*-->
 **Step 8** Use a Kendo UI widget.
 
-Add the snippet from the example below to `~/Views/Home/Index.cshtml`.
+The example below demonstrates how to use HTML helpers. Add the snippet to `~/Views/Home/Index.cshtml`.
 
-###### Example - Using HTML Helpers
+###### Example
 
             <h2>Kendo UI DatePicker</h2>
 
