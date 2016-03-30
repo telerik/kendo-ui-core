@@ -57,3 +57,4 @@ Other articles and how-to examples on the Kendo UI Chart HtmlHelper:
 
 * [Chart HtmlHelper Overview]({% slug overview_dropdownlisthelper_aspnetmvc %})
 * [How to Bind to SignalR Hubs in ASP.NET MVC Apps]({% slug howto_bindtosignalr_chartaspnetmvc %})
+* [How to Create Charts in Ajax Grid Columns in ASP.NET MVC Apps]({% slug howto_createchartinajaxgridcolumn_chartaspnetmvc %})
