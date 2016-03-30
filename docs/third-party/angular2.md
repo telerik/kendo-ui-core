@@ -27,3 +27,4 @@ Articles on Kendo UI integration with third-party tools and frameworks:
 * [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})
 * [SystemJS Support]({% slug systemjs_integration_kendoui %})
 * [Webpack Support]({% slug webpacksupport_integration_kendoui %})
+* [Aurelia]({% slug aurelia_integration_kendoui %})
