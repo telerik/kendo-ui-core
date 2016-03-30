@@ -142,10 +142,10 @@ You can reference an existing Kendo UI Map instance via [`jQuery.data()`](http:/
 
 ###### Example
 
-    // Put this after your Kendo Map for ASP.NET MVC declaration
+    // Put this after your Kendo UI Map for ASP.NET MVC declaration.
     <script>
     $(function() {
-        // Notice that the Name() of the map is used to get its client-side instance
+        //Notice that the Name() of the Map is used to get its client-side instance.
         var map = $("#map").data("kendoMap");
     });
     </script>

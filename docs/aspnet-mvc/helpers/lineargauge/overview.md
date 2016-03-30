@@ -64,10 +64,10 @@ You can reference an existing Kendo UI LinearGauge instance via [`jQuery.data()`
 
 ###### Example
 
-        //Put this after your Kendo LinearGauge for ASP.NET MVC declaration
+        //Put this after your Kendo UI LinearGauge for ASP.NET MVC declaration.
         <script>
         $(function() {
-        // Notice that the Name() of the linearGauge is used to get its client-side instance
+        //Notice that the Name() of the LinearGauge is used to get its client-side instance.
             var gauge = $("#linearGauge").data("kendoLinearGauge");
         });
         </script>
