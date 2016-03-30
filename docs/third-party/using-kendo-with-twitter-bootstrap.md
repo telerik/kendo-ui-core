@@ -158,11 +158,12 @@ To resolve this issue, follow some of the possible solutions below.
 
 Other articles on Kendo UI integration with third-party tools and frameworks:
 
-* [Web Components]({% slug webcomponents_integration_kendoui %})
 * [Angular 2.0]({% slug angular2support_integration_kendoui %})
+* [Web Components]({% slug webcomponents_integration_kendoui %})
 * [RequireJS]({% slug requirejs_integration_kendoui %})
 * [TypeScript]({% slug typescript_integration_kendoui %})
 * [Visual Studio IntelliSense]({% slug visualstudiointellisense_integration_kendoui %})
 * [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})
 * [SystemJS Support]({% slug systemjs_integration_kendoui %})
 * [Webpack Support]({% slug webpacksupport_integration_kendoui %})
+* [Aurelia]({% slug aurelia_integration_kendoui %})
