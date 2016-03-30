@@ -1,153 +1,183 @@
 ---
 title: Overview
-page_title: User guide for Kendo UI MaskedTextBox widget | Kendo UI documentation
-description: How to configure a simple Kendo UI MaskedTextBox widget, add MaskedTextBox, handle events to control widget's behavior.
+page_title: Overview | Kendo UI MaskedTextBox HtmlHelper
+description: "Get started with the server-side wrapper for the Kendo UI MaskedTextBox widget for ASP.NET MVC."
+slug: overview_maskedtextboxhelper_aspnetmvc
+position: 1
 ---
 
-# MaskedTextBox
+# MaskedTextBox HtmlHelper Overview
 
-The MaskedTextBox HtmlHelper extension is a server-side wrapper for the [Kendo UI MaskedTextBox](/api/web/maskedtextbox) widget.
+The MaskedTextBox HtmlHelper extension is a server-side wrapper for the [Kendo UI MaskedTextBox](https://demos.telerik.com/kendo-ui/maskedtextbox/index) widget.
 
 ## Getting Started
 
-### Configure Kendo MaskedTextBox
+### Configuration
 
-Here is how to configure a simple Kendo MaskedTextBox:
+Below are listed the steps for you to follow when configuring the Kendo UI MaskedTextBox.
 
-1.  Make sure you have followed all the steps from the [Introduction](/aspnet-mvc/introduction) help topic.
-
-2.  Create a new action method which renders the view:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+**Step 2** Create a new action method which renders the view.
 
         public ActionResult Index()
         {
             return View();
         }
-3.  Add a maskedtextbox:
-    - WebForms
 
-            <%: Html.Kendo().MaskedTextBox()
-                    .Name("maskedtextbox") //The name of the maskedtextbox is mandatory. It specifies the "id" attribute of the widget.
-                    .Mask("(000) 000-0000") //Set mask value of the maskedtextbox
-                    .Value("(123) 345-6789") //Set value of the maskedtextbox
-            %>
-    - Razor
+**Step 3** Add a MaskedTextBox.
 
-            @(Html.Kendo().MaskedTextBox()
-                  .Name("maskedtextbox") //The name of the maskedtextbox is mandatory. It specifies the "id" attribute of the widget.
-                  .Mask("(000) 000-0000") //Set mask value of the maskedtextbox
-                  .Value("(123) 345-6789") //Set value of the maskedtextbox
-            )
+**WebForms**
 
-### Define widget's mask value
+        <%: Html.Kendo().MaskedTextBox()
+                .Name("maskedtextbox") //The name of the maskedtextbox is mandatory. It specifies the "id" attribute of the widget.
+                .Mask("(000) 000-0000") //Set mask value of the maskedtextbox
+                .Value("(123) 345-6789") //Set value of the maskedtextbox
+        %>
 
-The MaskedTextBox has [a list of predefined mask rules](/web/maskedtextbox/overview#predefined-mask-rules),
-which can be used to compose the widget's mask.
+**Razor**
 
-#### WebForms - set a `zip code` mask
+        @(Html.Kendo().MaskedTextBox()
+              .Name("maskedtextbox") //The name of the maskedtextbox is mandatory. It specifies the "id" attribute of the widget.
+              .Mask("(000) 000-0000") //Set mask value of the maskedtextbox
+              .Value("(123) 345-6789") //Set value of the maskedtextbox
+        )
 
-    <%: Html.Kendo().MaskedTextBox()
-            .Name("maskedtextbox")
-            .Mask("00000-9999") //Set zip code
-    %>
+### Define Mmask Values
 
-#### Razor - set a `zip code` mask
+The MaskedTextBox has [a list of predefined mask rules]({% slug overview_kendoui_maskedtextbox_widget%}#configuration-Rules), which can be used to compose the mask of a widget.
 
-    @(Html.Kendo().MaskedTextBox()
-          .Name("maskedtextbox")
-          .Mask("00000-9999") //Set zip code
-    )
+The example below demonstrates how to set a `zip code` mask
 
-> If no mask is defined widget will allow any input.
+###### Example
 
-### Define a custom mask rule
+**WebForms**
 
-The MaskedTextBox gives the ability to define custom mask rules if no of the predefined ones is sufficient.
-To add a custom rule use the **Rules** method:
+        <%: Html.Kendo().MaskedTextBox()
+                .Name("maskedtextbox")
+                .Mask("00000-9999") //Set zip code
+        %>
 
-#### WebForms - define a custom rule for "-" and "+" symbols
+**Razor**
 
-    <%: Html.Kendo().MaskedTextBox()
+        @(Html.Kendo().MaskedTextBox()
+              .Name("maskedtextbox")
+              .Mask("00000-9999") //Set zip code
+        )
+
+> **Important**
+>
+> If no mask is defined, the widget allows for any input.
+
+### Define Custom Mask Rules
+
+The MaskedTextBox enables you to define custom mask rules if none of the predefined ones is sufficient. To add a custom rule, use the `Rules` method.
+
+The example below demonstrates how to define a custom rule for the `-` (minus) and `+` (plus) symbols.
+
+###### Example
+
+**WebForms**
+
+      <%: Html.Kendo().MaskedTextBox()
+              .Name("maskedtextbox")
+              .Rules(rules => {
+                  rules.Add('~', "/[+-]/");
+              })
+              .Mask("~0000") //Set a mask with custom rule
+      %>
+
+**Razor**
+
+      @(Html.Kendo().MaskedTextBox()
             .Name("maskedtextbox")
             .Rules(rules => {
                 rules.Add('~', "/[+-]/");
             })
             .Mask("~0000") //Set a mask with custom rule
-    %>
+      )
 
-#### Razor - define a custom rule for "-" and "+" symbols
+> **Important**
+>
+> Widgets supports [JavaScript Regular Expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) defined as a string or a JavaScript function.
 
-    @(Html.Kendo().MaskedTextBox()
-          .Name("maskedtextbox")
-          .Rules(rules => {
-              rules.Add('~', "/[+-]/");
-          })
-          .Mask("~0000") //Set a mask with custom rule
-    )
+## Event Handling
 
-> Widgets supports [JavaScript Reguler Expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
-defined as a string or JavaScript function.
+You can subscribe to all MaskedTextBox [events](/api/javascript/ui/maskedtextbox#events).
 
-## Accessing an Existing MaskedTextBox
+### By Handler Name
 
-You can reference an existing MaskedTextBox instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/maskedtextbox#methods) to control its behavior.
+The examples below demonstrates how to subscribe to events by a handler name.
 
+###### Example
 
-### Accessing an existing MaskedTextBox instance
+**WebForms**
 
-    //Put this after your Kendo MaskedTextBox for ASP.NET MVC declaration
-    <script>
-    $(function() {
-        // Notice that the Name() of the maskedtextbox is used to get its client-side instance
-        var maskedtextbox = $("#maskedtextbox").data("kendoMaskedTextBox");
-    });
-    </script>
+      <%: Html.Kendo().MaskedTextBox()
+              .Name("maskedtextbox")
+              .Events(e => e
+                  .Change("maskedtextbox_change")
+              )
+      %>
+      <script>
+      function maskedtextbox_change() {
+          //Handle the change event
+      }
+      </script>
 
+**Razor**
 
-## Handling Kendo UI MaskedTextBox events
-
-You can subscribe to all [events](/api/web/maskedtextbox#events) exposed by Kendo UI MaskedTextBox:
-
-### WebForms - subscribe by handler name
-
-    <%: Html.Kendo().MaskedTextBox()
+      @(Html.Kendo().MaskedTextBox()
             .Name("maskedtextbox")
             .Events(e => e
                 .Change("maskedtextbox_change")
             )
-    %>
-    <script>
-    function maskedtextbox_change() {
-        //Handle the change event
-    }
-    </script>
+      )
+      <script>
+      function maskedtextbox_change() {
+          //Handle the change event
+      }
+      </script>
 
+### By Template Delegate
 
-### Razor - subscribe by handler name
+**Razor**
 
-    @(Html.Kendo().MaskedTextBox()
-          .Name("maskedtextbox")
-          .Events(e => e
-              .Change("maskedtextbox_change")
-          )
-    )
-    <script>
-    function maskedtextbox_change() {
-        //Handle the change event
-    }
-    </script>
+      @(Html.Kendo().MaskedTextBox()
+            .Name("maskedtextbox")
+            .Events(e => e
+                .Change(@<text>
+                  function() {
+                      //Handle the change event inline
+                  }
+                </text>)
+            )
+      )
 
+## Reference
 
-### Razor - subscribe by template delegate
+### Existing Instances
 
-    @(Html.Kendo().MaskedTextBox()
-          .Name("maskedtextbox")
-          .Events(e => e
-              .Change(@<text>
-                function() {
-                    //Handle the change event inline
-                }
-              </text>)
-          )
-    )
+You can reference an existing Kendo UI MaskedTextBox instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [MaskedTextBox API](/api/javascript/ui/maskedtextbox#methods) to control its behavior.
 
+###### Example
+
+      //Put this after your Kendo UI MaskedTextBox for ASP.NET MVC declaration.
+      <script>
+      $(function() {
+          //Notice that the Name() of the MaskedTextBox is used to get its client-side instance.
+          var maskedtextbox = $("#maskedtextbox").data("kendoMaskedTextBox");
+      });
+      </script>
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the MaskedTextBox:
+
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Overview of the Kendo UI MaskedTextBox Widget]({% slug overview_kendoui_maskedtextbox_widget %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
