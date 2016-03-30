@@ -1,63 +1,86 @@
 ---
 title: Overview
-page_title: LinearGauge HtmlHelper extension for Kendo UI DataViz LinearGauge documentation
-description: Getting started with LinearGauge HtmlHelper extension for Kendo UI DataViz LinearGauge for ASP.NET MVC.
+page_title: Overview | Kendo UI LinearGauge HtmlHelper
+description: "Get started with the server-side wrapper for the Kendo UI LinearGauge widget for ASP.NET MVC."
+slug: overviewlineargaugehelper_aspnetmvc
+position: 1
 ---
 
-# RadialGauge
+# LinearGauge HtmlHelper Overview
 
-The LinearGauge HtmlHelper extension is a server-side wrapper for the [Kendo DataViz LinearGauge](/api/dataviz/lineargauge) widget.
+The LinearGauge HtmlHelper extension is a server-side wrapper for the [Kendo LinearGauge](https://demos.telerik.com/kendo-ui/linear-gauge/index) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo LinearGauge:
+### Configuration
 
-1.  Make sure you have followed all the steps from the [Introduction](/aspnet-mvc/introduction) help topic.
+Below are listed the steps for you to follow when configuring the Kendo UI Linear Gauge.
 
-2.  Create a new action method which renders the view:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+**Step 2** Create a new action method which renders the view.
+
+###### Example
 
         public ActionResult Index()
         {
             return View();
         }
-3.  Add a LinearGauge:
-    - WebForms
 
-            <%: Html.Kendo().LinearGauge()
-                    .Name("linearGauge") // The name of the linearGauge is mandatory. It specifies the "id" attribute of the widget.
-                    .Scale(scale => scale
-                        .Min(0) // Set min value of the linearGauge
-                        .Max(200) // Set min value of the linearGauge
-                    )
-                    .Pointer(pointer => pointer
-                        .Value(10) // Set the value of the linearGauge
-                    )
-            %>
-    - Razor
+**Step 3** Add a LinearGauge.
 
-            @(Html.Kendo().LinearGauge()
-                  .Name("linearGauge") // The name of the linearGauge is mandatory. It specifies the "id" attribute of the widget.
-                  .Scale(scale => scale
-                      .Min(0) // Set min value of the linearGauge
-                      .Max(200) // Set min value of the linearGauge
-                  )
-                  .Pointer(pointer => pointer
-                      .Value(10) // Set the value of the linearGauge
-                  )
-            )
+###### Example
 
-## Accessing an Existing LinearGauge
+**WebForms**
 
-You can reference an existing LinearGauge instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/dataviz/lineargauge#methods) to control its behavior.
+        <%: Html.Kendo().LinearGauge()
+                .Name("linearGauge") // The name of the linearGauge is mandatory. It specifies the "id" attribute of the widget.
+                .Scale(scale => scale
+                    .Min(0) // Set min value of the linearGauge
+                    .Max(200) // Set min value of the linearGauge
+                )
+                .Pointer(pointer => pointer
+                    .Value(10) // Set the value of the linearGauge
+                )
+        %>
 
-### Accessing an existing LinearGauge instance
+**Razor**
 
-    //Put this after your Kendo LinearGauge for ASP.NET MVC declaration
-    <script>
-    $(function() {
-    // Notice that the Name() of the linearGauge is used to get its client-side instance
-        var gauge = $("#linearGauge").data("kendoLinearGauge");
-    });
-    </script>
+        @(Html.Kendo().LinearGauge()
+              .Name("linearGauge") // The name of the linearGauge is mandatory. It specifies the "id" attribute of the widget.
+              .Scale(scale => scale
+                  .Min(0) // Set min value of the linearGauge
+                  .Max(200) // Set min value of the linearGauge
+              )
+              .Pointer(pointer => pointer
+                  .Value(10) // Set the value of the linearGauge
+              )
+        )
 
+## Reference
+
+### Existing Instances
+
+You can reference an existing Kendo UI LinearGauge instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [LinearGauge API](/api/javascript/dataviz/ui/lineargauge#methods) to control its behavior.
+
+###### Example
+
+        //Put this after your Kendo LinearGauge for ASP.NET MVC declaration
+        <script>
+        $(function() {
+        // Notice that the Name() of the linearGauge is used to get its client-side instance
+            var gauge = $("#linearGauge").data("kendoLinearGauge");
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the LinearGauge:
+
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Overview of the Kendo UI LinearGauge Widget]({% slug overview_kendoui_lineargauge_widget %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
