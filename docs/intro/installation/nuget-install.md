@@ -14,17 +14,19 @@ Telerik maintains a number of NuGet packages related to Kendo UI.
 
 Official releases, service packs and internal builds are available for registered users.
 
-## Installation
+## Use the Telerik Private NuGet Feed
 
-### Instructions
+### Install NuGet Packages
 
 See the [NuGet installation instructions]({% slug aspnetmvc_nuget %}) in the UI for ASP.NET MVC documentation.
+
+### Local Content Distribution
 
 After installing the packages, the content scripts and stylesheets are copied to your application, as outlined below:
 * `/Scripts/kendo/<version>/`&mdash;Contains the minified JavaScript files.
 * `/Content/kendo/<version>/`&mdash;Consists of the minified CSS files and theme images.
 
-### List of Provided Packages for Kendo UI
+## List of Provided Packages
 
 The NuGet Feed provides the following packages related to the UI for ASP.NET MVC:
 
