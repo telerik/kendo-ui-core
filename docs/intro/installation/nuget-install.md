@@ -1,7 +1,7 @@
 ---
 title: NuGet Packages
 page_title: NuGet Packages | Kendo UI Getting Started
-description: "Get HTML5 UI frameworks and widgets by installing Kendo UI Professional or Kendo UI Core NuGet package."
+description: "Get HTML5 UI frameworks and widgets by installing Kendo UI Professional or Kendo UI Core NuGet packages."
 slug: kendoui_nuget_packages
 position: 4
 ---
@@ -10,21 +10,23 @@ position: 4
 
 [NuGet](https://www.nuget.org) is a popular .NET package manager.
 
-Telerik maintains a number NuGet packages related to Kendo UI.
+Telerik maintains a number of NuGet packages related to Kendo UI.
 
 Official releases, service packs and internal builds are available for registered users.
 
-## Installation Instructions
+## Installation
 
-See [NuGet Installation Instructions]({% slug aspnetmvc_nuget %}) in the UI for ASP.NET MVC documentation.
+### Instructions
 
-After installing the packages, the content scripts and stylesheets will be copied to your application, as outlined below:
+See the [NuGet installation instructions]({% slug aspnetmvc_nuget %}) in the UI for ASP.NET MVC documentation.
+
+After installing the packages, the content scripts and stylesheets are copied to your application, as outlined below:
 * `/Scripts/kendo/<version>/`&mdash;Contains the minified JavaScript files.
 * `/Content/kendo/<version>/`&mdash;Consists of the minified CSS files and theme images.
 
-## List of Provided Packages for Kendo UI
+### List of Provided Packages for Kendo UI
 
-The NuGet Feed provides the following packages related to UI for ASP.NET MVC:
+The NuGet Feed provides the following packages related to the UI for ASP.NET MVC:
 
 - `KendoUIProfessional`&mdash;Kendo UI for ASP.NET MVC 5 Commercial.
 - `KendoUIProfessional.Trial`&mdash;Kendo UI Trial.
@@ -32,7 +34,7 @@ The NuGet Feed provides the following packages related to UI for ASP.NET MVC:
 
 > **Important**
 >
-> [UI for ASP.NET MVC packages]({% slug aspnetmvc_nuget %}) are listed in a separate section.
+> The [UI for ASP.NET MVC packages]({% slug aspnetmvc_nuget %}) are listed in a separate section.
 
 ## See Also
 
@@ -48,4 +50,6 @@ Other articles on getting started with Kendo UI:
 * [Set Data Attributes]({% slug dataattributes_configuration_installation %})
 * [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})
 * [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
+* [Edit Widgets]({% slug kendoui_editing_gettingstarted %})
 * [Create Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
+* [Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})

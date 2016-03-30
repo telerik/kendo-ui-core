@@ -100,7 +100,6 @@ Although the [Amazon CloudFront service](https://aws.amazon.com/cloudfront/) pro
 Other articles on getting started with Kendo UI:
 
 * [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
-* [Kendo UI Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
 * [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
 * [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
 * [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
@@ -109,4 +108,7 @@ Other articles on getting started with Kendo UI:
 * [Set Data Attributes]({% slug dataattributes_configuration_installation %})
 * [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})
 * [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
+* [Edit Widgets]({% slug kendoui_editing_gettingstarted %})
 * [Create Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
+* [Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
+* [NuGet Packages]({% slug kendoui_nuget_packages %})

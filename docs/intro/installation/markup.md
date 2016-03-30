@@ -129,7 +129,6 @@ Below is an example referring to the Kendo UI AngularJS AutoComplete directive. 
 Other articles on getting started with Kendo UI:
 
 * [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
-* [Kendo UI Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
 * [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
@@ -138,4 +137,7 @@ Other articles on getting started with Kendo UI:
 * [Set Data Attributes]({% slug dataattributes_configuration_installation %})
 * [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})
 * [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
+* [Edit Widgets]({% slug kendoui_editing_gettingstarted %})
 * [Create Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
+* [Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
+* [NuGet Packages]({% slug kendoui_nuget_packages %})
