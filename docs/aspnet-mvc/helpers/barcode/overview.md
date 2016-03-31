@@ -17,6 +17,7 @@ The Barcode HtmlHelper extension is a server-side wrapper for the [Kendo UI Barc
 Below are listed the steps for you to follow when configuring the Kendo UI Barcode.
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+
 **Step 2** Create a new action method which renders the view.
 
 ###### Example
@@ -25,7 +26,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
         {
             return View();
         }
-        
+
 **Step 3** Add a Barcode.
 
 ###### Example
@@ -33,15 +34,15 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
 **WebForms**
 
         <%: Html.Kendo().Barcode()
-                .Name("barcode") // The name of the barcode is mandatory. It specifies the "id" attribute of the widget.
-                .Value("foo") // Set the value of the barcode
+                .Name("barcode") //The name of the Barcode is mandatory. It specifies the "id" attribute of the widget.
+                .Value("foo") //Set the value of the Barcode.
         %>
 
 **Razor**
 
         @(Html.Kendo().Barcode()
-              .Name("barcode") // The name of the barcode is mandatory. It specifies the "id" attribute of the widget.
-              .Value("foo") // Set the value of the barcode
+              .Name("barcode") //The name of the Barcode is mandatory. It specifies the "id" attribute of the widget.
+              .Value("foo") //Set the value of the Barcode.
         )
 
 **Step 4** Choose the appropriate symbology (encoding) from the available options listed [here](/api/javascript/dataviz/ui/barcode#configuration-type). Specify it through the Encoding method which accepts an `enum` value.
@@ -52,7 +53,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
 
         <%: Html.Kendo().Barcode()
                 .Name("barcode")
-                .Encoding(BarcodeSymbology.EAN13) //by default Code39 encoding is used
+                .Encoding(BarcodeSymbology.EAN13) //By default, Code39 encoding is used.
                 .Value("foo")
         %>
 
@@ -60,7 +61,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
 
         @(Html.Kendo().Barcode()
               .Name("barcode")
-              .Encoding(BarcodeSymbology.EAN13) //by default Code39 encoding is used
+              .Encoding(BarcodeSymbology.EAN13) //By default, Code39 encoding is used.
               .Value("foo")
         )
 
@@ -72,10 +73,10 @@ You can reference an existing Kendo UI Barcode instance via [`jQuery.data()`](ht
 
 ###### Example
 
-      //Put this after your Kendo Barcode for ASP.NET MVC declaration
+      //Put this after your Kendo UI Barcode for ASP.NET MVC declaration.
       <script>
       $(function() {
-          // Notice that the Name() of the barcode is used to get its client-side instance
+          //Notice that the Name() of the Barcode is used to get its client-side instance.
           var barcode = $("#barcode").data("kendoBarcode");
           barcode.value("foo") //make sure you supply valid value for that encoding then the barcode will redraw automatically
       });

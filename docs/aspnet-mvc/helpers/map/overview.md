@@ -17,6 +17,7 @@ The Map HtmlHelper extension is a server-side wrapper for the [Kendo UI Map](htt
 Below are listed the steps for you to follow when configuring the Kendo UI Map.
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+
 **Step 2** Create a new action method which renders the view.
 
 ###### Example
@@ -83,7 +84,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
     )
     <script>
         function mapReset(e) {
-            // Handle the reset event
+            //Handle the reset event.
         }
     </script>
 
@@ -104,7 +105,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
     %>
     <script>
         function mapReset(e) {
-            // Handle the reset event
+            //Handle the reset event.
         }
     </script>
 
@@ -128,7 +129,7 @@ The example below demonstrates how to subscribe to events by a template delegate
         .Events(e => e
           .Reset(@<text>
             function() {
-                // Handle the reset event inline
+                //Handle the reset event inline.
             }
             </text>)
         )
@@ -142,7 +143,7 @@ You can reference an existing Kendo UI Map instance via [`jQuery.data()`](http:/
 
 ###### Example
 
-    // Put this after your Kendo UI Map for ASP.NET MVC declaration.
+    //Put this after your Kendo UI Map for ASP.NET MVC declaration.
     <script>
     $(function() {
         //Notice that the Name() of the Map is used to get its client-side instance.

@@ -17,6 +17,7 @@ The DateTimePicker HtmlHelper extension is a server-side wrapper for the [Kendo 
 Below are listed the steps for you to follow when configuring the Kendo UI DateTimePicker.
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+
 **Step 2** Create a new action method which renders the view.
 
 ###### Example
@@ -68,15 +69,15 @@ The examples below demonstrates how to subscribe to events by a handler name.
         %>
         <script>
         function datetimepicker_open() {
-            //Handle the open event
+            //Handle the open event.
         }
 
         function datetimepicker_close() {
-            //Handle the close event
+            //Handle the close event.
         }
 
         function datetimepicker_change() {
-            //Handle the change event
+            //Handle the change event.
         }
         </script>
 
@@ -92,15 +93,15 @@ The examples below demonstrates how to subscribe to events by a handler name.
         )
         <script>
         function datetimepicker_open() {
-            //Handle the open event
+            //Handle the open event.
         }
 
         function datetimepicker_close() {
-            //Handle the close event
+            //Handle the close event.
         }
 
         function datetimepicker_change() {
-            //Handle the change event
+            //Handle the change event.
         }
         </script>
 

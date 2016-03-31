@@ -17,6 +17,7 @@ The Editor HtmlHelper extension is a server-side wrapper for the [Kendo UI Edito
 Below are listed the steps for you to follow when configuring the Kendo UI Editor.
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+
 **Step 2** Create a new action method which renders the view.
 
 ###### Example
@@ -33,15 +34,15 @@ Below are listed the steps for you to follow when configuring the Kendo UI Edito
 **WebForms**
 
         <%: Html.Kendo().Editor()
-                .Name("editor") // The name of the editor is mandatory. It specifies the "id" attribute of the widget.
-                .Value("<p>Initial value</p>") // Set the value of the editor
+                .Name("editor") //The name of the Editor is mandatory. It specifies the "id" attribute of the widget.
+                .Value("<p>Initial value</p>") //Set the value of the Editor.
         %>
 
 **Razor**
 
         @(Html.Kendo().Editor()
-              .Name("editor") // The name of the editor is mandatory. It specifies the "id" attribute of the widget.
-              .Value("<p>Initial value</p>") // Set the value of the editor
+              .Name("editor") //The name of the Editor is mandatory. It specifies the "id" attribute of the widget.
+              .Value("<p>Initial value</p>") //Set the value of the Editor.
         )
 
 ### Server Value Processing
@@ -82,7 +83,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
         %>
         <script>
             function editor_change() {
-                // Handle the change event
+                //Handle the change event.
             }
         </script>
 
@@ -96,7 +97,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
         )
         <script>
             function editor_change() {
-                // Handle the change event
+                //Handle the change event.
             }
         </script>
 
@@ -109,7 +110,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
               .Events(e => e
                   .Change(@<text>
                     function() {
-                        // Handle the change event inline
+                        //Handle the change event inline.
                     }
                     </text>)
               )
@@ -123,10 +124,10 @@ You can reference an existing Kendo UI Editor instance via [`jQuery.data()`](htt
 
 ###### Example
 
-        // Put this after your Kendo Editor for ASP.NET MVC declaration
+        //Put this after your Kendo UI Editor for ASP.NET MVC declaration.
         <script>
         $(function() {
-            // Notice that the Name() of the editor is used to get its client-side instance
+            //Notice that the Name() of the Editor is used to get its client-side instance.
             var editor = $("#editor").data("kendoEditor");
         });
         </script>

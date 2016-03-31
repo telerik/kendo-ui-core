@@ -17,6 +17,7 @@ The Calendar HtmlHelper extension is a server-side wrapper for the [Kendo UI Cal
 Below are listed the steps for you to follow when configuring the Kendo UI Calendar.
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+
 **Step 2** Create a new action method which renders the view.
 
 ###### Example
@@ -33,19 +34,19 @@ Below are listed the steps for you to follow when configuring the Kendo UI Calen
 **WebForms**
 
         <%: Html.Kendo().Calendar()
-            .Name("calendar") //The name of the calendar is mandatory. It specifies the "id" attribute of the widget.
-            .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set min time of the calendar
-            .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set min date of the calendar
-            .Value(DateTime.Now) //Set the value of the calendar
+            .Name("calendar") //The name of the Calendar is mandatory. It specifies the "id" attribute of the widget.
+            .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the Calendar.
+            .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the Calendar.
+            .Value(DateTime.Now) //Set the value of the Calendar.
         %>
 
 **Razor**
 
         @(Html.Kendo().Calendar()
-            .Name("calendar") //The name of the calendar is mandatory. It specifies the "id" attribute of the widget.
-            .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set min time of the calendar
-            .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set min date of the calendar
-            .Value(DateTime.Now) //Set the value of the calendar
+            .Name("calendar") //The name of the Calendar is mandatory. It specifies the "id" attribute of the widget.
+            .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the Calendar.
+            .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the Calendar.
+            .Value(DateTime.Now) //Set the value of the Calendar.
         )
 
 ## Event Handling
@@ -69,11 +70,11 @@ The examples below demonstrates how to subscribe to events by a handler name.
         %>
         <script>
         function calendar_navigate() {
-            //Handle the navigate event
+            //Handle the navigate event.
         }
 
         function calendar_change() {
-            //Handle the change event
+            //Handle the change event.
         }
         </script>
 
@@ -88,14 +89,13 @@ The examples below demonstrates how to subscribe to events by a handler name.
         )
         <script>
         function calendar_navigate() {
-            //Handle the navigate event
+            //Handle the navigate event.
         }
 
         function calendar_change() {
-            //Handle the change event
+            //Handle the change event.
         }
         </script>
-
 
 ### By Template Delegate
 
@@ -110,12 +110,12 @@ The example below demonstrates how to subscribe to events by a template delegate
           .Events(e => e
               .Change(@<text>
                 function() {
-                    //Handle the change event inline
+                    //Handle the change event inline.
                 }
               </text>)
               .Navigate(@<text>
                 function() {
-                    //Handle the navigate event inline
+                    //Handle the navigate event inline.
                 }
                 </text>)
           )
@@ -129,10 +129,10 @@ You can reference an existing Kendo UI Calendar instance via [`jQuery.data()`](h
 
 ###### Example
 
-        //Put this after your Kendo Calendar for ASP.NET MVC declaration
+        //Put this after your Kendo UI Calendar for ASP.NET MVC declaration.
         <script>
         $(function() {
-        // Notice that the Name() of the calendar is used to get its client-side instance
+        //Notice that the Name() of the Calendar is used to get its client-side instance.
         var calendar = $("#calendar").data("kendoCalendar");
         });
         </script>
