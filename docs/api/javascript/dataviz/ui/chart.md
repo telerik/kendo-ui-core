@@ -18113,6 +18113,25 @@ Format placeholders:
     });
     </script>
 
+### tooltip.opacity `Number` *(default: 1)*
+
+The opacity of the tooltip.
+
+#### Example - set the chart tooltip opacity
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      tooltip: {
+        visible: true,
+        opacity: 0.5
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
 ### tooltip.padding `Number|Object`
 
 The padding of the tooltip. A numeric value will set all paddings.
