@@ -4708,6 +4708,8 @@ If set to `true` the grid will display a pager. By default paging is disabled.
 
 Can be set to a JavaScript object which represents the pager configuration.
 
+> Don't forget to set a [`pageSize`](/api/javascript/data/datasource#configuration-pageSize), no matter if paging is performed client-side or server-side. A `pageSize` can be defined in the `pageable` settings, or in the [`dataSource`](/api/javascript/ui/grid#configuration-dataSource) settings. If an already existing dataSource instance is passed to the Grid, then the [`pageSize`](/api/javascript/data/datasource#configuration-pageSize) option should be set in the dataSource's settings and not in the `pageable` settings.
+
 #### Example - enable paging
 
     <div id="grid"></div>

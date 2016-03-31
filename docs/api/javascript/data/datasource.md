@@ -645,7 +645,7 @@ The page of data which the data source will return when the [view](#methods-view
 
 ### pageSize `Number`
 
-The number of data items per page.
+The number of data items per page. The property has no default value, that's why if paging should be used, make sure some pageSize is set.
 
 > The data source will page the data items client-side unless the [serverPaging](#configuration-serverPaging) option is set to `true`.
 
@@ -1209,7 +1209,7 @@ Use the [parameterMap](#configuration-transport.parameterMap) option to send the
 
 If set to `true` the data source will leave the data item paging implementation to the remote service. By default the data source performs paging client-side.
 
-> Don't forget to set [schema.total](#configuration-schema.total) if you set `serverPaging` to `true`.
+> Don't forget to set [`schema.total`](#configuration-schema.total) if you set `serverPaging` to `true`. In addition, [`pageSize`](#configuration-pageSize) should be set no matter if paging is performed client-side or server-side.
 
 The following options are sent to the server when server paging is enabled:
 
