@@ -24,6 +24,7 @@ There are two ways to bind a Kendo UI DropDownList for ASP.NET MVC:
 Below are listed the steps for you to follow when configuring the Kendo UI DropDownList for server binding to the Northwind **Products** table using Linq to SQL.
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+
 **Step 2** Create a new action method and pass the **Products** table as the model.
 
 ###### Example
@@ -56,8 +57,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
         <%: Html.Kendo().DropDownList()
             .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
-            .DataTextField("ProductName") //Specifies which property of the Product to be used by the DropDownList as a text.
-            .DataValueField("ProductID") //Specifies which property of the Product to be used by the DropDownList as a value.
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the DropDownList as a text.
+            .DataValueField("ProductID") //Specify which property of the Product to be used by the DropDownList as a value.
             .BindTo(Model)   //Pass the list of Products to the DropDownList.
             .SelectedIndex(10) //Select an item with index 10. Note that the indexes are zero-based.
         %>
@@ -66,8 +67,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
         @(Html.Kendo().DropDownList()
           .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
-          .DataTextField("ProductName") //Specifies which property of the Product to be used by the DropDownList as a text.
-          .DataValueField("ProductID") //Specifies which property of the Product to be used by the DropDownList as a value.
+          .DataTextField("ProductName") //Specify which property of the Product to be used by the DropDownList as a text.
+          .DataValueField("ProductID") //Specify which property of the Product to be used by the DropDownList as a value.
           .BindTo(Model)   //Pass the list of Products to the DropDownList.
           .SelectedIndex(10) //Select an item with index 10. Note that the indexes are zero-based.
         )
@@ -104,15 +105,15 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
         <%: Html.Kendo().DropDownList()
             .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
-            .DataTextField("ProductName") //Specifies which property of the Product to be used by the DropDownList as a text.
-            .DataValueField("ProductID") //Specifies which property of the Product to be used by the DropDownList as a value.
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the DropDownList as a text.
+            .DataValueField("ProductID") //Specify which property of the Product to be used by the DropDownList as a value.
             .DataSource(source =>
             {
                    source.Read(read =>
                    {
                         read.Action("GetProducts", "Home"); //Set the Action and Controller names.
                    })
-                   .ServerFiltering(true); //If true the DataSource will not filter the data on the client.
+                   .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
             })
             .SelectedIndex(0) //Select first item.
         %>
@@ -121,15 +122,15 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
         @(Html.Kendo().DropDownList()
             .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
-            .DataTextField("ProductName") //Specifies which property of the Product to be used by the DropDownList as a text.
-            .DataValueField("ProductID") //Specifies which property of the Product to be used by the DropDownList as a value.
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the DropDownList as a text.
+            .DataValueField("ProductID") //Specify which property of the Product to be used by the DropDownList as a value.
             .DataSource(source =>
             {
                    source.Read(read =>
                    {
                         read.Action("GetProducts", "Home"); //Set the Action and Controller names.
                    })
-                   .ServerFiltering(true); //If true the DataSource will not filter the data on the client.
+                   .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
             })
             .SelectedIndex(0) //Select the first item.
         )
@@ -172,8 +173,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
         <%: Html.Kendo().DropDownList()
             .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
-            .DataTextField("ProductName") //Specifies which property of the Product to be used by the DropDownList as a text.
-            .DataValueField("ProductID") //Specifies which property of the Product to be used by the DropDownList as a value.
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the DropDownList as a text.
+            .DataValueField("ProductID") //Specify which property of the Product to be used by the DropDownList as a value.
             .DataSource(source =>
             {
                 source.Custom()
@@ -195,8 +196,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
         @(Html.Kendo().DropDownList()
             .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
-            .DataTextField("ProductName") //Specifies which property of the Product to be used by the DropDownList as a text.
-            .DataValueField("ProductID") //Specifies which property of the Product to be used by the DropDownList as a value.
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the DropDownList as a text.
+            .DataValueField("ProductID") //Specify which property of the Product to be used by the DropDownList as a value.
             .DataSource(source =>
             {
                 source.Custom()
@@ -224,8 +225,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
         <%: Html.Kendo().DropDownList()
                 .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
-                .DataTextField("ProductName") //Specifies which property of the Product to be used by the DropDownList as a text.
-                .DataValueField("ProductID") //Specifies which property of the Product to be used by the DropDownList as a value.
+                .DataTextField("ProductName") //Specify which property of the Product to be used by the DropDownList as a text.
+                .DataValueField("ProductID") //Specify which property of the Product to be used by the DropDownList as a value.
                 .Filter(FilterType.Contains)
                 .DataSource(source =>
                 {
@@ -248,8 +249,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
         @(Html.Kendo().DropDownList()
               .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
-              .DataTextField("ProductName") //Specifies which property of the Product to be used by the DropDownList as a text.
-              .DataValueField("ProductID") //Specifies which property of the Product to be used by the DropDownList as a value.
+              .DataTextField("ProductName") //Specify which property of the Product to be used by the DropDownList as a text.
+              .DataValueField("ProductID") //Specify which property of the Product to be used by the DropDownList as a value.
               .Filter(FilterType.Contains)
               .DataSource(source =>
               {
@@ -349,11 +350,11 @@ The examples below demonstrates how to subscribe to events by a handler name.
         %>
         <script>
         function dropdownlist_select() {
-            //Handle the select event
+            //Handle the select event.
         }
 
         function dropdownlist_change() {
-            //Handle the change event
+            //Handle the change event.
         }
         </script>
 
@@ -406,7 +407,7 @@ You can reference an existing Kendo UI DropDownList instance via [`jQuery.data()
 
 ###### Example
 
-        //Put this after your Kendo DropDownList for ASP.NET MVC declaration.
+        //Put this after your Kendo UI DropDownList for ASP.NET MVC declaration.
         <script>
         $(function() {
         //Notice that the Name() of the DropDownList is used to get its client-side instance.

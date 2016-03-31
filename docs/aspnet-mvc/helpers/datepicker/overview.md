@@ -17,6 +17,7 @@ The DatePicker HtmlHelper extension is a server-side wrapper for the [Kendo UI D
 Below are listed the steps for you to follow when configuring the Kendo UI DatePicker.
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+
 **Step 2** Create a new action method which renders the view.
 
 ###### Example
@@ -33,19 +34,19 @@ Below are listed the steps for you to follow when configuring the Kendo UI DateP
 **WebForms**
 
         <%: Html.Kendo().DatePicker()
-            .Name("datepicker") //The name of the datepicker is mandatory. It specifies the "id" attribute of the widget.
-            .Min(new DateTime(1900, 1, 1)) //Set min date of the datepicker
-            .Max(new DateTime(2099, 12, 31)) //Set min date of the datepicker
-            .Value(DateTime.Today) //Set the value of the datepicker
+            .Name("datepicker") //The name of the DatePicker is mandatory. It specifies the "id" attribute of the widget.
+            .Min(new DateTime(1900, 1, 1)) //Set the min date of the DatePicker.
+            .Max(new DateTime(2099, 12, 31)) //Set the min date of the DatePicker.
+            .Value(DateTime.Today) //Set the value of the DatePicker.
         %>
 
 **Razor**
 
         @(Html.Kendo().DatePicker()
-            .Name("datepicker") //The name of the datepicker is mandatory. It specifies the "id" attribute of the widget.
-            .Min(new DateTime(1900, 1, 1)) //Set min date of the datepicker
-            .Max(new DateTime(2099, 12, 31)) //Set min date of the datepicker
-            .Value(DateTime.Today) //Set the value of the datepicker
+            .Name("datepicker") //The name of the DatePicker is mandatory. It specifies the "id" attribute of the widget.
+            .Min(new DateTime(1900, 1, 1)) //Set the min date of the DatePicker.
+            .Max(new DateTime(2099, 12, 31)) //Set the min date of the DatePicker.
+            .Value(DateTime.Today) //Set the value of the DatePicker.
         )
 
 ## Event Handling
@@ -117,12 +118,12 @@ The example below demonstrates how to subscribe to events by a template delegate
       .Events(e => e
           .Open(@<text>
             function() {
-                //Handle the open event inline
+                //Handle the open event inline.
             }
           </text>)
           .Change(@<text>
             function() {
-                //Handle the change event inline
+                //Handle the change event inline.
             }
             </text>)
       )
@@ -136,10 +137,10 @@ You can reference an existing Kendo UI DatePicker instance via [`jQuery.data()`]
 
 ###### Example
 
-        //Put this after your Kendo DatePicker for ASP.NET MVC declaration.
+        //Put this after your Kendo UIDatePicker for ASP.NET MVC declaration.
         <script>
         $(function() {
-        //Notice that the Name() of the datepicker is used to get its client-side instance.
+        //Notice that the Name() of the DatePicker is used to get its client-side instance.
         var datepicker = $("#datepicker").data("kendoDatePicker");
         });
         </script>

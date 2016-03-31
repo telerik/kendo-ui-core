@@ -17,6 +17,7 @@ The ColorPalette HtmlHelper extension is a server-side wrapper for the [Kendo UI
 Below are listed the steps for you to follow when configuring the Kendo UI ColorPalette.
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+
 **Step 2** Create a new action method which renders the view.
 
 ###### Example
@@ -33,15 +34,15 @@ Below are listed the steps for you to follow when configuring the Kendo UI Color
 **WebForms**
 
         <%: Html.Kendo().ColorPalette()
-                .Name("colorpalette") // The name of the colorpalette is mandatory. It specifies the "id" attribute of the widget.
-                .Value("#ff0000") // Set the value of the colorpalette
+                .Name("colorpalette") //The name of the ColorPalette is mandatory. It specifies the "id" attribute of the widget.
+                .Value("#ff0000") //Set the value of the ColorPalette.
         %>
 
 **Razor**
 
         @(Html.Kendo().ColorPalette()
-              .Name("colorpalette") //The name of the colorpalette is mandatory. It specifies the "id" attribute of the widget.
-              .Value("#ff0000") //Set the value of the colorpalette
+              .Name("colorpalette") //The name of the ColorPalette is mandatory. It specifies the "id" attribute of the widget.
+              .Value("#ff0000") //Set the value of the ColorPalette.
         )
 
 ## Event Handling
@@ -64,7 +65,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
         %>
         <script>
             function colorpalette_change() {
-                // Handle the change event
+                //Handle the change event.
             }
         </script>
 
@@ -78,13 +79,13 @@ The examples below demonstrates how to subscribe to events by a handler name.
         )
         <script>
             function colorpalette_change() {
-                // Handle the change event
+                //Handle the change event.
             }
         </script>
 
 ### By Template Delegate
 
-###### Example 
+###### Example
 
 **Razor**
 
@@ -93,7 +94,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
               .Events(e => e
                   .Change(@<text>
                     function() {
-                        // Handle the change event inline
+                        //Handle the change event inline.
                     }
                     </text>)
               )
@@ -107,10 +108,10 @@ Reference an existing Kendo UI ColorPalette instance via [`jQuery.data()`](http:
 
 ###### Example
 
-        //Put this after your Kendo ColorPalette for ASP.NET MVC declaration
+        //Put this after your Kendo UI ColorPalette for ASP.NET MVC declaration.
         <script>
         $(function() {
-            // Notice that the Name() of the colorpalette is used to get its client-side instance
+            //Notice that the Name() of the ColorPalette is used to get its client-side instance.
             var colorpalette = $("#colorpalette").data("kendoColorPalette");
         });
         </script>

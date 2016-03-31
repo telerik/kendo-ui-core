@@ -17,6 +17,7 @@ The MaskedTextBox HtmlHelper extension is a server-side wrapper for the [Kendo U
 Below are listed the steps for you to follow when configuring the Kendo UI MaskedTextBox.
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+
 **Step 2** Create a new action method which renders the view.
 
         public ActionResult Index()
@@ -26,23 +27,25 @@ Below are listed the steps for you to follow when configuring the Kendo UI Maske
 
 **Step 3** Add a MaskedTextBox.
 
+###### Example
+
 **WebForms**
 
         <%: Html.Kendo().MaskedTextBox()
-                .Name("maskedtextbox") //The name of the maskedtextbox is mandatory. It specifies the "id" attribute of the widget.
-                .Mask("(000) 000-0000") //Set mask value of the maskedtextbox
-                .Value("(123) 345-6789") //Set value of the maskedtextbox
+                .Name("maskedtextbox") //The name of the MaskedTextBox is mandatory. It specifies the "id" attribute of the widget.
+                .Mask("(000) 000-0000") //Set the mask value of the MaskedTextBox.
+                .Value("(123) 345-6789") //Set the value of the MaskedTextBox.
         %>
 
 **Razor**
 
         @(Html.Kendo().MaskedTextBox()
-              .Name("maskedtextbox") //The name of the maskedtextbox is mandatory. It specifies the "id" attribute of the widget.
-              .Mask("(000) 000-0000") //Set mask value of the maskedtextbox
-              .Value("(123) 345-6789") //Set value of the maskedtextbox
+              .Name("maskedtextbox") //The name of the MaskedTextBox is mandatory. It specifies the "id" attribute of the widget.
+              .Mask("(000) 000-0000") //Set the mask value of the MaskedTextBox.
+              .Value("(123) 345-6789") //Set the value of the MaskedTextBox.
         )
 
-### Define Mmask Values
+### Define Mask Values
 
 The MaskedTextBox has [a list of predefined mask rules]({% slug overview_kendoui_maskedtextbox_widget%}#configuration-Rules), which can be used to compose the mask of a widget.
 
@@ -54,14 +57,14 @@ The example below demonstrates how to set a `zip code` mask
 
         <%: Html.Kendo().MaskedTextBox()
                 .Name("maskedtextbox")
-                .Mask("00000-9999") //Set zip code
+                .Mask("00000-9999") //Set the zip code.
         %>
 
 **Razor**
 
         @(Html.Kendo().MaskedTextBox()
               .Name("maskedtextbox")
-              .Mask("00000-9999") //Set zip code
+              .Mask("00000-9999") //Set the zip code.
         )
 
 > **Important**
@@ -83,7 +86,7 @@ The example below demonstrates how to define a custom rule for the `-` (minus) a
               .Rules(rules => {
                   rules.Add('~', "/[+-]/");
               })
-              .Mask("~0000") //Set a mask with custom rule
+              .Mask("~0000") //Set a mask with a custom rule.
       %>
 
 **Razor**
@@ -93,7 +96,7 @@ The example below demonstrates how to define a custom rule for the `-` (minus) a
             .Rules(rules => {
                 rules.Add('~', "/[+-]/");
             })
-            .Mask("~0000") //Set a mask with custom rule
+            .Mask("~0000") //Set a mask with a custom rule.
       )
 
 > **Important**
@@ -120,7 +123,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
       %>
       <script>
       function maskedtextbox_change() {
-          //Handle the change event
+          //Handle the change event.
       }
       </script>
 
@@ -134,7 +137,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
       )
       <script>
       function maskedtextbox_change() {
-          //Handle the change event
+          //Handle the change event.
       }
       </script>
 
@@ -147,7 +150,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
             .Events(e => e
                 .Change(@<text>
                   function() {
-                      //Handle the change event inline
+                      //Handle the change event inline.
                   }
                 </text>)
             )

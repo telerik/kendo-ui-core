@@ -24,6 +24,7 @@ There are two ways to bind a Kendo UI ComboBox for ASP.NET MVC:
 Below are listed the steps for you to follow when configuring the Kendo UI ComboBox for server binding to the Northwind **Products** table using Linq to SQL.
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+
 **Step 2** Create a new action method and pass the **Products** table as the model.
 
 ###### Example
@@ -56,8 +57,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
 
         <%: Html.Kendo().ComboBox()
             .Name("productComboBox") //The name of the ComboBox is mandatory. It specifies the "id" attribute of the widget.
-            .DataTextField("ProductName") //Specifies which property of the Product to be used by the ComboBox as a text.
-            .DataValueField("ProductID") //Specifies which property of the Product to be used by the ComboBox as a value.
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the ComboBox as a text.
+            .DataValueField("ProductID") //Specify which property of the Product to be used by the ComboBox as a value.
             .BindTo(Model)   //Pass the list of Products to the ComboBox.
             .SelectedIndex(10) //Select an item with index 10. Note that the indexes are zero-based.
         %>
@@ -66,8 +67,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
 
         @(Html.Kendo().ComboBox()
           .Name("productComboBox") //The name of the ComboBox is mandatory. It specifies the "id" attribute of the widget.
-          .DataTextField("ProductName") //Specifies which property of the Product to be used by the ComboBox as a text.
-          .DataValueField("ProductID") //Specifies which property of the Product to be used by the ComboBox as a value.
+          .DataTextField("ProductName") //Specify which property of the Product to be used by the ComboBox as a text.
+          .DataValueField("ProductID") //Specify which property of the Product to be used by the ComboBox as a value.
           .BindTo(Model)   //Pass the list of Products to the ComboBox.
           .SelectedIndex(10) //Select an item with index 10. Note that the indexes are zero-based.
         )
@@ -106,8 +107,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
 
         <%: Html.Kendo().ComboBox()
             .Name("productComboBox") //The name of the ComboBox is mandatory. It specifies the "id" attribute of the widget.
-            .DataTextField("ProductName") //Specifies which property of the Product to be used by the ComboBox as a text.
-            .DataValueField("ProductID") //Specifies which property of the Product to be used by the ComboBox as a value.
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the ComboBox as a text.
+            .DataValueField("ProductID") //Specify which property of the Product to be used by the ComboBox as a value.
             .Filter(FilterType.Contains)
             .DataSource(source =>
             {
@@ -124,8 +125,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
 
         @(Html.Kendo().ComboBox()
             .Name("productComboBox") //The name of the ComboBox is mandatory. It specifies the "id" attribute of the widget.
-            .DataTextField("ProductName") //Specifies which property of the Product to be used by the ComboBox as a text.
-            .DataValueField("ProductID") //Specifies which property of the Product to be used by the ComboBox as a value.
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the ComboBox as a text.
+            .DataValueField("ProductID") //Specify which property of the Product to be used by the ComboBox as a value.
             .Filter(FilterType.Contains)
             .DataSource(source =>
             {
@@ -176,8 +177,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
 
         <%: Html.Kendo().ComboBox()
             .Name("productComboBox")
-            .DataTextField("ProductName") //Specifies which property of the Product to be used by the ComboBox as a text.
-            .DataValueField("ProductID") //Specifies which property of the Product to be used by the ComboBox as a value.
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the ComboBox as a text.
+            .DataValueField("ProductID") //Specify which property of the Product to be used by the ComboBox as a value.
             .DataSource(source =>
             {
                 source.Custom()
@@ -199,8 +200,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
 
         @(Html.Kendo().ComboBox()
             .Name("productComboBox")
-            .DataTextField("ProductName") //Specifies which property of the Product to be used by the ComboBox as a text.
-            .DataValueField("ProductID") //Specifies which property of the Product to be used by the ComboBox as a value.
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the ComboBox as a text.
+            .DataValueField("ProductID") //Specify which property of the Product to be used by the ComboBox as a value.
             .DataSource(source =>
             {
                 source.Custom()
@@ -229,8 +230,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
 
      <%: Html.Kendo().ComboBox()
               .Name("productComboBox") //The name of the ComboBox is mandatory. It specifies the "id" attribute of the widget.
-              .DataTextField("ProductName") //Specifies which property of the Product to be used by the ComboBox as a text.
-              .DataValueField("ProductID") //Specifies which property of the Product to be used by the ComboBox as a value.
+              .DataTextField("ProductName") //Specify which property of the Product to be used by the ComboBox as a text.
+              .DataValueField("ProductID") //Specify which property of the Product to be used by the ComboBox as a value.
               .Filter(FilterType.Contains)
               .DataSource(source =>
               {
@@ -254,8 +255,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
 
       @(Html.Kendo().ComboBox()
             .Name("productComboBox") //The name of the ComboBox is mandatory. It specifies the "id" attribute of the widget.
-            .DataTextField("ProductName") //Specifies which property of the Product to be used by the ComboBox as a text.
-            .DataValueField("ProductID") //Specifies which property of the Product to be used by the ComboBox as a value.
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the ComboBox as a text.
+            .DataValueField("ProductID") //Specify which property of the Product to be used by the ComboBox as a value.
             .Filter(FilterType.Contains)
             .DataSource(source =>
             {

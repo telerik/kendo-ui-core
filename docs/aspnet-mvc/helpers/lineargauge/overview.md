@@ -17,6 +17,7 @@ The LinearGauge HtmlHelper extension is a server-side wrapper for the [Kendo Lin
 Below are listed the steps for you to follow when configuring the Kendo UI LinearGauge.
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+
 **Step 2** Create a new action method which renders the view.
 
 ###### Example
@@ -33,26 +34,26 @@ Below are listed the steps for you to follow when configuring the Kendo UI Linea
 **WebForms**
 
         <%: Html.Kendo().LinearGauge()
-                .Name("linearGauge") // The name of the linearGauge is mandatory. It specifies the "id" attribute of the widget.
+                .Name("linearGauge") //The name of the LinearGauge is mandatory. It specifies the "id" attribute of the widget.
                 .Scale(scale => scale
-                    .Min(0) // Set min value of the linearGauge
-                    .Max(200) // Set min value of the linearGauge
+                    .Min(0) //Set the min value of the LinearGauge.
+                    .Max(200) //Set the min value of the LinearGauge.
                 )
                 .Pointer(pointer => pointer
-                    .Value(10) // Set the value of the linearGauge
+                    .Value(10) //Set the value of the LinearGauge.
                 )
         %>
 
 **Razor**
 
         @(Html.Kendo().LinearGauge()
-              .Name("linearGauge") // The name of the linearGauge is mandatory. It specifies the "id" attribute of the widget.
+              .Name("linearGauge") //The name of the LinearGauge is mandatory. It specifies the "id" attribute of the widget.
               .Scale(scale => scale
-                  .Min(0) // Set min value of the linearGauge
-                  .Max(200) // Set min value of the linearGauge
+                  .Min(0) //Set the min value of the LinearGauge.
+                  .Max(200) //Set the min value of the LinearGauge.
               )
               .Pointer(pointer => pointer
-                  .Value(10) // Set the value of the linearGauge
+                  .Value(10) //Set the value of the LinearGauge.
               )
         )
 

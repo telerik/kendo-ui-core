@@ -17,6 +17,7 @@ The ColorPicker HtmlHelper extension is a server-side wrapper for the [Kendo UI 
 Below are listed the steps for you to follow when configuring the Kendo UI ColorPicker.
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+
 **Step 2** Create a new action method which renders the view.
 
 ###### Example
@@ -33,15 +34,15 @@ Below are listed the steps for you to follow when configuring the Kendo UI Color
 **WebForms**
 
         <%: Html.Kendo().ColorPicker()
-                .Name("colorpicker") // The name of the colorpicker is mandatory. It specifies the "id" attribute of the widget.
-                .Value("#ff0000") // Set the value of the colorpicker
+                .Name("colorpicker") //The name of the ColorPicker is mandatory. It specifies the "id" attribute of the widget.
+                .Value("#ff0000") //Set the value of the ColorPicker.
         %>
 
 **Razor**
 
         @(Html.Kendo().ColorPicker()
-              .Name("colorpicker") // The name of the colorpicker is mandatory. It specifies the "id" attribute of the widget.
-              .Value("#ff0000") // Set the value of the colorpicker
+              .Name("colorpicker") //The name of the ColorPicker is mandatory. It specifies the "id" attribute of the widget.
+              .Value("#ff0000") //Set the value of the ColorPicker.
         )
 
 ## Event Handling
@@ -67,19 +68,19 @@ The examples below demonstrates how to subscribe to events by a handler name.
     %>
     <script>
         function colorpicker_open() {
-            // Handle the open event
+            //Handle the open event.
         }
 
         function colorpicker_close() {
-            // Handle the close event
+            //Handle the close event.
         }
 
         function colorpicker_select() {
-            // Handle the select event
+            //Handle the select event.
         }
 
         function colorpicker_change() {
-            // Handle the change event
+            //Handle the change event.
         }
     </script>
 
@@ -96,19 +97,19 @@ The examples below demonstrates how to subscribe to events by a handler name.
     )
     <script>
         function colorpicker_open() {
-            // Handle the open event
+            //Handle the open event.
         }
 
         function colorpicker_close() {
-            // Handle the close event
+            //Handle the close event.
         }
 
         function colorpicker_select() {
-            // Handle the select event
+            //Handle the select event.
         }
 
         function colorpicker_change() {
-            // Handle the change event
+            //Handle the change event.
         }
     </script>
 
@@ -123,22 +124,22 @@ The examples below demonstrates how to subscribe to events by a handler name.
           .Events(e => e
               .Open(@<text>
                 function() {
-                    // Handle the open event inline
+                    //Handle the open event inline.
                 }
               </text>)
               .Close(@<text>
                 function() {
-                    // Handle the close event inline
+                    //Handle the close event inline.
                 }
                 </text>)
               .Select(@<text>
                 function() {
-                    // Handle the select event inline
+                    //Handle the select event inline.
                 }
                 </text>)
               .Change(@<text>
                 function() {
-                    // Handle the change event inline
+                    //Handle the change event inline.
                 }
                 </text>)
           )
@@ -152,10 +153,10 @@ Reference an existing Kendo UI ColorPicker instance via [`jQuery.data()`](http:/
 
 ###### Example
 
-        //Put this after your Kendo ColorPicker for ASP.NET MVC declaration
+        //Put this after your Kendo UI ColorPicker for ASP.NET MVC declaration.
         <script>
         $(function() {
-            // Notice that the Name() of the colorpicker is used to get its client-side instance
+            //Notice that the Name() of the ColorPicker is used to get its client-side instance.
             var colorpicker = $("#colorpicker").data("kendoColorPicker");
         });
         </script>

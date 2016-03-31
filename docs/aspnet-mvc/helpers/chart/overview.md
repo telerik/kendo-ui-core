@@ -24,6 +24,7 @@ There are two ways to bind a Kendo UI Chart for ASP.NET MVC:
 Below are listed the steps for you to follow when configuring the Kendo UI Chart for server binding to the to the list of **InternetUsers**.
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+
 **Step 2** Create a new action method and pass the **InternetUsers** list as the model.
 
 ###### Example
@@ -52,11 +53,11 @@ Below are listed the steps for you to follow when configuring the Kendo UI Chart
 
 **WebForms**
 
-        <%: Html.Kendo().Chart(Model) // The chart will be bound to the Model which is the InternetUsers list
-                .Name("internetUsersChart") // The name of the chart is mandatory. It specifies the "id" attribute of the widget.
+        <%: Html.Kendo().Chart(Model) //The Chart will be bound to the Model which is the InternetUsers list.
+                .Name("internetUsersChart") //The name of the Chart is mandatory. It specifies the "id" attribute of the widget.
                 .Title("Internet Users")
                 .Series(series => {
-                    series.Bar(model => model.Value) // Create a bar chart series bound to the "Value" property
+                    series.Bar(model => model.Value) //Create a Bar Chart series bound to the "Value" property.
                           .Name("United States");
                 })
                 .CategoryAxis(axis => axis
@@ -66,11 +67,11 @@ Below are listed the steps for you to follow when configuring the Kendo UI Chart
 
 **Razor**
 
-        @(Html.Kendo().Chart(Model) // The chart will be bound to the Model which is the InternetUsers list
-              .Name("internetUsersChart") // The name of the chart is mandatory. It specifies the "id" attribute of the widget.
+        @(Html.Kendo().Chart(Model) //The Chart will be bound to the Model which is the InternetUsers list
+              .Name("internetUsersChart") //The name of the Chart is mandatory. It specifies the "id" attribute of the widget.
               .Title("Internet Users")
               .Series(series => {
-                  series.Bar(model => model.Value) // Create a bar chart series bound to the "Value" property
+                  series.Bar(model => model.Value) //Create a Bar Chart series bound to the "Value" property.
                         .Name("United States");
               })
               .CategoryAxis(axis => axis
@@ -100,11 +101,11 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
       <script>
           function internetUsersChart_dataBound() {
-              // Handle the dataBound event
+              //Handle the dataBound event.
           }
 
           function internetUsersChart_seriesClick() {
-              // Handle the series click event
+              //Handle the series click event.
           }
       </script>
 
@@ -120,11 +121,11 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
       <script>
           function internetUsersChart_dataBound() {
-              // Handle the dataBound event
+              //Handle the dataBound event.
           }
 
           function internetUsersChart_seriesClick() {
-              // Handle the seriesClick event
+              //Handle the seriesClick event.
           }
       </script>
 
@@ -137,12 +138,12 @@ The examples below demonstrates how to subscribe to events by a handler name.
             .Events(e => e
                 .DataBound(@<text>
                      function() {
-                         // Handle the dataBound event inline
+                         //Handle the dataBound event inline.
                      }
                 </text>)
                 .SeriesClick(@<text>
                      function() {
-                         // Handle the seriesClick event inline
+                         //Handle the seriesClick event inline.
                      }
                 </text>)
             )
@@ -156,10 +157,10 @@ You can reference an existing Kendo UI Chart instance via [`jQuery.data()`](http
 
 ###### Example
 
-      // Put this after your Kendo Chart for ASP.NET MVC declaration
+      //Put this after your Kendo UI Chart for ASP.NET MVC declaration.
       <script>
           $(function() {
-              // Notice that the Name() of the chart is used to get its client-side instance
+              //Notice that the Name() of the Chart is used to get its client-side instance.
               var chart = $("#internetUsersChart").data("kendoChart");
           });
       </script>
