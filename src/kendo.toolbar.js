@@ -1373,7 +1373,7 @@ var __meta__ = { // jshint ignore:line
                         }
                     }
 
-                    if (lastHasFocus && this.overflowAnchor.css("visibility") !== "hidden") {
+                    if (lastHasFocus && this.overflowAnchor && this.overflowAnchor.css("visibility") !== "hidden") {
                         e.preventDefault();
                         this.overflowAnchor.focus();
                     }
