@@ -5,7 +5,11 @@ description: Configuration, methods and events of the Kendo UI Notification
 
 # kendo.ui.Notification
 
-*It is assumed that the reader of this page is familiar with the [Notification widget Overview](/web/notification/overview/).*
+Represents a Kendo UI Notification Widget. Inherits from [Widget](/api/javascript/ui/widget).
+
+> **Important**
+>
+> Please review the [Notification Overview]({% slug overview_kendoui_notification_widget %}) help topic if you're not familiar with the widget.
 
 ## Configuration
 
