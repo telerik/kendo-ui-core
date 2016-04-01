@@ -1,27 +1,33 @@
 ---
 title: Overview
-page_title: How to use MultiSelect HtmlHelper extension | Kendo UI documentation
-description: User Guide for server-side wrapper for Kendo UI MultiSelect for ASP.NET MVC widget.
+page_title: Overview | Kendo UI MultiSelect HtmlHelper
+description: "Get started with the server-side wrapper for the Kendo UI MultiSelect widget for ASP.NET MVC."
+slug: overview_multiselecthelper_aspnetmvc
+position: 1
 ---
 
-# MultiSelect
+# MultiSelect HtmlHelper Overview
 
-The MultiSelect HtmlHelper extension is a server-side wrapper for the [Kendo UI MultiSelect](/api/web/multiselect) widget.
+The MultiSelect HtmlHelper extension is a server-side wrapper for the [Kendo UI MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/index) widget.
 
 ## Getting Started
 
-There are two ways to bind a Kendo MultiSelect for ASP.NET MVC:
+### The Basics
 
-*   **server** - the data will be serialized to the client. No Ajax requests will be made.
-*   **ajax** - the multiselect will make ajax request to get the data.
+There are two ways to bind a Kendo UI MultiSelect for ASP.NET MVC:
 
-### Configure the Kendo MultiSelect for server binding
+* `server`&mdash;The data is serialized to the client. No Ajax requests are made.
+* `ajax`&mdash;The MultiSelect makes Ajax requests to get the data.
 
-Here is how to configure the Kendo MultiSelect for server binding to the Northwind Products table using Linq to SQL:
+### Server Binding
 
-1.  Make sure you have followed all the steps from the [Introduction](/aspnet-mvc/introduction) help topic.
+Below are listed the steps for you to follow when configuring the Kendo UI MultiSelect for server binding to the Northwind **Products** table using Linq to SQL.
 
-2.  Create a new action method and pass the Products table as the model:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+
+**Step 2** Create a new action method and pass the **Products** table as the model.
+
+###### Example
 
         public ActionResult Index()
         {
@@ -29,45 +35,60 @@ Here is how to configure the Kendo MultiSelect for server binding to the Northwi
 
             return View(northwind.Products);
         }
-3.  Make your view strongly typed:
-    - WebForms
 
-            <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
-               Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Product>>" %>
-    - Razor
+**Step 3** Make your view strongly typed.
 
-            @model IEnumerable<MvcApplication1.Models.Product>
-4.  Add a server bound multiselect:
-    - WebForms
+###### Example
 
-            <%: Html.Kendo().MultiSelect()
-                .Name("productMultiSelect") //The name of the multiselect is mandatory. It specifies the "id" attribute of the widget.
-                .DataTextField("ProductName") //Specifies which property of the Product to be used by the multiselect as a text.
-                .DataValueField("ProductID") //Specifies which property of the Product to be used by the multiselect as a value.
-                .BindTo(Model)   //Pass the list of Products to the multiselect.
-            %>
-    - Razor
+**WebForms**
 
-            @(Html.Kendo().MultiSelect()
-              .Name("productMultiSelect") //The name of the multiselect is mandatory. It specifies the "id" attribute of the widget.
-              .DataTextField("ProductName") //Specifies which property of the Product to be used by the multiselect as a text.
-              .DataValueField("ProductID") //Specifies which property of the Product to be used by the multiselect as a value.
-              .BindTo(Model)   //Pass the list of Products to the multiselect.
-            )
+        <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+           Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Product>>" %>
 
-### Configure the Kendo MultiSelect for ajax binding
+**Razor**
 
-Here is how to configure the Kendo MultiSelect for ajax binding to the Northwind Products table using Linq to SQL:
+        @model IEnumerable<MvcApplication1.Models.Product>
 
-1.  Make sure you have followed all the steps from the [Introduction](/aspnet-mvc/introduction) help topic.
+**Step 4** Add a server bound MultiSelect.
 
-2.  Create an action method which renders the view:
+###### Example
+
+**WebForms**
+
+        <%: Html.Kendo().MultiSelect()
+            .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
+            .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
+            .BindTo(Model)   //Pass the list of Products to the MultiSelect.
+        %>
+
+**Razor**
+
+        @(Html.Kendo().MultiSelect()
+          .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
+          .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
+          .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
+          .BindTo(Model)   //Pass the list of Products to the MultiSelect.
+        )
+
+### Ajax Binding
+
+Below are listed the steps for you to follow when configuring the Kendo UI MultiSelect for Ajax binding to the Northwind **Products** table using Linq to SQL.
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+
+**Step 2** Create an action method which renders the view.
+
+###### Example
 
         public ActionResult Index()
         {
             return View();
         }
-3.  Create a new action method and pass the Products table as Json result:
+
+**Step 3** Create a new action method and pass the **Products** table as JSON result.
+
+###### Example
 
         public JsonResult GetProducts()
         {
@@ -75,55 +96,67 @@ Here is how to configure the Kendo MultiSelect for ajax binding to the Northwind
 
             return Json(northwind.Products, JsonRequestBehavior.AllowGet);
         }
-4.  Add an ajax bound multiselect:
-    - WebForms
 
-            <%: Html.Kendo().MultiSelect()
-                .Name("productMultiSelect") //The name of the multiselect is mandatory. It specifies the "id" attribute of the widget.
-                .DataTextField("ProductName") //Specifies which property of the Product to be used by the multiselect as a text.
-                .DataValueField("ProductID") //Specifies which property of the Product to be used by the multiselect as a value.
-                .Filter(FilterType.Contains)
-                .DataSource(source =>
+**Step 4** Add an Ajax-bound MultiSelect.
+
+###### Example
+
+**WebForms**
+
+        <%: Html.Kendo().MultiSelect()
+            .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
+            .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
+            .Filter(FilterType.Contains)
+            .DataSource(source =>
+            {
+                source.Read(read =>
                 {
-                    source.Read(read =>
-                    {
-                        read.Action("GetProducts", "Home"); //Set the Action and Controller name
-                    })
-                    .ServerFiltering(true); //If true the DataSource will not filter the data on the client.
+                    read.Action("GetProducts", "Home"); //Set the Action and Controller names.
                 })
-            %>
-    - Razor
+                .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
+            })
+        %>
 
-            @(Html.Kendo().MultiSelect()
-                .Name("productMultiSelect") //The name of the multiselect is mandatory. It specifies the "id" attribute of the widget.
-                .DataTextField("ProductName") //Specifies which property of the Product to be used by the multiselect as a text.
-                .DataValueField("ProductID") //Specifies which property of the Product to be used by the multiselect as a value.
-                .Filter(FilterType.Contains)
-                .DataSource(source =>
-                {
-                   source.Read(read =>
-                   {
-                        read.Action("GetProducts", "Home"); //Set the Action and Controller name
-                   })
-                   .ServerFiltering(true); //If true the DataSource will not filter the data on the client.
-                })
-            )
+**Razor**
 
-> **Important:** **ToDataSourceResult()** extension method will modify structure of the result and the widget will not be able to bind to it. Please return simple array of data in this case.
+        @(Html.Kendo().MultiSelect()
+            .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
+            .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
+            .Filter(FilterType.Contains)
+            .DataSource(source =>
+            {
+               source.Read(read =>
+               {
+                    read.Action("GetProducts", "Home"); //Set the Action and Controller names.
+               })
+               .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
+            })
+        )
 
-### Configure the Kendo MultiSelect to work with ToDataSourceResult instance
+> **Important:**
+>
+> The `ToDataSourceResult()` extension method modifies the structure of the result and the widget is not able to bind to it. In this case, return a simple array of data.
 
-Here is how to configure the multiselect to use a custom datasource and thus to bind to a ToDataSourceResult instance.
+#### ToDataSourceResult Binding
 
-1.  Make sure you have followed all the steps from the [Introduction](/aspnet-mvc/introduction) help topic.
+Below are listed the steps for you to follow when configuring the Kendo UI MultiSelect to use a custom DataSource and thus bind to a `ToDataSourceResult` instance.
 
-2.  Create an action method which renders the view:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+
+**Step 2** Create an action method which renders the view.
+
+###### Example
 
         public ActionResult Index()
         {
             return View();
         }
-3.  Create a new action method and pass the Products table as Json result:
+
+**Step 3** Create a new action method and pass the **Products** table as JSON result.
+
+###### Example
 
         public JsonResult GetProducts([DataSourceRequest] DataSourceRequest request)
         {
@@ -131,62 +164,69 @@ Here is how to configure the multiselect to use a custom datasource and thus to 
 
             return Json(northwind.Products.ToDataSourceResult(request));
         }
-4.  Add a ajax bound multiselect:
-    - WebForms
 
-            <%: Html.Kendo().MultiSelect()
-                .Name("productMultiSelect")
-                .DataTextField("ProductName") //Specifies which property of the Product to be used by the multiselect as a text.
-                .DataValueField("ProductID") //Specifies which property of the Product to be used by the multiselect as a value.
-                .DataSource(source =>
-                {
-                    source.Custom()
-                          .ServerFiltering(true)
-                          .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances
-                          .Transport(transport =>
-                          {
-                              transport.Read("GetProducts", "Home");
-                          })
-                          .Schema(schema =>
-                          {
-                              schema.Data("Data") //define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
-                                    .Total("Total"); //define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
-                          });
-                })
-            %>
-    - Razor
+**Step 4** Add an Ajax-bound MultiSelect.
 
-            @(Html.Kendo().MultiSelect()
-                .Name("productMultiSelect")
-                .DataTextField("ProductName") //Specifies which property of the Product to be used by the multiselect as a text.
-                .DataValueField("ProductID") //Specifies which property of the Product to be used by the multiselect as a value.
-                .DataSource(source =>
-                {
-                    source.Custom()
-                          .ServerFiltering(true)
-                          .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances
-                          .Transport(transport =>
-                          {
-                              transport.Read("GetProducts", "Home");
-                          })
-                          .Schema(schema =>
-                          {
-                              schema.Data("Data") //define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
-                                    .Total("Total"); //define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
-                          });
-                })
-            )
+###### Example
 
-### Sending parameters to the server
-
-Here is how to configure the Kendo MultiSelect to send parameters to the server:
-
-- WebForms
+**WebForms**
 
         <%: Html.Kendo().MultiSelect()
-                .Name("productMultiSelect") //The name of the multiselect is mandatory. It specifies the "id" attribute of the widget.
-                .DataTextField("ProductName") //Specifies which property of the Product to be used by the multiselect as a text.
-                .DataValueField("ProductID") //Specifies which property of the Product to be used by the multiselect as a value.
+            .Name("productMultiSelect")
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
+            .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
+            .DataSource(source =>
+            {
+                source.Custom()
+                      .ServerFiltering(true)
+                      .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances
+                      .Transport(transport =>
+                      {
+                          transport.Read("GetProducts", "Home");
+                      })
+                      .Schema(schema =>
+                      {
+                          schema.Data("Data") //define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
+                                .Total("Total"); //define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
+                      });
+            })
+        %>
+
+**Razor**
+
+        @(Html.Kendo().MultiSelect()
+            .Name("productMultiSelect")
+            .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
+            .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
+            .DataSource(source =>
+            {
+                source.Custom()
+                      .ServerFiltering(true)
+                      .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
+                      .Transport(transport =>
+                      {
+                          transport.Read("GetProducts", "Home");
+                      })
+                      .Schema(schema =>
+                      {
+                          schema.Data("Data") //define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option
+                                .Total("Total"); //define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option
+                      });
+            })
+        )
+
+### Parameter Sending to Server
+
+Below are listed the steps for you to follow when configuring the Kendo UI MultiSelect to send parameters to the server.
+
+###### Example
+
+**WebForms**
+
+        <%: Html.Kendo().MultiSelect()
+                .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
+                .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
+                .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
                 .Filter(FilterType.Contains)
                 .DataSource(source =>
                 {
@@ -207,18 +247,18 @@ Here is how to configure the Kendo MultiSelect to send parameters to the server:
             }
         </script>
 
-- Razor
+**Razor**
 
         @(Html.Kendo().MultiSelect()
-              .Name("productMultiSelect") //The name of the multiselect is mandatory. It specifies the "id" attribute of the widget.
-              .DataTextField("ProductName") //Specifies which property of the Product to be used by the multiselect as a text.
-              .DataValueField("ProductID") //Specifies which property of the Product to be used by the multiselect as a value.
+              .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
+              .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
+              .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
               .Filter(FilterType.Contains)
               .DataSource(source =>
               {
                  source.Read(read =>
                  {
-                      read.Action("GetProducts", "Home") //Set the Action and Controller name
+                      read.Action("GetProducts", "Home") //Set the Action and Controller names.
                           .Data("onAdditionalData");
                  });
                  source.ServerFiltering(true);
@@ -233,7 +273,9 @@ Here is how to configure the Kendo MultiSelect to send parameters to the server:
             }
         </script>
 
-Here is how the **GetProducts** method looks like:
+The example below demonstrates how the `GetProducts` method is used.
+
+###### Example
 
         public JsonResult GetProducts(string text)
         {
@@ -257,28 +299,32 @@ Here is how the **GetProducts** method looks like:
             return Json(products, JsonRequestBehavior.AllowGet);
         }
 
-> The Kendo MultiSelect has default event handler for the DataSource's Data callback. If you do not
-define event handler, it will be used.
+> **Important**
+>
+> The Kendo UI MultiSelect has a default event handler for the Data callback of the DataSource. It is used when no event handler is defined.
 
-*Default event handler for the DataSource's Data callback*
+The example below demonstrates how to use the default event handler for the Data callback of the DataSource.
+
+###### Example
 
     function requestData(selector) {
         return { text: $(selector).data("kendoMultiSelect").input.val() };
     }
 
-As you can see the multiselect sends the input's value only if the end-user starts to type in it.
+As seen, the MultiSelect sends the value of the input only if the end-user starts to type in it.
 
-## Pre-select values on initial loading
+### Pre-select Values on Initial Load
 
-When deffered binding (AutoBind: false) is used you will need to specify a list of data items instead of just list of strings.
-This functionality is supported in Q1 SP1 2013 release and later versions of Kendo UI.
+When deferred binding&mdash;`AutoBind: false`&mdash;is used, specify a list of data items instead of just a list of strings. This functionality is supported in Kendo UI Q1 SP1 2013 and later versions.
 
-- WebForms
+###### Example
+
+**WebForms**
 
         <%= Html.Kendo().MultiSelect()
-                .Name("productMultiSelect") //The name of the multiselect is mandatory. It specifies the "id" attribute of the widget.
-                .DataTextField("ProductName") //Specifies which property of the Product to be used by the multiselect as a text.
-                .DataValueField("ProductID") //Specifies which property of the Product to be used by the multiselect as a value.
+                .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
+                .DataTextField("ProductName") //Specifies which property of the Product to be used by the MultiSelect as a text.
+                .DataValueField("ProductID") //Specifies which property of the Product to be used by the MultiSelect as a value.
                 .Filter(FilterType.Contains)
                 .AutoBind(false)
                 .DataSource(source =>
@@ -295,12 +341,12 @@ This functionality is supported in Q1 SP1 2013 release and later versions of Ken
                 })
         %>
 
-- Razor
+**razor**
 
         @(Html.Kendo().MultiSelect()
-              .Name("productMultiSelect") //The name of the multiselect is mandatory. It specifies the "id" attribute of the widget.
-              .DataTextField("ProductName") //Specifies which property of the Product to be used by the multiselect as a text.
-              .DataValueField("ProductID") //Specifies which property of the Product to be used by the multiselect as a value.
+              .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
+              .DataTextField("ProductName") //Specify which property of the Product to be used by the MultiSelect as a text.
+              .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
               .Filter(FilterType.Contains)
               .AutoBind(false)
               .DataSource(source =>
@@ -319,93 +365,114 @@ This functionality is supported in Q1 SP1 2013 release and later versions of Ken
 
 ### Grouping
 
-The widget supports binding to a grouped data source. The only requirement is to define a datasource group expression in order to group the data.
-This can be done using a [Custom DataSource configuration](/aspnet-mvc/custom-datasource). Refer to our online demo for more details:
+The MultiSelect supports binding to a grouped data source. Define a `datasource` group expression to group the data by using the [Custom DataSource configuration]({% slug customdatasource_aspnetmvc %}).
 
-- [Grouping demo](http://demos.telerik.com/aspnet-mvc/multiselect/grouping)
+For more information, refer to the [demo on grouping](http://demos.telerik.com/aspnet-mvc/autocomplete/grouping).
 
-> The data source will sort the grouped data either ascending or descending. If you would like to persist a specific group order, then you will need to use
-a [server grouping](/api/javascript/data/datasource#configuration-serverGrouping). Use the DataSource ServerGrouping method to define the `serverGrouping` option.
+> **Important**
+>
+> The data source sorts the grouped data either in ascending or descending order. If you want to persist a specific group order, use the [server grouping feature](/api/javascript/data/datasource#configuration-serverGrouping). Use the DataSource `ServerGrouping` method to define the `serverGrouping` option.
 
-## Accessing an Existing MultiSelect
+## Event Handling
 
-You can reference an existing MultiSelect instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/multiselect#methods) to control its behavior.
+You can subscribe to all MultiSelect [events](/api/javascript/ui/mutliselect#events).
 
+### By Handler Name
 
-### Accessing an existing MultiSelect instance
+The examples below demonstrates how to subscribe to events by a handler name.
 
-    //Put this after your Kendo MultiSelect  for ASP.NET MVC declaration
-    <script>
-    $(function() {
-    // Notice that the Name() of the multiselect is used to get its client-side instance
-    var multiselect = $("#productMultiSelect").data("kendoMultiSelect");
-    });
-    </script>
+###### Example
 
+**WebForms**
 
-## Handling Kendo UI MultiSelect events
+        <%: Html.Kendo().MultiSelect()
+            .Name("multiselect")
+            .BindTo(new string[] { "Item1", "Item2", "Item3" })
+            .Events(e => e
+                .Select("multiselect_select")
+                .Change("multiselect_change")
+            )
+        %>
+        <script>
+        function multiselect_select() {
+            //Handle the select event.
+        }
 
-You can subscribe to all [events](/api/web/multiselect#events) exposed by Kendo UI MultiSelect:
+        function multiselect_change() {
+            //Handle the change event.
+        }
+        </script>
 
-### WebForms - subscribe by handler name
+**Razor**
 
-    <%: Html.Kendo().MultiSelect()
-        .Name("multiselect")
-        .BindTo(new string[] { "Item1", "Item2", "Item3" })
-        .Events(e => e
-            .Select("multiselect_select")
-            .Change("multiselect_change")
+        @(Html.Kendo().MultiSelect()
+          .Name("multiselect")
+          .BindTo(new string[] { "Item1", "Item2", "Item3" })
+          .Events(e => e
+                .Select("multiselect_select")
+                .Change("multiselect_change")
+          )
         )
-    %>
-    <script>
-    function multiselect_select() {
-        //Handle the select event
-    }
+        <script>
+        function multiselect_select() {
+            //Handle the select event.
+        }
 
-    function multiselect_change() {
-        //Handle the change event
-    }
-    </script>
+        function multiselect_change() {
+            //Handle the change event.
+        }
+        </script>
 
+### By Template Delegate
 
-### Razor - subscribe by handler name
+The example below demonstrates how to subscribe to events by a template delegate.
 
-    @(Html.Kendo().MultiSelect()
-      .Name("multiselect")
-      .BindTo(new string[] { "Item1", "Item2", "Item3" })
-      .Events(e => e
-            .Select("multiselect_select")
-            .Change("multiselect_change")
-      )
-    )
-    <script>
-    function multiselect_select() {
-        //Handle the select event
-    }
+###### Example
 
-    function multiselect_change() {
-        //Handle the change event
-    }
-    </script>
+**Razor**
 
+        @(Html.Kendo().MultiSelect()
+          .Name("multiselect")
+          .BindTo(new string[] { "Item1", "Item2", "Item3" })
+          .Events(e => e
+              .Select(@<text>
+                function() {
+                    //Handle the select event inline.
+                }
+              </text>)
+              .Change(@<text>
+                function() {
+                    //Handle the change event inline.
+                }
+                </text>)
+          )
+        )
 
-### Razor - subscribe by template delegate
+## Reference
 
-    @(Html.Kendo().MultiSelect()
-      .Name("multiselect")
-      .BindTo(new string[] { "Item1", "Item2", "Item3" })
-      .Events(e => e
-          .Select(@<text>
-            function() {
-                //Handle the select event inline
-            }
-          </text>)
-          .Change(@<text>
-            function() {
-                //Handle the change event inline
-            }
-            </text>)
-      )
-    )
+### Existing Instances
 
+You can reference an existing Kendo UI MultiSelect instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [MultiSelect API](/api/javascript/ui/multiselect#methods) to control its behavior.
+
+###### Example
+
+        //Put this after your Kendo UI MultiSelect  for ASP.NET MVC declaration.
+        <script>
+        $(function() {
+        //Notice that the Name() of the MultiSelect is used to get its client-side instance.
+        var multiselect = $("#productMultiSelect").data("kendoMultiSelect");
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the MultiSelect:
+
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Overview of the Kendo UI MultiSelect Widget]({% slug overview_kendoui_multiselect_widget %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
