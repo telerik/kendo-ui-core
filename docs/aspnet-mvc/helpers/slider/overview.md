@@ -1,123 +1,158 @@
 ---
 title: Overview
-page_title: Help Guide for Slider HtmlHelper extension | Kendo UI documentation
-description: Step-by-step instructions how to configure Kendo UI Slider for ASP.NET MVC widget and add Slider HtmlHelper extension.
+page_title: Overview | Kendo UI Slider HtmlHelper
+description: "Get started with the server-side wrapper for the Kendo UI Slider widget for ASP.NET MVC."
+slug: overview_sliderhelper_aspnetmvc
+position: 1
 ---
 
-# Slider
+# Slider HtmlHelper Overview
 
-The Slider HtmlHelper extension is a server-side wrapper for the [Kendo UI Slider](/api/web/slider) widget.
+The Slider HtmlHelper extension is a server-side wrapper for the [Kendo UI Slider](https://demos.telerik.com/kendo-ui/slider/index) widget.
 
 ## Getting Started
 
+### The Basics
+
 There are two types of Sliders:
 
-*   Kendo Slider for ASP.NET MVC, which presents one thumb and two opposing buttons for selecting a single numeric value
-*   Kendo RangeSlider for ASP.NET MVC, which present two thumbs for defining a range of numeric values
+* Kendo UI Slider for ASP.NET MVC, which presents one handle and two opposing buttons for selecting a single numeric value.
+* Kendo UI RangeSlider for ASP.NET MVC, which present two handlers for defining a range of numeric values.
 
-Here is how to configure a simple Kendo Slider:
+### Configuration
 
-1.  Make sure you have followed all the steps from the [Introduction](/aspnet-mvc/introduction) help topic.
+Below are listed the steps for you to follow when configuring the Kendo UI Slider.
 
-2.  Create a new action method which renders the view:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+
+**Step 2** Create a new action method which renders the view.
+
+###### Example
 
         public ActionResult Index()
         {
             return View();
         }
-3.  Add a slider:
-    - WebForms
 
-            <%: Html.Kendo().Slider()
-                    .Name("slider") //The name of the slider is mandatory. It specifies the "id" attribute of the widget.
-                    .Min(0) //Set min value of the slider
-                    .Max(100) //Set min value of the slider
-                    .Value(20) //Set the value of the slider
-            %>
-    - Razor
+**Step 3** Add a Slider.
 
-            @(Html.Kendo().Slider()
-                  .Name("slider") //The name of the slider is mandatory. It specifies the "id" attribute of the widget.
-                  .Min(0) //Set min value of the slider
-                  .Max(100) //Set min value of the slider
-                  .Value(20) //Set the value of the slider
-            )
+###### Example
 
-## Accessing an Existing Slider
+**WebForms**
 
-You can reference an existing slider instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/slider#methods) to control its behavior.
+        <%: Html.Kendo().Slider()
+                .Name("slider") //The name of the Slider is mandatory. It specifies the "id" attribute of the widget.
+                .Min(0) //Set min value of the Slider.
+                .Max(100) //Set min value of the Slider.
+                .Value(20) //Set the value of the Slider.
+        %>
 
-### Accessing an existing slider instance
+**Razor**
 
-    //Put this after your Kendo Slider for ASP.NET MVC declaration
-    <script>
-    $(function() {
-        // Notice that the Name() of the slider is used to get its client-side instance
-        var slider = $("#slider").data("kendoSlider");
-    });
-    </script>
+        @(Html.Kendo().Slider()
+              .Name("slider") //The name of the Slider is mandatory. It specifies the "id" attribute of the widget.
+              .Min(0) //Set min value of the Slider.
+              .Max(100) //Set min value of the Slider.
+              .Value(20) //Set the value of the Slider.
+        )
 
+## Event Handling
 
-## Handling Kendo UI Slider events
+You can subscribe to all Slider [events](/api/javascript/ui/slider#events).
 
-You can subscribe to all [events](/api/web/slider#events) exposed by Kendo UI Slider:
+### By Handler Name
 
-### WebForms - subscribe by handler name
+The examples below demonstrates how to subscribe to events by a handler name.
 
-    <%: Html.Kendo().Slider()
-            .Name("slider")
-            .Events(e => e
-                .Change("change")
-                .Slide("slide")
-            )
-    %>
-    <script>
-    function change() {
-        //Handle the change event
-    }
+###### Example
 
-    function slide() {
-        //Handle the slide event
-    }
-    </script>
+**WebForms**
 
+        <%: Html.Kendo().Slider()
+                .Name("slider")
+                .Events(e => e
+                    .Change("change")
+                    .Slide("slide")
+                )
+        %>
+        <script>
+        function change() {
+            //Handle the change event.
+        }
 
-### Razor - subscribe by handler name
+        function slide() {
+            //Handle the slide event.
+        }
+        </script>
 
-    @(Html.Kendo().Slider()
-          .Name("slider")
-          .Events(e => e
-                .Change("change")
-                .Slide("slide")
-          )
-    )
-    <script>
-    function change() {
-        //Handle the change event
-    }
+**Razor**
 
-    function slide() {
-        //Handle the slide event
-    }
-    </script>
+        @(Html.Kendo().Slider()
+              .Name("slider")
+              .Events(e => e
+                    .Change("change")
+                    .Slide("slide")
+              )
+        )
+        <script>
+        function change() {
+            //Handle the change event.
+        }
 
+        function slide() {
+            //Handle the slide event.
+        }
+        </script>
 
-### Razor - subscribe by template delegate
+### By Template Delegate
 
-    @(Html.Kendo().Slider()
-          .Name("slider")
-          .Events(e => e
-              .Change(@<text>
-                function() {
-                    //Handle the change event inline
-                }
-              </text>)
-              .Slide(@<text>
-                function() {
-                    //Handle the slide event inline
-                }
-                </text>)
-          )
-    )
+The example below demonstrates how to subscribe to events by a template delegate.
 
+###### Example
+
+**Razor**
+
+        @(Html.Kendo().Slider()
+              .Name("slider")
+              .Events(e => e
+                  .Change(@<text>
+                    function() {
+                        //Handle the change event inline.
+                    }
+                  </text>)
+                  .Slide(@<text>
+                    function() {
+                        //Handle the slide event inline.
+                    }
+                    </text>)
+              )
+        )
+
+## Reference
+
+### Existing Instances
+
+You can reference an existing Kendo UI Slider instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Slider API](/api/javascript/ui/slider#methods) to control its behavior.
+
+###### Example
+
+        //Put this after your Kendo UI Slider for ASP.NET MVC declaration.
+        <script>
+        $(function() {
+            //Notice that the Name() of the Slider is used to get its client-side instance.
+            var slider = $("#slider").data("kendoSlider");
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the Slider:
+
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Overview of the Kendo UI Slider Widget]({% slug overview_kendoui_slider_widget %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
