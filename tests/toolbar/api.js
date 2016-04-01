@@ -352,7 +352,7 @@
         ok($("#foo").hasClass("k-state-hidden"));
         ok($("#foo").is(":hidden"));
 
-        ok($("#foo_overflow").hasClass("k-state-hidden"));
+        ok($("#foo_overflow").closest("li").hasClass("k-overflow-hidden"));
         ok($("#foo_overflow").is(":hidden"));
     });
 
@@ -370,11 +370,11 @@
         toolbar.hide("#foo");
         ok($("#foo").is(":hidden"));
 
-        ok($("#foo_overflow").hasClass("k-state-hidden"));
+        ok($("#foo_overflow").closest("li").hasClass("k-overflow-hidden"));
         ok($("#foo_overflow").is(":hidden"));
     });
 
-    test("Hide method hides a button from SplitButton", 3, function() {
+    test("Hide method hides a button from SplitButton", 2, function() {
         var toolbar = container.kendoToolBar({
             items: [{
                 type: "splitButton",
@@ -389,7 +389,6 @@
         toolbar.hide("#foo");
         ok($("#foo").is(":hidden"));
 
-        ok($("#foo_overflow").hasClass("k-state-hidden"));
         ok($("#foo_overflow").is(":hidden"));
     });
 
@@ -409,7 +408,7 @@
         toolbar.hide("div.k-split-button");
         ok($("div.k-split-button").is(":hidden"));
 
-        ok($("li.k-split-button").hasClass("k-state-hidden"));
+        ok($("li.k-split-button").hasClass("k-overflow-hidden"));
         ok($("li.k-split-button").is(":hidden"));
     });
 

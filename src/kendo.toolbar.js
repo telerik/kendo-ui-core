@@ -1099,18 +1099,20 @@ var __meta__ = { // jshint ignore:line
                 var item = this._getItem(candidate);
 
                 if (item.toolbar) {
-                    item.toolbar.hide();
-
                     if (item.toolbar.options.type === "button" && item.toolbar.options.isChild) {
+                        item.toolbar.hide();
                         item.toolbar.getParentGroup().refresh();
+                    } else if(!item.toolbar.options.hidden) {
+                        item.toolbar.hide();
                     }
                 }
 
                 if (item.overflow) {
-                    item.overflow.hide();
-
                     if (item.overflow.options.type === "button" && item.overflow.options.isChild) {
+                        item.overflow.hide();
                         item.overflow.getParentGroup().refresh();
+                    } else if(!item.toolbar.options.hidden) {
+                        item.overflow.hide();
                     }
                 }
 
@@ -1121,18 +1123,20 @@ var __meta__ = { // jshint ignore:line
                 var item = this._getItem(candidate);
 
                 if (item.toolbar) {
-                    item.toolbar.show();
-
                     if (item.toolbar.options.type === "button" && item.toolbar.options.isChild) {
+                        item.toolbar.show();
                         item.toolbar.getParentGroup().refresh();
+                    } else if(item.toolbar.options.hidden) {
+                        item.toolbar.show();
                     }
                 }
 
                 if (item.overflow) {
-                    item.overflow.show();
-
                     if (item.overflow.options.type === "button" && item.overflow.options.isChild) {
+                        item.toolbar.show();
                         item.overflow.getParentGroup().refresh();
+                    } else if(item.overflow.options.hidden) {
+                        item.overflow.show();
                     }
                 }
 
