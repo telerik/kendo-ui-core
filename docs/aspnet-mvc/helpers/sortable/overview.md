@@ -180,6 +180,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 The example below demonstrates how to subscribe to events by a template delegate.
 
+###### Example 
+
 **Razor**
 
         <ul id="sortable">
