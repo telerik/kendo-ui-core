@@ -6,6 +6,8 @@ module Jekyll
         end
 
         def generate(site)
+            Jekyll.logger.info "      Processing redirects..."
+
             site.config['redirect_pages'] = redirect_pages(site)
             site.config['redirect_directories'] = redirect_directories(site)
 
@@ -42,6 +44,8 @@ module Jekyll
                 { 'url' => page.url, 'previous_url' => previous_url.uniq }
             end
 
+            Jekyll.logger.info "      #{pages.count} page redirects."
+
             site.pages.each do |page|
                 if page.url =~ /[A-Z]/
                     pages.push({
@@ -66,6 +70,8 @@ module Jekyll
                     end
                 end
             end
+
+            Jekyll.logger.info "      #{redirect_directories.count} directory redirects."
 
             redirect_directories.flatten
         end
