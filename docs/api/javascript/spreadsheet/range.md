@@ -1031,6 +1031,8 @@ Gets or sets the validation of the cells.
 
 The validation configuration object. It may contain `type`, `comparerType`, `dataType`, `from`, `to`, `allowNulls`, `messageTemplate` and `titleTemplate` keys.
 
+> Setting a validation, which contains references to a range of two or more cells, leads to the adjustment of the validation formula if a relative reference is used. In such cases, use an absolute reference such as `$A$1`.
+
 The `type` Can be set to "warning" or "reject". By default the type is "warning".
 
 The `comparerType` Can be set to "greaterThan", "lessThan", "between", "equalTo", "notEqualTo", "greaterThanOrEqualTo", "lessThanOrEqualTo", "notBetween" or "custom".
