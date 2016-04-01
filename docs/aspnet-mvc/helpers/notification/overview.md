@@ -91,13 +91,13 @@ The example below demonstrates how to manage the hide settings of the Notificati
 
       @(Html.Kendo().Notification()
           .Name("notification")
-          // hide automatically after 7 seconds
+          //Hide automatically after 7 seconds.
           .AutoHideAfter(7000)
-          // prevent accidental hiding for 1 second
+          //Prevent accidental hiding for 1 second.
           .AllowHideAfter(1000)
           // show a hide button
           .Button(true)
-          // prevent hiding by clicking on the notification content
+          //Prevent hiding by clicking on the notification content.
           .HideOnClick(false)
       )
 
@@ -119,15 +119,15 @@ The example below demonstrates how to manage the position, stacking, and size of
           .Name("notification")
           .Position(p =>
           {
-              // notification popup will scroll together with the other content
+              //Notification popup will scroll together with the other content.
               p.Pinned(false);
-              // the first notification popup will appear 30px from the viewport's top and right edge
+              //The first notification popup will appear 30px from the viewport's top and right edge.
               p.Top(30);
               p.Right(30);
           })
-          // new notifications will appear below old ones
+          //New notifications will appear below old ones.
           .Stacking(NotificationStackingSettings.Down)
-          // set appropriate size
+          //Set the appropriate size.
           .Width(300)
           .Height(50)
       )
@@ -142,9 +142,9 @@ The example below demonstrates how to enable static notifications.
 
       @(Html.Kendo().Notification()
           .Name("notification")
-          // insert all notifications to the widget's originating element
+          //Insert all notifications to the widget's originating element.
           .AppendTo("#notification")
-          // new notifications will appear above old ones
+          //New notifications will appear above old ones.
           .Stacking(NotificationStackingSettings.Up)
       )
 
@@ -166,11 +166,11 @@ The example below demonstrates how to use templates.
           .Name("notification")
           .Templates(t =>
           {
-              // define a custom template for the built-in "warning" notification type
+              //Define a custom template for the built-in "warning" Notification type.
               t.Add().Type("warning").ClientTemplate("<div class='myWarning'>Warning: #= myMessage #</div>");
-              // define a template for the custom "timeAlert" notification type
+              //Define a template for the custom "timeAlert" Notification type.
               t.Add().Type("timeAlert").ClientTemplate("<div class='myAlert'>System alert generated at #= time # : #= myMessage #</div>");
-              // template content can also be defined separately. The above line can be replaced with:
+              //The template content can also be defined separately. The above line can be replaced with:
               t.Add().Type("timeAlert").ClientTemplateID("myAlertTemplate");
           })
       )
@@ -179,12 +179,12 @@ The example below demonstrates how to use templates.
   	$(function(){
           var n = $("#notification").data("kendoNotification");
 
-          // show a warning message using the built-in shorthand method
+          //Show a warning message using the built-in shorthand method.
           n.warning({
               myMessage: "some warning message here"
           });
 
-          // show a "timeAlert" message using the default show() method
+          //Show a "timeAlert" message using the default show() method.
           n.show({
               time: new Date().toLocaleTimeString(),
               myMessage: "Server will be restarted."
