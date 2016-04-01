@@ -190,7 +190,7 @@ Below are listed the steps for you to follow when binding a kendo UI Menu to a h
             })
         )
 
-## Security Trimming
+### Security Trimming
 
 The Kendo UI Menu widget has a built-in security trimming functionality, which is enabled by default. If the URL, which the Menu item points to, is not authorized, then it is hidden. Security trimming depends on the [ASP.NET MVC Authorization](http://www.asp.net/mvc/tutorials/mvc-music-store/mvc-music-store-part-7). Every `action` method decorated with [`AuthorizeAttribute`](http://msdn.microsoft.com/en-us/library/system.web.mvc.authorizeattribute.aspx) checks whether the user is authorized and allows or forbids the request.
 
