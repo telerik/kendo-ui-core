@@ -147,6 +147,8 @@ Defines the open animation duration.
 The element that the Window will be appended to. Beneficial if the [Window is used together with a form](/web/window/overview#using-kendo-ui-window-with-a-form).
 Note that this *does not* constrain the window dragging within the given element.
 
+> Appending the Window to an element with an `overflow:hidden`, `overflow:auto` or `overflow:scroll` style may result in undesired behavior, because the Window will not be able to be displayed outside the element's boundaries. Unwanted scrollbars may appear as well.
+
 #### Example - set the window container to be the form with id="mainForm"
 
     <div id="dialog"></div>
