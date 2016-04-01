@@ -1,194 +1,233 @@
 ---
 title: Overview
+page_title: Overview | Kendo UI Sortable HtmlHelper
+description: "Get started with the server-side wrapper for the Kendo UI Sortable widget for ASP.NET MVC."
+slug: overview_sortablehelper_aspnetmvc
+position: 1
 ---
 
-# Sortable
+# Sortable HtmlHelper Overview
 
-The Sortable HtmlHelper extension is a server-side wrapper for the [Kendo UI Sortable](/api/web/sortable) widget.
+The Sortable HtmlHelper extension is a server-side wrapper for the [Kendo UI Sortable](https://demos.telerik.com/kendo-ui/sortable/index) widget.
 
 ## Getting Started
 
-Unlike most of the HtmlHelpers the Sortable one does not render HTML mark-up. **The Sortable HtmlHelper should be initialized for already existing DOM element.**
+Unlike most of the HtmlHelpers, the Sortable does not render HTML markup.
 
-### Configure the Kendo Sortable
+> **Important**
+>
+> Initialize the Sortable HtmlHelper for already existing DOM element.
 
-Here is how to configure the Kendo Sortable:
+### Configuration
 
- 1.  Make sure you have followed all the steps from the [Introduction](/aspnet-mvc/introduction) help topic.
- 2.  Create a new action method:
+Below are listed the steps for you to follow when configuring the Kendo UI Sortable.
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
- 3.  Initialize the Sortable:
-     - WebForms
+**Step 2** Create a new action method.
 
-            <ul id="sortable-basic">
-                <li class="sortable">Papercut <span>3:04</span></li>
-                <li class="sortable">One Step Closer <span>2:35</span></li>
-                <li class="sortable">With You <span>3:23</span></li>
-            </ul>
-            <%:Html.Kendo().Sortable()
-                .For("#sortable-basic") //The for option of the Sortable is mandatory.
-                                        //It is a jQuery selector which specifies 
-                                        //the already existing element for which the Sortable will be initialized.
-                .HintHandler("hint") //The JavaScript function which 
-                                     //constructs the Sortable's hint element
-                .PlaceholderHandler("placeholder") //The JavaScript function which
-                                                   //constructs the Sortable's placeholder element
-            %>
-            <script>
-                //define the hint handler
-                function hint(element) {
-                    return element.clone().addClass("hint");
-                }
-                //define the placeholder handler
-                function placeholder(element) {
-                    return element.clone().addClass("placeholder").text("drop here");
-                }
-            </script>
-     - Razor
+###### Example
 
-            <ul id="sortable-basic">
-                <li class="sortable">Papercut <span>3:04</span></li>
-                <li class="sortable">One Step Closer <span>2:35</span></li>
-                <li class="sortable">With You <span>3:23</span></li>
-            </ul>
-            @(Html.Kendo().Sortable()
-                .For("#sortable-basic") //The for option of the Sortable is mandatory.
-                                        //It is a jQuery selector which specifies 
-                                        //the already existing element for which the Sortable will be initialized.
-                .HintHandler("hint") //The JavaScript function which 
-                                     //constructs the Sortable's hint element
-                .PlaceholderHandler("placeholder") //The JavaScript function which
-                                                   //constructs the Sortable's placeholder element
+      public ActionResult Index()
+      {
+          return View();
+      }
+
+**Step 3** Initialize the Sortable.
+
+###### Example
+
+**WebForms**
+
+      <ul id="sortable-basic">
+          <li class="sortable">Papercut <span>3:04</span></li>
+          <li class="sortable">One Step Closer <span>2:35</span></li>
+          <li class="sortable">With You <span>3:23</span></li>
+      </ul>
+      <%:Html.Kendo().Sortable()
+          .For("#sortable-basic") //The for option of the Sortable is mandatory.
+                                  //It is a jQuery selector which specifies.
+                                  //the already existing element for which the Sortable will be initialized.
+          .HintHandler("hint") //The JavaScript function which
+                               //constructs the Sortable's hint element.
+          .PlaceholderHandler("placeholder") //The JavaScript function which
+                                             //constructs the Sortable's placeholder element
+      %>
+      <script>
+          //Define the hint handler.
+          function hint(element) {
+              return element.clone().addClass("hint");
+          }
+          //Define the placeholder handler.
+          function placeholder(element) {
+              return element.clone().addClass("placeholder").text("drop here");
+          }
+      </script>
+
+**Razor**
+
+      <ul id="sortable-basic">
+          <li class="sortable">Papercut <span>3:04</span></li>
+          <li class="sortable">One Step Closer <span>2:35</span></li>
+          <li class="sortable">With You <span>3:23</span></li>
+      </ul>
+      @(Html.Kendo().Sortable()
+          .For("#sortable-basic") //The for option of the Sortable is mandatory.
+                                  //It is a jQuery selector which specifies
+                                  //the already existing element for which the Sortable will be initialized.
+          .HintHandler("hint") //The JavaScript function which
+                               //constructs the Sortable's hint element.
+          .PlaceholderHandler("placeholder") //The JavaScript function which
+                                             //constructs the Sortable's placeholder element.
+      )
+      <script>
+          //Define the hint handler.
+          function hint(element) {
+              return element.clone().addClass("hint");
+          }
+          //Define the placeholder handler.
+          function placeholder(element) {
+              return element.clone().addClass("placeholder").text("drop here");
+          }
+      </script>
+
+### Hint Disabling
+
+The Sortable widget can operate without a hint. To disable the hint, set it to an empty function ([jQuery.noop](http://api.jquery.com/jQuery.noop/)).
+
+###### Example
+
+      @(Html.Kendo().Sortable()
+          .For("#sortable")
+          .HintHandler("noHint")
+      )
+
+      <script>
+          var noHint = $.noop;
+      </script>
+
+## Event Handling
+
+You can subscribe to all Sortable [events](/api/javascript/ui/sortable#events).
+
+### By Handler Name
+
+The examples below demonstrates how to subscribe to events by a handler name.
+
+###### Example
+
+**WebForms**
+
+      <ul id="sortable">
+          <li>Item 1</li>
+          <li>Item 2</li>
+          <li>Item 3</li>
+      </ul>
+      <%:Html.Kendo().Sortable()
+          .For("#sortable")
+          .Events(events => events
+              .Start("onStart")
+              .Change("onChange")
+          )
+      %>
+      <script>
+          function onStart(e) {
+              var id = e.sender.element.attr("id");
+              kendoConsole.log(id + " start: " + e.item.text());
+          }
+
+          function onChange(e) {
+              var id = e.sender.element.attr("id"),
+                  text = e.item.text(),
+                  newIndex = e.newIndex,
+                  oldIndex = e.oldIndex;
+
+              kendoConsole.log(id + " change: " + text + " newIndex: " + newIndex + " oldIndex: " + oldIndex + " action: " + e.action);
+          }
+      </script>
+
+**Razor**
+
+        <ul id="sortable">
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+        </ul>
+        @(Html.Kendo().Sortable()
+            .For("#sortable")
+            .Events(events => events
+                .Start("onStart")
+                .Change("onChange")
             )
-            <script>
-                //define the hint handler
-                function hint(element) {
-                    return element.clone().addClass("hint");
-                }
-                //define the placeholder handler
-                function placeholder(element) {
-                    return element.clone().addClass("placeholder").text("drop here");
-                }
-            </script>
-
-## Accessing an Existing Sortable
-
-You can reference an existing Sortable instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/sortable#methods) to control its behavior.
-
-### Accessing an existing Sortable instance
-
-    //Put this after your Kendo Sortable for ASP.NET MVC declaration
-    <script>
-    $(function() {
-        // Notice that the For() of the tooltip is used to get its client-side instance
-        var sortable = $("#container").data("kendoSortable");
-    });
-    </script>
-
-
-## Handling Kendo UI Sortable events
-
-You can subscribe to all [events](/api/web/sortable#events) exposed by Kendo UI Sortable:
-
-### WebForms - subscribe by handler name
-
-    <ul id="sortable">
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-    </ul>
-    <%:Html.Kendo().Sortable()
-        .For("#sortable")
-        .Events(events => events
-            .Start("onStart")
-            .Change("onChange")
         )
-    %>
-    <script>
-        function onStart(e) {
-            var id = e.sender.element.attr("id");
-            kendoConsole.log(id + " start: " + e.item.text());
-        }
+        <script>
+            function onStart(e) {
+                var id = e.sender.element.attr("id");
+                kendoConsole.log(id + " start: " + e.item.text());
+            }
 
-        function onChange(e) {
-            var id = e.sender.element.attr("id"),
-                text = e.item.text(),
-                newIndex = e.newIndex,
-                oldIndex = e.oldIndex;
+            function onChange(e) {
+                var id = e.sender.element.attr("id"),
+                    text = e.item.text(),
+                    newIndex = e.newIndex,
+                    oldIndex = e.oldIndex;
 
-            kendoConsole.log(id + " change: " + text + " newIndex: " + newIndex + " oldIndex: " + oldIndex + " action: " + e.action);
-        }
-    </script>
+                kendoConsole.log(id + " change: " + text + " newIndex: " + newIndex + " oldIndex: " + oldIndex + " action: " + e.action);
+            }
+        </script>
 
-### Razor - subscribe by handler name
+### By Template Delegate
 
-    <ul id="sortable">
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-    </ul>
-    @(Html.Kendo().Sortable()
-        .For("#sortable")
-        .Events(events => events
-            .Start("onStart")
-            .Change("onChange")
+The example below demonstrates how to subscribe to events by a template delegate.
+
+**Razor**
+
+        <ul id="sortable">
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+        </ul>
+        @(Html.Kendo().Sortable()
+            .For("#sortable")
+            .Events(events => events
+                .Start(@<text>
+                    function() {
+                        //Handle the show event inline.
+                    }
+                </text>)
+                .Change(@<text>
+                    function() {
+                        //Handle the show event inline.
+                    }
+                </text>)
+            )
         )
-    )
-    <script>
-        function onStart(e) {
-            var id = e.sender.element.attr("id");
-            kendoConsole.log(id + " start: " + e.item.text());
-        }
 
-        function onChange(e) {
-            var id = e.sender.element.attr("id"),
-                text = e.item.text(),
-                newIndex = e.newIndex,
-                oldIndex = e.oldIndex;
+## Reference
 
-            kendoConsole.log(id + " change: " + text + " newIndex: " + newIndex + " oldIndex: " + oldIndex + " action: " + e.action);
-        }
-    </script>
+### Existing Instances
 
-### Razor - subscribe by template delegate
+You can reference an existing Kendo UI Sortable instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Sortable API](/api/javascript/ui/sortable#methods) to control its behavior.
 
-    <ul id="sortable">
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-    </ul>
-    @(Html.Kendo().Sortable()
-        .For("#sortable")
-        .Events(events => events
-            .Start(@<text>
-                function() {
-                    //Handle the show event inline
-                }
-            </text>)
-            .Change(@<text>
-                function() {
-                    //Handle the show event inline
-                }
-            </text>)
-        )
-    )
+###### Example
 
-## Disabling the hint
+      //Put this after your Kendo UI Sortable for ASP.NET MVC declaration.
+      <script>
+      $(function() {
+          //Notice that the For() of the Sortable is used to get its client-side instance.
+          var sortable = $("#container").data("kendoSortable");
+      });
+      </script>
 
-The Sortable widget can operate without hint. To disable the hint you should set it to an empty function ([jQuery.noop](http://api.jquery.com/jQuery.noop/)).
+## See Also
 
-    @(Html.Kendo().Sortable()
-        .For("#sortable")
-        .HintHandler("noHint")
-    )
-    
-    <script>
-        var noHint = $.noop;
-    </script>
+Other articles on Telerik UI for ASP.NET MVC and on the Sortable:
 
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Overview of the Kendo UI Sortable Widget]({% slug overview_kendoui_sortable_widget %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
