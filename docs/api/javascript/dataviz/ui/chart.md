@@ -14073,6 +14073,7 @@ The supported values are:
 * scatter
 * scatterLine
 * verticalArea
+* verticalBoxPlot
 * verticalBullet
 * verticalLine
 * waterfall
