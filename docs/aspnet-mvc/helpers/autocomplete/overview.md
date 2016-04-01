@@ -301,7 +301,7 @@ You can subscribe to all AutoComplete [events](/api/javascript/ui/autocomplete#e
 
 ### By Handler Name
 
-The examples below demonstrates how to subscribe to events by a handler name.
+The example below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
