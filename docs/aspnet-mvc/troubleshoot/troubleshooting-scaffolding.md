@@ -37,10 +37,10 @@ Make sure that a valid entity is selected.
 
 Other articles on troubleshooting:
 
-* [Common Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_common_issues_kendoui %})
+* [Common Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_aspnetmvc %})
 * [Validation Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_validation_aspnetmvc %})
 * [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/grid/troubleshooting)
-* [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/upload/troubleshooting)
+* [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_uploadhelper_aspnetmvc %})
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
 * [Kendo UI JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Kendo UI Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})

@@ -2,7 +2,7 @@
 title: Common Issues
 page_title: Common Issues | Kendo UI DropDownList
 description: "Learn how to handle possible issues while working with the Kendo UI DropDownList widget."
-previous_url: /controls/editors/dropdownlist/troubleshooting 
+previous_url: /controls/editors/dropdownlist/troubleshooting
 slug: troubleshooting_common_issues_dropdownlist_kendoui
 ---
 
@@ -86,8 +86,8 @@ Other articles on troubleshooting:
 * [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
 * [Common Issues in Kendo UI Upload]({% slug troubleshooting_upload_widget %})
 * [Common Issues Related to Styling, Appearance, and Rendering]({% slug commonissues_troubleshooting_kendouistyling %})
-* [Common Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_common_issues_kendoui %})
+* [Common Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_aspnetmvc %})
 * [Validation Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_validation_aspnetmvc %})
 * [Scaffolding Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_scaffolding_aspnetmvc %})
 * [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/grid/troubleshooting)
-* [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/upload/troubleshooting)
+* [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_uploadhelper_aspnetmvc %})
