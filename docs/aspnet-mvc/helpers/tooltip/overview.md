@@ -6,7 +6,7 @@ slug: overview_tooltiphelper_aspnetmvc
 position: 1
 ---
 
-# Tooltip
+# Tooltip HtmlHelper Overview
 
 The Tooltip HtmlHelper extension is a server-side wrapper for the [Kendo UI Tooltip](https://demos.telerik.com/kendo-ui/tooltip/index) widget.
 
