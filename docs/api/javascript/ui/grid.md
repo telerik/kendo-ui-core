@@ -6368,6 +6368,10 @@ The index of the column, or the [field](#configuration-columns.field) to which t
 
 When using multicolumn headers, using an index is not allowed. In such scenarios, please use a field name or a column object as a method argument.
 
+> The method ignores and does not resize [hidden](#configuration-columns.hidden) columns.
+> 
+> Auto-fitting all columns at once is a resource-intensive operation and is not recommended. A better option is to auto-fit only a few columns that have the most variable content in terms of length. Alternatively, disable scrolling and allow the [browser to adjust all column widths automatically](/controls/data-management/grid/appearance#widths), according to their content.
+
 #### Example - autofit a column by index
 
     <div id="grid"></div>
