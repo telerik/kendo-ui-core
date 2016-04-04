@@ -6,7 +6,7 @@ slug: overview_tabstrip_aspnetmvc
 position: 1
 ---
 
-# TabStrip
+# TabStrip HtmlHelper Overview
 
 The TabStrip HtmlHelper extension is a server-side wrapper for the [Kendo UI TabStrip](https://demos.telerik.com/kendo-ui/tabstrip/index) widget.
 
