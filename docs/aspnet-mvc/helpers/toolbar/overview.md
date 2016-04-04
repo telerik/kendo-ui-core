@@ -1,143 +1,178 @@
 ---
 title: Overview
+page_title: Overview | Kendo UI ToolBar HtmlHelper
+description: "Get started with the server-side wrapper for the Kendo UI ToolBar widget for ASP.NET MVC."
+slug: overview_toolbarhelper_aspnetmvc
+position: 1
 ---
 
-# ToolBar
+# ToolBar HtmlHelper Overview
 
-The ToolBar HtmlHelper extension is a server-side wrapper for the [Kendo UI ToolBar](/api/web/toolbar) widget.
+The ToolBar HtmlHelper extension is a server-side wrapper for the [Kendo UI ToolBar](https://demos.telerik.com/kendo-ui/toolbar/index) widget.
 
 ## Getting Started
 
-### Example - initialization and basic usage
+### Initialization
 
-    @(Html.Kendo().ToolBar()
-        .Name("ToolBar")
-        .Items(items => {
+The example below demonstrates how to initialize the ToolBar.  
 
-            //regular button
-            items.Add().Type(CommandType.Button).Text("Button").Icon("note");
+###### Example
 
-            //toggle button
-            items.Add().Type(CommandType.Button).Text("Toggle Button").Togglable(true).Selected(true);
+      @(Html.Kendo().ToolBar()
+          .Name("ToolBar")
+          .Items(items => {
 
-            //split button
-            items.Add().Type(CommandType.SplitButton).Text("Split Button").MenuButtons(menuButtons =>
-            {
-                menuButtons.Add().Text("Option 1").Id("option1");
-                menuButtons.Add().Text("Option 2").Id("option2");
-                menuButtons.Add().Text("Option 3").Id("option3");
-            });
+              //A regular button.
+              items.Add().Type(CommandType.Button).Text("Button").Icon("note");
 
-            //button group
-            items.Add().Type(CommandType.ButtonGroup).Buttons(buttons =>
-            {
-                buttons.Add().Text("Left").Togglable(true).Group("text-align").SpriteCssClass("k-tool-icon k-justifyLeft");
-                buttons.Add().Text("Center").Togglable(true).Group("text-align").SpriteCssClass("k-tool-icon k-justifyCenter");
-                buttons.Add().Text("Right").Togglable(true).Group("text-align").SpriteCssClass("k-tool-icon k-justifyRight");
-            });
+              //A toggle button.
+              items.Add().Type(CommandType.Button).Text("Toggle Button").Togglable(true).Selected(true);
 
-            //separator
-            items.Add().Type(CommandType.Separator);
+              //The Split button.
+              items.Add().Type(CommandType.SplitButton).Text("Split Button").MenuButtons(menuButtons =>
+              {
+                  menuButtons.Add().Text("Option 1").Id("option1");
+                  menuButtons.Add().Text("Option 2").Id("option2");
+                  menuButtons.Add().Text("Option 3").Id("option3");
+              });
 
-            //custom template
-            items.Add().Template("<input id='dropdown' style='width: 150px;' />").Overflow(ShowInOverflowPopup.Never);
-        })
-    )
+              //The ButtonGroup.
+              items.Add().Type(CommandType.ButtonGroup).Buttons(buttons =>
+              {
+                  buttons.Add().Text("Left").Togglable(true).Group("text-align").SpriteCssClass("k-tool-icon k-justifyLeft");
+                  buttons.Add().Text("Center").Togglable(true).Group("text-align").SpriteCssClass("k-tool-icon k-justifyCenter");
+                  buttons.Add().Text("Right").Togglable(true).Group("text-align").SpriteCssClass("k-tool-icon k-justifyRight");
+              });
 
-### Configure the Kendo ToolBar
+              //The separator.
+              items.Add().Type(CommandType.Separator);
 
-Here is how to configure the Kendo AutoComplete:
+              //A custom template.
+              items.Add().Template("<input id='dropdown' style='width: 150px;' />").Overflow(ShowInOverflowPopup.Never);
+          })
+      )
 
- 1.  Make sure you have followed all the steps from the [Introduction](/aspnet-mvc/introduction) help topic.
- 2.  Create a new action method:
+### Configuration
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+Below are listed the steps for you to follow when configuring the Kendo UI ToolBar.
 
- 3.  Add a toolbar:
-     - WebForms
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
-             <%: Html.Kendo().ToolBar()
-                 .Resizable(true)   //Enable or disable the resizing feature
+**Step 2** Create a new action method which renders the view.
 
-                 .Items(items => {  //Define the widget commands
-                    items.Add().Type(CommandType.Button).Text("Button");
-                 })
-             %>
-     - Razor
+###### Example
 
-             @(Html.Kendo().ToolBar()
-                 .Resizable(true)   //Enable or disable the resizing feature
+      public ActionResult Index()
+      {
+          return View();
+      }
 
-                 .Items(items => {  //Define the widget commands
-                    items.Add().Type(CommandType.Button).Text("Button");
-                 })
-             )
+**Step 3** Add a ToolBar.
 
- 4. For more information regarding supported command types please check [this link](/web/toolbar/overview#command-types).
+###### Example
 
-## Accessing an Existing ToolBar
+**WebForms**
 
-You can reference an existing ToolBar instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
+       <%: Html.Kendo().ToolBar()
+           .Resizable(true)   //Enable or disable the resizing feature.
 
-### Accessing an existing ToolBar instance
+           .Items(items => {  //Define the widget commands.
+              items.Add().Type(CommandType.Button).Text("Button");
+           })
+       %>
 
-    //Put this after your Kendo ToolBar for ASP.NET MVC declaration
-    <script>
-    $(function() {
-        var toolbar = $("#container").data("kendoToolBar");
-    });
-    </script>
+**Razor**
 
+       @(Html.Kendo().ToolBar()
+           .Resizable(true)   //Enable or disable the resizing feature.
 
-## Handling Kendo UI ToolBar events
+           .Items(items => {  //Define the widget commands.
+              items.Add().Type(CommandType.Button).Text("Button");
+           })
+       )
 
-You can subscribe to all [events](/api/web/toolbar#events) exposed by Kendo UI ToolBar:
+For more information on supported command types, refer to [this link]({% slug overview_kendoui_toolbar_widget %}#command-types).
 
-### WebForms - subscribe by handler name
+## Event Handling
 
-    <%: Html.Kendo().ToolBar()
-         .Items(items => {  //Define the widget commands
-            items.Add().Type(CommandType.Button).Text("Button");
-         })
-         .Events(e => e
-            .Click("onClick")
-            .Toggle("onToggle")
-            .Open("onOpen")
-            .Close("onClose")
-            .OverflowOpen("onOverflowOpen")
-            .OverflowClose("onOverflowClose")
-         )
-    %>
-    <script>
-        function onClick(e) {
-            //Handle the click event
-        }
+You can subscribe to all ToolBar [events](/api/javascript/ui/toolbar#events).
 
-        //.....
-    </script>
+### By Handler Name
 
-### Razor - subscribe by handler name
+The examples below demonstrates how to subscribe to events by a handler name.
 
-    @(Html.Kendo().ToolBar()
-         .Items(items => {  //Define the widget commands
-            items.Add().Type(CommandType.Button).Text("Button");
-         })
-         .Events(e => e
-            .Click("onClick")
-            .Toggle("onToggle")
-            .Open("onOpen")
-            .Close("onClose")
-            .OverflowOpen("onOverflowOpen")
-            .OverflowClose("onOverflowClose")
-         )
-    )
-    <script>
-        function onClick(e) {
-            //Handle the click event
-        }
+###### Example
 
-        //.....
-    </script>
+**WebForms**
+
+      <%: Html.Kendo().ToolBar()
+           .Items(items => {  //Define the widget commands
+              items.Add().Type(CommandType.Button).Text("Button");
+           })
+           .Events(e => e
+              .Click("onClick")
+              .Toggle("onToggle")
+              .Open("onOpen")
+              .Close("onClose")
+              .OverflowOpen("onOverflowOpen")
+              .OverflowClose("onOverflowClose")
+           )
+      %>
+      <script>
+          function onClick(e) {
+              //Handle the click event.
+          }
+
+          //.....
+      </script>
+
+**Razor**
+
+      @(Html.Kendo().ToolBar()
+           .Items(items => {  //Define the widget commands
+              items.Add().Type(CommandType.Button).Text("Button");
+           })
+           .Events(e => e
+              .Click("onClick")
+              .Toggle("onToggle")
+              .Open("onOpen")
+              .Close("onClose")
+              .OverflowOpen("onOverflowOpen")
+              .OverflowClose("onOverflowClose")
+           )
+      )
+      <script>
+          function onClick(e) {
+              //Handle the click event.
+          }
+
+          //.....
+      </script>
+
+## Reference
+
+### Existing Instances
+
+You can reference an existing Kendo UI ToolBar instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [ToolBar API](/api/javascript/ui/toolbar#methods) to control its behavior.
+
+###### Example
+
+      //Put this after your Kendo UI ToolBar for ASP.NET MVC declaration.
+      <script>
+      $(function() {
+          var toolbar = $("#container").data("kendoToolBar");
+      });
+      </script>
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the ToolBar:
+
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Overview of the Kendo UI ToolBar Widget]({% slug overview_kendoui_toolbar_widget %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
