@@ -33,7 +33,7 @@ Below are listed the steps for you to follow when configuring the synchronous mo
 
         <kendo:upload name="files" />
 
-**Step 3** Add a submit and reset buttons to the form.
+**Step 3** Add **Submit** and **Reset** buttons to the form.
 
 ###### Example
 
@@ -50,7 +50,7 @@ Below are listed the steps for you to follow when configuring the synchronous mo
             <input type="reset" value="Reset" class="t-button" />
         </form>
 
-**Step 5** Process the files in the action. It requires no special server handling compared to a regular input.
+**Step 5** Process the files in the action. It requires no special server handling as compared to a regular input.
 
 ###### Example
 
@@ -139,7 +139,7 @@ The selected files are uploaded immediately by default. You can change this beha
 Other articles on Telerik UI for JSP and on the Upload:
 
 * [Overview of the Upload JSP Tag]({% slug overview_upload_uiforjsp %})
-* [Sending and Receiving Metadata with the Upload JSP Tag]({% slug metadata_upload_uiforjsp %})
+* [Sending and Receiving Metadata with the Upload HtmlHelper]({% slug metadata_upload_uiforjsp %})
 * [Overview of the Kendo UI Upload Widget]({% slug overview_kendoui_upload_widget %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
 * [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

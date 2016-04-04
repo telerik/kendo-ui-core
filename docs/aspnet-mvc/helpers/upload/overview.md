@@ -1,141 +1,180 @@
 ---
 title: Overview
-page_title: Upload HtmlHelper extension | Kendo UI Upload widget documentation
-description: Get familiar with Upload HtmlHelper server-side wrapper, learn how to setup an asynchronous upload and handle Kendo UI Upload events.
+page_title: Overview | Kendo UI Upload HtmlHelper
+description: "Get started with the server-side wrapper for the Kendo UI Upload widget for ASP.NET MVC."
+slug: overview_uploadhelper_aspnetmvc
+position: 1
 ---
 
-# Upload
+# Upload HtmlHelper Overview
 
-The Upload HtmlHelper extension is a server-side wrapper for the [Kendo UI Upload](/web/upload/overview) widget.
+The Upload HtmlHelper extension is a server-side wrapper for the [Kendo UI Upload](https://demos.telerik.com/kendo-ui/upload/index) widget.
 
 ## Getting Started
 
-The following example shows how to setup an asynchronous upload that saves the uploaded files in the App_Data folder.:
+### Configuration
 
-1.  Make sure you have followed all the steps from the [Introduction](/aspnet-mvc/introduction) help topic.
+Below are listed the steps for you to follow when configuring the Kendo UI Upload.
 
-2.  Create a new action method which renders the view:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+
+**Step 2** Create a new action method which renders the view.
+
+###### Example
 
         public ActionResult Index()
         {
             return View();
         }
 
-3.  Add the upload to the view:
-    - WebForms
+**Step 3** Add the Upload to the view.
 
-            <%: Html.Kendo().Upload()
-                    .Name("attachments")
-                    .Async(async => async
-                        .Save("Save", "Home")
-                    )
-            %>
-    - Razor
+###### Example
 
-            @(Html.Kendo().Upload()
-                    .Name("attachments")
-                    .Async(async => async
-                        .Save("Save", "Home")
-                    )
-            )
+**WebForms**
 
-    The name attribute is required and must be unique.
-	It will be used as a form field name in the requests to the server.
+        <%: Html.Kendo().Upload()
+                .Name("attachments")
+                .Async(async => async
+                    .Save("Save", "Home")
+                )
+        %>
 
-4. Implement the Save controller action:
+**Razor**
+
+        @(Html.Kendo().Upload()
+                .Name("attachments")
+                .Async(async => async
+                    .Save("Save", "Home")
+                )
+        )
+
+The name attribute is required and must be unique. It is used as a form field name in the requests to the server.
+
+**Step 4** Implement the `Save` controller action.
+
+###### Example
 
         public ActionResult Save(IEnumerable<HttpPostedFileBase> attachments)
         {
-            // The Name of the Upload component is "attachments"
+            //The Name of the Upload component is "attachments".
             foreach (var file in attachments)
             {
-                // Some browsers send file names with full path. We only care about the file name.
+                //Some browsers send file names with a full path. You only care about the file name.
                 var fileName = Path.GetFileName(file.FileName);
                 var destinationPath = Path.Combine(Server.MapPath("~/App_Data"), fileName);
 
                 file.SaveAs(destinationPath);
             }
 
-            // Return an empty string to signify success
+            //Return an empty string to signify success.
             return Content("");
         }
 
-5. Build and run the application. The uploaded files will appear in the App_Data folder.
+**Step 5** Build and run the application. The uploaded files appear in the `App_Data` folder.
 
-## Accessing an Existing Upload
+## Event Handling
 
-You can reference an existing Upload instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/upload#methods) to control its behavior.
+You can subscribe to all Upload [events](/api/javascript/ui/upload#events).
 
-### Accessing an existing Upload instance
+### By Handler Name
 
-    // Put this after your Kendo Upload for ASP.NET MVC declaration
-    <script>
-    $(function() {
-        // Notice that the Name() of the Upload is used to get its client-side instance
-        var upload = $("#attachments").data("kendoUpload");
-    });
-    </script>
+The examples below demonstrates how to subscribe to events by a handler name.
 
+###### Example
 
-## Handling Kendo UI Upload events
+**WebForms**
 
-You can subscribe to all [events](/api/web/upload) exposed by Kendo UI Upload:
+        <%: Html.Kendo().Upload()
+                .Name("attachments")
+                .Events(e => e
+                    .Upload("onUpload")
+                    .Success("onSuccess")
+                )
+        %>
+        <script>
+        function onUpload(e) {
+            //Handle the upload event.
+        }
 
-### WebForms - subscribe by handler name
+        function onSuccess() {
+            //Handle the success event.
+        }
+        </script>
 
-    <%: Html.Kendo().Upload()
-            .Name("attachments")
-            .Events(e => e
-                .Upload("onUpload")
-                .Success("onSuccess")
-            )
-    %>
-    <script>
-    function onUpload(e) {
-        // Handle the upload event
-    }
+**Razor**
 
-    function onSuccess() {
-        // Handle the success event
-    }
-    </script>
+        @(Html.Kendo().Upload()
+                .Name("attachments")
+                .Events(e => e
+                    .Upload("onUpload")
+                    .Success("onSuccess")
+                )
+        )
+        <script>
+        function onUpload(e) {
+            //Handle the upload event.
+        }
 
+        function onSuccess() {
+            //Handle the success event.
+        }
+        </script>
 
-### Razor - subscribe by handler name
+### By Template Delegate
 
-    @(Html.Kendo().Upload()
-            .Name("attachments")
-            .Events(e => e
-                .Upload("onUpload")
-                .Success("onSuccess")
-            )
-    )
-    <script>
-    function onUpload(e) {
-        // Handle the upload event
-    }
+The example below demonstrates how to subscribe to events by a template delegate.
 
-    function onSuccess() {
-        // Handle the success event
-    }
-    </script>
+###### Example
 
+**Razor**
 
-### Razor - subscribe by template delegate
+        @(Html.Kendo().Upload()
+              .Name("attachments")
+              .Events(e => e
+                  .Upload(@<text>
+                    function() {
+                        //Handle the upload event inline.
+                    }
+                  </text>)
+                  .Success(@<text>
+                    function() {
+                        //Handle the success event inline.
+                    }
+                    </text>)
+              )
+        )
 
-    @(Html.Kendo().Upload()
-          .Name("attachments")
-          .Events(e => e
-              .Upload(@<text>
-                function() {
-                    // Handle the upload event inline
-                }
-              </text>)
-              .Success(@<text>
-                function() {
-                    // Handle the success event inline
-                }
-                </text>)
-          )
-    )
+## Reference
+
+### Existing Instances
+
+You can reference an existing Kendo UI Upload instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Upload API](/api/javascript/ui/upload#methods) to control its behavior.
+
+###### Example
+
+        //Put this after your Kendo UI Upload for ASP.NET MVC declaration.
+        <script>
+        $(function() {
+            //Notice that the Name() of the Upload is used to get its client-side instance.
+            var upload = $("#attachments").data("kendoUpload");
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the Upload:
+
+* [Upload HtmlHelper Modes of Operation]({% slug modesoperation_uploadhelper_aspnetmvc %})
+* [Sending and Receiving Metadata with the Upload HtmlHelper]({% slug metadata_uploadhelper_aspnetmvc %})
+* [How to Upload Files from Grid Popup Editors in ASP.NET MVC Applications]({% slug howto_uploadfilesgridpopupeditor_uploadaspnetmvc %})
+* [How to Upload Files to Databases in ASP.NET MVC Applications]({% slug howto_uploadfilesdatabases_uploadaspnetmvc %})
+* [Overview of the Kendo UI Upload Widget]({% slug overview_kendoui_upload_widget %})
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Upload HtmlHelper Troubleshooting]({% slug troubleshoot_uploadhelper_aspnetmvc %})
