@@ -63,11 +63,12 @@ A binding pairs a DOM element (or widget) property to a field or method of the V
 
 The Kendo UI MVVM supports binding to other properties as well: `source`, `html`, `attr`, `visible`, `enabled`, etc. The `data-bind` may contain a comma-separated list of bindings e.g. `data-bind="value: name, visible: isNameVisible"`.
 
-> Bindings cannot include hard-coded values, but only references to properties of the viewModel. For example, the following is incorrect:
+> **Important**
+> * Bindings cannot include hard-coded values, but only references to properties of the `viewModel`. For example, the following is incorrect:
 >
->       data-bind="visible: false, source: [{ foo: 'bar'}]"
+>           data-bind="visible: false, source: [{ foo: 'bar'}]"
 >
-> Also, `data-template` attributes cannot contain inline template definitions, but only ID's of [external templates](/framework/templates/overview#inline-vs-external-templates).
+> * The `data-template` attributes cannot contain inline template definitions, but only ID's of [external templates]({% slug overview_kendoui_templatescomponent %}#inline-vs-external-templates).
 
 For detailed information on each Kendo UI MVVM binding, refer to the [MVVM bindings articles]({% slug attributebinding_mvvm_kendoui %}).
 

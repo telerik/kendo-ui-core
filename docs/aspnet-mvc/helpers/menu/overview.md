@@ -18,7 +18,7 @@ There are a few ways to bind a Kendo UI Menu for ASP.NET MVC:
 
 * Use items builder&mdash;Manually define the properties of each Menu item.
 * Sitemap binding&mdash;Uses a sitemap to create the items of the Menu.
-* Model binding&mdash;Uses a collection of objects to create the items of the Menu.
+* Model binding&mdash;Use a collection of objects to create the items of the Menu.
 
 ### Items Builder
 
@@ -118,7 +118,7 @@ Below are listed the steps for you to follow when binding a Kendo UI Menu to a s
 
 ### Model Binding
 
-Below are listed the steps for you to follow when binding a kendo UI Menu to a hierarchical model.
+Below are listed the steps for you to follow when binding a Kendo UI Menu to a hierarchical model.
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
