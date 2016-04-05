@@ -10,9 +10,11 @@ Represents the Kendo UI DatePicker widget. Inherits from [Widget](/api/javascrip
 
 ## Configuration
 
-### animation `Object`
+### animation `Boolean|Object`
 
 Configures the opening and closing animations of the calendar popup. Setting the `animation` option to `false` will disable the opening and closing animations. As a result the calendar popup will open and close instantly.
+
+`animation:true` is not a valid configuration.
 
 #### Example - disable open and close animations
 
