@@ -1,9 +1,18 @@
 ---
-title: Save Items State
-page_title: Save Items State
-description: Save Items State
+title: Save the State of TreeView Items
+page_title: Save the State of TreeView Items | Kendo UI TreeView HtmlHelper
+description: "Save the state of TreeView items in ASP.NET MVC applications."
+slug: howto_savetreeviewitemsstate_treeviewaspnetmvc
 ---
 
-# Save Items State
+# Save the State of TreeView Items
 
-The following project demonstrates how to save the items expanded and checked state on the server and reapply it the next time the data is loaded. [SavingItemsState](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/treeview/SavingItemsState)
+To see the example on how to save the expanded and checked state of the items on the server and re-apply it the next time the data is loaded, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/treeview/SavingItemsState).
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the TreeView:
+
+* [Overview of the TreeView HtmlHelper]({% slug overview_treeviewhelper_aspnetmvc %})
+* [How to Bind TreeViews to XML]({% slug howto_bindtoaml_treeviewaspnetmvc %})
+* [How to Integrate with Sharepoint]({% slug howto_integratewithsharepoint_treeviewaspnetmvc %})
