@@ -37,21 +37,21 @@ The example below demonstrates code snippets for Grid components.
 
 **view**
 
-    <template>  
+<template>
     <require from="./basic-use.css"></require>
-
-     <k-grid k-data-source.bind="datasource" k-pageable.bind="pageable" k-sortable.bind="true">
-        <k-col title="Contact Name" field="ContactName">
+    <ak-grid k-data-source.bind="datasource" k-pageable.bind="pageable" k-sortable.bind="true">
+      <ak-col k-title="Contact Name" k-field="ContactName">
+        <ak-template>
           <div class='customer-photo' style="background-image: url(http://demos.telerik.com/kendo-ui/content/web/Customers/${CustomerID}.jpg);"></div>
           <div class='customer-name'>${ContactName}</div>
-        </k-col>
-        <k-col title="Contact Name" field="ContactName"></k-col>
-        <k-col title="Contact Title" field="ContactTitle"></k-col>
-        <k-col title="Company Name" field="CompanyName"></k-col>
-        <k-col field="Country"></k-col>
-      </k-grid>
-      </template>
-
+        </ak-template>
+      </ak-col>
+      <ak-col k-title="Contact Name" k-field="ContactName"></ak-col>
+      <ak-col k-title="Contact Title" k-field="ContactTitle"></ak-col>
+      <ak-col k-title="Company Name" k-field="CompanyName"></ak-col>
+      <ak-col k-field="Country"></ak-col>
+    </ak-grid>
+</template>
 **view model**
 
     export class BasicUse {
