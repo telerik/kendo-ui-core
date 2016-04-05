@@ -12,8 +12,9 @@ Represents the Kendo UI TabStrip. Inherits from [Widget](/api/javascript/ui/widg
 
 ### animation `Object|Boolean`
 
-A collection of visual animations used when **TabStrip** tab are selected through
-user interactions. Setting this option to **false** will disable all animations.
+A collection of visual animations used when **TabStrip** tab are selected through user interactions. Setting this option to `false` will disable all animations.
+
+`animation:true` is not a valid configuration.
 
 #### Example
 

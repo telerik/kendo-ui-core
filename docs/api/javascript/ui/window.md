@@ -24,10 +24,11 @@ and "Maximize".
     });
     </script>
 
-### animation `Object`
+### animation `Boolean|Object`
 
-A collection of {Animation} objects, used to change default animations. A value of **false**
-will disable all animations in the widget.
+A collection of {Animation} objects, used to change default animations. A value of `false` will disable all animations in the widget.
+
+`animation:true` is not a valid configuration.
 
 #### Example - disable animation
 

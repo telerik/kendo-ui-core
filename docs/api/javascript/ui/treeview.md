@@ -15,6 +15,8 @@ Represents the Kendo UI TreeView. Inherits from [Widget](/api/javascript/ui/widg
 A collection of visual animations used when items are expanded or collapsed through user interaction.
 Setting this option to **false** will disable all animations.
 
+`animation:true` is not a valid configuration.
+
 #### Example - disable animation of subnodes
 
     <div id="treeview"></div>

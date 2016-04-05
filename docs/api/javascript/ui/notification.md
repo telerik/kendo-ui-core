@@ -28,7 +28,9 @@ Indicates the period in milliseconds after which a notification can be dismissed
 
 ### animation `Object|Boolean`
 
-Defines custom show and hide animations via an Kendo UI Animation object. Setting the value to false disables animations.
+Defines custom show and hide animations via an Kendo UI Animation object. Setting the value to `false` disables animations.
+
+`animation:true` is not a valid configuration.
 
 #### Example - disable animations
 
