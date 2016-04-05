@@ -37,45 +37,51 @@ The example below demonstrates code snippets for Grid components.
 
 **view**
 
-    <template>  
+```html
+<template>
     <require from="./basic-use.css"></require>
-
-     <k-grid k-data-source.bind="datasource" k-pageable.bind="pageable" k-sortable.bind="true">
-        <k-col title="Contact Name" field="ContactName">
+    <ak-grid k-data-source.bind="datasource" k-pageable.bind="pageable" k-sortable.bind="true">
+      <ak-col k-title="Contact Name" k-field="ContactName">
+        <ak-template>
           <div class='customer-photo' style="background-image: url(http://demos.telerik.com/kendo-ui/content/web/Customers/${CustomerID}.jpg);"></div>
           <div class='customer-name'>${ContactName}</div>
-        </k-col>
-        <k-col title="Contact Name" field="ContactName"></k-col>
-        <k-col title="Contact Title" field="ContactTitle"></k-col>
-        <k-col title="Company Name" field="CompanyName"></k-col>
-        <k-col field="Country"></k-col>
-      </k-grid>
-      </template>
+        </ak-template>
+      </ak-col>
+      <ak-col k-title="Contact Name" k-field="ContactName"></ak-col>
+      <ak-col k-title="Contact Title" k-field="ContactTitle"></ak-col>
+      <ak-col k-title="Company Name" k-field="CompanyName"></ak-col>
+      <ak-col k-field="Country"></ak-col>
+    </ak-grid>
+</template>
+```
 
 **view model**
 
-    export class BasicUse {
+```js
+export class BasicUse {
 
-    pageable = {
-      refresh: true,
-      pageSizes: true,
-      buttonCount: 10
+pageable = {
+  refresh: true,
+  pageSizes: true,
+  buttonCount: 10
+};
+
+constructor() {
+  this.datasource = {
+    type: 'odata',
+    transport: {
+      read: '//demos.telerik.com/kendo-ui/service/Northwind.svc/Customers'
+      },
+      pageSize: 5
     };
-
-    constructor() {
-      this.datasource = {
-        type: 'odata',
-        transport: {
-          read: '//demos.telerik.com/kendo-ui/service/Northwind.svc/Customers'
-          },
-          pageSize: 5
-        };
-      }
-    }
+  }
+}
+```
 
 **style.css**
 
-    .customer-photo {
+```css
+.customer-photo {
     display: inline-block;
     width: 32px;
     height: 32px;
@@ -86,14 +92,15 @@ The example below demonstrates code snippets for Grid components.
     line-height: 32px;
     box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
     margin-left: 5px;
-    }
+}
 
-    .customer-name {
-        display: inline-block;
-        vertical-align: middle;
-        line-height: 32px;
-        padding-left: 3px;
-    }
+.customer-name {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 32px;
+    padding-left: 3px;
+}
+```
 
 For more runnable examples on all Aurelia-KendoUI controls the Bridge supports, refer to the [page of the Aurelia-KendoUI components catalog](http://aurelia-ui-toolkits.github.io/demo-kendo/#/samples/grid/basic-use).
 
