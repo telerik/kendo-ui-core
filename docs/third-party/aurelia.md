@@ -37,6 +37,7 @@ The example below demonstrates code snippets for Grid components.
 
 **view**
 
+```html
 <template>
     <require from="./basic-use.css"></require>
     <ak-grid k-data-source.bind="datasource" k-pageable.bind="pageable" k-sortable.bind="true">
@@ -52,30 +53,35 @@ The example below demonstrates code snippets for Grid components.
       <ak-col k-field="Country"></ak-col>
     </ak-grid>
 </template>
+```
+
 **view model**
 
-    export class BasicUse {
+```js
+export class BasicUse {
 
-    pageable = {
-      refresh: true,
-      pageSizes: true,
-      buttonCount: 10
+pageable = {
+  refresh: true,
+  pageSizes: true,
+  buttonCount: 10
+};
+
+constructor() {
+  this.datasource = {
+    type: 'odata',
+    transport: {
+      read: '//demos.telerik.com/kendo-ui/service/Northwind.svc/Customers'
+      },
+      pageSize: 5
     };
-
-    constructor() {
-      this.datasource = {
-        type: 'odata',
-        transport: {
-          read: '//demos.telerik.com/kendo-ui/service/Northwind.svc/Customers'
-          },
-          pageSize: 5
-        };
-      }
-    }
+  }
+}
+```
 
 **style.css**
 
-    .customer-photo {
+```css
+.customer-photo {
     display: inline-block;
     width: 32px;
     height: 32px;
@@ -86,14 +92,15 @@ The example below demonstrates code snippets for Grid components.
     line-height: 32px;
     box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
     margin-left: 5px;
-    }
+}
 
-    .customer-name {
-        display: inline-block;
-        vertical-align: middle;
-        line-height: 32px;
-        padding-left: 3px;
-    }
+.customer-name {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 32px;
+    padding-left: 3px;
+}
+```
 
 For more runnable examples on all Aurelia-KendoUI controls the Bridge supports, refer to the [page of the Aurelia-KendoUI components catalog](http://aurelia-ui-toolkits.github.io/demo-kendo/#/samples/grid/basic-use).
 
