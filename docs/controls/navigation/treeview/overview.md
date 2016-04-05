@@ -6,7 +6,7 @@ slug: overview_kendoui_treeview_widget
 position: 1
 ---
 
-# Overview
+# TreeView Overview
 
 The [Kendo UI TreeView widget](http://demos.telerik.com/kendo-ui/treeview/index) displays hierarchical data in a traditional tree structure. It supports user interaction through mouse or touch to perform re-ordering operations via drag-and-drop.
 
