@@ -40,6 +40,7 @@ The example below demonstrates code snippets for Grid components.
 ```html
 <template>
     <require from="./basic-use.css"></require>
+
     <ak-grid k-data-source.bind="datasource" k-pageable.bind="pageable" k-sortable.bind="true">
       <ak-col k-title="Contact Name" k-field="ContactName">
         <ak-template>
@@ -81,7 +82,7 @@ constructor() {
 **style.css**
 
 ```css
-.customer-photo {
+#grid-basic-use .customer-photo {
     display: inline-block;
     width: 32px;
     height: 32px;
@@ -94,7 +95,7 @@ constructor() {
     margin-left: 5px;
 }
 
-.customer-name {
+#grid-basic-use .customer-name {
     display: inline-block;
     vertical-align: middle;
     line-height: 32px;
