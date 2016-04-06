@@ -66,7 +66,7 @@ $("#dropdownlist").kendoDropDownList({
 var path = require('path')
 module.exports = {
     resolve: {
-        extensions: [ '', '.js', 'min.js' ],
+        extensions: [ '', '.js', '.min.js' ],
         root: [
             path.resolve('.'),
             path.resolve('../kendo/dist/js/') // the path to the minified scripts
