@@ -1,19 +1,22 @@
 ---
 title: Resources
-page_title: Resources and Scheduler HtmlHelper extension | Kendo UI documentation
-description: How to add Resources to Scheduler HtmlHelper extension for Kendo UI Scheduler widget.
+page_title: Resources | Kendo UI Scheduler HtmlHelper
+description: "Add Resources to the Scheduler HtmlHelper extension for the Kendo UI Scheduler widget in ASP.NET MVC applications."
+slug: resourcesscheduler_aspnetmvc
+position: 4
 ---
 
-# Scheduler Resources
+# Resources
 
-The Scheduler HtmlHelper extension supports assigning scheduler events to a set of predefined [resources](/web/scheduler/resources).
+The Scheduler HtmlHelper extension supports assigning Scheduler events to a set of predefined [resources]({% slug resources_kendoui_scheduler_widget %}).
 
+## Configuration
 
-## Getting Started
+### Single Resources
 
-Here is how to add a simple scheduler resource and bind it to local data:
+The example below demonstrates how to add a Scheduler resource and bind it to local data.
 
-### Example - single single resources
+###### Example
 
     @(Html.Kendo().Scheduler<KendoSchedulerAjaxEditing.Models.TaskViewModel>()
         .Name("scheduler")
@@ -48,14 +51,15 @@ Here is how to add a simple scheduler resource and bind it to local data:
         .BindTo(Model)
     )
 
+### Multiple Resource Types
 
-## Multiple resource types
+The Scheduler HtmlHelper extension supports unlimited resource types. For example, it enables you to combine the single and the multiple resource examples in a single one.
 
-The Scheduler HtmlHelper extension supports unlimited resource types. For example we can combine the single and multiple resource examples in a single one.
+> **Important**
+>
+> The widget requires the first resource to have a color field, because the event background color is taken from the first resource.
 
-> Widget requires the first resource to have a color field, because the event background color is get from the first resource.
-
-### Example - multiple resource types
+###### Example
 
     @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.MeetingViewModel>()
         .Name("scheduler")
@@ -92,3 +96,20 @@ The Scheduler HtmlHelper extension supports unlimited resource types. For exampl
         .Editable(false)
         .BindTo(Model)
     )
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the Scheduler:
+
+* [Overview of the Scheduler HtmlHelper]({% slug overview_schedulerhelper_aspnetmvc %})
+* [Ajax Binding of the Scheduler HtmlHelper]({% slug ajaxbinding_schedulerhelper_aspnetmvc %})
+* [Scaffolding of the Scheduler HtmlHelper]({% slug scaffoldingscheduler_aspnetmvc %})
+* [Scheduler HtmlHelper How-To Examples]({% slug howto_bindtowebapicontroller_scheduleraspnetmvc %})
+* [Overview of the Kendo UI Scheduler Widget]({% slug overview_kendoui_scheduler_widget %})
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
