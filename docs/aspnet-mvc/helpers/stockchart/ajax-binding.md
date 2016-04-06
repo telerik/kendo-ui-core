@@ -1,87 +1,131 @@
 ---
 title: Ajax Binding
+page_title: Ajax Binding | Kendo UI StockChart HtmlHelper
+description: "Configure the Kendo UI StockChart for ASP.NET MVC for Ajax binding."
+slug: ajaxbinding_stockcharthelper_aspnetmvc
+position: 2
 ---
 
 ## Ajax Binding
 
-When configured for ajax binding the Kendo StockChart for ASP.NET MVC will make an ajax requests to populate its series.
+When configured for an Ajax binding, the Kendo UI StockChart for ASP.NET MVC makes Ajax requests to populate its series.
 
-To configure the Kendo StockChart for ajax binding follow these steps:
+## Configuration
 
-1.  Add a new action method which will return data to populate the chart:
+Below are steps for you to follow when configuring the Kendo UI StockChart for ASP.NET MVC for Ajax binding.
+
+### Add a New Action Method
+
+Add a new action method which returns data to populate the StockChart.
+
+###### Example
 
 	    public partial class HomeController : Controller
 	    {
 	        public ActionResult _BoeingStockData()
-	        {	
+	        {
 	        }
 	    }
 
-2.  Return the data as JSON:
+<!--_-->
+### Return Data
+
+Return the data as JSON.
+
+###### Example
 
         public ActionResult InternetUsers_Read()
         {
             return Json(ChartDataRepository.BoeingStockData());
         }
 
-3.  In the view configure the chart to use the action method created in the previous steps:
-    - WebForms
+### Configure the Chart
 
-            <%: Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
-		        .Name("stockChart")
-		        .Title("The Boeing Company (NYSE:BA)")
-		        .DataSource(ds => ds.Read(read => read
-		            .Action("_BoeingStockData", "Home")
-		        ))
-		        .DateField("Date")
-            %>
-    - Razor
+In the view, configure the Chart to use the action method created in the previous steps.
 
-            @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
-		        .Name("stockChart")
-		        .Title("The Boeing Company (NYSE:BA)")
-		        .DataSource(ds => ds.Read(read => read
-		            .Action("_BoeingStockData", "Home")
-		        ))
-		        .DateField("Date")
-            )
+###### Example
 
-4. Create the main and navigator data series:
-    - WebForms
+**WebForms**
 
-            <%: Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
-		        .Name("stockChart")
-		        .Title("The Boeing Company (NYSE:BA)")
-		        .DataSource(ds => ds.Read(read => read
-		            .Action("_BoeingStockData", "Home")
-		        ))
-		        .DateField("Date")
+	     <%: Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
+	      .Name("stockChart")
+	      .Title("The Boeing Company (NYSE:BA)")
+	      .DataSource(ds => ds.Read(read => read
+	          .Action("_BoeingStockData", "Home")
+	      ))
+	      .DateField("Date")
+	      %>
 
-		        .Series(series => {
-		            series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
-		        })
-		        .Navigator(nav => nav
-		            .Series(series => {
-		                series.Line(s => s.Volume);
-		            })
-		        )
-            %>
-    - Razor
+<!--_-->
+**Razor**
 
-            @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
-		        .Name("stockChart")
-		        .Title("The Boeing Company (NYSE:BA)")
-		        .DataSource(ds => ds.Read(read => read
-		            .Action("_BoeingStockData", "Home")
-		        ))
-		        .DateField("Date")
+        @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
+        .Name("stockChart")
+        .Title("The Boeing Company (NYSE:BA)")
+        .DataSource(ds => ds.Read(read => read
+            .Action("_BoeingStockData", "Home")
+        ))
+        .DateField("Date")
+        )
 
-		        .Series(series => {
-		            series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
-		        })
-		        .Navigator(nav => nav
-		            .Series(series => {
-		                series.Line(s => s.Volume);
-		            })
-		        )
-            )
+<!--_-->
+### Create the Data Series
+
+Create the main and navigator data series.
+
+###### Example
+
+**WebForms**
+
+        <%: Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
+        .Name("stockChart")
+        .Title("The Boeing Company (NYSE:BA)")
+        .DataSource(ds => ds.Read(read => read
+            .Action("_BoeingStockData", "Home")
+        ))
+        .DateField("Date")
+
+        .Series(series => {
+            series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
+        })
+        .Navigator(nav => nav
+            .Series(series => {
+                series.Line(s => s.Volume);
+            })
+        )
+        %>
+<!--_-->
+**Razor**
+
+        @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
+        .Name("stockChart")
+        .Title("The Boeing Company (NYSE:BA)")
+        .DataSource(ds => ds.Read(read => read
+            .Action("_BoeingStockData", "Home")
+        ))
+        .DateField("Date")
+
+        .Series(series => {
+            series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
+        })
+        .Navigator(nav => nav
+            .Series(series => {
+                series.Line(s => s.Volume);
+            })
+        )
+        )
+<!--_-->
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the StockChart:
+
+* [Overview of the StockChart HtmlHelper]({% slug overview_stockcharthelper_aspnetmvc %})
+* [Overview of the Kendo UI StockChart Widget]({% slug overview_kendoui_stockcharts %})
+* [Scaffolding of the Kendo UI Chart for ASP.NET MVC]({% slug scaffoldingchart_aspnetmvc %})
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

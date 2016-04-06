@@ -1,161 +1,200 @@
 ---
 title: Overview
+page_title: Overview | Kendo UI StockChart HtmlHelper
+description: "Get started with the server-side wrapper for the Kendo UI StockChart widget for ASP.NET MVC."
+slug: overview_stockcharthelper_aspnetmvc
+position: 1
 ---
 
 # StockChart
 
-The StockChart HtmlHelper extension is a server-side wrapper for the [Kendo UI StockChart](/api/dataviz/stock-chart) widget.
+The StockChart HtmlHelper extension is a server-side wrapper for the [Kendo UI StockChart](https://demos.telerik.com/kendo-ui/financial/index) widget.
 
 ## Getting Started
 
-There are two ways to bind a Kendo StockChart for ASP.NET MVC:
+### The Basics
 
-*   server - the chart will bind to a supplied model
-*   ajax - the chart will make ajax requests when binding
+There are two ways to bind a Kendo UI StockChart for ASP.NET MVC:
 
-Here is how to configure the Kendo StockChart for server binding:
+* `server`&mdash;The StockChart is bound to a supplied model.
+* `ajax`&mdash;The StockChart makes Ajax requests when binding.
 
-1.  Make sure you have followed all the steps from the [Introduction](/aspnet-mvc/introduction) help topic.
+### Server Binding
 
-2.  Create a new action method and pass the data list as the model:
+Below are listed the steps for you to follow when configuring the Kendo UI StockChart for server binding.
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+
+**Step 2** Create a new action method and pass the data list as the model.
+
+###### Example
 
         public ActionResult Index()
         {
             return View(ChartDataRepository.BoeingStockData());
         }
 
-3.  Make your view strongly typed:
-    - WebForms
+**Step 3** Make your view strongly typed.
 
-            <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
-               		 Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.StockDataPoint>>" %>
-    - Razor
+**WebForms**
 
-            @model IEnumerable<Kendo.Mvc.Examples.Models.StockDataPoint>
-4.  Add a server bound chart:
-    - WebForms
+        <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+           		 Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.StockDataPoint>>" %>
 
-            <%: Html.Kendo().StockChart(Model)
-		        .Name("stockChart")
-		        .Title("The Boeing Company (NYSE:BA)")
-		        .DateField("Date")
-		        .Series(series => {
-		            series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
-		        })
-		        .Navigator(nav => nav
-		            .Series(series => {
-		                series.Line(s => s.Volume);
-		            })
-		        )
-            %>
-    - Razor
+**Razor**
 
-            @(Html.Kendo().StockChart(Model)
-		        .Name("stockChart")
-		        .Title("The Boeing Company (NYSE:BA)")
-		        .DateField("Date")
-		        .Series(series => {
-		            series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
-		        })
-		        .Navigator(nav => nav
-		            .Series(series => {
-		                series.Line(s => s.Volume);
-		            })
-		        )
-            )
+        @model IEnumerable<Kendo.Mvc.Examples.Models.StockDataPoint>
 
-## Accessing an Existing StockChart
+**Step 4** Add a server-bound StockChart.
 
-You can reference an existing stock chart instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/dataviz/stock-chart#methods) to control its behavior.
+**WebForms**
 
-### Accessing an existing StockChart instance
+        <%: Html.Kendo().StockChart(Model)
+        .Name("stockChart")
+        .Title("The Boeing Company (NYSE:BA)")
+        .DateField("Date")
+        .Series(series => {
+            series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
+        })
+        .Navigator(nav => nav
+            .Series(series => {
+                series.Line(s => s.Volume);
+            })
+        )
+        %>
 
-    // Put this after your Kendo StockChart for ASP.NET MVC declaration
-    <script>
-        $(function() {
-            // Notice that the Name() of the chart is used to get its client-side instance
-            var chart = $("#stockChart").data("kendoStockChart");
-        });
-    </script>
+**Razor**
 
-## Handling Kendo UI StockChart events
+        @(Html.Kendo().StockChart(Model)
+        .Name("stockChart")
+        .Title("The Boeing Company (NYSE:BA)")
+        .DateField("Date")
+        .Series(series => {
+            series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
+        })
+        .Navigator(nav => nav
+            .Series(series => {
+                series.Line(s => s.Volume);
+            })
+        )
+        )
 
-You can subscribe to all [events](/api/dataviz/stock-chart#events) exposed by Kendo UI Chart:
+## Event Handling
 
+You can subscribe to all StockChart [events](/api/javascript/dataviz/ui/stock-chart#events).
 
-### WebForms - subscribe by handler name
+### By Handler Name
 
-    <%: Html.Kendo().StockChart(Model)
-	        .Name("stockChart")
-	        .Title("The Boeing Company (NYSE:BA)")
-	        .DateField("Date")
-	        .Series(series => {
-	            series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
-	        })
-            .Events(e => e
-                .DataBound("stockChart_dataBound")
-                .SeriesClick("stockChart_seriesClick")
-            )
-    %>
+The examples below demonstrates how to subscribe to events by a handler name.
 
-    <script>
-        function stockChart_dataBound() {
-            // Handle the dataBound event
-        }
-	    
-        function stockChart_seriesClick() {
-            // Handle the series click event
-        }
-    </script>
+###### Example
 
+**WebForms**
 
-### Razor - subscribe by handler name
+        <%: Html.Kendo().StockChart(Model)
+    	        .Name("stockChart")
+    	        .Title("The Boeing Company (NYSE:BA)")
+    	        .DateField("Date")
+    	        .Series(series => {
+    	            series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
+    	        })
+                .Events(e => e
+                    .DataBound("stockChart_dataBound")
+                    .SeriesClick("stockChart_seriesClick")
+                )
+        %>
 
-    @(Html.Kendo().StockChart(Model)
-		.Name("stockChart")
-		.Title("The Boeing Company (NYSE:BA)")
-		.DateField("Date")
-		.Series(series => {
-		    series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
-		})
-		.Events(e => e
-		  .DataBound("stockChart_dataBound")
-		  .SeriesClick("stockChart_seriesClick")
-		)
-    )
+        <script>
+            function stockChart_dataBound() {
+                //Handle the dataBound event.
+            }
 
-    <script>
-        function stockChart_dataBound() {
-            // Handle the dataBound event
-        }
-	    
-        function stockChart_seriesClick() {
-            // Handle the seriesClick event
-        }
-    </script>
+            function stockChart_seriesClick() {
+                //Handle the series click event.
+            }
+        </script>
 
+**Razor**
 
-### Razor - subscribe by template delegate
+        @(Html.Kendo().StockChart(Model)
+    		.Name("stockChart")
+    		.Title("The Boeing Company (NYSE:BA)")
+    		.DateField("Date")
+    		.Series(series => {
+    		    series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
+    		})
+    		.Events(e => e
+    		  .DataBound("stockChart_dataBound")
+    		  .SeriesClick("stockChart_seriesClick")
+    		)
+        )
 
-    @(Html.Kendo().StockChart(Model)
-		.Name("stockChart")
-		.Title("The Boeing Company (NYSE:BA)")
-		.DateField("Date")
-		.Series(series => {
-		    series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
-		})
-		.Events(e => e
-		  .DataBound(@<text>
-		       function() {
-		           // Handle the dataBound event inline
-		       }
-		  </text>)
-		  .SeriesClick(@<text>
-		       function() {
-		           // Handle the seriesClick event inline
-		       }
-		  </text>)
-		)
-    )
+        <script>
+            function stockChart_dataBound() {
+                //Handle the dataBound event.
+            }
 
+            function stockChart_seriesClick() {
+                //Handle the seriesClick event.
+            }
+        </script>
+
+### By Template Delegate
+
+The example below demonstrates how to subscribe to events by a template delegate.
+
+###### Example
+
+**Razor**
+
+        @(Html.Kendo().StockChart(Model)
+    		.Name("stockChart")
+    		.Title("The Boeing Company (NYSE:BA)")
+    		.DateField("Date")
+    		.Series(series => {
+    		    series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
+    		})
+    		.Events(e => e
+    		  .DataBound(@<text>
+    		       function() {
+    		           //Handle the dataBound event inline.
+    		       }
+    		  </text>)
+    		  .SeriesClick(@<text>
+    		       function() {
+    		           //Handle the seriesClick event inline.
+    		       }
+    		  </text>)
+    		)
+        )
+
+## Reference
+
+### Existing Instances
+
+You can reference an existing Kendo UI StockChart instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [StockChart API](/api/javascript/dataviz/ui/stock-chart#methods) to control its behavior.
+
+###### Example
+
+      //Put this after your Kendo UI StockChart for ASP.NET MVC declaration.
+      <script>
+          $(function() {
+              //Notice that the Name() of the StockChart is used to get its client-side instance.
+              var chart = $("#stockChart").data("kendoStockChart");
+          });
+      </script>
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the StockChart:
+
+* [Ajax Binding of the Kendo UI StockChart for ASP.NET MVC]({% slug ajaxbinding_stockcharthelper_aspnetmvc %})
+* [Overview of the Kendo UI StockChart Widget]({% slug overview_kendoui_stockcharts %})
+* [Scaffolding of the Kendo UI Chart for ASP.NET MVC]({% slug scaffoldingchart_aspnetmvc %})
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
