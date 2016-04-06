@@ -131,6 +131,10 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### By Template Delegate
 
+The example below demonstrates how to subscribe to events by a template delegate.
+
+###### Example
+
 **Razor**
 
       @(Html.Kendo().Chart(Model)

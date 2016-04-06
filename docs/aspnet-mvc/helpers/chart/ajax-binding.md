@@ -48,7 +48,7 @@ In the view, configure the Chart to use the action method created in the previou
         <%: Html.Kendo().Chart<MvcApplication1.Models.InternetUsers>()
                 .Name("internetUsersChart")
                 .DataSource(dataSource => dataSource
-                    .Read(read => read.Action("InternetUsers_Read", "Home")) // Specify the action method and controller name
+                    .Read(read => read.Action("InternetUsers_Read", "Home")) //Specify the action method and controller names.
                 )
                 .Series(series => {
                     series.Bar(d => d.Value)
@@ -64,7 +64,7 @@ In the view, configure the Chart to use the action method created in the previou
         @(Html.Kendo().Chart<MvcApplication1.Models.InternetUsers>()
               .Name("internetUsersChart")
               .DataSource(dataSource => dataSource
-                  .Read(read => read.Action("InternetUsers_Read", "Home")) // Specify the action method and controller name
+                  .Read(read => read.Action("InternetUsers_Read", "Home")) //Specify the action method and controller names.
               )
               .Series(series => {
                   series.Bar(d => d.Value)
