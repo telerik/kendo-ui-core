@@ -45,6 +45,10 @@ test("do not apply thousand separator if no enough digits", function() {
     equal(toString(10, "$ ##,##"), "$ 10"); //use globalization thousand separator count
 });
 
+test("apply thousand separator to a longer than format number", function() {
+    equal(toString(1000000.1, "$ #,###"), "$ 1,000,000"); //use globalization thousand separator count
+});
+
 test("replace number in decimal part", function() {
     equal(toString(10.1, "####.#"), "10.1");
 });
