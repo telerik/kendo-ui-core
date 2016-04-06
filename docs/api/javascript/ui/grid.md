@@ -2876,6 +2876,36 @@ The text of the option which represents the "or" logical operation.
     });
     </script>
 
+### filterable.messages.search `String` *(default: "Search")*
+
+The placeholder of the search input for columns with the [search](#configuration-columns.filterable.search) option set to true.
+
+#### Example - set the "search" message
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          {
+            field: "category",
+            filterable: {
+              multi: true,
+              search: true
+            }
+          }
+        ],
+        dataSource: [
+          { category: "Foo" },
+          { category: "Boo" }
+        ],
+        filterable: {
+          messages: {
+            search: "Search category"
+          }
+        }
+      });
+    </script>
+
 ### filterable.messages.selectValue `String` *(default: "-Select value-")*
 
 The text of the DropDownList displayed in the filter menu for columns whose [values](#configuration-columns.values) option is set.
@@ -6369,7 +6399,7 @@ The index of the column, or the [field](#configuration-columns.field) to which t
 When using multicolumn headers, using an index is not allowed. In such scenarios, please use a field name or a column object as a method argument.
 
 > The method ignores and does not resize [hidden](#configuration-columns.hidden) columns.
-> 
+>
 > Auto-fitting all columns at once is a resource-intensive operation and is not recommended. A better option is to auto-fit only a few columns that have the most variable content in terms of length. Alternatively, disable scrolling and allow the [browser to adjust all column widths automatically](/controls/data-management/grid/appearance#widths), according to their content.
 
 #### Example - autofit a column by index
