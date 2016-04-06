@@ -1,221 +1,254 @@
 ---
 title: Overview
-page_title: How to use the Kendo UI Spreadsheet HtmlHelper extension, server-side ASP.NET MVC wrapper for Kendo UI Spreadsheet widget
-description: Learn how to bind Kendo UI Spreadsheet for ASP.NET MVC, handle Kendo UI Spreadsheet Events, access an existing Spreadsheet.
+page_title: Overview | Kendo UI Spreadsheet HtmlHelper
+description: "Get started with the server-side wrapper for the Kendo UI Spreadsheet widget for ASP.NET MVC."
+slug: overview_spreadsheethelper_aspnetmvc
 position: 1
 ---
 
-# Spreadsheet
+# Spreadsheet HtmlHelper Overview
 
-The Spreadsheet HtmlHelper extension is a server-side wrapper for the [Kendo UI Spreadsheet](/api/web/spreadsheet) widget.
-It allows you to configure the Kendo UI Spreadsheet from server-side code.
+The Spreadsheet HtmlHelper extension is a server-side wrapper for the [Kendo UI Spreadsheet](https://demos.telerik.com/kendo-ui/spreadsheet/index) widget. It allows you to configure the Kendo UI Spreadsheet from server-side code.
 
 ## Getting started
 
-The following tutorial shows how to configure Kendo UI Spreadsheet for ASP.NET MVC to bind to inline data.
+### Configuration
 
-1.  Create a new ASP.NET MVC 5 application using any of the following templates:
-    * Telerik UI for ASP.NET MVC application. Available after installing the [Telerik UI for ASP.NET MVC Visual Studio Extensions](/aspnet-mvc/introduction#kendo-ui-for-asp.net-mvc-visual-studio-extensions)).
-    * Default Visual Studio template. Follow the steps from the [Introduction](/aspnet-mvc/introduction) help topic in order to setup to the application.
+Below are listed the steps for you to follow when configuring the Kendo UI Spreadsheet for ASP.NET MVC to bind to inline data.
 
-1.  Add a Kendo UI Spreadsheet to the Index view
+**Step 1** Create a new ASP.NET MVC 5 application using any of the following templates:
 
-    - Views/Home/Index.cshtml
+* Telerik UI for ASP.NET MVC application. It is available after installing the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}).
+* Default Visual Studio template. Follow the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}) to set up to the application.
 
-            @(Html.Kendo().Spreadsheet()
-            .Name("spreadsheet")
-            .Sheets(sheets => {
-                sheets.Add()
-                    .Name("Food Order")
-                    .MergedCells("A1:F1", "C15:E15")
-                    .Columns(columns =>
-                    {
-                        columns.Add().Width(100);
-                        columns.Add().Width(215);
-                        columns.Add().Width(115);
-                        columns.Add().Width(115);
-                        columns.Add().Width(115);
-                        columns.Add().Width(155);
-                    })
-                    .Rows(rows =>
-                    {
-                        rows.Add().Height(50).Cells(cells =>
-                        {
-                            cells.Add()
-                                .Value("My Company")
-                                .FontSize(25)
-                                .Background("rgb(142,196,65)")
-                                .TextAlign(SpreadsheetTextAlign.Center)
-                                .Color("white");
-                        });
+**Step 2** Add a Kendo UI Spreadsheet to the `Index` view.
 
-                        rows.Add().Height(25).Cells(cells =>
-                        {
-                            cells.Add()
-                                .Value("ID")
-                                .Background("rgb(212,223,50)")
-                                .TextAlign(SpreadsheetTextAlign.Center);
+###### Example
 
-                            cells.Add()
-                                .Value("Product")
-                                .Background("rgb(212,223,50)")
-                                .TextAlign(SpreadsheetTextAlign.Center);
+`Views/Home/Index.cshtml`
 
-                            cells.Add()
-                                .Value("Quantity")
-                                .Background("rgb(212,223,50)")
-                                .TextAlign(SpreadsheetTextAlign.Center);
+      @(Html.Kendo().Spreadsheet()
+      .Name("spreadsheet")
+      .Sheets(sheets => {
+          sheets.Add()
+              .Name("Food Order")
+              .MergedCells("A1:F1", "C15:E15")
+              .Columns(columns =>
+              {
+                  columns.Add().Width(100);
+                  columns.Add().Width(215);
+                  columns.Add().Width(115);
+                  columns.Add().Width(115);
+                  columns.Add().Width(115);
+                  columns.Add().Width(155);
+              })
+              .Rows(rows =>
+              {
+                  rows.Add().Height(50).Cells(cells =>
+                  {
+                      cells.Add()
+                          .Value("My Company")
+                          .FontSize(25)
+                          .Background("rgb(142,196,65)")
+                          .TextAlign(SpreadsheetTextAlign.Center)
+                          .Color("white");
+                  });
 
-                            cells.Add()
-                                .Value("Price")
-                                .Background("rgb(212,223,50)")
-                                .TextAlign(SpreadsheetTextAlign.Center);
+                  rows.Add().Height(25).Cells(cells =>
+                  {
+                      cells.Add()
+                          .Value("ID")
+                          .Background("rgb(212,223,50)")
+                          .TextAlign(SpreadsheetTextAlign.Center);
 
-                            cells.Add()
-                                .Value("Tax")
-                                .Background("rgb(212,223,50)")
-                                .TextAlign(SpreadsheetTextAlign.Center);
+                      cells.Add()
+                          .Value("Product")
+                          .Background("rgb(212,223,50)")
+                          .TextAlign(SpreadsheetTextAlign.Center);
 
-                            cells.Add()
-                                .Value("Amount")
-                                .Background("rgb(212,223,50)")
-                                .TextAlign(SpreadsheetTextAlign.Center);
-                        });
-                    });
-                })
-            )
+                      cells.Add()
+                          .Value("Quantity")
+                          .Background("rgb(212,223,50)")
+                          .TextAlign(SpreadsheetTextAlign.Center);
 
-    - Views/Home/Index.aspx
+                      cells.Add()
+                          .Value("Price")
+                          .Background("rgb(212,223,50)")
+                          .TextAlign(SpreadsheetTextAlign.Center);
 
-            <%:Html.Kendo().Spreadsheet()
-                .Name("spreadsheet")
-                .Sheets(sheets => {
-                    sheets.Add()
-                        .Name("Food Order")
-                        .MergedCells("A1:F1", "C15:E15")
-                        .Columns(columns =>
-                        {
-                            columns.Add().Width(100);
-                            columns.Add().Width(215);
-                            columns.Add().Width(115);
-                            columns.Add().Width(115);
-                            columns.Add().Width(115);
-                            columns.Add().Width(155);
-                        })
-                        .Rows(rows =>
-                        {
-                            rows.Add().Height(50).Cells(cells =>
-                            {
-                                cells.Add()
-                                    .Value("My Company")
-                                    .FontSize(25)
-                                    .Background("rgb(142,196,65)")
-                                    .TextAlign(SpreadsheetTextAlign.Center)
-                                    .Color("white");
-                            });
+                      cells.Add()
+                          .Value("Tax")
+                          .Background("rgb(212,223,50)")
+                          .TextAlign(SpreadsheetTextAlign.Center);
 
-                            rows.Add().Height(25).Cells(cells =>
-                            {
-                                cells.Add()
-                                    .Value("ID")
-                                    .Background("rgb(212,223,50)")
-                                    .TextAlign(SpreadsheetTextAlign.Center);
+                      cells.Add()
+                          .Value("Amount")
+                          .Background("rgb(212,223,50)")
+                          .TextAlign(SpreadsheetTextAlign.Center);
+                  });
+              });
+          })
+      )
 
-                                cells.Add()
-                                    .Value("Product")
-                                    .Background("rgb(212,223,50)")
-                                    .TextAlign(SpreadsheetTextAlign.Center);
+`Views/Home/Index.aspx`
 
-                                cells.Add()
-                                    .Value("Quantity")
-                                    .Background("rgb(212,223,50)")
-                                    .TextAlign(SpreadsheetTextAlign.Center);
+      <%:Html.Kendo().Spreadsheet()
+          .Name("spreadsheet")
+          .Sheets(sheets => {
+              sheets.Add()
+                  .Name("Food Order")
+                  .MergedCells("A1:F1", "C15:E15")
+                  .Columns(columns =>
+                  {
+                      columns.Add().Width(100);
+                      columns.Add().Width(215);
+                      columns.Add().Width(115);
+                      columns.Add().Width(115);
+                      columns.Add().Width(115);
+                      columns.Add().Width(155);
+                  })
+                  .Rows(rows =>
+                  {
+                      rows.Add().Height(50).Cells(cells =>
+                      {
+                          cells.Add()
+                              .Value("My Company")
+                              .FontSize(25)
+                              .Background("rgb(142,196,65)")
+                              .TextAlign(SpreadsheetTextAlign.Center)
+                              .Color("white");
+                      });
 
-                                cells.Add()
-                                    .Value("Price")
-                                    .Background("rgb(212,223,50)")
-                                    .TextAlign(SpreadsheetTextAlign.Center);
+                      rows.Add().Height(25).Cells(cells =>
+                      {
+                          cells.Add()
+                              .Value("ID")
+                              .Background("rgb(212,223,50)")
+                              .TextAlign(SpreadsheetTextAlign.Center);
 
-                                cells.Add()
-                                    .Value("Tax")
-                                    .Background("rgb(212,223,50)")
-                                    .TextAlign(SpreadsheetTextAlign.Center);
+                          cells.Add()
+                              .Value("Product")
+                              .Background("rgb(212,223,50)")
+                              .TextAlign(SpreadsheetTextAlign.Center);
 
-                                cells.Add()
-                                    .Value("Amount")
-                                    .Background("rgb(212,223,50)")
-                                    .TextAlign(SpreadsheetTextAlign.Center);
-                            });
-                        });
-                    })
-            %>
+                          cells.Add()
+                              .Value("Quantity")
+                              .Background("rgb(212,223,50)")
+                              .TextAlign(SpreadsheetTextAlign.Center);
 
-1. Build and run the application
+                          cells.Add()
+                              .Value("Price")
+                              .Background("rgb(212,223,50)")
+                              .TextAlign(SpreadsheetTextAlign.Center);
+
+                          cells.Add()
+                              .Value("Tax")
+                              .Background("rgb(212,223,50)")
+                              .TextAlign(SpreadsheetTextAlign.Center);
+
+                          cells.Add()
+                              .Value("Amount")
+                              .Background("rgb(212,223,50)")
+                              .TextAlign(SpreadsheetTextAlign.Center);
+                      });
+                  });
+              })
+      %>
+
+**Step 3** Build and run the application.
+
+**Figure 1. The final result**
+
 ![Final result](/aspnet-mvc/helpers/spreadsheet/images/spreadsheet-inline.png)
 
-## Getting reference to the Kendo UI Spreadsheet widget
+## Event Handling
 
-To get a reference to a Spreadsheet instance use the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified via the `Name()` method.
-Then you can use you can use the JavaScript [API](/api/web/spreadsheet#methods) of the Spreadsheet.
+You can subscribe to all Spreadsheet [events](/api/javascript/ui/spreadsheet#events).
 
-### Example - get reference to a Kendo UI Spreadsheet instance
+### By Handler Name
 
-    @(Html.Kendo().Spreadsheet()
-        .Name("spreadsheet")
-    )
-    <script>
-    $(function() {
-        // Notice that the Name() of the treelist is used to get its client-side instance
-        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
-    });
-    </script>
+The examples below demonstrates how to subscribe to events by a handler name.
 
+###### Example
 
-## Handling Kendo UI Spreadsheet events
+**ASPX**
 
-You can subscribe to all [events](/api/web/spreadsheet#events) exposed by the widget:
+      <%:Html.Kendo().Spreadsheet()
+          .Name("spreadsheet")
+          .Events(e => e
+              .Render("spreadsheetRender")
+          )
+      %>
 
-### Example - Subscribe to event by handler name (Razor)
+      <script>
+          function spreadsheetRender() {
+              //Handle the render event.
+          }
+      </script>
 
-    @(Html.Kendo().Spreadsheet()
-        .Name("spreadsheet")
-        .Events(e => e
-            .Render("spreadsheetRender")
-        )
-    )
+**Razor**
 
-    <script>
-        function spreadsheetRender() {
-            // Handle the render event
-        }
-    </script>
+      @(Html.Kendo().Spreadsheet()
+          .Name("spreadsheet")
+          .Events(e => e
+              .Render("spreadsheetRender")
+          )
+      )
 
+      <script>
+          function spreadsheetRender() {
+              //Handle the render event.
+          }
+      </script>
 
-### Example - Subscribe to event via Razor delegate
+### By Template Delegate
 
-    @(Html.Kendo().Spreadsheet()
-        .Name("spreadsheet")
-        .Events(e => e
-            .Render(@<text>
-                function() {
-                    // Handle the render event inline
-                }
-            </text>)
-        )
-    )
+The example below demonstrates how to subscribe to events by a template delegate.
 
-### Example - Subscribe to event by handler name (ASPX)
+###### Example
 
-    <%:Html.Kendo().Spreadsheet()
-        .Name("spreadsheet")
-        .Events(e => e
-            .Render("spreadsheetRender")
-        )
-    %>
+**Razor**
 
-    <script>
-        function spreadsheetRender() {
-            // Handle the render event
-        }
-    </script>
+      @(Html.Kendo().Spreadsheet()
+          .Name("spreadsheet")
+          .Events(e => e
+              .Render(@<text>
+                  function() {
+                      //Handle the render event inline.
+                  }
+              </text>)
+          )
+      )
 
+## Reference
+
+### Existing Instances
+
+You can reference an existing Kendo UI Spreadsheet instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Spreadsheet API](/api/javascript/ui/spreadsheet#methods) to control its behavior.
+
+###### Example
+
+      @(Html.Kendo().Spreadsheet()
+          .Name("spreadsheet")
+      )
+      <script>
+      $(function() {
+          //Notice that the Name() of the Spreadsheet is used to get its client-side instance.
+          var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+      });
+      </script>
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the Spreadsheet:
+
+* [Processing of the Kendo UI Spreadsheet for ASP.NET MVC]({% slug spreadsheet_processing_spreadsheet_mvc %})
+* [Overview of the Kendo UI Spreadsheet Widget]({% slug overview_spreadsheet_widget %})
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
+* [Spreadsheet HtmlHelper Troubleshooting]({% slug troubleshoot_spreadsheethelper_aspnetmvc %})

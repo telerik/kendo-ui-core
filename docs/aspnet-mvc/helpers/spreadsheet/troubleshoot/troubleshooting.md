@@ -1,46 +1,45 @@
 ---
-title: Scaffolding
-page_title: Scaffolding | UI for ASP.NET MVC Troubleshooting
-description: "Learn about the solutions of issues that may occur while using the Kendo UI Scaffolder Visual Studio Extension."
-slug: troubleshooting_scaffolding_aspnetmvc
-position: 2
+title: Common Issues
+page_title: Common Issues | Spreadsheet HtmlHelper Troubleshooting
+description: "Learn about the solutions of common issues that may occur while working with Kendo UI Spreadsheet for ASP.NET MVC."
+slug: troubleshoot_spreadsheethelper_aspnetmvc
+position: 1
 ---
 
-# Scaffolding
+# Common Issues
 
-This page provides solutions to common issues you may encounter while working with the Kendo UI Scaffolder Visual Studio extension.
+This page provides solutions for common problems you may encounter while working with the Kendo UI Spreadsheet HtmlHelper.
 
-## Common Scaffolding Issues
+## Processing
 
-### New Scaffolded Item Menu Is Not Displayed When Right-Clicking Project Locations
+### Processing Fails for Files with Small Amount of Data
 
-**Solution**
-
-* Make sure that you use a compatible Visual Studio version and that all listed requirements are fulfilled.
-* Check if the Kendo UI Scaffolder extension is listed in the **Tools** > **Extensions and Updates** list.
-
-### Data Context Class DropDownList Is Empty
+The conversion and processing can hang or fail even if the Spreadsheet file does not contain a lot of data. Even cells that appear empty are processed if they have a non-default styling.
 
 **Solution**
 
-Make sure that the current project contains a valid **Entity Framework Data Model**. If this is true, rebuild the solution.
-
-### Invalid Model Configuration Error Is Thrown When Running the Scaffolder
-
-The most probable reason for this error is that the selected **Model Class** is not a valid entity in the current **Data Context**.
-
-**Solution**
-
-Make sure that a valid entity is selected.
+Reset all cells outside the used range to the default borders, formatting and colors.
 
 ## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the Spreadsheet:
+
+* [Processing of the Kendo UI Spreadsheet for ASP.NET MVC]({% slug spreadsheet_processing_spreadsheet_mvc %})
+* [Overview of the Kendo UI Spreadsheet Widget]({% slug overview_spreadsheet_widget %})
+* [Overview of the Spreadsheet HtmlHelper]({% slug overview_spreadsheethelper_aspnetmvc %})
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 
 Other articles on troubleshooting:
 
 * [Common Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_aspnetmvc %})
 * [Validation Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_validation_aspnetmvc %})
+* [Scaffolding Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_scaffolding_aspnetmvc %})
 * [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/grid/troubleshooting)
-* [Common Issues in the Spreadsheet ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_spreadsheethelper_aspnetmvc %})
 * [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_uploadhelper_aspnetmvc %})
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
 * [Kendo UI JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
