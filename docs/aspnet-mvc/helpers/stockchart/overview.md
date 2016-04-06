@@ -6,7 +6,7 @@ slug: overview_stockcharthelper_aspnetmvc
 position: 1
 ---
 
-# StockChart
+# StockChart HtmlHelper Overview
 
 The StockChart HtmlHelper extension is a server-side wrapper for the [Kendo UI StockChart](https://demos.telerik.com/kendo-ui/financial/index) widget.
 
