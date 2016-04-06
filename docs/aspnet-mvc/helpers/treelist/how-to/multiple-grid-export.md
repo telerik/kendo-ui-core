@@ -1,11 +1,22 @@
 ---
-title: Multiple TreeList Export
-description: Export more than one Kendo UI treeList for ASP.NET MVC to Excel
+title: Export Multiple TreeLists to Excel
+page_title: Export Multiple TreeLists to Excel | Kendo UI TreeView HtmlHelper
+description: "Export two or more Kendo UI treeLists to the same Excel document in ASP.NET MVC applications."
+slug: howto_exportmultipletoexcel_treelistaspnetmvc
 ---
 
-# Multiple TreeList Export
+# Export Multiple TreeLists to Excel
 
-This example shows how to export two Kendo UI treeLists in the same Excel document. Each treeList is exported in a separate Excel sheet.
-For additional info check [Create Excel Documents](/framework/excel/introduction#create-excel-document).
+The example below demonstrates how to export two or more Kendo UI TreeLists to the same Excel document when working in ASP.NET MVC applications. Each TreeList is exported to a separate Excel sheet.
 
-[Multiple TreeList Excel Export Visual Studio Project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/treelist/multiple-treelist-export)
+For additional information on this topic, refer to [this article]({% slug introduction_excelexport_kendoui %}#excel-document-creation).
+
+To see the example, refer to the Visual Studio project on [multiple TreeList Excel export](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/treelist/multiple-treelist-export).
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the TreeList:
+
+* [Overview of the TreeList HtmlHelper]({% slug overview_treelisthelper_aspnetmvc %})
+* [Overview of the Kendo UI TreeList Widget]({% slug overview_kendoui_treelist_widget %})
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
