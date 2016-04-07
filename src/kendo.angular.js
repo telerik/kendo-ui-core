@@ -621,6 +621,10 @@ var __meta__ = { // jshint ignore:line
             if (!widget._muteRebind && newValue !== oldValue) {
                 unregister(); // this watcher will be re-added if we compile again!
 
+                if (attrs._cleanUp) {
+                    attrs._cleanUp();
+                }
+
                 var templateOptions = WIDGET_TEMPLATE_OPTIONS[widget.options.name];
 
                 if (templateOptions) {
@@ -663,6 +667,16 @@ var __meta__ = { // jshint ignore:line
         digest(scope);
     }
 
+    function bind(f, obj) {
+        return function(a, b) {
+            return f.call(obj, a, b);
+        };
+    }
+
+    function setTemplate(key, value) {
+        this[key] = kendo.stringify(value); // jshint ignore:line
+    }
+
     module.factory('directiveFactory', [ '$compile', function(compile) {
         var kendoRenderedTimeout;
         var RENDERED = false;
@@ -678,15 +692,11 @@ var __meta__ = { // jshint ignore:line
                 scope: false,
 
                 controller: [ '$scope', '$attrs', '$element', function($scope, $attrs) {
-                    var that = this;
-                    that.template = function(key, value) {
-                        $attrs[key] = kendo.stringify(value);
-                    };
-
-                    $scope.$on("$destroy", function() {
-                        that.template = null;
-                        that = null;
-                    });
+                    this.template = bind(setTemplate, $attrs);
+                    $attrs._cleanUp = bind(function(){
+                        this.template = null;
+                        $attrs._cleanUp = null;
+                    }, this);
                 }],
 
                 link: function(scope, element, attrs, controllers) {
