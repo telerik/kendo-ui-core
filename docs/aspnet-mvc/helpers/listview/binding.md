@@ -1,34 +1,42 @@
 ---
-title: Binding
-page_title: Ajax Binding of Kendo jQuery ListView widget
-description: Learn the steps to configure Kendo UI ListView component for AJAX binding and easily enable client data processing during AJAX binding.
+title: Ajax Binding
+page_title: Binding | Kendo UI ListView HtmlHelper
+description: "Configure the Kendo UI ListView component for AJAX binding and easily enable client-data processing during AJAX binding."
+slug: ajaxbinding_listviewhelper_aspnetmvc
+position: 3
 ---
 
-# ListView Binding
+# Ajax Editing
 
-## Getting started
+When configured for Аjax binding, the Kendo UI ListView for ASP.NET MVC makes Ajax requests when doing paging.
 
-When configured for ajax binding the Kendo ListView for ASP.NET MVC will make ajax requests when doing paging.
+## Getting Started
 
-To configure the Kendo ListView for ajax binding follow these steps:
+### Configuration
 
-1.  Add a new action method which will return data to populate the listview:
+Below are listed the steps for you to follow when configuring the Kendo UI ListView for ASP.NET MVC for Ajax binding.
+
+**Step 1** Add a new action method which returns data to populate the ListView.
+
+###### Example
 
         public ActionResult Products_Read()
         {
             var products = new NorthwindDataContext().Products;
         }
-2.  Add a new parameter of type `Kendo.UI.DataSourceRequest`.
-It will contain the current listview request information.
-Decorate that parameter with the `Kendo.UI.DataSourceRequestAttribute`. That attribute is responsible for populating the `DataSourceRequest` object.
+
+**Step 2** Add a new parameter of type `Kendo.UI.DataSourceRequest`. It will contain the current ListView request information. Decorate that parameter with the `Kendo.UI.DataSourceRequestAttribute`. This attribute is responsible for populating the `DataSourceRequest` object.
+
+###### Example
 
         public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
         {
             var products = new NorthwindDataContext().Products;
         }
-3.  Use the `ToDataSourceResult` extension method to convert your `IQueryable` or `IEnumerable` to a
-`Kendo.UI.DataSourceResult` object. That extension method will page, filter, sort or group your data using the information provided by the
-`DataSourceRequest` object. To use the `ToDataSourceResult` extension method import the `Kendo.Mvc.Extensions` namespace.
+
+**Step 3** Use the `ToDataSourceResult` extension method to convert your `IQueryable` or `IEnumerable` to a `Kendo.UI.DataSourceResult` object. This extension method will page, filter, sort, or group your data using the information provided by the `DataSourceRequest` object. To use the `ToDataSourceResult` extension method, import the `Kendo.Mvc.Extensions` namespace.
+
+###### Example
 
         public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
         {
@@ -36,7 +44,10 @@ Decorate that parameter with the `Kendo.UI.DataSourceRequestAttribute`. That att
 
             DataSourceResult result = products.ToDataSourceResult(request);
         }
-4.  Return the `DataSourceResult` as JSON:
+
+**Step 4** Return the `DataSourceResult` as JSON.
+
+###### Example
 
         public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
         {
@@ -46,8 +57,12 @@ Decorate that parameter with the `Kendo.UI.DataSourceRequestAttribute`. That att
 
             return Json(result);
         }
-5.  In the view configure the listview to use the action method created in the previous steps:
-    - ListView item template
+
+**Step 5** In the view, configure the ListView to use the action method created in the previous steps.
+
+###### Example
+
+**ListView item template**
 
             <script type="text/x-kendo-tmpl" id="template">
                 <div class="product">
@@ -59,7 +74,8 @@ Decorate that parameter with the `Kendo.UI.DataSourceRequestAttribute`. That att
                     </dl>
                 </div>
             </script>
-    - WebForms
+
+**WebForms**
 
             <%: Html.Kendo().ListView<MvcApplication1.Models.Product>()
                 .Name("ListView")
@@ -70,7 +86,8 @@ Decorate that parameter with the `Kendo.UI.DataSourceRequestAttribute`. That att
                 )
                 .Pageable()
             %>
-    - Razor
+
+**Razor**
 
             @(Html.Kendo().ListView<MvcApplication1.Models.Product>()
                 .Name("ListView")
@@ -82,75 +99,92 @@ Decorate that parameter with the `Kendo.UI.DataSourceRequestAttribute`. That att
                 .Pageable()
             )
 
+The `ToDataSourceResult` method uses the `DataSourceRequest` parameter and Linq expressions to apply paging, sorting, filtering, and grouping. The JSON response of the action method will contain only a single page of data. The ListView will be bound to that data.
 
-The `ToDataSourceResult` method uses the `DataSourceRequest` parameter and Linq expressions to apply paging, sorting, filtering and grouping.
-The JSON response of the action method will contain only a single page of data. The listview will be bound to that data.
+### Additional Parametres
 
-## Pass Additional Data to Action Method
+To pass additional parameters to the action method, use the `Data` setting. Provide the name of a JavaScript function which will return an object containing the additional data.
 
-To pass additional parameters to the action method use the `Data` setting. Provide the name of a JavaScript function which will return an object
-containing the additional data:
+The example below demonstrates the action method.
 
+###### Example
 
-
-### Action method
-
-    public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request, string firstName, string lastName)
-    {
-        //Implementation omitted
-    }
+          public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request, string firstName, string lastName)
+          {
+              //Implementation omitted
+          }
 
 
-### WebForms - Send additional data
+The example below demonstrates how to send additional data.
 
-    <%: Html.Kendo().ListView<MvcApplication1.Models.Product>()
-            .Name("ListView")
-            .TagName("div")
-            .ClientTemplateId("template")
-            .DataSource(dataSource => dataSource
-                .Read(read => read.Action("Products_Read", "Home")
-                                  .Data("additionalData")) // Specify the name of the JavaScript function that returns the data
-            )
-            .Pageable()
-    %>
-    <script>
-    function additionalData() {
-        return {
-            firstName: "John",
-            lastName: "Doe"
-        };
-    }
-    </script>
+###### Example
 
+**WebForms**
 
-### Razor - Send additional data
+          <%: Html.Kendo().ListView<MvcApplication1.Models.Product>()
+                  .Name("ListView")
+                  .TagName("div")
+                  .ClientTemplateId("template")
+                  .DataSource(dataSource => dataSource
+                      .Read(read => read.Action("Products_Read", "Home")
+                                        .Data("additionalData")) // Specify the name of the JavaScript function that returns the data
+                  )
+                  .Pageable()
+          %>
+          <script>
+          function additionalData() {
+              return {
+                  firstName: "John",
+                  lastName: "Doe"
+              };
+          }
+          </script>
 
-    @(Html.Kendo().ListView<MvcApplication1.Models.Product>()
-        .Name("ListView")
-        .TagName("div")
-        .ClientTemplateId("template")
-        .DataSource(dataSource => dataSource
-            .Read(read => read.Action("Products_Read", "Home")
-                .Data("additionalData")) // Specify the name of the JavaScript function that returns the data
-        )
-        .Pageable()
-    )
-    <script>
-    function additionalData() {
-        return {
-            firstName: "John",
-            lastName: "Doe"
-        };
-    }
-    </script>
+**Razor**
 
+          @(Html.Kendo().ListView<MvcApplication1.Models.Product>()
+              .Name("ListView")
+              .TagName("div")
+              .ClientTemplateId("template")
+              .DataSource(dataSource => dataSource
+                  .Read(read => read.Action("Products_Read", "Home")
+                      .Data("additionalData")) // Specify the name of the JavaScript function that returns the data
+              )
+              .Pageable()
+          )
+          <script>
+          function additionalData() {
+              return {
+                  firstName: "John",
+                  lastName: "Doe"
+              };
+          }
+          </script>
 
-## Enable Client Data Processing during Ajax Binding
+### Client Data Processing
 
-By default Kendo ListView for ASP.NET MVC will request data from the server every time the user changes the page, filters the grid, sorts or groups. This behavior
-can be changed by disabling `ServerOperation`:
+By default, Kendo UI ListView for ASP.NET MVC requests data from the server every time the user changes the page, filters the grid, sorts, or groups. This behavior
+can be changed by disabling `ServerOperation`.
+
+###### Example
 
     .DataSource(dataSource => dataSource
         .ServerOperation(false) // paging will be applied client-side
         .Read(read => read.Action("Products_Read", "Home"))
     )
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the ListView:
+
+* [Overview of the ListView HtmlHelper]({% slug overview_listviewhelper_aspnetmvc %})
+* [Configuration of the ListView HtmlHelper]({% slug configuration_listviewhelper_aspnetmvc %})
+* [Editing of the ListView HtmlHelper]({% slug eiditing_listviewhelper_aspnetmvc %})
+* [Overview of the Kendo UI ListView Widget]({% slug overview_kendoui_listview_widget %})
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

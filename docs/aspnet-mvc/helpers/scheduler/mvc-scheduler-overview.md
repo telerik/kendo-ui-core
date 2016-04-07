@@ -62,6 +62,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sched
 
 **Step 4** Add a Scheduler.
 
+###### Example
+
 **WebForms**
 
         <%= Html.Kendo().Scheduler<KendoUISchedulerDemo.Models.Projection>()
