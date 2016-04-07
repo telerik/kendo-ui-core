@@ -9,7 +9,7 @@ position: 1
 
 # Hybrid ActionSheet HtmlHelper Overview
 
-The hybrid ActionSheet HtmlHelper extension is a server-side wrapper for the [hybrid Kendo UI ActionSheet](/api/mobile/actionsheet) widget. It allows you to configure the hybrid Kendo UI ActionSheet from server-side code.
+The hybrid ActionSheet HtmlHelper extension is a server-side wrapper for the [hybrid Kendo UI ActionSheet](http://demos.telerik.com/kendo-ui/m/index#actionsheet/index) widget. It allows you to configure the hybrid Kendo UI ActionSheet from server-side code.
 
 ## Getting Started
 
@@ -167,9 +167,9 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ## Reference
 
-### Existing Instances
+### Instances
 
-You can reference an existing hybrid ActionSheet instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [hybrid ActionSheet API](/api/javascript/mobile/ui/actionsheet#methods) to control its behavior.
+You can reference a hybrid ActionSheet instance by using the code from the example below. Once a reference is established, use the [hybrid ActionSheet API](/api/javascript/mobile/ui/actionsheet#methods) to control its behavior.
 
 ###### Example
 
