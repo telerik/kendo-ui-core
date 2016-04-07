@@ -153,6 +153,15 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
 });
 }
 
+/* FilterMultiCheck messages */
+
+if (kendo.ui.FilterMultiCheck) {
+kendo.ui.FilterMultiCheck.prototype.options.messages =
+$.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
+  "search": "搜索"
+});
+}
+
 /* Filter cell operator messages */
 
 if (kendo.ui.FilterCell) {

@@ -225,6 +225,15 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
 });
 }
 
+/* FilterMultiCheck messages */
+
+if (kendo.ui.FilterMultiCheck) {
+kendo.ui.FilterMultiCheck.prototype.options.messages =
+$.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
+  "search": "検索"
+});
+}
+
 /* Gantt messages */
 
 if (kendo.ui.Gantt) {

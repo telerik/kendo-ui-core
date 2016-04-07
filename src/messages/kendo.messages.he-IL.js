@@ -372,7 +372,8 @@ kendo.ui.FilterMultiCheck.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
   "checkAll": "בחר הכל",
   "clear": "נקה",
-  "filter": "סנן"
+  "filter": "סנן",
+  "search": "חפש"
 });
 }
 

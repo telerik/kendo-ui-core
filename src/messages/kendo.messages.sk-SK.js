@@ -232,7 +232,8 @@ if (kendo.ui.FilterMultiCheck) {
     $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
         "checkAll": "Všetky",
         "clear": "Vyčistiť",
-        "filter": "Filtrovať"
+        "filter": "Filtrovať",
+        "search": "Hľadať"
     });
 }
 
