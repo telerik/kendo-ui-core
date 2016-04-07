@@ -1,125 +1,171 @@
 ---
 title: Configuration
-page_title: Configuration of Kendo jQuery ListView widget for ASP.NET MVC
-description: How to configure the TagName of Kendo ListView for ASP.NET MVC and set Client Template ID of the script element.
+page_title: Configuration | Kendo UI ListView HtmlHelper
+description: "Configure the TagName of a Kendo UI ListView for ASP.NET MVC and set the Client Template ID of the script element."
+slug: configuration_listviewhelper_aspnetmvc
+position: 2
 ---
 
-## Tag name
+# Configuration
 
-The `TagName` of Kendo ListView for ASP.NET MVC used to create an element which will contain all listivew items once the listview is bound.
+## Tag Name
 
-## Client template id
+The `TagName` of Kendo UI ListView for ASP.NET MVC is used to create an element to contain all ListView items once the ListView is bound.
 
-The `ClientTemplateId` is mandatory for the listview widget. It contains the `id` of the **script** element which has the item template.
+## ClientTemplateId
 
-	<script type="text/x-kendo-tmpl" id="template">
-	    <div class="product">
-	        <img src="@Url.Content("~/content/web/foods/")${ProductID}.jpg" alt="${ProductName} image" />
-	        <h3>${ProductName}</h3>
-	        <dl>
-	            <dt>Price:</dt>
-	            <dd>${kendo.toString(UnitPrice, "c")}</dd>
-	        </dl>
-	    </div>
-	</script>
+The `ClientTemplateId` is mandatory for the ListView widget. It contains the `id` of the `script` element which accommodates the item template.
+
+###### Example
+
+			<script type="text/x-kendo-tmpl" id="template">
+			    <div class="product">
+			        <img src="@Url.Content("~/content/web/foods/")${ProductID}.jpg" alt="${ProductName} image" />
+			        <h3>${ProductName}</h3>
+			        <dl>
+			            <dt>Price:</dt>
+			            <dd>${kendo.toString(UnitPrice, "c")}</dd>
+			        </dl>
+			    </div>
+			</script>
 
 ## Common DataSource Settings
 
-The `DataSource` of the Kendo ListView for ASP.NET MVC contains configuration used by
-the [Kendo DataSource](/api/framework/datasource) object.
+The `DataSource` of the Kendo UI ListView for ASP.NET MVC contains configuration used by the [Kendo UI DataSource](/api/framework/datasource) object.
 
-Kendo ListView for ASP.NET MVC supports
-[ajax](/aspnet-mvc/helpers/listview/binding) type of data source.
+Kendo UI ListView for ASP.NET MVC supports [Ajax]({% slug ajaxbinding_listviewhelper_aspnetmvc %}) type of data source.
 
+### Create
 
-###   Create
-Specify the action method which will create new model
+Specify the action method which will create the new model.
 
-    .DataSource(dataSource => dataSource
-        .Create(create => create.Action(/### action ###/ "Create", /### controller ###/ "Home"))
-    )
+###### Example
 
-###   Destroy
-Specify the action method which will destroy existing models.
+	    .DataSource(dataSource => dataSource
+	        .Create(create => create.Action(/### action ###/ "Create", /### controller ###/ "Home"))
+	    )
 
-    .DataSource(dataSource => dataSource
-        .Destroy(destroy =>  destroy.Destroy(/### action ###/ "Destroy", /### controller ###/ "Home"))
-    )
+### Destroy
 
-###   Events
-Handle the [events](/api/framework/datasource#events) of the Kendo DataSource object.
+Specify the action method which will destroy the existing models.
 
-    .DataSource(dataSource => dataSource
-        .Events(events => events
-            // Subscribe to the "change" event. The name of the JavaScript function which will be invoked is "changeHandler".
-            .Change("changeHandler")
-            // Subscribe to the "error" event. The name of the JavaScript function which will be invoked is "errorHandler".
-            .Error("errorHandler")
-            // Subscribe to the "requestStart" event. The name of the JavaScript function which will be invoked is "requestStartHandler".
-            .RequestStart("requestStartHandler")
-        )
-    )
+###### Example
 
-###   Filter
+	    .DataSource(dataSource => dataSource
+	        .Destroy(destroy =>  destroy.Destroy(/### action ###/ "Destroy", /### controller ###/ "Home"))
+	    )
+
+### Events
+
+Handle the [events](/api/javascript/data/datasource#events) of the Kendo UI DataSource object.
+
+###### Example
+
+	    .DataSource(dataSource => dataSource
+	        .Events(events => events
+	            //Subscribe to the "change" event. The name of the JavaScript function which will be invoked is "changeHandler".
+	            .Change("changeHandler")
+	            //Subscribe to the "error" event. The name of the JavaScript function which will be invoked is "errorHandler".
+	            .Error("errorHandler")
+	            //Subscribe to the "requestStart" event. The name of the JavaScript function which will be invoked is "requestStartHandler".
+	            .RequestStart("requestStartHandler")
+	        )
+	    )
+
+### Filter
+
 Set the initial filter.
 
-    .DataSource(dataSource => dataSource
-        .Filter(filters =>
-        {
-            // Show products whose ProductName property contains "C"
-            filters.Add(p => p.ProductName).Contains("C");
-            // and UnitsInStock is greater than 10
-            filters.Add(p => p.UnitsInStock).IsGreaterThan(10);
-        })
-    )
+###### Example
 
-###   Model
+	    .DataSource(dataSource => dataSource
+	        .Filter(filters =>
+	        {
+	            //Show products whose ProductName property contains "C".
+	            filters.Add(p => p.ProductName).Contains("C");
+	            //And UnitsInStock is greater than 10.
+	            filters.Add(p => p.UnitsInStock).IsGreaterThan(10);
+	        })
+	    )
+
+### Model
+
 Configure the model of the data source.
 
-    .DataSource(dataSource => dataSource
-        .Model(model =>
-        {
-            //The unique identifier (primary key) of the model is the ProductID property
-            model.Id(p => p.ProductID);
+###### Example
 
-            // Declare a model field and optionally specify its default value (used when a new model instance is created)
-            model.Field(p => p.ProductName).DefaultValue("N/A");
+	    .DataSource(dataSource => dataSource
+	        .Model(model =>
+	        {
+	            //The unique identifier (primary key) of the model is the ProductID property.
+	            model.Id(p => p.ProductID);
 
-            // Declare a model field and make it readonly
-            model.Field(p => p.UnitPrice).Editable(false);
-        })
-    )
+	            //Declare a model field and optionally specify its default value (used when a new model instance is created).
+	            model.Field(p => p.ProductName).DefaultValue("N/A");
 
-###   PageSize
-Set the page size used during paging. The default page size is 10.
+	            //Declare a model field and make it readonly.
+	            model.Field(p => p.UnitPrice).Editable(false);
+	        })
+	    )
 
-    .DataSource(dataSource => dataSource
-        .PageSize(20)
-    )
+### PageSize
 
-###   Read
-Specify the action method which will read existing models and return them as JSON:
+Set the page size used during paging. The default page size is `10`.
 
-    .DataSource(dataSource => dataSource
-        .Read(read =>  read.Read(/### action ###/ "Read", /### controller ###/ "Home"))
-    )
+###### Example
 
-###   Sort
+	    .DataSource(dataSource => dataSource
+	        .PageSize(20)
+	    )
+
+### Read
+
+Specify the action method which will read the existing models and return them as JSON.
+
+###### Example
+
+	    .DataSource(dataSource => dataSource
+	        .Read(read =>  read.Read(/### action ###/ "Read", /### controller ###/ "Home"))
+	    )
+
+### Sort
+
 Set the initial sort.
 
-    .DataSource(dataSource => dataSource
-        .Sort(sort =>
-        {
-            // Sort by UnitsInStock in descending order
-            sort.Add(p => p.UnitsInStock).Descending();
-            // then by ProductName in ascending order
-            sort.Add(p => p.ProductName);
-        })
-    )
+###### Example
 
-###   Update
-Specify the action method which will update existing models:
+	    .DataSource(dataSource => dataSource
+	        .Sort(sort =>
+	        {
+	            //Sort by UnitsInStock in descending order.
+	            sort.Add(p => p.UnitsInStock).Descending();
+	            //Then by ProductName in ascending order.
+	            sort.Add(p => p.ProductName);
+	        })
+	    )
 
-    .DataSource(dataSource => dataSource
-        .Update(update =>  update.Update(/### action ###/ "Update", /### controller ###/ "Home"))
-    )
+### Update
+
+Specify the action method which will update the existing models.
+
+###### Example
+
+	    .DataSource(dataSource => dataSource
+	        .Update(update =>  update.Update(/### action ###/ "Update", /### controller ###/ "Home"))
+	    )
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the ListView:
+
+* [Overview of the ListView HtmlHelper]({% slug overview_listviewhelper_aspnetmvc %})
+* [Ajax Binding of the ListView HtmlHelper]({% slug ajaxbinding_listviewhelper_aspnetmvc %})
+* [Editing of the ListView HtmlHelper]({% slug eiditing_listviewhelper_aspnetmvc %})
+* [Overview of the Kendo UI ListView Widget]({% slug overview_kendoui_listview_widget %})
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
