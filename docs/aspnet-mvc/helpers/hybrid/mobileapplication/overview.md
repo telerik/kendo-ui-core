@@ -279,7 +279,7 @@ You can reference a hybrid Application instance by using the code from the examp
         )
         <script>
         $(function() {
-            // Notice that the casing is important
+            //Notice that the casing is important.
             var application = kendo.mobile.application;
         });
         </script>
