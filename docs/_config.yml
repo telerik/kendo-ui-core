@@ -523,7 +523,7 @@ navigation:
 baseurl: /kendo-ui
 
 ## The Kendo UI version used
-cdnVersion: "2016.1.226"
+cdnVersion: "2016.1.406"
 
 ## Assign layout and category per different paths
 defaults:
