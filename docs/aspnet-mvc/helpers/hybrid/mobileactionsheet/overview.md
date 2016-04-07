@@ -110,7 +110,6 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 **Step 4** Build and run the application.
 
-
 ## Event Handling
 
 You can subscribe to all hybrid ActionSheet [events](/api/javascript/mobile/ui/actionsheet#events).

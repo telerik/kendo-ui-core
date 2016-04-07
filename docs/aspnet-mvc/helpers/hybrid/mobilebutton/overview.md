@@ -1,23 +1,27 @@
 ---
 title: Overview
-page_title: How to use the Kendo UI MobileButton HtmlHelper extension, server-side ASP.NET MVC wrapper for Kendo UI Mobile Button widget
-description: Learn how to initialize Kendo UI MobileButton for ASP.NET MVC, handle Kendo UI MobileButton Events, access an existing button with MobileButton HtmlHelper extension documentation.
+page_title: Overview | Hybrid UI Button HtmlHelper
+description: "Get started with the server-side wrapper for the hybrid Kendo UI Button widget for ASP.NET MVC."
 previous_url: /aspnet-mvc/helpers/mobilebutton/overview
+slug: overview_hybridbutton_aspnetmvc
+position: 1
 ---
 
-# MobileButton
+# Hybrid Button HtmlHelper Overview
 
-The MobileButton HtmlHelper extension is a server-side wrapper for the [Kendo UI Mobile Button](/api/mobile/button) widget. It allows you to configure the Kendo UI Mobile Button
-from server-side code.
+The hybrid Button HtmlHelper extension is a server-side wrapper for the [hybrid Kendo UI Button](http://demos.telerik.com/kendo-ui/m/index#mobile-button/index) widget. It allows you to configure the hybrid Kendo UI Button from server-side code.
 
-## Getting started
+## Getting Started
 
-The following tutorial shows how to configure Kendo UI MobileButton for ASP.NET MVC.
+### Configuration
 
-1.  Create a new ASP.NET MVC 4 application (or Telerik UI for ASP.NET MVC application if you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions](/aspnet-mvc/introduction#kendo-ui-for-asp.net-mvc-visual-studio-extensions)).
-If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introduction](/aspnet-mvc/introduction) help topic in order
-to add Telerik UI for ASP.NET MVC to the application.
-1.  Open "HomeController.cs" and modify the `Index` action method:
+Below are listed the steps for you to follow when configuring the hybrid Kendo UI Button for ASP.NET MVC.
+
+**Step 1** Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+
+**Step 2** Open `HomeController.cs` and modify the `Index` action method.
+
+###### Example
 
         public ActionResult Index()
         {
@@ -25,110 +29,135 @@ to add Telerik UI for ASP.NET MVC to the application.
 
             return View();
         }
-1. Add a Kendo UI MobileButton to the Index view. As most mobile widgets MobileButton must be initialized within MobileView content
-    - Index.aspx (ASPX)
 
-            <% Html.Kendo().MobileView()
-                    .Name("button-view")
-                    .Title("Inbox")
-                    .Content(() =>
-                    {
-                        %>
+**Step 3** Add a hybrid Kendo UI Button to the `Index` view. Like most hybrid Kendo UI widgets, the Button must be initialized within the hybrid View content.
 
-                        <%: Html.Kendo().MobileButton()
-                                .Name("mobile-button2")
-                                .Text("Trigger Event 2")
-                                .HtmlAttributes(new { style = "margin: 2em; text-align: center;" })
-                        %>
-                        <%
-                    })
-                    .Render();
-            %>
+###### Example
 
-    - Index.cshtml (Razor)
+**Index.aspx (ASPX)**
 
-            @(Html.Kendo().MobileView()
+        <% Html.Kendo().MobileView()
                 .Name("button-view")
                 .Title("Inbox")
-                .Content(
-                    @<text>
+                .Content(() =>
+                {
+                    %>
 
-                    @(Html.Kendo().MobileButton()
+                    <%: Html.Kendo().MobileButton()
                             .Name("mobile-button2")
                             .Text("Trigger Event 2")
                             .HtmlAttributes(new { style = "margin: 2em; text-align: center;" })
-                    )
+                    %>
+                    <%
+                })
+                .Render();
+        %>
 
-                </text>)
-            )
+**Index.cshtml (Razor)**
 
-1. Initialize the mobile application
-    - Index.aspx (ASPX)
+        @(Html.Kendo().MobileView()
+            .Name("button-view")
+            .Title("Inbox")
+            .Content(
+                @<text>
 
-            <%: Html.Kendo().MobileApplication()
-                    .ServerNavigation(true)
-            %>
+                @(Html.Kendo().MobileButton()
+                        .Name("mobile-button2")
+                        .Text("Trigger Event 2")
+                        .HtmlAttributes(new { style = "margin: 2em; text-align: center;" })
+                )
 
-    - Index.cshtml (Razor)
+            </text>)
+        )
 
-            @(Html.Kendo().MobileApplication()
+**Step 4** Initialize the mobile application.
+
+###### Example
+
+**Index.aspx (ASPX)**
+
+        <%: Html.Kendo().MobileApplication()
                 .ServerNavigation(true)
-            )
+        %>
 
-1. Build and run the application
+**Index.cshtml (Razor)**
 
-## Getting reference to the Kendo UI MobileButton widget
+        @(Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        )
 
-To get a reference to a button instance use the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified via the `Name()` method.
-Then you can use you can use the JavaScript [API](/api/mobile/button#methods) of the button.
+**Step 5** Build and run the application.
 
-### Example - get reference to a Kendo UI MobileButton instance
+## Event Handling
 
-    @(Html.Kendo().MobileButton()
-            .Name("MobileButton")
-            .Text("Button Text")
-    )
-    <script>
-    $(function() {
-        // Notice that the Name() of the button is used to get its client-side instance
-        var button = $("#MobileButton").data("kendoMobileButton");
-    });
-    </script>
+You can subscribe to all hybrid Button [events](/api/javascript/mobile/ui/button#events).
 
+### By Handler Name
 
-## Handling Kendo UI MobileButton events
+The examples below demonstrates how to subscribe to events by a handler name.
 
-You can subscribe to all [events](/api/mobile/button#events) exposed by the widget:
+###### Example
 
-### Example - subscribe to event by handler name (ASPX)
+**ASPX**
 
-    <%: Html.Kendo().MobileButton()
-            .Name("MobileButton")
-            .Text("Button Text")
-            .Events(events => events
-                .Click("onClick")
-            )
-    %>
+        <%: Html.Kendo().MobileButton()
+                .Name("MobileButton")
+                .Text("Button Text")
+                .Events(events => events
+                    .Click("onClick")
+                )
+        %>
 
-    <script>
-    function onClick() {
-        //Handle the open event
-    }
-    </script>
+        <script>
+        function onClick() {
+            //Handle the open event.
+        }
+        </script>
 
+**Razor**
 
-### Example - subscribe to event by handler name (Razor)
+        @(Html.Kendo().MobileButton()
+                .Name("MobileButton")
+                .Text("Button Text")
+                .Events(events => events
+                    .Click("onClick")
+                )
+        )
 
-    @(Html.Kendo().MobileButton()
-            .Name("MobileButton")
-            .Text("Button Text")
-            .Events(events => events
-                .Click("onClick")
-            )
-    )
+        <script>
+        function onClick() {
+            //Handle the click event.
+        }
+        </script>
 
-    <script>
-    function onClick() {
-        //Handle the click event
-    }
-    </script>
+## Reference
+
+### Instances
+
+You can reference a hybrid Button instance by using the code from the example below. Once a reference is established, use the [hybrid Button API](/api/javascript/mobile/ui/button#methods) to control its behavior.
+
+###### Example
+
+        @(Html.Kendo().MobileButton()
+                .Name("MobileButton")
+                .Text("Button Text")
+        )
+        <script>
+        $(function() {
+            //Notice that the Name() of the Button is used to get its client-side instance.
+            var button = $("#MobileButton").data("kendoMobileButton");
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the Button:
+
+* [Overview of the Hybrid UI Button Widget]({% slug overview_hybridactionsheet %})
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
