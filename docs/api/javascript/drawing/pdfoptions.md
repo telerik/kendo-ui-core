@@ -44,7 +44,7 @@ The default "auto" means paper size is determined by content.
 
 Supported values:
 
-* A predefined size: "A4", "A3" etc
+* A predefined size. The supported paper sizes are: A0-A10, B0-B10, C0-C10, Executive, Folio, Legal, Letter, Tabloid.
 * An array of two numbers specifying the width and height in points (1pt = 1/72in)
 * An array of two strings specifying the width and height in units.
   Supported units are "mm", "cm", "in" and "pt".
