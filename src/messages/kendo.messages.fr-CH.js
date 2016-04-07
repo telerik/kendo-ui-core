@@ -227,7 +227,8 @@ kendo.ui.FilterMultiCheck.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
   "checkAll": "Choisir toutes",
   "clear": "Effacer filtre",
-  "filter": "Filtrer"
+  "filter": "Filtrer",
+  "search": "Recherche"
 });
 }
 

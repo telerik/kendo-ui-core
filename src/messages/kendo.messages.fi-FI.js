@@ -232,7 +232,8 @@ kendo.ui.FilterMultiCheck.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
   "checkAll": "Valitse kaikki",
   "clear": "Tyhjennä",
-  "filter": "Suodatus"
+  "filter": "Suodatus",
+  "search": "Hae"
 });
 }
 
