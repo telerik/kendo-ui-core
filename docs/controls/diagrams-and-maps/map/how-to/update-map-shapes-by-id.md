@@ -83,3 +83,4 @@ Other articles on Kendo UI Map:
 * [How to Render Custom Symbols for Bubble Layers]({% slug howto_rendercustomsymbols_forbubblelayers_map %})
 * [How to Set 100% Height in Mobile Applications]({% slug howto_set100percentheight_inmobileapps_map %})
 * [How to Zoom on Area]({% slug howto_zoomonarea_map %})
+* [How to Zoom on Double Click]({% slug howto_zoomondblclick_map %})
