@@ -3174,6 +3174,73 @@ A string, DOM element or jQuery object which represents the parent table row. A 
         treeList.addRow($("#treeList tbody>tr:first"));
     </script>
 
+### autoFitColumn
+
+Applies the minimum possible width for the specified column, so that all text fits without wrapping.
+
+#### Parameters
+
+##### column `Number|String|Object`
+
+The index of the column, or the [field](#configuration-columns.field) to which the columns is bound, or the column object obtained from the [columns](#fields-columns) collection.
+
+#### Example - autofit a column by index
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        resizable: true,
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ]
+      });
+      var treeList = $("#treeList").data("kendoTreeList");
+      treeList.autoFitColumn(0);
+    </script>
+
+#### Example - autofit a column by field
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        resizable: true,
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ]
+      });
+      var treeList = $("#treeList").data("kendoTreeList");
+      treeList.autoFitColumn("Name");
+    </script>
+
+#### Example - autofit a column by column object reference
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        resizable: true,
+        columns: [
+          { field: "Name" },
+          { field: "Position" }
+        ],
+        dataSource: [
+          { id: 1, Name: "Daryl Sweeney", Position: "CEO", parentId: null },
+          { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
+        ]
+      });
+      var treeList = $("#treeList").data("kendoTreeList");
+      treeList.autoFitColumn(treeList.columns[0]);
+    </script>
+
 ### cancelRow
 
 Cancels editing for the table row which is in edit mode. Reverts any changes made.
