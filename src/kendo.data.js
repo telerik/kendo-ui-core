@@ -2840,6 +2840,23 @@ var __meta__ = { // jshint ignore:line
                 that._addRange(that._data);
 
                 that._change();
+
+                that._markOfflineUpdatesAsDirty();
+            }
+        },
+
+        _markOfflineUpdatesAsDirty: function() {
+            var that = this;
+
+            if (that.options.offlineStorage != null) {
+                that._eachItem(that._data, function(items) {
+                    for (var idx = 0; idx < items.length; idx++) {
+                        var item = items.at(idx);
+                        if (item.__state__ == "update") {
+                            item.dirty = true;
+                        }
+                    }
+                });
             }
         },
 
@@ -2974,6 +2991,11 @@ var __meta__ = { // jshint ignore:line
                 if (idx >= 0) {
                     if (pristine && (!model.isNew() || pristine.__state__)) {
                         items[idx].accept(pristine);
+
+                        if (pristine.__state__ == "update") {
+                            items[idx].dirty = true;
+                        }
+
                     } else {
                         items.splice(idx, 1);
                     }
@@ -3196,16 +3218,7 @@ var __meta__ = { // jshint ignore:line
 
             that._data = that._observe(data);
 
-            if (that.options.offlineStorage != null) {
-                that._eachItem(that._data, function(items) {
-                    for (var idx = 0; idx < items.length; idx++) {
-                        var item = items.at(idx);
-                        if (item.__state__ == "update") {
-                            item.dirty = true;
-                        }
-                    }
-                });
-            }
+            that._markOfflineUpdatesAsDirty();
 
             that._storeData();
 
