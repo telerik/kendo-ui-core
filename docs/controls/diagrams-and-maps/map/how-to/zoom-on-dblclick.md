@@ -7,9 +7,9 @@ slug: howto_zoomondblclick_map
 
 # Zoom on Double Click
 
-The example below demonstrates how to zoom the map upon double click.
+The example below demonstrates how to zoom the map upon a double click.
 
-Event coordinates are mapped to location using the [eventToLocation](/api/javascript/dataviz/ui/map#methods-eventToLocation) method.
+Event coordinates are mapped to the location through using the [`eventToLocation`](/api/javascript/dataviz/ui/map#methods-eventToLocation) method.
 
 ###### Example
 
@@ -55,3 +55,4 @@ Other articles on Kendo UI Map:
 * [How to Render Custom Symbols for Bubble Layers]({% slug howto_rendercustomsymbols_forbubblelayers_map %})
 * [How to Set 100% Height in Mobile Applications]({% slug howto_set100percentheight_inmobileapps_map %})
 * [How to Update Map Shapes by ID]({% slug howto_updatemapshapesbyid_map %})
+* [How to Zoom on Area]({% slug howto_zoomonarea_map %})

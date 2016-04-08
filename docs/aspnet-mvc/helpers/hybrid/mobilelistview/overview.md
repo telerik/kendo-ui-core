@@ -1,79 +1,58 @@
 ---
 title: Overview
-page_title: How to use the Kendo UI MobileListView HtmlHelper extension, server-side ASP.NET MVC wrapper for Kendo UI Mobile ListView widget
-description: Learn how to initialize Kendo UI MobileListView for ASP.NET MVC, handle Kendo UI MobileListView Events, access an existing view with MobileListView HtmlHelper extension documentation.
+page_title: Overview | Hybrid UI ListView HtmlHelper
+description: "Get started with the server-side wrapper for the hybrid Kendo UI ListView widget for ASP.NET MVC."
 previous_url: /aspnet-mvc/helpers/mobilelistview/overview
+slug: overview_hybridlistview_aspnetmvc
+position: 1
 ---
 
-# MobileListView
+# Hybrid ListView HtmlHelper Overview
 
-The MobileListView HtmlHelper extension is a server-side wrapper for the [Kendo UI Mobile ListView](/api/mobile/listview) widget. It allows you to configure the Kendo UI Mobile ListView
-from server-side code.
+The hybrid ListView HtmlHelper extension is a server-side wrapper for the [hybrid Kendo UI ListView](http://demos.telerik.com/kendo-ui/m/index#mobile-listview/index) widget. It allows you to configure the hybrid Kendo UI ListView from server-side code.
 
-## Getting started
+## Getting Started
 
-There are two ways to configure Kend UI Mobile ListView fo ASP.NET MVC
+### The Basics
 
-* using item builder - manually creating MobileListView items structure
-* using data binding - binding MobileListView to collection of objects
+There are two ways to configure the hybrid ListView for ASP.NET MVC:
 
-### Manually building MobileListView items
+* By using an item builder&mdash;manually create the hybrid ListView items structure.
+* By using data binding&mdash;Bind the hybrid ListView to a collection of objects.
 
-1.  Create a new ASP.NET MVC 4 application (or Telerik UI for ASP.NET MVC application if you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions](/aspnet-mvc/introduction#kendo-ui-for-asp.net-mvc-visual-studio-extensions)).
-If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introduction](/aspnet-mvc/introduction) help topic in order
-to add Telerik UI for ASP.NET MVC to the application.
-1.  Open "HomeController.cs" and modify the `Index` action method:
+### Items Builder
+
+Below are listed the steps for you to follow when defining the items of a hybrid Kendo UI ListView.
+
+**Step 1** Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+
+**Step 2** Open `HomeController.cs` and modify the `Index` action method.
+
+###### Example
 
         public ActionResult Index()
         {
             return View();
         }
 
-1. Add a Kendo UI MobileListView to the Index view. It must be inside MobileView content
-    - Index.aspx (ASPX)
+**Step 3** Add a hybrid ListView to the `Index` view. It must be inside the View content.
 
-            <% Html.Kendo().MobileView()
-                    .Name("listview-home")
-                    .Title("Destinations")
-                    .Content(() =>
-                    {
-                        %>
-                        <% Html.Kendo().MobileListView().Style("inset").Type("group")
-                               .Items(root => {
-                                    //add root item
-                                    root.Add().Text("Africa").Items(items =>
-                                    {
-                                        //add nested link item
-                                        items.AddLink().Text("Nairobi").Icon("toprated");
-                                    });
+###### Example
 
-                                    root.Add().Text("America").Items(items =>
-                                    {
-                                        items.AddLink().Text("Boston").Icon("globe");
-                                        items.AddLink().Text("Ottawa").Icon("globe");
-                                        items.AddLink().Text("San Francisco").Icon("toprated");
-                                    });
-                                })
-                                .Render();
-                        %>
-                        <%
-                    })
-                    .Render();
-            %>
+**Index.aspx (ASPX)**
 
-    - Index.cshtml (Razor)
-
-            @(Html.Kendo().MobileView()
-                    .Name("listview-home")
-                    .Title("Destinations")
-                    .Content(obj =>
-                        Html.Kendo().MobileListView().Style("inset").Type("group")
-                            .Items(root =>
-                            {
-                                //add root item
+        <% Html.Kendo().MobileView()
+                .Name("listview-home")
+                .Title("Destinations")
+                .Content(() =>
+                {
+                    %>
+                    <% Html.Kendo().MobileListView().Style("inset").Type("group")
+                           .Items(root => {
+                                //Add the root item.
                                 root.Add().Text("Africa").Items(items =>
                                 {
-                                    //add nested link item
+                                    //Add the nested link item.
                                     items.AddLink().Text("Nairobi").Icon("toprated");
                                 });
 
@@ -84,37 +63,75 @@ to add Telerik UI for ASP.NET MVC to the application.
                                     items.AddLink().Text("San Francisco").Icon("toprated");
                                 });
                             })
-                    )
-            )
+                            .Render();
+                    %>
+                    <%
+                })
+                .Render();
+        %>
 
-1. Initialize the mobile application
-    - Index.aspx (ASPX)
+**Index.cshtml (Razor)**
 
-            <%: Html.Kendo().MobileApplication()
-                    .ServerNavigation(true)
-            %>
+        @(Html.Kendo().MobileView()
+                .Name("listview-home")
+                .Title("Destinations")
+                .Content(obj =>
+                    Html.Kendo().MobileListView().Style("inset").Type("group")
+                        .Items(root =>
+                        {
+                            //Add the root item.
+                            root.Add().Text("Africa").Items(items =>
+                            {
+                                //Add the nested link item.
+                                items.AddLink().Text("Nairobi").Icon("toprated");
+                            });
 
-    - Index.cshtml (Razor)
+                            root.Add().Text("America").Items(items =>
+                            {
+                                items.AddLink().Text("Boston").Icon("globe");
+                                items.AddLink().Text("Ottawa").Icon("globe");
+                                items.AddLink().Text("San Francisco").Icon("toprated");
+                            });
+                        })
+                )
+        )
 
-            @(Html.Kendo().MobileApplication()
+**Step 4** Initialize the mobile application.
+
+###### Example
+
+**Index.aspx (ASPX)**
+
+        <%: Html.Kendo().MobileApplication()
                 .ServerNavigation(true)
-            )
+        %>
 
-1. Build and run the application
+**Index.cshtml (Razor)**
 
-### Data binding
+        @(Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        )
 
-1.  Create a new ASP.NET MVC 4 application (or Telerik UI for ASP.NET MVC application if you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions](/aspnet-mvc/introduction#kendo-ui-for-asp.net-mvc-visual-studio-extensions)).
-If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introduction](/aspnet-mvc/introduction) help topic in order
-to add Telerik UI for ASP.NET MVC to the application.
-1.  Open "HomeController.cs" and modify the `Index` action method:
+**Step 5** Build and run the application.
+
+### Data Binding
+
+Below are listed the steps for you to follow when configuring the hybrid Kendo UI ListView for data binding.
+
+**Step 1** Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+
+**Step 2** Open `HomeController.cs` and modify the `Index` action method.
+
+###### Example
 
         public ActionResult Index()
         {
             return View();
         }
 
-1. Add a new action method which will return data to populate the listview:
+**Step 3** Add a new action method that returns the data populating the ListView.
+
+###### Example
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Read([DataSourceRequest] DataSourceRequest request)
@@ -141,111 +158,135 @@ to add Telerik UI for ASP.NET MVC to the application.
                 new { Name = "Yaki Udon", Letter = "Y" }
             };
 
-            //return the data as JSON
+            //Return the data as JSON.
             return Json(products.ToDataSourceResult(request));
         }
 
-1. Add a Kendo UI MobileListView to the Index view. It must be inside MobileView content
-    - Index.aspx (ASPX)
+**Step 4** Add a hybrid ListView to the `Index` view. It must be inside the View content.
 
-            <%: Html.Kendo().MobileView()
-                    .Name("grouped")
-                    .Title("ListView")
-                    .Content(obj =>
-                        Html.Kendo().MobileListView()
-                            .Name("grouped-listview")
-                            .TemplateId("template") //configure the item template
-                            .FixedHeaders(true)
-                            .DataSource(dataSource =>
-                                dataSource
-                                    .Read("Read", "Home") //configure DataSource `Read` action
-                                    .Group(group => group.Add("Letter", typeof(string)))
-                            )
-                    )
-            %>
+###### Example
 
-    - Index.cshtml (Razor)
+**Index.aspx (ASPX)**
 
-            @(Html.Kendo().MobileView()
-                    .Name("grouped")
-                    .Title("ListView")
-                    .Content(obj =>
-                        Html.Kendo().MobileListView()
-                            .Name("grouped-listview")
-                            .TemplateId("template") //configure the item template
-                            .FixedHeaders(true)
-                            .DataSource(dataSource =>
-                                dataSource
-                                    .Read("Read", "Home") //configure DataSource `Read` action
-                                    .Group(group => group.Add("Letter", typeof(string)))
-                            )
-                    )
-            )
+        <%: Html.Kendo().MobileView()
+                .Name("grouped")
+                .Title("ListView")
+                .Content(obj =>
+                    Html.Kendo().MobileListView()
+                        .Name("grouped-listview")
+                        .TemplateId("template") //configure the item template
+                        .FixedHeaders(true)
+                        .DataSource(dataSource =>
+                            dataSource
+                                .Read("Read", "Home") //configure DataSource `Read` action
+                                .Group(group => group.Add("Letter", typeof(string)))
+                        )
+                )
+        %>
 
-1. Initialize the mobile application
-    - Index.aspx (ASPX)
+**Index.cshtml (Razor)**
 
-            <%: Html.Kendo().MobileApplication()
-                    .ServerNavigation(true)
-            %>
+        @(Html.Kendo().MobileView()
+                .Name("grouped")
+                .Title("ListView")
+                .Content(obj =>
+                    Html.Kendo().MobileListView()
+                        .Name("grouped-listview")
+                        .TemplateId("template") //configure the item template
+                        .FixedHeaders(true)
+                        .DataSource(dataSource =>
+                            dataSource
+                                .Read("Read", "Home") //configure DataSource `Read` action
+                                .Group(group => group.Add("Letter", typeof(string)))
+                        )
+                )
+        )
 
-    - Index.cshtml (Razor)
+**Step 5** Initialize the mobile application.
 
-            @(Html.Kendo().MobileApplication()
+###### Example
+
+**Index.aspx (ASPX)**
+
+        <%: Html.Kendo().MobileApplication()
                 .ServerNavigation(true)
-            )
+        %>
 
-1. Build and run the application
+**Index.cshtml (Razor)**
 
-## Getting reference to the Kendo UI MobileListView widget
+        @(Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        )
 
-To get a reference to a view instance use the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified via the `Name()` method.
-Then you can use you can use the JavaScript [API](/api/mobile/listview#methods) of the view.
+**Step 6** Build and run the application.
 
-### Example - get reference to a Kendo UI MobileListView instance
+## Reference
 
-    @(Html.Kendo().MobileListView()
-            .Name("MobileListView")
-    )
-    <script>
-    $(function() {
-        // Notice that the Name() of the listview is used to get its client-side instance
-        var listview = $("#MobileListView").data("kendoMobileListView");
-    });
-    </script>
+### Instances
 
+You can reference a hybrid Layout instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified through the `Name()` method. Once a reference is established, use the [hybrid ListView API](/api/javascript/mobile/ui/listview#methods) to control its behavior.
 
-## Handling Kendo UI MobileListView events
+###### Example
 
-You can subscribe to all [events](/api/mobile/listview#events) exposed by the widget:
+        @(Html.Kendo().MobileListView()
+                .Name("MobileListView")
+        )
+        <script>
+        $(function() {
+            //Notice that the Name() of the ListView is used to get its client-side instance.
+            var listview = $("#MobileListView").data("kendoMobileListView");
+        });
+        </script>
 
-### Example - subscribe to event by handler name (ASPX)
+## Event Handling
 
-    <%: Html.Kendo().MobileListView()
-            .Name("MobileListView")
-            .Events(events => events
-                .Click("onClick")
-            )
-    %>
+You can subscribe to all hybrid ListView [events](/api/javascript/mobile/ui/listview#events).
 
-    <script>
-    function onClick() {
-        //Handle the click event
-    }
-    </script>
+### By Handler Name
 
+The examples below demonstrates how to subscribe to events by a handler name.
 
-### Example - subscribe to event by handler name (Razor)
+###### Example
 
-    @(Html.Kendo().MobileListView()
-            .Name("MobileListView")
-            .Events(events => events
-                .Click("onClick")
-            )
-    )
+**ASPX**
 
-    <script>
-    function onClick() {
-        //Handle the click event
-    }
-    </script>
+        <%: Html.Kendo().MobileListView()
+                .Name("MobileListView")
+                .Events(events => events
+                    .Click("onClick")
+                )
+        %>
+
+        <script>
+        function onClick() {
+            //Handle the click event.
+        }
+        </script>
+
+**Razor**
+
+        @(Html.Kendo().MobileListView()
+                .Name("MobileListView")
+                .Events(events => events
+                    .Click("onClick")
+                )
+        )
+
+        <script>
+        function onClick() {
+            //Handle the click event.
+        }
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the ListView:
+
+* [Overview of the Hybrid UI ListView Widget]({% slug overview_hybridlistview %})
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

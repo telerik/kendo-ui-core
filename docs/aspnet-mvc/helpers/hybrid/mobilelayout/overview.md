@@ -21,7 +21,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 **Step 2** Open `HomeController.cs` and modify the `Index` action method.
 
-###### Example# MobileLayout
+###### Example
 
         public ActionResult Index()
         {
