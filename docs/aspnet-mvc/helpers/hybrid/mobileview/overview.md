@@ -1,118 +1,146 @@
 ---
 title: Overview
-page_title: How to use the Kendo UI MobileView HtmlHelper extension, server-side ASP.NET MVC wrapper for Kendo UI Mobile View widget
-description: Learn how to initialize Kendo UI MobileView for ASP.NET MVC, handle Kendo UI MobileView Events, access an existing view with MobileView HtmlHelper extension documentation.
+page_title: Overview | Hybrid UI View HtmlHelper
+description: "Get started with the server-side wrapper for the hybrid Kendo UI View widget for ASP.NET MVC."
 previous_url: /aspnet-mvc/helpers/mobileview/overview
+slug: overview_hybridview_aspnetmvc
+position: 1
 ---
 
-# MobileView
+# Hybrid View HtmlHelper Overview
 
-The MobileView HtmlHelper extension is a server-side wrapper for the [Kendo UI Mobile View](/api/mobile/view) widget. It allows you to configure the Kendo UI Mobile View
-from server-side code.
+The hybrid View HtmlHelper extension is a server-side wrapper for the [hybrid Kendo UI View](http://demos.telerik.com/kendo-ui/m/index#mobile-view/index) widget. It allows you to configure the hybrid Kendo UI View from server-side code.
 
-## Getting started
+## Getting Started
 
-The following tutorial shows how to configure Kendo UI MobileView for ASP.NET MVC.
+### Configuration
 
-1.  Create a new ASP.NET MVC 4 application (or Telerik UI for ASP.NET MVC application if you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions](/aspnet-mvc/introduction#kendo-ui-for-asp.net-mvc-visual-studio-extensions)).
-If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introduction](/aspnet-mvc/introduction) help topic in order
-to add Telerik UI for ASP.NET MVC to the application.
-1.  Open "HomeController.cs" and modify the `Index` action method:
+Below are listed the steps for you to follow when configuring the hybrid Kendo UI View for ASP.NET MVC.
+
+**Step 1** Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+
+**Step 2** Open `HomeController.cs` and modify the `Index` action method.
+
+###### Example
 
         public ActionResult Index()
         {
             return View();
         }
 
-1. Add a Kendo UI MobileView to the Index view.
-    - Index.aspx (ASPX)
+**Step 3** Add a Kendo UI View to the `Index` view.
 
-            <% Html.Kendo().MobileView()
-                    .Title("View Title")
-                    .Content(() =>
-                    {
-                        %>
-                            View Content Template
-                        <%
-                    })
-                    .Render();
-            %>
+###### Example
 
-    - Index.cshtml (Razor)
+**Index.aspx (ASPX)**
 
-            @(Html.Kendo().MobileView()
-                    .Title("View Title")
-                    .Content(
-                        @<text>
-                            View Content Template
-                        </text>
-                    )
-            )
+        <% Html.Kendo().MobileView()
+                .Title("View Title")
+                .Content(() =>
+                {
+                    %>
+                        View Content Template
+                    <%
+                })
+                .Render();
+        %>
 
-1. Initialize the mobile application
-    - Index.aspx (ASPX)
+**Index.cshtml (Razor)**
 
-            <%: Html.Kendo().MobileApplication()
-                    .ServerNavigation(true)
-            %>
+        @(Html.Kendo().MobileView()
+                .Title("View Title")
+                .Content(
+                    @<text>
+                        View Content Template
+                    </text>
+                )
+        )
 
-    - Index.cshtml (Razor)
+**Step 4** Initialize the mobile application.
 
-            @(Html.Kendo().MobileApplication()
+###### Example
+
+**Index.aspx (ASPX)**
+
+        <%: Html.Kendo().MobileApplication()
                 .ServerNavigation(true)
-            )
+        %>
 
-1. Build and run the application
+**Index.cshtml (Razor)**
 
-## Getting reference to the Kendo UI MobileView widget
+        @(Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        )
 
-To get a reference to a view instance use the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified via the `Name()` method.
-Then you can use you can use the JavaScript [API](/api/mobile/view#methods) of the view.
+**Step 5** Build and run the application.
 
-### Example - get reference to a Kendo UI MobileView instance
+## Event Handling
 
-    @(Html.Kendo().MobileView()
-            .Name("MobileView")
-    )
-    <script>
-    $(function() {
-        // Notice that the Name() of the view is used to get its client-side instance
-        var view = $("#Mobileview").data("kendoMobileView");
-    });
-    </script>
+You can subscribe to all hybrid View [events](/api/javascript/mobile/ui/view#events).
 
+### By Handler Name
 
-## Handling Kendo UI MobileView events
+The examples below demonstrates how to subscribe to events by a handler name.
 
-You can subscribe to all [events](/api/mobile/view#events) exposed by the widget:
+###### Example
 
-### Example - subscribe to event by handler name (ASPX)
+**ASPX**
 
-    <%: Html.Kendo().MobileView()
-            .Name("MobileView")
-            .Events(events => events
-                .AfterShow("onAfterShow")
-            )
-    %>
+        <%: Html.Kendo().MobileView()
+                .Name("MobileView")
+                .Events(events => events
+                    .AfterShow("onAfterShow")
+                )
+        %>
 
-    <script>
-    function onAfterShow() {
-        //Handle the show event
-    }
-    </script>
+        <script>
+        function onAfterShow() {
+            //Handle the show event.
+        }
+        </script>
 
+**Razor**
 
-### Example - subscribe to event by handler name (Razor)
+        @(Html.Kendo().MobileView()
+                .Name("MobileView")
+                .Events(events => events
+                    .AfterShow("onAfterShow")
+                )
+        )
 
-    @(Html.Kendo().MobileView()
-            .Name("MobileView")
-            .Events(events => events
-                .AfterShow("onAfterShow")
-            )
-    )
+        <script>
+        function onAfterShow() {
+            //Handle the show event.
+        }
+        </script>
 
-    <script>
-    function onAfterShow() {
-        //Handle the show event
-    }
-    </script>
+## Reference
+
+### Instances
+
+You can reference a hybrid View instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified via the `Name()` method. Once a reference is established, use the [hybrid View API](/api/javascript/mobile/ui/view#methods) to control its behavior.
+
+###### Example
+
+      @(Html.Kendo().MobileView()
+              .Name("MobileView")
+      )
+      <script>
+      $(function() {
+          //Notice that the Name() of the View is used to get its client-side instance.
+          var view = $("#Mobileview").data("kendoMobileView");
+      });
+      </script>
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the View:
+
+* [Overview of the Hybrid UI View Widget]({% slug overview_hybridtabstrip %})
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

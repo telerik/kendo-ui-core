@@ -1,23 +1,27 @@
 ---
 title: Overview
-page_title: How to use the Kendo UI MobileSwitch HtmlHelper extension, server-side ASP.NET MVC wrapper for Kendo UI Mobile Switch widget
-description: Learn how to initialize Kendo UI MobileSwitch for ASP.NET MVC, handle Kendo UI MobileSwitch Events, access an existing switch with MobileSwitch HtmlHelper extension documentation.
+page_title: Overview | Hybrid UI Switch HtmlHelper
+description: "Get started with the server-side wrapper for the hybrid Kendo UI Switch widget for ASP.NET MVC."
 previous_url: /aspnet-mvc/helpers/mobileswitch/overview
+slug: overview_hybridswitch_aspnetmvc
+position: 1
 ---
 
-# MobileSwitch
+# Hybrid Switch HtmlHelper Overview
 
-The MobileSwitch HtmlHelper extension is a server-side wrapper for the [Kendo UI Mobile Switch](/api/mobile/switch) widget. It allows you to configure the Kendo UI Mobile Switch
-from server-side code.
+The hybrid SplitView HtmlHelper extension is a server-side wrapper for the [hybrid Kendo UI SplitView](http://demos.telerik.com/kendo-ui/m/index#splitview/index) widget. It allows you to configure the hybrid Kendo UI SplitView from server-side code.
 
-## Getting started
+## Getting Started
 
-The following tutorial shows how to configure Kendo UI MobileSwitch for ASP.NET MVC.
+### Configuration
 
-1.  Create a new ASP.NET MVC 4 application (or Telerik UI for ASP.NET MVC application if you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions](/aspnet-mvc/introduction#kendo-ui-for-asp.net-mvc-visual-studio-extensions)).
-If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introduction](/aspnet-mvc/introduction) help topic in order
-to add Telerik UI for ASP.NET MVC to the application.
-1.  Open "HomeController.cs" and modify the `Index` action method:
+Below are listed the steps for you to follow when configuring the hybrid Kendo UI Switch for ASP.NET MVC.
+
+**Step 1** Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#kendo-ui-for-asp.net-mvc-visual-studio-extensions), create a Telerik UI for ASP.NET MVC application. If you decide not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+
+**Step 2** Open `HomeController.cs` and modify the `Index` action method.
+
+###### Example
 
         public ActionResult Index()
         {
@@ -25,108 +29,133 @@ to add Telerik UI for ASP.NET MVC to the application.
 
             return View();
         }
-1. Add a Kendo UI MobileSwitch to the Index view. As most mobile widgets MobileSwitch must be initialized within MobileView content
-    - Index.aspx (ASPX)
 
-            <% Html.Kendo().MobileView()
-                    .Name("switch-view")
-                    .Title("Inbox")
-                    .Content(() =>
-                    {
-                        %>
+**Step 3** Add a Kendo UI Switch to the `Index` view. Like most hybrid Kendo UI widgets, the Switch must be initialized within the hybrid View content.
 
-                        <%: Html.Kendo().MobileSwitch()
-                                .Name("subscription-switch")
-                                .Checked(true)
-                                .OnLabel("YES")
-                                .OffLabel("NO")
-                        %>
-                        <%
-                    })
-                    .Render();
-            %>
+###### Example
 
-    - Index.cshtml (Razor)
+**Index.aspx (ASPX)**
 
-            @(Html.Kendo().MobileView()
+        <% Html.Kendo().MobileView()
                 .Name("switch-view")
                 .Title("Inbox")
-                .Content(
-                    @<text>
+                .Content(() =>
+                {
+                    %>
 
-                    @(Html.Kendo().MobileSwitch()
+                    <%: Html.Kendo().MobileSwitch()
                             .Name("subscription-switch")
                             .Checked(true)
                             .OnLabel("YES")
                             .OffLabel("NO")
-                    )
+                    %>
+                    <%
+                })
+                .Render();
+        %>
 
-                </text>)
-            )
+**Index.cshtml (Razor)**
 
-1. Initialize the mobile application
-    - Index.aspx (ASPX)
+        @(Html.Kendo().MobileView()
+            .Name("switch-view")
+            .Title("Inbox")
+            .Content(
+                @<text>
 
-            <%: Html.Kendo().MobileApplication()
-                    .ServerNavigation(true)
-            %>
+                @(Html.Kendo().MobileSwitch()
+                        .Name("subscription-switch")
+                        .Checked(true)
+                        .OnLabel("YES")
+                        .OffLabel("NO")
+                )
 
-    - Index.cshtml (Razor)
+            </text>)
+        )
 
-            @(Html.Kendo().MobileApplication()
+**Step 4** Initialize the mobile application.
+
+###### Example
+
+**Index.aspx (ASPX)**
+
+        <%: Html.Kendo().MobileApplication()
                 .ServerNavigation(true)
-            )
+        %>
 
-1. Build and run the application
+**Index.cshtml (Razor)**
 
-## Getting reference to the Kendo UI MobileSwitch widget
+        @(Html.Kendo().MobileApplication()
+            .ServerNavigation(true)
+        )
 
-To get a reference to a switch instance use the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified via the `Name()` method.
-Then you can use you can use the JavaScript [API](/api/mobile/switch#methods) of the switch.
+**Step 5** Build and run the application.
 
-### Example - get reference to a Kendo UI MobileSwitch instance
+## Event Handling
 
-    @(Html.Kendo().MobileSwitch()
-            .Name("subscription-switch")
-            .Checked(true)
-            .OnLabel("YES")
-            .OffLabel("NO")
-    )
-    <script>
-    $(function() {
-        // Notice that the Name() of the switch is used to get its client-side instance
-        var switch = $("#subscription-switch").data("kendoMobileSwitch");
-    });
-    </script>
+You can subscribe to all hybrid Switch [events](/api/javascript/mobile/ui/switch#events).
 
+### By Handler Name
 
-## Handling Kendo UI MobileSwitch events
+The examples below demonstrates how to subscribe to events by a handler name.
 
-You can subscribe to all [events](/api/mobile/switch#events) exposed by the widget:
+###### Example
 
-### Example - subscribe to event by handler name (ASPX)
+**ASPX**
 
-    <%: Html.Kendo().MobileSwitch()
+        <%: Html.Kendo().MobileSwitch()
+                .Name("mobile-switch")
+                .Events(events => events.Change("onChange"))
+        %>
+
+        <script>
+        function onChange() {
+            //Handle the change event.
+        }
+        </script>
+
+**Razor**
+
+        @(Html.Kendo().MobileSwitch()
             .Name("mobile-switch")
             .Events(events => events.Change("onChange"))
-    %>
+        )
 
-    <script>
-    function onChange() {
-        //Handle the change event
-    }
-    </script>
+        <script>
+        function onChange() {
+            //Handle the change event.
+        }
+        </script>
 
+## Reference
 
-### Example - subscribe to event by handler name (Razor)
+### Instances
 
-    @(Html.Kendo().MobileSwitch()
-        .Name("mobile-switch")
-        .Events(events => events.Change("onChange"))
-    )
+You can reference a hybrid Switch instance by using the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified via the `Name()` method. Once a reference is established, use the [hybrid Switch API](/api/javascript/mobile/ui/switch#methods) to control its behavior.
 
-    <script>
-    function onChange() {
-        //Handle the change event
-    }
-    </script>
+###### Example
+
+        @(Html.Kendo().MobileSwitch()
+                .Name("subscription-switch")
+                .Checked(true)
+                .OnLabel("YES")
+                .OffLabel("NO")
+        )
+        <script>
+        $(function() {
+            //Notice that the Name() of the Switch is used to get its client-side instance.
+            var switch = $("#subscription-switch").data("kendoMobileSwitch");
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the Switch:
+
+* [Overview of the Hybrid UI Switch Widget]({% slug overview_hybridswitch %})
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
