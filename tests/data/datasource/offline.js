@@ -729,6 +729,70 @@
         equal(dataSource.data().length, 1);
     });
 
+    test("cancelChanges does not revert item state after sync is called", function() {
+        var dataSource = new kendo.data.DataSource({
+            offlineStorage: "key",
+            schema: {
+                model: {
+                    id: "id"
+                }
+            },
+            transport: {
+                read: function(options) {
+                   options.success([
+                       {
+                           id: 1,
+                           name: "foo"
+                       }
+                   ]);
+                }
+            }
+        });
+
+        dataSource.read();
+        dataSource.online(false);
+        var model = dataSource.get(1);
+        model.set("name", "bar");
+        dataSource.sync();
+        dataSource.cancelChanges();
+
+        equal(dataSource.data().length, 1);
+        equal(dataSource.at(0).name, "bar");
+        ok(dataSource.at(0).dirty);
+    });
+
+    test("cancelChanges for a single record does not revert item state after sync is called", function() {
+        var dataSource = new kendo.data.DataSource({
+            offlineStorage: "key",
+            schema: {
+                model: {
+                    id: "id"
+                }
+            },
+            transport: {
+                read: function(options) {
+                   options.success([
+                       {
+                           id: 1,
+                           name: "foo"
+                       }
+                   ]);
+                }
+            }
+        });
+
+        dataSource.read();
+        dataSource.online(false);
+        var model = dataSource.get(1);
+        model.set("name", "bar");
+        dataSource.sync();
+        dataSource.cancelChanges(model);
+
+        equal(dataSource.data().length, 1);
+        equal(dataSource.at(0).name, "bar");
+        ok(dataSource.at(0).dirty);
+    });
+
     test("read resolves promise when pushing data to offline storage", function() {
         var dataSource = new kendo.data.DataSource({
             offlineStorage: "key"
