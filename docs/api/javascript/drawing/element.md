@@ -73,6 +73,9 @@ A flag, indicating if the element is visible.
 ### options `kendo.drawing.OptionsStore`
 The configuration options of the drawing element.
 
+### parent `kendo.drawing.Group`
+The parent group element, if any.
+
 ## Methods
 
 ### bbox
