@@ -5557,6 +5557,8 @@ The `uid` of the occurrence to look for.
 
 Gets a list of event occurrences in specified time range.
 
+> The result is scoped to the current displayed view. Therefore, the specified range should be within the view's time range.
+
 #### Parameters
 
 ##### start `Date`
