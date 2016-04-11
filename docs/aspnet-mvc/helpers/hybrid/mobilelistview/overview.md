@@ -17,7 +17,7 @@ The hybrid ListView HtmlHelper extension is a server-side wrapper for the [hybri
 
 There are two ways to configure the hybrid ListView for ASP.NET MVC:
 
-* By using an item builder&mdash;manually create the hybrid ListView items structure.
+* By using an item builder&mdash;Manually create the hybrid ListView items structure.
 * By using data binding&mdash;Bind the hybrid ListView to a collection of objects.
 
 ### Items Builder
