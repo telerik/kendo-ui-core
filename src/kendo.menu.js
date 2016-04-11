@@ -272,7 +272,8 @@ var __meta__ = { // jshint ignore:line
             .filter(":not([disabled])")
             .addClass(DEFAULTSTATE);
         item
-            .filter(".k-separator:empty")
+            .filter(".k-separator")
+            .empty()
             .append("&nbsp;");
         item
             .filter("li[disabled]")
