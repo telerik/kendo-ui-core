@@ -66,9 +66,15 @@ The example below demonstrates how to make the TabStrip widget 100% high and res
       var tabStrip = tabStripElement.data("kendoTabStrip");
 
       var expandContentDivs = function(divs) {
-        divs.height(tabStripElement.innerHeight() - tabStripElement.children(".k-tabstrip-items").outerHeight() - 16);
-          // 16px are substracted to compensate for content div vertical paddings and borders
-          // This amount can be calculated instead of hard-coded, if needed.
+        var visibleDiv = divs.filter(":visible");
+        divs.height(tabStripElement.innerHeight()
+                    - tabStripElement.children(".k-tabstrip-items").outerHeight()
+                    - parseFloat(visibleDiv.css("padding-top"))
+                    - parseFloat(visibleDiv.css("padding-bottom"))
+                    - parseFloat(visibleDiv.css("border-top-width"))
+                    - parseFloat(visibleDiv.css("border-bottom-width"))
+                    - parseFloat(visibleDiv.css("margin-bottom")));
+                    // all of the above padding/margin/border calculations can be replaced by a single hard-coded number for improved performance
       }
 
       resizeAll();
