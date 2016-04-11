@@ -1878,7 +1878,7 @@ The connector name.
 
 ### shapeDefaults.connectors.position `Function`
 
-The function that positions the connector.
+The function that positions the connector. The function is passed a shape and should return a kendo.dataviz.diagram.Point holding the connector position as result.
 
 ### shapeDefaults.connectors.width `Number` *(default: 8)*
 
@@ -2372,7 +2372,7 @@ The connector name. Predefined names include:
 
 ### shapes.connectors.position `Function`
 
-The function that positions the connector.
+The function that positions the connector. The function is passed a shape and should return a kendo.dataviz.diagram.Point holding the connector position as result.
 
 ### shapes.connectors.width `Number` *(default: 8)*
 
