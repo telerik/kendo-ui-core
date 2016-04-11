@@ -1012,6 +1012,166 @@ The title of the tool that deletes selected table columns.
     });
     </script>
 
+### pasteCleanup `Object`
+
+Options for controlling how the pasting content is modified before it is added in the editor.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        pasteCleanup: {
+            all: false,
+            css: false,
+            custom: null,
+            keepNewLines: false,
+            msAllFormatting: false,
+            msConvertLists: true,
+            msTags: true,
+            none: false,
+            span: false
+        }
+    });
+    </script>
+
+### pasteCleanup.all `Boolean` *(default: false)*
+
+All HTML tags are stripped leaving only the text in the content.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        pasteCleanup: {
+            all: true
+        }
+    });
+    </script>
+
+### pasteCleanup.css `Boolean` *(default: false)*
+
+Remove `style` and `class` attributes from the pasting content.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        pasteCleanup: {
+            css: true
+        }
+    });
+    </script>
+
+### pasteCleanup.custom `Function`
+
+Use a callback function to integrate a custom implementation for cleaning up the paste content. Make sure the callback function always returns the result.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        pasteCleanup: {
+            custom: function(html) {
+                return html.replace(/<img[^>]/>/, "");
+            }
+        }
+    });
+    </script>
+
+### pasteCleanup.keepNewLines `Boolean` *(default: false)*
+
+Strip all HTML tags but keep new lines in the pasted content.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        pasteCleanup: {
+            keepNewLines: true
+        }
+    });
+    </script>
+
+### pasteCleanup.msAllFormatting `Boolean` *(default: false)*
+
+Remove all special formatting from MS Word content like font-name, font-size and MS Word specific tags.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        pasteCleanup: {
+            msAllFormatting: true
+        }
+    });
+    </script>
+
+### pasteCleanup.msConvertLists `Boolean` *(default: true)*
+
+Converts MS Word pasted content into HTML lists.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        pasteCleanup: {
+            msConvertLists: false
+        }
+    });
+    </script>
+
+### pasteCleanup.msTags `Boolean` *(default: true)*
+
+Removes all MS Word specific tags and cleans up the extra metadata.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        pasteCleanup: {
+            msTags: false
+        }
+    });
+    </script>
+
+### pasteCleanup.none `Boolean` *(default: false)*
+
+Prevent any cleaning up of the content.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        pasteCleanup: {
+            none: true
+        }
+    });
+    </script>
+
+### pasteCleanup.span `Boolean` *(default: false)*
+
+Remove all span elements from the content, ensuring much of the inline formatting is removed.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        pasteCleanup: {
+            span: false
+        }
+    });
+    </script>
+
 ### pdf `Object`
 
 Configures the Kendo UI Editor PDF export settings.
