@@ -357,4 +357,18 @@ test("DateTimePicker max and min values are reset to initial when form is reset"
     deepEqual(datetimepicker.options.max, new Date(2000, 0, 2, 22, 0, 0));
 });
 
+test("datetimepicker does not add timezone offset incorrectly", function() {
+    var minDate = new Date(2016, 3, 8, 0, 0, 0);
+    var datetimepicker = new DateTimePicker(input, {
+        animation: false,
+        min: new Date(minDate)
+    });
+
+    datetimepicker.open();
+    datetimepicker.dateView.calendar.value(minDate);
+    datetimepicker.dateView.calendar.trigger("change");
+
+    deepEqual(datetimepicker.value(), minDate);
+});
+
 })();
