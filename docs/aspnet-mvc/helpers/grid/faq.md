@@ -1,7 +1,9 @@
 ---
-title: FAQ
-page_title: Frequently asked questions for Kendo UI Grid for ASP.NET MVC
-description: Learn how to use Kendo UI Grid for ASP.NET MVC by reading Grid FAQ and learning with examples. How Data binding works with Kendo ASP.NET MVC helpers.
+title: Frequently Asked Questions
+page_title: Frequently Asked Questions | Kendo UI Grid HtmlHelper
+description: "Find the most frequently asked questions related to the Kendo UI Grid HtmlHelper and their answers."
+slug: freqaskedquestions_gridhelper_aspnetmvc
+position: 5
 ---
 
 # Grid Frequently Asked Questions
@@ -390,7 +392,7 @@ There are several ways to prevent Ajax responses from being cached and reused by
         {
             /* ... */
         }
-    
+
 * Configure the Kendo UI DataSource to make POST Ajax requests for the Read action, instead of GET requests.
 
 * Use jQuery's [`ajaxSetup`](https://api.jquery.com/jquery.ajaxsetup/) configuration method. This will influence all Ajax requests that the web application performs.

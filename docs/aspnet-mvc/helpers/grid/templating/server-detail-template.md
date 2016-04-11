@@ -1,10 +1,13 @@
 ---
-title: Server Detail Template
-page_title: Configure Kendo UI Grid Server Detail Template
-description: Set the detail template of Kendo UI Grid used during server binding
+title: Server Detail Templates
+page_title: Server Detail Templates | Kendo UI Grid HtmlHelper
+description: "Set the detail template used during server binding of the Kendo UI Grid for ASP.NET MVC."
+previous_url: /aspnet-mvc/helpers/grid/server-detail-template
+slug: servertemplates_grid_aspnetmvc
+position: 3
 ---
 
-# Server Detail Template
+# Server Detail Templates
 
 ## Introduction
 

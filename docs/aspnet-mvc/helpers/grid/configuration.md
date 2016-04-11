@@ -1,10 +1,12 @@
 ---
 title: Configuration
-page_title: DataSource Configuration of Kendo UI Grid for ASP.NET MVC | Kendo UI Documentation
-description: Kendo UI DataSource documentation guides you how to configure DataSource to use Ajax binding, add grid columns.
+page_title: Configuration | Kendo UI Grid HtmlHelper
+description: "Configure the DataSource of the Kendo UI Grid HtmlHelper to use Ajax binding and add Grid columns in ASP.NET MVC applications."
+slug: configuration_gridhelper_aspnetmvc
+position: 2
 ---
 
-# Grid Configuration Settings
+# Configuration
 
 This help topic explains the various configuration options exposed via the Kendo UI Grid fluent API.
 
@@ -994,7 +996,7 @@ The `Refresh` method enables or disables the refresh pager button. Clicking that
      )
 
 ## Scrolling
- 
+
 By default, the Kendo UI MVC Grid is not scrollable. If scrolling is enabled, the widget will apply a default height of 200px to its data area.
 That can be changed or removed by setting an optional height style in the Grid's `Scrollable` settings:
 
@@ -1002,9 +1004,9 @@ That can be changed or removed by setting an optional height style in the Grid's
         .Name("grid")
         .Scrollable(s => s.Height(400)) // set 400px height style
      )
-     
+
      // or
-     
+
     @(Html.Kendo().Grid(Model)
         .Name("grid")
         .Scrollable(s => s.Height("auto")) // remove default height
@@ -1046,7 +1048,7 @@ Save as above, but the template is defined outside the Grid declaration.
     <script id="no-records-template-id" type="text/x-kendo-template">
         external HTML template, not centered
     </script>
-    
+
     @(Html.Kendo().Grid<Order>()   
         .Name("Grid")
         .NoRecords(n => n.TemplateId("no-records-template-id"))

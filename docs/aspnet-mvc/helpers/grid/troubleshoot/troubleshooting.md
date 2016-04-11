@@ -1,7 +1,9 @@
 ---
-title: Troubleshooting
-page_title: Kendo UI Grid for ASP.NET MVC Troubleshooting Guide
-description: Learn how to use Kendo UI jQuery Grid component with ASP.NET MVC Helpers and easily handle most common issues.
+title: Common Issues
+page_title: Common Issues | Grid HtmlHelper Troubleshooting
+description: "Learn about the solutions of common issues that may occur while working with Kendo UI Grid for ASP.NET MVC."
+slug: troubleshoot_gridhelper_aspnetmvc
+position: 1
 ---
 
 # Grid Troubleshooting
@@ -87,7 +89,7 @@ An exception that a request has been blocked because sensitive information could
         return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
     }
 
-### Limited Usage of Templates 
+### Limited Usage of Templates
 
 An exception that templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions can occur if an editable grid is bound to a `DataTable` or `DataSet`. The reason is that ASP.NET MVC `EditorFor` method does not support `DataTable`.
 
@@ -118,7 +120,7 @@ The easiest way to avoid the JavaScript error is the following:
 
 In this case widget "C" will not exist in a nested template context and its HTML/JavaScript output will not need any escaping.
 
-## Different Cultural Formats 
+## Different Cultural Formats
 
 By default Kendo UI Grid formats dates and numbers using the **en-US** culture. If the Grid does not display numbers and dates in the right format that corresponds to your culture, change the culture by including the JavaScript for your culture and then call `kendo.culture`.
 

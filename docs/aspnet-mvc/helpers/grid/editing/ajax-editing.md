@@ -1,7 +1,10 @@
 ---
 title: Ajax Editing
-page_title: Ajax Editing in Kendo UI Grid for ASP.NET MVC | Kendo UI Documentation
-description: Documentation how to define commands and set the editing mode to configure Kendo UI Grid for ASP.NET MVC for Ajax editing.
+page_title: Ajax Editing | Kendo UI Grid HtmlHelper
+description: "Define commands and set the editing mode to configure the Kendo UI Grid for ASP.NET MVC for Ajax editing."
+previous_url: /aspnet-mvc/helpers/grid/ajax-editing
+slug: ajaxediting_grid_aspnetmvc
+position: 2
 ---
 
 # Ajax Editing

@@ -247,6 +247,23 @@ navigation:
     "aspnet-mvc/helpers":
         title: "HtmlHelpers"
         position: 14
+    "aspnet-mvc/helpers/grid/binding":
+        title: "Binding"
+        position: 6
+    "aspnet-mvc/helpers/grid/editing":
+        title: "Editing"
+        position: 7
+    "aspnet-mvc/helpers/grid/templating":
+        title: "Templating"
+        position: 8
+    "aspnet-mvc/helpers/grid/how-to":
+        title: "How To"
+        position: 9
+    "aspnet-mvc/helpers/grid/how-to/editing":
+        title: "Editing"
+    "aspnet-mvc/helpers/grid/troubleshoot":
+        title: "Troubleshooting"
+        position: 10
     "aspnet-mvc/helpers/hybrid":
         title: "Hybrid UI"
     "aspnet-mvc/troubleshoot":

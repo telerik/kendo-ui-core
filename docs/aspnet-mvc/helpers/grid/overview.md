@@ -1,11 +1,12 @@
 ---
 title: Overview
-page_title: How to use the Kendo UI Grid HtmlHelper extension, server-side ASP.NET MVC wrapper for Kendo UI Grid widget
-description: Learn how to bind Kendo UI Grid for ASP.NET MVC, handle Kendo UI Grid Events, access an existing grid with Grid HtmlHelper extension documentation.
+page_title: Overview | Kendo UI Grid HtmlHelper
+description: "Get started with the server-side wrapper for the Kendo UI Grid widget for ASP.NET MVC."
+slug: overview_gridhelper_aspnetmvc
 position: 1
 ---
 
-# Grid
+# Grid HtmlHelper Overview
 
 The Grid HtmlHelper extension is a server-side wrapper for the [Kendo UI Grid](/api/javascript/ui/grid) widget. It allows you to configure the Kendo UI grid
 from server-side code, helps with data binding and editing.
