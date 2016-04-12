@@ -1,6 +1,7 @@
 ---
 title: Color Alternating Rows
 descriptin: Color the alternating Excel rows in Kendo UI Grid for ASP.NET MVC
+slug: howto_alternatingrows_aspnetmvcgrid
 ---
 
 # Color the Alternating Rows

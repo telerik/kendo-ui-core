@@ -1,6 +1,7 @@
 ---
 title: Cell Format
 description: Format the Excel cell values in Kendo UI grid for ASP.NET MVC
+slug: howto_cellformat_aspnetmvcgrid
 ---
 
 # Set Cell Format During Excel export

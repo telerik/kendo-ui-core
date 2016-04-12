@@ -1,6 +1,7 @@
 ---
 title: Column Template
 description: Use the column template in the output Excel document
+slug: howto_columntemplatexport_aspnetmvcgrid
 ---
 
 # Column Template Export
