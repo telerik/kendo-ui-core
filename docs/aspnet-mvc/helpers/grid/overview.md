@@ -58,7 +58,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
         {
             ViewBag.Message = "Welcome to ASP.NET MVC!";
             var northwind = new NorthwindEntities();
-            // Get the Products entities and add them in the ViewBag
+            //Get the Products entities and add them to the ViewBag.
             ViewBag.Products = northwind.Products;
             return View();
         }
@@ -73,15 +73,15 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
                 .Name("grid")
                 .Columns(columns =>
                 {
-                    // Create a column bound to the ProductID property
+                    //Create a column bound to the ProductID property.
                     columns.Bound(product => product.ProductID);
-                    // Create a column bound to the ProductName property
+                    //Create a column bound to the ProductName property.
                     columns.Bound(product => product.ProductName);
-                    // Create a column bound to the UnitsInStock property
+                    //Create a column bound to the UnitsInStock property.
                     columns.Bound(product => product.UnitsInStock);
                 })
-                .Pageable() // Enable paging
-                .Sortable() // Enable sorting
+                .Pageable() //Enable the paging.
+                .Sortable() //Enable the sorting.
         %>
 
 **Index.cshtml (Razor)**
@@ -90,15 +90,15 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
               .Name("grid")
               .Columns(columns =>
               {
-                  // Create a column bound to the ProductID property
+                  //Create a column bound to the ProductID property.
                   columns.Bound(product => product.ProductID);
-                  // Create a column bound to the ProductName property
+                  //Create a column bound to the ProductName property.
                   columns.Bound(product => product.ProductName);
-                  // Create a column bound to the UnitsInStock property
+                  //Create a column bound to the UnitsInStock property.
                   columns.Bound(product => product.UnitsInStock);
               })
-              .Pageable() // Enable paging
-              .Sortable() // Enable sorting
+              .Pageable() //Enable the paging.
+              .Sortable() //Enable the sorting.
         )
 
 **Step 7** Build and run the application.
@@ -126,7 +126,7 @@ You can reference an existing Kendo UI Grid instance via [`jQuery.data()`](http:
         )
         <script>
         $(function() {
-            // Notice that the Name() of the grid is used to get its client-side instance
+            //Notice that the Name() of the Grid is used to get its client-side instance.
             var grid = $("#grid").data("kendoGrid");
         });
         </script>
@@ -152,11 +152,11 @@ The examples below demonstrates how to subscribe to events by a handler name.
         %>
         <script>
         function grid_dataBound() {
-            //Handle the dataBound event
+            //Handle the dataBound event.
         }
 
         function grid_change() {
-            //Handle the change event
+            //Handle the change event.
         }
         </script>
 
@@ -171,11 +171,11 @@ The examples below demonstrates how to subscribe to events by a handler name.
         )
         <script>
         function grid_dataBound() {
-            //Handle the dataBound event
+            //Handle the dataBound event.
         }
 
         function grid_change() {
-            //Handle the change event
+            //Handle the change event.
         }
         </script>
 
@@ -192,12 +192,12 @@ The example below demonstrates how to subscribe to events by a template delegate
           .Events(e => e
               .DataBound(@<text>
                   function() {
-                      //Handle the dataBound event inline
+                      //Handle the dataBound event inline.
                   }
               </text>)
               .Change(@<text>
                   function() {
-                      //Handle the change event inline
+                      //Handle the change event inline.
                   }
               </text>)
           )
