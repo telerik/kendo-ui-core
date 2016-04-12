@@ -1,6 +1,7 @@
 ---
 title: Detail Grid Excel Export
 description: How to export master and detail grids in Excel using ASP.NET MVC
+slug: howto_detailgridexcelexport_aspnetmvcgrid
 ---
 
 # Detail Grid Excel Export
@@ -13,4 +14,3 @@ workbook of the detail grids. The event is prevented to avoid saving an Excel fi
 [Detail Grid Excel Export All Expanded Detail Grids Visual Studio Project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/detail-grid-excel-export)
 
 [Detail Grid Excel Export All Pages and All Detail Grids Visual Studio Project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/detail-grid-excel-export-all-pages-all-details)
-

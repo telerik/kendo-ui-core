@@ -1,6 +1,7 @@
 ---
 title: Multiple Grid Export
 description: Export more than one Kendo UI grid for ASP.NET MVC to Excel
+slug: howto_multiplegridexport_aspnetmvcgrid
 ---
 
 # Multiple Grid Export
