@@ -48,7 +48,7 @@ Name the model "Northwind.edmx" and click "Next". This will start the "Entity Da
         {
             ViewBag.Message = "Welcome to ASP.NET MVC!";
             var northwind = new NorthwindEntities();
-            // Get the Products entities and add them in the ViewBag
+            //Get the Products entities and add them to the ViewBag.
             ViewBag.Products = northwind.Products;
             return View();
         }
@@ -93,7 +93,47 @@ Name the model "Northwind.edmx" and click "Next". This will start the "Entity Da
 To get a reference to a grid instance use the [jQuery.data()](http://api.jquery.com/jQuery.data/) method and the value specified via the `Name()` method.
 Then you can use you can use the JavaScript [API](/api/javascript/ui/grid#methods) of the grid.
 
+<<<<<<< HEAD
 ###### Example - get reference to a Kendo UI Grid instance
+=======
+**Index.aspx (ASPX)**
+
+        <%: Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products) //Bind the grid to ViewBag.Products
+                .Name("grid")
+                .Columns(columns =>
+                {
+                    //Create a column bound to the ProductID property.
+                    columns.Bound(product => product.ProductID);
+                    //Create a column bound to the ProductName property.
+                    columns.Bound(product => product.ProductName);
+                    //Create a column bound to the UnitsInStock property.
+                    columns.Bound(product => product.UnitsInStock);
+                })
+                .Pageable() //Enable the paging.
+                .Sortable() //Enable the sorting.
+        %>
+
+**Index.cshtml (Razor)**
+
+        @(Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products) //Bind the grid to ViewBag.Products
+              .Name("grid")
+              .Columns(columns =>
+              {
+                  //Create a column bound to the ProductID property.
+                  columns.Bound(product => product.ProductID);
+                  //Create a column bound to the ProductName property.
+                  columns.Bound(product => product.ProductName);
+                  //Create a column bound to the UnitsInStock property.
+                  columns.Bound(product => product.UnitsInStock);
+              })
+              .Pageable() //Enable the paging.
+              .Sortable() //Enable the sorting.
+        )
+
+**Step 7** Build and run the application.
+
+**Figure 4. The final result**
+>>>>>>> 83590fc... Update aspnetmvc grid overview and configuration
 
     @(Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products)
           .Name("grid")
@@ -118,7 +158,25 @@ You can subscribe to all [events](/api/javascript/ui/grid#events) exposed by the
 
 ### Subscribe to an Event by Handler Name (ASPX)
 
+<<<<<<< HEAD
 ###### Example
+=======
+        @(Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products)
+              .Name("grid")
+              .Columns(columns =>
+              {
+                  columns.Bound(product => product.ProductID);
+                  columns.Bound(product => product.ProductName);
+                  columns.Bound(product => product.UnitsInStock);
+              })
+        )
+        <script>
+        $(function() {
+            //Notice that the Name() of the Grid is used to get its client-side instance.
+            var grid = $("#grid").data("kendoGrid");
+        });
+        </script>
+>>>>>>> 83590fc... Update aspnetmvc grid overview and configuration
 
     <%: Html.Kendo().Grid(Model)
             .Name("grid")
@@ -142,6 +200,7 @@ You can subscribe to all [events](/api/javascript/ui/grid#events) exposed by the
 
 ###### Example
 
+<<<<<<< HEAD
     @(Html.Kendo().Grid(Model)
           .Name("grid")
           .Events(e => e
@@ -158,6 +217,45 @@ You can subscribe to all [events](/api/javascript/ui/grid#events) exposed by the
         //Handle the change event
     }
     </script>
+=======
+**ASPX**
+
+        <%: Html.Kendo().Grid(Model)
+                .Name("grid")
+                .Events(e => e
+                    .DataBound("grid_dataBound")
+                    .Change("grid_change")
+                )
+        %>
+        <script>
+        function grid_dataBound() {
+            //Handle the dataBound event.
+        }
+
+        function grid_change() {
+            //Handle the change event.
+        }
+        </script>
+
+**Razor**
+
+        @(Html.Kendo().Grid(Model)
+              .Name("grid")
+              .Events(e => e
+                  .DataBound("grid_dataBound")
+                  .Change("grid_change")
+              )
+        )
+        <script>
+        function grid_dataBound() {
+            //Handle the dataBound event.
+        }
+
+        function grid_change() {
+            //Handle the change event.
+        }
+        </script>
+>>>>>>> 83590fc... Update aspnetmvc grid overview and configuration
 
 
 ### Subscribe to an Event via Razor Delegate
@@ -169,12 +267,12 @@ You can subscribe to all [events](/api/javascript/ui/grid#events) exposed by the
           .Events(e => e
               .DataBound(@<text>
                   function() {
-                      //Handle the dataBound event inline
+                      //Handle the dataBound event inline.
                   }
               </text>)
               .Change(@<text>
                   function() {
-                      //Handle the change event inline
+                      //Handle the change event inline.
                   }
               </text>)
           )
