@@ -53,14 +53,19 @@ The example below demonstrates how to display a tooltip for `categoryAxis` label
         },
 
         render: function(e) {
+          var ttip = $(".customTooltip");
           e.sender.surface.bind("mouseenter", function(e) {
             if (e.element.tooltipText) {
-              $(".customTooltip").html(e.element.tooltipText).show();
+              var pos = e.element.bbox().getOrigin();
+	      pos.y = pos.y + 30;
+              ttip.html(e.element.tooltipText).show();
+              ttip[0].style.top = pos.y + 'px';
+	      ttip[0].style.left = pos.x + 'px';
             }
           });
           e.sender.surface.bind("mouseleave", function(e) {
             if (e.element.tooltipText) {
-              $(".customTooltip").hide();
+              ttip.hide();
             }
           });
         }
@@ -68,6 +73,7 @@ The example below demonstrates how to display a tooltip for `categoryAxis` label
     </script>
 	<style>
       .customTooltip {
+      	position:absolute;
         display: none;
         color: #fff;
         font-size: 20px Arial, sans-serif;
