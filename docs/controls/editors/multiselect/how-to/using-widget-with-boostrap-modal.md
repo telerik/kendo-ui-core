@@ -32,7 +32,7 @@ The example below demonstrates how to use the Kendo UI Multiselect widget with a
           </div>
           <div class="modal-body">
 
-            <div
+            <select
                  id="people-multiselect"
                  data-role="multiselect"
                  data-filter="startswith"
@@ -40,7 +40,7 @@ The example below demonstrates how to use the Kendo UI Multiselect widget with a
                  data-text-field="name"
                  data-value-field="id"
                  data-bind="source: players, value: game.players, events: { close: close }">
-            </div>
+            </select>
 
           </div>
           <div class="modal-footer">
@@ -51,7 +51,7 @@ The example below demonstrates how to use the Kendo UI Multiselect widget with a
     </div>
 
     <script type="text/x-kendo-tmpl" id="gameTemplate">
-      <button class='btn btn-default' data-bind='click: selectGame'>        
+      <button class='btn btn-default' data-bind='click: selectGame'>
           Show #=name#
       </button>
     </script>
@@ -97,7 +97,7 @@ The example below demonstrates how to use the Kendo UI Multiselect widget with a
 
         function bindView() {
           kendo.bind($("#game-container"), viewModel);
-        }            
+        }
       });
     </script>
 ```
