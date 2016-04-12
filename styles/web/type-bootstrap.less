@@ -769,12 +769,20 @@ html .km-pane-wrapper .k-header
         background-color: @base;
     }
 
+    .k-today.k-state-selected {
+        background-color: @selected-background-color;
+    }
+
     .k-today.k-state-hover {
         background-color: darken(@base, 7%);
     }
 
     .k-today.k-state-focused.k-state-hover {
         background-color: lighten(@selected-background-color, 37%);
+    }
+
+    .k-today.k-state-selected.k-state-hover {
+        background-color: darken(@selected-background, 8%);
     }
 
     .k-footer .k-link {
