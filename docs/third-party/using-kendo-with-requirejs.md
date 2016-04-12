@@ -109,46 +109,47 @@ The example below demonstrates how to load AngularJS and initialize it with [`an
 ```html
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <link rel="stylesheet" href="../dist/styles/web/kendo.common-material.core.min.css">
-        <link rel="stylesheet" href="../dist/styles/web/kendo.material.min.css">
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
-    </head>
-    <body>
-        <div ng-controller="controller">
-          <select kendo-drop-down-list k-options="options"></select>
-        </div>
+  <head>
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.406/styles/kendo.common.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.406/styles/kendo.rtl.min.css">
+    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.406/styles/kendo.default.min.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
+  </head>
+  <body>
+    <div ng-controller="controller">
+      <select kendo-drop-down-list k-options="options"></select>
+    </div>
 
-        <script>
-        require.config({
-          paths: {
-            "angular": "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min",
-            "jquery": "http://code.jquery.com/jquery-1.9.1.min",
-            "kendo.ui.core.min": "../dist/js/kendo.ui.core.min"
-          },
-          shim: {
-            "angular": { deps: ["jquery"] },
-            "kendo.ui.core.min": { deps: ["angular"] }
-          }
-        });
+    <script>
+      require.config({
+        paths: {
+          "angular": "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min",
+          "jquery": "http://code.jquery.com/jquery-1.9.1.min",
+          "kendo.all.min": "http://kendo.cdn.telerik.com/2016.1.406/js/kendo.all.min"
+        },
+        shim: {
+          "angular": { deps: ["jquery"] },
+          "kendo.all.min": { deps: ["angular"] }
+        }
+      });
 
-        require([ "angular", "kendo.ui.core.min" ], function() {
-            var app = angular.module("app", ["kendo.directives"]);
+      require([ "angular", "kendo.all.min" ], function() {
+        var app = angular.module("app", ["kendo.directives"]);
 
-            app.controller("controller", ["$scope", function($scope) {
-              $scope.options = {
-                dataSource: {
-                  data: [{name:"Jane Doe", value: 1}, {name:"John Doe", value: 2}]
-                },
-                dataTextField: "name",
-                dataValueField: "value"
-              };
-            }]);
+        app.controller("controller", ["$scope", function($scope) {
+          $scope.options = {
+            dataSource: {
+              data: [{name:"Jane Doe", value: 1}, {name:"John Doe", value: 2}]
+            },
+            dataTextField: "name",
+            dataValueField: "value"
+          };
+        }]);
 
-            angular.bootstrap(document, ["app"]);
-        });
-        </script>
-    </body>
+        angular.bootstrap(document, ["app"]);
+      });
+    </script>
+  </body>
 </html>
 ```
 
