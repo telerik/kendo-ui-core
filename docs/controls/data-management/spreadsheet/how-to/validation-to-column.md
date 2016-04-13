@@ -1,15 +1,13 @@
 ---
-title: Set a validation rule to a column range
-page_title: Set a validation rule to a column range
+title: Set Validation Rules to Column Ranges
+page_title: Set Validation Rules to Column Ranges
 description: "Learn how to set a valdiation rule to a specific column range in Kendo UI Spreadsheet."
 slug: howto_validationtocolumn_spreadsheet_widget
 ---
 
-# Set validation to column
+# Set Validation Rules to Column Ranges
 
-The example below demonstrates how to set a validation rule to a column range.
-
-The demo will [range.validation](http://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range#methods-validation) to apply the validation rule to the specific range.
+The example below demonstrates how to set a validation rule to a column range. It uses the [`range.validation`](/api/javascript/spreadsheet/range#methods-validation) to apply the validation rule to the specific range.
 
 ###### Example
 
@@ -517,3 +515,4 @@ The demo will [range.validation](http://docs.telerik.com/kendo-ui/api/javascript
 Other articles and how-to examples on Kendo UI Spreadsheet:
 
 * [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
+* [How to Bind Charts to Sheet Data]({% slug howto_bindcharttosheet_spreadsheet_widget %})

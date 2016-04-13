@@ -108,3 +108,5 @@ Other articles on Kendo UI Spreadsheet:
 * [Server-Side Processing]({% slug serverside_processing_spreadsheet_widget %})
 * [User Guide]({% slug user_guide_spreadsheet_widget %})
 * [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
+* [How to Bind Charts to Sheet Data]({% slug howto_bindcharttosheet_spreadsheet_widget %})
+* [How to Set Validation Rules to Column Ranges]({% slug howto_validationtocolumn_spreadsheet_widget %})
