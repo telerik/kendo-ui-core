@@ -13,7 +13,7 @@ The Kendo UI Grid for ASP.NET MVC enables you to bypass the built-in data proces
 
 ## Configuration
 
-### Custom Server Binding
+### Set Custom Server Binding
 
 Below are listed the steps for you to follow when configuring the Kendo UI Grid for custom server binding.
 
@@ -174,7 +174,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/custom-server-binding).
 
-### Custom Ajax Binding
+### Apply Custom Ajax Binding
 
 Below are listed the steps for you to follow when configuring the Kendo UI Grid for custom Ajax binding.
 
