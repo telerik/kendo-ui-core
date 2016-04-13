@@ -9,13 +9,27 @@ position: 2
 
 # Server Binding
 
-By default the Kendo Grid for ASP.NET MVC will perform server side requests (HTTP GET) when doing paging, sorting and filtering.
+By default, the Kendo UI Grid for ASP.NET MVC will perform server side requests&mdash;`HTTP`, `GET`&mdash;when doing paging, sorting, and filtering.
 
-To bind the grid with data you just need to set its data source and render the view. There are a few ways to do this:
+## The Basics
 
-## Bind to the `Model` of the View
+To bind the Grid to data, set its data source and render the view.
 
-### Controller
+There are a few ways to do this:
+* Bind to the view model
+* Bind to items from `ViewData` or `ViewBag`
+* Use the `BindTo` method
+* Pass additional data to an action method
+
+## Configuration
+
+### Bind to the View Model
+
+The examples below demonstrate how to bind to the view model.
+
+###### Example
+
+**Controller**
 
     public ActionResult Index()
     {
@@ -24,45 +38,48 @@ To bind the grid with data you just need to set its data source and render the v
         return View(products);
     }
 
-### View
+**Razor**
 
-```Razor
-@model IEnumerable<KendoGridServerBinding.Models.Product>
+    @model IEnumerable<KendoGridServerBinding.Models.Product>
 
-@(Html.Kendo().Grid(Model) // Bind the grid to the Model property of the view
-      .Name("Grid")
-      .Columns(columns =>
-      {
-          columns.Bound(p => p.ProductID);   //Create a column bound to the "ProductID" property
-          columns.Bound(p => p.ProductName); //Create a column bound to the "ProductName" property
-          columns.Bound(p => p.UnitPrice);   //Create a column bound to the "UnitPrice" property
-          columns.Bound(p => p.UnitsInStock);//Create a column bound to the "UnitsInStock" property
-      })
-     .Pageable() //Enable paging
-)
-```
-```ASPX
-<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
-   Inherits="System.Web.Mvc.ViewPage<IEnumerable<KendoGridServerBinding.Models.Product>>" %>
+    @(Html.Kendo().Grid(Model) //Bind the Grid to the Model property of the view.
+          .Name("Grid")
+          .Columns(columns =>
+          {
+              columns.Bound(p => p.ProductID);   //Create a column bound to the "ProductID" property
+              columns.Bound(p => p.ProductName); //Create a column bound to the "ProductName" property
+              columns.Bound(p => p.UnitPrice);   //Create a column bound to the "UnitPrice" property
+              columns.Bound(p => p.UnitsInStock);//Create a column bound to the "UnitsInStock" property
+          })
+         .Pageable() //Enable paging.
+    )
 
-<%: Html.Kendo().Grid(Model) // Bind the grid to the Model property of the view
-        .Name("Grid")
-        .Columns(columns =>
-        {
-            columns.Bound(p => p.ProductID);   //Create a column bound to the "ProductID" property
-            columns.Bound(p => p.ProductName); //Create a column bound to the "ProductName" property
-            columns.Bound(p => p.UnitPrice);   //Create a column bound to the "UnitPrice" property
-            columns.Bound(p => p.UnitsInStock);//Create a column bound to the "UnitsInStock" property
-        })
-        .Pageable() //Enable paging
-%>
-```
+**ASPX**
 
-[Download Visual Studio Project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/server-binding)
+    <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+       Inherits="System.Web.Mvc.ViewPage<IEnumerable<KendoGridServerBinding.Models.Product>>" %>
 
-##   Bind to an Item from the `ViewData` or `ViewBag`
+    <%: Html.Kendo().Grid(Model) // Bind the grid to the Model property of the view
+            .Name("Grid")
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.ProductID);   //Create a column bound to the "ProductID" property
+                columns.Bound(p => p.ProductName); //Create a column bound to the "ProductName" property
+                columns.Bound(p => p.UnitPrice);   //Create a column bound to the "UnitPrice" property
+                columns.Bound(p => p.UnitsInStock);//Create a column bound to the "UnitsInStock" property
+            })
+            .Pageable() //Enable paging
+    %>
 
-### Action
+To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/ajax-binding).
+
+### Use ViewData or ViewBag Items Binding
+
+The example below demonstrates how to bind to an item from the `ViewData` or `ViewBag`.
+
+###### Example
+
+**Action**
 
     public ActionResult Index()
     {
@@ -73,7 +90,7 @@ To bind the grid with data you just need to set its data source and render the v
         return View();
     }
 
-### WebForms View
+**WebForms**
 
     <%: Html.Kendo().Grid((IEnumerable<MvcApplication1.Models.Product>)ViewData["products"])
             .Name("Grid")
@@ -86,7 +103,7 @@ To bind the grid with data you just need to set its data source and render the v
             })
     %>
 
-### Razor View
+**Razor**
 
     @(Html.Kendo().Grid((IEnumerable<MvcApplication1.Models.Product>)ViewData["products"])
           .Name("Grid")
@@ -98,9 +115,12 @@ To bind the grid with data you just need to set its data source and render the v
               columns.Bound(p => p.UnitsInStock);
           })
     )
-##  Use the `BindTo` method
 
-### Action
+### Apply the BindTo Method
+
+The example below demonstrates how to use the `BindTo` method.
+
+**Action**
 
     public ActionResult Index()
     {
@@ -111,7 +131,7 @@ To bind the grid with data you just need to set its data source and render the v
         return View();
     }
 
-### WebForms View
+**WebForms**
 
     <%: Html.Kendo().Grid<MvcApplication1.Models.Product>() // Specify the type of the grid
             .Name("Grid")
@@ -125,7 +145,7 @@ To bind the grid with data you just need to set its data source and render the v
             })
     %>
 
-### Razor View
+**Razor**
 
     @(Html.Kendo().Grid<MvcApplication1.Models.Product>() // Specify the type of the grid
         .Name("Grid")
@@ -140,10 +160,11 @@ To bind the grid with data you just need to set its data source and render the v
     )
 
 
-The grid will make HTTP GET requests to the action method which rendered the view initially. The grid page, sort, filter and group info will be passed as query string parameters
-Here is how a typical URL would look like: http://localhost:4939/?Grid-sort=ProductName-asc&amp;Grid-page=2\. The `Name` of the grid will be used as a prefix of the query string
-parameters. Thus more than one server-boud grid can coexist in the same view. The prefix can be disabled via the `PrefixUrlParameters` method:
+The Grid makes `HTTP GET` requests to the action method which initially renders the view. The Grid page, sort, filter, and group information is passed as query string parameters.
 
+For more information on how a typical URL would look like, refer to [this location](http://localhost:4939/?Grid-sort=ProductName-asc&amp;Grid-page=2\). The `Name` of the Grid will be used as a prefix of the query string parameters. In this way, more than one server-bound Grid can coexist in the same view. The prefix can be disabled through the `PrefixUrlParameters` method.
+
+###### Example
 
     <%: Html.Kendo().Grid(Model)
             .Name("Grid")
@@ -151,11 +172,15 @@ parameters. Thus more than one server-boud grid can coexist in the same view. Th
     %>
 
 
-## Pass Additional Data to Action Method
+### Pass Additional Data to Action Methods
 
-Sometimes the action method which renders the view containing the grid may need additional data. Here is how to pass them:
+Sometimes the action method, which renders the view containing the Grid, may need additional data.
 
-### Action
+The example below demonstrates how to pass them.
+
+###### Example
+
+**Action**
 
     public ActionResult Index(string firstName, string lastName)
     {
@@ -164,8 +189,7 @@ Sometimes the action method which renders the view containing the grid may need 
         return View(products);
     }
 
-
-### WebForms View
+**WebForms**
 
     <%: Html.Kendo().Grid(Model)
             .Name("Grid")
@@ -175,8 +199,7 @@ Sometimes the action method which renders the view containing the grid may need 
             )
     %>
 
-
-### Razor View
+**Razor**
 
     @(Html.Kendo().Grid(Model)
           .Name("Grid")
@@ -186,25 +209,27 @@ Sometimes the action method which renders the view containing the grid may need 
           )
     )
 
-## Client-Side Events And Server Binding
+## Supported Client-Side Events
 
-The following events are supported in server binding mode:
+The following client-side events are supported in the server binding mode:
 
-- Change
-- ColumnHide
-- ColumnLock
-- ColumnMenuInit
-- ColumnReorder
-- ColumnResize
-- ColumnShow
-- ColumnUnlock
-- DetailCollapse
-- DetailExpand
-- ExcelExport
-- FilterMenuInit
-- PdfExport
+- `Change`
+- `ColumnHide`
+- `ColumnLock`
+- `ColumnMenuInit`
+- `ColumnReorder`
+- `ColumnResize`
+- `ColumnShow`
+- `ColumnUnlock`
+- `DetailCollapse`
+- `DetailExpand`
+- `ExcelExport`
+- `FilterMenuInit`
+- `PdfExport`
 
-The other client-side events (which are related to data-binding and CRUD operations) will **not** be raised when the grid is configured for server binding.
+> **Important**
+>
+> The other client-side events, which are related to data-binding and CRUD data operations, will not be raised when the Grid is configured for server binding.
 
 ## See Also
 
