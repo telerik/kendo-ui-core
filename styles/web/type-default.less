@@ -822,8 +822,8 @@ html .km-pane-wrapper .k-header
     border-top-color: @hover-border-color;
 }
 
-.k-group-header + div > .k-list > .k-item.k-first {
-    box-shadow: 0 -1px 0px 0px contrast(@widget-background-color, darken(@header-background-color, 20%), @alt-background-color, .5);
+.k-group-header + div > .k-list > .k-item.k-first:before {
+    border-top-color: contrast(@widget-background-color, darken(@header-background-color, 20%), @alt-background-color, .5);
 }
 
 .k-popup > .k-group-header,

@@ -407,6 +407,28 @@ body .k-datetimepicker .k-select
     min-height: 1.8em;
 }
 
+.k-popup .k-list .k-item {
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    padding: 0 4px;
+}
+
+.k-popup .k-list .k-item > .k-group {
+    top: -1px;
+}
+
+.k-group-header + div > .k-list > .k-item.k-first:before {
+    content: " ";
+    display: block;
+    border-top-width: 1px;
+    border-top-style: solid;
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+}
+
 .k-popup > .k-group-header,
 .k-popup > .k-virtual-wrap > .k-group-header
 {
