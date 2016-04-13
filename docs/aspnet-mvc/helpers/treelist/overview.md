@@ -14,7 +14,7 @@ The TreeList HtmlHelper extension is a server-side wrapper for the [Kendo UI Tre
 
 ### Configuration
 
-Below are listed the steps for you to follow when configuring the Kendo UI TreeList to do server binding to the Northwind database, the **Products** table.
+Below are listed the steps for you to follow when configuring the Kendo UI TreeList to do server binding to the Northwind database, the **Employees** table.
 
 **Step 1** Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#requirements), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridServerBinding`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
 
