@@ -71,7 +71,7 @@ The examples below demonstrate how to bind to the view model.
             .Pageable() //Enable paging
     %>
 
-To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/ajax-binding).
+To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/server-binding).
 
 ### Use ViewData or ViewBag Items Binding
 
