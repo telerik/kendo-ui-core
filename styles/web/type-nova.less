@@ -492,8 +492,12 @@ input.k-textbox:active {
     color: @link-text-color;
 }
 
-.k-group-header + div > .k-list > .k-item.k-first {
-    box-shadow: 0 -1px 0px 0px @selected-background;
+.k-group-header + div > .k-list > .k-item.k-first:before {
+    border-top-color: @selected-background;
+}
+
+.k-popup .k-list .k-state-selected.k-state-focused.k-first:before {
+    border-top-color: multiply(@accent, #9a9a9a);
 }
 
 .k-popup .k-list .k-item > .k-group {
