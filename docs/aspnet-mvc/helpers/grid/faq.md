@@ -6,24 +6,29 @@ slug: freqaskedquestions_gridhelper_aspnetmvc
 position: 5
 ---
 
-# Grid Frequently Asked Questions
+# Frequently Asked Questions
 
-## Displaying Values
+## Displaying of Values
 
-### How Do I Display HTML in a Grid Column?
+### How to Display HTML in Grid Columns?
 
-By default the Kendo UI Grid for ASP.NET MVC will encode the HTML entities present in the data. To prevent that call the [Encoded](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#formatsystem.string)
-method and pass `false` as the argument.
+By default, the Kendo UI Grid for ASP.NET MVC encodes the HTML entities that are included in its data. To prevent this, call the [`Encoded`](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#formatsystem.string) method and pass `false` as its argument.
 
-######## Example - display HTML entities in Grid columns
+The example below demonstrates how to display HTML entities in Grid columns.
+
+###### Example
 
     columns.Bound(o => o.Description).Encoded(false);
 
-### How Do I Customize the Way a Property Is Displayed in a Grid Bound Column?
+### How to Customize the Way Properties Are Displayed in Grid-Bound Columns?
 
-If the grid is [server bound](/aspnet-mvc/helpers/grid/server-binding) use the `Template` method.
+If the Grid is [server-bound](/aspnet-mvc/helpers/grid/server-binding), use the `Template` method.
 
-######## Example - customize the column appearance of a server bound Grid (WebForms)
+The example below demonstrates how to customize the column appearance of a server-bound Grid.
+
+###### Example
+
+**WebForms**
 
     <% Html.Kendo().Grid<Models.Product>(Model)
            .Name("Grid")
@@ -39,7 +44,7 @@ If the grid is [server bound](/aspnet-mvc/helpers/grid/server-binding) use the `
            .Render();
     %>
 
-######## Example - customize the column appearance of a server bound Grid (Razor)
+**Razor**
 
     @(Html.Kendo().Grid<Models.Product>(Model)
           .Name("Grid")
@@ -52,24 +57,27 @@ If the grid is [server bound](/aspnet-mvc/helpers/grid/server-binding) use the `
     )
 
 > **Important**  
-> The `Template` method needs a [templated razor delegate](http://haacked.com/archive/2011/02/27/templated-razor-delegates.aspx) when used in Razor views.
-The bound item is available using the `@item` parameter.
+>
+> The `Template` method needs a [templated Razor delegate](http://haacked.com/archive/2011/02/27/templated-razor-delegates.aspx) when used in Razor views. The bound item is available through the `@item` parameter.
 
-If the grid is [ajax bound](/aspnet-mvc/helpers/grid/ajax-binding) use the `ClientTemplate` method.
-The value should be a string which represents a valid [Kendo Template](/framework/templates/overview).
+If the Grid is [Ajax-bound]({% slug ajaxbinding_grid_aspnetmvc %}), use the `ClientTemplate` method. The value should be a string, which represents a valid [Kendo UI Template]({% slug overview_kendoui_templatescomponent %}).
 
-######## Example - customize the column appearance of an Ajax bound Grid
+The example below demonstrates how to customize the column appearance of an Ajax-bound Grid.
+
+###### Example
 
     .Columns(columns =>
     {
         columns.Bound(p => p.Title).ClientTemplate("<strong>#: Title #</strong>");
     })
 
-### How Do I Have Conditional Logic in a Column Client Template?
+### How to Apply Conditional Logic in Column Client Templates?
 
-A Kendo Template may contain arbitrary JavaScript code. The `#` symbol is used to denote JavaScript blocks.
+A Kendo UI Template may contain arbitrary JavaScript code. The `#` symbol is used to denote JavaScript blocks.
 
-######## Example - conditions in clienttemplate
+The example below demonstrates the conditions in the `ClientTemplate`.
+
+###### Example
 
     columns.Bound(p => p.ProductName).ClientTemplate(
         "# if (HasIcon == true) { #" +
@@ -79,11 +87,13 @@ A Kendo Template may contain arbitrary JavaScript code. The `#` symbol is used t
         "# } #"
     );
 
-### How Do I Display a Checkbox in an Ajax Bound Grid?
+### How to Display Checkboxes in Ajax-Bound Grids?
 
-The `checked` attribute specifies whether a checkbox is displayed as checked or not. Use a condition to set that attribute.
+The `checked` attribute specifies whether a checkbox is displayed as checked or not checked. Use a condition to set that attribute.
 
-######## Example - display a Checkbox in bound ColumnClientTemplate
+The example below demonstrates how to display a checkbox in a bound `ColumnClientTemplate`.
+
+###### Example
 
     columns.Bound(p => p.Enabled).ClientTemplate(
         "<input type='checkbox' value='#= ProductID #' " +
@@ -93,11 +103,15 @@ The `checked` attribute specifies whether a checkbox is displayed as checked or 
         "/>"
     );
 
-### How Do I Use Action Links?
+### How to Use Action Links?
 
-For server-bound grids the `Template` method should be used.
+For server-bound Grids, the `Template` method should be used.
 
-###### Example - action link in Grid column (WebForms)
+The example below demonstrates an action link in a Grid column.
+
+###### Example
+
+**WebForms**
 
     columns.Bound(p => p.ProductID).Template(p =>
     {
@@ -106,15 +120,17 @@ For server-bound grids the `Template` method should be used.
         <%
     });
 
-###### Example - action link in Grid column (Razor)
+**Razor**
 
     columns.Bound(p => p.ProductID).Template(@<text>
           @Html.ActionLink("Show Product Details", "ProductDetails", new { id = @item.ProductID } )>
     </text>);
 
-For ajax bound grids the `ClientTemplate` method should be used.
+For Ajax-bound Grids the `ClientTemplate` method should be used.
 
-###### Example - action link in Ajax bound Grid column
+The example below demonstrates an action link in an Ajax-bound Grid column.
+
+###### Example
 
     columns.Bound(p => p.ProductID).ClientTemplate(
         "<a href='" +
@@ -123,15 +139,17 @@ For ajax bound grids the `ClientTemplate` method should be used.
         ">Show Product Details</a>"
     );
 
-### How Do I Use a JavaScript Function in a Column Client Template?
+### How to Use JavaScript Functions in Column Client Templates?
 
-The Kendo Template has an implicit parameter called `data`. Use that as the argument of the JavaScript function.
+The Kendo UI Template has an implicit parameter called `data`. Use it as the argument of the JavaScript function.
 
-###### Example - use JavaScript function in ClientTemplate
+The example below demonstrates how to use a JavaScript function in the `ClientTemplate`.
 
-     // -- removed for brevity
+###### Example
+
+     // -- Removed for brevity.
      columns.Bound(p => p.ProductID).ClientTemplate("#= productDetails(data) #");
-     // -- removed for brevity
+     // -- Removed for brevity.
 
     <script>
     function productDetails(product) {
@@ -146,12 +164,13 @@ The Kendo Template has an implicit parameter called `data`. Use that as the argu
     }
     </script>
 
-### How Do I Use a Kendo UI Widget Inside a Grid Client Column Template?
+### How to Use Kendo UI Widgets inside Grid Client Column Templates?
 
-`script` tags are not automatically evaluated inside a Grid client column template, so any included widgets will not be initialized.
-The scripts must be evaluated manually in the [Grid's dataBound event](/api/javascript/ui/grid#events-dataBound).
+The `script` tags are not automatically evaluated inside a Grid client column template, so the included widgets are not initialized. The scripts must be evaluated manually in the [Grid's `dataBound` event](/api/javascript/ui/grid#events-dataBound).
 
-###### Example - add a Kendo UI menu inside a Grid client column template
+The example below demonstrates how to add a Kendo UI Menu inside a Grid column template.
+
+###### Example
 
 **C#**
 
@@ -186,29 +205,32 @@ The scripts must be evaluated manually in the [Grid's dataBound event](/api/java
 
 **CSS**
 
-The Menu requires the Grid cells to allow overflowing, which is disabled by default:
+The Menu requires the Grid cells to allow overflowing, which is disabled by default.
 
     .k-widget .templateCell
     {
         overflow: visible;
     }
 
-### How Do I Change the Format of a Bound Column?
+### How to Change the Format of Bound Columns?
 
-Use the [Format](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#formatsystem.string) method.
-The value should be a valid [number](/api/javascript/kendo#standard-number-formats) or [date](/api/javascript/kendo#standard-date-formats) format.
+Use the [`Format`](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#formatsystem.string) method. The value should be a valid [`number`](/api/javascript/kendo#standard-number-formats) or [`date`](/api/javascript/kendo#standard-date-formats) format.
 
-###### Example - specify the format of a bound column
+The example below demonstrates how to specify the format of a bound column.
+
+###### Example
 
     columns.Bound(o => o.OrderDate).Format("{0:d}"); // Will use the short date pattern
 
-### How Do I Add Kendo UI Icons to Custom Command Buttons?
+### How to Add Kendo UI Icons to Custom Command Buttons?
 
-The custom command buttons have the required `span` element, which is normally used to display an icon, but this element has no CSS classes. You can add them in the `dataBound` handler.
+The custom command buttons have the required `span` element, which is normally used to display an icon. However, this element has no CSS classes. Add them in the `dataBound` handler.
 
-A list of the available Kendo UI icons and their CSS classes is available in the [Styling / Icons demo](http://demos.telerik.com/kendo-ui/styling/icons).
+A list of the available Kendo UI icons and their CSS classes is available in the [demo on styling and icons](http://demos.telerik.com/kendo-ui/styling/icons).
 
-###### Example - add Kendo UI icons to custom command buttons
+The example below demonstrates how to add Kendo UI icons to custom command buttons.
+
+###### Example
 
 **C#**
 
@@ -229,48 +251,52 @@ A list of the available Kendo UI icons and their CSS classes is available in the
 
 ## Data Binding
 
-### How Do I Implement Paging, Sorting, Filtering and Grouping?
+### How to Implement Paging, Sorting, Filtering, and Grouping?
 
-If your model supports the `IQueryable` interface or is `DataTable` the grid will do paging, sorting, filtering, grouping and aggregates (`DataTable` binding supports only `count` aggregate) automatically.
-For server binding scenarios no additional steps are required - just pass the IQueryable to the `Grid` constructor. Check the
-[server binding](/aspnet-mvc/helpers/grid/server-binding) help topic for additional info.
+If your model supports the `IQueryable` interface or is `DataTable`, the Grid does paging, sorting, filtering, grouping, and aggregates&mdash;`DataTable` binding supports only the `count` aggregate&mdash;automatically.
 
-For ajax binding scenarios the `ToDataSourceResult` extension method must be used to perform the data processing.
-Check the [ajax binding](/aspnet-mvc/helpers/grid/ajax-binding) help topic for additional information.
+For server-binding scenarios, no additional steps are required. Just pass the `IQueryable` to the `Grid` constructor. For additional information on the Grid server binding, refer to [this article]({% slug serverbinding_grid_aspnetmvc %}).
 
-If your model does not implement `IQueryable` custom binding should be implemented. This means that the developer is responsible for
-paging, sorting, filtering and grouping the data. More info can be found in the [custom binding](/aspnet-mvc/helpers/grid/custom-binding) help topic.
+For Ajax-binding scenarios, the `ToDataSourceResult` extension method must be used to perform the data processing. For additional information on the Grid Ajax binding, refer to [this article]({% slug ajaxbinding_grid_aspnetmvc %}).
+
+If your model does not implement `IQueryable`, implement custom binding. This means that you are responsible for the paging, sorting, filtering, and grouping of the data. For more information on the Grid custom binding, refer to [this article]({% slug custombinding_grid_aspnetmvc %}).
 
 > **Important**  
-> All data operations will be performed at database server level if the underlying IQueryable provider supports translation of expression trees to SQL. Kendo Grid for ASP.NET MVC has been tested with the following frameworks:
-
+>
+> All data operations are performed at database server level if the underlying `IQueryable` provider supports translation of expression trees to SQL. Kendo UI Grid for ASP.NET MVC has been tested with the following frameworks:
 > - Entity Framework
 > - Linq to SQL
 > - Telerik OpenAccess
 > - NHibernate
 
-### How Do I Send Values to My Action Method When Binding the Grid?
+### How to Send Values to My Action Method When Binding the Grid?
 
-If the grid is server bound the overload method which accepts route values should be used.
+If the Grid is server-bound, use the `overload` method which accepts route values.
 
-###### Example - send additional data in server bound Grid
-    // -- removed for brevity
+The example below demonstrates how to send data in a server-bound Grid.
+
+###### Example
+
+    // -- Removed for brevity.
     .DataSource(dataSource => dataSource.Server()
         .Read(read => read.Action("Read", "Home", new { userID = (int)ViewData["UserID"] }))
     )
-    // -- removed for brevity
+    // -- Removed for brevity.
 
-If the grid is ajax bound the `Data` method should be used to specify the name of the JavaScript function which will return the additional data.
+If the Grid is Ajax-bound, use the `Data` method to specify the name of the JavaScript function, which will return the additional data.
 
-###### Example - send additional data in an Ajax bound Grid
-    // -- removed for brevity
+The example below demonstrates how to send additional data in an Ajax-bound Grid.
+
+###### Example
+
+    // -- Removed for brevity.
     .DataSource(dataSource => dataSource.Ajax()
         .Read(read => read
             .Action("Read", "Home")
             .Data("additionalData")
         )
     )
-    // -- removed for brevity
+    // -- Removed for brevity.
     <script>
         function additionalData() {
             return {
@@ -280,21 +306,25 @@ If the grid is ajax bound the `Data` method should be used to specify the name o
         }
     </script>
 
-### How Do I Reload the Data in an Ajax Bound Grid?
+### How to Reload Data in Ajax-Bound Grids?
 
-The [read](/api/javascript/data/datasource#read) method of the DataSource should be used.
+Use the [`read`](/api/javascript/data/datasource#read) method of the DataSource.
 
-###### Example - reload an Ajax bound Grid
+The example below demonstrates how to reload an Ajax-bound Grid.
+
+###### Example
 
     var grid = $("#Grid").data("kendoGrid");
 
     grid.dataSource.read();
 
-### How Do I convert my models to View Model objects?
+### How to Convert My Models to View Model Objects?
 
-The `ToDataSourceResult` extension method supports an optional selector which can be used to convert the processed data to some other type.
+The `ToDataSourceResult` extension method supports an optional selector, which can be used to convert the processed data to some other type.
 
-###### Example - convert the processed data
+The example below demonstrates how to convert the processed data.
+
+###### Example
 
     public ActionResult Read([DataSourceRequest] DataSourceRequest request)
     {
@@ -308,22 +338,25 @@ The `ToDataSourceResult` extension method supports an optional selector which ca
     }
 
 > **Important**  
-> Use View Model objects in order to flatten your data, reduce the number of serialized properties or avoid circular reference serializaton exceptions.
+>
+> To flatten your data, use View Model objects, reduce the number of serialized properties, or avoid circular reference serializaton exceptions.
 
-### How Do I Avoid Circular Reference Exceptions?
+### How to Avoid Circular Reference Exceptions?
 
-The JavaScriptSerializer class will throw an exception if the serialized object contains circular references. To avoid that use a View Model and exclude the
+The `JavaScriptSerializer` class throws an exception if the serialized object contains circular references. To avoid this, use a View Model and exclude the
 properties which create the circular references.
 
-###### Example - avoid circular references
+The example below demonstrates how to avoid circular references.
 
-    // Models
+###### Example
+
+    //Models.
     public class Order
     {
         public int OrderID { get; set; }
 
-        // This property creates a circular reference because the Customer class
-        // refers to the Order class via the Orders property
+        //This property creates a circular reference because of the Customer class.
+        //Refers to the Order class through the Orders property.
         public Customer Customer { get; set; }
     }
 
@@ -333,69 +366,74 @@ properties which create the circular references.
         public IEnumerable<Order> Orders { get; set; }
     }
 
-    // Action
+    //Action.
     public ActionResult Read([DataSourceRequest] DataSourceRequest request)
     {
         var northwind = new NorthwindDataContext();
         var orders = northwind.Orders;
 
-        // Avoid the circular reference by creating a View Model object and skiping the Customer property
+        //Avoid the circular reference by creating a View Model object and skipping the Customer property.
         var result = orders.ToDataSourceResult(request, o => new {
             OrderID = o.OrderID,
             CustomerName = o.Customer.ContactName
         });
     }
 
-### How Do I Handle Errors in Ajax Binding Mode?
+### How to Handle Errors in Ajax Binding Mode?
 
-The [error](/api/javascript/data/datasource#error) event of the DataSource should be used.
-Use the `Error` method from the fluent API to specify the name of the JavaScript function which will handle the event.
+Use the [`error`](/api/javascript/data/datasource#error) event of the DataSource. Apply the `Error` method from the fluent API to specify the name of the JavaScript function which will handle the event.
 
-###### Example - handle errors in Ajax binding
+The example below demonstrates how to handle errors in the Ajax binding mode.
 
-     // -- removed for brevity
+###### Example
+
+     // -- Removed for brevity.
      .DataSource(dataSource => dataSource.Ajax()
         .Events(events => events.Error("onError"))
-     // -- removed for brevity
+     // -- Removed for brevity.
      <script>
         function onError(e, status) {
             alert("A server error has occurred!");
         }
      </script>
 
-### How Can I See What the Server Response Is?
+### How to See What the Server Response Is?
 
-The Kendo Grid makes HTTP requests. Use your browser's developer tools to inspect the communication between the browser and the web server. In case of server-side exception the
-HTTP status code will be 500 and the server response will contain the detailed exception stacktrace.
+The Kendo UI Grid makes `HTTP` requests. Use the developer tools of your browser to inspect the communication between the browser and the web server. In case of a server-side exception, the `HTTP` status code is `500` and the server response contains the detailed exception stack-trace.
 
-### How Can I Configure the Grid to Perform Paging, Sorting, Filtering and Grouping in Memory?
+### How to Configure Grids to Perform Paging, Sorting, Filtering, and Grouping in Memory?
 
-By default ajax requests will be made for paging, sorting, filtering and grouping. The `ToDataSourceResult` extension method processes the data source server-side.
-To prevent that call the `ServerOperation` method and pass `false` as the argument.
+By default, paging, sorting, filtering and grouping initiate the making of Ajax requests. The `ToDataSourceResult` extension method processes the data source server-side. To prevent this, call the `ServerOperation` method and pass `false` as the argument.
 
-###### Example - perform paging, sorting, filtering and grouping in memory
+The example below demonstrates how to perform paging, sorting, filtering, and grouping in memory.
 
-     // -- removed for brevity
+###### Example
+
+     // -- Removed for brevity.
      .DataSource(dataSource => dataSource.Ajax()
         .ServerOperation(false)
-     // -- removed for brevity
+     // -- Removed for brevity.
 
 
 ### How to Prevent Ajax Response Caching?
 
-There are several ways to prevent Ajax responses from being cached and reused by the browser.
+Prevent the caching and browser re-use of Ajax responses in either of the following ways:
 
-* Use an `OutputCache` attribute for the action method.
+**Option 1** Use an `OutputCache` attribute for the action method.
+
+###### Example
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public JsonResult MyReadMethod()
         {
             /* ... */
         }
+<!--*-->
+**Option 2** Configure the Kendo UI DataSource to make `POST` instead of `GET` Ajax requests for the `Read` action.
 
-* Configure the Kendo UI DataSource to make POST Ajax requests for the Read action, instead of GET requests.
+**Option 3** Use jQuery's [`ajaxSetup`](https://api.jquery.com/jquery.ajaxsetup/) configuration method. This influences all Ajax requests that the web application performs.
 
-* Use jQuery's [`ajaxSetup`](https://api.jquery.com/jquery.ajaxsetup/) configuration method. This will influence all Ajax requests that the web application performs.
+###### Example
 
         $.ajaxSetup ({
            cache: false
@@ -403,17 +441,18 @@ There are several ways to prevent Ajax responses from being cached and reused by
 
 ## Editing
 
-### How Do I Display Model State Errors?
+### How to Display Model State Errors?
 
-The `ToDataSourceResult` extension method has an overload which accepts the `ModelState` as parameter. That overload will serialize any model state errors in the JSON response and
-the `error` event of the DataSource will be raised.
+The `ToDataSourceResult` extension method has an overload which accepts the `ModelState` as parameter. That overload serializes any model state errors in the JSON response and the `error` event of the DataSource is raised.
 
-###### Example - display model state errors
+The example below demonstrates how to display model state errors.
 
-     // -- removed for brevity
+###### Example
+
+     // -- Removed for brevity.
      .DataSource(dataSource => dataSource.Ajax()
         .Events(events => events.Error("onError"))
-     // -- removed for brevity
+     // -- Removed for brevity.
      <script>
         function onError(e, status) {
             if (e.errors) {
@@ -430,38 +469,44 @@ the `error` event of the DataSource will be raised.
         }
      </script>
 
-### How Do I Create a Custom Pop-up Editor?
+### How to Create Custom Pop-Up Editors?
 
-The Kendo Grid for ASP.NET MVC uses `Html.EditorForModel` to create the editing form. That method relies on ASP.NET MVC editor templates. To create a custom editor template
-you should create a partial view under the **~/Views/Shared/EditorTemplates** folder and specify it via the `UIHint` attribute. The [Custom Object Templates](http://bradwilson.typepad.com/blog/2009/10/aspnet-mvc-2-templates-part-4-custom-object-templates.html)
-blog post contains a lot of information about creating a custom editor template. The [Custom Popup Editor](http://docs.telerik.com/kendo-ui/aspnet-mvc/helpers/grid/how-to/editing/custom-popup-editor) code library project contains a ready-to-run project.
+The Kendo UI Grid for ASP.NET MVC uses the `Html.EditorForModel` to create the editing form. This method relies on ASP.NET MVC editor templates. To create a custom editor template, create a partial view under the `~/Views/Shared/EditorTemplates` folder and specify it through the `UIHint` attribute.
+
+The [Custom Object Templates](http://bradwilson.typepad.com/blog/2009/10/aspnet-mvc-2-templates-part-4-custom-object-templates.html) blog post contains a lot of information about creating a custom editor template.
+
+The [Custom Popup Editor](http://docs.telerik.com/kendo-ui/aspnet-mvc/helpers/grid/how-to/editing/custom-popup-editor) code library project contains a ready-to-run project.
 
 > **Important**  
-> `Html.EditorForModel` is used only in popup edit mode. In-cell and in-line edit modes use `Html.EditorFor` and pass the expression used to declare the bound column e.g. `Html.EditorFor(o => o.OrderDate)`
+>
+> The `Html.EditorForModel` is used only in popup edit mode. In-cell and in-line edit modes use `Html.EditorFor` and pass the expression used to declare the bound column&mdash;for example, `Html.EditorFor(o => o.OrderDate)`.
 
-### How Do I Specify Default Property Values When a New Item Is Created?
+### How to Specify Default Property Values When New Items Are Created?
 
-The Kendo Grid will use the default .NET property values when creating a new object - `""` for strings, `0` for numeric types, `null` for reference types. To change that behavior
-use the `Model` method of the DataSource.
+The Kendo UI Grid uses the default `.NET` property values when creating a new object&mdash;`""` for strings, `0` for numeric types, `null` for reference types. To change this behavior, use the `Model` method of the DataSource.
 
-###### Example - specify default property values
+The example below demonstrates how to specify default property values.
 
-     // -- removed for brevity
+###### Example
+
+     // -- Removed for brevity.
      .DataSource(dataSource => dataSource.Ajax()
         .Model(model =>
         {
             model.Field(p => p.Name).DefaultValue("N/A");
             model.Field(p => p.Price).DefaultValue(9.99);
         })
-     // -- removed for brevity
+     // -- Removed for brevity.
 
-### How Do I Create a Helper Method Rendering a Predefined Widget I Can Further Configure?
+### How to Create Helper Methods Rendering Predefined Widgets I Can Further Configure?
 
-In many cases we want to avoid setting similar settings to all the places widget is used. Instead of defining same settings all over again we can create a helper method that wraps a Kendo widget which is already configured.
+In many cases Kendo UI wants to avoid setting similar settings to all the places where a widget is used. Instead of defining the same settings all over again, create a helper method that wraps a Kendo UI widget which is already configured.
 
-We need to first create such extension method in a static class
+First, create such an extension method in a static class.
 
-###### Example - create custom helper that wraps the Grid configurator
+The example below demonstrates how to create a custom helper that wraps the Grid configurator.  
+
+###### Example
 
 **C#**
 
@@ -482,13 +527,16 @@ We need to first create such extension method in a static class
     @(Html.MyGrid.Name("foo")) //the Grid is already configured to be Scrollable
 
 > **Important**  
-> In case you want to avoid adding the `using` statement in every view this Html helper is used, then add namespace reference to the `Web.config` file inside the Views folder of your MVC project.
+>
+> If you want to avoid adding the `using` statement in each view this Html helper is used, add a namespace reference to the `Web.config` file inside the `Views` folder of your MVC project.
 
-### How Do I Mark Certain Properties as Read-only?
+### How to Mark Certain Properties as Read-only?
 
-By default all properties are readonly. Decorate the read-only properties with the [ReadOnly](https://msdn.microsoft.com/en-us/library/system.componentmodel.readonlyattribute.aspx) data annotation attribute or use the `Editable` configuration method.
+By default, all properties are read-only. Decorate the read-only properties with the [`ReadOnly`](https://msdn.microsoft.com/en-us/library/system.componentmodel.readonlyattribute.aspx) data annotation attribute or use the `Editable` configuration method.
 
-###### Example - Read-only property via the ReadOnly attribute
+The example below demonstrates the Read-only property through the `ReadOnly` attribute.
+
+###### Example
 
     public class Order
     {
@@ -496,27 +544,26 @@ By default all properties are readonly. Decorate the read-only properties with t
         public int OrderID { get; set; }
     }
 
-###### Example - Read-only property via the Editable method
+The example below demonstrates the Read-only property through the `Editable` method.
 
-     // -- removed for brevity
+###### Example
+
+     // -- Removed for brevity.
      .DataSource(dataSource => dataSource.Ajax()
         .Model(model =>
         {
             model.Field(o => o.OrderID).Editable(false);
         })
-     // -- removed for brevity
+     // -- Removed for brevity.
 
 > **Important**  
-> The `ReadOnly` and `Editable` settings work only in in-line and in-cell editing modes. Use a custom popup editor if you want to exclude certain properties from
-the editor form.
+>
+> The `ReadOnly` and `Editable` settings work only in in-line and in-cell editing modes. Use a custom popup editor if you want to exclude certain properties from the editor form.
 
-### How Do I Use Kendo UI Widgets as Editors for Dates and Numbers?
+### How to Use Kendo UI Widgets as Editors for Dates and Numbers?
 
-Custom editor templates should be used. ASP.NET MVC will look for a partial view named after the type e.g. `DateTime.cshtml`. Telerik UI for ASP.NET MVC ships with a few
-ready-to-use editor templates. They are located in the **\wrappers\aspnetmvc\EditorTemplates** folder. The editor templates are available in two flavors - the **ascx** folder
-contains the WebForms view engine version whereas the **razor** folder contains the Razor view egine version. To use those editor templates in your application copy all files from
-the corresponding folder ("ascx" or "razor") to `~/Views/Shared/EditorTemplates` (you may need to create that folder if it does not exist).
-
+Use custom editor templates. ASP.NET MVC looks for a partial view, named after the type&mdash;for example, `DateTime.cshtml`. Telerik UI for ASP.NET MVC ships with a few
+ready-to-use editor templates. They are located in the `\wrappers\aspnetmvc\EditorTemplates` folder. The editor templates are available in two flavors&mdash;the `ascx` folder contains the `WebForms` view engine version, whereas the `razor` folder contains the `Razor` view engine version. To use these editor templates in your application, copy all files from the corresponding folder (`ascx` or `razor`) to `~/Views/Shared/EditorTemplates` (you may need to create this folder if it does not exist yet).
 
 ## See Also
 
