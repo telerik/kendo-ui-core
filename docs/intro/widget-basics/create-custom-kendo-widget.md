@@ -690,6 +690,10 @@ The example below combines the snippets and exhibits the full code.
 
 ```
 
+## Technical Support
+
+Custom widgets that inherit from Kendo UI widgets are not subject to technical support service, unless the question or issue can be discussed in the context of the originating widget that is provided in the Kendo UI installer.
+
 ## See Also
 
 Other articles on Kendo UI widget basics:
