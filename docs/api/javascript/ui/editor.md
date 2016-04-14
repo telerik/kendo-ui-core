@@ -1076,7 +1076,7 @@ Use a callback function to integrate a custom implementation for cleaning up the
     $("#editor").kendoEditor({
         pasteCleanup: {
             custom: function(html) {
-                return html.replace(/<img[^>]/>/, "");
+                return html.replace(/<img[^>]*>/, "");
             }
         }
     });
