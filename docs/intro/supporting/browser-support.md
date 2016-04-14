@@ -107,7 +107,6 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 | OS X              | 10.5 or later         |
 | Android           | 2.3 or later          |
 | iOS               | 6.0 or later          |
-| BlackBerry        | 10.0 or later         |
 | Windows Phone     | 8.0 or later          |
 | Chrome for Mobile | Any version           |
 
