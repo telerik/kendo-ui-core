@@ -9,6 +9,8 @@ position: 1
 
 # Ajax Binding
 
+This article demonstrates how to configure the Kendo UI Grid extension for Ajax binding to make Ajax requests upon paging, sorting, filtering, or grouping.
+
 ## Getting Started
 
 When configured for Ajax binding, the Kendo UI Grid for ASP.NET MVC makes Ajax requests when doing paging, sorting, filtering, grouping, or when saving data.

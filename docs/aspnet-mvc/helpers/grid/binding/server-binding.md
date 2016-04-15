@@ -9,7 +9,7 @@ position: 2
 
 # Server Binding
 
-By default, the Kendo UI Grid for ASP.NET MVC will perform server side requests&mdash;`HTTP`, `GET`&mdash;when doing paging, sorting, and filtering.
+By default, the Kendo UI Grid for ASP.NET MVC performs server side requests&mdash;`HTTP`, `GET`&mdash;when doing paging, sorting, and filtering.
 
 ## The Basics
 
