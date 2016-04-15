@@ -379,7 +379,15 @@ textarea.k-textbox:hover,
     .k-item > .k-state-active {
         color: @selected-text-color;
         background-color: @selected-background;
-    }    
+    }
+
+    .k-state-selected.k-state-hover {
+        background-color: lighten(@info, 11%);
+    }
+
+    .k-state-hover .k-link.k-state-active {
+        background-color: @accent-hover-background;
+    }
 }
 
 /* Inputs */
