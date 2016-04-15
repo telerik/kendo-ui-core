@@ -689,6 +689,28 @@ html .km-pane-wrapper .k-header
     background-color: transparent;
 }
 
+.k-menu {
+    .k-state-selected > .k-link {
+        color: @selected-text-color;
+        background-color: @selected-background-color;
+        border-color: @selected-border-color;
+        .composite-background(@selected-gradient);
+    }
+
+    .k-link.k-state-active {
+        background-color: @active-background-color;
+        border-color: @active-border-color;
+        color: @active-text-color;
+    }
+
+    .k-state-hover > .k-link {
+        color: @hover-text-color;
+        background-color: @hover-background-color;
+        border-color: @hover-border-color;
+        .composite-background(@hover-gradient);
+    }
+}
+
 .k-state-highlight
 {
     background: @active-background-color;
