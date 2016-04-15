@@ -134,7 +134,7 @@ Internet Explorer 9 and Safari do not support the option for saving a file and r
 
 In some cases it is useful to send the generated file to a remote service. Do this by setting a `proxyUrl` and `forceProxy` to `true`.
 
-If the proxy returns `204 No Content`, no file will be sent to the server.
+If the proxy returns `204 No Content`, no "Save As..." dialog will appear on the client.
 
 The example below demonstrates how to post files to the server.
 
@@ -147,7 +147,7 @@ The example below demonstrates how to post files to the server.
             pdf: {
                 forceProxy: true,
                 proxyURL: "/proxy"
-            }
+            },
             dataSource: {
                 type: "odata",
                 transport: {
