@@ -92,7 +92,7 @@ The example below demonstrates a simple logic to strip the `<strong>` tags from 
         $("#editor").kendoEditor({
             pasteCleanup: {
                 custom: function(html) {
-                    return html.replace(/<strong[^>]*>/, "");
+                    return html.replace(/<\/?strong[^>]*>/, "");
                 }
             }
         });
