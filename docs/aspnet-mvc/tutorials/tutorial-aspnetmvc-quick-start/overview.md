@@ -3,6 +3,7 @@ title: Overview
 page_title: Overview | Team Efficiency Dashboard Tutorial
 description: "Start building the Team Efficiency Dashboard application by using Telerik UI for ASP.NET MVC."
 slug: overview_timeefficiencyapp_aspnetmvc6
+previous_url: /aspnet-mvc/tutorials/tutorial-aspnetmvc-quick-start/chapter0
 position: 1
 ---
 
@@ -41,17 +42,15 @@ However, the UI for ASP.NET MVC wrappers provide additional capabilities for use
 - [API References - UI for ASP.NET MVC](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
 - [Support](http://www.telerik.com/account/support-tickets/my-support-tickets.aspx)
 
-## See Also
+## Next Steps
 
-Below are listed all UI for ASP.NET MVC Quick Start Guide chapters on how to build the Team Efficiency Dashboard application:
-
-* [Getting Up and Running]({% slug gettingupandrunning_timeefficiencyapp_aspnetmvc6 %})
-* [Input Controls]({% slug inputcontrols_timeefficiencyapp_aspnetmvc6 %})
-* [Scaffolding]({% slug scaffolding_timeefficiencyapp_aspnetmvc6 %})
-* [Add and Configure the Kendo UI Grid]({% slug kendouigrid_timeefficiencyapp_aspnetmvc6 %})
-* [Add and Configure the Kendo UI ListView]({% slug kendouilistview_timeefficiencyapp_aspnetmvc6 %})
-* [Manage the Client Side]({% slug clientside_timeefficiencyapp_aspnetmvc6 %})
-* [Handle the Kendo UI Datasource]({% slug kendouidatasource_timeefficiencyapp_aspnetmvc6 %})
-* [Add and Configure the Kendo UI Charts]({% slug kendouicharts_timeefficiencyapp_aspnetmvc6 %})
-* [Make the Application Responsive]({% slug goresponsive_timeefficiencyapp_aspnetmvc6 %})
-* [Add and Configure the Kendo UI Themes]({% slug kendouithemes_timeefficiencyapp_aspnetmvc6 %})
+* [Chapter 1: Getting Up and Running]({% slug gettingupandrunning_timeefficiencyapp_aspnetmvc6 %}#getting-up-and-running)
+* [Chapter 2: Input Controls]({% slug gettingupandrunning_timeefficiencyapp_aspnetmvc6 %}#input-controls)
+* [Chapter 3: Scaffolding]({% slug gettingupandrunning_timeefficiencyapp_aspnetmvc6 %}#scaffolding)
+* [Chapter 4: Add and Configure the Kendo UI Grid]({% slug gettingupandrunning_timeefficiencyapp_aspnetmvc6 %}#kendo-ui-grid)
+* [Chapter 5: Add and Configure the Kendo UI ListView]({% slug gettingupandrunning_timeefficiencyapp_aspnetmvc6 %}#kendo-ui-listview)
+* [Chapter 6: Manage the Client Side]({% slug gettingupandrunning_timeefficiencyapp_aspnetmvc6 %}#client-side)
+* [Chapter 7: Handle the Kendo UI Datasource]({% slug gettingupandrunning_timeefficiencyapp_aspnetmvc6 %}#kendo-ui-datasource)
+* [Chapter 8: Add and Configure the Kendo UI Charts]({% slug gettingupandrunning_timeefficiencyapp_aspnetmvc6 %}#kendo-ui-charts)
+* [Chapter 9: Make the Application Responsive]({% slug gettingupandrunning_timeefficiencyapp_aspnetmvc6 %}#go-responsive)
+* [Chapter 10: Add and Configure the Kendo UI Themes]({% slug gettingupandrunning_timeefficiencyapp_aspnetmvc6 %}#kendo-ui-themes)
