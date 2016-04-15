@@ -272,7 +272,7 @@ navigation:
     "aspnet-mvc/tutorials":
         title: "Tutorials"
         position: 16
-    "aspnet-mvc/tutorials/tutorial-aspnetmvc-quick-start":
+    "aspnet-mvc/tutorials/quickstart":
         title: "Quick Start Guide"
         position: 1
     "aspnet-mvc/tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app":
