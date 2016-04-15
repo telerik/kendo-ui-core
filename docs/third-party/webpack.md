@@ -69,7 +69,7 @@ module.exports = {
         extensions: [ '', '.js', '.min.js' ],
         root: [
             path.resolve('.'),
-            path.resolve('../kendo/dist/js/') // the path to the minified scripts
+            path.resolve('../kendo/dist/js/') // the path to the minified scripts, if you want to use some widgets like treeview which define 'util/main' as deps, you have to use src js files
         ]
     },
     entry: './main',
