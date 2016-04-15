@@ -27,7 +27,7 @@ The example below demonstrates how to enable the Excel export functionality.
     .Name("grid")
     .ToolBar(tools => tools.Excel())
     .Excel(excel => excel
-        .FileName("Products.xslx")
+        .FileName("Products.xlsx")
     )
     .DataSource(dataSource => dataSource
         .Ajax()
@@ -136,70 +136,6 @@ The Kendo UI Grid does not export its `DetailTemplate` for the same reason it do
 
 ### Export Multiple Grids
 
-<<<<<<< HEAD
-The [Multiple Grid Export](/aspnet-mvc/helpers/grid/how-to/excel/multiple-grid-export) tutorial shows how to export multiple grids in a single Excel document. Each grid is exported in a separate Excel sheet.
-
-## Troubleshooting
-
-### JavaScript Error that JSZip Is Not Found
-
-Clicking the "Export to Excel" button or calling the `saveAsExcel` throws an exception if the JSZip JavaScript library isn't found. Including JSZip in the page solves the problem.
-Further info is available in the [Excel Export Introduction](/framework/excel/introduction#requirements)
-
-### Export Does Not Work in Internet Explorer and Safari
-
-Internet Explorer versions below 10 and Safari can't save a file and require the implementation of a [server proxy](/framework/save-files/introduction#browser-support).
-Set the `ProxyURL` option to specify the server proxy URL.
-
-###### Example - user server proxy
-
-```Controller
-public class ProxyController : Controller
-{
-    [HttpPost]
-    public ActionResult Save(string contentType, string base64, string fileName)
-    {
-        var fileContents = Convert.FromBase64String(base64);
-
-        return File(fileContents, contentType, fileName);
-    }
-}
-```
-```Razor
-@(Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
-    .Name("grid")
-    .ToolBar(tools => tools.Excel())
-    .Excel(excel => excel
-        .AllPages(true)
-        .ProxyURL(Url.Action("Save", "Proxy"))
-    )
-    .DataSource(dataSource => dataSource
-        .Ajax()
-        .Read(read => read.Action("Products_Read", "Home"))
-    )
-)
-```
-```ASPX
-<%: Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
-    .Name("grid")
-    .ToolBar(tools => tools.Excel())
-    .Excel(excel => excel
-        .AllPages(true)
-        .ProxyURL(Url.Action("Save", "Proxy"))
-    )
-    .DataSource(dataSource => dataSource
-        .Ajax()
-        .Read(read => read.Action("Products_Read", "Home"))
-    )
-%>
-```
-
-## Further Reading
-
-* [Create Excel Documents with Kendo UI](/framework/excel/introduction)
-* [Save Files with Kendo UI](/framework/save-files/introduction)
-* [kendo.ooxml.Workbook API Reference](/api/javascript/ooxml/Workbook)
-=======
 For more information on how to export multiple Grids to a separate Excel sheet in a single Excel document, refer to [this runnable how-to example]({% slug howto_multiplegridexport_aspnetmvcgrid %}).
 
 ## See Also
@@ -230,4 +166,3 @@ Articles on Telerik UI for ASP.NET MVC:
 * [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
 * [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
->>>>>>> 61dc76f... Review aspnetmvc grid excel docs, separate the troubleshooting
