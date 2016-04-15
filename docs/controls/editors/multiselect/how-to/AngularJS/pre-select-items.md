@@ -9,6 +9,10 @@ slug: howto_preselect_itemson_load_angular_multiselect
 
 The example below demonstrates how to preselect items in Kendo UI MultiSelect without loading the whole source in AngularJS.
 
+> **Important**
+>
+> This example needs to be run in the Dojo to function correctly.
+
 ###### Example
 
 ```html
@@ -49,74 +53,77 @@ The example below demonstrates how to preselect items in Kendo UI MultiSelect wi
     </style>
 </div>
 
+<!-- The example uses linq.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/linq.js/2.2.0.2/jquery.linq.min.js"></script>
+
 <script>
   var kms;
   angular.module("KendoDemos", [ "kendo.directives" ])
     .controller("MyCtrl", function ($scope,$http){
-      $scope.countryNames = {
-          type: "odata",
-          pageSize: 10,
-          serverPaging: true,
-            serverFiltering: true,
-            serverSorting: true,
-          transport: {
-            read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
-            }
-      };
-
-      $scope.selectOptions = {
-          autoBind: false,
-          value: [
-            { ProductName: "Not Loaded 1", ProductID: 1 },
-            { ProductName: "Not Loaded 2", ProductID: 11 }
-          ]
-      };
-
-      $scope.products = [1, 11];
-
-      $scope.productDataSource = {
-          type: "odata",
-          pageSize: 10,
-          serverPaging: true,
-            serverFiltering: true,
-            serverSorting: true,
-          transport: {
-            read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
-            }
-      };
-
-      $scope.secondOptions = {
-        autoBind: false,
-        valuePrimitive: true
-      };
-
-      $scope.products2 = [];
-
-      function LoadValues(valuesToSelect) {
-        var filter = Enumerable.from(valuesToSelect)
-                        .select(function(x) { return "(ProductID eq "+x+")" })
-                        .toArray().join("or");
-
-        var success = function(data, status, headers) {
-            var values =  Enumerable.from(data.d)
-                            .select(function(x) { return {ProductName: x.ProductName, ProductID: x.ProductID, } })
-                            .toArray();
-
-            $scope.secondOptions = {
-              autoBind: false,
-              valuePrimitive: true,
-              value: values
-            };
-            $scope.products2 = valuesToSelect;
-        };
-
-        $scope.filter = filter;
-        $http.get('http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products?$filter='+filter).success(success);
+    $scope.countryNames = {
+      type: "odata",
+      pageSize: 10,
+      serverPaging: true,
+      serverFiltering: true,
+      serverSorting: true,
+      transport: {
+        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
       }
+    };
 
-      setTimeout(function() {
-        LoadValues([3, 4]);
-      });
+    $scope.selectOptions = {
+      autoBind: false,
+      value: [
+        { ProductName: "Not Loaded 1", ProductID: 1 },
+        { ProductName: "Not Loaded 2", ProductID: 11 }
+      ]
+    };
+
+    $scope.products = [1, 11];
+
+    $scope.productDataSource = {
+      type: "odata",
+      pageSize: 10,
+      serverPaging: true,
+      serverFiltering: true,
+      serverSorting: true,
+      transport: {
+        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+      }
+    };
+
+    $scope.secondOptions = {
+      autoBind: false,
+      valuePrimitive: true
+    };
+
+    $scope.products2 = [];
+
+    function LoadValues(valuesToSelect) {
+      var filter =  $.Enumerable.From(valuesToSelect)
+      .Select(function(x) { return "(ProductID eq "+x+")" })
+      .ToArray().join("or");
+
+      var success = function(data, status, headers) {
+        var values = $.Enumerable.From(data.d)
+        .Select(function(x) { return {ProductName: x.ProductName, ProductID: x.ProductID, } })
+        .ToArray();
+
+        $scope.secondOptions = {
+          autoBind: false,
+          valuePrimitive: true,
+          value: values
+        };
+        $scope.products2 = valuesToSelect;
+      };
+
+      $scope.filter = filter;
+      $http.get('http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products?$filter='+filter).success(success);
+    }
+
+    setTimeout(function() {
+      LoadValues([3, 4]);
+    });
   });
 </script>
 ```
