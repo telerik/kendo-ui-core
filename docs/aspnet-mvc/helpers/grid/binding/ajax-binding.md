@@ -37,9 +37,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 ![Choose the connection](/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png)
 
-**Step 4** Choose the **Products** table from the `Which database objects do you want to include in your model?`. Leave all other options as they are set by default. Click **Finish**.
+**Step 4** Choose the **Products** table from the **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
 
-**Figure 3. Choose the Employees table**
+**Figure 3. Choose the Products table**
 
 ![Choose the Products table](/aspnet-mvc/helpers/grid/images/grid-database-objects.png)
 
