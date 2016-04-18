@@ -608,8 +608,7 @@ var __meta__ = { // jshint ignore:line
             that._accessor(value);
 
             if (that._isFilterEnabled() && listView.bound() && listView.isFiltered()) {
-                listView.bound(false);
-                that._filterSource();
+                that._clearFilter();
             } else {
                 that._fetchData();
             }

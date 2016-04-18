@@ -209,4 +209,40 @@
         multiselect.open();
     });
 
+    asyncTest("clear filter when set new value", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            close: function(e) { e.preventDefault(); },
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            filter: "contains",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 20
+            }
+        });
+
+        multiselect.one("dataBound", function() {
+            multiselect.open();
+
+            multiselect.dataSource.filter({
+                field: "text",
+                operator: "contains",
+                value: "Item 30"
+            });
+
+            multiselect.one("dataBound", function() {
+                start();
+
+                multiselect.value("");
+
+                equal(multiselect.dataSource.filter().filters.length, 0);
+            });
+        });
+
+        multiselect.value(10);
+    });
+
 })();

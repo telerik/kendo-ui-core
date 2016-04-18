@@ -405,4 +405,40 @@
 
         combobox.value(10);
     });
+
+    asyncTest("clear filter when set new value", 1, function() {
+        var combobox = new ComboBox(select, {
+            close: function(e) { e.preventDefault(); },
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            filter: "contains",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 20
+            }
+        });
+
+        combobox.one("dataBound", function() {
+            combobox.open();
+
+            combobox.dataSource.filter({
+                field: "text",
+                operator: "contains",
+                value: "Item 30"
+            });
+
+            combobox.one("dataBound", function() {
+                start();
+
+                combobox.value("");
+
+                equal(combobox.dataSource.filter().filters.length, 0);
+            });
+        });
+
+        combobox.value(10);
+    });
 })();
