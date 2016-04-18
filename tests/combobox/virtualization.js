@@ -395,7 +395,6 @@
         combobox.one("dataBound", function() {
             combobox.open();
 
-            debugger;
             combobox.one("dataBound", function() {
                 start();
                 equal(select.val(), 10);

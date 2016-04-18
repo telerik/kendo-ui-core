@@ -442,7 +442,6 @@ test("MultiSelect does not prevent default when click input", 0, function() {
 
 test("MultiSelect add focused class on focus", function() {
     var multiselect = new MultiSelect(select);
-    debugger;
 
     multiselect.wrapper.mousedown();
 
