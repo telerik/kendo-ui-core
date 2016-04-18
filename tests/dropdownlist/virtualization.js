@@ -177,4 +177,40 @@
 
         dropdownlist.value(10);
     });
+
+    asyncTest("clear filter when set new value", 1, function() {
+        var dropdownlist = new DropDownList(select, {
+            close: function(e) { e.preventDefault(); },
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            filter: "contains",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 20
+            }
+        });
+
+        dropdownlist.one("dataBound", function() {
+            dropdownlist.open();
+
+            dropdownlist.dataSource.filter({
+                field: "text",
+                operator: "contains",
+                value: "Item 30"
+            });
+
+            dropdownlist.one("dataBound", function() {
+                start();
+
+                dropdownlist.value("");
+
+                equal(dropdownlist.dataSource.filter().filters.length, 0);
+            });
+        });
+
+        dropdownlist.value(10);
+    });
 })();

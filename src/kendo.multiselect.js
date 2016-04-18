@@ -552,8 +552,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (clearFilters) {
-                listView.bound(false);
-                that._filterSource();
+                that._clearFilter();
             }
 
             listView.value(value);
