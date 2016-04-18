@@ -9,38 +9,57 @@ position: 1
 
 # Client Detail Templates
 
-## Introduction
+This article demonstrates how to set the detail template used during Ajax binding of the Kendo UI Grid for ASP.NET MVC.
 
-Kendo UI Grid for ASP.NET MVC provides the ability to show additional info for a data item. This is done by setting the detail template of the grid
-This help topic shows how to use detail template which is used in ajax binding scenarios.
+## Overview
 
-## Client Details
+The Kendo UI Grid for ASP.NET MVC enables you to show additional info for a data item. This is done by setting the detail template of the Grid.
 
-The following tutorial shows how to configure Kendo UI Grid for ASP.NET MVC to display additional details of the **Product** entity from the **Northwind** database.
+## Getting Started
 
-1.  Create a new ASP.NET MVC 4 application (or Telerik UI for ASP.NET MVC application if you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions](/aspnet-mvc/introduction#kendo-ui-for-asp.net-mvc-visual-studio-extensions)).
-Name the application "KendoGridClientDetailTemplate". If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions followe the steps from the [introduction](/aspnet-mvc/introduction) help topic in order
-to add Telerik UI for ASP.NET MVC to the application.
-1.  Add a new "Entity Framework Data Model". Right click the `~/Models` folder in the solution explorer and pick "Add ->  New Item". Choose "Data -> ADO.NET Entity Data Model" in the "Add New Item" dialog.
-Name the model "Northwind.edmx" and click "Next". This will start the "Entity Data Model Wizard".
+### Client Details
+
+Below are listed the steps for you to follow when configuring the Kendo UI Grid for ASP.NET MVC to display additional details of the **Product** entity from the **Northwind** database.
+
+**Step 1** Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#requirements), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridClientDetailTemplate`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+
+**Step 2** Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add** > **New Item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
+
+**Figure 1. A new entity data model**
+
 ![New entity data model](/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png)
-1.  Pick the "Generate from database" option and click "Next". Configure a connection to the Northwind database. Click "Next".
+
+**Step 3** Select **Generate from database** and click **Next**. Configure a connection to the **Northwind** database. Click **Next**.
+
+**Figure 2. Choosing a connection**
+
 ![Choose the connection](/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png)
-1.  Choose the "Products" table from the "Which database objects do you want to include in your model?". Leave all other options as they are set by default. Click "Finish".
+
+**Step 4** Choose the **Products** table from the **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
+
+**Figure 3. Choosing the Products table**
+
 ![Choose the Products table](/aspnet-mvc/helpers/grid/images/grid-database-objects.png)
-1.  Open HomeController.cs and add a new action method which will return the Products as JSON. The grid will make ajax requests to this action.
+
+**Step 5** Open `HomeController.cs` and add a new action method which will return the Products as JSON. The Grid makes Ajax requests to this action.
+
+###### Example
 
         public ActionResult Products_Read()
         {
         }
-1.  Add a new parameter of type `Kendo.Mvc.UI.DataSourceRequest` to the action. This parameter will contain the current grid request information - page, sort, group and filter.
-Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. That attribute will populate the `DataSourceRequest` object from the posted data. You need to import the `Kendo.Mvc.UI` namespace.
+
+**Step 6** Add a new parameter of type `Kendo.Mvc.UI.DataSourceRequest` to the action. This parameter will contain the current Grid request information&mdash;page, sort, group, and filter. Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. This attribute will populate the `DataSourceRequest` object from the posted data. Import the `Kendo.Mvc.UI` namespace.
+
+###### Example
 
         public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
         {
         }
-1.  Use the `ToDataSourceResult` extension method to convert the Products to a `Kendo.Mvc.UI.DataSourceResult` object. That extension method will page, filter, sort or group your data using the information provided by the
-`DataSourceRequest` object. To use the `ToDataSourceResult` extension method import the `Kendo.Mvc.Extensions` namespace.
+
+**Step 7** Use the `ToDataSourceResult` extension method to convert the Products to a `Kendo.Mvc.UI.DataSourceResult` object. That extension method will page, filter, sort, or group your data using the information provided by the `DataSourceRequest` object. To use the `ToDataSourceResult` extension method, import the `Kendo.Mvc.Extensions` namespace.
+
+###### Example
 
         public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
         {
@@ -50,7 +69,10 @@ Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. That
                 DataSourceResult result = products.ToDataSourceResult(request);
             }
         }
-1.  Return the `DataSourceResult` as JSON. Now let's configure Kendo UI Grid for ajax binding.
+
+**Step 8** Return the `DataSourceResult` as JSON. Now configure Kendo UI Grid for Ajax binding.
+
+###### Example
 
         public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request)
         {
@@ -61,9 +83,13 @@ Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. That
                 return Json(result);
             }
         }
-1.  In the view configure the grid to use the action method created in the previous steps.
 
-    ```Razor
+**Step 9** In the view, configure the Grid to use the action method created in the previous steps.
+
+###### Example
+
+**Razor**
+
     @(Html.Kendo().Grid<KendoGridClientDetailTemplate.Models.Product>()
           .Name("grid")
           .DataSource(dataSource => dataSource
@@ -77,8 +103,9 @@ Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. That
           })
           .Pageable()
     )
-    ```
-    ```ASPX
+
+**ASPX**
+
     <%: Html.Kendo().Grid<KendoGridClientDetailTemplate.Models.Product>()
           .Name("grid")
           .DataSource(dataSource => dataSource
@@ -92,11 +119,14 @@ Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. That
           })
           .Pageable()
     %>
-    ```
-1.  Define the client template using [Kendo UI Template](/framework/templates/overview) syntax. The context of the template is the data item (Product entity) to which the current grid row is bound.
+
+**Step 10** Define the client template using the [Kendo UI template]({% slug overview_kendoui_templatescomponent %}) syntax. The context of the template is the data item&mdash;Product entity&mdash;to which the current Grid row is bound.
 
 > **Important**  
-> Any "#" symbols that are not part of a template expression (#: #, # # or #= #) must be escaped ("\\#").
+>
+> Each `#` symbol that is not part of a template expression&mdash;`#: #`, `# #` or `#= #`&mdash;must be escaped&mdash;`\\#`.
+
+###### Example
 
         <script id="client-template" type="text/x-kendo-template">
           <div>ProductID: #: ProductID #</div>
@@ -106,9 +136,13 @@ Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. That
           <div>UnitsOnOrder: #: UnitsOnOrder #</div>
           <div>Discontinued: #: Discontinued #</div>
         </script>
-1.  Specify the id of the template using the `ClientDetailTemplateId` method.
 
-    ```Razor
+**Step 11** Specify the id of the template using the `ClientDetailTemplateId` method.
+
+###### Example
+
+**Razor**
+
     @(Html.Kendo().Grid<KendoGridClientDetailTemplate.Models.Product>()
           .Name("grid")
           .DataSource(dataSource => dataSource
@@ -123,8 +157,9 @@ Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. That
           .Pageable()
           .ClientDetailTemplateId("client-template")
     )
-    ```
-    ```ASPX
+
+**ASPX**
+
     <%: Html.Kendo().Grid<KendoGridClientDetailTemplate.Models.Product>()
           .Name("grid")
           .DataSource(dataSource => dataSource
@@ -139,59 +174,78 @@ Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. That
           .Pageable()
           .ClientDetailTemplateId("client-template")
     %>
-    ```
-1. Build and run
+
+**Step 12** Build and run the project.
+
+**Figure 4. The final result**
+
 ![Client detail template](/aspnet-mvc/helpers/grid/images/grid-detail-template.png)
 
-[Download Visual Studio Project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/client-detail-template)
+To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/client-detail-template).
 
-## Client Hierarchy
+### Client Hierarchy
 
-The following tutorial shows how to configure Kendo UI Grid for ASP.NET MVC to display all **Product** entities available per **Category** entity from the **Northwind** database.
+Below are listed the steps for you to follow when configuring the Kendo UI Grid for ASP.NET MVC to display all **Product** entities available per **Category** entity from the **Northwind** database.
 
-1.  Create a new ASP.NET MVC 4 application (or Telerik UI for ASP.NET MVC application if you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions](/aspnet-mvc/introduction#kendo-ui-for-asp.net-mvc-visual-studio-extensions)).
-Name the application "KendoGridClientHierarchy". If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions followe the steps from the [introduction](/aspnet-mvc/introduction) help topic in order
-to add Telerik UI for ASP.NET MVC to the application.
-1.  Add a new "Entity Framework Data Model". Right click the `~/Models` folder in the solution explorer and pick "Add ->  New Item". Choose "Data -> ADO.NET Entity Data Model" in the "Add New Item" dialog.
-Name the model "Northwind.edmx" and click "Next". This will start the "Entity Data Model Wizard".
+**Step 1** Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#requirements), create a Telerik UI for ASP.NET MVC application. Name the application `KendoGridClientHierarchy`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug overview_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+
+**Step 2** Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add** > **New Item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
+
+**Figure 1. A new entity data model**
+
 ![New entity data model](/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png)
-1.  Pick the "Generate from database" option and click "Next". Configure a connection to the Northwind database. Click "Next".
+
+**Step 3**  Select **Generate from database** and click **Next**. Configure a connection to the **Northwind** database. Click **Next**.
+
+**Figure 2. Choosing the connection**
+
 ![Choose the connection](/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png)
-1.  Choose the "Products" and "Categories" tables from the "Which database objects do you want to include in your model?". Leave all other options as they are set by default. Click "Finish".
-1.  Open HomeController.cs and add a new action method which will return the Category entities as JSON. The grid will make ajax requests to this action.
+
+**Step 4** Choose the **Products** and **Categories** tables from **Which database objects do you want to include in your model?**. Leave all other options as they are set by default. Click **Finish**.
+
+**Step 5** Open `HomeController.cs` and add a new action method which will return the **Category** entities as JSON. The Grid makes Ajax requests to this action.
+
+###### Example
 
         public ActionResult Categories_Read()
         {
         }
-1.  Add a new parameter of type `Kendo.Mvc.UI.DataSourceRequest` to the action. This parameter will contain the current grid request information - page, sort, group and filter.
-Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. That attribute will populate the `DataSourceRequest` object from the posted data. You need to import the `Kendo.Mvc.UI` namespace.
+
+**Step 6** Add a new parameter of type `Kendo.Mvc.UI.DataSourceRequest` to the action. This parameter will contain the current grid request information - page, sort, group and filter. Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. That attribute will populate the `DataSourceRequest` object from the posted data. Import the `Kendo.Mvc.UI` namespace.
+
+###### Example
 
         public ActionResult Categories_Read([DataSourceRequest]DataSourceRequest request)
         {
         }
-1.  Use the `ToDataSourceResult` extension method to convert the Categories to a `Kendo.Mvc.UI.DataSourceResult` object. That extension method will page, filter, sort or group your data using the information provided by the
-`DataSourceRequest` object. To use the `ToDataSourceResult` extension method import the `Kendo.Mvc.Extensions` namespace.
+
+**Step 7** Use the `ToDataSourceResult` extension method to convert the Categories to a `Kendo.Mvc.UI.DataSourceResult` object. That extension method will page, filter, sort, or group your data using the information provided by the `DataSourceRequest` object. To use the `ToDataSourceResult` extension method import the `Kendo.Mvc.Extensions` namespace.
+
+###### Example
 
         public ActionResult Categories_Read([DataSourceRequest]DataSourceRequest request)
         {
             using (var northwind = new NorthwindEntities())
             {
                 IQueryable<Category> categories = northwind.Categories;
-                // Flatten the Category to avoid circular references during JSON serialization
+                // Flatten the Category to avoid circular references during JSON serialization.
                 DataSourceResult result = categories.ToDataSourceResult(request, category => new {
                     category.CategoryID,
                     category.CategoryName
                 });
             }
         }
-1.  Return the `DataSourceResult` as JSON. Now let's configure Kendo UI Grid for ajax binding.
+
+**Step 8**  Return the `DataSourceResult` as JSON. Now let's configure Kendo UI Grid for ajax binding.
+
+###### Example
 
         public ActionResult Categories_Read([DataSourceRequest]DataSourceRequest request)
         {
             using (var northwind = new NorthwindEntities())
             {
                 IQueryable<Category> categories = northwind.Categories;
-                // Flatten the Category to avoid circular references during JSON serialization
+                // Flatten the Category to avoid circular references during JSON serialization.
                 DataSourceResult result = categories.ToDataSourceResult(request, category => new {
                     category.CategoryID,
                     category.CategoryName
@@ -199,7 +253,10 @@ Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. That
                 return Json(result);
             }
         }
-1.  Open HomeController.cs and add a new action method which will return the Product entities for a given category as JSON. The child grid will make ajax requests to this action.
+
+**Step 9** Open `HomeController.cs` and add a new action method which will return the **Product** entities for a given category as JSON. The child Grid makes Ajax requests to this action.
+
+###### Example
 
         public ActionResult Products_Read([DataSourceRequest]DataSourceRequest request, int categoryId)
         {
@@ -214,9 +271,13 @@ Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. That
                 return Json(result);
             }
         }
-1. In the view configure the grid for ajax binding to `Categories_Read`
 
-    ```Razor
+**Step 10** In the view, configure the Grid for Ajax binding to `Categories_Read`.
+
+###### Example
+
+**Razor**
+
     @(Html.Kendo().Grid<KendoGridClientHierarchy.Models.Category>()
           .Name("grid")
           .Columns(columns =>
@@ -228,8 +289,9 @@ Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. That
             dataSource.Ajax().Read(read => read.Action("Categories_Read", "Home"))
           )
     )
-    ```
-    ```ASPX
+
+**ASPX**
+
     <%: Html.Kendo().Grid<KendoGridClientHierarchy.Models.Category>()
           .Name("grid")
           .Columns(columns =>
@@ -241,14 +303,14 @@ Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. That
             dataSource.Ajax().Read(read => read.Action("Categories_Read", "Home"))
           )
     %>
-    ```
-1. Define the client template using [Kendo UI Template](/framework/templates/overview) syntax. The context of the template is the Category entity to which the current grid row is bound. The template itself
-contains another grid which is bound to the `Products_Read` action.
+
+**Step 11** Define the client template using [Kendo UI Template]({% slug overview_kendoui_templatescomponent %}) syntax. The context of the template is the **Category** entity to which the current Grid row is bound. The template itself contains another Grid which is bound to the `Products_Read` action.
 
 > **Important**  
-> **Always** call the `ToClientTemplate` method when using Telerik UI for ASP.NET MVC widgets in a client template.
->
-> The "#" characters used for a template expression should be escaped when using a column `ClientTemplate` in a detail template so that the expression is evaluated in the correct context.
+> * Always call the `ToClientTemplate` method when using Telerik UI for ASP.NET MVC widgets in a client template.
+> * Escape the `#` characters used for a template expression when using a column `ClientTemplate` in a detail template, so that the expression is evaluated in the correct context.
+
+###### Example
 
         <script id="client-template" type="text/x-kendo-template">
         @(Html.Kendo().Grid<KendoGridClientHierarchy.Models.Product>()
@@ -259,16 +321,20 @@ contains another grid which is bound to the `Products_Read` action.
                   columns.Bound(product => product.ProductName).ClientTemplate("<strong>\\#:ProductName\\#</strong>"); // escape the "#" characters
               })
               .DataSource(dataSource =>
-                  // Make request to Products_Read and provide the current CategoryID as a route parameter
+                  // Make a request to Products_Read and provide the current CategoryID as a route parameter.
                   dataSource.Ajax().Read(read => read.Action("Products_Read", "Home", new { categoryId = "#=CategoryID#" }))
               )
               .Pageable()
               .ToClientTemplate()
         )
         </script>
-1. Specify the id of the template using the `ClientDetailTemplateId` method.
 
-    ```Razor
+**Step 12** Specify the id of the template using the `ClientDetailTemplateId` method.
+
+###### Example
+
+**Razor**
+
     @(Html.Kendo().Grid<KendoGridClientHierarchy.Models.Category>()
           .Name("grid")
           .Columns(columns =>
@@ -281,8 +347,9 @@ contains another grid which is bound to the `Products_Read` action.
           )
           .ClientDetailTemplateId("client-template")
     )
-    ```
-    ```ASPX
+
+**ASPX**
+
     <%: Html.Kendo().Grid<KendoGridClientHierarchy.Models.Category>()
           .Name("grid")
           .Columns(columns =>
@@ -295,15 +362,18 @@ contains another grid which is bound to the `Products_Read` action.
           )
           .ClientDetailTemplateId("client-template")
     %>
-    ```
-1. Build and run.
+
+**Step 13** Build and run the project.
+
+**Figure 3. The final result**
+
 ![Client hierarchy](/aspnet-mvc/helpers/grid/images/grid-hierarchy.png)
 
-[Download Visual Studio Project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/client-hierarchy)
+To download the Visual Studio Project, refer to [this GitHub repository]((https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/client-hierarchy).
 
-## Nested Client Template Scenarios
+### Nested Client Template Scenarios
 
-Nesting client templates is not supported out-of-the-box with the Kendo UI MVC wrappers. Please check [Invalid Template error when nesting client templates](/aspnet-mvc/helpers/grid/troubleshooting#invalid-template-error-when-nesting-client-templates).
+Nesting client templates is not an out-of-the-box feature the Kendo UI MVC wrappers support. For more information on this issue, check the Grid troubleshooting section in [invalid template errors when nesting client templates]({% slug troubleshoot_gridhelper_aspnetmvc %}#invalid-template-error-when-nesting-client-templates).
 
 ## See Also
 
