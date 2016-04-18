@@ -9,30 +9,52 @@ position: 3
 
 # Web API Editing
 
-This tutorial shows how to implement CRUD (Create, Read, Update, Destroy) with Kendo UI Grid for ASP.NET MVC and a [Web API](http://www.asp.net/web-api) controller.
-The example uses the Products table from the Northwind database.
+This article demonstrates how to implement the CRUD (Create, Read, Update, Destroy) data operations with the Kendo UI Grid for ASP.NET MVC and a [Web API](http://www.asp.net/web-api) controller.
 
-1. Create a new **ASP.NET MVC 4 Web Application** (or **Telerik MVC Web Application** if you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions](/aspnet-mvc/introduction#kendo-ui-for-asp.net-mvc-visual-studio-extensions)).
-Name the application "KendoGridWebApiCRUD". If you decided not to use the Visual Studio Extensions follow the steps from the [introduction](/aspnet-mvc/asp-net-mvc-4) help topic in order
-to add Telerik UI for ASP.NET MVC to the application.
-1. Add a new "Entity Framework Data Model". Right click the **Models** folder in Visual Studio solution explorer and pick **Add -> New Item**. Choose **Data -> ADO.NET Entity Data Model** from the **Add New Item** dialog.
-Name the model "Northwind.edmx" and click **Next**. This will start the **Entity Data Model Wizard**.
+## Getting Started
+
+### Configuration
+
+Below are listed the steps for you to follow when implementing the CRUD data operations with a Web API controller for the Kendo UI Grid for ASP.NET MVC. The configuration example uses the **Products** table from the Northwind database.
+
+**Step 1** Create a new ASP.NET MVC 4 application. If you have installed the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}#requirements), create a Telerik UI for ASP.NET MVC Web application. Name the application `KendoGridWebApiCRUD`. If you decided not to use the Telerik UI for ASP.NET MVC Visual Studio Extensions, follow the steps from the [introductory article]({% slug aspnetmvc4_aspnetmvc %}) to add Telerik UI for ASP.NET MVC to the application.
+
+**Step 2** Add a new `Entity Framework Data Model`. Right-click the `~/Models` folder in the solution explorer and pick **Add** > **New Item**. Choose **Data** > **ADO.NET Entity Data Model** in the **Add New Item** dialog. Name the model `Northwind.edmx` and click **Next**. This starts the **Entity Data Model Wizard**.
+
+**Figure 1. A new entity data model**
+
 ![New entity data model](/aspnet-mvc/helpers/grid/images/grid-entity-data-model.png)
-1. Select **Generate from database** option and click **Next**. Configure a connection to the Northwind database. Click **Next**.
-1. Select the **Products** table. Leave all other options as they are set by default. Click **Finish** to create the Entity Framework model.
+
+**Step 3** Select **Generate from database** and click **Next**. Configure a connection to the Northwind database. Click **Next**.
+
+**Step 4** Select the **Products** table. Leave all other options as they are set by default. Click **Finish** to create the Entity Framework model.
+
+**Figure 2. Choosing the connection**
+
 ![Choose the Products table](/aspnet-mvc/helpers/grid/images/grid-database-objects.png)
-1. Right click the **Controllers** folder in Visual Studio solution explorer. Select **Add -> Controller**.
-1. Set "ProductsController" as **Controller name**. Select **API controller with read/write actions, using Entity Framework** as **Template**. Select **Product (KendoGridWebApiCRUD.Models)** as **Model class** and
-**NorthwindEntities (KendoGridWebApiCRUD.Models)** as **Data context class**. Click **Add** to create the Web API controller.
+
+**Step 4** Right click the `Controllers` folder in Visual Studio solution explorer. Select **Add** > **Controller**.
+
+**Step 5** Set **ProductsController** as **Controller name**. Select **API controller with read/write actions, using Entity Framework** as **Template**. Select **Product (KendoGridWebApiCRUD.Models)** as **Model class** and **NorthwindEntities (KendoGridWebApiCRUD.Models)** as **Data context class**. Click **Add** to create the Web API controller.
+
+**Figure 2. Adding the Controller**
+
 ![Add Controller](/aspnet-mvc/helpers/grid/images/grid-api-controller.png)
-1. Open **Controllers/ProductsController.cs**
-1. Update the **GetProducts** method to
+
+**Step 6** Open `Controllers/ProductsController.cs`.
+
+**Step 7** Update the `GetProducts` method as demonstrated by the example below.
+
+###### Example
 
         public DataSourceResult GetProducts([System.Web.Http.ModelBinding.ModelBinder(typeof(WebApiDataSourceRequestModelBinder))]DataSourceRequest request)
         {
             return db.Products.ToDataSourceResult(request);
         }
-1. Update the **PostProduct** method to
+
+**Step 8** Update the `PostProduct` method as demonstrated in the example below.
+
+###### Example
 
         public HttpResponseMessage PostProduct(Product product)
         {
@@ -55,9 +77,13 @@ Name the model "Northwind.edmx" and click **Next**. This will start the **Entity
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
         }
-1.  In the view configure the grid to use the Products Web API controller.
 
-    ```Razor
+**Step 9** In the view, configure the Grid to use the Products Web API controller.
+
+###### Example
+
+**Razor**
+
     @(Html.Kendo().Grid<KendoGridWebApiCRUD.Models.Product>()
           .Name("grid")
           .Columns(columns =>
@@ -87,8 +113,9 @@ Name the model "Northwind.edmx" and click **Next**. This will start the **Entity
           )
           .Pageable()
     )
-    ```
-    ```ASPX
+
+**ASPX**
+
     <%: Html.Kendo().Grid<KendoGridWebApiCRUD.Models.Product>()
           .Name("grid")
           .Columns(columns =>
@@ -118,10 +145,12 @@ Name the model "Northwind.edmx" and click **Next**. This will start the **Entity
           )
           .Pageable()
     %>
-    ```
-1. Build and run the application
-![Final result](/aspnet-mvc/helpers/grid/images/grid-inline-grid.png)
 
+**Step 10** Build and run the application.
+
+**Figure 3. The final result**
+
+![Final result](/aspnet-mvc/helpers/grid/images/grid-inline-grid.png)
 
 ## See Also
 
