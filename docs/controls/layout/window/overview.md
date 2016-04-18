@@ -322,6 +322,10 @@ In Safari and Chrome browsers running on OS X, a scrollbar of an element below t
 
     -webkit-transform: translate3d(0, 0, 0);
 
+### Create a Window multiple times
+
+It is possible to create a Kendo UI Window instance multiple times with the same ID only if the existing instance with this ID is [destroyed](#configuration-Destroy) first. Multiple widgets with the same ID [cannot exist and work properly](/intro/installation/jquery-initialization#duplicate-initialization) at the same time. An alternative approach is not to destroy the existing Window instance, but just [open](/api/javascript/ui/window#methods-open) it and [refresh](/api/javascript/ui/window#methods-refresh) its Ajax content (or [set new static content](/api/javascript/ui/window#methods-content)), if needed.
+
 ## See Also
 
 Other articles on Kendo UI Upload:
