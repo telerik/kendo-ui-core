@@ -2072,7 +2072,9 @@ html .km-pane-wrapper .km-widget,
 
 .k-grid tr:hover {
     color: @hover-text-color;
-    background-color: @hover-background;
+    background-color: @select-hover-background-color;
+    .composite-background(@hover-gradient);
+    background-position: 50% 50%;
 }
 
 .k-pivot-rowheaders .k-grid tr:hover {

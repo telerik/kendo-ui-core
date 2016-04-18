@@ -1331,8 +1331,9 @@ div.k-filebrowser-dropzone em
 }
 
 .k-grid tr:hover {
-    .composite-background(@widget-gradient);
-    background-color: contrast(@widget-background-color, darken(@header-background-color, 20%), @header-background-color, .5);
+    background-color: @select-hover-background-color;
+    .composite-background(@hover-gradient);
+    background-position: 50% 50%;
 }
 
 .k-pivot-rowheaders .k-grid tr:hover {
