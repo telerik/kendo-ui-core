@@ -115,7 +115,8 @@ position: 2
 | HARMEAN                   | Returns the harmonic mean of a sequence
 | HLOOKUP                   | Looks for a matching value in the first row of a given table, and returns the value of the indicated row
 | HOUR                      | Converts a serial number to an hour
-| IF                        | Returns a value, if a condition is true
+| HYPERLINK                 | Creates a hyperlink involving an evaluated expression
+| IF                        | Return one of two values, depending on a condition
 | IFERROR                   | Returns a specified value if a forumla evaluates to an error; otherwise, returns the result of the formula
 | INDEX                     | Returns a value or a reference to a value fromwithin a table or range
 | INDIRECT                  | Returns a reference indicated by a text value    
