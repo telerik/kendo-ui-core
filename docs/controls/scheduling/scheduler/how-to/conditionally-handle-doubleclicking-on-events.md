@@ -2,7 +2,7 @@
 title: Handle Doubleclicking on Events Conditionally Based On The View Name
 page_title: Handle Doubleclicking on Events Conditionally Based On The View Name | Kendo UI Scheduler
 description: "Learn how to handle doubleclicking on events conditionally based on the view name in a Kendo UI Scheduler widget."
-slug: howto_create_custom_view_inheriting_builtinview_scheduler
+slug: howto_conditionally_handle_doubleclicking_events_scheduler
 ---
 
 # Handle Doubleclicking on Events Conditionally Based On The View Name
