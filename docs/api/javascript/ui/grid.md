@@ -2965,6 +2965,36 @@ The text of the cancel button in the filter menu header (available in mobile mod
     });
     </script>
 
+### filterable.messages.selectedItemsFormat `String` *(default: "{0} items selected")*
+
+The format string for selected items count in filter menu when [search](#configuration-columns.filterable.multi) option set to true.
+
+#### Example - set the "selectedItemsFormat" text
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          {
+            field: "category",
+            filterable: {
+              multi: true,
+              search: true
+            }
+          }
+        ],
+        dataSource: [
+          { category: "Foo" },
+          { category: "Boo" }
+        ],
+        filterable: {
+          messages: {
+            selectedItemsFormat: "There are {0} selected items"
+          }
+        }
+      });
+    </script>
+
 ### filterable.messages.operator `String` *(default: "Operator")*
 
 The text of the operator item in filter menu (available in mobile mode only).
