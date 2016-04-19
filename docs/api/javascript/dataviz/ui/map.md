@@ -5717,7 +5717,7 @@ The parent layer instance.
 
 ##### e.shape `kendo.drawing.Element`
 
-The the shape instance.
+The shape instance.
 
 ##### e.sender `kendo.dataviz.ui.Map`
 
@@ -5730,37 +5730,99 @@ The source jQuery event instance
 #### Example - bind to the map shapeCreated event on initialization
     <div id="map"></div>
     <script>
-        $("#map").kendoMap({
-            zoom: 3,
-            center: [0, 0],
-            layers: [{
-                type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
-            }],
-            shapeCreated: function() {
-                console.log("shape created");
-            }
-        });
+      var data = [
+        { "type": "Feature",
+         "geometry": {
+           "type": "Polygon",
+           "coordinates": [
+             [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0],
+              [100.0, 1.0], [100.0, 0.0] ]
+           ]
+         },
+         "properties": {
+           "name": "Feature #1"
+         }
+        }
+      ];
+
+      $("#map").kendoMap({
+        center: [0.5, 100.5],
+        zoom: 8,
+        layers: [{
+          type: "shape",
+          dataSource: {
+            type: "geojson",
+            data: data
+          }
+        }],
+        shapeCreated: onShapeCreated
+      });
+
+      function onShapeCreated(e) {
+        console.log("shape created: ", e.shape.dataItem.properties.name);
+      }
     </script>
 
-#### Example - bind to the map shapeCreated event after initialization
+### shapeFeatureCreated
+
+Fired when a [GeoJSON Feature](http://geojson.org/geojson-spec.html#feature-objects) is created on a shape layer.
+
+#### Event Data
+
+##### e.dataItem `Object`
+
+The original data item for this Feature. Members include `geometries` and `properties`.
+
+##### e.layer `kendo.dataviz.map.layer.Shape`
+
+The parent layer instance.
+
+##### e.group `kendo.drawing.Group`
+
+The group containing feature shape instances.
+
+##### e.properties `Object`
+
+A reference to the `dataItem.properties` object.
+
+##### e.sender `kendo.dataviz.ui.Map`
+
+The source widget instance.
+
+#### Example - bind to the map shapeFeatureCreated event on initialization
     <div id="map"></div>
     <script>
-        $("#map").kendoMap({
-            zoom: 3,
-            center: [0, 0],
-            layers: [{
-                type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
-            }]
-        });
+      var data = [
+        { "type": "Feature",
+         "geometry": {
+           "type": "Polygon",
+           "coordinates": [
+             [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0],
+              [100.0, 1.0], [100.0, 0.0] ]
+           ]
+         },
+         "properties": {
+           "name": "Feature #1"
+         }
+        }
+      ];
 
-        var map = $("#map").data("kendoMap");
-        map.bind("shapeCreated", function(e) {
-            console.log("shape created");
-        });
+      $("#map").kendoMap({
+        center: [0.5, 100.5],
+        zoom: 8,
+        layers: [{
+          type: "shape",
+          dataSource: {
+            type: "geojson",
+            data: data
+          }
+        }],
+        shapeFeatureCreated: onShapeFeatureCreated
+      });
+
+      function onShapeFeatureCreated(e) {
+        console.log("feature created: ", e.properties.name);
+      }
     </script>
 
 ### shapeMouseEnter
