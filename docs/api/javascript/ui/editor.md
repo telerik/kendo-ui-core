@@ -10,6 +10,27 @@ Represents the Kendo UI Editor widget. Inherits from [Widget](/api/javascript/ui
 
 ## Configuration
 
+### deserialization `Object`
+
+Fine-tune deserialization in the Editor widget. Deserialization is the process of parsing the HTML string input from the value() method or from the viewHtml dialog into editable content.
+
+### deserialization.custom `Function`
+
+Callback that allows custom deserialization to be plugged in. The method accepts string as the only parameter and is expected to return the modified content as string as well.
+
+#### Example
+
+    <textarea id="editor></textarea>
+    <script>
+        $("#editor").kendoEditor({
+            deserialization: {
+                custom: function(html) {
+                    return html.replace(/(<\/?)b(\s?)/, "$1strong$2");
+                }
+            }
+        });
+    </script>
+
 ### domain `String`
 
 Relaxes the same-origin policy when using the iframe-based editor.
@@ -1502,6 +1523,23 @@ If `resizable` is set to `true` the widget will detect changes in the viewport w
 ### serialization `Object`
 
 Allows setting of serialization options.
+
+### serialization.custom `Function`
+
+Define custom serialization for the editable content. The method accepts a single parameter as a string and is expected to return a string.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        serialization: {
+            custom: function(html) {
+                return html.replace(/(<\/?)b(\s?)/, "$1strong$2");
+            }
+        }
+    });
+    </script>
 
 ### serialization.entities `Boolean` *(default: true)*
 
@@ -3718,7 +3756,7 @@ Initiates the PDF export and returns a promise. Also triggers the [pdfExport](#e
             and image handling. The widget &lt;strong&gt;outputs identical HTML&lt;/strong&gt; across all major browsers, follows
             accessibility standards and provides API for content manipulation.
     </textarea>
-    
+
     <script>
         $("#editor").kendoEditor();
         $("#export").click(function(e) {
