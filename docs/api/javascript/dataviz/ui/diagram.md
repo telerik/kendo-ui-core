@@ -94,6 +94,14 @@ The font family of the connection content text.
 
 The font size of the connection content text.
 
+### connectionDefaults.content.fontStyle `String`
+
+The font style of the connection content text.
+
+### connectionDefaults.content.fontWeight `String`
+
+The font weight of the connection content text.
+
 ### connectionDefaults.content.template `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) which renders the labels.
@@ -467,6 +475,14 @@ The font family of the connection content text.
 ### connections.content.fontSize `Number`
 
 The font size of the connection content text.
+
+### connections.content.fontStyle `String`
+
+The font style of the connection content text.
+
+### connections.content.fontWeight `String`
+
+The font weight of the connection content text.
 
 ### connections.content.template `String|Function`
 
@@ -2040,6 +2056,14 @@ The font family of the shape content text.
 
 The font size of the shape content text.
 
+### shapeDefaults.content.fontStyle `String`
+
+The font style of the shape content text.
+
+### shapeDefaults.content.fontWeight `String`
+
+The font weight of the shape content text.
+
 ### shapeDefaults.content.template `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) which renders the labels.
@@ -2533,6 +2557,14 @@ The font family of the shape content text.
 ### shapes.content.fontSize `Number`
 
 The font size of the shape content text.
+
+### shapes.content.fontStyle `String`
+
+The font style of the shape content text.
+
+### shapes.content.fontWeight `String`
+
+The font weight of the shape content text.
 
 ### shapes.content.template `String|Function`
 

@@ -20,6 +20,14 @@ The font family of the text block.
 
 The font size of the text block.
 
+### fontStyle `String`
+
+The font style of the text block.
+
+### fontWeight `String`
+
+The font weight of the text block.
+
 ### height `Number`
 
 The height of the text block.

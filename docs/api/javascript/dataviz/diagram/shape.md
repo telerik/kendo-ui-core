@@ -216,6 +216,14 @@ The font family of the shape content text.
 
 The font size of the shape content text.
 
+### content.fontStyle `String`
+
+The font style of the shape content text.
+
+### content.fontWeight `String`
+
+The font weight of the shape content text.
+
 ### content.text `String`
 
 The text displayed in the shape.

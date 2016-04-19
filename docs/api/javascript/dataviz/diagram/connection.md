@@ -25,6 +25,14 @@ The font family of the connection content text.
 
 The font size of the connection content text.
 
+### content.fontStyle `String`
+
+The font style of the connection content text.
+
+### content.fontWeight `String`
+
+The font weight of the connection content text.
+
 ### content.template `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) which renders the labels.
