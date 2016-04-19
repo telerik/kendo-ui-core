@@ -316,8 +316,31 @@ The bottom border color of the cell.
 
 Many standard CSS formats are supported, but the canonical form is "#ccff00".
 
-### sheets.rows.cells.borderBottom.size `String`
+### sheets.rows.cells.borderBottom.size `Number`
 The width of the border in pixels.
+
+The allowed values are:
+* `1` - Results in а "thin" border.
+* `2` - Results in а "medium" border.
+* `3` - Results in а "thick" border.
+
+#### Example - add a bottom border to the cell
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+    sheets: [
+     {
+         rows: [
+           { cells: [ { value: "Border", borderBottom: { color: "#ff0000", size: 3 } } ] }
+         ]
+     }
+    ]
+    });
+    kendo.saveAs({
+    dataURI: workbook.toDataURL(),
+    fileName: "Test.xlsx"
+    });
+    </script>
 
 ### sheets.rows.cells.borderLeft `Object`
 The style information for the left border of the cell.
@@ -327,8 +350,31 @@ The left border color of the cell.
 
 Many standard CSS formats are supported, but the canonical form is "#ccff00".
 
-### sheets.rows.cells.borderLeft.size `String`
+### sheets.rows.cells.borderLeft.size `Number`
 The width of the border in pixels.
+
+The allowed values are:
+* `1` - Results in а "thin" border.
+* `2` - Results in а "medium" border.
+* `3` - Results in а "thick" border.
+
+#### Example - add a left border to the cell
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+    sheets: [
+     {
+         rows: [
+           { cells: [ { value: "Border", borderLeft: { color: "#ff0000", size: 3 } } ] }
+         ]
+     }
+    ]
+    });
+    kendo.saveAs({
+    dataURI: workbook.toDataURL(),
+    fileName: "Test.xlsx"
+    });
+    </script>
 
 ### sheets.rows.cells.borderTop `Object`
 The style information for the top border of the cell.
@@ -338,8 +384,31 @@ The top border color of the cell.
 
 Many standard CSS formats are supported, but the canonical form is "#ccff00".
 
-### sheets.rows.cells.borderTop.size `String`
+### sheets.rows.cells.borderTop.size `Number`
 The width of the border in pixels.
+
+The allowed values are:
+* `1` - Results in а "thin" border.
+* `2` - Results in а "medium" border.
+* `3` - Results in а "thick" border.
+
+#### Example - add a top border to the cell
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+    sheets: [
+     {
+         rows: [
+           { cells: [ { value: "Border", borderTop: { color: "#ff0000", size: 3 } } ] }
+         ]
+     }
+    ]
+    });
+    kendo.saveAs({
+    dataURI: workbook.toDataURL(),
+    fileName: "Test.xlsx"
+    });
+    </script>
 
 ### sheets.rows.cells.borderRight `Object`
 The style information for the right border of the cell.
@@ -349,8 +418,31 @@ The right border color of the cell.
 
 Many standard CSS formats are supported, but the canonical form is "#ccff00".
 
-### sheets.rows.cells.borderRight.size `String`
+### sheets.rows.cells.borderRight.size `Number`
 The width of the border in pixels.
+
+The allowed values are:
+* `1` - Results in а "thin" border.
+* `2` - Results in а "medium" border.
+* `3` - Results in а "thick" border.
+
+#### Example - add a right border to the cell
+
+    <script>
+    var workbook = new kendo.ooxml.Workbook({
+    sheets: [
+     {
+         rows: [
+           { cells: [ { value: "Border", borderRight: { color: "#ff0000", size: 3 } } ] }
+         ]
+     }
+    ]
+    });
+    kendo.saveAs({
+    dataURI: workbook.toDataURL(),
+    fileName: "Test.xlsx"
+    });
+    </script>
 
 ### sheets.rows.cells.bold `Boolean` *(default: false)*
 
@@ -787,6 +879,3 @@ Creates an Excel file that represents the current workbook and returns it as a d
       fileName: "Test.xlsx"
     });
     </script>
-
-
-    
