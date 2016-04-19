@@ -9,11 +9,11 @@ position: 2
 
 # Editor Templates
 
-The Kendo UI Grid for ASP.NET MVC relies on ASP.NET MVC editor templates to create the editing UI.
+This article demonstrates how to create the editing UI of a Kendo UI Grid for ASP.NET MVC editor templates.
 
 ## Configuration
 
-If the Grid is configured for in-line or in-cell editing, the [`Html.EditorFor`](https://msdn.microsoft.com/en-us/library/system.web.mvc.html.editorextensions.editorfor.aspx) method is used to get the editor HTML for every property which is editable.
+The Kendo UI Grid for ASP.NET MVC relies on ASP.NET MVC editor templates to create the editing UI. If the Grid is configured for in-line or in-cell editing, the [`Html.EditorFor`](https://msdn.microsoft.com/en-us/library/system.web.mvc.html.editorextensions.editorfor.aspx) method is used to get the editor HTML for every property which is editable.
 
 ### Overview
 
