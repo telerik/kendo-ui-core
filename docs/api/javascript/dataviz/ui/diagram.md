@@ -3263,6 +3263,34 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
 
 Sets the focus on the diagram.
 
+### getConnectionByModelId
+
+Returns the connection corresponding to the model with the specified id value.
+
+#### Parameters
+
+##### id `String|Number`
+
+The model id value.
+
+#### Returns
+
+`kendo.dataviz.diagram.Connection` the connection corresponding to the model.
+
+### getConnectionByModelUid
+
+Returns the connection corresponding to the model with the specified uid value.
+
+#### Parameters
+
+##### uid `String`
+
+The model uid value.
+
+#### Returns
+
+`kendo.dataviz.diagram.Connection` the connection corresponding to the model.
+
 ### getShapeById
 
 Returns the shape or connection with the specified identifier.
@@ -3276,6 +3304,34 @@ The unique identifier of the Shape or Connection
 #### Returns
 
 `Object` the item that has the provided ID.
+
+### getShapeByModelId
+
+Returns the shape corresponding to the model with the specified id value.
+
+#### Parameters
+
+##### id `String|Number`
+
+The model id value.
+
+#### Returns
+
+`kendo.dataviz.diagram.Shape` the shape corresponding to the model.
+
+### getShapeByModelUid
+
+Returns the shape corresponding to the model with the specified uid value.
+
+#### Parameters
+
+##### uid `String`
+
+The model uid value.
+
+#### Returns
+
+`kendo.dataviz.diagram.Shape` the shape corresponding to the model.
 
 ### layerToModel
 
