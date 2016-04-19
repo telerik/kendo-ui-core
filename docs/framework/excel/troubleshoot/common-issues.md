@@ -23,9 +23,9 @@ The application functions normally with the substituted files as well. Once you 
 Other articles on troubleshooting:
 
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
-* [Kendo UI JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
-* [Kendo UI Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
-* [Kendo UI Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
+* [JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
+* [Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
+* [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
 * [Common Issues in Kendo UI Charts]({% slug troubleshooting_chart_widget %})
 * [Common Issues in Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %})
 * [Common Issues in Kendo UI Diagram]({% slug troubleshooting_diagram_widget %})
@@ -38,6 +38,7 @@ Other articles on troubleshooting:
 * [Common Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_aspnetmvc %})
 * [Validation Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_validation_aspnetmvc %})
 * [Scaffolding Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_scaffolding_aspnetmvc %})
-* [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/grid/troubleshooting)
+* [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_gridhelper_aspnetmvc %})
+* [Excel Export with the Grid ASP.NET MVC HtmlHelper Extension]({% slug excelissues_gridhelper_aspnetmvc %})
 * [Common Issues in the Spreadsheet ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_spreadsheethelper_aspnetmvc %})
 * [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_uploadhelper_aspnetmvc %})
