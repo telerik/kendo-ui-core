@@ -46,6 +46,15 @@ In addition to the `accesskey` attribute support, most Kendo UI widgets also off
 - [TreeView](http://demos.telerik.com/kendo-ui/web/treeview/navigation.html)
 - [Window](http://demos.telerik.com/kendo-ui/web/window/navigation.html)
 
+## How In-widget Keyboard Navigation Works
+
+Generally, there are two ways to implement in-widget keyboard navigation:
+
+- rely on TAB to focus multiple HTML elements inside a widget
+- rely on TAB to focus only one element in the widget, and then use various other keys for in-widget navigation and actions (e.g. arrows, Enter, Page Up, Page Down, etc).
+
+We have opted for the second approach, which uses an `aria-activedescendant` attribute to determine the currently active element inside the widget. This is the recommended technique for complex UI components and allows better control over the keyboard navigation, easier implementation of nested textboxes' change handlers, and spares the need to define accessibility attributes for all possible elements that may need them (on the other hand, there is need to define WAI-ARIA attributes). From end-user's perspective, the widget's markup is encapsulated as if shadow DOM is used. We agree there is one drawback - the end-user should be educated on how to use the widget, but we also consider the pros to outweigh the cons.
+
 ## See Also
 
 Other articles on Kendo UI Accessibility support:
