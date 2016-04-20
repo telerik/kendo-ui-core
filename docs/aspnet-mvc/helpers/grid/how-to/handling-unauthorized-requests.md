@@ -1,11 +1,33 @@
 ---
-title: Handling unauthorized requests with Ajax bound Grid
-page_title: Handling unauthorized requests with Ajax bound Grid
-description: Create custom AuthorizeAttribute that returns result which can be handled on the client.
+title: Handle Unauthorized Requests with Ajax-Bound Grids
+page_title: Handle Unauthorized Requests with Ajax-Bound Grids | Kendo UI Grid HtmlHelper
+description: "Create a custom AuthorizeAttribute that returns results that can be handled on the client."
+slug: howto_handleunathorizedrequestsajaxbound_gridaspnetmv
 ---
 
-# Handling unauthorized requests with Ajax bound Grid
+# Handle Unauthorized Requests with Ajax-Bound Grids
 
-This project demonstrates how to create custom AuthorizeAttribute that returns result which can be used on the client to show error message or redirect to the login page.
+To see the example on how to create a custom `AuthorizeAttribute` that returns results that can be used on the client to show error messages or redirect to the login page, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-handling-unauthorized-request).
 
-[Handling unauthorized requests with Ajax bound Grid](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-handling-unauthorized-request)
+## See Also
+
+Other articles and how-to examples on the Kendo UI Grid HtmlHelper:
+
+* [Overview of the Grid HtmlHelper]({% slug overview_uploadhelper_aspnetmvc %})
+* [How to Apply Custom Row Styles Based on Model Data]({% slug howto_applycustomrrowstylesmodeldata_gridaspnetmv %})
+* [How to Bind the Grid to DataTable]({% slug howto_bindgridtodatatable_gridaspnetmvc %})
+* [How to Bind the Grid to the SignalR Hub]({% slug howto_bindgridtosignalrhub_gridaspnetmv %})
+* [How to Export Grid Data in PDF]({% slug howto_exportonpdf_gridaspnetmv %})
+* [How to Export Grid Data to CSV Files]({% slug howto_exportgriddatacsvfile_gridaspnetmv %})
+* [How to Export Grid Data to Excel]({% slug howto_exportgriddataasexceldocs_gridaspnetmv %})
+* [How to Post Grid Data with Form]({% slug howto_postgriddatawithform_gridaspnetmv %})
+* [How to Post Grid Selection to Server]({% slug howto_postselectiontoserver_gridaspnetmv %})
+* [How to Preserve the Grid Server Toolbar Template after Using setOptions]({% slug howto_preserveservertemplateaftersetoptions_gridaspnetmv %})
+* [How to Use Custom JsonResult with Ajax-Bound Grids]({% slug howto_usecustomjsonresultajaxbound_gridaspnetmvc %})
+* [How to Use Grid Hierarchy with Dynamic Model Loading and DataTable]({% slug howto_usegridhierarchydynamicmodelload_gridaspnetmv %})
+* [How to Use Grid Self-Referencing Hierarchy]({% slug howto_usegridselfrefhierarchy_gridaspnetmv %})
+* [How to Use oData v4 with WebAPI Controller]({% slug howto_useodata4webapicontroller_gridaspnetmvc %})
+* [How to Use the Sortable to Reorder Grid Rows]({% slug howto_usesortabletoreorder_gridaspnetmv %})
+* [How to Use UTC on Both Client and Server]({% slug howto_useutctimeonclientandserver_gridaspnetmv %})
+
+For more runnable examples on the Kendo UI Grid HtmlHelper, browse the [how-to section of articles]({% slug howto_applycustomrowstylesbasedondata_gridaspnetmvc %}).
