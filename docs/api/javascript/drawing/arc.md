@@ -52,6 +52,9 @@ Inherited from [Element.opacity](element#configuration-opacity)
 ### stroke `kendo.drawing.StrokeOptions`
 The stroke options of the shape.
 
+### tooltip `kendo.drawing.TooltipOptions`
+The tooltip options of the shape.
+
 ### transform `kendo.geometry.Transformation`
 The transformation to apply to this element.
 Inherited from [Element.transform](element#configuration-transform)

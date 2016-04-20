@@ -44,6 +44,9 @@ Inherited from [Element.cursor](element#configuration-cursor)
 The element opacity.
 Inherited from [Element.opacity](element#configuration-opacity)
 
+### tooltip `kendo.drawing.TooltipOptions`
+The tooltip options of the shape.
+
 ### transform `kendo.geometry.Transformation`
 The transformation to apply to this element.
 Inherited from [Element.transform](element#configuration-transform)

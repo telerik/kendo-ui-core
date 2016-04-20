@@ -45,6 +45,9 @@ The opacity of any child groups and elements will be multiplied by this value.
 ### pdf `kendo.drawing.PDFOptions`
 Page options to apply during PDF export.
 
+### tooltip `kendo.drawing.TooltipOptions`
+The tooltip options of the shape.
+
 ### transform `kendo.geometry.Transformation`
 The transformation to apply to this group and its children.
 Inherited from [Element.transform](element#configuration-transform)
