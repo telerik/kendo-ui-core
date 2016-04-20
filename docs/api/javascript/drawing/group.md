@@ -96,6 +96,16 @@ Inherited from [Element.clippedBBox](element#methods-clippedBBox)
 #### Returns
 `kendo.geometry.Rect` The bounding box of the element with clipping transformations applied.
 
+### containsPoint
+Returns true if the shape contains the specified point.
+
+#### Parameters
+
+##### point `kendo.geometry.Point`
+The point that should be checked.
+
+#### Returns
+`Boolean` value indicating if the shape contains the point.
 
 ### insert
 Inserts an element at the specified position.

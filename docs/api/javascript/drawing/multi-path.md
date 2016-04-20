@@ -120,6 +120,16 @@ Closes the current sub-path by linking its current end point with its start poin
 #### Returns
 `kendo.drawing.MultiPath` The current instance to allow chaining.
 
+### containsPoint
+Returns true if the shape contains the specified point.
+
+#### Parameters
+
+##### point `kendo.geometry.Point`
+The point that should be checked.
+
+#### Returns
+`Boolean` value indicating if the shape contains the point.
 
 ### curveTo
 Draws a cubic Bézier curve (with two control points).
