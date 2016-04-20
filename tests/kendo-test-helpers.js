@@ -307,6 +307,7 @@ function withAngularTests(moduleName, func) {
     });
 
     $.mockjaxSettings.responseTime = 0;
+    $.mockjaxSettings.logging = false;
 
     $.mockjax({
         url: "ajax-template.html",
