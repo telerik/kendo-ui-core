@@ -8,7 +8,7 @@ position: 4
 
 # Keyboard Shortcuts
 
-Keyboard access is a very significant aspect of the interaction between disabled users and the Web. The more the functionalities of your project that users can handle through the keyboard, the wider the variety of assistive technologies that can be used by disabled users. 
+Keyboard access is a very significant aspect of the interaction between disabled users and the Web. The more the functionalities of your project that users can handle through the keyboard, the wider the variety of assistive technologies that can be used by disabled users.
 
 ## Overview
 
@@ -20,7 +20,7 @@ By using the `accesskey` attribute, you instruct the browser to enable a user se
 
 Kendo UI recognizes `accesskey` attributes, and automatically preserves those when creating widgets. This is especially helpful in the cases when Kendo UI creates multiple DOM elements to construct some more complex widgets such as the NumericTextBox or DatePicker.
 
-## Built-in Support
+## Built-In Support
 
 Keyboard support in Kendo UI is about more than just mapping access keys for you. It is also about ensuring that your users can access the full capabilities of the widgets by just using the keyboard. What is more, you get this kind of support right out of the box.
 
@@ -46,14 +46,14 @@ In addition to the `accesskey` attribute support, most Kendo UI widgets also off
 - [TreeView](http://demos.telerik.com/kendo-ui/web/treeview/navigation.html)
 - [Window](http://demos.telerik.com/kendo-ui/web/window/navigation.html)
 
-## How In-widget Keyboard Navigation Works
+## In-Widget Keyboard Navigation
 
 Generally, there are two ways to implement in-widget keyboard navigation:
 
-- rely on TAB to focus multiple HTML elements inside a widget
-- rely on TAB to focus only one element in the widget, and then use various other keys for in-widget navigation and actions (e.g. arrows, Enter, Page Up, Page Down, etc).
+- Rely on `TAB` to focus multiple HTML elements inside a widget.
+- Rely on `TAB` to focus only one element in the widget, and then use various other keys for in-widget navigation and actions&mdash;for example, `Arrow` keys, `Enter`, `Page Up`, `Page Down`, etc.
 
-We have opted for the second approach, which uses an `aria-activedescendant` attribute to determine the currently active element inside the widget. This is the recommended technique for complex UI components and allows better control over the keyboard navigation, easier implementation of nested textboxes' change handlers, and spares the need to define accessibility attributes for all possible elements that may need them (on the other hand, there is need to define WAI-ARIA attributes). From end-user's perspective, the widget's markup is encapsulated as if shadow DOM is used. We agree there is one drawback - the end-user should be educated on how to use the widget, but we also consider the pros to outweigh the cons.
+Kendo UI opts for the second approach. It uses an `aria-activedescendant` attribute to determine the currently active element inside the widget and is the recommended technique for complex UI components. It allows for a better control over the keyboard navigation, easier implementation of nested textboxes change handlers, and spares the need to define accessibility attributes for all possible elements that may need them. On the other hand, you need to define WAI-ARIA attributes. From an end-user's perspective, the markup of the widget is encapsulated as if a shadow DOM is used. The drawback of this approach is that the end-user is expected to be educated on how to use the widget. However, Kendo UI considers the pros to outweigh the cons.
 
 ## See Also
 
