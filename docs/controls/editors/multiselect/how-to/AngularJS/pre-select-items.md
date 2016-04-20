@@ -8,6 +8,10 @@ slug: howto_preselect_itemson_load_angular_multiselect
 # Preselect Items on Load
 
 The example below demonstrates how to preselect items in Kendo UI MultiSelect without loading the whole source in AngularJS.
+Note that values **should be objects**. The approach will not work with primitive values. More details can be found in those help topics:
+
+- [k-value-primitive attribute](http://docs.telerik.com/kendo-ui/AngularJS/introduction#the-k-value-primitive-attribute)
+- [MVVM value binding](http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value#data-bound-widgets-and-value-binding)
 
 > **Important**
 >
@@ -16,45 +20,41 @@ The example below demonstrates how to preselect items in Kendo UI MultiSelect wi
 ###### Example
 
 ```html
-    <div id="example" ng-app="KendoDemos">
-    <div class="demo-section k-content" ng-controller="MyCtrl">
-        <div style="padding:10px">
-           <p>Pre-select items using static initial data:</p>
-           <select
+<script src="https://cdnjs.cloudflare.com/ajax/libs/linq.js/2.2.0.2/jquery.linq.min.js"></script>
+<div id="example" ng-app="KendoDemos">
+  <div class="demo-section k-content" ng-controller="MyCtrl">
+    <div style="padding:10px">
+      <p>Pre-select items using static initial data:</p>
+      <select
               kendo-multi-select
               k-data-source="countryNames"
               k-data-text-field="'ProductName'"
               k-data-value-field="'ProductID'"
               k-ng-model="products"
               k-options="selectOptions"
-              k-rebind="selectOptions"
-              k-value-primitive="true"></select>
+              k-value-primitive="false"></select>
 
-           <br/>
-           <p>Pre-select items using data loaded via ajax:</p>
-           <select
+      <br/>
+      <p>Pre-select items using data loaded via ajax:</p>
+      <select
               kendo-multi-select
               k-data-source="productDataSource"
               k-data-text-field="'ProductName'"
               k-data-value-field="'ProductID'"
-              k-ng-model="products2"
               k-options="secondOptions"
-              k-rebind="secondOptions"
-              k-value-primitive="true"></select>
-      </div>
+              k-ng-model="products2"
+              k-rebind="products2"></select>
     </div>
-    <style scoped>
-        .demo-section {
-            width: 400px;
-        }
-        .demo-section p {
-            padding: 5px 0;
-        }
-    </style>
+  </div>
+  <style scoped>
+    .demo-section {
+      width: 400px;
+    }
+    .demo-section p {
+      padding: 5px 0;
+    }
+  </style>
 </div>
-
-<!-- The example uses linq.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/linq.js/2.2.0.2/jquery.linq.min.js"></script>
 
 <script>
   var kms;
@@ -72,14 +72,13 @@ The example below demonstrates how to preselect items in Kendo UI MultiSelect wi
     };
 
     $scope.selectOptions = {
-      autoBind: false,
-      value: [
-        { ProductName: "Not Loaded 1", ProductID: 1 },
-        { ProductName: "Not Loaded 2", ProductID: 11 }
-      ]
+      autoBind: false
     };
 
-    $scope.products = [1, 11];
+    $scope.products = [
+      { ProductName: "Not Loaded 1", ProductID: 1 },
+      { ProductName: "Not Loaded 2", ProductID: 11 }
+    ];
 
     $scope.productDataSource = {
       type: "odata",
@@ -94,7 +93,7 @@ The example below demonstrates how to preselect items in Kendo UI MultiSelect wi
 
     $scope.secondOptions = {
       autoBind: false,
-      valuePrimitive: true
+      valuePrimitive: false
     };
 
     $scope.products2 = [];
@@ -111,10 +110,10 @@ The example below demonstrates how to preselect items in Kendo UI MultiSelect wi
 
         $scope.secondOptions = {
           autoBind: false,
-          valuePrimitive: true,
-          value: values
+            valuePrimitive: false
         };
-        $scope.products2 = valuesToSelect;
+
+        $scope.products2 = values;
       };
 
       $scope.filter = filter;
