@@ -6735,6 +6735,8 @@ A string, DOM element or jQuery object which represents the master table row. A 
 
 Gets or sets the current cell for keyboard navigation.
 
+> The method will also automatically scroll to the newly set current cell, but this feature works with limited capabilities when virtual scrolling is used. In the latter case, `current` will scroll correctly only if the new current cell is adjacent or close to the currently visible portion of the Grid's data table.
+
 #### Parameters
 
 ##### cell `jQuery`
