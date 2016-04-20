@@ -82,7 +82,7 @@ The example below demonstrates the chain jQuery method calls after the widget in
 
 ### Initialize within Iframes
 
-It is theoretically possible to initialize a Kendo UI widget, which is inside an `iframe`, from the context of the parent page. This may work in specific scenarios, but is not officially supported. For example, widgets that render popups may not be able to display them.
+It is theoretically possible to initialize a Kendo UI widget, which is inside an `iframe`, from the context of the parent page, or vice-versa. Such cross-frame widget creation may work in specific scenarios, but is not officially supported or recommended. For example, widgets that render popups may not be able to display them. A possible workaround is to initialize widgets in another document context by calling a JavaScript function, which belongs to the same context, where the widgets will be located.
 
 ## Configuration
 
