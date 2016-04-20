@@ -8,11 +8,7 @@ position: 1
 
 # Telerik UI for JSP Overview
 
-[Telerik UI for JSP (JavaServer Pages)](http://www.telerik.com/jsp-ui) is a complete web development framework for building HTML5 applications. It extends the core Kendo UI client-side framework by enabling Java developers to initialize and work with the widgets completely on the server-side. As a set of helpers that sit on top of Kendo UI tools, Telerik UI for JSP cannot be used without the Kendo UI client-side libraries.
-
-Telerik UI for JSP includes a Model-View-ViewModel (MVVM) framework and lets you write JSP code to generate widgets that easily integrate with your server-side backend. The distribution consists of [Kendo UI Professional](http://www.telerik.com/purchase/kendo-ui) and JSP wrappers, tailored to be used with Java Server Pages in either a standalone JSP app, or as the view engine of an MVC framework, such as Spring MVC or Struts.
-
-In its current version, Telerik UI for JSP contains server wrappers for all Kendo UI components except for its Hybrid UI.
+This article demonstrates how to download and install Telerik UI for JSP and run a sample application.
 
 ## Getting Started
 
