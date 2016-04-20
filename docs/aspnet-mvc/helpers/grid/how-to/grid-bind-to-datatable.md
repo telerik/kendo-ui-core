@@ -2,6 +2,7 @@
 title: Bind the Kendo UI MVC Grid to a DataTable
 Page_title: Bind the Kendo UI MVC Grid to a DataTable
 description: Bind the Kendo UI MVC Grid to a DataTable
+slug: howto_bindgridtodatatable_gridaspnetmvc
 ---
 
 # Bind the Kendo UI MVC Grid to a DataTable
@@ -32,4 +33,3 @@ We can pull it into the model definition as illustrated in
 The aggregates suffer from lack of type information as well. The ToDataSourceResult helper does not have information about the field types and fails to compute the aggregates on its own.
 
 The solution is to provide type information for the requested aggregates in the DataSourceRequest object. See [HomeController.cs:33](https://github.com/telerik/ui-for-aspnet-mvc-examples/blob/master/grid/binding-to-datatable/KendoUIMVC5/Controllers/HomeController.cs#L33)
-

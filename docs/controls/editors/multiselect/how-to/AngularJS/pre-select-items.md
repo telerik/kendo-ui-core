@@ -1,21 +1,21 @@
 ---
-title: Preselect Items on Load
-page_title: Preselect Items on Load | Kendo UI MultiSelect
+title: Pre-select Items on Load
+page_title: Pre-select Items on Load | Kendo UI MultiSelect
 description: "Learn how to pre-select items on load in the Kendo UI MultiSelect widget."
 slug: howto_preselect_itemson_load_angular_multiselect
 ---
 
-# Preselect Items on Load
+# Pre-select Items on Load
 
-The example below demonstrates how to preselect items in Kendo UI MultiSelect without loading the whole source in AngularJS.
-Note that values **should be objects**. The approach will not work with primitive values. More details can be found in those help topics:
-
-- [k-value-primitive attribute](http://docs.telerik.com/kendo-ui/AngularJS/introduction#the-k-value-primitive-attribute)
-- [MVVM value binding](http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value#data-bound-widgets-and-value-binding)
+The example below demonstrates how to pre-select items in the Kendo UI MultiSelect without loading the whole source in AngularJS.
 
 > **Important**
 >
-> This example needs to be run in the Dojo to function correctly.
+> The values should be objects. The approach will not work with primitive values. For more details on this issue, refer to the articles about:
+> * [The `k-value-primitive` attribute]({% slug angularjs_integration_directives %}#the-k-value-primitive-attribute)
+> * [MVVM value binding]({% slug valuebinding_mvvm_kendoui %}#data-bound-widgets-and-value-binding)
+
+To function correctly, run this example in the Dojo.
 
 ###### Example
 
