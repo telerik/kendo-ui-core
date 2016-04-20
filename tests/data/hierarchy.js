@@ -28,7 +28,7 @@ module("HierarchicalDataSource", {
         $.mockjaxSettings.contentType = "text/html";
     },
     teardown: function() {
-        $.mockjaxClear();
+        $.mockjax.clear();
     }
 });
 
@@ -1061,7 +1061,7 @@ module("HierarchicalDataSource : parameterMap", {
         $.mockjaxSettings.responseTime = 0;
     },
     teardown: function() {
-        $.mockjaxClear();
+        $.mockjax.clear();
     }
 });
 

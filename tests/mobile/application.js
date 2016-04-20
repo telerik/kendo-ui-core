@@ -12,7 +12,7 @@
 
         teardown: function() {
             application.destroy();
-            $.mockjaxClear();
+            $.mockjax.clear();
             kendo.history.stop();
             QUnit.fixture.empty();
         }

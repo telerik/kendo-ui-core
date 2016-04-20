@@ -756,7 +756,7 @@ asyncTest("ComboBox fetches only once on open and not data is returned", functio
 
     setTimeout(function() {
         start();
-        $.mockjaxClear();
+        $.mockjax.clear();
 
         equal(called, 1);
     }, 200);

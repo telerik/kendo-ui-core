@@ -77,7 +77,7 @@ test("open() does not initiate second Ajax request", function() {
 
     equal(combobox.dataSource.calls("fetch"), 1);
 
-    $.mockjaxClear();
+    $.mockjax.clear();
 });
 
 
@@ -696,7 +696,7 @@ test("value(value) does not initiate second Ajax request", function() {
 
     equal(combobox.dataSource.calls("fetch"), 1);
 
-    $.mockjaxClear();
+    $.mockjax.clear();
 });
 
 test("value('') clears selection and do not fetch", function() {

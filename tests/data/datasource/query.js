@@ -5,7 +5,7 @@ module("data source query", {
         $.mockjaxSettings.responseTime = 0;
     },
     teardown: function() {
-        $.mockjaxClear()
+        $.mockjax.clear()
     }
 });
 

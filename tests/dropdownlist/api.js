@@ -208,7 +208,7 @@
 
         equal(dropdownlist.dataSource.calls("fetch"), 1);
 
-        $.mockjaxClear();
+        $.mockjax.clear();
     });
 
     test("calls hideBusy on dataSource transport error", 1, function() {
@@ -543,7 +543,7 @@
 
         equal(dropdownlist.dataSource.calls("fetch"), 1);
 
-        $.mockjaxClear();
+        $.mockjax.clear();
     });
 
     test("value method does not fetch if widget is disabled", function() {
@@ -974,7 +974,7 @@
                 }
             },
             dataBound: function() {
-                $.mockjaxClear();
+                $.mockjax.clear();
                 equal(dropdownlist.value(), "item2");
                 start();
             }

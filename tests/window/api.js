@@ -10,7 +10,7 @@
                 $(element).data("kendoWindow").destroy();
             });
             QUnit.fixture.closest("body").find(".k-overlay").remove();
-            $.mockjaxClear();
+            $.mockjax.clear();
             kendo.effects.enable();
         }
     });
@@ -238,7 +238,7 @@
 
         ok(hasRequestedData);
 
-        $.mockjaxClear();
+        $.mockjax.clear();
     });
 
 
@@ -266,7 +266,7 @@
 
         expect(1);
 
-        $.mockjaxClear();
+        $.mockjax.clear();
         $.mockjax(function(settings) {
             equal(settings.url, url);
             return {};
@@ -303,7 +303,7 @@
 
         expect(2);
 
-        $.mockjaxClear();
+        $.mockjax.clear();
         $.mockjax(function(settings) {
             equal(settings.url, url);
             equal(settings.type, contentObject.type);

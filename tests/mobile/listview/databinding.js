@@ -464,7 +464,7 @@
         },
 
         teardown: function() {
-            $.mockjaxClear();
+            $.mockjax.clear();
             kendo.destroy(root);
             kendo.history.stop();
         }
@@ -491,7 +491,7 @@
 
         setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
 
-        $.mockjaxClear();
+        $.mockjax.clear();
         $.mockjax({ url: "foo.json", responseText: ["foo", "bar", "baz"] });
 
         function secondAssert() {
@@ -538,11 +538,11 @@
         setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
         var scroller = application.scroller();
 
-        $.mockjaxClear();
+        $.mockjax.clear();
         $.mockjax({ url: "foo.json", responseText: ["foo", "bar", "baz"] });
 
         function firstAssert() {
-            $.mockjaxClear();
+            $.mockjax.clear();
             scroller.trigger("pull");
             start();
         }
@@ -597,7 +597,7 @@
                         calls ++;
                     } else {
                         equal(item, "foo1");
-                        $.mockjaxClear();
+                        $.mockjax.clear();
                         start();
                     }
                 }
@@ -607,7 +607,7 @@
         setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
         var scroller = application.scroller();
 
-        $.mockjaxClear();
+        $.mockjax.clear();
         $.mockjax({ url: "foo.json", responseText: ["foo1"] });
 
         ds.bind("change", function() {

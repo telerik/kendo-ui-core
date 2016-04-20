@@ -32,7 +32,7 @@
             kendo.destroy(root);
             viewEngine.destroy();
             window.viewEngineSuccess = null;
-            $.mockjaxClear();
+            $.mockjax.clear();
         }
     });
 
@@ -381,7 +381,7 @@
 
         teardown: function() {
             viewEngine.destroy();
-            $.mockjaxClear();
+            $.mockjax.clear();
         }
     });
 
@@ -431,7 +431,7 @@
 
         teardown: function() {
             viewEngine.destroy();
-            $.mockjaxClear();
+            $.mockjax.clear();
         }
     });
 

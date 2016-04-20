@@ -117,7 +117,7 @@
             app.destroy();
             kendo.history.stop();
             location.hash = "";
-            $.mockjaxClear();
+            $.mockjax.clear();
         }
     });
 
