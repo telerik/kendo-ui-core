@@ -54,14 +54,14 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 ###### Example
 
-        public ActionResult Index()
-        {
-            ViewBag.Message = "Welcome to ASP.NET MVC!";
-            var northwind = new NorthwindEntities();
-            //Get the Products entities and add them to the ViewBag.
-            ViewBag.Products = northwind.Products;
-            return View();
-        }
+      public ActionResult Index()
+      {
+          ViewBag.Message = "Welcome to ASP.NET MVC!";
+          var northwind = new NorthwindEntities();
+          //Get the Products entities and add them to the ViewBag.
+          ViewBag.Products = northwind.Products;
+          return View();
+      }
 
 **Step 6** Add a Kendo UI Grid to the `Index` view.
 
@@ -69,24 +69,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 **Index.aspx (ASPX)**
 
-        <%: Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products) //Bind the grid to ViewBag.Products
-                .Name("grid")
-                .Columns(columns =>
-                {
-                    //Create a column bound to the ProductID property.
-                    columns.Bound(product => product.ProductID);
-                    //Create a column bound to the ProductName property.
-                    columns.Bound(product => product.ProductName);
-                    //Create a column bound to the UnitsInStock property.
-                    columns.Bound(product => product.UnitsInStock);
-                })
-                .Pageable() //Enable the paging.
-                .Sortable() //Enable the sorting.
-        %>
-
-**Index.cshtml (Razor)**
-
-        @(Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products) //Bind the grid to ViewBag.Products
+      <%: Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products) //Bind the grid to ViewBag.Products
               .Name("grid")
               .Columns(columns =>
               {
@@ -99,7 +82,24 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
               })
               .Pageable() //Enable the paging.
               .Sortable() //Enable the sorting.
-        )
+      %>
+
+**Index.cshtml (Razor)**
+
+      @(Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products) //Bind the grid to ViewBag.Products
+            .Name("grid")
+            .Columns(columns =>
+            {
+                //Create a column bound to the ProductID property.
+                columns.Bound(product => product.ProductID);
+                //Create a column bound to the ProductName property.
+                columns.Bound(product => product.ProductName);
+                //Create a column bound to the UnitsInStock property.
+                columns.Bound(product => product.UnitsInStock);
+            })
+            .Pageable() //Enable the paging.
+            .Sortable() //Enable the sorting.
+      )
 
 **Step 7** Build and run the application.
 
