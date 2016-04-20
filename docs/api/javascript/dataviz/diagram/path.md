@@ -252,6 +252,12 @@ The X position of the top-left corner of the path.
 
 The Y position of the top-left corner of the path.
 
+## Fields
+
+### drawingElement `kendo.drawing.Path`
+
+The drawing element used to draw the path.
+
 ## Methods
 
 ### data

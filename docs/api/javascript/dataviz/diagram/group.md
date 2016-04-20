@@ -16,6 +16,12 @@ The X position of the top-left corner of the group.
 
 The Y position of the top-left corner of the group.
 
+## Fields
+
+### drawingElement `kendo.drawing.Group`
+
+The drawing element used to draw the group.
+
 ## Methods
 
 ### append

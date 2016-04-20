@@ -48,6 +48,12 @@ The X position of the top-left corner of the text block.
 
 The Y position of the top-left corner of the text block.
 
+## Fields
+
+### drawingElement `kendo.drawing.Text`
+
+The drawing element used to draw the text.
+
 ## Methods
 
 ### content

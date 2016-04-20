@@ -417,3 +417,7 @@ The object containing a subset of options to change. Follows the same structure 
         });
     </script>
 
+### redrawVisual
+
+Redraws the shape visual element and its content
+

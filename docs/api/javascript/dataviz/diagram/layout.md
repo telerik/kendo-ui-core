@@ -49,6 +49,12 @@ Specifies the layout orientation. The supported values are:
 
 Specifies the behavior when the elements size exceeds the rectangle size. If set to true, the elements will be moved to the next "line". If set to false, the layout will be scaled so that the elements fit in the rectangle.
 
+## Fields
+
+### drawingElement `kendo.drawing.Layout`
+
+The drawing element used to draw the layout.
+
 ## Methods
 
 ### append
