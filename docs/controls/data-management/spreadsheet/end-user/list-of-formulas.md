@@ -61,7 +61,7 @@ position: 2
 | COT                       | Returns the cotangent of an angle, specified in radians
 | COTH                      | Returns the hyperbolic cotangent of a number
 | COUNT                     | Counts the number of numbers in a list of arguments
-| COUNTA                    | Counts the number of values ina  list of arguments
+| COUNTA                    | Counts the number of values in a  list of arguments
 | COUNTBLANK                | Counts the number of blank cells in a range   
 | COUNTIF                   | Counts the number of cells in a range that meet a criteria
 | COUNTIFS                  | Counts the number of cells in a range that meet multiple criteria
@@ -116,9 +116,9 @@ position: 2
 | HLOOKUP                   | Looks for a matching value in the first row of a given table, and returns the value of the indicated row
 | HOUR                      | Converts a serial number to an hour
 | HYPERLINK                 | Creates a hyperlink involving an evaluated expression
-| IF                        | Return one of two values, depending on a condition
-| IFERROR                   | Returns a specified value if a forumla evaluates to an error; otherwise, returns the result of the formula
-| INDEX                     | Returns a value or a reference to a value fromwithin a table or range
+| IF                        | Returns one of two values, depending on a condition
+| IFERROR                   | Returns a specified value if a formula evaluates to an error; otherwise, returns the result of the formula
+| INDEX                     | Returns a value or a reference to a value from within a table or range
 | INDIRECT                  | Returns a reference indicated by a text value    
 | INT                       | Rounds a number down to the nearest integer
 | INTERCEPT                 | Returns the intercept of the linear regression line for the given data   
@@ -152,7 +152,7 @@ position: 2
 | MAX                       | Returns the maximum value in a set of numbers
 | MDETERM                   | Returns the determinant of a matrix
 | MEDIAN                    | Returns the median (middle) value in a list of numbers
-| MID                       | Returns a specific number of charaters from a text string, starting at a specified position
+| MID                       | Returns a specific number of characters from a text string, starting at a specified position
 | MIN                       | Returns the minimum value in a set of numbers
 | MINUTE                    | Converts a serial number into a minute
 | MINVERSE                  | Returns the inverse of a matrix
@@ -203,7 +203,7 @@ position: 2
 | RANK.EQ                   | Returns the rank of a number in a list of numbers
 | REPLACE                   | Replaces characters within text
 | REPT                      | Repeats text a specified number of times
-| RIGHT                     | Returns the righmost characters from a text value
+| RIGHT                     | Returns the rightmost characters from a text value
 | ROMAN                     | Converts Arabic numbers to Roman as text
 | ROUNDDOWN                 | Rounds a number down, towards zero, to the number of digits specified by `digits`
 | ROUNDUP                   | Rounds a number up, away from 0 (zero), to the number of digits specified by `digits`
@@ -230,7 +230,7 @@ position: 2
 | SUM                       | Sums (adds) the set of numbers, including all numbers in a range
 | SUMIF                     | Sums the values of cells in a range that meet a criteria
 | SUMIFS                    | Sums the values of cells in a range that meet multiple criteria
-| SUMPRODUCT                | Returns the sum of the products of correspondign array elements
+| SUMPRODUCT                | Returns the sum of the products of corresponding array elements
 | SUMSQ                     | Sums (adds) the set of squares of numbers, including all numbers in a range
 | SUMX2MY2                  | Returns the sum of the difference between the squares of corresponding values in two arrays
 | SUMX2PY2                  | Returns the sum of squares of corresponding values in two arrays
@@ -254,7 +254,7 @@ position: 2
 | TRUE                      | Returns the logical value `True`
 | UNICHAR                   | Returns the character represented by the given numeric value according to the [Unicode Standard](http://unicode.org/standard/standard.html)
 | UNICODE                   | Returns the [Unicode](http://unicode.org/standard/standard.html) code point that corresponds to the first character of a text value
-| UPPER                     | Converts text to uppprecase
+| UPPER                     | Converts text to uppercase
 | VALUE                     | Converts a text argument to a number
 | VAR.P                     | Calculates variance based on the entire population
 | VAR.S                     | Estimates variance based on a sample
