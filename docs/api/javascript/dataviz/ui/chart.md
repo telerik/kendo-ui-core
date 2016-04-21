@@ -33561,7 +33561,7 @@ The X axis value or array of values for multi-axis charts.
 
 ##### e.y `Object`
 
-The X axis value or array of values for multi-axis charts.
+The Y axis value or array of values for multi-axis charts.
 
 #### Example - handle right click on plot area and disable context menu
     <div id="chart"></div>
@@ -33605,6 +33605,68 @@ The X axis value or array of values for multi-axis charts.
     });
     var chart = $("#chart").data("kendoChart");
     chart.bind("plotAreaClick", chart_plotAreaClick);
+    </script>
+
+### plotAreaHover
+
+Fired when the user hovers the plot area.
+
+#### Event Data
+
+##### e.category `Object`
+
+The data point category. Available only for categorical charts (bar, line, area and similar).
+
+##### e.element `Object`
+
+The DOM element of the plot area.
+
+##### e.sender `kendo.ui.Chart`
+
+The widget instance which fired the event.
+
+##### e.originalEvent `Object`
+
+The original browser event that triggered the hover action.
+
+##### e.value `Object`
+
+The data point value. Available only for categorical charts (bar, line, area and similar).
+
+##### e.x `Object`
+
+The X axis value or array of values for multi-axis charts.
+
+##### e.y `Object`
+
+The Y axis value or array of values for multi-axis charts.
+
+#### Example - subscribe to the "plotAreaHover" event during initialization
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2] }
+      ],
+      plotAreaHover: function(e) {
+        console.log(e.value);
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "plotAreaHover" event after initialization
+    <div id="chart"></div>
+    <script>
+    function chart_plotAreaHover(e) {
+      console.log(e.value);
+    }
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2] }
+      ]
+    });
+    var chart = $("#chart").data("kendoChart");
+    chart.bind("plotAreaHover", chart_plotAreaHover);
     </script>
 
 ### render

@@ -9526,7 +9526,41 @@ The X axis value or array of values for multi-axis charts.
 
 ##### e.y `Object`
 
+The Y axis value or array of values for multi-axis charts.
+
+### plotAreaHover
+
+Fired when the user hovers the plot area.
+
+#### Event Data
+
+##### e.category `Object`
+
+The data point category. Available only for categorical charts (bar, line, area and similar).
+
+##### e.element `Object`
+
+The DOM element of the plot area.
+
+##### e.sender `kendo.ui.Chart`
+
+The widget instance which fired the event.
+
+##### e.originalEvent `Object`
+
+The original browser event that triggered the hover action.
+
+##### e.value `Object`
+
+The data point value. Available only for categorical charts (bar, line, area and similar).
+
+##### e.x `Object`
+
 The X axis value or array of values for multi-axis charts.
+
+##### e.y `Object`
+
+The Y axis value or array of values for multi-axis charts.
 
 ### render
 
