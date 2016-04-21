@@ -31,3 +31,13 @@ All Widgets No Longer Have The OnLoad Event. Please Use **$(document).ready()** 
 #### New
 
     Html.Kendo().PanelBar().Name("SamplePanelBar").Events(events => events.Change(“change”))
+
+## See Also
+
+Other articles on migrating from Telerik Extensions:
+
+* [Migrate the AutoComplete]({% slug autocomplete_migrationextensions_aspnetmvc %})
+* [Migrate the Calendar]({% slug calendar_migrationextensions_aspnetmvc %})
+* [Migrate the Chart]({% slug chart_migrationextensions_aspnetmvc %})
+
+To see the articles on migrating kendo UI controls from Telerik Extensions, browse [this section]({% slug combobox_migrationextensions_aspnetmvc %}).

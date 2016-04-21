@@ -2,9 +2,16 @@
 title: DatePicker
 page_title: Server-side API documentation for Kendo UI jQuery DatePicker widget with ASP.NET MVC
 description: How to define min and max dates in the server-side API of Kendo UI DatePicker component. Documentation for the events which are enabled in the client-side API.
+
+title: DatePicker
+page_title: DatePicker | Migrate from Telerik Extensions
+description: "Handle ASP.NET MVC server-side API for the Kendo UI DatePicker widget."
+slug: datepicker_migrationextensions_aspnetmvc
 ---
 
-# Server-Side API
+# DatePicker
+
+Server-Side API
 
 Defining min and max dates:
 
@@ -78,3 +85,13 @@ All widgets no longer have the OnLoad event. Please use **$(document).ready()** 
 
     var datePicker = $("#datepicker").data("kendoDatePicker");
     datePicker.enable(false);
+
+## See Also
+
+Other articles on migrating from Telerik Extensions:
+
+* [Migrate the AutoComplete]({% slug autocomplete_migrationextensions_aspnetmvc %})
+* [Migrate the Calendar]({% slug calendar_migrationextensions_aspnetmvc %})
+* [Migrate the Chart]({% slug chart_migrationextensions_aspnetmvc %})
+
+To see the articles on migrating kendo UI controls from Telerik Extensions, browse [this section]({% slug combobox_migrationextensions_aspnetmvc %}).
