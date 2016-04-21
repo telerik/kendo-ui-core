@@ -860,6 +860,9 @@ The cell formula **without the leading equals** sign, e.g. `A1 * 10`.
 ### sheets.rows.cells.index `Number`
 The zero-based index of the cell. Required to ensure correct positioning.
 
+### sheets.rows.cells.link `String`
+The hyperlink (URL) of the cell.
+
 ### sheets.rows.cells.textAlign `String`
 The text align setting for the cell content.
 
