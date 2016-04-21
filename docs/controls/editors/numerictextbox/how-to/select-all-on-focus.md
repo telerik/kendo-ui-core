@@ -15,6 +15,8 @@ The example below demonstrates how to select the whole input value on focus in t
 <input id="numeric" type="number" value="17" min="0" max="100" step="1" />
 <script type="text/javascript">
 $(function () {
+	$("input").kendoNumericTextBox();
+
     //wire focus of all numerictextbox widgets on the page
     $("input[type=text]").bind("focus", function () {
         var input = $(this);
