@@ -13,7 +13,7 @@ description: Documentation and code examples about server-side and client-side A
     Html.Telerik().NumericTextBox().IncrementStep(1)
 
 #### New
-    
+
     Html.Kendo().NumericTextBox().Step(1)
 
 Min/Max value:
@@ -45,13 +45,13 @@ Not implemented.
 DecimalDigits:
 
 #### Old
-    
+
     Html.Telerik().NumericTextBox().DecimalDigits(3)
 
 #### New
 
     Html.Kendo().NumericTextBox().Decimals(3)
-    
+
 **NumberGroupSize**, **NumberGroupSeparator**, **NegativePatternIndex**, **DecimalSeparator**, **CurrencySymbol**:
 
 Not implemented in Kendo. Can use **Format()** and **Culture()** methods to achieve the same result.
@@ -72,6 +72,16 @@ Disable and enable:
     datePicker.disable();
 
 #### New
-    
+
     var datePicker = $("#datepicker").data("kendoNumericTextBox");
     datePicker.enable(false);
+
+## See Also
+
+Other articles on migrating from Telerik Extensions:
+
+* [Migrate the AutoComplete]({% slug autocomplete_migrationextensions_aspnetmvc %})
+* [Migrate the Calendar]({% slug calendar_migrationextensions_aspnetmvc %})
+* [Migrate the Chart]({% slug chart_migrationextensions_aspnetmvc %})
+
+To see the articles on migrating kendo UI controls from Telerik Extensions, browse [this section]({% slug combobox_migrationextensions_aspnetmvc %}).
