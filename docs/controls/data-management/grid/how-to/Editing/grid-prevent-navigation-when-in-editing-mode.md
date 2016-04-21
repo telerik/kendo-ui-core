@@ -85,7 +85,7 @@ If the Grid is in edit mode and you do not make any changes, page navigation or 
             edit: function() {
               preventAction = true;
             },
-            save: function() {
+            saveChanges: function() {
               preventAction = false;
             },
             remove: function(e) {
