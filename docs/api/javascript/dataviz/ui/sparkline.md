@@ -2189,8 +2189,6 @@ The supported values are:
 * "vml" - renders the widget as VML, if available
 * "canvas" - renders the widget as a Canvas element, if available.
 
-> Using Canvas rendering disables most interactive features.
-
 ### Example - Render as Canvas, if supported
 
     <span id="sparkline"></div>

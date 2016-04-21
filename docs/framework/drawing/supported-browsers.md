@@ -24,10 +24,6 @@ Surfaces are listed in their order of preference. You can request a specific [`t
 
 Generating PDF files is supported in Internet Explorer 9 and later and in all other major desktop browsers.
 
-## Known Limitations
-
-- The Canvas surface does not fire [`events`](/api/dataviz/drawing/surface#events).
-
 ## See Also
 
 Other articles on Kendo UI Drawing API:

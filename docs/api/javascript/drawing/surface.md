@@ -174,8 +174,6 @@ Options for the tooltip.
 ### click
 Triggered when an element has been clicked.
 
-> The Canvas drawing surface does not currently fire events.
-
 #### Example - subscribe to the "click" event during initialization
     <div id="container"></div>
     <script>
@@ -203,8 +201,6 @@ The browser event that triggered the click.
 ### mouseenter
 Triggered when the mouse is moved over an element.
 
-> The Canvas drawing surface does not currently fire events.
-
 #### Example - subscribe to the "mouseenter" event during initialization
     <div id="container"></div>
     <script>
@@ -231,8 +227,6 @@ The browser event that triggered the click.
 
 ### mouseleave
 Triggered when the mouse is leaves an element.
-
-> The Canvas drawing surface does not currently fire events.
 
 #### Example - subscribe to the "mouseleave" event during initialization
     <div id="container"></div>
