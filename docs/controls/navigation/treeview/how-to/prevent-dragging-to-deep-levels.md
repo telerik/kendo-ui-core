@@ -2,7 +2,7 @@
 title: Prevent Dragging Nodes to Deep Levels
 page_title: Prevent Dragging Nodes to Deep Levels | Kendo UI TreeView
 description: "Learn how to handle the Kendo UI TreeView drag event to prevent nodes from being dragged to a deep level of the tree."
-slug: howto_preventdragging_nodestorootlevel_treeview
+slug: howto_preventdragging_nodestodeeplevels_treeview
 ---
 
 # Prevent Dragging Nodes to Deep Levels
