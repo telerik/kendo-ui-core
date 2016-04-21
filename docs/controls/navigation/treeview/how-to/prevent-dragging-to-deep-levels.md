@@ -36,10 +36,10 @@ The example below demonstrates how to handle the Kendo UI TreeView `drag` event 
       if (e.statusClass == "add") {
         var destination = this.dataItem(e.dropTarget);
 
-        // if the (zero-based) destination level is 3,
-        // allowing the operation will result in a 5-level tree
+        // If the (zero-based) destination level is 3,
+        // allowing the operation will result in a 5-level tree.
         if (destination.level() == 3) {
-          // deny the operation
+          // Deny the operation
           e.setStatusClass("k-denied");
         }
       }
@@ -73,4 +73,3 @@ Articles and other how-to examples on Kendo UI TreeView:
 * [How to Show Node Context Menu]({% slug howto_shiwnodecontextmenu_treeview %})
 * [How to Sort Child Nodes]({% slug howto_sortchildnodes_treeview %})
 * [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})
-

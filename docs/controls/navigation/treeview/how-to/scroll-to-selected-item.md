@@ -52,6 +52,7 @@ Articles and other how-to examples on Kendo UI TreeView:
 * [How to Filter Out Search Results]({% slug howto_filetroutserachresults_treeview %})
 * [How to Hide Checkboxes for Root Level]({% slug howto_hidecheckboxesforrootlevel_treeview %})
 * [How to Persist Expanded State]({% slug howto_persistexpandedstate_treeview %})
+* [How to Prevent Dragging Nodes to Deep Levels]({% slug howto_preventdragging_nodestodeeplevels_treeview %})
 * [How to Prevent Dragging Nodes to Root Level]({% slug howto_preventdragging_nodestorootlevel_treeview %})
 * [How to Render Multiple TreeViews Using HTML Source Binding]({% slug howto_rendermultipleusing_htmlsourcebinding_mvvm_treeview %})
 * [How to Show Lines between Nodes]({% slug howto_showlinesbetweennodes_treeview %})
