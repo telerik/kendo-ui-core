@@ -21,7 +21,7 @@ Most [Kendo UI widgets]({% slug bundle_supportfor_kendoui_components %}) have no
 | :---------------- | :---------------------------- | :---------------
 | Edge              | 20 or later ([officially supported versions by Microsoft only](https://en.wikipedia.org/wiki/Microsoft_Edge#Release_history)) |
 | Internet Explorer | 8 or later                    | Kendo UI [Spreadsheet](http://demos.telerik.com/kendo-ui/spreadsheet/index) and [Responsive panel](http://demos.telerik.com/kendo-ui/responsive-panel/index) require IE9 or later
-| Chrome            | 21 or later                   |
+| Chrome            | Current and previous          |
 | Firefox           | [Current and ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history) ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/))|
 | Opera             | 15 or later                   |
 | OS X Safari       | [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
@@ -33,7 +33,7 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 | Browser           | Supported Versions            |
 | :---------------- | :---------------------------- |
 | Internet Explorer | 10 or later                   |
-| Chrome            | 21 or later                   |
+| Chrome            | Current and previous          |
 | Firefox           | Not supported                 |
 | OS X Safari       | [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
 
@@ -47,7 +47,7 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 | :---------------- | :---------------------------- |
 | Edge              | 20 or later ([officially supported versions by Microsoft only](https://en.wikipedia.org/wiki/Microsoft_Edge#Release_history)) |
 | Internet Explorer | 9 or later                    |
-| Chrome            | 21 or later                   |
+| Chrome            | Current and previous          |
 | Firefox           | [Current and ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history) ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/))|
 | Opera             | 15 or later                   |
 | OS X Safari       | [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
@@ -63,7 +63,7 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 |                   |                               | Gradients in pie and donut charts are not supported |
 | Internet Explorer | 10                            | Dashed lines in canvas are not supported, which affects the image export as well |
 |                   |                               | Android 2.x, therefore, uses non-interactive canvas output |
-|Android            | 2.3                           | The Canvas rendering mode is only supported
+| Android           | 2.3                           | The Canvas rendering mode is only supported
 
 ### Important Notes
 
