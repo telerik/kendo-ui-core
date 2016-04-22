@@ -222,7 +222,7 @@ Not supported
 
 **Previous**
 
-    Not supported (when Ajax binding always autoBind: false)
+Not supported. During Ajax binding, the setting is always `autoBind: false`.
 
 **Current**
 
