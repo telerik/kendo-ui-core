@@ -7,6 +7,8 @@ slug: datepicker_migrationextensions_aspnetmvc
 
 # DatePicker Migration
 
+This article demonstrates the ASP.NET MVC server-side API for the Kendo UI DatePicker widget.
+
 ## Server-Side API
 
 ### Min Dates
