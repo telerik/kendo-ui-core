@@ -32,7 +32,7 @@ For a complete overview of the methods and configuration options MaskedTextBox a
 
 When a MaskedTextBox is initialized, it will decorate the `<input>` element with a `k-textbox` CSS class.
 
-> **Important**  
+> **Important**
 >
 > The default mask is an empty string, which allows any input. If you need to restrict user input, define a mask value.
 
@@ -62,7 +62,7 @@ The following mask rules are available and predefined:
 - `A` - Alphanumeric. Accepts letters and digits only.
 - `a` - Alphanumeric or space. Accepts letters, digits and space only.
 
-> **Important**  
+> **Important**
 >
 > Any mask rule can be escaped using the `\` character. An escaped rule is turned into a literal.
 
@@ -74,7 +74,7 @@ The following mask literals are globalized based on the current culture:
 - `,` - Thousands placeholder. The display character will be set according to current culture used by Kendo UI.
 - `$` - Currency symbol. The display character will be set according to current culture used by Kendo UI.
 
-> **Importnat**  
+> **Importnat**
 >
 > Any of the aforementioned literals can be escaped using the `\` character.
 
@@ -100,9 +100,22 @@ The MaskedTextBox widget provides the option to define custom mask rules during 
       });
     </script>
 
-> **Important**  
+> **Important**
 >
 > Any of the predefined rules can be overridden through the [`rules`](/api/web/maskedtextbox#configuration-rules) option.
+
+## Known Limitations
+
+### Mobile editing
+
+The MaskedTextBox widget listens to input events, like keydown, keypress, to restrict the typed value. In some
+mobile browsers (mostly built-in browsers of Android/Windows Mobile OS) those events **are not triggered at all**, which
+prevents the normal behavior of the MaskedTextBox, as they are fundamental for the typing restriction.
+
+Unfortunately, in those cases we could not do much, because there is no other reliable way to detect typing in mobile browsers
+(virtual keyboard does not rise any other specific events).
+
+> Our tests show that MaskedTextBox **works** in latest iOS OS.
 
 ## See Also
 
