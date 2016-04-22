@@ -11,80 +11,78 @@ The example below demonstrates how to display a tooltip for `categoryAxis` label
 
 ###### Example
 ```html
+<div id="chart"></div>
+<div class="customTooltip">CustomTooltip</div>
+<script>
+  $("#chart").kendoChart({
+    series: [{
+      data: [{
+        value: 1
+      }, {
+        value: 2
+      }, {
+        value: 3
+      }]
+    }],
+    categoryAxis: {
+      categories: ["Cat 1", "Cat 2", "Cat 3"],
+      labels: {
+        visual: function (e) {
+          // The actual label
+          var labelVisual = e.createVisual();
+          var bbox = labelVisual.bbox();
 
-	<div id="chart"></div>
-    <div class="customTooltip">CustomTooltip</div>
-    <script>
-      $("#chart").kendoChart({
-        series: [{
-          data: [{
-            value: 1
-          }, {
-            value: 2
-          }, {
-            value: 3
-          }]
-        }],
-        categoryAxis: {
-          categories: ["Cat 1", "Cat 2", "Cat 3"],
-          labels: {
-            visual: function (e) {
-              // The actual label
-              var labelVisual = e.createVisual();
-              var bbox = labelVisual.bbox();
-
-              // An invisible rectangle to serve as a hot zone
-              var sink = kendo.drawing.Path.fromRect(bbox, {
-                stroke: null,
-                fill: {
-                  color: "#fff",
-                  opacity: 0
-                }
-              });
-
-              // Maintain reference for event handlers              
-              sink.tooltipText = e.text;
-
-              var visual = new kendo.drawing.Group();
-              visual.append(labelVisual, sink);    
-              return visual;
-            }
-          }
-        },
-
-        render: function(e) {
-          var ttip = $(".customTooltip");
-          e.sender.surface.bind("mouseenter", function(e) {
-            if (e.element.tooltipText) {
-              var pos = e.element.bbox().getOrigin();
-	      pos.y = pos.y + 30;
-              ttip.html(e.element.tooltipText).show();
-              ttip[0].style.top = pos.y + 'px';
-	      ttip[0].style.left = pos.x + 'px';
+          // An invisible rectangle to serve as a hot zone
+          var sink = kendo.drawing.Path.fromRect(bbox, {
+            stroke: null,
+            fill: {
+              color: "#fff",
+              opacity: 0
             }
           });
-          e.sender.surface.bind("mouseleave", function(e) {
-            if (e.element.tooltipText) {
-              ttip.hide();
-            }
-          });
+
+          // Maintain reference for event handlers
+          sink.tooltipText = e.text;
+
+          var visual = new kendo.drawing.Group();
+          visual.append(labelVisual, sink);
+          return visual;
+        }
+      }
+    },
+
+    render: function(e) {
+      var tooltip = $(".customTooltip");
+      e.sender.surface.bind("mouseenter", function(e) {
+        if (e.element.tooltipText) {
+          var pos = e.element.bbox().getOrigin();
+          tooltip.html(e.element.tooltipText)
+                 .css({ left: pos.x, top: pos.y + 30 })
+                 .show();
         }
       });
-    </script>
-	<style>
-      .customTooltip {
-      	position:absolute;
-        display: none;
-        color: #fff;
-        font-size: 20px Arial, sans-serif;
-        line-height: 20px;
-        text-align: center;
-        vertical-align: middle;
-        background: green;
-        width: 200px;
-        height: 20px;
-      }
-    </style>
+      e.sender.surface.bind("mouseleave", function(e) {
+        if (e.element.tooltipText) {
+          tooltip.hide();
+        }
+      });
+    }
+  });
+</script>
+<style>
+  .customTooltip {
+    position:absolute;
+    display: none;
+    color: #fff;
+    font-size: 20px Arial, sans-serif;
+    line-height: 20px;
+    text-align: center;
+    vertical-align: middle;
+    background: green;
+    width: 200px;
+    height: 20px;
+  }
+</style>
 ```
 
 ## See Also
