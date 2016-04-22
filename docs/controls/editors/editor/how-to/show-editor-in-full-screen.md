@@ -79,6 +79,7 @@ Other articles on Kendo UI Editor:
 
 * [Editor JavaScript API Reference](/api/javascript/ui/editor)
 * [How to Add Max-Length Validation]({% slug howto_add_max_length_validation_editor %})
+* [How to Create Markdown Editor]({% slug howto_create_markdown_editor %})
 * [How to Get Reference to Child Widgets]({% slug howto_get_referenceto_child_widgets_editor %})
 * [How to Use Inline Editor inside Windows]({% slug howto_use_inline_editor_inside_windows_editor %})
 * [How to Insert HTML Content via Custom Popup Tools]({% slug howto_insert_html_content_custom_popup_tool_editor %})
