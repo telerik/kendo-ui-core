@@ -5,46 +5,51 @@ description: "Handle ASP.NET MVC server-side API for the Kendo UI Calendar widge
 slug: calendar_migrationextensions_aspnetmvc
 ---
 
-## Calendar Migration
+# Calendar Migration
 
 This article demonstrates the ASP.NET MVC server-side API for the Kendo UI Calendar widget.
 
 ## Server-Side API
 
-<table width="100%">
-  <col width="50%">
-  <col width="50%">
-    <tr>
-      <th>Options</th>
-      <th>Previous</th>
-      <th>New</th>
-    </tr>
+### Events
 
-    <tr>
-      <td><strong>Events</strong></td>
-      <td><code>Html.Telerik().Calendar().Name("Calendar").ClientEvents( events => events.OnChange(“change”))</code></td>
-      <td><code>Html.Kendo().Calendar().Name("Calendar").Events( events => events.Change(“change”))</code></td>
-    </tr>
+**Previous**
 
-    <tr>
-      <td><strong>Min Date</strong></td>
-      <td><code>Html.Telerik().Calendar().Name("Calendar").MinDate(DateTime.Now)</code></td>
-      <td><code>Html.Telerik().Calendar().Name("Calendar").MaxDate(DateTime.Now)</code></td>
-    </tr>
+    Html.Telerik().Calendar().Name("Calendar").ClientEvents( events => events.OnChange(“change”))
 
-    <tr>
-      <td><strong>Max Date</strong></td>
-      <td><code>Html.Kendo().Calendar().Name("Calendar").Min(DateTime.Now)</code></td>
-      <td><code>Html.Kendo().Calendar().Name("Calendar").Max(DateTime.Now)</code></td>
-    </tr>
+**Current**
 
-    <tr>
-      <td><strong>Footer</strong></td>
-      <td><code>Html.Telerik().Calendar().Name("Calendar").TodayButton(“d”)</code></td>
-      <td><code>Html.Kendo().Calendar().Name("Calendar").Footer(“#= kendo.toString(data, ‘MM/dd/yyyy’)”)</code></td>
-    </tr>
+    Html.Kendo().Calendar().Name("Calendar").Events( events => events.Change(“change”))
 
-</table>
+### Min Date
+
+**Previous**
+
+    Html.Telerik().Calendar().Name("Calendar").MinDate(DateTime.Now)
+
+**Current**
+
+    Html.Telerik().Calendar().Name("Calendar").MaxDate(DateTime.Now)
+
+### Max Date
+
+**Previous**
+
+    Html.Kendo().Calendar().Name("Calendar").Min(DateTime.Now)
+
+**Current**
+
+    Html.Kendo().Calendar().Name("Calendar").Max(DateTime.Now)
+
+### Footer
+
+**Previous**
+
+    Html.Telerik().Calendar().Name("Calendar").TodayButton(“d”)</code></td>
+
+**Current**
+
+    Html.Kendo().Calendar().Name("Calendar").Footer(“#= kendo.toString(data, ‘MM/dd/yyyy’)”)
 
 ## See Also
 
