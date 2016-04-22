@@ -1,22 +1,27 @@
 ---
 title: DropDownList
-page_title: Server-side API documentation for Kendo UI jQuery ComboBox widget
-description: Notes about server-side API for Kendo UI ComboBox component.
+page_title: DropDownList | Migrate from Telerik Extensions
+description: "Handle ASP.NET MVC server-side API for the Kendo UI DropDownList widget."
+slug: dropdownlist_migrationextensions_aspnetmv
 ---
 
-# Server-Side API
+# Calendar Migration
 
-All changes described in the [ComboBox](combobox) are applicable to the AutoComplete. AutoComplete can be bound to any collection, just define the DataTextField.
+This article demonstrates the ASP.NET MVC server-side API for the Kendo UI DropDownList widget.
+
+## Server-Side API
+
+To bind the DropDownList to any collection, define the `DataTextField`. Note that all the changes described in the [article on migrating the ComboBox]({%slug combobox_migrationextensions_aspnetmvc %}) are applicable to the DropDownList.
 
 ## Other Options
 
 ### OptionLabel
 
-#### Old
+**Previous**
 
     Html.Telerik().DropDownList().Name(“DropDownList”).Placeholder(“Select…”)
 
-#### New
+**Current**
 
     Html.Kendo().DropDownList().Name(“DropDownList”).OptionLabel(“Select…”)
 

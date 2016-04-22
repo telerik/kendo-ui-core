@@ -11,7 +11,7 @@ This article demonstrates the ASP.NET MVC server-side API for the Kendo UI AutoC
 
 ## Server-Side API
 
-To bind the AutoComplete to any collection, define the `DataTextField`. Note that all the changes described in the [article on migrating the ComboBox](combobox) are applicable to the AutoComplete.
+To bind the AutoComplete to any collection, define the `DataTextField`. Note that all the changes described in the [article on migrating the ComboBox]({% slug combobox_migrationextensions_aspnetmvc %}) are applicable to the AutoComplete.
 
 ### Separator
 
