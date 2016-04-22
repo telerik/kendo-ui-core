@@ -11,15 +11,17 @@ This article demonstrates the ASP.NET MVC server-side API for the Kendo UI AutoC
 
 ## Server-Side API
 
-### Overview
-
 To bind the AutoComplete to any collection, define the `DataTextField`. Note that all the changes described in the [article on migrating the ComboBox](combobox) are applicable to the AutoComplete.
 
 ### Separator
 
-|Previous |New		 	|
-|:--- 		|:---			|
-|`Html.Telerik().AutoComplete().Name(“AutoComplete”).Multiple(m => m.Separator(“, “))`|`Html.Kendo().AutoComplete().Name(“AutoComplete”).Separator(“, “)`
+**Previous**
+
+    Html.Telerik().AutoComplete().Name(“AutoComplete”).Multiple(m => m.Separator(“, “))
+
+**Current**
+
+    Html.Kendo().AutoComplete().Name(“AutoComplete”).Separator(“, “)
 
 ## See Also
 
