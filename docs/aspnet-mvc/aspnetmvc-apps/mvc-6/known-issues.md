@@ -30,45 +30,48 @@ This articles summarizes all known issues related to Telerik UI for ASP.NET MVC,
 
 ###### Example
 
-        @(Html.Kendo().NumericTextBox()
-              .Name("age")
-              /*other configuration..*/
-              .Deferred()
-        )
-- Tag helpers might need to be disabled on pages, where widgets that can render custom content are used, e.g. Button, Editor, Splitter, Tooltip, Window. Some tag helpers such as `href` are processed automatically and will result in invalid HTML.
+    @(Html.Kendo().NumericTextBox()
+          .Name("age")
+          /*other configuration..*/
+          .Deferred()
+    )
+
+- Tag helpers might need to be disabled on pages, where widgets that can render custom content are used&mdash;for example, the Button, Editor, Splitter, Tooltip, or Window. Some tag helpers, such as the `href` one, are processed automatically and result in invalid HTML.
 
 ###### Example
 
-        @removeTagHelper "*, Microsoft.AspNet.Mvc.Razor"
-        @removeTagHelper "*, Microsoft.AspNetCore.Mvc.Razor"
+    @removeTagHelper "*, Microsoft.AspNet.Mvc.Razor"
+    @removeTagHelper "*, Microsoft.AspNetCore.Mvc.Razor"
 
 ### Grid
 
-- Server-side rendering is not supported. The Toolbar template, Column Header template, and Column Template are no longer rendered on the server.
+Server-side rendering is not supported. The Toolbar template, Column Header template, and Column Template are no longer rendered on the server.
 
 ### Chart
 
-- `ChartAreaStyle` enum is now by `ChartSeriesLineStyle`.
-- `ChartAreaMissingValues` enum is now by `ChartSeriesMissingValues`.
-- `ChartBarGradient` enum is now by `ChartSeriesGradient`.
-- `ChartBarLabelsPosition` enum is now by `ChartSeriesLabelsPosition`.
-- `ChartFunnelLabelsAlign` enum is now by `ChartSeriesLabelsAlign`.
-- `ChartFunnelLabelsPosition` enum is now by `ChartSeriesLabelsPosition`.
-- `ChartLineMissingValues` enum is now by `ChartSeriesMissingValues`.
-- `ChartLineStyle` enum is now by `ChartSeriesStyle`.
-- `ChartPieLabelsAlign` enum is now by `ChartSeriesLabelsAlign`.
-- `ChartPieLabelsPosition` enum is now by `ChartSeriesLabelsPosition`.
-- `ChartPointLabelsPosition` enum is now by `ChartSeriesLabelsPosition`.
-- `ChartPolarAreaStyle` enum is now by `ChartSeriesLineStyle`.
-- `ChartPolarLineStyle` enum is now by `ChartSeriesLineStyle`.
-- `ChartRadarAreaStyle` enum is now by `ChartSeriesLineStyle`.
-- `ChartRadarLineStyle` enum is now by `ChartSeriesLineStyle`.
-- `ChartScatterLineMissingValues` enum is now by `ChartSeriesMissingValues`.
-- `ChartScatterLineStyle` enum is now by `ChartSeriesStyle`.
+| Enum                      | Now by                  |
+|:---                       |:---                     |
+| `ChartAreaStyle`          | `ChartSeriesLineStyle`  |
+| `ChartAreaMissingValues`  | `ChartSeriesMissingValues` |
+| `ChartBarGradient`        | `ChartSeriesGradient`   |
+| `ChartBarLabelsPosition`  | `ChartSeriesLabelsPosition`|
+| `ChartFunnelLabelsAlign`  | `ChartSeriesLabelsAlign`|
+| `ChartFunnelLabelsPosition`| `ChartSeriesLabelsPosition`|
+| `ChartLineMissingValues`  | `ChartSeriesMissingValues`  |
+| `ChartLineStyle`          | `ChartSeriesStyle`      |
+| `ChartPieLabelsAlign`     | `ChartSeriesLabelsAlign`|
+| `ChartPieLabelsPosition`  | `ChartSeriesLabelsPosition`  |
+| `ChartPointLabelsPosition`| `ChartSeriesLabelsPosition`  |
+| `ChartPolarAreaStyle`     | `ChartSeriesLineStyle`  |
+| `ChartPolarLineStyle`     | `ChartSeriesLineStyle`  |
+| `ChartRadarAreaStyle`     | `ChartSeriesLineStyle`  |
+| `ChartRadarLineStyle`     | `ChartSeriesLineStyle`  |
+| `ChartScatterLineMissingValues` | `ChartSeriesMissingValues`|
+| `ChartScatterLineStyle`   | `ChartSeriesStyle`      |
 
 ### MultiSelect
 
-- `TagMode` enum is now by `MultiSelectTagMode`.
+The `TagMode` enum is now by `MultiSelectTagMode`.
 
 ## See Also
 
