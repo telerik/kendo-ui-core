@@ -51,7 +51,9 @@ The example below demonstrates how to create a Tooltip for multiple targets with
 
 ### Show over Disabled Elements
 
-The Kendo UI Tooltip relies on the `mouseenter` and `mouseleave` events to work. Disabled elements do not fire events by design. If working with disabled elements is a strict requirement, a possible workaround is to initialize the Tooltip widget over a parent of the disabled element. Note that there must be some empty space between the disabled element and its parent's boundaries, so that the `mouseenter` event is fired.
+The Kendo UI Tooltip relies on the `mouseenter` and `mouseleave` events to work. By design, disabled elements do not fire events. If working with disabled elements is a strict requirement, a possible workaround is to initialize the Tooltip widget over a parent of the disabled element. Note that there must be some empty space between the disabled element and the boundaries of its parent, so that the `mouseenter` event is fired.
+
+###### Example
 
 ```html
 <style>
