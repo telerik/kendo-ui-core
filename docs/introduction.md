@@ -32,7 +32,11 @@ Kendo UI Professional includes widgets for enterprise-grade line-of-business app
 
 ### Telerik Kendo UI Complete
 
-Kendo UI Complete incorporates all the products in the Kendo UI family - Kendo UI Professional, [UI for ASP.NET MVC](/aspnet-mvc/introduction), [UI for JSP](/jsp/introduction) and [UI for PHP](http://docs.telerik.com/kendo-ui/php/introduction)
+Kendo UI Complete incorporates all the products in the Kendo UI family - Kendo UI Professional, [UI for ASP.NET MVC](/aspnet-mvc/introduction), [UI for JSP](/jsp/introduction) and [UI for PHP](http://docs.telerik.com/kendo-ui/php/introduction).
+
+In addition, you receive a license for the
+[RadSpreadProcessing](http://www.telerik.com/products/wpf/spreadsheet-processing.aspx)
+library for .NET.
 
 #### UI for ASP.NET MVC
 
@@ -64,6 +68,17 @@ HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to co
 * [Evaluate UI for PHP](http://www.telerik.com/download/php-ui)
 * [Get a License](http://www.telerik.com/purchase/php-ui)
 * [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/php-ui)
+
+#### RadSpreadProcessing
+
+[RadSpreadProcessing](http://www.telerik.com/products/wpf/spreadsheet-processing.aspx)
+is a .NET library that allows you to read, create and write Microsoft Excel (.XLSX) documents.
+
+It complements the Spreadsheet component and allows you to process the data on the server, but can be used on its own as well.
+
+* [Server-Side Processing with the UI for ASP.NET MVC Spreadsheet]({% slug spreadsheet_processing_spreadsheet_mvc %})
+* [Server-Side Processing with the Kendo UI Spreadsheet]({% slug serverside_processing_spreadsheet_widget %})
+* [RadSpreadProcessing Overview](http://docs.telerik.com/devtools/wpf/controls/radspreadprocessing/overview)
 
 ## Other Kendo UI Incorporating Products
 
