@@ -65,7 +65,6 @@ Some rendering modes impose limitations on the available features. Below is a sh
 
 ### Canvas
 
-* Interactive features are not available with the exception of shared Tooltips.
 * Dashed lines are not supported in the Internet Explorer.
 
 ## See Also
