@@ -77,6 +77,5 @@ Other articles on styling, appearance, and rendering of Kendo UI widgets:
 * [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})
 * [How to Change Themes on the Client]({% slug howto_changethemes_ontheclient_styleskendoui %})
 * [ThemeBuilder Overview]({% slug themebuilder_overview_kendouistyling %})
-* [Tips and Tricks]({% slug tipsandtricks_kendouistyling %})
 * [Troubleshooting]({% slug commonissues_troubleshooting_kendouistyling %})
 * [Themes and Appearance of the Kendo UI Hybrid Widgets](/controls/hybrid/styling)
