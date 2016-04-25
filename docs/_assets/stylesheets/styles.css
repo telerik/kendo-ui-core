@@ -723,28 +723,39 @@ footer p {
 }
 
 .k-tabstrip {
+    border: 1px solid #ccc;
+}
+
+.k-tabstrip .k-link {
+    padding: 0;
+}
+
+.k-tabstrip .k-content,
+.k-tabstrip .k-loading {
     border: 0;
+}
+
+.k-tabstrip .k-tabstrip-items {
+    padding: 0;
+    border-bottom: 1px solid;
 }
 
 .k-tabstrip .k-item {
-    border-width: 0 1px 0;
-    border-color: #acacac;
+    border-width: 0 1px 0 0;
+    border-style: solid;
+    font-weight: bold;
+    font-size: 14px;
+    padding: .72em 1.5em;
+    cursor: pointer;
+    transition-property: background-color, color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
 }
 
-.k-tabstrip .k-content {
-    border-color: #acacac;
-    background: #F1F5F9;
-}
 .k-tabstrip .k-content pre {
     border: 0;
-}
-
-.k-tabstrip .k-tabstrip-items .k-state-active {
-    border-bottom-width: 0;
-    margin-bottom: -1px;
-    padding-bottom: -1px;
-    z-index: 1;
-    background: #F1F5F9;
+    padding: 0;
+    margin: 1em 0;
 }
 
 @media (max-width: 1200px) {
