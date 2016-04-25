@@ -344,7 +344,6 @@
     text-decoration: none;
     background-color: #e8ebef;
     color: #000;
-    
 }
 
 .action-buttons .active-button,
@@ -384,35 +383,31 @@
     box-sizing: border-box;
 }
 
-.k-tabstrip {
-    border: 1px solid #ebecee;
-}
-
-.k-tabstrip .k-item,
-.k-tabstrip .k-link,
-.k-tabstrip .k-content,
-.k-tabstrip .k-content pre,
-.k-tabstrip .k-loading {
-    border: 0;
+.k-tabstrip .k-tabstrip-items,
+.k-tabstrip .k-item {
+    border-color: #e8ebef;
 }
 
 .k-tabstrip .k-tabstrip-items {
-    background: #f5f7f8;
+    background: #fefefe;
 }
 
-.k-tabstrip .k-tabstrip-items .k-state-active .k-link {
-    font-weight: bold;
+.k-tabstrip .k-item {
+    color: #333;
+}
+
+.k-tabstrip .k-item:hover {
+    background-color: #e8ebef;
     color: #000;
 }
 
-.k-tabstrip .k-content {
-    background: #fff;
+.k-tabstrip .k-item.k-state-active,
+.k-tabstrip .k-item.k-state-active:hover {
+    background-color: #e8ebef;
+    color: #333;
 }
 
-.k-tabstrip .prettyprint {
-    padding: 0;
-}
-
+.k-tabstrip,
 .prettyprint {
     border-color: #e8ebef;
     background-color: #f9f9f9;
