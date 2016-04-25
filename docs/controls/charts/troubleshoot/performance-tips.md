@@ -1,21 +1,21 @@
 ---
-title: Tips and Tricks
-page_title: Tips and Tricks | Kendo UI Styles and Appearance
+title: Performance Issues
+page_title: Performance Issues | Kendo UI Charts
 description: "Learn the tips and tricks for improving the performance of the Kendo UI widgets rendering data visualization."
 previous_url: /dataviz/performance-tips
 slug: tipsandtricks_kendouistyling
-position: 5
+position: 2
 ---
 
-# Tips and Tricks
+# Performance Issues
 
-Below are some tips and tricks for improving the behavior of [Kendo UI Gauges, Charts, Barcodes, Diagrams, and Maps](http://demos.telerik.com/kendo-ui/).
+This page provides tips and tricks on how to handle and improve the performance of the [Kendo UI Gauges, Charts, Barcodes, Diagrams, and Maps](http://demos.telerik.com/kendo-ui/).
 
-## Performance Tips
+## Tips and Tricks
 
 ### Use Canvas Rendering
 
-Switching to Canvas rendering improves the performance of the widgets, especially on mobile devices. It facilitates the visualization of data by its fast update of graphs and that do not need animations and interactivity.
+Switching to Canvas rendering improves the performance of the widgets, especially on mobile devices. It facilitates the visualization of data by its fast update of graphs that do not need animations and interactivity.
 
 The example below demonstrates how to configure Canvas rendering.
 
@@ -40,16 +40,13 @@ For more information on configuration settings, refer to the [`renderAs` API art
 
 ### Use Inline Binding
 
-When using a DataSource binding, all data items will be wrapped in an
-[Observable](/api/javascript/data/observableobject) instances to track changes.
+When using a DataSource binding, all data items are be wrapped in [`Observable`](/api/javascript/data/observableobject) instances to track changes.
 
-This is generally unnecessary for the Chart. It really starts to become an issue
-if you have a large number of data points, say 5000 and more.
+This is generally unnecessary for the Chart. It might become an issue if you have a large number of data points&mdash;5,000 and more.
 
-In this case you can use [Inline Binding]({% slug databinding_charts_widget %}),
-as illustrated below:
+In this case you can use [inline binding]({% slug databinding_charts_widget %}), as demonstrated in the example below.
 
-###### Example - Inline Binding
+###### Example
 
 ```html
     <div id="chart"></div>
@@ -71,7 +68,9 @@ as illustrated below:
     </script>
 ```
 
-###### Example - Inline Binding with objects
+The example below demonstrates how to do inline binding with objects.
+
+###### Example
 
 ```html
     <div id="chart"></div>
@@ -105,7 +104,7 @@ as illustrated below:
 
 ### Turn Off Animated Transitions
 
-Animated transitions can slow the browser down, especially if the page displays many active charts.
+Animated transitions might slow the browser down, especially if the page displays many active charts.
 
 The example below demonstrates how to implement this approach.
 
@@ -161,7 +160,7 @@ The example below demonstrates how to turn off the initial animation only.
 
 ### Disable Gradients
 
-Using solid fills instead of gradients improves performance noticeably.
+Using solid fills instead of gradients noticeably improves performance.
 
 The example below demonstrates how to disable gradients.
 
@@ -192,10 +191,28 @@ The example below demonstrates how to disable gradients.
 Other articles on styling, appearance, and rendering of Kendo UI widgets:
 
 * [Themes and Appearance of the Kendo UI Widgets]({% slug themesandappearnce_kendoui_desktopwidgets %})
-* [Responsive Web Design]({% slug responsivewebdesign_integration_kendoui %})
-* [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})
-* [How to Change Themes on the Client]({% slug howto_changethemes_ontheclient_styleskendoui %})
-* [ThemeBuilder Overview]({% slug themebuilder_overview_kendouistyling %})
 * [Rendering Modes for Data Visualization]({% slug renderingmodesfor_datavisualization_kendouistyling %})
-* [Troubleshooting]({% slug commonissues_troubleshooting_kendouistyling %})
-* [Themes and Appearance of the Kendo UI Hybrid Widgets](/controls/hybrid/styling)
+
+Other articles on troubleshooting:
+
+* [Common Issues in Kendo UI Charts]({% slug troubleshooting_chart_widget %})
+* [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
+* [Kendo UI JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
+* [Kendo UI Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
+* [Kendo UI Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
+* [Common Issues in Kendo UI Excel Export]({% slug troubleshooting_excel_export_kendoui %})
+* [Common Issues in Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %})
+* [Common Issues in Kendo UI Diagram]({% slug troubleshooting_diagram_widget %})
+* [Common Issues in Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %})
+* [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})
+* [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})
+* [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
+* [Common Issues in Kendo UI Upload]({% slug troubleshooting_upload_widget %})
+* [Common Issues Related to Styling, Appearance, and Rendering]({% slug commonissues_troubleshooting_kendouistyling %})
+* [Common Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_aspnetmvc %})
+* [Validation Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_validation_aspnetmvc %})
+* [Scaffolding Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_scaffolding_aspnetmvc %})
+* [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_gridhelper_aspnetmvc %})
+* [Excel Export with the Grid ASP.NET MVC HtmlHelper Extension]({% slug excelissues_gridhelper_aspnetmvc %})
+* [Common Issues in the Spreadsheet ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_spreadsheethelper_aspnetmvc %})
+* [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_uploadhelper_aspnetmvc %})
