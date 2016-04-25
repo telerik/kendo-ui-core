@@ -49,6 +49,42 @@ The example below demonstrates how to create a Tooltip for multiple targets with
         $("#container").kendoTooltip({ filter: "a[title]" });
     });
 
+### Show over Disabled Elements
+
+The Kendo UI Tooltip relies on the `mouseenter` and `mouseleave` events to work. Disabled elements do not fire events by design. If working with disabled elements is a strict requirement, a possible workaround is to initialize the Tooltip widget over a parent of the disabled element. Note that there must be some empty space between the disabled element and its parent's boundaries, so that the `mouseenter` event is fired.
+
+```html
+<style>
+.parent {
+    display: inline-block;
+    border: 1px solid;
+    margin: 2em;
+    padding: 0.2em;
+}
+</style>
+
+<div id="example">
+
+  <span id="btn1-parent" class="parent" style="border-color:#f00;">
+    <button id="btn1" class="k-button" disabled="disabled">No tooltip</button>
+  </span>
+
+  <span id="btn2-parent" class="parent" style="border-color:#0c0;">
+    <button id="btn2" class="k-button" disabled="disabled">Tooltip works</button>
+  </span>
+
+</div>
+
+<script>
+  $(function() {
+    $("#btn1, #btn2-parent").kendoTooltip({
+      content: "Hello!",
+      position: "right"
+    });
+  });
+</script>
+```
+
 ## Configuration
 
 ### Defaults
