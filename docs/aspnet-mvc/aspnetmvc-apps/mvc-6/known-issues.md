@@ -69,6 +69,10 @@ Server-side rendering is not supported. The Toolbar template, Column Header temp
 | `ChartScatterLineMissingValues` | `ChartSeriesMissingValues`|
 | `ChartScatterLineStyle`   | `ChartSeriesStyle`      |
 
+### Editor
+
+The Thumbnails view of ImageBrowser is not supported because the **System.Drawing** namespace is [not part of ASP.NET Core](https://blogs.msdn.microsoft.com/dotnet/2016/02/10/porting-to-net-core/). However, a third-party library can be used for the server-side processing of images.
+
 ### MultiSelect
 
 The `TagMode` enum is now by `MultiSelectTagMode`.
