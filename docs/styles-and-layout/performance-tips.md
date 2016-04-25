@@ -21,6 +21,7 @@ The example below demonstrates how to configure Canvas rendering.
 
 ###### Example
 
+```html
     <div id="chart"></div>
     <script>
         $(function() {
@@ -33,8 +34,74 @@ The example below demonstrates how to configure Canvas rendering.
             });
         });
     </script>
+```
 
 For more information on configuration settings, refer to the [`renderAs` API article](/api/dataviz/chart#configuration-renderAs).
+
+### Use Inline Binding
+
+When using a DataSource binding, all data items will be wrapped in an
+[Observable](/api/javascript/data/observableobject) instances to track changes.
+
+This is generally unnecessary for the Chart. It really starts to become an issue
+if you have a large number of data points, say 5000 and more.
+
+In this case you can use [Inline Binding]({% slug databinding_charts_widget %}),
+as illustrated below:
+
+###### Example - Inline Binding
+
+```html
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+        series: [{
+            name: "Series 1",
+            type: "column",
+            data: [200, 450, 300, 125, 100]
+        }, {
+            name: "Series 2",
+            type: "column",
+            data: [210, null, 200, 100, null]
+        }],
+        categoryAxis: {
+            categories: ["Mon", "Tue", "Wed", "Thu", "Fri"]
+        }
+    });
+    </script>
+```
+
+###### Example - Inline Binding with objects
+
+```html
+    <div id="chart"></div>
+    <script>
+    var seriesData = [
+        { day: "Mon", sales1: 200, sales2: 210 },
+        { day: "Tue", sales1: 450 },
+        { day: "Wed", sales1: 300, sales2: 200 },
+        { day: "Thu", sales1: 125, sales2: 100 },
+        { day: "Fri", sales1: 100 }
+    ];
+
+    $("#chart").kendoChart({
+        series: [{
+            name: "Series 1",
+            type: "column",
+            data: seriesData,
+            field: "sales1"
+        }, {
+            name: "Series 2",
+            type: "column",
+            data: seriesData,
+            field: "sales2"
+        }],
+        categoryAxis: {
+            categoryField: "day"
+        }
+    });
+    </script>
+```
 
 ### Turn Off Animated Transitions
 
@@ -44,6 +111,7 @@ The example below demonstrates how to implement this approach.
 
 ###### Example
 
+```html
     <div id="chart"></div>
     <script>
         $(function() {
@@ -56,11 +124,13 @@ The example below demonstrates how to implement this approach.
             });
         });
     </script>
+```
 
 The example below demonstrates how to turn off the initial animation only.
 
 ###### Example
 
+```html
     <div id="chart"></div>
     <script>
       $(function() {
@@ -87,6 +157,7 @@ The example below demonstrates how to turn off the initial animation only.
         }, 2000);
       });
     </script>
+```
 
 ### Disable Gradients
 
@@ -96,6 +167,7 @@ The example below demonstrates how to disable gradients.
 
 ###### Example
 
+```html
     <div id="chart"></div>
     <script>
         $(function() {
@@ -103,6 +175,7 @@ The example below demonstrates how to disable gradients.
                 seriesDefaults: {
                   overlay: {
                     gradient: null
+                  }
                 },
                 series: [{
                     type: "column",
@@ -112,6 +185,7 @@ The example below demonstrates how to disable gradients.
             });
         });
     </script>
+```
 
 ## See Also
 
