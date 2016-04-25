@@ -901,4 +901,5 @@ Other articles and how-to examples on Kendo UI Spreadsheet and Charts:
 
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
 * [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
+* [How to Get Flagged Cells Containing Invalid Values]({% slug howto_get_flagged_cells_containing_invalid_values_spreadsheet_widget %})
 * [How to Set Validation Rules to Column Ranges]({% slug howto_validationtocolumn_spreadsheet_widget %})

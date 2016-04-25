@@ -516,3 +516,4 @@ Other articles and how-to examples on Kendo UI Spreadsheet:
 
 * [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
 * [How to Bind Charts to Sheet Data]({% slug howto_bindcharttosheet_spreadsheet_widget %})
+* [How to Get Flagged Cells Containing Invalid Values]({% slug howto_get_flagged_cells_containing_invalid_values_spreadsheet_widget %})
