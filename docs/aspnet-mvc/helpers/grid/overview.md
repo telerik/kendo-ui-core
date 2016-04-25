@@ -207,6 +207,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 Other articles on the Kendo UI Grid for ASP.NET MVC:
 
+* [ASP.NET MVC API Reference: GridBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [Configuration of the Grid HtmlHelper]({% slug configuration_gridhelper_aspnetmvc %})
 * [Scaffolding]({% slug scaffoldinggrid_aspnetmvc %})

@@ -136,6 +136,7 @@ You can reference a hybrid View instance by using the [jQuery.data()](http://api
 
 Other articles on Telerik UI for ASP.NET MVC and on the View:
 
+* [ASP.NET MVC API Reference: TabStripBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/MobileTabStripBuilder)
 * [Overview of the Hybrid UI View Widget]({% slug overview_hybridtabstrip %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})

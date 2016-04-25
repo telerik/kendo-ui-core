@@ -173,6 +173,7 @@ You can reference an existing Kendo UI Chart instance via [`jQuery.data()`](http
 
 Other articles on Telerik UI for ASP.NET MVC and on the Chart:
 
+* [ASP.NET MVC API Reference: ChartBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/ChartBuilder)
 * [How to Bind to SignalR Hubs in ASP.NET MVC Apps]({% slug howto_bindtosignalr_chartaspnetmvc %})
 * [How to Create View Model Bound Dynamic Series in ASP.NET MVC Apps]({% slug howto_cerateviewmodelboundseries_chartaspnetmvc %})
 * [Ajax Binding of the Kendo UI Chart for ASP.NET MVC]({% slug ajaxbinding_charthelper_aspnetmvc %})

@@ -209,6 +209,7 @@ You can reference a hybrid Layout instance by using the code from the example be
 
 Other articles on Telerik UI for ASP.NET MVC and on the Layout:
 
+* [ASP.NET MVC API Reference: LayoutBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/MobileLayoutBuilder)
 * [Overview of the Hybrid UI Layout Widget]({% slug layout_hybridkendoui %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})

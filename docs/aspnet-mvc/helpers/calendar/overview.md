@@ -141,6 +141,7 @@ You can reference an existing Kendo UI Calendar instance via [`jQuery.data()`](h
 
 Other articles on Telerik UI for ASP.NET MVC and on the Calendar:
 
+* [ASP.NET MVC API Reference: CalendarBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/CalendarBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

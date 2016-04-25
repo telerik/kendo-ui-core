@@ -201,6 +201,7 @@ You can reference an existing Kendo UI Scheduler instance via [`jQuery.data()`](
 
 Other articles on Telerik UI for ASP.NET MVC and on the Scheduler:
 
+* [ASP.NET MVC API Reference: SchedulerBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/SchedulerBuilder)
 * [Overview of the Scheduler HtmlHelper]({% slug overview_schedulerhelper_aspnetmvc %})
 * [Ajax Binding of the Scheduler HtmlHelper]({% slug ajaxbinding_schedulerhelper_aspnetmvc %})
 * [Scaffolding of the Scheduler HtmlHelper]({% slug scaffoldingscheduler_aspnetmvc %})

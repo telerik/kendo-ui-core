@@ -155,6 +155,7 @@ You can reference an existing Kendo UI Map instance via [`jQuery.data()`](http:/
 
 Other articles on Telerik UI for ASP.NET MVC and on the Map:
 
+* [ASP.NET MVC API Reference: MapBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/MapBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
