@@ -15,7 +15,12 @@ This page provides tips and tricks on how to handle and improve the performance 
 
 ### Use Canvas Rendering
 
-Switching to Canvas rendering improves the performance of the widgets, especially on mobile devices. It facilitates the visualization of data by its fast update of graphs that do not need animations and interactivity.
+Switching to Canvas rendering improves the performance of the widgets, especially on mobile devices. It facilitates the visualization of data by its fast update and lower resource usage.
+
+> **Important**
+>
+> Versions of Kendo UI prior to 2016.2 do not support interactivity
+> and do not fire events when rendering in Canvas.
 
 The example below demonstrates how to configure Canvas rendering.
 
