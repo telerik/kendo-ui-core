@@ -120,6 +120,7 @@ Reference an existing Kendo UI FlatColorPicker instance via [`jQuery.data()`](ht
 
 Other articles on Telerik UI for ASP.NET MVC and on the FlatColorPicker:
 
+* [ASP.NET MVC API Reference: FlatColorPickerBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/FlatColorPickerBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

@@ -149,6 +149,7 @@ You can reference an existing Kendo UI DatePicker instance via [`jQuery.data()`]
 
 Other articles on Telerik UI for ASP.NET MVC and on the DatePicker:
 
+* [ASP.NET MVC API Reference: DatePickerBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/DatePickerBuilder)
 * [How to Create Masked DatePickers in ASP.NET MVC Apps]({% slug howto_create_masked_datepickers_datepickaspnetmvc %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})

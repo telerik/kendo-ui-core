@@ -468,6 +468,7 @@ You can reference an existing Kendo UI MultiSelect instance via [`jQuery.data()`
 
 Other articles on Telerik UI for ASP.NET MVC and on the MultiSelect:
 
+* [ASP.NET MVC API Reference: MultiSelectBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/MultiSelectBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

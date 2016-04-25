@@ -155,6 +155,7 @@ You can reference an existing Kendo UI Diagram instance via [`jQuery.data()`](ht
 
 Other articles on Telerik UI for ASP.NET MVC and on the Diagram:
 
+* [ASP.NET MVC API Reference: DiagramBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/DiagramBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

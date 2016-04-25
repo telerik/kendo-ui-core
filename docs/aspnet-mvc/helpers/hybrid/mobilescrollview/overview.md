@@ -192,6 +192,7 @@ You can reference a hybrid ScrollView instance by using the code from the exampl
 
 Other articles on Telerik UI for ASP.NET MVC and on the ScrollView:
 
+* [ASP.NET MVC API Reference: ScrollViewBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/MobileScrollViewBuilder)
 * [Overview of the Hybrid UI ScrollView Widget]({% slug overview_hybridscrollview %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})

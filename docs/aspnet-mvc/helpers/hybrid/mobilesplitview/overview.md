@@ -210,6 +210,7 @@ You can reference a hybrid SplitView instance by using the [jQuery.data()](http:
 
 Other articles on Telerik UI for ASP.NET MVC and on the SplitView:
 
+* [ASP.NET MVC API Reference: SplitViewBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/MobileSplitViewBuilder)
 * [Overview of the Hybrid UI SplitView Widget]({% slug overview_hybridsplitview %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})

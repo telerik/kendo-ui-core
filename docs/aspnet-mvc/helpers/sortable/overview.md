@@ -180,7 +180,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 The example below demonstrates how to subscribe to events by a template delegate.
 
-###### Example 
+###### Example
 
 **Razor**
 
@@ -225,6 +225,7 @@ You can reference an existing Kendo UI Sortable instance via [`jQuery.data()`](h
 
 Other articles on Telerik UI for ASP.NET MVC and on the Sortable:
 
+* [ASP.NET MVC API Reference: SortableBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/SortableBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

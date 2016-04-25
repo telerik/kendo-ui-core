@@ -149,6 +149,7 @@ You can reference an existing Kendo UI TimePicker instance via [`jQuery.data()`]
 
 Other articles on Telerik UI for ASP.NET MVC and on the TimePicker:
 
+* [ASP.NET MVC API Reference: TimePickerBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/TimePickerBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

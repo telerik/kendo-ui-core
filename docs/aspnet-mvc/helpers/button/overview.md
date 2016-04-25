@@ -232,6 +232,7 @@ For more information on how to access an instance, refer to the [introductory ar
 
 Other articles on Telerik UI for ASP.NET MVC and on the Button:
 
+* [ASP.NET MVC API Reference: ButtonBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/ButtonBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
