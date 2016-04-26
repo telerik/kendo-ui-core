@@ -69,6 +69,12 @@ The example below demonstrates how to make all Kendo widgets use this font.
 > * In order for automatic font discovery to work, your CSS must reside on the same domain as the web page.
 > * Kendo UI bundles the DejaVu font family and will fall back to it for a few names, such as Times New Roman, Arial, or Courier, or generics, such as serif, sans-serif, or monospace, if no alternate fonts are specified. This is so that Unicode works by default. However, the layout problem will remain&mdash;the PDF output will be slightly different from the browser unless the exact same fonts are used.
 
+### Images in PDF
+
+Images will be exported correctly only if they have the correct extension. For example, if PNG images with a JPG extension are displayed on the page, they may not show up in the exported PDF, or may cause exceptions in the PDF reader.
+
+Also check the [Known limitations](#known-limitations) for notes on loading images from different domains.
+
 ### Hyperlinks in PDF
 
 By default the [`drawDOM`](/api/javascript/drawing#methods-drawDOM) method creates clickable hyperlinks in the generated PDF document. You can disable this behavior with the `avoidLinks` option, as demonstrated in the example below.
