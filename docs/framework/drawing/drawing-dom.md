@@ -71,9 +71,9 @@ The example below demonstrates how to make all Kendo widgets use this font.
 
 ### Images in PDF
 
-Images will be exported correctly only if they have the correct extension. For example, if PNG images with a JPG extension are displayed on the page, they may not show up in the exported PDF, or may cause exceptions in the PDF reader.
+Images are exported correctly only if they have the correct extension. For example, if PNG images with a JPG extension are displayed on the page, they might not show up in the exported PDF, or might cause exceptions in the PDF reader.
 
-Also check the [Known limitations](#known-limitations) for notes on loading images from different domains.
+To check for possible notes on loading images from different domains, refer to the [section on known limitations](#known-limitations).
 
 ### Hyperlinks in PDF
 
