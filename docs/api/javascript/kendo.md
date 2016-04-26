@@ -170,9 +170,12 @@ Creates an ObservableArray instance that is bound to a HierarchicalDataSource. R
 The array that will be converted to an ObservableArray.
 
 ### culture
+
 Sets or gets the current culture. Uses the passed culture name to select a culture from the culture scripts that you have included and then sets the current culture.
 If there is no corresponding culture then the method will try to find culture which is equal to the country part of the culture name.
 If no culture is found the default one is used.
+
+> The culture must be set before any Kendo UI widgets that rely on it, are initialized.
 
 #### Example -  include a culture-specific JavaScript file and set the culture
     <script src="http://kendo.cdn.telerik.com/2013.2.716/js/cultures/kendo.culture.en-GB.min.js"></script>

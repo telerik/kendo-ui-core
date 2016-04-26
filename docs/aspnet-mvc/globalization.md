@@ -138,6 +138,8 @@ Below are listed the steps for you to follow when you want to make the widgets u
           kendo.culture("@culture");
       </script>
 
+> The client-side culture must be set before any Kendo UI widgets that rely on it, are initialized.
+
 ## See Also
 
 Other articles on Telerik UI for ASP.NET MVC:
