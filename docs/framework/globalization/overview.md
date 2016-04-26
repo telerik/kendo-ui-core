@@ -43,6 +43,8 @@ Now, set the culture script, which Kendo UI should use, as shown below.
 
 The default culture, which Kendo UI widgets uses is "en-US".
 
+> The culture must be set before any Kendo UI widgets that rely on it, are initialized.
+
 ## Configuration
 
 ### Format Number or Date Objects
