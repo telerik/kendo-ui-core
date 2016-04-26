@@ -266,8 +266,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "create": "新增",
     "destroy": "删除",
     "edit": "编辑",
-    "excel": "Export to Excel",
-    "pdf": "Export to PDF",
+    "excel": "导出 Excel",
+    "pdf": "导出 PDF",
     "save": "保存",
     "select": "选择",
     "update": "更新"
@@ -424,14 +424,14 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "allDay": "整天",
   "date": "日期",
   "event": "事件",
-  "time": "時間",
-  "showFullDay": "顯示整天",
-  "showWorkDay": "顯示營業時間",
+  "time": "时间",
+  "showFullDay": "显示整天",
+  "showWorkDay": "显示营业时间",
   "deleteWindowTitle": "删除事件",
   "ariaSlotLabel": "选择从 {0:t} 到 {1:t}",
   "ariaEventLabel": "{0} on {1:D} at {2:t}",
   "editable": {
-    "confirmation": "你確定你要刪除這個活動？"
+    "confirmation": "你确定你要删除这个活动？"
   },
   "views": {
     "day": "日",
@@ -447,8 +447,8 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "editWindowTitle": "修改周期条目",
     "editWindowOccurrence": "修改当前事件",
     "editWindowSeries": "修改序列",
-    "deleteRecurring": "你想刪除僅此事件發生或整個系列？",
-    "editRecurring": "你想，僅編輯此次事件發生或整個系列？"
+    "deleteRecurring": "你想删除仅此事件发生或整个系列？",
+    "editRecurring": "你想，仅编辑此次事件发生或整个系列？"
   },
   "editor": {
     "title": "标题",
