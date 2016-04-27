@@ -79,7 +79,7 @@ With this small snippet, we can write code that works with CORS XHR, XDR, and wh
       }
     }
 
-<--*-->
+<!--*-->
 You can [try this code snippet live in different browsers](http://jsbin.com/ohugih/8/edit) to confirm it works.
 
 The [`XMLHttpRequest2` object](http://www.w3.org/TR/XMLHttpRequest2/), which includes required support for CORS, can be used to feature-detect browser support for CORS. If the browser's `XHR` object has the XHR2 `"withCredentials"` property, you're in business. If not, step 2.
@@ -154,7 +154,7 @@ We elected to use the later approach in the Feed Reader demo since it also helps
     //**END OPERA/Non-CORS HACK
     }
 
-<--**-->
+<!--**-->
 Now, Opera (any other non-CORS browser) will use an alternate configuration of the Kendo UI data source pointed at a JSONP endpoint and expecting a JSON response. Not pretty code, but it's functional. Sometimes, that's what it takes to build software that runs in every major browser and platform.
 
 ### Bottom Line on CORS
