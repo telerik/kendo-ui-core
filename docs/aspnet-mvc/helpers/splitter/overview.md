@@ -29,7 +29,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Split
 
 **Step 3** Add a Splitter.
 
-**WebForms**
+###### Example
+
+```tab-WebForms
 
         <%: Html.Kendo().Splitter()
                 .Name("splitter") //The name of the Splitter is mandatory. It specifies the "id" attribute of the widget.
@@ -39,8 +41,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Split
                     panes.Add().Content("Item 2"); //Add the pane.
                 })
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Splitter()
             .Name("splitter") //The name of the Splitter is mandatory. It specifies the "id" attribute of the widget.
@@ -50,6 +52,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Split
                 panes.Add().Content("Item 2"); //Add the pane.
             })
          )
+```
 
 ## Event Handling
 
@@ -61,7 +64,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().Splitter()
                 .Name("splitter")
@@ -74,9 +77,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the Resize event.
         }
         </script>
-
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Splitter()
               .Name("splitter")
@@ -89,7 +91,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the Resize event.
         }
         </script>
-
+```
 
 ### By Template Delegate
 
@@ -97,7 +99,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().Splitter()
               .Name("splitter")
@@ -109,6 +111,7 @@ The example below demonstrates how to subscribe to events by a template delegate
                   </text>)
               )
         )
+```
 
 ## Reference
 

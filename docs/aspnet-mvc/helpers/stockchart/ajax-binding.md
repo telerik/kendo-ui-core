@@ -45,7 +45,7 @@ In the view, configure the Chart to use the action method created in the previou
 
 ###### Example
 
-**WebForms**
+```tba-WebForms
 
 	     <%: Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
 	      .Name("stockChart")
@@ -55,9 +55,8 @@ In the view, configure the Chart to use the action method created in the previou
 	      ))
 	      .DateField("Date")
 	      %>
-
-<!--_-->
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
         .Name("stockChart")
@@ -67,15 +66,15 @@ In the view, configure the Chart to use the action method created in the previou
         ))
         .DateField("Date")
         )
+```
 
-<!--_-->
 ### Create the Data Series
 
 Create the main and navigator data series.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
         .Name("stockChart")
@@ -94,8 +93,8 @@ Create the main and navigator data series.
             })
         )
         %>
-<!--_-->
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
         .Name("stockChart")
@@ -114,7 +113,8 @@ Create the main and navigator data series.
             })
         )
         )
-<!--_-->
+```
+
 ## See Also
 
 Other articles on Telerik UI for ASP.NET MVC and on the StockChart:

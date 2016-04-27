@@ -38,7 +38,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Slide
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().Slider()
                 .Name("slider") //The name of the Slider is mandatory. It specifies the "id" attribute of the widget.
@@ -46,8 +46,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Slide
                 .Max(100) //Set min value of the Slider.
                 .Value(20) //Set the value of the Slider.
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Slider()
               .Name("slider") //The name of the Slider is mandatory. It specifies the "id" attribute of the widget.
@@ -55,6 +55,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Slide
               .Max(100) //Set min value of the Slider.
               .Value(20) //Set the value of the Slider.
         )
+```
 
 ## Event Handling
 
@@ -66,7 +67,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().Slider()
                 .Name("slider")
@@ -84,8 +85,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the slide event.
         }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Slider()
               .Name("slider")
@@ -103,6 +104,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the slide event.
         }
         </script>
+```
 
 ### By Template Delegate
 
@@ -110,7 +112,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().Slider()
               .Name("slider")
@@ -127,6 +129,7 @@ The example below demonstrates how to subscribe to events by a template delegate
                     </text>)
               )
         )
+```
 
 ## Reference
 

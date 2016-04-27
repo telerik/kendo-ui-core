@@ -39,7 +39,7 @@ Below are listed the steps for you to follow when defining the items of a Kendo 
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().PanelBar()
                 .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
@@ -49,8 +49,8 @@ Below are listed the steps for you to follow when defining the items of a Kendo 
                     items.Add().Text("Item 2"); //Add item with text "Item2")
                 })
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().PanelBar()
               .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
@@ -60,7 +60,7 @@ Below are listed the steps for you to follow when defining the items of a Kendo 
                   items.Add().Text("Item 2"); //Add item with text "Item2")
               })
         )
-
+```
 
 ### Sitemap Binding
 
@@ -103,19 +103,20 @@ Below are listed the steps for you to follow when binding a Kendo UI PanelBar to
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().PanelBar()
                 .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
                 .BindTo("sample") //bind to sitemap with name "sample"
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().PanelBar()
               .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
               .BindTo("sample") //bind to sitemap with name "sample"
         )
+```
 
 ### Model Binding
 
@@ -134,22 +135,25 @@ Below are listed the steps for you to follow when binding a kendo UI PanelBar to
             return View(northwind.Categories);
         }
 
-**Step 3** Make your view strongly typed:
+**Step 3** Make your view strongly typed.
 
-**WebForms**
+###### Example
+
+```tab-WebForms
 
         <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
             Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Category>>" %>
-
-**Razor**
+```
+```tab-Razor
 
         @model IEnumerable<MvcApplication1.Models.Category>
+```
 
 **Step 4** Add a PanelBar.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().PanelBar()
                 .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
@@ -168,8 +172,8 @@ Below are listed the steps for you to follow when binding a kendo UI PanelBar to
                         }));
                 })
             %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().PanelBar()
               .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
@@ -188,6 +192,7 @@ Below are listed the steps for you to follow when binding a kendo UI PanelBar to
                            }));
                })
         )
+```
 
 ### Security Trimming
 
@@ -210,7 +215,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().PanelBar()
                 .Name("panelbar")
@@ -228,8 +233,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the expand event
         }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().PanelBar()
               .Name("panelbar")
@@ -247,6 +252,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the expand event
         }
         </script>
+```
 
 ### By Template Delegate
 
@@ -254,7 +260,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().PanelBar()
               .Name("panelbar")
@@ -271,6 +277,7 @@ The example below demonstrates how to subscribe to events by a template delegate
                     </text>)
               )
         )
+```
 
 ## Reference
 

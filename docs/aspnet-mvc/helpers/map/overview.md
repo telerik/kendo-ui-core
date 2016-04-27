@@ -31,20 +31,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Map.
 
 ###### Example
 
-**Razor**
-
-    @(Html.Kendo().Map()
-        .Name("map")
-        .Layers(layers =>
-        {
-            layers.Add()
-                .Type(MapLayerType.Tile)
-                .UrlTemplate("http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png")
-                .Subdomains("a", "b", "c");
-        })
-    )
-
-**WebForms**
+```tab-WebForms
 
     <%: Html.Kendo().Map()
         .Name("map")
@@ -56,6 +43,20 @@ Below are listed the steps for you to follow when configuring the Kendo UI Map.
                 .Subdomains("a", "b", "c");
         })
     %>
+```
+```tab-Razor
+
+    @(Html.Kendo().Map()
+        .Name("map")
+        .Layers(layers =>
+        {
+            layers.Add()
+                .Type(MapLayerType.Tile)
+                .UrlTemplate("http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png")
+                .Subdomains("a", "b", "c");
+        })
+    )
+```
 
 ## Event Handling
 
@@ -67,28 +68,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**Razor**
-
-    @(Html.Kendo().Map()
-        .Name("map")
-        .Layers(layers =>
-        {
-            layers.Add()
-                .Type(MapLayerType.Tile)
-                .UrlTemplate("http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png")
-                .Subdomains("a", "b", "c");
-        })
-        .Events(e => e
-            .Reset("mapReset")
-        )
-    )
-    <script>
-        function mapReset(e) {
-            //Handle the reset event.
-        }
-    </script>
-
-**WebForms**
+```tab-WebForms
 
     <%: Html.Kendo().Map()
         .Name("map")
@@ -108,6 +88,28 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the reset event.
         }
     </script>
+```
+```tab-Razor
+
+    @(Html.Kendo().Map()
+        .Name("map")
+        .Layers(layers =>
+        {
+            layers.Add()
+                .Type(MapLayerType.Tile)
+                .UrlTemplate("http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png")
+                .Subdomains("a", "b", "c");
+        })
+        .Events(e => e
+            .Reset("mapReset")
+        )
+    )
+    <script>
+        function mapReset(e) {
+            //Handle the reset event.
+        }
+    </script>
+```
 
 ### By Template Delegate
 
@@ -115,7 +117,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
     @(Html.Kendo().Map()
         .Name("map")
@@ -134,6 +136,7 @@ The example below demonstrates how to subscribe to events by a template delegate
             </text>)
         )
     )
+```
 
 ## Reference
 

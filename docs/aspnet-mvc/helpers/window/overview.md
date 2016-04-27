@@ -38,7 +38,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Windo
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <% Html.Kendo().Window()
                .Name("window") //The name of the Window is mandatory. It specifies the "id" attribute of the widget.
@@ -54,8 +54,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Windo
                .Width(600)  //Set the width of the Window.
                .Render(); //Render the Window.
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Window()
               .Name("window") //The name of the Window is mandatory. It specifies the "id" attribute of the widget.
@@ -67,6 +67,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Windo
               .Resizable() //Enable the resizing of the Window.
               .Width(600)  //Set the width of the Window.
         )
+```
 
 ### Load-on-Demand Content
 
@@ -96,21 +97,22 @@ Below are listed the steps for you to follow when configuring the Kendo UI Windo
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <% Html.Kendo().Window()
                .Name("window") //The name of the Window is mandatory. It specifies the "id" attribute of the widget.
                .Title("About Alvar Aalto") //Set the title of the Window.
                .LoadContentFrom("AjaxContent", "Window") //Define the Action and Controller names.
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Window()
               .Name("window") //The name of the Window is mandatory. It specifies the "id" attribute of the widget.
               .Title("About Alvar Aalto") //Set the title of the Window.
               .LoadContentFrom("AjaxContent", "Window") //Define the Action and Controller names.
         )
+```
 
 ### Html.BeginForms inside Windows
 
@@ -122,7 +124,7 @@ The example below demonstrates how to insert a complete form inside the Window.
 
 ###### Example
 
-**WebForms**  
+```tab-WebForms  
 
         <% Html.Kendo().Window()
             .Content(() =>
@@ -133,8 +135,8 @@ The example below demonstrates how to insert a complete form inside the Window.
             })
             .Render();
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @{Html.Kendo().Window()
             .Content(@<text>
@@ -145,6 +147,7 @@ The example below demonstrates how to insert a complete form inside the Window.
             </text>)
             .Render();
         }
+```
 
 ## Event Handling
 
@@ -156,7 +159,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().Window()
                 .Name("window")
@@ -174,8 +177,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the close event.
         }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Window()
               .Name("window")
@@ -193,6 +196,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the close event.
         }
         </script>
+```
 
 ### By Template Delegate
 
@@ -200,7 +204,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().Window()
               .Name("window")
@@ -217,6 +221,7 @@ The example below demonstrates how to subscribe to events by a template delegate
                     </text>)
               )
         )
+```
 
 ## Reference
 

@@ -31,7 +31,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TimeP
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().TimePicker()
                 .Name("timepicker") //The name of the TimePicker is mandatory. It specifies the "id" attribute of the widget.
@@ -39,8 +39,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI TimeP
                 .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the TimePicker.
                 .Value(DateTime.Now) //Set the value of the TimePicker.
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().TimePicker()
               .Name("timepicker") //The name of the TimePicker is mandatory. It specifies the "id" attribute of the widget.
@@ -48,6 +48,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TimeP
               .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the TimePicker.
               .Value(DateTime.Now) //Set the value of the TimePicker.
         )
+```
 
 ## Event Handling
 
@@ -59,7 +60,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().TimePicker()
                 .Name("timepicker")
@@ -82,8 +83,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the change event.
         }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().TimePicker()
               .Name("timepicker")
@@ -106,12 +107,13 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the change event.
         }
         </script>
+```
 
 ### By Template Delegate
 
 The example below demonstrates how to subscribe to events by a template delegate.
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().TimePicker()
               .Name("timepicker")
@@ -128,6 +130,7 @@ The example below demonstrates how to subscribe to events by a template delegate
                     </text>)
               )
         )
+```
 
 ## Reference
 

@@ -71,28 +71,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeV
 
 ###### Example
 
-**Index.cshtml (Razor)**
-
-        @(Html.Kendo().TreeView()
-            .Name("treeview")
-            // The property that specifies the text of the node
-            .DataTextField("Name")
-            .DataSource(dataSource => dataSource
-                .Model(model => model
-                    // The property that uniquely identieis a node.
-                    // The value of this property is the argument of the action method
-                    .Id("EmployeeID")
-                    // the boolean property that tells whether a node has children
-                    .HasChildren("HasChildren")
-                )
-                .Read(read => read
-                    // The action method which will return JSON
-                    .Action("Employees_Read", "Home")
-                )
-            )
-        )
-
-**Index.aspx (ASPX)**
+```tab-ASPX
 
         <%: Html.Kendo().TreeView()
             .Name("treeview")
@@ -112,6 +91,28 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeV
                 )
             )
         %>
+```
+```tab-Razor
+
+        @(Html.Kendo().TreeView()
+            .Name("treeview")
+            // The property that specifies the text of the node
+            .DataTextField("Name")
+            .DataSource(dataSource => dataSource
+                .Model(model => model
+                    // The property that uniquely identieis a node.
+                    // The value of this property is the argument of the action method
+                    .Id("EmployeeID")
+                    // the boolean property that tells whether a node has children
+                    .HasChildren("HasChildren")
+                )
+                .Read(read => read
+                    // The action method which will return JSON
+                    .Action("Employees_Read", "Home")
+                )
+            )
+        )
+```
 
 **Step 3** Press `CTRL`+`F5` to build and run the application. Expand the **Andrew Fuller** node and the TreeView loads its children.
 

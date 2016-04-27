@@ -41,7 +41,7 @@ Load a file from the file system and convert it to a Workbook for serialization.
 
 ###### Example
 
-```cs
+```tab-cs
 public class HomeController : Controller
 {
     public ActionResult Read()
@@ -54,8 +54,7 @@ public class HomeController : Controller
     }
 }
 ```
-
-```cshtml
+```tab-cshtml
 @(Html.Kendo().Spreadsheet()
     .Name("spreadsheet")
 )
@@ -78,7 +77,7 @@ Load a file from the file system and use it to populate the Spreadsheet widget. 
 
 ###### Example
 
-```cshtml
+```tab-cshtml
 @{
     var path = Server.MapPath("~/App_Data/path/to/document.xlsx");
     var workbook = Telerik.Web.Spreadsheet.Workbook.Load(path);
@@ -94,13 +93,13 @@ Load a file from the file system and use it to populate the Spreadsheet widget. 
 
 Post a Workbook to a controller and save it as a local file. The supported file extensions are `.xlsx`, `.csv`, `.txt`, `.pdf`, and `.json`.
 
-> **IMportant**
+> **Important**
 >
 > Set [`aspnet:MaxJsonDeserializerMembers`](https://msdn.microsoft.com/en-us/library/hh975440%28v=vs.120%29.aspx?f=255&MSPPError=-2147217396) to a higher value than the default one in the `web.config`.
 
 ###### Example
 
-```cs
+```tab-cs
 [HttpPost]
 public ActionResult Save(Telerik.Web.Spreadsheet.Workbook workbook)
 {
@@ -108,8 +107,7 @@ public ActionResult Save(Telerik.Web.Spreadsheet.Workbook workbook)
     return new EmptyResult();
 }
 ```
-
-```cshtml
+```tab-cshtml
 @(Html.Kendo().Spreadsheet()
     .Name("spreadsheet")
 )
@@ -127,8 +125,7 @@ public ActionResult Save(Telerik.Web.Spreadsheet.Workbook workbook)
     });
 </script>
 ```
-
-```web.config
+```tab-web.config
 <configuration>
   <appSettings>
     <add key="aspnet:MaxJsonDeserializerMembers" value="150000" />
@@ -142,7 +139,7 @@ The Telerik Document Processing Library provides a full-blown model for a Spread
 
 ###### Example
 
-```cs
+```tab-cs
     var document = new Telerik.Windows.Documents.Spreadsheet.Model.Workbook();
     var worksheet = document.Worksheets.Add();
     worksheet.Cells[0, 0].SetValue("1.23");
@@ -156,7 +153,7 @@ Conversely, you can start with a Kendo UI Spreadsheet model (`Telerik.Web.Spread
 
 ###### Example
 
-```cs
+```tab-cs
 [HttpPost]
 public ActionResult Process(Telerik.Web.Spreadsheet.Workbook workbook)
 {

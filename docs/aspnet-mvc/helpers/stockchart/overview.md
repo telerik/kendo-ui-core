@@ -36,18 +36,23 @@ Below are listed the steps for you to follow when configuring the Kendo UI Stock
 
 **Step 3** Make your view strongly typed.
 
-**WebForms**
+###### Example
+
+```tab-WebForms
 
         <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
            		 Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.StockDataPoint>>" %>
-
-**Razor**
+```
+```tab-Razor
 
         @model IEnumerable<Kendo.Mvc.Examples.Models.StockDataPoint>
+```
 
 **Step 4** Add a server-bound StockChart.
 
-**WebForms**
+###### Example
+
+```tab-WebForms
 
         <%: Html.Kendo().StockChart(Model)
         .Name("stockChart")
@@ -62,8 +67,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Stock
             })
         )
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().StockChart(Model)
         .Name("stockChart")
@@ -78,6 +83,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Stock
             })
         )
         )
+```
 
 ## Event Handling
 
@@ -89,7 +95,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().StockChart(Model)
     	        .Name("stockChart")
@@ -113,8 +119,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
                 //Handle the series click event.
             }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().StockChart(Model)
     		.Name("stockChart")
@@ -138,6 +144,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
                 //Handle the seriesClick event.
             }
         </script>
+```
 
 ### By Template Delegate
 
@@ -145,7 +152,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().StockChart(Model)
     		.Name("stockChart")
@@ -167,6 +174,7 @@ The example below demonstrates how to subscribe to events by a template delegate
     		  </text>)
     		)
         )
+```
 
 ## Reference
 

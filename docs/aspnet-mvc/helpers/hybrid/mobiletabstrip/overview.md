@@ -34,7 +34,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ###### Example
 
-**Index.aspx (ASPX)**
+```tab-ASPX
 
         <% Html.Kendo().MobileView()
                 .Name("tabstrip-view")
@@ -56,8 +56,8 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
                 })
                 .Render();
         %>
-
-**Index.cshtml (Razor)**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileView()
             .Name("tabstrip-view")
@@ -77,22 +77,24 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
             </text>)
         )
+```
 
 **Step 4** Initialize the mobile application.
 
 ###### Example
 
-**Index.aspx (ASPX)**
+```tab-ASPX
 
         <%: Html.Kendo().MobileApplication()
                 .ServerNavigation(true)
         %>
-
-**Index.cshtml (Razor)**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileApplication()
             .ServerNavigation(true)
         )
+```
 
 **Step 5** Build and run the application.
 
@@ -106,7 +108,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**ASPX**
+```tab-ASPX
 
         <%: Html.Kendo().MobileTabStrip()
                 .Name("tabstrip")
@@ -128,8 +130,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the select event.
         }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileTabStrip()
             .Name("tabstrip")
@@ -150,6 +152,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the select event.
         }
         </script>
+```
 
 ## Reference
 

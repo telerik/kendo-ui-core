@@ -37,7 +37,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sorta
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
       <ul id="sortable-basic">
           <li class="sortable">Papercut <span>3:04</span></li>
@@ -63,8 +63,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sorta
               return element.clone().addClass("placeholder").text("drop here");
           }
       </script>
-
-**Razor**
+```
+```tab-Razor
 
       <ul id="sortable-basic">
           <li class="sortable">Papercut <span>3:04</span></li>
@@ -90,6 +90,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sorta
               return element.clone().addClass("placeholder").text("drop here");
           }
       </script>
+```
 
 ### Hint Disabling
 
@@ -116,7 +117,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
       <ul id="sortable">
           <li>Item 1</li>
@@ -145,8 +146,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
               kendoConsole.log(id + " change: " + text + " newIndex: " + newIndex + " oldIndex: " + oldIndex + " action: " + e.action);
           }
       </script>
-
-**Razor**
+```
+```tab-Razor
 
         <ul id="sortable">
             <li>Item 1</li>
@@ -175,6 +176,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
                 kendoConsole.log(id + " change: " + text + " newIndex: " + newIndex + " oldIndex: " + oldIndex + " action: " + e.action);
             }
         </script>
+```
 
 ### By Template Delegate
 
@@ -182,7 +184,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         <ul id="sortable">
             <li>Item 1</li>
@@ -204,6 +206,7 @@ The example below demonstrates how to subscribe to events by a template delegate
                 </text>)
             )
         )
+```
 
 ## Reference
 

@@ -40,20 +40,21 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
            Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Product>>" %>
-
-**Razor**
+```
+```tab-Razor
 
         @model IEnumerable<MvcApplication1.Models.Product>
+```
 
 **Step 4** Add a server bound MultiSelect.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().MultiSelect()
             .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
@@ -61,8 +62,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
             .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
             .BindTo(Model)   //Pass the list of Products to the MultiSelect.
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().MultiSelect()
           .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
@@ -70,6 +71,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
           .DataValueField("ProductID") //Specify which property of the Product to be used by the MultiSelect as a value.
           .BindTo(Model)   //Pass the list of Products to the MultiSelect.
         )
+```
 
 ### Ajax Binding
 
@@ -101,7 +103,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().MultiSelect()
             .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
@@ -117,8 +119,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
                 .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
             })
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().MultiSelect()
             .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
@@ -134,6 +136,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
                .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
             })
         )
+```
 
 > **Important:**
 >
@@ -169,7 +172,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().MultiSelect()
             .Name("productMultiSelect")
@@ -191,8 +194,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
                       });
             })
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().MultiSelect()
             .Name("productMultiSelect")
@@ -214,6 +217,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
                       });
             })
         )
+```
 
 ### Parameter Sending to Server
 
@@ -221,7 +225,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().MultiSelect()
                 .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
@@ -246,8 +250,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
                 };
             }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().MultiSelect()
               .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
@@ -272,6 +276,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
                 };
             }
         </script>
+```
 
 The example below demonstrates how the `GetProducts` method is used.
 
@@ -319,7 +324,7 @@ When deferred binding&mdash;`AutoBind: false`&mdash;is used, specify a list of d
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%= Html.Kendo().MultiSelect()
                 .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
@@ -340,8 +345,8 @@ When deferred binding&mdash;`AutoBind: false`&mdash;is used, specify a list of d
                   new Product { ProductName = "Chang", ProductID = 2 }
                 })
         %>
-
-**razor**
+```
+```tab-Razor
 
         @(Html.Kendo().MultiSelect()
               .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
@@ -362,6 +367,7 @@ When deferred binding&mdash;`AutoBind: false`&mdash;is used, specify a list of d
                 new Product { ProductName = "Chang", ProductID = 2 }
               })
         )
+```
 
 ### Grouping
 
@@ -383,7 +389,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().MultiSelect()
             .Name("multiselect")
@@ -402,8 +408,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the change event.
         }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().MultiSelect()
           .Name("multiselect")
@@ -422,6 +428,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the change event.
         }
         </script>
+```
 
 ### By Template Delegate
 
@@ -429,7 +436,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().MultiSelect()
           .Name("multiselect")
@@ -447,6 +454,7 @@ The example below demonstrates how to subscribe to events by a template delegate
                 </text>)
           )
         )
+```
 
 ## Reference
 

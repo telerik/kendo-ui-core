@@ -29,21 +29,22 @@ Below are listed the steps for you to follow when configuring the Kendo UI Maske
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().MaskedTextBox()
                 .Name("maskedtextbox") //The name of the MaskedTextBox is mandatory. It specifies the "id" attribute of the widget.
                 .Mask("(000) 000-0000") //Set the mask value of the MaskedTextBox.
                 .Value("(123) 345-6789") //Set the value of the MaskedTextBox.
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().MaskedTextBox()
               .Name("maskedtextbox") //The name of the MaskedTextBox is mandatory. It specifies the "id" attribute of the widget.
               .Mask("(000) 000-0000") //Set the mask value of the MaskedTextBox.
               .Value("(123) 345-6789") //Set the value of the MaskedTextBox.
         )
+```
 
 ### Define Mask Values
 
@@ -53,19 +54,20 @@ The example below demonstrates how to set a `zip code` mask
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().MaskedTextBox()
                 .Name("maskedtextbox")
                 .Mask("00000-9999") //Set the zip code.
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().MaskedTextBox()
               .Name("maskedtextbox")
               .Mask("00000-9999") //Set the zip code.
         )
+```
 
 > **Important**
 >
@@ -79,7 +81,7 @@ The example below demonstrates how to define a custom rule for the `-` (minus) a
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
       <%: Html.Kendo().MaskedTextBox()
               .Name("maskedtextbox")
@@ -88,8 +90,8 @@ The example below demonstrates how to define a custom rule for the `-` (minus) a
               })
               .Mask("~0000") //Set a mask with a custom rule.
       %>
-
-**Razor**
+```
+```tab-Razor
 
       @(Html.Kendo().MaskedTextBox()
             .Name("maskedtextbox")
@@ -98,6 +100,7 @@ The example below demonstrates how to define a custom rule for the `-` (minus) a
             })
             .Mask("~0000") //Set a mask with a custom rule.
       )
+```
 
 > **Important**
 >
@@ -113,7 +116,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
       <%: Html.Kendo().MaskedTextBox()
               .Name("maskedtextbox")
@@ -126,8 +129,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
           //Handle the change event.
       }
       </script>
-
-**Razor**
+```
+```tab-Razor
 
       @(Html.Kendo().MaskedTextBox()
             .Name("maskedtextbox")
@@ -140,10 +143,11 @@ The examples below demonstrates how to subscribe to events by a handler name.
           //Handle the change event.
       }
       </script>
+```
 
 ### By Template Delegate
 
-**Razor**
+```tab-Razor
 
       @(Html.Kendo().MaskedTextBox()
             .Name("maskedtextbox")
@@ -155,6 +159,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
                 </text>)
             )
       )
+```
 
 ## Reference
 

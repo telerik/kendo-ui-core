@@ -40,7 +40,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Pivot
 
 ###### Example
 
-**Index.aspx (ASPX)**
+```tab-ASPX
 
       <%: Html.Kendo().PivotGrid()
               .Name("pivotgrid")
@@ -65,8 +65,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Pivot
                   )
               )
       %>
-
-**Index.cshtml (Razor)**
+```
+```tab-Razor
 
       @(Html.Kendo().PivotGrid()
             .Name("pivotgrid")
@@ -91,6 +91,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Pivot
                 )
             )
       )
+```
 
 **Step 3** Build and run the application.
 

@@ -31,7 +31,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Linea
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().LinearGauge()
                 .Name("linearGauge") //The name of the LinearGauge is mandatory. It specifies the "id" attribute of the widget.
@@ -43,8 +43,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Linea
                     .Value(10) //Set the value of the LinearGauge.
                 )
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().LinearGauge()
               .Name("linearGauge") //The name of the LinearGauge is mandatory. It specifies the "id" attribute of the widget.
@@ -56,6 +56,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Linea
                   .Value(10) //Set the value of the LinearGauge.
               )
         )
+```
 
 ## Reference
 

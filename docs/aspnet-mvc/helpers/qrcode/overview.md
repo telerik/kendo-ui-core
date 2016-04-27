@@ -29,23 +29,28 @@ Below are listed the steps for you to follow when configuring the Kendo UI QRCod
 
 **Step 3** Add a QRCode.
 
-**WebForms**
+###### Example
+
+```tab-WebForms
 
         <%: Html.Kendo().QRCode()
         .Name("qrcode") //The name of the QRCode is mandatory. It specifies the "id" attribute of the widget.
         .Value("#ff0000") //Set the value of the QRCode.
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().QRCode()
               .Name("qrcode") //The name of the QRCode is mandatory. It specifies the "id" attribute of the widget.
               .Value("#ff0000") //Set the value of the QRCode.
         )
+```
 
 **Step 4** Choose the appropriate correction level and/or encoding.
 
-**WebForms**
+###### Example
+
+```tab-WebForms
 
         <%: Html.Kendo().QRCode()
                 .Name("qrcode")
@@ -53,8 +58,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI QRCod
                 .Encoding(QREncoding.ISO_8859_1)
                 .Value("foo")
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().QRCode()
               .Name("qrcode")
@@ -62,6 +67,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI QRCod
               .Encoding(QREncoding.ISO_8859_1)
               .Value("foo")
         )
+```
 
 ## Reference
 

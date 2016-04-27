@@ -24,35 +24,37 @@ Below are listed the steps for you to follow when configuring the synchronous mo
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <% using (Html.BeginForm("ProcessSubmit", "Home",
                                  FormMethod.Post, new { id = "uploadForm", enctype = "multipart/form-data" })) { %>
 
         <% } %>
-
-**Razor**
+```
+```tab-Razor
 
         @using (Html.BeginForm("ProcessSubmit", "Home",
                                  FormMethod.Post, new { id = "uploadForm", enctype = "multipart/form-data" })) {
 
         }
+```
 
 **Step 2** Add the Upload inside the form. The only required setting is `name`.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%= Html.Kendo().Upload()
                 .Name("attachments")
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Upload()
                 .Name("attachments")
         )
+```
 
 **Step 3** Add **Submit** and **Reset** buttons to the form.
 
@@ -65,7 +67,7 @@ Below are listed the steps for you to follow when configuring the synchronous mo
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <% using (Html.BeginForm("ProcessSubmit", "Home",
                                  FormMethod.Post, new { id = "uploadForm", enctype = "multipart/form-data" })) { %>
@@ -77,8 +79,8 @@ Below are listed the steps for you to follow when configuring the synchronous mo
             <input type="submit" value="Send" class="t-button" />
             <input type="reset" value="Reset" class="t-button" />
         <% } %>
-
-**Razor**
+```
+```tab-Razor
 
         @using (Html.BeginForm("ProcessSubmit", "Home",
                                  FormMethod.Post, new { id = "uploadForm", enctype = "multipart/form-data" })) {
@@ -90,6 +92,7 @@ Below are listed the steps for you to follow when configuring the synchronous mo
             <input type="submit" value="Send" class="t-button" />
             <input type="reset" value="Reset" class="t-button" />
         }
+```
 
 **Step 5** Process the files in the action. It requires no special server handling as compared to a regular input.
 
@@ -127,7 +130,7 @@ Below are listed the steps for you to follow when configuring the saving of the 
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().Upload()
                 .Name("attachments")
@@ -135,8 +138,8 @@ Below are listed the steps for you to follow when configuring the saving of the 
                     .Save("Save", "Home")
                 )
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Upload()
                 .Name("attachments")
@@ -144,6 +147,7 @@ Below are listed the steps for you to follow when configuring the saving of the 
                     .Save("Save", "Home")
                 )
         )
+```
 
 The `name` attribute is required and must be unique. It is used as a form field name in the requests to the server.
 
@@ -179,7 +183,7 @@ Below are listed the steps for you to follow when configuring the removing of th
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%= Html.Kendo().Upload()
                 .Name("attachments")
@@ -188,8 +192,8 @@ Below are listed the steps for you to follow when configuring the removing of th
                     .Remove("Remove", "Home")
                 )
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Upload()
                 .Name("attachments")
@@ -198,6 +202,7 @@ Below are listed the steps for you to follow when configuring the removing of th
                     .Remove("Remove", "Home")
                 )
         )
+```
 
 **Step 2** Implement the `Remove` action. It takes a `fileNames` parameter of type `string[]`.
 
@@ -232,7 +237,7 @@ The selected files are uploaded immediately by default. You can change this beha
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%= Html.Kendo().Upload()
                 .Name("attachments")
@@ -241,7 +246,8 @@ The selected files are uploaded immediately by default. You can change this beha
                     .AutoUpload(false)
                 )
         %>
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Upload()
                 .Name("attachments")
@@ -250,6 +256,7 @@ The selected files are uploaded immediately by default. You can change this beha
                     .AutoUpload(false)
                 )
         )
+```
 
 ## See Also
 

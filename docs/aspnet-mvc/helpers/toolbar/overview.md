@@ -71,7 +71,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ToolB
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
        <%: Html.Kendo().ToolBar()
            .Resizable(true)   //Enable or disable the resizing feature.
@@ -80,8 +80,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI ToolB
               items.Add().Type(CommandType.Button).Text("Button");
            })
        %>
-
-**Razor**
+```
+```tab-Razor
 
        @(Html.Kendo().ToolBar()
            .Resizable(true)   //Enable or disable the resizing feature.
@@ -90,6 +90,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ToolB
               items.Add().Type(CommandType.Button).Text("Button");
            })
        )
+```
 
 For more information on supported command types, refer to [this link]({% slug overview_kendoui_toolbar_widget %}#command-types).
 
@@ -103,7 +104,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
       <%: Html.Kendo().ToolBar()
            .Items(items => {  //Define the widget commands
@@ -125,8 +126,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
           //.....
       </script>
-
-**Razor**
+```
+```tab-Razor
 
       @(Html.Kendo().ToolBar()
            .Items(items => {  //Define the widget commands
@@ -148,6 +149,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
           //.....
       </script>
+```
 
 ## Reference
 

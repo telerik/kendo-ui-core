@@ -232,7 +232,7 @@ Add a new class to the `~/Models` folder. Name it `TaskViewModel`.
 
 ###### Example
 
-**Index.aspx (ASPX)**
+```tab-ASPX
 
         <%= Html.Kendo().Scheduler<KendoSchedulerAjaxEditing.Models.TaskViewModel>()
             .Name("scheduler")
@@ -260,8 +260,8 @@ Add a new class to the `~/Models` folder. Name it `TaskViewModel`.
                 .Update("Tasks_Update", "Home")
             )
         %>
-
-**Index.cshtml (Razor)**
+```
+```tab-Razor
 
         @(Html.Kendo().Scheduler<KendoSchedulerAjaxEditing.Models.TaskViewModel>()
             .Name("scheduler")
@@ -289,6 +289,7 @@ Add a new class to the `~/Models` folder. Name it `TaskViewModel`.
                 .Update("Tasks_Update", "Home")
             )
         )
+```
 
 **Step 6** Build and run the application.
 

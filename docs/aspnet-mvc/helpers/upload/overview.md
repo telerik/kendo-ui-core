@@ -31,7 +31,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Uploa
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().Upload()
                 .Name("attachments")
@@ -39,8 +39,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Uploa
                     .Save("Save", "Home")
                 )
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Upload()
                 .Name("attachments")
@@ -48,6 +48,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Uploa
                     .Save("Save", "Home")
                 )
         )
+```
 
 The name attribute is required and must be unique. It is used as a form field name in the requests to the server.
 
@@ -83,7 +84,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().Upload()
                 .Name("attachments")
@@ -101,8 +102,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the success event.
         }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Upload()
                 .Name("attachments")
@@ -120,6 +121,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the success event.
         }
         </script>
+```
 
 ### By Template Delegate
 
@@ -127,7 +129,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().Upload()
               .Name("attachments")
@@ -144,6 +146,7 @@ The example below demonstrates how to subscribe to events by a template delegate
                     </text>)
               )
         )
+```
 
 ## Reference
 

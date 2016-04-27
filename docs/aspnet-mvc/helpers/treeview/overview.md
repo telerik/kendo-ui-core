@@ -31,7 +31,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeV
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().TreeView()
                 .Name("treeview") //The name of the treeview is mandatory. It specifies the "id" attribute of the widget.
@@ -41,8 +41,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeV
                     items.Add().Text("Item 2"); //Add item with text "Item2")
                 })
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().TreeView()
               .Name("treeview") //The name of the treeview is mandatory. It specifies the "id" attribute of the widget.
@@ -52,6 +52,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeV
                   items.Add().Text("Item 2"); //Add item with text "Item2")
               })
         )
+```
 
 ### Security Trimming
 
@@ -74,7 +75,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().TreeView()
                 .Name("treeview")
@@ -92,8 +93,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the expand event
         }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().TreeView()
               .Name("treeview")
@@ -111,6 +112,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the expand event
         }
         </script>
+```
 
 ### By Template Delegate
 
@@ -118,7 +120,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().TreeView()
               .Name("treeview")
@@ -135,6 +137,7 @@ The example below demonstrates how to subscribe to events by a template delegate
                     </text>)
               )
         )
+```
 
 ## Reference
 

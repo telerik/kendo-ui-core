@@ -64,7 +64,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sched
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%= Html.Kendo().Scheduler<KendoUISchedulerDemo.Models.Projection>()
                 .Name("scheduler")
@@ -75,8 +75,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sched
                 .Height(600)
                 .BindTo(Model)
          %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Scheduler<KendoUISchedulerDemo.Models.Projection>()
                 .Name("scheduler")
@@ -87,6 +87,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sched
                 .Height(600)
                 .BindTo(Model)
         )
+```
 
 ## Event Handling
 
@@ -98,7 +99,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%=Html.Kendo().Scheduler<KendoUISchedulerDemo.Models.Projection>()
                 .Name("scheduler")
@@ -124,8 +125,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
                  //Handle the dataBinding event.
              }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
        @(Html.Kendo().Scheduler<KendoUISchedulerDemo.Models.Projection>()
                 .Name("scheduler")
@@ -150,6 +151,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
                 //Handle the dataBinding event.
             }
         </script>
+```
 
 ### By Template Delegate
 
@@ -157,7 +159,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
           @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.Projection>()
                   .Name("scheduler")
@@ -180,6 +182,7 @@ The example below demonstrates how to subscribe to events by a template delegate
                       </text>);
                   })
           )
+```
 
 ## Reference
 

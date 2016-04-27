@@ -33,7 +33,7 @@ Below are listed the steps for you to follow when configuring the sending of met
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%= Html.Kendo().Upload()
                 .Name("attachments")
@@ -42,8 +42,8 @@ Below are listed the steps for you to follow when configuring the sending of met
                           new { messageId = ViewBag.MessageId })
                 )
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Upload()
                 .Name("attachments")
@@ -52,6 +52,7 @@ Below are listed the steps for you to follow when configuring the sending of met
                           new { messageId = ViewBag.MessageId })
                 )
         )
+```
 
 **Step 3** Process the file using the message ID.
 
@@ -102,7 +103,7 @@ Below are listed the steps for you to follow to do that.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%= Html.Kendo().Upload()
             .Name("attachments")
@@ -113,8 +114,8 @@ Below are listed the steps for you to follow to do that.
                 .Upload("onUpload")
             )
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Upload()
             .Name("attachments")
@@ -125,6 +126,7 @@ Below are listed the steps for you to follow to do that.
                 .Upload("onUpload")
             )
         )
+```
 
 **Step 4** Process the file and the associated description.
 
@@ -179,7 +181,7 @@ Below are listed the steps for you to follow when configuring the receiving of m
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%= Html.Kendo().Upload()
             .Name("attachments")
@@ -190,8 +192,8 @@ Below are listed the steps for you to follow when configuring the receiving of m
                 .Success("onSuccess")
             )
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Upload()
             .Name("attachments")
@@ -202,6 +204,7 @@ Below are listed the steps for you to follow when configuring the receiving of m
                 .Success("onSuccess")
             )
         )
+```
 
 The same approach is applicable for the `remove` handler as well.
 

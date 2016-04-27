@@ -21,76 +21,11 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sprea
 * Telerik UI for ASP.NET MVC application. It is available after installing the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_aspnetmvc %}).
 * Default Visual Studio template. Follow the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}) to set up to the application.
 
-**Step 2** Add a Kendo UI Spreadsheet to the `Index` view.
+**Step 2** Add a Kendo UI Spreadsheet to the `Index` view in `Views/Home/Index.cshtml`.
 
 ###### Example
 
-`Views/Home/Index.cshtml`
-
-      @(Html.Kendo().Spreadsheet()
-      .Name("spreadsheet")
-      .Sheets(sheets => {
-          sheets.Add()
-              .Name("Food Order")
-              .MergedCells("A1:F1", "C15:E15")
-              .Columns(columns =>
-              {
-                  columns.Add().Width(100);
-                  columns.Add().Width(215);
-                  columns.Add().Width(115);
-                  columns.Add().Width(115);
-                  columns.Add().Width(115);
-                  columns.Add().Width(155);
-              })
-              .Rows(rows =>
-              {
-                  rows.Add().Height(50).Cells(cells =>
-                  {
-                      cells.Add()
-                          .Value("My Company")
-                          .FontSize(25)
-                          .Background("rgb(142,196,65)")
-                          .TextAlign(SpreadsheetTextAlign.Center)
-                          .Color("white");
-                  });
-
-                  rows.Add().Height(25).Cells(cells =>
-                  {
-                      cells.Add()
-                          .Value("ID")
-                          .Background("rgb(212,223,50)")
-                          .TextAlign(SpreadsheetTextAlign.Center);
-
-                      cells.Add()
-                          .Value("Product")
-                          .Background("rgb(212,223,50)")
-                          .TextAlign(SpreadsheetTextAlign.Center);
-
-                      cells.Add()
-                          .Value("Quantity")
-                          .Background("rgb(212,223,50)")
-                          .TextAlign(SpreadsheetTextAlign.Center);
-
-                      cells.Add()
-                          .Value("Price")
-                          .Background("rgb(212,223,50)")
-                          .TextAlign(SpreadsheetTextAlign.Center);
-
-                      cells.Add()
-                          .Value("Tax")
-                          .Background("rgb(212,223,50)")
-                          .TextAlign(SpreadsheetTextAlign.Center);
-
-                      cells.Add()
-                          .Value("Amount")
-                          .Background("rgb(212,223,50)")
-                          .TextAlign(SpreadsheetTextAlign.Center);
-                  });
-              });
-          })
-      )
-
-`Views/Home/Index.aspx`
+```tab-ASPX
 
       <%:Html.Kendo().Spreadsheet()
           .Name("spreadsheet")
@@ -154,6 +89,71 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sprea
                   });
               })
       %>
+```
+```tab-Razor
+      @(Html.Kendo().Spreadsheet()
+      .Name("spreadsheet")
+      .Sheets(sheets => {
+          sheets.Add()
+              .Name("Food Order")
+              .MergedCells("A1:F1", "C15:E15")
+              .Columns(columns =>
+              {
+                  columns.Add().Width(100);
+                  columns.Add().Width(215);
+                  columns.Add().Width(115);
+                  columns.Add().Width(115);
+                  columns.Add().Width(115);
+                  columns.Add().Width(155);
+              })
+              .Rows(rows =>
+              {
+                  rows.Add().Height(50).Cells(cells =>
+                  {
+                      cells.Add()
+                          .Value("My Company")
+                          .FontSize(25)
+                          .Background("rgb(142,196,65)")
+                          .TextAlign(SpreadsheetTextAlign.Center)
+                          .Color("white");
+                  });
+
+                  rows.Add().Height(25).Cells(cells =>
+                  {
+                      cells.Add()
+                          .Value("ID")
+                          .Background("rgb(212,223,50)")
+                          .TextAlign(SpreadsheetTextAlign.Center);
+
+                      cells.Add()
+                          .Value("Product")
+                          .Background("rgb(212,223,50)")
+                          .TextAlign(SpreadsheetTextAlign.Center);
+
+                      cells.Add()
+                          .Value("Quantity")
+                          .Background("rgb(212,223,50)")
+                          .TextAlign(SpreadsheetTextAlign.Center);
+
+                      cells.Add()
+                          .Value("Price")
+                          .Background("rgb(212,223,50)")
+                          .TextAlign(SpreadsheetTextAlign.Center);
+
+                      cells.Add()
+                          .Value("Tax")
+                          .Background("rgb(212,223,50)")
+                          .TextAlign(SpreadsheetTextAlign.Center);
+
+                      cells.Add()
+                          .Value("Amount")
+                          .Background("rgb(212,223,50)")
+                          .TextAlign(SpreadsheetTextAlign.Center);
+                  });
+              });
+          })
+      )
+```
 
 **Step 3** Build and run the application.
 
@@ -171,7 +171,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**ASPX**
+```tab-ASPX
 
       <%:Html.Kendo().Spreadsheet()
           .Name("spreadsheet")
@@ -185,8 +185,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
               //Handle the render event.
           }
       </script>
-
-**Razor**
+```
+```tab-Razor
 
       @(Html.Kendo().Spreadsheet()
           .Name("spreadsheet")
@@ -200,6 +200,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
               //Handle the render event.
           }
       </script>
+```
 
 ### By Template Delegate
 
@@ -207,7 +208,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
       @(Html.Kendo().Spreadsheet()
           .Name("spreadsheet")
@@ -219,6 +220,7 @@ The example below demonstrates how to subscribe to events by a template delegate
               </text>)
           )
       )
+```
 
 ## Reference
 

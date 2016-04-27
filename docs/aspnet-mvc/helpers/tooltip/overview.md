@@ -39,7 +39,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Toolt
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
          <%: Html.Kendo().Tooltip()
              .For("#container") //The for option of the Tooltip is mandatory.
@@ -47,8 +47,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Toolt
              .Filter("a[title]") //The jQuery selector which narrows the elements within the container for which the Tooltip will be shown.
              .Content("custom text")
          %>
-
-**Razor**
+```
+```tab-Razor
 
          @(Html.Kendo().Tooltip()
              .For("#container") //The for option of the Tooltip is mandatory.
@@ -56,6 +56,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Toolt
              .Filter("a[title]") //The jQuery selector which narrows the elements within the container for which the Tooltip will be shown.
              .Content("custom text")
          )
+```
 
 ### Load-on-Demand Content
 
@@ -85,21 +86,22 @@ Below are listed the steps for you to follow when configuring the Kendo UI Toolt
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().Tooltip()
                .For("#container") //The for option of the Tooltip is mandatory.
                                 //It is a jQuery selector which specifies the element or the container for the elements for which the Tooltip will be shown.
                .LoadContentFrom("AjaxContent", "Tooltip") //Define the Action and Controller names.
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Tooltip()
                .For("#container") //The for option of the Tooltip is mandatory.
                                 //It is a jQuery selector which specifies the element or the container for the elements for which the Tooltip will be shown.
                .LoadContentFrom("AjaxContent", "Tooltip") //Define the Action and Controller names.
         )
+```
 
 ## Event Handling
 
@@ -111,7 +113,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().Tooltip()
             .For("#container")
@@ -129,8 +131,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
                 //Handle the hide event.
             }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Tooltip()
           .For("#container")
@@ -148,6 +150,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
                 //Handle the hide event.
             }
         </script>
+```
 
 ### By Template Delegate
 
@@ -155,7 +158,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().Tooltip()
           .For("#container")
@@ -172,6 +175,7 @@ The example below demonstrates how to subscribe to events by a template delegate
                 </text>)
           )
         )
+```
 
 ## Reference
 

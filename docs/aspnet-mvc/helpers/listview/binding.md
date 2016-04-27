@@ -62,7 +62,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
 ###### Example
 
-**ListView item template**
+```tab-Item Template
 
             <script type="text/x-kendo-tmpl" id="template">
                 <div class="product">
@@ -74,8 +74,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
                     </dl>
                 </div>
             </script>
-
-**WebForms**
+```
+```tab-WebForms
 
             <%: Html.Kendo().ListView<MvcApplication1.Models.Product>()
                 .Name("ListView")
@@ -86,8 +86,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
                 )
                 .Pageable()
             %>
-
-**Razor**
+```
+```tab-Razor
 
             @(Html.Kendo().ListView<MvcApplication1.Models.Product>()
                 .Name("ListView")
@@ -98,6 +98,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
                 )
                 .Pageable()
             )
+```
 
 The `ToDataSourceResult` method uses the `DataSourceRequest` parameter and Linq expressions to apply paging, sorting, filtering, and grouping. The JSON response of the action method will contain only a single page of data. The ListView will be bound to that data.
 
@@ -119,7 +120,7 @@ The example below demonstrates how to send additional data.
 
 ###### Example
 
-**WebForms**
+``tab-WebForms
 
           <%: Html.Kendo().ListView<MvcApplication1.Models.Product>()
                   .Name("ListView")
@@ -139,8 +140,8 @@ The example below demonstrates how to send additional data.
               };
           }
           </script>
-
-**Razor**
+```
+```tag-Razor
 
           @(Html.Kendo().ListView<MvcApplication1.Models.Product>()
               .Name("ListView")
@@ -160,6 +161,7 @@ The example below demonstrates how to send additional data.
               };
           }
           </script>
+```
 
 ### Client Data Processing
 
