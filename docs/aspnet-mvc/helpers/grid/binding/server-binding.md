@@ -29,7 +29,7 @@ The examples below demonstrate how to bind to the view model.
 
 ###### Example
 
-**Controller**
+```tab-Controller
 
     public ActionResult Index()
     {
@@ -37,24 +37,8 @@ The examples below demonstrate how to bind to the view model.
         var products = northwind.Products;
         return View(products);
     }
-
-**Razor**
-
-    @model IEnumerable<KendoGridServerBinding.Models.Product>
-
-    @(Html.Kendo().Grid(Model) //Bind the Grid to the Model property of the view.
-          .Name("Grid")
-          .Columns(columns =>
-          {
-              columns.Bound(p => p.ProductID);   //Create a column bound to the "ProductID" property
-              columns.Bound(p => p.ProductName); //Create a column bound to the "ProductName" property
-              columns.Bound(p => p.UnitPrice);   //Create a column bound to the "UnitPrice" property
-              columns.Bound(p => p.UnitsInStock);//Create a column bound to the "UnitsInStock" property
-          })
-         .Pageable() //Enable paging.
-    )
-
-**ASPX**
+```
+```tab-ASPX
 
     <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
        Inherits="System.Web.Mvc.ViewPage<IEnumerable<KendoGridServerBinding.Models.Product>>" %>
@@ -70,6 +54,23 @@ The examples below demonstrate how to bind to the view model.
             })
             .Pageable() //Enable paging
     %>
+```
+```tab-Razor
+
+    @model IEnumerable<KendoGridServerBinding.Models.Product>
+
+    @(Html.Kendo().Grid(Model) //Bind the Grid to the Model property of the view.
+          .Name("Grid")
+          .Columns(columns =>
+          {
+              columns.Bound(p => p.ProductID);   //Create a column bound to the "ProductID" property
+              columns.Bound(p => p.ProductName); //Create a column bound to the "ProductName" property
+              columns.Bound(p => p.UnitPrice);   //Create a column bound to the "UnitPrice" property
+              columns.Bound(p => p.UnitsInStock);//Create a column bound to the "UnitsInStock" property
+          })
+         .Pageable() //Enable paging.
+    )
+```
 
 To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/server-binding).
 
@@ -79,7 +80,7 @@ The example below demonstrates how to bind to an item from the `ViewData` or `Vi
 
 ###### Example
 
-**Action**
+```tab-Action
 
     public ActionResult Index()
     {
@@ -89,8 +90,8 @@ The example below demonstrates how to bind to an item from the `ViewData` or `Vi
 
         return View();
     }
-
-**WebForms**
+```
+```tab-WebForms
 
     <%: Html.Kendo().Grid((IEnumerable<MvcApplication1.Models.Product>)ViewData["products"])
             .Name("Grid")
@@ -102,8 +103,8 @@ The example below demonstrates how to bind to an item from the `ViewData` or `Vi
                 columns.Bound(p => p.UnitsInStock);
             })
     %>
-
-**Razor**
+```
+```tab-Razor
 
     @(Html.Kendo().Grid((IEnumerable<MvcApplication1.Models.Product>)ViewData["products"])
           .Name("Grid")
@@ -115,12 +116,13 @@ The example below demonstrates how to bind to an item from the `ViewData` or `Vi
               columns.Bound(p => p.UnitsInStock);
           })
     )
+```
 
 ### Apply the BindTo Method
 
 The example below demonstrates how to use the `BindTo` method.
 
-**Action**
+```tab-Action
 
     public ActionResult Index()
     {
@@ -130,8 +132,8 @@ The example below demonstrates how to use the `BindTo` method.
 
         return View();
     }
-
-**WebForms**
+```
+```tab-WebForms
 
     <%: Html.Kendo().Grid<MvcApplication1.Models.Product>() // Specify the type of the grid
             .Name("Grid")
@@ -144,8 +146,8 @@ The example below demonstrates how to use the `BindTo` method.
                 columns.Bound(p => p.UnitsInStock);
             })
     %>
-
-**Razor**
+```
+```tab-Razor
 
     @(Html.Kendo().Grid<MvcApplication1.Models.Product>() // Specify the type of the grid
         .Name("Grid")
@@ -158,7 +160,7 @@ The example below demonstrates how to use the `BindTo` method.
             columns.Bound(p => p.UnitsInStock);
         })
     )
-
+```
 
 The Grid makes `HTTP GET` requests to the action method which initially renders the view. The Grid page, sort, filter, and group information is passed as query string parameters.
 
@@ -180,7 +182,7 @@ The example below demonstrates how to pass them.
 
 ###### Example
 
-**Action**
+```tab-Action
 
     public ActionResult Index(string firstName, string lastName)
     {
@@ -188,8 +190,8 @@ The example below demonstrates how to pass them.
 
         return View(products);
     }
-
-**WebForms**
+```
+```tab-WebForms
 
     <%: Html.Kendo().Grid(Model)
             .Name("Grid")
@@ -198,8 +200,8 @@ The example below demonstrates how to pass them.
                 .Read(read => read.Action("Index", "Home", new { firstName = "John", lastName = "Doe } ))
             )
     %>
-
-**Razor**
+```
+```tab-Razor
 
     @(Html.Kendo().Grid(Model)
           .Name("Grid")
@@ -208,6 +210,7 @@ The example below demonstrates how to pass them.
               .Read(read => read.Action("Index", "Home", new { firstName = "John", lastName = "Doe } ))
           )
     )
+```
 
 ## Supported Client-Side Events
 

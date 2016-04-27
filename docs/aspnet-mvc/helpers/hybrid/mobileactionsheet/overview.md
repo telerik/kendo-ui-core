@@ -32,7 +32,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ###### Example
 
-**Index.aspx (ASPX)**
+```tab-ASPX
 
         <% Html.Kendo().MobileView()
                 .Name("actionsheet-view")
@@ -63,8 +63,8 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
                 })
                 .Render();
         %>
-
-**Index.cshtml (Razor)**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileView()
             .Name("actionsheet-view")
@@ -91,22 +91,24 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
             </text>)
         )
+```
 
 **Step 3** Initialize the mobile application.
 
 ###### Example
 
-**Index.aspx (ASPX)**
+```tab-ASPX
 
         <%: Html.Kendo().MobileApplication()
                 .ServerNavigation(true)
         %>
-
-**Index.cshtml (Razor)**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileApplication()
             .ServerNavigation(true)
         )
+```
 
 **Step 4** Build and run the application.
 
@@ -120,7 +122,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**ASPX**
+```tab-ASPX
 
         <%: Html.Kendo().MobileActionSheet()
                 .Name("MobileActionSheet")
@@ -141,8 +143,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Will execute when item with `Reply` title is clicked.
         }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileActionSheet()
                 .Name("MobileActionSheet")
@@ -163,6 +165,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Will execute when item with `Reply` title is clicked.
         }
         </script>
+```
 
 ## Reference
 

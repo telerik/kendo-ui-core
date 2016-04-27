@@ -194,43 +194,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 ###### Example
 
-**Razor**
-
-        @(Html.Kendo().Grid<KendoGridBatchEditing.Models.ProductViewModel>()
-              .Name("grid")
-              .Columns(columns =>
-              {
-                  columns.Bound(product => product.ProductID).Width(100);
-                  columns.Bound(product => product.ProductName);
-                  columns.Bound(product => product.UnitsInStock).Width(250);
-                  columns.Command(commands =>
-                  {
-                      commands.Destroy(); // The "destroy" command removes data items.
-                  }).Title("Commands").Width(200);
-              })
-              .ToolBar(toolbar =>
-              {
-                  toolbar.Create(); // The "create" command adds new data items.
-                  toolbar.Save(); // The "save" command saves the changed data items.
-              })
-              .Editable(editable => editable.Mode(GridEditMode.InCell)) // Use in-cell editing mode.
-              .DataSource(dataSource =>
-                  dataSource.Ajax()
-                    .Batch(true) // Enable batch updates.
-                    .Model(model =>
-                    {
-                        model.Id(product => product.ProductID); // Specify the property which is the unique identifier of the model.
-                        model.Field(product => product.ProductID).Editable(false); // Make the ProductID property not editable.
-                    })
-                    .Create(create => create.Action("Products_Create", "Home")) // Action method invoked when the user saves a new data item.
-                    .Read(read => read.Action("Products_Read", "Home"))  // Action method invoked when the grid needs data.
-                    .Update(update => update.Action("Products_Update", "Home"))  // Action method invoked when the user saves an updated data item.
-                    .Destroy(destroy => destroy.Action("Products_Destroy", "Home")) // Action method invoked when the user removes a data item.
-              )
-              .Pageable()
-        )
-
-**ASPX**
+```tab-ASPX
 
         <%: Html.Kendo().Grid<KendoGridBatchEditing.Models.ProductViewModel>()
               .Name("grid")
@@ -265,6 +229,43 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
               )
               .Pageable()
         %>
+```
+```tab-Razor
+
+        @(Html.Kendo().Grid<KendoGridBatchEditing.Models.ProductViewModel>()
+              .Name("grid")
+              .Columns(columns =>
+              {
+                  columns.Bound(product => product.ProductID).Width(100);
+                  columns.Bound(product => product.ProductName);
+                  columns.Bound(product => product.UnitsInStock).Width(250);
+                  columns.Command(commands =>
+                  {
+                      commands.Destroy(); // The "destroy" command removes data items.
+                  }).Title("Commands").Width(200);
+              })
+              .ToolBar(toolbar =>
+              {
+                  toolbar.Create(); // The "create" command adds new data items.
+                  toolbar.Save(); // The "save" command saves the changed data items.
+              })
+              .Editable(editable => editable.Mode(GridEditMode.InCell)) // Use in-cell editing mode.
+              .DataSource(dataSource =>
+                  dataSource.Ajax()
+                    .Batch(true) // Enable batch updates.
+                    .Model(model =>
+                    {
+                        model.Id(product => product.ProductID); // Specify the property which is the unique identifier of the model.
+                        model.Field(product => product.ProductID).Editable(false); // Make the ProductID property not editable.
+                    })
+                    .Create(create => create.Action("Products_Create", "Home")) // Action method invoked when the user saves a new data item.
+                    .Read(read => read.Action("Products_Read", "Home"))  // Action method invoked when the grid needs data.
+                    .Update(update => update.Action("Products_Update", "Home"))  // Action method invoked when the user saves an updated data item.
+                    .Destroy(destroy => destroy.Action("Products_Destroy", "Home")) // Action method invoked when the user removes a data item.
+              )
+              .Pageable()
+        )
+```
 
 **Step 11** Build and run the application.
 

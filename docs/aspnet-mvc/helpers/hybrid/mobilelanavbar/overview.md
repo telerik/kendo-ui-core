@@ -31,7 +31,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ###### Example
 
-**Index.aspx (ASPX)**
+```tab-ASPX
 
         <% Html.Kendo().MobileView()
                 .Name("navbar-home")
@@ -62,8 +62,8 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
                 })
                 .Render();
         %>
-
-**Index.cshtml (Razor)**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileView()
             .Name("navbar-home")
@@ -80,22 +80,24 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
                 )
             .Content(@<text>View Content</text>)
         )
+```
 
 **Step 4** Initialize the mobile application.
 
 ###### Example
 
-**Index.aspx (ASPX)**
+```tab-ASPX
 
         <%: Html.Kendo().MobileApplication()
                 .ServerNavigation(true)
         %>
-
-**Index.cshtml (Razor)**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileApplication()
             .ServerNavigation(true)
         )
+```
 
 **Step 5** Build and run the application.
 

@@ -96,28 +96,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 ###### Example
 
-**Razor**
-
-    @(Html.Kendo().Grid<KendoGridAjaxBinding.Models.Product>()
-          .Name("grid")
-          .DataSource(dataSource => dataSource //Configure the Grid data source.
-              .Ajax() //Specify that Ajax binding is used.
-              .Read(read => read.Action("Products_Read", "Home")) //Set the action method which will return the data in JSON format.
-           )
-          .Columns(columns =>
-          {
-              //Create a column bound to the ProductID property.
-              columns.Bound(product => product.ProductID);
-              //Create a column bound to the ProductName property.
-              columns.Bound(product => product.ProductName);
-              //Create a column bound to the UnitsInStock property.
-              columns.Bound(product => product.UnitsInStock);
-          })
-          .Pageable() // Enable paging
-          .Sortable() // Enable sorting
-    )
-
-**ASPX**
+```tab-ASPX
 
     <%: Html.Kendo().Grid<KendoGridAjaxBinding.Models.Product>()
           .Name("grid")
@@ -137,6 +116,28 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
           .Pageable() // Enable paging
           .Sortable() // Enable sorting
     %>
+```
+```tab-Razor
+
+    @(Html.Kendo().Grid<KendoGridAjaxBinding.Models.Product>()
+          .Name("grid")
+          .DataSource(dataSource => dataSource //Configure the Grid data source.
+              .Ajax() //Specify that Ajax binding is used.
+              .Read(read => read.Action("Products_Read", "Home")) //Set the action method which will return the data in JSON format.
+           )
+          .Columns(columns =>
+          {
+              //Create a column bound to the ProductID property.
+              columns.Bound(product => product.ProductID);
+              //Create a column bound to the ProductName property.
+              columns.Bound(product => product.ProductName);
+              //Create a column bound to the UnitsInStock property.
+              columns.Bound(product => product.UnitsInStock);
+          })
+          .Pageable() // Enable paging
+          .Sortable() // Enable sorting
+    )
+```
 
 **Step 10** Build and run the application.
 
@@ -177,25 +178,7 @@ This section shows how to use view models and the Kendo UI Grid for ASP.NET MVC.
 
 ###### Example
 
-**Razor**
-
-    @(Html.Kendo().Grid<KendoGridAjaxBinding.Models.ProductViewModel>()
-          .Name("grid")
-          .DataSource(dataSource => dataSource
-              .Ajax()
-              .Read(read => read.Action("Products_Read", "Home"))
-           )
-          .Columns(columns =>
-          {
-              columns.Bound(product => product.ProductID);
-              columns.Bound(product => product.ProductName);
-              columns.Bound(product => product.UnitsInStock);
-          })
-          .Pageable()
-          .Sortable()
-    )
-
-**ASPX**
+```tab-ASPX
 
     <%: Html.Kendo().Grid<KendoGridAjaxBinding.Models.ProductViewModel>()
           .Name("grid")
@@ -212,6 +195,25 @@ This section shows how to use view models and the Kendo UI Grid for ASP.NET MVC.
           .Pageable()
           .Sortable()
     %>
+```
+```tab-Razor
+
+    @(Html.Kendo().Grid<KendoGridAjaxBinding.Models.ProductViewModel>()
+          .Name("grid")
+          .DataSource(dataSource => dataSource
+              .Ajax()
+              .Read(read => read.Action("Products_Read", "Home"))
+           )
+          .Columns(columns =>
+          {
+              columns.Bound(product => product.ProductID);
+              columns.Bound(product => product.ProductName);
+              columns.Bound(product => product.UnitsInStock);
+          })
+          .Pageable()
+          .Sortable()
+    )
+```
 
 **Step 4** Modify the `Products_Read` action method and use the `ToDataSourceResult` method overload which accepts a mapping lambda.
 
@@ -254,7 +256,7 @@ The example below demonstrates how to specify the JavaScript function which retu
 
 ###### Example
 
-**ASPX**
+```tab-ASPX
 
     <%: Html.Kendo().Grid<KendoGridAjaxBinding.Models.Product>()
           .Name("grid")
@@ -282,8 +284,8 @@ The example below demonstrates how to specify the JavaScript function which retu
         };
     }
     </script>
-
-**Razor**
+```
+```tab-Razor
 
     @(Html.Kendo().Grid<KendoGridAjaxBinding.Models.Product>()
           .Name("grid")
@@ -311,6 +313,7 @@ The example below demonstrates how to specify the JavaScript function which retu
         };
     }
     </script>
+```
 
 ### Enable Client Data Processing
 
@@ -320,7 +323,7 @@ The example below demonstrates how to enable client data processing.
 
 ###### Example
 
-**ASPX**
+```tab-ASPX
 
     <%: Html.Kendo().Grid<KendoGridAjaxBinding.Models.Product>()
           .Name("grid")
@@ -341,8 +344,8 @@ The example below demonstrates how to enable client data processing.
           .Pageable()
           .Sortable()
     %>
-
-**Razor**
+```
+```tab-Razor
 
     @(Html.Kendo().Grid<KendoGridAjaxBinding.Models.Product>()
           .Name("grid")
@@ -363,6 +366,7 @@ The example below demonstrates how to enable client data processing.
           .Pageable()
           .Sortable()
     )
+```
 
 ### Customize Content and Attach Event Handlers on the Fly
 

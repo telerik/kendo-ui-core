@@ -56,18 +56,7 @@ Below are the steps for you to follow when configuring the Kendo UI Grid for ASP
 
 ###### Example
 
-**Razor**
-
-      @(Html.Kendo().Grid((IEnumerable<KendoGridServerDetailTemplate.Models.Product>)ViewBag.Products)
-            .Name("grid")
-            .Columns(columns =>
-            {
-                columns.Bound(product => product.ProductID);
-                columns.Bound(product => product.ProductName);
-            })
-      )
-
-**ASPX**
+```tab-ASPX
 
       <% Html.Kendo().Grid((IEnumerable<KendoGridServerDetailTemplate.Models.Product>)ViewBag.Products)
             .Name("grid")
@@ -78,12 +67,8 @@ Below are the steps for you to follow when configuring the Kendo UI Grid for ASP
             })
             .Render();
       %>
-
-**Step 7** Set the detail template.
-
-###### Example
-
-**Razor**
+```
+```tab-Razor
 
       @(Html.Kendo().Grid((IEnumerable<KendoGridServerDetailTemplate.Models.Product>)ViewBag.Products)
             .Name("grid")
@@ -92,18 +77,14 @@ Below are the steps for you to follow when configuring the Kendo UI Grid for ASP
                 columns.Bound(product => product.ProductID);
                 columns.Bound(product => product.ProductName);
             })
-            .Pageable()
-            .DetailTemplate(@<text>
-                <div>ProductID: @item.ProductID</div>
-                <div>ProductName: @item.ProductName</div>
-                <div>UnitsInStock: @item.UnitsInStock</div>
-                <div>UnitPrice: @item.UnitPrice</div>
-                <div>UnitsOnOrder: @item.UnitsOnOrder</div>
-                <div>Discontinued: @item.Discontinued</div>
-            </text>)
       )
+```
 
-**ASPX**
+**Step 7** Set the detail template.
+
+###### Example
+
+```tab-ASPX
 
       <%: Html.Kendo().Grid((IEnumerable<KendoGridServerDetailTemplate.Models.Product>)ViewBag.Products)
             .Name("grid")
@@ -125,6 +106,27 @@ Below are the steps for you to follow when configuring the Kendo UI Grid for ASP
             })
             .Render();
       %>
+```
+```tab-Razor
+
+      @(Html.Kendo().Grid((IEnumerable<KendoGridServerDetailTemplate.Models.Product>)ViewBag.Products)
+            .Name("grid")
+            .Columns(columns =>
+            {
+                columns.Bound(product => product.ProductID);
+                columns.Bound(product => product.ProductName);
+            })
+            .Pageable()
+            .DetailTemplate(@<text>
+                <div>ProductID: @item.ProductID</div>
+                <div>ProductName: @item.ProductName</div>
+                <div>UnitsInStock: @item.UnitsInStock</div>
+                <div>UnitPrice: @item.UnitPrice</div>
+                <div>UnitsOnOrder: @item.UnitsOnOrder</div>
+                <div>Discontinued: @item.Discontinued</div>
+            </text>)
+      )
+```
 
 **Step 8** Build and run the project.
 
@@ -169,18 +171,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 ###### Example
 
-**Razor**
-
-        @(Html.Kendo().Grid((IEnumerable<KendoGridServerHierarchy.Models.Category>)ViewBag.Categories)
-              .Name("grid")
-              .Columns(columns =>
-              {
-                  columns.Bound(category => category.CategoryID);
-                  columns.Bound(category => category.CategoryName);
-              })
-        )
-
-**ASPX**
+```tab-ASPX
 
         <% Html.Kendo().Grid((IEnumerable<KendoGridServerHierarchy.Models.Category>)ViewBag.Categories)
               .Name("grid")
@@ -191,12 +182,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
               })
               .Render();
         %>
-
-**Step 7** Set the detail template. Define another Grid which is bound to the `Products` property of the category entity. Make sure the name of the Grid is unique.
-
-###### Example
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Grid((IEnumerable<KendoGridServerHierarchy.Models.Category>)ViewBag.Categories)
               .Name("grid")
@@ -205,21 +192,14 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
                   columns.Bound(category => category.CategoryID);
                   columns.Bound(category => category.CategoryName);
               })
-              .Pageable()
-              .DetailTemplate(@<text>
-                @(Html.Kendo().Grid(item.Products)
-                      .Name(string.Format("product_grid_{0}", item.CategoryID)) // The Name() should be unique.
-                      .Columns(columns =>
-                      {
-                          columns.Bound(product => product.ProductID);
-                          columns.Bound(product => product.ProductName);
-                      })
-                      .Pageable()
-                )
-              </text>)
         )
+```
 
-**ASPX**
+**Step 7** Set the detail template. Define another Grid which is bound to the `Products` property of the category entity. Make sure the name of the Grid is unique.
+
+###### Example
+
+```tab-ASPX
 
         <% Html.Kendo().Grid((IEnumerable<KendoGridServerHierarchy.Models.Category>)ViewBag.Categories)
               .Name("grid")
@@ -244,6 +224,30 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
               })
               .Render();
         %>
+```
+```tab-Razor
+
+        @(Html.Kendo().Grid((IEnumerable<KendoGridServerHierarchy.Models.Category>)ViewBag.Categories)
+              .Name("grid")
+              .Columns(columns =>
+              {
+                  columns.Bound(category => category.CategoryID);
+                  columns.Bound(category => category.CategoryName);
+              })
+              .Pageable()
+              .DetailTemplate(@<text>
+                @(Html.Kendo().Grid(item.Products)
+                      .Name(string.Format("product_grid_{0}", item.CategoryID)) // The Name() should be unique.
+                      .Columns(columns =>
+                      {
+                          columns.Bound(product => product.ProductID);
+                          columns.Bound(product => product.ProductName);
+                      })
+                      .Pageable()
+                )
+              </text>)
+        )
+```
 
 **Step 8** Build and run the project.
 

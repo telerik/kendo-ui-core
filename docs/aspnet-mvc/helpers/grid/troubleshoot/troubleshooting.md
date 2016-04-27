@@ -225,7 +225,7 @@ The example below demonstrates how to include JavaScript for the current culture
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
     <%
         var culture = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();
@@ -234,8 +234,8 @@ The example below demonstrates how to include JavaScript for the current culture
     <script>
         kendo.culture("<%= culture %>");
     </script>
-
-**Razor**
+```
+```tab-Razor
 
     @{
         var culture = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();
@@ -244,6 +244,7 @@ The example below demonstrates how to include JavaScript for the current culture
     <script>
         kendo.culture("@culture");
     </script>
+```
 
 For additional information on this issue, refer to the [article on globalization]({% slug globalization_aspnetmvc %}).
 

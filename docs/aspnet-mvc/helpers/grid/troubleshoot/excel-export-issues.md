@@ -34,7 +34,7 @@ The example below demonstrates the user server proxy.
 
 ###### Example
 
-**Controller**
+```tab-Controller
 
     public class ProxyController : Controller
     {
@@ -46,23 +46,8 @@ The example below demonstrates the user server proxy.
             return File(fileContents, contentType, fileName);
         }
     }
-
-**Razor**
-
-    @(Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
-        .Name("grid")
-        .ToolBar(tools => tools.Excel())
-        .Excel(excel => excel
-            .AllPages(true)
-            .ProxyURL(Url.Action("Save", "Proxy"))
-        )
-        .DataSource(dataSource => dataSource
-            .Ajax()
-            .Read(read => read.Action("Products_Read", "Home"))
-        )
-    )
-
-**ASPX**
+```
+```tab-ASPX
 
     <%: Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
         .Name("grid")
@@ -76,6 +61,22 @@ The example below demonstrates the user server proxy.
             .Read(read => read.Action("Products_Read", "Home"))
         )
     %>
+```
+```tab-Razor
+
+    @(Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
+        .Name("grid")
+        .ToolBar(tools => tools.Excel())
+        .Excel(excel => excel
+            .AllPages(true)
+            .ProxyURL(Url.Action("Save", "Proxy"))
+        )
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Read(read => read.Action("Products_Read", "Home"))
+        )
+    )
+```
 
 ## See Also
 

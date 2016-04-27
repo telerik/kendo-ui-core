@@ -46,7 +46,7 @@ There are two ways of navigation:
 
 ###### Example
 
-**Index.aspx (ASPX)**
+```tab-ASPX
 
         <% Html.Kendo().MobileView()
                 .Name("Index")
@@ -64,8 +64,8 @@ There are two ways of navigation:
                 })
                 .Render();
         %>
-
-**Index.cshtml (Razor)**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileView()
             .Name("Index")
@@ -83,12 +83,13 @@ There are two ways of navigation:
                 </text>
             )
         )
+```
 
 **Step 5** Create a new `Details` ASP.NET MVC View file under the `/Views/Home/` folder.
 
 ###### Example
 
-**Details.aspx (ASPX)**
+```tab-ASPX
 
         <%Html.Kendo().MobileView()
             .Title("Details")
@@ -105,8 +106,8 @@ There are two ways of navigation:
                 <%
             })
         %>
-
-**Details.cshtml (Razor)**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileView()
             .Title("Details")
@@ -122,22 +123,24 @@ There are two ways of navigation:
                 </text>
             )
         )
+```
 
 **Step 6** Initialize the Application inside the `Master/Layout` page and enable the server navigation.
 
-###### example
+###### Example
 
-**Default.Master (ASPX)**
+```tab-ASPX
 
         <%: Html.Kendo().MobileApplication()
                 .ServerNavigation(true)
         %>
-
-**_Layout.cshtml (Razor)**
+```
+```tab-Razor
 
             @(Html.Kendo().MobileApplication()
                 .ServerNavigation(true)
             )
+```
 
 **Step 7** Build and run the Application.
 
@@ -169,7 +172,7 @@ There are two ways of navigation:
 
 ###### Example
 
-**Index.aspx (ASPX)**
+```tab-ASPX
 
         <% Html.Kendo().MobileView()
                 .Name("Index")
@@ -187,8 +190,8 @@ There are two ways of navigation:
                 })
                 .Render();
         %>
-
-**Index.cshtml (Razor)**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileView()
             .Name("Index")
@@ -206,12 +209,13 @@ There are two ways of navigation:
                 </text>
             )
         )
+```
 
 **Step 5** Create a new `Details` ASP.NET MVC View file under the `/Views/Home/` folder.
 
 ###### Example
 
-**Details.aspx (ASPX)**
+```tab-ASPX
 
         <%Html.Kendo().MobileView()
             .Title("Details")
@@ -228,8 +232,8 @@ There are two ways of navigation:
                 <%
             })
         %>
-
-**Details.cshtml (Razor)**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileView()
             .Title("Details")
@@ -245,24 +249,26 @@ There are two ways of navigation:
                 </text>
             )
         )
+```
 
 **Step 6** Initialize the mobile application inside the `Master/Layout` page.
 
 ###### Example
 
-**Default.Master (ASPX)**
+```tab-ASPX
 
         <%: Html.Kendo().MobileApplication()
                 .PushState(true)
                 .ServerNavigation(false)
         %>
-
-**_Layout.cshtml (Razor)**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileApplication()
             .PushState(true)
             .ServerNavigation(false)
         )
+```
 
 **Step 7** Build and run the application.
 

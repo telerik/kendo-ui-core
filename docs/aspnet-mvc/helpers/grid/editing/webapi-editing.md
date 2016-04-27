@@ -82,39 +82,7 @@ Below are listed the steps for you to follow when implementing the CRUD data ope
 
 ###### Example
 
-**Razor**
-
-    @(Html.Kendo().Grid<KendoGridWebApiCRUD.Models.Product>()
-          .Name("grid")
-          .Columns(columns =>
-          {
-              columns.Bound(product => product.ProductID).Width(100);
-              columns.Bound(product => product.ProductName);
-              columns.Bound(product => product.UnitsInStock).Width(250);
-              columns.Command(commands =>
-              {
-                  commands.Edit(); // The "edit" command will edit and update data items
-                  commands.Destroy(); // The "destroy" command removes data items
-              }).Title("Commands").Width(200);
-          })
-          .ToolBar(toolbar => toolbar.Create()) // The "create" command adds new data items
-          .Editable(editable => editable.Mode(GridEditMode.InLine)) // Use inline editing mode
-          .DataSource(dataSource => dataSource
-                .WebApi()
-                .Model(model =>
-                {
-                    model.Id(product => product.ProductID); // Specify the property which is the unique identifier of the model
-                    model.Field(product => product.ProductID).Editable(false); // Make the ProductID property not editable
-                })
-                .Create(create => create.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products" }))) // Action invoked when the user saves a new data item
-                .Read(read => read.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products" }))) // Action invoked when the grid needs data
-                .Update(update => update.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products", id = "{0}" })))  // Action invoked when the user saves an updated data item
-                .Destroy(destroy => destroy.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products", id = "{0}" }))) // Action invoked when the user removes a data item
-          )
-          .Pageable()
-    )
-
-**ASPX**
+```tab-ASPX
 
     <%: Html.Kendo().Grid<KendoGridWebApiCRUD.Models.Product>()
           .Name("grid")
@@ -145,6 +113,39 @@ Below are listed the steps for you to follow when implementing the CRUD data ope
           )
           .Pageable()
     %>
+```
+```tab-Razor
+
+    @(Html.Kendo().Grid<KendoGridWebApiCRUD.Models.Product>()
+          .Name("grid")
+          .Columns(columns =>
+          {
+              columns.Bound(product => product.ProductID).Width(100);
+              columns.Bound(product => product.ProductName);
+              columns.Bound(product => product.UnitsInStock).Width(250);
+              columns.Command(commands =>
+              {
+                  commands.Edit(); // The "edit" command will edit and update data items
+                  commands.Destroy(); // The "destroy" command removes data items
+              }).Title("Commands").Width(200);
+          })
+          .ToolBar(toolbar => toolbar.Create()) // The "create" command adds new data items
+          .Editable(editable => editable.Mode(GridEditMode.InLine)) // Use inline editing mode
+          .DataSource(dataSource => dataSource
+                .WebApi()
+                .Model(model =>
+                {
+                    model.Id(product => product.ProductID); // Specify the property which is the unique identifier of the model
+                    model.Field(product => product.ProductID).Editable(false); // Make the ProductID property not editable
+                })
+                .Create(create => create.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products" }))) // Action invoked when the user saves a new data item
+                .Read(read => read.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products" }))) // Action invoked when the grid needs data
+                .Update(update => update.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products", id = "{0}" })))  // Action invoked when the user saves an updated data item
+                .Destroy(destroy => destroy.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Products", id = "{0}" }))) // Action invoked when the user removes a data item
+          )
+          .Pageable()
+    )
+```
 
 **Step 10** Build and run the application.
 

@@ -88,23 +88,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 ###### Example
 
-**Razor**
-
-    @(Html.Kendo().Grid<KendoGridClientDetailTemplate.Models.Product>()
-          .Name("grid")
-          .DataSource(dataSource => dataSource
-              .Ajax()
-              .Read(read => read.Action("Products_Read", "Home"))
-           )
-          .Columns(columns =>
-          {
-              columns.Bound(product => product.ProductID);
-              columns.Bound(product => product.ProductName);
-          })
-          .Pageable()
-    )
-
-**ASPX**
+```tab-ASPX
 
     <%: Html.Kendo().Grid<KendoGridClientDetailTemplate.Models.Product>()
           .Name("grid")
@@ -119,6 +103,23 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
           })
           .Pageable()
     %>
+```
+```tab-Razor
+
+    @(Html.Kendo().Grid<KendoGridClientDetailTemplate.Models.Product>()
+          .Name("grid")
+          .DataSource(dataSource => dataSource
+              .Ajax()
+              .Read(read => read.Action("Products_Read", "Home"))
+           )
+          .Columns(columns =>
+          {
+              columns.Bound(product => product.ProductID);
+              columns.Bound(product => product.ProductName);
+          })
+          .Pageable()
+    )
+```
 
 **Step 10** Define the client template using the [Kendo UI template]({% slug overview_kendoui_templatescomponent %}) syntax. The context of the template is the data item&mdash;Product entity&mdash;to which the current Grid row is bound.
 
@@ -141,24 +142,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 ###### Example
 
-**Razor**
-
-    @(Html.Kendo().Grid<KendoGridClientDetailTemplate.Models.Product>()
-          .Name("grid")
-          .DataSource(dataSource => dataSource
-              .Ajax()
-              .Read(read => read.Action("Products_Read", "Home"))
-           )
-          .Columns(columns =>
-          {
-              columns.Bound(product => product.ProductID);
-              columns.Bound(product => product.ProductName);
-          })
-          .Pageable()
-          .ClientDetailTemplateId("client-template")
-    )
-
-**ASPX**
+```tab-ASPX
 
     <%: Html.Kendo().Grid<KendoGridClientDetailTemplate.Models.Product>()
           .Name("grid")
@@ -174,6 +158,24 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
           .Pageable()
           .ClientDetailTemplateId("client-template")
     %>
+```
+```tab-Razor
+
+    @(Html.Kendo().Grid<KendoGridClientDetailTemplate.Models.Product>()
+          .Name("grid")
+          .DataSource(dataSource => dataSource
+              .Ajax()
+              .Read(read => read.Action("Products_Read", "Home"))
+           )
+          .Columns(columns =>
+          {
+              columns.Bound(product => product.ProductID);
+              columns.Bound(product => product.ProductName);
+          })
+          .Pageable()
+          .ClientDetailTemplateId("client-template")
+    )
+```
 
 **Step 12** Build and run the project.
 
@@ -276,21 +278,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 ###### Example
 
-**Razor**
-
-    @(Html.Kendo().Grid<KendoGridClientHierarchy.Models.Category>()
-          .Name("grid")
-          .Columns(columns =>
-          {
-              columns.Bound(category => category.CategoryID);
-              columns.Bound(category => category.CategoryName);
-          })
-          .DataSource(dataSource =>
-            dataSource.Ajax().Read(read => read.Action("Categories_Read", "Home"))
-          )
-    )
-
-**ASPX**
+```tab-ASPX
 
     <%: Html.Kendo().Grid<KendoGridClientHierarchy.Models.Category>()
           .Name("grid")
@@ -303,6 +291,21 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
             dataSource.Ajax().Read(read => read.Action("Categories_Read", "Home"))
           )
     %>
+```
+```tab-Razor
+
+    @(Html.Kendo().Grid<KendoGridClientHierarchy.Models.Category>()
+          .Name("grid")
+          .Columns(columns =>
+          {
+              columns.Bound(category => category.CategoryID);
+              columns.Bound(category => category.CategoryName);
+          })
+          .DataSource(dataSource =>
+            dataSource.Ajax().Read(read => read.Action("Categories_Read", "Home"))
+          )
+    )
+```
 
 **Step 11** Define the client template using [Kendo UI Template]({% slug overview_kendoui_templatescomponent %}) syntax. The context of the template is the **Category** entity to which the current Grid row is bound. The template itself contains another Grid which is bound to the `Products_Read` action.
 
@@ -333,22 +336,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 ###### Example
 
-**Razor**
-
-    @(Html.Kendo().Grid<KendoGridClientHierarchy.Models.Category>()
-          .Name("grid")
-          .Columns(columns =>
-          {
-              columns.Bound(category => category.CategoryID);
-              columns.Bound(category => category.CategoryName);
-          })
-          .DataSource(dataSource =>
-              dataSource.Ajax().Read(read => read.Action("Categories_Read", "Home"))
-          )
-          .ClientDetailTemplateId("client-template")
-    )
-
-**ASPX**
+```tab-ASPX
 
     <%: Html.Kendo().Grid<KendoGridClientHierarchy.Models.Category>()
           .Name("grid")
@@ -362,6 +350,22 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
           )
           .ClientDetailTemplateId("client-template")
     %>
+```
+```tab-Razor
+
+    @(Html.Kendo().Grid<KendoGridClientHierarchy.Models.Category>()
+          .Name("grid")
+          .Columns(columns =>
+          {
+              columns.Bound(category => category.CategoryID);
+              columns.Bound(category => category.CategoryName);
+          })
+          .DataSource(dataSource =>
+              dataSource.Ajax().Read(read => read.Action("Categories_Read", "Home"))
+          )
+          .ClientDetailTemplateId("client-template")
+    )
+```
 
 **Step 13** Build and run the project.
 

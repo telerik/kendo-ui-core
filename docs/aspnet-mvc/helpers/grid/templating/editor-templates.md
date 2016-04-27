@@ -72,16 +72,7 @@ to the `~/Views/Shared/EditorTemplates` folder&mdash;for example, `EmployeeEdito
 
 ###### Example
 
-**Razor**
-
-        @(Html.Kendo().DropDownList()
-            .Name("Employee") // The name of the widget should be the same as the name of the property.
-            .DataValueField("EmployeeID") // The value of the dropdown is taken from the EmployeeID property.
-            .DataTextField("EmployeeName") // The text of the items is taken from the EmployeeName property.
-            .BindTo((System.Collections.IEnumerable)ViewData["employees"]) // A list of all employees which is populated in the controller.
-        )
-
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().DropDownList()
             .Name("Employee") // The name of the widget should be the same as the name of the property.
@@ -89,6 +80,16 @@ to the `~/Views/Shared/EditorTemplates` folder&mdash;for example, `EmployeeEdito
             .DataTextField("EmployeeName") // The text of the items is taken from the EmployeeName property.
             .BindTo((System.Collections.IEnumerable)ViewData["employees"]) // A list of all employees which is populated in the controller.
         %>
+```
+```tab-Razor
+
+        @(Html.Kendo().DropDownList()
+            .Name("Employee") // The name of the widget should be the same as the name of the property.
+            .DataValueField("EmployeeID") // The value of the dropdown is taken from the EmployeeID property.
+            .DataTextField("EmployeeName") // The text of the items is taken from the EmployeeName property.
+            .BindTo((System.Collections.IEnumerable)ViewData["employees"]) // A list of all employees which is populated in the controller.
+        )
+```
 
 **Step 4** In the action method, which renders the view that contains the Grid, populate the `ViewData` with a list of all employees.
 

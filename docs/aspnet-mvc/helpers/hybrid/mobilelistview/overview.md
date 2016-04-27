@@ -39,7 +39,7 @@ Below are listed the steps for you to follow when defining the items of a hybrid
 
 ###### Example
 
-**Index.aspx (ASPX)**
+```tab-ASPX
 
         <% Html.Kendo().MobileView()
                 .Name("listview-home")
@@ -69,8 +69,8 @@ Below are listed the steps for you to follow when defining the items of a hybrid
                 })
                 .Render();
         %>
-
-**Index.cshtml (Razor)**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileView()
                 .Name("listview-home")
@@ -95,22 +95,24 @@ Below are listed the steps for you to follow when defining the items of a hybrid
                         })
                 )
         )
+```
 
 **Step 4** Initialize the mobile application.
 
 ###### Example
 
-**Index.aspx (ASPX)**
+```tab-ASPX
 
         <%: Html.Kendo().MobileApplication()
                 .ServerNavigation(true)
         %>
-
-**Index.cshtml (Razor)**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileApplication()
             .ServerNavigation(true)
         )
+```
 
 **Step 5** Build and run the application.
 
@@ -166,7 +168,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ###### Example
 
-**Index.aspx (ASPX)**
+```tab-ASPX
 
         <%: Html.Kendo().MobileView()
                 .Name("grouped")
@@ -183,8 +185,8 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
                         )
                 )
         %>
-
-**Index.cshtml (Razor)**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileView()
                 .Name("grouped")
@@ -201,22 +203,24 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
                         )
                 )
         )
+```
 
 **Step 5** Initialize the mobile application.
 
 ###### Example
 
-**Index.aspx (ASPX)**
+```tab-ASPX
 
         <%: Html.Kendo().MobileApplication()
                 .ServerNavigation(true)
         %>
-
-**Index.cshtml (Razor)**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileApplication()
             .ServerNavigation(true)
         )
+```
 
 **Step 6** Build and run the application.
 
@@ -248,7 +252,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**ASPX**
+```tab-ASPX
 
         <%: Html.Kendo().MobileListView()
                 .Name("MobileListView")
@@ -262,8 +266,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the click event.
         }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileListView()
                 .Name("MobileListView")
@@ -277,6 +281,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the click event.
         }
         </script>
+```
 
 ## See Also
 
