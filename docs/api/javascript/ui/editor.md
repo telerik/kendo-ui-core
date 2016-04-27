@@ -20,7 +20,7 @@ Callback that allows custom deserialization to be plugged in. The method accepts
 
 #### Example
 
-    <textarea id="editor></textarea>
+    <textarea id="editor"></textarea>
     <script>
         $("#editor").kendoEditor({
             deserialization: {
