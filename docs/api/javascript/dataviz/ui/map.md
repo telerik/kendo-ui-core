@@ -5829,6 +5829,11 @@ The source widget instance.
 
 Fired when the mouse enters a shape.
 
+> **Important**
+>
+> This event will fire reliably only for shapes that have set fill color.
+> The opacity can still be set to 0 so the shapes appear to have no fill.
+
 #### Event Data
 
 ##### e.layer `kendo.dataviz.map.layer.Shape`
@@ -5854,9 +5859,26 @@ The source jQuery event instance
             zoom: 3,
             center: [0, 0],
             layers: [{
-                type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+              type: "shape",
+              dataSource: {
+                type: "geojson",
+                data: [{
+                  "type": "Polygon",
+                  "coordinates": [
+                    [[0, 10], [0, 20], [10, 20], [10, 10], [0, 10]]
+                  ]
+                }, {
+                  "type": "Polygon",
+                  "coordinates": [
+                    [[0, 0], [0, 10], [10, 10], [10, 0], [0,0]]
+                  ]
+                }]
+              },
+              style: {
+                fill: {
+                  color: "#aaa"
+                }
+              }
             }],
             shapeMouseEnter: function() {
                 console.log("shape mouseenter");
@@ -5871,9 +5893,26 @@ The source jQuery event instance
             zoom: 3,
             center: [0, 0],
             layers: [{
-                type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+              type: "shape",
+              dataSource: {
+                type: "geojson",
+                data: [{
+                  "type": "Polygon",
+                  "coordinates": [
+                    [[0, 10], [0, 20], [10, 20], [10, 10], [0, 10]]
+                  ]
+                }, {
+                  "type": "Polygon",
+                  "coordinates": [
+                    [[0, 0], [0, 10], [10, 10], [10, 0], [0,0]]
+                  ]
+                }]
+              },
+              style: {
+                fill: {
+                  color: "#aaa"
+                }
+              }
             }]
         });
 
@@ -5883,9 +5922,52 @@ The source jQuery event instance
         });
     </script>
 
+#### Example - Highlight Shapes on shapeMouseEnter/shapeMouseLeave
+    <div id="map"></div>
+    <script>
+      $("#map").kendoMap({
+        zoom: 3,
+        layers: [{
+          type: "shape",
+          dataSource: {
+            type: "geojson",
+            data: [{
+              "type": "Polygon",
+              "coordinates": [
+                [[0, 10], [0, 20], [10, 20], [10, 10], [0, 10]]
+              ]
+            }, {
+              "type": "Polygon",
+              "coordinates": [
+                [[0, 0], [0, 10], [10, 10], [10, 0], [0,0]]
+              ]
+            }]
+          },
+          style: {
+            // Simulate no fill with a fully transparent color
+            fill: {
+              color: "#fff",
+              opacity: 0
+            }
+          }
+        }],
+        shapeMouseEnter: function(e) {
+          e.shape.fill("#00f", 1);
+        },
+        shapeMouseLeave: function(e) {
+          e.shape.fill("#fff", 0);
+        }
+      });
+    </script>
+
 ### shapeMouseLeave
 
 Fired when the mouse leaves a shape.
+
+> **Important**
+>
+> This event will fire reliably only for shapes that have set fill color.
+> The opacity can still be set to 0 so the shapes appear to have no fill.
 
 #### Event Data
 
@@ -5912,9 +5994,26 @@ The source jQuery event instance
             zoom: 3,
             center: [0, 0],
             layers: [{
-                type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+              type: "shape",
+              dataSource: {
+                type: "geojson",
+                data: [{
+                  "type": "Polygon",
+                  "coordinates": [
+                    [[0, 10], [0, 20], [10, 20], [10, 10], [0, 10]]
+                  ]
+                }, {
+                  "type": "Polygon",
+                  "coordinates": [
+                    [[0, 0], [0, 10], [10, 10], [10, 0], [0,0]]
+                  ]
+                }]
+              },
+              style: {
+                fill: {
+                  color: "#aaa"
+                }
+              }
             }],
             shapeMouseLeave: function() {
                 console.log("shape mouseleave");
@@ -5929,9 +6028,26 @@ The source jQuery event instance
             zoom: 3,
             center: [0, 0],
             layers: [{
-                type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+              type: "shape",
+              dataSource: {
+                type: "geojson",
+                data: [{
+                  "type": "Polygon",
+                  "coordinates": [
+                    [[0, 10], [0, 20], [10, 20], [10, 10], [0, 10]]
+                  ]
+                }, {
+                  "type": "Polygon",
+                  "coordinates": [
+                    [[0, 0], [0, 10], [10, 10], [10, 0], [0,0]]
+                  ]
+                }]
+              },
+              style: {
+                fill: {
+                  color: "#aaa"
+                }
+              }
             }]
         });
 
