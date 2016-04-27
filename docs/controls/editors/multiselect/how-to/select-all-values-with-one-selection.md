@@ -71,7 +71,7 @@ The example below demonstrates how to create a `dataItem` that holds an `all`-va
               this.value("");
             } else if (values.indexOf("ALL") !== -1) {
               values = $.grep(values, function(value) {
-                return value !== "ALL";    
+                return value !== "ALL";
               });
 
               this.value(values);
@@ -140,16 +140,23 @@ The example below demonstrates how to select all items by selecting the `ALL` it
           // create MultiSelect from select HTML element
           var required = $("#required").kendoMultiSelect({
             select: function(e) {
-              var dataItem = this.dataSource.view()[e.item.index()];
-              var values = this.value();
+                var dataItem = this.dataSource.view()[e.item.index()];
+                var values = this.value();
 
-              if (dataItem.value === "ALL") {
-                values = e.sender.dataSource.data().map(function(item){
-                  return item.value;
-                })
+                if (dataItem.value === "ALL") {
+                  values = [];
+                } else if (values.indexOf("ALL") !== -1) {
+                  values = $.grep(values, function(value) {
+                    return value !== "ALL";
+                  });
+                }
+
+                values.push(dataItem.value);
 
                 this.value(values);
-              }
+                this.trigger("change"); //Trigger change manually, as the default select is prevented
+
+                e.preventDefault();
             }
           }).data("kendoMultiSelect");
         });
