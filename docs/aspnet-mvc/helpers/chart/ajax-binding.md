@@ -43,7 +43,7 @@ In the view, configure the Chart to use the action method created in the previou
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().Chart<MvcApplication1.Models.InternetUsers>()
                 .Name("internetUsersChart")
@@ -58,8 +58,8 @@ In the view, configure the Chart to use the action method created in the previou
                     .Categories(model => model.Year)
                 )
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Chart<MvcApplication1.Models.InternetUsers>()
               .Name("internetUsersChart")
@@ -74,6 +74,7 @@ In the view, configure the Chart to use the action method created in the previou
                   .Categories(model => model.Year)
               )
         )
+```
 
 ## See Also
 

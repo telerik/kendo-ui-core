@@ -226,20 +226,18 @@ Below are listed the steps for you to follow while handling this issue.
 
 **Step 1** Disable security trimming if not needed or during development. Enable it again when deploying the site.
 
-* **WebForms View Engine**
-
-###### Example
+```tab-WebForms
 
             <%: Html.Kendo().Menu()
                     .SecurityTrimming(false)
             %>
-* **Razor**
-
-###### Example
+```
+```tab-Razor
 
             @(Html.Kendo().Menu()
                   .SecurityTrimming(false)
             )
+```
 
 **Step 2** Disable debug mode. Set the `debug` attribute of the `compilation` element in the `web.config` to `false`.
 
@@ -290,9 +288,7 @@ Apply either of the two options below:
 
 * Change HTTP verb of the DataSource.
 
-**WebForms View Engine**
-
-###### Example
+```tab-WebForms
 
             <%: Html.Kendo().ComboBox()
                     .Name("ComboBox")
@@ -300,10 +296,8 @@ Apply either of the two options below:
                         read.Action("GetCascadeCategories", "ComboBox").Type(HttpVerbs.Post);
                     })
             %>
-
-**Razor**
-
-###### Example
+```
+```tab-Razor
 
             @(Html.Kendo().ComboBox()
                   .Name("ComboBox")
@@ -311,6 +305,7 @@ Apply either of the two options below:
                       read.Action("GetCascadeCategories", "ComboBox").Type(HttpVerbs.Post);
                   })
             )
+```
 
 ### Widgets Do Not Work with Remote Binding and Throw No Errors
 

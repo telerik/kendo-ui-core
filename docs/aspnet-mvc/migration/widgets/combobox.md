@@ -13,7 +13,7 @@ This article demonstrates the ASP.NET MVC server-side API for the Kendo UI Combo
 
 ### Data Binding
 
-#### Bind to List<Selectlistitem> collections
+#### Bind to List<Selectlistitem> Collections
 
 ```tab-Previous
 
@@ -353,4 +353,4 @@ Other articles on migrating from Telerik Extensions:
 * [Migrate the Calendar]({% slug calendar_migrationextensions_aspnetmvc %})
 * [Migrate the Chart]({% slug chart_migrationextensions_aspnetmvc %})
 
-To see the articles on migrating kendo UI controls from Telerik Extensions, browse [this section]({% slug datepicker_migrationextensions_aspnetmvc %}).
+To see the articles on migrating Кendo UI controls from Telerik Extensions, browse [this section]({% slug datepicker_migrationextensions_aspnetmvc %}).

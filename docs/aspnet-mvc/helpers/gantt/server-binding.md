@@ -97,7 +97,7 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
 
 ## Bind to Items from ViewData
 
-### Action
+```tab-Action
 
     public ActionResult ServerBinding()
     {
@@ -129,8 +129,8 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
 
         return View();
     }
-
-### WebFroms View
+```
+```tab-WebForms
 
     <%: Html.Kendo()
         .Gantt<TaskViewModel, DependencyViewModel>((IEnumerable<TaskViewModel>)ViewData["tasks"], (IEnumerable<DependencyViewModel>)ViewData["dependencies"])
@@ -163,8 +163,8 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
             })
         )
     %>
-
-### Razor View
+```
+```tab-Razor
 
     @(Html.Kendo()
         .Gantt<TaskViewModel, DependencyViewModel>((IEnumerable<TaskViewModel>)ViewData["tasks"], (IEnumerable<DependencyViewModel>)ViewData["dependencies"])
@@ -197,10 +197,13 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
             })
         )
     )
+```
 
 ## Bind to Items from ViewBag
 
-### Action
+###### Example
+
+```tab-Action
 
     public ActionResult ServerBinding()
     {
@@ -232,8 +235,8 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
 
         return View();
     }
-
-### WebFroms View
+```
+```tab-WebForms
 
     <%: Html.Kendo()
         .Gantt<TaskViewModel, DependencyViewModel>((IEnumerable<TaskViewModel>)ViewBag.Tasks, (IEnumerable<DependencyViewModel>)ViewBag.Dependencies)
@@ -266,8 +269,8 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
             })
         )
     %>
-
-### Razor View
+```
+```tab-Razor
 
     @(Html.Kendo()
         .Gantt<TaskViewModel, DependencyViewModel>((IEnumerable<TaskViewModel>)ViewBag.Tasks, (IEnumerable<DependencyViewModel>)ViewBag.Dependencies)
@@ -300,6 +303,7 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
             })
         )
     )
+```
 
 ## See Also
 

@@ -315,7 +315,7 @@ The example below demonstrates how to configure the Grid columns.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <% Html.Kendo().Grid<Product>()
            .Name("grid")
@@ -345,8 +345,8 @@ The example below demonstrates how to configure the Grid columns.
            //The Render method is used because of the server-side code blocks.
            .Render();
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @( Html.Kendo().Grid<Product>()
            .Name("grid")
@@ -371,6 +371,7 @@ The example below demonstrates how to configure the Grid columns.
                });
            })
         )
+```
 
 ### Bound Column Overview
 
@@ -550,7 +551,7 @@ The example below demonstrates how to set the column template.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <% Html.Kendo().Grid(Model)
             .Name("grid")
@@ -567,8 +568,8 @@ The example below demonstrates how to set the column template.
             //The Render method is used because of the server-side code blocks.
             .Render();
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Grid(Model)
             .Name("grid")
@@ -580,6 +581,7 @@ The example below demonstrates how to set the column template.
                  </text>);
             })
          )
+```
 
 ### Title
 
@@ -727,7 +729,7 @@ To enable paging with the default settings, call the `Paegable` method without a
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().Grid(Model)
             .Name("grid")
@@ -737,8 +739,8 @@ To enable paging with the default settings, call the `Paegable` method without a
                 .Read(read => read.Action("Products_Read", "Home"))
             )
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Grid(Model)
             .Name("grid")
@@ -748,6 +750,7 @@ To enable paging with the default settings, call the `Paegable` method without a
                 .Read(read => read.Action("Products_Read", "Home"))
             )
          )
+```
 
 ### ButtonCount
 

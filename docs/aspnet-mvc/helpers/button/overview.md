@@ -28,37 +28,39 @@ The example below demonstrates how to initialize the Button by using the default
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().Button()
             .Name("textButton")
             .HtmlAttributes( new {type = "button"} )
             .Content("Text button"))
-
-**WebForms**
+```
+```tab-WebForms
 
         <%= Html.Kendo().Button()
             .Name("textButton")
             .HtmlAttributes( new {type = "button"} )
             .Content("Text button") %>
+```
 
 The example below demonstrates how to initialize the Button by using the `anchor` tag.
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().Button()
             .Name("linkButton")
             .Tag("a")
             .Content("Link button"))
-
-**WebForms**
+```
+```tab-WebForms
 
         <%= Html.Kendo().Button()
             .Name("linkButton")
             .Tag("a")
             .Content("Link button") %>
+```
 
 ## Appearance
 
@@ -84,19 +86,20 @@ The example below demonstrates how to add a background icon by using `.Icon()`.
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().Button()
             .Name("cancelButton")
             .Icon("cancel")
             .Content("Cancel"))
-
-**WebForms**
+```
+```tab-WebForms
 
         <%= Html.Kendo().Button()
             .Name("cancelButton")
             .Icon("cancel")
             .Content("Cancel") %>
+```
 
 The above configuration is expected to produce the HTML output from the example below.
 
@@ -108,19 +111,20 @@ The example below demonstrates how to add a background icon by using `.SpriteCss
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().Button()
             .Name("spriteButton")
             .SpriteCssClass("myIconClass")
             .Content("Sprite button"))
-
-**WebForms**
+```
+```tab-WebForms
 
         <%= Html.Kendo().Button()
             .Name("spriteButton")
             .SpriteCssClass("myIconClass")
             .Content("Sprite button") %>
+```
 
 The above configuration is expected to produce the HTML output from the example below.
 
@@ -136,19 +140,20 @@ The example below demonstrates how to use a button with no text.
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().Button()
             .Name("deleteButton")
             .SpriteCssClass("myDeleteClass")
             .Content("<span class='k-sprite'>Delete</span>"))
-
-**WebForms**
+```
+```tab-WebForms
 
         <%= Html.Kendo().Button()
             .Name("deleteButton")
             .SpriteCssClass("myDeleteClass")
             .Content("<span class='k-sprite'>Delete</span>") %>
+```
 
 ### Image Icons
 
@@ -158,19 +163,20 @@ The example below demonstrates how to use `.ImageUrl()`.
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().Button()
             .Name("imageButton")
             .ImageUrl("/images/myIcon.gif")
             .Content("Image button"))
-
-**WebForms**
+```
+```tab-WebForms
 
         <%= Html.Kendo().Button()
             .Name("imageButton")
             .ImageUrl("/images/myIcon.gif")
             .Content("Image button") %>
+```
 
 The above configuration is expected to produce the HTML output from the example below.
 
@@ -182,19 +188,20 @@ The example below demonstrates how to use `.ImageUrl()` with no text. Note that 
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().Button()
             .Name("iconButton")
             .ImageUrl("/images/myIcon.gif")
             .Content("<img class='k-image' alt='my icon' />"))
-
-**WebForms**
+```
+```tab-WebForms
 
         <%= Html.Kendo().Button()
             .Name("iconButton")
             .ImageUrl("/images/myIcon.gif")
             .Content("<img class='k-image' alt='my icon' />") %>
+```
 
 ## Features
 
@@ -206,19 +213,20 @@ The example below demonstrates how to use `.Enable()`.
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().Button()
             .Name("disabledButton")
             .Enable(false)
             .Content("Disabled button"))
-
-**WebForms**
+```
+```tab-WebForms
 
         <%= Html.Kendo().Button()
             .Name("disabledButton")
             .Enable(false)
             .Content("Disabled button") %>
+```
 
 For more information on the [`enable` method of the Button](/api/javascript/ui/button#methods-enable), refer to the [API of the Button control](/api/javascript/ui/button).
 

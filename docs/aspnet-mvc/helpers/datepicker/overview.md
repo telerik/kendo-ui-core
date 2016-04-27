@@ -31,7 +31,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DateP
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().DatePicker()
             .Name("datepicker") //The name of the DatePicker is mandatory. It specifies the "id" attribute of the widget.
@@ -39,8 +39,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI DateP
             .Max(new DateTime(2099, 12, 31)) //Set the min date of the DatePicker.
             .Value(DateTime.Today) //Set the value of the DatePicker.
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().DatePicker()
             .Name("datepicker") //The name of the DatePicker is mandatory. It specifies the "id" attribute of the widget.
@@ -48,6 +48,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DateP
             .Max(new DateTime(2099, 12, 31)) //Set the min date of the DatePicker.
             .Value(DateTime.Today) //Set the value of the DatePicker.
         )
+```
 
 ## Event Handling
 
@@ -59,7 +60,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().DatePicker()
             .Name("datepicker")
@@ -82,8 +83,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the change event
         }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().DatePicker()
           .Name("datepicker")
@@ -106,12 +107,15 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the change event
         }
         </script>
+```
 
 ### By Template Delegate
 
 The example below demonstrates how to subscribe to events by a template delegate.
 
-**Razor**
+###### Example
+
+```tab-Razor
 
     @(Html.Kendo().DatePicker()
       .Name("datepicker")
@@ -128,6 +132,7 @@ The example below demonstrates how to subscribe to events by a template delegate
             </text>)
       )
     )
+```
 
 ## Reference
 

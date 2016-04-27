@@ -38,20 +38,21 @@ Below are listed the steps for you to follow when configuring the Kendo UI Chart
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
            Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.InternetUsers>>" %>
-
-**Razor**
+```
+```tab-Razor
 
         @model IEnumerable<MvcApplication1.Models.InternetUsers>
+```
 
 **Step 4** Add a server-bound Chart.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().Chart(Model) //The Chart will be bound to the Model which is the InternetUsers list.
                 .Name("internetUsersChart") //The name of the Chart is mandatory. It specifies the "id" attribute of the widget.
@@ -64,8 +65,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Chart
                     .Categories(model => model.Year)
                 )
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Chart(Model) //The Chart will be bound to the Model which is the InternetUsers list
               .Name("internetUsersChart") //The name of the Chart is mandatory. It specifies the "id" attribute of the widget.
@@ -78,6 +79,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Chart
                   .Categories(model => model.Year)
               )
         )
+```
 
 ## Event Handling
 
@@ -89,7 +91,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
       <%: Html.Kendo().Chart(Model)
               .Name("internetUsersChart")
@@ -108,8 +110,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
               //Handle the series click event.
           }
       </script>
-
-**Razor**
+```
+```tab-Razor
 
       @(Html.Kendo().Chart(Model)
             .Name("internetUsersChart")
@@ -128,6 +130,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
               //Handle the seriesClick event.
           }
       </script>
+```
 
 ### By Template Delegate
 
@@ -135,7 +138,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
       @(Html.Kendo().Chart(Model)
             .Name("internetUsersChart")
@@ -152,6 +155,7 @@ The example below demonstrates how to subscribe to events by a template delegate
                 </text>)
             )
       )
+```
 
 ## Reference
 

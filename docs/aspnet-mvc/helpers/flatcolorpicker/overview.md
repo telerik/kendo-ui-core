@@ -31,19 +31,20 @@ Below are listed the steps for you to follow when configuring the Kendo UI FlatC
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().FlatColorPicker()
                 .Name("flatcolorpicker") //The name of the FlatColorPicker is mandatory. It specifies the "id" attribute of the widget.
                 .Value("#ff0000") //Set the value of the FlatColorPicker.
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().FlatColorPicker()
               .Name("flatcolorpicker") //The name of the FlatColorPicker is mandatory. It specifies the "id" attribute of the widget.
               .Value("#ff0000") //Set the value of the FlatColorPicker.
         )
+```
 
 ## Event Handling
 
@@ -55,7 +56,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().FlatColorPicker()
               .Name("flatcolorpicker")
@@ -68,8 +69,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
               //Handle the change event.
           }
       </script>
-
-**Razor**
+```
+```tab-Razor
 
       @(Html.Kendo().FlatColorPicker()
             .Name("flatcolorpicker")
@@ -82,12 +83,13 @@ The examples below demonstrates how to subscribe to events by a handler name.
               //Handle the change event.
           }
       </script>
+```
 
 ### By Template Delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
       @(Html.Kendo().FlatColorPicker()
             .Name("flatcolorpicker")
@@ -99,6 +101,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
                   </text>)
             )
       )
+```
 
 ## Reference
 

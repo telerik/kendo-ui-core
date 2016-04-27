@@ -98,6 +98,8 @@ After the needed JavaScript and CSS files are added to the application, you can 
 
 **Step 10** Render the Telerik UI for ASP.NET MVC style bundle.
 
+###### Example
+
 ```tab-ASPX
 
     <%: Styles.Render("~/Content/kendo/css") %>
@@ -110,6 +112,8 @@ After the needed JavaScript and CSS files are added to the application, you can 
 **Step 11** Move the jQuery bundle to the `head` tag of the page. It is at the end of the page by default.
 
 **Step 12** Render the Telerik UI for ASP.NET MVC script bundle after jQuery.
+
+###### Example
 
 ```tab-ASPX
 
@@ -195,6 +199,8 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 **Step 1** Open the `Views/Home/Index.cshtml` view, or `Index.aspx` if using ASPX.
 
 **Step 2** Add a Kendo UI DatePicker widget.
+
+###### Example
 
 ```tab-ASPX
 

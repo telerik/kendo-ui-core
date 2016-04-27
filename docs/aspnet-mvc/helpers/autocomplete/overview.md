@@ -40,36 +40,38 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
-         <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
-         Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Product>>" %>
+     <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
+     Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Product>>" %>
+```
+```tab-Razor
 
-**Razor**
-
-         @model IEnumerable<MvcApplication1.Models.Product>
+     @model IEnumerable<MvcApplication1.Models.Product>
+```
 
 **Step 4** Add a server bound AutoComplete.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
-         <%: Html.Kendo().AutoComplete()
-             .Name("productAutoComplete") //The name of the AutoComplete is mandatory. It specifies the "id" attribute of the widget.
-             .DataTextField("ProductName") //Specify which property of the Product to be used by the AutoComplete.
-             .BindTo(Model)   //Pass the list of Products to the AutoComplete.
-             .Filter("contains") //Define the type of the filter, which AutoComplete will use.
-         %>
+    <%: Html.Kendo().AutoComplete()
+        .Name("productAutoComplete") //The name of the AutoComplete is mandatory. It specifies the "id" attribute of the widget.
+        .DataTextField("ProductName") //Specify which property of the Product to be used by the AutoComplete.
+        .BindTo(Model)   //Pass the list of Products to the AutoComplete.
+        .Filter("contains") //Define the type of the filter, which AutoComplete will use.
+    %>
+```
+```tab-Razor
 
-**Razor**
-
-         @(Html.Kendo().AutoComplete()
-           .Name("productAutoComplete") //The name of the AutoComplete is mandatory. It specifies the "id" attribute of the widget.
-           .DataTextField("ProductName") //Specify which property of the Product to be used by the AutoComplete.
-           .BindTo(Model)   //Pass the list of Products to the AutoComplete.
-           .Filter("contains") //Define the type of the filter, which AutoComplete will use.
-         )
+    @(Html.Kendo().AutoComplete()
+      .Name("productAutoComplete") //The name of the AutoComplete is mandatory. It specifies the "id" attribute of the widget.
+      .DataTextField("ProductName") //Specify which property of the Product to be used by the AutoComplete.
+      .BindTo(Model)   //Pass the list of Products to the AutoComplete.
+      .Filter("contains") //Define the type of the filter, which AutoComplete will use.
+    )
+```
 
 ### Ajax Binding
 
@@ -100,35 +102,36 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
-         <%: Html.Kendo().AutoComplete()
-             .Name("productAutoComplete") //The name of the AutoComplete is mandatory. It specifies the "id" attribute of the widget.
-             .DataTextField("ProductName") //Specify which property of the Product to be used by the AutoComplete.
-             .DataSource(source =>
-             {
-                source.Read(read =>
-                {
-                     read.Action("GetProducts", "Home"); //Set the Action and Controller names.
-                })
-                .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
-             })
-         %>
+    <%: Html.Kendo().AutoComplete()
+        .Name("productAutoComplete") //The name of the AutoComplete is mandatory. It specifies the "id" attribute of the widget.
+        .DataTextField("ProductName") //Specify which property of the Product to be used by the AutoComplete.
+        .DataSource(source =>
+        {
+           source.Read(read =>
+           {
+                read.Action("GetProducts", "Home"); //Set the Action and Controller names.
+           })
+           .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
+        })
+    %>
+```
+```tab-Razor
 
-**Razor**
-
-         @(Html.Kendo().AutoComplete()
-           .Name("productAutoComplete") //The name of the AutoComplete is mandatory. It specifies the "id" attribute of the widget.
-           .DataTextField("ProductName") //Specify which property of the Product to be used by the AutoComplete.
-           .DataSource(source =>
-            {
-               source.Read(read =>
-               {
-                    read.Action("GetProducts", "Home"); //Set the Action and Controller names.
-               })
-               .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
-            })
-         )
+    @(Html.Kendo().AutoComplete()
+      .Name("productAutoComplete") //The name of the AutoComplete is mandatory. It specifies the "id" attribute of the widget.
+      .DataTextField("ProductName") //Specify which property of the Product to be used by the AutoComplete.
+      .DataSource(source =>
+       {
+          source.Read(read =>
+          {
+               read.Action("GetProducts", "Home"); //Set the Action and Controller names.
+          })
+          .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
+       })
+    )
+```
 
 > **Important**
 >
@@ -164,49 +167,50 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
-        <%: Html.Kendo().AutoComplete()
-            .Name("productAutoComplete")
-            .DataTextField("ProductName") //Specify which property of the Product to be used by the autocomplete as a text.
-            .DataSource(source =>
-            {
-                source.Custom()
-                      .ServerFiltering(true)
-                      .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
-                      .Transport(transport =>
-                      {
-                          transport.Read("GetProducts", "Home");
-                      })
-                      .Schema(schema =>
-                      {
-                          schema.Data("Data") //Define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option.
-                                .Total("Total"); //Define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option.
-                      });
-            })
-        %>
+    <%: Html.Kendo().AutoComplete()
+        .Name("productAutoComplete")
+        .DataTextField("ProductName") //Specify which property of the Product to be used by the autocomplete as a text.
+        .DataSource(source =>
+        {
+            source.Custom()
+                  .ServerFiltering(true)
+                  .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
+                  .Transport(transport =>
+                  {
+                      transport.Read("GetProducts", "Home");
+                  })
+                  .Schema(schema =>
+                  {
+                      schema.Data("Data") //Define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option.
+                            .Total("Total"); //Define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option.
+                  });
+        })
+    %>
+```
+```tab-Razor
 
-**Razor**
-
-        @(Html.Kendo().AutoComplete()
-            .Name("productAutoComplete")
-            .DataTextField("ProductName") //Specify which property of the Product to be used by the autocomplete as a text.
-            .DataSource(source =>
-            {
-                source.Custom()
-                      .ServerFiltering(true)
-                      .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
-                      .Transport(transport =>
-                      {
-                          transport.Read("GetProducts", "Home");
-                      })
-                      .Schema(schema =>
-                      {
-                          schema.Data("Data") //Define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option.
-                                .Total("Total"); //Define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option.
-                      });
-            })
-        )
+    @(Html.Kendo().AutoComplete()
+        .Name("productAutoComplete")
+        .DataTextField("ProductName") //Specify which property of the Product to be used by the autocomplete as a text.
+        .DataSource(source =>
+        {
+            source.Custom()
+                  .ServerFiltering(true)
+                  .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
+                  .Transport(transport =>
+                  {
+                      transport.Read("GetProducts", "Home");
+                  })
+                  .Schema(schema =>
+                  {
+                      schema.Data("Data") //Define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option.
+                            .Total("Total"); //Define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option.
+                  });
+        })
+    )
+```
 
 ### Parameter Sending to Server
 
@@ -214,50 +218,51 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
-        <%: Html.Kendo().AutoComplete()
-                .Name("productAutoComplete")
-                .DataTextField("ProductName") //Specify which property of the Product to be used by the AutoComplete.
-                .DataSource(source =>
-                {
-                   source.Read(read =>
-                   {
-                        read.Action("GetProducts", "Home")
-                            .Data("onAdditionalData");
-                   });
-                })
-         %>
-         <script>
-            function onAdditionalData() {
-                return {
-                    text: $("#productAutoComplete").val()
-                };
-            }
-        </script>
+    <%: Html.Kendo().AutoComplete()
+        .Name("productAutoComplete")
+        .DataTextField("ProductName") //Specify which property of the Product to be used by the autocomplete as a text.
+        .DataSource(source =>
+        {
+            source.Custom()
+                  .ServerFiltering(true)
+                  .Type("aspnetmvc-ajax") //Set this type if you want to use DataSourceRequest and ToDataSourceResult instances.
+                  .Transport(transport =>
+                  {
+                      transport.Read("GetProducts", "Home");
+                  })
+                  .Schema(schema =>
+                  {
+                      schema.Data("Data") //Define the [data](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.data) option.
+                            .Total("Total"); //Define the [total](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.total) option.
+                  });
+        })
+    %>
+```
+```tab-Razor
 
-**Razor**
+    @(Html.Kendo().AutoComplete()
+          .Name("productAutoComplete")
+          .DataTextField("ProductName") //Specify which property of the Product to be used by the AutoComplete.
+          .DataSource(source =>
+          {
+             source.Read(read =>
+             {
+                  read.Action("GetProducts", "Home")
+                      .Data("onAdditionalData");
+             });
+          })
+    )
 
-        @(Html.Kendo().AutoComplete()
-              .Name("productAutoComplete")
-              .DataTextField("ProductName") //Specify which property of the Product to be used by the AutoComplete.
-              .DataSource(source =>
-              {
-                 source.Read(read =>
-                 {
-                      read.Action("GetProducts", "Home")
-                          .Data("onAdditionalData");
-                 });
-              })
-        )
-
-        <script>
-            function onAdditionalData() {
-                return {
-                    text: $("#productAutoComplete").val()
-                };
-            }
-        </script>
+    <script>
+        function onAdditionalData() {
+            return {
+                text: $("#productAutoComplete").val()
+            };
+        }
+    </script>
+```
 
 The example below demonstrates how the `GetProducts` method is used.
 
@@ -305,7 +310,7 @@ The example below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().AutoComplete()
             .Name("autocomplete")
@@ -324,8 +329,8 @@ The example below demonstrates how to subscribe to events by a handler name.
                 //Handle the change event.
             }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().AutoComplete()
           .Name("autocomplete")
@@ -344,6 +349,7 @@ The example below demonstrates how to subscribe to events by a handler name.
                 //Handle the change event.
             }
         </script>
+```
 
 ### By Template Delegate
 
@@ -351,7 +357,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().AutoComplete()
           .Name("autocomplete")
@@ -369,6 +375,7 @@ The example below demonstrates how to subscribe to events by a template delegate
                 </text>)
           )
         )
+```
 
 ## Reference
 
@@ -378,13 +385,13 @@ You can reference an existing Kendo UI AutoComplete instance via [`jQuery.data()
 
 ###### Example
 
-        //Put this after your Kendo AutoComplete for ASP.NET MVC declaration.
-        <script>
-        $(function() {
-            //Notice that the Name() of the AutoComplete is used to get its client-side instance.
-            var autocomplete = $("#productAutoComplete").data("kendoAutoComplete");
-        });
-        </script>
+      //Put this after your Kendo AutoComplete for ASP.NET MVC declaration.
+      <script>
+      $(function() {
+          //Notice that the Name() of the AutoComplete is used to get its client-side instance.
+          var autocomplete = $("#productAutoComplete").data("kendoAutoComplete");
+      });
+      </script>
 
 ## See Also
 

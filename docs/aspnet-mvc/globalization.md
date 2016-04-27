@@ -18,6 +18,8 @@ Below are listed the steps for you to follow when you want to make Telerik UI fo
 
 **Step 2** Include the corresponding culture JavaScript file after the other JavaScript product files.
 
+###### Example
+
 ```tab-ASPX
 
       <script src="<%= Url.Content("~/Scripts/jquery.min.js") %>"></script>
@@ -87,6 +89,8 @@ Below are listed the steps for you to follow when you want to make the widgets u
 
 **Step 2** Get the current culture.
 
+###### Example
+
 ```tab-ASPX
 
     <%
@@ -101,6 +105,8 @@ Below are listed the steps for you to follow when you want to make the widgets u
 
 **Step 3** Include the corresponding culture JavaScript file.
 
+###### Example
+
 ```tab-ASPX
 
     <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js") %>"></script>
@@ -111,6 +117,8 @@ Below are listed the steps for you to follow when you want to make the widgets u
 ```
 
 **Step 4** Set the current culture by calling the [`kendo.culture`](/api/javascript/kendo#methods-culture) method. Note that you must add the script block after the culture JavaScript file.
+
+###### Example
 
 ```tab-ASPX
 

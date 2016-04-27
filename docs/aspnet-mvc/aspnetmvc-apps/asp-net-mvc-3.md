@@ -69,6 +69,8 @@ After the needed JavaScript and CSS files are added to the application, you can 
 
 **Step 6** Include `Content/kendo/kendo.common.min.css` and `Content/kendo/kendo.default.min.css`. Add a `link` tag within the `head` tag of the layout.
 
+###### Example
+
 ```tab-ASPX
 
     <link rel="stylesheet" href="<%: Url.Content("~/Content/kendo/kendo.common.min.css") %>" />
@@ -84,6 +86,8 @@ After the needed JavaScript and CSS files are added to the application, you can 
 
 **Step 8** Include the jQuery JavaScript file distributed with Telerik UI for ASP.NET MVC, or a compatible version from other location. Add a `script` tag in within the `head` tag of the layout.
 
+###### Example
+
 ```tab-ASPX
 
     <script src="<%: Url.Content("~/Scripts/kendo/jquery.min.js") %>"></script>
@@ -94,6 +98,8 @@ After the needed JavaScript and CSS files are added to the application, you can 
 ```
 
 **Step 9** Include `Scripts/kendo/kendo.all.min.js` and `Scripts/kendo/kendo.aspnetmvc.min.js` after jQuery.
+
+###### Example
 
 ```tab-ASPX
 
@@ -109,6 +115,8 @@ After the needed JavaScript and CSS files are added to the application, you can 
 ```
 
 **Step 10** If using the Telerik ASP.NET MVC Scheduler wrapper, include `Scripts/kendo/kendo.timezones.min.js` after `kendo.all.min.js`.
+
+###### Example
 
 ```tab-ASPX
 
@@ -204,6 +212,8 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 **Step 1** Open the `Views/Home/Index.cshtml` view, or `Index.aspx` if using ASPX.
 
 **Step 2** Add a Kendo UI DatePicker widget.
+
+###### Example
 
 ```tab-ASPX
 

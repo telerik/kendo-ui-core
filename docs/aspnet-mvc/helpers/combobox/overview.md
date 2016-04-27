@@ -40,20 +40,21 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
            Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Product>>" %>
-
-**Razor**
+```
+```tab-Razor
 
         @model IEnumerable<MvcApplication1.Models.Product>
+```
 
 **Step 4**  Add a server-bound ComboBox.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().ComboBox()
             .Name("productComboBox") //The name of the ComboBox is mandatory. It specifies the "id" attribute of the widget.
@@ -62,8 +63,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
             .BindTo(Model)   //Pass the list of Products to the ComboBox.
             .SelectedIndex(10) //Select an item with index 10. Note that the indexes are zero-based.
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().ComboBox()
           .Name("productComboBox") //The name of the ComboBox is mandatory. It specifies the "id" attribute of the widget.
@@ -72,6 +73,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
           .BindTo(Model)   //Pass the list of Products to the ComboBox.
           .SelectedIndex(10) //Select an item with index 10. Note that the indexes are zero-based.
         )
+```
 
 ### Ajax Binding
 
@@ -103,7 +105,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().ComboBox()
             .Name("productComboBox") //The name of the ComboBox is mandatory. It specifies the "id" attribute of the widget.
@@ -120,8 +122,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
             })
             .SelectedIndex(0) //Select the first item.
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().ComboBox()
             .Name("productComboBox") //The name of the ComboBox is mandatory. It specifies the "id" attribute of the widget.
@@ -138,6 +140,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
             })
             .SelectedIndex(0) //Select the first item.
         )
+```
 
 > **Important**
 >
@@ -173,7 +176,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
         <%: Html.Kendo().ComboBox()
             .Name("productComboBox")
@@ -195,8 +198,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
                       });
             })
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().ComboBox()
             .Name("productComboBox")
@@ -218,6 +221,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
                       });
             })
         )
+```
 
 ### Parameter Sending to Server
 
@@ -225,8 +229,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
 
 ###### Example
 
-**WebForms**
-
+```tab-WebForms
 
      <%: Html.Kendo().ComboBox()
               .Name("productComboBox") //The name of the ComboBox is mandatory. It specifies the "id" attribute of the widget.
@@ -250,8 +253,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
               };
           }
       </script>
-
-**Razor**
+```
+```tab-Razor
 
       @(Html.Kendo().ComboBox()
             .Name("productComboBox") //The name of the ComboBox is mandatory. It specifies the "id" attribute of the widget.
@@ -276,6 +279,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
               };
           }
       </script>
+```
 
 The example below demonstrates how the `GetProducts` method is used.
 
@@ -345,7 +349,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-WebForms
 
     <%: Html.Kendo().ComboBox()
         .Name("combobox")
@@ -364,8 +368,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
         //Handle the change event.
     }
     </script>
-
-**Razor**
+```
+```tab-Razor
 
     @(Html.Kendo().ComboBox()
       .Name("combobox")
@@ -384,6 +388,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
         //Handle the change event.
     }
     </script>
+```
 
 ### By Template Delegate
 
@@ -391,7 +396,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
     @(Html.Kendo().ComboBox()
       .Name("combobox")
@@ -409,6 +414,7 @@ The example below demonstrates how to subscribe to events by a template delegate
             </text>)
       )
     )
+```
 
 ## Reference
 

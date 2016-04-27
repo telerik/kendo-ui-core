@@ -70,6 +70,8 @@ You can also bind the NumericTextBox to a particular model field using the `for`
 
 The NumericTextBox Tag Helper supports all the configuration options that the HtmlHelper does. They are passed as attributes of the tag.
 
+###### Example
+
 ```tab-cshtml
 
         @(Html.Kendo().NumericTextBox<decimal>()
@@ -102,6 +104,8 @@ The example below demonstrates how to define a Kendo UI Button by using a Tag He
 
 The Button Tag Helper configuration options are passed as attributes of the tag.
 
+###### Example
+
 ```tab-cshtml
 
         @(Html.Kendo().Button()
@@ -129,6 +133,8 @@ The example below demonstrates how to define a Kendo UI Window by using a Tag He
 ### Configuration
 
 The Window Tag Helper configuration options are passed as attributes of the tag. The Window contents is placed between the opening and closing tag.
+
+###### Example
 
 ```tab-cshtml
 
@@ -190,6 +196,8 @@ The example below demonstrates how to define a Kendo UI DatePicker by using a Ta
 
 The DatePicker Tag Helper configuration options are passed as attributes of the tag.
 
+###### Example
+
 ```tab-cshtml
 
         @(Html.Kendo().DatePicker()
@@ -232,6 +240,8 @@ The example below demonstrates how to define a Kendo UI TimePicker by using a Ta
 
 The TimePicker Tag Helper configuration options are passed as attributes of the tag.
 
+###### Example
+
 ```tab-cshtml
 
         @(Html.Kendo().TimePicker()
@@ -272,6 +282,8 @@ The example below demonstrates how to define a Kendo UI DateTimePicker by using 
 ### Configuration
 
 The DateTimePicker Tag Helper configuration options are passed as attributes of the tag.
+
+###### Example
 
 ```tab-cshtml
 
