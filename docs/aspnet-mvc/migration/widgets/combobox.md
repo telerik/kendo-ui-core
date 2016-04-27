@@ -15,46 +15,47 @@ This article demonstrates the ASP.NET MVC server-side API for the Kendo UI Combo
 
 #### Bind to List<Selectlistitem> collections
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().ComboBox()
         .Name(“Combo”)
         .BindTo(new SelectList(Model.Products, "ProductID", "ProductName"))
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().ComboBox()
         .Name(“Combo”)
         .BindTo(new SelectList(Model.Products, "ProductID", "ProductName"))
         .DataTextField(“Text”)
         .DataValueField(“Value”)
+```
 
 #### Create Items Manually
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().ComboBox()
     .Name(“Combo”)
     . Items( items => items.Add().Text("Item1").Value("1"))
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().ComboBox()
         .Name(“Combo”)
         .Items( items => items.Add().Text("Item1").Value("1"))
         .DataTextField(“Text”)
         .DataValueField(“Value”)
+```
 
 #### Do Ajax Binding
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().ComboBox()
         .Name(“Combo”)
         .DataBinding(binding => binding.Ajax().Select(“_Select”, “Combo”))
-
-<!--_-->
-**Current**
+```
+```tab-Current
 
     Html.Kendo().ComboBox().Name(“Combo”)
         .DataSource(source => {
@@ -66,28 +67,30 @@ This article demonstrates the ASP.NET MVC server-side API for the Kendo UI Combo
         })
         .DataTextField(“Text”)
         .DataValueField(“Value”)
+```
 
 #### Define Delay
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().ComboBox()
         .Name(“Combo”)
         .DataBinding(binding => binding.Ajax().Delay(300))
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().ComboBox()
         .Name(“Combo”)
         .Delay(300)
+```
 
 #### Define ServerFiltering
 
-**Previous**
+```tab-Previous
 
 Not supported
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().ComboBox().Name(“Combo”)
         .DataSource(source => {
@@ -98,10 +101,11 @@ Not supported
         })
         .DataTextField(“Text”)
         .DataValueField(“Value”)
+```
 
 #### Send Parameters to Server
 
-**Previous**
+```tab-Previous
 
     <%= Html.Telerik().ComboBox()
         .Name("AjaxComboBox")
@@ -114,8 +118,8 @@ Not supported
             e.data = $.extend({}, e.data, { filterMode: $('#ComboBoxAttributes_FilterMode').data('tDropDownList').value() });
         }
     </script>
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().ComboBox().Name(“Combo”)
         .DataSource(source => {
@@ -133,26 +137,29 @@ Not supported
             return { text : “Chai” }
         }
     </script>
+```
 
 #### Bind to Non-List<Selectlistitem> Collections
 
-**Previous**
+```tab-Previous
 
 Not supported
 
-**Current**
+```
+```tab-Current
 
     Html.Kendo().ComboBox().Name(“Combo”)
         .DataTextField(“CompanyName”)
         .DataValueField(“CompanyID”)
         .BindTo(List<Company>);
     })
+```
 
 ### Other Options
 
 #### Filter
 
-**Previous**
+```tab-Previous
 
     <%= Html.Telerik().ComboBox()
         .Name("AjaxComboBox")
@@ -160,17 +167,18 @@ Not supported
         {
             filtering.FilterMode(AutoCompleteFilterMode.Contains);                             
         })
-
-**Current**
+```
+```tab-Current
 
     @(Html.Kendo().ComboBox()
         .Name("fabric")
         .Filter(FilterType.StartsWith)
     )
+```
 
 #### Min Characters
 
-**Previous**
+```tab-Previous
 
     <%= Html.Telerik().ComboBox()
         .Name("AjaxComboBox")
@@ -179,128 +187,148 @@ Not supported
             filtering.MinimumChars(2);
         })
 
-**Current**
+```
+```tab-Current
 
     @(Html.Kendo().ComboBox()
         .Name("fabric")
         .MinLength (2)
     )
+```
 
 #### Suggestions (AutoFill)
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().ComboBox().Name("AjaxComboBox").AutoFill(true)
 
-**Current**
+```
+```tab-Current
 
     Html.Kendo().ComboBox().Name("AjaxComboBox").Suggest(true)
+```
 
 #### Placeholder
 
-**Previous**
+```tab-Previous
 
     //Create item with text  “Select…” and value “”
     Html.Telerik().ComboBox().Name("AjaxComboBox").Placeholder(“Select…”)
 
-**Current**
+```
+```tab-Current
 
     //Html5 placeholder
     Html.Kendo().ComboBox().Name("AjaxComboBox"). Placeholder (“2”)
+```
 
 #### Animations
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().ComboBox().Name("AjaxComboBox").Effects(effects => effects.Slide())
 
-**Current**
+```
+```tab-Current
 
     Html.Kendo().ComboBox().Name("AjaxComboBox") .Animation(animation => animation.Open(open => open.FadeIn(FadeDirection.Down))
+```
 
 #### AutoBind
 
-**Previous**
+```tab-Previous
 
 Not supported. During Ajax binding, the setting is always `autoBind: false`.
 
-**Current**
+```
+```tab-Current
 
     Html.Kendo().ComboBox().Name("Combo").AutoBind(false)
+```
 
 #### SelectedText when AutoBind is false
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().ComboBox().Name("Combo")
         .DataBinding(binding => binding.Ajax().Select(“”, “”))
         .InputHtmlAttribute(new { value = “Chai” })
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().ComboBox().Name("Combo").AutoBind(false).Text(“Chai”)
+```
 
 #### First Item Highlighting
 
-**Previous**
+```tab-Previous
 
     HighlightFirstMatch(true)
-
-**Current**
+```
+```tab-Current
 
     HighlightFirst (true)
+```
 
 #### Unsupported Onload Event
 
 Kendo UI does not support action syntax&mdash;`“() => {}”`. None of the widgets supports the `Onload` event.
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().ComboBox().Name("Combo").ClientEvents( events => events.OnChange(“change”))
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().ComboBox().Name("Combo").Events( events => events.Change(“change”))
+```
 
 #### Templates
 
-**Previous**
+```tab-Previous
 
 Not supported
 
-**Current**
+```
+```tab-Current
 
     Html.Kendo().ComboBox().Name("Combo").Template(“#= data.CompanyName #”)
+```
 
 #### Height of Popup Element
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().ComboBox().Name("Combo").DropDownHtmlAttributes( new style { height = “300px” })
 
-**Current**
+```
+```tab-Current
 
     Html.Kendo().ComboBox().Name("Combo").Height(300)
+```
 
 #### Cascading Functionality
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().ComboBox().Name("Combo").CascadeTo(“Id of the child ComboBox”)
 
-**Current**
+```
+```tab-Current
 
     Html.Kendo().ComboBox().Name("Combo").CascadeFrom(“Id of the parent ComboBox”)
+```
 
 #### Encode
 
-**Previous**
+```tab-Previous
 
     Encode(false)
-
-**Current**
+```
+```tab-Current
 
     Template(“ #= data.Text #”)
+```
 
 ## Client-Side API
 

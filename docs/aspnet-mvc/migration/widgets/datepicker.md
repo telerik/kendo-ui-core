@@ -13,75 +13,83 @@ This article demonstrates the ASP.NET MVC server-side API for the Kendo UI DateP
 
 ### Min Dates
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().DatePicker().Name("DatePicker").MinDate(DateTime.Now)
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().DatePicker().Name("DatePicker").Min(DateTime.Now)
+```
 
 ### Max Dates
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().DatePicker().Name("DatePicker").MaxDate(DateTime.Now)
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().DatePicker().Name("DatePicker").Max(DateTime.Now)
+```
 
 ### Footer
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().DatePicker().Name("DatePicker").TodayButton(“d”)
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().DatePicker().Name("DatePicker").Footer(“#= kendo.toString(data, ‘MM/dd/yyyy’)”)
+```
 
 ### ShowButton
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().DatePicker().Name("DatePicker").ShowButton(false)
+```
+```tab-Current
 
-**Current**
-
-Not Supported
+    Not Supported
+```
 
 ### ButtonTitle
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().DatePicker().Name("DatePicker").ButtonTitle(“choose date”)
 
-**Current**
+```
+```tab-Current
 
-Not Supported
+    Not Supported
+```
 
 ### OpenOnFocus
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().DatePicker().Name("DatePicker").OpenOnFocus(true)
+```
+```tab-Current
 
-**Current**
-
-Not Supported
+    Not Supported
+```
 
 ### DateTime.MinValue
 
 Set the `DateTime.MinValue` and show `nothing`.
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().DatePicker().Name("DatePicker").Value(DateTime.MinValue)
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().DatePicker().Name("DatePicker").Value(value == DateTime.MinValue ? null : value)
+```
 
 ## Client-Side API
 
@@ -93,15 +101,16 @@ None of the widgets features the `OnLoad` event anymore. Use the `$(document).re
 
 ### Disable
 
-**Previous**
+```tab-Previous
 
     var datePicker = $("#DatePicker").data("tDatePicker");
     datePicker.disable();
-
-**Current**
+```
+```tab-Current
 
     var datePicker = $("#datepicker").data("kendoDatePicker");
     datePicker.enable(false);
+```
 
 ## See Also
 

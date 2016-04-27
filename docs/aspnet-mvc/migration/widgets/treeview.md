@@ -1,14 +1,19 @@
 ---
 title: TreeView
-page_title: API documentation for Kendo UI jQuery TreeView widget for ASP.NET MVC
-description: This documentation guides you how to load data on demand in the server-side API of Kendo UI TreeView for ASP.NET MVC and serialize JSON format data from the server.
+page_title: TreeView | Migrate from Telerik Extensions
+description: "Handle ASP.NET MVC server-side API for the Kendo UI TreeView widget."
+slug: treeview_migrationextensions_aspnetmvc
 ---
 
-# Server-side API
+# TreeView Migration
 
-### Remote data binding (Load On Demand)
+This article demonstrates the ASP.NET MVC server-side API for the Kendo UI TreeView widget.
 
-#### Old
+## Server-side API
+
+### Remote Data Binding
+
+```tab-Previous
 
     <%= Html.Telerik().TreeView()
          .Name("TreeView")
@@ -16,8 +21,8 @@ description: This documentation guides you how to load data on demand in the ser
              .Ajax().Select("_AjaxLoading", "TreeView")
          )
      %>
-
-#### New
+```
+```tab-Current
 
     <%= Html.Telerik().TreeView()
          .Name("TreeView")
@@ -28,10 +33,13 @@ description: This documentation guides you how to load data on demand in the ser
                });
          })
      %>
+```
 
-### Serializing Data
+### Data Serialization
 
-Data from the server should be serialized in the following JSON format:
+Data from the server must be serialized in the JSON format demonstrated in the example below.
+
+###### Example
 
     {
         id: String,
@@ -42,7 +50,9 @@ Data from the server should be serialized in the following JSON format:
         hasChildren: Boolean
     }
 
-All fields are optional (skipping the text field will show the item with the text “undefined”). The text/url/imageUrl/spriteCssClass field names can be changed through the DataTextField/DataUrlField/DataImageUrlField/DataSpriteCssClassField fluent methods:
+All fields are optional&mdash;skipping the text field shows the item with the text `undefined`. The `text`, `url`, `imageUrl`, or `spriteCssClass` field names can be changed through the `DataTextField`, `DataUrlField`, `DataImageUrlField`, or `DataSpriteCssClassField` fluent methods, as demonstrated in the example below.
+
+###### Example
 
     <%= Html.Kendo().TreeView()
          .Name("TreeView")
@@ -54,8 +64,10 @@ All fields are optional (skipping the text field will show the item with the tex
                });
          })
      %>
+<!--_-->
+The above code allows the items to be serialized in the form below.
 
-The above code allows the items to be serialized in the following form:
+###### Example
 
     {
         id: 2,
@@ -63,9 +75,11 @@ The above code allows the items to be serialized in the following form:
         hasChildren: true
     }
 
-### Changing The Field That Posts The Item ID
+### Item-Posting Field Change
 
-By default, the **id** field will be posted to the server. To change the parameter name, you can use the Data handler:
+By default, the `id` field is posted to the server. To change the parameter name, use the Data handler.
+
+###### Example
 
     <%= Html.Kendo().TreeView()
         .Name("TreeView")
@@ -85,15 +99,18 @@ By default, the **id** field will be posted to the server. To change the paramet
 
 ### Value Field
 
-The value field is removed.  Depending on your use case, you can either:
+The value field is removed. Depending on your use case, apply either of the approaches below.
 
-- If the value was used for load on demand, use the **id** field.  The id will be inferred in the client-side datasource and will be used when making requests for more data.
+- If the value was used for load on demand, use the `id` field. The id will be inferred in the client-side `dataSource` and will be used when making requests for more data.
+- If the value was used to store arbitrary data, serialize it in a `data-*` attribute through the `HtmlAttributes` item, or if a DataSource is used, access the additional data through the `dataItem` client-side method.
 
--  If the value was used to store arbitrary data, serialize it in a data-* attribute through the item HtmlAttributes, or if a DataSource is used, access the additional data through the **dataItem** client-side method.
+### Conditional Load on Demand
 
-### Conditional load on demand for some nodes
+The conditional load on demand for some nodes can be achieved through using custom transport, as demonstrated in the article on [mixing local data and remote binding]({% slug howto_combinelocaldatawithremoteloading_treeview %}).
 
-This behavior can be achieved using a custom transport, like shown in the how to [mix local data and remote binding article](/web/treeview/how-to/mix-local-data-and-remote-loading). Defining the local transport via the server-side wrappers can be done like this:
+Define the local transport by using the server-side wrappers in the way shown below.
+
+###### Example
 
     @(Html.Kendo().TreeView()
         .Name("treeview")
@@ -112,7 +129,9 @@ This behavior can be achieved using a custom transport, like shown in the how to
 
 ### CheckBox Support
 
-Use the checkboxes builder to render checkboxes or enable tri-state checkboxes:
+Use the checkboxes builder to render checkboxes or enable tri-state checkboxes.
+
+###### Example
 
     @(Html.Kendo().TreeView()
         .Name("TreeView")
@@ -126,9 +145,11 @@ Use the checkboxes builder to render checkboxes or enable tri-state checkboxes:
         )
     )
 
-#### Conditionally showing checkboxes
+#### Conditional Checkboxes Display
 
-This functionality requires a custom checkbox template:
+This functionality requires a custom checkbox template, as demonstrated in the example below.
+
+###### Example
 
     @(Html.Kendo().TreeView()
         .Name("TreeView")
@@ -142,86 +163,42 @@ This functionality requires a custom checkbox template:
         )
     )
 
-Any conditional code executed in the client-side template. See also [how to hide checkboxes for root level](/web/treeview/how-to/hide-checkboxes-for-root-level).
+For more information on this issue, refer to the article on [how to hide checkboxes for root level]({% slug howto_hidecheckboxesforrootlevel_treeview %}).
 
-#### Show node lines
+#### Node Lines Display
 
-Node line functionality is not supported out of the box, but can be achieved via custom styling, as shown in the [show lines between nodes help topic](/web/treeview/how-to/show-node-lines).
+The node-line functionality is not supported out of the box, but can be achieved through custom styling, as demonstrated in the article on [how to show lines between nodes]({% slug howto_showlinesbetweennodes_treeview %}).
 
+## Client-Side API
 
-# Client-Side API Changes
+### Configuration
 
-#### MVC -> Kendo
+| MVC               | Kendo UI        |
+|:---               |:---             |
+| `ajaxRequest`     | Now removed. Use `dataItem.children.read()` after obtaining the `dataItem` through `treeview.dataItem(node)`.
+| `dataBind`        | Now removed. Use `treeview.dataSource.read()` instead.
+| `disable`         | Now removed. Use `treeview.enable(node, false)` instead.
+| `getItemText`     | Now renamed. Use `treeview.text(node)`.
+| `getItemValue`    | Now removed. Refer to the section on [removed value fields](#value-field-is-removed).
+| `findByValue`     | Now removed. Refer to the section on [removed value fields](#value-field-is-removed). An alternative is to use `treeview.findByUid` and access additional data in the related `dataItem`.
+| `nodeCheck`       | Now removed. Refer to the section on [checkbox support](#checkbox-support).
 
-##### ajaxRequest
+### Events
 
-Removed. Use **dataItem.children.read()** (after obtaining the dataItem through **treeview.dataItem(node)**)
+Apart from changing the event builders, the changes listed below are now introduced.
 
-##### dataBind
+| MVC               | Kendo UI        |
+|:---               |:---             |
+| `OnLoad`          | Now removed. Use `$(document).ready()` instead.
+| `OnChecked`       | Now removed. Refer to the section on [checkbox support](#checkbox-support).
+| `OnDataBinding`   | Now removed. Use the DataSource events instead.
+| `OnDataBound`     | Now removed. Use the DataSource events instead.
+| `OnError`         | Now removed. Use the DataSource events instead.
+| `OnNodeDragStart` | Now renamed. Use the `DragStart` event.
+| `OnNodeDragging`  | Now renamed. Use the `Drag` event.
+| `OnNodeDrop`      | Now renamed. Use the `Drop` event.
+| `OnNodeDropped`   | Now renamed. Use the `DragEnd` event.
 
-Removed. Use **treeview.dataSource.read()**
-
-##### disable
-
-Removed. Use **treeview.enable(node, false)**
-
-##### getItemText
-
-Renamed. Use **treeview.text(node)**
-
-##### getItemValue
-
-Removed. See the [Value Field Is Removed](#value-field-is-removed) section of this document.
-
-##### findByValue
-
-Removed. See the [Value Field Is Removed](#value-field-is-removed) section of this document. An alternative is to use **treeview.findByUid** and access additional data in the related dataItem.
-
-##### nodeCheck
-
-Removed. See the [Checkbox Support](#checkbox-support) section of this document.
-
-## Client-Side Events Changes
-
-Apart from changing the event builders, the following changes have been introduced:
-
-#### MVC -> Kendo
-
-##### OnLoad
-
-Removed. Use **$(document).ready()**
-
-##### OnChecked
-
-Removed. See the [Checkbox Support](#checkbox-support) section of this document.
-
-##### OnDataBinding
-
-Removed. Use the DataSource events
-
-##### OnDataBound
-
-Removed. Use the DataSource events
-
-##### OnError
-
-Removed. Use the DataSource events
-
-##### OnNodeDragStart
-
-Renamed. Use the **DragStart** event
-
-##### OnNodeDragging
-
-Renamed. Use the **Drag** event
-
-##### OnNodeDrop
-
-Renamed. Use the **Drop** event
-
-##### OnNodeDropped
-
-Renamed. Use the **DragEnd** event
 
 ## See Also
 

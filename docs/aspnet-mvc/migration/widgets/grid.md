@@ -7,7 +7,7 @@ slug: grid_migrationextensions_aspnetmvc
 
 # Grid Migration
 
-This article demonstrates the ASP.NET MVC server-side API for the Kendo UI Calendar widget.
+This article demonstrates the ASP.NET MVC server-side API for the Kendo UI Grid widget.
 
 ## Server-Side API
 
@@ -15,13 +15,13 @@ This article demonstrates the ASP.NET MVC server-side API for the Kendo UI Calen
 
 The `DataKeys` configuration option is now moved to the `Datasource` model configuration.
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")       
         .DataKeys(dataKeys => dataKeys.Add(o => o.OrderID))
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().Grid<Order>()
         .Name("Grid")
@@ -29,6 +29,7 @@ The `DataKeys` configuration option is now moved to the `Datasource` model confi
             .Ajax()
             .Model(model => model.Id(o => o.OrderID))
         )
+```
 
 ### Data Binding
 
@@ -36,14 +37,14 @@ The `DataKeys` configuration option is now moved to the `Datasource` model confi
 
 The `DataBinding` configuration is now moved to the `Datasource`.
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")      
         .DataBinding(dataBinding => dataBinding.Ajax().Select("_AjaxBinding", "Grid"))
 
-<!--_-->
-**Current**    
+```
+```tab-Current    
 
     Html.Kendo().Grid<Order>()   
         .Name("Grid")  
@@ -51,6 +52,7 @@ The `DataBinding` configuration is now moved to the `Datasource`.
             .Ajax()
             .Read(read => read.Action("AjaxBinding ", "Grid"))
         )
+```
 
 #### Methods
 
@@ -58,13 +60,13 @@ The `DataBinding.WebService` configuration option is now removed.
 
 The `OperationMode` configuration option is now changed to `ServerOperation`.
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")      
         .DataBinding(dataBinding => dataBinding.Ajax().OperationMode(GridOperationMode.Client))
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().Grid<Order>()
         .Name("Grid")
@@ -72,6 +74,7 @@ The `OperationMode` configuration option is now changed to `ServerOperation`.
             .Ajax()
             .ServerOperation(false)
         )
+```
 
 #### URL Methods
 
@@ -88,7 +91,7 @@ The `DataBinding` `URL` methods are now renamed to match the Kendo UI `Datasourc
 
 The `DetailView.Clienttemplate` configuration option is now changed to `ClientDetailTemplateId`.
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")
@@ -97,8 +100,8 @@ The `DetailView.Clienttemplate` configuration option is now changed to `ClientDe
             .Name("TabStrip_<#= EmployeeID #>")                                                                                                           
             .ToHtmlString()
         ))
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().Grid<Order>()
         .Name("Grid")
@@ -109,10 +112,11 @@ The `DetailView.Clienttemplate` configuration option is now changed to `ClientDe
             .Name("TabStrip_#=EmployeeID#")           
             .ToClientTemplate())
     </script>
+```
 
 The `DetailView.Template` configuration option is now changed to `DetailTemplate`.
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().Grid(Model)
         .Name("Employees")  
@@ -122,8 +126,8 @@ The `DetailView.Template` configuration option is now changed to `DetailTemplate
                     .Name("TabStrip_" + e.EmployeeID)
                     .Render();
         }))
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().Grid(Model)
         .Name("Employees")   
@@ -133,6 +137,7 @@ The `DetailView.Template` configuration option is now changed to `DetailTemplate
             .Name("TabStrip_" + e.EmployeeID)
             .Render();
         })
+```
 
 ### Editing
 
@@ -153,12 +158,12 @@ Inline edit forms are immediately closed when the update button is clicked. This
 
 ###### Example
 
-    ...
+    //Omitted for brevity.
     .DataSource(dataSource => dataSource
         .Ajax()
         .Events(events => events.Error("error_handler"))
     )
-    ...
+    //Omitted for brevity.
 
     <script type="text/javascript">
         function error_handler(e) {
@@ -178,15 +183,15 @@ Inline edit forms are immediately closed when the update button is clicked. This
 
 The `DefaultDataItem` is now moved to the `DataSource` model configuration.
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")                           
         .Editable(editable => editable.DefaultDataItem(new Order {
             OrderDate = DateTime.Today
         }))
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().Grid<Order>()    
         .Name("Grid")     
@@ -194,6 +199,7 @@ The `DefaultDataItem` is now moved to the `DataSource` model configuration.
             .Ajax()
             .Model(model => model.Field(o => o.OrderDate).DefaultValue(DateTime.Today))
         )
+```
 
 ### Grouping
 
@@ -201,15 +207,15 @@ The `Visible` option is now removed. The same functionality can be achieved by s
 
 The `Groups` configuration option is now moved to the `Datasource`.
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")                        
         .Groupable(groupable => groupable
             .Groups(groups => groups.Add(o => o.OrderDate))
         )    
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().Grid<Order>()   
         .Name("Grid")    
@@ -217,18 +223,19 @@ The `Groups` configuration option is now moved to the `Datasource`.
             .Ajax()                       
             .Group(group => group.Add(o => o.OrderDate))
         )     
+```
 
 ### Sorting
 
 The `OrderBy` configuration option is now moved to the `DataSource` configuration.
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")   
         .Sortable(sortable => sortable.OrderBy(order => order.Add(o => o.OrderDate).Ascending()))
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().Grid<Order>()   
         .Name("Grid")    
@@ -236,18 +243,19 @@ The `OrderBy` configuration option is now moved to the `DataSource` configuratio
             .Ajax()                       
             .Sort(sort => sort.Add(o => o.OrderDate).Ascending())
         )
+```
 
 ### Filtering
 
 The `Filters` configuration option is now moved to the `DataSource` configuration.
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")   
         .Filterable(filtarable => filtarable.Filters(filters => filters.Add(o => o.OrderDate).IsEqualTo(DateTime.Today))
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().Grid<Order>()   
         .Name("Grid")        
@@ -255,6 +263,7 @@ The `Filters` configuration option is now moved to the `DataSource` configuratio
             .Ajax()                        
             .Filter(filter => filter.Add(o => o.OrderDate).IsEqualTo(DateTime.Today))
         )
+```
 
 ### Pageable
 
@@ -266,13 +275,13 @@ The `Filters` configuration option is now moved to the `DataSource` configuratio
 
 The `PageSize` and `Total` are now moved to the DataSource configuration.
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")   
         .Pageable(pageable => pageable.PageSize(42).Total(100))
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().Grid<Order>()   
     .Name("Grid")        
@@ -281,12 +290,13 @@ The `PageSize` and `Total` are now moved to the DataSource configuration.
         .PageSize(42)
         .Total(100)
     )
+```
 
 ### Columns
 
 The `Aggregates` configuration option is now moved to the DataSource configuration.
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")   
@@ -295,8 +305,8 @@ The `Aggregates` configuration option is now moved to the DataSource configurati
             columns.Bound(o => o.OrderID)
             .Aggregate(agg => agg.Count());          
         })
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().Grid<Order>()   
         .Name("Grid"
@@ -308,10 +318,11 @@ The `Aggregates` configuration option is now moved to the DataSource configurati
             .Ajax()                       
             .Aggregates(agg => agg.Add(o => o.OrderID).Count())
         )
+```
 
 The `ReadOnly` configuration option is now moved to the `DataSource` model configuration.
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")   
@@ -319,8 +330,8 @@ The `ReadOnly` configuration option is now moved to the `DataSource` model confi
         {
             columns.Bound(o => o.OrderID).ReadOnly(true);          
         })
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().Grid<Order>()   
         .Name("Grid")
@@ -332,6 +343,7 @@ The `ReadOnly` configuration option is now moved to the `DataSource` model confi
             .Ajax()
             .Model(model => model.Field(o => o.OrderID).Editable(false))
         )
+```
 
 ### KeyboardNavigation
 
@@ -344,17 +356,18 @@ The `ReadOnly` configuration option is now moved to the `DataSource` model confi
 
 The `NoRecordsTemplate` is now renamed to `NoRecords`.
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")
         .NoRecordsTemplate("foo")
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().Grid<Order>()   
         .Name("Grid")
         .NoRecords("foo")
+```
 
 For more hints on how to use the `NoRecords` setting, refer to the [article on the Grid configuration]({% slug configuration_gridhelper_aspnetmvc %}#no-records-template).
 
@@ -438,7 +451,7 @@ The `OnDataBinding` event is now removed. If you want to be notified when an Aja
 
     dataSource => dataSource.Ajax().Events(e => e.RequestStart("onRequestStart"))
 
-If you need to send custom data to the `action` method, use `.Data()` on the DataSource operation.
+To send custom data to the `action` method, use `.Data()` on the DataSource operation.
 
     dataSource => dataSource.Ajax()
         .Read(read=>read.Action("Action","Controller").Data("sendData"))

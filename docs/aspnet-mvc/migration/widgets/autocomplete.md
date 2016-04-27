@@ -15,13 +15,14 @@ To bind the AutoComplete to any collection, define the `DataTextField`. Note tha
 
 ### Separator
 
-**Previous**
+```tab-Previous
 
     Html.Telerik().AutoComplete().Name(“AutoComplete”).Multiple(m => m.Separator(“, “))
-
-**Current**
+```
+```tab-Current
 
     Html.Kendo().AutoComplete().Name(“AutoComplete”).Separator(“, “)
+```
 
 ## See Also
 

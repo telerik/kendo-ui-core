@@ -1,11 +1,13 @@
 ---
 title: Menu
-page_title: API documentation for Kendo UI jQuery Menu control with ASP.NET MVC
-description: Documentation and code examples about server-side and client-side API for Kendo UI Menu component.
+page_title: Menu | Migrate from Telerik Extensions
+description: "Handle ASP.NET MVC server-side API for the Kendo UI Menu widget."
+slug: menu_migrationextensions_aspnetmvc
 ---
 
-# Server-side API
+# Menu Migration
 
+<<<<<<< HEAD
 Animations:
 
 #### Old
@@ -15,23 +17,47 @@ Animations:
 #### New
 
     Html.Kendo().Menu().Name("SampleMenu").Animation(animation => animation.Open(open => open.FadeIn(FadeDirection.Down))
+=======
+This article demonstrates the ASP.NET MVC server-side API for the Kendo UI Menu widget.
 
-# Client-side API
+## Server-Side API
 
-## Events
+### Animations
 
-KendoUI Complete for ASP.NET MVC does not support action syntax i.e. “() => {}”.
+```tab-Previous
 
-All Widgets No Longer Have the OnLoad Event. Please Use **$(Document).Ready()** Instead.
+    Html.Telerik().Menu().Name("SampleMenu")
+        .Effects(effects => effects.Slide())
+```
+```tab-Current
+    Html.Kendo().Menu().Name("SampleMenu")
+        .Animation(animation => animation
+            .Open(open => open.FadeIn(FadeDirection.Down)
+        )
+```
+>>>>>>> 203e81b... Review Migration section, apply new syntax to improve layout
 
-#### Old
+## Client-side API
 
-    Html.Telerik().Menu().Name("Menu").ClientEvents(events => events.OnChange(“change”))
+### Events
 
-#### New
+Kendo UI Complete for ASP.NET MVC does not support action syntax, that is, `“() => {}”`.
 
-    Html.Kendo().Menu().Name("Menu").Events(events => events.Change(“change”))
+None of the widgets features the `OnLoad` event anymore. Use the `$(document).ready()` instead.
 
+```tab-Previous
+
+    Html.Telerik().Menu().Name("Menu")
+        .ClientEvents(events => events
+            .OnChange(“change”)
+        )
+```
+```tab-Current
+    Html.Kendo().Menu().Name("Menu")
+        .Events(events => events
+            .Change(“change”)
+        )
+```
 ## See Also
 
 Other articles on migrating from Telerik Extensions:

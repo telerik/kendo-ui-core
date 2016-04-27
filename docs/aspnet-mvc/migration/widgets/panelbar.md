@@ -1,36 +1,43 @@
 ---
 title: PanelBar
-page_title: Help guide for Kendo UI PanelBar widget server-side API
-description: Learn more about animations and events in the API for Kendo UI PanelBar component with ASP.NET MVC.
+page_title: PanelBar | Migrate from Telerik Extensions
+description: "Handle ASP.NET MVC server-side API for the Kendo UI PanelBar widget."
+slug: panelbar_migrationextensions_aspnetmvc
 ---
 
-# Server-Side API
+# PanelBar Migration
 
-Animations:
+This article demonstrates the ASP.NET MVC server-side API for the Kendo UI PanelBar widget.
 
-#### Old
+## Server-Side API
+
+### Animations
+
+```tab-Previous
 
     Html.Telerik().PanelBar().Name("SamplePanelBar").Effects(effects => effects.Slide())
-
-#### New
+```
+```tab-Current
 
     Html.Kendo().PanelBar().Name("SamplePanelBar").Animation(animation => animation.Open(open => open.FadeIn(FadeDirection.Down))
+```
 
-# Client-Side API
+## Client-Side API
 
-## Events
+### Events
 
-KendoUI Complete for ASP.NET MVC does not support action syntax i.e. “() => {}”.
+Kendo UI Complete for ASP.NET MVC does not support action syntax, that is, `“() => {}”`.
 
-All Widgets No Longer Have The OnLoad Event. Please Use **$(document).ready()** Instead.
+None of the widgets features the `OnLoad` event anymore. Use the `$(document).ready()` instead.
 
-#### Old
+```tab-Previous
 
     Html.Telerik().PanelBar().Name("SamplePanelBar").ClientEvents(events => events.OnChange(“change”))
-
-#### New
+```
+```tab-Current
 
     Html.Kendo().PanelBar().Name("SamplePanelBar").Events(events => events.Change(“change”))
+```
 
 ## See Also
 

@@ -1,80 +1,98 @@
 ---
 title: NumericTextBox
-page_title: API documentation for Kendo UI jQuery NumericTextBox control with ASP.NET MVC
-description: Documentation and code examples about server-side and client-side API for Kendo UI NumericTextBox component.
+page_title: NumericTextBox | Migrate from Telerik Extensions
+description: "Handle ASP.NET MVC server-side API for the Kendo UI NumericTextBox widget."
+slug: numerictextbox_migrationextensions_aspnetmvc
 ---
 
-# Server-Side API
+# NumericTextBox Migration
 
-**IncrementStep**:
+This article demonstrates the ASP.NET MVC server-side API for the Kendo UI NumericTextBox widget.
 
-#### Old
+## Server-Side API
+
+### IncrementStep
+
+```tab-Previous
 
     Html.Telerik().NumericTextBox().IncrementStep(1)
-
-#### New
+```
+```tab-Current
 
     Html.Kendo().NumericTextBox().Step(1)
+```
 
-Min/Max value:
+### Min Value
 
-#### Old
+```tab-Previous
 
     Html.Telerik().NumericTextBox().MinValue(1)
-    Html.Telerik().NumericTextBox().MaxValue(1)
-
-#### New
+```
+```tab-Current
 
     Html.Kendo().NumericTextBox().Min(1)
+
+```
+
+### Max Value
+
+```tab-Previous
+
+    Html.Telerik().NumericTextBox().MaxValue(1)
+```
+```tab-Current
+
     Html.Kendo().NumericTextBox().Max(1)
+```
 
-Empty message:
+### Empty Message
 
-#### Old
+```tab-Previous
 
     Html.Telerik().NumericTextBox().EmptyMessage(“Enter”)
-
-#### New
+```
+```tab-Current
 
     Html.Kendo().NumericTextBox().Placeholder(“Enter”)
+```
 
-ButtonTitleUp and ButtonTitleDown:
+### ButtonTitleUp and ButtonTitleDown
 
 Not implemented.
 
-DecimalDigits:
+### DecimalDigits
 
-#### Old
+```tab-Previous
 
     Html.Telerik().NumericTextBox().DecimalDigits(3)
-
-#### New
+```
+```tab-Current
 
     Html.Kendo().NumericTextBox().Decimals(3)
+```
 
-**NumberGroupSize**, **NumberGroupSeparator**, **NegativePatternIndex**, **DecimalSeparator**, **CurrencySymbol**:
+The `NumberGroupSize`, `NumberGroupSeparator`, `NegativePatternIndex`, `DecimalSeparator`, and `CurrencySymbol` are not implemented in Kendo UI. Use the `Format()` and `Culture()` methods instead to achieve the same result.
 
-Not implemented in Kendo. Can use **Format()** and **Culture()** methods to achieve the same result.
+## Client-Side API
 
-# Client-Side API
+### Events
 
-## Events
+None of the events has the `On` prefix anymore.
 
-All Events No Longer Have the “On” Prefix.
+None of the widgets features the `OnLoad` event anymore. Use the `$(document).ready()` instead.
 
-All Widgets No Longer Have The OnLoad Event. Please Use **$(document).ready()** Instead.
+### Enable and Disable
 
-Disable and enable:
-
-#### Old
+```tab-Previous
 
     var datePicker = $("#DatePicker").data("tTextBox");
     datePicker.disable();
-
-#### New
+```
+```tab-Current
 
     var datePicker = $("#datepicker").data("kendoNumericTextBox");
     datePicker.enable(false);
+```
 
 ## See Also
 

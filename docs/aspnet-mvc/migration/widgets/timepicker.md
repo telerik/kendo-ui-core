@@ -1,52 +1,71 @@
 ---
 title: TimePicker
-page_title: API documentation for Kendo UI TimePicker widget for ASP.NET MVC
-description: How to define min and max dates in the server-side API of Kendo UI TimePicker control for ASP.NET MVC.
+page_title: TimePicker | Migrate from Telerik Extensions
+description: "Handle ASP.NET MVC server-side API for the Kendo UI TimePicker widget."
+slug: timepicker_migrationextensions_aspnetmvc
 ---
 
-# Server-Side API
+# TimePicker Migration
 
-Defining Min and Max dates:
+This article demonstrates the ASP.NET MVC server-side API for the Kendo UI TimePicker widget.
 
-#### Old
+## Server-Side API
+
+### Min Date
+
+```tab-Previous
 
     Html.Telerik().Calendar().Name("Calendar").MinDate(DateTime.Now)
-    Html.Telerik().Calendar().Name("Calendar").MaxDate(DateTime.Now)
 
-#### New
+```
+```tab-Current
 
     Html.Kendo().Calendar().Name("Calendar").Min(DateTime.Now)
-    Html.Kendo().Calendar().Name("Calendar").Max(DateTime.Now)
 
-Footer:
+```
 
-#### Old
+### Max Date
+
+```tab-Previous
+
+      Html.Telerik().Calendar().Name("Calendar").MaxDate(DateTime.Now)
+```
+```tab-Current
+
+      Html.Kendo().Calendar().Name("Calendar").Max(DateTime.Now)
+```
+
+### Footer
+
+```tab-Previous
 
     Html.Telerik().Calendar().Name("Calendar").TodayButton(“d”)
-
-#### New
+```
+```tab-Current
 
     Html.Kendo().Calendar().Name("Calendar").Footer(“#= kendo.toString(data, ‘MM/dd/yyyy’)”)
+```
 
-# Client-Side API
+## Client-Side API
 
-## Events
+### Events
 
-All Events No Longer Have the “On” Prefix.
+None of the events has the `On` prefix anymore.
 
-All Widgets No Longer Have The OnLoad Event. Please Use **$(document).ready()** Instead.
+None of the widgets features the `OnLoad` event anymore. Use the `$(document).ready()` instead.
 
-**Disable**:
+#### Disable
 
-#### Old
+```tab-Previous
 
     var datePicker = $("#DatePicker").data("tTimePicker");
     datePicker.disable();
-
-#### New
+```
+```tab-Current
 
     var datePicker = $("#datepicker").data("kendoTimePicker");
     datePicker.enable(false);
+```
 
 ## See Also
 
