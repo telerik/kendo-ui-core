@@ -5,8 +5,8 @@ description: Documentation and code examples about server-side and client-side A
 ---
 
 # Server-Side API
- 
-## DataKeys 
+
+## DataKeys
 
 DataKeys Are Moved to the Datasource Model Configuration:
 
@@ -24,19 +24,19 @@ DataKeys Are Moved to the Datasource Model Configuration:
             .Ajax()
             .Model(model => model.Id(o => o.OrderID))
         )
- 
+
 ## DataBinding
 
 ### Configuration
 
 DataBinding Configuration Is Moved to Datasource:
- 
+
 #### Old
-    
+
     Html.Telerik().Grid<Order>()
         .Name("Grid")      
         .DataBinding(dataBinding => dataBinding.Ajax().Select("_AjaxBinding", "Grid"))
-    
+
 #### New    
 
     Html.Kendo().Grid<Order>()   
@@ -70,8 +70,8 @@ DataBinding Configuration Is Moved to Datasource:
 Databinding "Url" Methods Are Renamed to Match the KendoUI Datasource Client Configuration.
 
 #### Old -> New
-                
-##### Select 
+
+##### Select
 
 Read
 
@@ -86,7 +86,7 @@ Destroy
 ##### Insert
 
 Create
- 
+
 ### DetailView
 
 **DetailView.Clienttemplate** Changed to **ClientDetailTemplateId**:
@@ -112,11 +112,11 @@ Create
             .Name("TabStrip_#=EmployeeID#")           
             .ToClientTemplate())
     </script>
- 
+
 **DetailView.Template** changed to **DetailTemplate**:
- 
+
 #### Old
-      
+
     Html.Telerik().Grid(Model)
         .Name("Employees")  
         .DetailView(detailView => detailView.Template(e =>
@@ -133,11 +133,11 @@ Create
         .DetailTemplate(e =>
         {            
             Html.Kendo().TabStrip()
-            .Name("TabStrip_" + e.EmployeeID) 
+            .Name("TabStrip_" + e.EmployeeID)
             .Render();
         })
-       
-### Editing 
+
+### Editing
 
 **InForms** Mode is no longer available.
 
@@ -192,10 +192,10 @@ Inline edit forms are immediately closed when the update button is clicked. This
         .Name("Grid")     
         .DataSource(dataSource => dataSource
             .Ajax()
-            .Model(model => model.Field(o => o.OrderDate).DefaultValue(DateTime.Today)) 
+            .Model(model => model.Field(o => o.OrderDate).DefaultValue(DateTime.Today))
         )
 
-## Grouping 
+## Grouping
 
 Groups Configuration Is Moved to Datasource:
 
@@ -217,7 +217,7 @@ Groups Configuration Is Moved to Datasource:
         )     
 
 **Visible** option is removed. Same functionality can be achieved by setting **Groupable.Enabled** to false and Group descriptors through the DataSource.
- 
+
 ## Sorting
 
 **OrderBy** Is Moved to The DataSource Configuration:
@@ -242,7 +242,7 @@ Groups Configuration Is Moved to Datasource:
 **Filters** Is Moved to The DataSource Configuration:
 
 #### Old
-       
+
     Html.Telerik().Grid<Order>()
         .Name("Grid")   
         .Filterable(filtarable => filtarable.Filters(filters => filters.Add(o => o.OrderDate).IsEqualTo(DateTime.Today))
@@ -254,7 +254,7 @@ Groups Configuration Is Moved to Datasource:
         .DataSource(dataSource => dataSource
             .Ajax()                        
             .Filter(filter => filter.Add(o => o.OrderDate).IsEqualTo(DateTime.Today))
-        ) 
+        )
 
 ## Pageable
 
@@ -263,26 +263,26 @@ Groups Configuration Is Moved to Datasource:
 **PageSize** And Total Is Moved to the DataSource Configuration:
 
 #### Old
- 
+
     Html.Telerik().Grid<Order>()
         .Name("Grid")   
         .Pageable(pageable => pageable.PageSize(42).Total(100))
 
 #### New
-     
+
     Html.Kendo().Grid<Order>()   
     .Name("Grid")        
     .DataSource(dataSource => dataSource
         .Ajax()                       
         .PageSize(42)
         .Total(100)
-    ) 
+    )
 
 **PageOnScroll** Is Removed (Use **Scrollable.Virtual** Option to Enabled Virtual Scrolling Instead).
 
 **Style** Is Removed. Pager Style Can Be Configured by Setting Individual Properties Such As **Input**, **PageSizes**, **Info**, **Numeric**, **PreviousNext**.
 
-## Columns 
+## Columns
 
 **Aggregates** are moved to the DataSource configuration:
 
@@ -308,7 +308,7 @@ Groups Configuration Is Moved to Datasource:
             .Ajax()                       
             .Aggregates(agg => agg.Add(o => o.OrderID).Count())
         )
-        
+
 **ReadOnly** In Moved To DataSource Model Configuration:
 
 #### Old
@@ -494,7 +494,7 @@ If you need to send custom data to the action method use .Data() on the DataSour
 
     dataSource => dataSource.Ajax()
         .Read(read=>read.Action("Action","Controller").Data("sendData"))
-    
+
     function sendData() {
         return { foo: "bar" };
     }
@@ -526,3 +526,13 @@ Renamed to **Change**
 ##### OnSubmitChanges
 
 Renamed to **SaveChanges**
+
+## See Also
+
+Other articles on migrating from Telerik Extensions:
+
+* [Migrate the AutoComplete]({% slug autocomplete_migrationextensions_aspnetmvc %})
+* [Migrate the Calendar]({% slug calendar_migrationextensions_aspnetmvc %})
+* [Migrate the Chart]({% slug chart_migrationextensions_aspnetmvc %})
+
+To see the articles on migrating kendo UI controls from Telerik Extensions, browse [this section]({% slug combobox_migrationextensions_aspnetmvc %}).

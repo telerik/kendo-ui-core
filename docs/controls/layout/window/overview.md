@@ -189,25 +189,34 @@ Kendo UI Window creates an iframe for its content if the content URL contains a 
 > * Loading HTML fragments (partial content) inside an iframe is incorrect. Iframe pages should include a DOCTYPE, `html`, `head`, and `body` tags, just like a standard web page does.
 >  * Using an iframe on iOS devices is not recommended. Iframes on these devices are not scrollable and always expand to match the content.
 
-The example below demonstrates how to access the `window` and `document` objects inside the `iframe`. Note that to achieve this, the nested page must belong to the same domain as the main page.
+The example below demonstrates how to access the `window` and `document` objects inside the `iframe`. Note that to achieve this, the nested page must belong to the same domain as the main page. The `iframe` is accessed via the Window widget's [element](/intro/widget-basics/wrapper-element).
 
 ###### Example
 
     <div id="window"></div>
 
     <script>
-
-    var windowElement = $("#window").kendoWindow({
-        iframe: true,
-        content: "http://docs.telerik.com/kendo-ui/"
+    
+    $(function() {
+        $("#window").kendoWindow({
+            iframe: true,
+            content: "http://docs.telerik.com/kendo-ui/"
+        });
     });
-
-    var iframeDomElement = windowElement.children("iframe")[0];
-    var iframeWindowObject = iframeDomElement.contentWindow;
-    var iframeDocumentObject = iframeDomElement.contentDocument;
-    // which is equivalent to
-    // var iframeDocumentObject = iframeWindowObject.document;
-    var iframejQuery = iframeWindowObject.$; // if jQuery is registered inside the iframe page, of course
+    
+    // the code above will be generated automatically when using server-side Kendo UI wrappers
+    
+    $(function() {
+        var windowElement = $("#window");
+        var iframeDomElement = windowElement.children("iframe")[0];
+        var iframeWindowObject = iframeDomElement.contentWindow;
+        
+        var iframeDocumentObject = iframeDomElement.contentDocument;
+        // which is equivalent to
+        // var iframeDocumentObject = iframeWindowObject.document;
+        
+        var iframejQuery = iframeWindowObject.$; // if jQuery is registered inside the iframe page, of course    
+    });
 
     </script>
 

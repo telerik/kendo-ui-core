@@ -7,7 +7,7 @@ slug: howto_select_allvalues_witha_single_selection_multiselect
 
 # Select All Values with Single Selection
 
-The example below demonstrates how to create a dataItem that holds an `all`-value, which selects all items in the Kendo UI MultiSelect widget.
+The example below demonstrates how to create a `dataItem` that holds an `all`-value, which selects all items in the Kendo UI MultiSelect widget.
 
 ###### Example
 
@@ -71,7 +71,7 @@ The example below demonstrates how to create a dataItem that holds an `all`-valu
               this.value("");
             } else if (values.indexOf("ALL") !== -1) {
               values = $.grep(values, function(value) {
-                return value !== "ALL";    
+                return value !== "ALL";
               });
 
               this.value(values);
@@ -83,8 +83,7 @@ The example below demonstrates how to create a dataItem that holds an `all`-valu
   </div>
 ```
 
-
-The example below demonstrates how to select all items by selecting the item "ALL".
+The example below demonstrates how to select all items by selecting the `ALL` item.
 
 ###### Example
 
@@ -141,16 +140,23 @@ The example below demonstrates how to select all items by selecting the item "AL
           // create MultiSelect from select HTML element
           var required = $("#required").kendoMultiSelect({
             select: function(e) {
-              var dataItem = this.dataSource.view()[e.item.index()];
-              var values = this.value();
+                var dataItem = this.dataSource.view()[e.item.index()];
+                var values = this.value();
 
-              if (dataItem.value === "ALL") {
-                values = e.sender.dataSource.data().map(function(item){
-                  return item.value;
-                })
+                if (dataItem.value === "ALL") {
+                  values = [];
+                } else if (values.indexOf("ALL") !== -1) {
+                  values = $.grep(values, function(value) {
+                    return value !== "ALL";
+                  });
+                }
+
+                values.push(dataItem.value);
 
                 this.value(values);
-              } 
+                this.trigger("change"); //Trigger change manually, as the default select is prevented
+
+                e.preventDefault();
             }
           }).data("kendoMultiSelect");
         });

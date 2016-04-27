@@ -1,41 +1,56 @@
 ---
 title: Calendar
-page_title: Server-side API for Kendo UI Calendar widget with ASP.NET MVC
-description: This documentation provides information about events and options such as min/max date in the server-side API of Kendo UI Calendar widget.
+page_title: Calendar | Migrate from Telerik Extensions
+description: "Handle ASP.NET MVC server-side API for the Kendo UI Calendar widget."
+slug: calendar_migrationextensions_aspnetmvc
 ---
+
+## Calendar Migration
+
+This article demonstrates the ASP.NET MVC server-side API for the Kendo UI Calendar widget.
 
 ## Server-Side API
 
-## Events
+<table width="100%">
+  <col width="50%">
+  <col width="50%">
+    <tr>
+      <th>Options</th>
+      <th>Previous</th>
+      <th>New</th>
+    </tr>
 
-#### Old
+    <tr>
+      <td><strong>Events</strong></td>
+      <td><code>Html.Telerik().Calendar().Name("Calendar").ClientEvents( events => events.OnChange(“change”))</code></td>
+      <td><code>Html.Kendo().Calendar().Name("Calendar").Events( events => events.Change(“change”))</code></td>
+    </tr>
 
-    Html.Telerik().Calendar().Name("Calendar").ClientEvents( events => events.OnChange(“change”))
- 
-#### New
+    <tr>
+      <td><strong>Min Date</strong></td>
+      <td><code>Html.Telerik().Calendar().Name("Calendar").MinDate(DateTime.Now)</code></td>
+      <td><code>Html.Telerik().Calendar().Name("Calendar").MaxDate(DateTime.Now)</code></td>
+    </tr>
 
-    Html.Kendo().Calendar().Name("Calendar").Events( events => events.Change(“change”))
+    <tr>
+      <td><strong>Max Date</strong></td>
+      <td><code>Html.Kendo().Calendar().Name("Calendar").Min(DateTime.Now)</code></td>
+      <td><code>Html.Kendo().Calendar().Name("Calendar").Max(DateTime.Now)</code></td>
+    </tr>
 
-## Other Options
+    <tr>
+      <td><strong>Footer</strong></td>
+      <td><code>Html.Telerik().Calendar().Name("Calendar").TodayButton(“d”)</code></td>
+      <td><code>Html.Kendo().Calendar().Name("Calendar").Footer(“#= kendo.toString(data, ‘MM/dd/yyyy’)”)</code></td>
+    </tr>
 
-### Min/Max date
- 
-#### Old
+</table>
 
-    Html.Telerik().Calendar().Name("Calendar").MinDate(DateTime.Now)
-    Html.Telerik().Calendar().Name("Calendar").MaxDate(DateTime.Now)
- 
-#### New
+## See Also
 
-    Html.Kendo().Calendar().Name("Calendar").Min(DateTime.Now)
-    Html.Kendo().Calendar().Name("Calendar").Max(DateTime.Now)
+Other articles on migrating from Telerik Extensions:
 
-### Footer
- 
-#### Old
+* [Migrate the AutoComplete]({% slug autocomplete_migrationextensions_aspnetmvc %})
+* [Migrate the Chart]({% slug chart_migrationextensions_aspnetmvc %})
 
-    Html.Telerik().Calendar().Name("Calendar").TodayButton(“d”)
- 
-#### New
-
-    Html.Kendo().Calendar().Name("Calendar").Footer(“#= kendo.toString(data, ‘MM/dd/yyyy’)”)
+To see the articles on migrating kendo UI controls from Telerik Extensions, browse [this section]({% slug combobox_migrationextensions_aspnetmvc %}).
