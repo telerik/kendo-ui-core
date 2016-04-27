@@ -155,6 +155,7 @@ You can reference an existing Kendo UI TreeMap instance via [`jQuery.data()`](ht
 
 Other articles on Telerik UI for ASP.NET MVC and on the TreeMap:
 
+* [ASP.NET MVC API Reference: TreeMapBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/TreeMapBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

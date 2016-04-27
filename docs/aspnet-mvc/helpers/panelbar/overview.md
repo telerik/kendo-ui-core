@@ -292,6 +292,7 @@ You can reference an existing Kendo UI PanelBar instance via [`jQuery.data()`](h
 
 Other articles on Telerik UI for ASP.NET MVC and on the PanelBar:
 
+* [ASP.NET MVC API Reference: PanelBarBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/PanelBarBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

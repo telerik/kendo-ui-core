@@ -4,7 +4,6 @@ page_title: Overview | Kendo UI MaskedTextBox
 description: "Learn how to initialize the Kendo UI MaskedTextBox widget and configure its behaviors."
 slug: overview_kendoui_maskedtextbox_widget
 position: 1
-
 ---
 
 # MaskedTextBox Overview
@@ -106,16 +105,15 @@ The MaskedTextBox widget provides the option to define custom mask rules during 
 
 ## Known Limitations
 
-### Mobile editing
+### Mobile Editing
 
-The MaskedTextBox widget listens to input events, like keydown, keypress, to restrict the typed value. In some
-mobile browsers (mostly built-in browsers of Android/Windows Mobile OS) those events **are not triggered at all**, which
-prevents the normal behavior of the MaskedTextBox, as they are fundamental for the typing restriction.
+The MaskedTextBox widget listens to input events, like `keydown` and `keypress`, to restrict the typed value.
 
-Unfortunately, in those cases we could not do much, because there is no other reliable way to detect typing in mobile browsers
-(virtual keyboard does not rise any other specific events).
+> **Important**
+> * In some mobile browsers, mostly Android or Windows Mobile OS built-in browsers, those events are not triggered at all. This prevents the normal behavior of the MaskedTextBox, as they are fundamental for the typing restriction.
+> * Recent tests show that the MaskedTextBox works in the latest iOS OS.
 
-> Our tests show that MaskedTextBox **works** in latest iOS OS.
+Unfortunately, in those cases not much can be done, because there is no other reliable way to detect typing in mobile browsers&mdash;the virtual keyboard does not rise any other specific events.
 
 ## See Also
 

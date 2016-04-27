@@ -1,53 +1,76 @@
 ---
 title: DateTimePicker
-page_title: Server-side API documentation for Kendo UI jQuery DateTimePicker widget with ASP.NET MVC
-description: How to define min and max dates, as well as start/end time in the server-side API of Kendo UI DateTimePicker component.
+page_title: DateTimePicker | Migrate from Telerik Extensions
+description: "Handle ASP.NET MVC server-side API for the Kendo UI DateTimePicker widget."
+slug: datetimepicker_migrationextensions_aspnetmvc
 ---
 
-# Server-side API
+# DateTimePicker Migration
 
-Defining min and max dates:
+This article demonstrates the ASP.NET MVC server-side API for the Kendo UI DateTimePicker widget.
 
-#### Old
-    
+## Server-Side API
+
+### Min Date
+
+**Previous**
+
     Html.Telerik().Calendar().Name("Calendar").MinDate(DateTime.Now)
+
+**Current**
+
+    Html.Kendo().Calendar().Name("Calendar").Min(DateTime.Now)
+
+### Max Date
+
+**Previous**
+
     Html.Telerik().Calendar().Name("Calendar").MaxDate(DateTime.Now)
 
-#### New
-    
-    Html.Kendo().Calendar().Name("Calendar").Min(DateTime.Now)
+**Current**
+
     Html.Kendo().Calendar().Name("Calendar").Max(DateTime.Now)
 
-Footer:
+### Footer
 
-#### Old
-    
+**Previous**
+
     Html.Telerik().Calendar().Name("Calendar").TodayButton(“d”)
 
-##3# New
-    
+**Current**
+
     Html.Kendo().Calendar().Name("Calendar").Footer(“#= kendo.toString(data, ‘MM/dd/yyyy’)”)
 
-StartTime and EndTime:
+### StartTime and EndTime
 
-    Not implemented in Kendo UI
+The `StartTime` and `EndTime` configuration options are not implemented in Kendo UI.
 
-# Client-side API
+## Client-side API
 
-## Events
+### Events
 
-All events no longer have the “On” prefix.
+None of the events has the `On` prefix anymore.
 
-All widgets no longer have the OnLoad event. Please use **$(document).ready()** instead.
+None of the widgets features the `OnLoad` event anymore. Use the `$(document).ready()` instead.
 
 ### Disable
 
-#### Old
-    
+**Previous**
+
     var datePicker = $("#DatePicker").data("tDateTimePicker");
     datePicker.disable();
 
-#### New
-    
+**Current**
+
     var datePicker = $("#datepicker").data("kendoDateTimePicker");
     datePicker.enable(false);
+
+## See Also
+
+Other articles on migrating from Telerik Extensions:
+
+* [Migrate the AutoComplete]({% slug autocomplete_migrationextensions_aspnetmvc %})
+* [Migrate the Calendar]({% slug calendar_migrationextensions_aspnetmvc %})
+* [Migrate the Chart]({% slug chart_migrationextensions_aspnetmvc %})
+
+To see the articles on migrating kendo UI controls from Telerik Extensions, browse [this section]({% slug combobox_migrationextensions_aspnetmvc %}).

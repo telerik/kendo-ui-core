@@ -176,6 +176,7 @@ You can reference an existing Kendo UI MaskedTextBox instance via [`jQuery.data(
 
 Other articles on Telerik UI for ASP.NET MVC and on the MaskedTextBox:
 
+* [ASP.NET MVC API Reference: MaskedTextBoxBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/MaskedTextBoxBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

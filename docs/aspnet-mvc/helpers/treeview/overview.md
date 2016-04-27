@@ -156,6 +156,7 @@ You can reference an existing Kendo UI TreeView instance via [`jQuery.data()`](h
 
 Other articles on Telerik UI for ASP.NET MVC and on the TreeView:
 
+* [ASP.NET MVC API Reference: TreeViewBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/TreeViewBuilder)
 * [Ajax Binding of the TreeView HtmlHelper]({% slug ajaxbinding_treeviewhelper_aspnetmvc %})
 * [How to Bind TreeViews to XML]({% slug howto_bindtoaml_treeviewaspnetmvc %})
 * [How to Integrate with Sharepoint]({% slug howto_integratewithsharepoint_treeviewaspnetmvc %})

@@ -280,6 +280,7 @@ Other articles on troubleshooting:
 * [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
 * [Common Issues in Kendo UI Excel Export]({% slug troubleshooting_excel_export_kendoui %})
 * [Common Issues in Kendo UI Charts]({% slug troubleshooting_chart_widget %})
+* [Performance Issues in Kendo UI Widgets for Data Visualization]({% slug tipsandtricks_kendouistyling %})
 * [Common Issues in Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %})
 * [Common Issues in Kendo UI Diagram]({% slug troubleshooting_diagram_widget %})
 * [Common Issues in Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %})

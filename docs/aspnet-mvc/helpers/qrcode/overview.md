@@ -83,6 +83,7 @@ You can reference an existing Kendo UI QRCode instance via [`jQuery.data()`](htt
 
 Other articles on Telerik UI for ASP.NET MVC and on the QRCode:
 
+* [ASP.NET MVC API Reference: QRCodeBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/QRCodeBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

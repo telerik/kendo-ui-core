@@ -23,6 +23,10 @@ For example, the {{ site.cdnVersion }} version can be loaded from:
 `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js`
 `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css`
 
+> **Important**
+>
+> Only Kendo UI official releases and service packs are uploaded to CDN. Internal builds are not published to the CDN.
+
 Use the following URL to load the minified Kendo UI Core script (available since Q1 2014 SP1):
 `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.ui.core.min.js`
 

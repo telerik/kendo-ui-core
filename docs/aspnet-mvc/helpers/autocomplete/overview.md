@@ -390,6 +390,7 @@ You can reference an existing Kendo UI AutoComplete instance via [`jQuery.data()
 
 Other articles on Telerik UI for ASP.NET MVC and on the AutoComplete:
 
+* [ASP.NET MVC API Reference: AutoCompleteBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
