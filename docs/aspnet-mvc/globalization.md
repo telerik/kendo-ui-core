@@ -18,23 +18,20 @@ Below are listed the steps for you to follow when you want to make Telerik UI fo
 
 **Step 2** Include the corresponding culture JavaScript file after the other JavaScript product files.
 
-**I. ASPX**
-
-###### Example
+```tab-ASPX
 
       <script src="<%= Url.Content("~/Scripts/jquery.min.js") %>"></script>
       <script src="<%= Url.Content("~/Scripts/kendo.all.min.js") %>"></script>
       <script src="<%= Url.Content("~/Scripts/kendo.aspnetmvc.min.js") %>"></script>
       <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js") %>"></script>
-
-**II. Razor**
-
-###### Example
+```
+```tab-Razor
 
       <script src="@Url.Content("~/Scripts/jquery.min.js")"></script>
       <script src="@Url.Content("~/Scripts/kendo.all.min.js")"></script>
       <script src="@Url.Content("~/Scripts/kendo.aspnetmvc.min.js")"></script>
       <script src="@Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js")"></script>
+```
 
 **Step 3** Set the current culture by calling the [`kendo.culture`](/api/javascript/kendo#methods-culture) method. Note that you must add the script block after the culture JavaScript file.
 
@@ -90,53 +87,43 @@ Below are listed the steps for you to follow when you want to make the widgets u
 
 **Step 2** Get the current culture.
 
-**I. ASPX**
+```tab-ASPX
 
-###### Example
-
-      <%
+    <%
+      var culture =  System.Globalization.CultureInfo.CurrentCulture.ToString();
+    %>
+```
+```tab-Razor
+    @{
         var culture =  System.Globalization.CultureInfo.CurrentCulture.ToString();
-      %>
-
-**II. Razor**
-
-###### Example
-
-      @{
-          var culture =  System.Globalization.CultureInfo.CurrentCulture.ToString();
-      }
+    }
+```
 
 **Step 3** Include the corresponding culture JavaScript file.
 
-**I. ASPX**
+```tab-ASPX
 
-###### Example
+    <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js") %>"></script>
+```
+```tab-Razor
 
-      <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js") %>"></script>
-
-**II. Razor**
-
-###### Example
-
-      <script src="@Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js")"></script>
+    <script src="@Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js")"></script>
+```
 
 **Step 4** Set the current culture by calling the [`kendo.culture`](/api/javascript/kendo#methods-culture) method. Note that you must add the script block after the culture JavaScript file.
 
-**I. ASPX**
+```tab-ASPX
 
-###### Example
+    <script>
+        kendo.culture("<%= culture %>");
+    </script>
+```
+```tab-Razor
 
-      <script>
-          kendo.culture("<%= culture %>");
-      </script>
-
-**II. Razor**
-
-###### Example
-
-      <script>
-          kendo.culture("@culture");
-      </script>
+    <script>
+        kendo.culture("@culture");
+    </script>
+```
 
 > The client-side culture must be set before any Kendo UI widgets that rely on it, are initialized.
 

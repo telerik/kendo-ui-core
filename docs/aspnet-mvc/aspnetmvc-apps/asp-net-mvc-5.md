@@ -98,35 +98,29 @@ After the needed JavaScript and CSS files are added to the application, you can 
 
 **Step 10** Render the Telerik UI for ASP.NET MVC style bundle.
 
-**I. Razor**
+```tab-ASPX
 
-###### Example
+    <%: Styles.Render("~/Content/kendo/css") %>
+```
+```tab-Razor
 
-        @Styles.Render("~/Content/kendo/css")
-
-**II. ASPX**
-
-###### Example
-
-        <%: Styles.Render("~/Content/kendo/css") %>
+    @Styles.Render("~/Content/kendo/css")
+```
 
 **Step 11** Move the jQuery bundle to the `head` tag of the page. It is at the end of the page by default.
 
 **Step 12** Render the Telerik UI for ASP.NET MVC script bundle after jQuery.
 
-**I. Razor**
+```tab-ASPX
 
-###### Example
+    <%: Scripts.Render("~/bundles/jquery") %>
+    <%: Scripts.Render("~/bundles/kendo") %>
+```
+```tab-Razor
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/kendo")
-
-**II. ASPX**
-
-###### Example
-
-        <%: Scripts.Render("~/bundles/jquery") %>
-        <%: Scripts.Render("~/bundles/kendo") %>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/kendo")
+```
 
 #### Use CDN Services
 
@@ -209,17 +203,14 @@ Below are listed the steps for you to follow when using a Kendo UI widget throug
 
 **Step 2** Add a Kendo UI DatePicker widget.
 
-**I. Razor**
+```tab-ASPX
 
-###### Example
+    <%: Html.Kendo().DatePicker().Name("datepicker") %>
+```
+```tab-Razor
 
-        @(Html.Kendo().DatePicker().Name("datepicker"))
-
-**II. ASPX**
-
-###### Example
-
-        <%: Html.Kendo().DatePicker().Name("datepicker") %>
+    @(Html.Kendo().DatePicker().Name("datepicker"))
+```
 
 **Step 3** Press `CTRL+F5` to build and run the application.
 

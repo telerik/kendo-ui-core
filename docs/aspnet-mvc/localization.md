@@ -13,23 +13,25 @@ position: 8
 
 If the `CurrentUICulture` is set&mdash;from code or `web.config`&mdash;Telerik UI for ASP.NET MVC will use localized user interface messages.
 
-Telerik UI for ASP.NET MVC comes with localized messages for the following cultures:
+Telerik UI for ASP.NET MVC comes with localized messages for the cultures listed in the table below.
 
-- `bg-BG`&mdash;Bulgarian (Bulgaria)
-- `da-DK`&mdash;Danish (Denmark)
-- `de-DE`&mdash;German (Germany)
-- `es-ES`&mdash;Spanish (Spain)
-- `en-US`&mdash;English (US)
-- `fr-FR`&mdash;French (French)
-- `nl-NL`&mdash;Dutch (Netherlands)
-- `pl-PL`&mdash;Polish (Poland)
-- `pt-PT`&mdash;Portuguese (Portugal)
-- `pt-BR`&mdash;Portuguese (Brazil)
-- `ro-RO`&mdash;Romanian (Romania)
-- `ru-RU`&mdash;Russian (Russia)
-- `sv-SE`&mdash;Swedish (Sweden)
-- `uk-UA`&mdash;Ukrainian (Ukraine)
-- `zh-CN`&mdash;Chinese (PRC)
+| Culture   | Language  | Country
+|:---       |:---       |:---
+|`bg-BG`    |Bulgarian  |Bulgaria
+|`da-DK`    |Danish     |Denmark
+|`de-DE`    |German     |Germany
+|`es-ES`    |Spanish    |Spain
+|`en-US`    |English    |United States of America
+|`fr-FR`    |French     |France
+|`nl-NL`    |Dutch      |The Netherlands
+|`pl-PL`    |Polish     |Poland
+|`pt-PT`    |Portuguese |Portugal
+|`pt-BR`    |Portuguese |Brazil
+|`ro-RO`    |Romanian   |Romania
+|`ru-RU`    |Russian    |Russia
+|`sv-SE`    |Swedish    |Sweden
+|`uk-UA`    |Ukrainian  |Ukraine
+|`zh-CN`    |Chinese    |People's Republic of China
 
 If the `CurrentUICulture` is not supported, the default `en-US` will be used.
 
@@ -67,29 +69,28 @@ Below are listed the steps for you to follow when willing to change the provided
 
 **Step 8** Update the `Kendo.Mvc.dll` assembly reference to the newly copied one.
 
-Apart from building a custom version of `Kendo.Mvc.dll`, you can specify a new value for the corresponding message in the MVC HtmlHelper configuration. For example, to change the default message for the `create` Grid toolbar command, you can do the following:
-
-**I. ASPX**
+Apart from building a custom version of `Kendo.Mvc.dll`, you can specify a new value for the corresponding message in the MVC HtmlHelper configuration. For example, change the default message for the `create` Grid toolbar command as demonstrated below.
 
 ###### Example
 
-      <%:Html.Kendo().Grid<Product>()
-             .Toolbar(toolbar =>
-             {
-                 toolbar.Create().Text("Add new product");
-             })
-      %>
+```tab-ASPX
 
-**II. Razor**
+    <%:Html.Kendo().Grid<Product>()
+           .Toolbar(toolbar =>
+           {
+               toolbar.Create().Text("Add new product");
+           })
+    %>
+```
+```tab-Razor
 
-###### Example
-
-      @(Html.Kendo().Grid<Product>()
-            .Toolbar(toolbar =>
-            {
-              toolbar.Create().Text("Add new product");
-            })
-      )
+    @(Html.Kendo().Grid<Product>()
+          .Toolbar(toolbar =>
+          {
+            toolbar.Create().Text("Add new product");
+          })
+    )
+```
 
 ### Add New Localizations
 

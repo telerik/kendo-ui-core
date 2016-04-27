@@ -15,7 +15,9 @@ The Kendo UI Tag Helpers let the user configure Kendo UI widgets by using the ne
 
 ### Add Tag Helpers
 
-To configure an ASP.NET Core MVC project that enables you to use the Kendo UI Tag Helpers, you need to add the @addTagHelper directive to your cshtml file:
+To configure an ASP.NET Core MVC project that enables you to use the Kendo UI Tag Helpers, you need to add the @addTagHelper directive to your `cshtml` file as demonstrated below.
+
+###### Example
 
       @addTagHelper "*, Kendo.Mvc"
 
@@ -68,9 +70,7 @@ You can also bind the NumericTextBox to a particular model field using the `for`
 
 The NumericTextBox Tag Helper supports all the configuration options that the HtmlHelper does. They are passed as attributes of the tag.
 
-**cshtml**
-
-###### Example
+```tab-cshtml
 
         @(Html.Kendo().NumericTextBox<decimal>()
             .Name("currency")
@@ -80,14 +80,13 @@ The NumericTextBox Tag Helper supports all the configuration options that the Ht
             .Max(100)
             .Value(30)
         )
-
-**tag helper**
-
-###### Example
+```
+```tab-tagHelper
 
         <kendo-numerictextbox name="currency" format="c" min="0"
             enable="true" max="100" value="30">
         </kendo-numerictextbox>
+```
 
 ## Button Tag Helper
 
@@ -103,22 +102,19 @@ The example below demonstrates how to define a Kendo UI Button by using a Tag He
 
 The Button Tag Helper configuration options are passed as attributes of the tag.
 
-**cshtml**
-
-###### Example
+```tab-cshtml
 
         @(Html.Kendo().Button()
             .Name("imageButton")
             .HtmlAttributes(new { type = "button" })
             .ImageUrl(Url.Content("/shared/icons/sports/snowboarding.png"))
             .Content("Image icon"))
-
-**tag helper**
-
-###### Example
+```
+```tab-tagHelper
 
         <kendo-button name="button1" type="button"
             image-url="/shared/icons/sports/snowboarding.png">Image icon</kendo-button>
+```
 
 ## Window Tag Helper
 
@@ -134,9 +130,7 @@ The example below demonstrates how to define a Kendo UI Window by using a Tag He
 
 The Window Tag Helper configuration options are passed as attributes of the tag. The Window contents is placed between the opening and closing tag.
 
-**cshtml**
-
-###### Example
+```tab-cshtml
 
         @(Html.Kendo().Window()
             .Name("window")
@@ -160,10 +154,8 @@ The Window Tag Helper configuration options are passed as attributes of the tag.
             .Width(600)
             .Events(ev => ev.Close("onClose"))
         )
-
-**tag helper**
-
-###### Example
+```
+```tab-tagHelper
 
         <kendo-window name="window" title="About Alvar Aalto" draggable="true"
             width="400" on-close="onClose">
@@ -181,6 +173,7 @@ The Window Tag Helper configuration options are passed as attributes of the tag.
                 growing Alvar Aalto Collection that remains true to his original design.
             </p>
         </kendo-window>
+```
 
 ## DatePicker Tag Helper
 
@@ -197,9 +190,7 @@ The example below demonstrates how to define a Kendo UI DatePicker by using a Ta
 
 The DatePicker Tag Helper configuration options are passed as attributes of the tag.
 
-**cshtml**
-
-###### Example
+```tab-cshtml
 
         @(Html.Kendo().DatePicker()
                 .Name("monthpicker")
@@ -208,14 +199,13 @@ The DatePicker Tag Helper configuration options are passed as attributes of the 
                 .Format("MMMM yyyy")
                 .Value(DateTime.Now)
         )
-
-**tag helper**
-
-###### Example
+```
+```tab-tagHelper
 
         <kendo-datepicker name="monthpicker" start="CalendarView.Year" depth="CalendarView.Year"
             format="MMMM yyyy" value="DateTime.Now">
         </kendo-datepicker>
+```
 
 The `ParseFormats` option is of type `string[]` and can be assigned either by a `ViewBag` property, or a property of the model.
 
@@ -242,9 +232,7 @@ The example below demonstrates how to define a Kendo UI TimePicker by using a Ta
 
 The TimePicker Tag Helper configuration options are passed as attributes of the tag.
 
-**cshtml**
-
-###### Example
+```tab-cshtml
 
         @(Html.Kendo().TimePicker()
                 .Name("end")
@@ -252,14 +240,13 @@ The TimePicker Tag Helper configuration options are passed as attributes of the 
                 .Min("8:00 AM")
                 .Max("7:30 AM")
         )
-
-**tag helper**
-
-###### Example
+```
+```tab-tagHelper
 
         <kendo-timepicker name="end" value="new DateTime(1900, 1, 1, 8, 30, 0)"
             min="new DateTime(1900, 1, 1, 8, 0, 0)" max="new DateTime(1900, 1, 1, 7, 30, 0)">
         </kendo-timepicker>
+```
 
 The `ParseFormats` option is of type `string[]` and can be assigned either by a `ViewBag` property, or a property of the model.
 
@@ -286,9 +273,7 @@ The example below demonstrates how to define a Kendo UI DateTimePicker by using 
 
 The DateTimePicker Tag Helper configuration options are passed as attributes of the tag.
 
-**cshtml**
-
-###### Example
+```tab-cshtml
 
         @(Html.Kendo().DateTimePicker()
                 .Name("end")
@@ -296,14 +281,12 @@ The DateTimePicker Tag Helper configuration options are passed as attributes of 
                 .Min(DateTime.Today)
                 .Events(e => e.Change("endChange"))
         )
-
-**tag helper**
-
-###### Example
-
+```
+```tab-tagHelper
         <kendo-datetimepicker name="end" value="DateTime.Today"
             min="DateTime.Today" on-change="endChange">
         </kendo-datetimepicker>
+```
 
 The `ParseFormats` option is of type `string[]` and can be assigned either by a `ViewBag` property, or a property of the model.
 
