@@ -137,13 +137,27 @@ The example below demonstrates how to select all items by selecting the `ALL` it
       </style>
       <script>
         $(document).ready(function() {
-          // create MultiSelect from select HTML element
-          var required = $("#required").kendoMultiSelect({
-            select: function(e) {
-                var dataItem = this.dataSource.view()[e.item.index()];
+            // create MultiSelect from select HTML element
+            function contains(value, values) {
+                for (var idx = 0; idx < values.length; idx++) {
+                if (values[idx] === value) {
+                    return true;
+                }
+              }
+
+              return false;
+            }
+
+            var required = $("#required").kendoMultiSelect({
+              select: function(e) {
+                var dataItemValue = this.dataSource.view()[e.item.index()].value;
                 var values = this.value();
 
-                if (dataItem.value === "ALL") {
+                if (dataItemValue !== "ALL" && contains(dataItemValue, values)) {
+                    return;
+                }
+
+                if (dataItemValue === "ALL") {
                   values = [];
                 } else if (values.indexOf("ALL") !== -1) {
                   values = $.grep(values, function(value) {
@@ -151,14 +165,13 @@ The example below demonstrates how to select all items by selecting the `ALL` it
                   });
                 }
 
-                values.push(dataItem.value);
-
+                values.push(dataItemValue);
                 this.value(values);
-                this.trigger("change"); //Trigger change manually, as the default select is prevented
+                this.trigger("change"); //notify others for the updated values
 
                 e.preventDefault();
-            }
-          }).data("kendoMultiSelect");
+              }
+            }).data("kendoMultiSelect");
         });
       </script>
     </div>
