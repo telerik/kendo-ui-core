@@ -31,7 +31,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI QRCod
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().QRCode()
         .Name("qrcode") //The name of the QRCode is mandatory. It specifies the "id" attribute of the widget.
@@ -50,7 +50,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI QRCod
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().QRCode()
                 .Name("qrcode")

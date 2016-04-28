@@ -38,7 +38,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Windo
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <% Html.Kendo().Window()
                .Name("window") //The name of the Window is mandatory. It specifies the "id" attribute of the widget.
@@ -97,7 +97,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Windo
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <% Html.Kendo().Window()
                .Name("window") //The name of the Window is mandatory. It specifies the "id" attribute of the widget.
@@ -124,7 +124,7 @@ The example below demonstrates how to insert a complete form inside the Window.
 
 ###### Example
 
-```tab-WebForms  
+```tab-ASPX  
 
         <% Html.Kendo().Window()
             .Content(() =>
@@ -159,7 +159,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().Window()
                 .Name("window")

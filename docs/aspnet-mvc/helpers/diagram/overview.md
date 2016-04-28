@@ -34,7 +34,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Diagr
 
 ###### Example 
 
-```tab-WebForms
+```tab-ASPX
 
         <%= Html.Kendo().Diagram()
                 .Name("diagram")
@@ -73,7 +73,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%= Html.Kendo().Diagram()
                 .Name("diagram")

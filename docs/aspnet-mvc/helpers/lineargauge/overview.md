@@ -31,7 +31,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Linea
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().LinearGauge()
                 .Name("linearGauge") //The name of the LinearGauge is mandatory. It specifies the "id" attribute of the widget.

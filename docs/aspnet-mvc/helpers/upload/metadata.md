@@ -33,7 +33,7 @@ Below are listed the steps for you to follow when configuring the sending of met
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%= Html.Kendo().Upload()
                 .Name("attachments")
@@ -103,7 +103,7 @@ Below are listed the steps for you to follow to do that.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%= Html.Kendo().Upload()
             .Name("attachments")
@@ -181,7 +181,7 @@ Below are listed the steps for you to follow when configuring the receiving of m
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%= Html.Kendo().Upload()
             .Name("attachments")

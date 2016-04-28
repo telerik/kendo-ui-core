@@ -130,7 +130,7 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
         return View();
     }
 ```
-```tab-WebForms
+```tab-ASPX
 
     <%: Html.Kendo()
         .Gantt<TaskViewModel, DependencyViewModel>((IEnumerable<TaskViewModel>)ViewData["tasks"], (IEnumerable<DependencyViewModel>)ViewData["dependencies"])
@@ -236,7 +236,7 @@ Below are listed the data model classes for the Tasks and Dependencies and the a
         return View();
     }
 ```
-```tab-WebForms
+```tab-ASPX
 
     <%: Html.Kendo()
         .Gantt<TaskViewModel, DependencyViewModel>((IEnumerable<TaskViewModel>)ViewBag.Tasks, (IEnumerable<DependencyViewModel>)ViewBag.Dependencies)

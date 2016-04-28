@@ -43,7 +43,7 @@ In the view, configure the Chart to use the action method created in the previou
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().Chart<MvcApplication1.Models.InternetUsers>()
                 .Name("internetUsersChart")

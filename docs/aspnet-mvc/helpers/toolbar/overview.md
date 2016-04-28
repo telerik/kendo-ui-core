@@ -71,7 +71,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ToolB
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
        <%: Html.Kendo().ToolBar()
            .Resizable(true)   //Enable or disable the resizing feature.
@@ -104,7 +104,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
       <%: Html.Kendo().ToolBar()
            .Items(items => {  //Define the widget commands

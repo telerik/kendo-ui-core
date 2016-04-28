@@ -31,7 +31,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Radia
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().RadialGauge()
                 .Name("radialGauge") // The name of the radialGauge is mandatory. It specifies the "id" attribute of the widget.

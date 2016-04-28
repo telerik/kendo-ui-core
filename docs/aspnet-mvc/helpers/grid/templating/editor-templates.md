@@ -72,7 +72,7 @@ to the `~/Views/Shared/EditorTemplates` folder&mdash;for example, `EmployeeEdito
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().DropDownList()
             .Name("Employee") // The name of the widget should be the same as the name of the property.

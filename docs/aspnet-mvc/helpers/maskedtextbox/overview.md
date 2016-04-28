@@ -29,7 +29,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Maske
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().MaskedTextBox()
                 .Name("maskedtextbox") //The name of the MaskedTextBox is mandatory. It specifies the "id" attribute of the widget.
@@ -54,7 +54,7 @@ The example below demonstrates how to set a `zip code` mask
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().MaskedTextBox()
                 .Name("maskedtextbox")
@@ -81,7 +81,7 @@ The example below demonstrates how to define a custom rule for the `-` (minus) a
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
       <%: Html.Kendo().MaskedTextBox()
               .Name("maskedtextbox")
@@ -116,7 +116,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
       <%: Html.Kendo().MaskedTextBox()
               .Name("maskedtextbox")

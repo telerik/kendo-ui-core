@@ -315,7 +315,7 @@ The example below demonstrates how to configure the Grid columns.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <% Html.Kendo().Grid<Product>()
            .Name("grid")
@@ -551,7 +551,7 @@ The example below demonstrates how to set the column template.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <% Html.Kendo().Grid(Model)
             .Name("grid")
@@ -729,7 +729,7 @@ To enable paging with the default settings, call the `Paegable` method without a
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().Grid(Model)
             .Name("grid")

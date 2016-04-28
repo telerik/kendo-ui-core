@@ -75,7 +75,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
                 </div>
             </script>
 ```
-```tab-WebForms
+```tab-ASPX
 
             <%: Html.Kendo().ListView<MvcApplication1.Models.Product>()
                 .Name("ListView")
@@ -120,7 +120,7 @@ The example below demonstrates how to send additional data.
 
 ###### Example
 
-``tab-WebForms
+``tab-ASPX
 
           <%: Html.Kendo().ListView<MvcApplication1.Models.Product>()
                   .Name("ListView")

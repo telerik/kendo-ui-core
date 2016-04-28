@@ -87,7 +87,7 @@ Below are listed the steps for you to follow when binding the Kendo UI Gantt to 
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%= Html.Kendo().Gantt<TelerikMvcApp14.Models.TaskViewModel, TelerikMvcApp14.Models.DependencyViewModel>()
             .Name("Gantt")

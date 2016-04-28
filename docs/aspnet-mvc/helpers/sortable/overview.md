@@ -37,7 +37,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sorta
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
       <ul id="sortable-basic">
           <li class="sortable">Papercut <span>3:04</span></li>
@@ -117,7 +117,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
       <ul id="sortable">
           <li>Item 1</li>

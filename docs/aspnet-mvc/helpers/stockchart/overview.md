@@ -38,7 +38,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Stock
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
            		 Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.StockDataPoint>>" %>
@@ -52,7 +52,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Stock
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().StockChart(Model)
         .Name("stockChart")
@@ -95,7 +95,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().StockChart(Model)
     	        .Name("stockChart")

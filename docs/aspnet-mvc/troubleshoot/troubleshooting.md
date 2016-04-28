@@ -226,7 +226,7 @@ Below are listed the steps for you to follow while handling this issue.
 
 **Step 1** Disable security trimming if not needed or during development. Enable it again when deploying the site.
 
-```tab-WebForms
+```tab-ASPX
 
             <%: Html.Kendo().Menu()
                     .SecurityTrimming(false)
@@ -288,7 +288,7 @@ Apply either of the two options below:
 
 * Change HTTP verb of the DataSource.
 
-```tab-WebForms
+```tab-ASPX
 
             <%: Html.Kendo().ComboBox()
                     .Name("ComboBox")

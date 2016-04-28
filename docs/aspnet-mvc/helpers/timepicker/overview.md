@@ -31,7 +31,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TimeP
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().TimePicker()
                 .Name("timepicker") //The name of the TimePicker is mandatory. It specifies the "id" attribute of the widget.
@@ -60,7 +60,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().TimePicker()
                 .Name("timepicker")

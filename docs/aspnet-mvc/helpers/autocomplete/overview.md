@@ -40,7 +40,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
      <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
      Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Product>>" %>
@@ -54,7 +54,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
     <%: Html.Kendo().AutoComplete()
         .Name("productAutoComplete") //The name of the AutoComplete is mandatory. It specifies the "id" attribute of the widget.
@@ -102,7 +102,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
     <%: Html.Kendo().AutoComplete()
         .Name("productAutoComplete") //The name of the AutoComplete is mandatory. It specifies the "id" attribute of the widget.
@@ -167,7 +167,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
     <%: Html.Kendo().AutoComplete()
         .Name("productAutoComplete")
@@ -218,7 +218,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
     <%: Html.Kendo().AutoComplete()
         .Name("productAutoComplete")
@@ -310,7 +310,7 @@ The example below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().AutoComplete()
             .Name("autocomplete")

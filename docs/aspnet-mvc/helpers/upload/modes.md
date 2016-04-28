@@ -24,7 +24,7 @@ Below are listed the steps for you to follow when configuring the synchronous mo
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <% using (Html.BeginForm("ProcessSubmit", "Home",
                                  FormMethod.Post, new { id = "uploadForm", enctype = "multipart/form-data" })) { %>
@@ -43,7 +43,7 @@ Below are listed the steps for you to follow when configuring the synchronous mo
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%= Html.Kendo().Upload()
                 .Name("attachments")
@@ -67,7 +67,7 @@ Below are listed the steps for you to follow when configuring the synchronous mo
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <% using (Html.BeginForm("ProcessSubmit", "Home",
                                  FormMethod.Post, new { id = "uploadForm", enctype = "multipart/form-data" })) { %>
@@ -130,7 +130,7 @@ Below are listed the steps for you to follow when configuring the saving of the 
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().Upload()
                 .Name("attachments")
@@ -183,7 +183,7 @@ Below are listed the steps for you to follow when configuring the removing of th
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%= Html.Kendo().Upload()
                 .Name("attachments")
@@ -237,7 +237,7 @@ The selected files are uploaded immediately by default. You can change this beha
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%= Html.Kendo().Upload()
                 .Name("attachments")

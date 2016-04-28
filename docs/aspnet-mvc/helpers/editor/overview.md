@@ -31,7 +31,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Edito
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().Editor()
                 .Name("editor") //The name of the Editor is mandatory. It specifies the "id" attribute of the widget.
@@ -74,7 +74,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().Editor()
                 .Name("editor")

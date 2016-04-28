@@ -39,7 +39,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Toolt
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
          <%: Html.Kendo().Tooltip()
              .For("#container") //The for option of the Tooltip is mandatory.
@@ -86,7 +86,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Toolt
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().Tooltip()
                .For("#container") //The for option of the Tooltip is mandatory.
@@ -113,7 +113,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().Tooltip()
             .For("#container")

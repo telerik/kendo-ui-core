@@ -31,7 +31,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeM
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%= Html.Kendo().TreeMap()
                 .Name("treeMap")
@@ -70,7 +70,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%= Html.Kendo().TreeMap()
                 .Name("treemap")

@@ -40,7 +40,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
            Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Product>>" %>
@@ -54,7 +54,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().MultiSelect()
             .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
@@ -103,7 +103,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().MultiSelect()
             .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
@@ -172,7 +172,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().MultiSelect()
             .Name("productMultiSelect")
@@ -225,7 +225,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().MultiSelect()
                 .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
@@ -324,7 +324,7 @@ When deferred binding&mdash;`AutoBind: false`&mdash;is used, specify a list of d
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%= Html.Kendo().MultiSelect()
                 .Name("productMultiSelect") //The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
@@ -389,7 +389,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().MultiSelect()
             .Name("multiselect")

@@ -74,7 +74,7 @@ Create the main and navigator data series.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
         .Name("stockChart")

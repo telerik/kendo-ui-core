@@ -225,7 +225,7 @@ The example below demonstrates how to include JavaScript for the current culture
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
     <%
         var culture = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();

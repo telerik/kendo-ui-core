@@ -31,7 +31,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().Barcode()
                 .Name("barcode") //The name of the Barcode is mandatory. It specifies the "id" attribute of the widget.
@@ -50,7 +50,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().Barcode()
                 .Name("barcode")

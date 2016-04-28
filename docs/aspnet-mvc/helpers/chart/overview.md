@@ -38,7 +38,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Chart
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
            Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.InternetUsers>>" %>
@@ -52,7 +52,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Chart
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().Chart(Model) //The Chart will be bound to the Model which is the InternetUsers list.
                 .Name("internetUsersChart") //The name of the Chart is mandatory. It specifies the "id" attribute of the widget.
@@ -91,7 +91,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
       <%: Html.Kendo().Chart(Model)
               .Name("internetUsersChart")

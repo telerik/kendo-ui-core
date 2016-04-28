@@ -38,7 +38,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Slide
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().Slider()
                 .Name("slider") //The name of the Slider is mandatory. It specifies the "id" attribute of the widget.
@@ -67,7 +67,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().Slider()
                 .Name("slider")

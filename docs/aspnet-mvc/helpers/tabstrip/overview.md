@@ -39,7 +39,7 @@ Below are listed the steps for you to follow when defining the items of a Kendo 
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().TabStrip()
                 .Name("tabstrip") //The name of the tabstrip is mandatory. It specifies the "id" attribute of the widget.
@@ -97,7 +97,7 @@ Below are listed the steps for you to follow when binding a Kendo UI TabStrip to
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().TabStrip()
                 .Name("tabstrip") //The name of the TabStrip is mandatory. It specifies the "id" attribute of the widget.
@@ -133,7 +133,7 @@ Below are listed the steps for you to follow when binding a Kendo UI TabStrip to
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
             Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Category>>" %>
@@ -147,7 +147,7 @@ Below are listed the steps for you to follow when binding a Kendo UI TabStrip to
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().TabStrip()
             .Name("tabstrip") //The name of the TabStrip is mandatory. It specifies the "id" attribute of the widget.
@@ -211,7 +211,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
       <%: Html.Kendo().TabStrip()
               .Name("tabstrip")

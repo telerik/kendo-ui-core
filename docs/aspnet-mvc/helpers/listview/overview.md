@@ -40,7 +40,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
            Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Product>>" %>
@@ -67,7 +67,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 		    	</div>
 			  </script>
 ```
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().ListView(Model) //The ListView will be initially bound to the Model which is the Products table.
                   .Name("productListView") //The name of the ListView is mandatory. It specifies the "id" attribute of the widget.
@@ -102,7 +102,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().ListView<ProductViewModel>()
         		.Name("listView")

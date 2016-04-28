@@ -31,7 +31,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeV
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().TreeView()
                 .Name("treeview") //The name of the treeview is mandatory. It specifies the "id" attribute of the widget.
@@ -75,7 +75,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().TreeView()
                 .Name("treeview")

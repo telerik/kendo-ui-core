@@ -39,7 +39,7 @@ Below are listed the steps for you to follow when defining the items of a Kendo 
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().PanelBar()
                 .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
@@ -103,7 +103,7 @@ Below are listed the steps for you to follow when binding a Kendo UI PanelBar to
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().PanelBar()
                 .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
@@ -139,7 +139,7 @@ Below are listed the steps for you to follow when binding a kendo UI PanelBar to
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
             Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Category>>" %>
@@ -153,7 +153,7 @@ Below are listed the steps for you to follow when binding a kendo UI PanelBar to
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().PanelBar()
                 .Name("panelbar") //The name of the panelbar is mandatory. It specifies the "id" attribute of the widget.
@@ -215,7 +215,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().PanelBar()
                 .Name("panelbar")

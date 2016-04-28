@@ -35,7 +35,7 @@ The example below demonstrates how to initialize the Button by using the default
             .HtmlAttributes( new {type = "button"} )
             .Content("Text button"))
 ```
-```tab-WebForms
+```tab-ASPX
 
         <%= Html.Kendo().Button()
             .Name("textButton")
@@ -54,7 +54,7 @@ The example below demonstrates how to initialize the Button by using the `anchor
             .Tag("a")
             .Content("Link button"))
 ```
-```tab-WebForms
+```tab-ASPX
 
         <%= Html.Kendo().Button()
             .Name("linkButton")
@@ -93,7 +93,7 @@ The example below demonstrates how to add a background icon by using `.Icon()`.
             .Icon("cancel")
             .Content("Cancel"))
 ```
-```tab-WebForms
+```tab-ASPX
 
         <%= Html.Kendo().Button()
             .Name("cancelButton")
@@ -118,7 +118,7 @@ The example below demonstrates how to add a background icon by using `.SpriteCss
             .SpriteCssClass("myIconClass")
             .Content("Sprite button"))
 ```
-```tab-WebForms
+```tab-ASPX
 
         <%= Html.Kendo().Button()
             .Name("spriteButton")
@@ -147,7 +147,7 @@ The example below demonstrates how to use a button with no text.
             .SpriteCssClass("myDeleteClass")
             .Content("<span class='k-sprite'>Delete</span>"))
 ```
-```tab-WebForms
+```tab-ASPX
 
         <%= Html.Kendo().Button()
             .Name("deleteButton")
@@ -170,7 +170,7 @@ The example below demonstrates how to use `.ImageUrl()`.
             .ImageUrl("/images/myIcon.gif")
             .Content("Image button"))
 ```
-```tab-WebForms
+```tab-ASPX
 
         <%= Html.Kendo().Button()
             .Name("imageButton")
@@ -195,7 +195,7 @@ The example below demonstrates how to use `.ImageUrl()` with no text. Note that 
             .ImageUrl("/images/myIcon.gif")
             .Content("<img class='k-image' alt='my icon' />"))
 ```
-```tab-WebForms
+```tab-ASPX
 
         <%= Html.Kendo().Button()
             .Name("iconButton")
@@ -220,7 +220,7 @@ The example below demonstrates how to use `.Enable()`.
             .Enable(false)
             .Content("Disabled button"))
 ```
-```tab-WebForms
+```tab-ASPX
 
         <%= Html.Kendo().Button()
             .Name("disabledButton")

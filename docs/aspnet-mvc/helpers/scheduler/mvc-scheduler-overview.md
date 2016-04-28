@@ -64,7 +64,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sched
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%= Html.Kendo().Scheduler<KendoUISchedulerDemo.Models.Projection>()
                 .Name("scheduler")
@@ -99,7 +99,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%=Html.Kendo().Scheduler<KendoUISchedulerDemo.Models.Projection>()
                 .Name("scheduler")

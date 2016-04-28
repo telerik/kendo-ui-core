@@ -40,7 +40,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
            Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Product>>" %>
@@ -54,7 +54,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().DropDownList()
             .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
@@ -105,7 +105,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().DropDownList()
             .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
@@ -174,7 +174,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().DropDownList()
             .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
@@ -227,7 +227,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().DropDownList()
                 .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
@@ -345,7 +345,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-```tab-WebForms
+```tab-ASPX
 
         <%: Html.Kendo().DropDownList()
             .Name("dropdownlist")

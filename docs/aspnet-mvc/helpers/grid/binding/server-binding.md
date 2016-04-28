@@ -91,7 +91,7 @@ The example below demonstrates how to bind to an item from the `ViewData` or `Vi
         return View();
     }
 ```
-```tab-WebForms
+```tab-ASPX
 
     <%: Html.Kendo().Grid((IEnumerable<MvcApplication1.Models.Product>)ViewData["products"])
             .Name("Grid")
@@ -133,7 +133,7 @@ The example below demonstrates how to use the `BindTo` method.
         return View();
     }
 ```
-```tab-WebForms
+```tab-ASPX
 
     <%: Html.Kendo().Grid<MvcApplication1.Models.Product>() // Specify the type of the grid
             .Name("Grid")
@@ -191,7 +191,7 @@ The example below demonstrates how to pass them.
         return View(products);
     }
 ```
-```tab-WebForms
+```tab-ASPX
 
     <%: Html.Kendo().Grid(Model)
             .Name("Grid")
