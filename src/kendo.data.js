@@ -2852,7 +2852,7 @@ var __meta__ = { // jshint ignore:line
                 that._eachItem(that._data, function(items) {
                     for (var idx = 0; idx < items.length; idx++) {
                         var item = items.at(idx);
-                        if (item.__state__ == "update") {
+                        if (item.__state__ == "update" || item.__state__ == "create") {
                             item.dirty = true;
                         }
                     }
