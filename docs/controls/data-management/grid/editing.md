@@ -126,6 +126,15 @@ If you want to delete records, define a delete command column, as demonstrated b
          editable: true
      });
 
+## Editing a Foreign Key Column
+
+Normally, a foreign key column should be bound to a numeric data field, which points to the unique keys of a separate collection. An issue related to editing may occur if some of the values in the foreign key column are `null`. While this will not create problems in display mode, it will mislead the column editor to think it should work with object values, instead of primitive values. As a result, when a value is picked from the DropDownList, the widget will set an object value to the Grid data item (e.g. {text: "Foo", value: 3} ), instead of a numeric value (e.g. 3). This will cause the Grid cell to remain blank upon exiting edit mode.
+
+To avoid the above behavior, one of the following options paths be followed:
+
+* use zeros instead of nulls to match the data values to the declared data field type
+* use a [custom column Editor](http://demos.telerik.com/kendo-ui/grid/editing-custom) with manually configured DropDownList that has a [`valuePrimitive`](/api/javascript/ui/dropdownlist#configuration-valuePrimitive) setting set to `true`
+
 ## See Also
 
 Other articles on Kendo UI Grid:
