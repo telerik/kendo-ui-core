@@ -21,6 +21,7 @@ var __meta__ = { // jshint ignore:line
         HIDE = "hide",
         KNOTIFICATION = "k-notification",
         KICLOSE = ".k-notification-wrap .k-i-close",
+        KHIDING = "k-hiding",
         INFO = "info",
         SUCCESS = "success",
         WARNING = "warning",
@@ -210,7 +211,7 @@ var __meta__ = { // jshint ignore:line
                 y = options.position.top,
                 popup, openPopup;
 
-            openPopup = $("." + that._guid + ":not(.k-hiding)").last();
+            openPopup = $("." + that._guid + ":not(." + KHIDING + ")").last();
 
             popup = new kendo.ui.Popup(wrapper, {
                 anchor: openPopup[0] ? openPopup : document.body,
@@ -265,7 +266,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _hidePopup: function (popup) {
-            popup.wrapper.addClass("k-hiding");
+            popup.wrapper.addClass(KHIDING);
             popup.close();
         },
 
@@ -435,7 +436,7 @@ var __meta__ = { // jshint ignore:line
 
         getNotifications: function() {
             var that = this,
-                guidElements = $("." + that._guid);
+                guidElements = $("." + that._guid + ":not(." + KHIDING + ")");
 
             if (that.options.appendTo) {
                 return guidElements;
