@@ -97,7 +97,7 @@ Although the [Amazon CloudFront service](https://aws.amazon.com/cloudfront/) pro
 
 > **Important**
 >
-> Find more information on the topic at [Scott HanselMann - Fallback from CDN to Local Scripts](http://www.hanselman.com/blog/CDNsFailButYourScriptsDontHaveToFallbackFromCDNToLocalJQuery.aspx).
+> Find more information on the topic at [Scott Hanselman - Fallback from CDN to Local Scripts](http://www.hanselman.com/blog/CDNsFailButYourScriptsDontHaveToFallbackFromCDNToLocalJQuery.aspx).
 
 ## See Also
 
