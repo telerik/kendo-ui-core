@@ -10,6 +10,53 @@ position: 4
 
 [The Grid](http://www.telerik.com/kendo-ui/grid) is one of the most complex Kendo UI widgets. This chapter outlines some of its particularities regarding the AngularJS integration supported by Kendo UI.
 
+### column.title
+
+> AngularJS will evaluate template expression placed as [column.title](/api/javascript/ui/grid#configuration-columns.title) content. If this is not intended, a [ng-non-bindable](https://docs.angularjs.org/api/ng/directive/ngNonBindable) attribute should be set via the [headerAttributes](/api/javascript/ui/grid#configuration-columns.headerAttributes) in order to instruct AngularJS to skip expression evaluation.
+
+The example below demonstrates how to use the `headerAttributes` to prevent expression inside title content from execution.
+
+###### Example
+
+```html
+<div id="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+        <kendo-grid options="mainGridOptions">
+        </kendo-grid>
+    </div>
+</div>
+
+<script>
+    angular.module("KendoDemos", [ "kendo.directives" ])
+        .controller("MyCtrl", function($scope){
+            $scope.mainGridOptions = {
+                dataSource: {
+                    type: "odata",
+                    transport: {
+                        read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
+                    }
+                },
+                columns: [{
+                    field: "FirstName",
+                    title: "First Name {{1+1}}",
+                    headerAttributes: {"ng-non-bindable": true},
+                    width: "180px"
+                    },{
+                    field: "LastName",
+                    title: "Last Name",
+                    width: "120px"
+                    },{
+                    field: "Country",
+                    width: "120px"
+                    },{
+                    field: "City",
+                    width: "120px"
+                    }]
+            };
+        });
+</script>
+```
+
 ## Attributes
 
 ### k-on-change
