@@ -57,6 +57,8 @@ The example below demonstrates how to use the `headerAttributes` to prevent expr
 </script>
 ```
 
+## Attributes
+
 ### k-on-change
 
 If you assign a `k-on-change` event handler, it is evaluated in a scope, which contains additional local variables:
