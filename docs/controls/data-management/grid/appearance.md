@@ -318,7 +318,7 @@ Setting column widths in percent is possible, but if the sum of all widths is gr
 
 ### Resizing
 
-When Grid scrolling is `disabled` and a column is resized, other columns will change widths too, so that the sum of all column widths remains constant.
+When Grid scrolling is `disabled` and a column is resized, other columns will change widths too, so that the sum of all column widths remains constant. If both the columns and the Grid `<div>` already have their minimum possible widths applied, then column resizing will stop working. In such scenarios, either apply a larger width to the Grid, or enable scrolling.
 
 When Grid scrolling is `enabled` and a column is resized, all other columns will maintain their widths. There are three possible outcomes of column resizing with regard to the sum of all column widths:
 
