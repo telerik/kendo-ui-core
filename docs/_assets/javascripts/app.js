@@ -150,7 +150,7 @@ function preventParentSelection(e) {
 }
 
 $(function(){
-    $("pre[lang]").each(function() {
+    $("pre[data-lang^=tab-]").each(function() {
         if (this.parentNode.className.indexOf("k-content") >= 0) {
             return;
         }
@@ -158,7 +158,8 @@ $(function(){
         var langs = $(this).nextUntil(":not(pre)", "pre").add(this);
 
         var tabs = $.map(langs, function(item) {
-            return $("<li>").text($(item).attr("lang"));
+            var title = $(item).attr("data-lang").replace("tab-", "");
+            return $("<li>").text(title);
         });
 
         if (tabs.length < 2) {
