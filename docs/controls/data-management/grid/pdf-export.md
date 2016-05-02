@@ -61,7 +61,7 @@ To initiate PDF export via code, call the [`saveAsPdf`](/api/javascript/ui/grid.
 
 ## Features
 
-### PDF Export of All Pages
+### Export of All Pages
 
 By default, the Kendo UI Grid exports only the current page of data. To export all pages set the [`allPages`](/api/javascript/ui/grid#configuration-pdf.allPages) option to `true`.
 
@@ -80,6 +80,153 @@ The example below demonstrates how to export all the pages of a Kendo UI Grid in
             toolbar: ["pdf"],
             pdf: {
                 allPages: true
+            },
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                },
+                pageSize: 7
+            },
+            pageable: true,
+            columns: [
+                { width: 300, field: "ProductName", title: "Product Name" },
+                { field: "UnitsOnOrder", title: "Units On Order" },
+                { field: "UnitsInStock", title: "Units In Stock" }
+            ]
+        });
+    </script>
+```
+
+### Fit to Paper Size
+
+By default, the [paper size](/api/javascript/ui/grid#configuration-pdf.paperSize)
+of the exported document is determined by the size of the Grid on the screen.
+See [Dimensions and CSS Units]({% slug drawingofhtmlelements_drawingapi %}#dimensions-and-css-units#)
+for more details on the conversion from screen to document units.
+
+This implies that the document can contain pages with different dimensions
+in case the size of the Grid is not uniform for each data page.
+
+Starting with the 2016.2 release you can specify a paper size to be used for the whole document.
+Content will be scaled to fit the specified paper size. The automatic scale factor can be
+overridden, e.g. to make room for additional page elements.
+
+In order to make use of all the available space the Grid will:
+- Adjust the column widths to fill the page. Avoid setting width on all columns.
+- Vary the number of rows for each page, placing page breaks where appropriate.
+- Omit the toolbar and pager
+
+> **Important**
+>
+> This feature requires all records to be rendered at once albeit off-screen.
+> The exact maximum number of exportable rows will vary depending on the browser,
+> system resources, template complexity and other factors.
+>
+> It's advisable to verify your own "worst case" scenarios in each browser you intend to support.
+
+###### Example - Export With Fixed Paper Size
+```html
+    <div id="grid"></div>
+    <script>
+        $("#grid").kendoGrid({
+            toolbar: ["pdf"],
+            pdf: {
+                allPages: true,
+                paperSize: "A4",
+                landscape: true,
+                scale: 0.75
+            },
+            dataSource: {
+                type: "odata",
+                transport: {
+                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                },
+                pageSize: 7
+            },
+            pageable: true,
+            columns: [
+                { width: 300, field: "ProductName", title: "Product Name" },
+                { field: "UnitsOnOrder", title: "Units On Order" },
+                { field: "UnitsInStock", title: "Units In Stock" }
+            ]
+        });
+    </script>
+```
+
+### Page Template
+
+Starting from the 2016.2 release, the Grid allows you to specify a page template.
+The template can be used to position the content, add headers, footers and other elements.
+Styling is done using CSS. The template will be positioned in a container with the specified
+paper size during export.
+
+Available template variables include:
+* pageNumber
+* totalPages
+
+> **Important**
+>
+> Using a template requires setting paper size. See above.
+
+###### Example - Export With Page Template
+```html
+    <style>
+        body {
+            font-family: "DejaVu Serif";
+            font-size: 12px;
+        }
+
+        .page-template {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .page-template .header {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            right: 30px;
+
+            border-bottom: 1px solid #888;
+
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .page-template .footer {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            right: 30px;
+        }
+    </style>
+
+    <script type="x/kendo-template" id="page-template">
+        <div class="page-template">
+            <div class="header">
+                Acme Inc.
+            </div>
+            <div class="footer">
+                <div style="float: right">Page #: pageNum # of #: totalPages #</div>
+            </div>
+        </div>
+    </script>
+
+    <div id="grid"></div>
+
+    <script>
+        $("#grid").kendoGrid({
+            toolbar: ["pdf"],
+            pdf: {
+                allPages: true,
+                paperSize: "A4",
+                margin: { top: "3cm", right: "1cm", bottom: "1cm", left: "1cm" },
+                landscape: true,
+                template: $("#page-template").html()
             },
             dataSource: {
                 type: "odata",

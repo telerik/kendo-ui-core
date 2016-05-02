@@ -5673,6 +5673,14 @@ Supported values:
 
 A piece of HTML to be included in each page.  Can be used to display headers and footers.  See the documentation in [drawDOM](/framework/drawing/drawing-dom#Template).
 
+Available template variables include:
+* pageNumber
+* totalPages
+
+> **Important**
+>
+> Using a template requires setting [paper size](#configuration-pdf.paperSize)
+
 ### pdf.repeatHeaders `Boolean` *(default: false)*
 
 Set this to `true` to repeat the grid headers on each page.
