@@ -7,17 +7,6 @@ slug: menu_migrationextensions_aspnetmvc
 
 # Menu Migration
 
-<<<<<<< HEAD
-Animations:
-
-#### Old
-
-    Html.Telerik().Menu().Name("SampleMenu").Effects(effects => effects.Slide())
-
-#### New
-
-    Html.Kendo().Menu().Name("SampleMenu").Animation(animation => animation.Open(open => open.FadeIn(FadeDirection.Down))
-=======
 This article demonstrates the ASP.NET MVC server-side API for the Kendo UI Menu widget.
 
 ## Server-Side API
@@ -35,7 +24,6 @@ This article demonstrates the ASP.NET MVC server-side API for the Kendo UI Menu 
             .Open(open => open.FadeIn(FadeDirection.Down)
         )
 ```
->>>>>>> 203e81b... Review Migration section, apply new syntax to improve layout
 
 ## Client-side API
 
