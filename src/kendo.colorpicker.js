@@ -703,15 +703,17 @@ var __meta__ = { // jshint ignore:line
             if (enable) {
                 wrapper.removeClass("k-state-disabled")
                     .attr("tabIndex", that._tabIndex)
-                    .on("mouseenter" + NS, function() { innerWrapper.addClass("k-state-hover"); })
-                    .on("mouseleave" + NS, function() { innerWrapper.removeClass("k-state-hover"); })
+                    .on("mouseenter" + NS, function () { innerWrapper.addClass("k-state-hover"); })
+                    .on("mouseleave" + NS, function () { innerWrapper.removeClass("k-state-hover"); })
                     .on("focus" + NS, function () { innerWrapper.addClass("k-state-focused"); })
                     .on("blur" + NS, function () { innerWrapper.removeClass("k-state-focused"); })
                     .on(KEYDOWN_NS, bind(that._keydown, that))
                     .on(CLICK_NS, ".k-select", bind(that.toggle, that))
-                    .on(CLICK_NS, that.options.toolIcon ? ".k-tool-icon" : ".k-selected-color", function(){
+                    .on(CLICK_NS, that.options.toolIcon ? ".k-tool-icon" : ".k-selected-color", function () {
                         that.trigger("activate");
                     });
+            } else {
+                that.close();
             }
         },
 
@@ -747,14 +749,18 @@ var __meta__ = { // jshint ignore:line
 
         events: [ "activate", "change", "select", "open", "close" ],
 
-        open: function() {
-            this._getPopup().open();
+        open: function () {
+            if (!this.element.prop("disabled")) {
+                this._getPopup().open();
+            }
         },
-        close: function() {
+        close: function () {
             this._getPopup().close();
         },
-        toggle: function() {
-            this._getPopup().toggle();
+        toggle: function () {
+            if (!this.element.prop("disabled")) {
+                this._getPopup().toggle();
+            }
         },
         color: ColorSelector.fn.color,
         value: ColorSelector.fn.value,
