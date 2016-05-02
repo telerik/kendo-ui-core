@@ -39,7 +39,7 @@ Below are listed the steps for you to follow when defining the items of a Kendo 
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%: Html.Kendo().Menu()
                 .Name("menu") //The name of the menu is mandatory. It specifies the "id" attribute of the widget.
@@ -49,8 +49,8 @@ Below are listed the steps for you to follow when defining the items of a Kendo 
                     items.Add().Text("Item 2"); //Add an item with the text "Item2".)
                 })
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Menu()
             .Name("menu") //The name of the Menu is mandatory. It specifies the "id" attribute of the widget.
@@ -60,6 +60,7 @@ Below are listed the steps for you to follow when defining the items of a Kendo 
                 items.Add().Text("Item 2"); //Add an item with the text "Item2".)
             })
         )
+```
 
 ### Sitemap Binding
 
@@ -102,19 +103,20 @@ Below are listed the steps for you to follow when binding a Kendo UI Menu to a s
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%: Html.Kendo().Menu()
                 .Name("menu") //The name of the Menu is mandatory. It specifies the "id" attribute of the widget.
                 .BindTo("sample") //Bind to sitemap with name "sample".
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Menu()
               .Name("menu") //The name of the Menu is mandatory. It specifies the "id" attribute of the widget.
               .BindTo("sample") //Bind to the sitemap with name "sample".
         )
+```
 
 ### Model Binding
 
@@ -137,20 +139,21 @@ Below are listed the steps for you to follow when binding a Kendo UI Menu to a h
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
             Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Category>>" %>
-
-**Razor**
+```
+```tab-Razor
 
         @model IEnumerable<MvcApplication1.Models.Category>
+```
 
 **Step 4** Add a Menu.
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%: Html.Kendo().Menu()
                 .Name("menu") //The name of the Menu is mandatory. It specifies the "id" attribute of the widget.
@@ -169,8 +172,8 @@ Below are listed the steps for you to follow when binding a Kendo UI Menu to a h
                         }));
                 })
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Menu()
               .Name("menu") //The name of the Menu is mandatory. It specifies the "id" attribute of the widget.
@@ -189,6 +192,7 @@ Below are listed the steps for you to follow when binding a Kendo UI Menu to a h
                       }));
             })
         )
+```
 
 ### Security Trimming
 
@@ -219,7 +223,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%: Html.Kendo().Menu()
                 .Name("menu")
@@ -237,8 +241,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the open event.
         }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Menu()
               .Name("menu")
@@ -256,6 +260,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the open event.
         }
         </script>
+```
 
 ### By Template Delegate
 
@@ -263,7 +268,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().Menu()
               .Name("menu")
@@ -280,6 +285,7 @@ The example below demonstrates how to subscribe to events by a template delegate
                     </text>)
               )
         )
+```
 
 ## Reference
 
@@ -302,6 +308,7 @@ You can reference an existing Kendo UI Menu instance via [`jQuery.data()`](http:
 Other articles on Telerik UI for ASP.NET MVC and on the Menu:
 
 * [ASP.NET MVC API Reference: MenuBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/MenuBuilder)
+* [ASP.NET MVC API Reference: MenuItemBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/MenuItemBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

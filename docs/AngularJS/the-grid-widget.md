@@ -10,11 +10,13 @@ position: 4
 
 [The Grid](http://www.telerik.com/kendo-ui/grid) is one of the most complex Kendo UI widgets. This chapter outlines some of its particularities regarding the AngularJS integration supported by Kendo UI.
 
-### column.title
+## Escaping Execution of Title Expression
 
-> AngularJS will evaluate template expression placed as [column.title](/api/javascript/ui/grid#configuration-columns.title) content. If this is not intended, a [ng-non-bindable](https://docs.angularjs.org/api/ng/directive/ngNonBindable) attribute should be set via the [headerAttributes](/api/javascript/ui/grid#configuration-columns.headerAttributes) in order to instruct AngularJS to skip expression evaluation.
+> **Important**
+>
+> AngularJS evaluates a template expression placed as [`column.title`](/api/javascript/ui/grid#configuration-columns.title) content. To avoid this behavior, set a [`ng-non-bindable`](https://docs.angularjs.org/api/ng/directive/ngNonBindable) attribute through the [`headerAttributes`](/api/javascript/ui/grid#configuration-columns.headerAttributes) so that AngularJS skips the expression evaluation.
 
-The example below demonstrates how to use the `headerAttributes` to prevent expression inside title content from execution.
+The example below demonstrates how to use the `headerAttributes` to prevent the execution of expressions inside the title content.
 
 ###### Example
 

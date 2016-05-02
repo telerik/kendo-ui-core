@@ -7,9 +7,32 @@ slug: documentation_updates_2016_kendoui
 
 # Kendo UI 2016 Documentation Updates
 
+## Kendo UI Q2 2016
+
+Below are listed the Kendo UI Q2 2016 release changes in the documentation as compared to the Kendo UI Q1 2016 SP1 ones.
+
+<table style="width:100%">
+  <col width="25%">
+  <col width="25%">
+  <col width="25%">
+  <col width="25%">
+    <tr>
+      <th>Article</th>
+      <th>New Name</th>
+      <th>Previous Location</th>
+      <th>New Location</th>
+    </tr>
+    <tr>
+      <td>Tips and Tricks</td>
+      <td>Performance Issues</td>
+      <td><strong>Styles and Appearance</strong></td>
+      <td><strong>Widgets</strong> > <strong>Charts</strong> > <strong>Troubleshooting</strong></td>
+    </tr>
+</table>
+
 ## Kendo UI Q1 2016 SP1
 
-Below are listed the latest (Kendo UI Q1 2016 SP1 release) changes in the documentation as compared to the Kendo UI Q1 2016 ones.
+Below are listed the Kendo UI Q1 2016 SP1 release changes in the documentation as compared to the Kendo UI Q1 2016 ones.
 
 ### Getting Started Location
 
