@@ -11,8 +11,6 @@ The Kendo UI Diagram is rendered by using the [Drawing API](http://docs.telerik.
 
 In addition to manually drawing the shapes, you are able to use the [HTML Drawing](/framework/drawing/drawing-dom) feature to convert existing document content into static drawings.
 
-The example below demonstrates how to render HTML content in Kendo UI Diagram shapes by placing a chart into the Diagram shapes.
-
 ###### Example
 
 ```html
