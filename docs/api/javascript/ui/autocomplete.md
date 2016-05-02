@@ -436,6 +436,24 @@ The [template](/api/javascript/kendo#methods-template) used to render the sugges
     });
     </script>
 
+### value `String`*(default: "")*
+
+The value of the widget.
+
+#### Example - specify value of the widget
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      value: "Oranges"
+    });
+    </script>
+
 ### valuePrimitive `Boolean`*(default: false)*
 
 Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item text field. If set to false, the View-Model field will be updated with the selected item.
