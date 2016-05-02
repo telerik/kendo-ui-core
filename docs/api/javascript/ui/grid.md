@@ -5677,7 +5677,7 @@ A piece of HTML to be included in each page.  Can be used to display headers and
 
 Set this to `true` to repeat the grid headers on each page.
 
-### pdf.scale `Number|Array|Object` *(default: null)*
+### pdf.scale `Number` *(default: 1)*
 
 A scale factor.  In many cases, text size on screen will be too big for print, so you can use this option to scale down the output in PDF.  See the documentation in [drawDOM](/framework/drawing/drawing-dom#Scaling).
 
