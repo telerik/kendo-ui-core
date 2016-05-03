@@ -9,9 +9,8 @@ slug: howto_export_multiple_pageswith_variable_rowheight_pdf_grid
 
 
 > **Important**
->
-> This example used to demonstrate how to split pages based on actual row height.
-> It is now obsoleted built-in functionality. Refer to the [PDF Export - Fit to Paper Size]({% slug exporting_pdf_kendoui_grid_widget %}#fit-to-paper-size) section.
+> * This example used to demonstrate how to split pages based on actual row height.
+> * It is now an obsoleted built-in functionality. Refer to the article on how to [adjust the Grid to the paper size during PDF export]({% slug exporting_pdf_kendoui_grid_widget %}#fit-to-paper-size).
 
 ## See Also
 

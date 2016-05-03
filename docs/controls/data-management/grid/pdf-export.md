@@ -100,32 +100,26 @@ The example below demonstrates how to export all the pages of a Kendo UI Grid in
 
 ### Fit to Paper Size
 
-By default, the [paper size](/api/javascript/ui/grid#configuration-pdf.paperSize)
-of the exported document is determined by the size of the Grid on the screen.
-See [Dimensions and CSS Units]({% slug drawingofhtmlelements_drawingapi %}#dimensions-and-css-units#)
-for more details on the conversion from screen to document units.
+By default, the [paper size](/api/javascript/ui/grid#configuration-pdf.paperSize) of the exported document is determined by the size of the Grid on the screen. For detailed information on the conversion from screen to document units, refer to the article on [dimensions and CSS units]({% slug drawingofhtmlelements_drawingapi %}#dimensions-and-css-units#).
 
-This implies that the document can contain pages with different dimensions
-in case the size of the Grid is not uniform for each data page.
+This implies that the document can contain pages with different dimensions if the size of the Grid is not uniform for each data page.
 
-Starting with the 2016.2 release you can specify a paper size to be used for the whole document.
-Content will be scaled to fit the specified paper size. The automatic scale factor can be
-overridden, e.g. to make room for additional page elements.
+Starting with the Kendo UI 2016.2 release, you will be able to specify a paper size that is going to be used for the whole document. The content will be scaled to fit the specified paper size. The automatic scale factor can be overridden&mdash;for example, to make room for additional page elements.
 
-In order to make use of all the available space the Grid will:
+To make use of all the available space, the Grid will be enabled to:
 - Adjust the column widths to fill the page. Avoid setting width on all columns.
 - Vary the number of rows for each page, placing page breaks where appropriate.
-- Omit the toolbar and pager
+- Omit the toolbar and pager.
 
 > **Important**
->
-> This feature requires all records to be rendered at once albeit off-screen.
-> The exact maximum number of exportable rows will vary depending on the browser,
-> system resources, template complexity and other factors.
->
-> It's advisable to verify your own "worst case" scenarios in each browser you intend to support.
+> * This feature requires that all records are rendered at once albeit off-screen.
+> * The exact maximum number of exportable rows will vary depending on the browser, system resources, template complexity, and other factors.
+> * It is advisable to verify your own worst-case scenarios in each browser you intend to support.
 
-###### Example - Export With Fixed Paper Size
+The example below demonstrates how to export the Grid with a fixed paper size.
+
+###### Example
+
 ```html
     <div id="grid"></div>
     <script>
