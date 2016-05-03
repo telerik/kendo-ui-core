@@ -267,6 +267,22 @@ position: 2
 
 For more information on how to create formulas and what their syntax is, see the list of [Excel functions](https://support.office.com/en-GB/article/Excel-functions-by-category-5f91f4e9-7b42-46d2-9bd1-63f26a86c0eb?CorrelationId=343eb30b-8175-4479-be19-1310dd12334f).
 
+## Array Formulas
+
+Similar to Excel, the Kendo UI Spreadsheet widget supports the implementation of [array formulas](https://support.office.com/en-us/article/Guidelines-and-examples-of-array-formulas-7d94a64e-3ff3-4686-9372-ecfd5caa57c7?ui=en-US&rs=en-US&ad=US), which return a matrix of values.  
+
+Below are listed the steps for you to follow when entering an array formula to the Kendo UI Spreadsheet.
+
+**Step 1** Select a cell by clicking on it.
+
+**Step 2** Go to the Formula bar and enter the formula.
+
+**Step 3** Press **Enter**.
+
+> **Important**
+>
+> Currently, the Spreadsheet distributes the resulting values to the cells adjacent to the input ones. For example, if you state an array formula `1+C4:G11` in **A1**, the resulting matrix of values is distributed across the respective number of fields next to **A1**&mdash;in this case, the calculated values are spread over the `A1:E8` range.
+
 ## See Also
 
 Other articles on Kendo UI Spreadsheet:
