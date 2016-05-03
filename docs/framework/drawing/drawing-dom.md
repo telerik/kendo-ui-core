@@ -206,7 +206,7 @@ It can happen that this element ends up in a position where all the text fits on
 
 ### Template: Headers and Footers
 
-When multi-page output is requested via `forcePageBreak` or `paperSize`, you can additionally specify a page template. This template will be inserted into each page before producing the output. You can easily position it relatively to the page via CSS. The template can be a function, or a Kendo UI template, and it receives the number of the current page and the total number of pages.
+When multi-page output is requested via `forcePageBreak` or `paperSize`, you can additionally specify a page template. This template will be inserted into each page before producing the output. You can easily position it relatively to the page via CSS. The template can be a function, or a Kendo UI template, and it receives the number of the current page (`pageNum`) and the total number of pages (`totalPages`).
 
 ###### Example
 
