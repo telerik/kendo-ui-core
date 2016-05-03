@@ -2857,9 +2857,9 @@ td.k-state-focused.k-state-selected,
 }
 
 .k-state-focused,
-.k-button:focus,
+.k-button:focus:not(.k-state-disabled):not([disabled]),
 .k-button.k-state-focused,
-.k-button:focus:active
+.k-button:focus:active:not(.k-state-disabled):not([disabled])
 {
     .box-shadow(@focused-shadow);
 }
