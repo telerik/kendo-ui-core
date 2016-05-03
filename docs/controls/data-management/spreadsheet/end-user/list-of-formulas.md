@@ -269,19 +269,15 @@ For more information on how to create formulas and what their syntax is, see the
 
 ## Array Formulas
 
-Similar to Excel, the Kendo UI Spreadsheet widget supports the implementation of [array formulas](https://support.office.com/en-us/article/Guidelines-and-examples-of-array-formulas-7d94a64e-3ff3-4686-9372-ecfd5caa57c7?ui=en-US&rs=en-US&ad=US), which return a matrix of values.  
+Similar to Excel, the Kendo UI Spreadsheet widget supports [array formulas](https://support.office.com/en-us/article/Guidelines-and-examples-of-array-formulas-7d94a64e-3ff3-4686-9372-ecfd5caa57c7?ui=en-US&rs=en-US&ad=US), which return a matrix of values.
 
-Below are listed the steps for you to follow when entering an array formula to the Kendo UI Spreadsheet.
+### Difference from Excel / limitations
 
-**Step 1** Select a cell by clicking on it.
+In Excel, to get all the values from an array formula you need to pre-select the target range, press `F2` to type the formula, and press `Ctrl-Shift-Enter` to save the formula.  Excel then locks the cells that contain the result (they cannot be edited, deleted or merged).
 
-**Step 2** Go to the Formula bar and enter the formula.
+Kendo UI Spreadsheet is missing an implementation for this UI.  If a formula returns an array, then all adjacent cells are filled with the values.  For example, if you type in `A1`: `=2*D1:E2`, the cells `A1`, `B1`, `A2` and `B2` will get the doubles of values in `D1`, `E1`, `D2` and `E2` respectively, whereas in Excel such a formula will just place the double of `D1` in `A1` (it would only act as an array formula if the steps outlined above are taken when the formula is created).
 
-**Step 3** Press **Enter**.
-
-> **Important**
->
-> Currently, the Spreadsheet distributes the resulting values to the cells adjacent to the input ones. For example, if you state an array formula `1+C4:G11` in **A1**, the resulting matrix of values is distributed across the respective number of fields next to **A1**&mdash;in this case, the calculated values are spread over the `A1:E8` range.
+Kendo UI Spreadsheet does not lock the result cells, which can lead to surprising behavior.  You can type into the result cells, but the value will appear to not be saved because the formula will fill them again.  Cells can also be merged, deleted etc. — an array formula will just attempt to fill whatever cells it can.
 
 ## See Also
 
