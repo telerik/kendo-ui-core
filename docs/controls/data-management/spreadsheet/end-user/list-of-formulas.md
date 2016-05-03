@@ -267,6 +267,18 @@ position: 2
 
 For more information on how to create formulas and what their syntax is, see the list of [Excel functions](https://support.office.com/en-GB/article/Excel-functions-by-category-5f91f4e9-7b42-46d2-9bd1-63f26a86c0eb?CorrelationId=343eb30b-8175-4479-be19-1310dd12334f).
 
+## Array Formulas
+
+Similar to Excel, the Kendo UI Spreadsheet widget supports [array formulas](https://support.office.com/en-us/article/Guidelines-and-examples-of-array-formulas-7d94a64e-3ff3-4686-9372-ecfd5caa57c7?ui=en-US&rs=en-US&ad=US), which return a matrix of values.
+
+### Differences from Excel
+
+In Excel, to get all the values from an array formula, you pre-select the target range, press `F2` to type the formula, and press `Ctrl`+`Shift`+`Enter` to save it. Excel then locks the cells that contain the result, so that they cannot be edited, deleted, or merged.
+
+In the Spreadsheet, if a formula returns an array, the values are distributed across adjacent cells. For example, if you type in `A1`: `=2*D1:E2`, then the `A1`, `B1`, `A2`, and `B2` cells receive the doubles of the values from `D1`, `E1`, `D2`, and `E2` respectively. In Excel, such a formula places the double of `D1` in `A1`&mdash;it would only act as an array formula if the steps outlined above are taken when the formula is created.
+
+The Spreadsheet does not lock the result cells neither, which might lead to surprising behavior. You are able to type into the result cells, but the values do not appear to have been saved because the formula distributes the values to them again. The result cells are also editable and can be merged or deleted&mdash;an array formula will just attempt to fill whatever cell possible.
+
 ## See Also
 
 Other articles on Kendo UI Spreadsheet:
