@@ -43,6 +43,7 @@ The example below demonstrates how to customize the column appearance of a serve
            })
            .Render();
     %>
+```
 
 **Razor**
 
