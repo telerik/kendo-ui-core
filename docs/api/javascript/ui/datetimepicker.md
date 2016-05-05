@@ -176,7 +176,7 @@ All dates, which match the date portion of the selected date will be used to re-
 
         return false;
       }
-      
+
     </script>
 
 ### depth `String`
@@ -272,7 +272,7 @@ note that a check for an empty `date` is needed, as the widget can work with a n
     });
     </script>
 
-### format `String`*(default: "MM/dd/yyyy h:mm tt")*
+### format `String`*(default: "M/d/yyyy h:mm tt")*
 
  Specifies the format, which is used to format the value of the DateTimePicker displayed in the input. The format also will be used to parse the input.
 
