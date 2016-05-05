@@ -21,9 +21,34 @@ The example below demonstrates how to reload the configuration options of the Ke
     <script>
         $(document).ready(function () {
             var options = {
-                columns: [{"name":["[Date].[Calendar]"],"expand":true},{"name":["[Product].[Category]"]}],
+              columns: [{"name":["[Date].[Calendar]"],"expand":true},{"name":["[Product].[Category]"]}],
               rows: [{"name":["[Geography].[City]"]}],
-              measures: [{"name":"[Measures].[Reseller Freight Cost]"}]
+              measures: [{"name":"[Measures].[Reseller Freight Cost]"}],
+              filter: {
+                "logic":"and",
+                "filters":[{
+                  "field":"[Date].[Calendar]",
+                  "operator":"in",
+                  "value":"[Date].[Calendar].[Calendar Year].&[2006],[Date].[Calendar].[Calendar Year].&[2008]"
+                }]
+              }
+            };
+
+            var dataSourceConfig = {
+              type: "xmla",
+              transport: {
+                connection: {
+                  catalog: "Adventure Works DW 2008R2",
+                  cube: "Adventure Works"
+                },
+                read: "http://demos.telerik.com/olap/msmdpump.dll"
+              },
+              schema: {
+                type: "xmla"
+              },
+              error: function (e) {
+                alert("error: " + kendo.stringify(e.errors[0]));
+              }
             };
 
             var pivotgrid = $("#pivotgrid").kendoPivotGrid({
@@ -31,30 +56,14 @@ The example below demonstrates how to reload the configuration options of the Ke
                 sortable: true,
                 columnWidth: 200,
                 height: 580,
-                dataSource: {
-                    type: "xmla",
-                    transport: {
-                        connection: {
-                            catalog: "Adventure Works DW 2008R2",
-                            cube: "Adventure Works"
-                        },
-                        read: "http://demos.telerik.com/olap/msmdpump.dll"
-                    },
-                    schema: {
-                        type: "xmla"
-                    },
-                    error: function (e) {
-                        alert("error: " + kendo.stringify(e.errors[0]));
-                    }
-                }
+                dataSource: dataSourceConfig
             }).data("kendoPivotGrid");
 
             $("#reload").click(function() {
-              var source = pivotgrid.dataSource;
+              var newOptions = $.extend({}, dataSourceConfig, options);
+              var newSource = new kendo.data.PivotDataSource(newOptions);
 
-              source.columns(options.columns);
-              source.rows(options.rows);
-              source.measures(options.measures);
+              pivotgrid.setDataSource(newSource);
             });
         });
     </script>
