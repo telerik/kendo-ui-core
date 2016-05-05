@@ -4084,6 +4084,7 @@ If invoked prevents the add action.
         console.log("Add", e.task.title);
       }
     });
+    </script>
 
 #### Example - subscribe to the "add" event after initialization
 
