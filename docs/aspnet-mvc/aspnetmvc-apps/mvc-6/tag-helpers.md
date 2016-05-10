@@ -1,7 +1,7 @@
 ---
 title: Tag Helpers
 page_title: Tag Helpers | Telerik UI for ASP.NET Core MVC
-description: "Learn the basics when working with Telerik Tag Helpers for ASP.NET Core MVC."
+description: "Learn the basics when working with Telerik Tag Helpers for ASP.NET Core MVC (aka MVC 6)."
 previous_url: /aspnet-mvc/mvc-6/tag-helpers
 slug: taghelpers_aspnetmvc6_aspnetmvc
 position: 4
