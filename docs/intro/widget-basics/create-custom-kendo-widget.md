@@ -188,7 +188,7 @@ The way the widget code now looks like is shown in the example below.
             _dataSource: function() {
                 var that = this;
                 // returns the datasource OR creates one if using an array or a configuration
-                that.dataSource = kendo.data.DataSource.create(that.option.dataSource);
+                that.dataSource = kendo.data.DataSource.create(that.options.dataSource);
 
 				// bind to the change event to refresh the widget
                 that.dataSource.bind(CHANGE, function() {
