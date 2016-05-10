@@ -245,7 +245,7 @@ navigation:
         title: "Migrate From Telerik Extensions"
         position: 13
     "aspnet-mvc/helpers":
-        title: "HtmlHelpers"
+        title: "Components"
         position: 14
     "aspnet-mvc/helpers/grid/binding":
         title: "Binding"
