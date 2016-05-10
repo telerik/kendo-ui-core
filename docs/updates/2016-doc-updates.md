@@ -11,6 +11,74 @@ slug: documentation_updates_2016_kendoui
 
 Below are listed the Kendo UI Q2 2016 release changes in the documentation as compared to the Kendo UI Q1 2016 SP1 ones.
 
+### UI for ASP.NET MVC
+
+Some **UI for ASP.NET MVC** folders and articles are now renamed or reside in new locations, which conceptually better match the topics they tackle.
+
+**Folders**
+
+<table style="width:100%">
+  <col width="25%">
+  <col width="25%">
+  <col width="25%">
+  <col width="25%">
+    <tr>
+      <th>Folder</th>
+      <th>New Name</th>
+      <th>Previous Location</th>
+      <th>New Location</th>
+    </tr>
+    <tr>
+      <td>HtmlHelpers</td>
+      <td>Components</td>
+      <td><strong>UI for ASP.NET MVC</strong></td>
+      <td><strong>UI for ASP.NET MVC</strong></td>
+    </tr>
+    <tr>
+      <td>ASP.NET Core MVC</td>
+      <td>Use with ASP.NET Core MVC</td>
+      <td><strong>UI for ASP.NET MVC</strong> > <strong>ASP.NET MVC Apps</strong></td>
+      <td><strong>UI for ASP.NET MVC</strong></td>
+    </tr>
+</table>
+
+**Articles**
+
+<table style="width:100%">
+  <col width="25%">
+  <col width="25%">
+  <col width="25%">
+  <col width="25%">
+    <tr>
+      <th>Article</th>
+      <th>New Name</th>
+      <th>Previous Location</th>
+      <th>New Location</th>
+    </tr>
+    <tr>
+    <tr>
+      <td>ASP.NET MVC 3</td>
+      <td>Use with ASP.NET MVC 3</td>
+      <td><strong>UI for ASP.NET MVC</strong> > <strong>ASP.NET MVC Apps</strong></td>
+      <td><strong>UI for ASP.NET MVC</strong></td>
+    </tr>
+    <tr>
+      <td>ASP.NET MVC 4</td>
+      <td>Use with ASP.NET MVC 4</td>
+      <td><strong>UI for ASP.NET MVC</strong> > <strong>ASP.NET MVC Apps</strong></td>
+      <td><strong>UI for ASP.NET MVC</strong></td>
+    </tr>
+      <td>ASP.NET MVC 5</td>
+      <td>Use with ASP.NET MVC 5</td>
+      <td><strong>UI for ASP.NET MVC</strong> > <strong>ASP.NET MVC Apps</strong></td>
+      <td><strong>UI for ASP.NET MVC</strong></td>
+    </tr>
+</table>
+
+### Styles and Appearance
+
+Some **Styles and Appearance** articles now share new locations, which conceptually better match the topics they tackle.
+
 <table style="width:100%">
   <col width="25%">
   <col width="25%">
@@ -34,9 +102,9 @@ Below are listed the Kendo UI Q2 2016 release changes in the documentation as co
 
 Below are listed the Kendo UI Q1 2016 SP1 release changes in the documentation as compared to the Kendo UI Q1 2016 ones.
 
-### Getting Started Location
+### Getting Started
 
-Some Getting Started articles now share new locations, which conceptually better match the topics they tackle.
+Some **Getting Started** articles now share new locations, which conceptually better match the topics they tackle.
 
 <table style="width:100%">
   <col width="25%">
@@ -87,9 +155,9 @@ Some Getting Started articles now share new locations, which conceptually better
     </tr>
 </table>
 
-### UI for ASP.NET MVC Location
+### UI for ASP.NET MVC
 
-Some UI for ASP.NET MVC articles now share new locations, which conceptually better match the topics they tackle.
+Some **UI for ASP.NET MVC** articles now share new locations, which conceptually better match the topics they tackle.
 
 <table style="width:100%">
   <col width="25%">
@@ -134,7 +202,7 @@ In addition to the renaming and relocation of the above articles, some new ones 
 
 Below are listed the latest (Kendo UI Q1 2016 release) changes in the documentation as compared to the Kendo UI Q3 2015 ones.
 
-### File Reorganization and Relocation
+### Reorganization of Existing Files
 
 * The conceptual topic documentation on Kendo UI widgets is reorganized to correspond to the structure of the [Kendo UI live demo page](http://demos.telerik.com/kendo-ui/). The articles on Kendo UI controls are now listed in the **Widgets** folder. For example, **Widgets** > **Data Management** > **Grid** > **Overview**.
 * The new **Styles and Appearance** folder contains the combined articles on the layout and general appearance of the Kendo UI widgets that were previously referred to as Web and DataViz, such as the **Responsive Web Design** and **ThemeBuilder Overview** help topics.
