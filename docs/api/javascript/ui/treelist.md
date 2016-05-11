@@ -1590,7 +1590,7 @@ Can be set to a JavaScript object which represents the filter menu configuration
               },
               date: {
                 gt: "After",
-                gte: "On or after"
+                gte: "On or after",
                 lt: "Before",
                 lte: "On or before",
                 eq: "On",
