@@ -535,7 +535,7 @@ Returns a range with the current active selection.
 
 ### setDataSource
 
-Binds the sheet to a DataSource instance.For more information on the data-binding Spreadsheet functionality, refer to the [article on binding the Spreadsheet to a data source](/controls/data-management/spreadsheet/import-and-export-data/bind-to-data-source).
+Binds the sheet to a DataSource instance. For more information on the data-binding Spreadsheet functionality, refer to the [article on binding the Spreadsheet to a data source](/controls/data-management/spreadsheet/import-and-export-data/bind-to-data-source).
 
 #### Parameters
 
@@ -543,7 +543,7 @@ Binds the sheet to a DataSource instance.For more information on the data-bindin
 
 The DataSource instance.
 
-#### Example
+###### Example
 
 ```
     <div id="spreadsheet"></div>
@@ -571,7 +571,7 @@ The DataSource instance.
 
 Columns configuration.
 
-#### Example
+###### Example
 
 ```
     <div id="spreadsheet"></div>
@@ -591,6 +591,32 @@ Columns configuration.
       var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
       var sheet = spreadsheet.activeSheet();
       sheet.setDataSource(dataSource, [ "ProductName", "UnitPrice" ]);
+
+    </script>
+```
+
+###### Example - reorder columns and change column titles
+
+```
+    <div id="spreadsheet"></div>
+    <script>
+      var dataSource = new kendo.data.DataSource({
+        transport: {
+          read:  {
+            url: "//demos.telerik.com/kendo-ui/service/Products",
+            dataType: "jsonp"
+          }
+        }
+      });
+
+      $("#spreadsheet").kendoSpreadsheet();
+
+      var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+      var sheet = spreadsheet.activeSheet();
+      sheet.setDataSource(dataSource, [
+          { field: "UnitPrice", title: "Price" },
+          { field: "ProductName", title: "Name" }
+      ]);
 
     </script>
 ```
