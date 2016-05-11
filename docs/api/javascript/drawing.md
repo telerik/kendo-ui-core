@@ -114,13 +114,55 @@ The [page template](/framework/drawing/drawing-dom#page-template-headers-and-foo
 
         draw.drawDOM($("#calendar"))
         .then(function(root) {
+            // Chaining the promise via then
             return draw.exportImage(root);
         })
         .done(function(data) {
+            // Here 'data' is the Base64-encoded image file
             kendo.saveAs({
                 dataURI: data,
                 fileName: "calendar.png"
             });
+        });
+    </script>
+
+#### Example - Exporting a DOM element to a PDF file (via Base64-encoded string)
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar();
+
+        var draw = kendo.drawing;
+
+        draw.drawDOM($("#calendar"))
+        .then(function(root) {
+            // Chaining the promise via then
+            return draw.exportPDF(root, {
+                paperSize: "A4",
+                landscape: true
+            });
+        })
+        .done(function(data) {
+            // Here 'data' is the Base64-encoded PDF file
+            kendo.saveAs({
+                dataURI: data,
+                fileName: "calendar.pdf"
+            });
+        });
+    </script>
+
+#### Example - Exporting a DOM element to a PDF file (direct)
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar();
+
+        var draw = kendo.drawing;
+
+        draw.drawDOM($("#calendar"))
+        .done(function(root) {
+            // Here the PDF file is saved directly
+            // without creating an intermediate
+            // Base64-encoded version of its content
+            draw.pdf.saveAs(root, "calendar.pdf");
         });
     </script>
 
