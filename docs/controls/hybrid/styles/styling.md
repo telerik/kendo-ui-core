@@ -245,10 +245,6 @@ The skin should be activated by including the respective skin CSS file `kendo.mo
 
 The case is described in further details in [this article](/controls/hybrid/support/regular-usage).
 
-## ThemeBuilder for Mobile
-
-The Kendo UI themes for mobile are designed to be easily customizable with different colors and backgrounds. To further ease the task, Kendo UI also provides a special tool called [Kendo UI ThemeBuilder for mobile](http://demos.telerik.com/kendo-ui/mobilethemebuilder/index.html). It is very simple to use&mdash;just drag and drop your chosen colors, gradients, patterns and font styles onto the platform theme you want to restyle and finally click the export button to get the needed CSS stylesheet.
-
 ## Color Modifications
 
 ### Change iOS7 Tint Color
