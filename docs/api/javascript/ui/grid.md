@@ -1106,6 +1106,42 @@ The role data attribute of the widget used in the filter menu or a JavaScript fu
 
 > Check [Filter menu customization](http://demos.telerik.com/kendo-ui/grid/filter-menu-customization) for a live demo.
 
+### columns.footerAttributes `Object`
+
+HTML attributes of the column footer. The `footerAttributes` option can be used to set the HTML attributes of that cell.
+
+> HTML attributes which are JavaScript keywords (e.g. *class*) must be quoted.
+
+#### Example - set the column footer HTML attributes
+
+    <div id="grid"></div>
+    <script>
+        $("#grid").kendoGrid({
+          columns: [
+            { field: "name" },
+            { field: "age",
+              footerTemplate: "Min: #: min # Max: #: max #",
+              footerAttributes: {
+                  "class": "table-footer-cell",
+                  style: "text-align: right; font-size: 14px"
+              }
+            }
+          ],
+          dataSource: {
+            data: [
+              { name: "Jane Doe", age: 30 },
+              { name: "John Doe", age: 33 }
+            ],
+            aggregate: [
+                { field: "age", aggregate: "min" },
+                { field: "age", aggregate: "max" }
+            ]
+          }
+        });
+    </script>
+
+The table footer cell will look like this: `<td class="table-footer-cell" style="text-align: right; font-size: 14px">Min: 30 Max: 33</td>`.
+
 ### columns.footerTemplate `String|Function`
 The [template](/api/javascript/kendo#methods-template) which renders the footer table cell for the column.
 
