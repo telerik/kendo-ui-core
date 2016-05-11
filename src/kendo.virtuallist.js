@@ -1404,6 +1404,20 @@ var __meta__ = { // jshint ignore:line
                 return [];
             }
 
+            if (indices[0] === -1) {
+                $(children).removeClass("k-state-selected");
+                removed = $.map(this._selectedDataItems.slice(0), function(dataItem, idx) {
+                   return {
+                      dataItem: dataItem,
+                      position: idx
+                   };
+                });
+                this._selectedIndexes = [];
+                this._selectedDataItems = [];
+                this._values = [];
+                return removed;
+            }
+
             for (; idx < indices.length; idx++) {
                 position = -1;
                 index = indices[idx];
