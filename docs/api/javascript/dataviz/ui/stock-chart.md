@@ -9072,6 +9072,16 @@ The length of the connecting lines in pixels.
     });
     </script>
 
+## Fields
+
+### navigator `kendo.dataviz.Navigator`
+
+A reference to the Stock Chart built-in navigator (lower pane) instance.
+
+> **Important**
+>
+> The navigator field is available in Kendo UI v.2016.2.517 and later
+
 ## Methods
 
 ### destroy
