@@ -800,6 +800,13 @@ var __meta__ = { // jshint ignore:line
                     }
                 }
             } else if ((key === keys.DELETE || key === keys.BACKSPACE) && !hasValue) {
+                if (that.options.tagMode === "single") {
+                    that.listView.value([]);
+                    that._change();
+                    that._close();
+                    return;
+                }
+
                 if (key === keys.BACKSPACE && !tag) {
                     tag = $(that.tagList[0].lastChild);
                 }

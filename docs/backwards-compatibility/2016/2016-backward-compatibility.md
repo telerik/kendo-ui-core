@@ -8,6 +8,14 @@ slug: breakingchanges2016_kendoui
 
 # Kendo UI 2016 Breaking Changes
 
+## Kendo UI 2016 Q3
+
+### Changes from 2016 Q2 SP1
+
+#### Breaking Changes
+
+* **MultiSelect**: The widget with a 'single' tag mode will deselect all selected items on BACKSPACE/DELETE keyboard press. The previous behavior cannot be reverted.
+
 ## Kendo UI 2016 Q2
 
 ### Changes from 2016 Q1 SP1 (2016.1.226)

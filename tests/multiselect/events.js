@@ -231,4 +231,19 @@
 
         multiselect.search("bar");
     });
+
+    test("trigger change event when clear single tag on delete", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            tagMode: "single",
+            value: [1,2,3],
+            change: function() {
+                ok(true);
+            }
+        });
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.BACKSPACE
+        });
+    });
 })();

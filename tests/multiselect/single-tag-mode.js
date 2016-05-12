@@ -193,4 +193,20 @@
         equal(value.length, 1);
         equal(value[0], 2);
     });
+
+    test("Clear selected values when delete the tag", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            tagMode: "single",
+            value: [1,2,3]
+        });
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.BACKSPACE
+        });
+
+        var value = select.val();
+
+        equal(value, null);
+    });
 })();
