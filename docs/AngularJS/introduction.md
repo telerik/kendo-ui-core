@@ -427,7 +427,11 @@ You can update a widget from `controller`. Use the special `k-rebind` attribute 
 </script>
 ```
 
-To watch multiple options for change, just use `k-options` and pass the same variable to `k-rebind`, as shown below. **Note that this approach is not suitable for dataBound widgets, because the widget will be recreated on each change of its data, for example after Grid paging.**
+To watch multiple options for change, use `k-options` and pass the same variable to `k-rebind`, as shown below.
+
+> **Important**
+>
+> This approach is not suitable for `dataBound` widgets, because those widgets will be recreated on each change of their data&mdash;for example, after Grid paging.
 
 ###### Example
 
