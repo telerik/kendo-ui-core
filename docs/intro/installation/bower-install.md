@@ -31,8 +31,7 @@ bower install kendo-ui-core
 
 ### Kendo UI Professional
 
-The Kendo UI Professional Bower Package is hosted as a private Git repository. To access it, you need an active subscription for Kendo UI or DevCraft.
-Bower will prompt for your username and password during the installation and update processes.
+The Kendo UI Professional Bower Package is hosted on a private Git repository. To access the package, you need an active subscription for Kendo UI or DevCraft. Bower will prompt for your username and password during the installation and update processes.
 
 ###### Example
 
