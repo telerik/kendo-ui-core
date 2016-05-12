@@ -7400,6 +7400,26 @@ A string, DOM element or jQuery object which represents the table row(s) or cell
     grid.select("tr:eq(1), tr:eq(2)");
     </script>
 
+#### Example - select a row by Model UID
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+      ],
+      selectable: "multiple, row"
+    });
+    var grid = $("#grid").data("kendoGrid");
+    var uid = grid.dataSource.at(1).uid;
+    grid.select("tr[data-uid='" + uid + "']");
+    </script>
+
 #### Example - select the first table cell
 
     <div id="grid"></div>
