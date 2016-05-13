@@ -73,6 +73,10 @@ test("negative integer if no 0 in decimal part of the toString", function() {
     equal(toString(-10, "####.#"), "-10");
 });
 
+test("negative integer with thousands and custom format", function() {
+    equal(toString(-18000, "#,##0"), "-18,000");
+});
+
 test("decimal if 0 in the decimal part of toString", function() {
     equal(toString(10, "####.#0#"), "10.00");
 });
