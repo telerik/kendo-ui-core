@@ -885,4 +885,83 @@
             }
         });
     });
+
+    test("widget triggers select event END keystroke", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: ["foo", "foo1", "foo2"],
+            select: function(e) {
+                equal(e.item.text(), "foo2");
+            }
+        });
+
+        dropdownlist.wrapper.focus()
+                    .trigger({
+                        type: "keydown",
+                        keyCode: kendo.keys.END
+                    });
+    });
+
+    test("widget triggers select event HOME keystroke", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            index: 2,
+            dataSource: ["foo", "foo1", "foo2"],
+            select: function(e) {
+                equal(e.item.text(), "foo");
+            }
+        });
+
+        dropdownlist.wrapper.focus()
+                    .trigger({
+                        type: "keydown",
+                        keyCode: kendo.keys.HOME
+                    });
+    });
+
+    test("widget prevents selection when select is prevented on END keystroke", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: ["foo", "foo1", "foo2"],
+            select: function(e) {
+                e.preventDefault();
+            }
+        });
+
+        dropdownlist.wrapper.focus()
+                    .trigger({
+                        type: "keydown",
+                        keyCode: kendo.keys.END
+                    });
+
+        equal(dropdownlist.value(), "foo");
+    });
+
+    test("widget triggers change event END keystroke", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: ["foo", "foo1", "foo2"],
+            change: function(e) {
+                equal(this.value(), "foo2");
+            }
+        });
+
+        dropdownlist.wrapper.focus()
+                    .trigger({
+                        type: "keydown",
+                        keyCode: kendo.keys.END
+                    });
+    });
+
+    test("widget triggers change event HOME keystroke", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            index: 2,
+            dataSource: ["foo", "foo1", "foo2"],
+            change: function(e) {
+                equal(this.value(), "foo");
+            }
+        });
+
+        dropdownlist.wrapper.focus()
+                    .trigger({
+                        type: "keydown",
+                        keyCode: kendo.keys.HOME
+                    });
+    });
 })();

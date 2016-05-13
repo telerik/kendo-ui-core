@@ -657,6 +657,8 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (!isPopupVisible || !that.filterInput) {
+                current = that._focus();
+
                 if (key === keys.HOME) {
                     handled = true;
                     that._firstItem();
@@ -666,8 +668,16 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (handled) {
-                    that._select(that._focus());
-                    e.preventDefault();
+                    if (that.trigger("select", { item: that._focus() })) {
+                        that._focus(current);
+                        return;
+                    }
+
+                    that._select(that._focus(), true);
+
+                    if (!isPopupVisible) {
+                        that._blur();
+                    }
                 }
             }
 
