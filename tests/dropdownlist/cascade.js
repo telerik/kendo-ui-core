@@ -1246,4 +1246,39 @@
             equal(ddl2.value(), "item4");
         });
     });
+
+    test("widget with filter input filters child only once", 2, function() {
+        var ddl = new DropDownList(parent, {
+            animation: false,
+            optionLabel: "Select",
+            dataValueField: "id",
+            dataTextField: "text",
+            dataSource: [
+                {text: "item1", id: "1"},
+                {text: "item3", id: "2"}
+            ],
+            value: "1",
+            filter: "contains"
+        });
+
+        var ddl2 = new DropDownList(child.attr("id", "child"), {
+            dataValueField: "text",
+            dataTextField: "text",
+            cascadeFrom: "parent",
+            dataSource: {
+                serverFiltering: true,
+                transport: {
+                    read: function(options) {
+                        ok(true);
+                        options.success([ ]);
+                    }
+                }
+            },
+        });
+
+        ddl.wrapper.focus();
+        ddl.open();
+
+        ddl.ul.children().last().click();
+    });
 })();
