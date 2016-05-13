@@ -14,11 +14,11 @@ It is used as a default `categoryField` for all series.
 
 The data item field value must be either:
 
-####* Date instance
+* Date instance
 
-####* String parsable by `new Date([field value])`
+* String parsable by `new Date([field value])`
 
-####* String in ASP.NET JSON format, i.e. "\/Date(1320825600000-0800)\/"
+* String in ASP.NET JSON format, i.e. "\/Date(1320825600000-0800)\/"
 
 ### navigator `Object`
 
@@ -2661,27 +2661,17 @@ categories are listed from right to left and from top to bottom.
 
 The selected axis range. If configured, axis selection will be enabled.
 
-** Available only for vertical axes **
-
-The range units are:
-
-#### *Generic axis*
-Category index (0-based)
-
-#### *Date axis*
-Date instance or date string (yyyy/MM/dd HH:mm:ss)
-
-### categoryAxis.select.from `Object`
+### categoryAxis.select.from `String|Date`
 
 The lower boundary of the selected range.
 
-### categoryAxis.select.to `Object`
+### categoryAxis.select.to `String|Date`
 
 The upper boundary of the selected range.
 
-*Note*: The category with the specified index (date) is not included in the selected range
+*Note*: The category with the specified date is not included in the selected range
 unless the axis is justified. In order to select all categories specify
-a value larger than the last category index (date).
+a value larger than the last category date.
 
 ### categoryAxis.select.min `Object`
 
@@ -9295,6 +9285,83 @@ The original data item used to generate the label.
 
 The DOM element of the label.
 
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+### dataBound
+
+Fires when the chart has received data from the data source
+and is about to render it.
+
+#### Example
+
+    function onDataBound(e) {
+        // Series data is now available
+    }
+
+### dragStart
+
+Fires when the user has used the mouse or a swipe gesture to drag the chart.
+
+The drag operation can be aborted by calling `e.preventDefault()`.
+
+#### Event Data
+
+##### e.axisRanges `Object`
+
+A hastable containing the initial range (min and max values) of *named* axes.
+The axis name is used as a key.
+
+##### e.originalEvent `Object`
+
+The original user event that triggered the drag action.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+### drag
+
+Fires as long as the user is dragging the chart using the mouse or swipe gestures.
+
+#### Event Data
+
+##### e.axisRanges `Object`
+
+A hastable containing the suggested current range (min and max values) of *named* axes.
+The axis name is used as a key.
+
+Note that the axis ranges are not updated automatically. You need to call
+set_options with either the suggested or custom min/max values for them to take effect.
+
+##### e.originalEvent `Object`
+
+The original user event that triggered the drag action.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+### dragEnd
+
+Fires when the user stops dragging the chart.
+
+#### Event Data
+
+##### e.axisRanges `Object`
+
+A hastable containing the final range (min and max values) of *named* axes.
+The axis name is used as a key.
+
+##### e.originalEvent `Object`
+
+The original user event that triggered the drag action.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
 ### legendItemClick
 
 Fires when an legend item is clicked, before the selected series visibility is toggled.
@@ -9331,6 +9398,10 @@ If invoked the default action (toggle series visibility) will be prevented.
 
 The DOM element of the plot area.
 
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
 ### legendItemHover
 
 Fires when an legend item is hovered.
@@ -9363,80 +9434,9 @@ The point index.
 
 The DOM element of the plot area.
 
-### dataBound
+##### e.sender `kendo.dataviz.ui.StockChart`
 
-Fires when the chart has received data from the data source
-and is about to render it.
-
-#### Example
-
-    function onDataBound(e) {
-        // Series data is now available
-    }
-
-### dragStart
-
-Fires when the user has used the mouse or a swipe gesture to drag the chart.
-
-The drag operation can be aborted by calling `e.preventDefault()`.
-
-#### Event Data
-
-##### e.axisRanges `Object`
-
-A hastable containing the initial range (min and max values) of *named* axes.
-The axis name is used as a key.
-
-##### e.originalEvent `Object`
-
-The original user event that triggered the drag action.
-
-### drag
-
-Fires as long as the user is dragging the chart using the mouse or swipe gestures.
-
-#### Event Data
-
-##### e.axisRanges `Object`
-
-A hastable containing the suggested current range (min and max values) of *named* axes.
-The axis name is used as a key.
-
-Note that the axis ranges are not updated automatically. You need to call
-set_options with either the suggested or custom min/max values for them to take effect.
-
-#### Example
-
-    $("#chart").kendoChart({
-        valueAxis: {
-            name: "price"
-        },
-        drag: onDrag
-        ...
-    }
-
-    function onDrag(e) {
-        var minPrice = e.axisRanges.price.min;
-    }
-
-##### e.originalEvent `Object`
-
-The original user event that triggered the drag action.
-
-### dragEnd
-
-Fires when the user stops dragging the chart.
-
-#### Event Data
-
-##### e.axisRanges `Object`
-
-A hastable containing the final range (min and max values) of *named* axes.
-The axis name is used as a key.
-
-##### e.originalEvent `Object`
-
-The original user event that triggered the drag action.
+The widget instance which fired the event.
 
 ### noteClick
 
@@ -9454,7 +9454,7 @@ The data point category. Available only for categorical charts (bar, line, area 
 
 The DOM element of the plot area.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.StockChart`
 
 The widget instance which fired the event.
 
@@ -9469,6 +9469,10 @@ The series of the note.
 ##### e.dataItem `Object`
 
 The data item of the point's note.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
 
 ### noteHover
 
@@ -9486,7 +9490,7 @@ The data point category. Available only for categorical charts (bar, line, area 
 
 The DOM element of the plot area.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.StockChart`
 
 The widget instance which fired the event.
 
@@ -9501,6 +9505,10 @@ The series of the note.
 ##### e.dataItem `Object`
 
 The data item of the point's note.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
 
 ### plotAreaClick
 
@@ -9536,6 +9544,10 @@ The X axis value or array of values for multi-axis charts.
 
 The Y axis value or array of values for multi-axis charts.
 
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
 ### plotAreaHover
 
 Fired when the user hovers the plot area.
@@ -9550,7 +9562,7 @@ The data point category. Available only for categorical charts (bar, line, area 
 
 The DOM element of the plot area.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.StockChart`
 
 The widget instance which fired the event.
 
@@ -9570,6 +9582,10 @@ The X axis value or array of values for multi-axis charts.
 
 The Y axis value or array of values for multi-axis charts.
 
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
 ### render
 
 Fired when the chart is ready to render on screen.
@@ -9577,6 +9593,90 @@ Fired when the chart is ready to render on screen.
 Can be used, for example, to remove loading indicators. Changes to options will be ignored.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+### select
+
+Fired when the user modifies the selection.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.axis `Object`
+
+The target axis configuration.
+
+##### e.from `Date`
+
+The lower boundary of the selected range.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+##### e.to `Date`
+
+The upper boundary of the selected range.
+
+The last selected category is at index [to - 1] unless the axis is justified. In this case it is at index [to].
+
+### selectEnd
+
+Fired when the user completes modifying the selection.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.axis `Object`
+
+The target axis configuration.
+
+##### e.from `Date`
+
+The lower boundary of the selected range.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+##### e.to `Date`
+
+The upper boundary of the selected range.
+
+The last selected category is at index [to - 1] unless the axis is justified. In this case it is at index [to].
+
+### selectStart
+
+Fired when the user starts modifying the axis selection.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.axis `Object`
+
+The target axis configuration.
+
+##### e.from `Date`
+
+The lower boundary of the selected range.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+##### e.to `Date`
+
+The upper boundary of the selected range.
+
+The last selected category is at index [to - 1] unless the axis is justified. In this case it is at index [to].
 
 ### seriesClick
 
@@ -9626,6 +9726,10 @@ The DOM element of the data point.
 
 The point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
 
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
 ### seriesHover
 
 Fires when chart series are hovered.
@@ -9674,6 +9778,10 @@ The DOM element of the data point.
 
 The point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
 
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
 ### zoomStart
 
 Fires when the user has used the mousewheel to zoom the chart.
@@ -9691,6 +9799,10 @@ The axis name is used as a key.
 
 The original user event that triggered the zoom action.
 
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
 ### zoom
 
 Fires as long as the user is zooming the chart using the mousewheel.
@@ -9704,20 +9816,6 @@ The axis name is used as a key.
 
 Note that the axis ranges are not updated automatically. You need to call
 set_options with either the suggested or custom min/max values for them to take effect.
-
-#### Example
-
-    $("#chart").kendoChart({
-        valueAxis: {
-            name: "price"
-        },
-        zoom: onZoom
-        ...
-    }
-
-    function onZoom(e) {
-        var minPrice = e.axisRanges.price.min;
-    }
 
 ##### e.delta `Number`
 
@@ -9738,6 +9836,10 @@ This event can be used to prevent the default mousewheel action (scroll).
         e.originalEvent.preventDefault();
     }
 
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
 ### zoomEnd
 
 Fires when the user stops zooming the chart.
@@ -9753,88 +9855,7 @@ The axis name is used as a key.
 
 The original user event that triggered the zoom action.
 
-### selectStart
+##### e.sender `kendo.dataviz.ui.StockChart`
 
-Fires when the user starts modifying the axis selection.
-
-The range units are:
-
-#### *Generic axis*
-Category index (0-based)
-
-#### *Date axis*
-Date instance
-
-#### Event Data
-
-##### e.axis `Object`
-
-The target axis configuration.
-
-##### e.from `Object`
-
-The lower boundary of the selected range.
-
-##### e.to `Object`
-
-The upper boundary of the selected range.
-
-*Note*: The last selected category is at index [to - 1] unless
-the axis is justified. In this case it is at index [to].
-
-### select
-
-Fires when the user modifies the selection.
-
-The range units are:
-
-#### *Generic axis*
-Category index (0-based)
-
-#### *Date axis*
-Date instance
-
-#### Event Data
-
-##### e.axis `Object`
-
-The target axis configuration.
-
-##### e.from `Object`
-
-The lower boundary of the selected range.
-
-##### e.to `Object`
-
-The upper boundary of the selected range.
-
-*Note*: The last selected category is at index [to - 1] unless
-the axis is justified. In this case it is at index [to].
-
-### selectEnd
-
-Fires when the user completes modifying the selection.
-
-#### *Generic axis*
-Category index (0-based)
-
-#### *Date axis*
-Date instance
-
-#### Event Data
-
-##### e.axis `Object`
-
-The target axis configuration.
-
-##### e.from `Object`
-
-The lower boundary of the selected range.
-
-##### e.to `Object`
-
-The upper boundary of the selected range.
-
-*Note*: The last selected category is at index [to - 1] unless
-the axis is justified. In this case it is at index [to].
+The widget instance which fired the event.
 
