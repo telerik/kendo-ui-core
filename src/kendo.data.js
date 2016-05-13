@@ -3179,6 +3179,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 data = that._readData(data);
+                that._destroyed = [];
             } else {
                 data = that._readData(data);
 
