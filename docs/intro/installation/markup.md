@@ -70,7 +70,7 @@ Here is an example referring to an MVVM-bound DOM element with an AutoComplete w
 
 ### In Hybrid UI Application
 
-Below is an example referring to Kendo Hybrid UI application with a view and an AutoComplete widget. More information about Hybrid UI applications is available in the [Building Hybrid Mobile Applications topic]({% slug overview_kendoui_singlepageapplication %}).
+Below is an example referring to Kendo Hybrid UI application with a view and an AutoComplete widget. More information about Hybrid UI applications is available in the [Building Hybrid Mobile Applications topic]({% slug overview_hybridapplication %}).
 
 ###### Example
 
