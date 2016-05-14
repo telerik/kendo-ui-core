@@ -1021,6 +1021,8 @@ Un-merges any merged cells which are included in the range.
 
 Sets the values of the range cells. The argument should be an array of arrays which match the dimensions of the range.
 
+> This method clears the formulas on every cell.
+
 #### Parameters
 
 ##### values `Array`
