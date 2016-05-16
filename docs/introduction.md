@@ -38,7 +38,7 @@ library for .NET.
 
 #### UI for ASP.NET MVC
 
-[UI for ASP.NET MVC](/aspnet-mvc/introduction) is a Kendo UI product flavor which targets ASP.NET MVC developers. It includes all Kendo UI Professional components as well as
+[Telerik<sup>®</sup> UI for ASP.NET MVC by Progress](/aspnet-mvc/introduction) is a Kendo UI product flavor which targets ASP.NET MVC developers. It includes all Kendo UI Professional components as well as
 HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to configure the Kendo UI widgets via C# code.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
@@ -49,7 +49,7 @@ HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to co
 
 #### UI for JSP
 
-[UI for JSP](/jsp/introduction) is a Kendo UI product flavor which targets the Java web application developers. It includes JSP (Java Server Pages) tags for all Kendo UI Professional widgets.
+[Telerik<sup>®</sup> UI for JSP by Progress](/jsp/introduction) is a Kendo UI product flavor which targets the Java web application developers. It includes JSP (Java Server Pages) tags for all Kendo UI Professional widgets.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
@@ -59,7 +59,7 @@ HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to co
 
 #### UI for PHP
 
-[UI for PHP](http://docs.telerik.com/kendo-ui/php/introduction) is a Kendo UI product flavor which targets the PHP web application developers. It includes PHP classes for configuring all Kendo UI Professional widgets.
+[Telerik<sup>®</sup> UI for PHP by Progress](http://docs.telerik.com/kendo-ui/php/introduction) is a Kendo UI product flavor which targets the PHP web application developers. It includes PHP classes for configuring all Kendo UI Professional widgets.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
@@ -69,8 +69,7 @@ HtmlHelper extension methods (a.k.a. server-side wrappers) which allow you to co
 
 #### RadSpreadProcessing
 
-[RadSpreadProcessing](http://www.telerik.com/products/wpf/spreadsheet-processing.aspx)
-is a .NET library that allows you to read, create and write Microsoft Excel (.XLSX) documents.
+[RadSpreadProcessing](http://www.telerik.com/products/wpf/spreadsheet-processing.aspx) is a .NET library that allows you to read, create and write Microsoft Excel (.XLSX) documents.
 
 It complements the Spreadsheet component and allows you to process the data on the server, but can be used on its own as well.
 
@@ -80,9 +79,7 @@ It complements the Spreadsheet component and allows you to process the data on t
 
 ## Other Kendo UI Incorporating Products
 
-Kendo UI Core is the free and open-source Kendo UI distribution, released under Apache v2.0 License.
-It provides access to a limited number of widgets and framework features, and to 1,000+ tests running across browsers for each commit to the [Kendo UI Core GitHub repository](https://github.com/telerik/kendo-ui-core).
-Kendo UI Core is suitable for open-source or commercial projects that do not require complex UI, such as Grid, Chart, etc., nor dedicated technical support. Kendo UI Core does not offer dedicated technical support.
+Kendo UI Core is the free and open-source Kendo UI distribution, released under Apache v2.0 License. It provides access to a limited number of widgets and framework features, and to 1,000+ tests running across browsers for each commit to the [Kendo UI Core GitHub repository](https://github.com/telerik/kendo-ui-core). Kendo UI Core is suitable for open-source or commercial projects that do not require complex UI, such as Grid, Chart, etc., nor dedicated technical support. Kendo UI Core does not offer dedicated technical support.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
