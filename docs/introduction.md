@@ -1,6 +1,6 @@
 ---
 title: Welcome to Kendo UI!
-page_title: Introduction | Kendo UI Docs
+page_title: Introduction | Telerik Kendo UI by Progress
 description: "Learn about the Kendo UI controls, their distributions, frameworks, tools, and utilities."
 previous_url: /index
 slug: welcometo_kendoui
@@ -11,18 +11,16 @@ position: 1
 
 ## Overview
 
-Kendo UI is an HTML5 user interface framework for building interactive and high-performance websites and applications.
+Telerik<sup>®</sup> Kendo UI<sup>®</sup> by Progress is an HTML5 user interface framework for building interactive and high-performance websites and applications.
 The framework comes with a library of 70+ UI widgets, an abundance of data-visualization gadgets, client-side data source, built-in MVVM (Model-View-ViewModel) library. Kendo UI provides AngularJS and Bootstrap integration.
 
 [Check Out Kendo UI Online Demos](http://demos.telerik.com/kendo-ui/)
 
 Kendo UI is distributed as part of several product units that you can choose from depending on your project requirements.
 
-### Telerik Kendo UI<sup>®</sup> Professional
+### Kendo UI Professional
 
-Kendo UI Professional is one of the commercial versions of Kendo UI.
-It is a comprehensive framework providing 70+ Kendo UI widgets, and includes a simple and consistent programming interface, a rock-solid DataSource, out-of-the-box themes, an MVVM framework, and more.
-Kendo UI Professional includes widgets for enterprise-grade line-of-business applications and is suitable for creating professional websites that require expert and timely technical support.
+Kendo UI Professional is one of the commercial versions of Kendo UI. It is a comprehensive framework providing 70+ Kendo UI widgets, and includes a simple and consistent programming interface, a rock-solid DataSource, out-of-the-box themes, an MVVM framework, and more. Kendo UI Professional includes widgets for enterprise-grade line-of-business applications and is suitable for creating professional websites that require expert and timely technical support.
 
 * [List of Kendo UI Components]({% slug bundle_supportfor_kendoui_components %})
 * [Browser Support]({% slug wbe_browserand_operating_system_support %})
@@ -30,7 +28,7 @@ Kendo UI Professional includes widgets for enterprise-grade line-of-business app
 * [Get a License](http://www.telerik.com/purchase/kendo-ui)
 * [Licensee Agreement](http://www.telerik.com/purchase/license-agreement/kendo-ui-professional)
 
-### Telerik Kendo UI Complete
+### Kendo UI Complete
 
 Kendo UI Complete incorporates all the products in the Kendo UI family - Kendo UI Professional, [UI for ASP.NET MVC](/aspnet-mvc/introduction), [UI for JSP](/jsp/introduction) and [UI for PHP](http://docs.telerik.com/kendo-ui/php/introduction).
 

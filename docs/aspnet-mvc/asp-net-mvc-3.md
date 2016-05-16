@@ -13,7 +13,7 @@ This article demonstrates how to use Telerik UI for ASP.NET MVC in ASP.NET MVC 3
 
 > **Important**
 >
-> The Telerik UI for ASP.NET MVC Visual Studio extensions ({% slug overview_visualstudio_aspnetmvc %}) automate the whole procedure which this document describes.
+> The [Telerik UI for ASP.NET MVC Visual Studio extensions]({% slug overview_visualstudio_aspnetmvc %}) automate the whole procedure which this document describes.
 
 ## Create New ASP.NET MVC 3 Applications
 

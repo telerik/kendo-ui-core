@@ -1,46 +1,22 @@
 ---
 title: Kendo UI 2016 Documentation Updates
-page_title: Kendo UI 2016 Documentation Updates | Kendo UI Backwards Compatibility
+page_title: Kendo UI 2016 Documentation Updates | Updates and Contribution
 description: "Learn about the latest updates in Kendo UI documentation released in 2016."
 slug: documentation_updates_2016_kendoui
+position: 1
 ---
 
 # Kendo UI 2016 Documentation Updates
 
-## Kendo UI Q2 2016
+## May 2016
 
 Below are listed the Kendo UI Q2 2016 release changes in the documentation as compared to the Kendo UI Q1 2016 SP1 ones.
 
-### UI for ASP.NET MVC
+### New Files
 
-Some **UI for ASP.NET MVC** folders and articles are now renamed or reside in new locations, which conceptually better match the topics they tackle.
+* The **Copyright** notice has been added.
 
-**Folders**
-
-<table style="width:100%">
-  <col width="25%">
-  <col width="25%">
-  <col width="25%">
-  <col width="25%">
-    <tr>
-      <th>Folder</th>
-      <th>New Name</th>
-      <th>Previous Location</th>
-      <th>New Location</th>
-    </tr>
-    <tr>
-      <td>HtmlHelpers</td>
-      <td>Components</td>
-      <td><strong>UI for ASP.NET MVC</strong></td>
-      <td><strong>UI for ASP.NET MVC</strong></td>
-    </tr>
-    <tr>
-      <td>ASP.NET Core MVC</td>
-      <td>Use with ASP.NET Core MVC</td>
-      <td><strong>UI for ASP.NET MVC</strong> > <strong>ASP.NET MVC Apps</strong></td>
-      <td><strong>UI for ASP.NET MVC</strong></td>
-    </tr>
-</table>
+### Existing Files
 
 **Articles**
 
@@ -56,6 +32,11 @@ Some **UI for ASP.NET MVC** folders and articles are now renamed or reside in ne
       <th>New Location</th>
     </tr>
     <tr>
+      <td>Help Improve Kendo UI Documentation</td>
+      <td>Contribute to Documentation</td>
+      <td><strong>Help Improve Kendo UI Documentation</strong></td>
+      <td><strong>Updates and Contribution</strong> > <strong>Contribute to Kendo UI Documentation</strong></td>
+    </tr>
     <tr>
       <td>ASP.NET MVC 3</td>
       <td>Use with ASP.NET MVC 3</td>
@@ -75,9 +56,7 @@ Some **UI for ASP.NET MVC** folders and articles are now renamed or reside in ne
     </tr>
 </table>
 
-### Styles and Appearance
-
-Some **Styles and Appearance** articles now share new locations, which conceptually better match the topics they tackle.
+**Folders**
 
 <table style="width:100%">
   <col width="25%">
@@ -85,10 +64,28 @@ Some **Styles and Appearance** articles now share new locations, which conceptua
   <col width="25%">
   <col width="25%">
     <tr>
-      <th>Article</th>
+      <th>Folders</th>
       <th>New Name</th>
       <th>Previous Location</th>
       <th>New Location</th>
+    </tr>
+    <tr>
+      <td>Documentation Updates</td>
+      <td>Updates and Contribution</td>
+      <td><strong>Documentation Updates</strong></td>
+      <td><strong>Updates and Contribution</strong></td>
+    </tr>
+    <tr>
+      <td>HtmlHelpers</td>
+      <td>Components</td>
+      <td><strong>UI for ASP.NET MVC</strong></td>
+      <td><strong>UI for ASP.NET MVC</strong></td>
+    </tr>
+    <tr>
+      <td>ASP.NET Core MVC</td>
+      <td>Use with ASP.NET Core MVC</td>
+      <td><strong>UI for ASP.NET MVC</strong> > <strong>ASP.NET MVC Apps</strong></td>
+      <td><strong>UI for ASP.NET MVC</strong></td>
     </tr>
     <tr>
       <td>Tips and Tricks</td>
@@ -98,13 +95,9 @@ Some **Styles and Appearance** articles now share new locations, which conceptua
     </tr>
 </table>
 
-## Kendo UI Q1 2016 SP1
+## March 2016
 
 Below are listed the Kendo UI Q1 2016 SP1 release changes in the documentation as compared to the Kendo UI Q1 2016 ones.
-
-### Getting Started
-
-Some **Getting Started** articles now share new locations, which conceptually better match the topics they tackle.
 
 <table style="width:100%">
   <col width="25%">
@@ -153,23 +146,6 @@ Some **Getting Started** articles now share new locations, which conceptually be
       <td><strong>Getting Started</strong> > <strong>Widgets</strong></td>
       <td><strong>Getting Started</strong> > <strong>Widget Basics</strong></td>
     </tr>
-</table>
-
-### UI for ASP.NET MVC
-
-Some **UI for ASP.NET MVC** articles now share new locations, which conceptually better match the topics they tackle.
-
-<table style="width:100%">
-  <col width="25%">
-  <col width="25%">
-  <col width="25%">
-  <col width="25%">
-    <tr>
-      <th>Article</th>
-      <th>New Name</th>
-      <th>Previous Location</th>
-      <th>New Location</th>
-    </tr>
     <tr>
       <td>Troubleshooting</td>
       <td>Common Issues</td>
@@ -190,7 +166,7 @@ Some **UI for ASP.NET MVC** articles now share new locations, which conceptually
     </tr>
 </table>
 
-### Creation of New Files
+### New Files
 
 In addition to the renaming and relocation of the above articles, some new ones are now created&mdash;from scratch or as a result of splitting existing ones&mdash;to the purpose of making the documented information more handy.
 
@@ -198,11 +174,11 @@ In addition to the renaming and relocation of the above articles, some new ones 
 * A new troubleshooting article on Validation is now available. Go to **UI for ASP.NET MVC** > **Troubleshooting** > **Validation** to check it out.
 * The **Globalization and Localization** article on Telerik UI for ASP.NET MVC is now split to list the two topics separately for a better navigation. The current location of them both is **UI for ASP.NET MVC** > **Globalization** and **UI for ASP.NET MVC** > **Localization** respectively.
 
-## Kendo UI Q1 2016
+## January 2016
 
 Below are listed the latest (Kendo UI Q1 2016 release) changes in the documentation as compared to the Kendo UI Q3 2015 ones.
 
-### Reorganization of Existing Files
+### Existing Files
 
 * The conceptual topic documentation on Kendo UI widgets is reorganized to correspond to the structure of the [Kendo UI live demo page](http://demos.telerik.com/kendo-ui/). The articles on Kendo UI controls are now listed in the **Widgets** folder. For example, **Widgets** > **Data Management** > **Grid** > **Overview**.
 * The new **Styles and Appearance** folder contains the combined articles on the layout and general appearance of the Kendo UI widgets that were previously referred to as Web and DataViz, such as the **Responsive Web Design** and **ThemeBuilder Overview** help topics.
