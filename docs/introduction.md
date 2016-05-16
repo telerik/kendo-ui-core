@@ -11,7 +11,7 @@ position: 1
 
 ## Overview
 
-Telerik<sup>®</sup> Kendo UI<sup>®</sup> by Progress is an HTML5 user interface framework for building interactive and high-performance websites and applications.
+Kendo UI<sup>®</sup> by Progress is an HTML5 user interface framework for building interactive and high-performance websites and applications.
 The framework comes with a library of 70+ UI widgets, an abundance of data-visualization gadgets, client-side data source, built-in MVVM (Model-View-ViewModel) library. Kendo UI provides AngularJS and Bootstrap integration.
 
 [Check Out Kendo UI Online Demos](http://demos.telerik.com/kendo-ui/)
