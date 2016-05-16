@@ -6,9 +6,9 @@ slug: overview_uiforjsp
 position: 1
 ---
 
-# Telerik UI for JSP Overview
+# Telerik<sup>®</sup> UI for JSP by Progress
 
-This article demonstrates how to download and install Telerik<sup>®</sup> UI for JSP by Progress and run a sample application.
+This article demonstrates how to download and install Telerik UI for JSP and run a sample application.
 
 ## Getting Started
 
