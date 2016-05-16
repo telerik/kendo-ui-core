@@ -58,8 +58,8 @@ The example below demonstrates how to reorder multiple items using the Kendo UI 
       }
     }).data("kendoSortable");
 
-    //_draggable will be changed to draggable (without underscore) after Q3 2015
-    listA._draggable.userEvents.bind("tap", function(e) {
+    // As of Q3 2015, _draggable is changed to draggable (without underscore).
+    listA.draggable.userEvents.bind("tap", function(e) {
       if (e.event.ctrlKey) {
         e.target.toggleClass("state-selected")  
       } else {
