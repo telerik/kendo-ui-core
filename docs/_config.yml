@@ -326,8 +326,11 @@ navigation:
         title: "2016"
         position: 1
     "updates":
-        title: "Documentation Updates"
+        title: "Updates and  Contribution"
         position: 14
+    "copyright":
+        title: "Copyright"
+        position: 15
     "*how-to":
         title: "How To"
         position: 200
