@@ -779,6 +779,24 @@ test("setOptions preserves options.dates", 1, function() {
     equal(calendar.options.dates.length, 1);
 });
 
+test("setOptions allows clearing options.dates", 2, function() {
+    var calendar = new Calendar(div, {
+        dates: [new Date()]
+    });
+
+    calendar.setOptions({
+        dates: []
+    });
+
+    equal(calendar.options.dates.length, 0);
+
+    calendar.setOptions({
+        dates: null
+    });
+
+    equal(calendar.options.dates.length, 0);
+});
+
 test("setOptions updates options.dates", 1, function() {
     var calendar = new Calendar(div, {
         dates: [new Date()]

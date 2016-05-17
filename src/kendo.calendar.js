@@ -179,10 +179,6 @@ var __meta__ = { // jshint ignore:line
 
             normalize(options);
 
-            if (!options.dates[0]) {
-                options.dates = that.options.dates;
-            }
-
             options.disableDates = getDisabledExpr(options.disableDates);
 
             Widget.fn.setOptions.call(that, options);
@@ -1358,7 +1354,7 @@ var __meta__ = { // jshint ignore:line
             options.depth = MONTH;
         }
 
-        if (!options.dates) {
+        if (options.dates === null) {
             options.dates = [];
         }
     }
