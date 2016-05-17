@@ -32,12 +32,12 @@ The example below demonstrates how to set the offline storage key.
 
 ###### Example
 
-    var dataSource = kendo.data.DataSource({
+    var dataSource = new kendo.data.DataSource({
         offlineStorage: "products-offline",
         transport: {
             read: {
                 url: "http://demos.telerik.com/kendo-ui/service/products",
-                type: "jsonp"
+                dataType: "jsonp"
             }
         },
         schema: {
