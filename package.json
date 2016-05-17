@@ -8,6 +8,8 @@
   "version": "1.0.0",
   "dependencies": {},
   "devDependencies": {
+    "webpack-stream": "^3.2.0",
+    "vinyl-named": "^1.1.0",
     "amd-optimize": "0.6.1",
     "browser-sync": "~2.9.10",
     "colors": "^1.1.2",
@@ -108,9 +110,17 @@
       "baseSurfaceEventTests": true
     }
   },
+<<<<<<< HEAD
   "jshintFiles": [
     "src/kendo*.js",
     "src/messages/kendo*.js",
     "tests/**/test-helper.js"
   ]
+=======
+    "jshintFiles": [
+        "src/kendo*.js",
+        "src/messages/kendo*.js",
+        "tests/**/test-helper.js"
+    ]
+>>>>>>> 2b5ba41... NPM build
 }
