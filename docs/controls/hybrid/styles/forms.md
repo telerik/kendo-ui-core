@@ -110,7 +110,7 @@ Releases before Kendo UI Q3 2012 require the following rule to disable the Andro
         -moz-transform: none;
     }
 
-## Nova Theme Features
+## Forms Styling Features
 
 ### Required Indicator
 
