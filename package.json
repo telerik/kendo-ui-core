@@ -8,8 +8,6 @@
   "version": "1.0.0",
   "dependencies": {},
   "devDependencies": {
-    "webpack-stream": "^3.2.0",
-    "vinyl-named": "^1.1.0",
     "amd-optimize": "0.6.1",
     "browser-sync": "~2.9.10",
     "colors": "^1.1.2",
@@ -64,6 +62,9 @@
     "through2": "^2.0.0",
     "typescript": "^1.5.3",
     "vinyl": "^1.0.0",
+    "vinyl-named": "^1.1.0",
+    "webpack": "^1.13.0",
+    "webpack-stream": "^3.2.0",
     "xmlbuilder": "0.4.2",
     "yargs": "~3.27.0"
   },
@@ -107,9 +108,9 @@
       "baseSurfaceEventTests": true
     }
   },
-    "jshintFiles": [
-        "src/kendo*.js",
-        "src/messages/kendo*.js",
-        "tests/**/test-helper.js"
-    ]
+  "jshintFiles": [
+    "src/kendo*.js",
+    "src/messages/kendo*.js",
+    "tests/**/test-helper.js"
+  ]
 }
