@@ -64,7 +64,7 @@ Here is an enhanced example, which shows how to hide or show the scrollbar, depe
 
 ### Restore Scroll Positions
 
-In some scenarios, the Grid scroll position may be reset when the widget is rebound. If you want to avoid this behavior, save the scroll position in the [`dataBinding`](/api/javascript/ui/grid#events-dataBinding) event and restore it in the [`dataBound`](/api/javascript/ui/grid#events-dataBound) event. The scrollable container is `div.k-grid-content` and you can retrieve it as a child element of the widget [`wrapper`]({% slug widgetwrapperandelement_references_gettingstarted %}).
+In some scenarios, the Grid scroll position may be reset when the widget is rebound. If you want to avoid this behavior, save the scroll position in the [`dataBinding`](/api/javascript/ui/grid#events-dataBinding) event and restore it in the [`dataBound`](/api/javascript/ui/grid#events-dataBound) event. The scrollable container is `div.k-grid-content` and you can retrieve it as a child element of the widget [`wrapper`]({% slug widgetwrapperandelement_references_gettingstarted %}). If virtual scrolling is enabled, the scrollable data container is `div.k-virtual-scrollable-wrap` and it is scrolled only horizontally.
 
 ###### Example
 
@@ -77,16 +77,16 @@ In some scenarios, the Grid scroll position may be reset when the widget is rebo
 
         //save the scroll position before the new data is rendered
         function onGridDataBinding (e) {
-            var container = e.sender.wrapper.children(".k-grid-content");
+            var container = e.sender.wrapper.children(".k-grid-content"); // or ".k-virtual-scrollable-wrap"
             scrollOffset.left = container.scrollLeft();
-            scrollOffset.top = container.scrollTop();
+            scrollOffset.top = container.scrollTop(); // use only if virtual scrolling is disabled
         }
 
         //restore the scroll position after the new data is rendered
         function onGridDataBound (e) {
-            var container = e.sender.wrapper.children(".k-grid-content");
+            var container = e.sender.wrapper.children(".k-grid-content"); // or ".k-virtual-scrollable-wrap"
             container.scrollLeft(scrollOffset.left);
-            container.scrollTop(scrollOffset.top);
+            container.scrollTop(scrollOffset.top); // use only if virtual scrolling is disabled
         }
 
         // attach the Grid event handlers
