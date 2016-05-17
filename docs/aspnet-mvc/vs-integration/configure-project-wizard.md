@@ -3,7 +3,7 @@ title: Project Wizard Configuration
 page_title: Project Wizard Configuration | UI for ASP.NET MVC Visual Studio Integration
 description: "Learn how to configure a Telerik UI for ASP.NET MVC application."
 slug: projectwizardconfig_visualstudio_aspnetmvc
-position: 3
+position: 4
 ---
 
 # Project Wizard Configuration

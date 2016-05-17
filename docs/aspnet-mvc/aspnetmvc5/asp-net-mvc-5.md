@@ -2,7 +2,7 @@
 title: Use with ASP.NET MVC 5
 page_title: Use with ASP.NET MVC 5 | Telerik UI for ASP.NET MVC
 description: "Use Telerik UI for ASP.NET MVC in ASP.NET MVC 5 applications."
-previous_url: /aspnet-mvc/aspnetmvc-apps/asp-net-mvc-5
+previous_url: /aspnet-mvc/aspnetmvc-apps/asp-net-mvc-5, /aspnet-mvc/asp-net-mvc-5
 slug: aspnetmvc5_aspnetmvc
 position: 13
 ---

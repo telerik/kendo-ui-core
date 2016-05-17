@@ -3,7 +3,7 @@ title: New Project Wizards
 page_title: New Project Wizards | UI for ASP.NET MVC Visual Studio Integration
 description: "Learn how to create a new Telerik UI for ASP.NET MVC application."
 slug: newprojectwizards_visualstudio_aspnetmvc
-position: 2
+position: 3
 ---
 
 # New Project Wizard
