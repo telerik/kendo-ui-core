@@ -4453,6 +4453,10 @@ The model of the source row.
 
 The model of the new parent row.
 
+##### e.dropTarget `Element`
+
+The element that the node is placed over.
+
 ##### e.sender `kendo.ui.TreeList`
 
 The widget instance which fired the event.
