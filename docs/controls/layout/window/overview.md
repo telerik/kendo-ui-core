@@ -352,4 +352,4 @@ Other articles on Kendo UI Upload:
 * [How to Restrict Window Positioning]({% slug howto_restrictpositioning_window %})
 * [How to Use Custom Action Icons]({% slug howto_customactionicons_window %})
 * [How to Use MVVM Binding for Window Data Editing]({% slug howto_usemvvmbinding_forwindowdataediting_mvvm_window %})
-* [Upload JavaScript API Reference](/api/javascript/ui/window)
+* [Window JavaScript API Reference](/api/javascript/ui/window)
