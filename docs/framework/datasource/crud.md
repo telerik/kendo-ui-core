@@ -204,7 +204,7 @@ If the Grid is bound to an [`ObservableArray`](/api/javascript/data/observablear
             var idx,
                 l = sampleData.length;
 
-            for (var j; j < l; j++) {
+            for (var j=0; j < l; j++) {
                 if (sampleData[j].ProductID == id) {
                     return j;
                 }
