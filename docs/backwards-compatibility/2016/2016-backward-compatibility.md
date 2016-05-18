@@ -8,7 +8,7 @@ slug: breakingchanges2016_kendoui
 
 # Kendo UI 2016 Breaking Changes
 
-## Kendo UI 2016 Q2
+## Kendo UI 2016 R2
 
 ### Changes from 2016 Q1 SP1 (2016.1.226)
 
@@ -22,7 +22,7 @@ slug: breakingchanges2016_kendoui
 
 #### Breaking Changes
 
-* **Grunt was replaced with Gulp as the preferred build tool for Kendo UI. From now on the Gruntfile.js file is replaced with Gulpfile.js as part of the Kendo UI distribution.
+* **Grunt was replaced with Gulp as the preferred build tool for Kendo UI. From now on the Gruntfile.js file is replaced with Gulpfile.js as part of the Kendo UI distribution.**
 
 * **DropDownList/ComboBox/MultiSelect**: The widget will clear the applied filter if the user decides to set new value using the [`value`](/api/javascript/ui/dropdownlist#methods-value) method.
 
