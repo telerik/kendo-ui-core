@@ -53,9 +53,9 @@ Fore more details, refer to the [article on the priorities of AngularJS directiv
 
 ### Widgets with ng-model Directives Reflect No Model Value
 
-As of Angular 1.4.9 widgets initialized from the `select` element do not reflect changes to the model field. This is due to a change in the AngularJS implementation related to `ngModel.$render`. In the new Angular versions, that method is overridden in favor of a custom Angular implementation that supports adding custom `OPTION` elements. This enhancement, however, breaks the Kendo UI `ngModel` support, because it also depends on the `ngModel.$render` method to reflect any changes done in the model.
+As of Angular 1.4.9, widgets initialized from the `select` element do not reflect changes to the model field. This is due to a change in the Angular implementation related to `ngModel.$render`. In the new AngularJS versions, that method is overridden in favor of a custom Angular implementation that supports adding custom `option` elements. This enhancement, however, breaks the Kendo UI `ngModel` support, because it also depends on the `ngModel.$render` method to reflect any changes done in the model.
 
-Basically, the Kendo UI [`ngModel.$render`](https://github.com/telerik/kendo-ui-core/blob/master/src/kendo.angular.js#L388) is directly overridden by the Angular new function.
+Basically, the Kendo UI [`ngModel.$render`](https://github.com/telerik/kendo-ui-core/blob/master/src/kendo.angular.js#L388) is directly overridden by the new Angular function.
 
 **Solution**
 
