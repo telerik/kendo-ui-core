@@ -32318,7 +32318,7 @@ A function that can be used to create a custom visual for the notes. The availab
 
 Specifies if the chart can be zoomed.
 
-### Example - enable zooming
+##### Example - enable zooming
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
@@ -32336,7 +32336,7 @@ Specifies if the chart can be zoomed.
 
 Specifies if the chart can be zoomed using the mouse wheel.
 
-### Example - disable mouse wheel zoom
+##### Example - disable mouse wheel zoom
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
@@ -32356,7 +32356,7 @@ Specifies if the chart can be zoomed using the mouse wheel.
 
 Specifies an axis that should not be zoomed. The supported values are `none`, `x` and `y`.
 
-### Example - disable mouse wheel zoom for the y axis
+##### Example - disable mouse wheel zoom for the y axis
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
@@ -32376,7 +32376,7 @@ Specifies an axis that should not be zoomed. The supported values are `none`, `x
 
 Specifies if the chart can be zoomed using selection.
 
-### Example - disable selection zoom
+##### Example - disable selection zoom
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
@@ -32401,7 +32401,7 @@ Specifies a keyboard key that should be pressed to activate the selection. The s
 * "shift" - The "shift" key should be pressed.
 * "alt" - The "alt" key should be pressed.
 
-### Example - specify that no key needs be pressed
+##### Example - specify that no key needs be pressed
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
@@ -32423,7 +32423,7 @@ Specifies a keyboard key that should be pressed to activate the selection. The s
 
 Specifies an axis that should not be zoomed. The supported values are `none`, `x` and `y`.
 
-### Example - disable selection zoom for the y axis
+##### Example - disable selection zoom for the y axis
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
