@@ -151,6 +151,14 @@ You can also create a DataSource just by specifying its configuration values inl
 
 This example specifies a DataSource configuration, but does not actually create an instance of one. The `kendo.data.DataSource.create(that.options.dataSource)` takes this configuration object and returns a new DataSource instance with the specified configuration.
 
+> **Important**  
+>
+> To replicate the Kendo UI MultiSelect data binding behavior, assign the binding explicitly:
+>
+> ```
+> kendo.data.binders.widget.multiSelectCustom = kendo.data.binders.widget.multiselect;
+> ```
+
 ## Handle Events
 
 ### Bind to Change Events
@@ -188,7 +196,7 @@ The way the widget code now looks like is shown in the example below.
             _dataSource: function() {
                 var that = this;
                 // returns the datasource OR creates one if using an array or a configuration
-                that.dataSource = kendo.data.DataSource.create(that.option.dataSource);
+                that.dataSource = kendo.data.DataSource.create(that.options.dataSource);
 
 				// bind to the change event to refresh the widget
                 that.dataSource.bind(CHANGE, function() {
@@ -554,6 +562,7 @@ kendo.bind(document.body, viewModel);
 
 In order for a widget to support [`value` binding](http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/value), you need to:
 
+>>>>>>> 24021f0... Merge pull request #1674 from telerik/Alex-Bubblemaster-patch-1
 * Add a `value` method to the widget, which sets the current widget value and returns the current value if no arguments are passed.
 * [Trigger](http://docs.telerik.com/kendo-ui/api/javascript/ui/widget#methods-trigger) the widget change event when the widget value is changed.
 
