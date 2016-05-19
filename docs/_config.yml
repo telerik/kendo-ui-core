@@ -248,8 +248,8 @@ navigation:
         title: "Visual Studio Integration"
         position: 4
     "aspnet-mvc/helpers":
-        title: "Components"
-        position: 5
+        title: "Widgets"
+        position: 17
     "aspnet-mvc/helpers/grid/binding":
         title: "Binding"
         position: 6
