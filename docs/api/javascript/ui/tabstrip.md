@@ -1026,7 +1026,7 @@ The content element of the activated tab.
 
 #### Attach activate event handler during initialization; detach via unbind()
 
-    <div id="tabstrip">
+    <div id="tabStrip">
         <ul>
             <li>Tab 1</li>
             <li>Tab 2</li>
@@ -1285,4 +1285,3 @@ The content element of the activated tab.
         var tabStrip = $("#tabStrip").kendoTabStrip().data("kendoTabStrip");
         tabStrip.bind("show", onShow);
     </script>
-
