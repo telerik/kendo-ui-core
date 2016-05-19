@@ -3647,6 +3647,8 @@ Executes the specified query over the data items. Makes a HTTP request if bound 
 This method is useful when you need to modify several parameters of the data request at the same time (e.g. filtering and sorting).
 If you execute `filter()` and then `sort()`, the DataSource will make two separate requests. With `query()`, it will make one request.
 
+> This method will remove the current sort, filter, group, aggregates descriptors and paging information, if such are not provided as arguments.
+
 #### Parameters
 
 ##### options `Object` *(optional)*
