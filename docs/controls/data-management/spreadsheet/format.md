@@ -24,7 +24,7 @@ The example below demonstrates how to display a number with up to three decimals
 
     #.###
 
-The example below demonstrates how to display positive numbers, or zero, in green, and negative numbers in red.     
+The example below demonstrates how to display positive numbers, or zero, in green, and negative numbers in red.
 
 ###### Example
 
@@ -129,6 +129,24 @@ The Spreadsheet does not support the following options otherwise available in Ex
 
 - Exponent (“scientific”) notation (`E+`, `E-` Excel formats)
 - Filling cell width (`*` Excel format)
+
+## Default format strings
+
+The default format strings that are shown in the formatting drop-down are stored in the `kendo.spreadsheet.formatting` object.
+
+| Format identifier | Value                                                                         |
+|-------------------|-------------------------------------------------------------------------------|
+| automatic         | Infer formatting by parsing the cell value                                    |
+| number            | Format number, with precision of 2 decimals                                   |
+| percent           | Format percentage points, with precision of 2 decimals                        |
+| financial         | Format financial value, accounting for positive / negative / zero values      |
+| currency          | Format currency value, accounting for positive / negative values              |
+| date              | Format value as date                                                          |
+| time              | Format value as time                                                          |
+| dateTime          | Format value as date-time                                                     |
+| duration          | Format as elapsed duration (in hours / minutes / seconds)                     |
+
+You can use the above formats with the [Range value method](/api/javascript/spreadsheet/range#methods-format), like this: `sheet.range("A1").format(kendo.spreadsheet.formatting.currency)`.
 
 ## See Also
 
