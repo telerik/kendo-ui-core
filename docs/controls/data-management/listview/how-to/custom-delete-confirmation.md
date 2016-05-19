@@ -1,13 +1,13 @@
 ---
-title: Add custom Delete confirmation dialog
-page_title: Add custom Delete confirmation dialog | Kendo UI ListView
-description: "Learn how to add a custom 'delete' confirmation dialog the ListView"
+title: Add Custom Delete Confirmation Dialog
+page_title: Add Custom Delete Confirmation Dialog | Kendo UI ListView
+description: "Learn how to add a custom Delete confirmation dialog to the ListView."
 slug: add_custom_delete_confirmation_dialog
 ---
 
-# Add custom Delete confirmation dialog
+# Add Custom Delete Confirmation Dialog
 
-The example below demonstrates how to add a custom 'delete' confirmation dialog the Kendo UI ListView widget.
+The example below demonstrates how to add a custom **Delete** confirmation dialog to the Kendo UI ListView widget.
 
 ###### Example
 
@@ -40,10 +40,10 @@ The example below demonstrates how to add a custom 'delete' confirmation dialog 
             </div>
         </div>
     </script>
-  
+
     <script type="text/x-kendo-template" id="confirmTemplate">
-        Delete <strong>#= ProductName #</strong> ? </p> 
-        We have #= UnitsInStock # units in stock. </p> 
+        Delete <strong>#= ProductName #</strong> ? </p>
+        We have #= UnitsInStock # units in stock. </p>
         <button class="k-button" id="yesButton">Yes</button>
         <button class="k-button" id="noButton"> No</button>
     </script>
@@ -86,7 +86,7 @@ The example below demonstrates how to add a custom 'delete' confirmation dialog 
         confirmPopup.center().open();  
 
         $("#yesButton").click(function(){
-          listView.dataSource.remove(product)  //prepare a "destroy" request 
+          listView.dataSource.remove(product)  //prepare a "destroy" request
           listView.dataSource.sync()  //actually send the request (might be ommited if the autoSync option is enabled in the dataSource)
           confirmPopup.close();
         })
@@ -142,11 +142,11 @@ The example below demonstrates how to add a custom 'delete' confirmation dialog 
 
       $("#confirmation").kendoWindow({
         title: "Are you sure?",
-        visible: false, 
+        visible: false,
         width: "250px",
         height: "120px",
       })
-      
+
       $("#listView").kendoListView({
         remove: function(e) {                
           if(!confirm("Do you want to delete " + e.model.get("ProductName") + "?")){
@@ -264,5 +264,6 @@ The example below demonstrates how to add a custom 'delete' confirmation dialog 
 Other articles on Kendo UI ListView:
 
 * [ListView JavaScript API Reference](/api/javascript/ui/listview)
+* [How to Filter Using Slider Selection]({% slug howto_filter_using_slider_selection_listview %})
 * [How to Persist Row Selection during Data Operations]({% slug howto_persists_row_selection_listview %})
 * [How to Reorder Using Drag-and-Drop and Kendo UI Touch]({% slug howto_reorder_using_draganddrop_kendouitouch_listview %})
