@@ -153,7 +153,7 @@ This example specifies a DataSource configuration, but does not actually create 
 
 > **Important**  
 >
-> To replicate the Kendo UI MultiSelect data binding behaviour, assign the binding explicitly:
+> To replicate the Kendo UI MultiSelect data binding behavior, assign the binding explicitly:
 >
 > ```
 > kendo.data.binders.widget.multiSelectCustom = kendo.data.binders.widget.multiselect;
