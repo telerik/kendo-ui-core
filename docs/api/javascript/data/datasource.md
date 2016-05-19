@@ -2416,6 +2416,66 @@ Specifies the name of the server-side method of the SignalR hub responsible for 
 
 Specifies the name of the server-side method of the SignalR hub responsible for updating data items.
 
+### transport.submit `Function`
+
+A function that will handle create, update and delete operations in a single batch.
+
+Typically you'd have `transport.read` and `transport.submit` operations defined together.
+The `transport.create`, `transport.update` and `transport.delete` operations will not be executed in this case.
+
+> **Important**
+>
+> This function will only be invoked when the DataSource is in [batch mode](#configuration-batch)
+
+#### Parameters
+
+##### e.data `Object`
+
+An object containing the created (`e.data.created`), updated (`e.data.updated`) and destroyed (`e.data.destroyed`) items.
+
+##### e.success `Function`
+
+A callback that should be called for each operation with two parameters - items and operation. See example below.
+
+##### e.fail `Function`
+
+A callback that should be called in case of failure of any of the operations.
+
+##### Example - Declare transport submit function
+
+<script>
+    var dataSource = new kendo.data.DataSource({
+        batch: true,
+        transport: {
+          submit: function(e) {
+            // Check out the network tab on "Save Changes"
+            $.ajaxBatch({
+              url: "<your service URL>",
+              data: e.data
+            })
+            .done(function() {
+              e.success(e.data.created, "create");
+              e.success([], "update");
+              e.success([], "destroy");
+            })
+            .fail(function() {
+              e.error();
+            });
+          },
+          read: function(e) {
+            $.ajax({
+              url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers",
+              dataType: "jsonp",
+              data: data,
+              jsonp: "$callback"
+            })
+            .done(e.success)
+            .fail(e.error);
+          }
+        }
+      });
+</script>
+
 ### transport.update `Object|String|Function`
 
 The configuration used when the data source saves updated data items. Those are data items whose fields have been updated.
