@@ -24,7 +24,7 @@ HTTP access to SQL Server Analysis Services can be enabled by using a MSMDPUMP.d
 
 For detailed information on how to set up the MSMDPUMP.ddl extension, follow the [MSDN HTTP access tutorial](http://technet.microsoft.com/en-us/library/gg492140.aspx).
 
-To find an online accessible OLAP service for test purposes, follow [this link](http://demos.telerik.com/olap/msmdpump.dll).
+For an online accessible OLAP service for test purposes, use http://demos.telerik.com/olap/msmdpump.dll.
 
 ## Enable Cross-Domain Access
 
