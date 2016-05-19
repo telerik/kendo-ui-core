@@ -8,8 +8,8 @@ position: 2
 
 # List of Formulas and Functions
 
-| FORMULAS AND FUNCTIONS	| DESCRIPTION				                                    
-| :--- 						| :---						                                    
+| FORMULAS AND FUNCTIONS	  | DESCRIPTION				                                    
+| :--- 						          | :---						                                    
 | ABS                       | Returns the absolute (nonnegative) value of a number                      
 | ACOS                      | Returns the principal value of the arccosine of a number. The angle is returned in radians.
 | ACOSH                     | Returns the principal value of the inverse hyperbolic cosine of a number  
