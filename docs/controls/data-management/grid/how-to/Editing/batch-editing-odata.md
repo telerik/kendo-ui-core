@@ -1,21 +1,19 @@
 ---
-title: Batch Editing with OData
-page_title: Batch Editing with OData | Kendo UI Grid
+title: Implement Batch Editing with OData
+page_title: Implement Batch Editing with OData | Kendo UI Grid
 description: "Learn how to implement batch editing with the Kendo UI Grid when binding to OData service."
 slug: howto_batch_editing_odata_grid
 ---
 
-# Batch Editing with OData
+# Implement Batch Editing with OData
 
-The Grid does not come with a built-in support for batch editing when binding to OData.
-This can be achieved using a third-party library.
+The Grid does not come with a built-in support for batch editing when binding to OData. Achieve this by using a third-party library.
 
-For the example below we'll be using [Batch.js by Pavel Volgarev](https://github.com/volpav/batchjs) to submit the actual request.
-See also [Batch Processing](http://www.odata.org/documentation/odata-version-3-0/batch-processing/) in the OData 3.0 documentation.
+To submit the actual request, the example below uses [Batch.js by Pavel Volgarev](https://github.com/volpav/batchjs). See also [Batch Processing](http://www.odata.org/documentation/odata-version-3-0/batch-processing/) in the OData 3.0 documentation.
 
 > **Important**
 >
-> Note that I'm also using an experimental `transport.submit` member of the Kendo UI DataSource. This yet to be included as an officially supported API.
+> Note that an experimental `transport.submit` member of the Kendo UI DataSource is used. This is yet to be included as an officially supported API.
 
 ###### Example
 
