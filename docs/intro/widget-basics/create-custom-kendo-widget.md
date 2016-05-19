@@ -151,6 +151,14 @@ You can also create a DataSource just by specifying its configuration values inl
 
 This example specifies a DataSource configuration, but does not actually create an instance of one. The `kendo.data.DataSource.create(that.options.dataSource)` takes this configuration object and returns a new DataSource instance with the specified configuration.
 
+> **Important**  
+>
+> To replicate the Kendo UI MultiSelect data binding behaviour, assign the binding explicitly:
+>
+> ```
+> kendo.data.binders.widget.multiSelectCustom = kendo.data.binders.widget.multiselect;
+> ```
+
 ## Handle Events
 
 ### Bind to Change Events
