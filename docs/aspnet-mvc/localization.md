@@ -2,7 +2,6 @@
 title: Localization
 page_title: Localization | Telerik UI for ASP.NET MVC
 description: "Localize the content of a Telerik UI for ASP.NET MVC application."
-previous_url: /aspnet-mvc/localization
 slug: localization_aspnetmvc
 position: 8
 ---

@@ -3,7 +3,7 @@ title: Project Wizard Conversion
 page_title: Project Wizard Conversion | UI for ASP.NET MVC Visual Studio Integration
 description: "Learn how to convert an existing ASP.NET MVC application to a Telerik UI for ASP.NET MVC application."
 slug: projectwizardcoversion_visualstudio_aspnetmvc
-position: 6
+position: 5
 ---
 
 # Project Wizard Conversion

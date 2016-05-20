@@ -2,7 +2,6 @@
 title: Globalization
 page_title: Globalization | Telerik UI for ASP.NET MVC
 description: "Use different cultures with Telerik UI for ASP.NET MVC."
-previous_url: /aspnet-mvc/globalization
 slug: globalization_aspnetmvc
 position: 7
 ---

@@ -232,21 +232,15 @@ navigation:
     "aspnet-mvc":
         title: "UI for ASP.NET MVC"
         position: 8
-    "aspnet-mvc/getting-started":
-        title: "Getting Started"
-        position: 1
-    "aspnet-mvc/getting-started/migration":
-        title: "Migration"
-        position: 8
-    "aspnet-mvc/data-source":
-        title: "Data Source"
-        position: 2
-    "aspnet-mvc/validation":
-        title: "Validation"
-        position: 3
+    "aspnet-mvc/mvc-6":
+        title: "Use with ASP.NET Core MVC"
+        position: 14
     "aspnet-mvc/vs-integration":
         title: "Visual Studio Integration"
-        position: 4
+        position: 15
+    "aspnet-mvc/migration":
+        title: "Migrate From Telerik Extensions"
+        position: 16
     "aspnet-mvc/helpers":
         title: "Widgets"
         position: 17
@@ -269,24 +263,12 @@ navigation:
         position: 10
     "aspnet-mvc/helpers/hybrid":
         title: "Hybrid UI"
-    "aspnet-mvc/aspnetmvc3":
-        title: "ASP.NET MVC 3"
-        position: 6
-    "aspnet-mvc/aspnetmvc4":
-        title: "ASP.NET MVC 4"
-        position: 7
-    "aspnet-mvc/aspnetmvc5":
-        title: "ASP.NET MVC 5"
-        position: 8
-    "aspnet-mvc/mvc-6":
-        title: "ASP.NET Core MVC"
-        position: 9
     "aspnet-mvc/troubleshoot":
         title: "Troubleshooting"
-        position: 10
+        position: 18
     "aspnet-mvc/tutorials":
         title: "Tutorials"
-        position: 11
+        position: 19
     "aspnet-mvc/tutorials/quickstart":
         title: "Quick Start Guide"
         position: 1

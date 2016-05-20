@@ -3,7 +3,7 @@ title: Latest Version Retrieval
 page_title: Latest Version Retrieval | UI for ASP.NET MVC Visual Studio Integration
 description: "Learn how to keep your projects updated when using Telerik UI for ASP.NET MVC."
 slug: latestversionretrieval_visualstudio_aspnetmvc
-position: 7
+position: 6
 ---
 
 # Latest Version Retrieval
