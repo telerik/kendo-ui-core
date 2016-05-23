@@ -13373,7 +13373,7 @@ A string value is interpreted as [series.stack.group](#configuration-series.stac
 
 > The `stack` options is supported when [series.type](#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
 
-> Stack settings of the first series are applied to the rest of the series.
+> Stack settings of the first series are inherited as a default value by the rest of the series, in case they are not overridden.
 
 #### Example - configure stack series
 
