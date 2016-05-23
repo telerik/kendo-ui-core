@@ -20963,6 +20963,10 @@ The end position of the plot band in axis units.
 
 If set to `true` the value axis direction will be reversed. By default categories are listed from left to right and from bottom to top.
 
+> **Important**
+>
+> A reverse value axis is not supported for radar and polar charts.
+
 #### Example - reverse the value axis
 
     <div id="chart"></div>
