@@ -469,7 +469,7 @@ The pane(s) to be removed.
 
 ### size
 
-Set the size of the pane. Setting this value will cause the widget to redraw and it will trigger the `resize` event.
+Get or set the size of the pane. Setting this value will cause the widget to redraw and it will trigger the `resize` event.
 
 #### Parameters
 
@@ -477,10 +477,26 @@ Set the size of the pane. Setting this value will cause the widget to redraw and
 
 The pane to be resized.
 
-##### value `String`
+##### value `String` *(optional)*
 
 The new size of the pane defined as pixels (i.e. "200px") or as a percentage (i.e. "50%").
 Note: This value must not exceed **panes.max** or be less then **panes.min**.
+
+#### Returns
+
+`Object` the pane size.
+
+#### Example
+
+    <div id="splitter">
+      <div>Pane A</div>
+      <div>Pane B</div>
+    </div>
+    <script>
+    $("#splitter").kendoSplitter();
+    var splitter = $("#splitter").data("kendoSplitter");
+    var size = splitter.size(".k-pane:first");
+    </script>
 
 #### Example
 
