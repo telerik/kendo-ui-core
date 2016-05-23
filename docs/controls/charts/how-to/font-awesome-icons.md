@@ -7,9 +7,90 @@ slug: howto_fontawesomeicons_charts
 
 # Use FontAwesome in Labels
 
-Visual templates allow you to render font icons in Chart labels. The Chart labels cannot contain HTML markup. To get around this, use visual templates and construct the labels by using the [Drawing API]({% slug overview_kendoui_drawingapi %}).
+The Chart labels cannot contain HTML markup, so we can't use Font Awesome via CSS styles. We have several options to get around this.
 
-The example below demonstrates font icons in category axis labels&mdash;that is, how to construct two [Text](/api/javascript/drawing/text) shapes and position them in a [Layout](/api/javascript/drawing/layout). The first `Text` element contains the FontAwesome icon. The second one is a plain text label.
+## Use Unicode Code Points
+
+The simplest approach is to use the Unicode symbols from the font directly.
+One obvious drawback is that we're limited to Font Awesome for the entire label.
+
+###### Example - Font Awesome Icons in Series Labels with Unicode
+
+```html
+    <!-- Include FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css">
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        categoryAxis: {
+          categories: ["Foo"],
+          labels: {
+            font: "16px FontAwesome",
+
+            // Character codes for FontAwesome available here:
+            // https://fortawesome.github.io/Font-Awesome/cheatsheet/
+            //
+            // For example:
+            // [&#xf251;] becomes String.fromCharCode(0xf251)
+            template: String.fromCharCode(0xf005) + " #: value #"
+          }
+        },
+        series: [{
+          data: [1]
+        }]
+      });
+    </script>
+```
+
+###### Example - Font Awesome Icons in Series Notes with Unicode
+
+```html
+    <!-- Include FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css">
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            value: 1,
+            noteText: "A"
+          }, {
+            value: 2,
+            noteText: "B"
+          }]
+        },
+        series: [{
+          field: "value",
+          noteTextField: "noteText",
+          type: "line",
+          notes: {
+            label: {
+              font: "30px FontAwesome",
+              margin: { right: 5 },
+
+              // Character codes for FontAwesome available here:
+              // https://fortawesome.github.io/Font-Awesome/cheatsheet/
+              //
+              // For example:
+              // [&#xf251;] becomes String.fromCharCode(0xf251)
+              template: String.fromCharCode(0xf2ac)
+            },
+            icon: {
+              visible: false
+            }
+          }
+        }]
+      });
+    </script>
+```
+
+## Render Custom Visuals
+
+Visual templates are the most flexible way to override the rendering of chart elements. They allow you to construct the labels by using the [Drawing API]({% slug overview_kendoui_drawingapi %}).
+
+The example below demonstrates how to construct a visual using two [Text](/api/javascript/drawing/text) shapes and position them in a [Layout](/api/javascript/drawing/layout). The first `Text` element contains the FontAwesome icon. The second one is a plain text label.
 
 ###### Example
 
@@ -33,7 +114,10 @@ The example below demonstrates font icons in category axis labels&mdash;that is,
                 justifyContent: "center",
 
                 // Align items on center line
-                alignItems: "center"
+                alignItems: "center",
+
+                // Leave some space between the elements
+                spacing: 5
               });
 
               // Character codes for FontAwesome available here:
