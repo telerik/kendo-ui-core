@@ -136,7 +136,6 @@ var __meta__ = { // jshint ignore:line
                     that.trigger("dataBinding");
                 },
                 dataBound: listBoundHandler,
-                listBound: listBoundHandler,
                 height: currentOptions.height,
                 dataValueField: currentOptions.dataValueField,
                 dataTextField: currentOptions.dataTextField,
@@ -168,6 +167,7 @@ var __meta__ = { // jshint ignore:line
                 that.listView = new kendo.ui.VirtualList(that.ul, listOptions);
             }
 
+            that.listView.bind("listBound", proxy(that._listBound, that));
             that._setListValue();
         },
 
