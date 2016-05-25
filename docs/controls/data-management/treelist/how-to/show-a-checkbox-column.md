@@ -37,11 +37,23 @@ The example below demonstrates how to show a checkbox column bound to the item m
       ]
     });
 
+    function toggleAll(e) {
+      var view = dataSource.view();
+      var checked = e.target.checked;
+      for (var i = 0; i < view.length; i++) {
+        view[i].set("checked", checked);
+      }
+    }
+
     $("#treelist").kendoTreeList({
       dataSource: dataSource,
       height: 540,
       columns: [
-        { template: "<input type='checkbox' data-bind='checked: checked' />", width: 32 },
+        {
+          headerTemplate: "<input type='checkbox' onclick='toggleAll(event)' />",
+          template: "<input type='checkbox' data-bind='checked: checked' />",
+          width: 32
+        },
         { field: "Position", expandable: true },
         { field: "Name" },
         { field: "Phone" }
