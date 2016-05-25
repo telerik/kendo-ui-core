@@ -441,4 +441,34 @@
 
         combobox.value(10);
     });
+
+    test("use DataSource that was already read", 1, function() {
+        var noErrors = true;
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: function(o) {
+                    o.success([{text: "asd", value: 1}]);
+                }
+            }
+        });
+        dataSource.read();
+        try {
+            var combobox = new ComboBox(select, {
+                close: function(e) { e.preventDefault(); },
+                height: CONTAINER_HEIGHT,
+                animation: false,
+                filter: "contains",
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: dataSource,
+                virtual: {
+                    valueMapper: function(o) { o.success(o.value); },
+                    itemHeight: 20
+                }
+            });
+        } catch(err) {
+            noErrors = false;
+        }
+        ok(noErrors);
+    });
 })();
