@@ -173,8 +173,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "canceledit": "Annuler",
     "update": "Mettre à jour",
     "edit": "Éditer",
-    "excel": "Export to Excel",
-    "pdf": "Export to PDF",
+    "excel": "Exporter vers Excel",
+    "pdf": "Exporter vers PDF",
     "select": "Sélectionner",
     "cancel": "Annuler les modifications",
     "save": "Enregistrer les modifications"
@@ -369,8 +369,8 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "statusUploaded": "téléchargé",
   "statusUploading": "téléchargement",
   "uploadSelectedFiles": "Télécharger des fichiers",
-  "headerStatusUploaded": "Done",
-  "headerStatusUploading": "Uploading..."
+  "headerStatusUploaded":  "Complété",
+  "headerStatusUploading": "Téléchargement..."
 });
 }
 
