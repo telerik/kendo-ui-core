@@ -425,6 +425,39 @@
         });
     });
 
+    asyncTest("setting the value with the value method clears the selection in valueMapper returns null", 1, function() {
+        var values = [1, 10, 6];
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true,
+            value: values,
+            valueMapper: valueMapper
+        }));
+        asyncDataSource.read().then(function() {
+            start();
+            virtualList.value(9);
+            ok(virtualList.items().eq(9).hasClass(SELECTED), "Item 9 is selected");
+        });
+    });
+
+    asyncTest("selection is cleared if non existing value is set through the API and the valueMapper returns no indexes", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            value: 1,
+            selectable: true,
+            valueMapper: function(operation) {
+                operation.success([]);
+            }
+        }));
+
+        asyncDataSource.read().then(function() {
+            start();
+            virtualList.bind("change", function(e) {
+                debugger;
+                ok(!virtualList.items().eq(1).hasClass(SELECTED), "Item 1 is not selected any more");
+            });
+            virtualList.value("");
+        });
+    });
+
     asyncTest("value method works if called before the dataSource is fetched and list is created", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,
@@ -1039,10 +1072,7 @@
         });
     });
 
-    //Comment as unstable
-    //http://kendobuild/build/job/CI-Production/5849/console
-    //
-    /*asyncTest("next method does not focus next item if it is not loaded", 1, function() {
+    asyncTest("next method does not focus next item if it is not loaded", 1, function() {
         var asyncDataSource = new kendo.data.DataSource({
             transport: {
                 read: function(options) {
@@ -1112,5 +1142,5 @@
                 equal(virtualList.focus()[0], current[0], "incorrect item is focused");
             }, 150);
         });
-    });*/
+    });
 })();
