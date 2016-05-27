@@ -10,11 +10,15 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "gte": "Ist nach oder gleich",
     "lt": "Ist vor",
     "lte": "Ist vor oder gleich",
-    "neq": "Ist nicht gleich"
+    "neq": "Ist nicht gleich",
+    "isnull": "Ist Null",
+    "isnotnull": "Ist nicht Null"
   },
   "enums": {
     "eq": "Ist gleich",
-    "neq": "Ist nicht gleich"
+    "neq": "Ist nicht gleich",
+    "isnull": "Ist Null",
+    "isnotnull": "Ist nicht Null"
   },
   "number": {
     "eq": "Ist gleich",
@@ -22,7 +26,9 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "gte": "Ist größer als oder gleich",
     "lt": "Ist kleiner",
     "lte": "Ist kleiner als oder gleich",
-    "neq": "Ist nicht gleich"
+    "neq": "Ist nicht gleich",
+    "isnull": "Ist Null",
+    "isnotnull": "Ist nicht Null"
   },
   "string": {
     "contains": "Beinhaltet",
@@ -30,7 +36,11 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "endswith": "Endet mit",
     "eq": "Ist gleich",
     "neq": "Ist nicht gleich",
-    "startswith": "Beginnt mit"
+    "startswith": "Beginnt mit",
+    "isnull": "Ist Null",
+    "isnotnull": "Ist nicht Null",
+    "isempty": "Ist leer",
+    "isnotempty": "Ist nicht leer"
   }
 });
 }
@@ -46,11 +56,16 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "gte": "Ist nach oder gleich",
     "lt": "Ist vor",
     "lte": "Ist vor oder gleich",
-    "neq": "Ist nicht gleich"
+    "neq": "Ist nicht gleich",
+    "isnull": "Ist Null",
+    "isnotnull": "Ist nicht Null"
+
   },
   "enums": {
     "eq": "Ist gleich",
-    "neq": "Ist nicht gleich"
+    "neq": "Ist nicht gleich",
+    "isnull": "Ist Null",
+    "isnotnull": "Ist nicht Null"
   },
   "number": {
     "eq": "Ist gleich",
@@ -58,7 +73,9 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "gte": "Ist größer als oder gleich",
     "lt": "Ist kleiner",
     "lte": "Ist kleiner als oder gleich",
-    "neq": "Ist nicht gleich"
+    "neq": "Ist nicht gleich",
+    "isnull": "Ist Null",
+    "isnotnull": "Ist nicht Null"
   },
   "string": {
     "contains": "Beinhaltet",
@@ -66,7 +83,11 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "endswith": "Endet mit",
     "eq": "Ist gleich",
     "neq": "Ist nicht gleich",
-    "startswith": "Beginnt mit"
+    "startswith": "Beginnt mit",
+    "isnull": "Ist Null",
+    "isnotnull": "Ist nicht Null",
+    "isempty": "Ist leer",
+    "isnotempty": "Ist nicht leer"
   }
 });
 }
