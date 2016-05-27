@@ -19,7 +19,7 @@ The Kendo UI library is based on [jQuery](http://jquery.com/). All Kendo UI bund
 
 ### Supported jQuery Versions
 
-The current official version of Kendo UI requires jQuery 1.9.1. There are occasions when a new jQuery version is released. This new version usually introduces breaking changes and is not compatible with the existing Kendo UI versions. In such cases we recommend using the previous jQuery version until the next official Kendo UI version, which resolves the problem, is released. We do not normally change the jQuery version that is shipped with the Kendo UI service packs, but we do update it in major releases.
+The current official version of Kendo UI requires jQuery 1.12.3. There are occasions when a new jQuery version is released. This new version usually introduces breaking changes and is not compatible with the existing Kendo UI versions. In such cases we recommend using the previous jQuery version until the next official Kendo UI version, which resolves the problem, is released. We do not normally change the jQuery version that is shipped with the Kendo UI service packs, but we do update it in major releases.
 
 The following list provides jQuery compatibility information about the major Kendo UI releases and their corresponding service packs:
 
