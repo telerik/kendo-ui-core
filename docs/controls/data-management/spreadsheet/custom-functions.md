@@ -51,7 +51,7 @@ Suppose you have a way to retrieve currency information from some remote server,
         [ "curr", "string" ]
     ]);
 
-> **Important**  
+> **Important**
 > `argsAsync` passes a callback as first argument to your implementation function. Call that with the return value.
 
 Now you can do the following in formulas: `=CURRENCY("EUR", "USD")`, `=A1 * CURRENCY("EUR", "USD")` etc. Note that the callback is invisible in formulas. The second formula shows that even though the implementation itself is asynchronous, it can be used in formulas in a synchronous way (i.e., the result yielded by `CURRENCY` will be multiplied with the value in A1).
@@ -89,6 +89,24 @@ Again, to make it clear, some specifiers will actually modify the value that you
     ]);
 
 If you call `=TRUNCATE(12.634)`, the result will be `12`. You can also call `=TRUNCATE(TRUE)`, it returns `1`. All numeric types will silently accept a boolean, and will convert `true` to `1` and `false` to `0`.
+
+### Getting error values
+
+By default, if an argument is an error then your function will not be called at all, and that error will be returned.  Example:
+
+    defineFunction("iserror", function(value){
+        return value instanceof kendo.spreadsheet.CalcError;
+    }).args([
+        [ "value", "anyvalue" ]
+    ]);
+
+With this implementation, typing `=ISERROR(1/0)` will return `#DIV/0!`, instead of `true` — the error will be passed over, aborting computation.  To allow errors to go through, append a `!` to the type:
+
+    ...args([
+        [ "value", "anyvalue!" ]
+    ]);
+
+This time `true` will be returned.
 
 ### Reference Type Specifiers
 
@@ -220,7 +238,7 @@ If you need to return an error code, you must return a `spreadsheet.CalcError` o
         [ "x", "number" ]
     ]);
 
-> **Important**  
+> **Important**
 > For convenience, for synchronous primitives (that is, if you use `args`, not `argsAsync`) you can also `throw` a `CalcError` object.
 
 Note that it is possible to do the above via an assertion as well:
@@ -375,7 +393,7 @@ To test when something is the `NULL` reference, just do `x === spreadsheet.NULLR
 
 ### `spreadsheet.UnionRef`
 
-`spreadsheet.UnionRef` is a union. It contains a `ref` property, which is an array of references (it can be empty). A `UnionRef` can be created by the union operator, which is the comma.
+`spreadsheet.UnionRef` is a union. It contains a `refs` property, which is an array of references (it can be empty). A `UnionRef` can be created by the union operator, which is the comma.
 
 The example below demonstrates how to use a function that takes an arbitrary reference and returns its type of reference.
 
