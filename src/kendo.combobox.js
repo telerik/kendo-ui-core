@@ -366,8 +366,6 @@ var __meta__ = { // jshint ignore:line
             var skip = that.listView.skip();
             var isFirstPage = skip === undefined || skip === 0;
 
-            that._angularItems("compile");
-
             that._presetValue = false;
 
             that._resizePopup();
