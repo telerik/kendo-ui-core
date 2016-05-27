@@ -134,7 +134,6 @@ var __meta__ = { // jshint ignore:line
                 deactivate: proxy(that._deactivateItem, that),
                 dataBinding: function() {
                     that.trigger("dataBinding");
-                    that._angularItems("cleanup");
                 },
                 dataBound: listBoundHandler,
                 height: currentOptions.height,
@@ -147,6 +146,10 @@ var __meta__ = { // jshint ignore:line
 
             if (!options.template) {
                 options.template = "#:" + kendo.expr(options.dataTextField, "data") + "#";
+            }
+
+            if (currentOptions.$angular) {
+                options.$angular = currentOptions.$angular;
             }
 
             return options;
@@ -2047,6 +2050,7 @@ var __meta__ = { // jshint ignore:line
             var result;
 
             that.trigger("dataBinding");
+            this._angularItems("cleanup");
 
             that._fixedHeader();
 
@@ -2080,6 +2084,7 @@ var __meta__ = { // jshint ignore:line
                 that._valueDeferred.resolve();
             }
 
+            that._angularItems("compile");
             that.trigger("dataBound");
         },
 

@@ -417,8 +417,6 @@ var __meta__ = { // jshint ignore:line
             var isActive = that.element[0] === activeElement();
             var action;
 
-            that._angularItems("compile");
-
             that._resizePopup();
 
             popup.position();

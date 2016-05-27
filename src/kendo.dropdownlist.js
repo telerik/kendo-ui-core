@@ -465,8 +465,6 @@ var __meta__ = { // jshint ignore:line
             var data = that.dataSource.flatView();
             var dataItem;
 
-            that._angularItems("compile");
-
             that._presetValue = false;
 
             that._resizePopup(true);
