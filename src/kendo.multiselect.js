@@ -259,7 +259,6 @@ var __meta__ = { // jshint ignore:line
         _listChange: function(e) {
             if (this._state === REBIND) {
                 this._state = "";
-                e.added = [];
             }
 
             this._selectValue(e.added, e.removed);
