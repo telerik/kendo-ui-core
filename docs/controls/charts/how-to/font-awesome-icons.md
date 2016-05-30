@@ -7,14 +7,19 @@ slug: howto_fontawesomeicons_charts
 
 # Use FontAwesome in Labels
 
-The Chart labels cannot contain HTML markup, so we can't use Font Awesome via CSS styles. We have several options to get around this.
+The Chart labels cannot contain HTML markup, so you are not able to use FontAwesome via CSS styles. Below are listed the options to work around this.
 
-## Use Unicode Code Points
+## Apply Unicode Code Points
 
 The simplest approach is to use the Unicode symbols from the font directly.
-One obvious drawback is that we're limited to Font Awesome for the entire label.
 
-###### Example - Font Awesome Icons in Series Labels with Unicode
+An obvious drawback is that you are limited to FontAwesome for the entire label.
+
+### To Series Labels
+
+The example below demonstrates how to use FontAwesome icons in series labels with Unicode.
+
+###### Example
 
 ```html
     <!-- Include FontAwesome -->
@@ -43,7 +48,11 @@ One obvious drawback is that we're limited to Font Awesome for the entire label.
     </script>
 ```
 
-###### Example - Font Awesome Icons in Series Notes with Unicode
+### To Series Notes
+
+The example below demonstrates how to use FontAwesome icons in series notes with Unicode.
+
+###### Example
 
 ```html
     <!-- Include FontAwesome -->
@@ -70,10 +79,10 @@ One obvious drawback is that we're limited to Font Awesome for the entire label.
               font: "30px FontAwesome",
               margin: { right: 5 },
 
-              // Character codes for FontAwesome available here:
+              // Character codes for FontAwesome are available at
               // https://fortawesome.github.io/Font-Awesome/cheatsheet/
               //
-              // For example:
+              // For example,
               // [&#xf251;] becomes String.fromCharCode(0xf251)
               template: String.fromCharCode(0xf2ac)
             },
@@ -88,7 +97,7 @@ One obvious drawback is that we're limited to Font Awesome for the entire label.
 
 ## Render Custom Visuals
 
-Visual templates are the most flexible way to override the rendering of chart elements. They allow you to construct the labels by using the [Drawing API]({% slug overview_kendoui_drawingapi %}).
+Visual templates are the most flexible way to override the rendering of the Chart elements. They allow you to construct the labels by using the [Drawing API]({% slug overview_kendoui_drawingapi %}).
 
 The example below demonstrates how to construct a visual using two [Text](/api/javascript/drawing/text) shapes and position them in a [Layout](/api/javascript/drawing/layout). The first `Text` element contains the FontAwesome icon. The second one is a plain text label.
 
@@ -120,10 +129,10 @@ The example below demonstrates how to construct a visual using two [Text](/api/j
                 spacing: 5
               });
 
-              // Character codes for FontAwesome available here:
+              // Character codes for FontAwesome are available at
               // https://fortawesome.github.io/Font-Awesome/cheatsheet/
               //
-              // For example:
+              // For example,
               // [&#xf251;] becomes String.fromCharCode(0xf251)
               var star = new kendo.drawing.Text(String.fromCharCode(0xf005), [0, 0], {
                 font: "14px FontAwesome"
@@ -163,4 +172,4 @@ Other articles and how-to examples on Kendo UI Charts:
 * [How to Shorten Chart Labels]({% slug howto_shortenchartlabels_charts %})
 * [How to Use Linear Gradient As Background in Bars]({% slug howto_uselineargradient_inbars_charts %})
 
-For more runnable examples on Kendo UI Charts, browse the [how-to section of articles]({% slug howto_createdynamicplotbands_charts %}).
+For more runnable examples on Kendo UI Charts, browse the [how-to articles]({% slug howto_createdynamicplotbands_charts %}).
