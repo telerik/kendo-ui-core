@@ -78,6 +78,44 @@ The example below demonstrates how to initialize the ContextMenu by using a JSON
         });
     </script>
 
+### HTML Structure and DOM Placement
+
+With regard to the CSS selectors or element discovery via Javascript, take into account that, by default, the ContextMenu is created as a child of the `<body>` element. This behavior is configurable via the [`appendTo` setting](/api/javascript/ui/window#configuration-appendTo).
+
+The example below demonstrates the possible markup before the initialization of a Kendo UI ContextMenu.
+
+###### Example
+
+  <body>
+     <div id="container1">
+         <ul id="context-menu">
+             <li>Item 1</li>
+             <li>Item 2</li>
+         </ul>
+         ...
+     </div>
+     <div id="container2">
+         ...
+     </div>
+  </body>
+
+The example below demonstrates how the above page markup changes after the initialization of the Kendo UI ContextMenu when the widget is moved to become a child of the `<body>` and its additional markup is generated&mdash;that is, the wrapper and the title bar.
+
+###### Example
+
+  <body>
+    <div id="container1">
+        ...
+    </div>
+    <div id="container2">
+        ...
+    </div>
+    <ul id="context-menu" class="k-widget k-context-menu" data-role="contextmenu">
+            <li>Item 1</li>
+            <li>Item 2</li>
+     </ul>
+  </body>
+
 ## Configuration
 
 ### ContextMenu Animations
