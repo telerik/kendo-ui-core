@@ -1345,6 +1345,16 @@ Change the state of a togglable button.
 
 > This method does **not** trigger the `toggle` event!
 
+#### Parameters
+
+##### command `String|Element|jQuery`
+
+A string, DOM element or jQuery object which represents the togglable button which state will be changed. A string is treated as jQuery selector.
+
+##### state `Boolean`
+
+A boolean flag that determines whether the button will be toggled or not.
+
 #### Example - change the state of togglable buttons using the API
 
     <div id="toolbar"></div>
