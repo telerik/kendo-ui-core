@@ -672,7 +672,9 @@ var __meta__ = { // jshint ignore:line
         },
 
         _loader: function() {
-            this._loading = $('<span class="k-icon k-loading" style="display:none"></span>').insertAfter(this.element);
+            var loadSpan = this.element.next("span.k-loading");
+            this._loading = loadSpan.length ?
+                loadSpan : $('<span class="k-icon k-loading" style="display:none"></span>').insertAfter(this.element);
         },
 
         _toggleHover: function(e) {
