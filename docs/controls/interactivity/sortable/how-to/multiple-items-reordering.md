@@ -162,7 +162,7 @@ The example below demonstrates how to reorder multiple items using the Kendo UI 
 
 ## See Also
 
-Other articles and how-to examples on Kendo UI Sortable:
+Other articles and how-to examples on the Kendo UI Sortable:
 
 * [Sortable JavaScript API Reference](/api/javascript/ui/sortable)
 * [How to Nest Sortables]({% slug howto_nestsortables_sortable %})
@@ -171,4 +171,5 @@ Other articles and how-to examples on Kendo UI Sortable:
 * [How to Reorder Grid Rows]({% slug howto_reordergridrows_sortable %})
 * [How to Reorder Rows in Nested Grid]({% slug howto_reorderrowsinnestedgrid_sortable %})
 * [How to Use Sortable in AngularJS with Grid in Batch Editing Mode]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %})
-* [How to Use Sortable with Grid in Incell Editing Mode]({% slug howto_usesortablewithgrid_inincellediting_sortable %})
+
+For more runnable examples on the Kendo UI Sortable, browse the [how-to articles]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %}).
