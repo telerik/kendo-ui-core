@@ -134,6 +134,32 @@
         multiselect.open();
     });
 
+    asyncTest("MultiSelect can display values that are not part of the first data page and are set through the API after initial dataBinding", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            height: CONTAINER_HEIGHT,
+            autoBind: false,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            }
+        });
+
+        multiselect.one("dataBound", function() {
+            multiselect.close();
+            multiselect.value([300]);
+            setTimeout(function() {
+                start();
+                equal(multiselect.tagList.children().length, 1, "Selected tag is rendered");
+            }, 300)
+        });
+
+        multiselect.open();
+    });
+
     //unstable
     /*asyncTest("dataItem returns correct object based on LI element", 2, function() {
         var multiselect = new MultiSelect(select, {
