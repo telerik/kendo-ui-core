@@ -131,4 +131,4 @@ Other articles and how-to examples on Kendo UI Charts:
 * [How to Use Hyperlinks in Axes Labels]({% slug howto_usehyperlinks_inaxislabels_charts %})
 * [How to Use Linear Gradient As Background in Bars]({% slug howto_uselineargradient_inbars_charts %})
 
-For more runnable examples on Kendo UI Charts, browse the [how-to section of articles]({% slug howto_createdynamicplotbands_charts %}).
+For more runnable examples on Kendo UI Charts, browse the [how-to articles]({% slug howto_createdynamicplotbands_charts %}).

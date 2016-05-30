@@ -79,7 +79,7 @@ The example below demonstrates how to use hyperlinks in the axes labels of Kendo
               width: 1,
               color: "#0487c4"
             }
-          }	
+          }
         },
         axisLabelClick: function(e) {
           window.location = e.dataItem.url;
@@ -117,4 +117,4 @@ Other articles and how-to examples on Kendo UI Charts:
 * [How to Sort Categories in Grouped Charts]({% slug howto_sortcategorisinagroupedchart_charts %})
 * [How to Use Fixed Bar Size]({% slug howto_usefixedbarsize_charts %})
 
-For more runnable examples on Kendo UI Charts, browse the [how-to section of articles]({% slug howto_createdynamicplotbands_charts %}).
+For more runnable examples on Kendo UI Charts, browse the [how-to articles]({% slug howto_createdynamicplotbands_charts %}).
