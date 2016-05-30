@@ -52,7 +52,8 @@ Suppose you have a way to retrieve currency information from some remote server,
     ]);
 
 > **Important**
-> `argsAsync` passes a callback as first argument to your implementation function. Call that with the return value.
+>
+> The `argsAsync` passes a callback as first argument to your implementation function. Call that with the return value.
 
 Now you can do the following in formulas: `=CURRENCY("EUR", "USD")`, `=A1 * CURRENCY("EUR", "USD")` etc. Note that the callback is invisible in formulas. The second formula shows that even though the implementation itself is asynchronous, it can be used in formulas in a synchronous way (i.e., the result yielded by `CURRENCY` will be multiplied with the value in A1).
 
@@ -66,21 +67,25 @@ As can be seen in the examples above, both `args` and `argsAsync` expect a singl
 
 As of now, the following basic specifiers are supported:
 
-- `"number"` — requires a numeric argument.
-- `"number+"` — requires a number bigger than or equal to zero.
-- `"number++"` — requires a non-zero positive number.
-- `"integer"`, `"integer+"` and `"integer++"` — similar to `number`-s, but requires integer argument. Note that these may actually modify the argument value: if a number is specified and it has a decimal part, it will silently be truncated to integer, instead of returning an error. This is similar to Excel.
-- `"divisor"` — requires a non-zero number. Produces a `#DIV/0!` error if the argument is zero.
-- `"string"` — requires a string argument.
-- `"boolean"` — requires a boolean argument. Most times you may want to use `"logical"` though.
-- `"logical"` — requires a `logical` argument. That is, booleans `true` or `false`, but `1` and `0` are also accepted. It gets converted to an actual boolean.
-- `"date"` — requires a date argument. Internally, dates are stored as numbers (the number of days since December 31 1899), so this works the same as `"integer"`. It was added for consistency.
-- `"datetime"` — this is like `"number"`, because the time part is represented as a fraction of a day.
-- `"anyvalue"` — accepts any value type.
-- `"matrix"` — accepts a matrix argument. Тhis is either a range, e.g., `A1:C3`, or a literal matrix (see the **Matrices** section below).
-- `"null"` — requires a null (missing) argument. The reason for this specifier will be clarified in the **Optional Arguments** section.
+|BASIC SPECIFIER    |ACTION     |
+|:---               |:---       |
+|`"number"`         |Requires a numeric argument. |
+|`"number+"`        |Requires a number bigger than or equal to zero. |
+|`"number++"`       |Requires a non-zero positive number.|
+|`"integer"`/`"integer+"`/`"integer++"`   |Similar to `number`-s, but requires integer argument. Note that these may actually modify the argument value: if a number is specified and it has a decimal part, it will silently be truncated to integer, instead of returning an error. This is similar to Excel. |
+|`"divisor"`        |Requires a non-zero number. Produces a `#DIV/0!` error if the argument is zero. |
+|`"string"`         |Requires a string argument. |
+|`"boolean"`        |Requires a boolean argument. Most times you may want to use `"logical"` though. |
+|`"logical"`        |Requires a `logical` argument. That is, booleans `true` or `false`, but `1` and `0` are also accepted. It gets converted to an actual boolean. |
+|`"date"`           |Requires a date argument. Internally, dates are stored as numbers (the number of days since December 31 1899), so this works the same as `"integer"`. It was added for consistency. |
+|`"datetime"`       |This is like `"number"`, because the time part is represented as a fraction of a day. |
+|`"anyvalue"`       |Accepts any value type. |
+|`"matrix"`         |Accepts a matrix argument. Тhis is either a range, e.g., `A1:C3`, or a literal matrix (see the **Matrices** section below). |
+|`"null"`           |Requires a null (missing) argument. The reason for this specifier will be clarified in the **Optional Arguments** section. |
 
-Again, to make it clear, some specifiers will actually modify the value that your function receives. For example, you could implement a function that truncates the argument to integer like this:
+Again, to make it clear, some specifiers actually modify the value that your function receives. For example, you could implement a function that truncates the argument to integer, as shown below.
+
+###### Example
 
     defineFunction("truncate", function(value){
         return value;
@@ -88,11 +93,13 @@ Again, to make it clear, some specifiers will actually modify the value that you
         [ "value", "integer" ]
     ]);
 
-If you call `=TRUNCATE(12.634)`, the result will be `12`. You can also call `=TRUNCATE(TRUE)`, it returns `1`. All numeric types will silently accept a boolean, and will convert `true` to `1` and `false` to `0`.
+If you call `=TRUNCATE(12.634)`, the result is `12`. You can also call `=TRUNCATE(TRUE)`, it returns `1`. All numeric types silently accept a Boolean, and convert `true` to `1` and `false` to `0`.
 
-### Getting error values
+### Getting Error Values
 
-By default, if an argument is an error then your function will not be called at all, and that error will be returned.  Example:
+By default, if an argument is an error, your function is not called at all and that error is returned.  
+
+###### Example
 
     defineFunction("iserror", function(value){
         return value instanceof kendo.spreadsheet.CalcError;
@@ -100,19 +107,23 @@ By default, if an argument is an error then your function will not be called at 
         [ "value", "anyvalue" ]
     ]);
 
-With this implementation, typing `=ISERROR(1/0)` will return `#DIV/0!`, instead of `true` — the error will be passed over, aborting computation.  To allow errors to go through, append a `!` to the type:
+With this implementation, typing `=ISERROR(1/0)` returns `#DIV/0!` instead of `true`&mdash;the error is passed over, aborting computation. To allow errors to go through, append a `!` to the type.
+
+###### Example
 
     ...args([
         [ "value", "anyvalue!" ]
     ]);
 
-This time `true` will be returned.
+This time `true` is returned.
 
 ### Reference Type Specifiers
 
-All the above type specifiers will force references. For this reason `=TRUNCATE(A5)` will also work — the function will get the value in `A5` cell. If `A5` contains a formula, our runtime library will make sure you get the current value (that is, `A5` will be evaluated first). This all goes under the hood and you need not worry about.
+All the above type specifiers force references. For this reason `=TRUNCATE(A5)` also works&mdash;the function gets the value in `A5` cell. If `A5` contains a formula, the runtime library makes sure you get the current value (that is, `A5` is evaluated first). All of this goes under the hood and you need not worry about it.
 
-However, sometimes you might need to write functions that receive a reference, instead of a resolved value. One example is Excel's `ROW` function. In its basic form, it takes a cell reference and returns its row number. The actual `ROW` function is more complicated, but this is just to exemplify:
+However, sometimes you might need to write functions that receive a reference, instead of a resolved value. One example is Excel's `ROW` function. In its basic form, it takes a cell reference and returns its row number, as demonstrated in the example below. The actual `ROW` function is more complicated.
+
+###### Example
 
     defineFunction("row", function(cell){
         // add 1 because internally row indexes are zero-based
@@ -125,29 +136,33 @@ If you now call `=ROW(A5)`, you get a `5`, regardless of what is in cell `A5`: i
 
 See the **References** section below for more information about references. The related type specifiers are just listed here:
 
-- `"ref"` — allows any reference argument and your implementation gets it as such.
-- `"area"` — allows a cell or a range argument (`CellRef` or `RangeRef` instance).
-- `"cell"` — allows a cell argument (`CellRef` instance).
-- `"anything"` — allows any argument type. The difference to `anyvalue` is that this one does not force references, that is, if a reference is passed, it will remain a reference instead of being replaced by its value.
+|TYPE SPECIFIER   |ACTION     |
+|:---             |:---       |
+|`"ref"`          |Allows any reference argument and your implementation gets it as such. |
+|`"area"`         |Allows a cell or a range argument (`CellRef` or `RangeRef` instance). |
+|`"cell"`         |Allows a cell argument (`CellRef` instance).|
+|`"anything"`     |Allows any argument type. The difference to `anyvalue` is that this one does not force references, that is, if a reference is passed, it will remain a reference instead of being replaced by its value. |
 
 ### Compound Type Specifiers
 
 In addition to basic type specifiers, which are strings, you can also use the following forms of type specs:
 
-- `[ "null", DEFAULT ]` — validates a missing argument and makes it take the given `DEFAULT` value; this can be used in conjunction with `"or"` to support optional arguments.
-- `[ "not", SPEC ]` — requires an argument which does not match the spec.
-- `[ "or", SPEC, SPEC, ... ]` — validates an argument that passes any of the specs.
-- `[ "and", SPEC, SPEC, ... ]` — validates an argument that passes all the specs.
-- `[ "values", VAL1, VAL2, ... ]` — argument must strictly equal one of the listed values.
-- `[ "[between]", MIN, MAX ]` — validates an argument between (inclusive) the given values (does not require numeric argument). "between" is an alias.
-- `[ "(between)", MIN, MAX ]` — similar to "[between]" but it's exclusive.
-- `[ "[between)", MIN, MAX ]` — requires an argument greater than or equal to `MIN`, and strictly less than `MAX`.
-- `[ "(between]", MIN, MAX ]` — requires an argument strictly greater than `MIN`, and less than or equal to `MAX`.
-- `[ "assert", COND ]` — inserts an arbitrary condition literally into the code (see “Assertions” section below).
-- `[ "collect", SPEC ]` — collects all remaining arguments that pass the spec into a single array argument; this only makes sense at toplevel and cannot be nested in `"or"`, `"and"` etc. Arguments not matching the SPEC will be silently ignored, except errors (any error will abort the calculation).
-- `[ "#collect", SPEC ]` — like "collect", but ignores errors as well.
+|ADDITIONAL SPECIFIER           |ACTION     |
+|:---                           |:---       |
+|`[ "null", DEFAULT ]`          |Validates a missing argument and makes it take the given `DEFAULT` value. This can be used in conjunction with `"or"` to support optional arguments. |
+|`[ "not", SPEC ]`              |Requires an argument which does not match the spec. |
+|`[ "or", SPEC, SPEC, ... ]`    |Validates an argument that passes any of the specs.|
+|`[ "and", SPEC, SPEC, ... ]`   |Validates an argument that passes all the specs.|
+|`[ "values", VAL1, VAL2, ... ]`|The argument must strictly equal one of the listed values.|
+|`[ "[between]", MIN, MAX ]`    |Validates an argument between the given values inclusive. Note that it does not require numeric argument. The "between" value is an alias.|
+|`[ "(between)", MIN, MAX ]`    |This is similar to "[between]" but is exclusive.|
+|`[ "[between)", MIN, MAX ]`    |Requires an argument greater than or equal to `MIN`, and strictly less than `MAX`.|
+|`[ "(between]", MIN, MAX ]`    |Requires an argument strictly greater than `MIN`, and less than or equal to `MAX`.|
+|`[ "assert", COND ]`           |Inserts an arbitrary condition literally into the code (see the **Assertions** section below).|
+|`[ "collect", SPEC ]`          |Collects all remaining arguments that pass the spec into a single array argument. This only makes sense at top level and cannot be nested in `"or"`, `"and"`, etc. Arguments not matching the `SPEC` are silently ignored, except errors. Each error aborts the calculation.|
+|`[ "#collect", SPEC ]`         |This is similar to "collect", but ignores errors as well.|
 
-### Refer to Previous Arguments
+### Previous Arguments Reference
 
 In certain clauses you might need to be able to refer to values of previously type-checked arguments. For example, let us say you want to write a primitive that takes a minimum, a maximum, and a value that must be between them, and should return as a fraction the position of that value between min and max.
 
@@ -217,6 +232,7 @@ In most cases, “optional” means that the argument takes some default value i
         [ "?", [ "assert", "$base != 1", "DIV/0" ] ]
     ]);
 
+<!--*-->
 The type spec for `base` is: `[ "or", "number++", [ "null", 10 ] ]`. This says it should accept any number greater than zero, but if the argument is missing, defaults to 10. The implementation does not have to deal with the case that the argument is missing — it will get 10 instead.
 
 Also, note that it uses an assertion to make sure the `base` is not 1. If it is, return a `#DIV/0!` error.
@@ -239,6 +255,7 @@ If you need to return an error code, you must return a `spreadsheet.CalcError` o
     ]);
 
 > **Important**
+>
 > For convenience, for synchronous primitives (that is, if you use `args`, not `argsAsync`) you can also `throw` a `CalcError` object.
 
 Note that it is possible to do the above via an assertion as well:
@@ -480,37 +497,41 @@ The example below demonstrates how to use a function that doubles each number in
 
 You can now type in some cell "=doublematrix(A1:B2)" and it will return a matrix, that is, fill all the required cells to the right and bottom from where this formula is defined with the doubled values. As of now, this is different from Excel, where in order to get all values returned by an array formula you have to pre-select the range, and save the formula with CTRL-SHIFT-ENTER.
 
-Here is a list of interesting methods/properties provided by the `Matrix` objects:
+Here is a list of interesting methods/properties provided by the `Matrix` objects.
 
-- `width` and `height` (properties) — the dimensions of this matrix
-- `clone()` — returns a new matrix with the same data
-- `get(row, col)` — returns the element at a given location
-- `set(row, col, value)` — sets the element at a given location
-- `each(func, includeEmpty)` — iterates through elements of the matrix, calling your `func` for each element (first columns, then rows) with 3 arguments: value, row and column. If `includeEmpty` is `true`, it will call your function for empty (`null`) elements as well. Otherwise, it only calls it where a value exists.
-- `map(func, includeEmpty)` — similar to `each`, but produces a new matrix of the same shape as the original one with the values returned by your function.
-- `transpose()` — returns the transposed matrix. The rows of the original matrix become columns of the transposed one.
-- `unit(n)` — returns the unit square matrix of size `n`.
-- `multiply(m)` — multiplies the current matrix by the given matrix, and returns a new matrix as the result.
-- `determinant()` — returns the determinant of this matrix. The matrix should contain only numbers and be square. Note that there are no checks for this.
-- `inverse()` — returns the inverse of this matrix. The matrix should contain only numbers and be square. Note that there are no checks for this. If the inverse does not exist, i.e., the determinant is zero, then it returns `null`.
+|METHOD OR PROPERTY           |DESCRIPTION|
+|:---                         |:---|
+|`width` and `height`         |These properties indicate the dimensions of this matrix. |
+|`clone()`                    |Returns a new matrix with the same data. |
+|`get(row, col)`              |Returns the element at a given location. |
+|`set(row, col, value)`       |Sets the element at a given location. |
+|`each(func, includeEmpty)`   |Iterates through elements of the matrix, calling your `func` for each element (first columns, then rows) with 3 arguments: `value`, `row` and `column`. If `includeEmpty` is `true`, it will call your function for empty (`null`) elements as well. Otherwise, it only calls it where a value exists. |
+|`map(func, includeEmpty)`    |This is similar to `each`, but produces a new matrix of the same shape as the original one with the values returned by your functions.|
+|`transpose()`                |Returns the transposed matrix. The rows of the original matrix become columns of the transposed one.|
+|`unit(n)`                    |Returns the unit square matrix of size `n`.|
+|`multiply(m)`                |Multiplies the current matrix by the given matrix, and returns a new matrix as the result.|
+|`determinant()`              |Returns the determinant of this matrix. The matrix should contain only numbers and be square. Note that there are no checks for this.|
+|`inverse()`                  |Returns the inverse of this matrix. The matrix should contain only numbers and be square. Note that there are no checks for this. If the inverse does not exist&mdash;the determinant is zero&mdash;then it returns `null`.|
 
 ## Context Object
 
-Every time a formula is evaluated, a special `Context` object is created and each primitive function involved is invoked in the context of that object, that is, it will be accessible as `this`. Here are a few methods that this object provides:
+Every time a formula is evaluated, a special `Context` object is created and each primitive function involved is invoked in the context of that object, that is, it will be accessible as `this`. Here are a few methods that this object provides.
 
-- `resolveCells(array, callback)` — makes sure that all references in the given array are resolved before invoking your callback. That is, executes any formula. If this array turns out to include the very cell where the current formula lives, it returns a `#CIRCULAR!` error. Elements that are not references are ignored.
-- `cellValues(array)` — returns as a flat array the values in any reference that exist in the given array. Elements that are not references are copied over.
-- `asMatrix(arg)` — converts the given argument to a matrix, if possible. It accepts a `RangeRef` object or a plain JavaScript non-empty array. Additionally, if a `Matrix` object is provided, it is returned as is.
-- `workbook()` — returns the `Workbook` object where the current formula is evaluated.
-- `getRefData(ref)` — returns the data (i.e. value) in the given reference. If a `CellRef` is given, it will return a single value. For a `RangeRef` or `UnionRef` it returns a flat array of values.
+|METHOD                           |DESCRIPTION|
+|:---                             |:---       |
+|`resolveCells(array, callback)`  |Makes sure that all references in the given array are resolved before invoking your callback&mdash;that is, executes any formula. If this array turns out to include the very cell where the current formula lives, it returns a `#CIRCULAR!` error. Elements that are not references are ignored. |
+|`cellValues(array)`              |Returns as a flat array the values in any reference that exist in the given array. Elements that are not references are copied over.
+|`asMatrix(arg)`                  |Converts the given argument to a matrix, if possible. It accepts a `RangeRef` object or a plain JavaScript non-empty array. Additionally, if a `Matrix` object is provided, it is returned as is.|
+|`workbook()`                     |Returns the `Workbook` object where the current formula is evaluated. |
+|`getRefData(ref)`                |Returns the data&mdash;that is the value&mdash;in the given reference. If a `CellRef` is given, it returns a single value. For a `RangeRef` or `UnionRef`, it returns a flat array of values.|
 
 Additionally, there is a `formula` property, an object representing the current formula. Its details are internal, but you can rely on it having the `sheet` (sheet name as a string), `row` and `col` properties, the location of the current formula.
 
-## `args` or `argsAsync` Not Called
+## Not Calling `args` or `argsAsync`
 
 If `args` or `argsAsync` are not called, the primitive function will receive exactly two arguments: a callback to be invoked with the result, and an array that will contain the arguments passed in the formula.
 
-The example below demonstrates how to use a function that adds two <del>numbers</del> things.
+The example below demonstrates how to use a function that adds two things.
 
 ###### Example
 
@@ -525,7 +546,7 @@ Results:
 - `=ADD("foo")` → `fooundefined`
 - `=ADD(A1, A2)` → `A1A2`
 
-In other words, if you use this raw form you are responsible for type-checking the arguments and your primitive is always expected to be asynchonous.
+In other words, if you use this raw form, you are responsible for type-checking the arguments and your primitive is always expected to be asynchronous.
 
 ## See Also
 
