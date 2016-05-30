@@ -1495,7 +1495,7 @@ function pad(number, digits, end) {
 
             idx = 0;
 
-            formats = [
+            formats = formats.concat([
                 "yyyy/MM/dd HH:mm:ss",
                 "yyyy/MM/dd HH:mm",
                 "yyyy/MM/dd",
@@ -1514,7 +1514,7 @@ function pad(number, digits, end) {
                 "yyyy-MM-dd",
                 "HH:mm:ss",
                 "HH:mm"
-            ].concat(formats);
+            ]);
         }
 
         formats = isArray(formats) ? formats: [formats];
