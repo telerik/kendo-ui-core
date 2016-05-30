@@ -8619,6 +8619,241 @@ If invoked the grid will not save the generated file.
     grid.saveAsExcel();
     </script>
 
+### filter
+
+Fired when the user is about to filter the DataSource via the filter UI.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.filter `Object`
+
+The selected filter descriptor. If `null` the filter has been cleared for example by click on the `clear` button.
+
+##### e.preventDefault `Function`
+
+If invoked prevents adding the filter descriptor to the DataSource.
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "filter" event during initialization
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+            model: { id: "id" }
+          }
+        },
+        filterable: true,
+        filter: function(e) {
+          if (e.filter == null) {
+            console.log("filter has been cleared");
+          } else {
+            console.log(e.filter.logic);
+            console.log(e.filter.filters[0].field);
+            console.log(e.filter.filters[0].operator);
+            console.log(e.filter.filters[0].value);
+          }
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "filter" event after initialization
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+            model: { id: "id" }
+          }
+        },
+        filterable: true
+      });
+      var grid = $("#grid").data("kendoGrid");
+      grid.bind("filter", function(e) {
+        if (e.filter == null) {
+          console.log("filter has been cleared");
+        } else {
+          console.log(e.filter.logic);
+          console.log(e.filter.filters[0].field);
+          console.log(e.filter.filters[0].operator);
+          console.log(e.filter.filters[0].value);
+        }
+      });
+    </script>
+
+### group
+
+Fired when the user is about to group the DataSource or modify the group descriptors state via the Grid group panel.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.groups `Array`
+
+The selected group descriptors.
+
+##### e.preventDefault `Function`
+
+If invoked prevents applying the group descriptors changes to the DataSource and to the group panel UI.
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "group" event during initialization
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+            model: { id: "id" }
+          }
+        },
+        groupable: true,
+        group: function(e) {
+          if (e.groups.length) {
+            console.log(e.groups[0].field);
+            console.log(e.groups[0].dir);
+          }
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "group" event after initialization
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+            model: { id: "id" }
+          }
+        },
+        groupable: true
+      });
+      var grid = $("#grid").data("kendoGrid");
+      grid.bind("group", function(e) {
+        if (e.groups.length) {
+          console.log(e.groups[0].field);
+          console.log(e.groups[0].dir);
+        }
+      });
+    </script>
+
+### page
+
+Fired when the user is about change the current page index of DataSource via the pager UI.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.page `Number`
+
+The selected page index.
+
+##### e.preventDefault `Function`
+
+If invoked prevents applying the changes to the DataSource.
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "page" event during initialization
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          pageSize: 1,
+          schema: {
+            model: { id: "id" }
+          }
+        },
+        pageable: true,
+        page: function(e) {
+          console.log(e.page);
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "page" event after initialization
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          pageSize: 1,
+          schema: {
+            model: { id: "id" }
+          }
+        },
+        pageable: true
+      });
+      var grid = $("#grid").data("kendoGrid");
+      grid.bind("page", function(e) {
+        console.log(e.page);
+      });
+    </script>
+
 ### pdfExport
 
 Fired when the user clicks the "Export to PDF" toolbar button.
@@ -9037,6 +9272,79 @@ The widget instance which fired the event.
     });
     var grid = $("#grid").data("kendoGrid");
     grid.bind("saveChanges", grid_saveChanges);
+    </script>
+
+### sort
+
+Fired when the user is about to modify the current state of sort descriptors of DataSource via the sort UI.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.sort `Object`
+
+The selected sort descriptors.
+
+##### e.preventDefault `Function`
+
+If invoked prevents applying the changes to the DataSource.
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "sort" event during initialization
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+            model: { id: "id" }
+          }
+        },
+        sortable: true,
+        sort: function(e) {
+          console.log(e.sort.field);
+          console.log(e.sort.dir);
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "sort" event after initialization
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 }
+          ],
+          schema: {
+            model: { id: "id" }
+          }
+        },
+        sortable: true
+      });
+      var grid = $("#grid").data("kendoGrid");
+      grid.bind("sort", function(e) {
+        console.log(e.sort.field);
+        console.log(e.sort.dir);
+      });
     </script>
 
 ### columnLock
