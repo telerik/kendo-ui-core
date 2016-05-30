@@ -830,7 +830,7 @@ List of the files that were uploaded or removed . Each file has:
 ##### data `Object`
 
 Optional object that will be
-sent to the save handler in the form of key/value pairs.
+sent to the remove handler in the form of key/value pairs.
 
 ### select
 
