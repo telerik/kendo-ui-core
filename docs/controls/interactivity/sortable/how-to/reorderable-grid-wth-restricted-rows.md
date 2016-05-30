@@ -1,13 +1,13 @@
 ---
-title: Reorderable grid with restricted rows
-page_title: Reorderable grid with restricted rows | Kendo UI Sortable
-description: "Learn how to restrict rows reordering in Kendo UI Grid with Kendo UI Sortable widget."
+title: Create Reorderable Grid with Restricted Rows
+page_title: Create Reorderable Grid with Restricted Rows | Kendo UI Sortable
+description: "Learn how to restrict rows reordering in a Kendo UI Grid with a Kendo UI Sortable widget."
 slug: howto_restrict_reordergridrows_sortable
 ---
 
-# Create Reorderable Grid with restricted rows
+# Create Reorderable Grid with Restricted Rows
 
-The example below demonstrates how to reorder Grid rows using the Kendo UI Sortable widget and disable the top rows from reordering
+The example below demonstrates how to reorder Grid rows using the Kendo UI Sortable widget and disable the top rows from reordering.
 
 ###### Example
 
@@ -93,7 +93,7 @@ The example below demonstrates how to reorder Grid rows using the Kendo UI Sorta
 
 ## See Also
 
-Other articles and how-to examples on Kendo UI Sortable:
+Other articles and how-to examples on the Kendo UI Sortable:
 
 * [Sortable JavaScript API Reference](/api/javascript/ui/sortable)
 * [How to Nest Sortables]({% slug howto_nestsortables_sortable %})
@@ -102,5 +102,6 @@ Other articles and how-to examples on Kendo UI Sortable:
 * [How to Reorder Multiple Items]({% slug howto_reordermultipleitems_sortable %})
 * [How to Reorder Rows in Nested Grid]({% slug howto_reorderrowsinnestedgrid_sortable %})
 * [How to Transfer Grid Rows]({% slug howto_transfergridrows_sortable %})
-* [How to Use Sortable in AngularJS with Grid in Batch Editing Mode]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %})
 * [How to Use Sortable with Grid in Incell Editing Mode]({% slug howto_usesortablewithgrid_inincellediting_sortable %})
+
+For more runnable examples on the Kendo UI Sortable, browse the [how-to articles]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %}).
