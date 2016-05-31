@@ -15,6 +15,7 @@ Below are listed the script files for the Kendo UI Charts widgets:
 | [Chart](http://demos.telerik.com/kendo-ui/chart-api/index)| jquery.js|						|
 | 						| kendo.core.js								| 							|
 | 						| kendo.data.js								| 							|
+| 						| kendo.popup.js								| 							|
 | 						| kendo.userevents.js						| 							|
 | 						| kendo.color.js							| 							|
 | 						| kendo.drawing.js							| 							|
@@ -29,6 +30,7 @@ Below are listed the script files for the Kendo UI Charts widgets:
 | [Sparklines](http://demos.telerik.com/kendo-ui/sparklines/index)| jquery.js| 					|
 | 						| kendo.core.js								| 							|
 | 						| kendo.data.js								| 							|
+| 						| kendo.popup.js								| 							|
 | 						| kendo.userevents.js						| 							|
 | 						| kendo.color.js							| 							|
 | 						| kendo.drawing.js							| 							|
@@ -39,6 +41,7 @@ Below are listed the script files for the Kendo UI Charts widgets:
 | [StockCharts](http://demos.telerik.com/kendo-ui/financial/index)| jquery.js|					|
 | 						| kendo.core.js								| 							|
 | 						| kendo.data.js								| 							|
+| 						| kendo.popup.js								| 							|
 | 						| kendo.userevents.js						| 							|
 | 						| kendo.color.js							| 							|
 | 						| kendo.drawing.js							| 							|
@@ -54,7 +57,7 @@ Below are listed the script files for the Kendo UI Charts widgets:
 | 						| kendo.drawing.js							| 							|
 | 						| kendo.dataviz.core.js						| 							|
 | 						| kendo.dataviz.themes.js					| 							|
-| 						| kendo.dataviz.treeMap.js					| 							|
+| 						| kendo.dataviz.treemap.js					| 							|
 
 ## See Also
 
