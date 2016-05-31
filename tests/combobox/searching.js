@@ -928,4 +928,21 @@ asyncTest("clear selected value if search is started (filter: none)", 1, functio
     combobox.input.focus().val("Ba").trigger({ type: "keydown" });
 });
 
+asyncTest("search on paste", 1, function() {
+    combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: data,
+        filter: "startswith",
+        value: 2
+    });
+
+    combobox.bind("open", function() {
+        start();
+        equal(combobox.listView.dataSource.view().length, 1);
+    });
+
+    combobox.input.focus().val("F").trigger({ type: "paste" });
+});
+
 })();

@@ -615,4 +615,28 @@
         ok(dropdownlist.ul.children().eq(2).text(), "Bar");
         ok(dropdownlist.ul.children().eq(2).hasClass("k-state-selected"));
     });
+
+    asyncTest("filter on paste", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            animation: false,
+            filter: "startswith",
+            delay: 0,
+            dataSource: [
+                { text: "Black", value: "1" },
+                { text: "Orange", value: "2" },
+                { text: "Grey", value: "3" }
+            ],
+            dataTextField: "text",
+            dataValueField: "value",
+            index: 2
+        });
+
+        dropdownlist.one("filtering", function() {
+            start();
+            ok(true);
+        });
+
+        dropdownlist.open();
+        dropdownlist.filterInput.val("Gre").focus().trigger({type: "paste"});
+    });
 })();
