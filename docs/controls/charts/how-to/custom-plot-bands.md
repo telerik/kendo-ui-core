@@ -11,7 +11,11 @@ The example below demonstrates how to create our own plot bands as a custom over
 
 For a list of all available drawing primitives, refer to the [Drawing API article](/framework/drawing/overview).
 
-###### Example - Custom Plot Band in Column Chart
+## In Column Charts
+
+The example below demonstrates how to render a custom plot band in a column Kendo UI Chart.
+
+###### Example
 
 ```html
     <div id="chart" />
@@ -77,7 +81,11 @@ For a list of all available drawing primitives, refer to the [Drawing API articl
     </script>
 ```
 
-###### Example - Custom Plot Band in Bar Chart
+## In Bar Charts
+
+The example below demonstrates how to render a custom plot band in a bar Kendo UI Chart.
+
+###### Example
 
 ```html
     <div id="chart" />
