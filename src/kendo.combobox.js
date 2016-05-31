@@ -209,6 +209,16 @@ var __meta__ = { // jshint ignore:line
             that.element.blur();
         },
 
+        _inputPaste: function() {
+            var that = this;
+            clearTimeout(that._pasteTimeout);
+            that._pasteTimeout = null;
+
+            that._pasteTimeout = setTimeout(function() {
+                that.search();
+            });
+        },
+
         _editable: function(options) {
             var that = this,
                 disable = options.disable,
@@ -234,7 +244,8 @@ var __meta__ = { // jshint ignore:line
                 that.input
                     .on("keydown" + ns, proxy(that._keydown, that))
                     .on("focus" + ns, proxy(that._inputFocus, that))
-                    .on("focusout" + ns, proxy(that._inputFocusout, that));
+                    .on("focusout" + ns, proxy(that._inputFocusout, that))
+                    .on("paste" + ns, proxy(that._inputPaste, that));
 
             } else {
                 wrapper

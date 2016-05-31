@@ -513,6 +513,10 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _filterPaste: function() {
+            this._search();
+        },
+
         _focusHandler: function() {
             this.wrapper.focus();
         },
@@ -582,7 +586,8 @@ var __meta__ = { // jshint ignore:line
                     .on("keydown" + ns, proxy(that._keydown, that))
                     .on("focusin" + ns, proxy(that._focusinHandler, that))
                     .on("focusout" + ns, proxy(that._focusoutHandler, that))
-                    .on("mousedown" + ns, proxy(that._wrapperMousedown, that));
+                    .on("mousedown" + ns, proxy(that._wrapperMousedown, that))
+                    .on("paste" + ns, proxy(that._filterPaste, that));
 
                 that.wrapper.on("click" + ns, proxy(that._wrapperClick, that));
 
@@ -1096,7 +1101,6 @@ var __meta__ = { // jshint ignore:line
                                           "aria-haspopup": true,
                                           "aria-expanded": false
                                       });
-
                 this.list
                     .prepend($('<span class="k-list-filter" />')
                     .append(this.filterInput.add(icon)));
