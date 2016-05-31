@@ -257,8 +257,19 @@ var __meta__ = { // jshint ignore:line
         },
 
         _listChange: function(e) {
+            var data = this.dataSource.flatView();
+            var optionsMap = this._optionsMap;
+            var valueGetter = this._value;
+
             if (this._state === REBIND) {
                 this._state = "";
+            }
+
+            for (var i = 0; i < e.added.length; i++) {
+                if (optionsMap[valueGetter(e.added[i])] === undefined) {
+                    this._render(data); //render select element <option> tags if the item does not persist in the current data view
+                    break;
+                }
             }
 
             this._selectValue(e.added, e.removed);
