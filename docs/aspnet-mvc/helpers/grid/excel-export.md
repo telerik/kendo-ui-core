@@ -27,7 +27,7 @@ The example below demonstrates how to enable the Excel export functionality.
         .Name("grid")
         .ToolBar(tools => tools.Excel())
         .Excel(excel => excel
-            .FileName("Products.xslx")
+            .FileName("Products.xlsx")
         )
         .DataSource(dataSource => dataSource
             .Ajax()
