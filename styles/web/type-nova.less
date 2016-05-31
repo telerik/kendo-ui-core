@@ -1682,6 +1682,12 @@ html .km-pane-wrapper .km-widget,
         }
 
         /* Responsive Pager */
+        
+        .k-pager-wrap
+        {
+            min-height: 2.7em;
+        }
+        
         .k-pager-wrap .k-pager-nav,
         .k-pager-input {
             display: inline-block;
@@ -1702,6 +1708,11 @@ html .km-pane-wrapper .km-widget,
             background-color: @normal-background;
             border: 1px solid darken(@normal-background, 12%);
             border-radius: 3px;
+        }
+        
+        .k-pager-numbers:first-child,
+        .k-grid .k-pager-numbers:first-child { // move left when previousNext: false
+            left: .3em;
         }
 
         .k-pager-numbers:hover,
@@ -1741,6 +1752,12 @@ html .km-pane-wrapper .km-widget,
         .k-rtl .k-grid .k-pager-numbers {
             right: 5.6em;
             width: 5.15em;
+        }
+        
+        .k-rtl .k-pager-numbers:first-child,
+        .k-rtl .k-grid .k-pager-numbers:first-child { // move right when previousNext: false
+            left: auto;
+            right: .3em;
         }
 
         .k-pager-numbers .k-current-page,

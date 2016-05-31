@@ -3013,6 +3013,10 @@ td.k-state-focused.k-state-selected,
     .k-ff,
     .k-ie11,
     .k-safari {    
+        .k-pager-wrap {
+            min-height: 2.4em;
+        }
+        
         .k-pager-wrap .k-pager-nav,
         .k-pager-input
         {
@@ -3023,14 +3027,19 @@ td.k-state-focused.k-state-selected,
         .k-pager-numbers,
         .k-grid .k-pager-numbers
         {
-            position: relative;
+            position: absolute;
             display: inline-flex;
             flex-direction: column-reverse;
-            margin-left: .3em;
+            left: 5.6em;
             overflow: visible;
             height: auto;
             transform: translatey(-100%);
             -webkit-transform: translatey(-100%);
+        }
+        
+        .k-pager-numbers:first-child,
+        .k-grid .k-pager-numbers:first-child { // move left when previousNext: false
+            left: .3em;
         }
         
         .km-pane-wrapper .k-pager-numbers .k-link,
@@ -3050,10 +3059,14 @@ td.k-state-focused.k-state-selected,
         .k-rtl .k-pager-numbers,
         .k-rtl .k-grid .k-pager-numbers
         {
-            right: 5.18em;
+            right: 5.68em;
             width: 4.45em;
         }
         
+        .k-rtl .k-pager-numbers:first-child,
+        .k-rtl .k-grid .k-pager-numbers:first-child { // move right when previousNext: false
+            right: .3em;
+        }
         
         .k-pager-numbers .k-current-page,
         .k-grid .k-pager-numbers .k-current-page
