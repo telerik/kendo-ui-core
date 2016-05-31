@@ -1,11 +1,11 @@
 ---
-title: Apply chart settings for exported PDF only
+title: Apply Chart Settings for Exported PDF Only
 page_title: Apply Chart Settings for Exported PDF Only | Kendo UI Charts
 description: "Learn how to apply changes, visible only in the exported PDF."
 slug: howto_apply_settings_for_PDF_only_charts
 ---
 
-# Apply chart settings for exported PDF only
+# Apply Chart Settings for Exported PDF Only
 
 The example below demonstrates how to apply changes, visible only in the exported PDF.
 
@@ -30,7 +30,7 @@ The example below demonstrates how to apply changes, visible only in the exporte
             top: 0,
             left: -1500
           }).appendTo('body');
-          
+
           function cleanup() {
             container.getKendoChart().destroy();
             container.remove();
@@ -42,7 +42,7 @@ The example below demonstrates how to apply changes, visible only in the exporte
               visible: true
             },
             transitions: false,
-            
+
             // Cleanup
             render: function(e){
               e.sender.saveAsPDF();
