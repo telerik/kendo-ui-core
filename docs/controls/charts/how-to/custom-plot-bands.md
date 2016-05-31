@@ -11,7 +11,7 @@ The example below demonstrates how to create our own plot bands as a custom over
 
 For a list of all available drawing primitives, refer to the [Drawing API article](/framework/drawing/overview).
 
-###### Example
+###### Example - Custom Plot Band in Column Chart
 
 ```html
     <div id="chart" />
@@ -25,18 +25,23 @@ For a list of all available drawing primitives, refer to the [Drawing API articl
         categoryAxis: {
           name: "categoryAxis"
         },
+        series: [{
+          type: "column",
+          data: [500, 650]
+        }],
         render: function(e) {
           // Locate value slot
           //
           // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/chart/chart_axis#methods-slot
-          var axis = e.sender.getAxis("valueAxis");
-          var slot = axis.slot(650);
+          var valueAxis = e.sender.getAxis("valueAxis");
+          var valueSlot = valueAxis.slot(650);
 
           // Locate right-most category slot
           //
           var categoryAxis = e.sender.getAxis("categoryAxis");
-          var lastCategoryIndex = Math.max(1, categoryAxis.range().max - 1);
-          var categorySlot = categoryAxis.slot(lastCategoryIndex);
+          var lastCategoryIndex = Math.max(1, categoryAxis.range().max);
+          var minCategorySlot = categoryAxis.slot(0);
+          var maxCategorySlot = categoryAxis.slot(lastCategoryIndex);
 
           // Render a line element
           //
@@ -47,12 +52,78 @@ For a list of all available drawing primitives, refer to the [Drawing API articl
               width: 3
             }
           });
-          line.moveTo(slot.origin).lineTo([categorySlot.origin.x, slot.origin.y]);
+          line.moveTo(valueSlot.origin).lineTo([maxCategorySlot.origin.x, valueSlot.origin.y]);
 
           // Render a text element
           //
           // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
-          var labelPos = [categorySlot.origin.x - 50, slot.origin.y - 20];
+          var labelPos = [maxCategorySlot.origin.x - 50, valueSlot.origin.y - 20];
+          var label = new kendo.drawing.Text("MAX", labelPos, {
+            fill: {
+              color: "red"
+            },
+            font: "14px sans"
+          });
+
+          var group = new kendo.drawing.Group();
+          group.append(line, label);
+
+          // Draw on chart surface
+          //
+          // http://docs.telerik.com/kendo-ui/framework/drawing/overview
+          e.sender.surface.draw(group);
+        }
+      });
+    </script>
+```
+
+###### Example - Custom Plot Band in Bar Chart
+
+```html
+    <div id="chart" />
+    <script>
+      $("#chart").kendoChart({
+        valueAxis: {
+          name: "valueAxis",
+          min: 0,
+          max: 700
+        },
+        categoryAxis: {
+          name: "categoryAxis"
+        },
+        series: [{
+          type: "bar",
+          data: [500, 650]
+        }],
+        render: function(e) {
+          // Locate value slot
+          //
+          // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/chart/chart_axis#methods-slot
+          var valueAxis = e.sender.getAxis("valueAxis");
+          var valueSlot = valueAxis.slot(650);
+
+          // Locate right-most category slot
+          //
+          var categoryAxis = e.sender.getAxis("categoryAxis");
+          var lastCategoryIndex = Math.max(1, categoryAxis.range().max);
+          var minCategorySlot = categoryAxis.slot(0);
+          var maxCategorySlot = categoryAxis.slot(lastCategoryIndex);
+
+          // Render a line element
+          //
+          // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
+          var line = new kendo.drawing.Path({
+            stroke: {
+              color: "red",
+              width: 3
+            }
+          });
+          line.moveTo(valueSlot.origin).lineTo([valueSlot.origin.x, minCategorySlot.origin.y]);
+
+          // Render a text element
+          //
+          // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
+          var labelPos = [valueSlot.origin.x + 10, maxCategorySlot.origin.y - 30];
           var label = new kendo.drawing.Text("MAX", labelPos, {
             fill: {
               color: "red"
