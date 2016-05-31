@@ -435,6 +435,7 @@ The HTML renderer has been tested in recent versions of Chrome, Firefox, Safari,
 - CSS box-shadow, text-shadow, and radial gradients are omitted. Linear gradients are supported.
 - Using browser zoom other than 100% is not supported.
 - Only border-style `solid` is rendered.
+- Tables' `border-collapse:collapse` style is not supported. Avoid using adjacent borders for separate table cells to prevent double borders in the PDF output.
 - Maximum document size is limited to 5080x5080mm (200x200 inches) by the PDF 1.5 specification. Larger files might not open in some viewers.
 - Shadow DOM is not rendered.
 - SVG referenced with the `<img>` tag will not render in Internet Explorer, because [IE taints the canvas](http://stackoverflow.com/questions/31484379/ie-canvas-datauri-security-error).
