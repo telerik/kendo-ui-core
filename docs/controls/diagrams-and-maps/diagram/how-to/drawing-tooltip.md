@@ -1,13 +1,13 @@
 ---
-title: Shapes Tooltip
-page_title: Shapes Tooltip | Kendo UI Diagram
-description: "Learn how to use the drawing tooltip to show tooptip for the Kendo UI Diagram shapes."
+title: Show Shapes Tooltip
+page_title: Show Shapes Tooltip | Kendo UI Diagram
+description: "Learn how to use the drawing tooltip to show a tooltip for the Kendo UI Diagram shapes."
 slug: howto_shapestooltip_diagram
 ---
 
-# Shapes Tooltip
+# Show Shapes Tooltip
 
-The example below demonstrates how to use the [drawing tooltip options](/api/javascript/drawing/tooltip-options) to show tooltip for the shapes.
+The example below demonstrates how to use the [drawing tooltip options](/api/javascript/drawing/tooltip-options) to show a tooltip for the shapes.
 
 > **Important**
 >
@@ -156,3 +156,4 @@ Other articles on Kendo UI Diagram:
 * [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
 * [How to Render External Content in Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})
 * [How to Use Scrollbars]({% slug howto_usescrollbar_diagram %})
+* [How to Wrap Text]({% slug howto_wraptext_diagram %})
