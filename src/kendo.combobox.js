@@ -168,6 +168,7 @@ var __meta__ = { // jshint ignore:line
             that.input.off(ns);
             that.element.off(ns);
             that._inputWrapper.off(ns);
+            clearTimeout(that._pasteTimeout);
 
             that._arrow.parent().off(CLICK + " " + MOUSEDOWN);
 
