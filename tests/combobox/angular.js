@@ -197,4 +197,22 @@
         equal(widget.listView.bound(), false);
         equal(widget.value(), "");
     });
+
+
+    ngTest("combobox's input should inherit maxlength attribute", 1, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            var colors = new kendo.data.ObservableArray([ { color: "red", value: 1 }, { color: "green", value: 2 }, { color: "blue", value: 3 } ]);
+
+            $scope.colors = new kendo.data.DataSource({ data: colors }),
+            $scope.selectedColor = 2;
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select maxlength="3" kendo-combo-box k-auto-bind="false" k-value-primitive="true" k-text="\'custom text\'" k-ng-model=selectedColor k-data-source=colors k-data-text-field="\'color\'" k-data-value-field="\'value\'"></select></div>');
+    },
+
+    function() {
+        var widget = QUnit.fixture.find("select").getKendoComboBox();
+
+        equal(widget.input.attr("maxlength"), 3);
+    });
 })();
