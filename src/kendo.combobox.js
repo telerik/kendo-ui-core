@@ -717,7 +717,8 @@ var __meta__ = { // jshint ignore:line
                 wrapper = that.wrapper,
                 SELECTOR = "input.k-input",
                 name = element.name || "",
-                input;
+                input,
+                maxLength;
 
             if (name) {
                 name = 'name="' + name + '_input" ';
@@ -735,8 +736,9 @@ var __meta__ = { // jshint ignore:line
             input[0].style.cssText = element.style.cssText;
             input[0].title = element.title;
 
-            if (element.maxLength > -1) {
-                input[0].maxLength = element.maxLength;
+            maxLength = parseInt(this.element.prop("maxlength") || this.element.attr("maxlength"));
+            if (maxLength > -1) {
+                input[0].maxLength = maxLength;
             }
 
             input.addClass(element.className)

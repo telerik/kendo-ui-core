@@ -732,5 +732,11 @@ asyncTest("triggers change after same value is being set multiple times trough t
         $("[data-offset-index=3]").trigger("click");
     });
 });
+test("visible input inherits select's minlength attribute ", function() {
+    dom = $('<select minlength="3" data-role="combobox"/>');
 
+    kendo.bind(dom);
+
+    equal(dom.data("kendoComboBox").input.prop("minlength"), dom.prop("minlength"));
+});
 })();
