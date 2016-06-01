@@ -735,7 +735,7 @@ var __meta__ = { // jshint ignore:line
             input[0].style.cssText = element.style.cssText;
             input[0].title = element.title;
 
-            maxLength = parseInt(this.element.prop("maxlength") || this.element.attr("maxlength"));
+            maxLength = parseInt(this.element.prop("maxlength") || this.element.attr("maxlength"), 10);
             if (maxLength > -1) {
                 input[0].maxLength = maxLength;
             }
