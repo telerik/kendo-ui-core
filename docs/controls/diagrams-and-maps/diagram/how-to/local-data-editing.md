@@ -280,5 +280,6 @@ Other articles on Kendo UI Diagram:
 * [How to Change Shape Visual Elements Dynamically]({% slug howto_changeshapevisualelements_dynamically_diagram %})
 * [How to Drag and Drop on Shapes]({% slug howto_draganddrop_onshapes_diagram %})
 * [How to Render External Content in Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})
+* [How to Show Shapes Tooltip]({% slug howto_shapestooltip_diagram %})
 * [How to Use Scrollbars]({% slug howto_usescrollbar_diagram %})
 * [How to Wrap Text]({% slug howto_wraptext_diagram %})
