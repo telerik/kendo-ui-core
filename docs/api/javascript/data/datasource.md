@@ -1023,6 +1023,16 @@ If set to an existing [kendo.data.Model](/api/javascript/data/model) instance th
 
 Executed before the server response is used. Use it to preprocess or parse the server response.
 
+#### Parameters
+
+##### response `String`
+
+The server response.
+
+#### Returns
+
+`Array` The data items from the response.
+
 #### Example - data projection
 
     <script>
