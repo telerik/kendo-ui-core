@@ -9,7 +9,7 @@ slug: window_service_angularjs_directives
 
 This article is contributed by Kjartan Valur.
 
-The `$kWindow` is a service that dynamically creates Kendo UI windows with a separate template and controller. The complete source code is available in the [kjartanvalur/angular-kendo-window](https://github.com/kjartanvalur/angular-kendo-window) GitHub repository.
+The `$kWindow` is a service which dynamically creates Kendo UI windows with a separate template and controller. The complete source code is available in the [`kjartanvalur/angular-kendo-window`](https://github.com/kjartanvalur/angular-kendo-window) GitHub repository.
 
 The example below demonstrates how to open a modal Kendo UI Window.
 
