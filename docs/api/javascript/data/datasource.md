@@ -1025,9 +1025,9 @@ Executed before the server response is used. Use it to preprocess or parse the s
 
 #### Parameters
 
-##### response `String`
+##### response `Object|Array`
 
-The server response.
+The initially parsed server response that may need additional modifications.
 
 #### Returns
 
