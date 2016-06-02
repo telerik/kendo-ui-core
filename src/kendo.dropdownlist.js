@@ -38,7 +38,6 @@ var __meta__ = { // jshint ignore:line
         DEFAULT = "k-state-default",
         STATEDISABLED = "k-state-disabled",
         ARIA_DISABLED = "aria-disabled",
-        ARIA_READONLY = "aria-readonly",
         HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
         TABINDEX = "tabindex",
         STATE_FILTER = "filter",
@@ -582,7 +581,6 @@ var __meta__ = { // jshint ignore:line
                 wrapper
                     .attr(TABINDEX, wrapper.data(TABINDEX))
                     .attr(ARIA_DISABLED, false)
-                    .attr(ARIA_READONLY, false)
                     .on("keydown" + ns, proxy(that._keydown, that))
                     .on("focusin" + ns, proxy(that._focusinHandler, that))
                     .on("focusout" + ns, proxy(that._focusoutHandler, that))
@@ -613,8 +611,7 @@ var __meta__ = { // jshint ignore:line
             element.attr(DISABLED, disable)
                    .attr(READONLY, readonly);
 
-            wrapper.attr(ARIA_DISABLED, disable)
-                   .attr(ARIA_READONLY, readonly);
+            wrapper.attr(ARIA_DISABLED, disable);
         },
 
         _keydown: function(e) {

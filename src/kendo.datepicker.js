@@ -41,7 +41,6 @@ var __meta__ = { // jshint ignore:line
     ARIA_DISABLED = "aria-disabled",
     ARIA_EXPANDED = "aria-expanded",
     ARIA_HIDDEN = "aria-hidden",
-    ARIA_READONLY = "aria-readonly",
     calendar = kendo.calendar,
     isInRange = calendar.isInRange,
     restrictValue = calendar.restrictValue,
@@ -415,7 +414,6 @@ var __meta__ = { // jshint ignore:line
                 element.removeAttr(DISABLED)
                        .removeAttr(READONLY)
                        .attr(ARIA_DISABLED, false)
-                       .attr(ARIA_READONLY, false)
                        .on("keydown" + ns, proxy(that._keydown, that))
                        .on("focusout" + ns, proxy(that._blur, that))
                        .on("focus" + ns, function() {
@@ -431,8 +429,7 @@ var __meta__ = { // jshint ignore:line
 
                 element.attr(DISABLED, disable)
                        .attr(READONLY, readonly)
-                       .attr(ARIA_DISABLED, disable)
-                       .attr(ARIA_READONLY, readonly);
+                       .attr(ARIA_DISABLED, disable);
             }
         },
 
