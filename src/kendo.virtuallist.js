@@ -503,7 +503,7 @@ var __meta__ = { // jshint ignore:line
                 that.options.valueMapper({
                     value: (this.options.selectable === "multiple") ? value : value[0],
                     success: function(indexes) {
-                        if (indexes === undefined) {
+                        if (indexes === undefined || indexes === -1 || indexes === null) {
                             indexes = [];
                         } else {
                             indexes = toArray(indexes);
