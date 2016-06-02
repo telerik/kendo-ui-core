@@ -931,4 +931,13 @@ $.extend(true, kendo.ui.Validator.prototype.options.messages,{
   "dateCompare": "End date should be greater than or equal to the start date"
 });
 }
+
+/* kendo.ui.progress method */
+if (kendo.ui.progress) {
+kendo.ui.progress.messages =
+$.extend(true, kendo.ui.progress.messages, {
+    loading: "Loading..."
+});
+}
+
 })(window.kendo.jQuery);

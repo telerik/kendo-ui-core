@@ -3042,7 +3042,7 @@ function pad(number, digits, end) {
                     containerScrollLeft = container.scrollLeft();
                     webkitCorrection = browser.webkit ? (!isRtl ? 0 : container[0].scrollWidth - container.width() - 2 * containerScrollLeft) : 0;
 
-                    mask = $("<div class='k-loading-mask'><span class='k-loading-text'>Loading...</span><div class='k-loading-image'/><div class='k-loading-color'/></div>")
+                    mask = $("<div class='k-loading-mask'><span class='k-loading-text'>" + kendo.ui.progress.messages.loading + "</span><div class='k-loading-image'/><div class='k-loading-color'/></div>")
                         .width("100%").height("100%")
                         .css("top", container.scrollTop())
                         .css(leftRight, Math.abs(containerScrollLeft) + webkitCorrection)
@@ -3118,6 +3118,10 @@ function pad(number, digits, end) {
             };
         }
     });
+
+    kendo.ui.progress.messages = {
+        loading: "Loading..."
+    };
 
     var ContainerNullObject = { bind: function () { return this; }, nullObject: true, options: {} };
 
