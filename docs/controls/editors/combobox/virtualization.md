@@ -113,7 +113,7 @@ In this case, the `pageSize` will be set to `80`, because ((520 / 26) * 4) is eq
 
 ### valueMapper
 
-The `valueMapper` function is mandatory for the functionality of the virtualized widget. The widget calls the `valueMapper` function when the widget receives a value, which is not fetched from the remote server yet. The widget will pass the selected values in the `valueMapper` function. In turn, the `valueMapper` implementation should return the respective data item indices.
+The `valueMapper` function is mandatory for the functionality of the virtualized widget. The widget calls the `valueMapper` function when the widget receives a value, which is not fetched from the remote server yet. The widget will pass the selected values in the `valueMapper` function. In turn, the `valueMapper` implementation should return the respective data item indices. If the value does not exist the `valueMapper` should return `null`, `[]` or `-1` and the widget will deselect the currently selected item(s).
 
 ```javascript
     valueMapper: function(options) {
@@ -155,7 +155,9 @@ On initial load, the widget will check whether the selected value is present in 
 
 ### Function Result
 
-The `valueMapper` callback expects to receive a row index or list of indices (when multiple selection is available). That being said, the service should return either an index (number) or a list of indices. For instance, examine the result of [the test service](https://demos.telerik.com/kendo-ui/combobox/virtualization) used in the online demos:
+The `valueMapper` callback expects to receive a row index or list of indices (when multiple selection is available). That being said, the service should return either an index (number) or a list of indices. If the value does not exist the `valueMapper` should return `null`, `[]` or `-1` and the widget will deselect the currently selected item(s).
+
+For instance, examine the result of [the test service](https://demos.telerik.com/kendo-ui/combobox/virtualization) used in the online demos:
 
 ```javascript
 $.ajax({
