@@ -41,7 +41,6 @@ var __meta__ = { // jshint ignore:line
         FOCUSED = "k-state-focused",
         STATEDISABLED = "k-state-disabled",
         ARIA_DISABLED = "aria-disabled",
-        ARIA_READONLY = "aria-readonly",
         STATE_FILTER = "filter",
         STATE_ACCEPT = "accept",
         STATE_REBIND = "rebind",
@@ -235,8 +234,7 @@ var __meta__ = { // jshint ignore:line
 
                 input.removeAttr(DISABLED)
                      .removeAttr(READONLY)
-                     .attr(ARIA_DISABLED, false)
-                     .attr(ARIA_READONLY, false);
+                     .attr(ARIA_DISABLED, false);
 
                 arrow.on(CLICK, proxy(that._arrowClick, that))
                      .on(MOUSEDOWN, function(e) { e.preventDefault(); });
@@ -254,8 +252,7 @@ var __meta__ = { // jshint ignore:line
 
                 input.attr(DISABLED, disable)
                      .attr(READONLY, readonly)
-                     .attr(ARIA_DISABLED, disable)
-                     .attr(ARIA_READONLY, readonly);
+                     .attr(ARIA_DISABLED, disable);
             }
         },
 

@@ -40,7 +40,6 @@ var __meta__ = { // jshint ignore:line
         PROGRESS = "progress",
         SELECT = "select",
         ARIA_DISABLED = "aria-disabled",
-        ARIA_READONLY = "aria-readonly",
         FOCUSEDCLASS = "k-state-focused",
         HIDDENCLASS = "k-loading-hidden",
         HOVERCLASS = "k-state-hover",
@@ -393,8 +392,7 @@ var __meta__ = { // jshint ignore:line
 
                 input.removeAttr(DISABLED)
                      .removeAttr(READONLY)
-                     .attr(ARIA_DISABLED, false)
-                     .attr(ARIA_READONLY, false);
+                     .attr(ARIA_DISABLED, false);
 
                 tagList
                     .on(MOUSEENTER, LI, function() { $(this).addClass(HOVERCLASS); })
@@ -409,8 +407,7 @@ var __meta__ = { // jshint ignore:line
 
                 input.attr(DISABLED, disable)
                      .attr(READONLY, readonly)
-                     .attr(ARIA_DISABLED, disable)
-                     .attr(ARIA_READONLY, readonly);
+                     .attr(ARIA_DISABLED, disable);
             }
         },
 
