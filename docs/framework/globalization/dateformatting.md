@@ -82,11 +82,11 @@ The `"T"` specifier renders a long time pattern (`"h:mm:ss tt"` for en-US).
 
 #### The 's' Specifier
 
-The `"s"` specifier renders universal sortable **local** date/time pattern (`"yyyy-MM-dd HH:mm:ssZ"` for en-US).
+The `"s"` specifier renders universal sortable **local** date/time pattern (`"yyyy-MM-dd HH:mm:ss"` for en-US).
 
 ###### Example
 
-    kendo.toString(new Date(2000, 10, 6), "u") -> 2000-11-06 00:00:00Z
+    kendo.toString(new Date(2000, 10, 6), "s") -> 2000-11-06 00:00:00
 
 #### The 'u' Specifier
 
