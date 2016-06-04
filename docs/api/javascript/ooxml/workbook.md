@@ -612,8 +612,12 @@ Deprecated in versions 2015.3 and newer. Use [textAlign](#configuration-sheets.r
 
 ### sheets.rows.cells.index `Object`
 The zero-based index of the cell in the row.
+Records missing an index will be placed in the first available cell on the row.
 
-> Only the first value will be recorded if two cells occupy the same index.
+> **Important**
+>
+> Mixing indexed with non-indexed cells might yield invalid results.
+> If you want to use both, place the indexed cells at the end of the array.
 
 #### Example - list cells by index
 
