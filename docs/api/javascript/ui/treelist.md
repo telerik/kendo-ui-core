@@ -1190,12 +1190,13 @@ If the `dataSource` option is an existing `kendo.data.DataSource` instance, the 
           url: "http://demos.telerik.com/kendo-ui/service/products",
           dataType: "jsonp"
         }
-      },
-      pageSize: 10
+      }
     });
     $("#treelist").kendoTreeList({
       dataSource: dataSource,
-      pageable: true
+      columns: [
+        { field: "ProductName" }
+      ]
     });
     </script>
 
