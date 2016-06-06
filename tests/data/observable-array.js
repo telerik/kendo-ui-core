@@ -111,17 +111,4 @@ test("reduceRight on an empty array returns undefined", function () {
         equal(actual, expected);
     });
 
-module("ObservableArray @@iterator");
-
-if (typeof Symbol !== "undefined") {
-    test("allows iteration with for-of", 6, function() {
-        var source = ["1", "2", "3", "a", "b", "c"];
-        var array = new kendo.data.ObservableArray(source);
-
-        for (let number of array) {
-            ok(number);
-        }
-    });
-}
-
 }());
