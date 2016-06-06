@@ -45,7 +45,7 @@
     "jshint": "2.8.0",
     "jshint-stylish": "~2.0.1",
     "karma": "0.13.10",
-    "karma-chrome-launcher": "~0.2",
+    "karma-chrome-launcher": "^1.0.1",
     "karma-firefox-launcher": "~0.1",
     "karma-html2js-preprocessor": "~0.1",
     "karma-junit-reporter": "0.2.2",
