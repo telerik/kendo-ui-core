@@ -29,7 +29,9 @@ The example below demonstrates how to add a **Close** button to a modal Kendo UI
 
           $(".close-button").click(function(){
             // call 'close' method on nearest kendoWindow
-            $(this).closest("[data-role=window]").kendoWindow("close");
+            $(this).closest("[data-role=window]").data("kendoWindow").close();
+            // the above is equivalent to:
+            //$(this).closest(".k-window-content").data("kendoWindow").close();
           });
 
           if (!wnd.data("kendoWindow")) {
