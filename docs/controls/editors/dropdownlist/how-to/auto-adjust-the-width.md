@@ -7,17 +7,19 @@ slug: howto_automatically_adjust_width_dropdownlist
 
 # Adjust Width Automatically
 
-The examples below demonstrates how to automatically adjust the width of a DropDownList, depending on its list items.
+The examples below demonstrate how to automatically adjust the width of a DropDownList, depending on its list items.
 
-There are two things that should be done:
+To adjust the width automatically, follow the steps below.
 
-* reset the widget's list width to `auto` (performed after initialization)
-* add the scrollbar width to the list width (performed in the `adjustDropDownWidth` function)
+**Step 1** Reset the list width of the widget to `auto`. Perform it after initialization.
 
-There are two possible scenarios:
+**Step 2** Add the scrollbar width to the list width. Perform it in the `adjustDropDownWidth` function.
 
-* the DropDownList is already bound when it is opened. In this case, execute `adjustDropDownWidth` in the [`open`](/api/javascript/ui/dropdownlist#events-open) event.
-* the DropDownList triggers a remote request after it is opened. In this case, execute `adjustDropDownWidth` in the [`dataBound`](/api/javascript/ui/dropdownlist#events-dataBound) event.
+There are two possible scenarios.
+
+**Scenario 1** The DropDownList is already bound when it is opened. In this case, execute `adjustDropDownWidth` in the [`open`](/api/javascript/ui/dropdownlist#events-open) event.
+
+**Scenario 2** The DropDownList triggers a remote request after it is opened. In this case, execute `adjustDropDownWidth` in the [`dataBound`](/api/javascript/ui/dropdownlist#events-dataBound) event.
 
 ###### Example
 
