@@ -110,4 +110,15 @@ test("reduceRight passes index of collection to callback for each element", func
     equal(actual, expected);
 });
 
+module("ObservableArray @@iterator");
+
+test("allows iteration with for-of", 6, function() {
+    var source = ["1", "2", "3", "a", "b", "c"];
+    var array = new kendo.data.ObservableArray(source);
+
+    for (let number of array) {
+        ok(number);
+    }
+});
+
 }());
