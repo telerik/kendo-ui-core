@@ -4829,7 +4829,7 @@ Can be set to a JavaScript object which represents the pager configuration.
 
 ### pageable.pageSize `Number`
 
-The number of data items which will be displayed in the grid.
+The number of data items which will be displayed in the grid. **This setting will not work if the Grid is assigned an already existing Kendo UI DataSource instance.**
 
 #### Example - set page size
 
