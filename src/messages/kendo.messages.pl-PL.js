@@ -76,6 +76,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
 if (kendo.ui.ColumnMenu) {
 kendo.ui.ColumnMenu.prototype.options.messages =
 $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
+  "filter": "Filtr",
   "columns": "Kolumny",
   "sortAscending": "Sortuj Rosnąco",
   "sortDescending": "Sortuj malejąco",
