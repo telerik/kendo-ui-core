@@ -392,7 +392,7 @@ var __meta__ = { // jshint ignore:line
 
     // Polyfill for Symbol.iterator
     if (typeof Symbol !== "undefined" && Symbol.iterator && !ObservableArray.prototype[Symbol.iterator]) {
-        ObservableArray.prototype[Symbol.iterator] = [][Symbol.iterator]
+        ObservableArray.prototype[Symbol.iterator] = [][Symbol.iterator];
     }
 
     var LazyObservableArray = ObservableArray.extend({
