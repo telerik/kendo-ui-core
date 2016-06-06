@@ -460,13 +460,13 @@ navigation:
         title: "Spreadsheet"
     "*import-and-export-data":
         title: "Import and Export Data"
-        position: 4
+        position: 5
     "*localization-spreadsh":
         title: "Localization"
-        position: 5
+        position: 6
     "*end-user":
         title: "For the End User"
-        position: 6
+        position: 7
     "*listview":
         title: "ListView"
     "*maskedtextbox":

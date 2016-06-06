@@ -150,9 +150,11 @@ The Spreadsheet does not support the following options otherwise available in Ex
 
 ## See Also
 
-Other articles on Kendo UI Spreadsheet:
+Other articles on the Kendo UI Spreadsheet:
 
+* [Overview]({% slug overview_spreadsheet_widget %})
 * [Custom Functions]({% slug custom_functions_spreadsheet_widget %})
+* [Custom Cell Editors]({% slug custom_editors_spreadsheet_widget %})
 * [Store Data as JSON]({% slug loadand_saveas_json_spreadsheet_widget %})
 * [Export to Excel]({% slug export_toexcel_spreadsheet_widget %})
 * [Server-Side Processing]({% slug serverside_processing_spreadsheet_widget %})
