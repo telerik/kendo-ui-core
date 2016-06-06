@@ -9,7 +9,7 @@ position: 2
 
 # Responsive Web Design
 
-By definition, responsive web design, or responsiveness, is an approach to web design. It aims at crafting sites to provide an optimal viewing experience&mdash;easy reading and navigation with a minimum of resizing, panning, and scrolling&mdash;across a wide range of devices from desktop computer monitors to smartphones. Responsive web design is the foundation of modern UX practices for building applications for the mobile web.
+By definition, responsive web design, or responsiveness, is an approach to web design. It aims at crafting sites to provide an optimal viewing experience&mdash;easy reading and navigation with minimum of resizing, panning, and scrolling&mdash;across a wide range of devices from desktop computer monitors to smartphones. Responsive web design is the foundation of modern UX practices for building applications for the mobile web.
 
 ## Kendo UI in Responsive Web Pages
 
@@ -17,13 +17,13 @@ Most Kendo UI widgets work and auto-resize when used in responsive web pages out
 
 ### Non-Autoresizing Widgets in Container
 
-Below is a list of Kendo UI widgets that do not support auto-resizing when their container is resized:
+Below is a list of the Kendo UI widgets that do not support auto-resizing when their container is resized.
 
 * All [widgets for data visualization: Charts and Barcodes](http://demos.telerik.com/kendo-ui/)
-* [Mobile ActionSheet](http://demos.telerik.com/kendo-ui/m/index#actionsheet/index)
-* [Mobile ListView](http://demos.telerik.com/kendo-ui/m/index#mobile-listview/index)
-* [Mobile ScrollView](http://demos.telerik.com/kendo-ui/m/index#scrollview/mobile)
-* [Mobile Switch](http://demos.telerik.com/kendo-ui/m/index#switch/mobile)
+* [Hybrid ActionSheet](http://demos.telerik.com/kendo-ui/m/index#actionsheet/index)
+* [Hybrid ListView](http://demos.telerik.com/kendo-ui/m/index#mobile-listview/index)
+* [Hybrid ScrollView](http://demos.telerik.com/kendo-ui/m/index#scrollview/mobile)
+* [Hybrid Switch](http://demos.telerik.com/kendo-ui/m/index#switch/mobile)
 * [Grid](http://demos.telerik.com/kendo-ui/grid/index)
 * [PivotGrid](http://demos.telerik.com/kendo-ui/pivotgrid/index)
 * [Scheduler](http://demos.telerik.com/kendo-ui/scheduler/index)
@@ -90,7 +90,7 @@ The example below demonstrates how to auto-resize a chart with a 100% width.
 
 ### Individual Widget Resizing
 
-Each Kendo UI widget has a `resize()` method which can be used to trigger a layout readjustment instead of using [`kendo.resize`](/api/javascript/kendo#methods-resize). The widget's `resize` method accepts a single Boolean parameter, which defines whether the control should execute its layout adjustment algorithm even if the widget's dimensions have not changed (`"force"` mode).
+Each Kendo UI widget has a `resize()` method which can be used to trigger a layout readjustment instead of using [`kendo.resize`](/api/javascript/kendo#methods-resize). The `resize` method of the widget accepts a single Boolean parameter, which defines whether the control should execute its layout adjustment algorithm even if the widget dimensions have not changed (`"force"` mode).
 
 ### Apply `resize()` Method
 
@@ -107,9 +107,9 @@ The example below demonstrates how to use the `resize()` method.
     // force the layout readjustment without setting a new height
     gridWidget.resize(true);
 
-The example above uses a `wrapper` field, which is documented in the article about the [widget wrapper and widget element](/framework/widgets/wrapper-element).
+The example above uses a `wrapper` field, which is documented in the article on the [widget wrapper and widget element](/framework/widgets/wrapper-element).
 
-If the widget wrapper resizes automatically with its parent element during browser window resize, it is not required to set new dimensions for the `wrapper` before executing the `resize` method, or to use the  `"force"` mode.
+If the widget wrapper resizes automatically with its parent element during browser window resize, it is not required to set new dimensions for the `wrapper` before executing the `resize` method, nor to use the  `"force"` mode.
 
 ## Media Queries
 
@@ -127,7 +127,9 @@ The example below demonstrates a CSS media query.
 
 The responsive styles of Kendo UI use the non-mobile first method with media queries having max-width breakpoints. Max-width refers to every window or device with width or screen-width of less than or equal to the amount given. That said, written styles, e.g. under 480px breakpoint, are going to override the base styles on screens of max-width equal to 480px or less.
 
-> Responsive behaviors that depend on CSS media queries cannot be disabled.
+> **Important**
+>
+> Responsive behaviors which depend on CSS media queries cannot be disabled.
 
 ## Responsive UI Enhancements
 
