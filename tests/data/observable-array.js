@@ -97,7 +97,6 @@ test("reduceRight on an empty array returns undefined", function () {
     equal(actual, expected);
 });
 
-if (typeof Symbol !== "undefined") {
     test("reduceRight passes index of collection to callback for each element", function () {
         var source = ["1", "2", "3", "a", "b", "c"],
             array = new kendo.data.ObservableArray(source),
@@ -110,17 +109,18 @@ if (typeof Symbol !== "undefined") {
 
         equal(actual, expected);
     });
-}
 
 module("ObservableArray @@iterator");
 
-test("allows iteration with for-of", 6, function() {
-    var source = ["1", "2", "3", "a", "b", "c"];
-    var array = new kendo.data.ObservableArray(source);
+if (typeof Symbol !== "undefined") {
+    test("allows iteration with for-of", 6, function() {
+        var source = ["1", "2", "3", "a", "b", "c"];
+        var array = new kendo.data.ObservableArray(source);
 
-    for (let number of array) {
-        ok(number);
-    }
-});
+        for (let number of array) {
+            ok(number);
+        }
+    });
+}
 
 }());
