@@ -127,6 +127,8 @@ The example below demonstrates a CSS media query.
 
 The responsive styles of Kendo UI use the non-mobile first method with media queries having max-width breakpoints. Max-width refers to every window or device with width or screen-width of less than or equal to the amount given. That said, written styles, e.g. under 480px breakpoint, are going to override the base styles on screens of max-width equal to 480px or less.
 
+> Responsive behaviors that depend on CSS media queries cannot be disabled.
+
 ## Responsive UI Enhancements
 
 Responsive UI enhancements utilize media queries and include built-in UI enhancements for scalability and improved user experience on different form factors. Such features are available for Kendo UI widgets such as the Grid, Scheduler, TreeList, etc.
