@@ -387,7 +387,7 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            if (value !== null && !that.options.disableDates(value)) {
+            if (value === null || !that.options.disableDates(value)) {
                 that._value = value;
             } else if (that._value === undefined) {
                 that._value = null;
