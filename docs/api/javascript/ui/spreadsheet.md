@@ -1039,6 +1039,29 @@ Those tools which are part of a tool group are defined as array. For example `["
     </script>
 ```
 
+#### Example - show a custom tool
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                home: [
+                    // for all available options, see the toolbar items configuration
+                    // http://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar#configuration-items
+                    {
+                        type: "button",
+                        text: "Custom",
+                        spriteCssClass: "k-icon k-font-icon k-i-cog",
+                        click: function() {
+                            window.alert("custom tool");
+                        }
+                    }
+                ]
+            }
+        });
+    </script>
+```
+
 ### toolbar.insert `Boolean|Array` *(default: true)*
 A boolean value indicating if the "insert" tab should be displayed or a collection of tools that will be shown in the "insert" tab.
 
