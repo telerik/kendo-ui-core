@@ -1,7 +1,7 @@
 ---
 title: Get Started with Kendo UI
 page_title: Get Started with Kendo UI | Kendo UI Getting Started
-description: "Get your HTML5 UI frameworks and widgets by hosting Kendo UI, downloading Kendo UI bower package, or using Kendo UI CDN service."
+description: "Host Kendo UI in your project, download the Bower packages, or install it by using the CDN services."
 previous_url: /install/onsite, /getting-started, /intro/getting-started
 slug: getting_started_installation_kendoui
 position: 1
@@ -22,21 +22,24 @@ Depending on your preferences and the requirements of your project, you can:
 
 ### Download
 
-Once you [download any of the Kendo UI bundles](http://www.telerik.com/download/kendo-ui), you will get the following folders in your local repository:
+Once you [download any of the Kendo UI bundles](http://www.telerik.com/download/kendo-ui), the folders listed below are hosted in your local repository.
 
-* `/examples`&mdash;This folder accommodates the quick start demo files. Although they are static HTML files, it is recommended to open them via a web server, instead of directly from the file system. The latter approach will break all Ajax data requests.
-* `/js`&mdash;Contains the minified JavaScript files.
-* `/src`&mdash;Holds the source code files. Note that it is not available in the trial version.
-* `/styles`&mdash;Consists of the minified CSS files and theme images. The folder also includes the LESS files, which can be passed to the compiler, located on the first-level folders inside `styles/folder: styles/web/` and `styles/mobile/`. However, note that the LESS files are not available in the trial version.
-* `/wrappers`&mdash;Includes the server-side wrappers. As it is necessary for the Telerik UI for ASP.NET MVC, UI for JSP or UI for PHP distributions only, the folder is available in the commercial packages of these versions.
-* `changelog.html`&mdash;Provides the Kendo UI release notes.
+|FOLDERS 						|CONTENTS |
+|:---								|:---			|
+|`/examples`				|The folder accommodates the quick-start demo files. Although they are static HTML files, it is recommended that you open them through a web server instead of directly from the file system. The latter approach breaks all Ajax data requests.|
+|`/js`							|Contains the minified JavaScript files.|
+|`/src`							|Holds the source code files. Note that it is _not_ available in the trial version.|
+|`/styles`					|Consists of the minified CSS files and theme images. The folder also includes the LESS files, which can be passed to the compiler, located on the first-level folders inside `styles/folder: styles/web/` and `styles/mobile/`. Note that the LESS files are _not_ available in the trial version.|
+|`/wrappers`				|Includes the server-side wrappers. As it is necessary for the UI for ASP.NET MVC, UI for JSP or UI for PHP distributions only, the folder is available in the commercial packages of these versions.|
+|`changelog.html`		|Provides the Kendo UI release notes.|
 
 ### Add CSS and JavaScript References
 
-To use Kendo UI in your project, you need to include the required JavaScript and CSS files.
+To use Kendo UI in your project, include the required JavaScript and CSS files.
 
 **Step 1** Extract the `/js` and `/styles` directories from the bundle archive and copy them to your web application root directory.  
-**Step 2** Include the Kendo UI JavaScript and CSS files in the `head` tag of your HTML document. Make sure the common CSS file is registered before the theme CSS file.
+
+**Step 2** Include the Kendo UI JavaScript and CSS files in the `head` tag of your HTML document. Make sure the common CSS file is registered _before_ the theme CSS file.
 
 ###### Example
 
@@ -44,16 +47,16 @@ To use Kendo UI in your project, you need to include the required JavaScript and
 	        <html>
 	        <head>
 	            <title>Welcome to Kendo UI!</title>
-	            <!-- Common Kendo UI CSS for web and dataviz widgets -->
+	            <!-- Common Kendo UI CSS for web widgets and widgets for data visualization. -->
 	            <link href="styles/kendo.common.min.css" rel="stylesheet" />
 
-	            <!-- (optional) Kendo UI web widgets' RTL CSS, include only in right-to-left applications -->
+	            <!-- (Optional) RTL CSS for Kendo UI widgets for the web. Include only in right-to-left applications. -->
 	            <link href="styles/kendo.rtl.min.css" rel="stylesheet" type="text/css" />
 
-	            <!-- Default Kendo UI theme CSS for web and dataviz widgets -->
+	            <!-- Default Kendo UI theme CSS for web widgets and widgets for data visualization. -->
 	            <link href="styles/kendo.default.min.css" rel="stylesheet" />
 
-	            <!-- (optional) Kendo UI Mobile CSS, include only if you will use the mobile devices features -->
+	            <!-- (Optional) Kendo UI Hybrid CSS. Include only if you will use the mobile devices features. -->
 	            <link href="styles/kendo.default.mobile.min.css" rel="stylesheet" type="text/css" />
 
 	            <!-- jQuery JavaScript -->
@@ -69,7 +72,7 @@ To use Kendo UI in your project, you need to include the required JavaScript and
 
 > **Important**  
 >
-> The code examples onwards assume that the Kendo UI scripts and stylesheets were added to the document.
+> The code examples onwards assume that the Kendo UI scripts and stylesheets are now added to the document.
 
 **Step 3** Initialize a Widget.
 
@@ -111,15 +114,19 @@ The example below demonstrates the full initialization of the [DatePicker widget
 
 ## Install Bower Packages
 
-### Kendo UI Bower Packages
+### Delimiter for Recurrence Exceptions
+
+**Breaking Change** As of the Kendo UI 2016 Q2 (2016.2.504) release, the Scheduler substitutes the semicolon as the delimiter type for recurrence exception with the comma. Also, the widget no longer adds a trailing delimiter to a recurrence exception.
+
+The change was driven by the [RFC 5545](http://tools.ietf.org/html/rfc5545#page-120) specification. Note that the previously demonstrated behavior was incorrect.
+
+### Bower Packages
 
 [Bower](http://bower.io/) is a popular package manager for the web. Kendo UI maintains 2 bower packages, namely Kendo UI Core and Kendo UI Professional. Official releases, service packs and internal builds are uploaded to both of them.
 
 For more information on installing Kendo UI as a Bower package, see [this article]({% slug kendoui_bower_packages_kendoui_installation %}).
 
 ## Use CDN Services
-
-### Kendo UI CDN Services
 
 Kendo UI CDN is hosted on [Amazon CloudFront](https://aws.amazon.com/cloudfront/). To access the CDN Service, you can use different approaches.
 
