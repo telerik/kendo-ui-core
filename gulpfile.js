@@ -235,6 +235,10 @@ gulp.task('cjs', function() {
                     .pipe(rename('LICENSE'))
                     .pipe(gulp.dest('dist/npm'));
 
-        return merge(js, styles, pkg);
+        var readme = gulp.src('resources/npm/' + flavor + '-README.md')
+                    .pipe(rename('README.md'))
+                    .pipe(gulp.dest('dist/npm'));
+
+        return merge(js, styles, pkg, license, readme);
     })
 })
