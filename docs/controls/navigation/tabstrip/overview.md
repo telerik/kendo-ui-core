@@ -148,6 +148,10 @@ If the TabStrip has no fixed width and is placed in a fluid layout, it can re-ch
 
 For additional information on the configuration, events, and methods of the widget, check the [TabStrip API](/api/javascript/ui/tabstrip).
 
+### Scrollable Content
+
+The TabStrip content containers are scrollable by default. This allows the widget to display scrollbars if it has a fixed height and holds large content that cannot fit. If needed, it is possible to disable TabStrip content scrolling. This can help in scenarios where the TabStrip hosts a widget such as a Menu that needs to overflow outside the TabStrip. For more information and a runnable example, check the following how-to article: [Disable TabStrip Content Scrolling](/controls/navigation/tabstrip/how-to/disable-content-scrolling)
+
 ### Select Tab on Initial Load
 
 It is possible to select a tab and display its associated content upon the initial load. There are two ways to accomplish this task:
