@@ -1,86 +1,50 @@
 ---
-title: Show Category Axis Labels in Two Rows
-page_title: Show Category Axis Labels in Two Rows | Kendo UI Charts
-description: "Learn how to show Category Axis labels in two rows when working with Kendo UI Charts."
+title: Show Category Axis Labels on Multiple Lines
+page_title: Show Category Axis Labels in Multiple Lines | Kendo UI Charts
+description: "Learn how to insert line breaks in Category Axis labels when working with Kendo UI Charts."
 slug: howto_showlabelsintworows_charts
 ---
 
-# Show Category Axis Labels in Two Rows
+# Show Category Axis Labels on Multiple Lines
 
-The example below demonstrates how to show Category Axis labels in two rows when working with Kendo UI Charts.
+You can insert newline symbols in the Category Axis labels to break them on multiple lines.
 
 ###### Example
 
 ```html
 
     <div id="chart"></div>
-	<script>
+    <script>
       var data = [{
         value: 1,
-        category: "Category 1"
+        category: "Category Foo"
       },{
         value: 2,
-        category: "Category 2"
+        category: "Category Bar"
       }, {
         value: 3,
-        category: "Category 3"
-      }, {
-        value: 4,
-        category: "Category 4"
-      }, {
-        value: 3,
-        category: "Category 5"
-      }, {
-        value: 4,
-        category: "Category 6"
+        category: "Category Baz"
       }];
 
       $("#chart").kendoChart({
-        title: {
-          text: "Gross domestic product growth /GDP annual %/"
-        },
         dataSource: {
           data: data
         },
-        legend: {
-          position: "top"
-        },
-        seriesDefaults: {
-          type: "column"
-        },
         series: [{
+          type: "column",
           name: "Series Name",
           field: "value"
         }],
-        valueAxis: {
-          labels: {
-            format: "{0}%"
-          },
-          line: {
-            visible: false
-          },
-          axisCrossingValue: 0
-        },
         categoryAxis: {
           field: "category",
           labels: {
             template: labelTemplate
           }
-        },
-        tooltip: {
-          visible: true,
-          format: "{0}%",
-          template: "#= series.name #: #= value #"
         }
       });
 
       function labelTemplate(e) {
-        var ds = $("#chart").data("kendoChart").dataSource;
-        var index = ds.indexOf(e.dataItem);
-        var label = index % 2 !== 0 ? "&nbsp;\n" : "";
-        label += e.value;
-
-        return label;
+        return e.value.split(" ").join("\n");
       }
     </script>
 ```
