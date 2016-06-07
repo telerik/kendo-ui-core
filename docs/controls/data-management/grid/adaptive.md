@@ -159,6 +159,12 @@ The example below demonstrates how to add multiple adaptive Grids to the same pa
         $("#grid2").kendoGrid(gridConfig);
     </script>
 
+### Destroy the Adaptive Grid
+
+When in adaptive mode, the Grid generates some auxiliary markup, which needs to be removed, if the widget is to be [destroyed](/intro/widget-basics/destroy) manually.
+
+The recommended approach is to call [kendo.destroy()](/api/javascript/kendo#methods-destroy) over the closest Grid's `.km-pane-wrapper` ancestor, which is created around the Grid widget. Then remove this whole `.km-pane-wrapper` element from the DOM. If the Grid should be recreated, insert a new `<div>` at the same place where the previous Grid `<div>` was placed initially.
+
 ## See Also
 
 Other articles on Kendo UI Grid:
