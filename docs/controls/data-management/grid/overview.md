@@ -198,4 +198,4 @@ Other articles on the Kendo UI Grid:
 * [Overview of the Grid JSP Tag]({% slug overview_grid_uiforjsp %})
 * [Overview of the Grid PHP Class](/php/widgets/grid/overview)
 
-For how-to examples on the Kendo UI Grid widget, browse [its How-to section]({% slug howto_bindto_telerik_backend_services_grid %}).
+For how-to examples on the Kendo UI Grid widget, browse its [**How To** documentation folder]({% slug howto_bindto_telerik_backend_services_grid %}).

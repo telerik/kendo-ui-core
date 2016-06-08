@@ -5,7 +5,7 @@ description: "Learn how to resize the Kendo UI Grid widget and to apply the new 
 slug: howto_resize_by_dragging_and_apply_the_new_size_grid
 ---
 
-# esize the Grid by Dragging and Apply the New Size
+# Resize the Grid by Dragging and Apply the New Size
 
 The example below demonstrates how to resize the Kendo UI Grid by dragging its bottom-right corner.
 
@@ -39,12 +39,12 @@ The example below demonstrates how to resize the Kendo UI Grid by dragging its b
     <div class="grid-wrap">
       <div id="grid1" class="kendogrid"></div>
     </div>
-  
+
   <script>
 
     var minGridWidth = 150;
     var minGridHeight = 100;
-    
+
     function averageRowHeight(table) {
         var rowCount = table.find("tr").length;
         if (rowCount > 0) {
@@ -55,11 +55,11 @@ The example below demonstrates how to resize the Kendo UI Grid by dragging its b
             return table.height();
         }
     }
-    
+
     function changePageSize(grid) {
         grid.dataSource.pageSize( Math.floor(grid.wrapper.children(".k-grid-content").height() / averageRowHeight(grid.tbody.parent())) );    
     }
-  
+
     $(function(){
         var options = {
             dataSource: {
@@ -106,7 +106,7 @@ The example below demonstrates how to resize the Kendo UI Grid by dragging its b
                 }
             ]
         };
-    
+
         $("#grid1").kendoGrid(options);
 
         changePageSize($("#grid1").data("kendoGrid"));
@@ -142,9 +142,9 @@ The example below demonstrates how to resize the Kendo UI Grid by dragging its b
               }
             });
         });
-      
+
     });
-    
+
   </script>
 ```
 
@@ -161,4 +161,4 @@ Other articles on the Kendo UI Grid and how-to examples related to its layout:
 * [How to Resize Grid When Window Is Resized]({% slug howto_resize_whenthe_windowis_resized_grid %})
 * [How to Use FontAwesome Icons in Custom Command Buttons]({% slug howto_use_fontawesomeiconsin_custom_command_buttons_grid %})
 
-For more runnable examples on Kendo UI Grid, browse its [how-to articles]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
