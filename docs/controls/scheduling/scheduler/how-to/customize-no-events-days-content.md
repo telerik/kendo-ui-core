@@ -22,10 +22,10 @@ The example below demonstrates how to customize the content of days with no even
     </div>
     <div id="scheduler"></div>
 </div>
-<script> 
+<script>
 $(function() {
     $("#scheduler").kendoScheduler({
-        date: new Date("2013/6/13"), 
+        date: new Date("2013/6/13"),
         startTime: new Date("2013/6/13 07:00 AM"),
         height: 600,
       dayTemplate: '#= getTemplate(date, resources) #',
@@ -112,8 +112,8 @@ $(function() {
         });
     });
 });
-  
- 
+
+
   function getTemplate(date, resources) {
     var scheduler = $("#scheduler").data("kendoScheduler");
     var start = kendo.date.getDate(date);
@@ -180,20 +180,12 @@ Other articles and how-to examples on the Kendo UI Scheduler:
 * [How to Calculate Scheduler Height Dynamically on Mobile]({% slug howto_calculate_scheduler_height_dunamically_onmobile_scheduler %})
 * [How to Create Custom Views Inheriting Built-In Views]({% slug howto_create_custom_view_inheriting_builtinview_scheduler %})
 * [How to Create Custom `month` View with Event Count in **Show More** Button]({% slug howto_create_custom_monthview_eventcount_showmore_button_scheduler %})
-* [How to Customize Edit and Events Templates]({% slug howto_customize_editand_event_templates_scheduler %})
-* [How to Create External Editor Form]({% slug howto_create_external_editor_form_scheduler %})
-* [How to Edit Using ContextMenu]({% slug howto_edit_using_kendouicontextmenu_scheduler %})
-* [How to Expand Scheduler to 100% Width and Height]({% slug howto_expand_scheduler_to100percent_widthandheight_scheduler %})
-* [How to Filter Events by Resource Using MultiSelect]({% slug howto_filter_eventsby_resourceusing_multiselect_scheduler %})
-* [How to Get Reference to the Built-In Validator]({% slug howto_get_referencetothe_builtin_validator_scheduler %})
-* [How to Hide Edit Buttons]({% slug howto_hidethe_editbutons_scheduler %})
 * [How to Nest Editors inside Event Templates]({% slug howto_nest_editorsinside_event_templates_scheduler %})
 * [How to Use Custom Event Template with Specific Background Color]({% slug howto_use_custom_event_templatewith_specific_background_color_scheduler %})
 
 How-to examples on the Kendo UI Scheduler in AngularJS:
 
 * [How to Edit Using ContextMenu]({% slug howto_edit_using_contectmenu_angularjs_scheduler %})
-* [How to Set Initial Data Manually]({% slug howto_set_intial_data_manually_angularjs_scheduler %})
 * [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
 
-For additional runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
+For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
