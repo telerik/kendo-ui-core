@@ -28,8 +28,8 @@ The Kendo UI widgets which support editing have the following configuration opti
 - `editable.template`&mdash;Allows you to define a custom editor template.
 
 > **Important**
-> * Some widgets provides additional `editable` options. Refer to the particular widget API documentation for additional details.
-> For instance, the Grid widget can disable `remove` functionality using [editable.destroy](/api/javascript/ui/grid#configuration-editable.destroy) option.
+>
+> Some widgets provide additional `editable` options. For more details, see the particular widget API documentation. For example, the Grid widget can disable the `remove` functionality by using the [`editable.destroy`](/api/javascript/ui/grid#configuration-editable.destroy) option.
 
 ### Events
 
@@ -40,8 +40,8 @@ The Kendo UI widgets which support editing have the following common events:
 - `remove`&mdash;Triggered before the model is removed.
 
 > **Important**
-> * Only the **Scheduler** widget supports prevention of the [edit](/api/javascript/ui/scheduler#events-edit), [save](/api/javascript/ui/scheduler#events-edit), and [remove](/api/javascript/ui/scheduler#events-edit) events.
-> * The widget can use only one editor form. It applies the same editor template for the `create` and `update` actions.
+> * Only the Scheduler widget supports prevention of the [`edit`](/api/javascript/ui/scheduler#events-edit), [`save`](/api/javascript/ui/scheduler#events-edit), and [`remove`](/api/javascript/ui/scheduler#events-edit) events.
+> * The widget uses only one editor form. It applies the same editor template for the `create` and `update` actions.
 
 ### Setup
 
@@ -51,7 +51,7 @@ To enable the editing functionality of the widget, perform the following steps:
 2. Define the model fields by using the [`schema.model`](/api/javascript/data/datasource#configuration-schema.model) option.
 3. Enable the `editable` option.
 
-For more information on how to set up the editing functionality in Kendo UI widgets, refer to the [article on editing of the Grid]({% slug editing_kendoui_grid_widget %}). They are largely applicable, but with minor differences, to the other Kendo UI widgets which support the editing functionality.
+For more information on how to set up the editing functionality in Kendo UI widgets, refer to the [article on editing of the Grid]({% slug editing_kendoui_grid_widget %}). The approaches are largely applicable, with minor differences, to the other Kendo UI widgets which support the editing functionality.
 
 ## Basic Concepts
 
@@ -76,7 +76,7 @@ A Kendo UI widget builds an editor form dynamically based on the [`schema.model`
 
 > **Important**
 >
-> The Kendo UI Scheduler has [a static model structure](/api/javascript/data/schedulerevent#fields) and it follows only the predefined model fields list. If you want to edit additional fields,use [a custom editor template]({% slug howto_customize_editand_event_templates_scheduler %}).
+> The Kendo UI Scheduler has [a static model structure](/api/javascript/data/schedulerevent#fields) and it follows only the predefined model fields list. If you want to edit additional fields, use [a custom editor template]({% slug howto_customize_editand_event_templates_scheduler %}).
 
 The auto-generated editor form is bound to the model through the [Kendo UI MVVM pattern]({% slug overview_mvvmpattern_kendoui %}). The widget also allows you to override this form by using a custom editor template.
 
@@ -141,9 +141,9 @@ If you want to define a specific default value, use the `schema.model.fields.def
 
 ### Get References to Specific Editor Controls
 
-You are able to access a particular editor element from the editor form by using `edit` event of the widget.
+You are able to access a particular editor element from the editor form by using the `edit` event of the widget.
 
-For a sample demo that demonstrates how to accomplish this task, refer to [this runnable example]({% slug howto_access_editor_controlsin_edit_events_grid %}).
+For a sample demo which demonstrates how to accomplish this task, refer to [this runnable example]({% slug howto_access_editor_controlsin_edit_events_grid %}).
 
 ### Update Models by Using Specific Editors
 
@@ -157,16 +157,19 @@ If you want to modify the `model` by updating the relevant editor, trigger the `
 
 > **Important**
 >
-> The preferable way to accomplish custom editing is by using a custom editor template.
+> To accomplish custom editing, it is recommended use a custom editor template.
 
 If you want to avoid defining a custom editor template for editing a specific model field, add an additional editor after the form is created.
 
 To do this, follow the steps below:
 
-1. Wire the `edit` event of the widget.
-2. Add the editor manually in the `edit` event handler.
-3. Set editor's value by using the model, available in the arguments of the `edit` event handler.
-4. Wire the `change` event of the editor and update the `model` accordingly.
+**Step 1** Wire the `edit` event of the widget.
+
+**Step 2** Add the editor manually in the `edit` event handler.
+
+**Step 3** Set editor's value by using the model, available in the arguments of the `edit` event handler.
+
+**Step 4** Wire the `change` event of the editor and update the `model` accordingly.
 
 > **Important**
 >
@@ -186,11 +189,7 @@ Wire the `edit` event of the widget. You will get the model from the passed argu
 
 > **Important**
 >
-> The **Scheduler** passes `e.event` field instead of `model`. The event is instance of the [SchedulerEvent](/api/javascript/data/schedulerevent) class.
-
-> **Important**
->
-> For more details, refer to the corresponding `edit` event API documentation of the respective Kendo UI widget.
+> The Scheduler passes the `e.event` field instead of the `model` one. The event is an instance of the [`SchedulerEvent`](/api/javascript/data/schedulerevent) class. For more details, see the corresponding `edit` event API documentation of the respective Kendo UI widget.
 
 ### Access Models by UID
 

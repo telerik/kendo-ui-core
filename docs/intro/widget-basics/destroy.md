@@ -11,7 +11,7 @@ position: 4
 
 ## Overview
 
-Every Kendo UI widget has a `destroy` method, which does the following:
+Every Kendo UI widget has a `destroy` method which:
 
 1. Deletes the widget instance (client object). It is no longer accessible and all its event handlers stop working.
 1. Removes auto-generated HTML content, which is **outside** the widget, e.g. detached popups, dropdowns, etc. The main widget HTML remains intact and if needed, it should be removed from the DOM manually.
@@ -30,7 +30,7 @@ You may wish to manually destroy widgets in several possible cases:
 
 > **Important**
 >
-> Creating a new widget instance from the leftovers of a destroyed widget may work, but is not recommended. Initialize new widgets from different, such as newly appended, DOM elements. In some cases it is also possible to empty the widget container and initialize a new instance from the empty element.
+> Creating a new widget instance from the leftovers of a destroyed widget might work, but is not recommended. Initialize new widgets from different, such as newly appended, DOM elements. In some cases it is also possible to empty the widget container and initialize a new instance from the empty element.
 
 The example below demonstrates how to destroy and remove a Kendo UI Grid widget.
 

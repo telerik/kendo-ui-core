@@ -29,9 +29,10 @@ First, extend the base Kendo UI widget class in the `kendo.ui` namespace. The ex
 
     })(jQuery);
 
-In this example notice the following:
+In this example, notice:
 
 1. The entire thing is wrapped in a self-executing anonymous function, so as to protect the global namespace. jQuery is passed in as a reference to make sure `$` is jQuery.
+
 2. The widget itself extends the base widget class, so it is given the uppercase name of `MyWidget`&mdash;or whatever the name of your widget is for that matter. This is generally considered a best practice when naming classes in JavaScript as opposed to regular objects.
 
 ## Add Initialization Method
@@ -111,7 +112,7 @@ Now add the widget to Kendo UI. Here is the full boilerplate for creating your o
 
 ## Use DataSource
 
-If you want to make this widget DataSource- or MVVM-aware, implement some additional items. The section below goes over the process of creation a DataSource-aware widget. The MVVM part is tackled further below. The widget that is demonstrated, is a simple one that just repeats the data in the DataSource and also allows you to specify your own custom template. Think of this as an extremely dumbed-down ListView that for easier handling is named the Repeater.
+To make this widget DataSource- or MVVM-aware, implement some additional items. The section below goes over the process of creation a DataSource-aware widget. The MVVM part is tackled further below. The widget that is demonstrated is a simple one that just repeats the data in the DataSource and also allows you to specify your own custom template. Think of this as an extremely dumbed-down ListView that for easier handling is named the Repeater.
 
 To make your widget aware of a DataSource, first use the created convenience method on the DataSource base object.
 
@@ -123,7 +124,7 @@ This line offers flexibility in the way you initialize the DataSource for your w
 
 ### Set DataSource to Array
 
-Creating a new DataSource to bind a widget is not a must as you are able to set the DataSource to an array, as demonstrated in the example below.
+Creating a new DataSource to bind a widget is not a must because you are able to set the DataSource to an array, as demonstrated in the example below.
 
 ###### Example
 
@@ -153,11 +154,7 @@ This example specifies a DataSource configuration, but does not actually create 
 
 > **Important**  
 >
-> To replicate the Kendo UI MultiSelect data binding behavior, assign the binding explicitly:
->
-> ```
-> kendo.data.binders.widget.multiSelectCustom = kendo.data.binders.widget.multiselect;
-> ```
+> To replicate the Kendo UI MultiSelect data binding behavior, assign the binding explicitly: `kendo.data.binders.widget.multiSelectCustom = kendo.data.binders.widget.multiselect;`.
 
 ## Handle Events
 
@@ -172,7 +169,7 @@ Next, bind to your DataSource a `change` event and handle it. This is where you 
         that.refresh();
     });
 
-The way the widget code now looks like is shown in the example below.
+The way the widget code now looks is shown in the example below.
 
 ###### Example
 
