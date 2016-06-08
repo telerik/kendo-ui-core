@@ -34,11 +34,11 @@ The example below demonstrates how to persist all changes in a Kendo UI Schedule
             }
           }
         });
-        
+
         remoteDataSource.one("change", function() {
           scheduler = initScheduler(this);
         })
-        
+
         remoteDataSource.read();
 
       })
@@ -48,15 +48,15 @@ The example below demonstrates how to persist all changes in a Kendo UI Schedule
         if (created.length) {
         	dataForSync.created = created;
         }
-        
+
         if (updated.length) {
         	dataForSync.updated = updated;
         }
-        
+
         if (destroyed.length) {
         	dataForSync.destroyed = destroyed;
         }
-        
+
         $.ajax({
           url: "http://demos.kendoui.com/service/meetings/update",
           data: dataForSync,
@@ -66,7 +66,7 @@ The example below demonstrates how to persist all changes in a Kendo UI Schedule
             created = [];
           }
         })
-        
+
       }
 
       function initScheduler(remoteDataSource) {
@@ -225,10 +225,6 @@ Other articles and how-to examples on the Kendo UI Scheduler:
 * [How to Calculate Scheduler Height Dynamically]({% slug howto_calculate_scheduler_height_dunamically_scheduler %})
 * [How to Calculate Scheduler Height Dynamically on Mobile]({% slug howto_calculate_scheduler_height_dunamically_onmobile_scheduler %})
 * [How to Create Custom Views Inheriting Built-In Views]({% slug howto_create_custom_view_inheriting_builtinview_scheduler %})
-* [How to Create Custom `month` View with Event Count in **Show More** Button]({% slug howto_create_custom_monthview_eventcount_showmore_button_scheduler %})
-* [How to Customize Edit and Events Templates]({% slug howto_customize_editand_event_templates_scheduler %})
-* [How to Create External Editor Form]({% slug howto_create_external_editor_form_scheduler %})
-* [How to Edit Using ContextMenu]({% slug howto_edit_using_kendouicontextmenu_scheduler %})
 * [How to Expand Scheduler to 100% Width and Height]({% slug howto_expand_scheduler_to100percent_widthandheight_scheduler %})
 * [How to Filter Events by Resource Using MultiSelect]({% slug howto_filter_eventsby_resourceusing_multiselect_scheduler %})
 * [How to Get Reference to the Built-In Validator]({% slug howto_get_referencetothe_builtin_validator_scheduler %})
@@ -242,4 +238,4 @@ How-to examples on the Kendo UI Scheduler in AngularJS:
 * [How to Set Initial Data Manually]({% slug howto_set_intial_data_manually_angularjs_scheduler %})
 * [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
 
-For additional runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
+For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).

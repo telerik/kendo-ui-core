@@ -7,7 +7,7 @@ slug: howto_navigate_the_scheduler_via_separate_calendar_scheduler
 
 # Navigate via Separate Calendars
 
-The example below demonstrates how to navigate the Kendo UI Scheduler widget via a separate calendar. 
+The example below demonstrates how to navigate the Kendo UI Scheduler widget via a separate calendar.
 
 ###### Example
 
@@ -96,16 +96,16 @@ The example below demonstrates how to navigate the Kendo UI Scheduler widget via
                     }
                 ]
             }).data("kendoScheduler");
-          
+
           	scheduler.wrapper.find(".k-nav-current").hide();
-          
+
           	$("#calendar").kendoCalendar({
               value: scheduler.date(),
               change: function() {
                 scheduler.date(this.value());
               }
             })
-          
+
         });
     </script>
 </div>
@@ -139,4 +139,4 @@ How-to examples on the Kendo UI Scheduler in AngularJS:
 * [How to Set Initial Data Manually]({% slug howto_set_intial_data_manually_angularjs_scheduler %})
 * [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
 
-For additional runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
+For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
