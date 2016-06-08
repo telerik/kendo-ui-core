@@ -1,13 +1,13 @@
 ---
-title: Handle Doubleclicking on Events Conditionally Based On The View Name
-page_title: Handle Doubleclicking on Events Conditionally Based On The View Name | Kendo UI Scheduler
-description: "Learn how to handle doubleclicking on events conditionally based on the view name in a Kendo UI Scheduler widget."
+title: Handle Double-Clicking on Events Conditionally Based On the View Name
+page_title: Handle Double-Clicking on Events Conditionally Based On the View Name | Kendo UI Scheduler
+description: "Learn how to handle double-clicking on events conditionally based on the view name in a Kendo UI Scheduler widget."
 slug: howto_conditionally_handle_doubleclicking_events_scheduler
 ---
 
-# Handle Doubleclicking on Events Conditionally Based On The View Name
+# Handle Double-Clicking on Events Conditionally Based On the View Name
 
-The example below demonstrates how to handle doubleclicking on events conditionally based on the view name in a Kendo UI Scheduler widget.
+The example below demonstrates how to handle double-clicking on events conditionally based on the view name in a Kendo UI Scheduler widget.
 
 ###### Example
 
@@ -111,7 +111,7 @@ The example below demonstrates how to handle doubleclicking on events conditiona
 
 ## See Also
 
-Other articles and how-to examples on Kendo UI Scheduler:
+Other articles and how-to examples on the Kendo UI Scheduler:
 
 * [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [How to Add Controls to Custom Editor]({% slug howto_add_controlsto_custom_event_editor_scheduler %})
@@ -130,10 +130,10 @@ Other articles and how-to examples on Kendo UI Scheduler:
 * [How to Nest Editors inside Event Templates]({% slug howto_nest_editorsinside_event_templates_scheduler %})
 * [How to Use Custom Event Template with Specific Background Color]({% slug howto_use_custom_event_templatewith_specific_background_color_scheduler %})
 
-How-to examples on Kendo UI Scheduler in AngularJS:
+How-to examples on the Kendo UI Scheduler in AngularJS:
 
 * [How to Edit Using ContextMenu]({% slug howto_edit_using_contectmenu_angularjs_scheduler %})
 * [How to Set Initial Data Manually]({% slug howto_set_intial_data_manually_angularjs_scheduler %})
 * [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
 
-For additional runnable examples on Kendo UI Scheduler, browse the [Scheduler **How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
+For additional runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
