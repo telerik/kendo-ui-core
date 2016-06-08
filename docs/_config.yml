@@ -154,6 +154,8 @@ navigation:
     "controls/hybrid/how-to":
         title: "How To"
         position: 23
+    "controls/hybrid/how-to/application":
+        title: "Application"
     "controls/hybrid/faq":
         title: "Frequently Asked Questions"
         position: 24
