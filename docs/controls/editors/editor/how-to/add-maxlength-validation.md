@@ -77,13 +77,13 @@ The example below demonstrates how to define custom Kendo UI validators to check
 
 ## See Also
 
-Other articles on Kendo UI Editor:
+Other articles on the Kendo UI Editor and how-to examples::
 
 * [Editor JavaScript API Reference](/api/javascript/ui/editor)
-* [How to Create Markdown Editor]({% slug howto_create_markdown_editor %})
 * [How to Get Reference to Child Widgets]({% slug howto_get_referenceto_child_widgets_editor %})
 * [How to Insert HTML Content via Custom Popup Tools]({% slug howto_insert_html_content_custom_popup_tool_editor %})
-* [How to Make Inline Editor Toolbar Always Visible]({% slug howto_make_inline_editor_toolbar_always_visible %})
 * [How to Set Caret Position]({% slug howto_set_caret_position_editor %})
 * [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
 * [How to Use Inline Editor inside Windows]({% slug howto_use_inline_editor_inside_windows_editor %})
+
+For more runnable examples on the Kendo UI Editor, browse its [**How To** documentation folder]({% slug howto_add_google_webfonts_editor %}).
