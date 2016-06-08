@@ -1,17 +1,17 @@
 ---
-title: Filter Events Between Start and End of Current View on Server
-page_title: Filter Events Between Start and End of Current View on Server | Kendo UI Scheduler
-description: "Learn how to filter events between start and end of the current view on the server with Kendo UI Scheduler."
+title: Filter Events on Server between Start and End of Current View
+page_title: Filter Events on Server between Start and End of Current View | Kendo UI Scheduler
+description: "Learn how to filter events between start and end of the current view on the server in the Kendo UI Scheduler."
 slug: howto_server_filtering
 ---
 
-# Server Filtering
+# Filter Events on Server between Start and End of Current View
 
-This article illustrates how to filter events between start and end of the current view on the server with Kendo UI Scheduler. To see the example, refer to the [example source code](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/scheduler-server-filtering), which is available in the [Kendo UI ASP.NET MVC code samples GitHub repository](https://github.com/telerik/kendo-examples-asp-net-mvc).
+To see the example on how to filter events on the server between the start and end of the current view in a Kendo UI Scheduler, refer to [this project](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/scheduler-server-filtering). It is available in the [Kendo UI GitHub repository with code samples on the UI for ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc).
 
 ## See Also
 
-Other articles and how-to examples on Kendo UI Scheduler:
+Other articles and how-to examples on the Kendo UI Scheduler:
 
 * [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [How to Add Controls to Custom Editor]({% slug howto_add_controlsto_custom_event_editor_scheduler %})
@@ -34,7 +34,7 @@ Other articles and how-to examples on Kendo UI Scheduler:
 * [How to Nest Editors inside Event Templates]({% slug howto_nest_editorsinside_event_templates_scheduler %})
 * [How to Use Custom Event Template with Specific Background Color]({% slug howto_use_custom_event_templatewith_specific_background_color_scheduler %})
 
-How-to examples on Kendo UI Scheduler in AngularJS:
+How-to examples on the Kendo UI Scheduler in AngularJS:
 
 * [How to Create and Set ObservableArray Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
 * [How to Edit Using ContextMenu]({% slug howto_edit_using_contectmenu_angularjs_scheduler %})
@@ -42,4 +42,4 @@ How-to examples on Kendo UI Scheduler in AngularJS:
 * [How to Show Тooltip on hover]({% slug howto_show_tooltipon_hover_angularjs_scheduler %})
 * [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
 
-For additional runnable examples on Kendo UI Scheduler, browse the [Scheduler **How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
+For additional runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
