@@ -1,13 +1,13 @@
 ---
 title: Show Category Axis Labels on Multiple Lines
-page_title: Show Category Axis Labels in Multiple Lines | Kendo UI Charts
+page_title: Show Category Axis Labels on Multiple Lines | Kendo UI Charts
 description: "Learn how to insert line breaks in Category Axis labels when working with Kendo UI Charts."
 slug: howto_showlabelsintworows_charts
 ---
 
 # Show Category Axis Labels on Multiple Lines
 
-You can insert newline symbols in the Category Axis labels to break them on multiple lines.
+The example below demonstrates how to insert newline symbols in the Category Axis labels to break them on multiple lines.
 
 ###### Example
 

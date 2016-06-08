@@ -13,11 +13,11 @@ This page provides solutions for common issues you may encounter while working w
 
 ## General
 
-### Events are not rendered
+### Events Are Not Rendered
 
-If the remote data request is successful and the Scheduler is databound, but no events are rendered, this indicates that the date format of the events is not correct, and the browser is unable to create JavaScript Date objects from the date strings. As a result, the events in the Scheduler dataSource have `null` values for their`start` and `end` properties, and the events are not rendered.
+If the remote data request is successful and the Scheduler is databound, but no events are rendered, this indicates that the date format of the events is not correct, and the browser is unable to create JavaScript Date objects from the date strings. As a result, the events in the Scheduler dataSource have `null` values for their `start` and `end` properties, and the events are not rendered.
 
-Please use the recommended date format for sending and receiving Scheduler event dates, which is [ISO 8601 with a Z zone designator (UTC date)](/controls/scheduling/scheduler/timezones).
+To handle this issue, use the recommended date format for sending and receiving Scheduler event dates, which is [ISO 8601 with a Z zone designator (UTC date)]({% slug timezones_kendoui_scheduler_widget %}).
 
 ## CRUD Data Operations
 
@@ -25,19 +25,21 @@ Please use the recommended date format for sending and receiving Scheduler event
 
 In this case the server response of the create/destroy/update action is interpreted as an error by the `dataSource` and the [`error` event](/api/framework/datasource#events-error) of the dataSource is triggered. When such a request fails, the Scheduler `dataSource` will try to get a valid server response again on a subsequent dataSource sync until the request succeeds.
 
-**Solution**: Update the remote service in use, so it can return valid responses. Make sure the server response is formatted in the same way as the `read` action response:
+**Solution**
 
-1. `create` request - the Scheduler expects the created record to be returned to the client side with its [`id` field](/api/javascript/data/schedulerevent#fields-id) set to a unique value.
+Update the remote service in use, so it can return valid responses. Make sure the server response is formatted in the same way as the `read` action response:
 
-2. `update/destroy` request - the Scheduler expects the server to return a valid response, so it can signify success. Such a response, for example, is the updated/deleted event formatted in the same way as the `read` action:
+1. The `create` request&mdash;The Scheduler expects the created record to be returned to the client side with its [`id` field](/api/javascript/data/schedulerevent#fields-id) set to a unique value.
 
-        [{id: 23, title: "some title", start:"2015-10-14T15:00:00.000Z", end:"2015-10-14T17:00:00.000Z" }]
+2. The `update/destroy` request&mdash;The Scheduler expects the server to return a valid response, so it can signify success. Such a response, for example, is the updated/deleted event formatted in the same way as the `read` action `[{id: 23, title: "some title", start:"2015-10-14T15:00:00.000Z", end:"2015-10-14T17:00:00.000Z" }]`.
 
 ### Created Events Are Offset after Create/Update Request
 
 This behavior may be caused if the Scheduler [`timezone`](/api/javascript/ui/scheduler#configuration-timezone) option is not set, or if the remote service does not keep dates in the correct format.
 
-**Solution**: Set the timezone option of the Scheduler and make sure the dates on the remote service are saved in UTC. For more information about how to do this see the [Timezones help article](/web/scheduler/timezones).
+**Solution**
+
+Set the timezone option of the Scheduler and make sure the dates on the remote service are saved in UTC. For more information about how to do this see the [Timezones help article](/web/scheduler/timezones).
 
 ## Performance Issues
 
@@ -76,13 +78,13 @@ When widget navigation is enabled, the widget wrapper becomes a focusable elemen
 >
 > The page re-positioning is a default browser behavior, which cannot be prevented nor modified.
 
-If you want to avoid this behavior, choose one of the available options:
+To avoid this behavior, choose either of the available options:
 * [Disable widget's navigation](/api/javascript/ui/scheduler#configuration-selectable), if it is not needed in your business case.
 * [Size the widget to the view-port dimensions]({% slug howto_calculate_scheduler_height_dunamically_onmobile_scheduler %}).
 
 ## See Also
 
-Other articles on Kendo UI Scheduler:
+Other articles on the Kendo UI Scheduler:
 
 * [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [Resources]({% slug resources_kendoui_scheduler_widget %})
