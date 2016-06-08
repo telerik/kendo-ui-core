@@ -1,13 +1,13 @@
 ---
-title: Include Esri(ArcGIS) map in Kendo UI Mobile Application
-page_title: Include Esri(ArcGIS) map in Kendo UI Mobile Application | Kendo UI Hybrid Application
-description: "Learn how to include Esri(ArcGIS) map when working with the Hybrid UI Application of Kendo UI."
+title: Include Esri(ArcGIS) Map in the Application
+page_title: Include Esri(ArcGIS) Map in the Application | Kendo UI Hybrid Application
+description: "Learn how to include an Esri(ArcGIS) map when working with the Hybrid UI Application of Kendo UI."
 slug: include_esri_map_mobile_application
 ---
 
-# Include Esri(ArcGIS) map in Kendo UI Mobile Application
+# Include Esri(ArcGIS) Map in the Application
 
-The example below demonstrates how to include Esri(ArcGIS) map when working with the Hybrid UI Application of Kendo UI.
+The example below demonstrates how to include an Esri(ArcGIS) map when working with the Hybrid UI Application of Kendo UI.
 
 ###### Example
 
@@ -53,7 +53,7 @@ The example below demonstrates how to include Esri(ArcGIS) map when working with
 
 ## See Also
 
-Articles on Application and other Hybrid UI components in Kendo UI:
+Articles on the Application and other Hybrid UI components in Kendo UI:
 
 * [Hybrid UI Application API Reference](/api/javascript/mobile/application)
 * [Overview of the Hybrid UI Application in Kendo UI]({% slug overview_hybridapplication %})
