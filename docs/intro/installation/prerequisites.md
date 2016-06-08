@@ -51,7 +51,7 @@ As of the Kendo UI 2014 Q2 release, Kendo UI widgets support [AngularJS](https:/
 
 > **Important**
 >
-> Unlike jQuery, to function correctly, the Kendo UI distributions do not need AngularJS.
+> To function correctly and unlike jQuery, the Kendo UI distributions do not need AngularJS.
 
 ### Supported AngularJS Versions
 
