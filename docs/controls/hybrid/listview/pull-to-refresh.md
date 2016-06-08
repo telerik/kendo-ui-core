@@ -130,4 +130,5 @@ Other articles and how-to examples on the Hybrid UI ListView:
 * [Hybrid UI ListView JavaScript API Reference](/api/javascript/mobile/ui/listview)
 * [Overview of the Hybrid UI ListView]({% slug overview_hybridlistview %})
 * [Endless Scrolling Feature]({% slug endlessscrolling_hybridlistview %})
-* [How to Use jsSignature]({% slug howto_usejssignature_hybridlistview %})
+
+For how-to examples on the Kendo UI hybrid ListView, browse its [**How To** documentation folder]({% slug howto_group_data_hybridlistview %}).
