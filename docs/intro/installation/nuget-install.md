@@ -1,7 +1,7 @@
 ---
 title: NuGet Packages
 page_title: NuGet Packages | Kendo UI Getting Started
-description: "Get HTML5 UI frameworks and widgets by installing Kendo UI Professional or Kendo UI Core NuGet packages."
+description: "Install the Kendo UI Professional or Kendo UI Core NuGet packages."
 slug: kendoui_nuget_packages
 position: 4
 ---
@@ -12,7 +12,7 @@ position: 4
 
 Telerik maintains a number of NuGet packages related to Kendo UI.
 
-Official releases, service packs and internal builds are available for registered users.
+Official releases, service packs and internal builds are available for registered users only.
 
 ## Use the Telerik Private NuGet Feed
 
