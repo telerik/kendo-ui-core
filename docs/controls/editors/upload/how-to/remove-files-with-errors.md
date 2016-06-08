@@ -7,7 +7,7 @@ slug: howto_remove_files_with_errors
 
 # Remove Files with Errors
 
-This example demonstrates how to remove files with any errors, not passing the validation, using the Kendo UI Upload widget.
+This example demonstrates how to remove files, which contain errors and which have not passed the validation, by using the Kendo UI Upload widget.
 
 ###### Example
 
@@ -47,7 +47,7 @@ This example demonstrates how to remove files with any errors, not passing the v
 ```
 ## See Also
 
-Other articles on Kendo UI Upload:
+Other articles on the Kendo UI Upload:
 
 * [Upload JavaScript API Reference](/api/javascript/ui/upload)
 * [Modes of Operation]({% slug modes_upload_widget %})
