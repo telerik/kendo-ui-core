@@ -36,7 +36,7 @@ The example below demonstrates how to include an Esri(ArcGIS) map when working w
       var app = new kendo.mobile.Application(document.body);
 
       //initialize the map
-      function onInit(){ 
+      function onInit(){
         var map;
 
         require(["esri/map", "dojo/domReady!"], function(Map) {
@@ -60,3 +60,5 @@ Articles on the Application and other Hybrid UI components in Kendo UI:
 * [Overview of the Hybrid UI Components in Kendo UI]({% slug overview_hybridkendoui %})
 * [Performance Tips and Tricks]({% slug performance_hybridkendoui %})
 * [Native Scrolling]({% slug nativescrolling_hybrid_kendoui %})
+
+For more runnable examples on the Hybrid UI Application of Kendo UI, browse its [**How To** documentation folder]({% slug displa_validation_summary_hybridapplication %}).

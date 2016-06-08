@@ -385,3 +385,5 @@ Articles on Application and other Hybrid UI components in Kendo UI:
 * [Overview of the Hybrid UI Components in Kendo UI]({% slug overview_hybridkendoui %})
 * [Performance Tips and Tricks]({% slug performance_hybridkendoui %})
 * [Native Scrolling]({% slug nativescrolling_hybrid_kendoui %})
+
+For how-to examples on the Kendo UI hybrid Application, browse its [**How To** documentation folder]({% slug displa_validation_summary_hybridapplication %}).
