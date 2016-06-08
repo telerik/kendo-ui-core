@@ -13,9 +13,9 @@ This example demonstrates how to remove files, which contain errors and which ha
 
 ```html
 <style>
-  html { 
-	font-size: 12px; 
-	font-family: Arial, Helvetica, sans-serif; 
+  html {
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
   }
 </style>
 <input name="files" id="files" type="file" />
@@ -24,7 +24,7 @@ This example demonstrates how to remove files, which contain errors and which ha
     var files = e.files;
     for (var i = 0; i < files.length; i++) {
       alert("Validation failed for " + files[i].name);
-      
+
       var uid = files[i].uid;
       var entry = $(".k-file[data-uid='" + uid + "']");
       if (entry.length > 0) {
@@ -52,3 +52,5 @@ Other articles on the Kendo UI Upload:
 * [Upload JavaScript API Reference](/api/javascript/ui/upload)
 * [Modes of Operation]({% slug modes_upload_widget %})
 * [Metadata]({% slug metadata_upload_widget %})
+
+For more runnable examples on the Kendo UI Upload widget, browse its [**How To** documentation folder]({% slug howto_select_additional_metadata_upload %}).

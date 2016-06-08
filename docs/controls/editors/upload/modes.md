@@ -114,10 +114,12 @@ The [`wrapper` property]({% slug widgetwrapperandelement_references_gettingstart
 
 ## See Also
 
-Other articles on Kendo UI Upload:
+Other articles on the Kendo UI Upload:
 
 * [Overview of the Upload Widget]({% slug overview_kendoui_upload_widget %})
 * [Drag and Drop]({% slug dragandrop_upload_widget %})
 * [Send and Receive Metadata]({% slug metadata_upload_widget %})
 * [Browser Support]({% slug browsersupport_upload_widget %})
 * [Troubleshooting]({% slug troubleshooting_upload_widget %})
+
+For how-to examples on the Kendo UI Upload widget, browse its [**How To** documentation folder]({% slug howto_remove_files_with_errors %}).

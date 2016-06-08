@@ -17,7 +17,7 @@ The example demonstrates how to upload files and select additional metadata usin
             <div class="demo-section k-header">
                 <input type="file" name="files" id="files" />
             </div>
-          
+
             <script id="fileTemplate" type="text/x-kendo-template">
                 <span class='k-progress'></span>
                 <div class='file-wrapper'>
@@ -52,7 +52,7 @@ The example demonstrates how to upload files and select additional metadata usin
                 function onSelect(e){
                   var upload = this;
                   var files = e.files;
-                  
+
                   setTimeout(function(){
                   	for(var i = 0; i < files.length; i++){
                       var select = upload.wrapper.find(".k-file[data-uid='" + files[i].uid +"'] select");
@@ -60,7 +60,7 @@ The example demonstrates how to upload files and select additional metadata usin
                     }
                   });
                 }
-              
+
               function onUpload(e){
               	var upload = this;
                 var dropdown = upload.wrapper.find(".k-file[data-uid='" + e.files[0].uid +"'] select").data("kendoDropDownList");
@@ -72,15 +72,15 @@ The example demonstrates how to upload files and select additional metadata usin
             </script>
 
             <style scoped>
-			  html { 
-				font-size: 12px; 
-				font-family: Arial, Helvetica, sans-serif; 
+			  html {
+				font-size: 12px;
+				font-family: Arial, Helvetica, sans-serif;
 			  }
 
               #example {
               	width: 800px;
               }
-              
+
                 #example .file-heading
                 {
                     font-family: Arial;
@@ -132,3 +132,5 @@ Other articles on the Kendo UI Upload:
 * [Upload JavaScript API Reference](/api/javascript/ui/upload)
 * [Modes of Operation]({% slug modes_upload_widget %})
 * [Metadata]({% slug metadata_upload_widget %})
+
+For more runnable examples on the Kendo UI Upload widget, browse its [**How To** documentation folder]({% slug howto_remove_files_with_errors %}).
