@@ -47,10 +47,11 @@ $(function(){
 
 ## See Also
 
-Other articles on Kendo UI Validator:
+Other articles on the Kendo UI Validator:
 
 * [Validator JavaScript API Reference](/api/javascript/ui/validator)
-* [How to Add Red Border and Hide Tooltip]({% slug howto_addredborderandhidetooltip_validator %})
 * [How to Show Tooltip on Mouse Over]({% slug howto_showtooltiponmouseover_validator %})
 * [How to Use Use MutationObserver to Add Red Border and Hide Tooltip]({% slug howto_usemutationobserver_addborderandhidetooltip_validator %})
 * [How to Use Templates to Customize Tooltips]({% slug howto_usetemplatestocustomizetooltips_validator %})
+
+For more runnable examples on the Kendo UI Validator widget, browse its [**How To** documentation folder]({% slug howto_addredborderandhidetooltip_validator %}).
