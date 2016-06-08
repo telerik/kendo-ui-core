@@ -1,7 +1,7 @@
 ---
 title: Enable and Disable the Editor
 page_title: Enable and Disable the Editor | Kendo UI Editor
-description: "Learn how to enable and disable the Editor"
+description: "Learn how to enable and disable the Editor."
 slug: howto_enable_and_disable_the_editor_editor
 ---
 
@@ -47,7 +47,7 @@ The example below demonstrates how to enable and disable the Kendo UI Editor.
 
 ## See Also
 
-Other articles on Kendo UI Editor:
+Other articles on the Kendo UI Editor:
 
 * [Editor JavaScript API Reference](/api/javascript/ui/editor)
 * [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
