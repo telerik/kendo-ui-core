@@ -119,7 +119,7 @@ The cause of this issue is that the underlying Git installation is missing the c
 To resolve the issue, follow the steps in this [help article](http://blogs.msdn.com/b/phkelley/archive/2014/01/20/adding-a-corporate-or-self-signed-certificate-authority-to-git-exe-s-store.aspx).
 
 > **Important**  
-> * 1.9.5 Git build does not work with the Bower package.
+> * The 1.9.5 Git build does not work with the Bower package.
 > * When using the `@` symbol in the URL for accessing the Kendo UI Bower repository&mdash;because of network restrictions or admin rules, for example&mdash;make sure you encode it as `https://firstname.lasname**%40**domain.com@bower.telerik.com/bower-kendo-ui.git`.
 
 ### Restore Fails in ASP.NET Core MVC RC Projects in Visual Studio 2015
@@ -145,16 +145,9 @@ Use a Windows port of Git and your stored credentials instead of the built-in cl
 
 Other articles on getting started with Kendo UI:
 
+Other articles on getting started with Kendo UI:
+
 * [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
 * [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
-* [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
-* [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
-* [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
-* [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
-* [Access Widget DOM Elements: wrapper and element]({% slug widgetwrapperandelement_references_gettingstarted %})
-* [Set Data Attributes]({% slug dataattributes_configuration_installation %})
-* [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})
-* [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
-* [Edit Widgets]({% slug kendoui_editing_gettingstarted %})
-* [Create Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
+* [Kendo UI NPM Packages]({% slug kendoui_npm_packages_kendoui_installation %})
 * [NuGet Packages]({% slug kendoui_nuget_packages %})

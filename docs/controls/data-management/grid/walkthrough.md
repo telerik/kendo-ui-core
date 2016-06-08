@@ -726,7 +726,7 @@ For more detailed information on printing the Grid, refer to [this article]({% s
 
 ## See Also
 
-Other articles on Kendo UI Grid:
+Other articles on the Kendo UI Grid:
 
 * [Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [Editing Functionality]({% slug editing_kendoui_grid_widget %})

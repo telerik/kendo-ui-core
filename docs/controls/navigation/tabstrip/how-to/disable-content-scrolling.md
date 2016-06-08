@@ -1,20 +1,20 @@
 ---
 title: Disable TabStrip Content Scrolling
 page_title: Disable TabStrip Content Scrolling | Kendo UI TabStrip
-description: "Learn how to disable TabStrip content scrolling"
+description: "Learn how to disable the content scrolling of the TabStrip."
 slug: howto_disablecontentscrolling_tabstrip
 ---
 
 # Disable TabStrip Content Scrolling
 
-The TabStrip content containers are scrollable by default. This allows the widget to display scrollbars if it has a fixed height and holds large content that cannot fit. If needed, it is possible to disable TabStrip content scrolling. This can help in scenarios where the TabStrip hosts a widget such as a Menu that needs to overflow outside the TabStrip.
+The TabStrip content containers are scrollable by default. This allows the widget to display scrollbars if it has a fixed height and holds large content that cannot fit. If needed, it is possible to disable the TabStrip content scrolling. This helps in scenarios where the TabStrip hosts a widget, such as a Menu, that needs to overflow outside the TabStrip.
 
 The milestones of the approach are:
 
 * Apply an `overflow:visible` CSS style to the `div.k-content` elements that hold each TabStrip tab content.
-* The `.k-content` class is used by other widgets too. Make sure the CSS selector targets the appropriate elements only.
+* The `.k-content` class is used by other widgets too. Make sure the CSS selector targets only the appropriate elements.
 
-The example below demonstrates how to disable content scrolling for a specific TabStrip instance only, by using its ID in the CSS selector.
+The example below demonstrates how to disable content scrolling for a specific TabStrip instance only by using its ID in the CSS selector.
 
 ###### Example
 
@@ -44,7 +44,7 @@ The example below demonstrates how to disable content scrolling for a specific T
       </div>
       <div>Second content container</div>
     </div>
-    
+
     <br /><br />
 
     <div id="tabstrip2">
@@ -72,17 +72,17 @@ The example below demonstrates how to disable content scrolling for a specific T
       </div>
       <div>Second content container</div>
     </div>
-    
+
     <style>
-      
+
       #tabstrip2 > .k-content {
         overflow: visible;
       }
-    
+
     </style>
 
     <script>
-    
+
       $(function() {
         $("#tabstrip1").kendoTabStrip();
         $("#menu1").kendoMenu();
@@ -90,7 +90,7 @@ The example below demonstrates how to disable content scrolling for a specific T
         $("#tabstrip2").kendoTabStrip();
         $("#menu2").kendoMenu();
       });
-      
+
     </script>
 ```
 
