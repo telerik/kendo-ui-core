@@ -1,13 +1,13 @@
 ---
-title: Persist All Changes With One Request
-page_title: Persist All Changes With One Request | Kendo UI Scheduler
-description: "Learn how to persist all Kendo UI Scheduler changes with a single request."
+title: Persist All Changes with One Request
+page_title: Persist All Changes with One Request | Kendo UI Scheduler
+description: "Learn how to persist all changes in a Kendo UI Scheduler with a single request."
 slug: howto_persist_all_changes_with_a_single_request_scheduler
 ---
 
-# Persist All Changes With One Request
+# Persist All Changes with One Request
 
-The example below demonstrates how to persist all Kendo UI Scheduler changes with a single request.
+The example below demonstrates how to persist all changes in a Kendo UI Scheduler with a single request.
 
 ###### Example
 
@@ -217,7 +217,7 @@ The example below demonstrates how to persist all Kendo UI Scheduler changes wit
 
 ## See Also
 
-Other articles and how-to examples on Kendo UI Scheduler:
+Other articles and how-to examples on the Kendo UI Scheduler:
 
 * [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [How to Add Controls to Custom Editor]({% slug howto_add_controlsto_custom_event_editor_scheduler %})
@@ -236,10 +236,10 @@ Other articles and how-to examples on Kendo UI Scheduler:
 * [How to Nest Editors inside Event Templates]({% slug howto_nest_editorsinside_event_templates_scheduler %})
 * [How to Use Custom Event Template with Specific Background Color]({% slug howto_use_custom_event_templatewith_specific_background_color_scheduler %})
 
-How-to examples on Kendo UI Scheduler in AngularJS:
+How-to examples on the Kendo UI Scheduler in AngularJS:
 
 * [How to Edit Using ContextMenu]({% slug howto_edit_using_contectmenu_angularjs_scheduler %})
 * [How to Set Initial Data Manually]({% slug howto_set_intial_data_manually_angularjs_scheduler %})
 * [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
 
-For additional runnable examples on Kendo UI Scheduler, browse the [Scheduler **How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
+For additional runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
