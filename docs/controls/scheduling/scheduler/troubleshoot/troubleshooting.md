@@ -11,6 +11,14 @@ position: 1
 
 This page provides solutions for common issues you may encounter while working with the Kendo UI Scheduler widget.
 
+## General
+
+### Events are not rendered
+
+If the remote data request is successful and the Scheduler is databound, but no events are rendered, this indicates that the date format of the events is not correct, and the browser is unable to create JavaScript Date objects from the date strings. As a result, the events in the Scheduler dataSource have `null` values for their`start` and `end` properties, and the events are not rendered.
+
+Please use the recommended date format for sending and receiving Scheduler event dates, which is [ISO 8601 with a Z zone designator (UTC date)](/controls/scheduling/scheduler/timezones).
+
 ## CRUD Data Operations
 
 ### Create/Destroy/Update Request Is Sent Multiple Times to the Remote Service
