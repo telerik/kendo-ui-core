@@ -1,17 +1,17 @@
 ---
-title: Show Progress For Grid CRUD Operations
-page_title: Show Progress For CRUD Operations | Kendo UI Grid
-description: "Learn how to show the current progress of each CRUD operation with Kendo UI Grid."
+title: Show Progress for Grid CRUD Operations
+page_title: Show Progress for Grid CRUD Operations | Kendo UI Grid
+description: "Learn how to show the current progress of each CRUD operation for a Kendo UI Grid."
 slug: howto_show_progress_CRUD_operation
 ---
 
-# Show Progress For Grid CRUD Operations
+# Show Progress for Grid CRUD Operations
 
-This article illustrates how to show the current progress of each CRUD operation with Kendo UI Grid. To see the example, refer to the [example source code](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/grid-progressbar-crud-operations), which is available in the [Kendo UI ASP.NET MVC code samples GitHub repository](https://github.com/telerik/kendo-examples-asp-net-mvc).
+To see the example on how to show the current progress of each CRUD operation for a Kendo UI Grid, refer to [this project](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/grid-progressbar-crud-operations). It is available in the [Kendo UI GitHub repository with code samples on the UI for ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc).
 
 ## See Also
 
-Other articles on Kendo UI Grid and how-to examples related to its editing functionality:
+Other articles on the Kendo UI Grid and how-to examples related to its editing functionality:
 
 * [JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Access Editor Controls in Edit Events]({% slug howto_access_editor_controlsin_edit_events_grid %})
@@ -38,4 +38,4 @@ Other articles on Kendo UI Grid and how-to examples related to its editing funct
 * [How to Use MultiSelect as CSV Editor]({% slug howto_usethe_multiselect_aseditor_commaseparated_stringfields_grid %})
 * [How to Use TreeView as Custom Editor]({% slug howto_usethe_treeview_aseditor_grid %})
 
-For more runnable examples on Kendo UI Grid, browse the [how-to section of articles]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [how-to articles]({% slug howto_create_custom_editors_grid %}).
