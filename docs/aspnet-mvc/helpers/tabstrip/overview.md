@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI TabStip HtmlHelper
+page_title: Overview | Kendo UI TabStrip HtmlHelper
 description: "Get started with the server-side wrapper for the Kendo UI TabStip widget for ASP.NET MVC."
 slug: overview_tabstrip_aspnetmvc
 position: 1
