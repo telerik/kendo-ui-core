@@ -72,7 +72,7 @@ All of these can be changed through the [`imagebrowser` configuration](/api/java
 
 ## See Also
 
-Other articles on Kendo UI Editor:
+Other articles on the Kendo UI Editor:
 
 * [Overview of the Editor Widget]({% slug overview_kendoui_editor_widget %})
 * [Post-Process Content]({% slug post_process_content_editor_widget %})
@@ -81,3 +81,5 @@ Other articles on Kendo UI Editor:
 * [Prevent Cross-Site Scripting]({% slug prevent_xss_editor_widget %})
 * [Troubleshooting]({% slug troubleshooting_editor_widget %})
 * [Editor JavaScript API Reference](/api/javascript/ui/editor)
+
+For how-to examples on the Kendo UI Editor widget, browse its [**How To** documentation folder]({% slug howto_add_max_length_validation_editor %}).
