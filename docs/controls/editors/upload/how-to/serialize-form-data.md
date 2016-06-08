@@ -63,8 +63,10 @@ Content-Type: text/plain
 
 ## See Also
 
-Other articles on Kendo UI Upload:
+Other articles on the Kendo UI Upload:
 
 * [Upload JavaScript API Reference](/api/javascript/ui/upload)
 * [Modes of Operation]({% slug modes_upload_widget %})
 * [Metadata]({% slug metadata_upload_widget %})
+
+For more runnable examples on the Kendo UI Upload widget, browse its [**How To** documentation folder]({% slug howto_remove_files_with_errors %}).
