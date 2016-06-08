@@ -1,13 +1,13 @@
 ---
 title: Use Custom Content Containers in the PanelBar
 page_title: Use Custom Content Containers in the PanelBar | Kendo UI PanelBar
-description: "Learn how to use custom content containers in the Kendo UI PanelBar"
+description: "Learn how to use custom content containers in the Kendo UI PanelBar widget."
 slug: howto_use_custom_content_containers_in_the_panelbar_widget
 ---
 
-# Use Custom Content Containers
+# Use Custom Content Containers in the PanelBar
 
-The example below demonstrates how to use custom content containers in the PanelBar
+The example below demonstrates how to use custom content containers in the Kendo UI PanelBar widget.
 
 ###### Example
 
@@ -97,7 +97,7 @@ The example below demonstrates how to use custom content containers in the Panel
 
 ## See Also
 
-Other articles on Kendo UI PanelBar:
+Other articles on the Kendo UI PanelBar:
 
 * [PanelBar JavaScript API Reference](/api/javascript/ui/panelbar)
 * [Initialize the Grid inside a Hidden Container]({% slug appearance_kendoui_grid_widget %}#hidden-containers)
