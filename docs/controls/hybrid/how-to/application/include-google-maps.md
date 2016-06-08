@@ -1,11 +1,11 @@
 ---
-title: Include Google Maps in Kendo UI Mobile Application
-page_title: Include Google Maps in Kendo UI Mobile Application | Kendo UI Hybrid Application
+title: Include Google Maps in the Application
+page_title: Include Google Maps in the Application | Kendo UI Hybrid Application
 description: "Learn how to include Google maps when working with the Hybrid UI Application of Kendo UI."
-slug: include_esri_map_mobile_application
+slug: include_google_maps_mobile_application
 ---
 
-# Include Google maps in Kendo UI Mobile Application
+# Include Google Maps in the Application
 
 The example below demonstrates how to include Google maps when working with the Hybrid UI Application of Kendo UI.
 
@@ -69,7 +69,7 @@ The example below demonstrates how to include Google maps when working with the 
 
 ## See Also
 
-Articles on Application and other Hybrid UI components in Kendo UI:
+Articles on the Application and other Hybrid UI components in Kendo UI:
 
 * [Hybrid UI Application API Reference](/api/javascript/mobile/application)
 * [Overview of the Hybrid UI Application in Kendo UI]({% slug overview_hybridapplication %})
