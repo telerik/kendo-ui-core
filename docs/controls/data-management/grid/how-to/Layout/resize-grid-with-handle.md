@@ -1,11 +1,11 @@
 ---
-title: Resize the Grid By Dragging and Apply the New Size
-page_title:  Resize the Grid By Dragging and Apply the New Size | Kendo UI Grid
-description: "Learn how to resize and apply the new size using dragging in the Kendo UI Grid widget."
+title: Resize the Grid by Dragging and Apply the New Size
+page_title: Resize the Grid by Dragging and Apply the New Size | Kendo UI Grid
+description: "Learn how to resize the Kendo UI Grid widget and to apply the new size."
 slug: howto_resize_by_dragging_and_apply_the_new_size_grid
 ---
 
-# Resize the Grid by dragging and apply the new size
+# esize the Grid by Dragging and Apply the New Size
 
 The example below demonstrates how to resize the Kendo UI Grid by dragging its bottom-right corner.
 
@@ -150,7 +150,7 @@ The example below demonstrates how to resize the Kendo UI Grid by dragging its b
 
 ## See Also
 
-Other articles on Kendo UI Grid and how-to examples related to its layout:
+Other articles on the Kendo UI Grid and how-to examples related to its layout:
 
 * [Kendo UI Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Adjust Row Height with Virtual Scrolling]({% slug howto_adjust_row_height_withvirtual_scrolling_grid %})
@@ -161,4 +161,4 @@ Other articles on Kendo UI Grid and how-to examples related to its layout:
 * [How to Resize Grid When Window Is Resized]({% slug howto_resize_whenthe_windowis_resized_grid %})
 * [How to Use FontAwesome Icons in Custom Command Buttons]({% slug howto_use_fontawesomeiconsin_custom_command_buttons_grid %})
 
-For more runnable examples on Kendo UI Grid, browse the [how-to section of articles]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on Kendo UI Grid, browse its [how-to articles]({% slug howto_create_custom_editors_grid %}).
