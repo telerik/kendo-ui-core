@@ -31,32 +31,32 @@ The example below demonstrates how to display a validation summary if the valida
 
         <ul id="list" data-role="listview" data-style="inset">
             <li>
-                <label for="username">Username:</label> 
+                <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required="required" />
             </li>
             <li>
-                <label for="mail">Email:</label> 
+                <label for="mail">Email:</label>
                 <input type="email" id="email" name="email" required="required" />
             </li>
             <li>
-                <label for="birthdate">Birthdate:</label> 
+                <label for="birthdate">Birthdate:</label>
                 <input type="date" id="birthdate" name="birthdate" />
             </li>
             <li>
-                <label for="password">Password:</label> 
+                <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required="required" />
             </li>
             <li>
                 <label for="remember">I aggree to Terms of Use:
                     <input type="checkbox"  id="agreement" name="agreement" required="required" validationMessage="You must agree with the Terms of Usage!" />
-                </label> 
+                </label>
             </li>
         </ul>
 
         <a data-click="validate" id="register" type="button" data-role="button">Register</a>
         <a data-click="clear" id="clear" type="button" data-role="button">Clear</a>
     </div>
-    
+
 <style scoped>
     .validation-summary {
         margin: 1em;
@@ -118,3 +118,5 @@ Articles on the Application and other Hybrid UI components in Kendo UI:
 * [Overview of the Hybrid UI Components in Kendo UI]({% slug overview_hybridkendoui %})
 * [Performance Tips and Tricks]({% slug performance_hybridkendoui %})
 * [Native Scrolling]({% slug nativescrolling_hybrid_kendoui %})
+
+For more runnable examples on the Hybrid UI Application of Kendo UI, browse its [**How To** documentation folder]({% slug include_esri_map_mobile_application %}).
