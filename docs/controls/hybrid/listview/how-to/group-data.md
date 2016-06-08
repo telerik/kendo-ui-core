@@ -1,7 +1,7 @@
 ---
 title: Group Data
-page_title: Group Data | Hybrid UI Button
-description: "Learn how to group data in the Hybrid UI ListView."
+page_title: Group Data | Hybrid UI ListView
+description: "Learn how to group data in the Hybrid UI ListView of Kendo UI."
 slug: howto_group_data_hybridlistview
 ---
 
