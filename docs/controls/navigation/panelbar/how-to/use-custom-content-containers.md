@@ -102,3 +102,5 @@ Other articles on the Kendo UI PanelBar:
 * [PanelBar JavaScript API Reference](/api/javascript/ui/panelbar)
 * [Initialize the Grid inside a Hidden Container]({% slug appearance_kendoui_grid_widget %}#hidden-containers)
 * [JavaScript API Reference: Configure PanelBar Animations](/api/javascript/ui/panelbar#configuration-animation)
+
+For more runnable examples on the Kendo UI PanelBar widget, browse its [**How To** documentation folder]({% slug initialize_thegrid_panelbar_widget %}).
