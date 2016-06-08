@@ -1,13 +1,13 @@
 ---
-title: Auto Expanding Editor
-page_title: Auto Expanding Editor | Kendo UI Editor
-description: "Learn how to make the Editor auto expanding"
+title: Create Auto-Expanding Editors
+page_title: Create Auto-Expanding Editors | Kendo UI Editor
+description: "Learn how to make the Editor automatically expand."
 slug: howto_make_the_editor_auto_expanding_editor
 ---
 
-# Auto Expanding Editor
+# Create Auto-Expanding Editors
 
-The example below demonstrates how to create an auto expanding Kendo UI Editor.
+The example below demonstrates how to create an auto-expanding Kendo UI Editor.
 
 ###### Example
 
@@ -31,7 +31,7 @@ The example below demonstrates how to create an auto expanding Kendo UI Editor.
 
 ## See Also
 
-Other articles on Kendo UI Editor:
+Other articles on the Kendo UI Editor:
 
 * [Editor JavaScript API Reference](/api/javascript/ui/editor)
 * [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
