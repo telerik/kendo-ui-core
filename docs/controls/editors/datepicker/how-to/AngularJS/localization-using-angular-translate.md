@@ -1,11 +1,11 @@
 ---
-title: Localization with Angular Translate
-page_title: Localization with Angular Translate | Kendo UI DatePicker
+title: Localize with Angular Translate
+page_title: Localize with Angular Translate | Kendo UI DatePicker
 description: "Learn how to localize the Kendo UI DatePicker in AngularJS environment with Angular Translate."
 slug: howto_localize_datepicker_using_angular_translate
 ---
 
-# Localization with Angular Translate
+# Localize with Angular Translate
 
 The example below demonstrates how to localize a Kendo UI DatePicker in an AngularJS environment using Angular Translate.
 
@@ -127,7 +127,7 @@ The example below demonstrates how to localize a Kendo UI DatePicker in an Angul
 
 ## See Also
 
-Other articles on Kendo UI DatePicker:
+Other articles on the Kendo UI DatePicker:
 
 * [DatePicker JavaScript API Reference](/api/javascript/ui/datepicker)
 * [How to Set the First Weekday]({% slug howto_set_first_weekday_datepicker %})
