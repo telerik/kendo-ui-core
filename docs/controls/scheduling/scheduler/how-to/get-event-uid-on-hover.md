@@ -1,13 +1,13 @@
 ---
-title: Get Hovered Event's UID
-page_title: Get Hovered Event's UID | Kendo UI Scheduler
-description: "Learn how to get an event's uid on hover"
+title: Get the UID of Events on Hover
+page_title: Get the UID of Events on Hover | Kendo UI Scheduler
+description: "Learn how to get the UID of events on hover in the Kendo UI Scheduler widget."
 slug: howto_get_the_uid_of_an_event_on_hover_scheduler
 ---
 
-# Get the UID of an event on hover
+# Get the UID of Events on Hover
 
-The example below demonstrates how to get the uid of an event on hover. 
+The example below demonstrates how to get the UID of a Kendo UI Scheduler event on hover. 
 
 ###### Example
 
@@ -172,7 +172,7 @@ $(function() {
 
 ## See Also
 
-Other articles and how-to examples on Kendo UI Scheduler:
+Other articles and how-to examples on the Kendo UI Scheduler:
 
 * [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [How to Add Controls to Custom Editor]({% slug howto_add_controlsto_custom_event_editor_scheduler %})
@@ -191,10 +191,10 @@ Other articles and how-to examples on Kendo UI Scheduler:
 * [How to Nest Editors inside Event Templates]({% slug howto_nest_editorsinside_event_templates_scheduler %})
 * [How to Use Custom Event Template with Specific Background Color]({% slug howto_use_custom_event_templatewith_specific_background_color_scheduler %})
 
-How-to examples on Kendo UI Scheduler in AngularJS:
+How-to examples on the Kendo UI Scheduler in AngularJS:
 
 * [How to Edit Using ContextMenu]({% slug howto_edit_using_contectmenu_angularjs_scheduler %})
 * [How to Set Initial Data Manually]({% slug howto_set_intial_data_manually_angularjs_scheduler %})
 * [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
 
-For additional runnable examples on Kendo UI Scheduler, browse the [Scheduler **How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
+For additional runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
