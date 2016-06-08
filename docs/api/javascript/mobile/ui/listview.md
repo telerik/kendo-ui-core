@@ -1129,7 +1129,7 @@ The tapped Kendo mobile Button (if present).
 
 ### dataBound
 
-Fires when the ListView has received data from the DataSource.
+Fires when the ListView has received data from the DataSource. **The event is used only when virtual (endless scrolling) mode is disabled.**
 
 #### Example
 
@@ -1153,7 +1153,7 @@ Fires when the ListView has received data from the DataSource.
 
 ### dataBinding
 
-Fires when the ListView is about to be rendered.
+Fires when the ListView is about to be rendered. **The event is used only when virtual (endless scrolling) mode is disabled.**
 
 #### Example
 
@@ -1177,7 +1177,7 @@ Fires when the ListView is about to be rendered.
 
 ### itemChange
 
-Fires when a new item is added to the listview (usually in virtual mode).
+Fires when a new item is added to the listview. **The event is used in virtual (endless scrolling) mode only.**
 
 #### Example
 
