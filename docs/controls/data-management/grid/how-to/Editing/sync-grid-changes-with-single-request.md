@@ -1,11 +1,11 @@
 ---
-title: Sync Grid Changes With a Single Request
-page_title: Sync Grid Changes With a Single Request | Kendo UI Grid
+title: Sync Grid Changes with a Single Request
+page_title: Sync Grid Changes with a Single Request | Kendo UI Grid
 description: "Learn how to send all updated, deleted, or new records to the server with a single request in a Kendo UI Grid."
 slug: howto_sync_all_updated_items_with_single_request
 ---
 
-# Sync Grid Changes With a Single Request
+# Sync Grid Changes with a Single Request
 
 To see the example on how to send all updated, deleted, or new records to the server with a single request in a Kendo UI Grid, refer to [this project](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/grid-data-serializer-class-for-serializng-data-and-send-all-update-new-deleted-records). It is available in the [Kendo UI GitHub repository with code samples on the UI for ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc).
 
