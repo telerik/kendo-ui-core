@@ -1,17 +1,17 @@
 ---
-title: Show Preview of Image in Window Using MVVM
-page_title: Show Preview of Image in Window Using MVVM | Kendo UI Grid
-description: "Learn how to show a preview of an image in a window using MVVM."
+title: Show Image Preview in Window Using MVVM
+page_title: Show Image Preview in Window Using MVVM | Kendo UI Grid
+description: "Learn how to show a preview of an image in a window using MVVM in a Kendo UI Grid."
 slug: howto_show_preview_image_window_MVVM
 ---
 
-# Show Preview of Image in Window Using MVVM
+# Show Image Preview in Window Using MVVM
 
-This article illustrates how to show a preview of an image in a window using MVVM. To see the example, refer to the [example source code](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/grid-show-preview-image-mvvm), which is available in the [Kendo UI ASP.NET MVC code samples GitHub repository](https://github.com/telerik/kendo-examples-asp-net-mvc).
+To see the example on how to show a preview of an image in a window using MVVM in the Kendo UI Grid, refer to [this project](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/grid-show-preview-image-mvvm). It is available in the [Kendo UI GitHub repository with code samples on the UI for ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc).
 
 ## See Also
 
-Other articles on Kendo UI Grid and how-to examples related to its editing functionality:
+Other articles on the Kendo UI Grid and how-to examples related to its editing functionality:
 
 * [JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Access Editor Controls in Edit Events]({% slug howto_access_editor_controlsin_edit_events_grid %})
@@ -38,4 +38,4 @@ Other articles on Kendo UI Grid and how-to examples related to its editing funct
 * [How to Use MultiSelect as CSV Editor]({% slug howto_usethe_multiselect_aseditor_commaseparated_stringfields_grid %})
 * [How to Use TreeView as Custom Editor]({% slug howto_usethe_treeview_aseditor_grid %})
 
-For more runnable examples on Kendo UI Grid, browse the [how-to section of articles]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse the [how-to section of articles]({% slug howto_create_custom_editors_grid %}).
