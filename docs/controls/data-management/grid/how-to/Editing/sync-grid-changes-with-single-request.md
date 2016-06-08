@@ -1,17 +1,17 @@
 ---
 title: Sync Grid Changes With a Single Request
 page_title: Sync Grid Changes With a Single Request | Kendo UI Grid
-description: "Learn how to send all updated / deleted / new records with one request to the server with Kendo UI Grid."
+description: "Learn how to send all updated, deleted, or new records to the server with a single request in a Kendo UI Grid."
 slug: howto_sync_all_updated_items_with_single_request
 ---
 
 # Sync Grid Changes With a Single Request
 
-This article illustrates how to send all updated / deleted / new records with one request to the server with Kendo UI Grid. To see the example, refer to the [example source code](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/grid-data-serializer-class-for-serializng-data-and-send-all-update-new-deleted-records), which is available in the [Kendo UI ASP.NET MVC code samples GitHub repository](https://github.com/telerik/kendo-examples-asp-net-mvc).
+To see the example on how to send all updated, deleted, or new records to the server with a single request in a Kendo UI Grid, refer to [this project](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/grid-data-serializer-class-for-serializng-data-and-send-all-update-new-deleted-records). It is available in the [Kendo UI GitHub repository with code samples on the UI for ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc).
 
 ## See Also
 
-Other articles on Kendo UI Grid and how-to examples related to its editing functionality:
+Other articles on the Kendo UI Grid and how-to examples related to its editing functionality:
 
 * [JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Access Editor Controls in Edit Events]({% slug howto_access_editor_controlsin_edit_events_grid %})
@@ -38,4 +38,4 @@ Other articles on Kendo UI Grid and how-to examples related to its editing funct
 * [How to Use MultiSelect as CSV Editor]({% slug howto_usethe_multiselect_aseditor_commaseparated_stringfields_grid %})
 * [How to Use TreeView as Custom Editor]({% slug howto_usethe_treeview_aseditor_grid %})
 
-For more runnable examples on Kendo UI Grid, browse the [how-to section of articles]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [how-to articles]({% slug howto_create_custom_editors_grid %}).
