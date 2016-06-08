@@ -57,7 +57,7 @@ The example below demonstrates how to access PivotConfigurator TreeView widget a
 
 ## See Also
 
-Other articles on Kendo UI PivotGrid and how-to examples:
+Other articles on the Kendo UI PivotGrid and how-to examples:
 
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
 * [How to Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
@@ -71,4 +71,4 @@ Other articles on Kendo UI PivotGrid and how-to examples:
 * [How to Reset Expand State]({% slug howto_reset_expand_state_pivotgrid %})
 * [How to Show Tooltip with Data Cell Information]({% slug howto_show_tooltip_withdata_cellinformation_pivotgrid %})
 
-For more runnable examples on Kendo UI PivotGrid, browse the [how-to section of articles]({% slug howto_add_dimension_column_axis_pivotgrid %}).
+For more runnable examples on the Kendo UI PivotGrid, browse its [**How To** documentation folder]({% slug howto_add_dimension_column_axis_pivotgrid %}).

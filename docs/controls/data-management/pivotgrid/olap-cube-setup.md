@@ -140,10 +140,12 @@ There are two possible approaches to implement a secured access to the OLAP inst
 
 ## See Also
 
-Other article on Kendo UI PivotGrid:
+Other article on the Kendo UI PivotGrid:
 
 * [Overview]({% slug overview_kendoui_pivotgrid_widget %})
 * [PivotConfigurator]({% slug overview_kendoui_pivotconfigurator_pivotgridwidget %})
 * [Exporting]({% slug exporting_functionality_pivotgridwidget %})
 * [Fundamentals]({% slug fundamentals_pivotgrid_widget %})
 * [Frequently Asked Questions]({% slug frequently_asked_questions_pivotgrid %})
+
+For how-to examples on the Kendo UI PivotGrid widget, browse its [**How To** documentation folder]({% slug howto_add_dimension_column_axis_pivotgrid %}).

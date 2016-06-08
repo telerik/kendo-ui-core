@@ -54,10 +54,12 @@ For detailed information on XMLA, refer to [this article](http://technet.microso
 
 ## See Also
 
-Other article on Kendo UI PivotGrid:
+Other article on the Kendo UI PivotGrid:
 
 * [OLAP Cube Setup]({% slug olap_cube_setup_pivotgrid_widget %})
 * [Overview]({% slug overview_kendoui_pivotgrid_widget %})
 * [PivotConfigurator]({% slug overview_kendoui_pivotconfigurator_pivotgridwidget %})
 * [Exporting]({% slug exporting_functionality_pivotgridwidget %})
 * [Frequently Asked Questions]({% slug frequently_asked_questions_pivotgrid %})
+
+For how-to examples on the Kendo UI PivotGrid widget, browse its [**How To** documentation folder]({% slug howto_add_dimension_column_axis_pivotgrid %}).
