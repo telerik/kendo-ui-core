@@ -1,13 +1,13 @@
 ---
-title: Scroll to specific time slot
-page_title: Scroll to specific time slot
-description: "Learn how to scroll to a given time slot with JavaScript."
+title: Scroll to Specific Time Slot
+page_title: Scroll to Specific Time Slot | Kendo UI Scheduler
+description: "Learn how to scroll to a given time slot with JavaScript in a Kendo UI Scheduler."
 slug: scroll_to_given_time_slot
 ---
 
-# Scroll to given time slot with JavaScript 
+# Scroll to Specific Time Slot
 
-The example below demonstrates how Kendo UI Scheduler widget to scroll to a given time slot with JavaScript.
+The example below demonstrates how to scroll  to a given time slot with JavaScript in a Kendo UI Scheduler.
 
 ###### Example
 
@@ -127,7 +127,7 @@ The example below demonstrates how Kendo UI Scheduler widget to scroll to a give
 
 ## See Also
 
-Other articles and how-to examples on Kendo UI Scheduler:
+Other articles and how-to examples on the Kendo UI Scheduler:
 
 * [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [How to Add Events Programmatically]({% slug howto_add_events_programatically_scheduler %})
@@ -150,7 +150,7 @@ Other articles and how-to examples on Kendo UI Scheduler:
 * [How to Nest Editors inside Event Templates]({% slug howto_nest_editorsinside_event_templates_scheduler %})
 * [How to Use Custom Event Template with Specific Background Color]({% slug howto_use_custom_event_templatewith_specific_background_color_scheduler %})
 
-How-to examples on Kendo UI Scheduler in AngularJS:
+How-to examples on the Kendo UI Scheduler in AngularJS:
 
 * [How to Create and Set ObservableArray Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
 * [How to Edit Using ContextMenu]({% slug howto_edit_using_contectmenu_angularjs_scheduler %})
@@ -158,4 +158,4 @@ How-to examples on Kendo UI Scheduler in AngularJS:
 * [How to Show Тooltip on hover]({% slug howto_show_tooltipon_hover_angularjs_scheduler %})
 * [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
 
-For additional runnable examples on Kendo UI Scheduler, browse the [Scheduler **How To** documentation folder]({% slug howto_customize_editand_events_templates_angularjs_scheduler %}).
+For additional runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_customize_editand_events_templates_angularjs_scheduler %}).
