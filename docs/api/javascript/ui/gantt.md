@@ -944,6 +944,45 @@ If set to `false` the user won't be able to create, modify or delete tasks and d
     });
     </script>
 
+### editable.confirmation `Boolean` *(default: true)*
+
+If set to `true` the Gantt will display a confirmation dialog when the user deletes a task or a dependency.
+
+#### Example - disable delete confirmation
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
+        }
+      ],
+      dependencies: [
+        {
+          predecessorId: 1,
+          successorId: 2,
+          type: 1
+        }
+      ],
+      editable: {
+      	confirmation: false
+      }
+    });
+    </script>
+
 ### editable.create `Boolean` *(default: true)*
 
 If set to `false` the user won't be able to create tasks.
@@ -1186,7 +1225,7 @@ If set to `false` the user won't be able to move tasks.
 
 ### editable.reorder `Boolean` *(default: true)*
 
-If set to `false` the user won't be able to reorder tasks.
+If set to `false` the user won't be able to reorder tasks in the task list.
 
 #### Example
 
@@ -1264,85 +1303,6 @@ If set to `false` the user won't be able to resize tasks.
     });
     </script>
 
-### editable.update `Boolean` *(default: true)*
-
-If set to `false` the user won't be able to update tasks.
-
-#### Example
-
-    <div id="gantt"></div>
-    <script>
-    $("#gantt").kendoGantt({
-      dataSource: [
-        {
-          id: 1,
-          orderId: 0,
-          parentId: null,
-          title: "Task1",
-          start: new Date("2014/6/17 9:00"),
-          end: new Date("2014/6/17 11:00")
-        },
-        {
-          id: 2,
-          orderId: 1,
-          parentId: null,
-          title: "Task2",
-          start: new Date("2014/6/17 12:00"),
-          end: new Date("2014/6/17 14:00")
-        }
-      ],
-      dependencies: [
-        {
-          predecessorId: 1,
-          successorId: 2,
-          type: 1
-        }
-      ],
-      editable: {
-      	update: false
-      }
-    });
-    </script>
-
-### editable.confirmation `Boolean` *(default: true)*
-
-If set to `true` the Gantt will display a confirmation dialog when the user deletes a task or a dependency.
-
-#### Example - disable delete confirmation
-    <div id="gantt"></div>
-    <script>
-    $("#gantt").kendoGantt({
-      dataSource: [
-        {
-          id: 1,
-          orderId: 0,
-          parentId: null,
-          title: "Task1",
-          start: new Date("2014/6/17 9:00"),
-          end: new Date("2014/6/17 11:00")
-        },
-        {
-          id: 2,
-          orderId: 1,
-          parentId: null,
-          title: "Task2",
-          start: new Date("2014/6/17 12:00"),
-          end: new Date("2014/6/17 14:00")
-        }
-      ],
-      dependencies: [
-        {
-          predecessorId: 1,
-          successorId: 2,
-          type: 1
-        }
-      ],
-      editable: {
-      	confirmation: false
-      }
-    });
-    </script>
-
 ### editable.template `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) which renders the editor.
@@ -1381,6 +1341,46 @@ which field to update. The other option is to use [MVVM](/framework/mvvm/overvie
       ],
       editable: {
       	template: $("#editor").html()
+      }
+    });
+    </script>
+
+### editable.update `Boolean` *(default: true)*
+
+If set to `false` the user won't be able to update tasks.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        },
+        {
+          id: 2,
+          orderId: 1,
+          parentId: null,
+          title: "Task2",
+          start: new Date("2014/6/17 12:00"),
+          end: new Date("2014/6/17 14:00")
+        }
+      ],
+      dependencies: [
+        {
+          predecessorId: 1,
+          successorId: 2,
+          type: 1
+        }
+      ],
+      editable: {
+      	update: false
       }
     });
     </script>
