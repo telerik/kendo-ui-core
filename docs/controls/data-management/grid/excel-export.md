@@ -295,4 +295,4 @@ Other articles on the Kendo UI Grid:
 * [Export the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %})
 * [Print the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
 
-For how-to examples on the Kendo UI Grid widget, browse [its How-to section]({% slug howto_bindto_telerik_backend_services_grid %}).
+For how-to examples on the Kendo UI Grid widget, browse its [**How To** documentation folder]({% slug howto_bindto_telerik_backend_services_grid %}).
