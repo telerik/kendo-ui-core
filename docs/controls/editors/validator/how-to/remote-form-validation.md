@@ -1,17 +1,17 @@
 ---
-title: Remote Form Validation
-page_title: Remote Form Validation | Kendo UI Validator
-description: "Learn how to validate the form on the server using Kendo UI Validator."
+title: Implement Remote Form Validation
+page_title: Implement Remote Form Validation | Kendo UI Validator
+description: "Learn how to validate the form on the server by using the Kendo UI Validator."
 slug: howto_remote_validation
 ---
 
-# Remote Validation
+# Implement Remote Form Validation
 
-This article illustrates how to implement remote validation with Kendo UI Validator. To see the example, refer to the [example source code](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/validator-remotevalidation), which is available in the [Kendo UI ASP.NET MVC code samples GitHub repository](https://github.com/telerik/kendo-examples-asp-net-mvc).
+To see the example on how to implement remote validation by using the Kendo UI Validator, refer to [this project](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/validator-remotevalidation). It is available in the [Kendo UI GitHub repository with code samples on the UI for ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc).
 
 ## See Also
 
-Other articles on Kendo UI Validator:
+Other articles on the Kendo UI Validator:
 
 * [Validator JavaScript API Reference](/api/javascript/ui/validator)
 * [How to Add Red Border and Hide Tooltip]({% slug howto_addredborderandhidetooltip_validator %})
