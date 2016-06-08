@@ -1,11 +1,11 @@
 ---
-title: Change PivotGrid Fields Names
-page_title: Change PivotGrid Fields Names | Kendo UI PivotGrid
+title: Change PivotGrid Field Names
+page_title: Change PivotGrid Field Names | Kendo UI PivotGrid
 description: "Learn how to change the field names in a Kendo UI PivotGrid widget."
 slug: howto_change_pivotgrid_fields_names_pivotgrid
 ---
 
-# Change PivotGrid Fields Names
+# Change PivotGrid Field Names
 
 The example below demonstrates how to change the field names in a Kendo UI PivotGrid widget.
 
