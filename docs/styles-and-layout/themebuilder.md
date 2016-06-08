@@ -31,6 +31,11 @@ The LESS output of the ThemeBuilder depends on the LESS files that are distribut
 
 For the various ways to process the LESS output, refer to the [official LESS documentation](http://lesscss.org/#-client-side-usage).
 
+> **Important**
+
+> We introduced a new ThemeBuilder together with the `Kendo UI Q2 2015 release`. The new ThemeBuilder follows a notable CSS code overhaul, which made the themes more consistent and simpler to implement and to customize.
+The new ThemeBuilder `does not provide an import functionality`. We decided to drop this feature as it cannot be implemented to be as good and flexible as we desired. Although it may not seem like the best option, we recommend recreating the custom themes after upgrading the Kendo UI version. This will ensure that the generated CSS code is clean and includes all styles required by the new widgets or features.
+
 ## Version Compatibility
 
 The ThemeBuilder generates CSS, LESS, and JS code, which are compatible with the current official Kendo UI version. In case a custom theme for an older Kendo UI version is needed, implement it via [manual coding or overrides]({% slug themesandappearnce_kendoui_desktopwidgets %}#customize-appearance).
