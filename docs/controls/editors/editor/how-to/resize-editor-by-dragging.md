@@ -7,7 +7,7 @@ slug: howto_resize_the_editor_by_dragging_editor
 
 # Resize the Editor By Dragging
 
-This example demonstrates how to resize the Kendo UI Editor by dragging its bottom-right corner.
+The example below demonstrates how to resize the Kendo UI Editor by dragging its bottom-right corner.
 
 ###### Example
 
@@ -93,7 +93,7 @@ This example demonstrates how to resize the Kendo UI Editor by dragging its bott
 
 ## See Also
 
-Other articles on Kendo UI Editor:
+Other articles on the Kendo UI Editor:
 
 * [Editor JavaScript API Reference](/api/javascript/ui/editor)
 * [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
