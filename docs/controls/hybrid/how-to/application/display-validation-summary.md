@@ -111,7 +111,7 @@ The example below demonstrates how to display a validation summary if the valida
 
 ## See Also
 
-Articles on Application and other Hybrid UI components in Kendo UI:
+Articles on the Application and other Hybrid UI components in Kendo UI:
 
 * [Hybrid UI Application API Reference](/api/javascript/mobile/application)
 * [Overview of the Hybrid UI Application in Kendo UI]({% slug overview_hybridapplication %})
