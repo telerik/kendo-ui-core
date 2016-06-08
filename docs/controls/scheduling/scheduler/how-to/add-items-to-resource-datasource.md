@@ -1,11 +1,11 @@
 ---
-title: Insert New Items Into a Resource DataSource
-page_title: Insert New Items Into a Resource DataSource | Kendo UI Scheduler
+title: Insert New Items into Resource DataSource
+page_title: Insert New Items into Resource DataSource | Kendo UI Scheduler
 description: "Learn how to insert new items into a resource DataSource in a Kendo UI Scheduler widget."
 slug: howto_insert_items_in_resource_datasource_scheduler
 ---
 
-# Insert New Items Into a Resource DataSource
+# Insert New Items into Resource DataSource
 
 The example below demonstrates how to insert new items into a resource DataSource in a Kendo UI Scheduler widget.
 
@@ -115,7 +115,7 @@ The example below demonstrates how to insert new items into a resource DataSourc
 
 ## See Also
 
-Other articles and how-to examples on Kendo UI Scheduler:
+Other articles and how-to examples on the Kendo UI Scheduler:
 
 * [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [How to Add Events Programmatically]({% slug howto_add_events_programatically_scheduler %})
@@ -138,7 +138,7 @@ Other articles and how-to examples on Kendo UI Scheduler:
 * [How to Nest Editors inside Event Templates]({% slug howto_nest_editorsinside_event_templates_scheduler %})
 * [How to Use Custom Event Template with Specific Background Color]({% slug howto_use_custom_event_templatewith_specific_background_color_scheduler %})
 
-How-to examples on Kendo UI Scheduler in AngularJS:
+How-to examples on the Kendo UI Scheduler in AngularJS:
 
 * [How to Create and Set ObservableArray Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
 * [How to Edit Using ContextMenu]({% slug howto_edit_using_contectmenu_angularjs_scheduler %})
@@ -146,4 +146,4 @@ How-to examples on Kendo UI Scheduler in AngularJS:
 * [How to Show Тooltip on hover]({% slug howto_show_tooltipon_hover_angularjs_scheduler %})
 * [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
 
-For additional runnable examples on Kendo UI Scheduler, browse the [Scheduler **How To** documentation folder]({% slug howto_customize_editand_events_templates_angularjs_scheduler %}).
+For additional runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_customize_editand_events_templates_angularjs_scheduler %}).
