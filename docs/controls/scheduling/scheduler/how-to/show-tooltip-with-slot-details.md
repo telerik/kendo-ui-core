@@ -1,13 +1,13 @@
 ---
 title: Show Tooltip with Slot Details
 page_title: Show Tooltip with Slot Details | Kendo UI Scheduler
-description: "Learn how to use Kendo UI Tooltip to show slot details in a Scheduler"
+description: "Learn how to use the Kendo UI Tooltip to show slot details in a Kendo UI Scheduler widget."
 slug: howto_showtooltipwith_additionalinformation_overslots_scheduler
 ---
 
 # Show Tooltip with Slot Details
 
-The example below demonstrates how to use Kendo UI Tooltip to show slot details in a Scheduler.
+The example below demonstrates how to use the Kendo UI Tooltip to show slot details in a Kendo UI Scheduler widget.
 
 ###### Example
 
@@ -186,7 +186,7 @@ The example below demonstrates how to use Kendo UI Tooltip to show slot details 
 
 ## See Also
 
-Other articles and how-to examples on Kendo UI Scheduler:
+Other articles and how-to examples on the Kendo UI Scheduler:
 
 * [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [How to Create Recurrence Editor Using Mobile Editor]({% slug howto_createrecurrenceeditor_byusingmobileeditor_scheduler %})
@@ -205,7 +205,7 @@ Other articles and how-to examples on Kendo UI Scheduler:
 * [How to Use Remote Validation]({% slug howto_useremotevalidation_scheduler %})
 * [How to Work with Scheduler Offline]({% slug howto_setupthewidget_toworkoffline_scheduler %})
 
-How-to examples on Kendo UI Scheduler in AngularJS:
+How-to examples on the Kendo UI Scheduler in AngularJS:
 
 * [How to Create and Set ObservableArray Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
 * [How to Edit Using ContextMenu]({% slug howto_edit_using_contectmenu_angularjs_scheduler %})
@@ -213,4 +213,4 @@ How-to examples on Kendo UI Scheduler in AngularJS:
 * [How to Show Тooltip on hover]({% slug howto_show_tooltipon_hover_angularjs_scheduler %})
 * [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
 
-For additional runnable examples on Kendo UI Scheduler, browse the [Scheduler **How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
+For additional runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
