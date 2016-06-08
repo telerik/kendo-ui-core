@@ -56,7 +56,7 @@ The example below demonstrates how to use the internal Grid column resizing API 
 
 ## See Also
 
-Other articles on Kendo UI Grid and how-to examples related to its layout:
+Other articles on the Kendo UI Grid and how-to examples related to its layout:
 
 * [Kendo UI Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Adjust Row Height with Virtual Scrolling]({% slug howto_adjust_row_height_withvirtual_scrolling_grid %})
@@ -67,4 +67,4 @@ Other articles on Kendo UI Grid and how-to examples related to its layout:
 * [How to Resize Grid When Window Is Resized]({% slug howto_resize_whenthe_windowis_resized_grid %})
 * [How to Use FontAwesome Icons in Custom Command Buttons]({% slug howto_use_fontawesomeiconsin_custom_command_buttons_grid %})
 
-For more runnable examples on Kendo UI Grid, browse the [how-to section of articles]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).

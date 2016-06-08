@@ -90,7 +90,7 @@ To understand how Excel documents work, check the [introductory article on Excel
 
 ## See Also
 
-Other articles on Kendo UI Grid and how-to examples related to its export to Excel:
+Other articles on the Kendo UI Grid and how-to examples related to its export to Excel:
 
 * [JavaScript API Reference](/api/javascript/ui/grid#configuration-excel)
 * [How to Configure Color for Alternating Rows]({% slug howto_configure_color_alternating_rows_grid %})
@@ -100,4 +100,4 @@ Other articles on Kendo UI Grid and how-to examples related to its export to Exc
 * [How to Format Cell Values]({% slug howto_format_cell_values_grid %})
 * [How to Use Column Template]({% slug howto_use_column_template_grid %})
 
-For more runnable examples on Kendo UI Grid, browse the [how-to section of articles]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).

@@ -76,7 +76,7 @@ The example below demonstrates how to resize the columns of a Kendo UI Grid widg
 
 ## See Also
 
-Other articles on Kendo UI Grid and how-to examples related to AngularJS:
+Other articles on the Kendo UI Grid and how-to examples related to AngularJS:
 
 * [JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Bind to Telerik Backend Services]({% slug howto_bindto_telerik_backend_services_grid %})
@@ -86,4 +86,4 @@ Other articles on Kendo UI Grid and how-to examples related to AngularJS:
 * [How to Create Custom Edit Buttons]({% slug howto_create_custom_edit_buttons_grid %})
 * [How to Use AngularJS in Popup Editor Templates]({% slug howto_use_angularin_popup_editor_templates_grid %})
 
-For more runnable examples on Kendo UI Grid, browse the [how-to section of articles]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).
