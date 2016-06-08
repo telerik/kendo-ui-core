@@ -1,17 +1,17 @@
 ---
-title: Create a Custom ToDo view
-page_title: Create a Custom ToDo view | Kendo UI Scheduler
-description: "Learn how to create a custom todo view for a Kendo UI Scheduler."
+title: Create Custom ToDo Views
+page_title: Create Custom ToDo Views | Kendo UI Scheduler
+description: "Learn how to create a custom ToDo view for a Kendo UI Scheduler."
 slug: howto_create_custom_todo_view
 ---
 
-# Create a Custom ToDo view
+# Create Custom ToDo Views
 
-This article illustrates how to create a custom todo view for a Kendo UI Scheduler. To see the example, refer to the [example source code](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/scheduler-custom-view), which is available in the [Kendo UI ASP.NET MVC code samples GitHub repository](https://github.com/telerik/kendo-examples-asp-net-mvc).
+To see the example on how to create a custom ToDo view for a Kendo UI Scheduler, refer to [this project](https://github.com/telerik/kendo-examples-asp-net-mvc/tree/master/scheduler-custom-view). It is available in the [Kendo UI GitHub repository with code samples on the UI for ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc).
 
 ## See Also
 
-Other articles and how-to examples on Kendo UI Scheduler:
+Other articles and how-to examples on the Kendo UI Scheduler:
 
 * [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
 * [How to Add Controls to Custom Editor]({% slug howto_add_controlsto_custom_event_editor_scheduler %})
@@ -34,7 +34,7 @@ Other articles and how-to examples on Kendo UI Scheduler:
 * [How to Nest Editors inside Event Templates]({% slug howto_nest_editorsinside_event_templates_scheduler %})
 * [How to Use Custom Event Template with Specific Background Color]({% slug howto_use_custom_event_templatewith_specific_background_color_scheduler %})
 
-How-to examples on Kendo UI Scheduler in AngularJS:
+How-to examples on the Kendo UI Scheduler in AngularJS:
 
 * [How to Create and Set ObservableArray Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
 * [How to Edit Using ContextMenu]({% slug howto_edit_using_contectmenu_angularjs_scheduler %})
@@ -42,4 +42,4 @@ How-to examples on Kendo UI Scheduler in AngularJS:
 * [How to Show Тooltip on hover]({% slug howto_show_tooltipon_hover_angularjs_scheduler %})
 * [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
 
-For additional runnable examples on Kendo UI Scheduler, browse the [Scheduler **How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
+For additional runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_add_controlsto_custom_event_editor_scheduler %}).
