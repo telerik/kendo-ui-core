@@ -1,13 +1,13 @@
 ---
-title: Use Different Popup Editor For Create and Update Operations
-page_title: Use Different Popup Editor For Create and Update Operations | Kendo UI Grid
+title: Use Different Popup Editors for Create and Update Operations
+page_title: Use Different Popup Editors for Create and Update Operations | Kendo UI Grid
 description: "Learn how to use different popup editors for create and update operations in the Kendo UI Grid widget."
 slug: howto_use_different_poup_editors_for_create_update_operations
 ---
 
-# Use Different Popup Editor For Create and Update Operations
+# Use Different Popup Editors for Create and Update Operations
 
-The example below demonstrates how to use different popup editors for create and update operations.
+The example below demonstrates how to use different popup editors in a Kendo UI Grid for the Create and Update operations.
 
 ###### Example
 
@@ -104,7 +104,7 @@ The example below demonstrates how to use different popup editors for create and
 
 ## See Also
 
-Other articles on Kendo UI Grid and how-to examples related to its editing functionality:
+Other articles on the Kendo UI Grid and how-to examples related to its editing functionality:
 
 * [JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Access Editor Controls in Edit Events]({% slug howto_access_editor_controlsin_edit_events_grid %})
@@ -131,4 +131,4 @@ Other articles on Kendo UI Grid and how-to examples related to its editing funct
 * [How to Use MultiSelect as CSV Editor]({% slug howto_usethe_multiselect_aseditor_commaseparated_stringfields_grid %})
 * [How to Use TreeView as Custom Editor]({% slug howto_usethe_treeview_aseditor_grid %})
 
-For more runnable examples on Kendo UI Grid, browse the [how-to section of articles]({% slug howto_create_custom_editors_grid %}).
+For more runnable examples on the Kendo UI Grid, browse its [how-to articles]({% slug howto_create_custom_editors_grid %}).
