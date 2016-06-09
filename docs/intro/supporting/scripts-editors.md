@@ -10,7 +10,7 @@ position: 4
 
 Below are listed the script files for the Kendo UI Editors widgets:
 
-| Widget				| Script Files								| Comments					|
+| WIDGET				| SCRIPT FILES								 |COMMENTS			|
 | :---					| :---										| :---						|
 | [AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index)| jquery.js| 				|
 |						| kendo.core.js								|							|

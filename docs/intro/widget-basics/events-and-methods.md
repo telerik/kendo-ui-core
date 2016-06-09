@@ -1,7 +1,7 @@
 ---
 title: Methods and Events
 page_title: Methods and Events | Kendo UI Getting Started
-description: "Learn how to obtain a reference to an initialized Kendo UI widget instance and call its methods and events."
+description: "Obtain a reference to an initialized Kendo UI widget instance and call its methods and events."
 previous_url: /basics/events-and-methods, /intro/events-and-methods, /intro/installation/events-and-methods
 slug: widget_methodsand_events_kendoui_installation
 position: 3

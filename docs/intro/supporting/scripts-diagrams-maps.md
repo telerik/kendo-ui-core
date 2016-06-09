@@ -10,7 +10,7 @@ position: 8
 
 Below are listed the script files for Kendo UI Diagrams and Maps:
 
-| Widget				| Script Files								|Comments					|
+| WIDGET				| SCRIPT FILES								 |COMMENTS			|
 | :---					| :---										|:---						|
 | [Diagram](http://demos.telerik.com/kendo-ui/diagram/index)| jquery.js|						|
 | 						| kendo.core.js								| 							|

@@ -10,7 +10,7 @@ position: 9
 
 Below are listed the script files for the Kendo UI Scheduling widgets:
 
-| Widget				| Script Files								| Comments					|
+| WIDGET				| SCRIPT FILES								 |COMMENTS			|
 | :---					| :---										| :---						|
 | [Calendar](http://demos.telerik.com/kendo-ui/calendar/index)| jquery.js|						|
 | 						| kendo.core.js								| 							|

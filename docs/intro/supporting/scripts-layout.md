@@ -10,7 +10,7 @@ position: 10
 
 Below are listed the script files for the Kendo UI Layout widgets:
 
-| Widget				| Script Files								| Comments					|
+| WIDGET				| SCRIPT FILES								 |COMMENTS			|
 | :---					| :---										| :---						|
 | [Notification](http://demos.telerik.com/kendo-ui/notification/index)| jquery.js|				|
 | 						| kendo.core.js								| 							|

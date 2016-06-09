@@ -1,7 +1,7 @@
 ---
 title: Destroy Widgets
 page_title: Destroy Widgets | Kendo UI Getting Started
-description: "Learn how to destroy Kendo UI widgets."
+description: "Destroy Kendo UI widgets."
 previous_url: /framework/widgets/destroy
 slug: destroywidgets_kendoui_gettingstarted
 position: 4
