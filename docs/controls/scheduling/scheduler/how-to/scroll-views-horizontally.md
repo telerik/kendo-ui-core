@@ -1,13 +1,13 @@
 ---
 title: Scroll Views Horizontally
 page_title: Scroll Views Horizontally | Kendo UI Scheduler
-description: "Learn how to scroll the scheduler views horizontally"
+description: "Learn how to scroll the Kendo UI Scheduler views horizontally."
 slug: howto_scroll_views_horizontally_scheduler
 ---
 
 # Scroll Scheduler Views Horizontally
 
-The Kendo UI Scheduler views are normally 100% wide and depend on the widget width. The example below shows how to expand them and utilize a horizontal scrollbar inside the Scheduler.
+The Kendo UI Scheduler views are normally 100% wide and depend on the width of the widget. The example below demonstrates how to expand them and utilize a horizontal scrollbar inside the Scheduler.
 
 ###### Example
 

@@ -1,20 +1,21 @@
 ---
-title: Export PDF with Header and Footer
-page_title: Export PDF with Header and Footer | Kendo UI Editor
-description: "Learn how to create template for the drawing API and use it for exporting header and footer to the PDF file."
+title: Export Headers and Footers to PDF Files
+page_title: Export Headers and Footers to PDF Files | Kendo UI Editor
+description: "Learn how to create a template for the Drawing API and use it for exporting headers and footers to PDF files."
 slug: howto_export_pdf_header_footer
 ---
 
-# Export PDF with Header and Footer
+# Export Headers and Footers to PDF Files
 
-The example in this article demonstrates how to use the Template feature of the [Drawing DOM API]({%slug drawingofhtmlelements_drawingapi%}#configuration-Template:) to generate header and footer elements to the exported PDF document.
+The example below demonstrates how to use the Template feature of the [Drawing DOM API]({% slug drawingofhtmlelements_drawingapi %}#configuration-Template:) to generate header and footer elements to the exported PDF document.
 
-In order to style the header and footer elements you can: 
+To style the header and footer elements:
 
-* Use inline style tag (as in the example here);
-* If [Classic mode]({%slug overview_kendoui_editor_widget%}#classic-mode) is used, add an external CSS file to the [options.stylesheets array](/api/javascript/ui/editor#configuration-stylesheets) and apply the needed decoration;
-* And if [Inline mode]({%slug overview_kendoui_editor_widget%}#inline-mode) is used, the implented CSS file can be directly referenced to the page. 
+* Use an inline style tag, as in the example below.
+* Add an external CSS file to the [`options.stylesheets array`](/api/javascript/ui/editor#configuration-stylesheets) and apply the needed decoration if the [Classic mode]({% slug overview_kendoui_editor_widget %}#classic-mode) is used, ;
+* Directly reference the implemented CSS file to the page if the [Inline mode]({%slug overview_kendoui_editor_widget%}#inline-mode) is used.
 
+###### Example
 
 ```html
 <script>
