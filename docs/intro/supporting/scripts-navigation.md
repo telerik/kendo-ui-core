@@ -10,7 +10,7 @@ position: 11
 
 Below are listed the script files for the Kendo UI Navigation widgets:
 
-| Widget				| Script Files								| Comments					|
+| WIDGET				| SCRIPT FILES								 |COMMENTS			|
 | :---					| :---										| :---						|
 | [Button](http://demos.telerik.com/kendo-ui/button/index)| jquery.js|							|
 | 						| kendo.core.js								| 							|

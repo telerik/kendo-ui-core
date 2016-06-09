@@ -1,7 +1,7 @@
 ---
 title: Widget DOM Elements
 page_title: Widget DOM Elements  | Kendo UI Getting Started
-description: "Learn how to obtain a reference to the Kendo UI widget wrapper and element."
+description: "Obtain a reference to the Kendo UI widget wrapper and element."
 previous_url: /framework/widgets/wrapper-element
 slug: widgetwrapperandelement_references_gettingstarted
 position: 1

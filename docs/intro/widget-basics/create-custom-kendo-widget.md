@@ -2,7 +2,7 @@
 title: Create Custom Widgets
 page_title: Create Custom Widgets | Kendo UI Getting Started
 previous_url: /howto/create-custom-kendo-widget, /framework/widgets/create-custom-kendo-widget
-description: "Learn how to create your own widget by inheriting from the base widget class in Kendo UI."
+description: "Create your own widget by inheriting from the base widget class in Kendo UI."
 slug: createcustomkendouiwidgets_gettingstarted
 position: 5
 ---

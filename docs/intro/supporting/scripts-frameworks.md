@@ -10,7 +10,7 @@ position: 14
 
 Below are listed the script files for the Kendo UI shared components providing behaviors, data access and other services:
 
-| Feature				| Script Files						|Comments 		|
+| FEATURE				| SCRIPT FILES								 |COMMENTS			|
 | :---					| :---								|:---			|
 | [Angular JS Directives](http://demos.telerik.com/kendo-ui/integration/index)| jquery.js||
 |						| kendo.core.js						|				|

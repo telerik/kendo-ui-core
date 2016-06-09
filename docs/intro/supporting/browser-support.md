@@ -2,7 +2,7 @@
 title: Web Browser and Operating System Support
 page_title: Web Browser and Operating System Support | Kendo UI Getting Started
 previous_url: /technical-requirements.html, /getting-started/technical-requirements, /browsers-support, /intro/browser-support
-description: "Browsers and operating systems supported by Kendo UI widgets and frameworks."
+description: "Check out the browsers and operating systems supported by Kendo UI widgets and frameworks."
 slug: wbe_browserand_operating_system_support
 position: 1
 ---
@@ -11,13 +11,13 @@ position: 1
 
 ## Web Browser Support
 
-[Kendo UI components](http://demos.telerik.com/kendo-ui/) are designed to support all major browsers and to operate without the worries of cross-browser compatibility, standards compliance or touch-device support. However, depending on the specifics of your project and the components you prefer to use, the browser support provided by Kendo UI widgets may vary between the versions.
+[Kendo UI components](http://demos.telerik.com/kendo-ui/) are designed to support all major browsers and to operate without the worries of a cross-browser compatibility, standards compliance or touch-device support. However, depending on the specifics of your project and the components you prefer to use, the browser support provided by Kendo UI widgets might vary between the versions.
 
 ### Web Browser Support General
 
 Most [Kendo UI widgets]({% slug bundle_supportfor_kendoui_components %}) have no specific limitations as of the browser versions they support.
 
-| Browser           | Supported Versions            | Limitations
+| BROWSER           | SUPPORTED VERSIONS            | LIMITATIONS
 | :---------------- | :---------------------------- | :---------------
 | Edge              | 20 or later ([officially supported versions by Microsoft only](https://en.wikipedia.org/wiki/Microsoft_Edge#Release_history)) |
 | Internet Explorer | 8 or later                    | Kendo UI [Spreadsheet](http://demos.telerik.com/kendo-ui/spreadsheet/index) and [Responsive panel](http://demos.telerik.com/kendo-ui/responsive-panel/index) require IE9 or later
@@ -30,7 +30,7 @@ Most [Kendo UI widgets]({% slug bundle_supportfor_kendoui_components %}) have no
 
 The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_components %}) are intended for Cordova based deployments, and support the following mobile device browsers and their corresponding web view components:
 
-| Browser           | Supported Versions            |
+| BROWSER           | SUPPORTED VERSIONS            |
 | :---------------- | :---------------------------- |
 | Internet Explorer | 10 or later                   |
 | Chrome            | Current and previous          |
@@ -43,7 +43,7 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 
 #### Fully Supported Browsers
 
-| Browser           | Supported Versions            |
+| BROWSER           | SUPPORTED VERSIONS            |
 | :---------------- | :---------------------------- |
 | Edge              | 20 or later ([officially supported versions by Microsoft only](https://en.wikipedia.org/wiki/Microsoft_Edge#Release_history)) |
 | Internet Explorer | 9 or later                    |
@@ -56,7 +56,7 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 
 #### Browsers with Limited Support
 
-| Browser           | Supported Versions            | Limitations                               |
+| BROWSER           | SUPPORTED VERSIONS            | LIMITATIONS                               |
 | :---------------- | :---------------------------- | :-----------                              |
 | Internet Explorer | 8                             | PDF and image export is not supported     |
 |                   |                               | Text rotation is not supported by the 64-bit versions |
@@ -67,12 +67,10 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 
 ### Important Notes
 
-* As of Kendo UI 2015 Q3 release Internet Explorer 7 is no longer supported.
-
-* Since Internet Explorer 11 was released in October 2013, look up the Q3 2013 SP2 (2013.3.1324) or a more recent Kendo UI version if you need support for it
-
+* As of the Kendo UI 2015 Q3 release, Internet Explorer 7 is no longer supported.
+* Since Internet Explorer 11 was released in October 2013, look up the Kendo UI 2013 Q3 SP2 (2013.3.1324) release or a more recent Kendo UI version if you need support for it.
 * Browsers in beta stage are not supported.
-* Exporting a zoomed in/out page to PDF is not supported.
+* Exporting a zoomed in or zoomed out page to PDF is not supported.
 * [Quirks mode](http://www.quirksmode.org/css/quirksmode.html) is not supported.
 
 > **Important**  
@@ -100,7 +98,7 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 
 ## Operating System Support
 
-| Platform          | Version               |
+| PLATFORM          | VERSION               |
 | :---------------- | :-------------------- |
 | Windows           | XP or later           |
 | Windows Server    | Server 2003 or later  |
@@ -119,9 +117,9 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 
 To ensure the best performance of your project, make sure that you:
 
-* Always use an up-to-date browser version
-* Check **Disable Script Debugging** from your browser configuration options
-* Activate Caching in Internet Explorer
+* Always use an up-to-date browser version.
+* Check **Disable Script Debugging** from your browser configuration options.
+* Activate Caching in Internet Explorer.
 
 ## See Also
 

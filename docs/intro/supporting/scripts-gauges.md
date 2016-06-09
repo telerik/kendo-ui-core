@@ -10,7 +10,7 @@ position: 6
 
 Below are listed the script files for the Kendo UI Gauges widgets:
 
-| Widget				| Script Files								|Comments					|
+| WIDGET				| SCRIPT FILES								 |COMMENTS			|
 | :---					| :---										|:---						|
 | [Gauge](http://demos.telerik.com/kendo-ui/linear-gauge/index)| jquery.js|						|
 | 						| kendo.core.js								| 							|

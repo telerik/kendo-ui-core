@@ -10,7 +10,7 @@ position: 5
 
 Below are listed the script files for the Kendo UI Charts widgets:
 
-| Widget				| Script Files								|Comments					|
+| WIDGET				| SCRIPT FILES								 |COMMENTS			|
 | :---					| :---										|:---						|
 | [Chart](http://demos.telerik.com/kendo-ui/chart-api/index)| jquery.js|						|
 | 						| kendo.core.js								| 							|

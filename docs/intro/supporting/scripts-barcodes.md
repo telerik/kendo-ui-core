@@ -10,20 +10,20 @@ position: 7
 
 Below are listed the script files for Kendo UI Barcodes:
 
-| Widget				| Script Files								|Comments					|
-| :---					| :---										|:---						|
-| [Barcode](http://demos.telerik.com/kendo-ui/barcode/index)| jquery.js| 						|
-| 						| kendo.core.js								| 							|
-| 						| kendo.color.js							| 							|
-| 						| kendo.drawing.js							| 							|
-| 						| kendo.dataviz.core.js						| 							|
-| 						| kendo.dataviz.barcode.js					| 							|
-| [QRCode](http://demos.telerik.com/kendo-ui/qrcode/index)| jquery.js|							|
-| 						| kendo.core.js								| 							|
-| 						| kendo.color.js							| 							|
-| 						| kendo.drawing.js							| 							|
-| 						| kendo.dataviz.core.js						| 							|
-| 						| kendo.dataviz.qrcode.js					| 							|
+| WIDGET				| SCRIPT FILES								 |COMMENTS			|
+| :---					| :---										     |:---					|
+| [Barcode](http://demos.telerik.com/kendo-ui/barcode/index)| jquery.js| 	
+| 						| kendo.core.js								   | 							|
+| 						| kendo.color.js						     | 							|
+| 						| kendo.drawing.js							 | 							|
+| 						| kendo.dataviz.core.js					 | 							|
+| 						| kendo.dataviz.barcode.js			 | 							|
+| [QRCode](http://demos.telerik.com/kendo-ui/qrcode/index)| jquery.js|		
+| 						| kendo.core.js								   | 							|
+| 						| kendo.color.js							   | 							|
+| 						| kendo.drawing.js							 | 							|
+| 						| kendo.dataviz.core.js					 | 							|
+| 						| kendo.dataviz.qrcode.js				 | 							|
 
 ## See Also
 

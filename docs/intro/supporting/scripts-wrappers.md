@@ -10,7 +10,7 @@ position: 7
 
 Below are listed the script files for Kendo UI supplementary scripts for integration with server-side technologies:
 
-| Server-Side Wrapper	| Script Files						|
+| SERVER-SIDE WRAPPER	| SCRIPT FILES						|
 | :---					| :---								|
 | [ASP.NET MVC](http://docs.telerik.com/kendo-ui/aspnet-mvc/introduction)| jquery.js|
 | 						| kendo.core.js						|

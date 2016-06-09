@@ -10,7 +10,7 @@ position: 12
 
 Below are listed the script files for the Kendo UI Interactivity and UX widgets:
 
-| Widget				| Script Files								| Comments					|
+| WIDGET				| SCRIPT FILES								 |COMMENTS			|
 | :---					| :---										| :---						|
 | [Drag and Drop](http://demos.telerik.com/kendo-ui/dragdrop/index)| jquery.js||
 |						| kendo.core.js						|				|

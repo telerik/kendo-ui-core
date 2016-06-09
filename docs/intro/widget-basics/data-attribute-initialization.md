@@ -2,7 +2,7 @@
 title: Data Attributes
 page_title: Data Attributes | Kendo UI Getting Started
 previous_url: /framework/data-attribute-initialization
-description: "Learn how to initialize and configure each Kendo UI widget using data attributes."
+description: "Initialize and configure each Kendo UI widget using data attributes."
 slug: dataattributes_configuration_installation
 position: 2
 ---
