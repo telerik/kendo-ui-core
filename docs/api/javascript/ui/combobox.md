@@ -1391,7 +1391,7 @@ The value to set.
 
 ### change
 
-Fired when the value of the widget is changed by the user.
+Fired when the value of the widget is changed by the user. As of 2015 Q3 SP1 cascading widget will trigger change event when its value is changed due to parent update.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
