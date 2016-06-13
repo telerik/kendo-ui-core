@@ -15,6 +15,7 @@ slug: breakingchanges2016_kendoui
 #### Breaking Changes
 
 * **MultiSelect**: The widget with a 'single' tag mode will deselect all selected items on BACKSPACE/DELETE keyboard press. The previous behavior cannot be reverted.
+* **Validator**: The email validation rule has been changed to match the [HTML5 specification suggests for browsers to use](https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address). If the previous behavior is required, the email validation rule should be overriden by [specifing a custom rule](/controls/editors/validator/overview#custom-rules-for-validation) with the `email` key.
 
 ## Kendo UI 2016 R2
 
