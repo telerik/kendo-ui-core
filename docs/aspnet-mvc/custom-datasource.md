@@ -14,7 +14,7 @@ This article provides information on how to use the CustomDataSource builder ava
 
 ### The Basics
 
-The CustomDataSource builder is created to allow a full control over the DataSource options listed in the [client-side API](/api/javascript/data/dataSource). By applying the CustomDataSource builder, you benefit from using the MVC wrappers. For example, the wrappers are enabled to generate validation attributes, editors, etc., while utilizing the flexibility of JavaScript. The CustomDataSource builder can also be used in more advanced scenarios where the regular DataSource builders prevent you from fully customizing the options of the DataSource.
+The CustomDataSource builder is created to allow a full control over the DataSource options listed in the [client-side API](/api/javascript/data/datasource). By applying the CustomDataSource builder, you benefit from using the MVC wrappers. For example, the wrappers are enabled to generate validation attributes, editors, etc., while utilizing the flexibility of JavaScript. The CustomDataSource builder can also be used in more advanced scenarios where the regular DataSource builders prevent you from fully customizing the options of the DataSource.
 
 ### Initial Setup
 
