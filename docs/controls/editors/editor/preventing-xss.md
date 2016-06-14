@@ -46,7 +46,7 @@ Depending on your server-side platform, here are some libraries that allow proce
 
 - `ASP.NET` - [Html Agility Pack](http://htmlagilitypack.codeplex.com/)
 - `PHP` - [Html Purifier](http://htmlpurifier.org/)
-- `Java` - [jsoup](http://jsoup.org/)
+- `Java` - [jsoup](https://jsoup.org/)
 - `Node.js` - [sanitize-html](https://www.npmjs.com/package/sanitize-html)
 
 ## See Also
