@@ -14,7 +14,7 @@ position: 1
 
 Apple Numbers complain about missing fonts when opening an exported file. This is valid even for files created from Microsoft Excel.
 
-The fonts in question are typically **Cambria** and **Colibri**. They can be obtained by installing the free [Open XML File Format Converter for Mac](http://www.microsoft.com/en-us/download/details.aspx?id=27334).
+The fonts in question are typically **Cambria** and **Colibri**. They can be obtained by installing the free [Open XML File Format Converter for Mac](https://support.microsoft.com/en-us/kb/960403).
 
 The application functions normally with the substituted files as well. Once you save the file through Numbers, no error messages are shown.
 

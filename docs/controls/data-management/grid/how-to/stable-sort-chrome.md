@@ -7,7 +7,7 @@ slug: howto_implement_stable_sortin_chrome_grid
 
 # Implement Stable Sort in Chrome
 
-The implementation of the built-in sorting algorithm in Google Chrome [is not guaranteed to be stable](https://code.google.com/p/v8/issues/detail?id=90). A [non-stable sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability) may cause items with the same sorting order to change places.
+The implementation of the built-in sorting algorithm in Google Chrome [is not guaranteed to be stable](https://bugs.chromium.org/p/v8/issues/detail?id=90). A [non-stable sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability) may cause items with the same sorting order to change places.
 
 The example below demonstrates that when run in Chrome and items are sorted by **Address**, they change places. This is visible if you look at the **Name** column. The example represents a typical case where a non-stable sort causes side effects.
 

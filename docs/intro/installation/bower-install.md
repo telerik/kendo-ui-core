@@ -9,7 +9,7 @@ position: 2
 
 # Bower Packages
 
-[Bower](http://bower.io/) is a popular package manager for the web.
+[Bower](https://bower.io/) is a popular package manager for the web.
 
 Kendo UI maintains two bower packages, namely Kendo UI Core and Kendo UI Professional. Official releases, service packs and internal builds are uploaded to both of them.
 
