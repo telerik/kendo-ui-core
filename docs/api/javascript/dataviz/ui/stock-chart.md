@@ -9232,7 +9232,7 @@ The length of the connecting lines in pixels.
 
 ### navigator `kendo.dataviz.Navigator`
 
-A reference to the Stock Chart built-in navigator (lower pane) instance.
+A reference to the Stock Chart built-in [navigator](/api/javascript/dataviz/navigator) instance (the lower widget pane). Obtain the instance to call the available [navigator methods](/api/javascript/dataviz/navigator).
 
 > **Important**
 >
