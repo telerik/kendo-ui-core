@@ -86,7 +86,7 @@ The example below demonstrates how to initialize Kendo UI TabStrip from a JSON d
       });
     </script>
 
-## Configuration
+## Configuration Tips
 
 ### Load Content with AJAX
 
@@ -151,6 +151,8 @@ For additional information on the configuration, events, and methods of the widg
 ### Scrollable Content
 
 The TabStrip content containers are scrollable by default. This allows the widget to display scrollbars if it has a fixed height and holds large content that cannot fit. If needed, it is possible to disable TabStrip content scrolling. This can help in scenarios where the TabStrip hosts a widget such as a Menu that needs to overflow outside the TabStrip. For more information and a runnable example, check the following how-to article: [Disable TabStrip Content Scrolling](/controls/navigation/tabstrip/how-to/disable-content-scrolling)
+
+Depending on the browser, the content's scroll position may be reset when changing the active tab. If persisting the scroll position is required, use the [`select`](/api/javascript/ui/tabstrip#events-select) event to save the current scroll position, and the [`activate`](/api/javascript/ui/tabstrip#events-activate) event to restore it. Here is an example: [Save TabStrip Content Scroll Position](/controls/navigation/tabstrip/how-to/save-content-scroll-position)
 
 ### Select Tab on Initial Load
 
