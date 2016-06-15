@@ -1,41 +1,13 @@
 ---
-title: Create Lists with Long Items
-page_title: Create Lists with Long Items | Kendo UI DropDownList
-description: "Learn how to create Kendo UI DropDownLists with long items."
-slug: howto_create_listswith_long_items_dropdownlist
+title: Add Cascading DropDownLists to Grid
+page_title: Add Cascading DropDownLists to Grid | Kendo UI DropDownList
+description: "Learn how to add cascading Kendo UI DropDownLists to a Kendo UI Grid widget."
+slug: howto_add_cascading_dropdownlists_togrid
 ---
 
-# Create Lists with Long Items
+# Add Cascading DropDownLists to Grid
 
-The example below demonstrates how to create Kendo UI DropDownLists with long items.
-
-###### Example
-
-```html
-<div id="div">
-    <select id="ddl">
-        <option>lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum</option>
-        <option>item 2</option>
-        <option>item 3</option>
-    </select>
-</div>
-<script>
-    $("#ddl").kendoDropDownList().parent().css("width", "100%");
-</script>
-<style>
-html { font: 12px sans-serif; }
-
-#div { width: 300px; }
-
-.k-list-container .k-item {
-    white-space: nowrap;
-    float: left;
-    clear: left;
-    min-width: 100%;
-    box-sizing: border-box;
-}
-</style>
-```
+To see the example on how to add cascading Kendo UI DropDownLists to a Kendo UI Grid, refer to [this how-to article]({% slug howto_add_cascading_dropdown_list_editors_grid %}).
 
 ## See Also
 
@@ -43,6 +15,7 @@ Other articles on the Kendo UI DropDownList:
 
 * [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
 * [How to Automatically Adjust the Width of a DropDownList]({% slug howto_automatically_adjust_width_dropdownlist %})
+* [How to Create DropDownLists with Long Items]({% slug howto_create_listswith_long_items_dropdownlist %})
 * [How to Detect Wrapper Focus Events]({% slug howto_detect_wrapper_focus_events_dropdownlist %})
 * [How to Move the Group Label on Top of Items]({% slug howto_move_group_label_ontopof_items_dropdownlist %})
 * [How to Prevent Popup Closure on Scroll]({% slug howto_prevent_popup_closure_onscroll_dropdownlist %})

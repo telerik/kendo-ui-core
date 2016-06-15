@@ -1,6 +1,6 @@
 ---
 title: Show Tooltip for Chart Notes
-page_title: Show Tooltip for Chart Notes | Kendo UI Charts
+page_title: Show Tooltip for Chart Notes | Kendo UI Tooltip
 description: "Learn how to show a Kendo UI Tooltip for Kendo UI Chart notes."
 slug: howto_showtooltipfornotesincharts_tooltip
 ---
