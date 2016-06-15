@@ -89,10 +89,11 @@ The example below demonstrates how to customize the default **Delete** confirmat
                 {name: "edit"},
                 {name: "Delete",  
                     click: function(e){  //add a click event listener on the delete button
+                        e.preventDefault(); //prevent page scroll reset
                         var tr = $(e.target).closest("tr"); //get the row for deletion
                         var data = this.dataItem(tr); //get the row data so it can be referred later
                         window.content(windowTemplate(data)); //send the row data object to the template and render it
-                        window.open().center();  
+                        window.center().open();
 
                         $("#yesButton").click(function(){
                             grid.dataSource.remove(data)  //prepare a "destroy" request
