@@ -25,11 +25,11 @@ In other words, the DataSource fully supports CRUD  (Create, Read, Update, Destr
 
 For detailed information on the capabilities of the DataSource, refer to its [configuration API, methods, and events](/api/javascript/data/datasource), and [demos](http://demos.telerik.com/kendo-ui/datasource/index).
 
-## Getting Started
+## DataSource Binding
 
 This article provides simple examples, which show how to create Kendo UI DataSource instances bound to local or remote data, and DataSource instances, which are used by a single Kendo UI widget or by multiple widgets.
 
-### Bind DataSource to Local Data
+### To Local Data
 
 In this scenario an array of Javascript objects is assigned to the `data` configuration property of the DataSource instance, as demonstrated in the example below.
 
@@ -50,7 +50,7 @@ In this scenario an array of Javascript objects is assigned to the `data` config
         data: movies
     });
 
-### Bind DataSource to Remote Service
+### To Remote Service
 
 In this scenario the DataSource needs information about the web service URLs, the request type, the response data type, and the structure (`schema`) of the response, if it is more complex than a plain array of objects. You are also able to provide custom parameters, which are going to be submitted during the data request.
 
@@ -83,11 +83,17 @@ In this scenario the DataSource needs information about the web service URLs, th
         }
     });
 
+### Mixed Data Operations Mode
+
+Make sure that all data operations (paging, sorting, filtering, grouping, and aggregates) are configured to take place either on the server, or on the client. While it is possible to use a mixed data operations mode, setting some of the data operations on the server and others on the client leads to undesired side-effects.
+
+For example, if `serverPaging` is enabled and `serverFiltering` is disabled, the DataSource will filter only the data from the current page and the user will see less results than expected. In other scenarios, the DataSource might make more requests than necessary for the data operations to execute.
+
 ## Widget Binding
 
 Many Kendo UI widgets support data binding, and the Kendo UI DataSource is an ideal binding source for both local and remote data.
 
-### Bind Widgets to Local DataSource
+### To Local DataSource
 
 A DataSource can be created in-line with other Kendo UI widget configuration settings, as demonstrated in the example below.
 
@@ -122,7 +128,7 @@ A DataSource can be created in-line with other Kendo UI widget configuration set
         }
     });
 
-### Bind Widgets to Remote DataSource
+### To Remote DataSource
 
 You can also create a shared DataSource to allow multiple Kendo UI widgets to bind to the same data collection. The main benefits of using a shared DataSource are fewer data requests, better performance and automatic synchronized refreshing of all widgets bound to the same DataSource instance, when the data changes.
 
