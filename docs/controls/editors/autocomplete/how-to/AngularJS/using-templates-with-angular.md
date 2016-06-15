@@ -1,6 +1,6 @@
 ---
 title: Use Custom Templates
-page_title: Use Custom Templates | Kendo UI AutoComplete 
+page_title: Use Custom Templates | Kendo UI AutoComplete
 description: "Learn how to use templates with AngularJS inside the Kendo UI templates of the AutoComplete widget."
 slug: howto_use_custom_angularjs_templates_autocomplete
 ---
@@ -120,10 +120,11 @@ The example below demonstrates how to use AngularJS templates inside the Kendo U
 
 ## See Also
 
-Other articles on Kendo UI AutoComplete:
+Other articles on the Kendo UI AutoComplete:
 
 * [AutoComplete JavaScript API Reference](/api/javascript/ui/autocomplete)
-* [How to Show a No results found Message]({% slug howto_add_customized_templates_autocomplete %})
 * [How to Dynamically Change DataSource Based on User Selections]({% slug howto_change_datasource_dynamically_autocomplete %})
 * [How to Highlight Matched Values]({% slug howto_highlight_matched_values_autocomplete %})
 * [How to Restrict Other Users]({% slug howto_restrict_user_input_autocomplete %})
+
+For more runnable examples on the Kendo UI AutoComplete, browse its [**How To** documentation folder]({% slug howto_add_customized_templates_autocomplete %}).
