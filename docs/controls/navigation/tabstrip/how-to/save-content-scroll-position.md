@@ -1,13 +1,13 @@
 ---
 title: Save Content Scroll Position
-page_title: Save TabStrip Content Scroll Position | Kendo UI TabStrip
-description: "Learn how to save the scroll position of the TabStrip content."
+page_title: Save Content Scroll Position | Kendo UI TabStrip
+description: "Learn how to save the scroll position of the Kendo UI TabStrip content."
 slug: howto_savecontentscrollposition_tabstrip
 ---
 
-# Save TabStrip Content Scroll Position
+# Save Content Scroll Position
 
-The TabStrip content's scroll position may be reset when changing the active tab. This depends on browser behavior. If persisting the scroll position is required, use the [`select`](/api/javascript/ui/tabstrip#events-select) event to save the current scroll position, and the [`activate`](/api/javascript/ui/tabstrip#events-activate) event to restore it.
+The scroll position of the TabStrip content might be reset when changing the active tab. This depends on the browser behavior. If persisting the scroll position is required, use the [`select`](/api/javascript/ui/tabstrip#events-select) event to save the current scroll position, and the [`activate`](/api/javascript/ui/tabstrip#events-activate) event to restore it.
 
 ###### Example
 
@@ -54,9 +54,9 @@ The TabStrip content's scroll position may be reset when changing the active tab
 Other articles on Kendo UI TabStrip:
 
 * [TabStrip JavaScript API Reference](/api/javascript/ui/tabstrip)
-* [How to Disable Content Scrolling]({% slug howto_disablecontentscrolling_tabstrip %})
-* [How to Expand to 100% Height and Auto-Resize]({% slug howto_expandto100percentheightautoresize_tabstrip %})
 * [How to Add Close Button to Tabs]({% slug howto_addclosebuttontotabs_tabstrip %})
+* [How to Disable Content Scrolling]({% slug howto_disablecontentscrolling_tabstrip %})
 * [How to Display Buttons at the Bottom]({% slug howto_displaybuttonsatthebottom_tabstrip %})
+* [How to Expand to 100% Height and Auto-Resize]({% slug howto_expandto100percentheightautoresize_tabstrip %})
 * [How to Initialize the Grid in Kendo UI TabStrip]({% slug initialize_thegrid_tabstrip_widget %})
 * [How to Scroll TabStrip with Keyboard]({% slug howto_scrolltabstripwithkeyboard_tabstrip %})
