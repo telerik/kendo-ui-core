@@ -1,11 +1,11 @@
 ---
-title: Skip Non-editable Cells When Tabbing
-page_title:  Skip Non-editable Cells When Tabbing | Kendo UI Grid Widget
+title: Skip Non-Editable Cells When Tabbing
+page_title:  Skip Non-Editable Cells When Tabbing | Kendo UI Grid Widget
 description: "Learn how to skip non-editable cells in the Kendo UI Grid When tabbing"
 slug: howto_skip_noneditable_cells_when_tabbing_grid
 ---
 
-# Skip Non-editable Cells When Tabbing
+# Skip Non-Editable Cells When Tabbing
 
 Normally, tabbing in an editable Grid steps on each cell, no matter if it is editable or not.
 
