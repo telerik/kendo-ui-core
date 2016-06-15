@@ -528,7 +528,8 @@ var __meta__ = { // jshint ignore:line
 
             list.css({
                 fontFamily: wrapper.css("font-family"),
-                width: width
+                width: this.options.autoWidth ? "auto" : width,
+                minWidth: width
             })
             .data(WIDTH, width);
 

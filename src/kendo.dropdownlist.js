@@ -221,12 +221,21 @@ var __meta__ = { // jshint ignore:line
             } else if (that._allowOpening()) {
                 that.popup.one("activate", that._focusInputHandler);
                 that.popup.open();
+                if (that.filterInput) {
+                    that._resizeFilterInput();
+                }
                 that._focusItem();
             }
         },
 
         _focusInput: function () {
             this._focusElement(this.filterInput);
+        },
+
+        _resizeFilterInput: function () {
+            this.filterInput.css("display", "none");
+            this.filterInput.css("width", this.popup.element.css("width"));
+            this.filterInput.css("display", "inline-block");
         },
 
         _allowOpening: function() {
@@ -858,6 +867,7 @@ var __meta__ = { // jshint ignore:line
                     if (that._prev !== value) {
                         that._prev = value;
                         that.search(value);
+                        that._resizeFilterInput();
                     }
 
                     that._typingTimeout = null;

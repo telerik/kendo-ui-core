@@ -639,4 +639,47 @@
         dropdownlist.open();
         dropdownlist.filterInput.val("Gre").focus().trigger({type: "paste"});
     });
+
+
+    test("resize popup on search when autoWidth is enabled", function(assert) {
+        var data = [{text: "Foooooooooooooo", value: 1, type: "a"}, {text:"Bar", value:2, type: "b"}, {text:"Baz", value:3, type: "a"}];
+        var dropdownlist = new DropDownList(input, {
+            autoWidth: true,
+            dataTextField: "ProductName",
+            dataValueField: "ProductID",
+            autoBind: false,
+            filter: "contains",
+            minLenght: 3,
+            dataSource: {
+                serverFiltering: false,
+                transport: {
+                    read: function(options) {
+                        options.success([
+                            { ProductName: "ChaiiiiiiiiiiiiiiiiiiiiiiiiiiiiiChaiiiiiiiiiiiiiiiiiiiiiiiiiiiii", ProductID: 1 },
+                            { ProductName: "Tofu", ProductID: 2 },
+                            { ProductName: "Test3", ProductID: 3 },
+                            { ProductName: "Chai3", ProductID: 4 },
+                            { ProductName: "Test4", ProductID: 5 }
+                        ]);
+                    }
+                }
+            }
+        });
+
+        var done1 = assert.async();
+        var done2 = assert.async();
+        dropdownlist.one("open", function() {
+            assert.ok(dropdownlist.wrapper.width() < dropdownlist.popup.element.width());
+            dropdownlist.close();
+            done1();
+            dropdownlist.one("open", function() {
+                assert.ok(dropdownlist.wrapper.width() >= dropdownlist.popup.element.width());
+                done2();
+            });
+            dropdownlist.dataSource.filter({field: "ProductName", oeprator: "contains", value: "To"});
+            dropdownlist.open();
+        });
+        dropdownlist.open();
+
+    });
 })();

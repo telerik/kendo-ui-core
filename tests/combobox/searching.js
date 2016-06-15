@@ -945,4 +945,43 @@ asyncTest("search on paste", 1, function() {
     combobox.input.focus().val("F").trigger({ type: "paste" });
 });
 
+    test("resize popup on search when autoWidth is enabled", function(assert) {
+        var data = [{text: "Foooooooooooooo", value: 1, type: "a"}, {text:"Bar", value:2, type: "b"}, {text:"Baz", value:3, type: "a"}];
+        var combobox = new ComboBox(input, {
+            autoWidth: true,
+            dataTextField: "ProductName",
+            dataValueField: "ProductID",
+            minLenght: 3,
+            filter: "contains",
+            dataSource: {
+                serverFiltering: false,
+                transport: {
+                    read: function(options) {
+                        options.success([
+                            { ProductName: "ChaiiiiiiiiiiiiiiiiiiiiiiiiiiiiiChaiiiiiiiiiiiiiiiiiiiiiiiiiiiii", ProductID: 1 },
+                            { ProductName: "Tofu", ProductID: 2 },
+                            { ProductName: "Test3", ProductID: 3 },
+                            { ProductName: "Chai3", ProductID: 4 },
+                            { ProductName: "Test4", ProductID: 5 }
+                        ]);
+                    }
+                }
+            }
+        });
+
+        var done1 = assert.async();
+        var done2 = assert.async();
+        combobox.one("open", function() {
+            assert.ok(combobox.wrapper.width() < combobox.popup.element.width());
+            combobox.close();
+            done1();
+            combobox.one("open", function() {
+                assert.ok(combobox.wrapper.width() >= combobox.popup.element.width());
+                done2();
+            });
+            combobox.search("Tof");
+        });
+        combobox.search("Cha");
+
+    });
 })();
