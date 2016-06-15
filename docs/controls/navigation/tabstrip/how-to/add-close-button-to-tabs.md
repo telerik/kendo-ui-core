@@ -87,4 +87,5 @@ Other articles on Kendo UI TabStrip:
 * [How to Display Buttons at the Bottom]({% slug howto_displaybuttonsatthebottom_tabstrip %})
 * [How to Expand to 100% Height and Auto-Resize]({% slug howto_expandto100percentheightautoresize_tabstrip %})
 * [How to Initialize the Grid in Kendo UI TabStrip]({% slug initialize_thegrid_tabstrip_widget %})
+* [How to Save Content Scroll Position]({% slug howto_savecontentscrollposition_tabstrip %})
 * [How to Scroll TabStrip with Keyboard]({% slug howto_scrolltabstripwithkeyboard_tabstrip %})
