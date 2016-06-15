@@ -1,42 +1,13 @@
 ---
-title: Expand Nodes during Drag
-page_title: Expand Nodes during Drag | Kendo UI TreeView
-description: "Learn how to expand Kendo UI TreeView items that are hovered when the user drags a node."
-slug: howto_expandnodesduringdrag_treeview
+title: Use TreeView as Custom Editor in Grid
+page_title: Use TreeView as Custom Editor in Grid | Kendo UI TreeView
+description: "Learn how to use Kendo UI TreeView as an editor in the Kendo UI Grid widget."
+slug: howto_usetreeviewaseditorgrid
 ---
 
-# Expand Nodes during Drag
+# Use TreeView as Custom Editor in Grid
 
-The example below demonstrates how to expand Kendo UI TreeView items that are hovered when the user drags a node.
-
-###### Example
-
-```html
-    <div id="treeview"></div>
-
-    <script>
-      $("#treeview").kendoTreeView({
-        dragAndDrop: true,
-        dataSource: [
-          { text: "foo", items: [
-            { text: "bar" },
-            { text: "baz" }
-          ] },
-          { text: "qux", items: [
-            { text: "cat" },
-            { text: "dog" }
-          ] }
-        ],
-
-        drag: function(e) {
-            var dataItem = this.dataItem(e.dropTarget);
-            if (dataItem) {
-                dataItem.set("expanded", true);
-            }
-        }
-      });
-    </script>
-```
+To see the example on how to use the Kendo UI TreeView for batch editing in the Kendo UI Grid widget, refer to [this how-to article]({% slug howto_usethe_treeview_aseditor_grid %}).
 
 ## See Also
 
