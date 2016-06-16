@@ -115,6 +115,7 @@ var __meta__ = { // jshint ignore:line
                     "aria-haspopup": true
                 });
 
+            that._clear.on("click" + ns, proxy(that._clearClick, that));
             that._enable();
 
             that._old = that._accessor();
@@ -260,6 +261,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             that.element.off(ns);
+            that._clear.off(ns);
             that.wrapper.off(ns);
 
             List.fn.destroy.call(that);
@@ -403,6 +405,10 @@ var __meta__ = { // jshint ignore:line
             this._blur();
 
             caret(element, element.val().length);
+        },
+
+        _clearClick: function() {
+            this.value(null);
         },
 
         _resetFocusItem: function() {
@@ -724,6 +730,10 @@ var __meta__ = { // jshint ignore:line
                 height: DOMelement.style.height
             });
 
+            that._clear = $('<span unselectable="on" class="k-icon k-i-close">clear</span>').attr({
+                "role": "button",
+                "tabIndex": -1
+            }).appendTo(wrapper);
             that._focused = that.element;
             that.wrapper = wrapper
                               .addClass("k-widget k-autocomplete k-header")

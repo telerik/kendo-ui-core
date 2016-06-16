@@ -353,4 +353,18 @@ test("AutoComplete filtering event can be prevented", 0, function() {
     autocomplete.search("baz");
 });
 
+    test("reset value when _clear is clicked", 1, function() {
+        var autocomplete = new AutoComplete(input, {
+            dataTextField: "name",
+            dataSource: [
+                { id: 1, name: "name1" },
+                { id: 2, name: "name2" },
+                { id: 3, name: "name3" }
+            ],
+            value: "2"
+        });
+
+        autocomplete._clear.click();
+        equal(autocomplete.value(), "");
+    });
 }());
