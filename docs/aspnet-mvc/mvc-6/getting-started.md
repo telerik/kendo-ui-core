@@ -59,15 +59,34 @@ Set up the [Telerik NuGet Private Feed]({% slug aspnetmvc_nuget %}#set-up-nuget-
 
         "dependencies": {
             ...
-            "Kendo.Mvc": "2016.1.301"
+            "Kendo.Mvc": "{{ site.mvcCoreVersion }}"
         }
 
-**Step 4** Open `Startup.cs` and locate the `ConfigureServices` method. Add the snippet from the example below.
+**Step 4** Open `Startup.cs`, using a text editor (IDE) and update it as described below.
+
+Locate the `ConfigureServices` method and add a call to `services.AddKendo` at the end.
 
 ###### Example
 
-        // Register UI for ASP.NET MVC helpers
-        services.AddKendo();
+        public void ConfigureServices(IServiceCollection services)
+        {
+            ...
+
+            // Add Kendo UI services to the services container
+            services.AddKendo();
+        }
+
+Locate the `Configure` method and add a call to `app.UseKendo` at the end.
+
+###### Example
+
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        {
+            ...
+
+            // Configure Kendo UI
+            app.UseKendo(env);
+        }
 
 **Step 5** Import the `Kendo.Mvc.UI` namespace in `~/Views/_ViewImports.cshtml`.
 
