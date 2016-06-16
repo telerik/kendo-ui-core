@@ -668,11 +668,11 @@
 
         var done1 = assert.async();
         var done2 = assert.async();
-        dropdownlist.one("open", function() {
+        dropdownlist.popup.one("open", function() {
             assert.ok(dropdownlist.wrapper.width() < dropdownlist.popup.element.width());
             dropdownlist.close();
             done1();
-            dropdownlist.one("open", function() {
+            dropdownlist.popup.one("activate", function() {
                 assert.ok(dropdownlist.wrapper.width() >= dropdownlist.popup.element.width());
                 done2();
             });
