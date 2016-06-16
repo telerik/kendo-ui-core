@@ -36,6 +36,8 @@ To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/
     });
     </script>
 
+The Kendo UI adaptive mode requires scripts, which are normally part of the Kendo UI Mobile (Hybrid) library (`kendo.mobile.min.js`). However, these scripts are also included in `kendo.web.min.js` and `kendo.all.min.js`. In case you are using [individual widget scripts](/intro/installation/what-you-need#individual-widget-scripts) or a [custom combined script](/intro/installation/what-you-need#employ-download-builder), make sure the relevant scripts are included.
+
 ## Pane Configuration
 
 The mobile pane in which the adaptive Grid is placed does not automatically expand its height. To add an adaptive Grid to a kendo UI mobile application, set the `stretch` configuration of the respective view to `true`, or explicitly define the height of the widget.
