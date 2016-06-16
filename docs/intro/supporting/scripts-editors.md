@@ -1,7 +1,7 @@
 ---
 title: Script Files for Editors
 page_title: Script Files for Editors | Kendo UI Getting Started
-description: "Check out the list with the script files for the Kendo UI Editors widgets."
+description: "Check out the list of script files for the Kendo UI Editors widgets."
 slug: scirpt_filesfor_editors_widgets
 position: 4
 ---

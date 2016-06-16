@@ -1,7 +1,7 @@
 ---
 title: Script Files for Hybrid UI
 page_title: Script Files for Hybrid UI | Kendo UI Getting Started
-description: "Check out the list with the script files for the Hybrid UI widgets and frameworks of Kendo UI."
+description: "Check out the list of script files for the Hybrid UI widgets and frameworks of Kendo UI."
 slug: script_filesfor_hybridui_widgets
 position: 13
 ---

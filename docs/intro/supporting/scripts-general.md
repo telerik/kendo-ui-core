@@ -1,7 +1,7 @@
 ---
 title: Script Files for Data Management
 page_title: Script Files for Data Management | Kendo UI Getting Started
-description: "Learn which are the script files Kendo UI desktop widgets."
+description: "Check out the list of script files for the Kendo UI desktop widgets."
 slug: scirpt_filesfor_datamanagement_widgets
 position: 3
 ---

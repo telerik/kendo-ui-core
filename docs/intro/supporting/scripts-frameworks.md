@@ -1,7 +1,7 @@
 ---
 title: Script Files for Tools, Frameworks and Utilities
 page_title: Script Files for Tools, Frameworks and Utilities | Kendo UI Getting Started
-description: "Check out the list with the script files for the Kendo UI frameworks, tools, and utilities."
+description: "Check out the list of script files for the Kendo UI frameworks, tools, and utilities."
 slug: script_filesfor_tools_frameworks_utilities
 position: 14
 ---

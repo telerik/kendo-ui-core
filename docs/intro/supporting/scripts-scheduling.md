@@ -1,7 +1,7 @@
 ---
 title: Script Files for Scheduling
 page_title: Script Files for Scheduling | Kendo UI Getting Started
-description: "Check out the list with the script files for the Kendo UI Scheduling widgets."
+description: "Check out the list of script files for the Kendo UI Scheduling widgets."
 slug: scirpt_filesfor_scheduling_widgets
 position: 9
 ---

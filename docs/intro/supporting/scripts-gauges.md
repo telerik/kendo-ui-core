@@ -1,7 +1,7 @@
 ---
 title: Script Files for Gauges
 page_title: Script Files for Gauges | Kendo UI Getting Started
-description: "Check out the list with the script files for the Kendo UI Gauges widgets."
+description: "Check out the list of script files for the Kendo UI Gauges widgets."
 slug: script_filesfor_gauges_widgets
 position: 6
 ---

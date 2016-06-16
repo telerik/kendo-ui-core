@@ -1,7 +1,7 @@
 ---
 title: Script Files for Diagrams and Maps
 page_title: Script Files for Diagrams and Maps | Kendo UI Getting Started
-description: "Check out the list with the script files for the Kendo UI Diagrams and Maps widgets."
+description: "Check out the list of script files for the Kendo UI Diagrams and Maps widgets."
 slug: script_filesfor_diagramsandmaps_widgets
 position: 8
 ---
