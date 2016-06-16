@@ -74,7 +74,7 @@ Apply the same approach when [`columnHeaderTemplate`](/api/javascript/ui/pivotgr
 
 ## See Also
 
-Other articles on the Kendo UI PivotGrid and how-to examples:
+Other articles and how-to examples on the Kendo UI PivotGrid:
 
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
 * [How to Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})

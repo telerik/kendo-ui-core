@@ -90,7 +90,7 @@ The example below demonstrates how to change the `DataSource` of a Kendo UI Pivo
 
 ## See Also
 
-Other articles on the Kendo UI PivotGrid and how-to examples:
+Other articles and how-to examples on the Kendo UI PivotGrid:
 
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
 * [How to Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
