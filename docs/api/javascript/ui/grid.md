@@ -133,7 +133,7 @@ Defines the width of the column resize handle in pixels. Apply a larger value fo
 
 ### columns `Array`
 
-The configuration of the grid columns. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column configurations. Strings are interpreted as the
+The configuration of the grid columns. An array of JavaScript objects or strings. JavaScript objects are interpreted as column configurations. Strings are interpreted as the
 [field](#configuration-columns.field) to which the column is bound. The grid will create a column for every item of the array.
 
 > If this setting is **not** specified the grid will create a column for every field of the data item.

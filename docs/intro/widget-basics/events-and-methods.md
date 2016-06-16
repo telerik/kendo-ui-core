@@ -195,7 +195,7 @@ Certain widget events may be prevented by calling the `preventDefault` method of
 
 ### Unbind from Events
 
-To unbind from a given event, you should keep a reference to the event handler function and invoke the `unbind` method with it. Note that calling the `unbind` method without a second argument unbinds all event handlers from the event.
+To unbind from a given event, you should keep a reference to the event handler function and invoke the `unbind` method with it. Note that calling the `unbind` method without any argument unbinds all event handlers from the event.
 
 ###### Example
 
