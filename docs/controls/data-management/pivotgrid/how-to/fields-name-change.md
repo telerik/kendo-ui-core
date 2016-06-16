@@ -68,7 +68,7 @@ The example below demonstrates how to change the field names in a Kendo UI Pivot
 
 ## See Also
 
-Other articles on the Kendo UI PivotGrid and how-to examples:
+Other articles and how-to examples on the Kendo UI PivotGrid:
 
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
 * [How to Access MDX Query]({% slug howto_access_mdx_query_pivotgrid %})
