@@ -2,6 +2,7 @@
 title: Show Tooltip for Column Records
 page_title: Show Tooltip for Column Records | Kendo UI Grid
 description: "Learn how to show Kendo UI Tooltip for Kendo UI Grid columns."
+previous_url: /controls/data-management/grid/how-to/add-tooltip-for-cell
 slug: howto_show_tooltipfor_column_records_grid
 ---
 
@@ -73,7 +74,6 @@ Other articles on the Kendo UI Grid and how-to examples:
 * [How to Copy Data from Excel]({% slug howto_copy_datafrom_excel_grid %})
 * [How to Drag and Drop Rows between Grids]({% slug howto_dragand_drop_rows_between_twogrids_grid %})
 * [How to Enable ForeignKey Column Sorting by Text]({% slug howto_enable_foreignkey_sotringby_text_grid %})
-* [How to Filter Array Columns Using MultiSelect]({% slug howto_filetr_array_columns_using_multiselect_grid %})
 * [How to Implement Stable Sort in Chrome]({% slug howto_implement_stable_sortin_chrome_grid %})
 * [How to Initialize Data Attribute with Detail Template]({% slug howto_initialize_data_attributewith_detail_template_grid %})
 * [How to Load and Append More Records While Scrolling Down]({% slug howto_loadand_append_morerecords_while_scrollingdown_grid %})
