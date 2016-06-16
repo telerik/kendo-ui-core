@@ -172,4 +172,4 @@ Other articles and how-to examples on Kendo UI Charts:
 * [How to Shorten Chart Labels]({% slug howto_shortenchartlabels_charts %})
 * [How to Use Linear Gradient As Background in Bars]({% slug howto_uselineargradient_inbars_charts %})
 
-For more runnable examples on Kendo UI Charts, browse the [how-to articles]({% slug howto_createdynamicplotbands_charts %}).
+For more runnable examples on Kendo UI Charts, browse the [**How To** documentation folder]({% slug howto_createdynamicplotbands_charts %}).
