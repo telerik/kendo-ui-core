@@ -125,7 +125,7 @@ The example below sets the [`height`](/api/javascript/ui/grid#configuration-heig
 
 ## Duplicate Initialization
 
-When using a Kendo UI server-side wrapper (as the server-side wrappers are automatically initialized) or when a widget is being created in an event handler executed multiple times, it is possible to initialize a widget on the same DOM element more than once. In such a scenario, do not try to recreate a widget instance when the goal is to get the instance object.     
+When using a Kendo UI server-side wrapper (as the server-side wrappers are automatically initialized) or when a widget is being created in an event handler executed multiple times, it is possible to initialize a widget on the same DOM element more than once. A common mistake is to recreate a widget instance when the goal is only to get the instance object.      
 
 A common mistake is to recreate a widget instance when the goal is only to get the instance object. Duplicate initialization is not supported and results in unexpected side effects.
 

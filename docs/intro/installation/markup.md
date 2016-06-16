@@ -11,7 +11,7 @@ position: 7
 
 In addition to the [jQuery plugin syntax]({% slug initialize_widgets_using_jquery_plugins_installation %}), the Kendo UI widgets might be instantiated based on custom HTML attributes in several ways:
 
-**Option 1** The [View]({% slug viewclass_kendoui_singlepageapplication %}) and the [mobile Application](/controls/hybrid/application) instantiate widgets based on the `role` HTML5 `data` attributes. Both use the [MVVM]({% slug overview_mvvmpattern_kendoui %}) internally.  
+**Option 1** The [View]({% slug viewclass_kendoui_singlepageapplication %}) and the [mobile Application]({% slug overview_hybridapplication %}) instantiate widgets based on the `role` HTML5 `data` attributes. Both use the [MVVM]({% slug overview_mvvmpattern_kendoui %}) internally.  
 
 **Option 2** The `kendo.bind` method scans the passed DOM element contents for the `data-role` attributes and instantiates the respective widgets.  
 
@@ -99,7 +99,7 @@ The example below refers to a Kendo UI hybrid Application with a view and an Aut
 
 ## Configuration
 
-In addition to the `data-role` attribute, the declarative initialization parses other data attributes and passes them as configuration options to the widget constructor. For more information on the supported data attributes and on how to bind them to widget events, see the [section on data attributes](/framework/data-attribute-initialization).
+In addition to the `data-role` attribute, the declarative initialization parses other data attributes and passes them as configuration options to the widget constructor. For more information on the supported data attributes and on how to bind them to widget events, see the [section on data attributes]({% slug dataattributes_configuration_installation %}).
 
 ### AngularJS Directives
 
@@ -108,21 +108,23 @@ The example below refers to the Kendo UI AngularJS AutoComplete directive. For m
 ###### Example
 
 ```
-    <div ng-app>
+
+    <div ng-app="myApp">
         <div ng-controller="MyController">
             <input kendo-autocomplete k-data-source="dataSource" />
         </div>
     </div>
 
     <script>
-        var myApp = angular.module("myApp", [ "kendo.directives" ]).
-
-        myApp.controller("MyController", function($scope) {
-            $scope.dataSource = [
-                'foo', 'bar', 'baz'
-            ]
-        });
+        var myApp = angular
+  			            .module("myApp", [ "kendo.directives" ])
+          			    .controller("MyController", function($scope) {
+            			  $scope.dataSource = [
+                 					 'foo', 'bar', 'baz'
+             					      ]
+          					});
     </script>
+
 ```
 
 ## See Also
