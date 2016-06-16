@@ -1,13 +1,13 @@
 ---
-title: Filter Array Columns in Grid Using MultiSelect
-page_title: Filter Array Columns in Grid Using MultiSelect | Kendo UI MultiSelect
-description: "Learn how to enable filtering on a Kendo UI Grid column which is bound to an array field by using the Kendo UI MultiSelect widget."
-slug: howto_filtergridarraycolumnsusing_multiselect
+title: Use MultiSelect for Column Filtering in Grid
+page_title: Use MultiSelect for Column Filtering in Grid | Kendo UI MultiSelect
+description: "Learn how to use the Kendo UI MultiSelect for column filtering in the Kendo UI Grid widget."
+slug: howto_usemultiselectforgridcolumnfiltering_multiselect
 ---
 
-# Filter Array Columns in Grid Using MultiSelect
+# Use MultiSelect for Column Filtering in Grid
 
-To see the example on how to enable filtering on a Kendo UI Grid column which is bound to an array field by using the Kendo UI MultiSelect widget, refer to [this how-to article]({% slug howto_filetr_array_columns_using_multiselect_grid %}).
+To see the example on how to use Kendo UI MultiSelect as a column filter for the Grid, refer to [this how-to article]({% slug howto_use_multiselect_forcolumn_filtering_grid %}).
 
 ## See Also
 
