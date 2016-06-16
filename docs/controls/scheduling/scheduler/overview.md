@@ -317,7 +317,7 @@ Kendo UI Scheduler supports adaptive enhancements like changes in styling and be
 
 To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/scheduler#configuration-mobile) property to `true`, `"phone"` or `"tablet"`.
 
-The Kendo UI adaptive mode requires scripts, which are normally part of the Kendo UI Mobile (Hybrid) library (`kendo.mobile.min.js`). However, these scripts are also included in `kendo.web.min.js` and `kendo.all.min.js`. In case you are using [individual widget scripts](/intro/installation/what-you-need#individual-widget-scripts) or a [custom combined script](/intro/installation/what-you-need#employ-download-builder), make sure the relevant scripts are included.
+The Kendo UI adaptive mode requires scripts, which are normally part of the Kendo UI Mobile (Hybrid) library (`kendo.mobile.min.js`). However, these scripts are also included in `kendo.web.min.js` and `kendo.all.min.js`. If you are using [individual widget scripts]({% slug include_only_what_you_need_kendoui_installation %}#individual-widget-scripts) or a [custom combined script]({% slug include_only_what_you_need_kendoui_installation %}#employ-download-builder), make sure the relevant scripts are included.
 
 Each adaptive Scheduler is rendered inside a separate Kendo UI Mobile Pane. Since the panes are absolutely positioned, they can overlap with other content on the page. To avoid this, wrap the Scheduler inside a `<div>` container that has a `position:relative` style and a set `height`. The `height` must be consistent with the Scheduler's height. Note that the absolute position is required for the transitions between the main and editing views to work correctly.
 
