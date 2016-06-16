@@ -1,7 +1,7 @@
 ---
 title: Script Files for Barcodes
 page_title: Script Files for Barcodes | Kendo UI Getting Started
-description: "Check out the list with the script files for the Kendo UI Barcodes widgets."
+description: "Check out the list of script files for the Kendo UI Barcodes widgets."
 slug: script_filesfor_barcodes_widgets
 position: 7
 ---

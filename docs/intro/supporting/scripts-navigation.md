@@ -1,7 +1,7 @@
 ---
 title: Script Files for Navigation
 page_title: Script Files for Navigation | Kendo UI Getting Started
-description: "Check out the list with the script files for the Kendo UI Navigation widgets."
+description: "Check out the list of script files for the Kendo UI Navigation widgets."
 slug: scirpt_filesfor_navigation_widgets
 position: 11
 ---

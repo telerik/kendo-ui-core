@@ -1,7 +1,7 @@
 ---
 title: Script Files for Server-Side Wrappers
 page_title: Script Files for Server-Side Wrappers | Kendo UI Getting Started
-description: "Check out the list with the script files for the ASP.NET MVC server-side wrapper for Kendo UI widgets."
+description: "Check out the list of script files for the ASP.NET MVC server-side wrapper for Kendo UI widgets."
 slug: script_filesfor_serverside_wrappers
 position: 7
 ---

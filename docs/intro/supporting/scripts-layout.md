@@ -1,7 +1,7 @@
 ---
 title: Script Files for Layout
 page_title: Script Files for Layout | Kendo UI Getting Started
-description: "Check out the list with the script files for the Kendo UI Layout widgets."
+description: "Check out the list of script files for the Kendo UI Layout widgets."
 slug: scirpt_filesfor_layout_widgets
 position: 10
 ---

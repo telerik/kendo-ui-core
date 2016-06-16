@@ -1,7 +1,7 @@
 ---
 title: Script Files for Interactivity and UX
 page_title: Script Files for Interactivity and UX | Kendo UI Getting Started
-description: "Check out the list with the script files for the Kendo UI Interactivity and UX widgets."
+description: "Check out the list of script files for the Kendo UI Interactivity and UX widgets."
 slug: scirpt_filesfor_interactivityandux_widgets
 position: 12
 ---

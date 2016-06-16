@@ -1,7 +1,7 @@
 ---
 title: Script Files for Charts
 page_title: Script Files for Charts | Kendo UI Getting Started
-description: "Check out the list with the script files for the Kendo UI Charts widgets."
+description: "Check out the list of script files for the Kendo UI Charts widgets."
 slug: script_filesfor_charts_widgets
 position: 5
 ---

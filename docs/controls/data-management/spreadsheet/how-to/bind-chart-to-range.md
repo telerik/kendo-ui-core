@@ -7,9 +7,9 @@ slug: howto_bindcharttosheet_spreadsheet_widget
 
 # Bind Charts to Sheet Data
 
-The example below demonstrates how to extract spreadsheet data and populate a chart.
+The example below demonstrates how to extract Spreadsheet data and populate a Kendo UI Chart.
 
-The chart will be updated on sheet [on change](/api/javascript/spreadsheet/sheet#events-change).
+The chart will be updated on sheet [on `change`](/api/javascript/spreadsheet/sheet#events-change).
 
 ###### Example
 
