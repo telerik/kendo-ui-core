@@ -616,6 +616,19 @@ test('parse G format of ko-KR culture', function () {
     }
 });
 
+test('parses more specific standard formats before culture date formats', function () {
+    var calendar = kendo.culture().calendar;
+    var shortDatePattern = calendar.patterns.d;
+
+    try {
+        calendar.patterns.d = "yyyy-MM-dd";
+        var result = parse("2016-02-29T15:22:46+01:00");
+        ok(isValidDateTime(result, 2016, 2, 29, 16, 22, 46));
+    } finally {
+        calendar.patterns.d = shortDatePattern;
+    }
+});
+
 test('parse should return null if only year is passed', function () {
     var dateFormat = "M/dd/yyyy";
 
