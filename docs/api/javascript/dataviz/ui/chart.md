@@ -25540,7 +25540,7 @@ Setting it to `false` will force the automatic axis range to snap to 0.
           xAxis: {
             narrowRange: true
           },
-          xAxis: {
+          yAxis: {
             narrowRange: true
           }
         });
