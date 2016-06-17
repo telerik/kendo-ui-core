@@ -995,6 +995,8 @@ var __meta__ = { // jshint ignore:line
 
                 that._onDocumentResize();
             });
+
+            return this;
         },
 
         minimize: function() {
@@ -1010,6 +1012,8 @@ var __meta__ = { // jshint ignore:line
 
                 that.options.isMinimized = true;
             });
+
+            return this;
         },
 
         pin: function(force) {
