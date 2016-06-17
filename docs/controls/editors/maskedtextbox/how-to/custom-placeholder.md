@@ -101,5 +101,6 @@ Other articles on the Kendo UI MaskedTextBox:
 
 * [MaskedTextBox JavaScript API Reference](/api/javascript/ui/maskedtextbox)
 * [How to Use Custom Directive to Set Model Value]({% slug howto_use_raw_methodtoset_modelvalue_angularjs_maskedtextbox %})
+* [How to Use Custom MVVM Binding to Set Model Value]({% slug howto_use_custommvvm_bindingto_setmodel_value_maskedtextbox %})
 
 For more runnable examples on the Kendo UI MaskedTextBox, browse its [**How To** documentation folder]({% slug howto_use_raw_methodtoset_modelvalue_angularjs_maskedtextbox %}).

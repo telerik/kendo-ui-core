@@ -61,9 +61,10 @@ The example below demonstrates how to implement [a custom MVVM binding](http://d
 
 ## See Also
 
-Other articles on Kendo UI MaskedTextBox:
+Other articles on the Kendo UI MaskedTextBox:
 
 * [MaskedTextBox JavaScript API Reference](/api/javascript/ui/maskedtextbox)
 * [How to Customize Masks through MVVM Binding]({% slug howto_customize_masks_through_mvvmbinding_mvvm_maskedtextbox %})
 * [How to Show Custom Placeholder on Blur]({% slug howto_show_custom_placeholderon_blur_maskedtextbox %})
-* [How to Use Custom Directive to Set Model Value]({% slug howto_use_raw_methodtoset_modelvalue_angularjs_maskedtextbox %})
+
+For more runnable examples on the Kendo UI MaskedTextBox, browse its [**How To** documentation folder]({% slug howto_use_raw_methodtoset_modelvalue_angularjs_maskedtextbox %}).
