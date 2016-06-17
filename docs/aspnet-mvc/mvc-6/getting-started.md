@@ -33,11 +33,11 @@ Below are listed the steps for you to follow when creating an ASP.NET Core MVC w
 
 **Step 1** Select **File** > **New Project**.
 
-**Step 2** Choose **Templates** > **Visual C#** > **Web** > **ASP.NET Web Application**.
+**Step 2** Choose **Templates** > **Visual C#** > **Web** > **ASP.NET Core Web Application (.NET Core)**.
 
 **Step 3** Set a name and location for the project.
 
-**Step 4** Select **ASP.NET 5 Preview Templates** > **Web Site** from the project templates.
+**Step 4** Select **ASP.NET Core Templates** > **Web Application** from the project templates.
 
 **Step 5** Click **OK** to create the project.
 
