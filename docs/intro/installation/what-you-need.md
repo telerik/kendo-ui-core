@@ -16,7 +16,7 @@ To facilitate the common project types, the following combined scripts are avail
 *  The `kendo.ui.core.min.js` contains all widgets supported by the [Kendo UI Core distribution]({% slug bundle_supportfor_kendoui_components %}). The relevant script is available in the Kendo UI Core package as well.
 *  The `kendo.all.min.js` contains a minified version of all features provided by Kendo UI.
 
-> **Important**  
+> **Important**
 >
 > The `kendo.all.min.js` is available in the Kendo UI Professional, Telerik UI for ASP.NET MVC, Telerik UI for JSP and Telerik UI for PHP bundles. However, the `kendo.all.min.js` does not include the `kendo.aspnetmvc.min.js`. To install it, add `kendo.aspnetmvc.min.js` to `kendo.all.min.js`, or use the [custom download builder tool](http://www.telerik.com/download/custom-download).
 
@@ -24,13 +24,13 @@ To facilitate the common project types, the following combined scripts are avail
 * The `kendo.dataviz.min.js` is available in Kendo UI Professional, JSP, PHP, and MVC. It includes the core framework and all data visualization widgets (previously distributed as Kendo UI DataViz).
 * The `kendo.mobile.min.js` is available in Kendo UI Professional, JSP, PHP, and MVC. It includes the core framework and all mobile device specific widgets (previously distributed as Kendo UI Mobile).
 
-> **Important**  
+> **Important**
 >
 > Only one of the combined JavaScript files can be included at a time, because they include the Kendo UI framework. To simultaneously use widgets from different Kendo UI suites, use the `kendo.all.min.js` or build a custom script.
 
 In addition, none of the combined script files should be registered together with an individual widget script from the same suite. For example, `kendo.grid.js` should not be registered together with `kendo.web.js` or `kendo.all.js` because they already include the Grid scripts.
 
-> **Important**  
+> **Important**
 >
 > Registering duplicate scripts might cause JavaScript errors and unexpected behavior.
 
@@ -38,17 +38,17 @@ In addition, none of the combined script files should be registered together wit
 
 Below are listed the references to the script files which, whether minified or not, can be included on a per-widget basis depending on the flavor you want to add to your project.
 
-+ [List of Kendo UI widgets in terms of their bundle support]({% slug bundle_supportfor_kendoui_components %})  
-+ [Script Files for Data Management]({% slug scirpt_filesfor_datamanagement_widgets %})  
-+ [Script Files for Editors]({% slug scirpt_filesfor_editors_widgets %})
++ [List of Kendo UI widgets in terms of their bundle support]({% slug bundle_supportfor_kendoui_components %})
++ [Script Files for Data Management]({% slug script_filesfor_datamanagement_widgets %})
++ [Script Files for Editors]({% slug script_filesfor_editors_widgets %})
 + [Script Files for Charts]({% slug script_filesfor_charts_widgets %})
 + [Script Files for Gauges]({% slug script_filesfor_gauges_widgets %})
 + [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})
 + [Script Files for Diagrams and Maps]({% slug script_filesfor_diagramsandmaps_widgets %})
-+ [Script Files for Scheduling]({% slug scirpt_filesfor_scheduling_widgets %})
-+ [Script Files for Layout]({% slug scirpt_filesfor_layout_widgets %})
-+ [Script Files for Navigation]({% slug scirpt_filesfor_navigation_widgets %})
-+ [Script Files for Interactivity and UX]({% slug scirpt_filesfor_interactivityandux_widgets %})
++ [Script Files for Scheduling]({% slug script_filesfor_scheduling_widgets %})
++ [Script Files for Layout]({% slug script_filesfor_layout_widgets %})
++ [Script Files for Navigation]({% slug script_filesfor_navigation_widgets %})
++ [Script Files for Interactivity and UX]({% slug script_filesfor_interactivityandux_widgets %})
 + [Script Files for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})
 + [Script Files for Tools, Frameworks and Utilities]({% slug script_filesfor_tools_frameworks_utilities %})
 + [Script Files for Server-Side Wrappers]({% slug script_filesfor_serverside_wrappers %})
@@ -59,7 +59,7 @@ Below are listed the references to the script files which, whether minified or n
 
 Users with a commercial license might use the [custom download builder tool](http://www.telerik.com/download/custom-download) to create a single JavaScript file which contains only the required widgets and features.
 
-> **Important**  
+> **Important**
 >
 > Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
 
@@ -80,7 +80,7 @@ As of the Kendo UI 2014 Q3 release, the necessary build scripts are shipped in t
 
 List the components you want to be included in the custom build and separate them with a comma (`,`). The example above builds a custom minified script which includes the AutoComplete and the DropDownList widgets.
 
-> **Important**  
+> **Important**
 >
 > When complete, the `gulp` command outputs a `kendo.custom.min.js` file in the `src/dist` directory. The Gulp build task automatically resolves the needed dependencies for each component, so you do not have to list them. Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
 
