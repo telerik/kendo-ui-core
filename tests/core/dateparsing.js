@@ -616,7 +616,7 @@ test('parse G format of ko-KR culture', function () {
     }
 });
 
-test('parses more specific standard formats before culture date formats', function () {
+tzTest('Sofia', 'parses more specific standard formats before culture date formats', function () {
     var calendar = kendo.culture().calendar;
     var shortDatePattern = calendar.patterns.d;
 
