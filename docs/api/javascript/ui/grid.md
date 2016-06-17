@@ -1284,7 +1284,7 @@ The fields which can be used in the template are:
 * max - the value of the "max" aggregate (if specified)
 * min - the value of the "min" aggregate (if specified)
 * sum - the value of the "sum" aggregate (if specified)
-* aggregates - all of the aggregate (if specified) values for the current group
+* aggregates - provides access to all available aggregates, e.g. `aggregates.fieldName1.sum` or `aggregates.fieldName2.average`
 
 #### Example - set the group header template
 
@@ -1318,6 +1318,7 @@ The fields which can be used in the template are:
 * max - the value of the "max" aggregate (if specified)
 * min - the value of the "min" aggregate (if specified)
 * sum - the value of the "sum" aggregate (if specified)
+* data - provides access to all available aggregates, e.g. `data.fieldName1.sum` or `data.fieldName2.average`
 
 #### Example - set the group header template
 
@@ -6475,6 +6476,8 @@ When using multicolumn headers, using an index is not allowed. In such scenarios
 > The method ignores and does not resize [hidden](#configuration-columns.hidden) columns.
 >
 > Auto-fitting all columns at once is a resource-intensive operation and is not recommended. A better option is to auto-fit only a few columns that have the most variable content in terms of length. Alternatively, disable scrolling and allow the [browser to adjust all column widths automatically](/controls/data-management/grid/appearance#widths), according to their content.
+>
+> Use `autoFitColumn` only after the Grid has been databound. Executing the method immediately after Grid initialization makes no sense and can lead to undesired behavior.
 
 #### Example - autofit a column by index
 
