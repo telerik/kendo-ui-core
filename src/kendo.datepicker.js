@@ -612,7 +612,7 @@ var __meta__ = { // jshint ignore:line
 
             if (options.disableDates(date)) {
                 date = null;
-                if (!that._old) {
+                if (!that._old && !that.element.val()) {
                     value = null;
                 }
             }
