@@ -179,6 +179,37 @@
         multiselect.search("te");
     });
 
+    test("MultiSelect updates datasource filter state when force rebind", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            autoBind: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            filter: "contains",
+            value: [{ text: "text", value: "value" }],
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        options.success([
+                            { text: "text", value: "1" },
+                            { text: "text2", value: "2" },
+                            { text: "text3", value: "3" },
+                            { text: "text4", value: "4" }
+                        ]);
+                    }
+                },
+                serverFiltering: true
+            }
+        });
+
+        multiselect.dataSource.bind("change", function() {
+            var filter = multiselect.dataSource.filter();
+
+            ok(filter);
+        });
+
+        multiselect.search("te");
+    });
+
     asyncTest("MultiSelect filters on empty input", 1, function() {
         var multiselect = new MultiSelect(select, {
             delay: 0,
