@@ -1809,6 +1809,10 @@ Defines the selectable key. The available values are:
 
 > This option is not aplicable for mobile defices
 
+### selectable.multiple `Boolean` *(default: true)*
+
+Specifies if the multiple selection should be enabled.
+
 ### selectable.stroke `Object`
 
 Defines the selection stroke configuration.
