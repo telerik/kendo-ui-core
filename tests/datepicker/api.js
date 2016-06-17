@@ -567,6 +567,17 @@ test("manually setting disabled date, does not set the widget value", 2, functio
     equal(datepicker.value(), null);
 });
 
+test("setting disabled date for first time does not clear input", 2, function() {
+    var datepicker = new DatePicker(input, {
+        disableDates : ["sa", "su"]
+    });
+    datepicker.element.val("06/18/2016");
+    datepicker.element.blur();
+
+    equal(datepicker.element.val(), "06/18/2016");
+    equal(datepicker.value(), null);
+});
+
 test("clicking on disabled date does not close the popup", 2, function() {
     var datepicker = new DatePicker(input, {
         disableDates : ["tu"]
