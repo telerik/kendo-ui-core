@@ -26,12 +26,26 @@ As of now, Visual Studio does not provide a UI for configuring authenticated NuG
 1. Open a Command Prompt and change the path to where the `nuget.exe` is downloaded.
 1. Execute the command from the example below.
 
-###### Example
+###### Store Encrypted Credentials
 
 ```
-NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "<your login email>" -Password "<your password>"
+NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" ^
+      -UserName "your login email" -Password "your password"
 ```
 This command stores a token in the `%AppData%\NuGet\NuGet.config`  file. Your original credentials cannot be obtained from this token.
+
+> **Important**
+>
+> If you're unable to connect to the feed using encrypted credentials try the alternative approach below.
+
+###### Alternative: Store Credentials in Clear Text
+
+```
+NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" ^
+      -UserName "your login email" -Password "your password" ^
+      -StorePasswordInClearText
+```
+This command stores the password in clear text in the `%AppData%\NuGet\NuGet.config` file.
 
 ### Install NuGet Packages
 
