@@ -194,7 +194,7 @@
         var virtualList = new VirtualList(container, $.extend(virtualSettings));
         asyncDataSource.read().then(function() {
             virtualList.one("listBound", function() {
-               start(); 
+               start();
                ok(true, "ListBound is fired");
             });
             scroll(virtualList.content, 16 * ITEM_HEIGHT);
@@ -205,7 +205,7 @@
         var virtualList = new VirtualList(container, $.extend(virtualSettings));
         asyncDataSource.read().then(function() {
             virtualList.one("listBound", function() {
-               start(); 
+               start();
                ok(this.skip() !== this.dataSource.page(), "Skip is different from page");
                equal(this.skip(), 11);
             });
@@ -1618,5 +1618,43 @@
 
         virtualList.setDataSource(asyncDataSource);
         virtualList.value(250);
+    });
+
+    asyncTest("fetch the correct data page when selecting a border index", 2, function() {
+        var value = 240;
+        var requests = [];
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            dataSource: new kendo.data.DataSource({
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            requests.push(options.data);
+                            options.success({ data: generateData(options.data), total: 300 });
+                        }, 0);
+                    }
+                },
+                serverPaging: true,
+                pageSize: 40,
+                schema: {
+                    data: "data",
+                    total: "total"
+                }
+            }),
+            height: 500,
+            itemHeight: 50,
+            valueMapper: function(o) {
+                o.success(o.value);
+            }
+        }));
+
+        virtualList.dataSource.read().then(function() {
+            virtualList.value(value);
+
+            virtualList.dataSource.one("change", function() {
+                start();
+                equal(requests.length, 2);
+                equal(requests[1].page, 6);
+            });
+        });
     });
 })();
