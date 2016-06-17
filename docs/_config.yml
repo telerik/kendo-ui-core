@@ -545,7 +545,7 @@ baseurl: /kendo-ui
 cdnVersion: "2016.2.607"
 
 ## The MVC Core version used
-mvcCoreVersion: "2016.2.626"
+mvcCoreVersion: "2016.2.616"
 
 ## Assign layout and category per different paths
 defaults:
