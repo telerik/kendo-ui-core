@@ -32,7 +32,7 @@ To reorder the table rows of the Grid, initialize the Sortable widget on the Gri
 
 > **Important**  
 >
-> In an AngularJS application initialize the Sortable widget as a parent directive. The `filter` configuration option selects all `tr` elements that are children of the `.k-grid` wrapper. For detailed information, refer to [this example]({% slug howto_reorderangularjsgridrows_angular_sortable %}).
+> In an AngularJS application initialize the Sortable widget as a parent directive. The `filter` configuration option selects all `tr` elements that are children of the `.k-grid` wrapper. For detailed information, refer to [this example]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %}).
 
 ### Set Hint in Grid
 

@@ -86,10 +86,7 @@ Other articles and how-to examples on the Kendo UI Sortable:
 * [Sortable JavaScript API Reference](/api/javascript/ui/sortable)
 * [How to Nest Sortables]({% slug howto_nestsortables_sortable %})
 * [How to Persist Order in localStorage]({% slug howto_persistoderinlocalstorage_sortable %})
-* [How to Reorder AngularJS Grid Rows]({% slug howto_reorderangularjsgridrows_angular_sortable %})
-* [How to Reorder Multiple Items]({% slug howto_reordermultipleitems_sortable %})
-* [How to Reorder Rows in Nested Grid]({% slug howto_reorderrowsinnestedgrid_sortable %})
 * [How to Transfer Grid Rows]({% slug howto_transfergridrows_sortable %})
 * [How to Use Sortable in AngularJS with Grid in Batch Editing Mode]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %})
 
-For more runnable examples on the Kendo UI Sortable, browse the [how-to articles]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %}).
+For more runnable examples on the Kendo UI Sortable, browse its [**How To** documentation folder]({% slug howto_usesortablewithgrid_inincellediting_sortable %}).
