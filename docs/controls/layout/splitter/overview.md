@@ -227,7 +227,7 @@ Other articles on Kendo UI Splitter:
 * [How to Nest Sortables]({% slug howto_nestsortables_sortable %})
 * [How to Persist Order in `localStorage`]({% slug howto_persistoderinlocalstorage_sortable %})
 * [How to Reorder AngularJS Grid Rows]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %})
-* [How to Reorder Grid Rows]({% slug howto_reordergridrows_sortable %})
+* [How to Reorder Grid Rows]({% slug howto_usesortablewithgrid_inincellediting_sortable %})
 * [How to Reorder Rows in Nested Grid]({% slug howto_reorderrowsinnestedgrid_sortable %})
 * [How to Transfer Grid Rows]({% slug howto_transfergridrows_sortable %})
 * [Splitter JavaScript API Reference](/api/javascript/ui/splitter)

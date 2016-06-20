@@ -2,13 +2,13 @@
 title: Use Sortable with Grid in AngularJS
 page_title: Use Sortable with Grid in AngularJS | Kendo UI Sortable
 description: "Learn how to reorder AngularJS Grid rows by using the Kendo UI Sortable widget."
-previous_url: /controls/interactivity/sortable/how-to/AngularJS/angularjs-reorder-grid-rows
+previous_url: /controls/interactivity/sortable/how-to/AngularJS/angularjs-reorder-grid-rows, /controls/interactivity/sortable/how-to/AngularJS/angularjs-batch-editable-grid
 slug: howto_usesortablewith_gridinbatcheditablemode_angular_sortable
 ---
 
 # Use Sortable with Grid in AngularJS
 
-In AngularJS applications, the Kendo UI Sortable might be used together with a Kendo UI Grid to achieve the reordering of the Grid rows.
+The examples below demonstrate how to use the Kendo UI Sortable widget with a Kendo UI Grid either in an editable or in a non-editable mode in AngularJS applications.
 
 ## Non-Editable Grid Mode
 
