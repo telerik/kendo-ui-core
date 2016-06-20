@@ -78,6 +78,7 @@ var __meta__ = { // jshint ignore:line
             that._input();
             that._textContainer();
             that._loader();
+            that._clearButton();
 
             that._tabindex(that.input);
 
@@ -223,6 +224,7 @@ var __meta__ = { // jshint ignore:line
             that.wrapper.off(ns);
             that.tagList.off(ns);
             that.input.off(ns);
+            that._clear.off(ns);
 
             List.fn.destroy.call(that);
         },
@@ -371,6 +373,11 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _clearClick: function() {
+            this.value(null);
+            this.trigger("change");
+        },
+
         _editable: function(options) {
             var that = this,
                 disable = options.disable,
@@ -390,6 +397,7 @@ var __meta__ = { // jshint ignore:line
                     .on("focus" + ns, proxy(that._inputFocus, that))
                     .on("focusout" + ns, proxy(that._inputFocusout, that));
 
+                that._clear.on("click" + ns, proxy(that._clearClick, that));
                 input.removeAttr(DISABLED)
                      .removeAttr(READONLY)
                      .attr(ARIA_DISABLED, false);
@@ -1152,6 +1160,13 @@ var __meta__ = { // jshint ignore:line
 
         _loader: function() {
             this._loading = $('<span class="k-icon k-loading ' + HIDDENCLASS + '"></span>').insertAfter(this.input);
+        },
+
+        _clearButton: function() {
+            this._clear = $('<span unselectable="on" class="k-icon k-i-close">clear</span>').attr({
+                "role": "button",
+                "tabIndex": -1
+            }).insertAfter(this.input);
         },
 
         _textContainer: function() {

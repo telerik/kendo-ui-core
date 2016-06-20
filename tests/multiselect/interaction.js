@@ -448,6 +448,15 @@ test("MultiSelect add focused class on focus", function() {
     ok(multiselect.wrapper.hasClass("k-state-focused"));
 });
 
+    test("reset value when _clear is clicked", function() {
+        var multiselect = new MultiSelect(select, {
+            dataSource: ["foo", "bar", "baz", "item1", "item2"],
+            value: ["item1", "bar"]
+        });
+
+        multiselect._clear.click();
+        equal(multiselect.value(), "");
+    });
 return;
 
 test("MultiSelect removes focused class on blur", function() {

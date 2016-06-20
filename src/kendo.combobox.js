@@ -68,6 +68,8 @@ var __meta__ = { // jshint ignore:line
 
             that._input();
 
+            that._clearButton();
+
             that._tabindex(that.input);
 
             that._popup();
@@ -185,6 +187,7 @@ var __meta__ = { // jshint ignore:line
 
         _clearClick: function() {
             this.value(null);
+            this.trigger("change");
         },
 
         _inputFocus: function() {
@@ -733,7 +736,7 @@ var __meta__ = { // jshint ignore:line
             input = wrapper.find(SELECTOR);
 
             if (!input[0]) {
-                wrapper.append('<span tabindex="-1" unselectable="on" class="k-dropdown-wrap k-state-default"><input ' + name + 'class="k-input" type="text" autocomplete="off"/><span unselectable="on" class="k-icon k-i-close">clear</span><span tabindex="-1" unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span></span>')
+                wrapper.append('<span tabindex="-1" unselectable="on" class="k-dropdown-wrap k-state-default"><input ' + name + 'class="k-input" type="text" autocomplete="off"/><span tabindex="-1" unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span></span>')
                     .append(that.element);
 
                 input = wrapper.find(SELECTOR);
@@ -775,16 +778,16 @@ var __meta__ = { // jshint ignore:line
                     "role": "button",
                     "tabIndex": -1
                 });
-            that._clear = wrapper.find(".k-icon:first")
-                .attr({
-                    "role": "button",
-                    "tabIndex": -1
-                });
-
             if (element.id) {
                 that._arrow.attr("aria-controls", that.ul[0].id);
-                that._clear.attr("aria-controls", that.ul[0].id);
             }
+        },
+
+        _clearButton: function() {
+            this._clear = $('<span unselectable="on" class="k-icon k-i-close">clear</span>').attr({
+                "role": "button",
+                "tabIndex": -1
+            }).insertAfter(this.input);
         },
 
         _keydown: function(e) {
