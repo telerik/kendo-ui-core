@@ -9,7 +9,7 @@ slug: howto_preserveservertemplateaftersetoptions_gridaspnetmv
 
 The example below demonstrates how to preserve the Telerik UI for ASP.NET MVC Grid server toolbar template after using the `setOptions` method. Preserving it is required because of the limitation described in the [method description](/api/javascript/ui/grid#methods-setOptions).
 
-To see the example, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/).
+To see the example, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-preserve-server-toolbar-template-after-set-options).
 
 ## See Also
 
