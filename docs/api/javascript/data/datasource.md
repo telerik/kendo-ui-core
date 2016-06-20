@@ -2944,6 +2944,8 @@ Cancels any pending changes in the data source. Deleted data items are restored,
 
 The optional data item (model). If specified only the changes of this data item will be discarded. If omitted all changes will be discarded.
 
+> Note that specifying a data item (model) for `cancelChanges` will not work if the data item was removed from the collection via `remove` method.
+
 #### Example - cancel all changes
     <script>
     var dataSource = new kendo.data.DataSource({
