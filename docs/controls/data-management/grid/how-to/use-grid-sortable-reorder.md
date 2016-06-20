@@ -1,11 +1,11 @@
 ---
-title: Use Grid with Sortable
-page_title: Use Grid with Sortable | Kendo UI Grid
+title: Reorder Rows in Grids Using Sortable
+page_title: Reorder Rows in Grids Using Sortable | Kendo UI Grid
 description: "Learn how to use the Kendo UI Sortable widget with a Kendo UI Grid either in editable or non-editable modes."
 slug: howto_usegridandsortable_grid
 ---
 
-# Use Grid with Sortable
+# Reorder Rows in Grids Using Sortable
 
 To see the examples on how to use the Kendo UI Sortable widget with a Kendo UI Grid either in an editable or in a non-editable mode, refer to [this how-to article]({% slug howto_usesortablewithgrid_inincellediting_sortable %}).
 

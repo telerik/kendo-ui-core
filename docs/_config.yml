@@ -30,6 +30,7 @@ navigation:
         position: 1
     "controls/data-management/grid/how-to/AngularJS":
         title: "AngularJS"
+        position: 1
     "controls/data-management/grid/how-to/Editing":
         title: "Editing"
         position: 2
