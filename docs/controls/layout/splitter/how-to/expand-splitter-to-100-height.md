@@ -202,7 +202,9 @@ The example below demonstrates a Kendo UI Splitter with a calculated height.
 
 ## See Also
 
-Other articles on Kendo UI Splitter:
+Other articles and how-to examples on the Kendo UI Splitter:
 
 * [Splitter JavaScript API Reference](/api/javascript/ui/splitter)
 * [How to Keep Pane Size in Percentages]({% slug howto_keeppanesizepercentages_splitter %})
+
+For more runnable examples on the Kendo UI Splitter, browse its [**How To** documentation folder]({% slug howto_addautoresizingsplittertowindow_splitter %}).
