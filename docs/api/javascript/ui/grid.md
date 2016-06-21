@@ -7384,6 +7384,8 @@ A string, DOM element or jQuery object which represents the table row(s) or cell
 
 `jQuery` the selected table rows or cells.
 
+> If the Grid is using frozen (locked) columns and row selection, the `select` method will return **two** table row elements for each selected item. This is because the frozen columns feature works with the separate tables for the frozen and non-frozen columns. Each pair of table row elements that correspond to the same data item, will have the same `data-uid` attribute value. One of the table rows will be a descendant of `div.k-grid-content-locked` and the other one will be a descendant of `div.k-grid-content`. The two `div`s are siblings in the Grid DOM structure.
+
 #### Example - select the first and second table rows
 
     <div id="grid"></div>
