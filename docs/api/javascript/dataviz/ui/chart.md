@@ -4626,7 +4626,7 @@ The supported values are:
       categoryAxis: {
         notes: {
           icon: {
-            shape: "triangle"
+            type: "triangle"
           },
           data: [{ value: 1 }]
         }
@@ -34250,4 +34250,3 @@ The widget instance which fired the event.
     var chart = $("#chart").data("kendoChart");
     chart.bind("zoomStart", chart_zoomStart);
     </script>
-
