@@ -81,7 +81,7 @@ which also explains how to [change the auto-hide timeout on the fly]({% slug ove
 
 ## See Also
 
-Other articles on Kendo UI Notification:
+Other articles on the Kendo UI Notification:
 
 * [Notification JavaScript API Reference](/api/javascript/ui/notification)
 * [How to Stack Static Notifications to the Left or Right]({% slug howto_stack_static_tothe_leftor_right_notification %})

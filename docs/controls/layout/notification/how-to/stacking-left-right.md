@@ -81,7 +81,7 @@ $(function() {
 
 ## See Also
 
-Other articles on Kendo UI Notification:
+Other articles on the Kendo UI Notification:
 
 * [Notification JavaScript API Reference](/api/javascript/ui/notification)
 * [How to Move Popup Notifications on Window Resize]({% slug howto_move_popup_notifications_onwindow_resize_notification %})
