@@ -897,7 +897,7 @@ The chart will be updated on sheet [on `change`](/api/javascript/spreadsheet/she
 
 ## See Also
 
-Other articles and how-to examples on Kendo UI Spreadsheet and Charts:
+Other articles and how-to examples related to the Kendo UI Spreadsheet:
 
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
 * [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)

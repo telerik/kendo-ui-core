@@ -512,7 +512,7 @@ The example below demonstrates how to set a validation rule to a column range. I
 
 ## See Also
 
-Other articles and how-to examples on Kendo UI Spreadsheet:
+Other articles on the Kendo UI Spreadsheet:
 
 * [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
 * [How to Bind Charts to Sheet Data]({% slug howto_bindcharttosheet_spreadsheet_widget %})
