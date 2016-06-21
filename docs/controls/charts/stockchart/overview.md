@@ -79,7 +79,7 @@ The name of the field is specified by using the `dateField` option, as demonstra
 
 It can be omitted if the field name is `"date"` (the default value).
 
-> **Importnat**
+> **Important**
 >
 > Data points must be sorted by date in ascending order. Consider sorting the data on the server or use the DataSource [`sort` option](/api/framework/datasource#sort-array--objectdefault).
 
