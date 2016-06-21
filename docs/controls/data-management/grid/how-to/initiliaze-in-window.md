@@ -1,13 +1,13 @@
 ---
-title: Create Reorderable Grids with Restricted Rows Using Sortable
-page_title: Create Reorderable Grids with Restricted Rows Using Sortable | Kendo UI Grid
-description: "Learn how to restrict rows reordering in a Kendo UI Grid with a Kendo UI Sortable widget."
-slug: howto_restrictreordergridrowssortable_grid
+title: Initialize the Grid in Window
+page_title: Initialize the Grid in Window | Kendo UI Grid
+description: "Learn how to initialize a Kendo UI Grid inside a Kendo UI Window widget by resizing it according to the dimensions of its container."
+slug: howto_initializegridinwindow_grid
 ---
 
-# Create Reorderable Grids with Restricted Rows Using Sortable
+# Initialize the Grid in Window
 
-To see the example on how to reorder Kendo UI Grid rows using the Kendo UI Sortable widget and disable the top rows from reordering, refer to [this how-to article]({% slug howto_restrict_reordergridrows_sortable %}).
+To see the example on how to use the `activate` event when initializing a Grid within a Window so that it is resized according to the dimensions of its container, refer to [this how-to article]({% slug initialize_thegrid_window_widget %}).
 
 ## See Also
 
