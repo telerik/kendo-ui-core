@@ -369,6 +369,32 @@
         equal(optionHeader.innerHTML, "Select...");
     });
 
+    asyncTest("use optionLabelTemplate when bound asynchronously", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success([]);
+                        }, 0);
+                    }
+                }
+            },
+            optionLabel: "Select...",
+            optionLabelTemplate: "#= data.toUpperCase() #",
+            headerTemplate: "<div>Header</div>",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataBound: function() {
+                start();
+
+                equal(this.text(), "SELECT...");
+            }
+        });
+
+        dropdownlist.value("");
+    });
+
     test("defining input template", function() {
         var dropdownlist = new DropDownList(input, {
             valueTemplate: "#= data #",
