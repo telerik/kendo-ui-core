@@ -110,10 +110,10 @@ The example below demonstrates how to hide editors for different columns on diff
 
 ## See Also
 
-Other articles on Kendo UI TreeList:
+Other articles on the Kendo UI TreeList:
 
 * [JavaScript API Reference](/api/javascript/ui/treelist)
-* [How to Show Checkbox Column]({% slug howto_showcheckboxcolumn_treelist %})
 * [How to Show Context Menu]({% slug howto_showcontextmenu_treelist %})
 * [How to Update Field in All Child Nodes]({% slug howto_updatefieldinallchildnodes_treelist %})
-* [How to Update Field in All Child Nodes in AgularJS]({% slug howto_updatefieldinallchildnodes_angularjs_treelist %})
+
+For more runnable examples on the Kendo UI TreeList, browse the [**How To** documentation folder]({% slug howto_updatefieldinallchildnodes_angularjs_treelist %}).
