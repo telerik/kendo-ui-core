@@ -1356,4 +1356,17 @@
         equal(dropdownlist.wrapper.attr("accesskey"),  "w");
     });
 
+    test("render empty option for optionLabel with null value", function() {
+        dropdownlist = select.kendoDropDownList({
+          optionLabel: {
+              text: "Select...",
+              value: null
+          },
+          dataTextField: "text",
+          dataValueField: "value",
+          dataSource: []
+        }).data("kendoDropDownList");
+
+        equal(dropdownlist.value(), "");
+    });
 })();

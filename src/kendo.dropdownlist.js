@@ -448,13 +448,18 @@ var __meta__ = { // jshint ignore:line
 
             var value = that.listView.value()[0];
             var optionLabel = that._optionLabelDataItem();
+            var optionLabelValue = optionLabel && that._value(optionLabel);
 
             if (value === undefined || value === null) {
                 value = "";
             }
 
             if (optionLabel) {
-                optionLabel = '<option value="' + that._value(optionLabel) + '">' + that._text(optionLabel) + "</option>";
+                if (optionLabelValue === undefined || optionLabelValue === null) {
+                    optionLabelValue = "";
+                }
+
+                optionLabel = '<option value="' + optionLabelValue + '">' + that._text(optionLabel) + "</option>";
             }
 
             that._options(data, optionLabel, value);
