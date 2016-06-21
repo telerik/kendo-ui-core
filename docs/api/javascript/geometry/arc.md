@@ -20,6 +20,14 @@ Represents an arc with set center, direction, angular range and x/y radius.
             });
         </script>
 
+## Constructor Parameters
+
+### center `Array|kendo.geometry.Point`
+The center point of the arc
+
+### options `Object`
+The options that describe the arc
+
 ## Fields
 
 ### anticlockwise `Boolean` *(default: false)*

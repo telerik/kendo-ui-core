@@ -20,6 +20,14 @@ A circle with set center and radius.
             var rect = new geom.Circle([10, 10], 20);
         </script>
 
+## Constructor Parameters
+
+### center `Array|kendo.geometry.Point`
+The center point of the circle
+
+### radius `Number`
+The radius of the circle
+
 ## Fields
 
 ### center `kendo.geometry.Point`
