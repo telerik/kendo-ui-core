@@ -529,7 +529,7 @@ var __meta__ = { // jshint ignore:line
                     }
                 });
             } else {
-                throw new Error("valueMapper is not provided");
+                that.select([-1]);
             }
         },
 
