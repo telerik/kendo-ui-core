@@ -10,6 +10,7 @@ slug: initialize_thegrid_window_widget
 The example below demonstrates how to use the `activate` event when initializing the Grid within the Window so as it is resized according to the dimensions of its container.
 
 > **Important**  
+>
 > In addition to the Kendo UI Window, this example can be applied to the TabStrip and PanelBar widgets, which, too, act as hidden containers for the Grid.
 
 ###### Example
