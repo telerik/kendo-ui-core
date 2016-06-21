@@ -105,12 +105,11 @@ In addition to manually drawing the shapes, you are able to use the [HTML Drawin
 
 ## See Also
 
-Other articles on Kendo UI Diagram:
+Other articles on the Kendo UI Diagram:
 
 * [JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
-* [How to Change Shape Visual Elements Dynamically]({% slug howto_changeshapevisualelements_dynamically_diagram %})
 * [How to Drag and Drop on Shapes]({% slug howto_draganddrop_onshapes_diagram %})
-* [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
 * [How to Show Shapes Tooltip]({% slug howto_shapestooltip_diagram %})
 * [How to Use Scrollbars]({% slug howto_usescrollbar_diagram %})
-* [How to Wrap Text]({% slug howto_wraptext_diagram %})
+
+For more runnable examples on the Kendo UI Diagram, browse the [**How To** documentation folder]({% slug howto_changeshapevisualelements_dynamically_diagram %}).
