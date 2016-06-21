@@ -524,6 +524,8 @@ if (kendo.spreadsheet && kendo.spreadsheet.messages.dialogs) {
             "save": "儲存",
             "cancel": "取消",
             "remove": "移除",
+            "retry": "重試",
+            "revert": "還原",
             "okText": "是",
             "formatCellsDialog": {
                 "title": "格式",

@@ -535,6 +535,8 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "save": "Save",
   "cancel": "Cancel",
   "remove": "Remove",
+  "retry": "Retry",
+  "revert": "Revert",
   "okText": "OK",
   "formatCellsDialog": {
     "title": "Format",
