@@ -55,7 +55,7 @@ To fine-tune the color, background, padding margin of the text and to find more 
 
 ## See Also
 
-Other articles on Kendo UI Barcode:
+Other articles on the Kendo UI Barcode:
 
 * [Encodings]({% slug encodings_kendoui_barcode_widget %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Barcode Widget](/aspnet-mvc/helpers/barcode/overview)

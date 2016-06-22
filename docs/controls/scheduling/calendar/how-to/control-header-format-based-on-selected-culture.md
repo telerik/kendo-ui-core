@@ -56,6 +56,6 @@ The example below demonstrates how to control the header format of Kendo UI Cale
 
 ## See Also
 
-Other articles on Kendo UI Calendar:
+Other articles on the Kendo UI Calendar:
 
 * [Calendar JavaScript API Reference](/api/javascript/ui/calendar)
