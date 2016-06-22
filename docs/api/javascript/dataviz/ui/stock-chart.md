@@ -2187,7 +2187,7 @@ Template variables:
 
           series: {
             type: "line",
-            field: "value", 
+            field: "value",
             categoryField: "date",
             data: [
               { value: 1, date: new Date(2012, 1, 1) },
@@ -9296,7 +9296,6 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
 #### Returns
 `Promise` A promise that will be resolved with a SVG document encoded as a Data URI.
 
-
 ### redraw
 
 Repaints the chart using the currently loaded data.
@@ -9324,6 +9323,16 @@ Sets the data source of the widget.
 ##### dataSource `kendo.data.DataSource`
 
 The data source to which the widget should be bound.
+
+### setOptions
+
+Sets the widget options. Changes are cumulative.
+
+#### Parameters
+
+##### options `Object`
+
+The chart settings to update.
 
 ### svg
 
@@ -10024,4 +10033,3 @@ The original user event that triggered the zoom action.
 ##### e.sender `kendo.dataviz.ui.StockChart`
 
 The widget instance which fired the event.
-
