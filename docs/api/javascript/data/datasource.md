@@ -2569,7 +2569,7 @@ If the value of `transport.update` is a string the data source uses this string 
     dataSource.fetch(function() {
       var product = dataSource.at(0);
       product.set("UnitPrice", 20);
-      dataSource.sync(); makes request to http://demos.telerik.com/kendo-ui/service/products/update
+      dataSource.sync(); //makes request to http://demos.telerik.com/kendo-ui/service/products/update
     });
     </script>
 
