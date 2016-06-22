@@ -176,14 +176,14 @@ Kendo UI Grid does not export its [detail template](/api/javascript/ui/grid#conf
 
 ### Row Type
 
-Each row is has a `type` field that can be used to distinguish between the various row types in the Grid.
-The possible values are
+Each row has a `type` field that can be used to distinguish between the various row types in the Grid.
 
-- "header"
-- "footer"
-- "groupHeader"
-- "groupFooter"
-- "data"
+The possible values are:
+- `"header"`
+- `"footer"`
+- `"groupHeader"`
+- `"groupFooter"`
+- `"data"`
 
 ### Multiple Grids
 

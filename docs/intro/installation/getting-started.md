@@ -134,7 +134,7 @@ For more information on installing Kendo UI CDN Service, see [this article]({% s
 
 ## Include Only What You Need
 
-Add to your project only what it requires by picking the right combined scripts, building a custom combined script, or using Grunt to build a custom script.
+Add to your project only what it requires by picking the right combined scripts, building a custom combined script, or using Gulp to build a custom script.
 
 For more information on customizing the scripts you need, see [this article]({% slug include_only_what_you_need_kendoui_installation %}).
 
