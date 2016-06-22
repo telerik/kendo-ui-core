@@ -8666,6 +8666,10 @@ The event handler function context (available via the `this` keyword) will be se
 
 The selected filter descriptor. If `null` the filter has been cleared for example by click on the `clear` button.
 
+##### e.field `String`
+
+The field for which the filter is constructed.
+
 ##### e.preventDefault `Function`
 
 If invoked prevents adding the filter descriptor to the DataSource.
