@@ -8,7 +8,7 @@ slug: breakingchanges2016_kendoui
 
 # Kendo UI 2016 Breaking Changes
 
-## Kendo UI 2016 R3
+## Kendo UI 2016 R4
 
 ### Changes from 2016 R2 SP1
 
@@ -16,6 +16,14 @@ slug: breakingchanges2016_kendoui
 
 * **MultiSelect**: The widget with a 'single' tag mode will deselect all selected items on BACKSPACE/DELETE keyboard press. The previous behavior cannot be reverted.
 * **Validator**: The email validation rule has been changed to match the [HTML5 specification suggests for browsers to use](https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address). If the previous behavior is required, the email validation rule should be overriden by [specifing a custom rule](/controls/editors/validator/overview#custom-rules-for-validation) with the `email` key.
+
+## Kendo UI 2016 R3
+
+### Changes from 2016 R2
+
+#### Breaking Changes
+
+* **Scheduler**: The widget will use ',' separator for the `recurrenceException` values to conform the [RFC5545](http://tools.ietf.org/html/rfc5545#page-120) specs. More details can be found in this [forum thread](http://www.telerik.com/forums/breaking-change-recurrence-exceptions-delimiter-change).
 
 ## Kendo UI 2016 R2
 
