@@ -283,6 +283,7 @@ var __meta__ = { // jshint ignore:line
             groupTemplate: "#:data#",
             fixedGroupTemplate: "fixed header template",
             noDataTemplate: null,
+            mapValueTo: "index",
             valueMapper: null
         },
 
@@ -483,6 +484,7 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 dataView = that._dataView,
                 valueGetter = that._valueGetter,
+                mapValueTo = that.options.mapValueTo,
                 item, match = false,
                 forSelection = [];
 
@@ -510,26 +512,52 @@ var __meta__ = { // jshint ignore:line
             if (typeof that.options.valueMapper === "function") {
                 that.options.valueMapper({
                     value: (this.options.selectable === "multiple") ? value : value[0],
-                    success: function(indexes) {
-                        if (indexes === undefined || indexes === -1 || indexes === null) {
-                            indexes = [];
-                        } else {
-                            indexes = toArray(indexes);
+                    success: function(response) {
+                        if (mapValueTo === "index") {
+                            that.mapValueToIndex(response);
+                        } else if (mapValueTo === "dataItem") {
+                            that.mapValueToDataItem(response);
                         }
-
-                        if (!indexes.length) {
-                            indexes = [-1];
-                        } else {
-                            that._values = [];
-                            that._selectedIndexes = [];
-                            that._selectedDataItems = [];
-                        }
-
-                        that.select(indexes);
                     }
                 });
             } else {
                 that.select([-1]);
+            }
+        },
+
+        mapValueToIndex: function(indexes) {
+            if (indexes === undefined || indexes === -1 || indexes === null) {
+                indexes = [];
+            } else {
+                indexes = toArray(indexes);
+            }
+
+            if (!indexes.length) {
+                indexes = [-1];
+            } else {
+                this._values = [];
+                this._selectedIndexes = [];
+                this._selectedDataItems = [];
+            }
+
+            this.select(indexes);
+        },
+
+        mapValueToDataItem: function(dataItems) {
+            if (dataItems === undefined || dataItems === null) {
+                dataItems = [];
+            } else {
+                dataItems = toArray(dataItems);
+            }
+
+            if (!dataItems.length) {
+                this.select([-1]);
+            } else {
+                this._selectedDataItems = dataItems;
+
+                if (this._valueDeferred) {
+                    this._valueDeferred.resolve();
+                }
             }
         },
 
