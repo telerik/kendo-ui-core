@@ -12,7 +12,7 @@
 @radio-disabled-border-color: darken(@base, 12%);
 @radio-disabled-box-shadow: none;
 
-.k-radio-label:before {  
+.k-radio-label:before {
    border-color: @radio-border-color;
    border-radius: @radio-border-radius;
    background-color: @radio-background-color;
@@ -27,12 +27,12 @@
 
 .k-radio:checked + .k-radio-label:after {
    background-color: @radio-checked-background-color;
-   border-radius: @radio-border-radius; 
+   border-radius: @radio-border-radius;
 }
 
 .k-radio-label:active:before {
-   border-color: @radio-active-border-color; 
-   box-shadow: @radio-active-box-shadow;  
+   border-color: @radio-active-border-color;
+   box-shadow: @radio-active-box-shadow;
 }
 
 .k-radio:checked + .k-radio-label:active:before {
@@ -48,7 +48,7 @@
 .k-radio:disabled + .k-radio-label:active:before,
 .k-radio:disabled + .k-radio-label:hover:after,
 .k-radio:disabled + .k-radio-label:hover:before {
-    background: @radio-disabled-background-color;       
+    background: @radio-disabled-background-color;
     border-color: @radio-disabled-border-color;
     box-shadow: @radio-disabled-box-shadow;
 }
