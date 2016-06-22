@@ -1348,6 +1348,29 @@ The fields which can be used in the template are:
     });
     </script>
 
+#### Example - set the group header template as function
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age",
+          groupFooterTemplate: function(e) {
+              return "Total: " + e.age.count;
+          }
+        }
+      ],
+      dataSource: {
+        data: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 30 }
+        ],
+        group: { field: "age", aggregates: [ { field: "age", aggregate: "count" }] }
+      }
+    });
+    </script>
+
 ### columns.headerAttributes `Object`
 
 HTML attributes of the column header. The grid renders a table header cell (`<th>`) for every column. The `headerAttributes` option can be used to set the HTML attributes of that `th`.
