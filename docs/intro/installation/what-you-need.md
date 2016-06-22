@@ -65,7 +65,7 @@ Users with a commercial license might use the [custom download builder tool](htt
 
 ### Use Gulp
 
-If you use the Kendo UI Core package, you can build a custom distribution using the `gulp` build tool by following the instructions in [README](https://github.com/telerik/kendo-ui-core#building-only-what-you-need).
+If you use the Kendo UI Core package, you can build a custom distribution using the `gulp` build tool by following the instructions in the [README article](https://github.com/telerik/kendo-ui-core#building-only-what-you-need).
 
 As of the Kendo UI 2014 Q3 release, the necessary build scripts are shipped in the `src/` directory of the downloadable commercial bundles. To build a custom distribution from the shipped source, run the shell commands from the example below.
 
