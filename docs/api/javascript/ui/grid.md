@@ -1279,6 +1279,7 @@ and the current group value is displayed.
 The fields which can be used in the template are:
 
 * value - the current group value
+* field - the current group field
 * average - the value of the "average" aggregate (if specified)
 * count - the value of the "count" aggregate (if specified)
 * max - the value of the "max" aggregate (if specified)
@@ -1319,6 +1320,12 @@ The fields which can be used in the template are:
 * min - the value of the "min" aggregate (if specified)
 * sum - the value of the "sum" aggregate (if specified)
 * data - provides access to all available aggregates, e.g. `data.fieldName1.sum` or `data.fieldName2.average`
+* group - provides information for the current group. An object with two fields - `field` and `value`.
+
+> **Important**
+>
+> If the template is declared as a function the group field is accessible only through the data field,
+> e.g. `data.fieldName1.group.value`.
 
 #### Example - set the group header template
 
