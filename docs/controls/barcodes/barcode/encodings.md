@@ -171,7 +171,7 @@ The [Kendo UI Barcode widget](http://demos.telerik.com/kendo-ui/barcode/index) s
 
 ## See Also
 
-Other articles on Kendo UI Barcode:
+Other articles on the Kendo UI Barcode:
 
 * [Overview of the Barcode Widget]({% slug overview_kendoui_barcode_widget %})
 * [Barcode JavaScript API Reference](/api/javascript/dataviz/ui/barcode)
