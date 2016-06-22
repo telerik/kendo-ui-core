@@ -51,7 +51,7 @@ The example below demonstrates how to increase the width of the popup edit form 
     In case of unexpected side effects, use widget-specific classes, instead of .k-widget.
 */
 .k-popup-edit-form .k-edit-field > .k-textbox,
-.k-popup-edit-form .k-edit-field > .k-widget
+.k-popup-edit-form .k-edit-field > .k-widget:not(.k-tooltip)
 {
     width: 98%;
 }
