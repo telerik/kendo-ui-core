@@ -350,9 +350,11 @@ refer to [Popup](/api/javascript/ui/popup) documentation.
     });
     </script>
 
-### separator `String` *(default: "")*
+### separator `String|Array` *(default: "")*
 
 The character used to separate multiple values. Empty by default.
+
+> As of Q3 2016 the Autocomplete widget supports multiple separators listed in an array. All separators will be replaced with the first array item, which acts as a default separator.
 
 #### Example - set separator to allow multiple values
 
@@ -360,6 +362,15 @@ The character used to separate multiple values. Empty by default.
     <script>
     $("#autocomplete").kendoAutoComplete({
       separator: ", "
+    });
+    </script>
+
+#### Example - set multiple separators
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      separator: [", ", "; "]
     });
     </script>
 

@@ -89,4 +89,45 @@ test("select replaces the word at the caret position", function() {
     equal(input.val(), "baz, bar, ");
 });
 
+    test("multiple separators, use first one as default", function() {
+        var autocomplete = new AutoComplete(input, {
+            dataSource: ["baz", "bar"],
+            separator: [", ", "; "]
+        });
+
+        input.focus();
+        input.val("b");
+        autocomplete.search();
+        autocomplete.select(autocomplete.ul.children().first());
+
+        equal(input.val(), "baz, ");
+    });
+
+    test("multiple separators", function(assert) {
+        var autocomplete = new AutoComplete(input, {
+            dataSource: ["baz", "bar"],
+            separator: [", ", "; "]
+        });
+
+        var done = assert.async();
+        autocomplete.popup.one("open", function() {
+            assert.ok(true);
+            done();
+        });
+        input.focus();
+        input.val("baz; ");
+        autocomplete.search();
+    });
+
+    test("multiple separators, replace all with default separator", function(assert) {
+        var autocomplete = new AutoComplete(input, {
+            dataSource: ["baz", "bar"],
+            separator: [", ", "; ", "/ "],
+            value: "foo; bar, baz/ boo"
+        });
+
+        input.focus();
+        input.trigger("focusout");
+        assert.equal(autocomplete.value(), "foo, bar, baz, boo");
+    });
 }());
