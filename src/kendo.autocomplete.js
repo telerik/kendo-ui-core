@@ -303,9 +303,11 @@ var __meta__ = { // jshint ignore:line
                     field: options.dataTextField,
                     ignoreCase: ignoreCase
                 });
-                this.popup.one("open", function(){
+                this.one("close", function(){
                     var value = that.value().split(separator).join(that._defaultSeparator());
-                    that.value(value);
+                    if(value && value !== '') {
+                        that.value(value);
+                    }
                 });
 
             }
