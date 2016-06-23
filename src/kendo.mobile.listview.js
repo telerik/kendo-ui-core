@@ -116,9 +116,17 @@ var __meta__ = { // jshint ignore:line
             listView.bind(STYLED, cacheHeaders);
             listView.bind(DATABOUND, cacheHeaders);
 
-            scroller.bind("scroll", function(e) {
+            this._scrollHandler = function(e) {
                 headerFixer._fixHeader(e);
-            });
+            };
+            scroller.bind("scroll", this._scrollHandler);
+        },
+
+        destroy: function() {
+            var that = this;
+            if (that.scroller) {
+                that.scroller.unbind("scroll", that._scrollHandler);
+            }
         },
 
         _fixHeader: function(e) {
@@ -1023,6 +1031,10 @@ var __meta__ = { // jshint ignore:line
                 this._itemBinder.destroy();
             }
 
+            if(this._headerFixer) {
+                this._headerFixer.destroy();
+            }
+
             this.element.unwrap();
             delete this.element;
             delete this.wrapper;
@@ -1090,6 +1102,7 @@ var __meta__ = { // jshint ignore:line
         replace: function(dataItems) {
             this.options.type = "flat";
             this._angularItems("cleanup");
+            kendo.destroy(this.element.children());
             this.element.empty();
             this._userEvents.cancel();
             this._style();
