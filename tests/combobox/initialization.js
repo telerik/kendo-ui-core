@@ -397,6 +397,53 @@ test("defining header template", function() {
     equal(list.children()[0].outerHTML, "<div>Header</div>");
 });
 
+test("render footer container", function() {
+    var combobox = new ComboBox(input, {
+        footerTemplate: "footer"
+    });
+
+    var footer = combobox.footer;
+
+    ok(footer);
+    ok(footer.hasClass("k-widget"));
+    ok(footer.hasClass("k-footer"));
+});
+
+test("render footer template", function() {
+    var combobox = new ComboBox(input, {
+        autoBind: true,
+        footerTemplate: "footer"
+    });
+
+    var footer = combobox.footer;
+
+    equal(footer.html(), "footer");
+});
+
+test("compile footer template with the combobox instance", function() {
+    var combobox = new ComboBox(input, {
+        autoBind: true,
+        footerTemplate: "#: instance.dataSource.total() #"
+    });
+
+    var footer = combobox.footer;
+
+    equal(footer.html(), combobox.dataSource.total());
+});
+
+test("update footer template on dataBound", function() {
+    var combobox = new ComboBox(input, {
+        autoBind: true,
+        footerTemplate: "#: instance.dataSource.total() #"
+    });
+
+    var footer = combobox.footer;
+
+    combobox.dataSource.data(["Item1"]);
+
+    equal(footer.html(), combobox.dataSource.total());
+});
+
 test("should populate text and value if items", function() {
    combobox = new ComboBox(input, {
        dataTextField: "text",
