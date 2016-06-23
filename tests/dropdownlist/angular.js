@@ -301,4 +301,49 @@
 
         equal(optionLabel.text(), "Select... - My text");
     });
+
+    ngTest("dropdownlist compiles header template", 1, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            $scope.selectedColors = [ "red", "green" ];
+
+            $scope.selectOptions = {
+                dataSource: [ "red", "green", "blue" ],
+                headerTemplate: "<div>{{text}}<div>",
+                valuePrimitive: true
+            };
+
+            $scope.text = "My text";
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-drop-down-list k-ng-model=selectedColors k-options=selectOptions></select></div>');
+    },
+
+    function() {
+        var header = QUnit.fixture.find("select").getKendoDropDownList().header;
+        equal(header.text(), "My text");
+    });
+
+    ngTest("dropdownlist compiles footer template", 1, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            $scope.selectedColors = [ "red", "green" ];
+
+            $scope.selectOptions = {
+                dataSource: [ "red", "green", "blue" ],
+                footerTemplate: "<div>{{text}}<div>",
+                valuePrimitive: true
+            };
+
+            $scope.text = "My text";
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-drop-down-list k-ng-model=selectedColors k-options=selectOptions></select></div>');
+    },
+
+    function() {
+        var widget = QUnit.fixture.find("select").getKendoDropDownList();
+        var scope = widget.element.scope();
+
+        var footer = QUnit.fixture.find("select").getKendoDropDownList().footer;
+        equal(footer.text(), "My text");
+    });
 })();

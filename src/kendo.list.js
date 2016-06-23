@@ -81,12 +81,14 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._header();
+            that._footer();
             that._accessors();
             that._initValue();
         },
 
         options: {
             valuePrimitive: false,
+            footerTemplate: "",
             headerTemplate: ""
         },
 
@@ -96,6 +98,9 @@ var __meta__ = { // jshint ignore:line
             if (options && options.enable !== undefined) {
                 options.enabled = options.enable;
             }
+
+            this._footer();
+            this._updateFooter();
         },
 
         focus: function() {
@@ -233,6 +238,44 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _angularElement: function(element, action) {
+            if (!element) {
+                return;
+            }
+
+            this.angular(action, function() {
+                return { elements: element };
+            });
+        },
+
+        _footer: function() {
+            var footer = $(this.footer);
+            var template = this.options.footerTemplate;
+
+            kendo.destroy(footer);
+            footer.remove();
+
+            if (!template) {
+                this.footer = null;
+                return;
+            }
+
+            this.footer = $('<div class="k-widget k-footer"></div>').appendTo(this.list);
+            this.footerTemplate = typeof template !== "function" ? kendo.template(template) : template;
+        },
+
+        _updateFooter: function() {
+            var footer = this.footer;
+
+            if (!footer) {
+                return;
+            }
+
+            this._angularElement(footer, "cleanup");
+            footer.html(this.footerTemplate({ instance: this }));
+            this._angularElement(footer, "compile");
+        },
+
         _header: function() {
             var that = this;
             var template = that.options.headerTemplate;
@@ -248,6 +291,7 @@ var __meta__ = { // jshint ignore:line
                 header = that.ul.prev();
 
                 that.header = header[0] ? header : null;
+
                 if (that.header) {
                     that.angular("compile", function(){
                         return { elements: that.header };
@@ -487,10 +531,7 @@ var __meta__ = { // jshint ignore:line
 
                 if (height !== "auto") {
                     offsetTop = that._offsetHeight();
-
-                    if (offsetTop) {
-                        height -= offsetTop;
-                    }
+                    height = height - offsetTop - $(that.footer).height();
                 }
 
                 that.listView.content.height(height);

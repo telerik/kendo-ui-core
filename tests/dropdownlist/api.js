@@ -1194,4 +1194,22 @@
 
         ok(!dropdownlist.hasOptionLabel());
     });
+
+    test("setOptions method updates footer template", 1, function() {
+        var dropdownlist = new DropDownList(input, { });
+
+        dropdownlist.setOptions({ footerTemplate: "footer" });
+
+        equal(dropdownlist.footer.html(), "footer");
+    });
+
+    test("setOptions method hides footer template", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            footerTemplate: "footer"
+        });
+
+        dropdownlist.setOptions({ footerTemplate: "" });
+
+        equal(dropdownlist.footer, null);
+    });
 })();

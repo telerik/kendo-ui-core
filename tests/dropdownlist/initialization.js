@@ -395,6 +395,53 @@
         dropdownlist.value("");
     });
 
+    test("render footer container", function() {
+        var dropdownlist = new DropDownList(input, {
+            footerTemplate: "footer"
+        });
+
+        var footer = dropdownlist.footer;
+
+        ok(footer);
+        ok(footer.hasClass("k-widget"));
+        ok(footer.hasClass("k-footer"));
+    });
+
+    test("render footer template", function() {
+        var dropdownlist = new DropDownList(input, {
+            autoBind: true,
+            footerTemplate: "footer"
+        });
+
+        var footer = dropdownlist.footer;
+
+        equal(footer.html(), "footer");
+    });
+
+    test("compile footer template with the dropdownlist instance", function() {
+        var dropdownlist = new DropDownList(input, {
+            autoBind: true,
+            footerTemplate: "#: instance.dataSource.total() #"
+        });
+
+        var footer = dropdownlist.footer;
+
+        equal(footer.html(), dropdownlist.dataSource.total());
+    });
+
+    test("update footer template on dataBound", function() {
+        var dropdownlist = new DropDownList(input, {
+            autoBind: true,
+            footerTemplate: "#: instance.dataSource.total() #"
+        });
+
+        var footer = dropdownlist.footer;
+
+        dropdownlist.dataSource.data(["Item1"]);
+
+        equal(footer.html(), dropdownlist.dataSource.total());
+    });
+
     test("defining input template", function() {
         var dropdownlist = new DropDownList(input, {
             valueTemplate: "#= data #",
@@ -1030,23 +1077,18 @@
         equal(list.height(), 50);
     });
 
-    /*
-    test("adjust ul height if filter header is rendered", function() {
+    test("adjust height if footer template", function() {
         var dropdownlist = new DropDownList(input, {
+            animation: false,
             dataSource: ["item1", "item2", "item3", "item4", "item5"],
-            filter: "startswith",
-            height: 50
+            footerTemplate: "<div>Footer</div>",
+            height: 100
         });
 
         dropdownlist.open();
 
-        var list = dropdownlist.list;
-        var filterHeader = list.find(".k-textbox");
-        var height = list.height() - dropdownlist.ul[0].offsetTop;
-
-        equal(dropdownlist.ul.height(), height);
+        ok(dropdownlist.listView.content.height() < 100);
     });
-    */
 
     test("widget renders search icon in filter header", function() {
         var dropdownlist = new DropDownList(input, {
