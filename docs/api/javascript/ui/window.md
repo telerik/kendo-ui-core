@@ -583,7 +583,7 @@ Maximizes a Window to its title bar.
 
 ### open
 
-Opens a Window.
+Opens a Window and brings it on top of any other open Window instances by calling [`toFront`](#methods-tofront) internally.
 
 #### Returns
 
@@ -764,7 +764,7 @@ The title of the Window.
 
 ### toFront
 
-Brings forward a Window to the top of the z-index.
+Increases the `z-index` style of a Window [`wrapper`](/intro/widget-basics/wrapper-element) to bring the instance on top of other open Windows. This method is executed automatically when the [`open`](#methods-open) method is used.
 
 #### Returns
 
