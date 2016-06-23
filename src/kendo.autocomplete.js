@@ -708,7 +708,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _clearButton: function() {
-            this._clear = $('<span unselectable="on" class="k-icon k-i-close">clear</span>').attr({
+            this._clear = $('<span unselectable="on" class="k-icon k-i-close" title="clear"></span>').attr({
                 "role": "button",
                 "tabIndex": -1
             }).insertAfter(this.element);
