@@ -541,4 +541,22 @@ asyncTest("value method selects item that exists only in unfiltered source (asyn
 
         equal(multiselect.tagList.children().length, 1)
     });
+
+    test("setOptions method updates footer template", 1, function() {
+        var multiselect = new MultiSelect(select, { });
+
+        multiselect.setOptions({ footerTemplate: "footer" });
+
+        equal(multiselect.footer.html(), "footer");
+    });
+
+    test("setOptions method hides footer template", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            footerTemplate: "footer"
+        });
+
+        multiselect.setOptions({ footerTemplate: "" });
+
+        equal(multiselect.footer, null);
+    });
 })();

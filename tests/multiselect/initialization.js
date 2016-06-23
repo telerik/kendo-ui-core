@@ -129,6 +129,53 @@
         equal(list.children()[0].outerHTML, "<div>Header</div>");
     });
 
+    test("render footer container", function() {
+        var multiselect = new MultiSelect(select, {
+            footerTemplate: "footer"
+        });
+
+        var footer = multiselect.footer;
+
+        ok(footer);
+        ok(footer.hasClass("k-widget"));
+        ok(footer.hasClass("k-footer"));
+    });
+
+    test("render footer template", function() {
+        var multiselect = new MultiSelect(select, {
+            autoBind: true,
+            footerTemplate: "footer"
+        });
+
+        var footer = multiselect.footer;
+
+        equal(footer.html(), "footer");
+    });
+
+    test("compile footer template with the multiselect instance", function() {
+        var multiselect = new MultiSelect(select, {
+            autoBind: true,
+            footerTemplate: "#: instance.dataSource.total() #"
+        });
+
+        var footer = multiselect.footer;
+
+        equal(footer.html(), multiselect.dataSource.total());
+    });
+
+    test("update footer template on dataBound", function() {
+        var multiselect = new MultiSelect(select, {
+            autoBind: true,
+            footerTemplate: "#: instance.dataSource.total() #"
+        });
+
+        var footer = multiselect.footer;
+
+        multiselect.dataSource.data(["Item1"]);
+
+        equal(footer.html(), multiselect.dataSource.total());
+    });
+
     test("MultiSelect creates DataSource", function() {
         var multiselect = new MultiSelect(select);
 
