@@ -80,7 +80,7 @@ test("text input should be wrapped with span", function(){
 test("include arrow after input.k-input", function(){
    combobox = new ComboBox(input);
 
-   var spanArrow = combobox.input.next(),
+    var spanArrow = combobox.input.next().next(),
        arrow = spanArrow.children().eq(0);
 
    ok(spanArrow.is("span"));

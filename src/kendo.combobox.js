@@ -68,6 +68,8 @@ var __meta__ = { // jshint ignore:line
 
             that._input();
 
+            that._clearButton();
+
             that._tabindex(that.input);
 
             that._popup();
@@ -170,6 +172,7 @@ var __meta__ = { // jshint ignore:line
             clearTimeout(that._pasteTimeout);
 
             that._arrow.parent().off(CLICK + " " + MOUSEDOWN);
+            that._clear.off(CLICK + " " + MOUSEDOWN);
 
             Select.fn.destroy.call(that);
         },
@@ -180,6 +183,11 @@ var __meta__ = { // jshint ignore:line
 
         _arrowClick: function() {
             this._toggle();
+        },
+
+        _clearClick: function() {
+            this.value(null);
+            this.trigger("change");
         },
 
         _inputFocus: function() {
@@ -224,7 +232,8 @@ var __meta__ = { // jshint ignore:line
                 readonly = options.readonly,
                 wrapper = that._inputWrapper.off(ns),
                 input = that.element.add(that.input.off(ns)),
-                arrow = that._arrow.parent().off(CLICK + " " + MOUSEDOWN);
+                arrow = that._arrow.parent().off(CLICK + " " + MOUSEDOWN),
+                clear = that._clear;
 
             if (!readonly && !disable) {
                 wrapper
@@ -238,6 +247,9 @@ var __meta__ = { // jshint ignore:line
 
                 arrow.on(CLICK, proxy(that._arrowClick, that))
                      .on(MOUSEDOWN, function(e) { e.preventDefault(); });
+
+                clear.on(CLICK, proxy(that._clearClick, that))
+                    .on(MOUSEDOWN, function(e) { e.preventDefault(); });
 
                 that.input
                     .on("keydown" + ns, proxy(that._keydown, that))
@@ -725,7 +737,7 @@ var __meta__ = { // jshint ignore:line
 
             if (!input[0]) {
                 wrapper.append('<span tabindex="-1" unselectable="on" class="k-dropdown-wrap k-state-default"><input ' + name + 'class="k-input" type="text" autocomplete="off"/><span tabindex="-1" unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span></span>')
-                       .append(that.element);
+                    .append(that.element);
 
                 input = wrapper.find(SELECTOR);
             }
@@ -761,15 +773,21 @@ var __meta__ = { // jshint ignore:line
 
             that._focused = that.input = input;
             that._inputWrapper = $(wrapper[0].firstChild);
-            that._arrow = wrapper.find(".k-icon")
-                                 .attr({
-                                     "role": "button",
-                                     "tabIndex": -1
-                                 });
-
+            that._arrow = wrapper.find(".k-icon:last")
+                .attr({
+                    "role": "button",
+                    "tabIndex": -1
+                });
             if (element.id) {
                 that._arrow.attr("aria-controls", that.ul[0].id);
             }
+        },
+
+        _clearButton: function() {
+            this._clear = $('<span unselectable="on" class="k-icon k-i-close" title="clear"></span>').attr({
+                "role": "button",
+                "tabIndex": -1
+            }).insertAfter(this.input);
         },
 
         _keydown: function(e) {
