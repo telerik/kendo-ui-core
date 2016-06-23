@@ -166,6 +166,55 @@ test("defining header template", function() {
     equal(list.children()[0].outerHTML, "<div>Header</div>");
 });
 
+test("render footer container", function() {
+    var autocomplete = new AutoComplete(input, {
+        footerTemplate: "footer"
+    });
+
+    var footer = autocomplete.footer;
+
+    ok(footer);
+    ok(footer.hasClass("k-widget"));
+    ok(footer.hasClass("k-footer"));
+});
+
+test("render footer template", function() {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: ["Item1"],
+        footerTemplate: "footer"
+    });
+
+    var footer = autocomplete.footer;
+
+    autocomplete.search("item");
+
+    equal(footer.html(), "footer");
+});
+
+test("compile footer template with the autocomplete instance", function() {
+    var autocomplete = new AutoComplete(input, {
+        autoBind: true,
+        footerTemplate: "#: instance.dataSource.total() #"
+    });
+
+    var footer = autocomplete.footer;
+
+    equal(footer.html(), autocomplete.dataSource.total());
+});
+
+test("update footer template on dataBound", function() {
+    var autocomplete = new AutoComplete(input, {
+        autoBind: true,
+        footerTemplate: "#: instance.dataSource.total() #"
+    });
+
+    var footer = autocomplete.footer;
+
+    autocomplete.dataSource.data(["Item1"]);
+
+    equal(footer.html(), autocomplete.dataSource.total());
+});
+
 test("highlight first item", function() {
     var autocomplete = new AutoComplete(input, {
         animation: false,
@@ -485,6 +534,24 @@ test("setOptions updates listView dataValueField when dataTextField is set", fun
     });
 
     equal(autocomplete.listView.options.dataValueField, "anotherName");
+});
+
+test("setOptions method updates footer template", 1, function() {
+    var autocomplete = new AutoComplete(input, { });
+
+    autocomplete.setOptions({ footerTemplate: "footer" });
+
+    equal(autocomplete.footer.html(), "footer");
+});
+
+test("setOptions method hides footer template", 1, function() {
+    var autocomplete = new AutoComplete(input, {
+        footerTemplate: "footer"
+    });
+
+    autocomplete.setOptions({ footerTemplate: "" });
+
+    equal(autocomplete.footer, null);
 });
 
 test("AutoComlete is disabled when placed in disabled fieldset", function() {
