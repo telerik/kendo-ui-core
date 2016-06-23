@@ -554,6 +554,24 @@ test("setOptions method hides footer template", 1, function() {
     equal(autocomplete.footer, null);
 });
 
+test("setOptions method updates header template", 1, function() {
+    var autocomplete = new AutoComplete(input, { });
+
+    autocomplete.setOptions({ headerTemplate: "<div>header</div>" });
+
+    equal(autocomplete.header.html(), "header");
+});
+
+test("setOptions method hides header template", 1, function() {
+    var autocomplete = new AutoComplete(input, {
+        headerTemplate: "<div>Header</div>"
+    });
+
+    autocomplete.setOptions({ headerTemplate: "" });
+
+    equal(autocomplete.header, null);
+});
+
 test("AutoComlete is disabled when placed in disabled fieldset", function() {
      $(input).wrap('<fieldset disabled="disabled"></fieldset>');
      input.kendoAutoComplete().data("kendoAutoComplete");

@@ -99,6 +99,7 @@ var __meta__ = { // jshint ignore:line
                 options.enabled = options.enable;
             }
 
+            this._header();
             this._footer();
             this._updateFooter();
         },
@@ -252,6 +253,7 @@ var __meta__ = { // jshint ignore:line
             var footer = $(this.footer);
             var template = this.options.footerTemplate;
 
+            this._angularElement(footer, "cleanup");
             kendo.destroy(footer);
             footer.remove();
 
@@ -277,27 +279,25 @@ var __meta__ = { // jshint ignore:line
         },
 
         _header: function() {
-            var that = this;
-            var template = that.options.headerTemplate;
-            var header;
+            var header = $(this.header);
+            var template = this.options.headerTemplate;
 
-            if ($.isFunction(template)) {
-                template = template({});
+            this._angularElement(header, "cleanup");
+            kendo.destroy(header);
+            header.remove();
+
+            if (!template) {
+                this.header = null;
+                return;
             }
 
-            if (template) {
-                that.list.prepend(template);
+            var headerTemplate = typeof template !== "function" ? kendo.template(template) : template;
+            header = $(headerTemplate({}));
 
-                header = that.ul.prev();
+            this.header = header[0] ? header : null;
+            this.list.prepend(header);
 
-                that.header = header[0] ? header : null;
-
-                if (that.header) {
-                    that.angular("compile", function(){
-                        return { elements: that.header };
-                    });
-                }
-            }
+            this._angularElement(this.header, "compile");
         },
 
         _initValue: function() {

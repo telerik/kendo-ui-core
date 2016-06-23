@@ -1041,4 +1041,22 @@ test("setOptions method hides footer template", 1, function() {
     equal(combobox.footer, null);
 });
 
+test("setOptions method updates header template", 1, function() {
+    var combobox = new ComboBox(input, { });
+
+    combobox.setOptions({ headerTemplate: "<div>header</div>" });
+
+    equal(combobox.header.html(), "header");
+});
+
+test("setOptions method hides footer template", 1, function() {
+    var combobox = new ComboBox(input, {
+        headerTemplate: "header"
+    });
+
+    combobox.setOptions({ headerTemplate: "" });
+
+    equal(combobox.header, null);
+});
+
 })();
