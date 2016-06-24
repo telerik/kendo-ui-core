@@ -249,6 +249,10 @@ By design, when adding items that do not fit in the existing free space, the Mul
 
 Because of its complex rendering, focusing the widget by using a label element requires additional implementation. For more information about how to do it, check this [Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
 
+### Input Removal
+
+The MultiSelect enables you to remove the values from the input area of the widget through the `clearButton` configuration option. By default, it is enabled and set to `true`. As a result, a **x** button appears in the input area on hover. When clicked, it resets the value of the widget and triggers the `change` event.
+
 ## See Also
 
 Other articles on Kendo UI MultiSelect:

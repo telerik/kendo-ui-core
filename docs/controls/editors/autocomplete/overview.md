@@ -33,7 +33,6 @@ Initialize the AutoComplete widget by using a jQuery selector:
         <input id="autoComplete" class="myClass" />
     </span>
 
-
 ## Configuration
 
 ### Suggestions
@@ -138,6 +137,10 @@ You can customize the width of a drop-down list and change its dimensions by usi
         // set width of the drop-down list
         autoComplete.list.width(400);
     </script>
+
+### Input Removal
+
+The AutoComplete enables you to remove the values from the input area of the widget through the `clearButton` configuration option. By default, it is enabled and set to `true`. As a result, a **x** button appears in the input area on hover. When clicked, it resets the value of the widget and triggers the `change` event.
 
 ## Templates
 
