@@ -384,28 +384,6 @@ if (kendo.ui.TreeList) {
     });
 }
 
-/* TreeList messages */
-
-if (kendo.ui.TreeList) {
-    kendo.ui.TreeList.prototype.options.messages =
-    $.extend(true, kendo.ui.TreeList.prototype.options.messages, {
-        noRows: "Es sind keine Daten vorhanden",
-        loading: "Lade Daten...",
-        requestFailed: "Laden fehlgeschlagen",
-        retry: "Neu laden",
-        commands: {
-            edit: "Bearbeiten",
-            update: "Aktualisiere",
-            canceledit: "Abbrechen",
-            create: "Neuen Datensatz hinzufügen",
-            createchild: "Kind-Datensatz hinzufügen",
-            destroy: "Löschen",
-            excel: "Als Excel exportieren",
-            pdf: "Als PDF exportieren"
-        }
-    });
-}
-
 /* Upload messages */
 
 if (kendo.ui.Upload) {
