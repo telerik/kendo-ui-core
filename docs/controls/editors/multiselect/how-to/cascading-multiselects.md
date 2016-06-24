@@ -24,18 +24,7 @@ The example below demonstrates how to cascade multiple Kendo UI MultiSelect widg
               url: "http://demos.kendoui.com/service/Northwind.svc/Products",
             },
             parameterMap: function(data) {
-              var result = {};
-              var filter = data.filter;
-
-              if (filter) {
-                filter = filter.filters;
-
-                for (var i = 0, length = filter.length; i < length; i++) {
-                  result["filters[" + i + "]"] = filter[i].value;
-                }
-              }
-
-              return result;
+              return kendo.data.transports.odata.parameterMap.call(this, data);
             }
           }
         });
