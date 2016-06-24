@@ -531,7 +531,7 @@ var __meta__ = { // jshint ignore:line
 
                 if (height !== "auto") {
                     offsetTop = that._offsetHeight();
-                    height = height - offsetTop - $(that.footer).height();
+                    height = height - offsetTop - $(that.footer).outerHeight();
                 }
 
                 that.listView.content.height(height);
