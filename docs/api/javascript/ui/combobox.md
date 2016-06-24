@@ -338,6 +338,31 @@ The [template](/api/javascript/kendo#methods-template) used to render the fixed 
         });
     </script>
 
+### footerTemplate `String|Function`
+
+The [template](/api/javascript/kendo#methods-template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
+
+#### Parameters
+
+##### instance `Object`
+
+The widget instance.
+
+#### Example - specify footerTemplate as a string
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      footerTemplate: 'Total <strong>#: instance.dataSource.total() #</strong> items found'
+    });
+    </script>
+
 ### groupTemplate `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) used to render the groups. By default the widget displays only the value of the group.

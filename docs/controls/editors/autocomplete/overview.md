@@ -22,7 +22,7 @@ Initialize the AutoComplete widget by using a jQuery selector:
      $("#autoComplete").kendoAutoComplete(["Item1", "Item2"]);
     });
 
-> **Important**  
+> **Important**
 > The widget copies any styles and CSS classes from the input element to the wrapper element.
 
     <input id="autoComplete" class="myClass" />
@@ -131,7 +131,7 @@ You can customize the width of a drop-down list and change its dimensions by usi
 
     <input id="autoComplete" />
 
-    <script>  
+    <script>
         $("#autoComplete").kendoAutoComplete();
         var autoComplete = $("#autocomplete").data("kendoAutoComplete");
         // set width of the drop-down list
@@ -197,6 +197,38 @@ The example below demonstrates how to define a header template.
         $(document).ready(function() {
             $("#autoComplete").kendoAutoComplete({
                 headerTemplate: $("#headerTemplate").html(),
+                dataTextField: "ContactName",
+                dataSource: {
+                    transport: {
+                        read: {
+                            dataType: "jsonp",
+                            url: "http://demos.telerik.com/kendo-ui/service/Customers"
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+### Footer Templates
+
+The AutoComplete allows you to render a pop-up footer. The footer is re-rendered on every DataSource change. The context of the template is the widget itself.
+
+The example below demonstrates how to define a footer template.
+
+###### Example
+
+    <input id="autoComplete" />
+    <!-- Template -->
+    <script id="footerTemplate" type="text/x-kendo-template">
+        Total <strong>#: instance.dataSource.total() #</strong> items found
+    </script>
+
+    <!-- AutoComplete initialization -->
+    <script>
+        $(document).ready(function() {
+            $("#autoComplete").kendoAutoComplete({
+                footerTemplate: $("#footerTemplate").html(),
                 dataTextField: "ContactName",
                 dataSource: {
                     transport: {

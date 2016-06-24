@@ -81,12 +81,14 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._header();
+            that._footer();
             that._accessors();
             that._initValue();
         },
 
         options: {
             valuePrimitive: false,
+            footerTemplate: "",
             headerTemplate: ""
         },
 
@@ -96,6 +98,10 @@ var __meta__ = { // jshint ignore:line
             if (options && options.enable !== undefined) {
                 options.enabled = options.enable;
             }
+
+            this._header();
+            this._footer();
+            this._updateFooter();
         },
 
         focus: function() {
@@ -233,27 +239,65 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _angularElement: function(element, action) {
+            if (!element) {
+                return;
+            }
+
+            this.angular(action, function() {
+                return { elements: element };
+            });
+        },
+
+        _footer: function() {
+            var footer = $(this.footer);
+            var template = this.options.footerTemplate;
+
+            this._angularElement(footer, "cleanup");
+            kendo.destroy(footer);
+            footer.remove();
+
+            if (!template) {
+                this.footer = null;
+                return;
+            }
+
+            this.footer = $('<div class="k-footer"></div>').appendTo(this.list);
+            this.footerTemplate = typeof template !== "function" ? kendo.template(template) : template;
+        },
+
+        _updateFooter: function() {
+            var footer = this.footer;
+
+            if (!footer) {
+                return;
+            }
+
+            this._angularElement(footer, "cleanup");
+            footer.html(this.footerTemplate({ instance: this }));
+            this._angularElement(footer, "compile");
+        },
+
         _header: function() {
-            var that = this;
-            var template = that.options.headerTemplate;
-            var header;
+            var header = $(this.header);
+            var template = this.options.headerTemplate;
 
-            if ($.isFunction(template)) {
-                template = template({});
+            this._angularElement(header, "cleanup");
+            kendo.destroy(header);
+            header.remove();
+
+            if (!template) {
+                this.header = null;
+                return;
             }
 
-            if (template) {
-                that.list.prepend(template);
+            var headerTemplate = typeof template !== "function" ? kendo.template(template) : template;
+            header = $(headerTemplate({}));
 
-                header = that.ul.prev();
+            this.header = header[0] ? header : null;
+            this.list.prepend(header);
 
-                that.header = header[0] ? header : null;
-                if (that.header) {
-                    that.angular("compile", function(){
-                        return { elements: that.header };
-                    });
-                }
-            }
+            this._angularElement(this.header, "compile");
         },
 
         _initValue: function() {
@@ -487,10 +531,7 @@ var __meta__ = { // jshint ignore:line
 
                 if (height !== "auto") {
                     offsetTop = that._offsetHeight();
-
-                    if (offsetTop) {
-                        height -= offsetTop;
-                    }
+                    height = height - offsetTop - $(that.footer).outerHeight();
                 }
 
                 that.listView.content.height(height);

@@ -215,4 +215,49 @@
 
         equal(widget.input.attr("maxlength"), 3);
     });
+
+    ngTest("combobox compiles header template", 1, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            $scope.selectedColors = [ "red", "green" ];
+
+            $scope.selectOptions = {
+                dataSource: [ "red", "green", "blue" ],
+                headerTemplate: "<div>{{text}}<div>",
+                valuePrimitive: true
+            };
+
+            $scope.text = "My text";
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-combo-box k-ng-model=selectedColors k-options=selectOptions></select></div>');
+    },
+
+    function() {
+        var header = QUnit.fixture.find("select").getKendoComboBox().header;
+        equal(header.text(), "My text");
+    });
+
+    ngTest("combobox compiles footer template", 1, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            $scope.selectedColors = [ "red", "green" ];
+
+            $scope.selectOptions = {
+                dataSource: [ "red", "green", "blue" ],
+                footerTemplate: "<div>{{text}}<div>",
+                valuePrimitive: true
+            };
+
+            $scope.text = "My text";
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-combo-box k-ng-model=selectedColors k-options=selectOptions></select></div>');
+    },
+
+    function() {
+        var widget = QUnit.fixture.find("select").getKendoComboBox();
+        var scope = widget.element.scope();
+
+        var footer = QUnit.fixture.find("select").getKendoComboBox().footer;
+        equal(footer.text(), "My text");
+    });
 })();

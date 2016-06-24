@@ -93,4 +93,46 @@
         equal(JSON.stringify(scope.selectedColors), JSON.stringify([ 'blue' ]));
     });
 
+    ngTest("autocomplete compiles header template", 1, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            $scope.selectedColors = [ "red", "green" ];
+
+            $scope.selectOptions = {
+                dataSource: [ "red", "green", "blue" ],
+                headerTemplate: "<div>{{text}}<div>",
+                valuePrimitive: true
+            };
+
+            $scope.text = "My text";
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><input kendo-autocomplete  k-ng-model=selectedColors k-options=selectOptions /></div>');
+    },
+
+    function() {
+        var header = QUnit.fixture.find("input").getKendoAutoComplete().header;
+        equal(header.text(), "My text");
+    });
+
+    ngTest("autocomplete compiles footer template", 1, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            $scope.selectOptions = {
+                dataSource: [ "red", "green", "blue" ],
+                footerTemplate: "<div>{{text}}<div>",
+                valuePrimitive: true
+            };
+
+            $scope.text = "My text";
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><input kendo-autocomplete  k-ng-model=selectedColors k-options=selectOptions /></div>');
+    },
+
+    function() {
+        var widget = QUnit.fixture.find("input").getKendoAutoComplete();
+        widget.search("red");
+
+        equal(widget.footer.text(), "My text");
+    });
+
 })();

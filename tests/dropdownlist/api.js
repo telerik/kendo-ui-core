@@ -1194,4 +1194,40 @@
 
         ok(!dropdownlist.hasOptionLabel());
     });
+
+    test("setOptions method updates footer template", 1, function() {
+        var dropdownlist = new DropDownList(input, { });
+
+        dropdownlist.setOptions({ footerTemplate: "footer" });
+
+        equal(dropdownlist.footer.html(), "footer");
+    });
+
+    test("setOptions method hides footer template", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            footerTemplate: "footer"
+        });
+
+        dropdownlist.setOptions({ footerTemplate: "" });
+
+        equal(dropdownlist.footer, null);
+    });
+
+    test("setOptions method updates header template", 1, function() {
+        var dropdownlist = new DropDownList(input, { });
+
+        dropdownlist.setOptions({ headerTemplate: "<div>header</div>" });
+
+        equal(dropdownlist.header.html(), "header");
+    });
+
+    test("setOptions method hides footer template", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            headerTemplate: "header"
+        });
+
+        dropdownlist.setOptions({ headerTemplate: "" });
+
+        equal(dropdownlist.header, null);
+    });
 })();
