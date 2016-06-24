@@ -219,10 +219,11 @@ The example below demonstrates a Kendo UI TabStrip widget in AngularJS with dela
 
 ### The ng-if Directive
 
-The ng-if directive (applicable to most ng-\* directives) operates directly on the origin HTML that is bound to and not on widget itself. When the Kendo UI widget has a more complex rendering, e.g. NumericTextBox,
-then the directive will show/hide the origin INPUT element and not the widget. This is expected due to the aforementioned specifics of the ng-\* directives.
+The `ng-if` directive, which is applicable to most `ng-\*` directives, operates directly on the origin HTML that is bound to and not on the widget itself. When the Kendo UI widget has a more complex rendering, such as the NumericTextBox, then the directive shows or hides the original `INPUT` element and not the widget. This is expected due to the aforementioned specifics of the `ng-\*` directives.
 
-> The general solution is to use a specific **k-ng-\** directive where available, e.g. k-ng-disabled.
+> **Important**
+>
+> The general solution is to use a specific **k-ng-\** directive where available&mdash;for example, `k-ng-disabled`.
 
 The example below demonstrates how to use a wrapping HTML element to hide/show Kendo UI Widget.
 
