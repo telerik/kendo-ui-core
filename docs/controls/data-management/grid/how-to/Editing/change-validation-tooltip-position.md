@@ -7,7 +7,7 @@ slug: howto_change_validation_message_position_grid
 
 # Change the Validation Message Position in Popup Edit Form
 
-By design, validation messages are tooltips that display over other page content. The example below shows how to change this behavior and display the validation messages at a specific position in the Grid's popup edit form.
+By design, validation messages inside the Grid are tooltips that display over other adjacent content. The example below shows how to change this behavior and display the validation messages at a specific position in the Grid's popup edit form.
 
 The approach relies on the following milestones:
 
