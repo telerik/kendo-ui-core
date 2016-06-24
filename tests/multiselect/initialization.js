@@ -137,7 +137,6 @@
         var footer = multiselect.footer;
 
         ok(footer);
-        ok(footer.hasClass("k-widget"));
         ok(footer.hasClass("k-footer"));
     });
 

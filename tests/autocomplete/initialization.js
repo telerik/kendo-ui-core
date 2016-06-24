@@ -174,7 +174,6 @@ test("render footer container", function() {
     var footer = autocomplete.footer;
 
     ok(footer);
-    ok(footer.hasClass("k-widget"));
     ok(footer.hasClass("k-footer"));
 });
 

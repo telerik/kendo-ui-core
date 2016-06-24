@@ -262,7 +262,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            this.footer = $('<div class="k-widget k-footer"></div>').appendTo(this.list);
+            this.footer = $('<div class="k-footer"></div>').appendTo(this.list);
             this.footerTemplate = typeof template !== "function" ? kendo.template(template) : template;
         },
 

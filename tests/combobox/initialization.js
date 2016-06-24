@@ -405,7 +405,6 @@ test("render footer container", function() {
     var footer = combobox.footer;
 
     ok(footer);
-    ok(footer.hasClass("k-widget"));
     ok(footer.hasClass("k-footer"));
 });
 
