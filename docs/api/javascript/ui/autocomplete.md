@@ -149,6 +149,19 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
     });
     </script>
 
+### clearButton `Boolean` *(default: true)*
+
+Unless this options is set to `false`, a button will appear when hovering the widget. Clicking that button will reset the widget's value and will trigger the change event.
+
+#### Example - disable the clear button
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+        clearButton: false
+    });
+    </script>
+
 ### dataTextField `String` *(default: null)*
 
 The field of the data item used when searching for suggestions.  This is the text that will be displayed in the list of matched results.

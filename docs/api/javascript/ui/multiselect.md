@@ -140,6 +140,22 @@ Controls whether to close the widget suggestion list on item selection.
     });
     </script>
 
+### clearButton `Boolean` *(default: true)*
+
+Unless this options is set to `false`, a button will appear when hovering the widget. Clicking that button will reset the widget's value and will trigger the change event.
+
+#### Example - disable the clear button
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+        clearButton: false
+    });
+    </script>
+
 ### dataSource `Object|Array|kendo.data.DataSource`
 
 The data source of the widget which is used to display a list of values. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)

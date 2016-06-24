@@ -173,6 +173,19 @@ Defines the field to be used to filter the data source. If not defined the [pare
     });
     </script>
 
+### clearButton `Boolean` *(default: true)*
+
+Unless this options is set to `false`, a button will appear when hovering the widget. Clicking that button will reset the widget's value and will trigger the change event.
+
+#### Example - disable the clear button
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+        clearButton: false
+    });
+    </script>
+
 ### dataSource `Object|Array|kendo.data.DataSource`
 
 The data source of the widget which is used to display a list of values. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
