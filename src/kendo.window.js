@@ -672,7 +672,7 @@ var __meta__ = { // jshint ignore:line
                 options = that.options,
                 showOptions = this._animationOptions("open"),
                 contentElement = wrapper.children(KWINDOWCONTENT),
-                overlay,
+                overlay, otherModalsVisible,
                 doc = $(document);
 
             if (!that.trigger(OPEN)) {
@@ -691,11 +691,12 @@ var __meta__ = { // jshint ignore:line
                 options.visible = true;
 
                 if (options.modal) {
-                    overlay = that._overlay(false);
+                    otherModalsVisible = !!that._modals().length;
+                    overlay = that._overlay(otherModalsVisible);
 
                     overlay.kendoStop(true, true);
 
-                    if (showOptions.duration && kendo.effects.Fade) {
+                    if (showOptions.duration && kendo.effects.Fade && !otherModalsVisible) {
                         var overlayFx = kendo.fx(overlay).fadeIn();
                         overlayFx.duration(showOptions.duration || 0);
                         overlayFx.endValue(0.5);
