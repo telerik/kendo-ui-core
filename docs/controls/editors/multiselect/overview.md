@@ -22,7 +22,7 @@ The Kendo UI MultiSelect widget can be initialized in three ways:
 
 The MultiSelect looks and operates consistently regardless of the initialization type you choose to apply.
 
-> **Important**  
+> **Important**
 > * As MultiSelect should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
 > * The widget copies any styles and CSS classes from the input element to the wrapper element and visible input.
 
@@ -190,6 +190,40 @@ The MultiSelect allows you to render a pop-up header. The example below demonstr
             });
         });
     </script>
+
+### Footer Templates
+
+The MultiSelect allows you to render a pop-up footer. The footer is re-rendered on every DataSource change. The context of the template is the widget itself.
+
+The example below demonstrates how to define a footer template.
+
+###### Example
+
+    <select id="multiselect" />
+    <!-- Template -->
+    <script id="footerTemplate" type="text/x-kendo-template">
+        Total <strong>#: instance.dataSource.total() #</strong> items found
+    </script>
+
+    <!-- MultiSelect initialization -->
+    <script>
+        $(document).ready(function() {
+            $("#multiselect").kendoMultiSelect({
+                headerTemplate: $("#headerTemplate").html(),
+                dataTextField: "ContactName",
+                dataValueField: "CustomerID",
+                dataSource: {
+                    transport: {
+                        read: {
+                            dataType: "jsonp",
+                            url: "http://demos.telerik.com/kendo-ui/service/Customers"
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
 
 ## Configuration
 

@@ -22,7 +22,7 @@ The Kendo UI ComboBox widget can be initialized in three ways:
 
 The ComboBox looks and operates consistently regardless of the initialization type you choose to apply.
 
-> **Important**  
+> **Important**
 > * As ComboBox should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
 > * The widget copies any styles and CSS classes from the input element to the wrapper element and visible input.
 
@@ -61,7 +61,7 @@ The ComboBox can be bound to local data arrays via the [DataSource component](/f
       });
     </script>
 
-#### Initialize the ComboBox by binding it to a remote data service   
+#### Initialize the ComboBox by binding it to a remote data service
 
 The ComboBox can be bound to remote data arrays via the [DataSource component](/framework/datasource/overview) - an abstraction for local and remote data. Remote data binding is appropriate for larger data sets, so that items are loaded on-demand, when displayed. The DataSource can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
@@ -140,6 +140,39 @@ The ComboBox allows you to render a pop-up header. The example below demonstrate
         $(document).ready(function() {
             $("#comboBox").kendoComboBox({
                 headerTemplate: $("#headerTemplate").html(),
+                dataTextField: "ContactName",
+                dataValueField: "CustomerID",
+                dataSource: {
+                    transport: {
+                        read: {
+                            dataType: "jsonp",
+                            url: "http://demos.telerik.com/kendo-ui/service/Customers"
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+### Footer Templates
+
+The ComboBox allows you to render a pop-up footer. The footer is re-rendered on every DataSource change. The context of the template is the widget itself.
+
+The example below demonstrates how to define a footer template.
+
+###### Example
+
+    <input id="comboBox" />
+    <!-- Template -->
+    <script id="footerTemplate" type="text/x-kendo-template">
+        Total <strong>#: instance.dataSource.total() #</strong> items found
+    </script>
+
+    <!-- ComboBox initialization -->
+    <script>
+        $(document).ready(function() {
+            $("#comboBox").kendoComboBox({
+                footerTemplate: $("#footerTemplate").html(),
                 dataTextField: "ContactName",
                 dataValueField: "CustomerID",
                 dataSource: {

@@ -194,6 +194,39 @@ The DropDownList allows you to render a pop-up header. The example below demonst
         });
     </script>
 
+### Footer Templates
+
+The DropDownList allows you to render a pop-up footer. The footer is re-rendered on every DataSource change. The context of the template is the widget itself.
+
+The example below demonstrates how to define a footer template.
+
+###### Example
+
+    <input id="dropdownlist" />
+    <!-- Template -->
+    <script id="footerTemplate" type="text/x-kendo-template">
+        Total <strong>#: instance.dataSource.total() #</strong> items found
+    </script>
+
+    <!-- DropDownList initialization -->
+    <script>
+        $(document).ready(function() {
+            $("#dropdownlist").kendoDropDownList({
+                footerTemplate: $("#footerTemplate").html(),
+                dataTextField: "ContactName",
+                dataValueField: "CustomerID",
+                dataSource: {
+                    transport: {
+                        read: {
+                            dataType: "jsonp",
+                            url: "http://demos.telerik.com/kendo-ui/service/Customers"
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
 ## Configuration
 
 ### Drop-Down List
