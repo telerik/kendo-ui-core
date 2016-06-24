@@ -77,8 +77,8 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "startswith": "Commence par",
     "contains": "Contient",
     "doesnotcontain": "Ne contient pas",
-    "isnull": "est nul",
-    "isnotnull": "c nul" ,
+    "isnull": "Est nul",
+    "isnotnull": "N’est pas nul" ,
     "isempty": "Est vide",
     "isnotempty": "N’est pas vide"
   },
