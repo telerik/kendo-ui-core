@@ -3007,7 +3007,7 @@ Every item from the array is wrapped in a [kendo.data.ObservableObject](/api/jav
 If the data source is grouped (via the [group](#configuration-group) option or the [group](#methods-group) method) and the [serverGrouping](#configuration-serverGrouping) is set to `true`
 the `data` method will return the group items.
 
-> The [schema.model](#configuration-schema.model) configuration will not be used to parse the set data items. The data should be parsed in advance.
+> The [schema.model](#configuration-schema.model) configuration will not be used to parse the set data items. The data should be parsed in advance and the values should be provided in the correct type - date values should be JavaScript Date objects, numeric values should be JavaScript numbers, etc.
 
 Compare with the [`view`](#methods-view) method, which will return the data items that correspond to the current page, filter, sort and group configuration.
 
