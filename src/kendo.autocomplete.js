@@ -162,7 +162,8 @@ var __meta__ = { // jshint ignore:line
             placeholder: "",
             animation: {},
             virtual: false,
-            value: null
+            value: null,
+            clearButton: true
         },
 
         _dataSource: function() {
@@ -711,7 +712,10 @@ var __meta__ = { // jshint ignore:line
             this._clear = $('<span unselectable="on" class="k-icon k-i-close" title="clear"></span>').attr({
                 "role": "button",
                 "tabIndex": -1
-            }).insertAfter(this.element);
+            });
+            if (this.options.clearButton) {
+                this._clear.insertAfter(this.element);
+            }
         },
 
         _toggleHover: function(e) {

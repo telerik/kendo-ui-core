@@ -976,6 +976,37 @@ test("calls hideBusy on dataSource transport error", 1, function() {
     equal(combobox.calls("_hideBusy"), 1);
 });
 
+    test("show clear button", 1, function() {
+        var combobox = new ComboBox(input, {
+            dataValueField: "id",
+            dataTextField: "name",
+            dataSource: [
+                { id: 1, name: "name1" },
+                { id: 2, name: "name2" },
+                { id: 3, name: "name3" }
+            ],
+            value: "2"
+        });
+
+        ok(combobox.wrapper.find(combobox._clear).length > 0);
+    });
+
+    test("hide clear button", 1, function() {
+        var combobox = new ComboBox(input, {
+            clearButton: false,
+            dataValueField: "id",
+            dataTextField: "name",
+            dataSource: [
+                { id: 1, name: "name1" },
+                { id: 2, name: "name2" },
+                { id: 3, name: "name3" }
+            ],
+            value: "2"
+        });
+
+        equal(combobox.wrapper.find(combobox._clear).length, 0);
+    });
+
     test("reset value when _clear is clicked", 1, function() {
         var combobox = new ComboBox(input, {
             dataValueField: "id",

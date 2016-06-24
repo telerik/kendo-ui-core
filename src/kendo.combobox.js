@@ -139,7 +139,8 @@ var __meta__ = { // jshint ignore:line
             virtual: false,
             template: null,
             groupTemplate: "#:data#",
-            fixedGroupTemplate: "#:data#"
+            fixedGroupTemplate: "#:data#",
+            clearButton: true
         },
 
         events:[
@@ -787,7 +788,10 @@ var __meta__ = { // jshint ignore:line
             this._clear = $('<span unselectable="on" class="k-icon k-i-close" title="clear"></span>').attr({
                 "role": "button",
                 "tabIndex": -1
-            }).insertAfter(this.input);
+            });
+            if (this.options.clearButton) {
+                this._clear.insertAfter(this.input);
+            }
         },
 
         _keydown: function(e) {

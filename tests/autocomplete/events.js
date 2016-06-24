@@ -367,4 +367,33 @@ test("AutoComplete filtering event can be prevented", 0, function() {
         autocomplete._clear.click();
         equal(autocomplete.value(), "");
     });
+
+    test("show clear button", 1, function() {
+        var autocomplete = new AutoComplete(input, {
+            dataTextField: "name",
+            dataSource: [
+                { id: 1, name: "name1" },
+                { id: 2, name: "name2" },
+                { id: 3, name: "name3" }
+            ],
+            value: "2"
+        });
+
+        ok(autocomplete.wrapper.find(autocomplete._clear).length > 0);
+    });
+
+    test("hide clear button", 1, function() {
+        var autocomplete = new AutoComplete(input, {
+            clearButton: false,
+            dataTextField: "name",
+            dataSource: [
+                { id: 1, name: "name1" },
+                { id: 2, name: "name2" },
+                { id: 3, name: "name3" }
+            ],
+            value: "2"
+        });
+
+        equal(autocomplete.wrapper.find(autocomplete._clear).length, 0);
+    });
 }());
