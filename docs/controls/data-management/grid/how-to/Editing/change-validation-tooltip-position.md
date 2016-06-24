@@ -1,19 +1,19 @@
 ---
 title: Change Validation Message Position
 page_title: Change Validation Message Position | Kendo UI Grid
-description: "Learn how to change the validation message position."
+description: "Learn how to change the validation message position in a popup edit form when working with the Kendo UI Grid."
 slug: howto_change_validation_message_position_grid
 ---
 
-# Change the Validation Message Position in Popup Edit Form
+# Change the Validation Message Position
 
-By design, validation messages inside the Grid are tooltips that display over other adjacent content. The example below shows how to change this behavior and display the validation messages at a specific position in the Grid's popup edit form.
+By design, validation messages inside the Grid are tooltips that display over other adjacent content. The example below shows how to change this behavior and display the validation messages at a specific position in the popup edit form of the Grid.
 
 The approach relies on the following milestones:
 
-* a [popup edit form template](/api/javascript/ui/grid#configuration-editable.template) is used
-* the validation messages are put in [placeholders](/controls/editors/validator/overview#customization-of-tooltip-position) that are wrapped in custom parents and positioned with the help of custom CSS styles
-* the [popup edit form width may need to be increased](/controls/data-management/grid/how-to/Editing/change-popup-edit-form-width-layout)
+* Usage of a [popup edit form template](/api/javascript/ui/grid#configuration-editable.template).
+* The validation messages are put in [placeholders]({% slug overview_kendoui_validator_widget %}#customization-of-tooltip-position) that are wrapped in custom parents and positioned with the help of custom CSS styles.
+* The [popup edit form width may need to be increased]({% slug howto_increase_popup_edit_formand_textbox_grid %})
 
 ###### Example
 
@@ -24,24 +24,24 @@ The approach relies on the following milestones:
   .k-edit-form-container {
     width: 500px;
   }
-  
+
   /* add side padding */
   .k-edit-form-container dl {
     padding: 0 1em;
   }
-  
+
   /* increase line height in accordance with validator messages' height */
   .k-edit-form-container dd {
     line-height: 3em;
   }
-  
+
   /* override absolute positioning styles of the validator messages */
   .validator-msg,
   .validator-msg .k-tooltip {
     position: static;
     display: inline-block;
   }
-  
+
   /* hide validator tooltip callouts */
   .validator-msg .k-tooltip .k-callout {
     display: none;
