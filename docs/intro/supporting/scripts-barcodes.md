@@ -8,7 +8,8 @@ position: 7
 
 # Script Files for Barcodes
 
-Below are listed the script files for Kendo UI Barcodes:
+Below are listed the script files for Kendo UI Barcodes widgets.&nbsp;&nbsp;
+
 | Widget | Script files | Comments |
 | :---   | :---         | :---     |
 | [Barcode](http://demos.telerik.com/kendo-ui/barcode/index) | jquery.js | |
@@ -17,14 +18,12 @@ Below are listed the script files for Kendo UI Barcodes:
 | | kendo.drawing.js | |
 | | kendo.dataviz.core.js | |
 | | kendo.dataviz.barcode.js | |
-
 | [QRCode](http://demos.telerik.com/kendo-ui/qrcode/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.color.js | |
 | | kendo.drawing.js | |
 | | kendo.dataviz.core.js | |
 | | kendo.dataviz.qrcode.js | |
-
 
 ## See Also
 
@@ -36,8 +35,8 @@ Articles listing the script files for other Kendo UI components:
 + [Script Files for Gauges]({% slug script_filesfor_gauges_widgets %})
 + [Script Files for Server-Side Wrappers]({% slug script_filesfor_serverside_wrappers %})
 + [Script Files for Diagrams and Maps]({% slug script_filesfor_diagramsandmaps_widgets %})
-+ [Script Files for Scheduling widgets]({% slug script_filesfor_scheduling_widgets %})
-+ [Script Files for Layout widgets]({% slug script_filesfor_layout_widgets %})
++ [Script Files for Scheduling]({% slug script_filesfor_scheduling_widgets %})
++ [Script Files for Layout]({% slug script_filesfor_layout_widgets %})
 + [Script Files for Navigation]({% slug script_filesfor_navigation_widgets %})
 + [Script Files for Interactivity and UX]({% slug script_filesfor_interactivityandux_widgets %})
 + [Script Files for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})

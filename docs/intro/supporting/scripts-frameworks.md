@@ -8,41 +8,35 @@ position: 15
 
 # Script Files for Tools, Frameworks and Utilities
 
-Below are listed the script files for the Kendo UI shared components providing behaviors, data access and other services:
+Below are listed the script files for the Kendo UI shared components providing behaviors, data access. and other services.&nbsp;&nbsp;
+
 | Widget | Script files | Comments |
 | :---   | :---         | :---     |
 | [AngularJS Directives](http://docs.telerik.com/kendo-ui/AngularJS/introduction) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.angular.js | |
-
 | [Angular 2](http://demos.telerik.com/kendo-ui/integration/angular2) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.angular2.js | |
-
 | [Core](https://github.com/telerik/kendo-ui-core) | jquery.js | |
 | | kendo.core.js | |
-
 | [Drawing API](http://demos.telerik.com/kendo-ui/drawing/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.color.js | |
 | | kendo.drawing.js | |
-
 | [Router](http://demos.telerik.com/kendo-ui/spa/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.router.js | |
-
 | [Touch](http://demos.telerik.com/kendo-ui/m/index#touchevents/mobile) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.touch.js | |
-
 | [View](http://demos.telerik.com/kendo-ui/m/index#mobile-view/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.binder.js | |
 | | kendo.fx.js | |
 | | kendo.view.js | |
-
 
 ## See Also
 
@@ -55,8 +49,8 @@ Articles listing the script files for other Kendo UI components:
 + [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})
 + [Script Files for Server-Side Wrappers]({% slug script_filesfor_serverside_wrappers %})
 + [Script Files for Diagrams and Maps]({% slug script_filesfor_diagramsandmaps_widgets %})
-+ [Script Files for Scheduling widgets]({% slug script_filesfor_scheduling_widgets %})
-+ [Script Files for Layout widgets]({% slug script_filesfor_layout_widgets %})
++ [Script Files for Scheduling]({% slug script_filesfor_scheduling_widgets %})
++ [Script Files for Layout]({% slug script_filesfor_layout_widgets %})
 + [Script Files for Navigation]({% slug script_filesfor_navigation_widgets %})
 + [Script Files for Interactivity and UX]({% slug script_filesfor_interactivityandux_widgets %})
 + [Script Files for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})

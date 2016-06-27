@@ -8,7 +8,8 @@ position: 6
 
 # Script Files for Gauges
 
-Below are listed the script files for the Kendo UI Gauges widgets:
+Below are listed the script files for the Kendo UI Gauges widgets.&nbsp;&nbsp;
+
 | Widget | Script files | Comments |
 | :---   | :---         | :---     |
 | [Gauge](http://demos.telerik.com/kendo-ui/linear-gauge/index) | jquery.js | |
@@ -18,7 +19,6 @@ Below are listed the script files for the Kendo UI Gauges widgets:
 | | kendo.dataviz.core.js | |
 | | kendo.dataviz.themes.js | |
 | | kendo.dataviz.gauge.js | |
-
 
 ## See Also
 
@@ -30,8 +30,8 @@ Articles listing the script files for other Kendo UI components:
 + [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})
 + [Script Files for Server-Side Wrappers]({% slug script_filesfor_serverside_wrappers %})
 + [Script Files for Diagrams and Maps]({% slug script_filesfor_diagramsandmaps_widgets %})
-+ [Script Files for Scheduling widgets]({% slug script_filesfor_scheduling_widgets %})
-+ [Script Files for Layout widgets]({% slug script_filesfor_layout_widgets %})
++ [Script Files for Scheduling]({% slug script_filesfor_scheduling_widgets %})
++ [Script Files for Layout]({% slug script_filesfor_layout_widgets %})
 + [Script Files for Navigation]({% slug script_filesfor_navigation_widgets %})
 + [Script Files for Interactivity and UX]({% slug script_filesfor_interactivityandux_widgets %})
 + [Script Files for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})

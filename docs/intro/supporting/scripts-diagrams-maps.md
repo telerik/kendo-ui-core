@@ -8,7 +8,8 @@ position: 9
 
 # Script Files for Diagrams and Maps
 
-Below are listed the script files for the Kendo UI Diagrams and Maps:
+Below are listed the script files for the Kendo UI Diagrams and Maps widgets.&nbsp;&nbsp;
+
 | Widget | Script files | Comments |
 | :---   | :---         | :---     |
 | [Diagram](http://demos.telerik.com/kendo-ui/diagram/index) | jquery.js | |
@@ -35,7 +36,6 @@ Below are listed the script files for the Kendo UI Diagrams and Maps:
 | | kendo.list.js | Editing feature |
 | | kendo.dropdownlist.js | Editing feature |
 | | kendo.dataviz.diagram.js | |
-
 | [Map](http://demos.telerik.com/kendo-ui/map/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
@@ -50,7 +50,6 @@ Below are listed the script files for the Kendo UI Diagrams and Maps:
 | | kendo.mobile.scroller.js | |
 | | kendo.dataviz.map.js | |
 
-
 ## See Also
 
 Articles listing the script files for other Kendo UI components:
@@ -61,8 +60,8 @@ Articles listing the script files for other Kendo UI components:
 + [Script Files for Gauges]({% slug script_filesfor_gauges_widgets %})
 + [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})
 + [Script Files for Server-Side Wrappers]({% slug script_filesfor_serverside_wrappers %})
-+ [Script Files for Scheduling widgets]({% slug script_filesfor_scheduling_widgets %})
-+ [Script Files for Layout widgets]({% slug script_filesfor_layout_widgets %})
++ [Script Files for Scheduling]({% slug script_filesfor_scheduling_widgets %})
++ [Script Files for Layout]({% slug script_filesfor_layout_widgets %})
 + [Script Files for Navigation]({% slug script_filesfor_navigation_widgets %})
 + [Script Files for Interactivity and UX]({% slug script_filesfor_interactivityandux_widgets %})
 + [Script Files for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})
