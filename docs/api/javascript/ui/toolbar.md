@@ -14,20 +14,20 @@ Represents the Kendo UI ToolBar. Inherits from [Widget](/api/javascript/ui/widge
 
 If `resizable` is set to `true` the widget will detect changes in the viewport width and hides the overflowing controls in the command overflow popup.
 
-> When set to `true`, the resizable configuration triggers `overflow: hidden;` CSS property. 
+> When set to `true`, the resizable configuration triggers `overflow: hidden;` CSS property.
 
 #### Example - Resizable and Non-Resizable ToolBar
 
     <div style="width: 350px; border: 1px solid #ccc; padding: 10px 10px 50px;">
-        
+
         <h5>Non-Resizable ToolBar</h5>
         <div id="toolbar-non-resizable"></div>
-        
+
         <h5>Resizable ToolBar</h5>
         <div id="toolbar-resizable"></div>
-        
+
     </div>
-    
+
     <script>
         $("#toolbar-non-resizable").kendoToolBar({
             resizable: false,
@@ -38,7 +38,7 @@ If `resizable` is set to `true` the widget will detect changes in the viewport w
                 { type: "button", text: "Button 4" }
             ]
         });
-        
+
         $("#toolbar-resizable").kendoToolBar({
             resizable: true,
             items: [
@@ -292,18 +292,19 @@ If set, the ToolBar will render an image with the specified URL in the button.
     <div id="toolbar"></div>
 
     <script>
+    var baseUrl = "http://demos.telerik.com/kendo-ui/content/shared/icons";
     $("#toolbar").kendoToolBar({
       items: [
         {
           type: "buttonGroup",
           buttons: [
-            { text: "foo", imageUrl: "foo.png" },
-            { text: "bar", imageUrl: "bar.png" },
-            { text: "baz", imageUrl: "baz.png" }
+            { text: "foo", imageUrl: "/sports/snowboarding.png" },
+            { text: "bar", imageUrl: "/sports/snowboarding.png" }
           ]
         }
       ]
     });
+    </script>
 
 ### items.buttons.selected `Boolean` *(default: false)*
 
@@ -611,11 +612,11 @@ If set, the ToolBar will render an image with the specified URL in the button.
     <div id="toolbar"></div>
 
     <script>
+        var baseUrl = "http://demos.telerik.com/kendo-ui/content/shared/icons";
         $("#toolbar").kendoToolBar({
           items: [
-          { type: "button", text: "foo", imageUrl: "foo.png" },
-          { type: "button", text: "bar", imageUrl: "bar.png" },
-          { type: "button", text: "baz", imageUrl: "baz.png" }
+              { type: "button", text: "foo", imageUrl: "/sports/snowboarding.png" },
+              { type: "button", text: "bar", imageUrl: "/sports/snowboarding.png" }
           ]
         });
     </script>
@@ -779,15 +780,15 @@ If set, the ToolBar will render an image with the specified URL in the menu butt
     <div id="toolbar"></div>
 
     <script>
+        var baseUrl = "http://demos.telerik.com/kendo-ui/content/shared/icons";
         $("#toolbar").kendoToolBar({
             items: [
             {
                 type: "splitButton",
                 text: "splitButton",
                 menuButtons: [
-                    { id: "foo", text: "Foo", imageUrl: "foo.png" },
-                    { id: "bar", text: "Bar", imageUrl: "bar.png" },
-                    { id: "baz", text: "Baz", imageUrl: "baz.png" }
+                    { id: "foo", text: "Foo", imageUrl: "/sports/snowboarding.png" },
+                    { id: "bar", text: "Bar", imageUrl: "/sports/snowboarding.png" }
                 ]
             }
             ]
@@ -1368,7 +1369,7 @@ A boolean flag that determines whether the button will be toggled or not.
             }
           ]
         });
-        
+
         var toolbar = $("#toolbar").data("kendoToolBar");
         toolbar.toggle("#foo", true); //select button with id: "foo"
         toolbar.toggle("#bar", true); //select button with id: "bar" (also deselects "#foo" as the buttons are from the same group
