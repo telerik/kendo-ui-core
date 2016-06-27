@@ -153,9 +153,9 @@
             ok(true);
         });
 
-        el.trigger($.Event("touchstart", { originalEvent: { changedTouches: [{ pageX: 1, pageY: 100, identifier: 1}] }}));
-        el.trigger($.Event("touchmove", { originalEvent: { changedTouches: [{ pageX: 1, pageY: 1, identifier: 1}] }}));
-        el.trigger($.Event("touchend", { originalEvent: { changedTouches: [{ pageX: 1, pageY: 1, identifier: 1}] }}));
+        triggerTouchEvent(el, "touchstart", { pageX: 1, pageY: 100, identifier: 1});
+        triggerTouchEvent(el, "touchmove", { pageX: 1, pageY: 1, identifier: 1});
+        triggerTouchEvent(el, "touchend", { pageX: 1, pageY: 1, identifier: 1});
 
         application.scroller().unbind("scroll");
     });
