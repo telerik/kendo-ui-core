@@ -79,6 +79,10 @@ When a Kendo UI widget is created as a web component from a custom HTML element,
 
 Event handlers can be set either using the attributes of the element or by attaching them after the initialization of the widget using the  [`bind` method](/api/javascript/ui/widget#methods-bind). Attributes should follow the `on-eventname` convention and point to a handler living in the global scope.
 
+> **Important**
+>
+> The Q3 2016 release introduced a special `init` event, triggered once the custom element is attached to the DOM.
+
 ### During Initialization
 
 The example below demonstrates how to subscribe to events during initialization.
@@ -110,6 +114,21 @@ The example below demonstrates how to subscribe to events after initialization.
     </script>
 ```
 
+### `init` event
+
+The example below demonstrates how to subscribe to `init` event.
+
+###### Example
+
+```html
+    <script>
+        function onInit(e){
+            alert(e.sender.value());
+        }
+    </script>
+    <kendo-numerictextbox on-init="onInit" value="42"></kendo-numerictextbox>
+```
+
 ## Set a DataSource
 
 DataSource can be specified as any other option through the attributes of the elements or using the `setDataSource` method after the widget has been initialized.
@@ -130,6 +149,11 @@ DataSource can be specified as any other option through the attributes of the el
 ## Browser Support
 
 Web Components work using certain features that older browsers do not support. It is recommended to use the [`webcomponents.js`](http://webcomponents.org/polyfills/) polyfill library where wider Web Components support is required.
+
+
+> **Important**
+>
+> Since Internet Explorer does does not support custom elements at this point and relies on polyfills, the widget's instance might not be available on the DOMContentLoaded or jQuery's document.ready events. The polyfill's [WebComponentsReady](http://webcomponents.org/polyfills/custom-elements/) or the widget's `init` events can be used instead.
 
 ## See Also
 
