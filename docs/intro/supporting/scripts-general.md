@@ -8,7 +8,8 @@ position: 3
 
 # Script Files for Data Management Widgets
 
-Below are listed the script files for Kendo UI desktop widgets for mobile-ready websites and applications:
+Below are listed the script files for the Kendo UI desktop widgets for mobile-ready websites and applications.&nbsp;&nbsp;
+
 | Widget | Script files | Comments |
 | :---   | :---         | :---     |
 | [Grid](http://demos.telerik.com/kendo-ui/grid/index) | jquery.js | |
@@ -81,7 +82,6 @@ Below are listed the script files for Kendo UI desktop widgets for mobile-ready 
 | | kendo.pdf.js | PDF export feature |
 | | kendo.progressbar.js | PDF export feature |
 | | kendo.grid.js | |
-
 | [ListView](http://demos.telerik.com/kendo-ui/listview/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
@@ -96,7 +96,6 @@ Below are listed the script files for Kendo UI desktop widgets for mobile-ready 
 | | kendo.userevents.js | Selection feature |
 | | kendo.selectable.js | Selection feature |
 | | kendo.listview.js | |
-
 | [PivotGrid](http://demos.telerik.com/kendo-ui/pivotgrid/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.dom.js | |
@@ -127,7 +126,6 @@ Below are listed the script files for Kendo UI desktop widgets for mobile-ready 
 | | kendo.fx.js | Mobile scroller feature |
 | | kendo.mobile.scroller.js | Mobile scroller feature |
 | | kendo.pivotgrid.js | |
-
 | [Spreadsheet](http://demos.telerik.com/kendo-ui/spreadsheet/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
@@ -154,7 +152,6 @@ Below are listed the script files for Kendo UI desktop widgets for mobile-ready 
 | | kendo.drawing.js | |
 | | kendo.pdf.js | |
 | | kendo.spreadsheet.js | |
-
 | [TreeList](http://demos.telerik.com/kendo-ui/treelist/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.dom.js | |
@@ -194,7 +191,6 @@ Below are listed the script files for Kendo UI desktop widgets for mobile-ready 
 | | kendo.pdf.js | PDF export feature |
 | | kendo.treelist.js | |
 
-
 ## See Also
 
 Articles listing the script files for other Kendo UI components:
@@ -205,8 +201,8 @@ Articles listing the script files for other Kendo UI components:
 + [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})
 + [Script Files for Server-Side Wrappers]({% slug script_filesfor_serverside_wrappers %})
 + [Script Files for Diagrams and Maps]({% slug script_filesfor_diagramsandmaps_widgets %})
-+ [Script Files for Scheduling widgets]({% slug script_filesfor_scheduling_widgets %})
-+ [Script Files for Layout widgets]({% slug script_filesfor_layout_widgets %})
++ [Script Files for Scheduling]({% slug script_filesfor_scheduling_widgets %})
++ [Script Files for Layout]({% slug script_filesfor_layout_widgets %})
 + [Script Files for Navigation]({% slug script_filesfor_navigation_widgets %})
 + [Script Files for Interactivity and UX]({% slug script_filesfor_interactivityandux_widgets %})
 + [Script Files for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})

@@ -8,7 +8,8 @@ position: 8
 
 # Script Files for Server-Side Wrappers
 
-Below are listed the script files for Kendo UI supplementary scripts for integration with server-side technologies:
+Below are listed the script files for the Kendo UI supplementary scripts for integration with server-side technologies.&nbsp;&nbsp;
+
 | Widget | Script files | Comments |
 | :---   | :---         | :---     |
 | [ASP.NET MVC](http://docs.telerik.com/kendo-ui/aspnet-mvc/introduction) | jquery.js | |
@@ -22,7 +23,6 @@ Below are listed the script files for Kendo UI supplementary scripts for integra
 | | kendo.validator.js | |
 | | kendo.aspnetmvc.js | |
 
-
 ## See Also
 
 Articles listing the script files for other Kendo UI components:
@@ -33,8 +33,8 @@ Articles listing the script files for other Kendo UI components:
 + [Script Files for Gauges]({% slug script_filesfor_gauges_widgets %})
 + [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})
 + [Script Files for Diagrams and Maps]({% slug script_filesfor_diagramsandmaps_widgets %})
-+ [Script Files for Scheduling widgets]({% slug script_filesfor_scheduling_widgets %})
-+ [Script Files for Layout widgets]({% slug script_filesfor_layout_widgets %})
++ [Script Files for Scheduling]({% slug script_filesfor_scheduling_widgets %})
++ [Script Files for Layout]({% slug script_filesfor_layout_widgets %})
 + [Script Files for Navigation]({% slug script_filesfor_navigation_widgets %})
 + [Script Files for Interactivity and UX]({% slug script_filesfor_interactivityandux_widgets %})
 + [Script Files for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})

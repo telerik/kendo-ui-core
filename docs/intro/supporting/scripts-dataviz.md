@@ -8,7 +8,8 @@ position: 5
 
 # Script Files for Charts
 
-Below are listed the script files for the Kendo UI Charts widgets:
+Below are listed the script files for the Kendo UI Charts widgets.&nbsp;&nbsp;
+
 | Widget | Script files | Comments |
 | :---   | :---         | :---     |
 | [Chart](http://demos.telerik.com/kendo-ui/chart-api/index) | jquery.js | |
@@ -25,7 +26,6 @@ Below are listed the script files for the Kendo UI Charts widgets:
 | | kendo.dataviz.chart.funnel.js | Funnel chart feature |
 | | kendo.pdf.js | PDF export feature |
 | | kendo.dataviz.chart.js | |
-
 | [Sparkline](http://demos.telerik.com/kendo-ui/sparklines/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
@@ -36,7 +36,6 @@ Below are listed the script files for the Kendo UI Charts widgets:
 | | kendo.dataviz.themes.js | |
 | | kendo.dataviz.chart.js | |
 | | kendo.dataviz.sparkline.js | |
-
 | [StockChart](http://demos.telerik.com/kendo-ui/financial/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
@@ -47,7 +46,6 @@ Below are listed the script files for the Kendo UI Charts widgets:
 | | kendo.dataviz.themes.js | |
 | | kendo.dataviz.chart.js | |
 | | kendo.dataviz.stockchart.js | |
-
 | [TreeMap](http://demos.telerik.com/kendo-ui/treemap/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
@@ -57,7 +55,6 @@ Below are listed the script files for the Kendo UI Charts widgets:
 | | kendo.dataviz.core.js | |
 | | kendo.dataviz.themes.js | |
 | | kendo.dataviz.treeMap.js | |
-
 
 ## See Also
 
@@ -69,8 +66,8 @@ Articles listing the script files for other Kendo UI components:
 + [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})
 + [Script Files for Server-Side Wrappers]({% slug script_filesfor_serverside_wrappers %})
 + [Script Files for Diagrams and Maps]({% slug script_filesfor_diagramsandmaps_widgets %})
-+ [Script Files for Scheduling widgets]({% slug script_filesfor_scheduling_widgets %})
-+ [Script Files for Layout widgets]({% slug script_filesfor_layout_widgets %})
++ [Script Files for Scheduling]({% slug script_filesfor_scheduling_widgets %})
++ [Script Files for Layout]({% slug script_filesfor_layout_widgets %})
 + [Script Files for Navigation]({% slug script_filesfor_navigation_widgets %})
 + [Script Files for Interactivity and UX]({% slug script_filesfor_interactivityandux_widgets %})
 + [Script Files for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})

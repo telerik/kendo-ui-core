@@ -1,20 +1,20 @@
 ---
-title: Script Files for Scheduling widgets
-page_title: Script Files for Scheduling widgets | Kendo UI Getting Started
-description: "Listing of required script files for the Kendo UI Scheduling widgets"
+title: Script Files for Scheduling
+page_title: Script Files for Scheduling | Kendo UI Getting Started
+description: "Listing of required script files for the Kendo UI Scheduling"
 slug: script_filesfor_scheduling_widgets
 position: 10
 ---
 
-# Script Files for Scheduling widgets
+# Script Files for Scheduling
 
-Below are listed the script files for the Kendo UI Scheduling widgets:
+Below are listed the script files for the Kendo UI Scheduling widgets.&nbsp;&nbsp;
+
 | Widget | Script files | Comments |
 | :---   | :---         | :---     |
 | [Calendar](http://demos.telerik.com/kendo-ui/calendar/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.calendar.js | |
-
 | [Gantt](http://demos.telerik.com/kendo-ui/gantt/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
@@ -38,7 +38,6 @@ Below are listed the script files for the Kendo UI Scheduling widgets:
 | | kendo.gantt.timeline.js | |
 | | kendo.grid.js | |
 | | kendo.gantt.js | |
-
 | [Scheduler](http://demos.telerik.com/kendo-ui/scheduler/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
@@ -78,7 +77,6 @@ Below are listed the script files for the Kendo UI Scheduling widgets:
 | | kendo.timezones.js | Timezones feature |
 | | kendo.scheduler.js | |
 
-
 ## See Also
 
 Articles listing the script files for other Kendo UI components:
@@ -90,7 +88,7 @@ Articles listing the script files for other Kendo UI components:
 + [Script Files for Barcodes]({% slug script_filesfor_barcodes_widgets %})
 + [Script Files for Server-Side Wrappers]({% slug script_filesfor_serverside_wrappers %})
 + [Script Files for Diagrams and Maps]({% slug script_filesfor_diagramsandmaps_widgets %})
-+ [Script Files for Layout widgets]({% slug script_filesfor_layout_widgets %})
++ [Script Files for Layout]({% slug script_filesfor_layout_widgets %})
 + [Script Files for Navigation]({% slug script_filesfor_navigation_widgets %})
 + [Script Files for Interactivity and UX]({% slug script_filesfor_interactivityandux_widgets %})
 + [Script Files for Hybrid UI]({% slug script_filesfor_hybridui_widgets %})
