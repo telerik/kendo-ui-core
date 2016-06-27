@@ -67,8 +67,6 @@ For more information on handling errors in such scenarios, refer to the section 
 
 The `update` configuration setting of the DataSource should define a function that handles the updated data items, received as a function argument. When `batch` is disabled, as it is by default, and only one data item can be updated at a time, the updated data item is received as an object in `e.data`. If `batch` is enabled and multiple data items can be updated, they are received as an array of objects in `e.data.models`. Again, the `success` or `error` method of the function argument must be executed at the end.
 
-If the Grid is bound to an [`ObservableArray`](/api/javascript/data/observablearray), there is no need to manipulate the array manually. Only `e.success()` or `e.error()` should be called.
-
 ###### Example
 
     var dataSource = new kendo.data.DataSource({
@@ -106,8 +104,6 @@ The `create` function should perform a similar routine as the `update` one with 
 * The newly created data items have no ID, so they must be added by the function script or returned by the remote service.
 * The newly created data items must be returned in the `success` method with their IDs assigned. Otherwise, the DataSource instance is going to operate with incorrect data and subsequent data operations can fail.
 
-If the Grid is bound to an [`ObservableArray`](/api/javascript/data/observablearray), there is no need to add the new item to the array manually. Only `e.success()` or `e.error()` should be called.
-
 ###### Example
 
 <!-- exit list -->
@@ -135,8 +131,6 @@ Also, check the notes on IDs in the above [Update (Local)]({% slug cruddataopera
 ### Destroy (Local)
 
 The `destroy` function receives the items to be deleted in `e.data`, similar to `create` and `update`. The function should remove the provided items from the original datasource and return `success` or `error`.
-
-If the Grid is bound to an [`ObservableArray`](/api/javascript/data/observablearray), there is no need to remove the item from the array manually. Only `e.success()` or `e.error()` should be called.
 
 ###### Example
 
@@ -180,7 +174,7 @@ If any of the transport actions (read, update, create, destroy) fails, then info
 
 The complete example below uses the information above to demonstrate CRUD operations with simple Products data. `original datasource` signifies the `sampleData` variable, which is used to populate the Grid initially. All data operations are persisted in this variable, so that it can be used or submitted somewhere else.
 
-If the Grid is bound to an [`ObservableArray`](/api/javascript/data/observablearray), there is no need to add, edit or remove items from the array manually. Only `e.success()` or `e.error()` should be called. When adding an item, it still needs an ID to be assigned.
+It is not recommended to use an [`ObservableArray`](/api/javascript/data/observablearray) instead of a plain JavaScript array in the example below. The Kendo UI DataSource will wrap the provided plain array and transform it to a collection of [`ObservableObjects`](/api/javascript/data/observableobject) automatically.
 
 ###### Example
 
