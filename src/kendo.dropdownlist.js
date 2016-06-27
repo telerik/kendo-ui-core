@@ -239,7 +239,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _allowOpening: function() {
-            return this.hasOptionLabel() || this.filterInput || this.dataSource.view().length;
+            return this.hasOptionLabel() || this.filterInput || Select.fn._allowOpening.call(this);
         },
 
         toggle: function(toggle) {

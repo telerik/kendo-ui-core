@@ -330,6 +330,16 @@
         equal(template, "#= data.toUpperCase() #");
     });
 
+    test("dropdownlist supports setting a no data template", function() {
+        var dropdownlist = new DropDownList(input, {
+            noDataTemplate: "no data"
+        });
+
+        var template = dropdownlist.listView.options.noDataTemplate;
+
+        equal(template, "no data");
+    });
+
     test("defining header template", function() {
         var dropdownlist = new DropDownList(input, {
             template: "#= data.toUpperCase() #",
@@ -1409,5 +1419,43 @@
         }).data("kendoDropDownList");
 
         equal(dropdownlist.value(), "");
+    });
+
+    test("DropDownList opens the popup if optionLabel is defined", function() {
+        var dropdownlist = new DropDownList(input, {
+            optionLabel: "Select"
+        });
+
+        dropdownlist.wrapper.click();
+
+        ok(dropdownlist.popup.visible());
+    });
+
+    test("DropDownList opens the popup if filtering is enabled", function() {
+        var dropdownlist = new DropDownList(input, {
+            filter: "contains"
+        });
+
+        dropdownlist.wrapper.click();
+
+        ok(dropdownlist.popup.visible());
+    });
+
+    test("DropDownList opens the popup if noDataTemplate", function() {
+        var dropdownlist = new DropDownList(input, {
+            noDataTemplate: "no data"
+        });
+
+        dropdownlist.wrapper.click();
+
+        ok(dropdownlist.popup.visible());
+    });
+
+    test("DropDownList doesn't open the popup if no data", function() {
+        var dropdownlist = new DropDownList(input, { });
+
+        dropdownlist.wrapper.click();
+
+        ok(!dropdownlist.popup.visible());
     });
 })();

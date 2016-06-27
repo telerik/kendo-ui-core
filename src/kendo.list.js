@@ -101,6 +101,7 @@ var __meta__ = { // jshint ignore:line
 
             this._header();
             this._footer();
+
             this._updateFooter();
         },
 
@@ -147,6 +148,7 @@ var __meta__ = { // jshint ignore:line
                 dataTextField: currentOptions.dataTextField,
                 groupTemplate: currentOptions.groupTemplate,
                 fixedGroupTemplate: currentOptions.fixedGroupTemplate,
+                noDataTemplate: currentOptions.noDataTemplate,
                 template: currentOptions.template
             }, options, virtual);
 
@@ -298,6 +300,10 @@ var __meta__ = { // jshint ignore:line
             this.list.prepend(header);
 
             this._angularElement(this.header, "compile");
+        },
+
+        _allowOpening: function() {
+            return this.options.noDataTemplate || this.dataSource.flatView().length;
         },
 
         _initValue: function() {
@@ -1370,7 +1376,8 @@ var __meta__ = { // jshint ignore:line
             selectable: true,
             template: null,
             groupTemplate: null,
-            fixedGroupTemplate: null
+            fixedGroupTemplate: null,
+            noDataTemplate: null
         },
 
         events: [
@@ -1910,11 +1917,12 @@ var __meta__ = { // jshint ignore:line
 
         _templates: function() {
             var template;
+            var options = this.options;
             var templates = {
-                template: this.options.template,
-                groupTemplate: this.options.groupTemplate,
-                fixedGroupTemplate: this.options.fixedGroupTemplate,
-                noDataTemplate: this.options.noDataTemplate
+                template: options.template,
+                groupTemplate: options.groupTemplate,
+                fixedGroupTemplate: options.fixedGroupTemplate,
+                noDataTemplate: options.noDataTemplate
             };
 
             for (var key in templates) {
