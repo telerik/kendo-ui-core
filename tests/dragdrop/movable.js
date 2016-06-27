@@ -1,9 +1,5 @@
 (function() {
 
-    function triggerTouchEvent(type, e) {
-        element.trigger($.Event(type, { originalEvent: { changedTouches: [e] }}));
-    }
-
     function elementLocation() {
         var values = $(element).css("transform").match(/[\d.]+/g);
         return {
