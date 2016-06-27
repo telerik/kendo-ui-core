@@ -55,6 +55,19 @@ asyncTest("popup should close if input is empty", 1, function() {
     input.val("").press(8/*backspace*/);
 });
 
+test("popup is opened if noDataTemplate is defined", 1, function() {
+    var autocomplete = new AutoComplete(input, {
+        animation: false,
+        dataTextField: "name",
+        dataSource: [{ name: "foo" }, { name: "bar" }],
+        noDataTemplate: "no data"
+    });
+
+    autocomplete.search("fake");
+
+    ok(autocomplete.popup.visible());
+});
+
 test("search method supports case sensitive filtering", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["FOO", "foo", "bar"],
