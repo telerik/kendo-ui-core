@@ -1349,6 +1349,7 @@ var __meta__ = { // jshint ignore:line
 
             this._getter();
             this._templates();
+            this._noData();
 
             this.setDataSource(this.options.dataSource);
 
@@ -1418,6 +1419,7 @@ var __meta__ = { // jshint ignore:line
 
             this._getter();
             this._templates();
+            this._noData();
             this._render();
         },
 
@@ -1869,6 +1871,26 @@ var __meta__ = { // jshint ignore:line
             return candidate;
         },
 
+        _noData: function() {
+            var noData = $(this.noData);
+            var template = this.templates.noDataTemplate;
+
+            this.angular("cleanup", function() { return { elements: noData }; });
+            kendo.destroy(noData);
+            noData.remove();
+
+            if (!template) {
+                this.noData = null;
+                return;
+            }
+
+            this.noData = this.content.after('<div class="k-nodata" style="display:none"></div>').next();
+
+            this.noData.html(template({}));
+
+            this.angular("compile", function() { return { elements: noData }; });
+        },
+
         _template: function() {
             var that = this;
             var options = that.options;
@@ -1891,7 +1913,8 @@ var __meta__ = { // jshint ignore:line
             var templates = {
                 template: this.options.template,
                 groupTemplate: this.options.groupTemplate,
-                fixedGroupTemplate: this.options.fixedGroupTemplate
+                fixedGroupTemplate: this.options.fixedGroupTemplate,
+                noDataTemplate: this.options.noDataTemplate
             };
 
             for (var key in templates) {
@@ -2092,11 +2115,13 @@ var __meta__ = { // jshint ignore:line
             var result;
 
             that.trigger("dataBinding");
-            this._angularItems("cleanup");
+            that._angularItems("cleanup");
 
             that._fixedHeader();
 
             that._render();
+
+            $(that.noData).toggle(!that._view.length);
 
             that.bound(true);
 

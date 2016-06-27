@@ -60,6 +60,14 @@
         ok(list.templates.fixedGroupTemplate);
     });
 
+    test("StaticList builds a noDataTemplate", function() {
+        var list = new StaticList(element, {
+            noDataTemplate: "test"
+        });
+
+        ok(list.templates.noDataTemplate);
+    });
+
     test("StaticList appends fixed header element before content element", function() {
         var list = new StaticList(element, {
             fixedGroupTemplate: "test"
@@ -185,5 +193,15 @@
         equal(list.dataSource.view().length, 0);
         equal(list.select()[0], 0);
         equal(list.value()[0], 1);
+    });
+
+    test("render nodata container", function() {
+        var list = new StaticList(element, {
+            noDataTemplate: "no data"
+        });
+
+        ok(list.noData);
+        ok(list.noData.hasClass("k-nodata"));
+        equal(list.noData.text(), list.options.noDataTemplate);
     });
 })();
