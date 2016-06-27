@@ -825,6 +825,28 @@
         });
     });
 
+    test("setOptions renders noDataTemplate", 3, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            noDataTemplate: "no data"
+        }));
+
+        ok(virtualList.noData);
+        ok(virtualList.noData.hasClass("k-nodata"));
+        equal(virtualList.noData.text(), "no data");
+    });
+
+    test("setOptions removes noDataTemplate", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            noDataTemplate: "no data"
+        }));
+
+        virtualList.setOptions({
+            noDataTemplate: null
+        });
+
+        ok(!virtualList.noData);
+    });
+
     test("bound returns false if the list is not bound yet", 1, function() {
         var virtualList = new VirtualList(container, virtualSettings);
         asyncDataSource.read();
