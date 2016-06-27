@@ -398,7 +398,7 @@ test("defining header template", function() {
 });
 
 test("render footer container", function() {
-    var combobox = new ComboBox(input, {
+    combobox = new ComboBox(input, {
         footerTemplate: "footer"
     });
 
@@ -409,7 +409,7 @@ test("render footer container", function() {
 });
 
 test("render footer template", function() {
-    var combobox = new ComboBox(input, {
+    combobox = new ComboBox(input, {
         autoBind: true,
         footerTemplate: "footer"
     });
@@ -420,7 +420,7 @@ test("render footer template", function() {
 });
 
 test("compile footer template with the combobox instance", function() {
-    var combobox = new ComboBox(input, {
+    combobox = new ComboBox(input, {
         autoBind: true,
         footerTemplate: "#: instance.dataSource.total() #"
     });
@@ -431,7 +431,7 @@ test("compile footer template with the combobox instance", function() {
 });
 
 test("update footer template on dataBound", function() {
-    var combobox = new ComboBox(input, {
+    combobox = new ComboBox(input, {
         autoBind: true,
         footerTemplate: "#: instance.dataSource.total() #"
     });
@@ -1047,6 +1047,24 @@ asyncTest("ComboBox calls placeholder method when delayed binding is used", 1, f
 
         equal(combobox.calls("_placeholder"), 1);
     });
+});
+
+test("ComboBox opens the popup if noDataTemplate", function() {
+    combobox = new ComboBox(input, {
+        noDataTemplate: "no data"
+    });
+
+    combobox.wrapper.find(".k-icon:last").click();
+
+    ok(combobox.popup.visible());
+});
+
+test("ComboBox doesn't open the popup if no data", function() {
+    combobox = new ComboBox(input, { });
+
+    combobox.wrapper.find(".k-icon:last").click();
+
+    ok(!combobox.popup.visible());
 });
 
 })();
