@@ -381,6 +381,15 @@ asyncTest("value method selects item that exists only in unfiltered source (asyn
         ok(!multiselect.popup.visible());
     });
 
+    test("MultiSelect opens popup if noDataTemplate", function() {
+        popuplateSelect();
+        var multiselect = new MultiSelect(select, { noDataTemplate: "no data" });
+
+        multiselect.open();
+
+        ok(multiselect.popup.visible());
+    });
+
     test("readonly method makes input element readonly", function() {
         var multiselect = new MultiSelect(select);
 
