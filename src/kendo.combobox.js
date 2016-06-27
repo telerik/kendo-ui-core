@@ -485,7 +485,7 @@ var __meta__ = { // jshint ignore:line
 
             this.selectedIndex = idx;
 
-            if (idx === -1) {
+            if (idx === -1 && !dataItem) {
                 value = text = this.input[0].value;
                 this.listView.focus(-1);
             } else {
