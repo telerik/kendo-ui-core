@@ -12587,7 +12587,7 @@ The rotation angle of the markers.
 
 ### series.outliers `Object`
 
-The chart series outliers configuration.
+The chart series outliers configuration. Applies to **mild** outliers. Also check [`series.extremes`](#configuration-series.extremes).
 
 #### Example - set the chart series outliers
 
@@ -12789,7 +12789,7 @@ The rotation angle of the outliers.
 
 ### series.extremes `Object`
 
-The chart series extremes configuration.
+The chart series extremes configuration. Applies to **extreme** outliers. Also check [`series.outliers`](#configuration-series.outliers).
 
 #### Example - set the chart series extremes
 
