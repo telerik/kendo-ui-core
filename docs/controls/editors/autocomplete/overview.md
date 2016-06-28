@@ -242,6 +242,40 @@ The example below demonstrates how to define a footer template.
         });
     </script>
 
+### No Data Templates
+
+The AutoComplete widget displays `noDataTemplate` in the popup when data source is empty.
+
+The example below demonstrates how to define a noDataTemplate template.
+
+> **Important** When the noDataTemplate option is defined, the widget will always open the popup element.
+
+###### Example
+
+    <input id="autoComplete" />
+    <!-- Template -->
+    <script id="noDataTemplate" type="text/x-kendo-template">
+        <strong>No Data!</strong>
+    </script>
+
+    <!-- AutoComplete initialization -->
+    <script>
+        $(document).ready(function() {
+            $("#autoComplete").kendoAutoComplete({
+                noDataTemplate: $("#noDataTemplate").html(),
+                dataTextField: "ContactName",
+                dataSource: {
+                    transport: {
+                        read: {
+                            dataType: "jsonp",
+                            url: "http://demos.telerik.com/kendo-ui/service/Customers"
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
 ## See Also
 
 Other articles on Kendo UI AutoComplete:

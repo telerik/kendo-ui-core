@@ -458,6 +458,27 @@ A zero value means that a request will be made as soon as the user focuses the w
     });
     </script>
 
+### noDataTemplate `String|Function` *(default: "No results found.")*
+
+Specifies a static HTML content, which will be displayed if no results are found or the underlying data source is empty. The popup will open when 'noDataTemplate' is defined.
+
+> **Important** Widget does not pass a model to the noData template. Use this option only with static HTML.
+
+#### Example - specify headerTemplate as a string
+
+    <select id="multiselect"></select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      noDataTemplate: 'No Data!'
+    });
+    </script>
+
 ### placeholder `String`*(default: "")*
 
 The hint displayed by the widget when it is empty. Not set by default.

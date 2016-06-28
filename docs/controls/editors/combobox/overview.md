@@ -187,6 +187,41 @@ The example below demonstrates how to define a footer template.
         });
     </script>
 
+### No Data Templates
+
+The ComboBox widget displays `noDataTemplate` in the popup when data source is empty.
+
+The example below demonstrates how to define a noDataTemplate template.
+
+> **Important** When the noDataTemplate option is defined, the widget will always open the popup element.
+
+###### Example
+
+    <input id="comboBox" />
+    <!-- Template -->
+    <script id="noDataTemplate" type="text/x-kendo-template">
+        <strong>No Data!</strong>
+    </script>
+
+    <!-- ComboBox initialization -->
+    <script>
+        $(document).ready(function() {
+            $("#comboBox").kendoComboBox({
+                noDataTemplate: $("#noDataTemplate").html(),
+                dataTextField: "ContactName",
+                dataValueField: "CustomerID",
+                dataSource: {
+                    transport: {
+                        read: {
+                            dataType: "jsonp",
+                            url: "http://demos.telerik.com/kendo-ui/service/Customers"
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
 ## Configuration
 
 ### Drop-Down List
