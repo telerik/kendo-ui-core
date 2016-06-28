@@ -1,23 +1,23 @@
 ---
-title: Persist Focused Grid Cell
-page_title:  Persist Focused Grid Cell | Kendo UI Grid
-description: "Learn how to persist the focused Kendo UI Grid cell after rebind."
+title: Persist Focused Grid Cells After Rebind
+page_title: Persist Focused Grid Cells After Rebind | Kendo UI Grid
+description: "Learn how to persist a focused Kendo UI Grid cell after rebind."
 slug: howto_persist_focused_grid_cell_grid
 ---
 
-# Persist Focused Grid Cell After Rebind
+# Persist Focused Grid Cells After Rebind
 
-The example below shows how to persist the focused Grid cell after rebind. Usage of in-cell editing and the built-in keyboard navigation is implied, as well as [autoSync:true](/api/javascript/data/datasource#configuration-autoSync) for the Kendo UI Grid [DataSource instance](/api/javascript/data/datasource).
+The example below demonstrates how to persist a focused Grid cell after rebind. The example implies the usage of in-cell editing, the built-in keyboard navigation, and the [`autoSync:true`](/api/javascript/data/datasource#configuration-autoSync) configuration for the Kendo UI Grid [DataSource instance](/api/javascript/data/datasource).
 
 The functionality relies on the following milestones:
 
-* [`navigatable`](/api/javascript/ui/grid#configuration-navigatable) is set to `true`;
-* [`editable`](/api/javascript/ui/grid#configuration-editable) is set to `true`, or [`editable.mode`](/api/javascript/ui/grid#configuration-editable.mode) is set to `"incell"`;
-* the [`dataBinding`](/api/javascript/ui/grid#events-dataBinding) event handler of the Grid is used to obtain the [`current`](/api/javascript/ui/grid#methods-current) Grid cell, and its corresponding row and cell indexes;
-* the saved row and cell index are applied via the [`current()`](/api/javascript/ui/grid#methods-current) method in the [`dataBound`](/api/javascript/ui/grid#events-dataBound) event handler;
-* the Grid [`table`](/api/javascript/ui/grid#fields-table) can be focused explicitly if the user has clicked on the "Save Changes" button - this requires a flag to be set in the [`saveChanges`](/api/javascript/ui/grid#events-saveChanges) event handler;
+* The [`navigatable`](/api/javascript/ui/grid#configuration-navigatable) option is set to `true`.
+* The [`editable`](/api/javascript/ui/grid#configuration-editable) option is set to `true`, or the [`editable.mode`](/api/javascript/ui/grid#configuration-editable.mode) option is set to `"incell"`.
+* The [`dataBinding`](/api/javascript/ui/grid#events-dataBinding) event handler of the Grid is used to obtain the [`current`](/api/javascript/ui/grid#methods-current) Grid cell and its corresponding row and cell indexes.
+* The saved row and cell indexes are applied through the [`current()`](/api/javascript/ui/grid#methods-current) method in the [`dataBound`](/api/javascript/ui/grid#events-dataBound) event handler.
+* The [`table`](/api/javascript/ui/grid#fields-table) option of the Grid can be focused explicitly if the user has clicked on the **Save Changes** button&mdash;this requires you to set a flag in the [`saveChanges`](/api/javascript/ui/grid#events-saveChanges) event handler.
 
-Generally, it is uncommon to enable [autoSync](/api/javascript/data/datasource#configuration-autoSync) for in-cell editing, as this will greatly increase the amount of update-related remote requests. Nevertheless, it is possible to use such an approach, if required.
+Generally, it is uncommon to enable the [`autoSync`](/api/javascript/data/datasource#configuration-autoSync) option for the in-cell editing, as this will greatly increase the amount of update-related remote requests. Nevertheless, it is possible that you use such an approach if required.
 
 ###### Example
 
@@ -99,7 +99,7 @@ Generally, it is uncommon to enable [autoSync](/api/javascript/data/datasource#c
         if (!isNaN(cellIndex)) {
           e.sender.current(e.sender.tbody.children().eq(rowIndex).children().eq(cellIndex));
           rowIndex = cellIndex = null;
-          
+
           // The code below is needed only when the user clicks on the "Save Changes" button.
           // Otherwise, focusing the table explicitly and unconditionally can steal the page focus.
           if (saveButtonClicked) {
