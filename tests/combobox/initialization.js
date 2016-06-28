@@ -1060,7 +1060,9 @@ test("ComboBox opens the popup if noDataTemplate", function() {
 });
 
 test("ComboBox doesn't open the popup if no data", function() {
-    combobox = new ComboBox(input, { });
+    combobox = new ComboBox(input, {
+        noDataTemplate: ""
+    });
 
     combobox.wrapper.find(".k-icon:last").click();
 

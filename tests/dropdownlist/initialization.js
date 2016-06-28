@@ -1452,7 +1452,9 @@
     });
 
     test("DropDownList doesn't open the popup if no data", function() {
-        var dropdownlist = new DropDownList(input, { });
+        var dropdownlist = new DropDownList(input, {
+            noDataTemplate: ""
+        });
 
         dropdownlist.wrapper.click();
 
