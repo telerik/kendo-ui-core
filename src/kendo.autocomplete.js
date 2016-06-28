@@ -445,7 +445,7 @@ var __meta__ = { // jshint ignore:line
 
             if (that._open) {
                 that._open = false;
-                action = length ? "open" : "close";
+                action = that._allowOpening() ? "open" : "close";
 
                 if (that._typingTimeout && !isActive) {
                     action = "close";

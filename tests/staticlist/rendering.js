@@ -581,4 +581,62 @@
 
         deepEqual(list.value(), ["item1"]);
     });
+
+    //no data template
+    test("hides noData template if any data", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "a" },
+                    { name: "item3", type: "b" }
+                ]
+            },
+            noDataTemplate: "no data",
+            template: '#:data.name#'
+        });
+
+        list.dataSource.read();
+
+        ok(!list.noData.is(":visible"));
+    });
+
+    test("shows noData template if no data", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [ ]
+            },
+            noDataTemplate: "no data",
+            template: '#:data.name#'
+        });
+
+        list.dataSource.read();
+
+        ok(list.noData.is(":visible"));
+    });
+
+    test("hdies noData template if widget is bound on subsequent call", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [ ]
+            },
+            noDataTemplate: "no data",
+            template: '#:data.name#'
+        });
+
+        list.dataSource.read();
+
+        ok(list.noData.is(":visible"));
+
+        list.dataSource.data([
+            { name: "item1", type: "a" },
+            { name: "item2", type: "a" },
+            { name: "item3", type: "b" }
+        ]);
+
+        ok(!list.noData.is(":visible"));
+    });
 })();

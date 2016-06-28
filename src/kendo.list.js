@@ -89,7 +89,8 @@ var __meta__ = { // jshint ignore:line
         options: {
             valuePrimitive: false,
             footerTemplate: "",
-            headerTemplate: ""
+            headerTemplate: "",
+            noDataTemplate: "No results found."
         },
 
         setOptions: function(options) {
@@ -101,6 +102,7 @@ var __meta__ = { // jshint ignore:line
 
             this._header();
             this._footer();
+
             this._updateFooter();
         },
 
@@ -147,6 +149,7 @@ var __meta__ = { // jshint ignore:line
                 dataTextField: currentOptions.dataTextField,
                 groupTemplate: currentOptions.groupTemplate,
                 fixedGroupTemplate: currentOptions.fixedGroupTemplate,
+                noDataTemplate: currentOptions.noDataTemplate,
                 template: currentOptions.template
             }, options, virtual);
 
@@ -298,6 +301,10 @@ var __meta__ = { // jshint ignore:line
             this.list.prepend(header);
 
             this._angularElement(this.header, "compile");
+        },
+
+        _allowOpening: function() {
+            return this.options.noDataTemplate || this.dataSource.flatView().length;
         },
 
         _initValue: function() {
@@ -1349,6 +1356,7 @@ var __meta__ = { // jshint ignore:line
 
             this._getter();
             this._templates();
+            this._noData();
 
             this.setDataSource(this.options.dataSource);
 
@@ -1369,7 +1377,8 @@ var __meta__ = { // jshint ignore:line
             selectable: true,
             template: null,
             groupTemplate: null,
-            fixedGroupTemplate: null
+            fixedGroupTemplate: null,
+            noDataTemplate: null
         },
 
         events: [
@@ -1418,6 +1427,7 @@ var __meta__ = { // jshint ignore:line
 
             this._getter();
             this._templates();
+            this._noData();
             this._render();
         },
 
@@ -1869,6 +1879,26 @@ var __meta__ = { // jshint ignore:line
             return candidate;
         },
 
+        _noData: function() {
+            var noData = $(this.noData);
+            var template = this.templates.noDataTemplate;
+
+            this.angular("cleanup", function() { return { elements: noData }; });
+            kendo.destroy(noData);
+            noData.remove();
+
+            if (!template) {
+                this.noData = null;
+                return;
+            }
+
+            this.noData = this.content.after('<div class="k-nodata" style="display:none"></div>').next();
+
+            this.noData.html(template({}));
+
+            this.angular("compile", function() { return { elements: noData }; });
+        },
+
         _template: function() {
             var that = this;
             var options = that.options;
@@ -1888,10 +1918,12 @@ var __meta__ = { // jshint ignore:line
 
         _templates: function() {
             var template;
+            var options = this.options;
             var templates = {
-                template: this.options.template,
-                groupTemplate: this.options.groupTemplate,
-                fixedGroupTemplate: this.options.fixedGroupTemplate
+                template: options.template,
+                groupTemplate: options.groupTemplate,
+                fixedGroupTemplate: options.fixedGroupTemplate,
+                noDataTemplate: options.noDataTemplate
             };
 
             for (var key in templates) {
@@ -2092,11 +2124,13 @@ var __meta__ = { // jshint ignore:line
             var result;
 
             that.trigger("dataBinding");
-            this._angularItems("cleanup");
+            that._angularItems("cleanup");
 
             that._fixedHeader();
 
             that._render();
+
+            $(that.noData).toggle(!that._view.length);
 
             that.bound(true);
 

@@ -252,6 +252,9 @@ var __meta__ = { // jshint ignore:line
             that._promisesList = [];
             that._optionID = kendo.guid();
 
+            that._templates();
+            that._noData();
+
             that.setDataSource(options.dataSource);
 
             that.content.on("scroll" + VIRTUAL_LIST_NS, kendo.throttle(function() {
@@ -279,6 +282,7 @@ var __meta__ = { // jshint ignore:line
             placeholderTemplate: "loading...",
             groupTemplate: "#:data#",
             fixedGroupTemplate: "fixed header template",
+            noDataTemplate: null,
             valueMapper: null
         },
 
@@ -300,6 +304,8 @@ var __meta__ = { // jshint ignore:line
                 this._selectable();
             }
 
+            this._templates();
+            this._noData();
             this.refresh();
         },
 
@@ -406,6 +412,8 @@ var __meta__ = { // jshint ignore:line
 
                 that._triggerListBound();
             }
+
+            $(that.noData).toggle(!that.dataSource.flatView().length);
 
             if (isItemChange || action === "remove") {
                 result = mapChangedItems(that._selectedDataItems, e.items);
@@ -935,17 +943,38 @@ var __meta__ = { // jshint ignore:line
             return position;
         },
 
+        _noData: function() {
+            var noData = $(this.noData);
+
+            this.angular("cleanup", function() { return { elements: noData }; });
+            kendo.destroy(noData);
+            noData.remove();
+
+            if (!this.options.noDataTemplate) {
+                this.noData = null;
+                return;
+            }
+
+            this.noData = this.content.after('<div class="k-nodata" style="display:none"></div>').next();
+
+            this.noData.html(this.templates.noDataTemplate({}));
+
+            this.angular("compile", function() { return { elements: noData }; });
+        },
+
         _templates: function() {
+            var options = this.options;
             var templates = {
-                template: this.options.template,
-                placeholderTemplate: this.options.placeholderTemplate,
-                groupTemplate: this.options.groupTemplate,
-                fixedGroupTemplate: this.options.fixedGroupTemplate
+                template: options.template,
+                placeholderTemplate: options.placeholderTemplate,
+                groupTemplate: options.groupTemplate,
+                fixedGroupTemplate: options.fixedGroupTemplate,
+                noDataTemplate: options.noDataTemplate
             };
 
             for (var key in templates) {
                 if (typeof templates[key] !== "function") {
-                    templates[key] = kendo.template(templates[key]);
+                    templates[key] = kendo.template(templates[key] || "");
                 }
             }
 
@@ -1002,7 +1031,6 @@ var __meta__ = { // jshint ignore:line
                 that.itemCount = dataSource.total();
             }
 
-            that._templates();
             that._items = that._generateItems(that.element[0], that.itemCount);
 
             that._setHeight(options.itemHeight * dataSource.total());

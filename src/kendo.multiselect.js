@@ -455,7 +455,7 @@ var __meta__ = { // jshint ignore:line
                 that.listView.skipUpdate(true);
 
                 that._filterSource();
-            } else if (that._allowSelection()) {
+            } else if (that._allowOpening()) {
                 that.popup.open();
                 that._focusItem();
             }
@@ -1006,6 +1006,10 @@ var __meta__ = { // jshint ignore:line
                     that.search(value);
                 }
             }, that.options.delay);
+        },
+
+        _allowOpening: function() {
+            return this._allowSelection() && List.fn._allowOpening.call(this);
         },
 
         _allowSelection: function() {

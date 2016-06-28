@@ -281,7 +281,7 @@ var __meta__ = { // jshint ignore:line
                 that._open = true;
                 that._state = STATE_REBIND;
                 that._filterSource();
-            } else {
+            } else if (that._allowOpening()) {
                 that.popup.open();
                 that._focusItem();
             }
