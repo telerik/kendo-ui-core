@@ -544,6 +544,8 @@ var __meta__ = { // jshint ignore:line
         },
 
         mapValueToDataItem: function(dataItems) {
+            var removed, added;
+
             if (dataItems === undefined || dataItems === null) {
                 dataItems = [];
             } else {
@@ -553,7 +555,23 @@ var __meta__ = { // jshint ignore:line
             if (!dataItems.length) {
                 this.select([-1]);
             } else {
+                removed = $.map(this._selectedDataItems, function(item, index) {
+                    return { index: index, dataItem: item };
+                });
+
+                added = $.map(dataItems, function(item, index) {
+                    return { index: index, dataItem: item };
+                });
+
                 this._selectedDataItems = dataItems;
+
+                this._selectedIndexes = [];
+
+                for (var i = 0; i < this._selectedDataItems.length; i++) {
+                    this._selectedIndexes.push(undefined);
+                }
+
+                this._triggerChange(removed, added);
 
                 if (this._valueDeferred) {
                     this._valueDeferred.resolve();
@@ -1424,15 +1442,15 @@ var __meta__ = { // jshint ignore:line
                 selectedIndex,
                 dataItem,
                 selectedIndexes = this._selectedIndexes,
+                selectedDataItems = this._selectedDataItems,
                 position = 0,
                 selectable = this.options.selectable,
                 removedindexesCounter = 0,
-                item;
+                item, match;
 
             indices = indices.slice();
 
             if (selectable === true || !indices.length) { //deselect everything
-
                 for (var idx = 0; idx < selectedIndexes.length; idx++) {
                     if (selectedIndexes[idx] !== undefined) {
                         this._getElementByIndex(selectedIndexes[idx]).removeClass(SELECTED);
@@ -1451,30 +1469,65 @@ var __meta__ = { // jshint ignore:line
             } else if (selectable === "multiple") {
                 for (var i = 0; i < indices.length; i++) {
                     position = $.inArray(indices[i], selectedIndexes);
-                    selectedIndex = selectedIndexes[position];
 
-                    if (selectedIndex !== undefined) {
-                        item = this._getElementByIndex(selectedIndex);
+                    if (position === -1 && this._view[indices[i]]) {
+                        dataItem = this._view[indices[i]].item;
 
-                        if (!item.hasClass("k-state-selected")) {
-                            continue;
+                        if (dataItem) {
+                            for (var j = 0; j < selectedDataItems.length; j++) {
+                                match = isPrimitive(dataItem) ? selectedDataItems[j] === dataItem: this._valueGetter(selectedDataItems[j]) === this._valueGetter(dataItem);
+                                if (match) {
+                                    position = j;
+                                    item = this._getElementByIndex(indices[i]);
+
+                                    if (!item.hasClass("k-state-selected")) {
+                                        continue;
+                                    }
+
+                                    item.removeClass(SELECTED);
+                                    this._values.splice(position, 1);
+                                    this._selectedIndexes.splice(position, 1);
+                                    this._selectedDataItems.splice(position, 1);
+
+                                    indices.splice(i, 1);
+
+                                    removed.push({
+                                        index: undefined,
+                                        position: position + removedindexesCounter,
+                                        dataItem: dataItem
+                                    });
+
+                                    removedindexesCounter++;
+                                    i--;
+                                }
+                            }
                         }
+                    } else {
+                        selectedIndex = selectedIndexes[position];
 
-                        item.removeClass(SELECTED);
-                        this._values.splice(position, 1);
-                        this._selectedIndexes.splice(position, 1);
-                        dataItem = this._selectedDataItems.splice(position, 1)[0];
+                        if (selectedIndex !== undefined) {
+                            item = this._getElementByIndex(selectedIndex);
 
-                        indices.splice(i, 1);
+                            if (!item.hasClass("k-state-selected")) {
+                                continue;
+                            }
 
-                        removed.push({
-                            index: selectedIndex,
-                            position: position + removedindexesCounter,
-                            dataItem: dataItem
-                        });
+                            item.removeClass(SELECTED);
+                            this._values.splice(position, 1);
+                            this._selectedIndexes.splice(position, 1);
+                            dataItem = this._selectedDataItems.splice(position, 1)[0];
 
-                        removedindexesCounter++;
-                        i--;
+                            indices.splice(i, 1);
+
+                            removed.push({
+                                index: selectedIndex,
+                                position: position + removedindexesCounter,
+                                dataItem: dataItem
+                            });
+
+                            removedindexesCounter++;
+                            i--;
+                        }
                     }
                 }
             }

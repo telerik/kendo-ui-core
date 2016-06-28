@@ -147,7 +147,7 @@
         });
     });
 
-    asyncTest("selectedIndexes are not set", 1, function() {
+    asyncTest("selectedIndexes are undefined", 2, function() {
         $.extend(virtualSettings, {
             valueMapper: function(o) {
                 o.success({
@@ -162,9 +162,67 @@
         asyncDataSource.read().done(function() {
             virtualList.value(37).done(function() {
                 start();
-                ok(!virtualList.select().length);
+                equal(virtualList.select().length, 1);
+                equal(virtualList.select()[0], undefined);
+            });
+        });
+    });
+/*
+    asyncTest("deselects and already resolved dataItem (multiple selection)", 4, function() {
+        $.extend(virtualSettings, {
+            valueMapper: function(o) {
+                o.success({
+                    value: o.value,
+                    text: "Item " + o.value
+                });
+            },
+            mapValueTo: "dataItem",
+            selectable: "multiple",
+        });
+
+        var virtualList = new VirtualList(container, virtualSettings);
+        asyncDataSource.read().done(function() {
+            virtualList.value([37, 60]).done(function() {
+                virtualList.bind("change", function() {
+                    start();
+                    equal(this.selectedDataItems().length, 1);
+                    equal(this.selectedDataItems()[0].value, 37);
+                    equal(this.select().length, 1);
+                    equal(this.select()[0], undefined);
+                });
+                virtualList.select(60);
             });
         });
     });
 
+    asyncTest("reports correct removed items (multiple selection)", 6, function() {
+        $.extend(virtualSettings, {
+            valueMapper: function(o) {
+                o.success({
+                    value: o.value,
+                    text: "Item " + o.value
+                });
+            },
+            mapValueTo: "dataItem",
+            selectable: "multiple"
+        });
+
+        var virtualList = new VirtualList(container, virtualSettings);
+        asyncDataSource.read().done(function() {
+            virtualList.value([37, 60]).done(function() {
+                virtualList.open();
+                virtualList.bind("change", function() {
+                start();
+                equal(this.selectedDataItems().length, 3);
+                equal(this.selectedDataItems()[2].value, 3);
+                equal(this.select().length, 3);
+                equal(this.select()[0], undefined);
+                equal(this.select()[1], undefined);
+                equal(this.select()[2], undefined);
+                })
+                virtualList.select(3);
+            });
+        });
+    });
+*/
 })();
