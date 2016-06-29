@@ -414,7 +414,7 @@ var __meta__ = { // jshint ignore:line
                 if (that._typingTimeout && !isActive) {
                     that.popup.close();
                 } else {
-                    that.toggle(!!data.length);
+                    that.toggle(that._allowOpening());
                 }
 
                 that._typingTimeout = null;
