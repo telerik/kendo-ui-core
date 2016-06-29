@@ -8,7 +8,9 @@ position: 1
 
 # ComboBox Overview
 
-The [Kendo UI ComboBox widget](http://demos.telerik.com/kendo-ui/combobox/index) displays a list of values and allows single selection from that list. You are able to enter custom values by using a keyboard input. If you want to restrict the user input, you can use [Kendo UI DropDownList widget](http://demos.telerik.com/kendo-ui/dropdownlist/index). The ComboBox represents a richer version of the `<select>` element and provides support for local and remote data binding, item templates, and configurable options for controlling the list behavior.
+The [Kendo UI ComboBox widget](http://demos.telerik.com/kendo-ui/combobox/index) displays a list of values and allows for a single selection from that list. It enables the user to enter custom values through the keyboard. The ComboBox represents a richer version of the `<select>` element and provides support for local and remote data binding, item templates, and configurable options for controlling the list behavior.
+
+To restrict the user input, use the [Kendo UI DropDownList widget](http://demos.telerik.com/kendo-ui/dropdownlist/index).
 
 ## Getting Started
 
@@ -26,7 +28,11 @@ The ComboBox looks and operates consistently regardless of the initialization ty
 > * As ComboBox should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
 > * The widget copies any styles and CSS classes from the input element to the wrapper element and visible input.
 
-#### Initialize the ComboBox from an existing <select> element with defined data items
+**Use the `<option>` tag of an existing `<select>` element**
+
+The example below demonstrates how to initialize the ComboBox from an existing `<select>` element with defined data items.
+
+###### Example
 
     <select id="comboBox">
         <option>Item 1</option>
@@ -40,9 +46,9 @@ The ComboBox looks and operates consistently regardless of the initialization ty
         });
     </script>
 
-#### Initialize the ComboBox by binding it to a local data array
+**Bind the ComboBox to a local data array**
 
-The ComboBox can be bound to local data arrays via the [DataSource component](/framework/datasource/overview) - an abstraction for local and remote data. Local arrays are appropriate for limited value options.
+The ComboBox can be bound to local data arrays through the [DataSource component](/framework/datasource/overview)&mdash;an abstraction for local and remote data. Local arrays are appropriate for limited value options.
 
 ###### Example
 
@@ -61,9 +67,9 @@ The ComboBox can be bound to local data arrays via the [DataSource component](/f
       });
     </script>
 
-#### Initialize the ComboBox by binding it to a remote data service
+**Bind the ComboBox to a remote data service**
 
-The ComboBox can be bound to remote data arrays via the [DataSource component](/framework/datasource/overview) - an abstraction for local and remote data. Remote data binding is appropriate for larger data sets, so that items are loaded on-demand, when displayed. The DataSource can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
+The ComboBox can be bound to remote data arrays through the [DataSource component](/framework/datasource/overview)&mdash;an abstraction for local and remote data. Remote data binding is appropriate for larger data sets, so that items are loaded on demand when displayed. The DataSource can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
 ###### Example
 
@@ -187,13 +193,15 @@ The example below demonstrates how to define a footer template.
         });
     </script>
 
-### No Data Templates
+### No-Data Templates
 
-The ComboBox widget displays `noDataTemplate` in the popup when data source is empty.
+The ComboBox widget displays `noDataTemplate` in the popup when the data source is empty.
 
-The example below demonstrates how to define a noDataTemplate template.
+The example below demonstrates how to define a `noDataTemplate` template.
 
-> **Important** When the noDataTemplate option is defined, the widget will always open the popup element.
+> **Important**
+>
+> When the `noDataTemplate` option is defined, the widget will always open the popup element.
 
 ###### Example
 
@@ -226,7 +234,7 @@ The example below demonstrates how to define a noDataTemplate template.
 
 ### Drop-Down List
 
-You can customize the width of a drop-down list and change its dimensions by using the jQuery `width()` method.
+To customize the width of a drop-down list and change its dimensions, use the jQuery `width()` method.
 
 ###### Example
 
@@ -241,7 +249,7 @@ You can customize the width of a drop-down list and change its dimensions by usi
 
 ### Support for label Elements
 
-Because of its complex rendering, focusing the widget by using a `label` element requires additional implementation. For more information about how to do it, check [this Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
+Because of its complex rendering, the focusing of the widget by using a `label` element requires additional implementation. For more information on how to do it, refer to [this Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
 
 ### Input Removal
 
@@ -261,33 +269,27 @@ You can refer an existing ComboBox widget via [jQuery.data()](http://api.jquery.
 
 ## See Also
 
-Other articles on Kendo UI ComboBox:
+Other articles on the Kendo UI ComboBox:
 
 * [Grouping Functionality]({% slug grouping_kendoui_combobox_widget %})
 * [Virtualization]({% slug virtualization_kendoui_combobox_widget %})
 * [Cascading ComboBoxes]({% slug cascading_kendoui_combobox_widget %})
 * [Server Filtering]({% slug server_filtering_kendoui_combobox_widget %})
 * [Troubleshooting]({% slug troubleshooting_common_issues_combobox_kendoui %})
-* [How to Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
-* [How to Configure Deferred Value Binding]({% slug howto_configure_deffered_value_binding_combobox %})
-* [How to Declaratively Initialize ComboBox with Templates]({% slug howto_declaratively_initialize_with_templates_combobox %})
-* [How to Clear Filter on Open]({% slug howto_clear_filter_open_combobox %})
-* [How to Detect When All Widgets Are Bound]({% slug howto_detect_when_widgets_bound_combobox %})
 * [How to Bypass Boundary Detection]({% slug howto_bypass_boudary_detection_combobox %})
-* [How to Disable Child Cascading ComboBoxes]({% slug howto_disable_child_cascading_combobox %})
 * [How to Expand Background of Long List Items]({% slug howto_expand_background_longlist_items_combobox %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the ComboBox Widget](/aspnet-mvc/helpers/combobox/overview)
 * [Overview of the ComboBox JSP Tag]({% slug overview_combobox_uiforjsp %})
 * [Overview of the ComboBox PHP Class](/php/widgets/combobox/overview)
 * [ComboBox JavaScript API Reference](/api/javascript/ui/combobox)
 
-Articles on Kendo UI DropDownList:
+Articles on the Kendo UI DropDownList:
 
 * [Overview of the DropDown Widget]({% slug overview_kendoui_dropdownlist_widget %})
 * [Cascading DropDownLists]({% slug cascading_kendoui_dropdownlist_widget %})
 * [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
 
-Articles on Kendo UI MultiSelect:
+Articles on the Kendo UI MultiSelect:
 
 * [Overview of the MultiSelect Widget]({% slug overview_kendoui_multiselect_widget %})
 * [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)

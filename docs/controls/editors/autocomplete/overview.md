@@ -14,7 +14,9 @@ The [Kendo UI AutoComplete widget](http://demos.telerik.com/kendo-ui/autocomplet
 
 ### Initialize the AutoComplete
 
-Initialize the AutoComplete widget by using a jQuery selector:
+Initialize the AutoComplete widget by using a jQuery selector.
+
+###### Example
 
     <input id="autoComplete" />
 
@@ -23,7 +25,10 @@ Initialize the AutoComplete widget by using a jQuery selector:
     });
 
 > **Important**
+>
 > The widget copies any styles and CSS classes from the input element to the wrapper element.
+
+###### Example
 
     <input id="autoComplete" class="myClass" />
 
@@ -42,13 +47,13 @@ There are two primary ways to provide AutoComplete suggestions:
 1.  From a local data array
 2.  From a remote data service
 
-Locally defined values are best for small, fixed sets of suggestions. Remote suggestions must be used for larger data sets. When used with the `DataSource` component, filtering large remote data services can be pushed to the server as well, maximizing client-side performance.
+Locally defined values are best for small, fixed sets of suggestions. Remote suggestions must be used for larger data sets. When used with the `DataSource` component, the filtering of large remote data services can be pushed to the server as well, which maximizes the client-side performance.
 
 #### Local Data Array
 
-To configure and provide AutoComplete suggestions locally, you can either pass an array directly to its constructor or you can set the `dataSource` property to a local array.
+To configure and provide AutoComplete suggestions locally, either pass an array directly to its constructor, or set the `dataSource` property to a local array.
 
-You can directly initialize a local data array in `constructor` as demonstrated in the example below.
+To directly initialize a local data array in `constructor`, follow the example below.
 
 ###### Example
 
@@ -58,7 +63,7 @@ You can directly initialize a local data array in `constructor` as demonstrated 
         $("#autoComplete").kendoAutoComplete(["Item1", "Item2", "Item3"]);
     </script>
 
-You can bind the widget to a local data array by using the `dataSource` property as demonstrated int he example below.
+To bind the widget to a local data array by using the `dataSource` property, follow the example below.
 
 ###### Example
 
@@ -72,9 +77,9 @@ You can bind the widget to a local data array by using the `dataSource` property
 
 #### Remote Data Service
 
-The easiest way to bind an AutoComplete to a remote data service is to use the `DataSource` component - an abstraction for local and remote data. `DataSource` can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
+The easiest way to bind an AutoComplete to a remote data service is to use the DataSource component&mdash;an abstraction for local and remote data. The DataSource can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
-You can bind the widget to a remote data service by using OData by means of the `DataSource` component as demonstrated in the example below.
+To bind the widget to a remote data service by using OData through the DataSource component, follow the example below.
 
 ###### Example
 
@@ -91,7 +96,7 @@ You can bind the widget to a remote data service by using OData by means of the 
         });
     });
 
-You can bind the widget to a JSONP service by using Kendo UI `DataSource` as demonstrated in the example below.
+To bind the widget to a JSONP service by using the Kendo UI DataSource, follow the example below.
 
 ###### Example
 
@@ -125,7 +130,7 @@ You can bind the widget to a JSONP service by using Kendo UI `DataSource` as dem
 
 ### Drop-Down List
 
-You can customize the width of a drop-down list and change its dimensions by using the jQuery width() method.
+To customize the width of a drop-down list and change its dimensions by using the jQuery `width()` method, follow the example below.
 
 ###### Example
 
@@ -144,7 +149,7 @@ The AutoComplete enables you to remove the values from the input area of the wid
 
 ## Templates
 
-The AutoComplete widget uses Kendo UI templates to enable control over how an item and pop-up header is rendered. For detailed description of the capabilities and syntax of the templates, please refer to the [documentation](/framework/templates/overview).
+The AutoComplete widget uses Kendo UI templates to enable control over the way an item and a pop-up header is rendered. For more information on the capabilities and syntax of the templates, refer to the [documentation]({% slug overview_kendoui_templatescomponent %}).
 
 ### Item Templates
 
@@ -242,13 +247,15 @@ The example below demonstrates how to define a footer template.
         });
     </script>
 
-### No Data Templates
+### No-Data Templates
 
-The AutoComplete widget displays `noDataTemplate` in the popup when data source is empty.
+The AutoComplete widget displays `noDataTemplate` in the popup when the data source is empty.
 
-The example below demonstrates how to define a noDataTemplate template.
+The example below demonstrates how to define a `noDataTemplate` template.
 
-> **Important** When the noDataTemplate option is defined, the widget will always open the popup element.
+> **Important**
+>
+> When the `noDataTemplate` option is defined, the widget will always open the popup element.
 
 ###### Example
 
@@ -278,15 +285,12 @@ The example below demonstrates how to define a noDataTemplate template.
 
 ## See Also
 
-Other articles on Kendo UI AutoComplete:
+Other articles on the Kendo UI AutoComplete:
 
 * [Grouping Functionality]({% slug grouping_kendoui_autocomplete_widget %})
 * [Virtualization]({% slug virtualization_kendoui_autocomplete_widget %})
 * [How to Use Custom AngularJS Template]({% slug howto_use_custom_angularjs_templates_autocomplete %})
-* [How to Show a No results found Message]({% slug howto_add_customized_templates_autocomplete %})
-* [How to Dynamically Change DataSource Based on User Selections]({% slug howto_change_datasource_dynamically_autocomplete %})
-* [How to Highlight Matched Values]({% slug howto_highlight_matched_values_autocomplete %})
-* [How to Restrict Other Users]({% slug howto_restrict_user_input_autocomplete %})
+* [How to Show a No Records Found Message]({% slug howto_add_customized_templates_autocomplete %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the AutoComplete Widget](/aspnet-mvc/helpers/autocomplete/overview)
 * [Overview of the AutoComplete JSP Tag]({% slug overview_autocomplete_uiforjsp %})
 * [Overview of the AutoComplete PHP Class](/php/widgets/autocomplete/overview)
