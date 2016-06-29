@@ -8,11 +8,11 @@ position: 3
 
 # Virtualization
 
-The virtualization functionality described in the related help article for [Kendo UI ComboBox widget](/web/combobox/virtualization) is applicable to Kendo UI MultiSelect.
+The virtualization functionality described in the related help article for the [Kendo UI ComboBox widget](/web/combobox/virtualization) is applicable to the Kendo UI MultiSelect.
 
 ## See Also
 
-Other articles on Kendo UI MultiSelect:
+Other articles on the Kendo UI MultiSelect:
 
 * [Overview of the MultiSelect Widget]({% slug overview_kendoui_multiselect_widget %})
 * [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
