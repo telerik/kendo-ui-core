@@ -755,6 +755,35 @@ If the `dataSource` option is an existing [kendo.data.GanttDataSource](/api/java
     });
     </script>
 
+### date `Date`
+
+If set to some date the timeline of the currently selected view is scrolled to start from this date.
+
+#### Example
+    <div id="gantt1"></div>
+    <script>
+        $("#gantt1").kendoGantt({
+            dataSource: [{
+                id: 1,
+                orderId: 0,
+                parentId: null,
+                title: "Task1",
+                start: new Date("2016/09/20 09:00"),
+                end: new Date("2016/09/20 10:00")
+            }],
+            views: [
+              {
+                  type: "day", selected: true,
+                  date: new Date("2016/09/20"), 
+                  range: {
+                      start: new Date("2016/09/1"),
+                      end: new Date("2016/10/15")
+                  },
+              }
+            ]
+        });
+    </script>
+
 ### dependencies `Object|Array|kendo.data.GanttDependencyDataSource`
 
 The data source of the widget which contains the dependencies. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.GanttDependencyDataSource](/api/javascript/data/ganttdependencydatasource)
@@ -2791,7 +2820,68 @@ Sets the title of the PDF file.
         ]
     });
     </script>
-    
+
+### range `Object`
+
+Configures the Kendo UI Gantt range settings.
+
+### range.start `Date`
+ 
+ If set to some date the timeline of all views will start from this date.
+ 
+#### Example
+ 
+     <div id="gantt"></div>
+     <script>
+     $("#gantt").kendoGantt({
+       dataSource: [{
+         id: 1,
+         orderId: 0,
+         parentId: null,
+         title: "Task1",
+         start: new Date("2016/6/17 9:00"),
+         end: new Date("2016/6/20 11:00")
+       }],
+       range: {
+          start: new Date("2016/06/2")
+       },
+       views: [
+         { type: "day" },
+         { type: "week", selected: true },
+         { type: "month" }
+       ]
+     });
+     </script>
+     
+### range.end `Date`
+ 
+If set to some date the timeline of all views will end to this date.
+ 
+#### Example
+ 
+     <div id="gantt"></div>
+     <script>
+     $("#gantt").kendoGantt({
+       dataSource: [{
+         id: 1,
+         orderId: 0,
+         parentId: null,
+         title: "Task1",
+         start: new Date("2016/6/17 9:00"),
+         end: new Date("2016/6/20 11:00")
+       }],
+       range: {
+          end: new Date("2016/06/29")
+       },
+       views: [
+         { type: "day" },
+         { type: "week", selected: true },
+         { type: "month" }
+       ]
+     });
+     </script>    
+
+
 ### resizable `Boolean` *(default: false)*
 
 If set to `true` allows users to resize columns by dragging their header borders. By default resizing is disabled.    
@@ -3180,6 +3270,71 @@ If set to `false` the gantt will not display the task tooltip. By default the ta
 
 The views displayed by the Gantt and their configuration. The array items can be either objects specifying the view configuration or strings representing the view types (assuming default configuration).
 By default the Kendo UI Gantt widget displays "day", "week", and "month" views.
+
+
+### views.range `Object`
+
+Configures the view range settings.
+
+### views.range.start `Date`
+ 
+If set to some date the timeline of the view will start from this date.
+ 
+Overrides the [range.start](#configuration-range.start) option of the gantt.
+ 
+#### Example
+ 
+     <div id="gantt"></div>
+     <script>
+     $("#gantt").kendoGantt({
+       dataSource: [{
+         id: 1,
+         orderId: 0,
+         parentId: null,
+         title: "Task1",
+         start: new Date("2016/6/17 9:00"),
+         end: new Date("2016/6/20 11:00")
+       }],
+       views: [
+         { type: "day" },
+         { type: "week", selected: true,
+           range: {
+               start: new Date("2016/06/2")
+             }},
+         { type: "month" }
+       ]
+     });
+     </script>
+     
+### views.range.end `Date`
+ 
+If set to some date the timeline of the view will end to this date.
+ 
+Overrides the [range.end](#configuration-range.end) option of the gantt.
+ 
+#### Example
+ 
+     <div id="gantt"></div>
+     <script>
+     $("#gantt").kendoGantt({
+       dataSource: [{
+         id: 1,
+         orderId: 0,
+         parentId: null,
+         title: "Task1",
+         start: new Date("2016/6/17 9:00"),
+         end: new Date("2016/6/20 11:00")
+       }],
+       views: [
+         { type: "day" },
+         { type: "week", selected: true,
+           range: {
+               end: new Date("2016/06/29")
+             }},
+         { type: "month" }
+       ]
+     });
+     </script>
 
 ### views.type `String`
 
@@ -3941,6 +4096,47 @@ A string, DOM element or jQuery object which represents the table row. A string 
     console.log(task.title); // displays "Task1"
     </script>
 
+### date
+
+Sets date to the widget that will scroll the timeline of the current view to this date.
+
+#### Parameters
+
+##### date `Date` *(optional)*
+
+A Date that will be set to the currently selected view.
+
+#### Returns
+
+`Date` that is set to the currently seleted view.
+
+#### Example - set date to the widget
+
+  <div id="gantt1"></div>
+    <script>
+        $("#gantt1").kendoGantt({
+            dataSource: [{
+                id: 1,
+                orderId: 0,
+                parentId: null,
+                title: "Task1",
+                start: new Date("2016/09/20 09:00"),
+                end: new Date("2016/09/20 10:00")
+            }],
+            views: [
+              {
+                  type: "day", selected: true,
+                  range: {
+                      start: new Date("2016/09/1"),
+                      end: new Date("2016/10/15")
+                  },
+              }
+            ]
+        });
+        var gantt = $("#gantt1").data("kendoGantt");
+        gantt.date(new Date("2016/09/20"));
+    </script>
+
 ### destroy
 
 Prepares the widget for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
@@ -3965,6 +4161,44 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
     });
     var gantt = $("#gantt").data("kendoGantt");
     gantt.destroy();
+    </script>
+
+### range
+
+Sets range to the widget.
+
+#### Parameters
+
+##### range `Object` *(optional)*
+
+An Object that have start and end parameters of type Date.
+
+#### Returns
+
+`Object` the object with start and end values of the selected view.
+
+#### Example - set range to the widget
+
+      <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [
+         {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        }
+      ]
+    });
+    var gantt = $("#gantt").data("kendoGantt");
+    var range = {
+        start: new Date("2014/06/2"),
+        end: new Date("2014/06/23")
+    };
+    gantt.range(range);
     </script>
 
 ### refresh
