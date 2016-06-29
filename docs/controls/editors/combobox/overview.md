@@ -46,9 +46,13 @@ The example below demonstrates how to initialize the ComboBox from an existing `
         });
     </script>
 
-**Bind the ComboBox to a local data array**
+**Bind to a local data array**
 
-The ComboBox can be bound to local data arrays through the [DataSource component](/framework/datasource/overview)&mdash;an abstraction for local and remote data. Local arrays are appropriate for limited value options.
+Bind the ComboBox to local data arrays through the [DataSource component]({% slug overview_kendoui_datasourcecomponent %})&mdash;an abstraction for local and remote data.
+
+Local arrays are appropriate for limited value options.
+
+The example below demonstrates how to initialize the ComboBox by binding it to local data arrays.
 
 ###### Example
 
@@ -67,9 +71,13 @@ The ComboBox can be bound to local data arrays through the [DataSource component
       });
     </script>
 
-**Bind the ComboBox to a remote data service**
+**Bind to a remote data service**
 
-The ComboBox can be bound to remote data arrays through the [DataSource component](/framework/datasource/overview)&mdash;an abstraction for local and remote data. Remote data binding is appropriate for larger data sets, so that items are loaded on demand when displayed. The DataSource can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
+Bind the ComboBox to remote data arrays through the [DataSource component]({% slug overview_kendoui_datasourcecomponent %})&mdash;an abstraction for local and remote data.
+
+Remote data binding is appropriate for larger data sets, so that items are loaded on demand when displayed. The DataSource can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
+
+The example below demonstrates how to initialize the ComboBox by binding it to a remote data service.
 
 ###### Example
 
@@ -293,3 +301,8 @@ Articles on the Kendo UI MultiSelect:
 
 * [Overview of the MultiSelect Widget]({% slug overview_kendoui_multiselect_widget %})
 * [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
+
+Articles on the Kendo UI AutoComplete:
+
+* [Overview of the AutoComplete Widget]({% slug overview_kendoui_autocomplete_widget %})
+* [AutoComplete JavaScript API Reference](/api/javascript/ui/autocomplete)

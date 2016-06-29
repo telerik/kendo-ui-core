@@ -8,7 +8,9 @@ position: 1
 
 # DropDownList Overview
 
-The [Kendo UI DropDownList widget](http://demos.telerik.com/kendo-ui/dropdownlist/index) displays a list of values and allows for a single selection from the list. The user input is restricted within the predefined options. Use the Kendo UI ComboBox control if you want to apply a keyboard input.
+The [Kendo UI DropDownList widget](http://demos.telerik.com/kendo-ui/dropdownlist/index) displays a list of values and allows for a single selection from the list. The user input is restricted within the predefined options.
+
+To apply a keyboard input, use the [Kendo UI ComboBox control]({% slug overview_kendoui_combobox_widget %}).
 
 ## Getting Started
 
@@ -23,10 +25,10 @@ The Kendo UI DropDownList widget can be initialized in three ways:
 The DropDownList looks and operates consistently regardless of the initialization type you choose to apply.
 
 > **Important**
-> * As DropDownList should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
+> * As a DropDownList must be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
 > * The widget copies any styles and CSS classes from the input element to the wrapper element and visible input.
 
-#### From Existing select Element
+**Use the `<option>` tag of an existing `<select>` element**
 
 The example below demonstrates how to initialize the DropDownList from an existing `<select>` element with defined data items.
 
@@ -44,9 +46,9 @@ The example below demonstrates how to initialize the DropDownList from an existi
         });
     </script>
 
-#### By Binding to Local Array
+**Bind to a local data array**
 
-The DropDownList can be bound to local data arrays via the [DataSource component](/framework/datasource/overview) - an abstraction for local and remote data. Local arrays are appropriate for limited value options.
+Bind the DropDownList to local data arrays through the [DataSource component]({% slug overview_kendoui_datasourcecomponent %})&mdash;an abstraction for local and remote data. Local arrays are appropriate for limited value options.
 
 The example below demonstrates how to initialize the DropDownList by binding it to a local data array.
 
@@ -67,9 +69,9 @@ The example below demonstrates how to initialize the DropDownList by binding it 
       });
     </script>
 
-#### By Binding to Remote Service
+**Bind to a remote data service**
 
-The DropDownList can be bound to remote data arrays via the [DataSource component](/framework/datasource/overview) - an abstraction for local and remote data. Remote data binding is appropriate for larger data sets, so that items are loaded on-demand, when displayed. The DataSource can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
+Bind the DropDownList to remote data arrays through the [DataSource component]({% slug overview_kendoui_datasourcecomponent %})&mdash;an abstraction for local and remote data. Remote data binding is appropriate for larger data sets, so that items are loaded on demand when displayed. The DataSource can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
 The example below demonstrates how to initialize the DropDownList by binding it to a remote data service.
 
@@ -134,7 +136,7 @@ The example below demonstrates how to define a value template.
 
 > **Important**
 >
-> Note that value templates should consist of inline HTML elements only.
+> Value templates must consist of inline HTML elements only.
 
 ###### Example
 
@@ -165,7 +167,9 @@ The example below demonstrates how to define a value template.
 
 ### Header Templates
 
-The DropDownList allows you to render a pop-up header. The example below demonstrates how to define a header template.
+The DropDownList allows you to render a pop-up header.
+
+The example below demonstrates how to define a header template.
 
 ###### Example
 
@@ -227,13 +231,15 @@ The example below demonstrates how to define a footer template.
         });
     </script>
 
-### No Data Templates
+### No-Data Templates
 
-The DropDownList widget displays `noDataTemplate` in the popup when data source is empty.
+The DropDownList widget displays `noDataTemplate` in the popup when the data source is empty.
 
-The example below demonstrates how to define a noDataTemplate template.
+The example below demonstrates how to define a `noDataTemplate` template.
 
-> **Important** When the noDataTemplate option is defined, the widget will always open the popup element.
+> **Important**
+>
+> When the `noDataTemplate` option is defined, the widget will always open the popup element.
 
 ###### Example
 
@@ -266,7 +272,7 @@ The example below demonstrates how to define a noDataTemplate template.
 
 ### Drop-Down List
 
-You can customize the width of a drop-down list and change its dimensions by using the jQuery `width()` method.
+Customize the width of a drop-down list and change its dimensions by using the jQuery `width()` method.
 
 ###### Example
 
@@ -302,7 +308,7 @@ Because of its complex rendering, focusing the widget by using a `label` element
 
 ## See Also
 
-Other articles on Kendo UI DropDownList:
+Other articles on the Kendo UI DropDownList:
 
 * [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
 * [Grouping Functionality]({% slug grouping_kendoui_combobox_widget %})
@@ -310,23 +316,15 @@ Other articles on Kendo UI DropDownList:
 * [Cascading DropDownLists]({% slug cascading_kendoui_dropdownlist_widget %})
 * [Troubleshooting]({% slug troubleshooting_common_issues_dropdownlist_kendoui %})
 * [How to Cascade DropDownLists Using `ng-repeat`]({% slug howto_cascade_withngrepeat_distinct_values_dropdownlist %})
-* [How to Validate DropDownLists by Using Required Attributes]({% slug howto_validate_using_required_attributes_dropdownlist %})
-* [How to Cascade from Multiple Parents]({% slug howto_cascade_multiple_parents_dropdownlist %})
-* [How to Create DropDownLists with Long Items]({% slug howto_create_listswith_long_items_dropdownlist %})
-* [How to Detect Input Change Events]({% slug howto_detect_input_change_events_dropdownlist %})
-* [How to Detect Wrapper Blur Events]({% slug howto_detect_wrapper_blur_events_dropdownlist %})
 * [How to Detect Wrapper Focus Events]({% slug howto_detect_wrapper_focus_events_dropdownlist %})
 * [How to Move the Group Label on Top of Items]({% slug howto_move_group_label_ontopof_items_dropdownlist %})
-* [How to Preselect Items]({% slug howto_preselect_items_dropdownlist %})
-* [How to Update MVVM Bound Models on Load]({% slug howto_update_mvvm_model_onload_dropdownlist %})
-* [How to Set DataSource Dynamically]({% slug howto_set_datasource_dynamically_dropdownlist %})
 * [How to Remove Items]({% slug howto_remove_items_dropdownlist %})
-* [How to Prevent Popup Closure on Scroll]({% slug howto_prevent_popup_closure_onscroll_dropdownlist %})
+* [How to Set DataSource Dynamically]({% slug howto_set_datasource_dynamically_dropdownlist %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension fro the DropDownList Widget](/aspnet-mvc/helpers/dropdownlist/overview)
 * [Overview of the DropDownList JSP Tag]({% slug overview_dropdownlist_uiforjsp %})
 * [Overview of the DropDownList PHP Class](/php/widgets/dropdownlist/overview)
 
-Articles on Kendo UI ComboBox:
+Articles on the Kendo UI ComboBox:
 
 * [Overview of the ComboBox Widget]({% slug overview_kendoui_combobox_widget %})
 * [Grouping Functionality]({% slug grouping_kendoui_combobox_widget %})
@@ -335,7 +333,12 @@ Articles on Kendo UI ComboBox:
 * [Server Filtering]({% slug server_filtering_kendoui_combobox_widget %})
 * [ComboBox JavaScript API Reference](/api/javascript/ui/combobox)
 
-Articles on Kendo UI MultiSelect:
+Articles on the Kendo UI MultiSelect:
 
 * [Overview of the MultiSelect Widget]({% slug overview_kendoui_multiselect_widget %})
 * [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
+
+Articles on the Kendo UI AutoComplete:
+
+* [Overview of the AutoComplete Widget]({% slug overview_kendoui_autocomplete_widget %})
+* [AutoComplete JavaScript API Reference](/api/javascript/ui/autocomplete)

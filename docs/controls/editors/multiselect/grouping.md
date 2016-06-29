@@ -8,11 +8,11 @@ position: 2
 
 # Grouping
 
-The grouping functionality described in the related help article for [Kendo UI ComboBox widget](/web/combobox/grouping) is applicable to Kendo UI MultiSelect.
+The grouping functionality described in the related help article for the [Kendo UI ComboBox widget](/web/combobox/grouping) is applicable to the Kendo UI MultiSelect.
 
 ## See Also
 
-Other articles on Kendo UI MultiSelect:
+Other articles on the Kendo UI MultiSelect:
 
 * [Overview of the MultiSelect Widget]({% slug overview_kendoui_multiselect_widget %})
 * [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)

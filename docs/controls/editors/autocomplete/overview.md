@@ -49,9 +49,9 @@ There are two primary ways to provide AutoComplete suggestions:
 
 Locally defined values are best for small, fixed sets of suggestions. Remote suggestions must be used for larger data sets. When used with the `DataSource` component, the filtering of large remote data services can be pushed to the server as well, which maximizes the client-side performance.
 
-#### Local Data Array
+**Bind to a local data array**
 
-To configure and provide AutoComplete suggestions locally, either pass an array directly to its constructor, or set the `dataSource` property to a local array.
+To configure and provide the AutoComplete suggestions locally, either pass an array directly to its constructor, or set the `dataSource` property to a local array.
 
 To directly initialize a local data array in `constructor`, follow the example below.
 
@@ -75,9 +75,11 @@ To bind the widget to a local data array by using the `dataSource` property, fol
         });
     </script>
 
-#### Remote Data Service
+**Bind to a remote data service**
 
-The easiest way to bind an AutoComplete to a remote data service is to use the DataSource component&mdash;an abstraction for local and remote data. The DataSource can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
+To bind an AutoComplete to a remote data service, use the [DataSource component]({% slug overview_kendoui_datasourcecomponent %})&mdash;an abstraction for local and remote data.
+
+The DataSource can be used to serve data from a variety of data services, such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
 
 To bind the widget to a remote data service by using OData through the DataSource component, follow the example below.
 
@@ -295,3 +297,23 @@ Other articles on the Kendo UI AutoComplete:
 * [Overview of the AutoComplete JSP Tag]({% slug overview_autocomplete_uiforjsp %})
 * [Overview of the AutoComplete PHP Class](/php/widgets/autocomplete/overview)
 * [AutoComplete JavaScript API Reference](/api/javascript/ui/autocomplete)
+
+Articles on the Kendo UI ComboBox:
+
+* [Overview of the ComboBox Widget]({% slug overview_kendoui_combobox_widget %})
+* [Grouping Functionality]({% slug grouping_kendoui_combobox_widget %})
+* [Virtualization]({% slug virtualization_kendoui_combobox_widget %})
+* [Cascading ComboBoxes]({% slug cascading_kendoui_combobox_widget %})
+* [Server Filtering]({% slug server_filtering_kendoui_combobox_widget %})
+* [ComboBox JavaScript API Reference](/api/javascript/ui/combobox)
+
+Articles on the Kendo UI MultiSelect:
+
+* [Overview of the MultiSelect Widget]({% slug overview_kendoui_multiselect_widget %})
+* [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
+
+Articles on the Kendo UI DropDownList:
+
+* [Overview of the DropDownList Widget]({% slug overview_kendoui_dropdownlist_widget %})
+* [Cascading DropDownLists]({% slug cascading_kendoui_dropdownlist_widget %})
+* [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
