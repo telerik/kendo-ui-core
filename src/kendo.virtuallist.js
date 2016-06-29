@@ -957,6 +957,24 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
+        _getElementByDataItem: function(dataItem) {
+            var dataView = this._dataView,
+            valueGetter = this._valueGetter,
+                element;
+
+            element = dataView.find(function(viewItem) {
+                if (!viewItem.item) {
+                    return false;
+                } else if (isPrimitive(viewItem.item)) {
+                    return viewItem.item === dataItem;
+                } else {
+                    return valueGetter(viewItem.item) === valueGetter(dataItem);
+                }
+            });
+
+            return this._getElementByIndex(element.index);
+        },
+
         _clean: function() {
             this.result = undefined;
             this._lastScrollTop = undefined;
@@ -1446,7 +1464,9 @@ var __meta__ = { // jshint ignore:line
                 position = 0,
                 selectable = this.options.selectable,
                 removedindexesCounter = 0,
-                item, match;
+                valueGetter = this._valueGetter,
+                item, match,
+                result = null;
 
             indices = indices.slice();
 
@@ -1454,13 +1474,15 @@ var __meta__ = { // jshint ignore:line
                 for (var idx = 0; idx < selectedIndexes.length; idx++) {
                     if (selectedIndexes[idx] !== undefined) {
                         this._getElementByIndex(selectedIndexes[idx]).removeClass(SELECTED);
-
-                        removed.push({
-                            index: selectedIndexes[idx],
-                            position: idx,
-                            dataItem: this._selectedDataItems[idx]
-                        });
+                    } else if (selectedDataItems[idx]) {
+                        this._getElementByDataItem(selectedDataItems[idx]).removeClass(SELECTED);
                     }
+
+                    removed.push({
+                        index: selectedIndexes[idx],
+                        position: idx,
+                        dataItem: selectedDataItems[idx]
+                    });
                 }
 
                 this._values = [];
@@ -1468,6 +1490,7 @@ var __meta__ = { // jshint ignore:line
                 this._selectedIndexes = [];
             } else if (selectable === "multiple") {
                 for (var i = 0; i < indices.length; i++) {
+                    result = null;
                     position = $.inArray(indices[i], selectedIndexes);
 
                     if (position === -1 && this._view[indices[i]]) {
@@ -1475,30 +1498,10 @@ var __meta__ = { // jshint ignore:line
 
                         if (dataItem) {
                             for (var j = 0; j < selectedDataItems.length; j++) {
-                                match = isPrimitive(dataItem) ? selectedDataItems[j] === dataItem: this._valueGetter(selectedDataItems[j]) === this._valueGetter(dataItem);
+                                match = isPrimitive(dataItem) ? selectedDataItems[j] === dataItem : valueGetter(selectedDataItems[j]) === valueGetter(dataItem);
                                 if (match) {
-                                    position = j;
                                     item = this._getElementByIndex(indices[i]);
-
-                                    if (!item.hasClass("k-state-selected")) {
-                                        continue;
-                                    }
-
-                                    item.removeClass(SELECTED);
-                                    this._values.splice(position, 1);
-                                    this._selectedIndexes.splice(position, 1);
-                                    this._selectedDataItems.splice(position, 1);
-
-                                    indices.splice(i, 1);
-
-                                    removed.push({
-                                        index: undefined,
-                                        position: position + removedindexesCounter,
-                                        dataItem: dataItem
-                                    });
-
-                                    removedindexesCounter++;
-                                    i--;
+                                    result = this._deselectSingleItem(item, j, indices[i], removedindexesCounter);
                                 }
                             }
                         }
@@ -1507,27 +1510,16 @@ var __meta__ = { // jshint ignore:line
 
                         if (selectedIndex !== undefined) {
                             item = this._getElementByIndex(selectedIndex);
-
-                            if (!item.hasClass("k-state-selected")) {
-                                continue;
-                            }
-
-                            item.removeClass(SELECTED);
-                            this._values.splice(position, 1);
-                            this._selectedIndexes.splice(position, 1);
-                            dataItem = this._selectedDataItems.splice(position, 1)[0];
-
-                            indices.splice(i, 1);
-
-                            removed.push({
-                                index: selectedIndex,
-                                position: position + removedindexesCounter,
-                                dataItem: dataItem
-                            });
-
-                            removedindexesCounter++;
-                            i--;
+                            result = this._deselectSingleItem(item, position, selectedIndex, removedindexesCounter);
                         }
+                    }
+
+                    if (result) {
+                        indices.splice(i, 1);
+                        removed.push(result);
+
+                        removedindexesCounter++;
+                        i--;
                     }
                 }
             }
@@ -1535,6 +1527,25 @@ var __meta__ = { // jshint ignore:line
             return {
                 indices: indices,
                 removed: removed
+            };
+        },
+
+        _deselectSingleItem: function(item, position, selectedIndex, removedindexesCounter) {
+            var dataItem;
+
+            if (!item.hasClass("k-state-selected")) {
+                return;
+            }
+
+            item.removeClass(SELECTED);
+            this._values.splice(position, 1);
+            this._selectedIndexes.splice(position, 1);
+            dataItem = this._selectedDataItems.splice(position, 1)[0];
+
+            return {
+                index: selectedIndex,
+                position: position + removedindexesCounter,
+                dataItem: dataItem
             };
         },
 

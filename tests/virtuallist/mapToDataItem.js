@@ -15,6 +15,7 @@
         var items = [];
         for (var i = parameters.skip, len = parameters.skip + parameters.take; i < len; i++) {
             items.push({
+                value: i,
                 text: " Item " + i
             });
         }
@@ -63,7 +64,7 @@
                     }
                 },
                 serverPaging: true,
-                pageSize: 40,
+                pageSize: 20,
                 schema: {
                     data: "data",
                     total: "total"
@@ -75,7 +76,28 @@
                 dataSource: asyncDataSource,
                 itemHeight: ITEM_HEIGHT,
                 height: CONTAINER_HEIGHT,
-                template: "#:text#"
+                template: "#:text#",
+                dataValueField: "value",
+                selectable: true,
+                mapValueTo: "dataItem",
+                valueMapper: function(o) {
+                    var result = [];
+
+                    if (o.value.length) {
+                        o.value.forEach(function(value){
+                            result.push({
+                                value: value,
+                                text: "Item " + value
+                            });
+                        });
+                        o.success(result);
+                    } else if (o.value) {
+                        o.success({
+                            value: o.value,
+                            text: "Item " + o.value
+                        });
+                    }
+                }
             };
         },
 
@@ -107,17 +129,8 @@
     }
 
     asyncTest("value is set", 1, function() {
-        $.extend(virtualSettings, {
-            valueMapper: function(o) {
-                o.success({
-                    value: o.value,
-                    text: "Item " + o.value
-                });
-            },
-            mapValueTo: "dataItem"
-        });
-
         var virtualList = new VirtualList(container, virtualSettings);
+
         asyncDataSource.read().done(function() {
             virtualList.value(37).done(function() {
                 start();
@@ -127,17 +140,8 @@
     });
 
     asyncTest("selectedDataItems are set", 2, function() {
-        $.extend(virtualSettings, {
-            valueMapper: function(o) {
-                o.success({
-                    value: o.value,
-                    text: "Item " + o.value
-                });
-            },
-            mapValueTo: "dataItem"
-        });
-
         var virtualList = new VirtualList(container, virtualSettings);
+
         asyncDataSource.read().done(function() {
             virtualList.value(37).done(function() {
                 start();
@@ -147,18 +151,9 @@
         });
     });
 
-    asyncTest("selectedIndexes are undefined", 2, function() {
-        $.extend(virtualSettings, {
-            valueMapper: function(o) {
-                o.success({
-                    value: o.value,
-                    text: "Item " + o.value
-                });
-            },
-            mapValueTo: "dataItem"
-        });
-
+    asyncTest("selectedIndexes array is filled with undefined values", 2, function() {
         var virtualList = new VirtualList(container, virtualSettings);
+
         asyncDataSource.read().done(function() {
             virtualList.value(37).done(function() {
                 start();
@@ -167,62 +162,71 @@
             });
         });
     });
-/*
-    asyncTest("deselects and already resolved dataItem (multiple selection)", 4, function() {
-        $.extend(virtualSettings, {
-            valueMapper: function(o) {
-                o.success({
-                    value: o.value,
-                    text: "Item " + o.value
-                });
-            },
-            mapValueTo: "dataItem",
-            selectable: "multiple",
-        });
 
-        var virtualList = new VirtualList(container, virtualSettings);
-        asyncDataSource.read().done(function() {
-            virtualList.value([37, 60]).done(function() {
-                virtualList.bind("change", function() {
-                    start();
-                    equal(this.selectedDataItems().length, 1);
-                    equal(this.selectedDataItems()[0].value, 37);
-                    equal(this.select().length, 1);
-                    equal(this.select()[0], undefined);
-                });
-                virtualList.select(60);
-            });
-        });
-    });
-
-    asyncTest("reports correct removed items (multiple selection)", 6, function() {
+    asyncTest("deselects an already resolved dataItem (multiple selection)", 4, function() {
         $.extend(virtualSettings, {
-            valueMapper: function(o) {
-                o.success({
-                    value: o.value,
-                    text: "Item " + o.value
-                });
-            },
-            mapValueTo: "dataItem",
             selectable: "multiple"
         });
 
         var virtualList = new VirtualList(container, virtualSettings);
+
         asyncDataSource.read().done(function() {
-            virtualList.value([37, 60]).done(function() {
-                virtualList.open();
+            virtualList.value([15, 25]).done(function() {
                 virtualList.bind("change", function() {
-                start();
-                equal(this.selectedDataItems().length, 3);
-                equal(this.selectedDataItems()[2].value, 3);
-                equal(this.select().length, 3);
-                equal(this.select()[0], undefined);
-                equal(this.select()[1], undefined);
-                equal(this.select()[2], undefined);
-                })
+                    start();
+                    equal(this.selectedDataItems().length, 1);
+                    equal(this.selectedDataItems()[0].value, 15);
+                    equal(this.select().length, 1);
+                    equal(this.select()[0], undefined);
+                });
+
+                virtualList.scrollToIndex(25);
+                setTimeout(function() {
+                    this.select(25);
+                }.bind(virtualList), 300);
+            });
+        });
+    });
+
+    asyncTest("selecting addiotional items does not remove current (multiple selection)", 4, function() {
+        $.extend(virtualSettings, {
+            selectable: "multiple"
+        });
+
+        var virtualList = new VirtualList(container, virtualSettings);
+
+        asyncDataSource.read().done(function() {
+            virtualList.value([15, 25]).done(function() {
+                virtualList.bind("change", function() {
+                    start();
+                    equal(this.selectedDataItems().length, 3);
+                    equal(this.selectedDataItems()[2].value, 3);
+                    equal(this.select().length, 3);
+                    equal(this.select()[2], 3);
+                });
                 virtualList.select(3);
             });
         });
     });
-*/
+
+    asyncTest("deselects all previously selected items when selection changes (single selection)", 3, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+
+        asyncDataSource.read().done(function() {
+            virtualList.value(25).done(function() {
+                virtualList.bind("change", function() {
+                    start();
+                    equal(this.selectedDataItems().length, 1);
+                    equal(this.select().length, 1);
+                    equal(this.items().filter(".k-state-selected").length, 1, "Only one item is visibly selected");
+                });
+
+                virtualList.scrollToIndex(25);
+                setTimeout(function() {
+                    this.select(26);
+                }.bind(virtualList), 300);
+            });
+        });
+    });
+
 })();
