@@ -24,8 +24,8 @@ The Kendo UI ComboBox widget can be initialized in three ways:
 
 The ComboBox looks and operates consistently regardless of the initialization type you choose to apply.
 
-> **Important**
-> * As ComboBox should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
+> **Important**  
+> * As a ComboBox must be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
 > * The widget copies any styles and CSS classes from the input element to the wrapper element and visible input.
 
 **Use the `<option>` tag of an existing `<select>` element**
