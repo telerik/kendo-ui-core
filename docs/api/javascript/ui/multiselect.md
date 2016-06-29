@@ -1271,7 +1271,7 @@ Opens the popup.
     $("#multiselect").kendoMultiSelect();
 
     var multiselect = $("#multiselect").data("kendoMultiSelect");
-    multiselect.focus();
+    multiselect.open();
     </script>
 
 ### readonly
