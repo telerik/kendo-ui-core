@@ -128,12 +128,31 @@
 
     test("MultiSelect hides popup if no data", function() {
         popuplateSelect();
-        var multiselect = new MultiSelect(select);
+        var multiselect = new MultiSelect(select, {
+            noDataTemplate: ""
+        });
 
         multiselect.wrapper.click();
         multiselect.search("no such item");
 
         ok(!multiselect.popup.visible());
+    });
+
+    test("keeps popup opened on empty search result if noDataTemplate", 2, function(assert) {
+        var multiselect = new MultiSelect(select, {
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [{text: "Foo", value: 1 }, {text:"Bar", value:2 }, {text:"Baz", value:3}]
+        });
+
+        multiselect.search("Foo");
+
+        ok(multiselect.popup.visible());
+
+        multiselect.search("None");
+
+        ok(multiselect.popup.visible());
     });
 
     test("MultiSelect do not show initial values on rebind", function() {

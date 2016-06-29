@@ -475,7 +475,6 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var data = that.dataSource.flatView();
             var skip = that.listView.skip();
-            var length = data.length;
 
             that._render(data);
 
@@ -483,7 +482,7 @@ var __meta__ = { // jshint ignore:line
 
             if (that._open) {
                 that._open = false;
-                that.toggle(length);
+                that.toggle(that._allowOpening());
             }
 
             that.popup.position();
