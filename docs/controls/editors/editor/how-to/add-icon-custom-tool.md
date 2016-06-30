@@ -21,7 +21,7 @@ To do so you can use the automatically generated class name taken from the tool'
   
   .k-editor .k-myTool
   {
-      background: 50% 50% no-repeat url(http://digitaltools.node3000.com/wp-content/themes/digital-tools/images/rss-icon-16x16px.png);
+      background: 50% 50% no-repeat url(images/rss-icon-16x16px.png);
   }
   
   /* Using FontAwesome icon for background */
