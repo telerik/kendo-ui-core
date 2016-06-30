@@ -306,6 +306,16 @@ test("$filter date encoding", function() {
     equal(result.$filter, "foo eq datetime'2011-02-01T00:00:00'");
 });
 
+test("$filter adjust date to UTC TZ (odata-v4)", function() {
+    var useVersionFour = true;
+    var date = new Date(2011, 1, 1);
+    var result = parameterMap({ filter: { filters: [ { field: "foo", operator: "eq", value: date }] } }, "read", useVersionFour);
+
+    date = kendo.timezone.apply(date, "Etc/UTC");
+
+    equal(result.$filter, "foo eq " + kendo.toString(date, "yyyy-MM-ddTHH:mm:ss+00:00"));
+});
+
 test("custom arguments are preserved", function() {
     var result = parameterMap({ foo: "bar" });
 
