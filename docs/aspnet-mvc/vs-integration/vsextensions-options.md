@@ -28,7 +28,7 @@ The settings under the General category affect all of the installed Telerik Visu
 
 ### Project Setup
 
-Set the default value for the **Add referenced assemblies to solution** option in the Project Configuration Wizard through **Add referenced assemblies to solution and source control**.
+Set the default value for the **Copy referenced assemblies to solution** option in the Project Configuration Wizard through **Copy referenced assemblies to solution and integrate with source control**.
 
 ### Project Upgrade Notifications
 
@@ -36,14 +36,6 @@ Set the project upgrade notifications for detected local distributions by using 
 
 - **Suggest project upgrades for Telerik product version available on my computer**&mdash;When enabled, you are prompted to upgrade upon opening a project, which is not using the latest version of Telerik products installed on your system.
 - **Suggest upgrades when an equal Dev release detected on projects using a Trial**&mdash;When enabled, you are prompted to upgrade if a licensed version is available on your system, but the current project uses a trial version.
-
-### Other Notifications
-
-- **Notify me when a Telerik subscription I have is about to expire**&mdash;When enabled, you receive reminders if any of your subscriptions expire within the next month.
-
-> **Important**
->
-> You benefit from subscription reminders only if you saved your credentials in the Latest Version Acquirer tool.
 
 ### Download Folder Selection
 
