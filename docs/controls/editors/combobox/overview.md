@@ -189,10 +189,6 @@ To customize the width of a drop-down list and change its dimensions, use the jQ
 
 Because of its complex rendering, the focusing of the widget by using a `label` element requires additional implementation. For more information on how to do it, refer to [this Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
 
-### Input Removal
-
-The ComboBox enables you to remove the values from the input area of the widget through the `clearButton` configuration option. By default, it is enabled and set to `true`. As a result, a **x** button appears in the input area on hover. When clicked, it resets the value of the widget and triggers the `change` event.
-
 ## Reference
 
 ### Existing Instances

@@ -145,10 +145,6 @@ To customize the width of a drop-down list and change its dimensions by using th
         autoComplete.list.width(400);
     </script>
 
-### Input Removal
-
-The AutoComplete enables you to remove the values from the input area of the widget through the `clearButton` configuration option. By default, it is enabled and set to `true`. As a result, a **x** button appears in the input area on hover. When clicked, it resets the value of the widget and triggers the `change` event.
-
 ## Templates
 
 The AutoComplete widget uses Kendo UI templates to enable control over the way an item and a pop-up header is rendered. For more information on the capabilities and syntax of the templates, refer to the [documentation]({% slug overview_kendoui_templatescomponent %}).
