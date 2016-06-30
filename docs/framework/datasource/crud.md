@@ -378,7 +378,9 @@ For more information on handling errors in such scenarios, refer to the section 
 
 The `update` service expects the edited data items and should return the same items (including all data fields) as a confirmation of the successful save operation. An empty response is also treated as a valid success response.
 
-###### Example
+If [`schema.data`](/api/javascript/data/datasource#configuration-schema.data) is set and the server response is not empty, then the server response should have the **same structure**, as the response of the `read` request. See example below.
+
+###### Example with no schema.data
 
     /*Client POST request:
 
@@ -398,9 +400,40 @@ The `update` service expects the edited data items and should return the same it
         transport: {
             /* the other CRUD settings are ommitted for brevity */
             update: {
-                url: "service/products/create/",
+                url: "service/products/update/",
                 type: "post"
             }
+        }
+    });
+
+###### Example with schema.data
+
+    /*Client POST request:
+
+    ProductID: 1
+    ProductName: "Fresh yellow bananas"
+
+    Server response:
+
+    {
+        "items": [{
+            "ProductID": 1,
+            "ProductName": "Fresh yellow bananas"
+        }]
+    }
+
+    */
+
+    var dataSource = new kendo.data.DataSource({
+        transport: {
+            /* the other CRUD settings are ommitted for brevity */
+            update: {
+                url: "service/products/update/",
+                type: "post"
+            }
+        },
+        schema: {
+            data: "items"
         }
     });
 
@@ -411,7 +444,10 @@ Also, check the notes on IDs in the above [Update (Local)]({% slug cruddataopera
 
 The `create` action should perform a similar routine as `update`, with one notable difference&mdash;the newly created data items have no IDs, so they must be assigned server-side and returned by the remote service.
 
-###### Example
+If [`schema.data`](/api/javascript/data/datasource#configuration-schema.data) is set, then the server response should have the **same structure**, as the response of the `read` request. See example below.
+
+
+###### Example with no schema.data
 
     /*Client POST request:
 
@@ -433,6 +469,36 @@ The `create` action should perform a similar routine as `update`, with one notab
                 url: "service/products/create/",
                 type: "post"
             }
+        }
+    });
+
+###### Example with schema.data
+
+    /*Client POST request:
+
+    ProductName: "Fresh yellow bananas"
+
+    Server response:
+
+    {
+        "items": [{
+            "ProductID": 1,
+            "ProductName": "Fresh yellow bananas"
+        }]
+    }
+
+    */
+
+    var dataSource = new kendo.data.DataSource({
+        transport: {
+            /* the other CRUD settings are ommitted for brevity */
+            create: {
+                url: "service/products/create/",
+                type: "post"
+            }
+        },
+        schema: {
+            data: "items"
         }
     });
 
