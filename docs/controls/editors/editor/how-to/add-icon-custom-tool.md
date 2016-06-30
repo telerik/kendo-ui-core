@@ -5,7 +5,7 @@ description: "Learn how to add icon or plain image to a custom tool in th etoolb
 slug: howto_add_add_icon_custom_tool
 ---
 
-# Add Max-Length Validation
+# Add Icon or Image to a Custom Tool
 
 The example below demonstrates how to decorate your own custom tools with a background image or a FontAwesome icon.
 
