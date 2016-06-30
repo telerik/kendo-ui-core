@@ -35,7 +35,7 @@ Represents the Kendo UI NumericTextBox widget. Inherits from [Widget](/api/javas
 
 ### decimals `Number`*(default: null)*
 
-Specifies the number precision applied to the widget value and when the NumericTextBox is focused. If not set, the precision defined by the current culture is used.
+Specifies the number precision applied to the widget value and when the NumericTextBox is focused. If not set, the precision defined by the current culture is used. If the user enters a number with a greater precision than is currently configured, the widget value will be rounded. For example, if `decimals` is `2` and the user inputs `12.346`, the value will become `12.35`. If the user inputs `12.99`, the value will become `13.00`.
 
 Compare with the [`format`](#configuration-format) property.
 
