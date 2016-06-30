@@ -99,6 +99,8 @@ Kendo UI NumericTextBox uses a JavaScript [`Number`](http://ecma262-5.com/ELS5_H
 
 No feasible workaround for this limitation exists as it comes from JavaScript itself. It is recommended that you use a simple `<input>` element with server validation as some server languages are able to parse long numbers.
 
+On the other hand, if the user enters a number with a greater precision than is currently configured via `decimals`, the widget value will be rounded. Please check the [`decimals` property](/api/javascript/ui/numerictextbox#configuration-decimals) documentation for details and examples.
+
 ### Input Type
 
 Kendo UI NumericTextBox uses `<input type="text" />` elements. If the widget is initialized from an `<input type="number" />` element, it will switch the input type to `text`. This behavior is required so that comma (",") is supported as a decimal separator in some non-"en-US" cultures. For the time being, browsers do not take into account the client's culture and always ignore values that contain a comma decimal separator.
