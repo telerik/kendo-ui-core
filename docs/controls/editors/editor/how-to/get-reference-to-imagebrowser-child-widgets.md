@@ -103,7 +103,7 @@ Note that the `transport` configurations below are over-simplified and invalid.
 
 ## See Also
 
-Other articles on the Kendo UI Editor and how-to examples::
+Other articles on the Kendo UI Editor:
 
 * [Editor JavaScript API Reference](/api/javascript/ui/editor)
 * [How to Insert HTML Content via Custom Popup Tools]({% slug howto_insert_html_content_custom_popup_tool_editor %})

@@ -1,16 +1,15 @@
 ---
 title: Add Icon or Image to a Custom Tool
 page_title: Add Icon or Image to a Custom Tool | Kendo UI Editor
-description: "Learn how to add icon or plain image to a custom tool in th etoolbar"
+description: "Learn how to add an icon or a plain image to a custom tool in the Kendo UI Editor widget."
 slug: howto_add_add_icon_custom_tool
 ---
 
 # Add Icon or Image to a Custom Tool
 
-The example below demonstrates how to decorate your own custom tools with a background image or a FontAwesome icon.
+When you create a custom tool, whether to render an image or an icon in its appearance depends on further CSS stylization. To such a visual element, use the automatically generated class name taken from the tool and follow the `k-[ToolName]` pattern.
 
-When a custom tool is created its appearance depends on further CSS stylization in order to have an image or icon rendered. 
-To do so you can use the automatically generated class name taken from the tool's and follows this pattern: `k-[ToolName]`.
+The example below demonstrates how to decorate your own custom tools with a background image or a FontAwesome icon.
 
 ###### Example
 
@@ -18,20 +17,20 @@ To do so you can use the automatically generated class name taken from the tool'
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <style>
   /* Using plain image for background */
-  
+
   .k-editor .k-myTool
   {
       background: 50% 50% no-repeat url(images/rss-icon-16x16px.png);
   }
-  
+
   /* Using FontAwesome icon for background */
-  
+
   .k-editor .k-mySecondTool
   {
       background: none;
       line-height:25px;
   }
-  
+
   .k-editor .k-mySecondTool:before
   {
       font-family: FontAwesome;
@@ -66,7 +65,7 @@ To do so you can use the automatically generated class name taken from the tool'
 
 ## See Also
 
-Other articles on the Kendo UI Editor and how-to examples::
+Other articles on the Kendo UI Editor:
 
 * [Editor JavaScript API Reference](/api/javascript/ui/editor)
 * [How to Get Reference to Child Widgets]({% slug howto_get_referenceto_child_widgets_editor %})

@@ -62,7 +62,7 @@ This example demonstrates how to include Google Web Fonts to the Kendo UI Editor
 
 ## See Also
 
-Other articles on the Kendo UI Editor and how-to examples::
+Other articles on the Kendo UI Editor:
 
 * [Editor JavaScript API Reference](/api/javascript/ui/editor)
 * [How to Get Reference to Child Widgets]({% slug howto_get_referenceto_child_widgets_editor %})
