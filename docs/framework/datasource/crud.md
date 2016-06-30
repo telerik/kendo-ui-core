@@ -103,6 +103,7 @@ The `create` function should perform a similar routine as the `update` one with 
 
 * The newly created data items have no ID, so they must be added by the function script or returned by the remote service.
 * The newly created data items must be returned in the `success` method with their IDs assigned. Otherwise, the DataSource instance is going to operate with incorrect data and subsequent data operations can fail.
+* If [`schema.data`](/api/javascript/data/datasource#configuration-schema.data) is set, then the `success` method should receive the created data item in an object **with the same structure**, as the object that is passed to the `read` function's `success` method. See example below.
 
 ###### Example
 
@@ -117,8 +118,12 @@ The `create` function should perform a similar routine as the `update` one with 
                 e.data.my_ID_field_name = 123;
                 // ...
 
-                // on success return the new data items with IDs
+                // on success return the new data items with IDs (assuming schema.data is NOT SET)
                 e.success(e.data);
+
+                // if schema.data IS SET (for example to "foo"), use the following syntax instead
+                // e.success({"foo": [e.data]});
+
                 // on failure
                 //e.error("XHR response", "status code", "error message");
             }
