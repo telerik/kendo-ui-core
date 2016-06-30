@@ -8,7 +8,9 @@ position: 5
 
 # CRUD Data Operations
 
-The [Kendo UI DataSource component](http://demos.telerik.com/kendo-ui/datasource/index) fully supports the CRUD (Create, Read, Update, Destroy) data operations. However, it must be combined with some user interface or another Kendo UI widget, such as the Grid, ListView, etc. Note that even though the examples below use the Grid as a sample, the configurations apply to any other widget or scenario.
+The [Kendo UI DataSource component](http://demos.telerik.com/kendo-ui/datasource/index) fully supports the CRUD (Create, Read, Update, Destroy) data operations. However, it must be combined with some user interface or another Kendo UI widget such as the Grid, ListView, etc.
+
+Though the examples below use the Grid as a sample, the configurations apply to any other widget or scenario.
 
 ## Concepts
 
@@ -103,7 +105,7 @@ The `create` function should perform a similar routine as the `update` one with 
 
 * The newly created data items have no ID, so they must be added by the function script or returned by the remote service.
 * The newly created data items must be returned in the `success` method with their IDs assigned. Otherwise, the DataSource instance is going to operate with incorrect data and subsequent data operations can fail.
-* If [`schema.data`](/api/javascript/data/datasource#configuration-schema.data) is set, then the `success` method should receive the created data item in an object **with the same structure**, as the object that is passed to the `read` function's `success` method. See example below.
+* If the [`schema.data`](/api/javascript/data/datasource#configuration-schema.data) configuration is set, the `success` method should receive the created data item in an object _with the same structure_ as the object that is passed to the `success` method of the `read` function. See the example below. 
 
 ###### Example
 

@@ -93,7 +93,7 @@ The example below demonstrates how to resize the Kendo UI Editor by dragging its
 
 ## See Also
 
-Other articles on the Kendo UI Editor and how-to examples::
+Other articles on the Kendo UI Editor:
 
 * [Editor JavaScript API Reference](/api/javascript/ui/editor)
 * [How to Get Reference to Child Widgets]({% slug howto_get_referenceto_child_widgets_editor %})
