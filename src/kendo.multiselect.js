@@ -39,6 +39,7 @@ var __meta__ = { // jshint ignore:line
         CHANGE = "change",
         PROGRESS = "progress",
         SELECT = "select",
+        DESELECT = "deselect",
         ARIA_DISABLED = "aria-disabled",
         FOCUSEDCLASS = "k-state-focused",
         HIDDENCLASS = "k-loading-hidden",
@@ -156,6 +157,7 @@ var __meta__ = { // jshint ignore:line
             CLOSE,
             CHANGE,
             SELECT,
+            DESELECT,
             "filtering",
             "dataBinding",
             "dataBound"
@@ -343,8 +345,14 @@ var __meta__ = { // jshint ignore:line
             var position = tag.index();
             var listView = that.listView;
             var value = listView.value()[position];
+            var dataItem = that.listView.selectedDataItems()[position];
             var customIndex = that._customOptions[value];
             var option;
+
+            if (that.trigger(DESELECT, { dataItem: dataItem, item: tag })) {
+                that._close();
+                return;
+            }
 
             if (customIndex === undefined && (state === ACCEPT || state === FILTER)) {
                 customIndex = that._optionsMap[value];
@@ -698,11 +706,6 @@ var __meta__ = { // jshint ignore:line
 
             e.preventDefault();
 
-            if (this.trigger(SELECT, { item: item })) {
-                this._close();
-                return;
-            }
-
             this._select(item);
             this._change();
             this._close();
@@ -761,15 +764,7 @@ var __meta__ = { // jshint ignore:line
                     that.currentTag(tag[0] ? tag : null);
                 }
             } else if (key === keys.ENTER && visible) {
-                if (current) {
-                    if (that.trigger(SELECT, {item: current})) {
-                        that._close();
-                        return;
-                    }
-
-                    that._select(current);
-                }
-
+                that._select(current);
                 that._change();
                 that._close();
                 e.preventDefault();
@@ -1087,7 +1082,14 @@ var __meta__ = { // jshint ignore:line
         },
 
         _select: function(candidate) {
+            if (!candidate) {
+                return;
+            }
+
             var that = this;
+            var listView = that.listView;
+            var dataItem = listView.dataItemByIndex(listView.getElementIndex(candidate));
+            var isSelected = candidate.hasClass("k-state-selected");
 
             if (that._state === REBIND) {
                 that._state = "";
@@ -1097,13 +1099,18 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            this.listView.select(candidate);
+            if (that.trigger(isSelected ? DESELECT : SELECT, { dataItem: dataItem, item: candidate })) {
+                that._close();
+                return;
+            }
+
+            listView.select(candidate);
 
             that._placeholder();
 
             if (that._state === FILTER) {
                 that._state = ACCEPT;
-                that.listView.skipUpdate(true);
+                listView.skipUpdate(true);
             }
         },
 
@@ -1130,7 +1137,7 @@ var __meta__ = { // jshint ignore:line
                 tagList = that._innerWrapper.children("ul");
 
             if (!tagList[0]) {
-                tagList = $('<ul role="listbox" unselectable="on" class="k-reset"/>').appendTo(that._innerWrapper);
+                tagList = $('<ul role="listbox" deselectable="on" class="k-reset"/>').appendTo(that._innerWrapper);
             }
 
             that.tagList = tagList;
@@ -1154,9 +1161,9 @@ var __meta__ = { // jshint ignore:line
             that.tagTextTemplate = tagTemplate = tagTemplate ? kendo.template(tagTemplate) : defaultTemplate;
 
             that.tagTemplate = function(data) {
-                return '<li class="k-button" unselectable="on"><span unselectable="on">' +
+                return '<li class="k-button" deselectable="on"><span deselectable="on">' +
                         tagTemplate(data) +
-                        '</span><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon ' +
+                        '</span><span deselectable="on" class="k-select"><span deselectable="on" class="k-icon ' +
                         (isMultiple ? "k-i-close" : "k-i-arrow-s") + '">' +
                         (isMultiple ? "delete" : "open") +
                         '</span></span></li>';
@@ -1168,7 +1175,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _clearButton: function() {
-            this._clear = $('<span unselectable="on" class="k-icon k-i-close" title="clear"></span>').attr({
+            this._clear = $('<span deselectable="on" class="k-icon k-i-close" title="clear"></span>').attr({
                 "role": "button",
                 "tabIndex": -1
             });
@@ -1194,11 +1201,11 @@ var __meta__ = { // jshint ignore:line
                 wrapper = element.parent("span.k-multiselect");
 
             if (!wrapper[0]) {
-                wrapper = element.wrap('<div class="k-widget k-multiselect k-header" unselectable="on" />').parent();
+                wrapper = element.wrap('<div class="k-widget k-multiselect k-header" deselectable="on" />').parent();
                 wrapper[0].style.cssText = element[0].style.cssText;
                 wrapper[0].title = element[0].title;
 
-                $('<div class="k-multiselect-wrap k-floatwrap" unselectable="on" />').insertBefore(element);
+                $('<div class="k-multiselect-wrap k-floatwrap" deselectable="on" />').insertBefore(element);
             }
 
             that.wrapper = wrapper.addClass(element[0].className).css("display", "");
