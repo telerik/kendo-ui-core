@@ -12,7 +12,7 @@ This article demonstrates how to scaffold a Kendo UI Scheduler for ASP.NET MVC b
 
 > **Important**  
 >
-> The Kendo UI Scaffolder will not include the required `UI for ASP.NET MVC` files to the project. To achieve this automatically, use the [Telerik UI for ASP.NET MVC Visual Studio extensions]({% slug overview_aspnetmvc %}). To achieve this manually, refer to [this article]({% slug aspnetmvc5_aspnetmvc %}).
+> The Kendo UI Scaffolder will not include the required `UI for ASP.NET MVC` files to the project. To automatically achieve this, use the [Telerik UI for ASP.NET MVC Visual Studio extensions]({% slug overview_aspnetmvc %}). To manually achieve this, refer to [this article]({% slug aspnetmvc5_aspnetmvc %}).
 
 ## Configuration
 
@@ -28,7 +28,7 @@ For information on how to do this, follow steps 1 to 5 from the [article about T
 
 Right-click the location where the `Scheduler Controller` should be generated. Select **Add** > **New Scaffolded Item...** from the displayed menu. In this example, you are going to generate it in the **Controllers** folder.
 
-**Figure 1. A new scaffolded item**
+**Figure 1. Add a new scaffolded item**
 
 ![New Scaffolded Item](/aspnet-mvc/helpers/scheduler/images/scaffolding/scheduler_new_scaffolded_item.png)
 

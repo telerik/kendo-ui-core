@@ -99,7 +99,7 @@ Kendo UI NumericTextBox uses a JavaScript [`Number`](http://ecma262-5.com/ELS5_H
 
 No feasible workaround for this limitation exists as it comes from JavaScript itself. It is recommended that you use a simple `<input>` element with server validation as some server languages are able to parse long numbers.
 
-On the other hand, if the user enters a number with a greater precision than is currently configured via `decimals`, the widget value will be rounded. Please check the [`decimals` property](/api/javascript/ui/numerictextbox#configuration-decimals) documentation for details and examples.
+On the other hand, if the user enters a number with a greater precision than is currently configured through the `decimals` property, the widget value will be rounded. For more details and examples, refer to the [API documentation on `decimals`](/api/javascript/ui/numerictextbox#configuration-decimals).
 
 ### Input Type
 
