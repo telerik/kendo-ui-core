@@ -26,7 +26,7 @@ The example below demonstrates how to try to update the data source.
          k-data-source="gridData"
          k-columns="gridColumns"
          k-selectable="true"
-         k-on-change="selected = data"></div>
+         k-on-change="onChange(data)"></div>
 
     <p ng-show="selected">
       <label>Artist: <input ng-model="selected.artist" /></label>
@@ -53,6 +53,9 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
     $scope.gridData[0].track = "Hey you";
     console.log($scope.gridData);
   };
+  $scope.onChange = function(data){
+    $scope.selected = data;
+  };
 });
 </script>
 ```
@@ -71,7 +74,7 @@ However, if you click the **UPDATE FROM CODE** button, nothing appears to happen
          k-data-source="gridData"
          k-columns="gridColumns"
          k-selectable="true"
-         k-on-change="selected = data"></div>
+         k-on-change="onChange(data)"></div>
 
     <p ng-show="selected">
       <label>Artist: <input ng-model="selected.artist" /></label>
@@ -96,6 +99,9 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
     ];
     $scope.update = function() {
       $scope.gridData[0].set("track", "Hey you");
+    };
+    $scope.onChange = function(data){
+      $scope.selected = data;
     };
 });
 </script>
