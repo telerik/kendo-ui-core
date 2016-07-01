@@ -480,6 +480,8 @@ navigation:
         title: "MultiSelect"
     "*notification":
         title: "Notification"
+    "*popup":
+        title: "Popup"
     "*numerictextbox":
         title: "NumericTextBox"
     "*panelbar":
