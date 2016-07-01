@@ -28,7 +28,7 @@ Below are listed the steps for you to follow when scaffolding the Kendo UI TreeV
 
 **Step 2** Include an Entity Framework Data Model. You can follow the steps described [in this article]({% slug ajaxbinding_treeviewhelper_aspnetmvc %}) to do that.
 
->Note If you are using the [Northwind dummy datasource]({http://northwinddatabase.codeplex.com/}) as demonstrated in the example in this article, you might need to upgrade it to match a newer version of your Visual Studio LocalDb definition. If this is the case, you can easily do that using the [Server Explorer]({https://msdn.microsoft.com/en-us/library/hh873188.aspx}). Visual Studio will ask you to confirm whether you want to upgrade the database and when you accept, you are ready to go.
+>Note If you are using the [Northwind dummy datasource](http://northwinddatabase.codeplex.com/) as demonstrated in the example in this article, you might need to upgrade it to match a newer version of your Visual Studio LocalDb definition. If this is the case, you can easily do that using the [Server Explorer](https://msdn.microsoft.com/en-us/library/hh873188.aspx). Visual Studio will ask you to confirm whether you want to upgrade the database and when you accept, you are ready to go.
 
 >Important You will need to Rebuild your project after adding the Entity data model.
 
@@ -78,7 +78,7 @@ Below are listed the steps for you to follow when scaffolding the Kendo UI TreeV
 Other articles on the Kendo UI TreeView for ASP.NET MVC:
 
 * [Overview of the TreeView HtmlHelper]({% slug overview_treeviewhelper_aspnetmvc %})
-* [Live Samples]({http://demos.telerik.com/aspnet-mvc/treeview/index})
+* [Live Samples](http://demos.telerik.com/aspnet-mvc/treeview/index)
 
 
 Articles on Telerik UI for ASP.NET MVC:
