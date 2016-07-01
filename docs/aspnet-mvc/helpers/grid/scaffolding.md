@@ -12,7 +12,7 @@ This article demonstrates how to scaffold a Kendo UI Grid for ASP.NET MVC by usi
 
 > **Important**  
 >
-> The Kendo UI Scaffolder will not include the required UI for ASP.NET MVC files to the project. You are able to achieve this automatically by using the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %}), or manually, as demonstrated [in this article]({% slug aspnetmvc5_aspnetmvc %}).
+> The Kendo UI Scaffolder will not include the required UI for ASP.NET MVC files to the project. To automatically achieve this, use the [Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %}). To manually achieve this, refer to [this article]({% slug aspnetmvc5_aspnetmvc %}).
 
 ## Getting Started
 
@@ -20,7 +20,7 @@ This article demonstrates how to scaffold a Kendo UI Grid for ASP.NET MVC by usi
 
 Below are listed the steps for you to follow when scaffolding the Kendo UI Grid.
 
-**Step 1** Create a new ASP.NET MVC application, include an Entity Framework Data Model and add Telerik UI for ASP.NET MVC. If you have already done so, move on tot he next step. Otherwise, follow the first four steps described [in this article]({% slug overview_gridhelper_aspnetmvc %}).
+**Step 1** Create a new ASP.NET MVC application, include an Entity Framework Data Model and add Telerik UI for ASP.NET MVC. If you have already done so, move on to the next step. Otherwise, follow the first four steps described [in this article]({% slug overview_gridhelper_aspnetmvc %}).
 
 **Step 2** Right-click the location where the Grid Controller should be generated. Select **Add** > **New Scaffolded item...** from the displayed menu. In this example, you generate it in the **Controllers** folder.
 

@@ -105,7 +105,7 @@ The `create` function should perform a similar routine as the `update` one with 
 
 * The newly created data items have no ID, so they must be added by the function script or returned by the remote service.
 * The newly created data items must be returned in the `success` method with their IDs assigned. Otherwise, the DataSource instance is going to operate with incorrect data and subsequent data operations can fail.
-* If the [`schema.data`](/api/javascript/data/datasource#configuration-schema.data) configuration is set, the `success` method should receive the created data item in an object _with the same structure_ as the object that is passed to the `success` method of the `read` function. See the example below. 
+* If the [`schema.data`](/api/javascript/data/datasource#configuration-schema.data) configuration is set, the `success` method should receive the created data item in an object _with the same structure_ as the object that is passed to the `success` method of the `read` function. See the example below.
 
 ###### Example
 
@@ -378,9 +378,11 @@ For more information on handling errors in such scenarios, refer to the section 
 
 The `update` service expects the edited data items and should return the same items (including all data fields) as a confirmation of the successful save operation. An empty response is also treated as a valid success response.
 
-If [`schema.data`](/api/javascript/data/datasource#configuration-schema.data) is set and the server response is not empty, then the server response should have the **same structure**, as the response of the `read` request. See example below.
+If [`schema.data`](/api/javascript/data/datasource#configuration-schema.data) is set and the server response is not empty, then the server response must have _the same structure_, as the response of the `read` request.
 
-###### Example with no schema.data
+The example below demonstrates a case with no `schema.data`.
+
+###### Example
 
     /*Client POST request:
 
@@ -398,7 +400,7 @@ If [`schema.data`](/api/javascript/data/datasource#configuration-schema.data) is
 
     var dataSource = new kendo.data.DataSource({
         transport: {
-            /* the other CRUD settings are ommitted for brevity */
+            /* the other CRUD settings are omitted for brevity */
             update: {
                 url: "service/products/update/",
                 type: "post"
@@ -406,7 +408,10 @@ If [`schema.data`](/api/javascript/data/datasource#configuration-schema.data) is
         }
     });
 
-###### Example with schema.data
+<!--*-->
+The example below demonstrates a case with `schema.data`.
+
+###### Example
 
     /*Client POST request:
 
@@ -426,7 +431,7 @@ If [`schema.data`](/api/javascript/data/datasource#configuration-schema.data) is
 
     var dataSource = new kendo.data.DataSource({
         transport: {
-            /* the other CRUD settings are ommitted for brevity */
+            /* the other CRUD settings are omitted for brevity */
             update: {
                 url: "service/products/update/",
                 type: "post"
