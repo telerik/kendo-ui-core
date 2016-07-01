@@ -95,6 +95,13 @@ To align the Popup to a specific element, use the `anchor` option. The Popup ope
       });
     </script>
     
+### AppendTo
+Specifies the element the Popup will be appended to. By default, the `document.body` will be used.
+
+> **Important**
+>
+> Unless specified otherwise, the Popup will attach itself to the nearest parent container with a "k-group" class. This allows for seamless integration with widgets like the Menu. In rare cases however, this behavior might yield unexpected results, such as misaligned or a not visible Popup. In those cases, explicitly specifying the `appendTo` option is recommended.
+
 ### Collisions
 To define the Popup boundary detection behavior, use the `collision ` option. It specifies the behavior of the component when it does not fit in the view port.
 
