@@ -1245,6 +1245,8 @@ var __meta__ = { // jshint ignore:line
 
             Menu.fn.init.call(that, element, options);
 
+            that._marker = kendo.guid().substring(0, 8);
+
             that.target = $(that.options.target);
 
             that._popup();
@@ -1272,7 +1274,7 @@ var __meta__ = { // jshint ignore:line
 
             Menu.fn.setOptions.call(that, options);
 
-            that.target.off(that.showOn + NS, that._showProxy);
+            that.target.off(that.showOn + NS + that._marker, that._showProxy);
 
             if (that.userEvents) {
                 that.userEvents.destroy();
@@ -1291,8 +1293,8 @@ var __meta__ = { // jshint ignore:line
         destroy: function() {
             var that = this;
 
-            that.target.off(that.options.showOn + NS);
-            DOCUMENT_ELEMENT.off(kendo.support.mousedown + NS, that._closeProxy);
+            that.target.off(that.options.showOn + NS + that._marker);
+            DOCUMENT_ELEMENT.off(kendo.support.mousedown + NS + that._marker, that._closeProxy);
 
             if (that.userEvents) {
                 that.userEvents.destroy();
@@ -1326,7 +1328,7 @@ var __meta__ = { // jshint ignore:line
 
                     DOCUMENT_ELEMENT.off(that.popup.downEvent, that.popup._mousedownProxy);
                     DOCUMENT_ELEMENT
-                        .on(kendo.support.mousedown + NS, that._closeProxy);
+                        .on(kendo.support.mousedown + NS + that._marker, that._closeProxy);
                 }
             }
 
@@ -1425,13 +1427,13 @@ var __meta__ = { // jshint ignore:line
                         allowSelection: false
                     });
 
-                    target.on(options.showOn + NS, false);
+                    target.on(options.showOn + NS + that._marker, false);
                     that.userEvents.bind("hold", that._showProxy);
                 } else {
                     if (options.filter) {
-                        target.on(options.showOn + NS, options.filter, that._showProxy);
+                        target.on(options.showOn + NS + that._marker, options.filter, that._showProxy);
                     } else {
-                        target.on(options.showOn + NS, that._showProxy);
+                        target.on(options.showOn + NS + that._marker, that._showProxy);
                     }
                 }
             }
