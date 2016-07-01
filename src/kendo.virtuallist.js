@@ -1354,6 +1354,14 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        getElementIndex: function(element) {
+            if (!(element instanceof jQuery)) {
+                return undefined;
+            }
+
+            return parseInt(element.attr("data-offset-index"), 10);
+        },
+
         _getIndecies: function(candidate) {
             var result = [], data;
 
@@ -1371,11 +1379,9 @@ var __meta__ = { // jshint ignore:line
                 result.push(candidate);
             }
 
-            if (candidate instanceof jQuery) {
-                candidate = parseInt(candidate.attr("data-offset-index"), 10);
-                if (!isNaN(candidate)) {
-                    result.push(candidate);
-                }
+            var elementIndex = this.getElementIndex(candidate);
+            if (!isNaN(elementIndex)) {
+                result.push(elementIndex);
             }
 
             if (candidate instanceof Array) {
