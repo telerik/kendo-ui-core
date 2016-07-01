@@ -545,11 +545,12 @@ var __meta__ = { // jshint ignore:line
             var filtered = that._state === STATE_FILTER;
             var isIFrame = window.self !== window.top;
             var focusedItem = that._focus();
+            var dataItem = that._getElementDataItem(focusedItem);
 
             if (!that._prevent) {
                 clearTimeout(that._typingTimeout);
 
-                if (filtered && focusedItem && !that.trigger("select", { item: focusedItem })) {
+                if (filtered && focusedItem && !that.trigger("select", { dataItem: dataItem, item: focusedItem })) {
                     that._select(focusedItem, !that.dataSource.view().length);
                 }
 
@@ -683,7 +684,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (handled) {
-                    if (that.trigger("select", { item: that._focus() })) {
+                    if (that.trigger("select", { dataItem: that._getElementDataItem(that._focus()), item: that._focus() })) {
                         that._focus(current);
                         return;
                     }
@@ -761,7 +762,7 @@ var __meta__ = { // jshint ignore:line
 
                 that._select(normalizeIndex(startIndex + idx, dataLength));
 
-                if (that.trigger("select", { item: that._focus() })) {
+                if (that.trigger("select", { dataItem: that._getElementDataItem(that._focus()), item: that._focus() })) {
                     that._select(oldFocusedItem);
                 }
 
@@ -810,12 +811,24 @@ var __meta__ = { // jshint ignore:line
             this.popup.one("open", proxy(this._popupOpen, this));
         },
 
+        _getElementDataItem: function(element) {
+            if (!element || !element[0]) {
+                return null;
+            }
+
+            if (element[0] === this.optionLabel[0]) {
+                return this._optionLabelDataItem();
+            }
+
+            return this.listView.dataItemByIndex(this.listView.getElementIndex(element));
+        },
+
         _click: function (e) {
             var item = e.item || $(e.currentTarget);
 
             e.preventDefault();
 
-            if (this.trigger("select", { item: item })) {
+            if (this.trigger("select", { dataItem: this._getElementDataItem(item), item: item })) {
                 this.close();
                 return;
             }
