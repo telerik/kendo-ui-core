@@ -1867,17 +1867,16 @@ var __meta__ = { // jshint ignore:line
             return added;
         },
 
+        getElementIndex: function(element) {
+            return $(element).data("offset-index");
+        },
+
         _get: function(candidate) {
             if (typeof candidate === "number") {
                 candidate = [candidate];
             } else if (!isArray(candidate)) {
-                candidate = $(candidate).data("offset-index");
-
-                if (candidate === undefined) {
-                    candidate = -1;
-                }
-
-                candidate = [candidate];
+                candidate = this.getElementIndex(candidate);
+                candidate = [candidate !== undefined ? candidate : -1];
             }
 
             return candidate;

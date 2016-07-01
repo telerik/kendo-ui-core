@@ -1518,4 +1518,24 @@
         ok(list.isFiltered());
     });
 
+    test("getElementIndex method LI element offset index", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ]
+            },
+            template: '#:data.name#'
+        });
+
+        list.dataSource.read();
+
+        var index = list.getElementIndex(list.element.children().eq(2));
+
+        equal(index, 2);
+    });
+
 })();
