@@ -238,11 +238,12 @@ test("close event when popup close on click", 1, function() {
     autocomplete.ul.children().first().click();
 });
 
-test("click item raises select event", 1, function() {
+test("click item raises select event", 2, function() {
     var autocomplete = input.kendoAutoComplete({
         dataSource: ["foo"],
         select: function(e) {
-            ok(e.item);
+            equal(e.item[0], autocomplete.ul.children()[0]);
+            equal(e.dataItem, autocomplete.dataSource.view()[0]);
         }
     }).data("kendoAutoComplete");
 
@@ -286,11 +287,12 @@ test("select event is not raised when custom value is entered", 0, function() {
     });
 });
 
-test("select event is raised when first item is entered", 1, function() {
+test("select event is raised when first item is entered", 2, function() {
     var autocomplete = input.kendoAutoComplete({
         dataSource: ["foo"],
         select: function(e) {
-            ok(true);
+            equal(e.item[0], autocomplete.ul.children()[0]);
+            equal(e.dataItem, autocomplete.dataSource.view()[0]);
         }
     }).data("kendoAutoComplete");
 

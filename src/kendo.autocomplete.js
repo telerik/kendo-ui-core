@@ -393,12 +393,13 @@ var __meta__ = { // jshint ignore:line
         _click: function(e) {
             var item = e.item;
             var element = this.element;
+            var dataItem = this.listView.dataItemByIndex(this.listView.getElementIndex(item));
 
             e.preventDefault();
 
             this._active = true;
 
-            if (this.trigger("select", { item: item })) {
+            if (this.trigger("select", { dataItem: dataItem, item: item })) {
                 this.close();
                 return;
             }
@@ -581,7 +582,8 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (visible && current) {
-                    if (that.trigger("select", { item: current })) {
+                    var dataItem = that.listView.dataItemByIndex(that.listView.getElementIndex(current));
+                    if (that.trigger("select", { dataItem: dataItem, item: current })) {
                         return;
                     }
 
