@@ -1443,6 +1443,10 @@ var __meta__ = { // jshint ignore:line
             Widget.fn.destroy.call(this);
         },
 
+        dataItemByIndex: function(index) {
+            return this.dataSource.flatView()[index];
+        },
+
         scrollToIndex: function(index) {
             var item = this.element[0].children[index];
 
