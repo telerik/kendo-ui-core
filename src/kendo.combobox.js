@@ -206,7 +206,10 @@ var __meta__ = { // jshint ignore:line
 
             that.text(that.text());
 
-            if (value !== that.value() && that.trigger("select", { item: that._focus() })) {
+            var item = that._focus();
+            var dataItem = this.listView.dataItemByIndex(this.listView.getElementIndex(item));
+
+            if (value !== that.value() && that.trigger("select", { dataItem: dataItem, item: item })) {
                 that.value(value);
                 return;
             }
@@ -656,10 +659,11 @@ var __meta__ = { // jshint ignore:line
 
         _click: function(e) {
             var item = e.item;
+            var dataItem = this.listView.dataItemByIndex(this.listView.getElementIndex(item));
 
             e.preventDefault();
 
-            if (this.trigger("select", { item: item })) {
+            if (this.trigger("select", { dataItem: dataItem, item: item })) {
                 this.close();
                 return;
             }

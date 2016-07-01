@@ -990,6 +990,7 @@ var __meta__ = { // jshint ignore:line
 
         _move: function(e) {
             var that = this;
+            var listView = that.listView;
             var key = e.keyCode;
             var down = key === keys.DOWN;
             var dataItem;
@@ -1000,7 +1001,7 @@ var __meta__ = { // jshint ignore:line
                 if (e.altKey) {
                     that.toggle(down);
                 } else {
-                    if (!that.listView.bound()) {
+                    if (!listView.bound()) {
                         if (!that._fetch) {
                             that.dataSource.one(CHANGE, function() {
                                 that._fetch = false;
@@ -1034,7 +1035,9 @@ var __meta__ = { // jshint ignore:line
                         }
                     }
 
-                    if (that.trigger(SELECT, { item: that._focus() })) {
+                    dataItem = listView.dataItemByIndex(listView.getElementIndex(that._focus()));
+
+                    if (that.trigger(SELECT, { dataItem: dataItem, item: that._focus() })) {
                         that._focus(current);
                         return;
                     }
@@ -1063,7 +1066,9 @@ var __meta__ = { // jshint ignore:line
                 var activeFilter = that.filterInput && that.filterInput[0] === activeElement();
 
                 if (current) {
-                    if (that.trigger(SELECT, { item: current })) {
+                    dataItem = listView.dataItemByIndex(listView.getElementIndex(current));
+
+                    if (that.trigger(SELECT, { dataItem: dataItem, item: current })) {
                         return;
                     }
 
