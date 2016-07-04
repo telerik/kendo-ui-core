@@ -8,7 +8,7 @@ position: 1
 
 # MultiSelect JSP Tag Overview
 
-The MultiSelect JSP tag is a server-side wrapper for the [Kendo UI MultiSelect](/api/javascript/ui/multiSelect) widget.
+The MultiSelect JSP tag is a server-side wrapper for the [Kendo UI MultiSelect](/api/javascript/ui/multiselect) widget.
 
 ## Getting Started
 
@@ -87,7 +87,7 @@ When deferred binding (`autoBind="false"`) is used, you need to specify a list o
 
 ### Subscribe to Events
 
-You can subscribe to all [events exposed by Kendo UI MultiSelect](/api/javascript/ui/multiSelect) by the handler name.
+You can subscribe to all [events exposed by Kendo UI MultiSelect](/api/javascript/ui/multiselect) by the handler name.
 
 ###### Example
 

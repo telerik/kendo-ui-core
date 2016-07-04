@@ -381,7 +381,7 @@ For more information, refer to the [demo on grouping](http://demos.telerik.com/a
 
 ## Event Handling
 
-You can subscribe to all MultiSelect [events](/api/javascript/ui/mutliselect#events).
+You can subscribe to all MultiSelect [events](/api/javascript/ui/multiselect#events).
 
 ### By Handler Name
 

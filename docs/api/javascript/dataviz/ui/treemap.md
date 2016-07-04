@@ -15,7 +15,7 @@ instance.
 
 If the `HierarchicalDataSource` option is set to a JavaScript object or array the widget will initialize a new [kendo.data.HierarchicalDataSource](/api/framework/hierarchicaldatasource) instance using that value as data source configuration.
 
-If the `HierarchicalDataSource` option is an existing [kendo.data.HierarchicalDataSource](/api/framework/HierarchicalDataSource) instance the widget will use that instance and will **not** initialize a new one.
+If the `HierarchicalDataSource` option is an existing [kendo.data.HierarchicalDataSource](/api/framework/hierarchicaldatasource) instance the widget will use that instance and will **not** initialize a new one.
 
 ### autoBind `Boolean` *(default: true)*
 

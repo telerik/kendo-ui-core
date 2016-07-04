@@ -8,9 +8,10 @@ position: 1
 
 # Store Data as JSON
 
-The Spreadsheet component allows you to store and load data in a native JSON format. The format follows the same structure as the [widget configuration](/api/javascript/ui/spreadsheet#configuration). It is designed to be used both for direct storage and as an [intermediate format](server-side-processing).
+The Spreadsheet component allows you to store and load data in a native JSON format. The format follows the same structure as the [widget configuration](/api/javascript/ui/spreadsheet#configuration). It is designed to be used both for direct storage and as an [intermediate format]({% slug serverside_processing_spreadsheet_widget %}).
 
 > **Important**  
+>
 > An official JSON schema will be published once the component goes out of Beta.
 
 Persisted information includes:
@@ -22,7 +23,7 @@ Persisted information includes:
 
 ## Serialization API
 
-The Spreadsheet client-side API includes the [`fromJSON`](/api/javascript/ui/spreadsheet#methods-fromJSON) and [`toJSON`](http://localhost/kendo-ui/api/javascript/ui/spreadsheet#methods-toJSON) methods for loading and storing the widget state.
+The Spreadsheet client-side API includes the [`fromJSON`](/api/javascript/ui/spreadsheet#methods-fromJSON) and [`toJSON`](/api/javascript/ui/spreadsheet#methods-toJSON) methods for loading and storing the widget state.
 
 To load the spreadsheet with data, pass an object matching the required schema, to `fromJSON`. This will reset the widget and clear all existing data.
 

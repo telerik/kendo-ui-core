@@ -26,7 +26,7 @@ The server-filtering feature can be used to display only a subset of a dataset. 
 
 Another benefit that server filtering brings about is the option to bind the widget to only one data item&mdash;the selected one. In this way, you avoid the need to retrieve the whole dataset when you want to display the selected value or text. This approach boosts the loading time of the widget.
 
-To apply the approach, send the selected value to the server and return only the matching data item. Use the  [`data`](/kendo-ui/api/javascript/data/datasource#configuration-transport.read.data) callback of the DataSource.
+To apply the approach, send the selected value to the server and return only the matching data item. Use the  [`data`](/api/javascript/data/datasource#configuration-transport.read.data) callback of the DataSource.
 
 ###### Example
 
