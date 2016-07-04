@@ -135,7 +135,29 @@ In turn, the `valueMapper` implementation is expected to return the respective d
             type: "GET",
             data: options.value, //send value to the server
             success: function (data) {
-                options.success(data); //return the index number of the correspoding data item
+                options.success(data); //return the index number of the corresponding data item
+            }
+        })
+    }
+```
+
+#### Kendo UI R3 2016 Updates
+
+Since **Kendo UI R3 2016** the developer is able to determine if the valueMapper should resolve *value to index* or *value to dataItem*. This is configured through the `mapValueTo` option that accepts two possible values - "index" or "dataItem". By default the `mapValueTo` is set to "index" which does not change the current behavior of the virtualization process.
+
+If the developer sets `mapValueTo: "dataItem"`, the `valueMapper` implementation should return the dataItems that correspond to the selected values. The widget will use the returned dataItems to render selected dataItems but not will not scroll the list to the selected dataItem. Instead when the user open the list, the widget will display the options from the first data page no matter if the selected value is part of the first page or not.
+
+###### Example
+
+```javascript
+    mapValueTo: "dataItem",
+    valueMapper: function(options) {
+        $.ajax({
+            url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+            type: "GET",
+            data: options.value, //send value to the server
+            success: function (dataItems) {
+                options.success(dataItems); //return the dataItems that correspond to provided values
             }
         })
     }
@@ -143,11 +165,17 @@ In turn, the `valueMapper` implementation is expected to return the respective d
 
 ## The valueMapper Function
 
+> Since **Kendo UI R3 2016** the valueMapper is not mandatory. It is required only if the widget has initial value or if the value method is used.
+
 ### Overview
 
-The `valueMapper` was introduced because, unlike simple Data and UI virtualization, the ComboBox needs to maintain the selected item and also to display the selected data item based on value alone. To display the selected text, the widget needs to retrieve the selected data item which is part of a particular data page that is unknown to you. The required information is gathered with the [`valueMapper`](#valuemapper) callback that passes the selected value and requests the corresponding `row` or `dataitem` index of that value. From this index you are able to calculate the page number and in this way pre-fetch only that particular page by sending an additional Ajax request.
+The `valueMapper` was introduced because, unlike simple Data and UI virtualization, the ComboBox needs to maintain the selected item and also to display the selected data item based on value alone. To display the selected text, the widget needs to retrieve the selected data item which is part of a particular data page that is unknown to you. The required information is gathered with the [`valueMapper`](#valuemapper) callback that passes the selected value and requests the corresponding `row` index or `dataItem` of that value.
 
-### Sample Case
+By default the widget expects the valueMapper to return the corresponding "row" from this index you are able to calculate the page number and in this way pre-fetch only that particular page by sending an additional Ajax request.
+
+Since **Kendo UI R3 2016** the developer can use the `mapValueTo` option to configure the widget to expect that the valueMapper will return the corresponding "dataItem". It will be used by the widget to render the pre-selected values. In this scenario the widget will always request first data page which means that when the user opens the widget's list, the list will not be scrolled to the selected value.
+
+### Sample Case `mapValueTo: "index"` (default)
 
 The `valueMapper` is called when you want to select a data item that is not present in the data source.
 
@@ -206,6 +234,29 @@ The result is:
 As mentioned in the previous section, the service maps the selected value to a particular row index. The implementation of this functionality is completely under your control.
 
 However, the most simplified implementation includes the iteration of all items counting the index of the rows. A more optimized solution still is to use a dedicated SQL method that handles this action internally. Do this by using the [`ROW_NUMBER()`](https://msdn.microsoft.com/en-us/library/ms186734.aspx) function.
+
+### Sample Case `mapValueTo: "dataItem"` (Kendo UI R3 2016)
+
+The `valueMapper` is called when you want to select a data item that is not present in the data source.
+
+The exemplary case below demonstrates the process.
+
+The widget is configuredas follows:
+- The `pageSize` is set to `50`.
+- The selected value is `foo`.
+
+On initial load, the widget checks whether the selected value is present in the loaded data. If it is not, it performs the following actions:
+
+1. It calls the `valueMapper`, requesting a dataItem that corresponds to the selected value `foo`.
+2. The `valueMapper` calls the `service 1`, passing the selected value `foo` to it.
+3. The `service 1` finds the dataItem that corresponds to the `foo` value. In this case it is `{text: "bar", value: "foo"}`.
+4. The `valueMapper` function returns this dataItem to the widget.
+5. The widget renders the selected item template.
+6. The widget requests first page from `service 2` using the `dataSource`.
+7. The `service 2` returns the first data page.
+8. The widget list displays the item from the first page no matter if the selected items are part of it or not.
+
+![Virtualization process](/controls/editors/combobox/virtualization.png)
 
 ## Known Limitations
 
