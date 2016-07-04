@@ -717,6 +717,13 @@ var __meta__ = { // jshint ignore:line
             that.dataSource.unbind(REQUESTSTART, that._requestStartHandler)
                            .unbind(REQUESTEND, that._requestEndHandler)
                            .unbind("error", that._errorHandler);
+        },
+
+        requireValueMapper: function(options, value) {
+            var hasValue = (options.value instanceof Array ? options.value.length : options.value) || (value instanceof Array ? value.length : value);
+            if (hasValue && options.virtual && typeof options.virtual.valueMapper !== "function") {
+                throw new Error("ValueMapper is not provided while the value is being set. See http://docs.telerik.com/kendo-ui/controls/editors/combobox/virtualization#the-valuemapper-function");
+            }
         }
     });
 

@@ -85,6 +85,7 @@ var __meta__ = { // jshint ignore:line
 
             that._initialIndex = options.index;
 
+            that.requireValueMapper(that.options);
             that._initList();
 
             that._cascade();
@@ -622,6 +623,8 @@ var __meta__ = { // jshint ignore:line
                 value = that._accessor() || that.listView.value()[0];
                 return value === undefined || value === null ? "" : value;
             }
+
+            that.requireValueMapper(that.options, value);
 
             that.trigger("set", { value: value });
 
