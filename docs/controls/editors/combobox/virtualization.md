@@ -188,9 +188,7 @@ On initial load, the widget checks whether the selected value is present in the 
 7. The `service 2` returns the corresponding 25th page.
 8. The `dataSource` changes the page to `25` and displays the items showing the selected item too.
 
-**Figure 1. The virtualization process**
-
-![Virtualization process](/controls/editors/combobox/virtualization.png)
+![Virtualization process](/controls/editors/combobox/mapValueTo-index.png)
 
 **Function result**
 
@@ -246,7 +244,7 @@ On initial load, the widget checks whether the selected value is present in the 
 7. The `service 2` returns the first data page.
 8. The widget list displays the items from the first page no matter if the selected items are part of it or not.
 
-![Virtualization process](/controls/editors/combobox/virtualization.png)
+![Virtualization process](/controls/editors/combobox/mapValueTo-dataItem.png)
 
 **Function result**
 
