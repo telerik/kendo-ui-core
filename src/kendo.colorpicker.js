@@ -863,7 +863,9 @@ var __meta__ = { // jshint ignore:line
                         var color = selector._selectOnHide();
                         if (!color) {
                             setTimeout(function(){
-                                that.wrapper.focus();
+                                if (that.wrapper) {
+                                    that.wrapper.focus();
+                                }
                             });
                             that._updateUI(that.color());
                         } else {
