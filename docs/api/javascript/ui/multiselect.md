@@ -1775,6 +1775,10 @@ Fired when an item from the popup is selected by the user.
 
 #### Event Data
 
+##### e.dataItem `Object`
+
+The data item instance of the selected item.
+
 ##### e.item `jQuery`
 
 The jQuery object which represents the selected item.
@@ -1816,7 +1820,7 @@ The widget instance which fired the event.
     multiselect.bind("select", multiselect_select);
     </script>
 
-#### Example - prevent selection
+#### Example - prevent the item selection
 
     <select id="multiselect" multiple="multiple">
         <option>Item1</option>

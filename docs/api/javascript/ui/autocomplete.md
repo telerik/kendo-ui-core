@@ -1344,6 +1344,10 @@ Fired when an item from the suggestion popup is selected by the user.
 
 #### Event Data
 
+##### e.dataItem `Object`
+
+The data item instance of the selected item.
+
 ##### e.item `jQuery`
 
 The jQuery object which represents the selected item.
@@ -1380,4 +1384,17 @@ The widget instance which fired the event.
     });
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
     autocomplete.bind("select", autocomplete_select);
+    </script>
+
+#### Example - prevent the item selection
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      dataSource: [ "Apples", "Oranges" ],
+      select: function(e) {
+        //call preventDefault() to prevent the selection
+        e.preventDefault();
+      }
+    });
     </script>
