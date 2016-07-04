@@ -799,9 +799,9 @@ If the developer does not specify one, the framework will automatically set `ite
 
 ### virtual.mapValueTo `String`*(default: "index")*
 
-Since **Kendo UI R3 2016** the developer is able to determine if the valueMapper should resolve *value to index* or *value to dataItem*. This is configured through the `mapValueTo` option that accepts two possible values - "index" or "dataItem". By default the `mapValueTo` is set to "index" which does not change the current behavior of the virtualization process.
+The changes introduced with the Kendo UI R3 2016 release enable you to determine if the `valueMapper` must resolve a *value to an `index`* or a *value to a `dataItem`*. This is configured through the `mapValueTo` option that accepts two possible values - `"index"` or `"dataItem"`. By default, the `mapValueTo` is set to `"index"`, which does not affect the current behavior of the virtualization process.
 
-For more information see [{% slug virtualization_kendoui_combobox_widget %}#the-valuemapper-function]
+For more information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}#value-mapping).
 
 ### virtual.valueMapper `Function`*(default: null)*
 
