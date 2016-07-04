@@ -105,6 +105,7 @@ var __meta__ = { // jshint ignore:line
             that._popup();
 
             that._tagTemplate();
+            that.requireValueMapper(that.options);
             that._initList();
 
             that._reset();
@@ -554,6 +555,8 @@ var __meta__ = { // jshint ignore:line
             if (value === undefined) {
                 return oldValue;
             }
+
+            that.requireValueMapper(that.options, value);
 
             value = that._normalizeValues(value);
 

@@ -85,6 +85,7 @@ var __meta__ = { // jshint ignore:line
 
             that._initialIndex = options.index;
 
+            that.requireValueMapper(that.options);
             that._initList();
 
             that._cascade();
@@ -485,7 +486,7 @@ var __meta__ = { // jshint ignore:line
 
             this.selectedIndex = idx;
 
-            if (idx === -1) {
+            if (idx === -1 && !dataItem) {
                 value = text = this.input[0].value;
                 this.listView.focus(-1);
             } else {
@@ -622,6 +623,8 @@ var __meta__ = { // jshint ignore:line
                 value = that._accessor() || that.listView.value()[0];
                 return value === undefined || value === null ? "" : value;
             }
+
+            that.requireValueMapper(that.options, value);
 
             that.trigger("set", { value: value });
 

@@ -283,6 +283,7 @@ var __meta__ = { // jshint ignore:line
             groupTemplate: "#:data#",
             fixedGroupTemplate: "fixed header template",
             noDataTemplate: null,
+            mapValueTo: "index",
             valueMapper: null
         },
 
@@ -483,6 +484,7 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 dataView = that._dataView,
                 valueGetter = that._valueGetter,
+                mapValueTo = that.options.mapValueTo,
                 item, match = false,
                 forSelection = [];
 
@@ -510,26 +512,70 @@ var __meta__ = { // jshint ignore:line
             if (typeof that.options.valueMapper === "function") {
                 that.options.valueMapper({
                     value: (this.options.selectable === "multiple") ? value : value[0],
-                    success: function(indexes) {
-                        if (indexes === undefined || indexes === -1 || indexes === null) {
-                            indexes = [];
-                        } else {
-                            indexes = toArray(indexes);
+                    success: function(response) {
+                        if (mapValueTo === "index") {
+                            that.mapValueToIndex(response);
+                        } else if (mapValueTo === "dataItem") {
+                            that.mapValueToDataItem(response);
                         }
-
-                        if (!indexes.length) {
-                            indexes = [-1];
-                        } else {
-                            that._values = [];
-                            that._selectedIndexes = [];
-                            that._selectedDataItems = [];
-                        }
-
-                        that.select(indexes);
                     }
                 });
             } else {
-                throw new Error("valueMapper is not provided");
+                that.select([-1]);
+            }
+        },
+
+        mapValueToIndex: function(indexes) {
+            if (indexes === undefined || indexes === -1 || indexes === null) {
+                indexes = [];
+            } else {
+                indexes = toArray(indexes);
+            }
+
+            if (!indexes.length) {
+                indexes = [-1];
+            } else {
+                this._values = [];
+                this._selectedIndexes = [];
+                this._selectedDataItems = [];
+            }
+
+            this.select(indexes);
+        },
+
+        mapValueToDataItem: function(dataItems) {
+            var removed, added;
+
+            if (dataItems === undefined || dataItems === null) {
+                dataItems = [];
+            } else {
+                dataItems = toArray(dataItems);
+            }
+
+            if (!dataItems.length) {
+                this.select([-1]);
+            } else {
+                removed = $.map(this._selectedDataItems, function(item, index) {
+                    return { index: index, dataItem: item };
+                });
+
+                added = $.map(dataItems, function(item, index) {
+                    return { index: index, dataItem: item };
+                });
+
+                this._selectedDataItems = dataItems;
+
+                this._selectedIndexes = [];
+
+                for (var i = 0; i < this._selectedDataItems.length; i++) {
+                    this._selectedIndexes.push(undefined);
+                }
+
+                this._triggerChange(removed, added);
+
+                if (this._valueDeferred) {
+                    this._valueDeferred.resolve();
+                }
             }
         },
 
@@ -909,6 +955,24 @@ var __meta__ = { // jshint ignore:line
             return this.items().filter(function(idx, element) {
                 return index === parseInt($(element).attr("data-offset-index"), 10);
             });
+        },
+
+        _getElementByDataItem: function(dataItem) {
+            var dataView = this._dataView,
+            valueGetter = this._valueGetter,
+                element;
+
+            element = dataView.find(function(viewItem) {
+                if (!viewItem.item) {
+                    return false;
+                } else if (isPrimitive(viewItem.item)) {
+                    return viewItem.item === dataItem;
+                } else {
+                    return valueGetter(viewItem.item) === valueGetter(dataItem);
+                }
+            });
+
+            return this._getElementByIndex(element.index);
         },
 
         _clean: function() {
@@ -1396,25 +1460,29 @@ var __meta__ = { // jshint ignore:line
                 selectedIndex,
                 dataItem,
                 selectedIndexes = this._selectedIndexes,
+                selectedDataItems = this._selectedDataItems,
                 position = 0,
                 selectable = this.options.selectable,
                 removedindexesCounter = 0,
-                item;
+                valueGetter = this._valueGetter,
+                item, match,
+                result = null;
 
             indices = indices.slice();
 
             if (selectable === true || !indices.length) { //deselect everything
-
                 for (var idx = 0; idx < selectedIndexes.length; idx++) {
                     if (selectedIndexes[idx] !== undefined) {
                         this._getElementByIndex(selectedIndexes[idx]).removeClass(SELECTED);
-
-                        removed.push({
-                            index: selectedIndexes[idx],
-                            position: idx,
-                            dataItem: this._selectedDataItems[idx]
-                        });
+                    } else if (selectedDataItems[idx]) {
+                        this._getElementByDataItem(selectedDataItems[idx]).removeClass(SELECTED);
                     }
+
+                    removed.push({
+                        index: selectedIndexes[idx],
+                        position: idx,
+                        dataItem: selectedDataItems[idx]
+                    });
                 }
 
                 this._values = [];
@@ -1422,28 +1490,33 @@ var __meta__ = { // jshint ignore:line
                 this._selectedIndexes = [];
             } else if (selectable === "multiple") {
                 for (var i = 0; i < indices.length; i++) {
+                    result = null;
                     position = $.inArray(indices[i], selectedIndexes);
-                    selectedIndex = selectedIndexes[position];
 
-                    if (selectedIndex !== undefined) {
-                        item = this._getElementByIndex(selectedIndex);
+                    if (position === -1 && this._view[indices[i]]) {
+                        dataItem = this._view[indices[i]].item;
 
-                        if (!item.hasClass("k-state-selected")) {
-                            continue;
+                        if (dataItem) {
+                            for (var j = 0; j < selectedDataItems.length; j++) {
+                                match = isPrimitive(dataItem) ? selectedDataItems[j] === dataItem : valueGetter(selectedDataItems[j]) === valueGetter(dataItem);
+                                if (match) {
+                                    item = this._getElementByIndex(indices[i]);
+                                    result = this._deselectSingleItem(item, j, indices[i], removedindexesCounter);
+                                }
+                            }
                         }
+                    } else {
+                        selectedIndex = selectedIndexes[position];
 
-                        item.removeClass(SELECTED);
-                        this._values.splice(position, 1);
-                        this._selectedIndexes.splice(position, 1);
-                        dataItem = this._selectedDataItems.splice(position, 1)[0];
+                        if (selectedIndex !== undefined) {
+                            item = this._getElementByIndex(selectedIndex);
+                            result = this._deselectSingleItem(item, position, selectedIndex, removedindexesCounter);
+                        }
+                    }
 
+                    if (result) {
                         indices.splice(i, 1);
-
-                        removed.push({
-                            index: selectedIndex,
-                            position: position + removedindexesCounter,
-                            dataItem: dataItem
-                        });
+                        removed.push(result);
 
                         removedindexesCounter++;
                         i--;
@@ -1454,6 +1527,25 @@ var __meta__ = { // jshint ignore:line
             return {
                 indices: indices,
                 removed: removed
+            };
+        },
+
+        _deselectSingleItem: function(item, position, selectedIndex, removedindexesCounter) {
+            var dataItem;
+
+            if (!item.hasClass("k-state-selected")) {
+                return;
+            }
+
+            item.removeClass(SELECTED);
+            this._values.splice(position, 1);
+            this._selectedIndexes.splice(position, 1);
+            dataItem = this._selectedDataItems.splice(position, 1)[0];
+
+            return {
+                index: selectedIndex,
+                position: position + removedindexesCounter,
+                dataItem: dataItem
             };
         },
 

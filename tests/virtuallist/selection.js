@@ -451,7 +451,6 @@
         asyncDataSource.read().then(function() {
             start();
             virtualList.bind("change", function(e) {
-                debugger;
                 ok(!virtualList.items().eq(1).hasClass(SELECTED), "Item 1 is not selected any more");
             });
             virtualList.value("");
