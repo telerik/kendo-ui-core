@@ -1815,3 +1815,86 @@ The widget instance which fired the event.
     var multiselect = $("#multiselect").data("kendoMultiSelect");
     multiselect.bind("select", multiselect_select);
     </script>
+
+#### Example - prevent selection
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      select: function(e) {
+        //call preventDefault() to prevent the selection
+        e.preventDefault();
+      }
+    });
+    </script>
+
+### deselect
+
+Fired when an item is deselected or tag is removed.
+
+> **Important:** The event is not fired when an item is deselected programmatically.
+
+#### Event Data
+
+##### e.dataItem `Object`
+
+The data item instance of the deselected item/tag.
+
+##### e.item `jQuery`
+
+The jQuery object which represents the deselected item or removed tag element.
+
+##### e.sender `kendo.ui.MultiSelect`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "deselect" event during initialization
+
+    <select id="multiselect" multiple="multiple">
+        <option selected>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      deselect: function(e) {
+        var dataItem = e.dataItem;
+        var item = e.item;
+        // Use the deselected data item or jQuery item
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "deselect" event after initialization
+
+    <select id="multiselect" multiple="multiple">
+        <option selected>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    function multiselect_deselect(e) {
+        var dataItem = e.dataItem;
+        var item = e.item;
+        // Use the deselected data item or jQuery item
+    }
+    $("#multiselect").kendoMultiSelect();
+    var multiselect = $("#multiselect").data("kendoMultiSelect");
+    multiselect.bind("deselect", multiselect_deselect);
+    </script>
+
+#### Example - prevent the deselection action
+
+    <select id="multiselect" multiple="multiple">
+        <option selected>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      deselect: function(e) {
+        // Call preventDefault() to prevent the deselection
+        e.preventDefault();
+      }
+    });
+    </script>
