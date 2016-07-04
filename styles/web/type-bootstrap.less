@@ -860,6 +860,11 @@ td.k-state-focused,
     .box-shadow(@focused-item-shadow);
 }
 
+.k-popup .k-list .k-state-focused {
+    border-radius: @main-border-radius;
+    box-shadow: inset 0 0 2px 0 @accent, @focused-item-shadow;
+}
+
 .k-state-focused.k-state-selected,
 .k-list>.k-state-focused.k-state-selected,
 .k-listview>.k-state-focused.k-state-selected,
