@@ -7533,7 +7533,7 @@ The data source to which the widget should be bound.
 Sets the options of the Grid. Use this method if you want to enable/disable a particular feature/option or to load
 the complete state obtained previously with the [`getOptions`](#methods-getOptions) method.
 
-When `setOptions` is called, the Grid widget will be destroyed and recreated.
+When `setOptions` is called, the Grid widget will be destroyed and recreated. If the widget is bound to remote data, a new read request will be made.
 
 > There are three important things to keep in mind when using `getOptions` and `setOptions`.
 >
