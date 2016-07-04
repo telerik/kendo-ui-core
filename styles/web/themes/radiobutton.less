@@ -53,6 +53,11 @@
     box-shadow: @radio-disabled-box-shadow;
 }
 
+.k-radio:disabled:checked+.k-radio-label:after {
+    background-color: @radio-checked-background-color;
+    opacity: .5;
+}
+
 .k-radio:focus + .k-radio-label:before {
    border-color: @radio-active-border-color;
    box-shadow: @radio-active-box-shadow;
