@@ -2231,6 +2231,16 @@ html .km-pane-wrapper .km-widget,
     box-shadow: 0 0 0 12px fadeout(@hover-background, 70%);
 }
 
+
+.k-radio:disabled:checked + .k-radio-label:before,
+.k-radio:disabled:checked + .k-radio-label:hover:before {
+    border-color: @radio-disabled-border-color;
+}
+
+.k-radio:disabled:checked + .k-radio-label:active:before {
+    box-shadow: none;
+}
+
 // Retina sprite
 @media only screen and (-webkit-min-device-pixel-ratio: 1.2),
        only screen and (min-device-pixel-ratio: 1.2) {
