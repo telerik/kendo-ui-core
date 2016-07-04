@@ -1679,4 +1679,96 @@
             });
         });
     });
+
+    test("dataItemByIndex method returns a dataItem corresponding to the index", 3, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            dataSource: new kendo.data.DataSource({
+                transport: {
+                    read: function(options) {
+                        options.success({ data: generateData(options.data), total: 300 });
+                    }
+                },
+                serverPaging: true,
+                pageSize: 40,
+                schema: {
+                    data: "data",
+                    total: "total"
+                }
+            }),
+            height: 500,
+            itemHeight: 50,
+            valueMapper: function(o) {
+                o.success(o.value);
+            },
+            value: 210
+        }));
+
+        virtualList.dataSource.read().then(function() {
+            var dataItem = virtualList.dataItemByIndex(210);
+
+            ok(dataItem);
+            equal(dataItem.id, 210);
+            equal(dataItem.value, 210);
+        });
+    });
+
+    test("dataItemByIndex method returns a dataItem corresponding to the index", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            dataSource: new kendo.data.DataSource({
+                transport: {
+                    read: function(options) {
+                        options.success({ data: generateData(options.data), total: 300 });
+                    }
+                },
+                serverPaging: true,
+                pageSize: 40,
+                schema: {
+                    data: "data",
+                    total: "total"
+                }
+            }),
+            height: 500,
+            itemHeight: 50,
+            valueMapper: function(o) {
+                o.success(o.value);
+            }
+        }));
+
+        virtualList.dataSource.read().then(function() {
+            var dataItem = virtualList.dataItemByIndex(210);
+
+            equal(dataItem, null);
+        });
+
+    });
+
+    test("getElementIndex method returns LI offset index", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            dataSource: new kendo.data.DataSource({
+                transport: {
+                    read: function(options) {
+                        options.success({ data: generateData(options.data), total: 300 });
+                    }
+                },
+                serverPaging: true,
+                pageSize: 40,
+                schema: {
+                    data: "data",
+                    total: "total"
+                }
+            }),
+            height: 500,
+            itemHeight: 50,
+            valueMapper: function(o) {
+                o.success(o.value);
+            }
+        }));
+
+        virtualList.dataSource.read().then(function() {
+            var li = virtualList.element.children().eq(3);
+            var index = virtualList.getElementIndex(li);
+            equal(index, 3);
+        });
+
+    });
 })();

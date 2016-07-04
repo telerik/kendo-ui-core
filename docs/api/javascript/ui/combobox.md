@@ -1683,6 +1683,10 @@ Fired when an item from the popup is selected by the user either with mouse/tap 
 
 #### Event Data
 
+##### e.dataItem `Object`
+
+The data item instance of the selected item.
+
 ##### e.item `jQuery`
 
 The jQuery object which represents the selected item.
@@ -1723,6 +1727,19 @@ The widget instance which fired the event.
     });
     var combobox = $("#combobox").data("kendoComboBox");
     combobox.bind("select", combobox_select);
+    </script>
+
+#### Example - prevent the item selection
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      dataSource: [ "Apples", "Oranges" ],
+      select: function(e) {
+        //call preventDefault() to prevent the selection
+        e.preventDefault();
+      }
+    });
     </script>
 
 ### cascade

@@ -622,6 +622,28 @@ var __meta__ = { // jshint ignore:line
             return view[index];
         },
 
+        dataItemByIndex: function(index) {
+            var that = this;
+            var dataSource = that.dataSource;
+            var oldSkip = dataSource.skip();
+            var dataItem = null;
+
+            that.mute(function() {
+                var take = that.itemCount;
+                var skip = that._getSkip(index, take);
+
+                dataSource.range(skip, take); //switch the range to get the dataItem
+
+                if (dataSource.skip() === (skip + take)) { //the range is found
+                    dataItem = that._findDataItem([index - skip]);
+                }
+
+                dataSource.range(oldSkip, take); //switch back the range
+            });
+
+            return dataItem;
+        },
+
         selectedDataItems: function() {
             return this._selectedDataItems.slice();
         },
@@ -1332,6 +1354,14 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        getElementIndex: function(element) {
+            if (!(element instanceof jQuery)) {
+                return undefined;
+            }
+
+            return parseInt(element.attr("data-offset-index"), 10);
+        },
+
         _getIndecies: function(candidate) {
             var result = [], data;
 
@@ -1349,11 +1379,9 @@ var __meta__ = { // jshint ignore:line
                 result.push(candidate);
             }
 
-            if (candidate instanceof jQuery) {
-                candidate = parseInt(candidate.attr("data-offset-index"), 10);
-                if (!isNaN(candidate)) {
-                    result.push(candidate);
-                }
+            var elementIndex = this.getElementIndex(candidate);
+            if (!isNaN(elementIndex)) {
+                result.push(elementIndex);
             }
 
             if (candidate instanceof Array) {
@@ -1476,6 +1504,12 @@ var __meta__ = { // jshint ignore:line
             return removed;
         },
 
+        _getSkip: function(index, take) {
+            var page = index < take ? 1 : Math.floor(index / take) + 1;
+
+            return (page - 1) * take;
+        },
+
         _select: function(indexes) {
             var that = this,
                 singleSelection = this.options.selectable !== "multiple",
@@ -1494,8 +1528,7 @@ var __meta__ = { // jshint ignore:line
             oldSkip = dataSource.skip();
 
             $.each(indexes, function(_, index) {
-                var page = index < take ? 1 : Math.floor(index / take) + 1;
-                var skip = (page - 1) * take;
+                var skip = that._getSkip(index, take);
 
                 that.mute(function() {
                     dataSource.range(skip, take); //switch the range to get the dataItem

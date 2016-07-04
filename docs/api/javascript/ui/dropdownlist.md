@@ -1739,6 +1739,10 @@ and/or check if the selected dateItem's text is equal to the optionLabel string.
 
 #### Event Data
 
+##### e.dataItem `Object`
+
+The data item instance of the selected item.
+
 ##### e.item `jQuery`
 
 The jQuery object which represents the selected item.
@@ -1779,6 +1783,19 @@ The widget instance which fired the event.
     });
     var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
     dropdownlist.bind("select", dropdownlist_select);
+    </script>
+
+#### Example - prevent the item selection
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: [ "Apples", "Oranges" ],
+      select: function(e) {
+        //call preventDefault() to prevent the selection
+        e.preventDefault();
+      }
+    });
     </script>
 
 ### cascade

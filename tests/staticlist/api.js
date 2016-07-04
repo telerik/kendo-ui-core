@@ -228,6 +228,29 @@
         equal(values[1], "item3");
     });
 
+    test("dataItemByIndex method returns a dataItem corresponding to the index", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            selectable: "multiple"
+        });
+
+        list.dataSource.read();
+
+        var dataItem = list.dataItemByIndex(2);
+
+        equal(dataItem, list.dataSource.view()[1].items[0]);
+    });
+
     test("focus method focuses li element", function() {
         var list = new StaticList(element, {
             dataSource: ["item1", "item2", "item3"],
@@ -1493,6 +1516,26 @@
         list.dataSource.filter({ field: "", operator: "eq", value: "item2" });
 
         ok(list.isFiltered());
+    });
+
+    test("getElementIndex method LI element offset index", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ]
+            },
+            template: '#:data.name#'
+        });
+
+        list.dataSource.read();
+
+        var index = list.getElementIndex(list.element.children().eq(2));
+
+        equal(index, 2);
     });
 
 })();
