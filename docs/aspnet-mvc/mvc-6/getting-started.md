@@ -51,15 +51,15 @@ Set up the [Telerik NuGet Private Feed]({% slug aspnetmvc_nuget %}#set-up-nuget-
 
 ![NuGet package manager](images/manage-nuget-packages.png)
 
-**Step 2** Choose the [Telerik package source]({% slug aspnetmvc_nuget %}#set-up-nuget-package-source) and search for `Kendo.Mvc`. Preview releases are also available on `api.nuget.org`.
+**Step 2** Choose the [Telerik package source]({% slug aspnetmvc_nuget %}#set-up-nuget-package-source) and search for `Telerik.UI.for.AspNet.Core`.
 
-**Step 3** Install the `Kendo.Mvc` package version 2015.2.909 or later. This should add a line to you `project.json` similar to the one shown below.
+**Step 3** Install the `Telerik.UI.for.AspNet.Core` package. This should add a line to you `project.json` similar to the one shown below.
 
 ###### Example
 
         "dependencies": {
             ...
-            "Kendo.Mvc": "{{ site.mvcCoreVersion }}"
+            "Telerik.UI.for.AspNet.Core": "{{ site.mvcCoreVersion }}"
         }
 
 **Step 4** Open `Startup.cs`, using a text editor (IDE) and update it as described below.
@@ -74,6 +74,10 @@ Locate the `ConfigureServices` method and add a call to `services.AddKendo` at t
 
             // Add Kendo UI services to the services container
             services.AddKendo();
+
+            // Maintain property names during serialization. See:
+            // https://github.com/aspnet/Announcements/issues/194
+            services.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
         }
 
 Locate the `Configure` method and add a call to `app.UseKendo` at the end.
