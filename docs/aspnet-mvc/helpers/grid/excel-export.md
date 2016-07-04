@@ -143,7 +143,7 @@ For more information on how to export multiple Grids to a separate Excel sheet i
 
 * [Create Excel Documents with Kendo UI]({% slug introduction_excelexport_kendoui %})
 * [Save Files with Kendo UI]({% slug overview_savingfiles_kendoui %})
-* [API Reference: kendo.ooxml.Workbook](/api/javascript/ooxml/Workbook)
+* [API Reference: kendo.ooxml.Workbook](/api/javascript/ooxml/workbook)
 
 Other articles on the Kendo UI Grid for ASP.NET MVC:
 

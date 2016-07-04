@@ -746,7 +746,7 @@ The resulting code should be like the one shown below.
 
 **Step 6** Refresh the page to see that the first item in the list is selected by default.
 
-![employee list selected](images\chapter6\employee-list-selected.jpg)
+![employee list selected](images/chapter6/employee-list-selected.jpg)
 
 Selecting the first item using the `DataBound` event was a good start. Next we'll take it a step further by using the selected item to populate a Kendo UI template showing the selected employee on the dashboard.
 
@@ -850,10 +850,10 @@ The Kendo UI DataSource has many abilities and responsibilities, among which to:
 - Process serialization formats to and from a remote endpoint.
 - [Synchronize updates, create, update, delete]({% slug cruddataoperations_kendoui_datasourcecomponent%}) to and from a remote endpoint.
 - [Maintain an in-memory cache of data, including changes]({% slug offlinesupport_kendoui_datasourcecomponent %}) for updating to a remote endpoint.
-- Calculate and maintain [aggregates](/api/javascript/data/datasource#methods-aggregate), [sorting order](http://demos.telerik.com/kendo-ui/api/javascript/data/datasource#methods-sort) and [paging](/api/javascript/data/datasource#methods-page).
+- Calculate and maintain [aggregates](/api/javascript/data/datasource#methods-aggregate), [sorting order](/api/javascript/data/datasource#methods-sort) and [paging](/api/javascript/data/datasource#methods-page).
 - Provide a query mechanism via [filter expressions](/api/javascript/data/datasource#methods-filter).
 
-For detailed information on the capabilities of the [DataSource]({% slug overview_kendoui_datasourcecomponent %}), refer to its [configuration API methods, and events](http://demos.telerik.com/kendo-ui/api/javascript/data/datasource), and [demos](http://demos.telerik.com/kendo-ui/datasource/index).
+For detailed information on the capabilities of the [DataSource]({% slug overview_kendoui_datasourcecomponent %}), refer to its [configuration API methods, and events](/api/javascript/data/datasource), and [demos](http://demos.telerik.com/kendo-ui/datasource/index).
 
 At this point the dashboard is showing all invoice data. Let's use the `EmployeeList` list view and `StatsFrom`/`StatsTo` date pickers to filter the invoice grid by invoking the grid's datasource.
 
