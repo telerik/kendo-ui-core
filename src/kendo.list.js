@@ -90,7 +90,7 @@ var __meta__ = { // jshint ignore:line
             valuePrimitive: false,
             footerTemplate: "",
             headerTemplate: "",
-            noDataTemplate: "No results found."
+            noDataTemplate: "No data found."
         },
 
         setOptions: function(options) {
