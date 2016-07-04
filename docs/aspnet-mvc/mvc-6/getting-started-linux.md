@@ -145,13 +145,13 @@ As a result, the response demonstrated in the example below is delivered.
 
 ### Add NuGet Packages
 
-**Step 1.** Open the `project.json` file, using a text editor, and add the `Kendo.Mvc` dependency.
+**Step 1.** Open the `project.json` file, using a text editor, and add the `Telerik.UI.for.AspNet.Core` dependency.
 
 ###### Example
 
         "dependencies": {
             ...
-            "Kendo.Mvc": "{{ site.mvcCoreVersion }}"
+            "Telerik.UI.for.AspNet.Core": "{{ site.mvcCoreVersion }}"
         }
 
 **Step 2.** Navigate to the project folder and restore the packages again.
@@ -172,6 +172,10 @@ Locate the `ConfigureServices` method and add a call to `services.AddKendo` at t
 
             // Add Kendo UI services to the services container
             services.AddKendo();
+
+            // Maintain property names during serialization. See:
+            // https://github.com/aspnet/Announcements/issues/194
+            services.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
         }
 
 Locate the `Configure` method and add a call to `app.UseKendo` at the end.
