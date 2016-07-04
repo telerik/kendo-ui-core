@@ -488,7 +488,7 @@ var __meta__ = { // jshint ignore:line
 
         var length = function(value) {
             //length is irrelevant when value is not collection
-            return valueIsCollection ? value.length : 0;
+            return value && valueIsCollection ? value.length : 0;
         };
 
         var currentValueLength = length(getter(scope));

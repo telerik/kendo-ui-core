@@ -178,6 +178,25 @@
         equal($(items[2]).text(), "blue - My text");
     });
 
+    ngTest("multiselect initializes with a undefined model value", 1, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+
+            $scope.selectOptions = {
+                dataSource: [ "red", "green", "blue" ],
+                itemTemplate: "{{dataItem}} - {{text}}",
+                valuePrimitive: true
+            };
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-multiselect k-ng-model="object.selectedColors" k-options=selectOptions></select></div>');
+    },
+
+    function() {
+        var widget = QUnit.fixture.find("select").getKendoMultiSelect();
+
+        ok(widget);
+    });
+
     //ng-model
 
     ngTest("multiselect with autoBind:false skips binding when value is null", 2, function() {
