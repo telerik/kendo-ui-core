@@ -271,7 +271,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             for (var i = 0; i < e.added.length; i++) {
-                if (optionsMap[valueGetter(e.added[i])] === undefined) {
+                if (optionsMap[valueGetter(e.added[i].dataItem)] === undefined) {
                     this._render(data); //render select element <option> tags if the item does not persist in the current data view
                     break;
                 }

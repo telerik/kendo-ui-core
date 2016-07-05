@@ -793,4 +793,18 @@
         select.kendoMultiSelect().data("kendoMultiSelect");
         equal(select.attr("disabled"), "disabled");
     });
+
+    test("MultiSelect doesn't re-render options on list change when value exists", function() {
+        popuplateSelect();
+
+        var multiselect = select.kendoMultiSelect().data("kendoMultiSelect");
+
+        stub(multiselect, {
+            _render: multiselect._render
+        });
+
+        multiselect.value([1, 3, 5]);
+
+        equal(multiselect.calls("_render"), 0);
+    });
 })();
