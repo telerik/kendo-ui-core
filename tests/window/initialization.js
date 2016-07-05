@@ -23,7 +23,7 @@
             });
             QUnit.fixture.closest("body").find(".k-overlay").remove();
             kendo.effects.enable();
-            $.mockjaxClear();
+            $.mockjax.clear();
         }
     });
 

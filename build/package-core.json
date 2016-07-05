@@ -1,0 +1,13 @@
+{
+    "name": "kendo-ui-core",
+    "license": "Apache 2.0",
+    "version": "$KENDO_VERSION",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/telerik/kendo-ui-core.git"
+    },
+    "dependencies": {
+        "jquery": ">=1.9.1"
+    },
+    "main": "js/kendo.ui.core.js"
+}

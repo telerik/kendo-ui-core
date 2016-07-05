@@ -958,19 +958,23 @@ currently selected tab.
 #### Example
 
     <div id="tabstrip">
-        <ul>
-            <li>Tab 1</li>
-            <li>Tab 2</li>
-        </ul>
-        <div>Content 1</div>
-        <div>Content 2</div>
+      <ul>
+        <li>Tab 1</li>
+        <li>Tab 2</li>
+      </ul>
+      <div>
+        <button class='k-button'>Select second tab</button>
+      </div>
+      <div>Content 2</div>
     </div>
 
     <script>
-        var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+      var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
 
-        tabStrip.select("li:first");        // Select by jQuery selector
-        tabStrip.select(1);                 // Select by index
+      tabStrip.select("li:first");  // Select by jQuery selector
+      $("#tabstrip").on("click", ".k-button", function() {
+      	  tabStrip.select(1);   // Select by index
+      })
     </script>
 
 #### Parameters
@@ -1026,7 +1030,7 @@ The content element of the activated tab.
 
 #### Attach activate event handler during initialization; detach via unbind()
 
-    <div id="tabstrip">
+    <div id="tabStrip">
         <ul>
             <li>Tab 1</li>
             <li>Tab 2</li>
@@ -1285,4 +1289,3 @@ The content element of the activated tab.
         var tabStrip = $("#tabStrip").kendoTabStrip().data("kendoTabStrip");
         tabStrip.bind("show", onShow);
     </script>
-

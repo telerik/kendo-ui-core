@@ -31,7 +31,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeM
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%= Html.Kendo().TreeMap()
                 .Name("treeMap")
@@ -44,9 +44,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeM
                 .ValueField("Value")
                 .TextField("Name")
         %>
-
-<!--_-->
-**Razor**
+```
+```tab-Razor
 
         $(Html.Kendo().TreeMap()
               .Name("treeMap")
@@ -59,8 +58,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeM
               .ValueField("Value")
               .TextField("Name")
         )
+```
 
-<!--_-->
 ## Event Handling
 
 You can subscribe to all TreeMap [events](/api/javascript/dataviz/ui/treemap#events).
@@ -71,7 +70,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%= Html.Kendo().TreeMap()
                 .Name("treemap")
@@ -90,8 +89,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the dataBound event.
         }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         $(Html.Kendo().TreeMap()
               .Name("treemap")
@@ -110,6 +109,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the dataBound event.
         }
         </script>
+```
 
 ### By Template Delegate
 
@@ -117,7 +117,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().TreeMap()
               .Name("treemap")
@@ -134,6 +134,7 @@ The example below demonstrates how to subscribe to events by a template delegate
                     </text>)
               )
         )
+```
 
 ## Reference
 
@@ -155,6 +156,7 @@ You can reference an existing Kendo UI TreeMap instance via [`jQuery.data()`](ht
 
 Other articles on Telerik UI for ASP.NET MVC and on the TreeMap:
 
+* [ASP.NET MVC API Reference: TreeMapBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/TreeMapBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

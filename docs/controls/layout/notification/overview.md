@@ -10,8 +10,7 @@ position: 1
 
 The [Kendo UI Notification widget](http://demos.telerik.com/kendo-ui/notification/index) provides a styled UI widget with arbitrary content, which can provide information to the user on various occasions.
 
-> **Important**  
-> The content of this page is intended to users that are familiar with the [fundamental Kendo UI widget concepts](/widgets).
+This article assumes that you are familiar with the [fundamental Kendo UI widget concepts]({% slug widget_methodsand_events_kendoui_installation %}).
 
 ## Getting Started
 
@@ -152,7 +151,7 @@ When a popup notification message from a given stack is hidden, the remaining vi
 
 > **Important**  
 >
-> Using several Notification widget instances, which display notifications at the same place on the page, is not recommended because the notifications from the multiple instances will overlap.
+> The usage of more than one Notification widget instances, which display notifications at the same place on the page, is not recommended because the notifications from the multiple instances will overlap.
 
 #### Static messages
 

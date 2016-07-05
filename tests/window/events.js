@@ -8,7 +8,7 @@
                 $(element).data("kendoWindow").destroy();
             });
             QUnit.fixture.closest("body").find(".k-overlay").remove();
-            $.mockjaxClear();
+            $.mockjax.clear();
         }
     });
 
@@ -180,7 +180,7 @@
                 $(element).data("kendoWindow").destroy();
             });
             QUnit.fixture.closest("body").find(".k-overlay").remove();
-            $.mockjaxClear();
+            $.mockjax.clear();
         }
     });
 

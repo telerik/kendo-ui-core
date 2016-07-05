@@ -52,5 +52,6 @@ Other articles on Kendo UI MVVM:
 * [MVVM Overview]({% slug overview_mvvmpattern_kendoui %})
 * [ObservableObject Overview]({% slug overview_observabeobject_kendoui %})
 * [Tutorial on How to Build MVVM Bound Forms]({% slug mvvmboundforms_mvvmpattern_kendoui %})
+* [How to Bind Container to Extended ObservableObject with Default Values]({% slug howto_bindacontainertoanextended_observableobjectwithdefaultvalues_mvvm %})
 
 For detailed information on the bindings Kendo UI MVVM supports, refer to the section about [Kendo UI MVVM bindings]({% slug attributebinding_mvvm_kendoui %}).

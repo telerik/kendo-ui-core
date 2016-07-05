@@ -95,6 +95,30 @@
         equal(element.children(":first").html(), "new item");
     });
 
+    test("setOptions re-renders noDataTemplate", function() {
+        var list = new StaticList(element, {
+            noDataTemplate: "test"
+        });
+
+        list.setOptions({
+            noDataTemplate: "no data"
+        });
+
+        equal(list.noData.text(), "no data");
+    });
+
+    test("setOptions removes noData template", function() {
+        var list = new StaticList(element, {
+            noDataTemplate: "test"
+        });
+
+        list.setOptions({
+            noDataTemplate: null
+        });
+
+        equal(list.noData, null);
+    });
+
     test("setOptions does not update bound state", function() {
         var list = new StaticList(element, {
             dataSource: ["item"],
@@ -202,6 +226,29 @@
         equal(values.length, 2);
         equal(values[0], "item1");
         equal(values[1], "item3");
+    });
+
+    test("dataItemByIndex method returns a dataItem corresponding to the index", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            selectable: "multiple"
+        });
+
+        list.dataSource.read();
+
+        var dataItem = list.dataItemByIndex(2);
+
+        equal(dataItem, list.dataSource.view()[1].items[0]);
     });
 
     test("focus method focuses li element", function() {
@@ -1469,6 +1516,26 @@
         list.dataSource.filter({ field: "", operator: "eq", value: "item2" });
 
         ok(list.isFiltered());
+    });
+
+    test("getElementIndex method LI element offset index", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ]
+            },
+            template: '#:data.name#'
+        });
+
+        list.dataSource.read();
+
+        var index = list.getElementIndex(list.element.children().eq(2));
+
+        equal(index, 2);
     });
 
 })();

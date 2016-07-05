@@ -1010,5 +1010,22 @@ test("created method returns added records if server grouping is enabled", funct
     equal(created[0], added);
 });
 
+test("deleted records are cleared when datasource is re-read", function() {
+    var dataSource = new DataSource({
+        data: [{id: 1},{id: 2}],
+        schema: {
+            model: { id: "id" }
+        }
+    });
+
+    dataSource.read();
+    dataSource.remove(dataSource.at(0));
+
+    dataSource.read();
+
+    var destroyed = dataSource.destroyed();
+
+    equal(destroyed.length, 0);
+});
 
 }());

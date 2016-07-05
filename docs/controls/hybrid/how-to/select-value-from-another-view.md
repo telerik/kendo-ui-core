@@ -71,9 +71,10 @@ The example below demonstrates how to navigate to a child view from a ListView, 
 
 ## See Also
 
-Articles and other how-to examples on Kendo UI hybrid components:
+Articles and other how-to examples on the Kendo UI hybrid components:
 
 * [Overview of the Hybrid UI Components in Kendo UI]({% slug overview_hybridkendoui %})
 * [How to Create Fixed Content Areas with Scroller]({% slug howto_createfixedcontentarea_hybridui %})
-* [How to Create Relative Content Size Using Flexboxes]({% slug howto_createrelative_contentsize_usingflexboxes_hybridui %})
 * [How to Set Initial View Prior to Initialization in AngularJS]({% slug howto_setinitiaviewpriortoinitialization_angular_hybridui %})
+
+For more runnable examples on the Kendo UI hybrid controls, browse the [**How To** documentation folder]({% slug include_esri_map_mobile_application %}).

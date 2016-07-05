@@ -28,7 +28,7 @@ The example below demonstrates how to customize the column appearance of a serve
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
     <% Html.Kendo().Grid<Models.Product>(Model)
            .Name("Grid")
@@ -43,6 +43,7 @@ The example below demonstrates how to customize the column appearance of a serve
            })
            .Render();
     %>
+```
 
 **Razor**
 

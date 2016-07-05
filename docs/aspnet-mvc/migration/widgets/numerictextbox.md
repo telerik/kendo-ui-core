@@ -1,77 +1,105 @@
 ---
 title: NumericTextBox
-page_title: API documentation for Kendo UI jQuery NumericTextBox control with ASP.NET MVC
-description: Documentation and code examples about server-side and client-side API for Kendo UI NumericTextBox component.
+page_title: NumericTextBox | Migrate from Telerik Extensions
+description: "Handle ASP.NET MVC server-side API for the Kendo UI NumericTextBox widget."
+slug: numerictextbox_migrationextensions_aspnetmvc
 ---
 
-# Server-Side API
+# NumericTextBox Migration
 
-**IncrementStep**:
+This article demonstrates the ASP.NET MVC server-side API for the Kendo UI NumericTextBox widget.
 
-#### Old
+## Server-Side API
+
+### IncrementStep
+
+```tab-Previous
 
     Html.Telerik().NumericTextBox().IncrementStep(1)
+```
+```tab-Current
 
-#### New
-    
     Html.Kendo().NumericTextBox().Step(1)
+```
 
-Min/Max value:
+### Min Value
 
-#### Old
+```tab-Previous
 
     Html.Telerik().NumericTextBox().MinValue(1)
-    Html.Telerik().NumericTextBox().MaxValue(1)
-
-#### New
+```
+```tab-Current
 
     Html.Kendo().NumericTextBox().Min(1)
+
+```
+
+### Max Value
+
+```tab-Previous
+
+    Html.Telerik().NumericTextBox().MaxValue(1)
+```
+```tab-Current
+
     Html.Kendo().NumericTextBox().Max(1)
+```
 
-Empty message:
+### Empty Message
 
-#### Old
+```tab-Previous
 
     Html.Telerik().NumericTextBox().EmptyMessage(“Enter”)
-
-#### New
+```
+```tab-Current
 
     Html.Kendo().NumericTextBox().Placeholder(“Enter”)
+```
 
-ButtonTitleUp and ButtonTitleDown:
+### ButtonTitleUp and ButtonTitleDown
 
 Not implemented.
 
-DecimalDigits:
+### DecimalDigits
 
-#### Old
-    
+```tab-Previous
+
     Html.Telerik().NumericTextBox().DecimalDigits(3)
-
-#### New
+```
+```tab-Current
 
     Html.Kendo().NumericTextBox().Decimals(3)
-    
-**NumberGroupSize**, **NumberGroupSeparator**, **NegativePatternIndex**, **DecimalSeparator**, **CurrencySymbol**:
+```
 
-Not implemented in Kendo. Can use **Format()** and **Culture()** methods to achieve the same result.
+The `NumberGroupSize`, `NumberGroupSeparator`, `NegativePatternIndex`, `DecimalSeparator`, and `CurrencySymbol` are not implemented in Kendo UI. Use the `Format()` and `Culture()` methods instead to achieve the same result.
 
-# Client-Side API
+## Client-Side API
 
-## Events
+### Events
 
-All Events No Longer Have the “On” Prefix.
+None of the events has the `On` prefix anymore.
 
-All Widgets No Longer Have The OnLoad Event. Please Use **$(document).ready()** Instead.
+None of the widgets features the `OnLoad` event anymore. Use the `$(document).ready()` instead.
 
-Disable and enable:
+### Enable and Disable
 
-#### Old
+```tab-Previous
 
     var datePicker = $("#DatePicker").data("tTextBox");
     datePicker.disable();
+```
+```tab-Current
 
-#### New
-    
     var datePicker = $("#datepicker").data("kendoNumericTextBox");
     datePicker.enable(false);
+```
+
+## See Also
+
+Other articles on migrating from Telerik Extensions:
+
+* [Migrate the AutoComplete]({% slug autocomplete_migrationextensions_aspnetmvc %})
+* [Migrate the Calendar]({% slug calendar_migrationextensions_aspnetmvc %})
+* [Migrate the Chart]({% slug chart_migrationextensions_aspnetmvc %})
+
+To see the articles on migrating Кendo UI controls from Telerik Extensions, browse [this section]({% slug combobox_migrationextensions_aspnetmvc %}).

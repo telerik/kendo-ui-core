@@ -1,7 +1,7 @@
 ---
 title: Bundle Support for Kendo UI Components
 page_title: Bundle Support for Kendo UI Components | Kendo UI Getting Started
-description: "Learn which are the Kendo UI components supported by Kendo UI Core, Kendo UI Professional, UI for ASP .NET MVC, UI for JSP, and UI for PHP."
+description: "Check out the controls supported by Kendo UI Core, Kendo UI Professional, and Kendo UI Complete."
 previous_url: /intro/list-of-widgets
 slug: bundle_supportfor_kendoui_components
 position: 2
@@ -11,7 +11,7 @@ position: 2
 
 The following table lists all Kendo UI components with regard to their support by the different Kendo UI bundles.
 
-| Component             | Kendo UI Core     | Kendo UI Professional     | Kendo UI Complete         |
+| COMPONENT             | KENDO UI CORE     | KENDO UI PROFESSIONAL     | KENDO UI COMPLETE         |
 | :---                  | :---              | :---                      | :---                      |
 | **Data Management**       |
 | [Grid](http://demos.telerik.com/kendo-ui/grid/index)                  | <span class="tag-neutral">No</span>  | <span class="tag-success">Yes</span> | <span class="tag-success">Yes</span>           |

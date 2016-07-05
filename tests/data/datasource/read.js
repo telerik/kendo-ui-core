@@ -18,7 +18,7 @@ module("data source read", {
         $.mockjaxSettings.responseTime = 0;
     },
     teardown: function() {
-        $.mockjaxClear();
+        $.mockjax.clear();
     }
 });
 

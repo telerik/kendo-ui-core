@@ -14,11 +14,11 @@ It is used as a default `categoryField` for all series.
 
 The data item field value must be either:
 
-####* Date instance
+* Date instance
 
-####* String parsable by `new Date([field value])`
+* String parsable by `new Date([field value])`
 
-####* String in ASP.NET JSON format, i.e. "\/Date(1320825600000-0800)\/"
+* String in ASP.NET JSON format, i.e. "\/Date(1320825600000-0800)\/"
 
 ### navigator `Object`
 
@@ -1016,6 +1016,8 @@ without loading them at once.
 
 #### Example
 
+    <div id="stock-chart"></div>
+    <script>
     $("#stock-chart").kendoStockChart({
         dataSource: {
             transport: {
@@ -1031,6 +1033,7 @@ without loading them at once.
             }
         }
     });
+    </script>
 
 ### navigator.autoBind `Boolean`*(default: true)*
 
@@ -1038,6 +1041,9 @@ Indicates whether the navigator will call read on the data source initially.
 Applicable only when using a dedicated navigator data source.
 
 #### Example
+
+    <div id="stock-chart"></div>
+    <script>
     $("#stock-chart").kendoStockChart({
         navigator: {
             dataSource: naviDataSource,
@@ -1047,6 +1053,7 @@ Applicable only when using a dedicated navigator data source.
 
     // ...
     naviDataSource.read();
+    </script>
 
 ### navigator.dateField `String`
 
@@ -1234,7 +1241,9 @@ Accepts the same options as the root `series` collection.
 Omitting the array and specifying a single series is also acceptable.
 
 #### Example
-    <p>
+
+    <div id="stock-chart"></div>
+    <script>
     $("#stock-chart").kendoStockChart({
          navigator: {
             series: {
@@ -1244,7 +1253,7 @@ Omitting the array and specifying a single series is also acceptable.
          },
          ...
     });
-    </p>
+    </script>
 
 ### navigator.visible `Boolean`*(default: true)*
 
@@ -1392,6 +1401,7 @@ The data item field which contains the category name or date.
 The navigator series name.
 
 #### Example - set the navigator series name
+
     <div id="stock-chart"></div>
     <script>
     $("#stock-chart").kendoStockChart({
@@ -1531,12 +1541,14 @@ The supported values are:
 
 ##### Example
 
+```pseudo
     aggregate: {
         open: "max",
         high: "max",
         close: "min",
         low: "max"
     }
+```
 
 ### navigator.series.axis `String`*(default: "primary")*
 
@@ -1693,8 +1705,10 @@ The format of the labels.
 
 #### Example
 
+```pseudo
     //sets format of the labels
     format: "C"
+```
 
 ### navigator.series.labels.margin `Number|Object`*(default: { left: 5, right: 5})*
 
@@ -1702,12 +1716,14 @@ The margin of the labels.
 
 #### Example
 
+```pseudo
     // sets the top, right, bottom and left margin to 3px.
     margin: 3
 
     // sets the top and bottom margin to 1px
     // margin left and right are with 5px (by default)
     margin: { top: 1, bottom: 1 }
+```
 
 ### navigator.series.labels.padding `Number|Object`*(default: 0)*
 
@@ -1715,12 +1731,14 @@ The margin of the labels.
 
 #### Example
 
+```pseudo
     // sets the top, right, bottom and left padding to 3px.
     padding: 3
 
     // sets the top and left padding to 1px
     // padding right and bottom are with 0px (by default)
     padding: { top: 1, left: 1 }
+```
 
 ### navigator.series.labels.position `String`*(default: "above")*
 
@@ -1788,7 +1806,7 @@ The fields which can be used in the template are:
 
 #### Example
 
-    // chart initialization
+```pseudo
     $("#chart").kendoChart({
          title: {
              text: "My Chart Title"
@@ -1809,6 +1827,7 @@ The fields which can be used in the template are:
              categories: [2000, 2001, 2002, 2003]
          }
     });
+```pseudo
 
 ### navigator.series.labels.visible `Boolean`*(default: false)*
 
@@ -1865,6 +1884,7 @@ The border of the markers.
 The rotation angle of the markers.
 
 #### Example
+
     <div id="stock-chart"></div>
     <script>
     $("#stock-chart").kendoStockChart({
@@ -2031,8 +2051,10 @@ The tooltip format. Format variables depend on the series type:
 
 #### Example
 
+```pseudo
     //sets format of the tooltip
     format: "{0:C}--{1:C}"
+```
 
 ### navigator.series.tooltip.padding `Number|Object`
 
@@ -2040,12 +2062,14 @@ The padding of the tooltip.
 
 #### Example
 
+```pseudo
     // sets the top, right, bottom and left padding to 3px.
     padding: 3
 
     // sets the top and left padding to 1px
     // right and bottom padding are left at their default values
     padding: { top: 1, left: 1 }
+```
 
 ### navigator.series.tooltip.template `String|Function`
 
@@ -2163,7 +2187,7 @@ Template variables:
 
           series: {
             type: "line",
-            field: "value", 
+            field: "value",
             categoryField: "date",
             data: [
               { value: 1, date: new Date(2012, 1, 1) },
@@ -2181,8 +2205,10 @@ The format of the hint.
 
 #### Example
 
+```pseudo
     //sets format of the hint
     format: "From: {0:d} To: {1:d}"
+```
 
 ### axisDefaults `Object`
 
@@ -2203,8 +2229,7 @@ of categories to denote the far end of the axis.
 
 #### Example
 
-    <div id="stock-chart"></div>
-    <script>
+```pseudo
     $("#stock-chart").kendoStockChart({
          categoryAxis: {
              categories: ["A", "B"],
@@ -2212,7 +2237,7 @@ of categories to denote the far end of the axis.
          },
          valueAxis: [{ }, { name: "secondary" }]
     });
-    </script>
+```
 
 ### categoryAxis.categories `Array`
 
@@ -2229,6 +2254,9 @@ The data field containing the category name.
 
 #### Example
 
+    <div id="chart"></div>
+    <script>
+
     // assuming the following data...
     var data = [ { sales: 200, year: 2005 }, { sales: 300, year: 2006 }, { sales: 400, year: 2007 }];
     // specify the "year" as the field for the category axis
@@ -2238,9 +2266,9 @@ The data field containing the category name.
         },
         categoryAxis: {
             field: "year"
-        },
-        ...
+        }
     });
+    </script>
 
 ### categoryAxis.justified `Boolean`*(default: false)*
 
@@ -2318,12 +2346,14 @@ The margin of the labels.
 
 #### Example
 
+```pseudo
     // sets the top, right, bottom and left margin to 3px.
     margin: 3
 
     // sets the top and left margin to 1px
     // margin right and bottom are with 0px (by default)
     margin: { top: 1, left: 1 }
+```
 
 ### categoryAxis.labels.mirror `Boolean`
 
@@ -2337,12 +2367,14 @@ The padding of the labels.
 
 #### Example
 
+```pseudo
     // sets the top, right, bottom and left padding to 3px.
     padding: 3
 
     // sets the top and left padding to 1px
     // padding right and bottom are with 0px (by default)
     padding: { top: 1, left: 1 }
+```
 
 ### categoryAxis.labels.rotation `Number`*(default: 0)*
 
@@ -2369,6 +2401,8 @@ The fields which can be used in the template are:
 
 #### Example
 
+    <div id="chart"></div>
+    <script>
     // chart initialization
     $("#chart").kendoChart({
          title: {
@@ -2386,6 +2420,7 @@ The fields which can be used in the template are:
              }
          }
     });
+    </script>
 
 ### categoryAxis.labels.visible `Boolean`*(default: true)*
 
@@ -2661,27 +2696,17 @@ categories are listed from right to left and from top to bottom.
 
 The selected axis range. If configured, axis selection will be enabled.
 
-** Available only for vertical axes **
-
-The range units are:
-
-#### *Generic axis*
-Category index (0-based)
-
-#### *Date axis*
-Date instance or date string (yyyy/MM/dd HH:mm:ss)
-
-### categoryAxis.select.from `Object`
+### categoryAxis.select.from `String|Date`
 
 The lower boundary of the selected range.
 
-### categoryAxis.select.to `Object`
+### categoryAxis.select.to `String|Date`
 
 The upper boundary of the selected range.
 
-*Note*: The category with the specified index (date) is not included in the selected range
+*Note*: The category with the specified date is not included in the selected range
 unless the axis is justified. In order to select all categories specify
-a value larger than the last category index (date).
+a value larger than the last category date.
 
 ### categoryAxis.select.min `Object`
 
@@ -2785,6 +2810,7 @@ The margin of the title.
 
 #### Example
 
+```pseudo
     $("#chart").kendoChart({
         categoryAxis: {
             title: {
@@ -2792,9 +2818,9 @@ The margin of the title.
                 margin: 3
             }
         },
-        ...
+        //...
     });
-    //
+
     $("#chart").kendoChart({
         categoryAxis: {
             title: {
@@ -2803,8 +2829,9 @@ The margin of the title.
                 margin: { top: 1, left: 1 }
             }
         },
-        ...
+        //...
     });
+```
 
 ### categoryAxis.title.position `String`*(default: "center")*
 
@@ -3074,8 +3101,10 @@ The tooltip format.
 
 #### Example
 
+```pseudo
     //sets format of the tooltip
     format: "C"
+```
 
 ### categoryAxis.crosshair.tooltip.padding `Number|Object`
 
@@ -3083,12 +3112,14 @@ The padding of the tooltip.
 
 #### Example
 
+```pseudo
     // sets the top, right, bottom and left padding to 3px.
     padding: 3
 
     // sets the top and left padding to 1px
     // right and bottom padding are left at their default values
     padding: { top: 1, left: 1 }
+```
 
 ### categoryAxis.crosshair.tooltip.template `String|Function`
 
@@ -3099,6 +3130,8 @@ Template variables:
 
 #### Example
 
+    <div id="chart"></div>
+    <script>
     $("#chart").kendoChart({
          title: {
              text: "My Chart Title"
@@ -3119,6 +3152,7 @@ Template variables:
              }
          }
     });
+    </script>
 
 ### categoryAxis.crosshair.tooltip.visible `Boolean`*(default: false)*
 
@@ -4372,12 +4406,14 @@ The margin of the chart area.
 
 #### Example
 
+```pseudo
     // sets the top, right, bottom and left margin to 3px.
     margin: 3
 
     // sets the top and left margin to 1px
     // margin right and bottom are with 5px (by default)
     margin: { top: 1, left: 1 }
+```
 
 ### chartArea.width `Number`*(default: 600)*
 
@@ -4389,6 +4425,7 @@ DataSource configuration or instance.
 
 #### Example
 
+```pseudo
     $("#chart").kendoChart({
         dataSource: {
             transport: {
@@ -4419,12 +4456,15 @@ DataSource configuration or instance.
             field: "year"
         }
     });
+```
 
 ### autoBind `Boolean`*(default: true)*
 
 Indicates whether the chart will call read on the data source initially.
 
 #### Example
+
+```pseudo
     $("#stock-chart").kendoStockChart({
         dataSource: chartDataSource,
         chartBind: false
@@ -4432,6 +4472,7 @@ Indicates whether the chart will call read on the data source initially.
 
     // ...
     naviDataSource.read();
+```
 
 ### legend `Object`
 
@@ -4439,6 +4480,7 @@ The chart legend configuration options.
 
 #### Example
 
+```pseudo
     $("#chart").kendoChart({
         legend: {
             // set the background color to a dark blue
@@ -4457,6 +4499,7 @@ The chart legend configuration options.
             offsetY: -100,
         }
     });
+```
 
 ### legend.background `String`*(default: "white")*
 
@@ -4468,6 +4511,7 @@ The border of the legend.
 
 #### Example
 
+```pseudo
     $("#chart").kendoChart({
         legend: {
             border: {
@@ -4481,6 +4525,7 @@ The border of the legend.
         },
         ...
     });
+```
 
 ### legend.border.color `String`*(default: "black")*
 
@@ -4615,12 +4660,13 @@ The fields which can be used in the template are:
 
 #### Example
 
+```pseudo
     $("#chart").kendoChart({
         legend: {
             // sets the top, right, bottom and left margin to 3px.
             margin: 3
         },
-        ...
+        //...
     });
     //
     $("#chart").kendoChart({
@@ -4629,8 +4675,9 @@ The fields which can be used in the template are:
             // margin right and bottom are with 10px (by default)
             margin: { top: 1, left: 1 }
         },
-        ...
+        //...
     });
+```
 
 ### legend.offsetX `Number`*(default: 0)*
 
@@ -4640,6 +4687,7 @@ to the left of the current position.
 
 #### Example
 
+```pseudo
     $("#chart").kendoChart({
         legend: {
             // move the legend to the left side of the chart
@@ -4647,6 +4695,7 @@ to the left of the current position.
         },
         ...
     });
+```
 
 ### legend.offsetY `Number`*(default: 0)*
 
@@ -4656,6 +4705,7 @@ upwards from the current position.
 
 #### Example
 
+```pseudo
     $("#chart").kendoChart({
         legend: {
             // move the legend up 100 pixels
@@ -4663,6 +4713,7 @@ upwards from the current position.
         },
         ...
     });
+```
 
 ### legend.padding `Number | Object`*(default: 5)*
 
@@ -4670,6 +4721,7 @@ upwards from the current position.
 
 #### Example
 
+```pseudo
     // sets the top, right, bottom and left padding to 3px.
     $("#chart").kendoChart({
         legend: {
@@ -4687,6 +4739,7 @@ upwards from the current position.
         },
         ...
     });
+```
 
 ### legend.position `String`*(default: "right")*
 
@@ -4725,6 +4778,7 @@ Available in versions 2013.3.1306 and later.
 
 #### Example
 
+```pseudo
     $("#chart").kendoChart({
         legend: {
             // show the legend
@@ -4732,6 +4786,7 @@ Available in versions 2013.3.1306 and later.
         },
         ...
     });
+```
 
 ### legend.inactiveItems `Object`
 
@@ -4792,11 +4847,13 @@ The margin of the pane.
 
 #### Example
 
+```pseudo
     // sets the top, right, bottom and left margin to 3px.
     margin: 3
 
     // sets the top and left margin to 1px
     margin: { top: 1, left: 1 }
+```
 
 ### panes.padding `Number|Object`
 
@@ -4804,11 +4861,13 @@ The padding of the pane.
 
 #### Example
 
+```pseudo
     // sets the top, right, bottom and left padding to 3px.
     padding: 3
 
     // sets the top and left padding to 1px
     padding: { top: 1, left: 1 }
+```
 
 ### panes.background `String`
 
@@ -4963,6 +5022,7 @@ Configures the export settings for the [saveAsPDF](#methods-saveAsPDF) method.
 The author of the PDF document.
 
 #### Example - set the author
+
     <div id="chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
@@ -4988,6 +5048,7 @@ The author of the PDF document.
 The creator of the PDF document.
 
 #### Example - set the creator
+
     <div id="chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
@@ -5013,6 +5074,7 @@ The creator of the PDF document.
 The date when the PDF document is created. Defaults to `new Date()`.
 
 #### Example - set the date
+
     <div id="chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
@@ -5038,6 +5100,7 @@ The date when the PDF document is created. Defaults to `new Date()`.
 If set to true, the content will be forwarded to [proxyURL](#configuration-pdf.proxyURL) even if the browser supports saving files locally.
 
 #### Example - use proxy
+
     <div id="chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
@@ -5064,6 +5127,7 @@ If set to true, the content will be forwarded to [proxyURL](#configuration-pdf.p
 Specifies the file name of the exported PDF file.
 
 #### Example - set the default PDF file name
+
     <div id="chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
@@ -5089,6 +5153,7 @@ Specifies the file name of the exported PDF file.
 Specifies the keywords of the exported PDF file.
 
 #### Example - set the keywords
+
     <div id="chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
@@ -5114,6 +5179,7 @@ Specifies the keywords of the exported PDF file.
 Set to `true` to reverse the paper dimensions if needed such that width is the larger edge.
 
 #### Example - enable landscape mode
+
     <div id="chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
@@ -5141,6 +5207,7 @@ Specifies the margins of the page (numbers or strings with units). Supported
 units are "mm", "cm", "in" and "pt" (default).
 
 #### Example - set the margins
+
     <div id="chart" style="width: 600px; height: 400px;"></div>
     <script>
       $("#stock-chart").kendoStockChart({
@@ -5193,6 +5260,7 @@ Supported values:
   Supported units are "mm", "cm", "in" and "pt".
 
 #### Example - set custom paper size
+
     <div id="chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
@@ -5231,6 +5299,7 @@ The proxy will receive a POST request with the following parameters in the reque
 The proxy should return the decoded file with set "Content-Disposition" header.
 
 #### Example - set the server proxy URL
+
     <div id="chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
@@ -5260,6 +5329,7 @@ If you want to display the document in a new window or iframe,
 the proxy should set the "Content-Disposition" header to `inline; filename="<fileName.pdf>"`.
 
 #### Example - open the generated document in a new window
+
     <div id="chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
@@ -5287,6 +5357,7 @@ the proxy should set the "Content-Disposition" header to `inline; filename="<fil
 Sets the subject of the PDF file.
 
 #### Example - set the subject
+
     <div id="chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
@@ -5312,6 +5383,7 @@ Sets the subject of the PDF file.
 Sets the title of the PDF file.
 
 #### Example - set the title
+
     <div id="chart"></div>
     <script>
       $("#stock-chart").kendoStockChart({
@@ -5396,12 +5468,14 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 
 #### Example
 
+```pseudo
     // sets the top, right, bottom and left margin to 3px.
     margin: 3
 
     // sets the top and left margin to 1px
     // margin right and bottom are with 5px (by default)
     margin: { top: 1, left: 1 }
+```
 
 ### renderAs `String`
 
@@ -5413,8 +5487,6 @@ The supported values are:
 * "svg" - renders the widget as inline SVG document, if available
 * "vml" - renders the widget as VML, if available
 * "canvas" - renders the widget as a Canvas element, if available.
-
-> Using Canvas rendering disables most interactive features.
 
 ### Example - Render as Canvas, if supported
 
@@ -5550,6 +5622,7 @@ The data field containing the target value.
 The series name visible in the legend.
 
 #### Example - set the series name
+
     <div id="stock-chart"></div>
     <script>
     $("#stock-chart").kendoStockChart({
@@ -5583,6 +5656,7 @@ The fields which can be used in the template are:
 *   group.value - the field value for this group.
 
 #### Example - set the chart series group name template
+
     <div id="stock-chart"></div>
     <script>
     $("#stock-chart").kendoStockChart({
@@ -5684,12 +5758,14 @@ The supported values are:
 
 ##### Example
 
+```pseudo
     aggregate: {
         open: "max",
         high: "max",
         close: "min",
         low: "max"
     }
+```
 
 ### series.axis `String`*(default: "primary")*
 
@@ -5760,8 +5836,10 @@ The series base color. The supported values are:
 * CSS color string, including hex and rgb
 * function(point) - user-defined function that will be evaluated for each point. Returning `undefined` will assume the default series color.
 
-#### Example
+#### Example - set color as a string
 
+    <div id="stock-chart"></div>
+    <script>
     $("#stock-chart").kendoStockChart({
         dataSource: {
             data: [{
@@ -5782,9 +5860,12 @@ The series base color. The supported values are:
             color: "#ff0000"
         }]
     });
+    </script>
 
-#### Example
+#### Example set color as a function
 
+    <div id="chart"></div>
+    <script>
     $("#stock-chart").kendoStockChart({
         dataSource: {
             data: [{
@@ -5812,6 +5893,7 @@ The series base color. The supported values are:
             }
         }]
     });
+    </script>
 
 ### series.colorField `String`
 
@@ -5911,8 +5993,10 @@ The format of the labels.
 
 #### Example
 
+```pseudo
     //sets format of the labels
     format: "C"
+```
 
 ### series.labels.margin `Number|Object`*(default: { left: 5, right: 5})*
 
@@ -5920,12 +6004,14 @@ The margin of the labels.
 
 #### Example
 
+```pseudo
     // sets the top, right, bottom and left margin to 3px.
     margin: 3
 
     // sets the top and bottom margin to 1px
     // margin left and right are with 5px (by default)
     margin: { top: 1, bottom: 1 }
+```
 
 ### series.labels.padding `Number|Object`*(default: 0)*
 
@@ -5933,12 +6019,14 @@ The margin of the labels.
 
 #### Example
 
+```pseudo
     // sets the top, right, bottom and left padding to 3px.
     padding: 3
 
     // sets the top and left padding to 1px
     // padding right and bottom are with 0px (by default)
     padding: { top: 1, left: 1 }
+```
 
 ### series.labels.position `String|Function`*(default: "above")*
 
@@ -6006,6 +6094,7 @@ The fields which can be used in the template are:
 
 #### Example
 
+```pseudo
     // chart initialization
     $("#chart").kendoChart({
          title: {
@@ -6027,6 +6116,7 @@ The fields which can be used in the template are:
              categories: [2000, 2001, 2002, 2003]
          }
     });
+```
 
 ### series.labels.visible `Boolean|Function`*(default: false)*
 
@@ -6099,6 +6189,7 @@ The border of the markers.
 The rotation angle of the markers.
 
 #### Example
+
     <div id="stock-chart"></div>
     <script>
     $("#stock-chart").kendoStockChart({
@@ -6268,8 +6359,10 @@ The tooltip format. Format variables depend on the series type:
 
 #### Example
 
+```pseudo
     //sets format of the tooltip
     format: "{0:C}--{1:C}"
+```
 
 ### series.tooltip.padding `Number|Object`
 
@@ -6277,12 +6370,14 @@ The padding of the tooltip.
 
 #### Example
 
+```pseudo
     // sets the top, right, bottom and left padding to 3px.
     padding: 3
 
     // sets the top and left padding to 1px
     // right and bottom padding are left at their default values
     padding: { top: 1, left: 1 }
+```
 
 ### series.tooltip.template `String|Function`
 
@@ -6297,6 +6392,7 @@ Template variables:
 
 #### Example
 
+```pseudo
     $("#chart").kendoChart({
          title: {
              text: "My Chart Title"
@@ -6316,6 +6412,7 @@ Template variables:
              categories: [2000, 2001, 2002, 2003]
          }
     });
+```
 
 ### series.tooltip.visible `Boolean`*(default: false)*
 
@@ -6591,6 +6688,7 @@ Configures the series data labels.
 
 #### Example
 
+```pseudo
     $("#chart").kendoChart({
         seriesDefault: {
             // adjust the default label appearence for all series
@@ -6601,8 +6699,9 @@ Configures the series data labels.
                 format: "C"
             }
         },
-        ...
+        //...
     });
+```
 
 ### seriesDefaults.labels.background `String`
 
@@ -6666,6 +6765,7 @@ labels
 
 #### Example
 
+```pseudo
     $("#chart").kendoChart({
         seriesDefault: {
             // adjust the default label appearence for all series
@@ -6674,8 +6774,9 @@ labels
                 font: "14px Arial,Helvetica,sans-serif"
             }
         },
-        ...
+        //...
     });
+```
 
 ### seriesDefaults.labels.format `String`
 
@@ -6683,8 +6784,10 @@ The format of the labels.
 
 #### Example
 
+```pseudo
     //sets format of the labels
     format: "C"
+```
 
 ### seriesDefaults.labels.margin `Number|Object`*(default: 0)*
 
@@ -6692,22 +6795,24 @@ The format of the labels.
 
 #### Example
 
+```pseudo
     $("#chart).kendoChart({
          labels: {
              // sets the top, right, bottom and left margin to 3px.
              margin: 3
          },
-         ...
+         //...
     });
-    //
+
     $("#chart").kendoChart({
          labels: {
              // sets the top and left margin to 1px
              // margin right and bottom are with 0px (by default)
              margin: { top: 1, left: 1 }
          },
-         ...
+         //...
     });
+```
 
 ### seriesDefaults.labels.padding `Number|Object`*(default: 0)*
 
@@ -6715,18 +6820,19 @@ The format of the labels.
 
 #### Example
 
+```pseudo
     // sets the top, right, bottom and left padding to 3px.
     padding: 3
 
     // sets the top and left padding to 1px
     // padding right and bottom are with 0px (by default)
     padding: { top: 1, left: 1 }
+```
 
 ### seriesDefaults.labels.template `String | Function`
 
 The label template.
 Template variables:
-
 
 *   **value** - the point value
 *   **category** - the category name
@@ -6736,6 +6842,7 @@ Template variables:
 
 #### Example
 
+```pseudo
     // chart initialization
     $("#chart").kendoChart({
          title: {
@@ -6758,6 +6865,7 @@ Template variables:
              categories: [2000, 2001, 2002, 2003]
          }
     });
+```
 
 ### seriesDefaults.labels.visible `Boolean`*(default: false)*
 
@@ -6765,15 +6873,17 @@ Template variables:
 
 #### Example
 
+```pseudo
     $("#chart").kendoChart({
         seriesDefault: {
             labels: {
                 // hide all the series labels by default
                 visible: true
             },
-            ...
+            //...
         }
     });
+```
 
 ### seriesDefaults.line `Object`
 
@@ -6852,8 +6962,10 @@ The tooltip format.
 
 #### Example
 
+```pseudo
     //sets format of the tooltip
     format: "C"
+```
 
 ### seriesDefaults.tooltip.padding `Number|Object`
 
@@ -6861,18 +6973,19 @@ The padding of the tooltip.
 
 #### Example
 
+```pseudo
     // sets the top, right, bottom and left padding to 3px.
     padding: 3
 
     // sets the top and left padding to 1px
     // right and bottom padding are left at their default values
     padding: { top: 1, left: 1 }
+```
 
 ### seriesDefaults.tooltip.template `String|Function`
 
 The tooltip template.
 Template variables:
-
 
 *   **value** - the point value
 *   **category** - the category name
@@ -6882,6 +6995,7 @@ Template variables:
 
 #### Example
 
+```pseudo
     $("#chart").kendoChart({
          title: {
              text: "My Chart Title"
@@ -6902,6 +7016,7 @@ Template variables:
              categories: [2000, 2001, 2002, 2003]
          }
     });
+```
 
 ### seriesDefaults.tooltip.visible `Boolean`*(default: false)*
 
@@ -6941,6 +7056,7 @@ The border of the title.
 
 #### Example
 
+```pseudo
     $("#chart").kendoChart({
         // set border options on the title
         title: {
@@ -6955,6 +7071,7 @@ The border of the title.
         },
         ...
     });
+```
 
 ### title.border.color `String`*(default: "black")*
 
@@ -7011,12 +7128,13 @@ The text color of the title. Accepts a valid CSS color string, including hex and
 
 #### Example
 
+```pseudo
     $("#chart").kendoChart({
         // sets the top, right, bottom and left margin to 3px.
         title: {
             margin: 3
         },
-        ...
+        //...
     });
     //
     $("#chart").kendoChart({
@@ -7025,8 +7143,9 @@ The text color of the title. Accepts a valid CSS color string, including hex and
         title: {
             margin: { top: 1, left: 1 }
         },
-        ...
+        //...
     });
+```
 
 ### title.padding `Number | Object`*(default: 5)*
 
@@ -7034,22 +7153,24 @@ The text color of the title. Accepts a valid CSS color string, including hex and
 
 #### Example
 
+```pseudo
     $("#chart").kendoChart({
         // sets the top, right, bottom and left padding to 3px.
         title: {
             padding: 3
         },
-        ...
+        //...
     });
-    //
+
     $("#chart").kendoChart({
         // sets the top and left padding to 1px
         // padding right and bottom are with 5px (by default)
         title: {
             padding: { top: 1, left: 1 }
         },
-        ...
+        //...
     });
+```
 
 ### title.position `String`*(default: "top")*
 
@@ -7070,18 +7191,19 @@ The title of the chart. You can also set the text directly for a title with defa
 
 #### Example
 
+```pseudo
     $("#chart ").kendoChart({
         title: {
             text: "Sales data"
         },
-        ...
+        //...
     });
 
     $("#chart ").kendoChart({
         title: "Sales data",
-        ...
+        //...
     });
-
+```
 
 ### title.visible `Boolean`*(default: false)*
 
@@ -7089,13 +7211,15 @@ The title of the chart. You can also set the text directly for a title with defa
 
 #### Example
 
+```pseudo
     $("#chart ").kendoChart({
         title: {
             // hides the title
             visible: false
         },
-        ...
+        //...
     });
+```
 
 ### tooltip `Object`
 
@@ -7131,8 +7255,10 @@ The tooltip format.
 
 #### Example
 
+```pseudo
     //sets format of the tooltip
     format: "C"
+```
 
 ### tooltip.padding `Number|Object`
 
@@ -7140,12 +7266,14 @@ The padding of the tooltip.
 
 #### Example
 
+```pseudo
     // sets the top, right, bottom and left padding to 3px.
     padding: 3
 
     // sets the top and left padding to 1px
     // right and bottom padding are left at their default values
     padding: { top: 1, left: 1 }
+```
 
 ### tooltip.template `String|Function`
 
@@ -7161,6 +7289,8 @@ Template variables:
 
 #### Example
 
+    <div id="chart"></div>
+    <script>
     $("#chart").kendoChart({
          title: {
              text: "My Chart Title"
@@ -7177,6 +7307,7 @@ Template variables:
              template: "#= category # - #= value #"
          }
     });
+    </script>
 
 ### tooltip.visible `Boolean`*(default: false)*
 
@@ -7196,6 +7327,8 @@ Template variables:
 
 #### Example
 
+    <div id="chart"></div>
+    <script>
     $("#chart").kendoChart({
          title: {
              text: "Internet Users"
@@ -7220,6 +7353,7 @@ Template variables:
                 "# } #"
          }
     });
+    </script>
 
 ### transitions `Boolean`*(default: true)*
 
@@ -7314,6 +7448,7 @@ The format of the labels.
 
 #### Example
 
+```pseudo
     $("#chart").kendoChart({
         valueAxis: {
            labels: {
@@ -7321,8 +7456,9 @@ The format of the labels.
                format: "C"
            }
         },
-        ...
+        //...
     });
+```
 
 ### valueAxis.labels.margin `Number|Object`*(default: 0)*
 
@@ -7330,12 +7466,14 @@ The margin of the labels.
 
 #### Example
 
+```pseudo
     // sets the top, right, bottom and left margin to 3px.
     margin: 3
 
     // sets the top and left margin to 1px
     // margin right and bottom are with 0px (by default)
     margin: { top: 1, left: 1 }
+```
 
 ### valueAxis.labels.mirror `Boolean`
 
@@ -7349,12 +7487,14 @@ The padding of the labels.
 
 #### Example
 
+```pseudo
     // sets the top, right, bottom and left padding to 3px.
     padding: 3
 
     // sets the top and left padding to 1px
     // padding right and bottom are with 0px (by default)
     padding: { top: 1, left: 1 }
+```
 
 ### valueAxis.labels.rotation `Number`*(default: 0)*
 
@@ -7379,6 +7519,8 @@ Template variables:
 
 #### Example
 
+    <div id="chart"></div>
+    <script>
     // chart initialization
     $("#chart").kendoChart({
          title: {
@@ -7400,6 +7542,7 @@ Template variables:
              }
          }
     });
+    </script>
 
 ### valueAxis.labels.visible `Boolean`*(default: true)*
 
@@ -7723,12 +7866,14 @@ The margin of the title.
 
 #### Example
 
+```pseudo
     // sets the top, right, bottom and left margin to 3px.
     margin: 3
 
     // sets the top and left margin to 1px
     // margin right and bottom are with 0px (by default)
     margin: { top: 1, left: 1 }
+```
 
 ### valueAxis.title.padding `Number | Object`*(default: 0)*
 
@@ -7736,12 +7881,14 @@ The padding of the title.
 
 #### Example
 
+```pseudo
     // sets the top, right, bottom and left padding to 3px.
     padding: 3
 
     // sets the top and left padding to 1px
     // padding right and bottom are with 0px (by default)
     padding: { top: 1, left: 1 }
+```
 
 ### valueAxis.title.position `String`*(default: "center")*
 
@@ -7841,8 +7988,10 @@ The tooltip format.
 
 #### Example
 
+```pseudo
     //sets format of the tooltip
     format: "C"
+```
 
 ### valueAxis.crosshair.tooltip.padding `Number|Object`
 
@@ -7850,12 +7999,14 @@ The padding of the tooltip.
 
 #### Example
 
+```pseudo
     // sets the top, right, bottom and left padding to 3px.
     padding: 3
 
     // sets the top and left padding to 1px
     // right and bottom padding are left at their default values
     padding: { top: 1, left: 1 }
+```
 
 ### valueAxis.crosshair.tooltip.template `String|Function`
 
@@ -7866,6 +8017,8 @@ Template variables:
 
 #### Example
 
+    <div id="chart"></div>
+    <script>
     // chart initialization
     $("#chart").kendoChart({
          title: {
@@ -7888,6 +8041,7 @@ Template variables:
              }
          }
     });
+    </script>
 
 ### valueAxis.crosshair.tooltip.visible `Boolean`*(default: false)*
 
@@ -9074,6 +9228,16 @@ The length of the connecting lines in pixels.
     });
     </script>
 
+## Fields
+
+### navigator `kendo.dataviz.Navigator`
+
+A reference to the Stock Chart built-in [navigator](/api/javascript/dataviz/navigator) instance (the lower widget pane). Obtain the instance to call the available [navigator methods](/api/javascript/dataviz/navigator).
+
+> **Important**
+>
+> The navigator field is available in Kendo UI v.2016.2.517 and later
+
 ## Methods
 
 ### destroy
@@ -9132,7 +9296,6 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
 #### Returns
 `Promise` A promise that will be resolved with a SVG document encoded as a Data URI.
 
-
 ### redraw
 
 Repaints the chart using the currently loaded data.
@@ -9160,6 +9323,16 @@ Sets the data source of the widget.
 ##### dataSource `kendo.data.DataSource`
 
 The data source to which the widget should be bound.
+
+### setOptions
+
+Sets the widget options. Changes are cumulative.
+
+#### Parameters
+
+##### options `Object`
+
+The chart settings to update.
 
 ### svg
 
@@ -9287,6 +9460,83 @@ The original data item used to generate the label.
 
 The DOM element of the label.
 
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+### dataBound
+
+Fires when the chart has received data from the data source
+and is about to render it.
+
+#### Example
+
+    function onDataBound(e) {
+        // Series data is now available
+    }
+
+### dragStart
+
+Fires when the user has used the mouse or a swipe gesture to drag the chart.
+
+The drag operation can be aborted by calling `e.preventDefault()`.
+
+#### Event Data
+
+##### e.axisRanges `Object`
+
+A hastable containing the initial range (min and max values) of *named* axes.
+The axis name is used as a key.
+
+##### e.originalEvent `Object`
+
+The original user event that triggered the drag action.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+### drag
+
+Fires as long as the user is dragging the chart using the mouse or swipe gestures.
+
+#### Event Data
+
+##### e.axisRanges `Object`
+
+A hastable containing the suggested current range (min and max values) of *named* axes.
+The axis name is used as a key.
+
+Note that the axis ranges are not updated automatically. You need to call
+set_options with either the suggested or custom min/max values for them to take effect.
+
+##### e.originalEvent `Object`
+
+The original user event that triggered the drag action.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+### dragEnd
+
+Fires when the user stops dragging the chart.
+
+#### Event Data
+
+##### e.axisRanges `Object`
+
+A hastable containing the final range (min and max values) of *named* axes.
+The axis name is used as a key.
+
+##### e.originalEvent `Object`
+
+The original user event that triggered the drag action.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
 ### legendItemClick
 
 Fires when an legend item is clicked, before the selected series visibility is toggled.
@@ -9323,6 +9573,10 @@ If invoked the default action (toggle series visibility) will be prevented.
 
 The DOM element of the plot area.
 
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
 ### legendItemHover
 
 Fires when an legend item is hovered.
@@ -9355,80 +9609,9 @@ The point index.
 
 The DOM element of the plot area.
 
-### dataBound
+##### e.sender `kendo.dataviz.ui.StockChart`
 
-Fires when the chart has received data from the data source
-and is about to render it.
-
-#### Example
-
-    function onDataBound(e) {
-        // Series data is now available
-    }
-
-### dragStart
-
-Fires when the user has used the mouse or a swipe gesture to drag the chart.
-
-The drag operation can be aborted by calling `e.preventDefault()`.
-
-#### Event Data
-
-##### e.axisRanges `Object`
-
-A hastable containing the initial range (min and max values) of *named* axes.
-The axis name is used as a key.
-
-##### e.originalEvent `Object`
-
-The original user event that triggered the drag action.
-
-### drag
-
-Fires as long as the user is dragging the chart using the mouse or swipe gestures.
-
-#### Event Data
-
-##### e.axisRanges `Object`
-
-A hastable containing the suggested current range (min and max values) of *named* axes.
-The axis name is used as a key.
-
-Note that the axis ranges are not updated automatically. You need to call
-set_options with either the suggested or custom min/max values for them to take effect.
-
-#### Example
-
-    $("#chart").kendoChart({
-        valueAxis: {
-            name: "price"
-        },
-        drag: onDrag
-        ...
-    }
-
-    function onDrag(e) {
-        var minPrice = e.axisRanges.price.min;
-    }
-
-##### e.originalEvent `Object`
-
-The original user event that triggered the drag action.
-
-### dragEnd
-
-Fires when the user stops dragging the chart.
-
-#### Event Data
-
-##### e.axisRanges `Object`
-
-A hastable containing the final range (min and max values) of *named* axes.
-The axis name is used as a key.
-
-##### e.originalEvent `Object`
-
-The original user event that triggered the drag action.
+The widget instance which fired the event.
 
 ### noteClick
 
@@ -9446,7 +9629,7 @@ The data point category. Available only for categorical charts (bar, line, area 
 
 The DOM element of the plot area.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.StockChart`
 
 The widget instance which fired the event.
 
@@ -9461,6 +9644,10 @@ The series of the note.
 ##### e.dataItem `Object`
 
 The data item of the point's note.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
 
 ### noteHover
 
@@ -9478,7 +9665,7 @@ The data point category. Available only for categorical charts (bar, line, area 
 
 The DOM element of the plot area.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.StockChart`
 
 The widget instance which fired the event.
 
@@ -9493,6 +9680,10 @@ The series of the note.
 ##### e.dataItem `Object`
 
 The data item of the point's note.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
 
 ### plotAreaClick
 
@@ -9526,7 +9717,49 @@ The X axis value or array of values for multi-axis charts.
 
 ##### e.y `Object`
 
+The Y axis value or array of values for multi-axis charts.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+### plotAreaHover
+
+Fired when the user hovers the plot area.
+
+#### Event Data
+
+##### e.category `Object`
+
+The data point category. Available only for categorical charts (bar, line, area and similar).
+
+##### e.element `Object`
+
+The DOM element of the plot area.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+##### e.originalEvent `Object`
+
+The original browser event that triggered the hover action.
+
+##### e.value `Object`
+
+The data point value. Available only for categorical charts (bar, line, area and similar).
+
+##### e.x `Object`
+
 The X axis value or array of values for multi-axis charts.
+
+##### e.y `Object`
+
+The Y axis value or array of values for multi-axis charts.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
 
 ### render
 
@@ -9535,6 +9768,90 @@ Fired when the chart is ready to render on screen.
 Can be used, for example, to remove loading indicators. Changes to options will be ignored.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+### select
+
+Fired when the user modifies the selection.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.axis `Object`
+
+The target axis configuration.
+
+##### e.from `Date`
+
+The lower boundary of the selected range.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+##### e.to `Date`
+
+The upper boundary of the selected range.
+
+The last selected category is at index [to - 1] unless the axis is justified. In this case it is at index [to].
+
+### selectEnd
+
+Fired when the user completes modifying the selection.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.axis `Object`
+
+The target axis configuration.
+
+##### e.from `Date`
+
+The lower boundary of the selected range.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+##### e.to `Date`
+
+The upper boundary of the selected range.
+
+The last selected category is at index [to - 1] unless the axis is justified. In this case it is at index [to].
+
+### selectStart
+
+Fired when the user starts modifying the axis selection.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.axis `Object`
+
+The target axis configuration.
+
+##### e.from `Date`
+
+The lower boundary of the selected range.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+##### e.to `Date`
+
+The upper boundary of the selected range.
+
+The last selected category is at index [to - 1] unless the axis is justified. In this case it is at index [to].
 
 ### seriesClick
 
@@ -9584,6 +9901,10 @@ The DOM element of the data point.
 
 The point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
 
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
 ### seriesHover
 
 Fires when chart series are hovered.
@@ -9632,6 +9953,10 @@ The DOM element of the data point.
 
 The point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
 
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
 ### zoomStart
 
 Fires when the user has used the mousewheel to zoom the chart.
@@ -9649,6 +9974,10 @@ The axis name is used as a key.
 
 The original user event that triggered the zoom action.
 
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
 ### zoom
 
 Fires as long as the user is zooming the chart using the mousewheel.
@@ -9662,20 +9991,6 @@ The axis name is used as a key.
 
 Note that the axis ranges are not updated automatically. You need to call
 set_options with either the suggested or custom min/max values for them to take effect.
-
-#### Example
-
-    $("#chart").kendoChart({
-        valueAxis: {
-            name: "price"
-        },
-        zoom: onZoom
-        ...
-    }
-
-    function onZoom(e) {
-        var minPrice = e.axisRanges.price.min;
-    }
 
 ##### e.delta `Number`
 
@@ -9696,6 +10011,10 @@ This event can be used to prevent the default mousewheel action (scroll).
         e.originalEvent.preventDefault();
     }
 
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
 ### zoomEnd
 
 Fires when the user stops zooming the chart.
@@ -9711,88 +10030,6 @@ The axis name is used as a key.
 
 The original user event that triggered the zoom action.
 
-### selectStart
+##### e.sender `kendo.dataviz.ui.StockChart`
 
-Fires when the user starts modifying the axis selection.
-
-The range units are:
-
-#### *Generic axis*
-Category index (0-based)
-
-#### *Date axis*
-Date instance
-
-#### Event Data
-
-##### e.axis `Object`
-
-The target axis configuration.
-
-##### e.from `Object`
-
-The lower boundary of the selected range.
-
-##### e.to `Object`
-
-The upper boundary of the selected range.
-
-*Note*: The last selected category is at index [to - 1] unless
-the axis is justified. In this case it is at index [to].
-
-### select
-
-Fires when the user modifies the selection.
-
-The range units are:
-
-#### *Generic axis*
-Category index (0-based)
-
-#### *Date axis*
-Date instance
-
-#### Event Data
-
-##### e.axis `Object`
-
-The target axis configuration.
-
-##### e.from `Object`
-
-The lower boundary of the selected range.
-
-##### e.to `Object`
-
-The upper boundary of the selected range.
-
-*Note*: The last selected category is at index [to - 1] unless
-the axis is justified. In this case it is at index [to].
-
-### selectEnd
-
-Fires when the user completes modifying the selection.
-
-#### *Generic axis*
-Category index (0-based)
-
-#### *Date axis*
-Date instance
-
-#### Event Data
-
-##### e.axis `Object`
-
-The target axis configuration.
-
-##### e.from `Object`
-
-The lower boundary of the selected range.
-
-##### e.to `Object`
-
-The upper boundary of the selected range.
-
-*Note*: The last selected category is at index [to - 1] unless
-the axis is justified. In this case it is at index [to].
-
+The widget instance which fired the event.

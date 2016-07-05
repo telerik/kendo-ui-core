@@ -860,6 +860,9 @@ The cell formula **without the leading equals** sign, e.g. `A1 * 10`.
 ### sheets.rows.cells.index `Number`
 The zero-based index of the cell. Required to ensure correct positioning.
 
+### sheets.rows.cells.link `String`
+The hyperlink (URL) of the cell.
+
 ### sheets.rows.cells.textAlign `String`
 The text align setting for the cell content.
 
@@ -1031,6 +1034,29 @@ Those tools which are part of a tool group are defined as array. For example `["
         $("#spreadsheet").kendoSpreadsheet({
             toolbar: {
                 home: false
+            }
+        });
+    </script>
+```
+
+#### Example - show a custom tool
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                home: [
+                    // for all available options, see the toolbar items configuration
+                    // http://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar#configuration-items
+                    {
+                        type: "button",
+                        text: "Custom",
+                        spriteCssClass: "k-icon k-font-icon k-i-cog",
+                        click: function() {
+                            window.alert("custom tool");
+                        }
+                    }
+                ]
             }
         });
     </script>

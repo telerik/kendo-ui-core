@@ -104,6 +104,12 @@ The Y position of the circle center.
 
 The radius of the circle.
 
+## Fields
+
+### drawingElement `kendo.drawing.Circle`
+
+The drawing element used to draw the circle.
+
 ## Methods
 
 ### position

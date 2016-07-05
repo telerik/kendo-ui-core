@@ -29,7 +29,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Radia
 
 **Step 3** Add a RadialGauge.
 
-**WebForms**
+###### Example
+
+```tab-ASPX
 
         <%: Html.Kendo().RadialGauge()
                 .Name("radialGauge") // The name of the radialGauge is mandatory. It specifies the "id" attribute of the widget.
@@ -41,8 +43,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Radia
                     .Value(10) //Set the value of the RadialGauge.
                 )
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().RadialGauge()
               .Name("radialGauge") //The name of the RadialGauge is mandatory. It specifies the "id" attribute of the widget.
@@ -54,6 +56,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Radia
                   .Value(10) //Set the value of the RadialGauge.
               )
         )
+```
 
 ## Reference
 
@@ -75,6 +78,7 @@ You can reference an existing Kendo UI RadialGauge instance via [`jQuery.data()`
 
 Other articles on Telerik UI for ASP.NET MVC and on the RadialGauge:
 
+* [ASP.NET MVC API Reference: RadialGaugeBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/RadialGaugeBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

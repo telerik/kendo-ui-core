@@ -1190,12 +1190,13 @@ If the `dataSource` option is an existing `kendo.data.DataSource` instance, the 
           url: "http://demos.telerik.com/kendo-ui/service/products",
           dataType: "jsonp"
         }
-      },
-      pageSize: 10
+      }
     });
     $("#treelist").kendoTreeList({
       dataSource: dataSource,
-      pageable: true
+      columns: [
+        { field: "ProductName" }
+      ]
     });
     </script>
 
@@ -1590,7 +1591,7 @@ Can be set to a JavaScript object which represents the filter menu configuration
               },
               date: {
                 gt: "After",
-                gte: "On or after"
+                gte: "On or after",
                 lt: "Before",
                 lte: "On or before",
                 eq: "On",
@@ -4452,6 +4453,10 @@ The model of the source row.
 ##### e.destination `kendo.data.TreeListModel`
 
 The model of the new parent row.
+
+##### e.dropTarget `Element`
+
+The element that the node is placed over.
 
 ##### e.sender `kendo.ui.TreeList`
 

@@ -407,6 +407,10 @@ var __meta__ = { // jshint ignore:line
 
         page: function(page) {
             if (page !== undefined) {
+                if (this.trigger("pageChange", { index: page })) {
+                   return;
+                }
+
                 this.dataSource.page(page);
 
                 this.trigger(CHANGE, { index: page });

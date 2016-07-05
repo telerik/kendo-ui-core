@@ -59,8 +59,10 @@ The example below demonstrates how to show a Kendo UI Tooltip only if the text o
 
 ## See Also
 
-Other articles on Kendo UI Tooltip:
+Other articles and how-to examples on the Kendo UI Tooltip:
 
 * [Tooltip JavaScript API Reference](/api/javascript/ui/tooltip)
-* [How to Calculate Tooltip Content Width]({% slug howto_calculatetooltipcontentlength_tooltip %})
 * [How to Show Only If Text Exceeds Certain Length]({% slug howto_showonlyiftextexceedscertainlength_tooltip %})
+* [How to Show Tooltip for Chart Notes]({% slug howto_showonlyiftextexceedscertainlength_tooltip %})
+
+For more runnable examples on the Kendo UI Tooltip, browse its [**How To** documentation folder]({% slug howto_calculatetooltipcontentlength_tooltip %}).

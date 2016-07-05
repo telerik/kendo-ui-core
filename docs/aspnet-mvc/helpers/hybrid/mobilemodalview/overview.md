@@ -34,7 +34,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ###### Example
 
-**Index.aspx (ASPX)**
+```tab-ASPX
 
         <% Html.Kendo().MobileView()
                 .Name("modalview-view")
@@ -50,8 +50,8 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
                 })
                 .Render();
         %>
-
-**Index.cshtml (Razor)**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileView()
             .Name("modalview-view")
@@ -64,12 +64,13 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
                     )
                 </text>)
         )
+```
 
 **Step 4** Add a Kendo UI ModalView to the `Index` view.
 
 ###### Example
 
-**Index.aspx (ASPX)**
+```tab-ASPX
 
         <% Html.Kendo().MobileModalView()
                 .Name("ModalView")
@@ -82,8 +83,8 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
                 })
                 .Render();
         %>
-
-**Index.cshtml (Razor)**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileModalView()
                 .Name("ModalView")
@@ -94,22 +95,24 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
                     </text>
                 )
         )
+```
 
 **Step 5** Initialize the mobile application.
 
 ###### Example
 
-**Index.aspx (ASPX)**
+```tab-ASPX
 
         <%: Html.Kendo().MobileApplication()
                 .ServerNavigation(true)
         %>
-
-**Index.cshtml (Razor)**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileApplication()
             .ServerNavigation(true)
         )
+```
 
 **Step 6** Build and run the application.
 
@@ -123,7 +126,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**ASPX**
+```tab-ASPX
 
         <% Html.Kendo().MobileModalView()
                 .Name("ModalView")
@@ -145,8 +148,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the close event.
         }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileModalView()
                 .Name("ModalView")
@@ -166,6 +169,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the close event.
         }
         </script>
+```
 
 ## Reference
 
@@ -195,6 +199,7 @@ You can reference a hybrid ModalView instance by using the code from the example
 
 Other articles on Telerik UI for ASP.NET MVC and on the ModalView:
 
+* [ASP.NET MVC API Reference: ModalViewBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/MobileModalViewBuilder)
 * [Overview of the Hybrid UI ModalView Widget]({% slug overview_hybridmodalview %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})

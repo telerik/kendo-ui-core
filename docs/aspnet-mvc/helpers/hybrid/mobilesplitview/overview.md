@@ -32,7 +32,7 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
 
 ###### Example
 
-**Index.aspx (ASPX)**
+```tab-ASPX
 
         <% Html.Kendo().MobileSplitView()
                 .Name("MobileSplitView") //SplitView `id`
@@ -65,8 +65,8 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
                 })
                 .Render();
         %>
-
-**Index.cshtml (Razor)**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileSplitView()
                 .Name("MobileSplitView") //SplitView `id`
@@ -92,22 +92,24 @@ Below are listed the steps for you to follow when configuring the hybrid Kendo U
                     );
                 })
         )
+```
 
 **Step 4** Initialize the mobile application.
 
 ###### Example
 
-**Index.aspx (ASPX)**
+```tab-ASPX
 
         <%: Html.Kendo().MobileApplication()
                 .ServerNavigation(true)
         %>
-
-**Index.cshtml (Razor)**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileApplication()
             .ServerNavigation(true)
         )
+```
 
 **Step 5** Build and run the application.
 
@@ -121,7 +123,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**ASPX**
+```tab-ASPX
 
         <% Html.Kendo().MobileSplitView()
                 .Name("MobileSplitView")
@@ -150,8 +152,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the init event.
         }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().MobileSplitView()
                 .Name("MobileSplitView")
@@ -176,6 +178,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the init event.
         }
         </script>
+```
 
 ## Reference
 
@@ -210,6 +213,7 @@ You can reference a hybrid SplitView instance by using the [jQuery.data()](http:
 
 Other articles on Telerik UI for ASP.NET MVC and on the SplitView:
 
+* [ASP.NET MVC API Reference: SplitViewBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/MobileSplitViewBuilder)
 * [Overview of the Hybrid UI SplitView Widget]({% slug overview_hybridsplitview %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})

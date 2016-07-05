@@ -23,6 +23,13 @@ The example below demonstrates how to register a one-way binding. As a result, t
 
 ###### Example
 
+```html
+    <p><label><input type="checkbox" data-bind="checked: slideValue" />toggle slideValue</label></p>
+
+    <div id="target" style="width:200px;height:200px;background:#fc9;" data-bind="slide: slideValue">
+        Orange Square.
+    </div>
+
     <script>
         kendo.data.binders.slide = kendo.data.Binder.extend({
             refresh: function() {
@@ -42,10 +49,7 @@ The example below demonstrates how to register a one-way binding. As a result, t
 
         kendo.bind(document.body, viewModel);
     </script>
-
-    <div id="target" data-bind="slide: slideValue">
-        One Big Orange Square.
-    </div>
+```
 
 ### Two-Way Custom Bindings
 
@@ -53,6 +57,10 @@ The example below demonstrates how to register a two-way binding. As a result, b
 
 ###### Example
 
+```html
+    <input data-bind="numericValue: number" />
+    Input value: <span data-bind="text: number" />
+    
     <script>
         kendo.data.binders.numericValue = kendo.data.Binder.extend({
             init: function(element, bindings, options) {
@@ -87,10 +95,7 @@ The example below demonstrates how to register a two-way binding. As a result, b
 
         kendo.bind(document.body, viewModel);
     </script>
-
-    <!-- View source -->
-    <input data-bind="numericValue: number" />
-    Input value: <span data-bind="text: number" />
+```
 
 ### Custom Widget Binding
 
@@ -98,6 +103,10 @@ The example below demonstrates how to bind the max value of a Kendo UI NumericTe
 
 ###### Example
 
+```html
+    <input data-role="numerictextbox" id="numeric" data-bind="value: value, max: max" />​
+
+    <script>
     kendo.data.binders.widget.max = kendo.data.Binder.extend({
         init: function(widget, bindings, options) {
             //call the base constructor
@@ -109,9 +118,18 @@ The example below demonstrates how to bind the max value of a Kendo UI NumericTe
             $(that.element).data("kendoNumericTextBox").max(value); //update the widget
         }
     });
+    
+    //View-Model source
+    var viewModel = kendo.observable({
+        value: 5,
+        max: 10
+    });
 
-    <!-- View source -->
-    <input data-role="numerictextbox" id="numeric" data-bind="value: value, max: max" />​
+    kendo.bind(document.body, viewModel);    
+    </script>
+
+
+```
 
 #### Breakdown of Code Elements
 

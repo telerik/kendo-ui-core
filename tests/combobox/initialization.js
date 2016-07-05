@@ -80,7 +80,7 @@ test("text input should be wrapped with span", function(){
 test("include arrow after input.k-input", function(){
    combobox = new ComboBox(input);
 
-   var spanArrow = combobox.input.next(),
+    var spanArrow = combobox.input.next().next(),
        arrow = spanArrow.children().eq(0);
 
    ok(spanArrow.is("span"));
@@ -395,6 +395,52 @@ test("defining header template", function() {
     var list = combobox.list;
 
     equal(list.children()[0].outerHTML, "<div>Header</div>");
+});
+
+test("render footer container", function() {
+    combobox = new ComboBox(input, {
+        footerTemplate: "footer"
+    });
+
+    var footer = combobox.footer;
+
+    ok(footer);
+    ok(footer.hasClass("k-footer"));
+});
+
+test("render footer template", function() {
+    combobox = new ComboBox(input, {
+        autoBind: true,
+        footerTemplate: "footer"
+    });
+
+    var footer = combobox.footer;
+
+    equal(footer.html(), "footer");
+});
+
+test("compile footer template with the combobox instance", function() {
+    combobox = new ComboBox(input, {
+        autoBind: true,
+        footerTemplate: "#: instance.dataSource.total() #"
+    });
+
+    var footer = combobox.footer;
+
+    equal(footer.html(), combobox.dataSource.total());
+});
+
+test("update footer template on dataBound", function() {
+    combobox = new ComboBox(input, {
+        autoBind: true,
+        footerTemplate: "#: instance.dataSource.total() #"
+    });
+
+    var footer = combobox.footer;
+
+    combobox.dataSource.data(["Item1"]);
+
+    equal(footer.html(), combobox.dataSource.total());
 });
 
 test("should populate text and value if items", function() {
@@ -756,7 +802,7 @@ asyncTest("ComboBox fetches only once on open and not data is returned", functio
 
     setTimeout(function() {
         start();
-        $.mockjaxClear();
+        $.mockjax.clear();
 
         equal(called, 1);
     }, 200);
@@ -1001,6 +1047,44 @@ asyncTest("ComboBox calls placeholder method when delayed binding is used", 1, f
 
         equal(combobox.calls("_placeholder"), 1);
     });
+});
+
+test("ComboBox opens the popup if noDataTemplate", function() {
+    combobox = new ComboBox(input, {
+        noDataTemplate: "no data"
+    });
+
+    combobox.wrapper.find(".k-icon:last").click();
+
+    ok(combobox.popup.visible());
+});
+
+test("ComboBox doesn't open the popup if no data", function() {
+    combobox = new ComboBox(input, {
+        noDataTemplate: ""
+    });
+
+    combobox.wrapper.find(".k-icon:last").click();
+
+    ok(!combobox.popup.visible());
+});
+
+test("widget keeps defaultSelected property", function() {
+   var select = $("<select><option>foo</option><option selected>bar</option><option>baz</option></select>").appendTo(QUnit.fixture);
+
+    combobox = new ComboBox(select, {
+        value: "bar"
+    });
+
+    combobox.value("baz");
+
+    var options = select[0].children;
+
+    equal(options[1].selected, false);
+    equal(options[2].selected, true);
+
+    equal(options[1].defaultSelected, true);
+    equal(options[2].defaultSelected, false);
 });
 
 })();

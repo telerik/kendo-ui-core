@@ -835,6 +835,34 @@ True will make the text of the cells italic; false otherwise.
 </script>
 ```
 
+### link
+
+Gets or sets the hyperlink of the cells in the range.
+
+#### Parameters
+
+##### url `String` *optional*
+
+Pass a string (the URL) to create a hyperlink.  Pass `null` to remove the link.
+Omit argument to get the existing URL, if any.
+
+#### Returns
+
+`String` the current hyperlink attribute of the top-left cell of the range.
+
+#### Example
+
+```
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
+    $("#spreadsheet").kendoSpreadsheet();
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var sheet = spreadsheet.activeSheet();
+    sheet.range("A1").value("Visit telerik.com!");
+    sheet.range("A1").link("http://www.telerik.com/");
+</script>
+```
+
 ### merge
 
 Merges the range cells into a single merged cell. If the range already includes a merged cell, they are merged, too.
@@ -992,6 +1020,8 @@ Un-merges any merged cells which are included in the range.
 ### values
 
 Sets the values of the range cells. The argument should be an array of arrays which match the dimensions of the range.
+
+> This method clears the formulas on every cell.
 
 #### Parameters
 

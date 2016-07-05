@@ -226,20 +226,18 @@ Below are listed the steps for you to follow while handling this issue.
 
 **Step 1** Disable security trimming if not needed or during development. Enable it again when deploying the site.
 
-* **WebForms View Engine**
-
-###### Example
+```tab-ASPX
 
             <%: Html.Kendo().Menu()
                     .SecurityTrimming(false)
             %>
-* **Razor**
-
-###### Example
+```
+```tab-Razor
 
             @(Html.Kendo().Menu()
                   .SecurityTrimming(false)
             )
+```
 
 **Step 2** Disable debug mode. Set the `debug` attribute of the `compilation` element in the `web.config` to `false`.
 
@@ -290,9 +288,7 @@ Apply either of the two options below:
 
 * Change HTTP verb of the DataSource.
 
-**WebForms View Engine**
-
-###### Example
+```tab-ASPX
 
             <%: Html.Kendo().ComboBox()
                     .Name("ComboBox")
@@ -300,10 +296,8 @@ Apply either of the two options below:
                         read.Action("GetCascadeCategories", "ComboBox").Type(HttpVerbs.Post);
                     })
             %>
-
-**Razor**
-
-###### Example
+```
+```tab-Razor
 
             @(Html.Kendo().ComboBox()
                   .Name("ComboBox")
@@ -311,6 +305,7 @@ Apply either of the two options below:
                       read.Action("GetCascadeCategories", "ComboBox").Type(HttpVerbs.Post);
                   })
             )
+```
 
 ### Widgets Do Not Work with Remote Binding and Throw No Errors
 
@@ -463,7 +458,8 @@ Other articles on troubleshooting:
 
 * [Validation Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_validation_aspnetmvc %})
 * [Scaffolding Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_scaffolding_aspnetmvc %})
-* [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/grid/troubleshooting)
+* [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_gridhelper_aspnetmvc %})
+* [Excel Export with the Grid ASP.NET MVC HtmlHelper Extension]({% slug excelissues_gridhelper_aspnetmvc %})
 * [Common Issues in the Spreadsheet ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_spreadsheethelper_aspnetmvc %})
 * [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_uploadhelper_aspnetmvc %})
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
@@ -472,6 +468,7 @@ Other articles on troubleshooting:
 * [Kendo UI Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
 * [Common Issues in Kendo UI Excel Export]({% slug troubleshooting_excel_export_kendoui %})
 * [Common Issues in Kendo UI Charts]({% slug troubleshooting_chart_widget %})
+* [Performance Issues in Kendo UI Widgets for Data Visualization]({% slug tipsandtricks_kendouistyling %})
 * [Common Issues in Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %})
 * [Common Issues in Kendo UI Diagram]({% slug troubleshooting_diagram_widget %})
 * [Common Issues in Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %})

@@ -31,7 +31,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Linea
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%: Html.Kendo().LinearGauge()
                 .Name("linearGauge") //The name of the LinearGauge is mandatory. It specifies the "id" attribute of the widget.
@@ -43,8 +43,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Linea
                     .Value(10) //Set the value of the LinearGauge.
                 )
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().LinearGauge()
               .Name("linearGauge") //The name of the LinearGauge is mandatory. It specifies the "id" attribute of the widget.
@@ -56,6 +56,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Linea
                   .Value(10) //Set the value of the LinearGauge.
               )
         )
+```
 
 ## Reference
 
@@ -77,6 +78,7 @@ You can reference an existing Kendo UI LinearGauge instance via [`jQuery.data()`
 
 Other articles on Telerik UI for ASP.NET MVC and on the LinearGauge:
 
+* [ASP.NET MVC API Reference: LinearGaugeBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/LinearGaugeBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

@@ -96,7 +96,7 @@ If set to `true` the event is "all day". By default events are not all day.
 
 ### recurrenceException `String` *(default: undefined)*
 
-The recurrence exceptions. A list of semi-colon separated dates formatted using the `yyyyMMddTHHmmssZ` format string.
+The recurrence exceptions. A list of comma separated dates formatted using the `yyyyMMddTHHmmssZ` format string.
 
 > **Important**: The dates should be encoded in UTC.
 
@@ -293,7 +293,7 @@ If set to `true` the event is "all day".
 
 ### recurrenceException `String`
 
-The recurrence exceptions. A list of semi-colon separated dates formatted using the `yyyyMMddTHHmmssZ` format string.
+The recurrence exceptions. A list of comma separated dates formatted using the `yyyyMMddTHHmmssZ` format string.
 
 #### Example - get the event recurrence exception field
     <script>

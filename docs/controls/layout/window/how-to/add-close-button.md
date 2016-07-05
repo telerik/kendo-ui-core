@@ -29,7 +29,9 @@ The example below demonstrates how to add a **Close** button to a modal Kendo UI
 
           $(".close-button").click(function(){
             // call 'close' method on nearest kendoWindow
-            $(this).closest("[data-role=window]").kendoWindow("close");
+            $(this).closest("[data-role=window]").data("kendoWindow").close();
+            // the above is equivalent to:
+            //$(this).closest(".k-window-content").data("kendoWindow").close();
           });
 
           if (!wnd.data("kendoWindow")) {
@@ -49,15 +51,11 @@ The example below demonstrates how to add a **Close** button to a modal Kendo UI
 
 ## See Also
 
-Articles and other how-to examples on Kendo UI Window:
+Other articles and how-to examples on the Kendo UI Window:
 
 * [Window JavaScript API Reference](/api/javascript/ui/window)
-* [How to Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})
-* [How to Cascade Open Windows]({% slug howto_cascadeopenwindows_window %})
-* [How to Create Confirmation Dialog via Promises]({% slug howto_createconfirmationdialog_viapromises_window %})
-* [How to Display Loading Indicator over Window]({% slug howto_displayloadingindicator_overwindow_window %})
-* [How to Initialize the Grid]({% slug initialize_thegrid_window_widget %})
 * [How to Post to Iframe]({% slug howto_posttoiframe_window %})
 * [How to Restrict Window Positioning]({% slug howto_restrictpositioning_window %})
 * [How to Use Custom Action Icons]({% slug howto_customactionicons_window %})
-* [How to Use MVVM Binding for Window Data Editing]({% slug howto_usemvvmbinding_forwindowdataediting_mvvm_window %})
+
+For more runnable examples on the Kendo UI Window, browse the [**How To** documentation folder]({% slug howto_usemvvmbinding_forwindowdataediting_mvvm_window %}).

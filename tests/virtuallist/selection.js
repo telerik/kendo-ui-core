@@ -425,6 +425,57 @@
         });
     });
 
+    asyncTest("setting the value with the value method clears the selection in valueMapper returns null", 1, function() {
+        var values = [1, 10, 6];
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: true,
+            value: values,
+            valueMapper: valueMapper
+        }));
+        asyncDataSource.read().then(function() {
+            start();
+            virtualList.value(9);
+            ok(virtualList.items().eq(9).hasClass(SELECTED), "Item 9 is selected");
+        });
+    });
+
+    asyncTest("selection is cleared if non existing value is set through the API and the valueMapper returns no indexes", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            value: 1,
+            selectable: true,
+            valueMapper: function(operation) {
+                operation.success([]);
+            }
+        }));
+
+        asyncDataSource.read().then(function() {
+            start();
+            virtualList.bind("change", function(e) {
+                ok(!virtualList.items().eq(1).hasClass(SELECTED), "Item 1 is not selected any more");
+            });
+            virtualList.value("");
+        });
+    });
+
+    asyncTest("selection is cleared if non existing value is set through the API and the valueMapper returns -1", 1, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            value: 1,
+            selectable: true,
+            valueMapper: function(operation) {
+                operation.success(-1);
+            }
+        }));
+
+        asyncDataSource.read().then(function() {
+            start();
+            virtualList.bind("change", function(e) {
+                debugger;
+                ok(!virtualList.items().eq(1).hasClass(SELECTED), "Item 1 is not selected any more");
+            });
+            virtualList.value("");
+        });
+    });
+
     asyncTest("value method works if called before the dataSource is fetched and list is created", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,

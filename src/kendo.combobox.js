@@ -41,7 +41,6 @@ var __meta__ = { // jshint ignore:line
         FOCUSED = "k-state-focused",
         STATEDISABLED = "k-state-disabled",
         ARIA_DISABLED = "aria-disabled",
-        ARIA_READONLY = "aria-readonly",
         STATE_FILTER = "filter",
         STATE_ACCEPT = "accept",
         STATE_REBIND = "rebind",
@@ -69,6 +68,8 @@ var __meta__ = { // jshint ignore:line
 
             that._input();
 
+            that._clearButton();
+
             that._tabindex(that.input);
 
             that._popup();
@@ -84,6 +85,7 @@ var __meta__ = { // jshint ignore:line
 
             that._initialIndex = options.index;
 
+            that.requireValueMapper(that.options);
             that._initList();
 
             that._cascade();
@@ -138,7 +140,8 @@ var __meta__ = { // jshint ignore:line
             virtual: false,
             template: null,
             groupTemplate: "#:data#",
-            fixedGroupTemplate: "#:data#"
+            fixedGroupTemplate: "#:data#",
+            clearButton: true
         },
 
         events:[
@@ -168,8 +171,10 @@ var __meta__ = { // jshint ignore:line
             that.input.off(ns);
             that.element.off(ns);
             that._inputWrapper.off(ns);
+            clearTimeout(that._pasteTimeout);
 
             that._arrow.parent().off(CLICK + " " + MOUSEDOWN);
+            that._clear.off(CLICK + " " + MOUSEDOWN);
 
             Select.fn.destroy.call(that);
         },
@@ -180,6 +185,11 @@ var __meta__ = { // jshint ignore:line
 
         _arrowClick: function() {
             this._toggle();
+        },
+
+        _clearClick: function() {
+            this.value(null);
+            this.trigger("change");
         },
 
         _inputFocus: function() {
@@ -197,7 +207,10 @@ var __meta__ = { // jshint ignore:line
 
             that.text(that.text());
 
-            if (value !== that.value() && that.trigger("select", { item: that._focus() })) {
+            var item = that._focus();
+            var dataItem = this.listView.dataItemByIndex(this.listView.getElementIndex(item));
+
+            if (value !== that.value() && that.trigger("select", { dataItem: dataItem, item: item })) {
                 that.value(value);
                 return;
             }
@@ -208,13 +221,24 @@ var __meta__ = { // jshint ignore:line
             that.element.blur();
         },
 
+        _inputPaste: function() {
+            var that = this;
+            clearTimeout(that._pasteTimeout);
+            that._pasteTimeout = null;
+
+            that._pasteTimeout = setTimeout(function() {
+                that.search();
+            });
+        },
+
         _editable: function(options) {
             var that = this,
                 disable = options.disable,
                 readonly = options.readonly,
                 wrapper = that._inputWrapper.off(ns),
                 input = that.element.add(that.input.off(ns)),
-                arrow = that._arrow.parent().off(CLICK + " " + MOUSEDOWN);
+                arrow = that._arrow.parent().off(CLICK + " " + MOUSEDOWN),
+                clear = that._clear;
 
             if (!readonly && !disable) {
                 wrapper
@@ -224,16 +248,19 @@ var __meta__ = { // jshint ignore:line
 
                 input.removeAttr(DISABLED)
                      .removeAttr(READONLY)
-                     .attr(ARIA_DISABLED, false)
-                     .attr(ARIA_READONLY, false);
+                     .attr(ARIA_DISABLED, false);
 
                 arrow.on(CLICK, proxy(that._arrowClick, that))
                      .on(MOUSEDOWN, function(e) { e.preventDefault(); });
 
+                clear.on(CLICK, proxy(that._clearClick, that))
+                    .on(MOUSEDOWN, function(e) { e.preventDefault(); });
+
                 that.input
                     .on("keydown" + ns, proxy(that._keydown, that))
                     .on("focus" + ns, proxy(that._inputFocus, that))
-                    .on("focusout" + ns, proxy(that._inputFocusout, that));
+                    .on("focusout" + ns, proxy(that._inputFocusout, that))
+                    .on("paste" + ns, proxy(that._inputPaste, that));
 
             } else {
                 wrapper
@@ -242,8 +269,7 @@ var __meta__ = { // jshint ignore:line
 
                 input.attr(DISABLED, disable)
                      .attr(READONLY, readonly)
-                     .attr(ARIA_DISABLED, disable)
-                     .attr(ARIA_READONLY, readonly);
+                     .attr(ARIA_DISABLED, disable);
             }
         },
 
@@ -259,7 +285,7 @@ var __meta__ = { // jshint ignore:line
                 that._open = true;
                 that._state = STATE_REBIND;
                 that._filterSource();
-            } else {
+            } else if (that._allowOpening()) {
                 that.popup.open();
                 that._focusItem();
             }
@@ -366,8 +392,6 @@ var __meta__ = { // jshint ignore:line
             var skip = that.listView.skip();
             var isFirstPage = skip === undefined || skip === 0;
 
-            that._angularItems("compile");
-
             that._presetValue = false;
 
             that._resizePopup();
@@ -394,13 +418,14 @@ var __meta__ = { // jshint ignore:line
                 if (that._typingTimeout && !isActive) {
                     that.popup.close();
                 } else {
-                    that.toggle(!!data.length);
+                    that.toggle(that._allowOpening());
                 }
 
                 that._typingTimeout = null;
             }
 
             that._hideBusy();
+            that._updateFooter();
             that.trigger("dataBound");
         },
 
@@ -461,7 +486,7 @@ var __meta__ = { // jshint ignore:line
 
             this.selectedIndex = idx;
 
-            if (idx === -1) {
+            if (idx === -1 && !dataItem) {
                 value = text = this.input[0].value;
                 this.listView.focus(-1);
             } else {
@@ -599,6 +624,8 @@ var __meta__ = { // jshint ignore:line
                 return value === undefined || value === null ? "" : value;
             }
 
+            that.requireValueMapper(that.options, value);
+
             that.trigger("set", { value: value });
 
             if (value === options.value && that.input.val() === options.text) {
@@ -608,8 +635,7 @@ var __meta__ = { // jshint ignore:line
             that._accessor(value);
 
             if (that._isFilterEnabled() && listView.bound() && listView.isFiltered()) {
-                listView.bound(false);
-                that._filterSource();
+                that._clearFilter();
             } else {
                 that._fetchData();
             }
@@ -636,10 +662,11 @@ var __meta__ = { // jshint ignore:line
 
         _click: function(e) {
             var item = e.item;
+            var dataItem = this.listView.dataItemByIndex(this.listView.getElementIndex(item));
 
             e.preventDefault();
 
-            if (this.trigger("select", { item: item })) {
+            if (this.trigger("select", { dataItem: dataItem, item: item })) {
                 this.close();
                 return;
             }
@@ -708,7 +735,8 @@ var __meta__ = { // jshint ignore:line
                 wrapper = that.wrapper,
                 SELECTOR = "input.k-input",
                 name = element.name || "",
-                input;
+                input,
+                maxLength;
 
             if (name) {
                 name = 'name="' + name + '_input" ';
@@ -718,7 +746,7 @@ var __meta__ = { // jshint ignore:line
 
             if (!input[0]) {
                 wrapper.append('<span tabindex="-1" unselectable="on" class="k-dropdown-wrap k-state-default"><input ' + name + 'class="k-input" type="text" autocomplete="off"/><span tabindex="-1" unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span></span>')
-                       .append(that.element);
+                    .append(that.element);
 
                 input = wrapper.find(SELECTOR);
             }
@@ -726,8 +754,9 @@ var __meta__ = { // jshint ignore:line
             input[0].style.cssText = element.style.cssText;
             input[0].title = element.title;
 
-            if (element.maxLength > -1) {
-                input[0].maxLength = element.maxLength;
+            maxLength = parseInt(this.element.prop("maxlength") || this.element.attr("maxlength"), 10);
+            if (maxLength > -1) {
+                input[0].maxLength = maxLength;
             }
 
             input.addClass(element.className)
@@ -753,14 +782,23 @@ var __meta__ = { // jshint ignore:line
 
             that._focused = that.input = input;
             that._inputWrapper = $(wrapper[0].firstChild);
-            that._arrow = wrapper.find(".k-icon")
-                                 .attr({
-                                     "role": "button",
-                                     "tabIndex": -1
-                                 });
-
+            that._arrow = wrapper.find(".k-icon:last")
+                .attr({
+                    "role": "button",
+                    "tabIndex": -1
+                });
             if (element.id) {
                 that._arrow.attr("aria-controls", that.ul[0].id);
+            }
+        },
+
+        _clearButton: function() {
+            this._clear = $('<span unselectable="on" class="k-icon k-i-close" title="clear"></span>').attr({
+                "role": "button",
+                "tabIndex": -1
+            });
+            if (this.options.clearButton) {
+                this._clear.insertAfter(this.input);
             }
         },
 

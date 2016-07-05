@@ -216,6 +216,12 @@ Defines the line color of the polyline.
 
 Defines the stroke width of the polyline.
 
+## Fields
+
+### drawingElement `kendo.drawing.Path`
+
+The drawing element used to draw the polyline.
+
 ## Methods
 
 ### points

@@ -184,7 +184,7 @@ The example below demonstrates how to access and existing Grid instance.
 
 ## See Also
 
-Other articles on Kendo UI Grid:
+Other articles on the Kendo UI Grid:
 
 * [Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})
@@ -198,4 +198,4 @@ Other articles on Kendo UI Grid:
 * [Overview of the Grid JSP Tag]({% slug overview_grid_uiforjsp %})
 * [Overview of the Grid PHP Class](/php/widgets/grid/overview)
 
-For how-to examples on the Kendo UI Grid widget, browse [its How-to section]({% slug howto_bindto_telerik_backend_services_grid %}).
+For how-to examples on the Kendo UI Grid widget, browse its [**How To** documentation folder]({% slug howto_bindto_telerik_backend_services_grid %}).

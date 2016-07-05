@@ -32,9 +32,9 @@ When a Window is initialized, it is going to be automatically displayed as open 
 
 ### HTML Structure and DOM Placement
 
-With regard to the CSS selectors or element discovery via Javascript, make sure you take into account that, by default, the Window is created as a child of the `<body>` element. This behavior is configurable via the [`appendTo` setting](/api/javascript/ui/window#configuration-appendTo).
+With regard to the CSS selectors or element discovery via Javascript, take into account that, by default, the Window is created as a child of the `<body>` element. This behavior is configurable via the [`appendTo` setting](/api/javascript/ui/window#configuration-appendTo).
 
-The HTML snippet below demonstrates how the page markup may look like before Kendo UI Window initialization.
+The example below demonstrates the possible markup before the initialization of the Kendo UI Window.
 
 ###### Example
 
@@ -50,7 +50,7 @@ The HTML snippet below demonstrates how the page markup may look like before Ken
 		</div>
 	</body>
 
-The HTML snippet below demonstrates how the above page markup will change after Kendo UI Window initialization, when the widget is moved to become a child of the `<body>` and its additional markup is generated (i.e. the wrapper and the titlebar).
+The example below demonstrates how the above page markup changes after the initialization of the Kendo UI Window, when the widget is moved to become a child of the `<body>` and its additional markup is generated&mdash;that is, the wrapper and the title bar.
 
 ###### Example
 
@@ -189,7 +189,7 @@ Kendo UI Window creates an iframe for its content if the content URL contains a 
 > * Loading HTML fragments (partial content) inside an iframe is incorrect. Iframe pages should include a DOCTYPE, `html`, `head`, and `body` tags, just like a standard web page does.
 >  * Using an iframe on iOS devices is not recommended. Iframes on these devices are not scrollable and always expand to match the content.
 
-The example below demonstrates how to access the `window` and `document` objects inside the `iframe`. Note that to achieve this, the nested page must belong to the same domain as the main page.
+The example below demonstrates how to access the `window` and `document` objects inside the `iframe`. Note that to achieve this, the nested page must belong to the same domain as the main page. The `iframe` is accessed through the [`element`]({% slug widgetwrapperandelement_references_gettingstarted %}) of the Window widget.
 
 ###### Example
 
@@ -197,17 +197,26 @@ The example below demonstrates how to access the `window` and `document` objects
 
     <script>
 
-    var windowElement = $("#window").kendoWindow({
-        iframe: true,
-        content: "http://docs.telerik.com/kendo-ui/"
+    $(function() {
+        $("#window").kendoWindow({
+            iframe: true,
+            content: "http://docs.telerik.com/kendo-ui/"
+        });
     });
 
-    var iframeDomElement = windowElement.children("iframe")[0];
-    var iframeWindowObject = iframeDomElement.contentWindow;
-    var iframeDocumentObject = iframeDomElement.contentDocument;
-    // which is equivalent to
-    // var iframeDocumentObject = iframeWindowObject.document;
-    var iframejQuery = iframeWindowObject.$; // if jQuery is registered inside the iframe page, of course
+    // The code above will be generated automatically when using server-side Kendo UI wrappers.
+
+    $(function() {
+        var windowElement = $("#window");
+        var iframeDomElement = windowElement.children("iframe")[0];
+        var iframeWindowObject = iframeDomElement.contentWindow;
+
+        var iframeDocumentObject = iframeDomElement.contentDocument;
+        // which is equivalent to
+        // var iframeDocumentObject = iframeWindowObject.document;
+
+        var iframejQuery = iframeWindowObject.$; // if jQuery is registered inside the iframe page, of course    
+    });
 
     </script>
 
@@ -322,6 +331,10 @@ In Safari and Chrome browsers running on OS X, a scrollbar of an element below t
 
     -webkit-transform: translate3d(0, 0, 0);
 
+### Create Windows Multiple Times
+
+It is possible to create a Kendo UI Window instance multiple times with the same ID only if the existing instance with this ID is [destroyed](#configuration-Destroy) first. Multiple widgets with the same ID [cannot exist and work properly]({% slug initialize_widgets_using_jquery_plugins_installation %}#duplicate-initialization) at the same time. An alternative approach is not to destroy the existing Window instance, but just [open](/api/javascript/ui/window#methods-open) it and [refresh](/api/javascript/ui/window#methods-refresh) its Ajax content&mdash;or [set new static content](/api/javascript/ui/window#methods-content)&mdash;if needed.
+
 ## See Also
 
 Other articles on Kendo UI Upload:
@@ -339,4 +352,4 @@ Other articles on Kendo UI Upload:
 * [How to Restrict Window Positioning]({% slug howto_restrictpositioning_window %})
 * [How to Use Custom Action Icons]({% slug howto_customactionicons_window %})
 * [How to Use MVVM Binding for Window Data Editing]({% slug howto_usemvvmbinding_forwindowdataediting_mvvm_window %})
-* [Upload JavaScript API Reference](/api/javascript/ui/window)
+* [Window JavaScript API Reference](/api/javascript/ui/window)

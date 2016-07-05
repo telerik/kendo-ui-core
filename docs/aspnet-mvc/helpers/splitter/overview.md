@@ -29,7 +29,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Split
 
 **Step 3** Add a Splitter.
 
-**WebForms**
+###### Example
+
+```tab-ASPX
 
         <%: Html.Kendo().Splitter()
                 .Name("splitter") //The name of the Splitter is mandatory. It specifies the "id" attribute of the widget.
@@ -39,8 +41,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Split
                     panes.Add().Content("Item 2"); //Add the pane.
                 })
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Splitter()
             .Name("splitter") //The name of the Splitter is mandatory. It specifies the "id" attribute of the widget.
@@ -50,6 +52,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Split
                 panes.Add().Content("Item 2"); //Add the pane.
             })
          )
+```
 
 ## Event Handling
 
@@ -61,7 +64,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%: Html.Kendo().Splitter()
                 .Name("splitter")
@@ -74,9 +77,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the Resize event.
         }
         </script>
-
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Splitter()
               .Name("splitter")
@@ -89,7 +91,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the Resize event.
         }
         </script>
-
+```
 
 ### By Template Delegate
 
@@ -97,7 +99,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().Splitter()
               .Name("splitter")
@@ -109,6 +111,7 @@ The example below demonstrates how to subscribe to events by a template delegate
                   </text>)
               )
         )
+```
 
 ## Reference
 
@@ -130,6 +133,7 @@ You can reference an existing Kendo UI Splitter instance via [`jQuery.data()`](h
 
 Other articles on Telerik UI for ASP.NET MVC and on the Splitter:
 
+* [ASP.NET MVC API Reference: SplitterBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/SplitterBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

@@ -24,7 +24,7 @@ The example below demonstrates how to display a number with up to three decimals
 
     #.###
 
-The example below demonstrates how to display positive numbers, or zero, in green, and negative numbers in red.     
+The example below demonstrates how to display positive numbers, or zero, in green, and negative numbers in red.
 
 ###### Example
 
@@ -58,6 +58,24 @@ The example below demonstrates how to display numbers greater than 100 in green,
     [>100][GREEN]#,##0;[<=-100][YELLOW]#,##0;[CYAN]#,##0
 
 In this case it is not clear whether only up to four sections are allowed, of which the last one must be text, while the Spreadsheet formatter allows for any number of conditional sections.
+
+### Default Format Strings
+
+The default format strings that are shown in the formatting drop-down are stored in the `kendo.spreadsheet.formatting` object.
+
+| FORMAT IDENTIFIER | VALUE                                                                         |
+|-------------------|-------------------------------------------------------------------------------|
+| automatic         | Infer formatting by parsing the cell value                                    |
+| number            | Format number, with precision of 2 decimals                                   |
+| percent           | Format percentage points, with precision of 2 decimals                        |
+| financial         | Format financial value, accounting for positive / negative / zero values      |
+| currency          | Format currency value, accounting for positive / negative values              |
+| date              | Format value as date                                                          |
+| time              | Format value as time                                                          |
+| dateTime          | Format value as date-time                                                     |
+| duration          | Format as elapsed duration (in hours / minutes / seconds)                     |
+
+You can use the above formats with the [`range` value method](/api/javascript/spreadsheet/range#methods-format), like this: `sheet.range("A1").format(kendo.spreadsheet.formatting.currency)`.
 
 ### Text and Numbers
 
@@ -132,9 +150,11 @@ The Spreadsheet does not support the following options otherwise available in Ex
 
 ## See Also
 
-Other articles on Kendo UI Spreadsheet:
+Other articles on the Kendo UI Spreadsheet:
 
+* [Overview]({% slug overview_spreadsheet_widget %})
 * [Custom Functions]({% slug custom_functions_spreadsheet_widget %})
+* [Custom Cell Editors]({% slug custom_editors_spreadsheet_widget %})
 * [Store Data as JSON]({% slug loadand_saveas_json_spreadsheet_widget %})
 * [Export to Excel]({% slug export_toexcel_spreadsheet_widget %})
 * [Server-Side Processing]({% slug serverside_processing_spreadsheet_widget %})

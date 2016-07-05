@@ -4626,7 +4626,7 @@ The supported values are:
       categoryAxis: {
         notes: {
           icon: {
-            shape: "triangle"
+            type: "triangle"
           },
           data: [{ value: 1 }]
         }
@@ -9383,8 +9383,6 @@ The supported values are:
 * "vml" - renders the widget as VML, if available
 * "canvas" - renders the widget as a Canvas element, if available.
 
-> Using Canvas rendering disables most interactive features.
-
 ### Example - Render as Canvas, if supported
 
     <div id="chart"></div>
@@ -12589,7 +12587,7 @@ The rotation angle of the markers.
 
 ### series.outliers `Object`
 
-The chart series outliers configuration.
+The chart series outliers configuration. Applies to **mild** outliers. Also check [`series.extremes`](#configuration-series.extremes).
 
 #### Example - set the chart series outliers
 
@@ -12791,7 +12789,7 @@ The rotation angle of the outliers.
 
 ### series.extremes `Object`
 
-The chart series extremes configuration.
+The chart series extremes configuration. Applies to **extreme** outliers. Also check [`series.outliers`](#configuration-series.outliers).
 
 #### Example - set the chart series extremes
 
@@ -13375,7 +13373,7 @@ A string value is interpreted as [series.stack.group](#configuration-series.stac
 
 > The `stack` options is supported when [series.type](#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
 
-> Stack settings of the first series are applied to the rest of the series.
+> Stack settings of the first series are inherited as a default value by the rest of the series, in case they are not overridden.
 
 #### Example - configure stack series
 
@@ -20965,6 +20963,10 @@ The end position of the plot band in axis units.
 
 If set to `true` the value axis direction will be reversed. By default categories are listed from left to right and from bottom to top.
 
+> **Important**
+>
+> A reverse value axis is not supported for radar and polar charts.
+
 #### Example - reverse the value axis
 
     <div id="chart"></div>
@@ -25538,7 +25540,7 @@ Setting it to `false` will force the automatic axis range to snap to 0.
           xAxis: {
             narrowRange: true
           },
-          xAxis: {
+          yAxis: {
             narrowRange: true
           }
         });
@@ -32320,7 +32322,7 @@ A function that can be used to create a custom visual for the notes. The availab
 
 Specifies if the chart can be zoomed.
 
-### Example - enable zooming
+##### Example - enable zooming
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
@@ -32338,7 +32340,7 @@ Specifies if the chart can be zoomed.
 
 Specifies if the chart can be zoomed using the mouse wheel.
 
-### Example - disable mouse wheel zoom
+##### Example - disable mouse wheel zoom
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
@@ -32358,7 +32360,7 @@ Specifies if the chart can be zoomed using the mouse wheel.
 
 Specifies an axis that should not be zoomed. The supported values are `none`, `x` and `y`.
 
-### Example - disable mouse wheel zoom for the y axis
+##### Example - disable mouse wheel zoom for the y axis
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
@@ -32378,7 +32380,7 @@ Specifies an axis that should not be zoomed. The supported values are `none`, `x
 
 Specifies if the chart can be zoomed using selection.
 
-### Example - disable selection zoom
+##### Example - disable selection zoom
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
@@ -32403,7 +32405,7 @@ Specifies a keyboard key that should be pressed to activate the selection. The s
 * "shift" - The "shift" key should be pressed.
 * "alt" - The "alt" key should be pressed.
 
-### Example - specify that no key needs be pressed
+##### Example - specify that no key needs be pressed
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
@@ -32425,7 +32427,7 @@ Specifies a keyboard key that should be pressed to activate the selection. The s
 
 Specifies an axis that should not be zoomed. The supported values are `none`, `x` and `y`.
 
-### Example - disable selection zoom for the y axis
+##### Example - disable selection zoom for the y axis
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
@@ -33089,7 +33091,7 @@ The DOM element of the label.
 
 The label sequential index or category index.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -33135,74 +33137,6 @@ The label value or category name.
     chart.bind("axisLabelClick", chart_axisLabelClick);
     </script>
 
-### legendItemClick
-
-Fires when an legend item is clicked, before the selected series visibility is toggled.
-Can be cancelled.
-
-#### Example - prevent toggling the series visibility on legend item click
-    function onLegendItemClick(e) {
-        e.preventDefault();
-    }
-
-#### Event Data
-
-##### e.text `String`
-
-The name of the series.
-
-##### e.series `Object`
-
-The series options.
-
-##### e.seriesIndex `Number`
-
-The series index.
-
-##### e.pointIndex `Number`
-
-The point index.
-
-##### e.preventDefault `Function`
-
-If invoked the default action (toggle series visibility) will be prevented.
-
-##### e.element `Object`
-
-The DOM element of the plot area.
-
-### legendItemHover
-
-Fires when an legend item is hovered.
-
-#### Example
-
-    function onLegendItemHover(e) {
-        alert("Hovered " + e.text + " series");
-    }
-
-#### Event Data
-
-##### e.text `String`
-
-The name of the series.
-
-##### e.series `Object`
-
-The series options.
-
-##### e.seriesIndex `Number`
-
-The series index.
-
-##### e.pointIndex `Number`
-
-The point index.
-
-##### e.element `Object`
-
-The DOM element of the plot area.
-
 ### dataBound
 
 Fired when the widget is bound to data from its data source.
@@ -33211,7 +33145,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 #### Event Data
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -33267,7 +33201,7 @@ A hastable containing the initial range (min and max values) of *named* axes. Th
 
 The original user event that triggered the drag action.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -33315,7 +33249,7 @@ A hastable containing the initial range (min and max values) of *named* axes. Th
 
 The original user event that triggered the dragEnd action.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -33367,7 +33301,7 @@ The original user event that triggered the drag action.
 
 If invoked the drag operation will abort.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -33399,6 +33333,82 @@ The widget instance which fired the event.
     chart.bind("dragStart", chart_dragStart);
     </script>
 
+### legendItemClick
+
+Fires when an legend item is clicked, before the selected series visibility is toggled.
+Can be cancelled.
+
+#### Example - prevent toggling the series visibility on legend item click
+    function onLegendItemClick(e) {
+        e.preventDefault();
+    }
+
+#### Event Data
+
+##### e.pointIndex `Number`
+
+The point index.
+
+##### e.preventDefault `Function`
+
+If invoked the default action (toggle series visibility) will be prevented.
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
+
+##### e.series `Object`
+
+The series options.
+
+##### e.seriesIndex `Number`
+
+The series index.
+
+##### e.text `String`
+
+The name of the series.
+
+##### e.element `Object`
+
+The DOM element of the plot area.
+
+### legendItemHover
+
+Fires when an legend item is hovered.
+
+#### Example
+
+    function onLegendItemHover(e) {
+        alert("Hovered " + e.text + " series");
+    }
+
+#### Event Data
+
+##### e.element `Object`
+
+The DOM element of the plot area.
+
+##### e.pointIndex `Number`
+
+The point index.
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
+
+##### e.series `Object`
+
+The series options.
+
+##### e.seriesIndex `Number`
+
+The series index.
+
+##### e.text `String`
+
+The name of the series.
+
 ### noteClick
 
 Fired when the user clicks one of the notes.
@@ -33411,25 +33421,25 @@ The event handler function context (available via the `this` keyword) will be se
 
 The data point category. Available only for categorical charts (bar, line, area and similar).
 
+##### e.dataItem `Object`
+
+The data item of the point's note.
+
 ##### e.element `Object`
 
 The DOM element of the plot area.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
-
-##### e.value `Object`
-
-The data point value.
 
 ##### e.series `Object`
 
 The series of the note.
 
-##### e.dataItem `Object`
+##### e.value `Object`
 
-The data item of the point's note.
+The data point value.
 
 ##### e.visual `Object`
 
@@ -33475,25 +33485,25 @@ The event handler function context (available via the `this` keyword) will be se
 
 The data point category. Available only for categorical charts (bar, line, area and similar).
 
+##### e.dataItem `Object`
+
+The data item of the point's note.
+
 ##### e.element `Object`
 
 The DOM element of the plot area.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
-
-##### e.value `Object`
-
-The data point value.
 
 ##### e.series `Object`
 
 The series of the note.
 
-##### e.dataItem `Object`
+##### e.value `Object`
 
-The data item of the point's note.
+The data point value.
 
 ##### e.visual `Object`
 
@@ -33543,13 +33553,13 @@ The data point category. Available only for categorical charts (bar, line, area 
 
 The DOM element of the plot area.
 
-##### e.sender `kendo.ui.Chart`
-
-The widget instance which fired the event.
-
 ##### e.originalEvent `Object`
 
 The original browser event that triggered the click action.
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
 
 ##### e.value `Object`
 
@@ -33561,7 +33571,7 @@ The X axis value or array of values for multi-axis charts.
 
 ##### e.y `Object`
 
-The X axis value or array of values for multi-axis charts.
+The Y axis value or array of values for multi-axis charts.
 
 #### Example - handle right click on plot area and disable context menu
     <div id="chart"></div>
@@ -33607,6 +33617,68 @@ The X axis value or array of values for multi-axis charts.
     chart.bind("plotAreaClick", chart_plotAreaClick);
     </script>
 
+### plotAreaHover
+
+Fired when the user hovers the plot area.
+
+#### Event Data
+
+##### e.category `Object`
+
+The data point category. Available only for categorical charts (bar, line, area and similar).
+
+##### e.element `Object`
+
+The DOM element of the plot area.
+
+##### e.originalEvent `Object`
+
+The original browser event that triggered the hover action.
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
+
+##### e.value `Object`
+
+The data point value. Available only for categorical charts (bar, line, area and similar).
+
+##### e.x `Object`
+
+The X axis value or array of values for multi-axis charts.
+
+##### e.y `Object`
+
+The Y axis value or array of values for multi-axis charts.
+
+#### Example - subscribe to the "plotAreaHover" event during initialization
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2] }
+      ],
+      plotAreaHover: function(e) {
+        console.log(e.value);
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "plotAreaHover" event after initialization
+    <div id="chart"></div>
+    <script>
+    function chart_plotAreaHover(e) {
+      console.log(e.value);
+    }
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2] }
+      ]
+    });
+    var chart = $("#chart").data("kendoChart");
+    chart.bind("plotAreaHover", chart_plotAreaHover);
+    </script>
+
 ### render
 
 Fired when the chart is ready to render on screen.
@@ -33614,6 +33686,12 @@ Fired when the chart is ready to render on screen.
 Can be used, for example, to remove loading indicators. Changes to options will be ignored.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
 
 ### select
 
@@ -33636,7 +33714,7 @@ The target axis configuration.
 
 The lower boundary of the selected range.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -33710,7 +33788,7 @@ The target axis configuration.
 
 The lower boundary of the selected range.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -33784,7 +33862,7 @@ The target axis configuration.
 
 The lower boundary of the selected range.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -33848,6 +33926,10 @@ Fired when the user clicks the chart series.
 
 The data point category
 
+##### e.dataItem `Object`
+
+The original data item (when binding to dataSource).
+
 ##### e.element `Object`
 
 The DOM element of the data point.
@@ -33855,6 +33937,14 @@ The DOM element of the data point.
 ##### e.originalEvent `Object`
 
 The original browser event that triggered the click action.
+
+##### e.percentage `Object`
+
+The point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
 
 ##### e.series `Object`
 
@@ -33872,21 +33962,9 @@ The series name
 
 The series data points
 
-##### e.dataItem `Object`
-
-The original data item (when binding to dataSource).
-
-##### e.sender `kendo.ui.Chart`
-
-The widget instance which fired the event.
-
 ##### e.value `Object`
 
 The data point value.
-
-##### e.percentage `Object`
-
-The point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
 
 #### Example - handle right click on series and disable context menu
     <div id="chart"></div>
@@ -33953,6 +34031,10 @@ A list of all points that are in the same category. Each item has the same field
 Defined only when a [shared tooltip](#configuration-tooltip.shared) is in use.
 Available in versions 2014.3.1306 and later.
 
+##### e.dataItem `Object`
+
+The original data item (when binding to dataSource).
+
 ##### e.element `Object`
 
 The DOM element of the data point.
@@ -33960,6 +34042,14 @@ The DOM element of the data point.
 ##### e.originalEvent `Object`
 
 The original browser event that triggered the hover action.
+
+##### e.percentage `Object`
+
+The point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
 
 ##### e.series `Object`
 
@@ -33977,21 +34067,9 @@ The series name
 
 The series data points
 
-##### e.dataItem `Object`
-
-The original data item (when binding to dataSource).
-
-##### e.sender `kendo.ui.Chart`
-
-The widget instance which fired the event.
-
 ##### e.value `Object`
 
 The data point value.
-
-##### e.percentage `Object`
-
-The point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
 
 #### Example - subscribe to the "seriesHover" event during initialization
     <div id="chart"></div>
@@ -34041,7 +34119,7 @@ A number that indicates the zoom amount and direction. A negative value indicate
 
 The original user event that triggered the drag action.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -34089,7 +34167,7 @@ A hastable containing the initial range (min and max values) of *named* axes. Th
 
 The original user event that triggered the zoomEnd action.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -34141,7 +34219,7 @@ The original user event that triggered the drag action.
 
 If invoked the zoom operation will abort.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -34172,4 +34250,3 @@ The widget instance which fired the event.
     var chart = $("#chart").data("kendoChart");
     chart.bind("zoomStart", chart_zoomStart);
     </script>
-

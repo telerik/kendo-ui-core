@@ -7,7 +7,7 @@ module("RemoteTransport", {
         $.mockjaxSettings.responseTime = 0;
     },
     teardown: function() {
-        $.mockjaxClear();
+        $.mockjax.clear();
     }
 });
 
@@ -154,7 +154,7 @@ asyncTest("read constructor data function is persisted on multiple requests", 2,
     });
 
     transport.read({ url: "foo", data: { baz: "moo" } });
-    $.mockjaxClear();
+    $.mockjax.clear();
     $.mockjax({
         url: "foo",
         response: function() {
@@ -191,7 +191,7 @@ asyncTest("read constructor data has access to the data to be passed to paramete
 
     transport.read({ url: "foo", data: { baz: "moo" } });
 
-    $.mockjaxClear();
+    $.mockjax.clear();
 });
 
 asyncTest("read original data is not contaminated when additional data is submitted", 1, function() {

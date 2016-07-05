@@ -174,7 +174,7 @@ Creates a plain JavaScript object which contains all fields of the `ObservableOb
 
 ## Events
 
-### change event
+### change
 
 Fired when a field value is updated via the `set` method.
 

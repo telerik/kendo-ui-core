@@ -52,6 +52,9 @@ var __meta__ = { // jshint ignore:line
                   "line-height"];
 
     function contains(container, target) {
+        if (!container || !target) {
+            return false;
+        }
         return container === target || $.contains(container, target);
     }
 

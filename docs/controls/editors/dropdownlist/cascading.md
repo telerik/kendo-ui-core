@@ -8,11 +8,11 @@ position: 4
 
 # Cascading DropDownLists
 
-The casacding functionality described in the related help article for [Kendo UI ComboBox widget](/web/combobox/cascading) is applicable to the DropDownList as well.
+The cascading functionality described in the related help article for the [Kendo UI ComboBox widget](/web/combobox/cascading) is applicable to the DropDownList as well.
 
 ## See Also
 
-Other articles on Kendo UI DropDownList:
+Other articles on the Kendo UI DropDownList:
 
 * [Overview of the DropDownList Widget]({% slug overview_kendoui_dropdownlist_widget %})
 * [Grouping Functionality]({% slug grouping_kendoui_combobox_widget %})

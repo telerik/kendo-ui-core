@@ -87,37 +87,7 @@ Below are listed the steps for you to follow when binding the Kendo UI Gantt to 
 
 ###### Example
 
-**Razor**
-
-        @(Html.Kendo().Gantt<TelerikMvcApp14.Models.TaskViewModel, TelerikMvcApp14.Models.DependencyViewModel>()
-            .Name("Gantt")
-            .DataSource(ds => ds
-                .Read(read => read
-                    .Action("Tasks", "Home")
-                )
-                .Model(m =>
-                {
-                    m.Id(f => f.TaskID);
-                    m.ParentId(f => f.ParentID);
-                    m.OrderId(f => f.OrderId);
-                    m.Field(f => f.Expanded).DefaultValue(true);
-                })
-            )
-            .DependenciesDataSource(ds => ds
-                .Read(read => read
-                    .Action("Dependencies", "Home")
-                )
-                .Model(m =>
-                {
-                    m.Id(f => f.DependencyID);
-                    m.PredecessorId(f => f.PredecessorID);
-                    m.SuccessorId(f => f.SuccessorID);
-                    m.Type(f => f.Type);
-                })
-            )
-        )
-
-**WebForms**
+```tab-ASPX
 
         <%= Html.Kendo().Gantt<TelerikMvcApp14.Models.TaskViewModel, TelerikMvcApp14.Models.DependencyViewModel>()
             .Name("Gantt")
@@ -146,11 +116,43 @@ Below are listed the steps for you to follow when binding the Kendo UI Gantt to 
                 })
             )
         %>
+```
+```tab-Razor
+
+        @(Html.Kendo().Gantt<TelerikMvcApp14.Models.TaskViewModel, TelerikMvcApp14.Models.DependencyViewModel>()
+            .Name("Gantt")
+            .DataSource(ds => ds
+                .Read(read => read
+                    .Action("Tasks", "Home")
+                )
+                .Model(m =>
+                {
+                    m.Id(f => f.TaskID);
+                    m.ParentId(f => f.ParentID);
+                    m.OrderId(f => f.OrderId);
+                    m.Field(f => f.Expanded).DefaultValue(true);
+                })
+            )
+            .DependenciesDataSource(ds => ds
+                .Read(read => read
+                    .Action("Dependencies", "Home")
+                )
+                .Model(m =>
+                {
+                    m.Id(f => f.DependencyID);
+                    m.PredecessorId(f => f.PredecessorID);
+                    m.SuccessorId(f => f.SuccessorID);
+                    m.Type(f => f.Type);
+                })
+            )
+        )
+```
 
 ## See Also
 
 Other articles on Telerik UI for ASP.NET MVC and on the Gantt:
 
+* [ASP.NET MVC API Reference: GanttBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GanttBuilder)
 * [Server Binding of the Gantt HtmlHelper]({% slug serverbinding_gantthelper_aspnetmvc %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})

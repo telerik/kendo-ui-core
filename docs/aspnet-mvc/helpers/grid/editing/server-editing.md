@@ -9,9 +9,17 @@ position: 3
 
 # Server Editing
 
-To configure Kendo Grid for ASP.NET MVC for server editing follow these steps:
+This article demonstrates how to configure the Kendo UI Grid for ASP.NET MVC for server editing.
 
-1.  Define a command column for the `Edit` and `Destroy` commands:
+## Getting Started
+
+### Configuration
+
+Below are listed the steps for you to follow when configuring the Kendo UI Grid for ASP.NET MVC for server editing.
+
+**Step 1** Define a command column for the `Edit` and `Destroy` commands.
+
+###### Example
 
         <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
                 .Name("Home")
@@ -21,11 +29,14 @@ To configure Kendo Grid for ASP.NET MVC for server editing follow these steps:
                     columns.Bound(p => p.UnitPrice).Width(140);
                     columns.Bound(p => p.UnitsInStock).Width(140);
                     columns.Bound(p => p.Discontinued).Width(100);
-                    // Add "Edit" and "Destroy" commands
+                    // Add the "Edit" and "Destroy" commands.
                     columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
                 })
         %>
-2.  Set the editing mode to `InLine`:
+
+**Step 2** Set the editing mode to `InLine`.
+
+###### Example
 
         <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
                 .Name("Home")
@@ -37,10 +48,13 @@ To configure Kendo Grid for ASP.NET MVC for server editing follow these steps:
                     columns.Bound(p => p.Discontinued).Width(100);
                     columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
                 })
-                // Set the edit mode to "InLine"
+                // Set the edit mode to "InLine".
                 .Editable(editable => editable.Mode(GridEditMode.InLine))
         %>
-3.  Add the `Create` command to the grid toolbar:
+
+**Step 3** Add the `Create` command to the Grid toolbar.
+
+###### Example
 
         <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
                 .Name("Home")
@@ -52,11 +66,14 @@ To configure Kendo Grid for ASP.NET MVC for server editing follow these steps:
                     columns.Bound(p => p.Discontinued).Width(100);
                     columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
                 })
-                // Add "Create" command
+                // Add the "Create" command.
                 .ToolBar(commands => commands.Create())
                 .Editable(editable => editable.Mode(GridEditMode.InLine))
         %>
-4.  Specify the action methods which will handle the Create, Update and Destroy operations:
+
+**Step 4** Specify the action methods which will handle the `Create`, `Update` and `Destroy` operations.
+
+###### Example
 
         <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
                 .Name("Home")
@@ -72,15 +89,18 @@ To configure Kendo Grid for ASP.NET MVC for server editing follow these steps:
                 .Editable(editable => editable.Mode(GridEditMode.InLine))
                 .DataSource(dataSource => dataSource
                     .Server()
-                    // Configure CRUD -->
+                    // Configure CRUD. -->
                     .Create(create => create.Action("Create", "Home"))
                     .Read(read => read.Action("Index", "Home"))
                     .Update(update => update.Action("Update", "Home"))
                     .Destroy(destroy => destroy.Action("Destroy", "Home"))
-                    // <-- Configure CRUD
+                    // <-- Configure CRUD.
                 )
         %>
-5.  Specify the property of the model which is the unique identifier (primary key):
+
+**Step 5** Specify the property of the model which is the unique identifier (primary key).
+
+###### Example
 
         <%: Html.Kendo().Grid<MvcApplication1.Models.Product>()
                 .Name("Home")
@@ -96,7 +116,7 @@ To configure Kendo Grid for ASP.NET MVC for server editing follow these steps:
                 .Editable(editable => editable.Mode(GridEditMode.InLine))
                 .DataSource(dataSource => dataSource
                     .Server()
-                    // Specify that the ProductID property is the unique identifier of the model
+                    // Specify that the ProductID property is the unique identifier of the model.
                     .Model(model => model.Id(p => p.ProductID))
                     .Create(create => create.Action("Create", "Home"))
                     .Read(read => read.Action("Index", "Home"))
@@ -104,84 +124,97 @@ To configure Kendo Grid for ASP.NET MVC for server editing follow these steps:
                     .Destroy(destroy => destroy.Action("Destroy", "Home"))
                 )
         %>
-6.  Implement the `Read` action method:
+
+**Step 6** Implement the `Read` action method.
+
+###### Example
 
         public ActionResult Index()
         {
             return View(ProductRepository.All());
         }
-7.  Implement the `Create` action method:
+
+**Step 7** Implement the `Create` action method.
+
+###### Example
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Create(Product product)
         {
             if (ModelState.IsValid)
             {
-                //The model is valid - insert the product and redisplay the grid.
+                // The model is valid. Insert the product and re-display the Grid.
                 ProductRepository.Insert(product);
 
-                //GridRouteValues() is an extension method which returns the
-                //route values defining the grid state - current page, sort expression, filter etc.
+                // GridRouteValues() is an extension method which returns the
+                // route values defining the Grid state - current page, sort expression, filter etc.
                 RouteValueDictionary routeValues = this.GridRouteValues();
 
                 return RedirectToAction("Index", routeValues);
             }
 
-            //The model is invalid - render the current view to show any validation errors
+            // The model is invalid. Render the current view to show any validation errors.
             return View("Index", ProductRepository.All());
         }
-8.  Implement the `Update` action method:
+
+**Step 8** Implement the `Update` action method.
+
+###### Example
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Update(Product product)
         {
             if (ModelState.IsValid)
             {
-                //The model is valid - update the product and redisplay the grid.
+                // The model is valid. Update the product and re-display the Grid.
                 ProductRepository.Update(product);
 
-                //GridRouteValues() is an extension method which returns the
-                //route values defining the grid state - current page, sort expression, filter etc.
+                // GridRouteValues() is an extension method which returns the
+                // route values defining the Grid state - current page, sort expression, filter etc.
                 RouteValueDictionary routeValues = this.GridRouteValues();
 
                 return RedirectToAction("Index", routeValues);
             }
 
-            //The model is invalid - render the current view to show any validation errors
+            // The model is invalid. Render the current view to show any validation errors.
             return View("Index", ProductRepository.All());
         }
-9.  Implement the `Destroy` action method:
+
+**Step 9** Implement the `Destroy` action method.
+
+###### Example
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Destroy(int productID)
         {
-            //Find a product with ProductID equal to the id action parameter
+            // Find a product with ProductID equal to the id action parameter.
             Product product = ProductRepository.One(p => p.ProductID == productID);
 
             RouteValueDictionary routeValues;
 
             if (product == null)
             {
-                //A product with the specified id does not exist - redisplay the grid
+                // A product with the specified id does not exist. Re-display the Grid.
 
-                //GridRouteValues() is an extension method which returns the
-                //route values defining the grid state - current page, sort expression, filter etc.
+                // GridRouteValues() is an extension method which returns the
+                // route values defining the Grid state - current page, sort expression, filter etc.
                 routeValues = this.GridRouteValues();
 
                 return RedirectToAction("Index", routeValues);
             }
 
-            //Delete the record
+            // Delete the record.
             ProductRepository.Delete(product);
 
             routeValues = this.GridRouteValues();
 
-            //Redisplay the grid
+            // Re-display the Grid.
             return RedirectToAction("Index", routeValues);
         }
 
 > **Important**  
-> The Kendo UI MVC Grid uses `form` elements internally when server editing is enabled. This means the widget cannot be placed in another `form` element on the page, because nesting forms is not standard-compliant.
+>
+> The Kendo UI Grid for ASP.NET MVC uses `form` elements internally when the server editing is enabled. This means that you are not able to place the widget in another `form` element on the page, because the nesting of forms is not a standard-compliant characteristic.
 
 ## See Also
 

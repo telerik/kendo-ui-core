@@ -7,126 +7,121 @@ slug: howto_automatically_adjust_width_dropdownlist
 
 # Adjust Width Automatically
 
-The example below demonstrates how to automatically adjust the width of a DropDownList.
+The examples below demonstrate how to automatically adjust the width of a DropDownList, depending on its list items.
+
+To adjust the width automatically, follow the steps below.
+
+**Step 1** Reset the list width of the widget to `auto`. Perform it after initialization.
+
+**Step 2** Add the scrollbar width to the list width. Perform it in the `adjustDropDownWidth` function.
+
+There are two possible scenarios.
+
+**Scenario 1** The DropDownList is already bound when it is opened. In this case, execute `adjustDropDownWidth` in the [`open`](/api/javascript/ui/dropdownlist#events-open) event.
+
+**Scenario 2** The DropDownList triggers a remote request after it is opened. In this case, execute `adjustDropDownWidth` in the [`dataBound`](/api/javascript/ui/dropdownlist#events-dataBound) event.
 
 ###### Example
 
 ```html
-  <div id="example">
-    <div id="cap-view" class="demo-section k-header">
-      <h2>Customize your Kendo Cap</h2>
-      <div id="options">
-        <h3>Cap Color</h3>
-        <input id="color" value="1" />
+<style>
 
-        <h3>Cap Size</h3>
-        <select id="size" style="width:auto">
-          <option>S - 6 3/4"</option>
-          <option>M - 7 1/4"</option>
-          <option>L - 7 1/8"</option>
-          <option>aaaaaaaaaaaaaaaaaaXL - 7 5/8"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</option>
-        </select>
-      </div>
-    </div>
-    <style scoped>
-      .demo-section {
-        width: 460px;
-        height: 300px;
-      }
-      .demo-section h2 {
-        text-transform: uppercase;
-        font-size: 1em;
-        margin-bottom: 30px;
-      }
-      #cap {
-        float: left;
-        width: 242px;
-        height: 225px;
-        margin: 20px 30px 30px 0;
-        background-image: url('../content/web/dropdownlist/cap.png');
-        background-repeat: no-repeat;
-        background-color: transparent;
-      }
-      .black-cap {
-        background-position: 0 0;
-      }
-      .grey-cap {
-        background-position: 0 -225px;
-      }
-      .orange-cap {
-        background-position: 0 -450px;
-      }
-      #options {
-        padding: 1px 0 30px 30px;
-      }
-      #options h3 {
-        font-size: 1em;
-        font-weight: bold;
-        margin: 25px 0 8px 0;
-      }
-      #get {
-        margin-top: 25px;
-      }
-    </style>
+  .k-list
+  {
+    white-space: nowrap;
+  }
 
-    <script>
-      $(document).ready(function() {
-        var data = [
-          { text: "Black", value: "1" },
-          { text: "Orange", value: "2" },
-          { text: "Grey", value: "3" }
-        ];
+</style>
 
-        // create DropDownList from input HTML element
-        $("#color").kendoDropDownList({
-          dataTextField: "text",
-          dataValueField: "value",
-          dataSource: data,
-          index: 0,
-          change: onChange
-        });
+<div id="example">
 
-        // create DropDownList from select HTML element
-        $("#size").kendoDropDownList({
-          filter: "contains"
-        });
+  <p>
+    Remote data: <select id="color-remote"></select>
+  </p>
 
-        var color = $("#color").data("kendoDropDownList");
-        var size = $("#size").data("kendoDropDownList");
+  <p>
+    Local data: <select id="color-local"></select>
+  </p>
 
-        size.list.width("auto");
+</div>
 
-        function onChange() {
-          var value = $("#color").val();
-          $("#cap")
-          .toggleClass("black-cap", value == 1)
-          .toggleClass("orange-cap", value == 2)
-          .toggleClass("grey-cap", value == 3);
-        };
+<script>
+  $(function() {
 
-        $("#get").click(function() {
-          alert('Thank you! Your Choice is:\n\nColor ID: '+color.value()+' and Size: '+size.value());
-        });
-      });
-    </script>
-  </div>
+    var data = [
+      { text: "Grey Grey Grey Grey Grey Grey Grey Grey Grey Grey Grey Grey Grey Grey Grey Grey Grey ", value: "13" },
+      { text: "Black 1", value: "1" },
+      { text: "Orange 2", value: "2" },
+      { text: "Black 3", value: "3" },
+      { text: "Orange 4", value: "4" },
+      { text: "Black 5", value: "5" },
+      { text: "Orange 6", value: "6" },
+      { text: "Black 7", value: "7" },
+      { text: "Orange 8", value: "8" },
+      { text: "Black 9", value: "9" },
+      { text: "Orange 10", value: "10" },
+      { text: "Black 11", value: "11" },
+      { text: "Orange 12", value: "12" }
+    ];
+
+    // DropDownList bound to remote data that is fetched on open
+    // use a dataBound handler
+
+    $("#color-remote").kendoDropDownList({
+      dataTextField: "text",
+      dataValueField: "value",
+      autoBind: false,
+      dataSource: {
+        transport: {
+          read: function (e) {
+            setTimeout(function(){
+              e.success(data);
+            }, 500);
+          }
+        }
+      },
+      dataBound: adjustDropDownWidth
+    });
+
+    var remoteDropDown = $("#color-remote").data("kendoDropDownList");
+
+    remoteDropDown.list.width("auto");
+
+    // DropDownList bound to local data or remote data that is fetched immediately upon initialization
+    // use an open handler
+
+    $("#color-local").kendoDropDownList({
+      dataTextField: "text",
+      dataValueField: "value",
+      dataSource: data,
+      open: adjustDropDownWidth
+    });
+
+    var localDropDown = $("#color-local").data("kendoDropDownList");
+
+    localDropDown.list.width("auto");
+
+    function adjustDropDownWidth(e) {
+      var listContainer = e.sender.list.closest(".k-list-container");
+      listContainer.width(listContainer.width() + kendo.support.scrollbar());
+    }    
+
+  });
+</script>
 ```
 
 ## See Also
 
-Other articles on Kendo UI DropDownList:
+Other articles on the Kendo UI DropDownList:
 
 * [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
-* [How to Cascade DropDownLists Using `ng-repeat`]({% slug howto_cascade_withngrepeat_distinct_values_dropdownlist %})
-* [How to Validate DropDownLists by Using Required Attributes]({% slug howto_validate_using_required_attributes_dropdownlist %})
-* [How to Cascade from Multiple Parents]({% slug howto_cascade_multiple_parents_dropdownlist %})
 * [How to Create DropDownLists with Long Items]({% slug howto_create_listswith_long_items_dropdownlist %})
-* [How to Detect Input Change Events]({% slug howto_detect_input_change_events_dropdownlist %})
-* [How to Detect Wrapper Blur Events]({% slug howto_detect_wrapper_blur_events_dropdownlist %})
 * [How to Detect Wrapper Focus Events]({% slug howto_detect_wrapper_focus_events_dropdownlist %})
 * [How to Move the Group Label on Top of Items]({% slug howto_move_group_label_ontopof_items_dropdownlist %})
-* [How to Preselect Items]({% slug howto_preselect_items_dropdownlist %})
-* [How to Update MVVM Bound Models on Load]({% slug howto_update_mvvm_model_onload_dropdownlist %})
-* [How to Set DataSource Dynamically]({% slug howto_set_datasource_dynamically_dropdownlist %})
-* [How to Remove Items]({% slug howto_remove_items_dropdownlist %})
 * [How to Prevent Popup Closure on Scroll]({% slug howto_prevent_popup_closure_onscroll_dropdownlist %})
+* [How to Remove Items]({% slug howto_remove_items_dropdownlist %})
+* [How to Set DataSource Dynamically]({% slug howto_set_datasource_dynamically_dropdownlist %})
+* [How to Update MVVM Bound Models on Load]({% slug howto_update_mvvm_model_onload_dropdownlist %})
+* [How to Validate DropDownLists by Using Required Attributes]({% slug howto_validate_using_required_attributes_dropdownlist %})
+
+For more runnable examples on the Kendo UI DropDownList, browse its [**How To** documentation folder]({% slug howto_cascade_withngrepeat_distinct_values_dropdownlist %}).

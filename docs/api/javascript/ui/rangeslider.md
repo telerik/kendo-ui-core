@@ -15,6 +15,10 @@ Represents the Kendo UI RangeSlider widget. Inherits from [Widget](/api/javascri
 The delta with which the value will change when the user presses the Page Up or Page Down key (the drag
 handle must be focused). Note: The allied `largeStep` will also set large tick for every large step.
 
+### leftDragHandleTitle `String`*(default: "drag")*
+
+The title of the left drag handle of the **RangeSlider**.
+
 ### max `Number`*(default: 10)*
 
 The maximum value of the **RangeSlider**.
@@ -24,9 +28,12 @@ The maximum value of the **RangeSlider**.
 The minimum value of the **RangeSlider**.
 
 ### orientation `String`*(default: "horizontal")*
-F
-The orientation of a **RangeSlider**; **"horizontal"** or
-**"vertical"**.
+
+The orientation of a **RangeSlider** - `"horizontal"` or `"vertical"`.
+
+### rightDragHandleTitle `String`*(default: "drag")*
+
+The title of the right drag handle of the **RangeSlider**.
 
 ### selectionEnd `Number`
 
@@ -46,7 +53,6 @@ arrow keys (the drag handle must be focused), or (3) drags the drag handle.
 
 Denotes the location of the tick marks in the **RangeSlider**. The available options are:
 
-
 #### *"topLeft"*
 
 Tick marks are located on the top of the horizontal widget or on the left of
@@ -54,8 +60,7 @@ Tick marks are located on the top of the horizontal widget or on the left of
 
 #### *"bottomRight"*
 
-Tick marks are located on the bottom of the horizontal widget or on the
-  right side of the vertical widget.
+Tick marks are located on the bottom of the horizontal widget or on the right side of the vertical widget.
 
 #### *"both"*
 

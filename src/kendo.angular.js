@@ -45,6 +45,8 @@ var __meta__ = { // jshint ignore:line
             TreeList    : 'TreeListDataSource',
             TreeView    : 'HierarchicalDataSource',
             Scheduler   : 'SchedulerDataSource',
+            PivotGrid   : 'PivotDataSource',
+            PivotConfigurator   : 'PivotDataSource',
             PanelBar    : '$PLAIN',
             Menu        : "$PLAIN",
             ContextMenu : "$PLAIN"
@@ -477,7 +479,7 @@ var __meta__ = { // jshint ignore:line
         }
 
         var form  = $(widget.element).parents("form");
-        var ngForm = scope[form.attr("name")];
+        var ngForm = kendo.getter(form.attr("name"))(scope);
         var getter = $parse(kNgModel);
         var setter = getter.assign;
         var updating = false;
@@ -486,7 +488,7 @@ var __meta__ = { // jshint ignore:line
 
         var length = function(value) {
             //length is irrelevant when value is not collection
-            return valueIsCollection ? value.length : 0;
+            return value && valueIsCollection ? value.length : 0;
         };
 
         var currentValueLength = length(getter(scope));

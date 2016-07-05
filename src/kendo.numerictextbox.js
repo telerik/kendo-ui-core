@@ -71,8 +71,15 @@ var __meta__ = { // jshint ignore:line
                  that._text.on(FOCUS + ns, proxy(that._click, that));
              } else {
                  that._text.on(TOUCHEND + ns + " " + FOCUS + ns, function() {
-                    that._toggleText(false);
-                    element.focus();
+                     if (kendo.support.browser.edge) {
+                         that._text.one(FOCUS + ns, function() {
+                             that._toggleText(false);
+                             element.focus();
+                         });
+                     } else {
+                         that._toggleText(false);
+                         element.focus();
+                     }
                  });
              }
 

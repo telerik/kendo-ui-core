@@ -93,16 +93,18 @@ The example below demonstrates how to specify the server proxy URL.
 
 ## Further Reading
 
-* [Learn More about Creating Excel Documents with Kendo UI](/framework/excel/introduction)
-* [Learn How to Save Files with Kendo UI](/framework/save-files/introduction)
-* [`kendo.ooxml.Workbook` API Reference](/api/javascript/ooxml/Workbook)
+* [Learn More about Creating Excel Documents with Kendo UI]({% slug introduction_excelexport_kendoui %}})
+* [Learn How to Save Files with Kendo UI]({% slug overview_savingfiles_kendoui %})
+* [API Reference: `kendo.ooxml.Workbook`](/api/javascript/ooxml/Workbook)
 
 ## See Also
 
-Other articles on Kendo UI PivotGrid:
+Other articles on the Kendo UI PivotGrid:
 
 * [Overview]({% slug overview_kendoui_pivotgrid_widget %})
 * [PivotConfigurator]({% slug overview_kendoui_pivotconfigurator_pivotgridwidget %})
 * [Fundamentals]({% slug fundamentals_pivotgrid_widget %})
 * [OLAP Cube Setup]({% slug olap_cube_setup_pivotgrid_widget %})
 * [Frequently Asked Questions]({% slug frequently_asked_questions_pivotgrid %})
+
+For how-to examples on the Kendo UI PivotGrid widget, browse its [**How To** documentation folder]({% slug howto_add_dimension_column_axis_pivotgrid %}).

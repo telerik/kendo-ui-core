@@ -525,6 +525,8 @@ $.extend(true, kendo.spreadsheet.messages.dialogs, {
     "save": "Uložiť",
     "cancel": "Storno",
     "remove": "Odstrániť",
+    "retry": "Opakovať",
+    "revert": "Prejsť Späť",
     "okText": "OK",
     "formatCellsDialog": {
         "title": "Formátovanie",

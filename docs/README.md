@@ -5,24 +5,26 @@ publish: false
 
 # Kendo UI Public Documentation
 
-Welcome to the GitHub repo for [Kendo UI](http://www.telerik.com/kendo-ui) documentation. This repository contains the source content — written in Markdown — that we use to power the Kendo UI Documentation at [docs.telerik.com/kendo-ui](http://docs.telerik.com/kendo-ui/). If you've arrived here wanting to search and peruse our docs, you'd be better served heading over to [docs.telerik.com/kendo-ui](http://docs.telerik.com/kendo-ui) where our content is prettified and searchable.
+Welcome to the GitHub documentation repo for [Telerik<sup>®</sup> Kendo UI<sup>®</sup> by Progress](http://www.telerik.com/kendo-ui). This repository contains the source content&mdash;written in Markdown&mdash;that we use to power the Kendo UI Documentation at [docs.telerik.com/kendo-ui](http://docs.telerik.com/kendo-ui/). If you have arrived here wanting to search and peruse our docs, you'd be better served heading over to [docs.telerik.com/kendo-ui](http://docs.telerik.com/kendo-ui) where our content is prettified and searchable.
 
-We believe that the documentation for a product is at its best when the content is a collaboration between the builders and consumers of that product. As such, this documentation is both public, and open sourced under a MIT license (see below). That means you can clone this repository, read the docs off line, or even load the entire thing to an Apple Newton, if that's your thing.
+We believe that the documentation for a product is at its best when the content is a collaboration between the builders and consumers of that product. As such, this documentation is both public, and open-sourced under a MIT license (see below). This means you can clone this repository, read the docs offline, or even load the entire thing to an Apple Newton, if that's your thing.
 
 It also means that you can play a role in making our docs better for everyone, and if helping us make the Kendo UI docs better sounds interesting to you, read on.
 
-## Contributing
+## Contribution
 
-There are two ways you can contribute to the public Kendo UI documentation: either create an issue in this repository, or fork the repo, make the change and send us a pull request!
+There are two ways you can contribute to the public Kendo UI documentation: either create an issue in this repository, or fork the repo, make the change and send us a pull request.
 
 * **Create an issue** - If you find an issue with our docs that needs to be addressed, the best way to let us know about it is by [creating an issue in this repository](https://github.com/telerik/kendo-ui-core/issues?state=open). When creating an issue, provide a descriptive title, be as specific as possible and link to the document in question (If you can provide a link to the closest anchor to the issue, all the better). Here's an example:
 
         Title: api/DataViz/chart.md is missing an image
         Description: Example 3 is missing an image right after the code sample. https://github.com/telerik/kendo-ui-core/issues?state=open
 
-> Note: When creating issues, please don't modify the assignee or milestone fields. Also, please create one issue per fix or change. "Bundled" entries will be deleted.
+> **Important**
+>
+> When creating issues, do not modify the assignee or milestone fields. Also, create one issue per fix or change. "Bundled" entries will be deleted.
 
-* **Send us a pull request** - Creating an issue is great — and we certainly appreciate them — but what we really love are pull requests. So, if you find an issue in the docs, or even feel like creating new content, we'd be happy to have your contributions! If you're just getting started with open source, Git and GitHub, we suggest you first read up on [forking repositories](https://help.github.com/articles/fork-a-repo) and [sending pull requests](https://help.github.com/articles/using-pull-requests), both great articles from the GitHub bootcamp.
+* **Send us a pull request** - Creating an issue is great&mdash;and we certainly appreciate them&mdash;but what we really love are pull requests. So, if you find an issue in the docs, or even feel like creating new content, we'd be happy to have your contributions! If you're just getting started with open source, Git and GitHub, we suggest you first read up on [forking repositories](https://help.github.com/articles/fork-a-repo) and [sending pull requests](https://help.github.com/articles/using-pull-requests), both great articles from the GitHub bootcamp.
 
     Once you've read these — or you've already memorized them — you're ready to contribute to the Kendo docs. Start by creating a local clone of our repo either using [GitHub for Windows](http://windows.github.com/), [GitHub for Mac](http://mac.github.com/) or your friendly command-line:
 
@@ -47,7 +49,7 @@ There are two ways you can contribute to the public Kendo UI documentation: eith
 
     Once you've made your changes, commit, pull, merge, push and [send us a pull request](https://help.github.com/articles/using-pull-requests)! We — and Kendo UI users everywhere — thank you for making our docs the best front-end library documentation on the web!
 
-## Running locally
+## Local Generation
 
 You can generate a static web site from the Kendo UI the documentation and browse it locally.
 

@@ -61,11 +61,12 @@ The example below demonstrates how to use the `activate` event when initializing
 
 ## See Also
 
-Other related articles and how-to examples on Kendo UI TabStrip:
+Other articles and how-to examples related to the Kendo UI TabStrip:
 
 * [Initialize the Grid inside a Hidden Container](/web/grid/appearance#initialize-the-grid-inside-a-hidden-container)    
 * [JavaScript API Reference: Configure TabStrip Animations](/api/javascript/ui/tabstrip#configuration-animation)
-* [How to Add Close Button to Tabs]({% slug howto_addclosebuttontotabs_tabstrip %})
 * [How to Display Buttons at the Bottom]({% slug howto_displaybuttonsatthebottom_tabstrip %})
-* [How to Expand to 100% Height and Auto-Resize]({% slug howto_expandto100percentheightautoresize_tabstrip %})
+* [How to Save Content Scroll Position]({% slug howto_savecontentscrollposition_tabstrip %})
 * [How to Scroll TabStrip with Keyboard]({% slug howto_scrolltabstripwithkeyboard_tabstrip %})
+
+For more runnable examples on the Kendo UI TabStrip widget, browse its [**How To** documentation folder]({% slug howto_disablecontentscrolling_tabstrip %}).

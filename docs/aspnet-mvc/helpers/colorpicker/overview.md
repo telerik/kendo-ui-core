@@ -31,19 +31,20 @@ Below are listed the steps for you to follow when configuring the Kendo UI Color
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%: Html.Kendo().ColorPicker()
                 .Name("colorpicker") //The name of the ColorPicker is mandatory. It specifies the "id" attribute of the widget.
                 .Value("#ff0000") //Set the value of the ColorPicker.
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().ColorPicker()
               .Name("colorpicker") //The name of the ColorPicker is mandatory. It specifies the "id" attribute of the widget.
               .Value("#ff0000") //Set the value of the ColorPicker.
         )
+```
 
 ## Event Handling
 
@@ -55,7 +56,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
     <%: Html.Kendo().ColorPicker()
             .Name("colorpicker")
@@ -83,8 +84,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the change event.
         }
     </script>
-
-**Razor**
+```
+```tab-Razor
 
     @(Html.Kendo().ColorPicker()
           .Name("colorpicker")
@@ -112,12 +113,13 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the change event.
         }
     </script>
+```
 
 ### By Template Delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
     @(Html.Kendo().ColorPicker()
           .Name("colorpicker")
@@ -144,6 +146,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
                 </text>)
           )
     )
+```
 
 ## Reference
 
@@ -165,6 +168,7 @@ Reference an existing Kendo UI ColorPicker instance via [`jQuery.data()`](http:/
 
 Other articles on Telerik UI for ASP.NET MVC and on the ColorPicker:
 
+* [ASP.NET MVC API Reference: ColorPickerBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/ColorPickerBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

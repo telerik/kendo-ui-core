@@ -13,7 +13,7 @@
             QUnit.fixture.closest("body").find(".k-splitter").each(function(idx, element){
                 $(element).data("kendoSplitter").destroy();
             });
-            $.mockjaxClear();
+            $.mockjax.clear();
             $(document).off();
         }
     });
@@ -77,7 +77,7 @@
 
         splitter = create();
 
-        $.mockjaxClear();
+        $.mockjax.clear();
         $.mockjax(function(settings) {
             deepEqual(settings.data, data);
             return {};

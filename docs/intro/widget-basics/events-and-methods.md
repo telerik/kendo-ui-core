@@ -1,7 +1,7 @@
 ---
 title: Methods and Events
 page_title: Methods and Events | Kendo UI Getting Started
-description: "Learn how to obtain a reference to an initialized Kendo UI widget instance and call its methods and events."
+description: "Obtain a reference to an initialized Kendo UI widget instance and call its methods and events."
 previous_url: /basics/events-and-methods, /intro/events-and-methods, /intro/installation/events-and-methods
 slug: widget_methodsand_events_kendoui_installation
 position: 3
@@ -35,7 +35,7 @@ To get a reference to a widget instance, use the [jQuery data](http://api.jquery
     </script>
 ```
 
-### getKendo* Approach
+### getKendo* Method
 
 To get a reference to a widget instance, you may also use the `getKendo<WidgetName>` method. Note that the jQuery convention of returning the selected DOM element(s) applies to widget initialization plug-in methods too. This means that the plug-in method, for example `kendoAutoComplete()`, does not return the widget instance, but the jQuery selector that the method was used on.
 
@@ -195,7 +195,7 @@ Certain widget events may be prevented by calling the `preventDefault` method of
 
 ### Unbind from Events
 
-To unbind from a given event, you should keep a reference to the event handler function and invoke the `unbind` method with it. Note that calling the `unbind` method without a second argument unbinds all event handlers from the event.
+To unbind from a given event, you should keep a reference to the event handler function and invoke the `unbind` method with it. Note that calling the `unbind` method without any argument unbinds all event handlers from the event.
 
 ###### Example
 
@@ -222,7 +222,9 @@ To unbind from a given event, you should keep a reference to the event handler f
 
 ## Known Limitations
 
-* Combine Methods and Events&mdash;Kendo UI does not fire an event when the corresponding method is invoked. For example, the `select` event of the Kendo UI PanelBar widget is not fired if you call the `select` method via the API.
+**Combine Methods and Events**
+
+Kendo UI does not fire an event when the corresponding method is invoked. For example, the `select` event of the Kendo UI PanelBar widget is not fired if you call the `select` method through the API.
 
 ## See Also
 

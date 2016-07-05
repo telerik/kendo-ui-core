@@ -140,6 +140,22 @@ Controls whether to close the widget suggestion list on item selection.
     });
     </script>
 
+### clearButton `Boolean` *(default: true)*
+
+Unless this options is set to `false`, a button will appear when hovering the widget. Clicking that button will reset the widget's value and will trigger the change event.
+
+#### Example - disable the clear button
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+        clearButton: false
+    });
+    </script>
+
 ### dataSource `Object|Array|kendo.data.DataSource`
 
 The data source of the widget which is used to display a list of values. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
@@ -308,6 +324,31 @@ The [template](/api/javascript/kendo#methods-template) used to render the fixed 
         });
     </script>
 
+### footerTemplate `String|Function`
+
+The [template](/api/javascript/kendo#methods-template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
+
+#### Parameters
+
+##### instance `Object`
+
+The widget instance.
+
+#### Example - specify footerTemplate as a string
+
+    <select id="customers" style="width: 400px;"></select>
+    <script>
+    $("#customers").kendoMultiSelect({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      footerTemplate: 'Total <strong>#: instance.dataSource.total() #</strong> items found'
+    });
+    </script>
+
 ### groupTemplate `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) used to render the groups. By default the widget displays only the value of the group.
@@ -414,6 +455,27 @@ A zero value means that a request will be made as soon as the user focuses the w
     <script>
     $("#multiselect").kendoMultiSelect({
         maxSelectedItems: 3 //only three or less items could be selected
+    });
+    </script>
+
+### noDataTemplate `String|Function` *(default: "No results found.")*
+
+Specifies a static HTML content, which will be displayed if no results are found or the underlying data source is empty. The popup will open when 'noDataTemplate' is defined.
+
+> **Important** Widget does not pass a model to the noData template. Use this option only with static HTML.
+
+#### Example - specify headerTemplate as a string
+
+    <select id="multiselect"></select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      noDataTemplate: 'No Data!'
     });
     </script>
 
@@ -984,6 +1046,12 @@ If the developer does not specify one, the framework will automatically set `ite
         }
     </script>
 
+### virtual.mapValueTo `String`*(default: "index")*
+
+The changes introduced with the Kendo UI R3 2016 release enable you to determine if the `valueMapper` must resolve a *value to an `index`* or a *value to a `dataItem`*. This is configured through the `mapValueTo` option that accepts two possible values - `"index"` or `"dataItem"`. By default, the `mapValueTo` is set to `"index"`, which does not affect the current behavior of the virtualization process.
+
+For more information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}#value-mapping).
+
 ### virtual.valueMapper `Function`*(default: null)*
 
 The `valueMapper` function is **mandatory** for the functionality of the virtualized widget.
@@ -1271,7 +1339,7 @@ Opens the popup.
     $("#multiselect").kendoMultiSelect();
 
     var multiselect = $("#multiselect").data("kendoMultiSelect");
-    multiselect.focus();
+    multiselect.open();
     </script>
 
 ### readonly
@@ -1368,7 +1436,7 @@ Opens or closes the widget popup.
 
 #### Parameters
 
-##### toggle `Boolean`
+##### toggle `Boolean` *(optional)*
 
 Defines the whether to open/close the drop-down list.
 
@@ -1713,6 +1781,10 @@ Fired when an item from the popup is selected by the user.
 
 #### Event Data
 
+##### e.dataItem `Object`
+
+The data item instance of the selected item.
+
 ##### e.item `jQuery`
 
 The jQuery object which represents the selected item.
@@ -1752,4 +1824,87 @@ The widget instance which fired the event.
     $("#multiselect").kendoMultiSelect();
     var multiselect = $("#multiselect").data("kendoMultiSelect");
     multiselect.bind("select", multiselect_select);
+    </script>
+
+#### Example - prevent the item selection
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      select: function(e) {
+        //call preventDefault() to prevent the selection
+        e.preventDefault();
+      }
+    });
+    </script>
+
+### deselect
+
+Fired when an item is deselected or tag is removed.
+
+> **Important:** The event is not fired when an item is deselected programmatically.
+
+#### Event Data
+
+##### e.dataItem `Object`
+
+The data item instance of the deselected item/tag.
+
+##### e.item `jQuery`
+
+The jQuery object which represents the deselected item or removed tag element.
+
+##### e.sender `kendo.ui.MultiSelect`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "deselect" event during initialization
+
+    <select id="multiselect" multiple="multiple">
+        <option selected>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      deselect: function(e) {
+        var dataItem = e.dataItem;
+        var item = e.item;
+        // Use the deselected data item or jQuery item
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "deselect" event after initialization
+
+    <select id="multiselect" multiple="multiple">
+        <option selected>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    function multiselect_deselect(e) {
+        var dataItem = e.dataItem;
+        var item = e.item;
+        // Use the deselected data item or jQuery item
+    }
+    $("#multiselect").kendoMultiSelect();
+    var multiselect = $("#multiselect").data("kendoMultiSelect");
+    multiselect.bind("deselect", multiselect_deselect);
+    </script>
+
+#### Example - prevent the deselection action
+
+    <select id="multiselect" multiple="multiple">
+        <option selected>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      deselect: function(e) {
+        // Call preventDefault() to prevent the deselection
+        e.preventDefault();
+      }
+    });
     </script>

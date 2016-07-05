@@ -94,6 +94,14 @@ The font family of the connection content text.
 
 The font size of the connection content text.
 
+### connectionDefaults.content.fontStyle `String`
+
+The font style of the connection content text.
+
+### connectionDefaults.content.fontWeight `String`
+
+The font weight of the connection content text.
+
 ### connectionDefaults.content.template `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) which renders the labels.
@@ -467,6 +475,14 @@ The font family of the connection content text.
 ### connections.content.fontSize `Number`
 
 The font size of the connection content text.
+
+### connections.content.fontStyle `String`
+
+The font style of the connection content text.
+
+### connections.content.fontWeight `String`
+
+The font weight of the connection content text.
 
 ### connections.content.template `String|Function`
 
@@ -1793,6 +1809,10 @@ Defines the selectable key. The available values are:
 
 > This option is not aplicable for mobile defices
 
+### selectable.multiple `Boolean` *(default: true)*
+
+Specifies if the multiple selection should be enabled.
+
 ### selectable.stroke `Object`
 
 Defines the selection stroke configuration.
@@ -2039,6 +2059,14 @@ The font family of the shape content text.
 ### shapeDefaults.content.fontSize `Number`
 
 The font size of the shape content text.
+
+### shapeDefaults.content.fontStyle `String`
+
+The font style of the shape content text.
+
+### shapeDefaults.content.fontWeight `String`
+
+The font weight of the shape content text.
 
 ### shapeDefaults.content.template `String|Function`
 
@@ -2533,6 +2561,14 @@ The font family of the shape content text.
 ### shapes.content.fontSize `Number`
 
 The font size of the shape content text.
+
+### shapes.content.fontStyle `String`
+
+The font style of the shape content text.
+
+### shapes.content.fontWeight `String`
+
+The font weight of the shape content text.
 
 ### shapes.content.template `String|Function`
 
@@ -3231,6 +3267,34 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
 
 Sets the focus on the diagram.
 
+### getConnectionByModelId
+
+Returns the connection corresponding to the model with the specified id value.
+
+#### Parameters
+
+##### id `String|Number`
+
+The model id value.
+
+#### Returns
+
+`kendo.dataviz.diagram.Connection` the connection corresponding to the model.
+
+### getConnectionByModelUid
+
+Returns the connection corresponding to the model with the specified uid value.
+
+#### Parameters
+
+##### uid `String`
+
+The model uid value.
+
+#### Returns
+
+`kendo.dataviz.diagram.Connection` the connection corresponding to the model.
+
 ### getShapeById
 
 Returns the shape or connection with the specified identifier.
@@ -3244,6 +3308,34 @@ The unique identifier of the Shape or Connection
 #### Returns
 
 `Object` the item that has the provided ID.
+
+### getShapeByModelId
+
+Returns the shape corresponding to the model with the specified id value.
+
+#### Parameters
+
+##### id `String|Number`
+
+The model id value.
+
+#### Returns
+
+`kendo.dataviz.diagram.Shape` the shape corresponding to the model.
+
+### getShapeByModelUid
+
+Returns the shape corresponding to the model with the specified uid value.
+
+#### Parameters
+
+##### uid `String`
+
+The model uid value.
+
+#### Returns
+
+`kendo.dataviz.diagram.Shape` the shape corresponding to the model.
 
 ### layerToModel
 

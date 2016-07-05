@@ -14,7 +14,7 @@ As of the Kendo UI Q3 2013 release, the Grid widget supports adaptive enhancemen
 
 ### Enable Adaptive Rendering
 
-To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/grid#configuration-mobile) property to `true`, `phone` or `tablet`.
+To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/grid#configuration-mobile) property to `true`, `phone`, or `tablet`.
 
 ###### Example
 
@@ -36,11 +36,13 @@ To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/
     });
     </script>
 
+The Kendo UI adaptive mode requires scripts, which are normally part of the Kendo UI Mobile (Hybrid) library (`kendo.mobile.min.js`). However, these scripts are also included in `kendo.web.min.js` and `kendo.all.min.js`. If you are using [individual widget scripts]({% slug include_only_what_you_need_kendoui_installation %}#individual-widget-scripts) or a [custom combined script]({% slug include_only_what_you_need_kendoui_installation %}#employ-download-builder), make sure the relevant scripts are included.
+
 ## Pane Configuration
 
-The mobile pane in which the adaptive Grid is placed does not automatically expand in height. To add an adaptive Grid to a kendo UI mobile application, set the `stretch` configuration of the respective view to `true`, or explicitly define the height of the widget.
+The mobile pane in which the adaptive Grid is placed does not automatically expand its height. To add an adaptive Grid to a kendo UI mobile application, set the `stretch` configuration of the respective view to `true`, or explicitly define the height of the widget.
 
-### Apply Options: stretch
+### Use the stretch Option
 
 ###### Example
 
@@ -71,7 +73,7 @@ The mobile pane in which the adaptive Grid is placed does not automatically expa
         var app = new kendo.mobile.Application();
     </script>
 
-### Apply Options: height    
+### Use the height Option    
 
 ###### Example
 
@@ -105,7 +107,7 @@ The mobile pane in which the adaptive Grid is placed does not automatically expa
 
 ### Resize Columns
 
-The column resizing feature on touch screen devices is triggered when the user holds a finger on the respective column header. When the resizing icon appears, the user will be able to resize the column by dragging.
+The column resizing feature on touch screen devices is triggered when the user holds a finger on the respective column header. When the resizing icon appears, the user is able to resize the column by dragging.
 
 **Figure 1. Grid with resizable columns on a mobile device**
 
@@ -113,14 +115,14 @@ The column resizing feature on touch screen devices is triggered when the user h
 
 ## Grid Specifics
 
-### Apply Height and Position Styles to Grid Parent Element
+### Apply Height and Position Styles to Parent Grid Elements
 
 This section applies to the following cases:
 
-* Multiple adaptive Grids are used on the same page.
-* The Grid is not the only content on the page.
+* When multiple adaptive Grids are used on the same page.
+* When the Grid is not the only content on the page.
 
-Each adaptive Grid is rendered inside a separate mobile Pane. Since the position of the Panes is absolute, the Panes overlap. To avoid this issue, wrap each grid inside a `<div>` container that is relatively positioned and has a set height. The absolute position is required for the transition between main and edit views to work correctly.
+Each adaptive Grid is rendered inside a separate mobile pane. Since the position of the panes is absolute, the panes overlap. To avoid this issue, wrap each Grid inside a `<div>` container that is relatively positioned and has a set height. The absolute position is required for the transition between main and edit views to work correctly.
 
 The example below demonstrates how to add multiple adaptive Grids to the same page.
 
@@ -159,9 +161,15 @@ The example below demonstrates how to add multiple adaptive Grids to the same pa
         $("#grid2").kendoGrid(gridConfig);
     </script>
 
+### Destroy the Adaptive Grid
+
+When in adaptive mode, the Grid generates some auxiliary markup, which needs to be removed if the widget is to be [destroyed]({% slug destroywidgets_kendoui_gettingstarted %}) manually.
+
+The recommended approach is to call [`kendo.destroy()`](/api/javascript/kendo#methods-destroy) over the closest `.km-pane-wrapper` ancestor of the Grid, which is created around the Grid widget. Then, remove the whole `.km-pane-wrapper` element from the DOM. To recreate the Grid, insert a new `<div>` at the same place where the previous Grid `<div>` was placed initially.
+
 ## See Also
 
-Other articles on Kendo UI Grid:
+Other articles on the Kendo UI Grid:
 
 * [Blog Post for Building An Adaptive Grid and Scheduler for Kendo UI](http://blogs.telerik.com/kendoui/posts/13-10-10/building-an-adaptive-grid-and-scheduler-for-kendo-ui)
 * [Grid JavaScript API Reference](/api/javascript/ui/grid)
@@ -174,4 +182,4 @@ Other articles on Kendo UI Grid:
 * [Export the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %})
 * [Print the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
 
-For how-to examples on the Kendo UI Grid widget, browse [its How-to section]({% slug howto_bindto_telerik_backend_services_grid %}).
+For how-to examples on the Kendo UI Grid widget, browse its [**How To** documentation folder]({% slug howto_bindto_telerik_backend_services_grid %}).

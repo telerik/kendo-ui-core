@@ -579,7 +579,9 @@ var __meta__ = { // jshint ignore:line
             for (idx = 0; idx < items.length; idx++) {
                 var child = element.children[index];
                 unbindElementTree(child, true);
-                element.removeChild(child);
+                if (child.parentNode == element) {
+                    element.removeChild(child);
+                }
             }
         },
 

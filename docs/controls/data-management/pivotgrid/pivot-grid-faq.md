@@ -36,14 +36,16 @@ Check the [section related to accessing the cube securely](/kendo-ui/web/pivotgr
 
 ### I do not have OLAP cube. Can I still use the PivotGrid?
 
-Currently, Kendo UI `PivotDataSource` has limited support for [binding to flat data](http://demos.telerik.com/kendo-ui/pivotgrid/local-flat-data-binding). Note that in this scenario not all of the features that are avialable when the widget is bound to an OLAP cube are supported, such as filtering, sorting, hierarchies, etc.
+Currently, Kendo UI `PivotDataSource` has limited support for [binding to flat data](http://demos.telerik.com/kendo-ui/pivotgrid/local-flat-data-binding). Note that in this scenario not all of the features that are available when the widget is bound to an OLAP cube are supported, such as sorting, hierarchies, etc.
 
 ## See Also
 
-Other article on Kendo UI PivotGrid:
+Other article on the Kendo UI PivotGrid:
 
 * [Overview]({% slug overview_kendoui_pivotgrid_widget %})
 * [PivotConfigurator]({% slug overview_kendoui_pivotconfigurator_pivotgridwidget %})
 * [Exporting]({% slug exporting_functionality_pivotgridwidget %})
 * [Fundamentals]({% slug fundamentals_pivotgrid_widget %})
 * [OLAP Cube Setup]({% slug olap_cube_setup_pivotgrid_widget %})
+
+For how-to examples on the Kendo UI PivotGrid widget, browse its [**How To** documentation folder]({% slug howto_add_dimension_column_axis_pivotgrid %}).

@@ -169,6 +169,9 @@ var __meta__ = { // jshint ignore:line
         });
 
         prototype.bindEvents = function() {
+            if (widget.prototype.events.indexOf("init") < 0) {
+                widget.prototype.events.push("init");
+            }
             widget.prototype.events.forEach(function(eventName) {
                 this.widget.bind(eventName, eventHandler.bind(this, eventName));
 
@@ -196,6 +199,7 @@ var __meta__ = { // jshint ignore:line
             } while ((obj = Object.getPrototypeOf(obj)));
 
             this.bindEvents();
+            that.widget.trigger("init");
         };
 
         prototype.detachedCallback = function() {

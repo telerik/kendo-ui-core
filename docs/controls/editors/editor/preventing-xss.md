@@ -46,12 +46,12 @@ Depending on your server-side platform, here are some libraries that allow proce
 
 - `ASP.NET` - [Html Agility Pack](http://htmlagilitypack.codeplex.com/)
 - `PHP` - [Html Purifier](http://htmlpurifier.org/)
-- `Java` - [jsoup](http://jsoup.org/)
+- `Java` - [jsoup](https://jsoup.org/)
 - `Node.js` - [sanitize-html](https://www.npmjs.com/package/sanitize-html)
 
 ## See Also
 
-Other articles on Kendo UI Editor:
+Other articles on the Kendo UI Editor:
 
 * [Overview of the Editor Widget]({% slug overview_kendoui_editor_widget %})
 * [Image Browser]({% slug image_browser_editor_widget %})
@@ -60,3 +60,5 @@ Other articles on Kendo UI Editor:
 * [Set Selections]({% slug set_selections_editor_widget %})
 * [Troubleshooting]({% slug troubleshooting_editor_widget %})
 * [Editor JavaScript API Reference](/api/javascript/ui/editor)
+
+For how-to examples on the Kendo UI Editor widget, browse its [**How To** documentation folder]({% slug howto_add_max_length_validation_editor %}).

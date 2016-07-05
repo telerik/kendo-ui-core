@@ -9,7 +9,8 @@ slug: howto_integratewith_kendoui_chart_pivotgrid
 
 The example below demonstrates how to integrate a Kendo UI PivotGrid widget with a Kendo UI Chart widget.
 
-> **Important**  
+> **Important**
+>
 > The example omits the totals from the PivotGrid, so they are not shown in the Chart data visualization.
 
 ###### Example
@@ -50,18 +51,55 @@ The example below demonstrates how to integrate a Kendo UI PivotGrid widget with
             return result;
         }
 
+        function fullPath(members, idx) {
+            var path = [];
+          var parentName = members[idx].parentName;
+
+          idx -= 1;
+
+          while (idx > -1) {
+            path.push(members[idx].name);
+            idx -= 1;
+          }
+
+          path.push(parentName);
+
+          return path;
+        }
+
         //Check whether the tuple has been collapsed
         function isCollapsed(tuple, collapsed) {
-          var name = tuple.members[0].parentName;
+          var members = tuple.members;
 
           for (var idx = 0, length = collapsed.length; idx < length; idx++) {
-            if (collapsed[idx] === name) {
-              console.log(name);
+            var collapsedPath = collapsed[idx];
+            if (indexOfPath(fullPath(members, collapsedPath.length -1), [collapsedPath]) !== -1) {
               return true;
             }
           }
 
           return false;
+        }
+
+        function indexOfPath(path, paths) {
+            var path = path.join(",");
+
+          for (var idx = 0; idx < paths.length; idx++) {
+            if (paths[idx].join(",") === path) {
+                return idx;
+            }
+          }
+
+          return -1;
+        }
+
+        function fullPathCaptionName(members, idx) {
+            var name = "";
+            while (idx > -1) {
+                            name += " " + members[idx].caption;
+              idx -= 1;
+            }
+            return name;
         }
 
         //the main function that convert PivotDataSource data into understandable for the Chart widget format
@@ -84,11 +122,21 @@ The example below demonstrates how to integrate a Kendo UI PivotGrid widget with
 
                 if (!isCollapsed(columnTuple, collapsed.columns)) {
                   if (idx > columnsLength && idx % columnsLength !== 0) {
-                    result.push({
-                      measure: Number(data[idx].value),
-                      column: columnTuple.members[0].caption,
-                      row: rowTuple.members[0].caption
-                    });
+                    for (var ri = 0; ri < rowTuple.members.length; ri++) {
+                      for (var ci = 0; ci < columnTuple.members.length; ci++) {
+                        //do not add root tuple members, e.g. [CY 2005, All Employees]
+                        //Add only children
+                        if (!columnTuple.members[ci].parentName || !rowTuple.members[ri].parentName) {
+                          continue;
+                        }
+
+                        result.push({
+                          measure: Number(data[idx].value),
+                          column: fullPathCaptionName(columnTuple.members, ci),
+                          row: rowTuple.members[ri].caption
+                        });
+                      }
+                    }
                   }
                 }
                 idx += 1;
@@ -111,28 +159,28 @@ The example below demonstrates how to integrate a Kendo UI PivotGrid widget with
                 //gather the collapsed members
                 collapseMember: function(e) {
                   var axis = collapsed[e.axis];
-                  var path = e.path[0];
+                  var path = e.path;
 
-                  if (axis.indexOf(path) === -1) {
+                  if (indexOfPath(path, axis) === -1) {
                      axis.push(path);
                   }
                 },
                 //gather the expanded members
                 expandMember: function(e) {
                   var axis = collapsed[e.axis];
-                  var index = axis.indexOf(e.path[0]);
+                  var index = indexOfPath(e.path, axis);
 
                   if (index !== -1) {
                     axis.splice(index, 1);
                   }
                 },
                 columnWidth: 100,
-                height: 230,
+                height: 330,
                 dataSource: {
                     type: "xmla",
-                    columns: [{ name: "[Date].[Calendar]", expand: true }],
+                    columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Employee].[Gender]" }],
                   rows: [{ name: "[Product].[Category]", expand: true }],
-                    measures: ["[Measures].[Internet Sales Amount]"],
+                    measures: ["[Measures].[Reseller Freight Cost]"],
                     transport: {
                         connection: {
                             catalog: "Adventure Works DW 2008R2",
@@ -193,26 +241,18 @@ The example below demonstrates how to integrate a Kendo UI PivotGrid widget with
 
 ## See Also
 
-Other articles on Kendo UI PivotGrid and how-to examples:
+Other articles and how-to examples on the Kendo UI PivotGrid:
 
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)
-* [How to Access MDX Query]({% slug howto_access_mdx_query_pivotgrid %})
-* [How to Add Dimension to Column Axis]({% slug howto_add_dimension_column_axis_pivotgrid %})
 * [How to Change Data Source Dynamically]({% slug howto_change_datasource_dynamically_pivotgrid %})
 * [How to Drill Down Navigation Always Starting from Root Tuple]({% slug howto_drill_down_navigation_startingfrom_root_tuple_pivotgrid %})
-* [How to Expand the Include fields TreeView]({% slug howto_expand_include_fields_treeview_pivotgrid %})
 * [How to Expand Multiple Column Dimensions]({% slug howto_expand_multiple_column_dimensions_pivotgrid %})
-* [How to Filter by Using the include Operator]({% slug howto_use_include_operator_pivotgrid %})
-* [How to Filter Dimensions]({% slug howto_filter_dimensions_pivotgrid %})
-* [How to Format Dates in Dimension Labels]({% slug howto_format_date_query_pivotgrid %})
+* [How to Filter by Using the "include" Operator]({% slug howto_use_include_operator_pivotgrid %})
 * [How to Make the Include fields Window Modal]({% slug howto_make_include_fields_window_modal_pivotgrid %})
-* [How to Modify Exported Excel Files]({% slug howto_modify_exported_excel_files_pivotgrid %})
 * [How to Modify Measure Tag Captions]({% slug howto_modify_measure_tag_captions_pivotgrid %})
 * [How to Reload PivotGrid Configuration Options]({% slug howto_reload_configuration_options_pivotgrid %})
-* [How to Render Row Header Caption As Anchor]({% slug howto_render_rowheader_captionas_anchor_pivotgrid %})
 * [How to Reset Expand State]({% slug howto_reset_expand_state_pivotgrid %})
-* [How to Right-Align Text]({% slug howto_right_align_text_pivotgrid %})
 * [How to Show Tooltip with Data Cell Information]({% slug howto_show_tooltip_withdata_cellinformation_pivotgrid %})
-* [How to Sort Dimensions]({% slug howto_sort_dimensions_pivotgrid %})
 * [How to Translate PivotConfigurator Field Items]({% slug howto_translate_pivotconfigurator_messages_pivotgrid %})
-* [How to Translate PivotGrid Messages]({% slug howto_translate_pivotgrid_messages_pivotgrid %})
+
+For more runnable examples on the Kendo UI PivotGrid, browse its [**How To** documentation folder]({% slug howto_add_dimension_column_axis_pivotgrid %}).

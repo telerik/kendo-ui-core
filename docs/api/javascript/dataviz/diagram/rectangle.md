@@ -104,6 +104,12 @@ The X position of the top-left corner of the rectangle.
 
 The Y position of the top-left corner of the rectangle.
 
+## Fields
+
+### drawingElement `kendo.drawing.Path`
+
+The drawing element used to draw the rectangle.
+
 ## Methods
 
 ### visible

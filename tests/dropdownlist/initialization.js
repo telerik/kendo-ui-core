@@ -330,6 +330,16 @@
         equal(template, "#= data.toUpperCase() #");
     });
 
+    test("dropdownlist supports setting a no data template", function() {
+        var dropdownlist = new DropDownList(input, {
+            noDataTemplate: "no data"
+        });
+
+        var template = dropdownlist.listView.options.noDataTemplate;
+
+        equal(template, "no data");
+    });
+
     test("defining header template", function() {
         var dropdownlist = new DropDownList(input, {
             template: "#= data.toUpperCase() #",
@@ -367,6 +377,78 @@
         ok(optionHeader.id)
         equal(optionHeader.className, "k-list-optionlabel k-state-selected k-state-focused");
         equal(optionHeader.innerHTML, "Select...");
+    });
+
+    asyncTest("use optionLabelTemplate when bound asynchronously", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success([]);
+                        }, 0);
+                    }
+                }
+            },
+            optionLabel: "Select...",
+            optionLabelTemplate: "#= data.toUpperCase() #",
+            headerTemplate: "<div>Header</div>",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataBound: function() {
+                start();
+
+                equal(this.text(), "SELECT...");
+            }
+        });
+
+        dropdownlist.value("");
+    });
+
+    test("render footer container", function() {
+        var dropdownlist = new DropDownList(input, {
+            footerTemplate: "footer"
+        });
+
+        var footer = dropdownlist.footer;
+
+        ok(footer);
+        ok(footer.hasClass("k-footer"));
+    });
+
+    test("render footer template", function() {
+        var dropdownlist = new DropDownList(input, {
+            autoBind: true,
+            footerTemplate: "footer"
+        });
+
+        var footer = dropdownlist.footer;
+
+        equal(footer.html(), "footer");
+    });
+
+    test("compile footer template with the dropdownlist instance", function() {
+        var dropdownlist = new DropDownList(input, {
+            autoBind: true,
+            footerTemplate: "#: instance.dataSource.total() #"
+        });
+
+        var footer = dropdownlist.footer;
+
+        equal(footer.html(), dropdownlist.dataSource.total());
+    });
+
+    test("update footer template on dataBound", function() {
+        var dropdownlist = new DropDownList(input, {
+            autoBind: true,
+            footerTemplate: "#: instance.dataSource.total() #"
+        });
+
+        var footer = dropdownlist.footer;
+
+        dropdownlist.dataSource.data(["Item1"]);
+
+        equal(footer.html(), dropdownlist.dataSource.total());
     });
 
     test("defining input template", function() {
@@ -1004,23 +1086,18 @@
         equal(list.height(), 50);
     });
 
-    /*
-    test("adjust ul height if filter header is rendered", function() {
+    test("adjust height if footer template", function() {
         var dropdownlist = new DropDownList(input, {
+            animation: false,
             dataSource: ["item1", "item2", "item3", "item4", "item5"],
-            filter: "startswith",
-            height: 50
+            footerTemplate: "<div>Footer</div>",
+            height: 100
         });
 
         dropdownlist.open();
 
-        var list = dropdownlist.list;
-        var filterHeader = list.find(".k-textbox");
-        var height = list.height() - dropdownlist.ul[0].offsetTop;
-
-        equal(dropdownlist.ul.height(), height);
+        ok(dropdownlist.listView.content.height() < 100);
     });
-    */
 
     test("widget renders search icon in filter header", function() {
         var dropdownlist = new DropDownList(input, {
@@ -1330,4 +1407,74 @@
         equal(dropdownlist.wrapper.attr("accesskey"),  "w");
     });
 
+    test("render empty option for optionLabel with null value", function() {
+        dropdownlist = select.kendoDropDownList({
+          optionLabel: {
+              text: "Select...",
+              value: null
+          },
+          dataTextField: "text",
+          dataValueField: "value",
+          dataSource: []
+        }).data("kendoDropDownList");
+
+        equal(dropdownlist.value(), "");
+    });
+
+    test("DropDownList opens the popup if optionLabel is defined", function() {
+        var dropdownlist = new DropDownList(input, {
+            optionLabel: "Select"
+        });
+
+        dropdownlist.wrapper.click();
+
+        ok(dropdownlist.popup.visible());
+    });
+
+    test("DropDownList opens the popup if filtering is enabled", function() {
+        var dropdownlist = new DropDownList(input, {
+            filter: "contains"
+        });
+
+        dropdownlist.wrapper.click();
+
+        ok(dropdownlist.popup.visible());
+    });
+
+    test("DropDownList opens the popup if noDataTemplate", function() {
+        var dropdownlist = new DropDownList(input, {
+            noDataTemplate: "no data"
+        });
+
+        dropdownlist.wrapper.click();
+
+        ok(dropdownlist.popup.visible());
+    });
+
+    test("DropDownList doesn't open the popup if no data", function() {
+        var dropdownlist = new DropDownList(input, {
+            noDataTemplate: ""
+        });
+
+        dropdownlist.wrapper.click();
+
+        ok(!dropdownlist.popup.visible());
+    });
+
+    test("widget keeps defaultSelected property", function() {
+        dropdownlist = new DropDownList(select, {
+            dataSource: [ "foo", "bar", "baz" ],
+            value: "bar"
+        });
+
+        dropdownlist.value("baz");
+
+        var options = select[0].children;
+
+        equal(options[1].selected, false);
+        equal(options[2].selected, true);
+
+        equal(options[1].defaultSelected, true);
+        equal(options[2].defaultSelected, false);
+    });
 })();

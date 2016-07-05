@@ -95,7 +95,7 @@ An array or function that will be used to determine which dates to be disabled i
 		disableDates: ["we", "th"],
     });
     </script>
-	
+
 #### Example - specify an array of dates to be disabled
 
     <div id="calendar"></div>
@@ -154,7 +154,7 @@ note that a check for an empty `date` is needed, as the widget can work with a n
         });
     </script>
 
-### format `String`*(default: "MM/dd/yyyy")*
+### format `String`*(default: "M/d/yyyy")*
 
  Specifies the format, which is used to parse value set with value() method.
 

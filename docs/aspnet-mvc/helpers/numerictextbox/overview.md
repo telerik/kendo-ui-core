@@ -31,7 +31,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Numer
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%: Html.Kendo().NumericTextBox()
                 .Name("numerictextbox") //The name of the NumericTextBox is mandatory. It specifies the "id" attribute of the widget.
@@ -39,8 +39,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Numer
                 .Max(100) //Set the min value of the NumericTextBox.
                 .Value(10) //Set the value of the NumericTextBoxNumericTextBox.
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().NumericTextBox()
               .Name("numerictextbox") //The name of the NumericTextBox is mandatory. It specifies the "id" attribute of the widget.
@@ -48,6 +48,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Numer
               .Max(100) //Set the min value of the NumericTextBox.
               .Value(10) //Set the value of the NumericTextBox.
         )
+```
 
 ## Event Handling
 
@@ -59,7 +60,7 @@ The example below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
       <%: Html.Kendo().NumericTextBox()
               .Name("numerictextbox")
@@ -77,8 +78,8 @@ The example below demonstrates how to subscribe to events by a handler name.
           //Handle the change event.
       }
       </script>
-
-**Razor**
+```
+```tab-Razor
 
       @(Html.Kendo().NumericTextBox()
             .Name("numerictextbox")
@@ -96,6 +97,7 @@ The example below demonstrates how to subscribe to events by a handler name.
           //Handle the change event.
       }
       </script>
+```
 
 ### By Template Delegate
 
@@ -103,7 +105,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
     @(Html.Kendo().NumericTextBox()
           .Name("numerictextbox")
@@ -120,6 +122,7 @@ The example below demonstrates how to subscribe to events by a template delegate
                 </text>)
           )
     )
+```
 
 ## Reference
 
@@ -142,6 +145,7 @@ You can reference an existing Kendo UI NumericTextBox instance via [`jQuery.data
 
 Other articles on Telerik UI for ASP.NET MVC and on the NumericTextBox:
 
+* [ASP.NET MVC API Reference: NumericTextBoxBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/NumericTextBoxBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

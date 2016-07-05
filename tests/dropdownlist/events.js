@@ -327,16 +327,32 @@
         ddl.ul.children().eq(0).trigger(CLICK);
     });
 
-    test("click item raises select event", 1, function() {
+    test("click item raises select event", 2, function() {
         var dropdownlist = input.kendoDropDownList({
             dataSource: ["foo"],
             select: function(e) {
-                ok(e.item);
+                equal(e.item[0], dropdownlist.ul.children()[0]);
+                equal(e.dataItem, dropdownlist.dataSource.view()[0]);
             }
         }).data("kendoDropDownList");
 
         dropdownlist.open();
         dropdownlist.ul.children().first().trigger(CLICK);
+    });
+
+    test("click item raises select event", 2, function() {
+        var dropdownlist = input.kendoDropDownList({
+            optionLabel: "select...",
+            dataSource: ["foo"],
+            value: "foo",
+            select: function(e) {
+                equal(e.item[0], dropdownlist.optionLabel[0]);
+                equal(e.dataItem, "select...");
+            }
+        }).data("kendoDropDownList");
+
+        dropdownlist.open();
+        dropdownlist.optionLabel.trigger(CLICK);
     });
 
     test("prevent select event should only close the popup", 2, function() {
@@ -358,11 +374,12 @@
         ok(!dropdownlist.popup.visible(), 'popup is not visible');
     });
 
-    test("selection with arrow triggers the select event", 1, function() {
+    test("selection with arrow triggers the select event", 2, function() {
         var dropdownlist = input.kendoDropDownList({
             dataSource: ["foo"],
             select: function(e) {
-                ok(e.item);
+                equal(e.item[0], dropdownlist.ul.children()[0]);
+                equal(e.dataItem, dropdownlist.dataSource.view()[0]);
             }
         }).data("kendoDropDownList");
 
@@ -669,13 +686,14 @@
         dropdownlist.ul.children(":first").click();
     });
 
-    test("DropDownList triggers select event on blur after filtration", 1, function() {
+    test("DropDownList triggers select event on blur after filtration", 2, function() {
         var dropdownlist = new DropDownList(input, {
             filter: "startswith",
             optionLabel: "Select...",
             dataSource: ["foo", "bar"],
             select: function(e) {
                 equal(e.item[0], dropdownlist.ul.children(":first")[0]);
+                equal(e.dataItem, dropdownlist.dataSource.view()[0]);
             }
         });
 
@@ -702,11 +720,12 @@
         equal(dropdownlist.value(), "foo");
     });
 
-    test("widget triggers select event when select item with loop search", 1, function() {
+    test("widget triggers select event when select item with loop search", 2, function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: ["foo", "foo1", "foo2"],
             select: function(e) {
-                equal(e.item.text(), "foo1");
+                equal(e.item[0], dropdownlist.ul.children()[1]);
+                equal(e.dataItem, dropdownlist.dataSource.view()[1]);
             }
         });
 
@@ -884,5 +903,86 @@
                 ok(true);
             }
         });
+    });
+
+    test("widget triggers select event END keystroke", 2, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: ["foo", "foo1", "foo2"],
+            select: function(e) {
+                equal(e.item[0], dropdownlist.ul.children().last()[0]);
+                equal(e.dataItem, dropdownlist.dataSource.view()[2]);
+            }
+        });
+
+        dropdownlist.wrapper.focus()
+                    .trigger({
+                        type: "keydown",
+                        keyCode: kendo.keys.END
+                    });
+    });
+
+    test("widget triggers select event HOME keystroke", 2, function() {
+        var dropdownlist = new DropDownList(input, {
+            index: 2,
+            dataSource: ["foo", "foo1", "foo2"],
+            select: function(e) {
+                equal(e.item[0], dropdownlist.ul.children().first()[0]);
+                equal(e.dataItem, dropdownlist.dataSource.view()[0]);
+            }
+        });
+
+        dropdownlist.wrapper.focus()
+                    .trigger({
+                        type: "keydown",
+                        keyCode: kendo.keys.HOME
+                    });
+    });
+
+    test("widget prevents selection when select is prevented on END keystroke", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: ["foo", "foo1", "foo2"],
+            select: function(e) {
+                e.preventDefault();
+            }
+        });
+
+        dropdownlist.wrapper.focus()
+                    .trigger({
+                        type: "keydown",
+                        keyCode: kendo.keys.END
+                    });
+
+        equal(dropdownlist.value(), "foo");
+    });
+
+    test("widget triggers change event END keystroke", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: ["foo", "foo1", "foo2"],
+            change: function(e) {
+                equal(this.value(), "foo2");
+            }
+        });
+
+        dropdownlist.wrapper.focus()
+                    .trigger({
+                        type: "keydown",
+                        keyCode: kendo.keys.END
+                    });
+    });
+
+    test("widget triggers change event HOME keystroke", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            index: 2,
+            dataSource: ["foo", "foo1", "foo2"],
+            change: function(e) {
+                equal(this.value(), "foo");
+            }
+        });
+
+        dropdownlist.wrapper.focus()
+                    .trigger({
+                        type: "keydown",
+                        keyCode: kendo.keys.HOME
+                    });
     });
 })();

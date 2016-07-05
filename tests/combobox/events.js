@@ -391,16 +391,33 @@ test("close event when ALT + up _arrow", 1, function() {
     combobox.input.trigger({ type: "keydown", keyCode: kendo.keys.UP, altKey: true } );
 });
 
-test("click item raises select event", 1, function() {
+test("click item raises select event", 2, function() {
     combobox = input.kendoComboBox({
         dataSource: ["foo"],
         select: function(e) {
-            ok(e.item);
+            equal(e.item[0], combobox.ul.children()[0]);
+            equal(e.dataItem, combobox.dataSource.view()[0]);
         }
     }).data("kendoComboBox");
 
     combobox.open();
     combobox.ul.children().first().trigger(CLICK);
+});
+
+test("select event is not raised when custom value is entered", 2, function() {
+    combobox = input.kendoComboBox({
+        highlightFirst: true,
+        dataSource: ["foo"],
+        select: function(e) {
+            equal(e.item[0], combobox.ul.children()[0]);
+            equal(e.dataItem, combobox.dataSource.view()[0]);
+        }
+    }).data("kendoComboBox");
+
+    combobox.open();
+    combobox.input.focus();
+    combobox.listView.focus(0);
+    combobox.input.press(kendo.keys.ENTER);
 });
 
 test("select event is not raised when custom value is entered", 0, function() {
@@ -429,12 +446,13 @@ test("select event is not raised no item is focused", 0, function() {
     combobox.input.press(kendo.keys.ENTER);
 });
 
-test("select is raised when down arrow is clicked", 1, function() {
+test("select is raised when down arrow is clicked", 2, function() {
     combobox = input.kendoComboBox({
         highlightFirst: false,
         dataSource: ["foo"],
         select: function(e) {
-            ok(true);
+            equal(e.item[0], combobox.ul.children()[0]);
+            equal(e.dataItem, combobox.dataSource.view()[0]);
         }
     }).data("kendoComboBox");
 
@@ -477,11 +495,12 @@ test("preventing select event during navigation reverts selection", 2, function(
     equal(current.html(), "foo");
 });
 
-test("trigger select event on blur when input text is changed", 1, function() {
+test("trigger select event on blur when input text is changed", 2, function() {
     var combobox = input.kendoComboBox({
         dataSource: ["foo", "bar"],
         select: function(e) {
-            equal(e.item[0], combobox.current()[0]);
+            equal(e.item[0], combobox.ul.children()[1]);
+            equal(e.dataItem, combobox.dataSource.view()[1]);
         }
     }).data("kendoComboBox");
 

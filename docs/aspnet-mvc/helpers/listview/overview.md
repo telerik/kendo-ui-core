@@ -40,20 +40,21 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
            Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Product>>" %>
-
-**Razor**
+```
+```tab-Razor
 
         @model IEnumerable<MvcApplication1.Models.Product>
+```
 
 **Step 4** Add the ListView wrapper.
 
 ###### Example
 
-**ListView Template**
+```tab-Template
 
 		    <script type="text/x-kendo-tmpl" id="template">
     			<div class="product">
@@ -65,8 +66,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 			        </dl>
 		    	</div>
 			  </script>
-
-**WebForms**
+```
+```tab-ASPX
 
         <%: Html.Kendo().ListView(Model) //The ListView will be initially bound to the Model which is the Products table.
                   .Name("productListView") //The name of the ListView is mandatory. It specifies the "id" attribute of the widget.
@@ -77,8 +78,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 			  }) //DataSource configuration. It will be used on paging.
                   .Pageable() //Enable paging.
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().ListView(Model) //The ListView will be initially bound to the Model which is the Products table.
                   .Name("productListView") //The name of the ListView is mandatory. It specifies the "id" attribute of the widget.
@@ -89,6 +90,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 			  }) //DataSource configuration. It will be used on paging.
                   .Pageable() //Enable paging.
         )
+```
 
 ## Event Handling
 
@@ -100,7 +102,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%: Html.Kendo().ListView<ProductViewModel>()
         		.Name("listView")
@@ -123,8 +125,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the change event.
         }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().ListView<ProductViewModel>()
         		.Name("listView")
@@ -147,6 +149,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the change event.
         }
         </script>
+```
 
 ### By Template Delegate
 
@@ -154,7 +157,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().ListView<ProductViewModel>()
         		.Name("listView")
@@ -176,6 +179,7 @@ The example below demonstrates how to subscribe to events by a template delegate
     	                </text>)
     	          )
         )
+```
 
 ## Reference
 
@@ -197,6 +201,7 @@ You can reference an existing Kendo UI ListView instance via [`jQuery.data()`](h
 
 Other articles on Telerik UI for ASP.NET MVC and on the ListView:
 
+* [ASP.NET MVC API Reference: ListViewBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/ListViewBuilder)
 * [Overview of the ListView HtmlHelper]({% slug overview_listviewhelper_aspnetmvc %})
 * [Configuration of the ListView HtmlHelper]({% slug configuration_listviewhelper_aspnetmvc %})
 * [Ajax Binding of the ListView HtmlHelper]({% slug ajaxbinding_listviewhelper_aspnetmvc %})

@@ -29,6 +29,7 @@ The [Kendo UI Spreadsheet widget](http://demos.telerik.com/kendo-ui/spreadsheet/
 Each of these features is exposed as a UI for the end user, as well as is exposed as API calls for you as a developer for further UI customization.
 
 > **Important**  
+>
 > The Spreadsheet widget supports Internet Explorer 9 or later versions.
 
 ## Getting Started
@@ -98,9 +99,10 @@ For more information on the data-binding Spreadsheet functionality, refer to the
 
 ## See Also
 
-Other articles on Kendo UI Spreadsheet:
+Other articles on the Kendo UI Spreadsheet:
 
 * [Custom Functions]({% slug custom_functions_spreadsheet_widget %})
+* [Custom Cell Editors]({% slug custom_editors_spreadsheet_widget %})
 * [Cell Formatting]({% slug cell_formatting_spreadsheet_widget %})
 * [Load and Save Data as JSON]({% slug loadand_saveas_json_spreadsheet_widget %})
 * [Data Source Binding]({% slug bind_todata_source_spreadsheet_widget %})
@@ -109,4 +111,5 @@ Other articles on Kendo UI Spreadsheet:
 * [User Guide]({% slug user_guide_spreadsheet_widget %})
 * [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
 * [How to Bind Charts to Sheet Data]({% slug howto_bindcharttosheet_spreadsheet_widget %})
+* [How to Get Flagged Cells Containing Invalid Values]({% slug howto_get_flagged_cells_containing_invalid_values_spreadsheet_widget %})
 * [How to Set Validation Rules to Column Ranges]({% slug howto_validationtocolumn_spreadsheet_widget %})

@@ -442,12 +442,40 @@ test("MultiSelect does not prevent default when click input", 0, function() {
 
 test("MultiSelect add focused class on focus", function() {
     var multiselect = new MultiSelect(select);
-    debugger;
 
     multiselect.wrapper.mousedown();
 
     ok(multiselect.wrapper.hasClass("k-state-focused"));
 });
+
+    test("reset value when _clear is clicked", function() {
+        var multiselect = new MultiSelect(select, {
+            dataSource: ["foo", "bar", "baz", "item1", "item2"],
+            value: ["item1", "bar"]
+        });
+
+        multiselect._clear.click();
+        equal(multiselect.value(), "");
+    });
+
+    test("show clear button", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            dataSource: ["foo", "bar", "baz", "item1", "item2"],
+            value: ["item1", "bar"]
+        });
+
+        ok(multiselect.wrapper.find(multiselect._clear).length > 0);
+    });
+
+    test("hide clear button", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            clearButton: false,
+            dataSource: ["foo", "bar", "baz", "item1", "item2"],
+            value: ["item1", "bar"]
+        });
+
+        equal(multiselect.wrapper.find(multiselect._clear).length, 0);
+    });
 
 return;
 

@@ -40,20 +40,21 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master"
            Inherits="System.Web.Mvc.ViewPage<IEnumerable<MvcApplication1.Models.Product>>" %>
-
-**Razor**
+```
+```tab-Razor
 
         @model IEnumerable<MvcApplication1.Models.Product>
+```
 
 **Step 4** Add a server bound dropdownlist.
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%: Html.Kendo().DropDownList()
             .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
@@ -62,8 +63,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
             .BindTo(Model)   //Pass the list of Products to the DropDownList.
             .SelectedIndex(10) //Select an item with index 10. Note that the indexes are zero-based.
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().DropDownList()
           .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
@@ -72,6 +73,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
           .BindTo(Model)   //Pass the list of Products to the DropDownList.
           .SelectedIndex(10) //Select an item with index 10. Note that the indexes are zero-based.
         )
+```
 
 ### Ajax Binding
 
@@ -80,6 +82,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
 
 **Step 2** Create an action method which renders the view.
+
+###### Example
 
         public ActionResult Index()
         {
@@ -101,7 +105,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%: Html.Kendo().DropDownList()
             .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
@@ -117,8 +121,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
             })
             .SelectedIndex(0) //Select first item.
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().DropDownList()
             .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
@@ -134,6 +138,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
             })
             .SelectedIndex(0) //Select the first item.
         )
+```
 
 > **Important**
 >
@@ -169,7 +174,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%: Html.Kendo().DropDownList()
             .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
@@ -191,8 +196,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
                       });
             })
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().DropDownList()
             .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
@@ -214,6 +219,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
                       });
             })
         )
+```
 
 ### Parameter Sending to Server
 
@@ -221,7 +227,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%: Html.Kendo().DropDownList()
                 .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
@@ -244,8 +250,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
                 };
             }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().DropDownList()
               .Name("productDropDownList") //The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
@@ -269,6 +275,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
                 };
             }
         </script>
+```
 
 The example below demonstrates how the `GetProducts` method is used.
 
@@ -338,7 +345,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%: Html.Kendo().DropDownList()
             .Name("dropdownlist")
@@ -357,8 +364,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the change event.
         }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().DropDownList()
           .Name("dropdownlist")
@@ -377,10 +384,13 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the change event.
         }
         </script>
+```
 
 ### By Template Delegate
 
-**Razor**
+###### Example
+
+```tab-Razor
 
         @(Html.Kendo().DropDownList()
           .Name("dropdownlist")
@@ -398,6 +408,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
                 </text>)
           )
         )
+```
 
 ## Reference
 
@@ -419,6 +430,7 @@ You can reference an existing Kendo UI DropDownList instance via [`jQuery.data()
 
 Other articles on Telerik UI for ASP.NET MVC and on the DropDownList:
 
+* [ASP.NET MVC API Reference: DropDownListBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/DropDownListBuilder)
 * [How to Cascade DropDownLists Using WebApi Service in ASP.NET MVC Apps]({% slug howto_cascadeddlusingwebapiservice_ddlaspnetmvc %})
 * [How to Cascade DropDownLists with Enabled Virtualization in ASP.NET MVC Apps]({% slug howto_cascadeddlenabledvirtualization_ddlaspnetmvc %})
 * [How to Use Custom DataSource to Bind to ToDataSourceResult Output in ASP.NET MVC Apps]({% slug howto_usecustomdatasource_bindtodatasourceoutput_ddlaspnetmvc %})

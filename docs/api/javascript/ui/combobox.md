@@ -173,6 +173,19 @@ Defines the field to be used to filter the data source. If not defined the [pare
     });
     </script>
 
+### clearButton `Boolean` *(default: true)*
+
+Unless this options is set to `false`, a button will appear when hovering the widget. Clicking that button will reset the widget's value and will trigger the change event.
+
+#### Example - disable the clear button
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+        clearButton: false
+    });
+    </script>
+
 ### dataSource `Object|Array|kendo.data.DataSource`
 
 The data source of the widget which is used to display a list of values. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
@@ -325,6 +338,31 @@ The [template](/api/javascript/kendo#methods-template) used to render the fixed 
         });
     </script>
 
+### footerTemplate `String|Function`
+
+The [template](/api/javascript/kendo#methods-template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
+
+#### Parameters
+
+##### instance `Object`
+
+The widget instance.
+
+#### Example - specify footerTemplate as a string
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      footerTemplate: 'Total <strong>#: instance.dataSource.total() #</strong> items found'
+    });
+    </script>
+
 ### groupTemplate `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) used to render the groups. By default the widget displays only the value of the group.
@@ -416,6 +454,27 @@ The minimum number of characters the user must type before a search is performed
     <script>
     $("#combobox").kendoComboBox({
       minLength: 3
+    });
+    </script>
+
+### noDataTemplate `String|Function` *(default: "No results found.")*
+
+Specifies a static HTML content, which will be displayed if no results are found or the underlying data source is empty. The popup will open when 'noDataTemplate' is defined.
+
+> **Important** Widget does not pass a model to the noData template. Use this option only with static HTML.
+
+#### Example - specify headerTemplate as a string
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      noDataTemplate: 'No Data!'
     });
     </script>
 
@@ -697,6 +756,12 @@ For detailed information, refer to the [article on virtualization]({% slug virtu
 
 Specifies the height of the virtual item. All items in the virtualized list **must** have the same height.
 If the developer does not specify one, the framework will automatically set `itemHeight` based on the current theme and font size.
+
+### virtual.mapValueTo `String`*(default: "index")*
+
+The changes introduced with the Kendo UI R3 2016 release enable you to determine if the `valueMapper` must resolve a *value to an `index`* or a *value to a `dataItem`*. This is configured through the `mapValueTo` option that accepts two possible values - `"index"` or `"dataItem"`. By default, the `mapValueTo` is set to `"index"`, which does not affect the current behavior of the virtualization process.
+
+For more information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}#value-mapping).
 
 ### virtual.valueMapper `Function`*(default: null)*
 
@@ -1391,7 +1456,7 @@ The value to set.
 
 ### change
 
-Fired when the value of the widget is changed by the user.
+Fired when the value of the widget is changed by the user. As of 2015 Q3 SP1 cascading widget will trigger change event when its value is changed due to parent update.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
@@ -1624,6 +1689,10 @@ Fired when an item from the popup is selected by the user either with mouse/tap 
 
 #### Event Data
 
+##### e.dataItem `Object`
+
+The data item instance of the selected item.
+
 ##### e.item `jQuery`
 
 The jQuery object which represents the selected item.
@@ -1664,6 +1733,19 @@ The widget instance which fired the event.
     });
     var combobox = $("#combobox").data("kendoComboBox");
     combobox.bind("select", combobox_select);
+    </script>
+
+#### Example - prevent the item selection
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      dataSource: [ "Apples", "Oranges" ],
+      select: function(e) {
+        //call preventDefault() to prevent the selection
+        e.preventDefault();
+      }
+    });
     </script>
 
 ### cascade

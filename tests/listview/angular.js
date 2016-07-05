@@ -56,7 +56,6 @@
     },
     function() {
         var widget = QUnit.fixture.find('[data-role=listview]').data("kendoListView");
-        debugger;
         widget.edit(widget.element.children().first());
         widget.cancel();
         equal(QUnit.fixture.find(".list-item:eq(0)").html(), "1.first title");

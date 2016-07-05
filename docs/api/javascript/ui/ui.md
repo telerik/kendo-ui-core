@@ -82,7 +82,7 @@ The flag, which indicates whether to show or hide the loading overlay.
         padding: .5em;
         z-index: 2; /* random value, not required */
     }
-    
+
     div.k-loading-mask
     {
         z-index: 3; /* must be larger than the z-index:2 of #container */
@@ -96,7 +96,7 @@ The flag, which indicates whether to show or hide the loading overlay.
     <div id="container" class="k-widget">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Nam lacinia congue leo, ut euismod orci accumsan ut. Pellentesque ligula erat, tempus ut faucibus sit amet, interdum vitae lectus.
         Curabitur placerat, magna a dictum blandit, felis dolor blandit purus, quis malesuada dolor mauris non justo.</div>
-        
+
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Nam lacinia congue leo, ut euismod orci accumsan ut. Pellentesque ligula erat, tempus ut faucibus sit amet, interdum vitae lectus.
         Curabitur placerat, magna a dictum blandit, felis dolor blandit purus, quis malesuada dolor mauris non justo.</p>
@@ -104,13 +104,92 @@ The flag, which indicates whether to show or hide the loading overlay.
     <script>
 
     $(function(){
-    
         function displayLoading(target) {
             var element = $(target);
             kendo.ui.progress(element, true);
             setTimeout(function(){
                 kendo.ui.progress(element, false);
             }, 2000);        
+        }
+
+        $("#containerButton").click(function(){
+            displayLoading("#container");
+        });
+
+        $("#pageButton").click(function(){
+            displayLoading(document.body);
+        });
+
+    });
+
+    </script>
+
+#### Example - customize loading animation text
+
+    <style>
+
+    html,
+    body
+    {
+        min-height: 100%;
+        margin: 0;
+        font: 14px sans-serif;
+    }
+
+    #container
+    {
+        position: relative; /* required */
+        margin: 1em 4em;
+        padding: .5em;
+        z-index: 2; /* random value, not required */
+    }
+
+    div.k-loading-mask
+    {
+        z-index: 3; /* must be larger than the z-index:2 of #container */
+    }
+
+    /* By default the text is hidden, re-position the text */
+    span.k-loading-text
+    {
+        text-indent: 0;
+        top: 50%;
+        left: 50%;
+        background-color: #0F0;
+    }
+
+    div.k-loading-image
+    {
+        display: none;
+    }
+
+    </style>
+
+    <p><button id="containerButton" class="k-button">Show a loading indicator over the container</button>
+    <button id="pageButton" class="k-button">Show a loading indicator over the whole page</button></p>
+
+    <div id="container" class="k-widget">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Nam lacinia congue leo, ut euismod orci accumsan ut. Pellentesque ligula erat, tempus ut faucibus sit amet, interdum vitae lectus.
+        Curabitur placerat, magna a dictum blandit, felis dolor blandit purus, quis malesuada dolor mauris non justo.</div>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Nam lacinia congue leo, ut euismod orci accumsan ut. Pellentesque ligula erat, tempus ut faucibus sit amet, interdum vitae lectus.
+        Curabitur placerat, magna a dictum blandit, felis dolor blandit purus, quis malesuada dolor mauris non justo.</p>
+
+    <script>
+
+    $(function(){
+        //customize the default "Loading..." text
+        kendo.ui.progress.messages = {
+            loading: "Processing..."
+        };
+
+        function displayLoading(target) {
+            var element = $(target);
+            kendo.ui.progress(element, true);
+            setTimeout(function(){
+                kendo.ui.progress(element, false);
+            }, 2000)    ;
         }
 
         $("#containerButton").click(function(){

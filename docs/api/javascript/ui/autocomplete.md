@@ -149,6 +149,19 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
     });
     </script>
 
+### clearButton `Boolean` *(default: true)*
+
+Unless this options is set to `false`, a button will appear when hovering the widget. Clicking that button will reset the widget's value and will trigger the change event.
+
+#### Example - disable the clear button
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+        clearButton: false
+    });
+    </script>
+
 ### dataTextField `String` *(default: null)*
 
 The field of the data item used when searching for suggestions.  This is the text that will be displayed in the list of matched results.
@@ -229,6 +242,30 @@ The [template](/api/javascript/kendo#methods-template) used to render the fixed 
         });
     </script>
 
+### footerTemplate `String|Function`
+
+The [template](/api/javascript/kendo#methods-template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
+
+#### Parameters
+
+##### instance `Object`
+
+The widget instance.
+
+#### Example - specify footerTemplate as a string
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      footerTemplate: 'Total <strong>#: instance.dataSource.total() #</strong> items found'
+    });
+    </script>
+
 ### groupTemplate `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) used to render the groups. By default the widget displays only the value of the group.
@@ -305,6 +342,26 @@ The minimum number of characters the user must type before a search is performed
     });
     </script>
 
+### noDataTemplate `String|Function` *(default: "No results found.")*
+
+Specifies a static HTML content, which will be displayed if no results are found or the underlying data source is empty. The popup will open when 'noDataTemplate' is defined.
+
+> **Important** Widget does not pass a model to the noData template. Use this option only with static HTML.
+
+#### Example - specify headerTemplate as a string
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      noDataTemplate: 'No Data!'
+    });
+    </script>
+
 ### placeholder `String` *(default: "")*
 
 The hint displayed by the widget when it is empty. Not set by default.
@@ -350,9 +407,11 @@ refer to [Popup](/api/javascript/ui/popup) documentation.
     });
     </script>
 
-### separator `String` *(default: "")*
+### separator `String|Array` *(default: "")*
 
 The character used to separate multiple values. Empty by default.
+
+> As of Q3 2016 the Autocomplete widget supports multiple separators listed in an array. All separators will be replaced with the first array item, which acts as a default separator.
 
 #### Example - set separator to allow multiple values
 
@@ -360,6 +419,15 @@ The character used to separate multiple values. Empty by default.
     <script>
     $("#autocomplete").kendoAutoComplete({
       separator: ", "
+    });
+    </script>
+
+#### Example - set multiple separators
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      separator: [", ", "; "]
     });
     </script>
 
@@ -433,6 +501,24 @@ The [template](/api/javascript/kendo#methods-template) used to render the sugges
       ],
       dataTextField: "name",
       template: '<span><img src="/img/#: id #.png" alt="#: name #" />#: name #</span>'
+    });
+    </script>
+
+### value `String`*(default: "")*
+
+The value of the widget.
+
+#### Example - specify value of the widget
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      value: "Oranges"
     });
     </script>
 
@@ -607,6 +693,12 @@ If the developer does not specify one, the framework will automatically set `ite
             });
         });
     </script>
+
+### virtual.mapValueTo `String`*(default: "index")*
+
+The changes introduced with the Kendo UI R3 2016 release enable you to determine if the `valueMapper` must resolve a *value to an `index`* or a *value to a `dataItem`*. This is configured through the `mapValueTo` option that accepts two possible values - `"index"` or `"dataItem"`. By default, the `mapValueTo` is set to `"index"`, which does not affect the current behavior of the virtualization process.
+
+For more information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}#value-mapping).
 
 ### virtual.valueMapper `Function`*(default: null)*
 
@@ -1258,6 +1350,10 @@ Fired when an item from the suggestion popup is selected by the user.
 
 #### Event Data
 
+##### e.dataItem `Object`
+
+The data item instance of the selected item.
+
 ##### e.item `jQuery`
 
 The jQuery object which represents the selected item.
@@ -1294,4 +1390,17 @@ The widget instance which fired the event.
     });
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
     autocomplete.bind("select", autocomplete_select);
+    </script>
+
+#### Example - prevent the item selection
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      dataSource: [ "Apples", "Oranges" ],
+      select: function(e) {
+        //call preventDefault() to prevent the selection
+        e.preventDefault();
+      }
+    });
     </script>

@@ -69,6 +69,12 @@ The example below demonstrates how to make all Kendo widgets use this font.
 > * In order for automatic font discovery to work, your CSS must reside on the same domain as the web page.
 > * Kendo UI bundles the DejaVu font family and will fall back to it for a few names, such as Times New Roman, Arial, or Courier, or generics, such as serif, sans-serif, or monospace, if no alternate fonts are specified. This is so that Unicode works by default. However, the layout problem will remain&mdash;the PDF output will be slightly different from the browser unless the exact same fonts are used.
 
+### Images in PDF
+
+Images are exported correctly only if they have the correct extension. For example, if PNG images with a JPG extension are displayed on the page, they might not show up in the exported PDF, or might cause exceptions in the PDF reader.
+
+To check for possible notes on loading images from different domains, refer to the [section on known limitations](#known-limitations).
+
 ### Hyperlinks in PDF
 
 By default the [`drawDOM`](/api/javascript/drawing#methods-drawDOM) method creates clickable hyperlinks in the generated PDF document. You can disable this behavior with the `avoidLinks` option, as demonstrated in the example below.
@@ -200,7 +206,7 @@ It can happen that this element ends up in a position where all the text fits on
 
 ### Template: Headers and Footers
 
-When multi-page output is requested via `forcePageBreak` or `paperSize`, you can additionally specify a page template. This template will be inserted into each page before producing the output. You can easily position it relatively to the page via CSS. The template can be a function, or a Kendo UI template, and it receives the number of the current page and the total number of pages.
+When multi-page output is requested via `forcePageBreak` or `paperSize`, you can additionally specify a page template. This template will be inserted into each page before producing the output. You can easily position it relatively to the page via CSS. The template can be a function, or a Kendo UI template, and it receives the number of the current page (`pageNum`) and the total number of pages (`totalPages`).
 
 ###### Example
 
@@ -422,11 +428,14 @@ The HTML renderer has been tested in recent versions of Chrome, Firefox, Safari,
 
 - Right-to-left text is not supported.
 - Images hosted on different domains might not be rendered, unless permissive [Cross-Origin HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image) are provided by the server. Similarly, fonts might not be possible to load cross-domain. Even with the proper CORS headers, Internet Explorer 9 will not be able to load images or fonts from another domain, and could raise an uncatchable security exception. If you need to support Internet Explorer 9, make sure to host images and fonts on the same domain as the application.
+- Images will not be exported in IE if their source is an SVG document. These are considered to be tainted.
 - Exporting might not work when loading the page from a local file (`file://` protocol) due to CORS restrictions.
-- The content of the `<iframe>` and `<svg>` elements is not rendered. A `<canvas>` will be rendered as an image, but only if it is non-tainted, meaning if it does not display images from another domain.
+- The content of the `<iframe>` and `<svg>` elements is not rendered.
+- A `<canvas>` will be rendered as an image, but only if it is non-tainted, meaning if it does not display images from another domain.
 - CSS box-shadow, text-shadow, and radial gradients are omitted. Linear gradients are supported.
 - Using browser zoom other than 100% is not supported.
 - Only border-style `solid` is rendered.
+- The `border-collapse:collapse` style of tables is not supported. Avoid using adjacent borders for separate table cells to prevent double borders in the PDF output.
 - Maximum document size is limited to 5080x5080mm (200x200 inches) by the PDF 1.5 specification. Larger files might not open in some viewers.
 - Shadow DOM is not rendered.
 - SVG referenced with the `<img>` tag will not render in Internet Explorer, because [IE taints the canvas](http://stackoverflow.com/questions/31484379/ie-canvas-datauri-security-error).

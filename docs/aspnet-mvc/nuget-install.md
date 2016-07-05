@@ -26,12 +26,32 @@ As of now, Visual Studio does not provide a UI for configuring authenticated NuG
 1. Open a Command Prompt and change the path to where the `nuget.exe` is downloaded.
 1. Execute the command from the example below.
 
+**Store Encrypted Credentials**
+
+The command from the example below stores a token in the `%AppData%\NuGet\NuGet.config` file. Your original credentials cannot be obtained from this token.
+
+> **Important**
+>
+> If you are unable to connect to the feed using encrypted credentials, try the alternative approach of storing credentials in clear text below.
+
 ###### Example
 
 ```
-NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "<your login email>" -Password "<your password>"
+NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" ^
+      -UserName "your login email" -Password "your password"
 ```
-This command stores a token in the `%AppData%\NuGet\NuGet.config`  file. Your original credentials cannot be obtained from this token.
+
+**Store Credentials in Clear Text**
+
+The command from the example below stores the password in clear text in the `%AppData%\NuGet\NuGet.config` file. Use this alternative approach if you are unable to connect to the feed using encrypted credentials.
+
+###### Example
+
+```
+NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" ^
+      -UserName "your login email" -Password "your password" ^
+      -StorePasswordInClearText
+```
 
 ### Install NuGet Packages
 
@@ -60,10 +80,11 @@ Other articles on getting started with UI for ASP.NET MVC:
 
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
-* [Use Telerik UI for ASP.NET MVC in MVC 3 Applications](/aspnet-mvc/asp-net-mvc-3)
-* [Use Telerik UI for ASP.NET MVC in MVC 4 Applications](/aspnet-mvc/asp-net-mvc-4)
-* [Use Telerik UI for ASP.NET MVC in MVC 5 Applications](/aspnet-mvc/asp-net-mvc-5)
-* [Use Telerik UI for ASP.NET MVC Visual Studio Extensions](/aspnet-mvc/vs-integration/introduction)
+* [Use Telerik UI for ASP.NET MVC in MVC 3 Applications]({% slug aspnetmvc3_aspnetmvc %})
+* [Use Telerik UI for ASP.NET MVC in MVC 4 Applications]({% slug aspnetmvc4_aspnetmvc %})
+* [Use Telerik UI for ASP.NET MVC in MVC 5 Applications]({% slug aspnetmvc5_aspnetmvc %})
+* [Use Telerik UI for ASP.NET MVC in Core MVC Applications]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Use Telerik UI for ASP.NET MVC Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %})
 * [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})
 
 Articles on Telerik UI for ASP.NET MVC:

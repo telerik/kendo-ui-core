@@ -31,19 +31,20 @@ Below are listed the steps for you to follow when configuring the Kendo UI Edito
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%: Html.Kendo().Editor()
                 .Name("editor") //The name of the Editor is mandatory. It specifies the "id" attribute of the widget.
                 .Value("<p>Initial value</p>") //Set the value of the Editor.
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Editor()
               .Name("editor") //The name of the Editor is mandatory. It specifies the "id" attribute of the widget.
               .Value("<p>Initial value</p>") //Set the value of the Editor.
         )
+```
 
 ### Server Value Processing
 
@@ -73,7 +74,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%: Html.Kendo().Editor()
                 .Name("editor")
@@ -86,8 +87,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
                 //Handle the change event.
             }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Editor()
               .Name("editor")
@@ -100,10 +101,13 @@ The examples below demonstrates how to subscribe to events by a handler name.
                 //Handle the change event.
             }
         </script>
+```
 
 ### By Template Delegate
 
-**Razor**
+###### Example
+
+```tab-Razor
 
         @(Html.Kendo().Editor()
               .Name("editor")
@@ -115,6 +119,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
                     </text>)
               )
         )
+```
 
 ## Reference
 
@@ -136,6 +141,7 @@ You can reference an existing Kendo UI Editor instance via [`jQuery.data()`](htt
 
 Other articles on Telerik UI for ASP.NET MVC and on the Editor:
 
+* [ASP.NET MVC API Reference: EditorBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/EditorBuilder)
 * [How to Add maxlength Editor Validations in ASP.NET MVC Apps]({% slug howto_addmaxlengthvalidation_editoraspnetmvc %})
 * [How to Store Images in Databases when Working with the Editor HtmlHelper]({% slug howto_storeimagesindatabases_editoraspnetmvc %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})

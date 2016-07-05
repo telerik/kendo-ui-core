@@ -95,10 +95,7 @@
         },
 
         teardown: function() {
-            if (container.data("kendoVirtualList")) {
-                container.data("kendoVirtualList").destroy();
-            }
-
+            kendo.destroy(QUnit.fixture);
             QUnit.fixture.empty();
         }
     });
@@ -353,10 +350,7 @@
         },
 
         teardown: function() {
-            if (container.data("kendoVirtualList")) {
-                container.data("kendoVirtualList").destroy();
-            }
-
+            kendo.destroy(QUnit.fixture);
             QUnit.fixture.empty();
         }
     });
@@ -420,4 +414,48 @@
         localDataSource.filter([]);
     });
 
+    asyncTest("clear selected values when list is filtered", 4, function() {
+        var container = $("<div/>").appendTo(QUnit.fixture);
+        var virtualList = new VirtualList(container, {
+            dataSource: localDataSource,
+            template: "#=text#",
+            dataValueField: "value",
+            height: CONTAINER_HEIGHT,
+            itemHeight: ITEM_HEIGHT,
+            selectable: "multiple",
+            valueMapper: function(options) {
+                var data = this.dataSource.data();
+                var values = $.isArray(options.value) ? options.value : [options.value];
+                var res = [], i, j, l = values.length, dl = data.length;
+
+                for (i = 0; i < l; i++) {
+                    for (j = 0; j < dl; j++) {
+                        if (data[j].value === values[i]) {
+                            res[i] = j;
+                            break;
+                        }
+                    }
+                }
+
+                options.success(res);
+            }
+        });
+
+        virtualList.one("listBound", function() {
+            virtualList.select(0);
+
+            virtualList.bind("change", function(e) {
+                start();
+
+                equal(virtualList.value().length, 0);
+                equal(e.removed.length, 1);
+                ok(e.removed[0].dataItem);
+                equal(e.removed[0].position, 0);
+            });
+
+            virtualList.value([]);
+        });
+
+        localDataSource.filter({field: "text", operator: "contains", value: "0"});
+    });
 })();

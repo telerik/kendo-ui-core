@@ -1,22 +1,27 @@
 ---
 title: Grid
-page_title: Server-side API documentation for Kendo UI jQuery Grid widget for ASP.NET MVC
-description: Documentation and code examples about server-side and client-side API for Kendo UI Grid component.
+page_title: Grid | Migrate from Telerik Extensions
+description: "Handle ASP.NET MVC server-side API for the Kendo UI Grid widget."
+slug: grid_migrationextensions_aspnetmvc
 ---
 
-# Server-Side API
- 
-## DataKeys 
+# Grid Migration
 
-DataKeys Are Moved to the Datasource Model Configuration:
+This article demonstrates the ASP.NET MVC server-side API for the Kendo UI Grid widget.
 
-#### Old
+## Server-Side API
+
+### DataKeys
+
+The `DataKeys` configuration option is now moved to the `Datasource` model configuration.
+
+```tab-Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")       
         .DataKeys(dataKeys => dataKeys.Add(o => o.OrderID))
-
-#### New
+```
+```tab-Current
 
     Html.Kendo().Grid<Order>()
         .Name("Grid")
@@ -24,20 +29,22 @@ DataKeys Are Moved to the Datasource Model Configuration:
             .Ajax()
             .Model(model => model.Id(o => o.OrderID))
         )
- 
-## DataBinding
+```
 
-### Configuration
+### Data Binding
 
-DataBinding Configuration Is Moved to Datasource:
- 
-#### Old
-    
+#### Configuration
+
+The `DataBinding` configuration is now moved to the `Datasource`.
+
+```tab-Previous
+
     Html.Telerik().Grid<Order>()
         .Name("Grid")      
         .DataBinding(dataBinding => dataBinding.Ajax().Select("_AjaxBinding", "Grid"))
-    
-#### New    
+
+```
+```tab-Current    
 
     Html.Kendo().Grid<Order>()   
         .Name("Grid")  
@@ -45,18 +52,21 @@ DataBinding Configuration Is Moved to Datasource:
             .Ajax()
             .Read(read => read.Action("AjaxBinding ", "Grid"))
         )
+```
 
-### Methods
+#### Methods
 
-**OperationMode** has changed to **ServerOperation**:
+The `DataBinding.WebService` configuration option is now removed.
 
-#### Old
+The `OperationMode` configuration option is now changed to `ServerOperation`.
+
+```tab-Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")      
         .DataBinding(dataBinding => dataBinding.Ajax().OperationMode(GridOperationMode.Client))
-
-#### New
+```
+```tab-Current
 
     Html.Kendo().Grid<Order>()
         .Name("Grid")
@@ -64,34 +74,24 @@ DataBinding Configuration Is Moved to Datasource:
             .Ajax()
             .ServerOperation(false)
         )
+```
 
-**DataBinding.WebService** Is Removed
+#### URL Methods
 
-Databinding "Url" Methods Are Renamed to Match the KendoUI Datasource Client Configuration.
+The `DataBinding` `URL` methods are now renamed to match the Kendo UI `Datasource` client configuration.
 
-#### Old -> New
-                
-##### Select 
+| Previous    | Current         |
+|:---         |:---             |
+| `Select`    | `Read`          |
+| `Update`    | `Update`        |
+| `Delete`    | `Destroy`       |
+| `Insert`    | `Create`        |
 
-Read
+#### DetailView
 
-##### Update
+The `DetailView.Clienttemplate` configuration option is now changed to `ClientDetailTemplateId`.
 
-Update
-
-##### Delete
-
-Destroy
-
-##### Insert
-
-Create
- 
-### DetailView
-
-**DetailView.Clienttemplate** Changed to **ClientDetailTemplateId**:
-
-#### Old
+```tab-Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")
@@ -100,8 +100,8 @@ Create
             .Name("TabStrip_<#= EmployeeID #>")                                                                                                           
             .ToHtmlString()
         ))
-
-#### New
+```
+```tab-Current
 
     Html.Kendo().Grid<Order>()
         .Name("Grid")
@@ -112,11 +112,12 @@ Create
             .Name("TabStrip_#=EmployeeID#")           
             .ToClientTemplate())
     </script>
- 
-**DetailView.Template** changed to **DetailTemplate**:
- 
-#### Old
-      
+```
+
+The `DetailView.Template` configuration option is now changed to `DetailTemplate`.
+
+```tab-Previous
+
     Html.Telerik().Grid(Model)
         .Name("Employees")  
         .DetailView(detailView => detailView.Template(e =>
@@ -125,42 +126,44 @@ Create
                     .Name("TabStrip_" + e.EmployeeID)
                     .Render();
         }))
-
-#### New
+```
+```tab-Current
 
     Html.Kendo().Grid(Model)
         .Name("Employees")   
         .DetailTemplate(e =>
         {            
             Html.Kendo().TabStrip()
-            .Name("TabStrip_" + e.EmployeeID) 
+            .Name("TabStrip_" + e.EmployeeID)
             .Render();
         })
-       
-### Editing 
+```
 
-**InForms** Mode is no longer available.
+### Editing
 
-**InsertRowPosition** is renamed to **CreateAt**.
+| Previous            | Current        
+|:---                 |:---             
+| `InForms` mode      | No longer available.
+| `InsertRowPosition` | Now renamed. Use `CreateAt` instead.
+| `BeginEdit`         | No longer available.  
+| `HtmlFormAttributes`| No longer available.
 
-**BeginEdit** and **HtmlFormAttributes** options are not available.
+The Grid editing now uses the Kendo UI Validator instead of jQuery validate.
 
-**DefaultDataItem** is moved to DataSource Model configuration.
+During updates, Telerik Extensions for ASP.NET MVC send the changed properties during updates only. With Kendo IU Complete for ASP.NET MVC, the whole model is now sent.
 
-Grid editing now uses the Kendo Validator instead of jQuery validate.
+Buttons related to editing now use both images and text. There are no text-only or image-only buttons available.
 
-During updates the Telerik Extensions for ASP.NET MVC only sent the changed properties during updates. With Kendo IU Complete for ASP.NET MVC the whole model is now sent.
+Inline edit forms are immediately closed when the update button is clicked. This means that server validation errors should be handled and displayed in the `Error` event, as demonstrated in the example below.
 
-Buttons related to editing now utilize both images and text. There are no text-only or image-only buttons available.
+###### Example
 
-Inline edit forms are immediately closed when the update button is clicked. This means that server validation errors should be handled and displayed in the Error event. For example:
-
-    ...
+    //Omitted for brevity.
     .DataSource(dataSource => dataSource
         .Ajax()
         .Events(events => events.Error("error_handler"))
     )
-    ...
+    //Omitted for brevity.
 
     <script type="text/javascript">
         function error_handler(e) {
@@ -178,36 +181,41 @@ Inline edit forms are immediately closed when the update button is clicked. This
         }
     </script>
 
-#### Old
+The `DefaultDataItem` is now moved to the `DataSource` model configuration.
+
+```tab-Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")                           
         .Editable(editable => editable.DefaultDataItem(new Order {
             OrderDate = DateTime.Today
         }))
-
-#### New
+```
+```tab-Current
 
     Html.Kendo().Grid<Order>()    
         .Name("Grid")     
         .DataSource(dataSource => dataSource
             .Ajax()
-            .Model(model => model.Field(o => o.OrderDate).DefaultValue(DateTime.Today)) 
+            .Model(model => model.Field(o => o.OrderDate).DefaultValue(DateTime.Today))
         )
+```
 
-## Grouping 
+### Grouping
 
-Groups Configuration Is Moved to Datasource:
+The `Visible` option is now removed. The same functionality can be achieved by setting the `Groupable.Enabled` to `false` and the `Group` descriptors through the `DataSource`.
 
-#### Old
+The `Groups` configuration option is now moved to the `Datasource`.
+
+```tab-Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")                        
         .Groupable(groupable => groupable
             .Groups(groups => groups.Add(o => o.OrderDate))
         )    
-
-#### New
+```
+```tab-Current
 
     Html.Kendo().Grid<Order>()   
         .Name("Grid")    
@@ -215,20 +223,19 @@ Groups Configuration Is Moved to Datasource:
             .Ajax()                       
             .Group(group => group.Add(o => o.OrderDate))
         )     
+```
 
-**Visible** option is removed. Same functionality can be achieved by setting **Groupable.Enabled** to false and Group descriptors through the DataSource.
- 
-## Sorting
+### Sorting
 
-**OrderBy** Is Moved to The DataSource Configuration:
+The `OrderBy` configuration option is now moved to the `DataSource` configuration.
 
-#### Old
+```tab-Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")   
         .Sortable(sortable => sortable.OrderBy(order => order.Add(o => o.OrderDate).Ascending()))
-
-#### New
+```
+```tab-Current
 
     Html.Kendo().Grid<Order>()   
         .Name("Grid")    
@@ -236,57 +243,60 @@ Groups Configuration Is Moved to Datasource:
             .Ajax()                       
             .Sort(sort => sort.Add(o => o.OrderDate).Ascending())
         )
+```
 
-## Filtering
+### Filtering
 
-**Filters** Is Moved to The DataSource Configuration:
+The `Filters` configuration option is now moved to the `DataSource` configuration.
 
-#### Old
-       
+```tab-Previous
+
     Html.Telerik().Grid<Order>()
         .Name("Grid")   
         .Filterable(filtarable => filtarable.Filters(filters => filters.Add(o => o.OrderDate).IsEqualTo(DateTime.Today))
-
-#### New
+```
+```tab-Current
 
     Html.Kendo().Grid<Order>()   
         .Name("Grid")        
         .DataSource(dataSource => dataSource
             .Ajax()                        
             .Filter(filter => filter.Add(o => o.OrderDate).IsEqualTo(DateTime.Today))
-        ) 
+        )
+```
 
-## Pageable
+### Pageable
 
-**Position** Is Not Available.
+| Previous            | Current    
+|:---                 |:---             
+| `Position`          | No longer available.
+| `PageOnScroll`      | Now removed. Use the `Scrollable.Virtual` configuration to enable virtual scrolling instead.  
+| `Style`             | Now removed. The Pager style can be configured by setting individual properties such as `Input`, `PageSizes`, `Info`, `Numeric`, `PreviousNext`.
 
-**PageSize** And Total Is Moved to the DataSource Configuration:
+The `PageSize` and `Total` are now moved to the DataSource configuration.
 
-#### Old
- 
+```tab-Previous
+
     Html.Telerik().Grid<Order>()
         .Name("Grid")   
         .Pageable(pageable => pageable.PageSize(42).Total(100))
+```
+```tab-Current
 
-#### New
-     
     Html.Kendo().Grid<Order>()   
     .Name("Grid")        
     .DataSource(dataSource => dataSource
         .Ajax()                       
         .PageSize(42)
         .Total(100)
-    ) 
+    )
+```
 
-**PageOnScroll** Is Removed (Use **Scrollable.Virtual** Option to Enabled Virtual Scrolling Instead).
+### Columns
 
-**Style** Is Removed. Pager Style Can Be Configured by Setting Individual Properties Such As **Input**, **PageSizes**, **Info**, **Numeric**, **PreviousNext**.
+The `Aggregates` configuration option is now moved to the DataSource configuration.
 
-## Columns 
-
-**Aggregates** are moved to the DataSource configuration:
-
-#### Old
+```tab-Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")   
@@ -295,8 +305,8 @@ Groups Configuration Is Moved to Datasource:
             columns.Bound(o => o.OrderID)
             .Aggregate(agg => agg.Count());          
         })
-
-#### New
+```
+```tab-Current
 
     Html.Kendo().Grid<Order>()   
         .Name("Grid"
@@ -308,10 +318,11 @@ Groups Configuration Is Moved to Datasource:
             .Ajax()                       
             .Aggregates(agg => agg.Add(o => o.OrderID).Count())
         )
-        
-**ReadOnly** In Moved To DataSource Model Configuration:
+```
 
-#### Old
+The `ReadOnly` configuration option is now moved to the `DataSource` model configuration.
+
+```tab-Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")   
@@ -319,8 +330,8 @@ Groups Configuration Is Moved to Datasource:
         {
             columns.Bound(o => o.OrderID).ReadOnly(true);          
         })
-
-#### New
+```
+```tab-Current
 
     Html.Kendo().Grid<Order>()   
         .Name("Grid")
@@ -332,182 +343,128 @@ Groups Configuration Is Moved to Datasource:
             .Ajax()
             .Model(model => model.Field(o => o.OrderID).Editable(false))
         )
+```
 
-## KeyboardNavigation
+### KeyboardNavigation
 
-**KeyboardNavigation** Is Renamed To **Navigatable**.
+| Previous            | Current    
+|:---                 |:---             
+| `KeyboardNavigation`| Now renamed to `Navigatable`.
+| `KeyboardNavigation.EditOnTab`| No longer available. This is enabled by default.  
 
-**KeyboardNavigation.EditOnTab** is not available. This is enabled by default.
+### NoRecordsTemplate
 
-## NoRecordsTemplate
+The `NoRecordsTemplate` is now renamed to `NoRecords`.
 
-**NoRecordsTemplate** is renamed to **NoRecords**.
-
-#### Old
+```tab-Previous
 
     Html.Telerik().Grid<Order>()
         .Name("Grid")
         .NoRecordsTemplate("foo")
-
-#### New
+```
+```tab-Current
 
     Html.Kendo().Grid<Order>()   
         .Name("Grid")
         .NoRecords("foo")
+```
 
-More ways to use the NoRecords setting are discussed in the [Grid Configuration](/aspnet-mvc/helpers/grid/configuration#no-records-template) help page.
+For more hints on how to use the `NoRecords` setting, refer to the [article on the Grid configuration]({% slug configuration_gridhelper_aspnetmvc %}#no-records-template).
 
-A "No Records" message is also shown inside the Pager. The message is configurable through **Pageable.Messages**.
+A `No Records` message is also shown inside the Pager. The message is configurable through the `Pageable.Messages` option.
 
-## Localization
+### Localization
 
-Localization is essentially handled automatically. Changing the current .NET UI culture will load the corresponding localization assembly for the Kendo UI components.
+Localization is essentially handled automatically. Changing the current .NET UI culture loads the corresponding localization assembly for the Kendo UI components.
 
-To change the built-in localization strings the following steps need to be taken.
+To change the built-in localization strings, follow the steps listed below.
 
-1. Edit the resource files in the source code project and create a custom build of the assembly.
-2. Set corresponding property of the widget. For example:
+**Step 1** Edit the resource files in the source code project and create a custom build of the assembly.
+
+**Step 2** Set the corresponding property of the widget.
+
+###### Example
 
     grid.Filterable(filter => filter.Messages(msg => msg.IsTrue("is true")));
 
-# Client-side API Changes
+## Client-Side API
 
-## Client-side API
+### Configuration
 
-#### MVC -> Kendo
+| MVC             | Kendo UI         
+|:---             |:---             
+| `insertRow`     | Now removed. Use `grid.dataSource.insert(index, model)` instead.
+| `updateRow`     | Now renamed. Use `saveRow` instead.
+| `hasChanges`    | Now removed.    
+| `submitChanges` | Now renamed. Use `saveChanges` instead.
+| `cancelCell`    | Now renamed. Use `closeCell` instead.
+| `saveCell`      | Now renamed. Use `closeCell` instead.     
+| `ajaxRequest`       | Now removed. Use `grid.dataSource.read()` instead.     
+| `dataBind(data)`    | Now removed. Use `grid.dataSource.data(data)` instead.   
+| `pageTo`            | Now removed. Use `grid.dataSource.page` instead.   
+| `grid.rebind(params)`| Now removed. Use `grid.dataSource.read(params)` instead.   
+| `sort("Name-desc")` | Now removed. Use `grid.dataSource.sort( { field: "Name", dir: "desc" } );` instead.   
+| `serializeData`     | Now removed.    
 
-##### insertRow
-
-Removed. Use **grid.dataSource.insert(index, model)**
-
-##### updateRow
-
-Renamed. Use **saveRow** instead.
-
-##### hasChanges
-
-Removed.
-
-##### submitChanges
-
-Renamed. Use **saveChanges** instead.
-
-##### cancelCell
-
-Renamed. Use **closeCell** instead.
-
-##### saveCell
-
-Renamed. use **closeCell* instead.
-
-##### insertedDataItems
-
-Removed. Use the following code snippet instead:
+The `insertedDataItems` configuration option is now removed. Instead, use the code snippet below.
 
     var inserted = $.grep(grid.dataSource.data(), function(model) {
-        return model.isNew();
+    return model.isNew();
     });
 
-##### updatedDataitems
-
-Removed. Use the following code snippet instead:
+The `updatedDataitems` configuration option is now removed. Instead, use the code snippet below.
 
     var updated = $.grep(grid.dataSource.data(), function(model) {
-        return model.dirty;
-    });
+    return model.dirty;
+    });  
 
-##### deletedDataItems
+The `deletedDataItems` configuratino option is now removed. Instead, use the code snippet below, applying private API.
 
-Removed. Use the following code snippet instead (utilizing private API):
+    var destroyed = grid.dataSource._destroyed`
 
-    var destroyed = grid.dataSource._destroyed
-
-##### ajaxRequest
-
-Removed. Use **grid.dataSource.read()** instead.
-
-##### dataBind(data)
-
-Removed. Use **grid.dataSource.data(data)** instead.
-
-##### filter("Name~eq~'foo'");
-
-Removed. Use the following code snippet instead:
+<!--_-->
+The `filter("Name~eq~'foo'");` is now removed. Instead, use the code snippet below.
 
     grid.dataSource.filter( { field: "Name", operator: "eq", value: "foo" } )
 
-##### pageTo
+### Events
 
-Removed. Use **grid.dataSource.page** instead.
+None of the events has the `On` prefix anymore.
 
-##### grid.rebind(params)
+None of the widgets features the `OnLoad` event anymore. Use the `$(document).ready()` instead.
 
-Removed. Use **grid.dataSource.read(params)** instead.
+| MVC               | Kendo UI        |
+|:---               |:---             |
+| `OnComplete`      | Now removed.    |
+| `OnDetailViewCollapse` | Now renamed to `DetailCollapse`. |
+| `OnDetailViewExpand`   | Now renamed to `DetailInit`.     |
+| `OnDelete`        | Now renamed to `Remove`. |
+| `OnRowSelect`     | Now renamed to `Change`. |
+| `OnSubmitChanges` | Now renamed to `SaveChanges`. |
 
-##### sort("Name-desc")
-
-Removed. Use **grid.dataSource.sort( { field: "Name", dir: "desc" } );** instead.
-
-##### serializeData
-
-Removed.
-
-## Client-side Events
-
-All events have removed the "On" prefix.
-
-OnLoad no longer exists, please utilize **$(document).ready()** instead.
-
-#### MVC -> Kendo
-
-##### OnCommand
-
-Removed. Utilize click event instead:
+The `OnCommand` event is now removed. Use the `click` one instead.
 
     command.custom("ViewDetails").Click("showDetails")
 
-##### OnComplete
 
-Removed.
-
-##### OnDetailViewCollapse
-
-Renamed to **DetailCollapse**
-
-##### OnDetailViewExpand
-
-Renamed to **DetailInit**
-
-##### OnDelete
-
-Renamed to **Remove**.
-
-##### OnDataBinding
-
-Removed.
-
-If you want to be notified when an ajax request is being made use the following snippet:
+The `OnDataBinding` event is now removed. If you want to be notified when an Ajax request is being made, use the code below.
 
     dataSource => dataSource.Ajax().Events(e => e.RequestStart("onRequestStart"))
 
-If you need to send custom data to the action method use .Data() on the DataSource's operation:
+To send custom data to the `action` method, use `.Data()` on the DataSource operation.
 
     dataSource => dataSource.Ajax()
         .Read(read=>read.Action("Action","Controller").Data("sendData"))
-    
+
     function sendData() {
         return { foo: "bar" };
     }
 
-##### OnError
-
-Removed. Use the Error event on the DataSource instead:
+The `OnError` event is now removed. Use the `Error` one on the DataSource instead.
 
     dataSource => dataSource.Ajax().Events(e => e.Error("onError"))
 
-##### OnRowDataBound
-
-Removed. Utilize **DataBound** instead and utilize the following code snippet:
+The `OnRowDataBound` event is now removed. Use the `DataBound` one instead and apply the code below.
 
     function onDataBound() {
         var data = this.view();
@@ -519,10 +476,12 @@ Removed. Utilize **DataBound** instead and utilize the following code snippet:
         }
      }
 
-##### OnRowSelect
+## See Also
 
-Renamed to **Change**
+Other articles on migrating from Telerik Extensions:
 
-##### OnSubmitChanges
+* [Migrate the AutoComplete]({% slug autocomplete_migrationextensions_aspnetmvc %})
+* [Migrate the Calendar]({% slug calendar_migrationextensions_aspnetmvc %})
+* [Migrate the Chart]({% slug chart_migrationextensions_aspnetmvc %})
 
-Renamed to **SaveChanges**
+To see the articles on migrating Кendo UI controls from Telerik Extensions, browse [this section]({% slug combobox_migrationextensions_aspnetmvc %}).

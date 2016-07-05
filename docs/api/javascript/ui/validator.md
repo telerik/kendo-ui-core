@@ -12,7 +12,9 @@ description: How to configure the Validator in Kendo UI Framework, get error mes
 
 The [template](/api/javascript/kendo#methods-template) which renders the validation message.
 
-#### Defining custom error template
+> The `errorTemplate` content must be enclosed in a single DOM element parent. There are no restrictions with regard to nested child elements.
+
+#### Define a custom error template
     <form id="myform">
         <input name="username" required /> <br />
         <button>Validate</button>

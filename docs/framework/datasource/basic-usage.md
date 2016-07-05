@@ -92,7 +92,7 @@ Local grouping is convenient for small datasets. However, avoid it is working wi
 
 ###### Example
 
-**1. Data**
+```tab-Data
 
         var words = {
             'count': 4,
@@ -104,13 +104,14 @@ Local grouping is convenient for small datasets. However, avoid it is working wi
                 { 'w': 'node', 'length': 4 }
             ]
         };
-
-**2. DataSource**
+```
+```tab-DataSource
 
         var wordsDataSource = new kendo.data.DataSource({
             data: words,
             group: { field: 'length', dir: 'desc'}
         });
+```
 
 ### Server Grouping
 
@@ -120,7 +121,7 @@ The example below features local data but the data returned by a `transport` is 
 
 ###### Example
 
-**1. Data**
+```tab-Data
 
         var words = {
             'count': 4,
@@ -145,8 +146,8 @@ The example below features local data but the data returned by a `transport` is 
                 'aggregates': {}
             }]
         };
-
-**2. DataSource**
+```
+```tab-DataSource
 
         var wordsDataSource = new kendo.data.DataSource({
             data: words,
@@ -158,6 +159,7 @@ The example below features local data but the data returned by a `transport` is 
             },
             serverGrouping: true
         });
+```
 
 ## See Also
 

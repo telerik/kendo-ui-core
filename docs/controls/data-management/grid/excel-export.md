@@ -174,6 +174,17 @@ For more information on how to format cell values, refer to [this example]({% sl
 
 Kendo UI Grid does not export its [detail template](/api/javascript/ui/grid#configuration-detailTemplate) for the same reason as it does not export its column templates. If the detail template contains another Grid, follow [the example on the detail Grid export]({% slug howto_exportto_excel_masterand_detail_grid %}).
 
+### Row Type
+
+Each row has a `type` field that can be used to distinguish between the various row types in the Grid.
+
+The possible values are:
+- `"header"`
+- `"footer"`
+- `"groupHeader"`
+- `"groupFooter"`
+- `"data"`
+
 ### Multiple Grids
 
 Each Grid is exported in a separate Excel sheet. For more information on how to export multiple Grids in a single Excel document, see [this example]({% slug howto_export_excel_multiple_grids_grid %}).
@@ -283,7 +294,7 @@ Internet Explorer 9 and Safari do not support the option for saving a file and r
 
 ## See Also
 
-Other articles on Kendo UI Grid:
+Other articles on the Kendo UI Grid:
 
 * [Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})
@@ -295,4 +306,4 @@ Other articles on Kendo UI Grid:
 * [Export the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %})
 * [Print the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
 
-For how-to examples on the Kendo UI Grid widget, browse [its How-to section]({% slug howto_bindto_telerik_backend_services_grid %}).
+For how-to examples on the Kendo UI Grid widget, browse its [**How To** documentation folder]({% slug howto_bindto_telerik_backend_services_grid %}).

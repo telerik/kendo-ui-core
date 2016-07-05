@@ -4,7 +4,6 @@ page_title: Overview | Kendo UI MaskedTextBox
 description: "Learn how to initialize the Kendo UI MaskedTextBox widget and configure its behaviors."
 slug: overview_kendoui_maskedtextbox_widget
 position: 1
-
 ---
 
 # MaskedTextBox Overview
@@ -32,7 +31,7 @@ For a complete overview of the methods and configuration options MaskedTextBox a
 
 When a MaskedTextBox is initialized, it will decorate the `<input>` element with a `k-textbox` CSS class.
 
-> **Important**  
+> **Important**
 >
 > The default mask is an empty string, which allows any input. If you need to restrict user input, define a mask value.
 
@@ -62,7 +61,7 @@ The following mask rules are available and predefined:
 - `A` - Alphanumeric. Accepts letters and digits only.
 - `a` - Alphanumeric or space. Accepts letters, digits and space only.
 
-> **Important**  
+> **Important**
 >
 > Any mask rule can be escaped using the `\` character. An escaped rule is turned into a literal.
 
@@ -74,7 +73,7 @@ The following mask literals are globalized based on the current culture:
 - `,` - Thousands placeholder. The display character will be set according to current culture used by Kendo UI.
 - `$` - Currency symbol. The display character will be set according to current culture used by Kendo UI.
 
-> **Importnat**  
+> **Importnat**
 >
 > Any of the aforementioned literals can be escaped using the `\` character.
 
@@ -100,9 +99,21 @@ The MaskedTextBox widget provides the option to define custom mask rules during 
       });
     </script>
 
-> **Important**  
+> **Important**
 >
 > Any of the predefined rules can be overridden through the [`rules`](/api/web/maskedtextbox#configuration-rules) option.
+
+## Known Limitations
+
+### Mobile Editing
+
+The MaskedTextBox widget listens to input events, like `keydown` and `keypress`, to restrict the typed value.
+
+> **Important**
+> * In some mobile browsers, mostly Android or Windows Mobile OS built-in browsers, those events are not triggered at all. This prevents the normal behavior of the MaskedTextBox, as they are fundamental for the typing restriction.
+> * Recent tests show that the MaskedTextBox works in the latest iOS OS.
+
+Unfortunately, in those cases not much can be done, because there is no other reliable way to detect typing in mobile browsers&mdash;the virtual keyboard does not rise any other specific events.
 
 ## See Also
 

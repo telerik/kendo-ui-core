@@ -178,6 +178,25 @@
         equal($(items[2]).text(), "blue - My text");
     });
 
+    ngTest("multiselect initializes with a undefined model value", 1, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+
+            $scope.selectOptions = {
+                dataSource: [ "red", "green", "blue" ],
+                itemTemplate: "{{dataItem}} - {{text}}",
+                valuePrimitive: true
+            };
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-multiselect k-ng-model="object.selectedColors" k-options=selectOptions></select></div>');
+    },
+
+    function() {
+        var widget = QUnit.fixture.find("select").getKendoMultiSelect();
+
+        ok(widget);
+    });
+
     //ng-model
 
     ngTest("multiselect with autoBind:false skips binding when value is null", 2, function() {
@@ -196,5 +215,49 @@
 
         equal(widget.listView.bound(), false);
         equal(widget.value(), "");
+    });
+
+    //header&footer
+
+    ngTest("multiselect compiles header template", 1, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            $scope.selectedColors = [ "red", "green" ];
+
+            $scope.selectOptions = {
+                dataSource: [ "red", "green", "blue" ],
+                headerTemplate: "<div>{{text}}<div>",
+                valuePrimitive: true
+            };
+
+            $scope.text = "My text";
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-multi-select k-ng-model=selectedColors k-options=selectOptions></select></div>');
+    },
+
+    function() {
+        var header = QUnit.fixture.find("select").getKendoMultiSelect().header;
+        equal(header.text(), "My text");
+    });
+
+    ngTest("multiselect compiles footer template", 1, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            $scope.selectedColors = [ "red", "green" ];
+
+            $scope.selectOptions = {
+                dataSource: [ "red", "green", "blue" ],
+                footerTemplate: "<div>{{text}}<div>",
+                valuePrimitive: true
+            };
+
+            $scope.text = "My text";
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-multi-select k-ng-model=selectedColors k-options=selectOptions></select></div>');
+    },
+
+    function() {
+        var widget = QUnit.fixture.find("select").getKendoMultiSelect();
+        equal(widget.footer.text(), "My text");
     });
 })();

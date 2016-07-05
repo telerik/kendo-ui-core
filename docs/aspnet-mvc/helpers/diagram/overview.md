@@ -32,7 +32,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Diagr
 <!--_-->
 **Step 2** In the view, configure the Diagram to use the action method created in the previous step.
 
-**WebForms**
+###### Example 
+
+```tab-ASPX
 
         <%= Html.Kendo().Diagram()
                 .Name("diagram")
@@ -45,8 +47,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Diagr
                 .Layout(l => l.Type(DiagramLayoutType.Layered))
         %>
 
-<!--_-->
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Diagram()
                 .Name("diagram")
@@ -59,7 +61,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Diagr
                 .Layout(l => l.Type(DiagramLayoutType.Layered))
         )
 
-<!--_-->
+```
+
 ## Event Handling
 
 You can subscribe to all Diagram [events](/api/javascript/dataviz/ui/diagram#events).
@@ -70,7 +73,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%= Html.Kendo().Diagram()
                 .Name("diagram")
@@ -91,9 +94,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
                 // Handle the click event
             }
         </script>
-
-<!--_-->
-**Razor**
+```
+```tab-Razor
 
     @(Html.Kendo().Diagram()
           .Name("diagram")
@@ -114,15 +116,15 @@ The examples below demonstrates how to subscribe to events by a handler name.
             // Handle the click event
         }
     </script>
+```
 
-<!--_-->
 ### By Template Delegate
 
 The example below demonstrates how to subscribe to events by a template delegate.
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
     @(Html.Kendo().Diagram()
           .Name("diagram")
@@ -134,6 +136,7 @@ The example below demonstrates how to subscribe to events by a template delegate
               </text>)
           )
     )
+```
 
 ## Reference
 
@@ -155,6 +158,7 @@ You can reference an existing Kendo UI Diagram instance via [`jQuery.data()`](ht
 
 Other articles on Telerik UI for ASP.NET MVC and on the Diagram:
 
+* [ASP.NET MVC API Reference: DiagramBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/DiagramBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

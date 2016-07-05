@@ -1,6 +1,6 @@
 ---
 title: Use jsSignature
-page_title: Use jsSignature | Hybrid UI Button
+page_title: Use jsSignature | Hybrid UI ListView
 description: "Learn how to use jsSignature in the Hybrid UI ListView."
 slug: howto_usejssignature_hybridlistview
 ---
@@ -110,3 +110,5 @@ Other articles and how-to examples on the Hybrid UI ListView:
 * [Overview of the Hybrid UI ListView]({% slug overview_hybridlistview %})
 * [Endless Scrolling Feature]({% slug endlessscrolling_hybridlistview %})
 * [Pull-to-Refresh Feature]({% slug pulltorefreshfeature_hybridlistview %})
+
+For more runnable examples on the Kendo UI hybrid ListView, browse its [**How To** documentation folder]({% slug howto_group_data_hybridlistview %}).

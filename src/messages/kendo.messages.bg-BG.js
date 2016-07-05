@@ -849,4 +849,13 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "showWorkDay": "Покажи работни часове"
 });
 }
+
+/* kendo.ui.progress method */
+if (kendo.ui.progress) {
+kendo.ui.progress.messages =
+$.extend(true, kendo.ui.progress.messages, {
+    loading: "Зареждане..."
+});
+}
+
 })(window.kendo.jQuery);

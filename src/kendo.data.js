@@ -390,6 +390,11 @@ var __meta__ = { // jshint ignore:line
         }
     });
 
+    // Polyfill for Symbol.iterator
+    if (typeof Symbol !== "undefined" && Symbol.iterator && !ObservableArray.prototype[Symbol.iterator]) {
+        ObservableArray.prototype[Symbol.iterator] = [][Symbol.iterator];
+    }
+
     var LazyObservableArray = ObservableArray.extend({
         init: function(data, type) {
             Observable.fn.init.call(this);
@@ -2852,7 +2857,7 @@ var __meta__ = { // jshint ignore:line
                 that._eachItem(that._data, function(items) {
                     for (var idx = 0; idx < items.length; idx++) {
                         var item = items.at(idx);
-                        if (item.__state__ == "update") {
+                        if (item.__state__ == "update" || item.__state__ == "create") {
                             item.dirty = true;
                         }
                     }
@@ -3127,6 +3132,7 @@ var __meta__ = { // jshint ignore:line
                         that.transport.read({
                             data: params,
                             success: function(data) {
+                                that._ranges = [];
                                 that.success(data, params);
 
                                 deferred.resolve();
@@ -3179,6 +3185,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 data = that._readData(data);
+                that._destroyed = [];
             } else {
                 data = that._readData(data);
 

@@ -129,6 +129,52 @@
         equal(list.children()[0].outerHTML, "<div>Header</div>");
     });
 
+    test("render footer container", function() {
+        var multiselect = new MultiSelect(select, {
+            footerTemplate: "footer"
+        });
+
+        var footer = multiselect.footer;
+
+        ok(footer);
+        ok(footer.hasClass("k-footer"));
+    });
+
+    test("render footer template", function() {
+        var multiselect = new MultiSelect(select, {
+            autoBind: true,
+            footerTemplate: "footer"
+        });
+
+        var footer = multiselect.footer;
+
+        equal(footer.html(), "footer");
+    });
+
+    test("compile footer template with the multiselect instance", function() {
+        var multiselect = new MultiSelect(select, {
+            autoBind: true,
+            footerTemplate: "#: instance.dataSource.total() #"
+        });
+
+        var footer = multiselect.footer;
+
+        equal(footer.html(), multiselect.dataSource.total());
+    });
+
+    test("update footer template on dataBound", function() {
+        var multiselect = new MultiSelect(select, {
+            autoBind: true,
+            footerTemplate: "#: instance.dataSource.total() #"
+        });
+
+        var footer = multiselect.footer;
+
+        multiselect.dataSource.data(["Item1"]);
+
+        equal(footer.html(), multiselect.dataSource.total());
+    });
+
     test("MultiSelect creates DataSource", function() {
         var multiselect = new MultiSelect(select);
 
@@ -412,6 +458,41 @@
             equal(multiselect.input.val(), "Select...");
             start();
         }, 150);
+    });
+
+    test("widget sets only option.selected property", 4, function() {
+        popuplateSelect();
+
+        var multiselect = new MultiSelect(select);
+
+        multiselect.value(["3","4"]);
+
+        ok(select[0].children[3].selected);
+        ok(select[0].children[4].selected);
+
+        ok(!select[0].children[3].getAttribute("selected"));
+        ok(!select[0].children[4].getAttribute("selected"));
+    });
+
+    test("widget persists defaultSelected property", 8, function() {
+        popuplateSelect();
+
+        select[0].children[1].setAttribute("selected", "selected");
+        select[0].children[2].setAttribute("selected", "selected");
+
+        var multiselect = new MultiSelect(select);
+
+        multiselect.value(["3","4"]);
+
+        ok(!select[0].children[1].selected);
+        ok(!select[0].children[2].selected);
+        ok(select[0].children[1].defaultSelected);
+        ok(select[0].children[2].defaultSelected);
+
+        ok(select[0].children[3].selected);
+        ok(select[0].children[4].selected);
+        ok(!select[0].children[3].getAttribute("selected"));
+        ok(!select[0].children[4].getAttribute("selected"));
     });
 
     test("persist tabIndex of the original element", function() {
@@ -746,5 +827,19 @@
         $(select).wrap('<fieldset disabled="disabled"></fieldset>');
         select.kendoMultiSelect().data("kendoMultiSelect");
         equal(select.attr("disabled"), "disabled");
+    });
+
+    test("MultiSelect doesn't re-render options on list change when value exists", function() {
+        popuplateSelect();
+
+        var multiselect = select.kendoMultiSelect().data("kendoMultiSelect");
+
+        stub(multiselect, {
+            _render: multiselect._render
+        });
+
+        multiselect.value([1, 3, 5]);
+
+        equal(multiselect.calls("_render"), 0);
     });
 })();

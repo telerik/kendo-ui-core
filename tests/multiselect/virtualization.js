@@ -41,6 +41,7 @@
                 }
             },
             serverPaging: true,
+            serverFiltering: true,
             pageSize: 40,
             schema: {
                 data: "data",
@@ -134,6 +135,61 @@
         multiselect.open();
     });
 
+    asyncTest("MultiSelect can display values that are not part of the first data page and are set through the API after initial dataBinding", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            height: CONTAINER_HEIGHT,
+            autoBind: false,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            }
+        });
+
+        multiselect.one("dataBound", function() {
+            multiselect.close();
+            multiselect.value([300]);
+            setTimeout(function() {
+                start();
+                equal(multiselect.tagList.children().length, 1, "Selected tag is rendered");
+            }, 300)
+        });
+
+        multiselect.open();
+    });
+
+    asyncTest("MultiSelect renders <select> tag if the corresponding dataItem is not part of the current data view", 2, function() {
+        var multiselect = new MultiSelect(select, {
+            height: CONTAINER_HEIGHT,
+            autoBind: false,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) {
+                    o.success(o.value);
+                },
+                itemHeight: 40
+            }
+        });
+
+        multiselect.one("dataBound", function() {
+            multiselect.close();
+            multiselect.value([299]);
+            setTimeout(function() {
+                start();
+                equal(multiselect.value()[0], [299]);
+                equal(multiselect.element.children().last().attr("value"), "299", "Custom option is rendered");
+            }, 300)
+        });
+
+        multiselect.open();
+    });
+
     //unstable
     /*asyncTest("dataItem returns correct object based on LI element", 2, function() {
         var multiselect = new MultiSelect(select, {
@@ -207,6 +263,42 @@
             item.click();
         });
         multiselect.open();
+    });
+
+    asyncTest("clear filter when set new value", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            close: function(e) { e.preventDefault(); },
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            filter: "contains",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 20
+            }
+        });
+
+        multiselect.one("dataBound", function() {
+            multiselect.open();
+
+            multiselect.dataSource.filter({
+                field: "text",
+                operator: "contains",
+                value: "Item 30"
+            });
+
+            multiselect.one("dataBound", function() {
+                start();
+
+                multiselect.value("");
+
+                equal(multiselect.dataSource.filter().filters.length, 0);
+            });
+        });
+
+        multiselect.value(10);
     });
 
 })();

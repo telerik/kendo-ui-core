@@ -360,6 +360,30 @@
         }));
     });
 
+    test("shows noDataTemplate when no data", 1, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: [],
+            noDataTemplate: "no data",
+            valueMapper: function() {}
+        });
+
+        ok(virtualList.noData.is(":visible"));
+    });
+
+    test("hides noDataTemplate when no data", 2, function() {
+        var virtualList = new VirtualList(container, {
+            dataSource: [],
+            noDataTemplate: "no data",
+            valueMapper: function() {}
+        });
+
+        ok(virtualList.noData.is(":visible"));
+
+        virtualList.dataSource.data(["Item"]);
+
+        ok(!virtualList.noData.is(":visible"));
+    });
+
     //templates
 
     asyncTest("initializes the default templates", function() {
@@ -452,6 +476,24 @@
             scroll(virtualList.content, 3 * CONTAINER_HEIGHT + 60);
             equal(virtualList.items().last().html(), '<span class="foo">foo...</span>');
         });
+    });
+
+    test("does not render no data template", function() {
+        var virtualList = new VirtualList(container, {
+            noDataTemplate: null
+        });
+
+        ok(!virtualList.noData)
+    });
+
+    test("renders noDataTemplate element", function() {
+        var virtualList = new VirtualList(container, {
+            noDataTemplate: "no data"
+        });
+
+        ok(virtualList.noData)
+        ok(virtualList.noData.hasClass("k-nodata"))
+        equal(virtualList.noData.text(), "no data");
     });
 
     //scrolling

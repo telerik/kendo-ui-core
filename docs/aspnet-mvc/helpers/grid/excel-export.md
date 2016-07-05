@@ -22,31 +22,31 @@ The example below demonstrates how to enable the Excel export functionality.
 
 ###### Example
 
-```Razor
-@(Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
-    .Name("grid")
-    .ToolBar(tools => tools.Excel())
-    .Excel(excel => excel
-        .FileName("Products.xlsx")
-    )
-    .DataSource(dataSource => dataSource
-        .Ajax()
-        .Read(read => read.Action("Products_Read", "Home"))
-    )
-)
+```tab-ASPX
+    <%: Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
+        .Name("grid")
+        .ToolBar(tools => tools.Excel())
+        .Excel(excel => excel
+            .FileName("Products.xlsx")
+        )
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Read(read => read.Action("Products_Read", "Home"))
+        )
+    %>
 ```
-```ASPX
-<%: Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
-    .Name("grid")
-    .ToolBar(tools => tools.Excel())
-    .Excel(excel => excel
-        .FileName("Products.xslx")
+```tab-Razor
+    @(Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
+        .Name("grid")
+        .ToolBar(tools => tools.Excel())
+        .Excel(excel => excel
+            .FileName("Products.xlsx")
+        )
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Read(read => read.Action("Products_Read", "Home"))
+        )
     )
-    .DataSource(dataSource => dataSource
-        .Ajax()
-        .Read(read => read.Action("Products_Read", "Home"))
-    )
-%>
 ```
 
 To initiate the Excel export through code, call the [`saveAsExcel`](/api/javascript/ui/grid.html#methods-saveAsExcel) method.
@@ -81,33 +81,34 @@ The example below demonstrates how to export all the data.
 
 ###### Example
 
-```Razor
-@(Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
-    .Name("grid")
-    .ToolBar(tools => tools.Excel())
-    .Excel(excel => excel
-        .AllPages(true)
+```tab-ASPX
+    <%: Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
+        .Name("grid")
+        .ToolBar(tools => tools.Excel())
+        .Excel(excel => excel
+            .AllPages(true)
+        )
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Read(read => read.Action("Products_Read", "Home"))
+        )
     )
-    .DataSource(dataSource => dataSource
-        .Ajax()
-        .Read(read => read.Action("Products_Read", "Home"))
-    )
-)
+    %>
 ```
-```ASPX
-<%: Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
-    .Name("grid")
-    .ToolBar(tools => tools.Excel())
-    .Excel(excel => excel
-        .AllPages(true)
+```tab-Razor
+    @(Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
+        .Name("grid")
+        .ToolBar(tools => tools.Excel())
+        .Excel(excel => excel
+            .AllPages(true)
+        )
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Read(read => read.Action("Products_Read", "Home"))
+        )
     )
-    .DataSource(dataSource => dataSource
-        .Ajax()
-        .Read(read => read.Action("Products_Read", "Home"))
-    )
-%>
+```
 
-```
 ### Customize Excel Documents
 
 The [`excelExport`](/api/javascript/ui/grid#events-excelExport) event allows the customization of the generated Excel document. The `workbook` event argument exposes the generated Excel workbook configuration.
@@ -142,7 +143,7 @@ For more information on how to export multiple Grids to a separate Excel sheet i
 
 * [Create Excel Documents with Kendo UI]({% slug introduction_excelexport_kendoui %})
 * [Save Files with Kendo UI]({% slug overview_savingfiles_kendoui %})
-* [API Reference: kendo.ooxml.Workbook](/api/javascript/ooxml/Workbook)
+* [API Reference: kendo.ooxml.Workbook](/api/javascript/ooxml/workbook)
 
 Other articles on the Kendo UI Grid for ASP.NET MVC:
 

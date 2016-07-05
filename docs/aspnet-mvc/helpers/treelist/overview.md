@@ -84,7 +84,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeL
 
 ###### Example
 
-**Index.aspx (ASPX)**
+```tab-ASPX
 
         <%:Html.Kendo().TreeList<KendoTreeListBinding.Models.EmployeeViewModel>()
             .Name("treelist")
@@ -104,8 +104,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeL
                 )
             .Height(540)
         %>
-
-**Index.cshtml (Razor)**
+```
+```tab-Razor
 
         @(Html.Kendo().TreeList<KendoTreeListBinding.Models.EmployeeViewModel>()
             .Name("treelist")
@@ -125,6 +125,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeL
                 )
             .Height(540)
         )
+```
 
 **Step 8** Build and run the application.
 
@@ -142,7 +143,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**ASPX**
+```tab-ASPX
 
         <%:Html.Kendo().TreeList<KendoTreeListBinding.Models.EmployeeViewModel>()
             .Name("treelist")
@@ -175,8 +176,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the change event.
         }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().TreeList<KendoTreeListBinding.Models.EmployeeViewModel>()
             .Name("treelist")
@@ -209,6 +210,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the change event.
         }
         </script>
+```
 
 ### By Template Delegate
 
@@ -216,7 +218,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().TreeList<KendoTreeListBinding.Models.EmployeeViewModel>()
             .Name("treelist")
@@ -248,6 +250,7 @@ The example below demonstrates how to subscribe to events by a template delegate
                 )
               .Height(540)
           )
+```
 
 ## Reference
 
@@ -286,6 +289,7 @@ You can reference an existing Kendo UI TreeList instance via [`jQuery.data()`](h
 
 Other articles on Telerik UI for ASP.NET MVC and on the TreeList:
 
+* [ASP.NET MVC API Reference: TreeListBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/TreeListBuilder)
 * [How to Export Multiple TreeLists to Excel]({% slug howto_exportmultipletoexcel_treelistaspnetmvc %})
 * [Overview of the Kendo UI TreeList Widget]({% slug overview_kendoui_treelist_widget %})
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})

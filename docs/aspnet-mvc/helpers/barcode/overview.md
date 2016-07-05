@@ -31,39 +31,41 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%: Html.Kendo().Barcode()
                 .Name("barcode") //The name of the Barcode is mandatory. It specifies the "id" attribute of the widget.
                 .Value("foo") //Set the value of the Barcode.
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Barcode()
               .Name("barcode") //The name of the Barcode is mandatory. It specifies the "id" attribute of the widget.
               .Value("foo") //Set the value of the Barcode.
         )
+```
 
 **Step 4** Choose the appropriate symbology (encoding) from the available options listed [here](/api/javascript/dataviz/ui/barcode#configuration-type). Specify it through the Encoding method which accepts an `enum` value.
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%: Html.Kendo().Barcode()
                 .Name("barcode")
                 .Encoding(BarcodeSymbology.EAN13) //By default, Code39 encoding is used.
                 .Value("foo")
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Barcode()
               .Name("barcode")
               .Encoding(BarcodeSymbology.EAN13) //By default, Code39 encoding is used.
               .Value("foo")
         )
+```
 
 ## Reference
 
@@ -86,6 +88,7 @@ You can reference an existing Kendo UI Barcode instance via [`jQuery.data()`](ht
 
 Other articles on Telerik UI for ASP.NET MVC and on the Barcode:
 
+* [ASP.NET MVC API Reference: BarCodeBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/BarcodeBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

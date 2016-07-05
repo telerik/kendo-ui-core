@@ -64,7 +64,7 @@ Here is an enhanced example, which shows how to hide or show the scrollbar, depe
 
 ### Restore Scroll Positions
 
-In some scenarios, the Grid scroll position may be reset when the widget is rebound. If you want to avoid this behavior, save the scroll position in the [`dataBinding`](/api/javascript/ui/grid#events-dataBinding) event and restore it in the [`dataBound`](/api/javascript/ui/grid#events-dataBound) event. The scrollable container is `div.k-grid-content` and you can retrieve it as a child element of the widget [`wrapper`]({% slug widgetwrapperandelement_references_gettingstarted %}).
+In some scenarios, the Grid scroll position may be reset when the widget is rebound. If you want to avoid this behavior, save the scroll position in the [`dataBinding`](/api/javascript/ui/grid#events-dataBinding) event and restore it in the [`dataBound`](/api/javascript/ui/grid#events-dataBound) event. The scrollable container is `div.k-grid-content` and you can retrieve it as a child element of the widget [`wrapper`]({% slug widgetwrapperandelement_references_gettingstarted %}). If virtual scrolling is enabled, the scrollable data container is `div.k-virtual-scrollable-wrap` and it is scrolled only horizontally.
 
 ###### Example
 
@@ -77,16 +77,16 @@ In some scenarios, the Grid scroll position may be reset when the widget is rebo
 
         //save the scroll position before the new data is rendered
         function onGridDataBinding (e) {
-            var container = e.sender.wrapper.children(".k-grid-content");
+            var container = e.sender.wrapper.children(".k-grid-content"); // or ".k-virtual-scrollable-wrap"
             scrollOffset.left = container.scrollLeft();
-            scrollOffset.top = container.scrollTop();
+            scrollOffset.top = container.scrollTop(); // use only if virtual scrolling is disabled
         }
 
         //restore the scroll position after the new data is rendered
         function onGridDataBound (e) {
-            var container = e.sender.wrapper.children(".k-grid-content");
+            var container = e.sender.wrapper.children(".k-grid-content"); // or ".k-virtual-scrollable-wrap"
             container.scrollLeft(scrollOffset.left);
-            container.scrollTop(scrollOffset.top);
+            container.scrollTop(scrollOffset.top); // use only if virtual scrolling is disabled
         }
 
         // attach the Grid event handlers
@@ -318,7 +318,7 @@ Setting column widths in percent is possible, but if the sum of all widths is gr
 
 ### Resizing
 
-When Grid scrolling is `disabled` and a column is resized, other columns will change widths too, so that the sum of all column widths remains constant.
+When Grid scrolling is `disabled` and a column is resized, other columns will change widths too, so that the sum of all column widths remains constant. If both the columns and the Grid `<div>` already have their minimum possible widths applied, then column resizing will stop working. In such scenarios, either apply a larger width to the Grid, or enable scrolling.
 
 When Grid scrolling is `enabled` and a column is resized, all other columns will maintain their widths. There are three possible outcomes of column resizing with regard to the sum of all column widths:
 
@@ -428,7 +428,7 @@ The `#f1f1f1` value corresponds to the background color of `.k-alt` table rows. 
 
 ## See Also
 
-Other articles on Kendo UI Grid:
+Other articles on the Kendo UI Grid:
 
 * [Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})
@@ -440,4 +440,4 @@ Other articles on Kendo UI Grid:
 * [Export the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %})
 * [Print the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
 
-For how-to examples on the Kendo UI Grid widget, browse [its How-to section]({% slug howto_bindto_telerik_backend_services_grid %}).
+For how-to examples on the Kendo UI Grid widget, browse its [**How To** documentation folder]({% slug howto_bindto_telerik_backend_services_grid %}).

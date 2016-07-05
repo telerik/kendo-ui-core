@@ -8,7 +8,9 @@ position: 5
 
 # CRUD Data Operations
 
-The [Kendo UI DataSource component](http://demos.telerik.com/kendo-ui/datasource/index) fully supports the CRUD (Create, Read, Update, Destroy) data operations. However, it must be combined with some user interface or another Kendo UI widget, such as the Grid, ListView, etc. Note that even though the examples below use the Grid as a sample, the configurations apply to any other widget or scenario.
+The [Kendo UI DataSource component](http://demos.telerik.com/kendo-ui/datasource/index) fully supports the CRUD (Create, Read, Update, Destroy) data operations. However, it must be combined with some user interface or another Kendo UI widget such as the Grid, ListView, etc.
+
+Though the examples below use the Grid as a sample, the configurations apply to any other widget or scenario.
 
 ## Concepts
 
@@ -67,8 +69,6 @@ For more information on handling errors in such scenarios, refer to the section 
 
 The `update` configuration setting of the DataSource should define a function that handles the updated data items, received as a function argument. When `batch` is disabled, as it is by default, and only one data item can be updated at a time, the updated data item is received as an object in `e.data`. If `batch` is enabled and multiple data items can be updated, they are received as an array of objects in `e.data.models`. Again, the `success` or `error` method of the function argument must be executed at the end.
 
-If the Grid is bound to an [`ObservableArray`](/api/javascript/data/observablearray), there is no need to manipulate the array manually. Only `e.success()` or `e.error()` should be called.
-
 ###### Example
 
     var dataSource = new kendo.data.DataSource({
@@ -105,8 +105,7 @@ The `create` function should perform a similar routine as the `update` one with 
 
 * The newly created data items have no ID, so they must be added by the function script or returned by the remote service.
 * The newly created data items must be returned in the `success` method with their IDs assigned. Otherwise, the DataSource instance is going to operate with incorrect data and subsequent data operations can fail.
-
-If the Grid is bound to an [`ObservableArray`](/api/javascript/data/observablearray), there is no need to add the new item to the array manually. Only `e.success()` or `e.error()` should be called.
+* If the [`schema.data`](/api/javascript/data/datasource#configuration-schema.data) configuration is set, the `success` method should receive the created data item in an object _with the same structure_ as the object that is passed to the `success` method of the `read` function. See the example below.
 
 ###### Example
 
@@ -121,8 +120,12 @@ If the Grid is bound to an [`ObservableArray`](/api/javascript/data/observablear
                 e.data.my_ID_field_name = 123;
                 // ...
 
-                // on success return the new data items with IDs
+                // on success return the new data items with IDs (assuming schema.data is NOT SET)
                 e.success(e.data);
+
+                // if schema.data IS SET (for example to "foo"), use the following syntax instead
+                // e.success({"foo": [e.data]});
+
                 // on failure
                 //e.error("XHR response", "status code", "error message");
             }
@@ -135,8 +138,6 @@ Also, check the notes on IDs in the above [Update (Local)]({% slug cruddataopera
 ### Destroy (Local)
 
 The `destroy` function receives the items to be deleted in `e.data`, similar to `create` and `update`. The function should remove the provided items from the original datasource and return `success` or `error`.
-
-If the Grid is bound to an [`ObservableArray`](/api/javascript/data/observablearray), there is no need to remove the item from the array manually. Only `e.success()` or `e.error()` should be called.
 
 ###### Example
 
@@ -180,7 +181,7 @@ If any of the transport actions (read, update, create, destroy) fails, then info
 
 The complete example below uses the information above to demonstrate CRUD operations with simple Products data. `original datasource` signifies the `sampleData` variable, which is used to populate the Grid initially. All data operations are persisted in this variable, so that it can be used or submitted somewhere else.
 
-If the Grid is bound to an [`ObservableArray`](/api/javascript/data/observablearray), there is no need to add, edit or remove items from the array manually. Only `e.success()` or `e.error()` should be called. When adding an item, it still needs an ID to be assigned.
+It is not recommended to use an [`ObservableArray`](/api/javascript/data/observablearray) instead of a plain JavaScript array in the example below. The Kendo UI DataSource will wrap the provided plain array and transform it to a collection of [`ObservableObjects`](/api/javascript/data/observableobject) automatically.
 
 ###### Example
 
@@ -204,7 +205,7 @@ If the Grid is bound to an [`ObservableArray`](/api/javascript/data/observablear
             var idx,
                 l = sampleData.length;
 
-            for (var j; j < l; j++) {
+            for (var j=0; j < l; j++) {
                 if (sampleData[j].ProductID == id) {
                     return j;
                 }
@@ -377,6 +378,10 @@ For more information on handling errors in such scenarios, refer to the section 
 
 The `update` service expects the edited data items and should return the same items (including all data fields) as a confirmation of the successful save operation. An empty response is also treated as a valid success response.
 
+If [`schema.data`](/api/javascript/data/datasource#configuration-schema.data) is set and the server response is not empty, then the server response must have _the same structure_, as the response of the `read` request.
+
+The example below demonstrates a case with no `schema.data`.
+
 ###### Example
 
     /*Client POST request:
@@ -395,11 +400,45 @@ The `update` service expects the edited data items and should return the same it
 
     var dataSource = new kendo.data.DataSource({
         transport: {
-            /* the other CRUD settings are ommitted for brevity */
+            /* the other CRUD settings are omitted for brevity */
             update: {
-                url: "service/products/create/",
+                url: "service/products/update/",
                 type: "post"
             }
+        }
+    });
+
+<!--*-->
+The example below demonstrates a case with `schema.data`.
+
+###### Example
+
+    /*Client POST request:
+
+    ProductID: 1
+    ProductName: "Fresh yellow bananas"
+
+    Server response:
+
+    {
+        "items": [{
+            "ProductID": 1,
+            "ProductName": "Fresh yellow bananas"
+        }]
+    }
+
+    */
+
+    var dataSource = new kendo.data.DataSource({
+        transport: {
+            /* the other CRUD settings are omitted for brevity */
+            update: {
+                url: "service/products/update/",
+                type: "post"
+            }
+        },
+        schema: {
+            data: "items"
         }
     });
 
@@ -410,7 +449,10 @@ Also, check the notes on IDs in the above [Update (Local)]({% slug cruddataopera
 
 The `create` action should perform a similar routine as `update`, with one notable difference&mdash;the newly created data items have no IDs, so they must be assigned server-side and returned by the remote service.
 
-###### Example
+If [`schema.data`](/api/javascript/data/datasource#configuration-schema.data) is set, then the server response should have the **same structure**, as the response of the `read` request. See example below.
+
+
+###### Example with no schema.data
 
     /*Client POST request:
 
@@ -432,6 +474,36 @@ The `create` action should perform a similar routine as `update`, with one notab
                 url: "service/products/create/",
                 type: "post"
             }
+        }
+    });
+
+###### Example with schema.data
+
+    /*Client POST request:
+
+    ProductName: "Fresh yellow bananas"
+
+    Server response:
+
+    {
+        "items": [{
+            "ProductID": 1,
+            "ProductName": "Fresh yellow bananas"
+        }]
+    }
+
+    */
+
+    var dataSource = new kendo.data.DataSource({
+        transport: {
+            /* the other CRUD settings are ommitted for brevity */
+            create: {
+                url: "service/products/create/",
+                type: "post"
+            }
+        },
+        schema: {
+            data: "items"
         }
     });
 

@@ -381,6 +381,15 @@ asyncTest("value method selects item that exists only in unfiltered source (asyn
         ok(!multiselect.popup.visible());
     });
 
+    test("MultiSelect opens popup if noDataTemplate", function() {
+        popuplateSelect();
+        var multiselect = new MultiSelect(select, { noDataTemplate: "no data" });
+
+        multiselect.open();
+
+        ok(multiselect.popup.visible());
+    });
+
     test("readonly method makes input element readonly", function() {
         var multiselect = new MultiSelect(select);
 
@@ -540,5 +549,41 @@ asyncTest("value method selects item that exists only in unfiltered source (asyn
         multiselect.value("item2");
 
         equal(multiselect.tagList.children().length, 1)
+    });
+
+    test("setOptions method updates footer template", 1, function() {
+        var multiselect = new MultiSelect(select, { });
+
+        multiselect.setOptions({ footerTemplate: "footer" });
+
+        equal(multiselect.footer.html(), "footer");
+    });
+
+    test("setOptions method hides footer template", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            footerTemplate: "footer"
+        });
+
+        multiselect.setOptions({ footerTemplate: "" });
+
+        equal(multiselect.footer, null);
+    });
+
+    test("setOptions method updates header template", 1, function() {
+        var multiselect = new MultiSelect(select, { });
+
+        multiselect.setOptions({ headerTemplate: "<div>header</div>" });
+
+        equal(multiselect.header.html(), "header");
+    });
+
+    test("setOptions method hides footer template", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            headerTemplate: "header"
+        });
+
+        multiselect.setOptions({ headerTemplate: "" });
+
+        equal(multiselect.header, null);
     });
 })();

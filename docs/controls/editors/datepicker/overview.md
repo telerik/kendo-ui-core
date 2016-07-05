@@ -168,33 +168,22 @@ $(function() {
 
 ## See Also
 
-Other articles on Kendo UI DatePicker:
+Other articles on the Kendo UI DatePicker:
 
-* [How to Create Date Masking]({% slug howto_create_date_masking_datepicker %})
-* [How to Select Ranges between DatePickers]({% slug howto_select_ranges_between_datepicker %})
-* [How to Set the First Weekday]({% slug howto_set_first_weekday_datepicker %})
-* [How to Use AngularJS Copy Functionality]({% slug howto_use_angularjs_copy_functionality_datepicker %})
-* [How to Integrate DatePicker with DateJS Library]({% slug howto_integrate_withdatejs_library_datepicker %})
-* [How to Hide the Deafult Button]({% slug howto_hide_default_button_datepicker %})
-* [How to Globally Modify Default Options]({% slug howto_globally_modify_default_options_datepicker %})
-* [How to Persist Entered Dates]({% slug howto_persist_entered_dates_datepicker %})
-* [How to Make Input Elements Readonly]({% slug howto_make_input_elements_readonly_datepicker %})
-* [How to Resize Calendar Based on Input Width]({% slug howto_use_resize_calendar_basedon_input_width_datepicker %})
-* [How to Restrict User Input to Min/Max Values]({% slug howto_restrict_user_input_minandmax_values_datepicker %})
-* [How to Show Out-of-Range Dates as Disabled]({% slug howto_show_outofrange_dates_disabled_datepicker %})
-* [How to Submit Forms on ENTER]({% slug howto_submmit_forms_onenter_datepicker %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the DatePicker Widget](/aspnet-mvc/helpers/datepicker/overview)
 * [Overview of the DatePicker JSP Tag]({% slug overview_datepicker_uiforjsp %})
 * [Overview of the DatePicker PHP Class](/php/widgets/datepicker/overview)
 * [DatePicker JavaScript API Reference](/api/javascript/ui/datepicker)
 
-Articles on Kendo UI Calendar:
+For how-to examples on the Kendo UI DatePicker widget, browse its [**How To** documentation folder]({% slug howto_select_ranges_between_datepicker %}).
+
+Articles on the Kendo UI Calendar:
 
 * [Overview of the Calendar Widget]({% slug overview_kendoui_calendar_widget %})
 * [How to Control the Header Format]({% slug howto_control_header_format_calendar %})
 * [Calendar JavaScript API Reference](/api/javascript/ui/calendar)
 
-Articles on Kendo UI DateTimePicker:
+Articles on the Kendo UI DateTimePicker:
 
 * [Overview of the DateTimePicker Widget]({% slug overview_kendoui_datetimepicker_widget %})
 * [How to Prevent Invalid Values]({% slug howto_prevent_invalid_values_datetimepicker %})
@@ -203,7 +192,7 @@ Articles on Kendo UI DateTimePicker:
 * [How to Override Hours in the Popup]({% slug howto_override_hours_inpopup_datetimepicker %})
 * [DateTimePicker JavaScript API Reference](/api/javascript/ui/datetimepicker)
 
-Articles on Kendo UI TimePicker:
+Articles on the Kendo UI TimePicker:
 
 * [Overview of the TimePicker Widget]({% slug overview_kendoui_timepicker_widget %})
 * [TimePicker JavaScript API Reference](/api/javascript/ui/timepicker)

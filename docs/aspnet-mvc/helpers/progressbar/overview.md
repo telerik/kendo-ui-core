@@ -31,19 +31,20 @@ Below are listed the steps for you to follow when configuring the Kendo UI Progr
 
 ###### Example
 
-**Aspx**
+```tab-ASPX
 
 			<%= Html.Kendo().ProgressBar()
                     .Name("progressBar") // The name of the ProgressBar is mandatory. It specifies the "id" attribute of the widget.
                     .Type(ProgressBarType.Percent)
             %>
-
-**Razor**
+```
+```tab-Razor
 
 			@(Html.Kendo().ProgressBar()
                   .Name("progressBar") // The name of the ProgressBar is mandatory. It specifies the "id" attribute of the widget.
                   .Type(ProgressBarType.Percent)
             )
+```
 
 ## Event Handling
 
@@ -55,7 +56,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**ASPX**
+```tab-ASPX
 
 			<%= Html.Kendo().ProgressBar()
 		            .Name("progressBar")
@@ -73,8 +74,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
 		            //Handle the complete event.
 		        }
 		    </script>
-
-**Razor**
+```
+```tab-Razor
 
 			@(Html.Kendo().ProgressBar()
 		            .Name("progressBar")
@@ -92,6 +93,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 		            //Handle the complete event.
 		        }
 		    </script>
+```
 
 ### By Template Delegate
 
@@ -99,7 +101,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
 			@(Html.Kendo().ProgressBar()
 		          .Name("progressBar")
@@ -110,6 +112,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 		              </text>)
 				  )
 		    )
+```
 
 ## Reference
 
@@ -131,6 +134,7 @@ You can reference an existing Kendo UI ProgressBar instance via [`jQuery.data()`
 
 Other articles on Telerik UI for ASP.NET MVC and on the ProgressBar:
 
+* [ASP.NET MVC API Reference: ProgressBarBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/ProgressBarBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

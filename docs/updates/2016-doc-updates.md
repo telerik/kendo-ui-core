@@ -1,19 +1,113 @@
 ---
 title: Kendo UI 2016 Documentation Updates
-page_title: Kendo UI 2016 Documentation Updates | Kendo UI Backwards Compatibility
+page_title: Kendo UI 2016 Documentation Updates | Updates and Contribution
 description: "Learn about the latest updates in Kendo UI documentation released in 2016."
 slug: documentation_updates_2016_kendoui
+position: 1
 ---
 
 # Kendo UI 2016 Documentation Updates
 
-## Kendo UI Q1 2016 SP1
+## May 2016
 
-Below are listed the latest (Kendo UI Q1 2016 SP1 release) changes in the documentation as compared to the Kendo UI Q1 2016 ones.
+Below are listed the Kendo UI R2 2016 release changes in the documentation as compared to the Kendo UI Q1 2016 SP1 ones.
 
-### Getting Started Location
+### New Files
 
-Some Getting Started articles now share new locations, which conceptually better match the topics they tackle.
+The **Copyright** notice is now added.
+
+### Existing Files
+
+**Articles**
+
+<table style="width:100%">
+  <col width="25%">
+  <col width="25%">
+  <col width="25%">
+  <col width="25%">
+    <tr>
+      <th>Article</th>
+      <th>New Name</th>
+      <th>Previous Location</th>
+      <th>New Location</th>
+    </tr>
+    <tr>
+      <td>Help Improve Kendo UI Documentation</td>
+      <td>Contribute to Documentation</td>
+      <td><strong>Help Improve Kendo UI Documentation</strong></td>
+      <td><strong>Updates and Contribution</strong> > <strong>Contribute to Kendo UI Documentation</strong></td>
+    </tr>
+    <tr>
+      <td>ASP.NET MVC 3</td>
+      <td>Use with ASP.NET MVC 3</td>
+      <td><strong>UI for ASP.NET MVC</strong> > <strong>ASP.NET MVC Apps</strong></td>
+      <td><strong>UI for ASP.NET MVC</strong></td>
+    </tr>
+    <tr>
+      <td>ASP.NET MVC 4</td>
+      <td>Use with ASP.NET MVC 4</td>
+      <td><strong>UI for ASP.NET MVC</strong> > <strong>ASP.NET MVC Apps</strong></td>
+      <td><strong>UI for ASP.NET MVC</strong></td>
+    </tr>
+      <td>ASP.NET MVC 5</td>
+      <td>Use with ASP.NET MVC 5</td>
+      <td><strong>UI for ASP.NET MVC</strong> > <strong>ASP.NET MVC Apps</strong></td>
+      <td><strong>UI for ASP.NET MVC</strong></td>
+    </tr>
+</table>
+
+**Folders**
+
+<table style="width:100%">
+  <col width="25%">
+  <col width="25%">
+  <col width="25%">
+  <col width="25%">
+    <tr>
+      <th>Folders</th>
+      <th>New Name</th>
+      <th>Previous Location</th>
+      <th>New Location</th>
+    </tr>
+    <tr>
+      <td>Documentation Updates</td>
+      <td>Updates and Contribution</td>
+      <td><strong>Documentation Updates</strong></td>
+      <td><strong>Updates and Contribution</strong></td>
+    </tr>
+    <tr>
+      <td>HtmlHelpers</td>
+      <td>Components</td>
+      <td><strong>UI for ASP.NET MVC</strong></td>
+      <td><strong>UI for ASP.NET MVC</strong></td>
+    </tr>
+    <tr>
+      <td>ASP.NET Core MVC</td>
+      <td>Use with ASP.NET Core MVC</td>
+      <td><strong>UI for ASP.NET MVC</strong> > <strong>ASP.NET MVC Apps</strong></td>
+      <td><strong>UI for ASP.NET MVC</strong></td>
+    </tr>
+    <tr>
+      <td>Tips and Tricks</td>
+      <td>Performance Issues</td>
+      <td><strong>Styles and Appearance</strong></td>
+      <td><strong>Widgets</strong> > <strong>Charts</strong> > <strong>Troubleshooting</strong></td>
+    </tr>
+</table>
+
+## March 2016
+
+### New Files
+
+In addition to the renaming and relocation of the above articles, some new ones are now created&mdash;from scratch or as a result of splitting existing ones&mdash;to the purpose of making the documented information more handy.
+
+* A new troubleshooting article on Scaffolding when using the Kendo UI Scaffolder Visual Studio Extension is now available. Go to **UI for ASP.NET MVC** > **Troubleshooting** > **Scaffolding** to check it out.
+* A new troubleshooting article on Validation is now available. Go to **UI for ASP.NET MVC** > **Troubleshooting** > **Validation** to check it out.
+* The **Globalization and Localization** article on Telerik UI for ASP.NET MVC is now split to list the two topics separately for a better navigation. The current location of them both is **UI for ASP.NET MVC** > **Globalization** and **UI for ASP.NET MVC** > **Localization** respectively.
+
+### Existing Files
+
+Below are listed the Kendo UI Q1 2016 SP1 (2016.1.226) release changes in the documentation as compared to the Kendo UI Q1 2016 ones.
 
 <table style="width:100%">
   <col width="25%">
@@ -62,23 +156,6 @@ Some Getting Started articles now share new locations, which conceptually better
       <td><strong>Getting Started</strong> > <strong>Widgets</strong></td>
       <td><strong>Getting Started</strong> > <strong>Widget Basics</strong></td>
     </tr>
-</table>
-
-### UI for ASP.NET MVC Location
-
-Some UI for ASP.NET MVC articles now share new locations, which conceptually better match the topics they tackle.
-
-<table style="width:100%">
-  <col width="25%">
-  <col width="25%">
-  <col width="25%">
-  <col width="25%">
-    <tr>
-      <th>Article</th>
-      <th>New Name</th>
-      <th>Previous Location</th>
-      <th>New Location</th>
-    </tr>
     <tr>
       <td>Troubleshooting</td>
       <td>Common Issues</td>
@@ -99,19 +176,11 @@ Some UI for ASP.NET MVC articles now share new locations, which conceptually bet
     </tr>
 </table>
 
-### Creation of New Files
+## January 2016
 
-In addition to the renaming and relocation of the above articles, some new ones are now created&mdash;from scratch or as a result of splitting existing ones&mdash;to the purpose of making the documented information more handy.
+### Existing Files
 
-* A new troubleshooting article on Scaffolding when using the Kendo UI Scaffolder Visual Studio Extension is now available. Go to **UI for ASP.NET MVC** > **Troubleshooting** > **Scaffolding** to check it out.
-* A new troubleshooting article on Validation is now available. Go to **UI for ASP.NET MVC** > **Troubleshooting** > **Validation** to check it out.
-* The **Globalization and Localization** article on Telerik UI for ASP.NET MVC is now split to list the two topics separately for a better navigation. The current location of them both is **UI for ASP.NET MVC** > **Globalization** and **UI for ASP.NET MVC** > **Localization** respectively.
-
-## Kendo UI Q1 2016
-
-Below are listed the latest (Kendo UI Q1 2016 release) changes in the documentation as compared to the Kendo UI Q3 2015 ones.
-
-### File Reorganization and Relocation
+Below are listed the Kendo UI Q1 2016 release changes in documentation as compared to the Kendo UI Q3 2015 ones.
 
 * The conceptual topic documentation on Kendo UI widgets is reorganized to correspond to the structure of the [Kendo UI live demo page](http://demos.telerik.com/kendo-ui/). The articles on Kendo UI controls are now listed in the **Widgets** folder. For example, **Widgets** > **Data Management** > **Grid** > **Overview**.
 * The new **Styles and Appearance** folder contains the combined articles on the layout and general appearance of the Kendo UI widgets that were previously referred to as Web and DataViz, such as the **Responsive Web Design** and **ThemeBuilder Overview** help topics.

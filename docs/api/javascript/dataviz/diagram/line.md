@@ -44,6 +44,12 @@ The X position of second point.
 
 The Y position of second point.
 
+## Fields
+
+### drawingElement `kendo.drawing.Path`
+
+The drawing element used to draw the line.
+
 ## Methods
 
 ### position

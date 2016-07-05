@@ -9,7 +9,7 @@ module("kendo.ui.AutoComplete filtering", {
 
         $.fn.press = function(key) {
             return this.trigger({ type: "keydown", keyCode: key } );
-        }
+        };
     },
     teardown: function() {
         kendo.destroy(QUnit.fixture);
@@ -53,6 +53,19 @@ asyncTest("popup should close if input is empty", 1, function() {
         start();
     });
     input.val("").press(8/*backspace*/);
+});
+
+test("popup is opened if noDataTemplate is defined", 1, function() {
+    var autocomplete = new AutoComplete(input, {
+        animation: false,
+        dataTextField: "name",
+        dataSource: [{ name: "foo" }, { name: "bar" }],
+        noDataTemplate: "no data"
+    });
+
+    autocomplete.search("fake");
+
+    ok(autocomplete.popup.visible());
 });
 
 test("search method supports case sensitive filtering", function() {
@@ -359,4 +372,43 @@ test("AutoComplete keeps value when shared source is modified", function() {
     equal(autocomplete.value(), "foo1");
 });
 
+    test("resize popup on search when autoWidth is enabled", function(assert) {
+        var data = [{text: "Foooooooooooooo", value: 1, type: "a"}, {text:"Bar", value:2, type: "b"}, {text:"Baz", value:3, type: "a"}];
+        var autocomplete = new AutoComplete(input, {
+            autoWidth: true,
+            separator: ", ",
+            dataTextField: "ProductName",
+            autoBind: false,
+            minLenght: 3,
+            dataSource: {
+                serverFiltering: false,
+                transport: {
+                    read: function(options) {
+                        options.success([
+                            { ProductName: "ChaiiiiiiiiiiiiiiiiiiiiiiiiiiiiiChaiiiiiiiiiiiiiiiiiiiiiiiiiiiii", ProductID: 1 },
+                            { ProductName: "Tofu", ProductID: 2 },
+                            { ProductName: "Test3", ProductID: 3 },
+                            { ProductName: "Chai3", ProductID: 4 },
+                            { ProductName: "Test4", ProductID: 5 }
+                        ]);
+                    }
+                }
+            }
+        });
+
+        var done1 = assert.async();
+        var done2 = assert.async();
+        autocomplete.one("open", function() {
+            assert.ok(autocomplete.wrapper.width() < autocomplete.popup.element.width());
+            autocomplete.close();
+            done1();
+            autocomplete.one("open", function() {
+                assert.ok(autocomplete.wrapper.width() >= autocomplete.popup.element.width());
+                done2();
+            });
+            autocomplete.search("Tof");
+        });
+        autocomplete.search("");
+
+    });
 }());

@@ -31,7 +31,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Calen
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%: Html.Kendo().Calendar()
             .Name("calendar") //The name of the Calendar is mandatory. It specifies the "id" attribute of the widget.
@@ -39,8 +39,8 @@ Below are listed the steps for you to follow when configuring the Kendo UI Calen
             .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the Calendar.
             .Value(DateTime.Now) //Set the value of the Calendar.
         %>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Calendar()
             .Name("calendar") //The name of the Calendar is mandatory. It specifies the "id" attribute of the widget.
@@ -48,6 +48,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Calen
             .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the Calendar.
             .Value(DateTime.Now) //Set the value of the Calendar.
         )
+```
 
 ## Event Handling
 
@@ -59,7 +60,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**WebForms**
+```tab-ASPX
 
         <%: Html.Kendo().Calendar()
             .Name("calendar")
@@ -77,8 +78,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the change event.
         }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Calendar()
           .Name("calendar")
@@ -96,6 +97,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the change event.
         }
         </script>
+```
 
 ### By Template Delegate
 
@@ -103,7 +105,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
         @(Html.Kendo().Calendar()
           .Name("calendar")
@@ -120,6 +122,7 @@ The example below demonstrates how to subscribe to events by a template delegate
                 </text>)
           )
         )
+```
 
 ## Reference
 
@@ -141,6 +144,7 @@ You can reference an existing Kendo UI Calendar instance via [`jQuery.data()`](h
 
 Other articles on Telerik UI for ASP.NET MVC and on the Calendar:
 
+* [ASP.NET MVC API Reference: CalendarBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/CalendarBuilder)
 * [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
 * [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
 * [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})

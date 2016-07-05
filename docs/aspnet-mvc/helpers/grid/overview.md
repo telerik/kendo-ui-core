@@ -24,7 +24,7 @@ Here are some of the differences between server and ajax bound modes:
 |**Feature**  |**Server Binding** |**Ajax Binding** |
 |:---         |:---               |:---             |
 |**Templates** |In the server-bound mode, the Grid templates use server-side expressions and .NET code&Mdash;C# or Visual Basic. Templates are executed server-side. |In the Ajax-bound mode, the Grid uses Kendo UI Templates. Templates are executed on the client side and use JavaScript. |
-|**Full-Page Updates** |The Grid makes HTTP GET requests to ASP.NET MVC action methods which cause a full-page refresh. |The grid makes Ajax requests which cause partial page update. The Grid retrieves only the data needed for the current page.|
+|**Full-Page Updates** |The Grid makes HTTP GET requests to ASP.NET MVC action methods which cause a full-page refresh. |The Grid makes Ajax requests which cause partial page update. The Grid retrieves only the data needed for the current page.|
 
 ### Server Binding
 
@@ -46,7 +46,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 **Step 4** Choose the **Products** table from the `Which database objects do you want to include in your model?`. Leave all other options as they are set by default. Click **Finish**.
 
-**Figure 3. Choose the Employees table**
+**Figure 3. Choose the Products table**
 
 ![Choose the Products table](/aspnet-mvc/helpers/grid/images/grid-database-objects.png)
 
@@ -54,39 +54,22 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 ###### Example
 
-        public ActionResult Index()
-        {
-            ViewBag.Message = "Welcome to ASP.NET MVC!";
-            var northwind = new NorthwindEntities();
-            //Get the Products entities and add them to the ViewBag.
-            ViewBag.Products = northwind.Products;
-            return View();
-        }
+      public ActionResult Index()
+      {
+          ViewBag.Message = "Welcome to ASP.NET MVC!";
+          var northwind = new NorthwindEntities();
+          //Get the Products entities and add them to the ViewBag.
+          ViewBag.Products = northwind.Products;
+          return View();
+      }
 
 **Step 6** Add a Kendo UI Grid to the `Index` view.
 
 ###### Example
 
-**Index.aspx (ASPX)**
+```tab-ASPX
 
-        <%: Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products) //Bind the grid to ViewBag.Products
-                .Name("grid")
-                .Columns(columns =>
-                {
-                    //Create a column bound to the ProductID property.
-                    columns.Bound(product => product.ProductID);
-                    //Create a column bound to the ProductName property.
-                    columns.Bound(product => product.ProductName);
-                    //Create a column bound to the UnitsInStock property.
-                    columns.Bound(product => product.UnitsInStock);
-                })
-                .Pageable() //Enable the paging.
-                .Sortable() //Enable the sorting.
-        %>
-
-**Index.cshtml (Razor)**
-
-        @(Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products) //Bind the grid to ViewBag.Products
+      <%: Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products) //Bind the grid to ViewBag.Products
               .Name("grid")
               .Columns(columns =>
               {
@@ -99,7 +82,25 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
               })
               .Pageable() //Enable the paging.
               .Sortable() //Enable the sorting.
-        )
+      %>
+```
+```tab-Razor
+
+      @(Html.Kendo().Grid((IEnumerable<KendoGridServerBinding.Models.Product>)ViewBag.Products) //Bind the grid to ViewBag.Products
+            .Name("grid")
+            .Columns(columns =>
+            {
+                //Create a column bound to the ProductID property.
+                columns.Bound(product => product.ProductID);
+                //Create a column bound to the ProductName property.
+                columns.Bound(product => product.ProductName);
+                //Create a column bound to the UnitsInStock property.
+                columns.Bound(product => product.UnitsInStock);
+            })
+            .Pageable() //Enable the paging.
+            .Sortable() //Enable the sorting.
+      )
+```
 
 **Step 7** Build and run the application.
 
@@ -141,7 +142,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ###### Example
 
-**ASPX**
+```tab-ASPX
 
         <%: Html.Kendo().Grid(Model)
                 .Name("grid")
@@ -159,8 +160,8 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the change event.
         }
         </script>
-
-**Razor**
+```
+```tab-Razor
 
         @(Html.Kendo().Grid(Model)
               .Name("grid")
@@ -178,6 +179,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
             //Handle the change event.
         }
         </script>
+```
 
 ### By Template Delegate
 
@@ -185,7 +187,7 @@ The example below demonstrates how to subscribe to events by a template delegate
 
 ###### Example
 
-**Razor**
+```tab-Razor
 
     @(Html.Kendo().Grid(Model)
           .Name("grid")
@@ -202,11 +204,13 @@ The example below demonstrates how to subscribe to events by a template delegate
               </text>)
           )
     )
+```
 
 ## See Also
 
 Other articles on the Kendo UI Grid for ASP.NET MVC:
 
+* [ASP.NET MVC API Reference: GridBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [Configuration of the Grid HtmlHelper]({% slug configuration_gridhelper_aspnetmvc %})
 * [Scaffolding]({% slug scaffoldinggrid_aspnetmvc %})
