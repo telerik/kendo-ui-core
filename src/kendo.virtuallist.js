@@ -960,17 +960,15 @@ var __meta__ = { // jshint ignore:line
         _getElementByDataItem: function(dataItem) {
             var dataView = this._dataView,
             valueGetter = this._valueGetter,
-                element;
+                element, match;
 
-            element = dataView.find(function(viewItem) {
-                if (!viewItem.item) {
-                    return false;
-                } else if (isPrimitive(viewItem.item)) {
-                    return viewItem.item === dataItem;
-                } else {
-                    return valueGetter(viewItem.item) === valueGetter(dataItem);
+            for (var i = 0; i < dataView.length; i++) {
+                match = dataView[i].item && isPrimitive(dataView[i].item) ? dataView[i].item === dataItem : valueGetter(dataView[i].item) === valueGetter(dataItem);
+                if (match) {
+                    element = dataView[i];
+                    break;
                 }
-            });
+            }
 
             return this._getElementByIndex(element.index);
         },
