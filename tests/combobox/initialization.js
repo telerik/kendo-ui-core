@@ -1069,4 +1069,22 @@ test("ComboBox doesn't open the popup if no data", function() {
     ok(!combobox.popup.visible());
 });
 
+test("widget keeps defaultSelected property", function() {
+   var select = $("<select><option>foo</option><option selected>bar</option><option>baz</option></select>").appendTo(QUnit.fixture);
+
+    combobox = new ComboBox(select, {
+        value: "bar"
+    });
+
+    combobox.value("baz");
+
+    var options = select[0].children;
+
+    equal(options[1].selected, false);
+    equal(options[2].selected, true);
+
+    equal(options[1].defaultSelected, true);
+    equal(options[2].defaultSelected, false);
+});
+
 })();

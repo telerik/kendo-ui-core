@@ -856,44 +856,27 @@ var __meta__ = { // jshint ignore:line
 
         _accessorSelect: function(value, idx) {
             var element = this.element[0];
-            var selectedIndex = element.selectedIndex;
-            var option;
+            var hasValue;
 
             if (value === undefined) {
-                if (selectedIndex > -1) {
-                    option = element.options[selectedIndex];
-                }
+                return getSelectedOption(element).value || "";
+            }
 
-                if (option) {
-                    value = option.value;
-                }
-                return value || "";
+            getSelectedOption(element).selected = false;
+
+            if (idx === undefined) {
+                idx = -1;
+            }
+
+            hasValue = (value !== null && value !== "");
+
+            if (hasValue && idx == -1) {
+                this._custom(value);
             } else {
-                if (selectedIndex > -1) {
-                    element.options[selectedIndex].removeAttribute(SELECTED);
-                    element.options[selectedIndex].selected = false;
-                }
-
-                if (idx === undefined) {
-                    idx = -1;
-                }
-
-                if (value !== null && value !== "" && idx == -1) {
-                    this._custom(value);
+                if (value) {
+                    element.value = value;
                 } else {
-                    if (value) {
-                        element.value = value;
-                    } else {
-                        element.selectedIndex = idx;
-                    }
-
-                    if (element.selectedIndex > -1) {
-                        option = element.options[element.selectedIndex];
-                    }
-
-                    if (option) {
-                       option.setAttribute(SELECTED, SELECTED);
-                    }
+                    element.selectedIndex = idx;
                 }
             }
         },
@@ -911,7 +894,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             custom.text(value);
-            custom[0].setAttribute(SELECTED, SELECTED);
             custom[0].selected = true;
         },
 
@@ -1127,6 +1109,7 @@ var __meta__ = { // jshint ignore:line
         _options: function(data, optionLabel, value) {
             var that = this,
                 element = that.element,
+                htmlElement = element[0],
                 length = data.length,
                 options = "",
                 option,
@@ -1168,9 +1151,17 @@ var __meta__ = { // jshint ignore:line
             element.html(options);
 
             if (value !== undefined) {
-                element[0].value = value;
-                if (element[0].value && !value) {
-                    element[0].selectedIndex = -1;
+                htmlElement.value = value;
+                if (htmlElement.value && !value) {
+                    htmlElement.selectedIndex = -1;
+                }
+            }
+
+            if (htmlElement.selectedIndex !== -1) {
+                option = getSelectedOption(htmlElement);
+
+                if (option) {
+                    option.setAttribute(SELECTED, SELECTED);
                 }
             }
         },
@@ -2193,6 +2184,11 @@ var __meta__ = { // jshint ignore:line
     });
 
     ui.plugin(StaticList);
+
+    function getSelectedOption(select) {
+        var index = select.selectedIndex;
+        return index > -1 ? select.options[index] : {};
+    }
 
     function mapChangedItems(selected, itemsToMatch) {
         var itemsLength = itemsToMatch.length;

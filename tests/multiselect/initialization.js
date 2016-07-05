@@ -460,6 +460,41 @@
         }, 150);
     });
 
+    test("widget sets only option.selected property", 4, function() {
+        popuplateSelect();
+
+        var multiselect = new MultiSelect(select);
+
+        multiselect.value(["3","4"]);
+
+        ok(select[0].children[3].selected);
+        ok(select[0].children[4].selected);
+
+        ok(!select[0].children[3].getAttribute("selected"));
+        ok(!select[0].children[4].getAttribute("selected"));
+    });
+
+    test("widget persists defaultSelected property", 8, function() {
+        popuplateSelect();
+
+        select[0].children[1].setAttribute("selected", "selected");
+        select[0].children[2].setAttribute("selected", "selected");
+
+        var multiselect = new MultiSelect(select);
+
+        multiselect.value(["3","4"]);
+
+        ok(!select[0].children[1].selected);
+        ok(!select[0].children[2].selected);
+        ok(select[0].children[1].defaultSelected);
+        ok(select[0].children[2].defaultSelected);
+
+        ok(select[0].children[3].selected);
+        ok(select[0].children[4].selected);
+        ok(!select[0].children[3].getAttribute("selected"));
+        ok(!select[0].children[4].getAttribute("selected"));
+    });
+
     test("persist tabIndex of the original element", function() {
         var multiselect = new MultiSelect($("<select tabindex='5'/>").appendTo(QUnit.fixture));
 
@@ -792,5 +827,19 @@
         $(select).wrap('<fieldset disabled="disabled"></fieldset>');
         select.kendoMultiSelect().data("kendoMultiSelect");
         equal(select.attr("disabled"), "disabled");
+    });
+
+    test("MultiSelect doesn't re-render options on list change when value exists", function() {
+        popuplateSelect();
+
+        var multiselect = select.kendoMultiSelect().data("kendoMultiSelect");
+
+        stub(multiselect, {
+            _render: multiselect._render
+        });
+
+        multiselect.value([1, 3, 5]);
+
+        equal(multiselect.calls("_render"), 0);
     });
 })();
