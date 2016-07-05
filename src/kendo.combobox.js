@@ -127,7 +127,7 @@ var __meta__ = { // jshint ignore:line
             delay: 200,
             dataTextField: "",
             dataValueField: "",
-            minLength: 0,
+            minLength: 1,
             height: 200,
             highlightFirst: true,
             filter: "none",
@@ -284,7 +284,12 @@ var __meta__ = { // jshint ignore:line
             if ((!that.listView.bound() && state !== STATE_FILTER) || state === STATE_ACCEPT) {
                 that._open = true;
                 that._state = STATE_REBIND;
-                that._filterSource();
+                if (that.options.minLength !== 1) {
+                    that.refresh();
+                    that.popup.open();
+                } else {
+                    that._filterSource();
+                }
             } else if (that._allowOpening()) {
                 that.popup.open();
                 that._focusItem();

@@ -219,7 +219,16 @@ var __meta__ = { // jshint ignore:line
                     that._prev = "";
                 }
 
-                that._filterSource();
+                if (that.filterInput && that.options.minLength !== 1) {
+                    that.refresh();
+                    that.popup.one("activate", that._focusInputHandler);
+                    that.popup.open();
+                    if (that.filterInput) {
+                        that._resizeFilterInput();
+                    }
+                } else {
+                    that._filterSource();
+                }
             } else if (that._allowOpening()) {
                 that.popup.one("activate", that._focusInputHandler);
                 that.popup.open();

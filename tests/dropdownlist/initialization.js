@@ -1477,4 +1477,20 @@
         equal(options[1].defaultSelected, true);
         equal(options[2].defaultSelected, false);
     });
+
+    test("DropDownList does not bind on open if minLength & autoBind: false", function() {
+        var dropdownlist = new DropDownList(input, {
+            minLength: 3,
+            autoBind: false,
+            filter: "startswith"
+        });
+
+        dropdownlist.dataSource.bind("change", function() {
+            ok(false, "change does not fire");
+        });
+        dropdownlist.wrapper.click();
+
+        ok(dropdownlist.popup.visible());
+    });
+
 })();
