@@ -361,7 +361,6 @@ var __meta__ = { // jshint ignore:line
 
             if (customIndex !== undefined) {
                 option = that.element[0].children[customIndex];
-                option.removeAttribute("selected");
                 option.selected = false;
 
                 listView.removeAt(position);
@@ -594,12 +593,6 @@ var __meta__ = { // jshint ignore:line
             var option = this.element[0].children[this._optionsMap[value]];
 
             if (option) {
-                if (selected) {
-                    option.setAttribute("selected", "selected");
-                } else {
-                    option.removeAttribute("selected");
-                }
-
                 option.selected = selected;
             }
         },
