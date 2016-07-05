@@ -458,8 +458,22 @@
         dropdownlist.value("Bar");
 
         equal(select[0].selectedIndex, 1);
-        ok(select[0].options[1].getAttribute("selected"));
-        ok(!select[0].options[0].getAttribute("selected"));
+
+        ok(!select[0].options[0].selected);
+        ok(select[0].options[1].selected);
+    });
+
+    test("value method should update only OPTION selected property", 4, function() {
+        var select = $("<select><option selected>Chai</option><option>Bar</option></select>").appendTo(QUnit.fixture);
+        dropdownlist = new DropDownList(select);
+
+        dropdownlist.value("Bar");
+
+        ok(select[0].options[0].getAttribute("selected"));
+        ok(!select[0].options[0].selected);
+
+        ok(!select[0].options[1].getAttribute("selected"));
+        ok(select[0].options[1].selected);
     });
 
     test("value method calls dataSource.fetch when element is disabled", function() {

@@ -151,7 +151,7 @@
         });
     });
 
-    asyncTest("keep selected value when list is scrolled", 1, function() {
+    asyncTest("keep selected value when list is scrolled", 3, function() {
         var dropdownlist = new DropDownList(select, {
             close: function(e) { e.preventDefault(); },
             height: CONTAINER_HEIGHT,
@@ -169,7 +169,11 @@
             dropdownlist.open();
             dropdownlist.one("dataBound", function() {
                 start();
+                var selectedOption = select[0].children[select[0].selectedIndex];
+
                 equal(select.val(), 10);
+                ok(selectedOption.selected);
+                ok(!selectedOption.getAttribute("selected"));
             });
 
             scroll(dropdownlist.listView.content, 5 * CONTAINER_HEIGHT);

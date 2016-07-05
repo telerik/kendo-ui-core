@@ -1460,4 +1460,21 @@
 
         ok(!dropdownlist.popup.visible());
     });
+
+    test("widget keeps defaultSelected property", function() {
+        dropdownlist = new DropDownList(select, {
+            dataSource: [ "foo", "bar", "baz" ],
+            value: "bar"
+        });
+
+        dropdownlist.value("baz");
+
+        var options = select[0].children;
+
+        equal(options[1].selected, false);
+        equal(options[2].selected, true);
+
+        equal(options[1].defaultSelected, true);
+        equal(options[2].defaultSelected, false);
+    });
 })();
