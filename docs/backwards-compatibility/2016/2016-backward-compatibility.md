@@ -8,7 +8,7 @@ slug: breakingchanges2016_kendoui
 
 # Kendo UI 2016 Breaking Changes
 
-## Kendo UI 2016 R4
+## Kendo UI 2016 R3
 
 ### Changes from 2016 R2 SP1
 
@@ -18,9 +18,9 @@ slug: breakingchanges2016_kendoui
 
 * **MultiSelect**: The widget with a 'single' tag mode will deselect all selected items on BACKSPACE/DELETE keyboard press. The previous behavior cannot be reverted.
 
-* **Validator**: The email validation rule has been changed to match the [HTML5 specification suggests for browsers to use](https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address). If the previous behavior is required, the email validation rule should be overriden by [specifing a custom rule](/controls/editors/validator/overview#custom-rules-for-validation) with the `email` key.
+* **DropDownList/ComboBox**: The widget will not bind on open if `autoBind: false` and `minLength` is set to higher that 1.
 
-## Kendo UI 2016 R3
+* **Validator**: The email validation rule has been changed to match the [HTML5 specification suggests for browsers to use](https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address). If the previous behavior is required, the email validation rule should be overriden by [specifing a custom rule](/controls/editors/validator/overview#custom-rules-for-validation) with the `email` key.
 
 ### Changes from 2016 R2
 
