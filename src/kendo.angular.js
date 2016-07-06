@@ -452,6 +452,8 @@ var __meta__ = { // jshint ignore:line
         };
 
         widget.first("change", onChange(false));
+        widget.first("spin", onChange(false));
+
         if (!(kendo.ui.AutoComplete && widget instanceof kendo.ui.AutoComplete)) {
             widget.first("dataBound", onChange(true));
         }
@@ -519,7 +521,7 @@ var __meta__ = { // jshint ignore:line
             scope.$watch(kNgModel, watchHandler);
         }
 
-        widget.first("change", function(){
+        var changeHandler = function() {
             updating = true;
 
             if (ngForm && ngForm.$pristine) {
@@ -532,7 +534,10 @@ var __meta__ = { // jshint ignore:line
             });
 
             updating = false;
-        });
+        };
+
+        widget.first("change", changeHandler);
+        widget.first("spin", changeHandler);
     }
 
     function destroyWidgetOnScopeDestroy(scope, widget) {
