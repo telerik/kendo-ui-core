@@ -648,6 +648,10 @@ html .km-pane-wrapper .k-header
     background-color: @button-hover-background-color;
 }
 
+.k-button.k-state-focused {
+    color: @button-hover-text-color;
+}
+
 .k-tabstrip-scrollable .k-button-bare:hover {
     background: @button-hover-background-color !important;
 }
@@ -1020,8 +1024,7 @@ div.k-filebrowser-dropzone em
 
 .km-pane-wrapper .k-mobile-list input:not([type="checkbox"]):not([type="radio"]),
 .km-pane-wrapper .km-pane .k-mobile-list select:not([multiple]),
-.km-pane-wrapper .k-mobile-list textarea,
-.k-dropdown .k-state-focused .k-input
+.km-pane-wrapper .k-mobile-list textarea
 {
     color: @widget-text-color;
 }
@@ -1042,7 +1045,8 @@ div.k-filebrowser-dropzone em
     }
 }
 
-.k-dropdown .k-state-hover .k-input
+.k-dropdown .k-state-hover .k-input,
+.k-dropdown .k-state-focused .k-input
 {
     color: @hover-text-color;
 }
@@ -1991,7 +1995,6 @@ html .km-pane-wrapper .km-widget,
 }
 
 .k-dropdown .k-input,
-.k-dropdown .k-state-focused .k-input,
 .k-menu .k-popup
 {
     color: @drop-down-text-color;
