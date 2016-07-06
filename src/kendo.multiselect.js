@@ -841,9 +841,18 @@ var __meta__ = { // jshint ignore:line
         },
 
         _placeholder: function(show, skipCaret) {
-            var that = this,
-                input = that.input,
-                active = activeElement();
+            var that = this;
+            var input = that.input;
+            var active = activeElement();
+            var placeholder = that.options.placeholder;
+            var inputValue = input.val();
+            var isActive = input[0] === active;
+            var caretPos = inputValue.length;
+
+            if (!isActive || that.options.autoClose || inputValue === placeholder) {
+                caretPos = 0;
+                inputValue = "";
+            }
 
             if (show === undefined) {
                 show = false;
@@ -852,12 +861,11 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            that._prev = "";
-            input.toggleClass("k-readonly", show)
-                 .val(show ? that.options.placeholder : "");
+            that._prev = inputValue;
+            input.toggleClass("k-readonly", show).val(show ? placeholder : inputValue);
 
-            if (input[0] === active && !skipCaret) {
-                kendo.caret(input[0], 0, 0);
+            if (isActive && !skipCaret) {
+                kendo.caret(input[0], caretPos, caretPos);
             }
 
             that._scale();

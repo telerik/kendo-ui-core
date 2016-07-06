@@ -91,4 +91,33 @@
         ok(multiselect.input.hasClass("k-readonly"));
     });
 
+    test("MultiSelect keeps the filter value when autoClose is false", function() {
+        var multiselect = new MultiSelect(select.data("placeholder", "Select..."), { autoClose: false });
+        var input = multiselect.input;
+        var filterText = "2";
+
+        input.focus().val(filterText);
+        multiselect.open();
+
+        multiselect.ul.children().first().click();
+
+        equal(input.val(), filterText);
+        equal(kendo.caret(input[0])[1], 1);
+    });
+
+    test("MultiSelect clears filter value on blur when autoClose is false", function() {
+        var filterText = "2";
+        var placeholder = "Select...";
+        var multiselect = new MultiSelect(select.data("placeholder", placeholder), { autoClose: false });
+
+        multiselect.input.focus().val(filterText);
+        multiselect.open();
+
+        multiselect.ul.children().first().click();
+
+        multiselect.input.blur();
+
+        equal(multiselect.input.val(), "");
+    });
+
 })();
