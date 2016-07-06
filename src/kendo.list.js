@@ -820,7 +820,7 @@ var __meta__ = { // jshint ignore:line
 
             clearTimeout(that._typingTimeout);
 
-            if (!length || length >= options.minLength) {
+            if ((!options.enforceMinLength && !length) || length >= options.minLength) {
                 that._state = "filter";
 
                 if (!that._isFilterEnabled()) {

@@ -128,6 +128,7 @@ var __meta__ = { // jshint ignore:line
             dataTextField: "",
             dataValueField: "",
             minLength: 1,
+            enforceMinLength: false,
             height: 200,
             highlightFirst: true,
             filter: "none",

@@ -151,6 +151,7 @@ var __meta__ = { // jshint ignore:line
             animation: {},
             filter: "none",
             minLength: 1,
+            enforceMinLength: false,
             virtual: false,
             template: null,
             valueTemplate: null,

@@ -153,6 +153,7 @@ var __meta__ = { // jshint ignore:line
             fixedGroupTemplate: "#:data#",
             dataTextField: "",
             minLength: 1,
+            enforceMinLength: false,
             delay: 200,
             height: 200,
             filter: "startswith",
@@ -294,7 +295,7 @@ var __meta__ = { // jshint ignore:line
 
             length = word.length;
 
-            if (!length || length >= options.minLength) {
+            if ((!options.enforceMinLength && !length) || length >= options.minLength) {
                 that._open = true;
 
                 that._mute(function() {

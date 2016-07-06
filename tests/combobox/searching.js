@@ -232,6 +232,23 @@ test("search with startswith rebind items", function() {
     equal(combobox.ul.children().length, 1);
 });
 
+test("search with empty input and enforceMinLength: true does not rebind items", function() {
+    create({
+        filter: "startswith",
+        minLength: 2,
+        enforceMinLength: true
+    });
+    combobox.text("fo");
+    combobox.search("fo");
+
+    equal(combobox.ul.children().length, 1);
+
+    combobox.text("");
+    combobox.search("");
+
+    equal(combobox.ul.children().length, 1);
+});
+
 test("search with filter opens drop down if any items", function() {
     create({
         filter: "startswith"

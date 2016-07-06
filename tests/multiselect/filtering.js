@@ -252,6 +252,30 @@
         multiselect.input.focus().val("baz").keydown();
     });
 
+    asyncTest("MultiSelect does not trigger filter on empty input if minLength & enforceMinLength", 0, function() {
+        var multiselect = new MultiSelect(select, {
+            delay: 0,
+            minLength: 3,
+            enforceMinLength: true,
+            dataSource: ["foo", "bar"],
+            filter: "contains"
+        });
+
+        multiselect.dataSource.one("change", function() {
+            multiselect.one("filtering", function(e) {
+                ok(false, "should not filter on empty input and enforceMinLength");
+            });
+
+            multiselect.input.val("").keydown();
+
+            setTimeout(function() {
+                start();
+            }, 0);
+        });
+
+        multiselect.input.focus().val("baz").keydown();
+    });
+
     test("MultiSelect renders value of the custom options on filter", 3, function() {
         var multiselect = new MultiSelect(select, {
             dataTextField: "text",
