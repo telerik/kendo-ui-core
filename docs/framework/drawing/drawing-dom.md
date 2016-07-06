@@ -14,7 +14,8 @@ The [Kendo UI Drawing API](http://demos.telerik.com/kendo-ui/drawing/index) supp
 
 Using the `drawing.drawDOM` function you can draw a DOM element into a [`drawing.Group`](/api/dataviz/drawing/group), which you are then able to render with one of the supported backends into SVG, PDF, HTML5 `<canvas>`, or VML format.
 
-The DOM element must be appended to the document and must be visible, meaning that you cannot draw an element which has the `display: none`, or the `visibility: hidden` options. Assume that you have the following HTML in the page:
+The DOM element must be appended to the document and must be fully rendered, meaning that you cannot draw an element
+which has the `display: none`, or the `visibility: hidden` options. Assume that you have the following HTML in the page:
 
     <div id="drawMe" class="...">
       ... more HTML code here...
@@ -372,6 +373,48 @@ One drawback of this approach is that you cannot add background images. The code
 The reason is that images are cached upfront, and this one will miss. If you want to add any background images, use the next option.
 
 ### The `<kendo-pdf-document>` Element
+
+The `<kendo-pdf-document>` approach only works when multi-page documents are requested, that is, only when either of `forcePageBreak` or `paperSize` is given. To make it work in the cases when you need only a single page, pass some dummy value to the `forcePageBreak` such as `forcePageBreak: "-"`.
+
+In this case, the DOM renderer will create a clone of the element so that it is able to do the page-breaking without destroying the original content, and it will place it inside a custom `<kendo-pdf-document>` element, which is hidden from the view. Therefore, you can apply custom styles under `kendo-pdf-document` by restricting the rules to elements.
+
+###### Example
+
+    <style>
+      kendo-pdf-document p {
+        border: 2px solid black;
+        background: url("image.jpg");
+      }
+    </style>
+
+Images are safe to add here.
+
+### Off-screen Content
+
+If you want the produce different content for export, or keep it hidden from the user, position the container outside the screen.
+
+The container has to be fully rendered, see [Getting Started](#getting-started) for details.
+The example uses absolute positioning to move the container off screen.
+
+###### Example
+
+    <style>
+      #content {
+        position: absolute;
+        width: 800px;
+        left: -10000px;
+        top: 0;
+      }
+    </style>
+    <script>
+        drawing.drawDOM("#content", {
+          paperSize: "A4",
+          margin: "2cm"
+        }).then(function(group){
+          drawing.pdf.saveAs(group, "filename.pdf");
+        });
+    </script>
+
 
 The `<kendo-pdf-document>` approach only works when multi-page documents are requested, that is, only when either of `forcePageBreak` or `paperSize` is given. To make it work in the cases when you need only a single page, pass some dummy value to the `forcePageBreak` such as `forcePageBreak: "-"`.
 
