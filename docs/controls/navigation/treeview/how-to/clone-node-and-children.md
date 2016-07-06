@@ -1,23 +1,21 @@
 ---
-title: Clone Node and its Children
-page_title: Clone Node and its Children | Kendo UI TreeView
-description: "Learn how to clone the selected node and its children."
+title: Clone the Selected Node and Its Children
+page_title: Clone the Selected Node and Its Children | Kendo UI TreeView
+description: "Learn how to clone the selected node and its children in a kendo UI TreeView."
 slug: howto_clonenodeandchildren_treeview
 ---
 
-# Clone the Selected Node and its Children
+# Clone the Selected Node and Its Children
 
-The example below demonstrates how to clone the selected TreeView node, together with its children.
+The example below demonstrates how to clone the selected node of a Kendo UI TreeView together with its children.
 
-Notable steps include:
-
-* Use the TreeView's [`select`](/api/javascript/ui/treeview#methods-select) method to obtain the selected node as a jQuery object.
-* Find the parent node (`li.k-item`) of the selected node via DOM traversal.
-* Use the TreeView's [`dataItem`](/api/javascript/ui/treeview#methods-dataItem) method to obtain the data item (Kendo UI Model), which corresponds to the selected node.
-* Use the Model's [`toJSON`](/api/javascript/data/model#methods-toJSON) method to strip proprietary information from the data item and its children and convert then to a plain JavaScript object.
-* Deselect and collapse the cloned node before appending it to the TreeView (optional).
-* Use the TreeView's [`append`](/api/javascript/ui/treeview#methods-append), [`insertAfter`](/api/javascript/ui/treeview#methods-insertAfter) or [`insertBefore`](/api/javascript/ui/treeview#methods-insertBefore) method to add the cloned node to the desired location in the TreeView's item structure. In this example, the nodes are cloned at the same level.
-
+The notable steps to achieve this behavior are:
+* Use the [`select`](/api/javascript/ui/treeview#methods-select) method of the TreeView to obtain the selected node as a jQuery object.
+* Find the parent node of the selected node (`li.k-item`)through a DOM traversal.
+* Use the [`dataItem`](/api/javascript/ui/treeview#methods-dataItem) method of the TreeView to obtain the data item (Kendo UI Model), which corresponds to the selected node.
+* Use the [`toJSON`](/api/javascript/data/model#methods-toJSON) method of the Model to strip proprietary information from the data item and its children, and convert them to a plain JavaScript object.
+* (Optional) Deselect and collapse the cloned node before appending it to the TreeView.
+* Use the [`append`](/api/javascript/ui/treeview#methods-append), the [`insertAfter`](/api/javascript/ui/treeview#methods-insertAfter), or the [`insertBefore`](/api/javascript/ui/treeview#methods-insertBefore) method of the TreeView to add the cloned node to the desired location in the item structure of the widget. In this example, the nodes are cloned at the same level.
 
 ###### Example
 
@@ -49,7 +47,7 @@ Notable steps include:
 
         $("#cloneNode").click(function() {
           var selectedNode = treeview.select();
-          
+
           if (!selectedNode[0]) {
             selectedNode = treeview.wrapper.find("li.k-item").first();
           }
@@ -65,7 +63,7 @@ Notable steps include:
           // remove selection from the cloned node (optional)
           var clonedNode = treeview.dataItem(selectedNode).toJSON();
           clonedNode.selected = false;
-          
+
           // collapse the cloned node (optional)
           delete clonedNode.expanded;
 

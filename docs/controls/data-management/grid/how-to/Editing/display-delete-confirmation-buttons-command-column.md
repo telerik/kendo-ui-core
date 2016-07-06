@@ -1,13 +1,13 @@
 ---
-title: Display Delete Confirmation as Buttons in the Command Column
-page_title:  Display Delete Confirmation as Buttons in the Command Column | Kendo UI Grid
-description: "Learn how to display delete confirmation as buttons in the command column instead of dialog."
+title: Display Delete Confirmation as Button in the Command Column
+page_title: Display Delete Confirmation as Button in the Command Column | Kendo UI Grid
+description: "Learn how to display the Delete confirmation as a button instead of a dialog in the command column of a Kendo UI Grid."
 slug: howto_display_delete_confirmation_buttons_command_column
 ---
 
-# Display Delete Confirmation as Buttons in the Command Column
+# Display Delete Confirmation as Button in the Command Column
 
-The example below demonstrates how display delete confirmation as buttons in the command column instead of dialog with the Kendo UI Grid.
+The example below demonstrates how to render the confirmation to delete a row in a Kendo UI Grid as a button instead of a dialog in the command column.
 
 ###### Example
 
