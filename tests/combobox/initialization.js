@@ -1087,4 +1087,19 @@ test("widget keeps defaultSelected property", function() {
     equal(options[2].defaultSelected, false);
 });
 
+test("ComboBox does not bind on open if minLength & autoBind: false", function() {
+    combobox = new ComboBox(input, {
+        minLength: 3,
+        autoBind: false,
+        filter: "contains"
+    });
+
+    combobox.dataSource.bind("change", function() {
+        ok(false, "dataSource should not be read");
+    })
+    combobox.wrapper.find(".k-icon:last").click();
+
+    ok(combobox.popup.visible());
+});
+
 })();

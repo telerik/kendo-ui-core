@@ -138,7 +138,8 @@ var __meta__ = { // jshint ignore:line
             dataValueField: "",
             filter: "startswith",
             ignoreCase: true,
-            minLength: 0,
+            minLength: 1,
+            enforceMinLength: false,
             delay: 100,
             value: null,
             maxSelectedItems: null,
@@ -310,7 +311,7 @@ var __meta__ = { // jshint ignore:line
                     that.input.focus();
                 }
 
-                if (that.options.minLength === 0) {
+                if (that.options.minLength === 1) {
                     that.open();
                 }
             }
@@ -529,7 +530,7 @@ var __meta__ = { // jshint ignore:line
 
             length = word.length;
 
-            if (!length || length >= options.minLength) {
+            if ((!options.enforceMinLength && !length) || length >= options.minLength) {
                 that._state = FILTER;
                 that._open = true;
 

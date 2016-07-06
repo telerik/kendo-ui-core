@@ -389,7 +389,7 @@ test("MultiSelect closes popup on blur", function() {
 test("MultiSelect honours minLength on click", function() {
     populateSelect();
     var multiselect = new MultiSelect(select, {
-        minLength: 1,
+        minLength: 2,
         autoBind: false
     });
 

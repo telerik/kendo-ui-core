@@ -265,6 +265,26 @@ asyncTest("remove input value clears filter even with minLength option", 2, func
     input.val("").trigger({ type: "keydown", keyCode: kendo.keys.BACKSPACE });
 });
 
+asyncTest("remove input value does not clear filter if minLength and enforceMinLength", 0, function() {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: ["foo", "bar"],
+        minLenght: 2,
+        enforceMinLength: true
+    });
+
+    input.val("ba").press("a".charCodeAt(0));
+
+    autocomplete.dataSource.bind("change", function() {
+        ok(false, "list should not rebind");
+    });
+
+    input.val("").trigger({ type: "keydown", keyCode: kendo.keys.BACKSPACE });
+
+    setTimeout(function() {
+        start();
+    }, 0);
+});
+
 test("select item after filtering", function() {
     var autocomplete = new AutoComplete(input, {
         dataTextField: "text",
