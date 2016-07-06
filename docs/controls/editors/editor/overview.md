@@ -38,7 +38,9 @@ The classic Editor is able to post its value automatically, because it is based 
 
 ### Inline Mode
 
-If you initialize the Editor from a `<div>` or any other element (`<div>` elements are recommended in most cases), it assumes its inline mode. The originating element is made contenteditable and is used by the widget to return its value.
+If you initialize the Editor from a `<div>`, it assumes its inline mode. The originating element is made contenteditable and is used by the widget to return its value.
+
+> While it is possible to initialize the Editor from a non-div element (`p`, `h1`, etc), we strongly recommend `<div>`s. In addition, table elements cannot be used for Editor creation, due to IE browser limitations. Table elements can exist only inside the Editor's editable area.
 
 The inline Editor is not able to post its value and [this is something you must take care of](/web/editor/troubleshoot/troubleshooting). The Editor tools are only visible when the widget is focused. The Editor's content resides on the main web page, so the page styling can influence the editable content.
 
