@@ -1,7 +1,7 @@
 ---
-title: Clone TreeView Node and Its Children
+title: Clone a TreeView Node and Its Children
 page_title: Clone a TreeView Node and Its Children | Kendo UI TreeView
-description: "Learn how to clone (copy) the selected node and its children in a kendo UI TreeView."
+description: "Learn how to clone (copy) the selected node and its children in a Kendo UI TreeView."
 slug: howto_clonenodeandchildren_treeview
 ---
 
@@ -11,13 +11,15 @@ The example below demonstrates how to clone (copy) a Kendo UI TreeView node toge
 
 The notable steps to achieve this behavior are:
 * Use the [`select`](/api/javascript/ui/treeview#methods-select) method of the TreeView to obtain the selected node as a jQuery object. The second example below uses a context menu instead.
-* Use the [`parent`](/api/javascript/ui/treeview#methods-parent) method to get the selected node's parent node.
+* Use the [`parent`](/api/javascript/ui/treeview#methods-parent) method to get the parent node of the selected node.
 * Use the [`dataItem`](/api/javascript/ui/treeview#methods-dataItem) method to obtain the data item (Kendo UI Model), which corresponds to the selected node.
 * Use the [`toJSON`](/api/javascript/data/model#methods-toJSON) method of the Model to strip proprietary information from the data item and its children, and convert them to a plain JavaScript object.
 * (Optional) Deselect and collapse the cloned node before appending it to the TreeView.
 * Use the [`append`](/api/javascript/ui/treeview#methods-append), [`insertAfter`](/api/javascript/ui/treeview#methods-insertAfter), or [`insertBefore`](/api/javascript/ui/treeview#methods-insertBefore) method of the TreeView to add the cloned node to the desired location in the item structure of the widget. In this example, nodes are cloned at the same level.
 
-###### Example - copy the selected node
+The example below demonstrates how to copy the selected node.
+
+###### Example
 
 ```html
     <p><button class="k-button" id="cloneNode">Clone selected node</button></p>
@@ -78,7 +80,9 @@ The notable steps to achieve this behavior are:
 
 Here is a variation of the above approach, which relies on a context menu click, instead of selection.
 
-###### Example - copy the right-clicked node
+The example below demonstrates how to copy the right-clicked node.
+
+###### Example
 
 ```html
 <div id="treeview"></div>
@@ -118,7 +122,7 @@ Here is a variation of the above approach, which relies on a context menu click,
             alignToAnchor: true,
             select: function (e) {
                 var selectedNode = e.target;
-                
+
                 // find the parent node of the selected node;
                 // passing a falsy value as the second append() parameter
                 // will append the node to the root group

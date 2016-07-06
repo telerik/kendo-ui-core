@@ -14,8 +14,7 @@ The [Kendo UI Drawing API](http://demos.telerik.com/kendo-ui/drawing/index) supp
 
 Using the `drawing.drawDOM` function you can draw a DOM element into a [`drawing.Group`](/api/dataviz/drawing/group), which you are then able to render with one of the supported backends into SVG, PDF, HTML5 `<canvas>`, or VML format.
 
-The DOM element must be appended to the document and must be fully rendered, meaning that you cannot draw an element
-which has the `display: none`, or the `visibility: hidden` options. Assume that you have the following HTML in the page:
+The DOM element must be appended to the document and fully rendered, meaning that you cannot draw an element which has the `display: none`, or the `visibility: hidden` options. Assume that you have the following HTML in the page:
 
     <div id="drawMe" class="...">
       ... more HTML code here...
@@ -389,12 +388,13 @@ In this case, the DOM renderer will create a clone of the element so that it is 
 
 Images are safe to add here.
 
-### Off-screen Content
+### Off-Screen Content
 
-If you want the produce different content for export, or keep it hidden from the user, position the container outside the screen.
+To produce different content for export, or keep it hidden from the user, position the container outside the screen.
 
-The container has to be fully rendered, see [Getting Started](#getting-started) for details.
-The example uses absolute positioning to move the container off screen.
+The container has to be fully rendered. For more information, see the section on [getting started](#getting-started).
+
+The example below uses an absolute positioning to move the container off the screen.
 
 ###### Example
 
