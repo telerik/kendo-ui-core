@@ -90,9 +90,28 @@ test("include arrow after input.k-input", function(){
    equal(arrow.html(), "select");
 });
 
-test("text input should copy value of the hidden input on create", function() {
+test("text input should keep the visible input empty on init", function() {
    combobox = new ComboBox(input.val("item"), {
         autoBind: false
+   });
+
+   equal(combobox.input.val(), "");
+});
+
+test("text input shows options.text value", function() {
+    var text = "visible";
+    combobox = new ComboBox(input.val("item"), {
+        autoBind: false,
+        text: text
+    });
+
+    equal(combobox.input.val(), text);
+});
+
+test("bound widget should set text to the custom value", function() {
+   combobox = new ComboBox(input.val("item"), {
+        autoBind: true,
+        dataSource: []
    });
 
    equal(combobox.input.val(), input.val());

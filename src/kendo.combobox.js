@@ -766,7 +766,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             input.addClass(element.className)
-                 .val(this.options.text || element.value)
                  .css({
                     width: "100%",
                     height: element.style.height
