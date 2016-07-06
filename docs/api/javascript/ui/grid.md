@@ -663,14 +663,13 @@ Can be set to a JavaScript object which represents the filter cell configuration
 
 ### columns.filterable.cell.dataSource `Object|kendo.data.DataSource`
 
-Specifies custom dataSource for the AutoComplete when type of the column is string.  Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
-instance.
+Specifies a custom dataSource for the AutoComplete when the type of the column is `string`. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array, or an existing [`kendo.data.DataSource`](/api/javascript/data/datasource) instance.
 
-Using the same `dataSource` instance for the Grid, and the AutoComplete is not recommended, and causes negative side effects.
+It is not recommended that you use the same `dataSource` instance for the Grid and the AutoComplete because it causes negative side effects.
 
 If the `dataSource` options is missing, a new cloned instance of the Grid's dataSource will be used.
 
-If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascript/data/datasource) instance the widget will use that instance and will **not** initialize a new one.
+If the `dataSource` option is an existing [`kendo.data.DataSource`](/api/javascript/data/datasource) instance, the widget will use that instance and will _not_ initialize a new one.
 
 #### Example - custom cell filter autocomplete dataSource
 
@@ -778,9 +777,9 @@ Specifies the width of the input before it is initialized or turned into a widge
 
 ### columns.filterable.cell.suggestionOperator `String` *(default: "startswith")*
 
-Specifies the AutoComplete filter option. Possible values are same as the one for the AutoComplete filter option- "startswith", "endswith", "contains". The "contains" operator performs a case insensitive search. For case sensitive filtering, a custom filtering function can be set via the [dataSource.filter.operator](/api/javascript/data/datasource#configuration-filter.operator) option. 
+Specifies the AutoComplete `filter` option. The possible values are the same as the ones for the AutoComplete `filter` option - `"startswith"`, `"endswith"`, `"contains"`. The `"contains"` operator performs a case-insensitive search. To perform a case-sensitive filtering, set a custom filtering function through the [`dataSource.filter.operator`](/api/javascript/data/datasource#configuration-filter.operator) option.
 
-> Notice this operator is completely separate from the operator used for filtering on this column - check [operator](#configuration-columns.filterable.cell.operator).
+> This operator is completely independent from the operator used for the filtering on this column. For more inforamtion, check [`operator`](#configuration-columns.filterable.cell.operator).
 
 #### Example - Specifying suggestionOperator option for the filter cell of a column
 
