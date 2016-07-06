@@ -542,6 +542,7 @@
 
     asyncTest("update popup height when no items are found", 1, function() {
         var dropdownlist = new DropDownList(select, {
+            noDataTemplate: "",
             filter: "startswith",
             delay: 0,
             dataSource: [
@@ -560,6 +561,32 @@
         dropdownlist.bind("dataBound", function() {
             start();
             ok(dropdownlist.ul.height() < height);
+        });
+
+        dropdownlist.filterInput.focus().val("test").keydown();
+    });
+
+    asyncTest("update popup height when no items are found and noDataTemplate is defined", 1, function() {
+        var dropdownlist = new DropDownList(select, {
+            noDataTemplate: "No data found.",
+            filter: "startswith",
+            delay: 0,
+            dataSource: [
+                { text: "Black", value: "1" },
+                { text: "Orange", value: "2" },
+                { text: "Grey", value: "3" }
+            ],
+            dataTextField: "text",
+            dataValueField: "value"
+        });
+
+        dropdownlist.open();
+
+        var height = dropdownlist.ul.height();
+
+        dropdownlist.one("dataBound", function() {
+            start();
+            ok(!dropdownlist.ul.height());
         });
 
         dropdownlist.filterInput.focus().val("test").keydown();

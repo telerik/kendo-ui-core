@@ -372,43 +372,60 @@ test("AutoComplete keeps value when shared source is modified", function() {
     equal(autocomplete.value(), "foo1");
 });
 
-    test("resize popup on search when autoWidth is enabled", function(assert) {
-        var data = [{text: "Foooooooooooooo", value: 1, type: "a"}, {text:"Bar", value:2, type: "b"}, {text:"Baz", value:3, type: "a"}];
-        var autocomplete = new AutoComplete(input, {
-            autoWidth: true,
-            separator: ", ",
-            dataTextField: "ProductName",
-            autoBind: false,
-            minLenght: 3,
-            dataSource: {
-                serverFiltering: false,
-                transport: {
-                    read: function(options) {
-                        options.success([
-                            { ProductName: "ChaiiiiiiiiiiiiiiiiiiiiiiiiiiiiiChaiiiiiiiiiiiiiiiiiiiiiiiiiiiii", ProductID: 1 },
-                            { ProductName: "Tofu", ProductID: 2 },
-                            { ProductName: "Test3", ProductID: 3 },
-                            { ProductName: "Chai3", ProductID: 4 },
-                            { ProductName: "Test4", ProductID: 5 }
-                        ]);
-                    }
+test("resize popup on search when autoWidth is enabled", function(assert) {
+    var data = [{text: "Foooooooooooooo", value: 1, type: "a"}, {text:"Bar", value:2, type: "b"}, {text:"Baz", value:3, type: "a"}];
+    var autocomplete = new AutoComplete(input, {
+        autoWidth: true,
+        separator: ", ",
+        dataTextField: "ProductName",
+        autoBind: false,
+        minLenght: 3,
+        dataSource: {
+            serverFiltering: false,
+            transport: {
+                read: function(options) {
+                    options.success([
+                        { ProductName: "ChaiiiiiiiiiiiiiiiiiiiiiiiiiiiiiChaiiiiiiiiiiiiiiiiiiiiiiiiiiiii", ProductID: 1 },
+                        { ProductName: "Tofu", ProductID: 2 },
+                        { ProductName: "Test3", ProductID: 3 },
+                        { ProductName: "Chai3", ProductID: 4 },
+                        { ProductName: "Test4", ProductID: 5 }
+                    ]);
                 }
             }
-        });
-
-        var done1 = assert.async();
-        var done2 = assert.async();
-        autocomplete.one("open", function() {
-            assert.ok(autocomplete.wrapper.width() < autocomplete.popup.element.width());
-            autocomplete.close();
-            done1();
-            autocomplete.one("open", function() {
-                assert.ok(autocomplete.wrapper.width() >= autocomplete.popup.element.width());
-                done2();
-            });
-            autocomplete.search("Tof");
-        });
-        autocomplete.search("");
-
+        }
     });
+
+    var done1 = assert.async();
+    var done2 = assert.async();
+    autocomplete.one("open", function() {
+        assert.ok(autocomplete.wrapper.width() < autocomplete.popup.element.width());
+        autocomplete.close();
+        done1();
+        autocomplete.one("open", function() {
+            assert.ok(autocomplete.wrapper.width() >= autocomplete.popup.element.width());
+            done2();
+        });
+        autocomplete.search("Tof");
+    });
+    autocomplete.search("");
+
+});
+
+asyncTest("update popup height when no items are found", 1, function() {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: $.map(new Array(30), function(_, idx) { return "item" + idx.toString() })
+    });
+
+    autocomplete.search("item");
+
+    var oldHeight = autocomplete.list.height();
+
+    autocomplete.one("dataBound", function() {
+        start();
+        ok(autocomplete.list.height() < oldHeight);
+    });
+
+    autocomplete.element.focus().val("test").keydown();
+});
 }());

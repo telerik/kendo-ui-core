@@ -1019,4 +1019,22 @@ test("close popup opened on empty search result", 2, function(assert) {
     combobox.search("None");
     ok(!combobox.popup.visible());
 });
+
+asyncTest("update popup height when no items are found", 1, function() {
+    var combobox = new ComboBox(input, {
+        dataSource: $.map(new Array(30), function(_, idx) { return "item" + idx.toString() }),
+        filter: "contains"
+    });
+
+    combobox.open();
+
+    var oldHeight = combobox.list.height();
+
+    combobox.one("dataBound", function() {
+        start();
+        ok(combobox.list.height() < oldHeight);
+    });
+
+    combobox.input.focus().val("test").keydown();
+});
 })();

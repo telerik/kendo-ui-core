@@ -524,7 +524,7 @@ var __meta__ = { // jshint ignore:line
             var offsetTop;
             var popups;
 
-            if (length) {
+            if (length || that.options.noDataTemplate) {
                 popups = list.add(list.parent(".k-animation-container")).show();
 
                 if (!list.is(":visible")) {
