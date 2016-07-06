@@ -301,6 +301,34 @@ If set to `false` the widget will be disabled and will not allow user input. The
     });
     </script>
 
+### enforceMinLength `Boolean` *(default: false)*
+
+If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](#configuration-minLength).
+
+#### Example - enforce minLength
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+        placeholder: "Select product",
+        dataTextField: "ProductName",
+        dataValueField: "ProductID",
+        filter: "contains",
+        autoBind: false,
+        minLength: 3,
+        enforceMinLength: true,
+        dataSource: {
+            type: "odata",
+            serverFiltering: true,
+            transport: {
+                read: {
+                    url: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                }
+            }
+        }
+    });
+    </script>
+
 ### filter `String`*(default: "none")*
 
 The filtering method used to determine the suggestions for the current value. Filtration is turned off by default.

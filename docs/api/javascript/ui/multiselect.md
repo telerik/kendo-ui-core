@@ -283,6 +283,37 @@ If set to `false` the widget will be disabled and will not allow user input. The
     });
     </script>
 
+### enforceMinLength `Boolean` *(default: false)*
+
+If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](#configuration-minLength).
+
+#### Example - enforce minLength
+
+    <input id="multiselect" />
+    <script>
+    $("#multiselect").kendoMultiSelect({
+        placeholder: "Select products...",
+        dataTextField: "ProductName",
+        dataValueField: "ProductID",
+        autoBind: false,
+        minLength: 3,
+        enforceMinLength: true,
+        dataSource: {
+            type: "odata",
+            serverFiltering: true,
+            transport: {
+                read: {
+                    url: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                }
+            }
+        },
+        value: [
+            { ProductName: "Chang", ProductID: 2 },
+            { ProductName: "Uncle Bob's Organic Dried Pears", ProductID: 7 }
+        ]
+    });
+    </script>
+
 ### filter `String`*(default: "startswith")*
 
 The filtering method used to determine the suggestions for the current value. Filtration is turned of by default.
