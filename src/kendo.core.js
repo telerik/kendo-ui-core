@@ -2246,8 +2246,9 @@ function pad(number, digits, end) {
 
         // IE10 touch zoom is living in a separate viewport
         if (support.browser.msie && (support.pointers || support.msPointers) && !positioned) {
-            result.top -= (window.pageYOffset - document.documentElement.scrollTop);
-            result.left -= (window.pageXOffset - document.documentElement.scrollLeft);
+            var sign = support.isRtl(element) ? 1 : -1;
+            result.top -= (window.pageYOffset + (sign * document.documentElement.scrollTop));
+            result.left -= (window.pageXOffset + (sign * document.documentElement.scrollLeft));
         }
 
         return result;
