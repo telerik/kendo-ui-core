@@ -38,9 +38,11 @@ The classic Editor is able to post its value automatically, because it is based 
 
 ### Inline Mode
 
-If you initialize the Editor from a `<div>`, it assumes its inline mode. The originating element is made contenteditable and is used by the widget to return its value.
+If you initialize the Editor from a `<div>`, it assumes its inline mode. The originating element is made content-editable and is used by the widget to return its value.
 
-> While it is possible to initialize an inline Editor from a non-div element (`p`, `h1`, etc), we strongly recommend `<div>`s. Table elements cannot be used for inline Editor creation, due to IE browser limitation.
+> **Important**
+>
+> While it is possible to initialize an inline Editor from a non-`div` element, such as `p`, `h1`, and others, it is strongly recommended that you use the `<div>`. Table elements cannot be used for creating an inline Editor because of Internet Explorer browser limitations.
 
 The inline Editor is not able to post its value and [this is something you must take care of](/web/editor/troubleshoot/troubleshooting). The Editor tools are only visible when the widget is focused. The Editor's content resides on the main web page, so the page styling can influence the editable content.
 
@@ -48,11 +50,11 @@ The inline Editor is not able to post its value and [this is something you must 
 
 > **Important**  
 >
-> Due to the iOS Safari browser's limited `iframe` support, the inline mode of the Editor is recommended to use on iOS devices.
+> Due to the limited `iframe` support of the iOS Safari browser, the inline mode of the Editor is recommended to use on iOS devices.
 
 ## Configuration
 
-The Editor tools can be configured through the [`tools` configuration option](/api/web/editor#tools).
+It is possible to configure the Editor tools through the [`tools` configuration option](/api/web/editor#tools).
 
 ### Define Sets of Editor Tools
 

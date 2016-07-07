@@ -16,11 +16,11 @@ slug: breakingchanges2016_kendoui
 
 * **DropDownList/ComboBox/MultiSelect**: The widget will not update the OPTION [`selected`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#attr-selected) attribute to keep the behavior of the  [`defaultSelected`](https://developer.mozilla.org/en/docs/Web/API/HTMLOptionElement#Properties) property. For more information, refer to this [Github issue](https://github.com/telerik/kendo-ui-core/issues/1660).
 
-* **MultiSelect**: The widget with a 'single' tag mode will deselect all selected items on BACKSPACE/DELETE keyboard press. The previous behavior cannot be reverted.
+* **MultiSelect**: The widget with a 'single' tag mode will deselect all selected items on **Backspace** or **Delete** keyboard press. The previous behavior is impossible to revert.
 
-* **DropDownList/ComboBox**: The widget will not bind on open if `autoBind: false` and `minLength` is set to higher that 1.
+* **DropDownList/ComboBox**: The widget will not bind on open if `autoBind` is set to `false` and `minLength` is set to a value higher than 1.
 
-* **Validator**: The email validation rule has been changed to match the [HTML5 specification suggests for browsers to use](https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address). If the previous behavior is required, the email validation rule should be overriden by [specifing a custom rule](/controls/editors/validator/overview#custom-rules-for-validation) with the `email` key.
+* **Validator**: The email validation rule has been changed to match the [HTML5 specification suggests for browsers to use](https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address). If the previous behavior is required, the email validation rule should be overridden by [specifying a custom rule](/controls/editors/validator/overview#custom-rules-for-validation) with the `email` key.
 
 ### Changes from 2016 R2
 
