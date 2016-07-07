@@ -26,6 +26,9 @@ The example below demonstrates how to set up a color-picking custom editor.
 
 ###### Example
 
+```html
+  <div id="spreadsheet" style="width: 100%;"></div>
+  <script>
     kendo.spreadsheet.registerEditor("color", function(){
         var context, dlg, model;
 
@@ -83,6 +86,27 @@ The example below demonstrates how to set up a color-picking custom editor.
             }
         }
     });
+
+   $(function() {
+       $("#spreadsheet").kendoSpreadsheet({
+           sheetsbar: false,
+           excel: {
+               // Required to enable Excel Export in some browsers
+               proxyURL: "//demos.telerik.com/kendo-ui/service/export"
+           },
+           sheets: [{
+               rows: [{
+                   cells: [
+                       { value: "Select color:", bold: true },
+                       { background: "#fef0cd",
+                         editor: "color" }
+                   ]
+               }]
+           }]
+       });
+   });
+  </script>
+```
 
 Once the editor is defined, apply it through the API to any cell.
 
