@@ -1039,9 +1039,9 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            this.noData = this.content.after('<div class="k-nodata" style="display:none"></div>').next();
+            this.noData = this.content.after('<div class="k-nodata" style="display:none"><span></span></div>').next();
 
-            this.noData.html(this.templates.noDataTemplate({}));
+            this.noData.children(":first").html(this.templates.noDataTemplate({}));
 
             this.angular("compile", function() { return { elements: noData }; });
         },

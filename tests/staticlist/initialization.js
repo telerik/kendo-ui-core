@@ -202,6 +202,7 @@
 
         ok(list.noData);
         ok(list.noData.hasClass("k-nodata"));
+        equal(list.noData.children("span").length, 1);
         equal(list.noData.text(), list.options.noDataTemplate);
     });
 })();

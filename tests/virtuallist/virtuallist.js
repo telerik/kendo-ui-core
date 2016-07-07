@@ -492,6 +492,7 @@
         });
 
         ok(virtualList.noData)
+        equal(virtualList.noData.children("span").length, 1);
         ok(virtualList.noData.hasClass("k-nodata"))
         equal(virtualList.noData.text(), "no data");
     });
