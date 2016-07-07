@@ -3413,6 +3413,10 @@ This method expands the row.
 
 A string, DOM element or jQuery object which represents the table row. A string is treated as a jQuery selector.
 
+#### Returns
+
+`Promise`
+
 #### Example
 
     <div id="treeList"></div>
