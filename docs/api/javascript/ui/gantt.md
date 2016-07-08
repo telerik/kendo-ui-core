@@ -757,7 +757,7 @@ If the `dataSource` option is an existing [kendo.data.GanttDataSource](/api/java
 
 ### date `Date`
 
-If set to some date the timeline of the currently selected view is scrolled to start from this date.
+If set to some date and that is between the range start and range end of the selected view, the timeline of the currently selected view is scrolled to start from this date.
 
 #### Example
     <div id="gantt1"></div>
