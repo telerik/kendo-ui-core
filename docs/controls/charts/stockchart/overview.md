@@ -122,6 +122,8 @@ Kendo UI Stock Charts can be bound to both local and remote data via its DataSou
 
 The example below demonstrates a service that returns stock price history data as JSON.
 
+See the [Stock Chart Data Binding]({% slug databinding_kendoui_stockcharts %}) for a detailed discussion of the Stock Chart data binding specifics.
+
 ###### Example
 
 		[
@@ -175,10 +177,12 @@ Define the main and the Navigator series.
 		}
     });
 
+
 ## See Also
 
 Other articles on Kendo UI Charts and chart types:
 
+* [Stock Chart Data Binding]({% slug databinding_kendoui_stockcharts %})
 * [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
 * [Data Series Charts]({% slug seriestypeofcharts_widget %})
 * [Area Charts]({% slug areacharts_widget %})
