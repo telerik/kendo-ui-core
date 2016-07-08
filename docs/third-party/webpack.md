@@ -11,12 +11,13 @@ position: 9
 
 ## Include Kendo UI through the NPM package (recommended)
 
-Since the 2016 Q2 SP1 release, Both Kendo UI Core and Kendo UI Professional are distributed in NPM format.
-Check [the installation instructions](http://docs.telerik.com/kendo-ui/intro/installation/npm) and the [sample repository](https://github.com/telerik/kendo-ui-npm-example/tree/master/typescript-webpack).
+As of the Kendo UI 2016 Q2 SP1 release, Both Kendo UI Core and Kendo UI Professional are distributed in an NPM format. For more details, check [the installation instructions]({% slug kendoui_npm_packages_kendoui_installation %}) and the [sample repository](https://github.com/telerik/kendo-ui-npm-example/tree/master/typescript-webpack).
 
-> The typescript step is optional - the NPM package may be consumed from vanilla JavaScript or with the Babel transpiler.
+> **Important**
+> * The typescript step is optional&mdash;the NPM package may be consumed from vanilla JavaScript or with the Babel transpiler.
+> * The Kendo UI [TypeScript typings are global](https://github.com/typings/typings/blob/master/docs/faq.md#what-are-global-dependencies). This means that TypeScript will complain if you try to import the `kendo` object. Use the global reference instead.
 
-> **Impotant** The Kendo UI [TypeScript typings are global](https://github.com/typings/typings/blob/master/docs/faq.md#what-are-global-dependencies). This means that TypeScript will complain if you try to import the kendo object. You should use the global reference instead.
+###### Example
 
 ```typescript
 // This won't work
@@ -29,9 +30,9 @@ import 'kendo-ui-core';
 console.log(kendo);
 ```
 
-## Include the Kendo UI CDN/packaged scripts (AMD Format)
+## Include CDN or Packaged Kendo UI Scripts (AMD Format)
 
-The Kendo UI packaged scripts are in an AMD-compatible format, which means that they can be used by [Webpack](http://webpack.github.io). This article illustrates the necessary Webpack configuration for this setup.
+The Kendo UI packaged scripts are in an AMD-compatible format, which means that they can be used by [Webpack](http://webpack.github.io). This sections below demonstrate the necessary Webpack configuration for this setup.
 
 ## Obtain Packaged Kendo UI Script Files
 
@@ -50,37 +51,37 @@ Once the scripts are available and present in your project directory, the Webpac
 ### index.html
 
 ```html
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Kendo UI with webpack</title>
-  <!-- the styles may also be loaded with webpack -->
-  <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.112/styles/kendo.common.min.css">
-  <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.112/styles/kendo.default.min.css">
-  <meta charset="utf-8" />
-  <script src="bundle.js" type="text/javascript" charset="utf-8"></script>
-</head>
-<body>
-  <input id="ddl" />
-</body>
-</html>
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Kendo UI with webpack</title>
+      <!-- the styles may also be loaded with webpack -->
+      <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.112/styles/kendo.common.min.css">
+      <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.112/styles/kendo.default.min.css">
+      <meta charset="utf-8" />
+      <script src="bundle.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+    <body>
+      <input id="ddl" />
+    </body>
+    </html>
 ```
 
 ### main.js
 
 ```javascript
-require('jquery')
+    require('jquery')
 
-require('kendo.dropdownlist')
+    require('kendo.dropdownlist')
 
-$("#dropdownlist").kendoDropDownList({
-    dataTextField: "text",
-    dataValueField: "value",
-    dataSource: [
-      { text: "Item1", value: "1" },
-      { text: "Item2", value: "2" }
-    ]
-});
+    $("#dropdownlist").kendoDropDownList({
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: [
+          { text: "Item1", value: "1" },
+          { text: "Item2", value: "2" }
+        ]
+    });
 ```
 
 ### webpack.config.js
