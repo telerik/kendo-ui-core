@@ -23,7 +23,7 @@ must be set to indicate the field that contains the date of the data item.
 
 ## Binding Modes
 
-### Simple - Single Data Source
+### Single Data Source
 
 In this mode you assign a single data source the Stock Chart configuration. It is used for
 all series in the chart, including the Navigator pane below.
@@ -75,7 +75,7 @@ No additional requests will be made unless you use the Data Source API directly.
     </script>
 ```
 
-### Advanced - Master and Navigator Data Source
+### Master and Navigator Data Source
 
 In this mode you supply two data source instances to the Stock Chart -
 one for the main chart and one for the Navigator pane.
