@@ -382,6 +382,10 @@ var __meta__ = { // jshint ignore:line
                 that.element.kendoStop(true);
                 wrap.css({ overflow: HIDDEN }); // stop callback will remove hidden overflow
                 that.element.kendoAnimate(animation);
+
+                if (skipEffects) {
+                    that._animationClose();
+                }
             }
         },
 
