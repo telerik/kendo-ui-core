@@ -699,6 +699,10 @@ var __meta__ = { // jshint ignore:line
             return separator;
         },
 
+        _inputValue: function() {
+            return this.element.val();
+        },
+
         _search: function () {
             var that = this;
             clearTimeout(that._typingTimeout);

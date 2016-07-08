@@ -686,7 +686,11 @@ var __meta__ = { // jshint ignore:line
             this._blur();
         },
 
-        _filter: function(word) {
+        _inputValue: function() {
+            return this.text();
+        },
+
+        _searchByWord: function(word) {
             var that = this;
             var options = that.options;
             var dataSource = that.dataSource;
