@@ -374,6 +374,41 @@ var __meta__ = { // jshint ignore:line
             return this.listView.focus(candidate);
         },
 
+        _filter: function(options) {
+            var that = this;
+            var widgetOptions = that.options;
+            var ignoreCase = widgetOptions.ignoreCase;
+            var field = widgetOptions.dataTextField;
+
+            var expression = {
+                value: ignoreCase ? options.word.toLowerCase() : options.word,
+                field: field,
+                operator: widgetOptions.filter,
+                ignoreCase: ignoreCase
+            };
+
+            that._open = options.open;
+            that._filterSource(expression);
+
+        },
+
+        search: function(word) {
+            var options = this.options;
+
+            word = typeof word === "string" ? word : this._inputValue();
+
+            clearTimeout(this._typingTimeout);
+
+            if ((!options.enforceMinLength && !word.length) || word.length >= options.minLength) {
+                this._state = "filter";
+                if (!this._isFilterEnabled()) {
+                    this._searchByWord(word);
+                } else {
+                    this._filter({word: word, open: true});
+                }
+            }
+        },
+
         current: function(candidate) {
             return this._focus(candidate);
         },
@@ -842,33 +877,6 @@ var __meta__ = { // jshint ignore:line
 
                 that._old = that._accessor();
                 that._oldIndex = that.selectedIndex;
-            }
-        },
-
-        search: function(word) {
-            word = typeof word === "string" ? word : this.text();
-            var that = this;
-            var length = word.length;
-            var options = that.options;
-            var ignoreCase = options.ignoreCase;
-            var field = options.dataTextField;
-
-            clearTimeout(that._typingTimeout);
-
-            if ((!options.enforceMinLength && !length) || length >= options.minLength) {
-                that._state = "filter";
-
-                if (!that._isFilterEnabled()) {
-                    that._filter(word);
-                } else {
-                    that._open = true;
-                    that._filterSource({
-                        value: ignoreCase ? word.toLowerCase() : word,
-                        field: field,
-                        operator: options.filter,
-                        ignoreCase: ignoreCase
-                    });
-                }
             }
         },
 

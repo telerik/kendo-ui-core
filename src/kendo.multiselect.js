@@ -514,38 +514,14 @@ var __meta__ = { // jshint ignore:line
             that.trigger("dataBound");
         },
 
-        search: function(word) {
+        _inputValue: function() {
             var that = this;
-            var options = that.options;
-            var ignoreCase = options.ignoreCase;
-            var field = options.dataTextField;
             var inputValue = that.input.val();
-            var expression;
-            var length;
 
-            if (options.placeholder === inputValue) {
+            if (that.options.placeholder === inputValue) {
                 inputValue = "";
             }
-
-            clearTimeout(that._typingTimeout);
-
-            word = typeof word === "string" ? word : inputValue;
-
-            length = word.length;
-
-            if ((!options.enforceMinLength && !length) || length >= options.minLength) {
-                that._state = FILTER;
-                that._open = true;
-
-                expression = {
-                    value: ignoreCase ? word.toLowerCase() : word,
-                    field: field,
-                    operator: options.filter,
-                    ignoreCase: ignoreCase
-                };
-
-                that._filterSource(expression);
-            }
+            return inputValue;
         },
 
         value: function(value) {
