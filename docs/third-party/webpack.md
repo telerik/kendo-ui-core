@@ -8,6 +8,29 @@ position: 9
 
 # Webpack
 
+
+## Include Kendo UI through the NPM package (recommended)
+
+Since the 2016 Q2 SP1 release, Both Kendo UI Core and Kendo UI Professional are distributed in NPM format.
+Check [the installation instructions](http://docs.telerik.com/kendo-ui/intro/installation/npm) and the [sample repository](https://github.com/telerik/kendo-ui-npm-example/tree/master/typescript-webpack).
+
+> The typescript step is optional - the NPM package may be consumed from vanilla JavaScript or with the Babel transpiler.
+
+> **Impotant** The Kendo UI [TypeScript typings are global](https://github.com/typings/typings/blob/master/docs/faq.md#what-are-global-dependencies). This means that TypeScript will complain if you try to import the kendo object. You should use the global reference instead.
+
+```typescript
+// This won't work
+import kendo from 'kendo-ui-core';
+
+// This works
+
+import 'kendo-ui-core';
+
+console.log(kendo);
+```
+
+## Include the Kendo UI CDN/packaged scripts (AMD Format)
+
 The Kendo UI packaged scripts are in an AMD-compatible format, which means that they can be used by [Webpack](http://webpack.github.io). This article illustrates the necessary Webpack configuration for this setup.
 
 ## Obtain Packaged Kendo UI Script Files
