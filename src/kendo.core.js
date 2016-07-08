@@ -2244,6 +2244,12 @@ function pad(number, digits, end) {
 
         var result = element[type]();
 
+        if (support.mobileOS.android) {
+            // offset() is buggy in Android
+            result.top -= window.scrollY;
+            result.left -= window.scrollX;
+        }
+
         // IE10 touch zoom is living in a separate viewport
         if (support.browser.msie && (support.pointers || support.msPointers) && !positioned) {
             var sign = support.isRtl(element) ? 1 : -1;
