@@ -129,6 +129,19 @@ The hint displayed by the widget when it is empty. Not set by default.
     });
     </script>
 
+### round `Boolean`*(default: true)*
+
+ Specifies whether the value should be rounded or truncated. The length of the fraction is defined by the `decimals` value.
+
+#### Example
+
+    <input id="numerictextbox" />
+    <script>
+    $("#numerictextbox").kendoNumericTextBox({
+        round: false
+    });
+    </script>
+
 ### spinners `Boolean`*(default: true)*
 
  Specifies whether the up and down spin buttons should be rendered

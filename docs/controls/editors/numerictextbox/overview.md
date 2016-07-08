@@ -24,7 +24,7 @@ The [Kendo UI NumericTextBox widget](http://demos.telerik.com/kendo-ui/numericte
 
 When a NumericTextBox is initialized, it will automatically wrap the `<input>` element with a `<span>` tag and render spin buttons.
 
-> **Important**  
+> **Important**
 > When getting a reference to the widget, you should always use `id` instead of a class selector. Behind the scenes, the NumericTextBox creates a secondary element that is used to represent the visual look of the widget, and copies over all non-`id` attributes, including the class. This will cause unexpected results when the class is sued for widget referencing.
 
 ## Configuration
@@ -35,6 +35,7 @@ NumericTextBox provides configuration options that can be set during initializat
 *   Minimum and/or maximum values
 *   Increment step
 *   Precision of number
+*   Rounding of number
 *   Number format (any valid number format is allowed)
 
 For a complete overview of the methods and configuration options NumericTextBox applies, [review its API Reference](/api/javascript/ui/numerictextbox).
@@ -87,7 +88,12 @@ The example below demonstartes how to create a percentage NumericTextBox widget.
         });
     </script>
 
-### Support fro label Element
+### Number rounding
+
+The widget controls the precision of the entered number using "half-up" rounding technique. This functionality can be disabled with the [round](/api/javascript/ui/numerictextbox#configuration-round) configuration option.
+Once the rounding is turned off, the value will be truncated up to the desired precision length, without rounding the value.
+
+### Support for label Element
 
 Because of its complex rendering, focusing the widget by using a label element requires additional implementation. For more information about how to do it, check this [this Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
 
