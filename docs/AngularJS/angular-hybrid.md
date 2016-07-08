@@ -25,7 +25,7 @@ As of the Kendo UI Q3 2014 release, Kendo UI includes AngularJS directives for s
                 </kendo-mobile-nav-bar>
             </kendo-mobile-header>
 
-            {{hello}}
+            {% raw %} {{hello}} {% endraw %}
         </kendo-mobile-view>
 
         <script>

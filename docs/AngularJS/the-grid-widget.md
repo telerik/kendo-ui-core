@@ -40,7 +40,7 @@ The example below demonstrates how to use the `headerAttributes` to prevent the 
                 },
                 columns: [{
                     field: "FirstName",
-                    title: "First Name {{1+1}}",
+                    title: "First Name {% raw %}{{1+1}}{% endraw %}",
                     headerAttributes: {"ng-non-bindable": true},
                     width: "180px"
                     },{
@@ -99,9 +99,9 @@ The example below demonstrates how to handle the `change` event in AngularJS.
   <div kendo-grid k-options="gridOptions" k-rebind="gridOptions.selectable"
        k-on-change="handleChange(data, dataItem, columns)"></div>
   <pre>
-  data: {{ data | json }}
-  columns: {{ columns | json }}
-  <span ng-show="gridOptions.selectable == 'row' || gridOptions.selectable == 'cell'">DataItem: {{ dataItem | json }}</span>
+  data: {% raw %}{{ data | json }}{% endraw %}
+  columns: {% raw %}{{ columns | json }}{% endraw %}
+  <span ng-show="gridOptions.selectable == 'row' || gridOptions.selectable == 'cell'">DataItem: {% raw %}{{ dataItem | json }}{% endraw %}</span>
   </pre>
 </div>
 <script>
@@ -177,10 +177,12 @@ The example below demonstrates how to set the Grid row template (`rowTemplate`) 
   <div kendo-grid k-options="gridOptions" k-ng-delay="gridOptions">
     <table>
         <tr k-row-template data-uid="#: uid #">
-            <td colspan="2" style="text-align:center">This is <strong>{{dataItem.text}}</strong> and has an ID of {{dataItem.id}}</td>
+            <td colspan="2" style="text-align:center">This is <strong>{% raw %}{{dataItem.text}}{% endraw %}</strong>
+                and has an ID of {% raw %}{{dataItem.id}}{% endraw %}</td>
         </tr>
         <tr k-alt-row-template class="k-alt" data-uid="#: uid #">
-            <td colspan="2" style="text-align:center">This is <strong>{{dataItem.text}}</strong> and has an ID of {{dataItem.id}}</td>
+            <td colspan="2" style="text-align:center">This is <strong>{% raw %}{{dataItem.text}}{% endraw %}</strong>
+                and has an ID of {% raw %}{{dataItem.id}}{% endraw %}</td>
         </tr>
     </table>
   </div>
@@ -209,7 +211,7 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
 
 > **Important**
 >
-> When using `rowTemplate`, include the `data-uid="#: uid #"` attribute in the toplevel row element as described in the [Grid documentation]({% slug howto_use_dates_inside_row_template_grid %}). You must not use an AngularJS template like `data-uid="{{dataItem.uid}}"` because it is compiled after the grid is displayed and the widget cannot discriminate between the different rows and the data items they belong to.
+> When using `rowTemplate`, include the `data-uid="#: uid #"` attribute in the toplevel row element as described in the [Grid documentation]({% slug howto_use_dates_inside_row_template_grid %}). You must not use an AngularJS template like `data-uid="{% raw %}{{dataItem.uid}}{% endraw %}"` because it is compiled after the grid is displayed and the widget cannot discriminate between the different rows and the data items they belong to.
 
 ## Server Requests
 
