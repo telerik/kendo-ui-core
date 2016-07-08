@@ -1040,7 +1040,7 @@ function pad(number, digits, end) {
         value = value.toString().split('e');
         value = +(value[0] + 'e' + (value[1] ? (+value[1] - precision) : -precision));
 
-        return value.toFixed(precision);
+        return value.toFixed(Math.min(precision, 20));
     };
 
     var toString = function(value, fmt, culture) {
