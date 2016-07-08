@@ -507,6 +507,13 @@ By definition, the row template defines the row markup explicitly, while groupin
         });
     });
 
+#### Grouping with paging
+
+Paging occurs before grouping, otherwise the whole datasource should be grouped, which will greatly reduce the performance. As a result, the following behavior is exhibited:
+
+* the Grid dataSource instance is not aware if there are items from the displayed groups on other pages.
+* if groups are collapsed, additional items and groups from other pages cannot be displayed below the rendered items and groups. The only possible workaround is to increase the page size.
+
 ### Sorting
 
 Sorting is supported in two formats: either single-column sorting, or multi-column sorting. To enable single column sorting, set the `sortable` option of the Grid to `true`. This will enable the default single-column sorting:
