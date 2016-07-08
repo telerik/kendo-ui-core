@@ -261,4 +261,14 @@
         },200)
     });
 
+    test("widget restricts value without rounding it", function() {
+        var textbox = new NumericTextBox(input, {
+            round: false
+        });
+
+        textbox.focus();
+        textbox.element.val("10.556").blur();
+
+        equal(textbox.value(), 10.55);
+    });
 })();
