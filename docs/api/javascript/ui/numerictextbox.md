@@ -129,6 +129,20 @@ The hint displayed by the widget when it is empty. Not set by default.
     });
     </script>
 
+### restrictDecimals `Boolean`*(default: false)*
+
+ Specifies whether the decimals length should be restricted during typing. The length of the fraction is defined by the `decimals` value.
+
+#### Example
+
+    <input id="numerictextbox" />
+    <script>
+    $("#numerictextbox").kendoNumericTextBox({
+        decimals: 3,
+        restrictDecimals: true
+    });
+    </script>
+
 ### round `Boolean`*(default: true)*
 
  Specifies whether the value should be rounded or truncated. The length of the fraction is defined by the `decimals` value.

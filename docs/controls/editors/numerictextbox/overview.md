@@ -88,6 +88,13 @@ The example below demonstartes how to create a percentage NumericTextBox widget.
         });
     </script>
 
+### Number precision
+
+The widget controls the precision of the entered number using the value of the [decimals](/api/javascript/ui/numerictextbox#configuration-decimals) option. The number will be limited to the `decimals` length.
+
+By default, widget does not restrict the length of the typed value. If you would like to enforce a specific fraction length during editing, then you will need to set [`restrictDecimals`](/api/javascript/ui/numerictextbox#configuration-restrictDecimals)
+option to *true*.
+
 ### Number rounding
 
 The widget controls the precision of the entered number using "half-up" rounding technique. This functionality can be disabled with the [round](/api/javascript/ui/numerictextbox#configuration-round) configuration option.
