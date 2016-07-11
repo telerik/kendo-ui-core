@@ -344,7 +344,7 @@ The logical operation to use when the `filter.filters` option is set. The suppor
 ### filter.operator `String`
 
 The filter operator (comparison). The supported operators are: "eq" (equal to), "neq" (not equal to), "isnull" (is equal to null), "isnotnull" (is not equal to null), "lt" (less than), "lte" (less than or equal to), "gt" (greater than), "gte" (greater than or equal to),
-"startswith", "endswith", "contains", "isempty", "isnotempty". The last five are supported only for string fields.
+"startswith", "endswith", "contains", "doesnotcontain", "isempty", "isnotempty". The last five are supported only for string fields.
 
 #### Example - set the filter operator
 
@@ -1145,7 +1145,7 @@ If set to `true`, the data source will leave the aggregate calculation to the re
 
 > Configure [`schema.aggregates`](#configuration-schema.aggregates) if you set `serverAggregates` to `true`.
 
-For more information and tips about client and server data operations, refer to the [introductory article on the DataSource]({% slug overview_kendoui_datasourcecomponent %}#mixed-data-operations-mode).  
+For more information and tips about client and server data operations, refer to the [introductory article on the DataSource]({% slug overview_kendoui_datasourcecomponent %}#mixed-data-operations-mode).
 
 #### Example - enable server aggregates
 
@@ -1179,7 +1179,7 @@ For example, the filter `{ logic: "and", filters: [ { field: "name", operator: "
 
 Use the [`parameterMap`](#configuration-transport.parameterMap) option to send the filter option in a different format.
 
-For more information and tips about client and server data operations, refer to the [introductory article on the DataSource]({% slug overview_kendoui_datasourcecomponent %}#mixed-data-operations-mode).  
+For more information and tips about client and server data operations, refer to the [introductory article on the DataSource]({% slug overview_kendoui_datasourcecomponent %}#mixed-data-operations-mode).
 
 #### Example - enable server filtering
 
