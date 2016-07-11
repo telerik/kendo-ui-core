@@ -25,6 +25,7 @@ The [Kendo UI NumericTextBox widget](http://demos.telerik.com/kendo-ui/numericte
 When a NumericTextBox is initialized, it will automatically wrap the `<input>` element with a `<span>` tag and render spin buttons.
 
 > **Important**
+>
 > When getting a reference to the widget, you should always use `id` instead of a class selector. Behind the scenes, the NumericTextBox creates a secondary element that is used to represent the visual look of the widget, and copies over all non-`id` attributes, including the class. This will cause unexpected results when the class is sued for widget referencing.
 
 ## Configuration
@@ -42,7 +43,7 @@ For a complete overview of the methods and configuration options NumericTextBox 
 
 ### Defaults
 
-The example below demonstrates how to customize NumericTextBox defaults.
+The example below demonstrates how to customize the default settings of the NumericTextBox.
 
 ###### Example
 
@@ -75,7 +76,7 @@ The example below demonstrates how to create a currency NumericTextBox widget.
 
 ### Percentage NumericTextBox
 
-The example below demonstartes how to create a percentage NumericTextBox widget.
+The example below demonstrates how to create a percentage NumericTextBox widget.
 
 ###### Example
 
@@ -88,17 +89,15 @@ The example below demonstartes how to create a percentage NumericTextBox widget.
         });
     </script>
 
-### Number precision
+### Precision of Numbers
 
-The widget controls the precision of the entered number using the value of the [decimals](/api/javascript/ui/numerictextbox#configuration-decimals) option. The number will be limited to the `decimals` length.
+The widget controls the precision of the entered number using the value of the [`decimals`](/api/javascript/ui/numerictextbox#configuration-decimals) option. The number will be limited to the `decimals` length.
 
-By default, widget does not restrict the length of the typed value. If you would like to enforce a specific fraction length during editing, then you will need to set [`restrictDecimals`](/api/javascript/ui/numerictextbox#configuration-restrictDecimals)
-option to *true*.
+By default, the widget does not restrict the length of the typed value. To enforce a specific fraction length during editing, set the [`restrictDecimals`](/api/javascript/ui/numerictextbox#configuration-restrictDecimals) option to `true`.
 
-### Number rounding
+### Rounding of Numbers
 
-The widget controls the precision of the entered number using "half-up" rounding technique. This functionality can be disabled with the [round](/api/javascript/ui/numerictextbox#configuration-round) configuration option.
-Once the rounding is turned off, the value will be truncated up to the desired precision length, without rounding the value.
+The widget controls the precision of the entered number using the half-up rounding technique. This functionality can be disabled through the [`round`](/api/javascript/ui/numerictextbox#configuration-round) configuration option. Once the rounding is turned off, the value will be truncated up to the desired precision length, without rounding the value.
 
 ### Support for label Element
 
