@@ -99,6 +99,10 @@ var __meta__ = { // jshint ignore:line
             this.events.cancel();
         },
 
+        destroy: function() {
+            this.events.destroy();
+        },
+
         _triggerTouch: function(type, e) {
             if (this.trigger(type, { touch: e.touch, event: e.event })) {
                 e.preventDefault();
