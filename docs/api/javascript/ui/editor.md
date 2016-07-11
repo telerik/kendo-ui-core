@@ -1608,7 +1608,7 @@ If enabled, the editor disables the editing and command execution in elements ma
       tools: [
         "bold", "italic", "underline", "justifyLeft", "justifyCenter", "justifyRight", "insertUnorderedList", "insertOrderedList", "indent", "outdent", "createLink", "unlink", "insertImage", "createTable", "viewHtml"
       ],
-      value: '<p>editable content</p><p contenteditable="false">content, which <span style="color:red;">can not</span> be changed</p><p contenteditable="false">editable content</p>',
+      value: '<p>editable content</p><p contenteditable="false">content, which <span style="color:red;">can not</span> be changed</p><p contenteditable="false">immutable content</p>',
       immutables: true
     });
     </script>
@@ -1625,10 +1625,9 @@ Kendo template or a callback that allows custom serialization of an immutable el
       tools: [
         "bold", "italic", "underline", "justifyLeft", "justifyCenter", "justifyRight", "insertUnorderedList", "insertOrderedList", "indent", "outdent", "createLink", "unlink", "insertImage", "createTable", "viewHtml"
       ],
-      value: '<p>editable content</p><p contenteditable="false">content, which <span style="color:red;">can not</span> be changed</p><p contenteditable="false">editable content</p>',
+      value: '<p>editable content</p><p contenteditable="false">content, which <span style="color:red;">can not</span> be changed</p><p contenteditable="false">immutable content</p>',
       immutables: {
           serialization: "<#= data.nodeName # data=\"immutable-element\"></#= data.nodeName #>"
-        }
       }
     });
     </script>
@@ -1641,7 +1640,7 @@ Kendo template or a callback that allows custom serialization of an immutable el
       tools: [
         "bold", "italic", "underline", "justifyLeft", "justifyCenter", "justifyRight", "insertUnorderedList", "insertOrderedList", "indent", "outdent", "createLink", "unlink", "insertImage", "createTable", "viewHtml"
       ],
-      value: '<p>editable content</p><p contenteditable="false">content, which <span style="color:red;">can not</span> be changed</p><p contenteditable="false">editable content</p>',
+      value: '<p>editable content</p><p contenteditable="false">content, which <span style="color:red;">can not</span> be changed</p><p contenteditable="false">immutable content</p>',
       immutables: {
         serialization: function(node) {
           var tagName = node.tagName;
