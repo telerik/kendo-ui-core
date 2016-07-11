@@ -237,6 +237,33 @@
         });
     });
 
+    test("Allow infinite decimal digits", 0, function() {
+        var textbox = new NumericTextBox(input);
+
+        input.val("2.22222");
+
+        input.pressKey("4", {
+            preventDefault: function() {
+                ok(false);
+            }
+        });
+    });
+
+    test("Prevent decimals digits after precision is reached", 1, function() {
+        var textbox = new NumericTextBox(input, {
+            decimals: 3,
+            restrictDecimals: true
+        });
+
+        input.val("2.222");
+
+        input.pressKey("4", {
+            preventDefault: function() {
+                ok(true);
+            }
+        });
+    });
+
     test("Focus origin input on touched", 1, function() {
         kendo.support.mobileOS = true;
 

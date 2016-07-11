@@ -120,6 +120,7 @@ var __meta__ = { // jshint ignore:line
         options: {
             name: "NumericTextBox",
             decimals: NULL,
+            restrictDecimals: false,
             min: NULL,
             max: NULL,
             value: NULL,
@@ -496,6 +497,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var separator = numberFormat[POINT];
             var precision = that.options.decimals;
+            var fractionRule = "*";
 
             if (separator === POINT) {
                 separator = "\\" + separator;
@@ -509,9 +511,13 @@ var __meta__ = { // jshint ignore:line
                 return INTEGER_REGEXP;
             }
 
+            if (that.options.restrictDecimals) {
+                fractionRule = "{0," + precision + "}";
+            }
+
             if (that._separator !== separator) {
                 that._separator = separator;
-                that._floatRegExp = new RegExp("^(-)?(((\\d+(" + separator + "\\d*)?)|(" + separator + "\\d*)))?$");
+                that._floatRegExp = new RegExp("^(-)?(((\\d+(" + separator + "\\d" + fractionRule + ")?)|(" + separator + "\\d" + fractionRule + ")))?$");
             }
 
             return that._floatRegExp;
