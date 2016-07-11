@@ -26,6 +26,15 @@
         press(element);
     });
 
+    test("unbinds on destroy", 0, function() {
+        touch.bind("touchstart", function() {
+            ok(false);
+        });
+
+        touch.destroy();
+        press(element);
+    });
+
     test("triggers dragstart on press + move", 1, function() {
         touch.bind("dragstart", function() {
             ok(true);
