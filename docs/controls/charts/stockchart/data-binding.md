@@ -10,8 +10,12 @@ position: 2
 
 The Kendo UI Stock Chart provides two main modes for binding to data.
 
-You can bind the Stock Chart to a single data source or
-chose to provide an additional data source for the Navigator.
+In the first mode a single Data Source instance is used for both the
+main and Navigator pane.
+
+A second data source can be configured to load the Navigator data,
+usually with reduced time resolution. This mode enables filtering
+on the main data source and can be made more efficient.
 
 In both cases a [dateField](/api/javascript/dataviz/ui/stock-chart#configuration-dateField)
 must be set to indicate the field that contains the date of the data item.
@@ -25,13 +29,14 @@ must be set to indicate the field that contains the date of the data item.
 
 ### Single Data Source
 
-In this mode you assign a single data source the Stock Chart configuration. It is used for
-all series in the chart, including the Navigator pane below.
-You can see it in action in the [Basic Usage demo](http://demos.telerik.com/kendo-ui/financial/virtualization).
+In this mode the Stock Chart is set up with a single data source.
+It is used for all series in the chart, including the Navigator pane below.
+
+See it in action in the [Basic Usage demo](http://demos.telerik.com/kendo-ui/financial/virtualization).
 
 The Data Source is [fetched](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-fetch)
 once and filtered internally by the chart.
-No additional requests will be made unless you use the Data Source API directly.
+No additional requests will be made unless the Data Source API methods are invoked.
 
 ##### Example - Stock Chart with a single data source
 
@@ -77,11 +82,11 @@ No additional requests will be made unless you use the Data Source API directly.
 
 ### Master and Navigator Data Source
 
-In this mode you supply two data source instances to the Stock Chart -
+In this mode the Stock Chart is set up with two data source instances -
 one for the main chart and one for the Navigator pane.
-You can see it in action in the [Virtualization demo](http://demos.telerik.com/kendo-ui/financial/virtualization).
+See it in action in the [Virtualization demo](http://demos.telerik.com/kendo-ui/financial/virtualization).
 
-This mode makes sense when you can provide views over the data with different time resolution.
+This mode makes sense when the service can provide views over the data with different time resolution.
 The Navigator can then load low a resolution preview while the main data source handles the detailed data.
 
 The data for the Navigator will be fetched only once and without any filters.
@@ -95,6 +100,69 @@ Even without server filtering, there'll be reduction of the processing time need
 
 Each subsequent pan, zoom and selection operation will update the filters on the main data source
 and fetch it.
+
+##### Example - Master and Navigator Data Source
+
+```html
+    <div id="stock-chart"></div>
+    <script>
+    var stockDataSchema = {
+        model: {
+            fields: {
+                Date: {
+                    type: "date"
+                }
+            }
+        }
+    };
+
+    $("#stock-chart").kendoStockChart({
+        dataSource: {
+            serverFiltering: true,
+            transport: {
+                read: {
+                    url: "http://demos.telerik.com/kendo-ui/service/StockData",
+                    dataType: "jsonp"
+                },
+                parameterMap: function(data) {
+                    return { filter: JSON.stringify(data.filter) };
+                }
+            },
+            schema: stockDataSchema
+        },
+        title: {
+            text: "The ACME Company"
+        },
+        dateField: "Date",
+        series: [{
+            type: "candlestick",
+            openField: "Open",
+            highField: "High",
+            lowField: "Low",
+            closeField: "Close"
+        }],
+        navigator: {
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "http://demos.telerik.com/kendo-ui/service/StockData",
+                        dataType: "jsonp"
+                    }
+                },
+                schema: stockDataSchema
+            },
+            series: {
+                type: "area",
+                field: "High"
+            },
+            select: {
+                from: "2009/02/05",
+                to: "2011/10/07"
+            }
+        }
+    });
+    </script>
+```
 
 > **Important**
 >
