@@ -10,35 +10,27 @@ position: 2
 
 The Kendo UI Stock Chart provides two main modes for binding to data.
 
-In the first mode a single Data Source instance is used for both the
-main and Navigator pane.
+In the first mode, a single Data Source instance is used for both the main and the **Navigator** panes.
 
-A second data source can be configured to load the Navigator data,
-usually with reduced time resolution. This mode enables filtering
-on the main data source and can be made more efficient.
+A second data source can be configured to load the **Navigator** data, usually with reduced time resolution. This mode enables filtering on the main data source and can be made more efficient.
 
-In both cases a [dateField](/api/javascript/dataviz/ui/stock-chart#configuration-dateField)
-must be set to indicate the field that contains the date of the data item.
+In both cases, a [`dateField`](/api/javascript/dataviz/ui/stock-chart#configuration-dateField) must be set to indicate the field that contains the date of the data item.
 
 > **Important**
->
-> The Stock Chart supports only binding to time series.
-> Discrete categories and XY/scatter series are not supported.
+> * The Stock Chart supports only binding to time series.
+> * Discrete categories and XY/scatter series are not supported.
 
 ## Binding Modes
 
 ### Single Data Source
 
-In this mode the Stock Chart is set up with a single data source.
-It is used for all series in the chart, including the Navigator pane below.
+In this mode, the Stock Chart is set up with a single data source. It is used for all series in the Chart, including the **Navigator** pane below. To see the single data-binding mode in action, refer to the [demo on its basic usage](http://demos.telerik.com/kendo-ui/financial/virtualization).
 
-See it in action in the [Basic Usage demo](http://demos.telerik.com/kendo-ui/financial/virtualization).
+The Data Source is [fetched](/api/javascript/data/datasource#methods-fetch) once and filtered internally by the Chart. No additional requests will be made unless the Data Source API methods are invoked.
 
-The Data Source is [fetched](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-fetch)
-once and filtered internally by the chart.
-No additional requests will be made unless the Data Source API methods are invoked.
+The example below demonstrates a Stock Chart in a single data-binding mode.
 
-##### Example - Stock Chart with a single data source
+###### Example
 
 ```html
     <div id="stock-chart"></div>
@@ -82,26 +74,19 @@ No additional requests will be made unless the Data Source API methods are invok
 
 ### Master and Navigator Data Source
 
-In this mode the Stock Chart is set up with two data source instances -
-one for the main chart and one for the Navigator pane.
-See it in action in the [Virtualization demo](http://demos.telerik.com/kendo-ui/financial/virtualization).
+In this mode, the Stock Chart is set up with two data source instances&mdash;one for the main chart (master) and one for the **Navigator** pane (navigator). To see it in action, refer to the [demo on virtualization](http://demos.telerik.com/kendo-ui/financial/virtualization).
 
-This mode makes sense when the service can provide views over the data with different time resolution.
-The Navigator can then load low a resolution preview while the main data source handles the detailed data.
+This mode makes sense when the service is expected to provide views over the data with different time resolution. The navigator can then load a low resolution preview while the main data source handles the detailed data.
 
-The data for the Navigator will be fetched only once and without any filters.
-This can be changed by altering its configuration or calling methods on the DataSource directly.
-The fetched data will be displayed in its entirety in the navigator pane.
+The data for the **Navigator** will be fetched only once and without any filters. To change this behavior, alter its configuration or call methods directly on the DataSource. The fetched data will be displayed in its entirety in the **Navigator** pane.
 
-The main data source will be filtered based on the selected date range before being fetched.
-It is recommended to use [server filtering](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverFiltering)
-to make sure only the visible range data is transferred.
-Even without server filtering, there'll be reduction of the processing time needed by the chart to display the data.
+The main data source will be filtered based on the selected date range before being fetched. It is recommended to use [server filtering](/api/javascript/data/datasource#configuration-serverFiltering) to make sure that only the visible range data is transferred. Even without applying server filtering, there will be a reduction in the processing time needed by the Chart to display the data.
 
-Each subsequent pan, zoom and selection operation will update the filters on the main data source
-and fetch it.
+Each subsequent pan, zoom, and selection operation will update the filters on the main data source and fetch it.
 
-##### Example - Master and Navigator Data Source
+The example below demonstrates a Stock Chart in the master and navigator data-binding mode.
+
+##### Example
 
 ```html
     <div id="stock-chart"></div>
@@ -168,7 +153,10 @@ and fetch it.
 >
 > The filter field is always `Date` regardless of the `dateField` setting.
 
-##### Example - Sample filter submitted by the Stock Chart for the main data source
+The example below demonstrates a sample filter submitted by the Stock Chart for the main data source.
+
+##### Example
+
 ```json
 {
     "logic": "and",
