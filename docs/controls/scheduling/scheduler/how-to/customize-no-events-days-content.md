@@ -1,11 +1,11 @@
 ---
-title: Customize the Comtent of No Events Days
-page_title: Customize the Comtent of No Events Days | Kendo UI Scheduler
+title: Customize the Content of No Events Days
+page_title: Customize the Content of No Events Days | Kendo UI Scheduler
 description: "Learn how to customize the content of days with no events in a Kendo UI Scheduler."
 slug: howto_customize_no_events_days_content_scheduler
 ---
 
-# Customize the Comtent of No Events Days
+# Customize the Content of No Events Days
 
 The example below demonstrates how to customize the content of days with no events in a Kendo UI Scheduler.
 

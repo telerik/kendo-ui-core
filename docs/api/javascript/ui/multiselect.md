@@ -209,7 +209,7 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
 
 The field of the data item that provides the text content of the list items. The widget will filter the data source based on this field.
 
-> **Important** When `dataTextField` is defined, the`dataValueField` option also should be set.
+> **Important** When `dataTextField` is defined, the `dataValueField` option also should be set.
 
 #### Example - set the dataTextField
 
