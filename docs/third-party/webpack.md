@@ -40,6 +40,8 @@ This section is intended for holders of the commercial Kendo UI Complete license
 
 The commercial Kendo UI distribution `zip` file, available for download for the active customer subscriptions has the packaged scripts available in the `js` directory.
 
+However, Webpack will generally work better with source JavaScript files than it will with distribution-ready files that have already been minified and uglified.  Webpack can minify and uglify your final build files for you via its UglifyJsPlugin (example included below).  For this reason, you should point Webpack to use the files in the /src folder whenever that is available to you.
+
 ## Build AMD-Formatted Scripts
 
 This section is intended for users of the Kendo UI Core open-source distribution.
@@ -87,19 +89,29 @@ Once the scripts are available and present in your project directory, the Webpac
 ### webpack.config.js
 
 ```javascript
-var path = require('path')
+var path = require('path');
 module.exports = {
     resolve: {
         extensions: [ '', '.js', 'min.js' ],
         root: [
             path.resolve('.'),
-            path.resolve('../kendo/dist/js/') // the path to the minified scripts
+            path.resolve('../kendo/src/js/') // the path to the source scripts (preferable to dist scripts)
         ]
     },
     entry: './main',
     output: {
         filename: 'bundle.js'
-    }
+    },
+     plugins: [
+     // To have Webpack minify/uglify the file(s) that it builds.  Note: this will slow down
+     // the build process, so use for final build only, and not for development version when
+     // using webpack-dev-server.
+      new webpack.optimize.UglifyJsPlugin({
+          compress: {
+              warnings: false
+          }
+      })
+  ]
 }
 ```
 
