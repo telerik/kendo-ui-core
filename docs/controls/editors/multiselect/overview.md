@@ -269,7 +269,7 @@ The example below demonstrates how to define a `noDataTemplate` template.
 
 ## Configuration
 
-### Drop-Down List
+### Change Drop-Down List Width
 
 Customize the width of a drop-down list and change its dimensions by using the jQuery `width()` method.
 
@@ -282,6 +282,30 @@ Customize the width of a drop-down list and change its dimensions by using the j
 
         // set width of the drop-down list
         multiselect.list.width(400);
+    </script>
+
+### Access Drop-Down List Element
+
+The drop-down list renders an ID attribute, generated from the widget's ID and the '-list' suffix.
+
+The ID can be used to style the element or to access a specific element inside the popup element.
+
+> Drop-down element will not have ID if the widget doesn't have an ID
+
+###### Example
+
+    <select id="multiselect"></select>
+    <script>
+      $(document).ready(function() {
+        $("#multiselect").kendoMultiSelect({
+            dataSource: ["Item1", "Item2"]
+        });
+
+        //the DIV popup element that holds header, footer templates and the suggestion options.
+        var popupElement = $("#multiselect-list");
+
+        console.log(popupElement);
+      });
     </script>
 
 ### Pre-Selected Values

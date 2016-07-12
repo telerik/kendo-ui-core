@@ -130,7 +130,7 @@ To bind the widget to a JSONP service by using the Kendo UI DataSource, follow t
      })
     });
 
-### Drop-Down List
+### Change Drop-Down List Width
 
 To customize the width of a drop-down list and change its dimensions by using the jQuery `width()` method, follow the example below.
 
@@ -143,6 +143,30 @@ To customize the width of a drop-down list and change its dimensions by using th
         var autoComplete = $("#autocomplete").data("kendoAutoComplete");
         // set width of the drop-down list
         autoComplete.list.width(400);
+    </script>
+
+### Access Drop-Down List Element
+
+The drop-down list renders an ID attribute, generated from the widget's ID and the '-list' suffix.
+
+The ID can be used to style the element or to access a specific element inside the popup element.
+
+> Drop-down element will not have ID if the widget doesn't have an ID
+
+###### Example
+
+    <input id="autocomplete">
+    <script>
+      $(document).ready(function() {
+        $("#autocomplete").kendoAutoComplete({
+            dataSource: ["Item1", "Item2"]
+        });
+
+        //the DIV popup element that holds header, footer templates and the suggestion options.
+        var popupElement = $("#autocomplete-list");
+
+        console.log(popupElement);
+      });
     </script>
 
 ### Input Removal
