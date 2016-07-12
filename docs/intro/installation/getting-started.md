@@ -122,7 +122,7 @@ The change was driven by the [RFC 5545](http://tools.ietf.org/html/rfc5545#page-
 
 ### Bower Packages
 
-[Bower](http://bower.io/) is a popular package manager for the web. Kendo UI maintains 2 bower packages, namely Kendo UI Core and Kendo UI Professional. Official releases, service packs and internal builds are uploaded to both of them.
+[Bower](https://bower.io/) is a popular package manager for the web. Kendo UI maintains 2 bower packages, namely Kendo UI Core and Kendo UI Professional. Official releases, service packs and internal builds are uploaded to both of them.
 
 For more information on installing Kendo UI as a Bower package, see [this article]({% slug kendoui_bower_packages_kendoui_installation %}).
 
