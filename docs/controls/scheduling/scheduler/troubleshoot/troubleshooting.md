@@ -41,6 +41,15 @@ This behavior may be caused if the Scheduler [`timezone`](/api/javascript/ui/sch
 
 Set the timezone option of the Scheduler and make sure the dates on the remote service are saved in UTC. For more information about how to do this see the [Timezones help article](/web/scheduler/timezones).
 
+### Defined Timezone Is Not Applied
+
+In this case, the specified [timezone](/api/javascript/ui/scheduler#configuration-timezone) option is not recognized by the widget and the events are visualized with a specific time offset. This could happen
+when SchedulerDataSource instance is created separately, outside of the Scheduler widget.
+
+**Solution**
+
+Set directly the [schema.timezone](/api/javascript/data/schedulerdatasource#configuration-schema.timezone) option of the SchedulerDataSource instance to the desired value.
+
 ## Performance Issues
 
 ### When You Cancel Changes, Other Events Disappear
