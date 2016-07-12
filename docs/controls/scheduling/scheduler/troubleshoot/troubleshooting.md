@@ -37,7 +37,17 @@ In this case the server response of the create/destroy/update action is interpre
 
 This behavior may be caused if the Scheduler [`timezone`](/api/javascript/ui/scheduler#configuration-timezone) option is not set, or if the remote service does not keep dates in the correct format.
 
-**Solution**: Set the timezone option of the Scheduler and make sure the dates on the remote service are saved in UTC. For more information about how to do this see the [Timezones help article](/web/scheduler/timezones).
+**Solution**
+
+Set the timezone option of the Scheduler and make sure the dates on the remote service are saved in UTC. For more information about how to do this see the [Timezones help article](/web/scheduler/timezones).
+
+### Defined Timezone Is Not Applied
+
+In this case, the specified [`timezone`](/api/javascript/ui/scheduler#configuration-timezone) option is not recognized by the widget and the events are visualized with a specific time offset. This could happen when the `SchedulerDataSource` instance is created separately, outside the Scheduler.
+
+**Solution**
+
+Set directly the [`schema.timezone`](/api/javascript/data/schedulerdatasource#configuration-schema.timezone) option of the `SchedulerDataSource` instance to the desired value.
 
 ## Performance Issues
 
