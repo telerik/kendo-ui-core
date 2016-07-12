@@ -16,7 +16,7 @@ This page provides solutions for common problems you may encounter while working
 
 ## DataSource
 
-### Selected Item Loosed When Bound to Shared DataSource
+### Selected Item Is Lost When Bound to Shared DataSource
 
 The selected item of the widget is directly related to the data source view. If it does not contain the selected item, then the widget will remove its current value. This behavior is expected and the solution is to use separate data sources.
 
