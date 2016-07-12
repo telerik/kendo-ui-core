@@ -233,7 +233,7 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
 
 The field of the data item that provides the text content of the list items. The widget will filter the data source based on this field.
 
-> **Important** When `dataTextField` is defined, the`dataValueField` option also should be set.
+> When `dataTextField` is defined, the `dataValueField` option also should be set.
 
 #### Example - set the dataTextField
 
@@ -253,7 +253,7 @@ The field of the data item that provides the text content of the list items. The
 
 The field of the data item that provides the value of the widget.
 
-> **Important** When `dataValueField` is defined, the`dataTextField` option also should be set.
+> When `dataValueField` is defined, the `dataTextField` option also should be set.
 
 #### Example - set the dataValueField
 
@@ -472,7 +472,7 @@ The minimum number of characters the user must type before a filter is performed
 
 Specifies a static HTML content, which will be displayed if no results are found or the underlying data source is empty. The popup will open when 'noDataTemplate' is defined.
 
-> **Important** Widget does not pass a model to the noData template. Use this option only with static HTML.
+> The widget does not pass a model to the noData template. Use this option only with static HTML.
 
 #### Example - specify headerTemplate as a string
 
@@ -611,16 +611,14 @@ The available "x" positions are:
  Define the text of the default empty item. If the value is an object, then the widget will use it as a valid data item.
  Note that the optionLabel will not be available if the widget is empty.
 
-> **Important:** If `optionLabel` is an object, it needs to have at least `dataValueField` and `dataTextField` properties. Otherwise, widget will show `undefined`.
+> * If `optionLabel` is an object, it needs to have at least `dataValueField` and `dataTextField` properties. Otherwise, widget will show `undefined`.
 Note that the very same optionLabel object will be passed to the [valueTemplate](/api/javascript/ui/dropdownlist#configuration-valueTemplate). **You need to ensure that all required by the valueTemplate properties are present
 in the optionLabel object**.
-
-> **Important:** Since Q1 2015 (2015.1.318), the option label is rendered as a separate header template. The benefits of this change are:
+> * Since Q1 2015 (2015.1.318), the option label is rendered as a separate header template. The benefits of this change are:
 - the widget's value will be empty string even when `dataValueField` and `dataTextField` options are equal or not defined
 - the widget will not throw an exception when a custom item template is used and `optionLabel` is string
 - option label has a separate template, that gives more freedom for customization
-
-> **Important:** [Not relevant after Q1 2015] Widget's value will be equal to the `optionLabel` if the `dataValueField` and `dataTextField` options are equal or not defined
+> * [Not relevant after Q1 2015] Widget's value will be equal to the `optionLabel` if the `dataValueField` and `dataTextField` options are equal or not defined
 
 #### Example - specify optionLabel as a string
 
@@ -654,15 +652,14 @@ in the optionLabel object**.
 
 The [template](/api/javascript/kendo#methods-template) used to render the option label.
 
-> **Important:** Define the [optionLabel](/api/javascript/kendo#configuration-optionLabel) as **object** if complex template structure is used
+> Define the [optionLabel](/api/javascript/kendo#configuration-optionLabel) as **object** if complex template structure is used
 
 ### headerTemplate `String|Function`
 
 Specifies a static HTML content, which will be rendered as a header of the popup element.
 
-> **Important** The header content **should be wrapped** with a HTML tag if it contains more than one element. This is applicable also when header content is just a string/text.
-
-> **Important** Widget does not pass a model data to the header template. Use this option only with static HTML.
+> * The header content **should be wrapped** with a HTML tag if it contains more than one element. This is applicable also when header content is just a string/text.
+> * Widget does not pass a model data to the header template. Use this option only with static HTML.
 
 #### Example - specify headerTemplate as a string
 
@@ -977,9 +974,8 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
 
 The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
 
-> Changes of the data source will be reflected in the widget.
-
-> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](#methods-setDataSource) method instead.
+> * Changes of the data source will be reflected in the widget.
+> * Assigning a new data source would have no effect. Use the [setDataSource](#methods-setDataSource) method instead.
 
 #### Example - add a data item to the data source
     <input id="dropdownlist" />
@@ -1133,7 +1129,7 @@ The zero-based index of the data record.
 
 Prepares the **DropDownList** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
 
-> **Important:** This method does not remove the DropDownList element from DOM.
+> This method does not remove the DropDownList element from DOM.
 
 #### Example
 
@@ -1300,10 +1296,9 @@ The search value.
 
 Gets or sets the selected item. Selects the item provided as an argument and updates the value and text of the widget.
 
-> **Important:** When **virtualization** is enabled, the method **does not support** selection with a *function predicate*. The predicate function looks only
+> * When **virtualization** is enabled, the method **does not support** selection with a *function predicate*. The predicate function looks only
 in the current datasource view, which represents only the active range/page. Hence it will not work properly.
-
-> **Important:** This method **does not trigger** [change](#events-change) event.
+> * This method **does not trigger** [change](#events-change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
 
@@ -1482,12 +1477,10 @@ Defines the whether to open/close the drop-down list.
 
 Gets or sets the value of the DropDownList. The value will not be set if there is no item with such value. If value is undefined, text of the data item is used.
 
-> **Important:** If the widget is not bound (e.g. `autoBind` is set to `false`), the `value` method will pre-fetch the data before continuing with the value setting.
+> * If the widget is not bound (e.g. `autoBind` is set to `false`), the `value` method will pre-fetch the data before continuing with the value setting.
 **This does not apply when MVVM binding is used.**
-
-> **Important:** The widget will **clear the applied filter** if a new value is set. Thus it ensures that the original/whole data set is available for selection.
-
-> **Important:** This method **does not trigger** [change](#events-change) event.
+> * The widget will **clear the applied filter** if a new value is set. Thus it ensures that the original/whole data set is available for selection.
+> * This method **does not trigger** [change](#events-change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
 
@@ -1533,7 +1526,7 @@ Fired when the value of the widget is changed by the user. As of 2015 Q3 SP1 cas
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
-> **Important:** The event is not fired when the value of the widget is changed programmatically. If you need to handle changes made by API, wire the [cascade](/api/javascript/ui/dropdownlist#events-cascade) event.
+> The event is not fired when the value of the widget is changed programmatically. If you need to handle changes made by API, wire the [cascade](/api/javascript/ui/dropdownlist#events-cascade) event.
 
 #### Event Data
 
@@ -1759,16 +1752,10 @@ The widget instance which fired the event.
 
 Fired when an item from the popup is selected by the user either with mouse/tap or with keyboard navigation.
 
-> **Important:** The event is not fired when an item is selected programmatically.
-
-> **Important:** Since version Q1 2015 (2015.1.318), the
-[option label has been moved outside the item list DOM collection](/backward-compatibility#kendo-ui-2015-q1).
-As a result, jQuery.index() can no longer be used to reliably detect if the option label is the selected dropdown item.
-A more appropriate approach would be to check if the selected dataItem value is an empty string,
-and/or check if the selected dateItem's text is equal to the optionLabel string.
->
-> *  `e.sender.dataItem(e.item)[e.sender.options.dataValueField] == ""`
-> *  `e.sender.dataItem(e.item)[e.sender.options.dataTextField] == e.sender.options.optionLabel`
+> * The event is not fired when an item is selected programmatically.
+> * Since version Q1 2015 (2015.1.318), the [option label has been moved outside the item list DOM collection](/backward-compatibility#kendo-ui-2015-q1). As a result, `jQuery.index()` can no longer be used to reliably detect if the option label is the selected dropdown item. A more appropriate approach would be to check if the selected dataItem value is an empty string, and/or check if the selected dateItem's text is equal to the `optionLabel` string.
+>   *  `e.sender.dataItem(e.item)[e.sender.options.dataValueField] == ""`
+>   *  `e.sender.dataItem(e.item)[e.sender.options.dataTextField] == e.sender.options.optionLabel`
 
 #### Event Data
 
