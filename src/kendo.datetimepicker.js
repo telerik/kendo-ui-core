@@ -486,7 +486,7 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            that.element.val(date ? kendo.toString(date, options.format, options.culture) : value);
+            that.element.val(kendo.toString(date || value, options.format, options.culture));
             that._updateARIA(date);
 
             return date;

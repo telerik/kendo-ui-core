@@ -357,5 +357,17 @@ test("DatePicker max and min values are reset to initial when form is reset", fu
     deepEqual(datepicker.options.max, new Date(2000, 0, 2));
 });
 
+test("DatePicker renders formatted value even when out of range", function() {
+    var value = new Date(1900, 0, 1);
+
+    var datepicker = input.kendoDatePicker({
+        value: value,
+        min: new Date(2000, 0, 1),
+        max: new Date(2000, 0, 2)
+    }).data("kendoDatePicker");
+
+    equal(datepicker.value(), null);
+    equal(datepicker.element.val(), kendo.toString(value, datepicker.options.format));
+});
 
 })();
