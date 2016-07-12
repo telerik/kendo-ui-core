@@ -371,4 +371,17 @@ test("datetimepicker does not add timezone offset incorrectly", function() {
     deepEqual(datetimepicker.value(), minDate);
 });
 
+test("datetimepicker renders formatted value even when out of range", function() {
+    var value = new Date(1900, 0, 1);
+
+    var datetimepicker = input.kendoDateTimePicker({
+        value: value,
+        min: new Date(2000, 0, 1),
+        max: new Date(2000, 0, 2)
+    }).data("kendoDateTimePicker");
+
+    equal(datetimepicker.value(), null);
+    equal(datetimepicker.element.val(), kendo.toString(value, datetimepicker.options.format));
+});
+
 })();

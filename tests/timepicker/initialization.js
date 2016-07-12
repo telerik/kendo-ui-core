@@ -330,7 +330,7 @@
         equal(input.attr("disabled"), "disabled");
     });
 
-    test("DateTimePicker max and min values are reset to initial when form is reset", function() {
+    test("timepicker max and min values are reset to initial when form is reset", function() {
         $(input).wrap("<form id='form'></form>");
         var timepicker = input.kendoTimePicker({
             min: new Date(2000, 0, 1, 22, 0, 0),
@@ -345,7 +345,7 @@
         deepEqual(timepicker.options.max, new Date(2000, 0, 2, 22, 0, 0));
     });
 
-    test("DateTimePicker scrolls to selected value", function() {
+    test("timepicker scrolls to selected value", function() {
         var timepicker = input.kendoTimePicker({
             value: "10:00 AM"
         }).data("kendoTimePicker")
@@ -354,6 +354,16 @@
         equal(isScrolled, true)
     });
 
+    test("timepicker renders formatted value even when out of range", function() {
+        var value = new Date(2000, 0, 1, 20, 30, 0);
 
+        var timepicker = input.kendoTimePicker({
+            value: value,
+            min: new Date(2000, 0, 1, 22, 0, 0),
+            max: new Date(2000, 0, 1, 23, 0, 0)
+        }).data("kendoTimePicker");
 
+        equal(timepicker.value(), null);
+        equal(timepicker.element.val(), kendo.toString(value, timepicker.options.format));
+    });
 })();
