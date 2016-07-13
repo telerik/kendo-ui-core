@@ -12,7 +12,7 @@ This page provides solutions for common problems you may encounter while working
 
 ## DataSource
 
-### Selected Item Lost When Bound to Shared DataSource
+### Selected Item Is Lost When Bound to Shared DataSource
 
 > **Important**  
 >
@@ -53,8 +53,6 @@ The example below demonstrates the solution to the above issue.
         dataSource: new kendo.data.DataSource({ data: ds.data() });
     });
 
-## Filtering
-
 ### Repetitive Requests Are Performed while Filtering in ASP.NET
 
 Repetitive requests performed by the Kendo UI DropDownList widget are caused by the response from the ASP.NET Web API Order controller.
@@ -81,7 +79,7 @@ The example below demonstrates how to change the service accordingly.
 
 ## See Also
 
-Other articles on Kendo UI DropDownList:
+Other articles on the Kendo UI DropDownList:
 
 * [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
 * [Grouping Functionality]({% slug grouping_kendoui_combobox_widget %})

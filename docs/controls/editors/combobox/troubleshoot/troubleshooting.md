@@ -12,7 +12,7 @@ This page provides solutions for common issues you may encounter while working w
 
 ## DataSource
 
-### Selected Item Loosed When Bound to Shared DataSource
+### Selected Item Is Lost When Bound to Shared DataSource
 
 > **Important**  
 >
@@ -53,9 +53,13 @@ The example below demonstrates the solution to the above issue.
         dataSource: new kendo.data.DataSource({ data: ds.data() });
     });
 
+### Repetitive Requests Are Performed while Filtering in ASP.NET
+
+For more information on handling repetitive requests performed while filtering in ASP.NET, refer to [this troubleshooting topic]({% slug troubleshooting_common_issues_dropdownlist_kendoui %}#repetitive-requests-are-performed-while-filtering-in-aspnet).
+
 ## See Also
 
-Other articles on Kendo UI ComboBox:
+Other articles on the Kendo UI ComboBox:
 
 * [ComboBox JavaScript API Reference](/api/javascript/ui/combobox)
 * [Grouping Functionality]({% slug grouping_kendoui_combobox_widget %})

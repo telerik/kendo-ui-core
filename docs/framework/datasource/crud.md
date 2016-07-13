@@ -374,6 +374,8 @@ If an error in the server code occurs, the server response can notify the client
 
 For more information on handling errors in such scenarios, refer to the section about [error handling with remote transport]({% slug cruddataoperations_kendoui_datasourcecomponent %}#error-handling-with-remote-transport).
 
+For more information on handling repetitive requests performed while filtering in ASP.NET, refer to [this troubleshooting topic]({% slug troubleshooting_common_issues_dropdownlist_kendoui %}#repetitive-requests-are-performed-while-filtering-in-aspnet).
+
 ### Update (Remote)
 
 The `update` service expects the edited data items and should return the same items (including all data fields) as a confirmation of the successful save operation. An empty response is also treated as a valid success response.

@@ -53,9 +53,13 @@ The example below demonstrates the solution to the above issue.
         dataSource: new kendo.data.DataSource({ data: ds.data() });
     });
 
+### Repetitive Requests Are Performed while Filtering in ASP.NET
+
+For more information on handling repetitive requests performed while filtering in ASP.NET, refer to [this troubleshooting topic]({% slug troubleshooting_common_issues_dropdownlist_kendoui %}#repetitive-requests-are-performed-while-filtering-in-aspnet).
+
 ## See Also
 
-Other articles on Kendo UI MultiSelect:
+Other articles on the Kendo UI MultiSelect:
 
 * [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
 * [Grouping Functionality]({% slug grouping_kendoui_multiselect_widget %})
