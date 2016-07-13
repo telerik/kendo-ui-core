@@ -8,26 +8,25 @@ position: 3
 
 # Data Binding
 
-## Bind Series to Inline Data
+## To Inline Data
 
 The Kendo UI Chart data points can be specified as part of the series definitions. The type of the data points depends on the type of the series.
 
-### Binding to an Array of Values
+### Bind to Arrays of Values
 
-This is the simplest form of data binding in which we provide the values as an array
-for each series. It's also the fastest.
+This is the simplest and the fastest form of data binding where the values are provided as an array for each series.
 
-As a drawback, you can't add any metadata to the data points.
-The array contains only the values to be plotted.
+A limitation of this approach is that you are not allowed to add metadata to the data points. The array contains only the values which are to be plotted.
 
 #### Categorical Series
-Categorical series, such as [Bar](http://demos.telerik.com/kendo-ui/bar-charts/index), [Line](http://demos.telerik.com/kendo-ui/line-charts/index), [Area](http://demos.telerik.com/kendo-ui/area-charts/index) and other Kendo UI Charts, expect a data point of type `Number`. The category names are populated independently in the category axis.
+
+Categorical series, such as the [Bar](http://demos.telerik.com/kendo-ui/bar-charts/index), the [Line](http://demos.telerik.com/kendo-ui/line-charts/index), the [Area](http://demos.telerik.com/kendo-ui/area-charts/index) and other Kendo UI Charts, expect a data point of type `Number`. The category names are populated independently in the category axis.
 
 > **Important**
 >
 > All series must contain the same number of points in an order identical to the category one.
 
-The example below demonstrates inline binding of column series.
+The example below demonstrates the inline binding of a column series.
 
 ###### Example
 
@@ -52,7 +51,7 @@ The example below demonstrates inline binding of column series.
 ```
 #### Scatter Series
 
-This category of Kendo UI Charts includes the two-dimensional [Scatter](http://demos.telerik.com/kendo-ui/scatter-charts/index) and [Scatter Line](http://demos.telerik.com/kendo-ui/scatter-charts/scatter-line) series. The data point should be an array containing two values&mdash;X and Y, as demonstrated in the example below.
+This category of Kendo UI Charts includes the two-dimensional [Scatter](http://demos.telerik.com/kendo-ui/scatter-charts/index) and [Scatter Line](http://demos.telerik.com/kendo-ui/scatter-charts/scatter-line) series. The data point has to be an array containing two values&mdash;X and Y, as demonstrated in the example below.
 
 ###### Example
 
@@ -69,18 +68,15 @@ This category of Kendo UI Charts includes the two-dimensional [Scatter](http://d
     </script>
 ```
 
+### Bind to Arrays of Objects
 
-### Binding to an Array of Objects
+A more flexible and still very performant alternative is to provide the series with an array of objects. Configure the fields for each series, because they cannot be inferred as in the case with the simple arrays.
 
-A more flexible, but still very performant, alternative is to provide the series
-with an array of objects. You need to configure fields for each series, as these
-can't be inferred as is the case with simple arrays.
-
-The major benefit with this approach is that we can associate metadata with the
-series points. It's also possible to combine the data for many series in a single object.
+The major benefit of this approach is that you are able to associate metadata with the series points. It is also possible to combine the data for many series in a single object.
 
 #### Categorical Series
-In addition to binding to arrays, you can also supply objects and specify fields to bind the series to. This allows you to access additional fields, for example in tooltips.
+
+In addition to binding to arrays, you are also able to supply objects and specify fields to bind the series to. This allows you to access additional fields, for example in tooltips.
 
 ###### Example
 
@@ -116,7 +112,7 @@ In addition to binding to arrays, you can also supply objects and specify fields
 
 #### Scatter Series
 
-This category of Kendo UI Charts includes the two-dimensional [Scatter](http://demos.telerik.com/kendo-ui/scatter-charts/index) and [Scatter Line](http://demos.telerik.com/kendo-ui/scatter-charts/scatter-line) series. The data point should be an array containing two values&mdash;X and Y, as demonstrated in the example below.
+This category of Kendo UI Charts includes the two-dimensional [Scatter](http://demos.telerik.com/kendo-ui/scatter-charts/index) and [Scatter Line](http://demos.telerik.com/kendo-ui/scatter-charts/scatter-line) series. The data point has to be an array containing two values&mdash;X and Y, as demonstrated in the example below.
 
 ###### Example
 
@@ -133,15 +129,11 @@ This category of Kendo UI Charts includes the two-dimensional [Scatter](http://d
     </script>
 ```
 
-## Bind Series to a Data Source
+## Bind Series to Data Source
 
-The most powerful form of data binding is to use the
-[Kendo UI DataSource component](/framework/datasource/overview).
-It supports binding to both local and remote data in a variety of formats and over
-different transport protocols. Examples include JSON, XML, JSONP and OData.
+The most powerful form of data binding is to use the [Kendo UI DataSource component](/framework/datasource/overview). It supports binding to both local and remote data in a variety of formats and over different transport protocols. Examples include JSON, XML, JSONP and OData.
 
-Note that using the Data Source incurs a performance overhead.
-See [Performance Tips]({% slug tipsandtricks_kendouistyling %}).
+The usage of the DataSource abstraction incurs a performance overhead. For more information, refer to the article on [performance tips]({% slug tipsandtricks_kendouistyling %}).
 
 ### Set the Data Source
 
@@ -237,7 +229,7 @@ The Chart can be bound to grouped data. In this case the categories are created 
 
 > **Important**
 >
-> All series must contain the same number of points. If there is a different number of points in the `series.categoryField` groups must be used instead of `categoryAxis.field`.
+> All series must contain the same number of points. If there is a different number of points in the `series.categoryField`,use groups instead of `categoryAxis.field`.
 
 The example below demonstrates a grouped chart with different number of points in the groups.
 
@@ -276,7 +268,7 @@ The example below demonstrates a grouped chart with different number of points i
     </script>
 ```
 
-### Categorical Series Data Source Binding
+### Bind Categorical Series
 
 #### Value Field
 
@@ -362,7 +354,7 @@ The example below demonstrates how to bind with `categoryField`.
     </script>
 ```
 
-### Scatter Series Data Source Binding
+### Bind Scatter Series
 
 Scatter series are bound to the fields specified as `xField` and `yField`, as demonstrated below.
 
