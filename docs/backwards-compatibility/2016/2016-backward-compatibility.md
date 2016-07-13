@@ -14,6 +14,10 @@ slug: breakingchanges2016_kendoui
 
 #### Breaking Changes
 
+* **DropDownList**: The widget will clear the applied filter when ESC key is pressed.
+
+* **DropDownList**: The widget will not select the focused item on focusout when list is filtered.
+
 * **DropDownList/ComboBox/MultiSelect**: The widget will not update the OPTION [`selected`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option#attr-selected) attribute to keep the behavior of the  [`defaultSelected`](https://developer.mozilla.org/en/docs/Web/API/HTMLOptionElement#Properties) property. For more information, refer to this [Github issue](https://github.com/telerik/kendo-ui-core/issues/1660).
 
 * **MultiSelect**: The widget with a 'single' tag mode will deselect all selected items on **Backspace** or **Delete** keyboard press. The previous behavior is impossible to revert.
