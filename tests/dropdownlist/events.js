@@ -565,14 +565,14 @@
         });
     });
 
-    asyncTest("Dropdownlist with filtered source triggers change on document mousedown", 1, function() {
+    asyncTest("Dropdownlist with filtered source shouldn't trigger change on document mousedown", 0, function() {
         var dropdownlist = new DropDownList(input, {
             delay: 0,
             value: "foo",
             filter: "startswith",
             dataSource: ["foo", "bar"],
             change: function() {
-                equal(dropdownlist.value(), "bar");
+                ok(false);
             }
         });
 
@@ -686,14 +686,13 @@
         dropdownlist.ul.children(":first").click();
     });
 
-    test("DropDownList triggers select event on blur after filtration", 2, function() {
+    test("DropDownList shouldn't trigger select event on blur after filtration", 0, function() {
         var dropdownlist = new DropDownList(input, {
             filter: "startswith",
             optionLabel: "Select...",
             dataSource: ["foo", "bar"],
             select: function(e) {
-                equal(e.item[0], dropdownlist.ul.children(":first")[0]);
-                equal(e.dataItem, dropdownlist.dataSource.view()[0]);
+                ok(false);
             }
         });
 

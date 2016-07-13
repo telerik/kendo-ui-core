@@ -623,39 +623,6 @@
         dropdownlist.filterInput.focus().val("test").keydown();
     });
 
-    asyncTest("filter if same text is entered after blur", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            animation: false,
-            filter: "startswith",
-            delay: 0,
-            dataSource: [
-                { text: "Black", value: "1" },
-                { text: "Orange", value: "2" },
-                { text: "Grey", value: "3" }
-            ],
-            dataTextField: "text",
-            dataValueField: "value",
-            index: 2
-        });
-
-        dropdownlist.one("dataBound", function() {
-            dropdownlist.filterInput.focusout();
-
-            dropdownlist.wrapper.focus();
-            dropdownlist.open();
-
-            dropdownlist.one("dataBound", function() {
-                start();
-                ok(true);
-            });
-
-            dropdownlist.filterInput.val("or").keydown();
-        });
-
-        dropdownlist.open();
-        dropdownlist.filterInput.val("or").keydown();
-    });
-
     test("search select first match of grouped list", function() {
         var data = [{text: "Foo", value: 1, type: "a"}, {text:"Bar", value:2, type: "b"}, {text:"Baz", value:3, type: "a"}];
         var dropdownlist = new DropDownList(input, {
