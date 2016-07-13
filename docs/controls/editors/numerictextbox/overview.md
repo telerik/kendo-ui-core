@@ -101,13 +101,15 @@ The widget controls the precision of the entered number using the half-up roundi
 
 ### Range Validation
 
-The NumericTextBox value can be restricted to a specific range using two different approaches:
+The NumericTextBox value can be restricted to a specific range by using two different approaches:
 
 - Restrict the input value between a specific [`min`](/api/javascript/ui/numerictextbox#configuration-min) and [`max`](/api/javascript/ui/numerictextbox#configuration-max) range. The typed value will be automatically modified to fit the range on blur.
 
 - Use a custom Kendo UI Validator rule to restrict the input value. The invalid value will be kept unchanged and the user will be notified for the incorrect input with a friendly error message.
-For more details, please review the [custom validation rules](/controls/editors/validator/overview#custom-rules-for-validation) documentation of Kendo UI Validator. To see the suggested implementation in action,
-navigate to our [Range Validation](http://demos.telerik.com/kendo-ui/numerictextbox/validation) online demo.
+
+    For more details, refer to the article on [custom validation rules]({% slug overview_kendoui_validator_widget %}#custom-rules-for-validation) of the Validator.
+
+    To see the suggested implementation in action, navigate to the online demo on [range validation](http://demos.telerik.com/kendo-ui/numerictextbox/validation).
 
 ### Support for label Element
 
