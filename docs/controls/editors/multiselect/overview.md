@@ -269,7 +269,7 @@ The example below demonstrates how to define a `noDataTemplate` template.
 
 ## Configuration
 
-### Change Drop-Down List Width
+### Change of Drop-Down List Width
 
 Customize the width of a drop-down list and change its dimensions by using the jQuery `width()` method.
 
@@ -284,13 +284,15 @@ Customize the width of a drop-down list and change its dimensions by using the j
         multiselect.list.width(400);
     </script>
 
-### Access Drop-Down List Element
+### Access of Drop-Down List Element
 
-The drop-down list renders an ID attribute, generated from the widget's ID and the '-list' suffix.
+The drop-down list renders an ID attribute, generated from the ID of the widget and the `-list` suffix.
 
 The ID can be used to style the element or to access a specific element inside the popup element.
 
-> Drop-down element will not have ID if the widget doesn't have an ID
+> **Important**
+>
+> If the widget has no ID, the drop-down element will have no ID either.
 
 ###### Example
 

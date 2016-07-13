@@ -34,13 +34,13 @@ If you try to convert the previously created JavaScript `Date` to a JSON string 
 
 ## Configuration
 
-You can define a [timezone](/api/javascript/ui/scheduler#configuration-timezone) option to Kendo UI Scheduler. It idicates to the widget what timezone to apply when displaying the appointment dates.
+You can define a [timezone](/api/javascript/ui/scheduler#configuration-timezone) option to Kendo UI Scheduler. It indicates to the widget what timezone to apply when displaying the appointment dates.
 
 The timezones option is not set by default and, therefore, the [event dates will be created based on the current client timezone offset](#configuration-Scheduler). This means that users from different timezones will see different start and end times. On the other hand, setting the Scheduler [timezone](/api/javascript/ui/scheduler#configuration-timezone) will force the widget to show the same start and end times regardless of the user's timezone.
 
 > **Important**  
 > * When you use remote binding, Kendo UI Scheduler expects to receive UTC dates. Respectively, it will send them back to the server in UTC. The service in use is responsible for keeping the dates in UTC, without offsetting them against its local time.
-> * When you bind the Scheduler to a remote service, it is recommended that you keep the `timezone` option always set, for example, to `"Etc/UTC"`.
+> * When you bind the Scheduler to a remote service, it is recommended that you keep the `timezone` option always set, for example, to `"ETC/UTC"`.
 > * When the `timezone` option of the Scheduler is not set, the current system timezone offset is used.
 > * The recommended `Date` format for sending and receiving Scheduler event dates is [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) with a **Z** zone designator (UTC date). The same format is used by the [`JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method, which converts JavaScript `Date` objects to JSON strings.
 
