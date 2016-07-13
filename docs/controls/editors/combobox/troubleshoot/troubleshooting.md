@@ -10,14 +10,19 @@ slug: troubleshooting_common_issues_combobox_kendoui
 
 This page provides solutions for common issues you may encounter while working with the Kendo UI ComboBox widget.
 
-> **Important**  
-> This issue can also be observed in [Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %}) and [Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %}). The solution demonstrated in the examples below is fully applicable to the case of them both as well.
-
 ## DataSource
 
 ### Selected Item Loosed When Bound to Shared DataSource
 
-The selected item of the widget is directly related to the data source view. If it does not contain the selected item, then the widget will remove its current value. This behavior is expected and the solution is to use separate data sources.
+> **Important**  
+>
+> This issue can also be observed in [Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %}) and [Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %}). The solution demonstrated in the examples below is fully applicable to the case of them both as well.
+
+The selected item of the widget is directly related to the data source view. If it does not contain the selected item, then the widget will remove its current value. Such behavior is expected.
+
+**Solution**
+
+Use separate data sources.
 
 The example below demonstrates a sample issue.
 
