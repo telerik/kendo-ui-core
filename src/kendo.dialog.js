@@ -18,6 +18,7 @@
             template = kendo.template,
             KDIALOG = ".k-dialog",
             KCONTENT = "k-content",
+            KTITLELESS = "k-dialog-titleless",
             templates;
 
         var Dialog = Widget.extend({
@@ -26,32 +27,62 @@
                     wrapper;
 
                 Widget.fn.init.call(that, element, options);
-                options = that.options;
+
                 element = that.element;
-
                 that._createDialog();
-
                 wrapper = that.wrapper = element.closest(KDIALOG);
                 kendo.notify(that);
             },
 
             _createDialog: function() {
                 var that = this,
-                    contentHtml = this.element,
+                    contentHtml = that.element,
                     options = that.options,
                     titlebar = $(templates.titlebar(options)),
-                    actionbar = $(templates.actionbar(options)),
                     wrapper = $(templates.wrapper(options));
 
                 contentHtml.addClass(KCONTENT);
 
-                wrapper
-                    .appendTo("body")
-                    .append(titlebar)
-                    .append(contentHtml)
-                    .append(actionbar);
+                wrapper.appendTo("body");
+
+                if (options.closable !== false) {
+                    wrapper.append(templates.close);
+                }
+
+                if (options.title !== false) {
+                    wrapper.append(titlebar);
+                } else {
+                    wrapper.addClass(KTITLELESS);
+                }
+
+                wrapper.append(contentHtml);
+
+                if (options.actions.length) {
+                    that._createActionbar(wrapper);
+                }
 
                 wrapper = contentHtml = null;
+            },
+
+
+            _createActionbar: function(wrapper) {
+                var actionbar = $(templates.actionbar);
+                this._addButtons(actionbar);
+                wrapper.append(actionbar);
+            },
+
+            _addButtons: function(actionbar) {
+                var actions = this.options.actions,
+                    action;
+                for (var i = 0; i < actions.length; i++) {
+                    var action = actions[i],
+                        button = $(templates.action(action));
+
+                    if (action.primary) {
+                        button.addClass("k-primary");
+                    }
+                    actionbar.append(button);
+                }
             },
 
             _destroy: function() {
@@ -68,19 +99,24 @@
             ],
 
             options: {
-                name: "Dialog"
+                name: "Dialog",
+                title: "",
+                actions: [],
+                modal: true,
+                closable: true
             }
         });
 
         templates = {
             wrapper: template("<div class='k-widget k-dialog k-window' />"),
-            action: template("<li class='k-button'>Button 1</li>"),
+            action: template("<li class='k-button'>#= text #</li>"),
             titlebar: template(
                 "<div class='k-window-titlebar k-header'>" +
-                  "<span class='k-dialog-title'>Dialog Title</span>" +
+                  "<span class='k-dialog-title'>#= title #</span>" +
                 "</div>"
             ),
-            actionbar: template("<ul class='k-dialog-buttongroup' />"),
+            actionbar: "<ul class='k-dialog-buttongroup' />",
+            close: "<span class='k-i-close'>Close</span>",
             overlay: "<div class='k-overlay' />"
         };
 
