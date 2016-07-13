@@ -561,7 +561,7 @@
         });
     });
 
-    asyncTest("DropDownList selects focused item on blur after filtering", 1, function() {
+    asyncTest("DropDownList shouldn't select focused item on blur after filtering", 1, function() {
         var dropdownlist = input.kendoDropDownList({
             delay: 0,
             dataTextField: "text",
@@ -580,7 +580,7 @@
             start();
             dropdownlist.filterInput.focusout();
 
-            equal(dropdownlist.value(), "item2");
+            equal(dropdownlist.value(), "item1");
         });
 
         dropdownlist.filterInput.focus().val("item2").keydown();

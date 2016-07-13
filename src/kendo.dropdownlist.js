@@ -564,7 +564,7 @@ var __meta__ = { // jshint ignore:line
             if (!that._prevent) {
                 clearTimeout(that._typingTimeout);
 
-                if (filtered && focusedItem && !that.trigger("select", { dataItem: dataItem, item: focusedItem })) {
+                if (!filtered && focusedItem && !that.trigger("select", { dataItem: dataItem, item: focusedItem })) {
                     that._select(focusedItem, !that.dataSource.view().length);
                 }
 
