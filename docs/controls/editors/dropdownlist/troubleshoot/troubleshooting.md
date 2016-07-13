@@ -10,14 +10,19 @@ slug: troubleshooting_common_issues_dropdownlist_kendoui
 
 This page provides solutions for common problems you may encounter while working with the Kendo UI DropDownList widget.
 
-> **Important**  
-> This issue can also be observed in [Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %}) and [Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %}). The solution demonstrated in the examples below is fully applicable to the case of them both as well.  
-
 ## DataSource
 
 ### Selected Item Lost When Bound to Shared DataSource
 
-The selected item of the widget is directly related to the data source view. If it does not contain the selected item, then the widget will remove its current value. This behavior is expected and the solution is to use separate data sources.
+> **Important**  
+>
+> This issue can also be observed in [Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %}) and [Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %}). The solution demonstrated in the examples below is fully applicable to the case of them both as well.  
+
+The selected item of the widget is directly related to the data source view. If it does not contain the selected item, then the widget will remove its current value. Such behavior is expected.
+
+**Solution**
+
+Use separate data sources.
 
 The example below demonstrates a sample issue.
 
@@ -47,6 +52,32 @@ The example below demonstrates the solution to the above issue.
     $("#ms2").kendoDropDownList({
         dataSource: new kendo.data.DataSource({ data: ds.data() });
     });
+
+## Filtering
+
+### Repetitive Requests Are Performed while Filtering in ASP.NET
+
+Repetitive requests performed by the Kendo UI DropDownList widget are caused by the response from the ASP.NET Web API Order controller.
+
+**Solution**
+
+The `total` configuration has to respond to the total number of records found after the filtering&mdash;that is, `dataResult.Count`. Otherwise, the widget continues requesting the remainder of the `total`.
+
+The example below demonstrates how to change the service accordingly.
+
+###### Example
+
+```
+   public object Get(int? take = null, int? skip = null, string q = null)
+    {
+    	List<OrderModel> dataResult = string.IsNullOrEmpty(q) ? Orders.Skip(skip ?? 0).Take(take ?? int.MaxValue).ToList() : Orders.Where(m => m.Name.Contains(q)).ToList();
+    	return new
+    	{
+    		total = dataResult.Count,
+    		data = dataResult
+    	};
+    }
+```
 
 ## See Also
 
