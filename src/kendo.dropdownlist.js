@@ -344,6 +344,11 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _clearFilter: function() {
+            $(this.filterInput).val("");
+            Select.fn._clearFilter.call(this);
+        },
+
         value: function(value) {
             var that = this;
             var listView = that.listView;
@@ -673,6 +678,10 @@ var __meta__ = { // jshint ignore:line
 
             if ((altKey && key === keys.UP) || key === keys.ESC) {
                 that._focusElement(that.wrapper);
+            }
+
+            if (that._state === STATE_FILTER && key === keys.ESC) {
+                that._clearFilter();
             }
 
             if (key === keys.ENTER && that._typingTimeout && that.filterInput && isPopupVisible) {

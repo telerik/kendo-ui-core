@@ -856,4 +856,31 @@
         kendo.support.mobileOS = false;
         kendo.support.touch = false;
     });
+
+    asyncTest("DropDownList clears filter on ESC", 2, function() {
+        var dropdownlist = new DropDownList(input, {
+            animation: false,
+            filter: "startswith",
+            delay: 0,
+            dataSource: [
+                { text: "Black", value: "1" },
+                { text: "Orange", value: "2" },
+                { text: "Grey", value: "3" }
+            ],
+            dataTextField: "text",
+            dataValueField: "value",
+            index: 2
+        });
+
+        dropdownlist.open();
+        dropdownlist.filterInput.focus().val("Gre").keydown();
+
+        dropdownlist.one("dataBound", function() {
+            start();
+            dropdownlist.filterInput.press(keys.ESC);
+
+            equal(dropdownlist.dataSource.view().length, 3);
+            equal(dropdownlist.filterInput.val(), "");
+        });
+    });
 })();
