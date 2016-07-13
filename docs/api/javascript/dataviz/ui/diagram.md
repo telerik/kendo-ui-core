@@ -2308,6 +2308,7 @@ Specifies the type of the Shape using any of the built-in shape type.
 * "rectangle": this is the default option
 * "circle": a circle/ellipse
 * "image": an image
+* "text": some text
 
 ### shapeDefaults.visual `Function`
 
@@ -2343,10 +2344,10 @@ A function returning a visual element to render for a given shape. The following
                 y: 20
             });
             g.append(fn);
-            
+
             return g;
         };
-    
+
         $("#diagram").kendoDiagram({
             dataSource: [{
                 "name" : "Telerik",
@@ -3825,7 +3826,7 @@ Fired when dragging shapes or connection.
 
 ##### e.connectionHandle `String`
 
-A value indicating which handle of the connection is being dragged. The value will be `"source"` for the source handle, `"target"` for the target handle and `undefined` if the entire connection is being dragged. 
+A value indicating which handle of the connection is being dragged. The value will be `"source"` for the source handle, `"target"` for the target handle and `undefined` if the entire connection is being dragged.
 
 ##### e.connections `Array`
 
@@ -4118,4 +4119,3 @@ The widget instance which fired the event.
 ##### e.zoom `Number`
 
 The current zoom level.
-
