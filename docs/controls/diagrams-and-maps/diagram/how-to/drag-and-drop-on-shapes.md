@@ -1,11 +1,11 @@
 ---
-title: Drag and Drop on Shapes
-page_title: Drag and Drop on Shapes | Kendo UI Diagram
+title: Drag and Drop on Existing Shapes
+page_title: Drag and Drop on Existing Shapes | Kendo UI Diagram
 description: "Learn how to find a particular element from the shape visual and dynamically change it in a Kendo UI Diagram."
 slug: howto_draganddrop_onshapes_diagram
 ---
 
-# Drag and Drop on Shapes
+# Drag and Drop on Existing Shapes
 
 The example below demonstrates how to allow the dropping of new shapes only on existing ones in the Kendo UI Diagram.
 
