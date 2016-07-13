@@ -99,6 +99,16 @@ By default, the widget does not restrict the length of the typed value. To enfor
 
 The widget controls the precision of the entered number using the half-up rounding technique. This functionality can be disabled through the [`round`](/api/javascript/ui/numerictextbox#configuration-round) configuration option. Once the rounding is turned off, the value will be truncated up to the desired precision length, without rounding the value.
 
+### Range Validation
+
+The NumericTextBox value can be restricted to a specific range using two different approaches:
+
+- Restrict the input value between a specific [`min`](/api/javascript/ui/numerictextbox#configuration-min) and [`max`](/api/javascript/ui/numerictextbox#configuration-max) range. The typed value will be automatically modified to fit the range on blur.
+
+- Use a custom Kendo UI Validator rule to restrict the input value. The invalid value will be kept unchanged and the user will be notified for the incorrect input with a friendly error message.
+For more details, please review the [custom validation rules](/controls/editors/validator/overview#custom-rules-for-validation) documentation of Kendo UI Validator. To see the suggested implementation in action,
+navigate to our [Range Validation](http://demos.telerik.com/kendo-ui/numerictextbox/validation) online demo.
+
 ### Support for label Element
 
 Because of its complex rendering, focusing the widget by using a label element requires additional implementation. For more information about how to do it, check this [this Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
