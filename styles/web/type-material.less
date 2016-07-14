@@ -826,7 +826,9 @@ html .km-pane-wrapper .k-header
 .k-listview>.k-state-focused,
 .k-listview > .k-state-focused.k-state-selected,
 td.k-state-focused,
-.k-button.k-state-focused
+.k-button.k-state-focused,
+.k-upload-files .k-button:focus,
+.k-upload-files .k-button:focus:not(.k-state-disabled):not([disabled])
 {
     .box-shadow(@focused-item-shadow);
 }
@@ -3079,9 +3081,7 @@ color: @widget-text-color;
 background-color: @widget-background-color;
 }
 
-.k-upload-files .k-button,
-.k-upload-files .k-button:focus,
-.k-upload-files .k-button:focus:not(.k-state-disabled):not([disabled]) {
+.k-upload-files .k-button {
     .box-shadow(none);
 }
 
