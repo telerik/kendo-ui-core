@@ -175,6 +175,20 @@
         equal(footer.html(), multiselect.dataSource.total());
     });
 
+    test("adjust height if footer template", function() {
+        var multiselect = new MultiSelect(select, {
+            animation: false,
+            autoBind: false,
+            dataSource: ["item1", "item2", "item3", "item4", "item5"],
+            footerTemplate: "<div>Footer</div>",
+            height: 100
+        });
+
+        multiselect.open();
+
+        ok(multiselect.listView.content.height() < 100);
+    });
+
     test("MultiSelect creates DataSource", function() {
         var multiselect = new MultiSelect(select);
 

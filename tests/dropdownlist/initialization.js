@@ -1089,6 +1089,7 @@
     test("adjust height if footer template", function() {
         var dropdownlist = new DropDownList(input, {
             animation: false,
+            autoBind: false,
             dataSource: ["item1", "item2", "item3", "item4", "item5"],
             footerTemplate: "<div>Footer</div>",
             height: 100

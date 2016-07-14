@@ -499,6 +499,7 @@ var __meta__ = { // jshint ignore:line
 
             that._presetValue = false;
 
+            that._updateFooter();
             that._resizePopup(true);
 
             that.popup.position();
@@ -534,7 +535,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._hideBusy();
-            that._updateFooter();
             that.trigger("dataBound");
         },
 

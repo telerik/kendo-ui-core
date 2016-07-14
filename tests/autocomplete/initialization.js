@@ -214,6 +214,20 @@ test("update footer template on dataBound", function() {
     equal(footer.html(), autocomplete.dataSource.total());
 });
 
+test("adjust height if footer template", function() {
+    var autocomplete = new AutoComplete(input, {
+        animation: false,
+        autoBind: false,
+        dataSource: ["item1", "item2", "item3", "item4", "item5"],
+        footerTemplate: "<div>Footer</div>",
+        height: 100
+    });
+
+    autocomplete.search("item");
+
+    ok(autocomplete.listView.content.height() < 100);
+});
+
 test("highlight first item", function() {
     var autocomplete = new AutoComplete(input, {
         animation: false,

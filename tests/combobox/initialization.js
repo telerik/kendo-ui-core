@@ -462,6 +462,20 @@ test("update footer template on dataBound", function() {
     equal(footer.html(), combobox.dataSource.total());
 });
 
+test("adjust height if footer template", function() {
+    var combobox = new ComboBox(input, {
+        animation: false,
+        autoBind: false,
+        dataSource: ["item1", "item2", "item3", "item4", "item5"],
+        footerTemplate: "<div>Footer</div>",
+        height: 100
+    });
+
+    combobox.open();
+
+    ok(combobox.listView.content.height() < 100);
+});
+
 test("should populate text and value if items", function() {
    combobox = new ComboBox(input, {
        dataTextField: "text",
