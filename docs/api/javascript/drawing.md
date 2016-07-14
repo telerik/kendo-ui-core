@@ -125,7 +125,7 @@ The [page template](/framework/drawing/drawing-dom#page-template-headers-and-foo
             });
         });
     </script>
-
+    
 #### Example - Exporting a DOM element to a PDF file (via Base64-encoded string)
     <div id="calendar"></div>
     <script>
@@ -147,6 +147,33 @@ The [page template](/framework/drawing/drawing-dom#page-template-headers-and-foo
                 dataURI: data,
                 fileName: "calendar.pdf"
             });
+        });
+    </script>
+
+#### Example - Exporting a DOM element to a PDF Base64-encoded string and send it to the server via jQuery.post() 
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar();
+
+        var draw = kendo.drawing;
+
+        draw.drawDOM($("#calendar"))
+        .then(function(root) {
+            // Chaining the promise via then
+            return draw.exportPDF(root, {
+                paperSize: "A4",
+                landscape: true
+            });
+        })
+        .done(function(data) {
+            //Extracting the base64-encoded string and the contentType
+            var data = {};
+            var parts = dataURI.split(";base64,");
+            data.contentType = parts[0].replace("data:", "");
+            data.base64 = parts[1];
+
+            //Sending the data via jQuery.post method
+            jQuery.post("url/to/save/pdf", data)
         });
     </script>
 
