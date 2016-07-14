@@ -30,7 +30,7 @@ The example below demonstrates how to display positive numbers, or zero, in gree
 
     [Green]#.###;[Red]#.###
 
-The example below demonstrates how to display positive numbers in green, negative numbers in red, and the the "Zero" text in blue if the number is zero.
+The example below demonstrates how to display positive numbers in green, negative numbers in red, and the `"Zero"` text in blue if the number is zero.
 
 ###### Example
 
