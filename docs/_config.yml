@@ -266,12 +266,15 @@ navigation:
         position: 10
     "aspnet-mvc/helpers/hybrid":
         title: "Hybrid UI"
+    "aspnet-mvc/how-to":
+        title: "How To"
+        position: 18
     "aspnet-mvc/troubleshoot":
         title: "Troubleshooting"
-        position: 18
+        position: 19
     "aspnet-mvc/tutorials":
         title: "Tutorials"
-        position: 19
+        position: 20
     "aspnet-mvc/tutorials/quickstart":
         title: "Quick Start Guide"
         position: 1
