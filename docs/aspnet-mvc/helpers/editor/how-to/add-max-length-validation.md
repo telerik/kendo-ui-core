@@ -57,4 +57,6 @@ The example below demonstrates how to define custom Kendo UI validators to check
 Other articles and how-to examples on the Kendo UI Editor HtmlHelper:
 
 * [Editor HtmlHelper Overview]({% slug overview_editorhelper_aspnetmvc %})
-* [How to Store Images in Databases]({% slug howto_storeimagesindatabases_editoraspnetmvc %})
+* [EditorBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/EditorBuilder)
+
+For more runnable examples on the Kendo UI Editor in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_storeimagesindatabases_editoraspnetmvc %}).
