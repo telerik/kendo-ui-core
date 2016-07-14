@@ -291,7 +291,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (!silent) {
-                if (this.trigger(CHANGE, { url: to })) {
+                if (this.trigger(CHANGE, { url: to, decode: false })) {
                     return;
                 }
             }
@@ -394,7 +394,7 @@ var __meta__ = { // jshint ignore:line
             this._callback = callback;
         },
 
-        callback: function(url, back) {
+        callback: function(url, back, decode) {
             var params,
                 idx = 0,
                 length,
@@ -405,9 +405,11 @@ var __meta__ = { // jshint ignore:line
             params = this.route.exec(url).slice(1);
             length = params.length;
 
-            for (; idx < length; idx ++) {
-                if (typeof params[idx] !== 'undefined') {
-                    params[idx] = decodeURIComponent(params[idx]);
+            if (decode) {
+                for (; idx < length; idx ++) {
+                    if (typeof params[idx] !== 'undefined') {
+                        params[idx] = decodeURIComponent(params[idx]);
+                    }
                 }
             }
 
@@ -416,9 +418,9 @@ var __meta__ = { // jshint ignore:line
             this._callback.apply(null, params);
         },
 
-        worksWith: function(url, back) {
+        worksWith: function(url, back, decode) {
             if (this.route.test(stripUrl(url))) {
-                this.callback(url, back);
+                this.callback(url, back, decode);
                 return true;
             } else {
                 return false;
@@ -499,6 +501,7 @@ var __meta__ = { // jshint ignore:line
 
         _urlChanged: function(e) {
             var url = e.url;
+            var decode = typeof e.decode === 'undefined';
             var back = e.backButtonPressed;
 
             if (!url) {
@@ -518,7 +521,7 @@ var __meta__ = { // jshint ignore:line
             for (; idx < length; idx ++) {
                  route = routes[idx];
 
-                 if (route.worksWith(url, back)) {
+                 if (route.worksWith(url, back, decode)) {
                     return;
                  }
             }
