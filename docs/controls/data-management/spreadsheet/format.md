@@ -61,7 +61,7 @@ In this case it is not clear whether only up to four sections are allowed, of wh
 
 ### Default Format Strings
 
-The default format strings that are shown in the formatting drop-down are stored in the `kendo.spreadsheet.formatting` object.
+The default format strings that are shown in the formatting drop-down are stored in the `kendo.spreadsheet.formats` object.
 
 | FORMAT IDENTIFIER | VALUE                                                                         |
 |-------------------|-------------------------------------------------------------------------------|
@@ -75,7 +75,7 @@ The default format strings that are shown in the formatting drop-down are stored
 | dateTime          | Format value as date-time                                                     |
 | duration          | Format as elapsed duration (in hours / minutes / seconds)                     |
 
-You can use the above formats with the [`range` value method](/api/javascript/spreadsheet/range#methods-format), like this: `sheet.range("A1").format(kendo.spreadsheet.formatting.currency)`.
+You can use the above formats with the [`range` value method](/api/javascript/spreadsheet/range#methods-format), like this: `sheet.range("A1").format(kendo.spreadsheet.formats.currency)`.
 
 ### Text and Numbers
 
