@@ -59,6 +59,21 @@ asyncTest("by default ignores URL case", 1, function(){
     router.navigate("#/BAR");
 });
 
+asyncTest("does not encode symbols in segments", 1, function(){
+    router = new kendo.Router();
+
+    router.start();
+
+    router.route("/*suffix", function(suffix) {
+        start();
+        equal(suffix, 'A/B%2FC/D');
+        router.destroy();
+    });
+
+    router.navigate("/A/B%2FC/D");
+});
+
+
 asyncTest("ignoreCase false makes routes case sensitive", 1, function(){
     router = new kendo.Router({ ignoreCase: false });
 
