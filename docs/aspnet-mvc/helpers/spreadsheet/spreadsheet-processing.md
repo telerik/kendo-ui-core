@@ -8,7 +8,7 @@ position: 2
 
 # Processing
 
-Kendo UI ships a `.NET`-based server-side module established on [Telerik `RadSpreadProcessing`](http://docs.telerik.com/devtools/wpf/controls/radspreadprocessing/overview)&mdash;part of the Document Processing Library.
+Kendo UI ships a `.NET`-based server-side module established on [Telerik `RadSpreadProcessing`](http://docs.telerik.com/devtools/wpf/controls/radspreadprocessing/overview)&mdash;part of the Telerik Document Processing.
 
 It allows the import, export, and processing of data from various formats:
 
@@ -17,7 +17,7 @@ It allows the import, export, and processing of data from various formats:
 * Tab separated values (`.txt`).
 * Portable document format (`.pdf`) (export only).
 
-For complete information on the `RadSpreadProcessing` module, refer to [this part](http://docs.telerik.com/devtools/wpf/controls/radspreadprocessing/overview) of the [UI for WPF documentation](http://docs.telerik.com/devtools/wpf/introduction).
+For complete information on the `RadSpreadProcessing` module, refer to [this part](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview) of the [Telerik Document Processing documentation](http://docs.telerik.com/devtools/document-processing/introduction).
 
 ## Addition of Dependencies
 
