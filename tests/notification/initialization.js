@@ -110,7 +110,7 @@
 
         var defaultFunc = notification._getCompiled();
         var params = {typeIcon: "info", content: "foo"};
-        var defaultOutput = '<div class="k-notification-wrap"><span class="k-icon k-i-note">info</span>foo<span class="k-icon k-i-close">Hide</span></div>';
+        var defaultOutput = '<div class="k-notification-wrap"><span class="k-icon k-i-info">info</span>foo<span class="k-icon k-i-close">Hide</span></div>';
 
         equal(typeof defaultFunc, "function");
         equal(defaultFunc(params), defaultOutput);

@@ -122,7 +122,9 @@ var __meta__ = { // jshint ignore:line
             depth: MONTH,
             animation: {},
             month : {},
-            ARIATemplate: 'Current focused date is #=kendo.toString(data.current, "d")#'
+            ARIATemplate: 'Current focused date is #=kendo.toString(data.current, "d")#',
+            dateButtonText: "Open the date view",
+            timeButtonText: "Open the time view"
     },
 
     events: [
@@ -662,26 +664,26 @@ var __meta__ = { // jshint ignore:line
         },
 
         _icons: function() {
-            var that = this,
-                element = that.element,
-                icons;
+            var that = this;
+            var element = that.element;
+            var options = that.options;
+            var icons;
 
             icons = element.next("span.k-select");
 
             if (!icons[0]) {
-                icons = $('<span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-calendar">select</span><span unselectable="on" class="k-icon k-i-clock">select</span></span>').insertAfter(element);
+                icons = $('<span unselectable="on" class="k-select">' +
+                            '<span class="k-link k-link-date" aria-label="' + options.dateButtonText + '"><span unselectable="on" class="k-icon k-i-calendar"></span></span>' +
+                            '<span class="k-link k-link-time" aria-label="' + options.timeButtonText + '"><span unselectable="on" class="k-icon k-i-clock"></span></span>' +
+                          '</span>'
+                         ).insertAfter(element);
             }
 
             icons = icons.children();
-            that._dateIcon = icons.eq(0).attr({
-                "role": "button",
-                "aria-controls": that.dateView._dateViewID
-            });
 
-            that._timeIcon = icons.eq(1).attr({
-                "role": "button",
-                "aria-controls": that.timeView._timeViewID
-            });
+            icons = icons.children();
+            that._dateIcon = icons.eq(0).attr("aria-controls", that.dateView._dateViewID);
+            that._timeIcon = icons.eq(1).attr("aria-controls", that.timeView._timeViewID);
         },
 
         _wrapper: function() {

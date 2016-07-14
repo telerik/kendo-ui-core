@@ -1168,15 +1168,16 @@ var __meta__ = { // jshint ignore:line
             that.tagTemplate = function(data) {
                 return '<li class="k-button" deselectable="on"><span deselectable="on">' +
                         tagTemplate(data) +
-                        '</span><span deselectable="on" class="k-select"><span deselectable="on" class="k-icon ' +
-                        (isMultiple ? "k-i-close" : "k-i-arrow-s") + '">' +
+                        '</span><span unselectable="on" aria-label="' +
                         (isMultiple ? "delete" : "open") +
+                        '" class="k-select"><span class="k-icon ' +
+                        (isMultiple ? "k-i-close" : "k-i-arrow-s") + '">' +
                         '</span></span></li>';
             };
         },
 
         _loader: function() {
-            this._loading = $('<span class="k-icon k-loading ' + HIDDENCLASS + '"></span>').insertAfter(this.input);
+            this._loading = $('<span class="k-icon k-i-loading ' + HIDDENCLASS + '"></span>').insertAfter(this.input);
         },
 
         _clearButton: function() {

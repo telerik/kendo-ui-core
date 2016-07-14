@@ -107,7 +107,7 @@
         ok(spanArrow.hasClass("k-select"));
         ok(arrow.is("span"));
         ok(arrow.hasClass("k-icon k-i-arrow-s"));
-        equal(arrow.html(), "select");
+        equal(arrow.html(), "");
     });
 
     test("data source is when pass DataSource", function() {

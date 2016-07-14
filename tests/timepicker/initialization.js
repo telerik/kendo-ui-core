@@ -96,7 +96,7 @@
         ok(icon.hasClass("k-select"));
         ok(icon.children().is("span"));
         ok(icon.children().hasClass("k-icon k-i-clock"));
-        ok(icon.children().html());
+        equal(icon.children().html(), "");
     });
 
     test("timeView is defined", function() {

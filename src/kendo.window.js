@@ -31,7 +31,7 @@ var __meta__ = { // jshint ignore:line
         KWINDOWRESIZEHANDLES = ".k-resize-handle",
         KOVERLAY = ".k-overlay",
         KCONTENTFRAME = "k-content-frame",
-        LOADING = "k-loading",
+        LOADING = "k-i-loading",
         KHOVERSTATE = "k-state-hover",
         KFOCUSEDSTATE = "k-state-focused",
         MAXIMIZEDSTATE = "k-window-maximized",
@@ -1255,8 +1255,8 @@ var __meta__ = { // jshint ignore:line
     templates = {
         wrapper: template("<div class='k-widget k-window' />"),
         action: template(
-            "<a role='button' href='\\#' class='k-window-action k-link'>" +
-                "<span role='presentation' class='k-icon k-i-#= name.toLowerCase() #'>#= name #</span>" +
+            "<a role='button' href='\\#' class='k-window-action k-link' aria-label='#= name #'>" +
+                "<span class='k-icon k-i-#= name.toLowerCase() #'></span>" +
             "</a>"
         ),
         titlebar: template(

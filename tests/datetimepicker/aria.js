@@ -36,11 +36,6 @@ test("DateTimePicker sets aria-expanded=false", function() {
     equal(input.attr("aria-expanded"), "false");
 });
 
-test("DateTimePicker adds role to the toggle button", function() {
-    equal(instance._dateIcon.attr("role"), "button");
-    equal(instance._timeIcon.attr("role"), "button");
-});
-
 test("DateTimePicker adds aria-controls to the toggle button", function() {
     equal(instance._dateIcon.attr("aria-controls"), instance.dateView.popup.element.attr("id"));
     equal(instance._timeIcon.attr("aria-controls"), instance.timeView.ul.attr("id"));

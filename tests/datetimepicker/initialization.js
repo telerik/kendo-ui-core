@@ -34,8 +34,17 @@ test("_icons method creates calendar and clock button", function() {
     ok(icons.is("span"));
     ok(icons.hasClass("k-select"));
 
-    ok(icons.children(":first").hasClass("k-icon k-i-calendar"));
-    ok(icons.children(":last").hasClass("k-icon k-i-clock"));
+    var date = icons.children().eq(0);
+    var time = icons.children().eq(1);
+
+    ok(date.hasClass("k-link k-link-date"));
+    ok(time.hasClass("k-link k-link-time"));
+
+    ok(date.attr("aria-label"), datetimepicker.options.dateButtonText);
+    ok(time.attr("aria-label"), datetimepicker.options.timeButtonText);
+
+    ok(date.children().hasClass("k-icon k-i-calendar"));
+    ok(time.children().hasClass("k-icon k-i-clock"));
 });
 
 test("DateTimePicker renders last date when navigating", function() {

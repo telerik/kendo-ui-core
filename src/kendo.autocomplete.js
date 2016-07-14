@@ -709,7 +709,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _loader: function() {
-            this._loading = $('<span class="k-icon k-loading" style="display:none"></span>').insertAfter(this.element);
+            this._loading = $('<span class="k-icon k-i-loading" style="display:none"></span>').insertAfter(this.element);
         },
 
         _clearButton: function() {

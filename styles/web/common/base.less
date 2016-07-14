@@ -1,14 +1,14 @@
 /* Kendo base CSS */
 
-.fake{color:red;}
+.fake {color:red;}
 
 .k-common-test-class { opacity: 0; }
 
 .k-reset { margin:0;padding:0;border:0;outline:0;text-decoration:none;font-size:100%;list-style:none;}
 
-.k-floatwrap:after,.k-slider-items:after,.k-grid-toolbar:after{content:"";display:block;clear:both;visibility:hidden;height:0;overflow:hidden;}
-.k-floatwrap,.k-slider-items,.k-grid-toolbar{display:inline-block;}
-.k-floatwrap,.k-slider-items,.k-grid-toolbar{display:block;}
+.k-floatwrap:after,.k-slider-items:after,.k-grid-toolbar:after {content:"";display:block;clear:both;visibility:hidden;height:0;overflow:hidden;}
+.k-floatwrap,.k-slider-items,.k-grid-toolbar {display:inline-block;}
+.k-floatwrap,.k-slider-items,.k-grid-toolbar {display:block;}
 
 /* main gradient */
 
@@ -340,7 +340,7 @@ html body .k-button-bare.k-upload-button:hover
 
 .k-icon,
 .k-sprite,
-.k-button-group .k-tool-icon
+.k-tool-icon
 {
     display: inline-block;
     width: @grid-size;
@@ -361,14 +361,14 @@ html body .k-button-bare.k-upload-button:hover
 /* In IE7 vertical align: middle can't be overridden */
 .k-ie8 .k-icon,
 .k-ie8 .k-sprite,
-.k-ie8 .k-button-group .k-tool-icon
+.k-ie8 .k-tool-icon
 {
     vertical-align: middle;
 }
 
 :root *> .k-icon,
 :root *> .k-sprite,
-:root *> .k-button-group .k-tool-icon
+:root *> .k-tool-icon
 {
     vertical-align: middle;
 }
@@ -389,9 +389,11 @@ html body .k-button-bare.k-upload-button:hover
 // Remove sorting arrows hover state in grid headers
 .k-grid-header th > .k-link:hover span.k-i-arrow-n { .sprite-position(0, 0) }
 .k-grid-header th > .k-link:hover span.k-i-arrow-s { .sprite-position(0, 2) }
-.k-group-indicator .k-link:hover span.k-si-arrow-n { .sprite-position(0, -129px) }
-.k-group-indicator .k-link:hover span.k-si-arrow-s { .sprite-position(0, -159px) }
-.k-group-indicator .k-button:hover span.k-group-delete { .sprite-position(2, 1) }
+.k-group-indicator .k-link:hover span.k-si-arrow-n,
+.k-group-indicator .k-link:hover span.k-i-sarrow-n { .sprite-position(0, -129px) }
+.k-group-indicator .k-link:hover span.k-si-arrow-s,
+.k-group-indicator .k-link:hover span.k-i-sarrow-s { .sprite-position(0, -159px) }
+.k-group-indicator .k-button:hover span.k-group-delete, .k-group-indicator .k-button:hover span.k-i-group-delete { .sprite-position(2, 1) }
 .k-scheduler .k-scheduler-toolbar .k-nav-current .k-link .k-i-calendar { .sprite-position(2, 11); }
 
 .k-i-arrow-n { .sprite-hoverable(0, 0); }
@@ -408,38 +410,38 @@ html body .k-button-bare.k-upload-button:hover
 .k-i-seek-w { .sprite-hoverable(0, 7); }
 .k-i-seek-e { .sprite-hoverable-rtl(0, 7); }
 
-.k-si-arrow-n { .sprite-hoverable(0, -129px); }
-.k-si-arrow-e { .sprite-hoverable(0, 9); }
-.k-si-arrow-s { .sprite-hoverable(0, -159px); }
-.k-si-arrow-w { .sprite-hoverable(0, 11); }
+.k-si-arrow-n, .k-i-sarrow-n { .sprite-hoverable(0, -129px); }
+.k-si-arrow-e, .k-i-sarrow-e { .sprite-hoverable(0, 9); }
+.k-si-arrow-s, .k-i-sarrow-s { .sprite-hoverable(0, -159px); }
+.k-si-arrow-w, .k-i-sarrow-w { .sprite-hoverable(0, 11); }
 
 .k-i-arrowhead-n { .sprite-hoverable(0, 16); }
 .k-i-arrowhead-e { .sprite-hoverable(0, 17); }
 .k-i-arrowhead-s { .sprite-hoverable(0, 18); }
 .k-i-arrowhead-w { .sprite-hoverable(0, 19); }
 
-.k-i-expand, .k-plus, .k-plus-disabled { .sprite-hoverable(0, 12); }
-.k-i-expand-w, .k-rtl .k-i-expand, .k-rtl .k-plus, .k-rtl .k-plus-disabled { .sprite-hoverable(0, 13); }
-.k-i-collapse, .k-minus, .k-minus-disabled { .sprite-hoverable(0, 14); }
-.k-i-collapse-w, .k-rtl .k-i-collapse, .k-rtl .k-minus, .k-rtl .k-minus-disabled { .sprite-hoverable(0, 15); }
+.k-i-expand, .k-plus, .k-plus-disabled, .k-i-plus, .k-i-plus-disabled { .sprite-hoverable(0, 12); }
+.k-i-expand-w, .k-rtl .k-i-expand, .k-rtl .k-plus, .k-rtl .k-plus-disabled, .k-rtl .k-i-plus, .k-rtl .k-i-plus-disabled { .sprite-hoverable(0, 13); }
+.k-i-collapse, .k-minus, .k-minus-disabled, .k-i-minus, .k-i-minus-disabled { .sprite-hoverable(0, 14); }
+.k-i-collapse-w, .k-rtl .k-i-collapse, .k-rtl .k-minus, .k-rtl .k-minus-disabled, .k-rtl .k-i-minus, .k-rtl .k-i-minus-disabled { .sprite-hoverable(0, 15); }
 
-.k-i-pencil, .k-edit { .sprite-hoverable(2, 0); }
-.k-i-close, .k-delete, .k-group-delete { .sprite-hoverable(2, 1); }
+.k-i-pencil, .k-edit, .k-i-edit { .sprite-hoverable(2, 0); }
+.k-i-close, .k-delete, .k-group-delete, .k-i-delete, .k-i-group-delete { .sprite-hoverable(2, 1); }
 .k-si-close { .sprite-hoverable(10, 5); }
-.k-multiselect .k-delete { .sprite-position(10, 5); }
-.k-multiselect .k-state-hover .k-delete { .sprite-position(11, 5); }
+.k-multiselect .k-delete, .k-multiselect .k-i-delete { .sprite-position(10, 5); }
+.k-multiselect .k-state-hover .k-delete, .k-multiselect .k-state-hover .k-i-delete { .sprite-position(11, 5); }
 
-.k-i-tick, .k-insert, .k-update{ .sprite-hoverable(2, 2); }
+.k-i-tick, .k-insert, .k-update, .k-i-insert, .k-i-update { .sprite-hoverable(2, 2); }
 .k-check:checked,
 .k-mobile-list .k-edit-field [type=checkbox],
 .k-mobile-list .k-edit-field [type=radio] { .sprite-hoverable(2, 2); }
 
-.k-i-cancel, .k-cancel, .k-denied { .sprite-hoverable(2, 3); }
-.k-i-plus, .k-add { .sprite-hoverable(2, 4); }
-.k-i-funnel, .k-filter { .sprite-hoverable(2, 5); }
-.k-i-funnel-clear, .k-clear-filter { .sprite-hoverable(2, 6); }
-.k-i-lock{ .sprite-hoverable(4, 0); }
-.k-i-unlock{ .sprite-hoverable(4, 1); }
+.k-i-cancel, .k-cancel, .k-denied, .k-i-denied { .sprite-hoverable(2, 3); }
+.k-i-plus, .k-add, .k-i-add { .sprite-hoverable(2, 4); }
+.k-i-funnel, .k-filter, .k-i-filter { .sprite-hoverable(2, 5); }
+.k-i-funnel-clear, .k-clear-filter, .k-i-clear-filter { .sprite-hoverable(2, 6); }
+.k-i-lock { .sprite-hoverable(4, 0); }
+.k-i-unlock { .sprite-hoverable(4, 1); }
 
 .k-i-refresh { .sprite-hoverable(2, 7); }
 .k-i-exception { .sprite-hoverable(10, 19); }
@@ -448,24 +450,27 @@ html body .k-button-bare.k-upload-button:hover
 .k-i-minimize { .sprite-hoverable(4, 18); }
 .k-i-pin { .sprite-hoverable(10, 16); }
 .k-i-unpin { .sprite-hoverable(10, 17); }
-.k-resize-se { .sprite-hoverable(2, 10); }
+.k-resize-se, .k-i-resize-se { .sprite-hoverable(2, 10); }
+
+// .k-i-hbar { background-position: -38px -309px; }
+// .k-i-vbar { background-position: -165px -6px; }
 
 .k-i-calendar { .sprite-hoverable(2, 11); }
 .k-i-clock { .sprite-hoverable(2, 12); }
-.k-si-plus { .sprite-hoverable(2, 13); }
-.k-si-minus { .sprite-hoverable(2, 14); }
+.k-si-plus, .k-i-splus { .sprite-hoverable(2, 13); }
+.k-si-minus, .k-i-sminus { .sprite-hoverable(2, 14); }
 
 .k-i-search { .sprite-hoverable(2, 15); }
 .k-i-custom { .sprite-hoverable(-115px, -113px, 26); }
 .k-editor .k-i-custom { background-position: -111px -109px; }
-.k-viewHtml { background-position: -288px -120px; }
+.k-viewHtml, .k-i-view-html { background-position: -288px -120px; }
 
-.k-i-insert-n, .k-insert-top { .sprite-hoverable(10, 2); }
-.k-i-insert-m, .k-insert-middle { .sprite-hoverable(10, 3); }
-.k-i-insert-s, .k-insert-bottom { .sprite-hoverable(10, 4); }
+.k-i-insert-n, .k-insert-top, .k-i-insert-top { .sprite-hoverable(10, 2); }
+.k-i-insert-m, .k-insert-middle, .k-i-insert-middle { .sprite-hoverable(10, 3); }
+.k-i-insert-s, .k-insert-bottom, .k-i-insert-bottom { .sprite-hoverable(10, 4); }
 .k-drop-hint { background-position: 0 -326px; }
 
-.k-i-note, .k-warning { .sprite-hoverable(10, 15); }
+.k-i-note, .k-warning, .k-i-info, .k-i-success, .k-i-warning, .k-i-error { .sprite-hoverable(10, 15); }
 
 .k-i-sort-asc { .sprite-hoverable(7, 15); }
 .k-i-sort-desc { .sprite-hoverable(7, 16); }
@@ -489,9 +494,9 @@ html body .k-button-bare.k-upload-button:hover
 .k-i-kpi { .sprite-hoverable(4, 13); }
 .k-i-dimension { .sprite-hoverable(4, 14); }
 
-.k-file { .sprite-hoverable(0, 0); }
-.k-i-folder-add, .k-addfolder { .sprite-hoverable(2, 17); }
-.k-i-folder-up, .k-goup { .sprite-hoverable(2, 18); }
+.k-file, .k-i-file { .sprite-hoverable(0, 0); }
+.k-i-folder-add, .k-addfolder, .k-i-add-folder { .sprite-hoverable(2, 17); }
+.k-i-folder-up, .k-goup, .k-i-go-up { .sprite-hoverable(2, 18); }
 
 .k-i-more { .sprite-hoverable(4, 2); }
 
@@ -557,6 +562,7 @@ html .k-error-colored
 /* loading */
 
 .k-loading,
+.k-i-loading,
 .k-loading-image
 {
     background-color: transparent;

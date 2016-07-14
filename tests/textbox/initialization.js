@@ -28,14 +28,19 @@
             downArrow = textbox._downArrow;
 
         ok(upArrow.parent().hasClass("k-select"));
+
         ok(upArrow.hasClass("k-link"));
+        ok(upArrow.hasClass("k-link-increase"));
+        equal(upArrow.attr("aria-label"), textbox.options.upArrowText);
+
         ok(downArrow.hasClass("k-link"));
+        ok(downArrow.hasClass("k-link-decrease"));
+        equal(downArrow.attr("aria-label"), textbox.options.downArrowText);
+
         ok(upArrow.children(":first").hasClass("k-icon k-i-arrow-n"));
         ok(downArrow.children(":first").hasClass("k-icon k-i-arrow-s"));
-        equal(upArrow.children(":first").attr("title"), textbox.options.upArrowText);
-        equal(downArrow.children(":first").attr("title"), textbox.options.downArrowText);
-        equal(upArrow.children(":first").html(), textbox.options.upArrowText);
-        equal(downArrow.children(":first").html(), textbox.options.downArrowText);
+        equal(upArrow.children(":first").html(), "");
+        equal(downArrow.children(":first").html(), "");
     });
 
     test("Should render INPUT containing the formatted value", function() {

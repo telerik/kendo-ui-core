@@ -87,7 +87,7 @@ test("include arrow after input.k-input", function(){
    ok(spanArrow.hasClass("k-select"));
    ok(arrow.is("span"));
    ok(arrow.hasClass("k-icon k-i-arrow-s"));
-   equal(arrow.html(), "select");
+   equal(arrow.html(), "");
 });
 
 test("text input should keep the visible input empty on init", function() {
@@ -876,7 +876,7 @@ asyncTest("ComboBox hides loading image on error", function() {
         //simulate error
         combobox.dataSource.trigger("error");
 
-        ok(!combobox.wrapper.find(".k-loading").is(":visible"));
+        ok(!combobox.wrapper.find(".k-i-loading").is(":visible"));
     }, 200);
 });
 

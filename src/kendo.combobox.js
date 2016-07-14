@@ -174,7 +174,7 @@ var __meta__ = { // jshint ignore:line
             that._inputWrapper.off(ns);
             clearTimeout(that._pasteTimeout);
 
-            that._arrow.parent().off(CLICK + " " + MOUSEDOWN);
+            that._arrow.off(CLICK + " " + MOUSEDOWN);
             that._clear.off(CLICK + " " + MOUSEDOWN);
 
             Select.fn.destroy.call(that);
@@ -238,7 +238,7 @@ var __meta__ = { // jshint ignore:line
                 readonly = options.readonly,
                 wrapper = that._inputWrapper.off(ns),
                 input = that.element.add(that.input.off(ns)),
-                arrow = that._arrow.parent().off(CLICK + " " + MOUSEDOWN),
+                arrow = that._arrow.off(CLICK + " " + MOUSEDOWN),
                 clear = that._clear;
 
             if (!readonly && !disable) {
@@ -751,7 +751,7 @@ var __meta__ = { // jshint ignore:line
             input = wrapper.find(SELECTOR);
 
             if (!input[0]) {
-                wrapper.append('<span tabindex="-1" unselectable="on" class="k-dropdown-wrap k-state-default"><input ' + name + 'class="k-input" type="text" autocomplete="off"/><span tabindex="-1" unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-arrow-s">select</span></span></span>')
+                wrapper.append('<span tabindex="-1" unselectable="on" class="k-dropdown-wrap k-state-default"><input ' + name + 'class="k-input" type="text" autocomplete="off"/><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-s"></span></span></span>')
                     .append(that.element);
 
                 input = wrapper.find(SELECTOR);
@@ -787,11 +787,12 @@ var __meta__ = { // jshint ignore:line
 
             that._focused = that.input = input;
             that._inputWrapper = $(wrapper[0].firstChild);
-            that._arrow = wrapper.find(".k-icon:last")
+            that._arrow = wrapper.find(".k-select")
                 .attr({
                     "role": "button",
                     "tabIndex": -1
                 });
+
             if (element.id) {
                 that._arrow.attr("aria-controls", that.ul[0].id);
             }

@@ -293,7 +293,7 @@ var __meta__ = { // jshint ignore:line
             arrows = element.siblings(".k-icon");
 
             if (!arrows[0]) {
-                arrows = $(buttonHtml("n", options.upArrowText) + buttonHtml("s", options.downArrowText))
+                arrows = $(buttonHtml("increase", options.upArrowText) + buttonHtml("decrease", options.downArrowText))
                         .insertAfter(element);
 
                 arrows.wrapAll('<span class="k-select"/>');
@@ -692,8 +692,9 @@ var __meta__ = { // jshint ignore:line
         }
     });
 
-    function buttonHtml(className, text) {
-        return '<span unselectable="on" class="k-link"><span unselectable="on" class="k-icon k-i-arrow-' + className + '" title="' + text + '">' + text + '</span></span>';
+    function buttonHtml(direction, text) {
+        var className = "k-i-arrow-" + (direction === "increase" ? "n" : "s");
+        return '<span unselectable="on" class="k-link k-link-' + direction + '" aria-label="' + text + '"><span unselectable="on" class="k-icon ' + className + '"></span></span>';
     }
 
     function truncate(value, precision) {

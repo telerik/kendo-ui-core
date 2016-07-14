@@ -685,7 +685,7 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 wrapper = that.wrapper,
                 innerWrapper = wrapper.children(".k-picker-wrap"),
-                icon = innerWrapper.find(".k-select");
+                arrow = innerWrapper.find(".k-select");
 
             if (arguments.length === 0) {
                 enable = true;
@@ -694,7 +694,7 @@ var __meta__ = { // jshint ignore:line
             that.element.attr("disabled", !enable);
             wrapper.attr("aria-disabled", !enable);
 
-            icon.off(NS).on("mousedown" + NS, preventDefault);
+            arrow.off(NS).on("mousedown" + NS, preventDefault);
 
             wrapper.addClass("k-state-disabled")
                 .removeAttr("tabIndex")
@@ -727,8 +727,8 @@ var __meta__ = { // jshint ignore:line
                     '# } else { #' +
                         '<span class="k-selected-color"></span>' +
                     '# } #' +
-                    '<span class="k-select" unselectable="on">' +
-                        '<span class="k-icon k-i-arrow-s" unselectable="on"></span>' +
+                    '<span class="k-select" unselectable="on" aria-label="select">' +
+                        '<span class="k-icon k-i-arrow-s"></span>' +
                     '</span>' +
                 '</span>' +
             '</span>'
