@@ -13,6 +13,9 @@ The example below demonstrates how to set a different start weekday in a Kendo U
 
 ```html
     <div id="scheduler"></div>
+    
+    <script src="http://kendo.cdn.telerik.com/2016.2.607/js/cultures/kendo.culture.bg-BG.min.js"></script>
+    
     <script>
       kendo.culture("bg-BG"); //week start day depends on the used kendo culture
     </script>
@@ -24,8 +27,7 @@ The example below demonstrates how to set a different start weekday in a Kendo U
           height: 600,
           views: [
             "day",
-            { type: "workWeek", selected: true },
-            "week",
+            { type: "week", selected: true },
             "month",
             "agenda"
           ],
