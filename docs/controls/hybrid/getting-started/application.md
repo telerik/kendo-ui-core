@@ -2,7 +2,7 @@
 title: Application
 page_title: Application | Kendo UI Hybrid Components
 description: "Initiate the Kendo UI Application for mobile and handle its navigation."
-previous_url: /howto/universal-mobile-apps-html5
+previous_url: /howto/universal-mobile-apps-html5, /controls/hybrid/application
 slug: overview_hybridapplication
 position: 4
 ---
