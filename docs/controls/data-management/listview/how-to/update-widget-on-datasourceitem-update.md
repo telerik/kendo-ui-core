@@ -7,7 +7,7 @@ slug: howto_updatelistviewondatasitemupdate_listview
 
 # Update ListView on DataSource Item Update
 
-The dynamic refresh on model update causes undesirable effects. To re-render the kendo UI ListView widget, trigger the change in the dataSource manually after the model update.
+The Kendo UI ListView does not update the content dynamically on model field update. To re-render the widget, trigger the `change` event of the dataSource manually after the model update.
 
 The example below demonstrates how to update the ListView on a dataSource item update.
 
