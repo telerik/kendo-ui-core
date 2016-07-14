@@ -50,8 +50,9 @@ The example below demonstrates how to skip non-editable cells during tabbing the
       var grid = $('#grid').data('kendoGrid');
 
       grid.table.on('keydown', function(e) {
-        if (e.keyCode === kendo.keys.TAB && $(e.target.closest('.k-edit-cell'))[0]) {
-          var currentNumberOfItems = grid.dataSource.view().length;
+        if (e.keyCode === kendo.keys.TAB && $($(e.target).closest('.k-edit-cell'))[0]) {
+          e.preventDefault();
+          var currentNumberOfItems = grid.dataSource.view().length;    
           var row = $(e.target).closest('tr').index();
           var col = grid.cellIndex($(e.target).closest('td'));
 
