@@ -2,7 +2,7 @@
 title: Overview
 page_title: Overview | Kendo UI Hybrid Components
 description: "Build mobile applications using the Kendo UI hybrid components."
-previous_url: /tutorials/build-apps-with-kendo-ui-mobile, /controls/hybrid/introduction
+previous_url: /tutorials/build-apps-with-kendo-ui-mobile
 slug: overview_hybridkendoui
 position: 1
 ---

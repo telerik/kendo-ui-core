@@ -1,13 +1,13 @@
 ---
-title: Integration with AngularJS
-page_title: Integration with AngularJS | Kendo UI Hybrid Components
+title: AngularJS for Hybrid UI
+page_title: AngularJS for Hybrid UI | Kendo UI Hybrid Components
 description: "Use the AngularJS directives with hybrid mobile Kendo UI components."
-previous_url: /controls/hybrid/angular/angular, /controls/hybrid/support/angular/angular, /AngularJS/angular-hybrid
+previous_url: /controls/hybrid/angular/angular, /controls/hybrid/support/angular/angular
 slug: angularjssupport_hybridkendoui
-position: 3
+position: 5
 ---
 
-# Integration with AngularJS
+# AngularJS for Hybrid UI
 
 As of the Kendo UI Q3 2014 release, Kendo UI includes AngularJS directives for some of its Hybrid UI components, such as the hybrid mobile Application and View, the SplitView, and the ModalView. In this context, the mobile views support AngularJS controllers, directives and tw- way data binding expressions.
 
