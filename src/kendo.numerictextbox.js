@@ -644,10 +644,15 @@ var __meta__ = { // jshint ignore:line
         },
 
         _placeholder: function(value) {
-            this._text.val(value);
+            var input = this._text;
+
+            input.val(value);
             if (!placeholderSupported && !value) {
-                this._text.val(this.options.placeholder);
+                input.val(this.options.placeholder);
             }
+
+            input.attr("title", input.attr("title") || input.val());
+            input.attr("aria-title", input.attr("title") || input.val());
         },
 
         _wrapper: function() {

@@ -245,6 +245,24 @@
         equal(numerictextbox.wrapper.find(".k-formatted-value").attr("title"), title);
     });
 
+    test("NumericTextBox copies the input title to the visible input aria-title attr", function() {
+        var textbox = input.attr("title", "foo").kendoNumericTextBox().data("kendoNumericTextBox");
+
+        equal(textbox._text.attr("aria-title"), textbox._text.attr("title"));
+    });
+
+    test("NumericTextBox copies the formatted value to the visible input title attr", function() {
+        var textbox = new NumericTextBox(input, { value: 10 });
+
+        equal(textbox._text.attr("aria-title"), textbox._text.val());
+    });
+
+    test("NumericTextBox copies the formatted value to the visible input aria-title attr", function() {
+        var textbox = new NumericTextBox(input, { value: 10 });
+
+        equal(textbox._text.attr("title"), textbox._text.val());
+    });
+
     test("NumericTextBox is disabled when placed in disabled fieldset", function() {
         $(input).wrap('<fieldset disabled="disabled"></fieldset>');
         input.kendoNumericTextBox().data("kendoNumericTextBox");
