@@ -8,7 +8,7 @@ position: 2
 
 # Processing
 
-Kendo UI ships a `.NET`-based server-side module established on [Telerik `RadSpreadProcessing`](http://docs.telerik.com/devtools/wpf/controls/radspreadprocessing/overview)&mdash;part of the Telerik Document Processing.
+Kendo UI ships a `.NET`-based server-side module established on [Telerik `RadSpreadProcessing`](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview)&mdash;part of the Telerik Document Processing.
 
 It allows the import, export, and processing of data from various formats:
 
