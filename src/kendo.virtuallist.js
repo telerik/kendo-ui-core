@@ -694,6 +694,10 @@ var __meta__ = { // jshint ignore:line
             return this._selectedDataItems.slice();
         },
 
+        scrollWith: function(value) {
+            this.content.scrollTop(this.content.scrollTop() + value);
+        },
+
         scrollTo: function(y) {
             this.content.scrollTop(y); //works only if the element is visible
         },
