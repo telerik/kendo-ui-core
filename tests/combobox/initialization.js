@@ -1,8 +1,7 @@
 (function() {
 
-var ComboBox = kendo.ui.ComboBox,
-    combobox,
-    input;
+var ComboBox = kendo.ui.ComboBox;
+var input;
 
 module("kendo.ui.ComboBox initialization", {
     setup: function() {
@@ -12,19 +11,30 @@ module("kendo.ui.ComboBox initialization", {
     teardown: function() {
         kendo.ns = "";
 
-        combobox.destroy();
+        var combobox = input.getKendoComboBox();
+
+        if (combobox) {
+            combobox.destroy();
+        }
+
+        var selectCombo = QUnit.fixture.find("select").getKendoComboBox();
+
+        if (selectCombo) {
+            selectCombo.destroy();
+        }
+
         kendo.destroy(QUnit.fixture);
     }
 });
 
 test("kendoComboBox attaches a combobox object to target", function() {
-   combobox = input.kendoComboBox({ data: [] }).data("kendoComboBox");
+   var combobox = input.kendoComboBox({ data: [] }).data("kendoComboBox");
 
    ok(input.data("kendoComboBox") instanceof ComboBox);
 });
 
 test("kendoComboBox extends passed options", function() {
-    combobox = new ComboBox(input, { test: 1});
+    var combobox = new ComboBox(input, { test: 1});
 
     var options = combobox.options;
 
@@ -33,7 +43,7 @@ test("kendoComboBox extends passed options", function() {
 });
 
 test("combobox creates static list view", function() {
-    combobox = new ComboBox(input);
+    var combobox = new ComboBox(input);
 
     ok(combobox.listView instanceof kendo.ui.StaticList);
 });
@@ -41,7 +51,7 @@ test("combobox creates static list view", function() {
 test("wraps element if no wrapper span.k-widget and hide element", function() {
    input.wrap("<span class='test'/>");
 
-   combobox = new ComboBox(input);
+   var combobox = new ComboBox(input);
 
    var wrapper = combobox.wrapper;
 
@@ -50,11 +60,11 @@ test("wraps element if no wrapper span.k-widget and hide element", function() {
    ok(wrapper.hasClass("k-widget k-combobox k-header"));
    ok(!input.is(":visible"));
 
-   input.parent().remove();
+   input.unwrap();
 });
 
 test("create a text input", function() {
-   combobox = new ComboBox(input.attr("name", "combo1"), {
+   var combobox = new ComboBox(input.attr("name", "combo1"), {
        text: "test"
    });
 
@@ -69,7 +79,7 @@ test("create a text input", function() {
 });
 
 test("text input should be wrapped with span", function(){
-   combobox = new ComboBox(input);
+   var combobox = new ComboBox(input);
 
    var comboWrapper = combobox.input.parent();
 
@@ -78,7 +88,7 @@ test("text input should be wrapped with span", function(){
 });
 
 test("include arrow after input.k-input", function(){
-   combobox = new ComboBox(input);
+   var combobox = new ComboBox(input);
 
     var spanArrow = combobox.input.next().next(),
        arrow = spanArrow.children().eq(0);
@@ -91,7 +101,7 @@ test("include arrow after input.k-input", function(){
 });
 
 test("text input should keep the visible input empty on init", function() {
-   combobox = new ComboBox(input.val("item"), {
+   var combobox = new ComboBox(input.val("item"), {
         autoBind: false
    });
 
@@ -100,7 +110,7 @@ test("text input should keep the visible input empty on init", function() {
 
 test("text input shows options.text value", function() {
     var text = "visible";
-    combobox = new ComboBox(input.val("item"), {
+    var combobox = new ComboBox(input.val("item"), {
         autoBind: false,
         text: text
     });
@@ -109,7 +119,7 @@ test("text input shows options.text value", function() {
 });
 
 test("bound widget should set text to the custom value", function() {
-   combobox = new ComboBox(input.val("item"), {
+   var combobox = new ComboBox(input.val("item"), {
         autoBind: true,
         dataSource: []
    });
@@ -120,7 +130,7 @@ test("bound widget should set text to the custom value", function() {
 test("data source instance reference is preserved when pass DataSource", function() {
    var dataSource = kendo.data.DataSource.create([{text: 1, value: 1}, {text:2, value:2}]);
 
-   combobox = new ComboBox(input, {dataSource: dataSource});
+   var combobox = new ComboBox(input, {dataSource: dataSource});
 
     ok(combobox.dataSource);
     equal(combobox.dataSource, dataSource);
@@ -130,7 +140,7 @@ test("data source instance reference is preserved when pass DataSource", functio
 test("data source is initialized from options when it is an array", function() {
     var data = [{text: 1, value: 1}, {text:2, value:2}];
 
-    combobox = new ComboBox(input, data);
+    var combobox = new ComboBox(input, data);
 
     ok(combobox.dataSource);
     combobox.dataSource.read();
@@ -140,7 +150,7 @@ test("data source is initialized from options when it is an array", function() {
 test("data source is initialized from options.dataSource when array is passed", function() {
     var data = [{text: 1, value: 1}, {text:2, value:2}];
 
-    combobox = new ComboBox(input, {
+    var combobox = new ComboBox(input, {
         dataSource: data
     });
 
@@ -152,7 +162,7 @@ test("data source is initialized from options.dataSource when array is passed", 
 test("data source is initialized from options.dataSource", function() {
    var data = [{text: 1, value: 1}, {text:2, value:2}];
 
-   combobox = new ComboBox(input, {
+   var combobox = new ComboBox(input, {
        dataSource: {
            data: data
        }
@@ -166,7 +176,7 @@ test("data source is initialized from options.dataSource", function() {
 test("data source is initialized from OPTION items + one custom OPTION", function() {
    var select = $("<select><option value=1>Chai</option><option value=1 selected='selected'>Chai</option></select>").appendTo(QUnit.fixture);
 
-   combobox = new ComboBox(select);
+   var combobox = new ComboBox(select);
 
    var data = combobox.dataSource.view();
 
@@ -180,7 +190,7 @@ test("data source is initialized from OPTION items + one custom OPTION", functio
 test("ComboBox selects correct option on init", function() {
    var select = $("<select><option value=1>Chai</option><option value=2 selected='selected'>Chang</option></select>").appendTo(QUnit.fixture);
 
-   combobox = new ComboBox(select);
+   var combobox = new ComboBox(select);
 
    equal(select.val(), "2");
 });
@@ -188,7 +198,7 @@ test("ComboBox selects correct option on init", function() {
 test("ComboBox persists custom value after re-bind", function() {
    var select = $("<select></select>").appendTo(QUnit.fixture);
 
-   combobox = new ComboBox(select);
+   var combobox = new ComboBox(select);
 
    combobox.value("custom");
    combobox.dataSource.data(["test"]);
@@ -199,7 +209,7 @@ test("ComboBox persists custom value after re-bind", function() {
 test("selected index is get from select element", function() {
    var select = $("<select><option value=1>Chai</option><option value=1 selected='selected'>Chai</option></select>").appendTo(QUnit.fixture);
 
-   combobox = new ComboBox(select);
+   var combobox = new ComboBox(select);
 
    equal(combobox.options.index, 1);
 });
@@ -207,7 +217,7 @@ test("selected index is get from select element", function() {
 test("set text if select and not autoBind", function() {
    var select = $("<select><option value=1>Chai</option><option value=1 selected='selected'>Chai</option></select>").appendTo(QUnit.fixture);
 
-   combobox = new ComboBox(select, {autoBind: false});
+   var combobox = new ComboBox(select, {autoBind: false});
 
    equal(combobox.input.val(), "Chai");
 });
@@ -216,7 +226,7 @@ test("retrived data from OPTIONS does not override options.dataSource", function
    var select = $("<select><option value=1>Chai</option><option value=2 selected='selected'>Beverages</option></select>").appendTo(QUnit.fixture);
    var data = [{text: "Foo", value: "Foo"}];
 
-   combobox = new ComboBox(select, {
+   var combobox = new ComboBox(select, {
        dataSource: {
            data: data
        }
@@ -235,7 +245,7 @@ test("retrived data from OPTIONS does not override options.dataSource", function
 test("combobox does not select first item if initialized from empty select", function() {
    var select = $("<select></select>").appendTo(QUnit.fixture);
 
-   combobox = new ComboBox(select, {
+   var combobox = new ComboBox(select, {
        dataSource: [{text: "Foo", value: "Foo"}],
        dataTextField: "text",
        dataValueField: "value"
@@ -248,7 +258,7 @@ test("combobox does not select first item if initialized from empty select", fun
 test("combobox do not select custom option when value is empty string", function() {
    var select = $("<select></select>").appendTo(QUnit.fixture);
 
-   combobox = new ComboBox(select, {
+   var combobox = new ComboBox(select, {
        dataSource: [{text: "Foo", value: "Foo"}],
        dataTextField: "text",
        dataValueField: "value"
@@ -262,7 +272,7 @@ test("combobox keeps selected index on rebind", function() {
 
    select.append(document.createTextNode(""));
 
-   combobox = new ComboBox(select, {
+   var combobox = new ComboBox(select, {
        dataSource: [{text: "Foo", value: "Foo"}],
        dataTextField: "text",
        dataValueField: "value",
@@ -277,7 +287,7 @@ test("combobox selects first item when initalized from select with TEXT node", f
 
    select.append(document.createTextNode(""));
 
-   combobox = new ComboBox(select, {
+   var combobox = new ComboBox(select, {
        dataSource: [{text: "Foo", value: "Foo"}],
        dataTextField: "text",
        dataValueField: "value"
@@ -288,7 +298,7 @@ test("combobox selects first item when initalized from select with TEXT node", f
 });
 
 test("combobox initializes an UL for its items", function() {
-     combobox = new ComboBox(input, []);
+     var combobox = new ComboBox(input, []);
 
      ok(combobox.ul);
      ok(combobox.ul.is("ul"));
@@ -296,7 +306,7 @@ test("combobox initializes an UL for its items", function() {
 });
 
 test("combobox initializes a popup for its items", function() {
-     combobox = new ComboBox(input, []);
+     var combobox = new ComboBox(input, []);
 
      ok(combobox.popup);
      ok(combobox.popup instanceof kendo.ui.Popup);
@@ -315,7 +325,7 @@ test("combobox shrink ul if the height of the items is more then options.height"
                {text:2, value:2},
                {text:2, value:2}];
 
-      combobox = new ComboBox(input, data);
+      var combobox = new ComboBox(input, data);
       combobox.options.height = 100;
 
       combobox.dataSource.read();
@@ -335,7 +345,7 @@ test("combobox substracts height of header from list content", function() {
                {text:2, value:2},
                {text:2, value:2}];
 
-    combobox = new ComboBox(input, {
+    var combobox = new ComboBox(input, {
        dataSource: data,
        headerTemplate: "<div>Header</div>"
     });
@@ -349,7 +359,7 @@ test("combobox substracts height of header from list content", function() {
 });
 
 test("combobox calculates popup height properly when ul has overflow-x styling", function() {
-    combobox = new ComboBox(input, {
+    var combobox = new ComboBox(input, {
         dataSource: ["item1", "item2", "item3", "item4", "item5"],
         height: 50
     });
@@ -364,7 +374,7 @@ test("combobox calculates popup height properly when ul has overflow-x styling",
 });
 
 test("combobox populates its list when the datasource changes", function() {
-   combobox = new ComboBox(input, {
+   var combobox = new ComboBox(input, {
        dataTextField: "text",
        dataValueField: "value",
        dataSource: [{text: "foo", value: 1}, {text:2, value:2}]
@@ -377,7 +387,7 @@ test("combobox populates its list when the datasource changes", function() {
 });
 
 test("combobox sets default item template", function(){
-    combobox = new ComboBox(input, { });
+    var combobox = new ComboBox(input, { });
 
     var template = combobox.listView.options.template;
 
@@ -385,7 +395,7 @@ test("combobox sets default item template", function(){
 });
 
 test("template should use defined datatextField", function(){
-    combobox = new ComboBox(input, {
+    var combobox = new ComboBox(input, {
         dataTextField : "ProductName"
     });
 
@@ -395,7 +405,7 @@ test("template should use defined datatextField", function(){
 });
 
 test("changing the template", function() {
-    combobox = new ComboBox(input, {
+    var combobox = new ComboBox(input, {
         datatextField: "",
         template: "#= data.toUpperCase() #"
     });
@@ -406,7 +416,7 @@ test("changing the template", function() {
 });
 
 test("defining header template", function() {
-    combobox = new ComboBox(input, {
+    var combobox = new ComboBox(input, {
         template: "#= data.toUpperCase() #",
         headerTemplate: "<div>Header</div>"
     });
@@ -417,7 +427,7 @@ test("defining header template", function() {
 });
 
 test("render footer container", function() {
-    combobox = new ComboBox(input, {
+    var combobox = new ComboBox(input, {
         footerTemplate: "footer"
     });
 
@@ -428,7 +438,7 @@ test("render footer container", function() {
 });
 
 test("render footer template", function() {
-    combobox = new ComboBox(input, {
+    var combobox = new ComboBox(input, {
         autoBind: true,
         footerTemplate: "footer"
     });
@@ -439,7 +449,7 @@ test("render footer template", function() {
 });
 
 test("compile footer template with the combobox instance", function() {
-    combobox = new ComboBox(input, {
+    var combobox = new ComboBox(input, {
         autoBind: true,
         footerTemplate: "#: instance.dataSource.total() #"
     });
@@ -450,7 +460,7 @@ test("compile footer template with the combobox instance", function() {
 });
 
 test("update footer template on dataBound", function() {
-    combobox = new ComboBox(input, {
+    var combobox = new ComboBox(input, {
         autoBind: true,
         footerTemplate: "#: instance.dataSource.total() #"
     });
@@ -477,7 +487,7 @@ test("adjust height if footer template", function() {
 });
 
 test("should populate text and value if items", function() {
-   combobox = new ComboBox(input, {
+   var combobox = new ComboBox(input, {
        dataTextField: "text",
        dataValueField: "value",
        dataSource: [{text: "foo", value: 1}, {text:2, value:2}],
@@ -491,7 +501,7 @@ test("should populate text and value if items", function() {
 test("disabled input rendered with wrapper.k-state-disabled", function() {
    input.attr("disabled", "disabled").kendoComboBox();
 
-   combobox = input.data("kendoComboBox");
+   var combobox = input.data("kendoComboBox");
 
    ok(combobox._inputWrapper.hasClass("k-state-disabled"));
    ok(combobox.input.prop("disabled"));
@@ -502,7 +512,7 @@ test("ComboBox disables on init", function() {
         enabled: false
    });
 
-   combobox = input.data("kendoComboBox");
+   var combobox = input.data("kendoComboBox");
 
    ok(combobox._inputWrapper.hasClass("k-state-disabled"));
    ok(combobox.input.prop("disabled"));
@@ -511,7 +521,7 @@ test("ComboBox disables on init", function() {
 test("rebuild select options if data", function() {
    var select = $("<select><option>&lt;script&gt;alert(1)&lt;/script&gt;</option></select>").appendTo(QUnit.fixture);
 
-   combobox = new ComboBox(select);
+   var combobox = new ComboBox(select);
 
    equal(select.children(":first")[0].text, "<script>alert(1)<\/script>");
 });
@@ -519,7 +529,7 @@ test("rebuild select options if data", function() {
 test("Encodes the text value of the option element", function() {
    var select = $("<select><option value=1>foo1</option><option value=2>foo2</option><option value=3>foo3</option></select>").appendTo(QUnit.fixture);
 
-   combobox = new ComboBox(select, {
+   var combobox = new ComboBox(select, {
        dataTextField: "text",
        dataValueField: "value",
        dataSource: [{text: "Foo&", value: 0}, {text: 0, value:5}]
@@ -531,7 +541,7 @@ test("Encodes the text value of the option element", function() {
 test("value with space should be added to option", 1, function() {
    var select = $("<select><option value=1>foo1</option><option value=2>foo2</option><option value=3>foo3</option></select>").appendTo(QUnit.fixture);
 
-   combobox = new ComboBox(select, {
+   var combobox = new ComboBox(select, {
        index: 0,
        value: "",
        dataTextField: "text",
@@ -548,7 +558,7 @@ test("copy input styles to the visible input", function() {
 
    var color = input.css("color");
 
-   combobox = input.data("kendoComboBox");
+   var combobox = input.data("kendoComboBox");
 
    equal(combobox.input.css("color"), color);
    ok(combobox.input.is(":visible"));
@@ -559,7 +569,7 @@ test("copy input title attribute to the visible input", function() {
 
    var title = input.attr("title");
 
-   combobox = input.data("kendoComboBox");
+   var combobox = input.data("kendoComboBox");
 
    equal(combobox.input.attr("title"), title);
    ok(combobox.input.is(":visible"));
@@ -568,7 +578,7 @@ test("copy input title attribute to the visible input", function() {
 test("copy input className to the visible input", function() {
    input.addClass("test").kendoComboBox();
 
-   combobox = input.data("kendoComboBox");
+   var combobox = input.data("kendoComboBox");
 
    ok(combobox.input.hasClass("test"));
 });
@@ -576,7 +586,7 @@ test("copy input className to the visible input", function() {
 test("copy input className to the wrapper", function() {
    input.addClass("test").kendoComboBox();
 
-   combobox = input.data("kendoComboBox");
+   var combobox = input.data("kendoComboBox");
 
    ok(combobox.wrapper.hasClass("test"));
 });
@@ -585,7 +595,7 @@ test("set height if items height is bigger than options.height", function() {
    var dataSource = new kendo.data.DataSource.create([{text: 1, value: 1}, {text:2, value:2}]);
    dataSource.read();
 
-   combobox = new ComboBox(input, {
+   var combobox = new ComboBox(input, {
        autoBind: false,
        dataSource: dataSource,
        template: "<div style='height:30px'>#= text # </div>",
@@ -602,7 +612,7 @@ if (!kendo.support.touch) {
     test("pointer over widget should add hover state", function() {
         var data = [{text: 1, value: 1}, {text:2, value:2}];
 
-        combobox = new ComboBox(input, {
+        var combobox = new ComboBox(input, {
              dataSource: data
         });
 
@@ -617,7 +627,7 @@ if (!kendo.support.touch) {
 test("leaving widget should remove hover state", function() {
     var data = [{text: 1, value: 1}, {text:2, value:2}];
 
-    combobox = new ComboBox(input, {
+    var combobox = new ComboBox(input, {
          dataSource: data
     });
 
@@ -629,19 +639,19 @@ test("leaving widget should remove hover state", function() {
 });
 
 test("set selectedIndex", function() {
-    combobox = input.kendoComboBox().data("kendoComboBox");
+    var combobox = input.kendoComboBox().data("kendoComboBox");
 
     equal(combobox.selectedIndex, -1);
 });
 
 test("set selectedIndex when autoBind: false", function() {
-    combobox = input.kendoComboBox({ autoBind: false }).data("kendoComboBox");
+    var combobox = input.kendoComboBox({ autoBind: false }).data("kendoComboBox");
 
     equal(combobox.selectedIndex, -1);
 });
 
 test("do not suggest on init", function() {
-    combobox = input.kendoComboBox({
+    var combobox = input.kendoComboBox({
         dataSource: ["text1", "text2"],
         suggest: true
     }).data("kendoComboBox");
@@ -652,7 +662,7 @@ test("do not suggest on init", function() {
 test("list.mousedown should focus input", function() {
     var data = [{text: 1, value: 1}, {text:2, value:2}];
 
-    combobox = new ComboBox(input, {
+    var combobox = new ComboBox(input, {
          dataSource: data
     });
 
@@ -666,7 +676,7 @@ test("list.mousedown should focus input", function() {
 test("Calling triggerHandler('focus') focuses visible one", function() {
     var data = [{text: 1, value: 1}, {text:2, value:2}];
 
-    combobox = new ComboBox(input, {
+    var combobox = new ComboBox(input, {
          dataSource: data
     });
 
@@ -676,7 +686,7 @@ test("Calling triggerHandler('focus') focuses visible one", function() {
 });
 
 test("resetting dataSource detaches the previouse events", 0, function() {
-    combobox = new ComboBox($("<input/>").appendTo(QUnit.fixture));
+    var combobox = new ComboBox(input);
 
     var dataSource = combobox.dataSource;
 
@@ -690,7 +700,7 @@ test("resetting dataSource detaches the previouse events", 0, function() {
 });
 
 test("resetting DataSource rebinds the widget", function() {
-    combobox = new ComboBox($("<input/>").appendTo(QUnit.fixture),{
+    var combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value"
     });
@@ -705,7 +715,7 @@ test("resetting DataSource rebinds the widget", function() {
 test("Set data source does not change selected index", function() {
    var select = $("<select></select>").appendTo(QUnit.fixture);
 
-   combobox = new ComboBox(select, {
+   var combobox = new ComboBox(select, {
         dataTextField: "text",
         dataValueField: "value",
         index: -1
@@ -721,7 +731,7 @@ test("Set data source does not change selected index", function() {
 });
 
 test("Persist value when rebind data source", function() {
-    combobox = new ComboBox(input,{
+    var combobox = new ComboBox(input, {
         dataTextField: "text",
         dataValueField: "value",
         dataSource: [{text: 1, value: 1}, {text:2, value:2}],
@@ -736,7 +746,9 @@ test("Persist value when rebind data source", function() {
 });
 
 test("persist tabIndex of the original element", function() {
-    combobox = new ComboBox($("<input tabindex='5'/>").appendTo(QUnit.fixture));
+    input.attr("tabindex", 5);
+
+    var combobox = new ComboBox(input);
 
     var text = combobox.input;
 
@@ -744,7 +756,9 @@ test("persist tabIndex of the original element", function() {
 });
 
 test("move accesskey to the visible input", function() {
-    combobox = new ComboBox($("<input accesskey='w'/>").appendTo(QUnit.fixture));
+    input.attr("accesskey", "w");
+
+    var combobox = new ComboBox(input);
 
     var text = combobox.input;
 
@@ -752,7 +766,7 @@ test("move accesskey to the visible input", function() {
 });
 
 test("ComboBox sets element value if option.value is defined", function() {
-    combobox = input.kendoComboBox({
+    var combobox = input.kendoComboBox({
         dataSource: ["Item1", "Item2"],
         value: "Item2",
     }).data("kendoComboBox");
@@ -761,7 +775,7 @@ test("ComboBox sets element value if option.value is defined", function() {
 });
 
 test("ComboBox sets element value if option.value is defined (select)", function() {
-    combobox = $("<select/>").appendTo(QUnit.fixture).kendoComboBox({
+    var combobox = $("<select/>").appendTo(QUnit.fixture).kendoComboBox({
         dataSource: ["Item1", "Item2"],
         value: "Item2",
     }).data("kendoComboBox");
@@ -770,7 +784,7 @@ test("ComboBox sets element value if option.value is defined (select)", function
 });
 
 test("ComboBox displays text if autoBind false", function() {
-    combobox = input.kendoComboBox({
+    var combobox = input.kendoComboBox({
         text: "Chai",
         placeholder: "Select...",
         autoBind: false
@@ -781,14 +795,14 @@ test("ComboBox displays text if autoBind false", function() {
 
 test("ComboBox copies maxlength attr to the fake input", function() {
     input.attr("maxLength", 10);
-    combobox = new kendo.ui.ComboBox(input);
+    var combobox = new kendo.ui.ComboBox(input);
 
     equal(combobox.input.attr("maxLength"), 10);
 });
 
 test("ComboBox sets value on refresh", function() {
     input.val("Foo");
-    combobox = new kendo.ui.ComboBox(input);
+    var combobox = new kendo.ui.ComboBox(input);
 
     combobox.dataSource.data(["Boo", "Foo"]);
 
@@ -796,7 +810,7 @@ test("ComboBox sets value on refresh", function() {
 });
 
 test("ComboBox does not suggest on load", function() {
-    combobox = new kendo.ui.ComboBox(input.val("Item2"), {
+    var combobox = new kendo.ui.ComboBox(input.val("Item2"), {
         suggest: true,
         value: "Item2",
         autoBind: false
@@ -819,7 +833,7 @@ asyncTest("ComboBox fetches only once on open and not data is returned", functio
     $.mockjax({ url: "foo.json", responseText: '[]' });
 
     var called = 0;
-    combobox = new kendo.ui.ComboBox(input.val("Item2"), {
+    var combobox = new kendo.ui.ComboBox(input.val("Item2"), {
         autoBind: false,
         dataSource: {
             transport: {
@@ -846,7 +860,7 @@ asyncTest("form reset support", 2, function() {
 
     var form = $("<form/>").appendTo(QUnit.fixture).append(input);
 
-    combobox = new ComboBox(input, {
+    var combobox = new ComboBox(input, {
          dataSource: [{text: 1, value: 1}, {text:2, value:2}]
     });
 
@@ -862,7 +876,7 @@ asyncTest("form reset support", 2, function() {
 });
 
 test("ComboBox honors readonly attribute", function() {
-    combobox = input.attr("readonly", true).kendoComboBox().data("kendoComboBox");
+    var combobox = input.attr("readonly", true).kendoComboBox().data("kendoComboBox");
 
     combobox._arrow.click();
 
@@ -870,7 +884,7 @@ test("ComboBox honors readonly attribute", function() {
 });
 
 test("ComboBox uses disabled attr over the readonly", function() {
-    combobox = input.attr("readonly", true)
+    var combobox = input.attr("readonly", true)
                     .attr("disabled", true)
                     .kendoComboBox()
                     .data("kendoComboBox");
@@ -879,7 +893,7 @@ test("ComboBox uses disabled attr over the readonly", function() {
 });
 
 asyncTest("ComboBox hides loading image on error", function() {
-    combobox = input.kendoComboBox().data("kendoComboBox");
+    var combobox = input.kendoComboBox().data("kendoComboBox");
 
     //simulate request start
     combobox.dataSource.trigger("progress");
@@ -895,7 +909,7 @@ asyncTest("ComboBox hides loading image on error", function() {
 });
 
 test("ComboBox sets options.value to input value on init", function() {
-    combobox = input.val("1").kendoComboBox().data("kendoComboBox");
+    var combobox = input.val("1").kendoComboBox().data("kendoComboBox");
 
     equal(combobox.options.value, "1");
 });
@@ -912,7 +926,7 @@ test("ComboBox adds scrollbar width to the fixed group header padding", function
         group: "value"
     });
 
-    combobox = input.kendoComboBox({
+    var combobox = input.kendoComboBox({
         dataSource: dataSource,
         height: 50
     }).data("kendoComboBox");
@@ -936,7 +950,7 @@ test("ComboBox does not add scrollbar width to the fixed group header padding if
         group: "value"
     });
 
-    combobox = input.kendoComboBox({
+    var combobox = input.kendoComboBox({
         dataSource: dataSource,
         height: 350
     }).data("kendoComboBox");
@@ -959,7 +973,7 @@ test("ComboBox updates selected text when selected item is changed", function() 
         ]
     });
 
-    combobox = input.kendoComboBox({
+    var combobox = input.kendoComboBox({
         dataTextField: "text",
         dataValueField: "value",
         dataSource: dataSource,
@@ -974,7 +988,7 @@ test("ComboBox updates selected text when selected item is changed", function() 
 test("ComboBox shows the custom value if source is empty", function() {
    var select = $("<select></select>").appendTo(QUnit.fixture);
 
-   combobox = new ComboBox(select, { value: "custom" });
+   var combobox = new ComboBox(select, { value: "custom" });
 
    equal(combobox.text(), "custom");
 });
@@ -982,7 +996,7 @@ test("ComboBox shows the custom value if source is empty", function() {
 test("ComboBox shows the custom text if source is empty", function() {
    var select = $("<select></select>").appendTo(QUnit.fixture);
 
-   combobox = new ComboBox(select, { value: "custom", text: "custom text" });
+   var combobox = new ComboBox(select, { value: "custom", text: "custom text" });
 
    equal(combobox.value(), "custom");
    equal(combobox.text(), "custom text");
@@ -991,7 +1005,7 @@ test("ComboBox shows the custom text if source is empty", function() {
 asyncTest("ComboBox shows the custom text if source is empty", 2, function() {
    var select = $("<select></select>").appendTo(QUnit.fixture);
 
-   combobox = new ComboBox(select, {
+   var combobox = new ComboBox(select, {
        autoBind: false,
        dataSource: {
            transport: {
@@ -1020,7 +1034,7 @@ test("ComboBox with autoBind:false reads datasource ", 1, function() {
 
    dataSource.read();
 
-   combobox = new ComboBox(select, {
+   var combobox = new ComboBox(select, {
        autoBind: false,
        dataSource: dataSource
    });
@@ -1036,7 +1050,7 @@ test("ComboBox updates the selected text on source rebind", function() {
         { name: "item2", value: 2, group: "b" }
     ];
 
-    combobox = input.kendoComboBox({
+    var combobox = input.kendoComboBox({
         dataSource: {
             transport: {
                 read: function(options) {
@@ -1064,7 +1078,7 @@ test("ComboBox is disabled when placed in disabled fieldset", function() {
 });
 
 asyncTest("ComboBox calls placeholder method when delayed binding is used", 1, function() {
-    combobox = input.kendoComboBox({
+    var combobox = input.kendoComboBox({
         text: "Chai",
         placeholder: "Select...",
         autoBind: false
@@ -1083,7 +1097,7 @@ asyncTest("ComboBox calls placeholder method when delayed binding is used", 1, f
 });
 
 test("ComboBox opens the popup if noDataTemplate", function() {
-    combobox = new ComboBox(input, {
+    var combobox = new ComboBox(input, {
         noDataTemplate: "no data"
     });
 
@@ -1093,7 +1107,7 @@ test("ComboBox opens the popup if noDataTemplate", function() {
 });
 
 test("ComboBox doesn't open the popup if no data", function() {
-    combobox = new ComboBox(input, {
+    var combobox = new ComboBox(input, {
         noDataTemplate: ""
     });
 
@@ -1105,7 +1119,7 @@ test("ComboBox doesn't open the popup if no data", function() {
 test("widget keeps defaultSelected property", function() {
    var select = $("<select><option>foo</option><option selected>bar</option><option>baz</option></select>").appendTo(QUnit.fixture);
 
-    combobox = new ComboBox(select, {
+    var combobox = new ComboBox(select, {
         value: "bar"
     });
 
@@ -1121,7 +1135,7 @@ test("widget keeps defaultSelected property", function() {
 });
 
 test("ComboBox does not bind on open if minLength & autoBind: false", function() {
-    combobox = new ComboBox(input, {
+    var combobox = new ComboBox(input, {
         minLength: 3,
         autoBind: false,
         filter: "contains"
