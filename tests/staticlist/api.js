@@ -1384,7 +1384,7 @@
         equal(list.screenHeight(), 200);
     });
 
-    /*test("scrollPage moves scroll position down", 2, function() {
+    test("scrollWith moves scroll position down", 1, function() {
         var list = new StaticList(element, {
             dataSource: getData(100),
             template: "#:data#"
@@ -1392,15 +1392,16 @@
 
         list.dataSource.read();
 
-        var content = list.content.height(200);
+        var content = list.content
+                          .height(200)
+                          .scrollTop(100);
 
-        list.scrollPage(1);
+        list.scrollWith(50);
 
-        ok(content[0].scrollTop > 0);
-        equal(content[0].scrollTop, content[0].clientHeight);
+        ok(content[0].scrollTop, 150);
     });
 
-    test("scrollPage moves scroll position up", 1, function() {
+    test("scrollWith moves scroll position up", 1, function() {
         var list = new StaticList(element, {
             dataSource: getData(100),
             template: "#:data#"
@@ -1408,12 +1409,14 @@
 
         list.dataSource.read();
 
-        var content = list.content.height(200).scrollTop(200);
+        var content = list.content
+                          .height(200)
+                          .scrollTop(100);
 
-        list.scrollPage(-1);
+        list.scrollWith(-50);
 
-        equal(content[0].scrollTop, 0);
-    });*/
+        equal(content[0].scrollTop, 50);
+    });
 
     test("bound returns bound state of the list", function() {
         var list = new StaticList(element, {

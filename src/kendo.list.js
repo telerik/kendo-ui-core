@@ -1462,6 +1462,10 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        scrollWith: function(value) {
+            this.content.scrollTop(this.content.scrollTop() + value);
+        },
+
         scroll: function (item) {
             if (!item) {
                 return;
