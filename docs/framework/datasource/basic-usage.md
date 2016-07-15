@@ -82,14 +82,17 @@ The DataSource in the example is initialized to represent an in-memory cache of 
 
 Operations conducted by the DataSource against this remote endpoint are performed via [`jQuery.ajax()`](http://api.jquery.com/jQuery.ajax/) and therefore, are subject to the same security constraints as the ones enforced by the user agent. These security constraints also apply to [XHRs (XMLHttpRequests)](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) made across different domains. Since this is the case with the example above, the `dataType` configuration property is set to use [JSONP](https://en.wikipedia.org/wiki/JSONP).
 
-## Data filtration
+## Data Filtration
 
-Filtering local data is a trivial task using the DataSource. The component accepts a list of filter expressions (one or more). They can be combined using `and` or `or` logic. For more details about the filter expression structure check
-the [`filter`](/api/javascript/data/datasource#configuration-filter) configuration option.
+Filtering local data is a trivial task using the DataSource. The component accepts a list of one or more filter expressions. They can be combined by using the `and` or `or` logical operators. For more details about the filter expression structure, refer to the documentation on the [`filter`](/api/javascript/data/datasource#configuration-filter) configuration option.
 
-### Local filtering
+### Local Filtering
 
-Local filtering is convenient for small datasets. However, avoid it if you are working with large datasets for performance reasons.
+Local filtering is convenient for small datasets.
+
+Avoid it when working with large datasets because it might lead to performance issues.
+
+###### Example
 
 ```tab-Data
 
@@ -114,11 +117,15 @@ Local filtering is convenient for small datasets. However, avoid it if you are w
         });
 ```
 
-### Server filtering
+### Server Filtering
 
-Server filtering is an excellent option when working with large datasets. Be sure to set the [`schema`](/api/javascript/data/datasource#configuration-schema) and [`filter`](/api/javascript/data/datasource#configuration-filter) properties as necessary.
+Server filtering is convenient for large datasets.
 
-The example below features local data but the data returned by a [`transport`](/api/javascript/data/datasource#configuration-transport) is going to be evaluated the same way.
+Be sure to set the [`schema`](/api/javascript/data/datasource#configuration-schema) and the [`filter`](/api/javascript/data/datasource#configuration-filter) properties as necessary.
+
+The example below features local data but the data returned by the [`transport`](/api/javascript/data/datasource#configuration-transport) is going to be evaluated the same way.
+
+###### Example
 
 ```tab-Data
         //the JSON result from "{remote service}"
@@ -151,11 +158,15 @@ The example below features local data but the data returned by a [`transport`](/
         });
 ```
 
-### Accent folding
+### Accent Folding
 
-The DataSource does not support `accent folding` out-of-the-box, but it can be easily implemented using either local or server filtering.
+The DataSource does not support `accent folding` out of the box. However, it can be easily implemented by using either local or server filtering.
 
-##### Example - accent folding with local filtering
+#### Using Local Filtering
+
+The example below demonstrates accent folding with local filtering.
+
+###### Example
 
     <h5>DataSource will display all matching to 'Lo' search value items</h5>
     <div id="result"></div>
@@ -198,7 +209,11 @@ The DataSource does not support `accent folding` out-of-the-box, but it can be e
     dataSource.fetch();
     </script>
 
-##### Example - accent folding with server filtering
+#### Using Server Filtering
+
+The example below demonstrates accent folding with server filtering.
+
+###### Example
 
 ```tab-Data
         //the 'accent folding' is done on the server
