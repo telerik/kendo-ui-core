@@ -67,6 +67,15 @@
 
     //rendering
 
+    asyncTest("screenHeight method gets the content height", 1, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+
+        asyncDataSource.read().then(function() {
+            start();
+            equal(virtualList.screenHeight(), CONTAINER_HEIGHT);
+        });
+    });
+
     asyncTest("scrollTo methods scrolls to a given height", 3, function() {
         var virtualList = new VirtualList(container, virtualSettings);
 
@@ -100,6 +109,29 @@
             }, 300);
         });
     });
+
+    asyncTest("scrollWith method scrolls content down", 1, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+
+        asyncDataSource.read().then(function() {
+            start();
+            virtualList.scrollWith(200);
+            equal(virtualList.content[0].scrollTop, 200);
+        });
+    });
+
+    asyncTest("scrollWith method scrolls content up", 1, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+
+        asyncDataSource.read().then(function() {
+            start();
+            scroll(virtualList.content, 200);
+            virtualList.scrollWith(-100);
+
+            equal(virtualList.content[0].scrollTop, 100);
+        });
+    });
+
 
     //events
 

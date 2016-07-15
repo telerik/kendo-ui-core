@@ -1363,6 +1363,61 @@
         equal(list.args("scroll")[0], children[2]);
     });
 
+    var getData = function(length) {
+        var result = [];
+        for(var idx=0; idx < length; idx++) {
+            result.push("item" + idx);
+        }
+        return result;
+    };
+
+    test("screenHeight gets the clientHeight of the content", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: getData(100),
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        var content = list.content.height(200);
+
+        equal(list.screenHeight(), 200);
+    });
+
+    test("scrollWith moves scroll position down", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: getData(100),
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        var content = list.content
+                          .height(200)
+                          .scrollTop(100);
+
+        list.scrollWith(50);
+
+        ok(content[0].scrollTop, 150);
+    });
+
+    test("scrollWith moves scroll position up", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: getData(100),
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        var content = list.content
+                          .height(200)
+                          .scrollTop(100);
+
+        list.scrollWith(-50);
+
+        equal(content[0].scrollTop, 50);
+    });
+
     test("bound returns bound state of the list", function() {
         var list = new StaticList(element, {
             dataSource: ["item1", "item2", "item3"],

@@ -561,8 +561,9 @@ var __meta__ = { // jshint ignore:line
         _keydown: function (e) {
             var that = this;
             var key = e.keyCode;
+            var listView = that.listView;
             var visible = that.popup.visible();
-            var current = this.listView.focus();
+            var current = listView.focus();
 
             that._last = key;
 
@@ -583,7 +584,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (visible && current) {
-                    var dataItem = that.listView.dataItemByIndex(that.listView.getElementIndex(current));
+                    var dataItem = listView.dataItemByIndex(listView.getElementIndex(current));
                     if (that.trigger("select", { dataItem: dataItem, item: current })) {
                         return;
                     }
@@ -597,6 +598,11 @@ var __meta__ = { // jshint ignore:line
                     e.preventDefault();
                 }
                 that.close();
+            } else if (that.popup.visible() && (key === keys.PAGEDOWN || key === keys.PAGEUP)) {
+                e.preventDefault();
+
+                var direction = key === keys.PAGEDOWN ? 1 : -1;
+                listView.scrollWith(direction * listView.screenHeight());
             } else {
                 that._search();
             }

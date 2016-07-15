@@ -1085,6 +1085,13 @@ var __meta__ = { // jshint ignore:line
                 }
                 that.close();
                 pressed = true;
+            } else if (that.popup.visible() && (key === keys.PAGEDOWN || key === keys.PAGEUP)) {
+                e.preventDefault();
+
+                var direction = key === keys.PAGEDOWN ? 1 : -1;
+                listView.scrollWith(direction * listView.screenHeight());
+
+                pressed = true;
             }
 
             return pressed;
@@ -1450,12 +1457,20 @@ var __meta__ = { // jshint ignore:line
             return this.dataSource.flatView()[index];
         },
 
+        screenHeight: function() {
+            return this.content[0].clientHeight;
+        },
+
         scrollToIndex: function(index) {
             var item = this.element[0].children[index];
 
             if (item) {
                 this.scroll(item);
             }
+        },
+
+        scrollWith: function(value) {
+            this.content.scrollTop(this.content.scrollTop() + value);
         },
 
         scroll: function (item) {
