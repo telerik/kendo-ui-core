@@ -232,7 +232,7 @@ The field of the data item that provides the text content of the list items. The
 
 The field of the data item that provides the value of the widget.
 
-> **Important** When `dataValueField` is defined, the`dataTextField` option also should be set.
+> **Important** When `dataValueField` is defined, the `dataTextField` option also should be set.
 
 #### Example - set the dataValueField
 
