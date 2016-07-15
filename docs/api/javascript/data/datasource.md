@@ -367,7 +367,7 @@ The filter operator (comparison). The supported operators are: "eq" (equal to), 
 
 The value to which the [field](#configuration-filter.field) is compared. The value must be from the same type as the field.
 
-> By design, the `"\n"` is removed from the filter before the filtering is performed. That is why an `"\n"` identifier from the filter will not match data items whose corresponding field contain new lines. 
+> By design, the `"\n"` is removed from the filter before the filtering is performed. That is why an `"\n"` identifier from the filter will not match data items whose corresponding fields contain new lines.
 
 #### Example - specify the filter value
     <script>
