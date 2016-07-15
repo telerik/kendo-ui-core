@@ -44,6 +44,33 @@ table td:nth-child(2) {
 }
 </style>
 
+## Special Considerations
+
+Several Kendo UI widgets feature complex rendering, which will affect the 'Section 508' support.
+
+### Label Element Support
+
+Widgets like ComboBox, DropDownList, MultiSelect or NumericTextBox hides their initial INPUT/SELECT element, which will break
+the [`label.for`](https://developer.mozilla.org/en/docs/Web/HTML/Element/label#attr-for) functionality. In general, the browser
+cannot focus hidden elements, hence the label element will not be able to focus the corresponding widget.
+
+**The solution** is to put the widget inside the `label` element. Thus the label will focus the first visible element.
+
+##### Example
+
+```
+  <label>
+    Amount:
+    <input id="numerictextbox" />
+  </label>
+
+  <script>
+    $(function() {
+        $("#amount").kendoNumericTextBox();
+    });
+  </script>
+```
+
 ## See Also
 
 Other articles on Kendo UI Accessibility support:
