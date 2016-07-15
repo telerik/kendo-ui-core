@@ -770,7 +770,7 @@ var __meta__ = { // jshint ignore:line
                 if (position === "top") {
                     this.scrollTo(index * itemHeight);
                 } else if (position === "bottom") {
-                    this.scrollTo((index * itemHeight + itemHeight) - this.screenHeight);
+                    this.scrollTo((index * itemHeight + itemHeight) - this._screenHeight);
                 } else if (position === "outScreen") {
                     this.scrollTo(index * itemHeight);
                 }
@@ -997,17 +997,20 @@ var __meta__ = { // jshint ignore:line
             return height;
         },
 
-        _screenHeight: function() {
-            var height = this._height(),
-                content = this.content;
+        setScreenHeight: function() {
+            var height = this._height();
 
-            content.height(height);
-            this.screenHeight = height;
+            this.content.height(height);
+            this._screenHeight = height;
+        },
+
+        screenHeight: function() {
+            return this._screenHeight;
         },
 
         _getElementLocation: function(index) {
             var scrollTop = this.content.scrollTop(),
-                screenHeight = this.screenHeight,
+                screenHeight = this._screenHeight,
                 itemHeight = this.options.itemHeight,
                 yPosition = index * itemHeight,
                 yDownPostion = yPosition + itemHeight,
@@ -1107,9 +1110,9 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._saveInitialRanges();
-            that._screenHeight();
             that._buildValueGetter();
-            that.itemCount = getItemCount(that.screenHeight, options.listScreens, options.itemHeight);
+            that.setScreenHeight();
+            that.itemCount = getItemCount(that._screenHeight, options.listScreens, options.itemHeight);
 
             if (that.itemCount > dataSource.total()) {
                 that.itemCount = dataSource.total();
@@ -1141,7 +1144,7 @@ var __meta__ = { // jshint ignore:line
             );
 
             that._renderItems();
-            that._calculateGroupPadding(that.screenHeight);
+            that._calculateGroupPadding(that._screenHeight);
         },
 
         _setHeight: function(height) {
@@ -1329,7 +1332,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _listItems: function() {
-            var screenHeight = this.screenHeight,
+            var screenHeight = this._screenHeight,
                 options = this.options;
 
             var theValidator = listValidator(options, screenHeight);
@@ -1389,7 +1392,7 @@ var __meta__ = { // jshint ignore:line
         _bufferSizes: function() {
             var options = this.options;
 
-            return bufferSizes(this.screenHeight, options.listScreens, options.oppositeBuffer);
+            return bufferSizes(this._screenHeight, options.listScreens, options.oppositeBuffer);
         },
 
         _indexConstraint: function(position) {

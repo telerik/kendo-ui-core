@@ -67,6 +67,15 @@
 
     //rendering
 
+    asyncTest("screenHeight method gets the content height", 1, function() {
+        var virtualList = new VirtualList(container, virtualSettings);
+
+        asyncDataSource.read().then(function() {
+            start();
+            equal(virtualList.screenHeight(), CONTAINER_HEIGHT);
+        });
+    });
+
     asyncTest("scrollTo methods scrolls to a given height", 3, function() {
         var virtualList = new VirtualList(container, virtualSettings);
 
