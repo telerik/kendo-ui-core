@@ -1085,6 +1085,13 @@ var __meta__ = { // jshint ignore:line
                 }
                 that.close();
                 pressed = true;
+            } else if (that.popup.visible() && (key === keys.PAGEDOWN || key === keys.PAGEUP)) {
+                e.preventDefault();
+
+                var direction = key === keys.PAGEDOWN ? 1 : -1;
+                listView.scrollWith(direction * listView.screenHeight());
+
+                pressed = true;
             }
 
             return pressed;

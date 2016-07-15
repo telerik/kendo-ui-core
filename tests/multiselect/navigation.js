@@ -532,4 +532,54 @@
 
         equal(multiselect.currentTag(), null);
     });
+
+    test("MultiSelect scrolls content down", 2, function() {
+        populateSelect(100);
+        var multiselect = new MultiSelect(select, {
+            animation: false
+        });
+
+        stub(multiselect.listView, {
+            scrollWith: multiselect.listView.scrollWith
+        });
+
+        multiselect.open();
+        multiselect.input.trigger({ type: "keydown", keyCode: keys.PAGEDOWN });
+
+        equal(multiselect.listView.calls("scrollWith"), 1);
+        equal(multiselect.listView.args("scrollWith")[0], multiselect.listView.screenHeight());
+    });
+
+    test("MultiSelect scrolls content up", 2, function() {
+        populateSelect(100);
+        var multiselect = new MultiSelect(select, {
+            animation: false
+        });
+
+        stub(multiselect.listView, {
+            scrollWith: multiselect.listView.scrollWith
+        });
+
+        multiselect.open();
+        multiselect.input.trigger({ type: "keydown", keyCode: keys.PAGEUP });
+
+        equal(multiselect.listView.calls("scrollWith"), 1);
+        equal(multiselect.listView.args("scrollWith")[0], -1 * multiselect.listView.screenHeight());
+    });
+
+    test("MultiSelect prevents default on PAGEDOWN", 1, function() {
+        populateSelect(100);
+        var multiselect = new MultiSelect(select, {
+            animation: false
+        });
+
+        multiselect.open();
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: keys.PAGEDOWN,
+            preventDefault: function() {
+                ok(true);
+            }
+        });
+    });
 })();

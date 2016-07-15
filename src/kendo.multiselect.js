@@ -712,7 +712,8 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var key = e.keyCode;
             var tag = that._currentTag;
-            var current = that.listView.focus();
+            var listView = that.listView;
+            var current = listView.focus();
             var hasValue = that.input.val();
             var isRtl = kendo.support.isRtl(that.wrapper);
             var visible = that.popup.visible();
@@ -724,26 +725,26 @@ var __meta__ = { // jshint ignore:line
                     that.open();
 
                     if (!current) {
-                        this.listView.focusFirst();
+                        listView.focusFirst();
                     }
                     return;
                 }
 
                 if (current) {
-                    this.listView.focusNext();
-                    if (!this.listView.focus()) {
-                        this.listView.focusLast();
+                    listView.focusNext();
+                    if (!listView.focus()) {
+                        listView.focusLast();
                     }
                 } else {
-                    this.listView.focusFirst();
+                    listView.focusFirst();
                 }
             } else if (key === keys.UP) {
                 if (visible) {
                     if (current) {
-                        this.listView.focusPrev();
+                        listView.focusPrev();
                     }
 
-                    if (!this.listView.focus()) {
+                    if (!listView.focus()) {
                         that.close();
                     }
                 }
@@ -775,7 +776,7 @@ var __meta__ = { // jshint ignore:line
                 that.close();
             } else if (key === keys.HOME) {
                 if (visible) {
-                    this.listView.focusFirst();
+                    listView.focusFirst();
                 } else if (!hasValue) {
                     tag = that.tagList[0].firstChild;
 
@@ -785,7 +786,7 @@ var __meta__ = { // jshint ignore:line
                 }
             } else if (key === keys.END) {
                 if (visible) {
-                    this.listView.focusLast();
+                    listView.focusLast();
                 } else if (!hasValue) {
                     tag = that.tagList[0].lastChild;
 
@@ -795,7 +796,7 @@ var __meta__ = { // jshint ignore:line
                 }
             } else if ((key === keys.DELETE || key === keys.BACKSPACE) && !hasValue) {
                 if (that.options.tagMode === "single") {
-                    that.listView.value([]);
+                    listView.value([]);
                     that._change();
                     that._close();
                     return;
@@ -808,6 +809,11 @@ var __meta__ = { // jshint ignore:line
                 if (tag && tag[0]) {
                     that._removeTag(tag);
                 }
+            } else if (that.popup.visible() && (key === keys.PAGEDOWN || key === keys.PAGEUP)) {
+                e.preventDefault();
+
+                var direction = key === keys.PAGEDOWN ? 1 : -1;
+                listView.scrollWith(direction * listView.screenHeight());
             } else {
                 clearTimeout(that._typingTimeout);
                 setTimeout(function() { that._scale(); });
