@@ -1450,6 +1450,10 @@ var __meta__ = { // jshint ignore:line
             return this.dataSource.flatView()[index];
         },
 
+        screenHeight: function() {
+            return this.content[0].clientHeight;
+        },
+
         scrollToIndex: function(index) {
             var item = this.element[0].children[index];
 

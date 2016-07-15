@@ -1363,6 +1363,58 @@
         equal(list.args("scroll")[0], children[2]);
     });
 
+    var getData = function(length) {
+        var result = [];
+        for(var idx=0; idx < length; idx++) {
+            result.push("item" + idx);
+        }
+        return result;
+    };
+
+    test("screenHeight gets the clientHeight of the content", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: getData(100),
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        var content = list.content.height(200);
+
+        equal(list.screenHeight(), 200);
+    });
+
+    /*test("scrollPage moves scroll position down", 2, function() {
+        var list = new StaticList(element, {
+            dataSource: getData(100),
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        var content = list.content.height(200);
+
+        list.scrollPage(1);
+
+        ok(content[0].scrollTop > 0);
+        equal(content[0].scrollTop, content[0].clientHeight);
+    });
+
+    test("scrollPage moves scroll position up", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: getData(100),
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        var content = list.content.height(200).scrollTop(200);
+
+        list.scrollPage(-1);
+
+        equal(content[0].scrollTop, 0);
+    });*/
+
     test("bound returns bound state of the list", function() {
         var list = new StaticList(element, {
             dataSource: ["item1", "item2", "item3"],
