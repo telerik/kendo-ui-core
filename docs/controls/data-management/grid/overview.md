@@ -4,7 +4,7 @@ page_title: Overview | Kendo UI Grid
 description: "Learn how to create, initialize, and enable the Kendo UI Grid widget."
 previous_url: /web/grid/introduction
 slug: overview_kendoui_grid_widget
-position: 1
+position: 2
 ---
 
 # Grid Overview
