@@ -487,7 +487,10 @@ var __meta__ = { // jshint ignore:line
 
             that._render(data);
 
-            that._updateFooter();
+            that._renderFooter();
+            that._renderNoData();
+            that._toggleNoData(!data.length);
+
             that._resizePopup();
 
             if (that._open) {

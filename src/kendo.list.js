@@ -81,6 +81,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._header();
+            that._noData();
             that._footer();
             that._accessors();
             that._initValue();
@@ -101,9 +102,11 @@ var __meta__ = { // jshint ignore:line
             }
 
             this._header();
+            this._noData();
             this._footer();
 
-            this._updateFooter();
+            this._renderFooter();
+            this._renderNoData();
         },
 
         focus: function() {
@@ -149,7 +152,6 @@ var __meta__ = { // jshint ignore:line
                 dataTextField: currentOptions.dataTextField,
                 groupTemplate: currentOptions.groupTemplate,
                 fixedGroupTemplate: currentOptions.fixedGroupTemplate,
-                noDataTemplate: currentOptions.noDataTemplate,
                 template: currentOptions.template
             }, options, virtual);
 
@@ -252,6 +254,39 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
+        _noData: function() {
+            var noData = $(this.noData);
+            var template = this.options.noDataTemplate;
+
+            this.angular("cleanup", function() { return { elements: noData }; });
+            kendo.destroy(noData);
+            noData.remove();
+
+            if (!template) {
+                this.noData = null;
+                return;
+            }
+
+            this.noData = $('<div class="k-nodata" style="display:none"><div></div></div>').appendTo(this.list);
+            this.noDataTemplate = typeof template !== "function" ? kendo.template(template) : template;
+        },
+
+        _renderNoData: function() {
+            var noData = this.noData;
+
+            if (!noData) {
+                return;
+            }
+
+            this._angularElement(noData, "cleanup");
+            noData.children(":first").html(this.noDataTemplate({ instance: this }));
+            this._angularElement(noData, "compile");
+        },
+
+        _toggleNoData: function(show) {
+            $(this.noData).toggle(show);
+        },
+
         _footer: function() {
             var footer = $(this.footer);
             var template = this.options.footerTemplate;
@@ -269,7 +304,7 @@ var __meta__ = { // jshint ignore:line
             this.footerTemplate = typeof template !== "function" ? kendo.template(template) : template;
         },
 
-        _updateFooter: function() {
+        _renderFooter: function() {
             var footer = this.footer;
 
             if (!footer) {
@@ -1366,7 +1401,6 @@ var __meta__ = { // jshint ignore:line
 
             this._getter();
             this._templates();
-            this._noData();
 
             this.setDataSource(this.options.dataSource);
 
@@ -1387,8 +1421,7 @@ var __meta__ = { // jshint ignore:line
             selectable: true,
             template: null,
             groupTemplate: null,
-            fixedGroupTemplate: null,
-            noDataTemplate: null
+            fixedGroupTemplate: null
         },
 
         events: [
@@ -1437,7 +1470,6 @@ var __meta__ = { // jshint ignore:line
 
             this._getter();
             this._templates();
-            this._noData();
             this._render();
         },
 
@@ -1900,26 +1932,6 @@ var __meta__ = { // jshint ignore:line
             return candidate;
         },
 
-        _noData: function() {
-            var noData = $(this.noData);
-            var template = this.templates.noDataTemplate;
-
-            this.angular("cleanup", function() { return { elements: noData }; });
-            kendo.destroy(noData);
-            noData.remove();
-
-            if (!template) {
-                this.noData = null;
-                return;
-            }
-
-            this.noData = this.content.after('<div class="k-nodata" style="display:none"><span></span></div>').next();
-
-            this.noData.children(":first").html(template({}));
-
-            this.angular("compile", function() { return { elements: noData }; });
-        },
-
         _template: function() {
             var that = this;
             var options = that.options;
@@ -1943,8 +1955,7 @@ var __meta__ = { // jshint ignore:line
             var templates = {
                 template: options.template,
                 groupTemplate: options.groupTemplate,
-                fixedGroupTemplate: options.fixedGroupTemplate,
-                noDataTemplate: options.noDataTemplate
+                fixedGroupTemplate: options.fixedGroupTemplate
             };
 
             for (var key in templates) {
@@ -2150,8 +2161,6 @@ var __meta__ = { // jshint ignore:line
             that._fixedHeader();
 
             that._render();
-
-            $(that.noData).toggle(!that._view.length);
 
             that.bound(true);
 

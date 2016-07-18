@@ -95,30 +95,6 @@
         equal(element.children(":first").html(), "new item");
     });
 
-    test("setOptions re-renders noDataTemplate", function() {
-        var list = new StaticList(element, {
-            noDataTemplate: "test"
-        });
-
-        list.setOptions({
-            noDataTemplate: "no data"
-        });
-
-        equal(list.noData.text(), "no data");
-    });
-
-    test("setOptions removes noData template", function() {
-        var list = new StaticList(element, {
-            noDataTemplate: "test"
-        });
-
-        list.setOptions({
-            noDataTemplate: null
-        });
-
-        equal(list.noData, null);
-    });
-
     test("setOptions does not update bound state", function() {
         var list = new StaticList(element, {
             dataSource: ["item"],

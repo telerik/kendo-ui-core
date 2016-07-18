@@ -253,7 +253,6 @@ var __meta__ = { // jshint ignore:line
             that._optionID = kendo.guid();
 
             that._templates();
-            that._noData();
 
             that.setDataSource(options.dataSource);
 
@@ -282,7 +281,6 @@ var __meta__ = { // jshint ignore:line
             placeholderTemplate: "loading...",
             groupTemplate: "#:data#",
             fixedGroupTemplate: "fixed header template",
-            noDataTemplate: null,
             mapValueTo: "index",
             valueMapper: null
         },
@@ -306,7 +304,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             this._templates();
-            this._noData();
             this.refresh();
         },
 
@@ -413,8 +410,6 @@ var __meta__ = { // jshint ignore:line
 
                 that._triggerListBound();
             }
-
-            $(that.noData).toggle(!that.dataSource.flatView().length);
 
             if (isItemChange || action === "remove") {
                 result = mapChangedItems(that._selectedDataItems, e.items);
@@ -1034,33 +1029,13 @@ var __meta__ = { // jshint ignore:line
             return position;
         },
 
-        _noData: function() {
-            var noData = $(this.noData);
-
-            this.angular("cleanup", function() { return { elements: noData }; });
-            kendo.destroy(noData);
-            noData.remove();
-
-            if (!this.options.noDataTemplate) {
-                this.noData = null;
-                return;
-            }
-
-            this.noData = this.content.after('<div class="k-nodata" style="display:none"><span></span></div>').next();
-
-            this.noData.children(":first").html(this.templates.noDataTemplate({}));
-
-            this.angular("compile", function() { return { elements: noData }; });
-        },
-
         _templates: function() {
             var options = this.options;
             var templates = {
                 template: options.template,
                 placeholderTemplate: options.placeholderTemplate,
                 groupTemplate: options.groupTemplate,
-                fixedGroupTemplate: options.fixedGroupTemplate,
-                noDataTemplate: options.noDataTemplate
+                fixedGroupTemplate: options.fixedGroupTemplate
             };
 
             for (var key in templates) {

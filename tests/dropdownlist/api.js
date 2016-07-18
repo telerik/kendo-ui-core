@@ -1244,4 +1244,28 @@
 
         equal(dropdownlist.header, null);
     });
+
+    test("setOptions re-renders noDataTemplate", function() {
+        var dropdownlist = new DropDownList(input, {
+            noDataTemplate: "test"
+        });
+
+        dropdownlist.setOptions({
+            noDataTemplate: "no data"
+        });
+
+        equal(dropdownlist.noData.text(), "no data");
+    });
+
+    test("setOptions removes noData template", function() {
+        var dropdownlist = new DropDownList(input, {
+            noDataTemplate: "test"
+        });
+
+        dropdownlist.setOptions({
+            noDataTemplate: null
+        });
+
+        equal(dropdownlist.noData, null);
+    });
 })();
