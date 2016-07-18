@@ -499,7 +499,10 @@ var __meta__ = { // jshint ignore:line
 
             that._presetValue = false;
 
-            that._updateFooter();
+            that._renderFooter();
+            that._renderNoData();
+            that._toggleNoData(!data.length);
+
             that._resizePopup(true);
 
             that.popup.position();
