@@ -17,13 +17,12 @@ The information presented by the [Kendo UI Map widget](http://demos.telerik.com/
 Tile layers are suitable for displaying raster maps from popular online providers such as:
 * [OpenStreetMap](http://www.openstreetmap.org/)
 * [OpenWeatherMap](http://openweathermap.org/)
-* [MapQuestOpen](http://open.mapquest.com/)
 * [ArcGIS](https://developers.arcgis.com/en/)
 * [Here (Nokia) Maps](https://developer.here.com/rest-apis/documentation/enterprise-map-tile) and many more
 
 Dedicated support is available for [Microsoft Bing](http://msdn.microsoft.com/en-us/library/ff701713.aspx). Note that it requires you to [obtain an API key](http://msdn.microsoft.com/en-us/library/ff428642.aspx).
 
-The example below demonstrates how to display a MapQuest open tile layer.
+The example below demonstrates how to display a OpenStreetMap tile layer.
 
 ###### Example
 
@@ -31,10 +30,10 @@ The example below demonstrates how to display a MapQuest open tile layer.
     <script>
     $("#map").kendoMap({
         layers: [{
-            type: "tile",
-            urlTemplate: "http://otile#= subdomain #.mqcdn.com/tiles/1.0.0/osm/#= zoom #/#= x #/#= y #.png",
-            subdomains: ["1", "2", "3", "4"],
-            attribution: "Tiles courtesy of <a href='http://www.mapquest.com/' target='_blank'>MapQuest</a>"
+          type: "tile",
+            urlTemplate: "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+            subdomains: ["a", "b", "c"],
+            attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>"
         }]
     });
     </script>
