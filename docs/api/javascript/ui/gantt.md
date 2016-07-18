@@ -4112,9 +4112,9 @@ A Date that will be set to the currently selected view.
 
 #### Example - set date to the widget
 
-  <div id="gantt1"></div>
+     <div id="gantt1"></div>
     <script>
-        $("#gantt1").kendoGantt({
+    $("#gantt1").kendoGantt({
             dataSource: [{
                 id: 1,
                 orderId: 0,
@@ -4129,12 +4129,12 @@ A Date that will be set to the currently selected view.
                   range: {
                       start: new Date("2016/09/1"),
                       end: new Date("2016/10/15")
-                  },
+                  }
               }
             ]
-        });
-        var gantt = $("#gantt1").data("kendoGantt");
-        gantt.date(new Date("2016/09/20"));
+    });
+    var gantt = $("#gantt1").data("kendoGantt");
+    gantt.date(new Date("2016/09/20"));
     </script>
 
 ### destroy
