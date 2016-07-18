@@ -1,11 +1,11 @@
 ---
-title: Adjust Path origin
-page_title: Adjust Path origin | Kendo UI Diagram
-description: "Learn how to adjust a path or any element`s origin when using a custom visual."
+title: Adjust Path Origin
+page_title: Adjust Path Origin | Kendo UI Diagram
+description: "Learn how to adjust a path or the origin of an element when using a custom visual in the Kendo UI Diagram."
 slug: howto_adjustpathorigin_diagram
 ---
 
-# Adjust Path origin
+# Adjust Path Origin
 
 The example below demonstrates how to position any path at the origin.
 
@@ -34,7 +34,7 @@ The example below demonstrates how to position any path at the origin.
           return group;
         }
       });
-    </script> 
+    </script>
 
 ```
 

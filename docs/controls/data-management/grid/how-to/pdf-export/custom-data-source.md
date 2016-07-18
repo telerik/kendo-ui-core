@@ -7,13 +7,14 @@ slug: howto_customize_data_source_pdf_grid
 
 # Customize Data Source
 
-The PDF Export will normally use the configured data source to fetch all data pages.
-This might not be always desirable.
+The PDF Export functionality normally uses the configured Data Source to fetch all data pages.
 
-Since the Data Source does not support changing its configuration,
-we must use a different instance during export.
+If this behavior is not desirable, customize the Data Source by using a different Data Source instance during the export in PDF.
 
-##### Example - Switch to client paging during PDF Export
+The example below demonstrates how to switch to client paging during PDF export.
+
+###### Example
+
 ```html
   <div id="grid"></div>
 

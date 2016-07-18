@@ -23,7 +23,7 @@ The [`kendo.parseDate(string)`](/api/javascript/kendo#methods-parseDate) method 
 
 ### Parse UTC Date Strings
 
-Similar to the above case, parse UTC date strings without providing a format string. The resulting JavaScript Date object will have the time correctly offset, according to the user's local time zone.
+Similar to the above case, you are able to parse UTC date strings without providing a format string. The resulting JavaScript Date object will have the time correctly offset according to the local time zone of the user.
 
 ###### Example
 
