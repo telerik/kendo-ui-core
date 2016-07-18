@@ -1149,4 +1149,106 @@ test("ComboBox does not bind on open if minLength & autoBind: false", function()
     ok(combobox.popup.visible());
 });
 
+//no data template
+test("ComboBox builds a noDataTemplate", function() {
+    var combobox = new ComboBox(input, {
+        noDataTemplate: "test"
+    });
+
+    ok(combobox.noDataTemplate);
+});
+
+test("render nodata container", function() {
+    var combobox = new ComboBox(input, {
+        noDataTemplate: "test"
+    });
+
+    ok(combobox.noData);
+    ok(combobox.noData.hasClass("k-nodata"));
+    equal(combobox.noData.children("div").length, 1);
+    equal(combobox.noData.text(), combobox.options.noDataTemplate);
+});
+
+test("render nodata before footerTemplate", function() {
+    var combobox = new ComboBox(input, {
+        noDataTemplate: "test",
+        footerTemplate: "footer"
+    });
+
+    ok(combobox.noData.next().hasClass("k-footer"));
+});
+
+test("hides noData template if any data", function() {
+    var combobox = new ComboBox(input, {
+        dataValueField: "name",
+        dataTextField: "name",
+        dataSource: {
+            data: [
+                { name: "item1", type: "a" },
+                { name: "item2", type: "a" },
+                { name: "item3", type: "b" }
+            ]
+        },
+        noDataTemplate: "no data",
+        template: '#:data.name#'
+    });
+
+    combobox.open();
+
+    ok(!combobox.noData.is(":visible"));
+});
+
+test("shows noData template if no data", function() {
+    var combobox = new ComboBox(input, {
+        dataValueField: "name",
+        dataTextField: "name",
+        dataSource: {
+            data: [ ]
+        },
+        noDataTemplate: "no data",
+        template: '#:data.name#'
+    });
+
+    combobox.open();
+
+    ok(combobox.noData.is(":visible"));
+});
+
+test("hides noData template if widget is bound on subsequent call", function() {
+    var combobox = new ComboBox(input, {
+        dataValueField: "name",
+        dataTextField: "name",
+        dataSource: {
+            data: [ ]
+        },
+        noDataTemplate: "no data",
+        template: '#:data.name#'
+    });
+
+    combobox.open();
+
+    ok(combobox.noData.is(":visible"));
+
+    combobox.dataSource.data([
+        { name: "item1", type: "a" },
+        { name: "item2", type: "a" },
+        { name: "item3", type: "b" }
+    ]);
+
+    ok(!combobox.noData.is(":visible"));
+});
+
+test("update noData template on dataBound", function() {
+    var combobox = new ComboBox(input, {
+        autoBind: true,
+        noDataTemplate: "#: instance.dataSource.total() #"
+    });
+
+    var noData = combobox.noData;
+
+    combobox.dataSource.data(["Item1"]);
+
+    equal(noData.text(), combobox.dataSource.total());
+});
+
 })();

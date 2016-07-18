@@ -1059,4 +1059,28 @@ test("setOptions method hides footer template", 1, function() {
     equal(combobox.header, null);
 });
 
+test("setOptions re-renders noDataTemplate", function() {
+    var combobox = new ComboBox(input, {
+        noDataTemplate: "test"
+    });
+
+    combobox.setOptions({
+        noDataTemplate: "no data"
+    });
+
+    equal(combobox.noData.text(), "no data");
+});
+
+test("setOptions removes noData template", function() {
+    var combobox = new ComboBox(input, {
+        noDataTemplate: "test"
+    });
+
+    combobox.setOptions({
+        noDataTemplate: null
+    });
+
+    equal(combobox.noData, null);
+});
+
 })();

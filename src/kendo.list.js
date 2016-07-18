@@ -81,6 +81,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._header();
+            that._noData();
             that._footer();
             that._accessors();
             that._initValue();
@@ -101,9 +102,11 @@ var __meta__ = { // jshint ignore:line
             }
 
             this._header();
+            this._noData();
             this._footer();
 
-            this._updateFooter();
+            this._renderFooter();
+            this._renderNoData();
         },
 
         focus: function() {
@@ -251,6 +254,39 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
+        _noData: function() {
+            var noData = $(this.noData);
+            var template = this.options.noDataTemplate;
+
+            this.angular("cleanup", function() { return { elements: noData }; });
+            kendo.destroy(noData);
+            noData.remove();
+
+            if (!template) {
+                this.noData = null;
+                return;
+            }
+
+            this.noData = $('<div class="k-nodata" style="display:none"><div></div></div>').appendTo(this.list);
+            this.noDataTemplate = typeof template !== "function" ? kendo.template(template) : template;
+        },
+
+        _renderNoData: function() {
+            var noData = this.noData;
+
+            if (!noData) {
+                return;
+            }
+
+            this._angularElement(noData, "cleanup");
+            noData.children(":first").html(this.noDataTemplate({ instance: this }));
+            this._angularElement(noData, "compile");
+        },
+
+        _toggleNoData: function(show) {
+            $(this.noData).toggle(show);
+        },
+
         _footer: function() {
             var footer = $(this.footer);
             var template = this.options.footerTemplate;
@@ -268,7 +304,7 @@ var __meta__ = { // jshint ignore:line
             this.footerTemplate = typeof template !== "function" ? kendo.template(template) : template;
         },
 
-        _updateFooter: function() {
+        _renderFooter: function() {
             var footer = this.footer;
 
             if (!footer) {
