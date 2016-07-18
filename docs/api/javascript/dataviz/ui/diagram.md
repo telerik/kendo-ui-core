@@ -2323,6 +2323,8 @@ A function returning a visual element to render for a given shape. The following
 * [Image](/api/javascript/dataviz/diagram/image)
 * [Layout](/api/javascript/dataviz/diagram/layout)
 
+> Note that the visual bounding box origin must be (0, 0). If you have a complex path which coordinates cannot be easily adjusted then you can position the element as demonstrated in [this](/controls/diagrams-and-maps/diagram/how-to/adjust-path-origin) example.
+
 #### Example - how to use the visual
     <div id="diagram"></div>
     <script>
