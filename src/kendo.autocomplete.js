@@ -435,7 +435,10 @@ var __meta__ = { // jshint ignore:line
             var isActive = that.element[0] === activeElement();
             var action;
 
-            that._updateFooter();
+            that._renderFooter();
+            that._renderNoData();
+            that._toggleNoData(!data.length);
+
             that._resizePopup();
 
             popup.position();
