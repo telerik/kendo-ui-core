@@ -16,7 +16,7 @@
         KTITLELESS = "k-dialog-titleless";
 
     function createDialog(options, element) {
-        element = element || $("<div class='dialog' />").appendTo(QUnit.fixture);
+        element = element || $("<div class='dialog'>dialog content</div>").appendTo(QUnit.fixture);
         return element.kendoDialog(options).data("kendoDialog");
     }
 
@@ -72,9 +72,7 @@
 
     test("title method gets and sets the title consistently", 2, function () {
         var title = "&lt;foo&gt;",
-            dialog = createDialog({ title: title }),
-            oldTitle = dialog.title(),
-            titleElement = $(KDIALOGTITLE, dialog.wrapper);
+            dialog = createDialog({ title: title });
 
         equal(dialog.title(), title);
         dialog.title(dialog.title());
@@ -107,5 +105,32 @@
         dialog.title(false);
 
         ok(dialog.wrapper.hasClass(KTITLELESS));
+    });
+
+    test("content gets content", function() {
+        equal(createDialog().content(), "dialog content");
+    });
+
+    test("content sets content", function() {
+        var dialog = createDialog(),
+            oldContent = dialog.content(),
+            contentElement = $(".k-dialog-content", dialog.wrapper);
+
+        dialog.content("Content is the new content!");
+
+        equal(contentElement.html(), "Content is the new content!");
+
+        dialog.content(oldContent);
+
+        equal(contentElement.html(), oldContent);
+    });
+
+    test("title sets options.title", function() {
+        var dialog = createDialog({ content: "" }),
+            newContent = "Content is the new content!";
+
+        dialog.content(newContent);
+
+        equal(dialog.options.content, newContent);
     });
 })();

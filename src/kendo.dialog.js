@@ -17,11 +17,15 @@
             Widget = kendo.ui.Widget,
             template = kendo.template,
             KDIALOG = ".k-dialog",
-            KCONTENT = "k-content",
+            KCONTENT = "k-dialog-content",
             KTITLELESS = "k-dialog-titleless",
             KDIALOGTITLE = ".k-dialog-title",
             KDIALOGTITLEBAR = ".k-window-titlebar",
             templates;
+
+        function defined(x) {
+            return (typeof x != "undefined");
+        }
 
         var Dialog = Widget.extend({
             init: function(element, options) {
@@ -38,12 +42,12 @@
 
             _createDialog: function() {
                 var that = this,
-                    contentHtml = that.element,
+                    content = that.element,
                     options = that.options,
                     titlebar = $(templates.titlebar(options)),
                     wrapper = $(templates.wrapper(options));
 
-                contentHtml.addClass(KCONTENT);
+                content.addClass(KCONTENT);
 
                 wrapper.appendTo("body");
 
@@ -57,15 +61,19 @@
                     wrapper.addClass(KTITLELESS);
                 }
 
-                wrapper.append(contentHtml);
+                wrapper.append(content);
+
+                if (options.content) {
+                    kendo.destroy(content.children());
+                    content.html(options.content);
+                }
 
                 if (options.actions.length) {
                     that._createActionbar(wrapper);
                 }
 
-                wrapper = contentHtml = null;
+                wrapper = content = null;
             },
-
 
             _createActionbar: function(wrapper) {
                 var actionbar = $(templates.actionbar);
@@ -93,7 +101,7 @@
                 this.wrapper = this.element = $();
             },
 
-            title: function(text) {
+            title: function(html) {
                 var that = this,
                     wrapper = that.wrapper,
                     options = that.options,
@@ -104,7 +112,7 @@
                     return title.html();
                 }
                 
-                if (text === false) {
+                if (html === false) {
                     titlebar.remove();
                     wrapper.addClass(KTITLELESS);
                 } else {
@@ -113,10 +121,26 @@
                         title = titlebar.children(KDIALOGTITLE);
                         wrapper.removeClass(KTITLELESS);
                     }
-                    title.html(text);
+                    title.html(html);
                 }
 
-                that.options.title = text;
+                that.options.title = html;
+
+                return that;
+            },
+
+            content: function(html) {
+                var that = this,
+                    content = that.wrapper.children("." + KCONTENT);
+
+                if (!defined(html)) {
+                    return content.html();
+                }
+
+                kendo.destroy(content.children());
+                content.html(html);
+
+                that.options.content = html;
 
                 return that;
             },
