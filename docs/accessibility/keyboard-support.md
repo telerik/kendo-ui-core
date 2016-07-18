@@ -57,7 +57,7 @@ Kendo UI opts for the second approach. It uses an `aria-activedescendant` attrib
 
 ## See Also
 
-Other articles on Kendo UI Accessibility support:
+Other articles on the accessibility support provided by Kendo UI:
 
 * [Overview of Web Accessibility Standards]({% slug overview_accessibility_support_kendoui %})
 * [Charts]({% slug charts_accessibility_support %})
