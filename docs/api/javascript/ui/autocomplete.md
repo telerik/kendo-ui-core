@@ -368,9 +368,10 @@ The minimum number of characters the user must type before a search is performed
 
 ### noDataTemplate `String|Function` *(default: "No results found.")*
 
-Specifies a static HTML content, which will be displayed if no results are found or the underlying data source is empty. The popup will open when 'noDataTemplate' is defined.
+The [template](/api/javascript/kendo#methods-template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
+The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
 
-> **Important** Widget does not pass a model to the noData template. Use this option only with static HTML.
+> **Important** The popup will open when 'noDataTemplate' is defined
 
 #### Example - specify headerTemplate as a string
 
