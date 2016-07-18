@@ -19,6 +19,8 @@
             KDIALOG = ".k-dialog",
             KCONTENT = "k-content",
             KTITLELESS = "k-dialog-titleless",
+            KDIALOGTITLE = ".k-dialog-title",
+            KDIALOGTITLEBAR = ".k-window-titlebar",
             templates;
 
         var Dialog = Widget.extend({
@@ -73,15 +75,11 @@
 
             _addButtons: function(actionbar) {
                 var actions = this.options.actions,
-                    action;
-                for (var i = 0; i < actions.length; i++) {
-                        action = actions[i],
-                        button = $(templates.action(action));
+                    actionHtml;
 
-                    if (action.primary) {
-                        button.addClass("k-primary");
-                    }
-                    actionbar.append(button);
+                for (var i = 0; i < actions.length; i++) {
+                    actionHtml = templates.action(actions[i]);
+                    $(actionHtml).appendTo(actionbar);
                 }
             },
 
@@ -93,6 +91,34 @@
                 this._destroy();
                 this.wrapper.remove();
                 this.wrapper = this.element = $();
+            },
+
+            title: function(text) {
+                var that = this,
+                    wrapper = that.wrapper,
+                    options = that.options,
+                    titlebar = wrapper.children(KDIALOGTITLEBAR),
+                    title = titlebar.children(KDIALOGTITLE);
+
+                if (!arguments.length) {
+                    return title.html();
+                }
+                
+                if (text === false) {
+                    titlebar.remove();
+                    wrapper.addClass(KTITLELESS);
+                } else {
+                    if (!titlebar.length) {
+                        titlebar = $(templates.titlebar(options)).prependTo(wrapper);
+                        title = titlebar.children(KDIALOGTITLE);
+                        wrapper.removeClass(KTITLELESS);
+                    }
+                    title.html(text);
+                }
+
+                that.options.title = text;
+
+                return that;
             },
 
             events: [
@@ -109,7 +135,7 @@
 
         templates = {
             wrapper: template("<div class='k-widget k-dialog k-window' />"),
-            action: template("<li class='k-button'>#= text #</li>"),
+            action: template("<li class='k-button# if (data.primary) { # k-primary# } #'>#= text #</li>"),
             titlebar: template(
                 "<div class='k-window-titlebar k-header'>" +
                   "<span class='k-dialog-title'>#= title #</span>" +
