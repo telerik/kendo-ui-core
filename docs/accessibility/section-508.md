@@ -8,14 +8,16 @@ position: 2
 
 # Section 508
 
-Voluntary Product Accessibility Template (VPAT)
+[Section 508](https://www.section508.gov/) is a set of standards ensuring that all users, regardless of their disability status, are able to access technology.
 
-The following table shows the level of support that Kendo UI provides for the [Section 508 Web content standards](https://www.section508.gov/content/learn/standards/quick-reference-guide#1194.22).
+These standards apply to electronic and information technology and contain technical criteria specific to various types of technologies and performance-based requirements which focus on functional capabilities of covered products.
 
-**Section 1194.22 Web Information and Application Standards:**
+The following table is based on the [Voluntary Product Accessibility Template (VPAT)](https://www.itic.org/policy/accessibility/) requirements. It provides detailed explanation about the accessibility features Kendo UI delivers according to the [Section 508 Web content standards](https://www.section508.gov/content/learn/standards/quick-reference-guide#1194.22).
 
-|Criteria|Supporting features|Remarks
-|------------|----|----
+**Table 1. Section 1194.22 Web Information and Application Standards**
+
+|CRITERIA |SUPPORTING FEATURES|REMARKS
+|:---     |:---               |:---
 |[(a)](https://www.webaccessibility.com/best_practices.php?standard_id=1000704) A text equivalent for every non-text element shall be provided (e.g., via "alt", "longdesc", or in element content).|Supports|All images (`img` HTML elements) used by Kendo UI have their `alt` attribute set. If the developer uses images in Kendo UI templates he or she must set the "alt" or "longdesc" attribute in the template definition.)
 |[(b)](https://www.webaccessibility.com/best_practices.php?standard_id=1000727) Equivalent alternatives for any multimedia presentation shall be synchronized with the presentation.|Not applicable|Kendo UI does not use multimedia (sound or video) presentation.
 |[(c)](https://www.webaccessibility.com/best_practices.php?standard_id=1000730) Web pages shall be designed so that all information conveyed with color is also available without color, for example from context or markup.|Supports|Kendo UI widgets make sure that information is conveyed by other means besides color.
@@ -46,17 +48,17 @@ table td:nth-child(2) {
 
 ## Special Considerations
 
-Several Kendo UI widgets feature complex rendering, which will affect the 'Section 508' support.
+Several Kendo UI widgets feature complex rendering, which affects their support for the accessibility standards provisioned by Section 508.
 
 ### Label Element Support
 
-Widgets like ComboBox, DropDownList, MultiSelect or NumericTextBox hides their initial INPUT/SELECT element, which will break
-the [`label.for`](https://developer.mozilla.org/en/docs/Web/HTML/Element/label#attr-for) functionality. In general, the browser
-cannot focus hidden elements, hence the label element will not be able to focus the corresponding widget.
+Widgets, such as the ComboBox, DropDownList, MultiSelect, and NumericTextBox, hide their initial `input` or `select` element, which breaks the [`label.for`](https://developer.mozilla.org/en/docs/Web/HTML/Element/label#attr-for) functionality. In general, the browser cannot focus hidden elements which results in  the inability of the `label` element to focus the corresponding widget.
 
-**The solution** is to put the widget inside the `label` element. Thus the label will focus the first visible element.
+**Solution**
 
-##### Example
+Place the widget inside the `label` element which will focus the first visible element in turn.
+
+###### Example
 
 ```
   <label>
@@ -73,7 +75,7 @@ cannot focus hidden elements, hence the label element will not be able to focus 
 
 ## See Also
 
-Other articles on Kendo UI Accessibility support:
+Other articles on the accessibility support provided by Kendo UI:
 
 * [Overview of Web Accessibility Standards]({% slug overview_accessibility_support_kendoui %})
 * [Charts]({% slug charts_accessibility_support %})

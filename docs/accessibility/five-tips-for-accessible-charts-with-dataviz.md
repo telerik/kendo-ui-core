@@ -26,7 +26,7 @@ Providing text equivalents to non-text content is a key tenant of accessibility.
 
 ## Data Visualization
 
-Kendo UI charts and graphs definitely fit the bill of "non-text content". By definition, Kendo UI allows you to create visual charts and graphs that enhance textual or tabular data. These cannot possibly be accessible, out-of-the-box, right? 
+Kendo UI charts and graphs definitely fit the bill of "non-text content". By definition, Kendo UI allows you to create visual charts and graphs that enhance textual or tabular data. These cannot possibly be accessible, out-of-the-box, right?
 
 Actually, they can be. And with a little bit of work as you add charts and graphs to your applications, they can be made even more accessible.
 
@@ -258,7 +258,7 @@ SVG (the technology used to power Kendo UI charts) is pretty accessible out of t
 
 ## See Also
 
-Other articles on Kendo UI Accessibility support:
+Other articles on the accessibility support provided by Kendo UI:
 
 * [Overview of Web Accessibility Standards]({% slug overview_accessibility_support_kendoui %})
 * [High-Contrast Theme]({% slug high_contrast_theme_accessibility_support %})
