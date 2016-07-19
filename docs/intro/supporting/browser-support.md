@@ -11,9 +11,9 @@ position: 1
 
 ## Web Browser Support
 
-[Kendo UI components](http://demos.telerik.com/kendo-ui/) are designed to support all major browsers and to operate without the worries of a cross-browser compatibility, standards compliance or touch-device support. However, depending on the specifics of your project and the components you prefer to use, the browser support provided by Kendo UI widgets might vary between the versions.
+The [Kendo UI components](http://demos.telerik.com/kendo-ui/) are designed to support all major browsers and to operate without the worries of a cross-browser compatibility, standards compliance, or touch-device support. However, depending on the specifics of your project and the components you prefer to use, the browser support provided by Kendo UI widgets might vary between the versions.
 
-### Web Browser Support General
+### General
 
 Most [Kendo UI widgets]({% slug bundle_supportfor_kendoui_components %}) have no specific limitations as of the browser versions they support.
 
@@ -41,7 +41,7 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 
 [Kendo UI widgets rendering data visualization]({% slug bundle_supportfor_kendoui_components %}) may require more recent browser versions as well. If you want to use them in your project, consider the information below.
 
-#### Fully Supported Browsers
+**Fully supported browsers**
 
 | BROWSER           | SUPPORTED VERSIONS            |
 | :---------------- | :---------------------------- |
@@ -54,7 +54,7 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 | iOS Safari        | iOS 8 or later                |
 | Chrome for Mobile | 21 or later                   |
 
-#### Browsers with Limited Support
+**Browsers with limited support**
 
 | BROWSER           | SUPPORTED VERSIONS            | LIMITATIONS                               |
 | :---------------- | :---------------------------- | :-----------                              |
@@ -65,7 +65,15 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 |                   |                               | Android 2.x, therefore, uses non-interactive canvas output |
 | Android           | 2.3                           | The Canvas rendering mode is only supported
 
-### Important Notes
+### Best Performance
+
+To ensure the best performance of your project, make sure that you:
+
+* Always use an up-to-date browser version.
+* Check **Disable Script Debugging** from your browser configuration options.
+* Activate **Caching** in Internet Explorer.
+
+### Notes on Web Browser Support
 
 * As of the Kendo UI 2015 Q3 release, Internet Explorer 7 is no longer supported.
 * Since Internet Explorer 11 was released in October 2013, look up the Kendo UI 2013 Q3 SP2 (2013.3.1324) release or a more recent Kendo UI version if you need support for it.
@@ -73,28 +81,28 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 * Exporting a zoomed in or zoomed out page to PDF is not supported.
 * [Quirks mode](http://www.quirksmode.org/css/quirksmode.html) is not supported.
 
-> **Important**  
->
-> Always specify a [DOCTYPE](http://www.sitepoint.com/web-foundations/doctypes/). Recommended doctypes include `HTML5`, `XHTML 1.1`, `XHTML 1.0 Strict` and `HTML4 Strict`. The `HTML4 Transitional` DOCTYPE fires the Quirks mode and should not be used. `XHTML 1.0 Transitional` works well in most cases, but may cause issues with the vertical positioning of icons. The correct syntax for [all doctypes](http://www.w3.org/QA/2002/04/valid-dtd-list.html) is provided on the [W3C website](http://www.w3.org/).
+    > **Important**  
+    >
+    > Always specify a [DOCTYPE](http://www.sitepoint.com/web-foundations/doctypes/). Recommended doctypes include `HTML5`, `XHTML 1.1`, `XHTML 1.0 Strict` and `HTML4 Strict`. The `HTML4 Transitional` DOCTYPE fires the Quirks mode and should not be used. `XHTML 1.0 Transitional` works well in most cases, but may cause issues with the vertical positioning of icons. The correct syntax for [all doctypes](http://www.w3.org/QA/2002/04/valid-dtd-list.html) is provided on the [W3C website](http://www.w3.org/).
 
 * Internet Explorer compatibility modes are not supported. These modes can exhibit different behavior and rendering bugs as compared to the browser versions they emulate.
 * Windows Universal apps and Cordova for Windows environments are not supported, due to the [sandbox restrictions of the environment](https://msdn.microsoft.com/en-us/library/windows/apps/hh849625.aspx#Automatic_script_filtering). The recommended UI suite for this environment is [UI for Windows Universal](http://www.telerik.com/windows-universal-ui).
 * Unexpected behaviors that occur only in a hybrid application, but not in a standalone supported browser, are by default considered to be triggered by the hybrid environment and unrelated to Kendo UI.
 * It is highly advisable to use [Internet Explorer Edge mode](http://blogs.msdn.com/b/ie/archive/2010/06/16/ie-s-compatibility-features-for-site-developers.aspx) via a META tag or an HTTP header:
 
-```
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-```
+    ```
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    ```
 
 * Kendo UI uses a progressive enhancement for its CSS styling. As a result, old and obsolete browsers may ignore CSS 3 styles such as rounded corners and linear gradients.
-* Internet Explorer behaves differently when embedded inside a desktop (WinForms) application. It reports to support pointer events, but actually doesn't. As a result, some events, on which Kendo UI relies, are not fired. In order to avoid this problem, the following JavaScript code must be executed before the Kendo UI scripts are registered:
+* Internet Explorer behaves differently when embedded inside a desktop (WinForms) application. It reports to support pointer events, but actually does not. As a result, some events, on which Kendo UI relies, are not fired. To handle this issue, execute the following JavaScript code before the Kendo UI scripts are registered.
 
-```
-<script>
-    window.MSPointerEvent = null;
-    window.PointerEvent = null;
-</script>
-```
+    ```
+    <script>
+        window.MSPointerEvent = null;
+        window.PointerEvent = null;
+    </script>
+    ```
 
 ## Operating System Support
 
@@ -108,18 +116,10 @@ The [hybrid UI widgets and frameworks]({% slug bundle_supportfor_kendoui_compone
 | Windows Phone     | 8.0 or later          |
 | Chrome for Mobile | Any version           |
 
-### Important Notes
+### Notes on Operating System Support
 
 * Hybrid mouse and touch-screen devices are supported; for example, Internet Explorer 10, Chrome and Firefox on Windows 8
 * JavaScript should be enabled on all browsers so that they can be allowed to run scripts
-
-## Best Performance
-
-To ensure the best performance of your project, make sure that you:
-
-* Always use an up-to-date browser version.
-* Check **Disable Script Debugging** from your browser configuration options.
-* Activate Caching in Internet Explorer.
 
 ## See Also
 
