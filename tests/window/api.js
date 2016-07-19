@@ -1020,4 +1020,22 @@
 
         equal(dialog.wrapper.find(".k-i-minimize").length, 1);
     });
+
+    function setDimensionTest(dim) {
+        var options = {};
+        options[dim] = 400;
+        var wnd = createWindow(options);
+
+        options[dim] = null;
+        wnd.setOptions(options);
+
+        ok(!wnd.wrapper[0].style[dim]);
+    }
+
+    test("setOptions resets width", $.proxy(setDimensionTest, this, "width"));
+    test("setOptions resets height", $.proxy(setDimensionTest, this, "height"));
+    test("setOptions resets minWidth", $.proxy(setDimensionTest, this, "minWidth"));
+    test("setOptions resets maxWidth", $.proxy(setDimensionTest, this, "maxWidth"));
+    test("setOptions resets minHeight", $.proxy(setDimensionTest, this, "minHeight"));
+    test("setOptions resets maxHeight", $.proxy(setDimensionTest, this, "maxHeight"));
 })();
