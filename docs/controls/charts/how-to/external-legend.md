@@ -7,7 +7,7 @@ slug: howto_externallegend_charts
 
 # Render External Legend
 
-The example below demonstrates how to use the chart series options to render the legend via HTML outside of the chart.
+The example below demonstrates how to use the chart series options to render the legend through HTML outside the Kendo UI Chart.
 
 ###### Example
 
