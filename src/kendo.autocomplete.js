@@ -116,7 +116,7 @@ var __meta__ = { // jshint ignore:line
                     "aria-haspopup": true
                 });
 
-            that._clear.on("click" + ns, proxy(that._clearClick, that));
+            that._clear.on("click" + ns, proxy(that._clearValue, that));
             that._enable();
 
             that._old = that._accessor();
@@ -411,10 +411,7 @@ var __meta__ = { // jshint ignore:line
             caret(element, element.val().length);
         },
 
-        _clearClick: function() {
-            this.value(null);
-            this.trigger("change");
-        },
+        _clearText: $.noop,
 
         _resetFocusItem: function() {
             var index = this.options.highlightFirst ? 0 : -1;

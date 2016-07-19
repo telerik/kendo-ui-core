@@ -188,11 +188,6 @@ var __meta__ = { // jshint ignore:line
             this._toggle();
         },
 
-        _clearClick: function() {
-            this.value(null);
-            this.trigger("change");
-        },
-
         _inputFocus: function() {
             this._inputWrapper.addClass(FOCUSED);
             this._placeholder(false);
@@ -254,7 +249,7 @@ var __meta__ = { // jshint ignore:line
                 arrow.on(CLICK, proxy(that._arrowClick, that))
                      .on(MOUSEDOWN, function(e) { e.preventDefault(); });
 
-                clear.on(CLICK, proxy(that._clearClick, that))
+                clear.on(CLICK, proxy(that._clearValue, that))
                     .on(MOUSEDOWN, function(e) { e.preventDefault(); });
 
                 that.input
