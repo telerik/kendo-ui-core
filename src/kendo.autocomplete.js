@@ -627,6 +627,7 @@ var __meta__ = { // jshint ignore:line
             that._loading.hide();
             that.element.attr("aria-busy", false);
             that._busy = null;
+            that._showClear();
         },
 
         _showBusy: function () {
@@ -639,6 +640,7 @@ var __meta__ = { // jshint ignore:line
             that._busy = setTimeout(function () {
                 that.element.attr("aria-busy", true);
                 that._loading.show();
+                that._hideClear();
             }, 100);
         },
 

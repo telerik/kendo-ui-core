@@ -25,6 +25,7 @@ var __meta__ = { // jshint ignore:line
         FOCUSED = "k-state-focused",
         HOVER = "k-state-hover",
         LOADING = "k-i-loading",
+        HIDDENCLASS = "k-loading-hidden",
         OPEN = "open",
         CLOSE = "close",
         CASCADE = "cascade",
@@ -202,6 +203,22 @@ var __meta__ = { // jshint ignore:line
         _isFilterEnabled: function() {
             var filter = this.options.filter;
             return filter && filter !== "none";
+        },
+
+        _hideClear: function() {
+            var that = this;
+
+            if(that._clear) {
+                this._clear.addClass(HIDDENCLASS);
+            }
+        },
+
+        _showClear: function() {
+            var that = this;
+
+            if(that._clear) {
+                this._clear.removeClass(HIDDENCLASS);
+            }
         },
 
         _clearValue: function() {
@@ -960,6 +977,7 @@ var __meta__ = { // jshint ignore:line
             that._arrow.removeClass(LOADING);
             that._focused.attr("aria-busy", false);
             that._busy = null;
+            that._showClear();
         },
 
         _showBusy: function () {
@@ -975,6 +993,7 @@ var __meta__ = { // jshint ignore:line
                 if (that._arrow) { //destroyed after request start
                     that._focused.attr("aria-busy", true);
                     that._arrow.addClass(LOADING);
+                    that._hideClear();
                 }
             }, 100);
         },
