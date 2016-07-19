@@ -204,6 +204,20 @@ var __meta__ = { // jshint ignore:line
             return filter && filter !== "none";
         },
 
+        _clearValue: function() {
+            this.listView.value([]);
+            this._clearText();
+            this._accessor("");
+            if(this._isFilterEnabled()) {
+                this._filter({word: "", open: false});
+            }
+            this._change();
+        },
+
+        _clearText: function() {
+            this.text("");
+        },
+
         _clearFilter: function() {
             if (!this.options.virtual) {
                 this.listView.bound(false);
