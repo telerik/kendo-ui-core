@@ -273,10 +273,8 @@ Internet Explorer 9 and Safari do not support the option for saving a file and r
 
 ## Known Limitations
 
-* There is a system-specific limit of the maximum size of the exported file.
-For large data sets we recommend using the [Document Processing Library](http://docs.telerik.com/devtools/document-processing/introduction) server-side solution.
-The [RadSpreadStreamProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) component is particularly suited for large data sets.
-* As discussed in the previous section, exporting in older browsers, such as Internet Explorer 9 and Safari, requires the implementation of a server proxy. For more information on this, refer to [the `proxyUrl` configuration section](/api/javascript/ui/grid#configuration-excel.proxyURL).
+* The maximum size of the exported file has a system-specific limit. For large data sets, it is highly recommended that you use the server-side solution the [Document Processing Library](http://docs.telerik.com/devtools/document-processing/introduction) provides. The [RadSpreadStreamProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) component is particularly suited for large data sets.
+* As discussed in the previous section, exporting in older browsers, such as Internet Explorer 9 and Safari, requires the implementation of a server proxy. For more information, refer to [the `proxyUrl` configuration section](/api/javascript/ui/grid#configuration-excel.proxyURL).
 * If you use Kendo UI Q2 2014 SP2 (2014.2.1008) or older, exporting requires a custom implementation and there are two ways to approach the task:
     * Use a server-side implementation to directly export the data that is otherwise displayed by the Grid.
     * Use a client-side implementation to export the table HTML markup or the dataSource items of the Grid.
