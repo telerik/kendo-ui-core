@@ -7,7 +7,7 @@ slug: troubleshooting_content_security_policy_kendoui
 
 # Content Security Policy
 
-When you use the strict Content Security Policy (CSP) with Kendo UI widgets, that is, if the strict `Content-Security-Policy` (CSP) mode is enabled, some browser features are disabled by default:
+If the strict `Content-Security-Policy` (CSP) mode is enabled, some browser features are disabled by default:
 
 - Inline JavaScript, such as <script></script> or DOM event attributes like `onclick`, is blocked. All script code must reside in separate files, served from a whitelisted domain.
 - Dynamic code evaluation via `eval()` and string arguments for both `setTimeout` and `setInterval` are blocked.
