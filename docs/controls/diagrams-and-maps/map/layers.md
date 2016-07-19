@@ -22,7 +22,7 @@ Tile layers are suitable for displaying raster maps from popular online provider
 
 Dedicated support is available for [Microsoft Bing](http://msdn.microsoft.com/en-us/library/ff701713.aspx). Note that it requires you to [obtain an API key](http://msdn.microsoft.com/en-us/library/ff428642.aspx).
 
-The example below demonstrates how to display a OpenStreetMap tile layer.
+The example below demonstrates how to display an OpenStreetMap tile layer.
 
 ###### Example
 
