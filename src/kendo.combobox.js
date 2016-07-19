@@ -39,7 +39,6 @@ var __meta__ = { // jshint ignore:line
         CHANGE = "change",
         DEFAULT = "k-state-default",
         FOCUSED = "k-state-focused",
-        HIDDENCLASS = "k-loading-hidden",
         STATEDISABLED = "k-state-disabled",
         ARIA_DISABLED = "aria-disabled",
         STATE_FILTER = "filter",
@@ -49,34 +48,6 @@ var __meta__ = { // jshint ignore:line
         proxy = $.proxy;
 
     var ComboBox = Select.extend({
-        _hideBusy: function () {
-            var that = this;
-            clearTimeout(that._busy);
-            that.input.attr("aria-busy", false);
-            that._loading.addClass(HIDDENCLASS);
-            that._request = false;
-            that._busy = null;
-            that._showClear();
-        },
-
-        _showBusyHandler: function() {
-            this.input.attr("aria-busy", true);
-            this._loading.removeClass(HIDDENCLASS);
-            this._hideClear();
-        },
-
-        _showBusy: function () {
-            var that = this;
-
-            that._request = true;
-
-            if (that._busy) {
-                return;
-            }
-
-            that._busy = setTimeout(proxy(that._showBusyHandler, that), 100);
-        },
-
         init: function(element, options) {
             var that = this, text, disabled;
 
@@ -96,8 +67,6 @@ var __meta__ = { // jshint ignore:line
             that._wrapper();
 
             that._input();
-
-            that._loader();
 
             that._clearButton();
 
@@ -829,10 +798,6 @@ var __meta__ = { // jshint ignore:line
             if (element.id) {
                 that._arrow.attr("aria-controls", that.ul[0].id);
             }
-        },
-
-        _loader: function() {
-            this._loading = $('<span class="k-icon k-i-loading ' + HIDDENCLASS + '"></span>').insertAfter(this.input);
         },
 
         _clearButton: function() {
