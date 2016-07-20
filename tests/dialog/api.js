@@ -114,7 +114,7 @@
     test("content sets content", function() {
         var dialog = createDialog(),
             oldContent = dialog.content(),
-            contentElement = $(".k-dialog-content", dialog.wrapper);
+            contentElement = $(".k-content", dialog.wrapper);
 
         dialog.content("Content is the new content!");
 

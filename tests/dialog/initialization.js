@@ -24,7 +24,7 @@
         ok(wrapper.is(".k-widget.k-dialog.k-window"));
         ok(wrapperChildren.eq(0).is(".k-i-close"));
         ok(wrapperChildren.eq(1).is(".k-window-titlebar"));
-        ok(wrapperChildren.eq(2).is(".k-dialog-content"));
+        ok(wrapperChildren.eq(2).is(".k-content"));
         equal(wrapper.find(".k-dialog-buttongroup").length, 0);
     });
 
@@ -60,7 +60,7 @@
             content: "content text"
         });
 
-        equal(dialog.wrapper.find(".k-dialog-content").html(), "content text");
+        equal(dialog.wrapper.find(".k-content").html(), "content text");
     });
 
     test("setting actions in options adds buttongroup container", function() {

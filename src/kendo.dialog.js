@@ -17,7 +17,7 @@
             Widget = kendo.ui.Widget,
             template = kendo.template,
             KDIALOG = ".k-dialog",
-            KCONTENT = "k-dialog-content",
+            KCONTENT = "k-content",
             KTITLELESS = "k-dialog-titleless",
             KDIALOGTITLE = ".k-dialog-title",
             KDIALOGTITLEBAR = ".k-window-titlebar",
@@ -111,7 +111,7 @@
                 if (!arguments.length) {
                     return title.html();
                 }
-                
+
                 if (html === false) {
                     titlebar.remove();
                     wrapper.addClass(KTITLELESS);
