@@ -1817,4 +1817,24 @@
         });
 
     });
+
+    asyncTest("select method unselects prefetched item", 2, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            valueMapper: function(o) {
+                o.success([256]);
+            }
+        }));
+
+        virtualList.one("listBound", function() {
+            start();
+
+            virtualList.select([256]);
+
+            equal(virtualList.value().length, 0);
+            equal(virtualList.select().length, 0);
+        });
+
+        virtualList.select([256]);
+    });
 })();

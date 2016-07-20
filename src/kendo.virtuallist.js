@@ -661,20 +661,11 @@ var __meta__ = { // jshint ignore:line
         },
 
         dataItemByIndex: function(index) {
-            var that = this;
-            var dataSource = that.dataSource;
-            var oldSkip = dataSource.skip();
-            var dataItem = null;
+            var take = this.itemCount;
+            var skip = this._getSkip(index, take);
+            var view = this._getRange(skip, take);
 
-            that.mute(function() {
-                var take = that.itemCount;
-                var skip = that._getSkip(index, take);
-                var view = that._getRange(skip, take);
-
-                dataItem = that._findDataItem(view, [index - skip]);
-            });
-
-            return dataItem;
+            return this._findDataItem(view, [index - skip]);
         },
 
         selectedDataItems: function() {
@@ -1464,17 +1455,14 @@ var __meta__ = { // jshint ignore:line
                 for (var i = 0; i < indices.length; i++) {
                     result = null;
                     position = $.inArray(indices[i], selectedIndexes);
+                    dataItem = this.dataItemByIndex(indices[i]);
 
-                    if (position === -1 && this._view[indices[i]]) {
-                        dataItem = this._view[indices[i]].item;
-
-                        if (dataItem) {
-                            for (var j = 0; j < selectedDataItems.length; j++) {
-                                match = isPrimitive(dataItem) ? selectedDataItems[j] === dataItem : valueGetter(selectedDataItems[j]) === valueGetter(dataItem);
-                                if (match) {
-                                    item = this._getElementByIndex(indices[i]);
-                                    result = this._deselectSingleItem(item, j, indices[i], removedindexesCounter);
-                                }
+                    if (position === -1 && dataItem) {
+                        for (var j = 0; j < selectedDataItems.length; j++) {
+                            match = isPrimitive(dataItem) ? selectedDataItems[j] === dataItem : valueGetter(selectedDataItems[j]) === valueGetter(dataItem);
+                            if (match) {
+                                item = this._getElementByIndex(indices[i]);
+                                result = this._deselectSingleItem(item, j, indices[i], removedindexesCounter);
                             }
                         }
                     } else {
@@ -1550,7 +1538,7 @@ var __meta__ = { // jshint ignore:line
             for (; idx < indices.length; idx++) {
                 position = -1;
                 index = indices[idx];
-                value = this._valueGetter(this._view[index].item);
+                value = this._valueGetter(this.dataItemByIndex(index));
 
                 for (j = 0; j < values.length; j++) {
                     if (value == values[j]) {
