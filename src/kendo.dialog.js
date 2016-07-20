@@ -75,7 +75,7 @@
                 var actions = this.options.actions,
                     action;
                 for (var i = 0; i < actions.length; i++) {
-                    var action = actions[i],
+                        action = actions[i],
                         button = $(templates.action(action));
 
                     if (action.primary) {
