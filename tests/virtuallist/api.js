@@ -1680,17 +1680,53 @@
         }));
 
         virtualList.dataSource.read().then(function() {
-            virtualList.value(value);
+            var check = function() {
+                if (!check) { return; }
 
-            virtualList.dataSource.one("change", function() {
                 start();
                 equal(requests.length, 2);
-                equal(requests[1].page, 6);
-            });
+                equal(requests[1].page, 7); //[240, 280)
+                check = null;
+            };
+
+            virtualList.dataSource.one("change", check);
+            virtualList.value(value);
         });
     });
 
-    test("dataItemByIndex method returns a dataItem corresponding to the index", 3, function() {
+    test("dataItemByIndex method returns a dataItem from first range", 3, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            dataSource: new kendo.data.DataSource({
+                transport: {
+                    read: function(options) {
+                        options.success({ data: generateData(options.data), total: 300 });
+                    }
+                },
+                serverPaging: true,
+                pageSize: 40,
+                schema: {
+                    data: "data",
+                    total: "total"
+                }
+            }),
+            height: 500,
+            itemHeight: 50,
+            valueMapper: function(o) {
+                o.success(o.value);
+            },
+            value: 0
+        }));
+
+        virtualList.dataSource.read().then(function() {
+            var dataItem = virtualList.dataItemByIndex(0);
+
+            ok(dataItem);
+            equal(dataItem.id, 0);
+            equal(dataItem.value, 0);
+        });
+    });
+
+    test("dataItemByIndex method returns a dataItem from a prefetched range", 3, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             dataSource: new kendo.data.DataSource({
                 transport: {
@@ -1722,7 +1758,7 @@
         });
     });
 
-    test("dataItemByIndex method returns a dataItem corresponding to the index", 1, function() {
+    test("dataItemByIndex method returns null if data is not loaded", 1, function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             dataSource: new kendo.data.DataSource({
                 transport: {

@@ -637,12 +637,6 @@ var __meta__ = { // jshint ignore:line
             return that._activeDeferred;
         },
 
-        _getSkip: function(index, take) {
-            var page = index < take ? 1 : Math.floor(index / take) + 1;
-
-            return (page - 1) * take;
-        },
-
         _findDataItem: function(view, index) {
             var group;
 
@@ -667,11 +661,20 @@ var __meta__ = { // jshint ignore:line
         },
 
         dataItemByIndex: function(index) {
-            var take = this.itemCount;
-            var skip = this._getSkip(index, take);
-            var range = this._getRange(skip, take);
+            var that = this;
+            var dataSource = that.dataSource;
+            var oldSkip = dataSource.skip();
+            var dataItem = null;
 
-            return this._findDataItem(range, [index - skip]);
+            that.mute(function() {
+                var take = that.itemCount;
+                var skip = that._getSkip(index, take);
+                var view = that._getRange(skip, take);
+
+                dataItem = that._findDataItem(view, [index - skip]);
+            });
+
+            return dataItem;
         },
 
         selectedDataItems: function() {
@@ -1462,8 +1465,6 @@ var __meta__ = { // jshint ignore:line
                     result = null;
                     position = $.inArray(indices[i], selectedIndexes);
 
-                    //TODO: use _dataItemsByIndexes
-                    //
                     if (position === -1 && this._view[indices[i]]) {
                         dataItem = this._view[indices[i]].item;
 
@@ -1549,7 +1550,6 @@ var __meta__ = { // jshint ignore:line
             for (; idx < indices.length; idx++) {
                 position = -1;
                 index = indices[idx];
-                //TODO: Probably should use _dataItemsByIndexes
                 value = this._valueGetter(this._view[index].item);
 
                 for (j = 0; j < values.length; j++) {
@@ -1568,10 +1568,20 @@ var __meta__ = { // jshint ignore:line
             return removed;
         },
 
+        _getSkip: function(index, take) {
+            var page = index < take ? 1 : Math.floor(index / take) + 1;
+
+            return (page - 1) * take;
+        },
+
         _select: function(indexes) {
-            var that = this;
-            var singleSelection = this.options.selectable !== "multiple";
-            var added = [];
+            var that = this,
+                singleSelection = this.options.selectable !== "multiple",
+                dataSource = this.dataSource,
+                dataItem, oldSkip,
+                take = this.itemCount,
+                valueGetter = this._valueGetter,
+                added = [];
 
             if (singleSelection) {
                 that._selectedIndexes = [];
@@ -1579,18 +1589,28 @@ var __meta__ = { // jshint ignore:line
                 that._values = [];
             }
 
+            oldSkip = dataSource.skip();
+
             $.each(indexes, function(_, index) {
-                var dataItem = that.dataItemByIndex(index);
+                var skip = that._getSkip(index, take);
 
-                added.push({
-                    dataItem: dataItem,
-                    index: index
+                that.mute(function() {
+                    dataSource.range(skip, take); //switch the range to get the dataItem
+
+                    dataItem = that._findDataItem(dataSource.view(), [index - skip]);
+                    that._selectedIndexes.push(index);
+                    that._selectedDataItems.push(dataItem);
+                    that._values.push(isPrimitive(dataItem) ? dataItem : valueGetter(dataItem));
+
+                    added.push({
+                        index: index,
+                        dataItem: dataItem
+                    });
+
+                    that._getElementByIndex(index).addClass(SELECTED);
+
+                    dataSource.range(oldSkip, take); //switch back the range
                 });
-
-                that._selectedIndexes.push(index);
-                that._selectedDataItems.push(dataItem);
-                that._values.push(isPrimitive(dataItem) ? dataItem : that._valueGetter(dataItem));
-                that._getElementByIndex(index).addClass(SELECTED);
             });
 
             return added;
