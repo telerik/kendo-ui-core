@@ -67,7 +67,7 @@
 
         dialog.title(titleText);
 
-        notOk(dialog.wrapper.hasClass(KTITLELESS));
+        ok(!dialog.wrapper.hasClass(KTITLELESS));
     });
 
     test("title method gets and sets the title consistently", 2, function () {
@@ -161,7 +161,7 @@
     test("close does not destroy other dialog overlay", function() {
         createDialog();
         var dialog2 = createDialog();
-        
+
         dialog2.close();
 
         equal($(".k-overlay").length, 1);
@@ -171,7 +171,7 @@
     test("closing dialog moves overlay before previous modal dialog", function() {
         var dialog1 = createDialog();
         var dialog2 = createDialog();
-        
+
         dialog2.close();
 
         equal($(".k-overlay").length, 1);
@@ -189,5 +189,53 @@
         });
 
         dialog.wrapper.find(".k-i-close").click();
+    });
+
+    test("open sets options.visible to true", function() {
+        var dialog = createDialog({ visible: false });
+
+        dialog.open();
+
+        equal(dialog.options.visible, true);
+    });
+
+    test("open shows the dialog wrapper ", function() {
+        var dialog = createDialog({ visible: false });
+
+        dialog.open();
+
+        ok(dialog.wrapper.is(":visible"));
+    });
+
+    test("open adds only one modal overlay", function() {
+        var dialog = createDialog({ modal: true,  visible: false });
+        var dialog1 = createDialog({ modal: true,  visible: false });
+
+        dialog.open();
+        dialog1.open();
+
+        ok($(".k-overlay").length === 1);
+    });
+
+    test("open adds only is added after the last openned dialo", function() {
+        var dialog = createDialog({ modal: true,  visible: false });
+        var dialog1 = createDialog({ modal: true,  visible: false });
+
+        dialog1.open();
+        dialog.open();
+
+        ok(dialog.wrapper.prev("div").is(".k-overlay"));
+    });
+
+    test("open sets zIndex larger then the other's dialogs", function() {
+        var ZINDEX = "z-index";
+        var dialog = createDialog({ modal: true,  visible: false });
+        var dialog1 = createDialog({ modal: true,  visible: false });
+
+        dialog1.open();
+        dialog.open();
+
+        ok(dialog1.wrapper.css(ZINDEX) > 0);
+        ok(dialog.wrapper.css(ZINDEX) > dialog1.wrapper.css(ZINDEX));
     });
 })();

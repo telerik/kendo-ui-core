@@ -19,6 +19,7 @@
             template = kendo.template,
             NS = ".kendoWindow",
             KDIALOG = ".k-dialog",
+            KWINDOW = ".k-window",
             KICONCLOSE = ".k-i-close",
             KCONTENTCLASS = "k-content",
             KCONTENT = ".k-content",
@@ -66,6 +67,7 @@
                 if (!that.options.visible) {
                     that.wrapper.hide();
                 } else if (options.modal) {
+                    that.toFront();
                     that._overlay(wrapper.is(VISIBLE)).css({ opacity: 0.5 });
                 }
 
@@ -216,7 +218,52 @@
                 }
             },
 
-            close: function () {
+            open: function() {
+                var that = this,
+                    wrapper = that.wrapper,
+                    options = that.options,
+                    overlay, otherModalsVisible;
+
+                if (!that.trigger(OPEN)) {
+                    that.toFront();
+                    options.visible = true;
+                    if (options.modal) {
+                        otherModalsVisible = !!that._modals().length;
+                        overlay = that._overlay(otherModalsVisible);
+                        overlay.show();
+                    }
+                    wrapper.show();
+                }
+
+                return that;
+            },
+
+            toFront: function() {
+                var that = this,
+                    wrapper = that.wrapper,
+                    zIndex = +wrapper.css(ZINDEX),
+                    originalZIndex = zIndex;
+
+                $(KWINDOW).each(function(i, element) {
+                    var windowObject = $(element),
+                        zIndexNew = windowObject.css(ZINDEX);
+
+                    if (!isNaN(zIndexNew)) {
+                        zIndex = Math.max(+zIndexNew, zIndex);
+                    }
+                });
+
+                if (!wrapper[0].style.zIndex || originalZIndex < zIndex) {
+                    wrapper.css(ZINDEX, zIndex + 2);
+                }
+
+                that.element.find("> .k-overlay").remove();
+                wrapper = null;
+
+                return that;
+            },
+
+            close: function() {
                 this._close(true);
                 return this;
             },
@@ -250,13 +297,13 @@
             _modals: function() {
                 var that = this;
 
-                var zStack = $(KDIALOG).filter(function() {
+                var zStack = $(KWINDOW).filter(function() {
                     var dom = $(this);
                     var object = that._object(dom);
                     var options = object && object.options;
 
                     return options && options.modal && options.visible && dom.is(VISIBLE);
-                }).sort(function(a, b){
+                }).sort(function(a, b) {
                     return +$(a).css("zIndex") - +$(b).css("zIndex");
                 });
 

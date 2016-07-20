@@ -40,7 +40,7 @@
         });
         var wrapper = dialog.wrapper;
         var wrapperChildren = wrapper.children();
-        notOk(wrapperChildren.eq(0).is(".k-i-close"));
+        ok(!wrapperChildren.eq(0).is(".k-i-close"));
     });
 
     test("title=false does not render title and adds css class", function() {
@@ -173,7 +173,7 @@
             modal: true
         });
 
-        equal($(".k-overlay").length, 0);
+            equal($(".k-overlay").length, 0);
     });
 
     test("construction of modal dialog with visible false does not destroy other dialog overlay", function() {
