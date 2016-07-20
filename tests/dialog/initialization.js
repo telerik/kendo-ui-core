@@ -158,4 +158,30 @@
         var dialog = createDialog({ height: "190px" });
         equal(dialog.wrapper.height(), 190);
     });
+
+    test("construction of modal dialog shows overlay", function() {
+        createDialog({
+            modal: true
+        });
+
+        ok($(".k-overlay").is(":visible"));
+    });
+
+    test("construction of modal dialog with visible false does not shows overlay", function() {
+        createDialog({
+            visible: false,
+            modal: true
+        });
+
+        equal($(".k-overlay").length, 0);
+    });
+
+    test("construction of modal dialog with visible false does not destroy other dialog overlay", function() {
+        createDialog({ modal: true });
+        var div = $("<div class='dialog'>foo</div>").appendTo(QUnit.fixture);
+        div.kendoDialog({ modal: false });
+
+        equal($(".k-overlay").length, 1);
+        ok($(".k-overlay").is(":visible"));
+    });
 })();

@@ -22,7 +22,10 @@
             KDIALOGTITLE = ".k-dialog-title",
             KDIALOGTITLEBAR = ".k-window-titlebar",
             KBUTTONGRUOP = ".k-dialog-buttongroup",
+            KOVERLAY = ".k-overlay",
             VISIBLE = ":visible",
+            ZINDEX = "zIndex",
+            BODY = "body",
             templates;
 
         function defined(x) {
@@ -41,6 +44,8 @@
                 Widget.fn.init.call(that, element, options);
                 options = that.options;
                 element = that.element;
+                that.appendTo = $(BODY);
+
                 if (!defined(options.visible) || options.visible === null) {
                     options.visible = element.is(VISIBLE);
                 }
@@ -53,6 +58,8 @@
 
                 if (!that.options.visible) {
                     that.wrapper.hide();
+                } else if (options.modal) {
+                    that._overlay(wrapper.is(VISIBLE)).css({ opacity: 0.5 });
                 }
 
                 kendo.notify(that);
@@ -102,11 +109,10 @@
                 if (maxHeight != Infinity) {
                     actionbar = wrapper.children(KBUTTONGRUOP);
                     actionbarHeight = actionbar[0] && actionbar[0].offsetHeight || 0;
-
                     elementMaxHeight = parseInt(maxHeight, 10) - actionbarHeight -
                         parseInt(element.css("margin-top"), 10) -
                         parseInt(element.css("padding-top"), 10) -
-                        parseInt(element.css("padding-bottom"), 10) - 1;
+                        parseInt(element.css("padding-bottom"), 10);
 
                     element.css({
                         maxHeight: elementMaxHeight,
@@ -114,6 +120,23 @@
                     });
                 }
 
+            },
+
+            _overlay: function(visible) {
+                var overlay = this.appendTo.children(KOVERLAY),
+                    wrapper = this.wrapper;
+
+
+                if (!overlay.length) {
+                    overlay = $("<div class='k-overlay' />");
+                }
+
+                overlay
+                    .insertBefore(wrapper[0])
+                    .toggle(visible)
+                    .css(ZINDEX, parseInt(wrapper.css(ZINDEX), 10) - 1);
+
+                return overlay;
             },
 
             _createDialog: function() {
@@ -124,8 +147,7 @@
                     wrapper = $(templates.wrapper(options));
 
                 content.addClass(KCONTENT);
-
-                wrapper.appendTo("body");
+                that.appendTo.append(wrapper);
 
                 if (options.closable !== false) {
                     wrapper.append(templates.close);
