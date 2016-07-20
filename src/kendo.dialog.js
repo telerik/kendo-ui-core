@@ -21,10 +21,16 @@
             KTITLELESS = "k-dialog-titleless",
             KDIALOGTITLE = ".k-dialog-title",
             KDIALOGTITLEBAR = ".k-window-titlebar",
+            KBUTTONGRUOP = ".k-dialog-buttongroup",
+            VISIBLE = ":visible",
             templates;
 
         function defined(x) {
             return (typeof x != "undefined");
+        }
+
+        function constrain(value, low, high) {
+            return Math.max(Math.min(parseInt(value, 10), high === Infinity ? high : parseInt(high, 10)), parseInt(low, 10));
         }
 
         var Dialog = Widget.extend({
@@ -33,11 +39,81 @@
                     wrapper;
 
                 Widget.fn.init.call(that, element, options);
-
+                options = that.options;
                 element = that.element;
+                if (!defined(options.visible) || options.visible === null) {
+                    options.visible = element.is(VISIBLE);
+                }
+
                 that._createDialog();
+
                 wrapper = that.wrapper = element.closest(KDIALOG);
+
+                that._dimensions();
+
+                if (!that.options.visible) {
+                    that.wrapper.hide();
+                }
+
                 kendo.notify(that);
+            },
+
+            _dimensions: function() {
+                var wrapper = this.wrapper,
+                    options = this.options,
+                    width = options.width,
+                    height = options.height,
+                    dimensions = ["minWidth", "minHeight", "maxWidth", "maxHeight"];
+
+                for (var i = 0; i < dimensions.length; i++) {
+                    var value = options[dimensions[i]];
+                    if (value && value != Infinity) {
+                        wrapper.css(dimensions[i], value);
+                    }
+                }
+
+                this._elementMaxHeight();
+
+                if (width) {
+                    if (width.toString().indexOf("%") > 0) {
+                        wrapper.width(width);
+                    } else {
+                        wrapper.width(constrain(width, options.minWidth, options.maxWidth));
+                    }
+                }
+
+                if (height) {
+                    if (height.toString().indexOf("%") > 0) {
+                        wrapper.height(height);
+                    } else {
+                        wrapper.height(constrain(height, options.minHeight, options.maxHeight));
+                    }
+                }
+            },
+
+            _elementMaxHeight: function() {
+                var that = this,
+                    wrapper = that.wrapper,
+                    options = that.options,
+                    element = that.element,
+                    maxHeight = options.maxHeight,
+                    elementMaxHeight, actionbar, actionbarHeight;
+
+                if (maxHeight != Infinity) {
+                    actionbar = wrapper.children(KBUTTONGRUOP);
+                    actionbarHeight = actionbar[0] && actionbar[0].offsetHeight || 0;
+
+                    elementMaxHeight = parseInt(maxHeight, 10) - actionbarHeight -
+                        parseInt(element.css("margin-top"), 10) -
+                        parseInt(element.css("padding-top"), 10) -
+                        parseInt(element.css("padding-bottom"), 10) - 1;
+
+                    element.css({
+                        maxHeight: elementMaxHeight,
+                        overflow: "hidden"
+                    });
+                }
+
             },
 
             _createDialog: function() {
@@ -153,6 +229,10 @@
                 title: "",
                 actions: [],
                 modal: true,
+                minWidth: 90,
+                minHeight: 150,
+                maxWidth: Infinity,
+                maxHeight: Infinity,
                 closable: true
             }
         });

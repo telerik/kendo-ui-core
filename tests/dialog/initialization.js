@@ -16,6 +16,11 @@
         return element.kendoDialog(options).data("kendoDialog");
     }
 
+    function createHighDialog(options, element, innerHeight) {
+        element = element || $("<div class='dialog'><div style='height:" + innerHeight + "px'></div></div>").appendTo(QUnit.fixture);
+        return element.kendoDialog(options).data("kendoDialog");
+    }
+
     test("creates default html structure", function() {
         var dialog = createDialog();
         var wrapper = dialog.wrapper;
@@ -92,5 +97,65 @@
 
         equal(wrapper.find(".k-dialog-buttongroup > .k-button").length, 2);
         ok(wrapper.find(".k-dialog-buttongroup > .k-button:first").is(".k-primary"));
+    });
+
+    test("visible:true option is inferred from content element", function() {
+        var div = $("<div class='dialog'>foo</div>").appendTo(QUnit.fixture),
+            clientObject;
+
+        div.kendoDialog();
+
+        clientObject = div.data("kendoDialog");
+
+        ok(clientObject.wrapper.is(":visible"));
+        ok(div.is(":visible"));
+        ok(clientObject.options.visible);
+    });
+
+    test("visible:false option is inferred from content element", function() {
+        var div = $("<div style='display: none' class='dialog'>foo</div>").appendTo(QUnit.fixture),
+            clientObject;
+
+        div.kendoDialog();
+
+        clientObject = div.data("kendoDialog");
+
+        ok(clientObject.wrapper.is(":hidden"));
+        ok(!clientObject.options.visible);
+    });
+
+    test("width is constrained by minWidth", function() {
+        var dialog = createDialog({ minWidth: 100, width: 90 });
+        equal(dialog.wrapper.width(), 100);
+    });
+
+    test("width is constrained by maxWidth", function() {
+        var dialog = createDialog({ maxWidth: 100, width: 190 });
+        equal(dialog.wrapper.width(), 100);
+    });
+
+    test("height is constrained by minHeight", function() {
+        var dialog = createDialog({ minHeight: 100, height: 90 });
+        equal(dialog.wrapper.height(), 100);
+    });
+
+    test("height is constrained by maxHeight", function() {
+        var dialog = createDialog({ maxHeight: 150, height: 190 });
+        equal(dialog.wrapper.height(), 150);
+    });
+
+    test("height is constrained by maxHeight when content is larger", function() {
+        var dialog = createHighDialog({ maxHeight: 150 }, null, 200);
+        ok(dialog.wrapper.height() <= 150);
+    });
+
+    test("creating dialog with string width", function() {
+        var dialog = createDialog({ width: "190px" });
+        equal(dialog.wrapper.width(), 190);
+    });
+
+    test("creating dialog with string height", function() {
+        var dialog = createDialog({ height: "190px" });
+        equal(dialog.wrapper.height(), 190);
     });
 })();
