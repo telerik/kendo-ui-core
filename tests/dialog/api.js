@@ -142,14 +142,6 @@
         equal(dialog.options.visible, false);
     });
 
-    test("close callse close event", function() {
-        var dialog = createDialog({
-            close: function() { ok(true); }
-        });
-
-        dialog.close();
-    });
-
     test("close removes the modal wrapper", function() {
         var dialog = createDialog({ });
 

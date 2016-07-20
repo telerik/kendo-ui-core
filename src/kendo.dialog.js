@@ -68,6 +68,8 @@
                     that.wrapper.hide();
                 } else if (options.modal) {
                     that.toFront();
+                    that._triggerInitOpen();
+                    that.trigger(OPEN);
                     that._overlay(wrapper.is(VISIBLE)).css({ opacity: 0.5 });
                 }
 
@@ -224,6 +226,8 @@
                     options = that.options,
                     overlay, otherModalsVisible;
 
+                this._triggerInitOpen();
+
                 if (!that.trigger(OPEN)) {
                     that.toFront();
                     options.visible = true;
@@ -236,6 +240,13 @@
                 }
 
                 return that;
+            },
+
+            _triggerInitOpen: function() {
+                if (!defined(this._initOpenTriggered)) {
+                    this._initOpenTriggered = true;
+                    this.trigger(INITOPEN);
+                }
             },
 
             toFront: function() {
