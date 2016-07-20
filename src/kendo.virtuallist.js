@@ -623,13 +623,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             $.each(indexes, function(_, index) {
-                var rangeStart = Math.floor(index / take) * take;
-
-                if (index === rangeStart && rangeStart > take) {
-                    rangeStart -= take;
-                }
-
-                that._promisesList.push(that.deferredRange(rangeStart));
+                that._promisesList.push(that.deferredRange(that._getSkip(index, take)));
             });
 
             if (isEmptyList) {
@@ -643,9 +637,14 @@ var __meta__ = { // jshint ignore:line
             return that._activeDeferred;
         },
 
-        _findDataItem: function(index) {
-            var view = this.dataSource.view(),
-                group;
+        _getSkip: function(index, take) {
+            var page = index < take ? 1 : Math.floor(index / take) + 1;
+
+            return (page - 1) * take;
+        },
+
+        _findDataItem: function(view, index) {
+            var group;
 
             //find in grouped view
             if (this.options.type === "group") {
@@ -663,26 +662,16 @@ var __meta__ = { // jshint ignore:line
             return view[index];
         },
 
+        _getRange: function(skip, take) {
+            return this.dataSource._findRange(skip, Math.min(skip + take, this.dataSource.total()));
+        },
+
         dataItemByIndex: function(index) {
-            var that = this;
-            var dataSource = that.dataSource;
-            var oldSkip = dataSource.skip();
-            var dataItem = null;
+            var take = this.itemCount;
+            var skip = this._getSkip(index, take);
+            var range = this._getRange(skip, take);
 
-            that.mute(function() {
-                var take = that.itemCount;
-                var skip = that._getSkip(index, take);
-
-                dataSource.range(skip, take); //switch the range to get the dataItem
-
-                if (dataSource.skip() === (skip + take)) { //the range is found
-                    dataItem = that._findDataItem([index - skip]);
-                }
-
-                dataSource.range(oldSkip, take); //switch back the range
-            });
-
-            return dataItem;
+            return this._findDataItem(range, [index - skip]);
         },
 
         selectedDataItems: function() {
@@ -1473,6 +1462,8 @@ var __meta__ = { // jshint ignore:line
                     result = null;
                     position = $.inArray(indices[i], selectedIndexes);
 
+                    //TODO: use _dataItemsByIndexes
+                    //
                     if (position === -1 && this._view[indices[i]]) {
                         dataItem = this._view[indices[i]].item;
 
@@ -1558,6 +1549,7 @@ var __meta__ = { // jshint ignore:line
             for (; idx < indices.length; idx++) {
                 position = -1;
                 index = indices[idx];
+                //TODO: Probably should use _dataItemsByIndexes
                 value = this._valueGetter(this._view[index].item);
 
                 for (j = 0; j < values.length; j++) {
@@ -1576,20 +1568,10 @@ var __meta__ = { // jshint ignore:line
             return removed;
         },
 
-        _getSkip: function(index, take) {
-            var page = index < take ? 1 : Math.floor(index / take) + 1;
-
-            return (page - 1) * take;
-        },
-
         _select: function(indexes) {
-            var that = this,
-                singleSelection = this.options.selectable !== "multiple",
-                dataSource = this.dataSource,
-                dataItem, oldSkip,
-                take = this.itemCount,
-                valueGetter = this._valueGetter,
-                added = [];
+            var that = this;
+            var singleSelection = this.options.selectable !== "multiple";
+            var added = [];
 
             if (singleSelection) {
                 that._selectedIndexes = [];
@@ -1597,28 +1579,18 @@ var __meta__ = { // jshint ignore:line
                 that._values = [];
             }
 
-            oldSkip = dataSource.skip();
-
             $.each(indexes, function(_, index) {
-                var skip = that._getSkip(index, take);
+                var dataItem = that.dataItemByIndex(index);
 
-                that.mute(function() {
-                    dataSource.range(skip, take); //switch the range to get the dataItem
-
-                    dataItem = that._findDataItem([index - skip]);
-                    that._selectedIndexes.push(index);
-                    that._selectedDataItems.push(dataItem);
-                    that._values.push(isPrimitive(dataItem) ? dataItem : valueGetter(dataItem));
-
-                    added.push({
-                        index: index,
-                        dataItem: dataItem
-                    });
-
-                    that._getElementByIndex(index).addClass(SELECTED);
-
-                    dataSource.range(oldSkip, take); //switch back the range
+                added.push({
+                    dataItem: dataItem,
+                    index: index
                 });
+
+                that._selectedIndexes.push(index);
+                that._selectedDataItems.push(dataItem);
+                that._values.push(isPrimitive(dataItem) ? dataItem : that._valueGetter(dataItem));
+                that._getElementByIndex(index).addClass(SELECTED);
             });
 
             return added;
