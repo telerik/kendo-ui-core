@@ -67,7 +67,7 @@
 
         dialog.title(titleText);
 
-        ok(!dialog.wrapper.hasClass(KTITLELESS));
+        notOk(dialog.wrapper.hasClass(KTITLELESS));
     });
 
     test("title method gets and sets the title consistently", 2, function () {
@@ -229,5 +229,54 @@
 
         ok(dialog1.wrapper.css(ZINDEX) > 0);
         ok(dialog.wrapper.css(ZINDEX) > dialog1.wrapper.css(ZINDEX));
+    });
+
+    test("clicking on a button triggers action method", function() {
+        var dialog = createDialog({
+            actions: [{
+                text: "OK",
+                action: function() { ok(true); }
+            }]
+        });
+
+        dialog.wrapper.find(".k-button").click();
+    });
+
+    test("clicking on an element in the button triggers action method", function() {
+        var dialog = createDialog({
+            actions: [{
+                text: "<span class='button-span'>OK</span>",
+                action: function() { ok(true); }
+            }]
+        });
+
+        dialog.wrapper.find(".button-span").click();
+    });
+
+    test("executing action closes the dialog", function() {
+        var dialog = createDialog({
+            actions: [{
+                text: "OK"
+            }]
+        });
+
+        dialog.wrapper.find(".k-button").click();
+        notOk(dialog.options.visible);
+        notOk(dialog.wrapper.is(":visible"));
+    });
+
+    test("executing action returning false does't closes the dialog", function() {
+        var dialog = createDialog({
+            actions: [{
+                text: "OK",
+                action: function() {
+                    return false;
+                }
+            }]
+        });
+
+        dialog.wrapper.find(".k-button").click();
+        ok(dialog.options.visible);
+        ok(dialog.wrapper.is(":visible"));
     });
 })();

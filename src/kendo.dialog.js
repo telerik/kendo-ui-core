@@ -27,6 +27,7 @@
             KDIALOGTITLE = ".k-dialog-title",
             KDIALOGTITLEBAR = ".k-window-titlebar",
             KBUTTONGRUOP = ".k-dialog-buttongroup",
+            KBUTTON = ".k-button",
             KOVERLAY = ".k-overlay",
             VISIBLE = ":visible",
             ZINDEX = "zIndex",
@@ -211,12 +212,26 @@
             },
 
             _addButtons: function(actionbar) {
-                var actions = this.options.actions,
-                    actionHtml;
+                var that = this,
+                    actionClick = proxy(that._actionClick, that),
+                    actions = that.options.actions;
 
                 for (var i = 0; i < actions.length; i++) {
-                    actionHtml = templates.action(actions[i]);
-                    $(actionHtml).appendTo(actionbar);
+                    $(templates.action(actions[i]))
+                        .appendTo(actionbar)
+                        .on("click", actionClick);
+                }
+            },
+
+            _actionClick: function(e) {
+                var that = this,
+                    li = e.currentTarget,
+                    index = $("li", li.parentNode).index(li),
+                    action = that.options.actions[index].action,
+                    preventClose = typeof action === "function" && action() === false;
+
+                if (!preventClose) {
+                    that.close();
                 }
             },
 
@@ -344,7 +359,7 @@
             _destroy: function() {
                 var that = this;
                 that.element.off(NS);
-                that.wrapper.find(KICONCLOSE).off(NS);
+                that.wrapper.find(KICONCLOSE + "," + KBUTTONGRUOP + " > " + KBUTTON).off(NS);
                 Widget.fn.destroy.call(that);
             },
 
