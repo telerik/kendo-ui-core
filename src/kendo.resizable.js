@@ -34,7 +34,7 @@ var __meta__ = { // jshint ignore:line
             that._position = that.orientation == HORIZONTAL ? "left" : "top";
             that._sizingDom = that.orientation == HORIZONTAL ? "outerWidth" : "outerHeight";
 
-            that.draggable = new ui.Draggable(element, {
+            that.draggable = new ui.Draggable(options.draggableElement || element, {
                 distance: 1,
                 filter: options.handle,
                 drag: proxy(that._resize, that),
