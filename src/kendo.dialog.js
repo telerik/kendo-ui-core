@@ -15,9 +15,13 @@
     (function($, undefined) {
         var kendo = window.kendo,
             Widget = kendo.ui.Widget,
+            proxy = $.proxy,
             template = kendo.template,
+            NS = ".kendoWindow",
             KDIALOG = ".k-dialog",
-            KCONTENT = "k-content",
+            KICONCLOSE = ".k-i-close",
+            KCONTENTCLASS = "k-content",
+            KCONTENT = ".k-content",
             KTITLELESS = "k-dialog-titleless",
             KDIALOGTITLE = ".k-dialog-title",
             KDIALOGTITLEBAR = ".k-window-titlebar",
@@ -26,6 +30,9 @@
             VISIBLE = ":visible",
             ZINDEX = "zIndex",
             BODY = "body",
+            INITOPEN = "initOpen",
+            OPEN = "open",
+            CLOSE = "close",
             templates;
 
         function defined(x) {
@@ -60,6 +67,11 @@
                     that.wrapper.hide();
                 } else if (options.modal) {
                     that._overlay(wrapper.is(VISIBLE)).css({ opacity: 0.5 });
+                }
+
+                if (options.closable) {
+                    wrapper.find(KICONCLOSE).on("click" + NS, proxy(that._closeClick, that));
+                    wrapper.find(KCONTENT).on("keydown" + NS, proxy(that._keydown, that));
                 }
 
                 kendo.notify(that);
@@ -139,6 +151,21 @@
                 return overlay;
             },
 
+            _closeClick: function() {
+                this.close();
+            },
+
+            _keydown: function(e) {
+                var that = this,
+                    options = that.options,
+                    keys = kendo.keys,
+                    keyCode = e.keyCode;
+
+                if (keyCode == keys.ESC && options.closable) {
+                    that.close();
+                }
+            },
+
             _createDialog: function() {
                 var that = this,
                     content = that.element,
@@ -146,7 +173,7 @@
                     titlebar = $(templates.titlebar(options)),
                     wrapper = $(templates.wrapper(options));
 
-                content.addClass(KCONTENT);
+                content.addClass(KCONTENTCLASS);
                 that.appendTo.append(wrapper);
 
                 if (options.closable !== false) {
@@ -189,14 +216,78 @@
                 }
             },
 
-            _destroy: function() {
-                Widget.fn.destroy.call(this);
+            close: function () {
+                this._close(true);
+                return this;
+            },
+
+            _close: function(systemTriggered) {
+                var that = this,
+                    wrapper = that.wrapper,
+                    options = that.options;
+
+                if (wrapper.is(VISIBLE) && !that.trigger(CLOSE, { userTriggered: !systemTriggered })) {
+                    options.visible = false;
+                    this._removeOverlay();
+                    wrapper.hide();
+                }
+
+                return that;
+            },
+
+            _removeOverlay: function() {
+                var modals = this._modals();
+                var options = this.options;
+                var hideOverlay = options.modal && !modals.length;
+
+                if (hideOverlay) {
+                    this._overlay(false).remove();
+                } else if (modals.length) {
+                    this._object(modals.last())._overlay(true);
+                }
+            },
+
+            _modals: function() {
+                var that = this;
+
+                var zStack = $(KDIALOG).filter(function() {
+                    var dom = $(this);
+                    var object = that._object(dom);
+                    var options = object && object.options;
+
+                    return options && options.modal && options.visible && dom.is(VISIBLE);
+                }).sort(function(a, b){
+                    return +$(a).css("zIndex") - +$(b).css("zIndex");
+                });
+
+                that = null;
+
+                return zStack;
+            },
+
+            _object: function(element) {
+                var content = element.children(KCONTENT);
+                var widget = kendo.widgetInstance(content);
+
+                if (widget instanceof Dialog) {
+                    return widget;
+                }
+
+                return undefined;
             },
 
             destroy: function() {
-                this._destroy();
-                this.wrapper.remove();
-                this.wrapper = this.element = $();
+                var that = this;
+                that._destroy();
+                that.wrapper.remove();
+                that.wrapper = that.element = $();
+            },
+
+            _destroy: function() {
+                var that = this;
+                that.element.off(NS);
+                that.wrapper.find(KICONCLOSE).off(NS);
+                Widget.fn.destroy.call(that);
             },
 
             title: function(html) {
@@ -229,7 +320,7 @@
 
             content: function(html) {
                 var that = this,
-                    content = that.wrapper.children("." + KCONTENT);
+                    content = that.wrapper.children(KCONTENT);
 
                 if (!defined(html)) {
                     return content.html();
@@ -244,6 +335,9 @@
             },
 
             events: [
+                INITOPEN,
+                OPEN,
+                CLOSE
             ],
 
             options: {

@@ -133,4 +133,61 @@
 
         equal(dialog.options.content, newContent);
     });
+
+    test("close sets options.visible to false", function() {
+        var dialog = createDialog();
+
+        dialog.close();
+
+        equal(dialog.options.visible, false);
+    });
+
+    test("close callse close event", function() {
+        var dialog = createDialog({
+            close: function() { ok(true); }
+        });
+
+        dialog.close();
+    });
+
+    test("close removes the modal wrapper", function() {
+        var dialog = createDialog({ });
+
+        dialog.close();
+
+        equal($(".k-overlay").length, 0);
+    });
+
+    test("close does not destroy other dialog overlay", function() {
+        createDialog();
+        var dialog2 = createDialog();
+        
+        dialog2.close();
+
+        equal($(".k-overlay").length, 1);
+        ok($(".k-overlay").is(":visible"));
+    });
+
+    test("closing dialog moves overlay before previous modal dialog", function() {
+        var dialog1 = createDialog();
+        var dialog2 = createDialog();
+        
+        dialog2.close();
+
+        equal($(".k-overlay").length, 1);
+        ok(dialog1.wrapper.prev("div").is(".k-overlay"));
+    });
+
+    test("closing dialog from close handler", 1, function() {
+        var dialog = createDialog({
+            close: function(e) {
+                if (e.userTriggered) {
+                    this.close();
+                }
+                ok(true);
+            }
+        });
+
+        dialog.wrapper.find(".k-i-close").click();
+    });
 })();
