@@ -32,7 +32,7 @@ The value of the `AxisFormat` should be `TupleFormat`:
 
 ### How to connect to secured OLAP instance?
 
-Check the [section related to accessing the cube securely](/kendo-ui/web/pivotgrid/olap-cube-setup#access-the-cube-securely).
+Check the [section related to accessing the cube securely]({% slug olap_cube_setup_pivotgrid_widget %}#access-the-cube-securely).
 
 ### I do not have OLAP cube. Can I still use the PivotGrid?
 

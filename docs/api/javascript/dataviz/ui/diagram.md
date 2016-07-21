@@ -2319,7 +2319,7 @@ A function returning a visual element to render for a given shape. The following
 * [Path](/api/javascript/dataviz/diagram/path)
 * [Line](/api/javascript/dataviz/diagram/line)
 * [Polyline](/api/javascript/dataviz/diagram/polyline)
-* [TextBlock](/api/javascript/dataviz/diagram/textBlock)
+* [TextBlock](/api/javascript/dataviz/diagram/text_block)
 * [Image](/api/javascript/dataviz/diagram/image)
 * [Layout](/api/javascript/dataviz/diagram/layout)
 
