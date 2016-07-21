@@ -110,9 +110,9 @@
     });
 
     //grouping
-    
+
     //scrolling
-    
+
     //utilities
 
     asyncTest("prefetches value in grouped dataSource", 1, function() {
@@ -166,7 +166,6 @@
 
         asyncDataSource.pageSize(80);
         virtualList.value(30);
-        asyncDataSource.read();
         virtualList.bind("listBound", function() {
             start();
             ok(this.selectedDataItems().length);

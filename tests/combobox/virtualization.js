@@ -116,7 +116,7 @@
             dataValueField: "value",
             dataSource: createAsyncDataSource(),
             virtual: {
-                valueMapper: function(o) { o.success(o.value); },
+                valueMapper: function(o) { o.success(o.value ? parseInt(o.value) : -1); },
                 itemHeight: 40
             }
         });

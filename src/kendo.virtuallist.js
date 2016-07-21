@@ -530,9 +530,10 @@ var __meta__ = { // jshint ignore:line
             if (!indexes.length) {
                 indexes = [-1];
             } else {
-                this._values = [];
-                this._selectedIndexes = [];
-                this._selectedDataItems = [];
+                var removed = this._deselect([]).removed;
+                if (removed.length) {
+                    this._triggerChange(removed, []);
+                }
             }
 
             this.select(indexes);
@@ -623,13 +624,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             $.each(indexes, function(_, index) {
-                var rangeStart = Math.floor(index / take) * take;
-
-                if (index === rangeStart && rangeStart > take) {
-                    rangeStart -= take;
-                }
-
-                that._promisesList.push(that.deferredRange(rangeStart));
+                that._promisesList.push(that.deferredRange(that._getSkip(index, take)));
             });
 
             if (isEmptyList) {
@@ -643,9 +638,8 @@ var __meta__ = { // jshint ignore:line
             return that._activeDeferred;
         },
 
-        _findDataItem: function(index) {
-            var view = this.dataSource.view(),
-                group;
+        _findDataItem: function(view, index) {
+            var group;
 
             //find in grouped view
             if (this.options.type === "group") {
@@ -663,26 +657,16 @@ var __meta__ = { // jshint ignore:line
             return view[index];
         },
 
+        _getRange: function(skip, take) {
+            return this.dataSource._findRange(skip, Math.min(skip + take, this.dataSource.total()));
+        },
+
         dataItemByIndex: function(index) {
-            var that = this;
-            var dataSource = that.dataSource;
-            var oldSkip = dataSource.skip();
-            var dataItem = null;
+            var take = this.itemCount;
+            var skip = this._getSkip(index, take);
+            var view = this._getRange(skip, take);
 
-            that.mute(function() {
-                var take = that.itemCount;
-                var skip = that._getSkip(index, take);
-
-                dataSource.range(skip, take); //switch the range to get the dataItem
-
-                if (dataSource.skip() === (skip + take)) { //the range is found
-                    dataItem = that._findDataItem([index - skip]);
-                }
-
-                dataSource.range(oldSkip, take); //switch back the range
-            });
-
-            return dataItem;
+            return this._findDataItem(view, [index - skip]);
         },
 
         selectedDataItems: function() {
@@ -1472,17 +1456,14 @@ var __meta__ = { // jshint ignore:line
                 for (var i = 0; i < indices.length; i++) {
                     result = null;
                     position = $.inArray(indices[i], selectedIndexes);
+                    dataItem = this.dataItemByIndex(indices[i]);
 
-                    if (position === -1 && this._view[indices[i]]) {
-                        dataItem = this._view[indices[i]].item;
-
-                        if (dataItem) {
-                            for (var j = 0; j < selectedDataItems.length; j++) {
-                                match = isPrimitive(dataItem) ? selectedDataItems[j] === dataItem : valueGetter(selectedDataItems[j]) === valueGetter(dataItem);
-                                if (match) {
-                                    item = this._getElementByIndex(indices[i]);
-                                    result = this._deselectSingleItem(item, j, indices[i], removedindexesCounter);
-                                }
+                    if (position === -1 && dataItem) {
+                        for (var j = 0; j < selectedDataItems.length; j++) {
+                            match = isPrimitive(dataItem) ? selectedDataItems[j] === dataItem : valueGetter(selectedDataItems[j]) === valueGetter(dataItem);
+                            if (match) {
+                                item = this._getElementByIndex(indices[i]);
+                                result = this._deselectSingleItem(item, j, indices[i], removedindexesCounter);
                             }
                         }
                     } else {
@@ -1558,7 +1539,7 @@ var __meta__ = { // jshint ignore:line
             for (; idx < indices.length; idx++) {
                 position = -1;
                 index = indices[idx];
-                value = this._valueGetter(this._view[index].item);
+                value = this._valueGetter(this.dataItemByIndex(index));
 
                 for (j = 0; j < values.length; j++) {
                     if (value == values[j]) {
@@ -1605,7 +1586,7 @@ var __meta__ = { // jshint ignore:line
                 that.mute(function() {
                     dataSource.range(skip, take); //switch the range to get the dataItem
 
-                    dataItem = that._findDataItem([index - skip]);
+                    dataItem = that._findDataItem(dataSource.view(), [index - skip]);
                     that._selectedIndexes.push(index);
                     that._selectedDataItems.push(dataItem);
                     that._values.push(isPrimitive(dataItem) ? dataItem : valueGetter(dataItem));
