@@ -1586,4 +1586,26 @@
         ok(!dropdownlist.popup.visible());
     });
 
+    test("DropDownList should support calculated fields", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            autoBind: false,
+            dataTextField: 'name$()',
+            dataValueField: 'id',
+            dataSource: {
+                data: [ { id: kendo.guid(), firstName: 'Peter', lastName: 'Parker' } ],
+                schema: {
+                    model: kendo.data.Model.define({
+                        idField: 'id',
+                        fields: {
+                            firstName: { type: 'string' },
+                            lastName: { type: 'string' }
+                        },
+                        name$: function () { return this.get('firstName') + ' ' + this.get('lastName'); }
+                    })
+                }
+            }
+        });
+
+        ok(true); //no errors were thrown;
+    });
 })();

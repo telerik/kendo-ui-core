@@ -1258,8 +1258,10 @@ var __meta__ = { // jshint ignore:line
                 dataItem = this._assignInstance(text, this._accessor());
             }
 
-            if (dataItem === optionLabelText || this._text(dataItem) === optionLabelText) {
-                template = this.optionLabelTemplate;
+            if (this.hasOptionLabel()) {
+                if (dataItem === optionLabelText || this._text(dataItem) === optionLabelText) {
+                    template = this.optionLabelTemplate;
+                }
             }
 
             var getElements = function(){
