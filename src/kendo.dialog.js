@@ -177,7 +177,7 @@
             _uiHeight: function() {
                 var that = this,
                     wrapper = that.wrapper,
-                    actionbar = wrapper.children(KBUTTONGRUOP),
+                    actionbar = wrapper.children(KBUTTONGROUP),
                     actionbarHeight = actionbar[0] && actionbar[0].offsetHeight || 0,
                     titlebar = wrapper.children(KDIALOGTITLEBAR),
                     titlebarHeight = titlebar[0] && titlebar[0].offsetHeight || 0;
