@@ -1,15 +1,15 @@
 ---
-title: Use Checkbox Templates to Show Nested Items under Elements
-page_title: Use Checkbox Templates to Show Nested Items under Elements | Kendo UI TreeView
-description: "Learn how to use a Kendo UI template to render nested items under an element in the Kendo UI TreeView in AngularJS applications."
-slug: howto_shownesteditemsunderelements_angulartreeview
+title: Customize Checkbox Templates
+page_title: Customize Checkbox Templates | Kendo UI TreeView
+description: "Learn how to customize the checkbox template of a Kendo UI TreeView in AngularJS applications."
+slug: howto_customizecheckboxtemplate_angulartreeview
 ---
 
-# Use Checkbox Templates to Show Nested Items under Elements
+# Customize Checkbox Templates
 
 To add checkbox templates to a Kendo UI TreeView in AngularJS applications, choose either of the following approaches:
 
-* Add the template to the `k-options` as the `k-options` are already declared in `$scope`:
+* Add the template to the `k-options` if the `k-options` are already declared in `$scope`:
 
     ```
       $scope.options = {
@@ -30,8 +30,6 @@ To add checkbox templates to a Kendo UI TreeView in AngularJS applications, choo
       </script>
     ```
 
-The TreeView is initialized as a Kendo UI component and loads its own data source. AngularJS bindings are applied consequently. Therefore, to update the `ng-model` within the template, assign `ng-model=dataItem` and configure it yourself.
-
 When using the Kendo UI checkboxes, make sure the [`input` element is immediately followed by a `label` element]({% slug themesandappearnce_kendoui_desktopwidgets %}#customize-checkboxes-and-radio-buttons). Otherwise, without a `label`, the `k-checkbox` class will apply a `display : none` style.
 
 The example below demonstrates how to:
@@ -39,14 +37,11 @@ The example below demonstrates how to:
 1. Add checkbox templates to a Kendo UI TreeView in AngularJS applications.
 2. Add the [Bootstrap feel to the checkboxes]({% slug themesandappearnce_kendoui_desktopwidgets %}#common-css-files).
 3. Show nested items under elements of a Kendo UI TreeView.
-4. Load the data source of the TreeView in a predefined state.
 
 ###### Example
 
 ```html
   <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.2.714/styles/kendo.bootstrap.min.css">
-  <link rel="stylesheet" href="http://demos.telerik.com/kendo-ui/content/shared/styles/examples-offline.css">
-  <script src="http://demos.telerik.com/kendo-ui/content/shared/js/console.js"></script>
 
   <div id="example" ng-app="KendoDemos">
       <div class="demo-section k-content" ng-controller="MyCtrl">
@@ -59,13 +54,6 @@ The example below demonstrates how to:
           </div>
         </div>
       </div>
-      <div class="box">
-        <h4>Console log</h4>
-        <div class="console"></div>
-      </div>
-      <style>
-
-    </style>
   </div>
   <script id="item-template" type="text/x-kendo-template">
     # if (item.isLegend) { #
@@ -84,12 +72,7 @@ The example below demonstrates how to:
         loadOnDemand: false,
         checkboxes: {
           checkChildren: true,
-          template: "# if (!item.isLegend) { # <input id='checkbox_#:item.uid#' ng-model='dataItem.isChecked' type='checkbox' class='k-checkbox' #= item.isChecked ? 'checked' : '' # /><label for='checkbox_#:item.uid#' class='k-checkbox-label'></label># } #"
-        },
-        check: function(e) {
-          var dataItem = e.sender.dataItem(e.node);
-          kendoConsole.log("Check event triggered by : " + dataItem.label);
-          kendoConsole.log("Checked state : " + dataItem.checked);
+          template: "# if (!item.isLegend) { # <input id='checkbox_#:item.uid#' type='checkbox' class='k-checkbox' /><label for='checkbox_#:item.uid#' class='k-checkbox-label'></label># } #"
         },
         template: $("#item-template").html()
       };
@@ -100,7 +83,6 @@ The example below demonstrates how to:
           "items": [
             {
               "label": "My Indian Granny's Bar",
-              "isChecked": true,
               "items": [
                 {
                   "isLegend": true,
@@ -112,13 +94,12 @@ The example below demonstrates how to:
             },
             {
               "label": "My Daddy's Saloon",
-              "isChecked": false,
               "items": [
                 {
                   "isLegend": true,
                   "images": [
-                    "http://demos.telerik.com/kendo-ui/content/web/foods/3.jpg",
-                    "http://demos.telerik.com/kendo-ui/content/web/foods/4.jpg"
+                    "http://demos.telerik.com/kendo-ui/content/web/foods/35.jpg",
+                    "http://demos.telerik.com/kendo-ui/content/web/foods/75.jpg"
                   ]
                 }
               ]
