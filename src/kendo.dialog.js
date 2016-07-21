@@ -533,14 +533,14 @@
         });
 
         templates = {
-            wrapper: template("<div class='k-widget k-dialog k-window' />"),
-            action: template("<li class='k-button# if (data.primary) { # k-primary# } #'>#= text #</li>"),
+            wrapper: template("<div class='k-widget k-dialog k-window' role='dialog' />"),
+            action: template("<li class='k-button# if (data.primary) { # k-primary# } #' role='button'>#= text #</li>"),
             titlebar: template(
                 "<div class='k-window-titlebar k-header'>" +
                   "<span class='k-dialog-title'>#= title #</span>" +
                 "</div>"
             ),
-            actionbar: "<ul class='k-dialog-buttongroup' />",
+            actionbar: "<ul class='k-dialog-buttongroup' role='toolbar' />",
             close: "<span class='k-i-close'>Close</span>",
             overlay: "<div class='k-overlay' />"
         };
