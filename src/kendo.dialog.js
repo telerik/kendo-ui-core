@@ -39,6 +39,7 @@
             CLOSE = "close",
             WIDTH = "width",
             HUNDREDPERCENT = 100,
+            ceil = Math.ceil,
             templates;
 
         function defined(x) {
@@ -121,31 +122,67 @@
                     } else {
                         wrapper.height(constrain(height, options.minHeight, options.maxHeight));
                     }
+
+                    this._setElementHeight();
                 }
             },
 
             _setElementMaxHeight: function() {
                 var that = this,
-                    wrapper = that.wrapper,
-                    options = that.options,
                     element = that.element,
-                    maxHeight = options.maxHeight,
-                    elementMaxHeight, actionbar, actionbarHeight;
+                    maxHeight = that.options.maxHeight,
+                    paddingBox,
+                    elementMaxHeight;
 
                 if (maxHeight != Infinity) {
-                    actionbar = wrapper.children(KBUTTONGROUP);
-                    actionbarHeight = actionbar[0] && actionbar[0].offsetHeight || 0;
-                    elementMaxHeight = parseInt(maxHeight, 10) - actionbarHeight -
-                        parseInt(element.css("margin-top"), 10) -
-                        parseInt(element.css("padding-top"), 10) -
-                        parseInt(element.css("padding-bottom"), 10);
+                    paddingBox = that._paddingBox(element);
+                    elementMaxHeight = parseFloat(maxHeight, 10) - that._uiHeight() - paddingBox.vertical;
+                    if (elementMaxHeight > 0) {
+                        element.css({
+                            maxHeight: ceil(elementMaxHeight) + "px",
+                            overflow: "hidden"
+                        });
+                    }
+                }
 
-                    element.css({
-                        maxHeight: elementMaxHeight,
+            },
+
+            _paddingBox: function(element){
+                var paddingTop = parseFloat(element.css("padding-top"), 10),
+                    paddingLeft = parseFloat(element.css("padding-left"), 10),
+                    paddingBottom = parseFloat(element.css("padding-bottom"), 10),
+                    paddingRight = parseFloat(element.css("padding-right"), 10);
+
+                return {
+                    vertical: paddingTop + paddingBottom,
+                    horizontal: paddingLeft + paddingRight
+                };
+            },
+
+            _setElementHeight: function() {
+                var that = this,
+                    element = that.element,
+                    height = that.options.height,
+                    paddingBox = that._paddingBox(element),
+                    elementHeight = parseFloat(height, 10) - that._uiHeight() - paddingBox.vertical;
+
+                if (elementHeight > 0) {
+                    that.element.css({
+                        height: ceil(elementHeight)+ "px",
                         overflow: "hidden"
                     });
                 }
+            },
 
+            _uiHeight: function() {
+                var that = this,
+                    wrapper = that.wrapper,
+                    actionbar = wrapper.children(KBUTTONGRUOP),
+                    actionbarHeight = actionbar[0] && actionbar[0].offsetHeight || 0,
+                    titlebar = wrapper.children(KDIALOGTITLEBAR),
+                    titlebarHeight = titlebar[0] && titlebar[0].offsetHeight || 0;
+
+                return actionbarHeight + titlebarHeight;
             },
 
             _overlay: function(visible) {
@@ -563,6 +600,8 @@
                 title: "",
                 actions: [],
                 modal: true,
+                width: null,
+                height: null,
                 minWidth: 0,
                 minHeight: 0,
                 maxWidth: Infinity,
@@ -576,7 +615,7 @@
             action: template("<li class='k-button# if (data.primary) { # k-primary# } #' role='button'>#= text #</li>"),
             titlebar: template(
                 "<div class='k-window-titlebar k-header'>" +
-                  "<span class='k-dialog-title'>#= title #</span>" +
+                    "<span class='k-dialog-title'>#= title #</span>" +
                 "</div>"
             ),
             actionbar: "<ul class='k-dialog-buttongroup' role='toolbar' />",
