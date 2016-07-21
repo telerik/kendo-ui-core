@@ -169,13 +169,14 @@ Locate the `ConfigureServices` method and add a call to `services.AddKendo` at t
         public void ConfigureServices(IServiceCollection services)
         {
             ...
+            // Maintain property names during serialization. See:
+            // https://github.com/aspnet/Announcements/issues/194
+            services
+                .AddMvc()
+                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
             // Add Kendo UI services to the services container
             services.AddKendo();
-
-            // Maintain property names during serialization. See:
-            // https://github.com/aspnet/Announcements/issues/194
-            services.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
         }
 
 Locate the `Configure` method and add a call to `app.UseKendo` at the end.
