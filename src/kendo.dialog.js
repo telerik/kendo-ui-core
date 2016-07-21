@@ -35,6 +35,8 @@
             INITOPEN = "initOpen",
             OPEN = "open",
             CLOSE = "close",
+            WIDTH = "width",
+            HUNDREDPERCENT = 100,
             templates;
 
         function defined(x) {
@@ -209,18 +211,34 @@
             _createActionbar: function(wrapper) {
                 var actionbar = $(templates.actionbar);
                 this._addButtons(actionbar);
+                this._normalizeButtonSize(actionbar);
                 wrapper.append(actionbar);
             },
 
             _addButtons: function(actionbar) {
                 var that = this,
                     actionClick = proxy(that._actionClick, that),
-                    actions = that.options.actions;
+                    actions = that.options.actions,
+                    length = actions.length,
+                    buttonSize = HUNDREDPERCENT / length;
 
-                for (var i = 0; i < actions.length; i++) {
+                for (var i = 0; i < length; i++) {
                     $(templates.action(actions[i]))
+                        .css(WIDTH, buttonSize + "%")
                         .appendTo(actionbar)
                         .on("click", actionClick);
+                }
+            },
+
+            _normalizeButtonSize: function(actionbar) {
+                var that = this,
+                    options = that.options,
+                    lastButton = actionbar.children(KBUTTON + ":last"),
+                    currentSize = parseFloat(lastButton[0].style[WIDTH]),
+                    difference = HUNDREDPERCENT - (options.actions.length * currentSize);
+
+                if (difference > 0) {
+                    lastButton.css(WIDTH, (currentSize + difference) + "%");
                 }
             },
 
