@@ -757,7 +757,7 @@ If the `dataSource` option is an existing [kendo.data.GanttDataSource](/api/java
 
 ### date `Date`
 
-If set to some date and that is between the range start and range end of the selected view, the timeline of the currently selected view is scrolled to start from this date.
+If set to some date and it is between the range start and range end of the selected view, the timeline of the currently selected view is scrolled to start from this date.
 
 #### Example
     <div id="gantt1"></div>
@@ -771,10 +771,10 @@ If set to some date and that is between the range start and range end of the sel
                 start: new Date("2016/09/20 09:00"),
                 end: new Date("2016/09/20 10:00")
             }],
+            date: new Date("2016/09/20"),
             views: [
               {
                   type: "day", selected: true,
-                  date: new Date("2016/09/20"), 
                   range: {
                       start: new Date("2016/09/1"),
                       end: new Date("2016/10/15")
@@ -3271,6 +3271,36 @@ If set to `false` the gantt will not display the task tooltip. By default the ta
 The views displayed by the Gantt and their configuration. The array items can be either objects specifying the view configuration or strings representing the view types (assuming default configuration).
 By default the Kendo UI Gantt widget displays "day", "week", and "month" views.
 
+### views.date `Date`
+
+If set to some date and it is between the range start and range end of the selected view, the timeline of the currently selected view is scrolled to start from this date.
+
+Overrides the [date](#configuration-date) option of the gantt.
+
+#### Example
+    <div id="gantt1"></div>
+    <script>
+        $("#gantt1").kendoGantt({
+            dataSource: [{
+                id: 1,
+                orderId: 0,
+                parentId: null,
+                title: "Task1",
+                start: new Date("2016/09/20 09:00"),
+                end: new Date("2016/09/20 10:00")
+            }],
+            views: [
+              {
+                  type: "day", selected: true,
+                  date: new Date("2016/09/20"),
+                  range: {
+                      start: new Date("2016/09/1"),
+                      end: new Date("2016/10/15")
+                  },
+              }
+            ]
+        });
+    </script>
 
 ### views.range `Object`
 
