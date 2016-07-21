@@ -46,7 +46,7 @@ the [`rowHeaderTemplate`](/api/javascript/ui/pivotgrid#configuration-rowHeaderTe
 
 The [`excelExport`](/api/javascript/ui/grid#events-excelExport) event allows customization of the generated Excel document. The `workbook` event argument exposes the generated Excel workbook configuration.
 
-For a better understanding about how Excel documents work, check the [introductory help topic on Excel](/framework/excel/introduction#create-excel-document).
+For a better understanding about how Excel documents work, check the [introductory help topic on Excel]({% slug introduction_excelexport_kendoui %}}#create-excel-document).
 
 ### Templates
 
@@ -56,7 +56,7 @@ Kendo UI PivotGrid does not use [`dataCellTemplate`](/api/javascript/ui/pivotgri
 
 ### JavaScript "JSZip Is Not Found" Error
 
-Clicking the **Export to Excel** button or calling the `saveAsExcel` throws an exception if the JSZip JavaScript library is not found. o solve this issue, include JSZip in the page. For more information on this, see the [introductory help topic about exporting to Excel](/framework/excel/introduction#requirements).  
+Clicking the **Export to Excel** button or calling the `saveAsExcel` throws an exception if the JSZip JavaScript library is not found. o solve this issue, include JSZip in the page. For more information on this, see the [introductory help topic about exporting to Excel]({% slug introduction_excelexport_kendoui %}#requirements).  
 
 ### Export Not Working in Internet Explorer and Safari
 

@@ -8,7 +8,7 @@ position: 2
 
 # Map Layers
 
-The information presented by the [Kendo UI Map widget](http://demos.telerik.com/kendo-ui/map/index) is organized into layers. They are stacked from bottom to top in the order of definition and are oblivious of each other. The Map layers respond to [the Map events](/kendo-ui/api/dataviz/map#events) to keep their content in sync.
+The information presented by the [Kendo UI Map widget](http://demos.telerik.com/kendo-ui/map/index) is organized into layers. They are stacked from bottom to top in the order of definition and are oblivious of each other. The Map layers respond to [the Map events](/api/javascript/dataviz/ui/map#events) to keep their content in sync.
 
 ## Tile Layers
 

@@ -1971,10 +1971,10 @@ The bing map tile types. Possible options:
     * aerial - Aerial imagery.
     * aerialWithLabels - Aerial imagery with a road overlay.
     * road - Roads without additional imagery. (default)
-    
+
 ### layerDefaults.bing.culture `String` *(default: "en-US")*
 
-The culture to be used for the bing map tiles. 
+The culture to be used for the bing map tiles.
 
 #### Example - set default culture for bing layers
     <div id="map"></div>
@@ -2211,7 +2211,7 @@ The bing map tile types. Possible options:
     * birdseye - Bird’s eye (oblique-angle) imagery
     * birdseyeWithLabels - Bird’s eye imagery with a road overlay.
     * road - Roads without additional imagery. (default)
-    
+
 ### layers.culture `String` *(default: "en-US")*
 
 The culture to be used for the bing map tiles.
@@ -6174,4 +6174,3 @@ The source jQuery event instance
             console.log("zoom end @ " + e.sender.zoom());
         });
     </script>
-

@@ -7,7 +7,7 @@ slug: howto_sort_dimensions_pivotgrid
 
 # Sort Dimensions
 
-The example below demonstrates how use data source [`sort`](docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-sort) option to sort the result set.
+The example below demonstrates how use data source [`sort`](/api/javascript/data/datasource#configuration-sort) option to sort the result set.
 
 ###### Example
 

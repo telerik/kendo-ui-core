@@ -229,7 +229,7 @@ For more information on the configuration options, refer to the [Kendo UI Notifi
 
 > **Important**  
 >
-> The content of this section is intended to users that are familiar with [Kendo UI templates](/framework/templates/overview).
+> The content of this section is intended to users that are familiar with [Kendo UI templates]({% slug overview_kendoui_templatescomponent %}).
 
 Kendo UI Notification allows configuring multiple templates. Each template will be used together with its corresponding [notification type](#configuration-Types), either build-in, or custom. If you define a custom template for a built-in notification type, you will no longer be able to use the corresponding built-in template, but you will still be able to use the shorthand show methods, as demonstrated in the example below.
 
@@ -286,9 +286,9 @@ For more information on right-to-left language support, refer to the [general RT
 
 Similar to all other Kendo UI widgets, an existing Notification instance is accessed via the `.data("kendoNotification")` jQuery method, executed by the jQuery object of the originating element.
 
-For detailed information on how to get a reference to a Kendo UI widget, see [this help topic](/widgets#getting-reference-to-a-kendo-ui-widget).
+For detailed information on how to get a reference to a Kendo UI widget, see [this help topic]({% slug initialize_widgets_using_jquery_plugins_installation %}#getting-reference-to-a-kendo-ui-widget).
 
-For further reading on Kendo UI Notification settings, refer to [Kendo UI Notification API](/api/web/notification/).
+For further reading on Kendo UI Notification settings, refer to [Kendo UI Notification API](/api/javascript/ui/notification).
 
 ## See Also
 

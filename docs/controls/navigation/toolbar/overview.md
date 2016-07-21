@@ -147,8 +147,7 @@ The example below demonstrates the properties of each button.
     });
 
 
-When resizing is enabled, the control will be rendered twice: once in the ToolBar and once in the command overflow popup.
-If the button has an `ID` set, it will be assigned to the element in the ToolBar wrapper. The corresponding element in the command overflow popup will receive the same `ID` with an `"_overflow"` suffix. For example, a button with `id: "foo"` and `overflow: "auto"` will render an element with `id="foo"` in the ToolBar and another element with `id="foo_overflow"` in the ToolBar command overflow popup.
+When resizing is enabled, the control will be rendered twice: once in the ToolBar and once in the command overflow popup. If the button has an `ID` set, it will be assigned to the element in the ToolBar wrapper. The corresponding element in the command overflow popup will receive the same `ID` with an `"_overflow"` suffix. For example, a button with `id: "foo"` and `overflow: "auto"` will render an element with `id="foo"` in the ToolBar and another element with `id="foo_overflow"` in the ToolBar command overflow popup.
 
 The `overflow` property accepts the following values:
 
@@ -263,7 +262,7 @@ The example below demonstrates how to define a group of mutually exclusive Toggl
 
 The Split Button is a composite control which has a primary (main) button and alternative options displayed in a drop-down list, bound to a secondary button. In the command overflow popup the Split Button is rendered as a flat list of commands. The first one is the primary (main) button, followed by the drop-down items in the order they are defined.
 
-The example below demonstrates how to defines a Spli Button in the ToolBar widget.
+The example below demonstrates how to defines a Split Button in the ToolBar widget.
 
 ###### Example
 
@@ -273,7 +272,7 @@ The example below demonstrates how to defines a Spli Button in the ToolBar widge
         $("#toolbar").kendoToolBar({
             items: [
                 {
-                    type: "splitButton", //setting the command type is **mandatory**
+                    type: "splitButton", //setting the command type is _mandatory_
                     text: "Split Button", //define the text of the primary button
                     icon: "folter-add", //set icon of the primary button
                     menuButtons: [ //define the drop-down options
@@ -460,7 +459,7 @@ The example below demonstrates how to use the `overflow` property.
 
 The widget provides a mobile specific stylization when placed within the header or footer of a mobile View.
 
-For more information on the mobile rendering feature, refer to the [demo page on the ToolBar acting as ActionBar](http://demos.telerik.com/kendo-ui/navbar/adaptive-toolbar).
+For more information on the mobile rendering feature, refer to the [demo page on the ToolBar acting as ActionBar](http://demos.telerik.com/kendo-ui/m/index#navbar/index).
 
 ## ToolBar API
 
@@ -518,9 +517,9 @@ The example below demonstrates how to use ToolBar events.
 
 Other articles on Kendo UI ToolBar:
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the ToolBar Widget](/aspnet-mvc/helpers/toolbar/overview)
+* [Overview of the ASP.NET MVC HtmlHelper Extension for the ToolBar Widget]({% slug overview_toolbarhelper_aspnetmvc %})
 * [Overview of the ToolBar JSP Tag]({% slug overview_toolbar_uiforjsp %})
-* [Overview of the ToolBar PHP Class](/php/widgets/toolbar/overview)
+* [Overview of the ToolBar PHP Class]({% slug overview_toolbar_uiforphp %})
 * [How to Close ToolBar Popup Manually]({% slug howto_closetoolbarpopupmanually_toolbar %})
 * [How to Develop and Register Custom ToolBar Tools]({% slug howto_customtool_toolbar %})
 * [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_toolbar %})

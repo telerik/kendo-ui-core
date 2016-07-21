@@ -58,9 +58,9 @@ This is the list with the known limitations of the native scrolling functionalit
 
 Articles related to the scrolling functionality in hybrid Kendo UI widgets:
 
-* [Introduction to the Hybrid Kendo UI View Widget](/controls/hybrid/view)
-* [Introduction to the Hybrid Application](/controls/hybrid/application)
-* [Introduction to the Hybrid Scroller](/controls/hybrid/scroller)
+* [Introduction to the Hybrid Kendo UI View Widget]({% slug overview_hybridview %})
+* [Introduction to the Hybrid Application]({% slug overview_hybridapplication %})
+* [Introduction to the Hybrid Scroller]({% slug overview_hybridscroller %})
 
 Other articles on Hybrid UI components in Kendo UI:
 
