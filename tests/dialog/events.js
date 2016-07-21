@@ -74,7 +74,7 @@
         dialog.open();
     });
 
-    var keys;
+    var keys = kendo.keys;
     module("keyboard support", {
         setup: function() {
             keys = kendo.keys;
@@ -103,7 +103,7 @@
         notOk(dialog.wrapper.is(":visible"));
     });
 
-    test("escape key does not cose the dialog, when closable is false", function() {
+    test("escape key does not close the dialog, when closable is false", function() {
         var dialog = createDialog({
             closable: false,
             animation: false
@@ -113,5 +113,44 @@
 
         ok(dialog.options.visible);
         ok(dialog.wrapper.is(":visible"));
+    });
+
+    function keyboardCloseButton_closesDialog(keyCode) {
+        var dialog = createDialog({ closable: true });
+
+        dialog.wrapper.find(KICONCLOSE).press(keyCode);
+
+        notOk(dialog.options.visible);
+    }
+
+    test("close button enter key triggers close", $.proxy(keyboardCloseButton_closesDialog, this, keys.ENTER));
+    test("close button esc key triggers close", $.proxy(keyboardCloseButton_closesDialog, this, keys.ESC));
+    test("close button space key triggers close", $.proxy(keyboardCloseButton_closesDialog, this, keys.SPACEBAR));
+
+    function actionButtonKeyTrigger(keyCode) {
+        var dialog = createDialog({
+            actions: [{ text: "ok", action: function() {
+                ok(true);
+            }}]
+        });
+
+        dialog.wrapper.find(".k-dialog-buttongroup .k-button").press(keyCode);
+    }
+
+    test("action button triggered by enter key", $.proxy(actionButtonKeyTrigger, this, keys.ENTER));
+    test("action button triggered by enter key", $.proxy(actionButtonKeyTrigger, this, keys.SPACEBAR));
+
+    test("esc key on action button just closes the dialog", function() {
+        var dialog = createDialog({
+            actions: [{
+                text: "ok",
+                action: function() {
+                    ok(false);
+                }
+            }]
+        });
+
+        dialog.wrapper.find(".k-dialog-buttongroup .k-button").press(keys.ESC);
+        notOk(dialog.options.visible);
     });
 })();

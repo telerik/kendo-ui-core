@@ -17,6 +17,8 @@
             Widget = kendo.ui.Widget,
             proxy = $.proxy,
             template = kendo.template,
+            keys = kendo.keys,
+            isFunction = $.isFunction,
             NS = ".kendoWindow",
             KDIALOG = ".k-dialog",
             KWINDOW = ".k-window",
@@ -26,7 +28,7 @@
             KTITLELESS = "k-dialog-titleless",
             KDIALOGTITLE = ".k-dialog-title",
             KDIALOGTITLEBAR = ".k-window-titlebar",
-            KBUTTONGRUOP = ".k-dialog-buttongroup",
+            KBUTTONGROUP = ".k-dialog-buttongroup",
             KBUTTON = ".k-button",
             KOVERLAY = ".k-overlay",
             VISIBLE = ":visible",
@@ -65,6 +67,8 @@
 
                 wrapper = that.wrapper = element.closest(KDIALOG);
 
+                that._tabindex(element);
+
                 that._dimensions();
 
                 if (!that.options.visible) {
@@ -77,7 +81,9 @@
                 }
 
                 if (options.closable) {
-                    wrapper.find(KICONCLOSE).on("click" + NS, proxy(that._closeClick, that));
+                    wrapper.find(KICONCLOSE)
+                        .on("click" + NS, proxy(that._closeClick, that))
+                        .on("keydown" + NS, proxy(that._closeKeyHandler, that));
                     wrapper.find(KCONTENT).on("keydown" + NS, proxy(that._keydown, that));
                 }
 
@@ -127,7 +133,7 @@
                     elementMaxHeight, actionbar, actionbarHeight;
 
                 if (maxHeight != Infinity) {
-                    actionbar = wrapper.children(KBUTTONGRUOP);
+                    actionbar = wrapper.children(KBUTTONGROUP);
                     actionbarHeight = actionbar[0] && actionbar[0].offsetHeight || 0;
                     elementMaxHeight = parseInt(maxHeight, 10) - actionbarHeight -
                         parseInt(element.css("margin-top"), 10) -
@@ -163,10 +169,15 @@
                 this.close();
             },
 
+            _closeKeyHandler: function(e) {
+                if(buttonKeyTrigger(e) || e.keyCode == keys.ESC) {
+                    this.close();
+                }
+            },
+
             _keydown: function(e) {
                 var that = this,
                     options = that.options,
-                    keys = kendo.keys,
                     keyCode = e.keyCode;
 
                 if (keyCode == keys.ESC && !that._closing && options.closable) {
@@ -218,15 +229,19 @@
             _addButtons: function(actionbar) {
                 var that = this,
                     actionClick = proxy(that._actionClick, that),
+                    actionKeyHandler = proxy(that._actionKeyHandler, that),
                     actions = that.options.actions,
                     length = actions.length,
                     buttonSize = HUNDREDPERCENT / length;
 
                 for (var i = 0; i < length; i++) {
-                    $(templates.action(actions[i]))
+                    var o = actions[i];
+                    $(templates.action(o))
                         .css(WIDTH, buttonSize + "%")
                         .appendTo(actionbar)
-                        .on("click", actionClick);
+                        .data("action", o.action)
+                        .on("click", actionClick)
+                        .on("keydown", actionKeyHandler);
                 }
             },
 
@@ -242,17 +257,41 @@
                 }
             },
 
-            _actionClick: function(e) {
+            _tabindex: function(target) {
                 var that = this;
+                var wrapper = that.wrapper;
+                var closeBtn = wrapper.find(KICONCLOSE);
+                var actionButtons = wrapper.find(KBUTTONGROUP + " " + KBUTTON);
 
+                Widget.fn._tabindex.call(this, target);
+
+                var tabIndex = target.attr("tabindex");
+
+                closeBtn.attr("tabIndex", tabIndex);
+                actionButtons.attr("tabIndex", tabIndex);
+            },
+
+            _actionClick: function(e) {
+                this._runActionBtn(e.currentTarget);
+            },
+
+            _actionKeyHandler: function(e) {
+                if(buttonKeyTrigger(e)) {
+                    this._runActionBtn(e.currentTarget);
+                }
+                else if(e.keyCode == keys.ESC) {
+                    this.close();
+                }
+            },
+
+            _runActionBtn: function(target) {
+                var that = this;
                 if (that._closing) {
                     return;
                 }
 
-                var li = e.currentTarget,
-                    index = $("li", li.parentNode).index(li),
-                    action = that.options.actions[index].action,
-                    preventClose= typeof action === "function" && action() === false;
+                var action = $(target).data("action"),
+                    preventClose = (isFunction(action) && action() === false);
 
                 if (!preventClose) {
                     that.close();
@@ -465,7 +504,7 @@
             _destroy: function() {
                 var that = this;
                 that.element.off(NS);
-                that.wrapper.find(KICONCLOSE + "," + KBUTTONGRUOP + " > " + KBUTTON).off(NS);
+                that.wrapper.find(KICONCLOSE + "," + KBUTTONGROUP + " > " + KBUTTON).off(NS);
                 Widget.fn.destroy.call(that);
             },
 
@@ -541,9 +580,13 @@
                 "</div>"
             ),
             actionbar: "<ul class='k-dialog-buttongroup' role='toolbar' />",
-            close: "<span class='k-i-close'>Close</span>",
+            close: "<span class='k-i-close' role='button'>Close</span>",
             overlay: "<div class='k-overlay' />"
         };
+
+        function buttonKeyTrigger(e) {
+            return e.keyCode == keys.ENTER || e.keyCode == keys.SPACEBAR;
+        }
 
         kendo.ui.plugin(Dialog);
 

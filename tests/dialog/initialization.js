@@ -184,4 +184,22 @@
         equal($(".k-overlay").length, 1);
         ok($(".k-overlay").is(":visible"));
     });
+
+    test("tabindex is set when missing", function() {
+        var dialog = createDialog();
+
+        equal(dialog.element.attr("tabindex"), 0);
+    });
+
+    test("predefine tabindex is applied on other elements", function() {
+        var div = $("<div class='dialog' tabindex='10'>foo</div>").appendTo(QUnit.fixture);
+        var dialog = div.kendoDialog({
+            closable: true,
+            actions: [{text: "ok"}]
+        }).getKendoDialog();
+
+        equal(dialog.element.attr("tabindex"), 10);
+        equal(dialog.wrapper.find(".k-i-close").attr("tabindex"), 10);
+        equal(dialog.wrapper.find(".k-button").attr("tabindex"), 10);
+    });
 })();
