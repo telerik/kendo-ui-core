@@ -91,12 +91,27 @@
         }
     });
 
-    test("escape key triggers close event", function() {
+    test("escape key coses the window", function() {
         var dialog = createDialog({
-            close: function() { ok(true); }
+            closable: true,
+            animation: false
         });
 
         dialog.element.press(keys.ESC);
+
+        notOk(dialog.options.visible);
+        notOk(dialog.wrapper.is(":visible"));
     });
 
+    test("escape key does not cose the dialog, when closable is false", function() {
+        var dialog = createDialog({
+            closable: false,
+            animation: false
+        });
+
+        dialog.element.press(keys.ESC);
+
+        ok(dialog.options.visible);
+        ok(dialog.wrapper.is(":visible"));
+    });
 })();
