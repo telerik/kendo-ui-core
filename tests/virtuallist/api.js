@@ -1837,4 +1837,26 @@
 
         virtualList.select([256]);
     });
+
+    asyncTest("select method notifies for removed after valueMapper is called", 2, function() {
+        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+            selectable: "multiple",
+            valueMapper: function(o) {
+                o.success([256]);
+            },
+            value: [256]
+        }));
+
+        virtualList.one("listBound", function() {
+            virtualList.one("change", function(e) {
+                start();
+                equal(e.removed.length, 1);
+                equal(e.removed[0].index, 256);
+            });
+
+            virtualList.mapValueToIndex([256]);
+        });
+
+        virtualList.dataSource.read();
+    });
 })();

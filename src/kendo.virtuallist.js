@@ -530,9 +530,10 @@ var __meta__ = { // jshint ignore:line
             if (!indexes.length) {
                 indexes = [-1];
             } else {
-                this._values = [];
-                this._selectedIndexes = [];
-                this._selectedDataItems = [];
+                var removed = this._deselect([]).removed;
+                if (removed.length) {
+                    this._triggerChange(removed, []);
+                }
             }
 
             this.select(indexes);
