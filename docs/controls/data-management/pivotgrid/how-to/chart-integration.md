@@ -29,7 +29,7 @@ The example below demonstrates how to integrate a Kendo UI PivotGrid widget with
 
             while (tuple) {
                 //required for multiple measures
-                if (tuple.dataIndex !== undefined) {
+                if(tuple.dataIndex !== undefined) {
                     result.push(tuple);
                 }
 
@@ -38,7 +38,7 @@ The example below demonstrates how to integrate a Kendo UI PivotGrid widget with
                     member = tuple.members[idx];
                     children = member.children;
                     if (member.measure) {
-                        [].splice.apply(tuples, [0, 0].concat(children));
+                        [].splice.apply(tuples, [0, 0].concat(expandMeasures(children, tuple)));
                     } else {
                         [].splice.apply(tuples, [spliceIndex, 0].concat(children));
                     }
@@ -49,6 +49,55 @@ The example below demonstrates how to integrate a Kendo UI PivotGrid widget with
             }
 
             return result;
+        }
+
+        function clone(tuple, dataIndex) {
+            var members = tuple.members.slice();
+
+            return {
+                dataIndex: dataIndex,
+                members: $.map(members, function(m) {
+                    return $.extend({}, m, { children: [] });
+                })
+            };
+        }
+
+        function replaceLastMember(tuple, member) {
+            tuple.members[tuple.members.length - 1] = member;
+            return tuple;
+        };
+
+        function expandMeasures(measures, tuple) {
+            return $.map(measures, function(measure) {
+                return replaceLastMember(clone(tuple, measure.dataIndex), measure);
+            });
+        }
+
+        //Check whether the tuple has been collapsed
+        function isCollapsed(tuple, collapsed) {
+          var members = tuple.members;
+
+          for (var idx = 0, length = collapsed.length; idx < length; idx++) {
+            var collapsedPath = collapsed[idx];
+            if (indexOfPath(fullPath(members, collapsedPath.length -1), [collapsedPath]) !== -1) {
+              return true;
+            }
+          }
+
+          return false;
+        }
+
+        //Work with tuple names/captions
+        function indexOfPath(path, paths) {
+            var path = path.join(",");
+
+          for (var idx = 0; idx < paths.length; idx++) {
+            if (paths[idx].join(",") === path) {
+                return idx;
+            }
+          }
+
+          return -1;
         }
 
         function fullPath(members, idx) {
@@ -67,43 +116,28 @@ The example below demonstrates how to integrate a Kendo UI PivotGrid widget with
           return path;
         }
 
-        //Check whether the tuple has been collapsed
-        function isCollapsed(tuple, collapsed) {
-          var members = tuple.members;
+        function memberCaption(member) { return member.caption };
 
-          for (var idx = 0, length = collapsed.length; idx < length; idx++) {
-            var collapsedPath = collapsed[idx];
-            if (indexOfPath(fullPath(members, collapsedPath.length -1), [collapsedPath]) !== -1) {
-              return true;
+        function extractCaption(members) {
+            return $.map(members, memberCaption).join(" ");
+        };
+
+        function fullPathCaptionName(members, dLength, idx) {
+            var result = extractCaption(members.slice(0, idx + 1));
+            var measureName = extractCaption(members.slice(dLength, members.mLength));
+
+            if (measureName) {
+                result += " - " + measureName;
             }
-          }
 
-          return false;
-        }
-
-        function indexOfPath(path, paths) {
-            var path = path.join(",");
-
-          for (var idx = 0; idx < paths.length; idx++) {
-            if (paths[idx].join(",") === path) {
-                return idx;
-            }
-          }
-
-          return -1;
-        }
-
-        function fullPathCaptionName(members, idx) {
-            var name = "";
-            while (idx > -1) {
-                            name += " " + members[idx].caption;
-              idx -= 1;
-            }
-            return name;
+            return result;
         }
 
         //the main function that convert PivotDataSource data into understandable for the Chart widget format
         function convertData(dataSource, collapsed) {
+          var columnDimensionsLength = dataSource.columns().length;
+          var rowDimensionsLength = dataSource.rows().length;
+
           var columnTuples = flattenTree(dataSource.axes().columns.tuples || [], collapsed.columns);
           var rowTuples = flattenTree(dataSource.axes().rows.tuples || [], collapsed.rows);
           var data = dataSource.data();
@@ -132,8 +166,8 @@ The example below demonstrates how to integrate a Kendo UI PivotGrid widget with
 
                         result.push({
                           measure: Number(data[idx].value),
-                          column: fullPathCaptionName(columnTuple.members, ci),
-                          row: rowTuple.members[ri].caption
+                          column: fullPathCaptionName(columnTuple.members, columnDimensionsLength, ci),
+                          row: fullPathCaptionName(rowTuple.members, rowDimensionsLength, ci)
                         });
                       }
                     }
@@ -180,7 +214,7 @@ The example below demonstrates how to integrate a Kendo UI PivotGrid widget with
                     type: "xmla",
                     columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Employee].[Gender]" }],
                   rows: [{ name: "[Product].[Category]", expand: true }],
-                    measures: ["[Measures].[Reseller Freight Cost]"],
+                    measures: ["[Measures].[Reseller Freight Cost]", "[Measures].[Internet Order Quantity]"],
                     transport: {
                         connection: {
                             catalog: "Adventure Works DW 2008R2",
@@ -219,15 +253,22 @@ The example below demonstrates how to integrate a Kendo UI PivotGrid widget with
                   legend: {
                       position: "bottom"
                   },
+                  categoryAxis: {
+                      labels: {
+                          rotation: 310
+                      }
+                  },
                   valueAxis: {
                       labels: {
                           format: "${0}"
                       }
                   },
                   dataBound: function(e) {
-                    if (e.sender.options.categoryAxis) {
-                        e.sender.options.categoryAxis.categories.sort()
-                    }
+                      var categoryAxis = e.sender.options.categoryAxis;
+
+                      if (categoryAxis && categoryAxis.categories) {
+                          categoryAxis.categories.sort();
+                      }
                   }
                 });
               } else {
