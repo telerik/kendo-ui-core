@@ -99,8 +99,8 @@
 
         dialog.element.press(keys.ESC);
 
-        notOk(dialog.options.visible);
-        notOk(dialog.wrapper.is(":visible"));
+        ok(!dialog.options.visible);
+        ok(!dialog.wrapper.is(":visible"));
     });
 
     test("escape key does not close the dialog, when closable is false", function() {
@@ -120,7 +120,7 @@
 
         dialog.wrapper.find(KICONCLOSE).press(keyCode);
 
-        notOk(dialog.options.visible);
+        ok(!dialog.options.visible);
     }
 
     test("close button enter key triggers close", $.proxy(keyboardCloseButton_closesDialog, this, keys.ENTER));
@@ -151,6 +151,6 @@
         });
 
         dialog.wrapper.find(".k-dialog-buttongroup .k-button").press(keys.ESC);
-        notOk(dialog.options.visible);
+        ok(!dialog.options.visible);
     });
 })();

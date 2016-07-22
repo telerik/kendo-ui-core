@@ -50,6 +50,10 @@
             return Math.max(Math.min(parseInt(value, 10), high === Infinity ? high : parseInt(high, 10)), parseInt(low, 10));
         }
 
+        function buttonKeyTrigger(e) {
+            return e.keyCode == keys.ENTER || e.keyCode == keys.SPACEBAR;
+        }
+
         var Dialog = Widget.extend({
             init: function(element, options) {
                 var that = this,
@@ -622,10 +626,6 @@
             close: "<span class='k-i-close' role='button'>Close</span>",
             overlay: "<div class='k-overlay' />"
         };
-
-        function buttonKeyTrigger(e) {
-            return e.keyCode == keys.ENTER || e.keyCode == keys.SPACEBAR;
-        }
 
         kendo.ui.plugin(Dialog);
 

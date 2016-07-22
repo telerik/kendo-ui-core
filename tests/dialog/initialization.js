@@ -40,7 +40,7 @@
         });
         var wrapper = dialog.wrapper;
         var wrapperChildren = wrapper.children();
-        notOk(wrapperChildren.eq(0).is(".k-i-close"));
+        ok(!wrapperChildren.eq(0).is(".k-i-close"));
     });
 
     test("title=false does not render title and adds css class", function() {
@@ -121,7 +121,7 @@
         clientObject = div.data("kendoDialog");
 
         ok(clientObject.wrapper.is(":hidden"));
-        notOk(clientObject.options.visible);
+        ok(!clientObject.options.visible);
     });
 
     test("width is constrained by minWidth", function() {

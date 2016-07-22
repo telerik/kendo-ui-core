@@ -67,7 +67,7 @@
 
         dialog.title(titleText);
 
-        notOk(dialog.wrapper.hasClass(KTITLELESS));
+        ok(!dialog.wrapper.hasClass(KTITLELESS));
     });
 
     test("title method gets and sets the title consistently", 2, function () {
@@ -261,8 +261,8 @@
         });
 
         dialog.wrapper.find(".k-button").click();
-        notOk(dialog.options.visible);
-        notOk(dialog.wrapper.is(":visible"));
+        ok(!dialog.options.visible);
+        ok(!dialog.wrapper.is(":visible"));
     });
 
     test("executing action returning false does't closes the dialog", function() {
@@ -279,4 +279,4 @@
         ok(dialog.options.visible);
         ok(dialog.wrapper.is(":visible"));
     });
-})();
+}());
