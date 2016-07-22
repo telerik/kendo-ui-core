@@ -436,8 +436,10 @@ navigation:
         title: "Validator"
     "*autocomplete":
         title: "AutoComplete"
-    "*button":
+    "*/button":
         title: "Button"
+    "*/radiobutton":
+        title: "RadioButton"
     "*calendar":
         title: "Calendar"
     "*colorpalette":
