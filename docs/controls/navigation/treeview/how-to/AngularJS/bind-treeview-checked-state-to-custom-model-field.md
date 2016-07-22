@@ -46,6 +46,7 @@ The example below demonstrates how to bind the checked state of a Kendo UI TreeV
       angular.module("KendoDemos", ["kendo.directives"])
         .controller("MyCtrl", function ($scope) {
         $scope.options = {
+          loadOnDemand: false,
           checkboxes: {
             checkChildren: true,
             template: "<input id='checkbox_#:item.uid#' ng-model='dataItem.isChecked' type='checkbox' class='k-checkbox'/><label for='checkbox_#:item.uid#' class='k-checkbox-label'></label>"
