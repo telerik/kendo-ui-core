@@ -16,7 +16,7 @@ The examples below demonstrate how to skip non-editable cells of a Kendo UI Grid
 
 > **Important**
 >
-> Both examples work only if `navigatable` is _disabled_.
+> Both examples work only if [`navigatable`](/api/javascript/ui/grid#configuration-navigatable) is _disabled_ and locked (frozen) columns are not used.
 
 ## Skip Specific Columns
 
@@ -158,7 +158,6 @@ The example below demonstrates how to skip cells from different columns and rows
       grid.table.on('keydown', function moveToNext(e) {
         if (e.keyCode === kendo.keys.TAB && $($(e.target).closest('.k-edit-cell'))[0]) {
           e.preventDefault();
-                    console.log(e.shiftKey)
           var currentNumberOfItems = grid.dataSource.view().length;
           var row = $(e.target).closest('tr').index();
           var col = grid.cellIndex($(e.target).closest('td'));
