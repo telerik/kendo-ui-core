@@ -135,6 +135,32 @@ Below are listed the steps for you to follow when you want to make the widgets u
 
 > The client-side culture must be set before any Kendo UI widgets that rely on it, are initialized.
 
+## Culture helper
+
+The Kendo culture scripts are generated based on the Windows 8 formats. If using a different version that has different date or number formats then this will lead to issues with the binding. The problem can be avoided by using the `Html.Kendo().Culture()` helper which generates the Kendo culture script based on the current .NET or specified culture.
+
+###### Example - generate the current culture
+
+    @Html.Kendo().Culture()
+
+###### Example - generate specified culture
+
+    @Html.Kendo().Culture("bg-BG")
+
+The helper also supports disabling the rendering inside a script tag so that it can be included in existing script.
+
+###### Example - generate the current culture in existing script tag
+
+    <script>
+        @Html.Kendo().Culture(false)
+    </script>
+
+###### Example - generate specified culture in existing script tag
+
+    <script>
+        @Html.Kendo().Culture("bg-BG", false)
+    </script>
+
 ## See Also
 
 Other articles on Telerik UI for ASP.NET MVC:
