@@ -133,33 +133,50 @@ Below are listed the steps for you to follow when you want to make the widgets u
     </script>
 ```
 
-> The client-side culture must be set before any Kendo UI widgets that rely on it, are initialized.
+> **Important**
+>
+> Set the client-side culture before initializing any Kendo UI widgets that rely on it.
 
-## Culture helper
+## Use the Culture Helper
 
-The Kendo culture scripts are generated based on the Windows 8 formats. If using a different version that has different date or number formats then this will lead to issues with the binding. The problem can be avoided by using the `Html.Kendo().Culture()` helper which generates the Kendo culture script based on the current .NET or specified culture.
+The Kendo UI culture scripts are generated based on the Windows 8 formats. If you use a different version that has different date or number formats, it will lead to issues related to data binding. To avoid these side effects, use the `Html.Kendo().Culture()` helper which generates the Kendo UI culture script based on the current .NET or specified culture.
 
-###### Example - generate the current culture
+### Generate Cultures
+
+The example below demonstrates how to generate the current and specified cultures.
+
+###### Example
+
+```tab-Current
 
     @Html.Kendo().Culture()
-
-###### Example - generate specified culture
+```
+```tab-Specified
 
     @Html.Kendo().Culture("bg-BG")
 
-The helper also supports disabling the rendering inside a script tag so that it can be included in existing script.
+```
 
-###### Example - generate the current culture in existing script tag
+### Include in Existing Script
+
+The Culture helper also provides the option to disable the rendering inside a script tag, so it can be included in the existing script.
+
+The example below demonstrates how to generate the current and specified cultures in an existing script file.
+
+###### Example
+
+```tab-Current
 
     <script>
         @Html.Kendo().Culture(false)
     </script>
-
-###### Example - generate specified culture in existing script tag
+```
+```tab-Specified
 
     <script>
         @Html.Kendo().Culture("bg-BG", false)
     </script>
+```
 
 ## See Also
 
