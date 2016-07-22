@@ -16,7 +16,7 @@ Make sure you are familiar with the fundamental Kendo UI widget concepts and tha
 
 ### The Basics
 
-The Kendo UI RadioButton widget is rendered as an `input type='radio'` element that is immediately followed by a `label` element. The styling comes from the  **k-radio** class being attached to the input element and the **k-radio-label** class being attached to the label element.
+The Kendo UI RadioButton widget is rendered as an `input type='radio'` element that is immediately followed by a `label` element. The styling comes from the  `k-radio` class being attached to the `input` element and the `k-radio-label` class being attached to the `label` element.
 
 ### Initialization
 
@@ -41,11 +41,11 @@ The example below demonstrates how to initialize the RadioButton.
 
 ## Features
 
-### Check and UnCheck Buttons
+### Check and Uncheck Buttons
 
-The RadioButton can be configured to be initially checked via its `.Checked()` setting. The widget can also be checked or unchecked at any time with jQuery.
+The RadioButton can be configured to be initially checked through its `.Checked()` setting. The widget can also be checked or unchecked at any time by using jQuery.
 
-The example below demonstrates how to use `.Checked()`.
+The example below demonstrates how to use the `.Checked()` configuration option.
 
 ###### Example
 
@@ -66,9 +66,9 @@ The example below demonstrates how to use `.Checked()`.
 
 ### Enable and Disable Buttons
 
-The business logic of an application often requires a certain radio button to be temporarily enabled or disabled. The RadioButton can be configured to be initially disabled via its `.Enable()` setting. The widget can also be disabled or enabled at any time with jQuery.
+The business logic of an application often requires a certain radio button to be temporarily enabled or disabled. The RadioButton can be configured to be initially disabled through its `.Enable()` setting. The widget can also be enabled or disabled at any time by using jQuery.
 
-The example below demonstrates how to use `.Enable()`.
+The example below demonstrates how to use the `.Enable()` configuration option.
 
 ###### Example
 
@@ -89,7 +89,7 @@ The example below demonstrates how to use `.Enable()`.
                 .Checked(false) %>
 ```
 
-### Model Binding
+### Bind to Model
 
 Below are listed the steps for you to follow when binding a Kendo UI RadioButton to a model.
 
@@ -127,7 +127,9 @@ Below are listed the steps for you to follow when binding a Kendo UI RadioButton
         @model Kendo.Mvc.Examples.Controllers.RadioButtonModel
 ```
 
-**Step 4** Add two RadioButtons and set the boolean values for the checked state via the `.Value` setting. The matched boolean value from model will define the initial checked state. In the example below the radio button with "I Disagree" label will be checked since its false value matches the model value.
+**Step 4** Add two RadioButtons and set the Boolean values for the checked state through the `.Value` setting. The matched Boolean value from model will define the initial checked state.
+
+The example below demonstrates how the radio button with the **I Disagree** label will be checked because its false value matches the model value.
 
 ###### Example
 
