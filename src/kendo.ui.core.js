@@ -44,6 +44,7 @@
         "./kendo.datetimepicker",
         "./kendo.slider",
         "./kendo.splitter",
+        "./kendo.dialog",
         "./kendo.window",
         "./kendo.virtuallist",
         "./kendo.mobile.popover",
