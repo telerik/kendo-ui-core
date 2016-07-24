@@ -10,8 +10,6 @@
         depends: ["core", "popup"] // dependencies
     };
 
-    // START WIDGET DEFINITION - only if it will have a single script file
-
     (function($, undefined) {
         var kendo = window.kendo,
             Widget = kendo.ui.Widget,
@@ -37,6 +35,8 @@
             INITOPEN = "initOpen",
             OPEN = "open",
             CLOSE = "close",
+            SHOW = "show",
+            HIDE="hide",
             WIDTH = "width",
             HUNDREDPERCENT = 100,
             ceil = Math.ceil,
@@ -378,7 +378,7 @@
                     wrapper.show().kendoStop().kendoAnimate({
                         effects: showOptions.effects,
                         duration: showOptions.duration,
-                        complete: proxy(that._activate, that)
+                        complete: proxy(that._openAnimationEnd, that)
                     });
                     wrapper.show();
                 }
@@ -396,8 +396,8 @@
                 return animation && animation[id] || basicAnimation[id];
             },
 
-            _activate: function() {
-                //TODO set the focus of the first element here
+            _openAnimationEnd: function() {
+                this.trigger(SHOW);
             },
 
             _triggerInitOpen: function() {
@@ -459,7 +459,7 @@
                         effects: hideOptions.effects || showOptions.effects,
                         reverse: hideOptions.reverse === true,
                         duration: hideOptions.duration,
-                        complete: proxy(this._deactivate, this)
+                        complete: proxy(this._closeAnimationEnd, this)
                     });
                 }
 
@@ -495,9 +495,11 @@
                 }
             },
 
-            _deactivate: function() {
+            _closeAnimationEnd: function() {
                 var that = this;
                 that.wrapper.hide().css("opacity", "");
+                that.trigger(HIDE);
+
                 if (that.options.modal) {
                     var lastModal = that._object(that._modals().last());
                     if (lastModal) {
@@ -596,7 +598,9 @@
             events: [
                 INITOPEN,
                 OPEN,
-                CLOSE
+                CLOSE,
+                SHOW,
+                HIDE
             ],
 
             options: {

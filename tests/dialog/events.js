@@ -74,6 +74,43 @@
         dialog.open();
     });
 
+    test("open triggers show event", function() {
+        var dialog = createDialog({
+            visible: false,
+            show: function(e) { ok(e.sender.wrapper.is(":visible")); }
+        });
+
+        dialog.open();
+    });
+
+    test("open does not triggers show event, if open event hendler returns false.", function() {
+        var dialog = createDialog({
+            visible: false,
+            opne: function() { ok(true); return false;},
+            show: function(e) { ok(e.sender.wrapper.is(":visible")); }
+        });
+
+        dialog.open();
+    });
+
+    test("close triggers hide event", function() {
+        var dialog = createDialog({
+            visible: true,
+            hide: function(e) {ok(!e.sender.wrapper.is(":visible")); }
+        });
+        dialog.close();
+    });
+
+    test("close does not triggers hide event, if close event hendler returns false.", function() {
+        var dialog = createDialog({
+            visible: true,
+            close: function() { ok(true); return false;},
+            show: function(e) { ok(!e.sender.wrapper.is(":visible")); }
+        });
+
+        dialog.close();
+    });
+
     var keys = kendo.keys;
     module("keyboard support", {
         setup: function() {
