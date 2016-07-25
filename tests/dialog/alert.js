@@ -1,0 +1,83 @@
+(function() {
+    module("Alert dialog initialization", {
+        teardown: function() {
+            QUnit.fixture.closest("body").find(".alert").each(function(idx, element) {
+                var alertDialog = $(element).data("kendoAlert");
+                alertDialog.destroy();
+            });
+            QUnit.fixture.closest("body").find(".k-overlay").remove();
+        }
+    });
+
+    function createAlert(options, element) {
+        element = element || $("<div class='alert' />").appendTo(QUnit.fixture);
+        return element.kendoAlert(options).data("kendoAlert");
+    }
+
+    test("creates default html structure", function() {
+        var alertDialog = createAlert();
+        var wrapper = alertDialog.wrapper;
+        var wrapperChildren = wrapper.children();
+
+        ok(wrapper.is(".k-alert.k-widget.k-dialog.k-window"));
+        ok(wrapperChildren.eq(0).is(".k-window-titlebar"));
+        ok(wrapperChildren.eq(1).is(".k-content"));
+        ok(wrapperChildren.eq(2).is(".k-dialog-buttongroup"));
+        ok(wrapperChildren.eq(2).children().eq(0).is(".k-button"));
+    });
+
+    test("title is window.location.host", function() {
+        var alertDialog = createAlert();
+        var host = window.location.host;
+
+        equal(alertDialog.options.title, host);
+        equal(alertDialog.title(), host);
+    });
+
+    test("closable is false", function() {
+        var alertDialog = createAlert();
+        equal(alertDialog.options.closable, false);
+    });
+
+    test("Teher is one default OK action", function() {
+        var alertDialog = createAlert();
+        equal(alertDialog.options.actions.length, 1);
+        equal(alertDialog.options.actions[0].aciotn, undefined);
+    });
+
+    test("close should call destroy", function() {
+        mockFunc(kendo.ui.Alert.fn, "destroy", function() { ok(true); });
+        var alertDialog = createAlert();
+        alertDialog.open();
+        alertDialog.close();
+        removeMock(kendo.ui.Alert.fn, "destroy");
+    });
+
+    test("kendo.close should call destroy", function() {
+        mockFunc(kendo.ui.Alert.fn, "destroy", function() { ok(true); });
+        var alertDialog = createAlert();
+        alertDialog.open();
+        alertDialog.close();
+        removeMock(kendo.ui.Alert.fn, "destroy");
+    });
+
+
+    module("kendo.alert method", {
+        teardown: function() {
+            QUnit.fixture.closest("body").find(".k-alert .k-content").each(function(idx, element) {
+                $(element).data("kendoAlert").destroy();
+            });
+            QUnit.fixture.closest("body").find(".k-overlay").remove();
+        }
+    });
+
+    test("opens Alert dialog", function() {
+        var alertDialog = kendo.alert("message");
+        ok(alertDialog.options.visible);
+    });
+
+    test("text argument sets Alert dialog content", function() {
+        var alertDialog = kendo.alert("message");
+        equal(alertDialog.content(), "message");
+    });
+})();

@@ -28,6 +28,7 @@
             KDIALOGTITLEBAR = ".k-window-titlebar",
             KBUTTONGROUP = ".k-dialog-buttongroup",
             KBUTTON = ".k-button",
+            KALERT = "k-alert",
             KOVERLAY = ".k-overlay",
             VISIBLE = ":visible",
             ZINDEX = "zIndex",
@@ -36,7 +37,7 @@
             OPEN = "open",
             CLOSE = "close",
             SHOW = "show",
-            HIDE="hide",
+            HIDE = "hide",
             WIDTH = "width",
             HUNDREDPERCENT = 100,
             ceil = Math.ceil,
@@ -54,26 +55,27 @@
             return e.keyCode == keys.ENTER || e.keyCode == keys.SPACEBAR;
         }
 
-        var Dialog = Widget.extend({
+        var DialogBase = Widget.extend({
             init: function(element, options) {
-                var that = this,
-                    wrapper;
-
+                var that = this;
                 Widget.fn.init.call(that, element, options);
-                options = that.options;
-                element = that.element;
-                that.appendTo = $(BODY);
+                that._init(that.element, that.options);
+                kendo.notify(that);
+            },
 
+            _init: function(element, options) {
+                var that = this,
+                wrapper;
+
+                that.appendTo = $(BODY);
                 if (!defined(options.visible) || options.visible === null) {
                     options.visible = element.is(VISIBLE);
                 }
 
                 that._createDialog();
-
                 wrapper = that.wrapper = element.closest(KDIALOG);
 
                 that._tabindex(element);
-
                 that._dimensions();
 
                 if (!that.options.visible) {
@@ -91,8 +93,6 @@
                         .on("keydown" + NS, proxy(that._closeKeyHandler, that));
                     wrapper.find(KCONTENT).on("keydown" + NS, proxy(that._keydown, that));
                 }
-
-                kendo.notify(that);
             },
 
             _dimensions: function() {
@@ -151,7 +151,7 @@
 
             },
 
-            _paddingBox: function(element){
+            _paddingBox: function(element) {
                 var paddingTop = parseFloat(element.css("padding-top"), 10),
                     paddingLeft = parseFloat(element.css("padding-left"), 10),
                     paddingBottom = parseFloat(element.css("padding-bottom"), 10),
@@ -172,7 +172,7 @@
 
                 if (elementHeight > 0) {
                     that.element.css({
-                        height: ceil(elementHeight)+ "px",
+                        height: ceil(elementHeight) + "px",
                         overflow: "hidden"
                     });
                 }
@@ -211,7 +211,7 @@
             },
 
             _closeKeyHandler: function(e) {
-                if(buttonKeyTrigger(e) || e.keyCode == keys.ESC) {
+                if (buttonKeyTrigger(e) || e.keyCode == keys.ESC) {
                     this.close();
                 }
             },
@@ -317,10 +317,9 @@
             },
 
             _actionKeyHandler: function(e) {
-                if(buttonKeyTrigger(e)) {
+                if (buttonKeyTrigger(e)) {
                     this._runActionBtn(e.currentTarget);
-                }
-                else if(e.keyCode == keys.ESC) {
+                } else if (e.keyCode == keys.ESC) {
                     this.close();
                 }
             },
@@ -444,7 +443,7 @@
                     wrapper = that.wrapper,
                     options = that.options,
                     showOptions = this._animationOptions("open"),
-                    hideOptions  = this._animationOptions("close");
+                    hideOptions = this._animationOptions("close");
 
                 if (wrapper.is(VISIBLE) && !that.trigger(CLOSE, { userTriggered: !systemTriggered })) {
                     if (that._closing) {
@@ -530,7 +529,7 @@
                 var content = element.children(KCONTENT);
                 var widget = kendo.widgetInstance(content);
 
-                if (widget instanceof Dialog) {
+                if (widget) {
                     return widget;
                 }
 
@@ -604,7 +603,6 @@
             ],
 
             options: {
-                name: "Dialog",
                 title: "",
                 actions: [],
                 modal: true,
@@ -618,6 +616,39 @@
             }
         });
 
+        var Dialog = DialogBase.extend({
+            options: {
+                name: "Dialog"
+            }
+        });
+
+        kendo.ui.plugin(Dialog);
+
+        var Alert = DialogBase.extend({
+
+            _init: function(element, options) {
+                var that = this;
+                DialogBase.fn._init.call(that, element, options);
+                that.wrapper.addClass(KALERT);
+                that.bind(HIDE, proxy(that.destroy, that));
+            },
+
+            options: {
+                name: "Alert",
+                title: window.location.host,
+                closable: false,
+                actions: [{
+                    text: "OK"
+                }]
+            }
+        });
+
+        kendo.ui.plugin(Alert);
+
+        kendo.alert = function(text) {
+            return $(templates.alert).kendoAlert({ content: text }).data("kendoAlert").open();
+        };
+
         templates = {
             wrapper: template("<div class='k-widget k-dialog k-window' role='dialog' />"),
             action: template("<li class='k-button# if (data.primary) { # k-primary# } #' role='button'>#= text #</li>"),
@@ -628,13 +659,12 @@
             ),
             actionbar: "<ul class='k-dialog-buttongroup' role='toolbar' />",
             close: "<span class='k-i-close' role='button'>Close</span>",
-            overlay: "<div class='k-overlay' />"
+            overlay: "<div class='k-overlay' />",
+            alert: "<div style='diaplay: none;' />"
         };
-
-        kendo.ui.plugin(Dialog);
 
     })(window.kendo.jQuery);
 
     return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });
