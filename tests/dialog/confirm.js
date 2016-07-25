@@ -40,6 +40,12 @@
         equal(confirmDialog.options.closable, false);
     });
 
+    test("first action is primary", function() {
+        var confirmDialog = createConfirm();
+        ok(confirmDialog.options.actions[0].primary);
+        ok(!confirmDialog.options.actions[1].primary);
+    });
+
     test("created two default actions with set action method", function() {
         var confirmDialog = createConfirm();
         equal(confirmDialog.options.actions.length, 2);
@@ -89,12 +95,12 @@
     });
 
     test("ok calls chained done handler", function() {
-        kendo.confirm("message").done(function() { ok(true) });
+        kendo.confirm("message").done(function() { ok(true); });
         $(".k-confirm .k-content").data("kendoConfirm").wrapper.find(".k-button:first").click();
     });
 
     test("cancel calls chained fail handler", function() {
-        kendo.confirm("message").fail(function() { ok(true) });
+        kendo.confirm("message").fail(function() { ok(true); });
         $(".k-confirm .k-content").data("kendoConfirm").wrapper.find(".k-button:eq(1)").click();
     });
 })();

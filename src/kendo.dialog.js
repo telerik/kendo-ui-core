@@ -668,6 +668,7 @@
                 actions: [
                     {
                         text: "OK",
+                        primary: true,
                         action: function(e) {
                             e.sender.result.resolve();
                         }
