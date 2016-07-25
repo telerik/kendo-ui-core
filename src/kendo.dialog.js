@@ -29,6 +29,7 @@
             KBUTTONGROUP = ".k-dialog-buttongroup",
             KBUTTON = ".k-button",
             KALERT = "k-alert",
+            KCONFIRM = "k-confirm",
             KOVERLAY = ".k-overlay",
             VISIBLE = ":visible",
             ZINDEX = "zIndex",
@@ -331,7 +332,7 @@
                 }
 
                 var action = $(target).data("action"),
-                    preventClose = (isFunction(action) && action() === false);
+                    preventClose = (isFunction(action) && action({ sender: that }) === false);
 
                 if (!preventClose) {
                     that.close();
@@ -649,6 +650,44 @@
             return $(templates.alert).kendoAlert({ content: text }).data("kendoAlert").open();
         };
 
+        var Confirm = DialogBase.extend({
+
+            _init: function(element, options) {
+                var that = this;
+                DialogBase.fn._init.call(that, element, options);
+                that.wrapper.addClass(KCONFIRM);
+                that.bind(HIDE, proxy(that.destroy, that));
+                that.result = $.Deferred();
+            },
+
+            options: {
+                name: "Confirm",
+                title: window.location.host,
+                closable: false,
+                confirmCallback: null,
+                actions: [
+                    {
+                        text: "OK",
+                        action: function(e) {
+                            e.sender.result.resolve();
+                        }
+                    }, {
+                        text: "Cancel",
+                        action: function(e) {
+                            e.sender.result.reject();
+                        }
+                    }
+                ]
+            }
+        });
+
+        kendo.ui.plugin(Confirm);
+
+        kendo.confirm = function(text) {
+            var confirmDialog = $(templates.confirm).kendoConfirm({ content: text }).data("kendoConfirm").open();
+            return confirmDialog.result;
+        };
+
         templates = {
             wrapper: template("<div class='k-widget k-dialog k-window' role='dialog' />"),
             action: template("<li class='k-button# if (data.primary) { # k-primary# } #' role='button'>#= text #</li>"),
@@ -660,7 +699,8 @@
             actionbar: "<ul class='k-dialog-buttongroup' role='toolbar' />",
             close: "<span class='k-i-close' role='button'>Close</span>",
             overlay: "<div class='k-overlay' />",
-            alert: "<div style='diaplay: none;' />"
+            alert: "<div style='diaplay: none;' />",
+            confirm: "<div style='diaplay: none;' />"
         };
 
     })(window.kendo.jQuery);

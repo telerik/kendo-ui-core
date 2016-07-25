@@ -39,7 +39,7 @@
         equal(alertDialog.options.closable, false);
     });
 
-    test("Teher is one default OK action", function() {
+    test("created one default OK action", function() {
         var alertDialog = createAlert();
         equal(alertDialog.options.actions.length, 1);
         equal(alertDialog.options.actions[0].aciotn, undefined);
@@ -52,15 +52,6 @@
         alertDialog.close();
         removeMock(kendo.ui.Alert.fn, "destroy");
     });
-
-    test("kendo.close should call destroy", function() {
-        mockFunc(kendo.ui.Alert.fn, "destroy", function() { ok(true); });
-        var alertDialog = createAlert();
-        alertDialog.open();
-        alertDialog.close();
-        removeMock(kendo.ui.Alert.fn, "destroy");
-    });
-
 
     module("kendo.alert method", {
         teardown: function() {
