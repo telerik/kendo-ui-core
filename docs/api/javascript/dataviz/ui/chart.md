@@ -12,7 +12,7 @@ description: Learn how to configure Kendo UI Javascript chart widget in a few ea
 
 If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource#events-change) event of the
 data source is fired. By default the widget will bind to the data source specified in the configuration.
-ser
+
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.
 
 #### Example - disable automatic binding
