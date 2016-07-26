@@ -1225,6 +1225,13 @@
         equal(dropdown.wrapper.attr("title"), title);
     });
 
+    test("copy input title attribute to the filter input", function() {
+        var title = "foo";
+        var dropdown = input.attr("title", title).kendoDropDownList({ filter: "contains" }).data("kendoDropDownList");
+
+        equal(dropdown.filterInput.attr("title"), title);
+    });
+
     test("DropDownList displays optionLabel when autoBind: false and text is not defined", function() {
         var data = [
             { text: "Black", value: "1" },
