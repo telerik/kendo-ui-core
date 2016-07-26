@@ -1827,7 +1827,7 @@ The fields which can be used in the template are:
              categories: [2000, 2001, 2002, 2003]
          }
     });
-```pseudo
+```
 
 ### navigator.series.labels.visible `Boolean`*(default: false)*
 
