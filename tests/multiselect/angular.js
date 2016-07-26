@@ -260,4 +260,53 @@
         var widget = QUnit.fixture.find("select").getKendoMultiSelect();
         equal(widget.footer.text(), "My text");
     });
+
+    ngTest("virtualized multiselect updates model on change", 1, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            $scope.selectData = [
+                {ModelNo: "100 HP"},
+                {ModelNo: "105 HP"},
+                {ModelNo: "110 HP"},
+                {ModelNo: "115 HP"},
+                {ModelNo: "120 HP"},
+                {ModelNo: "125 HP"}
+            ];
+
+            $scope.dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function (options) {
+                        setTimeout(function() {
+                            options.success($scope.selectData.slice());
+                        });
+                    }
+                },
+                pageSize: 5
+            });
+
+            $scope.selectOptions = {
+                virtual: {
+                    itemHeight: 26,
+                    valueMapper: function(options) { options.success(null); }
+                },
+                height: 150,
+                dataTextField: "ModelNo",
+                dataValueField: "Id",
+                dataSource: $scope.dataSource
+            };
+
+            $scope.selectedModels = [];
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-multi-select k-ng-model=selectedModels k-options=selectOptions></select></div>');
+    },
+
+    function() {
+        var widget = QUnit.fixture.find("select").getKendoMultiSelect();
+        var scope = widget.element.scope();
+
+        widget.open();
+        widget.ul.children(":first").click();
+
+        equal(scope.selectedModels.length, 1);
+    });
 })();

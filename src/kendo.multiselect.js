@@ -548,7 +548,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             listView.value(value);
-            that._old = value;
+            that._old = listView.value(); //get a new array reference
 
             if (!clearFilters) {
                 that._fetchData();
@@ -658,6 +658,8 @@ var __meta__ = { // jshint ignore:line
                 value = $.map(value, function(dataItem) { return that._value(dataItem); });
             } else if (!isArray(value) && !(value instanceof ObservableArray)) {
                 value = [value];
+            } else if (isArray(value)) {
+                value = value.slice();
             }
 
             return value;
