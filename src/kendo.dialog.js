@@ -30,6 +30,8 @@
             KBUTTON = ".k-button",
             KALERT = "k-alert",
             KCONFIRM = "k-confirm",
+            KPROMPT = "k-prompt",
+            KPROMPTVALUE = ".k-prompt-value",
             KOVERLAY = ".k-overlay",
             VISIBLE = ":visible",
             ZINDEX = "zIndex",
@@ -66,7 +68,7 @@
 
             _init: function(element, options) {
                 var that = this,
-                wrapper;
+                    wrapper;
 
                 that.appendTo = $(BODY);
                 if (!defined(options.visible) || options.visible === null) {
@@ -625,19 +627,28 @@
 
         kendo.ui.plugin(Dialog);
 
-        var Alert = DialogBase.extend({
-
+        var PopupBox = DialogBase.extend({
             _init: function(element, options) {
                 var that = this;
                 DialogBase.fn._init.call(that, element, options);
-                that.wrapper.addClass(KALERT);
                 that.bind(HIDE, proxy(that.destroy, that));
             },
 
             options: {
-                name: "Alert",
                 title: window.location.host,
-                closable: false,
+                closable: false
+            }
+        });
+
+        var Alert = PopupBox.extend({
+            _init: function(element, options) {
+                var that = this;
+                PopupBox.fn._init.call(that, element, options);
+                that.wrapper.addClass(KALERT);
+            },
+
+            options: {
+                name: "Alert",
                 actions: [{
                     text: "OK"
                 }]
@@ -650,35 +661,28 @@
             return $(templates.alert).kendoAlert({ content: text }).data("kendoAlert").open();
         };
 
-        var Confirm = DialogBase.extend({
-
+        var Confirm = PopupBox.extend({
             _init: function(element, options) {
                 var that = this;
-                DialogBase.fn._init.call(that, element, options);
+                PopupBox.fn._init.call(that, element, options);
                 that.wrapper.addClass(KCONFIRM);
-                that.bind(HIDE, proxy(that.destroy, that));
                 that.result = $.Deferred();
             },
 
             options: {
                 name: "Confirm",
-                title: window.location.host,
-                closable: false,
-                confirmCallback: null,
-                actions: [
-                    {
-                        text: "OK",
-                        primary: true,
-                        action: function(e) {
-                            e.sender.result.resolve();
-                        }
-                    }, {
-                        text: "Cancel",
-                        action: function(e) {
-                            e.sender.result.reject();
-                        }
+                actions: [{
+                    text: "OK",
+                    primary: true,
+                    action: function(e) {
+                        e.sender.result.resolve();
                     }
-                ]
+                    }, {
+                    text: "Cancel",
+                    action: function(e) {
+                        e.sender.result.reject();
+                    }
+                }]
             }
         });
 
@@ -687,6 +691,59 @@
         kendo.confirm = function(text) {
             var confirmDialog = $(templates.confirm).kendoConfirm({ content: text }).data("kendoConfirm").open();
             return confirmDialog.result;
+        };
+
+        var Prompt = PopupBox.extend({
+            _init: function(element, options) {
+                var that = this;
+                PopupBox.fn._init.call(that, element, options);
+                that.wrapper.addClass(KPROMPT);
+                that._createPrompt();
+                that.result = $.Deferred();
+            },
+
+            _createPrompt: function() {
+                var value = this.options.value,
+                    promptContainer = $(templates.prompt).insertAfter(this.element);
+
+                if (value) {
+                    promptContainer.children(KPROMPTVALUE).val(value);
+                }
+            },
+
+            options: {
+                name: "Prompt",
+                value: "",
+                actions: [{
+                    text: "OK",
+                    primary: true,
+                    action: function(e) {
+                        var sender = e.sender,
+                            value = sender.wrapper.find(KPROMPTVALUE).val();
+
+                        sender.result.resolve(value);
+                    }
+                }, {
+                    text: "Cancel",
+                    action: function(e) {
+                        var sender = e.sender,
+                            value = sender.wrapper.find(KPROMPTVALUE).val();
+
+                        e.sender.result.reject(value);
+                    }
+                }]
+            }
+        });
+
+        kendo.ui.plugin(Prompt);
+
+        kendo.prompt = function(text, value) {
+            var promptDialog = $(templates.promptElement).kendoPrompt({
+                content: text,
+                value: value
+            }).data("kendoPrompt").open();
+
+            return promptDialog.result;
         };
 
         templates = {
@@ -701,7 +758,9 @@
             close: "<span class='k-i-close' role='button'>Close</span>",
             overlay: "<div class='k-overlay' />",
             alert: "<div style='diaplay: none;' />",
-            confirm: "<div style='diaplay: none;' />"
+            confirm: "<div style='diaplay: none;' />",
+            prompt: "<div class='k-prompt-container'><input type='text' class='k-prompt-value' /></div>",
+            promptElement: "<div style='diaplay: none;' />"
         };
 
     })(window.kendo.jQuery);
