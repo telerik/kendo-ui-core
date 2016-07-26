@@ -22,7 +22,7 @@
         ok(wrapper.is(".k-prompt.k-widget.k-dialog.k-window"));
         ok(wrapperChildren.eq(0).is(".k-window-titlebar"));
         ok(wrapperChildren.eq(1).is(".k-content"));
-        ok(wrapperChildren.eq(2).children(":first").is(".k-prompt-value"));
+        ok(wrapperChildren.eq(2).children(":first").is(".k-input"));
         ok(wrapperChildren.eq(3).is(".k-dialog-buttongroup"));
         ok(wrapperChildren.eq(3).children().eq(0).is(".k-button"));
         ok(wrapperChildren.eq(3).children().eq(1).is(".k-button"));
@@ -43,7 +43,7 @@
 
     test("proptValue sets the prompt input value", function() {
         var promptDialog = createPrompt({value: "test"});
-        equal(promptDialog.wrapper.find(".k-prompt-value").val(), "test");
+        equal(promptDialog.wrapper.find(".k-input").val(), "test");
     });
 
     test("first action is primary", function() {
@@ -106,7 +106,7 @@
 
     test("value sets default prompt value", function() {
         kendo.prompt("message", "test value");
-        equal($(".k-prompt-value").val(), "test value");
+        equal($(".k-input").val(), "test value");
     });
 
     test("ok calls chained done handler with prompt value argument", function() {

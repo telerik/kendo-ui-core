@@ -31,7 +31,7 @@
             KALERT = "k-alert",
             KCONFIRM = "k-confirm",
             KPROMPT = "k-prompt",
-            KPROMPTVALUE = ".k-prompt-value",
+            KINPUT = ".k-input",
             KOVERLAY = ".k-overlay",
             VISIBLE = ":visible",
             ZINDEX = "zIndex",
@@ -43,6 +43,10 @@
             HIDE = "hide",
             WIDTH = "width",
             HUNDREDPERCENT = 100,
+            OK_CANCEL = {
+                okText  : "OK",
+                cancel : "Cancel"
+            },
             ceil = Math.ceil,
             templates;
 
@@ -240,7 +244,7 @@
                 that.appendTo.append(wrapper);
 
                 if (options.closable !== false) {
-                    wrapper.append(templates.close);
+                    wrapper.append(templates.close(options));
                 }
 
                 if (options.title !== false) {
@@ -276,17 +280,26 @@
                     actionKeyHandler = proxy(that._actionKeyHandler, that),
                     actions = that.options.actions,
                     length = actions.length,
-                    buttonSize = HUNDREDPERCENT / length;
+                    buttonSize = HUNDREDPERCENT / length,
+                    action,
+                    text;
 
                 for (var i = 0; i < length; i++) {
-                    var o = actions[i];
-                    $(templates.action(o))
+                    action = actions[i];
+                    text = that._mergeTextWithOptions(action);
+                    $(templates.action(action))
+                        .html(text)
                         .css(WIDTH, buttonSize + "%")
                         .appendTo(actionbar)
-                        .data("action", o.action)
+                        .data("action", action.action)
                         .on("click", actionClick)
                         .on("keydown", actionKeyHandler);
                 }
+            },
+
+            _mergeTextWithOptions : function(action) {
+                var text = action.text;
+                return text ? template(text)(this.options) : "";
             },
 
             _normalizeButtonSize: function(actionbar) {
@@ -621,7 +634,10 @@
 
         var Dialog = DialogBase.extend({
             options: {
-                name: "Dialog"
+                name: "Dialog",
+                messages: {
+                    close: "Close"
+                }
             }
         });
 
@@ -636,7 +652,8 @@
 
             options: {
                 title: window.location.host,
-                closable: false
+                closable: false,
+                messages: OK_CANCEL
             }
         });
 
@@ -650,14 +667,14 @@
             options: {
                 name: "Alert",
                 actions: [{
-                    text: "OK"
+                    text: "#= messages.okText #"
                 }]
             }
         });
 
         kendo.ui.plugin(Alert);
 
-        kendo.alert = function(text) {
+        var kendoAlert = function(text) {
             return $(templates.alert).kendoAlert({ content: text }).data("kendoAlert").open();
         };
 
@@ -672,13 +689,13 @@
             options: {
                 name: "Confirm",
                 actions: [{
-                    text: "OK",
+                    text: "#= messages.okText #",
                     primary: true,
                     action: function(e) {
                         e.sender.result.resolve();
                     }
                     }, {
-                    text: "Cancel",
+                    text: "#= messages.cancel #",
                     action: function(e) {
                         e.sender.result.reject();
                     }
@@ -688,7 +705,7 @@
 
         kendo.ui.plugin(Confirm);
 
-        kendo.confirm = function(text) {
+        var kendoConfirm = function(text) {
             var confirmDialog = $(templates.confirm).kendoConfirm({ content: text }).data("kendoConfirm").open();
             return confirmDialog.result;
         };
@@ -707,7 +724,7 @@
                     promptContainer = $(templates.prompt).insertAfter(this.element);
 
                 if (value) {
-                    promptContainer.children(KPROMPTVALUE).val(value);
+                    promptContainer.children(KINPUT).val(value);
                 }
             },
 
@@ -715,19 +732,19 @@
                 name: "Prompt",
                 value: "",
                 actions: [{
-                    text: "OK",
+                    text: "#= messages.okText #",
                     primary: true,
                     action: function(e) {
                         var sender = e.sender,
-                            value = sender.wrapper.find(KPROMPTVALUE).val();
+                            value = sender.wrapper.find(KINPUT).val();
 
                         sender.result.resolve(value);
                     }
                 }, {
-                    text: "Cancel",
+                    text: "#= messages.cancel #",
                     action: function(e) {
                         var sender = e.sender,
-                            value = sender.wrapper.find(KPROMPTVALUE).val();
+                            value = sender.wrapper.find(KINPUT).val();
 
                         e.sender.result.reject(value);
                     }
@@ -737,7 +754,7 @@
 
         kendo.ui.plugin(Prompt);
 
-        kendo.prompt = function(text, value) {
+        var kendoPrompt = function(text, value) {
             var promptDialog = $(templates.promptElement).kendoPrompt({
                 content: text,
                 value: value
@@ -748,20 +765,24 @@
 
         templates = {
             wrapper: template("<div class='k-widget k-dialog k-window' role='dialog' />"),
-            action: template("<li class='k-button# if (data.primary) { # k-primary# } #' role='button'>#= text #</li>"),
+            action: template("<li class='k-button# if (data.primary) { # k-primary# } #' role='button'></li>"),
             titlebar: template(
                 "<div class='k-window-titlebar k-header'>" +
                     "<span class='k-dialog-title'>#= title #</span>" +
                 "</div>"
             ),
+            close: template("<span class='k-i-close' role='button'>#= messages.close #</span>"),
             actionbar: "<ul class='k-dialog-buttongroup' role='toolbar' />",
-            close: "<span class='k-i-close' role='button'>Close</span>",
             overlay: "<div class='k-overlay' />",
             alert: "<div style='diaplay: none;' />",
             confirm: "<div style='diaplay: none;' />",
-            prompt: "<div class='k-prompt-container'><input type='text' class='k-prompt-value' /></div>",
+            prompt: "<div class='k-prompt-container'><input type='text' class='k-input' /></div>",
             promptElement: "<div style='diaplay: none;' />"
         };
+
+        kendo.alert = kendoAlert;
+        kendo.confirm = kendoConfirm;
+        kendo.prompt = kendoPrompt;
 
     })(window.kendo.jQuery);
 
