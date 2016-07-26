@@ -1107,19 +1107,22 @@ var __meta__ = { // jshint ignore:line
         },
 
         _input: function() {
-            var that = this,
-                accessKey = that.element[0].accessKey,
-                input = that._innerWrapper.children("input.k-input");
+            var that = this;
+            var element = that.element;
+            var accessKey = element[0].accessKey;
+            var input = that._innerWrapper.children("input.k-input");
 
             if (!input[0]) {
                 input = $('<input class="k-input" style="width: 25px" />').appendTo(that._innerWrapper);
             }
 
-            that.element.removeAttr("accesskey");
+            element.removeAttr("accesskey");
+
             that._focused = that.input = input.attr({
                 "accesskey": accessKey,
                 "autocomplete": "off",
                 "role": "listbox",
+                "title": element[0].title,
                 "aria-expanded": false
             });
         },
@@ -1196,6 +1199,7 @@ var __meta__ = { // jshint ignore:line
             if (!wrapper[0]) {
                 wrapper = element.wrap('<div class="k-widget k-multiselect k-header" deselectable="on" />').parent();
                 wrapper[0].style.cssText = element[0].style.cssText;
+                wrapper[0].title = element[0].title;
                 wrapper[0].title = element[0].title;
 
                 $('<div class="k-multiselect-wrap k-floatwrap" deselectable="on" />').insertBefore(element);
