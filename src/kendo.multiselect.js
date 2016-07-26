@@ -1200,7 +1200,6 @@ var __meta__ = { // jshint ignore:line
                 wrapper = element.wrap('<div class="k-widget k-multiselect k-header" deselectable="on" />').parent();
                 wrapper[0].style.cssText = element[0].style.cssText;
                 wrapper[0].title = element[0].title;
-                wrapper[0].title = element[0].title;
 
                 $('<div class="k-multiselect-wrap k-floatwrap" deselectable="on" />').insertBefore(element);
             }
