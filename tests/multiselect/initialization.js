@@ -783,7 +783,7 @@
         var multiselect = select.attr("title", "foo").kendoMultiSelect().data("kendoMultiSelect");
         var title = select.attr("title");
 
-        equal(multiselect.wrapper.attr("title"), title);
+        equal(multiselect.input.attr("title"), title);
     });
 
     test("MultiSelect updates selected text when selected items are changed", function() {
