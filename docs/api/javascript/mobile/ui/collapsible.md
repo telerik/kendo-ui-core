@@ -118,7 +118,7 @@ Sets the icon position in the header of the collapsible widget. Possible values 
 #### Example
 
     <div id="home" data-role="view">
-        <div id="collapsible" data-role="collapsible" data-icon-postion="right">
+        <div id="collapsible" data-role="collapsible" data-icon-position="right">
             <h2>Header</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </div>
