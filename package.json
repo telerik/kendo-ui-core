@@ -1,5 +1,8 @@
 {
   "name": "kendo-ui-core",
+  "description": "Kendo UI Core package",
+  "main": "js/kendo.ui.core.js",
+  "author": "Telerik",
   "repository": {
     "type": "git",
     "url": "https://github.com/telerik/kendo-ui-core.git"
