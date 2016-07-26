@@ -63,7 +63,7 @@ Place the widget inside the `label` element which will focus the first visible e
 ```
   <label>
     Amount:
-    <input id="numerictextbox" />
+    <input id="numerictextbox" title="Add a Descriptive Tilte"/>
   </label>
 
   <script>
