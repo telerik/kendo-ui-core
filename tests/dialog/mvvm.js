@@ -2,11 +2,10 @@
     module("MVVM", {
         setup: function() {
             kendo.effects.disable();
-            //$.mockjax({ url: "echo", responseText: "echo!" });
 
             window.openHandler = function() {
                 ok(true);
-            }
+            };
         },
         teardown: function() {
           QUnit.fixture.closest("body").find(".k-dialog .k-content").each(function(idx, element) {
