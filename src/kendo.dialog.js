@@ -87,11 +87,13 @@
 
                 if (!that.options.visible) {
                     that.wrapper.hide();
-                } else if (options.modal) {
+                } else{
                     that.toFront();
                     that._triggerInitOpen();
                     that.trigger(OPEN);
-                    that._overlay(wrapper.is(VISIBLE)).css({ opacity: 0.5 });
+                    if (options.modal) {
+                        that._overlay(wrapper.is(VISIBLE)).css({ opacity: 0.5 });
+                    }
                 }
 
                 if (options.closable) {

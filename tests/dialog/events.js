@@ -40,8 +40,22 @@
         });
     });
 
+    test("init triggers open event if visible: true and modal: false", function() {
+        createDialog({
+            modal: false,
+            open: function() { ok(true); }
+        });
+    });
+
     test("init triggers initOpen event if visible: true", function() {
         createDialog({
+            initOpen: function() { ok(true); }
+        });
+    });
+
+    test("init triggers initOpen event if visible: true and modal: false", function() {
+        createDialog({
+            modal: false,
             initOpen: function() { ok(true); }
         });
     });
