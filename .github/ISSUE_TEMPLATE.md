@@ -22,7 +22,7 @@ _(feature report only)_
 
 ### Environment
 
-* Kendo UI version:** 201x.r.ddd
+* **Kendo UI version:** 201x.r.ddd
 * **jQuery version:** x.y
 * **Browser:** [all | Chrome XX | Firefox XX | IE XX | Safari XX | Mobile Chrome XX | Android X.X Web Browser | iOS XX Safari | iOS XX UIWebView | iOS XX WKWebView ] 
 
