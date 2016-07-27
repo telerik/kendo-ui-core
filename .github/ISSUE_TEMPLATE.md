@@ -1,4 +1,5 @@
-**I'm submitting a ...**  (leave only one)
+### I'm submitting a ...
+_(leave only one)_
 
 - Bug report
 - Feature request
