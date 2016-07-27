@@ -31,7 +31,7 @@
             KALERT = "k-alert",
             KCONFIRM = "k-confirm",
             KPROMPT = "k-prompt",
-            KINPUT = ".k-input",
+            KTEXTBOX = ".k-textbox",
             KOVERLAY = ".k-overlay",
             VISIBLE = ":visible",
             ZINDEX = "zIndex",
@@ -628,6 +628,8 @@
                 minHeight: 0,
                 maxWidth: Infinity,
                 maxHeight: Infinity,
+                content: null,
+                visible: null,
                 closable: true
             }
         });
@@ -724,7 +726,7 @@
                     promptContainer = $(templates.prompt).insertAfter(this.element);
 
                 if (value) {
-                    promptContainer.children(KINPUT).val(value);
+                    promptContainer.children(KTEXTBOX).val(value);
                 }
             },
 
@@ -736,7 +738,7 @@
                     primary: true,
                     action: function(e) {
                         var sender = e.sender,
-                            value = sender.wrapper.find(KINPUT).val();
+                            value = sender.wrapper.find(KTEXTBOX).val();
 
                         sender.result.resolve(value);
                     }
@@ -744,7 +746,7 @@
                     text: "#= messages.cancel #",
                     action: function(e) {
                         var sender = e.sender,
-                            value = sender.wrapper.find(KINPUT).val();
+                            value = sender.wrapper.find(KTEXTBOX).val();
 
                         e.sender.result.reject(value);
                     }
@@ -774,10 +776,10 @@
             close: template("<span class='k-i-close' role='button'>#= messages.close #</span>"),
             actionbar: "<ul class='k-dialog-buttongroup' role='toolbar' />",
             overlay: "<div class='k-overlay' />",
-            alert: "<div style='diaplay: none;' />",
-            confirm: "<div style='diaplay: none;' />",
-            prompt: "<div class='k-prompt-container'><input type='text' class='k-input' /></div>",
-            promptElement: "<div style='diaplay: none;' />"
+            alert: "<div style='display: none;' />",
+            confirm: "<div style='display: none;' />",
+            promptElement: "<div style='display: none;' />",
+            prompt: "<div class='k-prompt-container'><input type='text' class='k-textbox' /></div>"
         };
 
         kendo.alert = kendoAlert;
