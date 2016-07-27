@@ -3288,3 +3288,34 @@ td.k-state-focused.k-state-selected,
         &[data-property='fontFamily'] { width: 130px; }
     }
 }
+
+/* Dialog */
+
+.k-dialog {
+    .k-content {
+        border-bottom-right-radius: @border-radius;
+        border-bottom-left-radius: @border-radius;
+    }
+    &.k-dialog-titleless .k-content {
+        border-top-right-radius: @border-radius;
+        border-top-left-radius: @border-radius;
+    }
+    .k-dialog-buttongroup {
+        width: auto;
+        padding: 1em;
+        text-align: right;
+        border-top: 1px solid @widget-border-color;
+        .button {
+            margin-left: 0.5em;
+            &:first-child {
+            margin-left: 0;
+            }
+        }
+    }
+    .k-i-close {
+        color: @normal-text-color;
+        &:hover {
+            color: @hover-text-color;
+        }
+    }
+}
