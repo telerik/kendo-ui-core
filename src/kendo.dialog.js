@@ -48,7 +48,8 @@
                 cancel : "Cancel"
             },
             ceil = Math.ceil,
-            templates;
+            templates,
+            overlaySelector = ":not(link,meta,script,style)";
 
         function defined(x) {
             return (typeof x != "undefined");
@@ -204,7 +205,7 @@
 
 
                 if (!overlay.length) {
-                    overlay = $("<div class='k-overlay' />");
+                    overlay = $(templates.overlay);
                 }
 
                 overlay
@@ -212,7 +213,38 @@
                     .toggle(visible)
                     .css(ZINDEX, parseInt(wrapper.css(ZINDEX), 10) - 1);
 
+                if (visible) {
+                    this._waiAriaOverlay();
+                }
+                else {
+                    this._removeWaiAriaOverlay();
+                }
+
                 return overlay;
+            },
+
+            _waiAriaOverlay: function() {
+                var node = this.wrapper;
+
+                this._overlayedNodes = node.prevAll(overlaySelector).add(node.nextAll(overlaySelector))
+                    .each(function() {
+                        var jthis = $(this);
+                        jthis.data("ariaHidden", jthis.attr("aria-hidden"));
+                        jthis.attr("aria-hidden", "true");
+                    });
+            },
+
+            _removeWaiAriaOverlay: function() {
+                this._overlayedNodes && this._overlayedNodes.each(function() {
+                    var node = $(this);
+                    var hiddenValue = node.data("ariaHidden");
+                    if (hiddenValue) {
+                        node.attr("aria-hidden", hiddenValue);
+                    }
+                    else {
+                        node.removeAttr("aria-hidden");
+                    }
+                });
             },
 
             _closeClick: function() {

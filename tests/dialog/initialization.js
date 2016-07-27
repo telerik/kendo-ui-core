@@ -1,15 +1,18 @@
 (function() {
-    module("initialization", {
-        setup: function() {
+    var dialog;
+    var moduleOptions = {
+        beforeEach: function() {
             //
         },
-        teardown: function() {
+        afterEach: function() {
             QUnit.fixture.closest("body").find(".dialog").each(function(idx, element) {
                 $(element).data("kendoDialog").destroy();
             });
             QUnit.fixture.closest("body").find(".k-overlay").remove();
         }
-    });
+    };
+
+    module("initialization", $.extend({}, moduleOptions));
 
     function createDialog(options, element) {
         element = element || $("<div class='dialog' />").appendTo(QUnit.fixture);
@@ -201,5 +204,48 @@
         equal(dialog.element.attr("tabindex"), 10);
         equal(dialog.wrapper.find(".k-i-close").attr("tabindex"), 10);
         equal(dialog.wrapper.find(".k-button").attr("tabindex"), 10);
+    });
+
+    module("accessible modality", {
+        beforeEach: $.noop,
+        afterEach: function() {
+            moduleOptions.afterEach();
+            $("#before,#after").remove();
+        }
+    });
+
+    test("adds aria-hidden", function () {
+        var node = $("<div class='dialog'>foo</div>").appendTo(QUnit.fixture);
+        QUnit.fixture.before("<div id='before'>before</div>");
+        QUnit.fixture.after("<div id='after'>after</div>");
+
+        dialog = createDialog({ modal: true, visible: true }, node);
+
+        equal($("#before").attr("aria-hidden"), "true");
+        equal($("#after").attr("aria-hidden"), "true");
+    });
+
+    test("aria-hidden is removed on close", function () {
+        var node = $("<div class='dialog'>foo</div>").appendTo(QUnit.fixture);
+        QUnit.fixture.before("<div id='before'>before</div>");
+        QUnit.fixture.after("<div id='after'>after</div>");
+
+        dialog = createDialog({ modal: true, visible: true }, node);
+        dialog.close();
+
+        equal($("#before").attr("aria-hidden"), null);
+        equal($("#after").attr("aria-hidden"), null);
+    });
+
+    test("restores initial aria-hidden value on close", function () {
+        var node = $("<div class='dialog'>foo</div>").appendTo(QUnit.fixture);
+        QUnit.fixture.before("<div id='before' aria-hidden='true'>before</div>");
+        QUnit.fixture.after("<div id='after'>after</div>");
+
+        dialog = createDialog({ modal: true, visible: true }, node);
+        dialog.close();
+
+        equal($("#before").attr("aria-hidden"), "true");
+        equal($("#after").attr("aria-hidden"), null);
     });
 })();
