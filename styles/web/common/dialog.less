@@ -44,13 +44,13 @@
     margin: 0;
     padding: 0;
 }
-
-.k-dialog .k-i-close {
+// .k-dialog .k-i-close {
+.k-dialog a.k-dialog-action.k-link {
     position: absolute;
-    margin-left: 10px;
-    font-family: TelerikWebUI;
-    top: 1.1em;
-    right: 1.1em;
+    top: 1em;
+    right: 1em;
+    // margin-left: 10px;
+    // font-family: TelerikWebUI;
     cursor: pointer;
     z-index: 10000;
 }
@@ -69,8 +69,7 @@
 }
 
 .k-dialog.k-alert .k-content,
-.k-dialog.k-confirm .k-content
-    {
+.k-dialog.k-confirm .k-content {
     padding: 2.4em;
     text-align: center;
 }
@@ -84,7 +83,6 @@
     width: auto;
     padding: 0.6em 1.2em 1.8em 1.2em;
     text-align: center;
-
 }
 
 .k-dialog .k-prompt-container .k-textbox {

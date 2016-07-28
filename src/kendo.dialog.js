@@ -822,7 +822,7 @@
                     "<span class='k-dialog-title'>#= title #</span>" +
                 "</div>"
             ),
-            close: template("<span class='k-i-close' role='button'>#= messages.close #</span>"),
+            close: template("<a role='button' href='\\#' class='k-dialog-action k-link' aria-label='Close'><span class='k-icon k-i-close'>#= messages.close #</span></a>"),
             actionbar: "<ul class='k-dialog-buttongroup' role='toolbar' />",
             overlay: "<div class='k-overlay' />",
             alert: "<div style='display: none;' />",
