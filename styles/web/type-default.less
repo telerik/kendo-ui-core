@@ -2567,14 +2567,15 @@ textarea.k-textbox,
         border-bottom: 0;
         border-width: 1px 0 0 1px;
     }
-    .k-dialog-buttongroup li.k-button:first-child {
+    .k-dialog-buttongroup {
+        li.k-button:first-child {
         border-bottom-left-radius: @border-radius;
         border-left: 0;
-    }
-
-    .k-dialog-buttongroup li.k-button:last-child {
-        border-bottom-right-radius: @border-radius;
-        border-right: 0;
+        }
+        li.k-button:last-child {
+            border-bottom-right-radius: @border-radius;
+            border-right: 0;
+        }
     }
 
     .k-i-close {
