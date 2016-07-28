@@ -30,7 +30,8 @@
         var wrapperChildren = wrapper.children();
 
         ok(wrapper.is(".k-widget.k-dialog.k-window"));
-        ok(wrapperChildren.eq(0).is(".k-i-close"));
+        ok(wrapperChildren.eq(0).is(".k-dialog-action.k-link"));
+        ok(wrapperChildren.eq(0).children().eq(0).is(".k-icon.k-i-close"));
         ok(wrapperChildren.eq(1).is(".k-window-titlebar"));
         ok(wrapperChildren.eq(2).is(".k-content"));
         equal(wrapper.find(".k-dialog-buttongroup").length, 0);
