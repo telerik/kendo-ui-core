@@ -88,7 +88,7 @@
 
                 if (!that.options.visible) {
                     that.wrapper.hide();
-                } else{
+                } else {
                     that.toFront();
                     that._triggerInitOpen();
                     that.trigger(OPEN);
@@ -235,7 +235,7 @@
             },
 
             _removeWaiAriaOverlay: function() {
-                this._overlayedNodes && this._overlayedNodes.each(function() {
+                return this._overlayedNodes && this._overlayedNodes.each(function() {
                     var node = $(this);
                     var hiddenValue = node.data("ariaHidden");
                     if (hiddenValue) {
@@ -628,7 +628,7 @@
                 return that;
             },
 
-            content: function(html) {
+            content: function(html, data) {
                 var that = this,
                     content = that.wrapper.children(KCONTENT);
 
@@ -636,8 +636,23 @@
                     return content.html();
                 }
 
+                this.angular("cleanup", function(){
+                    return { elements: content.children() };
+                });
+
                 kendo.destroy(content.children());
                 content.html(html);
+
+                this.angular("compile", function(){
+                    var a = [];
+                    for (var i = content.length; --i >= 0;) {
+                        a.push({ dataItem: data });
+                    }
+                    return {
+                        elements: content.children(),
+                        data: a
+                    };
+                });
 
                 that.options.content = html;
 
@@ -730,7 +745,7 @@
                     action: function(e) {
                         e.sender.result.resolve();
                     }
-                    }, {
+                }, {
                     text: "#= messages.cancel #",
                     action: function(e) {
                         e.sender.result.reject();
