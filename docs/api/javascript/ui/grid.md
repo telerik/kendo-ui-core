@@ -8169,7 +8169,7 @@ If invoked prevents the data bind action. The table rows will remain unchanged a
 
 ##### e.action `String`
 
-The action that caused the dataBinding event
+The action that caused the dataBinding event. Possible values: `rebind`, `sync`, `add`, `remove`. 
 
 ##### e.index `Number`
 
