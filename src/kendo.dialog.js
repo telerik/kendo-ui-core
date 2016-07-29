@@ -678,8 +678,9 @@
 
             _blurDialog: function() {
                 var pageFocus = this._pageFocus;
-
-                pageFocus && this._focus(pageFocus);
+                if(pageFocus) {
+                    this._focus(pageFocus);
+                }
             },
 
             _focus: function(node) {
