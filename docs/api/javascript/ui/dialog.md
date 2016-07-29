@@ -12,7 +12,7 @@ Represents the Kendo UI Dialog. Inherits from [Widget](/api/javascript/ui/widget
 
 ### actions `Array` *(default: [])*
 
-A collectin of objects containng text, action and primary attributes used to specify the dialog buttons.
+A collection of objects containing text, action and primary attributes used to specify the dialog buttons.
 #### Example
 
     <div id="dialog"></div>
@@ -223,6 +223,36 @@ The maximum width (in pixels) that may be achieved by resizing the dialog.
     <script>
     $("#dialog").kendoDialog({
       maxWidth: 300
+    });
+    </script>
+
+### messages `Object`
+
+Defines the text of the labels that are shown within the dialog. Used primarily for localization.
+
+#### Example
+    
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoDialog({
+      messages:{
+        close: "Close Me!"
+      }
+    });
+    </script>
+
+### messages.close `String` *(default: "Close")*
+
+The title of the close button.
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoDialog({
+      messages:{
+        close: "Close Me!"
+      }
     });
     </script>
 
