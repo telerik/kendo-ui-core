@@ -17,7 +17,7 @@
             template = kendo.template,
             keys = kendo.keys,
             isFunction = $.isFunction,
-            NS = ".kendoWindow",
+            NS = "kendoWindow",
             KDIALOG = ".k-dialog",
             KWINDOW = ".k-window",
             KICONCLOSE = ".k-i-close",
@@ -98,10 +98,14 @@
                 }
 
                 if (options.closable) {
+                    wrapper.autoApplyNS(NS);
+                    element.autoApplyNS(NS);
+
                     wrapper.find(KICONCLOSE)
-                        .on("click" + NS, proxy(that._closeClick, that))
-                        .on("keydown" + NS, proxy(that._closeKeyHandler, that));
-                    wrapper.find(KCONTENT).on("keydown" + NS, proxy(that._keydown, that));
+                        .on("click", proxy(that._closeClick, that))
+                        .on("keydown", proxy(that._closeKeyHandler, that));
+
+                    element.on("keydown", proxy(that._keydown, that));
                 }
             },
 
@@ -322,6 +326,7 @@
                     action = actions[i];
                     text = that._mergeTextWithOptions(action);
                     $(templates.action(action))
+                        .autoApplyNS(NS)
                         .html(text)
                         .css(WIDTH, buttonSize + "%")
                         .appendTo(actionbar)
@@ -595,8 +600,11 @@
 
             _destroy: function() {
                 var that = this;
-                that.element.off(NS);
-                that.wrapper.find(KICONCLOSE + "," + KBUTTONGROUP + " > " + KBUTTON).off(NS);
+                var ns = "." + NS;
+
+                that.wrapper.off(ns);
+                that.element.off(ns);
+                that.wrapper.find(KICONCLOSE + "," + KBUTTONGROUP + " > " + KBUTTON).off(ns);
                 Widget.fn.destroy.call(that);
             },
 

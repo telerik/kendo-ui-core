@@ -18,6 +18,21 @@
         return element.kendoDialog(options).data("kendoDialog");
     }
 
+    test("dialog has kendoNS", function() {
+        var dialog = createDialog({ visible: true });
+
+        ok(dialog.wrapper.data("kendoNS"));
+        ok(dialog.element.data("kendoNS"));
+    });
+
+    test("dialog actions have kendoNS", function () {
+        var dialog = createDialog({ actions: [{}, {}] })
+        var actionBtns = dialog.wrapper.find(".k-dialog-buttongroup > .k-button");
+        actionBtns.each(function() {
+            ok($(this).data("kendoNS"));
+        });
+    });
+
     test("close triggers close event", function() {
         var dialog = createDialog({
             close: function() { ok(true); }

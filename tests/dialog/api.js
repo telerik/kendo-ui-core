@@ -209,7 +209,7 @@
         ok($(".k-overlay").length === 1);
     });
 
-    test("open adds only is added after the last openned dialo", function() {
+    test("open adds only is added after the last opened dialog", function() {
         var dialog = createDialog({ modal: true,  visible: false });
         var dialog1 = createDialog({ modal: true,  visible: false });
 
