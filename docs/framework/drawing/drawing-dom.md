@@ -470,7 +470,7 @@ The HTML renderer has been tested in recent versions of Chrome, Firefox, Safari,
 ## Known Limitations
 
 - Right-to-left text is not supported.
-- Images hosted on different domains might not be rendered, unless permissive [Cross-Origin HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image) are provided by the server. Similarly, fonts might not be possible to load cross-domain. Even with the proper CORS headers, Internet Explorer 9 will not be able to load images or fonts from another domain, and could raise an uncatchable security exception. If you need to support Internet Explorer 9, make sure to host images and fonts on the same domain as the application.
+- Images hosted on different domains will not be rendered, unless permissive [Cross-Origin HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image) are provided by the server. Similarly, fonts might not be possible to load cross-domain. Even with the proper CORS headers, Internet Explorer 9 will not be able to load images or fonts from another domain, and could raise an uncatchable security exception. If you need to support Internet Explorer 9, make sure to host images and fonts on the same domain as the application.
 - Images will not be exported in IE if their source is an SVG document. These are considered to be tainted.
 - Exporting might not work when loading the page from a local file (`file://` protocol) due to CORS restrictions.
 - The content of the `<iframe>` and `<svg>` elements is not rendered.
