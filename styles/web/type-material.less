@@ -3887,3 +3887,58 @@ div.k-scheduler-marquee:after {
 }
 
 @spreadsheet-page-orientation-border-color: @widget-border-color;
+
+/* Dialog */
+
+.k-dialog {
+    .k-content {
+        border-bottom-right-radius: @border-radius;
+        border-bottom-left-radius: @border-radius;
+    }
+    &.k-dialog-titleless .k-content {
+        border-top-right-radius: @border-radius;
+        border-top-left-radius: @border-radius;
+    }
+    .k-window-titlebar {
+        border-width: 0;
+        .k-dialog-title {
+            color: @normal-text-color;
+        }
+    }
+    .k-header {
+        background: none;
+    }
+    &.k-alert .k-window-titlebar,
+    &.k-confirm .k-window-titlebar,
+    &.k-prompt .k-window-titlebar {
+        .k-dialog-title {
+            color: @normal-text-color;
+        }
+        border-bottom: none;
+    }
+    .k-dialog-buttongroup {
+        width: 100%;
+        .k-button {
+            display: inline-block;
+            padding: 1.5em 1em 1.5em 1em;
+            border-radius: 0;
+            border-bottom: 0;
+            border-width: 1px 0 0 1px;
+            background: none;
+            border-color: @drop-down-border-color;
+            box-shadow: none;
+            &.k-primary {
+                color: @selected-background;
+                background: none;
+            }
+        }
+        li.k-button:first-child {
+        border-bottom-left-radius: @border-radius;
+        border-left: 0;
+        }
+        li.k-button:last-child {
+            border-bottom-right-radius: @border-radius;
+            border-right: 0;
+        }
+    }
+}
