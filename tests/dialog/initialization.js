@@ -6,7 +6,9 @@
         },
         afterEach: function() {
             QUnit.fixture.closest("body").find(".dialog").each(function(idx, element) {
-                $(element).data("kendoDialog").destroy();
+                removeMocksIn(kendo.ui.Dialog.fn);
+                var dialog = $(element).data("kendoDialog");
+                dialog.destroy();
             });
             QUnit.fixture.closest("body").find(".k-overlay").remove();
         }
@@ -248,5 +250,14 @@
 
         equal($("#before").attr("aria-hidden"), "true");
         equal($("#after").attr("aria-hidden"), null);
+    });
+
+    test("focuses visible modal dialog on init", function() {
+        var dialogNode = $("<div class='dialog'></div>").appendTo(QUnit.fixture);
+        mockFunc(kendo.ui.Dialog.fn, "_focus", function(node) {
+            console.log(node);
+            equal(node, dialogNode[0]);
+        });
+        var dialog = createDialog({ modal: true, visible: true }, dialogNode);
     });
 })();

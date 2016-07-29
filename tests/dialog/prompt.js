@@ -30,7 +30,7 @@
         ok(wrapperChildren.eq(3).children().eq(1).is(".k-button"));
     });
 
-    test("focuses the OK button on first show", function() {
+    test("focuses the textbox on first show", function() {
         mockFunc(kendo.ui.Prompt.fn, "_focus", function(node) {
             ok($(node).hasClass("k-textbox"));
         });

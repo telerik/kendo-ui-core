@@ -234,7 +234,7 @@
     test("open dialog focuses the content", function() {
         var dialog = createDialog({ visible: false });
         mockFunc(dialog, "_focus", function(node) {
-            equal(node, dialog.element);
+            equal(node, dialog.element[0]);
         });
         dialog.open();
     });
