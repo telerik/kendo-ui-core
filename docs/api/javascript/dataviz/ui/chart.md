@@ -12476,11 +12476,11 @@ The supported values are:
     });
     </script>
 
-### series.markers.visible `Boolean|Function` *(default: false)*
+### series.markers.visible `Boolean|Function` *(default: true)*
 
-If set to `true` the chart will display the series markers. By default chart series markers are not displayed.
+If set to `true` the chart will display the series markers. By default chart series markers are displayed.
 
-#### Example - display the chart series markers
+#### Example - hide the chart series markers
 
     <div id="chart"></div>
     <script>
@@ -12488,7 +12488,7 @@ If set to `true` the chart will display the series markers. By default chart ser
       series: [{
         type: "line",
         markers: {
-          visible: true
+          visible: false
         },
         data: [1, 2, 3]
       }]
@@ -17912,9 +17912,9 @@ The text of the chart title. You can also set the text directly for a title with
     });
     </script>
 
-### title.visible `Boolean` *(default: false)*
+### title.visible `Boolean` *(default: true)*
 
-If set to `true` the chart will display the title. By default the title is not displayed.
+If set to `true` the chart will display the title. By default the title will be displayed.
 
 #### Example - hide the title
 
