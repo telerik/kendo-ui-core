@@ -82,6 +82,7 @@
 
                 that._createDialog();
                 wrapper = that.wrapper = element.closest(KDIALOG);
+                that._defaultFocus = element;
 
                 that._tabindex(element);
                 that._dimensions();
@@ -672,7 +673,7 @@
 
             _focusDialog: function() {
                 this._pageFocus = this._getPageFocus();
-                this._focus(this.element);
+                this._focus(this._defaultFocus);
             },
 
             _blurDialog: function() {
@@ -729,6 +730,15 @@
                 var that = this;
                 DialogBase.fn._init.call(that, element, options);
                 that.bind(HIDE, proxy(that.destroy, that));
+
+                that._defaultFocus = that._chooseEntryFocus();
+                if(that._defaultFocus && that.options.visible) {
+                    that._focusDialog();
+                }
+            },
+
+            _chooseEntryFocus: function() {
+                return this.wrapper.find(KBUTTONGROUP + " > " + KBUTTON)[0];
             },
 
             options: {
@@ -747,6 +757,7 @@
 
             options: {
                 name: "Alert",
+                modal: true,
                 actions: [{
                     text: "#= messages.okText #"
                 }]
@@ -769,6 +780,7 @@
 
             options: {
                 name: "Confirm",
+                modal: true,
                 actions: [{
                     text: "#= messages.okText #",
                     primary: true,
@@ -807,10 +819,18 @@
                 if (value) {
                     promptContainer.children(KTEXTBOX).val(value);
                 }
+
+                this._defaultFocus = this._chooseEntryFocus();
+                this._focusDialog();
+            },
+
+            _chooseEntryFocus: function() {
+                return this.wrapper.find(KTEXTBOX)[0];
             },
 
             options: {
                 name: "Prompt",
+                modal: true,
                 value: "",
                 actions: [{
                     text: "#= messages.okText #",

@@ -3,6 +3,8 @@
         teardown: function() {
             QUnit.fixture.closest("body").find(".alert").each(function(idx, element) {
                 var alertDialog = $(element).data("kendoAlert");
+                removeMocksIn(kendo.ui.Alert.fn);
+                removeMocksIn(alertDialog);
                 alertDialog.destroy();
             });
             QUnit.fixture.closest("body").find(".k-overlay").remove();
@@ -51,6 +53,21 @@
         alertDialog.open();
         alertDialog.close();
         removeMock(kendo.ui.Alert.fn, "destroy");
+    });
+
+    test("focuses the OK button on first show", function() {
+        mockFunc(kendo.ui.Alert.fn, "_focus", function(node) {
+            ok($(node).hasClass("k-button"));
+        });
+        createAlert({ visible: true });
+    });
+
+    test("open focuses the OK button", function() {
+        var dialog = createAlert({ visible: false });
+        mockFunc(dialog, "_focus", function(node) {
+            ok($(node).hasClass("k-button"));
+        });
+        dialog.open();
     });
 
     module("kendo.alert method", {

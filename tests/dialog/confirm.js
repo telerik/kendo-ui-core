@@ -3,6 +3,8 @@
         teardown: function() {
             QUnit.fixture.closest("body").find(".confirm").each(function(idx, element) {
                 var confirmDialog = $(element).data("kendoConfirm");
+                removeMocksIn(kendo.ui.Confirm.fn);
+                removeMocksIn(confirmDialog);
                 confirmDialog.destroy();
             });
             QUnit.fixture.closest("body").find(".k-overlay").remove();
@@ -25,6 +27,21 @@
         ok(wrapperChildren.eq(2).is(".k-dialog-buttongroup"));
         ok(wrapperChildren.eq(2).children().eq(0).is(".k-button"));
         ok(wrapperChildren.eq(2).children().eq(1).is(".k-button"));
+    });
+
+    test("focuses the OK button on first show", function() {
+        mockFunc(kendo.ui.Confirm.fn, "_focus", function(node) {
+            ok($(node).hasClass("k-button"));
+        });
+        createConfirm({ visible: true });
+    });
+
+    test("open focuses the OK button", function() {
+        var dialog = createConfirm({ visible: false });
+        mockFunc(dialog, "_focus", function(node) {
+            ok($(node).hasClass("k-button"));
+        });
+        dialog.open();
     });
 
     test("title is window.location.host", function() {

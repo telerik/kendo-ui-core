@@ -3,6 +3,8 @@
         teardown: function() {
             QUnit.fixture.closest("body").find(".prompt").each(function(idx, element) {
                 var promptDialog = $(element).data("kendoPrompt");
+                removeMocksIn(kendo.ui.Prompt.fn);
+                removeMocksIn(promptDialog);
                 promptDialog.destroy();
             });
             QUnit.fixture.closest("body").find(".k-overlay").remove();
@@ -26,6 +28,21 @@
         ok(wrapperChildren.eq(3).is(".k-dialog-buttongroup"));
         ok(wrapperChildren.eq(3).children().eq(0).is(".k-button"));
         ok(wrapperChildren.eq(3).children().eq(1).is(".k-button"));
+    });
+
+    test("focuses the OK button on first show", function() {
+        mockFunc(kendo.ui.Prompt.fn, "_focus", function(node) {
+            ok($(node).hasClass("k-textbox"));
+        });
+        createPrompt({ visible: true });
+    });
+
+    test("open focuses the OK button", function() {
+        var dialog = createPrompt({ visible: false });
+        mockFunc(dialog, "_focus", function(node) {
+            ok($(node).hasClass("k-textbox"));
+        });
+        dialog.open();
     });
 
     test("title is window.location.host", function() {
