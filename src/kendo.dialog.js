@@ -435,6 +435,7 @@
                         complete: proxy(that._openAnimationEnd, that)
                     });
                     wrapper.show();
+                    that._focusDialog();
                 }
 
                 return that;
@@ -516,6 +517,8 @@
                         complete: proxy(this._closeAnimationEnd, this)
                     });
                 }
+
+                this._blurDialog();
 
                 return that;
             },
@@ -665,6 +668,25 @@
                 that.options.content = html;
 
                 return that;
+            },
+
+            _focusDialog: function() {
+                this._pageFocus = this._getPageFocus();
+                this._focus(this.element);
+            },
+
+            _blurDialog: function() {
+                var pageFocus = this._pageFocus;
+
+                pageFocus && this._focus(pageFocus);
+            },
+
+            _focus: function(node) {
+                node.focus();
+            },
+
+            _getPageFocus: function() {
+                return document.activeElement;
             },
 
             events: [

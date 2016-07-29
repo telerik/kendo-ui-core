@@ -231,6 +231,27 @@
         ok(dialog.wrapper.css(ZINDEX) > dialog1.wrapper.css(ZINDEX));
     });
 
+    test("open dialog focuses the content", function() {
+        var dialog = createDialog({ visible: false });
+        mockFunc(dialog, "_focus", function(node) {
+            equal(node, dialog.element);
+        });
+        dialog.open();
+    });
+
+    test("close restores focus back to the previous element", function () {
+        var dialog = createDialog({ visible: false });
+        var pageBtn = $("<button id='pageBtn'>Button</button>");
+        QUnit.fixture.append(pageBtn);
+        pageBtn.focus();
+        dialog.open();
+        mockFunc(dialog, "_focus", function(node) {
+            equal(node, pageBtn[0]);
+        });
+
+        dialog.close();
+    });
+
     test("clicking on a button triggers action method", function() {
         var dialog = createDialog({
             actions: [{
