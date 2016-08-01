@@ -7,9 +7,9 @@ slug: howto_loadmarkers_map
 
 # Load Markers For Visible Area
 
-The example below demonstrates how to filter the data for a marker layer on a Kendo UI Kendo UI Map depending on the visible area.
+The example below demonstrates how to filter the data for a marker layer depending on the visible area of a Kendo UI Map.
 
-###### Example - Filter Markers
+###### Example
 
 ```html
 <div id="map"></div>

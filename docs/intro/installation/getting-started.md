@@ -26,8 +26,8 @@ Once you [download any of the Kendo UI bundles](http://www.telerik.com/download/
 
 |FOLDERS 						|CONTENTS |
 |:---								|:---			|
-|`/apptemplates`				|Contains standalone starter templates. Although they are static HTML files, it is recommended that you open them through a web server instead of directly from the file system. The latter approach breaks all Ajax data requests.|
-|`/examples`				|The folder accommodates the quick-start demo files. Although they are static HTML files, it is recommended that you open them through a web server instead of directly from the file system. The latter approach breaks all Ajax data requests.|
+|`/apptemplates`		|The folder contains standalone starter templates. Although they are static HTML files, it is recommended that you open them through a web server instead of directly from the file system. The latter approach breaks all Ajax data requests.|
+|`/examples`				|Accommodates the quick-start demo files. Although they are static HTML files, it is recommended that you open them through a web server instead of directly from the file system. The latter approach breaks all Ajax data requests.|
 |`/js`							|Contains the minified JavaScript files.|
 |`/src`							|Holds the source code files. Note that it is _not_ available in the trial version.|
 |`/styles`					|Consists of the minified CSS files and theme images. The folder also includes the LESS files, which can be passed to the compiler, located on the first-level folders inside `styles/folder: styles/web/` and `styles/mobile/`. Note that the LESS files are _not_ available in the trial version.|
