@@ -272,6 +272,9 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
 if (kendo.ui.FilterMultiCheck) {
 kendo.ui.FilterMultiCheck.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
+  "checkAll": "Alle auswählen",
+  "clear": "Löschen",
+  "filter": "Filtern",
   "search": "Suchen"
 });
 }
