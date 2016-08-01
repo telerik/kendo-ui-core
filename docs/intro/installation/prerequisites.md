@@ -67,7 +67,7 @@ As of the Kendo UI 2014 Q2 release, Kendo UI widgets support [AngularJS](https:/
 
 > **Important**
 >
-> Using AngularJS 1.5* is not recommended because [Kendo UI widgets with `ng-model` directives do not reflect the model value]({% slug common_issues_support_angularjs %}#widgets-with-ng-model-directives-reflect-no-model-value).
+> Using AngularJS 1.5* is recommended only with the Kendo UI `k-ng-model` directive, because [the `ng-model` directive does not reflect the model value]({% slug common_issues_support_angularjs %}#widgets-with-ng-model-directives-reflect-no-model-value).
 
 ## Other
 
