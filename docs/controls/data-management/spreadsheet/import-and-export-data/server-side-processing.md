@@ -10,7 +10,7 @@ position: 4
 
 The native data format for the Spreadsheet widget is [JSON]({% slug loadand_saveas_json_spreadsheet_widget %}). There is also the built-in support for [exporting to Excel]({% slug export_toexcel_spreadsheet_widget %}) that runs in the browser.
 
-For anything beyond that, Kendo UI ships a .NET based server-side module established on [Telerik RadSpreadProcessing](http://docs.telerik.com/devtools/wpf/controls/radspreadprocessing/overview), part of [Telerik Document Processing by Progress](http://docs.telerik.com/devtools/document-processing/introduction).
+For anything beyond that, Kendo UI ships a .NET based server-side module established on [Telerik RadSpreadProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview), part of [Telerik Document Processing by Progress](http://docs.telerik.com/devtools/document-processing/introduction).
 
 It allows importing, exporting, and processing data from various formats:
 
