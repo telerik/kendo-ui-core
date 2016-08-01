@@ -10,7 +10,7 @@ Represents the Kendo UI Dialog. Inherits from [Widget](/api/javascript/ui/widget
 
 ## Configuration
 
-### actions `Array` *(default: [])*
+### actions `Array`
 
 A collection of objects containing text, action and primary attributes used to specify the dialog buttons.
 #### Example
@@ -18,18 +18,70 @@ A collection of objects containing text, action and primary attributes used to s
     <div id="dialog"></div>
     <script>
         $("#dialog").kendoDialog({
-        actions: [{
-            text: "OK",
-            action: function(e){
-                // e.sender is a refference to the dialog widget object
-                // OK action was clicked
-                // Returning false will prevent the closing of the dialog
-                return false;
-            },
-            primary: true
-        },{
-            text: "Cancel"
-        }]
+          actions: [{
+              text: "OK",
+              action: function(e){
+                  // e.sender is a reference to the dialog widget object
+                  // OK action was clicked
+                  // Returning false will prevent the closing of the dialog
+                  return false;
+              },
+              primary: true
+          },{
+              text: "Cancel"
+          }]
+        });
+    </script>
+
+### actions.text `String`
+
+The text to be shown in the action's button.
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+        $("#dialog").kendoDialog({
+          actions: [{
+              text: "OK",
+          }]
+        });
+    </script>
+
+### actions.action `Function`
+
+The callback function to be called after pressing the action button. 
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+        $("#dialog").kendoDialog({
+          actions: [{
+              text: "OK",
+              action: function(e){
+                  // e.sender is a reference to the dialog widget object
+                  alert("OK action was clicked");
+                  // Returning false will prevent the closing of the dialog
+                  return true;
+              },
+          }]
+        });
+    </script>
+
+### actions.primary `Boolean`
+
+A boolean property indicating whether teh action button will be decorated as primary button or not. 
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+        $("#dialog").kendoDialog({
+          actions: [{
+              text: "OK",
+              primary: true
+          }]
         });
     </script>
 
