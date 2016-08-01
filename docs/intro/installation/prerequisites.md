@@ -57,9 +57,9 @@ As of the Kendo UI 2014 Q2 release, Kendo UI widgets support [AngularJS](https:/
 
 | Major Releases												           | AngularJS Version     | Comments  |
 | :---															               | :---			       	     | :---	     |
-| [Kendo UI 2016.2.504 (R2 2016)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q2-2016) |1.4*, 1.5*|Kendo UI provides [limited support for AngularJS 1.5*]({% slug common_issues_support_angularjs %}#widgets-with-ng-model-directives-reflect-no-model-value). |
-| [Kendo UI 2016.1.112 (Q1 2016)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q1-2016) |1.4*, 1.5*|Kendo UI provides [limited support for AngularJS 1.5*]({% slug common_issues_support_angularjs %}#widgets-with-ng-model-directives-reflect-no-model-value). |
-| [Kendo UI 2015.3.930 (Q3 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2015)		      |1.4*, 1.5*|Kendo UI provides [limited support for AngularJS 1.5*]({% slug common_issues_support_angularjs %}#widgets-with-ng-model-directives-reflect-no-model-value). |
+| [Kendo UI 2016.2.504 (R2 2016)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q2-2016) |1.4*, 1.5*|Kendo UI provides [limited `ngModel` support]({% slug common_issues_support_angularjs %}#widgets-with-ng-model-directives-reflect-no-model-value) for AngularJS 1.5*. |
+| [Kendo UI 2016.1.112 (Q1 2016)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-q1-2016) |1.4*, 1.5*|Kendo UI provides [limited `ngModel` support]({% slug common_issues_support_angularjs %}#widgets-with-ng-model-directives-reflect-no-model-value) for AngularJS 1.5*. |
+| [Kendo UI 2015.3.930 (Q3 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2015)		      |1.4*, 1.5*|Kendo UI provides [limited `ngModel` support]({% slug common_issues_support_angularjs %}#widgets-with-ng-model-directives-reflect-no-model-value) for AngularJS 1.5*. |
 | [Kendo UI 2015.2.624 (Q2 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q2-2015)		      |1.3.16|- |
 | [Kendo UI 2015.1.318 (Q1 2015)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q1-2015)		      |1.3.0 |- |
 | [Kendo UI 2014.3.1119 (Q3 2014)](http://www.telerik.com/support/whats-new/kendo-ui/release-history/q3-2014)		      |1.3.0 |- |
