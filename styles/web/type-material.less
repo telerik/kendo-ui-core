@@ -3917,28 +3917,48 @@ div.k-scheduler-marquee:after {
         border-bottom: none;
     }
     .k-dialog-buttongroup {
-        width: 100%;
-        .k-button {
-            display: inline-block;
-            padding: 1.5em 1em 1.5em 1em;
-            border-radius: 0;
-            border-bottom: 0;
-            border-width: 1px 0 0 1px;
-            background: none;
-            border-color: @drop-down-border-color;
-            box-shadow: none;
-            &.k-primary {
-                color: @selected-background;
+        &.k-dialog-button-layout-stretched {
+            width: 100%;
+            .k-button {
+                display: inline-block;
+                padding: 1.5em 1em 1.5em 1em;
+                border-radius: 0;
+                border-bottom: 0;
+                border-width: 1px 0 0 1px;
                 background: none;
+                border-color: @drop-down-border-color;
+                box-shadow: none;
+                &.k-primary {
+                    color: @selected-background;
+                }
+            }
+            li.k-button:first-child {
+            border-bottom-left-radius: @border-radius;
+            border-left: 0;
+            }
+            li.k-button:last-child {
+                border-bottom-right-radius: @border-radius;
+                border-right: 0;
             }
         }
-        li.k-button:first-child {
-        border-bottom-left-radius: @border-radius;
-        border-left: 0;
-        }
-        li.k-button:last-child {
-            border-bottom-right-radius: @border-radius;
-            border-right: 0;
+        &.k-dialog-button-layout-normal {
+            width: auto;
+            margin: 0;
+            padding: 1em;
+            text-align: right;
+            .k-button {
+                margin-left: 0.5em;
+                background: none;
+                border: none;
+                border-radius: 0;
+                box-shadow: none;
+                &:first-child {
+                    margin-left: 0;
+                }
+                &.k-primary {
+                    color: @selected-background;
+                }
+            }
         }
     }
 }

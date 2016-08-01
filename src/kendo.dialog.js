@@ -890,7 +890,8 @@
                 "</div>"
             ),
             close: template("<a role='button' href='\\#' class='k-dialog-action k-link' aria-label='Close' tabindex='-1'><span class='k-icon k-i-close'>#= messages.close #</span></a>"),
-            actionbar: "<ul class='k-dialog-buttongroup' role='toolbar' />",
+            actionbar: "<ul class='k-dialog-buttongroup k-dialog-button-layout-stretched' role='toolbar' />",
+            //actionbar: "<ul class='k-dialog-buttongroup k-dialog-button-layout-normal' role='toolbar' />",
             overlay: "<div class='k-overlay' />",
             alert: "<div style='display: none;' />",
             confirm: "<div style='display: none;' />",

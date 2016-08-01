@@ -2112,21 +2112,35 @@ html .km-pane-wrapper .km-widget,
         border-top-left-radius: @border-radius;
     }
     .k-dialog-buttongroup {
-        width: 100%;
-        .k-button {
-            display: inline-block;
-            padding: 0.9em 0 0.9em 0;
-            border-radius: 0;
-            border-bottom: 0;
-            border-width: 1px 0 0 1px;
+        &.k-dialog-button-layout-stretched {
+            width: 100%;
+            .k-button {
+                display: inline-block;
+                padding: 1em 0 1em 0;
+                border-radius: 0;
+                border-bottom: 0;
+                border-width: 1px 0 0 1px;
+            }
+            li.k-button:first-child {
+            border-bottom-left-radius: @border-radius;
+            border-left: 0;
+            }
+            li.k-button:last-child {
+                border-bottom-right-radius: @border-radius;
+                border-right: 0;
+            }
         }
-        li.k-button:first-child {
-        border-bottom-left-radius: @border-radius;
-        border-left: 0;
-        }
-        li.k-button:last-child {
-            border-bottom-right-radius: @border-radius;
-            border-right: 0;
+        &.k-dialog-button-layout-normal {
+            width: auto;
+            margin: 0;
+            padding: 1em;
+            text-align: right;
+            .k-button {
+                margin-left: 0.5em;
+                &:first-child {
+                    margin-left: 0;
+                }
+            }
         }
     }
 }
