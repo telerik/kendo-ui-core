@@ -1,17 +1,19 @@
 ---
 title: Expand to Content
 page_title: Expand to Content | Kendo UI Splitter
-description: "Learn how to expand the Kendo UI Splitter based on the content's height."
+description: "Learn how to expand the Kendo UI Splitter based on the height of the content."
 slug: howto_expandtocontent_splitter
 ---
 
 # Expand to Content
 
-This article demonstrates how to make the Kendo UI Splitter expand its height based on the content inside a pane.
+The example below demonstrates how to make the Kendo UI Splitter expand its height based on the content inside a pane.
 
-1. Based on the [Expand to 100% Height and Auto-Resize]({%slug howto_expandto100heightandautoresize_splitter%}), you should first setup Kendo Splitter tp expand to its parent height;
-2. Then, you should make sure that the content parent is resized when the pane's content is rendered;
-3. Finally, calling the `resize` method will take care of the rest.
+To achieve this, take the following notable steps:
+
+1. Set up the Kendo UI Splitter to expand to the height of its parent according to the article on how to [expand to 100% height and auto-resize]({% slug howto_expandto100heightandautoresize_splitter %}).
+2. Make sure that the parent content is resized when the content of the pane is rendered.
+3. Call the `resize` method to finalize the process.
 
 ###### Example
 
