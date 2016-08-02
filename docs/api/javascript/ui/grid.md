@@ -2475,7 +2475,7 @@ which field to update. The other option is to use [MVVM](/framework/mvvm/overvie
     <script id="popup-editor" type="text/x-kendo-template">
       <h3>Edit Person</h3>
       <p>
-        <label>Name:<input data-bind="valueu:name" /></label>
+        <label>Name:<input data-bind="value:name" /></label>
       </p>
       <p>
         <label>Age:<input data-role="numerictextbox" data-bind="value:age" /></label>
@@ -8169,7 +8169,7 @@ If invoked prevents the data bind action. The table rows will remain unchanged a
 
 ##### e.action `String`
 
-The action that caused the dataBinding event. Possible values: `rebind`, `sync`, `add`, `remove`. 
+The action that caused the dataBinding event. Possible values: `rebind`, `sync`, `add`, `remove`.
 
 ##### e.index `Number`
 
