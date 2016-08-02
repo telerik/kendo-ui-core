@@ -6414,7 +6414,6 @@ The fields which can be used in the template are:
 *   series - the data series.
 *   value - the point value. (only for donut and pie charts)
 *   percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
-*   dataItem - the original data item used to construct the point.
 
 > The text can be split into multiple lines by using line feed characters ("\n").
 
@@ -11189,6 +11188,7 @@ The available argument fields are:
 * value - the point value.
 * sender - the chart instance.
 * series - the point series.
+* stackValue - the cumulative point value on the stack. Available only for stackable series.
 * percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
 * runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
@@ -11767,6 +11767,7 @@ The fields which can be used in the template are:
 * dataItem - the original data item used to construct the point. Will be null if binding to array.
 * percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
 * series - the data series
+* stackValue - the cumulative point value on the stack. Available only for stackable series.
 * value - the point value. Can be a number or object containing each bound field.
 * runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
@@ -14166,6 +14167,7 @@ A function that can be used to create a custom visual for the points. Applicable
 * category - the point category.
 * dataItem - the point dataItem.
 * value - the point value.
+* stackValue - the cumulative point value on the stack. Available only for stackable series.
 * sender - the chart instance.
 * series - the point series.
 * percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
@@ -33962,6 +33964,10 @@ The series name
 
 The series data points
 
+##### e.stackValue `Object`
+
+The cumulative point value on the stack. Available only for stackable series.
+
 ##### e.value `Object`
 
 The data point value.
@@ -34066,6 +34072,10 @@ The series name
 ##### e.series.data `Array`
 
 The series data points
+
+##### e.stackValue `Object`
+
+The cumulative point value on the stack. Available only for stackable series.
 
 ##### e.value `Object`
 
