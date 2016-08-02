@@ -26,6 +26,19 @@ slug: breakingchanges2016_kendoui
 
 * **Validator**: The email validation rule has been changed to match the [HTML5 specification suggests for browsers to use](https://html.spec.whatwg.org/multipage/forms.html#valid-e-mail-address). If the previous behavior is required, the email validation rule should be overridden by [specifying a custom rule](/controls/editors/validator/overview#custom-rules-for-validation) with the `email` key.
 
+* **Chart**: 100% stacked series will be clipped by default. See [the related issue](https://github.com/telerik/kendo-ui-core/issues/1699) for a discussion.
+
+To get the old behavior back you have to disable clipping on the pane:
+
+```
+    $("#chart").kendoChart({
+      ...
+      panes: [{
+        clip: false
+      }]
+    });
+```
+
 ### Changes from 2016 R2
 
 #### Breaking Changes
