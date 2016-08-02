@@ -9,6 +9,21 @@ previous_url: /api/introduction
 
 ## Methods
 
+### alert
+Opens a [Kendo UI Alert](/api/javascript/ui/alert) popup. Similar to the native [window.alert()](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) method.
+
+#### Example - Open a Kendo UI Alert on the page
+
+    <script>
+        kendo.alert("This is an alert popup!");
+    </script>
+
+#### Parameters
+
+##### text `String`
+
+The text to be shown in the Alert popup. 
+
 ### antiForgeryTokens
 Returns an object that contains common
 [CSRF tokens](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)_Prevention_Cheat_Sheet)
@@ -168,6 +183,32 @@ Creates an ObservableArray instance that is bound to a HierarchicalDataSource. R
 ##### array `Array`
 
 The array that will be converted to an ObservableArray.
+
+### confirm
+Opens a [Kendo UI Confirm](/api/javascript/ui/confirm) popup. Similar to the native [window.confirm()](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) method.
+
+`kendo.confirm` method is designed by following the Promise pattern. That means that it returns you a jQuery Deferred object that resolves to: 
+
+* `done()` - when user has pressed the "OK" button;
+* `fail()` - when user has pressed the "Cancel" button.
+
+#### Example - Open a Kendo UI Confirm on the page
+
+    <script>
+        kendo.confirm("Confirm text")
+            .done(function(){
+                console.log("User accepted");
+            })
+            .fail(function(){
+                console.log("User rejected");
+            });
+    </script>
+
+#### Parameters
+
+##### text `String`
+
+The text to be shown in the Confirm popup. 
 
 ### culture
 
@@ -372,6 +413,38 @@ If you pass `true` then this function will return `undefined` rather than throwi
 #### Returns
 
 `kendo.Color` A Color object.
+
+### prompt
+Opens a [Kendo UI Prompt](/api/javascript/ui/prompt) popup. Similar to the native [window.prompt()](https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt) method.
+
+`kendo.prompt` method is designed by following the Promise pattern. That means that it returns you a jQuery Deferred object that resolves to: 
+
+* `done()` - when user has pressed the "OK" button and the `data` passed to the callback is the inputted text;
+* `fail()` - when user has pressed the "Cancel" button and the `data` passed to the callback is the inputted text.
+
+#### Example - Open a Kendo UI Prompt on the page
+
+    <script>
+        kendo.prompt("Prompt text", "Default input text")
+            .done(function(data){
+                console.log("User accepted with text: " + data);
+            })
+            .fail(function(data){
+                console.log("User rejected with text: " + data);
+            });
+    </script>
+
+#### Parameters
+
+##### text `String`
+
+The text to be shown in the Prompt popup. 
+
+#### Parameters
+
+##### defaultValue `String`
+
+The default value that will be shown in the popup's input.
 
 ### proxyModelSetters
 
