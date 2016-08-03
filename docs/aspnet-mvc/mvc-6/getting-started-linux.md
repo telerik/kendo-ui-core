@@ -17,7 +17,7 @@ This article demonstrates how to configure an ASP.NET Core MVC project that enab
 
 ## Prerequisites
 
-Make sure you install the [Microsoft ASP.NET (RC1)](http://docs.asp.net/en/latest/getting-started/installing-on-linux.html).
+Make sure you install the [Microsoft ASP.NET](http://docs.asp.net/en/latest/getting-started/installing-on-linux.html).
 
 ## Configuration
 
@@ -260,7 +260,7 @@ Now that all is done, you can see the sample page.
 
 Other articles on Telerik UI for ASP.NET MVC in ASP.NET Core MVC applications:
 
-* [Overview of Telerik UI for ASP.NET Core MVC - RC1]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Overview of Telerik UI for ASP.NET Core MVC]({% slug overview_aspnetmvc6_aspnetmvc %})
 * [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core MVC Projects]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
 * [Known Issues with Telerik UI for ASP.NET Core MVC]({% slug knownissues_aspnetmvc6_aspnetmvc %})
 * [Tag Helpers for ASP.NET Core MVC]({% slug taghelpers_aspnetmvc6_aspnetmvc %})
