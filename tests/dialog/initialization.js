@@ -209,6 +209,13 @@
         equal(dialog.wrapper.find(".k-button").attr("tabindex"), 10);
     });
 
+    test("dialog aria-labelledby points to the titlebar", function() {
+        var dialog = createDialog({visible: true});
+        var wrapper = dialog.wrapper;
+
+        equal(wrapper.attr("aria-labelledby"), wrapper.find(".k-window-titlebar").attr("id"));
+    });
+
     module("accessible modality", {
         beforeEach: $.noop,
         afterEach: function() {

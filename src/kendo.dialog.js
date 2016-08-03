@@ -288,6 +288,7 @@
                     content = that.element,
                     options = that.options,
                     titlebar = $(templates.titlebar(options)),
+                    titleId = (content.id || kendo.guid()) + "_title",
                     wrapper = $(that.wrapperTemplate(options));
 
                 content.addClass(KCONTENTCLASS);
@@ -299,6 +300,8 @@
 
                 if (options.title !== false) {
                     wrapper.append(titlebar);
+                    titlebar.attr("id", titleId);
+                    wrapper.attr("aria-labelledby", titleId);
                 } else {
                     wrapper.addClass(KTITLELESS);
                 }
