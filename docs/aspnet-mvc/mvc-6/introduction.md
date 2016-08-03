@@ -7,7 +7,7 @@ slug: overview_aspnetmvc6_aspnetmvc
 position: 1
 ---
 
-# Overview of Telerik UI for ASP.NET Core MVC - RC1
+# Overview of Telerik UI for ASP.NET Core MVC
 
 This article demonstrates how to use Telerik UI for ASP.NET MVC in ASP.NET Core MVC applications.
 
