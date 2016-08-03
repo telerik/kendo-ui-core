@@ -28,6 +28,12 @@
         ok(wrapperChildren.eq(2).children().eq(0).is(".k-button"));
     });
 
+    test("alert has wai-aria role='alertdialog'", function() {
+        var alertDialog = createAlert();
+
+        equal(alertDialog.wrapper.attr("role"), "alertdialog");
+    });
+
     test("title is window.location.host", function() {
         var alertDialog = createAlert();
         var host = window.location.host;

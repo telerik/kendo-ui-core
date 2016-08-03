@@ -81,6 +81,10 @@
                     options.visible = element.is(VISIBLE);
                 }
 
+                if (that.wrapperTemplate === undefined) {
+                    that.wrapperTemplate = templates.wrapper;
+                }
+
                 that._createDialog();
                 wrapper = that.wrapper = element.closest(KDIALOG);
 
@@ -284,7 +288,7 @@
                     content = that.element,
                     options = that.options,
                     titlebar = $(templates.titlebar(options)),
-                    wrapper = $(templates.wrapper(options));
+                    wrapper = $(that.wrapperTemplate(options));
 
                 content.addClass(KCONTENTCLASS);
                 that.appendTo.append(wrapper);
@@ -744,6 +748,7 @@
         var PopupBox = DialogBase.extend({
             _init: function(element, options) {
                 var that = this;
+                that.wrapperTemplate = templates.alertWrapper;
                 options._defaultFocus = null;
                 DialogBase.fn._init.call(that, element, options);
                 that.bind(HIDE, proxy(that.destroy, that));
@@ -831,7 +836,7 @@
 
             _createPrompt: function() {
                 var value = this.options.value,
-                    promptContainer = $(templates.prompt).insertAfter(this.element);
+                    promptContainer = $(templates.promptInputContainer).insertAfter(this.element);
 
                 if (value) {
                     promptContainer.children(KTEXTBOX).val(value);
@@ -873,7 +878,7 @@
         kendo.ui.plugin(Prompt);
 
         var kendoPrompt = function(text, value) {
-            var promptDialog = $(templates.promptElement).kendoPrompt({
+            var promptDialog = $(templates.prompt).kendoPrompt({
                 content: text,
                 value: value
             }).data("kendoPrompt").open();
@@ -893,10 +898,11 @@
             actionbar: "<ul class='k-dialog-buttongroup k-dialog-button-layout-stretched' role='toolbar' />",
             //actionbar: "<ul class='k-dialog-buttongroup k-dialog-button-layout-normal' role='toolbar' />",
             overlay: "<div class='k-overlay' />",
-            alert: "<div style='display: none;' />",
-            confirm: "<div style='display: none;' />",
-            promptElement: "<div style='display: none;' />",
-            prompt: "<div class='k-prompt-container'><input type='text' class='k-textbox' /></div>"
+            alertWrapper: template("<div class='k-widget k-dialog k-window' role='alertdialog' />"),
+            alert: "<div />",
+            confirm: "<div />",
+            prompt: "<div />",
+            promptInputContainer: "<div class='k-prompt-container'><input type='text' class='k-textbox' /></div>"
         };
 
         var tabKeyTrapNS = "kendoTabKeyTrap";
