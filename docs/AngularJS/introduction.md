@@ -148,9 +148,9 @@ The data-bound container widgets may have their template options specified as ne
   <div kendo-list-view k-data-source="source">
     <!-- the template (including the div tag itself) here will be assigned as a string to the `template` configuration option of the listview widget -->
     <div class="product" k-template>
-        <img ng-src="http://demos.telerik.com/kendo-ui/content/web/foods/{% raw %} {{dataItem.ProductID}} {% endraw %}.jpg" alt=" {% raw %} {{dataItem.ProductName}} {% endraw %} image" />
-        <h3>{% raw %} {{ dataItem.ProductName }} {% endraw %}</h3>
-        <p>{% raw %} {{ dataItem.UnitPrice | currency:"USD$":0 }} {% endraw %}</p>
+        <img ng-src="http://demos.telerik.com/kendo-ui/content/web/foods/{% raw %}{{dataItem.ProductID}}{% endraw %}.jpg" alt="{% raw %}{{dataItem.ProductName}}{% endraw %} image" />
+        <h3>{% raw %}{{ dataItem.ProductName }}{% endraw %}</h3>
+        <p>{% raw %}{{ dataItem.UnitPrice | currency:"USD$":0 }}{% endraw %}</p>
     </div>
   </div>
 </div>
@@ -193,9 +193,9 @@ AngularJS provides built-in form validation functionality, however `k-ng-model` 
    <form name="myForm">
      <input kendo-numeric-text-box="kntb2" k-min="0" k-max="100" k-ng-model="value2">
      <br><br>
-     Dirty: {% raw %} {{myForm.$dirty}} {% endraw %}
+     Dirty: {% raw %}{{myForm.$dirty}}{% endraw %}
      <br />
-     Pristine: {% raw %} {{myForm.$pristine}} {% endraw %}
+     Pristine: {% raw %}{{myForm.$pristine}}{% endraw %}
    </form>
 </div>
 <script>
@@ -223,7 +223,7 @@ For all widgets which provide a `value()` method you can use the standard `ng-mo
 <div ng-app="app" ng-controller="MyCtrl">
   <label>Birthday: <input kendo-date-picker ng-model="birthday" /></label>
   <p>
-    Your selection: {% raw %} {{ birthday }} {% endraw %}
+    Your selection: {% raw %}{{ birthday }}{% endraw %}
   </p>  
 </div>
 <script>
@@ -246,7 +246,7 @@ If you need to get the actual `widget.value()` you can use `k-ng-model`.
 <div ng-app="app" ng-controller="MyCtrl">
   <label>Birthday: <input kendo-date-picker k-ng-model="birthday" /></label>
   <p>
-    Your selection: {% raw %} {{ birthday }} {% endraw %}
+    Your selection: {% raw %}{{ birthday }}{% endraw %}
   </p>
 </div>
 <script>
@@ -277,7 +277,7 @@ Setting the `k-value-primitive` to `false` will force the widget to accept or re
 <div ng-app="app" ng-controller="MyCtrl">
     <h4>Select product</h4>
     <select kendo-multi-select k-options="selectOptions" k-ng-model="selectedIds" k-value-primitive="false"></select>
-    <p ng-show="selectedIds.length"><br />Selected: {% raw %} {{ selectedIds }} {% endraw %}</p>
+    <p ng-show="selectedIds.length"><br />Selected: {% raw %}{{ selectedIds }}{% endraw %}</p>
 </div>
 <script>
   angular.module("app", [ "kendo.directives" ]).controller("MyCtrl", function($scope){
@@ -310,7 +310,7 @@ In this scenario, when `k-value-primitive` is set to `true`, you can pass an arr
 <div ng-app="app" ng-controller="MyCtrl">
     <h4>Select product</h4>
     <select kendo-multi-select k-options="selectOptions" k-ng-model="selectedIds" k-value-primitive="true"></select>
-    <p ng-show="selectedIds.length"><br />Selected: {% raw %} {{ selectedIds }} {% endraw %}</p>
+    <p ng-show="selectedIds.length"><br />Selected: {% raw %}{{ selectedIds }}{% endraw %}</p>
 </div>
 <script>
   angular.module("app", [ "kendo.directives" ]).controller("MyCtrl", function($scope){
@@ -674,7 +674,7 @@ The best solution in this case would be for you to use a separate `controller` t
            k-resizable="false" k-height="200" k-visible="false">
 
         <div ng-controller="Popup">
-          <span>Selected: {% raw %} {{dataview.DataSourceID}} {% endraw %} </span>
+          <span>Selected: {% raw %}{{dataview.DataSourceID}}{% endraw %} </span>
           <select kendo-drop-down-list style="width:230px;"
                   ng-model="dataview.DataSourceID"
                   k-data-text-field="'Name'"
