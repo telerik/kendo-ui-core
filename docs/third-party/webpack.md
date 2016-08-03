@@ -90,10 +90,10 @@ Once the scripts are available and present in your project directory, the Webpac
 var path = require('path')
 module.exports = {
     resolve: {
-        extensions: [ '', '.js', 'min.js' ],
+        extensions: [ '', '.js', '.min.js' ],
         root: [
             path.resolve('.'),
-            path.resolve('../kendo/dist/js/') // the path to the minified scripts
+            path.resolve('../kendo/dist/js/') // the path to the minified scripts, if you want to use some widgets like treeview which define 'util/main' as deps, you have to use src js files
         ]
     },
     entry: './main',
