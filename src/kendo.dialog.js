@@ -450,9 +450,7 @@
                         complete: proxy(that._openAnimationEnd, that)
                     });
                     wrapper.show();
-                    if (options.modal) {
-                        that._focusDialog();
-                    }
+
                 }
 
                 return that;
@@ -469,6 +467,9 @@
             },
 
             _openAnimationEnd: function() {
+                if (this.options.modal) {
+                    this._focusDialog();
+                }
                 this.trigger(SHOW);
             },
 
@@ -742,7 +743,7 @@
                 that.bind(HIDE, proxy(that.destroy, that));
 
                 that._defaultFocus = that._chooseEntryFocus();
-                if (that._defaultFocus && that.options.visible) {
+                if (that._defaultFocus && that.options.visible && that.options.modal) {
                     that._focusDialog();
                 }
             },
