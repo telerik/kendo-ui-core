@@ -570,6 +570,8 @@
 
             _closeAnimationEnd: function() {
                 var that = this;
+
+                that._closing = false;
                 that.wrapper.hide().css("opacity", "");
                 that.trigger(HIDE);
 
