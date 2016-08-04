@@ -666,6 +666,10 @@ This will continue until the number of intervals is less than
     });
     </script>
 
+### categoryAxis.autoBaseUnitSteps.milliseconds `Array` *(default: [1, 100, 100])*
+
+The milliseconds unit steps.
+
 ### categoryAxis.autoBaseUnitSteps.seconds `Array` *(default: [1, 2, 5, 15, 30])*
 
 The seconds unit steps.
@@ -747,6 +751,7 @@ between subsequent categories.
 The supported values are:
 
 * "fit"
+* "milliseconds"
 * "seconds"
 * "minutes"
 * "hours"
@@ -22969,6 +22974,7 @@ The background color of the axis.
 
 The base time interval for the axis labels. The default baseUnit is determined automatically from the value range. Available options:
 
+* milliseconds
 * seconds
 * minutes
 * hours
@@ -27756,6 +27762,7 @@ The background color of the axis.
 
 The base time interval for the axis labels. The default baseUnit is determined automatically from the value range. Available options:
 
+* milliseconds
 * seconds
 * minutes
 * hours
