@@ -450,7 +450,9 @@
                         complete: proxy(that._openAnimationEnd, that)
                     });
                     wrapper.show();
-                    that._focusDialog();
+                    if (options.modal) {
+                        that._focusDialog();
+                    }
                 }
 
                 return that;
@@ -532,8 +534,6 @@
                         complete: proxy(this._closeAnimationEnd, this)
                     });
                 }
-
-                this._blurDialog();
 
                 return that;
             },
@@ -686,31 +686,16 @@
             },
 
             _focusDialog: function() {
-                this._pageFocus = this._getPageFocus();
                 if (this._defaultFocus) {
                     this._focus(this._defaultFocus);
                 }
                 this._tabKeyTrap.trap();
             },
 
-            _blurDialog: function() {
-                this._tabKeyTrap.removeTrap();
-
-                var pageFocus = this._pageFocus;
-                if (pageFocus) {
-                    this._focus(pageFocus);
-                    this._pageFocus = undefined;
-                }
-            },
-
             _focus: function(node) {
                 if (node) {
                     node.focus();
                 }
-            },
-
-            _getPageFocus: function() {
-                return document.activeElement;
             },
 
             events: [
