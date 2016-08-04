@@ -7,7 +7,7 @@ slug: howto_use_crud_operationswith_mvvmbound_grid
 
 #  Use CRUD Operations when Grid Is Bound through MVVM
 
-To see the example on the remote CRUD (Create, Read, Update, Destroy) data operations using a Kendo UI Grid bound through MVVM (ASP.NET back-end), refer to the [thsi project](https://github.com/telerik/kendo-examples-asp-net/tree/master/grid-mvvm-web-service-crud). It is available in the [GitHub repository for Kendo UI examples using ASP.NET Web technologies](https://github.com/telerik/kendo-examples-asp-net).
+To see the example on the remote CRUD (Create, Read, Update, Destroy) data operations using a Kendo UI Grid bound through MVVM (ASP.NET back-end), refer to the [this project](https://github.com/telerik/kendo-examples-asp-net/tree/master/grid-mvvm-web-service-crud). It is available in the [GitHub repository for Kendo UI examples using ASP.NET Web technologies](https://github.com/telerik/kendo-examples-asp-net).
 
 ## See Also
 
