@@ -1104,7 +1104,7 @@ var __meta__ = { // jshint ignore:line
 
         var values = this.self.value().split(options.separator);
         var valuePrimitive = options.valuePrimitive;
-        var data = this.self.dataSource.data();
+        var data = this.self.listView.selectedDataItems(); //.concat(this.self.dataSource.data());
         var dataItems = [];
         for (var idx = 0, length = data.length; idx < length; idx++) {
             var item = data[idx];
