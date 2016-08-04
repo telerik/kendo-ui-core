@@ -4343,7 +4343,7 @@ The fields which can be used in the template are:
         # var resources = data.resources(); #
         # var color = resources.roomId === 1 ? "red" : "blue"; #
 
-        <span style="display:none; height:100%; background: #=color#">
+        <span style="height:100%;color:black;background-color:#:color#">
           #=kendo.toString(date, "d")#
         </span>
     </script>
@@ -7071,4 +7071,3 @@ The widget instance which fired the event.
     var scheduler = $("#scheduler").data("kendoScheduler");
     scheduler.bind("save", scheduler_save);
     </script>
-
