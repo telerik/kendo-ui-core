@@ -308,13 +308,8 @@ var __meta__ = { // jshint ignore:line
                     field: options.dataTextField,
                     ignoreCase: ignoreCase
                 });
-                this.one("close", function(){
-                    var value = that.value().split(separator).join(that._defaultSeparator());
-                    if(value && value !== '') {
-                        that.value(value);
-                    }
-                });
 
+                that.one("close", $.proxy(that._unifySeparators, that));
             }
         },
 
@@ -513,23 +508,28 @@ var __meta__ = { // jshint ignore:line
             this._placeholder();
         },
 
+        _unifySeparators: function() {
+            this._accessor(this.value().split(this._separator()).join(this._defaultSeparator()));
+            return this;
+        },
+
         _change: function() {
             var that = this;
-            var value = that.value().split(that._separator()).join(that._defaultSeparator());
+            var value = that._unifySeparators().value();
             var trigger = value !== List.unifyType(that._old, typeof value);
 
             var valueUpdated = trigger && !that._typing;
             var itemSelected = that._oldText !== value;
 
-            that.value(value);
+            that._old = value;
+            that._oldText = value;
+
             if (valueUpdated || itemSelected) {
                 // trigger the DOM change event so any subscriber gets notified
                 that.element.trigger(CHANGE);
             }
 
             if (trigger) {
-                that._old = value;
-
                 that.trigger(CHANGE);
             }
 
