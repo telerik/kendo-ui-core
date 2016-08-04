@@ -1,25 +1,19 @@
 ---
-title: Fixed-Size Pie or Donut Charts
-page_title: Fixed-Size Pie or Donut Charts | Kendo UI Charts
-description: "Learn how to create fixed-size pie or donut charts."
+title: Create Fixed-Size Pie or Donut Charts
+page_title: Create Fixed-Size Pie or Donut Charts | Kendo UI Charts
+description: "Learn how to create fixed-size Pie or Donut Kendo UI Charts."
 slug: howto_fixedsizepiedonut_charts
 ---
 
-# Fixed-Size Pie or Donut Charts
+# Create Fixed-Size Pie or Donut Charts
 
-Normally the plot area size is determined by the free space left by other chart elements - title, legend and others.
-This means that it's hard to produce pie or donut charts that have the same diameter.
+Normally, the plot area size is determined by the free space left by other chart elements such as the title, the legend, and others. This means that it is hard to produce pie or donut charts that have the same diameter.
 
-We can get around this by removing the legend from the normal element flow by setting the
-[legend position](/api/javascript/dataviz/ui/chart#configuration-legend.position) to "custom".
+To work around this issue, remove the legend from the normal element flow by setting the [legend position](/api/javascript/dataviz/ui/chart#configuration-legend.position) to `"custom"`.
 
-To make room for the legend set fixed plotArea.height for all charts and position it using
-[offsetX/offsetY](/api/javascript/dataviz/ui/chart#configuration-legend.offsetX).
+To make room for the legend, set a fixed `plotArea.height` for all charts and position it by using the [`offsetX`/`offsetY`](/api/javascript/dataviz/ui/chart#configuration-legend.offsetX) configuration options.
 
-The example below demonstrates how to store and load the axis range. Changes are detected in the
-[`drag`](/api/javascript/dataviz/ui/chart#events-drag) and
-[`zoom`](/api/javascript/dataviz/ui/chart#events-zoom) event.
-It is restored in the [`dataBound` event](/api/javascript/dataviz/ui/chart#events-dataBound).
+The example below demonstrates how to store and load the axis range. Changes are detected in the [`drag`](/api/javascript/dataviz/ui/chart#events-drag) and [`zoom`](/api/javascript/dataviz/ui/chart#events-zoom) events. The axis range is restored in the [`dataBound` event](/api/javascript/dataviz/ui/chart#events-dataBound).
 
 ###### Example
 

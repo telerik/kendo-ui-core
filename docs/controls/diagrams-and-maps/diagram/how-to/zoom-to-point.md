@@ -1,11 +1,11 @@
 ---
-title: Zoom to a Point in the Diagram
-page_title: Zoom to a Point in the Diagram | Kendo UI Diagram
+title: Zoom to Predefined Points
+page_title: Zoom to Predefined Points | Kendo UI Diagram
 description: "Learn how to programmatically zoom to a certain point in the Kendo UI Diagram."
 slug: howto_zoomtopoint_diagram
 ---
 
-# Zoom to a Point in the Diagram
+# Zoom to Predefined Points
 
 The example below demonstrates how to zoom the Diagram to a predefined point.
 
