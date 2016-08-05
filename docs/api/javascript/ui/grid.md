@@ -451,22 +451,26 @@ The JavaScript function executed when the user clicks the command button. The fu
 
 The function context (available via the `this` keyword) will be set to the grid instance.
 
+> Grid custom commands are rendered as anchors (`<a>`) with no `href` value. Prevent the click event in the click function in order to avoid shifting of the page scroll position.
+
 #### Example - handle the click event of the custom command button
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
       columns: [
         { field: "name" },
-        { command: [ {
+        { command: [{
             name: "details",
             click: function(e) {
-              // e.target is the DOM element representing the button
-              var tr = $(e.target).closest("tr"); // get the current table row (tr)
-              // get the data bound to the current table row
-              var data = this.dataItem(tr);
-              console.log("Details for: " + data.name);
+                // prevent page scroll position change
+                e.preventDefault();
+                // e.target is the DOM element representing the button
+                var tr = $(e.target).closest("tr"); // get the current table row (tr)
+                // get the data bound to the current table row
+                var data = this.dataItem(tr);
+                console.log("Details for: " + data.name);
             }
-          } ]
+          }]
        }
       ],
       dataSource: [ { name: "Jane Doe" } ]
