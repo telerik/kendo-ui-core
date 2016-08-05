@@ -19,12 +19,8 @@ Other articles and how-to examples on the Kendo UI Grid HtmlHelper:
 * [How to Display Server Validation Errors in Popup Edit Mode]({% slug howto_displayservervalidationerrors_gridaspnetmvc %})
 * [How to Do Ajax Editing with Enumeration]({% slug howto_doajaxeditingenumeration_gridaspnetmvc %})
 * [How to Do Ajax Editing with Localized Enumerations]({% slug howto_doajaxeditlcoalizedenumeration_gridaspnetmvc %})
-* [How to Do Checkboxes Batch Editing]({% slug howto_docheckboxesbatchediting_gridaspnetmvc %})
-* [How to Edit Grids with Cascading DropDownLists in In-Cell Mode]({% slug howto_editincellmodecasacdeddls_gridaspnetmvc %})
-* [How to Edit in In-Cell Batch Mode Using WebAPI Controller]({% slug howto_editincellbatchmodewebapi_gridaspnetmvc %})
-* [How to Edit Nullable Boolean Fields in In-Line Mode]({% slug howto_editnullablebooleanfields_gridaspnetmvc %})
 * [How to Edit Using ComboBoxes with Remote Binding and Filtering]({% slug howto_editusingcomboboxremotebindfilter_gridaspnetmvc %})
 * [How to Edit with Entity Framework Code First]({% slug howto_editwithentityframeworkcodefirst_gridaspnetmvc %})
 * [How to Handle Cascading DropDownLists within the Grid]({% slug howto_handleeditingcascadingddls_gridaspnetmvc %})
 
-For more runnable examples on the Kendo UI Grid HtmlHelper, browse the [how-to section of articles]({% slug howto_bindgridtodatatable_gridaspnetmvc %}).
+For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_bindgridtodatatable_gridaspnetmvc %}).
