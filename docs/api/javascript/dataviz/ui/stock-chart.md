@@ -2155,6 +2155,88 @@ The full range of values is shown if no range is specified.
 
 The lower boundary of the selected range.
 
+### navigator.select.mousewheel `Object | Boolean`
+
+The mousewheel configuration of the selection.
+
+If set to `false` the mousewheel will not update the selection.
+
+#### Example - configure the selection mousewheel behavior
+
+    <div id="stock-chart"></div>
+    <script>
+    $("#stock-chart").kendoStockChart({
+        navigator: {
+          select: {
+              from: "2012/02/01",
+              to: "2012/02/02",
+              mousewheel: {
+                reverse: true,
+                zoom: "both"
+              }
+          },
+
+          series: {
+            type: "line",
+            field: "value",
+            categoryField: "date",
+            tooltip: {
+              visible: true,
+              template: "#= value # - #= date #"
+            },
+            data: [
+              { value: 1, date: new Date(2012, 1, 1) },
+              { value: 2, date: new Date(2012, 1, 2) },
+              { value: 1, date: new Date(2012, 1, 3) }
+            ]
+          }
+        }
+    });
+
+#### Example - disable the selection mousewheel behavior
+
+    <div id="stock-chart"></div>
+    <script>
+    $("#stock-chart").kendoStockChart({
+        navigator: {
+          select: {
+              from: "2012/02/01",
+              to: "2012/02/02",
+              mousewheel: false
+          },
+
+          series: {
+            type: "line",
+            field: "value",
+            categoryField: "date",
+            tooltip: {
+              visible: true,
+              template: "#= value # - #= date #"
+            },
+            data: [
+              { value: 1, date: new Date(2012, 1, 1) },
+              { value: 2, date: new Date(2012, 1, 2) },
+              { value: 1, date: new Date(2012, 1, 3) }
+            ]
+          }
+        }
+    });
+
+### navigator.select.mousewheel.reverse `Boolean` *(default: false)*
+
+If set to `true` will reverse the mouse wheel direction. The normal direction is down for "zoom out", up for "zoom in".
+
+### navigator.select.mousewheel.zoom `String` *(default: "both")*
+
+The zoom direction.
+
+The supported values are:
+
+* "both" - zooming expands and contracts the selection both sides
+* "left" - zooming expands and contracts the selection left side only
+* "right" - zooming expands and contracts the selection right side only
+
+
 ### navigator.select.to `Date`|`String`
 
 The upper boundary of the selected range.
