@@ -528,7 +528,7 @@ var __meta__ = { // jshint ignore:line
             dateChanged;
 
             value = that._update(value);
-            dateChanged = +that._old != +value;
+            dateChanged = !kendo.calendar.isEqualDate(that._old, value);
 
             var valueUpdated = dateChanged && !that._typing;
             var textFormatted = oldValue !== that.element.val();
