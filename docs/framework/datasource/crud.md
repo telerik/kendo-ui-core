@@ -20,6 +20,8 @@ The DataSource component can work with local data or remote data. In both cases 
 
 For detailed information on the DataSource `transport`, refer to the [DataSource API documentation](/api/javascript/data/datasource#configuration-transport).
 
+> **Important:** All transport actions (read, update, create, destroy) must be defined in the same way, e.g. as functions (when using local or custom transport) or as objects (when using remote transport). Mixing the two configuration alternatives is not possible.
+
 ### Schema
 
 The DataSource `schema` has several important roles, with the most notable ones being:
