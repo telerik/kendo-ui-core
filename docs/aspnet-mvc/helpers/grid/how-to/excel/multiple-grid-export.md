@@ -27,4 +27,4 @@ Other articles and how-to examples on the Kendo UI Grid HtmlHelper:
 * [How to Format Cells during Excel Export]({% slug howto_cellformat_aspnetmvcgrid %})
 * [How to Use the Column Template]({% slug howto_columntemplatexport_aspnetmvcgrid %})
 
-For more runnable examples on the Kendo UI Grid HtmlHelper, browse the [how-to section of articles]({% slug howto_bindgridtodatatable_gridaspnetmvc %}).
+For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_bindgridtodatatable_gridaspnetmvc %}).
