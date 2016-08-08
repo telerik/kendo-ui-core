@@ -321,14 +321,19 @@
             },
 
             _createActionbar: function(wrapper) {
-                var actionbar = $(templates.actionbar);
+                var isStretchedLayout = (this.options.buttonLayout === "stretched");
+                var buttonLayout = isStretchedLayout ? "stretched" : "normal";
+                var actionbar = $(templates.actionbar({ buttonLayout: buttonLayout }));
                 this._addButtons(actionbar);
-                this._normalizeButtonSize(actionbar);
+                if(isStretchedLayout) {
+                    this._normalizeButtonSize(actionbar);
+                }
                 wrapper.append(actionbar);
             },
 
             _addButtons: function(actionbar) {
                 var that = this,
+                    o = that.options,
                     actionClick = proxy(that._actionClick, that),
                     actionKeyHandler = proxy(that._actionKeyHandler, that),
                     actions = that.options.actions,
@@ -340,14 +345,16 @@
                 for (var i = 0; i < length; i++) {
                     action = actions[i];
                     text = that._mergeTextWithOptions(action);
-                    $(templates.action(action))
+                    var btn = $(templates.action(action))
                         .autoApplyNS(NS)
                         .html(text)
-                        .css(WIDTH, buttonSize + "%")
                         .appendTo(actionbar)
                         .data("action", action.action)
                         .on("click", actionClick)
                         .on("keydown", actionKeyHandler);
+                    if(o.buttonLayout === "stretched") {
+                        btn.css(WIDTH, buttonSize + "%");
+                    }
                 }
             },
 
@@ -711,6 +718,7 @@
 
             options: {
                 title: "",
+                buttonLayout: "stretched",
                 actions: [],
                 modal: true,
                 width: null,
@@ -886,7 +894,7 @@
                 "</div>"
             ),
             close: template("<a role='button' href='\\#' class='k-dialog-action k-link' aria-label='Close' tabindex='-1'><span class='k-icon k-i-close'>#= messages.close #</span></a>"),
-            actionbar: "<ul class='k-dialog-buttongroup k-dialog-button-layout-stretched' role='toolbar' />",
+            actionbar: template("<ul class='k-dialog-buttongroup k-dialog-button-layout-#= buttonLayout #' role='toolbar' />"),
             //actionbar: "<ul class='k-dialog-buttongroup k-dialog-button-layout-normal' role='toolbar' />",
             overlay: "<div class='k-overlay' />",
             alertWrapper: template("<div class='k-widget k-dialog k-window' role='alertdialog' />"),

@@ -216,6 +216,33 @@
         equal(wrapper.attr("aria-labelledby"), wrapper.find(".k-window-titlebar").attr("id"));
     });
 
+    test("buttonLayout stretched", function() {
+        var dialog = createDialog({ buttonLayout: "stretched",
+            actions: [{ text: "a1" }, { text: "a2" }]});
+        var actionbar = dialog.wrapper.find(".k-dialog-buttongroup");
+
+        ok(actionbar.hasClass("k-dialog-button-layout-stretched"));
+        equal(actionbar.find(".k-button").get(0).style.width, "50%");
+    });
+
+    test("buttonLayout normal", function() {
+        var dialog = createDialog({ buttonLayout: "normal",
+            actions: [{ text: "a1" }, { text: "a2" }]});
+        var actionbar = dialog.wrapper.find(".k-dialog-buttongroup");
+
+        ok(actionbar.hasClass("k-dialog-button-layout-normal"));
+        equal(actionbar.find(".k-button").get(0).style.width, "");
+    });
+
+    test("buttonLayout is empty string resorts to normal", function() {
+        var dialog = createDialog({ buttonLayout: "",
+            actions: [{ text: "a1" }, { text: "a2" }]});
+        var actionbar = dialog.wrapper.find(".k-dialog-buttongroup");
+
+        ok(actionbar.hasClass("k-dialog-button-layout-normal"));
+        equal(actionbar.find(".k-button").get(0).style.width, "");
+    });
+
     module("accessible modality", {
         beforeEach: $.noop,
         afterEach: function() {
@@ -267,4 +294,5 @@
         });
         var dialog = createDialog({ modal: true, visible: true }, dialogNode);
     });
+
 })();
