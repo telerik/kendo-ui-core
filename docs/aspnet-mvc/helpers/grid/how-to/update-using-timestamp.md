@@ -1,13 +1,13 @@
 ---
-title: Handle Timestamps
-page_title: Handle Timestamps | Kendo UI Grid HtmlHelper
-description: "Export the Kendo UI Grid data as a PDF document."
-slug: howto_handletimestamp_gridaspnetmv
+title: Update Grid by Using timestamp Property
+page_title: Update Grid by Using timestamp Property | Kendo UI Grid HtmlHelper
+description: "Update the Kendo UI Grid in ASP.NET MVC applications by using the timestamp property."
+slug: howto_updategridusingtimestamp_gridaspnetmv
 ---
 
-# Handle Timestamps
+# Update Grid by Using timestamp Property
 
-To see the example on how to handle timestamps in Kendo UI Grids in ASP.NET MVC applications, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/pdf-export-server-side)
+To see the example on how to update the Kendo UI Grid in ASP.NET MVC applications by using the `timestamp` property, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-timestamp).
 
 ## See Also
 
