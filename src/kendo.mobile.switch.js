@@ -18,25 +18,33 @@ var __meta__ = { // jshint ignore:line
         Widget = ui.Widget,
         support = kendo.support,
         CHANGE = "change",
-        SWITCHON = "km-switch-on",
-        SWITCHOFF = "km-switch-off",
+        SWITCHON = "switch-on",
+        SWITCHOFF = "switch-off",
         MARGINLEFT = "margin-left",
-        ACTIVE_STATE = "km-state-active",
-        DISABLED_STATE = "km-state-disabled",
+        ACTIVE_STATE = "state-active",
+        DISABLED_STATE = "state-disabled",
         DISABLED = "disabled",
         TRANSFORMSTYLE = support.transitions.css + "transform",
         proxy = $.proxy;
+
+    function className(name) {
+        return "k-" + name + " km-" + name;
+    }
 
     function limitValue(value, minLimit, maxLimit) {
         return Math.max(minLimit, Math.min(maxLimit, value));
     }
 
-    var SWITCH_MARKUP = '<span class="km-switch km-widget">\
-        <span class="km-switch-wrapper"><span class="km-switch-background"></span></span> \
-        <span class="km-switch-container"><span class="km-switch-handle" > \
-            <span class="km-switch-label-on">{0}</span> \
-            <span class="km-switch-label-off">{1}</span> \
+    var SWITCH_MARKUP = '<span class="' + className("switch") + ' ' + className("widget") + '">\
+        <span class="' + className("switch-wrapper") + '">\
+            <span class="' + className("switch-background") + '"></span>\
         </span> \
+        <span class="' + className("switch-container") + '">\
+            <span class="' + className("switch-handle") + '"> \
+                <span class="' + className("switch-label-on") + '">{0}</span> \
+                <span class="' + className("switch-label-off") + '">{1}</span> \
+            </span> \
+        </span>\
     </span>';
 
     var Switch = Widget.extend({
@@ -119,8 +127,8 @@ var __meta__ = { // jshint ignore:line
             that._position(check ? that.constrain : 0);
             element.checked = check;
             that.wrapper
-                .toggleClass(SWITCHON, check)
-                .toggleClass(SWITCHOFF, !check);
+                .toggleClass(className(SWITCHON), check)
+                .toggleClass(className(SWITCHOFF), !check);
         },
 
         // alias for check, NG support
@@ -155,7 +163,7 @@ var __meta__ = { // jshint ignore:line
                 element.attr(DISABLED, DISABLED);
             }
 
-            wrapper.toggleClass(DISABLED_STATE, !enable);
+            wrapper.toggleClass(className(DISABLED_STATE), !enable);
         },
 
         _resize: function() {
@@ -184,14 +192,14 @@ var __meta__ = { // jshint ignore:line
                 this.userEvents.cancel();
             } else {
                 this.userEvents.capture();
-                this.handle.addClass(ACTIVE_STATE);
+                this.handle.addClass(className(ACTIVE_STATE));
             }
         },
 
         _stop: function() {
             var that = this;
 
-            that.handle.removeClass(ACTIVE_STATE);
+            that.handle.removeClass(className(ACTIVE_STATE));
             that._toggle(that.position > that.snapPoint);
         },
 
@@ -204,8 +212,8 @@ var __meta__ = { // jshint ignore:line
                 distance;
 
             that.wrapper
-                .toggleClass(SWITCHON, checked)
-                .toggleClass(SWITCHOFF, !checked);
+                .toggleClass(className(SWITCHON), checked)
+                .toggleClass(className(SWITCHOFF), !checked);
 
             that.position = distance = checked * that.constrain;
 

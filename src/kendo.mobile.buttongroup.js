@@ -14,13 +14,17 @@ var __meta__ = { // jshint ignore:line
     var kendo = window.kendo,
         ui = kendo.mobile.ui,
         Widget = ui.Widget,
-        ACTIVE = "km-state-active",
-        DISABLE = "km-state-disabled",
+        ACTIVE = "state-active",
+        DISABLE = "state-disabled",
         SELECT = "select",
-        SELECTOR = "li:not(." + ACTIVE +")";
+        SELECTOR = "li:not(.km-" + ACTIVE +")";
+
+    function className(name) {
+        return "k-" + name + " km-" + name;
+    }
 
     function createBadge(value) {
-        return $('<span class="km-badge">' + value + '</span>');
+        return $('<span class="' + className("badge") + '">' + value + '</span>');
     }
 
     var ButtonGroup = Widget.extend({
@@ -29,7 +33,7 @@ var __meta__ = { // jshint ignore:line
 
             Widget.fn.init.call(that, element, options);
 
-            that.element.addClass("km-buttongroup").find("li").each(that._button);
+            that.element.addClass("km-buttongroup k-widget k-button-group").find("li").each(that._button);
 
             that.element.on(that.options.selectOn, SELECTOR, "_select");
 
@@ -38,7 +42,7 @@ var __meta__ = { // jshint ignore:line
 
             if(!that.options.enable) {
                 that._enable = false;
-                that.wrapper.addClass(DISABLE);
+                that.wrapper.addClass(className(DISABLE));
             }
         },
 
@@ -54,18 +58,18 @@ var __meta__ = { // jshint ignore:line
         },
 
         current: function() {
-            return this.element.find("." + ACTIVE);
+            return this.element.find(".km-" + ACTIVE);
         },
 
         select: function (li) {
             var that = this,
                 index = -1;
 
-            if (li === undefined || li === -1 || !that._enable || $(li).is("." + DISABLE)) {
+            if (li === undefined || li === -1 || !that._enable || $(li).is(".km-" + DISABLE)) {
                 return;
             }
 
-            that.current().removeClass(ACTIVE);
+            that.current().removeClass(className(ACTIVE));
 
             if (typeof li === "number") {
                 index = li;
@@ -75,7 +79,7 @@ var __meta__ = { // jshint ignore:line
                 index = li.index();
             }
 
-            li.addClass(ACTIVE);
+            li.addClass(className(ACTIVE));
             that.selectedIndex = index;
         },
 
@@ -103,36 +107,30 @@ var __meta__ = { // jshint ignore:line
         },
 
         enable: function(enable) {
-            var wrapper = this.wrapper;
-
             if(typeof enable == "undefined") {
                 enable = true;
             }
 
-            if(enable) {
-                wrapper.removeClass(DISABLE);
-            } else {
-                wrapper.addClass(DISABLE);
-            }
+            this.wrapper.toggleClass(className(DISABLE), !enable);
 
             this._enable = this.options.enable = enable;
         },
 
         _button: function() {
-            var button = $(this).addClass("km-button"),
+            var button = $(this).addClass(className("button")),
                 icon = kendo.attrValue(button, "icon"),
                 badge = kendo.attrValue(button, "badge"),
                 span = button.children("span"),
-                image = button.find("img").addClass("km-image");
+                image = button.find("img").addClass(className("image"));
 
             if (!span[0]) {
                 span = button.wrapInner("<span/>").children("span");
             }
 
-            span.addClass("km-text");
+            span.addClass(className("text"));
 
             if (!image[0] && icon) {
-                button.prepend($('<span class="km-icon km-' + icon + '"/>'));
+                button.prepend($('<span class="' + className("icon") + ' ' + className(icon) + '"/>'));
             }
 
             if (badge || badge === 0) {

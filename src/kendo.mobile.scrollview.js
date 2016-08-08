@@ -35,8 +35,8 @@ var __meta__ = { // jshint ignore:line
         CHANGE = "change",
         CHANGING = "changing",
         REFRESH = "refresh",
-        CURRENT_PAGE_CLASS = "km-current-page",
-        VIRTUAL_PAGE_CLASS = "km-virtual-page",
+        CURRENT_PAGE_CLASS = "current-page",
+        VIRTUAL_PAGE_CLASS = "virtual-page",
         FUNCTION = "function",
         ITEM_CHANGE = "itemChange",
         CLEANUP = "cleanup",
@@ -50,10 +50,14 @@ var __meta__ = { // jshint ignore:line
         NUDGE = 0,
         RIGHT_SWIPE = 1;
 
+    function className(name) {
+        return "k-" + name + " km-" + name;
+    }
+
     var Pager = kendo.Class.extend({
         init: function(scrollView) {
             var that = this,
-                element = $("<ol class='km-pages'/>");
+                element = $("<ol class='" + className("pages") + "'/>");
 
             scrollView.element.append(element);
 
@@ -77,11 +81,13 @@ var __meta__ = { // jshint ignore:line
             }
 
             this.element.html(pageHTML);
-            this.items().eq(e.page).addClass(CURRENT_PAGE_CLASS);
+            this.items().eq(e.page).addClass(className(CURRENT_PAGE_CLASS));
         },
 
         _change: function(e) {
-            this.items().removeClass(CURRENT_PAGE_CLASS).eq(e.page).addClass(CURRENT_PAGE_CLASS);
+            this.items()
+                .removeClass(className(CURRENT_PAGE_CLASS))
+                .eq(e.page).addClass(className(CURRENT_PAGE_CLASS));
         },
 
         destroy: function() {
@@ -628,7 +634,7 @@ var __meta__ = { // jshint ignore:line
 
     var Page = kendo.Class.extend({
         init: function(container) {
-            this.element = $("<div class='" + VIRTUAL_PAGE_CLASS + "'></div>");
+            this.element = $("<div class='" + className(VIRTUAL_PAGE_CLASS) + "'></div>");
             this.width = container.width();
             this.element.width(this.width);
             container.append(this.element);
@@ -663,13 +669,13 @@ var __meta__ = { // jshint ignore:line
 
             element
                 .wrapInner("<div/>")
-                .addClass("km-scrollview");
+                .addClass("k-widget " + className("scrollview"));
 
             if (this.options.enablePager) {
                 this.pager = new Pager(this);
 
                 if (this.options.pagerOverlay) {
-                    element.addClass("km-scrollview-overlay");
+                    element.addClass(className("scrollview-overlay"));
                 }
             }
 
@@ -843,7 +849,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         items: function() {
-            return this.element.find("." + VIRTUAL_PAGE_CLASS);
+            return this.element.find(".km-" + VIRTUAL_PAGE_CLASS);
         },
 
         _syncWithContent: function() {
