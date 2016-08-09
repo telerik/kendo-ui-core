@@ -109,7 +109,7 @@ The NumericTextBox value can be restricted to a specific range by using two diff
 
     For more details, refer to the article on [custom validation rules]({% slug overview_kendoui_validator_widget %}#custom-rules-for-validation) of the Validator.
 
-    To see the suggested implementation in action, navigate to the online demo on [range validation](http://demos.telerik.com/kendo-ui/numerictextbox/validation).
+    To see the suggested implementation in action, navigate to the online demo on [custom validation](http://demos.telerik.com/kendo-ui/validator/custom-validation).
 
 ### Support for label Element
 
