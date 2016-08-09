@@ -224,7 +224,7 @@ Possible values are:
 
 ### closable `Boolean` *(default: true)*
 
-Specifies whether a close button should be rendered at the top coner of the dialog.
+Specifies whether a close button should be rendered at the top corner of the dialog.
 
 #### Example
 
