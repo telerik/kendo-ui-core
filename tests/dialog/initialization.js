@@ -243,6 +243,13 @@
         equal(actionbar.find(".k-button").get(0).style.width, "");
     });
 
+    test("rtl on the wrapper element", function() {
+        var node = $("<div class='dialog k-rtl'>foo</div>").appendTo(QUnit.fixture);
+        var dialog = createDialog({ visible: true }, node);
+
+        ok(dialog.wrapper.hasClass("k-rtl"));
+    });
+
     module("accessible modality", {
         beforeEach: $.noop,
         afterEach: function() {

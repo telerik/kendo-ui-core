@@ -287,9 +287,12 @@
                 var that = this,
                     content = that.element,
                     options = that.options,
+                    isRtl = kendo.support.isRtl(content),
                     titlebar = $(templates.titlebar(options)),
                     titleId = (content.id || kendo.guid()) + "_title",
                     wrapper = $(that.wrapperTemplate(options));
+
+                wrapper.toggleClass("k-rtl", isRtl);
 
                 content.addClass(KCONTENTCLASS);
                 that.appendTo.append(wrapper);
@@ -316,8 +319,6 @@
                 if (options.actions.length) {
                     that._createActionbar(wrapper);
                 }
-
-                wrapper = content = null;
             },
 
             _createActionbar: function(wrapper) {
