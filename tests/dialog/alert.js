@@ -76,6 +76,25 @@
         dialog.open();
     });
 
+    test("aria-describedby is set to content element", function() {
+        var alertDialog = createAlert({ content: "message", visible: true });
+
+        equal(alertDialog.wrapper.attr("aria-describedby"), alertDialog.element.attr("id"));
+    });
+
+    test("ensure content has id", function() {
+        var alertDialog = createAlert({ content: "message", visible: true });
+
+        ok(alertDialog.element.attr("id"));
+    });
+
+    test("use existing content id for aria-describedby", function() {
+        var node = $("<div class='alert' id='dialog-content'>content</div>").appendTo(QUnit.fixture);
+        var alertDialog = createAlert({ visible: true }, node);
+
+        equal(alertDialog.wrapper.attr("aria-describedby"), "dialog-content");
+    });
+
     module("kendo.alert method", {
         teardown: function() {
             QUnit.fixture.closest("body").find(".k-alert .k-content").each(function(idx, element) {
@@ -94,4 +113,5 @@
         var alertDialog = kendo.alert("message");
         equal(alertDialog.content(), "message");
     });
+
 })();

@@ -748,14 +748,36 @@
         var PopupBox = DialogBase.extend({
             _init: function(element, options) {
                 var that = this;
+
                 that.wrapperTemplate = templates.alertWrapper;
                 options._defaultFocus = null;
+                that._ensureContentId(element);
+
                 DialogBase.fn._init.call(that, element, options);
+
                 that.bind(HIDE, proxy(that.destroy, that));
 
-                that._defaultFocus = that._chooseEntryFocus();
-                if (that._defaultFocus && that.options.visible && that.options.modal) {
-                    that._focusDialog();
+                that._ariaDescribedBy();
+                that._initFocus();
+            },
+
+            _ensureContentId: function(element) {
+                var node = $(element);
+                if(!node.attr("id")) {
+                    node.attr("id", kendo.guid() + "_k-popup");
+                }
+            },
+
+            _ariaDescribedBy: function() {
+                this.wrapper.attr("aria-describedby", this.element.attr("id"));
+            },
+
+            _initFocus: function() {
+                var o = this.options;
+
+                this._defaultFocus = this._chooseEntryFocus();
+                if (this._defaultFocus && o.visible && o.modal) {
+                    this._focusDialog();
                 }
             },
 
