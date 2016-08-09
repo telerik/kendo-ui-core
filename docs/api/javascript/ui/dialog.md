@@ -204,6 +204,24 @@ Defines the open animation duration.
     $("#dialog").data("kendoDialog").open();
     </script>
 
+### buttonLayout `String` *(default: "stretched")*
+
+Specifies the possible layout of the action buttons in the **Dialog**.
+
+Possible values are:
+
+* normal
+* stretched
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+        $("#dialog").kendoDialog({
+            buttonLayout: "normal"
+        });
+    </script>
+
 ### closable `Boolean` *(default: true)*
 
 Specifies whether a close button should be rendered at the top coner of the dialog.
