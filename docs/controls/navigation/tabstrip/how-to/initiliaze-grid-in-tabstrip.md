@@ -53,7 +53,7 @@ The example below demonstrates how to use the `activate` event when initializing
           });
 
           $("#openBtn").click(function(e) {
-          	tabstrip.expand($("#tab1"));
+          	tabstrip.activateTab($("#tab1"));
           });
         </script>
     </body>
