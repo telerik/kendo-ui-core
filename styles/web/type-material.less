@@ -3924,6 +3924,11 @@ div.k-scheduler-marquee:after {
         border-bottom: none;
     }
     .k-dialog-buttongroup {
+        .k-button:active,
+        .k-button:focus,
+        .k-button:focus:active {
+            box-shadow: none;
+        }
         &.k-dialog-button-layout-stretched {
             width: 100%;
             .k-button {
