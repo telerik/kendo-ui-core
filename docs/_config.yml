@@ -95,9 +95,12 @@ navigation:
         title: "FX"
     "controls/interactivity/draganddrop":
         title: "Drag and Drop"
+    "controls/media":
+        title: "Media"
+        position: 11
     "controls/hybrid":
         title: "Hybrid UI"
-        position: 11
+        position: 12
     "controls/hybrid/styles":
         title: "Styles and Appearance"
         position: 5
@@ -464,6 +467,10 @@ navigation:
         title: "PivotGrid"
     "*grid":
         title: "Grid"
+    "*media":
+        title: "Media"
+    "*mediaplayer":
+        title: "MediaPlayer"
     "*spreadsheet":
         title: "Spreadsheet"
     "*import-and-export-data":

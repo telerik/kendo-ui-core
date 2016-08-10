@@ -284,7 +284,7 @@ For more information on right-to-left language support, refer to the [general RT
 
 ### Existing Instances
 
-Similar to all other Kendo UI widgets, an existing Notification instance is accessed via the `.data("kendoNotification")` jQuery method, executed by the jQuery object of the originating element.
+To access an existing Notification instance, use the `.data("kendoNotification")` jQuery method, executed by the jQuery object of the originating element.
 
 For detailed information on how to get a reference to a Kendo UI widget, see [this help topic]({% slug initialize_widgets_using_jquery_plugins_installation %}#getting-reference-to-a-kendo-ui-widget).
 
