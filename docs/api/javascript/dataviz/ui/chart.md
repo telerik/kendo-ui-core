@@ -13634,6 +13634,7 @@ The target line options.
         }
       ]
     });
+    </script>
 
 ### series.target.line.width `Object|Function`
 
@@ -13658,6 +13659,7 @@ The width of the line.
         }
       ]
     });
+    </script>
 
 ### series.targetField `String` *(default: "target")*
 
