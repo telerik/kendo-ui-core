@@ -15,6 +15,10 @@ A similar thing happens on the client side. Browsers convert all dates according
 
 To keep time in the UTC format, apply an explicit transformation to the dates on both client and server.
 
+> **Important**
+>
+> If you use formats for parsing UTC date strings, [apply the `zzz` specifier]({% slug dateparsing_kendoui_globalization %}#parse-utc-date-strings) to render the local time. Otherwise, the current browser timezone offset will apply.
+
 Below are listed the two corresponding steps for you to follow.
 
 **Step 1** Use a `ViewModel` with a setter and a getter that explicitly set the `DateTime Kind` to UTC.

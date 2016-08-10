@@ -22,7 +22,7 @@ Opens a [Kendo UI Alert](/api/javascript/ui/alert) popup. Similar to the native 
 
 ##### text `String`
 
-The text to be shown in the Alert popup. 
+The text to be shown in the Alert popup.
 
 ### antiForgeryTokens
 Returns an object that contains common
@@ -187,7 +187,7 @@ The array that will be converted to an ObservableArray.
 ### confirm
 Opens a [Kendo UI Confirm](/api/javascript/ui/confirm) popup. Similar to the native [window.confirm()](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) method.
 
-`kendo.confirm` method is designed by following the Promise pattern. That means that it returns you a jQuery Deferred object that resolves to: 
+`kendo.confirm` method is designed by following the Promise pattern. That means that it returns you a jQuery Deferred object that resolves to:
 
 * `done()` - when user has pressed the "OK" button;
 * `fail()` - when user has pressed the "Cancel" button.
@@ -208,7 +208,7 @@ Opens a [Kendo UI Confirm](/api/javascript/ui/confirm) popup. Similar to the nat
 
 ##### text `String`
 
-The text to be shown in the Confirm popup. 
+The text to be shown in the Confirm popup.
 
 ### culture
 
@@ -317,7 +317,9 @@ The string which should be parsed as `Date`.
 
 ##### formats `String|Array` *(optional)*
 
-The format(s) that will be used to parse the date. By default all [standard date formats](/framework/globalization/dateformatting) of the current culture are used.
+The format(s) that will be used to parse the date. If you do not explicitly state a date parsing format, the [standard date formats](/framework/globalization/dateformatting#standard) of the current culture will apply.
+
+For more information on the custom date parsing formats, refer to [this article](/framework/globalization/dateformatting#custom).
 
 ##### culture `String` *(optional)*
 
@@ -417,7 +419,7 @@ If you pass `true` then this function will return `undefined` rather than throwi
 ### prompt
 Opens a [Kendo UI Prompt](/api/javascript/ui/prompt) popup. Similar to the native [window.prompt()](https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt) method.
 
-`kendo.prompt` method is designed by following the Promise pattern. That means that it returns you a jQuery Deferred object that resolves to: 
+`kendo.prompt` method is designed by following the Promise pattern. That means that it returns you a jQuery Deferred object that resolves to:
 
 * `done()` - when user has pressed the "OK" button and the `data` passed to the callback is the inputted text;
 * `fail()` - when user has pressed the "Cancel" button and the `data` passed to the callback is the inputted text.
@@ -438,7 +440,7 @@ Opens a [Kendo UI Prompt](/api/javascript/ui/prompt) popup. Similar to the nativ
 
 ##### text `String`
 
-The text to be shown in the Prompt popup. 
+The text to be shown in the Prompt popup.
 
 #### Parameters
 
@@ -1403,4 +1405,3 @@ The AM/PM designator.
     <script>
     console.log(kendo.toString(new Date(2013, 5, 6, 13, 0), "HH tt")); // outputs "13 PM"
     </script>
-

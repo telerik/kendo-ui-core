@@ -23,11 +23,21 @@ The [`kendo.parseDate(string)`](/api/javascript/kendo#methods-parseDate) method 
 
 ### Parse UTC Date Strings
 
-Similar to the above case, you are able to parse UTC date strings without providing a format string. The resulting JavaScript Date object will have the time correctly offset according to the local time zone of the user.
+#### Without Format
+
+When parsing UTC date strings without providing a format string, the resulting JavaScript Date object will render the time according to the local time zone of the user.
 
 ###### Example
 
-    kendo.parseDate("2016-02-14T06:15:44.123Z"); //Sun Feb 14 2016 08:15:44 GMT+0200 (FLE Standard Time)
+    kendo.parseDate("2016-02-14T06:15:44.123Z"); // Sun Feb 14 2016 08:15:44 GMT+0200 (FLE Standard Time)
+
+#### With Format
+
+When you use formats for parsing UTC date strings, apply the `zzz` specifier to render the local time. Otherwise, the current browser timezone offset will apply.
+
+###### Example
+
+    kendo.parseDate("2016-08-09T05:28:46Z", "yyyy-MM-ddTHH:mm:sszzz") // Tue Aug 09 2016 08:28:46 GMT+0300 (FLE Daylight Time)
 
 ### Parse by Specifying Format
 
