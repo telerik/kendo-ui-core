@@ -208,6 +208,7 @@ The flag, which indicates whether to show or hide the loading overlay.
 
 #### Example - remove or change the animated image
 
+```pseudo
     /* remove */
     .k-loading-mask .k-loading-image {
       background-image: none;
@@ -218,3 +219,4 @@ The flag, which indicates whether to show or hide the loading overlay.
     .k-loading-mask .k-loading-image {
       background-image: url('...non-animated.image.here...');
     }
+```
