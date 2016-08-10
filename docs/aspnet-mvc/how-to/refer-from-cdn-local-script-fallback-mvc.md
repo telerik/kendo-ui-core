@@ -1,6 +1,6 @@
 ---
 title: Refer Kendo UI from CDN with Local Script Fallback
-page_title: Refer Kendo UI from CDN with Local Script Fallback | Kendo UI Grid HtmlHelper
+page_title: Refer Kendo UI from CDN with Local Script Fallback | UI for ASP.NET MVC 
 description: "Refer Kendo UI from CDN with a local script fallback in ASP.NET MVC applications."
 slug: howto_refercdnlocalscriptfallback_aspnetmvc
 ---
