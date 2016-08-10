@@ -32720,6 +32720,151 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
         });
     </script>
 
+### findAxisByName
+
+An alias for the existing [getAxis](#methods-getAxis) method.
+
+#### Parameters
+
+##### name `String`
+
+The axis name.
+
+#### Returns
+
+`kendo.dataviz.ChartAxis` The chart axis.
+
+### findPaneByIndex
+
+Returns a [pane](/api/javascript/dataviz/chart/chart_pane) with specific index.
+
+#### Parameters
+
+##### index `Number`
+
+The pane index.
+
+#### Returns
+
+`kendo.dataviz.ChartPane` The chart pane.
+
+#### Example - use the pane chartsVisual to draw a circle behind series points
+
+    <div id="chart"></div>
+    <script>
+      var chart = $("#chart").kendoChart({
+        series: [{ data: [1, 2] }]
+      }).getKendoChart();
+
+      var pane = chart.findPaneByIndex(0);
+      var circle = new kendo.drawing.Circle(new kendo.geometry.Circle([200, 200], 100), { fill: { color: "red" }});
+
+      pane.chartsVisual.insert(0, circle);
+    </script>
+
+### findPaneByName
+
+Returns a [pane](/api/javascript/dataviz/chart/chart_pane) with specific name.
+
+#### Parameters
+
+##### name `String`
+
+The pane name.
+
+#### Returns
+
+`kendo.dataviz.ChartPane` The chart pane.
+
+#### Example - find the pane by name
+
+    <div id="chart"></div>
+    <script>
+      var chart = $("#chart").kendoChart({
+        series: [{ data: [1, 2] }],
+        panes: [{ name: "foo" }]
+      }).getKendoChart();
+
+      var pane = chart.findPaneByName("foo");
+    </script>
+
+### findSeries
+
+Returns a [series](/api/javascript/dataviz/chart/chart_series) determined from the passed function. The function is called with the options of each series until it returns true.
+
+#### Parameters
+
+##### callback `Function`
+
+The function that will be called for each series.
+
+#### Returns
+
+`kendo.dataviz.ChartSeries` The chart series.
+
+#### Example - find series that contain 3 in the data
+
+    <div id="chart"></div>
+    <script>
+      var chart = $("#chart").kendoChart({
+        series: [{ data: [1, 2] }, { data: [3, 4] }],
+      }).getKendoChart();
+
+      var series = chart.findSeries(function(series) {
+        return $.inArray(3, series.data) >= 0;
+      });
+    </script>
+
+### findSeriesByIndex
+
+Returns a [series](/api/javascript/dataviz/chart/chart_series) with specific index.
+
+#### Parameters
+
+##### index `Number`
+
+The series index.
+
+#### Returns
+
+`kendo.dataviz.ChartSeries` The chart series.
+
+#### Example - find the second series
+
+    <div id="chart"></div>
+    <script>
+      var chart = $("#chart").kendoChart({
+        series: [{ data: [1, 2] }, { data: [3, 4] }],
+      }).getKendoChart();
+
+      var series = chart.findSeriesByIndex(1);
+    </script>
+
+### findSeriesByName
+
+Returns a [series](/api/javascript/dataviz/chart/chart_series) with specific name.
+
+#### Parameters
+
+##### name `String`
+
+The series name.
+
+#### Returns
+
+`kendo.dataviz.ChartSeries` The chart series.
+
+#### Example - find the series with name "bar"
+
+    <div id="chart"></div>
+    <script>
+      var chart = $("#chart").kendoChart({
+        series: [{ name: "foo", data: [1, 2] }, { name: "bar", data: [3, 4] }],
+      }).getKendoChart();
+
+      var series = chart.findSeriesByName("bar");
+    </script>
+
 ### getAxis
 
 Returns an [axis](/api/javascript/dataviz/chart/chart_axis) with specific name.
@@ -32766,6 +32911,41 @@ The axis name.
       .lineTo(categorySlot.bottomRight().x, valueSlot.origin.y);
 
       chart.surface.draw(path);
+    </script>
+
+### hideTooltip
+
+Hides the chart tooltip.
+
+#### Example - hide the tooltip
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{ data: [1, 2] }]
+      });
+
+      var chart = $("#chart").data("kendoChart");
+
+      chart.showTooltip(function(point) {
+        return point.value === 2;
+      });
+
+      chart.hideTooltip();
+    </script>
+
+### plotArea
+
+Returns the chart [plotArea](/api/javascript/dataviz/chart/chart_plotarea).
+
+#### Example - use the plotArea backgroundVisual to change the background
+
+    <div id="chart"></div>
+    <script>
+      var chart = $("#chart").kendoChart({}).getKendoChart();
+      var plotArea = chart.plotArea();
+
+      plotArea.backgroundVisual.fill("red", 1);
     </script>
 
 ### redraw
@@ -32886,6 +33066,51 @@ The chart settings to update.
 
     var chart = $("#chart").data("kendoChart");
     chart.setOptions({ theme: "uniform" });
+    </script>
+
+### showTooltip
+
+Shows the chart tooltip for specific point or the shared tooltip for specific category. The method accepts a function which will be called for each [point](/api/javascript/dataviz/chart/chart_point) until the function returns `true`.
+
+#### Parameters
+
+##### filter `Function|Number|Date|String`
+
+The callback function which will be called for the points or the category value for a shared tooltip.
+
+#### Example - show the tooltip for a point with value equal to 2
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{ data: [1, 2] }]
+      });
+
+      var chart = $("#chart").data("kendoChart");
+
+      chart.showTooltip(function(point) {
+        return point.value === 2;
+      });
+    </script>
+
+#### Example - show the shared tooltip for category equal to "B"
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{ name: "foo", data: [1, 2] }],
+        categoryAxis: {
+          categories: ["A", "B"]
+        },
+        tooltip: {
+          visible: true,
+          shared: true
+        }
+      });
+
+      var chart = $("#chart").data("kendoChart");
+
+      chart.showTooltip("B");
     </script>
 
 ### svg
