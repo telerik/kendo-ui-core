@@ -60,9 +60,9 @@ Based on the specifics of the JavaScript `Date` object explained above, the Sche
 
 ### Scheduler with No Timezone Option
 
-If you choose not to define a timezone option, your system timezone settings will apply by deafault. Yet, you can customize them so you can deliver an appointment date either in the local offset, or in UTC.
+If you choose not to define a timezone option, your system timezone settings will apply by default. Yet, you can customize them so you can deliver an appointment date either in the local offset, or in UTC.
 
-If you run the first example below, the Scheduler will show the dates in the local timezone offset. This means that the event will be displayed as scheduled for 2:00pm, regardless of your location - whether you are in the **Europe/Berlin** timezone, for instance, or in the **Europe/Sofia** one.
+If you run the first example below, the Scheduler will show the dates in the local timezone offset. This means that the event will be displayed as scheduled for 2:00pm, regardless of your location&mdash;whether you are in the **Europe/Berlin** timezone, for instance, or in the **Europe/Sofia** one.
 
 The example below demonstrates how to bind the Scheduler to local dates when the `timezone` option is not set.
 
@@ -94,6 +94,10 @@ The example below demonstrates how to bind the Scheduler to local dates when the
 ````
 
 If you run the second example below, the Scheduler will show the dates according to the UTC convention. This means that the event will be displayed as scheduled for 4:00pm if you are in the **Europe/Berlin** timezone, for instance, while if you are in the **Europe/Sofia** timezone, the event will appear as scheduled for 5:00pm.  
+
+> **Important**
+>
+> When you use formats for parsing UTC date strings, [apply the `zzz` specifier]({% slug dateparsing_kendoui_globalization %}#parse-utc-date-strings) to render the local time. Otherwise, the current browser timezone offset will apply.
 
 The example below demonstrates how to bind the Scheduler to UTC dates when the `timezone` option is not set.
 

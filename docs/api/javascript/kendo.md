@@ -276,7 +276,9 @@ The string which should be parsed as `Date`.
 
 ##### formats `String|Array` *(optional)*
 
-The format(s) that will be used to parse the date. By default all [standard date formats](/framework/globalization/dateformatting) of the current culture are used.
+The format(s) that will be used to parse the date. If you do not explicitly state a date parsing format, the [standard date formats](/framework/globalization/dateformatting#standard) of the current culture will apply.
+
+For more information on the custom date parsing formats, refer to [this article](/framework/globalization/dateformatting#custom).
 
 ##### culture `String` *(optional)*
 
@@ -1330,4 +1332,3 @@ The AM/PM designator.
     <script>
     console.log(kendo.toString(new Date(2013, 5, 6, 13, 0), "HH tt")); // outputs "13 PM"
     </script>
-
