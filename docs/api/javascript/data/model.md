@@ -119,6 +119,8 @@ If the value of the field specified is equal to the default value (specified thr
 A set of key/value pairs the configure the model fields. The key specifies the name of the field.
 Quote the key if it contains spaces or other symbols which are not valid for a JavaScript identifier.
 
+> A field configuration cannot contain nested fields' configurations.
+
 ##### options.fields.fieldName.defaultValue
 
 Specifies the default value which will be used for the field when a new model instance is created. The default settings depend on the type of the field. The default value for "string" is `""`, for "number" is `0`, and for "date" is `new Date()` (today).
@@ -139,7 +141,7 @@ Specifies the function which will parse the field value. If not set default pars
 
 ##### options.fields.fieldName.type `String`
 
-Specifies the type of the field. The available options are `"string"`, `"number"`, `"boolean"`, `"date`". The default is `"string"`.
+Specifies the type of the field. The available options are `"string"`, `"number"`, `"boolean"`, `"date`" and `"object`". The default is `"string"`.
 
 ##### options.fields.fieldName.from `String`
 
