@@ -7,7 +7,7 @@ slug: howto_createdynamiccolumnsdatatypes_grid
 
 # Create Grids with Dynamic Columns and Data Types
 
-The example below demonstrates how to create a Kendo UI Grid with column and data fields information which is retrieved during runtime.
+The example below demonstrates how to create a Kendo UI Grid with column and data-field information that is retrieved during runtime.
 
 ###### Example
 

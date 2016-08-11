@@ -7,7 +7,7 @@ slug: howto_use_checkboxes_inside_column_menu_grid
 
 # Use Checkboxes inside Column Menus
 
-The example below demonstrates how to use checkboxes inside a Kendo UI Grid column menu.
+The example below demonstrates how to use checkboxes inside the column menu of a Kendo UI Grid.
 
 ###### Example
 

@@ -7,7 +7,7 @@ slug: howto_enable_foreignkey_sotringby_text_grid
 
 # Enable ForeignKey Column Sorting by Text
 
-The example below demonstrates how to enable sorting by text in a ForeignKey column using a calculated field.
+The example below demonstrates how to enable the sorting-by-text functionality in a ForeignKey column using a calculated field in a Kendo UI Grid.
 
 ###### Example
 
