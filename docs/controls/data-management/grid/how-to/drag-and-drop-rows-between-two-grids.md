@@ -7,7 +7,7 @@ slug: howto_dragand_drop_rows_between_twogrids_grid
 
 # Drag and Drop Rows between Grids
 
-The example below demonstrates how to Drag and Drop rows between two grids.
+The example below demonstrates how to drag and drop rows between two Kendo UI Grids.
 
 ###### Example
 

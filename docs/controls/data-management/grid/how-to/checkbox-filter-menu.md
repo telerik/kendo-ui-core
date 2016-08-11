@@ -7,7 +7,7 @@ slug: howto_create_checkbox_filter_menu_grid
 
 # Create Checkbox Filter Menu
 
-The example below demonstrates how to create a checkbox filter menu functionality in a Kendo UI Grid.
+The example below demonstrates how to create a menu functionality based on a checkbox filter in a Kendo UI Grid.
 
 ###### Example
 
