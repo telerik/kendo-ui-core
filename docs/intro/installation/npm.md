@@ -66,11 +66,11 @@ For more information on how to install an NPM package from Git, refer to the [np
 
 ### Store on Windows
 
-> **Important**  
+> **Important**
 >
 > Caching your credentials is required if you use the Kendo UI NPM Package in an ASP.NET vNext project.
 
-**Step 1** Create a text file called `_netrc` in your home directory (e.g. `c:\users\jane\_netrc`).  
+**Step 1** Create a text file called `_netrc` in your home directory (e.g. `c:\users\jane\_netrc`).
 
 **Step 2** Declare a `HOME` environment variable.
 
@@ -121,7 +121,7 @@ The cause of this issue is that the underlying Git installation is missing the c
 
 To resolve the issue, follow the steps in this [help article](http://blogs.msdn.com/b/phkelley/archive/2014/01/20/adding-a-corporate-or-self-signed-certificate-authority-to-git-exe-s-store.aspx).
 
-> **Important**  
+> **Important**
 > * The 1.9.5 Git build does not work with the Bower package.
 > * When using the `@` symbol in the URL for accessing the Kendo UI Bower repository&mdash;because of network restrictions or admin rules, for example&mdash;make sure you encode it as `https://firstname.lasname%40domain.com@bower.telerik.com/npm-kendo-ui.git`.
 
@@ -143,6 +143,20 @@ Use a Windows port of Git and your stored credentials instead of the built-in cl
 **Figure 1. Add a new entry**
 
 ![External Tools](/images/vs2015-external-tools.png)
+
+### Cannot Find 'jQuery' Module
+
+It is possible during the installation process to see the following error
+
+```
+Error: Cannot find module 'jquery' from '/Users/bernhard/Documents/JavaScriptDevelopment/kendo-ui-npm-example/javascript-browserify'
+```
+
+The most probable cause of this issue is the usage of an old NPM
+
+**Solution**
+
+Use a NPM ^3.0.0 version.
 
 ## See Also
 
