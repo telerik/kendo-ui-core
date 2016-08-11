@@ -11,8 +11,5 @@ To see the example on how to save the expanded and checked state of the items on
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the TreeView:
-
 * [Overview of the TreeView HtmlHelper]({% slug overview_treeviewhelper_aspnetmvc %})
-* [How to Bind TreeViews to XML]({% slug howto_bindtoaml_treeviewaspnetmvc %})
-* [How to Integrate with Sharepoint]({% slug howto_integratewithsharepoint_treeviewaspnetmvc %})
+* [TreeViewBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/TreeViewBuilder)

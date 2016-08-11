@@ -19,12 +19,7 @@ To see the example on how to format Grid cells during Excel export, refer to [th
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Grid HtmlHelper:
-
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
-* [How to Color Alternating Rows]({% slug howto_alternatingrows_aspnetmvcgrid %})
-* [How to Export Detail Grids to Excel]({% slug howto_detailgridexcelexport_aspnetmvcgrid %})
-* [How to Export Multiple Grids to Excel]({% slug howto_multiplegridexport_aspnetmvcgrid %})
-* [How to Use the Column Template]({% slug howto_columntemplatexport_aspnetmvcgrid %})
+* [GridBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
 
 For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_bindgridtodatatable_gridaspnetmvc %}).
