@@ -17,7 +17,7 @@ To see the example on how to use oData v4 with the WebAPI controller, refer to [
 
 Other articles and how-to examples on the Kendo UI Grid HtmlHelper:
 
-* [Overview of the Grid HtmlHelper]({% slug overview_uploadhelper_aspnetmvc %})
+* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [How to Bind the Grid to the SignalR Hub]({% slug howto_bindgridtosignalrhub_gridaspnetmv %})
 * [How to Export Grid Data in PDF]({% slug howto_exportonpdf_gridaspnetmv %})
 * [How to Export Grid Data to Excel]({% slug howto_exportgriddataasexceldocs_gridaspnetmv %})

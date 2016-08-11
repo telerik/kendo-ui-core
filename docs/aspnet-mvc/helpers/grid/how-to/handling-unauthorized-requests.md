@@ -13,7 +13,7 @@ To see the example on how to create a custom `AuthorizeAttribute` that returns r
 
 Other articles and how-to examples on the Kendo UI Grid HtmlHelper:
 
-* [Overview of the Grid HtmlHelper]({% slug overview_uploadhelper_aspnetmvc %})
+* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [How to Apply Custom Row Styles Based on Model Data]({% slug howto_applycustomrrowstylesmodeldata_gridaspnetmv %})
 * [How to Bind the Grid to DataTable]({% slug howto_bindgridtodatatable_gridaspnetmvc %})
 * [How to Preserve the Grid Server Toolbar Template after Using setOptions]({% slug howto_preserveservertemplateaftersetoptions_gridaspnetmv %})

@@ -14,7 +14,7 @@ To see the example on how to apply custom row styles based on model data, refer 
 
 Other articles and how-to examples on the Kendo UI Grid HtmlHelper:
 
-* [Overview of the Grid HtmlHelper]({% slug overview_uploadhelper_aspnetmvc %})
+* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [How to Bind the Grid to DataTable]({% slug howto_bindgridtodatatable_gridaspnetmvc %})
 * [How to Bind the Grid to the SignalR Hub]({% slug howto_bindgridtosignalrhub_gridaspnetmv %})
 * [How to Use Custom JsonResult with Ajax-Bound Grids]({% slug howto_usecustomjsonresultajaxbound_gridaspnetmvc %})
