@@ -503,17 +503,21 @@ var __meta__ = { // jshint ignore:line
                 docEl = document.documentElement,
                 length, viewportOffset, viewportWidth, viewportHeight;
 
-            if (isWindow) {
-                viewportWidth = window.innerWidth;
-                viewportHeight = window.innerHeight;
+            if (options.viewport === window) {
                 viewportOffset = {
                     top: (window.pageYOffset || document.documentElement.scrollTop || 0),
                     left: (window.pageXOffset || document.documentElement.scrollLeft || 0)
                 };
             } else {
+                viewportOffset = viewport.offset();
+            }
+
+            if (isWindow) {
+                viewportWidth = window.innerWidth;
+                viewportHeight = window.innerHeight;
+            } else {
                 viewportWidth = viewport.width();
                 viewportHeight = viewport.height();
-                viewportOffset = viewport.offset();
             }
 
             if (isWindow && docEl.scrollHeight - docEl.clientHeight > 0) {
