@@ -15,6 +15,7 @@ To see the example, refer to the GitHub repo with the [sample project of a Signa
 
 Other articles and how-to examples on the Kendo UI Chart HtmlHelper:
 
-* [Chart HtmlHelper Overview]({% slug overview_dropdownlisthelper_aspnetmvc %})
-* [How to Create Charts in Ajax Grid Columns in ASP.NET MVC Apps]({% slug howto_createchartinajaxgridcolumn_chartaspnetmvc %})
-* [How to Create View Model Bound Dynamic Series in ASP.NET MVC Apps]({% slug howto_cerateviewmodelboundseries_chartaspnetmvc %})
+* [Overview of the Chart HtmlHelper]({% slug overview_dropdownlisthelper_aspnetmvc %})
+* [ChartBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/ChartBuilder)
+
+For more runnable examples on the Kendo UI Chart in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_cerateviewmodelboundseries_chartaspnetmvc %}).

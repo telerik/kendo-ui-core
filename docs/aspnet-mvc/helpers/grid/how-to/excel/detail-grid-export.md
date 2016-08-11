@@ -26,9 +26,6 @@ To see the example on how to export all pages and all expanded detail Grids, ref
 Other articles and how-to examples on the Kendo UI Grid HtmlHelper:
 
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
-* [How to Color Alternating Rows]({% slug howto_alternatingrows_aspnetmvcgrid %})
-* [How to Export Multiple Grids to Excel]({% slug howto_multiplegridexport_aspnetmvcgrid %})
-* [How to Format Cells during Excel Export]({% slug howto_cellformat_aspnetmvcgrid %})
-* [How to Use the Column Template]({% slug howto_columntemplatexport_aspnetmvcgrid %})
+* [GridBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
 
 For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_bindgridtodatatable_gridaspnetmvc %}).

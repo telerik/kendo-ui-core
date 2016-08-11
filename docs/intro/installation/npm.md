@@ -146,17 +146,17 @@ Use a Windows port of Git and your stored credentials instead of the built-in cl
 
 ### Cannot Find 'jQuery' Module
 
-It is possible during the installation process to see the following error
+It is possible during the installation process to see the following error:
 
 ```
 Error: Cannot find module 'jquery' from '/Users/bernhard/Documents/JavaScriptDevelopment/kendo-ui-npm-example/javascript-browserify'
 ```
 
-The most probable cause of this issue is the usage of an old NPM
+The most probable cause of this issue is the usage of an old NPM version.
 
 **Solution**
 
-Use a NPM ^3.0.0 version.
+Use an NPM ^3.0.0 version.
 
 ## See Also
 

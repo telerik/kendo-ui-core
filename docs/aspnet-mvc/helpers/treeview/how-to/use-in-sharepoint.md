@@ -11,8 +11,5 @@ To see the example on how to use the SharePoint Sandbox Visual Web Part to add t
 
 ## See Also
 
-Other articles on Telerik UI for ASP.NET MVC and on the TreeView:
-
 * [Overview of the TreeView HtmlHelper]({% slug overview_treeviewhelper_aspnetmvc %})
-* [How to Bind TreeViews to XML]({% slug howto_bindtoaml_treeviewaspnetmvc %})
-* [How to Save the State of TreeView Items]({% slug howto_savetreeviewitemsstate_treeviewaspnetmvc %})
+* [TreeViewBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/TreeViewBuilder)
