@@ -13,7 +13,7 @@ To see the example on how to post the Grid selection to the server, refer to [th
 
 Other articles and how-to examples on the Kendo UI Grid HtmlHelper:
 
-* [Overview of the Grid HtmlHelper]({% slug overview_uploadhelper_aspnetmvc %})
+* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [How to Apply Custom Row Styles Based on Model Data]({% slug howto_applycustomrrowstylesmodeldata_gridaspnetmv %})
 * [How to Bind the Grid to the SignalR Hub]({% slug howto_bindgridtosignalrhub_gridaspnetmv %})
 * [How to Export Grid Data in PDF]({% slug howto_exportonpdf_gridaspnetmv %})

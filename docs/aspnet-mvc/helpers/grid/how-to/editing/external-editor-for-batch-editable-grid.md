@@ -13,7 +13,7 @@ To see the example on how to apply custom row styles based on row data, refer to
 
 Other articles and how-to examples on the Kendo UI Grid HtmlHelper:
 
-* [Overview of the Grid HtmlHelper]({% slug overview_uploadhelper_aspnetmvc %})
+* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [How to Configure the Grid to edit the TimeSpan Property]({% slug howto_configuretoedittimespanproperty_gridaspnetmvc %})
 * [How to Display Server Validation Errors in Popup Edit Mode]({% slug howto_displayservervalidationerrors_gridaspnetmvc %})
 * [How to Do Ajax Editing with Enumeration]({% slug howto_doajaxeditingenumeration_gridaspnetmvc %})

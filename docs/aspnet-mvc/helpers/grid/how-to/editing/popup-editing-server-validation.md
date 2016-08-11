@@ -13,7 +13,7 @@ To see the example on how to display server validation errors in the popup edit 
 
 Other articles and how-to examples on the Kendo UI Grid HtmlHelper:
 
-* [Overview of the Grid HtmlHelper]({% slug overview_uploadhelper_aspnetmvc %})
+* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [How to Apply Custom Row Styles Based on Data]({% slug howto_applycustomrowstylesbasedondata_gridaspnetmvc %})
 * [How to Configure the Grid to edit the TimeSpan Property]({% slug howto_configuretoedittimespanproperty_gridaspnetmvc %})
 * [How to Do Ajax Editing with Enumeration]({% slug howto_doajaxeditingenumeration_gridaspnetmvc %})

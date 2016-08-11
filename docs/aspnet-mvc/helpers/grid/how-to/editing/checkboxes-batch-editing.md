@@ -13,7 +13,7 @@ To see the example on how to create a template column with а checkbox that upda
 
 Other articles and how-to examples on the Kendo UI Grid HtmlHelper:
 
-* [Overview of the Grid HtmlHelper]({% slug overview_uploadhelper_aspnetmvc %})
+* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [How to Apply Custom Row Styles Based on Data]({% slug howto_applycustomrowstylesbasedondata_gridaspnetmvc %})
 * [How to Edit Grids with Cascading DropDownLists in In-Cell Mode]({% slug howto_editincellmodecasacdeddls_gridaspnetmvc %})
 * [How to Edit in In-Cell Batch Mode Using WebAPI Controller]({% slug howto_editincellbatchmodewebapi_gridaspnetmvc %})

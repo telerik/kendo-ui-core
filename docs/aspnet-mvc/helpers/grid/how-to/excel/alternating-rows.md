@@ -23,7 +23,7 @@ To see the example on how to color alternating rows in the Grid, refer to [this 
 
 Other articles and how-to examples on the Kendo UI Grid HtmlHelper:
 
-* [Overview of the Grid HtmlHelper]({% slug overview_uploadhelper_aspnetmvc %})
+* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [How to Export Detail Grids to Excel]({% slug howto_detailgridexcelexport_aspnetmvcgrid %})
 * [How to Export Multiple Grids to Excel]({% slug howto_multiplegridexport_aspnetmvcgrid %})
 * [How to Format Cells during Excel Export]({% slug howto_cellformat_aspnetmvcgrid %})
