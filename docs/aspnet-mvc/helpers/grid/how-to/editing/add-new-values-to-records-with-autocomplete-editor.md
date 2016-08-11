@@ -1,13 +1,13 @@
 ---
-title: Update Grid by Using timestamp Property
-page_title: Update Grid by Using timestamp Property | Kendo UI Grid HtmlHelper
-description: "Update the Kendo UI Grid in ASP.NET MVC applications by using the timestamp property."
-slug: howto_updategridusingtimestamp_gridaspnetmv
+title: Add New Values to Records with AutoComplete as Editor
+page_title: Add New Values to Records with AutoComplete as Editor | Kendo UI Grid HtmlHelper
+description: "Add a new value to the Kendo UI Grid records when the Grid is used with the Kendo UI AutoComplete as an editor in ASP.NET MVC applications."
+slug: howto_addnewvaluestorecordsautoceditor_gridaspnetmv
 ---
 
-# Update Grid by Using timestamp Property
+# Add New Values to Records with AutoComplete as Editor
 
-To see the example on how to update the Kendo UI Grid in ASP.NET MVC applications by using the `timestamp` property, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-timestamp).
+To see the example on how to add a new value to the Kendo UI Grid records when the Grid is used with the Kendo UI AutoComplete as an editor in ASP.NET MVC applications, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/autocomplete-editor-allow-setting-new-values).
 
 ## See Also
 
