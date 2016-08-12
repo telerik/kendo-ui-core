@@ -715,6 +715,24 @@ html .km-pane-wrapper .k-header
     border-color: @focused-border-color;
 }
 
+html body .k-button-bare {
+	&.k-state-focused,
+	&:focus {
+		box-shadow: @button-focused-shadow inset !important;
+	}
+}
+
+html .k-mediaplayer-toolbar .k-button-bare {
+	&:active,
+	&.k-state-active,
+	&.k-state-active:hover {
+		color: @accent;
+	}
+}
+
+.k-mediaplayer-toolbar .k-mediaplayer-seekbar {
+	top: -14px;
+}
 
 .k-calendar {
     .k-link {

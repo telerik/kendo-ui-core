@@ -96,7 +96,8 @@
 
 /* button */
 
-.k-button
+.k-button,
+.k-button-bare
 {
     display: inline-block;
     margin: 0;
@@ -114,12 +115,20 @@
 .k-state-disabled .k-button:hover,
 .k-button.k-state-disabled:hover,
 .k-state-disabled .k-button:active,
-.k-button.k-state-disabled:active
+.k-button.k-state-disabled:active,
+.k-button-bare[disabled],
+.k-button-bare.k-state-disabled,
+.k-state-disabled .k-button-bare,
+.k-state-disabled .k-button-bare:hover,
+.k-button-bare.k-state-disabled:hover,
+.k-state-disabled .k-button-bare:active,
+.k-button-bare.k-state-disabled:active
 {
     cursor: default;
 }
 
-a.k-button
+a.k-button,
+a.k-button-bare
 {
     .prohibit-selection;
     text-decoration: none;
@@ -132,7 +141,9 @@ a.k-button
 }
 
 button.k-button::-moz-focus-inner,
-input.k-button::-moz-focus-inner
+input.k-button::-moz-focus-inner,
+.button.k-button-bare::-moz-focus-inner,
+input.k-button-bare::-moz-focus-inner
 {
     padding: 0;
     border: 0;
@@ -189,6 +200,36 @@ html body .k-button-bare
     background: none !important; /*spares long selectors*/
     color: inherit;
     border-width: 0;
+	opacity: 0.7;
+	box-shadow: none;
+
+	&,
+	&:hover,
+	&.k-state-hover,
+	&:active,
+	&.k-state-active,
+	&.k-state-active:hover {
+		color: inherit;
+	}
+
+	&:focus,
+	.k-state-focused {
+		background: none;
+		box-shadow: none !important;
+		border-color: transparent;
+		opacity: 0.8;
+	}
+
+	&:hover,
+	&.k-state-hover,
+	&:active,
+	&.k-state-active {
+		opacity: 1;
+	}
+
+	.k-font-icon {
+		overflow: hidden;
+	}
 }
 
 html body .k-button-bare.k-upload-button:hover
@@ -766,6 +807,7 @@ html .k-error-colored
 }
 
 .k-button,
+.k-button-bare,
 .k-textbox,
 .k-autocomplete,
 div.k-window-content,
@@ -791,7 +833,8 @@ div.k-window-content,
     padding: 0;
 }
 
-a.k-button:hover
+a.k-button:hover,
+a.k-button-bare:hover
 {
     text-decoration: none;
 }

@@ -365,6 +365,22 @@ textarea.k-textbox:hover,
     background-color: lighten(@accent, 18%);
 }
 
+/* Bare Button */
+.k-button-bare {
+	&.k-state-focused .k-font-icon,
+	&:focus .k-font-icon {
+		text-shadow: 0 0 3px currentColor;
+	}
+}
+
+html .k-mediaplayer-toolbar .k-button-bare {
+	&:active,
+	&.k-state-active,
+	&.k-state-active:hover {
+	    color: @accent;
+    }
+}
+
 /* Menu */
 .k-menu {
     background-color: @base;

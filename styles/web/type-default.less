@@ -408,6 +408,11 @@ html .km-pane-wrapper .k-header
     background-color: @header-background-color;
 }
 
+.k-mediaplayer-toolbar 
+{
+    background-color: fade(@group-background-color, 70%);
+}
+
 /* icons */
 .k-icon:hover,
 .k-state-hover .k-icon,
@@ -689,6 +694,21 @@ html .km-pane-wrapper .k-header
 .k-menu .k-state-hover>.k-state-active
 {
     background-color: transparent;
+}
+
+.k-button-bare {
+	&.k-state-focused .k-font-icon,
+	&:focus .k-font-icon {
+		text-shadow: 0 0 3px currentColor;
+	}
+}
+
+html .k-mediaplayer-toolbar .k-button-bare {
+	&:active,
+	&.k-state-active,
+	&.k-state-active:hover {
+	color: @accent;
+	}
 }
 
 .k-menu {
