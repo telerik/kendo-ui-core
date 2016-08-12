@@ -317,7 +317,7 @@ Though the scrolling functionality is enabled, the scrollbars do not necessarily
 
 You can control vertical and horizontal scrolling independently.
 
-For more information on the scrolling functionality and its limitations, refer to the [article on the appearance of the Grid]({% slug appearance_kendoui_grid_widget %}#scrolling).
+For more information on the scrolling functionality, refer to the [article on the appearance of the Grid]({% slug appearance_kendoui_grid_widget %}#scrolling).
 
 #### Remove Vertical Scrollbar
 
