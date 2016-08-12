@@ -1,18 +1,26 @@
 ---
-title: Filter by date only and ignore the time
-page_title: Filter by Date Only and Ignore the Time | Kendo UI Grid
+title: Filter by Date Only
+page_title: Filter by Date Only | Kendo UI Grid
 description: "Learn how to filter date columns in the Kendo UI Grid widget."
 slug: howto_filter_date_columns_grid
 ---
 
-# Filter by Date Only and Ignore the Time
+# Filter by Date Only
 
-The examples below demonstrate how to filter the Kendo UI Grid by date, and ignore the exact time.
+To achieve the behavior of filtering Grid columns by date only, ignoring the exact time, apply the following approaches:
 
-###### Example 1: Create a helper field to hold the date only and filter by it, while displaying the original datetime field
+1. Create a helper field, which will hold the date.
+2. Transform the filter before applying it.
 
-* Use [dataSource.schema.parse](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-schema.parse) to create a new field that will hold the date only.
-* Use it in the [columns](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns) definition, but provide a [template](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.template) that will visualize the initial datetime field.
+## Create Helper Field
+
+The helper field is intended to hold only the date, so that the Grid data is later filtered by it while displaying the original datetime field.
+
+To create the helper field, follow the steps below:
+* Use the [`dataSource.schema.parse`](/api/javascript/data/datasource#configuration-schema.parse) configuration to create a new field that is intended to hold the date only.
+* Use the data-holding field in the [`columns`](/api/javascript/ui/grid#configuration-columns) definition, but provide a [`template`](/api/javascript/ui/grid#configuration-columns.template) that will visualize the initial datetime field.
+
+###### Example
 
 ```html
 <div id="grid"></div>
@@ -71,16 +79,22 @@ The examples below demonstrate how to filter the Kendo UI Grid by date, and igno
       });
     </script>
 ```
-###### Example 2: Handle the filterMenuInit event to transform the filter before applying it
+## Transform the Filter
 
-* Handle the [filterMenuInit event](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-filterMenuInit), and conditionally apply custom logic that will modify the filter to look for dates between the start and the end of day, selected from the DatePicker.
-* Use the [dataSource.filter() method](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-filter), passing it the modified filter configuration.
+Before applying it, you have to handle the `filterMenuInit` event to transform the filter.
+
+To achieve the filter change, follow the steps below:
+
+* Handle the [`filterMenuInit` event](/api/javascript/ui/grid#events-filterMenuInit) and conditionally apply custom logic to modify the filter so that it looks for dates, selected from the DatePicker, between the start and the end of day.
+* Use the [`dataSource.filter()` method](/api/javascript/data/datasource#methods-filter) and pass the modified filter configuration to it.
+
+###### Example
 
 ```html
 <div id="grid"></div>
     <script>
       $("#grid").kendoGrid({
-        columns: [ 
+        columns: [
           {
             field: "date",
             format: "{0:MM/dd/yyyy}"
@@ -92,12 +106,12 @@ The examples below demonstrate how to filter the Kendo UI Grid by date, and igno
             if(firstDropDown.value() === 'eq'){
               ev.preventDefault();
               var selectedDate = $('[data-role="datepicker"]').first().data('kendoDatePicker').value();
-             
+
               if(!selectedDate){
                 $(ev.target).closest('[data-role="popup"]').data('kendoPopup').close();
                 return;
               }
-              
+
               var startOfFilterDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate());
             var endOfFilterDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate(), 23, 59, 59);
               var filter = {
