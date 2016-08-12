@@ -3074,6 +3074,29 @@ If an `Array` value is assigned, it will be treated as the list of commands disp
         });
     </script>
 
+### toolbar.click `Function`
+
+The click handler of the toolbar command. Used for custom toolbar commands.
+
+#### Example - specify the name of the command
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+          toolbar: [
+            { name: "custom", click: function() { alert("custom"); } }
+          ],
+          columns: [
+            { field: "name" },
+            { field: "age" }
+          ],
+          dataSource: [
+              { name: "Jane Doe", age: 30 },
+              { name: "John Doe", age: 33 }
+          ]
+        });
+    </script>
+
 ### toolbar.name `String`
 
 The name of the toolbar command. Either a built-in ("create", "excel", "pdf") or custom. The `name` is reflected in one of the CSS classes, which is applied to the button - `k-grid-name`.
