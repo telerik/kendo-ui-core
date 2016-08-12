@@ -9,8 +9,8 @@ slug: howto_filter_date_columns_grid
 
 To achieve the behavior of filtering Grid columns by date only, ignoring the exact time, apply the following approaches:
 
-1. Create a helper field, which will hold the date.
-2. Transform the filter before applying it.
+1. [Create a helper field, which will hold the date]({% slug howto_filter_date_columns_grid %}#create-helper-field).
+2. [Transform the filter before applying it]({% slug howto_filter_date_columns_grid %}#transform-the-filter).
 
 ## Create Helper Field
 
