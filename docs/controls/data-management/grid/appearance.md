@@ -187,7 +187,9 @@ When using mobile touch devices, which do not have a visible scrollbar that can 
 
 * Either enable virtual scrolling or paging. Do not apply both features at the same time.
 
-* It is not recommended to use virtual scrolling together with grouping, hierarchy, or editing. Virtual scrolling relies on calculating the average row height based on already loaded data&mdash;having a large variance of row heights or an unknown number of rows that are not bound to data (such as group headers) might cause unexpected behavior.
+* It is not recommended to use virtual scrolling together with grouping, hierarchy, or editing.
+
+* Virtual scrolling relies on calculating the average row height based on already loaded data&mdash;having a large variance of row heights or an unknown number of rows that are not bound to data (such as group headers) might cause unexpected behavior.
 
 * Provide for a page size of the Grid that is large enough, so that the table rows do not fit in the scrollable data area. Otherwise the vertical virtual scrollbar will not be created. The page size of the Grid must be over three times larger than the number of visible table rows in the data area.
 
