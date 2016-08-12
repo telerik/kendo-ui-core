@@ -9,7 +9,9 @@
   },
   "license": "Apache-2.0",
   "version": "1.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "markdown-spellcheck": "^0.10.0"
+  },
   "devDependencies": {
     "amd-optimize": "0.6.1",
     "browser-sync": "~2.9.10",
