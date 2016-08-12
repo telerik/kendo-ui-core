@@ -365,6 +365,20 @@ $.extend(true, kendo.ui.NumericTextBox.prototype.options,{
 });
 }
 
+/* MediaPlayer messages */
+
+if (kendo.ui.MediaPlayer) {
+kendo.ui.MediaPlayer.prototype.options.messages =
+$.extend(true, kendo.ui.MediaPlayer.prototype.options.messages,{
+  "pause": "Пауза",
+  "play": "Възпроизвеждане",
+  "mute": "Заглушаване на звука",
+  "unmute": "Включване на звука",
+  "quality": "Промяна на качеството",
+  "fullscreen": "Цял екран"
+});
+}
+
 /* Gantt */
 
 if (kendo.ui.Gantt) {
