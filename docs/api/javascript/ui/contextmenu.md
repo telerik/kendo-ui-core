@@ -642,9 +642,9 @@ Appends an item to a **ContextMenu** in the specified referenceItem's sub menu (
 
 Item to be appended, specified as a JSON object. An array of objects can also be passed.
 
-##### referenceItem `String|jQuery`
+##### referenceItem `String|jQuery` *(optional)*
 
-A reference item to append the new item in. Root context menu if not specified.
+A reference item to append the new item in. If omitted, the new item will be appended to the as a root item.
 
 #### Returns
 
