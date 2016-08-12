@@ -8,20 +8,27 @@ position: 5
 
 # Appearance
 
-The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) supports various options for you to apply to your project by setting its layout and appearance that best match your needs.
+The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) supports various options that can be applied by setting its layout and appearance.
 
 ## Scrolling
 
-The scrolling functionality of the Grid is enabled by default. For historical reasons, however, scrolling is disabled by default when using the [Grid MVC wrapper](/aspnet-mvc/helpers/grid/overview), but can be [enabled explicitly](/aspnet-mvc/helpers/grid/configuration#scrolling).
+By default, the scrolling functionality of the Grid is enabled. For historical reasons, however, the [Grid MVC wrapper]({% slug configuration_gridhelper_aspnetmvc %}#scrolling) does not support it. To disable the scrolling functionality, set the `scrollable` option to `false`.
 
-Though the scrolling functionality is enabled, the scrollbars do not necessarily appear. The reason for this is that scrolling requires you to define some of the widget's dimensions:
+###### Example
 
-1. To achieve vertical scrolling, the Grid must have a set height. Otherwise, it will expand vertically to show all rows.
-1. To achieve horizontal scrolling, all columns must have explicit widths defined in pixels and their sum must exceed the width of the Grid.
+    $("#grid").kendoGrid({
+        scrollable: false,
+        // other configuration
+    });
+
+Though the scrolling functionality is enabled, the scrollbars do not necessarily appear. The reason for this is that scrolling requires you to define some of the Grid dimensions:
+
+1. To achieve vertical scrolling, set the height of the Grid. Otherwise, it will expand vertically to show all rows.
+1. To achieve horizontal scrolling, explicitly define the width of all columns in pixels and make sure their sum exceeds the width of the Grid.
 
 You can control vertical and horizontal scrolling independently.
 
-When scrolling is enabled, the Grid renders two tables - one for the header area and one for the scrollable data area. This ensures that the header area of the Grid is always visible during vertical scrolling. Take the two tables into account when you need to manually make JavaScript or CSS updates to the Grid tables.
+When scrolling is enabled, the Grid renders two tables&mdash;one for the header area and one for the scrollable data area. Take the two tables into account when you need to manually make JavaScript or CSS updates to the Grid tables.
 
 ###### Example
 
@@ -36,13 +43,32 @@ When scrolling is enabled, the Grid renders two tables - one for the header area
         </div>
     </div>
 
+When you apply virtual scrolling, the HTML output is different.
+
+###### Example
+
+    <div class="k-widget k-grid">
+        <div class="k-grid-header">
+            <div class="k-grid-header-wrap">
+                <table>...</table>
+            </div>
+        </div>
+        <div class="k-grid-content">
+            <div class="k-virtual-scrollable-wrap">
+                <table>...</table>
+            </div>
+        </div>
+    </div>
+
 > **Important**  
 >
-> If you want to achieve maximum Grid accessibility with assistive technologies, disable the scrolling feature.
+> To achieve a maximum level of accessibility through assistive technologies, disable the scrolling feature of the Grid.
 
-### Remove Vertical Scrollbars
+### Remove Vertical Scrollbar
 
-When you enable scrolling in the Grid, its vertical scrollbar is always visible even if it is not needed. This simplifies the implementation and improves the performance of the widget. If your project does not require a vertical scrollbar, but will apply only horizontal scrolling, you can remove the vertical scrollbar via CSS in the way demonstrated in the example below. When using this technique, make sure that neither the Grid, nor its data area apply fixed heights, so that they are able to shrink and expand according to the number of table rows.
+When you enable the scrolling functionality of the Grid, its vertical scrollbar is always visible even if it is not needed. This simplifies the implementation and improves the performance of the widget.
+
+To remove the vertical scrollbar, use CSS, as shown below. When using this approach, make sure that neither the Grid, nor its data area apply fixed heights, so that they are able to shrink and expand according to the number of table rows.
 
 ###### Example
 
@@ -58,13 +84,13 @@ When you enable scrolling in the Grid, its vertical scrollbar is always visible 
 
 The `#GridID` allows the application of styles only to a particular Grid instance. To use the above styles in all Grid instances, replace the ID with the `.k-grid` CSS class.
 
-Here is an enhanced example, which shows how to hide or show the scrollbar, depending on the number of Grid rows.
-
-[Hide the Grid's vertical scrollbar when not needed]({% slug howto_hide_vertical_scrollbar_grid %})
+[This enhanced example]({% slug howto_hide_vertical_scrollbar_grid %}) shows how to hide or show the scrollbar, depending on the number of Grid rows.
 
 ### Restore Scroll Positions
 
-In some scenarios, the Grid scroll position may be reset when the widget is rebound. If you want to avoid this behavior, save the scroll position in the [`dataBinding`](/api/javascript/ui/grid#events-dataBinding) event and restore it in the [`dataBound`](/api/javascript/ui/grid#events-dataBound) event. The scrollable container is `div.k-grid-content` and you can retrieve it as a child element of the widget [`wrapper`]({% slug widgetwrapperandelement_references_gettingstarted %}). If virtual scrolling is enabled, the scrollable data container is `div.k-virtual-scrollable-wrap` and it is scrolled only horizontally.
+In some scenarios, the scroll position of the Grid might be reset when the widget is rebound. If you want to avoid this behavior, save the scroll position in the [`dataBinding`](/api/javascript/ui/grid#events-dataBinding) event and restore it in the [`dataBound`](/api/javascript/ui/grid#events-dataBound) event. The scrollable container is `div.k-grid-content` and you can retrieve it as a child element of the widget [`wrapper`]({% slug widgetwrapperandelement_references_gettingstarted %}).
+
+If virtual scrolling is enabled, the scrollable data container is `div.k-virtual-scrollable-wrap` and it is scrolled only horizontally.
 
 ###### Example
 
@@ -99,13 +125,18 @@ In some scenarios, the Grid scroll position may be reset when the widget is rebo
 
 ### Virtual Scrolling
 
-Virtual scrolling is an alternative to paging. When enabled, the Grid will load data from the remote data source as the user scrolls vertically. Note that horizontal scrolling is not virtualized.
+Virtual scrolling is an alternative to paging. When enabled, the Grid loads data from the remote data source as the user scrolls vertically.
 
-> **Important**  
->
-> Either enable virtual scrolling, or paging. Do not apply both features at the same time.
+###### Example
 
-When you apply virtual scrolling, the HTML output is a little different as compared to the standard scrolling functionality, as shown below.
+    $("#grid").kendoGrid({
+        scrollable: {
+            virtual: true
+        },
+        // other configuration
+    });
+
+When virtual scrolling is applied, the HTML output is different than the standard scrolling functionality.
 
 ###### Example
 
@@ -125,11 +156,13 @@ When you apply virtual scrolling, the HTML output is a little different as compa
         </div>
     </div>
 
-Note that when you use virtual scrolling, the Grid data table is not placed inside a scrollable container. The scrollbar belongs to a separate `div.k-scrollbar` shown above. This matters in scenarios when the data rows should be manually scrolled to a particular position. Scrolling to a specific table row is unreliable and not supported with virtual scrolling.
+When you use virtual scrolling, the data table of the Grid is not placed inside a scrollable container. The scrollbar belongs to a separate `div.k-scrollbar` shown above. This matters in scenarios when the data rows have to be manually scrolled to a particular position.
 
-The virtual scrolling behavior and implementation imposes limitations with regard to some other Grid features. Virtual scrolling cannot be used together with grouping and hierarchy. CRUD operations are not supported either.
+Virtual scrolling relies on a fake scrollbar. Its size is not determined by the browser, but is calculated based on the average row height of the data that is already loaded. As a result, variable row heights may cause unexpected behavior, such as inability to scroll to the last rows on the last page.
 
-Virtual scrolling relies on a fake scrollbar. Its size is not determined by the browser, but is calculated based on the average row height of the data that is already loaded. As a result, variable row heights may cause unexpected behavior, such as inability to scroll to the last rows on the last page. There are two ways to ensure that all table rows have the same heights&mdash;either disable text wrapping, or set an explicit large-enough row height, as demonstrated below.
+To ensure that all table rows have the same heights, use either of the options:
+* Disable text wrapping.
+* Set an explicit row height that is large enough (as demonstrated in the example below).
 
 ###### Example
 
@@ -146,15 +179,29 @@ Virtual scrolling relies on a fake scrollbar. Its size is not determined by the 
     }
 
 <!--*-->
-> **Important**  
-> * The page size of the Grid must be large-enough, so that the table rows do not fit in the scrollable data area. Otherwise the vertical virtual scrollbar will not be created.
-> * The page size of the Grid must be over three times larger than the number of visible table rows in the data area.
+When using mobile touch devices, which do not have a visible scrollbar that can be grabbed and dragged, virtual scrolling combined with a large number of data items&mdash;for example, thousands&mdash;might hinder the easy access to all table rows, because the large number of data items will require a great deal of touch scrolling. On the other hand, using virtual scrolling with a very small number of items&mdash;for example, less than two hundred&mdash;does not make much sense either. Virtual scrolling on touch devices relies on drag-and-drop events, which are slower than native scrolling. This might lead to performance issues.
 
-Due to height-related browser limitations, which cannot be avoided, virtual scrolling works with up to a couple of million records. The exact number of records depends on the browser. Note that if you use a row count that is larger than, can produce unexpected widget behavior, or JavaScript errors. Adjusting the scroll position programmatically, so that a certain row becomes visible is not supported.
+#### Limitations
 
-When using mobile touch devices, which do not have a visible scrollbar that can be grabbed and dragged, virtual scrolling combined with a large number of data items, e.g. thousands, can impose a challenge to easily access all table rows, as this will require a great deal of touch scrolling. On the other hand, using virtual scrolling with a very small number of items, e.g. less than two hundred, does not make much sense either. Virtual scrolling on touch devices relies on drag and drop events, which are slower than native scrolling, so inferior scrolling performance may be noticeable.
+* Horizontal scrolling is not virtualized.
 
-In the cases listed above, when using virtual scrolling is not supported or recommended, revert to standard paging or non-virtual scrolling without paging, depending on the number of data items.
+* Either enable virtual scrolling or paging. Do not apply both features at the same time.
+
+* It is not recommended to use virtual scrolling together with grouping, hierarchy, or editing. Virtual scrolling relies on calculating the average row height based on already loaded data&mdash;having a large variance of row heights or an unknown number of rows that are not bound to data (such as group headers) might cause unexpected behavior.
+
+* Provide for a page size of the Grid that is large enough, so that the table rows do not fit in the scrollable data area. Otherwise the vertical virtual scrollbar will not be created. The page size of the Grid must be over three times larger than the number of visible table rows in the data area.
+
+* A scrollable Grid with a set height needs to be visible when initialized. In this way the Grid adjusts the height of its scrollable data area in accordance with the total height of the widget. In certain scenarios the Grid might be invisible when initialized&mdash;for example, when placed inside an initially inactive TabStrip tab or in another widget. In such cases use either of the following options:
+    * Initialize the Grid while its element is still visible.
+    * Initialize the Grid in a suitable event of the parent widget&mdash;for example, in the `activate` event of the TabStrip.
+
+* Because of height-related browser limitations (which cannot be avoided), virtual scrolling works with up to a couple of million records. The exact number of records depends on the browser. If you use a row count that is larger than the browser can handle, unexpected widget behavior or JavaScript errors might occur. In such cases, revert to standard paging.
+
+* Programmatic scrolling to a particular Grid row is not supported when virtual scrolling is enabled, because it is not possible to reliably predict the exact scroll offset of the row.
+
+* The Grid does not persist [selection](#selection) when virtual scrolling occurs. To achieve this behavior, [use this custom implementation]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %}).
+
+When using virtual scrolling is not supported or recommended, revert to standard paging or non-virtual scrolling without paging, depending on the number of data items.
 
 ## Width
 
