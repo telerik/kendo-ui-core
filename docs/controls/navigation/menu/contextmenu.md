@@ -21,7 +21,7 @@ Kendo UI ContextMenu can be initialized in two ways:
 
 > **Important**  
 >
-> As ContextMenu should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
+> Make sure you create the ContextMenu within a `$(document).ready()` statement because the widget has to be initialized after the DOM is fully loaded.
 
 #### Using HTML Markup
 
@@ -80,41 +80,49 @@ The example below demonstrates how to initialize the ContextMenu by using a JSON
 
 ### HTML Structure and DOM Placement
 
-With regard to the CSS selectors or element discovery via Javascript, take into account that, by default, the ContextMenu is created as a child of the `<body>` element. This behavior is configurable via the [`appendTo` setting](/api/javascript/ui/window#configuration-appendTo).
-
-The example below demonstrates the possible markup before the initialization of a Kendo UI ContextMenu.
+By default, the ContextMenu is created as a child of the `<body>` element.  
 
 ###### Example
 
-  <body>
-     <div id="container1">
-         <ul id="context-menu">
-             <li>Item 1</li>
-             <li>Item 2</li>
-         </ul>
-         ...
-     </div>
-     <div id="container2">
-         ...
-     </div>
-  </body>
+```html
+    <body>
+         <div id="target">Target</div>
+         <div id="container1">
+             <ul id="context-menu">
+                 <li>Item 1</li>
+                 <li>Item 2</li>
+             </ul>
+             Container 1
+         </div>
+         <div id="container2">
+             Container 2
+         </div>
 
-The example below demonstrates how the above page markup changes after the initialization of the Kendo UI ContextMenu when the widget is moved to become a child of the `<body>` and its additional markup is generated&mdash;that is, the wrapper and the title bar.
+         <script>
+            $("#context-menu").kendoContextMenu({
+                target: "#target"
+            });
+        </script>
+      </body>
+```
+
+The example below demonstrates how the above page markup changes after the initialization of the ContextMenu when the widget is moved to become a child of the `<body>` element and its additional markup is generated&mdash;the wrapper and the title bar.
 
 ###### Example
 
-  <body>
-    <div id="container1">
-        ...
-    </div>
-    <div id="container2">
-        ...
-    </div>
-    <ul id="context-menu" class="k-widget k-context-menu" data-role="contextmenu">
-            <li>Item 1</li>
-            <li>Item 2</li>
-     </ul>
-  </body>
+      <body>
+        <div id="target"></div>
+        <div id="container1">
+            ...
+        </div>
+        <div id="container2">
+            ...
+        </div>
+        <ul id="context-menu" class="k-widget k-context-menu" data-role="contextmenu">
+                <li>Item 1</li>
+                <li>Item 2</li>
+        </ul>
+      </body>
 
 ## Configuration
 
