@@ -457,6 +457,8 @@ navigation:
         title: "DatePicker"
     "*datetimepicker":
         title: "DateTimePicker"
+    "*dialog":
+        title: "Dialog"
     "*dropdownlist":
         title: "DropDownList"
     "*editor":
