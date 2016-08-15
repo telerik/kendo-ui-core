@@ -38,13 +38,14 @@ Below are listed the steps for you to follow when configuring the Kendo UI Dialo
 
 ###### Example
 
-    <kendo:dialog name="dialog" title="Software Update" closable="false" modal="false" 
+    <kendo:dialog name="dialog" title="Software Update" closable="false" modal="false"
                 content="Do you agree terms and conditions?">
         <kendo:dialog-actions>
             <kendo:dialog-action text="NO" />
             <kendo:dialog-action text="YES" primary="true" />
         </kendo:dialog-actions>
     </kendo:dialog>
+
 ## Event Handling
 
 ### Subscribe to Events
@@ -70,7 +71,7 @@ You can subscribe to all [events exposed by Kendo UI Dialog](/api/javascript/ui/
 
 ### Existing Instances
 
-You are able to reference an existing Dialog instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Dialog API](/api/javascript/ui/dialog#methods) to control its behavior.
+To refer to an existing Dialog instance, use [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Dialog API](/api/javascript/ui/dialog#methods) to control its behavior.
 
 ###### Example
 

@@ -39,7 +39,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Dialo
 
         $noAction = new \Kendo\UI\DialogAction();
         $noAction->text("NO");
-        
+
         $yesAction = new \Kendo\UI\DialogAction();
         $yesAction->text("YES")
                   ->primary(true);
@@ -104,7 +104,7 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing Dialog instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Dialog API](/api/javascript/ui/dialog#dialog) to control its behavior.
+To refer to an existing Dialog instance, use [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Dialog API](/api/javascript/ui/dialog#dialog) to control its behavior.
 
 ###### Example
 

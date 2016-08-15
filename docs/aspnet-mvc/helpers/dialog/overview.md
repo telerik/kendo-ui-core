@@ -118,7 +118,7 @@ The examples below demonstrates how to subscribe to events by a handler name.
 
 ### Existing Instances
 
-You can reference an existing Kendo UI Dialog instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Dialog API](/api/javascript/ui/dialog#methods) to control its behavior.
+To refer to an existing Kendo UI Dialog instance, use [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Dialog API](/api/javascript/ui/dialog#methods) to control its behavior.
 
 ###### Example
 
