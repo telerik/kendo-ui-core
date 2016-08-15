@@ -1,0 +1,38 @@
+# markdown-spellcheck spelling configuration file
+# Format - lines beginning # are comments
+# global dictionary is at the start, file overrides afterwards
+# one word per line, to define a file override use ' - filename'
+# where filename is relative to this configuration file
+WAI-ARIA
+WCAG
+_ARIA
+braille
+VoiceOver
+Donut
+jQuery
+DataSource
+Paciello
+BlueOpal
+stylesheets
+stylesheet
+NumericTextBox
+DatePicker
+ComboBox
+DateTimePicker
+DropDownList
+ListView
+PanelBar
+TabStrip
+TimePicker
+TreeView
+alt
+longdesc
+MultiSelect
+ASP.NET
+ - ./accessibility/accessibility-overview.md
+2.0
+508
+ - accessibility/five-tips-for-accessible-charts-with-dataviz.md
+jsbin.com
+odowud
+000px
