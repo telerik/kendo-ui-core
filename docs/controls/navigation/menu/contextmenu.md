@@ -106,7 +106,7 @@ By default, the ContextMenu is created as a child of the `<body>` element.
       </body>
 ```
 
-The example below demonstrates how the above page markup changes after the initialization of the ContextMenu when the widget is moved to become a child of the `<body>` element and its additional markup is generated&mdash;the wrapper and the title bar.
+The following example demonstrates how the page markup from the previous example changes after the initialization of the ContextMenu when the widget is moved to become a child of the `<body>` element and its additional markup&mdash;the wrapper and the title bar&mdash;is generated.
 
 ###### Example
 
@@ -150,7 +150,7 @@ The example below demonstrates how to change ContextMenu animation and open beha
 
 ### Dynamic Items
 
-[The Kendo UI ContextMenu API](/api/javascript/ui/contextmenu) provides methods for dynamically adding or removing Menu items.
+The [API of the ContextMenu](/api/javascript/ui/contextmenu) provides methods for dynamically adding or removing Menu items.
 
 To add items, provide the new item as a JSON object along with a reference item. A reference item is a target ContextMenu item HTML element that already exists in the ContextMenu. The reference item will be used to determine the placement in the hierarchy of the new item. Any valid jQuery selector can be used to obtain a reference to the target item.
 
