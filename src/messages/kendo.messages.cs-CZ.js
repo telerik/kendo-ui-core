@@ -24,8 +24,8 @@ $.extend(true, kendo.ui.ColorPicker.prototype.options.messages,{
 if (kendo.ui.ColumnMenu) {
 kendo.ui.ColumnMenu.prototype.options.messages =
 $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
-  "sortAscending": "Roustoucí",
-  "sortDescending": "Klesající",
+  "sortAscending": "Třídit vzestupně",
+  "sortDescending": "Třídit sestupně",
   "filter": "Filtr",
   "columns": "Sloupce",
   "done": "Hotovo",
