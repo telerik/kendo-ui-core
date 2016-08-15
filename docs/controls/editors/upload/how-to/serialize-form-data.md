@@ -61,9 +61,8 @@ Content-Type: text/plain
 ------WebKitFormBoundaryXLTaUOP1FzKWJJlD--
 ```
 
-## See Also
 
-Other articles on the Kendo UI Upload:
+## See Also
 
 * [Upload JavaScript API Reference](/api/javascript/ui/upload)
 * [Modes of Operation]({% slug modes_upload_widget %})
