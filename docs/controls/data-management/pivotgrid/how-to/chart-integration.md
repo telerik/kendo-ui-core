@@ -167,7 +167,7 @@ The example below demonstrates how to integrate a Kendo UI PivotGrid widget with
                         result.push({
                           measure: Number(data[idx].value),
                           column: fullPathCaptionName(columnTuple.members, columnDimensionsLength, ci),
-                          row: fullPathCaptionName(rowTuple.members, rowDimensionsLength, ci)
+                          row: fullPathCaptionName(rowTuple.members, rowDimensionsLength, ri)
                         });
                       }
                     }
