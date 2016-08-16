@@ -1218,7 +1218,7 @@ var __meta__ = { // jshint ignore:line
                 isRtl = kendo.support.isRtl(contentHtml);
 
             if (options.scrollable === false) {
-                contentHtml.attr("style", "overflow:hidden;");
+                contentHtml.css("overflow", "hidden");
             }
 
             wrapper = $(templates.wrapper(options));
