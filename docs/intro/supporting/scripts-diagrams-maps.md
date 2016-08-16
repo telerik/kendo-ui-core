@@ -20,13 +20,13 @@ Below are listed the script files for the Kendo UI Diagrams and Maps widgets.&nb
 | | kendo.draganddrop.js | |
 | | kendo.mobile.scroller.js | |
 | | kendo.color.js | |
+| | kendo.popup.js | Editing feature |
 | | kendo.drawing.js | |
 | | kendo.dataviz.core.js | |
 | | kendo.dataviz.themes.js | |
 | | kendo.toolbar.js | |
 | | kendo.pdf.js | PDF export feature |
 | | kendo.calendar.js | Editing feature |
-| | kendo.popup.js | Editing feature |
 | | kendo.datepicker.js | Editing feature |
 | | kendo.numerictextbox.js | Editing feature |
 | | kendo.validator.js | Editing feature |
