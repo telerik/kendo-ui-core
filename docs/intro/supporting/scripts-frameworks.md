@@ -23,6 +23,7 @@ Below are listed the script files for the Kendo UI shared components providing b
 | [Drawing API](http://demos.telerik.com/kendo-ui/drawing/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.color.js | |
+| | kendo.popup.js | tooltip feature |
 | | kendo.drawing.js | |
 | [Router](http://demos.telerik.com/kendo-ui/spa/index) | jquery.js | |
 | | kendo.core.js | |

@@ -17,6 +17,7 @@ Below are listed the script files for the Kendo UI Charts widgets.&nbsp;&nbsp;
 | | kendo.data.js | |
 | | kendo.userevents.js | |
 | | kendo.color.js | |
+| | kendo.popup.js | drawing tooltip feature |
 | | kendo.drawing.js | |
 | | kendo.dataviz.core.js | |
 | | kendo.dataviz.themes.js | |
@@ -31,6 +32,7 @@ Below are listed the script files for the Kendo UI Charts widgets.&nbsp;&nbsp;
 | | kendo.data.js | |
 | | kendo.userevents.js | |
 | | kendo.color.js | |
+| | kendo.popup.js | drawing tooltip feature |
 | | kendo.drawing.js | |
 | | kendo.dataviz.core.js | |
 | | kendo.dataviz.themes.js | |
@@ -41,6 +43,7 @@ Below are listed the script files for the Kendo UI Charts widgets.&nbsp;&nbsp;
 | | kendo.data.js | |
 | | kendo.userevents.js | |
 | | kendo.color.js | |
+| | kendo.popup.js | drawing tooltip feature |
 | | kendo.drawing.js | |
 | | kendo.dataviz.core.js | |
 | | kendo.dataviz.themes.js | |
