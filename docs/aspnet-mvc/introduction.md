@@ -72,7 +72,7 @@ Telerik UI for ASP.NET MVC contains the following directories:
 * `wrappers\aspnetmvc\Examples\VS2012`&mdash;The ASP.NET MVC 4 sample application built with Visual Studio 2012.
 * `wrappers\aspnetmvc\Examples\VS2013`&mdash;The ASP.NET MVC 5 sample application built with Visual Studio 2013.
 * `wrappers\aspnetmvc\Examples\VS2015`&mdash;The ASP.NET MVC 5 sample application built with Visual Studio 2015.
-* `wrappers\aspnetmvc\Examples\MVC6`&mdash;The ASP.NET Core MVC Beta sample application built with Visual Studio 2015.
+* `wrappers\aspnetmvc\Examples\AspNet.Core`&mdash;The ASP.NET Core MVC sample application built with Visual Studio 2015.
 * `wrappers\aspnetmvc\EditorTemplates`&mdash;The ready-to-use editor templates based on the Kendo UI widgets.
 * `wrappers\aspnetmvc\Scaffolding`&mdash;The Kendo UI Scaffolder Visual Studio extension. It enables generating the Kendo UI MVC wrapper widgets declarations inside Visual Studio projects and is added in the Kendo UI Q1 2015 release.
 
