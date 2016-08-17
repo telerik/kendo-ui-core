@@ -13,7 +13,9 @@ Represents the Kendo UI PanelBar widget. Inherits from [Widget](/api/javascript/
 ### animation `Object|Boolean`
 
 A collection of visual animations used when **PanelBar** items are expand or collapsed through
-user interactions. Setting this option to **false** will disable all animations.
+user interactions. Setting this option to `false` will disable all animations.
+
+`animation:true` is not a valid configuration.
 
 #### Example
 

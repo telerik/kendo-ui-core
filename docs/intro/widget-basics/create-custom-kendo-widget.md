@@ -2,7 +2,7 @@
 title: Create Custom Widgets
 page_title: Create Custom Widgets | Kendo UI Getting Started
 previous_url: /howto/create-custom-kendo-widget, /framework/widgets/create-custom-kendo-widget
-description: "Learn how to create your own widget by inheriting from the base widget class in Kendo UI."
+description: "Create your own widget by inheriting from the base widget class in Kendo UI."
 slug: createcustomkendouiwidgets_gettingstarted
 position: 5
 ---
@@ -29,9 +29,10 @@ First, extend the base Kendo UI widget class in the `kendo.ui` namespace. The ex
 
     })(jQuery);
 
-In this example notice the following:
+In this example, notice:
 
 1. The entire thing is wrapped in a self-executing anonymous function, so as to protect the global namespace. jQuery is passed in as a reference to make sure `$` is jQuery.
+
 2. The widget itself extends the base widget class, so it is given the uppercase name of `MyWidget`&mdash;or whatever the name of your widget is for that matter. This is generally considered a best practice when naming classes in JavaScript as opposed to regular objects.
 
 ## Add Initialization Method
@@ -111,7 +112,7 @@ Now add the widget to Kendo UI. Here is the full boilerplate for creating your o
 
 ## Use DataSource
 
-If you want to make this widget DataSource- or MVVM-aware, implement some additional items. The section below goes over the process of creation a DataSource-aware widget. The MVVM part is tackled further below. The widget that is demonstrated, is a simple one that just repeats the data in the DataSource and also allows you to specify your own custom template. Think of this as an extremely dumbed-down ListView that for easier handling is named the Repeater.
+To make this widget DataSource- or MVVM-aware, implement some additional items. The section below goes over the process of creation a DataSource-aware widget. The MVVM part is tackled further below. The widget that is demonstrated is a simple one that just repeats the data in the DataSource and also allows you to specify your own custom template. Think of this as an extremely dumbed-down ListView that for easier handling is named the Repeater.
 
 To make your widget aware of a DataSource, first use the created convenience method on the DataSource base object.
 
@@ -123,7 +124,7 @@ This line offers flexibility in the way you initialize the DataSource for your w
 
 ### Set DataSource to Array
 
-Creating a new DataSource to bind a widget is not a must as you are able to set the DataSource to an array, as demonstrated in the example below.
+Creating a new DataSource to bind a widget is not a must because you are able to set the DataSource to an array, as demonstrated in the example below.
 
 ###### Example
 
@@ -151,6 +152,10 @@ You can also create a DataSource just by specifying its configuration values inl
 
 This example specifies a DataSource configuration, but does not actually create an instance of one. The `kendo.data.DataSource.create(that.options.dataSource)` takes this configuration object and returns a new DataSource instance with the specified configuration.
 
+> **Important**  
+>
+> To replicate the Kendo UI MultiSelect data binding behavior, assign the binding explicitly: `kendo.data.binders.widget.multiSelectCustom = kendo.data.binders.widget.multiselect;`.
+
 ## Handle Events
 
 ### Bind to Change Events
@@ -164,7 +169,7 @@ Next, bind to your DataSource a `change` event and handle it. This is where you 
         that.refresh();
     });
 
-The way the widget code now looks like is shown in the example below.
+The way the widget code now looks is shown in the example below.
 
 ###### Example
 
@@ -188,7 +193,7 @@ The way the widget code now looks like is shown in the example below.
             _dataSource: function() {
                 var that = this;
                 // returns the datasource OR creates one if using an array or a configuration
-                that.dataSource = kendo.data.DataSource.create(that.option.dataSource);
+                that.dataSource = kendo.data.DataSource.create(that.options.dataSource);
 
 				// bind to the change event to refresh the widget
                 that.dataSource.bind(CHANGE, function() {
@@ -690,13 +695,24 @@ The example below combines the snippets and exhibits the full code.
 
 ```
 
+## Technical Support
+
+Custom widgets that inherit from Kendo UI widgets are not subject to technical support service, unless the question or issue can be discussed in the context of the originating widget that is provided in the Kendo UI installer.
+
 ## See Also
 
 Other articles on Kendo UI widget basics:
 
 * [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
+* [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
+* [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
+* [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
 * [Access Widget DOM Elements: wrapper and element]({% slug widgetwrapperandelement_references_gettingstarted %})
 * [Set Data Attributes]({% slug dataattributes_configuration_installation %})
 * [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})
 * [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
-* [Editing Functionality]({% slug kendoui_editing_gettingstarted %})
+* [Edit Widgets]({% slug kendoui_editing_gettingstarted %})
+* [Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
+* [NuGet Packages]({% slug kendoui_nuget_packages %})

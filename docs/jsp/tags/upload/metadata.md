@@ -1,22 +1,32 @@
 ---
-title: Metadata
+title: Handling of Metadata
+page_title: Handling of Metadata | Upload JSP Tag
+description: "Use the synchronous and asynchronous operational modes of the Upload JSP tag in Kendo UI."
+slug: metadata_upload_uiforjsp
+position: 3
 ---
 
-Asynchronous uploading usually means that you lose the association betwen the files and the context that they originate from.
+# Handling of Metadata
 
-Take an e-mail application for example. The save handler must associate the uploaded files to a particular message.
+Asynchronous uploading usually means that you lose the association between the files and the context that they originate from. Take an e-mail application, for example. The save handler must associate the uploaded files to a particular message. The message and the file might even be processed on different servers in a load balancing or a cloud-based scenario.
 
-The message and the file even might be processed on different servers in a load balancing or a cloud-based scenario.
+## Send and Receive Metadata
 
-## Sending metadata to the save action
+### Send Metadata to the Save Action
 
 You can add metadata directly on the client. This is useful when the data is not known in advance.
 
-1. Add an input field for description. We will send its value to the save handler.
+Below are listed the steps for you to follow when configuring the sending of metadata to the `save` action in the Kendo UI Upload.
+
+**Step 1** Add an `input` field for description. Send its value to the `save` handler.
+
+###### Example
 
         <input type="text" id="fileDescription" />
 
-2. Declare a handler for the upload event and attach a data object to the passed event.
+**Step 2** Declare a handler for the `upload` event and attach a data object to the passed event.
+
+###### Example
 
         function onUpload(e) {
             e.data = {
@@ -24,13 +34,17 @@ You can add metadata directly on the client. This is useful when the data is not
             };
         }
 
-3. Attach the event handler.
+**Step 3** Attach the event handler.
+
+###### Example
 
         <kendo:upload name="files" upload="onUpload">
             <kendo:upload-async autoUpload="true" saveUrl="${saveUrl}" removeUrl="${removeUrl}"/>
         </kendo:upload>
 
-4. Process the file and the associated description
+**Step 4** Process the file and the associated description.
+
+###### Example
 
         @RequestMapping(value = "/events/save", method = RequestMethod.POST)
         public @ResponseBody String save(@RequestParam List<MultipartFile> files,
@@ -43,13 +57,15 @@ You can add metadata directly on the client. This is useful when the data is not
             return "";
         }
 
-## Receiving metadata from the save handler
+### Receive Metadata from the Save Handler
 
-The save handler can sometimes produce a result that needs to be routed back to the page.
+The `save` handler can sometimes produce a result that needs to be routed back to the page. The Upload requires the response to be in JSON format with the Content-Type set to `"text/plain"`. Any non-empty response that is not JSON is treated as a server error.
 
-The Upload requires the response to be in JSON format with Content-Type set to "text/plain". Any non-empty response that is not JSON will be treated as a server error.
+Below are listed the steps for you to follow when configuring the receiving of metadata from the `save` action in the Kendo UI Upload.
 
-1. Build the response
+**Step 1** Build the response.
+
+###### Example
 
         // When returning JSON the mime-type must be set to text/plain
         @RequestMapping(value = "/async/save", method = RequestMethod.POST, produces = "text/plain")
@@ -60,16 +76,30 @@ The Upload requires the response to be in JSON format with Content-Type set to "
             return "{ \"status\": \"OK\" }";
         }
 
-2. Declare a handler for the [success event](/api/web/upload#success) and process the response
+**Step 2** Declare a handler for the [`success` event](/api/javascript/ui/upload#success) and process the response.
+
+###### Example
 
         function onSuccess(e) {
             alert("Status: " + e.response.status);
         }
 
-3. Attach the event handler
+**Step 3** Attach the event handler.
+
+###### Example
 
         <kendo:upload name="files" success="onSuccess">
             <kendo:upload-async autoUpload="true" saveUrl="${saveUrl}" removeUrl="${removeUrl}"/>
         </kendo:upload>
 
-The same approach is applicable for the remove handler as well.
+The same approach is applicable for the `remove` handler as well.
+
+## See Also
+
+Other articles on Telerik UI for JSP and on the Upload:
+
+* [Overview of the Upload JSP Tag]({% slug overview_upload_uiforjsp %})
+* [Modes of Operation of the Upload JSP Tag]({% slug modesofoperation_upload_uiforjsp %})
+* [Overview of the Kendo UI Upload Widget]({% slug overview_kendoui_upload_widget %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

@@ -1,6 +1,6 @@
 ---
 title: Expand to 100% Height and Auto-Resize
-page_title: Expand to 100% Height and Auto-Resize | Kendo UI Splitter Widget
+page_title: Expand to 100% Height and Auto-Resize | Kendo UI Splitter
 description: "Learn how to expand the Kendo UI Splitter to a 100% height and make it resize automatically."
 slug: howto_expandto100heightandautoresize_splitter
 ---
@@ -202,7 +202,9 @@ The example below demonstrates a Kendo UI Splitter with a calculated height.
 
 ## See Also
 
-Other articles on Kendo UI Splitter:
+Other articles and how-to examples on the Kendo UI Splitter:
 
 * [Splitter JavaScript API Reference](/api/javascript/ui/splitter)
 * [How to Keep Pane Size in Percentages]({% slug howto_keeppanesizepercentages_splitter %})
+
+For more runnable examples on the Kendo UI Splitter, browse its [**How To** documentation folder]({% slug howto_addautoresizingsplittertowindow_splitter %}).

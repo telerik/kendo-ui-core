@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Sortable Widget
+page_title: Overview | Kendo UI Sortable
 description: "Learn how to initialize the Kendo UI Sortable widget and configure its behaviors."
 slug: overview_kendoui_sortable_widget
 position: 1
@@ -386,13 +386,11 @@ Other articles on Kendo UI Sortable:
 * [Integration with Grid and ListView]({% slug integrationwith_gridandlistview_sortable_widget %})
 * [How to Nest Sortables]({% slug howto_nestsortables_sortable %})
 * [How to Persist Order in localStorage]({% slug howto_persistoderinlocalstorage_sortable %})
-* [How to Reorder AngularJS Grid Rows]({% slug howto_reorderangularjsgridrows_angular_sortable %})
-* [How to Reorder Grid Rows]({% slug howto_reordergridrows_sortable %})
+* [How to Reorder Grid Rows]({% slug howto_usesortablewithgrid_inincellediting_sortable %})
 * [How to Reorder Rows in Nested Grid]({% slug howto_reorderrowsinnestedgrid_sortable %})
 * [How to Transfer Grid Rows]({% slug howto_transfergridrows_sortable %})
 * [How to Use Sortable in AngularJS with Grid in Batch Editing Mode]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %})
-* [How to Use Sortable with Grid in Batch Editing Mode]({% slug howto_usesortablewithgrid_inbatchediting_sortable %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Sortable Widget](/aspnet-mvc/helpers/sortable/overview)
-* [Overview of the Sortable JSP Tag](/jsp/tags/sortable/overview)
+* [Overview of the Sortable JSP Tag]({% slug overview_sortable_uiforjsp %})
 * [Overview of the Sortable PHP Class](/php/widgets/sortable/overview)
 * [Sortable JavaScript API Reference](/api/javascript/ui/sortable)

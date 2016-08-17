@@ -860,6 +860,9 @@ The cell formula **without the leading equals** sign, e.g. `A1 * 10`.
 ### sheets.rows.cells.index `Number`
 The zero-based index of the cell. Required to ensure correct positioning.
 
+### sheets.rows.cells.link `String`
+The hyperlink (URL) of the cell.
+
 ### sheets.rows.cells.textAlign `String`
 The text align setting for the cell content.
 
@@ -964,6 +967,9 @@ The absolute row index. Required to ensure correct positioning.
 ### sheets.selection `String`
 The selected range in the sheet, e.g. "A1:B10".
 
+### sheets.showGridLines `Boolean` *(default: true)*
+A boolean value indicating if the sheet grid lines should be displayed.
+
 ### sheets.sort `Object`
 Defines the sort criteria for the sheet.
 
@@ -984,8 +990,144 @@ The sorted range, e.g. "A1:D5".
 ### sheetsbar `Boolean` *(default: true)*
 A boolean value indicating if the sheetsbar should be displayed.
 
-### toolbar `Boolean` *(default: true)*
+### toolbar `Boolean|Object` *(default: true)*
 A boolean value indicating if the toolbar should be displayed.
+
+### toolbar.home `Boolean|Array` *(default: true)*
+A boolean value indicating if the "home" tab should be displayed or a collection of tools that will be shown in the "home" tab.
+
+The available tools are:
+
+* **open**
+* **exportAs**
+* [**cut**, **copy**, **paste**]
+* [**bold**, **italic**, **underline**]
+* **backgroundColor**, **textColor**
+* **borders**
+* **fontSize**, **fontFamily**
+* **alignment**
+* **textWrap**
+* [**formatDecreaseDecimal**, **formatIncreateDecimal**]
+* **format**
+* **merge**
+* **freeze**
+* **filter**
+
+Those tools which are part of a tool group are defined as array. For example `["bold", "italic", "underline"]`
+
+#### Example - customize home tab
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                home: [ ["bold", "italic"], "format" ]
+            }
+        });
+    </script>
+```
+
+#### Example - disable home tab
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                home: false
+            }
+        });
+    </script>
+```
+
+#### Example - show a custom tool
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                home: [
+                    // for all available options, see the toolbar items configuration
+                    // http://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar#configuration-items
+                    {
+                        type: "button",
+                        text: "Custom",
+                        spriteCssClass: "k-icon k-font-icon k-i-cog",
+                        click: function() {
+                            window.alert("custom tool");
+                        }
+                    }
+                ]
+            }
+        });
+    </script>
+```
+
+### toolbar.insert `Boolean|Array` *(default: true)*
+A boolean value indicating if the "insert" tab should be displayed or a collection of tools that will be shown in the "insert" tab.
+
+The available tools are:
+
+* [ **addColumnLeft**, **addColumnRight**, **addRowBelow**, **addRowAbove** ]
+* [ **deleteColumn**, **deleteRow** ]
+
+Those tools which are part of a tool group are defined as array. For example `["deleteColumn", "deleteRow"]`
+
+#### Example - customize insert tab
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                insert: [ ["deleteColumn", "deleteRow"] ]
+            }
+        });
+    </script>
+```
+
+#### Example - disable insert tab
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                insert: false
+            }
+        });
+    </script>
+```
+
+### toolbar.data `Boolean|Array` *(default: true)*
+A boolean value indicating if the "insert" tab should be displayed or a collection of tools that will be shown in the "insert" tab.
+
+The available tools are:
+
+* **sort**
+* **filter**
+* **validation**
+
+#### Example - customize data tab
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                data: ["validation"]
+            }
+        });
+    </script>
+```
+
+#### Example - disable data tab
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            toolbar: {
+                data: false
+            }
+        });
+    </script>
+```
 
 ## Methods
 
@@ -1000,6 +1142,18 @@ The sheet to set as active.
 #### Returns
 
 `kendo.spreadsheet.Sheet` the active sheet.
+
+#### Example - change the active Sheet
+```
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{ name: "Sheet1" }, { name: "Sheet2" }]
+        });
+        var sheets = $("#spreadsheet").data("kendoSpreadsheet").sheets();
+        $("#spreadsheet").data("kendoSpreadsheet").activeSheet(sheets[1]);
+    </script>
+```
 
 ### sheets
 Returns an array with the sheets in the workbook.
@@ -1290,6 +1444,20 @@ The object to load data from.  This should be **the deserialized object**, not t
 
 ## Events
 
+### change
+
+Triggered when a value in the spreadsheet has been changed. Introduced in 2016.Q1.SP1.
+
+#### Event Data
+
+##### e.sender `kendo.ui.Spreadsheet`
+
+The widget instance which fired the event.
+
+##### e.range `kendo.spreadsheet.Range`
+
+The [Range](/api/javascript/spreadsheet/range) that has triggered the change.
+
 ### render
 Triggered after the widget has completed rendering.
 
@@ -1464,4 +1632,3 @@ A promise that will be resolved when the export completes.
         spreadsheet.saveAsPDF();
     </script>
 ```
-

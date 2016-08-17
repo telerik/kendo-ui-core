@@ -27,10 +27,11 @@ Specifies if the Tooltip will be hidden when mouse leaves the target element. If
         });
     </script>
 
-### animation `Object`
+### animation `Boolean|Object`
 
-A collection of {Animation} objects, used to change default animations. A value of **false**
-will disable all animations in the widget.
+A collection of {Animation} objects, used to change default animations. A value of `false` will disable all animations in the widget.
+
+`animation:true` is not a valid configuration.
 
 #### Example - disable animations
 

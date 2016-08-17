@@ -85,6 +85,7 @@ var __meta__ = { // jshint ignore:line
             surface: null,
             global: false,
             fastTap: false,
+            filter: null,
             multiTouch: false,
             enableSwipe: false,
             minXDelta: 30,
@@ -96,6 +97,10 @@ var __meta__ = { // jshint ignore:line
 
         cancel: function() {
             this.events.cancel();
+        },
+
+        destroy: function() {
+            this.events.destroy();
         },
 
         _triggerTouch: function(type, e) {

@@ -1,11 +1,17 @@
 ---
-title: Grid TimeSpan editor
-page_title: Grid TimeSpan editor
-description: Demonstrates editing TimeSpan property with a Grid
+title: Configure Grids to Edit the TimeSpan Property
+page_title: Configure Grids to Edit the TimeSpan Property | Kendo UI Grid HtmlHelper
+description: "Configure Kendo UI Grids to use the TimePicker or NumericTextBox editor to edit the TimeSpan property from the model."
+slug: howto_configuretoedittimespanproperty_gridaspnetmvc
 ---
 
-# Grid TimeSpan editor
+# Configure Grids to Edit the TimeSpan Property
 
-The example below demonstrates how to configure the grid and use TimePicker or NumericTextBoxes editor to edit a TimeSpan property from the model.
+To see the example on how to configure the Grid and use the TimePicker or NumericTextBox editor to edit a `TimeSpan` property from the model, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-timespan-editor).
 
-[Grid TimeSpan editor](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-timespan-editor)
+## See Also
+
+* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
+* [GridBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
+
+For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_bindgridtodatatable_gridaspnetmvc %}).

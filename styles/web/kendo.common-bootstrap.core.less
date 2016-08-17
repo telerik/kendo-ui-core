@@ -48,6 +48,10 @@
     margin-left: -5px;
 }
 
+input.k-textbox {
+  height: 2.43em;
+}
+
 .k-textbox > input,
 .k-autocomplete .k-input,
 .k-picker-wrap .k-input,
@@ -55,6 +59,18 @@
 .k-dropdown-wrap .k-input,
 .k-selectbox .k-input {
       padding: 0.167em 0;
+}
+
+.k-autocomplete > .k-i-close {
+    margin-right: 8px;
+}
+
+.k-combobox > .k-dropdown-wrap > .k-i-close {
+    right: 2.55em;
+}
+
+.k-multiselect > .k-multiselect-wrap > .k-i-close {
+    top: @grid-size/2 - 1px;
 }
 
 .k-numerictextbox .k-link {
@@ -96,6 +112,11 @@
 
 .k-toolbar .k-button-group .k-button {
     margin: 0;
+}
+
+.k-checkbox-label,
+.k-radio-label {
+    display: inline;
 }
 
 .k-checkbox-label:before,

@@ -228,6 +228,8 @@ The **remove** and **getByUid** methods are overridden and work with the hierarc
 
 See the [DataSource events](/api/framework/datasource#events) for all inherited events.
 
+> Disclaimer: The [push](/api/framework/datasource#events-push) event is not currently supported by the `HierarchicalDataSource`.
+
 ### change
 
 Fires when data is changed. In addition to the [standard change event](/api/framework/datasource#change),

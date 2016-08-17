@@ -47,6 +47,9 @@ Inherited from [Element.opacity](element#configuration-opacity)
 ### stroke `kendo.drawing.StrokeOptions`
 The stroke options of the shape.
 
+### tooltip `kendo.drawing.TooltipOptions`
+The tooltip options of the shape.
+
 ### transform `kendo.geometry.Transformation`
 The transformation to apply to this element.
 Inherited from [Element.transform](element#configuration-transform)
@@ -85,6 +88,16 @@ Inherited from [Element.clippedBBox](element#methods-clippedBBox)
 #### Returns
 `kendo.geometry.Rect` The bounding box of the element with clipping transformations applied.
 
+### containsPoint
+Returns true if the shape contains the specified point.
+
+#### Parameters
+
+##### point `kendo.geometry.Point`
+The point that should be checked.
+
+#### Returns
+`Boolean` value indicating if the shape contains the point.
 
 ### geometry
 Gets or sets the rectangle geometry.

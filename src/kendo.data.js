@@ -390,6 +390,11 @@ var __meta__ = { // jshint ignore:line
         }
     });
 
+    // Polyfill for Symbol.iterator
+    if (typeof Symbol !== "undefined" && Symbol.iterator && !ObservableArray.prototype[Symbol.iterator]) {
+        ObservableArray.prototype[Symbol.iterator] = [][Symbol.iterator];
+    }
+
     var LazyObservableArray = ObservableArray.extend({
         init: function(data, type) {
             Observable.fn.init.call(this);
@@ -1162,10 +1167,10 @@ var __meta__ = { // jshint ignore:line
                 return a + " !== ''";
             },
             isnull: function(a) {
-                return a + " === null || " + a + " === undefined";
+                return "(" + a + " === null || " + a + " === undefined)";
             },
             isnotnull: function(a) {
-                return a + " !== null && " + a + " !== undefined";
+                return "(" + a + " !== null && " + a + " !== undefined)";
             }
         };
     })();
@@ -2840,6 +2845,23 @@ var __meta__ = { // jshint ignore:line
                 that._addRange(that._data);
 
                 that._change();
+
+                that._markOfflineUpdatesAsDirty();
+            }
+        },
+
+        _markOfflineUpdatesAsDirty: function() {
+            var that = this;
+
+            if (that.options.offlineStorage != null) {
+                that._eachItem(that._data, function(items) {
+                    for (var idx = 0; idx < items.length; idx++) {
+                        var item = items.at(idx);
+                        if (item.__state__ == "update" || item.__state__ == "create") {
+                            item.dirty = true;
+                        }
+                    }
+                });
             }
         },
 
@@ -2974,6 +2996,11 @@ var __meta__ = { // jshint ignore:line
                 if (idx >= 0) {
                     if (pristine && (!model.isNew() || pristine.__state__)) {
                         items[idx].accept(pristine);
+
+                        if (pristine.__state__ == "update") {
+                            items[idx].dirty = true;
+                        }
+
                     } else {
                         items.splice(idx, 1);
                     }
@@ -3105,6 +3132,7 @@ var __meta__ = { // jshint ignore:line
                         that.transport.read({
                             data: params,
                             success: function(data) {
+                                that._ranges = [];
                                 that.success(data, params);
 
                                 deferred.resolve();
@@ -3157,6 +3185,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 data = that._readData(data);
+                that._destroyed = [];
             } else {
                 data = that._readData(data);
 
@@ -3196,16 +3225,7 @@ var __meta__ = { // jshint ignore:line
 
             that._data = that._observe(data);
 
-            if (that.options.offlineStorage != null) {
-                that._eachItem(that._data, function(items) {
-                    for (var idx = 0; idx < items.length; idx++) {
-                        var item = items.at(idx);
-                        if (item.__state__ == "update") {
-                            item.dirty = true;
-                        }
-                    }
-                });
-            }
+            that._markOfflineUpdatesAsDirty();
 
             that._storeData();
 
@@ -3270,7 +3290,7 @@ var __meta__ = { // jshint ignore:line
                 this.offlineData(state.concat(destroyed));
 
                 if (updatePristine) {
-                    this._pristineData = state;
+                    this._pristineData = this._readData(state);
                 }
             }
         },
@@ -4166,7 +4186,9 @@ var __meta__ = { // jshint ignore:line
                 kendo.data.transports = kendo.data.transports || {};
                 kendo.data.schemas = kendo.data.schemas || {};
 
-                if (kendo.data.transports[options.type] && !isPlainObject(kendo.data.transports[options.type])) {
+                if (!kendo.data.transports[options.type]) {
+                    kendo.logToConsole("Unknown DataSource transport type '" + options.type + "'.\nVerify that registration scripts for this type are included after Kendo UI on the page.", "warn");
+                } else if (!isPlainObject(kendo.data.transports[options.type])) {
                     transport = new kendo.data.transports[options.type](extend(transportOptions, { data: data }));
                 } else {
                     transportOptions = extend(true, {}, kendo.data.transports[options.type], transportOptions);

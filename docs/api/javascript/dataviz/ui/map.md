@@ -1971,10 +1971,10 @@ The bing map tile types. Possible options:
     * aerial - Aerial imagery.
     * aerialWithLabels - Aerial imagery with a road overlay.
     * road - Roads without additional imagery. (default)
-    
+
 ### layerDefaults.bing.culture `String` *(default: "en-US")*
 
-The culture to be used for the bing map tiles. 
+The culture to be used for the bing map tiles.
 
 #### Example - set default culture for bing layers
     <div id="map"></div>
@@ -2211,7 +2211,7 @@ The bing map tile types. Possible options:
     * birdseye - Bird’s eye (oblique-angle) imagery
     * birdseyeWithLabels - Bird’s eye imagery with a road overlay.
     * road - Roads without additional imagery. (default)
-    
+
 ### layers.culture `String` *(default: "en-US")*
 
 The culture to be used for the bing map tiles.
@@ -5717,7 +5717,7 @@ The parent layer instance.
 
 ##### e.shape `kendo.drawing.Element`
 
-The the shape instance.
+The shape instance.
 
 ##### e.sender `kendo.dataviz.ui.Map`
 
@@ -5730,42 +5730,109 @@ The source jQuery event instance
 #### Example - bind to the map shapeCreated event on initialization
     <div id="map"></div>
     <script>
-        $("#map").kendoMap({
-            zoom: 3,
-            center: [0, 0],
-            layers: [{
-                type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
-            }],
-            shapeCreated: function() {
-                console.log("shape created");
-            }
-        });
+      var data = [
+        { "type": "Feature",
+         "geometry": {
+           "type": "Polygon",
+           "coordinates": [
+             [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0],
+              [100.0, 1.0], [100.0, 0.0] ]
+           ]
+         },
+         "properties": {
+           "name": "Feature #1"
+         }
+        }
+      ];
+
+      $("#map").kendoMap({
+        center: [0.5, 100.5],
+        zoom: 8,
+        layers: [{
+          type: "shape",
+          dataSource: {
+            type: "geojson",
+            data: data
+          }
+        }],
+        shapeCreated: onShapeCreated
+      });
+
+      function onShapeCreated(e) {
+        console.log("shape created: ", e.shape.dataItem.properties.name);
+      }
     </script>
 
-#### Example - bind to the map shapeCreated event after initialization
+### shapeFeatureCreated
+
+Fired when a [GeoJSON Feature](http://geojson.org/geojson-spec.html#feature-objects) is created on a shape layer.
+
+#### Event Data
+
+##### e.dataItem `Object`
+
+The original data item for this Feature. Members include `geometries` and `properties`.
+
+##### e.layer `kendo.dataviz.map.layer.Shape`
+
+The parent layer instance.
+
+##### e.group `kendo.drawing.Group`
+
+The group containing feature shape instances.
+
+##### e.properties `Object`
+
+A reference to the `dataItem.properties` object.
+
+##### e.sender `kendo.dataviz.ui.Map`
+
+The source widget instance.
+
+#### Example - bind to the map shapeFeatureCreated event on initialization
     <div id="map"></div>
     <script>
-        $("#map").kendoMap({
-            zoom: 3,
-            center: [0, 0],
-            layers: [{
-                type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
-            }]
-        });
+      var data = [
+        { "type": "Feature",
+         "geometry": {
+           "type": "Polygon",
+           "coordinates": [
+             [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0],
+              [100.0, 1.0], [100.0, 0.0] ]
+           ]
+         },
+         "properties": {
+           "name": "Feature #1"
+         }
+        }
+      ];
 
-        var map = $("#map").data("kendoMap");
-        map.bind("shapeCreated", function(e) {
-            console.log("shape created");
-        });
+      $("#map").kendoMap({
+        center: [0.5, 100.5],
+        zoom: 8,
+        layers: [{
+          type: "shape",
+          dataSource: {
+            type: "geojson",
+            data: data
+          }
+        }],
+        shapeFeatureCreated: onShapeFeatureCreated
+      });
+
+      function onShapeFeatureCreated(e) {
+        console.log("feature created: ", e.properties.name);
+      }
     </script>
 
 ### shapeMouseEnter
 
 Fired when the mouse enters a shape.
+
+> **Important**
+>
+> This event will fire reliably only for shapes that have set fill color.
+> The opacity can still be set to 0 so the shapes appear to have no fill.
 
 #### Event Data
 
@@ -5792,9 +5859,26 @@ The source jQuery event instance
             zoom: 3,
             center: [0, 0],
             layers: [{
-                type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+              type: "shape",
+              dataSource: {
+                type: "geojson",
+                data: [{
+                  "type": "Polygon",
+                  "coordinates": [
+                    [[0, 10], [0, 20], [10, 20], [10, 10], [0, 10]]
+                  ]
+                }, {
+                  "type": "Polygon",
+                  "coordinates": [
+                    [[0, 0], [0, 10], [10, 10], [10, 0], [0,0]]
+                  ]
+                }]
+              },
+              style: {
+                fill: {
+                  color: "#aaa"
+                }
+              }
             }],
             shapeMouseEnter: function() {
                 console.log("shape mouseenter");
@@ -5809,9 +5893,26 @@ The source jQuery event instance
             zoom: 3,
             center: [0, 0],
             layers: [{
-                type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+              type: "shape",
+              dataSource: {
+                type: "geojson",
+                data: [{
+                  "type": "Polygon",
+                  "coordinates": [
+                    [[0, 10], [0, 20], [10, 20], [10, 10], [0, 10]]
+                  ]
+                }, {
+                  "type": "Polygon",
+                  "coordinates": [
+                    [[0, 0], [0, 10], [10, 10], [10, 0], [0,0]]
+                  ]
+                }]
+              },
+              style: {
+                fill: {
+                  color: "#aaa"
+                }
+              }
             }]
         });
 
@@ -5821,9 +5922,52 @@ The source jQuery event instance
         });
     </script>
 
+#### Example - Highlight Shapes on shapeMouseEnter/shapeMouseLeave
+    <div id="map"></div>
+    <script>
+      $("#map").kendoMap({
+        zoom: 3,
+        layers: [{
+          type: "shape",
+          dataSource: {
+            type: "geojson",
+            data: [{
+              "type": "Polygon",
+              "coordinates": [
+                [[0, 10], [0, 20], [10, 20], [10, 10], [0, 10]]
+              ]
+            }, {
+              "type": "Polygon",
+              "coordinates": [
+                [[0, 0], [0, 10], [10, 10], [10, 0], [0,0]]
+              ]
+            }]
+          },
+          style: {
+            // Simulate no fill with a fully transparent color
+            fill: {
+              color: "#fff",
+              opacity: 0
+            }
+          }
+        }],
+        shapeMouseEnter: function(e) {
+          e.shape.fill("#00f", 1);
+        },
+        shapeMouseLeave: function(e) {
+          e.shape.fill("#fff", 0);
+        }
+      });
+    </script>
+
 ### shapeMouseLeave
 
 Fired when the mouse leaves a shape.
+
+> **Important**
+>
+> This event will fire reliably only for shapes that have set fill color.
+> The opacity can still be set to 0 so the shapes appear to have no fill.
 
 #### Event Data
 
@@ -5850,9 +5994,26 @@ The source jQuery event instance
             zoom: 3,
             center: [0, 0],
             layers: [{
-                type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+              type: "shape",
+              dataSource: {
+                type: "geojson",
+                data: [{
+                  "type": "Polygon",
+                  "coordinates": [
+                    [[0, 10], [0, 20], [10, 20], [10, 10], [0, 10]]
+                  ]
+                }, {
+                  "type": "Polygon",
+                  "coordinates": [
+                    [[0, 0], [0, 10], [10, 10], [10, 0], [0,0]]
+                  ]
+                }]
+              },
+              style: {
+                fill: {
+                  color: "#aaa"
+                }
+              }
             }],
             shapeMouseLeave: function() {
                 console.log("shape mouseleave");
@@ -5867,9 +6028,26 @@ The source jQuery event instance
             zoom: 3,
             center: [0, 0],
             layers: [{
-                type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
+              type: "shape",
+              dataSource: {
+                type: "geojson",
+                data: [{
+                  "type": "Polygon",
+                  "coordinates": [
+                    [[0, 10], [0, 20], [10, 20], [10, 10], [0, 10]]
+                  ]
+                }, {
+                  "type": "Polygon",
+                  "coordinates": [
+                    [[0, 0], [0, 10], [10, 10], [10, 0], [0,0]]
+                  ]
+                }]
+              },
+              style: {
+                fill: {
+                  color: "#aaa"
+                }
+              }
             }]
         });
 
@@ -5996,4 +6174,3 @@ The source jQuery event instance
             console.log("zoom end @ " + e.sender.zoom());
         });
     </script>
-

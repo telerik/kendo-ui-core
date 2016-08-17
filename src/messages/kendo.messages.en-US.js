@@ -242,7 +242,8 @@ kendo.ui.FilterMultiCheck.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
   "checkAll": "Select All",
   "clear": "Clear",
-  "filter": "Filter"
+  "filter": "Filter",
+  "search": "Search"
 });
 }
 
@@ -312,6 +313,28 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
 });
 }
 
+/* TreeList messages */
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.messages =
+$.extend(true, kendo.ui.TreeList.prototype.options.messages,{
+    "noRows": "No records to display",
+    "loading": "Loading...",
+    "requestFailed": "Request failed.",
+    "retry": "Retry",
+    "commands": {
+        "edit": "Edit",
+        "update": "Update",
+        "canceledit": "Cancel",
+        "create": "Add new record",
+        "createchild": "Add child record",
+        "destroy": "Delete",
+        "excel": "Export to Excel",
+        "pdf": "Export to PDF"
+    }
+});
+}
+
 /* Groupable messages */
 
 if (kendo.ui.Groupable) {
@@ -328,6 +351,20 @@ kendo.ui.NumericTextBox.prototype.options =
 $.extend(true, kendo.ui.NumericTextBox.prototype.options,{
   "upArrowText": "Increase value",
   "downArrowText": "Decrease value"
+});
+}
+
+/* MediaPlayer messages */
+
+if (kendo.ui.MediaPlayer) {
+kendo.ui.MediaPlayer.prototype.options.messages =
+$.extend(true, kendo.ui.MediaPlayer.prototype.options.messages,{
+  "pause": "Pause",
+  "play": "Play",
+  "mute": "Mute",
+  "unmute": "Unmute",
+  "quality": "Quality",
+  "fullscreen": "Full Screen"
 });
 }
 
@@ -534,6 +571,8 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
   "save": "Save",
   "cancel": "Cancel",
   "remove": "Remove",
+  "retry": "Retry",
+  "revert": "Revert",
   "okText": "OK",
   "formatCellsDialog": {
     "title": "Format",
@@ -908,4 +947,50 @@ $.extend(true, kendo.ui.Validator.prototype.options.messages,{
   "dateCompare": "End date should be greater than or equal to the start date"
 });
 }
+
+/* kendo.ui.progress method */
+if (kendo.ui.progress) {
+kendo.ui.progress.messages =
+$.extend(true, kendo.ui.progress.messages, {
+    loading: "Loading..."
+});
+}
+
+/* Dialog */
+
+if (kendo.ui.Dialog) {
+kendo.ui.Dialog.prototype.options.messages =
+$.extend(true, kendo.ui.Dialog.prototype.options.localization, {
+  "close": "Close"
+});
+}
+
+/* Alert */
+
+if (kendo.ui.Alert) {
+kendo.ui.Alert.prototype.options.messages =
+$.extend(true, kendo.ui.Alert.prototype.options.localization, {
+  "okText": "OK"
+});
+}
+
+/* Confirm */
+
+if (kendo.ui.Confirm) {
+kendo.ui.Confirm.prototype.options.messages =
+$.extend(true, kendo.ui.Confirm.prototype.options.localization, {
+  "okText": "OK",
+  "cancel": "Cancel"
+});
+}
+
+/* Prompt */
+if (kendo.ui.Prompt) {
+kendo.ui.Prompt.prototype.options.messages =
+$.extend(true, kendo.ui.Prompt.prototype.options.localization, {
+  "okText": "OK",
+  "cancel": "Cancel"
+});
+}
+
 })(window.kendo.jQuery);

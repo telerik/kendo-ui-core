@@ -1,6 +1,6 @@
 ---
 title: Reorder Multiple Items
-page_title: Reorder Multiple Items | Kendo UI Sortable Widget
+page_title: Reorder Multiple Items | Kendo UI Sortable
 description: "Learn how to reorder multiple items using the Kendo UI Sortable widget."
 slug: howto_reordermultipleitems_sortable
 ---
@@ -58,8 +58,8 @@ The example below demonstrates how to reorder multiple items using the Kendo UI 
       }
     }).data("kendoSortable");
 
-    //_draggable will be changed to draggable (without underscore) after Q3 2015
-    listA._draggable.userEvents.bind("tap", function(e) {
+    // As of Q3 2015, _draggable is changed to draggable (without underscore).
+    listA.draggable.userEvents.bind("tap", function(e) {
       if (e.event.ctrlKey) {
         e.target.toggleClass("state-selected")  
       } else {
@@ -162,13 +162,11 @@ The example below demonstrates how to reorder multiple items using the Kendo UI 
 
 ## See Also
 
-Other articles and how-to examples on Kendo UI Sortable:
+Other articles and how-to examples on the Kendo UI Sortable:
 
 * [Sortable JavaScript API Reference](/api/javascript/ui/sortable)
 * [How to Nest Sortables]({% slug howto_nestsortables_sortable %})
 * [How to Persist Order in localStorage]({% slug howto_persistoderinlocalstorage_sortable %})
-* [How to Reorder AngularJS Grid Rows]({% slug howto_reorderangularjsgridrows_angular_sortable %})
-* [How to Reorder Grid Rows]({% slug howto_reordergridrows_sortable %})
-* [How to Reorder Rows in Nested Grid]({% slug howto_reorderrowsinnestedgrid_sortable %})
 * [How to Use Sortable in AngularJS with Grid in Batch Editing Mode]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %})
-* [How to Use Sortable with Grid in Batch Editing Mode]({% slug howto_usesortablewithgrid_inbatchediting_sortable %})
+
+For more runnable examples on the Kendo UI Sortable, browse its [**How To** documentation folder]({% slug howto_usesortablewithgrid_inincellediting_sortable %}).

@@ -1,6 +1,6 @@
 ---
 title: Image Browser
-page_title: Image Browser | Kendo UI Editor Widget
+page_title: Image Browser | Kendo UI Editor
 description: "Learn how to initialize and configure the Kendo UI Editor widget."
 slug: image_browser_editor_widget
 position: 2
@@ -72,11 +72,14 @@ All of these can be changed through the [`imagebrowser` configuration](/api/java
 
 ## See Also
 
-Other articles on Kendo UI Editor:
+Other articles on the Kendo UI Editor:
 
 * [Overview of the Editor Widget]({% slug overview_kendoui_editor_widget %})
 * [Post-Process Content]({% slug post_process_content_editor_widget %})
 * [Set Selections]({% slug set_selections_editor_widget %})
+* [Pasting]({% slug pasting_editor_widget %})
 * [Prevent Cross-Site Scripting]({% slug prevent_xss_editor_widget %})
 * [Troubleshooting]({% slug troubleshooting_editor_widget %})
 * [Editor JavaScript API Reference](/api/javascript/ui/editor)
+
+For how-to examples on the Kendo UI Editor widget, browse its [**How To** documentation folder]({% slug howto_add_max_length_validation_editor %}).

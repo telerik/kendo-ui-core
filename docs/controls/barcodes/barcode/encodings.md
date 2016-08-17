@@ -1,6 +1,6 @@
 ---
 title: Encodings
-page_title: Encodings | Kendo UI Barcode Widget
+page_title: Encodings | Kendo UI Barcode
 description: "Learn more about the character set and length, and check the digits of the Barcode symbologies when configuring the Kendo UI Barcode widget."
 slug: encodings_kendoui_barcode_widget
 position: 2
@@ -171,7 +171,7 @@ The [Kendo UI Barcode widget](http://demos.telerik.com/kendo-ui/barcode/index) s
 
 ## See Also
 
-Other articles on Kendo UI Barcode:
+Other articles on the Kendo UI Barcode:
 
 * [Overview of the Barcode Widget]({% slug overview_kendoui_barcode_widget %})
 * [Barcode JavaScript API Reference](/api/javascript/dataviz/ui/barcode)

@@ -232,6 +232,23 @@ test("search with startswith rebind items", function() {
     equal(combobox.ul.children().length, 1);
 });
 
+test("search with empty input and enforceMinLength: true does not rebind items", function() {
+    create({
+        filter: "startswith",
+        minLength: 2,
+        enforceMinLength: true
+    });
+    combobox.text("fo");
+    combobox.search("fo");
+
+    equal(combobox.ul.children().length, 1);
+
+    combobox.text("");
+    combobox.search("");
+
+    equal(combobox.ul.children().length, 1);
+});
+
 test("search with filter opens drop down if any items", function() {
     create({
         filter: "startswith"
@@ -928,4 +945,113 @@ asyncTest("clear selected value if search is started (filter: none)", 1, functio
     combobox.input.focus().val("Ba").trigger({ type: "keydown" });
 });
 
+asyncTest("search on paste", 1, function() {
+    combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: data,
+        filter: "startswith",
+        value: 2
+    });
+
+    combobox.bind("open", function() {
+        start();
+        equal(combobox.listView.dataSource.view().length, 1);
+    });
+
+    combobox.input.focus().val("F").trigger({ type: "paste" });
+});
+
+test("resize popup on search when autoWidth is enabled", function(assert) {
+    var data = [{text: "Foooooooooooooo", value: 1, type: "a"}, {text:"Bar", value:2, type: "b"}, {text:"Baz", value:3, type: "a"}];
+    var combobox = new ComboBox(input, {
+        autoWidth: true,
+        dataTextField: "ProductName",
+        dataValueField: "ProductID",
+        minLenght: 3,
+        filter: "contains",
+        dataSource: {
+            serverFiltering: false,
+            transport: {
+                read: function(options) {
+                    options.success([
+                        { ProductName: "ChaiiiiiiiiiiiiiiiiiiiiiiiiiiiiiChaiiiiiiiiiiiiiiiiiiiiiiiiiiiii", ProductID: 1 },
+                        { ProductName: "Tofu", ProductID: 2 },
+                        { ProductName: "Test3", ProductID: 3 },
+                        { ProductName: "Chai3", ProductID: 4 },
+                        { ProductName: "Test4", ProductID: 5 }
+                    ]);
+                }
+            }
+        }
+    });
+
+    var done1 = assert.async();
+    var done2 = assert.async();
+    combobox.one("open", function() {
+        assert.ok(combobox.wrapper.width() < combobox.popup.element.width());
+        combobox.close();
+        done1();
+        combobox.one("open", function() {
+            assert.ok(combobox.wrapper.width() >= combobox.popup.element.width());
+            done2();
+        });
+        combobox.search("Tof");
+    });
+    combobox.search("Cha");
+
+});
+
+test("keep popup opened on empty search result if noDataTemplate", 2, function(assert) {
+    var combobox = new ComboBox(input, {
+        animation: false,
+        dataTextField: "text",
+        dataValueField: "value",
+        filter: "contains",
+        dataSource: [{text: "Foo", value: 1 }, {text:"Bar", value:2 }, {text:"Baz", value:3}]
+    });
+
+    combobox.search("Foo");
+
+    ok(combobox.popup.visible());
+
+    combobox.search("None");
+
+    ok(combobox.popup.visible());
+});
+
+test("close popup opened on empty search result", 2, function(assert) {
+    var combobox = new ComboBox(input, {
+        animation: false,
+        dataTextField: "text",
+        dataValueField: "value",
+        filter: "contains",
+        dataSource: [{text: "Foo", value: 1 }, {text:"Bar", value:2 }, {text:"Baz", value:3}],
+        noDataTemplate: ""
+    });
+
+    combobox.search("Foo");
+    ok(combobox.popup.visible());
+
+    combobox.search("None");
+    ok(!combobox.popup.visible());
+});
+
+asyncTest("update popup height when no items are found", 1, function() {
+    var combobox = new ComboBox(input, {
+        dataSource: $.map(new Array(30), function(_, idx) { return "item" + idx.toString() }),
+        filter: "contains"
+    });
+
+    combobox.open();
+
+    var oldHeight = combobox.list.height();
+
+    combobox.one("dataBound", function() {
+        start();
+        ok(combobox.list.height() < oldHeight);
+    });
+
+    combobox.input.focus().val("test").keydown();
+});
 })();

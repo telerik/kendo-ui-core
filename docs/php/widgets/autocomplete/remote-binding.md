@@ -1,165 +1,211 @@
 ---
-title: Remote binding
-page_title: How to bind Kendo AutoComplete for PHP to remote service which returns JSON
-description: Learn how to bind Kendo UI AutoComplete for PHP to JSON
+title: Remote Binding
+page_title: Remote Binding | AutoComplete PHP Class
+description: "Bind Kendo UI AutoComplete PHP class to JSON."
+slug: remotebinding_autocomplete_uiforphp
+position: 3
 ---
+
 # Remote Binding
 
-This help topic shows how to bind Kendo AutoComplete for PHP to JSON response. Remote binding means that filter operation
-will happen on the server-side.
+This article shows how to bind Kendo UI AutoComplete for PHP to a JSON response. Remote binding means that filter operations happen on the server side.
 
-## Binding to array returned by PDO
+## Bind to PDO-Returned Arrays
 
-### Configure AutoComplete for Remote Binding
+### Configuration
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-1. Create a data source and configure it:
+Below are listed the steps for you to follow when configuring the Kendo UI AutoComplete for PHP for remote binding.
 
-        <?php
-        $transport = new \Kendo\Data\DataSourceTransport();
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
 
-        $read = new \Kendo\Data\DataSourceTransportRead();
+**Step 2** Create a data source and configure it.
 
-        // Specify the url of the PHP page which will act as the remote service
-        $read->url('products.php')
-             ->type('POST');
+###### Example
 
-        $transport->read($read);
+    <?php
+    $transport = new \Kendo\Data\DataSourceTransport();
 
-        // Configure the model
-        $model = new \Kendo\Data\DataSourceSchemaModel();
+    $read = new \Kendo\Data\DataSourceTransportRead();
 
-        $productNameField = new \Kendo\Data\DataSourceSchemaModelField('ProductName');
-        $productNameField->type('string');
+    // Specify the url of the PHP page which will act as the remote service
+    $read->url('products.php')
+         ->type('POST');
 
-        $model->addField($productNameField);
+    $transport->read($read);
 
-        $schema = new \Kendo\Data\DataSourceSchema();
+    // Configure the model
+    $model = new \Kendo\Data\DataSourceSchemaModel();
 
-        $schema->model($model);
+    $productNameField = new \Kendo\Data\DataSourceSchemaModelField('ProductName');
+    $productNameField->type('string');
 
-        $dataSource = new \Kendo\Data\DataSource();
+    $model->addField($productNameField);
 
-        // Configure data source
-        $dataSource->transport($transport)
-                   ->schema($schema);
-        ?>
-1. Create a autocomplete, configure its dataTextField option and set its data source.
+    $schema = new \Kendo\Data\DataSourceSchema();
 
-        <?php
-        $autoComplete = new \Kendo\UI\AutoComplete('AutoComplete');
-        $autoComplete->dataSource($dataSource);
-        $autoComplete->dataTextField('ProductName');
-        ?>
-1. Output the autocomplete by echo-ing the result of the render method.
+    $schema->model($model);
 
-        <?php
-        echo $autoComplete->render();
-        ?>
+    $dataSource = new \Kendo\Data\DataSource();
 
-### Create PHP file which returns JSON
+    // Configure data source
+    $dataSource->transport($transport)
+               ->schema($schema);
+    ?>
 
-1. Create a new php file called **products.php**. This file will return data in JSON format. The data source is configured to request it via the [url](/api/php/Kendo/Data/DataSourceTransportRead#url) setting.
-1. Create a PDO connection
+**Step 3** Create an AutoComplete, configure its `dataTextField` option and set its data source.
 
-        <?php
-        $db = new PDO('sqlite:../sample.db');
-        ?>
-1. Retrieve all records from the `Products` table
+###### Example
 
-        <?php
-        $statement = $db->prepare('SELECT * FROM Products');
-        $products = $statement->fetchAll(PDO::FETCH_ASSOC);
-        ?>
-1. Return the records as JSON
+    <?php
+    $autoComplete = new \Kendo\UI\AutoComplete('AutoComplete');
+    $autoComplete->dataSource($dataSource);
+    $autoComplete->dataTextField('ProductName');
+    ?>
 
-        <?php
-        // Set response content type
-        header('Content-Type: application/json');
-        // Return JSON
+**Step 4** Output the AutoComplete by echoing the result of the `render` method.
 
-        echo json_encode($products);
-        ?>
+###### Example
 
-## Binding using the DataSourceResult Helper
+    <?php
+    echo $autoComplete->render();
+    ?>
 
-The `DataSourceResult` class is a helper utility on top of PDO which simplifies common CRUD operations.
-The DataSourceResult can also perform paging, sorting, filtering, grouping and aggregate calculation on the server side by generating SQL executed via PDO.
-It is distributed with the Telerik UI for PHP** demos and can be found in the **/wrappers/php/lib/** directory of the **Telerik UI for PHP distribution.
+### JSON-Returning File Creation
 
-> The following demo is using the sample SQLite database shipped with the Telerik UI for PHP** demos (**/wrappers/php/sample.db).
+Below are listed the steps for you to follow when creating a PHP file which returns JSON.
 
-First we will configure a Kendo AutoComplete for PHP binding and then we will implement the remote service which will return JSON.
+**Step 1** Create a new PHP file called `products.php`. This file will return data in JSON format. The data source is configured to request it via the [`url`](/api/php/Kendo/Data/DataSourceTransportRead#url) setting.
 
-### Configure AutoComplete for Remote Binding (using DataSourceResult)
+**Step 2** Create a PDO connection.
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-1. Create a data source and configure it:
+###### Example
 
-        <?php
-        $transport = new \Kendo\Data\DataSourceTransport();
+    <?php
+    $db = new PDO('sqlite:../sample.db');
+    ?>
 
-        $read = new \Kendo\Data\DataSourceTransportRead();
+**Step 3** Retrieve all records from the **Products** table.
 
-        // Specify the url of the PHP page which will act as the remote service
-        $read->url('products.php')
-             ->contentType('application/json')
-             ->type('POST');
+###### Example
 
-        // Configure the transport to send the data source parameters as JSON.
-        // This is required by the DataSourceResult helper.
-        $transport->read($read)
-                  ->parameterMap('function(data) {
-                      return kendo.stringify(data);
-                  }');
+    <?php
+    $statement = $db->prepare('SELECT * FROM Products');
+    $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+    ?>
 
-        // Configure the model
-        $model = new \Kendo\Data\DataSourceSchemaModel();
+**Step 4** Return the records as JSON.
 
-        $productNameField = new \Kendo\Data\DataSourceSchemaModelField('ProductName');
-        $productNameField->type('string');
+###### Example
 
-        $model->addField($productNameField);
+    <?php
+    // Set response content type
+    header('Content-Type: application/json');
+    // Return JSON
 
-        $schema = new \Kendo\Data\DataSourceSchema();
-        // Configure the schema to accept the format returned by DataSourceResult
-        $schema->model($model)
-               ->data('data')
-               ->errors('errors')
-               ->total('total');
+    echo json_encode($products);
+    ?>
 
-        $dataSource = new \Kendo\Data\DataSource();
+## Use DataSourceResult Helpers
 
-        // Configure data source and enable server filtering operation.
-        $dataSource->transport($transport)
-                   ->schema($schema)
-                   ->serverFiltering(true);
-        ?>
-1. Create a autocomplete, configure its dataTextField option and set its data source.
+The `DataSourceResult` class is a helper utility on top of PDO which simplifies common CRUD operations. The `DataSourceResult` can also perform paging, sorting, filtering, grouping and aggregate calculation on the server side by generating SQL executed via PDO. It is distributed with the Telerik UI for PHP demos and can be found in the `/wrappers/php/lib/` directory of the Telerik UI for PHP distribution.
 
-        <?php
-        $autoComplete = new \Kendo\UI\AutoComplete('AutoComplete');
-        $autoComplete->dataSource($dataSource);
-        $autoComplete->dataTextField('ProductName');
-        ?>
-1. Output the autocomplete by echo-ing the result of the render method.
+> **Important**
+>
+> The following demo is using the sample SQLite database shipped with the Telerik UI for PHP** demos (`/wrappers/php/sample.db`).
 
-        <?php
-        echo $autoComplete->render();
-        ?>
+First, configure a Kendo UI AutoComplete for PHP binding and then implement the remote service which will return JSON.
 
-### Create PHP file which returns JSON (using DataSourceResult)
+### Configuration (DataSourceResult)
 
-1. Create a new php file called **products.php**. This file will return data in JSON format. The data source is configured to request it via the [url](/api/php/Kendo/Data/DataSourceTransportRead#url) setting.
-1. Copy **/wrappers/php/lib/DataSourceResult.php** to your web site root and include it.
+Below are listed the steps for you to follow when configuring the AutoComplete for remote binding, using `DataSourceResult`.
+
+**Step 1** Follow the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript and CSS files.
+
+**Step 2** Create a data source and configure it.
+
+###### Example
+
+   <?php
+   $transport = new \Kendo\Data\DataSourceTransport();
+
+   $read = new \Kendo\Data\DataSourceTransportRead();
+
+   // Specify the url of the PHP page which will act as the remote service
+   $read->url('products.php')
+           ->contentType('application/json')
+           ->type('POST');
+
+    // Configure the transport to send the data source parameters as JSON.
+    // This is required by the DataSourceResult helper.
+    $transport->read($read)
+              ->parameterMap('function(data) {
+                  return kendo.stringify(data);
+              }');
+
+    // Configure the model
+    $model = new \Kendo\Data\DataSourceSchemaModel();
+
+    $productNameField = new \Kendo\Data\DataSourceSchemaModelField('ProductName');
+    $productNameField->type('string');
+
+    $model->addField($productNameField);
+
+    $schema = new \Kendo\Data\DataSourceSchema();
+    // Configure the schema to accept the format returned by DataSourceResult
+    $schema->model($model)
+           ->data('data')
+           ->errors('errors')
+           ->total('total');
+
+    $dataSource = new \Kendo\Data\DataSource();
+
+    // Configure data source and enable server filtering operation.
+    $dataSource->transport($transport)
+               ->schema($schema)
+               ->serverFiltering(true);
+    ?>
+
+**Step 3** Create an AutoComplete, configure its `dataTextField` option and set its `dataSource`.
+
+###### Example
+
+    <?php
+    $autoComplete = new \Kendo\UI\AutoComplete('AutoComplete');
+    $autoComplete->dataSource($dataSource);
+    $autoComplete->dataTextField('ProductName');
+    ?>
+
+**Step 4** Output the AutoComplete by echoing the result of the `render` method.
+
+###### Example
+
+    <?php
+    echo $autoComplete->render();
+    ?>
+
+### JSON-Returning File Creation (DataSourceResult)
+
+Below are listed the steps for you to follow when creating a PHP file which returns JSON, using DataSourceResult.
+
+**Step 1** Create a new PHP file called `products.php`. This file will return data in JSON format. The data source is configured to request it via the [`url`](/api/php/Kendo/Data/DataSourceTransportRead#url) setting.
+
+**Step 2** Copy `/wrappers/php/lib/DataSourceResult.php` to your web site root and include it.
+
+###### Example
 
         <?php require_once 'lib/DataSourceResult.php'; ?>
-1. Read the request body and parse it as JSON. In the previous example we configured the Kendo DataSource to submit its parameters as JSON via the [parameterMap](/api/php/Kendo/Data/DataSourceTransport#parametermap).
+
+**Step 3** Read the request body and parse it as JSON. In the previous example you configured the Kendo UI DataSource to submit its parameters as JSON via the [`parameterMap`](/api/php/Kendo/Data/DataSourceTransport#parametermap).
+
+###### Example
 
         <?php
         $request = json_decode(file_get_contents('php://input'));
         ?>
-1. Create a new instance of the `DataSourceResult` class and call its read method.
+
+**Step 4** Create a new instance of the `DataSourceResult` class and call its `read` method.
+
+###### Example
 
         <?php
         $result = new DataSourceResult('sqlite:../sample.db');
@@ -167,7 +213,10 @@ First we will configure a Kendo AutoComplete for PHP binding and then we will im
         // The 'read' method accepts table name, array of columns to select and request parameters as array
         $data = $result->read('Products', array('ProductName'), $request));
         ?>
-1. Return the result of the `read` method as JSON
+
+**Step 5** Return the result of the `read` method as JSON.
+
+###### Example
 
         <?php
         // Set response content type
@@ -176,3 +225,13 @@ First we will configure a Kendo AutoComplete for PHP binding and then we will im
 
         echo json_encode($data);
         ?>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the AutoComplete:
+
+* [Overview of the AutoComplete PHP Class]({% slug overview_autocomplete_uiforphp %})
+* [Local Binding of the AutoComplete PHP Class]({% slug localbinding_autocomplete_uiforphp %})
+* [Overview of the Kendo UI AutoComplete Widget]({% slug overview_kendoui_autocomplete_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

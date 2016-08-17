@@ -1,21 +1,30 @@
 ---
-title: Remote binding
-page_title: How to bind Kendo TreeView for PHP to remote service which returns JSON
-description: Learn how to bind Kendo UI TreeView for PHP to JSON
+title: Remote Binding
+page_title: Remote Binding | TreeView PHP Class
+description: "Bind Kendo UI TreeView PHP class to JSON."
+slug: remotebinding_treeview_uiforphp
+position: 3
 ---
+
 # Remote Binding
 
-This help topic shows how to bind Kendo TreeView for PHP to JSON response. Remote binding means that only the nodes that the user has expanded will be sent to the client, loaded on demand.
+This article shows how to bind Kendo UI TreeView for PHP to a JSON response. Remote binding means that the nodes, expanded by the user, will be sent to the client, loaded on demand.
 
-> The following demos are using the sample SQLite database shipped with the Telerik UI for PHP** demos (**/wrappers/php/sample.db).
+> **Important**
+>
+> The following demos are using the sample SQLite database shipped with the Telerik UI for PHP demos (`/wrappers/php/sample.db`).
 
-## Binding to array returned by PDO
+## Bind to PDO-Returned Arrays
 
-### Configure TreeView for Remote Binding
+### Configuration
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
+Below are listed the steps for you to follow when configuring the Kendo UI AutoComplete for PHP for remote binding.
 
-1. Create a data source and configure it:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Create a data source and configure it.
+
+###### Example
 
         <?php
         $transport = new \Kendo\Data\DataSourceTransport();
@@ -45,7 +54,9 @@ This help topic shows how to bind Kendo TreeView for PHP to JSON response. Remot
                    ->schema($schema);
         ?>
 
-1. Create a treeview, configure its columns and set its data source.
+**Step 3** Create a TreeView, configure its columns and set its data source.
+
+###### Example
 
         <?php
         $treeview = new \Kendo\UI\TreeView('treeview');
@@ -54,21 +65,31 @@ This help topic shows how to bind Kendo TreeView for PHP to JSON response. Remot
                  ->dataTextField("FirstName");
         ?>
 
-1. Output the treeview by echo-ing the result of the render method.
+**Step 4** Output the TreeView by echoing the result of the `render` method.
+
+###### Example
 
         <?php
         echo $treeview->render();
         ?>
 
-### Create PHP file which returns JSON
+### JSON-Returning File Creation
 
-1. Create a new php file called **employees.php**. This file will return data in JSON format. The data source is configured to request it via the [url](/api/php/Kendo/Data/DataSourceTransportRead#url) setting.
-1. Create a PDO connection
+Below are listed the steps for you to follow when creating a PHP file which returns JSON.
+
+**Step 1** Create a new PHP file called `employees.php`. This file will return data in JSON format. The data source is configured to request it via the [`url`](/api/php/Kendo/Data/DataSourceTransportRead#url) setting.
+
+**Step 2** Create a PDO connection.
+
+###### Example
 
         <?php
         $db = new PDO('sqlite:../sample.db');
         ?>
-1. Retrieve all records from the `Employees` table, children of the sent EmployeeID. If the paramater is not set, retrieve only the root nodes.
+
+**Step 3** Retrieve all records from the **Employees** table, children of the sent `EmployeeID`. If the `parameter` is not set, retrieve only the root nodes.
+
+###### Example
 
         <?php
         $request = json_decode(file_get_contents('php://input'), true);
@@ -91,7 +112,10 @@ This help topic shows how to bind Kendo TreeView for PHP to JSON response. Remot
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
         ?>
 
-1. Post-process the data, if necessary. In this case, the `HasEmployees` field needs to be boolean.
+<!--*-->
+**Step 4** Post-process the data, if necessary. In this case, the `HasEmployees` field needs to be Boolean.
+
+###### Example
 
         <?php
         $employees = array();
@@ -102,7 +126,9 @@ This help topic shows how to bind Kendo TreeView for PHP to JSON response. Remot
         }
         ?>
 
-1. Return the records as JSON
+**Step 5** Return the records as JSON.
+
+###### Example
 
         <?php
         // Set response content type
@@ -112,3 +138,12 @@ This help topic shows how to bind Kendo TreeView for PHP to JSON response. Remot
         echo json_encode($employees);
         ?>
 
+## See Also
+
+Other articles on Telerik UI for PHP and on the TreeView:
+
+* [Overview of the TreeView PHP Class]({% slug overview_treeview_uiforphp %})
+* [Local Binding of the TreeView PHP Class]({% slug localbinding_treeview_uiforphp %})
+* [Overview of the Kendo UI TreeView Widget]({% slug overview_kendoui_treeview_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

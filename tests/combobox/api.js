@@ -77,7 +77,7 @@ test("open() does not initiate second Ajax request", function() {
 
     equal(combobox.dataSource.calls("fetch"), 1);
 
-    $.mockjaxClear();
+    $.mockjax.clear();
 });
 
 
@@ -696,7 +696,7 @@ test("value(value) does not initiate second Ajax request", function() {
 
     equal(combobox.dataSource.calls("fetch"), 1);
 
-    $.mockjaxClear();
+    $.mockjax.clear();
 });
 
 test("value('') clears selection and do not fetch", function() {
@@ -976,4 +976,135 @@ test("calls hideBusy on dataSource transport error", 1, function() {
     equal(combobox.calls("_hideBusy"), 1);
 });
 
+test("show clear button", 1, function() {
+    var combobox = new ComboBox(input, {
+        dataValueField: "id",
+        dataTextField: "name",
+        dataSource: [
+            { id: 1, name: "name1" },
+            { id: 2, name: "name2" },
+            { id: 3, name: "name3" }
+        ],
+        value: "2"
+    });
+
+    ok(combobox.wrapper.find(combobox._clear).length > 0);
+});
+
+test("hide clear button", 1, function() {
+    var combobox = new ComboBox(input, {
+        clearButton: false,
+        dataValueField: "id",
+        dataTextField: "name",
+        dataSource: [
+            { id: 1, name: "name1" },
+            { id: 2, name: "name2" },
+            { id: 3, name: "name3" }
+        ],
+        value: "2"
+    });
+
+    equal(combobox.wrapper.find(combobox._clear).length, 0);
+});
+
+test("reset value when _clear is clicked", 1, function() {
+    var combobox = new ComboBox(input, {
+        dataValueField: "id",
+        dataTextField: "name",
+        dataSource: [
+            { id: 1, name: "name1" },
+            { id: 2, name: "name2" },
+            { id: 3, name: "name3" }
+        ],
+        value: "2"
+    });
+
+    combobox._clear.click();
+    equal(combobox.value(), "");
+});
+
+test("setOptions method updates footer template", 1, function() {
+    var combobox = new ComboBox(input, { });
+
+    combobox.setOptions({ footerTemplate: "footer" });
+
+    equal(combobox.footer.html(), "footer");
+});
+
+test("setOptions method hides footer template", 1, function() {
+    var combobox = new ComboBox(input, {
+        footerTemplate: "footer"
+    });
+
+    combobox.setOptions({ footerTemplate: "" });
+
+    equal(combobox.footer, null);
+});
+
+test("setOptions method updates header template", 1, function() {
+    var combobox = new ComboBox(input, { });
+
+    combobox.setOptions({ headerTemplate: "<div>header</div>" });
+
+    equal(combobox.header.html(), "header");
+});
+
+test("setOptions method hides footer template", 1, function() {
+    var combobox = new ComboBox(input, {
+        headerTemplate: "header"
+    });
+
+    combobox.setOptions({ headerTemplate: "" });
+
+    equal(combobox.header, null);
+});
+
+test("setOptions re-renders noDataTemplate", function() {
+    var combobox = new ComboBox(input, {
+        noDataTemplate: "test"
+    });
+
+    combobox.setOptions({
+        noDataTemplate: "no data"
+    });
+
+    equal(combobox.noData.text(), "no data");
+});
+
+test("setOptions removes noData template", function() {
+    var combobox = new ComboBox(input, {
+        noDataTemplate: "test"
+    });
+
+    combobox.setOptions({
+        noDataTemplate: null
+    });
+
+    equal(combobox.noData, null);
+});
+    asyncTest("reset filters when _clear is clicked", 1, function() {
+        var combobox = new ComboBox(input, {
+            filter: "startswith",
+            minLength: 2,
+            // enforceMinLength: true,
+            dataValueField: "id",
+            dataTextField: "name",
+            dataSource: {
+                data: [
+                    { id: 1, name: "name1" },
+                    { id: 2, name: "name2" },
+                    { id: 3, name: "name3" }
+                ],
+                // filter: {field: "id", value: 1, operator: "equals"}
+            }
+        });
+
+        combobox.text("name");
+        combobox.search("name");
+        combobox.dataSource.bind("change", function() {
+            start();
+            equal(JSON.stringify(combobox.dataSource.filter()), JSON.stringify({"filters":[{"value":"","field":"name","operator":"startswith","ignoreCase":true}],"logic":"and"}));
+        });
+        combobox._clear.click();
+    });
 })();

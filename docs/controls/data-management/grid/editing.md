@@ -1,6 +1,6 @@
 ---
 title: Editing
-page_title: Editing | Kendo UI Grid Widget
+page_title: Editing | Kendo UI Grid
 description: "Learn how to enable the editing support for the Kendo UI Grid widget."
 slug: editing_kendoui_grid_widget
 position: 4
@@ -10,7 +10,7 @@ position: 4
 
 Editing is one of the basic functionalities Kendo UI Grid supports and it allows you to manipulate the way the data is presented.
 
-## Set Up
+## Setup
 
 To enable the editing support for the Kendo UI Grid widget, perform the steps described below.
 
@@ -126,9 +126,26 @@ If you want to delete records, define a delete command column, as demonstrated b
          editable: true
      });
 
+## Editing of Foreign Key Columns
+
+Normally, a foreign key column should be bound to a numeric data field, which points to the unique keys of a separate collection. An issue related to editing may occur if some of the values in the foreign key column are `null`. While this will not create problems in display mode, it will mislead the column editor to think it should work with object values, instead of primitive values. As a result, when a value is picked from the DropDownList, the widget will set an object value to the Grid data item (e.g. {text: "Foo", value: 3} ), instead of a numeric value (e.g. 3). This will cause the Grid cell to remain blank upon exiting edit mode.
+
+To avoid the above behavior, one of the following options paths be followed:
+
+* Use zeros instead of nulls to match the data values to the declared data field type.
+* Use a [custom column Editor](http://demos.telerik.com/kendo-ui/grid/editing-custom) with manually configured DropDownList that has a [`valuePrimitive`](/api/javascript/ui/dropdownlist#configuration-valuePrimitive) setting set to `true`.
+
+## Using Custom Editors
+
+When a Kendo UI MultiSelect is used as a custom editor, the `save` event of the Grid is not triggered when the value of the MultiSelect is changed.
+
+The reason for this is that the value of the MultiSelect is a reference type&mdash;`array`&mdash;which prevents the normal usage of the `model.set()` function for setting the value of the corresponding model property. To work around this behavior, define a custom data-binding mechanism. After applying this fix, the `save` event of the Grid will be triggered properly each time a new selection is added to the value of the MultiSelect.
+
+To see the runnable example on this issue, refer to the article on [using the MultiSelect as a custom editor in the Grid]({% slug howto_usemultiselectascustomeditor_grid %}).
+
 ## See Also
 
-Other articles on Kendo UI Grid:
+Other articles on the Kendo UI Grid:
 
 * [Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})
@@ -140,4 +157,4 @@ Other articles on Kendo UI Grid:
 * [Export the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %})
 * [Print the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
 
-For how-to examples on the Kendo UI Grid widget, browse [its How-to section]({% slug howto_bindto_telerik_backend_services_grid %}).
+For how-to examples on the Kendo UI Grid widget, browse its [**How To** documentation folder]({% slug howto_bindto_telerik_backend_services_grid %}).

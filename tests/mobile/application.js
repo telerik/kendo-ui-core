@@ -12,7 +12,7 @@
 
         teardown: function() {
             application.destroy();
-            $.mockjaxClear();
+            $.mockjax.clear();
             kendo.history.stop();
             QUnit.fixture.empty();
         }
@@ -153,9 +153,9 @@
             ok(true);
         });
 
-        el.trigger($.Event("touchstart", { originalEvent: { changedTouches: [{ pageX: 1, pageY: 100, identifier: 1}] }}));
-        el.trigger($.Event("touchmove", { originalEvent: { changedTouches: [{ pageX: 1, pageY: 1, identifier: 1}] }}));
-        el.trigger($.Event("touchend", { originalEvent: { changedTouches: [{ pageX: 1, pageY: 1, identifier: 1}] }}));
+        triggerTouchEvent(el, "touchstart", { pageX: 1, pageY: 100, identifier: 1});
+        triggerTouchEvent(el, "touchmove", { pageX: 1, pageY: 1, identifier: 1});
+        triggerTouchEvent(el, "touchend", { pageX: 1, pageY: 1, identifier: 1});
 
         application.scroller().unbind("scroll");
     });
@@ -407,5 +407,21 @@
                 }
             }
         );
+    });
+
+    module("kendo.mobile.Application (history: false)", {
+        setup: function() {
+            var root = $("<div><div data-role=view></div></div>");
+            QUnit.fixture.html(root);
+            application = new kendo.mobile.Application(root, { browserHistory: false });
+        },
+
+        teardown: function() {
+            application.destroy();
+        }
+    });
+
+    test("destroy works when app has history disabled", 0, function() {
+        // rely on teardown failing
     });
 })();

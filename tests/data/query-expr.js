@@ -343,14 +343,28 @@ test("isnull", function() {
     equal(compile({
         logic: "and",
         filters: [ { field: "foo", operator: "isnull" } ]
-    }), "(d.foo === null || d.foo === undefined)");
+    }), "((d.foo === null || d.foo === undefined))");
+});
+
+test("multiple isnull expressions", function() {
+    equal(compile({
+        logic: "and",
+        filters: [ { field: "foo", operator: "isnull" }, { field: "bar", operator: "isnull" }  ]
+    }), "((d.foo === null || d.foo === undefined) && (d.bar === null || d.bar === undefined))");
+});
+
+test("multple isnotnull expressions", function() {
+    equal(compile({
+        logic: "and",
+        filters: [ { field: "foo", operator: "isnotnull" }, { field: "bar", operator: "isnotnull" } ]
+    }), "((d.foo !== null && d.foo !== undefined) && (d.bar !== null && d.bar !== undefined))");
 });
 
 test("isnotnull", function() {
     equal(compile({
         logic: "and",
         filters: [ { field: "foo", operator: "isnotnull" } ]
-    }), "(d.foo !== null && d.foo !== undefined)");
+    }), "((d.foo !== null && d.foo !== undefined))");
 });
 
 test("startswith", function() {

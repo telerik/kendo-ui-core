@@ -204,6 +204,29 @@
         equal(values[1], "item3");
     });
 
+    test("dataItemByIndex method returns a dataItem corresponding to the index", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ],
+                group: "type"
+            },
+            template: '#:data.name#',
+            groupTemplate: '#:data#',
+            selectable: "multiple"
+        });
+
+        list.dataSource.read();
+
+        var dataItem = list.dataItemByIndex(2);
+
+        equal(dataItem, list.dataSource.view()[1].items[0]);
+    });
+
     test("focus method focuses li element", function() {
         var list = new StaticList(element, {
             dataSource: ["item1", "item2", "item3"],
@@ -1316,6 +1339,61 @@
         equal(list.args("scroll")[0], children[2]);
     });
 
+    var getData = function(length) {
+        var result = [];
+        for(var idx=0; idx < length; idx++) {
+            result.push("item" + idx);
+        }
+        return result;
+    };
+
+    test("screenHeight gets the clientHeight of the content", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: getData(100),
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        var content = list.content.height(200);
+
+        equal(list.screenHeight(), 200);
+    });
+
+    test("scrollWith moves scroll position down", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: getData(100),
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        var content = list.content
+                          .height(200)
+                          .scrollTop(100);
+
+        list.scrollWith(50);
+
+        ok(content[0].scrollTop, 150);
+    });
+
+    test("scrollWith moves scroll position up", 1, function() {
+        var list = new StaticList(element, {
+            dataSource: getData(100),
+            template: "#:data#"
+        });
+
+        list.dataSource.read();
+
+        var content = list.content
+                          .height(200)
+                          .scrollTop(100);
+
+        list.scrollWith(-50);
+
+        equal(content[0].scrollTop, 50);
+    });
+
     test("bound returns bound state of the list", function() {
         var list = new StaticList(element, {
             dataSource: ["item1", "item2", "item3"],
@@ -1469,6 +1547,26 @@
         list.dataSource.filter({ field: "", operator: "eq", value: "item2" });
 
         ok(list.isFiltered());
+    });
+
+    test("getElementIndex method LI element offset index", function() {
+        var list = new StaticList(element, {
+            dataValueField: "name",
+            dataSource: {
+                data: [
+                    { name: "item1", type: "a" },
+                    { name: "item2", type: "b" },
+                    { name: "item3", type: "a" }
+                ]
+            },
+            template: '#:data.name#'
+        });
+
+        list.dataSource.read();
+
+        var index = list.getElementIndex(list.element.children().eq(2));
+
+        equal(index, 2);
     });
 
 })();

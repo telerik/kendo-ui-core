@@ -1,191 +1,202 @@
 ---
-title: Globalization and Localization
-page_title: Globalization guide for Telerik UI for ASP.NET MVC
-description: Globalize, internationalize a Telerik UI for ASP.NET MVC application
-position: 4
+title: Globalization
+page_title: Globalization | Telerik UI for ASP.NET MVC
+description: "Use different cultures with Telerik UI for ASP.NET MVC."
+slug: globalization_aspnetmvc
+position: 7
 ---
 
-# Globalization and Localization
+# Globalization
 
-- [Globalization](#globalization)
-    - [Use the same culture on the server and client-side](#use-the-same-culture-on-the-server-and-client-side)
-      - [Set the server-side culture](#set-the-server-side-culture)
-      - [Set the client-side culture to match the one on the server](#set-the-client-side-culture-to-match-the-one-on-the-server)
-- [Localization](#localization)
-    - [Changing the localization messages](#changing-the-localization-messages)
-    - [Adding new localizations](#adding-new-localizations)
+Globalization is the process of designing and developing an application that works in multiple cultures and languages. The culture defines specific information for the number formats, week and month names, date and time formats, etc.
 
-## Globalization
+## Apply Cultures
 
-Globalization is the process of designing and developing an application that works in multiple cultures and languages.
-The culture defines specific information for the number formats, week and month names, date and time formats etc.
+Below are listed the steps for you to follow when you want to make Telerik UI for ASP.NET MVC use a culture that is different from the default one, which is `en-US`.
 
-To make Telerik UI for ASP.NET MVC use a different culture than the default (which is "en-US") you should perform the following steps:
+**Step 1** Copy the required culture JavaScript file from the `\js\culture\` directory of your Telerik UI for ASP.NET MVC installation to the `~/Scripts/cultures/` directory of your application. Use the Spanish `es-ES` culture for the example.
 
-1. Copy the required culture JavaScript file from the **\js\culture\** directory of your Telerik UI for ASP.NET MVC installation
-to the **~/Scripts/cultures/** directory of your application. Let's use the Spanish (es-ES) culture for the example.
-1. Include the corresponding culture JavaScript file *after* the other JavaScript product files.
-    - ASPX
+**Step 2** Include the corresponding culture JavaScript file after the other JavaScript product files.
 
-            <script src="<%= Url.Content("~/Scripts/jquery.min.js") %>"></script>
-            <script src="<%= Url.Content("~/Scripts/kendo.all.min.js") %>"></script>
-            <script src="<%= Url.Content("~/Scripts/kendo.aspnetmvc.min.js") %>"></script>
-            <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js") %>"></script>
-    - Razor
+###### Example
 
-            <script src="@Url.Content("~/Scripts/jquery.min.js")"></script>
-            <script src="@Url.Content("~/Scripts/kendo.all.min.js")"></script>
-            <script src="@Url.Content("~/Scripts/kendo.aspnetmvc.min.js")"></script>
-            <script src="@Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js")"></script>
-1. Set the current culture by calling the [kendo.culture](/api/javascript/kendo#methods-culture) method. The script block should come *after* the culture JavaScript file.
+```tab-ASPX
 
-        <script>
-        kendo.culture("es-ES");
-        </script>
+      <script src="<%= Url.Content("~/Scripts/jquery.min.js") %>"></script>
+      <script src="<%= Url.Content("~/Scripts/kendo.all.min.js") %>"></script>
+      <script src="<%= Url.Content("~/Scripts/kendo.aspnetmvc.min.js") %>"></script>
+      <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js") %>"></script>
+```
+```tab-Razor
 
-After performing those steps all UI widgets included in the product will use the "es-ES" culture for parsing and formatting dates and numbers.
+      <script src="@Url.Content("~/Scripts/jquery.min.js")"></script>
+      <script src="@Url.Content("~/Scripts/kendo.all.min.js")"></script>
+      <script src="@Url.Content("~/Scripts/kendo.aspnetmvc.min.js")"></script>
+      <script src="@Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js")"></script>
+```
 
-### Use the same culture on the server and client-side
+**Step 3** Set the current culture by calling the [`kendo.culture`](/api/javascript/kendo#methods-culture) method. Note that you must add the script block after the culture JavaScript file.
 
-It's important to have matching culture set on the client and on the server. This will ensure that dates and numbers are displayed and parsed correctly.
+###### Example
 
-#### Set the server-side culture
+      <script>
+      kendo.culture("es-ES");
+      </script>
+
+After performing these steps, all Kendo UI widgets included in the product will use the `es-ES` culture for parsing and formatting dates and numbers.
+
+## Match Cultures
+
+It is important to have matching cultures set on the client and on the server. This ensures that dates and numbers are displayed and parsed correctly.
+
+### Set the Server-Side Culture
 
 You can choose to set the server-side culture globally or per-request.
 
-##### Globally
-To set the server-side culture you need to update the **web.config** file of your ASP.NET MVC application:
+#### Global Setup
 
-    <system.web>
-        <!-- snip --!>
-        <globalization uiCulture="es-ES" culture="es-ES"></globalization>
-        <!-- snip --!>
-    </system.web>
+To set the server-side culture, update the `web.config` file of your ASP.NET MVC application.
 
-##### Per-request
-Override the [Controller.Initialize](https://msdn.microsoft.com/en-us/library/system.web.mvc.controller.initialize(v=vs.118).aspx) method to set the [CurrentCulture](https://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.currentculture.aspx)
-and [CurrentUICulture](https://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.currentuiculture.aspx).
+###### Example
 
-    protected override void Initialize(System.Web.Routing.RequestContext requestContext)
-    {
-        Thread.CurrentThread.CurrentCulture =
-            Thread.CurrentThread.CurrentUICulture =
-                new CultureInfo(requestContext.HttpContext.Request["my-culture"]);
+      <system.web>
+          <!-- snip --!>
+          <globalization uiCulture="es-ES" culture="es-ES"></globalization>
+          <!-- snip --!>
+      </system.web>
 
-        base.Initialize(requestContext);
+<!-- -->
+#### Per-Request Setup
+
+Override the [`Controller.Initialize`](https://msdn.microsoft.com/en-us/library/system.web.mvc.controller.initialize(v=vs.118).aspx) method to set the [`CurrentCulture`](https://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.currentculture.aspx) and [`CurrentUICulture`](https://msdn.microsoft.com/en-us/library/system.globalization.cultureinfo.currentuiculture.aspx).
+
+###### Example
+
+      protected override void Initialize(System.Web.Routing.RequestContext requestContext)
+      {
+          Thread.CurrentThread.CurrentCulture =
+              Thread.CurrentThread.CurrentUICulture =
+                  new CultureInfo(requestContext.HttpContext.Request["my-culture"]);
+
+          base.Initialize(requestContext);
+      }
+
+### Set Matching Client-Side Cultures
+
+Below are listed the steps for you to follow when you want to make the widgets use the same culture as the one set on the server side.
+
+**Step 1** Copy the required culture JavaScript files from the `\js\culture\` directory of your Telerik UI for ASP.NET MVC installation to the `~/Scripts/cultures/` directory of your application.
+
+**Step 2** Get the current culture.
+
+###### Example
+
+```tab-ASPX
+
+    <%
+      var culture =  System.Globalization.CultureInfo.CurrentCulture.ToString();
+    %>
+```
+```tab-Razor
+    @{
+        var culture =  System.Globalization.CultureInfo.CurrentCulture.ToString();
     }
+```
 
-#### Set the client-side culture to match the one on the server
+**Step 3** Include the corresponding culture JavaScript file.
 
-To make the widgets use the same culture as the server-side follow these steps:
+###### Example
 
-1. Copy the required culture JavaScript files from the **\js\culture\** directory of your Telerik UI for ASP.NET MVC installation
-to the **~/Scripts/cultures/** directory of your application.
-1. Get the current culture
-    - ASPX
+```tab-ASPX
 
-            <%
-                var culture =  System.Globalization.CultureInfo.CurrentCulture.ToString();
-            %>
-    - Razor
+    <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js") %>"></script>
+```
+```tab-Razor
 
-            @{
-                var culture =  System.Globalization.CultureInfo.CurrentCulture.ToString();
-            }
-1. Include the corresponding culture JavaScript file.
-    - ASPX
+    <script src="@Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js")"></script>
+```
 
-            <script src="<%= Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js") %>"></script>
-    - Razor
+**Step 4** Set the current culture by calling the [`kendo.culture`](/api/javascript/kendo#methods-culture) method. Note that you must add the script block after the culture JavaScript file.
 
-            <script src="@Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js")"></script>
-1. Set the current culture by calling the [kendo.culture](/api/javascript/kendo#methods-culture) method. The script block should come *after* the culture JavaScript file.
-    - ASPX
+###### Example
 
-            <script>
-                kendo.culture("<%= culture %>");
-            </script>
-    - Razor
+```tab-ASPX
 
-            <script>
-                kendo.culture("@culture");
-            </script>
+    <script>
+        kendo.culture("<%= culture %>");
+    </script>
+```
+```tab-Razor
 
-## Localization
+    <script>
+        kendo.culture("@culture");
+    </script>
+```
 
-If the `CurrentUICulture` is set (from code or **web.config**) Telerik UI for ASP.NET MVC will use localized user interface messages.
+> **Important**
+>
+> Set the client-side culture before initializing any Kendo UI widgets that rely on it.
 
-Telerik UI for ASP.NET MVC comes with localized messages for the following cultures:
+## Use the Culture Helper
 
-- bg-BG - Bulgarian (Bulgaria)
-- da-DK - Danish (Denmark)
-- de-DE - German (Germany)
-- es-ES - Spanish (Spain)
-- en-US - English (US)
-- fr-FR - French (French)
-- nl-NL - Dutch (Netherlands)
-- pl-PL - Polish (Poland)
-- pt-BR - Portuguese (Brazil)
-- pt-PT - Portuguese (Portugal)
-- ro-RO - Romanian (Romania)
-- ru-RU - Russian (Russia)
-- sv-SE - Swedish (Sweden)
-- uk-UA - Ukrainian (Ukraine)
-- zh-CN - Chinese (PRC)
+The Kendo UI culture scripts are generated based on the Windows 8 formats. If you use a different version that has different date or number formats, it will lead to issues related to data binding. To avoid these side effects, use the `Html.Kendo().Culture()` helper which generates the Kendo UI culture script based on the current .NET or specified culture.
 
-If the `CurrentUICulture` is not supported the default "en-US" will be used.
+### Generate Cultures
 
-> The culture used for the localization messages is determined by the `CurrentUICulture` property and **not** by `CurrentCulture`.
+The example below demonstrates how to generate the current and specified cultures.
 
-### Changing the localization messages
+###### Example
 
-Telerik UI for ASP.NET MVC uses [satellite assemblies](http://blogs.msdn.com/b/global_developer/archive/2011/07/22/introduction-to-satellite-assemblies.aspx) to support localization (user interface messages localized for a set of cultures).
+```tab-Current
 
-To change the provided localization messages a custom version of Kendo.Mvc.dll must be built. This is required because Kendo.Mvc.dll is a strongly named assembly and its private key is not shipped as part of the Telerik UI for ASP.NET MVC distribution.
+    @Html.Kendo().Culture()
+```
+```tab-Specified
 
-1. Open the **\src\Kendo.Mvc\Kendo.Mvc.csproj** Visual Studio project. The **\src** directory is available only with the commercial version of Telerik UI for ASP.NET MVC.
-1. Locate the **Resources** directory in the solution explorer. It contains the resource files for the supported cultures.
-![Resources](/aspnet-mvc/images/resources.png)
-1. Open the resource file which corresponds to the target culture e.g. "Messages.es-ES.resx".
-1. Edit the resource file and save it.
-1. Change the solution configuration to "Release".
-1. Build the project.
-1. Copy **\src\Kendo.Mvc\bin\Release\Kendo.Mvc.dll** and **\src\Kendo.Mvc\bin\Release\es-ES\Kendo.Mvc.resources.dll** to your ASP.NET MVC application.
-1. Update the Kendo.Mvc.dll assembly reference to the newly copied one.
+    @Html.Kendo().Culture("bg-BG")
 
-Apart from building a custom version of Kendo.Mvc.dll you can specify a new value for the corresponding message in the MVC HtmlHelper configuration.
+```
 
-For example to change the default message for the "create" grid toolbar command you can do the following:
-- ASPX
+### Include in Existing Script
 
-        <%:Html.Kendo().Grid<Product>()
-               .Toolbar(toolbar =>
-               {
-                   toolbar.Create().Text("Add new product");
-               })
-        %>
-- Razor
+The Culture helper also provides the option to disable the rendering inside a script tag, so it can be included in the existing script.
 
-        @(Html.Kendo().Grid<Product>()
-              .Toolbar(toolbar =>
-              {
-                toolbar.Create().Text("Add new product");
-              })
-        )
+The example below demonstrates how to generate the current and specified cultures in an existing script file.
 
-### Adding new localizations
+###### Example
 
-To add a localization for a new language a custom version of Kendo.Mvc.dll must be built. This is required because Kendo.Mvc.dll is a strongly named assembly and its private key is not shipped as part of the Telerik UI for ASP.NET MVC distribution.
+```tab-Current
 
-1. Open the **\src\Kendo.Mvc\Kendo.Mvc.csproj** Visual Studio project. The **\src** directory is available only with the commercial version of Telerik UI for ASP.NET MVC.
-1. Locate the **Resources** directory in the solution explorer. It contains the resource files for the supported cultures.
-![Resources](/aspnet-mvc/images/resources.png)
-1. Copy **Messages.resx** and paste it. Rename the copy to **Messages.culture-code.resx** e.g. **Messages.es-MX.resx**.
-1. Open the newly created resource file.
-1. Edit the resource file and save it. The **Messagex.resx** file contains the English messages.
-1. Change the solution configuration to "Release".
-1. Build the project.
-1. Copy **\src\Kendo.Mvc\bin\Release\Kendo.Mvc.dll** and **\src\Kendo.Mvc\bin\Release\es-MX\Kendo.Mvc.resources.dll** to your ASP.NET MVC application.
-1. Update the Kendo.Mvc.dll assembly reference to the newly copied one.
+    <script>
+        @Html.Kendo().Culture(false)
+    </script>
+```
+```tab-Specified
 
+    <script>
+        @Html.Kendo().Culture("bg-BG", false)
+    </script>
+```
 
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC:
+
+* [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Custom DataSource]({% slug customdatasource_aspnetmvc %})
+* [Validation with Telerik UI for ASP.NET MVC]({% slug validation_aspnetmvc %})
+* [Localization with Telerik UI for ASP.NET MVC]({% slug localization_aspnetmvc %})
+* [Visual Basic Syntax]({% slug visualbasic_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Wrappers vs Kendo UI Widgets]({% slug wrappersvswidgets_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Visual Studio Integration]({% slug overview_visualstudio_aspnetmvc %})
+* [Migration from Telerik Extensions]({% slug overview_migrationextensions_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC HtmlHelpers]({% slug overview_autocompletehelper_aspnetmvc %})
+* [ASP.NET MVC 3]({% slug aspnetmvc3_aspnetmvc %})
+* [ASP.NET MVC 4]({% slug aspnetmvc4_aspnetmvc %})
+* [ASP.NET MVC 5]({% slug aspnetmvc5_aspnetmvc %})
+* [ASP.NET Core MVC]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})
+* [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

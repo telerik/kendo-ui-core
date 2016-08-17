@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Editor Widget
+page_title: Overview | Kendo UI Editor
 description: "Learn how to initialize and configure the Kendo UI Editor widget."
 slug: overview_kendoui_editor_widget
 position: 1
@@ -38,7 +38,11 @@ The classic Editor is able to post its value automatically, because it is based 
 
 ### Inline Mode
 
-If you initialize the Editor from a `<div>` or any other element (`<div>` elements are recommended in most cases), it assumes its inline mode. The originating element is made contenteditable and is used by the widget to return its value.
+If you initialize the Editor from a `<div>`, it assumes its inline mode. The originating element is made content-editable and is used by the widget to return its value.
+
+> **Important**
+>
+> While it is possible to initialize an inline Editor from a non-`div` element, such as `p`, `h1`, and others, it is strongly recommended that you use the `<div>`. Table elements cannot be used for creating an inline Editor because of Internet Explorer browser limitations.
 
 The inline Editor is not able to post its value and [this is something you must take care of](/web/editor/troubleshoot/troubleshooting). The Editor tools are only visible when the widget is focused. The Editor's content resides on the main web page, so the page styling can influence the editable content.
 
@@ -46,11 +50,11 @@ The inline Editor is not able to post its value and [this is something you must 
 
 > **Important**  
 >
-> Due to the iOS Safari browser's limited `iframe` support, the inline mode of the Editor is recommended to use on iOS devices.
+> Due to the limited `iframe` support of the iOS Safari browser, the inline mode of the Editor is recommended to use on iOS devices.
 
 ## Configuration
 
-The Editor tools can be configured through the [`tools` configuration option](/api/web/editor#tools).
+It is possible to configure the Editor tools through the [`tools` configuration option](/api/web/editor#tools).
 
 ### Define Sets of Editor Tools
 
@@ -263,20 +267,17 @@ To override the above styles, use custom styles with [higher specificity](https:
 
 ## See Also
 
-Other articles on Kendo UI Editor:
+Other articles on the Kendo UI Editor:
 
 * [Editor JavaScript API Reference](/api/javascript/ui/editor)
 * [Image Browser]({% slug image_browser_editor_widget %})
 * [Post-Process Content]({% slug post_process_content_editor_widget %})
 * [Set Selections]({% slug set_selections_editor_widget %})
 * [Prevent Cross-Site Scripting]({% slug prevent_xss_editor_widget %})
+* [Pasting]({% slug pasting_editor_widget %})
 * [Troubleshooting]({% slug troubleshooting_editor_widget %})
-* [How to Add Max-Length Validation]({% slug howto_add_max_length_validation_editor %})
-* [How to Get Reference to Child Widgets]({% slug howto_get_referenceto_child_widgets_editor %})
-* [How to Insert HTML Content via Custom Popup Tools]({% slug howto_insert_html_content_custom_popup_tool_editor %})
-* [How to Set Caret Position]({% slug howto_set_caret_position_editor %})
-* [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
-* [How to Use Inline Editor inside Windows]({% slug howto_use_inline_editor_inside_windows_editor %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension of the Editor Widget](/aspnet-mvc/helpers/editor/overview)
-* [Overview of the Editor JSP Tag](/jsp/tags/editor/overview)
+* [Overview of the Editor JSP Tag]({% slug overview_editor_uiforjsp %})
 * [Overview of the Editor PHP Class](/php/widgets/editor/overview)
+
+For how-to examples on the Kendo UI Editor widget, browse its [**How To** documentation folder]({% slug howto_add_max_length_validation_editor %}).

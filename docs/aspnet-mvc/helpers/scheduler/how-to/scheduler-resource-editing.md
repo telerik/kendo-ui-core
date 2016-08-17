@@ -1,12 +1,19 @@
 ---
-title: Scheduler resource editing
-page_title: Scheduler resource editing
-description: Scheduler resource editing
+title: Edit Scheduler Resources
+page_title: Edit Scheduler Resources | Kendo UI Scheduler HtmlHelper
+description: "Implement a custom editor which allows the user to edit the resources of the Kendo UI Scheduler by using the Grid in ASP.NET MVC applications."
+slug: howto_editresources_scheduleraspnetmvc
 ---
 
-# Scheduler resource editing
+# Edit Scheduler Resources
 
-The example below demonstrates how to implement custom editor which allow the user to edit the Scheduler resources using Grid.
+The example below demonstrates how to a custom editor which allows the user to edit the resources of the Kendo UI Scheduler by using the Grid in ASP.NET MVC applications.
 
+To see the example, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-resource-editing).
 
-[Scheduler resource editing](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-resource-editing)
+## See Also
+
+* [Overview of the Scheduler HtmlHelper]({% slug overview_schedulerhelper_aspnetmvc %})
+* [SchedulerBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/SchedulerBuilder)
+
+For more runnable examples on the Kendo UI Scheduler in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_bindtowebapicontroller_scheduleraspnetmvc %}).

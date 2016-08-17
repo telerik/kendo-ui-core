@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Notification Widget
+page_title: Overview | Kendo UI Notification
 description: "Learn how to initialize the Kendo UI Notification widget and customize it functionalities."
 slug: overview_kendoui_notification_widget
 position: 1
@@ -10,8 +10,7 @@ position: 1
 
 The [Kendo UI Notification widget](http://demos.telerik.com/kendo-ui/notification/index) provides a styled UI widget with arbitrary content, which can provide information to the user on various occasions.
 
-> **Important**  
-> The content of this page is intended to users that are familiar with the [fundamental Kendo UI widget concepts](/widgets).
+This article assumes that you are familiar with the [fundamental Kendo UI widget concepts]({% slug widget_methodsand_events_kendoui_installation %}).
 
 ## Getting Started
 
@@ -152,7 +151,7 @@ When a popup notification message from a given stack is hidden, the remaining vi
 
 > **Important**  
 >
-> Using several Notification widget instances, which display notifications at the same place on the page, is not recommended because the notifications from the multiple instances will overlap.
+> The usage of more than one Notification widget instances, which display notifications at the same place on the page, is not recommended because the notifications from the multiple instances will overlap.
 
 #### Static messages
 
@@ -230,7 +229,7 @@ For more information on the configuration options, refer to the [Kendo UI Notifi
 
 > **Important**  
 >
-> The content of this section is intended to users that are familiar with [Kendo UI templates](/framework/templates/overview).
+> The content of this section is intended to users that are familiar with [Kendo UI templates]({% slug overview_kendoui_templatescomponent %}).
 
 Kendo UI Notification allows configuring multiple templates. Each template will be used together with its corresponding [notification type](#configuration-Types), either build-in, or custom. If you define a custom template for a built-in notification type, you will no longer be able to use the corresponding built-in template, but you will still be able to use the shorthand show methods, as demonstrated in the example below.
 
@@ -285,11 +284,11 @@ For more information on right-to-left language support, refer to the [general RT
 
 ### Existing Instances
 
-Similar to all other Kendo UI widgets, an existing Notification instance is accessed via the `.data("kendoNotification")` jQuery method, executed by the jQuery object of the originating element.
+To access an existing Notification instance, use the `.data("kendoNotification")` jQuery method, executed by the jQuery object of the originating element.
 
-For detailed information on how to get a reference to a Kendo UI widget, see [this help topic](/widgets#getting-reference-to-a-kendo-ui-widget).
+For detailed information on how to get a reference to a Kendo UI widget, see [this help topic]({% slug initialize_widgets_using_jquery_plugins_installation %}#getting-reference-to-a-kendo-ui-widget).
 
-For further reading on Kendo UI Notification settings, refer to [Kendo UI Notification API](/api/web/notification/).
+For further reading on Kendo UI Notification settings, refer to [Kendo UI Notification API](/api/javascript/ui/notification).
 
 ## See Also
 
@@ -300,5 +299,5 @@ Other articles on Kendo UI Notification:
 * [How to Move Visible Notifications after Hiding Others]({% slug howto_move_notifications_after_hiding_others %})
 * [How to Stack Static Notifications to the Left or Right]({% slug howto_stack_static_tothe_leftor_right_notification %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Notification Widget](/aspnet-mvc/helpers/notification/overview)
-* [Overview of the Notification JSP Tag](/jsp/tags/notification/overview)
+* [Overview of the Notification JSP Tag]({% slug overview_notification_uiforjsp %})
 * [Overview of the Notification PHP Class](/php/widgets/notification/overview)

@@ -1,166 +1,189 @@
 ---
 title: Overview
-page_title: Code and examples how to use Kendo UI Splitter for PHP | Kendo UI documentation
-description: Easy to follow steps to explore the capabilities of Splitter class for Kendo UI Splitter for PHP.
+page_title: Overview | Splitter PHP Class
+description: "Get started with the Splitter PHP class in Kendo UI."
+slug: overview_splitter_uiforphp
+position: 1
 ---
 
-# Splitter
+# Splitter PHP Class Overview
 
-Kendo Splitter for PHP is a server-side wrapper for the [Kendo UI Splitter](/api/web/splitter) widget.
+The Kendo UI Splitter for PHP is a server-side wrapper for the [Kendo UI Splitter](/api/javascript/ui/splitter) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo Splitter:
+### Configuration
 
-1.  Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-1.  Add a simple splitter:
-    
-		<?php
-		// create inner splitter
-		$inner = new \Kendo\UI\Splitter('horizontal');
-		$inner->attr("style", "height: 100%; width: 100%;");
-		
-		$leftPane = new \Kendo\UI\SplitterPane();
-		$leftPane->attr("id", "left-pane")
-		     ->collapsible(true)
-		     ->size(220)
-		     ->startContent();
-		?>
+Below are listed the steps for you to follow when configuring the Kendo UI Splitter for PHP.
 
-		<div class="pane-content">
-			<h3>Inner splitter / left pane</h3>
-			<p>Resizable and collapsible.</p>
-		</div>
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
 
-		<?php
-		$leftPane->endContent();
-		$inner->addPane($leftPane);
-		
-		$centerPane = new \Kendo\UI\SplitterPane();
-		$centerPane->attr("id", "center-pane")
-		     ->collapsible(false)
-		     ->startContent();
-		?>
+**Step 2** Add a [Splitter](/api/php/Kendo/UI/Splitter).
 
-		<div class="pane-content">
-			<h3>Inner splitter / center pane</h3>
-			<p>Resizable only.</p>
-		</div>
+###### Example
 
-		<?php
-		$centerPane->endContent();
-		$inner->addPane($centerPane);
-		
-		$rightPane = new \Kendo\UI\SplitterPane();
-		$rightPane->attr("id", "center-pane")
-		     ->collapsible(true)
-		     ->size(220)
-		     ->startContent();
-		?>
+    		<?php
+    		// create inner splitter
+    		$inner = new \Kendo\UI\Splitter('horizontal');
+    		$inner->attr("style", "height: 100%; width: 100%;");
 
-		<div class="pane-content">
-			<h3>Inner splitter / right pane</h3>
-			<p>Resizable and collapsible.</p>
-		</div>
+    		$leftPane = new \Kendo\UI\SplitterPane();
+    		$leftPane->attr("id", "left-pane")
+    		     ->collapsible(true)
+    		     ->size(220)
+    		     ->startContent();
+    		?>
 
-		<?php
-		$rightPane->endContent();
-		$inner->addPane($rightPane);					
-		
-		$topPane = new \Kendo\UI\SplitterPane();
-		$topPane->attr("id", "top-pane")
-		    ->collapsible(false)
-		    ->content($inner->render());
-		
-		$middlePane = new \Kendo\UI\SplitterPane();
-		$middlePane->attr("id", "middle-pane")
-		       ->collapsible(false)
-		       ->size(100)
-		       ->startContent();
-		?>
+    		<div class="pane-content">
+    			<h3>Inner splitter / left pane</h3>
+    			<p>Resizable and collapsible.</p>
+    		</div>
 
-		<div class="pane-content">
-			<h3>Outer splitter / middle pane</h3>
-			<p>Resizable only.</p>
-		</div>
+    		<?php
+    		$leftPane->endContent();
+    		$inner->addPane($leftPane);
 
-		<?php
-		$middlePane->endContent();
-		
-		$bottomPane = new \Kendo\UI\SplitterPane();
-		$bottomPane->attr("id", "bottom-pane")
-		       ->collapsible(false)
-		       ->resizable(false)
-		       ->size(100)
-		       ->startContent();
-		?>
+    		$centerPane = new \Kendo\UI\SplitterPane();
+    		$centerPane->attr("id", "center-pane")
+    		     ->collapsible(false)
+    		     ->startContent();
+    		?>
 
-		<div class="pane-content">
-			<h3>Outer splitter / bottom pane</h3>
-			<p>Non-resizable and non-collapsible.</p>
-		</div>
+    		<div class="pane-content">
+    			<h3>Inner splitter / center pane</h3>
+    			<p>Resizable only.</p>
+    		</div>
 
-		<?php
-		$bottomPane->endContent();
-		
-		// create outer splitter
-		$splitter = new \Kendo\UI\Splitter('splitter');
-		$splitter->orientation("vertical");
-		$splitter->addPane($topPane, $middlePane, $bottomPane);
-		?>
+    		<?php
+    		$centerPane->endContent();
+    		$inner->addPane($centerPane);
 
-1. Output the splitter by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+    		$rightPane = new \Kendo\UI\SplitterPane();
+    		$rightPane->attr("id", "center-pane")
+    		     ->collapsible(true)
+    		     ->size(220)
+    		     ->startContent();
+    		?>
+
+    		<div class="pane-content">
+    			<h3>Inner splitter / right pane</h3>
+    			<p>Resizable and collapsible.</p>
+    		</div>
+
+    		<?php
+    		$rightPane->endContent();
+    		$inner->addPane($rightPane);					
+
+    		$topPane = new \Kendo\UI\SplitterPane();
+    		$topPane->attr("id", "top-pane")
+    		    ->collapsible(false)
+    		    ->content($inner->render());
+
+    		$middlePane = new \Kendo\UI\SplitterPane();
+    		$middlePane->attr("id", "middle-pane")
+    		       ->collapsible(false)
+    		       ->size(100)
+    		       ->startContent();
+    		?>
+
+    		<div class="pane-content">
+    			<h3>Outer splitter / middle pane</h3>
+    			<p>Resizable only.</p>
+    		</div>
+
+    		<?php
+    		$middlePane->endContent();
+
+    		$bottomPane = new \Kendo\UI\SplitterPane();
+    		$bottomPane->attr("id", "bottom-pane")
+    		       ->collapsible(false)
+    		       ->resizable(false)
+    		       ->size(100)
+    		       ->startContent();
+    		?>
+
+    		<div class="pane-content">
+    			<h3>Outer splitter / bottom pane</h3>
+    			<p>Non-resizable and non-collapsible.</p>
+    		</div>
+
+    		<?php
+    		$bottomPane->endContent();
+
+    		// create outer splitter
+    		$splitter = new \Kendo\UI\Splitter('splitter');
+    		$splitter->orientation("vertical");
+    		$splitter->addPane($topPane, $middlePane, $bottomPane);
+    		?>
+
+**Step 3** Output the Splitter by echoing the result of the `render` method.
+
+###### Example
 
         <?php
         echo $splitter->render();
         ?>
 
-## Accessing an Existing Splitter
+## Event Handling
 
-You can reference an existing Splitter instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/splitter#methods) to control its behavior.
+You can subscribe to all Splitter [events](/api/javascript/ui/splitter#events).
 
+### Specify Function Names
 
-### Accessing an existing Splitter instance
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-    //Put this after your Kendo Splitter for PHP declaration
-    <script>
-    $(function() {
-        // Notice that the Name() of the splitter is used to get its client-side instance
-        var splitter = $("#splitter").data("kendoSplitter");
-    });
-    </script>
+###### Example
 
+        <?php
+        $splitter = new \Kendo\UI\Splitter('splitter');
 
-## Handling Kendo UI Splitter events
+        // The 'resize_dataBound' JavaScript function will handle the 'dataBound' event of the splitter
+        $splitter->resize('splitter_resize');
 
-You can subscribe to all [events](/api/web/splitter#events) exposed by Kendo UI Splitter:
+        echo $splitter->render();
+        ?>
+        <script>
+        function splitter_resize() {
+            // Handle the resize event
+        }
+        </script>
 
+### Provide Inline Code
 
-### Example - subscribing by specifying JavaScript function name
+The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-    <?php
-    $splitter = new \Kendo\UI\Splitter('splitter');
+###### Example
 
-    // The 'resize_dataBound' JavaScript function will handle the 'dataBound' event of the splitter
-    $splitter->resize('splitter_resize');
+        <?php
+        $splitter = new \Kendo\UI\Splitter('splitter');
 
-    echo $splitter->render();
-    ?>
-    <script>
-    function splitter_resize() {
-        // Handle the resize event
-    }
-    </script>
+        // Provide inline JavaScript code that will handle the 'dataBound' event of the splitter
+        $splitter->resize('function() { /* Handle the resize event */ }');
 
-### Example - providing inline JavaScript code
+        echo $splitter->render();
+        ?>
 
-    <?php
-    $splitter = new \Kendo\UI\Splitter('splitter');
+<!--*-->
+## Reference
 
-    // Provide inline JavaScript code that will handle the 'dataBound' event of the splitter
-    $splitter->resize('function() { /* Handle the resize event */ }');
+### Client-Side Instances
 
-    echo $splitter->render();
-    ?>
+You are able to reference an existing Splitter instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Splitter API](/api/javascript/ui/splitter#methods) to control its behavior.
 
+###### Example
+
+        //Put this after your Kendo UI Splitter for PHP declaration
+        <script>
+        $(function() {
+            // Notice that the Name() of the splitter is used to get its client-side instance
+            var splitter = $("#splitter").data("kendoSplitter");
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the Splitter:
+
+* [Overview of the Kendo UI Splitter Widget]({% slug overview_kendoui_splitter_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

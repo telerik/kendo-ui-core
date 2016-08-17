@@ -44,7 +44,8 @@
         equal(tag.children().length, 2);
         equal(tag.children().eq(0).html(), "1 item(s) selected");
         equal(tag.find(".k-select").children(".k-i-arrow-s").length, 1);
-        equal(tag.find(".k-select").children(".k-i-arrow-s").html(), "open");
+        equal(tag.find(".k-select").attr("aria-label"), "open");
+        equal(tag.find(".k-select").children(".k-i-arrow-s").html(), "");
     });
 
     test("Widget renders a single tag using a custom template with 'values' and 'maxTotal'", function() {
@@ -192,5 +193,21 @@
 
         equal(value.length, 1);
         equal(value[0], 2);
+    });
+
+    test("Clear selected values when delete the tag", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            tagMode: "single",
+            value: [1,2,3]
+        });
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.BACKSPACE
+        });
+
+        var value = select.val();
+
+        equal(value, null);
     });
 })();

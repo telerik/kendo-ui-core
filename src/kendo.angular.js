@@ -45,6 +45,8 @@ var __meta__ = { // jshint ignore:line
             TreeList    : 'TreeListDataSource',
             TreeView    : 'HierarchicalDataSource',
             Scheduler   : 'SchedulerDataSource',
+            PivotGrid   : 'PivotDataSource',
+            PivotConfigurator   : 'PivotDataSource',
             PanelBar    : '$PLAIN',
             Menu        : "$PLAIN",
             ContextMenu : "$PLAIN"
@@ -373,6 +375,9 @@ var __meta__ = { // jshint ignore:line
         }
 
         var value;
+        // Some widgets trigger "change" on the input field
+        // and this would result in two events sent (#135)
+        var haveChangeOnElement = false;
 
         if (isForm(element)) {
             value = function() {
@@ -399,7 +404,9 @@ var __meta__ = { // jshint ignore:line
                 val = null;
             }
 
+            haveChangeOnElement = true;
             setTimeout(function(){
+                haveChangeOnElement = false;
                 if (widget) { // might have been destroyed in between. :-(
                     var kNgModel = scope[widget.element.attr("k-ng-model")];
 
@@ -417,10 +424,6 @@ var __meta__ = { // jshint ignore:line
                 }
             }, 0);
         };
-
-        // Some widgets trigger "change" on the input field
-        // and this would result in two events sent (#135)
-        var haveChangeOnElement = false;
 
         if (isForm(element)) {
             element.on("change", function() {
@@ -449,6 +452,8 @@ var __meta__ = { // jshint ignore:line
         };
 
         widget.first("change", onChange(false));
+        widget.first("spin", onChange(false));
+
         if (!(kendo.ui.AutoComplete && widget instanceof kendo.ui.AutoComplete)) {
             widget.first("dataBound", onChange(true));
         }
@@ -476,7 +481,7 @@ var __meta__ = { // jshint ignore:line
         }
 
         var form  = $(widget.element).parents("form");
-        var ngForm = scope[form.attr("name")];
+        var ngForm = kendo.getter(form.attr("name"))(scope);
         var getter = $parse(kNgModel);
         var setter = getter.assign;
         var updating = false;
@@ -485,7 +490,7 @@ var __meta__ = { // jshint ignore:line
 
         var length = function(value) {
             //length is irrelevant when value is not collection
-            return valueIsCollection ? value.length : 0;
+            return value && valueIsCollection ? value.length : 0;
         };
 
         var currentValueLength = length(getter(scope));
@@ -516,7 +521,7 @@ var __meta__ = { // jshint ignore:line
             scope.$watch(kNgModel, watchHandler);
         }
 
-        widget.first("change", function(){
+        var changeHandler = function() {
             updating = true;
 
             if (ngForm && ngForm.$pristine) {
@@ -529,16 +534,17 @@ var __meta__ = { // jshint ignore:line
             });
 
             updating = false;
-        });
+        };
+
+        widget.first("change", changeHandler);
+        widget.first("spin", changeHandler);
     }
 
     function destroyWidgetOnScopeDestroy(scope, widget) {
         var deregister = scope.$on("$destroy", function() {
             deregister();
             if (widget) {
-                if (widget.element) {
-                    widget.destroy();
-                }
+                kendo.destroy(widget.element);
                 widget = null;
             }
         });
@@ -622,6 +628,10 @@ var __meta__ = { // jshint ignore:line
             if (!widget._muteRebind && newValue !== oldValue) {
                 unregister(); // this watcher will be re-added if we compile again!
 
+                if (attrs._cleanUp) {
+                    attrs._cleanUp();
+                }
+
                 var templateOptions = WIDGET_TEMPLATE_OPTIONS[widget.options.name];
 
                 if (templateOptions) {
@@ -664,6 +674,16 @@ var __meta__ = { // jshint ignore:line
         digest(scope);
     }
 
+    function bind(f, obj) {
+        return function(a, b) {
+            return f.call(obj, a, b);
+        };
+    }
+
+    function setTemplate(key, value) {
+        this[key] = kendo.stringify(value); // jshint ignore:line
+    }
+
     module.factory('directiveFactory', [ '$compile', function(compile) {
         var kendoRenderedTimeout;
         var RENDERED = false;
@@ -679,15 +699,11 @@ var __meta__ = { // jshint ignore:line
                 scope: false,
 
                 controller: [ '$scope', '$attrs', '$element', function($scope, $attrs) {
-                    var that = this;
-                    that.template = function(key, value) {
-                        $attrs[key] = kendo.stringify(value);
-                    };
-
-                    $scope.$on("$destroy", function() {
-                        that.template = null;
-                        that = null;
-                    });
+                    this.template = bind(setTemplate, $attrs);
+                    $attrs._cleanUp = bind(function(){
+                        this.template = null;
+                        $attrs._cleanUp = null;
+                    }, this);
                 }],
 
                 link: function(scope, element, attrs, controllers) {
@@ -1088,7 +1104,7 @@ var __meta__ = { // jshint ignore:line
 
         var values = this.self.value().split(options.separator);
         var valuePrimitive = options.valuePrimitive;
-        var data = this.self.dataSource.data();
+        var data = this.self.listView.selectedDataItems(); //.concat(this.self.dataSource.data());
         var dataItems = [];
         for (var idx = 0, length = data.length; idx < length; idx++) {
             var item = data[idx];
@@ -1444,7 +1460,7 @@ var __meta__ = { // jshint ignore:line
                                 $log.warn(attrName + " without a matching parent widget found. It can be one of the following: " + parents.join(", "));
                             } else {
                                 controller.template(templateName, template);
-                                $element.remove();
+                                element.remove();
                             }
                         };
                     }

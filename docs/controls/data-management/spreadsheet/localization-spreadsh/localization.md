@@ -1,6 +1,6 @@
 ---
 title: Localization
-page_title: Localization | Kendo UI Spreadsheet Widget
+page_title: Localization | Kendo UI Spreadsheet
 description: "Learn how to localize the text messages of the Kendo UI Spreadsheet widget in your project."
 slug: localization_ofmessages_spreadsheet_widget
 position: 1
@@ -8,7 +8,7 @@ position: 1
 
 # Localization
 
-Language localization of software is the process of its adaptation to a specific country, area, or culture that uses a different language from the ones in which the software is released into. In terms of Kendo UI Spreadsheet widget, you are able to localize its messages in two ways: 
+Language localization of software is the process of its adaptation to a specific country, area, or culture that uses a different language from the ones in which the software is released into. In terms of Kendo UI Spreadsheet widget, you are able to localize its messages in two ways:
 
 1. By using an external localization file where all text messages are translated in the language you need for your project.
 2. By using JavaScript to manipulate the translation of only certain text entities.  
@@ -17,7 +17,7 @@ Messages represent the default written content of a widget that appears to end u
 
 ## Via External File
 
-You are able to change the messages displayed in Kendo UI widgets by adding a script file to the document as demonstrated in the example below. 
+You are able to change the messages displayed in Kendo UI widgets by adding a script file to the document as demonstrated in the example below.
 
 ###### Example
 
@@ -60,7 +60,7 @@ When applying JavaScript to update particular content, indicate the message you 
 ```html
 
     <div id="spreadsheet"></div>
-    
+
     <script>
         //change the text of the Toolbar tabs
         $.extend(true, kendo.spreadsheet.messages.view,{
@@ -97,4 +97,3 @@ Other articles on Kendo UI Spreadsheet and localization:
 * [List of `filterMenu` Messages]({% slug localization_filter_menu_messages_spreadsheet_widget %})
 * [List of `toolbar` Messages]({% slug localization_toolbar_messages_spreadsheet_widget%})
 * [Localization Overview of Kendo UI Widgets](/framework/localization/overview)
-

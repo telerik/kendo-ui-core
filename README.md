@@ -1,10 +1,10 @@
 # Kendo UI Core
 
+[![Build Status](https://travis-ci.org/telerik/kendo-ui-core.svg?branch=master)](https://travis-ci.org/telerik/kendo-ui-core)
+
 ## About Kendo UI Core
 
 Kendo UI is everything you need to build sites and apps with HTML5 & JavaScript. Kendo UI Core is the free and open-source version of Kendo UI that provides access to the web's best UI widgets and key framework features, essential for developing great experiences for the web and mobile.
-
-[![Build Status](https://travis-ci.org/telerik/kendo-ui-core.svg?branch=master)](https://travis-ci.org/telerik/kendo-ui-core)
 
 ## Features of Kendo UI Core
 
@@ -33,7 +33,7 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | [Switch](http://demos.telerik.com/kendo-ui/switch/index)              | :x:  | :white_check_mark: | :white_check_mark:           |
 | [TimePicker](http://demos.telerik.com/kendo-ui/timepicker/index)      | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [Upload](http://demos.telerik.com/kendo-ui/upload/index)              | :x:  | :white_check_mark: | :white_check_mark:           |
-| [Validator](http://demos.telerik.com/kendo-ui/validator/index)        | :x:  | :white_check_mark: | :white_check_mark:           |
+| [Validator](http://demos.telerik.com/kendo-ui/validator/index)        | :white_check_mark:  | :white_check_mark: | :white_check_mark:           |
 | **Charts**                |
 | [Area Charts](http://demos.telerik.com/kendo-ui/area-charts/index)    | :x: | :white_check_mark: | :white_check_mark:            |
 | [Bar Charts](http://demos.telerik.com/kendo-ui/bar-charts/index)      | :x: | :white_check_mark: | :white_check_mark:            |
@@ -224,7 +224,16 @@ Before contributing to Kendo UI Core, please:
 
 ## Getting Help
 
-**TL;DR** - Use the [issues list](https://github.com/telerik/kendo-ui-core/issues) of this repo for bugs, [Stack Overflow](http://stackoverflow.com/questions/tagged/kendo-ui) or the [Kendo UI Premium Forums](http://www.telerik.com/forums/kendo-ui-framework) for help and [User Voice](http://kendoui-feedback.telerik.com/forums/127393-kendo-ui-feedback) for feature requests. Misfiled items will be closed.
+* Use the
+[issues list](https://github.com/telerik/kendo-ui-core/issues)
+of this repo for bug reports, related both to Kendo UI Core and Kendo UI Professional
+
+* Get help on
+[Stack Overflow](http://stackoverflow.com/questions/tagged/kendo-ui)
+or the
+[Kendo UI Premium Forums](http://www.telerik.com/forums/kendo-ui-framework)
+
+* File feature requests on [User Voice](http://kendoui-feedback.telerik.com/forums/127393-kendo-ui-feedback)
 
 As a fully-open source project, Kendo UI Core is a primarily community-supported project, As such, you are encouraged to use forums like Stack Overflow to post questions, and the issues list of this repo to report bugs.
 

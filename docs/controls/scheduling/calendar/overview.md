@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Calendar Widget
+page_title: Overview | Kendo UI Calendar
 description: "Learn how to initialize the Kendo UI Calendar widget, configure its options and make use of custom templates."
 slug: overview_kendoui_calendar_widget
 position: 1
@@ -153,7 +153,7 @@ Other articles on Kendo UI Calendar:
 
 * [How to Control the Header Format]({% slug howto_control_header_format_calendar %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Calendar Widget](/aspnet-mvc/helpers/calendar/overview)
-* [Overview of the Calendar JSP Tag](/jsp/tags/calendar/overview)
+* [Overview of the Calendar JSP Tag]({% slug overview_calendar_uiforjsp %})
 * [Overview of the Calendar PHP Class](/php/widgets/calendar/overview)
 * [Calendar JavaScript API Reference](/api/javascript/ui/calendar)
 

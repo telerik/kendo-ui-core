@@ -59,7 +59,7 @@ GEM
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
     mercenary (0.3.3)
-    mini_portile (0.6.0)
+    mini_portile2 (0.6.0)
     minitest (5.3.5)
     multi_json (1.10.1)
     nokogiri (1.6.2.1)

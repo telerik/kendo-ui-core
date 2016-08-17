@@ -173,6 +173,19 @@ Defines the field to be used to filter the data source. If not defined the [pare
     });
     </script>
 
+### clearButton `Boolean` *(default: true)*
+
+Unless this options is set to `false`, a button will appear when hovering the widget. Clicking that button will reset the widget's value and will trigger the change event.
+
+#### Example - disable the clear button
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+        clearButton: false
+    });
+    </script>
+
 ### dataSource `Object|Array|kendo.data.DataSource`
 
 The data source of the widget which is used to display a list of values. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
@@ -288,6 +301,34 @@ If set to `false` the widget will be disabled and will not allow user input. The
     });
     </script>
 
+### enforceMinLength `Boolean` *(default: false)*
+
+If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](#configuration-minLength).
+
+#### Example - enforce minLength
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+        placeholder: "Select product",
+        dataTextField: "ProductName",
+        dataValueField: "ProductID",
+        filter: "contains",
+        autoBind: false,
+        minLength: 3,
+        enforceMinLength: true,
+        dataSource: {
+            type: "odata",
+            serverFiltering: true,
+            transport: {
+                read: {
+                    url: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                }
+            }
+        }
+    });
+    </script>
+
 ### filter `String`*(default: "none")*
 
 The filtering method used to determine the suggestions for the current value. Filtration is turned off by default.
@@ -323,6 +364,31 @@ The [template](/api/javascript/kendo#methods-template) used to render the fixed 
                 }
             });
         });
+    </script>
+
+### footerTemplate `String|Function`
+
+The [template](/api/javascript/kendo#methods-template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
+
+#### Parameters
+
+##### instance `Object`
+
+The widget instance.
+
+#### Example - specify footerTemplate as a string
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      footerTemplate: 'Total <strong>#: instance.dataSource.total() #</strong> items found'
+    });
     </script>
 
 ### groupTemplate `String|Function`
@@ -374,7 +440,7 @@ If set to `true` the first suggestion will be automatically highlighted.
     });
     </script>
 
-### ignoreCase `String`*(default: true)*
+### ignoreCase `Boolean`*(default: true)*
 
 If set to `false` case-sensitive search will be performed to find suggestions. The widget performs case-insensitive searching by default.
 
@@ -416,6 +482,28 @@ The minimum number of characters the user must type before a search is performed
     <script>
     $("#combobox").kendoComboBox({
       minLength: 3
+    });
+    </script>
+
+### noDataTemplate `String|Function` *(default: "No results found.")*
+
+The [template](/api/javascript/kendo#methods-template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
+The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
+
+> **Important** The popup will open when 'noDataTemplate' is defined
+
+#### Example - specify headerTemplate as a string
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      noDataTemplate: 'No Data!'
     });
     </script>
 
@@ -466,6 +554,96 @@ refer to [Popup](/api/javascript/ui/popup) documentation.
     });
     </script>
 
+### popup.appendTo `String`
+
+Defines a jQuery selector that will be used to find a container element, where the popup will be appended to.
+
+#### Example - append the popup to a specific element
+
+    <div id="container">
+        <input id="combobox" />
+    </div>
+    <script>
+    $("#combobox").kendoCombobox({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      popup: {
+        appendTo: $("#container")
+      }
+    });
+    </script>
+
+### popup.origin `String`
+
+Specifies how to position the popup element based on achor point. The value is
+space separated "y" plus "x" position.
+
+The available "y" positions are:
+- "bottom"
+- "center"
+- "top"
+
+The available "x" positions are:
+- "left"
+- "center"
+- "right"
+
+#### Example - append the popup to a specific element
+
+    <div id="container">
+        <input id="combobox" />
+    </div>
+    <script>
+    $("#combobox").kendoCombobox({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      popup: {
+        origin: "top left"
+      }
+    });
+    </script>
+
+### popup.position `String`
+
+Specifies which point of the popup element to attach to the anchor's origin point. The value is
+space separated "y" plus "x" position.
+
+The available "y" positions are:
+- "bottom"
+- "center"
+- "top"
+
+The available "x" positions are:
+- "left"
+- "center"
+- "right"
+
+#### Example - append the popup to a specific element
+
+    <div id="container">
+        <input id="combobox" />
+    </div>
+    <script>
+    $("#combobox").kendoCombobox({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      popup: {
+        origin: "top left"
+      }
+    });
+    </script>
 
 ### suggest `Boolean`*(default: false)*
 
@@ -599,9 +777,28 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
 
 ### virtual `Boolean|Object`*(default: false)*
 
-Enables the virtualization feature of the widget.
+Enables the virtualization feature of the widget. The configuration can be set on an object, which contains two properties - `itemHeight` and `valueMapper`.
 
-#### Example - ComboBox with virtualized list
+For detailed information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}).
+
+### virtual.itemHeight `Number`*(default: null)*
+
+Specifies the height of the virtual item. All items in the virtualized list **must** have the same height.
+If the developer does not specify one, the framework will automatically set `itemHeight` based on the current theme and font size.
+
+### virtual.mapValueTo `String`*(default: "index")*
+
+The changes introduced with the Kendo UI R3 2016 release enable you to determine if the `valueMapper` must resolve a *value to an `index`* or a *value to a `dataItem`*. This is configured through the `mapValueTo` option that accepts two possible values - `"index"` or `"dataItem"`. By default, the `mapValueTo` is set to `"index"`, which does not affect the current behavior of the virtualization process.
+
+For more information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}#value-mapping).
+
+### virtual.valueMapper `Function`*(default: null)*
+
+The `valueMapper` function is **mandatory** for the functionality of the virtualized widget.
+The widget calls the `valueMapper` function when the widget receives a value, that is not fetched from the remote server yet.
+The widget will pass the selected value(s) in the `valueMapper` function. In turn, the valueMapper implementation should return the **respective data item(s) index/indices**.
+
+#### Example - ComboBox widget with a virtualized list
 
     <input id="orders" style="width: 400px" />
     <script>
@@ -610,7 +807,25 @@ Enables the virtualization feature of the widget.
                 template: '<span class="order-id">#= OrderID #</span> #= ShipName #, #= ShipCountry #',
                 dataTextField: "ShipName",
                 dataValueField: "OrderID",
-                virtual: true
+                virtual: {
+                    itemHeight: 26,
+                    valueMapper: function(options) {
+                        $.ajax({
+                            url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+                            type: "GET",
+                            dataType: "jsonp",
+                            data: convertValues(options.value),
+                            success: function (data) {
+                                //the **data** is either index or array of indices.
+                                //Example:
+                                // 10258 -> 10 (index in the Orders collection)
+                                // [10258, 10261] -> [10, 14] (indices in the Orders collection)
+
+                                options.success(data);
+                            }
+                        })
+                    }
+                },
                 height: 520,
                 dataSource: {
                     type: "odata",
@@ -623,6 +838,18 @@ Enables the virtualization feature of the widget.
                 }
             });
         });
+
+        function convertValues(value) {
+            var data = {};
+
+            value = $.isArray(value) ? value : [value];
+
+            for (var idx = 0; idx < value.length; idx++) {
+                data["values[" + idx + "]"] = value[idx];
+            }
+
+            return data;
+        }
     </script>
 
 #### Example - ComboBox widget with declarative virtualization config
@@ -681,114 +908,6 @@ Enables the virtualization feature of the widget.
               }
             })
         }
-
-        function convertValues(value) {
-            var data = {};
-
-            value = $.isArray(value) ? value : [value];
-
-            for (var idx = 0; idx < value.length; idx++) {
-                data["values[" + idx + "]"] = value[idx];
-            }
-
-            return data;
-        }
-    </script>
-
-### virtual.itemHeight `Number`*(default: null)*
-
-Specifies the height of the virtual item. All items in the virtualized list **must** have the same height.
-If the developer does not specify one, the framework will automatically set `itemHeight` based on the current theme and font size.
-
-    <input id="orders" style="width: 400px" />
-    <script>
-        $(document).ready(function() {
-            $("#orders").kendoComboBox({
-                template: '<span class="order-id">#= OrderID #</span> #= ShipName #, #= ShipCountry #',
-                dataTextField: "ShipName",
-                dataValueField: "OrderID",
-                virtual: {
-                    itemHeight: 26,
-                    valueMapper: function(options) {
-                        $.ajax({
-                            url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
-                            type: "GET",
-                            data: convertValues(options.value),
-                            success: function (data) {
-                                options.success(data);
-                            }
-                        })
-                    }
-                },
-                height: 520,
-                dataSource: {
-                    type: "odata",
-                    transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
-                    },
-                    pageSize: 80,
-                    serverPaging: true,
-                    serverFiltering: true
-                }
-            });
-        });
-
-        function convertValues(value) {
-            var data = {};
-
-            value = $.isArray(value) ? value : [value];
-
-            for (var idx = 0; idx < value.length; idx++) {
-                data["values[" + idx + "]"] = value[idx];
-            }
-
-            return data;
-        }
-    </script>
-
-### virtual.valueMapper `Function`*(default: null)*
-
-The `valueMapper` function is **mandatory** for the functionality of the virtualized widget.
-The widget calls the `valueMapper` function when the widget receives a value, that is not fetched from the remote server yet.
-The widget will pass the selected value(s) in the `valueMapper` function. In turn, the valueMapper implementation should return the **respective data item(s) index/indices**.
-
-    <input id="orders" style="width: 400px" />
-    <script>
-        $(document).ready(function() {
-            $("#orders").kendoComboBox({
-                template: '<span class="order-id">#= OrderID #</span> #= ShipName #, #= ShipCountry #',
-                dataTextField: "ShipName",
-                dataValueField: "OrderID",
-                virtual: {
-                    itemHeight: 26,
-                    valueMapper: function(options) {
-                        $.ajax({
-                            url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
-                            type: "GET",
-                            data: convertValues(options.value),
-                            success: function (data) {
-                                //the **data** is either index or array of indices.
-                                //Example:
-                                // 10258 -> 10 (index in the Orders collection)
-                                // [10258, 10261] -> [10, 14] (indices in the Orders collection)
-
-                                options.success(data);
-                            }
-                        })
-                    }
-                },
-                height: 520,
-                dataSource: {
-                    type: "odata",
-                    transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
-                    },
-                    pageSize: 80,
-                    serverPaging: true,
-                    serverFiltering: true
-                }
-            });
-        });
 
         function convertValues(value) {
             var data = {};
@@ -1366,7 +1485,7 @@ The value to set.
 
 ### change
 
-Fired when the value of the widget is changed by the user.
+Fired when the value of the widget is changed by the user. As of 2015 Q3 SP1 cascading widget will trigger change event when its value is changed due to parent update.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
@@ -1599,6 +1718,10 @@ Fired when an item from the popup is selected by the user either with mouse/tap 
 
 #### Event Data
 
+##### e.dataItem `Object`
+
+The data item instance of the selected item.
+
 ##### e.item `jQuery`
 
 The jQuery object which represents the selected item.
@@ -1639,6 +1762,19 @@ The widget instance which fired the event.
     });
     var combobox = $("#combobox").data("kendoComboBox");
     combobox.bind("select", combobox_select);
+    </script>
+
+#### Example - prevent the item selection
+
+    <input id="combobox" />
+    <script>
+    $("#combobox").kendoComboBox({
+      dataSource: [ "Apples", "Oranges" ],
+      select: function(e) {
+        //call preventDefault() to prevent the selection
+        e.preventDefault();
+      }
+    });
     </script>
 
 ### cascade

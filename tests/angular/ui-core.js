@@ -15,6 +15,32 @@
         ok(colorPicker.data("kendoColorPicker") instanceof kendo.ui.ColorPicker);
    });
 
+   ngTest2("destroy widget", 1, function(root, controller, bootstrap) {
+        var numericTextBox = $("<input kendo-numerictextbox />").appendTo(root);
+        $("<div kendo-grid></div>").appendTo(root);
+
+        bootstrap();
+
+        angular.element(numericTextBox).scope().$destroy();
+
+        equal(numericTextBox.data("kendoNumericTextBox"), null);
+   });
+
+   ngTest2("do not throw exception when destroy scope", 1, function(root, controller, bootstrap) {
+        var dropDownList = $("<input kendo-drop-down-list />").appendTo(root);
+        $("<div kendo-grid></div>").appendTo(root);
+
+        bootstrap();
+
+        var scope = angular.element(dropDownList).scope();
+
+        dropDownList.data("kendoDropDownList").destroy();
+
+        scope.$destroy();
+
+        ok(!dropDownList.data("kendoDropDownList"));
+   });
+
     ngTest2("DropDown, ComboBox, MultiSelect -- k-ng-model returns items instead of string values", 6, function(dom, controller, bootstrap) {
         var theScope;
 
@@ -1031,12 +1057,30 @@ withAngularTests("Angular (UI Core)", function(runTest){
           "  <input kendo-numeric-text-box='ktb' k-ng-model='value' />" +
           "</form>").appendTo(dom);
 
-		expect(1);
+          expect(1);
         $scope.whenRendered(function(){
             $scope.ktb.value(1);
             $scope.ktb.trigger('change');
             var dirty = $scope[$("form").attr("name")].$dirty;
             equal(dirty, true);
+            start();
+        });
+    });
+
+    runTest("k-ng-model change updates form status - form name contains a dot", function(dom, $scope){
+
+        $("<form name='foo.myForm'>" +
+          "<input kendo-numeric-text-box='ktb' k-ng-model='value' />" +
+          "</form>").appendTo(dom);
+
+        expect(1);
+
+        $scope.whenRendered(function(){
+
+            $scope.ktb.value(1);
+            $scope.ktb.trigger('change');
+
+            equal($scope.foo.myForm.$dirty, true);
             start();
         });
     });
@@ -1050,5 +1094,30 @@ withAngularTests("Angular (UI Core)", function(runTest){
             equal(ngDirty, true);
             start();
         });
+    });
+
+    ngTest2("ng-model keep model value on initial scope.$render", 1, function(dom, controller, bootstrap) {
+        controller(function($scope) {
+            $scope.options = {
+                dataTextField  : "text",
+                dataValueField : "id"
+            };
+
+            $scope.data = [];
+            $scope.selectedValue = "";
+        });
+
+        $("<select kendo-dropdownlist ng-model='selectedValue' k-data-source='data' k-options='options'></select></div>").appendTo(dom);
+
+        bootstrap();
+
+        var $scope = dom.scope();
+
+        $scope.$apply(function() {
+            $scope.data = [{ id: 0, text: "text0" }, { id: 1, text: "text1" }, { id: 2, text: "text2" }];
+            $scope.selectedValue = 1;
+        });
+
+        equal($scope.selectedValue, 1);
     });
 });

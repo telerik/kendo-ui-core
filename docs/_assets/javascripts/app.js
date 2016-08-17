@@ -150,7 +150,7 @@ function preventParentSelection(e) {
 }
 
 $(function(){
-    $("pre[lang]").each(function() {
+    $("pre[data-lang^=tab-]").each(function() {
         if (this.parentNode.className.indexOf("k-content") >= 0) {
             return;
         }
@@ -158,7 +158,8 @@ $(function(){
         var langs = $(this).nextUntil(":not(pre)", "pre").add(this);
 
         var tabs = $.map(langs, function(item) {
-            return $("<li>").text($(item).attr("lang"));
+            var title = $(item).attr("data-lang").replace("tab-", "");
+            return $("<li>").text(title);
         });
 
         if (tabs.length < 2) {
@@ -176,6 +177,8 @@ $(function(){
 
         tabstrip.kendoTabStrip({ animation: false });
     });
+
+    $(document).on("click", ".current-topic > div a", false);
 
     $("pre").addClass("prettyprint");
 
@@ -222,6 +225,33 @@ $(function(){
         });
 
         ul.appendTo(this);
+    });
+
+    // do not scroll main page when page-nav is scrolled
+    $('#page-nav').on('DOMMouseScroll mousewheel', function(ev) {
+        var element = $(this),
+            scrollTop = this.scrollTop,
+            scrollHeight = this.scrollHeight,
+            height = element.innerHeight(),
+            delta = ev.originalEvent.wheelDelta,
+            up = delta > 0;
+
+        var prevent = function() {
+            ev.stopPropagation();
+            ev.preventDefault();
+            ev.returnValue = false;
+            return false;
+        }
+
+        if (!up && -delta > scrollHeight - height - scrollTop) {
+            // Scrolling down, but this will take us past the bottom.
+            element.scrollTop(scrollHeight);
+            return prevent();
+        } else if (up && delta > scrollTop) {
+            // Scrolling up, but this will take us past the top.
+            element.scrollTop(0);
+            return prevent();
+        }
     });
 });
 
@@ -316,7 +346,7 @@ var dojoApi = (function($) {
 
             var pre = $(element).parent().nextAll("pre:first");
 
-            var iframe = $('<iframe class="snippet-runner">').attr("src", '/kendo-ui/runner.html');
+            var iframe = $('<iframe class="snippet-runner">').attr("src", 'javascript:""');
 
 
             var snippet = null;

@@ -377,12 +377,5 @@ Other articles and how-to examples on the Hybrid UI ListView:
 * [Overview of the Hybrid UI ListView]({% slug overview_hybridlistview %})
 * [Endless Scrolling Feature]({% slug endlessscrolling_hybridlistview %})
 * [Pull-to-Refresh Feature]({% slug pulltorefreshfeature_hybridlistview %})
-* [How to Use jsSignature]({% slug howto_usejssignature_hybridlistview %})
 
-Articles and how-to examples on Hybrid UI components:
-
-* [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})
-* [How to Create Fixed Content Areas with Scroller]({% slug howto_createfixedcontentarea_hybridui %})
-* [How to Create Relative Content Size Using Flexboxes]({% slug howto_createrelative_contentsize_usingflexboxes_hybridui %})
-* [How to Select Value from Another View]({% slug howto_selectvaluefrom_anotherview_hybridui %})
-* [How to Set Initial View Prior to Initialization in AngularJS]({% slug howto_setinitiaviewpriortoinitialization_angular_hybridui %})
+For how-to examples on the Kendo UI hybrid ListView, browse its [**How To** documentation folder]({% slug howto_group_data_hybridlistview %}).

@@ -1,6 +1,6 @@
 ---
 title: Modes of Operation
-page_title: Modes of Operation | Kendo UI Upload Widget
+page_title: Modes of Operation | Kendo UI Upload
 description: "Learn how to use the different modes of operation supported by the Kendo UI Upload widget, initialize it from an existing file and how to use its asynchronous mode."
 slug: modes_upload_widget
 position: 4
@@ -101,12 +101,25 @@ The Upload has a fallback mechanism when it is placed inside a `form` and is con
 
 The uploaded files must be handled both in the save handler and in the form submit action, as in synchronous mode.
 
+### Programmatic Trigger of Asynchronous Upload
+
+The Upload widget does not provide a public API method for asynchronous uploading of the already selected files, when `autoUpload` is set to `false`. To achieve the same result, it is possible to trigger the `click` event of the widget's **Upload** button.
+
+###### Example
+
+    var upload = $("UploadID").data("kendoUpload");
+    upload.wrapper.find("button.k-upload-selected").click();
+
+The [`wrapper` property]({% slug widgetwrapperandelement_references_gettingstarted %}) returns the Upload widget's outermost element.
+
 ## See Also
 
-Other articles on Kendo UI Upload:
+Other articles on the Kendo UI Upload:
 
 * [Overview of the Upload Widget]({% slug overview_kendoui_upload_widget %})
 * [Drag and Drop]({% slug dragandrop_upload_widget %})
 * [Send and Receive Metadata]({% slug metadata_upload_widget %})
 * [Browser Support]({% slug browsersupport_upload_widget %})
 * [Troubleshooting]({% slug troubleshooting_upload_widget %})
+
+For how-to examples on the Kendo UI Upload widget, browse its [**How To** documentation folder]({% slug howto_remove_files_with_errors %}).

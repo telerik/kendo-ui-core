@@ -1,39 +1,87 @@
 ---
 title: Overview
-page_title: How to use the ColorPalette PHP class, server-side wrapper for Kendo UI ColorPalette widget
-description: Getting started with Kendo UI ColorPalette for PHP in quick steps - configure Kendo UI ColorPalette widget and operate Kendo UI ColorPalette events.
+page_title: Overview | ColorPalette PHP Class
+description: "Get started with the ColorPalette PHP class in Kendo UI."
+slug: overview_colorpalette_uiforphp
+position: 1
 ---
 
-# ColorPalette
+# ColorPalette PHP Class Overview
 
-The Kendo ColorPalette for PHP is a server-side wrapper for the [Kendo UI ColorPalette](/api/web/colorpalette) widget.
+The Kendo UI ColorPalette for PHP is a server-side wrapper for the [Kendo UI ColorPalette](/api/javascript/ui/colorpalette) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo ColorPalette:
+### Configuration
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
+Below are listed the steps for you to follow when configuring the Kendo UI ColorPalette for PHP.
 
-2. Create a [colorpalette](/api/php/Kendo/UI/ColorPalette).
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
 
-        <?php
-        $colorpalette = new \Kendo\UI\ColorPalette('colorpalette');
-        $colorpalette->value('#ff0000');
-        ?>
+**Step 2** Create a [ColorPalette](/api/php/Kendo/UI/ColorPalette).
 
-3. Output the colorpalette by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+###### Example
 
-        <?php
-        echo $colorpalette->render();
-        ?>
+    <?php
+    $colorpalette = new \Kendo\UI\ColorPalette('colorpalette');
+    $colorpalette->value('#ff0000');
+    ?>
 
-## Getting Client-side Reference
+**Step 3** Output the ColorPalette by echoing the result of the `render` method.
 
-You can reference the client-side Kendo ColorPalette instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/colorpalette#methods) to control its behavior.
+###### Example
 
+    <?php
+    echo $colorpalette->render();
+    ?>
 
-### Example
+## Event Handling
+
+You can subscribe to all ColorPalette [events](/api/web/colorpalette#events).
+
+### Specify Function Names
+
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
+
+###### Example
+
+    <?php
+    $colorpalette = new \Kendo\UI\ColorPalette('colorpalette');
+
+    // The 'colorpalette_change' JavaScript function will handle the 'change' event of the ColorPalette
+    $colorpalette->change('colorpalette_change');
+
+    echo $colorpalette->render();
+    ?>
+    <script>
+    function colorpalette_change() {
+        // Handle the change event
+    }
+    </script>
+
+### Provide Inline Code
+
+The example below demonstrates how to subscribe to events by providing inline JavaScript code.
+
+###### Example
+
+    <?php
+    $colorpalette = new \Kendo\UI\ColorPalette('colorpalette');
+
+    // Provide inline JavaScript code that will handle the 'change' event of the colorpalette
+    $colorpalette->change('function() { /* Handle the change event */ }');
+
+    echo $colorpalette->render();
+    ?>
+
+<!--*-->
+## Reference
+
+### Client-Side Instances
+
+You are able to reference an existing ColorPalette instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [ColorPalette API](/api/javascript/ui/colorpalette#methods) to control its behavior.
+
+###### Example
 
     <?php
     $colorpalette = new \Kendo\UI\ColorPalette('colorpalette');
@@ -46,33 +94,10 @@ Once a reference has been established, you can use the [API](/api/web/colorpalet
     });
     </script>
 
-## Handling Events
+## See Also
 
-You can subscribe to all colorpalette [events](/api/web/colorpalette#events).
+Other articles on Telerik UI for PHP and related to the ColorPalette:
 
-### Example - subscribing by specifying JavaScript function name
-
-    <?php
-    $colorpalette = new \Kendo\UI\ColorPalette('colorpalette');
-
-    // The 'colorpalette_change' JavaScript function will handle the 'change' event of the colorpalette
-    $colorpalette->change('colorpalette_change');
-
-    echo $colorpalette->render();
-    ?>
-    <script>
-    function colorpalette_change() {
-        // Handle the change event
-    }
-    </script>
-
-### Example - providing inline JavaScript code
-
-    <?php
-    $colorpalette = new \Kendo\UI\ColorPalette('colorpalette');
-
-    // Provide inline JavaScript code that will handle the 'change' event of the colorpalette
-    $colorpalette->change('function() { /* Handle the change event */ }');
-
-    echo $colorpalette->render();
-    ?>
+* [Overview of the Kendo UI ColorPicker Widget]({% slug overview_kendoui_colorpicker_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

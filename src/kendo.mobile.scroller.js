@@ -325,6 +325,7 @@ var __meta__ = { // jshint ignore:line
                 avoidScrolling = this.options.avoidScrolling,
 
                 userEvents = new kendo.UserEvents(element, {
+                    touchAction: "pan-y",
                     fastTap: true,
                     allowSelection: true,
                     preventDragEvent: true,

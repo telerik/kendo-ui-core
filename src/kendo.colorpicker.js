@@ -395,7 +395,7 @@ var __meta__ = { // jshint ignore:line
 
             that._hueSlider = element.find(".k-hue-slider").kendoSlider({
                 min: 0,
-                max: 359,
+                max: 360,
                 tickPlacement: "none",
                 showButtons: false,
                 slide: hueChange,
@@ -685,7 +685,7 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 wrapper = that.wrapper,
                 innerWrapper = wrapper.children(".k-picker-wrap"),
-                icon = innerWrapper.find(".k-select");
+                arrow = innerWrapper.find(".k-select");
 
             if (arguments.length === 0) {
                 enable = true;
@@ -694,7 +694,7 @@ var __meta__ = { // jshint ignore:line
             that.element.attr("disabled", !enable);
             wrapper.attr("aria-disabled", !enable);
 
-            icon.off(NS).on("mousedown" + NS, preventDefault);
+            arrow.off(NS).on("mousedown" + NS, preventDefault);
 
             wrapper.addClass("k-state-disabled")
                 .removeAttr("tabIndex")
@@ -703,15 +703,17 @@ var __meta__ = { // jshint ignore:line
             if (enable) {
                 wrapper.removeClass("k-state-disabled")
                     .attr("tabIndex", that._tabIndex)
-                    .on("mouseenter" + NS, function() { innerWrapper.addClass("k-state-hover"); })
-                    .on("mouseleave" + NS, function() { innerWrapper.removeClass("k-state-hover"); })
+                    .on("mouseenter" + NS, function () { innerWrapper.addClass("k-state-hover"); })
+                    .on("mouseleave" + NS, function () { innerWrapper.removeClass("k-state-hover"); })
                     .on("focus" + NS, function () { innerWrapper.addClass("k-state-focused"); })
                     .on("blur" + NS, function () { innerWrapper.removeClass("k-state-focused"); })
                     .on(KEYDOWN_NS, bind(that._keydown, that))
                     .on(CLICK_NS, ".k-select", bind(that.toggle, that))
-                    .on(CLICK_NS, that.options.toolIcon ? ".k-tool-icon" : ".k-selected-color", function(){
+                    .on(CLICK_NS, that.options.toolIcon ? ".k-tool-icon" : ".k-selected-color", function () {
                         that.trigger("activate");
                     });
+            } else {
+                that.close();
             }
         },
 
@@ -725,8 +727,8 @@ var __meta__ = { // jshint ignore:line
                     '# } else { #' +
                         '<span class="k-selected-color"></span>' +
                     '# } #' +
-                    '<span class="k-select" unselectable="on">' +
-                        '<span class="k-icon k-i-arrow-s" unselectable="on"></span>' +
+                    '<span class="k-select" unselectable="on" aria-label="select">' +
+                        '<span class="k-icon k-i-arrow-s"></span>' +
                     '</span>' +
                 '</span>' +
             '</span>'
@@ -747,14 +749,18 @@ var __meta__ = { // jshint ignore:line
 
         events: [ "activate", "change", "select", "open", "close" ],
 
-        open: function() {
-            this._getPopup().open();
+        open: function () {
+            if (!this.element.prop("disabled")) {
+                this._getPopup().open();
+            }
         },
-        close: function() {
+        close: function () {
             this._getPopup().close();
         },
-        toggle: function() {
-            this._getPopup().toggle();
+        toggle: function () {
+            if (!this.element.prop("disabled")) {
+                this._getPopup().toggle();
+            }
         },
         color: ColorSelector.fn.color,
         value: ColorSelector.fn.value,
@@ -856,7 +862,11 @@ var __meta__ = { // jshint ignore:line
                         that.wrapper.children(".k-picker-wrap").removeClass("k-state-focused");
                         var color = selector._selectOnHide();
                         if (!color) {
-                            that.wrapper.focus();
+                            setTimeout(function(){
+                                if (that.wrapper) {
+                                    that.wrapper.focus();
+                                }
+                            });
                             that._updateUI(that.color());
                         } else {
                             that._select(color);

@@ -30,6 +30,7 @@ navigation:
         position: 1
     "controls/data-management/grid/how-to/AngularJS":
         title: "AngularJS"
+        position: 1
     "controls/data-management/grid/how-to/Editing":
         title: "Editing"
         position: 2
@@ -56,19 +57,19 @@ navigation:
         position: 3
     "controls/charts/features":
         title: "Features"
-        position: 6
+        position: 7
     "controls/charts/chart-types":
         title: "Chart Types"
-        position: 7
+        position: 8
     "controls/charts/stockchart":
         title: "Stock Charts"
-        position: 8
+        position: 9
     "controls/charts/sparkline":
         title: "Sparklines"
-        position: 9
+        position: 10
     "controls/charts/treemap":
         title: "TreeMap"
-        position: 10
+        position: 11
     "controls/gauges":
         title: "Gauges"
         position: 4
@@ -94,21 +95,18 @@ navigation:
         title: "FX"
     "controls/interactivity/draganddrop":
         title: "Drag and Drop"
+    "controls/media":
+        title: "Media"
+        position: 11
     "controls/hybrid":
         title: "Hybrid UI"
-        position: 11
+        position: 12
     "controls/hybrid/styles":
         title: "Styles and Appearance"
         position: 5
     "controls/hybrid/support":
         title: "Support and Integration"
         position: 6
-    "controls/hybrid/support/angular":
-        title: "AngularJS"
-        position: 100
-    "controls/hybrid/support/angular/tutorials":
-        title: "Tutorials"
-        position: 100
     "controls/hybrid/actionsheet":
         title: "ActionSheet"
         position: 7
@@ -160,6 +158,8 @@ navigation:
     "controls/hybrid/how-to":
         title: "How To"
         position: 23
+    "controls/hybrid/how-to/application":
+        title: "Application"
     "controls/hybrid/faq":
         title: "Frequently Asked Questions"
         position: 24
@@ -226,32 +226,81 @@ navigation:
     "AngularJS":
         title: "AngularJS Directives"
         position: 7
+    "AngularJS/how-to":
+        title: "How To"
+        position: 6
+    "AngularJS/Troubleshooting":
+        title: "Troubleshooting"
+        position: 7
+    "AngularJS/tutorials":
+        title: "Tutorials"
+        position: 8
     "aspnet-mvc":
         title: "UI for ASP.NET MVC"
         position: 8
     "aspnet-mvc/mvc-6":
-        title: "ASP.NET MVC 6"
-        position: 4
+        title: "Use with ASP.NET Core MVC"
+        position: 14
     "aspnet-mvc/vs-integration":
         title: "Visual Studio Integration"
-        position: 9
+        position: 15
     "aspnet-mvc/migration":
         title: "Migrate From Telerik Extensions"
-        position: 12
+        position: 16
     "aspnet-mvc/helpers":
-        title: "View Helpers"
-        position: 11
-    "aspnet-mvc/tutorial-saleshub":
-        title: "Tutorial: Build the Sales Hub Project"
+        title: "Widgets"
+        position: 17
+    "aspnet-mvc/helpers/grid/binding":
+        title: "Binding"
+        position: 6
+    "aspnet-mvc/helpers/grid/editing":
+        title: "Editing"
+        position: 7
+    "aspnet-mvc/helpers/grid/templating":
+        title: "Templating"
+        position: 8
+    "aspnet-mvc/helpers/grid/how-to":
+        title: "How To"
+        position: 9
+    "aspnet-mvc/helpers/grid/how-to/editing":
+        title: "Editing"
+    "aspnet-mvc/helpers/grid/troubleshoot":
+        title: "Troubleshooting"
+        position: 10
+    "aspnet-mvc/helpers/hybrid":
+        title: "Hybrid UI"
+    "aspnet-mvc/how-to":
+        title: "How To"
+        position: 18
+    "aspnet-mvc/troubleshoot":
+        title: "Troubleshooting"
+        position: 19
+    "aspnet-mvc/tutorials":
+        title: "Tutorials"
         position: 20
-    "aspnet-mvc/tutorial-kendo-music-store":
-        title: "Tutorial: Build the Kendo Music Store"
-        position: 20
-    "aspnet-mvc/tutorial-kendo-music-store/music-store-web":
+    "aspnet-mvc/tutorials/quickstart":
+        title: "Quick Start Guide"
+        position: 1
+    "aspnet-mvc/tutorials/tutorial-aspnetmvc-quick-start/build-team-efficiency-app":
+        title: "Build the Team Efficiency Project"
+        position: 2
+    "aspnet-mvc/tutorials/tutorial-kendo-music-store":
+        title: "Build the Music Store Project"
+        position: 2
+    "aspnet-mvc/tutorials/tutorial-kendo-music-store/music-store-web":
         title: "Build the Web Application"
         position: 2
-    "aspnet-mvc/tutorial-kendo-music-store/music-store-dashboard":
+    "aspnet-mvc/tutorials/tutorial-kendo-music-store/music-store-dashboard":
         title: "Build the Dashboard"
+        position: 3
+    "aspnet-mvc/tutorials/tutorial-saleshub":
+        title: "Build the Sales Hub Project"
+        position: 2
+    "aspnet-mvc/tutorials/tutorial-saleshub/home-page":
+        title: "Build the Home Page"
+        position: 2
+    "aspnet-mvc/tutorials/tutorial-saleshub/order-page":
+        title: "Build the Order Page"
         position: 3
     "jsp":
         title: "UI for JSP"
@@ -259,6 +308,8 @@ navigation:
     "php":
         title: "UI for PHP"
         position: 10
+    "php/widgets":
+        title: "Classes"
     "troubleshoot":
         title: "Troubleshooting"
         position: 11
@@ -284,8 +335,11 @@ navigation:
         title: "2016"
         position: 1
     "updates":
-        title: "Documentation Updates"
+        title: "Updates and  Contribution"
         position: 14
+    "copyright":
+        title: "Copyright"
+        position: 15
     "*how-to":
         title: "How To"
         position: 200
@@ -309,29 +363,35 @@ navigation:
     "*pdf-export":
         title: "PDF Export"
     "*mobileactionsheet":
-        title: "MobileActionSheet"
+        title: "ActionSheet"
     "*mobileapplication":
-        title: "MobileApplication"
+        title: "Application"
     "*mobilebuttongroup":
-        title: "MobileButtonGroup"
+        title: "ButtonGroup"
     "*mobilelayout":
-        title: "MobileLayout"
+        title: "Layout"
     "*mobilemodalview":
-        title: "MobileModalView"
+        title: "ModalView"
     "*mobilepopover":
-        title: "MobilePopOver"
+        title: "PopOver"
     "*mobilesplitview":
-        title: "MobileSplitView"
+        title: "SplitView"
     "*mobileswitch":
-        title: "MobileSwitch"
+        title: "Switch"
     "*mobiletabstrip":
-        title: "MobileTabStrip"
+        title: "TabStrip"
     "*mobilelistview":
-        title: "MobileListView"
+        title: "ListView"
     "*mobileview":
-        title: "MobileView"
+        title: "View"
     "*mobilebutton":
-        title: "MobileButton"
+        title: "Button"
+    "*mobiledrawer":
+        title: "Drawer"
+    "*mobilelanavbar":
+        title: "NavBar"
+    "*mobilescrollview":
+        title: "ScrollView"
     "*barcode":
         title: "Barcode"
     "*stockchart":
@@ -379,8 +439,10 @@ navigation:
         title: "Validator"
     "*autocomplete":
         title: "AutoComplete"
-    "*button":
+    "*/button":
         title: "Button"
+    "*/radiobutton":
+        title: "RadioButton"
     "*calendar":
         title: "Calendar"
     "*colorpalette":
@@ -395,6 +457,8 @@ navigation:
         title: "DatePicker"
     "*datetimepicker":
         title: "DateTimePicker"
+    "*dialog":
+        title: "Dialog"
     "*dropdownlist":
         title: "DropDownList"
     "*editor":
@@ -405,17 +469,21 @@ navigation:
         title: "PivotGrid"
     "*grid":
         title: "Grid"
+    "*media":
+        title: "Media"
+    "*mediaplayer":
+        title: "MediaPlayer"
     "*spreadsheet":
         title: "Spreadsheet"
     "*import-and-export-data":
         title: "Import and Export Data"
-        position: 4
+        position: 5
     "*localization-spreadsh":
         title: "Localization"
-        position: 5
+        position: 6
     "*end-user":
         title: "For the End User"
-        position: 6
+        position: 7
     "*listview":
         title: "ListView"
     "*maskedtextbox":
@@ -426,6 +494,8 @@ navigation:
         title: "MultiSelect"
     "*notification":
         title: "Notification"
+    "*popup":
+        title: "Popup"
     "*numerictextbox":
         title: "NumericTextBox"
     "*panelbar":
@@ -472,27 +542,6 @@ navigation:
         title: "Order Page"
     "*localization":
         title: "Localization"
-    "aspnet-mvc/vs-integration":
-        title: "Visual Studio Integration"
-        position: 9
-    "aspnet-mvc/migration":
-        title: "Migrate From Telerik Extensions"
-        position: 12
-    "aspnet-mvc/helpers":
-        title: "View Helpers"
-        position: 11
-    "aspnet-mvc/tutorial-saleshub":
-        title: "Tutorial: Build the Sales Hub Project"
-        position: 20
-    "aspnet-mvc/tutorial-kendo-music-store":
-        title: "Tutorial: Build the Kendo Music Store"
-        position: 20
-    "aspnet-mvc/tutorial-kendo-music-store/music-store-web":
-        title: "Build the Web Application"
-        position: 2
-    "aspnet-mvc/tutorial-kendo-music-store/music-store-dashboard":
-        title: "Build the Dashboard"
-        position: 3
     "api/javascript":
         title: "JavaScript"
         position: 2
@@ -510,7 +559,10 @@ navigation:
 baseurl: /kendo-ui
 
 ## The Kendo UI version used
-cdnVersion: "2016.1.112"
+cdnVersion: "2016.2.607"
+
+## The MVC Core version used
+mvcCoreVersion: "2016.2.616"
 
 ## Assign layout and category per different paths
 defaults:
@@ -591,6 +643,7 @@ google_custom_search: '001595215763381649090:eblhnfskwrk'
 assets:
     cachebust: soft
     js_compressor: uglifier
+    gzip: false
 
 ## Do not edit below this line
 safe: false

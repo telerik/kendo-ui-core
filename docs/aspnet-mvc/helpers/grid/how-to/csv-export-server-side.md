@@ -1,9 +1,17 @@
 ---
-title: Server-side CSV Export
+title: Export Grid Data to CSV Files
+page_title: Do Ajax Editing with Enumeration | Kendo UI Grid HtmlHelper
+description: "Export Kendo UI Grid data as a CSV (comma-separated value) file."
+slug: howto_exportgriddatacsvfile_gridaspnetmv
 ---
 
-# CSV Export in server-side code
+# Export Grid Data to CSV Files
 
-This project shows how to export the Kendo UI Grid data as a CSV (comma separated value) file.
+To see the example on how to export the Kendo UI Grid data as a CVS (comma-separated value) file server-side, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/csv-export-server-side)
 
-[CSV Export Server-side](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/csv-export-server-side)
+## See Also
+
+* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
+* [GridBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
+
+For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_applycustomrowstylesbasedondata_gridaspnetmvc %}).

@@ -20,7 +20,7 @@
             }
 
             container.remove();
-            $.mockjaxClear();
+            $.mockjax.clear();
         }
     });
 

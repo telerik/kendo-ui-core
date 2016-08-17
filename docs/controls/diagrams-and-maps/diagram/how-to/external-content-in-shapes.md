@@ -1,6 +1,6 @@
 ---
 title: Render External Content in Shapes
-page_title: Render External Content in Shapes | Kendo UI Diagram Widget
+page_title: Render External Content in Shapes | Kendo UI Diagram
 description: "Learn how to render HTML content in Kendo UI Diagram shapes."
 slug: howto_renderexternalcontent_inshapes_diagram
 ---
@@ -10,8 +10,6 @@ slug: howto_renderexternalcontent_inshapes_diagram
 The Kendo UI Diagram is rendered by using the [Drawing API](http://docs.telerik.com/kendo-ui/framework/drawing/overview). The shape visual templates allow you to override the rendering entirely, as illustrated in the [Basic Usage](http://demos.telerik.com/kendo-ui/diagram/index) demo.
 
 In addition to manually drawing the shapes, you are able to use the [HTML Drawing](/framework/drawing/drawing-dom) feature to convert existing document content into static drawings.
-
-The example below demonstrates how to render HTML content in Kendo UI Diagram shapes by placing a chart into the Diagram shapes.
 
 ###### Example
 
@@ -107,11 +105,11 @@ The example below demonstrates how to render HTML content in Kendo UI Diagram sh
 
 ## See Also
 
-Other articles on Kendo UI Diagram:
+Other articles on the Kendo UI Diagram:
 
 * [JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
-* [How to Change Shape Visual Elements Dynamically]({% slug howto_changeshapevisualelements_dynamically_diagram %})
 * [How to Drag and Drop on Shapes]({% slug howto_draganddrop_onshapes_diagram %})
-* [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
+* [How to Show Shapes Tooltip]({% slug howto_shapestooltip_diagram %})
 * [How to Use Scrollbars]({% slug howto_usescrollbar_diagram %})
-* [How to Wrap Text]({% slug howto_wraptext_diagram %})
+
+For more runnable examples on the Kendo UI Diagram, browse the [**How To** documentation folder]({% slug howto_changeshapevisualelements_dynamically_diagram %}).

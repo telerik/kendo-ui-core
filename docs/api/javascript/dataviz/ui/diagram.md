@@ -82,6 +82,26 @@ Defines the defaults of the connections. Whenever a connection is created, the s
 
 Defines the label displayed on the connection path.
 
+### connectionDefaults.content.color `String`
+
+The color of the connection content text.
+
+### connectionDefaults.content.fontFamily `String`
+
+The font family of the connection content text.
+
+### connectionDefaults.content.fontSize `Number`
+
+The font size of the connection content text.
+
+### connectionDefaults.content.fontStyle `String`
+
+The font style of the connection content text.
+
+### connectionDefaults.content.fontWeight `String`
+
+The font weight of the connection content text.
+
 ### connectionDefaults.content.template `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) which renders the labels.
@@ -149,10 +169,52 @@ Specifies if the connections can be removed.
 
 ### connectionDefaults.editable.tools `Array`
 
-Specifies the the toolbar tools. Predefined tools are:
+Specifies the the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar#configuration-items). Predefined tools are:
 
 * "edit" - Selected item can be edit.
 * "delete" - Selected items can be deleted.
+
+#### Example - using predefined tools
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        connections: [{ from: {x: 100, y: 100}, to: {x: 200, y: 200}}],
+        connectionDefaults: {
+          editable: {
+            tools: [{
+              name: "delete"
+            }]
+          }
+        }
+      });
+    </script>
+
+#### Example - using custom tools
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        connections: [{ from: {x: 100, y: 100}, to: {x: 200, y: 200}}],
+        connectionDefaults: {
+          editable: {
+            tools: [{
+              type: "button",
+              text: "Set Content",
+              click: function() {
+                var selected = $("#diagram").getKendoDiagram().select();
+                var content = $("#content").val();
+                for (var idx = 0; idx < selected.length; idx++) {
+                  selected[idx].content(content);
+                }
+              }
+            }, {
+              template: "<input id='content' class='k-textbox' value='Foo' />"
+            }]
+          }
+        }
+      });
+    </script>
 
 ### connectionDefaults.editable.tools.name `String`
 
@@ -400,7 +462,27 @@ Defines the connections configuration.
 
 ### connections.content `Object`
 
-Defines the shapes content settings.
+Defines the connection content settings.
+
+### connections.content.color `String`
+
+The color of the connection content text.
+
+### connections.content.fontFamily `String`
+
+The font family of the connection content text.
+
+### connections.content.fontSize `Number`
+
+The font size of the connection content text.
+
+### connections.content.fontStyle `String`
+
+The font style of the connection content text.
+
+### connections.content.fontWeight `String`
+
+The font weight of the connection content text.
 
 ### connections.content.template `String|Function`
 
@@ -424,7 +506,7 @@ Defines the shape editable options.
 
 ### connections.editable.tools `Array`
 
-Specifies the the toolbar tools. Predefined tools are:
+Specifies the the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar#configuration-items). Predefined tools are:
 
 * "edit" - Selected item can be edit.
 * "delete" - Selected items can be deleted.
@@ -1032,21 +1114,6 @@ Specifies the width of the resizing handles. See the [editable.resize](#configur
 
 Specifies whether the shapes can be rotated. Note that changing this setting after creating the diagram will have no effect.
 
-#### Example - styling the rotation thumb
-
-     editable:{
-         rotate:{
-             fill:{
-                 color:"red",
-                 opacity:.5
-             },
-             stroke:{
-                 color:"blue",
-                 width:2
-             }
-         }
-     }
-
 ### editable.rotate.fill `Object`
 
 Specifies the fill settings of the rotation thumb.
@@ -1077,7 +1144,7 @@ Specifies the shape editor template. See the 'editable.connectionTemplate' for a
 
 ### editable.tools `Array`
 
-Specifies the the toolbar tools. Predefined tools are:
+Specifies the the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar#configuration-items). Predefined tools are:
 
 * "edit" - Selected item can be edit.
 * "createShape" - Adds an empty shape data item and a popup window will be displayed.
@@ -1088,6 +1155,48 @@ Specifies the the toolbar tools. Predefined tools are:
 * "rotateAnticlockwise" - Selected items can be rotated anticlockwise. Default value for rotation is 90 degree.
 
 > If the toolbar or toolbar items are not visible, please make sure the Kendo stylesheets are included in the header.
+
+#### Example - using predefined tools
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{}],
+        editable: {
+          tools: [{
+            name: "delete"
+          }, {
+            name: "rotateClockwise"
+          }, {
+            name: "rotateAnticlockwise"
+          }]
+        }
+      });
+    </script>
+
+#### Example - using custom tools
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{}],
+        editable: {
+          tools: [{
+            type: "button",
+            text: "Set Selected Content",
+            click: function() {
+              var selected = $("#diagram").getKendoDiagram().select();
+              var content = $("#content").val();
+              for (var idx = 0; idx < selected.length; idx++) {
+                selected[idx].content(content);
+              }
+            }
+          }, {
+            template: "<input id='content' class='k-textbox' value='Foo' />"
+          }]
+        }
+      });
+    </script>
 
 ### editable.tools.name `String`
 
@@ -1700,6 +1809,10 @@ Defines the selectable key. The available values are:
 
 > This option is not aplicable for mobile defices
 
+### selectable.multiple `Boolean` *(default: true)*
+
+Specifies if the multiple selection should be enabled.
+
 ### selectable.stroke `Object`
 
 Defines the selection stroke configuration.
@@ -1785,7 +1898,147 @@ The connector name.
 
 ### shapeDefaults.connectors.position `Function`
 
-The function that positions the connector.
+The function that positions the connector. The function is passed a shape and should return a kendo.dataviz.diagram.Point holding the connector position as result.
+
+### shapeDefaults.connectors.width `Number` *(default: 8)*
+
+Defines the width of the shape connectors.
+
+### shapeDefaults.connectors.height `Number` *(default: 8)*
+
+Defines the height of the shape connectors.
+
+### shapeDefaults.connectors.hover `Object`
+
+Defines the hover configuration of the shape connectors.
+
+### shapeDefaults.connectors.hover.fill `String|Object`
+
+Defines the hover fill options of the shape connectors.
+
+### shapeDefaults.connectors.hover.fill.color `String`
+
+Defines the hover fill color of the shape connectors.
+
+### shapeDefaults.connectors.hover.fill.opacity `Number` *(default: 1)*
+
+Defines the hover fill opacity of the shape connectors.
+
+### shapeDefaults.connectors.hover.stroke `String|Object`
+
+Defines the hover stroke options of the shape connectors.
+
+### shapeDefaults.connectors.hover.stroke.color `String` *(default: "Black")*
+
+Defines the hover stroke color.
+
+### shapeDefaults.connectors.hover.stroke.dashType `String`
+
+The hover stroke dash type.
+
+### shapeDefaults.connectors.hover.stroke.width `Number` *(default: 1)*
+
+Defines the thickness or width of the shape connectors stroke on hover.
+
+### shapeDefaults.connectors.fill `String|Object`
+
+Defines the fill options of the shape connectors.
+
+### shapeDefaults.connectors.fill.color `String`
+
+Defines the fill color of the shape connectors.
+
+### shapeDefaults.connectors.fill.opacity `Number` *(default: 1)*
+
+Defines the fill opacity of the shape connectors.
+
+### shapeDefaults.connectors.stroke `String|Object`
+
+Defines the stroke options of the shape connectors.
+
+### shapeDefaults.connectors.stroke.color `String` *(default: "Black")*
+
+Defines the stroke color.
+
+### shapeDefaults.connectors.stroke.dashType `String`
+
+The stroke dash type.
+
+### shapeDefaults.connectors.stroke.width `Number` *(default: 1)*
+
+Defines the thickness or width of the shape connectors stroke.
+
+### shapeDefaults.connectorDefaults `Object`
+
+Defines default options for the shape connectors.
+
+### shapeDefaults.connectorDefaults.width `Number` *(default: 8)*
+
+Defines the width of the shape connectors.
+
+### shapeDefaults.connectorDefaults.height `Number` *(default: 8)*
+
+Defines the height of the shape connectors.
+
+### shapeDefaults.connectorDefaults.hover `Object`
+
+Defines the hover configuration of the shape connectors.
+
+### shapeDefaults.connectorDefaults.hover.fill `String|Object`
+
+Defines the hover fill options of the shape connectors.
+
+### shapeDefaults.connectorDefaults.hover.fill.color `String`
+
+Defines the hover fill color of the shape connectors.
+
+### shapeDefaults.connectorDefaults.hover.fill.opacity `Number` *(default: 1)*
+
+Defines the hover fill opacity of the shape connectors.
+
+### shapeDefaults.connectorDefaults.hover.stroke `String|Object`
+
+Defines the hover stroke options of the shape connectors.
+
+### shapeDefaults.connectorDefaults.hover.stroke.color `String` *(default: "Black")*
+
+Defines the hover stroke color.
+
+### shapeDefaults.connectorDefaults.hover.stroke.dashType `String`
+
+The hover stroke dash type.
+
+### shapeDefaults.connectorDefaults.hover.stroke.width `Number` *(default: 1)*
+
+Defines the thickness or width of the shape connectors stroke on hover.
+
+### shapeDefaults.connectorDefaults.fill `String|Object`
+
+Defines the fill options of the shape connectors.
+
+### shapeDefaults.connectorDefaults.fill.color `String`
+
+Defines the fill color of the shape connectors.
+
+### shapeDefaults.connectorDefaults.fill.opacity `Number` *(default: 1)*
+
+Defines the fill opacity of the shape connectors.
+
+### shapeDefaults.connectorDefaults.stroke `String|Object`
+
+Defines the stroke options of the shape connectors.
+
+### shapeDefaults.connectorDefaults.stroke.color `String` *(default: "Black")*
+
+Defines the stroke color.
+
+### shapeDefaults.connectorDefaults.stroke.dashType `String`
+
+The stroke dash type.
+
+### shapeDefaults.connectorDefaults.stroke.width `Number` *(default: 1)*
+
+Defines the thickness or width of the shape connectors stroke.
 
 ### shapeDefaults.content `Object`
 
@@ -1806,6 +2059,14 @@ The font family of the shape content text.
 ### shapeDefaults.content.fontSize `Number`
 
 The font size of the shape content text.
+
+### shapeDefaults.content.fontStyle `String`
+
+The font style of the shape content text.
+
+### shapeDefaults.content.fontWeight `String`
+
+The font weight of the shape content text.
 
 ### shapeDefaults.content.template `String|Function`
 
@@ -1837,12 +2098,58 @@ Specifies if the shapes can be removed.
 
 ### shapeDefaults.editable.tools `Array`
 
-Specifies the the toolbar tools. Predefined tools are:
+Specifies the the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar#configuration-items). Predefined tools are:
 
 * "edit" - Selected item can be edit.
 * "delete" - Selected items can be deleted.
 * "rotateClockwise" - Selected items can be rotated clockwise. Default value for rotation is 90 degree.
 * "rotateAnticlockwise" - Selected items can be rotated anticlockwise. Default value for rotation is 90 degree.
+
+#### Example - using predefined tools
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{}],
+        shapeDefaults: {
+          editable: {
+            tools: [{
+              name: "delete"
+            }, {
+              name: "rotateClockwise"
+            }, {
+              name: "rotateAnticlockwise"
+            }]
+          }
+        }
+      });
+    </script>
+
+#### Example - using custom tools
+
+    <div id="diagram"></div>
+    <script>
+      $("#diagram").kendoDiagram({
+        shapes: [{}],
+        shapeDefaults: {
+          editable: {
+            tools: [{
+              type: "button",
+              text: "Set Content",
+              click: function() {
+                var selected = $("#diagram").getKendoDiagram().select();
+                var content = $("#content").val();
+                for (var idx = 0; idx < selected.length; idx++) {
+                  selected[idx].content(content);
+                }
+              }
+            }, {
+              template: "<input id='content' class='k-textbox' value='Foo' />"
+            }]
+          }
+        }
+      });
+    </script>
 
 ### shapeDefaults.editable.tools.name `String`
 
@@ -2001,57 +2308,63 @@ Specifies the type of the Shape using any of the built-in shape type.
 * "rectangle": this is the default option
 * "circle": a circle/ellipse
 * "image": an image
+* "text": some text
 
 ### shapeDefaults.visual `Function`
 
 A function returning a visual element to render for a given shape. The following primitives can be used to construct a composite visual:
 
-* [Circle](/api/javascript/dataviz/diagram/Circle)
-* [Rectangle](/api/javascript/dataviz/diagram/Rectangle)
-* [Path](/api/javascript/dataviz/diagram/Path)
-* [Line](/api/javascript/dataviz/diagram/Line)
-* [Polyline](/api/javascript/dataviz/diagram/Polyline)
-* [TextBlock](/api/javascript/dataviz/diagram/TextBlock)
-* [Image](/api/javascript/dataviz/diagram/Image)
-* [Layout](/api/javascript/dataviz/diagram/Layout)
+* [Circle](/api/javascript/dataviz/diagram/circle)
+* [Rectangle](/api/javascript/dataviz/diagram/rectangle)
+* [Path](/api/javascript/dataviz/diagram/path)
+* [Line](/api/javascript/dataviz/diagram/line)
+* [Polyline](/api/javascript/dataviz/diagram/polyline)
+* [TextBlock](/api/javascript/dataviz/diagram/text_block)
+* [Image](/api/javascript/dataviz/diagram/image)
+* [Layout](/api/javascript/dataviz/diagram/layout)
+
+> Note that the visual bounding box origin must be (0, 0). If you have a complex path which coordinates cannot be easily adjusted then you can position the element as demonstrated in [this](/controls/diagrams-and-maps/diagram/how-to/adjust-path-origin) example.
 
 #### Example - how to use the visual
+    <div id="diagram"></div>
+    <script>
+        var diagram = kendo.dataviz.diagram;
+        var getVisual = function(data) {
+            var g = new diagram.Group({
+                autoSize: true
+            });
+            var r = new diagram.Circle({
+                width : 100,
+                height: 60,
+                fill: "LimeGreen"
+            });
+            g.append(r);
+            var fn = new diagram.TextBlock({
+                text: data.dataItem.name,
+                fontSize: 16,
+                x: 25,
+                y: 20
+            });
+            g.append(fn);
 
-    var diagram = kendo.dataviz.diagram;
-    var getVisual = function(data) {
-        var g = new diagram.Group({
-            autoSize: true
-        });
-        var r = new diagram.Circle({
-            width : 100,
-            height: 60,
-            fill: "LimeGreen"
-        });
-        g.append(r);
-        var fn = new diagram.TextBlock({
-            text: data.name,
-            fontSize: 16,
-            x: 30,
-            y: 30
-        });
-        g.append(fn);
-        return g;
-    };
+            return g;
+        };
 
-    $("#diagram").kendoDiagram({
-        dataSource: [{
-            "name" : "Telerik",
-            "items": [
-                {"name": "Kendo"},
-                {"name": "Icenium"}
-            ]
-        }],
-        shapeDefaults: {
-            visual: getVisual
-        }
-    });
+        $("#diagram").kendoDiagram({
+            dataSource: [{
+                "name" : "Telerik",
+                "items": [
+                    {"name": "Kendo"},
+                    {"name": "Icenium"}
+                ]
+            }],
+            shapeDefaults: {
+                visual: getVisual
+            }
+        });
 
-    $("#diagram").getKendoDiagram().layout();
+        $("#diagram").getKendoDiagram().layout();
+    </script>
 
 ### shapeDefaults.width `Number` *(default: 100)*
 
@@ -2090,7 +2403,147 @@ The connector name. Predefined names include:
 
 ### shapes.connectors.position `Function`
 
-The function that positions the connector.
+The function that positions the connector. The function is passed a shape and should return a kendo.dataviz.diagram.Point holding the connector position as result.
+
+### shapes.connectors.width `Number` *(default: 8)*
+
+Defines the width of the shape connectors.
+
+### shapes.connectors.height `Number` *(default: 8)*
+
+Defines the height of the shape connectors.
+
+### shapes.connectors.hover `Object`
+
+Defines the hover configuration of the shape connectors.
+
+### shapes.connectors.hover.fill `String|Object`
+
+Defines the hover fill options of the shape connectors.
+
+### shapes.connectors.hover.fill.color `String`
+
+Defines the hover fill color of the shape connectors.
+
+### shapes.connectors.hover.fill.opacity `Number` *(default: 1)*
+
+Defines the hover fill opacity of the shape connectors.
+
+### shapes.connectors.hover.stroke `String|Object`
+
+Defines the hover stroke options of the shape connectors.
+
+### shapes.connectors.hover.stroke.color `String` *(default: "Black")*
+
+Defines the hover stroke color.
+
+### shapes.connectors.hover.stroke.dashType `String`
+
+The hover stroke dash type.
+
+### shapes.connectors.hover.stroke.width `Number` *(default: 1)*
+
+Defines the thickness or width of the shape connectors stroke on hover.
+
+### shapes.connectors.fill `String|Object`
+
+Defines the fill options of the shape connectors.
+
+### shapes.connectors.fill.color `String`
+
+Defines the fill color of the shape connectors.
+
+### shapes.connectors.fill.opacity `Number` *(default: 1)*
+
+Defines the fill opacity of the shape connectors.
+
+### shapes.connectors.stroke `String|Object`
+
+Defines the stroke options of the shape connectors.
+
+### shapes.connectors.stroke.color `String` *(default: "Black")*
+
+Defines the stroke color.
+
+### shapes.connectors.stroke.dashType `String`
+
+The stroke dash type.
+
+### shapes.connectors.stroke.width `Number` *(default: 1)*
+
+Defines the thickness or width of the shape connectors stroke.
+
+### shapes.connectorDefaults `Object`
+
+Defines default options for the shape connectors.
+
+### shapes.connectorDefaults.width `Number` *(default: 8)*
+
+Defines the width of the shape connectors.
+
+### shapes.connectorDefaults.height `Number` *(default: 8)*
+
+Defines the height of the shape connectors.
+
+### shapes.connectorDefaults.hover `Object`
+
+Defines the hover configuration of the shape connectors.
+
+### shapes.connectorDefaults.hover.fill `String|Object`
+
+Defines the hover fill options of the shape connectors.
+
+### shapes.connectorDefaults.hover.fill.color `String`
+
+Defines the hover fill color of the shape connectors.
+
+### shapes.connectorDefaults.hover.fill.opacity `Number` *(default: 1)*
+
+Defines the hover fill opacity of the shape connectors.
+
+### shapes.connectorDefaults.hover.stroke `String|Object`
+
+Defines the hover stroke options of the shape connectors.
+
+### shapes.connectorDefaults.hover.stroke.color `String` *(default: "Black")*
+
+Defines the hover stroke color.
+
+### shapes.connectorDefaults.hover.stroke.dashType `String`
+
+The hover stroke dash type.
+
+### shapes.connectorDefaults.hover.stroke.width `Number` *(default: 1)*
+
+Defines the thickness or width of the shape connectors stroke on hover.
+
+### shapes.connectorDefaults.fill `String|Object`
+
+Defines the fill options of the shape connectors.
+
+### shapes.connectorDefaults.fill.color `String`
+
+Defines the fill color of the shape connectors.
+
+### shapes.connectorDefaults.fill.opacity `Number` *(default: 1)*
+
+Defines the fill opacity of the shape connectors.
+
+### shapes.connectorDefaults.stroke `String|Object`
+
+Defines the stroke options of the shape connectors.
+
+### shapes.connectorDefaults.stroke.color `String` *(default: "Black")*
+
+Defines the stroke color.
+
+### shapes.connectorDefaults.stroke.dashType `String`
+
+The stroke dash type.
+
+### shapes.connectorDefaults.stroke.width `Number` *(default: 1)*
+
+Defines the thickness or width of the shape connectors stroke.
 
 ### shapes.content `Object`
 
@@ -2111,6 +2564,14 @@ The font family of the shape content text.
 ### shapes.content.fontSize `Number`
 
 The font size of the shape content text.
+
+### shapes.content.fontStyle `String`
+
+The font style of the shape content text.
+
+### shapes.content.fontWeight `String`
+
+The font weight of the shape content text.
 
 ### shapes.content.template `String|Function`
 
@@ -2134,7 +2595,7 @@ Specifies whether the connectors should appear on hover.
 
 ### shapes.editable.tools `Array`
 
-Specifies the the toolbar tools. Predefined tools are:
+Specifies the the toolbar tools. Supports all options supported for the [toolbar.items](/api/javascript/ui/toolbar#configuration-items). Predefined tools are:
 
 * "edit" - Selected item can be edit.
 * "delete" - Selected items can be deleted.
@@ -2809,6 +3270,34 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
 
 Sets the focus on the diagram.
 
+### getConnectionByModelId
+
+Returns the connection corresponding to the model with the specified id value.
+
+#### Parameters
+
+##### id `String|Number`
+
+The model id value.
+
+#### Returns
+
+`kendo.dataviz.diagram.Connection` the connection corresponding to the model.
+
+### getConnectionByModelUid
+
+Returns the connection corresponding to the model with the specified uid value.
+
+#### Parameters
+
+##### uid `String`
+
+The model uid value.
+
+#### Returns
+
+`kendo.dataviz.diagram.Connection` the connection corresponding to the model.
+
 ### getShapeById
 
 Returns the shape or connection with the specified identifier.
@@ -2822,6 +3311,34 @@ The unique identifier of the Shape or Connection
 #### Returns
 
 `Object` the item that has the provided ID.
+
+### getShapeByModelId
+
+Returns the shape corresponding to the model with the specified id value.
+
+#### Parameters
+
+##### id `String|Number`
+
+The model id value.
+
+#### Returns
+
+`kendo.dataviz.diagram.Shape` the shape corresponding to the model.
+
+### getShapeByModelUid
+
+Returns the shape corresponding to the model with the specified uid value.
+
+#### Parameters
+
+##### uid `String`
+
+The model uid value.
+
+#### Returns
+
+`kendo.dataviz.diagram.Shape` the shape corresponding to the model.
 
 ### layerToModel
 
@@ -3309,6 +3826,10 @@ Fired when dragging shapes or connection.
 
 #### Event Data
 
+##### e.connectionHandle `String`
+
+A value indicating which handle of the connection is being dragged. The value will be `"source"` for the source handle, `"target"` for the target handle and `undefined` if the entire connection is being dragged.
+
 ##### e.connections `Array`
 
 An array with the dragged connection.
@@ -3326,6 +3847,10 @@ The widget instance which fired the event.
 Fired after finishing dragging shapes or connection.
 
 #### Event Data
+
+##### e.connectionHandle `String`
+
+A value indicating which handle of the connection was dragged. The value will be `"source"` for the source handle, `"target"` for the target handle and `undefined` if the entire connection was dragged.
 
 ##### e.connections `Array`
 
@@ -3348,6 +3873,10 @@ A function that can be used prevent the default action. If invoked, the dragged 
 Fired before starting dragging shapes or connection.
 
 #### Event Data
+
+##### e.connectionHandle `String`
+
+A value indicating which handle of the connection will be dragged. The value will be `"source` for the source handle, `"target"` for the target handle and `undefined` if the entire connection will be dragged.
 
 ##### e.connections `Array`
 
@@ -3531,6 +4060,32 @@ The rest of the items (shapes and connections).
 
 The widget instance which fired the event.
 
+### toolBarClick
+
+Fired when the user clicks an item in the toolbar.
+
+#### Event Data
+
+##### e.action `String`
+
+The name of the clicked tool.
+
+##### e.shapes `Array`
+
+The selected shapes.
+
+##### e.connections `Array`
+
+The selected connections.
+
+##### e.target `jQuery`
+
+The jQuery object that represents the clicked toolbar element.
+
+##### e.sender `kendo.dataviz.ui.Diagram`
+
+The widget instance which fired the event.
+
 ### zoomEnd
 
 Fired when the user changes the diagram zoom level.
@@ -3566,4 +4121,3 @@ The widget instance which fired the event.
 ##### e.zoom `Number`
 
 The current zoom level.
-

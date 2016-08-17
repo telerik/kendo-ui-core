@@ -75,6 +75,8 @@ The name of the Model's ID field. This field is available **only** if the `id` i
 The unique identifier of the `Model`. Inherited from `ObservableObject`. More info can be found in the [uid](/api/javascript/data/observableobject#fields-uid) section of the
 ObservableObject API reference.
 
+The main benefit of uid's is to represent a link between data items (that may not have an ID of their own) and the corresponding rendered DOM elements (list items, table rows, etc). The uid's are generated randomly and they are not persisted across data or web page reloads.
+
 ### dirty `Boolean`
 
 Indicates whether the model is modified.
@@ -117,10 +119,13 @@ If the value of the field specified is equal to the default value (specified thr
 A set of key/value pairs the configure the model fields. The key specifies the name of the field.
 Quote the key if it contains spaces or other symbols which are not valid for a JavaScript identifier.
 
+> A field configuration cannot contain nested fields' configurations.
+
 ##### options.fields.fieldName.defaultValue
 
-Specifies the which will be used for the field when a new model instance is created. Default settings depend on the type of the field. Default for "string" is `""`,
-for "number" is `0` and for "date" is `new Date()` (today).
+Specifies the default value which will be used for the field when a new model instance is created. The default settings depend on the type of the field. The default value for "string" is `""`, for "number" is `0`, and for "date" is `new Date()` (today).
+
+The parameter can also be set to a function that returns the dynamic default values of the fields. For a live demo, refer to [this how-to example]({% slug howto_gridfiltering_dynamicdefaultvalues_grid %}).
 
 ##### options.fields.fieldName.editable `Boolean`
 
@@ -136,7 +141,7 @@ Specifies the function which will parse the field value. If not set default pars
 
 ##### options.fields.fieldName.type `String`
 
-Specifies the type of the field. The available options are `"string"`, `"number"`, `"boolean"`, `"date`". The default is `"string"`.
+Specifies the type of the field. The available options are `"string"`, `"number"`, `"boolean"`, `"date`" and `"object`". The default is `"string"`.
 
 ##### options.fields.fieldName.from `String`
 

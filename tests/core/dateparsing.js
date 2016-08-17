@@ -578,6 +578,57 @@ test('parse MMMM yyyy date format if the current culture contains months with na
     }
 });
 
+test('parse G format of ko-KR culture', function () {
+    var dateFormat = "MMMM yyyy";
+    var calendar = kendo.culture().calendar;
+
+    var oldAM = calendar.AM;
+    var oldPM = calendar.PM;
+    var oldPatterns = calendar.patterns;
+
+    //ko-KR culture
+    calendar.AM = ["오전","오전","오전"];
+    calendar.PM = ["오후","오후","오후"];
+    calendar.patterns = {
+        d: "yyyy-MM-dd",
+        D: "yyyy'년' M'월' d'일' dddd",
+        F: "yyyy'년' M'월' d'일' dddd tt h:mm:ss",
+        g: "yyyy-MM-dd tt h:mm",
+        G: "yyyy-MM-dd tt h:mm:ss",
+        m: "M'월' d'일'",
+        M: "M'월' d'일'",
+        s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
+        t: "tt h:mm",
+        T: "tt h:mm:ss",
+        u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
+        y: "yyyy'년' M'월'",
+        Y: "yyyy'년' M'월'"
+    };
+
+    try {
+        var result = parse("2016-05-27 오전 11:00");
+        ok(isValidDateTime(result, 2016, 5, 27, 11, 0, 0, 0 ,0), result);
+
+    } finally {
+        calendar.patterns = oldPatterns;
+        calendar.AM = oldAM;
+        calendar.PM = oldPM;
+    }
+});
+
+tzTest('Sofia', 'parses more specific standard formats before culture date formats', function () {
+    var calendar = kendo.culture().calendar;
+    var shortDatePattern = calendar.patterns.d;
+
+    try {
+        calendar.patterns.d = "yyyy-MM-dd";
+        var result = parse("2016-02-29T15:22:46+01:00");
+        ok(isValidDateTime(result, 2016, 2, 29, 16, 22, 46));
+    } finally {
+        calendar.patterns.d = shortDatePattern;
+    }
+});
+
 test('parse should return null if only year is passed', function () {
     var dateFormat = "M/dd/yyyy";
 

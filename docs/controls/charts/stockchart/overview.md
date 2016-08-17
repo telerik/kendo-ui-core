@@ -79,7 +79,7 @@ The name of the field is specified by using the `dateField` option, as demonstra
 
 It can be omitted if the field name is `"date"` (the default value).
 
-> **Importnat**
+> **Important**
 >
 > Data points must be sorted by date in ascending order. Consider sorting the data on the server or use the DataSource [`sort` option](/api/framework/datasource#sort-array--objectdefault).
 
@@ -121,6 +121,8 @@ You can omit the array if defining a single series.
 Kendo UI Stock Charts can be bound to both local and remote data via its DataSource. Binding is limited to time series only.
 
 The example below demonstrates a service that returns stock price history data as JSON.
+
+For a detailed discussion of the Stock Chart data binding specifics, refer to the article on the [Stock Chart data binding]({% slug databinding_kendoui_stockcharts %}) .
 
 ###### Example
 
@@ -175,10 +177,12 @@ Define the main and the Navigator series.
 		}
     });
 
+
 ## See Also
 
 Other articles on Kendo UI Charts and chart types:
 
+* [Stock Chart Data Binding]({% slug databinding_kendoui_stockcharts %})
 * [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
 * [Data Series Charts]({% slug seriestypeofcharts_widget %})
 * [Area Charts]({% slug areacharts_widget %})

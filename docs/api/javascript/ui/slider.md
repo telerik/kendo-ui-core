@@ -14,6 +14,10 @@ Represents the Kendo UI Slider widget. Inherits from [Widget](/api/javascript/ui
 
 The title of the decrease button of the **Slider**.
 
+### dragHandleTitle `String`*(default: "drag")*
+
+The title of the drag handle of the **Slider**.
+
 ### increaseButtonTitle `String`*(default: "Increase")*
 
 The title of the increase button of the **Slider**.
@@ -35,7 +39,7 @@ The minimum value of the **Slider**.
 
 ### orientation `String`*(default: "horizontal")*
 
-The orientation of a **Slider**: **"horizontal"** or **"vertical"**.
+The orientation of a **Slider**: `"horizontal"` or `"vertical"`.
 
 ### showButtons `Boolean`*(default: true)*
 

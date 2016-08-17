@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Spreadsheet Widget
+page_title: Overview | Kendo UI Spreadsheet
 description: "Learn about how to initialize and configure the Kendo UI Spreadsheet widget."
 slug: overview_spreadsheet_widget
 position: 1
@@ -29,13 +29,14 @@ The [Kendo UI Spreadsheet widget](http://demos.telerik.com/kendo-ui/spreadsheet/
 Each of these features is exposed as a UI for the end user, as well as is exposed as API calls for you as a developer for further UI customization.
 
 > **Important**  
+>
 > The Spreadsheet widget supports Internet Explorer 9 or later versions.
 
 ## Getting Started
 
 ### Initialize the Spreadsheet
 
-Intsantiate the Spreadsheet widget by using an empty `<div>` element, as demonstrated in the example below.
+Instantiate the Spreadsheet widget by using an empty `<div>` element, as demonstrated in the example below.
 
 ###### Example
 
@@ -82,7 +83,7 @@ The example below demonstrates how to set the value for a range of cells.
     </script>
 ```
 
-## Data Import/Export
+## Data Import and Export
 
 The Spreadsheet offers methods for storing and loading data in a JSON format.
 
@@ -96,11 +97,16 @@ Individual sheets can be bound to a Data Source in a special data-driven mode.
 
 For more information on the data-binding Spreadsheet functionality, refer to the [article on biding the Spreadsheet to a data source]({% slug bind_todata_source_spreadsheet_widget %}).
 
+## Mobile Integration
+
+The Spreadsheet is primarily targeted at desktop users. Its performance and functionality are limited on mobile devices.  
+
 ## See Also
 
-Other articles on Kendo UI Spreadsheet:
+Other articles on the Kendo UI Spreadsheet:
 
 * [Custom Functions]({% slug custom_functions_spreadsheet_widget %})
+* [Custom Cell Editors]({% slug custom_editors_spreadsheet_widget %})
 * [Cell Formatting]({% slug cell_formatting_spreadsheet_widget %})
 * [Load and Save Data as JSON]({% slug loadand_saveas_json_spreadsheet_widget %})
 * [Data Source Binding]({% slug bind_todata_source_spreadsheet_widget %})
@@ -108,3 +114,6 @@ Other articles on Kendo UI Spreadsheet:
 * [Server-Side Processing]({% slug serverside_processing_spreadsheet_widget %})
 * [User Guide]({% slug user_guide_spreadsheet_widget %})
 * [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
+* [How to Bind Charts to Sheet Data]({% slug howto_bindcharttosheet_spreadsheet_widget %})
+* [How to Get Flagged Cells Containing Invalid Values]({% slug howto_get_flagged_cells_containing_invalid_values_spreadsheet_widget %})
+* [How to Set Validation Rules to Column Ranges]({% slug howto_validationtocolumn_spreadsheet_widget %})

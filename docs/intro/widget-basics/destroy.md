@@ -1,7 +1,7 @@
 ---
 title: Destroy Widgets
 page_title: Destroy Widgets | Kendo UI Getting Started
-description: "Learn how to destroy Kendo UI widgets."
+description: "Destroy Kendo UI widgets."
 previous_url: /framework/widgets/destroy
 slug: destroywidgets_kendoui_gettingstarted
 position: 4
@@ -11,16 +11,16 @@ position: 4
 
 ## Overview
 
-Every Kendo UI widget has a `destroy` method, which does the following:
+Every Kendo UI widget has a `destroy` method which:
 
 1. Deletes the widget instance (client object). It is no longer accessible and all its event handlers stop working.
 1. Removes auto-generated HTML content, which is **outside** the widget, e.g. detached popups, dropdowns, etc. The main widget HTML remains intact and if needed, it should be removed from the DOM manually.
 The Window widget is an exception, as it represents a detached popup on its own.
 1. Destroys all child widgets with the help of [`kendo.destroy()` method](/api/framework/kendo#methods-destroy).
 
-## Destroy Widgets
+## Options
 
-### Destroy a Widget Manually
+### Destroy Widgets Manually
 
 You may wish to manually destroy widgets in several possible cases:
 
@@ -30,7 +30,7 @@ You may wish to manually destroy widgets in several possible cases:
 
 > **Important**
 >
-> Creating a new widget instance from the leftovers of a destroyed widget may work, but is not recommended. Initialize new widgets from different, such as newly appended, DOM elements. In some cases it is also possible to empty the widget container and initialize a new instance from the empty element.
+> Creating a new widget instance from the leftovers of a destroyed widget might work, but is not recommended. Initialize new widgets from different, such as newly appended, DOM elements. In some cases it is also possible to empty the widget container and initialize a new instance from the empty element.
 
 The example below demonstrates how to destroy and remove a Kendo UI Grid widget.
 
@@ -49,9 +49,13 @@ The example below demonstrates how to destroy and remove a Kendo UI Grid widget.
 	</script>
 
 <!--*-->
-### Destroy a Widget Automatically
+### Destroy Widgets Automatically
 
 Kendo UI widgets are destroyed automatically when the web page is unloaded.
+
+### Destroy Widgets Created via MVVM
+
+To properly destroy widgets [created declaratively]({% slug dataattributes_configuration_installation %}) via the [Kendo UI MVVM mechanism]({% slug overview_mvvmpattern_kendoui %}), first use the [`kendo.unbind()`](/api/javascript/kendo#methods-unbind) method to remove any MVVM bindings related to the widget, and then call [`kendo.destroy()`](/api/framework/kendo#methods-destroy) for the appropriate container, or the [`destroy()`](/api/javascript/ui/widget#methods-destroy) method of the widgets.
 
 ### Destroy Multiple Widgets
 
@@ -62,8 +66,15 @@ In addition to destroying a particular Kendo UI widget, the Kendo UI framework p
 Other articles on Kendo UI widget basics:
 
 * [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
+* [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
+* [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
+* [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
 * [Access Widget DOM Elements: wrapper and element]({% slug widgetwrapperandelement_references_gettingstarted %})
 * [Set Data Attributes]({% slug dataattributes_configuration_installation %})
 * [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})
+* [Edit Widgets]({% slug kendoui_editing_gettingstarted %})
 * [Create Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
-* [Editing Functionality]({% slug kendoui_editing_gettingstarted %})
+* [Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
+* [NuGet Packages]({% slug kendoui_nuget_packages %})

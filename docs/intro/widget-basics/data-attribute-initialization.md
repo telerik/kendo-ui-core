@@ -2,7 +2,7 @@
 title: Data Attributes
 page_title: Data Attributes | Kendo UI Getting Started
 previous_url: /framework/data-attribute-initialization
-description: "Learn how to initialize and configure each Kendo UI widget using data attributes."
+description: "Initialize and configure each Kendo UI widget using data attributes."
 slug: dataattributes_configuration_installation
 position: 2
 ---
@@ -41,9 +41,9 @@ By default, `kendo.bind` initializes only widgets from the `kendo.ui` namespace,
 
 > **Important**
 >
-> The `data-role` attribute also accepts full widget class name (with its namespace) as value.
+> The `data-role` attribute also accepts a full widget class name (with its namespace) as a value.
 
-The example below demonstrates how to instantiate a Kendo UI ListView in a hybrid Application by using the widget's full class path.
+The example below demonstrates how to instantiate a Kendo UI ListView in a hybrid Application by using the full class path of the widget.
 
 ###### Example
 
@@ -75,7 +75,7 @@ Each widget configuration option can be set with a data attribute of the target 
 
 > **Important**
 >
-> Camel-cased options are set via dash-separated attributes. For example, the [`ignoreCase`](/api/javascript/ui/autocomplete#configuration-ignoreCase) option of the AutoComplete is set via `data-ignore-case`.
+> The camelCase options are set through dash-separated attributes. For example, the [`ignoreCase`](/api/javascript/ui/autocomplete#configuration-ignoreCase) option of the AutoComplete is set through `data-ignore-case`.
 
 Options which start with `data` do not require an additional `"data"` in the attribute name. For example, the `dataTextField` option is set via the `data-text-field` attribute and `dataSource` is set via the `data-source` attribute.
 
@@ -141,7 +141,7 @@ The example below demonstrates how to use a member function as an event handler.
 
 The data source of data-bound Kendo UI widgets can also be set via a data attribute. The value can be a JavaScript object, array, or a variable available in the global scope.
 
-### Set DataSorce to Objects
+### Set DataSource to Objects
 
 The example below demonstrates how to set the data source of a Kendo UI widget to a JavaScript object.
 
@@ -212,8 +212,15 @@ The example below demonstrates how to set the template of a Kendo UI widget.
 Other articles on Kendo UI widget basics:
 
 * [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
+* [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
+* [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
+* [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
 * [Access Widget DOM Elements: wrapper and element]({% slug widgetwrapperandelement_references_gettingstarted %})
 * [Widget Methods and Events]({% slug widget_methodsand_events_kendoui_installation %})
 * [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
+* [Edit Widgets]({% slug kendoui_editing_gettingstarted %})
 * [Create Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
-* [Editing Functionality]({% slug kendoui_editing_gettingstarted %})
+* [Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
+* [NuGet Packages]({% slug kendoui_nuget_packages %})

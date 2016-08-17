@@ -79,7 +79,7 @@ The width of the border.
 
 ### checksum `Boolean` *(default: false)*
 
-If set to `true` the barcode will not display the checksum digit next to the value in the text area.
+If set to `true`, the Barcode will display the checksum digit next to the value in the text area.
 
 #### Example
 

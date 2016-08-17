@@ -99,7 +99,7 @@ The example below demonstrates how to display a list of items using JavaScript a
         <script id="javascriptTemplate" type="text/x-kendo-template">
             <ul>
             # for (var i = 0; i < data.length; i++) { #
-                <li>#= data[i] #</li>
+                <li>#= myCustomFunction(data[i]) #</li>
             # } #
             </ul>
         </script>
@@ -113,23 +113,28 @@ Then, to consume this external template with an expression, simply initialize a 
         <script id="javascriptTemplate" type="text/x-kendo-template">
             <ul>
             # for (var i = 0; i < data.length; i++) { #
-                <li>#= data[i] #</li>
+                <li>#= myCustomFunction(data[i]) #</li>
             # } #
             </ul>
         </script>
 
         <script type="text/javascript">
+            // use a custom function inside the template. Must be defined in the global JavaScript scope
+            function myCustomFunction (str) {
+                return str.replace(".", " ");
+            }
+        
             //Get the external template definition using a jQuery selector
             var template = kendo.template($("#javascriptTemplate").html());
 
             //Create some dummy data
-            var data = ["Todd", "Steve", "Burke"];
+            var data = ["Todd.Holland", "Steve.Anglin", "Burke.Ballmer"];
 
             var result = template(data); //Execute the template
             $("#example").html(result); //Append the result
         </script>
 
-As seen from the code above, the JavaScript executes a `for` loop inside the template and produces a HTML list item for each name.
+As seen from the code above, the JavaScript executes a `for` loop inside the template and produces a HTML list item for each name. An auxiliary global JavaScript function is used to manipulate each data item during display.
 
 Custom variables can be defined inside a template expression and then output in the same fashion as data fields.
 

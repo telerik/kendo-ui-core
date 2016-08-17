@@ -21,6 +21,7 @@ var __meta__ = { // jshint ignore:line
         HIDE = "hide",
         KNOTIFICATION = "k-notification",
         KICLOSE = ".k-notification-wrap .k-i-close",
+        KHIDING = "k-hiding",
         INFO = "info",
         SUCCESS = "success",
         WARNING = "warning",
@@ -33,10 +34,11 @@ var __meta__ = { // jshint ignore:line
         NS = ".kendoNotification",
         WRAPPER = '<div class="k-widget k-notification"></div>',
         TEMPLATE = '<div class="k-notification-wrap">' +
-                '<span class="k-icon k-i-note">#=typeIcon#</span>' +
+                '<span class="k-icon k-i-#=typeIcon#">#=typeIcon#</span>' +
                 '#=content#' +
                 '<span class="k-icon k-i-close">Hide</span>' +
-            '</div>';
+            '</div>',
+        SAFE_TEMPLATE = TEMPLATE.replace("#=content#", "#:content#");
 
     var Notification = Widget.extend({
         init: function(element, options) {
@@ -105,13 +107,13 @@ var __meta__ = { // jshint ignore:line
             });
 
             that._defaultCompiled = kendoTemplate(TEMPLATE);
+            that._safeCompiled = kendoTemplate(SAFE_TEMPLATE);
         },
 
-        _getCompiled: function(type) {
-            var that = this;
-            var defaultCompiled = that._defaultCompiled;
+        _getCompiled: function(type, safe) {
+            var defaultCompiled = safe ? this._safeCompiled : this._defaultCompiled;
 
-            return type ? that._compiled[type] || defaultCompiled : defaultCompiled;
+            return type ? this._compiled[type] || defaultCompiled : defaultCompiled;
         },
 
         _compileStacking: function(stacking, top, left) {
@@ -209,7 +211,7 @@ var __meta__ = { // jshint ignore:line
                 y = options.position.top,
                 popup, openPopup;
 
-            openPopup = $("." + that._guid + ":not(.k-hiding)").last();
+            openPopup = $("." + that._guid + ":not(." + KHIDING + ")").last();
 
             popup = new kendo.ui.Popup(wrapper, {
                 anchor: openPopup[0] ? openPopup : document.body,
@@ -264,7 +266,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _hidePopup: function (popup) {
-            popup.wrapper.addClass("k-hiding");
+            popup.wrapper.addClass(KHIDING);
             popup.close();
         },
 
@@ -342,7 +344,7 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
-        show: function(content, type) {
+        show: function(content, type, safe) {
             var that = this,
                 options = that.options,
                 wrapper = $(WRAPPER),
@@ -371,7 +373,7 @@ var __meta__ = { // jshint ignore:line
                     .toggleClass(KNOTIFICATION + "-button", options.button)
                     .attr("data-role", "alert")
                     .css({width: options.width, height: options.height})
-                    .append(that._getCompiled(type)(args));
+                    .append(that._getCompiled(type, safe)(args));
 
                 that.angular("compile", function(){
                     return {
@@ -390,6 +392,10 @@ var __meta__ = { // jshint ignore:line
             }
 
             return that;
+        },
+
+        showText: function(content, type) {
+            this.show(content, type, true);
         },
 
         info: function(content) {
@@ -430,7 +436,7 @@ var __meta__ = { // jshint ignore:line
 
         getNotifications: function() {
             var that = this,
-                guidElements = $("." + that._guid);
+                guidElements = $("." + that._guid + ":not(." + KHIDING + ")");
 
             if (that.options.appendTo) {
                 return guidElements;

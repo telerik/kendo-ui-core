@@ -1,7 +1,8 @@
 ---
 title: Common Issues
-page_title: Common Issues | Kendo UI MultiSelect Troubleshooting
+page_title: Common Issues | Kendo UI MultiSelect
 description: "Learn how to handle possible issues while working with the Kendo UI MultiSelect widget."
+previous_url: /controls/editors/multiselect/troubleshooting
 slug: troubleshooting_common_issues_multiselect_kendoui
 ---
 
@@ -9,15 +10,19 @@ slug: troubleshooting_common_issues_multiselect_kendoui
 
 This page provides solutions for common problems you may encounter while working with the Kendo UI MultiSelect widget.
 
+## DataSource
+
+### Selected Item Is Lost When Bound to Shared DataSource
+
 > **Important**  
 >
 > This issue can also be observed in [Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %}) and [Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %}). The solution demonstrated in the examples below is fully applicable to the case of them both as well.
 
-## DataSource
+The selected item of the widget is directly related to the data source view. If it does not contain the selected item, then the widget will remove its current value. Such behavior is expected.
 
-### Selected Item Loosed When Bound to Shared DataSource
+**Solution**
 
-The selected item of the widget is directly related to the data source view. If it does not contain the selected item, then the widget will remove its current value. This behavior is expected and the solution is to use separate data sources.
+Use separate data sources.
 
 The example below demonstrates a sample issue.
 
@@ -48,9 +53,13 @@ The example below demonstrates the solution to the above issue.
         dataSource: new kendo.data.DataSource({ data: ds.data() });
     });
 
+### Repetitive Requests Are Performed while Filtering in ASP.NET
+
+For more information on handling repetitive requests performed while filtering in ASP.NET, refer to [this troubleshooting topic]({% slug troubleshooting_common_issues_dropdownlist_kendoui %}#repetitive-requests-are-performed-while-filtering-in-aspnet).
+
 ## See Also
 
-Other articles on Kendo UI MultiSelect:
+Other articles on the Kendo UI MultiSelect:
 
 * [MultiSelect JavaScript API Reference](/api/javascript/ui/multiselect)
 * [Grouping Functionality]({% slug grouping_kendoui_multiselect_widget %})
@@ -73,13 +82,23 @@ Other articles on Kendo UI MultiSelect:
 Other articles on troubleshooting:
 
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
-* [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
-* [JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
-* [Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
+* [Kendo UI JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
+* [Kendo UI Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
+* [Kendo UI Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
+* [Common Issues in Kendo UI Excel Export]({% slug troubleshooting_excel_export_kendoui %})
+* [Common Issues in Kendo UI Charts]({% slug troubleshooting_chart_widget %})
+* [Performance Issues in Kendo UI Widgets for Data Visualization]({% slug tipsandtricks_kendouistyling %})
+* [Common Issues in Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %})
+* [Common Issues in Kendo UI Diagram]({% slug troubleshooting_diagram_widget %})
+* [Common Issues in Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %})
 * [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})
 * [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
 * [Common Issues in Kendo UI Upload]({% slug troubleshooting_upload_widget %})
 * [Common Issues Related to Styling, Appearance, and Rendering]({% slug commonissues_troubleshooting_kendouistyling %})
-* [Common Issues in Telerik UI for ASP.NET MVC](/aspnet-mvc/troubleshooting)
-* [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/grid/troubleshooting)
-* [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/upload/troubleshooting)
+* [Common Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_aspnetmvc %})
+* [Validation Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_validation_aspnetmvc %})
+* [Scaffolding Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_scaffolding_aspnetmvc %})
+* [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_gridhelper_aspnetmvc %})
+* [Excel Export with the Grid ASP.NET MVC HtmlHelper Extension]({% slug excelissues_gridhelper_aspnetmvc %})
+* [Common Issues in the Spreadsheet ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_spreadsheethelper_aspnetmvc %})
+* [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_uploadhelper_aspnetmvc %})

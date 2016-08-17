@@ -685,6 +685,7 @@ function createAsyncDataSource() {
             }
         },
         serverPaging: true,
+        serverFiltering: true,
         pageSize: 40,
         schema: {
             data: "data",
@@ -700,7 +701,7 @@ asyncTest("triggers change after same value is being set multiple times trough t
             'data-animation="false" ' +
             'data-text-field="text" ' +
             'data-value-field="value" ' +
-            'data-virtual="{itemHeight: 40, valueMapper: function(o) { o.success(o.value); }}" ' +
+            'data-virtual="{itemHeight: 20, valueMapper: function(o) { o.success(o.value); }}" ' +
             'data-value-primitive="true" ' +
             'data-bind="value:Invoice.orderId, source: ds"/>');
 
@@ -732,5 +733,11 @@ asyncTest("triggers change after same value is being set multiple times trough t
         $("[data-offset-index=3]").trigger("click");
     });
 });
+test("visible input inherits select's minlength attribute ", function() {
+    dom = $('<select minlength="3" data-role="combobox"/>');
 
+    kendo.bind(dom);
+
+    equal(dom.data("kendoComboBox").input.prop("minlength"), dom.prop("minlength"));
+});
 })();

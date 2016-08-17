@@ -1,11 +1,21 @@
 ---
-title: oData v4 with WebAPI controller
-page_title: oData v4 with WebAPI controller
-description: oData v4 with WebAPI controller
+title: Use oData v4 with WebAPI Controller
+page_title: Use oData v4 with WebAPI Controller | Kendo UI Grid HtmlHelper
+description: "Configure the Kendo UI Grid to use the enum type for both displaying and editing in ASP.NET MVC applications."
+slug: howto_useodata4webapicontroller_gridaspnetmvc
 ---
 
-# Using oData v4 with WebAPI controller
+# Use oData v4 with WebAPI Controller
 
-This project shows how to configure the dataSource to communicate with the WebAPI controller through the Odata 4 protocol. Notice Odata v4 is not fully supported. There is limitation when working with Dates, since WebAPI does not support DateTime type anymore. WebAPI now uses the DateTimeOffset time as a main type when it comes to dates. However DateTimeOffet requires the Model(that the dataSource creates) to keep information for both Date and Offset which is not possible with the current architecture of the DataSource and Model of Kendo.
+Odata v4 is not fully supported and the approaches to work with Dates are limited because WebAPI does not support the `DateTime` type any more. Instead, WebAPI now uses the `DateTimeOffset` time as a main type when it comes to dates.
 
-The [example source code is available here](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/odata-v4-web-api-binding-wrappers)
+However, the `DateTimeOffet` requires the Model (that the dataSource creates) to keep information for both Date and Offset, which is not possible with the current architecture of the DataSource and Model of Kendo UI.
+
+To see the example on how to configure the `dataSource` to communicate with the WebAPI controller through the Odata 4 protocol, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/odata-v4-web-api-binding-wrappers).
+
+## See Also
+
+* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
+* [GridBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
+
+For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_applycustomrowstylesbasedondata_gridaspnetmvc %}).

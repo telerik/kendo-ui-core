@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI DateTimePicker Widget
+page_title: Overview | Kendo UI DateTimePicker
 description: "Learn how to initialize the Kendo UI DateTimePicker widget, configure its options and define the interval between values int he time drop-down list."
 slug: overview_kendoui_datetimepicker_widget
 position: 1
@@ -106,7 +106,7 @@ Define the first rendered view with the `start` option. Control the navigation d
 
 ### Selectable Month DateTimePicker
 
-The exampe below demonstrates how to create a selectable month DateTimePicker.
+The example below demonstrates how to create a selectable month DateTimePicker.
 
 ###### Example
 
@@ -176,6 +176,7 @@ The other way to disable dates is by adding a function and determine its return 
         });
     </script>
 ```
+
 ## Validation
 
 The widget is designed to keep the input value unchanged, even when the typed date is invalid. This is due the following facts:
@@ -187,26 +188,32 @@ The best way to validate the DateTimePicker widget is to use a client-validation
 
 - [Custom validation](http://demos.telerik.com/kendo-ui/validator/custom-validation)
 
+## Calendar Types
+
+The DateTimePicker widget works with JavaScript `Date` objects, that support only the [Gregorian](https://en.wikipedia.org/wiki/Gregorian_calendar) calendar. This means that the widget does not support other calendar types.
+
+If you would like to simulate a different calendar date, like Lunar, use the JavaScript `Date` object and create a date that is just in the past.
+
 ## See Also
 
-Other articles on Kendo UI DateTimePicker:
+Other articles on the Kendo UI DateTimePicker:
 
 * [How to Prevent Invalid Values]({% slug howto_prevent_invalid_values_datetimepicker %})
 * [How to Validate Custom Dates]({% slug howto_validate_custom_dates_datetimepicker %})
 * [How to Limit Navigation to Months]({% slug howto_limit_navigation_tomonths_datetimepicker %})
 * [How to Override Hours in the Popup]({% slug howto_override_hours_inpopup_datetimepicker %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the DateTimePicker Widget](/aspnet-mvc/helpers/datetimepicker/overview)
-* [Overview of the DateTimePicker JSP Tag](/jsp/tags/datetimepicker/overview)
+* [Overview of the DateTimePicker JSP Tag]({% slug overview_datetimepicker_uiforjsp %})
 * [Overview of the DateTimePicker PHP Class](/php/widgets/datetimepicker/overview)
 * [DateTimePicker JavaScript API Reference](/api/javascript/ui/datetimepicker)
 
-Articles on Kendo UI Calendar:
+Articles on the Kendo UI Calendar:
 
 * [Overview of the Calendar Widget]({% slug overview_kendoui_calendar_widget %})
 * [How to Control the Header Format]({% slug howto_control_header_format_calendar %})
 * [Calendar JavaScript API Reference](/api/javascript/ui/calendar)
 
-Articles on Kendo UI DatePicker:
+Articles on the Kendo UI DatePicker:
 
 * [Overview of the DatePicker Widget]({% slug overview_kendoui_datepicker_widget %})
 * [How to Set the First Weekday]({% slug howto_set_first_weekday_datepicker %})
@@ -215,7 +222,7 @@ Articles on Kendo UI DatePicker:
 * [How to Resize Calendar Based on Input Width]({% slug howto_use_resize_calendar_basedon_input_width_datepicker %})
 * [DatePicker JavaScript API Reference](/api/javascript/ui/datepicker)
 
-Articles on Kendo UI TimePicker:
+Articles on the Kendo UI TimePicker:
 
 * [Overview of the TimePicker Widget]({% slug overview_kendoui_timepicker_widget %})
 * [TimePicker JavaScript API Reference](/api/javascript/ui/timepicker)

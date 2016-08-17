@@ -1,10 +1,17 @@
 ---
-title: Popup Editing Server Validation
-description: This example shows how to show server validation errors in popup edit mode
+title: Display Server Validation Errors in Popup Editing Mode
+page_title: Display Server Validation Errors in Popup Editing Mode | Kendo UI Grid HtmlHelper
+description: "Show server validation errors in the popup edit mode of the Kendo UI Grid."
+slug: howto_displayservervalidationerrors_gridaspnetmvc
 ---
 
-# Popup Editing Server Validation
+# Display Server Validation Errors in Popup Editing Mode
 
-The following project demonstrates how to display server validation errors in the popup editof of the Kendo UI Grid.
+To see the example on how to display server validation errors in the popup edit mode of the Kendo UI Grid, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/popup-editing-server-validation).
 
-[Pop editing and server validation](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/popup-editing-server-validation)
+## See Also
+
+* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
+* [GridBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
+
+For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_bindgridtodatatable_gridaspnetmvc %}).

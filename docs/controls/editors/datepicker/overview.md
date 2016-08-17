@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI DatePicker Widget
+page_title: Overview | Kendo UI DatePicker
 description: "Learn how to initialize the Kendo UI DatePicker widget and configure its options."
 slug: overview_kendoui_datepicker_widget
 position: 1
@@ -133,35 +133,57 @@ The widget is designed to keep the input value unchanged, even when the typed da
 
 The best way to validate the DatePicker widget is to use a client-validation framework, such as the [Kendo UI Validator]({% slug overview_kendoui_validator_widget %}). Thus you are able to provide meaningful error message to end users pointing them to the right actions to resolve the issue. For more details, check the [online custom validation demos](http://demos.telerik.com/kendo-ui/validator/custom-validation).
 
+## Calendar Types
+
+The DatePicker widget works with JavaScript `Date` objects, that support only the [Gregorian](https://en.wikipedia.org/wiki/Gregorian_calendar) calendar. This means that the widget does not support other calendar types.
+
+If you would like to simulate a different calendar date, like Lunar, use the JavaScript `Date` object and create a date that is just in the past. The example below demonstrates how to do this.
+
+###### Example
+
+```html
+<fieldset>
+    <label for="gregorianStyle">Gregorian year:</label>
+    <input id="gregorianStyle" type="text" />
+</fieldset>
+<fieldset>
+    <label for="lunarStyle">Lunar year:</label>
+    <input id="lunarStyle" type="text" />
+</fieldset>
+<h4>Disclamer: In both cases the Gregorian calendar date is used. The second widget just shows the Gregorian date with the Lunar year</h4>
+
+<script>
+$(function() {
+    var gregorian = new Date(2000, 10, 10); //date using Gregorian calendar
+    var lunar = new Date(1497, 10, 10); //date using Gregorian calendar but created in lunar year
+
+    $("#gregorianStyle").kendoDatePicker({ value: gregorian });
+    $("#lunarStyle").kendoDatePicker({
+        min: new Date(1400, 0, 1),
+        value: lunar
+    });
+});
+</script>
+```
+
 ## See Also
 
-Other articles on Kendo UI DatePicker:
+Other articles on the Kendo UI DatePicker:
 
-* [How to Create Date Masking]({% slug howto_create_date_masking_datepicker %})
-* [How to Select Ranges between DatePickers]({% slug howto_select_ranges_between_datepicker %})
-* [How to Set the First Weekday]({% slug howto_set_first_weekday_datepicker %})
-* [How to Use AngularJS Copy Functionality]({% slug howto_use_angularjs_copy_functionality_datepicker %})
-* [How to Integrate DatePicker with DateJS Library]({% slug howto_integrate_withdatejs_library_datepicker %})
-* [How to Hide the Deafult Button]({% slug howto_hide_default_button_datepicker %})
-* [How to Globally Modify Default Options]({% slug howto_globally_modify_default_options_datepicker %})
-* [How to Persist Entered Dates]({% slug howto_persist_entered_dates_datepicker %})
-* [How to Make Input Elements Readonly]({% slug howto_make_input_elements_readonly_datepicker %})
-* [How to Resize Calendar Based on Input Width]({% slug howto_use_resize_calendar_basedon_input_width_datepicker %})
-* [How to Restrict User Input to Min/Max Values]({% slug howto_restrict_user_input_minandmax_values_datepicker %})
-* [How to Show Out-of-Range Dates as Disabled]({% slug howto_show_outofrange_dates_disabled_datepicker %})
-* [How to Submit Forms on ENTER]({% slug howto_submmit_forms_onenter_datepicker %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the DatePicker Widget](/aspnet-mvc/helpers/datepicker/overview)
-* [Overview of the DatePicker JSP Tag](/jsp/tags/datepicker/overview)
+* [Overview of the DatePicker JSP Tag]({% slug overview_datepicker_uiforjsp %})
 * [Overview of the DatePicker PHP Class](/php/widgets/datepicker/overview)
 * [DatePicker JavaScript API Reference](/api/javascript/ui/datepicker)
 
-Articles on Kendo UI Calendar:
+For how-to examples on the Kendo UI DatePicker widget, browse its [**How To** documentation folder]({% slug howto_select_ranges_between_datepicker %}).
+
+Articles on the Kendo UI Calendar:
 
 * [Overview of the Calendar Widget]({% slug overview_kendoui_calendar_widget %})
 * [How to Control the Header Format]({% slug howto_control_header_format_calendar %})
 * [Calendar JavaScript API Reference](/api/javascript/ui/calendar)
 
-Articles on Kendo UI DateTimePicker:
+Articles on the Kendo UI DateTimePicker:
 
 * [Overview of the DateTimePicker Widget]({% slug overview_kendoui_datetimepicker_widget %})
 * [How to Prevent Invalid Values]({% slug howto_prevent_invalid_values_datetimepicker %})
@@ -170,7 +192,7 @@ Articles on Kendo UI DateTimePicker:
 * [How to Override Hours in the Popup]({% slug howto_override_hours_inpopup_datetimepicker %})
 * [DateTimePicker JavaScript API Reference](/api/javascript/ui/datetimepicker)
 
-Articles on Kendo UI TimePicker:
+Articles on the Kendo UI TimePicker:
 
 * [Overview of the TimePicker Widget]({% slug overview_kendoui_timepicker_widget %})
 * [TimePicker JavaScript API Reference](/api/javascript/ui/timepicker)

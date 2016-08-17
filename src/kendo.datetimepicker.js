@@ -44,7 +44,6 @@ var __meta__ = { // jshint ignore:line
         ARIA_HIDDEN = "aria-hidden",
         ARIA_OWNS = "aria-owns",
         ARIA_DISABLED = "aria-disabled",
-        ARIA_READONLY = "aria-readonly",
         DATE = Date,
         MIN = new DATE(1800, 0, 1),
         MAX = new DATE(2099, 11, 31),
@@ -123,7 +122,9 @@ var __meta__ = { // jshint ignore:line
             depth: MONTH,
             animation: {},
             month : {},
-            ARIATemplate: 'Current focused date is #=kendo.toString(data.current, "d")#'
+            ARIATemplate: 'Current focused date is #=kendo.toString(data.current, "d")#',
+            dateButtonText: "Open the date view",
+            timeButtonText: "Open the time view"
     },
 
     events: [
@@ -190,7 +191,6 @@ var __meta__ = { // jshint ignore:line
                 element.removeAttr(DISABLED)
                        .removeAttr(READONLY)
                        .attr(ARIA_DISABLED, false)
-                       .attr(ARIA_READONLY, false)
                        .on("keydown" + ns, $.proxy(that._keydown, that))
                        .on("focus" + ns, function() {
                            that._inputWrapper.addClass(FOCUSED);
@@ -230,8 +230,7 @@ var __meta__ = { // jshint ignore:line
 
                 element.attr(DISABLED, disable)
                        .attr(READONLY, readonly)
-                       .attr(ARIA_DISABLED, disable)
-                       .attr(ARIA_READONLY, readonly);
+                       .attr(ARIA_DISABLED, disable);
             }
         },
 
@@ -417,7 +416,7 @@ var __meta__ = { // jshint ignore:line
 
             if (options.disableDates && options.disableDates(date)) {
                 date = null;
-                if (!that._old) {
+                if (!that._old && !that.element.val()) {
                     value = null;
                 }
             }
@@ -425,9 +424,11 @@ var __meta__ = { // jshint ignore:line
             if (+date === +current && isSameType) {
                 formattedValue = kendo.toString(date, options.format, options.culture);
 
-                if (formattedValue !== value) {
+                if (formattedValue !== value ) {
                     that.element.val(date === null ? value : formattedValue);
-                    that.element.trigger(CHANGE);
+                    if (value instanceof String) {
+                        that.element.trigger(CHANGE);
+                    }
                 }
 
                 return date;
@@ -487,7 +488,7 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            that.element.val(date ? kendo.toString(date, options.format, options.culture) : value);
+            that.element.val(kendo.toString(date || value, options.format, options.culture));
             that._updateARIA(date);
 
             return date;
@@ -534,7 +535,8 @@ var __meta__ = { // jshint ignore:line
                         current, adjustedDate;
 
                     if (msValue === msMin || msValue === msMax) {
-                        current = new DATE(+that._value);
+                        current = msValue === msMin ? msMin : msMax;
+                        current = new DATE(that._value || current);
                         current.setFullYear(value.getFullYear(), value.getMonth(), value.getDate());
 
                         if (isInRange(current, msMin, msMax)) {
@@ -662,26 +664,26 @@ var __meta__ = { // jshint ignore:line
         },
 
         _icons: function() {
-            var that = this,
-                element = that.element,
-                icons;
+            var that = this;
+            var element = that.element;
+            var options = that.options;
+            var icons;
 
             icons = element.next("span.k-select");
 
             if (!icons[0]) {
-                icons = $('<span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-calendar">select</span><span unselectable="on" class="k-icon k-i-clock">select</span></span>').insertAfter(element);
+                icons = $('<span unselectable="on" class="k-select">' +
+                            '<span class="k-link k-link-date" aria-label="' + options.dateButtonText + '"><span unselectable="on" class="k-icon k-i-calendar"></span></span>' +
+                            '<span class="k-link k-link-time" aria-label="' + options.timeButtonText + '"><span unselectable="on" class="k-icon k-i-clock"></span></span>' +
+                          '</span>'
+                         ).insertAfter(element);
             }
 
             icons = icons.children();
-            that._dateIcon = icons.eq(0).attr({
-                "role": "button",
-                "aria-controls": that.dateView._dateViewID
-            });
 
-            that._timeIcon = icons.eq(1).attr({
-                "role": "button",
-                "aria-controls": that.timeView._timeViewID
-            });
+            icons = icons.children();
+            that._dateIcon = icons.eq(0).attr("aria-controls", that.dateView._dateViewID);
+            that._timeIcon = icons.eq(1).attr("aria-controls", that.timeView._timeViewID);
         },
 
         _wrapper: function() {

@@ -41,7 +41,6 @@ var __meta__ = { // jshint ignore:line
     ARIA_DISABLED = "aria-disabled",
     ARIA_EXPANDED = "aria-expanded",
     ARIA_HIDDEN = "aria-hidden",
-    ARIA_READONLY = "aria-readonly",
     calendar = kendo.calendar,
     isInRange = calendar.isInRange,
     restrictValue = calendar.restrictValue,
@@ -140,6 +139,11 @@ var __meta__ = { // jshint ignore:line
 
         setOptions: function(options) {
             var old = this.options;
+            var disableDates = options.disableDates;
+
+            if (disableDates) {
+                options.disableDates = calendar.disabled(disableDates);
+            }
 
             this.options = extend(old, options, {
                 change: old.change,
@@ -410,7 +414,6 @@ var __meta__ = { // jshint ignore:line
                 element.removeAttr(DISABLED)
                        .removeAttr(READONLY)
                        .attr(ARIA_DISABLED, false)
-                       .attr(ARIA_READONLY, false)
                        .on("keydown" + ns, proxy(that._keydown, that))
                        .on("focusout" + ns, proxy(that._blur, that))
                        .on("focus" + ns, function() {
@@ -426,8 +429,7 @@ var __meta__ = { // jshint ignore:line
 
                 element.attr(DISABLED, disable)
                        .attr(READONLY, readonly)
-                       .attr(ARIA_DISABLED, disable)
-                       .attr(ARIA_READONLY, readonly);
+                       .attr(ARIA_DISABLED, disable);
             }
         },
 
@@ -526,7 +528,7 @@ var __meta__ = { // jshint ignore:line
             dateChanged;
 
             value = that._update(value);
-            dateChanged = +that._old != +value;
+            dateChanged = !kendo.calendar.isEqualDate(that._old, value);
 
             var valueUpdated = dateChanged && !that._typing;
             var textFormatted = oldValue !== that.element.val();
@@ -571,7 +573,7 @@ var __meta__ = { // jshint ignore:line
             icon = element.next("span.k-select");
 
             if (!icon[0]) {
-                icon = $('<span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-i-calendar">select</span></span>').insertAfter(element);
+                icon = $('<span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-calendar"></span></span>').insertAfter(element);
             }
 
             that._dateIcon = icon.attr({
@@ -610,7 +612,7 @@ var __meta__ = { // jshint ignore:line
 
             if (options.disableDates(date)) {
                 date = null;
-                if (!that._old) {
+                if (!that._old && !that.element.val()) {
                     value = null;
                 }
             }
@@ -633,7 +635,7 @@ var __meta__ = { // jshint ignore:line
 
             that._value = date;
             that.dateView.value(date);
-            that.element.val(date ? kendo.toString(date, options.format, options.culture) : value);
+            that.element.val(kendo.toString(date || value, options.format, options.culture));
             that._updateARIA(date);
 
             return date;

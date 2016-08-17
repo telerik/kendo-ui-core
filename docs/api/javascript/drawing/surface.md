@@ -66,7 +66,7 @@ Supported types (case insensitive):
 - `vml`
 
 This option will be ignored if not supported by the browser.
-See [Supported Browsers](supported-browsers)
+See [Supported Browsers](/intro/supporting/browser-support).
 
 ### height `String` *(default: "100%")*
 The height of the surface element.
@@ -75,6 +75,48 @@ By default the surface will expand to fill the height of the first positioned co
 ### width `String` *(default: "100%")*
 The width of the surface element.
 By default the surface will expand to fill the width of the first positioned container.
+
+### tooltip `Object`
+
+Specifies general options for the shapes tooltip.
+
+### tooltip.animation `Boolean|Object`
+
+Configures the opening and closing animations of the tooltip. Setting the `animation` option to `false` will disable the opening and closing animations. As a result the tooltip will open and close instantly.
+
+`animation:true` is not a valid configuration.
+
+### tooltip.animation.close `Object`
+
+The animation played when the tooltip is closed.
+
+### tooltip.animation.close.effects `String`
+
+The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.
+
+[Complete list of available animations](/api/javascript/effects/common)
+
+### tooltip.animation.close.duration `Number`
+
+The duration of the close animation in milliseconds.
+
+### tooltip.animation.open `Object`
+
+The animation played when the tooltip is opened.
+
+### tooltip.animation.open.effects `String`
+
+The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.
+
+[Complete list of available animations](/api/javascript/effects/common)
+
+### tooltip.animation.open.duration `Number`
+
+The duration of the open animation in milliseconds.
+
+### tooltip.appendTo `String|jQuery`*(default: document.body)*
+
+Which element the tooltip will be appended to.
 
 ## Methods
 
@@ -103,6 +145,9 @@ The original DOM or jQuery event object.
 #### Returns
 `kendo.drawing.Element` The target drawing element, if any.
 
+### hideTooltip
+Hides the surface tooltip.
+
 
 ### resize
 Resizes the surface to match the size of the container.
@@ -112,13 +157,22 @@ Resizes the surface to match the size of the container.
 ##### force `Boolean` *optional*
 Whether to proceed with resizing even if the container dimensions have not changed.
 
+### showTooltip
+
+Shows the surface tooltip for the passed shape.
+
+#### Parameters
+
+##### element `kendo.drawing.Element`
+The element for which the tooltip should be shown.
+
+##### options `Object` *optional*
+Options for the tooltip.
 
 ## Events
 
 ### click
 Triggered when an element has been clicked.
-
-> The Canvas drawing surface does not currently fire events.
 
 #### Example - subscribe to the "click" event during initialization
     <div id="container"></div>
@@ -147,8 +201,6 @@ The browser event that triggered the click.
 ### mouseenter
 Triggered when the mouse is moved over an element.
 
-> The Canvas drawing surface does not currently fire events.
-
 #### Example - subscribe to the "mouseenter" event during initialization
     <div id="container"></div>
     <script>
@@ -176,8 +228,6 @@ The browser event that triggered the click.
 ### mouseleave
 Triggered when the mouse is leaves an element.
 
-> The Canvas drawing surface does not currently fire events.
-
 #### Example - subscribe to the "mouseleave" event during initialization
     <div id="container"></div>
     <script>
@@ -201,3 +251,75 @@ The target element.
 
 ##### e.originalEvent `Object`
 The browser event that triggered the click.
+
+### tooltipClose
+Triggered when closing the surface tooltip.
+
+#### Example - subscribe to the "tooltipClose" event
+
+    <div id="container"></div>
+    <script>
+      var draw = kendo.drawing;
+      var surface = draw.Surface.create($("#container"), {
+        tooltipClose: function(e) {
+          console.log("tooltip close");
+        }
+      });
+
+      var path = new draw.Path({
+        tooltip: {
+          content: "Path"
+        }
+      }).fill("red")
+      .moveTo(50, 0).lineTo(100, 50).lineTo(0, 50).close();
+
+      surface.draw(path);
+    </script>
+
+#### Event Data
+
+##### e.element `kendo.drawing.Element`
+The element with set tooltip options. Can differ from the target element for groups.
+
+##### e.preventDefault `Function`
+
+If invoked, prevents the close action.
+
+##### e.target `kendo.drawing.Element`
+The target element.
+
+### tooltipOpen
+Triggered when opening the surface tooltip.
+
+#### Example - subscribe to the "tooltipOpen" event
+
+    <div id="container"></div>
+    <script>
+      var draw = kendo.drawing;
+      var surface = draw.Surface.create($("#container"), {
+        tooltipOpen: function(e) {
+          console.log("tooltip open");
+        }
+      });
+
+      var path = new draw.Path({
+        tooltip: {
+          content: "Path"
+        }
+      }).fill("red")
+      .moveTo(50, 0).lineTo(100, 50).lineTo(0, 50).close();
+
+      surface.draw(path);
+    </script>
+
+#### Event Data
+
+##### e.element `kendo.drawing.Element`
+The element with set tooltip options. Can differ from the target element for groups.
+
+##### e.preventDefault `Function`
+
+If invoked, prevents the open action.
+
+##### e.target `kendo.drawing.Element`
+The target element.

@@ -1,16 +1,22 @@
 ---
 title: Editing
-page_title: Editing of Kendo jQuery ListView for ASP.NET MVC
-description: Find which steps to follow in order to configure Kendo UI ListView for ASP.NET MVC for editing.
+page_title: Editing | Kendo UI ListView HtmlHelper
+description: "Configure the Kendo UI ListView for ASP.NET MVC for editing."
+slug: eiditing_listviewhelper_aspnetmvc
+position: 4
 ---
 
 # Editing
 
-## Getting started
+## Configuration
 
-To configure Kendo ListView for ASP.NET MVC for editing follow these steps:
+Below are the steps for you to follow when configuring the Kendo UI ListView for ASP.NET MVC for editing.
 
-1.	Define item template for listview:
+### Define the Item Template
+
+The example below demonstrates how to define the item template for the Kendo UI ListView.
+
+###### Example
 
 		<!-- The following markup contains the `Add new record` button -->
 		<div class="k-toolbar k-grid-toolbar">
@@ -37,9 +43,13 @@ To configure Kendo ListView for ASP.NET MVC for editing follow these steps:
 		        </div>
 		</script>
 
-	**Note:** Click events for elements with class name **k-edit-button** and **k-delete-button** will be automatically handled and treated by Kendo ListView as **edit** and **delete** actions.
+> **Important**
+>
+> Click events for elements with `k-edit-button` and `k-delete-button` class names will be automatically handled and treated by the Kendo UI ListView as `edit` and `delete` actions.
 
-2.	Define `EditorTemplate` for the model:
+### Set the Editor Template
+
+The example below demonstrates how to define the `EditorTemplate` for the model.
 
 		@model Kendo.Mvc.Examples.Models.ProductViewModel
 		<div class="product-view">
@@ -71,18 +81,28 @@ To configure Kendo ListView for ASP.NET MVC for editing follow these steps:
 		    </div>
 		</div>
 
-	**Note:** Click events for elements with class name **k-update-button** and **k-cancel-button** will be automatically handled and treated by Kendo ListView as **save** and **cancel** actions. The editor template should be wrapped in a HTML container, same as the item template.
+> **Important**
+>
+> Click events for elements with `k-update-button` and `k-cancel-button` class names will be automatically handled and treated by the Kendo UI ListView as `save` and `cancel` actions. The editor template should be wrapped in an HTML container, same as the item template.
 
-3.	Enable listview editing:
+###	Enable Editing
+
+The example below demonstrates how to enable the ListView editing.
+
+###### Example
 
 		@(Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>()
 		    .Name("listView")
 		    .TagName("div")
 		    .ClientTemplateId("list-view-template")
-		    .Editable() // <-- Enable editing
+		    .Editable() //<-- Enable editing.
 		)
 
-4.  Specify the action methods which will handle the Create, Update and Destroy operations:
+### Specify the Action Methods
+
+The example below demonstrates how to specify the action methods which will handle the `Create`, `Update` and `Destroy` operations.
+
+###### Example
 
 		@(Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>(Model)
 		    .Name("listView")
@@ -90,16 +110,20 @@ To configure Kendo ListView for ASP.NET MVC for editing follow these steps:
 		    .ClientTemplateId("list-view-template")
 			.Editable()
 		    .DataSource(dataSource => dataSource
-		        // Configure CRUD -->
+		        //Configure CRUD. -->
 		        .Create(create => create.Action("Editing_Create", "ListView"))
 		        .Read(read => read.Action("Editing_Read", "ListView"))
 		        .Update(update => update.Action("Editing_Update", "ListView"))
 		        .Destroy(destroy => destroy.Action("Editing_Destroy", "ListView"))
-				// <-- Configure CRUD
+				//<-- Configure CRUD.
 		    )
 		)
 
-5.  Specify the property of the model which is the unique identifier (primary key):
+### Determine the Model Property
+
+The example below demonstrates how to specify the property of the model which is the unique identifier (primary key).
+
+###### Example
 
 		@(Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>(Model)
 		    .Name("listView")
@@ -107,7 +131,7 @@ To configure Kendo ListView for ASP.NET MVC for editing follow these steps:
 		    .ClientTemplateId("list-view-template")
 			.Editable()
 		    .DataSource(dataSource => dataSource
-				// Specify that the ProductID property is the unique identifier of the model
+				//Specify that the ProductID property is the unique identifier of the model.
 		        .Model(model => model.Id("ProductID"))
 		        .Create(create => create.Action("Editing_Create", "ListView"))
 		        .Read(read => read.Action("Editing_Read", "ListView"))
@@ -116,14 +140,20 @@ To configure Kendo ListView for ASP.NET MVC for editing follow these steps:
 		    )
 		)
 
-6.  Implement the `Read` action method:
+### Implement the Action Methods
+
+The example below demonstrates how to implement the `read` action method.
+
+###### Example
 
         public ActionResult Editing_Read([DataSourceRequest] DataSourceRequest request)
         {
             return Json(ProductRepository.All().ToDataSourceResult(request));
         }
 
-7.  Implement the `Create` action method:
+The example below demonstrates how to implement the `create` action method.
+
+###### Example
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Editing_Create([DataSourceRequest] DataSourceRequest request, Product product)
@@ -133,11 +163,13 @@ To configure Kendo ListView for ASP.NET MVC for editing follow these steps:
                 ProductRepository.Insert(product);
             }
 
-            //Return any validation errors if any
+            //Return any validation errors, if any.
             return Json(new [] { product }.ToDataSourceResult(request, ModelState));
         }
 
-8.  Implement the `Update` action method:
+The example below demonstrates how to implement the `update` action method.
+
+###### Example
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Editing_Update([DataSourceRequest] DataSourceRequest request, Product product)
@@ -156,11 +188,13 @@ To configure Kendo ListView for ASP.NET MVC for editing follow these steps:
                 }
             }
 
-            //Return any validation errors if any
+            //Return any validation errors, if any.
             return Json(ModelState.ToDataSourceResult());
         }
 
-9.  Implement the `Destroy` action method:
+The example below demonstrates how to implement the `destroy` action method.
+
+###### Example
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Editing_Destroy([DataSourceRequest] DataSourceRequest request, Product product)
@@ -170,7 +204,22 @@ To configure Kendo ListView for ASP.NET MVC for editing follow these steps:
                 ProductRepository.Delete(product);
             }
 
-            //Return any validation errors if any
+            //Return any validation errors, if any.
             return Json(ModelState.ToDataSourceResult());
         }
 
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the ListView:
+
+* [Overview of the ListView HtmlHelper]({% slug overview_listviewhelper_aspnetmvc %})
+* [Configuration of the ListView HtmlHelper]({% slug configuration_listviewhelper_aspnetmvc %})
+* [Ajax Binding of the ListView HtmlHelper]({% slug ajaxbinding_listviewhelper_aspnetmvc %})
+* [Overview of the Kendo UI ListView Widget]({% slug overview_kendoui_listview_widget %})
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

@@ -234,7 +234,7 @@ The Draggable element.
 ### drop
 
 Fired when draggable is dropped over the drop target.
-The `dragleave` event represents a jQuery `mouseup` event and contains all the event data of the [jQuery Event Object](http://api.jquery.com/category/events/event-object/).
+The `drop` event represents a jQuery `mouseup` event and contains all the event data of the [jQuery Event Object](http://api.jquery.com/category/events/event-object/).
 
 #### Example - disable draggable component after it has been dropped
 

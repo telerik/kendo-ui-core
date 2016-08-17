@@ -8,7 +8,7 @@
                 $(element).data("kendoWindow").destroy();
             });
             QUnit.fixture.closest("body").find(".k-overlay").remove();
-            $.mockjaxClear();
+            $.mockjax.clear();
         }
     });
 
@@ -75,6 +75,34 @@
             });
 
         dialog.wrapper.find(".k-i-refresh").trigger("click");
+
+        equal(triggers, 1);
+    });
+
+    test("minimize triggers minimize event", function() {
+        var triggers = 0,
+            dialog = createWindow({
+                actions: ["Minimize", "Restore"],
+                minimize: function() {
+                    triggers++;
+                }
+            });
+
+        dialog.wrapper.find(".k-i-minimize").trigger("click");
+
+        equal(triggers, 1);
+    });
+
+    test("maximize triggers maximize event", function() {
+        var triggers = 0,
+            dialog = createWindow({
+                actions: ["Maximize", "Restore"],
+                maximize: function() {
+                    triggers++;
+                }
+            });
+
+        dialog.wrapper.find(".k-i-maximize").trigger("click");
 
         equal(triggers, 1);
     });
@@ -152,7 +180,7 @@
                 $(element).data("kendoWindow").destroy();
             });
             QUnit.fixture.closest("body").find(".k-overlay").remove();
-            $.mockjaxClear();
+            $.mockjax.clear();
         }
     });
 

@@ -1,7 +1,7 @@
 ---
 title: Perform CRUD Operations with Local Storage Data
-page_title: Perform CRUD Operations with Local Storage Data | Kendo UI Grid Widget
-description: "Learn how to to perform CRUD operations with local storage data in the Kendo UI Grid widget."
+page_title: Perform CRUD Operations with Local Storage Data | Kendo UI Grid
+description: "Learn how to perform CRUD operations with local storage data in the Kendo UI Grid widget."
 slug: howto_perform_crud_operationswith_local_storage_data_grid
 ---
 
@@ -20,11 +20,11 @@ function setTestData(){
     var testData = [
       {ID: 1, Value: "TEST1"},
       {ID: 2, Value: "TEST2"},
-      {ID: 3, Value: "TEST3"}, 
-      {ID: 4, Value: "TEST4"}, 
+      {ID: 3, Value: "TEST3"},
+      {ID: 4, Value: "TEST4"},
       {ID: 5, Value: "TEST5"}  
-    ]; 
-    localStorage["grid_data"] = JSON.stringify(testData); 
+    ];
+    localStorage["grid_data"] = JSON.stringify(testData);
 }
 
 function reset(){
@@ -32,45 +32,45 @@ function reset(){
     $("#grid").data("kendoGrid").dataSource.read();
 }
 
-$(document).ready(function () { 
-  
-    if(localStorage["grid_data"] == undefined){ 
+$(document).ready(function () {
+
+    if(localStorage["grid_data"] == undefined){
         setTestData();
     }
 
     var dataSource = new kendo.data.DataSource({
         transport: {
           create: function(options){
-            var localData = JSON.parse(localStorage["grid_data"]); 
+            var localData = JSON.parse(localStorage["grid_data"]);
             options.data.ID = localData[localData.length-1].ID + 1;
             localData.push(options.data);
-            localStorage["grid_data"] = JSON.stringify(localData); 
+            localStorage["grid_data"] = JSON.stringify(localData);
             options.success(options.data);
           },
-          read: function(options){ 
-              var localData = JSON.parse(localStorage["grid_data"]); 
+          read: function(options){
+              var localData = JSON.parse(localStorage["grid_data"]);
               options.success(localData);
           },
           update: function(options){
-            var localData = JSON.parse(localStorage["grid_data"]); 
-            
+            var localData = JSON.parse(localStorage["grid_data"]);
+
             for(var i=0; i<localData.length; i++){
               if(localData[i].ID == options.data.ID){
                 localData[i].Value = options.data.Value;
-              } 
+              }
             }
-            localStorage["grid_data"] = JSON.stringify(localData); 
+            localStorage["grid_data"] = JSON.stringify(localData);
             options.success(options.data);
           },
-          destroy: function(options){ 
-            var localData = JSON.parse(localStorage["grid_data"]); 
+          destroy: function(options){
+            var localData = JSON.parse(localStorage["grid_data"]);
             for(var i=0; i<localData.length; i++){
                 if(localData[i].ID === options.data.ID){
                     localData.splice(i,1);
                     break;
                 }
-            } 
-            localStorage["grid_data"] = JSON.stringify(localData); 
+            }
+            localStorage["grid_data"] = JSON.stringify(localData);
             options.success(localData);
           },
         },
@@ -91,7 +91,7 @@ $(document).ready(function () {
         height: 500,
         toolbar: ["create", "save", "cancel"],
         columns: [
-          { field: "ID", width: "100px" }, 
+          { field: "ID", width: "100px" },
           { field: "Value", width: "100px"},
           { command: "destroy" }
         ],
@@ -103,32 +103,19 @@ $(document).ready(function () {
 
 ## See Also
 
-Other articles on Kendo UI Grid and how-to examples:
+Other articles on the Kendo UI Grid and how-to examples:
 
 * [JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Add Cascading DropDownList Editors]({% slug howto_add_cascading_dropdown_list_editors_grid %})
-* [How to Add Tooltip to Grid Cells]({% slug howto_add_tooltipto_grid_cell_record_grid %})
 * [How to Copy Data from Excel]({% slug howto_copy_datafrom_excel_grid %})
-* [How to Create Checkbox Filter Menu]({% slug howto_create_checkbox_filter_menu_grid %})
-* [How to Customize Rows and Cells Based on Data Item Values]({% slug howto_customize_rowsand_cells_basedon_dataitem_values_grid %})
 * [How to Drag and Drop Rows between Grids]({% slug howto_dragand_drop_rows_between_twogrids_grid %})
 * [How to Enable ForeignKey Column Sorting by Text]({% slug howto_enable_foreignkey_sotringby_text_grid %})
-* [How to Filter Array Columns Using MultiSelect]({% slug howto_filetr_array_columns_using_multiselect_grid %})
-* [How to Filter Grid as You Type]({% slug howto_filter_gridas_you_type_grid %})
 * [How to Implement Stable Sort in Chrome]({% slug howto_implement_stable_sortin_chrome_grid %})
 * [How to Initialize Data Attribute with Detail Template]({% slug howto_initialize_data_attributewith_detail_template_grid %})
 * [How to Load and Append More Records While Scrolling Down]({% slug howto_loadand_append_morerecords_while_scrollingdown_grid %})
-* [How to Persist Collapsed State of Grouped Records]({% slug howto_persist_collapsed_stateof_grouped_records_grid %})
 * [How to Persist Expanded Rows after Refresh]({% slug howto_persist_expanded_rows_afetrrefresh_grid %})
-* [How to Preserve Grid State in a Cookie]({% slug howto_preserve_gridstate_inacookie_grid %})
 * [How to Set Cell Color Based on ForeignKey Values]({% slug howto_set_cell_color_basedon_foreignkey_values_grid %})
 * [How to Show Tooltip for Column Records]({% slug howto_show_tooltipfor_column_records_grid %})
-* [How to Sort Multiple Checkbox Filter]({% slug howto_sort_multiple_checkbox_filter_grid %})
 * [How to Update Toolbar Content Using MVVM Binding]({% slug howto_update_toolbar_content_using_mvvmbinding_grid %})
-* [How to Use Checkboxes inside Column Menus]({% slug howto_use_checkboxes_inside_column_menu_grid %})
-* [How to Use Draggable Elements with Multiselection Enabled]({% slug howto_use_draggable_elements_multiselection_enabled_grid %})
-* [How to Use Grid in Kendo UI SPA Application]({% slug howto_use_gridin_kendouispa_app_grid %})
-* [How to Use MultiSelect for Column Filtering]({% slug howto_use_multiselect_forcolumn_filtering_grid %})
-* [How to Use Nested Chart]({% slug howto_use_nested_charts_grid %})
-* [How to Use Nested Model Properties]({% slug howto_use_nested_model_properties_grid %})
-* [How to Use WebAPI with Server-Side Operations]({% slug howto_use_webapi_withserverside_operations_grid %})
+
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).

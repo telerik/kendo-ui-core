@@ -1,6 +1,6 @@
 ---
 title: Use FontAwesome Icons in Kendo UI Grid
-page_title:  Use FontAwesome Icons in Custom Command Buttons | Kendo UI Grid Widget
+page_title:  Use FontAwesome Icons in Custom Command Buttons | Kendo UI Grid
 description: "Learn how to use FontAwesome icons in the Kendo UI Grid widget."
 slug: howto_use_fontawesomeiconsin_custom_command_buttons_grid
 ---
@@ -36,13 +36,13 @@ The example below demonstrates how to use FontAwesome icons with the Kendo UI Gr
               { field: "FirstName", title: "First Name", width: "140px" },
               { field: "LastName", title: "Last Name", width: "140px" },
               { field: "Title" },
-              { command: { 
-                text: " View Details", 
+              { command: {
+                text: " View Details",
                 click: showDetails,
                 className: "fa fa-map-marker"
-              }, 
-               title: " ", 
-               width: "140px" 
+              },
+               title: " ",
+               width: "140px"
               }],
               dataBound: function (e) {
                 e.sender.tbody.find(".k-button.fa").each(function(idx, element){
@@ -155,12 +155,15 @@ The example below demonstrates how to use FontAwesome icons with the Kendo UI Gr
 
 ## See Also
 
-Other articles on Kendo UI Grid and how-to examples related to its layout:
+Other articles on the Kendo UI Grid and how-to examples related to its layout:
 
-* [JavaScript API Reference](/api/javascript/ui/grid)
+* [Kendo UI Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Adjust Row Height with Virtual Scrolling]({% slug howto_adjust_row_height_withvirtual_scrolling_grid %})
 * [How to Apply Minimum Width during Column Resize]({% slug howto_apply_min_width_during_column_resize_grid %})
 * [How to Change Group Header Position with Locked Columns]({% slug howto_change_group_header_position_wthlocked_columns_grid %})
 * [How to Create and Use Auto Layout]({% slug howto_create_and_use_autolayout_grid %})
+* [How to Disable Resizing for Specific Columns]({% slug howto_disable_column_resizing_grid %})
 * [How to Hide the Vertical Scrollbar When Not Needed]({% slug howto_hide_vertical_scrollbar_grid %})
 * [How to Resize Grid When Window Is Resized]({% slug howto_resize_whenthe_windowis_resized_grid %})
+
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).

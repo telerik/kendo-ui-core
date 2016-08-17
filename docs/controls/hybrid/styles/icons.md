@@ -123,7 +123,7 @@ The example below demonstrates how to specify the character corresponding to eve
 
 In the example, `mycustomicon` is the icon name set in the data-icon attribute and `\E03a` is the Unicode character code of the icon.
 
-## Serving of Mime Types
+## Serving Font Files
 
 As of Kendo UI Q3 2012, the hybrid framework employs an icon font for its icon rendering. To be able to render it in most of the supported mobile and desktop browsers, two font formats included in the Kendo UI distribution exist&mdash;`TTF` and `WOFF`. Most web servers do not support serving these fonts with a specific mime type. Since currently there is no standardized mime type for fonts, you only need to serve them both with mime type `application/octet-stream` or you can come up with any valid mime type such as `application/x-font-ttf` and `application/x-font-woff`, for example.
 

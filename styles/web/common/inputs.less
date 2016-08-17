@@ -32,12 +32,84 @@ span.k-dropdown,
     vertical-align: middle;
 }
 
+.k-autocomplete > .k-i-close,
+.k-combobox > .k-dropdown-wrap > .k-i-close,
+.k-multiselect > .k-multiselect-wrap > .k-i-close {
+    display: none;
+    position: absolute;
+    right: 0;
+}
+
+.k-autocomplete > .k-i-close,
+.k-combobox > .k-dropdown-wrap > .k-i-close {
+    bottom: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.k-ie8 {
+    .k-autocomplete > .k-i-close,
+    .k-combobox > .k-dropdown-wrap > .k-i-close {
+        margin-top: -(@grid-size/2);
+    }
+}
+
+.k-combobox > .k-dropdown-wrap > .k-i-close {
+    font-size: 100%;
+    right: 2.4em;
+}
+
+.k-multiselect > .k-multiselect-wrap > .k-i-close {
+    top: @grid-size/2 - 2px;
+}
+
+.k-autocomplete > .k-i-close,
+.k-multiselect > .k-multiselect-wrap > .k-i-close {
+    margin-right: @grid-size/4 + 2px;
+}
+
+.k-autocomplete,
+.k-combobox > .k-dropdown-wrap {
+    &.k-state-hover,
+    &.k-state-focused {
+        > .k-i-close {
+            display: inline-block;
+            outline: none;         
+        }
+    }
+}
+
+.k-autocomplete > .k-i-close.k-loading-hidden,
+.k-combobox > .k-dropdown-wrap > .k-i-close.k-loading-hidden {
+    display: none;
+}
+
+.k-multiselect {
+    &.k-state-hover,
+    &.k-state-focused {
+        > .k-multiselect-wrap > .k-i-close {
+            display: inline-block;
+            outline: none;         
+        }
+    }
+}
+
+.k-autocomplete,
+.k-combobox > .k-dropdown-wrap {
+    &.k-state-border-down {
+       > .k-i-close {
+           margin-top: -1px;
+        }
+    } 
+}            
+
 .k-filter-menu .k-combobox,
 .k-filter-menu .k-datepicker,
 .k-filter-menu .k-timepicker,
 .k-filter-menu .k-datetimepicker,
 .k-filter-menu .k-numerictextbox,
 .k-filter-menu .k-dropdown,
+.k-filter-menu .k-autocomplete,
 .k-filter-menu .k-textbox
 {
     width: 13.2em;
@@ -367,7 +439,7 @@ body .k-datetimepicker .k-select
     border-radius: 0;
 }
 
-.k-combobox .k-icon,
+.k-combobox .k-select,
 .k-dropdown,
 .k-selectbox .k-icon
 {
@@ -396,6 +468,22 @@ body .k-datetimepicker .k-select
     height: auto;
 }
 
+.k-nodata {
+    min-height: 138px;
+    width: 100%;
+    display: table;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    font-weight: lighter;
+}
+
+.k-nodata > div {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    padding: 11px;
+}
+
 .k-popup .k-list .k-item,
 .k-fieldselector .k-list .k-item,
 .k-list-optionlabel,
@@ -405,6 +493,28 @@ body .k-datetimepicker .k-select
     padding: 1px 5px 1px 5px;
     line-height: 1.8em;
     min-height: 1.8em;
+}
+
+.k-popup .k-list .k-item {
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    padding: 0 4px;
+}
+
+.k-popup .k-list .k-item > .k-group {
+    top: -1px;
+}
+
+.k-group-header + div > .k-list > .k-item.k-first:before {
+    content: " ";
+    display: block;
+    border-top-width: 1px;
+    border-top-style: solid;
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
 }
 
 .k-popup > .k-group-header,
@@ -465,7 +575,7 @@ body .k-datetimepicker .k-select
     padding-left: 0;
     padding-right: 0;
     border-left-width: 0;
-    border-right-width: 0;    
+    border-right-width: 0;
 }
 
 /* MultiSelect */
@@ -508,7 +618,9 @@ body .k-datetimepicker .k-select
 }
 
 .k-autocomplete .k-loading,
-.k-multiselect .k-loading
+.k-multiselect .k-loading,
+.k-autocomplete .k-i-loading,
+.k-multiselect .k-i-loading
 {
     position: absolute;
     right: 3px;

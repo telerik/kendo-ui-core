@@ -674,7 +674,7 @@ The end time of the week and day views. The scheduler will display events ending
     $("#scheduler").kendoScheduler({
       date: new Date("2013/6/6"),
       startTime: new Date("2013/6/6 08:00"),
-      endTime: new Date("2013/6/6 18:00")
+      endTime: new Date("2013/6/6 18:00"),
       views: ["day", "week"],
       dataSource: [
         {
@@ -4343,7 +4343,7 @@ The fields which can be used in the template are:
         # var resources = data.resources(); #
         # var color = resources.roomId === 1 ? "red" : "blue"; #
 
-        <span style="display:none; height:100%; background: #=color#">
+        <span style="height:100%;color:black;background-color:#:color#">
           #=kendo.toString(date, "d")#
         </span>
     </script>
@@ -5556,6 +5556,8 @@ The `uid` of the occurrence to look for.
 ### occurrencesInRange
 
 Gets a list of event occurrences in specified time range.
+
+> The result is scoped to the current displayed view. Therefore, the specified range should be within the view's time range.
 
 #### Parameters
 
@@ -7069,4 +7071,3 @@ The widget instance which fired the event.
     var scheduler = $("#scheduler").data("kendoScheduler");
     scheduler.bind("save", scheduler_save);
     </script>
-

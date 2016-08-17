@@ -1,6 +1,6 @@
 ---
 title: Integration with Grid and ListView
-page_title: Integration with Grid and ListView | Kendo UI Sortable Widget
+page_title: Integration with Grid and ListView | Kendo UI Sortable
 description: "Learn how to reorder Kendo UI Grid and ListView items with the Kendo UI Sortable widget."
 slug: integrationwith_gridandlistview_sortable_widget
 position: 2
@@ -32,7 +32,7 @@ To reorder the table rows of the Grid, initialize the Sortable widget on the Gri
 
 > **Important**  
 >
-> In an AngularJS application initialize the Sortable widget as a parent directive. The `filter` configuration option selects all `tr` elements that are children of the `.k-grid` wrapper. For detailed information, refer to [this example]({% slug howto_reorderangularjsgridrows_angular_sortable %}).
+> In an AngularJS application initialize the Sortable widget as a parent directive. The `filter` configuration option selects all `tr` elements that are children of the `.k-grid` wrapper. For detailed information, refer to [this example]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %}).
 
 ### Set Hint in Grid
 
@@ -108,7 +108,7 @@ If you use the `batch` (or `incell`) editing modes, the code from the example ab
 >
 > The `data-value-update` approach works with regular inputs. However, you must configure the Kendo UI widgets manually as they do not support the `data-value-update` attribute.
 
-For runnable examples, refer to the article on [how to use the Sortable with Grids in batch editing mode]({% slug howto_usesortablewithgrid_inbatchediting_sortable %}), or to the article on [how to use the Sortable with Grids in batch editing mode within an AngularJS application]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %}).
+For runnable examples, refer to the article on [how to use the Sortable with Grids in инцелл editing mode]({% slug howto_usesortablewithgrid_inincellediting_sortable %}), or to the article on [how to use the Sortable with Grids in batch editing mode within an AngularJS application]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %}).
 
 ## Sortable and ListView
 

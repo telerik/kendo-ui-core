@@ -28,6 +28,12 @@ The Y position of the top-left corner of the element.
 
 The source URL of the image.
 
+## Fields
+
+### drawingElement `kendo.drawing.Image`
+
+The drawing element used to draw the image.
+
 ## Methods
 
 ### position

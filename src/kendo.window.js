@@ -31,7 +31,7 @@ var __meta__ = { // jshint ignore:line
         KWINDOWRESIZEHANDLES = ".k-resize-handle",
         KOVERLAY = ".k-overlay",
         KCONTENTFRAME = "k-content-frame",
-        LOADING = "k-loading",
+        LOADING = "k-i-loading",
         KHOVERSTATE = "k-state-hover",
         KFOCUSEDSTATE = "k-state-focused",
         MAXIMIZEDSTATE = "k-window-maximized",
@@ -45,6 +45,8 @@ var __meta__ = { // jshint ignore:line
         DEACTIVATE = "deactivate",
         CLOSE = "close",
         REFRESH = "refresh",
+        MINIMIZE = "minimize",
+        MAXIMIZE = "maximize",
         RESIZE = "resize",
         RESIZEEND = "resizeEnd",
         DRAGSTART = "dragstart",
@@ -66,39 +68,6 @@ var __meta__ = { // jshint ignore:line
 
     function constrain(value, low, high) {
         return Math.max(Math.min(parseInt(value, 10), high === Infinity ? high : parseInt(high, 10)), parseInt(low, 10));
-    }
-
-    function sizingAction(actionId, callback) {
-        return function() {
-            var that = this,
-                wrapper = that.wrapper,
-                style = wrapper[0].style,
-                options = that.options;
-
-            if (options.isMaximized || options.isMinimized) {
-                return that;
-            }
-
-            that.restoreOptions = {
-                width: style.width,
-                height: style.height
-            };
-
-            wrapper
-                .children(KWINDOWRESIZEHANDLES).hide().end()
-                .children(KWINDOWTITLEBAR).find(MINIMIZE_MAXIMIZE).parent().hide()
-                    .eq(0).before(templates.action({ name: "Restore" }));
-
-            callback.call(that);
-
-            if (actionId == "maximize") {
-                that.wrapper.children(KWINDOWTITLEBAR).find(PIN_UNPIN).parent().hide();
-            } else {
-                that.wrapper.children(KWINDOWTITLEBAR).find(PIN_UNPIN).parent().show();
-            }
-
-            return that;
-        };
     }
 
     function executableScript() {
@@ -266,13 +235,13 @@ var __meta__ = { // jshint ignore:line
             this.title(options.title);
 
             for (var i = 0; i < dimensions.length; i++) {
-                var value = options[dimensions[i]];
-                if (value && value != Infinity) {
+                var value = options[dimensions[i]] || "";
+                if (value != Infinity) {
                     wrapper.css(dimensions[i], value);
                 }
             }
 
-            if (maxHeight && maxHeight != Infinity) {
+            if (maxHeight != Infinity) {
                 this.element.css("maxHeight", maxHeight);
             }
 
@@ -283,6 +252,9 @@ var __meta__ = { // jshint ignore:line
                     wrapper.width(constrain(width, options.minWidth, options.maxWidth));
                 }
             }
+            else {
+                wrapper.width("");
+            }
 
             if (height) {
                 if (height.toString().indexOf("%") > 0) {
@@ -290,6 +262,9 @@ var __meta__ = { // jshint ignore:line
                 } else {
                     wrapper.height(constrain(height, options.minHeight, options.maxHeight));
                 }
+            }
+            else {
+                wrapper.height("");
             }
 
             if (!options.visible) {
@@ -407,6 +382,8 @@ var __meta__ = { // jshint ignore:line
             ACTIVATE,
             DEACTIVATE,
             CLOSE,
+            MINIMIZE,
+            MAXIMIZE,
             REFRESH,
             RESIZE,
             RESIZEEND,
@@ -701,7 +678,7 @@ var __meta__ = { // jshint ignore:line
                 options = that.options,
                 showOptions = this._animationOptions("open"),
                 contentElement = wrapper.children(KWINDOWCONTENT),
-                overlay,
+                overlay, otherModalsVisible,
                 doc = $(document);
 
             if (!that.trigger(OPEN)) {
@@ -720,11 +697,12 @@ var __meta__ = { // jshint ignore:line
                 options.visible = true;
 
                 if (options.modal) {
-                    overlay = that._overlay(false);
+                    otherModalsVisible = !!that._modals().length;
+                    overlay = that._overlay(otherModalsVisible);
 
                     overlay.kendoStop(true, true);
 
-                    if (showOptions.duration && kendo.effects.Fade) {
+                    if (showOptions.duration && kendo.effects.Fade && !otherModalsVisible) {
                         var overlayFx = kendo.fx(overlay).fadeIn();
                         overlayFx.duration(showOptions.duration || 0);
                         overlayFx.endValue(0.5);
@@ -968,45 +946,82 @@ var __meta__ = { // jshint ignore:line
             return that;
         },
 
-        maximize: sizingAction("maximize", function() {
+        _sizingAction: function(actionId, callback) {
             var that = this,
                 wrapper = that.wrapper,
-                position = wrapper.position(),
-                doc = $(document);
+                style = wrapper[0].style,
+                options = that.options;
 
-            extend(that.restoreOptions, {
-                left: position.left,
-                top: position.top
+            if (options.isMaximized || options.isMinimized) {
+                return that;
+            }
+
+            that.restoreOptions = {
+                width: style.width,
+                height: style.height
+            };
+
+            wrapper
+                .children(KWINDOWRESIZEHANDLES).hide().end()
+                .children(KWINDOWTITLEBAR).find(MINIMIZE_MAXIMIZE).parent().hide()
+                    .eq(0).before(templates.action({ name: "Restore" }));
+
+            callback.call(that);
+
+            that.wrapper.children(KWINDOWTITLEBAR).find(PIN_UNPIN).parent().toggle(actionId !== "maximize");
+
+            that.trigger(actionId);
+
+            return that;
+        },
+
+        maximize: function() {
+            this._sizingAction("maximize", function() {
+                var that = this,
+                    wrapper = that.wrapper,
+                    position = wrapper.position(),
+                    doc = $(document);
+
+                extend(that.restoreOptions, {
+                    left: position.left,
+                    top: position.top
+                });
+
+                wrapper.css({
+                        left: 0,
+                        top: 0,
+                        position: "fixed"
+                    })
+                    .addClass(MAXIMIZEDSTATE);
+
+                this._documentScrollTop = doc.scrollTop();
+                this._documentScrollLeft = doc.scrollLeft();
+                $("html, body").css(OVERFLOW, HIDDEN);
+
+                that.options.isMaximized = true;
+
+                that._onDocumentResize();
             });
 
-            wrapper.css({
-                    left: 0,
-                    top: 0,
-                    position: "fixed"
-                })
-                .addClass(MAXIMIZEDSTATE);
+            return this;
+        },
 
-            this._documentScrollTop = doc.scrollTop();
-            this._documentScrollLeft = doc.scrollLeft();
-            $("html, body").css(OVERFLOW, HIDDEN);
+        minimize: function() {
+            this._sizingAction("minimize", function() {
+                var that = this;
 
-            that.options.isMaximized = true;
+                that.wrapper.css({
+                    height: "",
+                    minHeight: ""
+                });
 
-            that._onDocumentResize();
-        }),
+                that.element.hide();
 
-        minimize: sizingAction("minimize", function() {
-            var that = this;
-
-            that.wrapper.css({
-                height: "",
-                minHeight: ""
+                that.options.isMinimized = true;
             });
 
-            that.element.hide();
-
-            that.options.isMinimized = true;
-        }),
+            return this;
+        },
 
         pin: function(force) {
             var that = this,
@@ -1203,7 +1218,7 @@ var __meta__ = { // jshint ignore:line
                 isRtl = kendo.support.isRtl(contentHtml);
 
             if (options.scrollable === false) {
-                contentHtml.attr("style", "overflow:hidden;");
+                contentHtml.css("overflow", "hidden");
             }
 
             wrapper = $(templates.wrapper(options));
@@ -1246,8 +1261,8 @@ var __meta__ = { // jshint ignore:line
     templates = {
         wrapper: template("<div class='k-widget k-window' />"),
         action: template(
-            "<a role='button' href='\\#' class='k-window-action k-link'>" +
-                "<span role='presentation' class='k-icon k-i-#= name.toLowerCase() #'>#= name #</span>" +
+            "<a role='button' href='\\#' class='k-window-action k-link' aria-label='#= name #'>" +
+                "<span class='k-icon k-i-#= name.toLowerCase() #'></span>" +
             "</a>"
         ),
         titlebar: template(
@@ -1420,6 +1435,11 @@ var __meta__ = { // jshint ignore:line
 
             wnd.initialWindowPosition = kendo.getOffset(wnd.wrapper, "position");
 
+            wnd.initialPointerPosition = {
+                left: e.x.client,
+                top: e.y.client
+            };
+
             wnd.startPosition = {
                 left: e.x.client - wnd.initialWindowPosition.left,
                 top: e.y.client - wnd.initialWindowPosition.top
@@ -1442,18 +1462,22 @@ var __meta__ = { // jshint ignore:line
         },
 
         drag: function (e) {
-            var wnd = this.owner,
-                position = wnd.options.position,
-                newTop = Math.max(e.y.client - wnd.startPosition.top, wnd.minTopPosition),
-                newLeft = Math.max(e.x.client - wnd.startPosition.left, wnd.minLeftPosition),
-                coordinates = {
-                    left: newLeft,
-                    top: newTop
-                };
+            var wnd = this.owner;
+            var position = wnd.options.position;
 
-            $(wnd.wrapper).css(coordinates);
-            position.top = newTop;
-            position.left = newLeft;
+            position.top = Math.max(e.y.client - wnd.startPosition.top, wnd.minTopPosition);
+            position.left = Math.max(e.x.client - wnd.startPosition.left, wnd.minLeftPosition);
+
+            if (kendo.support.transforms) {
+                $(wnd.wrapper).css(
+                    "transform", "translate(" +
+                        (e.x.client - wnd.initialPointerPosition.left) + "px, " +
+                            (e.y.client - wnd.initialPointerPosition.top) + "px)"
+                );
+            } else {
+                $(wnd.wrapper).css(position);
+            }
+
         },
 
         _finishDrag: function() {
@@ -1473,6 +1497,10 @@ var __meta__ = { // jshint ignore:line
         },
 
         dragend: function () {
+            $(this.owner.wrapper)
+                .css(this.owner.options.position)
+                .css("transform", "");
+
             this._finishDrag();
 
             this.owner.trigger(DRAGEND);

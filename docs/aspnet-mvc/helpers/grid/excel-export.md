@@ -1,195 +1,175 @@
 ---
 title: Excel Export
-description: Kendo UI Grid for ASP.NET MVC Excel Export
+page_title: Excel Export | Kendo UI Grid HtmlHelper
+description: "Export the Kendo UI Grid for ASP.NET MVC to Excel."
+slug: excelexport_gridhelper_aspnetmvc
+position: 4
 ---
 
 # Excel Export
 
-Kendo UI Grid can export its data as Excel document since the Q3 2014 (2014.3.1119) version.
+As of Kendo UI Q3 2014 (2014.3.1119) version, the Kendo UI Grid can export its data in the form of an Excel document.
 
-## Enable Excel Export
+## Configuration
+
+### Enable Excel Export
 
 To enable Excel export include the corresponding toolbar command and configure the export settings.
 
-* [Online demo](http://demos.telerik.com/aspnet-mvc/grid/excel-export)
+For more information on this issue, refer to [this online demo](http://demos.telerik.com/aspnet-mvc/grid/excel-export).
 
-###### Example - enable Excel export
+The example below demonstrates how to enable the Excel export functionality.
 
-```Razor
-@(Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
-    .Name("grid")
-    .ToolBar(tools => tools.Excel())
-    .Excel(excel => excel
-        .FileName("Products.xslx")
-    )
-    .DataSource(dataSource => dataSource
-        .Ajax()
-        .Read(read => read.Action("Products_Read", "Home"))
-    )
-)
+###### Example
+
+```tab-ASPX
+    <%: Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
+        .Name("grid")
+        .ToolBar(tools => tools.Excel())
+        .Excel(excel => excel
+            .FileName("Products.xlsx")
+        )
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Read(read => read.Action("Products_Read", "Home"))
+        )
+    %>
 ```
-```ASPX
-<%: Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
-    .Name("grid")
-    .ToolBar(tools => tools.Excel())
-    .Excel(excel => excel
-        .FileName("Products.xslx")
+```tab-Razor
+    @(Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
+        .Name("grid")
+        .ToolBar(tools => tools.Excel())
+        .Excel(excel => excel
+            .FileName("Products.xlsx")
+        )
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Read(read => read.Action("Products_Read", "Home"))
+        )
     )
-    .DataSource(dataSource => dataSource
-        .Ajax()
-        .Read(read => read.Action("Products_Read", "Home"))
-    )
-%>
 ```
 
-To initiate Excel export via code call the [saveAsExcel](/api/javascript/ui/grid.html#methods-saveAsExcel) method.
+To initiate the Excel export through code, call the [`saveAsExcel`](/api/javascript/ui/grid.html#methods-saveAsExcel) method.
 
-> Older browsers (IE9 and below, Safari) require the implementation of a [server proxy](/framework/save-files/introduction#browser-support).
+> **Important**
+>
+> Older browsers, such as Internet Explorer 9 and below and Safari, require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}).
 
-## What is Exported
+### Output the Result
 
-With the default configuration Kendo UI Grid exports the current page of the data with sorting, filtering, grouping and aggregates applied. [Export All Data](#export-all-data) shows how to export all pages.
+Through its default configuration, the Kendo UI Grid exports the current page of the data with sorting, filtering, grouping, and aggregates applied. To export all pages, refer to [this section](#export-all-data).
 
-The grid uses the current column order, visibility and dimensions to generate the Excel file.
+The Grid uses the current column order, visibility, and dimensions to generate the Excel file. It does not export the current CSS theme in the Excel file. For more information on changing the visual appearance of the Excel document, refer to [this section](#customize-the-excel-document).
 
-The grid doesn't export the current CSS theme in the Excel file. Check [Customize the Excel Document](#customize-the-excel-document) for information about changing the visual appearance of the Excel document.
+> **Important**
+> * The Grid exports only data-bound columns. Template and command columns are ignored.
+> * The `Format` option is not used during export. For more information on this, refer to [this section](#column-format).
+> * The `ClientTemplate` option is not used during export. For more information on this, refer to [this section](#column-template).
+> * The `DetailTemplate` option is not used during export. For more information on this, refer to [this section](#detail-template).
 
-The grid exports only data-bound columns. Template and command columns are **ignored**.
-
-The `Format` option is **not** used during export. Check [Column Format](#column-format) for more info.
-
-The `ClientTemplate` option is **not** used during export. Check [Column Template](#column-template) for more info.
-
-The `DetailTemplate` option is **not** used during export. Check [Detail Template](#detail-template) for more info.
-
-## How To
+## Common Scenarios
 
 ### Export All Data
 
-By default the Kendo UI Grid exports only the current page of data. To export all pages set the `AllPages` option to `true`.
+By default, the Kendo UI Grid exports only the current page of data. To export all pages, set the `AllPages` option to `true`.
 
-> When the `AllPages` option is set to `true` the grid will make a "read" request for **all** data. In case the data items are too many the browser may become unresponsive. Consider implementing server-side export for such cases.
+> **Important**
+>
+> When the `AllPages` option is set to `true` the Grid makes a `read` request for all data. If the data items are too many, the browser may become unresponsive. Consider implementing server-side export for such cases.
 
-###### Example - export all data
-```Razor
-@(Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
-    .Name("grid")
-    .ToolBar(tools => tools.Excel())
-    .Excel(excel => excel
-        .AllPages(true)
+The example below demonstrates how to export all the data.
+
+###### Example
+
+```tab-ASPX
+    <%: Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
+        .Name("grid")
+        .ToolBar(tools => tools.Excel())
+        .Excel(excel => excel
+            .AllPages(true)
+        )
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Read(read => read.Action("Products_Read", "Home"))
+        )
     )
-    .DataSource(dataSource => dataSource
-        .Ajax()
-        .Read(read => read.Action("Products_Read", "Home"))
-    )
-)
+    %>
 ```
-```ASPX
-<%: Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
-    .Name("grid")
-    .ToolBar(tools => tools.Excel())
-    .Excel(excel => excel
-        .AllPages(true)
+```tab-Razor
+    @(Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
+        .Name("grid")
+        .ToolBar(tools => tools.Excel())
+        .Excel(excel => excel
+            .AllPages(true)
+        )
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Read(read => read.Action("Products_Read", "Home"))
+        )
     )
-    .DataSource(dataSource => dataSource
-        .Ajax()
-        .Read(read => read.Action("Products_Read", "Home"))
-    )
-%>
-
 ```
-### Customize the Excel Document
 
-The [excelExport](/api/javascript/ui/grid#events-excelExport) event allows customization of the generated Excel document.
-The `workbook` event argument exposes the generated Excel workbook configuration.
+### Customize Excel Documents
 
-To understand how Excel documents work check the [Excel Introduction](/framework/excel/introduction#create-excel-document) help topic.
+The [`excelExport`](/api/javascript/ui/grid#events-excelExport) event allows the customization of the generated Excel document. The `workbook` event argument exposes the generated Excel workbook configuration.
 
-The [Color Alternating Rows](/aspnet-mvc/helpers/grid/how-to/excel/alternating-rows) tutorial shows one way to customize the generated Excel document.
+For more information on how the Excel documents work, refer to [this article]({% slug introduction_excelexport_kendoui %}).
 
-### Column Templates
+For more information on a possible approach to customize the generated Excel document, refer to [this runnable how-to example]({% slug howto_alternatingrows_aspnetmvcgrid %}).
 
-Kendo UI Grid doesn't use the `ClientTemplate` during Excel export - it exports only the data. The reason is simple - a column template may contain arbitrary HTML which can't be converted to Excel column values.
+### Set the Column Templates
 
-The [Column Template](/aspnet-mvc/helpers/grid/how-to/excel/column-template-export) tutorial shows how to use a column template that doesn't contain HTML.
+Kendo UI Grid does not use the `ClientTemplate` during Excel export. It exports only the data. The reason is that a column template may contain arbitrary HTML which cannot be converted to Excel column values.
 
-### Column Format
+For more information on how to use a column template that does not contain HTML, refer to [this runnable how-to example]({% slug howto_columntemplatexport_aspnetmvcgrid %}).
 
-Kendo UI Grid doesn't use the `Format` option during Excel export because some Kendo UI formats are incompatible with Excel.
+### Define the Column Format
 
-To format the cell values set the [format](/api/javascript/ooxml/workbook.html#configuration-sheets.rows.cells.format) option of the cells.
+The Kendo UI Grid does not use the `Format` option during Excel export because some Kendo UI formats are incompatible with Excel. To format the cell values, set the [`format`](/api/javascript/ooxml/workbook.html#configuration-sheets.rows.cells.format) option of the cells.
 
-The [Create a custom number format](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4) page describes the formats that Excel supports.
+The [page on creating a custom number format](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4) describes the formats supported by Excel.
 
-The [Cell Format](/aspnet-mvc/helpers/grid/how-to/excel/cell-format) tutorial shows how to format the cell values.
+For more information on how to format the cell values, refer to [this runnable how-to example]({% slug howto_cellformat_aspnetmvcgrid %}).
 
-### Detail Template
+### Use the Detail Template
 
-Kendo UI Grid doesn't export its `DetailTemplate` for the same reason as column templates.
-
-If the detail template contains another grid you can follow the [Detail Grid Export](/aspnet-mvc/helpers/grid/how-to/excel/detail-grid-export) tutorial.
+The Kendo UI Grid does not export its `DetailTemplate` for the same reason it does not export the column templates. If the detail template contains another Grid, follow [this runnable how-to example]({% slug howto_detailgridexcelexport_aspnetmvcgrid %}).
 
 ### Export Multiple Grids
 
-The [Multiple Grid Export](/aspnet-mvc/helpers/grid/how-to/excel/multiple-grid-export) tutorial shows how to export multiple grids in a single Excel document. Each grid is exported in a separate Excel sheet.
+For more information on how to export multiple Grids to a separate Excel sheet in a single Excel document, refer to [this runnable how-to example]({% slug howto_multiplegridexport_aspnetmvcgrid %}).
 
-## Troubleshooting
+### Use Server-Side Processing
 
-### JavaScript Error that JSZip Is Not Found
+To export big datasets from the Grid to Excel, use the .NET based server-side module shipped by Kendo UI. It is established on [Telerik RadSpreadProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview), which is part of the [Telerik Document Processing by Progress](http://docs.telerik.com/devtools/document-processing/introduction).
 
-Clicking the "Export to Excel" button or calling the `saveAsExcel` throws an exception if the JSZip JavaScript library isn't found. Including JSZip in the page solves the problem.
-Further info is available in the [Excel Export Introduction](/framework/excel/introduction#requirements)
+For more information, refer to the article on the [Excel export of the Grid widget]({% slug exporting_excel_kendoui_grid_widget %}#server-side-processing).
 
-### Export Does Not Work in Internet Explorer and Safari
+## See Also
 
-Internet Explorer versions below 10 and Safari can't save a file and require the implementation of a [server proxy](/framework/save-files/introduction#browser-support).
-Set the `ProxyURL` option to specify the server proxy URL.
+* [Create Excel Documents with Kendo UI]({% slug introduction_excelexport_kendoui %})
+* [Save Files with Kendo UI]({% slug overview_savingfiles_kendoui %})
+* [API Reference: kendo.ooxml.Workbook](/api/javascript/ooxml/workbook)
 
-###### Example - user server proxy
+Other articles on the Kendo UI Grid for ASP.NET MVC:
 
-```Controller
-public class ProxyController : Controller
-{
-    [HttpPost]
-    public ActionResult Save(string contentType, string base64, string fileName)
-    {
-        var fileContents = Convert.FromBase64String(base64);
+* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
+* [Configuration of the Grid HtmlHelper]({% slug configuration_gridhelper_aspnetmvc %})
+* [Scaffolding]({% slug scaffoldinggrid_aspnetmvc %})
+* [Frequently Asked Questions]({% slug freqaskedquestions_gridhelper_aspnetmvc %})
+* [Binding of the Grid HtmlHelper]({% slug ajaxbinding_grid_aspnetmvc %})
+* [Editing of the Grid HtmlHelper]({% slug ajaxediting_grid_aspnetmvc %})
+* [Templating of the Grid HtmlHelper]({% slug clientdetailtemplate_grid_aspnetmvc %})
+* [Troubleshooting for the Grid HtmlHelper]({% slug troubleshoot_gridhelper_aspnetmvc %})
+* [API Reference of the Grid HtmlHelper](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [Overview of the Kendo UI Grid Widget]({% slug overview_kendoui_grid_widget %})
 
-        return File(fileContents, contentType, fileName);
-    }
-}
-```
-```Razor
-@(Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
-    .Name("grid")
-    .ToolBar(tools => tools.Excel())
-    .Excel(excel => excel
-        .AllPages(true)
-        .ProxyURL(Url.Action("Save", "Proxy"))
-    )
-    .DataSource(dataSource => dataSource
-        .Ajax()
-        .Read(read => read.Action("Products_Read", "Home"))
-    )
-)
-```
-```ASPX
-<%: Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
-    .Name("grid")
-    .ToolBar(tools => tools.Excel())
-    .Excel(excel => excel
-        .AllPages(true)
-        .ProxyURL(Url.Action("Save", "Proxy"))
-    )
-    .DataSource(dataSource => dataSource
-        .Ajax()
-        .Read(read => read.Action("Products_Read", "Home"))
-    )
-%>
-```
+Articles on Telerik UI for ASP.NET MVC:
 
-## Further Reading
-
-* [Create Excel Documents with Kendo UI](/framework/excel/introduction)
-* [Save Files with Kendo UI](/framework/save-files/introduction)
-* [kendo.ooxml.Workbook API Reference](/api/javascript/ooxml/Workbook)
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_barcodehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

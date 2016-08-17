@@ -1,6 +1,6 @@
 ---
 title: Bind to Data Source
-page_title: Bind to Data Source | Kendo UI Spreadsheet Widget
+page_title: Bind to Data Source | Kendo UI Spreadsheet
 description: "Learn how to bind a sheet in the Kendo UI Spreadsheet widget to a Data Source."
 slug: bind_todata_source_spreadsheet_widget
 position: 3
@@ -10,9 +10,9 @@ position: 3
 
 The Spreadsheet widget supports binding individual sheets to a [Data Source](/framework/datasource/overview) instance. This allows you to quickly bring data from external data sources into the Spreadsheet and, optionally, edit it.
 
-Data Source binidng switches the sheet to a special data-bound mode. It differs from the standard behavior in a number of important ways:
+Data Source binding switches the sheet to a special data-bound mode. It differs from the standard behavior in a number of important ways:
 
-* Column headers are inferred from the data item fields.
+* Column headers are inferred from the data item fields. Configure the column headers and ordering by using the [sheet `setDataSource` method](/api/javascript/spreadsheet/sheet#methods-setDataSource).
 * Cell styles, formulas, and formats are not persisted in the data source.
 * Row height and column width are not persisted in the data source.
 * Sorting and filtering are applied locally.

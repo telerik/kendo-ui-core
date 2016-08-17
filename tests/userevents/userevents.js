@@ -409,6 +409,23 @@
         equal(userEvents.touches.length, 0);
     });
 
+    module("userEvents", {
+        teardown: function() {
+            $("#qunit-fixture").find("iframe").remove();
+        }
+    });
+
+    test("sets its element owner document as surface", function() {
+        var iframe = $("<iframe />")
+            .appendTo("#qunit-fixture")
+            .contents().find('body').append("<div id='element'></div>");
+        var element = $(iframe).find("#element")[0];
+
+        userEvents = new UserEvents(element, { global: true });
+
+        equal(userEvents.surface[0], element.ownerDocument.documentElement);
+    });
+
     module("selection", {
         setup: function() {
             element = $('<div />');

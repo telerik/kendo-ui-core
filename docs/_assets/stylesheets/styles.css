@@ -604,8 +604,8 @@ footer
 }
 
 footer p {
-    margin: 0;
-    padding: 20px;
+    margin: 20px;
+    padding: 0;
     font-size: 12px;
 }
 
@@ -619,7 +619,7 @@ footer p {
     padding: 0;
     right: 514px;
     text-align: right;
-    left: 20%;
+    left: 450px;
 }
 
 #page-search > div
@@ -723,31 +723,42 @@ footer p {
 }
 
 .k-tabstrip {
+    border: 1px solid #ccc;
+}
+
+.k-tabstrip .k-link {
+    padding: 0;
+}
+
+.k-tabstrip .k-content,
+.k-tabstrip .k-loading {
     border: 0;
+}
+
+.k-tabstrip .k-tabstrip-items {
+    padding: 0;
+    border-bottom: 1px solid;
 }
 
 .k-tabstrip .k-item {
-    border-width: 0 1px 0;
-    border-color: #acacac;
+    border-width: 0 1px 0 0;
+    border-style: solid;
+    font-weight: bold;
+    font-size: 14px;
+    padding: .72em 1.5em;
+    cursor: pointer;
+    transition-property: background-color, color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
 }
 
-.k-tabstrip .k-content {
-    border-color: #acacac;
-    background: #F1F5F9;
-}
 .k-tabstrip .k-content pre {
     border: 0;
+    padding: 0;
+    margin: 1em 0;
 }
 
-.k-tabstrip .k-tabstrip-items .k-state-active {
-    border-bottom-width: 0;
-    margin-bottom: -1px;
-    padding-bottom: -1px;
-    z-index: 1;
-    background: #F1F5F9;
-}
-
-@media (max-width: 1200px) {
+/*@media (max-width: 1200px) {
     #page-nav {
        width: 30%;
     }
@@ -768,10 +779,11 @@ footer p {
         right: 390px;
         left: 30%;
     }
-}
+}*/
 
 /* Responsive styles */
-@media (max-width: 800px) {
+
+@media (max-width: 1200px) {
     body {
         min-width: initial;
     }
@@ -869,6 +881,30 @@ footer p {
         text-align: right;
         left: auto;
         cursor: pointer;
+    }
+}
+
+@media (max-width: 600px) {
+    #page-header {
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-direction: row;
+      flex-direction: row;
+      align-items: center;
+    }
+    #logo-bar {
+      -webkit-flex: 1;
+      flex: 1;
+    }
+    #logo-bar a {
+      display: block;
+    }
+    #logo-bar img {
+      max-width: 100%;
+    }
+    #page-header .show-search {
+      margin: 0 1em;
+      position: static;
     }
 }
 

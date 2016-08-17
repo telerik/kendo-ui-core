@@ -45,7 +45,7 @@ The example below demonstrates how to create a quarter-gauge, oriented to the to
         endAngle: 180
     });
 
-For a real-world example on this functionality, see the [car dashboard demo](http://demos.telerik.com/kendo-ui/dataviz/dashboards/car-dashboard.html).
+For a real-world example on this functionality, see the [car dashboard demo](http://demos.telerik.com/kendo-ui/radial-gauge/car-dashboard).
 
 For a detailed list with all configuration options of the Kendo UI Radial Gauge, refer to the [Radial Gauge JavaScript API](/api/dataviz/radialgauge).
 
@@ -54,6 +54,6 @@ For a detailed list with all configuration options of the Kendo UI Radial Gauge,
 Other articles on Kendo UI Radial Gauge:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Radial Gauge Widget](/aspnet-mvc/helpers/radialgauge/overview)
-* [Overview of the Radial Gauge JSP Tag](/jsp/tags/radialgauge/overview)
+* [Overview of the Radial Gauge JSP Tag]({% slug overview_radialgauge_uiforjsp %})
 * [Overview of the Radial Gauge PHP Class](/php/widgets/radialgauge/overview)
 * [Radial Gauge JavaScript API Reference](/api/javascript/dataviz/ui/radialgauge)

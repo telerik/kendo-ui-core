@@ -1,21 +1,28 @@
 ---
 title: Custom DataSource
-page_title: Custom DataSource guide for Telerik UI for ASP.NET MVC
-description: Using Custom DataSource MVC
-position: 7
+page_title: Custom DataSource | Telerik UI for ASP.NET MVC
+description: "Use the CustomDataSource builder available for the Telerik UI for ASP.NET MVC HtmlHelpers."
+slug: customdatasource_aspnetmvc
+position: 5
 ---
 
 # Custom DataSource
 
-This chapter provides information about how to use the CustomDataSource builder available for the Telerik UI for ASP.NET MVC helpers that support DataSource.
+This article provides information on how to use the CustomDataSource builder available for the Telerik UI for ASP.NET MVC HtmlHelpers that support DataSource.
 
-The CustomDataSource builder is created in order to allow full control over the DataSource options listed in the [client-side API](/api/javascript/data/dataSource). By applying the CustomDataSource builder developers benefit from using the MVC wrappers. For example, they can generate validation attributes, editors, etc., while utilizing the flexibility of JavaScript. It can also be used in more advanced scenarios where the regular DataSource builders prevent the developer from fully customizing the options of the DataSource.
+## Getting Started
 
-###Using the CustomDataSource Builder
+### The Basics
 
-Using the CustomDataSource builder, even for small customizations, requires additional attention as all predefined settings, introduced by the regular DataSource builders, are removed. Here is an example for converting a regular Grid AjaxDataSourceBuilder to CustomDataSource builder:
+The CustomDataSource builder is created to allow a full control over the DataSource options listed in the [client-side API](/api/javascript/data/datasource). By applying the CustomDataSource builder, you benefit from using the MVC wrappers. For example, the wrappers are enabled to generate validation attributes, editors, etc., while utilizing the flexibility of JavaScript. The CustomDataSource builder can also be used in more advanced scenarios where the regular DataSource builders prevent you from fully customizing the options of the DataSource.
 
-##### Example - [Grid](http://demos.telerik.com/kendo-ui/grid/index) with AjaxDataSourceBuilder:
+### Initial Setup
+
+Using the CustomDataSource builder, even for small customizations, requires additional attention as all predefined settings, introduced by the regular DataSource builders, are removed.
+
+The example below demonstrates how to convert a regular [Grid](http://demos.telerik.com/kendo-ui/grid/index) AjaxDataSourceBuilder to a CustomDataSource builder.
+
+###### Example
 
     @(Html.Kendo().Grid<OrderViewModel>()
         .Name("grid")
@@ -31,7 +38,9 @@ Using the CustomDataSource builder, even for small customizations, requires addi
         )
     )
 
-##### Example - CustomDataSourceBuilder equivalent:
+The example below demonstrates how the CustomDataSourceBuilder equivalent.
+
+###### Example
 
     @(Html.Kendo().Grid<OrderViewModel>()
         .Name("grid")
@@ -60,11 +69,15 @@ Using the CustomDataSource builder, even for small customizations, requires addi
         )
     )
 
-### Using the `ClientHandlerDescriptor` Class to a Set JavaScript Function or Object as an Option for DataSource
+## Common Scenarios
 
-The demo below shows how to set a JavaScript function for the `Read` operation of the Scheduler by utilizing the `ClientHandlerDescriptor` type included in the `Kendo.Mvc` namespace. This class allows code rendering as-is, without the need of string wrapping. In this way the JavaScript functions and objects can be set to apply various options from the CustomDataSource.
+### Function and Object Setup as DataSource Objects
 
-##### Example:
+To set a JavaScript function or object as an option for the DataSource, use the `ClientHandlerDescriptor` class.
+
+The example below demonstrates how to set a JavaScript function for the `Read` operation of the Scheduler by utilizing the `ClientHandlerDescriptor` type included in the `Kendo.Mvc` namespace. This class allows code rendering as-is, without the need of string wrapping. In this way the JavaScript functions and objects can be set to apply various options from the CustomDataSource.
+
+###### Example
 
     @(Html.Kendo().Scheduler<MeetingViewModel>()
         .Name("scheduler")
@@ -87,13 +100,13 @@ The demo below shows how to set a JavaScript function for the `Read` operation o
                     m.Field("startTimezone", typeof(string)).From("StartTimezone");
                     m.Field("endTimezone", typeof(string)).From("EndTimezone");
                 }))
-            .Transport(new { 
+            .Transport(new {
                 //the ClientHandlerDescriptor is a special type that allows code rendering as-is (not as a string)
                 read = new Kendo.Mvc.ClientHandlerDescriptor() {HandlerName = "customRead" }
             })
         )
     )
-    
+
     <script>
         function customRead(options) {
             $.ajax({
@@ -107,11 +120,11 @@ The demo below shows how to set a JavaScript function for the `Read` operation o
         }
     </script>
 
-### `DefaultValue` of Model Fields as a Function
+### Model Fields Setup as Functions
 
-The example below demonstrates how to set the default value of the `EmployeeID` field to a JavaScript function. This is applicable in cases where the default value should be dynamic. For example, this is a case when the user inserts a new record while the `EmployeeID` column specifies a filter value different from the default one.
+The example below demonstrates how to set the default value of the `EmployeeID` field to a JavaScript function. This is applicable in the cases where the default value should be dynamic. For instance, a case when the user inserts a new record while the `EmployeeID` column specifies a filter value different from the default one.
 
-##### Example:
+###### Example
 
     @(Html.Kendo().Grid<ForeignKeyColumnDemo.Models.Order>()
         .Name("grid")
@@ -143,14 +156,14 @@ The example below demonstrates how to set the default value of the `EmployeeID` 
             )
         )
     )
-    
+
     <script>    
         function defaultValue(e) {
             if (typeof this.EmployeeID === "function") {
                 var grid = $("#grid").data("kendoGrid");
                 var ds = grid.dataSource;
                 var filter = ds.filter();
-             
+
                 if (filter && filter.filters[0].field === "EmployeeID") {
                     return filter.filters[0].value;
                 } else {
@@ -160,11 +173,13 @@ The example below demonstrates how to set the default value of the `EmployeeID` 
         }
     </script>
 
-### Setting Custom DataType of the Grid DataSource CRUD Operations
+### Custom DataType CRUD Operations Setup
 
-The example below shows how to bind the Grid to the Kendo UI online demo service that serves `jsonp` data. [See the full demo](/aspnet-mvc/introduction#sample-application).
+The example below demonstrates how to bind the Grid to the Kendo UI online demo service that serves `jsonp` data.
 
-##### Example:
+To see the full demo, refer to the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}#sample-application).
+
+###### Example
 
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()    
         .Name("Grid")    
@@ -221,9 +236,11 @@ The example below shows how to bind the Grid to the Kendo UI online demo service
 
 ### Grid Binding to oData
 
-This example demonstrates how to bind the Grid to the oData service. [See the full demo](/aspnet-mvc/introduction#sample-application).
+The example below demonstrates how to bind the Grid to the oData service.
 
-##### Example:
+To see the full demo, refer to the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}#sample-application).
+
+###### Example
 
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
         .Name("grid")
@@ -240,7 +257,7 @@ This example demonstrates how to bind the Grid to the oData service. [See the fu
             .Type("odata")
             .Transport(transport =>
                transport.Read(read => read.Url("http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"))
-            ) 
+            )
             .PageSize(20)
             .ServerPaging(true)
             .ServerSorting(true)
@@ -254,9 +271,11 @@ This example demonstrates how to bind the Grid to the oData service. [See the fu
 
 ### Grid Binding to oData v4
 
-Here is an example for using the CustomDataSource builder to bind the Grid wrapper to oData v4 service. [See the full demo](/aspnet-mvc/helpers/grid/how-to/oData-v4-web-api-controller).
+The example below demonstrates how to use the CustomDataSource builder to bind the Grid wrapper to oData v4 service.
 
-##### Example:
+To see the full demo, refer to this [Grid how-to example]({% slug howto_useodata4webapicontroller_gridaspnetmvc %}).
+
+###### Example
 
     @(Html.Kendo().Grid<KendoUIMVC5.Models.Product>()
         .Name("products")
@@ -291,3 +310,26 @@ Here is an example for using the CustomDataSource builder to bind the Grid wrapp
             .ServerFiltering(true)
         )
     )
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC:
+
+* [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc %})
+* [Validation with Telerik UI for ASP.NET MVC]({% slug validation_aspnetmvc %})
+* [Globalization with Telerik UI for ASP.NET MVC]({% slug globalization_aspnetmvc %})
+* [Localization with Telerik UI for ASP.NET MVC]({% slug localization_aspnetmvc %})
+* [Visual Basic Syntax]({% slug visualbasic_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Wrappers vs Kendo UI Widgets]({% slug wrappersvswidgets_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Visual Studio Integration]({% slug overview_visualstudio_aspnetmvc %})
+* [Migration from Telerik Extensions]({% slug overview_migrationextensions_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC HtmlHelpers]({% slug overview_autocompletehelper_aspnetmvc %})
+* [ASP.NET MVC 3]({% slug aspnetmvc3_aspnetmvc %})
+* [ASP.NET MVC 4]({% slug aspnetmvc4_aspnetmvc %})
+* [ASP.NET MVC 5]({% slug aspnetmvc5_aspnetmvc %})
+* [ASP.NET Core MVC]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC NuGet Packages]({% slug aspnetmvc_nuget %})
+* [Scaffolding with Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Tooltip Widget
+page_title: Overview | Kendo UI Tooltip
 description: "Learn how to initialize the Kendo UI Tooltip widget and configure its behaviors."
 slug: overview_kendoui_tooltip_widget
 position: 1
@@ -48,6 +48,44 @@ The example below demonstrates how to create a Tooltip for multiple targets with
     $(document).ready(function() {
         $("#container").kendoTooltip({ filter: "a[title]" });
     });
+
+### Show over Disabled Elements
+
+The Kendo UI Tooltip relies on the `mouseenter` and `mouseleave` events to work. By design, disabled elements do not fire events. If working with disabled elements is a strict requirement, a possible workaround is to initialize the Tooltip widget over a parent of the disabled element. Note that there must be some empty space between the disabled element and the boundaries of its parent, so that the `mouseenter` event is fired.
+
+###### Example
+
+```html
+<style>
+.parent {
+    display: inline-block;
+    border: 1px solid;
+    margin: 2em;
+    padding: 0.2em;
+}
+</style>
+
+<div id="example">
+
+  <span id="btn1-parent" class="parent" style="border-color:#f00;">
+    <button id="btn1" class="k-button" disabled="disabled">No tooltip</button>
+  </span>
+
+  <span id="btn2-parent" class="parent" style="border-color:#0c0;">
+    <button id="btn2" class="k-button" disabled="disabled">Tooltip works</button>
+  </span>
+
+</div>
+
+<script>
+  $(function() {
+    $("#btn1, #btn2-parent").kendoTooltip({
+      content: "Hello!",
+      position: "right"
+    });
+  });
+</script>
+```
 
 ## Configuration
 
@@ -109,7 +147,7 @@ The example below demonstrates how to access an existing Tooltip instance.
 Other articles on Kendo UI Tooltip:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Tooltip Widget](/aspnet-mvc/helpers/tooltip/overview)
-* [Overview of the Tooltip JSP Tag](/jsp/tags/tooltip/overview)
+* [Overview of the Tooltip JSP Tag]({% slug overview_tooltip_uiforjsp %})
 * [Overview of the Tooltip PHP Class](/php/widgets/tooltip/overview)
 * [How to Calculate Tooltip Content Width]({% slug howto_calculatetooltipcontentlength_tooltip %})
 * [How to Show Only If Text Exceeds Certain Length]({% slug howto_showonlyiftextexceedscertainlength_tooltip %})

@@ -1,10 +1,17 @@
 ---
-title: InCell with Batch mode enabled editing using WebAPI controller
-page_title: InCell with Batch mode enabled editing using WebAPI controller
-description: InCell with Batch mode enabled editing using WebAPI controller
+title: Edit Grids in Incell Batch Mode Using WebAPI Controller
+page_title: Edit Grids in Incell Batch Mode Using WebAPI Controller | Kendo UI Grid HtmlHelper
+description: "Configure the Kendo UI Grid to use the enum type for both displaying and editing."
+slug: howto_editincellbatchmodewebapi_gridaspnetmvc
 ---
 
-# InCell with Batch mode enabled editing using WebAPI controller
-This project shows how to configure the dataSource to communicate with the WebAPI controller in order to use incell batch mode editing.
+# Edit Grids in Incell Batch Mode Using WebAPI Controller
 
-[InCell with Batch mode enabled editing using WebAPI controller](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-web-api-crud-incell)
+To see the example on how to configure the dataSource to communicate with the Web API controller so it uses the incell batch mode editing, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-web-api-crud-incell).
+
+## See Also
+
+* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
+* [GridBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
+
+For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_bindgridtodatatable_gridaspnetmvc %}).

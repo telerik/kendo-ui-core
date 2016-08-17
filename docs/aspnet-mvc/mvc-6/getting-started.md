@@ -1,60 +1,119 @@
 ---
-title: Getting Started
-page_title: Getting started with Telerik UI for ASP.NET MVC 6
-description: How to configure a project to use Telerik UI for ASP.NET MVC 6.
-position: 1
+title: Get Started
+page_title: Get Started | Telerik UI for ASP.NET Core MVC
+description: "Learn the basics when working with Telerik UI for ASP.NET Core MVC (aka MVC 6)."
+previous_url: /aspnet-mvc/aspnetmvc-apps/mvc-6/getting-started
+slug: gettingstarted_aspnetmvc6_aspnetmvc
+position: 2
 ---
 
-# Using Telerik UI for ASP.NET MVC in MVC 6 applications
+# Get Started
 
-This tutorial shows how to configure an ASP.NET MVC6 project to use Telerik UI for ASP.NET MVC.
+This article demonstrates how to configure an ASP.NET Core MVC project to use Telerik UI for ASP.NET MVC.
 
-### Prerequisites
-1. [Visual Studio 2015](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx)
-1. [Microsoft ASP.NET and Web Tools 2015 (RC1)](https://www.microsoft.com/en-us/download/details.aspx?id=49959)
+## Prerequisites
 
-### 1. Create an ASP.NET MVC 6 Web Site
-Please skip this step if you're configuring an existing project.
+1. Download [Visual Studio 2015](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx).
+2. Download [Microsoft ASP.NET and Web Tools 2015](https://www.microsoft.com/en-us/download/details.aspx?id=49959).
 
-1. Select `File -> New Project`
-1. Choose `Templates / Visual C# / Web / ASP.NET Web Application`
-1. Set a name and location for the project
-1. From the project templates select `ASP.NET 5 Preview Templates / Web Site`
-1. Hit OK to create the project.
+## Configuration
 
-### 2. Add NuGet package
+To configure an ASP.NET Core MVC project to use Telerik UI for ASP.NET MVC, do the following:
 
-1. Open the NuGet Package Manager
+1. Create an ASP.NET MVC web site.
+2. Add the Kendo UI NuGet package.
 
-    ![NuGet package manager](images/manage-nuget-packages.png)
-1. Choose `api.nuget.org` as a package source and search for `Kendo.Mvc`
-1. Install the `Kendo.Mvc` package version 2015.2.909 or later.
-This should add a similar line in your `project.json`:
+### Create ASP.NET Core MVC Web Sites
+
+Below are listed the steps for you to follow when creating an ASP.NET Core MVC web site.
+
+> **Important**
+>
+> Skip this step if you are configuring an existing project.
+
+**Step 1** Select **File** > **New Project**.
+
+**Step 2** Choose **Templates** > **Visual C#** > **Web** > **ASP.NET Core Web Application (.NET Core)**.
+
+**Step 3** Set a name and location for the project.
+
+**Step 4** Select **ASP.NET Core Templates** > **Web Application** from the project templates.
+
+**Step 5** Click **OK** to create the project.
+
+### Add NuGet Packages
+
+Set up the [Telerik NuGet Private Feed]({% slug aspnetmvc_nuget %}#set-up-nuget-package-source) before continuing.
+
+**Step 1** Open the NuGet Package Manager.
+
+**Figure 1. The NuGet package manager**
+
+![NuGet package manager](images/manage-nuget-packages.png)
+
+**Step 2** Choose the [Telerik package source]({% slug aspnetmvc_nuget %}#set-up-nuget-package-source) and search for `Telerik.UI.for.AspNet.Core`.
+
+**Step 3** Install the `Telerik.UI.for.AspNet.Core` package. This should add a line to you `project.json` similar to the one shown below.
+
+###### Example
 
         "dependencies": {
             ...
-            "Kendo.Mvc": "2016.1.112"
+            "Telerik.UI.for.AspNet.Core": "{{ site.mvcCoreVersion }}"
         }
 
-1. Open `Startup.cs` and locate the `ConfigureServices` method. Add the following snippet:
+**Step 4** Open `Startup.cs`, using a text editor (IDE) and update it as described below.
 
-        // Register UI for ASP.NET MVC helpers
-        services.AddKendo();
+Locate the `ConfigureServices` method and add a call to `services.AddKendo` at the end.
 
-1. Import the `Kendo.Mvc.UI` namespace in `~/Views/_ViewImports.cshtml`
+###### Example
+
+        public void ConfigureServices(IServiceCollection services)
+        {
+            ...
+            // Maintain property names during serialization. See:
+            // https://github.com/aspnet/Announcements/issues/194
+            services
+                .AddMvc()
+                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+
+            // Add Kendo UI services to the services container
+            services.AddKendo();
+        }
+
+Locate the `Configure` method and add a call to `app.UseKendo` at the end.
+
+###### Example
+
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        {
+            ...
+
+            // Configure Kendo UI
+            app.UseKendo(env);
+        }
+
+**Step 5** Import the `Kendo.Mvc.UI` namespace in `~/Views/_ViewImports.cshtml`.
+
+###### Example
 
         @using Kendo.Mvc.UI
 
-1. Copy the Kendo UI client-side resources
-    1. Manual installation
+**Step 6** Copy the Kendo UI client-side resources.
 
-        Copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\lib\kendo-ui`
+* **Manual installation**
 
-        ![Kendo UI resources](images/kendo-ui-wwwroot.png)
+Copy the `js` and `styles` folders from the `telerik.ui.for.aspnetmvc` archive to `wwwroot\lib\kendo-ui`.
 
-    1. [Install Kendo UI Professional as a Bower package](/intro/installation/bower-install#restoring-packages-in-visual-studio-2015)
+**Figure 2. Kendo UI resources**
 
-1. Register the Kendo UI styles and scripts in `~/Views/Shared/Layout.cshtml`
+![Kendo UI resources](images/kendo-ui-wwwroot.png)
+
+* **[Kendo UI Professional Bower package installation]({% slug kendoui_bower_packages_kendoui_installation %})**
+
+**Step 7** Register the Kendo UI styles and scripts in `~/Views/Shared/Layout.cshtml`.
+
+###### Example
 
         <head>
         ...
@@ -109,9 +168,12 @@ This should add a similar line in your `project.json`:
         @RenderSection("scripts", required: false)
         </body>
 
-1. Use a Kendo UI Widget
+<!--*-->
+**Step 8** Use a Kendo UI widget.
 
-    Add the following snippet to `~/Views/Home/Index.cshtml`
+The example below demonstrates how to use HTML helpers. Add the snippet to `~/Views/Home/Index.cshtml`.
+
+###### Example
 
             <h2>Kendo UI DatePicker</h2>
 
@@ -125,6 +187,18 @@ This should add a similar line in your `project.json`:
                 @Html.Kendo().DeferredScripts()
             }
 
-1. All done
+<!--*-->
+Now that all is done, you can see the sample page.
 
-    ![Sample page](images/sample-page.png)
+**Figure 3. The end result&mdash;a sample page**
+
+![Sample page](images/sample-page.png)
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC in ASP.NET Core MVC applications:
+
+* [Overview of Telerik UI for ASP.NET Core MVC]({% slug overview_aspnetmvc6_aspnetmvc %})
+* [Get Started with Telerik UI for ASP.NET MVC in ASP.NET Core MVC Projects on Linux]({% slug gettingstartedlinux_aspnetmvc6_aspnetmvc %})
+* [Known Issues with Telerik UI for ASP.NET Core MVC]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Tag Helpers for ASP.NET Core MVC]({% slug taghelpers_aspnetmvc6_aspnetmvc %})

@@ -26,7 +26,7 @@ The example below demonstrates how to try to update the data source.
          k-data-source="gridData"
          k-columns="gridColumns"
          k-selectable="true"
-         k-on-change="selected = data"></div>
+         k-on-change="onChange(data)"></div>
 
     <p ng-show="selected">
       <label>Artist: <input ng-model="selected.artist" /></label>
@@ -53,6 +53,9 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
     $scope.gridData[0].track = "Hey you";
     console.log($scope.gridData);
   };
+  $scope.onChange = function(data){
+    $scope.selected = data;
+  };
 });
 </script>
 ```
@@ -71,7 +74,7 @@ However, if you click the **UPDATE FROM CODE** button, nothing appears to happen
          k-data-source="gridData"
          k-columns="gridColumns"
          k-selectable="true"
-         k-on-change="selected = data"></div>
+         k-on-change="onChange(data)"></div>
 
     <p ng-show="selected">
       <label>Artist: <input ng-model="selected.artist" /></label>
@@ -97,6 +100,9 @@ angular.module("app", ["kendo.directives"]).controller("MyCtrl", function($scope
     $scope.update = function() {
       $scope.gridData[0].set("track", "Hey you");
     };
+    $scope.onChange = function(data){
+      $scope.selected = data;
+    };
 });
 </script>
 ```
@@ -107,7 +113,7 @@ Note that the recommended way to update the object is to use the `set` method of
 
     $scope.gridData[0].track = "Hey you";
 
-The reason behind this is the fact that when grid columns do not declare a template property, Angular-Kendo bindings automatically initialize it with a template, which uses `{{angular}}` expressions. So, if you just set the property in the object, the display will update, but it is Angular, not Kendo, that manages the update. The grid itself would not be notified about a change in the data. In general, try to use methods of the Observable objects to manage the data as this is the only guaranteed way that widgets will properly update.
+The reason behind this is the fact that when grid columns do not declare a template property, Angular-Kendo bindings automatically initialize it with a template, which uses `{% raw %}{{angular}}{% endraw %}` expressions. So, if you just set the property in the object, the display will update, but it is Angular, not Kendo, that manages the update. The grid itself would not be notified about a change in the data. In general, try to use methods of the Observable objects to manage the data as this is the only guaranteed way that widgets will properly update.
 
 ## See Also
 

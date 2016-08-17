@@ -252,6 +252,8 @@ var __meta__ = { // jshint ignore:line
             that._promisesList = [];
             that._optionID = kendo.guid();
 
+            that._templates();
+
             that.setDataSource(options.dataSource);
 
             that.content.on("scroll" + VIRTUAL_LIST_NS, kendo.throttle(function() {
@@ -279,6 +281,7 @@ var __meta__ = { // jshint ignore:line
             placeholderTemplate: "loading...",
             groupTemplate: "#:data#",
             fixedGroupTemplate: "fixed header template",
+            mapValueTo: "index",
             valueMapper: null
         },
 
@@ -300,6 +303,7 @@ var __meta__ = { // jshint ignore:line
                 this._selectable();
             }
 
+            this._templates();
             this.refresh();
         },
 
@@ -475,6 +479,7 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 dataView = that._dataView,
                 valueGetter = that._valueGetter,
+                mapValueTo = that.options.mapValueTo,
                 item, match = false,
                 forSelection = [];
 
@@ -502,22 +507,71 @@ var __meta__ = { // jshint ignore:line
             if (typeof that.options.valueMapper === "function") {
                 that.options.valueMapper({
                     value: (this.options.selectable === "multiple") ? value : value[0],
-                    success: function(indexes) {
-                        that._values = [];
-                        that._selectedIndexes = [];
-                        that._selectedDataItems = [];
-
-                        indexes = toArray(indexes);
-
-                        if (!indexes.length) {
-                            indexes = [-1];
+                    success: function(response) {
+                        if (mapValueTo === "index") {
+                            that.mapValueToIndex(response);
+                        } else if (mapValueTo === "dataItem") {
+                            that.mapValueToDataItem(response);
                         }
-
-                        that.select(indexes);
                     }
                 });
             } else {
-                throw new Error("valueMapper is not provided");
+                that.select([-1]);
+            }
+        },
+
+        mapValueToIndex: function(indexes) {
+            if (indexes === undefined || indexes === -1 || indexes === null) {
+                indexes = [];
+            } else {
+                indexes = toArray(indexes);
+            }
+
+            if (!indexes.length) {
+                indexes = [-1];
+            } else {
+                var removed = this._deselect([]).removed;
+                if (removed.length) {
+                    this._triggerChange(removed, []);
+                }
+            }
+
+            this.select(indexes);
+        },
+
+        mapValueToDataItem: function(dataItems) {
+            var removed, added;
+
+            if (dataItems === undefined || dataItems === null) {
+                dataItems = [];
+            } else {
+                dataItems = toArray(dataItems);
+            }
+
+            if (!dataItems.length) {
+                this.select([-1]);
+            } else {
+                removed = $.map(this._selectedDataItems, function(item, index) {
+                    return { index: index, dataItem: item };
+                });
+
+                added = $.map(dataItems, function(item, index) {
+                    return { index: index, dataItem: item };
+                });
+
+                this._selectedDataItems = dataItems;
+
+                this._selectedIndexes = [];
+
+                for (var i = 0; i < this._selectedDataItems.length; i++) {
+                    this._selectedIndexes.push(undefined);
+                }
+
+                this._triggerChange(removed, added);
+
+                if (this._valueDeferred) {
+                    this._valueDeferred.resolve();
+                }
             }
         },
 
@@ -531,7 +585,7 @@ var __meta__ = { // jshint ignore:line
             var low = Math.floor(index / take) * take;
             var high = Math.ceil(index / take) * take;
 
-            var pages = high  === low ? [ high ] : [ low, high ];
+            var pages = high === low ? [ high ] : [ low, high ];
 
             $.each(pages, function(_, skip) {
                 var end = skip + take;
@@ -570,8 +624,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             $.each(indexes, function(_, index) {
-                var rangeStart = Math.floor(index / take) * take;
-                that._promisesList.push(that.deferredRange(rangeStart));
+                that._promisesList.push(that.deferredRange(that._getSkip(index, take)));
             });
 
             if (isEmptyList) {
@@ -585,9 +638,8 @@ var __meta__ = { // jshint ignore:line
             return that._activeDeferred;
         },
 
-        _findDataItem: function(index) {
-            var view = this.dataSource.view(),
-                group;
+        _findDataItem: function(view, index) {
+            var group;
 
             //find in grouped view
             if (this.options.type === "group") {
@@ -605,8 +657,24 @@ var __meta__ = { // jshint ignore:line
             return view[index];
         },
 
+        _getRange: function(skip, take) {
+            return this.dataSource._findRange(skip, Math.min(skip + take, this.dataSource.total()));
+        },
+
+        dataItemByIndex: function(index) {
+            var take = this.itemCount;
+            var skip = this._getSkip(index, take);
+            var view = this._getRange(skip, take);
+
+            return this._findDataItem(view, [index - skip]);
+        },
+
         selectedDataItems: function() {
             return this._selectedDataItems.slice();
+        },
+
+        scrollWith: function(value) {
+            this.content.scrollTop(this.content.scrollTop() + value);
         },
 
         scrollTo: function(y) {
@@ -685,7 +753,7 @@ var __meta__ = { // jshint ignore:line
                 if (position === "top") {
                     this.scrollTo(index * itemHeight);
                 } else if (position === "bottom") {
-                    this.scrollTo((index * itemHeight + itemHeight) - this.screenHeight);
+                    this.scrollTo((index * itemHeight + itemHeight) - this._screenHeight);
                 } else if (position === "outScreen") {
                     this.scrollTo(index * itemHeight);
                 }
@@ -872,6 +940,22 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
+        _getElementByDataItem: function(dataItem) {
+            var dataView = this._dataView,
+            valueGetter = this._valueGetter,
+                element, match;
+
+            for (var i = 0; i < dataView.length; i++) {
+                match = dataView[i].item && isPrimitive(dataView[i].item) ? dataView[i].item === dataItem : valueGetter(dataView[i].item) === valueGetter(dataItem);
+                if (match) {
+                    element = dataView[i];
+                    break;
+                }
+            }
+
+            return this._getElementByIndex(element.index);
+        },
+
         _clean: function() {
             this.result = undefined;
             this._lastScrollTop = undefined;
@@ -896,17 +980,20 @@ var __meta__ = { // jshint ignore:line
             return height;
         },
 
-        _screenHeight: function() {
-            var height = this._height(),
-                content = this.content;
+        setScreenHeight: function() {
+            var height = this._height();
 
-            content.height(height);
-            this.screenHeight = height;
+            this.content.height(height);
+            this._screenHeight = height;
+        },
+
+        screenHeight: function() {
+            return this._screenHeight;
         },
 
         _getElementLocation: function(index) {
             var scrollTop = this.content.scrollTop(),
-                screenHeight = this.screenHeight,
+                screenHeight = this._screenHeight,
                 itemHeight = this.options.itemHeight,
                 yPosition = index * itemHeight,
                 yDownPostion = yPosition + itemHeight,
@@ -927,16 +1014,17 @@ var __meta__ = { // jshint ignore:line
         },
 
         _templates: function() {
+            var options = this.options;
             var templates = {
-                template: this.options.template,
-                placeholderTemplate: this.options.placeholderTemplate,
-                groupTemplate: this.options.groupTemplate,
-                fixedGroupTemplate: this.options.fixedGroupTemplate
+                template: options.template,
+                placeholderTemplate: options.placeholderTemplate,
+                groupTemplate: options.groupTemplate,
+                fixedGroupTemplate: options.fixedGroupTemplate
             };
 
             for (var key in templates) {
                 if (typeof templates[key] !== "function") {
-                    templates[key] = kendo.template(templates[key]);
+                    templates[key] = kendo.template(templates[key] || "");
                 }
             }
 
@@ -985,15 +1073,14 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._saveInitialRanges();
-            that._screenHeight();
             that._buildValueGetter();
-            that.itemCount = getItemCount(that.screenHeight, options.listScreens, options.itemHeight);
+            that.setScreenHeight();
+            that.itemCount = getItemCount(that._screenHeight, options.listScreens, options.itemHeight);
 
             if (that.itemCount > dataSource.total()) {
                 that.itemCount = dataSource.total();
             }
 
-            that._templates();
             that._items = that._generateItems(that.element[0], that.itemCount);
 
             that._setHeight(options.itemHeight * dataSource.total());
@@ -1020,7 +1107,7 @@ var __meta__ = { // jshint ignore:line
             );
 
             that._renderItems();
-            that._calculateGroupPadding(that.screenHeight);
+            that._calculateGroupPadding(that._screenHeight);
         },
 
         _setHeight: function(height) {
@@ -1208,7 +1295,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _listItems: function() {
-            var screenHeight = this.screenHeight,
+            var screenHeight = this._screenHeight,
                 options = this.options;
 
             var theValidator = listValidator(options, screenHeight);
@@ -1268,7 +1355,7 @@ var __meta__ = { // jshint ignore:line
         _bufferSizes: function() {
             var options = this.options;
 
-            return bufferSizes(this.screenHeight, options.listScreens, options.oppositeBuffer);
+            return bufferSizes(this._screenHeight, options.listScreens, options.oppositeBuffer);
         },
 
         _indexConstraint: function(position) {
@@ -1295,6 +1382,14 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        getElementIndex: function(element) {
+            if (!(element instanceof jQuery)) {
+                return undefined;
+            }
+
+            return parseInt(element.attr("data-offset-index"), 10);
+        },
+
         _getIndecies: function(candidate) {
             var result = [], data;
 
@@ -1312,11 +1407,9 @@ var __meta__ = { // jshint ignore:line
                 result.push(candidate);
             }
 
-            if (candidate instanceof jQuery) {
-                candidate = parseInt(candidate.attr("data-offset-index"), 10);
-                if (!isNaN(candidate)) {
-                    result.push(candidate);
-                }
+            var elementIndex = this.getElementIndex(candidate);
+            if (!isNaN(elementIndex)) {
+                result.push(elementIndex);
             }
 
             if (candidate instanceof Array) {
@@ -1331,25 +1424,29 @@ var __meta__ = { // jshint ignore:line
                 selectedIndex,
                 dataItem,
                 selectedIndexes = this._selectedIndexes,
+                selectedDataItems = this._selectedDataItems,
                 position = 0,
                 selectable = this.options.selectable,
                 removedindexesCounter = 0,
-                item;
+                valueGetter = this._valueGetter,
+                item, match,
+                result = null;
 
             indices = indices.slice();
 
             if (selectable === true || !indices.length) { //deselect everything
-
                 for (var idx = 0; idx < selectedIndexes.length; idx++) {
                     if (selectedIndexes[idx] !== undefined) {
                         this._getElementByIndex(selectedIndexes[idx]).removeClass(SELECTED);
-
-                        removed.push({
-                            index: selectedIndexes[idx],
-                            position: idx,
-                            dataItem: this._selectedDataItems[idx]
-                        });
+                    } else if (selectedDataItems[idx]) {
+                        this._getElementByDataItem(selectedDataItems[idx]).removeClass(SELECTED);
                     }
+
+                    removed.push({
+                        index: selectedIndexes[idx],
+                        position: idx,
+                        dataItem: selectedDataItems[idx]
+                    });
                 }
 
                 this._values = [];
@@ -1357,28 +1454,30 @@ var __meta__ = { // jshint ignore:line
                 this._selectedIndexes = [];
             } else if (selectable === "multiple") {
                 for (var i = 0; i < indices.length; i++) {
+                    result = null;
                     position = $.inArray(indices[i], selectedIndexes);
-                    selectedIndex = selectedIndexes[position];
+                    dataItem = this.dataItemByIndex(indices[i]);
 
-                    if (selectedIndex !== undefined) {
-                        item = this._getElementByIndex(selectedIndex);
-
-                        if (!item.hasClass("k-state-selected")) {
-                            continue;
+                    if (position === -1 && dataItem) {
+                        for (var j = 0; j < selectedDataItems.length; j++) {
+                            match = isPrimitive(dataItem) ? selectedDataItems[j] === dataItem : valueGetter(selectedDataItems[j]) === valueGetter(dataItem);
+                            if (match) {
+                                item = this._getElementByIndex(indices[i]);
+                                result = this._deselectSingleItem(item, j, indices[i], removedindexesCounter);
+                            }
                         }
+                    } else {
+                        selectedIndex = selectedIndexes[position];
 
-                        item.removeClass(SELECTED);
-                        this._values.splice(position, 1);
-                        this._selectedIndexes.splice(position, 1);
-                        dataItem = this._selectedDataItems.splice(position, 1)[0];
+                        if (selectedIndex !== undefined) {
+                            item = this._getElementByIndex(selectedIndex);
+                            result = this._deselectSingleItem(item, position, selectedIndex, removedindexesCounter);
+                        }
+                    }
 
+                    if (result) {
                         indices.splice(i, 1);
-
-                        removed.push({
-                            index: selectedIndex,
-                            position: position + removedindexesCounter,
-                            dataItem: dataItem
-                        });
+                        removed.push(result);
 
                         removedindexesCounter++;
                         i--;
@@ -1389,6 +1488,25 @@ var __meta__ = { // jshint ignore:line
             return {
                 indices: indices,
                 removed: removed
+            };
+        },
+
+        _deselectSingleItem: function(item, position, selectedIndex, removedindexesCounter) {
+            var dataItem;
+
+            if (!item.hasClass("k-state-selected")) {
+                return;
+            }
+
+            item.removeClass(SELECTED);
+            this._values.splice(position, 1);
+            this._selectedIndexes.splice(position, 1);
+            dataItem = this._selectedDataItems.splice(position, 1)[0];
+
+            return {
+                index: selectedIndex,
+                position: position + removedindexesCounter,
+                dataItem: dataItem
             };
         },
 
@@ -1404,10 +1522,24 @@ var __meta__ = { // jshint ignore:line
                 return [];
             }
 
+            if (indices[0] === -1) {
+                $(children).removeClass("k-state-selected");
+                removed = $.map(this._selectedDataItems.slice(0), function(dataItem, idx) {
+                   return {
+                      dataItem: dataItem,
+                      position: idx
+                   };
+                });
+                this._selectedIndexes = [];
+                this._selectedDataItems = [];
+                this._values = [];
+                return removed;
+            }
+
             for (; idx < indices.length; idx++) {
                 position = -1;
                 index = indices[idx];
-                value = this._valueGetter(this._view[index].item);
+                value = this._valueGetter(this.dataItemByIndex(index));
 
                 for (j = 0; j < values.length; j++) {
                     if (value == values[j]) {
@@ -1423,6 +1555,12 @@ var __meta__ = { // jshint ignore:line
             }
 
             return removed;
+        },
+
+        _getSkip: function(index, take) {
+            var page = index < take ? 1 : Math.floor(index / take) + 1;
+
+            return (page - 1) * take;
         },
 
         _select: function(indexes) {
@@ -1443,13 +1581,12 @@ var __meta__ = { // jshint ignore:line
             oldSkip = dataSource.skip();
 
             $.each(indexes, function(_, index) {
-                var page = index < take ? 1 : Math.floor(index / take) + 1;
-                var skip = (page - 1) * take;
+                var skip = that._getSkip(index, take);
 
                 that.mute(function() {
                     dataSource.range(skip, take); //switch the range to get the dataItem
 
-                    dataItem = that._findDataItem([index - skip]);
+                    dataItem = that._findDataItem(dataSource.view(), [index - skip]);
                     that._selectedIndexes.push(index);
                     that._selectedDataItems.push(dataItem);
                     that._values.push(isPrimitive(dataItem) ? dataItem : valueGetter(dataItem));

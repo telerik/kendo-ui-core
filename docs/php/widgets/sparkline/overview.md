@@ -1,86 +1,120 @@
 ---
 title: Overview
-page_title: How to use the Sparkline PHP class, server-side wrapper for Kendo UI Sparkline widget
-description: Learn how to bind Kendo UI Sparkline for PHP, handle Kendo UI Sparkline Events, access an existing sparkline.
+page_title: Overview | Sparkline PHP Class
+description: "Get started with the Sparkline PHP class in Kendo UI."
+slug: overview_sparkline_uiforphp
+position: 1
 ---
 
-# Sparkline
+# Sparkline PHP Class Overview
 
-The Kendo Sparkline for PHP is a server-side wrapper for the [Kendo UI Sparkline](/api/dataviz/sparkline) widget.
+The Kendo UI Sparkline for PHP is a server-side wrapper for the [Kendo UI Sparkline](/api/javascript/dataviz/ui/sparkline) widget.
 
 ## Getting Started
 
-There are two main ways to bind Kendo Sparkline for PHP:
+### The Basics
 
-* [local](/php/widgets/sparkline/local-binding) - the sparkline is bound to PHP array
-* [remote](/php/widgets/sparkline/remote-binding) - the sparkline makes AJAX requests and is bound to JSON result
+There are two ways to bind a Kendo UI Sparkline for PHP:
 
-Here is how to configure the sparkline for local binding:
+* [Locally]({% slug localbinding_chart_uiforphp %})&mdash;Local binding binds the Sparkline to a PHP array.
+* [Remotely]({% slug remotebinding_chart_uiforphp %})&mdash;During remote binding the Sparkline makes AJAX requests and is bound to the JSON result.
 
-1. Follow the steps from the [introduction](/php/introduction) - include the autoloader, JavaScript and CSS files.
-2. Create an array which to which the sparkline will be bound to
+### Configuration
+
+Below are listed the steps for you to follow when configuring the Kendo UI Sparkline for local binding.
+
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
+
+**Step 2** Create an array to which the Sparkline will be bound.
+
+###### Example
 
         <?php
         $data = array(1, 3, 5, 4, 2);
         ?>
-4. Create a [sparkline](/api/php/Kendo/Dataviz/UI/Sparkline), configure its [data](/api/php/Kendo/Dataviz/UI/Sparkline#data).
+
+**Step 3** Create a [Sparkline](/api/php/Kendo/Dataviz/UI/Sparkline), configure its [`data`](/api/php/Kendo/Dataviz/UI/Sparkline#data).
+
+###### Example
 
         <?php
         $sparkline = new \Kendo\Dataviz\UI\Sparkline('sparkline');
         $sparkline->data($data);
         ?>
-5. Output the sparkline by echo-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
+
+**Step 4** Output the Sparkline by echoing the result of the `render` method.
+
+###### Example
 
         <?php
         echo $sparkline->render();
         ?>
 
-## Getting Client-side Reference
+## Event Handling
 
-You can reference the clien-side Kendo Sparkline instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/dataviz/sparkline#methods) to control its behavior.
+You can subscribe to all Sparkline [events](/api/javascript/dataviz/ui/sparkline).
 
+### Specify Function Names
 
-### Example
+The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-    <?php
-    $sparkline = new \Kendo\Dataviz\UI\Sparkline('sparkline');
-    echo $sparkline->render();
-    ?>
-    <script>
-    $(function() {
-        // The constructor parameter is used as the 'id' HTML attribute of the sparkline
-        var sparkline = $("#sparkline").data("kendoSparkline")
-    });
-    </script>
+###### Example
 
-## Handling Events
+        <?php
+        $sparkline = new \Kendo\Dataviz\UI\Sparkline('sparkline');
 
-You can subscribe to all Sparkline [events](/api/dataviz/sparkline#events).
+        // The 'sparkline_dataBound' JavaScript function will handle the 'dataBound' event of the sparkline
+        $sparkline->dataBound('sparkline_dataBound');
 
-### Example - subscribing by specifying JavaScript function name
+        echo $sparkline->render();
+        ?>
+        <script>
+        function sparkline_dataBound() {
+            // Handle the dataBound event
+        }
+        </script>
 
-    <?php
-    $sparkline = new \Kendo\Dataviz\UI\Sparkline('sparkline');
+### Provide Inline Code
 
-    // The 'sparkline_dataBound' JavaScript function will handle the 'dataBound' event of the sparkline
-    $sparkline->dataBound('sparkline_dataBound');
+The example below demonstrates how to provide inline JavaScript code.
 
-    echo $sparkline->render();
-    ?>
-    <script>
-    function sparkline_dataBound() {
-        // Handle the dataBound event
-    }
-    </script>
+###### Example
 
-### Example - providing inline JavaScript code
+        <?php
+        $sparkline = new \Kendo\Dataviz\UI\Sparkline('sparkline');
 
-    <?php
-    $sparkline = new \Kendo\Dataviz\UI\Sparkline('sparkline');
+        // Provide inline JavaScript code that will handle the 'dataBound' event of the sparkline
+        $sparkline->dataBound('function() { /* Handle the dataBound event */ }');
 
-    // Provide inline JavaScript code that will handle the 'dataBound' event of the sparkline
-    $sparkline->dataBound('function() { /* Handle the dataBound event */ }');
+        echo $sparkline->render();
+        ?>
 
-    echo $sparkline->render();
-    ?>
+<!--*-->
+## Reference
+
+### Client-Side Instances
+
+You can reference the client-side Kendo UI Sparkline instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Sparkline API](/api/javascript/dataviz/ui/sparkline#methods) to control its behavior.
+
+###### Example
+
+        <?php
+        $sparkline = new \Kendo\Dataviz\UI\Sparkline('sparkline');
+        echo $sparkline->render();
+        ?>
+        <script>
+        $(function() {
+            // The constructor parameter is used as the 'id' HTML attribute of the sparkline
+            var sparkline = $("#sparkline").data("kendoSparkline")
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for PHP and on the Sparkline:
+
+* [Local Binding of the Sparkline PHP Class]({% slug localbinding_sparkline_uiforphp %})
+* [Remote Binding of the Sparkline PHP Class]({% slug remotebinding_sparkline_uiforphp %})
+* [Overview of the Kendo UI Sparkline Widget]({% slug overview_kendoui_sparklinescharts %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

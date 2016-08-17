@@ -10,9 +10,11 @@ Represents the Kendo UI DatePicker widget. Inherits from [Widget](/api/javascrip
 
 ## Configuration
 
-### animation `Object`
+### animation `Boolean|Object`
 
 Configures the opening and closing animations of the calendar popup. Setting the `animation` option to `false` will disable the opening and closing animations. As a result the calendar popup will open and close instantly.
+
+`animation:true` is not a valid configuration.
 
 #### Example - disable open and close animations
 
@@ -173,7 +175,7 @@ Specifies a list of dates, which will be passed to the [month template](#configu
 
         return false;
       }
-      
+
     </script>
 
 ### depth `String`
@@ -222,7 +224,7 @@ An array or function that will be used to determine which dates to be disabled f
 		disableDates: ["we", "th"],
     });
     </script>
-	
+
 #### Example - specify an array of dates to be disabled
 
     <input id="datepicker">
@@ -281,7 +283,7 @@ note that a check for an empty `date` is needed, as the widget can work with a n
     });
     </script>
 
-### format `String`*(default: "MM/dd/yyyy")*
+### format `String`*(default: "M/d/yyyy")*
 
  Specifies the format, which is used to format the value of the DatePicker displayed in the input. The format also will be used to parse the input.
 

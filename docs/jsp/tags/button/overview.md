@@ -85,7 +85,7 @@ Technically, `spriteCssClass="k-icon k-cancel"` can be used to achieve the same 
 
 ### Image Icons
 
-Image icons are applied via the `imageUrl` property and are displayed as a `img` element.
+Image icons are applied via the `imageUrl` property and are displayed as an `img` element.
 
 #### The imageUrl Tag
 
@@ -101,7 +101,6 @@ The above configuration produces the HTML output shown below.
 ###### Example
 
     <button type="button" id="imageButton" class="k-button k-button-icontext"><img class="k-image" src="/images/myIcon.gif" alt="icon" />Image button</button>
-
 
 #### The img Tag
 
@@ -127,7 +126,7 @@ The Button uses an existing `span` element if it is supplied as `content`, e.g. 
 
 ### Enable and Disable Buttons
 
-The business logic of an application often requires a certain button to be temporarily disabled or enabled. The Button can be configured to be initially disabled via its `enable` setting. The widget can also be disabled or enabled at any time with Javascript by using its `enable` method with a Boolean argument.
+The business logic of an application often requires a certain button to be temporarily disabled or enabled. The Button can be configured to be initially disabled via its `enable` setting. The widget can also be disabled or enabled at any time with JavaScript by using its `enable` method with a Boolean argument.
 
 The example below demonstrates how to use the `enable` method.
 

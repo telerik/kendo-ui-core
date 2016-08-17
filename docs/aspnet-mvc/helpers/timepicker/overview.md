@@ -1,136 +1,163 @@
 ---
 title: Overview
-page_title: User Guide for TimePicker HtmlHelper | Kendo UI documentation
-description: How to add TimePicker HtmlHelper extension and handle Kendo UI TimePicker events.
+page_title: Overview | Kendo UI TimePicker HtmlHelper
+description: "Get started with the server-side wrapper for the Kendo UI TimePicker widget for ASP.NET MVC."
+slug: overview_timepickerhelper_aspnetmvc
+position: 1
 ---
 
-# TimePicker
+# TimePicker HtmlHelper Overview
 
-The TimePicker HtmlHelper extension is a server-side wrapper for the [Kendo UI TimePicker](/api/web/timepicker) widget.
+The TimePicker HtmlHelper extension is a server-side wrapper for the [Kendo UI TimePicker](https://demos.telerik.com/kendo-ui/timepicker/index) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo TimePicker:
+### Configuration
 
-1.  Make sure you have followed all the steps from the [Introduction](/aspnet-mvc/introduction) help topic.
+Below are listed the steps for you to follow when configuring the Kendo UI TimePicker.
 
-2.  Create a new action method which renders the view:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %}).
+
+**Step 2** Create a new action method which renders the view.
+
+###### Example
 
         public ActionResult Index()
         {
             return View();
         }
-3.  Add a timepicker:
-    - WebForms
 
-            <%: Html.Kendo().TimePicker()
-                    .Name("timepicker") //The name of the timepicker is mandatory. It specifies the "id" attribute of the widget.
-                    .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set min time of the timepicker
-                    .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set min date of the timepicker
-                    .Value(DateTime.Now) //Set the value of the timepicker
-            %>
-    - Razor
+**Step 3** Add a TimePicker.
 
-            @(Html.Kendo().TimePicker()
-                  .Name("timepicker") //The name of the timepicker is mandatory. It specifies the "id" attribute of the widget.
-                  .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set min time of the timepicker
-                  .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set min date of the timepicker
-                  .Value(DateTime.Now) //Set the value of the timepicker
-            )
+###### Example
 
-## Accessing an Existing TimePicker
+```tab-ASPX
 
-You can reference an existing TimePicker instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/timepicker#methods) to control its behavior.
+        <%: Html.Kendo().TimePicker()
+                .Name("timepicker") //The name of the TimePicker is mandatory. It specifies the "id" attribute of the widget.
+                .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the TimePicker.
+                .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the TimePicker.
+                .Value(DateTime.Now) //Set the value of the TimePicker.
+        %>
+```
+```tab-Razor
 
-### Accessing an existing TimePicker instance
+        @(Html.Kendo().TimePicker()
+              .Name("timepicker") //The name of the TimePicker is mandatory. It specifies the "id" attribute of the widget.
+              .Min(new DateTime(2010, 1, 1, 10, 0, 0)) //Set the min time of the TimePicker.
+              .Max(new DateTime(2010, 1, 1, 20, 0, 0)) //Set the min date of the TimePicker.
+              .Value(DateTime.Now) //Set the value of the TimePicker.
+        )
+```
 
-    //Put this after your Kendo TimePicker for ASP.NET MVC declaration
-    <script>
-    $(function() {
-        // Notice that the Name() of the timepicker is used to get its client-side instance
-        var timepicker = $("#timepicker").data("kendoTimePicker");
-    });
-    </script>
+## Event Handling
 
-## Handling Kendo UI TimePicker events
+You can subscribe to all TimePicker [events](/api/javascript/ui/timepicker#events).
 
-You can subscribe to all [events](/api/web/timepicker#events) exposed by Kendo UI TimePicker:
+### By Handler Name
 
-### WebForms - subscribe by handler name
+The examples below demonstrates how to subscribe to events by a handler name.
 
-    <%: Html.Kendo().TimePicker()
-            .Name("timepicker")
-            .Events(e => e
-                .Open("timepicker_open")
-                .Close("timepicker_close")
-                .Change("timepicker_change")
-            )
-    %>
-    <script>
-    function timepicker_open() {
-        //Handle the open event
-    }
+###### Example
 
-    function timepicker_close() {
-        //Handle the close event
-    }
+```tab-ASPX
 
-    function timepicker_change() {
-        //Handle the change event
-    }
-    </script>
+        <%: Html.Kendo().TimePicker()
+                .Name("timepicker")
+                .Events(e => e
+                    .Open("timepicker_open")
+                    .Close("timepicker_close")
+                    .Change("timepicker_change")
+                )
+        %>
+        <script>
+        function timepicker_open() {
+            //Handle the open event.
+        }
 
+        function timepicker_close() {
+            //Handle the close event.
+        }
 
-### Razor - subscribe by handler name
+        function timepicker_change() {
+            //Handle the change event.
+        }
+        </script>
+```
+```tab-Razor
 
-    @(Html.Kendo().TimePicker()
-          .Name("timepicker")
-          .Events(e => e
-                .Open("timepicker_open")
-                .Close("timepicker_close")
-                .Change("timepicker_change")
-          )
-    )
-    <script>
-    function timepicker_open() {
-        //Handle the open event
-    }
+        @(Html.Kendo().TimePicker()
+              .Name("timepicker")
+              .Events(e => e
+                    .Open("timepicker_open")
+                    .Close("timepicker_close")
+                    .Change("timepicker_change")
+              )
+        )
+        <script>
+        function timepicker_open() {
+            //Handle the open event.
+        }
 
-    function timepicker_close() {
-        //Handle the close event
-    }
+        function timepicker_close() {
+            //Handle the close event
+        }
 
-    function timepicker_change() {
-        //Handle the change event
-    }
-    </script>
+        function timepicker_change() {
+            //Handle the change event.
+        }
+        </script>
+```
 
-### Razor - subscribe by template delegate
+### By Template Delegate
 
-    @(Html.Kendo().TimePicker()
-          .Name("timepicker")
-          .Events(e => e
-              .Open(@<text>
-                function() {
-                    //Handle the open event inline
-                }
-              </text>)
-              .Change(@<text>
-                function() {
-                    //Handle the change event inline
-                }
-                </text>)
-          )
-    )
+The example below demonstrates how to subscribe to events by a template delegate.
 
-## Troubleshooting
+```tab-Razor
 
-### Display [DateTimeOffset](http://msdn.microsoft.com/en-us/library/system.datetimeoffset.aspx) value in widget
-The TimePicker widget supports DateTime structure. You will need to convert DateTimeOffset into DatePicker in order to show time correctly.
+        @(Html.Kendo().TimePicker()
+              .Name("timepicker")
+              .Events(e => e
+                  .Open(@<text>
+                    function() {
+                        //Handle the open event inline.
+                    }
+                  </text>)
+                  .Change(@<text>
+                    function() {
+                        //Handle the change event inline.
+                    }
+                    </text>)
+              )
+        )
+```
 
-### Client validation fails with invalid date
-By default ASP.NET MVC project uses jQuery validate framework, which does not provide support for internationalized dates.
-In other words, every string which [Date.parse](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Date/parse) cannot define as valid date will be reported as invalid. As extending open source libraries is beyond of our product,
-you will need to resolve this issue manually - check this [link](http://www.dotnet-programming.com/post/2011/12/14/Globalization-Validation-and-DateNumber-Formats-in-AspNet-MVC.aspx) for more information.
-You can also use [Kendo Validator](http://demos.telerik.com/kendo-ui/web/validator/index.html), which supports validating internationalized dates.
+## Reference
+
+### Existing Instances
+
+You can reference an existing Kendo UI TimePicker instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [TimePicker API](/api/javascript/ui/timepicker#methods) to control its behavior.
+
+###### Example
+
+       //Put this after your Kendo UI TimePicker for ASP.NET MVC declaration.
+        <script>
+        $(function() {
+            //Notice that the Name() of the TimePicker is used to get its client-side instance.
+            var timepicker = $("#timepicker").data("kendoTimePicker");
+        });
+        </script>
+
+## See Also
+
+Other articles on Telerik UI for ASP.NET MVC and on the TimePicker:
+
+* [ASP.NET MVC API Reference: TimePickerBuilder](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/TimePickerBuilder)
+* [Overview of Telerik UI for ASP.NET MVC]({% slug overview_aspnetmvc %})
+* [Fundamentals of Telerik UI for ASP.NET MVC]({% slug fundamentals_aspnetmvc %})
+* [Scaffolding in Telerik UI for ASP.NET MVC]({% slug scaffolding_aspnetmvc %})
+* [Overview of the Kendo UI TimePicker Widget]({% slug overview_kendoui_timepicker_widget %})
+* [Telerik UI for ASP.NET MVC API Reference Folder](/api/aspnet-mvc/Kendo.Mvc/AggregateFunction)
+* [Telerik UI for ASP.NET MVC HtmlHelpers Folder]({% slug overview_autocompletehelper_aspnetmvc %})
+* [Tutorials on Telerik UI for ASP.NET MVC]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
+* [Telerik UI for ASP.NET MVC Troubleshooting]({% slug troubleshooting_aspnetmvc %})

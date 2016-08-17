@@ -1,6 +1,6 @@
 ---
 title: Render Custom Symbols for Bubble Layers
-page_title: Render Custom Symbols for Bubble Layers | Kendo UI Map Widget
+page_title: Render Custom Symbols for Bubble Layers | Kendo UI Map
 description: "Learn how to render custom symbols on Kendo UI Map Bubble layers."
 slug: howto_rendercustomsymbols_forbubblelayers_map
 ---
@@ -26,15 +26,16 @@ The example below demonstrates how to render 200-kilometer lines in West-East di
         wraparound: false,
         layers: [{
           type: "tile",
-          urlTemplate: "http://otile3.mqcdn.com/tiles/1.0.0/sat/#= zoom #/#= x #/#= y #.png",
-          attribution: "Tiles © <a href='http://www.mapquest.com/' target='_blank'>MapQuest</a>"
+          urlTemplate: "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+          subdomains: ["a", "b", "c"],
+          attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>"
         }, {
           type: "bubble",
           attribution: "Population data from Nordpil and UN Population Division.",
           dataSource: {
             transport: {
               read: {
-                url: "https://cdn.rawgit.com/tsvetomir/59095cfd1592c2f2cd2f/raw/1083f917d84644641eb727705b37408f2d8e700a/urban-areas.json",
+                url: "http://runner.telerik.io/fullscreen/EsuDU.json",
                 dataType: "json"
               }
             }
@@ -86,16 +87,13 @@ The example below demonstrates how to render 200-kilometer lines in West-East di
 
 ## See Also
 
-Other articles on Kendo UI Map:
+Other articles on the Kendo UI Map:
 
 * [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
 * [How to Add Shape Titles]({% slug howto_addhspaetitles_map %})
-* [How to Customize Markers on Map]({% slug howto_customizemarkersonmap_map %})
-* [How to Disable Mousewheel Zoom]({% slug howto_disablemousezoom_map %})
-* [How to Display Shape Tooltips]({% slug howto_displayshapetooltip_map %})
 * [How to Drag and Drop Markers]({% slug howto_draganddropmarkers_map %})
 * [How to Highlight Map Shapes by ID]({% slug howto_highlightmapshapesbyid_map %})
-* [How to Link Marker to Location]({% slug howto_linkmarkertolocation_map %})
-* [How to Set 100% Height in Mobile Applications]({% slug howto_set100percentheight_inmobileapps_map %})
 * [How to Update Map Shapes by ID]({% slug howto_updatemapshapesbyid_map %})
 * [How to Zoom on Area]({% slug howto_zoomonarea_map %})
+
+For more runnable examples on the Kendo UI Map, browse the [**How To** documentation folder]({% slug howto_customizemarkersonmap_map %}).

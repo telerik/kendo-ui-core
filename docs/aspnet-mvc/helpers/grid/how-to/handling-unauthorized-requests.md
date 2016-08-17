@@ -1,11 +1,17 @@
 ---
-title: Handling unauthorized requests with Ajax bound Grid
-page_title: Handling unauthorized requests with Ajax bound Grid
-description: Create custom AuthorizeAttribute that returns result which can be handled on the client.
+title: Handle Unauthorized Requests with Ajax-Bound Grids
+page_title: Handle Unauthorized Requests with Ajax-Bound Grids | Kendo UI Grid HtmlHelper
+description: "Create a custom AuthorizeAttribute that returns results that can be handled on the client."
+slug: howto_handleunathorizedrequestsajaxbound_gridaspnetmv
 ---
 
-# Handling unauthorized requests with Ajax bound Grid
+# Handle Unauthorized Requests with Ajax-Bound Grids
 
-This project demonstrates how to create custom AuthorizeAttribute that returns result which can be used on the client to show error message or redirect to the login page.
+To see the example on how to create a custom `AuthorizeAttribute` that returns results that can be used on the client to show error messages or redirect to the login page, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-handling-unauthorized-request).
 
-[Handling unauthorized requests with Ajax bound Grid](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-handling-unauthorized-request)
+## See Also
+
+* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
+* [GridBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
+
+For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_applycustomrowstylesbasedondata_gridaspnetmvc %}).

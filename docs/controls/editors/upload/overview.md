@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Upload Widget
+page_title: Overview | Kendo UI Upload
 description: "Learn how to initialize the Kendo UI Upload widget and configure its behavior."
 slug: overview_kendoui_upload_widget
 position: 1
@@ -43,7 +43,7 @@ For more information on how to handle the uploaded files, refer to the documenta
 
 Kendo UI Upload is a widget based on standards and requires no plug-ins. It supports the following functionalities:
 
-*   Asynchronous and synchronous (on form `submit`) file upload
+*   Asynchronous and synchronous (on form `submit`) upload of files in the user's file system
 *   Multiple file selection
 *   Removal of uploaded files
 *   Progress tracking
@@ -53,8 +53,8 @@ Kendo UI Upload is a widget based on standards and requires no plug-ins. It supp
 Progress tracking, file drag-and-drop, and in-progress cancellation of upload are automatically enabled if supported by the browser. For detailed information on the browser versions which support the Upload features, refer to [this article]({% slug browsersupport_upload_widget %}).
 
 > **Important**
->
-> Uploading large files in chunks is currently not supported, as it would require an additional plug-in&mdash;eitherFlash, or Silverlight&mdash;to compensate for the missing File API support in older browsers.
+> * Uploading large files in chunks is currently not supported, as it would require an additional plug-in&mdash;eitherFlash, or Silverlight&mdash;to compensate for the missing File API support in older browsers.
+> * The Upload widget works in `<input type="file" />` elements, so it is only able to upload files selected by the user, which exist in the file system. For uploading files generated with JavaScript on the fly, use another approach, e.g. an Ajax request.
 
 ### Modes of Operation
 
@@ -86,10 +86,10 @@ The example below demonstrates how to access an existing Upload instance.
 
 ## See Also
 
-Other articles and how-to examples on Kendo UI Upload:
+Other articles and how-to examples on the Kendo UI Upload:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Upload Widget](/aspnet-mvc/helpers/upload/overview)
-* [Overview of the Upload JSP Tag](/jsp/tags/upload/overview)
+* [Overview of the Upload JSP Tag]({% slug overview_upload_uiforjsp %})
 * [Overview of the Upload PHP Class](/php/widgets/upload/overview)
 * [Drag and Drop]({% slug dragandrop_upload_widget %})
 * [Send and Receive Metadata]({% slug metadata_upload_widget %})
@@ -98,3 +98,5 @@ Other articles and how-to examples on Kendo UI Upload:
 * [Troubleshooting]({% slug troubleshooting_upload_widget %})
 * [How to Serialize Form Data during Async Upload]({% slug howto_serialize_form_data_upload %})
 * [Upload JavaScript API Reference](/api/javascript/ui/upload)
+
+For how-to examples on the Kendo UI Upload widget, browse its [**How To** documentation folder]({% slug howto_remove_files_with_errors %}).

@@ -76,7 +76,7 @@ Gets or sets the state of the bottom border of the cells. If the range includes 
 The border configuration object. It may contain `size` and `color` keys.
 
 The `color` may be set to any valid [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value).
-The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/docs/Web/CSS/length).
+The `size` should be the border width in pixels (numeric, not string).
 
 #### Returns
 
@@ -94,7 +94,7 @@ The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/
 
     var sheet = spreadsheet.activeSheet();
 
-    sheet.range("A2:B3").borderBottom({ size: "2px", color: "green" });
+    sheet.range("A2:B3").borderBottom({ size: 2, color: "green" });
 </script>
 ```
 
@@ -109,7 +109,7 @@ Gets or sets the state of the left border of the cells. If the range includes mo
 The border configuration object. It may contain `size` and `color` keys.
 
 The `color` may be set to any valid [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value).
-The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/docs/Web/CSS/length).
+The `size` should be the border width in pixels (numeric, not string).
 
 #### Returns
 
@@ -127,7 +127,7 @@ The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/
 
     var sheet = spreadsheet.activeSheet();
 
-    sheet.range("A2:B3").borderLeft({ size: "2px", color: "green" });
+    sheet.range("A2:B3").borderLeft({ size: 2, color: "green" });
 </script>
 ```
 
@@ -142,7 +142,7 @@ Gets or sets the state of the right border of the cells. If the range includes m
 The border configuration object. It may contain `size` and `color` keys.
 
 The `color` may be set to any valid [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value).
-The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/docs/Web/CSS/length).
+The `size` should be the border width in pixels (numeric, not string).
 
 #### Returns
 
@@ -160,7 +160,7 @@ The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/
 
     var sheet = spreadsheet.activeSheet();
 
-    sheet.range("A2:B3").borderRight({ size: "2px", color: "green" });
+    sheet.range("A2:B3").borderRight({ size: 2, color: "green" });
 </script>
 ```
 
@@ -175,7 +175,7 @@ Gets or sets the state of the top border of the cells. If the range includes mor
 The border configuration object. It may contain `size` and `color` keys.
 
 The `color` may be set to any valid [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value).
-The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/docs/Web/CSS/length).
+The `size` should be the border width in pixels (numeric, not string).
 
 #### Returns
 
@@ -193,7 +193,7 @@ The `size` accepts any valid [Length value](https://developer.mozilla.org/en-US/
 
     var sheet = spreadsheet.activeSheet();
 
-    sheet.range("A2:B3").borderTop({ size: "2px", color: "green" });
+    sheet.range("A2:B3").borderTop({ size: 2, color: "green" });
 </script>
 ```
 
@@ -563,6 +563,50 @@ The font size (in pixels) that should be set.
 </script>
 ```
 
+### forEachCell
+
+Executes a function for each cell in the range.
+
+#### Parameters
+
+##### callback `Function`
+
+The function that will be executed against every cell. The function receives the following parameters:
+
+- **rowIndex** - the row index of the cell
+- **columnIndex** - the column index of the cell
+- **value** - the cell properties
+
+#### Example
+
+```
+<div id="spreadsheet"></div>
+<script>
+
+    $("#spreadsheet").kendoSpreadsheet({
+        sheets: [
+            { rows: [
+                { cells: [
+                    { value: "A1" }, { value: "B1" }
+                ] },
+                { cells: [
+                    { value: "A2" }, { value: "B2" }
+                ] }
+            ] }
+        ]
+    });
+
+
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var sheet = spreadsheet.activeSheet();
+    var range = sheet.range("A1:B2");
+
+    range.forEachCell(function (row, column, value) {
+        console.log(row, column, value);
+    });
+</script>
+```
+
 ### format
 
 Gets or sets the format of the cells.
@@ -791,6 +835,34 @@ True will make the text of the cells italic; false otherwise.
 </script>
 ```
 
+### link
+
+Gets or sets the hyperlink of the cells in the range.
+
+#### Parameters
+
+##### url `String` *optional*
+
+Pass a string (the URL) to create a hyperlink.  Pass `null` to remove the link.
+Omit argument to get the existing URL, if any.
+
+#### Returns
+
+`String` the current hyperlink attribute of the top-left cell of the range.
+
+#### Example
+
+```
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
+    $("#spreadsheet").kendoSpreadsheet();
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var sheet = spreadsheet.activeSheet();
+    sheet.range("A1").value("Visit telerik.com!");
+    sheet.range("A1").link("http://www.telerik.com/");
+</script>
+```
+
 ### merge
 
 Merges the range cells into a single merged cell. If the range already includes a merged cell, they are merged, too.
@@ -949,6 +1021,8 @@ Un-merges any merged cells which are included in the range.
 
 Sets the values of the range cells. The argument should be an array of arrays which match the dimensions of the range.
 
+> This method clears the formulas on every cell.
+
 #### Parameters
 
 ##### values `Array`
@@ -986,6 +1060,8 @@ Gets or sets the validation of the cells.
 ##### value `Object` *optional*
 
 The validation configuration object. It may contain `type`, `comparerType`, `dataType`, `from`, `to`, `allowNulls`, `messageTemplate` and `titleTemplate` keys.
+
+> Setting a validation, which contains references to a range of two or more cells, leads to the adjustment of the validation formula if a relative reference is used. In such cases, use an absolute reference such as `$A$1`.
 
 The `type` Can be set to "warning" or "reject". By default the type is "warning".
 

@@ -63,6 +63,13 @@ A binding pairs a DOM element (or widget) property to a field or method of the V
 
 The Kendo UI MVVM supports binding to other properties as well: `source`, `html`, `attr`, `visible`, `enabled`, etc. The `data-bind` may contain a comma-separated list of bindings e.g. `data-bind="value: name, visible: isNameVisible"`.
 
+> **Important**
+> * Bindings cannot include hard-coded values, but only references to properties of the `viewModel`. For example, the following is incorrect:
+>
+>           data-bind="visible: false, source: [{ foo: 'bar'}]"
+>
+> * The `data-template` attributes cannot contain inline template definitions, but only ID's of [external templates]({% slug overview_kendoui_templatescomponent %}#inline-vs-external-templates).
+
 For detailed information on each Kendo UI MVVM binding, refer to the [MVVM bindings articles]({% slug attributebinding_mvvm_kendoui %}).
 
 ### Bind to Nested View-Model Fields
@@ -83,6 +90,16 @@ The Kendo UI MVVM also supports data binding to nested View-Model fields, as dem
     </script>
 
 ### Important Notes
+
+#### Set Numeric Options as Strings
+
+Some Kendo UI widgets accept string options, which represent numbers and can be parsed as such.
+
+###### Example
+
+    <input data-role="maskedtextbox" data-mask="09">
+
+The above mask will be parsed as a number and the widget will receive a single 9-digit in its initialization method, instead of a `"09"` string. In such scenarios, the widget options must be [set with custom MVVM binding]({% slug howto_customize_masks_through_mvvmbinding_mvvm_maskedtextbox %}).
 
 #### Bindings Are Not JavaScript Code
 

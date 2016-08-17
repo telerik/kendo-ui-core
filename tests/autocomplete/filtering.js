@@ -9,7 +9,7 @@ module("kendo.ui.AutoComplete filtering", {
 
         $.fn.press = function(key) {
             return this.trigger({ type: "keydown", keyCode: key } );
-        }
+        };
     },
     teardown: function() {
         kendo.destroy(QUnit.fixture);
@@ -53,6 +53,19 @@ asyncTest("popup should close if input is empty", 1, function() {
         start();
     });
     input.val("").press(8/*backspace*/);
+});
+
+test("popup is opened if noDataTemplate is defined", 1, function() {
+    var autocomplete = new AutoComplete(input, {
+        animation: false,
+        dataTextField: "name",
+        dataSource: [{ name: "foo" }, { name: "bar" }],
+        noDataTemplate: "no data"
+    });
+
+    autocomplete.search("fake");
+
+    ok(autocomplete.popup.visible());
 });
 
 test("search method supports case sensitive filtering", function() {
@@ -252,6 +265,26 @@ asyncTest("remove input value clears filter even with minLength option", 2, func
     input.val("").trigger({ type: "keydown", keyCode: kendo.keys.BACKSPACE });
 });
 
+asyncTest("remove input value does not clear filter if minLength and enforceMinLength", 0, function() {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: ["foo", "bar"],
+        minLenght: 2,
+        enforceMinLength: true
+    });
+
+    input.val("ba").press("a".charCodeAt(0));
+
+    autocomplete.dataSource.bind("change", function() {
+        ok(false, "list should not rebind");
+    });
+
+    input.val("").trigger({ type: "keydown", keyCode: kendo.keys.BACKSPACE });
+
+    setTimeout(function() {
+        start();
+    }, 0);
+});
+
 test("select item after filtering", function() {
     var autocomplete = new AutoComplete(input, {
         dataTextField: "text",
@@ -359,4 +392,60 @@ test("AutoComplete keeps value when shared source is modified", function() {
     equal(autocomplete.value(), "foo1");
 });
 
+test("resize popup on search when autoWidth is enabled", function(assert) {
+    var data = [{text: "Foooooooooooooo", value: 1, type: "a"}, {text:"Bar", value:2, type: "b"}, {text:"Baz", value:3, type: "a"}];
+    var autocomplete = new AutoComplete(input, {
+        autoWidth: true,
+        separator: ", ",
+        dataTextField: "ProductName",
+        autoBind: false,
+        minLenght: 3,
+        dataSource: {
+            serverFiltering: false,
+            transport: {
+                read: function(options) {
+                    options.success([
+                        { ProductName: "ChaiiiiiiiiiiiiiiiiiiiiiiiiiiiiiChaiiiiiiiiiiiiiiiiiiiiiiiiiiiii", ProductID: 1 },
+                        { ProductName: "Tofu", ProductID: 2 },
+                        { ProductName: "Test3", ProductID: 3 },
+                        { ProductName: "Chai3", ProductID: 4 },
+                        { ProductName: "Test4", ProductID: 5 }
+                    ]);
+                }
+            }
+        }
+    });
+
+    var done1 = assert.async();
+    var done2 = assert.async();
+    autocomplete.one("open", function() {
+        assert.ok(autocomplete.wrapper.width() < autocomplete.popup.element.width());
+        autocomplete.close();
+        done1();
+        autocomplete.one("open", function() {
+            assert.ok(autocomplete.wrapper.width() >= autocomplete.popup.element.width());
+            done2();
+        });
+        autocomplete.search("Tof");
+    });
+    autocomplete.search("");
+
+});
+
+asyncTest("update popup height when no items are found", 1, function() {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: $.map(new Array(30), function(_, idx) { return "item" + idx.toString() })
+    });
+
+    autocomplete.search("item");
+
+    var oldHeight = autocomplete.list.height();
+
+    autocomplete.one("dataBound", function() {
+        start();
+        ok(autocomplete.list.height() < oldHeight);
+    });
+
+    autocomplete.element.focus().val("test").keydown();
+});
 }());

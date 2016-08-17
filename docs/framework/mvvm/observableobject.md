@@ -186,7 +186,11 @@ The example below demonstrates how to set values of dependent properties.
 
 ### Important Notes on Dependent Methods
 
-#### Dependent Methods Must Use the get Method for Getting Field Values
+#### Nested Calculated Field Setters
+
+Currently, the Kendo UI MVVM does not support the setting of values of dependent properties when the calculated field is nested. In other words, the above example, where the setting of `fullName` will lead to the setting of `firstName` and `lastName`, will only work if `fullName` is defined as a root field of the `viewModel`.
+
+#### Dependent Methods to Use the get Method for Getting Field Values
 
 If the `get` method is not used, the Kendo UI MVVM fails to detect any dependencies of the dependent method. As a result, changing any of the dependencies would not be reflected properly.
 
@@ -196,7 +200,7 @@ If the `get` method is not used, the Kendo UI MVVM fails to detect any dependenc
         firstName: "John",
         lastName: "Doe",
         fullName: function() {
-            return this.firstName + " " + this.lastName;
+            return this.firstName + " " + this.lastName; // this implementation is incorrect, as it does not use get()
         }
     });
 

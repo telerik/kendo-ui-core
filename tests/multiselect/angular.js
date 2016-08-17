@@ -155,6 +155,48 @@
         equal(tags.eq(1).children("span:first").text(), "green - My text");
     });
 
+    ngTest("multiselect compiles item templates", 3, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            $scope.selectedColors = [ "red", "green" ];
+
+            $scope.selectOptions = {
+                dataSource: [ "red", "green", "blue" ],
+                itemTemplate: "{{dataItem}} - {{text}}",
+                valuePrimitive: true
+            };
+
+            $scope.text = "My text";
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-multiselect k-ng-model=selectedColors k-options=selectOptions></select></div>');
+    },
+
+    function() {
+        var items = QUnit.fixture.find("select").getKendoMultiSelect().items();
+        equal($(items[0]).text(), "red - My text");
+        equal($(items[1]).text(), "green - My text");
+        equal($(items[2]).text(), "blue - My text");
+    });
+
+    ngTest("multiselect initializes with a undefined model value", 1, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+
+            $scope.selectOptions = {
+                dataSource: [ "red", "green", "blue" ],
+                itemTemplate: "{{dataItem}} - {{text}}",
+                valuePrimitive: true
+            };
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-multiselect k-ng-model="object.selectedColors" k-options=selectOptions></select></div>');
+    },
+
+    function() {
+        var widget = QUnit.fixture.find("select").getKendoMultiSelect();
+
+        ok(widget);
+    });
+
     //ng-model
 
     ngTest("multiselect with autoBind:false skips binding when value is null", 2, function() {
@@ -173,5 +215,98 @@
 
         equal(widget.listView.bound(), false);
         equal(widget.value(), "");
+    });
+
+    //header&footer
+
+    ngTest("multiselect compiles header template", 1, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            $scope.selectedColors = [ "red", "green" ];
+
+            $scope.selectOptions = {
+                dataSource: [ "red", "green", "blue" ],
+                headerTemplate: "<div>{{text}}<div>",
+                valuePrimitive: true
+            };
+
+            $scope.text = "My text";
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-multi-select k-ng-model=selectedColors k-options=selectOptions></select></div>');
+    },
+
+    function() {
+        var header = QUnit.fixture.find("select").getKendoMultiSelect().header;
+        equal(header.text(), "My text");
+    });
+
+    ngTest("multiselect compiles footer template", 1, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            $scope.selectedColors = [ "red", "green" ];
+
+            $scope.selectOptions = {
+                dataSource: [ "red", "green", "blue" ],
+                footerTemplate: "<div>{{text}}<div>",
+                valuePrimitive: true
+            };
+
+            $scope.text = "My text";
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-multi-select k-ng-model=selectedColors k-options=selectOptions></select></div>');
+    },
+
+    function() {
+        var widget = QUnit.fixture.find("select").getKendoMultiSelect();
+        equal(widget.footer.text(), "My text");
+    });
+
+    ngTest("virtualized multiselect updates model on change", 1, function() {
+        angular.module("kendo.tests").controller("mine", function($scope) {
+            $scope.selectData = [
+                {ModelNo: "100 HP"},
+                {ModelNo: "105 HP"},
+                {ModelNo: "110 HP"},
+                {ModelNo: "115 HP"},
+                {ModelNo: "120 HP"},
+                {ModelNo: "125 HP"}
+            ];
+
+            $scope.dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function (options) {
+                        setTimeout(function() {
+                            options.success($scope.selectData.slice());
+                        });
+                    }
+                },
+                pageSize: 5
+            });
+
+            $scope.selectOptions = {
+                virtual: {
+                    itemHeight: 26,
+                    valueMapper: function(options) { options.success(null); }
+                },
+                height: 150,
+                dataTextField: "ModelNo",
+                dataValueField: "Id",
+                dataSource: $scope.dataSource
+            };
+
+            $scope.selectedModels = [];
+        });
+
+        QUnit.fixture.html('<div ng-controller=mine><select kendo-multi-select k-ng-model=selectedModels k-options=selectOptions></select></div>');
+    },
+
+    function() {
+        var widget = QUnit.fixture.find("select").getKendoMultiSelect();
+        var scope = widget.element.scope();
+
+        widget.open();
+        widget.ul.children(":first").click();
+
+        equal(scope.selectedModels.length, 1);
     });
 })();

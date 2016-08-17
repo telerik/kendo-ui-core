@@ -13,13 +13,15 @@ Under certain conditions, the browser memory usage continuously increases when d
 
 ## Handle Memory Leaks
 
-### Look for Memory Leaks
+### Detect the Leak
 
-Memory leak reports are not unique to Kendo UI directives. The [Angular JS repository](https://github.com/angular/angular.js) features several threads which dig into various aspects of the problem, [Issue #4864](https://github.com/angular/angular.js/issues/4864) being among the most prominent ones. The [post from Igor Minar](https://github.com/angular/angular.js/issues/4864#issuecomment-29394307) offers several insights, which highlight most of the problems our team has stumbled upon too. The takeaways are the following:
+Memory leak reports are not unique to Kendo UI directives. The [Angular JS repository](https://github.com/angular/angular.js) features several threads which dig into various aspects of the problem. [Issue #4864](https://github.com/angular/angular.js/issues/4864) is among the most prominent ones. The [post from Igor Minar](https://github.com/angular/angular.js/issues/4864#issuecomment-29394307) offers several insights, which highlight most of the problems the Kendo UI team stumbled upon too.
 
-- Use new, "clean" Chrome profile for testing, since extensions may cause false leaks. Incognito mode works, too. From our experience, ad blockers represent quite a common cause.
-- Triggering the garbage collect causes many "leaked" detached DOM nodes to be collected. If this is not so, then there is a real problem present.
-- According to Igor, the Chrome browser must be started with `--js-flags="--nocrankshaft --noopt"`. We did not notice any effect of these flags in our test cases, though.
+**Takeaways**
+
+- Use а new, clean Chrome profile for testing, because extensions might cause false leaks. Incognito mode works as well. Note that ad blockers represent quite a common cause.
+- Triggering the garbage collect causes the collection of many leaked, detached DOM nodes. If this is not the case, then a real problem is present.
+- According to Igor, you must start the Chrome browser with `--js-flags="--nocrankshaft --noopt"`. However, the Kendo UI test cases did not show any effect of these flags.
 
 ### Create a Test Case
 
@@ -75,11 +77,15 @@ To verify that your implementation does not differ from the default AngularJS be
 </html>
 ```
 
-Observe how the page performs in the Chrome timeline by recording the sample above:
+Observe the page performance in the Chrome timeline by recording the sample from above.
+
+**Figure 1** Page performance in the Chrome timeline
 
 <img src="leak-ng-repeat.png" width="600" />
 
-The DOM count increases as the routes toggle with each other. This looks like a leak. Perform the same, but force the garbage collect during the recording:
+The DOM count increases as the routes toggle with each other, which seems to be a leak. Perform the same, but force the garbage collect during the recording.
+
+**Figure 1** Forcing garbage collection during recording
 
 <img src="leak-ng-repeat-gc.png" width="600" />
 
@@ -87,7 +93,9 @@ The seemingly retained detached nodes are getting collected by the garbage colle
 
 ### Extend the Test Case
 
-Replace the `repeat` directive above with a Kendo UI Grid:
+Replace the `repeat` directive above with a Kendo UI Grid.
+
+###### Example
 
 ```html
 <!DOCTYPE html>
@@ -146,17 +154,21 @@ Replace the `repeat` directive above with a Kendo UI Grid:
 </html>
 ```
 
-The sample above performs in the same way. Nodes are retained, but collecting the garbage drops the node count back to its original state.
+The example from above performs in the same way. Nodes are retained, but collecting the garbage drops the node count back to its original state.
+
+**Figure 3** Node count dropping back to original state
 
 <img src="leak-kendo-grid-gc.png" width="600" />
 
-Based on this research, you can consider the memory usage of the Kendo UI directives (although not perfect) to be unavoidable given the AngularJS context.
+Based on this research, you can consider that the memory usage of the Kendo UI directives, although not perfect, is unavoidable given the AngularJS context.
 
 > **Important**
 >  
-> Note that the majority of Kendo UI widgets do not exhibit such leaks outside of the AngularJS context.
+> The majority of Kendo UI widgets do not exhibit such leaks outside the AngularJS context.
 
-A fix that works is to clean up before a route change. So, wherever you change to a new route via `$location.path('/my/new/route')`, you execute some extra code to clear out the HTML in the prior view using.
+### Solution
+
+Clean up before a route change. So, wherever you change to a new route through `$location.path('/my/new/route')`, you execute some extra code to clear out the HTML in the prior view using.
 
 ###### Example
 
@@ -165,7 +177,7 @@ A fix that works is to clean up before a route change. So, wherever you change t
 
 ## See Also
 
-Other articles on AngularJS directives and integration with Kendo UI:
+Other articles on AngularJS integration with Kendo UI:
 
 * [AngularJS Integration Overview]({% slug angularjs_integration_directives %})
 * [Global Events]({% slug global_events_angularjs_directives %})

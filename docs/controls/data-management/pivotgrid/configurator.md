@@ -1,6 +1,6 @@
 ---
 title: PivotConfigurator Overview
-page_title: PivotConfigurator Overview | Kendo UI PivotGrid Widget
+page_title: PivotConfigurator Overview | Kendo UI PivotGrid
 description: "Learn how to create and configure the Kendo UI PivotGrid Configurator."
 slug: overview_kendoui_pivotconfigurator_pivotgridwidget
 position: 2
@@ -79,10 +79,12 @@ The example below demonstrates how to access an existing PivotConfigurator insta
 
 ## See Also
 
-Other articles on Kendo UI PivotGrid:
+Other articles on the Kendo UI PivotGrid:
 
 * [Overview]({% slug overview_kendoui_pivotgrid_widget %})
 * [Exporting]({% slug exporting_functionality_pivotgridwidget %})
 * [Fundamentals]({% slug fundamentals_pivotgrid_widget %})
 * [OLAP Cube Setup]({% slug olap_cube_setup_pivotgrid_widget %})
 * [Frequently Asked Questions]({% slug frequently_asked_questions_pivotgrid %})
+
+For how-to examples on the Kendo UI PivotGrid widget, browse its [**How To** documentation folder]({% slug howto_add_dimension_column_axis_pivotgrid %}).

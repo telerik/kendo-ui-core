@@ -1,6 +1,6 @@
 ---
 title: Context Menu
-page_title: Context Menu | Kendo UI Menu Widget
+page_title: Context Menu | Kendo UI Menu
 description: "Learn how to initialize Kendo UI ContextMenu, configure its behaviors and customize animations."
 slug: overview_kendoui_contextmenu_widget
 position: 2
@@ -21,7 +21,7 @@ Kendo UI ContextMenu can be initialized in two ways:
 
 > **Important**  
 >
-> As ContextMenu should be initialized after the DOM is fully loaded, make sure you create it within a `$(document).ready()` statement.
+> Make sure you create the ContextMenu within a `$(document).ready()` statement because the widget has to be initialized after the DOM is fully loaded.
 
 #### Using HTML Markup
 
@@ -78,6 +78,52 @@ The example below demonstrates how to initialize the ContextMenu by using a JSON
         });
     </script>
 
+### HTML Structure and DOM Placement
+
+By default, the ContextMenu is created as a child of the `<body>` element.  
+
+###### Example
+
+```html
+    <body>
+         <div id="target">Target</div>
+         <div id="container1">
+             <ul id="context-menu">
+                 <li>Item 1</li>
+                 <li>Item 2</li>
+             </ul>
+             Container 1
+         </div>
+         <div id="container2">
+             Container 2
+         </div>
+
+         <script>
+            $("#context-menu").kendoContextMenu({
+                target: "#target"
+            });
+        </script>
+      </body>
+```
+
+The following example demonstrates how the page markup from the previous example changes after the initialization of the ContextMenu when the widget is moved to become a child of the `<body>` element and its additional markup&mdash;the wrapper and the title bar&mdash;is generated.
+
+###### Example
+
+      <body>
+        <div id="target"></div>
+        <div id="container1">
+            ...
+        </div>
+        <div id="container2">
+            ...
+        </div>
+        <ul id="context-menu" class="k-widget k-context-menu" data-role="contextmenu">
+                <li>Item 1</li>
+                <li>Item 2</li>
+        </ul>
+      </body>
+
 ## Configuration
 
 ### ContextMenu Animations
@@ -104,7 +150,7 @@ The example below demonstrates how to change ContextMenu animation and open beha
 
 ### Dynamic Items
 
-[The Kendo UI ContextMenu API](/api/javascript/ui/contextmenu) provides methods for dynamically adding or removing Menu items.
+The [API of the ContextMenu](/api/javascript/ui/contextmenu) provides methods for dynamically adding or removing Menu items.
 
 To add items, provide the new item as a JSON object along with a reference item. A reference item is a target ContextMenu item HTML element that already exists in the ContextMenu. The reference item will be used to determine the placement in the hierarchy of the new item. Any valid jQuery selector can be used to obtain a reference to the target item.
 

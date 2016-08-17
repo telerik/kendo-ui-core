@@ -20,6 +20,14 @@
         }
     });
 
+    var getData = function(length) {
+        var result = [];
+        for(var idx=0; idx < length; idx++) {
+            result.push("item" + idx);
+        }
+        return result;
+    };
+
    test("always select first item on dataSource change", function() {
         var dropdownlist = new DropDownList(input, ["foo", "bar"]);
 
@@ -561,7 +569,7 @@
         });
     });
 
-    asyncTest("DropDownList selects focused item on blur after filtering", 1, function() {
+    asyncTest("DropDownList shouldn't select focused item on blur after filtering", 1, function() {
         var dropdownlist = input.kendoDropDownList({
             delay: 0,
             dataTextField: "text",
@@ -580,7 +588,7 @@
             start();
             dropdownlist.filterInput.focusout();
 
-            equal(dropdownlist.value(), "item2");
+            equal(dropdownlist.value(), "item1");
         });
 
         dropdownlist.filterInput.focus().val("item2").keydown();
@@ -855,5 +863,82 @@
 
         kendo.support.mobileOS = false;
         kendo.support.touch = false;
+    });
+
+    asyncTest("DropDownList clears filter on ESC", 2, function() {
+        var dropdownlist = new DropDownList(input, {
+            animation: false,
+            filter: "startswith",
+            delay: 0,
+            dataSource: [
+                { text: "Black", value: "1" },
+                { text: "Orange", value: "2" },
+                { text: "Grey", value: "3" }
+            ],
+            dataTextField: "text",
+            dataValueField: "value",
+            index: 2
+        });
+
+        dropdownlist.open();
+        dropdownlist.filterInput.focus().val("Gre").keydown();
+
+        dropdownlist.one("dataBound", function() {
+            start();
+            dropdownlist.filterInput.press(keys.ESC);
+
+            equal(dropdownlist.dataSource.view().length, 3);
+            equal(dropdownlist.filterInput.val(), "");
+        });
+    });
+
+    test("DropDownList scrolls content down", 2, function() {
+        var dropdownlist = new DropDownList(input, {
+            animation: false,
+            dataSource: getData(100)
+        });
+
+        stub(dropdownlist.listView, {
+            scrollWith: dropdownlist.listView.scrollWith
+        });
+
+        dropdownlist.open();
+        dropdownlist.wrapper.press(keys.PAGEDOWN);
+
+        equal(dropdownlist.listView.calls("scrollWith"), 1);
+        equal(dropdownlist.listView.args("scrollWith")[0], dropdownlist.listView.screenHeight());
+    });
+
+    test("DropDownList scrolls content up", 2, function() {
+        var dropdownlist = new DropDownList(input, {
+            animation: false,
+            dataSource: getData(100)
+        });
+
+        stub(dropdownlist.listView, {
+            scrollWith: dropdownlist.listView.scrollWith
+        });
+
+        dropdownlist.open();
+        dropdownlist.wrapper.press(keys.PAGEUP);
+
+        equal(dropdownlist.listView.calls("scrollWith"), 1);
+        equal(dropdownlist.listView.args("scrollWith")[0], -1 * dropdownlist.listView.screenHeight());
+    });
+
+    test("DropDownList prevents default on PAGEDOWN", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            animation: false,
+            dataSource: getData(100)
+        });
+
+        dropdownlist.open();
+        dropdownlist.wrapper.trigger({
+            type: "keydown",
+            keyCode: keys.PAGEDOWN,
+            preventDefault: function() {
+                ok(true);
+            }
+        });
     });
 })();

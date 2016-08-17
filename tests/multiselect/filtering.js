@@ -2,9 +2,12 @@
     var MultiSelect = kendo.ui.MultiSelect,
         select;
 
-    function popuplateSelect() {
+    function popuplateSelect(length) {
         var options = [];
-        for (var i=0; i < 5; i++) {
+
+        length = length || 5;
+
+        for (var i=0; i < length; i++) {
             options.push("<option value='" + i + "'>Option" + i + "</option>");
         }
 
@@ -128,12 +131,31 @@
 
     test("MultiSelect hides popup if no data", function() {
         popuplateSelect();
-        var multiselect = new MultiSelect(select);
+        var multiselect = new MultiSelect(select, {
+            noDataTemplate: ""
+        });
 
         multiselect.wrapper.click();
         multiselect.search("no such item");
 
         ok(!multiselect.popup.visible());
+    });
+
+    test("keeps popup opened on empty search result if noDataTemplate", 2, function(assert) {
+        var multiselect = new MultiSelect(select, {
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [{text: "Foo", value: 1 }, {text:"Bar", value:2 }, {text:"Baz", value:3}]
+        });
+
+        multiselect.search("Foo");
+
+        ok(multiselect.popup.visible());
+
+        multiselect.search("None");
+
+        ok(multiselect.popup.visible());
     });
 
     test("MultiSelect do not show initial values on rebind", function() {
@@ -179,6 +201,37 @@
         multiselect.search("te");
     });
 
+    test("MultiSelect updates datasource filter state when force rebind", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            autoBind: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            filter: "contains",
+            value: [{ text: "text", value: "value" }],
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        options.success([
+                            { text: "text", value: "1" },
+                            { text: "text2", value: "2" },
+                            { text: "text3", value: "3" },
+                            { text: "text4", value: "4" }
+                        ]);
+                    }
+                },
+                serverFiltering: true
+            }
+        });
+
+        multiselect.dataSource.bind("change", function() {
+            var filter = multiselect.dataSource.filter();
+
+            ok(filter);
+        });
+
+        multiselect.search("te");
+    });
+
     asyncTest("MultiSelect filters on empty input", 1, function() {
         var multiselect = new MultiSelect(select, {
             delay: 0,
@@ -194,6 +247,30 @@
             });
 
             multiselect.input.val("").keydown();
+        });
+
+        multiselect.input.focus().val("baz").keydown();
+    });
+
+    asyncTest("MultiSelect does not trigger filter on empty input if minLength & enforceMinLength", 0, function() {
+        var multiselect = new MultiSelect(select, {
+            delay: 0,
+            minLength: 3,
+            enforceMinLength: true,
+            dataSource: ["foo", "bar"],
+            filter: "contains"
+        });
+
+        multiselect.dataSource.one("change", function() {
+            multiselect.one("filtering", function(e) {
+                ok(false, "should not filter on empty input and enforceMinLength");
+            });
+
+            multiselect.input.val("").keydown();
+
+            setTimeout(function() {
+                start();
+            }, 0);
         });
 
         multiselect.input.focus().val("baz").keydown();
@@ -558,5 +635,50 @@
         });
 
         multiselect.open();
+    });
+    test("resize popup on search when autoWidth is enabled", function(assert) {
+        var data = [{text: "Foooooooooooooooooooooooooooooooo", value: 1, type: "a"}, {text:"Bar", value:2, type: "b"}, {text:"Baz", value:3, type: "a"}];
+        $(select).width(100);
+        var multiselect = new MultiSelect(select, {
+            autoWidth: true,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                data: data
+            }
+        });
+
+        var done1 = assert.async();
+        var done2 = assert.async();
+        multiselect.one("open", function() {
+            assert.ok(multiselect.wrapper.width() < multiselect.popup.element.width());
+            multiselect.popup.close();
+            multiselect.dataSource.filter({field: "text", value: "a", operator: "contains"});
+            done1();
+            multiselect.one("open", function() {
+                assert.ok(multiselect.wrapper.width() >= multiselect.popup.element.width());
+                done2();
+            });
+            multiselect.open();
+        });
+        multiselect.open();
+
+    });
+
+    asyncTest("update popup height when no items are found", 1, function() {
+        popuplateSelect(30);
+
+        var multiselect = new MultiSelect(select);
+
+        multiselect.open();
+
+        var oldHeight = multiselect.list.height();
+
+        multiselect.one("dataBound", function() {
+            start();
+            ok(multiselect.list.height() < oldHeight);
+        });
+
+        multiselect.input.focus().val("test").keydown();
     });
 })();

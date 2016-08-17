@@ -1,6 +1,6 @@
 ---
 title: Set Selections
-page_title: Set Selections | Kendo UI Editor Widget
+page_title: Set Selections | Kendo UI Editor
 description: "Learn how to use the `range` object and set desired selections in the Kendo UI Editor widget."
 slug: set_selections_editor_widget
 position: 4
@@ -10,7 +10,7 @@ position: 4
 
 The Editor widget works with standard [`range` objects](https://developer.mozilla.org/en/docs/Web/API/Range) that provide a polyfill for Internet Explorer versions that do not fully support them.
 
-To set the Editor selection, you need to create a `Range` object that specifies the desired selection, and pass it to the [`selectRange` method](/kendo-ui/api/javascript/ui/editor#methods-selectRange)
+To set the Editor selection, you need to create a `Range` object that specifies the desired selection, and pass it to the [`selectRange` method](/api/javascript/ui/editor#methods-selectRange)
 
 The example below demonstrates how to set the Editor selections.
 
@@ -44,11 +44,14 @@ For more information, see the [in-depth tutorial on `Range` objects on Quirksmod
 
 ## See Also
 
-Other articles on Kendo UI Editor:
+Other articles on the Kendo UI Editor:
 
 * [Overview of the Editor Widget]({% slug overview_kendoui_editor_widget %})
 * [Image Browser]({% slug image_browser_editor_widget %})
 * [Post-Process Content]({% slug post_process_content_editor_widget %})
+* [Pasting]({% slug pasting_editor_widget %})
 * [Prevent Cross-Site Scripting]({% slug prevent_xss_editor_widget %})
 * [Troubleshooting]({% slug troubleshooting_editor_widget %})
 * [Editor JavaScript API Reference](/api/javascript/ui/editor)
+
+For how-to examples on the Kendo UI Editor widget, browse its [**How To** documentation folder]({% slug howto_add_max_length_validation_editor %}).

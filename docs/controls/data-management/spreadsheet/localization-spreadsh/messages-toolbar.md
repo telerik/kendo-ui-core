@@ -1,11 +1,11 @@
 ---
-title: List of <code>toolbar</code> Messages
-page_title: List of toolbar Messages | Kendo UI Spreadsheet Widget
+title: List of toolbar Messages
+page_title: List of toolbar Messages | Kendo UI Spreadsheet
 description: "A list of the toolbar messages used for localization of the Kendo UI Spreadsheet widget via JavaScript."
 slug: localization_toolbar_messages_spreadsheet_widget
 ---
 
-# List of `toolbar` Messages
+# List of toolbar Messages
 
 Below is the list of the messages and their namespaces under the `toolbar` category. These are used to [localize the Kendo UI Spreadsheet widget via JavaScript]({% slug localization_ofmessages_spreadsheet_widget %}).
 
@@ -87,7 +87,7 @@ Below is the list of the messages and their namespaces under the `toolbar` categ
           "validation": "Data validation..."
         });
         }
-        
+
 ## See Also
 
 * [List of `borderpalette` Messages]({% slug localization_borderpalette_messages_spreadsheet_widget %})

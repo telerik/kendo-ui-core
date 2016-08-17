@@ -25,10 +25,11 @@ Host the offline demos on a web server and load them from there.
 ### jQuery Is Unavailable or Undefined
 
 If jQuery is not included, or is included after the Kendo UI JavaScript files, or is included after Kendo UI widget initialization statements, the Kendo UI widgets will not function as expected.
+
 The following JavaScript errors will be thrown (depending on the browser):
 
-* ReferenceError: jQuery is not defined (in Google Chrome and Firefox)
-* 'jQuery' is undefined (in Internet Explorer)
+* `ReferenceError: jQuery is not defined` (in Google Chrome and Firefox)
+* `jQuery is undefined` (in Internet Explorer)
 
 **Solution**
 
@@ -38,7 +39,7 @@ Make sure that jQuery is included only before the Kendo UI JavaScript files and 
 
 ### Widgets Are Unavailable or Undefined
 
-If jQuery is included more than once in the page all existing jQuery plugins (including Kendo UI) will be wiped out. Will also occur if the [required Kendo JavaScript files](/intro/installation/prerequisites) are not included.
+If jQuery is included more than once in the page all existing jQuery plugins (including Kendo UI) will be wiped out. Will also occur if the [required Kendo JavaScript files]({% slug javascript_prerequisites_kendoui_installation %}) are not included.
 
 Depending on the browser, the following JavaScript errors will be thrown:
 
@@ -53,7 +54,7 @@ Depending on the browser, the following JavaScript errors will be thrown:
 
 **Solution**
 
-Make sure jQuery is not included more than once in your page. Remove any duplicate `script` references to jQuery. Include all [required Kendo JavaScript files](/intro/installation/prerequisites).
+Make sure jQuery is not included more than once in your page. Remove any duplicate `script` references to jQuery. Include all [required Kendo JavaScript files]({% slug javascript_prerequisites_kendoui_installation %}).
 
 ### Widgets Cannot Be Initialized in Internet Explorer Compatibility Mode
 
@@ -110,7 +111,7 @@ Some third-party modal popups prevent access to focusable elements, which are re
 There are two ways to avoid this problem:
 
 * Disable the modal popup's modality, so that elements outside it can be focused.
-* Use a [modal](/api/javascript/ui/window#configuration-modal) Kendo UI [Window](/web/window/overview) instead of a third-party popup.
+* Use a [modal](/api/javascript/ui/window#configuration-modal) [Kendo UI Window]({% slug overview_kendoui_window_widget %}) instead of a third-party popup.
 
 ### Widgets Do Not Work Correctly on Touch Devices
 
@@ -128,13 +129,13 @@ Find more details at [https://github.com/telerik/kendo-ui-core/issues/1375](http
 
 ### Scripts or Stylesheets Do Not Load from CDN
 
-For a solution, refer to [Kendo UI CDN Fallback and Troubleshooting](/intro/installation/cdn-service#troubleshooting).
+For a solution, refer to [Kendo UI CDN Fallback and Troubleshooting]({% slug kendoui_cdn_services_installation %}#troubleshooting).
 
 ## Status Codes
 
 ### 404 Status Code Is Thrown for WOFF or TTF Font Files
 
-For a solution, refer to [Serving Icon Fonts](/mobile/icons#serving-icon-fonts).
+For a solution, refer to [Serving Font Files]({% slug hybridiconfonts_hybridkendoui %}#serving-font-files).
 
 ### 404 Status Code Is Thrown for JSON Files on IIS
 
@@ -168,14 +169,18 @@ This issue is usually caused when the page loaded via AJAX contains a script ref
 
 Load a partial HTML fragment that does not contain any unneeded jQuery references, or use an `iframe` to load the complete page.
 
-###### Example - a test issue
+The example below demonstrates a test issue.
+
+###### Example
 
     $("#dialog").kendoWinodow({
         // loads complete page
         content: "/foo"
     });
 
-###### Example - the solution of the issue above
+The example below demonstrates the solution of the test issue above.
+
+###### Example
 
     $("#dialog").kendoWinodow({
         // load complete page...
@@ -200,13 +205,19 @@ Other articles on troubleshooting:
 * [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
 * [Common Issues in Kendo UI Excel Export]({% slug troubleshooting_excel_export_kendoui %})
 * [Common Issues in Kendo UI Charts]({% slug troubleshooting_chart_widget %})
+* [Performance Issues in Kendo UI Widgets for Data Visualization]({% slug tipsandtricks_kendouistyling %})
 * [Common Issues in Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %})
+* [Common Issues in Kendo UI Diagram]({% slug troubleshooting_diagram_widget %})
 * [Common Issues in Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %})
 * [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})
 * [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})
 * [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
 * [Common Issues in Kendo UI Upload]({% slug troubleshooting_upload_widget %})
 * [Common Issues Related to Styling, Appearance, and Rendering]({% slug commonissues_troubleshooting_kendouistyling %})
-* [Common Issues in Telerik UI for ASP.NET MVC](/aspnet-mvc/troubleshooting)
-* [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/grid/troubleshooting)
-* [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension](/aspnet-mvc/helpers/upload/troubleshooting)
+* [Common Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_aspnetmvc %})
+* [Validation Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_validation_aspnetmvc %})
+* [Scaffolding Issues in Telerik UI for ASP.NET MVC]({% slug troubleshooting_scaffolding_aspnetmvc %})
+* [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_gridhelper_aspnetmvc %})
+* [Excel Export with the Grid ASP.NET MVC HtmlHelper Extension]({% slug excelissues_gridhelper_aspnetmvc %})
+* [Common Issues in the Spreadsheet ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_spreadsheethelper_aspnetmvc %})
+* [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension]({% slug troubleshoot_uploadhelper_aspnetmvc %})

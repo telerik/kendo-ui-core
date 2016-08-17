@@ -12,9 +12,11 @@ Represents the Kendo UI AutoComplete widget. Inherits from [Widget](/api/javascr
 
 ## Configuration
 
-### animation `Object`
+### animation `Boolean|Object`
 
 Configures the opening and closing animations of the suggestion popup. Setting the `animation` option to `false` will disable the opening and closing animations. As a result the suggestion popup will open and close instantly.
+
+`animation:true` is not a valid configuration.
 
 #### Example - disable open and close animations
 
@@ -147,6 +149,19 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
     });
     </script>
 
+### clearButton `Boolean` *(default: true)*
+
+Unless this options is set to `false`, a button will appear when hovering the widget. Clicking that button will reset the widget's value and will trigger the change event.
+
+#### Example - disable the clear button
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+        clearButton: false
+    });
+    </script>
+
 ### dataTextField `String` *(default: null)*
 
 The field of the data item used when searching for suggestions.  This is the text that will be displayed in the list of matched results.
@@ -191,6 +206,30 @@ If set to `false` the widget will be disabled and will not allow user input. The
     });
     </script>
 
+### enforceMinLength `Boolean` *(default: false)*
+
+If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](#configuration-minLength).
+
+#### Example - enforce minLength
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+        dataTextField: "ProductName",
+        filter: "contains",
+        minLength: 3,
+        enforceMinLength: false,
+        autoBind: false,
+        dataSource: {
+            type: "odata",
+            serverFiltering: true,
+            transport: {
+                read: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+            }
+        }
+    });
+    </script>
+
 ### filter `String` *(default: "startswith")*
 
 The filtering method used to determine the suggestions for the current value. The default filter is "startswith" -
@@ -225,6 +264,30 @@ The [template](/api/javascript/kendo#methods-template) used to render the fixed 
                 }
             });
         });
+    </script>
+
+### footerTemplate `String|Function`
+
+The [template](/api/javascript/kendo#methods-template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
+
+#### Parameters
+
+##### instance `Object`
+
+The widget instance.
+
+#### Example - specify footerTemplate as a string
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      footerTemplate: 'Total <strong>#: instance.dataSource.total() #</strong> items found'
+    });
     </script>
 
 ### groupTemplate `String|Function`
@@ -303,6 +366,27 @@ The minimum number of characters the user must type before a search is performed
     });
     </script>
 
+### noDataTemplate `String|Function` *(default: "No results found.")*
+
+The [template](/api/javascript/kendo#methods-template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
+The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
+
+> **Important** The popup will open when 'noDataTemplate' is defined
+
+#### Example - specify headerTemplate as a string
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      noDataTemplate: 'No Data!'
+    });
+    </script>
+
 ### placeholder `String` *(default: "")*
 
 The hint displayed by the widget when it is empty. Not set by default.
@@ -348,9 +432,11 @@ refer to [Popup](/api/javascript/ui/popup) documentation.
     });
     </script>
 
-### separator `String` *(default: "")*
+### separator `String|Array` *(default: "")*
 
 The character used to separate multiple values. Empty by default.
+
+> As of Q3 2016 the Autocomplete widget supports multiple separators listed in an array. All separators will be replaced with the first array item, which acts as a default separator.
 
 #### Example - set separator to allow multiple values
 
@@ -358,6 +444,15 @@ The character used to separate multiple values. Empty by default.
     <script>
     $("#autocomplete").kendoAutoComplete({
       separator: ", "
+    });
+    </script>
+
+#### Example - set multiple separators
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      separator: [", ", "; "]
     });
     </script>
 
@@ -434,6 +529,24 @@ The [template](/api/javascript/kendo#methods-template) used to render the sugges
     });
     </script>
 
+### value `String`*(default: "")*
+
+The value of the widget.
+
+#### Example - specify value of the widget
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      value: "Oranges"
+    });
+    </script>
+
 ### valuePrimitive `Boolean`*(default: false)*
 
 Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item text field. If set to false, the View-Model field will be updated with the selected item.
@@ -461,9 +574,11 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
 
 ### virtual `Boolean|Object`*(default: false)*
 
-Enables the virtualization feature of the widget.
+Enables the virtualization feature of the widget. The configuration can be set on an object, which contains two properties - `itemHeight` and `valueMapper`.
 
-#### Example - AutoComplete with virtualized list
+For detailed information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}).
+
+#### Example - AutoComplete with a virtualized list
 
     <input id="orders" style="width: 400px" />
     <script>
@@ -497,7 +612,7 @@ Enables the virtualization feature of the widget.
         });
     </script>
 
-#### Example - AutoComplete widget with declarative virtualization config
+#### Example - AutoComplete widget with a declarative virtualization config
 
     <div class="demo-section k-header">
         <h4>Search for shipping name</h4>
@@ -568,7 +683,7 @@ Enables the virtualization feature of the widget.
 Specifies the height of the virtual item. All items in the virtualized list **must** have the same height.
 If the developer does not specify one, the framework will automatically set `itemHeight` based on the current theme and font size.
 
-#### Example - AutoComplete with virtualized list
+#### Example - AutoComplete with a virtualized list
 
     <input id="orders" style="width: 400px" />
     <script>
@@ -604,11 +719,19 @@ If the developer does not specify one, the framework will automatically set `ite
         });
     </script>
 
+### virtual.mapValueTo `String`*(default: "index")*
+
+The changes introduced with the Kendo UI R3 2016 release enable you to determine if the `valueMapper` must resolve a *value to an `index`* or a *value to a `dataItem`*. This is configured through the `mapValueTo` option that accepts two possible values - `"index"` or `"dataItem"`. By default, the `mapValueTo` is set to `"index"`, which does not affect the current behavior of the virtualization process.
+
+For more information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}#value-mapping).
+
 ### virtual.valueMapper `Function`*(default: null)*
 
 The `valueMapper` function is **mandatory** for the functionality of the virtualized widget.
 The widget calls the `valueMapper` function when the widget receives a value, that is not fetched from the remote server yet.
 The widget will pass the selected value(s) in the `valueMapper` function. In turn, the valueMapper implementation should return the **respective data item(s) index/indices**.
+
+#### Example - AutoComplete with a virtualized list
 
     <input id="orders" style="width: 400px" />
     <script>
@@ -622,6 +745,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
                         $.ajax({
                             url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
                             type: "GET",
+                            dataType: "jsonp",
                             data: convertValues(options.value),
                             success: function (data) {
                                 //the **data** is either index or array of indices.
@@ -1251,6 +1375,10 @@ Fired when an item from the suggestion popup is selected by the user.
 
 #### Event Data
 
+##### e.dataItem `Object`
+
+The data item instance of the selected item.
+
 ##### e.item `jQuery`
 
 The jQuery object which represents the selected item.
@@ -1287,4 +1415,17 @@ The widget instance which fired the event.
     });
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
     autocomplete.bind("select", autocomplete_select);
+    </script>
+
+#### Example - prevent the item selection
+
+    <input id="autocomplete" />
+    <script>
+    $("#autocomplete").kendoAutoComplete({
+      dataSource: [ "Apples", "Oranges" ],
+      select: function(e) {
+        //call preventDefault() to prevent the selection
+        e.preventDefault();
+      }
+    });
     </script>

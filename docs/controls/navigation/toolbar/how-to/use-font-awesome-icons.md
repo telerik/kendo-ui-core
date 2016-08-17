@@ -1,6 +1,6 @@
 ---
 title: Use FontAwesome Icons
-page_title: Use FontAwesome Icons | Kendo UI TabStrip Widget
+page_title: Use FontAwesome Icons | Kendo UI TabStrip
 description: "Learn how to use FontAwesome icons in the Kendo UI ToolBar widget."
 slug: howto_usefontawesomeicons_toolbar
 ---
@@ -36,7 +36,7 @@ The example below demonstrates how to use [FontAwesome icons](http://fortawesome
 
 ## See Also
 
-Other articles on Kendo UI ToolBar:
+Other articles on the Kendo UI ToolBar:
 
 * [ToolBar JavaScript API Reference](/api/javascript/ui/toolbar)
 * [How to Close ToolBar Popup Manually]({% slug howto_closetoolbarpopupmanually_toolbar %})

@@ -365,6 +365,20 @@ $.extend(true, kendo.ui.NumericTextBox.prototype.options,{
 });
 }
 
+/* MediaPlayer messages */
+
+if (kendo.ui.MediaPlayer) {
+kendo.ui.MediaPlayer.prototype.options.messages =
+$.extend(true, kendo.ui.MediaPlayer.prototype.options.messages,{
+  "pause": "Пауза",
+  "play": "Възпроизвеждане",
+  "mute": "Заглушаване на звука",
+  "unmute": "Включване на звука",
+  "quality": "Промяна на качеството",
+  "fullscreen": "Цял екран"
+});
+}
+
 /* Gantt */
 
 if (kendo.ui.Gantt) {
@@ -615,6 +629,28 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
 });
 }
 
+/* TreeList messages */
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.messages =
+$.extend(true, kendo.ui.TreeList.prototype.options.messages,{
+    "noRows": "Няма налични записи.",
+    "loading": "Зареждане...",
+    "requestFailed": "Грешка при заявка",
+    "retry": "Опитай отново",
+    "commands": {
+        "edit": "Редактиране",
+        "update": "Обнови",
+        "canceledit": "Отказ",
+        "create": "Добави",
+        "createchild": "Добави подзапис",
+        "destroy": "Изтриване",
+        "excel": "Експорт към Excel",
+        "pdf": "Експорт към PDF"
+    }
+});
+}
+
 /* Pager messages */
 
 if (kendo.ui.Pager) {
@@ -674,7 +710,8 @@ kendo.ui.FilterMultiCheck.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
   "checkAll": "Избери всички",
   "clear": "Премахни филтър",
-  "filter": "Филтрирай"
+  "filter": "Филтрирай",
+  "search": "Търси"
 });
 }
 
@@ -826,4 +863,51 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "showWorkDay": "Покажи работни часове"
 });
 }
+
+/* Dialog */
+
+if (kendo.ui.Dialog) {
+kendo.ui.Dialog.prototype.options.messages =
+$.extend(true, kendo.ui.Dialog.prototype.options.localization,{
+  "close": "Затвори"
+});
+}
+
+/* Alert */
+
+if (kendo.ui.Alert) {
+kendo.ui.Alert.prototype.options.messages =
+$.extend(true, kendo.ui.Alert.prototype.options.localization,{
+  "okText": "OK"
+});
+}
+
+/* Confirm */
+
+if (kendo.ui.Confirm) {
+kendo.ui.Confirm.prototype.options.messages =
+$.extend(true, kendo.ui.Confirm.prototype.options.localization,{
+  "okText": "OK",
+  "cancel": "Отказ"
+});
+}
+
+/* Prompt */
+
+if (kendo.ui.Prompt) {
+kendo.ui.Prompt.prototype.options.messages =
+$.extend(true, kendo.ui.Prompt.prototype.options.localization,{
+  "okText": "OK",
+  "cancel": "Отказ"
+});
+}
+
+/* kendo.ui.progress method */
+if (kendo.ui.progress) {
+kendo.ui.progress.messages =
+$.extend(true, kendo.ui.progress.messages, {
+    loading: "Зареждане..."
+});
+}
+
 })(window.kendo.jQuery);

@@ -1,0 +1,9 @@
+{
+  "name": "kendo",
+  "license": "LicenseRef-LICENSE",
+  "version": "$KENDO_VERSION",
+  "dependencies": {
+        "jquery": "<3.0.0"
+  },
+  "main": "js/kendo.all.js"
+}

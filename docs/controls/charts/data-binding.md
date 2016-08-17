@@ -8,22 +8,29 @@ position: 3
 
 # Data Binding
 
-## Bind to Inline Data
+## To Inline Data
 
 The Kendo UI Chart data points can be specified as part of the series definitions. The type of the data points depends on the type of the series.
 
-### Categorical Series Inline Data Binding
+### Bind to Arrays of Values
 
-Categorical series, such as [Bar](http://demos.telerik.com/kendo-ui/bar-charts/index), [Line](http://demos.telerik.com/kendo-ui/line-charts/index), [Area](http://demos.telerik.com/kendo-ui/area-charts/index) and other Kendo UI Charts, expect a data point of type `Number`. The category names are populated independently in the category axis.
+This is the simplest and the fastest form of data binding where the values are provided as an array for each series.
+
+A limitation of this approach is that you are not allowed to add metadata to the data points. The array contains only the values which are to be plotted.
+
+#### Categorical Series
+
+Categorical series, such as the [Bar](http://demos.telerik.com/kendo-ui/bar-charts/index), the [Line](http://demos.telerik.com/kendo-ui/line-charts/index), the [Area](http://demos.telerik.com/kendo-ui/area-charts/index) and other Kendo UI Charts, expect a data point of type `Number`. The category names are populated independently in the category axis.
 
 > **Important**
 >
 > All series must contain the same number of points in an order identical to the category one.
 
-The example below demonstrates inline binding of column series.
+The example below demonstrates the inline binding of a column series.
 
 ###### Example
 
+```html
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
@@ -41,13 +48,14 @@ The example below demonstrates inline binding of column series.
         }
     });
     </script>
+```
+#### Scatter Series
 
-### Scatter Series Inline Data Binding
-
-This category of Kendo UI Charts includes the two-dimensional [Scatter](http://demos.telerik.com/kendo-ui/scatter-charts/index) and [Scatter Line](http://demos.telerik.com/kendo-ui/scatter-charts/scatter-line) series. The data point should be an array containing two values&mdash;X and Y, as demonstrated in the example below.
+This category of Kendo UI Charts includes the two-dimensional [Scatter](http://demos.telerik.com/kendo-ui/scatter-charts/index) and [Scatter Line](http://demos.telerik.com/kendo-ui/scatter-charts/scatter-line) series. The data point has to be an array containing two values&mdash;X and Y, as demonstrated in the example below.
 
 ###### Example
 
+```html
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
@@ -58,10 +66,74 @@ This category of Kendo UI Charts includes the two-dimensional [Scatter](http://d
         }]
     });
     </script>
+```
 
-## Bind to Data Source
+### Bind to Arrays of Objects
 
-The [Kendo UI DataSource component](/framework/datasource/overview) can be used to bind a kendo UI Chart to both local and remote data. It supports variety of formats, including JSON, JSONP, XML, and OData.
+A more flexible and still very performant alternative is to provide the series with an array of objects. Configure the fields for each series, because they cannot be inferred as in the case with the simple arrays.
+
+The major benefit of this approach is that you are able to associate metadata with the series points. It is also possible to combine the data for many series in a single object.
+
+#### Categorical Series
+
+In addition to binding to arrays, you are also able to supply objects and specify fields to bind the series to. This allows you to access additional fields, for example in tooltips.
+
+###### Example
+
+```html
+    <div id="chart"></div>
+    <script>
+    var seriesData = [
+        { day: "Mon", sales1: 200, sales2: 210 },
+        { day: "Tue", sales1: 450 },
+        { day: "Wed", sales1: 300, sales2: 200 },
+        { day: "Thu", sales1: 125, sales2: 100 },
+        { day: "Fri", sales1: 100 }
+    ];
+
+    $("#chart").kendoChart({
+        series: [{
+            name: "Series 1",
+            type: "column",
+            data: seriesData,
+            field: "sales1"
+        }, {
+            name: "Series 2",
+            type: "column",
+            data: seriesData,
+            field: "sales2"
+        }],
+        categoryAxis: {
+            categoryField: "day"
+        }
+    });
+    </script>
+```
+
+#### Scatter Series
+
+This category of Kendo UI Charts includes the two-dimensional [Scatter](http://demos.telerik.com/kendo-ui/scatter-charts/index) and [Scatter Line](http://demos.telerik.com/kendo-ui/scatter-charts/scatter-line) series. The data point has to be an array containing two values&mdash;X and Y, as demonstrated in the example below.
+
+###### Example
+
+```html
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+        series: [{
+            name: "Example Series",
+            type: "scatterLine",
+            data:[[0, 0], [1, 1]]
+        }]
+    });
+    </script>
+```
+
+## Bind Series to Data Source
+
+The most powerful form of data binding is to use the [Kendo UI DataSource component](/framework/datasource/overview). It supports binding to both local and remote data in a variety of formats and over different transport protocols. Examples include JSON, XML, JSONP and OData.
+
+The usage of the DataSource abstraction incurs a performance overhead. For more information, refer to the article on [performance tips]({% slug tipsandtricks_kendouistyling %}).
 
 ### Set the Data Source
 
@@ -71,6 +143,7 @@ The example below demonstrates how to set the DataSource configuration.
 
 ###### Example
 
+```html
     <div id="chart"></div>
     <script>
         var seriesData = [
@@ -87,11 +160,13 @@ The example below demonstrates how to set the DataSource configuration.
             }]
         });
     </script>
+```
 
 The example below demonstrates how to set the DataSource instance.
 
 ###### Example
 
+```html
     <div id="chart"></div>
     <script>
         var seriesData = [
@@ -110,6 +185,7 @@ The example below demonstrates how to set the DataSource instance.
             }]
         });
     </script>
+```
 
 ### Bind to Remote Data
 
@@ -153,12 +229,13 @@ The Chart can be bound to grouped data. In this case the categories are created 
 
 > **Important**
 >
-> All series must contain the same number of points. If there is a different number of points in the `series.categoryField` groups must be used instead of `categoryAxis.field`.
+> All series must contain the same number of points. If there is a different number of points in the `series.categoryField`,use groups instead of `categoryAxis.field`.
 
 The example below demonstrates a grouped chart with different number of points in the groups.
 
 ###### Example
 
+```html
     <div id="chart"></div>
     <script>
     var data =  [
@@ -176,7 +253,7 @@ The example below demonstrates a grouped chart with different number of points i
             data: data,
             group: {
                 field: "group"
-            },  
+            },
             sort: {
                 field: "category",
                 dir: "asc"
@@ -189,8 +266,9 @@ The example below demonstrates a grouped chart with different number of points i
         }]
     });
     </script>
+```
 
-### Categorical Series Data Source Binding
+### Bind Categorical Series
 
 #### Value Field
 
@@ -204,6 +282,7 @@ The example below demonstrates data-bound categorical series.
 
 ###### Example
 
+```html
     <div id="chart"></div>
     <script>
     var seriesData = [{
@@ -224,7 +303,7 @@ The example below demonstrates data-bound categorical series.
             name: "Sold",
             field: "sold"
         }, {
-            name: "Producted",
+            name: "Produced",
             field: "produced"
         }],
         categoryAxis: {
@@ -232,6 +311,7 @@ The example below demonstrates data-bound categorical series.
         }
     });
     </script>
+```
 
 #### Category Field
 
@@ -241,6 +321,7 @@ The example below demonstrates how to bind with `categoryField`.
 
 ###### Example
 
+```html
     <div id="chart"></div>
     <script>
     var seriesData = [{
@@ -271,13 +352,15 @@ The example below demonstrates how to bind with `categoryField`.
         }]
     });
     </script>
+```
 
-### Scatter Series Data Spurce Binding
+### Bind Scatter Series
 
 Scatter series are bound to the fields specified as `xField` and `yField`, as demonstrated below.
 
 ###### Example
 
+```html
     <div id="chart"></div>
     <script>
     var xyData = [{
@@ -297,6 +380,7 @@ Scatter series are bound to the fields specified as `xField` and `yField`, as de
         }]
     });
     </script>
+```
 
 
 ## See Also

@@ -1,6 +1,6 @@
 ---
 title: Expand to 100% Height and Auto-Resize
-page_title: Expand to 100% Height and Auto-Resize | Kendo UI TabStrip Widget
+page_title: Expand to 100% Height and Auto-Resize | Kendo UI TabStrip
 description: "Learn how to expand the Kendo UI TabStrip widget to 100% height and make it resize together with the browser window."
 slug: howto_expandto100percentheightautoresize_tabstrip
 ---
@@ -66,9 +66,15 @@ The example below demonstrates how to make the TabStrip widget 100% high and res
       var tabStrip = tabStripElement.data("kendoTabStrip");
 
       var expandContentDivs = function(divs) {
-        divs.height(tabStripElement.innerHeight() - tabStripElement.children(".k-tabstrip-items").outerHeight() - 16);
-          // 16px are substracted to compensate for content div vertical paddings and borders
-          // This amount can be calculated instead of hard-coded, if needed.
+        var visibleDiv = divs.filter(":visible");
+        divs.height(tabStripElement.innerHeight()
+                    - tabStripElement.children(".k-tabstrip-items").outerHeight()
+                    - parseFloat(visibleDiv.css("padding-top"))
+                    - parseFloat(visibleDiv.css("padding-bottom"))
+                    - parseFloat(visibleDiv.css("border-top-width"))
+                    - parseFloat(visibleDiv.css("border-bottom-width"))
+                    - parseFloat(visibleDiv.css("margin-bottom")));
+                    // all of the above padding/margin/border calculations can be replaced by a single hard-coded number for improved performance
       }
 
       resizeAll();
@@ -89,10 +95,11 @@ The example below demonstrates how to make the TabStrip widget 100% high and res
 
 ## See Also
 
-Other articles on Kendo UI TabStrip:
+Other articles on the Kendo UI TabStrip:
 
 * [TabStrip JavaScript API Reference](/api/javascript/ui/tabstrip)
 * [How to Add Close Button to Tabs]({% slug howto_addclosebuttontotabs_tabstrip %})
-* [How to Display Buttons at the Bottom]({% slug howto_displaybuttonsatthebottom_tabstrip %})
 * [How to Initialize the Grid in Kendo UI TabStrip]({% slug initialize_thegrid_tabstrip_widget %})
 * [How to Scroll TabStrip with Keyboard]({% slug howto_scrolltabstripwithkeyboard_tabstrip %})
+
+For more runnable examples on the Kendo UI TabStrip widget, browse its [**How To** documentation folder]({% slug howto_disablecontentscrolling_tabstrip %}).

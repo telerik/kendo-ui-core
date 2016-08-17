@@ -53,7 +53,7 @@ var __meta__ = { // jshint ignore:line
         return text.split(separator)[indexOfWordAtCaret(caretIdx, text, separator)];
     }
 
-    function replaceWordAtCaret(caretIdx, text, word, separator) {
+    function replaceWordAtCaret(caretIdx, text, word, separator, defaultSeparator) {
         var words = text.split(separator);
 
         words.splice(indexOfWordAtCaret(caretIdx, text, separator), 1, word);
@@ -62,7 +62,7 @@ var __meta__ = { // jshint ignore:line
             words.push("");
         }
 
-        return words.join(separator);
+        return words.join(defaultSeparator);
     }
 
     var AutoComplete = List.extend({
@@ -84,6 +84,7 @@ var __meta__ = { // jshint ignore:line
 
             that._wrapper();
             that._loader();
+            that._clearButton();
 
             that._dataSource();
             that._ignoreCase();
@@ -115,6 +116,7 @@ var __meta__ = { // jshint ignore:line
                     "aria-haspopup": true
                 });
 
+            that._clear.on("click" + ns, proxy(that._clearValue, that));
             that._enable();
 
             that._old = that._accessor();
@@ -151,6 +153,7 @@ var __meta__ = { // jshint ignore:line
             fixedGroupTemplate: "#:data#",
             dataTextField: "",
             minLength: 1,
+            enforceMinLength: false,
             delay: 200,
             height: 200,
             filter: "startswith",
@@ -160,7 +163,8 @@ var __meta__ = { // jshint ignore:line
             placeholder: "",
             animation: {},
             virtual: false,
-            value: null
+            value: null,
+            clearButton: true
         },
 
         _dataSource: function() {
@@ -260,6 +264,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             that.element.off(ns);
+            that._clear.off(ns);
             that.wrapper.off(ns);
 
             List.fn.destroy.call(that);
@@ -277,7 +282,7 @@ var __meta__ = { // jshint ignore:line
             var that = this,
             options = that.options,
             ignoreCase = options.ignoreCase,
-            separator = options.separator,
+            separator = that._separator(),
             length;
 
             word = word || that._accessor();
@@ -290,7 +295,7 @@ var __meta__ = { // jshint ignore:line
 
             length = word.length;
 
-            if (!length || length >= options.minLength) {
+            if ((!options.enforceMinLength && !length) || length >= options.minLength) {
                 that._open = true;
 
                 that._mute(function() {
@@ -303,6 +308,8 @@ var __meta__ = { // jshint ignore:line
                     field: options.dataTextField,
                     ignoreCase: ignoreCase
                 });
+
+                that.one("close", $.proxy(that._unifySeparators, that));
             }
         },
 
@@ -312,7 +319,7 @@ var __meta__ = { // jshint ignore:line
                 value = that._accessor(),
                 element = that.element[0],
                 caretIdx = caret(element)[0],
-                separator = that.options.separator,
+                separator = that._separator(),
                 words = value.split(separator),
                 wordIndex = indexOfWordAtCaret(caretIdx, value, separator),
                 selectionEnd = caretIdx,
@@ -382,12 +389,13 @@ var __meta__ = { // jshint ignore:line
         _click: function(e) {
             var item = e.item;
             var element = this.element;
+            var dataItem = this.listView.dataItemByIndex(this.listView.getElementIndex(item));
 
             e.preventDefault();
 
             this._active = true;
 
-            if (this.trigger("select", { item: item })) {
+            if (this.trigger("select", { dataItem: dataItem, item: item })) {
                 this.close();
                 return;
             }
@@ -397,6 +405,8 @@ var __meta__ = { // jshint ignore:line
 
             caret(element, element.val().length);
         },
+
+        _clearText: $.noop,
 
         _resetFocusItem: function() {
             var index = this.options.highlightFirst ? 0 : -1;
@@ -417,7 +427,9 @@ var __meta__ = { // jshint ignore:line
             var isActive = that.element[0] === activeElement();
             var action;
 
-            that._angularItems("compile");
+            that._renderFooter();
+            that._renderNoData();
+            that._toggleNoData(!data.length);
 
             that._resizePopup();
 
@@ -431,7 +443,7 @@ var __meta__ = { // jshint ignore:line
 
             if (that._open) {
                 that._open = false;
-                action = length ? "open" : "close";
+                action = that._allowOpening() ? "open" : "close";
 
                 if (that._typingTimeout && !isActive) {
                     action = "close";
@@ -476,7 +488,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _selectValue: function(dataItem) {
-            var separator = this.options.separator;
+            var separator = this._separator();
             var text = "";
 
             if (dataItem) {
@@ -488,7 +500,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (separator) {
-                text = replaceWordAtCaret(caret(this.element)[0], this._accessor(), text, separator);
+                text = replaceWordAtCaret(caret(this.element)[0], this._accessor(), text, separator, this._defaultSeparator());
             }
 
             this._prev = text;
@@ -496,13 +508,21 @@ var __meta__ = { // jshint ignore:line
             this._placeholder();
         },
 
+        _unifySeparators: function() {
+            this._accessor(this.value().split(this._separator()).join(this._defaultSeparator()));
+            return this;
+        },
+
         _change: function() {
             var that = this;
-            var value = that.value();
+            var value = that._unifySeparators().value();
             var trigger = value !== List.unifyType(that._old, typeof value);
 
             var valueUpdated = trigger && !that._typing;
             var itemSelected = that._oldText !== value;
+
+            that._old = value;
+            that._oldText = value;
 
             if (valueUpdated || itemSelected) {
                 // trigger the DOM change event so any subscriber gets notified
@@ -510,8 +530,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (trigger) {
-                that._old = value;
-
                 that.trigger(CHANGE);
             }
 
@@ -543,8 +561,9 @@ var __meta__ = { // jshint ignore:line
         _keydown: function (e) {
             var that = this;
             var key = e.keyCode;
+            var listView = that.listView;
             var visible = that.popup.visible();
-            var current = this.listView.focus();
+            var current = listView.focus();
 
             that._last = key;
 
@@ -565,7 +584,8 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (visible && current) {
-                    if (that.trigger("select", { item: current })) {
+                    var dataItem = listView.dataItemByIndex(listView.getElementIndex(current));
+                    if (that.trigger("select", { dataItem: dataItem, item: current })) {
                         return;
                     }
 
@@ -578,6 +598,11 @@ var __meta__ = { // jshint ignore:line
                     e.preventDefault();
                 }
                 that.close();
+            } else if (that.popup.visible() && (key === keys.PAGEDOWN || key === keys.PAGEUP)) {
+                e.preventDefault();
+
+                var direction = key === keys.PAGEDOWN ? 1 : -1;
+                listView.scrollWith(direction * listView.screenHeight());
             } else {
                 that._search();
             }
@@ -602,6 +627,7 @@ var __meta__ = { // jshint ignore:line
             that._loading.hide();
             that.element.attr("aria-busy", false);
             that._busy = null;
+            that._showClear();
         },
 
         _showBusy: function () {
@@ -614,6 +640,7 @@ var __meta__ = { // jshint ignore:line
             that._busy = setTimeout(function () {
                 that.element.attr("aria-busy", true);
                 that._loading.show();
+                that._hideClear();
             }, 100);
         },
 
@@ -655,6 +682,26 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _separator: function() {
+            var separator = this.options.separator;
+            if (separator instanceof Array) {
+               return new RegExp(separator.join("|"), 'gi');
+            }
+            return separator;
+        },
+
+        _defaultSeparator: function() {
+            var separator = this.options.separator;
+            if (separator instanceof Array) {
+                return separator[0];
+            }
+            return separator;
+        },
+
+        _inputValue: function() {
+            return this.element.val();
+        },
+
         _search: function () {
             var that = this;
             clearTimeout(that._typingTimeout);
@@ -674,7 +721,17 @@ var __meta__ = { // jshint ignore:line
         },
 
         _loader: function() {
-            this._loading = $('<span class="k-icon k-loading" style="display:none"></span>').insertAfter(this.element);
+            this._loading = $('<span class="k-icon k-i-loading" style="display:none"></span>').insertAfter(this.element);
+        },
+
+        _clearButton: function() {
+            this._clear = $('<span unselectable="on" class="k-icon k-i-close" title="clear"></span>').attr({
+                "role": "button",
+                "tabIndex": -1
+            });
+            if (this.options.clearButton) {
+                this._clear.insertAfter(this.element);
+            }
         },
 
         _toggleHover: function(e) {

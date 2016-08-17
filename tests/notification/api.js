@@ -132,7 +132,7 @@
         notification.show("foo");
 
         var notificationElement = QUnit.fixture.children(".k-notification");
-        
+
         equal(notificationElement.length, 1);
         ok(!notificationElement.data("kendoPopup"));
     });
@@ -163,6 +163,17 @@
         equal($(document.body).find("div.k-widget.k-notification").find("#foo").length, 1);
     });
 
+    test("showText method escapes passed markup content", function() {
+        createNotification();
+
+        notification.showText("<span>Foo</span>");
+
+        contains(
+            $(document.body).find("div.k-widget.k-notification").html(),
+            "&lt;span&gt;Foo&lt;/span&gt;"
+        );
+    });
+
     test("show method renders passed object content", function() {
         createNotification({
             templates: [{
@@ -188,6 +199,21 @@
         ok($(document.body).find("div.k-widget.k-notification").html().indexOf(html) > -1);
     });
 
+    test("showText method escapes passed function content", function() {
+        createNotification();
+
+        var html = '<div id="foo"></div>';
+
+        notification.showText(function(){
+            return html;
+        });
+
+        contains(
+            $(document.body).find("div.k-widget.k-notification").html(),
+            "&lt;div id=\"foo\"&gt;&lt;/div&gt;"
+        );
+    });
+
     test("show method renders passed function object content", function() {
         createNotification({
             templates: [{
@@ -211,7 +237,7 @@
         var notificationPopup = $(".k-notification.k-notification-bar");
 
         equal(notificationPopup.length, 1);
-        equal(notificationPopup.find(".k-i-note").text(), "bar");
+        equal(notificationPopup.find(".k-i-bar").text(), "bar");
     });
 
     test("show method adds notification type CSS class to static element and text to note icon", 2, function() {
@@ -224,7 +250,7 @@
         var notificationElement = $(".k-notification.k-notification-bar");
 
         equal(notificationElement.length, 1);
-        equal(notificationElement.find(".k-i-note").text(), "bar");
+        equal(notificationElement.find(".k-i-bar").text(), "bar");
     });
 
     test("show method adds data-role='alert' to popup notification", function() {
@@ -319,7 +345,7 @@
         createNotification({
             autoHideAfter: 0
         });
-        
+
         notification.show("foo");
         notification.show("bar");
         notification.show("baz");
@@ -334,7 +360,7 @@
             autoHideAfter: 0,
             appendTo: QUnit.fixture
         });
-        
+
         notification.show("foo");
         notification.show("bar");
         notification.show("baz");

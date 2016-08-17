@@ -15,6 +15,8 @@ Represents the Kendo UI TreeView. Inherits from [Widget](/api/javascript/ui/widg
 A collection of visual animations used when items are expanded or collapsed through user interaction.
 Setting this option to **false** will disable all animations.
 
+`animation:true` is not a valid configuration.
+
 #### Example - disable animation of subnodes
 
     <div id="treeview"></div>
@@ -1564,7 +1566,7 @@ The y coordinate of the mouse.
 
 ##### e.statusClass `String`
 
-The status that the drag clue shows.
+The status that the drag clue shows (**add**, **denied**, **insert-top**, **insert-middle** or **insert-bottom**).
 
 ##### e.setStatusClass `Function`
 
@@ -1584,6 +1586,8 @@ Pre-defined status classes are:
         - Indicates an invalid operation. Using this class will automatically
           make the drop operation invalid, so there will be no need to call
           `setValid(false)` in the `drop` event.
+
+> Note that status classes are returned without the `k-` prefix by `e.statusClass`, but this prefix is required when setting a predefined status class via `e.setStatusClass`. A prefix is not required if setting a custom status CSS class.
 
 #### Example - subscribe to the "drag" event during initialization
 

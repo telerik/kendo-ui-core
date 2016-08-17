@@ -267,6 +267,18 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
 });
 }
 
+/* FilterMultiCheck messages */
+
+if (kendo.ui.FilterMultiCheck) {
+kendo.ui.FilterMultiCheck.prototype.options.messages =
+$.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
+  "checkAll": "Alle auswählen",
+  "clear": "Löschen",
+  "filter": "Filtern",
+  "search": "Suchen"
+});
+}
+
 /* Grid messages */
 
 if (kendo.ui.Grid) {
@@ -290,6 +302,28 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "confirmDelete": "Löschen"
   },
   "noRecords": "Keine Aufzeichnungen zur Verfügung."
+});
+}
+
+/* TreeList messages */
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.messages =
+$.extend(true, kendo.ui.TreeList.prototype.options.messages,{
+    "noRows": "Keine Aufzeichnungen zur Verfügung.",
+    "loading": "Lade Daten...",
+    "requestFailed": "Laden fehlgeschlagen",
+    "retry": "Neu laden",
+    "commands": {
+        "edit": "Bearbeiten",
+        "update": "Aktualisieren",
+        "canceledit": "Abbrechen",
+        "create": "Neuen Datensatz hinzufügen",
+        "createchild": "Neue abhängige Daten",
+        "destroy": "Löschen",
+        "excel": "Export nach Excel",
+        "pdf": "Export als PDF"
+    }
 });
 }
 
@@ -453,4 +487,42 @@ $.extend(true, kendo.ui.Validator.prototype.options.messages,{
   "date": "{0} ist kein gültiges Datum"
 });
 }
+
+/* Dialog */
+
+if (kendo.ui.Dialog) {
+kendo.ui.Dialog.prototype.options.messages =
+$.extend(true, kendo.ui.Dialog.prototype.options.localization, {
+  "close": "Schließen"
+});
+}
+
+/* Alert */
+
+if (kendo.ui.Alert) {
+kendo.ui.Alert.prototype.options.messages =
+$.extend(true, kendo.ui.Alert.prototype.options.localization, {
+  "okText": "OK"
+});
+}
+
+/* Confirm */
+
+if (kendo.ui.Confirm) {
+kendo.ui.Confirm.prototype.options.messages =
+$.extend(true, kendo.ui.Confirm.prototype.options.localization, {
+  "okText": "OK",
+  "cancel": "Abbrechen"
+});
+}
+
+/* Prompt */
+if (kendo.ui.Prompt) {
+kendo.ui.Prompt.prototype.options.messages =
+$.extend(true, kendo.ui.Prompt.prototype.options.localization, {
+  "okText": "OK",
+  "cancel": "Abbrechen"
+});
+}
+
 })(window.kendo.jQuery);

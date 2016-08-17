@@ -1,38 +1,51 @@
 ---
-title: Modes
-page_title: How to configure the upload mode of the Kendo UI Upload widget
-description: Learn how to use the synchronous and asynchronous modes of Kendo UI Upload for PHP, handle save and remove requests.
+title: Modes of Operation
+page_title: Modes of Operation | Upload PHP Class
+description: "Use the synchronous and asynchronous operational modes of the Upload PHP class in Kendo UI."
+slug: modesofoperation_upload_uiforphp
+position: 2
 ---
 
-# Upload
+# Modes of Operation
 
-The Upload supports two modes of operation - synchronous and asynchronous.
+The Kendo UI Upload supports two modes of operation&mdash;synchronous and asynchronous. This article explains how to use these modes with the Spring MVC framework.
 
-This help topic explains how to use these modes with PHP.
-Please review the main [Upload Modes](/web/upload/modes) help topic for general information.
+For general information, refer to the article on the [widget's modes of operation]({% slug modes_upload_widget %}).
 
-## Synchronous mode
+## Synchronous Mode
 
-In this mode the upload is executed as part of the form submit (synchronously). No dedicated action methods are required.
+In the synchronous mode, the Upload is executed as part of the form submit (synchronously). No dedicated action methods are required.
 
-1. Add a form declaration and set a controller action.
+### Configuration
+
+Below are listed the steps for you to follow when configuring the synchronous mode of operation for the Kendo UI Upload.
+
+**Step 1** Add a `form` declaration and set a `controller` action.
+
+###### Example
 
         <form method="post" action="form-action.php">
         </form>
 
-2. Add the Upload inside the form. The only required setting is a Name.
+**Step 2** Add the Upload inside the form. The only required setting is a `Name`.
+
+###### Example
 
         <?php
         $upload = new \Kendo\UI\Upload('upload');
         echo $upload->render();
         ?>
 
-3. Add a submit and reset buttons to the form.
+**Step 3** Add a submit and reset buttons to the form.
+
+###### Example
 
         <input type="submit" value="Send" class="t-button" />
         <input type="reset" value="Reset" class="t-button" />
 
-4. The form should look like this:
+**Step 4** The form should look like this.
+
+###### Example
 
         <form method="post" action="<c:url value='/web/upload/' />">
             <?php
@@ -43,7 +56,9 @@ In this mode the upload is executed as part of the form submit (synchronously). 
             <input type="reset" value="Reset" class="t-button" />
         </form>
 
-5. Process the files in "form-action.php". This requires no special server handling compared to a regular input.
+**Step 5** Process the files in `form-action.php`. This requires no special server handling compared to a regular input.
+
+###### Example
 
         <?php
         // Check if any files are uploaded
@@ -59,13 +74,18 @@ In this mode the upload is executed as part of the form submit (synchronously). 
                 }
         ?>
 
-## Asynchronous mode
+<!--_-->
+## Asynchronous Mode
 
 In this mode the files are uploaded to a handler without interrupting the user interaction with the page.
 
-### Save handler
+### Save Handlers
 
-1.  Add the upload to the page:
+Below are listed the steps for you to follow when configuring the saving of the handler in the asynchronous mode of operation of the Kendo UI Upload.
+
+**Step 1** Add the Upload to the page.
+
+###### Example
 
         <?php
         $upload = new \Kendo\UI\Upload('files[]');
@@ -74,11 +94,11 @@ In this mode the files are uploaded to a handler without interrupting the user i
         ));
         ?>
 
-The name attribute is required and must be unique. It will be used as a form field name in the requests to the server.
+The `name` attribute is required and must be unique. It will be used as a `form` field name in the requests to the server. Each request may contain multiple files hence the array-like syntax.
 
-Each request may contain multiple files hence the array-like syntax.
+**Step 2** Implement the Save handler (`save.php`).
 
-2. Implement the Save handler (save.php):
+###### Example
 
         <?php
         $files = $_FILES['files'];
@@ -91,11 +111,16 @@ Each request may contain multiple files hence the array-like syntax.
         }
         ?>
 
-### Remove handler
+<!--_-->
+### Remove Handlers
 
-Users can remove files even after they've been uploaded asynchronously. To enable this feature you need a Remove action.
+Users can remove files after they are uploaded asynchronously. To enable this feature, a `Remove` action is needed.
 
-1. Specify a Remove action
+Below are listed the steps for you to follow when configuring the removing of the handler in the asynchronous mode of operation of the Kendo UI Upload.
+
+**Step 1** Specify a `Remove` action.
+
+###### Example
 
         <?php
         $upload = new \Kendo\UI\Upload('files[]');
@@ -106,7 +131,9 @@ Users can remove files even after they've been uploaded asynchronously. To enabl
         ));
         ?>
 
-2. Implement the Remove handler (remove.php):
+**Step 2** Implement the Remove handler (`remove.php`).
+
+###### Example
 
         $fileNames = $_POST['fileNames'];
         // Delete uploaded files
@@ -114,11 +141,16 @@ Users can remove files even after they've been uploaded asynchronously. To enabl
             unlink('./' . $fileNames[$index]);
         }
 
-> The Remove action can be used as an attack vector if implemented poorly. Always sanitize the file names and verify that the user has the appropriate permissions before actually deleting any files.
+<!--_-->
+> **Important**
+>
+> The `Remove` action can be used as an attack vector if implemented poorly. Always sanitize the file names and verify that the user has the appropriate permissions before actually deleting any files.
 
-### Disabling automatic upload
+### Disable Automatic Uploads
 
-The selected files will be uploaded immediately by default. You can change this behavior by setting autoUpload to false.
+The selected files are uploaded immediately by default. You can change this behavior by setting `AutoUpload` to `false`.
+
+###### Example
 
         <?php
         $upload = new \Kendo\UI\Upload('files[]');
@@ -130,3 +162,11 @@ The selected files will be uploaded immediately by default. You can change this 
         ));
         ?>
 
+## See Also
+
+Other articles on Telerik UI for PHP and on the Upload:
+
+* [Overview of the Upload PHP Class]({% slug overview_upload_uiforphp %})
+* [Overview of the Kendo UI Upload Widget]({% slug overview_kendoui_upload_widget %})
+* [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)
+* [Telerik UI for PHP Classes Folder]({% slug overview_autocomplete_uiforphp %})

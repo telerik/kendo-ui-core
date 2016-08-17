@@ -45,6 +45,10 @@ test("do not apply thousand separator if no enough digits", function() {
     equal(toString(10, "$ ##,##"), "$ 10"); //use globalization thousand separator count
 });
 
+test("apply thousand separator to a longer than format number", function() {
+    equal(toString(1000000.1, "$ #,###"), "$ 1,000,000"); //use globalization thousand separator count
+});
+
 test("replace number in decimal part", function() {
     equal(toString(10.1, "####.#"), "10.1");
 });
@@ -67,6 +71,10 @@ test("integer if no 0 in decimal part of the toString", function() {
 
 test("negative integer if no 0 in decimal part of the toString", function() {
     equal(toString(-10, "####.#"), "-10");
+});
+
+test("negative integer with thousands and custom format", function() {
+    equal(toString(-18000, "#,##0"), "-18,000");
 });
 
 test("decimal if 0 in the decimal part of toString", function() {
@@ -418,6 +426,12 @@ test("toString formats correctly big integer", function() {
 
 test("toString rounds 17.115 correcly", function() {
     equal(toString(17.115, "#.##"), "17.12");
+});
+
+test("toString rounds really big numbers without crashing", function() {
+    var bigNumber = 5.4654647884512e+96;
+
+    equal(toString(bigNumber, "#,#.00"), bigNumber);
 });
 
 }());

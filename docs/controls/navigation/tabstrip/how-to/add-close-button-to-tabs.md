@@ -1,6 +1,6 @@
 ---
 title: Add Close Button to Tabs
-page_title: Add Close Button to Tabs | Kendo UI TabStrip Widget
+page_title: Add Close Button to Tabs | Kendo UI TabStrip
 description: Learn how to add close buttons in the Kendo UI TabStrip tabs.
 slug: howto_addclosebuttontotabs_tabstrip
 ---
@@ -80,10 +80,11 @@ The milestones of the approach are:
 
 ## See Also
 
-Other articles on Kendo UI TabStrip:
+Other articles on the Kendo UI TabStrip:
 
 * [TabStrip JavaScript API Reference](/api/javascript/ui/tabstrip)
 * [How to Display Buttons at the Bottom]({% slug howto_displaybuttonsatthebottom_tabstrip %})
-* [How to Expand to 100% Height and Auto-Resize]({% slug howto_expandto100percentheightautoresize_tabstrip %})
 * [How to Initialize the Grid in Kendo UI TabStrip]({% slug initialize_thegrid_tabstrip_widget %})
 * [How to Scroll TabStrip with Keyboard]({% slug howto_scrolltabstripwithkeyboard_tabstrip %})
+
+For more runnable examples on the Kendo UI TabStrip widget, browse its [**How To** documentation folder]({% slug howto_disablecontentscrolling_tabstrip %}).

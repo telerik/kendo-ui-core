@@ -1008,7 +1008,7 @@ var __meta__ = { // jshint ignore:line
                 statusIcon = element.find(".k-panelbar-collapse, .k-panelbar-expand"),
                 link = element.find(LINKSELECTOR),
                 loadingIconTimeout = setTimeout(function () {
-                    statusIcon.addClass("k-loading");
+                    statusIcon.addClass("k-i-loading");
                 }, 100),
                 data = {},
                 url = link.attr(HREF);
@@ -1021,7 +1021,7 @@ var __meta__ = { // jshint ignore:line
                 data: data,
 
                 error: function (xhr, status) {
-                    statusIcon.removeClass("k-loading");
+                    statusIcon.removeClass("k-i-loading");
                     if (that.trigger(ERROR, { xhr: xhr, status: status })) {
                         this.complete();
                     }
@@ -1029,7 +1029,7 @@ var __meta__ = { // jshint ignore:line
 
                 complete: function () {
                     clearTimeout(loadingIconTimeout);
-                    statusIcon.removeClass("k-loading");
+                    statusIcon.removeClass("k-i-loading");
                 },
 
                 success: function (data) {

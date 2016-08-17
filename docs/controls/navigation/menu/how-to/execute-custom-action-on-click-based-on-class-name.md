@@ -1,6 +1,6 @@
 ---
 title: Execute Custom Click Actions Based on Class Name
-page_title: Execute Custom Click Actions Based on Class Name | Kendo UI Menu Widget
+page_title: Execute Custom Click Actions Based on Class Name | Kendo UI Menu
 description: "Learn how to execute a custom click action depending on the class name of the clicked item in the Kendo UI Menu widget."
 slug: howto_execute_custom_click_actions_basedon_classnames_menu
 ---
@@ -97,8 +97,10 @@ The example below demonstrates how to execute a custom click action based on the
 
 ## See Also
 
-Other articles on Kendo UI Menu:
+Other articles on the Kendo UI Menu:
 
 * [Menu JavaScript API Reference](/api/javascript/ui/menu)
 * [How to Create Split Button]({% slug howto_createa_split_button_menu %})
 * [How to Use FontAwesome Icons]({% slug howto_use_fontawesome_icons_menu %})
+
+For more runnable examples on the Kendo UI Menu, browse the [**How To** documentation folder]({% slug howto_showcontextmenuintreelist_menu %}).

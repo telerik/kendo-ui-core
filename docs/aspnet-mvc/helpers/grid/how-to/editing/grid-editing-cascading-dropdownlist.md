@@ -1,11 +1,19 @@
 ---
-title: Grid editing with cascading dropdownlists
-page_title: Grid editing with cascading dropdownlists
-description: Grid editing with cascading dropdownlists
+title: Handle Cascading DropDownLists within the Grid
+page_title: Handle Cascading DropDownLists within the Grid | Kendo UI Grid HtmlHelper
+description: "Configure the Grid to handle cascading DropDownLists when using the Popup or Inline editing modes."
+slug: howto_handleeditingcascadingddls_gridaspnetmvc
 ---
 
-# Grid editing with cascading dropdownlists
+# Handle Cascading DropDownLists within the Grid
 
-The example below demonstrates how to configure the Grid to handle cascading dropdownlists within the Grid when using Popup or Inline editing modes.
+To see the example on how to configure the Kendo UI Grid to handle its cascading DropDownLists when using the popup or inline editing modes, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-editing-cascading-dropdownlist).
 
-[Ajax editing with Enumeration](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-editing-cascading-dropdownlist)
+## See Also
+
+* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
+* [GridBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
+* [Overview of the DropDownList HtmlHelper]({% slug overview_dropdownlisthelper_aspnetmvc %})
+* [DropDownListBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/DropDownListBuilder)
+
+For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_bindgridtodatatable_gridaspnetmvc %}).

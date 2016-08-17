@@ -1,18 +1,26 @@
 ---
 title: Overview
+page_title: Overview | TabStrip JSP Tag
+description: "Get started with the TabStrip JSP tag in Kendo UI."
+slug: overview_tabstrip_uiforjsp
+position: 1
 ---
 
-# TabStrip
+# TabStrip JSP Tag Overview
 
-The TabStrip JSP tag is a server-side wrapper for the [Kendo UI TabStrip](/api/web/tabstrip) widget.
+The TabStrip JSP tag is a server-side wrapper for the [Kendo UI TabStrip](/api/javascript/ui/tabstrip) widget.
 
 ## Getting Started
 
-Here is how to configure a simple Kendo TabStrip:
+### Configuration
 
-1.  Make sure you have followed all the steps from the [Introduction](/jsp/introduction) help topic.
+Below are listed the steps for you to follow when configuring the Kendo UI TabStrip.
 
-2.  Create a new action method which renders the view:
+**Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for JSP]({% slug overview_uiforjsp %}).
+
+**Step 2** Create a new action method to render the view.
+
+###### Example
 
         @RequestMapping(value = "index", method = RequestMethod.GET)
         public String index() {
@@ -20,11 +28,15 @@ Here is how to configure a simple Kendo TabStrip:
             return "web/tabstrip/index";
         }
 
-3. Add kendo taglib mapping to the page
+**Step 3** Add the Kendo UI `taglib` mapping to the page.
+
+###### Example
 
         <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 
-4.  Add a tabstrip tag:
+**Step 4** Add a `tabstrip` tag.
+
+###### Example
 
         <kendo:tabStrip name="tabstrip">
             <kendo:tabStrip-items>
@@ -49,12 +61,34 @@ Here is how to configure a simple Kendo TabStrip:
             </kendo:tabStrip-items>
         </kendo:tabStrip>
 
-## Accessing an Existing TabStrip
+## Event Handling
 
-You can reference an existing TabStrip instance via [jQuery.data()](http://api.jquery.com/jQuery.data/).
-Once a reference has been established, you can use the [API](/api/web/tabstrip#methods) to control its behavior.
+### Subscribe to Events
 
-### Accessing an existing TabStrip instance
+You can subscribe to all [events exposed by Kendo UI TabStrip](/api/javascript/ui/tabstrip#events) by the handler name.
+
+###### Example
+
+    <kendo:tabStrip name="tabstrip" select="tabstrip_select">
+        <kendo:tabStrip-items>
+            <kendo:tabStrip-item text="Paris" selected="true"></kendo:tabStrip-item>
+            <kendo:tabStrip-item text="New York"></kendo:tabStrip-item>
+        </kendo:tabStrip-items>
+    </kendo:tabStrip>
+
+    <script>
+        function tabstrip_select() {
+            //Handle the select event
+        }
+    </script>
+
+## Reference
+
+### Existing Instances
+
+You are able to reference an existing TabStrip instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [TabStrip API](/api/javascript/ui/tabstrip#methods) to control its behavior.
+
+###### Example
 
     //Put this after your Kendo TabStrip tag declaration
     <script>
@@ -64,22 +98,10 @@ Once a reference has been established, you can use the [API](/api/web/tabstrip#m
     });
     </script>
 
-## Handling Kendo UI TabStrip events
+## See Also
 
-You can subscribe to all [events](/api/web/tabstrip#events) exposed by Kendo UI TabStrip:
+Other articles on Telerik UI for JSP and on the TabStrip:
 
-### Subscribe by handler name
-
-    <kendo:tabStrip name="tabstrip" select="tabstrip_select">
-        <kendo:tabStrip-items>
-            <kendo:tabStrip-item text="Paris" selected="true"></kendo:tabStrip-item>
-            <kendo:tabStrip-item text="New York"></kendo:tabStrip-item>
-        </kendo:tabStrip-items>
-    </kendo:tabStrip>
-
-
-    <script>
-        function tabstrip_select() {
-            //Handle the select event
-        }
-    </script>
+* [Overview of the Kendo UI TabStrip Widget]({% slug overview_kendoui_tabstrip_widget %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

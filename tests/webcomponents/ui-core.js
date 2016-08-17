@@ -1,5 +1,5 @@
 (function() {
-    return;
+    return; //Tests are disabled due to incopatilibity between Angular and Web Components
     var coreWidgets = [
         "AutoComplete",
         "Button",
@@ -40,6 +40,7 @@
         },
         teardown: function() {
             kendo.destroy(dom);
+            window.onInit = undefined;
             dom.remove();
         }
     });
@@ -67,4 +68,15 @@
         var element = $("<kendo-splitter><div></div></kendo-splitter>").appendTo(dom)[0];
         equal(element._panes().length, 1);
     });
+
+    test("init event is triggered on HTMLElement.prototype.attachedCallback for core widgets", function(assert) {
+        assert.expect(coreWidgets.length);
+        window.onInit = function() {
+            assert.ok(true);
+        };
+        coreWidgets.forEach(function(name) {
+            var element = $("<kendo-"+ name.toLowerCase() +" on-init='onInit'/>").appendTo(dom)[0];
+        });
+    });
+
 })();

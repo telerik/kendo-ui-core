@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Barcode Widget
+page_title: Overview | Kendo UI Barcode
 description: "Learn how to create and set a Kendo UI Barcode widget."
 slug: overview_kendoui_barcode_widget
 position: 1
@@ -55,10 +55,10 @@ To fine-tune the color, background, padding margin of the text and to find more 
 
 ## See Also
 
-Other articles on Kendo UI Barcode:
+Other articles on the Kendo UI Barcode:
 
 * [Encodings]({% slug encodings_kendoui_barcode_widget %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Barcode Widget](/aspnet-mvc/helpers/barcode/overview)
-* [Overview of the Barcode JSP Tag](/jsp/tags/barcode/overview)
+* [Overview of the Barcode JSP Tag]({% slug overview_barcode_uiforjsp %})
 * [Overview of the Barcode PHP Class](/php/widgets/barcode/overview)
 * [Barcode JavaScript API Reference](/api/javascript/dataviz/ui/barcode)

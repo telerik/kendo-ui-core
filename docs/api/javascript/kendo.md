@@ -9,6 +9,21 @@ previous_url: /api/introduction
 
 ## Methods
 
+### alert
+Opens a [Kendo UI Alert](/api/javascript/ui/alert) popup. Similar to the native [window.alert()](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) method.
+
+#### Example - Open a Kendo UI Alert on the page
+
+    <script>
+        kendo.alert("This is an alert popup!");
+    </script>
+
+#### Parameters
+
+##### text `String`
+
+The text to be shown in the Alert popup.
+
 ### antiForgeryTokens
 Returns an object that contains common
 [CSRF tokens](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)_Prevention_Cheat_Sheet)
@@ -169,10 +184,39 @@ Creates an ObservableArray instance that is bound to a HierarchicalDataSource. R
 
 The array that will be converted to an ObservableArray.
 
+### confirm
+Opens a [Kendo UI Confirm](/api/javascript/ui/confirm) popup. Similar to the native [window.confirm()](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) method.
+
+`kendo.confirm` method is designed by following the Promise pattern. That means that it returns you a jQuery Deferred object that resolves to:
+
+* `done()` - when user has pressed the "OK" button;
+* `fail()` - when user has pressed the "Cancel" button.
+
+#### Example - Open a Kendo UI Confirm on the page
+
+    <script>
+        kendo.confirm("Confirm text")
+            .done(function(){
+                console.log("User accepted");
+            })
+            .fail(function(){
+                console.log("User rejected");
+            });
+    </script>
+
+#### Parameters
+
+##### text `String`
+
+The text to be shown in the Confirm popup.
+
 ### culture
+
 Sets or gets the current culture. Uses the passed culture name to select a culture from the culture scripts that you have included and then sets the current culture.
 If there is no corresponding culture then the method will try to find culture which is equal to the country part of the culture name.
 If no culture is found the default one is used.
+
+> The culture must be set before any Kendo UI widgets that rely on it, are initialized.
 
 #### Example -  include a culture-specific JavaScript file and set the culture
     <script src="http://kendo.cdn.telerik.com/2013.2.716/js/cultures/kendo.culture.en-GB.min.js"></script>
@@ -273,7 +317,9 @@ The string which should be parsed as `Date`.
 
 ##### formats `String|Array` *(optional)*
 
-The format(s) that will be used to parse the date. By default all [standard date formats](/framework/globalization/dateformatting) of the current culture are used.
+The format(s) that will be used to parse the date. If you do not explicitly state a date parsing format, the [standard date formats](/framework/globalization/dateformatting#standard) of the current culture will apply.
+
+For more information on the custom date parsing formats, refer to [this article](/framework/globalization/dateformatting#custom).
 
 ##### culture `String` *(optional)*
 
@@ -369,6 +415,38 @@ If you pass `true` then this function will return `undefined` rather than throwi
 #### Returns
 
 `kendo.Color` A Color object.
+
+### prompt
+Opens a [Kendo UI Prompt](/api/javascript/ui/prompt) popup. Similar to the native [window.prompt()](https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt) method.
+
+`kendo.prompt` method is designed by following the Promise pattern. That means that it returns you a jQuery Deferred object that resolves to:
+
+* `done()` - when user has pressed the "OK" button and the `data` passed to the callback is the inputted text;
+* `fail()` - when user has pressed the "Cancel" button and the `data` passed to the callback is the inputted text.
+
+#### Example - Open a Kendo UI Prompt on the page
+
+    <script>
+        kendo.prompt("Prompt text", "Default input text")
+            .done(function(data){
+                console.log("User accepted with text: " + data);
+            })
+            .fail(function(data){
+                console.log("User rejected with text: " + data);
+            });
+    </script>
+
+#### Parameters
+
+##### text `String`
+
+The text to be shown in the Prompt popup.
+
+#### Parameters
+
+##### defaultValue `String`
+
+The default value that will be shown in the popup's input.
 
 ### proxyModelSetters
 
@@ -1327,4 +1405,3 @@ The AM/PM designator.
     <script>
     console.log(kendo.toString(new Date(2013, 5, 6, 13, 0), "HH tt")); // outputs "13 PM"
     </script>
-

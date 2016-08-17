@@ -10,9 +10,11 @@ Represents the Kendo UI DateTimePicker widget. Inherits from [Widget](/api/javas
 
 ## Configuration
 
-### animation `Object`
+### animation `Boolean|Object`
 
 Configures the opening and closing animations of the popups. Setting the `animation` option to `false` will disable the opening and closing animations. As a result the popup will open and close instantly.
+
+`animation:true` is not a valid configuration.
 
 #### Example - disable open and close animations
 
@@ -174,7 +176,7 @@ All dates, which match the date portion of the selected date will be used to re-
 
         return false;
       }
-      
+
     </script>
 
 ### depth `String`
@@ -270,7 +272,7 @@ note that a check for an empty `date` is needed, as the widget can work with a n
     });
     </script>
 
-### format `String`*(default: "MM/dd/yyyy h:mm tt")*
+### format `String`*(default: "M/d/yyyy h:mm tt")*
 
  Specifies the format, which is used to format the value of the DateTimePicker displayed in the input. The format also will be used to parse the input.
 

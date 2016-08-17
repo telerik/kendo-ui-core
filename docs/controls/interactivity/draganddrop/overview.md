@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Drag and Drop Functionality
+page_title: Overview | Kendo UI Drag and Drop
 description: "Learn more about the draggable functionality on DOM elements and how to enable and initialize it."
 slug: overview_kendoui_draganddrop_intercativityandux
 position: 1

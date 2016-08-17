@@ -9,9 +9,11 @@ Represents the Kendo UI MultiSelect widget. Inherits from [Widget](/api/javascri
 
 ## Configuration
 
-### animation `Object`
+### animation `Boolean|Object`
 
 Configures the opening and closing animations of the suggestion popup. Setting the `animation` option to `false` will disable the opening and closing animations. As a result the suggestion popup will open and close instantly.
+
+`animation:true` is not a valid configuration.
 
 #### Example - disable open and close animations
 
@@ -138,6 +140,22 @@ Controls whether to close the widget suggestion list on item selection.
     });
     </script>
 
+### clearButton `Boolean` *(default: true)*
+
+Unless this options is set to `false`, a button will appear when hovering the widget. Clicking that button will reset the widget's value and will trigger the change event.
+
+#### Example - disable the clear button
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+        clearButton: false
+    });
+    </script>
+
 ### dataSource `Object|Array|kendo.data.DataSource`
 
 The data source of the widget which is used to display a list of values. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
@@ -191,7 +209,7 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
 
 The field of the data item that provides the text content of the list items. The widget will filter the data source based on this field.
 
-> **Important** When `dataTextField` is defined, the`dataValueField` option also should be set.
+> **Important** When `dataTextField` is defined, the `dataValueField` option also should be set.
 
 #### Example - set the dataTextField
 
@@ -214,7 +232,7 @@ The field of the data item that provides the text content of the list items. The
 
 The field of the data item that provides the value of the widget.
 
-> **Important** When `dataValueField` is defined, the`dataTextField` option also should be set.
+> **Important** When `dataValueField` is defined, the `dataTextField` option also should be set.
 
 #### Example - set the dataValueField
 
@@ -265,6 +283,37 @@ If set to `false` the widget will be disabled and will not allow user input. The
     });
     </script>
 
+### enforceMinLength `Boolean` *(default: false)*
+
+If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](#configuration-minLength).
+
+#### Example - enforce minLength
+
+    <input id="multiselect" />
+    <script>
+    $("#multiselect").kendoMultiSelect({
+        placeholder: "Select products...",
+        dataTextField: "ProductName",
+        dataValueField: "ProductID",
+        autoBind: false,
+        minLength: 3,
+        enforceMinLength: true,
+        dataSource: {
+            type: "odata",
+            serverFiltering: true,
+            transport: {
+                read: {
+                    url: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                }
+            }
+        },
+        value: [
+            { ProductName: "Chang", ProductID: 2 },
+            { ProductName: "Uncle Bob's Organic Dried Pears", ProductID: 7 }
+        ]
+    });
+    </script>
+
 ### filter `String`*(default: "startswith")*
 
 The filtering method used to determine the suggestions for the current value. Filtration is turned of by default.
@@ -304,6 +353,31 @@ The [template](/api/javascript/kendo#methods-template) used to render the fixed 
                 }
             });
         });
+    </script>
+
+### footerTemplate `String|Function`
+
+The [template](/api/javascript/kendo#methods-template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
+
+#### Parameters
+
+##### instance `Object`
+
+The widget instance.
+
+#### Example - specify footerTemplate as a string
+
+    <select id="customers" style="width: 400px;"></select>
+    <script>
+    $("#customers").kendoMultiSelect({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      footerTemplate: 'Total <strong>#: instance.dataSource.total() #</strong> items found'
+    });
     </script>
 
 ### groupTemplate `String|Function`
@@ -362,7 +436,7 @@ If set to `true` the first suggestion will be automatically highlighted.
     });
     </script>
 
-### ignoreCase `String`*(default: true)*
+### ignoreCase `Boolean`*(default: true)*
 
 If set to `false` case-sensitive search will be performed to find suggestions. The widget performs case-insensitive searching by default.
 
@@ -415,6 +489,28 @@ A zero value means that a request will be made as soon as the user focuses the w
     });
     </script>
 
+### noDataTemplate `String|Function` *(default: "No results found.")*
+
+The [template](/api/javascript/kendo#methods-template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
+The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
+
+> **Important** The popup will open when 'noDataTemplate' is defined
+
+#### Example - specify headerTemplate as a string
+
+    <select id="multiselect"></select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      noDataTemplate: 'No Data!'
+    });
+    </script>
+
 ### placeholder `String`*(default: "")*
 
 The hint displayed by the widget when it is empty. Not set by default.
@@ -462,6 +558,97 @@ refer to [Popup](/api/javascript/ui/popup) documentation.
       dataValueField: "id",
       popup: {
         appendTo: $("#container")
+      }
+    });
+    </script>
+
+### popup.appendTo `String`
+
+Defines a jQuery selector that will be used to find a container element, where the popup will be appended to.
+
+#### Example - append the popup to a specific element
+
+    <div id="container">
+        <input id="multiselect" />
+    </div>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      popup: {
+        appendTo: $("#container")
+      }
+    });
+    </script>
+
+### popup.origin `String`
+
+Specifies how to position the popup element based on achor point. The value is
+space separated "y" plus "x" position.
+
+The available "y" positions are:
+- "bottom"
+- "center"
+- "top"
+
+The available "x" positions are:
+- "left"
+- "center"
+- "right"
+
+#### Example - append the popup to a specific element
+
+    <div id="container">
+        <input id="multiselect" />
+    </div>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      popup: {
+        origin: "top left"
+      }
+    });
+    </script>
+
+### popup.position `String`
+
+Specifies which point of the popup element to attach to the anchor's origin point. The value is
+space separated "y" plus "x" position.
+
+The available "y" positions are:
+- "bottom"
+- "center"
+- "top"
+
+The available "x" positions are:
+- "left"
+- "center"
+- "right"
+
+#### Example - append the popup to a specific element
+
+    <div id="container">
+        <input id="multiselect" />
+    </div>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      popup: {
+        origin: "top left"
       }
     });
     </script>
@@ -687,9 +874,11 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
 
 ### virtual `Boolean|Object`*(default: false)*
 
-Enables the virtualization feature of the widget.
+Enables the virtualization feature of the widget. The configuration can be set on an object, which contains two properties - `itemHeight` and `valueMapper`.
 
-#### Example - MultiSelect with virtualized list
+For detailed information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}).
+
+#### Example - MultiSelect with a virtualized list
 
     <select id="orders" style="width: 400px;"></select>
     <script>
@@ -705,6 +894,7 @@ Enables the virtualization feature of the widget.
                         $.ajax({
                             url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
                             type: "GET",
+                            dataType: "jsonp",
                             data: convertValues(options.value),
                             success: function (data) {
                                 options.success(data);
@@ -748,7 +938,7 @@ Enables the virtualization feature of the widget.
         }
     </script>
 
-#### Example - MultiSelect widget with declarative virtualization config
+#### Example - MultiSelect widget with а declarative virtualization config
 
     <div class="demo-section k-header">
         <h4>Search for shipping name</h4>
@@ -823,6 +1013,8 @@ Enables the virtualization feature of the widget.
 Specifies the height of the virtual item. All items in the virtualized list **must** have the same height.
 If the developer does not specify one, the framework will automatically set `itemHeight` based on the current theme and font size.
 
+#### Example - MultiSelect with a virtualized list
+
     <select id="orders" style="width: 400px;"></select>
     <script>
         $(document).ready(function() {
@@ -837,6 +1029,7 @@ If the developer does not specify one, the framework will automatically set `ite
                         $.ajax({
                             url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
                             type: "GET",
+                            dataType: "jsonp",
                             data: convertValues(options.value),
                             success: function (data) {
                                 //the **data** is either index or array of indices.
@@ -885,11 +1078,19 @@ If the developer does not specify one, the framework will automatically set `ite
         }
     </script>
 
+### virtual.mapValueTo `String`*(default: "index")*
+
+The changes introduced with the Kendo UI R3 2016 release enable you to determine if the `valueMapper` must resolve a *value to an `index`* or a *value to a `dataItem`*. This is configured through the `mapValueTo` option that accepts two possible values - `"index"` or `"dataItem"`. By default, the `mapValueTo` is set to `"index"`, which does not affect the current behavior of the virtualization process.
+
+For more information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}#value-mapping).
+
 ### virtual.valueMapper `Function`*(default: null)*
 
 The `valueMapper` function is **mandatory** for the functionality of the virtualized widget.
 The widget calls the `valueMapper` function when the widget receives a value, that is not fetched from the remote server yet.
 The widget will pass the selected value(s) in the `valueMapper` function. In turn, the `valueMapper` implementation should return the **respective data item(s) index/indices**.
+
+#### Example - MultiSelect with a virtualized list
 
     <select id="orders" style="width: 400px;"></select>
     <script>
@@ -905,6 +1106,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
                         $.ajax({
                             url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
                             type: "GET",
+                            dataType: "jsonp",
                             data: convertValues(options.value),
                             success: function (data) {
                                 options.success(data);
@@ -1169,7 +1371,7 @@ Opens the popup.
     $("#multiselect").kendoMultiSelect();
 
     var multiselect = $("#multiselect").data("kendoMultiSelect");
-    multiselect.focus();
+    multiselect.open();
     </script>
 
 ### readonly
@@ -1266,7 +1468,7 @@ Opens or closes the widget popup.
 
 #### Parameters
 
-##### toggle `Boolean`
+##### toggle `Boolean` *(optional)*
 
 Defines the whether to open/close the drop-down list.
 
@@ -1611,6 +1813,10 @@ Fired when an item from the popup is selected by the user.
 
 #### Event Data
 
+##### e.dataItem `Object`
+
+The data item instance of the selected item.
+
 ##### e.item `jQuery`
 
 The jQuery object which represents the selected item.
@@ -1650,4 +1856,87 @@ The widget instance which fired the event.
     $("#multiselect").kendoMultiSelect();
     var multiselect = $("#multiselect").data("kendoMultiSelect");
     multiselect.bind("select", multiselect_select);
+    </script>
+
+#### Example - prevent the item selection
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      select: function(e) {
+        //call preventDefault() to prevent the selection
+        e.preventDefault();
+      }
+    });
+    </script>
+
+### deselect
+
+Fired when an item is deselected or tag is removed.
+
+> **Important:** The event is not fired when an item is deselected programmatically.
+
+#### Event Data
+
+##### e.dataItem `Object`
+
+The data item instance of the deselected item/tag.
+
+##### e.item `jQuery`
+
+The jQuery object which represents the deselected item or removed tag element.
+
+##### e.sender `kendo.ui.MultiSelect`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "deselect" event during initialization
+
+    <select id="multiselect" multiple="multiple">
+        <option selected>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      deselect: function(e) {
+        var dataItem = e.dataItem;
+        var item = e.item;
+        // Use the deselected data item or jQuery item
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "deselect" event after initialization
+
+    <select id="multiselect" multiple="multiple">
+        <option selected>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    function multiselect_deselect(e) {
+        var dataItem = e.dataItem;
+        var item = e.item;
+        // Use the deselected data item or jQuery item
+    }
+    $("#multiselect").kendoMultiSelect();
+    var multiselect = $("#multiselect").data("kendoMultiSelect");
+    multiselect.bind("deselect", multiselect_deselect);
+    </script>
+
+#### Example - prevent the deselection action
+
+    <select id="multiselect" multiple="multiple">
+        <option selected>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      deselect: function(e) {
+        // Call preventDefault() to prevent the deselection
+        e.preventDefault();
+      }
+    });
     </script>

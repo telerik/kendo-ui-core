@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI TreeMap Widget  
+page_title: Overview | Kendo UI TreeMap  
 description: "Learn how to create a Kendo UI TreeMap widget and explore its major features."
 slug: overview_treemap_widget
 position: 1

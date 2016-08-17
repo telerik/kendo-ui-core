@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI NumericTextBox Widget
+page_title: Overview | Kendo UI NumericTextBox
 description: "Learn how to initialize the Kendo UI NumericTextBox widget and configure its behaviors."
 slug: overview_kendoui_numerictextbox_widget
 position: 1
@@ -24,7 +24,8 @@ The [Kendo UI NumericTextBox widget](http://demos.telerik.com/kendo-ui/numericte
 
 When a NumericTextBox is initialized, it will automatically wrap the `<input>` element with a `<span>` tag and render spin buttons.
 
-> **Important**  
+> **Important**
+>
 > When getting a reference to the widget, you should always use `id` instead of a class selector. Behind the scenes, the NumericTextBox creates a secondary element that is used to represent the visual look of the widget, and copies over all non-`id` attributes, including the class. This will cause unexpected results when the class is sued for widget referencing.
 
 ## Configuration
@@ -35,13 +36,14 @@ NumericTextBox provides configuration options that can be set during initializat
 *   Minimum and/or maximum values
 *   Increment step
 *   Precision of number
+*   Rounding of number
 *   Number format (any valid number format is allowed)
 
 For a complete overview of the methods and configuration options NumericTextBox applies, [review its API Reference](/api/javascript/ui/numerictextbox).
 
 ### Defaults
 
-The example below demonstrates how to customize NumericTextBox defaults.
+The example below demonstrates how to customize the default settings of the NumericTextBox.
 
 ###### Example
 
@@ -74,7 +76,7 @@ The example below demonstrates how to create a currency NumericTextBox widget.
 
 ### Percentage NumericTextBox
 
-The example below demonstartes how to create a percentage NumericTextBox widget.
+The example below demonstrates how to create a percentage NumericTextBox widget.
 
 ###### Example
 
@@ -87,7 +89,29 @@ The example below demonstartes how to create a percentage NumericTextBox widget.
         });
     </script>
 
-### Support fro label Element
+### Precision of Numbers
+
+The widget controls the precision of the entered number using the value of the [`decimals`](/api/javascript/ui/numerictextbox#configuration-decimals) option. The number will be limited to the `decimals` length.
+
+By default, the widget does not restrict the length of the typed value. To enforce a specific fraction length during editing, set the [`restrictDecimals`](/api/javascript/ui/numerictextbox#configuration-restrictDecimals) option to `true`.
+
+### Rounding of Numbers
+
+The widget controls the precision of the entered number using the half-up rounding technique. This functionality can be disabled through the [`round`](/api/javascript/ui/numerictextbox#configuration-round) configuration option. Once the rounding is turned off, the value will be truncated up to the desired precision length, without rounding the value.
+
+### Range Validation
+
+The NumericTextBox value can be restricted to a specific range by using two different approaches:
+
+- Restrict the input value between a specific [`min`](/api/javascript/ui/numerictextbox#configuration-min) and [`max`](/api/javascript/ui/numerictextbox#configuration-max) range. The typed value will be automatically modified to fit the range on blur.
+
+- Use a custom Kendo UI Validator rule to restrict the input value. The invalid value will be kept unchanged and the user will be notified for the incorrect input with a friendly error message.
+
+    For more details, refer to the article on [custom validation rules]({% slug overview_kendoui_validator_widget %}#custom-rules-for-validation) of the Validator.
+
+    To see the suggested implementation in action, navigate to the online demo on [range validation](http://demos.telerik.com/kendo-ui/numerictextbox/validation).
+
+### Support for label Element
 
 Because of its complex rendering, focusing the widget by using a label element requires additional implementation. For more information about how to do it, check this [this Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
 
@@ -98,6 +122,8 @@ Because of its complex rendering, focusing the widget by using a label element r
 Kendo UI NumericTextBox uses a JavaScript [`Number`](http://ecma262-5.com/ELS5_HTML.htm#Section_8.5) object to keep its value, which has a certain precision limitation. In general, the `Number` object can persist its precision up to 16 digits. Numbers longer than that are converted to exponential numbers. Hence, they lose their precision. As the widget relies on a `Number` object, it gets the same precision limitation.
 
 No feasible workaround for this limitation exists as it comes from JavaScript itself. It is recommended that you use a simple `<input>` element with server validation as some server languages are able to parse long numbers.
+
+On the other hand, if the user enters a number with a greater precision than is currently configured through the `decimals` property, the widget value will be rounded. For more details and examples, refer to the [API documentation on `decimals`](/api/javascript/ui/numerictextbox#configuration-decimals).
 
 ### Input Type
 
@@ -134,6 +160,6 @@ Other articles and how-to examples on Kendo UI NumericTextBox:
 * [How to Update Value on Spin]({% slug howto_update_valueon_spin_angularjs_numerictextbox %})
 * [How to Use Custom Culture Script]({% slug howto_use_custom_culture_script_numerictextbox %})
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the NumericTextBox Widget](/aspnet-mvc/helpers/numerictextbox/overview)
-* [Overview of the NumericTextBox JSP Tag](/jsp/tags/numerictextbox/overview)
+* [Overview of the NumericTextBox JSP Tag]({% slug overview_numerictextbox_uiforjsp %})
 * [Overview of the NumericTextBox PHP Class](/php/widgets/numerictextbox/overview)
 * [NumericTextBox JavaScript API Reference](/api/javascript/ui/numerictextbox)

@@ -1,12 +1,19 @@
 ---
-title: Scheduler with custom editor
-page_title: Scheduler with custom editor
-description: Scheduler with custom editor
+title: Implement Custom Editors
+page_title: Implement Custom Editors | Kendo UI Scheduler HtmlHelper
+description: "Implement a custom editor similar to the build-in editor of a Kendo UI Scheduler in ASP.NET MVC applications."
+slug: howto_implementcustomeditor_scheduleraspnetmvc
 ---
 
-# Scheduler with custom editor
+# Implement Custom Editors
 
-The example below demonstrates how to implement custom editor similar to build-in one for Scheduler.
+The example below demonstrates how to implement a custom editor similar to the build-in editor of a Kendo UI Scheduler in ASP.NET MVC applications.
 
+To see the example, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-custom-editor).
 
-[Scheduler with a custom editor](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-custom-editor)
+## See Also
+
+* [Overview of the Scheduler HtmlHelper]({% slug overview_schedulerhelper_aspnetmvc %})
+* [SchedulerBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/SchedulerBuilder)
+
+For more runnable examples on the Kendo UI Scheduler in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_bindtowebapicontroller_scheduleraspnetmvc %}).

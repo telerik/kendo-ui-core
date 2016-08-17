@@ -10,7 +10,9 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "gte": "È dopo o uguale a",
     "lt": "È prima",
     "lte": "È prima o uguale a",
-    "neq": "Non è uguale a"
+    "neq": "Non è uguale a",
+    "isnull": "È nullo",
+    "isnotnull": "Non è nullo"
   },
   "number": {
     "eq": "È uguale a",
@@ -18,7 +20,9 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "gte": "È più grande o uguale a",
     "lt": "È più piccolo di",
     "lte": "È più piccolo o uguale a",
-    "neq": "Non è uguale a"
+    "neq": "Non è uguale a",
+    "isnull": "È nullo",
+    "isnotnull": "Non è nullo"
   },
   "string": {
     "contains": "Contiene",
@@ -26,11 +30,17 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "endswith": "Finisce con",
     "eq": "È uguale a",
     "neq": "Non è uguale a",
-    "startswith": "Inizia con"
+    "startswith": "Inizia con",
+    "isnull": "È nullo",
+    "isnotnull": "Non è nullo",
+    "isempty": "È vuoto",
+    "isnotempty": "Non è vuoto"
   },
   "enums": {
     "eq": "È uguale a",
-    "neq": "Non è uguale a"
+    "neq": "Non è uguale a",
+    "isnull": "È nullo",
+    "isnotnull": "Non è nullo"
   }
 });
 }
@@ -46,7 +56,9 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "gte": "È dopo o uguale a",
     "lt": "È prima",
     "lte": "È prima o uguale a",
-    "neq": "Non è uguale a"
+    "neq": "Non è uguale a",
+    "isnull": "È nullo",
+    "isnotnull": "Non è nullo"
   },
   "number": {
     "eq": "È uguale a",
@@ -54,7 +66,9 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "gte": "È più grande o uguale a",
     "lt": "È più piccolo di",
     "lte": "È più piccolo o uguale a",
-    "neq": "Non è uguale a"
+    "neq": "Non è uguale a",
+    "isnull": "È nullo",
+    "isnotnull": "Non è nullo"
   },
   "string": {
     "contains": "Contiene",
@@ -62,11 +76,17 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "endswith": "Finisce con",
     "eq": "È uguale a",
     "neq": "Non è uguale a",
-    "startswith": "Inizia con"
+    "startswith": "Inizia con",
+    "isnull": "È nullo",
+    "isnotnull": "Non è nullo",
+    "isempty": "È vuoto",
+    "isnotempty": "Non è vuoto"
   },
   "enums": {
     "eq": "È uguale a",
-    "neq": "Non è uguale a"
+    "neq": "Non è uguale a",
+    "isnull": "È nullo",
+    "isnotnull": "Non è nullo"
   }
 });
 }
@@ -172,6 +192,15 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "cancel": "Annulla",
   "operator": "Operatore",
   "value": "Valore"
+});
+}
+
+/* FilterMultiCheck messages */
+
+if (kendo.ui.FilterMultiCheck) {
+kendo.ui.FilterMultiCheck.prototype.options.messages =
+$.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
+  "search": "Cerca"
 });
 }
 
@@ -366,7 +395,6 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "showWorkDay": "Mostra solo le ore lavorative"
 });
 }
-})(window.kendo.jQuery);
 
 /* Spreadsheet messages */
 
@@ -650,3 +678,42 @@ $.extend(true, kendo.spreadsheet.messages.view,{
   }
 });
 }
+
+/* Dialog */
+
+if (kendo.ui.Dialog) {
+kendo.ui.Dialog.prototype.options.messages =
+$.extend(true, kendo.ui.Dialog.prototype.options.localization, {
+  "close": "Vicino"
+});
+}
+
+/* Alert */
+
+if (kendo.ui.Alert) {
+kendo.ui.Alert.prototype.options.messages =
+$.extend(true, kendo.ui.Alert.prototype.options.localization, {
+  "okText": "OK"
+});
+}
+
+/* Confirm */
+
+if (kendo.ui.Confirm) {
+kendo.ui.Confirm.prototype.options.messages =
+$.extend(true, kendo.ui.Confirm.prototype.options.localization, {
+  "okText": "OK",
+  "cancel": "Annulla"
+});
+}
+
+/* Prompt */
+if (kendo.ui.Prompt) {
+kendo.ui.Prompt.prototype.options.messages =
+$.extend(true, kendo.ui.Prompt.prototype.options.localization, {
+  "okText": "OK",
+  "cancel": "Annulla"
+});
+}
+
+})(window.kendo.jQuery);

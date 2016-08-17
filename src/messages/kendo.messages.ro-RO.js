@@ -239,6 +239,15 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
 });
 }
 
+/* FilterMultiCheck messages */
+
+if (kendo.ui.FilterMultiCheck) {
+kendo.ui.FilterMultiCheck.prototype.options.messages =
+$.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
+  "search": "Caută"
+});
+}
+
 /* Grid messages */
 
 if (kendo.ui.Grid) {
@@ -316,7 +325,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "start": "Start",
     "startTimezone": "Start timezone",
     "timezone": " ",
-    "timezoneEditorButton": "Time zone",
+    "timezoneEditorButton": "Fus orar",
     "timezoneEditorTitle": "Timezones",
     "title": "Title",
     "noTimezone": "No timezone"
@@ -333,14 +342,14 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "editWindowTitle": "Edit Recurring Item"
   },
   "save": "Salvează",
-  "time": "Time",
-  "today": "Today",
+  "time": "Timp",
+  "today": "Astăzi",
   "views": {
     "agenda": "Agendă",
-    "day": "Day",
-    "month": "Month",
-    "week": "Week",
-    "workWeek": "Work Week"
+    "day": "Zi",
+    "month": "Lună",
+    "week": "Săptămână",
+    "workWeek": "Săptămână de lucru"
   },
   "deleteWindowTitle": "Delete event",
   "showFullDay": "Show full day",
@@ -366,4 +375,42 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "headerStatusUploading": "Uploading..."
 });
 }
+
+/* Dialog */
+
+if (kendo.ui.Dialog) {
+kendo.ui.Dialog.prototype.options.messages =
+$.extend(true, kendo.ui.Dialog.prototype.options.localization, {
+  "close": "Închide"
+});
+}
+
+/* Alert */
+
+if (kendo.ui.Alert) {
+kendo.ui.Alert.prototype.options.messages =
+$.extend(true, kendo.ui.Alert.prototype.options.localization, {
+  "okText": "O.K"
+});
+}
+
+/* Confirm */
+
+if (kendo.ui.Confirm) {
+kendo.ui.Confirm.prototype.options.messages =
+$.extend(true, kendo.ui.Confirm.prototype.options.localization, {
+  "okText": "O.K",
+  "cancel": "Anulează"
+});
+}
+
+/* Prompt */
+if (kendo.ui.Prompt) {
+kendo.ui.Prompt.prototype.options.messages =
+$.extend(true, kendo.ui.Prompt.prototype.options.localization, {
+  "okText": "O.K",
+  "cancel": "Anulează"
+});
+}
+
 })(window.kendo.jQuery);

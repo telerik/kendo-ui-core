@@ -1,6 +1,6 @@
 ---
 title: Change Shape Visual Elements Dynamically
-page_title: Change Shape Visual Elements Dynamically | Kendo UI Diagram Widget
+page_title: Change Shape Visual Elements Dynamically | Kendo UI Diagram
 description: "Learn how to find a particular element from the shape visual and dynamically change it in a Kendo UI Diagram."
 slug: howto_changeshapevisualelements_dynamically_diagram
 ---
@@ -161,11 +161,11 @@ The example below demonstrates how to find a particular element from the shape v
 
 ## See Also
 
-Other articles on Kendo UI Diagram:
+Other articles on the Kendo UI Diagram:
 
 * [JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
-* [How to Drag and Drop on Shapes]({% slug howto_draganddrop_onshapes_diagram %})
 * [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
-* [How to Render External Content in Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})
 * [How to Use Scrollbars]({% slug howto_usescrollbar_diagram %})
 * [How to Wrap Text]({% slug howto_wraptext_diagram %})
+
+For more runnable examples on the Kendo UI Diagram, browse the [**How To** documentation folder]({% slug howto_draganddrop_onshapes_diagram %}).

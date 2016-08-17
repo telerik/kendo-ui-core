@@ -200,13 +200,33 @@ The rotation angle.
 
 Defines the shapes content settings.
 
-### content.text `String`
-
-The text displayed in the shape.
-
 ### content.align `String`
 
 The alignment of the text inside the shape.
+
+### content.color `String`
+
+The color of the shape content text.
+
+### content.fontFamily `String`
+
+The font family of the shape content text.
+
+### content.fontSize `Number`
+
+The font size of the shape content text.
+
+### content.fontStyle `String`
+
+The font style of the shape content text.
+
+### content.fontWeight `String`
+
+The font weight of the shape content text.
+
+### content.text `String`
+
+The text displayed in the shape.
 
 ### selectable `Boolean` *(default: true)*
 
@@ -215,6 +235,78 @@ Specifies if the shape can be selected.
 ### visual `Function`
 
 A function returning a visual element to render for this shape.
+
+### connectorDefaults `Object`
+
+Defines default options for the shape connectors.
+
+### connectorDefaults.width `Number` *(default: 8)*
+
+Defines the width of the shape connectors.
+
+### connectorDefaults.height `Number` *(default: 8)*
+
+Defines the height of the shape connectors.
+
+### connectorDefaults.hover `Object`
+
+Defines the hover configuration of the shape connectors.
+
+### connectorDefaults.hover.fill `String|Object`
+
+Defines the hover fill options of the shape connectors.
+
+### connectorDefaults.hover.fill.color `String`
+
+Defines the hover fill color of the shape connectors.
+
+### connectorDefaults.hover.fill.opacity `Number` *(default: 1)*
+
+Defines the hover fill opacity of the shape connectors.
+
+### connectorDefaults.hover.stroke `String|Object`
+
+Defines the hover stroke options of the shape connectors.
+
+### connectorDefaults.hover.stroke.color `String` *(default: "Black")*
+
+Defines the hover stroke color.
+
+### connectorDefaults.hover.stroke.dashType `String`
+
+The hover stroke dash type.
+
+### connectorDefaults.hover.stroke.width `Number` *(default: 1)*
+
+Defines the thickness or width of the shape connectors stroke on hover.
+
+### connectorDefaults.fill `String|Object`
+
+Defines the fill options of the shape connectors.
+
+### connectorDefaults.fill.color `String`
+
+Defines the fill color of the shape connectors.
+
+### connectorDefaults.fill.opacity `Number` *(default: 1)*
+
+Defines the fill opacity of the shape connectors.
+
+### connectorDefaults.stroke `String|Object`
+
+Defines the stroke options of the shape connectors.
+
+### connectorDefaults.stroke.color `String` *(default: "Black")*
+
+Defines the stroke color.
+
+### connectorDefaults.stroke.dashType `String`
+
+The stroke dash type.
+
+### connectorDefaults.stroke.width `Number` *(default: 1)*
+
+Defines the thickness or width of the shape connectors stroke.
 
 ## Fields
 
@@ -324,4 +416,8 @@ The object containing a subset of options to change. Follows the same structure 
           }
         });
     </script>
+
+### redrawVisual
+
+Redraws the shape visual element and its content
 

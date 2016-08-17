@@ -68,7 +68,7 @@ Kendo UI uses the default `content-box` box model (`box-sizing` CSS property), w
 
 A possible easy workaround is to override the Bootstrap CSS, apply the `content-box` box model to all elements on the page and use a `border-box` box model only to the Bootstrap elements which need it. These are all `.col-...` classes, `.row`, `.container`, `.container-fluid` and `form-control`.
 
-You can add the following CSS rules after the Bootstrap and Kendo UI stylesheets.
+You can add the following CSS rules _after_ the Bootstrap and Kendo UI stylesheets.
 
     /* reset everything to the default box model */
 
@@ -129,7 +129,7 @@ To resolve this issue, follow some of the possible solutions below.
 
 **Solution 1**
 
-* Place the Bootstrap stylesheet before the Kendo UI stylesheet, so that same-specificity Kendo UI selectors can take precedence.
+* Place the Bootstrap stylesheet _before_ the Kendo UI stylesheet, so that same-specificity Kendo UI selectors can take precedence.
 
 **Solution 2**
 
@@ -158,11 +158,12 @@ To resolve this issue, follow some of the possible solutions below.
 
 Other articles on Kendo UI integration with third-party tools and frameworks:
 
-* [Web Components]({% slug webcomponents_integration_kendoui %})
 * [Angular 2.0]({% slug angular2support_integration_kendoui %})
+* [Web Components]({% slug webcomponents_integration_kendoui %})
 * [RequireJS]({% slug requirejs_integration_kendoui %})
 * [TypeScript]({% slug typescript_integration_kendoui %})
 * [Visual Studio IntelliSense]({% slug visualstudiointellisense_integration_kendoui %})
 * [Telerik Data Access]({% slug bindtotelerikdataaccesstool_integration_kendoui %})
 * [SystemJS Support]({% slug systemjs_integration_kendoui %})
 * [Webpack Support]({% slug webpacksupport_integration_kendoui %})
+* [Aurelia]({% slug aurelia_integration_kendoui %})

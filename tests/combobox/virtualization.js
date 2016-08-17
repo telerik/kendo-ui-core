@@ -116,7 +116,7 @@
             dataValueField: "value",
             dataSource: createAsyncDataSource(),
             virtual: {
-                valueMapper: function(o) { o.success(o.value); },
+                valueMapper: function(o) { o.success(o.value ? parseInt(o.value) : -1); },
                 itemHeight: 40
             }
         });
@@ -188,15 +188,18 @@
             combobox.search("1");
             combobox.one("dataBound", function() {
                 combobox.select(2); //select "Item 111"
-                combobox.dataSource.filter([]);
 
-                setTimeout(function() {
-                    start();
-                    equal(combobox.select(), 111);
-                    equal(combobox.dataItem().value, 111);
-                    ok($("[data-offset-index=111]").hasClass("k-state-focused"));
-                    ok($("[data-offset-index=111]").hasClass("k-state-selected"));
-                }, 300);
+                combobox.bind("dataBound", function() {
+                    if (combobox.dataSource.page() > 1) { //wait until the binding is done
+                        start();
+                        equal(combobox.select(), 111);
+                        equal(combobox.dataItem().value, 111);
+                        ok($("[data-offset-index=111]").hasClass("k-state-focused"));
+                        ok($("[data-offset-index=111]").hasClass("k-state-selected"));
+                    }
+                });
+
+                combobox.dataSource.filter([]);
             });
         });
     });
@@ -392,7 +395,6 @@
         combobox.one("dataBound", function() {
             combobox.open();
 
-            debugger;
             combobox.one("dataBound", function() {
                 start();
                 equal(select.val(), 10);
@@ -402,5 +404,71 @@
         });
 
         combobox.value(10);
+    });
+
+    asyncTest("clear filter when set new value", 1, function() {
+        var combobox = new ComboBox(select, {
+            close: function(e) { e.preventDefault(); },
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            filter: "contains",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 20
+            }
+        });
+
+        combobox.one("dataBound", function() {
+            combobox.open();
+
+            combobox.dataSource.filter({
+                field: "text",
+                operator: "contains",
+                value: "Item 30"
+            });
+
+            combobox.one("dataBound", function() {
+                start();
+
+                combobox.value("");
+
+                equal(combobox.dataSource.filter().filters.length, 0);
+            });
+        });
+
+        combobox.value(10);
+    });
+
+    test("use DataSource that was already read", 1, function() {
+        var noErrors = true;
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: function(o) {
+                    o.success([{text: "asd", value: 1}]);
+                }
+            }
+        });
+        dataSource.read();
+        try {
+            var combobox = new ComboBox(select, {
+                close: function(e) { e.preventDefault(); },
+                height: CONTAINER_HEIGHT,
+                animation: false,
+                filter: "contains",
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: dataSource,
+                virtual: {
+                    valueMapper: function(o) { o.success(o.value); },
+                    itemHeight: 20
+                }
+            });
+        } catch(err) {
+            noErrors = false;
+        }
+        ok(noErrors);
     });
 })();

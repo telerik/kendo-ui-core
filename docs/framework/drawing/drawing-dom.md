@@ -14,7 +14,7 @@ The [Kendo UI Drawing API](http://demos.telerik.com/kendo-ui/drawing/index) supp
 
 Using the `drawing.drawDOM` function you can draw a DOM element into a [`drawing.Group`](/api/dataviz/drawing/group), which you are then able to render with one of the supported backends into SVG, PDF, HTML5 `<canvas>`, or VML format.
 
-The DOM element must be appended to the document and must be visible, meaning that you cannot draw an element which has the `display: none`, or the `visibility: hidden` options. Assume that you have the following HTML in the page:
+The DOM element must be appended to the document and fully rendered, meaning that you cannot draw an element which has the `display: none`, or the `visibility: hidden` options. Assume that you have the following HTML in the page:
 
     <div id="drawMe" class="...">
       ... more HTML code here...
@@ -68,6 +68,12 @@ The example below demonstrates how to make all Kendo widgets use this font.
 > * The PDF generator supports only TrueType fonts with Unicode mappings.
 > * In order for automatic font discovery to work, your CSS must reside on the same domain as the web page.
 > * Kendo UI bundles the DejaVu font family and will fall back to it for a few names, such as Times New Roman, Arial, or Courier, or generics, such as serif, sans-serif, or monospace, if no alternate fonts are specified. This is so that Unicode works by default. However, the layout problem will remain&mdash;the PDF output will be slightly different from the browser unless the exact same fonts are used.
+
+### Images in PDF
+
+Images are exported correctly only if they have the correct extension. For example, if PNG images with a JPG extension are displayed on the page, they might not show up in the exported PDF, or might cause exceptions in the PDF reader.
+
+To check for possible notes on loading images from different domains, refer to the [section on known limitations](#known-limitations).
 
 ### Hyperlinks in PDF
 
@@ -198,9 +204,9 @@ If the algorithm decides to move a node to the next page, all the DOM nodes whic
 
 It can happen that this element ends up in a position where all the text fits on the current page, but the image is higher and would fall on the boundary. In this case, the image and some text after will move to the next page.
 
-### Page Template: Headers and Footers
+### Template: Headers and Footers
 
-When multi-page output is requested via `forcePageBreak` or `paperSize`, you can additionally specify a page template. This template will be inserted into each page before producing the output. You can easily position it relatively to the page via CSS. The template can be a function, or a Kendo UI template, and it receives the number of the current page and the total number of pages.
+When multi-page output is requested via `forcePageBreak` or `paperSize`, you can additionally specify a page template. This template will be inserted into each page before producing the output. You can easily position it relatively to the page via CSS. The template can be a function, or a Kendo UI template, and it receives the number of the current page (`pageNum`) and the total number of pages (`totalPages`).
 
 ###### Example
 
@@ -382,6 +388,49 @@ In this case, the DOM renderer will create a clone of the element so that it is 
 
 Images are safe to add here.
 
+### Off-Screen Content
+
+To produce different content for export, or keep it hidden from the user, position the container outside the screen.
+
+The container has to be fully rendered. For more information, see the section on [getting started](#getting-started).
+
+The example below uses an absolute positioning to move the container off the screen.
+
+###### Example
+
+    <style>
+      #content {
+        position: absolute;
+        width: 800px;
+        left: -10000px;
+        top: 0;
+      }
+    </style>
+    <script>
+        drawing.drawDOM("#content", {
+          paperSize: "A4",
+          margin: "2cm"
+        }).then(function(group){
+          drawing.pdf.saveAs(group, "filename.pdf");
+        });
+    </script>
+
+
+The `<kendo-pdf-document>` approach only works when multi-page documents are requested, that is, only when either of `forcePageBreak` or `paperSize` is given. To make it work in the cases when you need only a single page, pass some dummy value to the `forcePageBreak` such as `forcePageBreak: "-"`.
+
+In this case, the DOM renderer will create a clone of the element so that it is able to do the page-breaking without destroying the original content, and it will place it inside a custom `<kendo-pdf-document>` element, which is hidden from the view. Therefore, you can apply custom styles under `kendo-pdf-document` by restricting the rules to elements.
+
+###### Example
+
+    <style>
+      kendo-pdf-document p {
+        border: 2px solid black;
+        background: url("image.jpg");
+      }
+    </style>
+
+Images are safe to add here.
+
 ## Dimensions and CSS Units
 
 If you target PDF output, the only unit which is safe to use in CSS is `px`. Using `cm`, `in`, `mm`, `pt`, or any other than `px` will have unpredictable results. This section explains this counter-intuitive fact.
@@ -421,10 +470,15 @@ The HTML renderer has been tested in recent versions of Chrome, Firefox, Safari,
 ## Known Limitations
 
 - Right-to-left text is not supported.
-- Images hosted on different domains might not be rendered, unless permissive [Cross-Origin HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image) are provided by the server. Similarly, fonts might not be possible to load cross-domain. Even with the proper CORS headers, Internet Explorer 9 will not be able to load images or fonts from another domain, and could raise an uncatchable security exception. If you need to support Internet Explorer 9, make sure to host images and fonts on the same domain as the application.
-- The content of the `<iframe>` and `<svg>` elements is not rendered. A `<canvas>` will be rendered as an image, but only if it is non-tainted, meaning if it does not display images from another domain.
+- Images hosted on different domains will not be rendered, unless permissive [Cross-Origin HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image) are provided by the server. Similarly, fonts might not be possible to load cross-domain. Even with the proper CORS headers, Internet Explorer 9 will not be able to load images or fonts from another domain, and could raise an uncatchable security exception. If you need to support Internet Explorer 9, make sure to host images and fonts on the same domain as the application.
+- Images will not be exported in IE if their source is an SVG document. These are considered to be tainted.
+- Exporting might not work when loading the page from a local file (`file://` protocol) due to CORS restrictions.
+- The content of the `<iframe>` and `<svg>` elements is not rendered.
+- A `<canvas>` will be rendered as an image, but only if it is non-tainted, meaning if it does not display images from another domain.
 - CSS box-shadow, text-shadow, and radial gradients are omitted. Linear gradients are supported.
+- Using browser zoom other than 100% is not supported.
 - Only border-style `solid` is rendered.
+- The `border-collapse:collapse` style of tables is not supported. Avoid using adjacent borders for separate table cells to prevent double borders in the PDF output.
 - Maximum document size is limited to 5080x5080mm (200x200 inches) by the PDF 1.5 specification. Larger files might not open in some viewers.
 - Shadow DOM is not rendered.
 - SVG referenced with the `<img>` tag will not render in Internet Explorer, because [IE taints the canvas](http://stackoverflow.com/questions/31484379/ie-canvas-datauri-security-error).

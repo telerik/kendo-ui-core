@@ -7,6 +7,38 @@ page_title: Configuration, methods and events of Kendo UI Spreadsheet Sheet Inst
 
 Represents a sheet instance in the [Kendo UI Spreadsheet](/api/javascript/ui/spreadsheet) widget. Inherits from [Observable](/api/javascript/observable).
 
+## Fields
+
+### dataSource `kendo.data.DataSource`
+
+The [DataSource](/framework/datasource/overview) instance to which the Sheet is bound to.
+
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+    <script>
+
+      var dataSource = new kendo.data.DataSource({
+        transport: {
+          read:  {
+            url: "//demos.telerik.com/kendo-ui/service/Products",
+            dataType: "jsonp"
+          }
+        }
+      });
+
+      $("#spreadsheet").kendoSpreadsheet();
+
+      var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+      var sheet = spreadsheet.activeSheet();
+      sheet.setDataSource(dataSource);
+
+      console.log(sheet.dataSource);
+
+    </script>
+```
+
 ## Methods
 
 ### clearFilter
@@ -172,6 +204,8 @@ The zero-based index of the row
 Loads the sheet from an object in the format defined in the [sheet configuration](/api/javascript/ui/spreadsheet#configuration.sheets).
 
 > The configuration and cell values will be merged.
+>
+> **Note:** the Sheet objects are not resizable.  If you use this method you must make sure that the JSON does not contain more rows or columns than defined when the `Spreadsheet` object has been constructed.  To reload a full spreadsheet from JSON, we recommend using Spreadsheet's [fromJSON](/api/javascript/ui/spreadsheet#methods-fromJSON) method.
 
 #### Parameters
 
@@ -496,6 +530,121 @@ Returns a range with the current active selection.
         sheet.range("A1:B2").select();
 
         var selection = sheet.selection(); // A1:B2 range
+    </script>
+```
+
+### setDataSource
+
+Binds the sheet to a DataSource instance. For more information on the data-binding Spreadsheet functionality, refer to the [article on binding the Spreadsheet to a data source](/controls/data-management/spreadsheet/import-and-export-data/bind-to-data-source).
+
+#### Parameters
+
+##### dataSource `kendo.data.DataSource`
+
+The DataSource instance.
+
+###### Example
+
+```
+    <div id="spreadsheet"></div>
+    <script>
+
+      var dataSource = new kendo.data.DataSource({
+        transport: {
+          read:  {
+            url: "//demos.telerik.com/kendo-ui/service/Products",
+            dataType: "jsonp"
+          }
+        }
+      });
+
+      $("#spreadsheet").kendoSpreadsheet();
+
+      var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+      var sheet = spreadsheet.activeSheet();
+      sheet.setDataSource(dataSource);
+
+    </script>
+```
+
+##### columns `Array` *optional*
+
+Columns configuration.
+
+###### Example
+
+```
+    <div id="spreadsheet"></div>
+    <script>
+
+      var dataSource = new kendo.data.DataSource({
+        transport: {
+          read:  {
+            url: "//demos.telerik.com/kendo-ui/service/Products",
+            dataType: "jsonp"
+          }
+        }
+      });
+
+      $("#spreadsheet").kendoSpreadsheet();
+
+      var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+      var sheet = spreadsheet.activeSheet();
+      sheet.setDataSource(dataSource, [ "ProductName", "UnitPrice" ]);
+
+    </script>
+```
+
+###### Example - reorder columns and change column titles
+
+```
+    <div id="spreadsheet"></div>
+    <script>
+      var dataSource = new kendo.data.DataSource({
+        transport: {
+          read:  {
+            url: "//demos.telerik.com/kendo-ui/service/Products",
+            dataType: "jsonp"
+          }
+        }
+      });
+
+      $("#spreadsheet").kendoSpreadsheet();
+
+      var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+      var sheet = spreadsheet.activeSheet();
+      sheet.setDataSource(dataSource, [
+          { field: "UnitPrice", title: "Price" },
+          { field: "ProductName", title: "Name" }
+      ]);
+
+    </script>
+```
+
+### showGridLines
+
+Gets or sets a flag indicating if the grid lines should be visible.
+
+#### Parameters
+
+##### showGridLiens `Boolean` *optional*
+
+If passed, the method will toggle the display of the grid lines according to the value.
+
+#### Returns
+
+`Boolean` True if the grid lines are currently visible, false otherwise.
+
+#### Example
+
+```
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet();
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        var sheet = spreadsheet.activeSheet();
+
+        sheet.showGridLines(false);
     </script>
 ```
 

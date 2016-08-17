@@ -1099,18 +1099,20 @@ var __meta__ = { // jshint ignore:line
                 var item = this._getItem(candidate);
 
                 if (item.toolbar) {
-                    item.toolbar.hide();
-
                     if (item.toolbar.options.type === "button" && item.toolbar.options.isChild) {
+                        item.toolbar.hide();
                         item.toolbar.getParentGroup().refresh();
+                    } else if(!item.toolbar.options.hidden) {
+                        item.toolbar.hide();
                     }
                 }
 
                 if (item.overflow) {
-                    item.overflow.hide();
-
                     if (item.overflow.options.type === "button" && item.overflow.options.isChild) {
+                        item.overflow.hide();
                         item.overflow.getParentGroup().refresh();
+                    } else if(!item.toolbar.options.hidden) {
+                        item.overflow.hide();
                     }
                 }
 
@@ -1121,16 +1123,20 @@ var __meta__ = { // jshint ignore:line
                 var item = this._getItem(candidate);
 
                 if (item.toolbar) {
-                    item.toolbar.show();
-
                     if (item.toolbar.options.type === "button" && item.toolbar.options.isChild) {
+                        item.toolbar.show();
                         item.toolbar.getParentGroup().refresh();
+                    } else if(item.toolbar.options.hidden) {
+                        item.toolbar.show();
                     }
-                } else if (item.overflow) {
-                    item.overflow.show();
+                }
 
+                if (item.overflow) {
                     if (item.overflow.options.type === "button" && item.overflow.options.isChild) {
+                        item.toolbar.show();
                         item.overflow.getParentGroup().refresh();
+                    } else if(item.overflow.options.hidden) {
+                        item.overflow.show();
                     }
                 }
 
@@ -1247,7 +1253,15 @@ var __meta__ = { // jshint ignore:line
             },
 
             _toggleOverflowAnchor: function() {
-                if (this.popup.element.children(":not(." + OVERFLOW_HIDDEN + ", ." + POPUP + ")").length > 0) {
+                var hasVisibleChildren = false;
+
+                if (this.options.mobile) {
+                    hasVisibleChildren = this.popup.element.find("." + OVERFLOW_CONTAINER).children(":not(." + OVERFLOW_HIDDEN + ", ." + POPUP + ")").length > 0;
+                } else {
+                    hasVisibleChildren = this.popup.element.children(":not(." + OVERFLOW_HIDDEN + ", ." + POPUP + ")").length > 0;
+                }
+
+                if (hasVisibleChildren) {
                     this.overflowAnchor.css({
                         visibility: "visible",
                         width: ""
@@ -1383,7 +1397,7 @@ var __meta__ = { // jshint ignore:line
                         }
                     }
 
-                    if (lastHasFocus && this.overflowAnchor.css("visibility") !== "hidden") {
+                    if (lastHasFocus && this.overflowAnchor && this.overflowAnchor.css("visibility") !== "hidden") {
                         e.preventDefault();
                         this.overflowAnchor.focus();
                     }

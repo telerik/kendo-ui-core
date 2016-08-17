@@ -55,6 +55,567 @@ The default options for all chart axes. Accepts the options supported by [catego
     });
     </script>
 
+### axisDefaults.background `String`
+
+The background color of the axis.
+
+### axisDefaults.color `String`
+
+The color to apply to all axis elements. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.crosshair `Object`
+
+The crosshair configuration options.
+
+> The crosshair is displayed when the [axisDefaults.crosshair.visible](#configuration-axisDefaults.crosshair.visible) option is set to `true`.
+
+### axisDefaults.crosshair.color `String`
+
+The color of the crosshair. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.crosshair.dashType `String` *(default: "solid")*
+
+The dash type of the crosshair.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### axisDefaults.crosshair.opacity `Number` *(default: 1)*
+
+The opacity of the crosshair. By default the crosshair is opaque.
+
+### axisDefaults.crosshair.tooltip `Object`
+
+The crosshar tooltip options.
+
+> The crosshair tooltip is displayed when the [axisDefaults.crosshair.tooltip.visible](#configuration-axisDefaults.crosshair.tooltip.visible) option is set to `true`.
+
+### axisDefaults.crosshair.tooltip.background `String`
+
+The background color of the tooltip. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.crosshair.tooltip.border `Object`
+
+The border options.
+
+### axisDefaults.crosshair.tooltip.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.crosshair.tooltip.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### axisDefaults.crosshair.tooltip.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### axisDefaults.crosshair.tooltip.color `String`
+
+The text color of the tooltip. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.crosshair.tooltip.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
+
+The tooltip font.
+
+### axisDefaults.crosshair.tooltip.format `String` *(default: "{0}")*
+
+The format used to display the tooltip. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+
+### axisDefaults.crosshair.tooltip.padding `Number|Object` *(default: 0)*
+
+The padding of the crosshair tooltip. A numeric value will set all paddings.
+
+### axisDefaults.crosshair.tooltip.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the crosshair tooltip.
+
+### axisDefaults.crosshair.tooltip.padding.left `Number` *(default: 0)*
+
+The left padding of the crosshair tooltip.
+
+### axisDefaults.crosshair.tooltip.padding.right `Number` *(default: 0)*
+
+The right padding of the crosshair tooltip.
+
+### axisDefaults.crosshair.tooltip.padding.top `Number` *(default: 0)*
+
+The top padding of the crosshair tooltip.
+
+### axisDefaults.crosshair.tooltip.template `String|Function`
+
+The [template](/api/javascript/kendo#methods-template) which renders the tooltip.
+
+The fields which can be used in the template are:
+
+* value - the category value
+
+### axisDefaults.crosshair.tooltip.visible `Boolean` *(default: false)*
+
+If set to `true` the chart will display the axis crosshair tooltip. By default the axis crosshair tooltip is not visible.
+
+### axisDefaults.crosshair.visible `Boolean` *(default: false)*
+
+If set to `true` the chart will display the axis crosshair. By default the axis crosshair is not visible.
+
+### axisDefaults.crosshair.width `Number` *(default: 1)*
+
+The width of the crosshair in pixels.
+
+### axisDefaults.labels `Object`
+
+The axis labels configuration.
+
+### axisDefaults.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
+
+The font style of the labels.
+
+### axisDefaults.labels.format `String` *(default: "{0}")*
+
+The format used to display the labels. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
+
+### axisDefaults.labels.margin `Number|Object` *(default: 0)*
+
+The margin of the labels. A numeric value will set all margins.
+
+### axisDefaults.labels.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the labels.
+
+### axisDefaults.labels.margin.left `Number` *(default: 0)*
+
+The left margin of the labels.
+
+### axisDefaults.labels.margin.right `Number` *(default: 0)*
+
+The right margin of the labels.
+
+### axisDefaults.labels.margin.top `Number` *(default: 0)*
+
+The top margin of the labels.
+
+### axisDefaults.labels.mirror `Boolean` *(default: false)*
+
+If set to `true` the chart will mirror the axis labels and ticks. If the labels are normally on the left side of the axis, mirroring the axis will render them to the right.
+
+### axisDefaults.labels.padding `Object|Number` *(default: 0)*
+
+The padding of the labels. A numeric value will set all paddings.
+
+### axisDefaults.labels.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the labels.
+
+### axisDefaults.labels.padding.left `Number` *(default: 0)*
+
+The left padding of the labels.
+
+### axisDefaults.labels.padding.right `Number` *(default: 0)*
+
+The right padding of the labels.
+
+### axisDefaults.labels.padding.top `Number` *(default: 0)*
+
+The top padding of the labels.
+
+### axisDefaults.labels.rotation `Number|String|Object` *(default: 0)*
+
+The rotation angle of the labels. By default the labels are not rotated. Can be set to `"auto"` if the axis is horizontal in which case the labels will be rotated only if the slot size is not sufficient for the entire labels.
+
+### axisDefaults.labels.rotation.align `String` *(default: "end")*
+
+The alignment of the rotated labels relative to the slot center. The supported values are `"end"` and `"center"`. By default the closest end of the label will be aligned to the center. If set to `"center"`, the center of the rotated label will be aligned instead.
+
+### axisDefaults.labels.rotation.angle `Number|String` *(default: 0)*
+
+The rotation angle of the labels. By default the labels are not rotated. Can be set to `"auto"` if the axis is horizontal in which case the labels will be rotated only if the slot size is not sufficient for the entire labels.
+
+### axisDefaults.labels.skip `Number` *(default: 0)*
+
+The number of labels to skip. By default no labels are skipped.
+
+### axisDefaults.labels.step `Number` *(default: 1)*
+
+The label rendering step - render every n-th label. By default every label is rendered.
+
+### axisDefaults.labels.template `String|Function`
+
+The [template](/api/javascript/kendo#methods-template) which renders the labels.
+
+The fields which can be used in the template are:
+
+* value - the category value
+* dataItem - the data item, in case a field has been specified. If the category does not have a corresponding item in the data then an empty object will be passed.
+* format - the default format of the label
+* culture - the default culture (if set) on the label
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+### axisDefaults.labels.visible `Boolean` *(default: true)*
+
+If set to `true` the chart will display the axis labels. By default the axis labels are visible.
+
+### axisDefaults.labels.visual `Function`
+
+A function that can be used to create a custom visual for the labels. The available argument fields are:
+
+* createVisual - a function that can be used to get the default visual.
+* culture - the default culture (if set) on the label
+* dataItem - the data item, in case a field has been specified
+* format - the default format of the label
+* options - the label options.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
+* text - the label text.
+* value - the category value
+
+### axisDefaults.line `Object`
+
+The configuration of the axis lines. Also affects the major and minor ticks, but not the grid lines.
+
+### axisDefaults.line.color `String` *(default: "black")*
+
+The color of the lines. Accepts a valid CSS color string, including hex and rgb.
+
+> Setting the `color` option affects the major and minor ticks, but not the grid lines.
+
+### axisDefaults.line.dashType `String` *(default: "solid")*
+
+The dash type of the line.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### axisDefaults.line.visible `Boolean` *(default: true)*
+
+If set to `true` the chart will display the axis lines. By default the axis lines are visible.
+
+### axisDefaults.line.width `Number` *(default: 1)*
+
+The width of the line in pixels. Also affects the major and minor ticks, but not the grid lines.
+
+### axisDefaults.majorGridLines `Object`
+
+The configuration of the major grid lines. These are the lines that are an extension of the major ticks through the
+body of the chart.
+
+### axisDefaults.majorGridLines.color `String` *(default: "black")*
+
+The color of the major grid lines. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.majorGridLines.dashType `String` *(default: "solid")*
+
+The dash type of the major grid lines.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### axisDefaults.majorGridLines.visible `Boolean` *(default: false)*
+
+If set to `true` the chart will display the major grid lines. By default the major grid lines are visible.
+
+### axisDefaults.majorGridLines.width `Number` *(default: 1)*
+
+The width of the axis major grid lines in pixels.
+
+### axisDefaults.majorGridLines.step `Number` *(default: 1)*
+
+The step of the axis major grid lines.
+
+### axisDefaults.majorGridLines.skip `Number` *(default: 0)*
+
+The skip of the axis major grid lines.
+
+### axisDefaults.majorTicks `Object`
+
+The configuration of the axis major ticks.
+
+### axisDefaults.majorTicks.color `String` *(default: "black")*
+
+The color of the axis major ticks lines. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.majorTicks.size `Number` *(default: 4)*
+
+The length of the tick line in pixels.
+
+### axisDefaults.majorTicks.visible `Boolean` *(default: true)*
+
+If set to `true` the chart will display the axis major ticks. By default the axis major ticks are visible.
+
+### axisDefaults.majorTicks.width `Number` *(default: 1)*
+
+The width of the major ticks in pixels.
+
+### axisDefaults.majorTicks.step `Number` *(default: 1)*
+
+The step of the axis major ticks.
+
+### axisDefaults.majorTicks.skip `Number` *(default: 0)*
+
+The skip of the axis major ticks.
+
+### axisDefaults.minorGridLines `Object`
+
+The configuration of the minor grid lines. These are the lines that are an extension of the minor ticks through the
+body of the chart.
+
+### axisDefaults.minorGridLines.color `String` *(default: "black")*
+
+The color of the minor grid lines. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.minorGridLines.dashType `String` *(default: "solid")*
+
+The dash type of the minor grid lines.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### axisDefaults.minorGridLines.visible `Boolean` *(default: false)*
+
+If set to `true` the chart will display the minor grid lines. By default the minor grid lines are visible.
+
+### axisDefaults.minorGridLines.width `Number` *(default: 1)*
+
+The width of the axis minor grid lines in pixels.
+
+### axisDefaults.minorGridLines.step `Number` *(default: 1)*
+
+The step of the axis minor grid lines.
+
+### axisDefaults.minorGridLines.skip `Number` *(default: 0)*
+
+The skip of the axis minor grid lines.
+
+### axisDefaults.minorTicks `Object`
+
+The configuration of the axis minor ticks.
+
+### axisDefaults.minorTicks.color `String` *(default: "black")*
+
+The color of the axis minor ticks lines. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.minorTicks.size `Number` *(default: 4)*
+
+The length of the tick line in pixels.
+
+### axisDefaults.minorTicks.visible `Boolean` *(default: true)*
+
+If set to `true` the chart will display the axis minor ticks. By default the axis minor ticks are visible.
+
+### axisDefaults.minorTicks.width `Number` *(default: 1)*
+
+The width of the minor ticks in pixels.
+
+### axisDefaults.minorTicks.step `Number` *(default: 1)*
+
+The step of the axis minor ticks.
+
+### axisDefaults.minorTicks.skip `Number` *(default: 0)*
+
+The skip of the axis minor ticks.
+
+### axisDefaults.narrowRange `Boolean` *(default: false)*
+
+If set to `true` the chart will prevent the axis range from snapping to 0.
+Setting it to `false` will force the axis range to snap to 0.
+
+### axisDefaults.pane `String`
+
+The name of the pane that the axis should be rendered in.
+The axis will be rendered in the first (default) pane if not set.
+
+### axisDefaults.plotBands `Array`
+
+The plot bands of the axis.
+
+### axisDefaults.plotBands.color `String`
+
+The color of the plot band.
+
+### axisDefaults.plotBands.from `Number`
+
+The start position of the plot band in axis units.
+
+### axisDefaults.plotBands.opacity `Number`
+
+The opacity of the plot band.
+
+### axisDefaults.plotBands.to `Number`
+
+The end position of the plot band in axis units.
+
+### axisDefaults.reverse `Boolean` *(default: false)*
+
+If set to `true` the axis direction will be reversed. By default categories are listed from left to right and from bottom to top.
+
+### axisDefaults.startAngle `Number` *(default: 90)*
+
+The angle (degrees) of the first category on the axis.
+
+Angles increase clockwise and zero is to the left. Negative values are acceptable.
+
+### axisDefaults.title `Object`
+
+The title configuration of the axis.
+
+> The [axisDefaults.title.text](#configuration-axisDefaults.title.text) option must be set in order to display the title.
+
+### axisDefaults.title.background `String`
+
+The background color of the title. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.title.border `Object`
+
+The border of the title.
+
+### axisDefaults.title.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.title.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### axisDefaults.title.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### axisDefaults.title.color `String`
+
+The text color of the title. Accepts a valid CSS color string, including hex and rgb.
+
+### axisDefaults.title.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
+
+The font style of the title.
+
+### axisDefaults.title.margin `Number|Object` *(default: 5)*
+
+The margin of the title. A numeric value will set all margins.
+
+### axisDefaults.title.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the title.
+
+### axisDefaults.title.margin.left `Number` *(default: 0)*
+
+The left margin of the title.
+
+### axisDefaults.title.margin.right `Number` *(default: 0)*
+
+The right margin of the title.
+
+### axisDefaults.title.margin.top `Number` *(default: 0)*
+
+The top margin of the title.
+
+### axisDefaults.title.padding `Number|Object` *(default: 0)*
+
+The padding of the title. A numeric value will set all paddings.
+
+### axisDefaults.title.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the title.
+
+### axisDefaults.title.padding.left `Number` *(default: 0)*
+
+The left padding of the title.
+
+### axisDefaults.title.padding.right `Number` *(default: 0)*
+
+The right padding of the title.
+
+### axisDefaults.title.padding.top `Number` *(default: 0)*
+
+The top padding of the title.
+
+### axisDefaults.title.position `String` *(default: "center")*
+
+The position of the title.
+
+The supported values are:
+
+* "top" - the axis title is positioned on the top (applicable to vertical axis)
+* "bottom" - the axis title is positioned on the bottom (applicable to vertical axis)
+* "left" - the axis title is positioned on the left (applicable to horizontal axis)
+* "right" - the axis title is positioned on the right (applicable to horizontal axis)
+* "center" - the axis title is positioned in the center
+
+### axisDefaults.title.rotation `Number` *(default: 0)*
+
+The rotation angle of the title. By default the title is not rotated.
+
+### axisDefaults.title.text `String`
+
+The text of the title.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+### axisDefaults.title.visible `Boolean` *(default: true)*
+
+If set to `true` the chart will display the axis title. By default the axis title is visible.
+
+### axisDefaults.title.visual `Function`
+
+A function that can be used to create a custom visual for the title. The available argument fields are:
+
+* text - the label text.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
+* options - the label options.
+* createVisual - a function that can be used to get the default visual.
+
+### axisDefaults.visible `Boolean` *(default: true)*
+
+If set to `true` the chart will display the axis. By default the axis is visible.
+
 ### categoryAxis `Array|Object`
 
 The category axis configuration options.
@@ -104,6 +665,10 @@ This will continue until the number of intervals is less than
         }
     });
     </script>
+
+### categoryAxis.autoBaseUnitSteps.milliseconds `Array` *(default: [1, 100, 100])*
+
+The milliseconds unit steps.
 
 ### categoryAxis.autoBaseUnitSteps.seconds `Array` *(default: [1, 2, 5, 15, 30])*
 
@@ -186,6 +751,7 @@ between subsequent categories.
 The supported values are:
 
 * "fit"
+* "milliseconds"
 * "seconds"
 * "minutes"
 * "hours"
@@ -322,7 +888,7 @@ The color of the crosshair. Accepts a valid CSS color string, including hex and 
     });
     </script>
 
-### categoryAxis.crosshair.dashType `string` *(default: "solid")*
+### categoryAxis.crosshair.dashType `String` *(default: "solid")*
 
 The dash type of the crosshair.
 
@@ -4065,7 +4631,7 @@ The supported values are:
       categoryAxis: {
         notes: {
           icon: {
-            shape: "triangle"
+            type: "triangle"
           },
           data: [{ value: 1 }]
         }
@@ -4390,6 +4956,20 @@ The position of the labels.
 ### categoryAxis.notes.line `Object`
 
 The line of the notes.
+
+### categoryAxis.notes.line.dashType `String` *(default: "solid")*
+
+The dash type of the note line.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
 
 ### categoryAxis.notes.line.width `Number`
 
@@ -5853,7 +6433,6 @@ The fields which can be used in the template are:
 *   series - the data series.
 *   value - the point value. (only for donut and pie charts)
 *   percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
-*   dataItem - the original data item used to construct the point.
 
 > The text can be split into multiple lines by using line feed characters ("\n").
 
@@ -8822,8 +9401,6 @@ The supported values are:
 * "vml" - renders the widget as VML, if available
 * "canvas" - renders the widget as a Canvas element, if available.
 
-> Using Canvas rendering disables most interactive features.
-
 ### Example - Render as Canvas, if supported
 
     <div id="chart"></div>
@@ -9203,7 +9780,7 @@ The label connectors options.
     });
     </script>
 
-### series.connectors.color `String`
+### series.connectors.color `String|Function`
 
 The color of the connector. Accepts a valid CSS color string, including hex and rgb.
 
@@ -10469,6 +11046,20 @@ The line of the highlighted chart series. The color is computed automatically fr
     });
     </script>
 
+### series.highlight.line.dashType `String` *(default: "solid")*
+
+The dash type of the highlight line.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
 ### series.highlight.line.color `String`
 
 The line color. Accepts a valid CSS color string, including hex and rgb.
@@ -10630,6 +11221,7 @@ The available argument fields are:
 * value - the point value.
 * sender - the chart instance.
 * series - the point series.
+* stackValue - the cumulative point value on the stack. Available only for stackable series.
 * percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
 * runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
@@ -11208,6 +11800,7 @@ The fields which can be used in the template are:
 * dataItem - the original data item used to construct the point. Will be null if binding to array.
 * percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
 * series - the data series
+* stackValue - the cumulative point value on the stack. Available only for stackable series.
 * value - the point value. Can be a number or object containing each bound field.
 * runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
 * total - the sum of all previous series values. Available for waterfall series.
@@ -11917,11 +12510,11 @@ The supported values are:
     });
     </script>
 
-### series.markers.visible `Boolean|Function` *(default: false)*
+### series.markers.visible `Boolean|Function` *(default: true)*
 
-If set to `true` the chart will display the series markers. By default chart series markers are not displayed.
+If set to `true` the chart will display the series markers. By default chart series markers are displayed.
 
-#### Example - display the chart series markers
+#### Example - hide the chart series markers
 
     <div id="chart"></div>
     <script>
@@ -11929,7 +12522,7 @@ If set to `true` the chart will display the series markers. By default chart ser
       series: [{
         type: "line",
         markers: {
-          visible: true
+          visible: false
         },
         data: [1, 2, 3]
       }]
@@ -12028,7 +12621,7 @@ The rotation angle of the markers.
 
 ### series.outliers `Object`
 
-The chart series outliers configuration.
+The chart series outliers configuration. Applies to **mild** outliers. Also check [`series.extremes`](#configuration-series.extremes).
 
 #### Example - set the chart series outliers
 
@@ -12230,7 +12823,7 @@ The rotation angle of the outliers.
 
 ### series.extremes `Object`
 
-The chart series extremes configuration.
+The chart series extremes configuration. Applies to **extreme** outliers. Also check [`series.outliers`](#configuration-series.outliers).
 
 #### Example - set the chart series extremes
 
@@ -12814,7 +13407,7 @@ A string value is interpreted as [series.stack.group](#configuration-series.stac
 
 > The `stack` options is supported when [series.type](#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
 
-> Stack settings of the first series are applied to the rest of the series.
+> Stack settings of the first series are inherited as a default value by the rest of the series, in case they are not overridden.
 
 #### Example - configure stack series
 
@@ -13074,6 +13667,7 @@ The target line options.
         }
       ]
     });
+    </script>
 
 ### series.target.line.width `Object|Function`
 
@@ -13098,6 +13692,7 @@ The width of the line.
         }
       ]
     });
+    </script>
 
 ### series.targetField `String` *(default: "target")*
 
@@ -13512,6 +14107,7 @@ The supported values are:
 * scatter
 * scatterLine
 * verticalArea
+* verticalBoxPlot
 * verticalBullet
 * verticalLine
 * waterfall
@@ -13606,6 +14202,7 @@ A function that can be used to create a custom visual for the points. Applicable
 * category - the point category.
 * dataItem - the point dataItem.
 * value - the point value.
+* stackValue - the cumulative point value on the stack. Available only for stackable series.
 * sender - the chart instance.
 * series - the point series.
 * percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
@@ -14279,6 +14876,20 @@ The position of the labels.
 ### series.notes.line `Object`
 
 The line of the notes.
+
+### series.notes.line.dashType `String` *(default: "solid")*
+
+The dash type of the note line.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
 
 ### series.notes.line.width `Number`
 
@@ -16743,6 +17354,20 @@ The position of the labels.
 
 The line of the notes.
 
+### seriesDefaults.notes.line.dashType `String` *(default: "solid")*
+
+The dash type of the note line.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
 ### seriesDefaults.notes.line.width `Number`
 
 The line width of the notes.
@@ -17352,9 +17977,9 @@ The text of the chart title. You can also set the text directly for a title with
     });
     </script>
 
-### title.visible `Boolean` *(default: false)*
+### title.visible `Boolean` *(default: true)*
 
-If set to `true` the chart will display the title. By default the title is not displayed.
+If set to `true` the chart will display the title. By default the title will be displayed.
 
 #### Example - hide the title
 
@@ -17548,6 +18173,25 @@ Format placeholders:
           type: "bubble",
           data: [ [1, 2, 3] ]
         }
+      ]
+    });
+    </script>
+
+### tooltip.opacity `Number` *(default: 1)*
+
+The opacity of the tooltip.
+
+#### Example - set the chart tooltip opacity
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      tooltip: {
+        visible: true,
+        opacity: 0.5
+      },
+      series: [
+        { data: [1, 2, 3] }
       ]
     });
     </script>
@@ -20384,6 +21028,10 @@ The end position of the plot band in axis units.
 
 If set to `true` the value axis direction will be reversed. By default categories are listed from left to right and from bottom to top.
 
+> **Important**
+>
+> A reverse value axis is not supported for radar and polar charts.
+
 #### Example - reverse the value axis
 
     <div id="chart"></div>
@@ -21507,6 +22155,20 @@ The position of the labels.
 
 The line of the notes.
 
+### valueAxis.notes.line.dashType `String` *(default: "solid")*
+
+The dash type of the note line.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
 ### valueAxis.notes.line.width `Number`
 
 The line width of the notes.
@@ -22312,6 +22974,7 @@ The background color of the axis.
 
 The base time interval for the axis labels. The default baseUnit is determined automatically from the value range. Available options:
 
+* milliseconds
 * seconds
 * minutes
 * hours
@@ -24957,7 +25620,7 @@ Setting it to `false` will force the automatic axis range to snap to 0.
           xAxis: {
             narrowRange: true
           },
-          xAxis: {
+          yAxis: {
             narrowRange: true
           }
         });
@@ -26276,6 +26939,20 @@ The position of the labels.
 
 The line of the notes.
 
+### xAxis.notes.line.dashType `String` *(default: "solid")*
+
+The dash type of the note line.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
 ### xAxis.notes.line.width `Number`
 
 The line width of the notes.
@@ -27085,6 +27762,7 @@ The background color of the axis.
 
 The base time interval for the axis labels. The default baseUnit is determined automatically from the value range. Available options:
 
+* milliseconds
 * seconds
 * minutes
 * hours
@@ -30997,6 +31675,20 @@ The position of the labels.
 
 The line of the notes.
 
+### yAxis.notes.line.dashType `String` *(default: "solid")*
+
+The dash type of the note line.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
 ### yAxis.notes.line.width `Number`
 
 The line width of the notes.
@@ -31739,7 +32431,7 @@ A function that can be used to create a custom visual for the notes. The availab
 
 Specifies if the chart can be zoomed.
 
-### Example - enable zooming
+##### Example - enable zooming
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
@@ -31757,7 +32449,7 @@ Specifies if the chart can be zoomed.
 
 Specifies if the chart can be zoomed using the mouse wheel.
 
-### Example - disable mouse wheel zoom
+##### Example - disable mouse wheel zoom
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
@@ -31777,7 +32469,7 @@ Specifies if the chart can be zoomed using the mouse wheel.
 
 Specifies an axis that should not be zoomed. The supported values are `none`, `x` and `y`.
 
-### Example - disable mouse wheel zoom for the y axis
+##### Example - disable mouse wheel zoom for the y axis
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
@@ -31797,7 +32489,7 @@ Specifies an axis that should not be zoomed. The supported values are `none`, `x
 
 Specifies if the chart can be zoomed using selection.
 
-### Example - disable selection zoom
+##### Example - disable selection zoom
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
@@ -31822,7 +32514,7 @@ Specifies a keyboard key that should be pressed to activate the selection. The s
 * "shift" - The "shift" key should be pressed.
 * "alt" - The "alt" key should be pressed.
 
-### Example - specify that no key needs be pressed
+##### Example - specify that no key needs be pressed
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
@@ -31844,7 +32536,7 @@ Specifies a keyboard key that should be pressed to activate the selection. The s
 
 Specifies an axis that should not be zoomed. The supported values are `none`, `x` and `y`.
 
-### Example - disable selection zoom for the y axis
+##### Example - disable selection zoom for the y axis
     <div id="chart"></div>
     <script>
       $("#chart").kendoChart({
@@ -32135,6 +32827,151 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
         });
     </script>
 
+### findAxisByName
+
+An alias for the existing [getAxis](#methods-getAxis) method.
+
+#### Parameters
+
+##### name `String`
+
+The axis name.
+
+#### Returns
+
+`kendo.dataviz.ChartAxis` The chart axis.
+
+### findPaneByIndex
+
+Returns a [pane](/api/javascript/dataviz/chart/chart_pane) with specific index.
+
+#### Parameters
+
+##### index `Number`
+
+The pane index.
+
+#### Returns
+
+`kendo.dataviz.ChartPane` The chart pane.
+
+#### Example - use the pane chartsVisual to draw a circle behind series points
+
+    <div id="chart"></div>
+    <script>
+      var chart = $("#chart").kendoChart({
+        series: [{ data: [1, 2] }]
+      }).getKendoChart();
+
+      var pane = chart.findPaneByIndex(0);
+      var circle = new kendo.drawing.Circle(new kendo.geometry.Circle([200, 200], 100), { fill: { color: "red" }});
+
+      pane.chartsVisual.insert(0, circle);
+    </script>
+
+### findPaneByName
+
+Returns a [pane](/api/javascript/dataviz/chart/chart_pane) with specific name.
+
+#### Parameters
+
+##### name `String`
+
+The pane name.
+
+#### Returns
+
+`kendo.dataviz.ChartPane` The chart pane.
+
+#### Example - find the pane by name
+
+    <div id="chart"></div>
+    <script>
+      var chart = $("#chart").kendoChart({
+        series: [{ data: [1, 2] }],
+        panes: [{ name: "foo" }]
+      }).getKendoChart();
+
+      var pane = chart.findPaneByName("foo");
+    </script>
+
+### findSeries
+
+Returns a [series](/api/javascript/dataviz/chart/chart_series) determined from the passed function. The function is called with the options of each series until it returns true.
+
+#### Parameters
+
+##### callback `Function`
+
+The function that will be called for each series.
+
+#### Returns
+
+`kendo.dataviz.ChartSeries` The chart series.
+
+#### Example - find series that contain 3 in the data
+
+    <div id="chart"></div>
+    <script>
+      var chart = $("#chart").kendoChart({
+        series: [{ data: [1, 2] }, { data: [3, 4] }],
+      }).getKendoChart();
+
+      var series = chart.findSeries(function(series) {
+        return $.inArray(3, series.data) >= 0;
+      });
+    </script>
+
+### findSeriesByIndex
+
+Returns a [series](/api/javascript/dataviz/chart/chart_series) with specific index.
+
+#### Parameters
+
+##### index `Number`
+
+The series index.
+
+#### Returns
+
+`kendo.dataviz.ChartSeries` The chart series.
+
+#### Example - find the second series
+
+    <div id="chart"></div>
+    <script>
+      var chart = $("#chart").kendoChart({
+        series: [{ data: [1, 2] }, { data: [3, 4] }],
+      }).getKendoChart();
+
+      var series = chart.findSeriesByIndex(1);
+    </script>
+
+### findSeriesByName
+
+Returns a [series](/api/javascript/dataviz/chart/chart_series) with specific name.
+
+#### Parameters
+
+##### name `String`
+
+The series name.
+
+#### Returns
+
+`kendo.dataviz.ChartSeries` The chart series.
+
+#### Example - find the series with name "bar"
+
+    <div id="chart"></div>
+    <script>
+      var chart = $("#chart").kendoChart({
+        series: [{ name: "foo", data: [1, 2] }, { name: "bar", data: [3, 4] }],
+      }).getKendoChart();
+
+      var series = chart.findSeriesByName("bar");
+    </script>
+
 ### getAxis
 
 Returns an [axis](/api/javascript/dataviz/chart/chart_axis) with specific name.
@@ -32181,6 +33018,41 @@ The axis name.
       .lineTo(categorySlot.bottomRight().x, valueSlot.origin.y);
 
       chart.surface.draw(path);
+    </script>
+
+### hideTooltip
+
+Hides the chart tooltip.
+
+#### Example - hide the tooltip
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{ data: [1, 2] }]
+      });
+
+      var chart = $("#chart").data("kendoChart");
+
+      chart.showTooltip(function(point) {
+        return point.value === 2;
+      });
+
+      chart.hideTooltip();
+    </script>
+
+### plotArea
+
+Returns the chart [plotArea](/api/javascript/dataviz/chart/chart_plotarea).
+
+#### Example - use the plotArea backgroundVisual to change the background
+
+    <div id="chart"></div>
+    <script>
+      var chart = $("#chart").kendoChart({}).getKendoChart();
+      var plotArea = chart.plotArea();
+
+      plotArea.backgroundVisual.fill("red", 1);
     </script>
 
 ### redraw
@@ -32303,6 +33175,51 @@ The chart settings to update.
     chart.setOptions({ theme: "uniform" });
     </script>
 
+### showTooltip
+
+Shows the chart tooltip for specific point or the shared tooltip for specific category. The method accepts a function which will be called for each [point](/api/javascript/dataviz/chart/chart_point) until the function returns `true`.
+
+#### Parameters
+
+##### filter `Function|Number|Date|String`
+
+The callback function which will be called for the points or the category value for a shared tooltip.
+
+#### Example - show the tooltip for a point with value equal to 2
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{ data: [1, 2] }]
+      });
+
+      var chart = $("#chart").data("kendoChart");
+
+      chart.showTooltip(function(point) {
+        return point.value === 2;
+      });
+    </script>
+
+#### Example - show the shared tooltip for category equal to "B"
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{ name: "foo", data: [1, 2] }],
+        categoryAxis: {
+          categories: ["A", "B"]
+        },
+        tooltip: {
+          visible: true,
+          shared: true
+        }
+      });
+
+      var chart = $("#chart").data("kendoChart");
+
+      chart.showTooltip("B");
+    </script>
+
 ### svg
 
 Returns the [SVG](http://www.w3.org/Graphics/SVG/) representation of the chart.
@@ -32388,9 +33305,17 @@ Toggles the highlight of the series points or a segment for pie, donut and funne
 
 A boolean value that specifies if the highlight should be shown or hidden.
 
-##### options `String|Object`
+##### options `String|Object|Function`
 
-A string representing the series name or the category name or an object with the series and category names.
+A string representing the series name or the category name or an object with the series and category names or a function which will be called for each point. The fields available in the function argument are:
+
+* category - the point category.
+* dataItem - the point dataItem.
+* value - the point value.
+* series - the point series.
+* percentage - the point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
+* runningTotal - the sum of point values since the last "runningTotal" [summary point](#configuration-series.summaryField). Available for waterfall series.
+* total - the sum of all previous series values. Available for waterfall series.
 
 ##### options.series `String`
 
@@ -32456,6 +33381,24 @@ The category name.
       });
     </script>
 
+#### Example - show the highlight for a point
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [
+          { name: "A", data: [1, 2] },
+          { name: "B", data: [3, 4] }
+        ]
+      });
+
+      var chart = $("#chart").data("kendoChart");
+
+      chart.toggleHighlight(true, function(point) {
+        return point.value === 3;
+      });
+    </script>
+
 ## Events
 
 ### axisLabelClick
@@ -32482,7 +33425,7 @@ The DOM element of the label.
 
 The label sequential index or category index.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -32528,74 +33471,6 @@ The label value or category name.
     chart.bind("axisLabelClick", chart_axisLabelClick);
     </script>
 
-### legendItemClick
-
-Fires when an legend item is clicked, before the selected series visibility is toggled.
-Can be cancelled.
-
-#### Example - prevent toggling the series visibility on legend item click
-    function onLegendItemClick(e) {
-        e.preventDefault();
-    }
-
-#### Event Data
-
-##### e.text `String`
-
-The name of the series.
-
-##### e.series `Object`
-
-The series options.
-
-##### e.seriesIndex `Number`
-
-The series index.
-
-##### e.pointIndex `Number`
-
-The point index.
-
-##### e.preventDefault `Function`
-
-If invoked the default action (toggle series visibility) will be prevented.
-
-##### e.element `Object`
-
-The DOM element of the plot area.
-
-### legendItemHover
-
-Fires when an legend item is hovered.
-
-#### Example
-
-    function onLegendItemHover(e) {
-        alert("Hovered " + e.text + " series");
-    }
-
-#### Event Data
-
-##### e.text `String`
-
-The name of the series.
-
-##### e.series `Object`
-
-The series options.
-
-##### e.seriesIndex `Number`
-
-The series index.
-
-##### e.pointIndex `Number`
-
-The point index.
-
-##### e.element `Object`
-
-The DOM element of the plot area.
-
 ### dataBound
 
 Fired when the widget is bound to data from its data source.
@@ -32604,7 +33479,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 #### Event Data
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -32660,7 +33535,7 @@ A hastable containing the initial range (min and max values) of *named* axes. Th
 
 The original user event that triggered the drag action.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -32708,7 +33583,7 @@ A hastable containing the initial range (min and max values) of *named* axes. Th
 
 The original user event that triggered the dragEnd action.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -32760,7 +33635,7 @@ The original user event that triggered the drag action.
 
 If invoked the drag operation will abort.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -32792,6 +33667,82 @@ The widget instance which fired the event.
     chart.bind("dragStart", chart_dragStart);
     </script>
 
+### legendItemClick
+
+Fires when an legend item is clicked, before the selected series visibility is toggled.
+Can be cancelled.
+
+#### Example - prevent toggling the series visibility on legend item click
+    function onLegendItemClick(e) {
+        e.preventDefault();
+    }
+
+#### Event Data
+
+##### e.pointIndex `Number`
+
+The point index.
+
+##### e.preventDefault `Function`
+
+If invoked the default action (toggle series visibility) will be prevented.
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
+
+##### e.series `Object`
+
+The series options.
+
+##### e.seriesIndex `Number`
+
+The series index.
+
+##### e.text `String`
+
+The name of the series.
+
+##### e.element `Object`
+
+The DOM element of the plot area.
+
+### legendItemHover
+
+Fires when an legend item is hovered.
+
+#### Example
+
+    function onLegendItemHover(e) {
+        alert("Hovered " + e.text + " series");
+    }
+
+#### Event Data
+
+##### e.element `Object`
+
+The DOM element of the plot area.
+
+##### e.pointIndex `Number`
+
+The point index.
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
+
+##### e.series `Object`
+
+The series options.
+
+##### e.seriesIndex `Number`
+
+The series index.
+
+##### e.text `String`
+
+The name of the series.
+
 ### noteClick
 
 Fired when the user clicks one of the notes.
@@ -32804,25 +33755,25 @@ The event handler function context (available via the `this` keyword) will be se
 
 The data point category. Available only for categorical charts (bar, line, area and similar).
 
+##### e.dataItem `Object`
+
+The data item of the point's note.
+
 ##### e.element `Object`
 
 The DOM element of the plot area.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
-
-##### e.value `Object`
-
-The data point value.
 
 ##### e.series `Object`
 
 The series of the note.
 
-##### e.dataItem `Object`
+##### e.value `Object`
 
-The data item of the point's note.
+The data point value.
 
 ##### e.visual `Object`
 
@@ -32868,25 +33819,25 @@ The event handler function context (available via the `this` keyword) will be se
 
 The data point category. Available only for categorical charts (bar, line, area and similar).
 
+##### e.dataItem `Object`
+
+The data item of the point's note.
+
 ##### e.element `Object`
 
 The DOM element of the plot area.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
-
-##### e.value `Object`
-
-The data point value.
 
 ##### e.series `Object`
 
 The series of the note.
 
-##### e.dataItem `Object`
+##### e.value `Object`
 
-The data item of the point's note.
+The data point value.
 
 ##### e.visual `Object`
 
@@ -32936,13 +33887,13 @@ The data point category. Available only for categorical charts (bar, line, area 
 
 The DOM element of the plot area.
 
-##### e.sender `kendo.ui.Chart`
-
-The widget instance which fired the event.
-
 ##### e.originalEvent `Object`
 
 The original browser event that triggered the click action.
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
 
 ##### e.value `Object`
 
@@ -32954,7 +33905,7 @@ The X axis value or array of values for multi-axis charts.
 
 ##### e.y `Object`
 
-The X axis value or array of values for multi-axis charts.
+The Y axis value or array of values for multi-axis charts.
 
 #### Example - handle right click on plot area and disable context menu
     <div id="chart"></div>
@@ -33000,6 +33951,68 @@ The X axis value or array of values for multi-axis charts.
     chart.bind("plotAreaClick", chart_plotAreaClick);
     </script>
 
+### plotAreaHover
+
+Fired when the user hovers the plot area.
+
+#### Event Data
+
+##### e.category `Object`
+
+The data point category. Available only for categorical charts (bar, line, area and similar).
+
+##### e.element `Object`
+
+The DOM element of the plot area.
+
+##### e.originalEvent `Object`
+
+The original browser event that triggered the hover action.
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
+
+##### e.value `Object`
+
+The data point value. Available only for categorical charts (bar, line, area and similar).
+
+##### e.x `Object`
+
+The X axis value or array of values for multi-axis charts.
+
+##### e.y `Object`
+
+The Y axis value or array of values for multi-axis charts.
+
+#### Example - subscribe to the "plotAreaHover" event during initialization
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2] }
+      ],
+      plotAreaHover: function(e) {
+        console.log(e.value);
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "plotAreaHover" event after initialization
+    <div id="chart"></div>
+    <script>
+    function chart_plotAreaHover(e) {
+      console.log(e.value);
+    }
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2] }
+      ]
+    });
+    var chart = $("#chart").data("kendoChart");
+    chart.bind("plotAreaHover", chart_plotAreaHover);
+    </script>
+
 ### render
 
 Fired when the chart is ready to render on screen.
@@ -33007,6 +34020,12 @@ Fired when the chart is ready to render on screen.
 Can be used, for example, to remove loading indicators. Changes to options will be ignored.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
 
 ### select
 
@@ -33029,7 +34048,7 @@ The target axis configuration.
 
 The lower boundary of the selected range.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -33103,7 +34122,7 @@ The target axis configuration.
 
 The lower boundary of the selected range.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -33177,7 +34196,7 @@ The target axis configuration.
 
 The lower boundary of the selected range.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -33241,6 +34260,10 @@ Fired when the user clicks the chart series.
 
 The data point category
 
+##### e.dataItem `Object`
+
+The original data item (when binding to dataSource).
+
 ##### e.element `Object`
 
 The DOM element of the data point.
@@ -33248,6 +34271,14 @@ The DOM element of the data point.
 ##### e.originalEvent `Object`
 
 The original browser event that triggered the click action.
+
+##### e.percentage `Object`
+
+The point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
 
 ##### e.series `Object`
 
@@ -33265,21 +34296,13 @@ The series name
 
 The series data points
 
-##### e.dataItem `Object`
+##### e.stackValue `Object`
 
-The original data item (when binding to dataSource).
-
-##### e.sender `kendo.ui.Chart`
-
-The widget instance which fired the event.
+The cumulative point value on the stack. Available only for stackable series.
 
 ##### e.value `Object`
 
 The data point value.
-
-##### e.percentage `Object`
-
-The point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
 
 #### Example - handle right click on series and disable context menu
     <div id="chart"></div>
@@ -33346,6 +34369,10 @@ A list of all points that are in the same category. Each item has the same field
 Defined only when a [shared tooltip](#configuration-tooltip.shared) is in use.
 Available in versions 2014.3.1306 and later.
 
+##### e.dataItem `Object`
+
+The original data item (when binding to dataSource).
+
 ##### e.element `Object`
 
 The DOM element of the data point.
@@ -33353,6 +34380,14 @@ The DOM element of the data point.
 ##### e.originalEvent `Object`
 
 The original browser event that triggered the hover action.
+
+##### e.percentage `Object`
+
+The point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
+
+##### e.sender `kendo.dataviz.ui.Chart`
+
+The widget instance which fired the event.
 
 ##### e.series `Object`
 
@@ -33370,21 +34405,13 @@ The series name
 
 The series data points
 
-##### e.dataItem `Object`
+##### e.stackValue `Object`
 
-The original data item (when binding to dataSource).
-
-##### e.sender `kendo.ui.Chart`
-
-The widget instance which fired the event.
+The cumulative point value on the stack. Available only for stackable series.
 
 ##### e.value `Object`
 
 The data point value.
-
-##### e.percentage `Object`
-
-The point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
 
 #### Example - subscribe to the "seriesHover" event during initialization
     <div id="chart"></div>
@@ -33434,7 +34461,7 @@ A number that indicates the zoom amount and direction. A negative value indicate
 
 The original user event that triggered the drag action.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -33482,7 +34509,7 @@ A hastable containing the initial range (min and max values) of *named* axes. Th
 
 The original user event that triggered the zoomEnd action.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -33534,7 +34561,7 @@ The original user event that triggered the drag action.
 
 If invoked the zoom operation will abort.
 
-##### e.sender `kendo.ui.Chart`
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -33565,4 +34592,3 @@ The widget instance which fired the event.
     var chart = $("#chart").data("kendoChart");
     chart.bind("zoomStart", chart_zoomStart);
     </script>
-

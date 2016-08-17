@@ -55,7 +55,7 @@ The Kendo UI Hybrid Application widget automatically initializes a Touch compone
 
 Each `touch` event handler receives an event object as a parameter. The `touch` event has a `touch` property, which contains information about the touch event like its current coordinates, initial position, the DOM element, etc.
 
-For a full list of the properties of the `touch` object, see the [`touchObject` API reference](/api/mobile/touch/#TouchObject).
+For a full list of the properties of the `touch` object, see the [`touchObject` API reference](/api/javascript/mobile/ui/touch).
 
 The multi-touch gestures event object parameter has a `touches` property, which is an array of two `touch` objects. In addition, a `distance` and `center` properties are exposed.
 

@@ -1,6 +1,6 @@
 ---
 title: User Guide
-page_title: User Guide | Kendo UI Spreadsheet Widget
+page_title: User Guide | Kendo UI Spreadsheet
 description: "A user guide for the Kendo UI Spreadsheet widget."
 slug: user_guide_spreadsheet_widget
 position: 1
@@ -34,7 +34,7 @@ This guide uses the following conventions:
 
 Kendo UI Spreadsheet is used for implementation of related data and its visualization in a tabular format (rows and columns). This kind of data structuring provides for an easier management and analysis. The widget renders the feeling of a [Microsoft Excel table](https://support.office.com/en-ca/article/Overview-of-Excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c) by offering many cell-formatting options, styles, and themes, while utilizing simpler and easy-to-master user interface.
 
-##### Main Elements of the Kendo UI Spreadsheet Widget  
+##### Main Elements of the Kendo UI Spreadsheet Widget
 
 <center>![Spreadsheet UI components](../images/spreadsheet-components.png)</center>
 
@@ -59,9 +59,9 @@ When you open the Spreadsheet, the widget automatically generates a worksheet an
 | Select/activate       | Click a cell		    |
 | Select a range of cells | <ol><li>Click a cell</li> <li>Extend the selection by holding down the mouse while marking the selection you want</li></ol> |
 | Edit 					| Double-click a cell 	|
-| Copy content			| <ol><li>Select a cell</li> <li>Click **Copy** [ <span class="k-font-icon k-i-copy"></span> ] on the **Toolbar**, or use the [`Ctrl` + `C`]({% slug list_ofkeyboard_shortcuts_spreadsheet_widget %}) keyboard shortcut</li></ol>|
-| Cut content			| <ol><li>Select a cell</li> <li>Click **Cut** [ <span class="k-font-icon k-i-cut"></span> ] on the **Toolbar**, or use the [`Ctrl` + `X`]({% slug list_ofkeyboard_shortcuts_spreadsheet_widget %}) keyboard shortcut</li></ol> |
-| Paste content			| <ol><li>Click the cell where you want to place the copied or cut content</li> <li>Click **Paste** [ <span class="k-font-icon k-i-paste"></span> ] on the **Toolbar**, or use the [`Ctrl` + `V`]({% slug list_ofkeyboard_shortcuts_spreadsheet_widget %}) keyboard shortcut</li></ol> |
+| Copy content			| <ol><li>Select a cell</li> <li>Click **Copy** [ <span class="k-font-icon k-i-copy"></span> ] on the **Toolbar**, or right-click the desired cell to display the context menu and choose **Copy** from it, or use the [`Ctrl` + `C`]({% slug list_ofkeyboard_shortcuts_spreadsheet_widget %}) keyboard shortcut</li></ol>|
+| Cut content			| <ol><li>Select a cell</li> <li>Click **Cut** [ <span class="k-font-icon k-i-cut"></span> ] on the **Toolbar**, or right-click the desired cell to display the context menu and choose **Cut** from it, or use the [`Ctrl` + `X`]({% slug list_ofkeyboard_shortcuts_spreadsheet_widget %}) keyboard shortcut</li></ol> |
+| Paste content			| <ol><li>Click the cell where you want to place the copied or cut content</li> <li>Click **Paste** [ <span class="k-font-icon k-i-paste"></span> ] on the **Toolbar**, or right-click the desired cell to display the context menu and choose **Paste** from it, or use the [`Ctrl` + `V`]({% slug list_ofkeyboard_shortcuts_spreadsheet_widget %}) keyboard shortcut</li></ol> |
 | Delete content		| <ol><li>Select a cell</li> <li>Press **Delete** on your keyboard to remove its content</li></ol> |
 | Align content			| <ol><li>Select a cell</li> <li>Click **Alignment** [ <span class="k-font-icon k-i-justify-left"></span> ] on the **Toolbar**</li> <li>Choose a style form the drop-down list</li></ol> |
 | Wrap content				| <ol><li>Select a cell that contains the content you want to wrap</li> <li>Click **Wrap Text** [ <span class="k-font-icon k-i-text-wrap"></span> ] on the **Toolbar**</li></ol> |
@@ -111,7 +111,7 @@ When you open the Spreadsheet, the widget automatically generates a worksheet an
 | :---						| :---					|
 | Sort fields   		    | <ol><li>Click **Data** on the **Tab Bar**</li> <li>Select a column</li> <li>Click **Sort** [ <span class="k-font-icon k-i-sort-desc"></span> ] on the **Toolbar** and choose any of the two options from the drop-down list:</li> <ul><ul><li>**Sort range A to Z** sorts the content within the selected columns in ascending order</li> <li>**Sort range Z to A** sorts the content within the selected columns in descending alphabetical order</li></ul></ul></ol> |
 | Unsort fields             | <ul><li>Click **Undo** [ <span class="k-font-icon k-i-undo"></span> ] on the **Menu** to reverse the sorting you made.</li></ul> <ul>Оr</ul> <ul><li>Add a new column. Check which is the last active field of the columns whose data you want to sort. Then add a subsequent number (1, 2, 3, etc.) to each field of the recently added column ending with the field in the same row as the last field of the columns whose content you want to sort. In this way you can revert the sorting of the target columns by applying the sorting option in ascending order to the recently added helper column.</li></ul> |
-| Filter information        | <ol><li>Click **Data** on the **Tab Bar**</li> <li>Select the columns to which you want to apply the filtering criteria</li> <li>Click **Filter** [ <span class="k-font-icon k-i-filter"></span> ] on the **Toolbar**</li> <li>Choose from the drop-down list of options:</li> <ul><ul><li>**Sort range A to Z** sorts the data within the columns in ascending alphabetical order</li> <li>**Sort range Z to A** sorts the data within the columns in descending alphabetical order</li> <li>**Filter by condition** filters the data within the column by applying any of the conditions from the drop-down list of options. Each of them can be applied to text fields, dates, or numbers:</li> <ul><ul><li><u>Text fields:</u> Choose any of the options referring to texts from the **Filter by condition** drop-down list. Fill in the field below to set the filter condition. Click **Apply**. For example, choose **Text starts with**, set the condition to **E**, and click **Apply**. The result shows all rows containing text fields that start with an **E**. You can alphabetically sort the filtered infromation by clicking **Sort range A to Z** or **Sort range Z to A**.</li> <li><u>Dates:</u> Choose any of the options referring to dates from the **Filter by condition** drop-down list. Fill in the field below to set the filter condition. Click **Apply**. For example, choose **Date is**, set the condition to **6/30/2014**, and click **Apply**. The result is a list of only rows containing fields that display the date 6/30/2014. Note that the date format may differ depending on the order of date components. Make sure you check the current format before applying this filter.</li> <li><u>Numbers:</u> Choose any of the options referring to numbers from the **Filter by condition** drop-down list. Fill in the field below to set the filter condition. Click **Apply**. For example, choose **Is equal to**, set the condition to **10230**, and click **Apply**. The result is a list of only rows containing fields that display the number 10230.</li></ul></ul></ul></ul> <ul><ul>To retrieve all applied filters and sorting conditions, from **Filter by condition** choose **None** > **Apply**.</ul></ul> <ul><ul><li>**Filter by value** provides more options for filtering numbers.</li> <ul><li>Select the checkbox against **All** to clear all conditions and view all rows within the active sheet</li> <li>Uncheck **All** to clear all checkboxes, and choose the values according to which you want to filter the data in the selected columns.</li></ul></ul></ul> |   
+| Filter information        | <ol><li>Click **Data** on the **Tab Bar**</li> <li>Select the columns to which you want to apply the filtering criteria</li> <li>Click **Filter** [ <span class="k-font-icon k-i-filter"></span> ] on the **Toolbar**</li> <li>Choose from the drop-down list of options:</li> <ul><ul><li>**Sort range A to Z** sorts the data within the columns in ascending alphabetical order</li> <li>**Sort range Z to A** sorts the data within the columns in descending alphabetical order</li> <li>**Filter by condition** filters the data within the column by applying any of the conditions from the drop-down list of options. Each of them can be applied to text fields, dates, or numbers:</li> <ul><ul><li><u>Text fields:</u> Choose any of the options referring to texts from the **Filter by condition** drop-down list. Fill in the field below to set the filter condition. Click **Apply**. For example, choose **Text starts with**, set the condition to **E**, and click **Apply**. The result shows all rows containing text fields that start with an **E**. You can alphabetically sort the filtered infromation by clicking **Sort range A to Z** or **Sort range Z to A**.</li> <li><u>Dates:</u> Choose any of the options referring to dates from the **Filter by condition** drop-down list. Fill in the field below to set the filter condition. Click **Apply**. For example, choose **Date is**, set the condition to **6/30/2014**, and click **Apply**. The result is a list of only rows containing fields that display the date 6/30/2014. Note that the date format may differ depending on the order of date components. Make sure you check the current format before applying this filter.</li> <li><u>Numbers:</u> Choose any of the options referring to numbers from the **Filter by condition** drop-down list. Fill in the field below to set the filter condition. Click **Apply**. For example, choose **Is equal to**, set the condition to **10230**, and click **Apply**. The result is a list of only rows containing fields that display the number 10230.</li></ul></ul></ul></ul> <ul><ul>To retrieve all applied filters and sorting conditions, from **Filter by condition** choose **None** > **Apply**.</ul></ul> <ul><ul><li>**Filter by value** provides more options for filtering numbers.</li> <ul><li>Select the checkbox against **All** to clear all conditions and view all rows within the active sheet</li> <li>Uncheck **All** to clear all checkboxes, and choose the values according to which you want to filter the data in the selected columns.</li></ul></ul></ul> |
 
 ### File Import and Export
 
@@ -137,10 +137,11 @@ You are able to export the content of your Spreadsheet to Portable Document Form
 | Apply formulas and functions | <ol><li>Select a cell</li> <li>Go to the **Formula Bar** and type an equal sign [ `=` ]</li> <li>Type your formula/function and press `Enter` once done to see the outcome of your input in the cell. Note that when you start writing a function, the `AutoComplete` prompts you with the syntax.</li></ol> |
 | Edit formulas and functions 	| <ol><li>Double-click a cell to display the formula/function in the **Formula Bar**</li> <li>Change the formula/function and press `Enter`</li></ol> |
 | Validate data				| Data validation allows you to predetermine the format and constrain the value of the content of a single cell or cells within a range, column, or row: <ol><li>Select a cell or a range of cells</li> <li>In the **Menu** click **Data** > **Data Validation** to open the **Data Validation** window</li> <li>Choose the criterion from the drop-down list of options.</li> <li>A new window with criteria-specific options appears. Use the prompts and drop-down options to set the rules for modifying the content.</li></ol> |
+| Choose data from predefined values | <p>The Spreadsheet supports the implementation of custom editors. They facilitate your input of data in a cell by providing you with predefined date and list values that are already placed in the necessary format.</p> <p>For example, if you are asked to fill in a date in a cell, clicking the icon of the custom editor of that cell provides you with a calendar. Choose the desired date without bothering about the syntax you are supposed to use to fill it in.</p> <ol><li>Select a cell.</li> <li>An icon appears right next to it. Click on it to see the options that are predefined for you to choose from. |
 
 <br>
 
-> **Important**  
+> **Important**
 > * Whenever **Cancel** is displayed as a command, click it if you want to close an active drop-down list or menu, or exit an open window, and return to the worksheet.
 > * Whenever **Apply** is displayed as a command, click it if you want an option you selected to be applied.
 
@@ -151,6 +152,15 @@ The Spreadsheet widget supports many of the Excel formulas and functions as seen
 ## Keyboard Navigation
 
 The Spreadsheet widget supports many of the Excel keyboard shortcuts as shown in the [List of Keyboard Shortcuts](/web/spreadsheet/end-user/list-of-shortcuts).
+
+## Known Limitations
+
+- Because of specific requirements, browsers may not support the **Paste** command when initiated from the context menu or the **Toolbar**. If you try to apply the command in either of these ways, a popup message is displayed informing you about the limitation. Use the keyboard navigation to achieve the result.
+- Formulas which are very deeply nested might produce a stack overflow error. For example, `=sin(cos(sin(cos(...))))` or `=A1+A2+A3+...+A200`&mdash;even though the latter does not seem nested&mdash;is internally treated like `=((((...(A1+A2)+A3)+A4)+...+)+A200)`).
+
+**Solution**
+
+Use `SUM` for cases like the second formula demonstrated above. When not possible, avoid nesting more than 100 levels deep. Note that the maximum depth depends on the browser, but 100 is considered to be a safe limit.
 
 ## See Also
 

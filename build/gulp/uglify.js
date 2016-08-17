@@ -28,4 +28,5 @@ module.exports = lazypipe()
     .pipe(logger, { after: 'uglify complete', extname: '.min.js', showChange: true })
     .pipe(uglify, { compress, mangle, preserveComments: "license" })
     .pipe(replace, /define\("[\w\.\-\/]+".+?\]/g, renameModules)
+    .pipe(replace, /"kendo\.core"/g, '"kendo.core.min"')
     .pipe(rename, { suffix: ".min" });

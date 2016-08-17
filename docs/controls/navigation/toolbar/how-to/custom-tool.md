@@ -1,6 +1,6 @@
 ---
 title: Develop and Register Custom ToolBar Tools
-page_title: Develop and Register Custom ToolBar Tools | Kendo UI ToolBar Widget
+page_title: Develop and Register Custom ToolBar Tools | Kendo UI ToolBar
 description: "Learn how to develop and register custom ToolBar tools."
 slug: howto_customtool_toolbar
 ---
@@ -122,7 +122,7 @@ The example below demonstrates how to develop and register custom ToolBar tools,
 
 ## See Also
 
-Other articles on Kendo UI ToolBar:
+Other articles on the Kendo UI ToolBar:
 
 * [ToolBar JavaScript API Reference](/api/javascript/ui/toolbar)
 * [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_toolbar %})

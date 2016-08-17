@@ -12,8 +12,9 @@ Represents the Kendo UI TabStrip. Inherits from [Widget](/api/javascript/ui/widg
 
 ### animation `Object|Boolean`
 
-A collection of visual animations used when **TabStrip** tab are selected through
-user interactions. Setting this option to **false** will disable all animations.
+A collection of visual animations used when **TabStrip** tab are selected through user interactions. Setting this option to `false` will disable all animations.
+
+`animation:true` is not a valid configuration.
 
 #### Example
 
@@ -479,7 +480,7 @@ A [**fade animation**](#configuration-animation) is highly recommended with any 
 
 ### value `String`*(default: null)*
 
-Specifies the selectd tab. Should be corresponding to the dataTextField configuration and used when bound to a DataSource component.
+Specifies the selected tab. Should be corresponding to the dataTextField configuration and used when bound to a DataSource component.
 
 #### Example
 
@@ -798,10 +799,9 @@ Inserts a newly-created tab after a specified tab.
 
 #### Parameters
 
-##### item `String|Element|jQuery`
+##### item `Array|Object|String|Element|jQuery`
 
-Target tab, specified as a JSON object. You can pass tab `text`, `content` or `contentUrl` here. Can handle an
-HTML string or array of such strings or JSON.
+Target tab(s), specified as a JSON object or array of objects. You can pass tab `text`, `content` or `contentUrl` here. Accepts also existing tab(s) specified as a string selector or jQuery object or DOM elements.
 
 ##### referenceTab `String|Element|jQuery`
 
@@ -854,10 +854,9 @@ Inserts a newly-created tab before a specified tab.
 
 #### Parameters
 
-##### item `String|Element|jQuery`
+##### item `Array|Object|String|Element|jQuery`
 
-Target tab, specified as a JSON object. You can pass tab `text`, `content` or `contentUrl` here. Can handle an
-HTML string or array of such strings or JSON.
+Target tab(s), specified as a JSON object or array of objects. You can pass tab `text`, `content` or `contentUrl` here. Accepts also existing tab(s) specified as a string selector or jQuery object or DOM elements.
 
 ##### referenceTab `String|Element|jQuery`
 
@@ -959,19 +958,23 @@ currently selected tab.
 #### Example
 
     <div id="tabstrip">
-        <ul>
-            <li>Tab 1</li>
-            <li>Tab 2</li>
-        </ul>
-        <div>Content 1</div>
-        <div>Content 2</div>
+      <ul>
+        <li>Tab 1</li>
+        <li>Tab 2</li>
+      </ul>
+      <div>
+        <button class='k-button'>Select second tab</button>
+      </div>
+      <div>Content 2</div>
     </div>
 
     <script>
-        var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+      var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
 
-        tabStrip.select("li:first");        // Select by jQuery selector
-        tabStrip.select(1);                 // Select by index
+      tabStrip.select("li:first");  // Select by jQuery selector
+      $("#tabstrip").on("click", ".k-button", function() {
+      	  tabStrip.select(1);   // Select by index
+      })
     </script>
 
 #### Parameters
@@ -1027,7 +1030,7 @@ The content element of the activated tab.
 
 #### Attach activate event handler during initialization; detach via unbind()
 
-    <div id="tabstrip">
+    <div id="tabStrip">
         <ul>
             <li>Tab 1</li>
             <li>Tab 2</li>
@@ -1286,4 +1289,3 @@ The content element of the activated tab.
         var tabStrip = $("#tabStrip").kendoTabStrip().data("kendoTabStrip");
         tabStrip.bind("show", onShow);
     </script>
-

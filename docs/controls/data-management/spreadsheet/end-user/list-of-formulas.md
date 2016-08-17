@@ -1,6 +1,6 @@
 ---
 title: List of Formulas and Functions
-page_title: List of Formulas and Functions | Kendo UI Spreadsheet Widget
+page_title: List of Formulas and Functions | Kendo UI Spreadsheet
 description: "A list of the formulas and functions available in the Kendo UI Spreadsheet widget."
 slug: list_offormulas_andfunctions_spreadsheet_widget
 position: 2
@@ -8,8 +8,8 @@ position: 2
 
 # List of Formulas and Functions
 
-| FORMULAS AND FUNCTIONS	| DESCRIPTION				                                    
-| :--- 						| :---						                                    
+| FORMULAS AND FUNCTIONS	  | DESCRIPTION				                                    
+| :--- 						          | :---						                                    
 | ABS                       | Returns the absolute (nonnegative) value of a number                      
 | ACOS                      | Returns the principal value of the arccosine of a number. The angle is returned in radians.
 | ACOSH                     | Returns the principal value of the inverse hyperbolic cosine of a number  
@@ -61,7 +61,7 @@ position: 2
 | COT                       | Returns the cotangent of an angle, specified in radians
 | COTH                      | Returns the hyperbolic cotangent of a number
 | COUNT                     | Counts the number of numbers in a list of arguments
-| COUNTA                    | Counts the number of values ina  list of arguments
+| COUNTA                    | Counts the number of values in a  list of arguments
 | COUNTBLANK                | Counts the number of blank cells in a range   
 | COUNTIF                   | Counts the number of cells in a range that meet a criteria
 | COUNTIFS                  | Counts the number of cells in a range that meet multiple criteria
@@ -115,9 +115,10 @@ position: 2
 | HARMEAN                   | Returns the harmonic mean of a sequence
 | HLOOKUP                   | Looks for a matching value in the first row of a given table, and returns the value of the indicated row
 | HOUR                      | Converts a serial number to an hour
-| IF                        | Returns a value, if a condition is true
-| IFERROR                   | Returns a specified value if a forumla evaluates to an error; otherwise, returns the result of the formula
-| INDEX                     | Returns a value or a reference to a value fromwithin a table or range
+| HYPERLINK                 | Creates a hyperlink involving an evaluated expression
+| IF                        | Returns one of two values, depending on a condition
+| IFERROR                   | Returns a specified value if a formula evaluates to an error; otherwise, returns the result of the formula
+| INDEX                     | Returns a value or a reference to a value from within a table or range
 | INDIRECT                  | Returns a reference indicated by a text value    
 | INT                       | Rounds a number down to the nearest integer
 | INTERCEPT                 | Returns the intercept of the linear regression line for the given data   
@@ -151,7 +152,7 @@ position: 2
 | MAX                       | Returns the maximum value in a set of numbers
 | MDETERM                   | Returns the determinant of a matrix
 | MEDIAN                    | Returns the median (middle) value in a list of numbers
-| MID                       | Returns a specific number of charaters from a text string, starting at a specified position
+| MID                       | Returns a specific number of characters from a text string, starting at a specified position
 | MIN                       | Returns the minimum value in a set of numbers
 | MINUTE                    | Converts a serial number into a minute
 | MINVERSE                  | Returns the inverse of a matrix
@@ -202,7 +203,7 @@ position: 2
 | RANK.EQ                   | Returns the rank of a number in a list of numbers
 | REPLACE                   | Replaces characters within text
 | REPT                      | Repeats text a specified number of times
-| RIGHT                     | Returns the righmost characters from a text value
+| RIGHT                     | Returns the rightmost characters from a text value
 | ROMAN                     | Converts Arabic numbers to Roman as text
 | ROUNDDOWN                 | Rounds a number down, towards zero, to the number of digits specified by `digits`
 | ROUNDUP                   | Rounds a number up, away from 0 (zero), to the number of digits specified by `digits`
@@ -229,7 +230,7 @@ position: 2
 | SUM                       | Sums (adds) the set of numbers, including all numbers in a range
 | SUMIF                     | Sums the values of cells in a range that meet a criteria
 | SUMIFS                    | Sums the values of cells in a range that meet multiple criteria
-| SUMPRODUCT                | Returns the sum of the products of correspondign array elements
+| SUMPRODUCT                | Returns the sum of the products of corresponding array elements
 | SUMSQ                     | Sums (adds) the set of squares of numbers, including all numbers in a range
 | SUMX2MY2                  | Returns the sum of the difference between the squares of corresponding values in two arrays
 | SUMX2PY2                  | Returns the sum of squares of corresponding values in two arrays
@@ -253,7 +254,7 @@ position: 2
 | TRUE                      | Returns the logical value `True`
 | UNICHAR                   | Returns the character represented by the given numeric value according to the [Unicode Standard](http://unicode.org/standard/standard.html)
 | UNICODE                   | Returns the [Unicode](http://unicode.org/standard/standard.html) code point that corresponds to the first character of a text value
-| UPPER                     | Converts text to uppprecase
+| UPPER                     | Converts text to uppercase
 | VALUE                     | Converts a text argument to a number
 | VAR.P                     | Calculates variance based on the entire population
 | VAR.S                     | Estimates variance based on a sample
@@ -265,6 +266,18 @@ position: 2
 | YEARFRAC                  | Extracts the number of years (including fractional part) between two dates
 
 For more information on how to create formulas and what their syntax is, see the list of [Excel functions](https://support.office.com/en-GB/article/Excel-functions-by-category-5f91f4e9-7b42-46d2-9bd1-63f26a86c0eb?CorrelationId=343eb30b-8175-4479-be19-1310dd12334f).
+
+## Array Formulas
+
+Similar to Excel, the Kendo UI Spreadsheet widget supports [array formulas](https://support.office.com/en-us/article/Guidelines-and-examples-of-array-formulas-7d94a64e-3ff3-4686-9372-ecfd5caa57c7?ui=en-US&rs=en-US&ad=US), which return a matrix of values.
+
+### Differences from Excel
+
+In Excel, to get all the values from an array formula, you pre-select the target range, press `F2` to type the formula, and press `Ctrl`+`Shift`+`Enter` to save it. Excel then locks the cells that contain the result, so that they cannot be edited, deleted, or merged.
+
+In the Spreadsheet, if a formula returns an array, the values are distributed across adjacent cells. For example, if you type in `A1`: `=2*D1:E2`, then the `A1`, `B1`, `A2`, and `B2` cells receive the doubles of the values from `D1`, `E1`, `D2`, and `E2` respectively. In Excel, such a formula places the double of `D1` in `A1`&mdash;it would only act as an array formula if the steps outlined above are taken when the formula is created.
+
+The Spreadsheet does not lock the result cells neither, which might lead to surprising behavior. You are able to type into the result cells, but the values do not appear to have been saved because the formula distributes the values to them again. The result cells are also editable and can be merged or deleted&mdash;an array formula will just attempt to fill whatever cell possible.
 
 ## See Also
 

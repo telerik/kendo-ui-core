@@ -1,6 +1,7 @@
 /* jshint browser:false, node:true, esnext: true */
 
 var gulp = require('gulp');
+var path = require('path');
 var debug = require('gulp-debug'); // jshint ignore:line
 var logger = require('gulp-logger');
 var util = require('gulp-util');
@@ -10,6 +11,8 @@ var filter = require('gulp-filter');
 var sourcemaps = require('gulp-sourcemaps');
 var gulpIf = require('gulp-if');
 var jshint = require("gulp-jshint");
+var replace = require("gulp-replace");
+var rename = require("gulp-rename");
 
 var ignore = require('gulp-ignore');
 
@@ -26,6 +29,12 @@ var gatherAmd = require('./build/gulp/gather-amd');
 var uglify = require('./build/gulp/uglify');
 var requireDir = require('require-dir');
 var runSequence = require('run-sequence');
+
+var webpack = require('webpack');
+var webpackStream = require('webpack-stream');
+var named = require('vinyl-named');
+
+var kendoVersion = require("./build/gulp/kendo-version");
 
 requireDir('./build/gulp/tasks');
 
@@ -189,3 +198,47 @@ gulp.task('ci', function(done) {
 gulp.task('travis', function(done) {
   runSequence('jshint', 'build', 'karma-travis', done);
 });
+
+gulp.task('cjs', function() {
+    return gulp.src('src/{kendo.*.js,*/*.js,*/**/*.js}')
+        .pipe(named(function(file) {
+            const thePath = file.path;
+            const relativeDir = path.relative(file.base, path.dirname(thePath));
+            const fileName = path.basename(thePath, path.extname(thePath));
+            return path.join(relativeDir, fileName);
+        }))
+        .pipe(webpackStream({
+            output: {
+                libraryTarget: 'commonjs2'
+            },
+
+            plugins: [ new webpack.ProvidePlugin({ 'jQuery': "jquery" }) ],
+
+            externals: ['jquery', /^\.\//, /^\.\.\// ]
+        }))
+        .pipe(gulp.dest('dist/cjs'));
+});
+
+[ 'pro', 'core' ].forEach(function(flavor) {
+    gulp.task('npm-' + flavor, [ 'cjs', 'styles' ] , function() {
+        var js = gulp.src('dist/cjs/**/*').pipe(gulp.dest('dist/npm/js'));
+
+        var styles = gulp.src('dist/styles/**/*').pipe(gulp.dest('dist/npm/css'));
+
+        var pkg = gulp.src('build/package-' + flavor + '.json')
+                    .pipe(replace("$KENDO_VERSION", kendoVersion))
+                    .pipe(rename('package.json'))
+                    .pipe(gulp.dest('dist/npm'));
+
+        var license = gulp.src('resources/legal/npm/' + flavor + '.txt')
+                    .pipe(replace("$YEAR", new Date().getFullYear()))
+                    .pipe(rename('LICENSE'))
+                    .pipe(gulp.dest('dist/npm'));
+
+        var readme = gulp.src('resources/npm/' + flavor + '-README.md')
+                    .pipe(rename('README.md'))
+                    .pipe(gulp.dest('dist/npm'));
+
+        return merge(js, styles, pkg, license, readme);
+    })
+})

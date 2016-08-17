@@ -10,9 +10,11 @@ Represents the Kendo UI DropDownList widget. Inherits from [Widget](/api/javascr
 
 ## Configuration
 
-### animation `Object`
+### animation `Boolean|Object`
 
 Configures the opening and closing animations of the suggestion popup. Setting the `animation` option to `false` will disable the opening and closing animations. As a result the suggestion popup will open and close instantly.
+
+`animation:true` is not a valid configuration.
 
 #### Example - disable open and close animations
 
@@ -231,7 +233,7 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
 
 The field of the data item that provides the text content of the list items. The widget will filter the data source based on this field.
 
-> **Important** When `dataTextField` is defined, the`dataValueField` option also should be set.
+> When `dataTextField` is defined, the `dataValueField` option also should be set.
 
 #### Example - set the dataTextField
 
@@ -251,7 +253,7 @@ The field of the data item that provides the text content of the list items. The
 
 The field of the data item that provides the value of the widget.
 
-> **Important** When `dataValueField` is defined, the`dataTextField` option also should be set.
+> When `dataValueField` is defined, the `dataTextField` option also should be set.
 
 #### Example - set the dataValueField
 
@@ -293,6 +295,33 @@ If set to `false` the widget will be disabled and will not allow user input. The
     });
     </script>
 
+### enforceMinLength `Boolean` *(default: false)*
+
+If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](#configuration-minLength).
+
+#### Example - enforce minLength
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+        filter: "startswith",
+        autoBind: false,
+        minLength: 3,
+        enforceMinLength: true,
+        dataTextField: "ProductName",
+        dataValueField: "ProductID",
+        dataSource: {
+            type: "odata",
+            serverFiltering: true,
+            transport: {
+                read: {
+                    url: "//demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                }
+            }
+        }
+    });
+    </script>
+
 ### filter `String`*(default: "none")*
 
 The filtering method used to determine the suggestions for the current value. Filtration is turned off by default.
@@ -329,6 +358,31 @@ The [template](/api/javascript/kendo#methods-template) used to render the fixed 
                 }
             });
         });
+    </script>
+
+### footerTemplate `String|Function`
+
+The [template](/api/javascript/kendo#methods-template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
+
+#### Parameters
+
+##### instance `Object`
+
+The widget instance.
+
+#### Example - specify footerTemplate as a string
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      footerTemplate: 'Total <strong>#: instance.dataSource.total() #</strong> items found'
+    });
     </script>
 
 ### groupTemplate `String|Function`
@@ -414,6 +468,28 @@ The minimum number of characters the user must type before a filter is performed
     });
     </script>
 
+### noDataTemplate `String|Function` *(default: "No results found.")*
+
+The [template](/api/javascript/kendo#methods-template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
+The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
+
+> **Important** The popup will open when 'noDataTemplate' is defined
+
+#### Example - specify headerTemplate as a string
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      noDataTemplate: 'No Data!'
+    });
+    </script>
+
 ### popup `Object`
 
 The options that will be used for the popup initialization. For more details about the available options
@@ -439,19 +515,111 @@ refer to [Popup](/api/javascript/ui/popup) documentation.
     </script>
 
 
+### popup.appendTo `String`
+
+Defines a jQuery selector that will be used to find a container element, where the popup will be appended to.
+
+#### Example - append the popup to a specific element
+
+    <div id="container">
+        <input id="dropdownlist" />
+    </div>
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      popup: {
+        appendTo: $("#container")
+      }
+    });
+    </script>
+
+### popup.origin `String`
+
+Specifies how to position the popup element based on achor point. The value is
+space separated "y" plus "x" position.
+
+The available "y" positions are:
+- "bottom"
+- "center"
+- "top"
+
+The available "x" positions are:
+- "left"
+- "center"
+- "right"
+
+#### Example - append the popup to a specific element
+
+    <div id="container">
+        <input id="dropdownlist" />
+    </div>
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      popup: {
+        origin: "top left"
+      }
+    });
+    </script>
+
+### popup.position `String`
+
+Specifies which point of the popup element to attach to the anchor's origin point. The value is
+space separated "y" plus "x" position.
+
+The available "y" positions are:
+- "bottom"
+- "center"
+- "top"
+
+The available "x" positions are:
+- "left"
+- "center"
+- "right"
+
+#### Example - append the popup to a specific element
+
+    <div id="container">
+        <input id="dropdownlist" />
+    </div>
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: [
+        { id: 1, name: "Apples" },
+        { id: 2, name: "Oranges" }
+      ],
+      dataTextField: "name",
+      dataValueField: "id",
+      popup: {
+        origin: "top left"
+      }
+    });
+    </script>
+
+
 ### optionLabel `String | Object`*(default: "")*
 
  Define the text of the default empty item. If the value is an object, then the widget will use it as a valid data item.
  Note that the optionLabel will not be available if the widget is empty.
 
-> **Important:** Since Q1 2015 (2015.1.318), the option label is rendered as a separate header template. The benefits of this change are:
+> * If `optionLabel` is an object, it needs to have at least `dataValueField` and `dataTextField` properties. Otherwise, widget will show `undefined`.
+Note that the very same optionLabel object will be passed to the [valueTemplate](/api/javascript/ui/dropdownlist#configuration-valueTemplate). **You need to ensure that all required by the valueTemplate properties are present
+in the optionLabel object**.
+> * Since Q1 2015 (2015.1.318), the option label is rendered as a separate header template. The benefits of this change are:
 - the widget's value will be empty string even when `dataValueField` and `dataTextField` options are equal or not defined
 - the widget will not throw an exception when a custom item template is used and `optionLabel` is string
 - option label has a separate template, that gives more freedom for customization
-
-> **Important:** If `optionLabel` is an object, it needs to have at least `dataValueField` and `dataTextField` properties. Otherwise, widget will show `undefined`.
-
-> **Important:** [Not relevant after Q1 2015] Widget's value will be equal to the `optionLabel` if the `dataValueField` and `dataTextField` options are equal or not defined
+> * [Not relevant after Q1 2015] Widget's value will be equal to the `optionLabel` if the `dataValueField` and `dataTextField` options are equal or not defined
 
 #### Example - specify optionLabel as a string
 
@@ -485,13 +653,14 @@ refer to [Popup](/api/javascript/ui/popup) documentation.
 
 The [template](/api/javascript/kendo#methods-template) used to render the option label.
 
+> Define the [optionLabel](/api/javascript/kendo#configuration-optionLabel) as **object** if complex template structure is used
+
 ### headerTemplate `String|Function`
 
 Specifies a static HTML content, which will be rendered as a header of the popup element.
 
-> **Important** The header content **should be wrapped** with a HTML tag if it contains more than one element. This is applicable also when header content is just a string/text.
-
-> **Important** Widget does not pass a model data to the header template. Use this option only with static HTML.
+> * The header content **should be wrapped** with a HTML tag if it contains more than one element. This is applicable also when header content is just a string/text.
+> * Widget does not pass a model data to the header template. Use this option only with static HTML.
 
 #### Example - specify headerTemplate as a string
 
@@ -644,9 +813,28 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
 
 ### virtual `Boolean|Object`*(default: false)*
 
-Enables the virtualization feature of the widget.
+Enables the virtualization feature of the widget. The configuration can be set on an object, which contains two properties - `itemHeight` and `valueMapper`.
 
-#### Example - DropDownList with virtualized list
+For detailed information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}).
+
+### virtual.itemHeight `Number`*(default: null)*
+
+Specifies the height of the virtual item. All items in the virtualized list **must** have the same height.
+If the developer does not specify one, the framework will automatically set `itemHeight` based on the current theme and font size.
+
+### virtual.mapValueTo `String`*(default: "index")*
+
+The changes introduced with the Kendo UI R3 2016 release enable you to determine if the `valueMapper` must resolve a *value to an `index`* or a *value to a `dataItem`*. This is configured through the `mapValueTo` option that accepts two possible values - `"index"` or `"dataItem"`. By default, the `mapValueTo` is set to `"index"`, which does not affect the current behavior of the virtualization process.
+
+For more information, refer to the [article on virtualization]({% slug virtualization_kendoui_combobox_widget %}#value-mapping).
+
+### virtual.valueMapper `Function`*(default: null)*
+
+The `valueMapper` function is **mandatory** for the functionality of the virtualized widget.
+The widget calls the `valueMapper` function when the widget receives a value, that is not fetched from the remote server yet.
+The widget will pass the selected value(s) in the `valueMapper` function. In turn, the valueMapper implementation should return the **respective data item(s) index/indices**.
+
+#### Example - DropDownList widget with a virtualized list
 
     <input id="orders" style="width: 400px" />
     <script>
@@ -656,12 +844,41 @@ Enables the virtualization feature of the widget.
                 dataTextField: "ShipName",
                 dataValueField: "OrderID",
                 filter: "contains",
-                virtual: true,
+                virtual: {
+                    itemHeight: 26,
+                    valueMapper: function(options) {
+                        $.ajax({
+                            url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+                            type: "GET",
+                            dataType: "jsonp",
+                            data: convertValues(options.value),
+                            success: function (data) {
+                                //the **data** is either index or array of indices.
+                                //Example:
+                                // 10258 -> 10 (index in the Orders collection)
+                                // [10258, 10261] -> [10, 14] (indices in the Orders collection)
+
+                                options.success(data);
+                            }
+                        })
+                    }
+                },
                 height: 520,
                 dataSource: {
                     type: "odata",
                     transport: {
                         read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                    },
+                    schema: {
+                        model: {
+                            fields: {
+                                OrderID: { type: "number" },
+                                Freight: { type: "number" },
+                                ShipName: { type: "string" },
+                                OrderDate: { type: "date" },
+                                ShipCity: { type: "string" }
+                            }
+                        }
                     },
                     pageSize: 80,
                     serverPaging: true,
@@ -669,6 +886,18 @@ Enables the virtualization feature of the widget.
                 }
             });
         });
+
+        function convertValues(value) {
+            var data = {};
+
+            value = $.isArray(value) ? value : [value];
+
+            for (var idx = 0; idx < value.length; idx++) {
+                data["values[" + idx + "]"] = value[idx];
+            }
+
+            return data;
+        }
     </script>
 
 #### Example - DropDownList widget with declarative virtualization config
@@ -740,147 +969,14 @@ Enables the virtualization feature of the widget.
         }
     </script>
 
-### virtual.itemHeight `Number`*(default: null)*
-
-Specifies the height of the virtual item. All items in the virtualized list **must** have the same height.
-If the developer does not specify one, the framework will automatically set `itemHeight` based on the current theme and font size.
-
-    <input id="orders" style="width: 400px" />
-    <script>
-        $(document).ready(function() {
-            $("#orders").kendoDropDownList({
-                template: '<span class="order-id">#= OrderID #</span> #= ShipName #, #= ShipCountry #',
-                dataTextField: "ShipName",
-                dataValueField: "OrderID",
-                filter: "contains",
-                virtual: {
-                    itemHeight: 26,
-                    valueMapper: function(options) {
-                        $.ajax({
-                            url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
-                            type: "GET",
-                            data: convertValues(options.value),
-                            success: function (data) {
-                                options.success(data);
-                            }
-                        })
-                    }
-                },
-                height: 520,
-                dataSource: {
-                    type: "odata",
-                    transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
-                    },
-                    schema: {
-                        model: {
-                            fields: {
-                                OrderID: { type: "number" },
-                                Freight: { type: "number" },
-                                ShipName: { type: "string" },
-                                OrderDate: { type: "date" },
-                                ShipCity: { type: "string" }
-                            }
-                        }
-                    },
-                    pageSize: 80,
-                    serverPaging: true,
-                    serverFiltering: true
-                }
-            });
-        });
-
-        function convertValues(value) {
-            var data = {};
-
-            value = $.isArray(value) ? value : [value];
-
-            for (var idx = 0; idx < value.length; idx++) {
-                data["values[" + idx + "]"] = value[idx];
-            }
-
-            return data;
-        }
-    </script>
-
-### virtual.valueMapper `Function`*(default: null)*
-
-The `valueMapper` function is **mandatory** for the functionality of the virtualized widget.
-The widget calls the `valueMapper` function when the widget receives a value, that is not fetched from the remote server yet.
-The widget will pass the selected value(s) in the `valueMapper` function. In turn, the valueMapper implementation should return the **respective data item(s) index/indices**.
-
-    <input id="orders" style="width: 400px" />
-    <script>
-        $(document).ready(function() {
-            $("#orders").kendoDropDownList({
-                template: '<span class="order-id">#= OrderID #</span> #= ShipName #, #= ShipCountry #',
-                dataTextField: "ShipName",
-                dataValueField: "OrderID",
-                filter: "contains",
-                virtual: {
-                    itemHeight: 26,
-                    valueMapper: function(options) {
-                        $.ajax({
-                            url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
-                            type: "GET",
-                            data: convertValues(options.value),
-                            success: function (data) {
-                                //the **data** is either index or array of indices.
-                                //Example:
-                                // 10258 -> 10 (index in the Orders collection)
-                                // [10258, 10261] -> [10, 14] (indices in the Orders collection)
-
-                                options.success(data);
-                            }
-                        })
-                    }
-                },
-                height: 520,
-                dataSource: {
-                    type: "odata",
-                    transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
-                    },
-                    schema: {
-                        model: {
-                            fields: {
-                                OrderID: { type: "number" },
-                                Freight: { type: "number" },
-                                ShipName: { type: "string" },
-                                OrderDate: { type: "date" },
-                                ShipCity: { type: "string" }
-                            }
-                        }
-                    },
-                    pageSize: 80,
-                    serverPaging: true,
-                    serverFiltering: true
-                }
-            });
-        });
-
-        function convertValues(value) {
-            var data = {};
-
-            value = $.isArray(value) ? value : [value];
-
-            for (var idx = 0; idx < value.length; idx++) {
-                data["values[" + idx + "]"] = value[idx];
-            }
-
-            return data;
-        }
-    </script>
-
 ## Fields
 
 ### dataSource `kendo.data.DataSource`
 
 The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
 
-> Changes of the data source will be reflected in the widget.
-
-> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](#methods-setDataSource) method instead.
+> * Changes of the data source will be reflected in the widget.
+> * Assigning a new data source would have no effect. Use the [setDataSource](#methods-setDataSource) method instead.
 
 #### Example - add a data item to the data source
     <input id="dropdownlist" />
@@ -1034,7 +1130,7 @@ The zero-based index of the data record.
 
 Prepares the **DropDownList** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
 
-> **Important:** This method does not remove the DropDownList element from DOM.
+> This method does not remove the DropDownList element from DOM.
 
 #### Example
 
@@ -1201,10 +1297,10 @@ The search value.
 
 Gets or sets the selected item. Selects the item provided as an argument and updates the value and text of the widget.
 
-> **Important:** When **virtualization** is enabled, the method **does not support** selection with a *function predicate*. The predicate function looks only
+> * The numeric argument indicates the item index in the dropdown, not in the dataSource. If an [`optionLabel`](#configuration-optionLabel) is used, the dropdown item index can be obtained by incrementing the respective dataSource item index by 1.
+> * When **virtualization** is enabled, the method **does not support** selection with a *function predicate*. The predicate function looks only
 in the current datasource view, which represents only the active range/page. Hence it will not work properly.
-
-> **Important:** This method **does not trigger** [change](#events-change) event.
+> * This method **does not trigger** [change](#events-change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
 
@@ -1383,12 +1479,10 @@ Defines the whether to open/close the drop-down list.
 
 Gets or sets the value of the DropDownList. The value will not be set if there is no item with such value. If value is undefined, text of the data item is used.
 
-> **Important:** If the widget is not bound (e.g. `autoBind` is set to `false`), the `value` method will pre-fetch the data before continuing with the value setting.
+> * If the widget is not bound (e.g. `autoBind` is set to `false`), the `value` method will pre-fetch the data before continuing with the value setting.
 **This does not apply when MVVM binding is used.**
-
-> **Important:** The widget will **clear the applied filter** if a new value is set. Thus it ensures that the original/whole data set is available for selection.
-
-> **Important:** This method **does not trigger** [change](#events-change) event.
+> * The widget will **clear the applied filter** if a new value is set. Thus it ensures that the original/whole data set is available for selection.
+> * This method **does not trigger** [change](#events-change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
 
@@ -1430,11 +1524,11 @@ The value to set.
 
 ### change
 
-Fired when the value of the widget is changed by the user.
+Fired when the value of the widget is changed by the user. As of 2015 Q3 SP1 cascading widget will trigger change event when its value is changed due to parent update.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
-> **Important:** The event is not fired when the value of the widget is changed programmatically. If you need to handle changes made by API, wire the [cascade](/api/javascript/ui/dropdownlist#events-cascade) event.
+> The event is not fired when the value of the widget is changed programmatically. If you need to handle changes made by API, wire the [cascade](/api/javascript/ui/dropdownlist#events-cascade) event.
 
 #### Event Data
 
@@ -1660,18 +1754,16 @@ The widget instance which fired the event.
 
 Fired when an item from the popup is selected by the user either with mouse/tap or with keyboard navigation.
 
-> **Important:** The event is not fired when an item is selected programmatically.
-
-> **Important:** Since version Q1 2015 (2015.1.318), the
-[option label has been moved outside the item list DOM collection](/backward-compatibility#kendo-ui-2015-q1).
-As a result, jQuery.index() can no longer be used to reliably detect if the option label is the selected dropdown item.
-A more appropriate approach would be to check if the selected dataItem value is an empty string,
-and/or check if the selected dateItem's text is equal to the optionLabel string.
->
-> *  `e.sender.dataItem(e.item)[e.sender.options.dataValueField] == ""`
-> *  `e.sender.dataItem(e.item)[e.sender.options.dataTextField] == e.sender.options.optionLabel`
+> * The event is not fired when an item is selected programmatically.
+> * Since version Q1 2015 (2015.1.318), the [option label has been moved outside the item list DOM collection](/backward-compatibility#kendo-ui-2015-q1). As a result, `jQuery.index()` can no longer be used to reliably detect if the option label is the selected dropdown item. A more appropriate approach would be to check if the selected dataItem value is an empty string, and/or check if the selected dateItem's text is equal to the `optionLabel` string.
+>   *  `e.sender.dataItem(e.item)[e.sender.options.dataValueField] == ""`
+>   *  `e.sender.dataItem(e.item)[e.sender.options.dataTextField] == e.sender.options.optionLabel`
 
 #### Event Data
+
+##### e.dataItem `Object`
+
+The data item instance of the selected item.
 
 ##### e.item `jQuery`
 
@@ -1713,6 +1805,19 @@ The widget instance which fired the event.
     });
     var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
     dropdownlist.bind("select", dropdownlist_select);
+    </script>
+
+#### Example - prevent the item selection
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: [ "Apples", "Oranges" ],
+      select: function(e) {
+        //call preventDefault() to prevent the selection
+        e.preventDefault();
+      }
+    });
     </script>
 
 ### cascade

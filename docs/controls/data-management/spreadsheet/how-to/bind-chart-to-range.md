@@ -1,15 +1,15 @@
 ---
-title: Bind Chart to Sheet Data
-page_title: Bind Chart to Sheet Data | Kendo UI Spreadsheet
+title: Bind Charts to Sheet Data
+page_title: Bind Charts to Sheet Data | Kendo UI Spreadsheet
 description: "Learn how to bind a Kendo UI Chart to the data of a Kendo UI Spreadsheet widget."
 slug: howto_bindcharttosheet_spreadsheet_widget
 ---
 
-# Bind Chart to Sheet Data
+# Bind Charts to Sheet Data
 
-The example below demonstrates how to extract spreadsheet data and populate a chart.
+The example below demonstrates how to extract Spreadsheet data and populate a Kendo UI Chart.
 
-The chart will be updated on sheet [on change](/api/javascript/spreadsheet/sheet#events-change).
+The chart will be updated on sheet [on `change`](/api/javascript/spreadsheet/sheet#events-change).
 
 ###### Example
 
@@ -897,7 +897,9 @@ The chart will be updated on sheet [on change](/api/javascript/spreadsheet/sheet
 
 ## See Also
 
-Other articles and how-to examples on Kendo UI Spreadsheet and Charts:
+Other articles and how-to examples related to the Kendo UI Spreadsheet:
 
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
 * [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
+* [How to Get Flagged Cells Containing Invalid Values]({% slug howto_get_flagged_cells_containing_invalid_values_spreadsheet_widget %})
+* [How to Set Validation Rules to Column Ranges]({% slug howto_validationtocolumn_spreadsheet_widget %})

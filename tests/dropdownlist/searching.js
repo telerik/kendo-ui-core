@@ -334,37 +334,27 @@
     test("searching always start from next item", 1, function() {
         var dropdownlist = new DropDownList(input, {
             dataSource: [
-                { text: "Black", value: "1" },
-                { text: "Orange", value: "2" },
-                { text: "Grey", value: "3" }
+                { text: "First", value: "1" },
+                { text: "Small", value: "2" },
+                { text: "Same", value: "3" },
+                { text: "Same", value: "4" },
+                { text: "Small", value: "5" }
             ],
             dataTextField: "text",
             dataValueField: "value",
-            index: 2
+            delay: 0,
+            index: 0
         });
 
-        input.press("z");
-        input.press("z");
+        input.press("s");
+        input.press("m");
 
-        ok(true);
-    });
+        dropdownlist._word = "";
 
-    test("searching always start from next item", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            dataSource: [
-                { text: "Black", value: "1" },
-                { text: "Orange", value: "2" },
-                { text: "Grey", value: "3" }
-            ],
-            dataTextField: "text",
-            dataValueField: "value",
-            index: 2
-        });
+        input.press("s");
+        input.press("m");
 
-        input.press("z");
-        input.press("z");
-
-        ok(true);
+        equal(dropdownlist.selectedIndex, 4);
     });
 
     test("search honors optionLabel header", 1, function() {
@@ -526,6 +516,37 @@
         dropdownlist.filterInput.val("").keydown();
     });
 
+    asyncTest("does not clear filter when clear input value and enforceMinLength: true", 0, function() {
+        var dropdownlist = new DropDownList(input, {
+            filter: "startswith",
+            minLength: 3,
+            enforceMinLength: true,
+            delay: 0,
+            dataSource: [
+                { text: "Black", value: "1" },
+                { text: "Orange", value: "2" },
+                { text: "Grey", value: "3" }
+            ],
+            dataTextField: "text",
+            dataValueField: "value",
+            index: 2
+        });
+
+        dropdownlist.open();
+        dropdownlist._prev = "or";
+        dropdownlist.filterInput.val("or").keydown();
+
+        dropdownlist.bind("dataBound", function() {
+            ok(false, "list should not rebind");
+        });
+
+        dropdownlist.filterInput.val("").keydown();
+
+        setTimeout(function() {
+            start();
+        }, 0);
+    });
+
     asyncTest("persist selected value if no items (select)", 1, function() {
         var dropdownlist = new DropDownList(select, {
             filter: "startswith",
@@ -552,6 +573,7 @@
 
     asyncTest("update popup height when no items are found", 1, function() {
         var dropdownlist = new DropDownList(select, {
+            noDataTemplate: "",
             filter: "startswith",
             delay: 0,
             dataSource: [
@@ -575,9 +597,9 @@
         dropdownlist.filterInput.focus().val("test").keydown();
     });
 
-    asyncTest("filter if same text is entered after blur", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            animation: false,
+    asyncTest("update popup height when no items are found and noDataTemplate is defined", 1, function() {
+        var dropdownlist = new DropDownList(select, {
+            noDataTemplate: "No data found.",
             filter: "startswith",
             delay: 0,
             dataSource: [
@@ -586,26 +608,19 @@
                 { text: "Grey", value: "3" }
             ],
             dataTextField: "text",
-            dataValueField: "value",
-            index: 2
-        });
-
-        dropdownlist.one("dataBound", function() {
-            dropdownlist.filterInput.focusout();
-
-            dropdownlist.wrapper.focus();
-            dropdownlist.open();
-
-            dropdownlist.one("dataBound", function() {
-                start();
-                ok(true);
-            });
-
-            dropdownlist.filterInput.val("or").keydown();
+            dataValueField: "value"
         });
 
         dropdownlist.open();
-        dropdownlist.filterInput.val("or").keydown();
+
+        var height = dropdownlist.ul.height();
+
+        dropdownlist.one("dataBound", function() {
+            start();
+            ok(!dropdownlist.ul.height());
+        });
+
+        dropdownlist.filterInput.focus().val("test").keydown();
     });
 
     test("search select first match of grouped list", function() {
@@ -624,5 +639,72 @@
 
         ok(dropdownlist.ul.children().eq(2).text(), "Bar");
         ok(dropdownlist.ul.children().eq(2).hasClass("k-state-selected"));
+    });
+
+    asyncTest("filter on paste", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            animation: false,
+            filter: "startswith",
+            delay: 0,
+            dataSource: [
+                { text: "Black", value: "1" },
+                { text: "Orange", value: "2" },
+                { text: "Grey", value: "3" }
+            ],
+            dataTextField: "text",
+            dataValueField: "value",
+            index: 2
+        });
+
+        dropdownlist.one("filtering", function() {
+            start();
+            ok(true);
+        });
+
+        dropdownlist.open();
+        dropdownlist.filterInput.val("Gre").focus().trigger({type: "paste"});
+    });
+
+
+    test("resize popup on search when autoWidth is enabled", function(assert) {
+        var data = [{text: "Foooooooooooooo", value: 1, type: "a"}, {text:"Bar", value:2, type: "b"}, {text:"Baz", value:3, type: "a"}];
+        var dropdownlist = new DropDownList(input, {
+            autoWidth: true,
+            dataTextField: "ProductName",
+            dataValueField: "ProductID",
+            autoBind: false,
+            filter: "contains",
+            minLenght: 3,
+            dataSource: {
+                serverFiltering: false,
+                transport: {
+                    read: function(options) {
+                        options.success([
+                            { ProductName: "ChaiiiiiiiiiiiiiiiiiiiiiiiiiiiiiChaiiiiiiiiiiiiiiiiiiiiiiiiiiiii", ProductID: 1 },
+                            { ProductName: "Tofu", ProductID: 2 },
+                            { ProductName: "Test3", ProductID: 3 },
+                            { ProductName: "Chai3", ProductID: 4 },
+                            { ProductName: "Test4", ProductID: 5 }
+                        ]);
+                    }
+                }
+            }
+        });
+
+        var done1 = assert.async();
+        var done2 = assert.async();
+        dropdownlist.popup.one("open", function() {
+            assert.ok(dropdownlist.wrapper.width() < dropdownlist.popup.element.width());
+            dropdownlist.close();
+            done1();
+            dropdownlist.popup.one("activate", function() {
+                assert.ok(dropdownlist.wrapper.width() >= dropdownlist.popup.element.width());
+                done2();
+            });
+            dropdownlist.dataSource.filter({field: "ProductName", oeprator: "contains", value: "To"});
+            dropdownlist.open();
+        });
+        dropdownlist.open();
+
     });
 })();

@@ -579,7 +579,9 @@ var __meta__ = { // jshint ignore:line
             for (idx = 0; idx < items.length; idx++) {
                 var child = element.children[index];
                 unbindElementTree(child, true);
-                element.removeChild(child);
+                if (child.parentNode == element) {
+                    element.removeChild(child);
+                }
             }
         },
 
@@ -1650,7 +1652,6 @@ var __meta__ = { // jshint ignore:line
         var role = element.getAttribute("data-" + kendo.ns + "role"),
             idx,
             bind = element.getAttribute("data-" + kendo.ns + "bind"),
-            children = element.children,
             childrenCopy = [],
             deep = true,
             bindings,
@@ -1718,6 +1719,7 @@ var __meta__ = { // jshint ignore:line
             element.kendoBindingTarget = target;
         }
 
+        var children = element.children;
         if (deep && children) {
             // https://github.com/telerik/kendo/issues/1240 for the weirdness.
             for (idx = 0; idx < children.length; idx++) {

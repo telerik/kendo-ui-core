@@ -1,6 +1,6 @@
 ---
 title: Remote Data Binding
-page_title: Remote Data Binding | Kendo UI Grid Widget
+page_title: Remote Data Binding | Kendo UI Grid
 description: "Learn how to use the Kendo UI Grid widget in your web application and bind it to a remote data source."
 previous_url: /howto/bind-the-grid-to-remote-data
 slug: remote_data_binding_grid
@@ -9,7 +9,7 @@ position: 3
 
 # Remote Data Binding
 
-[Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) features a rapid templating engine and a built-in dataSource, which allow you to set up the widget very quickly and use it in your project.
+The [Kendo UI Grid widget](http://demos.telerik.com/kendo-ui/grid/index) features a rapid templating engine and a built-in dataSource, which allow you to set up the widget very quickly and use it in your project.
 
 ## Bind to Remote Data
 
@@ -289,7 +289,7 @@ All markup is now removed from your JavaScript. Add some style, as demonstrated 
 
 ## See Also
 
-Other articles on Kendo UI Grid:
+Other articles on the Kendo UI Grid:
 
 * [Grid JavaScript API Reference](/api/javascript/ui/grid)
 * [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})
@@ -301,4 +301,4 @@ Other articles on Kendo UI Grid:
 * [Export the Grid in PDF]({% slug exporting_pdf_kendoui_grid_widget %})
 * [Print the Grid]({% slug exporting_pdf_kendoui_grid_widget %})
 
-For how-to examples on the Kendo UI Grid widget, browse [its How-to section]({% slug howto_bindto_telerik_backend_services_grid %}).
+For how-to examples on the Kendo UI Grid widget, browse its [**How To** documentation folder]({% slug howto_bindto_telerik_backend_services_grid %}).

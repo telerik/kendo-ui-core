@@ -68,8 +68,58 @@
             }).end()
             .find("label").click();
     });
-})();
 
+    test("clicking on an associated label does not open a disabled ColorPicker", function () {
+        expect(0);
+
+        // embedded in <label>
+        $("<label>ColorPicker: <input /></label>")
+            .appendTo(QUnit.fixture)
+            .find("input").prop("disabled", true).kendoColorPicker({
+                open: function () {
+                    ok(true);
+                }
+            }).end()
+            .click();
+
+        // <label for="...">
+        $("<div><label for='colorpicker'>ColorPicker:</label><input id='colorpicker' /></div>")
+            .appendTo(QUnit.fixture)
+            .find("input").prop("disabled", true).kendoColorPicker({
+                open: function () {
+                    ok(true)
+                }
+            }).end()
+            .find("label").click();
+    });
+
+    test("open() method does not open a disabled ColorPicker", function () {
+        expect(0);
+
+        var dom = $("<input disabled='disabled' />").appendTo(QUnit.fixture).kendoColorPicker({
+            open: function () {
+                ok(true);
+            }
+        });
+        var cp = dom.data("kendoColorPicker");
+
+        cp.open();
+    });
+
+    test("toggle() method does not open a disabled ColorPicker", function () {
+        expect(0);
+
+        var dom = $("<input disabled='disabled' />").appendTo(QUnit.fixture).kendoColorPicker({
+            open: function () {
+                ok(true);
+            }
+        });
+        var cp = dom.data("kendoColorPicker");
+
+        cp.toggle();
+    });
+
+})();
 
 (function(){
     module("ColorPalette", {

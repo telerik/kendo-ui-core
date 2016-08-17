@@ -1,6 +1,6 @@
 ---
 title: Use Dates inside Row Template
-page_title:  Use Dates inside Row Template | Kendo UI Grid Widget
+page_title:  Use Dates inside Row Template | Kendo UI Grid
 description: "Learn how to use dates inside a Kendo UI Grid row template."
 slug: howto_use_dates_inside_row_template_grid
 ---
@@ -152,9 +152,11 @@ The example below demonstrates how to use dates inside a Kendo UI Grid row templ
 
 ## See Also
 
-Other articles on Kendo UI Grid and how-to examples related to the usage of templates:
+Other articles on the Kendo UI Grid and how-to examples related to the usage of templates:
 
 * [JavaScript API Reference](/api/javascript/ui/grid)
 * [How to Create Custom Editor in Detail Template]({% slug howto_create_custom_editorin_detail_template_grid %})
 * [How to Refresh Grid in Detail Template]({% slug howto_refresh_gridin_detail_template_grid %})
 * [How to Use Checkbox Column Templates and Edit]({% slug howto_use_checkbox_column_templateand_edit_grid %})
+
+For more runnable examples on the Kendo UI Grid, browse its [**How To** documentation folder]({% slug howto_create_custom_editors_grid %}).

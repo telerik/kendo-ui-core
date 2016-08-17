@@ -5,7 +5,11 @@ description: Configuration, methods and events of the Kendo UI Notification
 
 # kendo.ui.Notification
 
-*It is assumed that the reader of this page is familiar with the [Notification widget Overview](/web/notification/overview/).*
+Represents a Kendo UI Notification Widget. Inherits from [Widget](/api/javascript/ui/widget).
+
+> **Important**
+>
+> Please review the [Notification Overview]({% slug overview_kendoui_notification_widget %}) help topic if you're not familiar with the widget.
 
 ## Configuration
 
@@ -24,7 +28,9 @@ Indicates the period in milliseconds after which a notification can be dismissed
 
 ### animation `Object|Boolean`
 
-Defines custom show and hide animations via an Kendo UI Animation object. Setting the value to false disables animations.
+Defines custom show and hide animations via an Kendo UI Animation object. Setting the value to `false` disables animations.
+
+`animation:true` is not a valid configuration.
 
 #### Example - disable animations
 
@@ -457,12 +463,14 @@ Displays a notification.
 
 **Required**. The string content for the notification; or the object with the values for the variables inside the notification template; or the function, which returns the required string or an object.
 
+> **Important** The content **will not** be HTML-encoded. Use the [showText](#methods-showText) if you only intend to show plain text.
+
 ##### type `String`
 
 The notification type. Built-in types include `"info"`, `"success"`, `"warning"` and `"error"`. Custom types should match the types from the [template configuration](#configuration-templates).
 If this argument is not supplied, then `"info"` is assumed.
 
-#### Example - use the show method with a string argument
+#### Example - Use the show method with a template and custom arguments
 
     <span id="notification"></span>
     <script>
@@ -471,17 +479,43 @@ If this argument is not supplied, then `"info"` is assumed.
     notificationWidget.show("foo text", "warning");
     </script>
 
-#### Example - use the show method with an object argument
+#### Example - Use the show method and return the message from a function
 
     <span id="notification"></span>
     <script>
-    var notificationWidget = $("#notification").kendoNotification({
-       templates: [
-            { type: "myAlert", template: "<div>System alert: #= myMessage #</div>"}
-        ]
-    }).data("kendoNotification");
+    function getNotificationMessage() {
+        return "foo text";
+    }
 
-    notificationWidget.show({ myMessage: "foo text" }, "myAlert");
+    var notificationWidget = $("#notification").kendoNotification().data("kendoNotification");
+
+    notificationWidget.showText(getNotificationMessag);
+    </script>
+
+### showText
+
+Displays a plain-text notification.
+
+This is a safer version of the [show](#methods-show) method that assumes that you want to encode any markup passed in as a message.
+
+#### Parameters
+
+##### data `Object|String|Function`
+
+**Required**. The string content for the notification; or the object with the values for the variables inside the notification template; or the function, which returns the required string or an object.
+
+##### type `String`
+
+The notification type. Built-in types include `"info"`, `"success"`, `"warning"` and `"error"`. Custom types should match the types from the [template configuration](#configuration-templates).
+If this argument is not supplied, then `"info"` is assumed.
+
+#### Example - Use the showText method to display a string
+
+    <span id="notification"></span>
+    <script>
+    var notificationWidget = $("#notification").kendoNotification().data("kendoNotification");
+
+    notificationWidget.showText("foo text", "warning");
     </script>
 
 #### Example - use the show method with a function argument

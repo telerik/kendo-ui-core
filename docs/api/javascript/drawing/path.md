@@ -103,6 +103,9 @@ Inherited from [Element.opacity](element#configuration-opacity)
 ### stroke `kendo.drawing.StrokeOptions`
 The stroke options of the shape.
 
+### tooltip `kendo.drawing.TooltipOptions`
+The tooltip options of the shape.
+
 ### transform `kendo.geometry.Transformation`
 The transformation to apply to this element.
 Inherited from [Element.transform](element#configuration-transform)
@@ -170,6 +173,16 @@ Closes the path by linking the current end point with the start point.
 #### Returns
 `kendo.drawing.Path` The current instance to allow chaining.
 
+### containsPoint
+Returns true if the shape contains the specified point.
+
+#### Parameters
+
+##### point `kendo.geometry.Point`
+The point that should be checked.
+
+#### Returns
+`Boolean` value indicating if the shape contains the point.
 
 ### curveTo
 Draws a cubic Bézier curve (with two control points).

@@ -10,6 +10,27 @@ Represents the Kendo UI Editor widget. Inherits from [Widget](/api/javascript/ui
 
 ## Configuration
 
+### deserialization `Object`
+
+Fine-tune deserialization in the Editor widget. Deserialization is the process of parsing the HTML string input from the value() method or from the viewHtml dialog into editable content.
+
+### deserialization.custom `Function`
+
+Callback that allows custom deserialization to be plugged in. The method accepts string as the only parameter and is expected to return the modified content as string as well.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+        $("#editor").kendoEditor({
+            deserialization: {
+                custom: function(html) {
+                    return html.replace(/(<\/?)b(\s?)/, "$1strong$2");
+                }
+            }
+        });
+    </script>
+
 ### domain `String`
 
 Relaxes the same-origin policy when using the iframe-based editor.
@@ -41,6 +62,81 @@ Indicates whether the Editor should submit encoded HTML tags. By default, the su
       encoded: false
     });
     console.log($("#editor").val()); // logs "<p>foo</p>"
+    </script>
+
+### immutables `Boolean|Object` *(default: false)*
+
+If enabled, the editor disables the editing and command execution in elements marked with editablecontent="false" attribute.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      tools: [
+        "bold", "italic", "underline", "justifyLeft", "justifyCenter", "justifyRight", "insertUnorderedList", "insertOrderedList", "indent", "outdent", "createLink", "unlink", "insertImage", "createTable", "viewHtml"
+      ],
+      value: '<p>editable content</p><p contenteditable="false">content, which <span style="color:red;">can not</span> be changed</p><p contenteditable="false">immutable content</p>',
+      immutables: true
+    });
+    </script>
+
+### immutables.deserialization `Function`
+
+Callback that allows custom deserialization of an immutable element. The callback accepts two arguments. The DOM element representing the immutable element in the html view and the immutable DOM element, which will be restored.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      tools: [
+        "bold", "italic", "underline", "justifyLeft", "justifyCenter", "justifyRight", "insertUnorderedList", "insertOrderedList", "indent", "outdent", "createLink", "unlink", "insertImage", "createTable", "viewHtml"
+      ],
+      value: '<p>editable content</p><p contenteditable="false">content, which <span style="color:red;">can not</span> be changed</p><p contenteditable="false">editable content</p>',
+      immutables: {
+        deserialization: function(node, immutable) {
+          immutable.style.backgroundColor = "red";
+        }
+      }
+    });
+    </script>
+
+### immutables.serialization `String|Function`
+
+Kendo template or a callback that allows custom serialization of an immutable element. The callback accepts DOM element as only parameter and is expected to return the HTML source of a DOM element.
+
+#### Example - specify serialization as a kendo template
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      tools: [
+        "bold", "italic", "underline", "justifyLeft", "justifyCenter", "justifyRight", "insertUnorderedList", "insertOrderedList", "indent", "outdent", "createLink", "unlink", "insertImage", "createTable", "viewHtml"
+      ],
+      value: '<p>editable content</p><p contenteditable="false">content, which <span style="color:red;">can not</span> be changed</p><p contenteditable="false">immutable content</p>',
+      immutables: {
+          serialization: "<#= data.nodeName # data=\"immutable-element\"></#= data.nodeName #>"
+      }
+    });
+    </script>
+
+#### Example - specify serialization as a function
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      tools: [
+        "bold", "italic", "underline", "justifyLeft", "justifyCenter", "justifyRight", "insertUnorderedList", "insertOrderedList", "indent", "outdent", "createLink", "unlink", "insertImage", "createTable", "viewHtml"
+      ],
+      value: '<p>editable content</p><p contenteditable="false">content, which <span style="color:red;">can not</span> be changed</p><p contenteditable="false">immutable content</p>',
+      immutables: {
+        serialization: function(node) {
+          var tagName = node.tagName;
+          return "<" + tagName + ">" + "</" + tagName + ">";
+        }
+      }
+    });
     </script>
 
 ### messages `Object`
@@ -1012,6 +1108,166 @@ The title of the tool that deletes selected table columns.
     });
     </script>
 
+### pasteCleanup `Object`
+
+Options for controlling how the pasting content is modified before it is added in the editor.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        pasteCleanup: {
+            all: false,
+            css: false,
+            custom: null,
+            keepNewLines: false,
+            msAllFormatting: false,
+            msConvertLists: true,
+            msTags: true,
+            none: false,
+            span: false
+        }
+    });
+    </script>
+
+### pasteCleanup.all `Boolean` *(default: false)*
+
+All HTML tags are stripped leaving only the text in the content.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        pasteCleanup: {
+            all: true
+        }
+    });
+    </script>
+
+### pasteCleanup.css `Boolean` *(default: false)*
+
+Remove `style` and `class` attributes from the pasting content.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        pasteCleanup: {
+            css: true
+        }
+    });
+    </script>
+
+### pasteCleanup.custom `Function`
+
+Use a callback function to integrate a custom implementation for cleaning up the paste content. Make sure the callback function always returns the result.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        pasteCleanup: {
+            custom: function(html) {
+                return html.replace(/<img[^>]*>/, "");
+            }
+        }
+    });
+    </script>
+
+### pasteCleanup.keepNewLines `Boolean` *(default: false)*
+
+Strip all HTML tags but keep new lines in the pasted content.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        pasteCleanup: {
+            keepNewLines: true
+        }
+    });
+    </script>
+
+### pasteCleanup.msAllFormatting `Boolean` *(default: false)*
+
+Remove all special formatting from MS Word content like font-name, font-size and MS Word specific tags.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        pasteCleanup: {
+            msAllFormatting: true
+        }
+    });
+    </script>
+
+### pasteCleanup.msConvertLists `Boolean` *(default: true)*
+
+Converts MS Word pasted content into HTML lists.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        pasteCleanup: {
+            msConvertLists: false
+        }
+    });
+    </script>
+
+### pasteCleanup.msTags `Boolean` *(default: true)*
+
+Removes all MS Word specific tags and cleans up the extra metadata.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        pasteCleanup: {
+            msTags: false
+        }
+    });
+    </script>
+
+### pasteCleanup.none `Boolean` *(default: false)*
+
+Prevent any cleaning up of the content.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        pasteCleanup: {
+            none: true
+        }
+    });
+    </script>
+
+### pasteCleanup.span `Boolean` *(default: false)*
+
+Remove all span elements from the content, ensuring much of the inline formatting is removed.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        pasteCleanup: {
+            span: false
+        }
+    });
+    </script>
+
 ### pdf `Object`
 
 Configures the Kendo UI Editor PDF export settings.
@@ -1342,6 +1598,23 @@ If `resizable` is set to `true` the widget will detect changes in the viewport w
 ### serialization `Object`
 
 Allows setting of serialization options.
+
+### serialization.custom `Function`
+
+Define custom serialization for the editable content. The method accepts a single parameter as a string and is expected to return a string.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+        serialization: {
+            custom: function(html) {
+                return html.replace(/(<\/?)b(\s?)/, "$1strong$2");
+            }
+        }
+    });
+    </script>
 
 ### serialization.entities `Boolean` *(default: true)*
 
@@ -3558,7 +3831,7 @@ Initiates the PDF export and returns a promise. Also triggers the [pdfExport](#e
             and image handling. The widget &lt;strong&gt;outputs identical HTML&lt;/strong&gt; across all major browsers, follows
             accessibility standards and provides API for content manipulation.
     </textarea>
-    
+
     <script>
         $("#editor").kendoEditor();
         $("#export").click(function(e) {

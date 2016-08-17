@@ -19,13 +19,32 @@ The layer options.
 ### map `kendo.dataviz.ui.Map`
 The owner Map widget.
 
+### items `Array`
+An array of the markers currently loaded in this layer.
+
 ## Methods
 
-### show
-Shows the layer, if not visible.
+### add
+Adds a Marker to the layer.
+
+#### Parameters
+
+##### marker `kendo.dataviz.map.Marker`
+The Marker instance to add.
+
+### clear
+Clears all Markers from the layer.
 
 ### hide
 Hides the layer, if visible.
+
+### remove
+Removes a Marker from the layer.
+
+#### Parameters
+
+##### marker `kendo.dataviz.map.Marker`
+The Marker instance to remove.
 
 ### setDataSource
 Sets the data source of this layer.
@@ -53,8 +72,11 @@ Sets the data source of this layer.
     </script>
 
 #### Parameters
+
 ##### dataSource `Object`
 A live [DataSource](/api/javascript/data/datasource) instance
 or its [configuration](/api/javascript/data/datasource#configuration) object.
 
+### show
+Shows the layer, if not visible.
 

@@ -1190,4 +1190,95 @@
             });
         });
     });
+
+    asyncTest("children cascades when parent is focused", 1, function() {
+        var ddl = new DropDownList(parent, {
+            optionLabel: "Select",
+            dataValueField: "id",
+            dataTextField: "text2",
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success([
+                                {text: "item1", id: "1", text2: "i"},
+                                {text: "item3", id: "2", text2: "i"}
+                            ]);
+                        });
+                    }
+                }
+            },
+            value: "0"
+        });
+
+        var ddl2 = new DropDownList(child.attr("id", "child"), {
+            optionLabel: "Select",
+            dataValueField: "text",
+            dataTextField: "text",
+            dataSource: {
+                serverFiltering: true,
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success([
+                                {text: "item1", id: "1"},
+                                {text: "item2", id: "1"},
+                                {text: "item3", id: "2"},
+                                {text: "item4", id: "2"}
+                            ]);
+                        });
+                    }
+                }
+            },
+            cascadeFrom: "parent",
+            autoBind: false,
+            value: "0"
+        });
+
+        ddl.value(2);
+        ddl2.value("item4");
+
+        ddl.wrapper.focus();
+
+        ddl2.one("dataBound", function() {
+            start();
+
+            equal(ddl2.value(), "item4");
+        });
+    });
+
+    test("widget with filter input filters child only once", 2, function() {
+        var ddl = new DropDownList(parent, {
+            animation: false,
+            optionLabel: "Select",
+            dataValueField: "id",
+            dataTextField: "text",
+            dataSource: [
+                {text: "item1", id: "1"},
+                {text: "item3", id: "2"}
+            ],
+            value: "1",
+            filter: "contains"
+        });
+
+        var ddl2 = new DropDownList(child.attr("id", "child"), {
+            dataValueField: "text",
+            dataTextField: "text",
+            cascadeFrom: "parent",
+            dataSource: {
+                serverFiltering: true,
+                transport: {
+                    read: function(options) {
+                        ok(true);
+                        options.success([ ]);
+                    }
+                }
+            },
+        });
+
+        ddl.wrapper.focus();
+        ddl.open();
+
+        ddl.ul.children().last().click();
+    });
 })();

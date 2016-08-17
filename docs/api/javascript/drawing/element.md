@@ -73,6 +73,9 @@ A flag, indicating if the element is visible.
 ### options `kendo.drawing.OptionsStore`
 The configuration options of the drawing element.
 
+### parent `kendo.drawing.Group`
+The parent group element, if any.
+
 ## Methods
 
 ### bbox
@@ -145,6 +148,16 @@ This is the rectangle that will fit around the actual rendered element.
 #### Returns
 `kendo.geometry.Rect` The bounding box of the element with clipping and transformations applied.
 
+### containsPoint
+Returns true if the shape contains the specified point.
+
+#### Parameters
+
+##### point `kendo.geometry.Point`
+The point that should be checked.
+
+#### Returns
+`Boolean` value indicating if the shape contains the point.
 
 ### opacity
 Gets or sets the element opacity.

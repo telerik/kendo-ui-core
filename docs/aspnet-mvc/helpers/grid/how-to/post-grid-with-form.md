@@ -1,16 +1,24 @@
 ---
-title: Post Grid with Form
-description: Submit the grid data items as part of a Html.Form
+title: Post Grid Data with Form
+page_title: Post Grid Data with Form | Kendo UI Grid HtmlHelper
+description: "Configure the Kendo UI Grid to use the enum type for both displaying and editing."
+slug: howto_postgriddatawithform_gridaspnetmv
 ---
 
-# Post grid data with form
+# Post Grid Data with Form
 
-This project shows how to submit the grid data items as part of a `Html.Form`
+The example below demonstrates how to submit the Grid data items as part of an `Html.Form`.
 
-There are several known limitations:
+There are three known limitations:
+* All items in the Grid are submitted no matter if they are updated or not.
+* Only the items from the current page are submitted.
+* Server operations must be disabled&mdash;`ServerOperation(false)`.
 
-* all the items in the grid will be submitted (no matter if they are updated or not)
-* only the items from the current page will be submitted
-* server operations must be disabled - `ServerOperation(false)`
+To see the example, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/post-grid-with-form).
 
-[Post Grid With Form](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/post-grid-with-form)
+## See Also
+
+* [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
+* [GridBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
+
+For more runnable examples on the Kendo UI Grid in ASP.NET MVC applications, browse its [**How To** documentation folder]({% slug howto_applycustomrowstylesbasedondata_gridaspnetmvc %}).

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Diagram Widget
+page_title: Overview | Kendo UI Diagram
 description: "Learn how to initialize the Kendo UI Diagram widget, add diagram elements, change properties and get an overview of its major features."
 slug: overview_kendoui_diagram_widget
 position: 1
@@ -195,7 +195,7 @@ Note that the function, returning a visual, has a parameter containing the data 
 Other articles and how-to examples on Kendo UI Diagram:
 
 * [Overview of the ASP.NET MVC HtmlHelper Extension for the Diagram Widget](/aspnet-mvc/helpers/diagram/overview)
-* [Overview of the Diagram JSP Tag](/jsp/tags/diagram/overview)
+* [Overview of the Diagram JSP Tag]({% slug overview_diagram_uiforjsp %})
 * [Overview of the Diagram PHP Class](/php/widgets/diagram/overview)
 * [How to Change Shape Visual Elements Dynamically]({% slug howto_changeshapevisualelements_dynamically_diagram %})
 * [How to Drag and Drop on Shapes]({% slug howto_draganddrop_onshapes_diagram %})

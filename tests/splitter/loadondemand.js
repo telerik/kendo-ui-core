@@ -13,7 +13,7 @@
             QUnit.fixture.closest("body").find(".k-splitter").each(function(idx, element){
                 $(element).data("kendoSplitter").destroy();
             });
-            $.mockjaxClear();
+            $.mockjax.clear();
             $(document).off();
         }
     });
@@ -64,7 +64,7 @@
 
         $(document).on("ajaxSend", function(e, request, settings) {
             request.abort();
-            var loading = splitter.dom.find(".k-pane-loading.k-loading");
+            var loading = splitter.dom.find(".k-pane-loading.k-i-loading");
             equal(loading.length, 1);
             ok(loading.parent().is(".k-pane:first"));
         });
@@ -77,7 +77,7 @@
 
         splitter = create();
 
-        $.mockjaxClear();
+        $.mockjax.clear();
         $.mockjax(function(settings) {
             deepEqual(settings.data, data);
             return {};

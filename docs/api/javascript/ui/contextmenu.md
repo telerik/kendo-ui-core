@@ -40,9 +40,11 @@ Specifies that ContextMenu should be shown aligned to the target or the filter e
         });
     </script>
 
-### animation `Object`
+### animation `Boolean|Object`
 
-A collection of **Animation** objects, used to change default animations. A value of false will disable all animations in the widget.
+A collection of **Animation** objects, used to change default animations. A value of `false` will disable all animations in the widget.
+
+`animation:true` is not a valid configuration.
 
 Available animations for the **ContextMenu** are listed below.  Each animation has a reverse options which is used for the **close** effect by default, but can be over-ridden
 by setting the **close** animation. Each animation also has a direction which can be set off the animation (i.e. **slideIn:Down**).
@@ -640,9 +642,9 @@ Appends an item to a **ContextMenu** in the specified referenceItem's sub menu (
 
 Item to be appended, specified as a JSON object. An array of objects can also be passed.
 
-##### referenceItem `String|jQuery`
+##### referenceItem `String|jQuery` *(optional)*
 
-A reference item to append the new item in. Root context menu if not specified.
+A reference item to append the new item in. If omitted, the new item will be appended to the as a root item.
 
 #### Returns
 

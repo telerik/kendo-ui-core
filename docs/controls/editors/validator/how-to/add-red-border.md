@@ -1,6 +1,6 @@
 ---
 title: Add Red Border and Hide Tooltip
-page_title: Add Red Border and Hide Tooltip | Kendo UI Validator Widget
+page_title: Add Red Border and Hide Tooltip | Kendo UI Validator
 description: "Learn how to add a red border and hide the tooltip in the Kendo UI Validator."
 slug: howto_addredborderandhidetooltip_validator
 ---
@@ -149,10 +149,12 @@ The example below demonstrates how to hide the validation tooltip and add a red 
 
 ## See Also
 
-Other articles on Kendo UI Validator:
+Other articles on the Kendo UI Validator:
 
 * [Validator JavaScript API Reference](/api/javascript/ui/validator)
 * [How to Show Tooltip on Mouse Over]({% slug howto_showtooltiponmouseover_validator %})
 * [How to Use Use MutationObserver to Add Red Border and Hide Tooltip]({% slug howto_usemutationobserver_addborderandhidetooltip_validator %})
 * [How to Use Templates to Customize Tooltips]({% slug howto_usetemplatestocustomizetooltips_validator %})
 * [How to Validate Radio Buttons with Only One Error Message]({% slug howto_validateradiowithonemessage_validator %})
+
+For more runnable examples on the Kendo UI Validator widget, browse its [**How To** documentation folder]({% slug howto_remote_validation %}).

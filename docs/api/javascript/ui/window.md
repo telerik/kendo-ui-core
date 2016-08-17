@@ -24,10 +24,11 @@ and "Maximize".
     });
     </script>
 
-### animation `Object`
+### animation `Boolean|Object`
 
-A collection of {Animation} objects, used to change default animations. A value of **false**
-will disable all animations in the widget.
+A collection of {Animation} objects, used to change default animations. A value of `false` will disable all animations in the widget.
+
+`animation:true` is not a valid configuration.
 
 #### Example - disable animation
 
@@ -147,6 +148,8 @@ Defines the open animation duration.
 The element that the Window will be appended to. Beneficial if the [Window is used together with a form](/web/window/overview#using-kendo-ui-window-with-a-form).
 Note that this *does not* constrain the window dragging within the given element.
 
+> Appending the Window to an element with an `overflow:hidden`, `overflow:auto` or `overflow:scroll` style may result in undesired behavior, because the Window will not be able to be displayed outside the element's boundaries. Unwanted scrollbars may appear as well.
+
 #### Example - set the window container to be the form with id="mainForm"
 
     <div id="dialog"></div>
@@ -241,6 +244,28 @@ Explicitly states whether a content iframe should be created. For more informati
     $("#dialog").kendoWindow({
       content: "http://www.telerik.com/",
       iframe: true
+    });
+    </script>
+
+### height `Number | String`
+
+Specifies height of the window.
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoWindow({
+      height: 400
+    });
+    </script>
+
+#### Example - specify window height in percent
+
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoWindow({
+      height: "50%"
     });
     </script>
 
@@ -434,37 +459,17 @@ Specifies width of the window.
     });
     </script>
 
-### height `Number | String`
-
-Specifies height of the window.
-
-#### Example
-
-    <div id="dialog"></div>
-    <script>
-    $("#dialog").kendoWindow({
-      height: 400
-    });
-    </script>
-
-#### Example - specify window height in percent
-
-    <div id="dialog"></div>
-    <script>
-    $("#dialog").kendoWindow({
-      height: "50%"
-    });
-    </script>
-
 ## Methods
 
 ### center
 
 Centers the window within the viewport.
 
+If the Window has no set dimensions and is centered before its content is loaded with Ajax, it is probably going to resize after the content is loaded. This naturally changes the position of the widget on the screen and it is no longer centered. If this is a requirement, then either center the Window in its [`refresh`](#events-refresh) event, or set some [explicit dimensions](#configuration-height).
+
 #### Returns
 
-`kendo.ui.Window` Returns the window object to support chaining.
+`kendo.ui.Window` Returns the window object to support chaining, for example center and open the Window with a single expression.
 
 #### Example
 
@@ -473,6 +478,8 @@ Centers the window within the viewport.
     $("#dialog").kendoWindow();
     var dialog = $("#dialog").data("kendoWindow");
     dialog.center();
+    // chaining example
+    // dialog.center().open();
     </script>
 
 ### close
@@ -496,7 +503,7 @@ Closes a Window.
 
 ### content
 
-Gets or set the content of a window.
+Gets or set the content of a window. Supports chaining when used as a setter.
 
 #### Parameters
 
@@ -507,7 +514,7 @@ The content of the Window. Can be an HTML string or jQuery object.
 
 #### Returns
 
-`Object` If the content parameter is provided, this method will return the widget object to support chaining. Otherwise, it will return the current content of the widget.
+`String` The current window content, if used as a getter. If used as a setter, the method will return the window object to support chaining.
 
 #### Example - get the window content
 
@@ -576,7 +583,7 @@ Maximizes a Window to its title bar.
 
 ### open
 
-Opens a Window.
+Opens a Window and brings it on top of any other open Window instances by calling [`toFront`](#methods-tofront) internally.
 
 #### Returns
 
@@ -628,6 +635,10 @@ Any options specified here are passed to jQuery.ajax().
 
 The server URL that will be requested.
 
+##### options.cache `Boolean`
+
+Indicates whether the Ajax request may use a previously cached response. By default Ajax request caching is not used.
+
 ##### options.data `Object`
 
 A JSON object containing the data that will be passed to the server.
@@ -662,8 +673,9 @@ Indicates whether the content should be fetched within an iframe, or with AJAX a
     });
 
     dialog.refresh({
-        url: "/userInfo",
+        url: "/userInfo", // returns JSON, { firstName: "Alyx", lastName: "Vance" }
         data: { userId: 42 },
+        dataType: "json",
         template: "Hello, #= firstName # #= lastName #"
     });
     </script>
@@ -694,8 +706,11 @@ Restores a maximized or minimized Window to its previous state. Triggers the res
 
 ### setOptions
 
-Allows the window to be configured with new options. If you change the [content url](#configuration-content), call [`refresh`](#methods-refresh) afterwards.
-Another option is to execute the `refresh` method with the new URL directly.
+Allows the Window to be configured with new options.
+
+If you change the [content url](#configuration-content), call [`refresh`](#methods-refresh) afterwards. Another option is to execute the `refresh` method with the new URL directly.
+
+Changing the size or position of the Window requires the widget to not be in maximized or minimized state.
 
 #### Parameters
 
@@ -717,7 +732,7 @@ The configuration options to be set.
 
 ### title
 
-Gets or set the title of a **Window**.
+Gets or sets the title of a Window. Supports chaining when used as a setter.
 
 #### Parameters
 
@@ -727,7 +742,7 @@ The title of the Window.
 
 #### Returns
 
-`kendo.ui.Window` If a title is provided, this method will return the window object to support chaining. Otherwise, it will return the current title of the window.
+`String` The current window title, if used as a getter. If used as a setter, the method will return the window object to support chaining.
 
 #### Example - get the title of the window
 
@@ -749,7 +764,7 @@ The title of the Window.
 
 ### toFront
 
-Brings forward a Window to the top of the z-index.
+Increases the `z-index` style of a Window [`wrapper`](/intro/widget-basics/wrapper-element) to bring the instance on top of other open Windows. This method is executed automatically when the [`open`](#methods-open) method is used.
 
 #### Returns
 
@@ -976,6 +991,62 @@ The status of the request, as returned from [jQuery.ajax](http://api.jquery.com/
     $("#dialog").kendoWindow();
     var dialog = $("#dialog").data("kendoWindow");
     dialog.bind("error", window_error);
+    </script>
+
+### maximize
+
+Triggered when the window has been minimized by the user. Introduced in 2016.Q1.SP1
+
+#### Example - subscribe to the "maximize" event during initialization
+
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoWindow({
+      actions: ["Maximize"],
+      maximize: function(e) {
+        console.log("Window was maximized")
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "maximize" event after initialization
+
+    <div id="dialog"></div>
+    <script>
+    function window_maximize(e) {
+      console.log("Window was maximized")
+    }
+    $("#dialog").kendoWindow({ actions: ["Maximize"] });
+    var dialog = $("#dialog").data("kendoWindow");
+    dialog.bind("maximize", window_maximize);
+    </script>
+
+### minimize
+
+Triggered when the window has been minimized by the user. Introduced in 2016.Q1.SP1
+
+#### Example - subscribe to the "minimize" event during initialization
+
+    <div id="dialog"></div>
+    <script>
+    $("#dialog").kendoWindow({
+      actions: ["Minimize"],
+      minimize: function(e) {
+        console.log("Window was minimized")
+      }
+    });
+    </script>
+
+#### Example - subscribe to the "minimize" event after initialization
+
+    <div id="dialog"></div>
+    <script>
+    function window_minimize(e) {
+      console.log("Window was minimized")
+    }
+    $("#dialog").kendoWindow({ actions: ["Minimize"] });
+    var dialog = $("#dialog").data("kendoWindow");
+    dialog.bind("minimize", window_minimize);
     </script>
 
 ### open

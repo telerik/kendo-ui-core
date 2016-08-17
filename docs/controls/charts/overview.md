@@ -67,7 +67,7 @@ This chart can be given a title by specifying the `text` property of the `title`
 
 Kendo UI Charts can visualize series bound to both local and remote data.
 
-#### Bind to local arrays
+#### Bind to Local Arrays
 
 Start by creating a series that displays inline data.
 
@@ -226,7 +226,7 @@ This results in the chart below.
 
 ![Chart with multiple axes](/controls/charts/chart-multiple-axes.png)
 
-### Axis-Crossing Values
+### Arrangement of Value Axes
 
 You are able to control the arrangement of the value axes by specifying the values (category indices) at which they cross the category axis, as demonstrated below.
 
@@ -316,7 +316,7 @@ The first series is associated with the default Y axis, as no axis name is speci
 
 ![Scatter chart with multiple axes](/controls/charts/chart-scatter-line-multiple-axes.png)
 
-### Axis-Crossing Values
+### Arrangement of X/Y Axes
 
 You are able to control the arrangement of the X and Y axes by specifying the values at which they cross the primary axes.
 

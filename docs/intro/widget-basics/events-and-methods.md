@@ -1,7 +1,7 @@
 ---
 title: Methods and Events
 page_title: Methods and Events | Kendo UI Getting Started
-description: "Learn how to obtain a reference to an initialized Kendo UI widget instance and call its methods and events."
+description: "Obtain a reference to an initialized Kendo UI widget instance and call its methods and events."
 previous_url: /basics/events-and-methods, /intro/events-and-methods, /intro/installation/events-and-methods
 slug: widget_methodsand_events_kendoui_installation
 position: 3
@@ -35,7 +35,7 @@ To get a reference to a widget instance, use the [jQuery data](http://api.jquery
     </script>
 ```
 
-### getKendo* Approach
+### getKendo* Method
 
 To get a reference to a widget instance, you may also use the `getKendo<WidgetName>` method. Note that the jQuery convention of returning the selected DOM element(s) applies to widget initialization plug-in methods too. This means that the plug-in method, for example `kendoAutoComplete()`, does not return the widget instance, but the jQuery selector that the method was used on.
 
@@ -80,7 +80,7 @@ Once the widget instance is available, you can call its methods using the standa
 
 If the code, which should return a widget instance, returns `undefined`, this means that the widget has not been initialized yet. Such a problem may occur, for example, if a widget is being created in a `document.ready` handler, but the widget instance is being referenced from code that was executed earlier.
 
-## Events
+## Widget Events
 
 Depending on the its specific features, each widget exposes different events. For example, the `AutoComplete` widget triggers `change`, `close`, `dataBound`, etc. You may pass event handlers when you instantiate the widget or afterwards.
 
@@ -195,7 +195,7 @@ Certain widget events may be prevented by calling the `preventDefault` method of
 
 ### Unbind from Events
 
-To unbind from a given event, you should keep a reference to the event handler function and invoke the `unbind` method with it. Note that calling the `unbind` method without a second argument unbinds all event handlers from the event.
+To unbind from a given event, you should keep a reference to the event handler function and invoke the `unbind` method with it. Note that calling the `unbind` method without any argument unbinds all event handlers from the event.
 
 ###### Example
 
@@ -222,15 +222,24 @@ To unbind from a given event, you should keep a reference to the event handler f
 
 ## Known Limitations
 
-* Combine Methods and Events&mdash;Kendo UI does not fire an event when the corresponding method is invoked. For example, the `select` event of the Kendo UI PanelBar widget is not fired if you call the `select` method via the API.
+**Combine Methods and Events**
+
+Kendo UI does not fire an event when the corresponding method is invoked. For example, the `select` event of the Kendo UI PanelBar widget is not fired if you call the `select` method through the API.
 
 ## See Also
 
 Other articles on Kendo UI widget basics:
 
 * [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
+* [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
+* [Include Only What You Need]({% slug include_only_what_you_need_kendoui_installation %})
+* [JavaScript Prerequisites]({% slug javascript_prerequisites_kendoui_installation %})
+* [Initialize Widgets Using jQuery Plug-Ins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Initialize Widgets Using Markup]({% slug initialize_widgets_using_markup_installation %})
 * [Access Widget DOM Elements: wrapper and element]({% slug widgetwrapperandelement_references_gettingstarted %})
 * [Set Data Attributes]({% slug dataattributes_configuration_installation %})
 * [Destroy Widgets]({% slug destroywidgets_kendoui_gettingstarted %})
+* [Edit Widgets]({% slug kendoui_editing_gettingstarted %})
 * [Create Custom Widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
-* [Editing Functionality]({% slug kendoui_editing_gettingstarted %})
+* [Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
+* [NuGet Packages]({% slug kendoui_nuget_packages %})

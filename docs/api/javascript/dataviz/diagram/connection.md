@@ -13,6 +13,26 @@ Connections are usually created by calling [connect](/api/dataviz/diagram#method
 
 Defines the label displayed on the connection path.
 
+### content.color `String`
+
+The color of the connection content text.
+
+### content.fontFamily `String`
+
+The font family of the connection content text.
+
+### content.fontSize `Number`
+
+The font size of the connection content text.
+
+### content.fontStyle `String`
+
+The font style of the connection content text.
+
+### content.fontWeight `String`
+
+The font weight of the connection content text.
+
 ### content.template `String|Function`
 
 The [template](/api/javascript/kendo#methods-template) which renders the labels.
@@ -220,7 +240,7 @@ Sets the intermediate points (in global coordinates) of the connection.
 
 #### Example - setting intermediate connection points
 
-![Intermediate connection points.](/api/dataviz/diagram/connectionpoints.png)
+![Intermediate connection points.](/api/dataviz/diagram/connection_points.png)
 
     <div id="diagram"></div>
     <script>

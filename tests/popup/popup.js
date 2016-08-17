@@ -175,6 +175,15 @@
         }, 400);
     });
 
+    test("popup close(true) hides wrapper", function() {
+        popup = div.kendoPopup().data("kendoPopup");
+
+        popup.open();
+        popup.close(true);
+
+        equal(popup.wrapper.css("display"), "none");
+    });
+
     test("popup is made absolute", function() {
         div.kendoPopup();
         popup = div.data('kendoPopup');

@@ -719,6 +719,16 @@ test("value method parses hours when ISO date format", 1, function() {
     equal(datetimepicker.element.val(), "10/10/2000 1:30 PM");
 });
 
+test("setting value in change event does not cause infinite recursion", 1, function() {
+    var datetimepicker = new DateTimePicker(input, {
+        change: function() {
+            this.value(new Date("1/1/2015"));
+        }
+    });
+    datetimepicker.value(new Date("1/2/2015"));
+    equal(datetimepicker.value().getDate(), 2);
+});
+
 test("setOptions method sets correct timeView min/max values", function() {
     var date = new Date(2013, 10, 10, 1, 30);
     var min = new Date(2013, 10, 9, 23, 30);
@@ -873,6 +883,4 @@ test("time part from current is stripped when value is set to null", 3, function
     equal(datetimepicker.dateView._current.getMinutes(), 0);
     equal(datetimepicker.dateView._current.getSeconds(), 0);
 });
-
-
 })();
