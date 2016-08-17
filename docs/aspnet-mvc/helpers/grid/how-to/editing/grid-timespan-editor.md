@@ -1,11 +1,11 @@
 ---
-title: Configure the Grid to edit the TimeSpan Property
-page_title: Configure the Grid to edit the TimeSpan Property | Kendo UI Grid HtmlHelper
-description: "Configure the Grid and use the TimePicker or NumericTextBox editor to edit the TimeSpan property from the model."
+title: Configure Grids to Edit the TimeSpan Property
+page_title: Configure Grids to Edit the TimeSpan Property | Kendo UI Grid HtmlHelper
+description: "Configure Kendo UI Grids to use the TimePicker or NumericTextBox editor to edit the TimeSpan property from the model."
 slug: howto_configuretoedittimespanproperty_gridaspnetmvc
 ---
 
-# Configure the Grid to edit the TimeSpan Property
+# Configure Grids to Edit the TimeSpan Property
 
 To see the example on how to configure the Grid and use the TimePicker or NumericTextBox editor to edit a `TimeSpan` property from the model, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-timespan-editor).
 
