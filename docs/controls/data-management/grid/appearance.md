@@ -28,7 +28,7 @@ Though the scrolling functionality is enabled, the scrollbars do not necessarily
 
 You can control vertical and horizontal scrolling independently.
 
-When scrolling is enabled, the Grid renders two tables&mdash;one for the header area and one for the scrollable data area. Take the two tables into account when you need to manually make JavaScript or CSS updates to the Grid tables.
+When scrolling is enabled, the Grid renders two tables - one for the header area and one for the scrollable data area. Take the two tables into account when you need to manually make JavaScript or CSS updates to the Grid tables.
 
 ###### Example
 
@@ -179,9 +179,18 @@ To ensure that all table rows have the same heights, use either of the options:
     }
 
 <!--*-->
-When using mobile touch devices, which do not have a visible scrollbar that can be grabbed and dragged, virtual scrolling combined with a large number of data items&mdash;for example, thousands&mdash;might hinder the easy access to all table rows, because the large number of data items will require a great deal of touch scrolling. On the other hand, using virtual scrolling with a very small number of items&mdash;for example, less than two hundred&mdash;does not make much sense either. Virtual scrolling on touch devices relies on drag-and-drop events, which are slower than native scrolling. This might lead to performance issues.
+When using mobile touch devices, which do not have a visible scrollbar that can be grabbed and dragged, virtual scrolling of a large number of data items (for example thousands) might hinder the easy access to all table rows, because the large number of data items will require a great deal of touch scrolling. On the other hand, using virtual scrolling with a very small number of items (for example, less than 200) does not make much sense either. Virtual scrolling on touch devices relies on drag-and-drop events, which are slower than native scrolling. This might lead to performance issues.
 
-#### Limitations
+When a virtualized Grid is scrolled, it renders the table rows for the reached scroll position on the fly. Assuming the local data is used, or the remote data has already been loaded and cached, then the rendering rate and performance depend on the following:
+
+* the page size
+* the Grid height
+* the scrolling speed
+* the total number of data items
+
+If the total number of items is very large and scrolling is fast, the Grid table can be re-rendered rather frequently. If this is combined with a large page size, a perceived lack of scrolling smoothness may be observed. In such cases, consider reducing the page size and increasing the Grid height to reduce the table re-rendering frequency.
+
+#### Limitations of virtual scrolling
 
 * Horizontal scrolling is not virtualized.
 
@@ -189,15 +198,15 @@ When using mobile touch devices, which do not have a visible scrollbar that can 
 
 * It is not recommended to use virtual scrolling together with grouping, hierarchy, or editing.
 
-* Virtual scrolling relies on calculating the average row height based on already loaded data&mdash;having a large variance of row heights or an unknown number of rows that are not bound to data (such as group headers) might cause unexpected behavior.
+* Virtual scrolling relies on calculating the average row height based on already loaded data. Having a large variance of row heights or an unknown number of rows that are not bound to data (such as group headers) might cause unexpected behavior.
 
 * Provide for a page size of the Grid that is large enough, so that the table rows do not fit in the scrollable data area. Otherwise the vertical virtual scrollbar will not be created. The page size of the Grid must be over three times larger than the number of visible table rows in the data area.
 
-* A scrollable Grid with a set height needs to be visible when initialized. In this way the Grid adjusts the height of its scrollable data area in accordance with the total height of the widget. In certain scenarios the Grid might be invisible when initialized&mdash;for example, when placed inside an initially inactive TabStrip tab or in another widget. In such cases use either of the following options:
+* A scrollable Grid with a set height needs to be visible when initialized. In this way the Grid adjusts the height of its scrollable data area in accordance with the total height of the widget. In certain scenarios the Grid might be invisible when initialized - for example, when placed inside an initially inactive TabStrip tab or in another widget. In such cases use either of the following options:
     * Initialize the Grid while its element is still visible.
-    * Initialize the Grid in a suitable event of the parent widget&mdash;for example, in the `activate` event of the TabStrip.
+    * Initialize the Grid in a suitable event of the parent widget - for example, in the `activate` event of the TabStrip.
 
-* Because of height-related browser limitations (which cannot be avoided), virtual scrolling works with up to a couple of million records. The exact number of records depends on the browser. If you use a row count that is larger than the browser can handle, unexpected widget behavior or JavaScript errors might occur. In such cases, revert to standard paging.
+* Because of height-related browser limitations (which cannot be avoided), virtual scrolling works with up to 1-2 million records. The exact number of records depends on the browser and the row height. If you use a row count that is larger than the browser can handle, unexpected widget behavior or JavaScript errors might occur. In such cases, revert to standard paging.
 
 * Programmatic scrolling to a particular Grid row is not supported when virtual scrolling is enabled, because it is not possible to reliably predict the exact scroll offset of the row.
 
