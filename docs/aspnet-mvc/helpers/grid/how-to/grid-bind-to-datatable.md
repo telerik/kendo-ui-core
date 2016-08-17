@@ -1,13 +1,13 @@
 ---
-title: Bind the Grid to DataTable
+title: Bind Grids to DataTable
 page_title: Bind the Grid to DataTable | Kendo UI Grid HtmlHelper
-description: "Bind the Kendo UI MVC Grid to a DataTable."
+description: "Bind the Kendo UI Grid to DataTable in ASP.NET MVC applications."
 slug: howto_bindgridtodatatable_gridaspnetmvc
 ---
 
 # Bind the Grid to DataTable
 
-The example below demonstrates how to bind the UI for ASP.NET MVC Grid to a DataTable.
+The [sample project](#sample-project) below demonstrates how to bind the Kendo UI Grid to a DataTable in ASP.NET MVC applications.
 
 > **Important**
 >
@@ -15,17 +15,19 @@ The example below demonstrates how to bind the UI for ASP.NET MVC Grid to a Data
 
 ## Sample Project
 
-To see the full source code of the sample project on how to bind the Kendo UI MVC Grid to a DataTable, refer to [this GitHub project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/binding-to-datatable).
+The sample project example resolves two main issues, which are related to:  
+* [Editing](#editing)
+* [Aggregates](#aggregates)
 
-There are two main issues that the sample project solves. They are related to:
-* Editing
-* Aggregates
+To see the complete project, refer to [this repository on GitHub](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/binding-to-datatable).
 
 ### Editing
 
 The Grid does not have an instance to a model object and cannot infer field types. You need to provide the model field definitions yourself.
 
-The DataTable metadata contains this information. Pull it into the model definition as illustrated in
+**Solution**
+
+The metadata of the DataTable contains this information. Pull it into the model definition as illustrated in
 [`Index.cshtml:29`](https://github.com/telerik/ui-for-aspnet-mvc-examples/blob/master/grid/binding-to-datatable/KendoUIMVC5/Views/Home/Index.cshtml#L29).
 
 ### Aggregates

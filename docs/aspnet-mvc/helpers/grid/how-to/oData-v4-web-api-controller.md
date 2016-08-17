@@ -1,17 +1,17 @@
 ---
 title: Use oData v4 with WebAPI Controller
 page_title: Use oData v4 with WebAPI Controller | Kendo UI Grid HtmlHelper
-description: "Configure the Kendo UI Grid to use the enum type for both displaying and editing."
+description: "Configure the Kendo UI Grid to use the enum type for both displaying and editing in ASP.NET MVC applications."
 slug: howto_useodata4webapicontroller_gridaspnetmvc
 ---
 
 # Use oData v4 with WebAPI Controller
 
-The example below demonstrates how to configure the `dataSource` to communicate with the WebAPI controller through the Odata 4 protocol.
+Odata v4 is not fully supported and the approaches to work with Dates are limited because WebAPI does not support the `DateTime` type any more. Instead, WebAPI now uses the `DateTimeOffset` time as a main type when it comes to dates.
 
-Note that Odata v4 is not fully supported. Your activities when working with Dates are limited because WebAPI does not support the `DateTime` type anymore. When it comes to dates, WebAPI now uses the `DateTimeOffset` time as a main type. However, the `DateTimeOffet` requires the Model (that the dataSource creates) to keep information for both Date and Offset which is not possible with the current architecture of the DataSource and Model of Kendo UI.
+However, the `DateTimeOffet` requires the Model (that the dataSource creates) to keep information for both Date and Offset, which is not possible with the current architecture of the DataSource and Model of Kendo UI.
 
-To see the example on how to use oData v4 with the WebAPI controller, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/odata-v4-web-api-binding-wrappers).
+To see the example on how to configure the `dataSource` to communicate with the WebAPI controller through the Odata 4 protocol, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/odata-v4-web-api-binding-wrappers).
 
 ## See Also
 
