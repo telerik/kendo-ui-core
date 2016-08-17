@@ -139,6 +139,12 @@ The Kendo UI Grid does not export its `DetailTemplate` for the same reason it do
 
 For more information on how to export multiple Grids to a separate Excel sheet in a single Excel document, refer to [this runnable how-to example]({% slug howto_multiplegridexport_aspnetmvcgrid %}).
 
+### Use Server-Side Processing
+
+To export big datasets from the Grid to Excel, use the .NET based server-side module shipped by Kendo UI. It is established on [Telerik RadSpreadProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview), which is part of the [Telerik Document Processing by Progress](http://docs.telerik.com/devtools/document-processing/introduction).
+
+For more information, refer to the article on the [Excel export of the Grid widget]({% slug exporting_excel_kendoui_grid_widget %}#server-side-processing).
+
 ## See Also
 
 * [Create Excel Documents with Kendo UI]({% slug introduction_excelexport_kendoui %})

@@ -23,8 +23,6 @@ To see the example on how to export all pages and all expanded detail Grids, ref
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Grid HtmlHelper:
-
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [GridBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
 

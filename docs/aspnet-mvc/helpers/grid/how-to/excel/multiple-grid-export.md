@@ -19,8 +19,6 @@ To see the example on how to export multiple Grids to Excel, refer to [this Visu
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Grid HtmlHelper:
-
 * [Overview of the Grid HtmlHelper]({% slug overview_gridhelper_aspnetmvc %})
 * [GridBuilder API Reference](/api/aspnet-mvc/Kendo.Mvc.UI.Fluent/AutoCompleteBuilder)
 
