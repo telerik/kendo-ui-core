@@ -10,7 +10,7 @@ err_count=0
 
 # List of URLs to check: <from> <to>
 urls="
-/kendo-ui/api/wrappers/jsp /kendo-ui/api/jsp/autoComplete
+/kendo-ui/api/wrappers/jsp /kendo-ui/api/jsp/alert
 /kendo-ui/api/web/grid /kendo-ui/api/javascript/ui/grid
 /kendo-ui/api/mobile/application /kendo-ui/api/javascript/mobile/application
 /kendo-ui/api/mobile/scrollview /kendo-ui/api/javascript/mobile/ui/scrollview
