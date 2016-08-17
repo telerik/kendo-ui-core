@@ -7,17 +7,15 @@ slug: howto_alternatingrows_aspnetmvcgrid
 
 # Color Alternating Rows
 
-The example below demonstrates how to customize the Excel document the Grid generates during exporting.
+The demo on how to color the alternating rows of an exported Grid to Excel uses the [`background`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.background) option of the cell to set the background color of the alternating rows.
 
-The demo uses the [`background`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.background) option of the cell to set the background color of the alternating rows.
-
-For more information on how Excel documents work, refer to the [introductory article on Excel]({% slug introduction_excelexport_kendoui %}).
+To see the example, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/alternating-rows).
 
 > **Important**
 >
 > This project requires UI for ASP.NET MVC version 2014.3.1125 and later. Earlier versions do not have the `ExcelExport` event exposed through the fluent API.
 
-To see the example on how to color alternating rows in the Grid, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/alternating-rows).
+For more information on how Excel documents work, refer to the [introductory article on Excel]({% slug introduction_excelexport_kendoui %}).
 
 ## See Also
 

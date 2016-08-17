@@ -1,11 +1,11 @@
 ---
-title: Use the Column Template
-page_title: Use the Column Template | Kendo UI Grid HtmlHelper
+title: Use Column Template
+page_title: Use Column Template | Kendo UI Grid HtmlHelper
 description: "Use the column template in the Grid output Excel document."
 slug: howto_columntemplatexport_aspnetmvcgrid
 ---
 
-# Use the Column Template
+# Use Column Template
 
 To see the example on how to use the column template as the value of the corresponding cell in the output Excel document, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/column-template-excel).
 

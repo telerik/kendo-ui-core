@@ -156,7 +156,7 @@ When virtual scrolling is applied, the HTML output is different than the standar
         </div>
     </div>
 
-When you use virtual scrolling, the data table of the Grid is not placed inside a scrollable container. The scrollbar belongs to a separate `div.k-scrollbar` shown above. This matters in scenarios when the data rows have to be manually scrolled to a particular position.
+When using virtual scrolling, the data table of the Grid is not placed inside a scrollable container. The scrollbar belongs to a separate `div.k-scrollbar` shown above. This matters in scenarios when the data rows have to be manually scrolled to a particular position.
 
 Virtual scrolling relies on a fake scrollbar. Its size is not determined by the browser, but is calculated based on the average row height of the data that is already loaded. As a result, variable row heights may cause unexpected behavior, such as inability to scroll to the last rows on the last page.
 
@@ -181,16 +181,15 @@ To ensure that all table rows have the same heights, use either of the options:
 <!--*-->
 When using mobile touch devices, which do not have a visible scrollbar that can be grabbed and dragged, virtual scrolling of a large number of data items (for example thousands) might hinder the easy access to all table rows, because the large number of data items will require a great deal of touch scrolling. On the other hand, using virtual scrolling with a very small number of items (for example, less than 200) does not make much sense either. Virtual scrolling on touch devices relies on drag-and-drop events, which are slower than native scrolling. This might lead to performance issues.
 
-When a virtualized Grid is scrolled, it renders the table rows for the reached scroll position on the fly. Assuming the local data is used, or the remote data has already been loaded and cached, then the rendering rate and performance depend on the following:
+When a virtualized Grid is scrolled, it renders the table rows for the reached scroll position on the fly. If the local data is used or if the remote data has already been loaded and cached, the rendering rate and performance depend on:
+* The page size.
+* The Grid height.
+* The scrolling speed.
+* The total number of data items.
 
-* the page size
-* the Grid height
-* the scrolling speed
-* the total number of data items
+If the total number of items is large and the scrolling is fast, the table of the Grid can be re-rendered frequently. If, additionally, the page size is huge, the user might observe issues with the smoothness of the scrolling. In such cases, consider reducing the page size and increasing the Grid height to reduce the frequency of table re-rendering.
 
-If the total number of items is very large and scrolling is fast, the Grid table can be re-rendered rather frequently. If this is combined with a large page size, a perceived lack of scrolling smoothness may be observed. In such cases, consider reducing the page size and increasing the Grid height to reduce the table re-rendering frequency.
-
-#### Limitations of virtual scrolling
+#### Limitations of Virtual Scrolling
 
 * Horizontal scrolling is not virtualized.
 
@@ -206,13 +205,13 @@ If the total number of items is very large and scrolling is fast, the Grid table
     * Initialize the Grid while its element is still visible.
     * Initialize the Grid in a suitable event of the parent widget - for example, in the `activate` event of the TabStrip.
 
-* Because of height-related browser limitations (which cannot be avoided), virtual scrolling works with up to 1-2 million records. The exact number of records depends on the browser and the row height. If you use a row count that is larger than the browser can handle, unexpected widget behavior or JavaScript errors might occur. In such cases, revert to standard paging.
+* Because of height-related browser limitations (which cannot be avoided), virtual scrolling works with up to one or two million records. The exact number of records depends on the browser and the row height. If you use a row count that is larger than the browser can handle, unexpected widget behavior or JavaScript errors might occur. In such cases, revert to standard paging.
 
 * Programmatic scrolling to a particular Grid row is not supported when virtual scrolling is enabled, because it is not possible to reliably predict the exact scroll offset of the row.
 
 * The Grid does not persist [selection](#selection) when virtual scrolling occurs. To achieve this behavior, [use this custom implementation]({% slug howto_persist_row_selection_paging_sorting_filtering_grid %}).
 
-When using virtual scrolling is not supported or recommended, revert to standard paging or non-virtual scrolling without paging, depending on the number of data items.
+When virtual scrolling is not supported or recommended, revert to standard paging or non-virtual scrolling without paging, depending on the number of data items.
 
 ## Width
 
@@ -242,21 +241,21 @@ Set the height of the Grid in one of the following ways:
 
 It makes sense to set a height to the Grid only if its scrolling is enabled.
 
-When the Grid has a set height, it calculates the appropriate height of its scrollable data area, so that the sum of the header rows, filter row, data, footer, and pager is equal to the expected Grid height. That is why, if the Grid height is changed via JavaScript after you create the widget, you must call the [`resize` method of the Grid]({% slug responsivewebdesign_integration_kendoui %}) afterwards. In this way, the Grid recalculates the height of its data area.
+When the Grid has a set height, it calculates the appropriate height of its scrollable data area, so that the sum of the header rows, filter row, data, footer, and pager is equal to the expected Grid height. That is why you have to call the [`resize` method of the Grid]({% slug responsivewebdesign_integration_kendoui %}) afterwards if the Grid height is changed through JavaScript after you create the widget. In this way the Grid recalculates the height of its data area.
 
 **Figure 1. Grid with a fixed height and its scrolling functionality enabled**
 
 ![Grid With Fixed Height And Scrolling](/controls/data-management/grid/grid3_1.png)
 
-In some special scenarios, it is possible to set a height style to the scrollable data area of the Grid, either via JavaScript, or external CSS, which is a `div.k-grid-content` element. In this case, do not set height to the Grid.
+In some special scenarios it is possible to set a height style to the scrollable data area of the Grid, either through JavaScript or external CSS, which is a `div.k-grid-content` element. In this case, do not set height to the Grid.
 
 ### Let the Height Vary within Limits
 
-It is possible to make the Grid expand and shrink vertically according to the number of its rows, but within certain limits. To achieve this, do not set any Grid height and apply a min and/or max height style to the scrollable data area. Make sure you [remove the default data area height](/aspnet-mvc/helpers/grid/configuration#scrolling) if you use the MVC wrapper.
+It is possible to make the Grid expand and shrink vertically according to the number of its rows and yet within certain limits. To achieve this, do not set a height of the Grid and apply a minimum and/or maximum height style to the scrollable data area. Make sure you [remove the default data area height]({% slug configuration_gridhelper_aspnetmvc %}#scrolling) if you use the MVC wrapper.
 
 > **Important**
 >
-> This whole approach is not applicable when virtual scrolling is enabled.
+> This approach is not applicable when virtual scrolling is enabled.
 
 ###### Example
 
@@ -274,7 +273,7 @@ You can use the `.k-grid` class instead of the `GridID` to target all widget ins
 >
 > This section is applicable to scrollable Grids only.
 
-To make the Grid 100% high and resize together with its parent, first apply a 100% height style to the Grid [(i.e. to the widget's `<div class="k-grid">` wrapper)]({% slug widgetwrapperandelement_references_gettingstarted %}). According to web standards, elements with a percentage height require that their parent has an explicit height. This requirement applies recursively either until an element with a pixel height, or the `html` element is reached. 100% high elements cannot have margins, paddings, borders, or sibling elements, so remove the default border of the Grid as well.
+To make the Grid 100% high and resize together with its parent, first apply a 100% height style to the Grid [(i.e. to the widget's `<div class="k-grid">` wrapper)]({% slug widgetwrapperandelement_references_gettingstarted %}). According to web standards, elements with a percentage height require that their parent has an explicit height. This requirement applies recursively either until an element with a pixel height, or the `html` element is reached. Elements that are 100% high cannot have margins, paddings, borders, or sibling elements, so remove the default border of the Grid as well.
 
 Secondly, ensure that the inner Grid layout adapts to changes in the height of the Grid wrapper `<div>`. If those changes are triggered by browser window resizing, subscribe to the window `resize` event of the browser and execute the [`resize`]({% slug responsivewebdesign_integration_kendoui %}) method of the Grid. The `resize` method will take care of measuring the height of the Grid `<div>` and adjusting the height of the scrollable data area. You do not need to call the `resize` method if the Grid is placed inside a Kendo UI Splitter or Kendo UI Window, because these widgets will execute it automatically. Also, you do not need the method if you use locked (frozen) columns.
 
@@ -297,7 +296,7 @@ The `resize` method will work for Kendo UI versions delivered after the Kendo UI
         gridElement.children(".k-grid-content").height(newHeight - otherElementsHeight);
     });
 
-The [help article on how to resize the Grid when the window is resized]({% slug howto_resize_whenthe_windowis_resized_grid %}) contains a runnable example of the discussed scenario.
+The [article on how to resize the Grid when the window is resized]({% slug howto_resize_whenthe_windowis_resized_grid %}) contains a runnable example of the discussed scenario.
 
 ### Loading Indicator
 
