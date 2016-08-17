@@ -1,11 +1,11 @@
 ---
-title: Edit Nullable Boolean Fields in In-Line Mode
-page_title: Edit Nullable Boolean Fields in In-Line Mode | Kendo UI Grid HtmlHelper
+title: Edit Nullable Boolean Fields in Inline Mode
+page_title: Edit Nullable Boolean Fields in Inline Mode | Kendo UI Grid HtmlHelper
 description: "Use a custom edit template to edit Nullable Boolean for the in-line edit mode of the Grid."
 slug: howto_editnullablebooleanfields_gridaspnetmvc
 ---
 
-# Edit Nullable Boolean Fields in In-Line Mode
+# Edit Nullable Boolean Fields in Inline Mode
 
 To see the example on how to add а nullable Boolean editor for the Kendo UI Grid, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-inline-editing-with-nullable-boolean).
 

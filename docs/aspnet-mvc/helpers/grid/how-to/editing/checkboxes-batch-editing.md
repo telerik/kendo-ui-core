@@ -1,11 +1,11 @@
 ---
-title: Do Checkboxes Batch Editing
-page_title: Do Checkboxes Batch Editing | Kendo UI Grid HtmlHelper
-description: "Configure the Kendo UI Grid to use the enum type for both displaying and editing."
+title: Edit Grids with Checkboxes in Batch Mode
+page_title: Edit Grids with Checkboxes in Batch Mode | Kendo UI Grid HtmlHelper
+description: "Create a template column with а checkbox that updates the underlying model when its state is changed in a Kendo UI Grid in ASP.NET MVC applications."
 slug: howto_docheckboxesbatchediting_gridaspnetmvc
 ---
 
-# Do Checkboxes Batch Editing
+# Edit Grids with Checkboxes in Batch Mode
 
 To see the example on how to create a template column with а checkbox that updates the underlying model when its state is changed, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/checkboxes-batch-editing).
 
