@@ -95,9 +95,7 @@ The example below demonstrates how to load sheet data by using `fromJSON`.
 
 ## See Also
 
-Other articles on Kendo UI Spreadsheet:
-
-* [API Reference](/api/javascript/ui/spreadsheet)
+* [Spreadsheet API Reference](/api/javascript/ui/spreadsheet)
 * [Data Source Binding]({% slug bind_todata_source_spreadsheet_widget %})
 * [Export to Excel]({% slug export_toexcel_spreadsheet_widget %})
 * [Server-Side Processing]({% slug serverside_processing_spreadsheet_widget %})

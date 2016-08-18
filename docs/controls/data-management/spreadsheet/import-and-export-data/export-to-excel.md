@@ -33,9 +33,7 @@ These will be addressed before the widget goes out of Beta.
 
 ## See Also
 
-Other articles on Kendo UI Spreadsheet:
-
-* [API Reference](/api/javascript/ui/spreadsheet)
+* [Spreadsheet API Reference](/api/javascript/ui/spreadsheet)
 * [Load and Save Data as JSON]({% slug loadand_saveas_json_spreadsheet_widget %})
 * [Data Source Binding]({% slug bind_todata_source_spreadsheet_widget %})
 * [Server-Side Processing]({% slug serverside_processing_spreadsheet_widget %})

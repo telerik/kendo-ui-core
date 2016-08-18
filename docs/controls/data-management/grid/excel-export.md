@@ -232,6 +232,14 @@ The example below demonstrates how to post files to the server.
         });
     </script>
 
+## Server-Side Processing
+
+To export huge datasets to Excel, a well-suited solution is the new [RadSpreadStreamProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of the [Document Processing Library (DPL) by Progress](http://docs.telerik.com/devtools/document-processing/introduction).  
+
+For examples on how to export Excel files, refer to the [RadSpreadProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).
+
+For more information on the Grid server-side processing, refer to [this article]({% slug excelexport_gridhelper_aspnetmvc %}#use-server-side-processing).
+
 ## Troubleshooting
 
 ### JavaScript Error Is Thrown That JSZip Is Not Found
