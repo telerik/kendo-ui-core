@@ -3,7 +3,7 @@ title: Browser Support
 page_title: Browser Support | Kendo UI Upload
 description: "Learn about the browser versions that support the Kendo UI Upload features."
 slug: browsersupport_upload_widget
-position: 5
+position: 6
 ---
 
 # Browser Support
