@@ -5890,7 +5890,7 @@ Get the time slot from given element.
 
 Sets the current Scheduler view.
 
-To get the current Scheduler view, use the [`viewName` method](#methods-viewName).
+To get the current Scheduler view name, use the [`viewName` method](#methods-viewName).
 
 #### Parameters
 
