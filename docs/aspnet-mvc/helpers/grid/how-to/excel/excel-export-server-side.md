@@ -7,13 +7,13 @@ slug: howto_exportgriddataasexceldocs_gridaspnetmv
 
 # Export Grid Data to Excel
 
-The example below demonstrates how to export big datasets from the Grid to Excel by using the [Telerik RadSpreadProcessing](/devtools/document-processing/libraries/radspreadprocessing/overview), which is part of the [Telerik Document Processing by Progress](/devtools/document-processing/introduction).
-
-For the complete project on how to export to Excel by using the .NET based server-side module shipped by Kendo UI, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/excel-export-server-side).
-
 > **Important**
 >
-> The DPL module is distributed as part of the [UI for ASP.NET MVC]({% slug overview_aspnetmvc %}) and is available for the Kendo UI Enterprise and DevCraft bundles.
+> The approach demonstrated in this article is now deprecated in favor of the [server-side processing concept]({% slug excelexport_gridhelper_aspnetmvc %}#use-server-side-processing).
+
+The example below demonstrates how to export the Kendo UI Grid data as an Excel document by implementing it through the NPOI open-source library as well as the Microsoft OpenXML SDK.
+
+To see the example on how to export to Excel on the server side, refer to [this project](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/excel-export-server-side).
 
 ## See Also
 

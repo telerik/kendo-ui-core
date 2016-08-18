@@ -34,9 +34,7 @@ The following issues are not addressed in the Beta release:
 
 ## See Also
 
-Other articles on Kendo UI Spreadsheet:
-
-* [API Reference](/api/javascript/ui/spreadsheet)
+* [Spreadsheet API Reference](/api/javascript/ui/spreadsheet)
 * [Load and Save Data as JSON]({% slug loadand_saveas_json_spreadsheet_widget %})
 * [Export to Excel]({% slug export_toexcel_spreadsheet_widget %})
 * [Server-Side Processing]({% slug serverside_processing_spreadsheet_widget %})

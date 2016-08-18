@@ -10,28 +10,15 @@ position: 4
 
 The native data format for the Spreadsheet widget is [JSON]({% slug loadand_saveas_json_spreadsheet_widget %}). There is also the built-in support for [exporting to Excel]({% slug export_toexcel_spreadsheet_widget %}) that runs in the browser.
 
-For exporting big datasets, Kendo UI ships a .NET based server-side module that is established on [Telerik RadSpreadProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview) and is part of [Telerik Document Processing by Progress](http://docs.telerik.com/devtools/document-processing/introduction).
+To export huge datasets to Excel, a well-suited solution is the new [RadSpreadStreamProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of the [Document Processing Library (DPL) by Progress](http://docs.telerik.com/devtools/document-processing/introduction).  
 
-The document processing library (DPL) handles the data import, export, and processing from the following formats:
+For examples on how to export Excel files, refer to the [RadSpreadProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).
 
-* Excel Microsoft Office Open XML Spreadsheet (.xlsx)
-* Comma-separated values (.csv)
-* Tab-separated values (.txt)
-* Portable document format (.pdf) (export only)
-
-> **Important**
->
-> The DPL module is distributed as part of the [UI for ASP.NET MVC]({% slug overview_aspnetmvc %}) and is available for the Kendo UI Enterprise and DevCraft bundles.
-
-For the complete project on exporting huge datasets from the Grid to Excel, refer to [this how-to example]({% slug howto_exportgriddataasexceldocs_gridaspnetmv %}).
-
-For more information on Excel export, refer to the article on [Spreadsheet processing]({% slug spreadsheet_processing_spreadsheet_mvc %}).
+For more information on the Spreadsheet server-side processing, refer to [this article]({% slug spreadsheet_processing_spreadsheet_mvc %}).
 
 ## See Also
 
-Other articles on Kendo UI Spreadsheet:
-
-* [API Reference](/api/javascript/ui/spreadsheet)
+* [Spreadsheet API Reference](/api/javascript/ui/spreadsheet)
 * [Load and Save Data as JSON]({% slug loadand_saveas_json_spreadsheet_widget %})
 * [Data Source Binding]({% slug bind_todata_source_spreadsheet_widget %})
 * [Export to Excel]({% slug export_toexcel_spreadsheet_widget %})

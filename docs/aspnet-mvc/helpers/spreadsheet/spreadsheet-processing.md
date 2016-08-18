@@ -1,25 +1,29 @@
 ---
-title: Processing
-page_title: Processing | Kendo UI Spreadsheet Widget
+title: Server-Side Processing
+page_title: Server-Side Processing | Kendo UI Spreadsheet HtmlHelper
 description: "Process Kendo UI Spreadsheet data using the Telerik Document Processing library."
 slug: spreadsheet_processing_spreadsheet_mvc
 position: 2
 ---
 
-# Processing
+# Server-Side Processing
 
-Kendo UI ships a `.NET`-based server-side module established on [Telerik `RadSpreadProcessing`](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview)&mdash;part of the Telerik Document Processing.
+To export huge datasets to Excel, a well-suited solution is the new [RadSpreadStreamProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of the [Document Processing Library (DPL) by Progress](http://docs.telerik.com/devtools/document-processing/introduction).  
 
-It allows the import, export, and processing of data from various formats:
+The DPL handles the data import, export, and processing from the following formats:
 
-* Excel Microsoft Office Open XML Spreadsheet (`.xlsx`).
-* Comma separated values (`.csv`).
-* Tab separated values (`.txt`).
-* Portable document format (`.pdf`) (export only).
+* Excel Microsoft Office Open XML Spreadsheet (`.xlsx`)
+* Comma-separated values (`.csv`)
+* Tab-separated values (`.txt`)
+* Portable document format (`.pdf`) (export only)
 
-For complete information on the `RadSpreadProcessing` module, refer to [this part](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview) of the [Telerik Document Processing documentation](http://docs.telerik.com/devtools/document-processing/introduction).
+> **Important**
+>
+> The DPL module is distributed as part of the [UI for ASP.NET MVC]({% slug overview_aspnetmvc %}) and is available for the Kendo UI Enterprise and DevCraft bundles.
 
-## Addition of Dependencies
+For examples on how to export Excel files, refer to the [RadSpreadProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).
+
+## Dependencies
 
 The `.NET` server-side module is distributed as a part of the [UI for ASP.NET MVC bundle]({% slug overview_aspnetmvc %}).
 

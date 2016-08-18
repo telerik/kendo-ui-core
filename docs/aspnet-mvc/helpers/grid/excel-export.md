@@ -141,9 +141,20 @@ For more information on how to export multiple Grids to a separate Excel sheet i
 
 ### Use Server-Side Processing
 
-To export big datasets from the Grid to Excel, use the .NET based server-side module shipped by Kendo UI. It is established on [Telerik RadSpreadProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview), which is part of the [Telerik Document Processing by Progress](http://docs.telerik.com/devtools/document-processing/introduction).
+To export huge datasets to Excel, a well-suited solution is the new [RadSpreadStreamProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of the [Document Processing Library (DPL) by Progress](http://docs.telerik.com/devtools/document-processing/introduction).  
 
-For more information, refer to the article on the [Excel export of the Grid widget]({% slug exporting_excel_kendoui_grid_widget %}#server-side-processing).
+The DPL handles the data import, export, and processing from the following formats:
+
+* Excel Microsoft Office Open XML Spreadsheet (`.xlsx`)
+* Comma-separated values (`.csv`)
+* Tab-separated values (`.txt`)
+* Portable document format (`.pdf`) (export only)
+
+> **Important**
+>
+> The DPL module is distributed as part of the [UI for ASP.NET MVC]({% slug overview_aspnetmvc %}) and is available for the Kendo UI Enterprise and DevCraft bundles.
+
+For examples on how to export Excel files, refer to the [RadSpreadProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).
 
 ## See Also
 
