@@ -1337,15 +1337,15 @@ var __meta__ = { // jshint ignore:line
                 initialSize = that.initialSize,
                 newWidth, newHeight,
                 windowBottom, windowRight,
-                x = Math.max(e.x.location, containerOffset.left),
-                y = Math.max(e.y.location, containerOffset.top);
+                x = Math.max(e.x.location, 0),
+                y = Math.max(e.y.location, 0);
 
             if (direction.indexOf("e") >= 0) {
-                newWidth = x - initialPosition.left;
+                newWidth = x - initialPosition.left - containerOffset.left;
 
                 wrapper.width(constrain(newWidth, options.minWidth, options.maxWidth));
             } else if (direction.indexOf("w") >= 0) {
-                windowRight = initialPosition.left + initialSize.width;
+                windowRight = initialPosition.left + initialSize.width + containerOffset.left;
                 newWidth = constrain(windowRight - x, options.minWidth, options.maxWidth);
 
                 wrapper.css({
@@ -1355,11 +1355,11 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (direction.indexOf("s") >= 0) {
-                newHeight = y - initialPosition.top - that.elementPadding;
+                newHeight = y - initialPosition.top - that.elementPadding - containerOffset.top;
 
                 wrapper.height(constrain(newHeight, options.minHeight, options.maxHeight));
             } else if (direction.indexOf("n") >= 0) {
-                windowBottom = initialPosition.top + initialSize.height;
+                windowBottom = initialPosition.top + initialSize.height + containerOffset.top;
                 newHeight = constrain(windowBottom - y, options.minHeight, options.maxHeight);
 
                 wrapper.css({
